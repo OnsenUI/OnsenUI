@@ -1,0 +1,2696 @@
+{
+  "fileInfo": {
+    "baseName": "platform",
+    "extension": "js"
+  },
+  "startingLine": 18,
+  "endingLine": 25,
+  "codeAncestors": [],
+  "docType": "object",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "object",
+        "startingLine": 18
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons.platform",
+        "startingLine": 19
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "util",
+        "startingLine": 20
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Utility methods to detect current platform.[/en]\n  [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]",
+        "startingLine": 21
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "object",
+            "startingLine": 18
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons.platform",
+            "startingLine": 19
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "util",
+            "startingLine": 20
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Utility methods to detect current platform.[/en]\n  [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]",
+            "startingLine": 21
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "categories": [
+    "util"
+  ],
+  "name": "ons.platform",
+  "description": "[en]Utility methods to detect current platform.[/en]\n  [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]",
+  "area": "api",
+  "module": "..",
+  "priority": 0,
+  "codeName": null,
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 27,
+      "endingLine": 36,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 27
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "select(platform)",
+            "startingLine": 28
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "Name of the platform.\n  [en]Possible values are: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれかを指定します。[/ja]",
+            "startingLine": 29,
+            "typeExpression": "string",
+            "type": {
+              "type": "NameExpression",
+              "name": "string"
+            },
+            "typeList": [
+              "string"
+            ],
+            "name": "platform"
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Sets the platform used to render the elements. Useful for testing.[/en]\n  [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]",
+            "startingLine": 32
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 27
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "select(platform)",
+                "startingLine": 28
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "Name of the platform.\n  [en]Possible values are: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれかを指定します。[/ja]",
+                "startingLine": 29,
+                "typeExpression": "string",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "string"
+                },
+                "typeList": [
+                  "string"
+                ],
+                "name": "platform"
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Sets the platform used to render the elements. Useful for testing.[/en]\n  [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]",
+                "startingLine": 32
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "select(platform)",
+                "startingLine": 28
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "select(platform)",
+      "name": "select",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "Name of the platform.\n  [en]Possible values are: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれかを指定します。[/ja]",
+          "startingLine": 29,
+          "typeExpression": "string",
+          "type": {
+            "type": "NameExpression",
+            "name": "string"
+          },
+          "typeList": [
+            "string"
+          ],
+          "name": "platform"
+        }
+      ],
+      "description": "[en]Sets the platform used to render the elements. Useful for testing.[/en]\n  [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 38,
+      "endingLine": 45,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 38
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isWebView()",
+            "startingLine": 39
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether app is running in Cordova.[/en]\n  [ja]Cordova内で実行されているかどうかを返します。[/ja]",
+            "startingLine": 40
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 43,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 38
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isWebView()",
+                "startingLine": 39
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether app is running in Cordova.[/en]\n  [ja]Cordova内で実行されているかどうかを返します。[/ja]",
+                "startingLine": 40
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 43,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isWebView()",
+                "startingLine": 39
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isWebView()",
+      "name": "isWebView",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 43,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether app is running in Cordova.[/en]\n  [ja]Cordova内で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 47,
+      "endingLine": 54,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 47
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIOS()",
+            "startingLine": 48
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the OS is iOS.[/en]\n  [ja]iOS上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 49
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 52,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 47
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS()",
+                "startingLine": 48
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the OS is iOS.[/en]\n  [ja]iOS上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 49
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 52,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS()",
+                "startingLine": 48
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isIOS()",
+      "name": "isIOS",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 52,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the OS is iOS.[/en]\n  [ja]iOS上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 56,
+      "endingLine": 63,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 56
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isAndroid()",
+            "startingLine": 57
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the OS is Android.[/en]\n  [ja]Android上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 58
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 61,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 56
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroid()",
+                "startingLine": 57
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the OS is Android.[/en]\n  [ja]Android上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 58
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 61,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroid()",
+                "startingLine": 57
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isAndroid()",
+      "name": "isAndroid",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 61,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the OS is Android.[/en]\n  [ja]Android上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 65,
+      "endingLine": 72,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 65
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isAndroidPhone()",
+            "startingLine": 66
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the device is Android phone.[/en]\n  [ja]Android携帯上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 67
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 70,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 65
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroidPhone()",
+                "startingLine": 66
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the device is Android phone.[/en]\n  [ja]Android携帯上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 67
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 70,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroidPhone()",
+                "startingLine": 66
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isAndroidPhone()",
+      "name": "isAndroidPhone",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 70,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the device is Android phone.[/en]\n  [ja]Android携帯上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 74,
+      "endingLine": 81,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 74
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isAndroidTablet()",
+            "startingLine": 75
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the device is Android tablet.[/en]\n  [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 76
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 79,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 74
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroidTablet()",
+                "startingLine": 75
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the device is Android tablet.[/en]\n  [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 76
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 79,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isAndroidTablet()",
+                "startingLine": 75
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isAndroidTablet()",
+      "name": "isAndroidTablet",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 79,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the device is Android tablet.[/en]\n  [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 83,
+      "endingLine": 90,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 83
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIPhone()",
+            "startingLine": 84
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the device is iPhone.[/en]\n  [ja]iPhone上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 85
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 88,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 83
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIPhone()",
+                "startingLine": 84
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the device is iPhone.[/en]\n  [ja]iPhone上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 85
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 88,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIPhone()",
+                "startingLine": 84
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isIPhone()",
+      "name": "isIPhone",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 88,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the device is iPhone.[/en]\n  [ja]iPhone上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 92,
+      "endingLine": 99,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 92
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIPad()",
+            "startingLine": 93
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the device is iPad.[/en]\n  [ja]iPad上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 94
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 97,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 92
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIPad()",
+                "startingLine": 93
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the device is iPad.[/en]\n  [ja]iPad上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 94
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 97,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIPad()",
+                "startingLine": 93
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isIPad()",
+      "name": "isIPad",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 97,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the device is iPad.[/en]\n  [ja]iPad上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 101,
+      "endingLine": 108,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 101
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isBlackBerry()",
+            "startingLine": 102
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the device is BlackBerry.[/en]\n  [ja]BlackBerry上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 103
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 106,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 101
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isBlackBerry()",
+                "startingLine": 102
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the device is BlackBerry.[/en]\n  [ja]BlackBerry上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 103
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 106,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isBlackBerry()",
+                "startingLine": 102
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isBlackBerry()",
+      "name": "isBlackBerry",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 106,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the device is BlackBerry.[/en]\n  [ja]BlackBerry上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 110,
+      "endingLine": 117,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 110
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isOpera()",
+            "startingLine": 111
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the browser is Opera.[/en]\n  [ja]Opera上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 112
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 115,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 110
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isOpera()",
+                "startingLine": 111
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the browser is Opera.[/en]\n  [ja]Opera上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 112
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 115,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isOpera()",
+                "startingLine": 111
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isOpera()",
+      "name": "isOpera",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 115,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Opera.[/en]\n  [ja]Opera上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 119,
+      "endingLine": 126,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 119
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isFirefox()",
+            "startingLine": 120
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the browser is Firefox.[/en]\n  [ja]Firefox上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 121
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 124,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 119
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isFirefox()",
+                "startingLine": 120
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the browser is Firefox.[/en]\n  [ja]Firefox上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 121
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 124,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isFirefox()",
+                "startingLine": 120
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isFirefox()",
+      "name": "isFirefox",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 124,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Firefox.[/en]\n  [ja]Firefox上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 128,
+      "endingLine": 135,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 128
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isSafari()",
+            "startingLine": 129
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the browser is Safari.[/en]\n  [ja]Safari上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 130
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 133,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 128
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isSafari()",
+                "startingLine": 129
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the browser is Safari.[/en]\n  [ja]Safari上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 130
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 133,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isSafari()",
+                "startingLine": 129
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isSafari()",
+      "name": "isSafari",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 133,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Safari.[/en]\n  [ja]Safari上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 137,
+      "endingLine": 144,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 137
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isChrome()",
+            "startingLine": 138
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the browser is Chrome.[/en]\n  [ja]Chrome上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 139
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 142,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 137
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isChrome()",
+                "startingLine": 138
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the browser is Chrome.[/en]\n  [ja]Chrome上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 139
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 142,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isChrome()",
+                "startingLine": 138
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isChrome()",
+      "name": "isChrome",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 142,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Chrome.[/en]\n  [ja]Chrome上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 146,
+      "endingLine": 153,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 146
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIE()",
+            "startingLine": 147
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the browser is Internet Explorer.[/en]\n  [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 148
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 151,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 146
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIE()",
+                "startingLine": 147
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the browser is Internet Explorer.[/en]\n  [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 148
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 151,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIE()",
+                "startingLine": 147
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isIE()",
+      "name": "isIE",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 151,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Internet Explorer.[/en]\n  [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 155,
+      "endingLine": 162,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 155
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIOS7above()",
+            "startingLine": 156
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 157
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 160,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 155
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS7above()",
+                "startingLine": 156
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 157
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 160,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS7above()",
+                "startingLine": 156
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isIOS7above()",
+      "name": "isIOS7above",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 160,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "events": [],
+  "id": "module:...object:ons.platform",
+  "aliases": [
+    "ons.platform",
+    "object:ons.platform",
+    "...ons.platform",
+    "module:...ons.platform",
+    "...object:ons.platform",
+    "module:...object:ons.platform"
+  ],
+  "path": "api/../object/ons.platform",
+  "outputPath": "partials/api/../object/ons.platform.html"
+}

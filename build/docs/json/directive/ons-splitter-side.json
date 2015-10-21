@@ -1,0 +1,4866 @@
+{
+  "fileInfo": {
+    "baseName": "splitterSide",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 19,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "splitter-side",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-splitter-side",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "control",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": " [en]The \"ons-splitter-side\" element is used as a child element of \"ons-splitter\".[/en]\n [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
+        "startingLine": 8
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "splitter-side",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-splitter-side",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "control",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]The \"ons-splitter-side\" element is used as a child element of \"ons-splitter\".[/en]\n [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
+            "startingLine": 8
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "categories": [
+    "control"
+  ],
+  "id": "splitter-side",
+  "example": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
+  "name": "ons-splitter-side",
+  "description": "[en]The \"ons-splitter-side\" element is used as a child element of \"ons-splitter\".[/en]\n [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 21,
+      "endingLine": 36,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 21
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modechange",
+            "startingLine": 22
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just after the component's mode changes.[/en]\n  [ja]この要素のモードが変化した際に発火します。[/ja]",
+            "startingLine": 23
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+            "startingLine": 26,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 29,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.side"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
+            "startingLine": 32,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "event.mode"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 21
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modechange",
+                "startingLine": 22
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just after the component's mode changes.[/en]\n  [ja]この要素のモードが変化した際に発火します。[/ja]",
+                "startingLine": 23
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+                "startingLine": 26,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 29,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.side"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
+                "startingLine": 32,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "event.mode"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "modechange",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+          "startingLine": 26,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 29,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.side"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
+          "startingLine": 32,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "event.mode"
+        }
+      ],
+      "description": "[en]Fired just after the component's mode changes.[/en]\n  [ja]この要素のモードが変化した際に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 38,
+      "endingLine": 53,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 38
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "preopen",
+            "startingLine": 39
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just before the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開く前に発火します。[/ja]",
+            "startingLine": 40
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+            "startingLine": 43,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
+            "startingLine": 46,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "event.cancel"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 49,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.side"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 38
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "preopen",
+                "startingLine": 39
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just before the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開く前に発火します。[/ja]",
+                "startingLine": 40
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+                "startingLine": 43,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
+                "startingLine": 46,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "event.cancel"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 49,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.side"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "preopen",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+          "startingLine": 43,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
+          "startingLine": 46,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "event.cancel"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 49,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.side"
+        }
+      ],
+      "description": "[en]Fired just before the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開く前に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 55,
+      "endingLine": 67,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 55
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "postopen",
+            "startingLine": 56
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just after the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開いた後に発火します。[/ja]",
+            "startingLine": 57
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+            "startingLine": 60,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 63,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.side"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 55
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "postopen",
+                "startingLine": 56
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just after the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開いた後に発火します。[/ja]",
+                "startingLine": 57
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+                "startingLine": 60,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 63,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.side"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "postopen",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+          "startingLine": 60,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 63,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.side"
+        }
+      ],
+      "description": "[en]Fired just after the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開いた後に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 69,
+      "endingLine": 84,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 69
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "preclose",
+            "startingLine": 70
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just before the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じる前に発火します。[/ja]",
+            "startingLine": 71
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+            "startingLine": 74,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 77,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.side"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
+            "startingLine": 80,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "event.cancel"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 69
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "preclose",
+                "startingLine": 70
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just before the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じる前に発火します。[/ja]",
+                "startingLine": 71
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+                "startingLine": 74,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 77,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.side"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
+                "startingLine": 80,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "event.cancel"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "preclose",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+          "startingLine": 74,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 77,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.side"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
+          "startingLine": 80,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "event.cancel"
+        }
+      ],
+      "description": "[en]Fired just before the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じる前に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 86,
+      "endingLine": 98,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 86
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "postclose",
+            "startingLine": 87
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just after the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じた後に発火します。[/ja]",
+            "startingLine": 88
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+            "startingLine": 91,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 94,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.side"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 86
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "postclose",
+                "startingLine": 87
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just after the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じた後に発火します。[/ja]",
+                "startingLine": 88
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+                "startingLine": 91,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 94,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.side"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "postclose",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
+          "startingLine": 91,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 94,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.side"
+        }
+      ],
+      "description": "[en]Fired just after the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じた後に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 257,
+      "endingLine": 266,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 257
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "load(page)",
+            "startingLine": 258
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
+            "startingLine": 259,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "page"
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
+            "startingLine": 262
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 257
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "load(page)",
+                "startingLine": 258
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
+                "startingLine": 259,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "page"
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
+                "startingLine": 262
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "load(page)",
+                "startingLine": 258
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "load(page)",
+      "name": "load",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
+          "startingLine": 259,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "page"
+        }
+      ],
+      "description": "[en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 268,
+      "endingLine": 280,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 268
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "open([options])",
+            "startingLine": 269
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+            "startingLine": 270,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "options",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 273,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "options.callback",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Open menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]",
+            "startingLine": 276
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 268
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "open([options])",
+                "startingLine": 269
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+                "startingLine": 270,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "options",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 273,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "options.callback",
+                "optional": true
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Open menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]",
+                "startingLine": 276
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "open([options])",
+                "startingLine": 269
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "open([options])",
+      "name": "open",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+          "startingLine": 270,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "options",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 273,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "options.callback",
+          "optional": true
+        }
+      ],
+      "description": "[en]Open menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 282,
+      "endingLine": 294,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 282
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "close([options])",
+            "startingLine": 283
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+            "startingLine": 284,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "options",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 287,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "options.callback",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Close menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]",
+            "startingLine": 290
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 282
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "close([options])",
+                "startingLine": 283
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+                "startingLine": 284,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "options",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 287,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "options.callback",
+                "optional": true
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Close menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]",
+                "startingLine": 290
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "close([options])",
+                "startingLine": 283
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "close([options])",
+      "name": "close",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+          "startingLine": 284,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "options",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 287,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "options.callback",
+          "optional": true
+        }
+      ],
+      "description": "[en]Close menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 296,
+      "endingLine": 302,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 296
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "getCurrentMode()",
+            "startingLine": 297
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
+            "startingLine": 298,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 296
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "getCurrentMode()",
+                "startingLine": 297
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
+                "startingLine": 298,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "getCurrentMode()",
+                "startingLine": 297
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "getCurrentMode()",
+      "name": "getCurrentMode",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
+        "startingLine": 298,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "description": "",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 100,
+      "endingLine": 108,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 100
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "animation",
+            "startingLine": 101
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 102
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 103,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Specify the animation. Use one of \"overlay\", and \"default\".[/en]\n [ja]アニメーションを指定します。\"overlay\", \"default\"のいずれかを指定できます。[/ja]",
+            "startingLine": 104
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 100
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "animation",
+                "startingLine": 101
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 102
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 103,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Specify the animation. Use one of \"overlay\", and \"default\".[/en]\n [ja]アニメーションを指定します。\"overlay\", \"default\"のいずれかを指定できます。[/ja]",
+                "startingLine": 104
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 103,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "animation",
+      "description": "[en]Specify the animation. Use one of \"overlay\", and \"default\".[/en]\n [ja]アニメーションを指定します。\"overlay\", \"default\"のいずれかを指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 110,
+      "endingLine": 117,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 110
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "animation-options",
+            "startingLine": 111
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 112,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+            "startingLine": 113
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 110
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "animation-options",
+                "startingLine": 111
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 112,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+                "startingLine": 113
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 112,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "animation-options",
+      "description": "[en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 119,
+      "endingLine": 126,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 119
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "threhold-ratio-should-open",
+            "startingLine": 120
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 121,
+            "typeExpression": "Number",
+            "type": {
+              "type": "NameExpression",
+              "name": "Number"
+            },
+            "typeList": [
+              "Number"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+            "startingLine": 122
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 119
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "threhold-ratio-should-open",
+                "startingLine": 120
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 121,
+                "typeExpression": "Number",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Number"
+                },
+                "typeList": [
+                  "Number"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+                "startingLine": 122
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 121,
+        "typeExpression": "Number",
+        "type": {
+          "type": "NameExpression",
+          "name": "Number"
+        },
+        "typeList": [
+          "Number"
+        ]
+      },
+      "name": "threhold-ratio-should-open",
+      "description": "[en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 128,
+      "endingLine": 137,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 128
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-destroy",
+            "startingLine": 129
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 130
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 131
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 132,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 133
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 128
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-destroy",
+                "startingLine": 129
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 130
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 131
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 132,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 133
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 132,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-destroy",
+      "description": "[en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 139,
+      "endingLine": 148,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 139
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-preopen",
+            "startingLine": 140
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 141
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 142
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 143,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"preopen\" event is fired.[/en]\n [ja]\"preopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 144
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 139
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-preopen",
+                "startingLine": 140
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 141
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 142
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 143,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"preopen\" event is fired.[/en]\n [ja]\"preopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 144
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 143,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-preopen",
+      "description": "[en]Allows you to specify custom behavior when the \"preopen\" event is fired.[/en]\n [ja]\"preopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 150,
+      "endingLine": 159,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 150
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-preclose",
+            "startingLine": 151
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 152
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 153
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 154,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"preclose\" event is fired.[/en]\n [ja]\"preclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 155
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 150
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-preclose",
+                "startingLine": 151
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 152
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 153
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 154,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"preclose\" event is fired.[/en]\n [ja]\"preclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 155
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 154,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-preclose",
+      "description": "[en]Allows you to specify custom behavior when the \"preclose\" event is fired.[/en]\n [ja]\"preclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 161,
+      "endingLine": 170,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 161
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-postopen",
+            "startingLine": 162
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 163
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 164
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 165,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"postopen\" event is fired.[/en]\n [ja]\"postopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 166
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 161
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-postopen",
+                "startingLine": 162
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 163
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 164
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 165,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"postopen\" event is fired.[/en]\n [ja]\"postopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 166
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 165,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-postopen",
+      "description": "[en]Allows you to specify custom behavior when the \"postopen\" event is fired.[/en]\n [ja]\"postopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 172,
+      "endingLine": 181,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 172
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-postclose",
+            "startingLine": 173
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 174
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 175
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 176,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"postclose\" event is fired.[/en]\n [ja]\"postclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 177
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 172
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-postclose",
+                "startingLine": 173
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 174
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 175
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 176,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"postclose\" event is fired.[/en]\n [ja]\"postclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 177
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 176,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-postclose",
+      "description": "[en]Allows you to specify custom behavior when the \"postclose\" event is fired.[/en]\n [ja]\"postclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 183,
+      "endingLine": 200,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 183
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "collapse",
+            "startingLine": 184
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 185,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]\n    Specify the collapse behavior. Valid values are \"portrait\", \"landscape\" or a media query.\n    \"portrait\" or \"landscape\" means the view will collapse when device is in landscape or portrait orientation.\n    If the value is a media query, the view will collapse when the media query is true.\n    If the value is not defined, the view always be in \"collapse\" mode.\n  [/en]\n  [ja]\n    左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。\n    portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。\n    メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。\n    値に何も指定しない場合には、常にcollapseモードになります。\n  [/ja]",
+            "startingLine": 186
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 183
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "collapse",
+                "startingLine": 184
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 185,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]\n    Specify the collapse behavior. Valid values are \"portrait\", \"landscape\" or a media query.\n    \"portrait\" or \"landscape\" means the view will collapse when device is in landscape or portrait orientation.\n    If the value is a media query, the view will collapse when the media query is true.\n    If the value is not defined, the view always be in \"collapse\" mode.\n  [/en]\n  [ja]\n    左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。\n    portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。\n    メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。\n    値に何も指定しない場合には、常にcollapseモードになります。\n  [/ja]",
+                "startingLine": 186
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 185,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "collapse",
+      "description": "[en]\n    Specify the collapse behavior. Valid values are \"portrait\", \"landscape\" or a media query.\n    \"portrait\" or \"landscape\" means the view will collapse when device is in landscape or portrait orientation.\n    If the value is a media query, the view will collapse when the media query is true.\n    If the value is not defined, the view always be in \"collapse\" mode.\n  [/en]\n  [ja]\n    左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。\n    portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。\n    メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。\n    値に何も指定しない場合には、常にcollapseモードになります。\n  [/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 202,
+      "endingLine": 209,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 202
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "swipe-target-width",
+            "startingLine": 203
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 204,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]\n  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]",
+            "startingLine": 205
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 202
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "swipe-target-width",
+                "startingLine": 203
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 204,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]\n  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]",
+                "startingLine": 205
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 204,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "swipe-target-width",
+      "description": "[en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]\n  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 211,
+      "endingLine": 218,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 211
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "width",
+            "startingLine": 212
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 213,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Can be specified in either pixels or as a percentage, e.g. \"90%\" or \"200px\".[/en]\n  [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]",
+            "startingLine": 214
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 211
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "width",
+                "startingLine": 212
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 213,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Can be specified in either pixels or as a percentage, e.g. \"90%\" or \"200px\".[/en]\n  [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]",
+                "startingLine": 214
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 213,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "width",
+      "description": "[en]Can be specified in either pixels or as a percentage, e.g. \"90%\" or \"200px\".[/en]\n  [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 220,
+      "endingLine": 227,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 220
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "side",
+            "startingLine": 221
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 222,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are \"left\" and \"right\".[/en]\n  [ja]この要素が左か右かを指定します。指定できる値は\"left\"か\"right\"のみです。[/ja]",
+            "startingLine": 223
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 220
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "side",
+                "startingLine": 221
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 222,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are \"left\" and \"right\".[/en]\n  [ja]この要素が左か右かを指定します。指定できる値は\"left\"か\"right\"のみです。[/ja]",
+                "startingLine": 223
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 222,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "side",
+      "description": "[en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are \"left\" and \"right\".[/en]\n  [ja]この要素が左か右かを指定します。指定できる値は\"left\"か\"right\"のみです。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 229,
+      "endingLine": 236,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 229
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "mode",
+            "startingLine": 230
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 231,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Current mode. Possible values are \"collapse\" or \"split\". This attribute is read only.[/en]\n  [ja]現在のモードが設定されます。\"collapse\"もしくは\"split\"が指定されます。この属性は読み込み専用です。[/ja]",
+            "startingLine": 232
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 229
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "mode",
+                "startingLine": 230
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 231,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Current mode. Possible values are \"collapse\" or \"split\". This attribute is read only.[/en]\n  [ja]現在のモードが設定されます。\"collapse\"もしくは\"split\"が指定されます。この属性は読み込み専用です。[/ja]",
+                "startingLine": 232
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 231,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "mode",
+      "description": "[en]Current mode. Possible values are \"collapse\" or \"split\". This attribute is read only.[/en]\n  [ja]現在のモードが設定されます。\"collapse\"もしくは\"split\"が指定されます。この属性は読み込み専用です。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 238,
+      "endingLine": 246,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 238
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "page",
+            "startingLine": 239
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 240
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 241,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
+            "startingLine": 242
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 238
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "page",
+                "startingLine": 239
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 240
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 241,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
+                "startingLine": 242
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 241,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "page",
+      "description": "[en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "splitterSide",
+        "extension": "js"
+      },
+      "startingLine": 248,
+      "endingLine": 255,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 248
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "swipeable",
+            "startingLine": 249
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 250,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Whether to enable swipe interaction on collapse mode.[/en]\n  [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]",
+            "startingLine": 251
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 248
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "swipeable",
+                "startingLine": 249
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 250,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Whether to enable swipe interaction on collapse mode.[/en]\n  [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]",
+                "startingLine": 251
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 250,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "name": "swipeable",
+      "description": "[en]Whether to enable swipe interaction on collapse mode.[/en]\n  [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "splitter-side"
+  ],
+  "path": "api/../directive/ons-splitter-side",
+  "outputPath": "partials/api/../directive/ons-splitter-side.html"
+}

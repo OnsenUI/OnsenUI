@@ -1,0 +1,5891 @@
+{
+  "fileInfo": {
+    "baseName": "popover",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 27,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "popover",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-popover",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "popover",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "android\n  [en]Display an Android style popover.[/en]\n  [ja]Androidライクなポップオーバーを表示します。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": " [en]A component that displays a popover next to an element.[/en]\n [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "ZYYRKo",
+        "startingLine": 11
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<script>\nons.ready(function() {\n  ons.createPopover('popover.html').then(function(popover) {\n    popover.show('#mybutton');   \n  });\n});\n</script>\n\n<script type=\"text/ons-template\" id=\"popover.html\">\n  <ons-popover cancelable>\n    <p style=\"text-align: center; opacity: 0.5;\">This popover will choose which side it's displayed on automatically.</p>\n  </ons-popover>\n</script>",
+        "startingLine": 12
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "popover",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-popover",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "popover",
+            "startingLine": 4
+          }
+        ],
+        "modifier": [
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "android\n  [en]Display an Android style popover.[/en]\n  [ja]Androidライクなポップオーバーを表示します。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]A component that displays a popover next to an element.[/en]\n [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]",
+            "startingLine": 8
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "ZYYRKo",
+            "startingLine": 11
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<script>\nons.ready(function() {\n  ons.createPopover('popover.html').then(function(popover) {\n    popover.show('#mybutton');   \n  });\n});\n</script>\n\n<script type=\"text/ons-template\" id=\"popover.html\">\n  <ons-popover cancelable>\n    <p style=\"text-align: center; opacity: 0.5;\">This popover will choose which side it's displayed on automatically.</p>\n  </ons-popover>\n</script>",
+            "startingLine": 12
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "modifiers": [
+    {
+      "name": "android",
+      "description": "\n  [en]Display an Android style popover.[/en]\n  [ja]Androidライクなポップオーバーを表示します。[/ja]"
+    }
+  ],
+  "codepen": {
+    "id": "ZYYRKo",
+    "isWide": false
+  },
+  "categories": [
+    "popover"
+  ],
+  "id": "popover",
+  "example": "<script>\nons.ready(function() {\n  ons.createPopover('popover.html').then(function(popover) {\n    popover.show('#mybutton');   \n  });\n});\n</script>\n\n<script type=\"text/ons-template\" id=\"popover.html\">\n  <ons-popover cancelable>\n    <p style=\"text-align: center; opacity: 0.5;\">This popover will choose which side it's displayed on automatically.</p>\n  </ons-popover>\n</script>",
+  "name": "ons-popover",
+  "description": "[en]A component that displays a popover next to an element.[/en]\n [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<script>\nons.ready(function() {\n  ons.createPopover('popover.html').then(function(popover) {\n    popover.show('#mybutton');   \n  });\n});\n</script>\n\n<script type=\"text/ons-template\" id=\"popover.html\">\n  <ons-popover cancelable>\n    <p style=\"text-align: center; opacity: 0.5;\">This popover will choose which side it's displayed on automatically.</p>\n  </ons-popover>\n</script>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 29,
+      "endingLine": 42,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 29
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "preshow",
+            "startingLine": 30
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just before the popover is displayed.[/en]\n  [ja]ポップオーバーが表示される直前に発火します。[/ja]",
+            "startingLine": 31
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]",
+            "startingLine": 34,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 35,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.popover"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Call this function to stop the popover from being shown.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]",
+            "startingLine": 38,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "event.cancel"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 29
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "preshow",
+                "startingLine": 30
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just before the popover is displayed.[/en]\n  [ja]ポップオーバーが表示される直前に発火します。[/ja]",
+                "startingLine": 31
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]",
+                "startingLine": 34,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 35,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.popover"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Call this function to stop the popover from being shown.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]",
+                "startingLine": 38,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "event.cancel"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "preshow",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]",
+          "startingLine": 34,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 35,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.popover"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Call this function to stop the popover from being shown.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]",
+          "startingLine": 38,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "event.cancel"
+        }
+      ],
+      "description": "[en]Fired just before the popover is displayed.[/en]\n  [ja]ポップオーバーが表示される直前に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 44,
+      "endingLine": 54,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 44
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "postshow",
+            "startingLine": 45
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just after the popover is displayed.[/en]\n  [ja]ポップオーバーが表示された直後に発火します。[/ja]",
+            "startingLine": 46
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]",
+            "startingLine": 49,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 50,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.popover"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 44
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "postshow",
+                "startingLine": 45
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just after the popover is displayed.[/en]\n  [ja]ポップオーバーが表示された直後に発火します。[/ja]",
+                "startingLine": 46
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]",
+                "startingLine": 49,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 50,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.popover"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "postshow",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]",
+          "startingLine": 49,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 50,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.popover"
+        }
+      ],
+      "description": "[en]Fired just after the popover is displayed.[/en]\n  [ja]ポップオーバーが表示された直後に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 56,
+      "endingLine": 69,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 56
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "prehide",
+            "startingLine": 57
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just before the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れる直前に発火します。[/ja]",
+            "startingLine": 58
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]",
+            "startingLine": 61,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 62,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.popover"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Call this function to stop the popover from being hidden.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]",
+            "startingLine": 65,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "event.cancel"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 56
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "prehide",
+                "startingLine": 57
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just before the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れる直前に発火します。[/ja]",
+                "startingLine": 58
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]",
+                "startingLine": 61,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 62,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.popover"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Call this function to stop the popover from being hidden.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]",
+                "startingLine": 65,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "event.cancel"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "prehide",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]",
+          "startingLine": 61,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 62,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.popover"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Call this function to stop the popover from being hidden.[/en]\n  [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]",
+          "startingLine": 65,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "event.cancel"
+        }
+      ],
+      "description": "[en]Fired just before the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れる直前に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 71,
+      "endingLine": 81,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 71
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "posthide",
+            "startingLine": 72
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired just after the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れた後に発火します。[/ja]",
+            "startingLine": 73
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]",
+            "startingLine": 76,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+            "startingLine": 77,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.popover"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 71
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "posthide",
+                "startingLine": 72
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired just after the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れた後に発火します。[/ja]",
+                "startingLine": 73
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]",
+                "startingLine": 76,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+                "startingLine": 77,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.popover"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "posthide",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]",
+          "startingLine": 76,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
+          "startingLine": 77,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.popover"
+        }
+      ],
+      "description": "[en]Fired just after the popover is hidden.[/en]\n  [ja]ポップオーバーが隠れた後に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 218,
+      "endingLine": 236,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 218
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "show(target, [options])",
+            "startingLine": 219
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]\n  [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]",
+            "startingLine": 220,
+            "typeExpression": "String|Event|HTMLElement",
+            "type": {
+              "type": "TypeUnion",
+              "elements": [
+                {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                {
+                  "type": "NameExpression",
+                  "name": "Event"
+                },
+                {
+                  "type": "NameExpression",
+                  "name": "HTMLElement"
+                }
+              ]
+            },
+            "typeList": [
+              "String",
+              "Event",
+              "HTMLElement"
+            ],
+            "name": "target"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+            "startingLine": 223,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "options",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+            "startingLine": 226,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "options.animation",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+            "startingLine": 229,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "options.animationOptions",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]\n  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]",
+            "startingLine": 232
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 218
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "show(target, [options])",
+                "startingLine": 219
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]\n  [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]",
+                "startingLine": 220,
+                "typeExpression": "String|Event|HTMLElement",
+                "type": {
+                  "type": "TypeUnion",
+                  "elements": [
+                    {
+                      "type": "NameExpression",
+                      "name": "String"
+                    },
+                    {
+                      "type": "NameExpression",
+                      "name": "Event"
+                    },
+                    {
+                      "type": "NameExpression",
+                      "name": "HTMLElement"
+                    }
+                  ]
+                },
+                "typeList": [
+                  "String",
+                  "Event",
+                  "HTMLElement"
+                ],
+                "name": "target"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+                "startingLine": 223,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "options",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+                "startingLine": 226,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "options.animation",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+                "startingLine": 229,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "options.animationOptions",
+                "optional": true
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]\n  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]",
+                "startingLine": 232
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "show(target, [options])",
+                "startingLine": 219
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "show(target, [options])",
+      "name": "show",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]\n  [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]",
+          "startingLine": 220,
+          "typeExpression": "String|Event|HTMLElement",
+          "type": {
+            "type": "TypeUnion",
+            "elements": [
+              {
+                "type": "NameExpression",
+                "name": "String"
+              },
+              {
+                "type": "NameExpression",
+                "name": "Event"
+              },
+              {
+                "type": "NameExpression",
+                "name": "HTMLElement"
+              }
+            ]
+          },
+          "typeList": [
+            "String",
+            "Event",
+            "HTMLElement"
+          ],
+          "name": "target"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+          "startingLine": 223,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "options",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+          "startingLine": 226,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "options.animation",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+          "startingLine": 229,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "options.animationOptions",
+          "optional": true
+        }
+      ],
+      "description": "[en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]\n  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 238,
+      "endingLine": 253,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 238
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "hide([options])",
+            "startingLine": 239
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+            "startingLine": 240,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "options",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+            "startingLine": 243,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "options.animation",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+            "startingLine": 246,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "options.animationOptions",
+            "optional": true
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Close the popover.[/en]\n  [ja]ポップオーバーを閉じます。[/ja]",
+            "startingLine": 249
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 238
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hide([options])",
+                "startingLine": 239
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+                "startingLine": 240,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "options",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+                "startingLine": 243,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "options.animation",
+                "optional": true
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+                "startingLine": 246,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "options.animationOptions",
+                "optional": true
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Close the popover.[/en]\n  [ja]ポップオーバーを閉じます。[/ja]",
+                "startingLine": 249
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hide([options])",
+                "startingLine": 239
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "hide([options])",
+      "name": "hide",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
+          "startingLine": 240,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "options",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Animation name. Available animations are \"fade\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\"もしくは\"none\"を指定できます。[/ja]",
+          "startingLine": 243,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "options.animation",
+          "optional": true
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
+          "startingLine": 246,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "options.animationOptions",
+          "optional": true
+        }
+      ],
+      "description": "[en]Close the popover.[/en]\n  [ja]ポップオーバーを閉じます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 255,
+      "endingLine": 264,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 255
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isShown()",
+            "startingLine": 256
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the popover is visible.[/en]\n  [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]",
+            "startingLine": 257,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the popover is visible or not.[/en]\n  [ja]ポップオーバーが表示されているかどうかを返します。[/ja]",
+            "startingLine": 260
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 255
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isShown()",
+                "startingLine": 256
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the popover is visible.[/en]\n  [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]",
+                "startingLine": 257,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the popover is visible or not.[/en]\n  [ja]ポップオーバーが表示されているかどうかを返します。[/ja]",
+                "startingLine": 260
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isShown()",
+                "startingLine": 256
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isShown()",
+      "name": "isShown",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the popover is visible.[/en]\n  [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]",
+        "startingLine": 257,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the popover is visible or not.[/en]\n  [ja]ポップオーバーが表示されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 266,
+      "endingLine": 272,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 266
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "destroy()",
+            "startingLine": 267
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Destroy the popover and remove it from the DOM tree.[/en]\n  [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]",
+            "startingLine": 268
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 266
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "destroy()",
+                "startingLine": 267
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Destroy the popover and remove it from the DOM tree.[/en]\n  [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]",
+                "startingLine": 268
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "destroy()",
+                "startingLine": 267
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "destroy()",
+      "name": "destroy",
+      "description": "[en]Destroy the popover and remove it from the DOM tree.[/en]\n  [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 274,
+      "endingLine": 283,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 274
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "setCancelable(cancelable)",
+            "startingLine": 275
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]If true the popover will be cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]",
+            "startingLine": 276,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ],
+            "name": "cancelable"
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Set whether the popover can be canceled by the user when it is shown.[/en]\n  [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]",
+            "startingLine": 279
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 274
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setCancelable(cancelable)",
+                "startingLine": 275
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]If true the popover will be cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]",
+                "startingLine": 276,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ],
+                "name": "cancelable"
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Set whether the popover can be canceled by the user when it is shown.[/en]\n  [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]",
+                "startingLine": 279
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setCancelable(cancelable)",
+                "startingLine": 275
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "setCancelable(cancelable)",
+      "name": "setCancelable",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]If true the popover will be cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]",
+          "startingLine": 276,
+          "typeExpression": "Boolean",
+          "type": {
+            "type": "NameExpression",
+            "name": "Boolean"
+          },
+          "typeList": [
+            "Boolean"
+          ],
+          "name": "cancelable"
+        }
+      ],
+      "description": "[en]Set whether the popover can be canceled by the user when it is shown.[/en]\n  [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 285,
+      "endingLine": 294,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 285
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isCancelable()",
+            "startingLine": 286
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the popover is cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]",
+            "startingLine": 287,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the popover is cancelable or not.[/en]\n  [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]",
+            "startingLine": 290
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 285
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isCancelable()",
+                "startingLine": 286
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the popover is cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]",
+                "startingLine": 287,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the popover is cancelable or not.[/en]\n  [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]",
+                "startingLine": 290
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isCancelable()",
+                "startingLine": 286
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isCancelable()",
+      "name": "isCancelable",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the popover is cancelable.[/en]\n  [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]",
+        "startingLine": 287,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the popover is cancelable or not.[/en]\n  [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 296,
+      "endingLine": 305,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 296
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "setDisabled(disabled)",
+            "startingLine": 297
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]If true the popover will be disabled.[/en]\n  [ja]ポップオーバーをdisabled状態にしたい場合にはtrueを指定します。[/ja]",
+            "startingLine": 298,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ],
+            "name": "disabled"
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Disable or enable the popover.[/en]\n  [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]",
+            "startingLine": 301
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 296
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 297
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]If true the popover will be disabled.[/en]\n  [ja]ポップオーバーをdisabled状態にしたい場合にはtrueを指定します。[/ja]",
+                "startingLine": 298,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ],
+                "name": "disabled"
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Disable or enable the popover.[/en]\n  [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]",
+                "startingLine": 301
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 297
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "setDisabled(disabled)",
+      "name": "setDisabled",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]If true the popover will be disabled.[/en]\n  [ja]ポップオーバーをdisabled状態にしたい場合にはtrueを指定します。[/ja]",
+          "startingLine": 298,
+          "typeExpression": "Boolean",
+          "type": {
+            "type": "NameExpression",
+            "name": "Boolean"
+          },
+          "typeList": [
+            "Boolean"
+          ],
+          "name": "disabled"
+        }
+      ],
+      "description": "[en]Disable or enable the popover.[/en]\n  [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 307,
+      "endingLine": 316,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 307
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isDisabled()",
+            "startingLine": 308
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the popover is disabled.[/en]\n  [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]",
+            "startingLine": 309,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the popover is disabled or enabled.[/en]\n  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]",
+            "startingLine": 312
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 307
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 308
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the popover is disabled.[/en]\n  [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]",
+                "startingLine": 309,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the popover is disabled or enabled.[/en]\n  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]",
+                "startingLine": 312
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 308
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isDisabled()",
+      "name": "isDisabled",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the popover is disabled.[/en]\n  [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]",
+        "startingLine": 309,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the popover is disabled or enabled.[/en]\n  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 318,
+      "endingLine": 331,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 318
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "on(eventName, listener)",
+            "startingLine": 319
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 320
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+            "startingLine": 321
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 324,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 327,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 318
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "on(eventName, listener)",
+                "startingLine": 319
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 320
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+                "startingLine": 321
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 324,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 327,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "on(eventName, listener)",
+                "startingLine": 319
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "on(eventName, listener)",
+      "extensionOf": "angular",
+      "name": "on",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 324,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 327,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 333,
+      "endingLine": 346,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 333
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "once(eventName, listener)",
+            "startingLine": 334
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 335
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+            "startingLine": 336
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 339,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 342,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 333
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "once(eventName, listener)",
+                "startingLine": 334
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 335
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+                "startingLine": 336
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 339,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 342,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "once(eventName, listener)",
+                "startingLine": 334
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "once(eventName, listener)",
+      "extensionOf": "angular",
+      "name": "once",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 339,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 342,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 348,
+      "endingLine": 361,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 348
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "off(eventName, [listener])",
+            "startingLine": 349
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 350
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+            "startingLine": 351
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 354,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+            "startingLine": 357,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 348
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "off(eventName, [listener])",
+                "startingLine": 349
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 350
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+                "startingLine": 351
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 354,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+                "startingLine": 357,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "off(eventName, [listener])",
+                "startingLine": 349
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "off(eventName, [listener])",
+      "extensionOf": "angular",
+      "name": "off",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 354,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+          "startingLine": 357,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 84,
+      "endingLine": 93,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 84
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "var",
+            "startingLine": 85
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 86
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 87
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 88,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Variable name to refer this popover.[/en]\n [ja]このポップオーバーを参照するための名前を指定します。[/ja]",
+            "startingLine": 89
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 84
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "var",
+                "startingLine": 85
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 86
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 87
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 88,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Variable name to refer this popover.[/en]\n [ja]このポップオーバーを参照するための名前を指定します。[/ja]",
+                "startingLine": 89
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 88,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "var",
+      "description": "[en]Variable name to refer this popover.[/en]\n [ja]このポップオーバーを参照するための名前を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 95,
+      "endingLine": 102,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 95
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modifier",
+            "startingLine": 96
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 97,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]The appearance of the popover.[/en]\n [ja]ポップオーバーの表現を指定します。[/ja]",
+            "startingLine": 98
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 95
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modifier",
+                "startingLine": 96
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 97,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]The appearance of the popover.[/en]\n [ja]ポップオーバーの表現を指定します。[/ja]",
+                "startingLine": 98
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 97,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "modifier",
+      "description": "[en]The appearance of the popover.[/en]\n [ja]ポップオーバーの表現を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 104,
+      "endingLine": 118,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 104
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "direction",
+            "startingLine": 105
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 106,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]\n   A space separated list of directions. If more than one direction is specified,\n   it will be chosen automatically. Valid directions are \"up\", \"down\", \"left\" and \"right\".\n [/en]\n [ja]\n   ポップオーバーを表示する方向を空白区切りで複数指定できます。\n   指定できる方向は、\"up\", \"down\", \"left\", \"right\"の4つです。空白区切りで複数指定することもできます。\n   複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。\n [/ja]",
+            "startingLine": 107
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 104
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "direction",
+                "startingLine": 105
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 106,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]\n   A space separated list of directions. If more than one direction is specified,\n   it will be chosen automatically. Valid directions are \"up\", \"down\", \"left\" and \"right\".\n [/en]\n [ja]\n   ポップオーバーを表示する方向を空白区切りで複数指定できます。\n   指定できる方向は、\"up\", \"down\", \"left\", \"right\"の4つです。空白区切りで複数指定することもできます。\n   複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。\n [/ja]",
+                "startingLine": 107
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 106,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "direction",
+      "description": "[en]\n   A space separated list of directions. If more than one direction is specified,\n   it will be chosen automatically. Valid directions are \"up\", \"down\", \"left\" and \"right\".\n [/en]\n [ja]\n   ポップオーバーを表示する方向を空白区切りで複数指定できます。\n   指定できる方向は、\"up\", \"down\", \"left\", \"right\"の4つです。空白区切りで複数指定することもできます。\n   複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。\n [/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 120,
+      "endingLine": 126,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 120
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "cancelable",
+            "startingLine": 121
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en]\n  [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にをポップオーバー閉じます。[/ja]",
+            "startingLine": 122
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 120
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "cancelable",
+                "startingLine": 121
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en]\n  [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にをポップオーバー閉じます。[/ja]",
+                "startingLine": 122
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "cancelable",
+      "description": "[en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en]\n  [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にをポップオーバー閉じます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 128,
+      "endingLine": 134,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 128
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "disabled",
+            "startingLine": 129
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]If this attribute is set the popover is disabled.[/en]\n  [ja]この属性がある時、ポップオーバーはdisabled状態になります。[/ja]",
+            "startingLine": 130
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 128
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "disabled",
+                "startingLine": 129
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]If this attribute is set the popover is disabled.[/en]\n  [ja]この属性がある時、ポップオーバーはdisabled状態になります。[/ja]",
+                "startingLine": 130
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "disabled",
+      "description": "[en]If this attribute is set the popover is disabled.[/en]\n  [ja]この属性がある時、ポップオーバーはdisabled状態になります。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 136,
+      "endingLine": 143,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 136
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "animation",
+            "startingLine": 137
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 138,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The animation used when showing an hiding the popover. Can be either \"none\" or \"fade\".[/en]\n  [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]",
+            "startingLine": 139
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 136
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "animation",
+                "startingLine": 137
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 138,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The animation used when showing an hiding the popover. Can be either \"none\" or \"fade\".[/en]\n  [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]",
+                "startingLine": 139
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 138,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "animation",
+      "description": "[en]The animation used when showing an hiding the popover. Can be either \"none\" or \"fade\".[/en]\n  [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 145,
+      "endingLine": 152,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 145
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "animation-options",
+            "startingLine": 146
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 147,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+            "startingLine": 148
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 145
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "animation-options",
+                "startingLine": 146
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 147,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+                "startingLine": 148
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 147,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "animation-options",
+      "description": "[en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 154,
+      "endingLine": 161,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 154
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "mask-color",
+            "startingLine": 155
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 156,
+            "typeExpression": "Color",
+            "type": {
+              "type": "NameExpression",
+              "name": "Color"
+            },
+            "typeList": [
+              "Color"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Color of the background mask. Default is \"rgba(0, 0, 0, 0.2)\".[/en]\n  [ja]背景のマスクの色を指定します。デフォルトは\"rgba(0, 0, 0, 0.2)\"です。[/ja]",
+            "startingLine": 157
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 154
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "mask-color",
+                "startingLine": 155
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 156,
+                "typeExpression": "Color",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Color"
+                },
+                "typeList": [
+                  "Color"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Color of the background mask. Default is \"rgba(0, 0, 0, 0.2)\".[/en]\n  [ja]背景のマスクの色を指定します。デフォルトは\"rgba(0, 0, 0, 0.2)\"です。[/ja]",
+                "startingLine": 157
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 156,
+        "typeExpression": "Color",
+        "type": {
+          "type": "NameExpression",
+          "name": "Color"
+        },
+        "typeList": [
+          "Color"
+        ]
+      },
+      "name": "mask-color",
+      "description": "[en]Color of the background mask. Default is \"rgba(0, 0, 0, 0.2)\".[/en]\n  [ja]背景のマスクの色を指定します。デフォルトは\"rgba(0, 0, 0, 0.2)\"です。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 163,
+      "endingLine": 172,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 163
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-preshow",
+            "startingLine": 164
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 165
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 166
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 167,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"preshow\" event is fired.[/en]\n [ja]\"preshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 168
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 163
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-preshow",
+                "startingLine": 164
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 165
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 166
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 167,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"preshow\" event is fired.[/en]\n [ja]\"preshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 168
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 167,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-preshow",
+      "description": "[en]Allows you to specify custom behavior when the \"preshow\" event is fired.[/en]\n [ja]\"preshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 174,
+      "endingLine": 183,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 174
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-prehide",
+            "startingLine": 175
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 176
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 177
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 178,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"prehide\" event is fired.[/en]\n [ja]\"prehide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 179
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 174
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-prehide",
+                "startingLine": 175
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 176
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 177
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 178,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"prehide\" event is fired.[/en]\n [ja]\"prehide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 179
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 178,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-prehide",
+      "description": "[en]Allows you to specify custom behavior when the \"prehide\" event is fired.[/en]\n [ja]\"prehide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 185,
+      "endingLine": 194,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 185
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-postshow",
+            "startingLine": 186
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 187
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 188
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 189,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"postshow\" event is fired.[/en]\n [ja]\"postshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 190
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 185
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-postshow",
+                "startingLine": 186
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 187
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 188
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 189,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"postshow\" event is fired.[/en]\n [ja]\"postshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 190
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 189,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-postshow",
+      "description": "[en]Allows you to specify custom behavior when the \"postshow\" event is fired.[/en]\n [ja]\"postshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 196,
+      "endingLine": 205,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 196
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-posthide",
+            "startingLine": 197
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 198
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 199
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 200,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"posthide\" event is fired.[/en]\n [ja]\"posthide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 201
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 196
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-posthide",
+                "startingLine": 197
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 198
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 199
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 200,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"posthide\" event is fired.[/en]\n [ja]\"posthide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 201
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 200,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-posthide",
+      "description": "[en]Allows you to specify custom behavior when the \"posthide\" event is fired.[/en]\n [ja]\"posthide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "popover",
+        "extension": "js"
+      },
+      "startingLine": 207,
+      "endingLine": 216,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 207
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-destroy",
+            "startingLine": 208
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 209
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 210
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 211,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+            "startingLine": 212
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 207
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-destroy",
+                "startingLine": 208
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 209
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 210
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 211,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+                "startingLine": 212
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 211,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-destroy",
+      "description": "[en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "popover"
+  ],
+  "path": "api/../directive/ons-popover",
+  "outputPath": "partials/api/../directive/ons-popover.html"
+}

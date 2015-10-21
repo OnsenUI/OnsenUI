@@ -1,0 +1,435 @@
+{
+  "fileInfo": {
+    "baseName": "ifPlatform",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 16,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "if-platform",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-if-platform",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "util",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "extensionOf"
+        },
+        "tagName": "extensionOf",
+        "description": "angular",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+        "startingLine": 6
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]",
+        "startingLine": 9
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]",
+        "startingLine": 10
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<div ons-if-platform=\"android\">\n  ...\n</div>",
+        "startingLine": 11
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "if-platform",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-if-platform",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "util",
+            "startingLine": 4
+          }
+        ],
+        "extensionOf": [
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 5
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+            "startingLine": 6
+          }
+        ],
+        "seealso": [
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]",
+            "startingLine": 9
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]",
+            "startingLine": 10
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<div ons-if-platform=\"android\">\n  ...\n</div>",
+            "startingLine": 11
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "guides": [
+    {
+      "name": "UtilityAPIs",
+      "description": "[en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]"
+    }
+  ],
+  "seealsos": [
+    {
+      "name": "ons-if-orientation",
+      "description": "[en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]"
+    }
+  ],
+  "categories": [
+    "util"
+  ],
+  "extensionOf": "angular",
+  "id": "if-platform",
+  "example": "<div ons-if-platform=\"android\">\n  ...\n</div>",
+  "name": "ons-if-platform",
+  "description": "[en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<div ons-if-platform=\"android\">\n  ...\n</div>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "ifPlatform",
+        "extension": "js"
+      },
+      "startingLine": 18,
+      "endingLine": 27,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 18
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-if-platform",
+            "startingLine": 19
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 20,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 21
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 22
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+            "startingLine": 23
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 18
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-if-platform",
+                "startingLine": 19
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 20,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 21
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 22
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+                "startingLine": 23
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 20,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "ons-if-platform",
+      "description": "[en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "if-platform"
+  ],
+  "path": "api/../directive/ons-if-platform",
+  "outputPath": "partials/api/../directive/ons-if-platform.html"
+}

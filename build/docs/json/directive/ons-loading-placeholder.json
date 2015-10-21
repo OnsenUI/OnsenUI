@@ -1,0 +1,369 @@
+{
+  "fileInfo": {
+    "baseName": "loadingPlaceholder",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 14,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "loading-placeholder",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-loading-placeholder",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "util",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Display a placeholder while the content is loading.[/en]\n  [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<div ons-loading-placeholder=\"page.html\">\n  Loading...\n</div>",
+        "startingLine": 9
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "loading-placeholder",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-loading-placeholder",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "util",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Display a placeholder while the content is loading.[/en]\n  [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]",
+            "startingLine": 8
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<div ons-loading-placeholder=\"page.html\">\n  Loading...\n</div>",
+            "startingLine": 9
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "guides": [
+    {
+      "name": "UtilityAPIs",
+      "description": "[en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]"
+    }
+  ],
+  "categories": [
+    "util"
+  ],
+  "id": "loading-placeholder",
+  "example": "<div ons-loading-placeholder=\"page.html\">\n  Loading...\n</div>",
+  "name": "ons-loading-placeholder",
+  "description": "[en]Display a placeholder while the content is loading.[/en]\n  [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<div ons-loading-placeholder=\"page.html\">\n  Loading...\n</div>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "loadingPlaceholder",
+        "extension": "js"
+      },
+      "startingLine": 16,
+      "endingLine": 24,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 16
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-loading-placeholder",
+            "startingLine": 17
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 18
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 19,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The url of the page to load.[/en]\n  [ja]読み込むページのURLを指定します。[/ja]",
+            "startingLine": 20
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 16
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-loading-placeholder",
+                "startingLine": 17
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 18
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 19,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The url of the page to load.[/en]\n  [ja]読み込むページのURLを指定します。[/ja]",
+                "startingLine": 20
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 19,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "ons-loading-placeholder",
+      "description": "[en]The url of the page to load.[/en]\n  [ja]読み込むページのURLを指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "loading-placeholder"
+  ],
+  "path": "api/../directive/ons-loading-placeholder",
+  "outputPath": "partials/api/../directive/ons-loading-placeholder.html"
+}

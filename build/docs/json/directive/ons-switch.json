@@ -1,0 +1,2463 @@
+{
+  "fileInfo": {
+    "baseName": "switch",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 20,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "switch",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-switch",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "form",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": " [en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
+        "startingLine": 11
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-button\n  [en]ons-button component[/en]\n  [ja]ons-buttonコンポーネント[/ja]",
+        "startingLine": 14
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-switch checked></ons-switch>",
+        "startingLine": 17
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "switch",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-switch",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "form",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+            "startingLine": 8
+          },
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
+            "startingLine": 11
+          }
+        ],
+        "seealso": [
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-button\n  [en]ons-button component[/en]\n  [ja]ons-buttonコンポーネント[/ja]",
+            "startingLine": 14
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-switch checked></ons-switch>",
+            "startingLine": 17
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "guides": [
+    {
+      "name": "UsingFormComponents\n",
+      "description": " [en]Using form components[/en]\n  [ja]フォームを使う[/ja]"
+    },
+    {
+      "name": "EventHandling\n",
+      "description": " [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]"
+    }
+  ],
+  "seealsos": [
+    {
+      "name": "ons-button\n",
+      "description": " [en]ons-button component[/en]\n  [ja]ons-buttonコンポーネント[/ja]"
+    }
+  ],
+  "categories": [
+    "form"
+  ],
+  "id": "switch",
+  "example": "<ons-switch checked></ons-switch>",
+  "name": "ons-switch",
+  "description": "[en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-switch checked></ons-switch>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 22,
+      "endingLine": 40,
+      "codeAncestors": [],
+      "docType": "event",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "event",
+            "startingLine": 22
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "change",
+            "startingLine": 23
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Fired when the value is changed.[/en]\n  [ja]ON/OFFが変わった時に発火します。[/ja]",
+            "startingLine": 24
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
+            "startingLine": 27,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
+            "startingLine": 30,
+            "typeExpression": "Object",
+            "type": {
+              "type": "NameExpression",
+              "name": "Object"
+            },
+            "typeList": [
+              "Object"
+            ],
+            "name": "event.switch"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
+            "startingLine": 33,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ],
+            "name": "event.value"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
+            "startingLine": 36,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ],
+            "name": "event.isInteractive"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "event",
+                "startingLine": 22
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "change",
+                "startingLine": 23
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Fired when the value is changed.[/en]\n  [ja]ON/OFFが変わった時に発火します。[/ja]",
+                "startingLine": 24
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
+                "startingLine": 27,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
+                "startingLine": 30,
+                "typeExpression": "Object",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Object"
+                },
+                "typeList": [
+                  "Object"
+                ],
+                "name": "event.switch"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
+                "startingLine": 33,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ],
+                "name": "event.value"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
+                "startingLine": 36,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ],
+                "name": "event.isInteractive"
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "change",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
+          "startingLine": 27,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
+          "startingLine": 30,
+          "typeExpression": "Object",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "typeList": [
+            "Object"
+          ],
+          "name": "event.switch"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
+          "startingLine": 33,
+          "typeExpression": "Boolean",
+          "type": {
+            "type": "NameExpression",
+            "name": "Boolean"
+          },
+          "typeList": [
+            "Boolean"
+          ],
+          "name": "event.value"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
+          "startingLine": 36,
+          "typeExpression": "Boolean",
+          "type": {
+            "type": "NameExpression",
+            "name": "Boolean"
+          },
+          "typeList": [
+            "Boolean"
+          ],
+          "name": "event.isInteractive"
+        }
+      ],
+      "description": "[en]Fired when the value is changed.[/en]\n  [ja]ON/OFFが変わった時に発火します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 78,
+      "endingLine": 87,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 78
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isChecked()",
+            "startingLine": 79
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
+            "startingLine": 80,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns true if the switch is ON.[/en]\n  [ja]スイッチがONの場合にtrueを返します。[/ja]",
+            "startingLine": 83
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 78
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isChecked()",
+                "startingLine": 79
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
+                "startingLine": 80,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns true if the switch is ON.[/en]\n  [ja]スイッチがONの場合にtrueを返します。[/ja]",
+                "startingLine": 83
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isChecked()",
+                "startingLine": 79
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isChecked()",
+      "name": "isChecked",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
+        "startingLine": 80,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns true if the switch is ON.[/en]\n  [ja]スイッチがONの場合にtrueを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 89,
+      "endingLine": 98,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 89
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "setChecked(checked)",
+            "startingLine": 90
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
+            "startingLine": 91,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ],
+            "name": "checked"
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Set the value of the switch. isChecked can be either true or false.[/en]\n  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]",
+            "startingLine": 94
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 89
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setChecked(checked)",
+                "startingLine": 90
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
+                "startingLine": 91,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ],
+                "name": "checked"
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Set the value of the switch. isChecked can be either true or false.[/en]\n  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]",
+                "startingLine": 94
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setChecked(checked)",
+                "startingLine": 90
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "setChecked(checked)",
+      "name": "setChecked",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
+          "startingLine": 91,
+          "typeExpression": "Boolean",
+          "type": {
+            "type": "NameExpression",
+            "name": "Boolean"
+          },
+          "typeList": [
+            "Boolean"
+          ],
+          "name": "checked"
+        }
+      ],
+      "description": "[en]Set the value of the switch. isChecked can be either true or false.[/en]\n  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 100,
+      "endingLine": 109,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 100
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "getCheckboxElement()",
+            "startingLine": 101
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
+            "startingLine": 102,
+            "typeExpression": "HTMLElement",
+            "type": {
+              "type": "NameExpression",
+              "name": "HTMLElement"
+            },
+            "typeList": [
+              "HTMLElement"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Get inner input[type=checkbox] element.[/en]\n  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]",
+            "startingLine": 105
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 100
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "getCheckboxElement()",
+                "startingLine": 101
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
+                "startingLine": 102,
+                "typeExpression": "HTMLElement",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "HTMLElement"
+                },
+                "typeList": [
+                  "HTMLElement"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Get inner input[type=checkbox] element.[/en]\n  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]",
+                "startingLine": 105
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "getCheckboxElement()",
+                "startingLine": 101
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "getCheckboxElement()",
+      "name": "getCheckboxElement",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
+        "startingLine": 102,
+        "typeExpression": "HTMLElement",
+        "type": {
+          "type": "NameExpression",
+          "name": "HTMLElement"
+        },
+        "typeList": [
+          "HTMLElement"
+        ]
+      },
+      "description": "[en]Get inner input[type=checkbox] element.[/en]\n  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 111,
+      "endingLine": 124,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 111
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "on(eventName, listener)",
+            "startingLine": 112
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 113
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+            "startingLine": 114
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 117,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 120,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 111
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "on(eventName, listener)",
+                "startingLine": 112
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 113
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+                "startingLine": 114
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 117,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 120,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "on(eventName, listener)",
+                "startingLine": 112
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "on(eventName, listener)",
+      "extensionOf": "angular",
+      "name": "on",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 117,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 120,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 126,
+      "endingLine": 139,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 126
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "once(eventName, listener)",
+            "startingLine": 127
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 128
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+            "startingLine": 129
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 132,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+            "startingLine": 135,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 126
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "once(eventName, listener)",
+                "startingLine": 127
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 128
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+                "startingLine": 129
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 132,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+                "startingLine": 135,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "once(eventName, listener)",
+                "startingLine": 127
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "once(eventName, listener)",
+      "extensionOf": "angular",
+      "name": "once",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 132,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
+          "startingLine": 135,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 141,
+      "endingLine": 154,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 141
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "off(eventName, [listener])",
+            "startingLine": 142
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 143
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+            "startingLine": 144
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+            "startingLine": 147,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "eventName"
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+            "startingLine": 150,
+            "typeExpression": "Function",
+            "type": {
+              "type": "FunctionType",
+              "params": []
+            },
+            "typeList": [
+              "Function"
+            ],
+            "name": "listener"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 141
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "off(eventName, [listener])",
+                "startingLine": 142
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 143
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+                "startingLine": 144
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+                "startingLine": 147,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "eventName"
+              },
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+                "startingLine": 150,
+                "typeExpression": "Function",
+                "type": {
+                  "type": "FunctionType",
+                  "params": []
+                },
+                "typeList": [
+                  "Function"
+                ],
+                "name": "listener"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "off(eventName, [listener])",
+                "startingLine": 142
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "off(eventName, [listener])",
+      "extensionOf": "angular",
+      "name": "off",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
+          "startingLine": 147,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "eventName"
+        },
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
+          "startingLine": 150,
+          "typeExpression": "Function",
+          "type": {
+            "type": "FunctionType",
+            "params": []
+          },
+          "typeList": [
+            "Function"
+          ],
+          "name": "listener"
+        }
+      ],
+      "description": "[en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 42,
+      "endingLine": 51,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 42
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "var",
+            "startingLine": 43
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 44
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 45
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 46,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Variable name to refer this switch.[/en]\n  [ja]JavaScriptから参照するための変数名を指定します。[/ja]",
+            "startingLine": 47
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 42
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "var",
+                "startingLine": 43
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 44
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 45
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 46,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Variable name to refer this switch.[/en]\n  [ja]JavaScriptから参照するための変数名を指定します。[/ja]",
+                "startingLine": 47
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 46,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "var",
+      "description": "[en]Variable name to refer this switch.[/en]\n  [ja]JavaScriptから参照するための変数名を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 53,
+      "endingLine": 60,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 53
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modifier",
+            "startingLine": 54
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 55,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]The appearance of the switch.[/en]\n [ja]スイッチの表現を指定します。[/ja]",
+            "startingLine": 56
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 53
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modifier",
+                "startingLine": 54
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 55,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]The appearance of the switch.[/en]\n [ja]スイッチの表現を指定します。[/ja]",
+                "startingLine": 56
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 55,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "modifier",
+      "description": "[en]The appearance of the switch.[/en]\n [ja]スイッチの表現を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 62,
+      "endingLine": 68,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 62
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "disabled",
+            "startingLine": 63
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Whether the switch should be disabled.[/en]\n  [ja]スイッチを無効の状態にする場合に指定します。[/ja]",
+            "startingLine": 64
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 62
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "disabled",
+                "startingLine": 63
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Whether the switch should be disabled.[/en]\n  [ja]スイッチを無効の状態にする場合に指定します。[/ja]",
+                "startingLine": 64
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "disabled",
+      "description": "[en]Whether the switch should be disabled.[/en]\n  [ja]スイッチを無効の状態にする場合に指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "switch",
+        "extension": "js"
+      },
+      "startingLine": 70,
+      "endingLine": 76,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 70
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "checked",
+            "startingLine": 71
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Whether the switch is checked.[/en]\n  [ja]スイッチがONの状態にするときに指定します。[/ja]",
+            "startingLine": 72
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 70
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "checked",
+                "startingLine": 71
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Whether the switch is checked.[/en]\n  [ja]スイッチがONの状態にするときに指定します。[/ja]",
+                "startingLine": 72
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "checked",
+      "description": "[en]Whether the switch is checked.[/en]\n  [ja]スイッチがONの状態にするときに指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "switch"
+  ],
+  "path": "api/../directive/ons-switch",
+  "outputPath": "partials/api/../directive/ons-switch.html"
+}
