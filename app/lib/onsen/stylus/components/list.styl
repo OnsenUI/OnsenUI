@@ -513,11 +513,18 @@ list__item()
   material-font()
   border 0
 
+  +retina-query()
+    background initial
+
 .list__item--material
   border 0
   min-height initial
   padding 14px 16px
   line-height normal
+
+.list__item--material:not(:last-child)
+  +retina-query()
+    background initial
 
 .list__item--material:first-child
   border 0
