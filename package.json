@@ -102,6 +102,7 @@
     "nunjucks": "^2.1.0",
     "prompt": "*",
     "run-sequence": "^1.0.2",
+    "shelljs": "^0.5.3",
     "topdoc": "~0.4.0",
     "webpack": "^1.10.0",
     "yargs": "^3.5.4"
