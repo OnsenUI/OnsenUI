@@ -60,6 +60,7 @@ v2.0.0-alpha.5
  * ons-toolbar: Added "material" modifier.
  * ons-back-button: Change style when parent toolbar has modifier "material".
  * ons-list: Added "material" modifier.
+ * ons-tabbar: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/948)
  * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
  * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
  * ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
