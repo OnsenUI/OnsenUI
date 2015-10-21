@@ -98,7 +98,11 @@ limitations under the License.
       this._pageContent = util.findParent(wrapperElement, '.page__content');
 
       if (!this._pageContent) {
-        throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> element.');
+        this._pageContent = util.findParent(wrapperElement, '.ons-scroller__content');
+      }
+
+      if (!this._pageContent) {
+        throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
       }
 
       this._itemHeightSum = [];

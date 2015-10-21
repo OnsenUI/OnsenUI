@@ -62,6 +62,7 @@ v2.0.0-alpha.5
  * ons-list: Added "material" modifier.
  * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
  * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
+ * ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
 
 v1.3.11
 ----
