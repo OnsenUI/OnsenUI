@@ -274,10 +274,21 @@ limitations under the License.
      * @param {Function} [options.callback]
      */
     _translateTo(scroll, options = {}) {
+      if (this._currentTranslation == 0 && scroll == 0) {
+        return;
+      }
 
-      //this._scope.$evalAsync(function() {
-        this._currentTranslation = scroll;
-      //}.bind(this));
+      const done = () => {
+        if (scroll === 0) {
+          this._getScrollableElement().removeAttribute('style');
+        }
+
+        if (options.callback) {
+          options.callback();
+        }
+      };
+
+      this._currentTranslation = scroll;
 
       if (options.animate) {
         animit(this._getScrollableElement())
@@ -287,13 +298,13 @@ limitations under the License.
             duration: 0.3,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
-          .play(options.callback);
+          .play(done);
       } else {
         animit(this._getScrollableElement())
           .queue({
             transform: this._generateTranslationTransform(scroll)
           })
-          .play(options.callback);
+          .play(done);
       }
     }
 

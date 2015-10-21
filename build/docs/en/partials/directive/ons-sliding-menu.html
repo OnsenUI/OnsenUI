@@ -1,0 +1,1445 @@
+---
+page: 'reference-detail'
+title: 'ons-sliding-menu'
+name: 'ons-sliding-menu'
+collection: 'components'
+reference: true
+docCategory: 'js'
+componentCategory: navigation
+---
+<div class="reference-container" id="ons-sliding-menu">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/slidingMenu.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/slidingMenu.js">Improve this doc</a>
+  </div>
+
+  <h2>ons-sliding-menu</h2>
+
+  
+  <span class="extension-name"></span>
+  
+
+  <section class="description">
+    <p>Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
+    
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    <li><a href="#usage">Usage</a></li>
+    
+    
+    <li><a href="#example">Live Example</a></li>
+    
+    
+    <li><a href="#attributes">Attributes</a></li>
+    
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
+    
+    
+    <li><a href="#events-summary">Events</a></li>
+    
+    
+    <li><a href="#seealso">See Also</a></li>
+    
+    <li><a href="#discussion">Discussion</a></li>
+  </ul>
+
+  
+    <section>
+      <h3 id="usage">
+        Usage
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml">&lt;ons-sliding-menu var=&quot;app.menu&quot; main-page=&quot;page.html&quot; menu-page=&quot;menu.html&quot; max-slide-distance=&quot;200px&quot; type=&quot;reveal&quot; side=&quot;left&quot;&gt;
+&lt;/ons-sliding-menu&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+   &lt;p style=&quot;text-align: center&quot;&gt;
+     &lt;ons-button ng-click=&quot;app.menu.toggleMenu()&quot;&gt;Toggle&lt;/ons-button&gt;
+   &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;
+
+&lt;ons-template id=&quot;menu.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;!-- menu page&#39;s contents --&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+    </section>
+  
+
+  
+
+  <!-- codepen -->
+  
+  <h3 id="example">
+    Live Example
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  
+    <p data-height="480" data-theme-id="11531" data-slug-hash="IDvFJ" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/IDvFJ/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/IDvFJ/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  
+
+  
+  <h3 id="seealso">
+    See also
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
+  <ul class="seealso">
+    
+      
+        <li class="guide"><a href="/guide/overview.html#UsingSlidingMenu
+">Using sliding menu</a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#EventHandling
+">Using events</a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#CallingComponentAPIsfromJavaScript
+">Using navigator from JavaScript</a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#DefiningMultiplePagesinSingleHTML
+">Defining multiple pages in single html</a></li>
+      
+    
+    
+      
+        <li class="seealso"><a href="ons-page
+.html">ons-page component</a></li>
+      
+    
+  </ul>
+  
+
+  <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">
+      Attributes
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Variable name to refer this sliding menu.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-menu-page">menu-page</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            The url of the menu page.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-main-page">main-page</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            The url of the main page.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-swipeable">swipeable</td>
+          <td>
+            <span class="value-type">Boolean</span>
+            
+          </td>
+          <td>
+            Whether to enable swipe interaction.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-swipe-target-width">swipe-target-width</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-max-slide-distance">max-slide-distance</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-side">side</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Specify which side of the screen the menu page is located on. Possible values are "left" and "right".
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-type">type</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Sliding menu animator. Possible values are reveal (default), push and overlay.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-preopen">ons-preopen</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "preopen" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-preclose">ons-preclose</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "preclose" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-postopen">ons-postopen</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "postopen" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-postclose">ons-postclose</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "postclose" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-init">ons-init</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when a page's "init" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-show">ons-show</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when a page's "show" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-hide">ons-hide</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when a page's "hide" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-sliding-menu-ons-destroy">ons-destroy</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when a page's "destroy" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">Works only during initialization</span>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-setMainPage">setMainPage(pageUrl, [options])</a></td>
+          <td>
+            Show the page specified in pageUrl in the main contents pane.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setMenuPage">setMenuPage(pageUrl, [options])</a></td>
+          <td>
+            Show the page specified in pageUrl in the side menu pane.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-openMenu">openMenu([options])</a></td>
+          <td>
+            Slide the above layer to reveal the layer behind.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-closeMenu">closeMenu([options])</a></td>
+          <td>
+            Slide the above layer to hide the layer behind.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-toggleMenu">toggleMenu([options])</a></td>
+          <td>
+            Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isMenuOpened">isMenuOpened()</a></td>
+          <td>
+            Returns true if the menu page is open, otherwise false.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
+          <td>
+            Retrieve the back-button handler.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setSwipeable">setSwipeable(swipeable)</a></td>
+          <td>
+            Specify if the menu should be swipeable or not.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-on">on(eventName, listener)</a></td>
+          <td>
+            Add an event listener.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-once">once(eventName, listener)</a></td>
+          <td>
+            Add an event listener that's only triggered once.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-off">off(eventName, [listener])</a></td>
+          <td>
+            Remove an event listener. If the listener is not specified all listeners for the event type will be removed.
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <section>
+    <h3 id="events-summary">
+      Events Summary
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-preopen">preopen</a></td>
+          <td>
+            Fired just before the sliding menu is opened.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-postopen">postopen</a></td>
+          <td>
+            Fired just after the sliding menu is opened.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-preclose">preclose</a></td>
+          <td>
+            Fired just before the sliding menu is closed.
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-postclose">postclose</a></td>
+          <td>
+            Fired just after the sliding menu is closed.
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-setMainPage">
+      setMainPage(pageUrl, [options])
+
+      <a href="#method-setMainPage" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Show the page specified in pageUrl in the main contents pane.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">pageUrl</span></td>
+          <td class="value-type">String</td>
+          <td>Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.closeMenu</span></td>
+          <td class="value-type">Boolean</td>
+          <td>If true the menu will be closed.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.callback</span></td>
+          <td class="value-type">Function</td>
+          <td>Function that is executed after the page has been set.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-setMenuPage">
+      setMenuPage(pageUrl, [options])
+
+      <a href="#method-setMenuPage" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Show the page specified in pageUrl in the side menu pane.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">pageUrl</span></td>
+          <td class="value-type">String</td>
+          <td>Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.closeMenu</span></td>
+          <td class="value-type">Boolean</td>
+          <td>If true the menu will be closed after the menu page has been set.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.callback</span></td>
+          <td class="value-type">Function</td>
+          <td>This function will be executed after the menu page has been set.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-openMenu">
+      openMenu([options])
+
+      <a href="#method-openMenu" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Slide the above layer to reveal the layer behind.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.callback</span></td>
+          <td class="value-type">Function</td>
+          <td>This function will be called after the menu has been opened.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-closeMenu">
+      closeMenu([options])
+
+      <a href="#method-closeMenu" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Slide the above layer to hide the layer behind.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.callback</span></td>
+          <td class="value-type">Function</td>
+          <td>This function will be called after the menu has been closed.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-toggleMenu">
+      toggleMenu([options])
+
+      <a href="#method-toggleMenu" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.callback</span></td>
+          <td class="value-type">Function</td>
+          <td>This function will be called after the menu has been opened or closed.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-isMenuOpened">
+      isMenuOpened()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isMenuOpened" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns true if the menu page is open, otherwise false.</p>
+
+    
+
+    
+
+    
+    <p>Returns: true if the menu is currently open.</p>
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getDeviceBackButtonHandler">
+      getDeviceBackButtonHandler()<span class="value-type">: Object</span>
+
+      <a href="#method-getDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Retrieve the back-button handler.</p>
+
+    
+
+    
+
+    
+    <p>Returns: Device back button handler.</p>
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-setSwipeable">
+      setSwipeable(swipeable)
+
+      <a href="#method-setSwipeable" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Specify if the menu should be swipeable or not.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">swipeable</span></td>
+          <td class="value-type">Boolean</td>
+          <td>If true the menu will be swipeable.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-on">
+      on(eventName, listener)
+
+      <a href="#method-on" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Add an event listener.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-once">
+      once(eventName, listener)
+
+      <a href="#method-once" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Add an event listener that's only triggered once.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-off">
+      off(eventName, [listener])
+
+      <a href="#method-off" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Remove an event listener. If the listener is not specified all listeners for the event type will be removed.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <h3>Events</h3>
+  
+  <section class="event-detail">
+    <h4 id="event-preopen">
+      preopen
+      <a href="#event-preopen" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fired just before the sliding menu is opened.</p>
+
+    
+
+    
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.slidingMenu</span></td>
+          <td class="value-type">Object</td>
+          <td>Sliding menu view object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-postopen">
+      postopen
+      <a href="#event-postopen" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fired just after the sliding menu is opened.</p>
+
+    
+
+    
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.slidingMenu</span></td>
+          <td class="value-type">Object</td>
+          <td>Sliding menu view object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-preclose">
+      preclose
+      <a href="#event-preclose" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fired just before the sliding menu is closed.</p>
+
+    
+
+    
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.slidingMenu</span></td>
+          <td class="value-type">Object</td>
+          <td>Sliding menu view object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-postclose">
+      postclose
+      <a href="#event-postclose" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fired just after the sliding menu is closed.</p>
+
+    
+
+    
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.slidingMenu</span></td>
+          <td class="value-type">Object</td>
+          <td>Sliding menu view object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
