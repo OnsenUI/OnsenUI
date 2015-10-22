@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v2.0.0-alpha.5
+v2.0.0-alpha.6
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
