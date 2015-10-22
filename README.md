@@ -47,6 +47,22 @@ See the [Onsen UI Getting Started](http://onsen.io/getting_started/) page.
 
 See the [Onsen UI Getting Started Page] and scroll down to the Using Onsen UI with Monaca section. 
 
+## Download Onsen UI
+
+Using bower:
+
+```bash
+$ bower install onsenui
+```
+
+Using npm:
+
+```bash
+$ npm install onsenui
+```
+
+The distribution repository is located [here](https://github.com/OnsenUI/OnsenUI-dist).
+
 ## Download the latest build
 
 A new build is generated every time the code changes. It can be downloaded on [this page](http://onsen.io/download.html#latest-build).
