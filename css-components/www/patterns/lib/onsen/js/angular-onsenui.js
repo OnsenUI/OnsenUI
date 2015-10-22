@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.5 - 2015-10-21 */
+/*! angular-onsenui.js for onsenui - v2.0.0-alpha.6 - 2015-10-22 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }

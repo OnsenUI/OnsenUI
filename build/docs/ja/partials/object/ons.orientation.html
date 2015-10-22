@@ -1,0 +1,423 @@
+---
+page: 'reference-detail'
+title: 'ons.orientation'
+name: 'ons.orientation'
+collection: 'objects'
+reference: true
+docCategory: 'js'
+componentCategory: util
+---
+
+<div id="ons.orientation">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/js/orientation.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/js/orientation.js">Improve this doc</a>
+  </div>
+
+  <h2>ons.orientation</h2>
+
+  
+
+  <section class="reference-description">
+    <p>画面のオリエンテーション検知のためのユーティリティメソッドを収めているオブジェクトです。</p>
+    
+
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    
+    
+    <li><a href="#methods-summary">メソッド</a></li>
+    
+    
+    <li><a href="#events-summary">イベント</a></li>
+    
+    
+    <li><a href="#discussion">議論</a></li>
+  </ul>
+
+  
+
+  
+
+  
+
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      メソッド概要
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>シグネチャ</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-isPortrait">isPortrait()</a></td>
+          <td>オリエンテーションがportraitモードかどうかを返します。
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isLandscape">isLandscape()</a></td>
+          <td>オリエンテーションがlandscapeモードかどうかを返します。
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-on">on(eventName, listener)</a></td>
+          <td>イベントリスナーを追加します。
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-once">once(eventName, listener)</a></td>
+          <td>一度だけ呼び出されるイベントリスナーを追加します。
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-off">off(eventName, [listener])</a></td>
+          <td>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <section>
+    <h3 id="events-summary">
+      イベント概要
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-change">change</a></td>
+          <td>デバイスのオリエンテーションが変化した際に発火します。
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>メソッド</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-isPortrait">
+      isPortrait()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isPortrait" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>オリエンテーションがportraitモードかどうかを返します。</p>
+
+    
+
+    
+
+    
+    <p>返り値: オリエンテーションがportraitモードの場合にtrueになります。</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-isLandscape">
+      isLandscape()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isLandscape" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>オリエンテーションがlandscapeモードかどうかを返します。</p>
+
+    
+
+    
+
+    
+    <p>返り値: オリエンテーションがlandscapeモードの場合にtrueになります。</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-on">
+      on(eventName, listener)
+
+      <a href="#method-on" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>イベントリスナーを追加します。</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>イベント名を指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>このイベントが発火された際に呼び出される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-once">
+      once(eventName, listener)
+
+      <a href="#method-once" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>一度だけ呼び出されるイベントリスナーを追加します。</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>イベント名を指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>イベントが発火した際に呼び出される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-off">
+      off(eventName, [listener])
+
+      <a href="#method-off" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>イベント名を指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>削除するイベントリスナーを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <h3>イベント</h3>
+  
+  <section class="event-detail">
+    <h4 id="event-change">
+      change
+      <a href="#event-change" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>デバイスのオリエンテーションが変化した際に発火します。</p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>イベントオブジェクトです。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.isPortrait</span></td>
+          <td class="value-type">Boolean</td>
+          <td>現在のオリエンテーションがportraitの場合にtrueを返します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    議論
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'onsenui-ja'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>
