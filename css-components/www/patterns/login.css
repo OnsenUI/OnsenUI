@@ -9,8 +9,9 @@ input[type=email], input[type=password] {
   width: 100%;
   margin: 0 auto;
   outline: none;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  height: 100%;
+  padding-top: 15px;
+  padding-bottom: 16px;
 }
 
 .login-button {
