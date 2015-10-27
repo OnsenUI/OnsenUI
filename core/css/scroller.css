@@ -21,6 +21,7 @@ ons-scroller {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;   
   -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
 }
 
 ons-scroller::-webkit-scrollbar {
