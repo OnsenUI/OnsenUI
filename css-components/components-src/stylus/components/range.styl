@@ -210,6 +210,15 @@ var-material-range-highlight-color-active = $second-highlight-color
   border-color var-material-range-highlight-color
   background-color var-material-range-highlight-color
 
+.range--material::-ms-thumb
+  margin-top 1px
+  border none
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%;
+  border-color var-material-range-highlight-color
+  background-color var-material-range-highlight-color
+
 .range--material:focus::-webkit-slider-thumb
   border-color var-material-range-highlight-color
   background-color var-material-range-highlight-color
@@ -227,13 +236,14 @@ range--material--thumb--before()
 .range--material::-webkit-slider-thumb:before
   range--material--thumb--before()
 
+.range--material::-ms-fill-lower
+  background-color var-material-range-highlight-color
+
 range--material--thumb--after()
   content ''
   display block
   border 0px
   border-radius 100%
-  margin-top -3px
-  margin-left -3px
   height var-material-range-thumb-width
   width var-material-range-thumb-width
   background-color var-material-range-highlight-color-active
@@ -241,9 +251,18 @@ range--material--thumb--after()
   transition transform 0.1s linear
 
 .range--material::-moz-range-thumb:after
+  margin-top -3px
+  margin-left -3px
   range--material--thumb--after()
 
 .range--material::-webkit-slider-thumb:after
+  margin-top -3px
+  margin-left -3px
+  range--material--thumb--after()
+
+.range--material::-ms-fill-upper
+  margin-top: -6px;
+  margin-left: -6px;
   range--material--thumb--after()
 
 .range--material:active::-webkit-slider-thumb:after
@@ -251,3 +270,7 @@ range--material--thumb--after()
 
 .range--material:active::-moz-range-thumb:after
   transform scale(2.5)
+
+.range--material:active::-ms-fill-upper
+  transform scale(2.5)
+
