@@ -32,4 +32,8 @@
   } else {
     ons._BaseElement = HTMLElement;
   }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ons;
+  }
 })(window.ons = window.ons || {});
