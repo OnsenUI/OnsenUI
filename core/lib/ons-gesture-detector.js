@@ -2059,18 +2059,6 @@ GestureDetector.Instance.prototype = {
     };
   })('transform');
 
-  // AMD export
-  if(typeof define == 'function' && define.amd) {
-    define(function() {
-      return GestureDetector;
-    });
-    // commonjs export
-  } else if(typeof module !== 'undefined' && module.exports) {
-    module.exports = GestureDetector;
-    // browser export
-  } else {
-    window.ons = window.ons || {};
-    window.ons.GestureDetector = GestureDetector;
-  }
-
+  window.ons = window.ons || {};
+  window.ons.GestureDetector = GestureDetector;
 })(window);

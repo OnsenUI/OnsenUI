@@ -1,0 +1,210 @@
+---
+page: 'reference-detail'
+title: 'ons-col'
+name: 'ons-col'
+collection: 'components'
+reference: true
+docCategory: 'js'
+componentCategory: grid
+---
+<div class="reference-container" id="ons-col">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/col.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/col.js">Improve this doc</a>
+  </div>
+
+  <h2>ons-col</h2>
+
+  
+
+  <section class="description">
+    <p>グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントのレイアウトに利用します。</p>
+    
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    <li><a href="#usage">使い方</a></li>
+    
+    
+    <li><a href="#example">実例</a></li>
+    
+    
+    <li><a href="#attributes">属性</a></li>
+    
+    
+    
+    
+    
+    <li><a href="#seealso">関連情報</a></li>
+    
+    <li><a href="#discussion">議論</a></li>
+  </ul>
+
+  
+    <section>
+      <h3 id="usage">
+        使い方
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml">&lt;ons-row&gt;
+  &lt;ons-col width=&quot;50px&quot;&gt;&lt;ons-icon icon=&quot;fa-twitter&quot;&gt;&lt;/ons-icon&gt;&lt;/ons-col&gt;
+  &lt;ons-col&gt;Text&lt;/ons-col&gt;
+&lt;/ons-row&gt;</code></pre>
+    </section>
+  
+
+  
+  <section class="reference-note" id="node">
+    <p>注意: Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。</p>
+  </section>
+  
+
+  <!-- codepen -->
+  
+  <h3 id="example">
+    実例
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  
+  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
+  
+    <p data-height="480" data-theme-id="11531" data-slug-hash="GgujC" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/GgujC/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/GgujC/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  
+
+  
+  <h3 id="seealso">
+    関連情報
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
+  <ul class="seealso">
+    
+      
+        <li class="guide"><a href="/guide/overview.html#layouting">レイアウト機能</a></li>
+      
+    
+    
+      
+        <li class="seealso"><a href="ons-row.html">ons-rowコンポーネント</a></li>
+      
+    
+  </ul>
+  
+
+  <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">
+      属性
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型 / デフォルト値</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-col-vertical-align">vertical-align</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            縦の配置を指定する。"top", "center", "bottom"のいずれかを指定します。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-col-width">width</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            カラムの横幅を指定する。パーセントもしくはピクセルで指定します（10%や50px）。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
+
+  <!-- methods summary -->
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    議論
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui-ja'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>

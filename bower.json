@@ -7,9 +7,7 @@
   ],
   "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
   "main": [
-    "js/onsenui.js"
-  ],
-  "styles": [
+    "js/onsenui.js",
     "css/onsenui.css",
     "css/onsen-css-components.css"
   ],
@@ -28,7 +26,6 @@
   },
   "license": "Apache License, Version 2.0",
   "ignore": [
-    ".npmignore",
-    "onsenui.zip"
+    ".npmignore"
   ]
 }
