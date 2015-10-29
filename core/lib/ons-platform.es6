@@ -47,6 +47,8 @@ limitations under the License.
     isIOS: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'ios';
+      } else if (typeof device === 'object') {
+        return /iOS/i.test(device.platform);
       } else {
         return /iPhone|iPad|iPod/i.test(navigator.userAgent);
       }
@@ -58,6 +60,8 @@ limitations under the License.
     isAndroid: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'android';
+      } else if (typeof device === 'object') {
+        return /Android/i.test(device.platform);
       } else {
         return /Android/i.test(navigator.userAgent);
       }
@@ -83,6 +87,8 @@ limitations under the License.
     isWP: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'wp';
+      } else if (typeof device === 'object') {
+        return /Win32NT|WinCE/i.test(device.platform);
       } else {
         return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
       }
@@ -115,6 +121,8 @@ limitations under the License.
     isBlackBerry: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'blackberry';
+      } else if (typeof device === 'object') {
+        return /BlackBerry/i.test(device.platform);
       } else {
         return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
       }
