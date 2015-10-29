@@ -1,0 +1,429 @@
+{
+  "fileInfo": {
+    "baseName": "lazyRepeat",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 56,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "lazy-repeat",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-lazy-repeat",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "extensionOf"
+        },
+        "tagName": "extensionOf",
+        "description": "angular",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "control",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]\n    Using this component a list with millions of items can be rendered without a drop in performance.\n    It does that by \"lazily\" loading elements into the DOM when they come into view and\n    removing items from the DOM when they are not visible.\n  [/en]\n  [ja]\n    このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、\n    画面から見えなくなった場合にはその要素は動的にアンロードされます。\n    このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。\n  [/ja]",
+        "startingLine": 6
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "QwrGBm",
+        "startingLine": 17
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UsingLazyRepeat \n  [en]How to use Lazy Repeat[/en]\n  [ja]レイジーリピートの使い方[/ja]",
+        "startingLine": 18
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<script>\n  ons.bootstrap()\n\n  .controller('MyController', function($scope) {\n    $scope.MyDelegate = {\n      countItems: function() {\n        // Return number of items.\n        return 1000000;\n      },\n\n      calculateItemHeight: function(index) {\n        // Return the height of an item in pixels.\n        return 45;\n      },\n\n      configureItemScope: function(index, itemScope) {\n        // Initialize scope\n        itemScope.item = 'Item #' + (index + 1);\n      },\n\n      destroyItemScope: function(index, itemScope) {\n        // Optional method that is called when an item is unloaded.\n        console.log('Destroyed item with index: ' + index);\n      }\n    };\n  });\n</script>\n\n<ons-list ng-controller=\"MyController\">\n  <ons-list-item ons-lazy-repeat=\"MyDelegate\">\n    {{ item }}\n  </ons-list-item>\n</ons-list>",
+        "startingLine": 21
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "lazy-repeat",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-lazy-repeat",
+            "startingLine": 3
+          }
+        ],
+        "extensionOf": [
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 4
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "control",
+            "startingLine": 5
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]\n    Using this component a list with millions of items can be rendered without a drop in performance.\n    It does that by \"lazily\" loading elements into the DOM when they come into view and\n    removing items from the DOM when they are not visible.\n  [/en]\n  [ja]\n    このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、\n    画面から見えなくなった場合にはその要素は動的にアンロードされます。\n    このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。\n  [/ja]",
+            "startingLine": 6
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "QwrGBm",
+            "startingLine": 17
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UsingLazyRepeat \n  [en]How to use Lazy Repeat[/en]\n  [ja]レイジーリピートの使い方[/ja]",
+            "startingLine": 18
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<script>\n  ons.bootstrap()\n\n  .controller('MyController', function($scope) {\n    $scope.MyDelegate = {\n      countItems: function() {\n        // Return number of items.\n        return 1000000;\n      },\n\n      calculateItemHeight: function(index) {\n        // Return the height of an item in pixels.\n        return 45;\n      },\n\n      configureItemScope: function(index, itemScope) {\n        // Initialize scope\n        itemScope.item = 'Item #' + (index + 1);\n      },\n\n      destroyItemScope: function(index, itemScope) {\n        // Optional method that is called when an item is unloaded.\n        console.log('Destroyed item with index: ' + index);\n      }\n    };\n  });\n</script>\n\n<ons-list ng-controller=\"MyController\">\n  <ons-list-item ons-lazy-repeat=\"MyDelegate\">\n    {{ item }}\n  </ons-list-item>\n</ons-list>",
+            "startingLine": 21
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "codepen": {
+    "id": "QwrGBm",
+    "isWide": false
+  },
+  "guides": [
+    {
+      "name": "UsingLazyRepeat",
+      "description": "\n  [en]How to use Lazy Repeat[/en]\n  [ja]レイジーリピートの使い方[/ja]"
+    }
+  ],
+  "categories": [
+    "control"
+  ],
+  "extensionOf": "angular",
+  "id": "lazy-repeat",
+  "example": "<script>\n  ons.bootstrap()\n\n  .controller('MyController', function($scope) {\n    $scope.MyDelegate = {\n      countItems: function() {\n        // Return number of items.\n        return 1000000;\n      },\n\n      calculateItemHeight: function(index) {\n        // Return the height of an item in pixels.\n        return 45;\n      },\n\n      configureItemScope: function(index, itemScope) {\n        // Initialize scope\n        itemScope.item = 'Item #' + (index + 1);\n      },\n\n      destroyItemScope: function(index, itemScope) {\n        // Optional method that is called when an item is unloaded.\n        console.log('Destroyed item with index: ' + index);\n      }\n    };\n  });\n</script>\n\n<ons-list ng-controller=\"MyController\">\n  <ons-list-item ons-lazy-repeat=\"MyDelegate\">\n    {{ item }}\n  </ons-list-item>\n</ons-list>",
+  "name": "ons-lazy-repeat",
+  "description": "[en]\n    Using this component a list with millions of items can be rendered without a drop in performance.\n    It does that by \"lazily\" loading elements into the DOM when they come into view and\n    removing items from the DOM when they are not visible.\n  [/en]\n  [ja]\n    このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、\n    画面から見えなくなった場合にはその要素は動的にアンロードされます。\n    このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。\n  [/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<script>\n  ons.bootstrap()\n\n  .controller('MyController', function($scope) {\n    $scope.MyDelegate = {\n      countItems: function() {\n        // Return number of items.\n        return 1000000;\n      },\n\n      calculateItemHeight: function(index) {\n        // Return the height of an item in pixels.\n        return 45;\n      },\n\n      configureItemScope: function(index, itemScope) {\n        // Initialize scope\n        itemScope.item = 'Item #' + (index + 1);\n      },\n\n      destroyItemScope: function(index, itemScope) {\n        // Optional method that is called when an item is unloaded.\n        console.log('Destroyed item with index: ' + index);\n      }\n    };\n  });\n</script>\n\n<ons-list ng-controller=\"MyController\">\n  <ons-list-item ons-lazy-repeat=\"MyDelegate\">\n    {{ item }}\n  </ons-list-item>\n</ons-list>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "lazyRepeat",
+        "extension": "js"
+      },
+      "startingLine": 58,
+      "endingLine": 67,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 58
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-lazy-repeat",
+            "startingLine": 59
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 60,
+            "typeExpression": "Expression",
+            "type": {
+              "type": "NameExpression",
+              "name": "Expression"
+            },
+            "typeList": [
+              "Expression"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "initonly"
+            },
+            "tagName": "initonly",
+            "description": "",
+            "startingLine": 61
+          },
+          {
+            "tagDef": {
+              "name": "extensionOf"
+            },
+            "tagName": "extensionOf",
+            "description": "angular",
+            "startingLine": 62
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]\n [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]",
+            "startingLine": 63
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 58
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "ons-lazy-repeat",
+                "startingLine": 59
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 60,
+                "typeExpression": "Expression",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Expression"
+                },
+                "typeList": [
+                  "Expression"
+                ]
+              }
+            ],
+            "initonly": [
+              {
+                "tagDef": {
+                  "name": "initonly"
+                },
+                "tagName": "initonly",
+                "description": "",
+                "startingLine": 61
+              }
+            ],
+            "extensionOf": [
+              {
+                "tagDef": {
+                  "name": "extensionOf"
+                },
+                "tagName": "extensionOf",
+                "description": "angular",
+                "startingLine": 62
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]\n [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]",
+                "startingLine": 63
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "initonly": true,
+      "extensionOf": "angular",
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 60,
+        "typeExpression": "Expression",
+        "type": {
+          "type": "NameExpression",
+          "name": "Expression"
+        },
+        "typeList": [
+          "Expression"
+        ]
+      },
+      "name": "ons-lazy-repeat",
+      "description": "[en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]\n [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "lazy-repeat"
+  ],
+  "path": "api/../directive/ons-lazy-repeat",
+  "outputPath": "partials/api/../directive/ons-lazy-repeat.html"
+}

@@ -1,0 +1,424 @@
+{
+  "fileInfo": {
+    "baseName": "listHeader",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 21,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "list-header",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-list-header",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "list",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Header element for list items. Must be put inside ons-list component.[/en]\n  [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-list\n  [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]",
+        "startingLine": 11
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UsingList [en]Using lists[/en][ja]リストを使う[/ja]",
+        "startingLine": 12
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "yxcCt",
+        "startingLine": 13
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+        "startingLine": 14
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "list-header",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-list-header",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "list",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Header element for list items. Must be put inside ons-list component.[/en]\n  [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "seealso": [
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-list\n  [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]",
+            "startingLine": 8
+          },
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]",
+            "startingLine": 11
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UsingList [en]Using lists[/en][ja]リストを使う[/ja]",
+            "startingLine": 12
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "yxcCt",
+            "startingLine": 13
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+            "startingLine": 14
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "codepen": {
+    "id": "yxcCt",
+    "isWide": false
+  },
+  "guides": [
+    {
+      "name": "UsingList",
+      "description": "[en]Using lists[/en][ja]リストを使う[/ja]"
+    }
+  ],
+  "seealsos": [
+    {
+      "name": "ons-list\n",
+      "description": " [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]"
+    },
+    {
+      "name": "ons-list-item",
+      "description": "[en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]"
+    }
+  ],
+  "categories": [
+    "list"
+  ],
+  "id": "list-header",
+  "example": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+  "name": "ons-list-header",
+  "description": "[en]Header element for list items. Must be put inside ons-list component.[/en]\n  [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "listHeader",
+        "extension": "js"
+      },
+      "startingLine": 23,
+      "endingLine": 30,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 23
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modifier",
+            "startingLine": 24
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 25,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The appearance of the list header.[/en]\n  [ja]ヘッダーの表現を指定します。[/ja]",
+            "startingLine": 26
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 23
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modifier",
+                "startingLine": 24
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 25,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The appearance of the list header.[/en]\n  [ja]ヘッダーの表現を指定します。[/ja]",
+                "startingLine": 26
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 25,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "modifier",
+      "description": "[en]The appearance of the list header.[/en]\n  [ja]ヘッダーの表現を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "list-header"
+  ],
+  "path": "api/../directive/ons-list-header",
+  "outputPath": "partials/api/../directive/ons-list-header.html"
+}

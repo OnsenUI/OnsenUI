@@ -34,8 +34,8 @@ For versions earlier than 1.3.0, iOS 8.4+ is not supported. In order to use thes
 
 ## What's Included
 
-* [AngularJS](angularjs.org): for directives
-* [Topcoat](topcoat.io): for fast UI css
+* [AngularJS](https://angularjs.org): for directives
+* [Topcoat](http://topcoat.io): for fast UI css
 * [HammerJS](http://eightmedia.github.io/hammer.js/): for touch, swipe handling
 * [Font Awesome](http://fontawesome.io/): for icons
 

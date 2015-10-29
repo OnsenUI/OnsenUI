@@ -1,0 +1,1003 @@
+{
+  "fileInfo": {
+    "baseName": "button",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 37,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "button",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-button",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "form",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "outline\n  [en]Button with outline and transparent background[/en]\n  [ja]アウトラインを持ったボタンを表示します。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "light\n  [en]Button that doesn't stand out.[/en]\n  [ja]目立たないボタンを表示します。[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "quiet\n  [en]Button with no outline and or background..[/en]\n  [ja]枠線や背景が無い文字だけのボタンを表示します。[/ja]",
+        "startingLine": 11
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "cta\n  [en]Button that really stands out.[/en]\n  [ja]目立つボタンを表示します。[/ja]",
+        "startingLine": 14
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "large\n  [en]Large button that covers the width of the screen.[/en]\n  [ja]横いっぱいに広がる大きなボタンを表示します。[/ja]",
+        "startingLine": 17
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "large--quiet\n  [en]Large quiet button.[/en]\n  [ja]横いっぱいに広がるquietボタンを表示します。[/ja]",
+        "startingLine": 20
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "large--cta\n  [en]Large call to action button.[/en]\n  [ja]横いっぱいに広がるctaボタンを表示します。[/ja]",
+        "startingLine": 23
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]\n  [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用します。[/ja]",
+        "startingLine": 26
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "hLayx",
+        "startingLine": 29
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]",
+        "startingLine": 30
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]",
+        "startingLine": 31
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-button modifier=\"large--cta\">\n  Tap Me\n</ons-button>",
+        "startingLine": 32
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "button",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-button",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "form",
+            "startingLine": 4
+          }
+        ],
+        "modifier": [
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "outline\n  [en]Button with outline and transparent background[/en]\n  [ja]アウトラインを持ったボタンを表示します。[/ja]",
+            "startingLine": 5
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "light\n  [en]Button that doesn't stand out.[/en]\n  [ja]目立たないボタンを表示します。[/ja]",
+            "startingLine": 8
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "quiet\n  [en]Button with no outline and or background..[/en]\n  [ja]枠線や背景が無い文字だけのボタンを表示します。[/ja]",
+            "startingLine": 11
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "cta\n  [en]Button that really stands out.[/en]\n  [ja]目立つボタンを表示します。[/ja]",
+            "startingLine": 14
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "large\n  [en]Large button that covers the width of the screen.[/en]\n  [ja]横いっぱいに広がる大きなボタンを表示します。[/ja]",
+            "startingLine": 17
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "large--quiet\n  [en]Large quiet button.[/en]\n  [ja]横いっぱいに広がるquietボタンを表示します。[/ja]",
+            "startingLine": 20
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "large--cta\n  [en]Large call to action button.[/en]\n  [ja]横いっぱいに広がるctaボタンを表示します。[/ja]",
+            "startingLine": 23
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]\n  [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用します。[/ja]",
+            "startingLine": 26
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "hLayx",
+            "startingLine": 29
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]",
+            "startingLine": 30
+          },
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]",
+            "startingLine": 31
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-button modifier=\"large--cta\">\n  Tap Me\n</ons-button>",
+            "startingLine": 32
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "modifiers": [
+    {
+      "name": "outline",
+      "description": "\n  [en]Button with outline and transparent background[/en]\n  [ja]アウトラインを持ったボタンを表示します。[/ja]"
+    },
+    {
+      "name": "light",
+      "description": "\n  [en]Button that doesn't stand out.[/en]\n  [ja]目立たないボタンを表示します。[/ja]"
+    },
+    {
+      "name": "quiet",
+      "description": "\n  [en]Button with no outline and or background..[/en]\n  [ja]枠線や背景が無い文字だけのボタンを表示します。[/ja]"
+    },
+    {
+      "name": "cta",
+      "description": "\n  [en]Button that really stands out.[/en]\n  [ja]目立つボタンを表示します。[/ja]"
+    },
+    {
+      "name": "large",
+      "description": "\n  [en]Large button that covers the width of the screen.[/en]\n  [ja]横いっぱいに広がる大きなボタンを表示します。[/ja]"
+    },
+    {
+      "name": "large--quiet",
+      "description": "\n  [en]Large quiet button.[/en]\n  [ja]横いっぱいに広がるquietボタンを表示します。[/ja]"
+    },
+    {
+      "name": "large--cta",
+      "description": "\n  [en]Large call to action button.[/en]\n  [ja]横いっぱいに広がるctaボタンを表示します。[/ja]"
+    }
+  ],
+  "codepen": {
+    "id": "hLayx",
+    "isWide": false
+  },
+  "guides": [
+    {
+      "name": "Button",
+      "description": "[en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]"
+    },
+    {
+      "name": "OverridingCSSstyles",
+      "description": "[en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]"
+    }
+  ],
+  "categories": [
+    "form"
+  ],
+  "id": "button",
+  "example": "<ons-button modifier=\"large--cta\">\n  Tap Me\n</ons-button>",
+  "name": "ons-button",
+  "description": "[en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]\n  [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用します。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-button modifier=\"large--cta\">\n  Tap Me\n</ons-button>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "button",
+        "extension": "js"
+      },
+      "startingLine": 56,
+      "endingLine": 65,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 56
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "setDisabled(disabled)",
+            "startingLine": 57
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Disable or enable the button.[/en]\n  [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]",
+            "startingLine": 58
+          },
+          {
+            "tagDef": {
+              "name": "param",
+              "multi": true,
+              "docProperty": "params",
+              "transforms": [
+                null,
+                null,
+                null
+              ]
+            },
+            "tagName": "param",
+            "description": "[en]If true the button will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
+            "startingLine": 61,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ],
+            "name": "disabled"
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 56
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 57
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Disable or enable the button.[/en]\n  [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]",
+                "startingLine": 58
+              }
+            ],
+            "param": [
+              {
+                "tagDef": {
+                  "name": "param",
+                  "multi": true,
+                  "docProperty": "params",
+                  "transforms": [
+                    null,
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "param",
+                "description": "[en]If true the button will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
+                "startingLine": 61,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ],
+                "name": "disabled"
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 57
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "setDisabled(disabled)",
+      "name": "setDisabled",
+      "params": [
+        {
+          "tagDef": {
+            "name": "param",
+            "multi": true,
+            "docProperty": "params",
+            "transforms": [
+              null,
+              null,
+              null
+            ]
+          },
+          "tagName": "param",
+          "description": "[en]If true the button will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
+          "startingLine": 61,
+          "typeExpression": "String",
+          "type": {
+            "type": "NameExpression",
+            "name": "String"
+          },
+          "typeList": [
+            "String"
+          ],
+          "name": "disabled"
+        }
+      ],
+      "description": "[en]Disable or enable the button.[/en]\n  [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "button",
+        "extension": "js"
+      },
+      "startingLine": 67,
+      "endingLine": 76,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 67
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isDisabled()",
+            "startingLine": 68
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the button is disabled.[/en]\n  [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]",
+            "startingLine": 69,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the button is disabled or enabled.[/en]\n  [ja]このボタンがdisabled状態かどうかを返します。[/ja]",
+            "startingLine": 72
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 67
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 68
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the button is disabled.[/en]\n  [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]",
+                "startingLine": 69,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the button is disabled or enabled.[/en]\n  [ja]このボタンがdisabled状態かどうかを返します。[/ja]",
+                "startingLine": 72
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 68
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isDisabled()",
+      "name": "isDisabled",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the button is disabled.[/en]\n  [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]",
+        "startingLine": 69,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the button is disabled or enabled.[/en]\n  [ja]このボタンがdisabled状態かどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "button",
+        "extension": "js"
+      },
+      "startingLine": 39,
+      "endingLine": 46,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 39
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modifier",
+            "startingLine": 40
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 41,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": " [en]The appearance of the button.[/en]\n [ja]ボタンの表現を指定します。[/ja]",
+            "startingLine": 42
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 39
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modifier",
+                "startingLine": 40
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 41,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": " [en]The appearance of the button.[/en]\n [ja]ボタンの表現を指定します。[/ja]",
+                "startingLine": 42
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 41,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "modifier",
+      "description": "[en]The appearance of the button.[/en]\n [ja]ボタンの表現を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "button",
+        "extension": "js"
+      },
+      "startingLine": 48,
+      "endingLine": 54,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 48
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "disabled",
+            "startingLine": 49
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Specify if button should be disabled.[/en]\n  [ja]ボタンを無効化する場合は指定します。[/ja]",
+            "startingLine": 50
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 48
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "disabled",
+                "startingLine": 49
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Specify if button should be disabled.[/en]\n  [ja]ボタンを無効化する場合は指定します。[/ja]",
+                "startingLine": 50
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "disabled",
+      "description": "[en]Specify if button should be disabled.[/en]\n  [ja]ボタンを無効化する場合は指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "button"
+  ],
+  "path": "api/../directive/ons-button",
+  "outputPath": "partials/api/../directive/ons-button.html"
+}
