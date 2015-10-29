@@ -7,6 +7,7 @@ var ngdoc = require('dgeni-packages/ngdoc');
 
 module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
   .processor(require('./aggregate'))
+  .processor(require('./output-json'))
   .config(function(log, readFilesProcessor, templateFinder) {
 
     log.level = 'info';

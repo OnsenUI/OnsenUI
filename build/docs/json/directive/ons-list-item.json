@@ -1,0 +1,649 @@
+{
+  "fileInfo": {
+    "baseName": "listItem",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 34,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "list-item",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-list-item",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "list",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "tight\n  [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]\n  [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "tappable\n  [en]Make the list item change appearance when it's tapped.[/en]\n  [ja]タップやクリックした時に効果が表示されるようになります。[/ja]",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "modifier",
+          "multi": true,
+          "docProperty": "modifiers"
+        },
+        "tagName": "modifier",
+        "description": "chevron\n  [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]\n  [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]",
+        "startingLine": 11
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]\n  [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]",
+        "startingLine": 14
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-list\n  [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]",
+        "startingLine": 17
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-list-header\n  [en]ons-list-header component[/en]\n  [ja]ons-list-headerコンポーネント[/ja]",
+        "startingLine": 20
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
+        "description": "UsingList\n  [en]Using lists[/en]\n  [ja]リストを使う[/ja]",
+        "startingLine": 23
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "yxcCt",
+        "startingLine": 26
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+        "startingLine": 27
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "list-item",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-list-item",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "list",
+            "startingLine": 4
+          }
+        ],
+        "modifier": [
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "tight\n  [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]\n  [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]",
+            "startingLine": 5
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "tappable\n  [en]Make the list item change appearance when it's tapped.[/en]\n  [ja]タップやクリックした時に効果が表示されるようになります。[/ja]",
+            "startingLine": 8
+          },
+          {
+            "tagDef": {
+              "name": "modifier",
+              "multi": true,
+              "docProperty": "modifiers"
+            },
+            "tagName": "modifier",
+            "description": "chevron\n  [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]\n  [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]",
+            "startingLine": 11
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]\n  [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]",
+            "startingLine": 14
+          }
+        ],
+        "seealso": [
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-list\n  [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]",
+            "startingLine": 17
+          },
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-list-header\n  [en]ons-list-header component[/en]\n  [ja]ons-list-headerコンポーネント[/ja]",
+            "startingLine": 20
+          }
+        ],
+        "guide": [
+          {
+            "tagDef": {
+              "name": "guide",
+              "multi": true,
+              "docProperty": "guides"
+            },
+            "tagName": "guide",
+            "description": "UsingList\n  [en]Using lists[/en]\n  [ja]リストを使う[/ja]",
+            "startingLine": 23
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "yxcCt",
+            "startingLine": 26
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+            "startingLine": 27
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "modifiers": [
+    {
+      "name": "tight",
+      "description": "\n  [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]\n  [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]"
+    },
+    {
+      "name": "tappable",
+      "description": "\n  [en]Make the list item change appearance when it's tapped.[/en]\n  [ja]タップやクリックした時に効果が表示されるようになります。[/ja]"
+    },
+    {
+      "name": "chevron",
+      "description": "\n  [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]\n  [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]"
+    }
+  ],
+  "codepen": {
+    "id": "yxcCt",
+    "isWide": false
+  },
+  "guides": [
+    {
+      "name": "UsingList\n",
+      "description": " [en]Using lists[/en]\n  [ja]リストを使う[/ja]"
+    }
+  ],
+  "seealsos": [
+    {
+      "name": "ons-list\n",
+      "description": " [en]ons-list component[/en]\n  [ja]ons-listコンポーネント[/ja]"
+    },
+    {
+      "name": "ons-list-header\n",
+      "description": " [en]ons-list-header component[/en]\n  [ja]ons-list-headerコンポーネント[/ja]"
+    }
+  ],
+  "categories": [
+    "list"
+  ],
+  "id": "list-item",
+  "example": "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>",
+  "name": "ons-list-item",
+  "description": "[en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]\n  [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-list>\n  <ons-list-header>Header Text</ons-list-header>\n  <ons-list-item>Item</ons-list-item>\n  <ons-list-item>Item</ons-list-item>\n</ons-list>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "listItem",
+        "extension": "js"
+      },
+      "startingLine": 36,
+      "endingLine": 43,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 36
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "modifier",
+            "startingLine": 37
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 38,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]The appearance of the list item.[/en]\n  [ja]各要素の表現を指定します。[/ja]",
+            "startingLine": 39
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 36
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "modifier",
+                "startingLine": 37
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 38,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]The appearance of the list item.[/en]\n  [ja]各要素の表現を指定します。[/ja]",
+                "startingLine": 39
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 38,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "modifier",
+      "description": "[en]The appearance of the list item.[/en]\n  [ja]各要素の表現を指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "listItem",
+        "extension": "js"
+      },
+      "startingLine": 45,
+      "endingLine": 52,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 45
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "lock-on-drag",
+            "startingLine": 46
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 47,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Prevent vertical scrolling when the user drags horizontally.[/en]\n  [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]",
+            "startingLine": 48
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 45
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "lock-on-drag",
+                "startingLine": 46
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 47,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Prevent vertical scrolling when the user drags horizontally.[/en]\n  [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]",
+                "startingLine": 48
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 47,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "lock-on-drag",
+      "description": "[en]Prevent vertical scrolling when the user drags horizontally.[/en]\n  [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "list-item"
+  ],
+  "path": "api/../directive/ons-list-item",
+  "outputPath": "partials/api/../directive/ons-list-item.html"
+}
