@@ -1,6 +1,6 @@
 # Onsen UI 
 
-[![Join us on Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
+[![Join us on Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
 [![StackOverflow](http://img.shields.io/badge/stackoverflow-onsen--ui-FF412D.svg )]( http://stackoverflow.com/questions/tagged/onsen-ui)
 [![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](https://github.com/borisyankov/DefinitelyTyped/tree/master/onsenui)
 [![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=shield)](https://circleci.com/gh/OnsenUI/OnsenUI) 
@@ -46,6 +46,22 @@ See the [Onsen UI Getting Started](http://onsen.io/getting_started/) page.
 ## Getting Started Using Monaca
 
 See the [Onsen UI Getting Started Page] and scroll down to the Using Onsen UI with Monaca section. 
+
+## Download Onsen UI
+
+Using bower:
+
+```bash
+$ bower install onsenui
+```
+
+Using npm:
+
+```bash
+$ npm install onsenui
+```
+
+The distribution repository is located [here](https://github.com/OnsenUI/OnsenUI-dist).
 
 ## Download the latest build
 

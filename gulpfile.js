@@ -334,13 +334,24 @@ gulp.task('build', function(done) {
 ////////////////////////////////////////
 // dist
 ////////////////////////////////////////
-gulp.task('dist', ['build'], function() {
+
+gulp.task('soft-build', function(done) {
+  return runSequence(
+    'clean',
+    'prepare',
+    'minify-js',
+    done
+  );
+});
+
+function distFiles() {
   gulp.src([
     'build/**/*',
     '!build/docs/**/*',
     '!build/docs/',
     '!build/js/angular/**/*',
     '!build/js/angular/',
+    '!build/onsenui.zip',
     'bower.json',
     'package.json',
     '.npmignore',
@@ -348,8 +359,12 @@ gulp.task('dist', ['build'], function() {
     'CHANGELOG.md',
     'LICENSE'
   ])
-  .pipe(gulp.dest('dist/'));
-});
+  .pipe(gulp.dest('OnsenUI-dist/'));
+}
+
+gulp.task('dist', ['soft-build'], distFiles);
+
+gulp.task('dist-no-build', [], distFiles);
 
 ////////////////////////////////////////
 // default
