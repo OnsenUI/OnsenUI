@@ -3031,6 +3031,7 @@ h6 {
 .radio-button--material__checkmark {
   width: 20px;
   height: 20px;
+  overflow: visible;
 }
 .radio-button--material__checkmark:before {
   background: transparent;
@@ -3177,9 +3178,6 @@ h6 {
     background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
   }
-}
-.list:first-child {
-  border-top: 0;
 }
 .list + .list {
   border-top: 0;

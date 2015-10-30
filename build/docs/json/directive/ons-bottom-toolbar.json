@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "toolbar",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -138,7 +138,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "toolbar",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -225,7 +225,7 @@
     }
   ],
   "categories": [
-    "toolbar"
+    "page"
   ],
   "id": "bottom_toolbar",
   "example": "<ons-bottom-toolbar>\n  <div style=\"text-align: center; line-height: 44px\">Text</div>\n</ons-bottom-toolbar>",

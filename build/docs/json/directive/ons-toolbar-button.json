@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "toolbar",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -166,7 +166,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "toolbar",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -295,7 +295,7 @@
     }
   ],
   "categories": [
-    "toolbar"
+    "page"
   ],
   "id": "toolbar_button",
   "example": "<ons-toolbar>\n  <div class=\"left\"><ons-toolbar-button>Button</ons-toolbar-button></div>\n  <div class=\"center\">Title</div>\n  <div class=\"right\"><ons-toolbar-button><ons-icon icon=\"ion-navicon\" size=\"28px\"></ons-icon></ons-toolbar-button></div>\n</ons-toolbar>",

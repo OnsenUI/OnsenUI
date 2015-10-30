@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "toolbar",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -156,7 +156,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "toolbar",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -267,7 +267,7 @@
     }
   ],
   "categories": [
-    "toolbar"
+    "page"
   ],
   "id": "back_button",
   "example": "<ons-back-button>\n  Back\n</ons-back-button>",

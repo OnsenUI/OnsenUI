@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "toolbar",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -176,7 +176,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "toolbar",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -319,7 +319,7 @@
     }
   ],
   "categories": [
-    "toolbar"
+    "page"
   ],
   "id": "toolbar",
   "example": "<ons-page>\n  <ons-toolbar>\n    <div class=\"left\"><ons-back-button>Back</ons-back-button></div>\n    <div class=\"center\">Title</div>\n    <div class=\"right\">Label</div>\n  </ons-toolbar>\n</ons-page>",

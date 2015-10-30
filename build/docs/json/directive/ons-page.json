@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "base",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -158,7 +158,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "base",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -265,7 +265,7 @@
     }
   ],
   "categories": [
-    "base"
+    "page"
   ],
   "id": "page",
   "example": "<ons-page>\n  <ons-toolbar>\n    <div class=\"center\">Title</div>\n  </ons-toolbar>\n\n  ...\n</ons-page>",

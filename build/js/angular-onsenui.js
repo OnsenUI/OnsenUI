@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.7 - 2015-10-27 */
+/*! angular-onsenui.js for onsenui - v2.0.0-alpha.7 - 2015-10-30 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
@@ -4484,7 +4484,7 @@ limitations under the License.
  * @ngdoc directive
  * @id back_button
  * @name ons-back-button
- * @category toolbar
+ * @category page
  * @description
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
  *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
@@ -4550,7 +4550,7 @@ limitations under the License.
  * @ngdoc directive
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
- * @category toolbar
+ * @category page
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
@@ -7324,7 +7324,7 @@ limitations under the License.
  * @ngdoc directive
  * @id page
  * @name ons-page
- * @category base
+ * @category page
  * @description
  *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
@@ -8506,7 +8506,7 @@ limitations under the License.
  * @ngdoc directive
  * @id scroller
  * @name ons-scroller
- * @category base
+ * @category page
  * @description
  *   [en]Makes the content inside this tag scrollable.[/en]
  *   [ja]要素内をスクロール可能にします。[/ja]
@@ -10848,7 +10848,7 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
- * @category toolbar
+ * @category page
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
@@ -10959,7 +10959,7 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
- * @category toolbar
+ * @category page
  * @modifier outline
  *   [en]A button with an outline.[/en]
  *   [ja]アウトラインをもったボタンを表示します。[/ja]

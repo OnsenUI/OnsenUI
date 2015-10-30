@@ -43,7 +43,7 @@
           "docProperty": "categories"
         },
         "tagName": "category",
-        "description": "base",
+        "description": "page",
         "startingLine": 4
       },
       {
@@ -108,7 +108,7 @@
               "docProperty": "categories"
             },
             "tagName": "category",
-            "description": "base",
+            "description": "page",
             "startingLine": 4
           }
         ],
@@ -141,7 +141,7 @@
     "description": ""
   },
   "categories": [
-    "base"
+    "page"
   ],
   "id": "scroller",
   "example": "<ons-scroller style=\"height: 200px; width: 100%\">\n  ...\n</ons-scroller>",
