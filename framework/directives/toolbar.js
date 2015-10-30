@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
- * @category toolbar
+ * @category page
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]

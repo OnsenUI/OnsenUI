@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
- * @category toolbar
+ * @category page
  * @modifier outline
  *   [en]A button with an outline.[/en]
  *   [ja]アウトラインをもったボタンを表示します。[/ja]

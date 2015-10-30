@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id page
  * @name ons-page
- * @category base
+ * @category page
  * @description
  *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]

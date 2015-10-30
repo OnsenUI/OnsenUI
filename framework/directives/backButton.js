@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id back_button
  * @name ons-back-button
- * @category toolbar
+ * @category page
  * @description
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
  *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
