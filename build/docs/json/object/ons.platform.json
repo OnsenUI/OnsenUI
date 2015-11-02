@@ -2536,7 +2536,7 @@
               "priority": 100
             },
             "tagName": "signature",
-            "description": "isIOS7above()",
+            "description": "isEdge()",
             "startingLine": 156
           },
           {
@@ -2544,7 +2544,7 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+            "description": "  [en]Returns whether the browser is Edge.[/en]\n  [ja]Edge上で実行されているかどうかを返します。[/ja]",
             "startingLine": 157
           },
           {
@@ -2592,7 +2592,7 @@
                   "priority": 100
                 },
                 "tagName": "signature",
-                "description": "isIOS7above()",
+                "description": "isEdge()",
                 "startingLine": 156
               }
             ],
@@ -2602,7 +2602,7 @@
                   "name": "description"
                 },
                 "tagName": "description",
-                "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+                "description": "  [en]Returns whether the browser is Edge.[/en]\n  [ja]Edge上で実行されているかどうかを返します。[/ja]",
                 "startingLine": 157
               }
             ],
@@ -2638,8 +2638,179 @@
                   "priority": 100
                 },
                 "tagName": "signature",
-                "description": "isIOS7above()",
+                "description": "isEdge()",
                 "startingLine": 156
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isEdge()",
+      "name": "isEdge",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "",
+        "startingLine": 160,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the browser is Edge.[/en]\n  [ja]Edge上で実行されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "platform",
+        "extension": "js"
+      },
+      "startingLine": 164,
+      "endingLine": 171,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 164
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isIOS7above()",
+            "startingLine": 165
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+            "startingLine": 166
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "",
+            "startingLine": 169,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 164
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS7above()",
+                "startingLine": 165
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the iOS version is 7 or above.[/en]\n  [ja]iOS7以上で実行されているかどうかを返します。[/ja]",
+                "startingLine": 166
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "",
+                "startingLine": 169,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isIOS7above()",
+                "startingLine": 165
               },
               "tagName": "name"
             }
@@ -2664,7 +2835,7 @@
         },
         "tagName": "return",
         "description": "",
-        "startingLine": 160,
+        "startingLine": 169,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",

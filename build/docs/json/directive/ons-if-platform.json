@@ -59,7 +59,7 @@
           "name": "description"
         },
         "tagName": "description",
-        "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+        "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" and \"wp\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。opera, firefox, safari, chrome, ie, edge, android, blackberry, ios, wpのいずれかの値を空白区切りで複数指定できます。[/ja]",
         "startingLine": 6
       },
       {
@@ -156,7 +156,7 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+            "description": "   [en]Conditionally display content depending on the platform / browser. Valid values are \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" and \"wp\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。opera, firefox, safari, chrome, ie, edge, android, blackberry, ios, wpのいずれかの値を空白区切りで複数指定できます。[/ja]",
             "startingLine": 6
           }
         ],
@@ -221,7 +221,7 @@
   "id": "if-platform",
   "example": "<div ons-if-platform=\"android\">\n  ...\n</div>",
   "name": "ons-if-platform",
-  "description": "[en]Conditionally display content depending on the platform / browser. Valid values are \"ios\", \"android\", \"blackberry\", \"chrome\", \"safari\", \"firefox\", and \"opera\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]",
+  "description": "[en]Conditionally display content depending on the platform / browser. Valid values are \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" and \"wp\".[/en]\n   [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。opera, firefox, safari, chrome, ie, edge, android, blackberry, ios, wpのいずれかの値を空白区切りで複数指定できます。[/ja]",
   "area": "api",
   "module": "..",
   "restrict": {
@@ -310,7 +310,7 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+            "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
             "startingLine": 23
           }
         ],
@@ -387,7 +387,7 @@
                   "name": "description"
                 },
                 "tagName": "description",
-                "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+                "description": "  [en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
                 "startingLine": 23
               }
             ]
@@ -420,7 +420,7 @@
         ]
       },
       "name": "ons-if-platform",
-      "description": "[en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
+      "description": "[en]One or multiple space separated values: \"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\" or \"wp\".[/en]\n  [ja]\"opera\", \"firefox\", \"safari\", \"chrome\", \"ie\", \"edge\", \"android\", \"blackberry\", \"ios\", \"wp\"のいずれか空白区切りで複数指定できます。[/ja]",
       "area": "api",
       "module": "..",
       "priority": 0,

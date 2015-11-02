@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.7 - 2015-10-30 */
+/*! angular-onsenui.js for onsenui - v2.0.0-alpha.8 - 2015-11-02 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
@@ -4016,10 +4016,6 @@ limitations under the License.
           'loadPage'
         ]);
 
-        this._boundOnPrechange = this._onPrechange.bind(this);
-        this._boundOnPostchange = this._onPostchange.bind(this);
-        this._element.on('prechange', this._boundOnPrechange);
-        this._element.on('postchange', this._boundOnPostchange);
       },
 
       _compileAndLink: function(pageElement, callback) {
@@ -4032,22 +4028,8 @@ limitations under the License.
         });
       },
 
-      _onPrechange: function(event) {
-        this._lastPageElement = this._element[0]._getCurrentPageElement();
-        this._lastPageScope = angular.element(this._lastPageElement).scope();
-      },
-
-      _onPostchange: function(event) {
-        if (this._lastPageElement && !this._lastPageElement.parentNode && this._lastPageScope) {
-          this._lastPageScope.$destroy();
-        }
-      },
-
       _destroy: function() {
         this.emit('destroy');
-
-        element.off(this._boundOnPrechange);
-        element.off(this._boundOnPostchange);
 
         this._clearDerivingEvents();
         this._clearDerivingMethods();
@@ -5990,8 +5972,8 @@ limitations under the License.
  * @category util
  * @extensionOf angular
  * @description
- *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
- *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]
+ *    [en]Conditionally display content depending on the platform / browser. Valid values are "opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios" and "wp".[/en]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。opera, firefox, safari, chrome, ie, edge, android, blackberry, ios, wpのいずれかの値を空白区切りで複数指定できます。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -6007,8 +5989,8 @@ limitations under the License.
  * @initonly
  * @extensionOf angular
  * @description
- *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios" or "wp".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
@@ -6095,7 +6077,12 @@ limitations under the License.
             return 'safari';
           }
 
-          var isChrome = !!window.chrome && !isOpera; // Chrome 1+
+          var isEdge = navigator.userAgent.indexOf(' Edge/') >= 0;
+          if (isEdge) {
+            return 'edge';
+          }
+
+          var isChrome = !!window.chrome && !isOpera && !isEdge; // Chrome 1+
           if (isChrome) {
             return 'chrome';
           }
@@ -7560,10 +7547,13 @@ limitations under the License.
             element.data('ons-page', page);
             $onsen.addModifierMethodsForCustomElements(page, element);
 
+            element.data('_scope', scope);
+
             $onsen.cleaner.onDestroy(scope, function() {
               page._events = undefined;
               $onsen.removeModifierMethods(page);
               element.data('ons-page', undefined);
+              element.data('_scope', undefined);
 
               $onsen.clearComponent({
                 element: element,
@@ -10773,6 +10763,12 @@ limitations under the License.
     });
   };
 
+  var lastUnlink = window.OnsTabbarElement.rewritables.unlink;
+  window.OnsTabbarElement.rewritables.unlink = function(tabbarElement, target, callback) {
+    angular.element(target).data('_scope').$destroy();
+    lastUnlink(tabbarElement, target, callback);
+  };
+
   angular.module('onsen').directive('onsTabbar', ['$onsen', '$compile', '$parse', 'TabbarView', function($onsen, $compile, $parse, TabbarView) {
 
     return {
@@ -12273,6 +12269,15 @@ limitations under the License.
  * @description 
  *   [en]Returns whether the browser is Internet Explorer.[/en]
  *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isEdge()
+ * @description 
+ *   [en]Returns whether the browser is Edge.[/en]
+ *   [ja]Edge上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 

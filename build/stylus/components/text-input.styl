@@ -74,18 +74,35 @@ text-input--invalid()
 .text-input
   text-input()
 
-.text-input::-webkit-input-placeholder,
-.text-input::-moz-placeholder,
+.text-input::-webkit-input-placeholder
+  color var-input-placeholder-color
+
+.text-input::-moz-placeholder
+  color var-input-placeholder-color
+
 .text-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.text-input:-ms-input-placeholder
   color var-input-placeholder-color
 
 .text-input:disabled
   text-input--disabled()
 
-.text-input:disabled::-webkit-input-placeholder,
-.text-input:disabled::-moz-placeholder,
+.text-input:disabled::-webkit-input-placeholder
+  webkit-input-placeholder()
+
+.text-input:disabled::-moz-placeholder
+  webkit-input-placeholder()
+
+.text-input:disabled::-ms-input-placeholder
+  webkit-input-placeholder()
+
 .text-input:disabled:-ms-input-placeholder
   webkit-input-placeholder()
+
+.text-input::-ms-clear
+  display none
 
 .text-input:invalid
   text-input--invalid()
@@ -111,12 +128,23 @@ text-input--invalid()
   border none
   background-color transparent
 
-.text-input--transparent:disabled::-webkit-input-placeholder
-.text-input--transparent:disabled::-moz-placeholder,
-.text-input--transparent:disabled:-ms-input-placeholder
+
+text-input-transparent-disabled()
   webkit-input-placeholder()
   border none
   background-color transparent
+
+.text-input--transparent:disabled::-webkit-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-moz-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-ms-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled:-ms-input-placeholder
+  text-input-transparent-disabled()
 
 
 .text-input--transparent:invalid
@@ -146,12 +174,22 @@ text-input--invalid()
   background-color transparent
   border-bottom 1px solid var-text-input-border-color
 
-.text-input--underbar:disabled::-webkit-input-placeholder,
-.text-input--underbar:disabled::-moz-placeholder,
-.text-input--underbar:disabled:-ms-input-placeholder
+text-input-underbar-disabled()
   webkit-input-placeholder()
   border none
   background-color transparent
+
+.text-input--underbar:disabled::-webkit-input-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled::-moz-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled::-ms-input-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled:-ms-input-placeholder
+  text-input-underbar-disabled()
 
 
 .text-input--underbar:invalid
@@ -192,7 +230,6 @@ text-input--invalid()
 .text-input--material:focus
   background-image linear-gradient(var-text-highlight-color, var-text-highlight-color), linear-gradient(var-text-input-border-color, var-text-input-border-color)
   animation material-input-animate 0.3s forwards
-  background-size 0% 2px
 
 .text-input--material::-webkit-input-placeholder
   color var-input-placeholder-color
@@ -202,6 +239,12 @@ text-input--invalid()
 
 .text-input--material::-ms-input-placeholder
   color var-input-placeholder-color
+
+.text-input--material:-ms-input-placeholder
+  color var-input-placeholder-color
+
+.text-input--material::-ms-clear
+  display none
 
 @keyframes material-input-animate
   0%
