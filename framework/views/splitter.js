@@ -35,7 +35,8 @@ limitations under the License.
           'toggleRight',
           'toggleLeft',
           'rightIsOpened',
-          'leftIsOpened'
+          'leftIsOpened',
+          'loadContentPage'
         ]);
 
         scope.$on('$destroy', this._destroy.bind(this));
