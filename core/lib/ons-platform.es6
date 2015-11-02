@@ -160,7 +160,7 @@ limitations under the License.
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'chrome';
       } else {
-        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
+        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
       }
     },
 
@@ -172,6 +172,17 @@ limitations under the License.
         return ons.platform._renderPlatform === 'ie';
       } else {
         return false || !!document.documentMode;
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isEdge: function() {
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'edge';
+      } else {
+        return navigator.userAgent.indexOf(' Edge/') >= 0;
       }
     },
 

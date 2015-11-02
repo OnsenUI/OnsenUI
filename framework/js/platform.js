@@ -154,6 +154,15 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature isEdge()
+ * @description 
+ *   [en]Returns whether the browser is Edge.[/en]
+ *   [ja]Edge上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
  * @signature isIOS7above()
  * @description 
  *   [en]Returns whether the iOS version is 7 or above.[/en]

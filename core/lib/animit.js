@@ -243,7 +243,7 @@ window.animit = (function(){
 
           for (var i = 0, name = ''; i < element.style.length; i++) {
             name = element.style[i];
-            if (typeof css[element.style[i]] !== 'string') {
+            if (typeof css[element.style[i]] === 'undefined') {
               css[element.style[i]] = '';
             }
           }

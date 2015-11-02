@@ -106,8 +106,8 @@ limitations under the License.
         this._template = circularTemplate.cloneNode(true);
       }
 
-      this._primary = this._template.children[1];
-      this._secondary = this._template.children[0];
+      this._primary = this._template.childNodes[3];
+      this._secondary = this._template.childNodes[1];
 
       this._updateDeterminate();
       this._updateValue();
