@@ -193,13 +193,16 @@ limitations under the License.
     _switchPage(element, options) {
 
       if (this.getActiveTabIndex() !== -1) {
-        var oldPageElement = this._contentElement.children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
+        var oldPageElement = this._oldPageElement || ons._internal.nullElement;
+        this._oldPageElement = element;
         var animator = this._animatorFactory.newAnimator(options);
 
         animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
           if (oldPageElement !== ons._internal.nullElement) {
             if (options._removeElement) {
-              oldPageElement._destroy();
+              window.OnsTabbarElement.rewritables.unlink(this, oldPageElement, pageElement => {
+                oldPageElement._destroy();
+              });
             } else {
               oldPageElement.style.display = 'none';
               oldPageElement._hide();
@@ -453,6 +456,15 @@ limitations under the License.
        * @param {Function} callback
        */
       link(tabbarElement, target, callback) {
+        callback(target);
+      },
+
+      /**
+       * @param {Element} tabbarElement
+       * @param {Element} target
+       * @param {Function} callback
+       */
+      unlink(tabbarElement, target, callback) {
         callback(target);
       }
     };

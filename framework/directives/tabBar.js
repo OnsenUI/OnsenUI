@@ -345,6 +345,12 @@
     });
   };
 
+  var lastUnlink = window.OnsTabbarElement.rewritables.unlink;
+  window.OnsTabbarElement.rewritables.unlink = function(tabbarElement, target, callback) {
+    angular.element(target).data('_scope').$destroy();
+    lastUnlink(tabbarElement, target, callback);
+  }
+
   angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
 
     return {

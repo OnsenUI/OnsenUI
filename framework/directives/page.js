@@ -238,10 +238,13 @@
             element.data('ons-page', page);
             $onsen.addModifierMethodsForCustomElements(page, element);
 
+            element.data('_scope', scope);
+
             $onsen.cleaner.onDestroy(scope, function() {
               page._events = undefined;
               $onsen.removeModifierMethods(page);
               element.data('ons-page', undefined);
+              element.data('_scope', undefined);
 
               $onsen.clearComponent({
                 element: element,
