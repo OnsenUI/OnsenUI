@@ -67,6 +67,10 @@ v2.0.0-alpha.7
  * ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/966).
  * core: Add support for Browserify.
 
+v1.3.12
+----
+* ons-page: Fix status bar fill for iOS9.
+
 v1.3.11
 ----
 * ons-tabbar: Remove flickering when navigator is a child of tabbar.
