@@ -8,11 +8,13 @@
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
-![The Answer to PhoneGap UI Development](https://cloud.githubusercontent.com/assets/9889313/5350569/eec8b870-7efb-11e4-90af-2f4d505e09a8.png)
+![The Answer to Cordova UI Development](https://cloud.githubusercontent.com/assets/9889313/5350569/eec8b870-7efb-11e4-90af-2f4d505e09a8.png)
 
-Built on top of [AngularJS](http://angularjs.org/), Onsen UI is open source, free and open for all. Onsen UI is designed and implemented to deliver unprecedented user experience for your apps. Applications can be built using **HTML tags** web developers already know and love. We love AngularJS and all the power it brings. But we've also added support for JQuery so developers less familiar with AngularJS can take advantage of Onsen UI, too.
+Onsen UI is open source, free and open for all. Onsen UI is designed and implemented to deliver unprecedented user interface and user experience for your mobile and hybrid apps. Onsen UI is built on top of Web Components so applications can be built using **HTML tags** web developers already know and love.
 
-Onsen UI also includes Onsen CSS Components, a free resource of UI templates with "theme roller" functionality. Developers can pick and choose, grab the code they need, and they're off and running. And they can create their own templates and submit to Onsen UI to be included with other templates available. 
+Onsen UI is framework agnostic. This means that it can be used with whatever front-end framework you prefer. However, Onsen UI also provides a binding library for [AngularJS](https://angularjs.org/) which makes it easy to integrate our custom tags in AngularJS apps.
+
+Onsen UI also includes [Onsen CSS Components](http://components.onsen.io/), a free resource of UI templates with "theme roller" functionality. Developers can pick and choose, grab the code they need, and they're off and running. And they can create their own templates and submit to Onsen UI to be included with other templates available. 
 
 Our [Monaca IDE] fully supports Onsen UI plugin.
 
@@ -34,10 +36,9 @@ For versions earlier than 1.3.0, iOS 8.4+ is not supported. In order to use thes
 
 ## What's Included
 
-* [AngularJS](https://angularjs.org): for directives
-* [Topcoat](http://topcoat.io): for fast UI css
-* [HammerJS](http://eightmedia.github.io/hammer.js/): for touch, swipe handling
-* [Font Awesome](http://fontawesome.io/): for icons
+* [Material Design](http://www.google.co.jp/design/spec/material-design/introduction.html): For Native-like Android UI
+* [Web Components](http://webcomponents.org/): for Custom Elements
+* [AngularJS module](https://angularjs.org/): bindings are backwards compatible with Onsen UI 1
 
 ## Getting Started Using Templates
 
@@ -111,15 +112,24 @@ $ [sudo] npm install -g gulp
 $ gulp serve
 ```
 
-* Then navigate your browser to [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html)
+* Then navigate your browser to [http://0.0.0.0:3000/demo/index.html](http://0.0.0.0:3000/demo/index.html)
 
 ## Running the test suite
 
-Onsen UI has end-to-end testing using Protractor. Use the following command to run the tests:
+Onsen UI has unit tests for the Web Components as well as end-to-end testing of the AngularJS directives using Protractor.
+
+Use the following commands to run the unit tests:
 
 ```bash
 $ npm install
-$ gulp test
+$ gulp core-test
+```
+
+or these commands for the protractor tests:
+
+```bash
+$ npm install
+$ gulp e2e-test
 ```
 
 It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
@@ -127,7 +137,13 @@ It will take some time the because it will download a stand-alone Selenium Serve
 To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
 
 ```bash
-$ gulp test --specs test/e2e/lazyRepeat/scenarios.js
+$ gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
+```
+
+In order to run both the unit tests and the end-to-end tests use the following command:
+
+```bash
+$ gulp test
 ```
 
 ## Developing your app
@@ -144,7 +160,7 @@ Run gulp task to develop Onsen UI itself with livereload.
 
     gulp serve
 
-Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
+Access [http://0.0.0.0:3000/demo/index.html](http://0.0.0.0:3000/demo/index.html) and your code changes will be reloaded.
 
 ## Contributors
 
