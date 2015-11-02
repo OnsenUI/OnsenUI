@@ -184,7 +184,7 @@
             scope : scope,
             attrs : attrs
           });
-          checkbox = element = attrs = scope = null;
+          element = attrs = scope = null;
         });
 
         $onsen.fireComponentEvent(element[0], 'init');
