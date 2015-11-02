@@ -51,10 +51,6 @@ limitations under the License.
           'loadPage'
         ]);
 
-        this._boundOnPrechange = this._onPrechange.bind(this);
-        this._boundOnPostchange = this._onPostchange.bind(this);
-        this._element.on('prechange', this._boundOnPrechange);
-        this._element.on('postchange', this._boundOnPostchange);
       },
 
       _compileAndLink: function(pageElement, callback) {
@@ -67,22 +63,8 @@ limitations under the License.
         });
       },
 
-      _onPrechange: function(event) {
-        this._lastPageElement = this._element[0]._getCurrentPageElement();
-        this._lastPageScope = angular.element(this._lastPageElement).scope();
-      },
-
-      _onPostchange: function(event) {
-        if (this._lastPageElement && !this._lastPageElement.parentNode && this._lastPageScope) {
-          this._lastPageScope.$destroy();
-        }
-      },
-
       _destroy: function() {
         this.emit('destroy');
-
-        element.off(this._boundOnPrechange);
-        element.off(this._boundOnPostchange);
 
         this._clearDerivingEvents();
         this._clearDerivingMethods();
