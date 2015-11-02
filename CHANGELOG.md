@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.12
+----
+* ons-page: Fix status bar fill for iOS9.
+
 v1.3.11
 ----
 * ons-tabbar: Remove flickering when navigator is a child of tabbar.
