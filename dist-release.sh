@@ -8,12 +8,12 @@ then
 	git clone https://github.com/OnsenUI/$distrepo.git
 	echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 else
-	echo "* $(tput setaf 3)Pulling OnsenUI/$distrepo$(tput setaf 7)..."
-	(cd $distrepo && git pull)
+	echo "* $(tput setaf 3)Fetching OnsenUI/$distrepo$(tput setaf 7)..."
+	(cd $distrepo && git fetch --tags)
 	echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 fi
 
-(cd $distrepo && git rm -r * --cached --ignore-unmatch 1>/dev/null)
+(cd $distrepo && git rm -r * --cached --ignore-unmatch 1>/dev/null && rm -rf *)
 
 echo "* $(tput setaf 3)Building css-components$(tput setaf 7)..."
 (cd css-components && npm install && node_modules/.bin/gulp build)
