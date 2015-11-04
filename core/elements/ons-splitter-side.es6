@@ -253,7 +253,7 @@ limitations under the License.
         startEvent.width = this._element._getWidthInPixel();
       }
 
-      const width = startEvent.width;
+      const width = this._element._getWidthInPixel();
 
       if (deltaDistance < 0 && startEvent.distance <= 0) {
         return;
