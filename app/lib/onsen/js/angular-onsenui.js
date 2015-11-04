@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.8 - 2015-11-02 */
+/*! angular-onsenui.js for onsenui - v2.0.0-alpha.9 - 2015-11-04 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
@@ -3861,7 +3861,8 @@ limitations under the License.
           'toggleRight',
           'toggleLeft',
           'rightIsOpened',
-          'leftIsOpened'
+          'leftIsOpened',
+          'loadContentPage'
         ]);
 
         scope.$on('$destroy', this._destroy.bind(this));
@@ -10256,7 +10257,7 @@ limitations under the License.
             scope : scope,
             attrs : attrs
           });
-          checkbox = element = attrs = scope = null;
+          element = attrs = scope = null;
         });
 
         $onsen.fireComponentEvent(element[0], 'init');
