@@ -427,6 +427,8 @@ limitations under the License.
       this._isPushing = true;
 
       window.OnsNavigatorElement.rewritables.link(this, element, element => {
+        CustomElements.upgrade(element);
+
         setTimeout(() => {
           if (this._pages.length > 1) {
             const leavePage = this._pages.slice(-2)[0];
