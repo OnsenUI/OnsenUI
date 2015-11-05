@@ -206,6 +206,9 @@ angular.module('app').controller('AppController',
 
 
   $scope.patterns = [
+    {name: 'md_inbox', displayName: 'Material Inbox'},
+    {name: 'md_contact', displayName: 'Material Contact Details'},
+    {name: 'md_contact_list', displayName: 'Material Contact List'},
     {name: 'details', displayName: 'Shop Details'},
     {name: 'profile', displayName: 'Profile'},
     {name: 'timeline', displayName: 'Timeline'},

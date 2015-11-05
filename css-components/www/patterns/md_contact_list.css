@@ -1,0 +1,56 @@
+body {
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.contact-interface {
+  background-color: #0091EA;
+}
+
+.contact-interface:active {
+  background-color: #0091EA;
+}
+
+.contact-interface * {
+  color: #FFFFFF;
+}
+
+.contact-toolbar-buttons * {
+  padding-right: 6px;
+}
+
+ons-list-item {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+ons-list-item ons-col {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+ons-list:first-child {
+  margin-top: 10px;
+}
+
+.contact-initials {
+  padding-left: 8px;
+  color: #9E9E9E;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.contact-item {
+  margin-left: 14px;
+  padding-left: 14px;
+}
+
+.contact-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.contact-name {
+  font-weight: 500;
+  padding-left: 18px;
+}

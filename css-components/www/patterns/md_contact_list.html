@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Material Contact List | Onsen UI</title>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+  <link rel="stylesheet" href="md_contact_list.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
+
+  <script src="lib/onsen/js/onsenui.js"></script>
+  <script src="lib/onsen/js/angular/angular.js"></script>
+  <script src="lib/onsen/js/angular-onsenui.js"></script>
+
+  <script>
+    ons.bootstrap();
+  </script>
+
+</head>
+
+<body>
+  <ons-page modifier="material">
+    <ons-toolbar modifier="material" class="contact-interface">
+      <div class="left">
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">All Contacts</div>
+      <div class="right contact-toolbar-buttons">
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="ion-android-search"></ons-icon>
+        </ons-toolbar-button>
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="ion-android-more-vertical" size="28px"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+    <ons-list modifier="material">
+      <ons-list-item modifier="material">
+        <ons-row>
+          <ons-col width="40px" align="center"  class="contact-initials">
+            Me
+          </ons-col>
+
+          <ons-col class="contact-item">
+            <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
+            <ons-row>
+              <ons-col width="40px">
+                <img ng-src="images/profile-image-01.png" class="contact-avatar">
+              </ons-col>
+
+              <ons-col align="center" class="contact-name">
+                Dave Graham
+              </ons-col>
+            </ons-row>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+
+      <ons-list-item modifier="material" ng-repeat="i in [8,5]">
+        <ons-row>
+          <ons-col width="40px" align="center"  class="contact-initials">
+            <ons-icon icon="ion-android-star" size="26px" ng-show="$first"></ons-icon>
+          </ons-col>
+
+          <ons-col class="contact-item">
+            <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
+            <ons-row>
+              <ons-col width="40px">
+                <img ng-src="images/profile-image-0{{i}}.png" class="contact-avatar">
+              </ons-col>
+
+              <ons-col align="center" class="contact-name">
+                Dave Graham
+              </ons-col>
+            </ons-row>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+
+      <ons-list-item modifier="material" ng-repeat="i in [2,3,4,5,6,7,8,9]">
+        <ons-row>
+          <ons-col width="40px" align="center"  class="contact-initials">
+            <span ng-show="$first">D</span>
+          </ons-col>
+
+          <ons-col class="contact-item">
+            <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
+            <ons-row>
+              <ons-col width="40px">
+                <img ng-src="images/profile-image-0{{i}}.png" class="contact-avatar">
+              </ons-col>
+
+              <ons-col align="center" class="contact-name">
+                Dave Graham
+              </ons-col>
+            </ons-row>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
+
+    <ons-fab position="right bottom" class="contact-interface">
+      <ons-icon
+        icon="ion-android-person-add"
+        size="24px"
+        fixed-width="false"
+        style="vertical-align:middle;">
+      </ons-icon>
+    </ons-fab>
+
+  </ons-page>
+</body>
+</html>
