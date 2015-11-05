@@ -29,11 +29,25 @@ limitations under the License.
 
     compile = compile || ((object) => object);
 
-    let dialogElement = util.createElement('<ons-alert-dialog></ons-alert-dialog>');
-    let titleElement = util.createElement('<div class="alert-dialog-title"></div>');
-    let messageElement = util.createElement('<div class="alert-dialog-content"></div>');
-    let footerElement = util.createElement('<div class="alert-dialog-footer"></div>');
+    const titleElementHTML = typeof title === 'string' ? '<div class="alert-dialog-title"></div>' : '';
+
+    let dialogElement = util.createElement(`
+    <ons-alert-dialog>
+      ${titleElementHTML}
+      <div class="alert-dialog-content"></div>
+      <div class="alert-dialog-footer"></div>
+    </ons-alert-dialog>`);
+
+    let titleElement = dialogElement.querySelector('.alert-dialog-title');
+    let messageElement = dialogElement.querySelector('.alert-dialog-content');
+    let footerElement = dialogElement.querySelector('.alert-dialog-footer');
     let inputElement;
+
+    if (typeof title === 'string') {
+      titleElement.textContent = title;
+    }
+
+    titleElement = null;
 
     dialogElement.setAttribute('animation', animation);
 
@@ -42,9 +56,6 @@ limitations under the License.
     } else {
       messageElement.textContent = message;
     }
-
-    dialogElement.appendChild(titleElement);
-    dialogElement.appendChild(messageElement);
 
     if (promptDialog) {
       inputElement = util.createElement('<input class="text-input" type="text"></input>');
@@ -74,8 +85,6 @@ limitations under the License.
         }, false);
       }
     }
-
-    dialogElement.appendChild(footerElement);
 
     document.body.appendChild(dialogElement);
 
@@ -145,7 +154,7 @@ limitations under the License.
       }
     });
 
-    titleElement = messageElement = footerElement = null;
+    messageElement = footerElement = null;
 
     if (modifier) {
       dialogElement.setAttribute('modifier', modifier);
