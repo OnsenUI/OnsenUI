@@ -68,7 +68,12 @@
 
         // Material Range
         'material-range-track-color': '#e0e0e0',
-        'material-range-thumb-color': '#009688'
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff'
       }
     },
 
@@ -116,7 +121,7 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#1284ff',
         'alert-dialog-separator-color': '#ddd',
-        
+
         // Dialog
         'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
@@ -135,8 +140,13 @@
 
         // Material Range
         'material-range-track-color': '#e0e0e0',
-        'material-range-thumb-color': '#009688'
-      }
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff'
+     }
     },
 
     {
@@ -202,8 +212,13 @@
 
         // Material Range
         'material-range-track-color': '#707070',
-        'material-range-thumb-color': '#80cbc4'
-      }
+        'material-range-thumb-color': '#80cbc4',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#333333',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff'
+     }
     },
     {
       text: 'sunshine',
@@ -268,8 +283,13 @@
 
         // Material Range
         'material-range-track-color': '#e0e0e0',
-        'material-range-thumb-color': '#009688'
-      }
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff'
+     }
     },
 
     {
@@ -316,7 +336,7 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#574bdb',
         'alert-dialog-separator-color': '#ddd',
-        
+
         // Dialog
         'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
@@ -335,8 +355,13 @@
 
         // Material Range
         'material-range-track-color': '#e0e0e0',
-        'material-range-thumb-color': '#009688'
-      }
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff'
+     }
     }
   ];
 

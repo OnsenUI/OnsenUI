@@ -38,7 +38,7 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Toolbar',
+      name: 'Flat Toolbar',
       items: [
         {
           name: 'toolbar-background-color',
@@ -58,6 +58,26 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'toolbar-border-color',
           displayName: 'Border Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Toolbar',
+      items: [
+        {
+          name: 'material-toolbar-background-color',
+          displayName: 'Background Color'
+        },
+
+        {
+          name: 'material-toolbar-text-color',
+          displayName: 'Text Color'
+        },
+
+        {
+          name: 'material-toolbar-button-color',
+          displayName: 'Button Color'
         }
       ]
     },
