@@ -207,6 +207,19 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
       ]
     },
     {
+      name: 'Material Range',
+      items: [
+        {
+          name: 'material-range-thumb-color',
+          displayName: 'Thumb Color'
+        },
+        {
+          name: 'material-range-track-color',
+          displayName: 'Track Color'
+        }
+      ]
+    },
+    {
       name: 'Other',
       items: [
         {

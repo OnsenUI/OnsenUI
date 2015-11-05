@@ -64,7 +64,11 @@
         'material-switch-active-thumb-color': '#009688',
         'material-switch-inactive-thumb-color': '#f1f1f1',
         'material-switch-active-background-color': '#77c2bb',
-        'material-switch-inactive-background-color': '#b0afaf'
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688'
       }
     },
 
@@ -127,7 +131,11 @@
         'material-switch-active-thumb-color': '#009688',
         'material-switch-inactive-thumb-color': '#f1f1f1',
         'material-switch-active-background-color': '#77c2bb',
-        'material-switch-inactive-background-color': '#b0afaf'
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688'
       }
     },
 
@@ -190,7 +198,11 @@
         'material-switch-active-thumb-color': '#80cbc4',
         'material-switch-inactive-thumb-color': '#bdbdbd',
         'material-switch-active-background-color': '#5a7f7c',
-        'material-switch-inactive-background-color': '#707070'
+        'material-switch-inactive-background-color': '#707070',
+
+        // Material Range
+        'material-range-track-color': '#707070',
+        'material-range-thumb-color': '#80cbc4'
       }
     },
     {
@@ -252,7 +264,11 @@
         'material-switch-active-thumb-color': '#009688',
         'material-switch-inactive-thumb-color': '#f1f1f1',
         'material-switch-active-background-color': '#77c2bb',
-        'material-switch-inactive-background-color': '#b0afaf'
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688'
       }
     },
 
@@ -315,7 +331,11 @@
         'material-switch-active-thumb-color': '#009688',
         'material-switch-inactive-thumb-color': '#f1f1f1',
         'material-switch-active-background-color': '#77c2bb',
-        'material-switch-inactive-background-color': '#b0afaf'
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688'
       }
     }
   ];
