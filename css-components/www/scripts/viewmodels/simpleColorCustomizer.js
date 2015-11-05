@@ -177,12 +177,38 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Other',
+      name: 'Flat Switch',
       items: [
         {
           name: 'switch-highlight-color',
-          displayName: 'Switch Highlight Color'
+          displayName: 'Highlight Color'
+        }
+      ]
+    },
+    {
+      name: 'Material Switch',
+      items: [
+        {
+          name: 'material-switch-active-thumb-color',
+          displayName: 'Active Thumb Color'
         },
+        {
+          name: 'material-switch-inactive-thumb-color',
+          displayName: 'Inactive Thumb Color'
+        },
+        {
+          name: 'material-switch-active-background-color',
+          displayName: 'Active Background Color'
+        },
+        {
+          name: 'material-switch-inactive-background-color',
+          displayName: 'Inactive Background Color'
+        },
+      ]
+    },
+    {
+      name: 'Other',
+      items: [
         {
           name: 'notification-background-color',
           displayName: 'Notification Background Color'

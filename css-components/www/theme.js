@@ -58,7 +58,13 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf'
       }
     },
 
@@ -115,7 +121,13 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf'
       }
     },
 
@@ -172,7 +184,13 @@
         'popover-text-color': 'white',
 
         // Notification
-        'notification-background-color': '#3385ff'
+        'notification-background-color': '#3385ff',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#80cbc4',
+        'material-switch-inactive-thumb-color': '#bdbdbd',
+        'material-switch-active-background-color': '#5a7f7c',
+        'material-switch-inactive-background-color': '#707070'
       }
     },
     {
@@ -228,7 +246,13 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#eb5e2f'
+        'notification-background-color': '#eb5e2f',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf'
       }
     },
 
@@ -285,7 +309,13 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf'
       }
     }
   ];
