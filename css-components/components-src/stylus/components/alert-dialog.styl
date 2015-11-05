@@ -318,12 +318,19 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-size 14px
   font-weight 400
   outline none
+  +retina-query()
+    background none
 
 .alert-dialog-button--material:active
   background-color initial
 
-.alert-dialog-button--one--material
+.alert-dialog-button--one--material,
+.alert-dialog-button--one--material:first-child
   border 0
+  +retina-query()
+    background none
 
 .alert-dialog-button--primal--material
   font-weight 500
+  +retina-query()
+    background none
