@@ -83,6 +83,56 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Material Button',
+      items: [
+        {
+          name: 'material-button-background-color',
+          displayName: 'Background Color'
+        },
+
+        {
+          name: 'material-button-text-color',
+          displayName: 'Text Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Checkbox',
+      items: [
+        {
+          name: 'material-checkbox-active-color',
+          displayName: 'Active Color'
+        },
+
+        {
+          name: 'material-checkbox-inactive-color',
+          displayName: 'Inactive Color'
+        },
+
+        {
+          name: 'material-checkbox-checkmark-color',
+          displayName: 'Checkmark Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Radio Button',
+      items: [
+        {
+          name: 'material-radio-button-active-color',
+          displayName: 'Active Color'
+        },
+
+        {
+          name: 'material-radio-button-inactive-color',
+          displayName: 'Inactive Color'
+        }
+      ]
+    },
+
+    {
       name: 'Button Bar',
       items: [
         {

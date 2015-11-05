@@ -73,7 +73,20 @@
         // Material Toolbar
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
-        'material-toolbar-button-color': '#ffffff'
+        'material-toolbar-button-color': '#ffffff',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171'
       }
     },
 
@@ -145,8 +158,21 @@
         // Material Toolbar
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
-        'material-toolbar-button-color': '#ffffff'
-     }
+        'material-toolbar-button-color': '#ffffff',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171'
+      }
     },
 
     {
@@ -217,8 +243,21 @@
         // Material Toolbar
         'material-toolbar-background-color': '#333333',
         'material-toolbar-text-color': '#ffffff',
-        'material-toolbar-button-color': '#ffffff'
-     }
+        'material-toolbar-button-color': '#ffffff',
+
+        // Material Button
+        'material-button-background-color': '#80cbc4',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#f5f5f5',
+        'material-checkbox-checkmark-color': '#333333',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#f5f5f5'
+      }
     },
     {
       text: 'sunshine',
@@ -288,8 +327,21 @@
         // Material Toolbar
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
-        'material-toolbar-button-color': '#ffffff'
-     }
+        'material-toolbar-button-color': '#ffffff',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171'
+      }
     },
 
     {
@@ -360,8 +412,21 @@
         // Material Toolbar
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
-        'material-toolbar-button-color': '#ffffff'
-     }
+        'material-toolbar-button-color': '#ffffff',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171'
+      }
     }
   ];
 
