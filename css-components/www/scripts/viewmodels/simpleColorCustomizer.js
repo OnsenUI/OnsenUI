@@ -219,7 +219,7 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Alert Dialog',
+      name: 'Flat Alert Dialog',
       items: [
         {
           name: 'alert-dialog-background-color',
@@ -241,10 +241,42 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Dialog',
+      name: 'Material Alert Dialog',
+      items: [
+        {
+          name: 'material-alert-dialog-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-alert-dialog-title-color',
+          displayName: 'Title Color'
+        },
+        {
+          name: 'material-alert-dialog-content-color',
+          displayName: 'Content Color'
+        },
+        {
+          name: 'material-alert-dialog-button-color',
+          displayName: 'Button Text Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Flat Dialog',
       items: [
         {
           name: 'dialog-background-color',
+          displayName: 'Background Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Dialog',
+      items: [
+        {
+          name: 'material-dialog-background-color',
           displayName: 'Background Color'
         }
       ]

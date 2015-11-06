@@ -91,7 +91,16 @@
         // Material Text Input
         'material-text-input-text-color': '#212121',
         'material-text-input-active-color': '#009688',
-        'material-text-input-inactive-color': '#afafaf'
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688'
       }
     },
 
@@ -181,7 +190,16 @@
         // Material Text Input
         'material-text-input-text-color': '#212121',
         'material-text-input-active-color': '#009688',
-        'material-text-input-inactive-color': '#afafaf'
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688'
       }
     },
 
@@ -271,7 +289,16 @@
         // Material Text Input
         'material-text-input-text-color': '#ffffff',
         'material-text-input-active-color': '#009688',
-        'material-text-input-inactive-color': '#4c4c4c'
+        'material-text-input-inactive-color': '#4c4c4c',
+
+        // Material Dialog
+        'material-dialog-background-color': '#333333',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#333333',
+        'material-alert-dialog-title-color': '#ffffff',
+        'material-alert-dialog-content-color': '#afafaf',
+        'material-alert-dialog-button-color': '#80cbc4'
       }
     },
     {
@@ -360,7 +387,16 @@
         // Material Text Input
         'material-text-input-text-color': '#212121',
         'material-text-input-active-color': '#009688',
-        'material-text-input-inactive-color': '#afafaf'
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688'
       }
     },
 
@@ -450,7 +486,16 @@
         // Material Text Input
         'material-text-input-text-color': '#212121',
         'material-text-input-active-color': '#009688',
-        'material-text-input-inactive-color': '#afafaf'
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688'
       }
     }
   ];

@@ -23,6 +23,11 @@ var-alert-dialog-button-color = $alert-dialog-button-color
 var-alert-dialog-background-color = $alert-dialog-background-color
 var-alert-dialog-text-color = $alert-dialog-text-color
 
+var-material-alert-dialog-button-color = $material-alert-dialog-button-color
+var-material-alert-dialog-background-color = $material-alert-dialog-background-color
+var-material-alert-dialog-title-color = $material-alert-dialog-title-color
+var-material-alert-dialog-content-color = $material-alert-dialog-content-color
+
 retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   +retina-query()
     border-top none
@@ -282,6 +287,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 .alert-dialog--material
   border-radius 2px
   padding-top 22px
+  background-color var-material-alert-dialog-background-color
   shadow-5()
 
 .alert-dialog-title--material
@@ -290,16 +296,18 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-size 20px
   font-weight 500
   padding 0 24px
+  color var-material-alert-dialog-title-color
 
 .alert-dialog-content--material
   material-font()
   text-align left
-  font-size 14px
+  font-size 16px
   font-weight 400
   line-height 20px
   padding 0 24px
   margin 24px 0 10px 0
   min-height 0
+  color var-material-alert-dialog-content-color
 
 .alert-dialog-footer--material
   display inline-block
@@ -316,8 +324,9 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   background none
   border-top none
   font-size 14px
-  font-weight 400
+  font-weight 500
   outline none
+  color var-material-alert-dialog-button-color
   +retina-query()
     background none
 
