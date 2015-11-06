@@ -86,7 +86,12 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#717171'
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf'
       }
     },
 
@@ -171,7 +176,12 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#717171'
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf'
       }
     },
 
@@ -256,7 +266,12 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#f5f5f5'
+        'material-radio-button-inactive-color': '#f5f5f5',
+
+        // Material Text Input
+        'material-text-input-text-color': '#ffffff',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#4c4c4c'
       }
     },
     {
@@ -340,7 +355,12 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#717171'
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf'
       }
     },
 
@@ -425,7 +445,12 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#717171'
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf'
       }
     }
   ];

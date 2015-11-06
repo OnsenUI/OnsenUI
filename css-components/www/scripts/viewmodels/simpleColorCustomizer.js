@@ -133,6 +133,24 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Material Input',
+      items: [
+        {
+          name: 'material-text-input-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'material-text-input-active-color',
+          displayName: 'Active Color'
+        },
+        {
+          name: 'material-text-input-inactive-color',
+          displayName: 'Inactive Color'
+        }
+      ]
+    },
+
+    {
       name: 'Button Bar',
       items: [
         {
