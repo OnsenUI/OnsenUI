@@ -340,6 +340,37 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
       ]
     },
     {
+      name: 'Progress Bar',
+      items: [
+        {
+          name: 'material-progress-bar-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-progress-bar-primary-color',
+          displayName: 'Primary Color'
+        },
+        {
+          name: 'material-progress-bar-secondary-color',
+          displayName: 'Secondary Color'
+        }
+      ]
+    },
+    {
+      name: 'Progress Circle',
+      items: [
+        {
+          name: 'material-progress-circle-primary-color',
+          displayName: 'Primary Color'
+        },
+        {
+          name: 'material-progress-circle-secondary-color',
+          displayName: 'Secondary Color'
+        }
+      ]
+    },
+
+    {
       name: 'Other',
       items: [
         {

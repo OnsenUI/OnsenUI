@@ -100,7 +100,14 @@
         'material-alert-dialog-background-color': '#fafafa',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
-        'material-alert-dialog-button-color': '#009688'
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4'
       }
     },
 
@@ -199,7 +206,15 @@
         'material-alert-dialog-background-color': '#fafafa',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
-        'material-alert-dialog-button-color': '#009688'
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4'
+
       }
     },
 
@@ -298,7 +313,14 @@
         'material-alert-dialog-background-color': '#333333',
         'material-alert-dialog-title-color': '#ffffff',
         'material-alert-dialog-content-color': '#afafaf',
-        'material-alert-dialog-button-color': '#80cbc4'
+        'material-alert-dialog-button-color': '#80cbc4',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#333333',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4'
       }
     },
     {
@@ -396,7 +418,14 @@
         'material-alert-dialog-background-color': '#fafafa',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
-        'material-alert-dialog-button-color': '#009688'
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4'
       }
     },
 
@@ -495,7 +524,14 @@
         'material-alert-dialog-background-color': '#fafafa',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
-        'material-alert-dialog-button-color': '#009688'
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4'
       }
     }
   ];
