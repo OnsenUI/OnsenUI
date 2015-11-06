@@ -107,7 +107,11 @@
         'material-progress-bar-secondary-color': '#80cbc4',
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
-        'material-progress-circle-secondary-color': '#80cbc4'
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -213,8 +217,11 @@
         'material-progress-bar-secondary-color': '#80cbc4',
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
-        'material-progress-circle-secondary-color': '#80cbc4'
+        'material-progress-circle-secondary-color': '#80cbc4',
 
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -320,7 +327,11 @@
         'material-progress-bar-secondary-color': '#80cbc4',
         'material-progress-bar-background-color': '#333333',
         'material-progress-circle-primary-color': '#009688',
-        'material-progress-circle-secondary-color': '#80cbc4'
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#80cbc4'
       }
     },
     {
@@ -425,7 +436,11 @@
         'material-progress-bar-secondary-color': '#80cbc4',
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
-        'material-progress-circle-secondary-color': '#80cbc4'
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -531,7 +546,11 @@
         'material-progress-bar-secondary-color': '#80cbc4',
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
-        'material-progress-circle-secondary-color': '#80cbc4'
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     }
   ];

@@ -371,6 +371,21 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Floating Action Button',
+      items: [
+        {
+          name: 'fab-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'fab-background-color',
+          displayName: 'Background Color'
+        }
+
+      ]
+    },
+
+    {
       name: 'Other',
       items: [
         {
