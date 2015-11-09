@@ -24,6 +24,7 @@
 }
 
 .inbox-clip-icon {
+  vertical-align: -20%;
   font-size: 18px;
   margin-right: 4px;
 }
@@ -77,5 +78,9 @@
   padding-left: 10px;
   font-size: 30px;
   float: right;
-  color: rgba(0,0,0,0.15);
+  color: rgba(0,0,0,0.50);
+}
+
+.inbox-fav-star > ons-icon {
+  vertical-align: -18%;
 }
