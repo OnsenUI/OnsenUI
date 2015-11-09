@@ -272,7 +272,7 @@ h6 {
   padding: 0 10px;
 }
 .switch--material__toggle {
-  background-color: #bdbdbd;
+  background-color: #b0afaf;
   margin-top: 5px;
   height: 14px;
 }
@@ -303,7 +303,7 @@ h6 {
   transform: translateX(16px);
 }
 .switch--material__toggle:before {
-  background-color: #574bdb;
+  background-color: #009688;
   left: 0px;
   margin-top: -5px;
   width: 20px;
@@ -312,7 +312,7 @@ h6 {
   box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
 }
 .switch--material__input:checked + .switch--material__toggle {
-  background-color: rgba(87,75,219,0.5);
+  background-color: #77c2bb;
 }
 .switch--material__input:not(:checked) + .switch--material__toggle:before {
   background-color: #f1f1f1;
@@ -494,11 +494,11 @@ h6 {
     <input type="range" class="range range--material" disabled>
 */
 .range--material {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
-  background-image: -webkit-linear-gradient(#ddd, #ddd);
-  background-image: -moz-linear-gradient(#ddd, #ddd);
-  background-image: -o-linear-gradient(#ddd, #ddd);
-  background-image: linear-gradient(#ddd, #ddd);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#e0e0e0));
+  background-image: -webkit-linear-gradient(#e0e0e0, #e0e0e0);
+  background-image: -moz-linear-gradient(#e0e0e0, #e0e0e0);
+  background-image: -o-linear-gradient(#e0e0e0, #e0e0e0);
+  background-image: linear-gradient(#e0e0e0, #e0e0e0);
   background-position: center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
@@ -506,23 +506,26 @@ h6 {
 }
 .range--material::-webkit-slider-thumb {
   top: 1px;
-  border: 3px solid #ddd;
+  border: 3px solid #e0e0e0;
   height: 12px;
   width: 12px;
   -webkit-border-radius: 100%;
   border-radius: 100%;
-  border-color: #574bdb;
-  background-color: #574bdb;
+  border-color: #009688;
+  background-color: #009688;
   margin-top: -1px;
 }
 .range--material::-moz-range-thumb {
   top: 1px;
-  border: 3px solid #ddd;
+  border: 3px solid #e0e0e0;
   height: 12px;
   width: 12px;
   border-radius: 100%;
-  border-color: #574bdb;
-  background-color: #574bdb;
+  border-color: #009688;
+  background-color: #009688;
+}
+.range--material::-moz-range-track {
+  background-color: #e0e0e0;
 }
 .range--material::-ms-thumb {
   margin-top: 1px;
@@ -530,16 +533,16 @@ h6 {
   height: 12px;
   width: 12px;
   border-radius: 100%;
-  border-color: #574bdb;
-  background-color: #574bdb;
+  border-color: #009688;
+  background-color: #009688;
 }
 .range--material:focus::-webkit-slider-thumb {
-  border-color: #574bdb;
-  background-color: #574bdb;
+  border-color: #009688;
+  background-color: #009688;
 }
 .range--material:focus::-moz-range-thumb {
-  border-color: #574bdb;
-  background-color: #574bdb;
+  border-color: #009688;
+  background-color: #009688;
 }
 .range--material::-moz-range-thumb:before {
   display: none;
@@ -548,7 +551,7 @@ h6 {
   display: none;
 }
 .range--material::-ms-fill-lower {
-  background-color: #574bdb;
+  background-color: #009688;
 }
 .range--material::-moz-range-thumb:after {
   margin-top: -3px;
@@ -559,7 +562,7 @@ h6 {
   border-radius: 100%;
   height: 12px;
   width: 12px;
-  background-color: #574bdb;
+  background-color: #009688;
   opacity: 0.2;
   -moz-transition: -moz-transform 0.1s linear;
   transition: transform 0.1s linear;
@@ -574,7 +577,7 @@ h6 {
   border-radius: 100%;
   height: 12px;
   width: 12px;
-  background-color: #574bdb;
+  background-color: #009688;
   opacity: 0.2;
   -webkit-transition: -webkit-transform 0.1s linear;
   transition: transform 0.1s linear;
@@ -588,7 +591,7 @@ h6 {
   border-radius: 100%;
   height: 12px;
   width: 12px;
-  background-color: #574bdb;
+  background-color: #009688;
   opacity: 0.2;
   transition: transform 0.1s linear;
 }
@@ -1047,12 +1050,14 @@ h6 {
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   padding: 0px 16px;
+  background-color: #009688;
 }
 .navigation-bar--material__left {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
+  color: #fff;
   height: 56px;
   width: auto;
   line-height: 56px;
@@ -1062,6 +1067,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
+  color: #fff;
   height: 56px;
   width: 100%;
   overflow: hidden;
@@ -1075,6 +1081,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
+  color: #fff;
   height: 56px;
   width: auto;
   line-height: 56px;
@@ -1662,13 +1669,16 @@ h6 {
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   text-transform: uppercase;
+  background-color: #009688;
+  color: #fff;
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
+  font-weight: 500;
 }
 .button--material:active {
   -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
   box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
-  background-color: #8962ed;
+  background-color: #009688;
   opacity: 1;
 }
 .button--material:focus {
@@ -1676,9 +1686,7 @@ h6 {
 }
 .button--material:disabled,
 .button--material[disabled] {
-  background: #eaeaea;
-  color: #a8a8a8;
-  opacity: 1;
+  opacity: 0.5;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -1754,18 +1762,22 @@ h6 {
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   text-transform: uppercase;
+  background-color: #009688;
+  color: #fff;
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
+  font-weight: 500;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
-  color: #8962ed;
+  color: #009688;
 }
 .button--material--flat:active {
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
-  color: #8962ed;
+  color: #009688;
+  outline: 0;
   opacity: 1;
   border: none;
 }
@@ -1773,15 +1785,14 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
-  color: #8962ed;
+  color: #009688;
+  outline: 0;
   opacity: 1;
   border: none;
 }
 .button--material--flat:disabled,
 .button--material--flat[disabled] {
-  background: #eaeaea;
-  color: #a8a8a8;
-  opacity: 1;
+  opacity: 0.5;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2470,7 +2481,11 @@ h6 {
 }
 .toolbar-button--material {
   font-size: 21px;
+  color: #fff;
   padding: 0;
+}
+.toolbar-button--material:active {
+  opacity: 1;
 }
 .toolbar-button--material:not(:last-child) {
   margin-right: 10px;
@@ -2858,12 +2873,14 @@ h6 {
   height: 18px;
 }
 .checkbox--material__checkmark:before {
-  border: 2px solid rgba(0,0,0,0.5);
+  border: 2px solid #717171;
 }
 .checkbox--material__input:checked + .checkbox--material__checkmark:before {
+  background-color: #009688;
   border: none;
 }
 .checkbox--material__input + .checkbox--material__checkmark:after {
+  border-color: #fff;
   -webkit-transition: -webkit-transform 0.3s ease;
   -moz-transition: -moz-transform 0.3s ease;
   -o-transition: -o-transform 0.3s ease;
@@ -2887,16 +2904,24 @@ h6 {
   -o-transform: scale(1) rotate(-45deg);
   transform: scale(1) rotate(-45deg);
 }
+.checkbox--material__input:disabled + .checkbox--material__checkmark {
+  opacity: 1;
+}
+.checkbox--material__input:disabled + .checkbox--material__checkmark:before {
+  border-color: #afafaf;
+}
 .checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before {
-  background-color: #000;
+  background-color: #afafaf;
+}
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:after {
+  border-color: #fff;
 }
 .checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before {
-  background-color: #000;
+  background-color: #afafaf;
 }
 .checkbox--material__checkmark:before {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  border-color: #5a5a5a;
   width: 18px;
   height: 18px;
 }
@@ -3070,12 +3095,12 @@ h6 {
       Label
     </label>
     <label class="radio-button radio-button--material">
-      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled checked>
       <div class="radio-button__checkmark radio-button--material__checkmark"></div>
       Label
     </label>
     <label class="radio-button radio-button--material">
-      <input type="radio" class="radio-button__input radio-button--material__input" name="r" disabled>
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled>
       <div class="radio-button__checkmark radio-button--material__checkmark"></div>
       Label
     </label>
@@ -3092,7 +3117,7 @@ h6 {
 }
 .radio-button--material__checkmark:before {
   background: transparent;
-  border: 2px solid #5a5a5a;
+  border: 2px solid #717171;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   width: 20px;
@@ -3122,10 +3147,10 @@ h6 {
 }
 .radio-button--material__input:checked + .radio-button__checkmark:before {
   background: transparent;
-  border: 2px solid #8962ed;
+  border: 2px solid #009688;
 }
 .radio-button--material__input + .radio-button__checkmark:after {
-  background: #696969;
+  background: #717171;
   opacity: 1;
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
@@ -3135,12 +3160,22 @@ h6 {
 }
 .radio-button--material__input:checked + .radio-button__checkmark:after {
   opacity: 1;
-  background: #8962ed;
+  background: #009688;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
+}
+.radio-button--material__input:disabled + .radio-button__checkmark {
+  opacity: 1;
+}
+.radio-button--material__input:disabled + .radio-button__checkmark:after {
+  background-color: #afafaf;
+  border-color: #afafaf;
+}
+.radio-button--material__input:disabled + .radio-button__checkmark:before {
+  border-color: #afafaf;
 }
 /* topdoc
   name: List
@@ -4041,6 +4076,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <span>
       <input class="text-input--material" placeholder="Username" type="text" required>
+      <br /><br />
       <input class="text-input--material" placeholder="Password" type="password" required>
     </span>
 */
@@ -4067,11 +4103,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-size: 17px;
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
-  background-image: -webkit-linear-gradient(#ddd, #ddd);
-  background-image: -moz-linear-gradient(#ddd, #ddd);
-  background-image: -o-linear-gradient(#ddd, #ddd);
-  background-image: linear-gradient(#ddd, #ddd);
+  color: #212121;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1px, transparent), color-stop(1px, #afafaf));
+  background-image: -webkit-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: -moz-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: -o-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: linear-gradient(to top, transparent 1px, #afafaf 1px);
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
   background-repeat: no-repeat;
@@ -4083,38 +4120,43 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   padding-bottom: 2px;
   -webkit-border-radius: 0;
   border-radius: 0;
+  height: 24px;
   -webkit-transform: translate3d(0, 0, 0);
 }
 .text-input--material__label {
-  color: #8962ed;
+  color: #009688;
 }
 .text-input--material:focus {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#8962ed), to(#8962ed)), -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
-  background-image: -webkit-linear-gradient(#8962ed, #8962ed), -webkit-linear-gradient(#ddd, #ddd);
-  background-image: -moz-linear-gradient(#8962ed, #8962ed), -moz-linear-gradient(#ddd, #ddd);
-  background-image: -o-linear-gradient(#8962ed, #8962ed), -o-linear-gradient(#ddd, #ddd);
-  background-image: linear-gradient(#8962ed, #8962ed), linear-gradient(#ddd, #ddd);
-  -webkit-animation: material-input-animate 0.3s forwards;
-  -moz-animation: material-input-animate 0.3s forwards;
-  -o-animation: material-input-animate 0.3s forwards;
-  animation: material-input-animate 0.3s forwards;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left bottom, left top, color-stop(1px, transparent), color-stop(1px, #afafaf));
+  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: -moz-linear-gradient(#009688, #009688), -moz-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  background-image: linear-gradient(#009688, #009688), linear-gradient(to top, transparent 1px, #afafaf 1px);
+  -webkit-animation: material-text-input-animate 0.3s forwards;
+  -moz-animation: material-text-input-animate 0.3s forwards;
+  -o-animation: material-text-input-animate 0.3s forwards;
+  animation: material-text-input-animate 0.3s forwards;
 }
 .text-input--material::-webkit-input-placeholder {
-  color: #ccc;
+  color: #afafaf;
+  line-height: 20px;
 }
 .text-input--material::-moz-placeholder {
-  color: #ccc;
+  color: #afafaf;
+  line-height: 20px;
 }
 .text-input--material::-ms-input-placeholder {
-  color: #ccc;
+  color: #afafaf;
+  line-height: 20px;
 }
 .text-input--material:-ms-input-placeholder {
-  color: #ccc;
+  color: #afafaf;
+  line-height: 20px;
 }
 .text-input--material::-ms-clear {
   display: none;
 }
-@-moz-keyframes material-input-animate {
+@-moz-keyframes material-text-input-animate {
   0% {
     background-size: 0% 2px, 100% 2px;
   }
@@ -4122,7 +4164,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     background-size: 100% 2px, 100% 2px;
   }
 }
-@-webkit-keyframes material-input-animate {
+@-webkit-keyframes material-text-input-animate {
   0% {
     -webkit-background-size: 0% 2px, 100% 2px;
     background-size: 0% 2px, 100% 2px;
@@ -4132,7 +4174,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     background-size: 100% 2px, 100% 2px;
   }
 }
-@-o-keyframes material-input-animate {
+@-o-keyframes material-text-input-animate {
   0% {
     background-size: 0% 2px, 100% 2px;
   }
@@ -4140,7 +4182,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     background-size: 100% 2px, 100% 2px;
   }
 }
-@keyframes material-input-animate {
+@keyframes material-text-input-animate {
   0% {
     -webkit-background-size: 0% 2px, 100% 2px;
     background-size: 0% 2px, 100% 2px;
@@ -4345,6 +4387,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
   -webkit-border-radius: 2px;
   border-radius: 2px;
   text-align: left;
@@ -4688,6 +4731,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   padding-top: 22px;
+  background-color: #fafafa;
   -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
 }
@@ -4698,17 +4742,19 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-size: 20px;
   font-weight: 500;
   padding: 0 24px;
+  color: #212121;
 }
 .alert-dialog-content--material {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 20px;
   padding: 0 24px;
   margin: 24px 0 10px 0;
   min-height: 0;
+  color: #727272;
 }
 .alert-dialog-footer--material {
   display: inline-block;
@@ -4728,17 +4774,35 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background: none;
   border-top: none;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   outline: none;
+  color: #009688;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--material {
+    background: none;
+  }
 }
 .alert-dialog-button--material:active {
   background-color: initial;
 }
-.alert-dialog-button--one--material {
+.alert-dialog-button--one--material,
+.alert-dialog-button--one--material:first-child {
   border: 0;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one--material,
+  .alert-dialog-button--one--material:first-child {
+    background: none;
+  }
 }
 .alert-dialog-button--primal--material {
   font-weight: 500;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--primal--material {
+    background: none;
+  }
 }
 /* topdoc
   name: Popover
@@ -5049,6 +5113,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
       <div class="progress-bar__primary"></div>
       <div class="progress-bar__secondary"></div>
     </div>
+    <br />
+    <div class="progress-bar progress-bar--determinate">
+      <div class="progress-bar__primary" style="width:20%"></div>
+      <div class="progress-bar__secondary" style="width:76%"></div>
+    </div>
 */
 .progress-bar {
   position: relative;
@@ -5064,7 +5133,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .progress-bar--determinate > .progress-bar__primary,
 .progress-bar--determinate > .progress-bar__secondary {
   position: absolute;
-  background-color: #8962ed;
+  background-color: #009688;
   top: 0;
   bottom: 0;
   -webkit-transition: width 0.3s linear;
@@ -5074,13 +5143,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   z-index: 100;
 }
 .progress-bar--determinate > .progress-bar__secondary {
-  background-color: #574bdb;
+  background-color: #80cbc4;
   z-index: 0;
 }
 .progress-bar--indeterminate:before {
   content: '';
   position: absolute;
-  background-color: #8962ed;
+  background-color: #009688;
   top: 0;
   left: 0;
   bottom: 0;
@@ -5093,7 +5162,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .progress-bar--indeterminate:after {
   content: '';
   position: absolute;
-  background-color: #8962ed;
+  background-color: #009688;
   top: 0;
   left: 0;
   bottom: 0;
@@ -5226,6 +5295,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <svg class="progress-circular">
       <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
     </svg>
+    <svg class="progress-circular progress-circular--determinate">
+      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:140%,251.32%"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:100%,251.32%"/>
+    </svg>
+
 */
 .progress-circular {
   -webkit-animation: progress__rotate 2s linear infinite;
@@ -5243,7 +5317,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-animation: progress__dash 1.5s ease-in-out infinite;
   -o-animation: progress__dash 1.5s ease-in-out infinite;
   animation: progress__dash 1.5s ease-in-out infinite;
-  stroke: #8962ed;
+  stroke: #009688;
   -webkit-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
   -moz-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
   -o-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -5271,7 +5345,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-animation: none;
   -o-animation: none;
   animation: none;
-  stroke: #e0e0e0;
+  stroke: #80cbc4;
 }
 @-moz-keyframes progress__rotate {
   100% {
@@ -5363,8 +5437,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="fab">+</button>
-    <button class="fab" disabled>+</button>
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
 */
 .fab {
   position: relative;
@@ -5397,27 +5471,41 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   width: 56px;
   height: 56px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 25px;
   line-height: 56px;
   letter-spacing: 0;
-  color: #fff;
+  color: #fafafa;
   vertical-align: middle;
   text-align: center;
-  background-color: #8962ed;
+  background-color: #009688;
   border: 0px solid currentColor;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+  overflow: hidden;
   -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
   box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
 }
 .fab:active {
   -webkit-box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
   box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
-  background-color: #8962ed;
+  background-color: #009688;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -5499,8 +5587,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="fab fab--mini">+</button>
-    <button class="fab fab--mini" disabled>+</button>
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
 */
 .fab--mini {
   width: 40px;

@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-alpha.9 - 2015-11-04 */
+/*! onsenui - v2.0.0-alpha.10 - 2015-11-09 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -170,7 +170,7 @@ ons-material-input {
 ons-material-input > .text-input--material__label {
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 2px;
   font-size: 16px;
   font-weight: 400;
   font-family: 'Roboto', 'Noto', sans-serif;

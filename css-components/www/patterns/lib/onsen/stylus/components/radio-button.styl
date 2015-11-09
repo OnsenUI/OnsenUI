@@ -25,7 +25,10 @@ var-radio-button-indicator-color = $highlight-color
 var-radio-button-background = transparent
 var-radio-button-border = 3px solid var-radio-button-indicator-color
 var-radio-button-size = 24px
+
 var-material-radio-button-size = 20px
+var-material-radio-button-active-color = $material-radio-button-active-color
+var-material-radio-button-inactive-color = $material-radio-button-inactive-color
 
 /*! topdoc
   name: Radio Button
@@ -158,12 +161,12 @@ radio-button--disabled()
       Label
     </label>
     <label class="radio-button radio-button--material">
-      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled checked>
       <div class="radio-button__checkmark radio-button--material__checkmark"></div>
       Label
     </label>
     <label class="radio-button radio-button--material">
-      <input type="radio" class="radio-button__input radio-button--material__input" name="r" disabled>
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled>
       <div class="radio-button__checkmark radio-button--material__checkmark"></div>
       Label
     </label>
@@ -180,7 +183,7 @@ radio-button--disabled()
 
 .radio-button--material__checkmark:before
   background transparent
-  border 2px solid #5a5a5a
+  border 2px solid $material-radio-button-inactive-color
   border-radius 50%
   width var-material-radio-button-size
   height var-material-radio-button-size
@@ -198,14 +201,25 @@ radio-button--disabled()
 
 .radio-button--material__input:checked + .radio-button__checkmark:before
   background transparent
-  border 2px solid $highlight-color
+  border 2px solid $material-radio-button-active-color
 
 .radio-button--material__input + .radio-button__checkmark:after
-  background #696969
+  background $material-radio-button-inactive-color
   opacity 1
   transform scale(0)
 
 .radio-button--material__input:checked + .radio-button__checkmark:after
   opacity 1
-  background $highlight-color
+  background $material-radio-button-active-color
   transform scale(1)
+
+.radio-button--material__input:disabled + .radio-button__checkmark
+  opacity 1
+
+.radio-button--material__input:disabled + .radio-button__checkmark:after
+  background-color #afafaf
+  border-color #afafaf
+
+.radio-button--material__input:disabled + .radio-button__checkmark:before
+  border-color #afafaf
+

@@ -22,12 +22,16 @@
 // internal variables
 var-switch-background-color = $border-color
 var-switch-checked-background-color = $switch-highlight-color // background color active
-var-switch-material-background-color = alpha($switch-highlight-color, 0.5)
 var-switch-thumb-background-color = white
 var-switch-thumb-border-color = $border-color
 var-switch-thumb-border-color-active = $switch-highlight-color
 var-switch-height = 32px
 var-switch-width = 51px
+
+var-material-switch-active-thumb-color = $material-switch-active-thumb-color
+var-material-switch-active-background-color = $material-switch-active-background-color
+var-material-switch-inactive-thumb-color = $material-switch-inactive-thumb-color
+var-material-switch-inactive-background-color = $material-switch-inactive-background-color
 
 /*! topdoc
   name: Switch
@@ -148,7 +152,7 @@ switch__toggle()
   padding 0 10px
 
 .switch--material__toggle
-  background-color #bdbdbd
+  background-color var-material-switch-inactive-background-color
   margin-top 5px
   height 14px
 
@@ -161,7 +165,7 @@ switch__toggle()
 
 // switch toggle circle
 .switch--material__toggle:before
-  background-color var-switch-thumb-border-color-active
+  background-color var-material-switch-active-thumb-color
   left 0px
   margin-top -5px
   width 20px
@@ -169,10 +173,10 @@ switch__toggle()
   shadow-2()
 
 .switch--material__input:checked + .switch--material__toggle
-  background-color var-switch-material-background-color
+  background-color var-material-switch-active-background-color
 
 .switch--material__input:not(:checked) + .switch--material__toggle:before
-  background-color #f1f1f1
+  background-color var-material-switch-inactive-thumb-color
   shadow-1()
   transform translateX(0px)
 

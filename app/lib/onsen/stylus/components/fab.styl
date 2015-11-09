@@ -7,8 +7,8 @@ var-fab-height = 56px
 var-fab-mini-width = 40px
 var-fab-mini-height = 40px
 
-var-fab-background-color = $highlight-color
-var-fab-color = white
+var-fab-background-color = $fab-background-color
+var-fab-color = $fab-text-color
 
 /*! topdoc
   name: Fab
@@ -18,8 +18,8 @@ var-fab-color = white
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="fab">+</button>
-    <button class="fab" disabled>+</button>
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
 */
 
 fab--disabled()
@@ -37,24 +37,28 @@ fab()
   width var-fab-width
   height var-fab-height
   text-decoration none
-  font-size var-font-size
+  font-size 25px
   line-height var-fab-height
   letter-spacing var-letter-spacing
   color var-fab-color
   vertical-align middle
   text-align center
-  background-color alpha(var-fab-background-color, 1)
+  background-color var-fab-background-color
   border 0px solid currentColor
   border-radius 50%
+  overflow hidden
   shadow-2()
   transition all 0.2s ease-in-out
+  display inline-flex
+  justify-content center
+  align-content center
 
 fab--focus()
   outline 0
 
 fab--active()
   shadow-4()
-  background-color alpha(var-fab-background-color, 1)
+  background-color var-fab-background-color
   transition all 0.2s ease
 
 .fab
@@ -68,7 +72,7 @@ fab--active()
 
 .fab:focus
   fab--focus()
-  
+
 .fab__icon
   position relative
   overflow hidden
@@ -83,7 +87,6 @@ fab--active()
 .fab:disabled,
 .fab[disabled]
   fab--disabled()
-  
 
 .fab--top__right
   top 20px
@@ -91,28 +94,28 @@ fab--active()
   right 20px
   left auto
   position fixed
-  
+
 .fab--bottom__right
   top auto
   bottom 20px
   right 20px
   left auto
   position fixed
-  
+
 .fab--top__left
   top 20px
   bottom auto
   right auto
   left 20px
   position fixed
-  
+
 .fab--bottom__left
   top auto
   bottom 20px
   right auto
   left 20px
   position fixed
-  
+
 .fab--top__center
   top 20px
   bottom auto
@@ -120,7 +123,7 @@ fab--active()
   left 50%
   right auto
   position fixed
-  
+
 .fab--bottom__center
   top auto
   bottom 20px
@@ -128,7 +131,6 @@ fab--active()
   left 50%
   right auto
   position fixed
-  
 
 /*! topdoc
   name: Fab Mini
@@ -138,15 +140,14 @@ fab--active()
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="fab fab--mini">+</button>
-    <button class="fab fab--mini" disabled>+</button>
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
 */
 
 .fab--mini
   width var-fab-mini-width
   height var-fab-mini-height
   line-height var-fab-mini-height
-  
 
 .fab--mini
   .fab__icon

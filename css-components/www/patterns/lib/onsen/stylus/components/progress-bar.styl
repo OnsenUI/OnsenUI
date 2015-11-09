@@ -1,9 +1,9 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-progress-bar-color = alpha($highlight-color, 1)
-var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
-
+var-progress-bar-color = $material-progress-bar-primary-color
+var-progress-bar-secondary-color = $material-progress-bar-secondary-color
+var-progress-bar-background-color = $material-progress-bar-background-color
 
 /*! topdoc
   name: Progress Bar
@@ -13,6 +13,11 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
       <div class="progress-bar__primary"></div>
       <div class="progress-bar__secondary"></div>
     </div>
+    <br />
+    <div class="progress-bar progress-bar--determinate">
+      <div class="progress-bar__primary" style="width:20%"></div>
+      <div class="progress-bar__secondary" style="width:76%"></div>
+    </div>
 */
 
 .progress-bar
@@ -20,7 +25,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
   height 4px
   display block
   width 100%
-  background-color #e0e0e0
+  background-color var-progress-bar-background-color
   background-clip padding-box
   margin 0
   overflow hidden

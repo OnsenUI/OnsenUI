@@ -38,7 +38,9 @@ var-checkbox-border-radius = 16px
 var-checkmark-border-radius = 0px
 
 var-material-checkbox-size = 18px
-
+var-material-checkbox-active-color = $material-checkbox-active-color
+var-material-checkbox-inactive-color = $material-checkbox-inactive-color
+var-material-checkbox-checkmark-color = $material-checkbox-checkmark-color
 
 /*! topdoc
   name: Checkbox
@@ -290,12 +292,14 @@ checkbox--after()
   height var-material-checkbox-size
 
 .checkbox--material__checkmark:before
-  border 2px solid rgba(0,0,0, 0.5)
+  border 2px solid var-material-checkbox-inactive-color
 
 .checkbox--material__input:checked + .checkbox--material__checkmark:before
+  background-color var-material-checkbox-active-color
   border none
 
 .checkbox--material__input + .checkbox--material__checkmark:after
+  border-color var-material-checkbox-checkmark-color
   transition transform 0.3s ease
   width 10px
   height 5px
@@ -308,14 +312,22 @@ checkbox--after()
   left 3px
   transform scale(1) rotate(-45deg)
 
+.checkbox--material__input:disabled + .checkbox--material__checkmark
+  opacity 1
+
+.checkbox--material__input:disabled + .checkbox--material__checkmark:before
+  border-color #afafaf
+
 .checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before
-  background-color rgba(0,0,0,1)
+  background-color #afafaf
+
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:after
+  border-color #ffffff
 
 .checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before
-  background-color rgba(0,0,0,1)
+  background-color #afafaf
 
 .checkbox--material__checkmark:before
   border-radius 2px
-  border-color #5a5a5a
   width var-material-checkbox-size
   height var-material-checkbox-size

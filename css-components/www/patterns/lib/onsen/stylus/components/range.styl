@@ -27,6 +27,9 @@ var-range-border := none
 var-range-track-height := 2px
 var-range-thumb-width  := var-thumb-size
 
+var-material-range-track-color = $material-range-track-color
+var-material-range-thumb-color = $material-range-thumb-color
+
 /*! topdoc
   name: Range
   class: range
@@ -81,7 +84,6 @@ range--disabled()
   height var-range-track-height
   border-radius var-border-radius--large
   border-radius var-range-border-radius
-
   background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
   background-position left center
   background-size 100% 2px
@@ -182,33 +184,34 @@ range--disabled()
 
 var-material-range-track-height = 2px
 var-material-range-thumb-width  = 12px
-var-material-range-highlight-color = $second-highlight-color
-var-material-range-highlight-color-active = $second-highlight-color
 
 .range--material
-  background-image linear-gradient(#ddd, #ddd)
+  background-image linear-gradient(var-material-range-track-color, var-material-range-track-color)
   background-position center
   background-size 100% 2px
   overflow visible
 
 .range--material::-webkit-slider-thumb
   top 1px
-  border 3px solid #dddddd
+  border 3px solid var-material-range-track-color
   height var-material-range-thumb-width
   width var-material-range-thumb-width
   border-radius 100%
-  border-color var-material-range-highlight-color
-  background-color var-material-range-highlight-color
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
   margin-top -1px
 
 .range--material::-moz-range-thumb
   top 1px
-  border 3px solid #dddddd
+  border 3px solid var-material-range-track-color
   height var-material-range-thumb-width
   width var-material-range-thumb-width
   border-radius 100%
-  border-color var-material-range-highlight-color
-  background-color var-material-range-highlight-color
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
+
+.range--material::-moz-range-track
+  background-color var-material-range-track-color
 
 .range--material::-ms-thumb
   margin-top 1px
@@ -216,16 +219,16 @@ var-material-range-highlight-color-active = $second-highlight-color
   height var-material-range-thumb-width
   width var-material-range-thumb-width
   border-radius 100%;
-  border-color var-material-range-highlight-color
-  background-color var-material-range-highlight-color
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
 
 .range--material:focus::-webkit-slider-thumb
-  border-color var-material-range-highlight-color
-  background-color var-material-range-highlight-color
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
 
 .range--material:focus::-moz-range-thumb
-  border-color var-material-range-highlight-color
-  background-color var-material-range-highlight-color
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
 
 range--material--thumb--before()
   display none
@@ -237,7 +240,7 @@ range--material--thumb--before()
   range--material--thumb--before()
 
 .range--material::-ms-fill-lower
-  background-color var-material-range-highlight-color
+  background-color var-material-range-thumb-color
 
 range--material--thumb--after()
   content ''
@@ -246,7 +249,7 @@ range--material--thumb--after()
   border-radius 100%
   height var-material-range-thumb-width
   width var-material-range-thumb-width
-  background-color var-material-range-highlight-color-active
+  background-color var-material-range-thumb-color
   opacity 0.2
   transition transform 0.1s linear
 
