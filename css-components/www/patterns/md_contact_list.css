@@ -35,7 +35,7 @@ ons-list:first-child {
 .contact-initials {
   padding-left: 8px;
   color: #9E9E9E;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 20px;
 }
 
@@ -51,6 +51,6 @@ ons-list:first-child {
 }
 
 .contact-name {
-  font-weight: 500;
+  font-weight: 400;
   padding-left: 18px;
 }
