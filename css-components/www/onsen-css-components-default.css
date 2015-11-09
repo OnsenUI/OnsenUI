@@ -272,7 +272,7 @@ h6 {
   padding: 0 10px;
 }
 .switch--material__toggle {
-  background-color: #bdbdbd;
+  background-color: #b0afaf;
   margin-top: 5px;
   height: 14px;
 }
@@ -303,7 +303,7 @@ h6 {
   transform: translateX(16px);
 }
 .switch--material__toggle:before {
-  background-color: #5198db;
+  background-color: #009688;
   left: 0px;
   margin-top: -5px;
   width: 20px;
@@ -312,7 +312,7 @@ h6 {
   box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
 }
 .switch--material__input:checked + .switch--material__toggle {
-  background-color: rgba(81,152,219,0.5);
+  background-color: #77c2bb;
 }
 .switch--material__input:not(:checked) + .switch--material__toggle:before {
   background-color: #f1f1f1;
@@ -4731,14 +4731,31 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   outline: none;
 }
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--material {
+    background: none;
+  }
+}
 .alert-dialog-button--material:active {
   background-color: initial;
 }
-.alert-dialog-button--one--material {
+.alert-dialog-button--one--material,
+.alert-dialog-button--one--material:first-child {
   border: 0;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one--material,
+  .alert-dialog-button--one--material:first-child {
+    background: none;
+  }
 }
 .alert-dialog-button--primal--material {
   font-weight: 500;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--primal--material {
+    background: none;
+  }
 }
 /* topdoc
   name: Popover

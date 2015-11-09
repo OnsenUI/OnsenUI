@@ -30,6 +30,9 @@ var-navigation-bar-separator = 1px solid var-navigation-bar-separator-color
 
 var-navigation-bar-material-height = 56px
 
+var-material-navigation-bar-background-color = $material-toolbar-background-color
+var-material-navigation-bar-color = $material-toolbar-text-color
+
 /*! topdoc
   name: Navigation Bar
   class: navigation-bar
@@ -404,11 +407,13 @@ navigation-bar__item()
   border-bottom 0
   box-shadow 0 1px 5px rgba(0,0,0,0.3)
   padding 0px 16px
+  background-color var-material-navigation-bar-background-color
 
 navigation-bar--material-font()
   material-font()
   font-size 20px
   font-weight 500
+  color var-material-navigation-bar-color
 
 .navigation-bar--material__left
   navigation-bar--material-font()
