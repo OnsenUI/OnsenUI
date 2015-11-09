@@ -169,7 +169,7 @@ ons-material-input {
 ons-material-input > .text-input--material__label {
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 2px;
   font-size: 16px;
   font-weight: 400;
   font-family: 'Roboto', 'Noto', sans-serif;

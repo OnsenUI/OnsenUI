@@ -1,9 +1,8 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-progress-bar-color = alpha($highlight-color, 1)
-var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
-
+var-progress-circle-color = $material-progress-circle-primary-color
+var-progress-circle-secondary-color = $material-progress-circle-secondary-color
 
 /*! topdoc
   name: Progress Circle
@@ -12,6 +11,11 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
     <svg class="progress-circular">
       <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
     </svg>
+    <svg class="progress-circular progress-circular--determinate">
+      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:140%,251.32%"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:100%,251.32%"/>
+    </svg>
+
 */
 
 .progress-circular
@@ -24,7 +28,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
   stroke-dasharray 1,200
   stroke-dashoffset 0
   animation progress__dash 1.5s ease-in-out infinite
-  stroke var-progress-bar-color
+  stroke var-progress-circle-color
   transition all 1s cubic-bezier(0.4, 0, 0.2, 1);
 
 .progress-circular--determinate
@@ -36,7 +40,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
 
 .progress-circular--determinate > .progress-circular__secondary
   animation none
-  stroke #e0e0e0
+  stroke var-progress-circle-secondary-color
 
 @keyframes progress__rotate {
   100% {

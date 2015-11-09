@@ -34,6 +34,9 @@ var-button-large-line-height = 36px
 var-button-active-opacity = 0.2
 var-button-border-radius = 3px
 
+var-material-button-background-color = $material-button-background-color
+var-material-button-color = $material-button-text-color
+
 /*! topdoc
   name: Button
   class: button
@@ -331,14 +334,17 @@ button--material()
   font-size 14px
   transform: translate3d(0, 0, 0);
   text-transform uppercase
+  background-color var-material-button-background-color
+  color var-material-button-color
   material-font()
+  font-weight 500
 
 .button--material
   button--material()
 
 .button--material:active
   shadow-3()
-  background-color var-button-background-color
+  background-color var-material-button-background-color
   opacity 1
 
 .button--material:focus
@@ -346,9 +352,7 @@ button--material()
 
 .button--material:disabled,
 .button--material[disabled]
-  background #eaeaea
-  color #a8a8a8
-  opacity 1
+  opacity 0.5
   shadow-0()
 
 /*! topdoc
@@ -368,12 +372,13 @@ button--material()
   button--material()
   shadow-0()
   background-color transparent
-  color var-button-background-color
+  color var-material-button-background-color
 
 button--material--active()
   shadow-0()
   background-color transparent
-  color var-button-background-color
+  color var-material-button-background-color
+  outline 0
   opacity 1
   border none
 
@@ -385,7 +390,5 @@ button--material--active()
 
 .button--material--flat:disabled,
 .button--material--flat[disabled]
-  background #eaeaea
-  color #a8a8a8
-  opacity 1
+  opacity 0.5
   shadow-0()

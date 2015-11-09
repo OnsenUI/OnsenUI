@@ -38,7 +38,7 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Toolbar',
+      name: 'Flat Toolbar',
       items: [
         {
           name: 'toolbar-background-color',
@@ -58,6 +58,94 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'toolbar-border-color',
           displayName: 'Border Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Toolbar',
+      items: [
+        {
+          name: 'material-toolbar-background-color',
+          displayName: 'Background Color'
+        },
+
+        {
+          name: 'material-toolbar-text-color',
+          displayName: 'Text Color'
+        },
+
+        {
+          name: 'material-toolbar-button-color',
+          displayName: 'Button Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Button',
+      items: [
+        {
+          name: 'material-button-background-color',
+          displayName: 'Background Color'
+        },
+
+        {
+          name: 'material-button-text-color',
+          displayName: 'Text Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Checkbox',
+      items: [
+        {
+          name: 'material-checkbox-active-color',
+          displayName: 'Active Color'
+        },
+
+        {
+          name: 'material-checkbox-inactive-color',
+          displayName: 'Inactive Color'
+        },
+
+        {
+          name: 'material-checkbox-checkmark-color',
+          displayName: 'Checkmark Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Radio Button',
+      items: [
+        {
+          name: 'material-radio-button-active-color',
+          displayName: 'Active Color'
+        },
+
+        {
+          name: 'material-radio-button-inactive-color',
+          displayName: 'Inactive Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Input',
+      items: [
+        {
+          name: 'material-text-input-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'material-text-input-active-color',
+          displayName: 'Active Color'
+        },
+        {
+          name: 'material-text-input-inactive-color',
+          displayName: 'Inactive Color'
         }
       ]
     },
@@ -131,7 +219,7 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Alert Dialog',
+      name: 'Flat Alert Dialog',
       items: [
         {
           name: 'alert-dialog-background-color',
@@ -153,10 +241,42 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Dialog',
+      name: 'Material Alert Dialog',
+      items: [
+        {
+          name: 'material-alert-dialog-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-alert-dialog-title-color',
+          displayName: 'Title Color'
+        },
+        {
+          name: 'material-alert-dialog-content-color',
+          displayName: 'Content Color'
+        },
+        {
+          name: 'material-alert-dialog-button-color',
+          displayName: 'Button Text Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Flat Dialog',
       items: [
         {
           name: 'dialog-background-color',
+          displayName: 'Background Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Dialog',
+      items: [
+        {
+          name: 'material-dialog-background-color',
           displayName: 'Background Color'
         }
       ]
@@ -177,12 +297,97 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
-      name: 'Other',
+      name: 'Flat Switch',
       items: [
         {
           name: 'switch-highlight-color',
-          displayName: 'Switch Highlight Color'
+          displayName: 'Highlight Color'
+        }
+      ]
+    },
+    {
+      name: 'Material Switch',
+      items: [
+        {
+          name: 'material-switch-active-thumb-color',
+          displayName: 'Active Thumb Color'
         },
+        {
+          name: 'material-switch-inactive-thumb-color',
+          displayName: 'Inactive Thumb Color'
+        },
+        {
+          name: 'material-switch-active-background-color',
+          displayName: 'Active Background Color'
+        },
+        {
+          name: 'material-switch-inactive-background-color',
+          displayName: 'Inactive Background Color'
+        },
+      ]
+    },
+    {
+      name: 'Material Range',
+      items: [
+        {
+          name: 'material-range-thumb-color',
+          displayName: 'Thumb Color'
+        },
+        {
+          name: 'material-range-track-color',
+          displayName: 'Track Color'
+        }
+      ]
+    },
+    {
+      name: 'Progress Bar',
+      items: [
+        {
+          name: 'material-progress-bar-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-progress-bar-primary-color',
+          displayName: 'Primary Color'
+        },
+        {
+          name: 'material-progress-bar-secondary-color',
+          displayName: 'Secondary Color'
+        }
+      ]
+    },
+    {
+      name: 'Progress Circle',
+      items: [
+        {
+          name: 'material-progress-circle-primary-color',
+          displayName: 'Primary Color'
+        },
+        {
+          name: 'material-progress-circle-secondary-color',
+          displayName: 'Secondary Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Floating Action Button',
+      items: [
+        {
+          name: 'fab-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'fab-background-color',
+          displayName: 'Background Color'
+        }
+
+      ]
+    },
+
+    {
+      name: 'Other',
+      items: [
         {
           name: 'notification-background-color',
           displayName: 'Notification Background Color'
