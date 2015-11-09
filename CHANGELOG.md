@@ -64,9 +64,10 @@ v2.0.0-alpha.10
  * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
  * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
  * ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
- * ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/966).
+ * ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/969).
  * core: Add support for Browserify.
  * ons.platform: uses cordova-plugin-device if installed.
+ * ons-sliding-menu: Fixed [#967](https://github.com/OnsenUI/OnsenUI/issues/967).
 
 v1.3.12
 ----
