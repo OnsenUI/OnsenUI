@@ -172,6 +172,8 @@ limitations under the License.
       const leavePage = this._pages.pop();
       const enterPage = this._pages[this._pages.length - 1];
 
+      enterPage.updateBackButton();
+
       leavePage.element._hide();
       if (enterPage) {
         enterPage.element.style.display = 'block';
@@ -240,6 +242,7 @@ limitations under the License.
             element.style.display = 'none';
             this.insertBefore(element, this._pages[index].element);
             this._pages.splice(index, 0, pageObject);
+            this.getCurrentPage().updateBackButton();
 
             setTimeout(() => {
               unlock();
@@ -326,6 +329,7 @@ limitations under the License.
         while (this._pages.length > 1) {
           this._pages.shift().destroy();
         }
+        this._pages[0].updateBackButton();
         onTransitionEnd();
       };
 
@@ -435,6 +439,7 @@ limitations under the License.
       };
 
       this._pages.push(pageObject);
+      pageObject.updateBackButton();
 
       const done = () => {
         if (this._pages[this._pages.length - 2]) {
