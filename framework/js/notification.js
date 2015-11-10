@@ -29,6 +29,12 @@ limitations under the License.
  *     message: 'Hello, world!'
  *   });
  *
+ *   // Show a Material Design alert dialog.
+ *   ons.notification.alert({
+ *    message: 'Hello, world!',
+ *    modifier: 'material'
+ *   });
+ *
  *   ons.notification.confirm({
  *     message: 'Are you ready?',
  *     callback: function(answer) {
