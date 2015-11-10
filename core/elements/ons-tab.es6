@@ -215,7 +215,7 @@ limitations under the License.
         const tabIndex = this._findTabIndex();
 
         window.OnsTabbarElement.rewritables.ready(tabbar, () => {
-          tabbar.setActiveTab(tabIndex, {animation: 'none'});
+          setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
       }
 
