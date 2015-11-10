@@ -6,6 +6,7 @@
  * @description
  *   [en]A material design progress component. Can be displayed both as a linear or circular progress indicator.[/en]
  *   [ja]マテリアルデザインのprgoressコンポーネントです。linearもしくはcircularなプログレスインジケータを表示できます。[/ja]
+ * @codepen VvVaZv
  * @example
  * <ons-progress
  *  type="circular"
