@@ -10,7 +10,7 @@
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
  * <ons-icon
- *   icon="fa-twitter"
+ *   icon="md-car"
  *   size="20px"
  *   fixed-width="false"
  *   style="color: red">
@@ -22,7 +22,7 @@
  * @name icon
  * @type {String}
  * @description
- *   [en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+ *   [en]The icon name. "md-" prefix for Material Icons, "fa-" for Font Awesome and "ion-" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]
  *   [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
  */
 
