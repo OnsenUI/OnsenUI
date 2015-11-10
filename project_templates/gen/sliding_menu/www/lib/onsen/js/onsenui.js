@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.12 - 2015-11-02 */
+/*! onsenui - v1.3.13 - 2015-11-10 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -4885,7 +4885,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
-}(new Function("return this")()));
+}(function() {return this;}()));
 
 (function() {
     function Viewport() {
@@ -4957,9 +4957,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
     '<span \n' +
@@ -4981,9 +4981,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/button.tpl',
     '<span class="label ons-button-inner"></span>\n' +
@@ -4993,9 +4993,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/dialog.tpl',
     '<div class="dialog-mask"></div>\n' +
@@ -5006,9 +5006,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/icon.tpl',
     '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
@@ -5017,9 +5017,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
@@ -5032,9 +5032,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/row.tpl',
     '<div class="row row-{{align}} ons-row-inner"></div>\n' +
@@ -5043,9 +5043,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
@@ -5055,9 +5055,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/split_view.tpl',
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
@@ -5067,9 +5067,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/switch.tpl',
     '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
@@ -5081,9 +5081,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
@@ -5094,9 +5094,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab_bar.tpl',
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
@@ -5106,9 +5106,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/toolbar_button.tpl',
     '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
@@ -7296,6 +7296,10 @@ limitations under the License.
               duration: duration,
               timing: 'cubic-bezier(.1, .4, .1, 1)'
             })
+            .queue(function(done) {
+              done();
+              this._tryFirePostChangeEvent();
+            }.bind(this))
             .play();
           this._scroll = 0;
           return;
@@ -7311,6 +7315,10 @@ limitations under the License.
               duration: duration,
               timing: 'cubic-bezier(.1, .4, .1, 1)'
             })
+            .queue(function(done) {
+              done();
+              this._tryFirePostChangeEvent();
+            }.bind(this))
             .play();
           this._scroll = maxScroll;
           return;
@@ -8838,7 +8846,7 @@ limitations under the License.
         this._pageContent = this._findPageContent();
 
         if (!this._pageContent) {
-          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
         }
 
         this._itemHeightSum = [];
@@ -9084,13 +9092,14 @@ limitations under the License.
           e = e.parentNode;
 
           if (e.className) {
-            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
-              break;
+            var classNames = e.className.split(/\s+/);
+            if (classNames.indexOf('page__content') >= 0 || classNames.indexOf('ons-scroller__content') >= 0) {
+              return e;
             }
           }
         }
 
-        return e;
+        return null;
       },
 
       _debounce: function(func, wait, immediate) {
@@ -10019,6 +10028,7 @@ limitations under the License.
           while (self.pages.length > 1) {
             self.pages.shift().destroy();
           }
+          self._scope.$digest();
           onTransitionEnd();
         };
 
@@ -11348,6 +11358,20 @@ limitations under the License.
       _translateTo: function(scroll, options) {
         options = options || {};
 
+        if (this._currentTranslation == 0 && scroll == 0) {
+          return;
+        }
+
+        var done = function() {
+          if (scroll === 0) {
+            this._scrollElement[0].removeAttribute('style');
+          }
+
+          if (options.callback) {
+            options.callback();
+          }
+        }.bind(this);
+
         this._currentTranslation = scroll;
 
         if (options.animate) {
@@ -11358,14 +11382,14 @@ limitations under the License.
               duration: 0.3,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .play(options.callback);
+            .play(done);
         }
         else {
           animit(this._scrollElement[0])
             .queue({
               transform: this._generateTranslationTransform(scroll)
             })
-            .play(options.callback);
+            .play(done);
         }
       },
 
@@ -12725,7 +12749,7 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event.gesture.stopDetect();
+          this._deactivateHammer();
         }
 
         switch (event.type) {
