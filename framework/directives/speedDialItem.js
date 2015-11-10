@@ -6,6 +6,7 @@
  * @description
  *   [en]This component displays the child elements of the Material Design Speed dial component.[/en]
  *   [ja]Material DesignのSpeed dialの子要素を表現する要素です。[/ja]
+ * @codepen dYQYLg
  * @seealso ons-speed-dial
  *   [en]ons-speed-dial component[/en]
  *   [ja]ons-speed-dialコンポーネント[/ja]

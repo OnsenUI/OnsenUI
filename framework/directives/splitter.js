@@ -6,6 +6,7 @@
  * @description
  *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
+ * @codepen rOQOML
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]

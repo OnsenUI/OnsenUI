@@ -6,6 +6,7 @@
  * @description
  *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
+ * @codepen rOQOML
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>

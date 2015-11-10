@@ -6,6 +6,7 @@
  * @description
  *   [en]Element that displays a Material Design Speed Dialog component.[/en]
  *   [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]
+ * @codepen dYQYLg
  * @seealso ons-speed-dial-item
  *   [en]ons-speed-dial-item component[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]
