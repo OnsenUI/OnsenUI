@@ -2,6 +2,16 @@
 CHANGELOG
 ====
 
+v1.3.13
+----
+* ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
+* ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
+* dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
+* ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
+* ons-sliding-menu: Fixed [#967](https://github.com/OnsenUI/OnsenUI/issues/967).
+* ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/969).
+* ons-navigator: Fixed [#1018](https://github.com/OnsenUI/OnsenUI/issues/1018).
+
 v1.3.12
 ----
 * ons-page: Fix status bar fill for iOS9.
