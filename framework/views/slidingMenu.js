@@ -470,7 +470,7 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event.gesture.stopDetect();
+          this._deactivateHammer();
         }
 
         switch (event.type) {
