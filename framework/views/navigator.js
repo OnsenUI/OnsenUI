@@ -599,6 +599,7 @@ limitations under the License.
           while (self.pages.length > 1) {
             self.pages.shift().destroy();
           }
+          self._scope.$digest();
           onTransitionEnd();
         };
 
