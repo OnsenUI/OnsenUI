@@ -38,7 +38,7 @@ limitations under the License.
         this._pageContent = this._findPageContent();
 
         if (!this._pageContent) {
-          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
         }
 
         this._itemHeightSum = [];
@@ -284,13 +284,14 @@ limitations under the License.
           e = e.parentNode;
 
           if (e.className) {
-            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
-              break;
+            var classNames = e.className.split(/\s+/);
+            if (classNames.indexOf('page__content') >= 0 || classNames.indexOf('ons-scroller__content') >= 0) {
+              return e;
             }
           }
         }
 
-        return e;
+        return null;
       },
 
       _debounce: function(func, wait, immediate) {
