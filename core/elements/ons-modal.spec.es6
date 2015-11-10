@@ -131,9 +131,7 @@ describe('OnsModalElement', () => {
       class MyAnimator extends ons._internal.ModalAnimator {
       }
 
-      expect(window.OnsModalElement._animatorDict.hoge).not.to.be.ok;
       window.OnsModalElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsModalElement._animatorDict.hoge).to.be.ok;
     });
   });
 });

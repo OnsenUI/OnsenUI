@@ -32,6 +32,41 @@ limitations under the License.
   var ModifierUtil = ons._internal.ModifierUtil;
   var util = ons._util;
 
+  const _animatorDict = {
+    'default': TabbarNoneAnimator,
+    'fade': TabbarFadeAnimator,
+    'slide': TabbarSlideAnimator,
+    'none': TabbarNoneAnimator
+  };
+
+  const rewritables = {
+    /**
+     * @param {Element} tabbarElement
+     * @param {Function} callback
+     */
+    ready(tabbarElement, callback) {
+      callback();
+    },
+
+    /**
+     * @param {Element} tabbarElement
+     * @param {Element} target
+     * @param {Function} callback
+     */
+    link(tabbarElement, target, callback) {
+      callback(target);
+    },
+
+    /**
+     * @param {Element} tabbarElement
+     * @param {Element} target
+     * @param {Function} callback
+     */
+    unlink(tabbarElement, target, callback) {
+      callback(target);
+    }
+  };
+
   var generateId = (() => {
     var i = 0;
     return () => 'ons-tabbar-gen-' + (i++);
@@ -43,7 +78,7 @@ limitations under the License.
       this._tabbarId = generateId();
 
       this._animatorFactory = new AnimatorFactory({
-        animators: OnsTabbarElement._animatorDict,
+        animators: _animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -147,7 +182,7 @@ limitations under the License.
     _loadPageDOMAsync(pageElement, options) {
       options = options || {};
 
-      window.OnsTabbarElement.rewritables.link(this, pageElement, pageElement => {
+      rewritables.link(this, pageElement, pageElement => {
         this._contentElement.appendChild(pageElement);
         this._switchPage(pageElement, options);
       });
@@ -200,7 +235,7 @@ limitations under the License.
         animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
           if (oldPageElement !== ons._internal.nullElement) {
             if (options._removeElement) {
-              window.OnsTabbarElement.rewritables.unlink(this, oldPageElement, pageElement => {
+              rewritables.unlink(this, oldPageElement, pageElement => {
                 oldPageElement._destroy();
               });
             } else {
@@ -308,7 +343,7 @@ limitations under the License.
 
         if (selectedTab.isPersistent()) {
           const link = (element, callback) => {
-            window.OnsTabbarElement.rewritables.link(this, element, callback);
+            rewritables.link(this, element, callback);
           };
           selectedTab._loadPageElement(pageElement => {
             this._loadPersistentPageDOM(pageElement, params);
@@ -423,13 +458,6 @@ limitations under the License.
       prototype: TabbarElement.prototype
     });
 
-    window.OnsTabbarElement._animatorDict = {
-      'default': TabbarNoneAnimator,
-      'fade': TabbarFadeAnimator,
-      'slide': TabbarSlideAnimator,
-      'none': TabbarNoneAnimator
-    };
-
     /**
      * @param {String} name
      * @param {Function} Animator
@@ -438,35 +466,9 @@ limitations under the License.
       if (!(Animator.prototype instanceof TabbarAnimator)) {
         throw new Error('"Animator" param must inherit TabbarAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
 
-    window.OnsTabbarElement.rewritables = {
-      /**
-       * @param {Element} tabbarElement
-       * @param {Function} callback
-       */
-      ready(tabbarElement, callback) {
-        callback();
-      },
-
-      /**
-       * @param {Element} tabbarElement
-       * @param {Element} target
-       * @param {Function} callback
-       */
-      link(tabbarElement, target, callback) {
-        callback(target);
-      },
-
-      /**
-       * @param {Element} tabbarElement
-       * @param {Element} target
-       * @param {Function} callback
-       */
-      unlink(tabbarElement, target, callback) {
-        callback(target);
-      }
-    };
+    window.OnsTabbarElement.rewritables = rewritables;
   }
 })();

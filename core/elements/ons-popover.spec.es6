@@ -354,9 +354,7 @@ describe('OnsPopoverElement', () => {
       class MyAnimator extends ons._internal.PopoverAnimator {
       }
 
-      expect(window.OnsPopoverElement._animatorDict.hoge).not.to.be.ok;
       window.OnsPopoverElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsPopoverElement._animatorDict.hoge).to.be.ok;
     });
   });
 });

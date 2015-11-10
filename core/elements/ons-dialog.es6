@@ -35,7 +35,15 @@ limitations under the License.
     </div>
   `);
 
+  const _animatorDict = {
+    'default': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+    'fade': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+    'slide': SlideDialogAnimator,
+    'none': DialogAnimator
+  };
+
   class DialogElement extends ons._BaseElement {
+
 
     /**
      * @return {Element}
@@ -60,7 +68,7 @@ limitations under the License.
       this._boundCancel = this._cancel.bind(this);
 
       this._animatorFactory = new AnimatorFactory({
-        animators: OnsDialogElement._animatorDict,
+        animators: _animatorDict,
         baseClass: DialogAnimator,
         baseClassName: 'DialogAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -299,13 +307,6 @@ limitations under the License.
       prototype: DialogElement.prototype
     });
 
-    window.OnsDialogElement._animatorDict = {
-      'default': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-      'fade': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-      'slide': SlideDialogAnimator,
-      'none': DialogAnimator
-    };
-
     /**
      * @param {String} name
      * @param {DialogAnimator} Animator
@@ -314,7 +315,7 @@ limitations under the License.
       if (!(Animator.prototype instanceof DialogAnimator)) {
         throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
   }
 })();

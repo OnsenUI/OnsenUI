@@ -426,9 +426,7 @@ describe('OnsTabbarElement', () => {
       class MyAnimator extends ons._internal.TabbarAnimator {
       }
 
-      expect(window.OnsTabbarElement._animatorDict.hoge).not.to.be.ok;
       window.OnsTabbarElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsTabbarElement._animatorDict.hoge).to.be.ok;
     });
   });
 });
