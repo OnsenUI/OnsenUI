@@ -137,7 +137,7 @@ limitations under the License.
         const unlock = this._doorLock.lock();
 
         if (options.refresh) {
-          const index = this.pages.length - 2;
+          const index = this._pages.length - 2;
 
           if (!this._pages[index].page) {
             throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
@@ -225,7 +225,7 @@ limitations under the License.
 
       index = this._normalizeIndex(index);
 
-      if (index >= this.pages.length) {
+      if (index >= this._pages.length) {
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
       }
 
@@ -252,7 +252,7 @@ limitations under the License.
 
     _normalizeIndex(index) {
       if (index < 0) {
-        index = Math.abs(this.pages.length + index) % this.pages.length;
+        index = Math.abs(this._pages.length + index) % this._pages.length;
       }
       return index;
     }
