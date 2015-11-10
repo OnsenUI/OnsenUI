@@ -604,8 +604,8 @@ limitations under the License.
     }
 
     _getThresholdRatioIfShouldOpen() {
-      if (this.hasAttribute('threhold-ratio-should-open')) {
-        const value = parseFloat(this.getAttribute('threhold-ratio-should-open'));
+      if (this.hasAttribute('threshold-ratio-should-open')) {
+        const value = parseFloat(this.getAttribute('threshold-ratio-should-open'));
         return Math.max(0.0, Math.min(1.0, value));
       } else {
         // default value
