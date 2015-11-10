@@ -809,7 +809,7 @@ limitations under the License.
       this._updateForSwipeableAttribute();
 
       if (this.hasAttribute('page')) {
-        window.OnsSplitterSideElement.rewritables.ready(this, () => this.load(this.getAttribute('page')));
+        setImmediate(() => window.OnsSplitterSideElement.rewritables.ready(this, () => this.load(this.getAttribute('page'))));
       }
     }
 

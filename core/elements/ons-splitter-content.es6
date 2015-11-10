@@ -64,7 +64,7 @@ limitations under the License.
       this._assertParent();
 
       if (this.hasAttribute('page')) {
-        window.OnsSplitterContentElement.rewritables.ready(this, () => this.load(this.getAttribute('page')));
+        setImmediate(() => window.OnsSplitterContentElement.rewritables.ready(this, () => this.load(this.getAttribute('page'))));
       }
     }
 
