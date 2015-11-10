@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 19,
+  "endingLine": 20,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,13 +56,21 @@
       },
       {
         "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "rOQOML",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
           "name": "example",
           "multi": true,
           "docProperty": "examples"
         },
         "tagName": "example",
         "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
-        "startingLine": 8
+        "startingLine": 9
       }
     ],
     "tagsByName": {
@@ -122,6 +130,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "rOQOML",
+            "startingLine": 8
+          }
+        ],
         "example": [
           {
             "tagDef": {
@@ -131,7 +149,7 @@
             },
             "tagName": "example",
             "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
-            "startingLine": 8
+            "startingLine": 9
           }
         ]
       },
@@ -139,6 +157,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "rOQOML",
+    "isWide": false
   },
   "categories": [
     "control"
@@ -167,8 +189,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 21,
-      "endingLine": 36,
+      "startingLine": 22,
+      "endingLine": 37,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -181,7 +203,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 21
+            "startingLine": 22
           },
           {
             "tagDef": {
@@ -190,7 +212,7 @@
             },
             "tagName": "name",
             "description": "modechange",
-            "startingLine": 22
+            "startingLine": 23
           },
           {
             "tagDef": {
@@ -198,7 +220,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just after the component's mode changes.[/en]\n  [ja]この要素のモードが変化した際に発火します。[/ja]",
-            "startingLine": 23
+            "startingLine": 24
           },
           {
             "tagDef": {
@@ -213,7 +235,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-            "startingLine": 26,
+            "startingLine": 27,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -237,7 +259,7 @@
             },
             "tagName": "param",
             "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-            "startingLine": 29,
+            "startingLine": 30,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -261,7 +283,7 @@
             },
             "tagName": "param",
             "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
-            "startingLine": 32,
+            "startingLine": 33,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -284,7 +306,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 21
+                "startingLine": 22
               }
             ],
             "name": [
@@ -295,7 +317,7 @@
                 },
                 "tagName": "name",
                 "description": "modechange",
-                "startingLine": 22
+                "startingLine": 23
               }
             ],
             "description": [
@@ -305,7 +327,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just after the component's mode changes.[/en]\n  [ja]この要素のモードが変化した際に発火します。[/ja]",
-                "startingLine": 23
+                "startingLine": 24
               }
             ],
             "param": [
@@ -322,7 +344,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-                "startingLine": 26,
+                "startingLine": 27,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -346,7 +368,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-                "startingLine": 29,
+                "startingLine": 30,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -370,7 +392,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
-                "startingLine": 32,
+                "startingLine": 33,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -403,7 +425,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-          "startingLine": 26,
+          "startingLine": 27,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -427,7 +449,7 @@
           },
           "tagName": "param",
           "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-          "startingLine": 29,
+          "startingLine": 30,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -451,7 +473,7 @@
           },
           "tagName": "param",
           "description": "[en]Returns the current mode. Can be either \"collapse\" or \"split\".[/en]\n  [ja]現在のモードを返します。[/ja]",
-          "startingLine": 32,
+          "startingLine": 33,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -474,8 +496,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 38,
-      "endingLine": 53,
+      "startingLine": 39,
+      "endingLine": 54,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -488,7 +510,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 38
+            "startingLine": 39
           },
           {
             "tagDef": {
@@ -497,7 +519,7 @@
             },
             "tagName": "name",
             "description": "preopen",
-            "startingLine": 39
+            "startingLine": 40
           },
           {
             "tagDef": {
@@ -505,7 +527,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just before the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開く前に発火します。[/ja]",
-            "startingLine": 40
+            "startingLine": 41
           },
           {
             "tagDef": {
@@ -520,7 +542,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-            "startingLine": 43,
+            "startingLine": 44,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -544,7 +566,7 @@
             },
             "tagName": "param",
             "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
-            "startingLine": 46,
+            "startingLine": 47,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -568,7 +590,7 @@
             },
             "tagName": "param",
             "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-            "startingLine": 49,
+            "startingLine": 50,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -591,7 +613,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 38
+                "startingLine": 39
               }
             ],
             "name": [
@@ -602,7 +624,7 @@
                 },
                 "tagName": "name",
                 "description": "preopen",
-                "startingLine": 39
+                "startingLine": 40
               }
             ],
             "description": [
@@ -612,7 +634,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just before the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開く前に発火します。[/ja]",
-                "startingLine": 40
+                "startingLine": 41
               }
             ],
             "param": [
@@ -629,7 +651,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-                "startingLine": 43,
+                "startingLine": 44,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -653,7 +675,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
-                "startingLine": 46,
+                "startingLine": 47,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -677,7 +699,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-                "startingLine": 49,
+                "startingLine": 50,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -710,7 +732,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-          "startingLine": 43,
+          "startingLine": 44,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -734,7 +756,7 @@
           },
           "tagName": "param",
           "description": "[en]Call to cancel opening sliding menu.[/en]\n  [ja]スライディングメニューが開くのをキャンセルします。[/ja]",
-          "startingLine": 46,
+          "startingLine": 47,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -758,7 +780,7 @@
           },
           "tagName": "param",
           "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-          "startingLine": 49,
+          "startingLine": 50,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -781,8 +803,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 55,
-      "endingLine": 67,
+      "startingLine": 56,
+      "endingLine": 68,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -795,7 +817,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 55
+            "startingLine": 56
           },
           {
             "tagDef": {
@@ -804,7 +826,7 @@
             },
             "tagName": "name",
             "description": "postopen",
-            "startingLine": 56
+            "startingLine": 57
           },
           {
             "tagDef": {
@@ -812,7 +834,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just after the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開いた後に発火します。[/ja]",
-            "startingLine": 57
+            "startingLine": 58
           },
           {
             "tagDef": {
@@ -827,7 +849,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-            "startingLine": 60,
+            "startingLine": 61,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -851,7 +873,7 @@
             },
             "tagName": "param",
             "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-            "startingLine": 63,
+            "startingLine": 64,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -874,7 +896,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 55
+                "startingLine": 56
               }
             ],
             "name": [
@@ -885,7 +907,7 @@
                 },
                 "tagName": "name",
                 "description": "postopen",
-                "startingLine": 56
+                "startingLine": 57
               }
             ],
             "description": [
@@ -895,7 +917,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just after the sliding menu is opened.[/en]\n  [ja]スライディングメニューが開いた後に発火します。[/ja]",
-                "startingLine": 57
+                "startingLine": 58
               }
             ],
             "param": [
@@ -912,7 +934,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-                "startingLine": 60,
+                "startingLine": 61,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -936,7 +958,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-                "startingLine": 63,
+                "startingLine": 64,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -969,7 +991,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-          "startingLine": 60,
+          "startingLine": 61,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -993,7 +1015,7 @@
           },
           "tagName": "param",
           "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-          "startingLine": 63,
+          "startingLine": 64,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1016,8 +1038,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 69,
-      "endingLine": 84,
+      "startingLine": 70,
+      "endingLine": 85,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -1030,7 +1052,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 69
+            "startingLine": 70
           },
           {
             "tagDef": {
@@ -1039,7 +1061,7 @@
             },
             "tagName": "name",
             "description": "preclose",
-            "startingLine": 70
+            "startingLine": 71
           },
           {
             "tagDef": {
@@ -1047,7 +1069,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just before the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じる前に発火します。[/ja]",
-            "startingLine": 71
+            "startingLine": 72
           },
           {
             "tagDef": {
@@ -1062,7 +1084,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-            "startingLine": 74,
+            "startingLine": 75,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1086,7 +1108,7 @@
             },
             "tagName": "param",
             "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-            "startingLine": 77,
+            "startingLine": 78,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1110,7 +1132,7 @@
             },
             "tagName": "param",
             "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
-            "startingLine": 80,
+            "startingLine": 81,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1133,7 +1155,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 69
+                "startingLine": 70
               }
             ],
             "name": [
@@ -1144,7 +1166,7 @@
                 },
                 "tagName": "name",
                 "description": "preclose",
-                "startingLine": 70
+                "startingLine": 71
               }
             ],
             "description": [
@@ -1154,7 +1176,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just before the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じる前に発火します。[/ja]",
-                "startingLine": 71
+                "startingLine": 72
               }
             ],
             "param": [
@@ -1171,7 +1193,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-                "startingLine": 74,
+                "startingLine": 75,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1195,7 +1217,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-                "startingLine": 77,
+                "startingLine": 78,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1219,7 +1241,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
-                "startingLine": 80,
+                "startingLine": 81,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1252,7 +1274,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-          "startingLine": 74,
+          "startingLine": 75,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1276,7 +1298,7 @@
           },
           "tagName": "param",
           "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-          "startingLine": 77,
+          "startingLine": 78,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1300,7 +1322,7 @@
           },
           "tagName": "param",
           "description": "[en]Call to cancel opening sliding-menu.[/en]\n  [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]",
-          "startingLine": 80,
+          "startingLine": 81,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1323,8 +1345,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 86,
-      "endingLine": 98,
+      "startingLine": 87,
+      "endingLine": 99,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -1337,7 +1359,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 86
+            "startingLine": 87
           },
           {
             "tagDef": {
@@ -1346,7 +1368,7 @@
             },
             "tagName": "name",
             "description": "postclose",
-            "startingLine": 87
+            "startingLine": 88
           },
           {
             "tagDef": {
@@ -1354,7 +1376,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just after the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じた後に発火します。[/ja]",
-            "startingLine": 88
+            "startingLine": 89
           },
           {
             "tagDef": {
@@ -1369,7 +1391,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-            "startingLine": 91,
+            "startingLine": 92,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1393,7 +1415,7 @@
             },
             "tagName": "param",
             "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-            "startingLine": 94,
+            "startingLine": 95,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1416,7 +1438,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 86
+                "startingLine": 87
               }
             ],
             "name": [
@@ -1427,7 +1449,7 @@
                 },
                 "tagName": "name",
                 "description": "postclose",
-                "startingLine": 87
+                "startingLine": 88
               }
             ],
             "description": [
@@ -1437,7 +1459,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just after the sliding menu is closed.[/en]\n  [ja]スライディングメニューが閉じた後に発火します。[/ja]",
-                "startingLine": 88
+                "startingLine": 89
               }
             ],
             "param": [
@@ -1454,7 +1476,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-                "startingLine": 91,
+                "startingLine": 92,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1478,7 +1500,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-                "startingLine": 94,
+                "startingLine": 95,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1511,7 +1533,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクトです。[/ja]",
-          "startingLine": 91,
+          "startingLine": 92,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1535,7 +1557,7 @@
           },
           "tagName": "param",
           "description": "[en]Component object.[/en]\n  [ja]コンポーネントのオブジェクト。[/ja]",
-          "startingLine": 94,
+          "startingLine": 95,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1560,8 +1582,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 257,
-      "endingLine": 266,
+      "startingLine": 258,
+      "endingLine": 267,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1574,7 +1596,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 257
+            "startingLine": 258
           },
           {
             "tagDef": {
@@ -1583,7 +1605,7 @@
             },
             "tagName": "signature",
             "description": "load(page)",
-            "startingLine": 258
+            "startingLine": 259
           },
           {
             "tagDef": {
@@ -1598,7 +1620,7 @@
             },
             "tagName": "param",
             "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-            "startingLine": 259,
+            "startingLine": 260,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1615,7 +1637,7 @@
             },
             "tagName": "description",
             "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
-            "startingLine": 262
+            "startingLine": 263
           }
         ],
         "tagsByName": {
@@ -1629,7 +1651,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 257
+                "startingLine": 258
               }
             ],
             "signature": [
@@ -1640,7 +1662,7 @@
                 },
                 "tagName": "signature",
                 "description": "load(page)",
-                "startingLine": 258
+                "startingLine": 259
               }
             ],
             "param": [
@@ -1657,7 +1679,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-                "startingLine": 259,
+                "startingLine": 260,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1676,7 +1698,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
-                "startingLine": 262
+                "startingLine": 263
               }
             ],
             "name": {
@@ -1687,7 +1709,7 @@
                 },
                 "tagName": "signature",
                 "description": "load(page)",
-                "startingLine": 258
+                "startingLine": 259
               },
               "tagName": "name"
             }
@@ -1713,7 +1735,7 @@
           },
           "tagName": "param",
           "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-          "startingLine": 259,
+          "startingLine": 260,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1736,8 +1758,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 268,
-      "endingLine": 280,
+      "startingLine": 269,
+      "endingLine": 281,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1750,7 +1772,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 268
+            "startingLine": 269
           },
           {
             "tagDef": {
@@ -1759,7 +1781,7 @@
             },
             "tagName": "signature",
             "description": "open([options])",
-            "startingLine": 269
+            "startingLine": 270
           },
           {
             "tagDef": {
@@ -1774,7 +1796,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-            "startingLine": 270,
+            "startingLine": 271,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1799,7 +1821,7 @@
             },
             "tagName": "param",
             "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
-            "startingLine": 273,
+            "startingLine": 274,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1817,7 +1839,7 @@
             },
             "tagName": "description",
             "description": "  [en]Open menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]",
-            "startingLine": 276
+            "startingLine": 277
           }
         ],
         "tagsByName": {
@@ -1831,7 +1853,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 268
+                "startingLine": 269
               }
             ],
             "signature": [
@@ -1842,7 +1864,7 @@
                 },
                 "tagName": "signature",
                 "description": "open([options])",
-                "startingLine": 269
+                "startingLine": 270
               }
             ],
             "param": [
@@ -1859,7 +1881,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-                "startingLine": 270,
+                "startingLine": 271,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1884,7 +1906,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
-                "startingLine": 273,
+                "startingLine": 274,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1904,7 +1926,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Open menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]",
-                "startingLine": 276
+                "startingLine": 277
               }
             ],
             "name": {
@@ -1915,7 +1937,7 @@
                 },
                 "tagName": "signature",
                 "description": "open([options])",
-                "startingLine": 269
+                "startingLine": 270
               },
               "tagName": "name"
             }
@@ -1941,7 +1963,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-          "startingLine": 270,
+          "startingLine": 271,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1966,7 +1988,7 @@
           },
           "tagName": "param",
           "description": "[en]This function will be called after the menu has been opened.[/en]\n  [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]",
-          "startingLine": 273,
+          "startingLine": 274,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1990,8 +2012,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 282,
-      "endingLine": 294,
+      "startingLine": 283,
+      "endingLine": 295,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2004,7 +2026,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 282
+            "startingLine": 283
           },
           {
             "tagDef": {
@@ -2013,7 +2035,7 @@
             },
             "tagName": "signature",
             "description": "close([options])",
-            "startingLine": 283
+            "startingLine": 284
           },
           {
             "tagDef": {
@@ -2028,7 +2050,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-            "startingLine": 284,
+            "startingLine": 285,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -2053,7 +2075,7 @@
             },
             "tagName": "param",
             "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
-            "startingLine": 287,
+            "startingLine": 288,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -2071,7 +2093,7 @@
             },
             "tagName": "description",
             "description": "  [en]Close menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]",
-            "startingLine": 290
+            "startingLine": 291
           }
         ],
         "tagsByName": {
@@ -2085,7 +2107,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 282
+                "startingLine": 283
               }
             ],
             "signature": [
@@ -2096,7 +2118,7 @@
                 },
                 "tagName": "signature",
                 "description": "close([options])",
-                "startingLine": 283
+                "startingLine": 284
               }
             ],
             "param": [
@@ -2113,7 +2135,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-                "startingLine": 284,
+                "startingLine": 285,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -2138,7 +2160,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
-                "startingLine": 287,
+                "startingLine": 288,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -2158,7 +2180,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Close menu in collapse mode.[/en]\n  [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]",
-                "startingLine": 290
+                "startingLine": 291
               }
             ],
             "name": {
@@ -2169,7 +2191,7 @@
                 },
                 "tagName": "signature",
                 "description": "close([options])",
-                "startingLine": 283
+                "startingLine": 284
               },
               "tagName": "name"
             }
@@ -2195,7 +2217,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-          "startingLine": 284,
+          "startingLine": 285,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -2220,7 +2242,7 @@
           },
           "tagName": "param",
           "description": "[en]This function will be called after the menu has been closed.[/en]\n  [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]",
-          "startingLine": 287,
+          "startingLine": 288,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -2244,8 +2266,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 296,
-      "endingLine": 302,
+      "startingLine": 297,
+      "endingLine": 303,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2258,7 +2280,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 296
+            "startingLine": 297
           },
           {
             "tagDef": {
@@ -2267,7 +2289,7 @@
             },
             "tagName": "signature",
             "description": "getCurrentMode()",
-            "startingLine": 297
+            "startingLine": 298
           },
           {
             "tagDef": {
@@ -2282,7 +2304,7 @@
             },
             "tagName": "return",
             "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
-            "startingLine": 298,
+            "startingLine": 299,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2304,7 +2326,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 296
+                "startingLine": 297
               }
             ],
             "signature": [
@@ -2315,7 +2337,7 @@
                 },
                 "tagName": "signature",
                 "description": "getCurrentMode()",
-                "startingLine": 297
+                "startingLine": 298
               }
             ],
             "returns": [
@@ -2332,7 +2354,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
-                "startingLine": 298,
+                "startingLine": 299,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2351,7 +2373,7 @@
                 },
                 "tagName": "signature",
                 "description": "getCurrentMode()",
-                "startingLine": 297
+                "startingLine": 298
               },
               "tagName": "name"
             }
@@ -2376,7 +2398,7 @@
         },
         "tagName": "return",
         "description": "[en]Get current mode. Possible values are \"collapse\" or \"split\".[/en]\n  [ja]このons-splitter-side要素の現在のモードを返します。\"split\"かもしくは\"collapse\"のどちらかです。[/ja]",
-        "startingLine": 298,
+        "startingLine": 299,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -2399,8 +2421,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 100,
-      "endingLine": 108,
+      "startingLine": 101,
+      "endingLine": 109,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2413,7 +2435,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 100
+            "startingLine": 101
           },
           {
             "tagDef": {
@@ -2422,7 +2444,7 @@
             },
             "tagName": "name",
             "description": "animation",
-            "startingLine": 101
+            "startingLine": 102
           },
           {
             "tagDef": {
@@ -2430,7 +2452,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 102
+            "startingLine": 103
           },
           {
             "tagDef": {
@@ -2442,7 +2464,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 103,
+            "startingLine": 104,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2458,7 +2480,7 @@
             },
             "tagName": "description",
             "description": " [en]Specify the animation. Use one of \"overlay\", and \"default\".[/en]\n [ja]アニメーションを指定します。\"overlay\", \"default\"のいずれかを指定できます。[/ja]",
-            "startingLine": 104
+            "startingLine": 105
           }
         ],
         "tagsByName": {
@@ -2472,7 +2494,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 100
+                "startingLine": 101
               }
             ],
             "name": [
@@ -2483,7 +2505,7 @@
                 },
                 "tagName": "name",
                 "description": "animation",
-                "startingLine": 101
+                "startingLine": 102
               }
             ],
             "initonly": [
@@ -2493,7 +2515,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 102
+                "startingLine": 103
               }
             ],
             "type": [
@@ -2507,7 +2529,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 103,
+                "startingLine": 104,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2525,7 +2547,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Specify the animation. Use one of \"overlay\", and \"default\".[/en]\n [ja]アニメーションを指定します。\"overlay\", \"default\"のいずれかを指定できます。[/ja]",
-                "startingLine": 104
+                "startingLine": 105
               }
             ]
           },
@@ -2545,7 +2567,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 103,
+        "startingLine": 104,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -2567,8 +2589,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 110,
-      "endingLine": 117,
+      "startingLine": 111,
+      "endingLine": 118,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2581,7 +2603,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 110
+            "startingLine": 111
           },
           {
             "tagDef": {
@@ -2590,7 +2612,7 @@
             },
             "tagName": "name",
             "description": "animation-options",
-            "startingLine": 111
+            "startingLine": 112
           },
           {
             "tagDef": {
@@ -2602,7 +2624,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 112,
+            "startingLine": 113,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -2618,7 +2640,7 @@
             },
             "tagName": "description",
             "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
-            "startingLine": 113
+            "startingLine": 114
           }
         ],
         "tagsByName": {
@@ -2632,7 +2654,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 110
+                "startingLine": 111
               }
             ],
             "name": [
@@ -2643,7 +2665,7 @@
                 },
                 "tagName": "name",
                 "description": "animation-options",
-                "startingLine": 111
+                "startingLine": 112
               }
             ],
             "type": [
@@ -2657,7 +2679,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 112,
+                "startingLine": 113,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -2675,7 +2697,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
-                "startingLine": 113
+                "startingLine": 114
               }
             ]
           },
@@ -2694,7 +2716,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 112,
+        "startingLine": 113,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -2716,8 +2738,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 119,
-      "endingLine": 126,
+      "startingLine": 120,
+      "endingLine": 127,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2730,7 +2752,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 119
+            "startingLine": 120
           },
           {
             "tagDef": {
@@ -2739,7 +2761,7 @@
             },
             "tagName": "name",
             "description": "threshold-ratio-should-open",
-            "startingLine": 120
+            "startingLine": 121
           },
           {
             "tagDef": {
@@ -2751,7 +2773,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 121,
+            "startingLine": 122,
             "typeExpression": "Number",
             "type": {
               "type": "NameExpression",
@@ -2767,7 +2789,7 @@
             },
             "tagName": "description",
             "description": " [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
-            "startingLine": 122
+            "startingLine": 123
           }
         ],
         "tagsByName": {
@@ -2781,7 +2803,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 119
+                "startingLine": 120
               }
             ],
             "name": [
@@ -2792,7 +2814,7 @@
                 },
                 "tagName": "name",
                 "description": "threshold-ratio-should-open",
-                "startingLine": 120
+                "startingLine": 121
               }
             ],
             "type": [
@@ -2806,7 +2828,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 121,
+                "startingLine": 122,
                 "typeExpression": "Number",
                 "type": {
                   "type": "NameExpression",
@@ -2824,7 +2846,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
-                "startingLine": 122
+                "startingLine": 123
               }
             ]
           },
@@ -2843,7 +2865,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 121,
+        "startingLine": 122,
         "typeExpression": "Number",
         "type": {
           "type": "NameExpression",
@@ -2865,8 +2887,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 128,
-      "endingLine": 137,
+      "startingLine": 129,
+      "endingLine": 138,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2879,7 +2901,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 128
+            "startingLine": 129
           },
           {
             "tagDef": {
@@ -2888,7 +2910,7 @@
             },
             "tagName": "name",
             "description": "ons-destroy",
-            "startingLine": 129
+            "startingLine": 130
           },
           {
             "tagDef": {
@@ -2896,7 +2918,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 130
+            "startingLine": 131
           },
           {
             "tagDef": {
@@ -2904,7 +2926,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 131
+            "startingLine": 132
           },
           {
             "tagDef": {
@@ -2916,7 +2938,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 132,
+            "startingLine": 133,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -2932,7 +2954,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 133
+            "startingLine": 134
           }
         ],
         "tagsByName": {
@@ -2946,7 +2968,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 128
+                "startingLine": 129
               }
             ],
             "name": [
@@ -2957,7 +2979,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-destroy",
-                "startingLine": 129
+                "startingLine": 130
               }
             ],
             "initonly": [
@@ -2967,7 +2989,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 130
+                "startingLine": 131
               }
             ],
             "extensionOf": [
@@ -2977,7 +2999,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 131
+                "startingLine": 132
               }
             ],
             "type": [
@@ -2991,7 +3013,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 132,
+                "startingLine": 133,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -3009,7 +3031,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 133
+                "startingLine": 134
               }
             ]
           },
@@ -3030,7 +3052,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 132,
+        "startingLine": 133,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -3052,8 +3074,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 139,
-      "endingLine": 148,
+      "startingLine": 140,
+      "endingLine": 149,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3066,7 +3088,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 139
+            "startingLine": 140
           },
           {
             "tagDef": {
@@ -3075,7 +3097,7 @@
             },
             "tagName": "name",
             "description": "ons-preopen",
-            "startingLine": 140
+            "startingLine": 141
           },
           {
             "tagDef": {
@@ -3083,7 +3105,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 141
+            "startingLine": 142
           },
           {
             "tagDef": {
@@ -3091,7 +3113,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 142
+            "startingLine": 143
           },
           {
             "tagDef": {
@@ -3103,7 +3125,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 143,
+            "startingLine": 144,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -3119,7 +3141,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"preopen\" event is fired.[/en]\n [ja]\"preopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 144
+            "startingLine": 145
           }
         ],
         "tagsByName": {
@@ -3133,7 +3155,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 139
+                "startingLine": 140
               }
             ],
             "name": [
@@ -3144,7 +3166,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-preopen",
-                "startingLine": 140
+                "startingLine": 141
               }
             ],
             "initonly": [
@@ -3154,7 +3176,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 141
+                "startingLine": 142
               }
             ],
             "extensionOf": [
@@ -3164,7 +3186,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 142
+                "startingLine": 143
               }
             ],
             "type": [
@@ -3178,7 +3200,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 143,
+                "startingLine": 144,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -3196,7 +3218,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"preopen\" event is fired.[/en]\n [ja]\"preopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 144
+                "startingLine": 145
               }
             ]
           },
@@ -3217,7 +3239,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 143,
+        "startingLine": 144,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -3239,8 +3261,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 150,
-      "endingLine": 159,
+      "startingLine": 151,
+      "endingLine": 160,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3253,7 +3275,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 150
+            "startingLine": 151
           },
           {
             "tagDef": {
@@ -3262,7 +3284,7 @@
             },
             "tagName": "name",
             "description": "ons-preclose",
-            "startingLine": 151
+            "startingLine": 152
           },
           {
             "tagDef": {
@@ -3270,7 +3292,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 152
+            "startingLine": 153
           },
           {
             "tagDef": {
@@ -3278,7 +3300,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 153
+            "startingLine": 154
           },
           {
             "tagDef": {
@@ -3290,7 +3312,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 154,
+            "startingLine": 155,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -3306,7 +3328,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"preclose\" event is fired.[/en]\n [ja]\"preclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 155
+            "startingLine": 156
           }
         ],
         "tagsByName": {
@@ -3320,7 +3342,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 150
+                "startingLine": 151
               }
             ],
             "name": [
@@ -3331,7 +3353,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-preclose",
-                "startingLine": 151
+                "startingLine": 152
               }
             ],
             "initonly": [
@@ -3341,7 +3363,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 152
+                "startingLine": 153
               }
             ],
             "extensionOf": [
@@ -3351,7 +3373,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 153
+                "startingLine": 154
               }
             ],
             "type": [
@@ -3365,7 +3387,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 154,
+                "startingLine": 155,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -3383,7 +3405,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"preclose\" event is fired.[/en]\n [ja]\"preclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 155
+                "startingLine": 156
               }
             ]
           },
@@ -3404,7 +3426,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 154,
+        "startingLine": 155,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -3426,8 +3448,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 161,
-      "endingLine": 170,
+      "startingLine": 162,
+      "endingLine": 171,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3440,7 +3462,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 161
+            "startingLine": 162
           },
           {
             "tagDef": {
@@ -3449,7 +3471,7 @@
             },
             "tagName": "name",
             "description": "ons-postopen",
-            "startingLine": 162
+            "startingLine": 163
           },
           {
             "tagDef": {
@@ -3457,7 +3479,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 163
+            "startingLine": 164
           },
           {
             "tagDef": {
@@ -3465,7 +3487,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 164
+            "startingLine": 165
           },
           {
             "tagDef": {
@@ -3477,7 +3499,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 165,
+            "startingLine": 166,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -3493,7 +3515,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"postopen\" event is fired.[/en]\n [ja]\"postopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 166
+            "startingLine": 167
           }
         ],
         "tagsByName": {
@@ -3507,7 +3529,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 161
+                "startingLine": 162
               }
             ],
             "name": [
@@ -3518,7 +3540,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-postopen",
-                "startingLine": 162
+                "startingLine": 163
               }
             ],
             "extensionOf": [
@@ -3528,7 +3550,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 163
+                "startingLine": 164
               }
             ],
             "initonly": [
@@ -3538,7 +3560,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 164
+                "startingLine": 165
               }
             ],
             "type": [
@@ -3552,7 +3574,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 165,
+                "startingLine": 166,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -3570,7 +3592,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"postopen\" event is fired.[/en]\n [ja]\"postopen\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 166
+                "startingLine": 167
               }
             ]
           },
@@ -3591,7 +3613,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 165,
+        "startingLine": 166,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -3613,8 +3635,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 172,
-      "endingLine": 181,
+      "startingLine": 173,
+      "endingLine": 182,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3627,7 +3649,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 172
+            "startingLine": 173
           },
           {
             "tagDef": {
@@ -3636,7 +3658,7 @@
             },
             "tagName": "name",
             "description": "ons-postclose",
-            "startingLine": 173
+            "startingLine": 174
           },
           {
             "tagDef": {
@@ -3644,7 +3666,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 174
+            "startingLine": 175
           },
           {
             "tagDef": {
@@ -3652,7 +3674,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 175
+            "startingLine": 176
           },
           {
             "tagDef": {
@@ -3664,7 +3686,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 176,
+            "startingLine": 177,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -3680,7 +3702,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"postclose\" event is fired.[/en]\n [ja]\"postclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 177
+            "startingLine": 178
           }
         ],
         "tagsByName": {
@@ -3694,7 +3716,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 172
+                "startingLine": 173
               }
             ],
             "name": [
@@ -3705,7 +3727,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-postclose",
-                "startingLine": 173
+                "startingLine": 174
               }
             ],
             "extensionOf": [
@@ -3715,7 +3737,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 174
+                "startingLine": 175
               }
             ],
             "initonly": [
@@ -3725,7 +3747,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 175
+                "startingLine": 176
               }
             ],
             "type": [
@@ -3739,7 +3761,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 176,
+                "startingLine": 177,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -3757,7 +3779,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"postclose\" event is fired.[/en]\n [ja]\"postclose\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 177
+                "startingLine": 178
               }
             ]
           },
@@ -3778,7 +3800,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 176,
+        "startingLine": 177,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -3800,8 +3822,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 183,
-      "endingLine": 200,
+      "startingLine": 184,
+      "endingLine": 201,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3814,7 +3836,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 183
+            "startingLine": 184
           },
           {
             "tagDef": {
@@ -3823,7 +3845,7 @@
             },
             "tagName": "name",
             "description": "collapse",
-            "startingLine": 184
+            "startingLine": 185
           },
           {
             "tagDef": {
@@ -3835,7 +3857,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 185,
+            "startingLine": 186,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -3851,7 +3873,7 @@
             },
             "tagName": "description",
             "description": "  [en]\n    Specify the collapse behavior. Valid values are \"portrait\", \"landscape\" or a media query.\n    \"portrait\" or \"landscape\" means the view will collapse when device is in landscape or portrait orientation.\n    If the value is a media query, the view will collapse when the media query is true.\n    If the value is not defined, the view always be in \"collapse\" mode.\n  [/en]\n  [ja]\n    左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。\n    portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。\n    メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。\n    値に何も指定しない場合には、常にcollapseモードになります。\n  [/ja]",
-            "startingLine": 186
+            "startingLine": 187
           }
         ],
         "tagsByName": {
@@ -3865,7 +3887,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 183
+                "startingLine": 184
               }
             ],
             "name": [
@@ -3876,7 +3898,7 @@
                 },
                 "tagName": "name",
                 "description": "collapse",
-                "startingLine": 184
+                "startingLine": 185
               }
             ],
             "type": [
@@ -3890,7 +3912,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 185,
+                "startingLine": 186,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -3908,7 +3930,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]\n    Specify the collapse behavior. Valid values are \"portrait\", \"landscape\" or a media query.\n    \"portrait\" or \"landscape\" means the view will collapse when device is in landscape or portrait orientation.\n    If the value is a media query, the view will collapse when the media query is true.\n    If the value is not defined, the view always be in \"collapse\" mode.\n  [/en]\n  [ja]\n    左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。\n    portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。\n    メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。\n    値に何も指定しない場合には、常にcollapseモードになります。\n  [/ja]",
-                "startingLine": 186
+                "startingLine": 187
               }
             ]
           },
@@ -3927,7 +3949,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 185,
+        "startingLine": 186,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -3949,8 +3971,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 202,
-      "endingLine": 209,
+      "startingLine": 203,
+      "endingLine": 210,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3963,7 +3985,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 202
+            "startingLine": 203
           },
           {
             "tagDef": {
@@ -3972,7 +3994,7 @@
             },
             "tagName": "name",
             "description": "swipe-target-width",
-            "startingLine": 203
+            "startingLine": 204
           },
           {
             "tagDef": {
@@ -3984,7 +4006,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 204,
+            "startingLine": 205,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4000,7 +4022,7 @@
             },
             "tagName": "description",
             "description": "  [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]\n  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]",
-            "startingLine": 205
+            "startingLine": 206
           }
         ],
         "tagsByName": {
@@ -4014,7 +4036,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 202
+                "startingLine": 203
               }
             ],
             "name": [
@@ -4025,7 +4047,7 @@
                 },
                 "tagName": "name",
                 "description": "swipe-target-width",
-                "startingLine": 203
+                "startingLine": 204
               }
             ],
             "type": [
@@ -4039,7 +4061,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 204,
+                "startingLine": 205,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4057,7 +4079,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]\n  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]",
-                "startingLine": 205
+                "startingLine": 206
               }
             ]
           },
@@ -4076,7 +4098,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 204,
+        "startingLine": 205,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4098,8 +4120,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 211,
-      "endingLine": 218,
+      "startingLine": 212,
+      "endingLine": 219,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4112,7 +4134,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 211
+            "startingLine": 212
           },
           {
             "tagDef": {
@@ -4121,7 +4143,7 @@
             },
             "tagName": "name",
             "description": "width",
-            "startingLine": 212
+            "startingLine": 213
           },
           {
             "tagDef": {
@@ -4133,7 +4155,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 213,
+            "startingLine": 214,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4149,7 +4171,7 @@
             },
             "tagName": "description",
             "description": "  [en]Can be specified in either pixels or as a percentage, e.g. \"90%\" or \"200px\".[/en]\n  [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]",
-            "startingLine": 214
+            "startingLine": 215
           }
         ],
         "tagsByName": {
@@ -4163,7 +4185,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 211
+                "startingLine": 212
               }
             ],
             "name": [
@@ -4174,7 +4196,7 @@
                 },
                 "tagName": "name",
                 "description": "width",
-                "startingLine": 212
+                "startingLine": 213
               }
             ],
             "type": [
@@ -4188,7 +4210,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 213,
+                "startingLine": 214,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4206,7 +4228,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Can be specified in either pixels or as a percentage, e.g. \"90%\" or \"200px\".[/en]\n  [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]",
-                "startingLine": 214
+                "startingLine": 215
               }
             ]
           },
@@ -4225,7 +4247,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 213,
+        "startingLine": 214,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4247,8 +4269,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 220,
-      "endingLine": 227,
+      "startingLine": 221,
+      "endingLine": 228,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4261,7 +4283,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 220
+            "startingLine": 221
           },
           {
             "tagDef": {
@@ -4270,7 +4292,7 @@
             },
             "tagName": "name",
             "description": "side",
-            "startingLine": 221
+            "startingLine": 222
           },
           {
             "tagDef": {
@@ -4282,7 +4304,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 222,
+            "startingLine": 223,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4298,7 +4320,7 @@
             },
             "tagName": "description",
             "description": "  [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are \"left\" and \"right\".[/en]\n  [ja]この要素が左か右かを指定します。指定できる値は\"left\"か\"right\"のみです。[/ja]",
-            "startingLine": 223
+            "startingLine": 224
           }
         ],
         "tagsByName": {
@@ -4312,7 +4334,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 220
+                "startingLine": 221
               }
             ],
             "name": [
@@ -4323,7 +4345,7 @@
                 },
                 "tagName": "name",
                 "description": "side",
-                "startingLine": 221
+                "startingLine": 222
               }
             ],
             "type": [
@@ -4337,7 +4359,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 222,
+                "startingLine": 223,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4355,7 +4377,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are \"left\" and \"right\".[/en]\n  [ja]この要素が左か右かを指定します。指定できる値は\"left\"か\"right\"のみです。[/ja]",
-                "startingLine": 223
+                "startingLine": 224
               }
             ]
           },
@@ -4374,7 +4396,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 222,
+        "startingLine": 223,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4396,8 +4418,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 229,
-      "endingLine": 236,
+      "startingLine": 230,
+      "endingLine": 237,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4410,7 +4432,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 229
+            "startingLine": 230
           },
           {
             "tagDef": {
@@ -4419,7 +4441,7 @@
             },
             "tagName": "name",
             "description": "mode",
-            "startingLine": 230
+            "startingLine": 231
           },
           {
             "tagDef": {
@@ -4431,7 +4453,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 231,
+            "startingLine": 232,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4447,7 +4469,7 @@
             },
             "tagName": "description",
             "description": "  [en]Current mode. Possible values are \"collapse\" or \"split\". This attribute is read only.[/en]\n  [ja]現在のモードが設定されます。\"collapse\"もしくは\"split\"が指定されます。この属性は読み込み専用です。[/ja]",
-            "startingLine": 232
+            "startingLine": 233
           }
         ],
         "tagsByName": {
@@ -4461,7 +4483,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 229
+                "startingLine": 230
               }
             ],
             "name": [
@@ -4472,7 +4494,7 @@
                 },
                 "tagName": "name",
                 "description": "mode",
-                "startingLine": 230
+                "startingLine": 231
               }
             ],
             "type": [
@@ -4486,7 +4508,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 231,
+                "startingLine": 232,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4504,7 +4526,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Current mode. Possible values are \"collapse\" or \"split\". This attribute is read only.[/en]\n  [ja]現在のモードが設定されます。\"collapse\"もしくは\"split\"が指定されます。この属性は読み込み専用です。[/ja]",
-                "startingLine": 232
+                "startingLine": 233
               }
             ]
           },
@@ -4523,7 +4545,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 231,
+        "startingLine": 232,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4545,8 +4567,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 238,
-      "endingLine": 246,
+      "startingLine": 239,
+      "endingLine": 247,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4559,7 +4581,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 238
+            "startingLine": 239
           },
           {
             "tagDef": {
@@ -4568,7 +4590,7 @@
             },
             "tagName": "name",
             "description": "page",
-            "startingLine": 239
+            "startingLine": 240
           },
           {
             "tagDef": {
@@ -4576,7 +4598,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 240
+            "startingLine": 241
           },
           {
             "tagDef": {
@@ -4588,7 +4610,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 241,
+            "startingLine": 242,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4604,7 +4626,7 @@
             },
             "tagName": "description",
             "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
-            "startingLine": 242
+            "startingLine": 243
           }
         ],
         "tagsByName": {
@@ -4618,7 +4640,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 238
+                "startingLine": 239
               }
             ],
             "name": [
@@ -4629,7 +4651,7 @@
                 },
                 "tagName": "name",
                 "description": "page",
-                "startingLine": 239
+                "startingLine": 240
               }
             ],
             "initonly": [
@@ -4639,7 +4661,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 240
+                "startingLine": 241
               }
             ],
             "type": [
@@ -4653,7 +4675,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 241,
+                "startingLine": 242,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4671,7 +4693,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
-                "startingLine": 242
+                "startingLine": 243
               }
             ]
           },
@@ -4691,7 +4713,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 241,
+        "startingLine": 242,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4713,8 +4735,8 @@
         "baseName": "splitterSide",
         "extension": "js"
       },
-      "startingLine": 248,
-      "endingLine": 255,
+      "startingLine": 249,
+      "endingLine": 256,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4727,7 +4749,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 248
+            "startingLine": 249
           },
           {
             "tagDef": {
@@ -4736,7 +4758,7 @@
             },
             "tagName": "name",
             "description": "swipeable",
-            "startingLine": 249
+            "startingLine": 250
           },
           {
             "tagDef": {
@@ -4748,7 +4770,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 250,
+            "startingLine": 251,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -4764,7 +4786,7 @@
             },
             "tagName": "description",
             "description": "  [en]Whether to enable swipe interaction on collapse mode.[/en]\n  [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]",
-            "startingLine": 251
+            "startingLine": 252
           }
         ],
         "tagsByName": {
@@ -4778,7 +4800,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 248
+                "startingLine": 249
               }
             ],
             "name": [
@@ -4789,7 +4811,7 @@
                 },
                 "tagName": "name",
                 "description": "swipeable",
-                "startingLine": 249
+                "startingLine": 250
               }
             ],
             "type": [
@@ -4803,7 +4825,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 250,
+                "startingLine": 251,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -4821,7 +4843,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Whether to enable swipe interaction on collapse mode.[/en]\n  [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]",
-                "startingLine": 251
+                "startingLine": 252
               }
             ]
           },
@@ -4840,7 +4862,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 250,
+        "startingLine": 251,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",

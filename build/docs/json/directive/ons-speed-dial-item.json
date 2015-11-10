@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 24,
+  "endingLine": 25,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,13 +56,21 @@
       },
       {
         "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "dYQYLg",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
           "name": "seealso",
           "multi": true,
           "docProperty": "seealsos"
         },
         "tagName": "seealso",
         "description": "ons-speed-dial\n  [en]ons-speed-dial component[/en]\n  [ja]ons-speed-dialコンポーネント[/ja]",
-        "startingLine": 8
+        "startingLine": 9
       },
       {
         "tagDef": {
@@ -72,7 +80,7 @@
         },
         "tagName": "example",
         "description": "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>",
-        "startingLine": 11
+        "startingLine": 12
       }
     ],
     "tagsByName": {
@@ -132,6 +140,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "dYQYLg",
+            "startingLine": 8
+          }
+        ],
         "seealso": [
           {
             "tagDef": {
@@ -141,7 +159,7 @@
             },
             "tagName": "seealso",
             "description": "ons-speed-dial\n  [en]ons-speed-dial component[/en]\n  [ja]ons-speed-dialコンポーネント[/ja]",
-            "startingLine": 8
+            "startingLine": 9
           }
         ],
         "example": [
@@ -153,7 +171,7 @@
             },
             "tagName": "example",
             "description": "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>",
-            "startingLine": 11
+            "startingLine": 12
           }
         ]
       },
@@ -161,6 +179,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "dYQYLg",
+    "isWide": false
   },
   "seealsos": [
     {

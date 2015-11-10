@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 17,
+  "endingLine": 18,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,12 +56,10 @@
       },
       {
         "tagDef": {
-          "name": "guide",
-          "multi": true,
-          "docProperty": "guides"
+          "name": "codepen"
         },
-        "tagName": "guide",
-        "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+        "tagName": "codepen",
+        "description": "ojQxLj",
         "startingLine": 8
       },
       {
@@ -71,8 +69,18 @@
           "docProperty": "guides"
         },
         "tagName": "guide",
+        "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+        "startingLine": 9
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
         "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
-        "startingLine": 11
+        "startingLine": 12
       },
       {
         "tagDef": {
@@ -82,7 +90,7 @@
         },
         "tagName": "example",
         "description": "<ons-material-input label=\"Username\"></ons-material-input>",
-        "startingLine": 14
+        "startingLine": 15
       }
     ],
     "tagsByName": {
@@ -142,6 +150,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "ojQxLj",
+            "startingLine": 8
+          }
+        ],
         "guide": [
           {
             "tagDef": {
@@ -151,7 +169,7 @@
             },
             "tagName": "guide",
             "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
-            "startingLine": 8
+            "startingLine": 9
           },
           {
             "tagDef": {
@@ -161,7 +179,7 @@
             },
             "tagName": "guide",
             "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
-            "startingLine": 11
+            "startingLine": 12
           }
         ],
         "example": [
@@ -173,7 +191,7 @@
             },
             "tagName": "example",
             "description": "<ons-material-input label=\"Username\"></ons-material-input>",
-            "startingLine": 14
+            "startingLine": 15
           }
         ]
       },
@@ -181,6 +199,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "ojQxLj",
+    "isWide": false
   },
   "guides": [
     {
@@ -221,8 +243,8 @@
         "baseName": "materialInput",
         "extension": "js"
       },
-      "startingLine": 19,
-      "endingLine": 26,
+      "startingLine": 20,
+      "endingLine": 27,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -235,7 +257,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 19
+            "startingLine": 20
           },
           {
             "tagDef": {
@@ -244,7 +266,7 @@
             },
             "tagName": "name",
             "description": "label",
-            "startingLine": 20
+            "startingLine": 21
           },
           {
             "tagDef": {
@@ -256,7 +278,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 21,
+            "startingLine": 22,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -272,7 +294,7 @@
             },
             "tagName": "description",
             "description": "  [en]Text for animated floating label.[/en]\n  [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]",
-            "startingLine": 22
+            "startingLine": 23
           }
         ],
         "tagsByName": {
@@ -286,7 +308,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 19
+                "startingLine": 20
               }
             ],
             "name": [
@@ -297,7 +319,7 @@
                 },
                 "tagName": "name",
                 "description": "label",
-                "startingLine": 20
+                "startingLine": 21
               }
             ],
             "type": [
@@ -311,7 +333,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 21,
+                "startingLine": 22,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -329,7 +351,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Text for animated floating label.[/en]\n  [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]",
-                "startingLine": 22
+                "startingLine": 23
               }
             ]
           },
@@ -348,7 +370,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 21,
+        "startingLine": 22,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -370,8 +392,8 @@
         "baseName": "materialInput",
         "extension": "js"
       },
-      "startingLine": 28,
-      "endingLine": 34,
+      "startingLine": 29,
+      "endingLine": 35,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -384,7 +406,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 28
+            "startingLine": 29
           },
           {
             "tagDef": {
@@ -393,7 +415,7 @@
             },
             "tagName": "name",
             "description": "no-float",
-            "startingLine": 29
+            "startingLine": 30
           },
           {
             "tagDef": {
@@ -401,7 +423,7 @@
             },
             "tagName": "description",
             "description": " [en]If this attribute is present, the label will not be animated.[/en]\n [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]",
-            "startingLine": 30
+            "startingLine": 31
           }
         ],
         "tagsByName": {
@@ -415,7 +437,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 28
+                "startingLine": 29
               }
             ],
             "name": [
@@ -426,7 +448,7 @@
                 },
                 "tagName": "name",
                 "description": "no-float",
-                "startingLine": 29
+                "startingLine": 30
               }
             ],
             "description": [
@@ -436,7 +458,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]If this attribute is present, the label will not be animated.[/en]\n [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]",
-                "startingLine": 30
+                "startingLine": 31
               }
             ]
           },
@@ -457,8 +479,8 @@
         "baseName": "materialInput",
         "extension": "js"
       },
-      "startingLine": 36,
-      "endingLine": 43,
+      "startingLine": 37,
+      "endingLine": 44,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -471,7 +493,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 36
+            "startingLine": 37
           },
           {
             "tagDef": {
@@ -480,7 +502,7 @@
             },
             "tagName": "name",
             "description": "ng-model",
-            "startingLine": 37
+            "startingLine": 38
           },
           {
             "tagDef": {
@@ -488,7 +510,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 38
+            "startingLine": 39
           },
           {
             "tagDef": {
@@ -496,7 +518,7 @@
             },
             "tagName": "description",
             "description": "  [en]Bind the value to a model. Works just like for normal input elements.[/en]\n  [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]",
-            "startingLine": 39
+            "startingLine": 40
           }
         ],
         "tagsByName": {
@@ -510,7 +532,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 36
+                "startingLine": 37
               }
             ],
             "name": [
@@ -521,7 +543,7 @@
                 },
                 "tagName": "name",
                 "description": "ng-model",
-                "startingLine": 37
+                "startingLine": 38
               }
             ],
             "extensionOf": [
@@ -531,7 +553,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 38
+                "startingLine": 39
               }
             ],
             "description": [
@@ -541,7 +563,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Bind the value to a model. Works just like for normal input elements.[/en]\n  [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]",
-                "startingLine": 39
+                "startingLine": 40
               }
             ]
           },
@@ -563,8 +585,8 @@
         "baseName": "materialInput",
         "extension": "js"
       },
-      "startingLine": 45,
-      "endingLine": 52,
+      "startingLine": 46,
+      "endingLine": 53,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -577,7 +599,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 45
+            "startingLine": 46
           },
           {
             "tagDef": {
@@ -586,7 +608,7 @@
             },
             "tagName": "name",
             "description": "ng-change",
-            "startingLine": 46
+            "startingLine": 47
           },
           {
             "tagDef": {
@@ -594,7 +616,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 47
+            "startingLine": 48
           },
           {
             "tagDef": {
@@ -602,7 +624,7 @@
             },
             "tagName": "description",
             "description": "  [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]\n  [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]",
-            "startingLine": 48
+            "startingLine": 49
           }
         ],
         "tagsByName": {
@@ -616,7 +638,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 45
+                "startingLine": 46
               }
             ],
             "name": [
@@ -627,7 +649,7 @@
                 },
                 "tagName": "name",
                 "description": "ng-change",
-                "startingLine": 46
+                "startingLine": 47
               }
             ],
             "extensionOf": [
@@ -637,7 +659,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 47
+                "startingLine": 48
               }
             ],
             "description": [
@@ -647,7 +669,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]\n  [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]",
-                "startingLine": 48
+                "startingLine": 49
               }
             ]
           },

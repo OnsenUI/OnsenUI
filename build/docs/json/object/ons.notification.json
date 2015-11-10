@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 18,
-  "endingLine": 48,
+  "endingLine": 54,
   "codeAncestors": [],
   "docType": "object",
   "tags": {
@@ -61,7 +61,7 @@
           "docProperty": "examples"
         },
         "tagName": "example",
-        "description": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
+        "description": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  // Show a Material Design alert dialog.\n  ons.notification.alert({\n   message: 'Hello, world!',\n   modifier: 'material'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
         "startingLine": 25
       }
     ],
@@ -130,7 +130,7 @@
               "docProperty": "examples"
             },
             "tagName": "example",
-            "description": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
+            "description": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  // Show a Material Design alert dialog.\n  ons.notification.alert({\n   message: 'Hello, world!',\n   modifier: 'material'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
             "startingLine": 25
           }
         ]
@@ -147,13 +147,13 @@
   "categories": [
     "dialog"
   ],
-  "example": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
+  "example": "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  // Show a Material Design alert dialog.\n  ons.notification.alert({\n   message: 'Hello, world!',\n   modifier: 'material'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>",
   "name": "ons.notification",
   "description": "[en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]\n  [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]",
   "area": "api",
   "module": "..",
   "examples": [
-    "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>"
+    "<script>\n  ons.notification.alert({\n    message: 'Hello, world!'\n  });\n\n  // Show a Material Design alert dialog.\n  ons.notification.alert({\n   message: 'Hello, world!',\n   modifier: 'material'\n  });\n\n  ons.notification.confirm({\n    message: 'Are you ready?',\n    callback: function(answer) {\n      // Do something here.\n    }\n  });\n\n  ons.notification.prompt({\n    message: 'How old are you?',\n    callback: function(age) {\n      ons.notification.alert({\n        message: 'You are ' + age + ' years old.'\n      });\n    });\n  });\n</script>"
   ],
   "priority": 0,
   "codeName": "alert",
@@ -163,8 +163,8 @@
         "baseName": "notification",
         "extension": "js"
       },
-      "startingLine": 50,
-      "endingLine": 88,
+      "startingLine": 56,
+      "endingLine": 94,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -177,7 +177,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 50
+            "startingLine": 56
           },
           {
             "tagDef": {
@@ -186,7 +186,7 @@
             },
             "tagName": "signature",
             "description": "alert(options)",
-            "startingLine": 51
+            "startingLine": 57
           },
           {
             "tagDef": {
@@ -201,7 +201,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-            "startingLine": 52,
+            "startingLine": 58,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -225,7 +225,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert message.[/en]\n  [ja]アラートダイアログに表示する文字列を指定します。[/ja]",
-            "startingLine": 55,
+            "startingLine": 61,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -250,7 +250,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert message in HTML.[/en]\n  [ja]アラートダイアログに表示するHTMLを指定します。[/ja]",
-            "startingLine": 58,
+            "startingLine": 64,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -275,7 +275,7 @@
             },
             "tagName": "param",
             "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-            "startingLine": 61,
+            "startingLine": 67,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -300,7 +300,7 @@
             },
             "tagName": "param",
             "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アラートダイアログを表示する際のアニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定できます。[/ja]",
-            "startingLine": 64,
+            "startingLine": 70,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -325,7 +325,7 @@
             },
             "tagName": "param",
             "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]アラートダイアログの上部に表示するタイトルを指定します。\"Alert\"がデフォルトです。[/ja]",
-            "startingLine": 67,
+            "startingLine": 73,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -350,7 +350,7 @@
             },
             "tagName": "param",
             "description": "[en]Modifier for the dialog.[/en]\n  [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]",
-            "startingLine": 70,
+            "startingLine": 76,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -375,7 +375,7 @@
             },
             "tagName": "param",
             "description": "[en]Function that executes after dialog has been closed.[/en]\n  [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]",
-            "startingLine": 73,
+            "startingLine": 79,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -393,7 +393,7 @@
             },
             "tagName": "description",
             "description": "  [en]\n    Display an alert dialog to show the user a message.\n    The content of the message can be either simple text or HTML.\n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザーへメッセージを見せるためのアラートダイアログを表示します。\n    表示するメッセージは、テキストかもしくはHTMLを指定できます。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-            "startingLine": 76
+            "startingLine": 82
           }
         ],
         "tagsByName": {
@@ -407,7 +407,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 50
+                "startingLine": 56
               }
             ],
             "signature": [
@@ -418,7 +418,7 @@
                 },
                 "tagName": "signature",
                 "description": "alert(options)",
-                "startingLine": 51
+                "startingLine": 57
               }
             ],
             "param": [
@@ -435,7 +435,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-                "startingLine": 52,
+                "startingLine": 58,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -459,7 +459,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert message.[/en]\n  [ja]アラートダイアログに表示する文字列を指定します。[/ja]",
-                "startingLine": 55,
+                "startingLine": 61,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -484,7 +484,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert message in HTML.[/en]\n  [ja]アラートダイアログに表示するHTMLを指定します。[/ja]",
-                "startingLine": 58,
+                "startingLine": 64,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -509,7 +509,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-                "startingLine": 61,
+                "startingLine": 67,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -534,7 +534,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アラートダイアログを表示する際のアニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定できます。[/ja]",
-                "startingLine": 64,
+                "startingLine": 70,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -559,7 +559,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]アラートダイアログの上部に表示するタイトルを指定します。\"Alert\"がデフォルトです。[/ja]",
-                "startingLine": 67,
+                "startingLine": 73,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -584,7 +584,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Modifier for the dialog.[/en]\n  [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]",
-                "startingLine": 70,
+                "startingLine": 76,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -609,7 +609,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function that executes after dialog has been closed.[/en]\n  [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]",
-                "startingLine": 73,
+                "startingLine": 79,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -629,7 +629,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]\n    Display an alert dialog to show the user a message.\n    The content of the message can be either simple text or HTML.\n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザーへメッセージを見せるためのアラートダイアログを表示します。\n    表示するメッセージは、テキストかもしくはHTMLを指定できます。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-                "startingLine": 76
+                "startingLine": 82
               }
             ],
             "name": {
@@ -640,7 +640,7 @@
                 },
                 "tagName": "signature",
                 "description": "alert(options)",
-                "startingLine": 51
+                "startingLine": 57
               },
               "tagName": "name"
             }
@@ -666,7 +666,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-          "startingLine": 52,
+          "startingLine": 58,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -690,7 +690,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert message.[/en]\n  [ja]アラートダイアログに表示する文字列を指定します。[/ja]",
-          "startingLine": 55,
+          "startingLine": 61,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -715,7 +715,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert message in HTML.[/en]\n  [ja]アラートダイアログに表示するHTMLを指定します。[/ja]",
-          "startingLine": 58,
+          "startingLine": 64,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -740,7 +740,7 @@
           },
           "tagName": "param",
           "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-          "startingLine": 61,
+          "startingLine": 67,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -765,7 +765,7 @@
           },
           "tagName": "param",
           "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アラートダイアログを表示する際のアニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定できます。[/ja]",
-          "startingLine": 64,
+          "startingLine": 70,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -790,7 +790,7 @@
           },
           "tagName": "param",
           "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]アラートダイアログの上部に表示するタイトルを指定します。\"Alert\"がデフォルトです。[/ja]",
-          "startingLine": 67,
+          "startingLine": 73,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -815,7 +815,7 @@
           },
           "tagName": "param",
           "description": "[en]Modifier for the dialog.[/en]\n  [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]",
-          "startingLine": 70,
+          "startingLine": 76,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -840,7 +840,7 @@
           },
           "tagName": "param",
           "description": "[en]Function that executes after dialog has been closed.[/en]\n  [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]",
-          "startingLine": 73,
+          "startingLine": 79,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -864,8 +864,8 @@
         "baseName": "notification",
         "extension": "js"
       },
-      "startingLine": 90,
-      "endingLine": 140,
+      "startingLine": 96,
+      "endingLine": 146,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -878,7 +878,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 90
+            "startingLine": 96
           },
           {
             "tagDef": {
@@ -887,7 +887,7 @@
             },
             "tagName": "signature",
             "description": "confirm(options)",
-            "startingLine": 91
+            "startingLine": 97
           },
           {
             "tagDef": {
@@ -902,7 +902,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]",
-            "startingLine": 92,
+            "startingLine": 98,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -926,7 +926,7 @@
             },
             "tagName": "param",
             "description": "[en]Confirmation question.[/en]\n  [ja]確認ダイアログに表示するメッセージを指定します。[/ja]",
-            "startingLine": 94,
+            "startingLine": 100,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -951,7 +951,7 @@
             },
             "tagName": "param",
             "description": "[en]Dialog content in HTML.[/en]\n  [ja]確認ダイアログに表示するHTMLを指定します。[/ja]",
-            "startingLine": 97,
+            "startingLine": 103,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -976,7 +976,7 @@
             },
             "tagName": "param",
             "description": "[en]Labels for the buttons. Default is [\"Cancel\", \"OK\"].[/en]\n  [ja]ボタンのラベルの配列を指定します。[\"Cancel\", \"OK\"]がデフォルトです。[/ja]",
-            "startingLine": 100,
+            "startingLine": 106,
             "typeExpression": "Array",
             "type": {
               "type": "NameExpression",
@@ -1001,7 +1001,7 @@
             },
             "tagName": "param",
             "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-            "startingLine": 103,
+            "startingLine": 109,
             "typeExpression": "Number",
             "type": {
               "type": "NameExpression",
@@ -1026,7 +1026,7 @@
             },
             "tagName": "param",
             "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]",
-            "startingLine": 106,
+            "startingLine": 112,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -1051,7 +1051,7 @@
             },
             "tagName": "param",
             "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-            "startingLine": 109,
+            "startingLine": 115,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1076,7 +1076,7 @@
             },
             "tagName": "param",
             "description": "[en]Dialog title. Default is \"Confirm\".[/en]\n  [ja]ダイアログのタイトルを指定します。\"Confirm\"がデフォルトです。[/ja]",
-            "startingLine": 112,
+            "startingLine": 118,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1101,7 +1101,7 @@
             },
             "tagName": "param",
             "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-            "startingLine": 115,
+            "startingLine": 121,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1126,7 +1126,7 @@
             },
             "tagName": "param",
             "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。\n    この関数の引数として、押されたボタンのインデックス値が渡されます。\n    もしダイアログがキャンセルされた場合には-1が渡されます。\n  [/ja]",
-            "startingLine": 118,
+            "startingLine": 124,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1144,7 +1144,7 @@
             },
             "tagName": "description",
             "description": "  [en]\n    Display a dialog to ask the user for confirmation.\n    The default button labels are \"Cancel\" and \"OK\" but they can be customized.\n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザに確認を促すダイアログを表示します。\n    デオルとのボタンラベルは、\"Cancel\"と\"OK\"ですが、これはこのメソッドの引数でカスタマイズできます。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-            "startingLine": 128
+            "startingLine": 134
           }
         ],
         "tagsByName": {
@@ -1158,7 +1158,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 90
+                "startingLine": 96
               }
             ],
             "signature": [
@@ -1169,7 +1169,7 @@
                 },
                 "tagName": "signature",
                 "description": "confirm(options)",
-                "startingLine": 91
+                "startingLine": 97
               }
             ],
             "param": [
@@ -1186,7 +1186,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]",
-                "startingLine": 92,
+                "startingLine": 98,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1210,7 +1210,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Confirmation question.[/en]\n  [ja]確認ダイアログに表示するメッセージを指定します。[/ja]",
-                "startingLine": 94,
+                "startingLine": 100,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1235,7 +1235,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Dialog content in HTML.[/en]\n  [ja]確認ダイアログに表示するHTMLを指定します。[/ja]",
-                "startingLine": 97,
+                "startingLine": 103,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1260,7 +1260,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Labels for the buttons. Default is [\"Cancel\", \"OK\"].[/en]\n  [ja]ボタンのラベルの配列を指定します。[\"Cancel\", \"OK\"]がデフォルトです。[/ja]",
-                "startingLine": 100,
+                "startingLine": 106,
                 "typeExpression": "Array",
                 "type": {
                   "type": "NameExpression",
@@ -1285,7 +1285,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-                "startingLine": 103,
+                "startingLine": 109,
                 "typeExpression": "Number",
                 "type": {
                   "type": "NameExpression",
@@ -1310,7 +1310,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]",
-                "startingLine": 106,
+                "startingLine": 112,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -1335,7 +1335,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-                "startingLine": 109,
+                "startingLine": 115,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1360,7 +1360,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Dialog title. Default is \"Confirm\".[/en]\n  [ja]ダイアログのタイトルを指定します。\"Confirm\"がデフォルトです。[/ja]",
-                "startingLine": 112,
+                "startingLine": 118,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1385,7 +1385,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-                "startingLine": 115,
+                "startingLine": 121,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1410,7 +1410,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。\n    この関数の引数として、押されたボタンのインデックス値が渡されます。\n    もしダイアログがキャンセルされた場合には-1が渡されます。\n  [/ja]",
-                "startingLine": 118,
+                "startingLine": 124,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1430,7 +1430,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]\n    Display a dialog to ask the user for confirmation.\n    The default button labels are \"Cancel\" and \"OK\" but they can be customized.\n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザに確認を促すダイアログを表示します。\n    デオルとのボタンラベルは、\"Cancel\"と\"OK\"ですが、これはこのメソッドの引数でカスタマイズできます。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-                "startingLine": 128
+                "startingLine": 134
               }
             ],
             "name": {
@@ -1441,7 +1441,7 @@
                 },
                 "tagName": "signature",
                 "description": "confirm(options)",
-                "startingLine": 91
+                "startingLine": 97
               },
               "tagName": "name"
             }
@@ -1467,7 +1467,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]",
-          "startingLine": 92,
+          "startingLine": 98,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1491,7 +1491,7 @@
           },
           "tagName": "param",
           "description": "[en]Confirmation question.[/en]\n  [ja]確認ダイアログに表示するメッセージを指定します。[/ja]",
-          "startingLine": 94,
+          "startingLine": 100,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1516,7 +1516,7 @@
           },
           "tagName": "param",
           "description": "[en]Dialog content in HTML.[/en]\n  [ja]確認ダイアログに表示するHTMLを指定します。[/ja]",
-          "startingLine": 97,
+          "startingLine": 103,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1541,7 +1541,7 @@
           },
           "tagName": "param",
           "description": "[en]Labels for the buttons. Default is [\"Cancel\", \"OK\"].[/en]\n  [ja]ボタンのラベルの配列を指定します。[\"Cancel\", \"OK\"]がデフォルトです。[/ja]",
-          "startingLine": 100,
+          "startingLine": 106,
           "typeExpression": "Array",
           "type": {
             "type": "NameExpression",
@@ -1566,7 +1566,7 @@
           },
           "tagName": "param",
           "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-          "startingLine": 103,
+          "startingLine": 109,
           "typeExpression": "Number",
           "type": {
             "type": "NameExpression",
@@ -1591,7 +1591,7 @@
           },
           "tagName": "param",
           "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]",
-          "startingLine": 106,
+          "startingLine": 112,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -1616,7 +1616,7 @@
           },
           "tagName": "param",
           "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-          "startingLine": 109,
+          "startingLine": 115,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1641,7 +1641,7 @@
           },
           "tagName": "param",
           "description": "[en]Dialog title. Default is \"Confirm\".[/en]\n  [ja]ダイアログのタイトルを指定します。\"Confirm\"がデフォルトです。[/ja]",
-          "startingLine": 112,
+          "startingLine": 118,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1666,7 +1666,7 @@
           },
           "tagName": "param",
           "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-          "startingLine": 115,
+          "startingLine": 121,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1691,7 +1691,7 @@
           },
           "tagName": "param",
           "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。\n    この関数の引数として、押されたボタンのインデックス値が渡されます。\n    もしダイアログがキャンセルされた場合には-1が渡されます。\n  [/ja]",
-          "startingLine": 118,
+          "startingLine": 124,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1715,8 +1715,8 @@
         "baseName": "notification",
         "extension": "js"
       },
-      "startingLine": 142,
-      "endingLine": 202,
+      "startingLine": 148,
+      "endingLine": 208,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1729,7 +1729,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 142
+            "startingLine": 148
           },
           {
             "tagDef": {
@@ -1738,7 +1738,7 @@
             },
             "tagName": "signature",
             "description": "prompt(options)",
-            "startingLine": 143
+            "startingLine": 149
           },
           {
             "tagDef": {
@@ -1753,7 +1753,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-            "startingLine": 144,
+            "startingLine": 150,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1777,7 +1777,7 @@
             },
             "tagName": "param",
             "description": "[en]Prompt question.[/en]\n  [ja]ダイアログに表示するメッセージを指定します。[/ja]",
-            "startingLine": 147,
+            "startingLine": 153,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1802,7 +1802,7 @@
             },
             "tagName": "param",
             "description": "[en]Dialog content in HTML.[/en]\n  [ja]ダイアログに表示するHTMLを指定します。[/ja]",
-            "startingLine": 150,
+            "startingLine": 156,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1827,7 +1827,7 @@
             },
             "tagName": "param",
             "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-            "startingLine": 153,
+            "startingLine": 159,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1852,7 +1852,7 @@
             },
             "tagName": "param",
             "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-            "startingLine": 156,
+            "startingLine": 162,
             "typeExpression": "Number",
             "type": {
               "type": "NameExpression",
@@ -1877,7 +1877,7 @@
             },
             "tagName": "param",
             "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]",
-            "startingLine": 159,
+            "startingLine": 165,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -1902,7 +1902,7 @@
             },
             "tagName": "param",
             "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-            "startingLine": 162,
+            "startingLine": 168,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1927,7 +1927,7 @@
             },
             "tagName": "param",
             "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]ダイアログのタイトルを指定します。デフォルトは \"Alert\" です。[/ja]",
-            "startingLine": 165,
+            "startingLine": 171,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1952,7 +1952,7 @@
             },
             "tagName": "param",
             "description": "[en]Placeholder for the text input.[/en]\n  [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]",
-            "startingLine": 168,
+            "startingLine": 174,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1977,7 +1977,7 @@
             },
             "tagName": "param",
             "description": "[en]Default value for the text input.[/en]\n  [ja]テキスト欄のデフォルトの値を指定します。[/ja]",
-            "startingLine": 171,
+            "startingLine": 177,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2002,7 +2002,7 @@
             },
             "tagName": "param",
             "description": "[en]Autofocus the input element. Default is true.[/en]\n  [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]",
-            "startingLine": 174,
+            "startingLine": 180,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2027,7 +2027,7 @@
             },
             "tagName": "param",
             "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-            "startingLine": 177,
+            "startingLine": 183,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2052,7 +2052,7 @@
             },
             "tagName": "param",
             "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the value of the input field or null if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に実行される関数オブジェクトを指定します。\n    関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。\n  [/ja]",
-            "startingLine": 180,
+            "startingLine": 186,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -2077,7 +2077,7 @@
             },
             "tagName": "param",
             "description": "[en]Submit automatically when enter is pressed. Default is \"true\".[/en]\n  [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]",
-            "startingLine": 189,
+            "startingLine": 195,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2095,7 +2095,7 @@
             },
             "tagName": "description",
             "description": "  [en]\n    Display a dialog with a prompt to ask the user a question. \n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザーに入力を促すダイアログを表示します。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-            "startingLine": 192
+            "startingLine": 198
           }
         ],
         "tagsByName": {
@@ -2109,7 +2109,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 142
+                "startingLine": 148
               }
             ],
             "signature": [
@@ -2120,7 +2120,7 @@
                 },
                 "tagName": "signature",
                 "description": "prompt(options)",
-                "startingLine": 143
+                "startingLine": 149
               }
             ],
             "param": [
@@ -2137,7 +2137,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-                "startingLine": 144,
+                "startingLine": 150,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -2161,7 +2161,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Prompt question.[/en]\n  [ja]ダイアログに表示するメッセージを指定します。[/ja]",
-                "startingLine": 147,
+                "startingLine": 153,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2186,7 +2186,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Dialog content in HTML.[/en]\n  [ja]ダイアログに表示するHTMLを指定します。[/ja]",
-                "startingLine": 150,
+                "startingLine": 156,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2211,7 +2211,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-                "startingLine": 153,
+                "startingLine": 159,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2236,7 +2236,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-                "startingLine": 156,
+                "startingLine": 162,
                 "typeExpression": "Number",
                 "type": {
                   "type": "NameExpression",
@@ -2261,7 +2261,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]",
-                "startingLine": 159,
+                "startingLine": 165,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2286,7 +2286,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-                "startingLine": 162,
+                "startingLine": 168,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2311,7 +2311,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]ダイアログのタイトルを指定します。デフォルトは \"Alert\" です。[/ja]",
-                "startingLine": 165,
+                "startingLine": 171,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2336,7 +2336,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Placeholder for the text input.[/en]\n  [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]",
-                "startingLine": 168,
+                "startingLine": 174,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2361,7 +2361,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Default value for the text input.[/en]\n  [ja]テキスト欄のデフォルトの値を指定します。[/ja]",
-                "startingLine": 171,
+                "startingLine": 177,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2386,7 +2386,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Autofocus the input element. Default is true.[/en]\n  [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]",
-                "startingLine": 174,
+                "startingLine": 180,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2411,7 +2411,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-                "startingLine": 177,
+                "startingLine": 183,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2436,7 +2436,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the value of the input field or null if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に実行される関数オブジェクトを指定します。\n    関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。\n  [/ja]",
-                "startingLine": 180,
+                "startingLine": 186,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -2461,7 +2461,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Submit automatically when enter is pressed. Default is \"true\".[/en]\n  [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]",
-                "startingLine": 189,
+                "startingLine": 195,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2481,7 +2481,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]\n    Display a dialog with a prompt to ask the user a question. \n    Must specify either message or messageHTML.\n  [/en]\n  [ja]\n    ユーザーに入力を促すダイアログを表示します。\n    このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。\n  [/ja]",
-                "startingLine": 192
+                "startingLine": 198
               }
             ],
             "name": {
@@ -2492,7 +2492,7 @@
                 },
                 "tagName": "signature",
                 "description": "prompt(options)",
-                "startingLine": 143
+                "startingLine": 149
               },
               "tagName": "name"
             }
@@ -2518,7 +2518,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-          "startingLine": 144,
+          "startingLine": 150,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -2542,7 +2542,7 @@
           },
           "tagName": "param",
           "description": "[en]Prompt question.[/en]\n  [ja]ダイアログに表示するメッセージを指定します。[/ja]",
-          "startingLine": 147,
+          "startingLine": 153,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2567,7 +2567,7 @@
           },
           "tagName": "param",
           "description": "[en]Dialog content in HTML.[/en]\n  [ja]ダイアログに表示するHTMLを指定します。[/ja]",
-          "startingLine": 150,
+          "startingLine": 156,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2592,7 +2592,7 @@
           },
           "tagName": "param",
           "description": "[en]Label for confirmation button. Default is \"OK\".[/en]\n  [ja]確認ボタンのラベルを指定します。\"OK\"がデフォルトです。[/ja]",
-          "startingLine": 153,
+          "startingLine": 159,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2617,7 +2617,7 @@
           },
           "tagName": "param",
           "description": "[en]Index of primary button. Default is 1.[/en]\n  [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]",
-          "startingLine": 156,
+          "startingLine": 162,
           "typeExpression": "Number",
           "type": {
             "type": "NameExpression",
@@ -2642,7 +2642,7 @@
           },
           "tagName": "param",
           "description": "[en]Whether the dialog is cancelable or not. Default is false.[/en]\n  [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]",
-          "startingLine": 159,
+          "startingLine": 165,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -2667,7 +2667,7 @@
           },
           "tagName": "param",
           "description": "[en]Animation name. Available animations are \"none\", \"fade\" and \"slide\".[/en]\n  [ja]アニメーション名を指定します。\"none\", \"fade\", \"slide\"のいずれかを指定します。[/ja]",
-          "startingLine": 162,
+          "startingLine": 168,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2692,7 +2692,7 @@
           },
           "tagName": "param",
           "description": "[en]Dialog title. Default is \"Alert\".[/en]\n  [ja]ダイアログのタイトルを指定します。デフォルトは \"Alert\" です。[/ja]",
-          "startingLine": 165,
+          "startingLine": 171,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2717,7 +2717,7 @@
           },
           "tagName": "param",
           "description": "[en]Placeholder for the text input.[/en]\n  [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]",
-          "startingLine": 168,
+          "startingLine": 174,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2742,7 +2742,7 @@
           },
           "tagName": "param",
           "description": "[en]Default value for the text input.[/en]\n  [ja]テキスト欄のデフォルトの値を指定します。[/ja]",
-          "startingLine": 171,
+          "startingLine": 177,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2767,7 +2767,7 @@
           },
           "tagName": "param",
           "description": "[en]Autofocus the input element. Default is true.[/en]\n  [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]",
-          "startingLine": 174,
+          "startingLine": 180,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -2792,7 +2792,7 @@
           },
           "tagName": "param",
           "description": "[en]Modifier for the dialog.[/en]\n  [ja]ダイアログのmodifier属性の値を指定します。[/ja]",
-          "startingLine": 177,
+          "startingLine": 183,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2817,7 +2817,7 @@
           },
           "tagName": "param",
           "description": "[en]\n    Function that executes after the dialog has been closed.\n    Argument for the function is the value of the input field or null if the dialog was canceled.\n  [/en]\n  [ja]\n    ダイアログが閉じられた後に実行される関数オブジェクトを指定します。\n    関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。\n  [/ja]",
-          "startingLine": 180,
+          "startingLine": 186,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -2842,7 +2842,7 @@
           },
           "tagName": "param",
           "description": "[en]Submit automatically when enter is pressed. Default is \"true\".[/en]\n  [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]",
-          "startingLine": 189,
+          "startingLine": 195,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",

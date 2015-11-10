@@ -6541,6 +6541,7 @@ limitations under the License.
  * @description
  *  [en]Material Design input component.[/en]
  *  [ja]Material Designのinputコンポ―ネントです。[/ja]
+ * @codepen ojQxLj
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -7991,6 +7992,7 @@ limitations under the License.
  * @description
  *   [en]A material design progress component. Can be displayed both as a linear or circular progress indicator.[/en]
  *   [ja]マテリアルデザインのprgoressコンポーネントです。linearもしくはcircularなプログレスインジケータを表示できます。[/ja]
+ * @codepen VvVaZv
  * @example
  * <ons-progress
  *  type="circular"
@@ -8990,6 +8992,7 @@ limitations under the License.
  * @description
  *   [en]Element that displays a Material Design Speed Dialog component.[/en]
  *   [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]
+ * @codepen dYQYLg
  * @seealso ons-speed-dial-item
  *   [en]ons-speed-dial-item component[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]
@@ -9137,6 +9140,7 @@ limitations under the License.
  * @description
  *   [en]This component displays the child elements of the Material Design Speed dial component.[/en]
  *   [ja]Material DesignのSpeed dialの子要素を表現する要素です。[/ja]
+ * @codepen dYQYLg
  * @seealso ons-speed-dial
  *   [en]ons-speed-dial component[/en]
  *   [ja]ons-speed-dialコンポーネント[/ja]
@@ -9577,6 +9581,7 @@ limitations under the License.
  * @description
  *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
+ * @codepen rOQOML
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -9811,6 +9816,7 @@ limitations under the License.
  * @description
  *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
+ * @codepen rOQOML
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>
@@ -9906,6 +9912,7 @@ limitations under the License.
  * @description
  *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
+ * @codepen rOQOML
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>
@@ -11978,6 +11985,12 @@ limitations under the License.
  * <script>
  *   ons.notification.alert({
  *     message: 'Hello, world!'
+ *   });
+ *
+ *   // Show a Material Design alert dialog.
+ *   ons.notification.alert({
+ *    message: 'Hello, world!',
+ *    modifier: 'material'
  *   });
  *
  *   ons.notification.confirm({

@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 15,
+  "endingLine": 16,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,13 +56,21 @@
       },
       {
         "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "VvVaZv",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
           "name": "example",
           "multi": true,
           "docProperty": "examples"
         },
         "tagName": "example",
         "description": "<ons-progress\n type=\"circular\"\n value=\"55\"\n secondary-value=\"87\">\n</ons-progress>",
-        "startingLine": 8
+        "startingLine": 9
       }
     ],
     "tagsByName": {
@@ -122,6 +130,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "VvVaZv",
+            "startingLine": 8
+          }
+        ],
         "example": [
           {
             "tagDef": {
@@ -131,7 +149,7 @@
             },
             "tagName": "example",
             "description": "<ons-progress\n type=\"circular\"\n value=\"55\"\n secondary-value=\"87\">\n</ons-progress>",
-            "startingLine": 8
+            "startingLine": 9
           }
         ]
       },
@@ -139,6 +157,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "VvVaZv",
+    "isWide": false
   },
   "categories": [
     "progress"
@@ -169,8 +191,8 @@
         "baseName": "progress",
         "extension": "js"
       },
-      "startingLine": 17,
-      "endingLine": 25,
+      "startingLine": 18,
+      "endingLine": 26,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -183,7 +205,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 17
+            "startingLine": 18
           },
           {
             "tagDef": {
@@ -192,7 +214,7 @@
             },
             "tagName": "name",
             "description": "type",
-            "startingLine": 18
+            "startingLine": 19
           },
           {
             "tagDef": {
@@ -200,7 +222,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 19
+            "startingLine": 20
           },
           {
             "tagDef": {
@@ -212,7 +234,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 20,
+            "startingLine": 21,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -228,7 +250,7 @@
             },
             "tagName": "description",
             "description": "  [en]The type of indicator. Can be one of either \"bar\" or \"circular\". Defaults to \"bar\".[/en]\n  [ja]indicatorのタイプを指定します。\"bar\"もしくは\"circular\"を指定できます。デフォルトは\"bar\"です。[/ja]",
-            "startingLine": 21
+            "startingLine": 22
           }
         ],
         "tagsByName": {
@@ -242,7 +264,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 17
+                "startingLine": 18
               }
             ],
             "name": [
@@ -253,7 +275,7 @@
                 },
                 "tagName": "name",
                 "description": "type",
-                "startingLine": 18
+                "startingLine": 19
               }
             ],
             "initonly": [
@@ -263,7 +285,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 19
+                "startingLine": 20
               }
             ],
             "type": [
@@ -277,7 +299,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 20,
+                "startingLine": 21,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -295,7 +317,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]The type of indicator. Can be one of either \"bar\" or \"circular\". Defaults to \"bar\".[/en]\n  [ja]indicatorのタイプを指定します。\"bar\"もしくは\"circular\"を指定できます。デフォルトは\"bar\"です。[/ja]",
-                "startingLine": 21
+                "startingLine": 22
               }
             ]
           },
@@ -315,7 +337,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 20,
+        "startingLine": 21,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -337,8 +359,8 @@
         "baseName": "progress",
         "extension": "js"
       },
-      "startingLine": 27,
-      "endingLine": 34,
+      "startingLine": 28,
+      "endingLine": 35,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -351,7 +373,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 27
+            "startingLine": 28
           },
           {
             "tagDef": {
@@ -360,7 +382,7 @@
             },
             "tagName": "name",
             "description": "modifier",
-            "startingLine": 28
+            "startingLine": 29
           },
           {
             "tagDef": {
@@ -372,7 +394,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 29,
+            "startingLine": 30,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -388,7 +410,7 @@
             },
             "tagName": "description",
             "description": "  [en]Change the appearance of the progress indicator.[/en]\n  [ja]プログレスインジケータの見た目を変更します。[/ja]",
-            "startingLine": 30
+            "startingLine": 31
           }
         ],
         "tagsByName": {
@@ -402,7 +424,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 27
+                "startingLine": 28
               }
             ],
             "name": [
@@ -413,7 +435,7 @@
                 },
                 "tagName": "name",
                 "description": "modifier",
-                "startingLine": 28
+                "startingLine": 29
               }
             ],
             "type": [
@@ -427,7 +449,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 29,
+                "startingLine": 30,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -445,7 +467,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Change the appearance of the progress indicator.[/en]\n  [ja]プログレスインジケータの見た目を変更します。[/ja]",
-                "startingLine": 30
+                "startingLine": 31
               }
             ]
           },
@@ -464,7 +486,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 29,
+        "startingLine": 30,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -486,8 +508,8 @@
         "baseName": "progress",
         "extension": "js"
       },
-      "startingLine": 36,
-      "endingLine": 43,
+      "startingLine": 37,
+      "endingLine": 44,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -500,7 +522,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 36
+            "startingLine": 37
           },
           {
             "tagDef": {
@@ -509,7 +531,7 @@
             },
             "tagName": "name",
             "description": "value",
-            "startingLine": 37
+            "startingLine": 38
           },
           {
             "tagDef": {
@@ -521,7 +543,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 38,
+            "startingLine": 39,
             "typeExpression": "Number",
             "type": {
               "type": "NameExpression",
@@ -537,7 +559,7 @@
             },
             "tagName": "description",
             "description": "  [en]Current progress. Should be a value between 0 and 100.[/en]\n  [ja]現在の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]",
-            "startingLine": 39
+            "startingLine": 40
           }
         ],
         "tagsByName": {
@@ -551,7 +573,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 36
+                "startingLine": 37
               }
             ],
             "name": [
@@ -562,7 +584,7 @@
                 },
                 "tagName": "name",
                 "description": "value",
-                "startingLine": 37
+                "startingLine": 38
               }
             ],
             "type": [
@@ -576,7 +598,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 38,
+                "startingLine": 39,
                 "typeExpression": "Number",
                 "type": {
                   "type": "NameExpression",
@@ -594,7 +616,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Current progress. Should be a value between 0 and 100.[/en]\n  [ja]現在の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]",
-                "startingLine": 39
+                "startingLine": 40
               }
             ]
           },
@@ -613,7 +635,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 38,
+        "startingLine": 39,
         "typeExpression": "Number",
         "type": {
           "type": "NameExpression",
@@ -635,8 +657,8 @@
         "baseName": "progress",
         "extension": "js"
       },
-      "startingLine": 45,
-      "endingLine": 52,
+      "startingLine": 46,
+      "endingLine": 53,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -649,7 +671,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 45
+            "startingLine": 46
           },
           {
             "tagDef": {
@@ -658,7 +680,7 @@
             },
             "tagName": "name",
             "description": "secondary-value",
-            "startingLine": 46
+            "startingLine": 47
           },
           {
             "tagDef": {
@@ -670,7 +692,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 47,
+            "startingLine": 48,
             "typeExpression": "Number",
             "type": {
               "type": "NameExpression",
@@ -686,7 +708,7 @@
             },
             "tagName": "description",
             "description": "  [en]Current secondary progress. Should be a value between 0 and 100.[/en]\n  [ja]現在の２番目の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]",
-            "startingLine": 48
+            "startingLine": 49
           }
         ],
         "tagsByName": {
@@ -700,7 +722,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 45
+                "startingLine": 46
               }
             ],
             "name": [
@@ -711,7 +733,7 @@
                 },
                 "tagName": "name",
                 "description": "secondary-value",
-                "startingLine": 46
+                "startingLine": 47
               }
             ],
             "type": [
@@ -725,7 +747,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 47,
+                "startingLine": 48,
                 "typeExpression": "Number",
                 "type": {
                   "type": "NameExpression",
@@ -743,7 +765,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Current secondary progress. Should be a value between 0 and 100.[/en]\n  [ja]現在の２番目の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]",
-                "startingLine": 48
+                "startingLine": 49
               }
             ]
           },
@@ -762,7 +784,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 47,
+        "startingLine": 48,
         "typeExpression": "Number",
         "type": {
           "type": "NameExpression",
@@ -784,8 +806,8 @@
         "baseName": "progress",
         "extension": "js"
       },
-      "startingLine": 54,
-      "endingLine": 60,
+      "startingLine": 55,
+      "endingLine": 61,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -798,7 +820,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 54
+            "startingLine": 55
           },
           {
             "tagDef": {
@@ -807,7 +829,7 @@
             },
             "tagName": "name",
             "description": "indeterminate ",
-            "startingLine": 55
+            "startingLine": 56
           },
           {
             "tagDef": {
@@ -815,7 +837,7 @@
             },
             "tagName": "description",
             "description": "  [en]If this attribute is set, an infinite looping animation will be shown.[/en]\n  [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]",
-            "startingLine": 56
+            "startingLine": 57
           }
         ],
         "tagsByName": {
@@ -829,7 +851,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 54
+                "startingLine": 55
               }
             ],
             "name": [
@@ -840,7 +862,7 @@
                 },
                 "tagName": "name",
                 "description": "indeterminate ",
-                "startingLine": 55
+                "startingLine": 56
               }
             ],
             "description": [
@@ -850,7 +872,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]If this attribute is set, an infinite looping animation will be shown.[/en]\n  [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]",
-                "startingLine": 56
+                "startingLine": 57
               }
             ]
           },

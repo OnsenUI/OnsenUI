@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 19,
+  "endingLine": 20,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,13 +56,21 @@
       },
       {
         "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "rOQOML",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
           "name": "example",
           "multi": true,
           "docProperty": "examples"
         },
         "tagName": "example",
         "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
-        "startingLine": 8
+        "startingLine": 9
       }
     ],
     "tagsByName": {
@@ -122,6 +130,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "rOQOML",
+            "startingLine": 8
+          }
+        ],
         "example": [
           {
             "tagDef": {
@@ -131,7 +149,7 @@
             },
             "tagName": "example",
             "description": "<ons-splitter>\n  <ons-splitter-content>\n    ...\n  </ons-splitter-content>\n\n  <ons-splitter-side side=\"left\" width=\"80%\" collapse>\n    ...\n  </ons-splitter-side>\n</ons-splitter>",
-            "startingLine": 8
+            "startingLine": 9
           }
         ]
       },
@@ -139,6 +157,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "rOQOML",
+    "isWide": false
   },
   "categories": [
     "control"
@@ -168,8 +190,8 @@
         "baseName": "splitterContent",
         "extension": "js"
       },
-      "startingLine": 42,
-      "endingLine": 51,
+      "startingLine": 43,
+      "endingLine": 52,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -182,7 +204,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 42
+            "startingLine": 43
           },
           {
             "tagDef": {
@@ -191,7 +213,7 @@
             },
             "tagName": "signature",
             "description": "load(pageUrl)",
-            "startingLine": 43
+            "startingLine": 44
           },
           {
             "tagDef": {
@@ -206,7 +228,7 @@
             },
             "tagName": "param",
             "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-            "startingLine": 44,
+            "startingLine": 45,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -223,7 +245,7 @@
             },
             "tagName": "description",
             "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
-            "startingLine": 47
+            "startingLine": 48
           }
         ],
         "tagsByName": {
@@ -237,7 +259,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 42
+                "startingLine": 43
               }
             ],
             "signature": [
@@ -248,7 +270,7 @@
                 },
                 "tagName": "signature",
                 "description": "load(pageUrl)",
-                "startingLine": 43
+                "startingLine": 44
               }
             ],
             "param": [
@@ -265,7 +287,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-                "startingLine": 44,
+                "startingLine": 45,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -284,7 +306,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Show the page specified in pageUrl in the right section[/en]\n  [ja]指定したURLをメインページを読み込みます。[/ja]",
-                "startingLine": 47
+                "startingLine": 48
               }
             ],
             "name": {
@@ -295,7 +317,7 @@
                 },
                 "tagName": "signature",
                 "description": "load(pageUrl)",
-                "startingLine": 43
+                "startingLine": 44
               },
               "tagName": "name"
             }
@@ -321,7 +343,7 @@
           },
           "tagName": "param",
           "description": "[en]Page URL. Can be either an HTML document or an <ons-template>.[/en]\n  [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]",
-          "startingLine": 44,
+          "startingLine": 45,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -346,8 +368,8 @@
         "baseName": "splitterContent",
         "extension": "js"
       },
-      "startingLine": 21,
-      "endingLine": 30,
+      "startingLine": 22,
+      "endingLine": 31,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -360,7 +382,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 21
+            "startingLine": 22
           },
           {
             "tagDef": {
@@ -369,7 +391,7 @@
             },
             "tagName": "name",
             "description": "ons-destroy",
-            "startingLine": 22
+            "startingLine": 23
           },
           {
             "tagDef": {
@@ -377,7 +399,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 23
+            "startingLine": 24
           },
           {
             "tagDef": {
@@ -385,7 +407,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 24
+            "startingLine": 25
           },
           {
             "tagDef": {
@@ -397,7 +419,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 25,
+            "startingLine": 26,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -413,7 +435,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 26
+            "startingLine": 27
           }
         ],
         "tagsByName": {
@@ -427,7 +449,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 21
+                "startingLine": 22
               }
             ],
             "name": [
@@ -438,7 +460,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-destroy",
-                "startingLine": 22
+                "startingLine": 23
               }
             ],
             "extensionOf": [
@@ -448,7 +470,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 23
+                "startingLine": 24
               }
             ],
             "initonly": [
@@ -458,7 +480,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 24
+                "startingLine": 25
               }
             ],
             "type": [
@@ -472,7 +494,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 25,
+                "startingLine": 26,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -490,7 +512,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 26
+                "startingLine": 27
               }
             ]
           },
@@ -511,7 +533,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 25,
+        "startingLine": 26,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -533,8 +555,8 @@
         "baseName": "splitterContent",
         "extension": "js"
       },
-      "startingLine": 32,
-      "endingLine": 40,
+      "startingLine": 33,
+      "endingLine": 41,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -547,7 +569,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 32
+            "startingLine": 33
           },
           {
             "tagDef": {
@@ -556,7 +578,7 @@
             },
             "tagName": "name",
             "description": "page",
-            "startingLine": 33
+            "startingLine": 34
           },
           {
             "tagDef": {
@@ -564,7 +586,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 34
+            "startingLine": 35
           },
           {
             "tagDef": {
@@ -576,7 +598,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 35,
+            "startingLine": 36,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -592,7 +614,7 @@
             },
             "tagName": "description",
             "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
-            "startingLine": 36
+            "startingLine": 37
           }
         ],
         "tagsByName": {
@@ -606,7 +628,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 32
+                "startingLine": 33
               }
             ],
             "name": [
@@ -617,7 +639,7 @@
                 },
                 "tagName": "name",
                 "description": "page",
-                "startingLine": 33
+                "startingLine": 34
               }
             ],
             "initonly": [
@@ -627,7 +649,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 34
+                "startingLine": 35
               }
             ],
             "type": [
@@ -641,7 +663,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 35,
+                "startingLine": 36,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -659,7 +681,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]The url of the menu page.[/en]\n  [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]",
-                "startingLine": 36
+                "startingLine": 37
               }
             ]
           },
@@ -679,7 +701,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 35,
+        "startingLine": 36,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
