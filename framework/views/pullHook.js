@@ -260,6 +260,20 @@ limitations under the License.
       _translateTo: function(scroll, options) {
         options = options || {};
 
+        if (this._currentTranslation == 0 && scroll == 0) {
+          return;
+        }
+
+        var done = function() {
+          if (scroll === 0) {
+            this._scrollElement[0].removeAttribute('style');
+          }
+
+          if (options.callback) {
+            options.callback();
+          }
+        }.bind(this);
+
         this._currentTranslation = scroll;
 
         if (options.animate) {
@@ -270,14 +284,14 @@ limitations under the License.
               duration: 0.3,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .play(options.callback);
+            .play(done);
         }
         else {
           animit(this._scrollElement[0])
             .queue({
               transform: this._generateTranslationTransform(scroll)
             })
-            .play(options.callback);
+            .play(done);
         }
       },
 
