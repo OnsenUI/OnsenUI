@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.10 - 2015-11-09 */
+/*! angular-onsenui.js for onsenui - v2.0.0-alpha.11 - 2015-11-10 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
@@ -2949,7 +2949,7 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event.gesture.stopDetect();
+          this._deactivateGestureDetector();
         }
 
         switch (event.type) {
@@ -10018,10 +10018,10 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name threhold-ratio-should-open
+ * @name threshold-ratio-should-open
  * @type {Number}
  * @description
- *  [en][/en]
+ *  [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]
  *  [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]
  */
 

@@ -2738,7 +2738,7 @@
               "required": true
             },
             "tagName": "name",
-            "description": "threhold-ratio-should-open",
+            "description": "threshold-ratio-should-open",
             "startingLine": 120
           },
           {
@@ -2766,7 +2766,7 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": " [en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+            "description": " [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
             "startingLine": 122
           }
         ],
@@ -2791,7 +2791,7 @@
                   "required": true
                 },
                 "tagName": "name",
-                "description": "threhold-ratio-should-open",
+                "description": "threshold-ratio-should-open",
                 "startingLine": 120
               }
             ],
@@ -2823,7 +2823,7 @@
                   "name": "description"
                 },
                 "tagName": "description",
-                "description": " [en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+                "description": " [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
                 "startingLine": 122
               }
             ]
@@ -2853,8 +2853,8 @@
           "Number"
         ]
       },
-      "name": "threhold-ratio-should-open",
-      "description": "[en][/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
+      "name": "threshold-ratio-should-open",
+      "description": "[en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]\n [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]",
       "area": "api",
       "module": "..",
       "priority": 0,
