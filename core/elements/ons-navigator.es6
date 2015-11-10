@@ -28,6 +28,34 @@ limitations under the License.
   const util = ons._util;
   const NavigatorPage = ons._internal.NavigatorPage;
 
+  const _animatorDict = {
+    'default': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+    'slide': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+    'simpleslide': SimpleSlideNavigatorTransitionAnimator,
+    'lift': LiftNavigatorTransitionAnimator,
+    'fade': FadeNavigatorTransitionAnimator,
+    'none': NoneNavigatorTransitionAnimator
+  };
+
+  const rewritables = {
+    /**
+     * @param {Element} navigatorSideElement
+     * @param {Function} callback
+     */
+    ready(navigatorElement, callback) {
+      callback();
+    },
+
+    /**
+     * @param {Element} navigatorElement
+     * @param {Element} target
+     * @param {Function} callback
+     */
+    link(navigatorElement, target, callback) {
+      callback(target);
+    }
+  };
+
   class NavigatorElement extends ons._BaseElement {
 
     createdCallback() {
@@ -40,7 +68,7 @@ limitations under the License.
       this.innerHTML = '';
 
       this._animatorFactory = new AnimatorFactory({
-        animators: window.OnsNavigatorElement._transitionAnimatorDict,
+        animators: _animatorDict,
         baseClass: NavigatorTransitionAnimator,
         baseClassName: 'NavigatorTransitionAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -119,7 +147,7 @@ limitations under the License.
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
-            window.OnsNavigatorElement.rewritables.link(this, element, element => {
+            rewritables.link(this, element, element => {
               this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
               this._pages.splice(index, 0, pageObject);
 
@@ -208,7 +236,7 @@ limitations under the License.
           const element = this._createPageElement(templateHTML);
           const pageObject = this._createPageObject(page, element, options);
 
-          window.OnsNavigatorElement.rewritables.link(this, element, element => {
+          rewritables.link(this, element, element => {
             element.style.display = 'none';
             this.insertBefore(element, this._pages[index].element);
             this._pages.splice(index, 0, pageObject);
@@ -318,7 +346,7 @@ limitations under the License.
     attachedCallback() {
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
-      window.OnsNavigatorElement.rewritables.ready(this, () => {
+      rewritables.ready(this, () => {
         if (this._pages.length === 0) {
           if (!this.getAttribute('page')) {
             const element = this._createPageElement(this._initialHTML || '');
@@ -426,7 +454,7 @@ limitations under the License.
 
       this._isPushing = true;
 
-      window.OnsNavigatorElement.rewritables.link(this, element, element => {
+      rewritables.link(this, element, element => {
         CustomElements.upgrade(element);
 
         setTimeout(() => {
@@ -597,15 +625,6 @@ limitations under the License.
       prototype: NavigatorElement.prototype
     });
 
-    window.OnsNavigatorElement._transitionAnimatorDict = {
-      'default': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-      'slide': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-      'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-      'lift': LiftNavigatorTransitionAnimator,
-      'fade': FadeNavigatorTransitionAnimator,
-      'none': NoneNavigatorTransitionAnimator
-    };
-
     /**
      * @param {String} name
      * @param {Function} Animator
@@ -615,26 +634,9 @@ limitations under the License.
         throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }
 
-      this._transitionAnimatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
 
-    window.OnsNavigatorElement.rewritables = {
-      /**
-       * @param {Element} navigatorSideElement
-       * @param {Function} callback
-       */
-      ready(navigatorElement, callback) {
-        callback();
-      },
-
-      /**
-       * @param {Element} navigatorElement
-       * @param {Element} target
-       * @param {Function} callback
-       */
-      link(navigatorElement, target, callback) {
-        callback(target);
-      }
-    };
+    window.OnsNavigatorElement.rewritables = rewritables;
   }
 })();
