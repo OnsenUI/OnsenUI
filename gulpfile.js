@@ -75,7 +75,9 @@ gulp.task('core', function() {
     'core/lib/ons-platform.es6',
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
+    'core/elements/ons-template.es6',
     'core/elements/ons-splitter.es6',
+    'core/elements/ons-tab.es6',
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.{es6,js}',
   ])

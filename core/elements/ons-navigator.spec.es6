@@ -540,9 +540,7 @@ describe('OnsNavigatorElement', () => {
       class MyAnimator extends ons._internal.NavigatorTransitionAnimator {
       }
 
-      expect(window.OnsNavigatorElement._transitionAnimatorDict.hoge).not.to.be.ok;
       window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsNavigatorElement._transitionAnimatorDict.hoge).to.be.ok;
     });
   });
 });

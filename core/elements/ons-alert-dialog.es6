@@ -36,6 +36,13 @@ limitations under the License.
   const SlideDialogAnimator = ons._internal.SlideDialogAnimator;
   const AlertDialogAnimator = ons._internal.AlertDialogAnimator;
 
+  const _animatorDict = {
+    'default': ons.platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+    'fade': ons.platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+    'slide': SlideDialogAnimator,
+    'none': AlertDialogAnimator
+  };
+
   class AlertDialogElement extends ons._BaseElement {
 
     get _titleElement() {
@@ -57,7 +64,7 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
 
       this._animatorFactory = new AnimatorFactory({
-        animators: OnsAlertDialogElement._animatorDict,
+        animators: _animatorDict,
         baseClass: AlertDialogAnimator,
         baseClassName: 'AlertDialogAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -284,13 +291,6 @@ limitations under the License.
       prototype: AlertDialogElement.prototype
     });
 
-    window.OnsAlertDialogElement._animatorDict = {
-      'default': ons.platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-      'fade': ons.platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-      'slide': SlideDialogAnimator,
-      'none': AlertDialogAnimator
-    };
-
     /**
      * @param {String} name
      * @param {DialogAnimator} Animator
@@ -299,7 +299,7 @@ limitations under the License.
       if (!(Animator.prototype instanceof AlertDialogAnimator)) {
         throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
   }
 })();

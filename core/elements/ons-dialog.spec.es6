@@ -256,9 +256,7 @@ describe('OnsDialogElement', () => {
       class MyAnimator extends ons._internal.DialogAnimator {
       }
 
-      expect(window.OnsDialogElement._animatorDict.hoge).not.to.be.ok;
       window.OnsDialogElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsDialogElement._animatorDict.hoge).to.be.ok;
     });
   });
 });

@@ -29,6 +29,25 @@ limitations under the License.
     inactivate() {}
   }
 
+  const rewritables = {
+    /**
+     * @param {Element} splitterSideElement
+     * @param {Function} callback
+     */
+    ready(splitterSideElement, callback) {
+      setImmediate(callback);
+    },
+
+    /**
+     * @param {Element} splitterSideElement
+     * @param {HTMLFragment} target
+     * @param {Function} callback
+     */
+    link(splitterSideElement, target, callback) {
+      callback(target);
+    }
+  };
+
   class OrientationCollapseDetection extends CollapseDetection {
     /**
      * @param {String} orientation
@@ -724,7 +743,7 @@ limitations under the License.
 
       options.callback = options.callback instanceof Function ? options.callback : () => {};
       ons._internal.getPageHTMLAsync(page).then((html) => {
-        window.OnsSplitterSideElement.rewritables.link(this, util.createFragment(html), (fragment) => {
+        rewritables.link(this, util.createFragment(html), (fragment) => {
           while (this.childNodes[0]) {
             if (this.childNodes[0]._hide instanceof Function) {
               this.childNodes[0]._hide();
@@ -809,7 +828,7 @@ limitations under the License.
       this._updateForSwipeableAttribute();
 
       if (this.hasAttribute('page')) {
-        setImmediate(() => window.OnsSplitterSideElement.rewritables.ready(this, () => this.load(this.getAttribute('page'))));
+        setImmediate(() => rewritables.ready(this, () => this.load(this.getAttribute('page'))));
       }
     }
 
@@ -865,24 +884,7 @@ limitations under the License.
       prototype: SplitterSideElement.prototype
     });
 
-    window.OnsSplitterSideElement.rewritables = {
-      /**
-       * @param {Element} splitterSideElement
-       * @param {Function} callback
-       */
-      ready(splitterSideElement, callback) {
-        setImmediate(callback);
-      },
-
-      /**
-       * @param {Element} splitterSideElement
-       * @param {HTMLFragment} target
-       * @param {Function} callback
-       */
-      link(splitterSideElement, target, callback) {
-        callback(target);
-      }
-    };
+    window.OnsSplitterSideElement.rewritables = rewritables;
   }
 
 })();

@@ -29,12 +29,18 @@ limitations under the License.
   const ModifierUtil = ons._internal.ModifierUtil;
   const util = ons._util;
 
+  const _animatorDict = {
+    'default': ModalAnimator,
+    'fade': FadeModalAnimator,
+    'none': ModalAnimator
+  };
+
   class ModalElement extends ons._BaseElement {
 
     createdCallback() {
       this._doorLock = new DoorLock();
       this._animatorFactory = new AnimatorFactory({
-        animators: OnsModalElement._animatorDict,
+        animators: _animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -199,12 +205,6 @@ limitations under the License.
       prototype: ModalElement.prototype
     });
 
-    window.OnsModalElement._animatorDict = {
-      'default': ModalAnimator,
-      'fade': FadeModalAnimator,
-      'none': ModalAnimator
-    };
-
     /**
      * @param {String} name
      * @param {Function} Animator
@@ -213,7 +213,7 @@ limitations under the License.
       if (!(Animator.prototype instanceof ModalAnimator)) {
         throw new Error('"Animator" param must inherit ModalAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
   }
 })();
