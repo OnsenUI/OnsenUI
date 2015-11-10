@@ -6,6 +6,7 @@
  * @description
  *  [en]Material Design input component.[/en]
  *  [ja]Material Designのinputコンポ―ネントです。[/ja]
+ * @codepen ojQxLj
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
