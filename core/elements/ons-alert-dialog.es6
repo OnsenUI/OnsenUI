@@ -79,11 +79,6 @@ limitations under the License.
       this.style.display = 'none';
       this.style.zIndex = '20001';
       this.classList.add('alert-dialog');
-
-      if (ons.platform.isAndroid()) {
-        let modifier = this.hasAttribute('modifier') ? this.getAttribute('modifier') : '';
-        this.setAttribute('modifier', (modifier + ' android').trim());
-      }
     }
 
     /**
