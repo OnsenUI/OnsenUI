@@ -66,15 +66,6 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#_compile', () => {
-    it('should add \'android\' modifier on Android devices', () => {
-      ons.platform.select('android');
-      let dialog = new OnsAlertDialogElement();
-      expect(dialog.getAttribute('modifier')).to.equal('android');
-      ons.platform._renderPlatform = null;
-    });
-  });
-
   describe('#setDisabled()', () => {
     it('only accepts a boolean argument', () => {
       expect(() => dialog.setDisabled('hoge')).to.throw(Error);
