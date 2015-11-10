@@ -8,6 +8,10 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 // @version 0.7.3
+
+// Force use of polyfill to get proper behavior on all platforms.
+document.registerElement = undefined;
+
 if (typeof WeakMap === "undefined") {
   (function() {
     var defineProperty = Object.defineProperty;
