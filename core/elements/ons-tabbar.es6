@@ -32,6 +32,13 @@ limitations under the License.
   var ModifierUtil = ons._internal.ModifierUtil;
   var util = ons._util;
 
+  const _animatorDict = {
+    'default': TabbarNoneAnimator,
+    'fade': TabbarFadeAnimator,
+    'slide': TabbarSlideAnimator,
+    'none': TabbarNoneAnimator
+  };
+
   var generateId = (() => {
     var i = 0;
     return () => 'ons-tabbar-gen-' + (i++);
@@ -43,7 +50,7 @@ limitations under the License.
       this._tabbarId = generateId();
 
       this._animatorFactory = new AnimatorFactory({
-        animators: OnsTabbarElement._animatorDict,
+        animators: _animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
         defaultAnimation: this.getAttribute('animation')
@@ -423,13 +430,6 @@ limitations under the License.
       prototype: TabbarElement.prototype
     });
 
-    window.OnsTabbarElement._animatorDict = {
-      'default': TabbarNoneAnimator,
-      'fade': TabbarFadeAnimator,
-      'slide': TabbarSlideAnimator,
-      'none': TabbarNoneAnimator
-    };
-
     /**
      * @param {String} name
      * @param {Function} Animator
@@ -438,7 +438,7 @@ limitations under the License.
       if (!(Animator.prototype instanceof TabbarAnimator)) {
         throw new Error('"Animator" param must inherit TabbarAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
 
     window.OnsTabbarElement.rewritables = {

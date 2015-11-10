@@ -257,10 +257,7 @@ describe('OnsAlertDialogElement', () => {
     it('registers a new animator', () => {
       class MyAnimator extends ons._internal.AlertDialogAnimator {
       }
-
-      expect(window.OnsAlertDialogElement._animatorDict.hoge).not.to.be.ok;
       window.OnsAlertDialogElement.registerAnimator('hoge', MyAnimator);
-      expect(window.OnsAlertDialogElement._animatorDict.hoge).to.be.ok;
     });
   });
 });

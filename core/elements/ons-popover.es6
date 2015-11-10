@@ -37,6 +37,12 @@ limitations under the License.
   `);
   const AnimatorFactory = ons._internal.AnimatorFactory;
 
+  const _animatorDict = {
+    'fade': FadePopoverAnimator,
+    'none': PopoverAnimator
+  };
+
+
   class PopoverElement extends ons._BaseElement {
 
     get _mask() {
@@ -78,7 +84,7 @@ limitations under the License.
 
     _createAnimatorFactory() {
       return new AnimatorFactory({
-        animators: window.OnsPopoverElement._animatorDict,
+        animators: _animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
         defaultAnimation: this.getAttribute('animation') || 'fade'
@@ -270,7 +276,7 @@ limitations under the License.
       options = options || {};
 
       if (options.animation &&
-        !(options.animation in window.OnsPopoverElement._animatorDict)) {
+        !(options.animation in _animatorDict)) {
         throw new Error(`Animator ${options.animation} is not registered.`);
       }
 
@@ -431,11 +437,6 @@ limitations under the License.
       prototype: PopoverElement.prototype
     });
 
-    window.OnsPopoverElement._animatorDict = {
-      'fade': FadePopoverAnimator,
-      'none': PopoverAnimator
-    };
-
     /**
      * @param {String} name
      * @param {PopoverAnimator} Animator
@@ -444,7 +445,7 @@ limitations under the License.
       if (!(Animator.prototype instanceof PopoverAnimator)) {
         throw new Error('"Animator" param must inherit PopoverAnimator');
       }
-      this._animatorDict[name] = Animator;
+      _animatorDict[name] = Animator;
     };
   }
 })();
