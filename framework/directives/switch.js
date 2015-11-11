@@ -4,8 +4,9 @@
  * @name ons-switch
  * @category form
  * @description
- *  [en]Switch component.[/en]
+ *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
  *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @codepen LpXZQQ
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -17,6 +18,7 @@
  *   [ja]ons-buttonコンポーネント[/ja]
  * @example
  * <ons-switch checked></ons-switch>
+ * <ons-switch modifier="material"></ons-switch>
  */
 
 /**
