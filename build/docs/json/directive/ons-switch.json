@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 20,
+  "endingLine": 22,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -51,17 +51,15 @@
           "name": "description"
         },
         "tagName": "description",
-        "description": " [en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+        "description": " [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
         "startingLine": 5
       },
       {
         "tagDef": {
-          "name": "guide",
-          "multi": true,
-          "docProperty": "guides"
+          "name": "codepen"
         },
-        "tagName": "guide",
-        "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+        "tagName": "codepen",
+        "description": "LpXZQQ",
         "startingLine": 8
       },
       {
@@ -71,8 +69,18 @@
           "docProperty": "guides"
         },
         "tagName": "guide",
+        "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
+        "startingLine": 9
+      },
+      {
+        "tagDef": {
+          "name": "guide",
+          "multi": true,
+          "docProperty": "guides"
+        },
+        "tagName": "guide",
         "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
-        "startingLine": 11
+        "startingLine": 12
       },
       {
         "tagDef": {
@@ -82,7 +90,7 @@
         },
         "tagName": "seealso",
         "description": "ons-button\n  [en]ons-button component[/en]\n  [ja]ons-buttonコンポーネント[/ja]",
-        "startingLine": 14
+        "startingLine": 15
       },
       {
         "tagDef": {
@@ -91,8 +99,8 @@
           "docProperty": "examples"
         },
         "tagName": "example",
-        "description": "<ons-switch checked></ons-switch>",
-        "startingLine": 17
+        "description": "<ons-switch checked></ons-switch>\n<ons-switch modifier=\"material\"></ons-switch>",
+        "startingLine": 18
       }
     ],
     "tagsByName": {
@@ -148,8 +156,18 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": " [en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+            "description": " [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
             "startingLine": 5
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "LpXZQQ",
+            "startingLine": 8
           }
         ],
         "guide": [
@@ -161,7 +179,7 @@
             },
             "tagName": "guide",
             "description": "UsingFormComponents\n  [en]Using form components[/en]\n  [ja]フォームを使う[/ja]",
-            "startingLine": 8
+            "startingLine": 9
           },
           {
             "tagDef": {
@@ -171,7 +189,7 @@
             },
             "tagName": "guide",
             "description": "EventHandling\n  [en]Event handling descriptions[/en]\n  [ja]イベント処理の使い方[/ja]",
-            "startingLine": 11
+            "startingLine": 12
           }
         ],
         "seealso": [
@@ -183,7 +201,7 @@
             },
             "tagName": "seealso",
             "description": "ons-button\n  [en]ons-button component[/en]\n  [ja]ons-buttonコンポーネント[/ja]",
-            "startingLine": 14
+            "startingLine": 15
           }
         ],
         "example": [
@@ -194,8 +212,8 @@
               "docProperty": "examples"
             },
             "tagName": "example",
-            "description": "<ons-switch checked></ons-switch>",
-            "startingLine": 17
+            "description": "<ons-switch checked></ons-switch>\n<ons-switch modifier=\"material\"></ons-switch>",
+            "startingLine": 18
           }
         ]
       },
@@ -203,6 +221,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "LpXZQQ",
+    "isWide": false
   },
   "guides": [
     {
@@ -224,9 +246,9 @@
     "form"
   ],
   "id": "switch",
-  "example": "<ons-switch checked></ons-switch>",
+  "example": "<ons-switch checked></ons-switch>\n<ons-switch modifier=\"material\"></ons-switch>",
   "name": "ons-switch",
-  "description": "[en]Switch component.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
+  "description": "[en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]\n [ja]スイッチを表示するコンポーネントです。[/ja]",
   "area": "api",
   "module": "..",
   "restrict": {
@@ -236,7 +258,7 @@
     "comment": false
   },
   "examples": [
-    "<ons-switch checked></ons-switch>"
+    "<ons-switch checked></ons-switch>\n<ons-switch modifier=\"material\"></ons-switch>"
   ],
   "element": "ANY",
   "priority": 0,
@@ -247,8 +269,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 22,
-      "endingLine": 40,
+      "startingLine": 24,
+      "endingLine": 42,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -261,7 +283,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 22
+            "startingLine": 24
           },
           {
             "tagDef": {
@@ -270,7 +292,7 @@
             },
             "tagName": "name",
             "description": "change",
-            "startingLine": 23
+            "startingLine": 25
           },
           {
             "tagDef": {
@@ -278,7 +300,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired when the value is changed.[/en]\n  [ja]ON/OFFが変わった時に発火します。[/ja]",
-            "startingLine": 24
+            "startingLine": 26
           },
           {
             "tagDef": {
@@ -293,7 +315,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
-            "startingLine": 27,
+            "startingLine": 29,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -317,7 +339,7 @@
             },
             "tagName": "param",
             "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
-            "startingLine": 30,
+            "startingLine": 32,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -341,7 +363,7 @@
             },
             "tagName": "param",
             "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
-            "startingLine": 33,
+            "startingLine": 35,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -365,7 +387,7 @@
             },
             "tagName": "param",
             "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
-            "startingLine": 36,
+            "startingLine": 38,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -388,7 +410,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 22
+                "startingLine": 24
               }
             ],
             "name": [
@@ -399,7 +421,7 @@
                 },
                 "tagName": "name",
                 "description": "change",
-                "startingLine": 23
+                "startingLine": 25
               }
             ],
             "description": [
@@ -409,7 +431,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired when the value is changed.[/en]\n  [ja]ON/OFFが変わった時に発火します。[/ja]",
-                "startingLine": 24
+                "startingLine": 26
               }
             ],
             "param": [
@@ -426,7 +448,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
-                "startingLine": 27,
+                "startingLine": 29,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -450,7 +472,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
-                "startingLine": 30,
+                "startingLine": 32,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -474,7 +496,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
-                "startingLine": 33,
+                "startingLine": 35,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -498,7 +520,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
-                "startingLine": 36,
+                "startingLine": 38,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -531,7 +553,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]\n  [ja]イベントオブジェクト。[/ja]",
-          "startingLine": 27,
+          "startingLine": 29,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -555,7 +577,7 @@
           },
           "tagName": "param",
           "description": "[en]Switch object.[/en]\n  [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]",
-          "startingLine": 30,
+          "startingLine": 32,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -579,7 +601,7 @@
           },
           "tagName": "param",
           "description": "[en]Current value.[/en]\n  [ja]現在の値を返します。[/ja]",
-          "startingLine": 33,
+          "startingLine": 35,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -603,7 +625,7 @@
           },
           "tagName": "param",
           "description": "[en]True if the change was triggered by the user clicking on the switch.[/en]\n  [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]",
-          "startingLine": 36,
+          "startingLine": 38,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -628,8 +650,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 78,
-      "endingLine": 87,
+      "startingLine": 80,
+      "endingLine": 89,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -642,7 +664,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 78
+            "startingLine": 80
           },
           {
             "tagDef": {
@@ -651,7 +673,7 @@
             },
             "tagName": "signature",
             "description": "isChecked()",
-            "startingLine": 79
+            "startingLine": 81
           },
           {
             "tagDef": {
@@ -666,7 +688,7 @@
             },
             "tagName": "return",
             "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
-            "startingLine": 80,
+            "startingLine": 82,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -682,7 +704,7 @@
             },
             "tagName": "description",
             "description": "  [en]Returns true if the switch is ON.[/en]\n  [ja]スイッチがONの場合にtrueを返します。[/ja]",
-            "startingLine": 83
+            "startingLine": 85
           }
         ],
         "tagsByName": {
@@ -696,7 +718,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 78
+                "startingLine": 80
               }
             ],
             "signature": [
@@ -707,7 +729,7 @@
                 },
                 "tagName": "signature",
                 "description": "isChecked()",
-                "startingLine": 79
+                "startingLine": 81
               }
             ],
             "returns": [
@@ -724,7 +746,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
-                "startingLine": 80,
+                "startingLine": 82,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -742,7 +764,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Returns true if the switch is ON.[/en]\n  [ja]スイッチがONの場合にtrueを返します。[/ja]",
-                "startingLine": 83
+                "startingLine": 85
               }
             ],
             "name": {
@@ -753,7 +775,7 @@
                 },
                 "tagName": "signature",
                 "description": "isChecked()",
-                "startingLine": 79
+                "startingLine": 81
               },
               "tagName": "name"
             }
@@ -778,7 +800,7 @@
         },
         "tagName": "return",
         "description": "[en]true if the switch is on.[/en]\n  [ja]ONになっている場合にはtrueになります。[/ja]",
-        "startingLine": 80,
+        "startingLine": 82,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",
@@ -799,8 +821,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 89,
-      "endingLine": 98,
+      "startingLine": 91,
+      "endingLine": 100,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -813,7 +835,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 89
+            "startingLine": 91
           },
           {
             "tagDef": {
@@ -822,7 +844,7 @@
             },
             "tagName": "signature",
             "description": "setChecked(checked)",
-            "startingLine": 90
+            "startingLine": 92
           },
           {
             "tagDef": {
@@ -837,7 +859,7 @@
             },
             "tagName": "param",
             "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
-            "startingLine": 91,
+            "startingLine": 93,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -854,7 +876,7 @@
             },
             "tagName": "description",
             "description": "  [en]Set the value of the switch. isChecked can be either true or false.[/en]\n  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]",
-            "startingLine": 94
+            "startingLine": 96
           }
         ],
         "tagsByName": {
@@ -868,7 +890,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 89
+                "startingLine": 91
               }
             ],
             "signature": [
@@ -879,7 +901,7 @@
                 },
                 "tagName": "signature",
                 "description": "setChecked(checked)",
-                "startingLine": 90
+                "startingLine": 92
               }
             ],
             "param": [
@@ -896,7 +918,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
-                "startingLine": 91,
+                "startingLine": 93,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -915,7 +937,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Set the value of the switch. isChecked can be either true or false.[/en]\n  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]",
-                "startingLine": 94
+                "startingLine": 96
               }
             ],
             "name": {
@@ -926,7 +948,7 @@
                 },
                 "tagName": "signature",
                 "description": "setChecked(checked)",
-                "startingLine": 90
+                "startingLine": 92
               },
               "tagName": "name"
             }
@@ -952,7 +974,7 @@
           },
           "tagName": "param",
           "description": "[en]If true the switch will be set to on.[/en]\n  [ja]ONにしたい場合にはtrueを指定します。[/ja]",
-          "startingLine": 91,
+          "startingLine": 93,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -975,8 +997,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 100,
-      "endingLine": 109,
+      "startingLine": 102,
+      "endingLine": 111,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -989,7 +1011,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 100
+            "startingLine": 102
           },
           {
             "tagDef": {
@@ -998,7 +1020,7 @@
             },
             "tagName": "signature",
             "description": "getCheckboxElement()",
-            "startingLine": 101
+            "startingLine": 103
           },
           {
             "tagDef": {
@@ -1013,7 +1035,7 @@
             },
             "tagName": "return",
             "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
-            "startingLine": 102,
+            "startingLine": 104,
             "typeExpression": "HTMLElement",
             "type": {
               "type": "NameExpression",
@@ -1029,7 +1051,7 @@
             },
             "tagName": "description",
             "description": "  [en]Get inner input[type=checkbox] element.[/en]\n  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]",
-            "startingLine": 105
+            "startingLine": 107
           }
         ],
         "tagsByName": {
@@ -1043,7 +1065,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 100
+                "startingLine": 102
               }
             ],
             "signature": [
@@ -1054,7 +1076,7 @@
                 },
                 "tagName": "signature",
                 "description": "getCheckboxElement()",
-                "startingLine": 101
+                "startingLine": 103
               }
             ],
             "returns": [
@@ -1071,7 +1093,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
-                "startingLine": 102,
+                "startingLine": 104,
                 "typeExpression": "HTMLElement",
                 "type": {
                   "type": "NameExpression",
@@ -1089,7 +1111,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Get inner input[type=checkbox] element.[/en]\n  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]",
-                "startingLine": 105
+                "startingLine": 107
               }
             ],
             "name": {
@@ -1100,7 +1122,7 @@
                 },
                 "tagName": "signature",
                 "description": "getCheckboxElement()",
-                "startingLine": 101
+                "startingLine": 103
               },
               "tagName": "name"
             }
@@ -1125,7 +1147,7 @@
         },
         "tagName": "return",
         "description": "[en]The underlying checkbox element.[/en]\n  [ja]コンポーネント内部のcheckbox要素になります。[/ja]",
-        "startingLine": 102,
+        "startingLine": 104,
         "typeExpression": "HTMLElement",
         "type": {
           "type": "NameExpression",
@@ -1146,8 +1168,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 111,
-      "endingLine": 124,
+      "startingLine": 113,
+      "endingLine": 126,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1160,7 +1182,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 111
+            "startingLine": 113
           },
           {
             "tagDef": {
@@ -1169,7 +1191,7 @@
             },
             "tagName": "signature",
             "description": "on(eventName, listener)",
-            "startingLine": 112
+            "startingLine": 114
           },
           {
             "tagDef": {
@@ -1177,7 +1199,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 113
+            "startingLine": 115
           },
           {
             "tagDef": {
@@ -1185,7 +1207,7 @@
             },
             "tagName": "description",
             "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
-            "startingLine": 114
+            "startingLine": 116
           },
           {
             "tagDef": {
@@ -1200,7 +1222,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 117,
+            "startingLine": 119,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1224,7 +1246,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
-            "startingLine": 120,
+            "startingLine": 122,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1247,7 +1269,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 111
+                "startingLine": 113
               }
             ],
             "signature": [
@@ -1258,7 +1280,7 @@
                 },
                 "tagName": "signature",
                 "description": "on(eventName, listener)",
-                "startingLine": 112
+                "startingLine": 114
               }
             ],
             "extensionOf": [
@@ -1268,7 +1290,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 113
+                "startingLine": 115
               }
             ],
             "description": [
@@ -1278,7 +1300,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
-                "startingLine": 114
+                "startingLine": 116
               }
             ],
             "param": [
@@ -1295,7 +1317,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 117,
+                "startingLine": 119,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1319,7 +1341,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
-                "startingLine": 120,
+                "startingLine": 122,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1339,7 +1361,7 @@
                 },
                 "tagName": "signature",
                 "description": "on(eventName, listener)",
-                "startingLine": 112
+                "startingLine": 114
               },
               "tagName": "name"
             }
@@ -1366,7 +1388,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 117,
+          "startingLine": 119,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1390,7 +1412,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]",
-          "startingLine": 120,
+          "startingLine": 122,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1413,8 +1435,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 126,
-      "endingLine": 139,
+      "startingLine": 128,
+      "endingLine": 141,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1427,7 +1449,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 126
+            "startingLine": 128
           },
           {
             "tagDef": {
@@ -1436,7 +1458,7 @@
             },
             "tagName": "signature",
             "description": "once(eventName, listener)",
-            "startingLine": 127
+            "startingLine": 129
           },
           {
             "tagDef": {
@@ -1444,7 +1466,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 128
+            "startingLine": 130
           },
           {
             "tagDef": {
@@ -1452,7 +1474,7 @@
             },
             "tagName": "description",
             "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
-            "startingLine": 129
+            "startingLine": 131
           },
           {
             "tagDef": {
@@ -1467,7 +1489,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 132,
+            "startingLine": 134,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1491,7 +1513,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
-            "startingLine": 135,
+            "startingLine": 137,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1514,7 +1536,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 126
+                "startingLine": 128
               }
             ],
             "signature": [
@@ -1525,7 +1547,7 @@
                 },
                 "tagName": "signature",
                 "description": "once(eventName, listener)",
-                "startingLine": 127
+                "startingLine": 129
               }
             ],
             "extensionOf": [
@@ -1535,7 +1557,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 128
+                "startingLine": 130
               }
             ],
             "description": [
@@ -1545,7 +1567,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
-                "startingLine": 129
+                "startingLine": 131
               }
             ],
             "param": [
@@ -1562,7 +1584,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 132,
+                "startingLine": 134,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1586,7 +1608,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
-                "startingLine": 135,
+                "startingLine": 137,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1606,7 +1628,7 @@
                 },
                 "tagName": "signature",
                 "description": "once(eventName, listener)",
-                "startingLine": 127
+                "startingLine": 129
               },
               "tagName": "name"
             }
@@ -1633,7 +1655,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 132,
+          "startingLine": 134,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1657,7 +1679,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]",
-          "startingLine": 135,
+          "startingLine": 137,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1680,8 +1702,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 141,
-      "endingLine": 154,
+      "startingLine": 143,
+      "endingLine": 156,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1694,7 +1716,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 141
+            "startingLine": 143
           },
           {
             "tagDef": {
@@ -1703,7 +1725,7 @@
             },
             "tagName": "signature",
             "description": "off(eventName, [listener])",
-            "startingLine": 142
+            "startingLine": 144
           },
           {
             "tagDef": {
@@ -1711,7 +1733,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 143
+            "startingLine": 145
           },
           {
             "tagDef": {
@@ -1719,7 +1741,7 @@
             },
             "tagName": "description",
             "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
-            "startingLine": 144
+            "startingLine": 146
           },
           {
             "tagDef": {
@@ -1734,7 +1756,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 147,
+            "startingLine": 149,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1758,7 +1780,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
-            "startingLine": 150,
+            "startingLine": 152,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1781,7 +1803,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 141
+                "startingLine": 143
               }
             ],
             "signature": [
@@ -1792,7 +1814,7 @@
                 },
                 "tagName": "signature",
                 "description": "off(eventName, [listener])",
-                "startingLine": 142
+                "startingLine": 144
               }
             ],
             "extensionOf": [
@@ -1802,7 +1824,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 143
+                "startingLine": 145
               }
             ],
             "description": [
@@ -1812,7 +1834,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]",
-                "startingLine": 144
+                "startingLine": 146
               }
             ],
             "param": [
@@ -1829,7 +1851,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 147,
+                "startingLine": 149,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1853,7 +1875,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
-                "startingLine": 150,
+                "startingLine": 152,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1873,7 +1895,7 @@
                 },
                 "tagName": "signature",
                 "description": "off(eventName, [listener])",
-                "startingLine": 142
+                "startingLine": 144
               },
               "tagName": "name"
             }
@@ -1900,7 +1922,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 147,
+          "startingLine": 149,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1924,7 +1946,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーを指定します。[/ja]",
-          "startingLine": 150,
+          "startingLine": 152,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1949,8 +1971,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 42,
-      "endingLine": 51,
+      "startingLine": 44,
+      "endingLine": 53,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -1963,7 +1985,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 42
+            "startingLine": 44
           },
           {
             "tagDef": {
@@ -1972,7 +1994,7 @@
             },
             "tagName": "name",
             "description": "var",
-            "startingLine": 43
+            "startingLine": 45
           },
           {
             "tagDef": {
@@ -1980,7 +2002,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 44
+            "startingLine": 46
           },
           {
             "tagDef": {
@@ -1988,7 +2010,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 45
+            "startingLine": 47
           },
           {
             "tagDef": {
@@ -2000,7 +2022,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 46,
+            "startingLine": 48,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2016,7 +2038,7 @@
             },
             "tagName": "description",
             "description": "  [en]Variable name to refer this switch.[/en]\n  [ja]JavaScriptから参照するための変数名を指定します。[/ja]",
-            "startingLine": 47
+            "startingLine": 49
           }
         ],
         "tagsByName": {
@@ -2030,7 +2052,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 42
+                "startingLine": 44
               }
             ],
             "name": [
@@ -2041,7 +2063,7 @@
                 },
                 "tagName": "name",
                 "description": "var",
-                "startingLine": 43
+                "startingLine": 45
               }
             ],
             "initonly": [
@@ -2051,7 +2073,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 44
+                "startingLine": 46
               }
             ],
             "extensionOf": [
@@ -2061,7 +2083,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 45
+                "startingLine": 47
               }
             ],
             "type": [
@@ -2075,7 +2097,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 46,
+                "startingLine": 48,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2093,7 +2115,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Variable name to refer this switch.[/en]\n  [ja]JavaScriptから参照するための変数名を指定します。[/ja]",
-                "startingLine": 47
+                "startingLine": 49
               }
             ]
           },
@@ -2114,7 +2136,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 46,
+        "startingLine": 48,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -2136,8 +2158,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 53,
-      "endingLine": 60,
+      "startingLine": 55,
+      "endingLine": 62,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2150,7 +2172,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 53
+            "startingLine": 55
           },
           {
             "tagDef": {
@@ -2159,7 +2181,7 @@
             },
             "tagName": "name",
             "description": "modifier",
-            "startingLine": 54
+            "startingLine": 56
           },
           {
             "tagDef": {
@@ -2171,7 +2193,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 55,
+            "startingLine": 57,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -2187,7 +2209,7 @@
             },
             "tagName": "description",
             "description": " [en]The appearance of the switch.[/en]\n [ja]スイッチの表現を指定します。[/ja]",
-            "startingLine": 56
+            "startingLine": 58
           }
         ],
         "tagsByName": {
@@ -2201,7 +2223,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 53
+                "startingLine": 55
               }
             ],
             "name": [
@@ -2212,7 +2234,7 @@
                 },
                 "tagName": "name",
                 "description": "modifier",
-                "startingLine": 54
+                "startingLine": 56
               }
             ],
             "type": [
@@ -2226,7 +2248,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 55,
+                "startingLine": 57,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2244,7 +2266,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]The appearance of the switch.[/en]\n [ja]スイッチの表現を指定します。[/ja]",
-                "startingLine": 56
+                "startingLine": 58
               }
             ]
           },
@@ -2263,7 +2285,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 55,
+        "startingLine": 57,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -2285,8 +2307,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 62,
-      "endingLine": 68,
+      "startingLine": 64,
+      "endingLine": 70,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2299,7 +2321,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 62
+            "startingLine": 64
           },
           {
             "tagDef": {
@@ -2308,7 +2330,7 @@
             },
             "tagName": "name",
             "description": "disabled",
-            "startingLine": 63
+            "startingLine": 65
           },
           {
             "tagDef": {
@@ -2316,7 +2338,7 @@
             },
             "tagName": "description",
             "description": "  [en]Whether the switch should be disabled.[/en]\n  [ja]スイッチを無効の状態にする場合に指定します。[/ja]",
-            "startingLine": 64
+            "startingLine": 66
           }
         ],
         "tagsByName": {
@@ -2330,7 +2352,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 62
+                "startingLine": 64
               }
             ],
             "name": [
@@ -2341,7 +2363,7 @@
                 },
                 "tagName": "name",
                 "description": "disabled",
-                "startingLine": 63
+                "startingLine": 65
               }
             ],
             "description": [
@@ -2351,7 +2373,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Whether the switch should be disabled.[/en]\n  [ja]スイッチを無効の状態にする場合に指定します。[/ja]",
-                "startingLine": 64
+                "startingLine": 66
               }
             ]
           },
@@ -2372,8 +2394,8 @@
         "baseName": "switch",
         "extension": "js"
       },
-      "startingLine": 70,
-      "endingLine": 76,
+      "startingLine": 72,
+      "endingLine": 78,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -2386,7 +2408,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 70
+            "startingLine": 72
           },
           {
             "tagDef": {
@@ -2395,7 +2417,7 @@
             },
             "tagName": "name",
             "description": "checked",
-            "startingLine": 71
+            "startingLine": 73
           },
           {
             "tagDef": {
@@ -2403,7 +2425,7 @@
             },
             "tagName": "description",
             "description": "  [en]Whether the switch is checked.[/en]\n  [ja]スイッチがONの状態にするときに指定します。[/ja]",
-            "startingLine": 72
+            "startingLine": 74
           }
         ],
         "tagsByName": {
@@ -2417,7 +2439,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 70
+                "startingLine": 72
               }
             ],
             "name": [
@@ -2428,7 +2450,7 @@
                 },
                 "tagName": "name",
                 "description": "checked",
-                "startingLine": 71
+                "startingLine": 73
               }
             ],
             "description": [
@@ -2438,7 +2460,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Whether the switch is checked.[/en]\n  [ja]スイッチがONの状態にするときに指定します。[/ja]",
-                "startingLine": 72
+                "startingLine": 74
               }
             ]
           },

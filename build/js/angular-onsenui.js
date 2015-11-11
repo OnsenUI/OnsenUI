@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-alpha.15 - 2015-11-10 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta - 2015-11-11 */
 (function(module) {
 try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
@@ -5814,7 +5814,7 @@ limitations under the License.
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
  * <ons-icon
- *   icon="fa-twitter"
+ *   icon="md-car"
  *   size="20px"
  *   fixed-width="false"
  *   style="color: red">
@@ -5826,7 +5826,7 @@ limitations under the License.
  * @name icon
  * @type {String}
  * @description
- *   [en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+ *   [en]The icon name. "md-" prefix for Material Icons, "fa-" for Font Awesome and "ion-" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]
  *   [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
  */
 
@@ -8352,6 +8352,7 @@ limitations under the License.
  * @description
  *   [en]Adds a Material Design "ripple" effect to an element.[/en]
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
+ * @codepen wKQWdZ
  * @example
  * <ons-list>
  *   <ons-list-item>
@@ -10257,8 +10258,9 @@ limitations under the License.
  * @name ons-switch
  * @category form
  * @description
- *  [en]Switch component.[/en]
+ *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
  *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @codepen LpXZQQ
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -10270,6 +10272,7 @@ limitations under the License.
  *   [ja]ons-buttonコンポーネント[/ja]
  * @example
  * <ons-switch checked></ons-switch>
+ * <ons-switch modifier="material"></ons-switch>
  */
 
 /**

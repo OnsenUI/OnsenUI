@@ -79,7 +79,7 @@
           "docProperty": "examples"
         },
         "tagName": "example",
-        "description": "<ons-icon\n  icon=\"fa-twitter\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
+        "description": "<ons-icon\n  icon=\"md-car\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
         "startingLine": 10
       }
     ],
@@ -170,7 +170,7 @@
               "docProperty": "examples"
             },
             "tagName": "example",
-            "description": "<ons-icon\n  icon=\"fa-twitter\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
+            "description": "<ons-icon\n  icon=\"md-car\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
             "startingLine": 10
           }
         ]
@@ -194,7 +194,7 @@
     "icon"
   ],
   "id": "icon",
-  "example": "<ons-icon\n  icon=\"fa-twitter\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
+  "example": "<ons-icon\n  icon=\"md-car\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>",
   "name": "ons-icon",
   "description": "[en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]\n  [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]",
   "area": "api",
@@ -206,7 +206,7 @@
     "comment": false
   },
   "examples": [
-    "<ons-icon\n  icon=\"fa-twitter\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>"
+    "<ons-icon\n  icon=\"md-car\"\n  size=\"20px\"\n  fixed-width=\"false\"\n  style=\"color: red\">\n</ons-icon>"
   ],
   "element": "ANY",
   "priority": 0,
@@ -269,7 +269,7 @@
               "name": "description"
             },
             "tagName": "description",
-            "description": "  [en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
+            "description": "  [en]The icon name. \"md-\" prefix for Material Icons, \"fa-\" for Font Awesome and \"ion-\" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
             "startingLine": 23
           }
         ],
@@ -326,7 +326,7 @@
                   "name": "description"
                 },
                 "tagName": "description",
-                "description": "  [en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
+                "description": "  [en]The icon name. \"md-\" prefix for Material Icons, \"fa-\" for Font Awesome and \"ion-\" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
                 "startingLine": 23
               }
             ]
@@ -357,7 +357,7 @@
         ]
       },
       "name": "icon",
-      "description": "[en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
+      "description": "[en]The icon name. \"md-\" prefix for Material Icons, \"fa-\" for Font Awesome and \"ion-\" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]\n  [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]",
       "area": "api",
       "module": "..",
       "priority": 0,

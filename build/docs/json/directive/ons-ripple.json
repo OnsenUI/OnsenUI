@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 20,
+  "endingLine": 21,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -56,13 +56,21 @@
       },
       {
         "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "wKQWdZ",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
           "name": "example",
           "multi": true,
           "docProperty": "examples"
         },
         "tagName": "example",
         "description": "<ons-list>\n  <ons-list-item>\n   <ons-ripple color=\"rgba(0, 0, 0, 0.3)\"></ons-ripple>\n   Click me!\n  </ons-list-item>\n</ons-list>\n\n<ons-ripple target=\"children\" color=\"rgba(0, 0, 0, 0.3)\">\n  <p>Click me!</p>\n</ons-ripple>",
-        "startingLine": 8
+        "startingLine": 9
       }
     ],
     "tagsByName": {
@@ -122,6 +130,16 @@
             "startingLine": 5
           }
         ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "wKQWdZ",
+            "startingLine": 8
+          }
+        ],
         "example": [
           {
             "tagDef": {
@@ -131,7 +149,7 @@
             },
             "tagName": "example",
             "description": "<ons-list>\n  <ons-list-item>\n   <ons-ripple color=\"rgba(0, 0, 0, 0.3)\"></ons-ripple>\n   Click me!\n  </ons-list-item>\n</ons-list>\n\n<ons-ripple target=\"children\" color=\"rgba(0, 0, 0, 0.3)\">\n  <p>Click me!</p>\n</ons-ripple>",
-            "startingLine": 8
+            "startingLine": 9
           }
         ]
       },
@@ -139,6 +157,10 @@
     },
     "badTags": [],
     "description": ""
+  },
+  "codepen": {
+    "id": "wKQWdZ",
+    "isWide": false
   },
   "categories": [
     "form"
@@ -169,8 +191,8 @@
         "baseName": "ripple",
         "extension": "js"
       },
-      "startingLine": 22,
-      "endingLine": 29,
+      "startingLine": 23,
+      "endingLine": 30,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -183,7 +205,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 22
+            "startingLine": 23
           },
           {
             "tagDef": {
@@ -192,7 +214,7 @@
             },
             "tagName": "name",
             "description": "color",
-            "startingLine": 23
+            "startingLine": 24
           },
           {
             "tagDef": {
@@ -204,7 +226,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 24,
+            "startingLine": 25,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -220,7 +242,7 @@
             },
             "tagName": "description",
             "description": "  [en]Color of the ripple effect.[/en]\n  [ja]リップルエフェクトの色を指定します。[/ja]",
-            "startingLine": 25
+            "startingLine": 26
           }
         ],
         "tagsByName": {
@@ -234,7 +256,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 22
+                "startingLine": 23
               }
             ],
             "name": [
@@ -245,7 +267,7 @@
                 },
                 "tagName": "name",
                 "description": "color",
-                "startingLine": 23
+                "startingLine": 24
               }
             ],
             "type": [
@@ -259,7 +281,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 24,
+                "startingLine": 25,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -277,7 +299,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Color of the ripple effect.[/en]\n  [ja]リップルエフェクトの色を指定します。[/ja]",
-                "startingLine": 25
+                "startingLine": 26
               }
             ]
           },
@@ -296,7 +318,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 24,
+        "startingLine": 25,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -318,8 +340,8 @@
         "baseName": "ripple",
         "extension": "js"
       },
-      "startingLine": 31,
-      "endingLine": 37,
+      "startingLine": 32,
+      "endingLine": 38,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -332,7 +354,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 31
+            "startingLine": 32
           },
           {
             "tagDef": {
@@ -341,7 +363,7 @@
             },
             "tagName": "name",
             "description": "center",
-            "startingLine": 32
+            "startingLine": 33
           },
           {
             "tagDef": {
@@ -349,7 +371,7 @@
             },
             "tagName": "description",
             "description": "  [en]If this attribute is set, the effect will originate from the center.[/en]\n  [ja]この属性が設定された場合、その効果は要素の中央から始まります。[/ja]",
-            "startingLine": 33
+            "startingLine": 34
           }
         ],
         "tagsByName": {
@@ -363,7 +385,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 31
+                "startingLine": 32
               }
             ],
             "name": [
@@ -374,7 +396,7 @@
                 },
                 "tagName": "name",
                 "description": "center",
-                "startingLine": 32
+                "startingLine": 33
               }
             ],
             "description": [
@@ -384,7 +406,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]If this attribute is set, the effect will originate from the center.[/en]\n  [ja]この属性が設定された場合、その効果は要素の中央から始まります。[/ja]",
-                "startingLine": 33
+                "startingLine": 34
               }
             ]
           },
@@ -405,8 +427,8 @@
         "baseName": "ripple",
         "extension": "js"
       },
-      "startingLine": 39,
-      "endingLine": 46,
+      "startingLine": 40,
+      "endingLine": 47,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -419,7 +441,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 39
+            "startingLine": 40
           },
           {
             "tagDef": {
@@ -428,7 +450,7 @@
             },
             "tagName": "name",
             "description": "target",
-            "startingLine": 40
+            "startingLine": 41
           },
           {
             "tagDef": {
@@ -440,7 +462,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 41,
+            "startingLine": 42,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -456,7 +478,7 @@
             },
             "tagName": "description",
             "description": "  [en]If this attribute is set to children, the effect will be applied to the children of the component instead of the parent.[/en]\n  [ja]この属性に\"children\"を設定されたとき、リップルエフェクトはこのコンポーネントの子要素に適用されます。そうでなければ、親要素に適用されます。[/ja]",
-            "startingLine": 42
+            "startingLine": 43
           }
         ],
         "tagsByName": {
@@ -470,7 +492,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 39
+                "startingLine": 40
               }
             ],
             "name": [
@@ -481,7 +503,7 @@
                 },
                 "tagName": "name",
                 "description": "target",
-                "startingLine": 40
+                "startingLine": 41
               }
             ],
             "type": [
@@ -495,7 +517,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 41,
+                "startingLine": 42,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -513,7 +535,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]If this attribute is set to children, the effect will be applied to the children of the component instead of the parent.[/en]\n  [ja]この属性に\"children\"を設定されたとき、リップルエフェクトはこのコンポーネントの子要素に適用されます。そうでなければ、親要素に適用されます。[/ja]",
-                "startingLine": 42
+                "startingLine": 43
               }
             ]
           },
@@ -532,7 +554,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 41,
+        "startingLine": 42,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -554,8 +576,8 @@
         "baseName": "ripple",
         "extension": "js"
       },
-      "startingLine": 48,
-      "endingLine": 54,
+      "startingLine": 49,
+      "endingLine": 55,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -568,7 +590,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 48
+            "startingLine": 49
           },
           {
             "tagDef": {
@@ -577,7 +599,7 @@
             },
             "tagName": "name",
             "description": "disabled",
-            "startingLine": 49
+            "startingLine": 50
           },
           {
             "tagDef": {
@@ -585,7 +607,7 @@
             },
             "tagName": "description",
             "description": "  [en]If this attribute is set, the ripple effect will be disabled.[/en]\n  [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]",
-            "startingLine": 50
+            "startingLine": 51
           }
         ],
         "tagsByName": {
@@ -599,7 +621,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 48
+                "startingLine": 49
               }
             ],
             "name": [
@@ -610,7 +632,7 @@
                 },
                 "tagName": "name",
                 "description": "disabled",
-                "startingLine": 49
+                "startingLine": 50
               }
             ],
             "description": [
@@ -620,7 +642,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]If this attribute is set, the ripple effect will be disabled.[/en]\n  [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]",
-                "startingLine": 50
+                "startingLine": 51
               }
             ]
           },
