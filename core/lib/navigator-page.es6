@@ -37,6 +37,7 @@ limitations under the License.
       this.options = params.options;
       this.navigator = params.navigator;
       this.initialContent = params.initialContent;
+      this.backButton = util.findChildRecursively(this.element, 'ons-back-button');
 
       // Block events while page is being animated to stop scrolling, pressing buttons, etc.
       this._blockEvents = (event) => {
@@ -68,6 +69,16 @@ limitations under the License.
         }
       }
       return this._page;
+    }
+
+    updateBackButton() {
+      if(this.backButton) {
+        if(this.navigator._pages.length > 1) {
+          this.backButton.style.display = 'block';
+        } else {
+          this.backButton.style.display = 'none';
+        }
+      }
     }
 
     destroy() {
