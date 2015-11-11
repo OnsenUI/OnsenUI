@@ -51,6 +51,7 @@ limitations under the License.
       this._updateLabel();
       this._updateLabelColor();
       this._updateBoundAttributes();
+      this._updateLabelClass();
 
       this._boundOnInput = this._onInput.bind(this);
       this._boundOnFocusin = this._onFocusin.bind(this);
