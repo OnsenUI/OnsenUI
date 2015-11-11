@@ -21,16 +21,24 @@ limitations under the License.
   const util = ons._util = ons._util || {};
 
   /**
+   * @param {String/Function} query dot class name or node name or matcher function.
+   * @return {Function}
+   */
+  util.prepareQuery = (query) => {
+    return query instanceof Function
+      ? query
+      : query.substr(0, 1) === '.' ?
+        (node) => node.classList.contains(query.substr(1)) :
+        (node) => node.nodeName.toLowerCase() === query;
+  };
+
+  /**
    * @param {Element} element
    * @param {String/Function} query dot class name or node name or matcher function.
    * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
-    const match = query instanceof Function
-      ? query
-      : query.substr(0, 1) === '.' ?
-        (node) => node.classList.contains(query.substr(1)) :
-        (node) => node.nodeName.toLowerCase() === query;
+    const match = util.prepareQuery(query);
 
     for (let i = 0; i < element.children.length; i++) {
       const node = element.children[i];
@@ -38,6 +46,29 @@ limitations under the License.
         return node;
       }
     }
+    return null;
+  };
+
+  /**
+   * @param {Element} element
+   * @param {String/Function} query dot class name or node name or matcher function.
+   * @return {HTMLElement/null}
+   */
+  util.findChildRecursively = (element, query) => {
+    const match = util.prepareQuery(query);
+
+    for (let i = 0; i < element.children.length; i++) {
+      const node = element.children[i];
+      if (match(node)) {
+        return node;
+      } else {
+        let nodeMatch = util.findChildRecursively(node, match);
+        if (nodeMatch) {
+          return nodeMatch;
+        }
+      }
+    }
+
     return null;
   };
 

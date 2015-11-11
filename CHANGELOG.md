@@ -39,11 +39,9 @@ v2.0.0-alpha.15
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.
  * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
- * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
  * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
  * ons-navigator: Added `bringPageTop()` method.
  * ons-carousel: Added `getCarouselItemCount()` method.
- * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
  * core: Add `ons-scope` Angular directive to allow not binding component to `$rootScope`.
  * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
  * ons-lazy-repeat: Fix layout of list when it's not placed on top of page.
@@ -61,13 +59,20 @@ v2.0.0-alpha.15
  * ons-back-button: Change style when parent toolbar has modifier "material".
  * ons-list: Added "material" modifier.
  * ons-tabbar: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/948)
- * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
  * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
- * ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
- * ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/969).
  * core: Add support for Browserify.
  * ons.platform: uses cordova-plugin-device if installed.
- * ons-sliding-menu: Fixed [#967](https://github.com/OnsenUI/OnsenUI/issues/967).
+ * ons-back-button: automatically hides if navigator has only 1 page.
+
+v1.3.13
+----
+* ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
+* ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
+* dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
+* ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
+* ons-sliding-menu: Fixed [#967](https://github.com/OnsenUI/OnsenUI/issues/967).
+* ons-pull-hook: Fixed [#969](https://github.com/OnsenUI/OnsenUI/issues/969).
+* ons-navigator: Fixed [#1018](https://github.com/OnsenUI/OnsenUI/issues/1018).
 
 v1.3.12
 ----
