@@ -73,6 +73,10 @@ limitations under the License.
         baseClassName: 'NavigatorTransitionAnimator',
         defaultAnimation: this.getAttribute('animation')
       });
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     /**

@@ -34,6 +34,10 @@ limitations under the License.
 
       this._tryToEnsureNodePosition();
       setImmediate(() => this._tryToEnsureNodePosition());
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     attributeChangedCallback(name, last, current) {

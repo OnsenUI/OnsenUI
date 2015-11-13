@@ -87,6 +87,10 @@ limitations under the License.
       this._compile();
       this._contentElement = ons._util.findChild(this, '.tab-bar__content');
       ModifierUtil.initModifier(this, scheme);
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _compile() {

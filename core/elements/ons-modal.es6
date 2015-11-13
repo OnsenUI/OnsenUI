@@ -48,6 +48,10 @@ limitations under the License.
 
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     getDeviceBackButtonHandler() {

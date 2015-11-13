@@ -73,6 +73,10 @@ limitations under the License.
       this._visible = false;
       this._doorLock = new DoorLock();
       this._boundCancel = this._cancel.bind(this);
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _compile() {
