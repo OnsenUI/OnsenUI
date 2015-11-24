@@ -2,9 +2,12 @@
 CHANGELOG
 ====
 
+v1.3.14
+----
+* ons-tabbar: Fixed [#963](https://github.com/OnsenUI/OnsenUI/issues/963).
+
 v1.3.13
 ----
-* ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
 * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
 * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
 * ons-lazy-repeat: Fixed [#966](https://github.com/OnsenUI/OnsenUI/issues/966).
