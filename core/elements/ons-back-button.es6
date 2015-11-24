@@ -57,6 +57,7 @@ limitations under the License.
   class BackButtonElement extends ons._BaseElement {
 
     createdCallback() {
+      this.options = {};
       this._compile();
       this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
@@ -81,10 +82,28 @@ limitations under the License.
       this.appendChild(template);
     }
 
+    /**
+     * @return {object}
+     */
+    get options() {
+      return this._options;
+    }
+
+    /**
+     * @param {object}
+     */
+    set options(object) {
+      if (!object.hasOwnProperty('cancelIfRunning')) {
+        object.cancelIfRunning = true;
+      }
+
+      this._options = object;
+    }
+
     _onClick() {
       const navigator = util.findParent(this, 'ons-navigator');
       if (navigator) {
-        navigator.popPage({cancelIfRunning: true});
+        navigator.popPage(this.options);
       }
     }
 
