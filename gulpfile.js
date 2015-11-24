@@ -221,6 +221,7 @@ gulp.task('prepare', ['html2js', 'core'], function() {
 
     // angular-onsenui.js
     gulp.src([
+      'framework/vendor/*.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/onsen.js',
