@@ -3727,6 +3727,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   position: absolute;
+  display: block;
   width: 220px;
   min-height: 100px;
 }
