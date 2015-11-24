@@ -3,6 +3,7 @@ CHANGELOG
 ====
 
 v2.0.0-beta.1
+----
  * ons-fab: Fix broken layout on Safari.
 
 v2.0.0-beta
@@ -66,6 +67,10 @@ v2.0.0-beta
  * core: Add support for Browserify.
  * ons.platform: uses cordova-plugin-device if installed.
  * ons-back-button: automatically hides if navigator has only 1 page.
+
+v1.3.14
+----
+* ons-tabbar: Fixed [#963](https://github.com/OnsenUI/OnsenUI/issues/963).
 
 v1.3.13
 ----
