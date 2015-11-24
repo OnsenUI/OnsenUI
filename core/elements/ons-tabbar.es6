@@ -314,6 +314,19 @@ limitations under the License.
 
       var needLoad = !selectedTab.isLoaded() && !options.keepPage;
 
+      util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
+        if (tab != selectedTab) {
+          tab.setInactive();
+        } else {
+          if (!needLoad) {
+            util.triggerElementEvent(this, 'postchange', {
+              index: index,
+              tabItem: selectedTab
+            });
+          }
+        }
+      });
+
       if (needLoad) {
         var removeElement = true;
 
@@ -352,19 +365,6 @@ limitations under the License.
           this._loadPage(selectedTab.getAttribute('page'), params);
         }
       }
-
-      util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
-        if (tab != selectedTab) {
-          tab.setInactive();
-        } else {
-          if (!needLoad) {
-            util.triggerElementEvent(this, 'postchange', {
-              index: index,
-              tabItem: selectedTab
-            });
-          }
-        }
-      });
 
       return true;
     }
