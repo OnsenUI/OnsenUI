@@ -192,6 +192,16 @@ limitations under the License.
 
         selectedTabItem.setActive();
 
+        for (var i = 0; i < this._tabItems.length; i++) {
+          if (this._tabItems[i] != selectedTabItem) {
+            this._tabItems[i].setInactive();
+          } else {
+            if (!needLoad) {
+              this.emit('postchange', {index: index, tabItem: selectedTabItem});
+            }
+          }
+        }
+
         if (needLoad) {
           var removeElement = true;
 
@@ -215,16 +225,6 @@ limitations under the License.
           }
           else {
             this._loadPage(selectedTabItem.page, params);
-          }
-        }
-
-        for (var i = 0; i < this._tabItems.length; i++) {
-          if (this._tabItems[i] != selectedTabItem) {
-            this._tabItems[i].setInactive();
-          } else {
-            if (!needLoad) {
-              this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }
           }
         }
 
