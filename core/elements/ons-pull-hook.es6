@@ -42,6 +42,10 @@ limitations under the License.
 
       this._setState(STATE_INITIAL, true);
       this._setStyle();
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _createScrollElement() {

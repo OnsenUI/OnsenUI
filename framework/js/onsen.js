@@ -299,10 +299,6 @@ limitations under the License.
   function initOnsenFacade() {
     ons._onsenService = null;
 
-    // Object to attach component variables to when using the var="..." attribute.
-    // Can be set to null to avoid polluting the global scope.
-    ons.componentBase = window;
-
     /**
      * Bootstrap this document as a Onsen UI application.
      *

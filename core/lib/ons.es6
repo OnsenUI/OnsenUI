@@ -24,6 +24,10 @@ limitations under the License.
     animationsDisabled: false
   };
 
+  // Object to attach component variables to when using the var="..." attribute.
+  // Can be set to null to avoid polluting the global scope.
+  ons.componentBase = window;
+
   waitDeviceReady();
 
   /**
@@ -52,6 +56,43 @@ limitations under the License.
       callback();
     } else {
       ons._readyLock.waitUnlock(callback);
+    }
+  };
+
+  /**
+   * Define a variable to JavaScript global scope.
+   *
+   * Util.defineVar('foo', 'foo-value');
+   * // => window.foo is now 'foo-value'
+   *
+   * Util.defineVar('foo.bar', 'foo-bar-value');
+   * // => window.foo.bar is now 'foo-bar-value'
+   *
+   * @param {String} rawName
+   * @param object
+   */
+  ons._defineVar = (name, object) => {
+    let names = name.split(/\./);
+
+    function set(container, names, object) {
+      let partName;
+      for (let i = 0; i < names.length - 1; i++) {
+        partName = names[i];
+        if (container[partName] === undefined || container[partName] === null) {
+          container[partName] = {};
+        }
+        container = container[partName];
+      }
+
+      container[names[names.length - 1]] = object;
+
+      if (container[names[names.length - 1]] !== object) {
+        throw new Error('Cannot set var="' + name + '" because it will overwrite a read-only variable.');
+      }
+    }
+
+    if (ons.componentBase) {
+      set(ons.componentBase, names, object);
     }
   };
 

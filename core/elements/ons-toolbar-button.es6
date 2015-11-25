@@ -28,6 +28,10 @@ limitations under the License.
       this.classList.add('navigation-bar__line-height');
 
       ModifierUtil.initModifier(this, scheme);
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     attributeChangedCallback(name, last, current) {

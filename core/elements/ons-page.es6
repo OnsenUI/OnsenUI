@@ -39,6 +39,10 @@ limitations under the License.
       this.eventDetail = {
         page: this
       };
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     attachedCallback() {

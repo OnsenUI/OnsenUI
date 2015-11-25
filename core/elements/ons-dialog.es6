@@ -73,6 +73,10 @@ limitations under the License.
         baseClassName: 'DialogAnimator',
         defaultAnimation: this.getAttribute('animation')
       });
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _compile() {

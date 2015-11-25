@@ -124,6 +124,10 @@ limitations under the License.
       this._setupInitialIndex();
 
       this._saveLastState();
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _onResize() {

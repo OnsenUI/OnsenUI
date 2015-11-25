@@ -101,6 +101,10 @@ limitations under the License.
 
       this._updateForCheckedAttribute();
       this._updateForDisabledAttribute();
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _updateForCheckedAttribute() {

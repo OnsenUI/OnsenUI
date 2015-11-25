@@ -80,6 +80,10 @@ limitations under the License.
 
 
       this._animatorFactory = this._createAnimatorFactory();
+
+      if (this.hasAttribute('var')) {
+        ons._defineVar(this.getAttribute('var'), this);
+      }
     }
 
     _createAnimatorFactory() {
