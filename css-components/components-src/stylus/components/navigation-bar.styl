@@ -78,11 +78,6 @@ navigation-bar__item()
   overflow visible
   retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
 
-.navigation-bar__line-height
-  line-height var-navigation-bar-height
-  padding-bottom 0
-  padding-top 0
-
 .navigation-bar__bg
   background var-navigation-bar-background-color
 
@@ -100,12 +95,14 @@ navigation-bar__item()
   max-width 50%
   width 27%
   text-align left
+  line-height var-navigation-bar-height
 
 .navigation-bar__right
   @extend .navigation-bar__item
   max-width 50%
   width 27%
   text-align right
+  line-height var-navigation-bar-height
 
 .navigation-bar__center
   @extend .navigation-bar__item
@@ -134,7 +131,7 @@ navigation-bar__item()
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -144,7 +141,7 @@ navigation-bar__item()
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
@@ -156,7 +153,7 @@ navigation-bar__item()
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--outline navigation-bar__line-height">
+        <span class="toolbar-button--outline">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -166,7 +163,7 @@ navigation-bar__item()
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+        <span class="toolbar-button--outline">Button</span>
       </div>
     </div>
 */
@@ -179,18 +176,18 @@ navigation-bar__item()
   markup:
     <div class="navigation-bar navigation-bar--android">
       <div class="navigation-bar__left navigation-bar--android__left">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
+        <span class="toolbar-button" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
       </div>
       <div class="navigation-bar__center navigation-bar--android__center">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
+        <span class="toolbar-button" style="padding:0">
           <i class="ion-cube" style="font-size:20px;"></i> App Bar
         </span>
       </div>
       <div class="navigation-bar__right navigation-bar--android__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-android-share" style="font-size:20px;"></i>
         </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-android-more" style="font-size:20px;"></i>
         </span>
       </div>
@@ -222,19 +219,19 @@ navigation-bar__item()
   markup:
     <div class="navigation-bar navigation-bar--android">
       <div class="navigation-bar__left navigation-bar--android__left">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
+        <span class="toolbar-button" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
       </div>
       <div class="navigation-bar__center navigation-bar--android__center">
         App Bar
       </div>
       <div class="navigation-bar__right navigation-bar--android__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-android-star" style="font-size:20px;"></i>
         </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-android-search" style="font-size:20px;"></i>
         </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-android-more" style="font-size:20px;"></i>
         </span>
       </div>
@@ -248,7 +245,7 @@ navigation-bar__item()
   markup:
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -256,7 +253,7 @@ navigation-bar__item()
         Navigation Bar
       </div>
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
@@ -273,7 +270,7 @@ navigation-bar__item()
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--outline navigation-bar__line-height">
+        <span class="toolbar-button--outline">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -283,7 +280,7 @@ navigation-bar__item()
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+        <span class="toolbar-button--outline">Button</span>
       </div>
     </div>
 */
@@ -296,7 +293,7 @@ navigation-bar__item()
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -304,7 +301,7 @@ navigation-bar__item()
         Navigation Bar
       </div>
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
