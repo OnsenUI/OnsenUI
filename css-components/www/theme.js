@@ -74,6 +74,7 @@
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
         'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
 
         // Material Button
         'material-button-background-color': '#009688',
@@ -184,6 +185,7 @@
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
         'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
 
         // Material Button
         'material-button-background-color': '#009688',
@@ -291,9 +293,10 @@
         'material-range-thumb-color': '#80cbc4',
 
         // Material Toolbar
-        'material-toolbar-background-color': '#333333',
+        'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
         'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
 
         // Material Button
         'material-button-background-color': '#80cbc4',
@@ -403,6 +406,7 @@
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
         'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
 
         // Material Button
         'material-button-background-color': '#009688',
@@ -513,6 +517,7 @@
         'material-toolbar-background-color': '#009688',
         'material-toolbar-text-color': '#ffffff',
         'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
 
         // Material Button
         'material-button-background-color': '#009688',

@@ -78,6 +78,11 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'material-toolbar-button-color',
           displayName: 'Button Color'
+        },
+
+        {
+          name: 'material-toolbar-button-active-color',
+          displayName: 'Active Button Background Color'
         }
       ]
     },
