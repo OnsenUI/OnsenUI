@@ -159,7 +159,7 @@ switch__toggle()
   background-color var-material-switch-inactive-background-color
   margin-top 5px
   height 14px
-
+  box-shadow none
 
 .switch--material__input
   hide-input()
@@ -178,6 +178,7 @@ switch__toggle()
 
 .switch--material__input:checked + .switch--material__toggle
   background-color var-material-switch-active-background-color
+  box-shadow none
 
 .switch--material__input:not(:checked) + .switch--material__toggle:before
   background-color var-material-switch-inactive-thumb-color
