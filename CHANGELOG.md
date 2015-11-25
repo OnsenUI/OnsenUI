@@ -7,6 +7,7 @@ v2.0.0-beta.1
  * ons-fab: Fix broken layout on Safari.
  * ons-toolbar: Improve layout of material toolbar.
  * ons-progress: Splitted into two different components `ons-progress-bar` and `ons-progress-circular`.
+ * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
 
 v2.0.0-beta
