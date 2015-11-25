@@ -88,11 +88,11 @@ limitations under the License.
       const bothPageHasToolbar =
         enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
 
-      var noAndroidLikeToolbar =
-        !enterPage.element._getToolbarElement().classList.contains('navigation-bar--android') &&
-        !leavePage.element._getToolbarElement().classList.contains('navigation-bar--android');
+      var noMaterialToolbar =
+        !enterPage.element._getToolbarElement().classList.contains('navigation-bar--material') &&
+        !leavePage.element._getToolbarElement().classList.contains('navigation-bar--material');
 
-      return bothPageHasToolbar && noAndroidLikeToolbar;
+      return bothPageHasToolbar && noMaterialToolbar;
     }
 
     /**

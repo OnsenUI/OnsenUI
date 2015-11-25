@@ -6,9 +6,6 @@
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
- * @modifier android
- *   [en]Android style toolbar. Title is left-aligned.[/en]
- *   [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]
  * @description
  *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
@@ -59,21 +56,6 @@
  * @description
  *   [en]The appearance of the toolbar.[/en]
  *   [ja]ツールバーの表現を指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name fixed-style
- * @initonly
- * @description
- *   [en]
- *     By default the center element will be left-aligned on Android and center-aligned on iOS.
- *     Use this attribute to override this behavior so it's always displayed in the center.
- *   [/en]
- *   [ja]
- *     このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。
- *     この属性を使用すると、要素はAndroidとiOSともに中央配置となります。
- *   [/ja]
  */
 
 (function() {

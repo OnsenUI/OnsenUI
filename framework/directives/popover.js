@@ -3,9 +3,6 @@
  * @id popover
  * @name ons-popover
  * @category popover
- * @modifier android
- *   [en]Display an Android style popover.[/en]
- *   [ja]Androidライクなポップオーバーを表示します。[/ja]
  * @description
  *  [en]A component that displays a popover next to an element.[/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
@@ -390,13 +387,8 @@
               element.data('ons-popover', undefined);
               element = null;
             });
-
-            if ($onsen.isAndroid()) {
-              setImmediate(function() {
-                popover.addModifier('android');
-              });
-            }
           },
+
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }

@@ -4,9 +4,6 @@
  * @id alert-dialog
  * @name ons-alert-dialog
  * @category dialog
- * @modifier android
- *   [en]Display an Android style alert dialog.[/en]
- *   [ja]Androidライクなスタイルを表示します。[/ja]
  * @description
  *   [en]Alert dialog that is displayed on top of the current screen.[/en]
  *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
