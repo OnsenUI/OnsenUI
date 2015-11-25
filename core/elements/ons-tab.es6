@@ -210,8 +210,14 @@ limitations under the License.
     attachedCallback() {
       this._ensureElementPosition();
 
+      const tabbar = this._findTabbarElement();
+
+      if (tabbar.hasAttribute('modifier')) {
+        const prefix = this.hasAttribute('modifier') ? this.getAttribute('modifier') + ' ' : '';
+        this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
+      }
+
       if (this.hasAttribute('active')) {
-        const tabbar = this._findTabbarElement();
         const tabIndex = this._findTabIndex();
 
         window.OnsTabbarElement.rewritables.ready(tabbar, () => {
