@@ -47,6 +47,8 @@ limitations under the License.
   const MaterialTemplateElement = util.createElement(`
     <span class="toolbar-button toolbar-button--material">
       <i class="zmdi zmdi-arrow-left"></i>
+
+      <span class="back-button__label"></span>
     </span>
   `);
 
