@@ -23,6 +23,10 @@ var-tab-bar-background-color = $tabbar-background-color // Background color
 var-tab-bar-border-color = $tabbar-border-color // Separator
 var-tab-bar-button-color = $tabbar-text-color // Text color
 var-tab-bar-active-color = $tabbar-highlight-text-color // Text color active
+var-material-tab-bar-background-color = $material-tabbar-background-color
+var-material-tab-bar-text-color = $material-tabbar-text-color
+var-material-tab-bar-current-color = $material-tabbar-highlight-text-color
+var-material-tab-bar-border-color = $material-tabbar-highlight-color
 
 var-tab-bar-active-border-top = none
 var-tab-bar-focus-border-top = none
@@ -338,4 +342,48 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 :checked + .tab-bar--top-border__button
   background-color transparent
   border-bottom 4px solid var-tab-bar-active-color
+
+/*! topdoc
+  name: Material Tab Bar
+  class: tab-bar--material
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Activity
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--material
+  background-color var-material-tab-bar-background-color
+  border-bottom-width 0px
+
+.tab-bar--material__button
+  background-color transparent
+  border-bottom 2px solid transparent
+  color var-material-tab-bar-text-color
+  material-font()
+
+:checked + .tab-bar--material__button
+  background-color transparent
+  border-bottom 2px solid var-material-tab-bar-border-color
+  color var-material-tab-bar-current-color
 

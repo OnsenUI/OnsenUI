@@ -110,6 +110,12 @@
         'material-progress-circle-primary-color': '#009688',
         'material-progress-circle-secondary-color': '#80cbc4',
 
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#004C40',
+
         // Floating Action Button
         'fab-text-color': '#fafafa',
         'fab-background-color': '#009688'
@@ -220,6 +226,12 @@
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
         'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#004C40',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -332,6 +344,12 @@
         'material-progress-circle-primary-color': '#009688',
         'material-progress-circle-secondary-color': '#80cbc4',
 
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#004C40',
+
         // Floating Action Button
         'fab-text-color': '#fafafa',
         'fab-background-color': '#80cbc4'
@@ -441,6 +459,12 @@
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
         'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#004C40',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -552,6 +576,12 @@
         'material-progress-bar-background-color': '#e0e0e0',
         'material-progress-circle-primary-color': '#009688',
         'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#004C40',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
