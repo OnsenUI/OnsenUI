@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.1
 ----
  * ons-fab: Fix broken layout on Safari.
+ * ons-toolbar: Improve layout of material toolbar.
 
 v2.0.0-beta
 ----
