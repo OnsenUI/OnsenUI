@@ -21,9 +21,7 @@
     "component",
     "monaca"
   ],
-  "dependencies": {
-    "angular": "~1.4.3"
-  },
+  "dependencies": {},
   "license": "Apache License, Version 2.0",
   "ignore": [
     ".npmignore"
