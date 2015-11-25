@@ -1013,21 +1013,8 @@ h6 {
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--material">
-      <div class="navigation-bar__left navigation-bar--material__left">
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-menu"></i>
-        </span>
-      </div>
       <div class="navigation-bar__center navigation-bar--material__center">
-        Toolbar
-      </div>
-      <div class="navigation-bar__right navigation-bar--material__right">
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-search"></i>
-        </span>
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-refresh"></i>
-        </span>
+        Title
       </div>
     </div>
 */
@@ -1049,7 +1036,7 @@ h6 {
   border-bottom: 0;
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-  padding: 0px 16px;
+  padding: 0;
   background-color: #009688;
 }
 .navigation-bar--material__left {
@@ -1059,6 +1046,7 @@ h6 {
   font-weight: 500;
   color: #fff;
   height: 56px;
+  min-width: 72px;
   width: auto;
   line-height: 56px;
 }
@@ -1073,8 +1061,10 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
-  padding-left: 34px;
   line-height: 56px;
+}
+.navigation-bar--material__center:first-child {
+  margin-left: 72px;
 }
 .navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -1086,6 +1076,34 @@ h6 {
   width: auto;
   line-height: 56px;
 }
+/* topdoc
+  name: Material Navigation Bar with Icons
+  class: navigation-bar--material
+  use: Toolbar Button, Material Navigation Bar
+  hint: .navigation-bar--material
+  markup:
+    <div class="navigation-bar navigation-bar--material">
+      <div class="navigation-bar__left navigation-bar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--material__center">
+        Title
+      </div>
+      <div class="navigation-bar__right navigation-bar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-favorite"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-more-vert"></i>
+        </span>
+      </div>
+    </div>
+*/
 /* topdoc
   name: Button
   class: button
@@ -2480,15 +2498,26 @@ h6 {
   padding-right: 6px;
 }
 .toolbar-button--material {
-  font-size: 21px;
+  font-size: 22px;
   color: #fff;
-  padding: 0;
+  display: inline-block;
+  padding: 0 12px;
+  height: 100%;
+  margin: 0;
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  vertical-align: initial;
+}
+.toolbar-button--material:first-of-type {
+  margin-left: 4px;
+}
+.toolbar-button--material:last-of-type {
+  margin-right: 4px;
 }
 .toolbar-button--material:active {
   opacity: 1;
-}
-.toolbar-button--material:not(:last-child) {
-  margin-right: 10px;
+  background-color: #26a69a;
 }
 /* topdoc
   name: Checkbox
