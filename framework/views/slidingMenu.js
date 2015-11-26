@@ -182,7 +182,7 @@ limitations under the License.
 
         // Close menu on tap event.
         this._mainPageGestureDetector = new ons.GestureDetector(this._mainPage[0]);
-        this._bindedOnTap = this._onTap.bind(this);
+        this._boundOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -197,8 +197,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        this._bindedOnWindowResize = this._onWindowResize.bind(this);
-        window.addEventListener('resize', this._bindedOnWindowResize);
+        this._boundOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._boundOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -225,7 +225,7 @@ limitations under the License.
             animators: SlidingMenuView._animatorDict,
             baseClass: SlidingMenuAnimator,
             baseClassName: 'SlidingMenuAnimator',
-            defaultAnimation: attrs.animation,
+            defaultAnimation: attrs.type,
             defaultAnimationOptions: $parse(attrs.animationOptions)()
           });
           this._animator = animationChooser.newAnimator();
@@ -243,6 +243,12 @@ limitations under the License.
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
+
+        if (!attrs.swipeable) {
+          this.setSwipeable(true);
+        }
       },
 
       getDeviceBackButtonHandler: function() {
@@ -277,10 +283,12 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
-        this._deviceBackButtonHandler.destroy();
-        window.removeEventListener('resize', this._bindedOnWindowResize);
+        this._clearDerivingEvents();
 
-        this._mainPageGestureDetector.off('tap', this._bindedOnTap);
+        this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._boundOnWindowResize);
+
+        this._mainPageGestureDetector.off('tap', this._boundOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -372,6 +380,7 @@ limitations under the License.
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
+        this._currentPageElement[0]._show();
       },
 
       /**
@@ -463,7 +472,7 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event.gesture.stopDetect();
+          this._deactivateGestureDetector();
         }
 
         switch (event.type) {
@@ -619,7 +628,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', '');
-          this._mainPageGestureDetector.off('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.off('tap', this._boundOnTap);
 
           this.emit('postclose', {
             slidingMenu: this
@@ -667,7 +676,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', 'none');
-          this._mainPageGestureDetector.on('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.on('tap', this._boundOnTap);
 
           this.emit('postopen', {
             slidingMenu: this

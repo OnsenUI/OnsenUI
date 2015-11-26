@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Range | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+
+</head>
+
+<body>
+
+  <ons-navigator>
+    <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
+
+    <div style="text-align: center">
+
+      <br><br><br>
+      <input type="range" value="{{numberSelection}}" ng-model="numberSelection" class="range">
+      <br><br><br>
+      <input type="range" class="range" disabled>
+
+      <br><br><br>
+      <input type="range" value="{{numberSelection2}}" ng-model="numberSelection2" class="range range--material">
+      <br><br><br>
+      <input type="range" class="range range--material" disabled>
+
+      <h3>{{numberSelection}}</h3>
+      <h3>{{numberSelection2}}</h3>
+    </div>
+  </ons-navigator>
+
+</body>
+</html>

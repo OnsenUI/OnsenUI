@@ -29,6 +29,8 @@
  * @ngdoc attribute
  * @name var
  * @type {String}
+ * @extensionOf angular
+ * @initonly
  * @description
  *   [en]Variable name to refer this modal.[/en]
  *   [ja]このモーダルを参照するための名前を指定します。[/ja]
@@ -106,6 +108,17 @@
 
 /**
  * @ngdoc method
+ * @signature isShown()
+ * @return {Boolean}
+ *   [en]true if the modal is visible.[/en]
+ *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
+ * @description
+ *   [en]Returns whether the modal is visible or not.[/en]
+ *   [ja]モーダルが表示されているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
@@ -133,6 +146,7 @@
 
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           var modal = new ModalView(scope, element, attrs);
           $onsen.addModifierMethodsForCustomElements(modal, element);
 

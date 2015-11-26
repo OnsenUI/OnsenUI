@@ -18,19 +18,42 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {'': 'list__item--*'};
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {'': 'list__item--*'};
+  const ModifierUtil = ons._internal.ModifierUtil;
 
   class ListItemElement extends ons._BaseElement {
     createdCallback() {
       this.classList.add('list__item');
       ModifierUtil.initModifier(this, scheme);
+
+      this._gestureDetector = new ons.GestureDetector(this);
+      this._boundOnDrag = this._onDrag.bind(this);
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
+    }
+
+    attachedCallback() {
+      this.addEventListener('drag', this._boundOnDrag);
+    }
+
+    detachedCallback() {
+      this.removeEventListener('drag', this._boundOnDrag);
+    }
+
+    _onDrag(event) {
+      let g = event.gesture;
+      // Prevent vertical scrolling if the users pans left or right.
+      if (this._shouldLockOnDrag() && ['left', 'right'].indexOf(g.direction) > -1) {
+        g.preventDefault();
+      }
+    }
+
+    _shouldLockOnDrag() {
+      return this.hasAttribute('lock-on-drag');
     }
   }
 

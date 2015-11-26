@@ -10,15 +10,27 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
-
+    frameworks: ['mocha', 'chai-as-promised', 'chai-spies', 'chai'],
 
     // list of files / patterns to load in the browser
     files: [
-      __dirname + '/../../build/js/ons-core.js',
-      __dirname + '/../**/*.spec.js'
+      '../../core/vendor/winstore-jscompat.js',
+      '../../core/vendor/*.js',
+      '../../core/lib/animit.js',
+      '../../core/lib/doorlock.es6',
+      '../../core/lib/ons.es6',
+      '../../core/lib/ons-util.es6',
+      '../../core/lib/modal-animator.es6',
+      '../../core/lib/navigator-transition-animator.es6',
+      '../../core/lib/popover-animator.es6',
+      '../../core/lib/ons-platform.es6',
+      '../../core/lib/*.{es6,js}',
+      '../../core/*.{es6,js}',
+      '../../core/elements/*.{es6,js}',
+      '../../core/test/setup.es6',
+      '../../build/css/onsenui.css',
+      '../../build/css/onsen-css-components.css'
     ],
-
 
     // list of files to exclude
     exclude: [
@@ -28,14 +40,34 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '../../core/**/*.es6': ['webpack'],
+      '../../core/*.es6': ['webpack']
     },
 
+    webpack: {
+        module: {
+            preLoaders: [
+                {
+                  test: /spec\.es6$/,
+                  loader: 'babel'
+                },
+                {
+                  test: /\.es6$/,
+                  exclude: /spec\.es6$/,
+                  loader: 'isparta'
+                }
+            ],
+        }
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage', 'junit'],
 
+    coverageReporter: {
+      type: 'lcov'
+    },
 
     // web server port
     port: 9876,

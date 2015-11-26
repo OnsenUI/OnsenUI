@@ -17,11 +17,18 @@ limitations under the License.
 
 ons-scroller {
   display: block;
+  height: 100%;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;   
   -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
 }
 
 ons-scroller::-webkit-scrollbar {
   display: none;
+}
+
+.ons-scroller__content {
+  height: 100%;
+  overflow: scroll;
 }

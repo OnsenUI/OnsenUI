@@ -1,0 +1,66 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "jasmine": true,
+    "node": true,
+    "mocha": true,
+    "browser": false,
+    "builtin": true
+  },
+  "rules": {
+    "strict": 0,
+    "block-scoped-var": 0,
+    "camelcase": 2,
+    "curly": [
+      2,
+      "all"
+    ],
+    "eqeqeq": [
+      0
+    ],
+    "global-strict": [
+      0,
+      "never"
+    ],
+    "guard-for-in": 2,
+    "new-cap": 2,
+    "no-bitwise": 2,
+    "no-caller": 2,
+    "no-empty": 2,
+    "no-extend-native": 2,
+    "no-irregular-whitespace": 2,
+    "no-iterator": 0,
+    "no-new": 2,
+    "no-underscore-dangle": 0,
+    "comma-dangle": 0,
+    "no-extra-strict": 0,
+    "no-extra-parens": 0,
+    "no-lone-blocks": 1,
+    "no-unused-expressions": 0,
+    "no-trailing-spaces": 1,
+    "no-multi-spaces": 0,
+    "no-shadow": 0,
+    "no-redeclare": 0,
+    "no-sequences": 2,
+    "no-undef": 0,
+    "no-unused-vars": 0,
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true
+    }],
+    "no-use-before-define": [
+      2,
+      "nofunc"
+    ],
+    "no-with": 2,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "valid-typeof": 2,
+    "wrap-iife": [
+      2,
+      "inside"
+    ]
+  }
+}

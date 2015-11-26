@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
 
   <script>
     var randomColor = function() {
@@ -49,6 +50,10 @@
       $scope.remove = function() {
         $scope.items.pop();
       };
+    })
+
+    .controller('ListController', function($scope) {
+      $scope.items = ['Apple', 'Banana', 'Orange', 'Pear', 'Melon', 'Papaya', 'Mango'];
     });
   </script>
 
@@ -127,6 +132,7 @@
         <ons-list-item ng-click="navi.pushPage('example5.html')" modifier="chevron">Example5</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example6.html')" modifier="chevron">Example6</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example7.html')" modifier="chevron">Example7</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example8.html')" modifier="chevron">Example8</ons-list-item>
       </ons-list>
 
     </ons-page>
@@ -330,7 +336,30 @@
             </ons-list-item>
           </ons-list>
         </ons-carousel-item>
-      </ons-carousel-item>
+      </ons-carousel>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="example8.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Example 8</div>
+      </ons-toolbar>
+      <p><input ng-model="test"></p>
+      <ons-list ng-controller="ListController">
+        <ons-list-item ng-repeat="item in items">
+          <ons-carousel var="carousel" style="width: 100%; height: 44px" ons-scope>
+            <ons-carousel-item ng-click="carousel.next()">
+              {{ $index }}
+            </ons-carousel-item>
+            <ons-carousel-item ng-click="carousel.prev()">
+              {{ test }}
+              {{ item }}
+            </ons-carousel-item>
+          </ons-carousel>
+        </ons-list-item>
+      </ons-list>
     </ons-page>
   </ons-template>
 

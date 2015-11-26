@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 ((ons) => {
-  var create = () => {
-    var obj = {
+  const create = () => {
+    const obj = {
       // actual implementation to detect if whether current screen is portrait or not
       _isPortrait: false,
 
@@ -57,7 +57,7 @@ limitations under the License.
       },
 
       _installIsPortraitImplementation: function() {
-        var isPortrait = window.innerWidth < window.innerHeight;
+        const isPortrait = window.innerWidth < window.innerHeight;
 
         if (!('orientation' in window)) {
           this._isPortrait = function() {
@@ -75,27 +75,26 @@ limitations under the License.
       },
 
       _onOrientationChange: function() {
-        var isPortrait = this._isPortrait();
+        const isPortrait = this._isPortrait();
 
         // Wait for the dimensions to change because
         // of Android inconsistency.
-        var nIter = 0;
-        var interval = setInterval(function() {
+        let nIter = 0;
+        const interval = setInterval(() => {
           nIter++;
 
-          var w = window.innerWidth,
-            h = window.innerHeight;
+          const w = window.innerWidth;
+          const h = window.innerHeight;
 
           if ((isPortrait && w <= h) ||
              (!isPortrait && w >= h)) {
             this.emit('change', {isPortrait: isPortrait});
             clearInterval(interval);
-          }
-          else if (nIter === 50) {
+          } else if (nIter === 50) {
             this.emit('change', {isPortrait: isPortrait});
             clearInterval(interval);
           }
-        }.bind(this), 20);
+        }, 20);
       },
 
       // Run on not mobile browser.

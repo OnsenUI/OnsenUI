@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('app').factory('GeneratedCss', function($http, $rootScope) {
+angular.module('app').factory('GeneratedCss', function($http, $rootScope, $timeout) {
 
-  $http.get('/onsen-css-components.css').then(function(response) {
-    generatedCss.templateCss = response.data;
-    generatedCss.onColorsChanged();
-  });
+  $timeout(function() {
+    $http.get('/onsen-css-components.css').then(function(response) {
+      generatedCss.templateCss = response.data;
+      generatedCss.onColorsChanged();
+    });
+  }, 0);
 
   var VAR_REGEX = /\$[-a-zA-Z0-9]+/g;
 

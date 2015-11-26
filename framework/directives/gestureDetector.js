@@ -56,8 +56,12 @@
             }
           };
 
-          var gestureDetector = element[0]._gestureDetector;
-          gestureDetector.on(EVENTS.join(' '), handler);
+          var gestureDetector;
+
+          setImmediate(function() {
+            gestureDetector = element[0]._gestureDetector;
+            gestureDetector.on(EVENTS.join(' '), handler);
+          });
 
           $onsen.cleaner.onDestroy(scope, function() {
             gestureDetector.off(EVENTS.join(' '), handler);

@@ -28,6 +28,11 @@ var-navigation-bar-box-shadow = none
 var-navigation-bar-padding = 0
 var-navigation-bar-separator = 1px solid var-navigation-bar-separator-color
 
+var-navigation-bar-material-height = 56px
+
+var-material-navigation-bar-background-color = $material-toolbar-background-color
+var-material-navigation-bar-color = $material-toolbar-text-color
+
 /*! topdoc
   name: Navigation Bar
   class: navigation-bar
@@ -368,3 +373,66 @@ navigation-bar__item()
       </div>
     </div>
 */
+
+/*! topdoc
+  name: Material Navigation Bar
+  class: navigation-bar--material
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--material">
+      <div class="navigation-bar__left navigation-bar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--material__center">
+        Toolbar
+      </div>
+      <div class="navigation-bar__right navigation-bar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-refresh"></i>
+        </span>
+      </div>
+    </div>
+*/
+
+.navigation-bar--material
+  display flex
+  flex-wrap nowrap
+  justify-content space-between
+  height var-navigation-bar-material-height
+  border-bottom 0
+  box-shadow 0 1px 5px rgba(0,0,0,0.3)
+  padding 0px 16px
+  background-color var-material-navigation-bar-background-color
+
+navigation-bar--material-font()
+  material-font()
+  font-size 20px
+  font-weight 500
+  color var-material-navigation-bar-color
+
+.navigation-bar--material__left
+  navigation-bar--material-font()
+  height var-navigation-bar-material-height
+  width auto
+  line-height var-navigation-bar-material-height
+
+.navigation-bar--material__center
+  navigation-bar--material-font()
+  height var-navigation-bar-material-height
+  width 100%
+  overflow hidden
+  text-overflow ellipsis
+  text-align left
+  padding-left 34px
+  line-height var-navigation-bar-material-height
+
+.navigation-bar--material__right
+  navigation-bar--material-font()
+  height var-navigation-bar-material-height
+  width auto
+  line-height var-navigation-bar-material-height

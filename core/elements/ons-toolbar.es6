@@ -31,6 +31,9 @@ limitations under the License.
     createdCallback() {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+
+      this._tryToEnsureNodePosition();
+      setImmediate(() => this._tryToEnsureNodePosition());
     }
 
     attributeChangedCallback(name, last, current) {
@@ -40,10 +43,11 @@ limitations under the License.
     }
 
     attachedCallback() {
-      setImmediate(this._ensureNodePosition.bind(this));
+      this._tryToEnsureNodePosition();
+      setImmediate(() => this._tryToEnsureNodePosition());
     }
 
-    _ensureNodePosition() {
+    _tryToEnsureNodePosition() {
       if (!this.parentNode || this.hasAttribute('inline')) {
         return;
       }
@@ -94,14 +98,9 @@ limitations under the License.
     }
 
     _compile() {
-      var shouldAppendAndroidModifier = ons.platform.isAndroid() && !this.hasAttribute('fixed-style');
       var inline = this.hasAttribute('inline');
 
       this.classList.add('navigation-bar');
-
-      if (shouldAppendAndroidModifier) {
-        this.classList.add('navigation-bar--android');
-      }
 
       if (!inline) {
         this.style.position = 'absolute';

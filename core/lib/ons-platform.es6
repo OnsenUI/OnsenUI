@@ -30,7 +30,7 @@ limitations under the License.
      * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
      * @param  {string} platform Name of the platform.
      */
-    select: function (platform) {
+    select: function(platform) {
       ons.platform._renderPlatform = platform.trim().toLowerCase();
     },
 
@@ -47,6 +47,8 @@ limitations under the License.
     isIOS: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'ios';
+      } else if (typeof device === 'object') {
+        return /iOS/i.test(device.platform);
       } else {
         return /iPhone|iPad|iPod/i.test(navigator.userAgent);
       }
@@ -58,6 +60,8 @@ limitations under the License.
     isAndroid: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'android';
+      } else if (typeof device === 'object') {
+        return /Android/i.test(device.platform);
       } else {
         return /Android/i.test(navigator.userAgent);
       }
@@ -83,6 +87,8 @@ limitations under the License.
     isWP: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'wp';
+      } else if (typeof device === 'object') {
+        return /Win32NT|WinCE/i.test(device.platform);
       } else {
         return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
       }
@@ -105,9 +111,18 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isIPod: function() {
+      return /iPod/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isBlackBerry: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'blackberry';
+      } else if (typeof device === 'object') {
+        return /BlackBerry/i.test(device.platform);
       } else {
         return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
       }
@@ -153,7 +168,7 @@ limitations under the License.
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'chrome';
       } else {
-        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
+        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
       }
     },
 
@@ -171,12 +186,61 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isEdge: function() {
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'edge';
+      } else {
+        return navigator.userAgent.indexOf(' Edge/') >= 0;
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isIOS7above: function() {
-      if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
+      if (typeof device === 'object') {
+        return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
+      } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
         return (parseInt(ver.split('.')[0]) >= 7);
       }
       return false;
+    },
+
+    /**
+     * @return {String}
+     */
+    getMobileOS: function() {
+      if (this.isAndroid()) {
+        return 'android';
+      }
+      else if (this.isIOS()) {
+        return 'ios';
+      }
+      else if (this.isWP()) {
+        return 'wp';
+      }
+      else {
+        return 'other';
+      }
+    },
+
+    /**
+     * @return {String}
+     */
+    getIOSDevice: function() {
+      if (this.isIPhone()) {
+        return 'iphone';
+      }
+      else if (this.isIPad()) {
+        return 'ipad';
+      }
+      else if (this.isIPod()) {
+        return 'ipod';
+      }
+      else {
+        return 'na';
+      }
     }
   };
 })(window.ons = window.ons || {});

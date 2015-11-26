@@ -2,19 +2,20 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Gesture Detector | Onsen UI</title>  
+  <title>Gesture Detector | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
 
-  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>  
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
   <script>
-    var eventName = 
+    var eventName =
       'drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
       'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate';
 
@@ -24,10 +25,10 @@
       }
     });
   </script>
-  
+
 </head>
 
-<body>    
+<body>
 
   <ons-page>
     <ons-toolbar>
@@ -42,6 +43,6 @@
 
     <p style="margin: 0 50px; color: #ccc;">Supporting events: Drag, Hold, Release, Swipe, Tap, DoubleTap, Transform, Pinch, Rotate</p>
   </ons-page>
-  
+
 </body>
 </html>

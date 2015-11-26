@@ -18,14 +18,20 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'switch--*',
-    'switch__input': 'switch--*__input',
-    'switch__toggle': 'switch--*__toggle'
+    '.switch__input': 'switch--*__input',
+    '.switch__toggle': 'switch--*__toggle'
   };
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const templateSource = ons._util.createElement(`
+    <div>
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle"></div>
+    </div>
+  `);
 
-  var ExtendableLabelElement;
+  let ExtendableLabelElement;
   if (typeof HTMLLabelElement !== 'function') {
     // for Safari
     ExtendableLabelElement = () => {};
@@ -34,12 +40,60 @@ limitations under the License.
     ExtendableLabelElement = HTMLLabelElement;
   }
 
-  var generateId = (() => {
-    var i = 0;
+  const generateId = (() => {
+    let i = 0;
     return () => 'ons-switch-id-' + (i++);
   })();
 
   class SwitchElement extends ExtendableLabelElement {
+
+    get checked() {
+      return this._getCheckbox().checked;
+    }
+
+    set checked(value) {
+      this._getCheckbox().checked = value;
+      if (this.checked) {
+        this.setAttribute('checked', '');
+      } else {
+        this.removeAttribute('checked');
+      }
+      this._updateForCheckedAttribute();
+    }
+
+    get disabled() {
+      return this._getCheckbox().disabled;
+    }
+
+    set disabled(value) {
+      this._getCheckbox().disabled = value;
+      if (this.disabled) {
+        this.setAttribute('disabled', '');
+      } else {
+        this.removeAttribute('disabled');
+      }
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    isChecked() {
+      return this.checked;
+    }
+
+    /**
+     * @param {Boolean}
+     */
+    setChecked(isChecked) {
+      this.checked = !!isChecked;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    getCheckboxElement() {
+      return this._getCheckbox();
+    }
 
     createdCallback() {
       this._compile();
@@ -67,17 +121,27 @@ limitations under the License.
 
     _compile() {
       this.classList.add('switch');
-      this.innerHTML = `
-        <input type="checkbox" checked class="switch__input">
-        <div class="switch__toggle"></div>
-      `;
+      const template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
       this._getCheckbox().setAttribute('name', generateId());
     }
 
     detachedCallback() {
+      this._getCheckbox().removeEventListener('change', this._onChangeListener);
     }
 
-    atachedCallback() {
+    attachedCallback() {
+      this._getCheckbox().addEventListener('change', this._onChangeListener);
+    }
+
+    _onChangeListener() {
+      if (this.checked !== true) {
+        this.removeAttribute('checked');
+      } else {
+        this.setAttribute('checked', '');
+      }
     }
 
     /**
@@ -93,7 +157,7 @@ limitations under the License.
     _setChecked(isChecked) {
       isChecked = !!isChecked;
 
-      var checkbox = this._getCheckbox();
+      const checkbox = this._getCheckbox();
 
       if (checkbox.checked != isChecked) {
         checkbox.checked = isChecked;

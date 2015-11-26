@@ -1,0 +1,1751 @@
+{
+  "fileInfo": {
+    "baseName": "speedDial",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 25,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "speed-dial",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-speed-dial",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "speeddial",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Element that displays a Material Design Speed Dialog component.[/en]\n  [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "codepen"
+        },
+        "tagName": "codepen",
+        "description": "dYQYLg",
+        "startingLine": 8
+      },
+      {
+        "tagDef": {
+          "name": "seealso",
+          "multi": true,
+          "docProperty": "seealsos"
+        },
+        "tagName": "seealso",
+        "description": "ons-speed-dial-item\n  [en]ons-speed-dial-item component[/en]\n  [ja]ons-speed-dial-itemコンポーネント[/ja]",
+        "startingLine": 9
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>",
+        "startingLine": 12
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "speed-dial",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-speed-dial",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "speeddial",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Element that displays a Material Design Speed Dialog component.[/en]\n  [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "codepen": [
+          {
+            "tagDef": {
+              "name": "codepen"
+            },
+            "tagName": "codepen",
+            "description": "dYQYLg",
+            "startingLine": 8
+          }
+        ],
+        "seealso": [
+          {
+            "tagDef": {
+              "name": "seealso",
+              "multi": true,
+              "docProperty": "seealsos"
+            },
+            "tagName": "seealso",
+            "description": "ons-speed-dial-item\n  [en]ons-speed-dial-item component[/en]\n  [ja]ons-speed-dial-itemコンポーネント[/ja]",
+            "startingLine": 9
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>",
+            "startingLine": 12
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "codepen": {
+    "id": "dYQYLg",
+    "isWide": false
+  },
+  "seealsos": [
+    {
+      "name": "ons-speed-dial-item\n",
+      "description": " [en]ons-speed-dial-item component[/en]\n  [ja]ons-speed-dial-itemコンポーネント[/ja]"
+    }
+  ],
+  "categories": [
+    "speeddial"
+  ],
+  "id": "speed-dial",
+  "example": "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>",
+  "name": "ons-speed-dial",
+  "description": "[en]Element that displays a Material Design Speed Dialog component.[/en]\n  [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-speed-dial position=\"left bottom\">\n  <ons-icon\n    icon=\"fa-twitter\"\n    size=\"26px\"\n    fixed-width=\"false\"\n    style=\"vertical-align:middle;\">\n  </ons-icon>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>\n  <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>\n</ons-speed-dial>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 63,
+      "endingLine": 69,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 63
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "show()",
+            "startingLine": 64
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Show the speed dial.[/en]\n  [ja]Speed dialを表示します。[/ja]",
+            "startingLine": 65
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 63
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "show()",
+                "startingLine": 64
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Show the speed dial.[/en]\n  [ja]Speed dialを表示します。[/ja]",
+                "startingLine": 65
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "show()",
+                "startingLine": 64
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "show()",
+      "name": "show",
+      "description": "[en]Show the speed dial.[/en]\n  [ja]Speed dialを表示します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 71,
+      "endingLine": 77,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 71
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "hide()",
+            "startingLine": 72
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Hide the speed dial.[/en]\n  [ja]Speed dialを非表示にします。[/ja]",
+            "startingLine": 73
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 71
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hide()",
+                "startingLine": 72
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Hide the speed dial.[/en]\n  [ja]Speed dialを非表示にします。[/ja]",
+                "startingLine": 73
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hide()",
+                "startingLine": 72
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "hide()",
+      "name": "hide",
+      "description": "[en]Hide the speed dial.[/en]\n  [ja]Speed dialを非表示にします。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 79,
+      "endingLine": 85,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 79
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "showItems()",
+            "startingLine": 80
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Show the speed dial items.[/en]\n  [ja]Speed dialの子要素を表示します。[/ja]",
+            "startingLine": 81
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 79
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "showItems()",
+                "startingLine": 80
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Show the speed dial items.[/en]\n  [ja]Speed dialの子要素を表示します。[/ja]",
+                "startingLine": 81
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "showItems()",
+                "startingLine": 80
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "showItems()",
+      "name": "showItems",
+      "description": "[en]Show the speed dial items.[/en]\n  [ja]Speed dialの子要素を表示します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 87,
+      "endingLine": 93,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 87
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "hideItems()",
+            "startingLine": 88
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Hide the speed dial items.[/en]\n  [ja]Speed dialの子要素を非表示にします。[/ja]",
+            "startingLine": 89
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 87
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hideItems()",
+                "startingLine": 88
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Hide the speed dial items.[/en]\n  [ja]Speed dialの子要素を非表示にします。[/ja]",
+                "startingLine": 89
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "hideItems()",
+                "startingLine": 88
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "hideItems()",
+      "name": "hideItems",
+      "description": "[en]Hide the speed dial items.[/en]\n  [ja]Speed dialの子要素を非表示にします。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 95,
+      "endingLine": 101,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 95
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "toggle()",
+            "startingLine": 96
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Toggle visibility.[/en]\n  [ja]Speed dialの表示非表示を切り替えます。[/ja]",
+            "startingLine": 97
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 95
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "toggle()",
+                "startingLine": 96
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Toggle visibility.[/en]\n  [ja]Speed dialの表示非表示を切り替えます。[/ja]",
+                "startingLine": 97
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "toggle()",
+                "startingLine": 96
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "toggle()",
+      "name": "toggle",
+      "description": "[en]Toggle visibility.[/en]\n  [ja]Speed dialの表示非表示を切り替えます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 103,
+      "endingLine": 109,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 103
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "toggleItems()",
+            "startingLine": 104
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Toggle item visibility.[/en]\n  [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]",
+            "startingLine": 105
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 103
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "toggleItems()",
+                "startingLine": 104
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Toggle item visibility.[/en]\n  [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]",
+                "startingLine": 105
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "toggleItems()",
+                "startingLine": 104
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "toggleItems()",
+      "name": "toggleItems",
+      "description": "[en]Toggle item visibility.[/en]\n  [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 111,
+      "endingLine": 117,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 111
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "setDisabled(disabled)",
+            "startingLine": 112
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Disable or enable the element.[/en]\n  [ja]disabled状態にするかどうかを設定します。[/ja]",
+            "startingLine": 113
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 111
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 112
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Disable or enable the element.[/en]\n  [ja]disabled状態にするかどうかを設定します。[/ja]",
+                "startingLine": 113
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "setDisabled(disabled)",
+                "startingLine": 112
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "setDisabled(disabled)",
+      "name": "setDisabled",
+      "description": "[en]Disable or enable the element.[/en]\n  [ja]disabled状態にするかどうかを設定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 119,
+      "endingLine": 128,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 119
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isDisabled()",
+            "startingLine": 120
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]true if the element is disabled.[/en]\n  [ja]disabled状態になっているかどうかを返します。[/ja]",
+            "startingLine": 121,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the component is enabled or not.[/en]\n  [ja]この要素を無効化するかどうかを指定します。[/ja]",
+            "startingLine": 124
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 119
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 120
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]true if the element is disabled.[/en]\n  [ja]disabled状態になっているかどうかを返します。[/ja]",
+                "startingLine": 121,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the component is enabled or not.[/en]\n  [ja]この要素を無効化するかどうかを指定します。[/ja]",
+                "startingLine": 124
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isDisabled()",
+                "startingLine": 120
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isDisabled()",
+      "name": "isDisabled",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]true if the element is disabled.[/en]\n  [ja]disabled状態になっているかどうかを返します。[/ja]",
+        "startingLine": 121,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Returns whether the component is enabled or not.[/en]\n  [ja]この要素を無効化するかどうかを指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 130,
+      "endingLine": 136,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 130
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isInline()",
+            "startingLine": 131
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Returns whether the component is inline or not.[/en]\n  [ja]この要素がインライン要素かどうかを返します。[/ja]",
+            "startingLine": 132
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 130
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isInline()",
+                "startingLine": 131
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Returns whether the component is inline or not.[/en]\n  [ja]この要素がインライン要素かどうかを返します。[/ja]",
+                "startingLine": 132
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isInline()",
+                "startingLine": 131
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isInline()",
+      "name": "isInline",
+      "description": "[en]Returns whether the component is inline or not.[/en]\n  [ja]この要素がインライン要素かどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 138,
+      "endingLine": 147,
+      "codeAncestors": [],
+      "docType": "method",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "method",
+            "startingLine": 138
+          },
+          {
+            "tagDef": {
+              "name": "signature",
+              "priority": 100
+            },
+            "tagName": "signature",
+            "description": "isShown()",
+            "startingLine": 139
+          },
+          {
+            "tagDef": {
+              "name": "returns",
+              "aliases": [
+                "return"
+              ],
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "return",
+            "description": "[en]True if the component is visible.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+            "startingLine": 140,
+            "typeExpression": "Boolean",
+            "type": {
+              "type": "NameExpression",
+              "name": "Boolean"
+            },
+            "typeList": [
+              "Boolean"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Return whether the component is visible or not.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+            "startingLine": 143
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "method",
+                "startingLine": 138
+              }
+            ],
+            "signature": [
+              {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isShown()",
+                "startingLine": 139
+              }
+            ],
+            "returns": [
+              {
+                "tagDef": {
+                  "name": "returns",
+                  "aliases": [
+                    "return"
+                  ],
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "return",
+                "description": "[en]True if the component is visible.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+                "startingLine": 140,
+                "typeExpression": "Boolean",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "Boolean"
+                },
+                "typeList": [
+                  "Boolean"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Return whether the component is visible or not.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+                "startingLine": 143
+              }
+            ],
+            "name": {
+              "0": {
+                "tagDef": {
+                  "name": "signature",
+                  "priority": 100
+                },
+                "tagName": "signature",
+                "description": "isShown()",
+                "startingLine": 139
+              },
+              "tagName": "name"
+            }
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "signature": "isShown()",
+      "name": "isShown",
+      "returns": {
+        "tagDef": {
+          "name": "returns",
+          "aliases": [
+            "return"
+          ],
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "return",
+        "description": "[en]True if the component is visible.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+        "startingLine": 140,
+        "typeExpression": "Boolean",
+        "type": {
+          "type": "NameExpression",
+          "name": "Boolean"
+        },
+        "typeList": [
+          "Boolean"
+        ]
+      },
+      "description": "[en]Return whether the component is visible or not.[/en]\n  [ja]表示されているかどうかを返します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "attributes": [
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 27,
+      "endingLine": 42,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 27
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "position",
+            "startingLine": 28
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 29,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]\n    Specify the vertical and horizontal position of the component.\n    I.e. to display it in the top right corner specify \"right top\".\n    Choose from \"right\", \"left\", \"top\" and \"bottom\".\n  [/en]\n  [ja]\n    この要素を表示する左右と上下の位置を指定します。\n    例えば、右上に表示する場合には\"right top\"を指定します。\n    左右と上下の位置の指定には、rightとleft、topとbottomがそれぞれ指定できます。\n  [/ja]",
+            "startingLine": 30
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 27
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "position",
+                "startingLine": 28
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 29,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]\n    Specify the vertical and horizontal position of the component.\n    I.e. to display it in the top right corner specify \"right top\".\n    Choose from \"right\", \"left\", \"top\" and \"bottom\".\n  [/en]\n  [ja]\n    この要素を表示する左右と上下の位置を指定します。\n    例えば、右上に表示する場合には\"right top\"を指定します。\n    左右と上下の位置の指定には、rightとleft、topとbottomがそれぞれ指定できます。\n  [/ja]",
+                "startingLine": 30
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 29,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "position",
+      "description": "[en]\n    Specify the vertical and horizontal position of the component.\n    I.e. to display it in the top right corner specify \"right top\".\n    Choose from \"right\", \"left\", \"top\" and \"bottom\".\n  [/en]\n  [ja]\n    この要素を表示する左右と上下の位置を指定します。\n    例えば、右上に表示する場合には\"right top\"を指定します。\n    左右と上下の位置の指定には、rightとleft、topとbottomがそれぞれ指定できます。\n  [/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 44,
+      "endingLine": 53,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 44
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "direction",
+            "startingLine": 45
+          },
+          {
+            "tagDef": {
+              "name": "type",
+              "transforms": [
+                null,
+                null
+              ]
+            },
+            "tagName": "type",
+            "description": "",
+            "startingLine": 46,
+            "typeExpression": "String",
+            "type": {
+              "type": "NameExpression",
+              "name": "String"
+            },
+            "typeList": [
+              "String"
+            ]
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Specify the direction the items are displayed. Possible values are \"up\", \"down\", \"left\" and \"right\".[/en]\n  [ja]\n    要素が表示する方向を指定します。up, down, left, rightが指定できます。\n  [/ja]",
+            "startingLine": 47
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 44
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "direction",
+                "startingLine": 45
+              }
+            ],
+            "type": [
+              {
+                "tagDef": {
+                  "name": "type",
+                  "transforms": [
+                    null,
+                    null
+                  ]
+                },
+                "tagName": "type",
+                "description": "",
+                "startingLine": 46,
+                "typeExpression": "String",
+                "type": {
+                  "type": "NameExpression",
+                  "name": "String"
+                },
+                "typeList": [
+                  "String"
+                ]
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Specify the direction the items are displayed. Possible values are \"up\", \"down\", \"left\" and \"right\".[/en]\n  [ja]\n    要素が表示する方向を指定します。up, down, left, rightが指定できます。\n  [/ja]",
+                "startingLine": 47
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "type": {
+        "tagDef": {
+          "name": "type",
+          "transforms": [
+            null,
+            null
+          ]
+        },
+        "tagName": "type",
+        "description": "",
+        "startingLine": 46,
+        "typeExpression": "String",
+        "type": {
+          "type": "NameExpression",
+          "name": "String"
+        },
+        "typeList": [
+          "String"
+        ]
+      },
+      "name": "direction",
+      "description": "[en]Specify the direction the items are displayed. Possible values are \"up\", \"down\", \"left\" and \"right\".[/en]\n  [ja]\n    要素が表示する方向を指定します。up, down, left, rightが指定できます。\n  [/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    },
+    {
+      "fileInfo": {
+        "baseName": "speedDial",
+        "extension": "js"
+      },
+      "startingLine": 55,
+      "endingLine": 61,
+      "codeAncestors": [],
+      "docType": "attribute",
+      "tags": {
+        "tags": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "attribute",
+            "startingLine": 55
+          },
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "disabled",
+            "startingLine": 56
+          },
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Specify if button should be disabled.[/en]\n  [ja]無効化する場合に指定します。[/ja]",
+            "startingLine": 57
+          }
+        ],
+        "tagsByName": {
+          "obj": {
+            "ngdoc": [
+              {
+                "tagDef": {
+                  "name": "ngdoc",
+                  "required": true,
+                  "docProperty": "docType"
+                },
+                "tagName": "ngdoc",
+                "description": "attribute",
+                "startingLine": 55
+              }
+            ],
+            "name": [
+              {
+                "tagDef": {
+                  "name": "name",
+                  "required": true
+                },
+                "tagName": "name",
+                "description": "disabled",
+                "startingLine": 56
+              }
+            ],
+            "description": [
+              {
+                "tagDef": {
+                  "name": "description"
+                },
+                "tagName": "description",
+                "description": "  [en]Specify if button should be disabled.[/en]\n  [ja]無効化する場合に指定します。[/ja]",
+                "startingLine": 57
+              }
+            ]
+          },
+          "hasProto": false
+        },
+        "badTags": [],
+        "description": ""
+      },
+      "name": "disabled",
+      "description": "[en]Specify if button should be disabled.[/en]\n  [ja]無効化する場合に指定します。[/ja]",
+      "area": "api",
+      "module": "..",
+      "priority": 0,
+      "codeName": null
+    }
+  ],
+  "aliases": [
+    "speed-dial"
+  ],
+  "path": "api/../directive/ons-speed-dial",
+  "outputPath": "partials/api/../directive/ons-speed-dial.html"
+}

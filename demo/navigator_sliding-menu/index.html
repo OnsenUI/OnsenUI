@@ -6,19 +6,21 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+
+  <script src="../app.js"></script>
 
 </head>
 
-<body>    
+<body>
   <ons-navigator var="myNavigator">
     <ons-page>
       <ons-sliding-menu main-page="main.html" menu-page="menu.html" max-slide-distance="200px">
       </ons-sliding-menu>
     </ons-page>
-  </ons-navigator>  
+  </ons-navigator>
 
   <ons-template id="main.html">
     <ons-page>
@@ -65,6 +67,6 @@
       </div>
     </ons-page>
   </ons-template>
-  
+
 </body>
 </html>

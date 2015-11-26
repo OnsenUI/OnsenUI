@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
- * @category toolbar
+ * @category page
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
@@ -31,6 +31,7 @@
 /**
  * @ngdoc attribute
  * @name inline
+ * @initonly
  * @description
  *   [en]Display the toolbar as an inline element.[/en]
  *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
@@ -44,6 +45,7 @@
       restrict: 'E',
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           GenericView.register(scope, element, attrs, {
             viewKey: 'ons-bottomToolbar'
           });

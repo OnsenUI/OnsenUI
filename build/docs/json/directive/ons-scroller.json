@@ -1,0 +1,172 @@
+{
+  "fileInfo": {
+    "baseName": "scroller",
+    "extension": "js"
+  },
+  "startingLine": 1,
+  "endingLine": 13,
+  "codeAncestors": [],
+  "docType": "directive",
+  "tags": {
+    "tags": [
+      {
+        "tagDef": {
+          "name": "ngdoc",
+          "required": true,
+          "docProperty": "docType"
+        },
+        "tagName": "ngdoc",
+        "description": "directive",
+        "startingLine": 1
+      },
+      {
+        "tagDef": {
+          "name": "id"
+        },
+        "tagName": "id",
+        "description": "scroller",
+        "startingLine": 2
+      },
+      {
+        "tagDef": {
+          "name": "name",
+          "required": true
+        },
+        "tagName": "name",
+        "description": "ons-scroller",
+        "startingLine": 3
+      },
+      {
+        "tagDef": {
+          "name": "category",
+          "multi": true,
+          "docProperty": "categories"
+        },
+        "tagName": "category",
+        "description": "page",
+        "startingLine": 4
+      },
+      {
+        "tagDef": {
+          "name": "description"
+        },
+        "tagName": "description",
+        "description": "  [en]Makes the content inside this tag scrollable.[/en]\n  [ja]要素内をスクロール可能にします。[/ja]",
+        "startingLine": 5
+      },
+      {
+        "tagDef": {
+          "name": "example",
+          "multi": true,
+          "docProperty": "examples"
+        },
+        "tagName": "example",
+        "description": "<ons-scroller style=\"height: 200px; width: 100%\">\n  ...\n</ons-scroller>",
+        "startingLine": 8
+      }
+    ],
+    "tagsByName": {
+      "obj": {
+        "ngdoc": [
+          {
+            "tagDef": {
+              "name": "ngdoc",
+              "required": true,
+              "docProperty": "docType"
+            },
+            "tagName": "ngdoc",
+            "description": "directive",
+            "startingLine": 1
+          }
+        ],
+        "id": [
+          {
+            "tagDef": {
+              "name": "id"
+            },
+            "tagName": "id",
+            "description": "scroller",
+            "startingLine": 2
+          }
+        ],
+        "name": [
+          {
+            "tagDef": {
+              "name": "name",
+              "required": true
+            },
+            "tagName": "name",
+            "description": "ons-scroller",
+            "startingLine": 3
+          }
+        ],
+        "category": [
+          {
+            "tagDef": {
+              "name": "category",
+              "multi": true,
+              "docProperty": "categories"
+            },
+            "tagName": "category",
+            "description": "page",
+            "startingLine": 4
+          }
+        ],
+        "description": [
+          {
+            "tagDef": {
+              "name": "description"
+            },
+            "tagName": "description",
+            "description": "  [en]Makes the content inside this tag scrollable.[/en]\n  [ja]要素内をスクロール可能にします。[/ja]",
+            "startingLine": 5
+          }
+        ],
+        "example": [
+          {
+            "tagDef": {
+              "name": "example",
+              "multi": true,
+              "docProperty": "examples"
+            },
+            "tagName": "example",
+            "description": "<ons-scroller style=\"height: 200px; width: 100%\">\n  ...\n</ons-scroller>",
+            "startingLine": 8
+          }
+        ]
+      },
+      "hasProto": false
+    },
+    "badTags": [],
+    "description": ""
+  },
+  "categories": [
+    "page"
+  ],
+  "id": "scroller",
+  "example": "<ons-scroller style=\"height: 200px; width: 100%\">\n  ...\n</ons-scroller>",
+  "name": "ons-scroller",
+  "description": "[en]Makes the content inside this tag scrollable.[/en]\n  [ja]要素内をスクロール可能にします。[/ja]",
+  "area": "api",
+  "module": "..",
+  "restrict": {
+    "element": false,
+    "attribute": true,
+    "cssClass": false,
+    "comment": false
+  },
+  "examples": [
+    "<ons-scroller style=\"height: 200px; width: 100%\">\n  ...\n</ons-scroller>"
+  ],
+  "element": "ANY",
+  "priority": 0,
+  "codeName": null,
+  "events": [],
+  "methods": [],
+  "attributes": [],
+  "aliases": [
+    "scroller"
+  ],
+  "path": "api/../directive/ons-scroller",
+  "outputPath": "partials/api/../directive/ons-scroller.html"
+}

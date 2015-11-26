@@ -3,9 +3,6 @@
  * @id popover
  * @name ons-popover
  * @category popover
- * @modifier android
- *   [en]Display an Android style popover.[/en]
- *   [ja]Androidライクなポップオーバーを表示します。[/ja]
  * @description
  *  [en]A component that displays a popover next to an element.[/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
@@ -84,6 +81,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this popover.[/en]
@@ -161,6 +160,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preshow
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
@@ -170,6 +171,8 @@
 /**
  * @ngdoc attribute
  * @name ons-prehide
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
@@ -179,6 +182,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postshow
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
@@ -188,6 +193,8 @@
 /**
  * @ngdoc attribute
  * @name ons-posthide
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
@@ -197,6 +204,8 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -306,6 +315,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -320,6 +330,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -334,6 +345,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
@@ -354,20 +366,18 @@
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/popover.tpl',
-      compile: function(element, attrs, transclude) {
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
-            transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.popover__content')).append(clone);
-            });
+            CustomElements.upgrade(element[0]);
 
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
             $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide destroy');
+            $onsen.addModifierMethodsForCustomElements(popover, element);
 
             element.data('ons-popover', popover);
 
@@ -377,20 +387,8 @@
               element.data('ons-popover', undefined);
               element = null;
             });
-
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover')));
-            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content')));
-
-            if ($onsen.isAndroid()) {
-              setImmediate(function() {
-                popover.addModifier('android');
-              });
-            }
-
-            scope.direction = 'up';
-            scope.arrowPosition = 'bottom';
           },
+
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }

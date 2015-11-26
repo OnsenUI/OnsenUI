@@ -22,6 +22,12 @@
 var-text-input-font-size = 15px
 var-text-input-height = 31px
 var-text-input-border-color = var-input-border-color
+var-text-highlight-color = $highlight-color // material
+
+var-material-text-input-font-size = 16px
+var-material-text-input-color = $material-text-input-text-color
+var-material-text-input-active-color = $material-text-input-active-color
+var-material-text-input-inactive-color = $material-text-input-inactive-color
 
 /*! topdoc
   name: Text Input
@@ -71,18 +77,35 @@ text-input--invalid()
 .text-input
   text-input()
 
-.text-input::-webkit-input-placeholder,
-.text-input::-moz-placeholder,
+.text-input::-webkit-input-placeholder
+  color var-input-placeholder-color
+
+.text-input::-moz-placeholder
+  color var-input-placeholder-color
+
 .text-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.text-input:-ms-input-placeholder
   color var-input-placeholder-color
 
 .text-input:disabled
   text-input--disabled()
 
-.text-input:disabled::-webkit-input-placeholder,
-.text-input:disabled::-moz-placeholder,
+.text-input:disabled::-webkit-input-placeholder
+  webkit-input-placeholder()
+
+.text-input:disabled::-moz-placeholder
+  webkit-input-placeholder()
+
+.text-input:disabled::-ms-input-placeholder
+  webkit-input-placeholder()
+
 .text-input:disabled:-ms-input-placeholder
   webkit-input-placeholder()
+
+.text-input::-ms-clear
+  display none
 
 .text-input:invalid
   text-input--invalid()
@@ -108,12 +131,23 @@ text-input--invalid()
   border none
   background-color transparent
 
-.text-input--transparent:disabled::-webkit-input-placeholder
-.text-input--transparent:disabled::-moz-placeholder,
-.text-input--transparent:disabled:-ms-input-placeholder
+
+text-input-transparent-disabled()
   webkit-input-placeholder()
   border none
   background-color transparent
+
+.text-input--transparent:disabled::-webkit-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-moz-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-ms-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled:-ms-input-placeholder
+  text-input-transparent-disabled()
 
 
 .text-input--transparent:invalid
@@ -143,12 +177,22 @@ text-input--invalid()
   background-color transparent
   border-bottom 1px solid var-text-input-border-color
 
-.text-input--underbar:disabled::-webkit-input-placeholder,
-.text-input--underbar:disabled::-moz-placeholder,
-.text-input--underbar:disabled:-ms-input-placeholder
+text-input-underbar-disabled()
   webkit-input-placeholder()
   border none
   background-color transparent
+
+.text-input--underbar:disabled::-webkit-input-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled::-moz-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled::-ms-input-placeholder
+  text-input-underbar-disabled()
+
+.text-input--underbar:disabled:-ms-input-placeholder
+  text-input-underbar-disabled()
 
 
 .text-input--underbar:invalid
@@ -157,3 +201,63 @@ text-input--invalid()
   background-color transparent
   border-bottom 1px solid var-input-invalid-border-color
 
+
+/*! topdoc
+  name: Material Input
+  class: text-input--material
+  markup:
+    <span>
+      <input class="text-input--material" placeholder="Username" type="text" required>
+      <br /><br />
+      <input class="text-input--material" placeholder="Password" type="password" required>
+    </span>
+*/
+
+.text-input--material
+  input()
+  material-font()
+  color var-material-text-input-color
+  background-image linear-gradient(to top, transparent 1px, var-material-text-input-inactive-color 1px)
+  background-size 100% 2px
+  background-repeat no-repeat
+  background-position center bottom
+  background-color transparent
+  font-size var-material-text-input-font-size
+  font-weight 400
+  border none
+  padding-bottom 2px
+  border-radius 0
+  height 24px
+  -webkit-transform translate3d(0, 0, 0) // prevent ios flicker
+
+.text-input--material__label
+  color var-material-text-input-active-color
+
+.text-input--material:focus
+  background-image linear-gradient(var-material-text-input-active-color, var-material-text-input-active-color), linear-gradient(to top, transparent 1px, var-material-text-input-inactive-color 1px)
+  animation material-text-input-animate 0.3s forwards
+
+text-input--material-placeholder()
+  color var-material-text-input-inactive-color
+  line-height 20px
+
+.text-input--material::-webkit-input-placeholder
+  text-input--material-placeholder()
+
+.text-input--material::-moz-placeholder
+  text-input--material-placeholder()
+
+.text-input--material::-ms-input-placeholder
+  text-input--material-placeholder()
+
+.text-input--material:-ms-input-placeholder
+  text-input--material-placeholder()
+
+.text-input--material::-ms-clear
+  display none
+
+@keyframes material-text-input-animate
+  0%
+    background-size 0% 2px, 100% 2px
+  100%
+    background-size 100% 2px, 100% 2px

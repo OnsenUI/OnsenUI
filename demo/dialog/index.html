@@ -2,14 +2,15 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Dialog | Onsen UI</title>  
+  <title>Dialog | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
 
   <script>
     var app = angular.module('myApp', ['onsen']);
@@ -28,13 +29,22 @@
         $scope.dialog.show();
       };
 
+
+      ons.createDialog('dialogMaterial.html').then(function(dialog2) {
+        $scope.dialog2 = dialog2;
+      });
+
+      $scope.show2 = function() {
+        $scope.dialog2.show();
+      };
+
     });
 
   </script>
 
 </head>
 
-<body ng-controller="MyCtrl"> 
+<body ng-controller="MyCtrl">
   <ons-page>
     <ons-toolbar>
       <div class="center">Dialog</div>
@@ -46,6 +56,7 @@
 
       <br />
       <ons-button ng-click="show()">Edit</ons-button>
+      <ons-button ng-click="show2()">Edit</ons-button>
     </div>
   </ons-page>
 
@@ -65,7 +76,26 @@
           </div>
           </ons-page>
       </ons-navigator>
-    </ons-dialog>  
+    </ons-dialog>
+  </script>
+
+  <script type="text/ons-template" id="dialogMaterial.html">
+    <ons-dialog style="height: 250px" modifier="material" animation="default" cancelable>
+      <ons-navigator animation="fade" var="app.navi2">
+        <ons-page>
+          <ons-toolbar modifier="material">
+            <div class="center">Name</div>
+          </ons-toolbar>
+          <br />
+          <div style="text-align: center; margin-top: 30px;">
+            <ons-material-input id="name" label="Name" ng-model="data.name"></ons-material-input>
+            <p>
+              <ons-button modifier="material" ng-click="app.navi2.pushPage('page2.html');">Next</ons-button>
+            </p>
+          </div>
+          </ons-page>
+      </ons-navigator>
+    </ons-dialog>
   </script>
 
   <ons-template id="page.html">
@@ -77,11 +107,26 @@
       <div style="text-align: center">
         <input id="description" class="text-input" ng-model="data.description">
         <p>
-          <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Previous</ons-button>
+          <ons-button modifier="light" ng-click="app.navi.popPage();">Previous</ons-button>
         </p>
       </div>
     </ons-page>
   </ons-template>
-  
+
+  <ons-template id="page2.html">
+    <ons-page>
+      <ons-toolbar modifier="material">
+        <div class="center">Description</div>
+      </ons-toolbar>
+      <br />
+      <div style="text-align: center; margin-top: 30px;">
+        <ons-material-input id="description" label="Description" ng-model="data.description"></ons-material-input>
+        <p>
+          <ons-button modifier="material" ng-click="app.navi2.popPage();">Previous</ons-button>
+        </p>
+      </div>
+    </ons-page>
+  </ons-template>
+
 </body>
 </html>

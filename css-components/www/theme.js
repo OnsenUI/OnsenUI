@@ -58,7 +58,67 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#26a69a',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -106,7 +166,7 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#1284ff',
         'alert-dialog-separator-color': '#ddd',
-        
+
         // Dialog
         'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
@@ -115,7 +175,67 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#26a69a',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -172,7 +292,67 @@
         'popover-text-color': 'white',
 
         // Notification
-        'notification-background-color': '#3385ff'
+        'notification-background-color': '#3385ff',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#80cbc4',
+        'material-switch-inactive-thumb-color': '#bdbdbd',
+        'material-switch-active-background-color': '#5a7f7c',
+        'material-switch-inactive-background-color': '#707070',
+
+        // Material Range
+        'material-range-track-color': '#707070',
+        'material-range-thumb-color': '#80cbc4',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
+
+        // Material Button
+        'material-button-background-color': '#80cbc4',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#f5f5f5',
+        'material-checkbox-checkmark-color': '#333333',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#f5f5f5',
+
+        // Material Text Input
+        'material-text-input-text-color': '#ffffff',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#4c4c4c',
+
+        // Material Dialog
+        'material-dialog-background-color': '#333333',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#333333',
+        'material-alert-dialog-title-color': '#ffffff',
+        'material-alert-dialog-content-color': '#afafaf',
+        'material-alert-dialog-button-color': '#80cbc4',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#333333',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#26a69a',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#80cbc4'
       }
     },
     {
@@ -228,7 +408,67 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#eb5e2f'
+        'notification-background-color': '#eb5e2f',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#26a69a',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     },
 
@@ -276,7 +516,7 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#574bdb',
         'alert-dialog-separator-color': '#ddd',
-        
+
         // Dialog
         'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
@@ -285,7 +525,67 @@
         'popover-text-color': '#1f1f21',
 
         // Notification
-        'notification-background-color': '#dc5236'
+        'notification-background-color': '#dc5236',
+
+        // Material Switch
+        'material-switch-active-thumb-color': '#009688',
+        'material-switch-inactive-thumb-color': '#f1f1f1',
+        'material-switch-active-background-color': '#77c2bb',
+        'material-switch-inactive-background-color': '#b0afaf',
+
+        // Material Range
+        'material-range-track-color': '#e0e0e0',
+        'material-range-thumb-color': '#009688',
+
+        // Material Toolbar
+        'material-toolbar-background-color': '#009688',
+        'material-toolbar-text-color': '#ffffff',
+        'material-toolbar-button-color': '#ffffff',
+        'material-toolbar-button-active-color': '#26a69a',
+
+        // Material Button
+        'material-button-background-color': '#009688',
+        'material-button-text-color': '#ffffff',
+
+        // Material Checkbox
+        'material-checkbox-active-color': '#009688',
+        'material-checkbox-inactive-color': '#717171',
+        'material-checkbox-checkmark-color': '#ffffff',
+
+        // Material Radio Button
+        'material-radio-button-active-color': '#009688',
+        'material-radio-button-inactive-color': '#717171',
+
+        // Material Text Input
+        'material-text-input-text-color': '#212121',
+        'material-text-input-active-color': '#009688',
+        'material-text-input-inactive-color': '#afafaf',
+
+        // Material Dialog
+        'material-dialog-background-color': '#fafafa',
+
+        // Material Alert Dialog
+        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-title-color': '#212121',
+        'material-alert-dialog-content-color': '#727272',
+        'material-alert-dialog-button-color': '#009688',
+
+        // Material Progress
+        'material-progress-bar-primary-color': '#009688',
+        'material-progress-bar-secondary-color': '#80cbc4',
+        'material-progress-bar-background-color': '#e0e0e0',
+        'material-progress-circle-primary-color': '#009688',
+        'material-progress-circle-secondary-color': '#80cbc4',
+
+        // Material Tabbar
+        'material-tabbar-background-color': '#009688',
+        'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
+        'material-tabbar-highlight-text-color': '#ffffff',
+        'material-tabbar-highlight-color': '#26a69a',
+
+        // Floating Action Button
+        'fab-text-color': '#fafafa',
+        'fab-background-color': '#009688'
       }
     }
   ];

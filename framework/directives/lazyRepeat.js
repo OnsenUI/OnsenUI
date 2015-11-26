@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id lazy-repeat
  * @name ons-lazy-repeat
+ * @extensionOf angular
  * @category control
  * @description 
  *   [en]
@@ -58,6 +59,8 @@
  * @ngdoc attribute
  * @name ons-lazy-repeat
  * @type {Expression}
+ * @initonly
+ * @extensionOf angular
  * @description
  *  [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]
  *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]
@@ -76,13 +79,14 @@
       restrict: 'A',
       replace: false,
       priority: 1000,
-      transclude: 'element',
-      compile: function(element, attrs, linker) {
+      terminal: true,
+
+      compile: function(element, attrs) {
         return function(scope, element, attrs) {
-          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker); // jshint ignore:line
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs);
 
           scope.$on('$destroy', function() {
-            scope = element = attrs = linker = null;
+            scope = element = attrs = lazyRepeat = null;
           });
         };
       }

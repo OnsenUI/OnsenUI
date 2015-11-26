@@ -18,13 +18,14 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'page--*',
     '.page__content': 'page--*__content',
     '.page__background': 'page--*__background'
   };
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var nullToolbarElement = document.createElement('ons-toolbar');
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const nullToolbarElement = document.createElement('ons-toolbar');
+  const util = ons._util;
 
   class PageElement extends ons._BaseElement {
 
@@ -32,6 +33,40 @@ limitations under the License.
       this.classList.add('page');
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+      this._isShown = false;
+      this._isMuted = this.hasAttribute('_muted');
+      this._skipInit = this.hasAttribute('_skipinit');
+      this.eventDetail = {
+        page: this
+      };
+    }
+
+    attachedCallback() {
+      if (!this._isMuted) {
+        if (this._skipInit) {
+          this.removeAttribute('_skipinit');
+        } else {
+          util.triggerElementEvent(this, 'init', this.eventDetail);
+        }
+      }
+
+      if(!util.hasAnyComponentAsParent(this)) {
+        this._show();
+      }
+    }
+
+    /**
+     * @return {boolean}
+     */
+    get isShown() {
+      return this._isShown;
+    }
+
+    /**
+     * @param {boolean}
+     */
+    set isShown(value) {
+      this._isShown = value;
     }
 
     /**
@@ -56,7 +91,7 @@ limitations under the License.
      * @return {HTMLElement}
      */
     _getContentElement() {
-      var result = ons._util.findChild(this, '.page__content');
+      const result = ons._util.findChild(this, '.page__content');
       if (result) {
         return result;
       }
@@ -71,10 +106,29 @@ limitations under the License.
     }
 
     /**
+     * @return {Boolean}
+     */
+    _canAnimateToolbar() {
+      const toolbar = ons._util.findChild(this, 'ons-toolbar');
+      if (toolbar) {
+        return true;
+      }
+
+      const elements = this._getContentElement().children;
+      for (let i = 0; i < elements.length; i++) {
+        if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    /**
      * @return {HTMLElement}
      */
     _getBackgroundElement() {
-      var result = ons._util.findChild(this, '.page__background');
+      const result = ons._util.findChild(this, '.page__background');
       if (result) {
         return result;
       }
@@ -118,7 +172,7 @@ limitations under the License.
      */
     _registerBottomToolbar(element) {
       if (!ons._util.findChild(this, '.page__status-bar-fill')) {
-        var fill = document.createElement('div');
+        const fill = document.createElement('div');
         fill.classList.add('page__bottom-bar-fill');
         fill.style.width = '0px';
         fill.style.height = '0px';
@@ -131,6 +185,10 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      } else if (name === '_muted') {
+        this._isMuted = this.hasAttribute('_muted');
+      } else if (name === '_skipinit') {
+        this._skipInit = this.hasAttribute('_skipinit');
       }
     }
 
@@ -139,16 +197,14 @@ limitations under the License.
         return;
       }
 
-      var background = document.createElement('div');
+      const background = document.createElement('div');
       background.classList.add('page__background');
 
-      var content = document.createElement('div');
+      const content = document.createElement('div');
       content.classList.add('page__content');
 
       while (this.childNodes[0]) {
-        var node = this.childNodes[0];
-        this.removeChild(node);
-        content.appendChild(node);
+        content.appendChild(this.childNodes[0]);
       }
 
       if (this.hasAttribute('style')) {
@@ -156,12 +212,15 @@ limitations under the License.
         this.removeAttribute('style', null);
       }
 
-      this.insertBefore(background, null);
-      this.insertBefore(content, null);
+      const fragment = document.createDocumentFragment();
+      fragment.appendChild(background);
+      fragment.appendChild(content);
+
+      this.appendChild(fragment);
     }
 
     _registerExtraElement(element) {
-      var extra = ons._util.findChild(this, '.page__extra');
+      let extra = ons._util.findChild(this, '.page__extra');
       if (!extra) {
         extra = document.createElement('div');
         extra.classList.add('page__extra');
@@ -175,13 +234,53 @@ limitations under the License.
     _tryToFillStatusBar() {
       if (ons._internal.shouldFillStatusBar(this)) {
         // Adjustments for IOS7
-        var fill = document.createElement('div');
+        const fill = document.createElement('div');
         fill.classList.add('page__status-bar-fill');
         fill.style.width = '0px';
         fill.style.height = '0px';
 
         this.insertBefore(fill, this.children[0]);
       }
+    }
+
+    _show() {
+      if (!this.isShown && ons._util.isAttached(this)) {
+        this.isShown = true;
+
+        if (!this._isMuted) {
+          util.triggerElementEvent(this, 'show', this.eventDetail);
+        }
+
+        ons._util.propagateAction(this._getContentElement(), '_show');
+      }
+    }
+
+    _hide() {
+      if (this.isShown) {
+        this.isShown = false;
+
+        if (!this._isMuted) {
+          util.triggerElementEvent(this, 'hide', this.eventDetail);
+        }
+
+        ons._util.propagateAction(this._getContentElement(), '_hide');
+      }
+    }
+
+    _destroy() {
+      this._hide();
+
+      if (!this._isMuted) {
+        util.triggerElementEvent(this, 'destroy', this.eventDetail);
+      }
+
+      if (this.getDeviceBackButtonHandler()) {
+        this.getDeviceBackButtonHandler().destroy();
+      }
+
+      ons._util.propagateAction(this._getContentElement(), '_destroy');
+
+      this.remove();
     }
   }
 

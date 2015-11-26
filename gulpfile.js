@@ -21,20 +21,17 @@ var CORDOVA_APP = false;
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var gulpIf = require('gulp-if');
 var pkg = require('./package.json');
 var merge = require('event-stream').merge;
 var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
-var gulpIf = require('gulp-if');
-var babel = require('gulp-babel');
 var dgeni = require('dgeni');
-var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
+var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
-var filter = require('gulp-filter');
-var karma = require('gulp-karma');
 
 ////////////////////////////////////////
 // browser-sync
@@ -46,12 +43,12 @@ gulp.task('browser-sync', function() {
       index: 'index.html',
       directory: true
     },
+    files: [],
     watchOptions: {
-      debounceDelay: 300
+      //debounceDelay: 400
     },
     ghostMode: false,
-    notify: false,
-    reloadDelay: 300
+    notify: false
   });
 });
 
@@ -59,24 +56,41 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  var onlyES6 = filter('*.es6');
+  var onlyES6 = $.filter('*.es6');
 
-  // ons-core.js
+  // onsenui.js
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
+    'core/lib/animit.js',
+    'core/lib/doorlock.es6',
+    'core/lib/ons-gesture-detector.es6',
+    'core/lib/device-back-button-dispatcher.es6',
+    'core/lib/ons.es6',
+    'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
+    'core/lib/splitter-animator.es6',
+    'core/lib/navigator-transition-animator.es6',
+    'core/lib/popover-animator.es6',
+    'core/lib/ons-platform.es6',
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
+    'core/elements/ons-template.es6',
+    'core/elements/ons-splitter.es6',
+    'core/elements/ons-tab.es6',
     'core/elements/*.{es6,js}',
-    '!core/**/*.spec.js'
+    '!core/**/*.spec.{es6,js}',
   ])
+    .pipe($.cached('onsenui.js'))
+    .pipe($.sourcemaps.init())
     .pipe($.plumber())
-    .pipe(onlyES6 = filter('*.es6'))
-    .pipe(babel({modules: 'ignore'}))
+    .pipe(onlyES6 = $.filter('*.es6'))
+    .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
-    .pipe($.concat('ons-core.js'))            
-    .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.remember('onsenui.js'))
+    .pipe($.concat('onsenui.js'))
+    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
 
@@ -84,10 +98,24 @@ gulp.task('core', function() {
 // core-test
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
-  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
-    .pipe(karma({
+  return gulp.src([])
+    .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
+    }))
+    .on('error', function(err) {
+      throw err;
+    });
+});
+
+////////////////////////////////////////
+// watch-core-test
+////////////////////////////////////////
+gulp.task('watch-core-test', function() {
+  return gulp.src([])
+    .pipe($.karma({
+      configFile: 'core/test/karma.conf.js',
+      action: 'watch'
     }))
     .on('error', function(err) {
       throw err;
@@ -118,16 +146,17 @@ gulp.task('jshint-vanilla', function() {
     'framework/elements/*.js',
     'framework/views/*.js'
   ])
-    .pipe($.cached('js'))
+    .pipe($.cached('jshint-vanilla'))
     .pipe($.jshint())
+    .pipe($.remember('jshint-vanilla'))
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
-/////////////////0///////////////////////
-// jshint-es6
+/////////////////////////////////////////
+// eslint
 ////////////////////////////////////////
-gulp.task('jshint-es6', function() {
-  gulp.src([
+gulp.task('eslint', function() {
+  return gulp.src([
     'core/elements/*.es6',
     'core/lib/*.es6',
     'core/*.es6',
@@ -137,15 +166,16 @@ gulp.task('jshint-es6', function() {
     'framework/elements/*.es6',
     'framework/views/*.es6'
   ])
-    .pipe($.cached('es6'))
-    .pipe($.jshint({esnext: true}))
-    .pipe($.jshint.reporter('jshint-stylish'));
+    .pipe($.cached('eslint'))
+    .pipe($.eslint({useEslintrc: true}))
+    .pipe($.remember('eslint'))
+    .pipe($.eslint.format());
 });
 
-/////////////////0///////////////////////
+/////////////////////////////////////////
 // jshint
 ////////////////////////////////////////
-gulp.task('jshint', ['jshint-vanilla', 'jshint-es6']);
+gulp.task('jshint', ['jshint-vanilla', 'eslint']);
 
 ////////////////////////////////////////
 // clean
@@ -164,7 +194,7 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 gulp.task('minify-js', function() {
   return merge(
-    gulp.src('build/js/{onsenui,onsenui_all,ons-core}.js')
+    gulp.src('build/js/{onsenui,angular-onsenui}.js')
       .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
@@ -189,13 +219,11 @@ gulp.task('prepare', ['html2js', 'core'], function() {
 
   return merge(
 
-    // onsenui.js
+    // angular-onsenui.js
     gulp.src([
-      'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
+      'framework/vendor/*.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
       'framework/js/onsen.js',
       'framework/views/*.{es6,js}',
       'framework/directives/*.{es6,js}',
@@ -203,40 +231,15 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe(onlyES6 = filter('*.es6'))
-      .pipe(babel({modules: 'ignore'}))
+      .pipe(onlyES6 = $.filter('*.es6'))
+      .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
-      .pipe($.concat('onsenui.js'))            
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.concat('angular-onsenui.js'))
+      .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
-
-    // onsenui_all.js
-    gulp.src([
-      'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
-      'framework/lib/angular/angular.js',
-      'framework/lib/*.{es6,js}',
-      'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
-      'framework/js/onsen.js',
-      'framework/views/*.{es6,js}',
-      'framework/directives/*.{es6,js}',
-      'framework/services/*.{es6,js}',
-      'framework/js/*.{es6,js}'
-    ])
-      .pipe($.plumber())
-      .pipe(onlyES6 = filter('*.es6'))
-      .pipe(babel({modules: 'ignore'}))
-      .pipe(onlyES6.restore())
-      .pipe($.ngAnnotate({add: true, single_quotes: true}))
-      .pipe($.concat('onsenui_all.js'))
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulp.dest('app/lib/onsen/js')),
-
 
     // onsen-css-components
     gulp.src([
@@ -281,11 +284,17 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe(gulp.dest('build/css/ionicons/'))
       .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
 
+    // material icons file copy
+    gulp.src('core/css/material-design-iconic-font/**/*')
+      .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+      .pipe(gulp.dest('app/lib/onsen/css/material-design-iconic-font/')),
+
     // auto prepare
     gulp.src('cordova-app/www/index.html')
       .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
-  );
-
+  ).on('end', function() {
+    browserSync.reload();
+  });
 });
 
 ////////////////////////////////////////
@@ -327,6 +336,41 @@ gulp.task('build', function(done) {
 });
 
 ////////////////////////////////////////
+// dist
+////////////////////////////////////////
+
+gulp.task('soft-build', function(done) {
+  return runSequence(
+    'clean',
+    'prepare',
+    'minify-js',
+    done
+  );
+});
+
+function distFiles() {
+  gulp.src([
+    'build/**/*',
+    '!build/docs/**/*',
+    '!build/docs/',
+    '!build/js/angular/**/*',
+    '!build/js/angular/',
+    '!build/onsenui.zip',
+    'bower.json',
+    'package.json',
+    '.npmignore',
+    'README.md',
+    'CHANGELOG.md',
+    'LICENSE'
+  ])
+  .pipe(gulp.dest('OnsenUI-dist/'));
+}
+
+gulp.task('dist', ['soft-build'], distFiles);
+
+gulp.task('dist-no-build', [], distFiles);
+
+////////////////////////////////////////
 // default
 ////////////////////////////////////////
 gulp.task('default', function() {
@@ -342,7 +386,9 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   var watched = [
     'core/*.{js,es6}',
     'core/*/*.{js,es6}',
+    '!core/*/*.spec.js',
     'framework/*/*',
+    'core/css/*.css',
     'css-components/components-src/dist/*.css'
   ];
 
@@ -351,12 +397,15 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 400
-  }, ['prepare', 'jshint']);
+    debounceDelay: 300
+  }, ['jshint', 'prepare']);
 
   // for livereload
   gulp.watch([
-    'app/**/*.{js,css,html}'
+    'app/*.{js,css,html}',
+    'app/*/*.{js,css,html}',
+    'demo/*/*.{js,css,html}',
+    'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
@@ -449,7 +498,9 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['core-test', 'e2e-test']);
+gulp.task('test', function(done) {
+  return runSequence('core-test', 'e2e-test', done);
+});
 
 ////////////////////////////////////////
 // e2e-test

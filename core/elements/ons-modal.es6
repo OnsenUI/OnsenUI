@@ -18,26 +18,32 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'modal--*',
     'modal__content': 'modal--*__content'
   };
 
-  var AnimatorFactory = ons._internal.AnimatorFactory;
-  var ModalAnimator = ons._internal.ModalAnimator;
-  var FadeModalAnimator = ons._internal.FadeModalAnimator;
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+  const ModalAnimator = ons._internal.ModalAnimator;
+  const FadeModalAnimator = ons._internal.FadeModalAnimator;
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const util = ons._util;
+
+  const _animatorDict = {
+    'default': ModalAnimator,
+    'fade': FadeModalAnimator,
+    'none': ModalAnimator
+  };
 
   class ModalElement extends ons._BaseElement {
 
     createdCallback() {
       this._doorLock = new DoorLock();
       this._animatorFactory = new AnimatorFactory({
-        animators: ModalElement._animatorDict,
+        animators: _animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._compile();
@@ -66,7 +72,7 @@ limitations under the License.
       this.style.display = 'none';
       this.classList.add('modal');
 
-      var wrapper = document.createElement('div');
+      const wrapper = document.createElement('div');
       wrapper.classList.add('modal__content');
 
       while (this.childNodes[0]) {
@@ -84,7 +90,7 @@ limitations under the License.
       }
     }
 
-    atachedCallback() {
+    attachedCallback() {
       setImmediate(this._ensureNodePosition.bind(this));
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     }
@@ -111,7 +117,7 @@ limitations under the License.
       }
     }
 
-    _isVisible() {
+    isShown() {
       return this.style.display !== 'none';
     }
 
@@ -123,12 +129,15 @@ limitations under the License.
      * @param {Object} [options.animationOptions] animation options
      * @param {Function} [options.callback] callback after modal is shown
      */
-    show(options) {
-      options = options || {};
+    show(options = {}) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       var callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
+      this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
@@ -137,7 +146,7 @@ limitations under the License.
           unlock();
           callback();
         });
-      }.bind(this));
+      });
     }
 
     /**
@@ -149,7 +158,7 @@ limitations under the License.
      * @param {Function} [options.callback] callback after modal is toggled
      */
     toggle() {
-      if (this._isVisible()) {
+      if (this.isShown()) {
         return this.hide.apply(this, arguments);
       } else {
         return this.show.apply(this, arguments);
@@ -164,21 +173,24 @@ limitations under the License.
      * @param {Object} [options.animationOptions] animation options
      * @param {Function} [options.callback] callback after modal is hidden
      */
-    hide(options) {
-      options = options || {};
+    hide(options = {}) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
-      var callback = options.callback || function() {};
+      const callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
-        var unlock = this._doorLock.lock(),
+      this._doorLock.waitUnlock(() => {
+        const unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
-        animator.hide(this, function() {
+        animator.hide(this, () => {
           this.style.display = 'none';
           unlock();
           callback();
-        }.bind(this));
-      }.bind(this));
+        });
+      });
     }
 
     attributeChangedCallback(name, last, current) {
@@ -188,26 +200,20 @@ limitations under the License.
     }
   }
 
-  ModalElement._animatorDict = {
-    'default': ModalAnimator,
-    'fade': FadeModalAnimator,
-    'none': ModalAnimator
-  };
-
-  /**
-   * @param {String} name
-   * @param {Function} Animator
-   */
-  ModalElement.registerAnimator = function(name, Animator) {
-    if (!(Animator.prototype instanceof ModalAnimator)) {
-      throw new Error('"Animator" param must inherit DialogAnimator');
-    }
-    ModalElement._animatorDict[name] = Animator;
-  };
-
   if (!window.OnsModalElement) {
     window.OnsModalElement = document.registerElement('ons-modal', {
       prototype: ModalElement.prototype
     });
+
+    /**
+     * @param {String} name
+     * @param {Function} Animator
+     */
+    window.OnsModalElement.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof ModalAnimator)) {
+        throw new Error('"Animator" param must inherit ModalAnimator');
+      }
+      _animatorDict[name] = Animator;
+    };
   }
 })();

@@ -26,6 +26,17 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature select(platform)
+ * @param  {string} platform Name of the platform.
+ *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれかを指定します。[/ja]
+ * @description 
+ *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
+ *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature isWebView()
  * @description 
  *   [en]Returns whether app is running in Cordova.[/en]
@@ -138,6 +149,15 @@ limitations under the License.
  * @description 
  *   [en]Returns whether the browser is Internet Explorer.[/en]
  *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isEdge()
+ * @description 
+ *   [en]Returns whether the browser is Edge.[/en]
+ *   [ja]Edge上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 

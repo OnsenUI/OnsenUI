@@ -18,14 +18,13 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {'' : 'toolbar-button--*'};
+  var scheme = {'': 'toolbar-button--*'};
   var ModifierUtil = ons._internal.ModifierUtil;
 
   class ToolbarButtonElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('toolbar-button');
-      this.classList.add('navigation-bar__line-height');
 
       ModifierUtil.initModifier(this, scheme);
     }

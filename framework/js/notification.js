@@ -29,8 +29,14 @@ limitations under the License.
  *     message: 'Hello, world!'
  *   });
  *
+ *   // Show a Material Design alert dialog.
+ *   ons.notification.alert({
+ *    message: 'Hello, world!',
+ *    modifier: 'material'
+ *   });
+ *
  *   ons.notification.confirm({
- *     message: 'Are you ready?'
+ *     message: 'Are you ready?',
  *     callback: function(answer) {
  *       // Do something here.
  *     }
@@ -166,6 +172,15 @@ limitations under the License.
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Alert".[/en]
  *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
+ * @param {String} [options.placeholder]
+ *   [en]Placeholder for the text input.[/en]
+ *   [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]
+ * @param {String} [options.defaultValue]
+ *   [en]Default value for the text input.[/en]
+ *   [ja]テキスト欄のデフォルトの値を指定します。[/ja]
+ * @param {Boolean} [options.autofocus]
+ *   [en]Autofocus the input element. Default is true.[/en]
+ *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]
  * @param {String} [options.modifier]
  *   [en]Modifier for the dialog.[/en]
  *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
@@ -180,7 +195,7 @@ limitations under the License.
  *   [/ja]
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
- *   [ja][/ja]
+ *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
  * @description 
  *   [en]
  *     Display a dialog with a prompt to ask the user a question. 
@@ -192,244 +207,38 @@ limitations under the License.
  *   [/ja]
  */
 
-window.ons.notification = (function() {
-  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder, submitOnEnter) {
-    var dialogEl = angular.element('<ons-alert-dialog>'),
-      titleEl = angular.element('<div>').addClass('alert-dialog-title').text(title),
-      messageEl = angular.element('<div>').addClass('alert-dialog-content'),
-      footerEl = angular.element('<div>').addClass('alert-dialog-footer'),
-      inputEl;
-
-    if (modifier) {
-      dialogEl.attr('modifier', modifier);
-    }
-
-    dialogEl.attr('animation', animation);
-
-    if (messageIsHTML) {
-      messageEl.html(message);
-    } else {
-      messageEl.text(message);
-    }
-
-    dialogEl.append(titleEl).append(messageEl);
-
-    if (promptDialog) {
-      inputEl = angular.element('<input>')
-        .addClass('text-input')
-        .attr('placeholder', placeholder)
-        .css({width: '100%', marginTop: '10px'});
-      messageEl.append(inputEl);
-
-      if (submitOnEnter) {
-        inputEl.on('keypress', function(event) {
-          if (event.keyCode === 13) {
-            alertDialog.hide({
-              callback: function() {
-                callback(inputEl.val());
-                alertDialog.destroy();
-                alertDialog = null;
-                inputEl = null;
-              }
-            });
-          }
-        });
-      }
-    }
-
-    dialogEl.append(footerEl);
-
-    angular.element(document.body).append(dialogEl);
-    ons.compile(dialogEl[0]);
-    var alertDialog = dialogEl.data('ons-alert-dialog');
-
-    if (buttonLabels.length <= 2) {
-      footerEl.addClass('alert-dialog-footer--one');
-    }
-
-    var createButton = function(i) {
-      var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
-
-      if (i == primaryButtonIndex) {
-        buttonEl.addClass('alert-dialog-button--primal');
-      }
-
-      if (buttonLabels.length <= 2) {
-        buttonEl.addClass('alert-dialog-button--one');
-      }
-
-      buttonEl.on('click', function() {
-        buttonEl.off('click');
-
-        alertDialog.hide({
-          callback: function() {
-            if (promptDialog) {
-              callback(inputEl.val());
-            } else {
-              callback(i);
-            }
-            alertDialog.destroy();
-            alertDialog = inputEl = buttonEl = null;
-          }
-        });
-      });
-      footerEl.append(buttonEl);
-    };
-
-    for (var i = 0; i < buttonLabels.length; i++) {
-      createButton(i);
-    }
-
-    if (cancelable) {
-      alertDialog.setCancelable(cancelable);
-      alertDialog.on('cancel', function() {
-        if(promptDialog) {
-          callback(null);
-        } else {
-          callback(-1);
-        }
-        setTimeout(function() {
-          alertDialog.destroy();
-          alertDialog = null;
-          inputEl = null;
-        });
-      });
-    }
-
-    alertDialog.show({
-      callback: function() {
-        if(promptDialog && autofocus) {
-          inputEl[0].focus();
-        }
-      }
-    });
-
-    dialogEl = titleEl = messageEl = footerEl = null; 
+ons.notification.alert = function(options) {
+  var originalCompile = options.compile || function(element) {
+    return element;
   };
 
-  return {
-    /**
-     * @param {Object} options
-     * @param {String} [options.message]
-     * @param {String} [options.messageHTML]
-     * @param {String} [options.buttonLabel]
-     * @param {String} [options.animation]
-     * @param {String} [options.title]
-     * @param {String} [options.modifier]
-     * @param {Function} [options.callback]
-     */
-    alert: function(options) {
-      var defaults = {
-        buttonLabel: 'OK',
-        animation: 'default',
-        title: 'Alert',
-        callback: function() {}
-      };
-
-      options = angular.extend({}, defaults, options);
-      if (!options.message && !options.messageHTML) {
-        throw new Error('Alert dialog must contain a message.');
-      }
-      createAlertDialog(
-        options.title, 
-        options.message || options.messageHTML, 
-        [options.buttonLabel], 
-        0,
-        options.modifier,
-        options.animation,
-        options.callback,
-        !options.message ? true : false,
-        false, false, false
-      );
-    },
-
-    /**
-     * @param {Object} options
-     * @param {String} [options.message]
-     * @param {String} [options.messageHTML]
-     * @param {Array} [options.buttonLabels]
-     * @param {Number} [options.primaryButtonIndex]
-     * @param {Boolean} [options.cancelable]
-     * @param {String} [options.animation]
-     * @param {String} [options.title]
-     * @param {String} [options.modifier]
-     * @param {Function} [options.callback]
-     */
-    confirm: function(options) {
-      var defaults = {
-        buttonLabels: ['Cancel', 'OK'],
-        primaryButtonIndex: 1,
-        animation: 'default',
-        title: 'Confirm',
-        callback: function() {},
-        cancelable: false
-      };
-
-      options = angular.extend({}, defaults, options);
-      if (!options.message && !options.messageHTML) {
-        throw new Error('Confirm dialog must contain a message.');
-      }
-
-      createAlertDialog(
-        options.title,
-        options.message || options.messageHTML,
-        options.buttonLabels,
-        options.primaryButtonIndex,
-        options.modifier,
-        options.animation,
-        options.callback,
-        !options.message ? true : false,
-        options.cancelable,
-        false, false
-      );
-    },
-
-    /**
-     * @param {Object} options
-     * @param {String} [options.message]
-     * @param {String} [options.messageHTML]
-     * @param {String} [options.buttonLabel]
-     * @param {Boolean} [options.cancelable]
-     * @param {String} [options.animation]
-     * @param {String} [options.placeholder]
-     * @param {String} [options.title]
-     * @param {String} [options.modifier]
-     * @param {Function} [options.callback]
-     * @param {Boolean} [options.autofocus]
-     */
-    prompt: function(options) {
-      var defaults = {
-        buttonLabel: 'OK',
-        animation: 'default',
-        title: 'Alert',
-        placeholder: '',
-        callback: function() {},
-        cancelable: false,
-        autofocus: true,
-        submitOnEnter: true
-      };
-
-      options = angular.extend({}, defaults, options);
-      if (!options.message && !options.messageHTML) {
-        throw new Error('Prompt dialog must contain a message.');
-      }
-
-      createAlertDialog(
-        options.title,
-        options.message || options.messageHTML,
-        [options.buttonLabel],
-        0,
-        options.modifier,
-        options.animation,
-        options.callback,
-        !options.message ? true : false,
-        options.cancelable,
-        true,
-        options.autofocus,
-        options.placeholder,
-        options.submitOnEnter
-      );
-    }
+  options.compile = function(element) {
+    ons.compile(originalCompile(element));
   };
-})();
 
+  return ons.notification._alertOriginal(options);
+};
+
+ons.notification.confirm = function(options) {
+  var originalCompile = options.compile || function(element) {
+    return element;
+  };
+
+  options.compile = function(element) {
+    ons.compile(originalCompile(element));
+  };
+
+  return ons.notification._confirmOriginal(options);
+};
+
+ons.notification.prompt = function(options) {
+  var originalCompile = options.compile || function(element) {
+    return element;
+  };
+
+  options.compile = function(element) {
+    ons.compile(originalCompile(element));
+  };
+
+  return ons.notification._promptOriginal(options);
+};

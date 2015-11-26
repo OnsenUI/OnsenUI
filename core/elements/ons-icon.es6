@@ -33,7 +33,7 @@ limitations under the License.
     _update() {
       this._cleanClassAttribute();
 
-      var builded = this._buildClassAndStyle(this);
+      const builded = this._buildClassAndStyle(this);
 
       for (let key in builded.style) {
         if (builded.style.hasOwnProperty(key)) {
@@ -41,52 +41,54 @@ limitations under the License.
         }
       }
 
-      builded.classList.forEach(className => {
-        this.classList.add(className);
-      }.bind(this));
+      builded.classList.forEach(className => this.classList.add(className));
+    }
+
+    get _iconName() {
+      return '' + this.getAttribute('icon');
     }
 
     /**
      * Remove unneeded class value.
      */
     _cleanClassAttribute() {
-      var classList = this.classList;
+      const classList = this.classList;
 
       Array.apply(null, this.classList).filter(klass => {
-        return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
+        return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0 || klass.indexOf('zmdi-') === 0;
       }).forEach(className => {
         classList.remove(className);
       });
 
-      classList.remove('ons-icon--ion');
+      classList.remove('zmdi');
     }
 
     _buildClassAndStyle() {
-      var classList = ['ons-icon'];
-      var style = {};
+      const classList = ['ons-icon'];
+      const style = {};
 
       // icon
-      var iconName = '' + this.getAttribute('icon');
+      const iconName = this._iconName;
       if (iconName.indexOf('ion-') === 0) {
         classList.push(iconName);
-        classList.push('ons-icon--ion');
       } else if (iconName.indexOf('fa-') === 0) {
         classList.push(iconName);
         classList.push('fa');
+      } else if(iconName.indexOf('md-') === 0)  {
+        classList.push('zmdi');
+        classList.push('zmdi-' + iconName.split(/\-(.+)?/)[1]);
       } else {
         classList.push('fa');
         classList.push('fa-' + iconName);
       }
 
       // size
-      var size = '' + this.getAttribute('size');
+      const size = '' + this.getAttribute('size');
       if (size.match(/^[1-5]x|lg$/)) {
         classList.push('fa-' + size);
         this.style.removeProperty('font-size');
-      } else if (typeof size === 'string') {
-        style.fontSize = size;
       } else {
-        classList.push('fa-lg');
+        style.fontSize = size;
       }
 
       return {

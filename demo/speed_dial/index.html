@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Speed Dial | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+
+</head>
+
+<body>
+  <ons-page modifier="material">
+    <ons-toolbar modifier="material">
+      <div class="center">Speed Dial</div>
+    </ons-toolbar>
+
+    <section style="text-align:center;">
+      <p></p>
+
+      <ons-speed-dial position="left bottom" direction="right">
+        <ons-icon icon="md-car"></ons-icon>
+        <ons-speed-dial-item>C</ons-speed-dial-item>
+        <ons-speed-dial-item>B</ons-speed-dial-item>
+        <ons-speed-dial-item>A</ons-speed-dial-item>
+      </ons-speed-dial>
+
+      <ons-speed-dial position="top right" style="top: 100px;" direction="left">
+        <ons-icon icon="md-car"></ons-icon>
+        <ons-speed-dial-item>C</ons-speed-dial-item>
+        <ons-speed-dial-item>B</ons-speed-dial-item>
+        <ons-speed-dial-item>A</ons-speed-dial-item>
+      </ons-speed-dial>
+
+      <ons-speed-dial position="top left" style="top: 100px;" direction="down">
+        <ons-icon icon="md-car"></ons-icon>
+        <ons-speed-dial-item>C</ons-speed-dial-item>
+        <ons-speed-dial-item>B</ons-speed-dial-item>
+        <ons-speed-dial-item>A</ons-speed-dial-item>
+      </ons-speed-dial>
+
+      <ons-speed-dial position="bottom right" direction="up">
+        <ons-icon icon="md-car"></ons-icon>
+        <ons-speed-dial-item>C</ons-speed-dial-item>
+        <ons-speed-dial-item>B</ons-speed-dial-item>
+        <ons-speed-dial-item>A</ons-speed-dial-item>
+      </ons-speed-dial>
+    </section>
+  </ons-page>
+</body>
+</html>

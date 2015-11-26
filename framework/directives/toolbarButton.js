@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
- * @category toolbar
+ * @category page
  * @modifier outline
  *   [en]A button with an outline.[/en]
  *   [ja]アウトラインをもったボタンを表示します。[/ja]
@@ -33,6 +33,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *   [en]Variable name to refer this button.[/en]
@@ -66,6 +68,7 @@
       scope: false,
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           var toolbarButton = new GenericView(scope, element, attrs);
           element.data('ons-toolbar-button', toolbarButton);
           $onsen.declareVarAttribute(attrs, toolbarButton);

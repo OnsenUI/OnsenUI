@@ -42,6 +42,15 @@
  *   [ja]各要素の表現を指定します。[/ja]
  */
 
+/**
+ * @ngdoc attribute
+ * @name lock-on-drag
+ * @type {String}
+ * @description
+ *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
+ *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -49,6 +58,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
         GenericView.register(scope, element, attrs, {viewKey: 'ons-list-item'});
         $onsen.fireComponentEvent(element[0], 'init');
       }

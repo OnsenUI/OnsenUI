@@ -1,0 +1,155 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-fab-width = 56px
+var-fab-height = 56px
+
+var-fab-mini-width = 40px
+var-fab-mini-height = 40px
+
+var-fab-background-color = $fab-background-color
+var-fab-color = $fab-text-color
+
+/*! topdoc
+  name: Fab
+  class: fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
+*/
+
+fab--disabled()
+  background-color alpha(black, 0.5)
+  shadow-0()
+  disabled()
+
+fab()
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  material-font()
+  width var-fab-width
+  height var-fab-height
+  text-decoration none
+  font-size 25px
+  line-height var-fab-height
+  letter-spacing var-letter-spacing
+  color var-fab-color
+  vertical-align middle
+  text-align center
+  background-color var-fab-background-color
+  border 0px solid currentColor
+  border-radius 50%
+  overflow hidden
+  shadow-2()
+  transition all 0.2s ease-in-out
+
+fab--focus()
+  outline 0
+
+fab--active()
+  shadow-4()
+  background-color var-fab-background-color
+  transition all 0.2s ease
+
+.fab
+  fab()
+
+.fab:hover
+  fab--hover()
+
+.fab:active
+  fab--active()
+
+.fab:focus
+  fab--focus()
+
+.fab__icon
+  position relative
+  overflow hidden
+  height 100%
+  width 100%
+  display block
+  border-radius 100%
+  padding 0
+  z-index 100
+  line-height var-fab-height
+
+.fab:disabled,
+.fab[disabled]
+  fab--disabled()
+
+.fab--top__right
+  top 20px
+  bottom auto
+  right 20px
+  left auto
+  position fixed
+
+.fab--bottom__right
+  top auto
+  bottom 20px
+  right 20px
+  left auto
+  position fixed
+
+.fab--top__left
+  top 20px
+  bottom auto
+  right auto
+  left 20px
+  position fixed
+
+.fab--bottom__left
+  top auto
+  bottom 20px
+  right auto
+  left 20px
+  position fixed
+
+.fab--top__center
+  top 20px
+  bottom auto
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
+
+.fab--bottom__center
+  top auto
+  bottom 20px
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
+
+/*! topdoc
+  name: Fab Mini
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
+*/
+
+.fab--mini
+  width var-fab-mini-width
+  height var-fab-mini-height
+  line-height var-fab-mini-height
+
+.fab--mini
+  .fab__icon
+    line-height var-fab-mini-height
+
+.speed-dial__item
+  position absolute
+  transform scale(0)

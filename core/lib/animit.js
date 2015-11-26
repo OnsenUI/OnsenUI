@@ -22,6 +22,8 @@ limitations under the License.
 window.animit = (function(){
   'use strict';
 
+  var TIMEOUT_RATIO = 1.4;
+
   /**
    * @param {HTMLElement} element
    */
@@ -34,22 +36,13 @@ window.animit = (function(){
       this.elements = [element];
     } else if (Object.prototype.toString.call(element) === '[object Array]') {
       this.elements = element;
+
     } else {
       throw new Error('First argument must be an array or an instance of HTMLElement.');
     }
 
     this.transitionQueue = [];
     this.lastStyleAttributeDict = [];
-
-    var self = this;
-    this.elements.forEach(function(element, index) {
-      if (!element.hasAttribute('data-animit-orig-style')) {
-        self.lastStyleAttributeDict[index] = element.getAttribute('style');
-        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
-      } else {
-        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
-      }
-    });
   };
 
   Animit.prototype = {
@@ -60,9 +53,9 @@ window.animit = (function(){
     transitionQueue: undefined,
 
     /**
-     * @property {HTMLElement}
+     * @property {Array}
      */
-    element: undefined,
+    elements: undefined,
 
     /**
      * Start animation sequence with passed animations.
@@ -127,22 +120,40 @@ window.animit = (function(){
      * @param {Float} seconds
      */
     wait: function(seconds) {
+      if (seconds > 0) {
+        this.transitionQueue.push(function(done) {
+          setTimeout(done, 1000 * seconds);
+        });
+      }
+
+      return this;
+    },
+
+    saveStyle: function() {
+
       this.transitionQueue.push(function(done) {
-        setTimeout(done, 1000 * seconds);
-      });
+        this.elements.forEach(function(element, index) {
+          var css = this.lastStyleAttributeDict[index] = {};
+
+          for (var i = 0; i < element.style.length; i++) {
+            css[element.style[i]] = element.style[element.style[i]];
+          }
+        }.bind(this));
+        done();
+      }.bind(this));
 
       return this;
     },
 
     /**
-     * Reset element's style.
+     * Restore element's style.
      *
      * @param {Object} [options]
      * @param {Float} [options.duration]
      * @param {String} [options.timing]
      * @param {String} [options.transition]
      */
-    resetStyle: function(options) {
+    restoreStyle: function(options) {
       options = options || {};
       var self = this;
 
@@ -150,35 +161,63 @@ window.animit = (function(){
         throw new Error('"options.duration" is required when "options.transition" is enabled.');
       }
 
+      var transitionName = util.transitionPropertyName;
+
       if (options.transition || (options.duration && options.duration > 0)) {
         var transitionValue = options.transition || ('all ' + options.duration + 's ' + (options.timing || 'linear'));
-        var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
 
         this.transitionQueue.push(function(done) {
           var elements = this.elements;
 
-          // transition and style settings
-          elements.forEach(function(element, index) {
-            element.style[Animit.prefix + 'Transition'] = transitionValue;
-            element.style.transition = transitionValue;
-
-            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
-            element.setAttribute('style', styleValue);
-          });
-
           // add "transitionend" event handler
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+          var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
-            reset();
+            clearTransition();
             done();
           });
 
           // for fail safe.
           var timeoutId = setTimeout(function() {
             removeListeners();
-            reset();
+            clearTransition();
             done();
-          }, options.duration * 1000 * 1.4);
+          }, options.duration * 1000 * TIMEOUT_RATIO);
+
+          // transition and style settings
+          elements.forEach(function(element, index) {
+
+            var css = self.lastStyleAttributeDict[index];
+
+            if (!css) {
+              throw new Error('restoreStyle(): The style is not saved. Invoke saveStyle() before.');
+            }
+
+            self.lastStyleAttributeDict[index] = undefined;
+
+            var name;
+            for (var i = 0, len = element.style.length; i < len; i++) {
+              name = element.style[i];
+              if (css[name] === undefined) {
+                css[name] = '';
+              }
+            }
+
+            element.style[transitionName] = transitionValue;
+
+            Object.keys(css).forEach(function(key) {
+              if (key !== transitionName) {
+                element.style[key] = css[key];
+              }
+            });
+
+            element.style[transitionName] = transitionValue;
+          });
+
+          var clearTransition = function() {
+            elements.forEach(function(element) {
+              element.style[transitionName] = '';
+            });
+          };
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -192,15 +231,27 @@ window.animit = (function(){
       function reset() {
         // Clear transition animation settings.
         self.elements.forEach(function(element, index) {
-          element.style[Animit.prefix + 'Transition'] = 'none';
-          element.style.transition = 'none';
+          element.style[transitionName] = 'none';
 
-          if (self.lastStyleAttributeDict[index]) {
-            element.setAttribute('style', self.lastStyleAttributeDict[index]);
-          } else {
-            element.setAttribute('style', '');
-            element.removeAttribute('style');
+          var css = self.lastStyleAttributeDict[index];
+
+          if (!css) {
+            throw new Error('restoreStyle(): The style is not saved. Invoke saveStyle() before.');
           }
+
+          self.lastStyleAttributeDict[index] = undefined;
+
+          for (var i = 0, name = ''; i < element.style.length; i++) {
+            name = element.style[i];
+            if (typeof css[element.style[i]] === 'undefined') {
+              css[element.style[i]] = '';
+            }
+          }
+
+          Object.keys(css).forEach(function(key) {
+            element.style[key] = css[key];
+          });
+
         });
       }
     },
@@ -239,42 +290,6 @@ window.animit = (function(){
     }
 
   };
-
-  Animit.cssPropertyDict = (function() {
-    var styles = window.getComputedStyle(document.documentElement, '');
-    var dict = {};
-    var a = 'A'.charCodeAt(0);
-    var z = 'z'.charCodeAt(0);
-
-    for (var key in styles) {
-      if (styles.hasOwnProperty(key)) {
-        if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
-          if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
-            dict[key] = true;
-          }
-        }
-      }
-    }
-
-    return dict;
-  })();
-
-  Animit.hasCssProperty = function(name) {
-    return !!Animit.cssPropertyDict[name];
-  };
-
-  /**
-   * Vendor prefix for css property.
-   */
-  Animit.prefix = (function() {
-    var styles = window.getComputedStyle(document.documentElement, ''),
-      pre = (Array.prototype.slice
-        .call(styles)
-        .join('') 
-        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-      )[1];
-    return pre;
-  })();
 
   /**
    * @param {Animit} arguments
@@ -320,9 +335,9 @@ window.animit = (function(){
 
         return function(callback) {
           var elements = this.elements;
-          var timeout = self.options.duration * 1000 * 1.4;
+          var timeout = self.options.duration * 1000 * TIMEOUT_RATIO;
 
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+          var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             callback();
           });
@@ -333,8 +348,7 @@ window.animit = (function(){
           }, timeout);
 
           elements.forEach(function(element) {
-            element.style[Animit.prefix + 'Transition'] = transitionValue;
-            element.style.transition = transitionValue;
+            element.style[util.transitionPropertyName] = transitionValue;
 
             Object.keys(css).forEach(function(name) {
               element.style[name] = css[name];
@@ -349,22 +363,19 @@ window.animit = (function(){
           var elements = this.elements;
 
           elements.forEach(function(element) {
-            element.style[Animit.prefix + 'Transition'] = 'none';
-            element.transition = 'none';
+            element.style[util.transitionPropertyName] = '';
 
             Object.keys(css).forEach(function(name) {
               element.style[name] = css[name];
             });
           });
 
-          if (elements.length) {
-            elements[0].offsetHeight;
-          }
-
-          if (window.requestAnimationFrame) {
-            requestAnimationFrame(callback);
+          if (elements.length > 0) {
+            util.forceLayoutAtOnce(elements, function() {
+              util.batchAnimationFrame(callback);
+            });
           } else {
-            setTimeout(callback, 1000 / 30);
+            util.batchAnimationFrame(callback);
           }
         };
       }
@@ -374,12 +385,14 @@ window.animit = (function(){
 
         Object.keys(css).forEach(function(name) {
           var value = css[name];
-          name = util.normalizeStyleName(name);
-          var prefixed = Animit.prefix + util.capitalize(name);
 
-          if (Animit.cssPropertyDict[name]) {
+          if (util.hasCssProperty(name)) {
             result[name] = value;
-          } else if (Animit.cssPropertyDict[prefixed]) {
+            return;
+          }
+
+          var prefixed = util.vendorPrefix + util.capitalize(name);
+          if (util.hasCssProperty(prefixed)) {
             result[prefixed] = value;
           } else {
             result[prefixed] = value;
@@ -394,79 +407,178 @@ window.animit = (function(){
   };
 
   var util = {
-    /**
-     * Normalize style property name.
-     */
-    normalizeStyleName: function(name) {
-      name = name.replace(/-[a-zA-Z]/g, function(all) {
-        return all.slice(1).toUpperCase();
-      });
-
-      return name.charAt(0).toLowerCase() + name.slice(1);
-    },
-
-    // capitalize string
-    capitalize : function(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    },
-
-    /**
-     * @param {Object} params
-     * @param {String} params.property
-     * @param {Float} params.duration
-     * @param {String} params.timing
-     */
-    buildTransitionValue: function(params) {
-      params.property = params.property || 'all';
-      params.duration = params.duration || 0.4;
-      params.timing = params.timing || 'linear';
-
-      var props = params.property.split(/ +/);
-
-      return props.map(function(prop) {
-        return prop + ' ' + params.duration + 's ' + params.timing;
-      }).join(', ');
-    },
-
-    /**
-     * Add an event handler on "transitionend" event.
-     */
-    addOnTransitionEnd: function(element, callback) {
-      if (!element) {
-        return function() {};
-      }
-
-      var fn = function(event) {
-        if (element == event.target) {
-          event.stopPropagation();
-          removeListeners();
-
-          callback();
-        }
-      };
-
-      var removeListeners = function() {
-        util._transitionEndEvents.forEach(function(eventName) {
-          element.removeEventListener(eventName, fn);
-        });
-      };
-
-      util._transitionEndEvents.forEach(function(eventName) {
-        element.addEventListener(eventName, fn, false);
-      });
-
-      return removeListeners;
-    },
-
-    _transitionEndEvents: (function() {
-      if (Animit.prefix === 'webkit' || Animit.prefix === 'o' || Animit.prefix === 'moz' || Animit.prefix === 'ms') {
-        return [Animit.prefix + 'TransitionEnd', 'transitionend'];
-      }
-
-      return ['transitionend'];
-    })()
-
   };
+
+  // capitalize string
+  util.capitalize = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  /**
+  * @param {Object} params
+  * @param {String} params.property
+  * @param {Float} params.duration
+  * @param {String} params.timing
+  */
+  util.buildTransitionValue = function(params) {
+    params.property = params.property || 'all';
+    params.duration = params.duration || 0.4;
+    params.timing = params.timing || 'linear';
+
+    var props = params.property.split(/ +/);
+
+    return props.map(function(prop) {
+      return prop + ' ' + params.duration + 's ' + params.timing;
+    }).join(', ');
+  };
+
+  /**
+  * Add an event handler on "transitionend" event.
+  */
+  util.onceOnTransitionEnd = function(element, callback) {
+    if (!element) {
+      return function() {};
+    }
+
+    var fn = function(event) {
+      if (element == event.target) {
+        event.stopPropagation();
+        removeListeners();
+
+        callback();
+      }
+    };
+
+    var removeListeners = function() {
+      util._transitionEndEvents.forEach(function(eventName) {
+        element.removeEventListener(eventName, fn, false);
+      });
+    };
+
+    util._transitionEndEvents.forEach(function(eventName) {
+      element.addEventListener(eventName, fn, false);
+    });
+
+    return removeListeners;
+  };
+
+  util._transitionEndEvents = (function() {
+
+    if ('ontransitionend' in window) {
+      return ['transitionend'];
+    }
+
+    if ('onwebkittransitionend' in window) {
+      return ['webkitTransitionEnd'];
+    }
+
+    if (util.vendorPrefix === 'webkit' || util.vendorPrefix === 'o' || util.vendorPrefix === 'moz' || util.vendorPrefix === 'ms') {
+      return [util.vendorPrefix + 'TransitionEnd', 'transitionend'];
+    }
+
+    return [];
+  })();
+
+  util._cssPropertyDict = (function() {
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var dict = {};
+    var a = 'A'.charCodeAt(0);
+    var z = 'z'.charCodeAt(0);
+
+    for (var key in styles) {
+      if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
+        if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
+          dict[key] = true;
+        }
+      }
+    }
+
+    return dict;
+  })();
+
+  util.hasCssProperty = function(name) {
+    return name in util._cssPropertyDict;
+  };
+
+  /**
+   * Vendor prefix for css property.
+   */
+  util.vendorPrefix = (function() {
+    var styles = window.getComputedStyle(document.documentElement, ''),
+    pre = (Array.prototype.slice
+      .call(styles)
+      .join('') 
+      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+    return pre;
+  })();
+
+  util.forceLayoutAtOnce = function(elements, callback) {
+    this.batchImmediate(function() {
+      elements.forEach(function(element) {
+        // force layout
+        element.offsetHeight;
+      });
+      callback();
+    });
+  };
+
+  util.batchImmediate = (function() {
+    var callbacks = [];
+
+    return function(callback) {
+      if (callbacks.length === 0) {
+        setImmediate(function() {
+          var concreateCallbacks = callbacks.slice(0);
+          callbacks = [];
+          concreateCallbacks.forEach(function(callback) {
+            callback();
+          });
+        });
+      }
+
+      callbacks.push(callback);
+    };
+  })();
+
+  util.batchAnimationFrame = (function() {
+    var callbacks = [];
+
+    var raf = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback) {
+      setTimeout(callback, 1000 / 60);
+    };
+
+    return function(callback) {
+      if (callbacks.length === 0) {
+        raf(function() {
+          var concreateCallbacks = callbacks.slice(0);
+          callbacks = [];
+          concreateCallbacks.forEach(function(callback) {
+            callback();
+          });
+        });
+      }
+
+      callbacks.push(callback);
+    };
+  })();
+
+  util.transitionPropertyName = (function() {
+    if (util.hasCssProperty('transition')) {
+      return 'transition';
+    }
+
+    if (util.hasCssProperty(util.vendorPrefix + 'Transition')) {
+      return util.vendorPrefix + 'Transition';
+    }
+
+    throw new Error('Invalid state');
+  })();
 
   return Animit;
 })();

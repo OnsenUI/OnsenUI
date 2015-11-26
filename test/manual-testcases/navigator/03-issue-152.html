@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
     <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
 
-    <script src="../../../build/js/angular/angular.js"></script>    
-    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/angular-onsenui.js"></script>
     <script>
       var module = angular.module('my-app', ['onsen']);
 
@@ -44,7 +45,7 @@
 
         <p style="text-align: center;">
           <br>
-          <ons-button modifier="light" ng-click="navi.popPage('page.html')">pop</ons-button>
+          <ons-button modifier="light" ng-click="navi.popPage()">pop</ons-button>
         </p>
       </ons-page>
     </script>

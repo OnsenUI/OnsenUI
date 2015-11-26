@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id back_button
  * @name ons-back-button
- * @category toolbar
+ * @category page
  * @description
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
  *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
@@ -32,47 +32,33 @@
     return {
       restrict: 'E',
       replace: false,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      transclude: true,
-      scope: true,
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
 
-      link: {
-        pre: function(scope, element, attrs, controller, transclude) {
-          var backButton = GenericView.register(scope, element, attrs, {viewKey: 'ons-back-button'});
+        return {
+          pre: function(scope, element, attrs, controller, transclude) {
+            CustomElements.upgrade(element[0]);
+            var backButton = GenericView.register(scope, element, attrs, {
+              viewKey: 'ons-back-button'
+            });
 
-          scope.$on('$destroy', function() {
-            backButton._events = undefined;
-            $onsen.removeModifierMethods(backButton);
-            element = null;
-          });
+            scope.$on('$destroy', function() {
+              backButton._events = undefined;
+              $onsen.removeModifierMethods(backButton);
+              element = null;
+            });
 
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-          var navigator = ons.findParentComponentUntil('ons-navigator', element);
-          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
-            scope.showBackButton = nbrOfPages > 1;
-          });
-
-          $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
-
-          transclude(scope, function(clonedElement) {
-            if (clonedElement[0]) {
-              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
-            }
-          });
-
-          ComponentCleaner.onDestroy(scope, function() {
-            ComponentCleaner.destroyScope(scope);
-            ComponentCleaner.destroyAttributes(attrs);
-            element = scope = attrs = null;
-          });
-        },
-        post: function(scope, element) {
-          $onsen.fireComponentEvent(element[0], 'init');
-        }
+            ComponentCleaner.onDestroy(scope, function() {
+              ComponentCleaner.destroyScope(scope);
+              ComponentCleaner.destroyAttributes(attrs);
+              element = scope = attrs = null;
+            });
+          },
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
       }
     };
   });

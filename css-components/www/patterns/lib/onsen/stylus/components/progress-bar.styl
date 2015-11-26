@@ -1,0 +1,95 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-progress-bar-color = $material-progress-bar-primary-color
+var-progress-bar-secondary-color = $material-progress-bar-secondary-color
+var-progress-bar-background-color = $material-progress-bar-background-color
+
+/*! topdoc
+  name: Progress Bar
+  class: progres-bar
+  markup:
+    <div class="progress-bar progress-bar--indeterminate">
+      <div class="progress-bar__primary"></div>
+      <div class="progress-bar__secondary"></div>
+    </div>
+    <br />
+    <div class="progress-bar progress-bar--determinate">
+      <div class="progress-bar__primary" style="width:20%"></div>
+      <div class="progress-bar__secondary" style="width:76%"></div>
+    </div>
+*/
+
+.progress-bar
+  position relative
+  height 4px
+  display block
+  width 100%
+  background-color var-progress-bar-background-color
+  background-clip padding-box
+  margin 0
+  overflow hidden
+
+.progress-bar--determinate > .progress-bar__primary
+.progress-bar--determinate > .progress-bar__secondary
+  position absolute
+  background-color var-progress-bar-color
+  top 0
+  bottom 0
+  transition width .3s linear
+  z-index 100
+    
+.progress-bar--determinate > .progress-bar__secondary
+  background-color var-progress-bar-secondary-color
+  z-index 0
+
+.progress-bar--indeterminate:before
+  content ''
+  position absolute
+  background-color var-progress-bar-color
+  top 0
+  left 0
+  bottom 0
+  will-change left, right
+  animation progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite
+
+.progress-bar--indeterminate:after
+  content ''
+  position absolute
+  background-color var-progress-bar-color
+  top 0
+  left 0
+  bottom 0
+  will-change left, right
+  animation progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite
+  animation-delay 1.15s
+
+@keyframes progress-bar__indeterminate {
+  0% {
+    left -35%
+    right 100%
+  }
+  60% {
+    left 100%
+    right -90%
+  }
+  100% {
+    left 100%
+    right -90%
+  }
+}
+
+@keyframes progress-bar__indeterminate-short {
+  0% {
+    left -200%
+    right 100%
+  }
+  60% {
+    left 107%
+    right -8%
+  }
+  100% {
+    left 107%
+    right -8%
+  }
+}

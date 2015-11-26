@@ -19,8 +19,8 @@ limitations under the License.
 window.DoorLock = (() => {
   'use strict';
 
-  var generateId = (function() {
-    var i = 0;
+  const generateId = (function() {
+    let i = 0;
     return function() {
       return i++;
     };
@@ -33,7 +33,7 @@ window.DoorLock = (() => {
    * @param {Function} [options.log]
    */
   class DoorLock {
-    
+
     constructor(options) {
       options = options || {};
       this._lockList = [];
@@ -47,9 +47,8 @@ window.DoorLock = (() => {
      * @return {Function} Callback for unlocking.
      */
     lock() {
-      var self = this;
-      var unlock = function() {
-        self._unlock(unlock);
+      const unlock = () => {
+        this._unlock(unlock);
       };
       unlock.id = generateId();
       this._lockList.push(unlock);
@@ -59,7 +58,7 @@ window.DoorLock = (() => {
     }
 
     _unlock(fn) {
-      var index = this._lockList.indexOf(fn);
+      const index = this._lockList.indexOf(fn);
       if (index === -1) {
         throw new Error('This function is not registered in the lock list.');
       }

@@ -2,13 +2,14 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Carousel</title>  
+  <title>Carousel | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
 
   <style>
     ons-carousel-item {
@@ -38,7 +39,6 @@
     }
 
     .list-action-menu {
-      
       background-color: #aaa;
       color: white;
       padding: 0 12px;
@@ -78,7 +78,7 @@
   </script>
 </head>
 
-<body>    
+<body>
   <ons-page ng-controller="MainController">
     <ons-toolbar>
       <div class="center">Carousel with list</div>
@@ -114,7 +114,7 @@
     </ons-list>
     <ons-carousel var="carousel" auto-refresh swipeable overscrollable style="height: 50%; width: 100%;" item-width="40%">
       <ons-carousel-item ng-repeat="item in items" ng-attr-style="background-color: {{ item }}">
-        {{ item }}   
+        {{ item }}
       </ons-carousel-item>
     </ons-carousel>
   </ons-page>

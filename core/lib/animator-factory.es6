@@ -24,9 +24,9 @@ limitations under the License.
      * @param {Object} opts
      * @param {Object} opts.animators The dictionary for animator classes
      * @param {Function} opts.baseClass The base class of animators
-     * @param {String} opts.baseClassName The name of the base class of animators
-     * @param {String} opts.defaultAnimation The default animation name
-     * @param {Object} opts.defaultAnimationOptions The default animation options
+     * @param {String} [opts.baseClassName] The name of the base class of animators
+     * @param {String} [opts.defaultAnimation] The default animation name
+     * @param {Object} [opts.defaultAnimationOptions] The default animation options
      */
     constructor(opts) {
       this._animators = opts.animators;
@@ -44,11 +44,20 @@ limitations under the License.
      * @param {String} jsonString
      * @return {Object/null}
      */
-    static parseJSONSafely(jsonString) {
+    static parseAnimationOptionsString(jsonString) {
       try {
-        return JSON.parse(jsonString);
+        if (typeof jsonString === 'string') {
+          let result = JSON.parse(jsonString);
+          if (typeof result === 'object' && result !== null) {
+            return result;
+          } else {
+            console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+          }
+        }
+        return {};
       } catch (e) {
-        return null;
+        console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+        return {};
       }
     }
 
@@ -69,13 +78,13 @@ limitations under the License.
     newAnimator(options, defaultAnimator) {
       options = options || {};
 
-      var animator = null;
+      let animator = null;
 
       if (options.animation instanceof this._baseClass) {
         return options.animation;
       }
 
-      var Animator = null;
+      let Animator = null;
 
       if (typeof options.animation === 'string') {
         Animator = this._animators[options.animation];
@@ -86,7 +95,7 @@ limitations under the License.
       } else {
         Animator = Animator || this._animators[this._animation];
 
-        var animationOpts = ons._util.extend(
+        const animationOpts = ons._util.extend(
           {},
           this._animationOptions,
           options.animationOptions || {},

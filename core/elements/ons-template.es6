@@ -26,10 +26,18 @@ limitations under the License.
         this.removeChild(this.firstChild);
       }
     }
+
+    attachedCallback() {
+      var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
+      event.template = this.template;
+      event.templateId = this.getAttribute('id');
+
+      this.dispatchEvent(event);
+    }
   }
 
-  if (!window.OnsTemplate) {
-    window.OnsTemplate = document.registerElement('ons-template', {
+  if (!window.OnsTemplateElement) {
+    window.OnsTemplateElement = document.registerElement('ons-template', {
       prototype: TemplateElement.prototype
     });
   }

@@ -3,6 +3,9 @@
  * @id dialog
  * @name ons-dialog
  * @category dialog
+ * @modifier material
+ *   [en]Display a Material Design dialog.[/en]
+ *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
@@ -89,7 +92,9 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
+ * @extensionOf angular
  * @description
  *  [en]Variable name to refer this dialog.[/en]
  *  [ja]このダイアログを参照するための名前を指定します。[/ja]
@@ -152,6 +157,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preshow
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
@@ -161,6 +168,8 @@
 /**
  * @ngdoc attribute
  * @name ons-prehide
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
@@ -170,6 +179,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postshow
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
@@ -179,6 +190,8 @@
 /**
  * @ngdoc attribute
  * @name ons-posthide
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
@@ -188,6 +201,8 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -311,6 +326,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -325,6 +341,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
@@ -339,6 +356,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]
@@ -353,32 +371,22 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  /**
-   * Dialog directive.
-   */
-  module.directive('onsDialog', function($onsen, DialogView) {
+  angular.module('onsen').directive('onsDialog', function($onsen, DialogView) {
     return {
       restrict: 'E',
-      replace: false,
       scope: true,
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/dialog.tpl',
-      compile: function(element, attrs, transclude) {
-        element[0].setAttribute('no-status-bar-fill', '');
+      
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
+
         return {
           pre: function(scope, element, attrs) {
-            transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.dialog')).append(clone);
-            });
+            CustomElements.upgrade(element[0]);
 
             var dialog = new DialogView(scope, element, attrs);
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-            $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
             $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide destroy');
+            $onsen.addModifierMethodsForCustomElements(dialog, element);
 
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
@@ -388,6 +396,7 @@
               element = null;
             });
           },
+
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }

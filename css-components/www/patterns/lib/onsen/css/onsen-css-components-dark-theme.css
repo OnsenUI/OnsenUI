@@ -58,6 +58,7 @@ h6 {
   overflow: visible;
   font-size: 17px;
   color: #fff;
+  -ms-overflow-style: none;
 }
 .page::-webkit-scrollbar {
   display: none;
@@ -72,7 +73,6 @@ h6 {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-top: -1px;
 }
 .page__background {
   background-color: #242424;
@@ -87,6 +87,24 @@ h6 {
 }
 .content-padded {
   padding: 8px;
+}
+.page--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.page--material__content {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+}
+.page--material__content h1,
+.page--material__content h2,
+.page--material__content h3,
+.page--material__content h4,
+.page--material__content h5 {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
 }
 /* topdoc
   name: Switch
@@ -229,6 +247,89 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
+  name: Material Switch
+  use: Switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input">
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" checked>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" disabled>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+*/
+.switch--material {
+  width: 36px;
+  height: 20px;
+  padding: 0 10px;
+}
+.switch--material__toggle {
+  background-color: #707070;
+  margin-top: 5px;
+  height: 14px;
+}
+.switch--material__input {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.switch--material__input:checked + .switch--material__toggle:before {
+  -webkit-transform: translateX(16px);
+  -moz-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  -o-transform: translateX(16px);
+  transform: translateX(16px);
+}
+.switch--material__toggle:before {
+  background-color: #80cbc4;
+  left: 0px;
+  margin-top: -5px;
+  width: 20px;
+  height: 20px;
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+}
+.switch--material__input:checked + .switch--material__toggle {
+  background-color: #5a7f7c;
+}
+.switch--material__input:not(:checked) + .switch--material__toggle:before {
+  background-color: #bdbdbd;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
+}
+.switch--material__input:disabled + .switch--material__toggle {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
   name: Range
   class: range
   modifiers:
@@ -309,6 +410,13 @@ h6 {
   margin: 0;
   padding: 0;
 }
+.range::-ms-track {
+  position: relative;
+  border: none;
+  background-color: #424242;
+  height: 0;
+  border-radius: 30px;
+}
 .range::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
@@ -337,6 +445,19 @@ h6 {
   margin: 0;
   padding: 0;
 }
+.range::-ms-thumb {
+  cursor: pointer;
+  position: relative;
+  height: 29px;
+  width: 29px;
+  background-color: #fff;
+  border: 1px solid #424242;
+  border-radius: 30px;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
 .range::-webkit-slider-thumb:before {
   position: absolute;
   top: 13px;
@@ -349,10 +470,142 @@ h6 {
   margin: 0;
   padding: 0;
 }
+.range::-ms-fill-lower {
+  height: 2px;
+  background-color: #3d74ff;
+}
+.range::-ms-tooltip {
+  display: none;
+}
 .range:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+.range--material {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#707070), to(#707070));
+  background-image: -webkit-linear-gradient(#707070, #707070);
+  background-image: -moz-linear-gradient(#707070, #707070);
+  background-image: -o-linear-gradient(#707070, #707070);
+  background-image: linear-gradient(#707070, #707070);
+  background-position: center;
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  overflow: visible;
+}
+.range--material::-webkit-slider-thumb {
+  top: 1px;
+  border: 3px solid #707070;
+  height: 12px;
+  width: 12px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  border-color: #80cbc4;
+  background-color: #80cbc4;
+  margin-top: -1px;
+}
+.range--material::-moz-range-thumb {
+  top: 1px;
+  border: 3px solid #707070;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  border-color: #80cbc4;
+  background-color: #80cbc4;
+}
+.range--material::-moz-range-track {
+  background-color: #707070;
+}
+.range--material::-ms-thumb {
+  margin-top: 1px;
+  border: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  border-color: #80cbc4;
+  background-color: #80cbc4;
+}
+.range--material:focus::-webkit-slider-thumb {
+  border-color: #80cbc4;
+  background-color: #80cbc4;
+}
+.range--material:focus::-moz-range-thumb {
+  border-color: #80cbc4;
+  background-color: #80cbc4;
+}
+.range--material::-moz-range-thumb:before {
+  display: none;
+}
+.range--material::-webkit-slider-thumb:before {
+  display: none;
+}
+.range--material::-ms-fill-lower {
+  background-color: #80cbc4;
+}
+.range--material::-moz-range-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  content: '';
+  display: block;
+  border: 0px;
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: #80cbc4;
+  opacity: 0.2;
+  -moz-transition: -moz-transform 0.1s linear;
+  transition: transform 0.1s linear;
+}
+.range--material::-webkit-slider-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  content: '';
+  display: block;
+  border: 0px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: #80cbc4;
+  opacity: 0.2;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  transition: transform 0.1s linear;
+}
+.range--material::-ms-fill-upper {
+  margin-top: -6px;
+  margin-left: -6px;
+  content: '';
+  display: block;
+  border: 0px;
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: #80cbc4;
+  opacity: 0.2;
+  transition: transform 0.1s linear;
+}
+.range--material:active::-webkit-slider-thumb:after {
+  -webkit-transform: scale(2.5);
+  transform: scale(2.5);
+}
+.range--material:active::-moz-range-thumb:after {
+  -moz-transform: scale(2.5);
+  transform: scale(2.5);
+}
+.range--material:active::-ms-fill-upper {
+  -ms-transform: scale(2.5);
+  transform: scale(2.5);
 }
 /* topdoc
   name: Navigation Bar
@@ -754,6 +1007,85 @@ h6 {
       </div>
     </div>
 */
+/* topdoc
+  name: Material Navigation Bar
+  class: navigation-bar--material
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--material">
+      <div class="navigation-bar__left navigation-bar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--material__center">
+        Toolbar
+      </div>
+      <div class="navigation-bar__right navigation-bar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-refresh"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--material {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 56px;
+  border-bottom: 0;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  padding: 0px 16px;
+  background-color: #333;
+}
+.navigation-bar--material__left {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  height: 56px;
+  width: auto;
+  line-height: 56px;
+}
+.navigation-bar--material__center {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  height: 56px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  padding-left: 34px;
+  line-height: 56px;
+}
+.navigation-bar--material__right {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  height: 56px;
+  width: auto;
+  line-height: 56px;
+}
 /* topdoc
   name: Button
   class: button
@@ -1264,6 +1596,205 @@ h6 {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material Button
+  class: button--material
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+.button--material {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #3d74ff;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0px 16px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  background-color: #80cbc4;
+  color: #fff;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+}
+.button--material:active {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
+  background-color: #80cbc4;
+  opacity: 1;
+}
+.button--material:focus {
+  outline: 0;
+}
+.button--material:disabled,
+.button--material[disabled] {
+  opacity: 0.5;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* topdoc
+  name: Material Flat Button
+  class: button--material--flat
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+*/
+.button--material--flat {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #3d74ff;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0px 16px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  background-color: #80cbc4;
+  color: #fff;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #80cbc4;
+}
+.button--material--flat:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #80cbc4;
+  outline: 0;
+  opacity: 1;
+  border: none;
+}
+.button--material--flat:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #80cbc4;
+  outline: 0;
+  opacity: 1;
+  border: none;
+}
+.button--material--flat:disabled,
+.button--material--flat[disabled] {
+  opacity: 0.5;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 /* topdoc
   name: Button Bar
@@ -1948,6 +2479,17 @@ h6 {
   padding-left: 6px;
   padding-right: 6px;
 }
+.toolbar-button--material {
+  font-size: 21px;
+  color: #fff;
+  padding: 0;
+}
+.toolbar-button--material:active {
+  opacity: 1;
+}
+.toolbar-button--material:not(:last-child) {
+  margin-right: 10px;
+}
 /* topdoc
   name: Checkbox
   class: checkbox
@@ -1956,19 +2498,19 @@ h6 {
     :disabled: Disabled state
   markup:
     <label class="checkbox">
-      <input type="checkbox">
+      <input type="checkbox" class="checkbox__input">
       <div class="checkbox__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" checked="checked">
+      <input type="checkbox" class="checkbox__input" checked="checked">
       <div class="checkbox__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" disabled>
+      <input type="checkbox" class="checkbox__input" disabled>
       <div class="checkbox__checkmark"></div>
       Disabled
     </label>
@@ -1990,7 +2532,7 @@ h6 {
   line-height: 24px;
   margin: 10px 0;
 }
-.checkbox > .checkbox__checkmark {
+.checkbox__checkmark {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2014,7 +2556,7 @@ h6 {
   height: 24px;
   pointer-events: none;
 }
-.checkbox > input[type="checkbox"] {
+.checkbox__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2035,17 +2577,17 @@ h6 {
   height: 0;
   width: 0;
 }
-.checkbox > input[type="checkbox"]:checked {
+.checkbox__input:checked {
   background: #3d74ff;
 }
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+.checkbox__input:checked + .checkbox__checkmark:before {
   background: #3d74ff;
   border: 1px solid #3d74ff;
 }
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+.checkbox__input:checked + .checkbox__checkmark:after {
   opacity: 1;
 }
-.checkbox > .checkbox__checkmark:before {
+.checkbox__checkmark:before {
   content: '';
   position: absolute;
   -webkit-box-sizing: border-box;
@@ -2063,7 +2605,7 @@ h6 {
   box-shadow: none;
   left: 0;
 }
-.checkbox > .checkbox__checkmark {
+.checkbox__checkmark {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2087,7 +2629,7 @@ h6 {
   width: 24px;
   height: 24px;
 }
-.checkbox > .checkbox__checkmark:after {
+.checkbox__checkmark:after {
   content: '';
   position: absolute;
   top: 6px;
@@ -2108,16 +2650,16 @@ h6 {
   transform: rotate(-45deg);
   opacity: 0;
 }
-.checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+.checkbox__input:focus + .checkbox__checkmark:before {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
+.checkbox__input:disabled + .checkbox__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before {
+.checkbox__input:disabled:active + .checkbox__checkmark:before {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -2127,24 +2669,24 @@ h6 {
   class: checkbox--noborder
   markup:
     <label class="checkbox--noborder">
-      <input type="checkbox">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" disabled checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       Disabled
     </label>
  */
-.checkbox--noborder > input[type="checkbox"] {
+.checkbox--noborder__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2182,7 +2724,7 @@ h6 {
   position: relative;
   overflow: hidden;
 }
-.checkbox--noborder > .checkbox__checkmark {
+.checkbox--noborder__checkmark {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2199,7 +2741,7 @@ h6 {
   height: 24px;
   background: transparent;
 }
-.checkbox--noborder > input[type="checkbox"] {
+.checkbox--noborder__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2220,14 +2762,14 @@ h6 {
   height: 0;
   width: 0;
 }
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:before {
   background: transparent;
   border: none;
 }
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:after {
   opacity: 1;
 }
-.checkbox--noborder > .checkbox__checkmark:before {
+.checkbox--noborder__checkmark:before {
   content: '';
   position: absolute;
   width: 24px;
@@ -2238,7 +2780,7 @@ h6 {
   border-radius: 16px;
   left: 0;
 }
-.checkbox--noborder > .checkbox__checkmark {
+.checkbox--noborder__checkmark {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2256,7 +2798,7 @@ h6 {
   height: 24px;
   border: none;
 }
-.checkbox--noborder > .checkbox__checkmark:after {
+.checkbox--noborder__checkmark:after {
   content: '';
   position: absolute;
   top: 6px;
@@ -2277,21 +2819,111 @@ h6 {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+.checkbox--noborder__input:focus + .checkbox--noborder__checkmark:before {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
+.checkbox--noborder__input:disabled + .checkbox--noborder__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.checkbox--noborder > input[type="checkbox"]:disabled:active + .checkbox--noborder__checkmark:before {
+.checkbox--noborder__input:disabled:active + .checkbox--noborder__checkmark:before {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
+}
+/* topdoc
+  name: Material Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      Disabled
+    </label>
+*/
+.checkbox--material {
+  line-height: 18px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.checkbox--material__checkmark {
+  width: 18px;
+  height: 18px;
+}
+.checkbox--material__checkmark:before {
+  border: 2px solid #f5f5f5;
+}
+.checkbox--material__input:checked + .checkbox--material__checkmark:before {
+  background-color: #009688;
+  border: none;
+}
+.checkbox--material__input + .checkbox--material__checkmark:after {
+  border-color: #333;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -moz-transform 0.3s ease;
+  -o-transition: -o-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  width: 10px;
+  height: 5px;
+  top: 4px;
+  left: 3px;
+  -webkit-transform: scale(0) rotate(-45deg);
+  -moz-transform: scale(0) rotate(-45deg);
+  -ms-transform: scale(0) rotate(-45deg);
+  -o-transform: scale(0) rotate(-45deg);
+  transform: scale(0) rotate(-45deg);
+}
+.checkbox--material__input:checked + .checkbox--material__checkmark:after {
+  top: 4px;
+  left: 3px;
+  -webkit-transform: scale(1) rotate(-45deg);
+  -moz-transform: scale(1) rotate(-45deg);
+  -ms-transform: scale(1) rotate(-45deg);
+  -o-transform: scale(1) rotate(-45deg);
+  transform: scale(1) rotate(-45deg);
+}
+.checkbox--material__input:disabled + .checkbox--material__checkmark {
+  opacity: 1;
+}
+.checkbox--material__input:disabled + .checkbox--material__checkmark:before {
+  border-color: #afafaf;
+}
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before {
+  background-color: #afafaf;
+}
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:after {
+  border-color: #fff;
+}
+.checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before {
+  background-color: #afafaf;
+}
+.checkbox--material__checkmark:before {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
 }
 /* topdoc
   name: Radio Button
@@ -2299,24 +2931,24 @@ h6 {
   modifiers:
   markup:
     <label class="radio-button">
-      <input type="radio" name="r" checked="checked">
+      <input type="radio" class="radio-button__input" name="r" checked="checked">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 
     <label class="radio-button">
-      <input type="radio" name="r">
+      <input type="radio" class="radio-button__input" name="r">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 
     <label class="radio-button">
-      <input type="radio" name="r">
+      <input type="radio" class="radio-button__input" name="r">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 */
-.radio-button > input[type="radio"] {
+.radio-button__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2337,15 +2969,15 @@ h6 {
   height: 0px;
   width: 0px;
 }
-.radio-button > input[type="radio"]:active,
-.radio-button > input[type="radio"]:focus {
+.radio-button__input:active,
+.radio-button__input:focus {
   outline: 0;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
+.radio-button__input:checked + .radio-button__checkmark:after {
   opacity: 1;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+.radio-button__input:checked + .radio-button__checkmark:before {
   background: transparent;
   border: none;
 }
@@ -2409,7 +3041,7 @@ h6 {
   background: transparent;
   pointer-events: none;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark {
+.radio-button__input:checked + .radio-button__checkmark {
   background: rgba(0,0,0,0);
 }
 .radio-button__checkmark:after {
@@ -2442,10 +3074,108 @@ h6 {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.radio-button > input[type="radio"]:disabled + .radio-button__checkmark {
+.radio-button__input:disabled + .radio-button__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material Radio Button
+  use: Radio Button
+  modifiers:
+  markup:
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r" checked="checked">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled checked>
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled>
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+*/
+.radio-button--material {
+  line-height: 20px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.radio-button--material__checkmark {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+}
+.radio-button--material__checkmark:before {
+  background: transparent;
+  border: 2px solid #f5f5f5;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  -webkit-transition: border 0.2s ease;
+  -moz-transition: border 0.2s ease;
+  -o-transition: border 0.2s ease;
+  transition: border 0.2s ease;
+}
+.radio-button--material__checkmark:after {
+  -webkit-transition: background 0.2s ease, -webkit-transform 0.2s ease;
+  -moz-transition: background 0.2s ease, -moz-transform 0.2s ease;
+  -o-transition: background 0.2s ease, -o-transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  border: none;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.radio-button--material__input:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: 2px solid #009688;
+}
+.radio-button--material__input + .radio-button__checkmark:after {
+  background: #f5f5f5;
+  opacity: 1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.radio-button--material__input:checked + .radio-button__checkmark:after {
+  opacity: 1;
+  background: #009688;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.radio-button--material__input:disabled + .radio-button__checkmark {
+  opacity: 1;
+}
+.radio-button--material__input:disabled + .radio-button__checkmark:after {
+  background-color: #afafaf;
+  border-color: #afafaf;
+}
+.radio-button--material__input:disabled + .radio-button__checkmark:before {
+  border-color: #afafaf;
 }
 /* topdoc
   name: List
@@ -2540,6 +3270,9 @@ h6 {
     background-image: -o-linear-gradient(90deg, #424242, #424242 50%, transparent 50%), -o-linear-gradient(270deg, #424242, #424242 50%, transparent 50%);
     background-image: linear-gradient(0deg, #424242, #424242 50%, transparent 50%), linear-gradient(180deg, #424242, #424242 50%, transparent 50%);
   }
+}
+.list + .list {
+  border-top: 0;
 }
 .list__item {
   margin: 0;
@@ -2813,14 +3546,14 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b" checked="checked">
+          <input type="radio" class="radio-button__input" name="b" checked="checked">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b">
+          <input type="radio" class="radio-button__input" name="b">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>
@@ -2844,14 +3577,14 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--list-item">
-          <input type="checkbox">
+          <input type="checkbox" class="checkbox__input">
           <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--list-item">
-          <input type="checkbox" checked>
+          <input type="checkbox" class="checkbox__input" checked>
           <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
@@ -2876,15 +3609,15 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
@@ -2929,6 +3662,74 @@ h6 {
   font-size: 14px;
   padding-right: 8px;
   float: right;
+}
+/* topdoc
+  name: Material List
+  use: List
+  class: list--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        Orange
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+      </li>
+      <li class="list__item list__item--material">
+        Pear
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
+      </li>
+      </li>
+    </ul>
+*/
+.list--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list--material {
+    background: initial;
+  }
+}
+.list__item--material {
+  border: 0;
+  min-height: initial;
+  padding: 14px 16px;
+  line-height: normal;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--material:not(:last-child) {
+    background: initial;
+  }
+}
+.list__item--material:first-child {
+  border: 0;
+}
+/* topdoc
+  name: Material List with Header
+  use: Material List
+  class: list__header--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__header list__header--material">
+        Fruits
+      </li>
+      <li class="list__item list__item--material">
+        Apple
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+      </li>
+    </ul>
+*/
+.list__header--material {
+  background: none;
+  font-size: 14px;
+  margin: 0 0 2px 0;
+  color: #6c6c6c;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+.list__header--material:not(:first-of-type) {
+  border-top: 1px solid #ececec;
+  margin-top: 16px;
 }
 /* topdoc
   name: Search Input
@@ -2977,7 +3778,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   padding: 4px 0 0 28px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nNDFweCcgaGVpZ2h0PSc0MHB4JyB2aWV3Qm94PScwIDAgNDEgNDAnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM6c2tldGNoPSdodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMnPjx0aXRsZT5TbGljZSAxPC90aXRsZT48ZGVzY3JpcHRpb24+Q3JlYXRlZCB3aXRoIFNrZXRjaCAoaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoKTwvZGVzY3JpcHRpb24+PGRlZnM+PC9kZWZzPjxnIGlkPSdQYWdlIDEnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnPjxnIGlkPSdzZWFyY2gnIGZpbGw9JyNDNkM4QzgnPjxwYXRoIGQ9J00wLjUwNCwxNi4zMzggQzAuNTA0LDI1LjA4NSA3LjYzNSwzMi4xNjUgMTYuNDQ0LDMyLjE2NSBDMjUuMjQsMzIuMTY1IDMyLjM4MiwyNS4wODUgMzIuMzgyLDE2LjMzOCBDMzIuMzgyLDcuNTkxIDI1LjI0LDAuNSAxNi40NDQsMC41IEM3LjYzNSwwLjUgMC41MDQsNy41OTEgMC41MDQsMTYuMzM4IEwwLjUwNCwxNi4zMzggWiBNNS41NTUsMTYuMzM4IEM1LjU1NSwxMC4zNTkgMTAuNDIzLDUuNTIxIDE2LjQ0NSw1LjUyMSBDMjIuNDU1LDUuNTIxIDI3LjMzMywxMC4zNiAyNy4zMzMsMTYuMzM4IEMyNy4zMzMsMjIuMzE3IDIyLjQ1NSwyNy4xNTYgMTYuNDQ1LDI3LjE1NiBDMTAuNDIzLDI3LjE1NiA1LjU1NSwyMi4zMTYgNS41NTUsMTYuMzM4IEw1LjU1NSwxNi4zMzggWiBNMjcuNjY2LDMwLjg2MSBMMzQuNTIxLDM4LjY3IEMzNS42MjUsMzkuNzcyIDM2LjMzOCwzOS43ODEgMzcuNDYsMzguNjcgTDM5LjY2MSwzNi40ODkgQzQwLjc0MywzNS40MDggNDAuODExLDM0LjcxMSAzOS42NjEsMzMuNTY4IEwzMS43NjUsMjYuNzkzIEwyNy42NjYsMzAuODYxIEwyNy42NjYsMzAuODYxIFogTTI3LjY2NiwzMC44NjEnIGlkPSdTaGFwZSc+PC9wYXRoPjwvZz48L2c+PC9zdmc+");
   background-position: 8px center;
   background-repeat: no-repeat;
   -webkit-background-size: 17px;
@@ -2997,9 +3798,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-search-decoration {
   margin-right: 0px;
 }
-.search-input::-webkit-input-placeholder,
-.search-input::-moz-placeholder,
+.search-input::-webkit-input-placeholder {
+  color: #87888f;
+}
+.search-input::-moz-placeholder {
+  color: #87888f;
+}
 .search-input::-ms-input-placeholder {
+  color: #87888f;
+}
+.search-input:-ms-input-placeholder {
   color: #87888f;
 }
 .search-input:disabled {
@@ -3057,9 +3865,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.text-input::-webkit-input-placeholder,
-.text-input::-moz-placeholder,
+.text-input::-webkit-input-placeholder {
+  color: #87888f;
+}
+.text-input::-moz-placeholder {
+  color: #87888f;
+}
 .text-input::-ms-input-placeholder {
+  color: #87888f;
+}
+.text-input:-ms-input-placeholder {
   color: #87888f;
 }
 .text-input:disabled {
@@ -3067,10 +3882,20 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-.text-input:disabled::-webkit-input-placeholder,
-.text-input:disabled::-moz-placeholder,
+.text-input:disabled::-webkit-input-placeholder {
+  color: #87888f;
+}
+.text-input:disabled::-moz-placeholder {
+  color: #87888f;
+}
+.text-input:disabled::-ms-input-placeholder {
+  color: #87888f;
+}
 .text-input:disabled:-ms-input-placeholder {
   color: #87888f;
+}
+.text-input::-ms-clear {
+  display: none;
 }
 .text-input:invalid {
   border: 1px solid #424242;
@@ -3133,8 +3958,21 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   border: none;
   background-color: transparent;
 }
-.text-input--transparent:disabled::-webkit-input-placeholder,
-.text-input--transparent:disabled::-moz-placeholder,
+.text-input--transparent:disabled::-webkit-input-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
+.text-input--transparent:disabled::-moz-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
+.text-input--transparent:disabled::-ms-input-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
 .text-input--transparent:disabled:-ms-input-placeholder {
   color: #87888f;
   border: none;
@@ -3205,8 +4043,21 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
   border-bottom: 1px solid #424242;
 }
-.text-input--underbar:disabled::-webkit-input-placeholder,
-.text-input--underbar:disabled::-moz-placeholder,
+.text-input--underbar:disabled::-webkit-input-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
+.text-input--underbar:disabled::-moz-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
+.text-input--underbar:disabled::-ms-input-placeholder {
+  color: #87888f;
+  border: none;
+  background-color: transparent;
+}
 .text-input--underbar:disabled:-ms-input-placeholder {
   color: #87888f;
   border: none;
@@ -3218,6 +4069,128 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #424242;
+}
+/* topdoc
+  name: Material Input
+  class: text-input--material
+  markup:
+    <span>
+      <input class="text-input--material" placeholder="Username" type="text" required>
+      <br /><br />
+      <input class="text-input--material" placeholder="Password" type="password" required>
+    </span>
+*/
+.text-input--material {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1px, transparent), color-stop(1px, #4c4c4c));
+  background-image: -webkit-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: -moz-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: -o-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: linear-gradient(to top, transparent 1px, #4c4c4c 1px);
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-bottom: 2px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  height: 24px;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.text-input--material__label {
+  color: #009688;
+}
+.text-input--material:focus {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left bottom, left top, color-stop(1px, transparent), color-stop(1px, #4c4c4c));
+  background-image: -webkit-linear-gradient(#009688, #009688), -webkit-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: -moz-linear-gradient(#009688, #009688), -moz-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: -o-linear-gradient(#009688, #009688), -o-linear-gradient(bottom, transparent 1px, #4c4c4c 1px);
+  background-image: linear-gradient(#009688, #009688), linear-gradient(to top, transparent 1px, #4c4c4c 1px);
+  -webkit-animation: material-text-input-animate 0.3s forwards;
+  -moz-animation: material-text-input-animate 0.3s forwards;
+  -o-animation: material-text-input-animate 0.3s forwards;
+  animation: material-text-input-animate 0.3s forwards;
+}
+.text-input--material::-webkit-input-placeholder {
+  color: #4c4c4c;
+  line-height: 20px;
+}
+.text-input--material::-moz-placeholder {
+  color: #4c4c4c;
+  line-height: 20px;
+}
+.text-input--material::-ms-input-placeholder {
+  color: #4c4c4c;
+  line-height: 20px;
+}
+.text-input--material:-ms-input-placeholder {
+  color: #4c4c4c;
+  line-height: 20px;
+}
+.text-input--material::-ms-clear {
+  display: none;
+}
+@-moz-keyframes material-text-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-webkit-keyframes material-text-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-o-keyframes material-text-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@keyframes material-text-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
 }
 /* topdoc
   name: Textarea
@@ -3398,7 +4371,26 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.2);
+}
+/* topdoc
+  name: Material Dialog
+  use: Dialog
+  markup:
+    <div class="dialog-mask dialog--material-mask"></div>
+    <div class="dialog dialog--material">
+      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+    </div>
+*/
+.dialog--material {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #333;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: left;
 }
 /* topdoc
   name: Alert Dialog
@@ -3718,6 +4710,101 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   padding: 8px 12px;
 }
 /* topdoc
+  name: Material Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog alert-dialog--material">
+      <div class="alert-dialog-title alert-dialog-title--material">
+        Dialog title
+      </div>
+      <div class="alert-dialog-content alert-dialog-content--material">
+        Some dialog content.
+      </div>
+      <div class="alert-dialog-footer alert-dialog-footer--material">
+        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      </div>
+    </div>
+*/
+.alert-dialog--material {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding-top: 22px;
+  background-color: #333;
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+}
+.alert-dialog-title--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0 24px;
+  color: #fff;
+}
+.alert-dialog-content--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0 24px;
+  margin: 24px 0 10px 0;
+  min-height: 0;
+  color: #afafaf;
+}
+.alert-dialog-footer--material {
+  display: inline-block;
+  padding: 0px 8px 0px 24px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.alert-dialog-button--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+  min-width: 70px;
+  float: right;
+  background: none;
+  border-top: none;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  color: #80cbc4;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--material {
+    background: none;
+  }
+}
+.alert-dialog-button--material:active {
+  background-color: initial;
+}
+.alert-dialog-button--one--material,
+.alert-dialog-button--one--material:first-child {
+  border: 0;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one--material,
+  .alert-dialog-button--one--material:first-child {
+    background: none;
+  }
+}
+.alert-dialog-button--primal--material {
+  font-weight: 500;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--primal--material {
+    background: none;
+  }
+}
+/* topdoc
   name: Popover
   class: popover
   markup:
@@ -3761,6 +4848,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   position: absolute;
+  display: block;
   width: 220px;
   min-height: 100px;
 }
@@ -4016,4 +5104,492 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   text-align: center;
   color: #fff;
   white-space: normal;
+}
+/* topdoc
+  name: Progress Bar
+  class: progres-bar
+  markup:
+    <div class="progress-bar progress-bar--indeterminate">
+      <div class="progress-bar__primary"></div>
+      <div class="progress-bar__secondary"></div>
+    </div>
+    <br />
+    <div class="progress-bar progress-bar--determinate">
+      <div class="progress-bar__primary" style="width:20%"></div>
+      <div class="progress-bar__secondary" style="width:76%"></div>
+    </div>
+*/
+.progress-bar {
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #333;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  margin: 0;
+  overflow: hidden;
+}
+.progress-bar--determinate > .progress-bar__primary,
+.progress-bar--determinate > .progress-bar__secondary {
+  position: absolute;
+  background-color: #009688;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: width 0.3s linear;
+  -moz-transition: width 0.3s linear;
+  -o-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+  z-index: 100;
+}
+.progress-bar--determinate > .progress-bar__secondary {
+  background-color: #80cbc4;
+  z-index: 0;
+}
+.progress-bar--indeterminate:before {
+  content: '';
+  position: absolute;
+  background-color: #009688;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  -moz-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  -o-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+.progress-bar--indeterminate:after {
+  content: '';
+  position: absolute;
+  background-color: #009688;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -moz-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -o-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -webkit-animation-delay: 1.15s;
+  -moz-animation-delay: 1.15s;
+  -o-animation-delay: 1.15s;
+  animation-delay: 1.15s;
+}
+@-moz-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-webkit-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-o-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-moz-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@-webkit-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@-o-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+/* topdoc
+  name: Progress Circle
+  class: progres-circle
+  markup:
+    <svg class="progress-circular">
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
+    </svg>
+    <svg class="progress-circular progress-circular--determinate">
+      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:140%,251.32%"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:100%,251.32%"/>
+    </svg>
+
+*/
+.progress-circular {
+  -webkit-animation: progress__rotate 2s linear infinite;
+  -moz-animation: progress__rotate 2s linear infinite;
+  -o-animation: progress__rotate 2s linear infinite;
+  animation: progress__rotate 2s linear infinite;
+  height: 80px;
+  position: relative;
+  width: 80px;
+}
+.progress-circular__primary {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: progress__dash 1.5s ease-in-out infinite;
+  -moz-animation: progress__dash 1.5s ease-in-out infinite;
+  -o-animation: progress__dash 1.5s ease-in-out infinite;
+  animation: progress__dash 1.5s ease-in-out infinite;
+  stroke: #009688;
+  -webkit-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-circular--determinate {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+.progress-circular--determinate > .progress-circular__primary {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+.progress-circular--determinate > .progress-circular__secondary {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+  stroke: #80cbc4;
+}
+@-moz-keyframes progress__rotate {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes progress__rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes progress__rotate {
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes progress__rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@-webkit-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@-o-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+/* topdoc
+  name: Fab
+  class: fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
+*/
+.fab {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  width: 56px;
+  height: 56px;
+  text-decoration: none;
+  font-size: 25px;
+  line-height: 56px;
+  letter-spacing: 0;
+  color: #fafafa;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #80cbc4;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.fab:active {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
+  background-color: #80cbc4;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.fab:focus {
+  outline: 0;
+}
+.fab__icon {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: block;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  padding: 0;
+  z-index: 100;
+  line-height: 56px;
+}
+.fab:disabled,
+.fab[disabled] {
+  background-color: rgba(0,0,0,0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.fab--top__right {
+  top: 20px;
+  bottom: auto;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+.fab--bottom__right {
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+.fab--top__left {
+  top: 20px;
+  bottom: auto;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+.fab--bottom__left {
+  top: auto;
+  bottom: 20px;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+.fab--top__center {
+  top: 20px;
+  bottom: auto;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+.fab--bottom__center {
+  top: auto;
+  bottom: 20px;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+/* topdoc
+  name: Fab Mini
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
+*/
+.fab--mini {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+.fab--mini .fab__icon {
+  line-height: 40px;
+}
+.speed-dial__item {
+  position: absolute;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
 }

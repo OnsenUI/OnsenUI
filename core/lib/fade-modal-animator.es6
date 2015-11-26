@@ -19,7 +19,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var ModalAnimator = ons._internal.ModalAnimator;
+  const ModalAnimator = ons._internal.ModalAnimator;
 
   /**
    * iOS style animator for dialog.
