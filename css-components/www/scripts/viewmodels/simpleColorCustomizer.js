@@ -78,6 +78,11 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'material-toolbar-button-color',
           displayName: 'Button Color'
+        },
+
+        {
+          name: 'material-toolbar-button-active-color',
+          displayName: 'Active Button Background Color'
         }
       ]
     },
@@ -366,6 +371,28 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'material-progress-circle-secondary-color',
           displayName: 'Secondary Color'
+        }
+      ]
+    },
+
+    {
+      name: 'Material Tabbar',
+      items: [
+        {
+          name: 'material-tabbar-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-tabbar-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'material-tabbar-highlight-color',
+          displayName: 'Highlight Color'
+        },
+        {
+          name: 'material-tabbar-highlight-text-color',
+          displayName: 'Highlight Text Color'
         }
       ]
     },

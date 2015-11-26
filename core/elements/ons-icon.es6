@@ -61,7 +61,6 @@ limitations under the License.
       });
 
       classList.remove('zmdi');
-      classList.remove('ons-icon--ion');
     }
 
     _buildClassAndStyle() {
@@ -72,7 +71,6 @@ limitations under the License.
       const iconName = this._iconName;
       if (iconName.indexOf('ion-') === 0) {
         classList.push(iconName);
-        classList.push('ons-icon--ion');
       } else if (iconName.indexOf('fa-') === 0) {
         classList.push(iconName);
         classList.push('fa');
