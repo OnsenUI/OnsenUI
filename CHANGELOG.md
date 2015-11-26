@@ -11,6 +11,7 @@ v2.0.0-beta.1
  * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
  * ons-tabbar: Add "material" modifier.
+ * animator-factory: Fixed animationOptions parsing.
 
 v2.0.0-beta
 ----
