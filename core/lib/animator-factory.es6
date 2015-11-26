@@ -47,7 +47,7 @@ limitations under the License.
     static parseAnimationOptionsString(jsonString) {
       try {
         if (typeof jsonString === 'string') {
-          let result = JSON.parse(jsonString);
+          let result = ons._util.animationOptionsParse(jsonString);
           if (typeof result === 'object' && result !== null) {
             return result;
           } else {
