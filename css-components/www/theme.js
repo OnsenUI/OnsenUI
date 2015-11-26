@@ -114,7 +114,7 @@
         'material-tabbar-background-color': '#009688',
         'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
         'material-tabbar-highlight-text-color': '#ffffff',
-        'material-tabbar-highlight-color': '#004C40',
+        'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -231,7 +231,7 @@
         'material-tabbar-background-color': '#009688',
         'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
         'material-tabbar-highlight-text-color': '#ffffff',
-        'material-tabbar-highlight-color': '#004C40',
+        'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -348,7 +348,7 @@
         'material-tabbar-background-color': '#009688',
         'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
         'material-tabbar-highlight-text-color': '#ffffff',
-        'material-tabbar-highlight-color': '#004C40',
+        'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -464,7 +464,7 @@
         'material-tabbar-background-color': '#009688',
         'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
         'material-tabbar-highlight-text-color': '#ffffff',
-        'material-tabbar-highlight-color': '#004C40',
+        'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
@@ -581,7 +581,7 @@
         'material-tabbar-background-color': '#009688',
         'material-tabbar-text-color': 'rgba(255, 255, 255, 0.6)',
         'material-tabbar-highlight-text-color': '#ffffff',
-        'material-tabbar-highlight-color': '#004C40',
+        'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
         'fab-text-color': '#fafafa',
