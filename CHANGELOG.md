@@ -10,6 +10,7 @@ v2.0.0-beta.1
  * css-components: Added `material` modifier on tab-bar components.
  * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
+ * ons-tabbar: Add "material" modifier.
 
 v2.0.0-beta
 ----
