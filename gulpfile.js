@@ -67,6 +67,7 @@ gulp.task('core', function() {
     'core/lib/ons-gesture-detector.es6',
     'core/lib/device-back-button-dispatcher.es6',
     'core/lib/ons.es6',
+    'core/lib/animationOptionsParser.es6',
     'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
     'core/lib/splitter-animator.es6',
