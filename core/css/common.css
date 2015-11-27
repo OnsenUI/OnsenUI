@@ -77,15 +77,30 @@ ons-toolbar + .page__background + .page__content {
   height: 64px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier="material"] {
+  height: 76px;
+}
+
 .page__status-bar-fill + ons-toolbar > .center,
 .page__status-bar-fill + ons-toolbar > .left,
 .page__status-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier="material"] > .center,
+.page__status-bar-fill + ons-toolbar[modifier="material"] > .left,
+.page__status-bar-fill + ons-toolbar[modifier="material"] > .right {
+  height: 76px;
+}
+
+
 .page__status-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
+}
+
+.page__status-bar-fill + ons-toolbar[modifier="material"] + .page__background + .page__content {
+  top: 76px;
 }
 
 .page__content {
