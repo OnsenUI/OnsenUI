@@ -217,6 +217,8 @@ limitations under the License.
       fragment.appendChild(content);
 
       this.appendChild(fragment);
+
+      this._tryToFillStatusBar();
     }
 
     _registerExtraElement(element) {
@@ -234,13 +236,20 @@ limitations under the License.
     _tryToFillStatusBar() {
       return ons._internal.shouldFillStatusBar(this)
         .then(() => {
-          // Adjustments for IOS7
-          var fill = document.createElement('div');
+          let fill = this.querySelector('.page__status-bar-fill');
+
+          if (fill instanceof HTMLElement) {
+            return fill;
+          }
+
+          fill = document.createElement('div');
           fill.classList.add('page__status-bar-fill');
           fill.style.width = '0px';
           fill.style.height = '0px';
 
           this.insertBefore(fill, this.children[0]);
+
+          return fill;
         })
         .catch(() => {
           const el = this.querySelector('.page__status-bar-fill');
