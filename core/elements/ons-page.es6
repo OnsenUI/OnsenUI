@@ -232,15 +232,22 @@ limitations under the License.
     }
 
     _tryToFillStatusBar() {
-      return ons._internal.shouldFillStatusBar(this).then(() => {
-        // Adjustments for IOS7
-        var fill = document.createElement('div');
-        fill.classList.add('page__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
+      return ons._internal.shouldFillStatusBar(this)
+        .then(() => {
+          // Adjustments for IOS7
+          var fill = document.createElement('div');
+          fill.classList.add('page__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
 
-        this.insertBefore(fill, this.children[0]);
-      });
+          this.insertBefore(fill, this.children[0]);
+        })
+        .catch(() => {
+          const el = this.querySelector('.page__status-bar-fill');
+          if (el instanceof HTMLElement) {
+            el.remove();
+          }
+        });
     }
 
     _show() {

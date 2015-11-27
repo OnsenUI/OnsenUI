@@ -134,15 +134,22 @@ limitations under the License.
         this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
       }
 
-      ons._internal.shouldFillStatusBar(this).then(() => {
-        // Adjustments for IOS7
-        var fill = document.createElement('div');
-        fill.classList.add('tab-bar__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
+      ons._internal.shouldFillStatusBar(this)
+        .then(() => {
+          // Adjustments for IOS7
+          var fill = document.createElement('div');
+          fill.classList.add('tab-bar__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
 
-        this.insertBefore(fill, this.children[0]);
-      });
+          this.insertBefore(fill, this.children[0]);
+        })
+        .catch(() => {
+          const el = this.querySelector('.tab-bar__status-bar-fill');
+          if (el instanceof HTMLElement) {
+            el.remove();
+          }
+        });
     }
 
     _getTabbarElement() {
