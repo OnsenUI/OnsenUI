@@ -232,15 +232,17 @@ limitations under the License.
     }
 
     _tryToFillStatusBar() {
-      if (ons._internal.shouldFillStatusBar(this)) {
+      ons._internal.shouldFillStatusBar(this).then(function(){
         // Adjustments for IOS7
-        const fill = document.createElement('div');
+        var fill = document.createElement('div');
         fill.classList.add('page__status-bar-fill');
         fill.style.width = '0px';
         fill.style.height = '0px';
 
         this.insertBefore(fill, this.children[0]);
-      }
+      }).catch(function(err){
+        // ignore
+      });
     }
 
     _show() {
