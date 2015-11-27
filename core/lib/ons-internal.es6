@@ -55,24 +55,40 @@ limitations under the License.
    * @param {HTMLElement} element
    * @return {Boolean}
    */
-  ons._internal.shouldFillStatusBar = (element) => {
-    if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7above()) {
-      if (!(element instanceof HTMLElement)) {
-        throw new Error('element must be an instance of HTMLElement');
-      }
-
-      for (;;) {
-        if (element.hasAttribute('no-status-bar-fill')) {
-          return false;
+  ons._internal.shouldFillStatusBar = function (element) {
+    var checkStatusBar = () => {
+      if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7above()) {
+        if (!(element instanceof HTMLElement)) {
+          throw new Error('element must be an instance of HTMLElement');
         }
 
-        element = element.parentNode;
-        if (!element || !element.hasAttribute) {
-          return true;
+        for (;;) {
+          if (element.hasAttribute('no-status-bar-fill')) {
+            return false;
+          }
+
+          element = element.parentNode;
+          if (!element || !element.hasAttribute) {
+            return true;
+          }
         }
       }
-    }
-    return false;
+      return false;
+    };
+
+    return new Promise(function(resolve, reject){
+      if(typeof device === 'object'){
+        document.addEventListener('deviceready', function(){
+          if(checkStatusBar()){
+            resolve();
+          }
+        });
+      }
+      else if(checkStatusBar()){
+        resolve();
+      }
+      reject();
+    });
   };
 
   ons._internal.templateStore = {

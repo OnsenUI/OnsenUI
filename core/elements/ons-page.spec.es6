@@ -155,13 +155,15 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#_tryToFillStatusBar()', () => {
+  describe('#_tryToFillStatusBar()', (done) => {
     it('fills status bar', () => {
       var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return true; };
-      element._tryToFillStatusBar();
+      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
+      element._tryToFillStatusBar().then(() => {
+        expect(element.firstChild.className).to.equal('page__status-bar-fill');
+        done();
+      });
       ons._internal.shouldFillStatusBar = tmp;
-      expect(element.firstChild.className).to.equal('page__status-bar-fill');
     });
   });
 

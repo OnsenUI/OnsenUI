@@ -53,6 +53,8 @@ limitations under the License.
       if(!util.hasAnyComponentAsParent(this)) {
         this._show();
       }
+
+      this._tryToFillStatusBar();
     }
 
     /**
@@ -232,15 +234,43 @@ limitations under the License.
     }
 
     _tryToFillStatusBar() {
-      if (ons._internal.shouldFillStatusBar(this)) {
-        // Adjustments for IOS7
-        const fill = document.createElement('div');
-        fill.classList.add('page__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
+      return ons._internal.shouldFillStatusBar(this)
+        .then(() => {
+          let fill = this.querySelector('.page__status-bar-fill');
 
-        this.insertBefore(fill, this.children[0]);
-      }
+          if (fill instanceof HTMLElement) {
+            return fill;
+          }
+
+          fill = document.createElement('div');
+          fill.classList.add('page__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          let bottomBarFill;
+
+          for (let i = 0; i < this.children.length; i++) {
+            if (this.children[i].classList.contains('page__bottom-bar-fill')) {
+              bottomBarFill = this.children[i];
+              break;
+            }
+          }
+
+          if (bottomBarFill) {
+            this.insertBefore(fill, bottomBarFill.nextSibling);
+          }
+          else {
+            this.insertBefore(fill, this.children[0]);
+          }
+
+          return fill;
+        })
+        .catch(() => {
+          const el = this.querySelector('.page__status-bar-fill');
+          if (el instanceof HTMLElement) {
+            el.remove();
+          }
+        });
     }
 
     _show() {
