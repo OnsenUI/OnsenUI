@@ -29,6 +29,9 @@ var-radio-button-size = 24px
 var-material-radio-button-size = 20px
 var-material-radio-button-active-color = $material-radio-button-active-color
 var-material-radio-button-inactive-color = $material-radio-button-inactive-color
+var-material-radio-button-ripple-active-color = $material-radio-button-ripple-active-color
+var-material-radio-button-ripple-inactive-color = $material-radio-button-ripple-inactive-color
+
 
 /*! topdoc
   name: Radio Button
@@ -174,6 +177,7 @@ radio-button--disabled()
 
 .radio-button--material
   line-height var-material-radio-button-size
+  overflow visible
   material-font()
 
 .radio-button--material__checkmark
@@ -183,11 +187,13 @@ radio-button--disabled()
 
 .radio-button--material__checkmark:before
   background transparent
-  border 2px solid $material-radio-button-inactive-color
+  border 2px solid var-material-radio-button-inactive-color
   border-radius 50%
   width var-material-radio-button-size
   height var-material-radio-button-size
   transition border 0.2s ease
+  box-shadow inset 0px 0px 0px 0px transparent, 0px 0px 0px 0px transparent
+  transition box-shadow 0.1s linear
 
 .radio-button--material__checkmark:after
   transition background 0.2s ease, transform 0.2s ease
@@ -201,16 +207,16 @@ radio-button--disabled()
 
 .radio-button--material__input:checked + .radio-button__checkmark:before
   background transparent
-  border 2px solid $material-radio-button-active-color
+  border 2px solid var-material-radio-button-active-color
 
 .radio-button--material__input + .radio-button__checkmark:after
-  background $material-radio-button-inactive-color
+  background var-material-radio-button-inactive-color
   opacity 1
   transform scale(0)
 
 .radio-button--material__input:checked + .radio-button__checkmark:after
   opacity 1
-  background $material-radio-button-active-color
+  background var-material-radio-button-active-color
   transform scale(1)
 
 .radio-button--material__input:disabled + .radio-button__checkmark
@@ -223,3 +229,11 @@ radio-button--disabled()
 .radio-button--material__input:disabled + .radio-button__checkmark:before
   border-color #afafaf
 
+.radio-button--material:active > .radio-button--material__checkmark:before
+  box-shadow inset 0px 0px 0px 12px var-material-radio-button-ripple-inactive-color, 0px 0px 0px 12px var-material-radio-button-ripple-inactive-color
+
+.radio-button--material:active > .radio-button--material__input:checked + .radio-button--material__checkmark:before
+  box-shadow inset 0px 0px 0px 12px var-material-radio-button-ripple-active-color, 0px 0px 0px 12px var-material-radio-button-ripple-active-color
+
+.radio-button--material__input:disabled + .radio-button--material__checkmark:before
+  box-shadow none !important
