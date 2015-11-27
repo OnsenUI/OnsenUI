@@ -32,6 +32,8 @@ var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 
 ////////////////////////////////////////
 // browser-sync
@@ -56,41 +58,20 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  var onlyES6 = $.filter('*.es6');
-
-  // onsenui.js
-  return gulp.src([
-    'core/vendor/winstore-jscompat.js',
-    'core/vendor/*.js',
-    'core/lib/animit.js',
-    'core/lib/doorlock.es6',
-    'core/lib/ons-gesture-detector.es6',
-    'core/lib/device-back-button-dispatcher.es6',
-    'core/lib/ons.es6',
-    'core/lib/ons-util.es6',
-    'core/lib/modal-animator.es6',
-    'core/lib/splitter-animator.es6',
-    'core/lib/navigator-transition-animator.es6',
-    'core/lib/popover-animator.es6',
-    'core/lib/ons-platform.es6',
-    'core/lib/*.{es6,js}',
-    'core/*.{es6,js}',
-    'core/elements/ons-template.es6',
-    'core/elements/ons-splitter.es6',
-    'core/elements/ons-tab.es6',
-    'core/elements/*.{es6,js}',
-    '!core/**/*.spec.{es6,js}',
-  ])
-    .pipe($.cached('onsenui.js'))
-    .pipe($.sourcemaps.init())
+  return browserify({
+    entries: ['./core/src/index.es6'],
+    debug: true,
+    extensions: ['.js', '.es6'],
+  })
+    .transform('babelify', {
+      extensions: ['.es6'],
+      presets: ['es2015']
+    })
+    .transform('concatenify')
+    .bundle()
     .pipe($.plumber())
-    .pipe(onlyES6 = $.filter('*.es6'))
-    .pipe($.babel({modules: 'ignore'}))
-    .pipe(onlyES6.restore())
-    .pipe($.remember('onsenui.js'))
-    .pipe($.concat('onsenui.js'))
+    .pipe(source('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
 
