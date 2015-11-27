@@ -53,6 +53,8 @@ limitations under the License.
       if(!util.hasAnyComponentAsParent(this)) {
         this._show();
       }
+
+      this._tryToFillStatusBar();
     }
 
     /**
@@ -217,8 +219,6 @@ limitations under the License.
       fragment.appendChild(content);
 
       this.appendChild(fragment);
-
-      this._tryToFillStatusBar();
     }
 
     _registerExtraElement(element) {

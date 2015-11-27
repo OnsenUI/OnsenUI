@@ -240,6 +240,9 @@ limitations under the License.
      * @param {Number} options.previousTabIndex
      */
     _switchPage(element, options) {
+      if (this._hasTopTabbar()) {
+        element.setAttribute('no-status-bar-fill', '');
+      }
 
       if (this.getActiveTabIndex() !== -1) {
         var oldPageElement = this._oldPageElement || ons._internal.nullElement;
