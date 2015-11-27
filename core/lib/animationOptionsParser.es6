@@ -138,7 +138,7 @@ limitations under the License.
     const isQuotedString = string => (string.startsWith('\'') && string.endsWith('\'')) || (string.startsWith('"') && string.endsWith('"'));
     const processToken = (token, string, originalString) => {
       if (token === 'true' || token === 'false') {
-        return token;
+        return token === 'true';
       } else if (isQuotedString(token)) {
         return unwrap(token);
       } else if (!isNaN(token)) {
