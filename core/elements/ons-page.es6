@@ -232,7 +232,7 @@ limitations under the License.
     }
 
     _tryToFillStatusBar() {
-      ons._internal.shouldFillStatusBar(this).then(function(){
+      return ons._internal.shouldFillStatusBar(this).then(() => {
         // Adjustments for IOS7
         var fill = document.createElement('div');
         fill.classList.add('page__status-bar-fill');
@@ -240,8 +240,6 @@ limitations under the License.
         fill.style.height = '0px';
 
         this.insertBefore(fill, this.children[0]);
-      }).catch(function(err){
-        // ignore
       });
     }
 

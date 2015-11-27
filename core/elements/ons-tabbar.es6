@@ -134,7 +134,7 @@ limitations under the License.
         this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
       }
 
-      ons._internal.shouldFillStatusBar(this).then(function(){
+      ons._internal.shouldFillStatusBar(this).then(() => {
         // Adjustments for IOS7
         var fill = document.createElement('div');
         fill.classList.add('tab-bar__status-bar-fill');
@@ -142,8 +142,6 @@ limitations under the License.
         fill.style.height = '0px';
 
         this.insertBefore(fill, this.children[0]);
-      }).catch(function(err){
-        // ignore
       });
     }
 

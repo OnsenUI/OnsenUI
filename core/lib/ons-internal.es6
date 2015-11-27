@@ -56,7 +56,7 @@ limitations under the License.
    * @return {Boolean}
    */
   ons._internal.shouldFillStatusBar = function (element) {
-    var checkStatusBar = function(){
+    var checkStatusBar = () => {
       if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7above()) {
         if (!(element instanceof HTMLElement)) {
           throw new Error('element must be an instance of HTMLElement');
@@ -74,7 +74,7 @@ limitations under the License.
         }
       }
       return false;
-    }
+    };
 
     return new Promise(function(resolve, reject){
       if(typeof device === 'object'){

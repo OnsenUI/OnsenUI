@@ -103,11 +103,11 @@ ons-toolbar + .page__background + .page__content {
   display: none;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top__content {
+.tab-bar__status-bar-fill + .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top {
+.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
   padding-top: 22px;
 }
 
