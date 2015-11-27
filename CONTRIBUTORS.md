@@ -27,5 +27,6 @@ List of code contributors (in no particular order):
 * [Kon Yuichi](https://github.com/konpyu)
 * [zack](https://github.com/zack24q)
 * [Adrian Stanecki](https://github.com/astanecki)
+* [snito](https://github.com/snito)
 
 Please add yourself if you're not on this list but feel that you should be.
