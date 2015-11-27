@@ -11,6 +11,7 @@ v2.0.0-beta.1
  * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
  * ons-tabbar: Add "material" modifier.
+ * ons-sliding-menu: Fix broken `_currentPageUrl` property.
 
 v2.0.0-beta
 ----
