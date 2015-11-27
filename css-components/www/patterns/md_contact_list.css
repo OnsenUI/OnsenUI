@@ -2,18 +2,6 @@ body {
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
-.contact-interface {
-  background-color: #0091EA;
-}
-
-.contact-interface:active {
-  background-color: #0091EA;
-}
-
-.contact-interface * {
-  color: #FFFFFF;
-}
-
 .contact-toolbar-buttons * {
   padding-right: 6px;
 }
@@ -37,6 +25,7 @@ ons-list:first-child {
   color: #9E9E9E;
   font-weight: 400;
   font-size: 20px;
+  line-height: 50px;
 }
 
 .contact-item {
@@ -53,4 +42,5 @@ ons-list:first-child {
 .contact-name {
   font-weight: 400;
   padding-left: 18px;
+  line-height: 40px;
 }
