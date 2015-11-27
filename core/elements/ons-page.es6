@@ -247,7 +247,21 @@ limitations under the License.
           fill.style.width = '0px';
           fill.style.height = '0px';
 
-          this.insertBefore(fill, this.children[0]);
+          let bottomBarFill;
+
+          for (let i = 0; i < this.children.length; i++) {
+            if (this.children[i].classList.contains('page__bottom-bar-fill')) {
+              bottomBarFill = this.children[i];
+              break;
+            }
+          }
+
+          if (bottomBarFill) {
+            this.insertBefore(fill, bottomBarFill.nextSibling);
+          }
+          else {
+            this.insertBefore(fill, this.children[0]);
+          }
 
           return fill;
         })
