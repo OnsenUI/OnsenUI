@@ -12,6 +12,7 @@ v2.0.0-beta.1
  * css-components: iOS toggle switch style updated.
  * ons-tabbar: Add "material" modifier.
  * ons-sliding-menu: Fix broken `_currentPageUrl` property.
+ * core: Fix status bar filling on iOS when using `device` plugin.
 
 v2.0.0-beta
 ----
