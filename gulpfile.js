@@ -34,6 +34,7 @@ var fs = require('fs');
 var argv = require('yargs').argv;
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
 ////////////////////////////////////////
 // browser-sync
@@ -58,21 +59,57 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  return browserify({
+  return bundleBrowserify(createBrowserify());
+});
+
+function createBrowserify(options) {
+  options = options || {};
+
+  var b = browserify({
     entries: ['./core/src/index.es6'],
     debug: true,
     extensions: ['.js', '.es6'],
-  })
+    cache: {},
+    packageCache: {},
+  });
+
+  if (options.watch) {
+    b = b.plugin(watchify);
+  }
+
+  return b
     .transform('babelify', {
       extensions: ['.es6'],
       presets: ['es2015']
     })
-    .transform('concatenify')
+    .transform('concatenify');
+}
+
+function bundleBrowserify(browserify) {
+  return browserify
     .bundle()
     .pipe($.plumber())
     .pipe(source('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe(gulp.dest('build/js/'));
+}
+
+
+////////////////////////////////////////
+// watch-core
+////////////////////////////////////////
+gulp.task('watch-core', function(done) {
+  var b = createBrowserify({watch: true});
+
+  b.on('update', function(event) {
+    $.util.log('Changed ' + $.util.colors.magenta(JSON.stringify(event)));
+    bundleBrowserify(b).on('end', function() {
+      $.util.log('Finished browserify rebundle');
+      browserSync.reload();
+    });
+  });
+
+  return bundleBrowserify(b);
 });
 
 ////////////////////////////////////////
@@ -138,10 +175,8 @@ gulp.task('jshint-vanilla', function() {
 ////////////////////////////////////////
 gulp.task('eslint', function() {
   return gulp.src([
-    'core/elements/*.es6',
-    'core/lib/*.es6',
-    'core/*.es6',
-    'framework/js/*.es6',
+    'core/src/**/*.es6',
+    'framework/*/*.es6',
     'framework/directives/*.es6',
     'framework/services/*.es6',
     'framework/elements/*.es6',
@@ -194,7 +229,7 @@ gulp.task('minify-js', function() {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js', 'core'], function() {
+gulp.task('prepare', ['html2js'], function() {
 
   var onlyES6;
 
@@ -307,6 +342,7 @@ gulp.task('compress-distribution-package', function() {
 gulp.task('build', function(done) {
   return runSequence(
     'clean',
+    'core',
     'prepare',
     'minify-js',
     'build-docs',
@@ -323,6 +359,7 @@ gulp.task('build', function(done) {
 gulp.task('soft-build', function(done) {
   return runSequence(
     'clean',
+    'core',
     'prepare',
     'minify-js',
     done
@@ -352,22 +389,12 @@ gulp.task('dist', ['soft-build'], distFiles);
 gulp.task('dist-no-build', [], distFiles);
 
 ////////////////////////////////////////
-// default
-////////////////////////////////////////
-gulp.task('default', function() {
-  return runSequence('prepare');
-});
-
-////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
-    'core/*.{js,es6}',
-    'core/*/*.{js,es6}',
-    '!core/*/*.spec.js',
     'framework/*/*',
     'core/css/*.css',
     'css-components/components-src/dist/*.css'
