@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../util';
+import platform from '../platform';
 
 export class LazyRepeatDelegate {
   /**
@@ -68,7 +69,7 @@ export class LazyRepeatDelegate {
 /**
  * This class provide core functions for ons-lazy-repeat.
  */
-export default class LazyRepeatProvider {
+export class LazyRepeatProvider {
 
   /**
    * @param {Element} wrapperElement
@@ -325,7 +326,7 @@ export default class LazyRepeatProvider {
   }
 
   _addEventListeners() {
-    if (ons.platform.isIOS()) {
+    if (platform.isIOS()) {
       this._boundOnChange = this._debounce(this._onChange.bind(this), 30);
     }
     else {
@@ -334,7 +335,7 @@ export default class LazyRepeatProvider {
 
     this._pageContent.addEventListener('scroll', this._boundOnChange, true);
 
-    if (ons.platform.isIOS()) {
+    if (platform.isIOS()) {
       this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
       this._pageContent.addEventListener('touchend', this._doubleFireOnTouchend, true);
     }
@@ -345,7 +346,7 @@ export default class LazyRepeatProvider {
   _removeEventListeners() {
     this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
 
-    if (ons.platform.isIOS()) {
+    if (platform.isIOS()) {
       this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
       this._pageContent.removeEventListener('touchend', this._doubleFireOnTouchend, true);
     }

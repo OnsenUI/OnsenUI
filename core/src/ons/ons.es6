@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import deviceBackButtonDispatcher from './device-back-button-dispatcher';
+
 const ons = {};
 
 ons._readyLock = new DoorLock();
@@ -65,7 +67,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * Disable this framework to handle cordova "backbutton" event.
  */
 ons.disableDeviceBackButtonHandler = function() {
-  ons._deviceBackButtonDispatcher.disable();
+  deviceBackButtonDispatcher.disable();
 };
 
 /**

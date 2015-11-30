@@ -22,6 +22,7 @@ import PopoverAnimator from './animator';
 import FadePopoverAnimator from './fade-animator';
 import platform from '../../ons/platform';
 import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 
 const scheme = {
   '.popover': 'popover--*',
@@ -359,7 +360,7 @@ class PopoverElement extends BaseElement {
   attachedCallback() {
     this._mask.addEventListener('click', this._boundCancel, false);
 
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
     this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);

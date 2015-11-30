@@ -24,7 +24,7 @@ const scheme = {
   '.switch__toggle': 'switch--*__toggle'
 };
 
-const templateSource = ons._util.createElement(`
+const templateSource = util.createElement(`
   <div>
     <input type="checkbox" class="switch__input">
     <div class="switch__toggle"></div>

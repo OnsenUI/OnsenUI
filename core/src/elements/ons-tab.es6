@@ -18,6 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
+import internal from '../ons/internal';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -183,7 +184,7 @@ class TabElement extends BaseElement {
    * @param {Function} callback
    */
   _createPageElement(page, callback) {
-    ons._internal.getPageHTMLAsync(page).then(html => {
+    internal.getPageHTMLAsync(page).then(html => {
       callback(util.createElement(html.trim()));
     });
   }

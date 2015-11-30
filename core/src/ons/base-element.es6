@@ -15,13 +15,12 @@ limitations under the License.
 
 */
 
-let BaseElement;
-
-if (typeof HTMLElement !== 'function') {
-  BaseElement = () => {};
-  BaseElement.prototype = document.createElement('div');
-} else {
-  BaseElement = HTMLElement;
-}
-
-export default BaseElement;
+export default (() => {
+  if (typeof HTMLElement !== 'function') {
+    const BaseElement = () => {};
+    BaseElement.prototype = document.createElement('div');
+    return BaseElement;
+  } else {
+    return HTMLElement;
+  }
+})();

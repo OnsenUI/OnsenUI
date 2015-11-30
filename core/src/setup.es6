@@ -2,7 +2,7 @@
 import ons from './ons/ons';
 import util from './ons/util';
 import gestureDetector from './ons/gesture-detector';
-import DeviceBackButtonDispatcher from './ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from './ons/device-back-button-dispatcher';
 import platform from './ons/platform';
 import notification from './ons/notification';
 import internal from './ons/internal';
@@ -11,8 +11,9 @@ import softwareKeyboard from './ons/software-keyboard';
 import PageAttributeExpression from './ons/page-attribute-expression';
 import BaseElement from './ons/base-element';
 
+
 ons._util = util;
-ons._deviceBackButtonDispatcher = new DeviceBackButtonDispatcher();
+ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
 ons._internal = internal;
 ons.gestureDetector = gestureDetector;
 ons.platform = platform;
@@ -24,6 +25,7 @@ ons.notification = notification;
 window.addEventListener('DOMContentLoaded', function() {
   ons._deviceBackButtonDispatcher.enable();
 });
+
 
 import './elements/ons-alert-dialog';
 import './elements/ons-back-button';
@@ -63,18 +65,13 @@ import './elements/ons-template';
 import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = ons;
-} else {
-  window.ons = ons;
-}
 
 // fastclick
 window.addEventListener('load', () => FastClick.attach(document.body), false);
 
 // ons._defaultDeviceBackButtonHandler
 window.addEventListener('DOMContentLoaded', () => {
-  ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
+  ons._defaultDeviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     navigator.app.exitApp();
   });
 }, false);
@@ -93,3 +90,12 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
     'overflowtouch',
     window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = ons;
+}
+
+if (typeof window !== 'undefined') {
+  window.ons = ons;
+}
+

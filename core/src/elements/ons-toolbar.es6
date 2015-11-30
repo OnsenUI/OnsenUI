@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
@@ -73,28 +74,28 @@ class ToolbarElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getToolbarLeftItemsElement() {
-    return this.querySelector('.left') || ons._internal.nullElement;
+    return this.querySelector('.left') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarCenterItemsElement() {
-    return this.querySelector('.center') || ons._internal.nullElement;
+    return this.querySelector('.center') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarRightItemsElement() {
-    return this.querySelector('.right') || ons._internal.nullElement;
+    return this.querySelector('.right') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarBackButtonLabelElement() {
-    return this.querySelector('ons-back-button .back-button__label') || ons._internal.nullElement;
+    return this.querySelector('ons-back-button .back-button__label') || internal.nullElement;
   }
 
   _compile() {
@@ -155,7 +156,7 @@ class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarItemContainer(name) {
-    var container = ons._util.findChild(this, '.' + name);
+    var container = util.findChild(this, '.' + name);
 
     if (!container) {
       container = document.createElement('div');

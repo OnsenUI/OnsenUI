@@ -148,10 +148,3 @@ export class TabbarSlideAnimator extends TabbarAnimator {
     );
   }
 }
-
-
-ons._internal = ons._internal || {};
-ons._internal.TabbarAnimator = TabbarAnimator;
-ons._internal.TabbarFadeAnimator = TabbarFadeAnimator;
-ons._internal.TabbarNoneAnimator = TabbarNoneAnimator;
-ons._internal.TabbarSlideAnimator = TabbarSlideAnimator;

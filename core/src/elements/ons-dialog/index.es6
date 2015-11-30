@@ -34,13 +34,13 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': ons.platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'default': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'fade': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };
 
-class DialogElement extends ons._BaseElement {
+class DialogElement extends BaseElement {
 
   /**
    * @return {Element}

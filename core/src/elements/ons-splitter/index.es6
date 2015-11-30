@@ -21,6 +21,7 @@ import AnimatorFactory from '../../ons/internal/animator-factory';
 import OverlaySplitterAnimator from './overlay-animator';
 import SplitterAnimator from './animator';
 import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 
 class SplitterElement extends BaseElement {
 
@@ -221,7 +222,7 @@ class SplitterElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
     this._assertChildren();
 
     this.addEventListener('modechange', this._boundOnModeChange, false);

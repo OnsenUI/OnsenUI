@@ -13,6 +13,7 @@ limitations under the License.
 
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
+import util from '../ons/util';
 
 const scheme = {
   '': 'fab--*',
@@ -32,7 +33,7 @@ class FabElement extends BaseElement {
     var content = document.createElement('span');
     content.classList.add('fab__icon');
 
-    const children = ons._util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
+    const children = util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
 
     this.insertBefore(content, this.firstChild);
   }

@@ -15,6 +15,9 @@ limitations under the License.
 
 */
 
+import util from '../util';
+import ons from '../ons';
+
 export default class AnimatorFactory {
 
   /**
@@ -92,7 +95,7 @@ export default class AnimatorFactory {
     } else {
       Animator = Animator || this._animators[this._animation];
 
-      const animationOpts = ons._util.extend(
+      const animationOpts = util.extend(
         {},
         this._animationOptions,
         options.animationOptions || {},

@@ -21,6 +21,7 @@ import AnimatorFactory from '../../ons/internal/animator-factory';
 import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
 import platform from '../../ons/platform';
 import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 
 const scheme = {
   '': 'alert-dialog--*',
@@ -258,7 +259,7 @@ class AlertDialogElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._mask.addEventListener('click', this._boundCancel, false);
   }

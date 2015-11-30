@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
+import internal from '../../ons/internal';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
@@ -23,13 +24,15 @@ import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
 import SimpleSlideNavigatorTransitionAnimator from './simple-slide-animator';
 import LiftNavigatorTransitionAnimator from './lift-animator';
 import FadeNavigatorTransitionAnimator from './fade-animator';
+import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from '../../ons/platform';
 import BaseElement from '../../ons/base-element';
 import NavigatorPage from './navigator-page';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 
 const _animatorDict = {
-  'default': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': ons.platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'default': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'slide': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'simpleslide': SimpleSlideNavigatorTransitionAnimator,
   'lift': LiftNavigatorTransitionAnimator,
   'fade': FadeNavigatorTransitionAnimator,
@@ -142,7 +145,7 @@ class NavigatorElement extends BaseElement {
           throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
         }
 
-        ons._internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
+        internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
           const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
@@ -233,7 +236,7 @@ class NavigatorElement extends BaseElement {
     this._doorLock.waitUnlock(() => {
       const unlock = this._doorLock.lock();
 
-      ons._internal.getPageHTMLAsync(page).then(templateHTML => {
+      internal.getPageHTMLAsync(page).then(templateHTML => {
         const element = this._createPageElement(templateHTML);
         const pageObject = this._createPageObject(page, element, options);
 
@@ -347,7 +350,7 @@ class NavigatorElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
       if (this._pages.length === 0) {
@@ -416,7 +419,7 @@ class NavigatorElement extends BaseElement {
     if (options.pageHTML) {
       run(options.pageHTML);
     } else {
-      ons._internal.getPageHTMLAsync(page).then(run);
+      internal.getPageHTMLAsync(page).then(run);
     }
   }
 

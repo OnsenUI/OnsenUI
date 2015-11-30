@@ -15,6 +15,9 @@ limitations under the License.
 
 */
 
+import platform from '../platform';
+import pageAttributeExpression from '../page-attribute-expression';
+
 const internal = {};
 
 internal.nullElement = window.document.createElement('div');
@@ -53,7 +56,7 @@ internal.waitDOMContentLoaded = (callback) => {
  * @return {Boolean}
  */
 internal.shouldFillStatusBar = (element) => {
-  if (internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7above()) {
+  if (internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above()) {
     if (!(element instanceof HTMLElement)) {
       throw new Error('element must be an instance of HTMLElement');
     }
@@ -149,7 +152,7 @@ internal.getTemplateHTMLAsync = function(page) {
  * @return {Promise}
  */
 internal.getPageHTMLAsync = function(page) {
-  let pages = ons.pageAttributeExpression.evaluate(page);
+  let pages = pageAttributeExpression.evaluate(page);
 
   let getPage = (page) => {
     if (typeof page !== 'string') {

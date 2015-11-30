@@ -19,13 +19,13 @@ const softwareKeyboard = new MicroEvent();
 softwareKeyboard._visible = false;
 
 const onShow = () => {
-  ons.softwareKeyboard._visible = true;
-  ons.softwareKeyboard.emit('show');
+  softwareKeyboard._visible = true;
+  softwareKeyboard.emit('show');
 };
 
 const onHide = () => {
-  ons.softwareKeyboard._visible = false;
-  ons.softwareKeyboard.emit('hide');
+  softwareKeyboard._visible = false;
+  softwareKeyboard.emit('hide');
 };
 
 const bindEvents = () => {
@@ -33,14 +33,14 @@ const bindEvents = () => {
     // https://github.com/martinmose/cordova-keyboard/blob/95f3da3a38d8f8e1fa41fbf40145352c13535a00/README.md
     Keyboard.onshow = onShow;
     Keyboard.onhide = onHide;
-    ons.softwareKeyboard.emit('init', {visible: Keyboard.isVisible});
+    softwareKeyboard.emit('init', {visible: Keyboard.isVisible});
 
     return true;
   } else if (typeof cordova.plugins !== 'undefined' && typeof cordova.plugins.Keyboard !== 'undefined') {
     // https://github.com/driftyco/ionic-plugins-keyboard/blob/ca27ecf/README.md
     window.addEventListener('native.keyboardshow', onShow);
     window.addEventListener('native.keyboardhide', onHide);
-    ons.softwareKeyboard.emit('init', {visible: cordova.plugins.Keyboard.isVisible});
+    softwareKeyboard.emit('init', {visible: cordova.plugins.Keyboard.isVisible});
 
     return true;
   }
@@ -59,7 +59,7 @@ document.addEventListener('deviceready', () => {
       noPluginError();
     }
 
-    ons.softwareKeyboard.on = noPluginError;
+    softwareKeyboard.on = noPluginError;
   }
 });
 

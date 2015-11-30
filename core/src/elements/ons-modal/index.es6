@@ -22,6 +22,7 @@ import ModalAnimator from './animator';
 import FadeModalAnimator from './fade-animator';
 import platform from '../../ons/platform';
 import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 
 const scheme = {
   '': 'modal--*',
@@ -58,7 +59,7 @@ class ModalElement extends BaseElement {
       this._deviceBackButtonHandler.destroy();
     }
 
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
     this._onDeviceBackButton = callback;
   }
 
@@ -91,7 +92,7 @@ class ModalElement extends BaseElement {
 
   attachedCallback() {
     setImmediate(this._ensureNodePosition.bind(this));
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
   }
 
   _ensureNodePosition() {

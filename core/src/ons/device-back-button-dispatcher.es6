@@ -17,6 +17,7 @@ limitations under the License.
 
 import ons from './ons';
 
+
 const util = {
   _ready: false,
 
@@ -293,4 +294,4 @@ class DeviceBackButtonDispatcher {
   }
 }
 
-export default DeviceBackButtonDispatcher;
+export default new DeviceBackButtonDispatcher();

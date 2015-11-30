@@ -129,7 +129,7 @@ util.propagateAction = (element, action) => {
     if (child[action]) {
       child[action]();
     } else {
-      ons._util.propagateAction(child, action);
+      util.propagateAction(child, action);
     }
   }
 };
