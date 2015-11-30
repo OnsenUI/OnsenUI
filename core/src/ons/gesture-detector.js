@@ -2059,6 +2059,6 @@ GestureDetector.Instance.prototype = {
     };
   })('transform');
 
-  modules.exports = GestureDetector;
+  module.exports = GestureDetector;
 
 })(window);
