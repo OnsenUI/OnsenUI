@@ -88,8 +88,11 @@ function createBrowserify(options) {
 function bundleBrowserify(browserify) {
   return browserify
     .bundle()
-    .pipe($.plumber())
+    .on('error', function(error) {
+      $.util.log($.util.colors.red(error.toString()));
+    })
     .pipe(source('onsenui.js'))
+    .pipe($.plumber())
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe(gulp.dest('build/js/'));
 }
