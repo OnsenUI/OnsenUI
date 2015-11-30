@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import ons from './ons';
+
 const util = {
   _ready: false,
 

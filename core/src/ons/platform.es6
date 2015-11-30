@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import ons from './ons';
+
 const platform = {
 
   /**
@@ -28,7 +30,7 @@ const platform = {
    * @param  {string} platform Name of the platform.
    */
   select: function(platform) {
-    ons.platform._renderPlatform = platform.trim().toLowerCase();
+    platform._renderPlatform = platform.trim().toLowerCase();
   },
 
   /**
@@ -42,8 +44,8 @@ const platform = {
    * @return {Boolean}
    */
   isIOS: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'ios';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'ios';
     } else if (typeof device === 'object') {
       return /iOS/i.test(device.platform);
     } else {
@@ -55,8 +57,8 @@ const platform = {
    * @return {Boolean}
    */
   isAndroid: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'android';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'android';
     } else if (typeof device === 'object') {
       return /Android/i.test(device.platform);
     } else {
@@ -82,8 +84,8 @@ const platform = {
    * @return {Boolean}
    */
   isWP: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'wp';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'wp';
     } else if (typeof device === 'object') {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
@@ -116,8 +118,8 @@ const platform = {
    * @return {Boolean}
    */
   isBlackBerry: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'blackberry';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'blackberry';
     } else if (typeof device === 'object') {
       return /BlackBerry/i.test(device.platform);
     } else {
@@ -129,8 +131,8 @@ const platform = {
    * @return {Boolean}
    */
   isOpera: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'opera';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'opera';
     } else {
       return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
     }
@@ -140,8 +142,8 @@ const platform = {
    * @return {Boolean}
    */
   isFirefox: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'firefox';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'firefox';
     } else {
       return (typeof InstallTrigger !== 'undefined');
     }
@@ -151,8 +153,8 @@ const platform = {
    * @return {Boolean}
    */
   isSafari: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'safari';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'safari';
     } else {
       return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
     }
@@ -162,8 +164,8 @@ const platform = {
    * @return {Boolean}
    */
   isChrome: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'chrome';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'chrome';
     } else {
       return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
     }
@@ -173,8 +175,8 @@ const platform = {
    * @return {Boolean}
    */
   isIE: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'ie';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'ie';
     } else {
       return false || !!document.documentMode;
     }
@@ -184,8 +186,8 @@ const platform = {
    * @return {Boolean}
    */
   isEdge: function() {
-    if (ons.platform._renderPlatform) {
-      return ons.platform._renderPlatform === 'edge';
+    if (platform._renderPlatform) {
+      return platform._renderPlatform === 'edge';
     } else {
       return navigator.userAgent.indexOf(' Edge/') >= 0;
     }
