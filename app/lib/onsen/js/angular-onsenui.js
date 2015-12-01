@@ -1,8 +1,72 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-beta.1 - 2015-11-25 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta.1 - 2015-12-01 */
+/* Simple JavaScript Inheritance
+ * By John Resig http://ejohn.org/
+ * MIT Licensed.
+ */
+// Inspired by base2 and Prototype
+(function(){
+  var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
+ 
+  // The base Class implementation (does nothing)
+  this.Class = function(){};
+ 
+  // Create a new Class that inherits from this class
+  Class.extend = function(prop) {
+    var _super = this.prototype;
+   
+    // Instantiate a base class (but only create the instance,
+    // don't run the init constructor)
+    initializing = true;
+    var prototype = new this();
+    initializing = false;
+   
+    // Copy the properties over onto the new prototype
+    for (var name in prop) {
+      // Check if we're overwriting an existing function
+      prototype[name] = typeof prop[name] == "function" &&
+        typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+        (function(name, fn){
+          return function() {
+            var tmp = this._super;
+           
+            // Add a new ._super() method that is the same method
+            // but on the super-class
+            this._super = _super[name];
+           
+            // The method only need to be bound temporarily, so we
+            // remove it when we're done executing
+            var ret = fn.apply(this, arguments);        
+            this._super = tmp;
+           
+            return ret;
+          };
+        })(name, prop[name]) :
+        prop[name];
+    }
+   
+    // The dummy class constructor
+    function Class() {
+      // All construction is actually done in the init method
+      if ( !initializing && this.init )
+        this.init.apply(this, arguments);
+    }
+   
+    // Populate our constructed prototype object
+    Class.prototype = prototype;
+   
+    // Enforce the constructor to be what we expect
+    Class.prototype.constructor = Class;
+ 
+    // And make this class extendable
+    Class.extend = arguments.callee;
+   
+    return Class;
+  };
+})();
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
@@ -12,9 +76,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/split_view.tpl',
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
@@ -2924,7 +2988,7 @@ limitations under the License.
           options.callback();
         }.bind(this);
 
-        if (this.currentPageUrl === pageUrl) {
+        if (this._currentPageUrl === pageUrl) {
           done();
           return;
         }
@@ -4055,9 +4119,6 @@ limitations under the License.
  * @id alert-dialog
  * @name ons-alert-dialog
  * @category dialog
- * @modifier android
- *   [en]Display an Android style alert dialog.[/en]
- *   [ja]Androidライクなスタイルを表示します。[/ja]
  * @description
  *   [en]Alert dialog that is displayed on top of the current screen.[/en]
  *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
@@ -7497,7 +7558,6 @@ limitations under the License.
       var i = 0, f = function() {
         if (i++ < 15)  {
           if (isAttached(element)) {
-            element._tryToFillStatusBar();
             $onsen.fireComponentEvent(element, 'init');
             fireActualPageInitEvent(element);
           } else {
@@ -7580,9 +7640,6 @@ limitations under the License.
  * @id popover
  * @name ons-popover
  * @category popover
- * @modifier android
- *   [en]Display an Android style popover.[/en]
- *   [ja]Androidライクなポップオーバーを表示します。[/ja]
  * @description
  *  [en]A component that displays a popover next to an element.[/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
@@ -7967,13 +8024,8 @@ limitations under the License.
               element.data('ons-popover', undefined);
               element = null;
             });
-
-            if ($onsen.isAndroid()) {
-              setImmediate(function() {
-                popover.addModifier('android');
-              });
-            }
           },
+
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }
@@ -7986,29 +8038,18 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id progress
- * @name ons-progress
+ * @id progress-bar
+ * @name ons-progress-bar
  * @category progress
  * @description
- *   [en]A material design progress component. Can be displayed both as a linear or circular progress indicator.[/en]
- *   [ja]マテリアルデザインのprgoressコンポーネントです。linearもしくはcircularなプログレスインジケータを表示できます。[/ja]
- * @codepen VvVaZv
+ *   [en]A material design progress component. It's displayed as a linear progress indicator.[/en]
+ *   [ja]マテリアルデザインのprogressコンポーネントです。linearなプログレスインジケータを表示します。[/ja]
+ * @codepen zvQbGj
  * @example
- * <ons-progress
- *  type="circular"
+ * <ons-progress-bar
  *  value="55"
  *  secondary-value="87">
- * </ons-progress>
- */
-
-/**
- * @ngdoc attribute
- * @name type
- * @initonly
- * @type {String}
- * @description
- *   [en]The type of indicator. Can be one of either "bar" or "circular". Defaults to "bar".[/en]
- *   [ja]indicatorのタイプを指定します。"bar"もしくは"circular"を指定できます。デフォルトは"bar"です。[/ja]
+ * </ons-progress-bar>
  */
 
 /**
@@ -8040,7 +8081,58 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name indeterminate 
+ * @name indeterminate
+ * @description
+ *   [en]If this attribute is set, an infinite looping animation will be shown.[/en]
+ *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc directive
+ * @id progress-circular
+ * @name ons-progress-circular
+ * @category progress
+ * @description
+ *   [en]A material design progress component. It's displayed as a circular progress indicator.[/en]
+ *   [ja]マテリアルデザインのprogressコンポーネントです。circularなプログレスインジケータを表示します。[/ja]
+ * @codepen EVzMjR
+ * @example
+ * <ons-progress-circular
+ *  value="55"
+ *  secondary-value="87">
+ * </ons-progress-circular>
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]Change the appearance of the progress indicator.[/en]
+ *   [ja]プログレスインジケータの見た目を変更します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name value
+ * @type {Number}
+ * @description
+ *   [en]Current progress. Should be a value between 0 and 100.[/en]
+ *   [ja]現在の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name secondary-value
+ * @type {Number}
+ * @description
+ *   [en]Current secondary progress. Should be a value between 0 and 100.[/en]
+ *   [ja]現在の２番目の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name indeterminate
  * @description
  *   [en]If this attribute is set, an infinite looping animation will be shown.[/en]
  *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
@@ -11032,9 +11124,6 @@ limitations under the License.
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
- * @modifier android
- *   [en]Android style toolbar. Title is left-aligned.[/en]
- *   [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]
  * @description
  *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
@@ -11085,21 +11174,6 @@ limitations under the License.
  * @description
  *   [en]The appearance of the toolbar.[/en]
  *   [ja]ツールバーの表現を指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name fixed-style
- * @initonly
- * @description
- *   [en]
- *     By default the center element will be left-aligned on Android and center-aligned on iOS.
- *     Use this attribute to override this behavior so it's always displayed in the center.
- *   [/en]
- *   [ja]
- *     このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。
- *     この属性を使用すると、要素はAndroidとiOSともに中央配置となります。
- *   [/ja]
  */
 
 (function() {
