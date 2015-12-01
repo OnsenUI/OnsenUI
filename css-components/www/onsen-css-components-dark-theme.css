@@ -1003,7 +1003,7 @@ h6 {
   font-weight: 500;
   color: #fff;
   height: 56px;
-  width: 100%;
+  width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
