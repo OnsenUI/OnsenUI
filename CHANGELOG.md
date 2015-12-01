@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.2
+ * css-components: Adjust Material navbar layout.
+
 v2.0.0-beta.1
 ----
  * ons-fab: Fix broken layout on Safari.
