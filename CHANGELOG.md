@@ -13,6 +13,7 @@ v2.0.0-beta.1
  * ons-tabbar: Add "material" modifier.
  * ons-sliding-menu: Fix broken `_currentPageUrl` property.
  * core: Fix status bar filling on iOS when using `device` plugin.
+ * css-components: Fix Material navbar title on iOS.
 
 v2.0.0-beta
 ----
