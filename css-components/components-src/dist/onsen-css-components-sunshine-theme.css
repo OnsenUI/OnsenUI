@@ -1004,6 +1004,11 @@ h6 {
   color: #fff;
   height: 56px;
   width: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
