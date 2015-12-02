@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-toolbar-button', () => {
   it('provides \'OnsToolbarButton\' global variable', () => {
     expect(window.OnsToolbarButton).to.be.ok;

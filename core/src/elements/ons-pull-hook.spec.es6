@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsPullHookElement', () => {
   it('exists', () => {
     expect(window.OnsPullHookElement).to.be.ok;

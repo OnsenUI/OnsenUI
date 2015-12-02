@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons.notification', () => {
   it('exists', () => {
     expect(ons.notification).to.be.ok;

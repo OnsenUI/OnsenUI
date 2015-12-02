@@ -1,3 +1,4 @@
+'use strict';
 
 describe('modifier', function() {
   it('provide \'ons._internal.ModifierUtil\' global variable', function() {

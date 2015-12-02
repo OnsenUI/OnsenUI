@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons.platform', () => {
   afterEach(() => {
     ons.platform._renderPlatform = null;

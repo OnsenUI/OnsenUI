@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsCarouselElement', () => {
   let carousel;
 

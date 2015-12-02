@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsTabbarElement', () => {
   let element, template, template2;
 

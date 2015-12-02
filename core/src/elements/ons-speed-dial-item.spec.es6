@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsSpeedDialItemElement', () => {
   let item;
 

@@ -1,3 +1,5 @@
+'use strict';
+
 let LazyRepeatProvider = ons._internal.LazyRepeatProvider,
   LazyRepeatDelegate = ons._internal.LazyRepeatDelegate;
 

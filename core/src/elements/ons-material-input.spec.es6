@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsMaterialInputElement', () => {
   let element;
 

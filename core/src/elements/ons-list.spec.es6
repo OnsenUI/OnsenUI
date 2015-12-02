@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-list', () => {
   it('provides \'OnsListElement\' global variable', () => {
     expect(window.OnsListElement).to.be.ok;

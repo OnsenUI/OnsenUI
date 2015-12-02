@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsIconElement', () => {
   it('should exist', () => {
     expect(window.OnsIconElement).to.be.ok;

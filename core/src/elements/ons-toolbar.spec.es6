@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsToolbarElement', () => {
   let element;
 

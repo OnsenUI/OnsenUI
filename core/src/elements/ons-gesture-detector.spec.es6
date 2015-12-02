@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsGestureDetectorElement', () => {
   it('should exist', () => {
     expect(window.OnsGestureDetectorElement).to.be.ok;

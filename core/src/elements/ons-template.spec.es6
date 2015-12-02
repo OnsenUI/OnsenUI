@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-template', () => {
   it('provides \'OnsTemplateElement\' global variable', () => {
     expect(window.OnsTemplateElement).to.be.ok;

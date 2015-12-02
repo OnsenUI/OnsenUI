@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsSwitchElement', () => {
   let element;
 

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsAlertDialogElement', () => {
   let dialog;
 

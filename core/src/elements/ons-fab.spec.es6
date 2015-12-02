@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsFabElement', () => {
   let fab;
 

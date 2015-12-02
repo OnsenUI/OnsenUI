@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-bottom-toolbar', () => {
   it('provides \'OnsBottomToolbarElement\' global variable', () => {
     expect(window.OnsBottomToolbarElement).to.be.ok;

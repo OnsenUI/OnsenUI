@@ -1,3 +1,5 @@
+'use strict';
+
 describe('deviceBackButtonDispatcher', () => {
   describe('#createHandler()', () => {
     it('throws an error if the first parameter is not an HTMLElement', () => {

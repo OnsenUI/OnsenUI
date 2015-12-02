@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsTabElement', () => {
   let element;
 

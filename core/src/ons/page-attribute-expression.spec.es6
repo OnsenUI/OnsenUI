@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons.pageAttributeExpression', () => {
   let pae = ons.pageAttributeExpression;
 

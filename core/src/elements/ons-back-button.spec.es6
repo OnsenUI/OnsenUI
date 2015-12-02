@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsBackButtonElement', () => {
   it('exists', () => {
     expect(window.OnsBackButtonElement).to.be.ok;

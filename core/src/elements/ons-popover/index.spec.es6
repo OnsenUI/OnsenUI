@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsPopoverElement', () => {
   let popover,
     target;

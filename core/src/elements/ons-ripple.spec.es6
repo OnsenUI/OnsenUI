@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsRippleElement', () => {
   let container, ripple;
 

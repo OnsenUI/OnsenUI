@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsPageElement', () => {
   let element;
 

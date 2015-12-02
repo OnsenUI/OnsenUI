@@ -1,3 +1,4 @@
+'use strict';
 
 describe('OnsSplitterSideElement', () => {
   it('exists', () => {

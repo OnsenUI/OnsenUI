@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsListItemElement', () => {
   let listItem;
 

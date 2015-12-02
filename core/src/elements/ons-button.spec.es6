@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-button', () => {
   it('provides \'OnsButtonElement\' global variable', () => {
     expect(window.OnsButtonElement).to.be.ok;

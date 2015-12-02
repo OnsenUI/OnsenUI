@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsNavigatorElement', () => {
   let nav;
 

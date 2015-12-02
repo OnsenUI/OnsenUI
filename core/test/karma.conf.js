@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: __dirname,
 
 
     // frameworks to use
@@ -14,20 +14,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../core/vendor/winstore-jscompat.js',
-      '../../core/vendor/*.js',
-      '../../core/lib/animit.js',
-      '../../core/lib/doorlock.es6',
-      '../../core/lib/ons.es6',
-      '../../core/lib/ons-util.es6',
-      '../../core/lib/modal-animator.es6',
-      '../../core/lib/navigator-transition-animator.es6',
-      '../../core/lib/popover-animator.es6',
-      '../../core/lib/ons-platform.es6',
-      '../../core/lib/*.{es6,js}',
-      '../../core/*.{es6,js}',
-      '../../core/elements/*.{es6,js}',
+      '../../build/js/onsenui.js',
       '../../core/test/setup.es6',
+      '../../core/src/**/*.spec.es6',
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
     ],
@@ -38,12 +27,6 @@ module.exports = function(config) {
 
 
     // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      '../../core/**/*.es6': ['webpack'],
-      '../../core/*.es6': ['webpack']
-    },
-
     webpack: {
         module: {
             preLoaders: [

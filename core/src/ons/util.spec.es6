@@ -1,3 +1,4 @@
+'use strict';
 
 describe('ons-util', function() {
   it('provide \'ons._util\' global variable', () => {

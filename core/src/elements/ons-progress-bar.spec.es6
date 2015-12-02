@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsProgressBarElement', () => {
   let progress;
 

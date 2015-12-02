@@ -1,3 +1,4 @@
+'use strict';
 
 describe('ons-splitter-content', () => {
 

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsColElement', () => {
   it('should exist', () => {
     expect(window.OnsColElement).to.be.ok;

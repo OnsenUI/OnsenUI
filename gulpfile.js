@@ -125,6 +125,7 @@ gulp.task('core-test', ['core'], function() {
       action: 'run'
     }))
     .on('error', function(err) {
+      $.util.log($.util.colors.red(err.message));
       throw err;
     });
 });

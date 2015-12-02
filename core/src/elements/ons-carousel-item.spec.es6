@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsCarouselItemElement', () => {
   it('exists', () => {
     expect(window.OnsCarouselItemElement).to.be.ok;

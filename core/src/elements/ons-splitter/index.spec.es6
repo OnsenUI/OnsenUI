@@ -1,3 +1,5 @@
+'use strict';
+
 describe('OnsSplitterElement', () => {
   it('exists', () => {
     expect(window.OnsSplitterElement).to.be.ok;

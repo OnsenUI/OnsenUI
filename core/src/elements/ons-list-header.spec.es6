@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons-list-header', () => {
   it('provides \'OnsHeaderListElement\' global variable', () => {
     expect(window.OnsListHeaderElement).to.be.ok;
