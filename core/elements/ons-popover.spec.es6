@@ -298,10 +298,15 @@ describe('OnsPopoverElement', () => {
       el = popover.querySelector('.popover');
     });
 
-    it('should change the direction dynamically', () => {
+    it('should change the direction dynamically', (done) => {
       popover.show(target, {animation: 'none'});
       popover.setAttribute('direction', 'up');
-      expect(el.classList.contains('popover--up')).to.be.true;
+
+      expect(el.classList.contains('popover--up')).to.be.false;
+      setImmediate(() => {
+        expect(el.classList.contains('popover--up')).to.be.true;
+        done();
+      });
     });
 
     it('can have the value \'up\'', () => {
