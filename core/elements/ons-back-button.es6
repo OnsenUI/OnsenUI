@@ -20,40 +20,11 @@ limitations under the License.
 
   const util = ons._util;
   const ModifierUtil = ons._internal.ModifierUtil;
-  const iOSTemplateElement = util.createElement(`
-    <span
-      class="toolbar-button--quiet"
-      style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
 
-      <i class="ion-ios-arrow-back ons-back-button__icon"
-        style="
-          vertical-align: top;
-          background-color: transparent;
-          height: 44px;
-          line-height: 44px;
-          font-size: 36px;
-          margin-left: 8px;
-          margin-right: 2px;
-          width: 16px;
-          display: inline-block;
-          padding-top: 1px;"></i>
-
-      <span
-        style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;"
-        class="back-button__label"></span>
-    </span>
-  `);
-
-  const MaterialTemplateElement = util.createElement(`
-    <span class="toolbar-button toolbar-button--material">
-      <i class="zmdi zmdi-arrow-left"></i>
-
-      <span class="back-button__label"></span>
-    </span>
-  `);
-
-  const scheme = {
-    '.toolbar-button--quiet': 'toolbar-button--*'
+  var scheme = {
+    '': 'back-button--*',
+    '.back-button__icon': 'back-button--*__icon',
+    '.back-button__label': 'back-button--*__label'
   };
 
   class BackButtonElement extends ons._BaseElement {
@@ -65,22 +36,20 @@ limitations under the License.
     }
 
     _compile() {
-      const toolbar = ons._util.findParent(this, 'ons-toolbar');
+      this.classList.add('back-button');
 
-      let template;
+      const label = ons._util.createElement(`
+        <span class="back-button__label">${this.innerHTML}</span>
+      `);
 
-      if (toolbar && ons._util.hasModifier(toolbar, 'material')) {
-        template = MaterialTemplateElement.cloneNode(true);
-      }
-      else {
-        template = iOSTemplateElement.cloneNode(true);
-      }
+      this.innerHTML = '';
 
-      const inner = template.querySelector('.back-button__label');
-      while (this.childNodes[0]) {
-        inner.appendChild(this.childNodes[0]);
-      }
-      this.appendChild(template);
+      const icon = ons._util.createElement(`
+        <span class="back-button__icon"></span>
+      `);
+
+      this.appendChild(icon);
+      this.appendChild(label);
     }
 
     _onClick() {
