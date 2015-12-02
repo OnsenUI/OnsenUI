@@ -353,7 +353,7 @@ describe('OnsPopoverElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.PopoverAnimator {
+      class MyAnimator extends window.OnsPopoverElement.PopoverAnimator {
       }
 
       window.OnsPopoverElement.registerAnimator('hoge', MyAnimator);

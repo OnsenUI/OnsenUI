@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import ModifierUtil from '../../ons/internal/modifier-util';
+import internal from '../../ons/internal/internal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import BaseElement from '../../ons/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
@@ -128,7 +129,7 @@ class TabbarElement extends BaseElement {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
     }
 
-    if (ons._internal.shouldFillStatusBar(this)) {
+    if (internal.shouldFillStatusBar(this)) {
       // Adjustments for IOS7
       var fill = document.createElement('div');
       fill.classList.add('tab-bar__status-bar-fill');
@@ -222,12 +223,12 @@ class TabbarElement extends BaseElement {
   _switchPage(element, options) {
 
     if (this.getActiveTabIndex() !== -1) {
-      var oldPageElement = this._oldPageElement || ons._internal.nullElement;
+      var oldPageElement = this._oldPageElement || internal.nullElement;
       this._oldPageElement = element;
       var animator = this._animatorFactory.newAnimator(options);
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
-        if (oldPageElement !== ons._internal.nullElement) {
+        if (oldPageElement !== internal.nullElement) {
           if (options._removeElement) {
             rewritables.unlink(this, oldPageElement, pageElement => {
               oldPageElement._destroy();

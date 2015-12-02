@@ -130,7 +130,7 @@ describe('OnsModalElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.ModalAnimator {
+      class MyAnimator extends window.OnsModalElement.ModalAnimator {
       }
 
       window.OnsModalElement.registerAnimator('hoge', MyAnimator);

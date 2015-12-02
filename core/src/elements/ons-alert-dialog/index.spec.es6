@@ -248,7 +248,7 @@ describe('OnsAlertDialogElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.AlertDialogAnimator {
+      class MyAnimator extends window.OnsAlertDialogElement.AlertDialogAnimator {
       }
       window.OnsAlertDialogElement.registerAnimator('hoge', MyAnimator);
     });

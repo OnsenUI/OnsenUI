@@ -539,7 +539,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.NavigatorTransitionAnimator {
+      class MyAnimator extends window.OnsNavigatorElement.NavigatorTransitionAnimator {
       }
 
       window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);

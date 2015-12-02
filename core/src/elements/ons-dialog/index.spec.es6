@@ -255,7 +255,7 @@ describe('OnsDialogElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.DialogAnimator {
+      class MyAnimator extends window.OnsDialogElement.DialogAnimator {
       }
 
       window.OnsDialogElement.registerAnimator('hoge', MyAnimator);

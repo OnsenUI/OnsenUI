@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import internal from '../ons/internal/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
@@ -139,7 +140,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getBottomToolbarElement() {
-    return ons._util.findChild(this, 'ons-bottom-toolbar') || ons._internal.nullElement;
+    return ons._util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
   }
 
 
@@ -232,7 +233,7 @@ class PageElement extends BaseElement {
   }
 
   _tryToFillStatusBar() {
-    if (ons._internal.shouldFillStatusBar(this)) {
+    if (internal.shouldFillStatusBar(this)) {
       // Adjustments for IOS7
       const fill = document.createElement('div');
       fill.classList.add('page__status-bar-fill');

@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import internal from '../ons/internal/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
@@ -57,7 +58,7 @@ class SplitterContentElement extends BaseElement {
     this._page = page;
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
-    ons._internal.getPageHTMLAsync(page).then((html) => {
+    internal.getPageHTMLAsync(page).then((html) => {
       rewritables.link(this, util.createFragment(html), (fragment) => {
         while (this.childNodes[0]) {
           if (this.childNodes[0]._hide instanceof Function) {

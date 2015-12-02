@@ -425,7 +425,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends ons._internal.TabbarAnimator {
+      class MyAnimator extends window.OnsTabbarElement.TabbarAnimator {
       }
 
       window.OnsTabbarElement.registerAnimator('hoge', MyAnimator);

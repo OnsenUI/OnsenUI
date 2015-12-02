@@ -616,7 +616,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _createPageElement(templateHTML) {
-    const pageElement = util.createElement(ons._internal.normalizePageHTML(templateHTML));
+    const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
 
     if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
       throw new Error('You must supply an "ons-page" element to "ons-navigator".');
@@ -644,5 +644,5 @@ window.OnsNavigatorElement.registerAnimator = function(name, Animator) {
 };
 
 window.OnsNavigatorElement.rewritables = rewritables;
-window.OnsNavigatorElement.NavigatorTransitionAnimator;
+window.OnsNavigatorElement.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
 

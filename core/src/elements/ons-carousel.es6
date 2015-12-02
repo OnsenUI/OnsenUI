@@ -18,6 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
+import GestureDetector from '../ons/gesture-detector';
 
 const scheme = {'': 'carousel--*'};
 
@@ -386,7 +387,7 @@ class CarouselElement extends BaseElement {
   }
 
   _prepareEventListeners() {
-    this._gestureDetector = new ons.GestureDetector(this, {
+    this._gestureDetector = new GestureDetector(this, {
       dragMinDistance: 1
     });
 
@@ -557,7 +558,7 @@ class CarouselElement extends BaseElement {
    * @return {Array}
    */
   _getCarouselItemElements() {
-    return ons._util.arrayFrom(this.children)
+    return util.arrayFrom(this.children)
       .filter((child) => child.nodeName.toLowerCase() === 'ons-carousel-item');
   }
 

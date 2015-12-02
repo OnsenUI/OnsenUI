@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from '../ons/util';
 import AnimatorFactory from '../ons/internal/animator-factory';
+import internal from '../ons/internal/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
@@ -494,7 +495,7 @@ class SplitterSideElement extends BaseElement {
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
-      baseClass: ons._internal.SplitterAnimator,
+      baseClass: internal.SplitterAnimator,
       baseClassName: 'SplitterAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
@@ -741,7 +742,7 @@ class SplitterSideElement extends BaseElement {
     this._page = page;
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
-    ons._internal.getPageHTMLAsync(page).then((html) => {
+    ons.getPageHTMLAsync(page).then((html) => {
       rewritables.link(this, util.createFragment(html), (fragment) => {
         while (this.childNodes[0]) {
           if (this.childNodes[0]._hide instanceof Function) {
