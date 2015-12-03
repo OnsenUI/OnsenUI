@@ -26,6 +26,7 @@ var-toolbar-button-active-background-color = var-toolbar-button-background-color
 var-toolbar-button-border = 1px solid var-toolbar-button-border-color
 
 var-material-toolbar-button-color = $material-toolbar-button-color
+var-material-toolbar-button-active-color = $material-toolbar-button-active-color
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
@@ -107,12 +108,24 @@ var-material-toolbar-button-color = $material-toolbar-button-color
   @extend .toolbar-button:focus
 
 .toolbar-button--material
-  font-size 21px
+  font-size 22px
   color var-material-toolbar-button-color
-  padding 0
+  display inline-block
+  padding 0 12px
+  height 100%
+  margin 0
+  border none
+  border-radius 0
+  vertical-align initial
+
+.toolbar-button--material:first-of-type {
+  margin-left 4px
+}
+
+.toolbar-button--material:last-of-type {
+  margin-right 4px
+}
 
 .toolbar-button--material:active
   opacity 1
-
-.toolbar-button--material:not(:last-child)
-  margin-right 10px
+  background-color var-material-toolbar-button-active-color

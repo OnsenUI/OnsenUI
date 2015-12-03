@@ -447,7 +447,7 @@ limitations under the License.
           options.callback();
         }.bind(this);
 
-        if (this.currentPageUrl === pageUrl) {
+        if (this._currentPageUrl === pageUrl) {
           done();
           return;
         }

@@ -367,20 +367,32 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 .tab-bar--material
   background-color var-material-tab-bar-background-color
   border-bottom-width 0px
-  shadow-1()
+  box-shadow 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2)
 
 .tab-bar--material__button
   background-color transparent
-  border-bottom 2px solid transparent
   color var-material-tab-bar-text-color
   text-transform uppercase
   font-size 14px
   font-weight 500
   material-font()
 
+.tab-bar--material__button:after
+  content ''
+  display block
+  width 0px
+  height 2px
+  bottom 0px
+  position absolute
+  margin-top -2px
+  background-color var-material-tab-bar-current-color
+
+:checked + .tab-bar--material__button:after
+  width 100%
+  transition width 0.2s ease-in-out
+
 :checked + .tab-bar--material__button
   background-color transparent
-  border-bottom 2px solid var-material-tab-bar-current-color
   color var-material-tab-bar-current-color
 
 .tab-bar--material__item:active

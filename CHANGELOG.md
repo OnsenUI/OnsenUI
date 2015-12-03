@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.3
+----
+ * animator-factory: Fixed animationOptions parsing.
+
+v2.0.0-beta.2
+----
+ * css-components: Adjust Material navbar layout.
+
 v2.0.0-beta.1
 ----
  * ons-fab: Fix broken layout on Safari.
@@ -11,7 +19,9 @@ v2.0.0-beta.1
  * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
  * ons-tabbar: Add "material" modifier.
- * animator-factory: Fixed animationOptions parsing.
+ * ons-sliding-menu: Fix broken `_currentPageUrl` property.
+ * core: Fix status bar filling on iOS when using `device` plugin.
+ * css-components: Fix Material navbar title on iOS.
 
 v2.0.0-beta
 ----

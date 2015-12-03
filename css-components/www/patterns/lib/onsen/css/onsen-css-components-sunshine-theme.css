@@ -175,7 +175,7 @@ h6 {
   transition: all 0.2s linear;
 }
 .switch__toggle {
-  background-color: #ddd;
+  background-color: #fff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -195,6 +195,8 @@ h6 {
   -moz-transition-timing-function: ease-out;
   -o-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
+  -webkit-box-shadow: inset 0 0 0 2px #e5e5e5;
+  box-shadow: inset 0 0 0 2px #e5e5e5;
 }
 .switch__toggle:before {
   -webkit-box-sizing: border-box;
@@ -219,27 +221,33 @@ h6 {
   -moz-transition-duration: 0.35s;
   -o-transition-duration: 0.35s;
   transition-duration: 0.35s;
-  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
+  -moz-transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
+  -o-transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
+  transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
+  -webkit-box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0,0,0,0.25);
+  box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0,0,0,0.25);
 }
 .switch__input:checked + .switch__toggle {
+  -webkit-box-shadow: inset 0 0 0 2px #e69e33;
+  box-shadow: inset 0 0 0 2px #e69e33;
   background-color: #e69e33;
 }
 .switch__input:checked + .switch__toggle:before {
-  -webkit-transform: translateX(18px);
-  -moz-transform: translateX(18px);
-  -ms-transform: translateX(18px);
-  -o-transform: translateX(18px);
-  transform: translateX(18px);
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  -o-transform: translateX(20px);
+  transform: translateX(20px);
+  -webkit-box-shadow: 0 3px 2px rgba(0,0,0,0.25);
+  box-shadow: 0 3px 2px rgba(0,0,0,0.25);
 }
 .switch__input:not(:checked) + .switch__toggle:before {
-  -webkit-transform: translateX(0px);
-  -moz-transform: translateX(0px);
-  -ms-transform: translateX(0px);
-  -o-transform: translateX(0px);
-  transform: translateX(0px);
+  -webkit-transform: translateX(-1px);
+  -moz-transform: translateX(-1px);
+  -ms-transform: translateX(-1px);
+  -o-transform: translateX(-1px);
+  transform: translateX(-1px);
 }
 .switch__input:disabled + .switch__toggle {
   opacity: 0.3;
@@ -275,6 +283,8 @@ h6 {
   background-color: #b0afaf;
   margin-top: 5px;
   height: 14px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .switch--material__input {
   position: absolute;
@@ -313,6 +323,8 @@ h6 {
 }
 .switch--material__input:checked + .switch--material__toggle {
   background-color: #77c2bb;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .switch--material__input:not(:checked) + .switch--material__toggle:before {
   background-color: #f1f1f1;
@@ -669,11 +681,6 @@ h6 {
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
   }
 }
-.navigation-bar__line-height {
-  line-height: 44px;
-  padding-bottom: 0;
-  padding-top: 0;
-}
 .navigation-bar__bg {
   background: #fff;
 }
@@ -704,11 +711,13 @@ h6 {
   max-width: 50%;
   width: 27%;
   text-align: left;
+  line-height: 44px;
 }
 .navigation-bar__right {
   max-width: 50%;
   width: 27%;
   text-align: right;
+  line-height: 44px;
 }
 .navigation-bar__center {
   width: 46%;
@@ -736,7 +745,7 @@ h6 {
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -746,7 +755,7 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
@@ -757,7 +766,7 @@ h6 {
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--outline navigation-bar__line-height">
+        <span class="toolbar-button--outline">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -767,76 +776,7 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
-      </div>
-    </div>
-*/
-/* topdoc
-  name: Android-like Navigation Bar
-  class: navigation-bar--android
-  hint: .navigation-bar--android
-  use: Navigation Bar, Toolbar Button
-  markup:
-    <div class="navigation-bar navigation-bar--android">
-      <div class="navigation-bar__left navigation-bar--android__left">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
-      </div>
-      <div class="navigation-bar__center navigation-bar--android__center">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
-          <i class="ion-cube" style="font-size:20px;"></i> App Bar
-        </span>
-      </div>
-      <div class="navigation-bar__right navigation-bar--android__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-share" style="font-size:20px;"></i>
-        </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-more" style="font-size:20px;"></i>
-        </span>
-      </div>
-    </div>
-*/
-.navigation-bar--android__left {
-  float: left;
-  text-align: left;
-  width: auto;
-  min-width: 10px;
-}
-.navigation-bar--android__center {
-  float: left;
-  text-align: left;
-  width: auto;
-  max-width: 50%;
-}
-.navigation-bar--android__right {
-  float: right;
-  text-align: right;
-  width: auto;
-}
-.navigation-bar--android__center:first-child:last-child {
-  padding-left: 10px;
-}
-/* topdoc
-  name: Android-like Navigation Bar(2)
-  use: Android-like Navigation Bar
-  markup:
-    <div class="navigation-bar navigation-bar--android">
-      <div class="navigation-bar__left navigation-bar--android__left">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
-      </div>
-      <div class="navigation-bar__center navigation-bar--android__center">
-        App Bar
-      </div>
-      <div class="navigation-bar__right navigation-bar--android__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-star" style="font-size:20px;"></i>
-        </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-search" style="font-size:20px;"></i>
-        </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-more" style="font-size:20px;"></i>
-        </span>
+        <span class="toolbar-button--outline">Button</span>
       </div>
     </div>
 */
@@ -847,7 +787,7 @@ h6 {
   markup:
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -855,7 +795,7 @@ h6 {
         Navigation Bar
       </div>
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
@@ -871,7 +811,7 @@ h6 {
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--outline navigation-bar__line-height">
+        <span class="toolbar-button--outline">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -881,7 +821,7 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+        <span class="toolbar-button--outline">Button</span>
       </div>
     </div>
 */
@@ -893,7 +833,7 @@ h6 {
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -901,7 +841,7 @@ h6 {
         Navigation Bar
       </div>
       <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet">Label</span>
       </div>
     </div>
 */
@@ -1013,21 +953,8 @@ h6 {
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--material">
-      <div class="navigation-bar__left navigation-bar--material__left">
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-menu"></i>
-        </span>
-      </div>
       <div class="navigation-bar__center navigation-bar--material__center">
-        Toolbar
-      </div>
-      <div class="navigation-bar__right navigation-bar--material__right">
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-search"></i>
-        </span>
-        <span class="toolbar-button toolbar-button--material">
-          <i class="zmdi zmdi-refresh"></i>
-        </span>
+        Title
       </div>
     </div>
 */
@@ -1049,8 +976,14 @@ h6 {
   border-bottom: 0;
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-  padding: 0px 16px;
+  padding: 0;
   background-color: #009688;
+  -webkit-background-size: 0;
+  background-size: 0;
+}
+.navigation-bar--noshadow {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .navigation-bar--material__left {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -1059,6 +992,7 @@ h6 {
   font-weight: 500;
   color: #fff;
   height: 56px;
+  min-width: 72px;
   width: auto;
   line-height: 56px;
 }
@@ -1069,12 +1003,19 @@ h6 {
   font-weight: 500;
   color: #fff;
   height: 56px;
-  width: 100%;
+  width: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
-  padding-left: 34px;
   line-height: 56px;
+}
+.navigation-bar--material__center:first-child {
+  margin-left: 72px;
 }
 .navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -1086,6 +1027,34 @@ h6 {
   width: auto;
   line-height: 56px;
 }
+/* topdoc
+  name: Material Navigation Bar with Icons
+  class: navigation-bar--material
+  use: Toolbar Button, Material Navigation Bar
+  hint: .navigation-bar--material
+  markup:
+    <div class="navigation-bar navigation-bar--material">
+      <div class="navigation-bar__left navigation-bar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--material__center">
+        Title
+      </div>
+      <div class="navigation-bar__right navigation-bar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-favorite"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-more-vert"></i>
+        </span>
+      </div>
+    </div>
+*/
 /* topdoc
   name: Button
   class: button
@@ -2182,9 +2151,6 @@ h6 {
   box-shadow: none;
   border-top: none;
 }
-:checked + .tab-bar__button > .tab-bar__icon {
-  color: #eb5e2f;
-}
 .tab-bar__button:disabled {
   opacity: 0.3;
   cursor: default;
@@ -2236,19 +2202,6 @@ h6 {
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-ios-cloud-outline"></i>
-        </button>
-      </label>
-
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-ios-pie"></i>
-        </button>
-      </label>
     </div>
 */
 /* topdoc
@@ -2336,6 +2289,42 @@ h6 {
       </label>
     </div>
 */
+/* topdoc
+  name: Material Tab Bar
+  class: tab-bar--material
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          Music
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Movies
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Books
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Games
+        </button>
+      </label>
+
+    </div>
+*/
 .tab-bar--top-border__button {
   background-color: transparent;
   border-bottom: 4px solid transparent;
@@ -2343,6 +2332,116 @@ h6 {
 :checked + .tab-bar--top-border__button {
   background-color: transparent;
   border-bottom: 4px solid #eb5e2f;
+}
+.tab-bar--material {
+  background-color: #009688;
+  border-bottom-width: 0px;
+  -webkit-box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
+}
+.tab-bar--material__button {
+  background-color: transparent;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.tab-bar--material__button:after {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 2px;
+  bottom: 0px;
+  position: absolute;
+  margin-top: -2px;
+  background-color: #fff;
+}
+:checked + .tab-bar--material__button:after {
+  width: 100%;
+  -webkit-transition: width 0.2s ease-in-out;
+  -moz-transition: width 0.2s ease-in-out;
+  -o-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+:checked + .tab-bar--material__button {
+  background-color: transparent;
+  color: #fff;
+}
+.tab-bar--material__item:active {
+  background-color: #26a69a;
+}
+/* topdoc
+  name: Material Tab Bar (Icon only)
+  class: tab-bar--material__icon
+  use:  Material Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account"></i>
+        </button>
+      </label>
+    </div>
+*/
+.tab-bar--material__icon {
+  font-size: 22px;
+  line-height: 36px;
+}
+/* topdoc
+  name: Material Tab Bar (Icon and Label)
+  class: tab-bar--material__label
+  use:  Material Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
+          <div class="tab-bar__label tab-bar--material__label">Call</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
+          <div class="tab-bar__label tab-bar--material__label">Favorites</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-delete"></i>
+          <div class="tab-bar__label tab-bar--material__label">Delete</div>
+        </button>
+      </label>
+    </div>
+*/
+.tab-bar--material__label {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+}
+.tab-bar--material__icon + .tab-bar--material__label {
+  font-size: 10px;
 }
 /* topdoc
   name: Notification
@@ -2480,15 +2579,26 @@ h6 {
   padding-right: 6px;
 }
 .toolbar-button--material {
-  font-size: 21px;
+  font-size: 22px;
   color: #fff;
-  padding: 0;
+  display: inline-block;
+  padding: 0 12px;
+  height: 100%;
+  margin: 0;
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  vertical-align: initial;
+}
+.toolbar-button--material:first-of-type {
+  margin-left: 4px;
+}
+.toolbar-button--material:last-of-type {
+  margin-right: 4px;
 }
 .toolbar-button--material:active {
   opacity: 1;
-}
-.toolbar-button--material:not(:last-child) {
-  margin-right: 10px;
+  background-color: #26a69a;
 }
 /* topdoc
   name: Checkbox
@@ -4669,47 +4779,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     </div>
 */
 /* topdoc
-  name: Android-like Alert Dialog
-  use: Alert Dialog
-  height: 360px
-  markup:
-    <div class="alert-dialog-mask"></div>
-
-    <div class="alert-dialog alert-dialog--android">
-      <div class="alert-dialog-title alert-dialog-title--android">
-        Alert
-      </div>
-
-      <div class="alert-dialog-content alert-dialog-content--android">
-        Hello World!
-      </div>
-
-      <div class="alert-dialog-footer alert-dialog-footer--one">
-        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
-        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
-      </div>
-    </div>
-*/
-.alert-dialog--android {
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  padding: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.alert-dialog-title--android {
-  border-bottom: 1px solid #ddd;
-  height: 52px;
-  line-height: 52px;
-  padding: 0 12px;
-  margin-bottom: 8px;
-  text-align: left;
-}
-.alert-dialog-content--android {
-  text-align: left;
-  padding: 8px 12px;
-}
-/* topdoc
   name: Material Alert Dialog
   use: Alert Dialog
   height: 360px
@@ -5010,21 +5079,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
       </div>
     </div>
 */
-/* topdoc
-  name: Android-like Popover
-  use: Popover
-  markup:
-    <div class="popover-mask"></div>
-    <div class="popover popover--up popover" style="top:10px;right:10px;">
-      <div class="popover__content popover__content--android">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
-      </div>
-    </div>
-*/
-.popover__content--android {
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-}
 /* topdoc
   name: Modal
   class: modal

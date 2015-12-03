@@ -404,16 +404,20 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('fills status bar', () => {
+    it('fills status bar', (done) => {
       var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return true; };
+      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
       let element = ons._util.createElement(`
         <ons-tabbar position="top">
         </ons-tabbar>
       `);
       ons._internal.shouldFillStatusBar = tmp;
-      expect(element._hasTopTabbar()).to.be.true;
-      expect(element.firstChild.className).to.equal('tab-bar__status-bar-fill');
+
+      setTimeout(() => {
+        expect(element._hasTopTabbar()).to.be.true;
+        expect(element.firstChild.className).to.equal('tab-bar__status-bar-fill');
+        done();
+      }, 1000);
     });
   });
 
