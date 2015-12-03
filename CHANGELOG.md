@@ -2,7 +2,12 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.3
+----
+ * ons-back-button: Add "material" modifier.
+
 v2.0.0-beta.2
+----
  * css-components: Adjust Material navbar layout.
 
 v2.0.0-beta.1

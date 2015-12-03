@@ -7,32 +7,27 @@ describe('OnsBackButtonElement', () => {
     let element = new OnsBackButtonElement();
 
     element.setAttribute('modifier', 'hoge');
-    expect(element.children[0].classList.contains('toolbar-button--hoge')).to.be.true;
+    expect(element.classList.contains('back-button--hoge')).to.be.true;
 
-    element.setAttribute('modifier', ' foo bar');
-    expect(element.children[0].classList.contains('toolbar-button--foo')).to.be.true;
-    expect(element.children[0].classList.contains('toolbar-button--bar')).to.be.true;
-    expect(element.children[0].classList.contains('toolbar-button--hoge')).not.to.be.true;
 
-    element.children[0].classList.add('toolbar-button--piyo');
+    element.setAttribute('modifier', 'foo bar');
+    expect(element.classList.contains('back-button--foo')).to.be.true;
+    expect(element.classList.contains('back-button--bar')).to.be.true;
+    expect(element.classList.contains('back-button--hoge')).not.to.be.true;
+
+    element.classList.add('back-button--piyo');
     element.setAttribute('modifier', 'fuga');
-    expect(element.children[0].classList.contains('toolbar-button--piyo')).to.be.true;
-    expect(element.children[0].classList.contains('toolbar-button--fuga')).to.be.true;
+    expect(element.classList.contains('back-button--piyo')).to.be.true;
+    expect(element.classList.contains('back-button--fuga')).to.be.true;
   });
 
-  it('has a child', () => {
+  it('has two children', () => {
     let element = new OnsBackButtonElement();
     document.body.appendChild(element);
 
     expect(element.children[0]).to.be.ok;
-    expect(element.children[1]).not.to.be.ok;
-
-    expect(element.children[0].nodeName).to.equal('SPAN');
-    expect(element.children[0].classList.contains('toolbar-button--quiet')).to.be.true;
-    expect(element.children[0].style.height).to.equal('44px');
-    expect(element.children[0].style.lineHeight).to.equal('0');
-    expect(element.children[0].style.padding).to.equal('0px 10px 0px 0px');
-    expect(element.children[0].style.position).to.equal('relative');
+    expect(element.children[1]).to.be.ok;
+    expect(element.children[2]).not.to.be.ok;
   });
 
   describe('#_onClick()', () => {
