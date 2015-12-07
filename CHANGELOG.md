@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-beta.3
 ----
+ * core: Fixed animationOptions parsing.
  * ons-back-button: Add "material" modifier.
  * ons-range: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/1082).
 
