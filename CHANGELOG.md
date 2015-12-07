@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.3
 ----
  * ons-back-button: Add "material" modifier.
+ * ons-popover: Added callback for `show` and `hide` methods.
 
 v2.0.0-beta.2
 ----
