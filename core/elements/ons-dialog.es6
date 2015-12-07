@@ -21,7 +21,8 @@ limitations under the License.
   const util = ons._util;
   const ModifierUtil = ons._internal.ModifierUtil;
   const scheme = {
-    '.dialog': 'dialog--*'
+    '.dialog': 'dialog--*',
+    '.dialog-container': 'dialog-container--*'
   };
   const AnimatorFactory = ons._internal.AnimatorFactory;
   const AndroidDialogAnimator = ons._internal.AndroidDialogAnimator;
@@ -31,7 +32,9 @@ limitations under the License.
   const templateSource = util.createElement(`
     <div>
       <div class="dialog-mask"></div>
-      <div class="dialog"></div>
+      <div class="dialog">
+        <div class="dialog-container"></div>
+      </div>
     </div>
   `);
 
@@ -88,7 +91,7 @@ limitations under the License.
       }
 
       while (this.firstChild) {
-        dialog.appendChild(this.firstChild);
+        dialog.children[0].appendChild(this.firstChild);
       }
 
       while (template.firstChild) {
