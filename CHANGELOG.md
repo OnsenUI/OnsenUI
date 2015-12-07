@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.3
 ----
  * ons-back-button: Add "material" modifier.
+ * ons-range: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/1082).
 
 v2.0.0-beta.2
 ----
