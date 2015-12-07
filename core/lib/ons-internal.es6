@@ -76,15 +76,15 @@ limitations under the License.
       return false;
     };
 
-    return new Promise(function(resolve, reject){
-      if(typeof device === 'object'){
-        document.addEventListener('deviceready', function(){
-          if(checkStatusBar()){
+    return new Promise(function(resolve, reject) {
+      if(typeof device === 'object') {
+        document.addEventListener('deviceready', () => {
+          if (checkStatusBar()) {
             resolve();
           }
         });
       }
-      else if(checkStatusBar()){
+      else if (checkStatusBar()) {
         resolve();
       }
       reject();

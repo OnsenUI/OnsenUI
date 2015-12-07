@@ -2,6 +2,16 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.3
+----
+ * core: Fixed animationOptions parsing.
+ * ons-back-button: Add "material" modifier.
+ * ons-range: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/1082).
+
+v2.0.0-beta.2
+----
+ * css-components: Adjust Material navbar layout.
+
 v2.0.0-beta.1
 ----
  * ons-fab: Fix broken layout on Safari.
@@ -13,6 +23,7 @@ v2.0.0-beta.1
  * ons-tabbar: Add "material" modifier.
  * ons-sliding-menu: Fix broken `_currentPageUrl` property.
  * core: Fix status bar filling on iOS when using `device` plugin.
+ * css-components: Fix Material navbar title on iOS.
 
 v2.0.0-beta
 ----

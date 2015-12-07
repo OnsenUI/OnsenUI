@@ -74,7 +74,7 @@ limitations under the License.
     updateBackButton() {
       if(this.backButton) {
         if(this.navigator._pages.length > 1) {
-          this.backButton.style.display = 'block';
+          this.backButton.style.display = 'inline-block';
         } else {
           this.backButton.style.display = 'none';
         }

@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 2,
-  "endingLine": 46,
+  "endingLine": 43,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -48,21 +48,11 @@
       },
       {
         "tagDef": {
-          "name": "modifier",
-          "multi": true,
-          "docProperty": "modifiers"
-        },
-        "tagName": "modifier",
-        "description": "android\n  [en]Display an Android style alert dialog.[/en]\n  [ja]Androidライクなスタイルを表示します。[/ja]",
-        "startingLine": 6
-      },
-      {
-        "tagDef": {
           "name": "description"
         },
         "tagName": "description",
         "description": "  [en]Alert dialog that is displayed on top of the current screen.[/en]\n  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]",
-        "startingLine": 9
+        "startingLine": 6
       },
       {
         "tagDef": {
@@ -70,7 +60,7 @@
         },
         "tagName": "codepen",
         "description": "Qwwxyp",
-        "startingLine": 12
+        "startingLine": 9
       },
       {
         "tagDef": {
@@ -80,7 +70,7 @@
         },
         "tagName": "guide",
         "description": "UsingAlert\n  [en]Learn how to use the alert dialog.[/en]\n  [ja]アラートダイアログの使い方の解説。[/ja]",
-        "startingLine": 13
+        "startingLine": 10
       },
       {
         "tagDef": {
@@ -90,7 +80,7 @@
         },
         "tagName": "seealso",
         "description": "ons-dialog\n  [en]ons-dialog component[/en]\n  [ja]ons-dialogコンポーネント[/ja]",
-        "startingLine": 16
+        "startingLine": 13
       },
       {
         "tagDef": {
@@ -100,7 +90,7 @@
         },
         "tagName": "seealso",
         "description": "ons-popover\n  [en]ons-popover component[/en]\n  [ja]ons-dialogコンポーネント[/ja]",
-        "startingLine": 19
+        "startingLine": 16
       },
       {
         "tagDef": {
@@ -110,7 +100,7 @@
         },
         "tagName": "seealso",
         "description": "ons.notification\n  [en]Using ons.notification utility functions.[/en]\n  [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできます。[/ja]",
-        "startingLine": 22
+        "startingLine": 19
       },
       {
         "tagDef": {
@@ -120,7 +110,7 @@
         },
         "tagName": "example",
         "description": "<script>\n  ons.ready(function() {\n    ons.createAlertDialog('alert.html').then(function(alertDialog) {\n      alertDialog.show();\n    });\n  });\n</script>\n\n<script type=\"text/ons-template\" id=\"alert.html\">\n  <ons-alert-dialog animation=\"default\" cancelable>\n    <div class=\"alert-dialog-title\">Warning!</div>\n    <div class=\"alert-dialog-content\">\n      An error has occurred!\n    </div>\n    <div class=\"alert-dialog-footer\">\n      <button class=\"alert-dialog-button\">OK</button>\n    </div>\n  </ons-alert-dialog>\n</script>",
-        "startingLine": 25
+        "startingLine": 22
       }
     ],
     "tagsByName": {
@@ -170,18 +160,6 @@
             "startingLine": 5
           }
         ],
-        "modifier": [
-          {
-            "tagDef": {
-              "name": "modifier",
-              "multi": true,
-              "docProperty": "modifiers"
-            },
-            "tagName": "modifier",
-            "description": "android\n  [en]Display an Android style alert dialog.[/en]\n  [ja]Androidライクなスタイルを表示します。[/ja]",
-            "startingLine": 6
-          }
-        ],
         "description": [
           {
             "tagDef": {
@@ -189,7 +167,7 @@
             },
             "tagName": "description",
             "description": "  [en]Alert dialog that is displayed on top of the current screen.[/en]\n  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]",
-            "startingLine": 9
+            "startingLine": 6
           }
         ],
         "codepen": [
@@ -199,7 +177,7 @@
             },
             "tagName": "codepen",
             "description": "Qwwxyp",
-            "startingLine": 12
+            "startingLine": 9
           }
         ],
         "guide": [
@@ -211,7 +189,7 @@
             },
             "tagName": "guide",
             "description": "UsingAlert\n  [en]Learn how to use the alert dialog.[/en]\n  [ja]アラートダイアログの使い方の解説。[/ja]",
-            "startingLine": 13
+            "startingLine": 10
           }
         ],
         "seealso": [
@@ -223,7 +201,7 @@
             },
             "tagName": "seealso",
             "description": "ons-dialog\n  [en]ons-dialog component[/en]\n  [ja]ons-dialogコンポーネント[/ja]",
-            "startingLine": 16
+            "startingLine": 13
           },
           {
             "tagDef": {
@@ -233,7 +211,7 @@
             },
             "tagName": "seealso",
             "description": "ons-popover\n  [en]ons-popover component[/en]\n  [ja]ons-dialogコンポーネント[/ja]",
-            "startingLine": 19
+            "startingLine": 16
           },
           {
             "tagDef": {
@@ -243,7 +221,7 @@
             },
             "tagName": "seealso",
             "description": "ons.notification\n  [en]Using ons.notification utility functions.[/en]\n  [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできます。[/ja]",
-            "startingLine": 22
+            "startingLine": 19
           }
         ],
         "example": [
@@ -255,7 +233,7 @@
             },
             "tagName": "example",
             "description": "<script>\n  ons.ready(function() {\n    ons.createAlertDialog('alert.html').then(function(alertDialog) {\n      alertDialog.show();\n    });\n  });\n</script>\n\n<script type=\"text/ons-template\" id=\"alert.html\">\n  <ons-alert-dialog animation=\"default\" cancelable>\n    <div class=\"alert-dialog-title\">Warning!</div>\n    <div class=\"alert-dialog-content\">\n      An error has occurred!\n    </div>\n    <div class=\"alert-dialog-footer\">\n      <button class=\"alert-dialog-button\">OK</button>\n    </div>\n  </ons-alert-dialog>\n</script>",
-            "startingLine": 25
+            "startingLine": 22
           }
         ]
       },
@@ -264,12 +242,6 @@
     "badTags": [],
     "description": ""
   },
-  "modifiers": [
-    {
-      "name": "android",
-      "description": "\n  [en]Display an Android style alert dialog.[/en]\n  [ja]Androidライクなスタイルを表示します。[/ja]"
-    }
-  ],
   "codepen": {
     "id": "Qwwxyp",
     "isWide": false
@@ -321,8 +293,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 48,
-      "endingLine": 61,
+      "startingLine": 45,
+      "endingLine": 58,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -335,7 +307,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 48
+            "startingLine": 45
           },
           {
             "tagDef": {
@@ -344,7 +316,7 @@
             },
             "tagName": "name",
             "description": "preshow",
-            "startingLine": 49
+            "startingLine": 46
           },
           {
             "tagDef": {
@@ -352,7 +324,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just before the alert dialog is displayed.[/en]\n  [ja]アラートダイアログが表示される直前に発火します。[/ja]",
-            "startingLine": 50
+            "startingLine": 47
           },
           {
             "tagDef": {
@@ -367,7 +339,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]",
-            "startingLine": 53,
+            "startingLine": 50,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -391,7 +363,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-            "startingLine": 54,
+            "startingLine": 51,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -415,7 +387,7 @@
             },
             "tagName": "param",
             "description": "[en]Execute to stop the dialog from showing.[/en]\n  [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]",
-            "startingLine": 57,
+            "startingLine": 54,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -438,7 +410,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 48
+                "startingLine": 45
               }
             ],
             "name": [
@@ -449,7 +421,7 @@
                 },
                 "tagName": "name",
                 "description": "preshow",
-                "startingLine": 49
+                "startingLine": 46
               }
             ],
             "description": [
@@ -459,7 +431,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just before the alert dialog is displayed.[/en]\n  [ja]アラートダイアログが表示される直前に発火します。[/ja]",
-                "startingLine": 50
+                "startingLine": 47
               }
             ],
             "param": [
@@ -476,7 +448,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]",
-                "startingLine": 53,
+                "startingLine": 50,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -500,7 +472,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-                "startingLine": 54,
+                "startingLine": 51,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -524,7 +496,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Execute to stop the dialog from showing.[/en]\n  [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]",
-                "startingLine": 57,
+                "startingLine": 54,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -557,7 +529,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]",
-          "startingLine": 53,
+          "startingLine": 50,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -581,7 +553,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-          "startingLine": 54,
+          "startingLine": 51,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -605,7 +577,7 @@
           },
           "tagName": "param",
           "description": "[en]Execute to stop the dialog from showing.[/en]\n  [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]",
-          "startingLine": 57,
+          "startingLine": 54,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -628,8 +600,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 63,
-      "endingLine": 73,
+      "startingLine": 60,
+      "endingLine": 70,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -642,7 +614,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 63
+            "startingLine": 60
           },
           {
             "tagDef": {
@@ -651,7 +623,7 @@
             },
             "tagName": "name",
             "description": "postshow",
-            "startingLine": 64
+            "startingLine": 61
           },
           {
             "tagDef": {
@@ -659,7 +631,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just after the alert dialog is displayed.[/en]\n  [ja]アラートダイアログが表示された直後に発火します。[/ja]",
-            "startingLine": 65
+            "startingLine": 62
           },
           {
             "tagDef": {
@@ -674,7 +646,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]",
-            "startingLine": 68,
+            "startingLine": 65,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -698,7 +670,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-            "startingLine": 69,
+            "startingLine": 66,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -721,7 +693,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 63
+                "startingLine": 60
               }
             ],
             "name": [
@@ -732,7 +704,7 @@
                 },
                 "tagName": "name",
                 "description": "postshow",
-                "startingLine": 64
+                "startingLine": 61
               }
             ],
             "description": [
@@ -742,7 +714,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just after the alert dialog is displayed.[/en]\n  [ja]アラートダイアログが表示された直後に発火します。[/ja]",
-                "startingLine": 65
+                "startingLine": 62
               }
             ],
             "param": [
@@ -759,7 +731,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]",
-                "startingLine": 68,
+                "startingLine": 65,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -783,7 +755,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-                "startingLine": 69,
+                "startingLine": 66,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -816,7 +788,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]",
-          "startingLine": 68,
+          "startingLine": 65,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -840,7 +812,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-          "startingLine": 69,
+          "startingLine": 66,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -863,8 +835,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 75,
-      "endingLine": 88,
+      "startingLine": 72,
+      "endingLine": 85,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -877,7 +849,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 75
+            "startingLine": 72
           },
           {
             "tagDef": {
@@ -886,7 +858,7 @@
             },
             "tagName": "name",
             "description": "prehide",
-            "startingLine": 76
+            "startingLine": 73
           },
           {
             "tagDef": {
@@ -894,7 +866,7 @@
             },
             "tagName": "description",
             "description": "  [en]Fired just before the alert dialog is hidden.[/en]\n  [ja]アラートダイアログが隠れる直前に発火します。[/ja]",
-            "startingLine": 77
+            "startingLine": 74
           },
           {
             "tagDef": {
@@ -909,7 +881,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]",
-            "startingLine": 80,
+            "startingLine": 77,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -933,7 +905,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-            "startingLine": 81,
+            "startingLine": 78,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -957,7 +929,7 @@
             },
             "tagName": "param",
             "description": "[en]Execute to stop the dialog from hiding.[/en]\n  [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]",
-            "startingLine": 84,
+            "startingLine": 81,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -980,7 +952,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 75
+                "startingLine": 72
               }
             ],
             "name": [
@@ -991,7 +963,7 @@
                 },
                 "tagName": "name",
                 "description": "prehide",
-                "startingLine": 76
+                "startingLine": 73
               }
             ],
             "description": [
@@ -1001,7 +973,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Fired just before the alert dialog is hidden.[/en]\n  [ja]アラートダイアログが隠れる直前に発火します。[/ja]",
-                "startingLine": 77
+                "startingLine": 74
               }
             ],
             "param": [
@@ -1018,7 +990,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]",
-                "startingLine": 80,
+                "startingLine": 77,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1042,7 +1014,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-                "startingLine": 81,
+                "startingLine": 78,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1066,7 +1038,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Execute to stop the dialog from hiding.[/en]\n  [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]",
-                "startingLine": 84,
+                "startingLine": 81,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1099,7 +1071,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]",
-          "startingLine": 80,
+          "startingLine": 77,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1123,7 +1095,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-          "startingLine": 81,
+          "startingLine": 78,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1147,7 +1119,7 @@
           },
           "tagName": "param",
           "description": "[en]Execute to stop the dialog from hiding.[/en]\n  [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]",
-          "startingLine": 84,
+          "startingLine": 81,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1170,8 +1142,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 90,
-      "endingLine": 100,
+      "startingLine": 87,
+      "endingLine": 97,
       "codeAncestors": [],
       "docType": "event",
       "tags": {
@@ -1184,7 +1156,7 @@
             },
             "tagName": "ngdoc",
             "description": "event",
-            "startingLine": 90
+            "startingLine": 87
           },
           {
             "tagDef": {
@@ -1193,7 +1165,7 @@
             },
             "tagName": "name",
             "description": "posthide",
-            "startingLine": 91
+            "startingLine": 88
           },
           {
             "tagDef": {
@@ -1201,7 +1173,7 @@
             },
             "tagName": "description",
             "description": "[en]Fired just after the alert dialog is hidden.[/en]\n[ja]アラートダイアログが隠れた後に発火します。[/ja]",
-            "startingLine": 92
+            "startingLine": 89
           },
           {
             "tagDef": {
@@ -1216,7 +1188,7 @@
             },
             "tagName": "param",
             "description": "[en]Event object.[/en]",
-            "startingLine": 95,
+            "startingLine": 92,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1240,7 +1212,7 @@
             },
             "tagName": "param",
             "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-            "startingLine": 96,
+            "startingLine": 93,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1263,7 +1235,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "event",
-                "startingLine": 90
+                "startingLine": 87
               }
             ],
             "name": [
@@ -1274,7 +1246,7 @@
                 },
                 "tagName": "name",
                 "description": "posthide",
-                "startingLine": 91
+                "startingLine": 88
               }
             ],
             "description": [
@@ -1284,7 +1256,7 @@
                 },
                 "tagName": "description",
                 "description": "[en]Fired just after the alert dialog is hidden.[/en]\n[ja]アラートダイアログが隠れた後に発火します。[/ja]",
-                "startingLine": 92
+                "startingLine": 89
               }
             ],
             "param": [
@@ -1301,7 +1273,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Event object.[/en]",
-                "startingLine": 95,
+                "startingLine": 92,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1325,7 +1297,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-                "startingLine": 96,
+                "startingLine": 93,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1358,7 +1330,7 @@
           },
           "tagName": "param",
           "description": "[en]Event object.[/en]",
-          "startingLine": 95,
+          "startingLine": 92,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1382,7 +1354,7 @@
           },
           "tagName": "param",
           "description": "[en]Alert dialog object.[/en]\n  [ja]アラートダイアログのオブジェクト。[/ja]",
-          "startingLine": 96,
+          "startingLine": 93,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1407,8 +1379,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 223,
-      "endingLine": 241,
+      "startingLine": 220,
+      "endingLine": 238,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1421,7 +1393,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 223
+            "startingLine": 220
           },
           {
             "tagDef": {
@@ -1430,7 +1402,7 @@
             },
             "tagName": "signature",
             "description": "show([options])",
-            "startingLine": 224
+            "startingLine": 221
           },
           {
             "tagDef": {
@@ -1445,7 +1417,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-            "startingLine": 225,
+            "startingLine": 222,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1470,7 +1442,7 @@
             },
             "tagName": "param",
             "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。指定できるのは、\"fade\", \"slide\", \"none\"のいずれかです。[/ja]",
-            "startingLine": 228,
+            "startingLine": 225,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1495,7 +1467,7 @@
             },
             "tagName": "param",
             "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-            "startingLine": 231,
+            "startingLine": 228,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1520,7 +1492,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute after the dialog has been revealed.[/en]\n  [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]",
-            "startingLine": 234,
+            "startingLine": 231,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1538,7 +1510,7 @@
             },
             "tagName": "description",
             "description": "  [en]Show the alert dialog.[/en]\n  [ja]ダイアログを表示します。[/ja]",
-            "startingLine": 237
+            "startingLine": 234
           }
         ],
         "tagsByName": {
@@ -1552,7 +1524,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 223
+                "startingLine": 220
               }
             ],
             "signature": [
@@ -1563,7 +1535,7 @@
                 },
                 "tagName": "signature",
                 "description": "show([options])",
-                "startingLine": 224
+                "startingLine": 221
               }
             ],
             "param": [
@@ -1580,7 +1552,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-                "startingLine": 225,
+                "startingLine": 222,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -1605,7 +1577,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。指定できるのは、\"fade\", \"slide\", \"none\"のいずれかです。[/ja]",
-                "startingLine": 228,
+                "startingLine": 225,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1630,7 +1602,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-                "startingLine": 231,
+                "startingLine": 228,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -1655,7 +1627,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute after the dialog has been revealed.[/en]\n  [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]",
-                "startingLine": 234,
+                "startingLine": 231,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -1675,7 +1647,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Show the alert dialog.[/en]\n  [ja]ダイアログを表示します。[/ja]",
-                "startingLine": 237
+                "startingLine": 234
               }
             ],
             "name": {
@@ -1686,7 +1658,7 @@
                 },
                 "tagName": "signature",
                 "description": "show([options])",
-                "startingLine": 224
+                "startingLine": 221
               },
               "tagName": "name"
             }
@@ -1712,7 +1684,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクトです。[/ja]",
-          "startingLine": 225,
+          "startingLine": 222,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -1737,7 +1709,7 @@
           },
           "tagName": "param",
           "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。指定できるのは、\"fade\", \"slide\", \"none\"のいずれかです。[/ja]",
-          "startingLine": 228,
+          "startingLine": 225,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1762,7 +1734,7 @@
           },
           "tagName": "param",
           "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-          "startingLine": 231,
+          "startingLine": 228,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -1787,7 +1759,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute after the dialog has been revealed.[/en]\n  [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]",
-          "startingLine": 234,
+          "startingLine": 231,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -1811,8 +1783,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 243,
-      "endingLine": 261,
+      "startingLine": 240,
+      "endingLine": 258,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -1825,7 +1797,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 243
+            "startingLine": 240
           },
           {
             "tagDef": {
@@ -1834,7 +1806,7 @@
             },
             "tagName": "signature",
             "description": "hide([options])",
-            "startingLine": 244
+            "startingLine": 241
           },
           {
             "tagDef": {
@@ -1849,7 +1821,7 @@
             },
             "tagName": "param",
             "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-            "startingLine": 245,
+            "startingLine": 242,
             "typeExpression": "Object",
             "type": {
               "type": "NameExpression",
@@ -1874,7 +1846,7 @@
             },
             "tagName": "param",
             "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\", \"slide\", \"none\"のいずれかを指定します。[/ja]",
-            "startingLine": 248,
+            "startingLine": 245,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1899,7 +1871,7 @@
             },
             "tagName": "param",
             "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-            "startingLine": 251,
+            "startingLine": 248,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -1924,7 +1896,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute after the dialog has been hidden.[/en]\n  [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]",
-            "startingLine": 254,
+            "startingLine": 251,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -1942,7 +1914,7 @@
             },
             "tagName": "description",
             "description": "  [en]Hide the alert dialog.[/en]\n  [ja]ダイアログを閉じます。[/ja]",
-            "startingLine": 257
+            "startingLine": 254
           }
         ],
         "tagsByName": {
@@ -1956,7 +1928,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 243
+                "startingLine": 240
               }
             ],
             "signature": [
@@ -1967,7 +1939,7 @@
                 },
                 "tagName": "signature",
                 "description": "hide([options])",
-                "startingLine": 244
+                "startingLine": 241
               }
             ],
             "param": [
@@ -1984,7 +1956,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-                "startingLine": 245,
+                "startingLine": 242,
                 "typeExpression": "Object",
                 "type": {
                   "type": "NameExpression",
@@ -2009,7 +1981,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\", \"slide\", \"none\"のいずれかを指定します。[/ja]",
-                "startingLine": 248,
+                "startingLine": 245,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2034,7 +2006,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-                "startingLine": 251,
+                "startingLine": 248,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -2059,7 +2031,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute after the dialog has been hidden.[/en]\n  [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]",
-                "startingLine": 254,
+                "startingLine": 251,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -2079,7 +2051,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Hide the alert dialog.[/en]\n  [ja]ダイアログを閉じます。[/ja]",
-                "startingLine": 257
+                "startingLine": 254
               }
             ],
             "name": {
@@ -2090,7 +2062,7 @@
                 },
                 "tagName": "signature",
                 "description": "hide([options])",
-                "startingLine": 244
+                "startingLine": 241
               },
               "tagName": "name"
             }
@@ -2116,7 +2088,7 @@
           },
           "tagName": "param",
           "description": "[en]Parameter object.[/en]\n  [ja]オプションを指定するオブジェクト。[/ja]",
-          "startingLine": 245,
+          "startingLine": 242,
           "typeExpression": "Object",
           "type": {
             "type": "NameExpression",
@@ -2141,7 +2113,7 @@
           },
           "tagName": "param",
           "description": "[en]Animation name. Available animations are \"fade\", \"slide\" and \"none\".[/en]\n  [ja]アニメーション名を指定します。\"fade\", \"slide\", \"none\"のいずれかを指定します。[/ja]",
-          "startingLine": 248,
+          "startingLine": 245,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2166,7 +2138,7 @@
           },
           "tagName": "param",
           "description": "[en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]\n  [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]",
-          "startingLine": 251,
+          "startingLine": 248,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -2191,7 +2163,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute after the dialog has been hidden.[/en]\n  [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]",
-          "startingLine": 254,
+          "startingLine": 251,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -2215,8 +2187,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 263,
-      "endingLine": 272,
+      "startingLine": 260,
+      "endingLine": 269,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2229,7 +2201,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 263
+            "startingLine": 260
           },
           {
             "tagDef": {
@@ -2238,7 +2210,7 @@
             },
             "tagName": "signature",
             "description": "isShown()",
-            "startingLine": 264
+            "startingLine": 261
           },
           {
             "tagDef": {
@@ -2246,7 +2218,7 @@
             },
             "tagName": "description",
             "description": "  [en]Returns whether the dialog is visible or not.[/en]\n  [ja]ダイアログが表示されているかどうかを返します。[/ja]",
-            "startingLine": 265
+            "startingLine": 262
           },
           {
             "tagDef": {
@@ -2261,7 +2233,7 @@
             },
             "tagName": "return",
             "description": "[en]true if the dialog is currently visible.[/en]\n  [ja]ダイアログが表示されていればtrueを返します。[/ja]",
-            "startingLine": 268,
+            "startingLine": 265,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2283,7 +2255,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 263
+                "startingLine": 260
               }
             ],
             "signature": [
@@ -2294,7 +2266,7 @@
                 },
                 "tagName": "signature",
                 "description": "isShown()",
-                "startingLine": 264
+                "startingLine": 261
               }
             ],
             "description": [
@@ -2304,7 +2276,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Returns whether the dialog is visible or not.[/en]\n  [ja]ダイアログが表示されているかどうかを返します。[/ja]",
-                "startingLine": 265
+                "startingLine": 262
               }
             ],
             "returns": [
@@ -2321,7 +2293,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]true if the dialog is currently visible.[/en]\n  [ja]ダイアログが表示されていればtrueを返します。[/ja]",
-                "startingLine": 268,
+                "startingLine": 265,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2340,7 +2312,7 @@
                 },
                 "tagName": "signature",
                 "description": "isShown()",
-                "startingLine": 264
+                "startingLine": 261
               },
               "tagName": "name"
             }
@@ -2365,7 +2337,7 @@
         },
         "tagName": "return",
         "description": "[en]true if the dialog is currently visible.[/en]\n  [ja]ダイアログが表示されていればtrueを返します。[/ja]",
-        "startingLine": 268,
+        "startingLine": 265,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",
@@ -2386,8 +2358,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 274,
-      "endingLine": 280,
+      "startingLine": 271,
+      "endingLine": 277,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2400,7 +2372,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 274
+            "startingLine": 271
           },
           {
             "tagDef": {
@@ -2409,7 +2381,7 @@
             },
             "tagName": "signature",
             "description": "destroy()",
-            "startingLine": 275
+            "startingLine": 272
           },
           {
             "tagDef": {
@@ -2417,7 +2389,7 @@
             },
             "tagName": "description",
             "description": "  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]\n  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]",
-            "startingLine": 276
+            "startingLine": 273
           }
         ],
         "tagsByName": {
@@ -2431,7 +2403,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 274
+                "startingLine": 271
               }
             ],
             "signature": [
@@ -2442,7 +2414,7 @@
                 },
                 "tagName": "signature",
                 "description": "destroy()",
-                "startingLine": 275
+                "startingLine": 272
               }
             ],
             "description": [
@@ -2452,7 +2424,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]\n  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]",
-                "startingLine": 276
+                "startingLine": 273
               }
             ],
             "name": {
@@ -2463,7 +2435,7 @@
                 },
                 "tagName": "signature",
                 "description": "destroy()",
-                "startingLine": 275
+                "startingLine": 272
               },
               "tagName": "name"
             }
@@ -2486,8 +2458,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 282,
-      "endingLine": 291,
+      "startingLine": 279,
+      "endingLine": 288,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2500,7 +2472,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 282
+            "startingLine": 279
           },
           {
             "tagDef": {
@@ -2509,7 +2481,7 @@
             },
             "tagName": "signature",
             "description": "setCancelable(cancelable)",
-            "startingLine": 283
+            "startingLine": 280
           },
           {
             "tagDef": {
@@ -2517,7 +2489,7 @@
             },
             "tagName": "description",
             "description": "  [en]Define whether the dialog can be canceled by the user or not.[/en]\n  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]",
-            "startingLine": 284
+            "startingLine": 281
           },
           {
             "tagDef": {
@@ -2532,7 +2504,7 @@
             },
             "tagName": "param",
             "description": "[en]If true the dialog will be cancelable.[/en]\n  [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]",
-            "startingLine": 287,
+            "startingLine": 284,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2555,7 +2527,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 282
+                "startingLine": 279
               }
             ],
             "signature": [
@@ -2566,7 +2538,7 @@
                 },
                 "tagName": "signature",
                 "description": "setCancelable(cancelable)",
-                "startingLine": 283
+                "startingLine": 280
               }
             ],
             "description": [
@@ -2576,7 +2548,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Define whether the dialog can be canceled by the user or not.[/en]\n  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]",
-                "startingLine": 284
+                "startingLine": 281
               }
             ],
             "param": [
@@ -2593,7 +2565,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]If true the dialog will be cancelable.[/en]\n  [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]",
-                "startingLine": 287,
+                "startingLine": 284,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2613,7 +2585,7 @@
                 },
                 "tagName": "signature",
                 "description": "setCancelable(cancelable)",
-                "startingLine": 283
+                "startingLine": 280
               },
               "tagName": "name"
             }
@@ -2639,7 +2611,7 @@
           },
           "tagName": "param",
           "description": "[en]If true the dialog will be cancelable.[/en]\n  [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]",
-          "startingLine": 287,
+          "startingLine": 284,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -2662,8 +2634,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 293,
-      "endingLine": 302,
+      "startingLine": 290,
+      "endingLine": 299,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2676,7 +2648,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 293
+            "startingLine": 290
           },
           {
             "tagDef": {
@@ -2685,7 +2657,7 @@
             },
             "tagName": "signature",
             "description": "isCancelable()",
-            "startingLine": 294
+            "startingLine": 291
           },
           {
             "tagDef": {
@@ -2693,7 +2665,7 @@
             },
             "tagName": "description",
             "description": "  [en]Returns whether the dialog is cancelable or not.[/en]\n  [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]",
-            "startingLine": 295
+            "startingLine": 292
           },
           {
             "tagDef": {
@@ -2708,7 +2680,7 @@
             },
             "tagName": "return",
             "description": "[en]true if the dialog is cancelable.[/en]\n  [ja]キャンセル可能であればtrueを返します。[/ja]",
-            "startingLine": 298,
+            "startingLine": 295,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2730,7 +2702,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 293
+                "startingLine": 290
               }
             ],
             "signature": [
@@ -2741,7 +2713,7 @@
                 },
                 "tagName": "signature",
                 "description": "isCancelable()",
-                "startingLine": 294
+                "startingLine": 291
               }
             ],
             "description": [
@@ -2751,7 +2723,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Returns whether the dialog is cancelable or not.[/en]\n  [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]",
-                "startingLine": 295
+                "startingLine": 292
               }
             ],
             "returns": [
@@ -2768,7 +2740,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]true if the dialog is cancelable.[/en]\n  [ja]キャンセル可能であればtrueを返します。[/ja]",
-                "startingLine": 298,
+                "startingLine": 295,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2787,7 +2759,7 @@
                 },
                 "tagName": "signature",
                 "description": "isCancelable()",
-                "startingLine": 294
+                "startingLine": 291
               },
               "tagName": "name"
             }
@@ -2812,7 +2784,7 @@
         },
         "tagName": "return",
         "description": "[en]true if the dialog is cancelable.[/en]\n  [ja]キャンセル可能であればtrueを返します。[/ja]",
-        "startingLine": 298,
+        "startingLine": 295,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",
@@ -2833,8 +2805,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 304,
-      "endingLine": 313,
+      "startingLine": 301,
+      "endingLine": 310,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -2847,7 +2819,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 304
+            "startingLine": 301
           },
           {
             "tagDef": {
@@ -2856,7 +2828,7 @@
             },
             "tagName": "signature",
             "description": "setDisabled(disabled)",
-            "startingLine": 305
+            "startingLine": 302
           },
           {
             "tagDef": {
@@ -2864,7 +2836,7 @@
             },
             "tagName": "description",
             "description": "  [en]Disable or enable the alert dialog.[/en]\n  [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]",
-            "startingLine": 306
+            "startingLine": 303
           },
           {
             "tagDef": {
@@ -2879,7 +2851,7 @@
             },
             "tagName": "param",
             "description": "[en]If true the dialog will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
-            "startingLine": 309,
+            "startingLine": 306,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -2902,7 +2874,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 304
+                "startingLine": 301
               }
             ],
             "signature": [
@@ -2913,7 +2885,7 @@
                 },
                 "tagName": "signature",
                 "description": "setDisabled(disabled)",
-                "startingLine": 305
+                "startingLine": 302
               }
             ],
             "description": [
@@ -2923,7 +2895,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Disable or enable the alert dialog.[/en]\n  [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]",
-                "startingLine": 306
+                "startingLine": 303
               }
             ],
             "param": [
@@ -2940,7 +2912,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]If true the dialog will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
-                "startingLine": 309,
+                "startingLine": 306,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -2960,7 +2932,7 @@
                 },
                 "tagName": "signature",
                 "description": "setDisabled(disabled)",
-                "startingLine": 305
+                "startingLine": 302
               },
               "tagName": "name"
             }
@@ -2986,7 +2958,7 @@
           },
           "tagName": "param",
           "description": "[en]If true the dialog will be disabled.[/en]\n  [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]",
-          "startingLine": 309,
+          "startingLine": 306,
           "typeExpression": "Boolean",
           "type": {
             "type": "NameExpression",
@@ -3009,8 +2981,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 315,
-      "endingLine": 324,
+      "startingLine": 312,
+      "endingLine": 321,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -3023,7 +2995,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 315
+            "startingLine": 312
           },
           {
             "tagDef": {
@@ -3032,7 +3004,7 @@
             },
             "tagName": "signature",
             "description": "isDisabled()",
-            "startingLine": 316
+            "startingLine": 313
           },
           {
             "tagDef": {
@@ -3040,7 +3012,7 @@
             },
             "tagName": "description",
             "description": "  [en]Returns whether the dialog is disabled or enabled.[/en]\n  [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]",
-            "startingLine": 317
+            "startingLine": 314
           },
           {
             "tagDef": {
@@ -3055,7 +3027,7 @@
             },
             "tagName": "return",
             "description": "[en]true if the dialog is disabled.[/en]\n  [ja]disabled状態であればtrueを返します。[/ja]",
-            "startingLine": 320,
+            "startingLine": 317,
             "typeExpression": "Boolean",
             "type": {
               "type": "NameExpression",
@@ -3077,7 +3049,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 315
+                "startingLine": 312
               }
             ],
             "signature": [
@@ -3088,7 +3060,7 @@
                 },
                 "tagName": "signature",
                 "description": "isDisabled()",
-                "startingLine": 316
+                "startingLine": 313
               }
             ],
             "description": [
@@ -3098,7 +3070,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Returns whether the dialog is disabled or enabled.[/en]\n  [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]",
-                "startingLine": 317
+                "startingLine": 314
               }
             ],
             "returns": [
@@ -3115,7 +3087,7 @@
                 },
                 "tagName": "return",
                 "description": "[en]true if the dialog is disabled.[/en]\n  [ja]disabled状態であればtrueを返します。[/ja]",
-                "startingLine": 320,
+                "startingLine": 317,
                 "typeExpression": "Boolean",
                 "type": {
                   "type": "NameExpression",
@@ -3134,7 +3106,7 @@
                 },
                 "tagName": "signature",
                 "description": "isDisabled()",
-                "startingLine": 316
+                "startingLine": 313
               },
               "tagName": "name"
             }
@@ -3159,7 +3131,7 @@
         },
         "tagName": "return",
         "description": "[en]true if the dialog is disabled.[/en]\n  [ja]disabled状態であればtrueを返します。[/ja]",
-        "startingLine": 320,
+        "startingLine": 317,
         "typeExpression": "Boolean",
         "type": {
           "type": "NameExpression",
@@ -3180,8 +3152,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 326,
-      "endingLine": 339,
+      "startingLine": 323,
+      "endingLine": 336,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -3194,7 +3166,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 326
+            "startingLine": 323
           },
           {
             "tagDef": {
@@ -3203,7 +3175,7 @@
             },
             "tagName": "signature",
             "description": "on(eventName, listener)",
-            "startingLine": 327
+            "startingLine": 324
           },
           {
             "tagDef": {
@@ -3211,7 +3183,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 328
+            "startingLine": 325
           },
           {
             "tagDef": {
@@ -3219,7 +3191,7 @@
             },
             "tagName": "description",
             "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
-            "startingLine": 329
+            "startingLine": 326
           },
           {
             "tagDef": {
@@ -3234,7 +3206,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 332,
+            "startingLine": 329,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -3258,7 +3230,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火された際に呼び出されるコールバックを指定します。[/ja]",
-            "startingLine": 335,
+            "startingLine": 332,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -3281,7 +3253,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 326
+                "startingLine": 323
               }
             ],
             "signature": [
@@ -3292,7 +3264,7 @@
                 },
                 "tagName": "signature",
                 "description": "on(eventName, listener)",
-                "startingLine": 327
+                "startingLine": 324
               }
             ],
             "extensionOf": [
@@ -3302,7 +3274,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 328
+                "startingLine": 325
               }
             ],
             "description": [
@@ -3312,7 +3284,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Add an event listener.[/en]\n  [ja]イベントリスナーを追加します。[/ja]",
-                "startingLine": 329
+                "startingLine": 326
               }
             ],
             "param": [
@@ -3329,7 +3301,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 332,
+                "startingLine": 329,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -3353,7 +3325,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火された際に呼び出されるコールバックを指定します。[/ja]",
-                "startingLine": 335,
+                "startingLine": 332,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -3373,7 +3345,7 @@
                 },
                 "tagName": "signature",
                 "description": "on(eventName, listener)",
-                "startingLine": 327
+                "startingLine": 324
               },
               "tagName": "name"
             }
@@ -3400,7 +3372,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 332,
+          "startingLine": 329,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -3424,7 +3396,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火された際に呼び出されるコールバックを指定します。[/ja]",
-          "startingLine": 335,
+          "startingLine": 332,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -3447,8 +3419,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 341,
-      "endingLine": 354,
+      "startingLine": 338,
+      "endingLine": 351,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -3461,7 +3433,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 341
+            "startingLine": 338
           },
           {
             "tagDef": {
@@ -3470,7 +3442,7 @@
             },
             "tagName": "signature",
             "description": "once(eventName, listener)",
-            "startingLine": 342
+            "startingLine": 339
           },
           {
             "tagDef": {
@@ -3478,7 +3450,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 343
+            "startingLine": 340
           },
           {
             "tagDef": {
@@ -3486,7 +3458,7 @@
             },
             "tagName": "description",
             "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
-            "startingLine": 344
+            "startingLine": 341
           },
           {
             "tagDef": {
@@ -3501,7 +3473,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 347,
+            "startingLine": 344,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -3525,7 +3497,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出されるコールバックを指定します。[/ja]",
-            "startingLine": 350,
+            "startingLine": 347,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -3548,7 +3520,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 341
+                "startingLine": 338
               }
             ],
             "signature": [
@@ -3559,7 +3531,7 @@
                 },
                 "tagName": "signature",
                 "description": "once(eventName, listener)",
-                "startingLine": 342
+                "startingLine": 339
               }
             ],
             "extensionOf": [
@@ -3569,7 +3541,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 343
+                "startingLine": 340
               }
             ],
             "description": [
@@ -3579,7 +3551,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Add an event listener that's only triggered once.[/en]\n [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]",
-                "startingLine": 344
+                "startingLine": 341
               }
             ],
             "param": [
@@ -3596,7 +3568,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 347,
+                "startingLine": 344,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -3620,7 +3592,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出されるコールバックを指定します。[/ja]",
-                "startingLine": 350,
+                "startingLine": 347,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -3640,7 +3612,7 @@
                 },
                 "tagName": "signature",
                 "description": "once(eventName, listener)",
-                "startingLine": 342
+                "startingLine": 339
               },
               "tagName": "name"
             }
@@ -3667,7 +3639,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 347,
+          "startingLine": 344,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -3691,7 +3663,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]イベントが発火した際に呼び出されるコールバックを指定します。[/ja]",
-          "startingLine": 350,
+          "startingLine": 347,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -3714,8 +3686,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 356,
-      "endingLine": 369,
+      "startingLine": 353,
+      "endingLine": 366,
       "codeAncestors": [],
       "docType": "method",
       "tags": {
@@ -3728,7 +3700,7 @@
             },
             "tagName": "ngdoc",
             "description": "method",
-            "startingLine": 356
+            "startingLine": 353
           },
           {
             "tagDef": {
@@ -3737,7 +3709,7 @@
             },
             "tagName": "signature",
             "description": "off(eventName, [listener])",
-            "startingLine": 357
+            "startingLine": 354
           },
           {
             "tagDef": {
@@ -3745,7 +3717,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 358
+            "startingLine": 355
           },
           {
             "tagDef": {
@@ -3753,7 +3725,7 @@
             },
             "tagName": "description",
             "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除されます。[/ja]",
-            "startingLine": 359
+            "startingLine": 356
           },
           {
             "tagDef": {
@@ -3768,7 +3740,7 @@
             },
             "tagName": "param",
             "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-            "startingLine": 362,
+            "startingLine": 359,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -3792,7 +3764,7 @@
             },
             "tagName": "param",
             "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーの関数オブジェクトを渡します。[/ja]",
-            "startingLine": 365,
+            "startingLine": 362,
             "typeExpression": "Function",
             "type": {
               "type": "FunctionType",
@@ -3815,7 +3787,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "method",
-                "startingLine": 356
+                "startingLine": 353
               }
             ],
             "signature": [
@@ -3826,7 +3798,7 @@
                 },
                 "tagName": "signature",
                 "description": "off(eventName, [listener])",
-                "startingLine": 357
+                "startingLine": 354
               }
             ],
             "extensionOf": [
@@ -3836,7 +3808,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 358
+                "startingLine": 355
               }
             ],
             "description": [
@@ -3846,7 +3818,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]\n [ja]イベントリスナーを削除します。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除されます。[/ja]",
-                "startingLine": 359
+                "startingLine": 356
               }
             ],
             "param": [
@@ -3863,7 +3835,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-                "startingLine": 362,
+                "startingLine": 359,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -3887,7 +3859,7 @@
                 },
                 "tagName": "param",
                 "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーの関数オブジェクトを渡します。[/ja]",
-                "startingLine": 365,
+                "startingLine": 362,
                 "typeExpression": "Function",
                 "type": {
                   "type": "FunctionType",
@@ -3907,7 +3879,7 @@
                 },
                 "tagName": "signature",
                 "description": "off(eventName, [listener])",
-                "startingLine": 357
+                "startingLine": 354
               },
               "tagName": "name"
             }
@@ -3934,7 +3906,7 @@
           },
           "tagName": "param",
           "description": "[en]Name of the event.[/en]\n  [ja]イベント名を指定します。[/ja]",
-          "startingLine": 362,
+          "startingLine": 359,
           "typeExpression": "String",
           "type": {
             "type": "NameExpression",
@@ -3958,7 +3930,7 @@
           },
           "tagName": "param",
           "description": "[en]Function to execute when the event is triggered.[/en]\n  [ja]削除するイベントリスナーの関数オブジェクトを渡します。[/ja]",
-          "startingLine": 365,
+          "startingLine": 362,
           "typeExpression": "Function",
           "type": {
             "type": "FunctionType",
@@ -3983,8 +3955,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 102,
-      "endingLine": 111,
+      "startingLine": 99,
+      "endingLine": 108,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -3997,7 +3969,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 102
+            "startingLine": 99
           },
           {
             "tagDef": {
@@ -4006,7 +3978,7 @@
             },
             "tagName": "name",
             "description": "var",
-            "startingLine": 103
+            "startingLine": 100
           },
           {
             "tagDef": {
@@ -4014,7 +3986,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 104
+            "startingLine": 101
           },
           {
             "tagDef": {
@@ -4022,7 +3994,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 105
+            "startingLine": 102
           },
           {
             "tagDef": {
@@ -4034,7 +4006,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 106,
+            "startingLine": 103,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4050,7 +4022,7 @@
             },
             "tagName": "description",
             "description": " [en]Variable name to refer this alert dialog.[/en]\n [ja]このアラートダイアログを参照するための名前を指定します。[/ja]",
-            "startingLine": 107
+            "startingLine": 104
           }
         ],
         "tagsByName": {
@@ -4064,7 +4036,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 102
+                "startingLine": 99
               }
             ],
             "name": [
@@ -4075,7 +4047,7 @@
                 },
                 "tagName": "name",
                 "description": "var",
-                "startingLine": 103
+                "startingLine": 100
               }
             ],
             "initonly": [
@@ -4085,7 +4057,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 104
+                "startingLine": 101
               }
             ],
             "extensionOf": [
@@ -4095,7 +4067,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 105
+                "startingLine": 102
               }
             ],
             "type": [
@@ -4109,7 +4081,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 106,
+                "startingLine": 103,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4127,7 +4099,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Variable name to refer this alert dialog.[/en]\n [ja]このアラートダイアログを参照するための名前を指定します。[/ja]",
-                "startingLine": 107
+                "startingLine": 104
               }
             ]
           },
@@ -4148,7 +4120,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 106,
+        "startingLine": 103,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4170,8 +4142,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 113,
-      "endingLine": 120,
+      "startingLine": 110,
+      "endingLine": 117,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4184,7 +4156,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 113
+            "startingLine": 110
           },
           {
             "tagDef": {
@@ -4193,7 +4165,7 @@
             },
             "tagName": "name",
             "description": "modifier",
-            "startingLine": 114
+            "startingLine": 111
           },
           {
             "tagDef": {
@@ -4205,7 +4177,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 115,
+            "startingLine": 112,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4221,7 +4193,7 @@
             },
             "tagName": "description",
             "description": " [en]The appearance of the dialog.[/en]\n [ja]ダイアログの見た目を指定します。[/ja]",
-            "startingLine": 116
+            "startingLine": 113
           }
         ],
         "tagsByName": {
@@ -4235,7 +4207,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 113
+                "startingLine": 110
               }
             ],
             "name": [
@@ -4246,7 +4218,7 @@
                 },
                 "tagName": "name",
                 "description": "modifier",
-                "startingLine": 114
+                "startingLine": 111
               }
             ],
             "type": [
@@ -4260,7 +4232,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 115,
+                "startingLine": 112,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4278,7 +4250,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]The appearance of the dialog.[/en]\n [ja]ダイアログの見た目を指定します。[/ja]",
-                "startingLine": 116
+                "startingLine": 113
               }
             ]
           },
@@ -4297,7 +4269,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 115,
+        "startingLine": 112,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4319,8 +4291,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 122,
-      "endingLine": 128,
+      "startingLine": 119,
+      "endingLine": 125,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4333,7 +4305,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 122
+            "startingLine": 119
           },
           {
             "tagDef": {
@@ -4342,7 +4314,7 @@
             },
             "tagName": "name",
             "description": "cancelable",
-            "startingLine": 123
+            "startingLine": 120
           },
           {
             "tagDef": {
@@ -4350,7 +4322,7 @@
             },
             "tagName": "description",
             "description": " [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]\n [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]",
-            "startingLine": 124
+            "startingLine": 121
           }
         ],
         "tagsByName": {
@@ -4364,7 +4336,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 122
+                "startingLine": 119
               }
             ],
             "name": [
@@ -4375,7 +4347,7 @@
                 },
                 "tagName": "name",
                 "description": "cancelable",
-                "startingLine": 123
+                "startingLine": 120
               }
             ],
             "description": [
@@ -4385,7 +4357,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]\n [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]",
-                "startingLine": 124
+                "startingLine": 121
               }
             ]
           },
@@ -4406,8 +4378,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 130,
-      "endingLine": 136,
+      "startingLine": 127,
+      "endingLine": 133,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4420,7 +4392,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 130
+            "startingLine": 127
           },
           {
             "tagDef": {
@@ -4429,7 +4401,7 @@
             },
             "tagName": "name",
             "description": "disabled",
-            "startingLine": 131
+            "startingLine": 128
           },
           {
             "tagDef": {
@@ -4437,7 +4409,7 @@
             },
             "tagName": "description",
             "description": " [en]If this attribute is set the dialog is disabled.[/en]\n [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]",
-            "startingLine": 132
+            "startingLine": 129
           }
         ],
         "tagsByName": {
@@ -4451,7 +4423,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 130
+                "startingLine": 127
               }
             ],
             "name": [
@@ -4462,7 +4434,7 @@
                 },
                 "tagName": "name",
                 "description": "disabled",
-                "startingLine": 131
+                "startingLine": 128
               }
             ],
             "description": [
@@ -4472,7 +4444,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]If this attribute is set the dialog is disabled.[/en]\n [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]",
-                "startingLine": 132
+                "startingLine": 129
               }
             ]
           },
@@ -4493,8 +4465,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 138,
-      "endingLine": 146,
+      "startingLine": 135,
+      "endingLine": 143,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4507,7 +4479,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 138
+            "startingLine": 135
           },
           {
             "tagDef": {
@@ -4516,7 +4488,7 @@
             },
             "tagName": "name",
             "description": "animation",
-            "startingLine": 139
+            "startingLine": 136
           },
           {
             "tagDef": {
@@ -4528,7 +4500,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 140,
+            "startingLine": 137,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4544,7 +4516,7 @@
             },
             "tagName": "default",
             "description": "default",
-            "startingLine": 141
+            "startingLine": 138
           },
           {
             "tagDef": {
@@ -4552,7 +4524,7 @@
             },
             "tagName": "description",
             "description": " [en]The animation used when showing and hiding the dialog. Can be either \"none\" or \"default\".[/en]\n [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは\"none\"か\"default\"が指定できます。[/ja]",
-            "startingLine": 142
+            "startingLine": 139
           }
         ],
         "tagsByName": {
@@ -4566,7 +4538,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 138
+                "startingLine": 135
               }
             ],
             "name": [
@@ -4577,7 +4549,7 @@
                 },
                 "tagName": "name",
                 "description": "animation",
-                "startingLine": 139
+                "startingLine": 136
               }
             ],
             "type": [
@@ -4591,7 +4563,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 140,
+                "startingLine": 137,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4609,7 +4581,7 @@
                 },
                 "tagName": "default",
                 "description": "default",
-                "startingLine": 141
+                "startingLine": 138
               }
             ],
             "description": [
@@ -4619,7 +4591,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]The animation used when showing and hiding the dialog. Can be either \"none\" or \"default\".[/en]\n [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは\"none\"か\"default\"が指定できます。[/ja]",
-                "startingLine": 142
+                "startingLine": 139
               }
             ]
           },
@@ -4638,7 +4610,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 140,
+        "startingLine": 137,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4661,8 +4633,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 148,
-      "endingLine": 155,
+      "startingLine": 145,
+      "endingLine": 152,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4675,7 +4647,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 148
+            "startingLine": 145
           },
           {
             "tagDef": {
@@ -4684,7 +4656,7 @@
             },
             "tagName": "name",
             "description": "animation-options",
-            "startingLine": 149
+            "startingLine": 146
           },
           {
             "tagDef": {
@@ -4696,7 +4668,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 150,
+            "startingLine": 147,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -4712,7 +4684,7 @@
             },
             "tagName": "description",
             "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
-            "startingLine": 151
+            "startingLine": 148
           }
         ],
         "tagsByName": {
@@ -4726,7 +4698,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 148
+                "startingLine": 145
               }
             ],
             "name": [
@@ -4737,7 +4709,7 @@
                 },
                 "tagName": "name",
                 "description": "animation-options",
-                "startingLine": 149
+                "startingLine": 146
               }
             ],
             "type": [
@@ -4751,7 +4723,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 150,
+                "startingLine": 147,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -4769,7 +4741,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]\n [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]",
-                "startingLine": 151
+                "startingLine": 148
               }
             ]
           },
@@ -4788,7 +4760,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 150,
+        "startingLine": 147,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -4810,8 +4782,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 158,
-      "endingLine": 166,
+      "startingLine": 155,
+      "endingLine": 163,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4824,7 +4796,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 158
+            "startingLine": 155
           },
           {
             "tagDef": {
@@ -4833,7 +4805,7 @@
             },
             "tagName": "name",
             "description": "mask-color",
-            "startingLine": 159
+            "startingLine": 156
           },
           {
             "tagDef": {
@@ -4845,7 +4817,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 160,
+            "startingLine": 157,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -4861,7 +4833,7 @@
             },
             "tagName": "default",
             "description": "rgba(0, 0, 0, 0.2)",
-            "startingLine": 161
+            "startingLine": 158
           },
           {
             "tagDef": {
@@ -4869,7 +4841,7 @@
             },
             "tagName": "description",
             "description": " [en]Color of the background mask. Default is \"rgba(0, 0, 0, 0.2)\".[/en]\n [ja]背景のマスクの色を指定します。\"rgba(0, 0, 0, 0.2)\"がデフォルト値です。[/ja]",
-            "startingLine": 162
+            "startingLine": 159
           }
         ],
         "tagsByName": {
@@ -4883,7 +4855,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 158
+                "startingLine": 155
               }
             ],
             "name": [
@@ -4894,7 +4866,7 @@
                 },
                 "tagName": "name",
                 "description": "mask-color",
-                "startingLine": 159
+                "startingLine": 156
               }
             ],
             "type": [
@@ -4908,7 +4880,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 160,
+                "startingLine": 157,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -4926,7 +4898,7 @@
                 },
                 "tagName": "default",
                 "description": "rgba(0, 0, 0, 0.2)",
-                "startingLine": 161
+                "startingLine": 158
               }
             ],
             "description": [
@@ -4936,7 +4908,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Color of the background mask. Default is \"rgba(0, 0, 0, 0.2)\".[/en]\n [ja]背景のマスクの色を指定します。\"rgba(0, 0, 0, 0.2)\"がデフォルト値です。[/ja]",
-                "startingLine": 162
+                "startingLine": 159
               }
             ]
           },
@@ -4955,7 +4927,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 160,
+        "startingLine": 157,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -4978,8 +4950,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 168,
-      "endingLine": 177,
+      "startingLine": 165,
+      "endingLine": 174,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -4992,7 +4964,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 168
+            "startingLine": 165
           },
           {
             "tagDef": {
@@ -5001,7 +4973,7 @@
             },
             "tagName": "name",
             "description": "ons-preshow",
-            "startingLine": 169
+            "startingLine": 166
           },
           {
             "tagDef": {
@@ -5009,7 +4981,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 170
+            "startingLine": 167
           },
           {
             "tagDef": {
@@ -5021,7 +4993,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 171,
+            "startingLine": 168,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -5037,7 +5009,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 172
+            "startingLine": 169
           },
           {
             "tagDef": {
@@ -5045,7 +5017,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"preshow\" event is fired.[/en]\n [ja]\"preshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 173
+            "startingLine": 170
           }
         ],
         "tagsByName": {
@@ -5059,7 +5031,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 168
+                "startingLine": 165
               }
             ],
             "name": [
@@ -5070,7 +5042,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-preshow",
-                "startingLine": 169
+                "startingLine": 166
               }
             ],
             "initonly": [
@@ -5080,7 +5052,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 170
+                "startingLine": 167
               }
             ],
             "type": [
@@ -5094,7 +5066,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 171,
+                "startingLine": 168,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -5112,7 +5084,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 172
+                "startingLine": 169
               }
             ],
             "description": [
@@ -5122,7 +5094,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"preshow\" event is fired.[/en]\n [ja]\"preshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 173
+                "startingLine": 170
               }
             ]
           },
@@ -5143,7 +5115,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 171,
+        "startingLine": 168,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -5165,8 +5137,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 179,
-      "endingLine": 188,
+      "startingLine": 176,
+      "endingLine": 185,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -5179,7 +5151,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 179
+            "startingLine": 176
           },
           {
             "tagDef": {
@@ -5188,7 +5160,7 @@
             },
             "tagName": "name",
             "description": "ons-prehide",
-            "startingLine": 180
+            "startingLine": 177
           },
           {
             "tagDef": {
@@ -5196,7 +5168,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 181
+            "startingLine": 178
           },
           {
             "tagDef": {
@@ -5208,7 +5180,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 182,
+            "startingLine": 179,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -5224,7 +5196,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 183
+            "startingLine": 180
           },
           {
             "tagDef": {
@@ -5232,7 +5204,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"prehide\" event is fired.[/en]\n [ja]\"prehide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 184
+            "startingLine": 181
           }
         ],
         "tagsByName": {
@@ -5246,7 +5218,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 179
+                "startingLine": 176
               }
             ],
             "name": [
@@ -5257,7 +5229,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-prehide",
-                "startingLine": 180
+                "startingLine": 177
               }
             ],
             "initonly": [
@@ -5267,7 +5239,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 181
+                "startingLine": 178
               }
             ],
             "type": [
@@ -5281,7 +5253,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 182,
+                "startingLine": 179,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -5299,7 +5271,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 183
+                "startingLine": 180
               }
             ],
             "description": [
@@ -5309,7 +5281,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"prehide\" event is fired.[/en]\n [ja]\"prehide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 184
+                "startingLine": 181
               }
             ]
           },
@@ -5330,7 +5302,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 182,
+        "startingLine": 179,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -5352,8 +5324,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 190,
-      "endingLine": 199,
+      "startingLine": 187,
+      "endingLine": 196,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -5366,7 +5338,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 190
+            "startingLine": 187
           },
           {
             "tagDef": {
@@ -5375,7 +5347,7 @@
             },
             "tagName": "name",
             "description": "ons-postshow",
-            "startingLine": 191
+            "startingLine": 188
           },
           {
             "tagDef": {
@@ -5383,7 +5355,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 192
+            "startingLine": 189
           },
           {
             "tagDef": {
@@ -5395,7 +5367,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 193,
+            "startingLine": 190,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -5411,7 +5383,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 194
+            "startingLine": 191
           },
           {
             "tagDef": {
@@ -5419,7 +5391,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"postshow\" event is fired.[/en]\n [ja]\"postshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 195
+            "startingLine": 192
           }
         ],
         "tagsByName": {
@@ -5433,7 +5405,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 190
+                "startingLine": 187
               }
             ],
             "name": [
@@ -5444,7 +5416,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-postshow",
-                "startingLine": 191
+                "startingLine": 188
               }
             ],
             "initonly": [
@@ -5454,7 +5426,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 192
+                "startingLine": 189
               }
             ],
             "type": [
@@ -5468,7 +5440,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 193,
+                "startingLine": 190,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -5486,7 +5458,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 194
+                "startingLine": 191
               }
             ],
             "description": [
@@ -5496,7 +5468,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"postshow\" event is fired.[/en]\n [ja]\"postshow\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 195
+                "startingLine": 192
               }
             ]
           },
@@ -5517,7 +5489,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 193,
+        "startingLine": 190,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -5539,8 +5511,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 201,
-      "endingLine": 210,
+      "startingLine": 198,
+      "endingLine": 207,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -5553,7 +5525,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 201
+            "startingLine": 198
           },
           {
             "tagDef": {
@@ -5562,7 +5534,7 @@
             },
             "tagName": "name",
             "description": "ons-posthide",
-            "startingLine": 202
+            "startingLine": 199
           },
           {
             "tagDef": {
@@ -5570,7 +5542,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 203
+            "startingLine": 200
           },
           {
             "tagDef": {
@@ -5582,7 +5554,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 204,
+            "startingLine": 201,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -5598,7 +5570,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 205
+            "startingLine": 202
           },
           {
             "tagDef": {
@@ -5606,7 +5578,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"posthide\" event is fired.[/en]\n [ja]\"posthide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 206
+            "startingLine": 203
           }
         ],
         "tagsByName": {
@@ -5620,7 +5592,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 201
+                "startingLine": 198
               }
             ],
             "name": [
@@ -5631,7 +5603,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-posthide",
-                "startingLine": 202
+                "startingLine": 199
               }
             ],
             "initonly": [
@@ -5641,7 +5613,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 203
+                "startingLine": 200
               }
             ],
             "type": [
@@ -5655,7 +5627,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 204,
+                "startingLine": 201,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -5673,7 +5645,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 205
+                "startingLine": 202
               }
             ],
             "description": [
@@ -5683,7 +5655,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"posthide\" event is fired.[/en]\n [ja]\"posthide\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 206
+                "startingLine": 203
               }
             ]
           },
@@ -5704,7 +5676,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 204,
+        "startingLine": 201,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",
@@ -5726,8 +5698,8 @@
         "baseName": "alertDialog",
         "extension": "js"
       },
-      "startingLine": 212,
-      "endingLine": 221,
+      "startingLine": 209,
+      "endingLine": 218,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -5740,7 +5712,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 212
+            "startingLine": 209
           },
           {
             "tagDef": {
@@ -5749,7 +5721,7 @@
             },
             "tagName": "name",
             "description": "ons-destroy",
-            "startingLine": 213
+            "startingLine": 210
           },
           {
             "tagDef": {
@@ -5757,7 +5729,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 214
+            "startingLine": 211
           },
           {
             "tagDef": {
@@ -5769,7 +5741,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 215,
+            "startingLine": 212,
             "typeExpression": "Expression",
             "type": {
               "type": "NameExpression",
@@ -5785,7 +5757,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 216
+            "startingLine": 213
           },
           {
             "tagDef": {
@@ -5793,7 +5765,7 @@
             },
             "tagName": "description",
             "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-            "startingLine": 217
+            "startingLine": 214
           }
         ],
         "tagsByName": {
@@ -5807,7 +5779,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 212
+                "startingLine": 209
               }
             ],
             "name": [
@@ -5818,7 +5790,7 @@
                 },
                 "tagName": "name",
                 "description": "ons-destroy",
-                "startingLine": 213
+                "startingLine": 210
               }
             ],
             "initonly": [
@@ -5828,7 +5800,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 214
+                "startingLine": 211
               }
             ],
             "type": [
@@ -5842,7 +5814,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 215,
+                "startingLine": 212,
                 "typeExpression": "Expression",
                 "type": {
                   "type": "NameExpression",
@@ -5860,7 +5832,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 216
+                "startingLine": 213
               }
             ],
             "description": [
@@ -5870,7 +5842,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Allows you to specify custom behavior when the \"destroy\" event is fired.[/en]\n [ja]\"destroy\"イベントが発火された時の挙動を独自に指定できます。[/ja]",
-                "startingLine": 217
+                "startingLine": 214
               }
             ]
           },
@@ -5891,7 +5863,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 215,
+        "startingLine": 212,
         "typeExpression": "Expression",
         "type": {
           "type": "NameExpression",

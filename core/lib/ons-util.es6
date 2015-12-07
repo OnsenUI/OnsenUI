@@ -263,4 +263,10 @@ limitations under the License.
     return false;
   };
 
+  /**
+   * @param {String}
+   * @return {Object}
+   */
+  util.animationOptionsParse = ons._animationOptionsParser.parse;
+
 })(window.ons = window.ons || {});
