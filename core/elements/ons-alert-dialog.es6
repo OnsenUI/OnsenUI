@@ -22,6 +22,7 @@ limitations under the License.
   const ModifierUtil = ons._internal.ModifierUtil;
   const scheme = {
     '': 'alert-dialog--*',
+    '.alert-dialog-container': 'alert-dialog-container--*',
     '.alert-dialog-title': 'alert-dialog-title--*',
     '.alert-dialog-content': 'alert-dialog-content--*',
     '.alert-dialog-footer': 'alert-dialog-footer--*',
@@ -46,11 +47,11 @@ limitations under the License.
   class AlertDialogElement extends ons._BaseElement {
 
     get _titleElement() {
-      return util.findChild(this, '.alert-dialog-title');
+      return util.findChild(this.children[0], '.alert-dialog-title');
     }
 
     get _contentElement() {
-      return util.findChild(this, '.alert-dialog-content');
+      return util.findChild(this.children[0], '.alert-dialog-content');
     }
 
     get _dialog() {

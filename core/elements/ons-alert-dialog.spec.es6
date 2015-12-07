@@ -4,13 +4,15 @@ describe('OnsAlertDialogElement', () => {
   beforeEach(() => {
     dialog = ons._util.createElement(`
       <ons-alert-dialog mask-color="red">
-        <div class="alert-dialog-title">Warning!</div>
-        <div class="alert-dialog-content">
-          An error has occurred!
-        </div>
-        <div class="alert-dialog-footer">
-          <button class="alert-dialog-button">Cancel</button>
-          <button class="alert-dialog-button">OK</button>
+        <div class="alert-dialog-container">
+          <div class="alert-dialog-title">Warning!</div>
+          <div class="alert-dialog-content">
+            An error has occurred!
+          </div>
+          <div class="alert-dialog-footer">
+            <button class="alert-dialog-button">Cancel</button>
+            <button class="alert-dialog-button">OK</button>
+          </div>
         </div>
       </ons-alert-dialog>
     `);

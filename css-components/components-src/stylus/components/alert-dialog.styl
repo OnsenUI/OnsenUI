@@ -43,14 +43,16 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
 
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -66,12 +68,15 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   width 270px
   margin auto auto
   background-color var-alert-dialog-background-color
-  box-shadow 0 2px 12px rgba(0, 0, 0, 0.07)
   border-radius 8px
-  overflow hidden
-  padding 16px 0 0 0
+  overflow visible
   max-width 95%
   color var-alert-dialog-text-color
+
+.alert-dialog-container
+  height inherit
+  padding-top 16px
+  overflow hidden
 
 .alert-dialog-title
   reset-font()
@@ -177,12 +182,14 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -194,13 +201,15 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button">Cancel</button>
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button">Cancel</button>
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -212,16 +221,18 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
 
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer alert-dialog-footer--one">
-        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
-        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
-        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        <div class="alert-dialog-footer alert-dialog-footer--one">
+          <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+          <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        </div>
       </div>
     </div>
 */
@@ -232,23 +243,27 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   height: 360px
   markup:
     <div class="alert-dialog alert-dialog--material">
-      <div class="alert-dialog-title alert-dialog-title--material">
-        Dialog title
-      </div>
-      <div class="alert-dialog-content alert-dialog-content--material">
-        Some dialog content.
-      </div>
-      <div class="alert-dialog-footer alert-dialog-footer--material">
-        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
-        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      <div class="alert-dialog-container alert-dialog-container--material">
+        <div class="alert-dialog-title alert-dialog-title--material">
+          Dialog title
+        </div>
+        <div class="alert-dialog-content alert-dialog-content--material">
+          Some dialog content.
+        </div>
+        <div class="alert-dialog-footer alert-dialog-footer--material">
+          <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+        </div>
       </div>
     </div>
 */
 
 .alert-dialog--material
   border-radius 2px
-  padding-top 22px
   background-color var-material-alert-dialog-background-color
+
+.alert-dialog-container--material
+  padding-top 22px
   shadow-5()
 
 .alert-dialog-title--material
