@@ -46,7 +46,7 @@ describe('ons._animationOptionsParser', () => {
     );
     let spy = chai.spy.on(alertDialog._animatorFactory, 'newAnimator');
     alertDialog.show();
-    expect(spy).to.have.been.called.with({animationOptions:{delay:1,duration:1,timing:'ease-in'}});
+    expect(spy).to.have.been.called.with({animationOptions: {delay: 1,duration: 1,timing: 'ease-in'}});
     alertDialog.remove();
   });
 
