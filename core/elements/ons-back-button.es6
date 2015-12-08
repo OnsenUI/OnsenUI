@@ -64,16 +64,30 @@ limitations under the License.
      * @param {object}
      */
     set options(object) {
-      if (!object.hasOwnProperty('cancelIfRunning')) {
-        object.cancelIfRunning = true;
-      }
-
       this._options = object;
     }
 
     _onClick() {
       const navigator = util.findParent(this, 'ons-navigator');
       if (navigator) {
+        this.options.cancelIfRunning = true;
+
+        if (this.hasAttribute('animation')) {
+          this.options.animation = this.getAttribute('animation');
+        }
+
+        if (this.hasAttribute('animation-options')) {
+          this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
+        }
+
+        if (this.hasAttribute('on-transition-end')) {
+          this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+        }
+
+        if (this.hasAttribute('refresh')) {
+          this.options.refresh = this.getAttribute('refresh') === 'true';
+        }
+
         navigator.popPage(this.options);
       }
     }
