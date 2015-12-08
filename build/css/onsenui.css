@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.1 - 2015-11-12 */
+/*! onsenui - v2.0.0-beta.2 - 2015-12-07 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -78,15 +78,30 @@ ons-toolbar + .page__background + .page__content {
   height: 64px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier~="material"] {
+  height: 76px;
+}
+
 .page__status-bar-fill + ons-toolbar > .center,
 .page__status-bar-fill + ons-toolbar > .left,
 .page__status-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
+  height: 76px;
+}
+
+
 .page__status-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
+}
+
+.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
+  top: 76px;
 }
 
 .page__content {
@@ -104,12 +119,24 @@ ons-toolbar + .page__background + .page__content {
   display: none;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top__content {
+.tab-bar__status-bar-fill + .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top {
+.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
   padding-top: 22px;
+}
+
+ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
+  padding-top: 0px;
+}
+
+ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content {
+  top: 49px;
+}
+
+ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
+  padding-top: 0px;
 }
 
 ons-dialog[disabled] > .dialog,
@@ -454,17 +481,17 @@ limitations under the License.
 
  */
 
-ons-progress {
+ons-progress-bar {
   display: block;
 }
 
-ons-progress[type="circular"] {
+ons-progress-circular {
   display: inline-block;
   width: 42px;
   height: 42px;
 }
 
-ons-progress > svg.progress-circular {
+ons-progress-circular > svg.progress-circular {
   width: 100%;
   height: 100%;
 }

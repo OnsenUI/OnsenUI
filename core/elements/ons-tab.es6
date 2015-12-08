@@ -20,7 +20,9 @@ limitations under the License.
 
   const scheme = {
     '': 'tab-bar--*__item',
-    '.tab-bar__button': 'tab-bar--*__button'
+    '.tab-bar__button': 'tab-bar--*__button',
+    '.tab-bar__icon': 'tab-bar--*__icon',
+    '.tab-bar__label': 'tab-bar--*__label'
   };
   const ModifierUtil = ons._internal.ModifierUtil;
   const util = ons._util;
@@ -33,7 +35,7 @@ limitations under the License.
   const defaultInnerTemplateSource = util.createElement(`
     <div>
       <div class="tab-bar__icon">
-        <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
+        <ons-icon icon="ion-cloud"></ons-icon>
       </div>
       <div class="tab-bar__label">label</div>
     </div>
@@ -210,8 +212,14 @@ limitations under the License.
     attachedCallback() {
       this._ensureElementPosition();
 
+      const tabbar = this._findTabbarElement();
+
+      if (tabbar.hasAttribute('modifier')) {
+        const prefix = this.hasAttribute('modifier') ? this.getAttribute('modifier') + ' ' : '';
+        this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
+      }
+
       if (this.hasAttribute('active')) {
-        const tabbar = this._findTabbarElement();
         const tabIndex = this._findTabIndex();
 
         window.OnsTabbarElement.rewritables.ready(tabbar, () => {

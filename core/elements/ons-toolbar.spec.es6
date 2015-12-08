@@ -77,12 +77,6 @@ describe('OnsToolbarElement', () => {
   });
   */
 
-  it('recognizes Android platform', () => {
-    if (ons.platform.isAndroid() && !this.hasAttribute('fixed-style')) {
-      expect(element.classList.contains('navigation-bar--android')).to.be.true;
-    }
-  });
-
   describe('#attachedCallbad()', () => {
     it('does not register extra element when has no parent ons-page', () => {
       var spy = chai.spy.on(element, '_registerToolbar');
@@ -92,12 +86,6 @@ describe('OnsToolbarElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('adds Android class', () => {
-      ons.platform.select('android');
-      let element = new OnsToolbarElement();
-      expect(element.classList.contains('navigation-bar--android')).to.be.true;
-    });
-
     it('removes non-element children', () => {
       let element = ons._util.createElement('<ons-toolbar>Test1<div class="center">Test2</div></ons-toolbar>');
       expect(element.childNodes[0].nodeValue).not.to.equal('Test1');

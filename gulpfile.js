@@ -28,7 +28,7 @@ var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
 var dgeni = require('dgeni');
-var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
+var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
@@ -67,6 +67,7 @@ gulp.task('core', function() {
     'core/lib/ons-gesture-detector.es6',
     'core/lib/device-back-button-dispatcher.es6',
     'core/lib/ons.es6',
+    'core/lib/animationOptionsParser.es6',
     'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
     'core/lib/splitter-animator.es6',
@@ -221,6 +222,7 @@ gulp.task('prepare', ['html2js', 'core'], function() {
 
     // angular-onsenui.js
     gulp.src([
+      'framework/vendor/*.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/onsen.js',

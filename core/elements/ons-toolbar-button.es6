@@ -25,7 +25,6 @@ limitations under the License.
 
     createdCallback() {
       this.classList.add('toolbar-button');
-      this.classList.add('navigation-bar__line-height');
 
       ModifierUtil.initModifier(this, scheme);
     }

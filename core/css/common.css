@@ -77,15 +77,30 @@ ons-toolbar + .page__background + .page__content {
   height: 64px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier~="material"] {
+  height: 76px;
+}
+
 .page__status-bar-fill + ons-toolbar > .center,
 .page__status-bar-fill + ons-toolbar > .left,
 .page__status-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
+.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
+  height: 76px;
+}
+
+
 .page__status-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
+}
+
+.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
+  top: 76px;
 }
 
 .page__content {
@@ -103,12 +118,24 @@ ons-toolbar + .page__background + .page__content {
   display: none;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top__content {
+.tab-bar__status-bar-fill + .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill ~ .tab-bar--top {
+.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
   padding-top: 22px;
+}
+
+ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
+  padding-top: 0px;
+}
+
+ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content {
+  top: 49px;
+}
+
+ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
+  padding-top: 0px;
 }
 
 ons-dialog[disabled] > .dialog,
@@ -192,4 +219,8 @@ ons-material-input[no-float] > .text-input--material__label--active {
 ons-material-input[disabled] {
   opacity: 0.5;
   pointer-events: none;
+}
+
+ons-toolbar-button > ons-icon[icon*="ion-"] {
+  font-size: 32px;
 }

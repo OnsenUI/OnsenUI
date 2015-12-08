@@ -98,14 +98,9 @@ limitations under the License.
     }
 
     _compile() {
-      var shouldAppendAndroidModifier = ons.platform.isAndroid() && !this.hasAttribute('fixed-style');
       var inline = this.hasAttribute('inline');
 
       this.classList.add('navigation-bar');
-
-      if (shouldAppendAndroidModifier) {
-        this.classList.add('navigation-bar--android');
-      }
 
       if (!inline) {
         this.style.position = 'absolute';

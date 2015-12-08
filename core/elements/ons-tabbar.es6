@@ -134,15 +134,29 @@ limitations under the License.
         this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
       }
 
-      if (ons._internal.shouldFillStatusBar(this)) {
-        // Adjustments for IOS7
-        var fill = document.createElement('div');
-        fill.classList.add('tab-bar__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
+      ons._internal.shouldFillStatusBar(this)
+        .then(() => {
+          let fill = this.querySelector('.tab-bar__status-bar-fill');
 
-        this.insertBefore(fill, this.children[0]);
-      }
+          if (fill instanceof HTMLElement) {
+            return fill;
+          }
+
+          fill = document.createElement('div');
+          fill.classList.add('tab-bar__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          this.insertBefore(fill, this.children[0]);
+
+          return fill;
+        })
+        .catch(() => {
+          const el = this.querySelector('.tab-bar__status-bar-fill');
+          if (el instanceof HTMLElement) {
+            el.remove();
+          }
+        });
     }
 
     _getTabbarElement() {
@@ -226,6 +240,9 @@ limitations under the License.
      * @param {Number} options.previousTabIndex
      */
     _switchPage(element, options) {
+      if (this._hasTopTabbar()) {
+        element.setAttribute('no-status-bar-fill', '');
+      }
 
       if (this.getActiveTabIndex() !== -1) {
         var oldPageElement = this._oldPageElement || ons._internal.nullElement;
@@ -314,6 +331,19 @@ limitations under the License.
 
       var needLoad = !selectedTab.isLoaded() && !options.keepPage;
 
+      util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
+        if (tab != selectedTab) {
+          tab.setInactive();
+        } else {
+          if (!needLoad) {
+            util.triggerElementEvent(this, 'postchange', {
+              index: index,
+              tabItem: selectedTab
+            });
+          }
+        }
+      });
+
       if (needLoad) {
         var removeElement = true;
 
@@ -352,19 +382,6 @@ limitations under the License.
           this._loadPage(selectedTab.getAttribute('page'), params);
         }
       }
-
-      util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
-        if (tab != selectedTab) {
-          tab.setInactive();
-        } else {
-          if (!needLoad) {
-            util.triggerElementEvent(this, 'postchange', {
-              index: index,
-              tabItem: selectedTab
-            });
-          }
-        }
-      });
 
       return true;
     }
