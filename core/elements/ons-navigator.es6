@@ -93,6 +93,10 @@ limitations under the License.
 
       const onTransitionEnd = options.onTransitionEnd || function() {};
 
+      if (this._pages.length === 1) {
+        options._forceHideBackButton = true;
+      }
+
       options.onTransitionEnd = () => {
         if (this._pages.length > 1) {
           this._pages[this._pages.length - 2].destroy();
@@ -329,9 +333,10 @@ limitations under the License.
         while (this._pages.length > 1) {
           this._pages.shift().destroy();
         }
-        this._pages[0].updateBackButton();
         onTransitionEnd();
       };
+
+      options._forceHideBackButton = true;
 
       if (page === undefined || page === '') {
         if (this.hasAttribute('page')) {

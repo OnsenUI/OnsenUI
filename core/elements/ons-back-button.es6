@@ -72,6 +72,14 @@ limitations under the License.
     detachedCallback() {
       this.removeEventListener('click', this._boundOnClick, false);
     }
+
+    show() {
+      this.style.display = 'inline-block';
+    }
+
+    hide() {
+      this.style.display = 'none';
+    }
   }
 
   if (!window.OnsBackButtonElement) {
