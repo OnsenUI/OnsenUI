@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import BaseElement from '../ons/base-element';
+import BaseElement from 'ons/base-element';
 
 class ColumnElement extends BaseElement {
 

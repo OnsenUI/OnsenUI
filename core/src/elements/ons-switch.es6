@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import util from '../ons/util';
-import ModifierUtil from '../ons/internal/modifier-util';
+import util from 'ons/util';
+import ModifierUtil from 'ons/internal/modifier-util';
 
 const scheme = {
   '': 'switch--*',

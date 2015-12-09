@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import BaseElement from '../ons/base-element';
-import GestureDetector from '../ons/gesture-detector';
+import BaseElement from 'ons/base-element';
+import GestureDetector from 'ons/gesture-detector';
 
 class GestureDetectorElement extends BaseElement {
   createdCallback() {

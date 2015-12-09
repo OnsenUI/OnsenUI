@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from '../ons/util';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import util from 'ons/util';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
 
 const iOSTemplateElement = util.createElement(`
   <span

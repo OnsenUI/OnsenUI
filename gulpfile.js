@@ -71,6 +71,7 @@ function createBrowserify(options) {
     extensions: ['.js', '.es6'],
     cache: {},
     packageCache: {},
+    paths: ['./core/src']
   });
 
   if (options.watch) {

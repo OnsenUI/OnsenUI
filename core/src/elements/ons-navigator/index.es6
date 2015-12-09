@@ -15,20 +15,20 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import internal from '../../ons/internal';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import AnimatorFactory from '../../ons/internal/animator-factory';
+import util from 'ons/util';
+import internal from 'ons/internal';
+import ModifierUtil from 'ons/internal/modifier-util';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
 import SimpleSlideNavigatorTransitionAnimator from './simple-slide-animator';
 import LiftNavigatorTransitionAnimator from './lift-animator';
 import FadeNavigatorTransitionAnimator from './fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
-import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
+import platform from 'ons/platform';
+import BaseElement from 'ons/base-element';
 import NavigatorPage from './navigator-page';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 
 const _animatorDict = {
   'default': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
