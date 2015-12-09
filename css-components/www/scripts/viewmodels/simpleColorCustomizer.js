@@ -133,7 +133,18 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'material-radio-button-inactive-color',
           displayName: 'Inactive Color'
+        },
+
+        {
+          name: 'material-radio-button-ripple-active-color',
+          displayName: 'Ripple Active Color'
+        },
+
+        {
+          name: 'material-radio-button-ripple-inactive-color',
+          displayName: 'Ripple Inactive Color'
         }
+
       ]
     },
 

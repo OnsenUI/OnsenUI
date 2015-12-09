@@ -88,6 +88,8 @@
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
         'material-radio-button-inactive-color': '#717171',
+        'material-radio-button-ripple-active-color': 'rgba(0, 150, 136, 0.15)',
+        'material-radio-button-ripple-inactive-color': 'rgba(113, 113, 113, 0.15)',
 
         // Material Text Input
         'material-text-input-text-color': '#212121',
@@ -205,6 +207,8 @@
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
         'material-radio-button-inactive-color': '#717171',
+        'material-radio-button-ripple-active-color': 'rgba(0, 150, 136, 0.15)',
+        'material-radio-button-ripple-inactive-color': 'rgba(113, 113, 113, 0.15)',
 
         // Material Text Input
         'material-text-input-text-color': '#212121',
@@ -321,7 +325,9 @@
 
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
-        'material-radio-button-inactive-color': '#f5f5f5',
+        'material-radio-button-inactive-color': '#717171',
+        'material-radio-button-ripple-active-color': 'rgba(0, 150, 136, 0.15)',
+        'material-radio-button-ripple-inactive-color': 'rgba(113, 113, 113, 0.15)',
 
         // Material Text Input
         'material-text-input-text-color': '#ffffff',
@@ -438,6 +444,8 @@
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
         'material-radio-button-inactive-color': '#717171',
+        'material-radio-button-ripple-active-color': 'rgba(0, 150, 136, 0.15)',
+        'material-radio-button-ripple-inactive-color': 'rgba(113, 113, 113, 0.15)',
 
         // Material Text Input
         'material-text-input-text-color': '#212121',
@@ -555,6 +563,8 @@
         // Material Radio Button
         'material-radio-button-active-color': '#009688',
         'material-radio-button-inactive-color': '#717171',
+        'material-radio-button-ripple-active-color': 'rgba(0, 150, 136, 0.15)',
+        'material-radio-button-ripple-inactive-color': 'rgba(113, 113, 113, 0.15)',
 
         // Material Text Input
         'material-text-input-text-color': '#212121',
