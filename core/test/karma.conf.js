@@ -21,27 +21,49 @@ module.exports = function(config) {
       '../../build/css/onsen-css-components.css'
     ],
 
+    preprocessors: {
+      '../../core/test/setup.es6': ['babel'],
+      '../../core/src/**/*.spec.es6': ['babel']
+    },
+
+    babelPreprocessor: {
+      options: {
+        //presets: ['es2015'],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
+    },
+
     // list of files to exclude
     exclude: [
     ],
 
 
     // preprocess matching files before serving them to the browser
+    /*
     webpack: {
-        module: {
-            preLoaders: [
-                {
-                  test: /spec\.es6$/,
-                  loader: 'babel'
-                },
-                {
-                  test: /\.es6$/,
-                  exclude: /spec\.es6$/,
-                  loader: 'isparta'
-                }
-            ],
-        }
-    },
+      module: {
+        preLoaders: [
+          {
+            test: /spec\.es6$/,
+            loader: 'babel',
+            query: {
+              //presets: ['es2015']
+            }
+          },
+          {
+            test: /\.es6$/,
+            exclude: /spec\.es6$/,
+            loader: 'isparta'
+          }
+        ],
+      }
+    },*/
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
