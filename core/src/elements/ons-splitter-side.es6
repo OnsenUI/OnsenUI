@@ -20,6 +20,8 @@ import AnimatorFactory from '../ons/internal/animator-factory';
 import internal from '../ons/internal/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
+import SplitterAnimator from './ons-splitter/animator';
+import GestureDetector from '../ons/gesture-detector';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -495,7 +497,7 @@ class SplitterSideElement extends BaseElement {
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
-      baseClass: internal.SplitterAnimator,
+      baseClass: SplitterAnimator,
       baseClassName: 'SplitterAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
@@ -824,7 +826,7 @@ class SplitterSideElement extends BaseElement {
     this._collapseStrategy.activate(this);
     this._assertParent();
 
-    this._gestureDetector = new ons.GestureDetector(this.parentElement, {dragMinDistance: 1});
+    this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
     this._updateForSwipeableAttribute();
 
     if (this.hasAttribute('page')) {

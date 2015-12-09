@@ -18,7 +18,7 @@ ons._internal = internal;
 ons.gestureDetector = gestureDetector;
 ons.platform = platform;
 ons.softwareKeyboard = softwareKeyboard;
-ons.PageAttributeExpression = PageAttributeExpression;
+ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
 

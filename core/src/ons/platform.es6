@@ -17,186 +17,188 @@ limitations under the License.
 
 import ons from './ons';
 
-const platform = {
+class Platform {
 
   /**
    * All elements will be rendered as if the app was running on this platform.
    * @type {String}
    */
-  _renderPlatform: null,
+  constructor() {
+    this._renderPlatform = null;
+  }
 
   /**
    * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
    * @param  {string} platform Name of the platform.
    */
-  select: function(platform) {
-    platform._renderPlatform = platform.trim().toLowerCase();
-  },
+  select(platform) {
+    this._renderPlatform = platform.trim().toLowerCase();
+  }
 
   /**
    * @return {Boolean}
    */
-  isWebView: function() {
+  isWebView() {
     return ons.isWebView();
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIOS: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'ios';
+  isIOS() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'ios';
     } else if (typeof device === 'object') {
       return /iOS/i.test(device.platform);
     } else {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isAndroid: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'android';
+  isAndroid() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'android';
     } else if (typeof device === 'object') {
       return /Android/i.test(device.platform);
     } else {
       return /Android/i.test(navigator.userAgent);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isAndroidPhone: function() {
+  isAndroidPhone() {
     return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isAndroidTablet: function() {
+  isAndroidTablet() {
     return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isWP: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'wp';
+  isWP() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'wp';
     } else if (typeof device === 'object') {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
       return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIPhone: function() {
+  isIPhone() {
     return /iPhone/i.test(navigator.userAgent);
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIPad: function() {
+  isIPad() {
     return /iPad/i.test(navigator.userAgent);
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIPod: function() {
+  isIPod() {
     return /iPod/i.test(navigator.userAgent);
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isBlackBerry: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'blackberry';
+  isBlackBerry() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'blackberry';
     } else if (typeof device === 'object') {
       return /BlackBerry/i.test(device.platform);
     } else {
       return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isOpera: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'opera';
+  isOpera() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'opera';
     } else {
       return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isFirefox: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'firefox';
+  isFirefox() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'firefox';
     } else {
       return (typeof InstallTrigger !== 'undefined');
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isSafari: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'safari';
+  isSafari() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'safari';
     } else {
       return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isChrome: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'chrome';
+  isChrome() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'chrome';
     } else {
       return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIE: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'ie';
+  isIE() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'ie';
     } else {
       return false || !!document.documentMode;
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isEdge: function() {
-    if (platform._renderPlatform) {
-      return platform._renderPlatform === 'edge';
+  isEdge() {
+    if (this._renderPlatform) {
+      return this._renderPlatform === 'edge';
     } else {
       return navigator.userAgent.indexOf(' Edge/') >= 0;
     }
-  },
+  }
 
   /**
    * @return {Boolean}
    */
-  isIOS7above: function() {
+  isIOS7above() {
     if (typeof device === 'object') {
       return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
     } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -204,12 +206,12 @@ const platform = {
       return (parseInt(ver.split('.')[0]) >= 7);
     }
     return false;
-  },
+  }
 
   /**
    * @return {String}
    */
-  getMobileOS: function() {
+  getMobileOS() {
     if (this.isAndroid()) {
       return 'android';
     }
@@ -222,12 +224,12 @@ const platform = {
     else {
       return 'other';
     }
-  },
+  }
 
   /**
    * @return {String}
    */
-  getIOSDevice: function() {
+  getIOSDevice() {
     if (this.isIPhone()) {
       return 'iphone';
     }
@@ -241,6 +243,7 @@ const platform = {
       return 'na';
     }
   }
-};
+}
 
-export default platform;
+
+export default new Platform();

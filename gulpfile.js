@@ -101,7 +101,7 @@ function bundleBrowserify(browserify) {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', function(done) {
+gulp.task('watch-core', function() {
   var b = createBrowserify({watch: true});
 
   b.on('update', function(event) {
@@ -133,7 +133,7 @@ gulp.task('core-test', ['core'], function() {
 ////////////////////////////////////////
 // watch-core-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', function() {
+gulp.task('watch-core-test', ['watch-core'], function() {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
