@@ -31,28 +31,37 @@ describe('OnsBackButtonElement', () => {
   });
 
   describe('#_onClick()', () => {
-    it('will pop a page', () => {
-      let div = ons._util.createElement(`
+    let div, nav;
+
+    beforeEach((done) => {
+      div = ons._util.createElement(`
         <div>
           <ons-template id="page1">
-            <ons-page></ons-page>
+            <ons-page id="p1"></ons-page>
           </ons-template>
           <ons-template id="page2">
-            <ons-page>
+            <ons-page id="p2">
               <ons-back-button>content</ons-back-button>
             </ons-page>
           </ons-template>
-          <ons-navigator page="page1"></ons-navigator>
         </div>
       `);
 
+      nav = new OnsNavigatorElement();
       document.body.appendChild(div);
+      document.body.appendChild(nav);
+      nav.resetToPage('page1', {animation: 'default', onTransitionEnd: done});
+    });
 
-      let nav = div.querySelector('ons-navigator');
+    afterEach(() => {
+      div.remove();
+      nav.remove();
+      div = nav = null;
+    });
 
+    it('will pop a page', () => {
       let promise = new Promise((resolve) => {
         nav.addEventListener('postpop', () => {
-          div.remove();
           resolve();
         });
       });
@@ -65,6 +74,69 @@ describe('OnsBackButtonElement', () => {
       });
 
       return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('takes \'animation\' attribute', (done) => {
+      nav.pushPage('page2', {
+        onTransitionEnd: () => {
+          let element = nav.querySelector('ons-back-button');
+          let animation = 'fade';
+          element.setAttribute('animation', animation);
+          let tmp = nav.popPage;
+          nav.popPage = options => { if (options.animation === animation) { nav.popPage = tmp; done(); } };
+          element._onClick();
+        }
+      });
+    });
+
+    it('takes \'animation-options\' attribute', (done) => {
+      nav.pushPage('page2', {
+        onTransitionEnd: () => {
+          let element = nav.querySelector('ons-back-button');
+          element.setAttribute('animation-options', '{delay: .1, duration: .2, timing: \'ease-out\'}');
+          let spy = chai.spy.on(nav, 'popPage');
+          element._onClick();
+          expect(spy).to.have.been.called.with({cancelIfRunning: true, animationOptions: {delay: 0.1, duration: 0.2, timing: 'ease-out'}});
+          done();
+        }
+      });
+    });
+
+    it('takes \'refresh\' attribute', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('init', event => {
+          if (event.detail.page.id === 'p1') {
+            return resolve();
+          }
+        });
+      });
+
+      nav.pushPage('page2', {
+        onTransitionEnd: () => {
+          let element = nav.querySelector('ons-back-button');
+          element.setAttribute('refresh', true);
+          element._onClick();
+        }
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('takes \'onTransitionEnd\' attribute', (done) => {
+      window.onTransitionEndCompleted = done;
+
+      nav.pushPage('page2', {
+        onTransitionEnd: () => {
+          let element = nav.querySelector('ons-back-button');
+          element.setAttribute('on-transition-end',
+            'function() {\
+              var localPromise = window.onTransitionEndCompleted;\
+              window.onTransitionEndCompleted = null;\
+              localPromise();\
+            }');
+          element._onClick();
+        }
+      });
     });
   });
 });
