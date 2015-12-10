@@ -162,10 +162,6 @@ limitations under the License.
         container.classList.add(name);
       }
 
-      if (container.innerHTML.trim() === '') {
-        container.innerHTML = '&nbsp;';
-      }
-
       container.classList.add('navigation-bar__' + name);
       return container;
     }
