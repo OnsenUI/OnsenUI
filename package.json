@@ -107,7 +107,6 @@
     "yargs": "^3.5.4",
     "browserify": "^9.0.8",
     "watchify": "^3.6.1",
-    "babel-core": "^6.3.15",
     "karma-babel-preprocessor": "^6.0.1"
   }
 }
