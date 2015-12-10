@@ -38,10 +38,16 @@ limitations under the License.
 
     attachedCallback() {
       this.addEventListener('drag', this._boundOnDrag);
+      this.addEventListener('touchstart', this._onTouch);
+      this.addEventListener('touchend', this._onRelease);
+      this.addEventListener('touchmove', this._onRelease);
     }
 
     detachedCallback() {
       this.removeEventListener('drag', this._boundOnDrag);
+      this.removeEventListener('touchstart', this._onTouch);
+      this.addEventListener('touchend', this._onRelease);
+      this.addEventListener('touchmove', this._onRelease);
     }
 
     _onDrag(event) {
@@ -54,6 +60,14 @@ limitations under the License.
 
     _shouldLockOnDrag() {
       return this.hasAttribute('lock-on-drag');
+    }
+
+    _onTouch() {
+        this.className = this.className + ' ' + 'list__item--tappable-active';
+    }
+
+    _onRelease() {
+      this.classList.remove('list__item--tappable-active');
     }
   }
 
