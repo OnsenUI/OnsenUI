@@ -468,10 +468,10 @@
   window.OnsNavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
 
   var lastLink = window.OnsNavigatorElement.rewritables.link;
-  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, callback) {
+  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
     var view = angular.element(navigatorElement).data('ons-navigator');
     view._compileAndLink(target, function(target) {
-      lastLink(navigatorElement, target, callback);
+      lastLink(navigatorElement, target, options, callback);
     });
   };
 

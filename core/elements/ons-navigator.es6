@@ -49,9 +49,10 @@ limitations under the License.
     /**
      * @param {Element} navigatorElement
      * @param {Element} target
+     * @param {Object} options
      * @param {Function} callback
      */
-    link(navigatorElement, target, callback) {
+    link(navigatorElement, target, options, callback) {
       callback(target);
     }
   };
@@ -151,7 +152,7 @@ limitations under the License.
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
 
-            rewritables.link(this, element, element => {
+            rewritables.link(this, element, this._pages[index].options, element => {
               this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
               this._pages.splice(index, 0, pageObject);
 
@@ -242,7 +243,7 @@ limitations under the License.
           const element = this._createPageElement(templateHTML);
           const pageObject = this._createPageObject(page, element, options);
 
-          rewritables.link(this, element, element => {
+          rewritables.link(this, element, options, element => {
             element.style.display = 'none';
             this.insertBefore(element, this._pages[index].element);
             this._pages.splice(index, 0, pageObject);
@@ -464,7 +465,7 @@ limitations under the License.
 
       this._isPushing = true;
 
-      rewritables.link(this, element, element => {
+      rewritables.link(this, element, options, element => {
         CustomElements.upgrade(element);
 
         setTimeout(() => {

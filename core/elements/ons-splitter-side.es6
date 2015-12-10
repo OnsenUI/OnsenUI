@@ -41,9 +41,10 @@ limitations under the License.
     /**
      * @param {Element} splitterSideElement
      * @param {HTMLFragment} target
+     * @param {Object} options
      * @param {Function} callback
      */
-    link(splitterSideElement, target, callback) {
+    link(splitterSideElement, target, options, callback) {
       callback(target);
     }
   };
@@ -743,7 +744,7 @@ limitations under the License.
 
       options.callback = options.callback instanceof Function ? options.callback : () => {};
       ons._internal.getPageHTMLAsync(page).then((html) => {
-        rewritables.link(this, util.createFragment(html), (fragment) => {
+        rewritables.link(this, util.createFragment(html), options, (fragment) => {
           while (this.childNodes[0]) {
             if (this.childNodes[0]._hide instanceof Function) {
               this.childNodes[0]._hide();
