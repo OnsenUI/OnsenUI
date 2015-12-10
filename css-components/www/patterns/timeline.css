@@ -35,10 +35,11 @@
   float: right;
   font-size: 12px;
   opacity: 0.35;
+  margin-top: 3px;
 }
 
 .timeline-from {
-  margin: 10px 0 6px 0;
+  margin: 0px 0 6px 0;
 }
 
 .timeline-name {

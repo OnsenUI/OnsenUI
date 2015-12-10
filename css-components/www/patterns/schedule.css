@@ -5,8 +5,8 @@
 }
 
 .plan {
-  line-height: 1;
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .plan-left {
@@ -20,7 +20,7 @@
 }
 
 .plan-right {
-  padding: 10px 40px 10px 10px;
+  padding: 8px 40px 8px 10px;
 }
 
 .plan-date {
@@ -44,4 +44,9 @@
   opacity: 0.4;
   font-size: 12px;
   line-height: 1.4;
+}
+
+.plan-icon {
+  width: 12px;
+  margin-right: 2px;
 }

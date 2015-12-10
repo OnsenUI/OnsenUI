@@ -1,14 +1,7 @@
-.range-list {
-  text-align: center;
-}
-
-.range-wrapper .range {
-  margin-top: 7px;
-  width: 100%;
-}
-
-ons-icon {
+.icon {
   opacity: 0.8;
+  vertical-align: middle;
+  margin: 0 10px;
 }
 
 .lower {
