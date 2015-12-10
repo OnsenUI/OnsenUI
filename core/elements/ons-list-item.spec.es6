@@ -67,4 +67,13 @@ describe('OnsListItemElement', () => {
       expect(listItem.classList.contains('list__item--tappable--active')).to.be.true;
     });
   });
+
+  describe('#_onRelease()', () => {
+    it('should remove the active style', () => {
+      listItem.classList.add('list__item--tappable--active');
+
+      listItem._onRelease();
+      expect(listItem.classList.contains('list__item--tappable--active')).not.to.be.true;
+    });
+  });
 });
