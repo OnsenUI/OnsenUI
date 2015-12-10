@@ -9,7 +9,7 @@ v2.0.0-beta.3
  * ons-range: Fixed [#1082](https://github.com/OnsenUI/OnsenUI/issues/1082).
  * ons-popover: Added callback for `show` and `hide` methods.
  * ons-back-button: Accepts `options` object. Fixed [#1040](https://github.com/OnsenUI/OnsenUI/issues/1040).
- * ons-list-item: Fixed active touch behavior, closes [#740](https://github.com/OnsenUI/OnsenUI/issues/740).
+ * ons-list-item: Fixed "tappable" modifier behavior on iOS. Fixed [#740](https://github.com/OnsenUI/OnsenUI/issues/740).
 
 v2.0.0-beta.2
 ----
