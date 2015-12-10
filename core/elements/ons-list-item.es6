@@ -63,11 +63,11 @@ limitations under the License.
     }
 
     _onTouch() {
-        this.className = this.className + ' ' + 'list__item--tappable-active';
+        this.className = this.className + ' ' + 'list__item--tappable--active';
     }
 
     _onRelease() {
-      this.classList.remove('list__item--tappable-active');
+      this.classList.remove('list__item--tappable--active');
     }
   }
 
