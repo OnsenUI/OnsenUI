@@ -7,3 +7,7 @@
 .lower {
   opacity: 0.2;
 }
+
+input[type="range"] {
+  width: 100%;
+}
