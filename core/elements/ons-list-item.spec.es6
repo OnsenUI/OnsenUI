@@ -56,4 +56,15 @@ describe('OnsListItemElement', () => {
       expect(listItem._shouldLockOnDrag()).to.be.true;
     });
   });
+
+  describe('#_onTouch()', () => {
+    it('should add the active style', () => {
+      listItem.setAttribute('modifier', 'tappable');
+      expect(listItem.classList.contains('list__item--tappable')).to.be.true;
+      expect(listItem.classList.contains('list__item--tappable--active')).not.to.be.true;
+
+      listItem._onTouch();
+      expect(listItem.classList.contains('list__item--tappable--active')).to.be.true;
+    });
+  });
 });
