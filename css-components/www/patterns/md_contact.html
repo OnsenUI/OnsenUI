@@ -22,7 +22,7 @@
   <ons-page modifier="material">
     <ons-toolbar modifier="material" class="contact-interface">
       <div class="center">Dave</div>
-      <div class="right contact-toolbar-buttons">
+      <div class="right">
         <ons-toolbar-button modifier="material">
           <ons-icon icon="md-star-outline"></ons-icon>
         </ons-toolbar-button>
@@ -36,217 +36,179 @@
     </ons-toolbar>
 
    <ons-list class="contact-block" modifier="material">
-      <ons-list-item modifier="material" class="contact-block-li">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-              <ons-icon icon="md-phone" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <span class="contact-block-item-title">+81 2727 3121</span>
-            <div class="contact-block-item-details">
-              Mobile
-            </div>
-          </ons-col>
-
-          <ons-col align="center" width="50px">
-            <div class="contact-extra-container">
-              <div class="contact-extra">
-                <ons-icon icon="ion-android-hangout" class="contact-interface-text" size="28px"></ons-icon>
-              </div>
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material short-divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-phone" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            +81 2727 3121
+          </span>
+          <span class="list__item__subtitle">
+            Mobile
+          </span>
+        </div>
+        <div class="list__item__right">
+          <ons-icon icon="ion-android-hangout" class="list__item__icon"></ons-icon>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-subdivision">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-phone" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title">+81 531 633 21</span>
-            </div>
-            <div class="contact-block-item-details">
-              Home
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material short-divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-phone" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            +81 531 633 21
+          </span>
+          <span class="list__item__subtitle">
+            Mobile
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-division">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-email" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title">d.graham81@hoge.com</span>
-            </div>
-            <div class="contact-block-item-details">
-              Personal
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material short-divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-email" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            d.graham81@hoge.com
+          </span>
+          <span class="list__item__subtitle">
+            Personal
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-email" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title">Dave@fuga.com</span>
-            </div>
-            <div class="contact-block-item-details">
-              Work
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-email" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            dave@fuga.com
+          </span>
+          <span class="list__item__subtitle">
+            Work
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-footer">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-chevron-down" class="contact-interface-text" size="30px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title contact-interface-text">See all</span>
-            </div>
-          </ons-col>
-
-          <ons-col align="center">
-            <div class="contact-extra-container">
-              <div class="contact-extra contact-extra-seeall">
-                <ons-icon icon="md-whatsapp" class="contact-interface-text" size="22px"></ons-icon>
-                <ons-icon icon="md-google-plus" class="contact-interface-text" size="24px"></ons-icon>
-              </div>
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-chevron-down" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          See all
+        </div>
+        <div class="list__item__right">
+          <ons-icon icon="md-whatsapp" class="list__item__icon"></ons-icon>
+          <ons-icon icon="md-google-plus" class="list__item__icon"></ons-icon>
+        </div>
       </ons-list-item>
     </ons-list>
 
    <ons-list class="contact-block" modifier="material">
-      <ons-list-item modifier="material" class="contact-block-li contact-block-header">
-        <div class="contact-from">
-          <span class="contact-block-item-title contact-interface-text">Recent</span>
+      <ons-list-item modifier="material divider">
+        <div class="list__item__center">
+          Recent
         </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-subdivision">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-              <ons-icon icon="md-phone" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <span class="contact-block-item-title">+81 2727 3121</span>
-            <div class="contact-block-item-details">
-              Mobile
+      <ons-list-item modifier="material short-divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-phone" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            +81 2727 3121
+          </span>
+          <span class="list__item__subtitle">
+            Mobile
+            <div>
+              <ons-icon icon="md-arrow-left-bottom"></ons-icon>
+              September 21
             </div>
-            <div class="contact-block-item-details">
-              <ons-icon icon="md-arrow-left-bottom" class="contact-interface-text" size="18px"></ons-icon> 21st September
-            </div>
-          </ons-col>
-        </ons-row>
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-subdivision">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-comment-more" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title">You: Are you coming to the meeting?</span>
+      <ons-list-item modifier="material short-divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-comment-more" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            You: Are you coming to the meeting?
+          </span>
+          <span class="list__item__subtitle">
+            +81 2727 3121
+            <div>
+              <ons-icon icon="md-arrow-left-bottom"></ons-icon>
+              September 3
             </div>
-            <div class="contact-block-item-details">
-              +81 2727 3121
-            </div>
-            <div class="contact-block-item-details">
-              3rd September
-            </div>
-          </ons-col>
-        </ons-row>
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-              <ons-icon icon="md-phone" class="contact-interface-text" size="24px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <span class="contact-block-item-title">+81 2727 3121</span>
-            <div class="contact-block-item-details">
-              Mobile
+      <ons-list-item modifier="material divider">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-phone" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          <span class="list__item__title">
+            +81 2727 3121
+          </span>
+          <span class="list__item__subtitle">
+            Mobile
+            <div>
+              <ons-icon icon="md-arrow-left-bottom"></ons-icon>
+              August 30
             </div>
-            <div class="contact-block-item-details">
-              <ons-icon icon="md-arrow-left-bottom" class="contact-interface-text" size="18px"></ons-icon> 30th August
-            </div>
-          </ons-col>
-        </ons-row>
+          </span>
+        </div>
       </ons-list-item>
 
-      <ons-list-item modifier="material" class="contact-block-li contact-block-footer">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="40px" align="center" class="contact-block-col-left">
-            <ons-icon icon="md-chevron-down" class="contact-interface-text" size="30px"></ons-icon>
-          </ons-col>
-
-          <ons-col>
-            <div class="contact-from">
-              <span class="contact-block-item-title contact-interface-text">See more</span>
-            </div>
-          </ons-col>
-
-          <ons-col align="center">
-            <div class="contact-extra-container">
-              <div class="contact-extra contact-extra-seeall">
-                <ons-icon icon="md-phone" class="contact-interface-text" size="22px"></ons-icon>
-                <ons-icon icon="md-comment-more" class="contact-interface-text" size="24px"></ons-icon>
-              </div>
-            </div>
-          </ons-col>
-        </ons-row>
+      <ons-list-item modifier="material">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <ons-icon icon="md-chevron-down" class="list__item__icon"></ons-icon>
+        </div>
+        <div class="list__item__center">
+          See more
+        </div>
+        <div class="list__item__right">
+          <ons-icon icon="md-phone" class="list__item__icon"></ons-icon>
+          <ons-icon icon="md-comment-more" class="list__item__icon"></ons-icon>
+        </div>
       </ons-list-item>
     </ons-list>
 
-   <ons-list class="contact-block" modifier="material">
-      <ons-list-item modifier="material" class="contact-block-li contact-block-header">
-        <div class="contact-from">
-          <span class="contact-block-item-title contact-interface-text">About Dave</span>
-        </div>
+    <ons-list class="contact-block" modifier="material">
+      <ons-list-item modifier="material divider">
+        <div class="list__item__center">About Dave</div>
       </ons-list-item>
 
-      <ons-list-item class="contact-about">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <div class="contact-block-item-title">
-          Website
-        </div>
-        <div class="contact-block-item-details">
-          http://dgraham.io/blog
+      <ons-list-item modifier="material">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__center">
+          <div class="list__item__title">
+            Website
+          </div>
+          <div class="list__item__subtitle">
+            http://dgraham.io/blog
+          </div>
         </div>
       </ons-list-item>
-
     </ons-list>
 
   </ons-page>

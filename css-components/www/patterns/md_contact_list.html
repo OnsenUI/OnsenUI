@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
   <link rel="stylesheet" href="md_contact_list.css">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <script src="lib/onsen/js/onsenui.js"></script>
   <script src="lib/onsen/js/angular/angular.js"></script>
@@ -27,7 +27,7 @@
         </ons-toolbar-button>
       </div>
       <div class="center">Contacts</div>
-      <div class="right contact-toolbar-buttons">
+      <div class="right">
         <ons-toolbar-button modifier="material">
           <ons-icon icon="md-search"></ons-icon>
         </ons-toolbar-button>
@@ -46,45 +46,25 @@
   <ons-template id="page.html">
     <ons-list modifier="material">
       <ons-list-item modifier="material">
-        <ons-row>
-          <ons-col width="40px" align="center"  class="contact-initials">
-            Me
-          </ons-col>
-
-          <ons-col class="contact-item">
-            <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-            <ons-row>
-              <ons-col width="40px">
-                <img ng-src="images/profile-image-01.png" class="contact-avatar">
-              </ons-col>
-
-              <ons-col align="center" class="contact-name">
-                Dave Graham
-              </ons-col>
-            </ons-row>
-          </ons-col>
-        </ons-row>
+        <div class="list__item__left">
+          <span class="contact-initials">Me</span>
+        </div>
+        <div class="list__item__center">
+          <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+          <img ng-src="images/profile-image-01.png" class="list__item__thumbnail">
+          <div>Dave Graham</div>
+        </div>
       </ons-list-item>
 
       <ons-list-item modifier="material" ng-repeat="i in [2,3,4,5,6,7,8,9]">
-        <ons-row>
-          <ons-col width="40px" align="center"  class="contact-initials">
-            <span ng-show="$first">D</span>
-          </ons-col>
-
-          <ons-col class="contact-item">
-            <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-            <ons-row>
-              <ons-col width="40px">
-                <img ng-src="images/profile-image-0{{i}}.png" class="contact-avatar">
-              </ons-col>
-
-              <ons-col align="center" class="contact-name">
-                Dave Graham
-              </ons-col>
-            </ons-row>
-          </ons-col>
-        </ons-row>
+        <div class="list__item__left">
+          <span ng-show="$first" class="contact-initials">D</span>
+        </div>
+        <div class="list__item__center">
+          <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+          <img ng-src="images/profile-image-0{{i}}.png" class="list__item__thumbnail">
+          <div>Dave Graham</div>
+        </div>
       </ons-list-item>
     </ons-list>
 
