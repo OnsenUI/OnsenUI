@@ -1,7 +1,7 @@
 
 import ons from './ons/ons';
 import util from './ons/util';
-import gestureDetector from './ons/gesture-detector';
+import GestureDetector from './ons/gesture-detector';
 import deviceBackButtonDispatcher from './ons/device-back-button-dispatcher';
 import platform from './ons/platform';
 import notification from './ons/notification';
@@ -15,7 +15,7 @@ import animationOptionsParser from './ons/animation-options-parser';
 ons._util = util;
 ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
 ons._internal = internal;
-ons.gestureDetector = gestureDetector;
+ons.GestureDetector = GestureDetector;
 ons.platform = platform;
 ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
