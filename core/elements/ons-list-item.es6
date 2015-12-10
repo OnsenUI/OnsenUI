@@ -64,7 +64,7 @@ limitations under the License.
 
     _onTouch() {
       if (this.classList.contains('list__item--tappable')) {
-        this.className = this.className + ' ' + 'list__item--tappable--active';
+        this.classList.add('list__item--tappable--active');
       }
     }
 
