@@ -540,9 +540,12 @@ limitations under the License.
           let pageObject = this._pages.splice(index, 1)[0];
           pageObject.element.style.display = 'block';
           pageObject.element.setAttribute('_skipinit', '');
-          options.animator = this._animatorFactory.newAnimator(options);
-          pageObject.options = options;
 
+          if (options.animation) {
+            options.animator = this._animatorFactory.newAnimator(options);
+          }
+
+          pageObject.options = util.extend(pageObject.options, options);
           this._pushPageDOM(pageObject, done);
         });
       }
