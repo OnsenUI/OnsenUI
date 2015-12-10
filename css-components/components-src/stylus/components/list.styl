@@ -283,13 +283,13 @@ list__item()
 /*! topdoc
   name: List Item with Chevron
   class: list__item--chevron
-  use: List
+  use: List, Tappable List
   markup:
     <ul class="list">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
     </ul>
@@ -317,13 +317,13 @@ list__item()
 
 /*! topdoc
   name: Inset List
-  use: List, List Item with Chevron
+  use: List, List Item with Chevron, Tappable List
   markup:
     <ul class="list list--inset">
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
     </ul>
@@ -379,23 +379,23 @@ list__item()
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
           <label class="checkbox">
-            <input type="radio" id="radio1" class="checkbox__input" name="b" checked="checked">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
             <div class="checkbox__checkmark"></div>
           </label>
         </div>
-        <label for="radio1" class="list__item__center">
-          Radio Button
+        <label for="checkbox1" class="list__item__center">
+          Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
           <label class="checkbox">
-            <input type="radio" id="radio2" class="checkbox__input" name="b" checked="checked">
+            <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
             <div class="checkbox__checkmark"></div>
           </label>
         </div>
-        <label for="radio2" class="list__item__center">
-          Radio Button
+        <label for="checkbox2" class="list__item__center">
+          Checkbox
         </label>
       </li>
     </ul>
@@ -663,12 +663,12 @@ list__item()
       <li class="list__item list__item--material">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox1" class="checkbox__input checkbox--material__input">
+            <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox1" class="list__item__center list__item--material__center">
+        <label for="checkbox3" class="list__item__center list__item--material__center">
           <div class="list__item__title list__item--material__title">Notifications</div>
           <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
         </label>
@@ -677,12 +677,12 @@ list__item()
       <li class="list__item list__item--material">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox2" class="checkbox__input checkbox--material__input" checked="checked">
+            <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox2" class="list__item__center list__item--material__center">
+        <label for="checkbox4" class="list__item__center list__item--material__center">
           <div class="list__item__title list__item--material__title">Sound</div>
           <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
         </label>
@@ -775,13 +775,13 @@ list__item()
       <li class="list__item list__item--material list__item--short-divider">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox1" class="checkbox__input checkbox--material__input">
+            <input type="checkbox" id="checkbox5" class="checkbox__input checkbox--material__input">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
         <div class="list__item__center list__item--material__center">
-          <label for="checkbox1" class="list__item__center list__item--material__center">
+          <label for="checkbox5" class="list__item__center list__item--material__center">
             <div class="list__item__title list__item--material__title">Notifications</div>
             <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
           </label>
@@ -791,13 +791,13 @@ list__item()
       <li class="list__item list__item--material list__item--short-divider">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox2" class="checkbox__input checkbox--material__input" checked="checked">
+            <input type="checkbox" id="checkbox6" class="checkbox__input checkbox--material__input" checked="checked">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
         <div class="list__item__center list__item--material__center">
-          <label for="checkbox2" class="list__item__center list__item--material__center">
+          <label for="checkbox6" class="list__item__center list__item--material__center">
             <div class="list__item__title list__item--material__title">Sound</div>
             <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
           </label>
@@ -824,13 +824,13 @@ list__item()
       <li class="list__item list__item--material list__item--divider">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox1" class="checkbox__input checkbox--material__input">
+            <input type="checkbox" id="checkbox7" class="checkbox__input checkbox--material__input">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
         <div class="list__item__center list__item--material__center">
-          <label for="checkbox1" class="list__item__center list__item--material__center">
+          <label for="checkbox7" class="list__item__center list__item--material__center">
             <div class="list__item__title list__item--material__title">Notifications</div>
             <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
           </label>
@@ -840,13 +840,13 @@ list__item()
       <li class="list__item list__item--material list__item--divider">
         <div class="list__item__left list__item--material__left">
           <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox2" class="checkbox__input checkbox--material__input" checked="checked">
+            <input type="checkbox" id="checkbox8" class="checkbox__input checkbox--material__input" checked="checked">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
         <div class="list__item__center list__item--material__center">
-          <label for="checkbox2" class="list__item__center list__item--material__center">
+          <label for="checkbox8" class="list__item__center list__item--material__center">
             <div class="list__item__title list__item--material__title">Sound</div>
             <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
           </label>
