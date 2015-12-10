@@ -149,7 +149,7 @@ limitations under the License.
 
           ons._internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
             const element = this._createPageElement(templateHTML);
-            const pageObject = this._createPageObject(this._pages[index].page, element, options);
+            const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
 
             rewritables.link(this, element, element => {
               this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
