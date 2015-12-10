@@ -39,6 +39,10 @@ limitations under the License.
       this.initialContent = params.initialContent;
       this.backButton = util.findChildRecursively(this.element, 'ons-back-button');
 
+      if (this.backButton) {
+        CustomElements.upgrade(this.backButton);
+      }
+
       // Block events while page is being animated to stop scrolling, pressing buttons, etc.
       this._blockEvents = (event) => {
         if (this.navigator._isPopping || this.navigator._isPushing) {
