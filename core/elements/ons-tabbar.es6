@@ -254,7 +254,7 @@ limitations under the License.
           if (oldPageElement !== ons._internal.nullElement) {
             if (options._removeElement) {
               rewritables.unlink(this, oldPageElement, pageElement => {
-                oldPageElement._destroy();
+                pageElement._destroy();
               });
             } else {
               oldPageElement.style.display = 'none';
