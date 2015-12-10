@@ -465,7 +465,12 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 .tab-bar--material__label
   material-font()
+
+.tab-bar--material__label:first-child
+  material-font()
+  letter-spacing 0.015em
   font-weight 500
+  font-size 14px
 
 .tab-bar--material__icon + .tab-bar--material__label
   font-size 10px
