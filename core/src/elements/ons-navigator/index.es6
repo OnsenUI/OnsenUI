@@ -151,7 +151,7 @@ class NavigatorElement extends BaseElement {
 
         internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
-          const pageObject = this._createPageObject(this._pages[index].page, element, options);
+          const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
 
           rewritables.link(this, element, element => {
             this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
@@ -541,9 +541,12 @@ class NavigatorElement extends BaseElement {
         let pageObject = this._pages.splice(index, 1)[0];
         pageObject.element.style.display = 'block';
         pageObject.element.setAttribute('_skipinit', '');
-        options.animator = this._animatorFactory.newAnimator(options);
-        pageObject.options = options;
 
+        if (options.animation) {
+          options.animator = this._animatorFactory.newAnimator(options);
+        }
+    
+        pageObject.options = util.extend(pageObject.options, options);
         this._pushPageDOM(pageObject, done);
       });
     }
