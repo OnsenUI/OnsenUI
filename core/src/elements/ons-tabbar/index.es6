@@ -124,20 +124,34 @@ class TabbarElement extends BaseElement {
     content.classList.add('tab-bar--top__content');
     tabbar.classList.add('tab-bar--top');
 
-    var page = ons._util.findParent(this, 'ons-page');
+    var page = util.findParent(this, 'ons-page');
     if (page) {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
     }
 
-    if (internal.shouldFillStatusBar(this)) {
-      // Adjustments for IOS7
-      var fill = document.createElement('div');
-      fill.classList.add('tab-bar__status-bar-fill');
-      fill.style.width = '0px';
-      fill.style.height = '0px';
+    ons._internal.shouldFillStatusBar(this)
+      .then(() => {
+        let fill = this.querySelector('.tab-bar__status-bar-fill');
 
-      this.insertBefore(fill, this.children[0]);
-    }
+        if (fill instanceof HTMLElement) {
+          return fill;
+        }
+
+        fill = document.createElement('div');
+        fill.classList.add('tab-bar__status-bar-fill');
+        fill.style.width = '0px';
+        fill.style.height = '0px';
+
+        this.insertBefore(fill, this.children[0]);
+
+        return fill;
+      })
+      .catch(() => {
+        const el = this.querySelector('.tab-bar__status-bar-fill');
+        if (el instanceof HTMLElement) {
+          el.remove();
+        }
+      });
   }
 
   _getTabbarElement() {

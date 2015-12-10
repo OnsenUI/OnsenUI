@@ -36,6 +36,10 @@ export default class NavigatorPage {
     this.initialContent = params.initialContent;
     this.backButton = util.findChildRecursively(this.element, 'ons-back-button');
 
+    if (this.backButton) {
+      CustomElements.upgrade(this.backButton);
+    }
+
     // Block events while page is being animated to stop scrolling, pressing buttons, etc.
     this._blockEvents = (event) => {
       if (this.navigator._isPopping || this.navigator._isPushing) {
@@ -69,11 +73,12 @@ export default class NavigatorPage {
   }
 
   updateBackButton() {
-    if(this.backButton) {
-      if(this.navigator._pages.length > 1) {
-        this.backButton.style.display = 'block';
+    if (this.backButton) {
+      if (this.navigator._pages.length === 1 || this.options._forceHideBackButton) {
+        this.backButton.hide();
+        this.options._forceHideBackButton = false;
       } else {
-        this.backButton.style.display = 'none';
+        this.backButton.show();
       }
     }
   }

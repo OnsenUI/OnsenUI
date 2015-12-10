@@ -36,7 +36,7 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
   })
   .config(function(writeFilesProcessor, parseTagsProcessor, templateEngine, checkAnchorLinksProcessor) {
 
-    var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
+    var njglobals = require('nunjucks/src/globals');
     writeFilesProcessor.outputFolder = 'build/docs/' + njglobals.lang;
 
     require('./tag-defs').forEach(function(definition) {

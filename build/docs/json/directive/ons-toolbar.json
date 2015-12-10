@@ -4,7 +4,7 @@
     "extension": "js"
   },
   "startingLine": 1,
-  "endingLine": 34,
+  "endingLine": 31,
   "codeAncestors": [],
   "docType": "directive",
   "tags": {
@@ -58,21 +58,11 @@
       },
       {
         "tagDef": {
-          "name": "modifier",
-          "multi": true,
-          "docProperty": "modifiers"
-        },
-        "tagName": "modifier",
-        "description": "android\n  [en]Android style toolbar. Title is left-aligned.[/en]\n  [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]",
-        "startingLine": 8
-      },
-      {
-        "tagDef": {
           "name": "description"
         },
         "tagName": "description",
         "description": "  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]\n  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]",
-        "startingLine": 11
+        "startingLine": 8
       },
       {
         "tagDef": {
@@ -80,7 +70,7 @@
         },
         "tagName": "codepen",
         "description": "aHmGL",
-        "startingLine": 14
+        "startingLine": 11
       },
       {
         "tagDef": {
@@ -90,7 +80,7 @@
         },
         "tagName": "guide",
         "description": "Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]",
-        "startingLine": 15
+        "startingLine": 12
       },
       {
         "tagDef": {
@@ -100,7 +90,7 @@
         },
         "tagName": "seealso",
         "description": "ons-bottom-toolbar\n  [en]ons-bottom-toolbar component[/en]\n  [ja]ons-bottom-toolbarコンポーネント[/ja]",
-        "startingLine": 16
+        "startingLine": 13
       },
       {
         "tagDef": {
@@ -110,7 +100,7 @@
         },
         "tagName": "seealso",
         "description": "ons-back-button\n  [en]ons-back-button component[/en]\n  [ja]ons-back-buttonコンポーネント[/ja]",
-        "startingLine": 19
+        "startingLine": 16
       },
       {
         "tagDef": {
@@ -120,7 +110,7 @@
         },
         "tagName": "seealso",
         "description": "ons-toolbar-button\n  [en]ons-toolbar-button component[/en]\n  [ja]ons-toolbar-buttonコンポーネント[/ja]",
-        "startingLine": 22
+        "startingLine": 19
       },
       {
         "tagDef": {
@@ -130,7 +120,7 @@
         },
         "tagName": "example",
         "description": "<ons-page>\n  <ons-toolbar>\n    <div class=\"left\"><ons-back-button>Back</ons-back-button></div>\n    <div class=\"center\">Title</div>\n    <div class=\"right\">Label</div>\n  </ons-toolbar>\n</ons-page>",
-        "startingLine": 25
+        "startingLine": 22
       }
     ],
     "tagsByName": {
@@ -190,16 +180,6 @@
             "tagName": "modifier",
             "description": "transparent\n  [en]Transparent toolbar[/en]\n  [ja]透明な背景を持つツールバーを表示します。[/ja]",
             "startingLine": 5
-          },
-          {
-            "tagDef": {
-              "name": "modifier",
-              "multi": true,
-              "docProperty": "modifiers"
-            },
-            "tagName": "modifier",
-            "description": "android\n  [en]Android style toolbar. Title is left-aligned.[/en]\n  [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]",
-            "startingLine": 8
           }
         ],
         "description": [
@@ -209,7 +189,7 @@
             },
             "tagName": "description",
             "description": "  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]\n  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]",
-            "startingLine": 11
+            "startingLine": 8
           }
         ],
         "codepen": [
@@ -219,7 +199,7 @@
             },
             "tagName": "codepen",
             "description": "aHmGL",
-            "startingLine": 14
+            "startingLine": 11
           }
         ],
         "guide": [
@@ -231,7 +211,7 @@
             },
             "tagName": "guide",
             "description": "Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]",
-            "startingLine": 15
+            "startingLine": 12
           }
         ],
         "seealso": [
@@ -243,7 +223,7 @@
             },
             "tagName": "seealso",
             "description": "ons-bottom-toolbar\n  [en]ons-bottom-toolbar component[/en]\n  [ja]ons-bottom-toolbarコンポーネント[/ja]",
-            "startingLine": 16
+            "startingLine": 13
           },
           {
             "tagDef": {
@@ -253,7 +233,7 @@
             },
             "tagName": "seealso",
             "description": "ons-back-button\n  [en]ons-back-button component[/en]\n  [ja]ons-back-buttonコンポーネント[/ja]",
-            "startingLine": 19
+            "startingLine": 16
           },
           {
             "tagDef": {
@@ -263,7 +243,7 @@
             },
             "tagName": "seealso",
             "description": "ons-toolbar-button\n  [en]ons-toolbar-button component[/en]\n  [ja]ons-toolbar-buttonコンポーネント[/ja]",
-            "startingLine": 22
+            "startingLine": 19
           }
         ],
         "example": [
@@ -275,7 +255,7 @@
             },
             "tagName": "example",
             "description": "<ons-page>\n  <ons-toolbar>\n    <div class=\"left\"><ons-back-button>Back</ons-back-button></div>\n    <div class=\"center\">Title</div>\n    <div class=\"right\">Label</div>\n  </ons-toolbar>\n</ons-page>",
-            "startingLine": 25
+            "startingLine": 22
           }
         ]
       },
@@ -288,10 +268,6 @@
     {
       "name": "transparent",
       "description": "\n  [en]Transparent toolbar[/en]\n  [ja]透明な背景を持つツールバーを表示します。[/ja]"
-    },
-    {
-      "name": "android",
-      "description": "\n  [en]Android style toolbar. Title is left-aligned.[/en]\n  [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]"
     }
   ],
   "codepen": {
@@ -347,8 +323,8 @@
         "baseName": "toolbar",
         "extension": "js"
       },
-      "startingLine": 36,
-      "endingLine": 45,
+      "startingLine": 33,
+      "endingLine": 42,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -361,7 +337,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 36
+            "startingLine": 33
           },
           {
             "tagDef": {
@@ -370,7 +346,7 @@
             },
             "tagName": "name",
             "description": "var",
-            "startingLine": 37
+            "startingLine": 34
           },
           {
             "tagDef": {
@@ -378,7 +354,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 38
+            "startingLine": 35
           },
           {
             "tagDef": {
@@ -386,7 +362,7 @@
             },
             "tagName": "extensionOf",
             "description": "angular",
-            "startingLine": 39
+            "startingLine": 36
           },
           {
             "tagDef": {
@@ -398,7 +374,7 @@
             },
             "tagName": "type",
             "description": "",
-            "startingLine": 40,
+            "startingLine": 37,
             "typeExpression": "String",
             "type": {
               "type": "NameExpression",
@@ -414,7 +390,7 @@
             },
             "tagName": "description",
             "description": " [en]Variable name to refer this toolbar.[/en]\n [ja]このツールバーを参照するための名前を指定します。[/ja]",
-            "startingLine": 41
+            "startingLine": 38
           }
         ],
         "tagsByName": {
@@ -428,7 +404,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 36
+                "startingLine": 33
               }
             ],
             "name": [
@@ -439,7 +415,7 @@
                 },
                 "tagName": "name",
                 "description": "var",
-                "startingLine": 37
+                "startingLine": 34
               }
             ],
             "initonly": [
@@ -449,7 +425,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 38
+                "startingLine": 35
               }
             ],
             "extensionOf": [
@@ -459,7 +435,7 @@
                 },
                 "tagName": "extensionOf",
                 "description": "angular",
-                "startingLine": 39
+                "startingLine": 36
               }
             ],
             "type": [
@@ -473,7 +449,7 @@
                 },
                 "tagName": "type",
                 "description": "",
-                "startingLine": 40,
+                "startingLine": 37,
                 "typeExpression": "String",
                 "type": {
                   "type": "NameExpression",
@@ -491,7 +467,7 @@
                 },
                 "tagName": "description",
                 "description": " [en]Variable name to refer this toolbar.[/en]\n [ja]このツールバーを参照するための名前を指定します。[/ja]",
-                "startingLine": 41
+                "startingLine": 38
               }
             ]
           },
@@ -512,7 +488,7 @@
         },
         "tagName": "type",
         "description": "",
-        "startingLine": 40,
+        "startingLine": 37,
         "typeExpression": "String",
         "type": {
           "type": "NameExpression",
@@ -534,8 +510,8 @@
         "baseName": "toolbar",
         "extension": "js"
       },
-      "startingLine": 47,
-      "endingLine": 54,
+      "startingLine": 44,
+      "endingLine": 51,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -548,7 +524,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 47
+            "startingLine": 44
           },
           {
             "tagDef": {
@@ -557,7 +533,7 @@
             },
             "tagName": "name",
             "description": "inline",
-            "startingLine": 48
+            "startingLine": 45
           },
           {
             "tagDef": {
@@ -565,7 +541,7 @@
             },
             "tagName": "initonly",
             "description": "",
-            "startingLine": 49
+            "startingLine": 46
           },
           {
             "tagDef": {
@@ -573,7 +549,7 @@
             },
             "tagName": "description",
             "description": "  [en]Display the toolbar as an inline element.[/en]\n  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]",
-            "startingLine": 50
+            "startingLine": 47
           }
         ],
         "tagsByName": {
@@ -587,7 +563,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 47
+                "startingLine": 44
               }
             ],
             "name": [
@@ -598,7 +574,7 @@
                 },
                 "tagName": "name",
                 "description": "inline",
-                "startingLine": 48
+                "startingLine": 45
               }
             ],
             "initonly": [
@@ -608,7 +584,7 @@
                 },
                 "tagName": "initonly",
                 "description": "",
-                "startingLine": 49
+                "startingLine": 46
               }
             ],
             "description": [
@@ -618,7 +594,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]Display the toolbar as an inline element.[/en]\n  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]",
-                "startingLine": 50
+                "startingLine": 47
               }
             ]
           },
@@ -640,8 +616,8 @@
         "baseName": "toolbar",
         "extension": "js"
       },
-      "startingLine": 56,
-      "endingLine": 62,
+      "startingLine": 53,
+      "endingLine": 59,
       "codeAncestors": [],
       "docType": "attribute",
       "tags": {
@@ -654,7 +630,7 @@
             },
             "tagName": "ngdoc",
             "description": "attribute",
-            "startingLine": 56
+            "startingLine": 53
           },
           {
             "tagDef": {
@@ -663,7 +639,7 @@
             },
             "tagName": "name",
             "description": "modifier",
-            "startingLine": 57
+            "startingLine": 54
           },
           {
             "tagDef": {
@@ -671,7 +647,7 @@
             },
             "tagName": "description",
             "description": "  [en]The appearance of the toolbar.[/en]\n  [ja]ツールバーの表現を指定します。[/ja]",
-            "startingLine": 58
+            "startingLine": 55
           }
         ],
         "tagsByName": {
@@ -685,7 +661,7 @@
                 },
                 "tagName": "ngdoc",
                 "description": "attribute",
-                "startingLine": 56
+                "startingLine": 53
               }
             ],
             "name": [
@@ -696,7 +672,7 @@
                 },
                 "tagName": "name",
                 "description": "modifier",
-                "startingLine": 57
+                "startingLine": 54
               }
             ],
             "description": [
@@ -706,7 +682,7 @@
                 },
                 "tagName": "description",
                 "description": "  [en]The appearance of the toolbar.[/en]\n  [ja]ツールバーの表現を指定します。[/ja]",
-                "startingLine": 58
+                "startingLine": 55
               }
             ]
           },
@@ -717,112 +693,6 @@
       },
       "name": "modifier",
       "description": "[en]The appearance of the toolbar.[/en]\n  [ja]ツールバーの表現を指定します。[/ja]",
-      "area": "api",
-      "module": "..",
-      "priority": 0,
-      "codeName": null
-    },
-    {
-      "fileInfo": {
-        "baseName": "toolbar",
-        "extension": "js"
-      },
-      "startingLine": 64,
-      "endingLine": 77,
-      "codeAncestors": [],
-      "docType": "attribute",
-      "tags": {
-        "tags": [
-          {
-            "tagDef": {
-              "name": "ngdoc",
-              "required": true,
-              "docProperty": "docType"
-            },
-            "tagName": "ngdoc",
-            "description": "attribute",
-            "startingLine": 64
-          },
-          {
-            "tagDef": {
-              "name": "name",
-              "required": true
-            },
-            "tagName": "name",
-            "description": "fixed-style",
-            "startingLine": 65
-          },
-          {
-            "tagDef": {
-              "name": "initonly"
-            },
-            "tagName": "initonly",
-            "description": "",
-            "startingLine": 66
-          },
-          {
-            "tagDef": {
-              "name": "description"
-            },
-            "tagName": "description",
-            "description": "  [en]\n    By default the center element will be left-aligned on Android and center-aligned on iOS.\n    Use this attribute to override this behavior so it's always displayed in the center.\n  [/en]\n  [ja]\n    このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。\n    この属性を使用すると、要素はAndroidとiOSともに中央配置となります。\n  [/ja]",
-            "startingLine": 67
-          }
-        ],
-        "tagsByName": {
-          "obj": {
-            "ngdoc": [
-              {
-                "tagDef": {
-                  "name": "ngdoc",
-                  "required": true,
-                  "docProperty": "docType"
-                },
-                "tagName": "ngdoc",
-                "description": "attribute",
-                "startingLine": 64
-              }
-            ],
-            "name": [
-              {
-                "tagDef": {
-                  "name": "name",
-                  "required": true
-                },
-                "tagName": "name",
-                "description": "fixed-style",
-                "startingLine": 65
-              }
-            ],
-            "initonly": [
-              {
-                "tagDef": {
-                  "name": "initonly"
-                },
-                "tagName": "initonly",
-                "description": "",
-                "startingLine": 66
-              }
-            ],
-            "description": [
-              {
-                "tagDef": {
-                  "name": "description"
-                },
-                "tagName": "description",
-                "description": "  [en]\n    By default the center element will be left-aligned on Android and center-aligned on iOS.\n    Use this attribute to override this behavior so it's always displayed in the center.\n  [/en]\n  [ja]\n    このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。\n    この属性を使用すると、要素はAndroidとiOSともに中央配置となります。\n  [/ja]",
-                "startingLine": 67
-              }
-            ]
-          },
-          "hasProto": false
-        },
-        "badTags": [],
-        "description": ""
-      },
-      "initonly": true,
-      "name": "fixed-style",
-      "description": "[en]\n    By default the center element will be left-aligned on Android and center-aligned on iOS.\n    Use this attribute to override this behavior so it's always displayed in the center.\n  [/en]\n  [ja]\n    このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。\n    この属性を使用すると、要素はAndroidとiOSともに中央配置となります。\n  [/ja]",
       "area": "api",
       "module": "..",
       "priority": 0,

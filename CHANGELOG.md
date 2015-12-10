@@ -2,13 +2,30 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.3
+----
+ * core: Fixed animationOptions parsing.
+ * ons-back-button: Add "material" modifier.
+ * ons-range: Fixed [#1082](https://github.com/OnsenUI/OnsenUI/issues/1082).
+ * ons-popover: Added callback for `show` and `hide` methods.
+ * ons-back-button: Accepts `options` object. Fixed [#1040](https://github.com/OnsenUI/OnsenUI/issues/1040).
+
+v2.0.0-beta.2
+----
+ * css-components: Adjust Material navbar layout.
+
 v2.0.0-beta.1
 ----
  * ons-fab: Fix broken layout on Safari.
  * ons-toolbar: Improve layout of material toolbar.
  * ons-progress: Splitted into two different components `ons-progress-bar` and `ons-progress-circular`.
+ * css-components: Added `material` modifier on tab-bar components.
  * css-components: [BC-BREAK] Removed `android` modifier on all components.
  * css-components: iOS toggle switch style updated.
+ * ons-tabbar: Add "material" modifier.
+ * ons-sliding-menu: Fix broken `_currentPageUrl` property.
+ * core: Fix status bar filling on iOS when using `device` plugin.
+ * css-components: Fix Material navbar title on iOS.
 
 v2.0.0-beta
 ----

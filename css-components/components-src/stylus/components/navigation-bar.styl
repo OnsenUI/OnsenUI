@@ -322,6 +322,10 @@ navigation-bar__item()
   box-shadow 0 1px 5px rgba(0,0,0,0.3)
   padding 0
   background-color var-material-navigation-bar-background-color
+  background-size 0
+
+.navigation-bar--noshadow
+  box-shadow none
 
 navigation-bar--material-font()
   material-font()
@@ -339,7 +343,8 @@ navigation-bar--material-font()
 .navigation-bar--material__center
   navigation-bar--material-font()
   height var-navigation-bar-material-height
-  width 100%
+  width auto
+  flex-grow 1
   overflow hidden
   text-overflow ellipsis
   text-align left

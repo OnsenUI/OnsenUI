@@ -376,6 +376,28 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Material Tabbar',
+      items: [
+        {
+          name: 'material-tabbar-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'material-tabbar-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'material-tabbar-highlight-color',
+          displayName: 'Highlight Color'
+        },
+        {
+          name: 'material-tabbar-highlight-text-color',
+          displayName: 'Highlight Text Color'
+        }
+      ]
+    },
+
+    {
       name: 'Floating Action Button',
       items: [
         {

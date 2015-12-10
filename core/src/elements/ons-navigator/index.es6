@@ -95,6 +95,10 @@ class NavigatorElement extends BaseElement {
 
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
+    if (this._pages.length === 1) {
+      options._forceHideBackButton = true;
+    }
+
     options.onTransitionEnd = () => {
       if (this._pages.length > 1) {
         this._pages[this._pages.length - 2].destroy();

@@ -40,8 +40,6 @@
               <li><a href="#navigation-bar">Navigation Bar</a></li>
               <li><a href="#navigation-bar-item">Navigation Bar Item</a></li>
               <li><a href="#navigation-bar-with-outline-button">Navigation Bar with Outline Button</a></li>
-              <li><a href="#android-like-navigation-bar">Android-like Navigation Bar</a></li>
-              <li><a href="#android-like-navigation-bar2)">Android-like Navigation Bar(2)</a></li>
               <li><a href="#transparent-navigation-bar">Transparent Navigation Bar</a></li>
               <li><a href="#navigation-bar-with-outline-button">Navigation Bar with Outline Button</a></li>
               <li><a href="#transparent-navigation-bar">Transparent Navigation Bar</a></li>
@@ -66,6 +64,9 @@
               <li><a href="#icon-only-tab-bar">Icon Only Tab Bar</a></li>
               <li><a href="#top-tab-bar">Top Tab Bar</a></li>
               <li><a href="#bordered-top-tab-bar">Bordered Top Tab Bar</a></li>
+              <li><a href="#material-tab-bar">Material Tab Bar</a></li>
+              <li><a href="#material-tab-bar-icon-only)">Material Tab Bar (Icon only)</a></li>
+              <li><a href="#material-tab-bar-icon-and-label)">Material Tab Bar (Icon and Label)</a></li>
               <li><a href="#notification">Notification</a></li>
               <li><a href="#toolbar-button">Toolbar Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
@@ -102,13 +103,11 @@
               <li><a href="#alert-dialog-without-title">Alert Dialog without Title</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons">Alert Dialog with Multiple Buttons</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons-2">Alert Dialog with Multiple Buttons 2</a></li>
-              <li><a href="#android-like-alert-dialog">Android-like Alert Dialog</a></li>
               <li><a href="#material-alert-dialog">Material Alert Dialog</a></li>
               <li><a href="#popover">Popover</a></li>
               <li><a href="#popoverdown)">Popover(down)</a></li>
               <li><a href="#popoverleft)">Popover(left)</a></li>
               <li><a href="#popoverright)">Popover(right)</a></li>
-              <li><a href="#android-like-popover">Android-like Popover</a></li>
               <li><a href="#modal">Modal</a></li>
               <li><a href="#progress-bar">Progress Bar</a></li>
               <li><a href="#progress-circle">Progress Circle</a></li>
@@ -226,13 +225,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet">Label</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -243,47 +242,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--outline navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--outline navigation-bar__line-height">Button</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--outline">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--outline">Button</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--outline navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Title  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--outline navigation-bar__line-height&quot;&gt;Button&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
-                </div>
-              </section>
-            </footer>
-          </article>
-          <article id="android-like-navigation-bar" class="component">
-            <header>
-              <h2>Android-like Navigation Bar</h2>
-            </header>
-            <section class="component">
-              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--android">  <div class="navigation-bar__left navigation-bar--android__left">    <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>  </div>  <div class="navigation-bar__center navigation-bar--android__center">    <span class="toolbar-button navigation-bar__line-height" style="padding:0">      <i class="ion-cube" style="font-size:20px;"></i> App Bar    </span>  </div>  <div class="navigation-bar__right navigation-bar--android__right">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-android-share" style="font-size:20px;"></i>    </span>    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-android-more" style="font-size:20px;"></i>    </span>  </div></div></div>
-              </div>
-            </section>
-            <footer class="showcode"><a href="#">Show code snippets</a>
-              <section class="code">
-                <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--android&quot;&gt;  &lt;div class=&quot;navigation-bar__left navigation-bar--android__left&quot;&gt;    &lt;span class=&quot;toolbar-button navigation-bar__line-height&quot; style=&quot;padding:0 5px 0 5px;&quot;&gt;&lt;i class=&quot;ion-android-arrow-back&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;&lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center navigation-bar--android__center&quot;&gt;    &lt;span class=&quot;toolbar-button navigation-bar__line-height&quot; style=&quot;padding:0&quot;&gt;      &lt;i class=&quot;ion-cube&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt; App Bar    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right navigation-bar--android__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-android-share&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-android-more&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
-                </div>
-              </section>
-            </footer>
-          </article>
-          <article id="android-like-navigation-bar2)" class="component">
-            <header>
-              <h2>Android-like Navigation Bar(2)</h2>
-            </header>
-            <section class="component">
-              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--android">  <div class="navigation-bar__left navigation-bar--android__left">    <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>  </div>  <div class="navigation-bar__center navigation-bar--android__center">    App Bar  </div>  <div class="navigation-bar__right navigation-bar--android__right">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-android-star" style="font-size:20px;"></i>    </span>    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-android-search" style="font-size:20px;"></i>    </span>    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-android-more" style="font-size:20px;"></i>    </span>  </div></div></div>
-              </div>
-            </section>
-            <footer class="showcode"><a href="#">Show code snippets</a>
-              <section class="code">
-                <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--android&quot;&gt;  &lt;div class=&quot;navigation-bar__left navigation-bar--android__left&quot;&gt;    &lt;span class=&quot;toolbar-button navigation-bar__line-height&quot; style=&quot;padding:0 5px 0 0;&quot;&gt;&lt;i class=&quot;ion-android-drawer&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;&lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center navigation-bar--android__center&quot;&gt;    App Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right navigation-bar--android__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-android-star&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-android-search&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-android-more&quot; style=&quot;font-size:20px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--outline&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Title  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--outline&quot;&gt;Button&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -294,13 +259,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet">Label</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -311,13 +276,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--outline navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--outline navigation-bar__line-height">Button</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--outline">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--outline">Button</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--outline navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Title  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--outline navigation-bar__line-height&quot;&gt;Button&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--outline&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Title  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--outline&quot;&gt;Button&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -328,13 +293,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet">Label</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -651,13 +616,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-ios-cloud-outline"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-ios-pie"></i>    </button>  </label></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-record&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-ios-cloud-outline&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-ios-pie&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. --&gt;&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-record&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -692,6 +657,57 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top tab-bar--top-border&quot;&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Home    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Comments    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Activity    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-tab-bar" class="component">
+            <header>
+              <h2>Material Tab Bar</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top tab-bar--material">  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a" checked="checked">    <button class="tab-bar__button tab-bar--material__button">      Music    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      Movies    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      Books    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      Games    </button>  </label></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top tab-bar--material&quot;&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      Music    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      Movies    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      Books    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      Games    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-tab-bar-icon-only)" class="component">
+            <header>
+              <h2>Material Tab Bar (Icon only)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top tab-bar--material">  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a" checked="checked">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account"></i>    </button>  </label></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top tab-bar--material&quot;&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-phone&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-tab-bar-icon-and-label)" class="component">
+            <header>
+              <h2>Material Tab Bar (Icon and Label)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top tab-bar--material">  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a" checked="checked">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>      <div class="tab-bar__label tab-bar--material__label">Call</div>    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>      <div class="tab-bar__label tab-bar--material__label">Favorites</div>    </button>  </label>  <label class="tab-bar__item tab-bar--material__item">    <input type="radio" name="tab-bar-material-a">    <button class="tab-bar__button tab-bar--material__button">      <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-delete"></i>      <div class="tab-bar__label tab-bar--material__label">Delete</div>    </button>  </label></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top tab-bar--material&quot;&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-phone&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label tab-bar--material__label&quot;&gt;Call&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label tab-bar--material__label&quot;&gt;Favorites&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--material__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-material-a&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--material__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon tab-bar--material__icon zmdi zmdi-delete&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label tab-bar--material__label&quot;&gt;Delete&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -1308,23 +1324,6 @@
               </section>
             </footer>
           </article>
-          <article id="android-like-alert-dialog" class="component">
-            <header>
-              <h2>Android-like Alert Dialog</h2>
-            </header>
-            <section class="component">
-              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="alert-dialog-mask"></div><div class="alert-dialog alert-dialog--android">  <div class="alert-dialog-title alert-dialog-title--android">    Alert  </div>  <div class="alert-dialog-content alert-dialog-content--android">    Hello World!  </div>  <div class="alert-dialog-footer alert-dialog-footer--one">    <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>    <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>  </div></div></div>
-              </div>
-            </section>
-            <footer class="showcode"><a href="#">Show code snippets</a>
-              <section class="code">
-                <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;alert-dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog alert-dialog--android&quot;&gt;  &lt;div class=&quot;alert-dialog-title alert-dialog-title--android&quot;&gt;    Alert  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-content alert-dialog-content--android&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Cancel&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Ok&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
-                </div>
-              </section>
-            </footer>
-          </article>
           <article id="material-alert-dialog" class="component">
             <header>
               <h2>Material Alert Dialog</h2>
@@ -1406,23 +1405,6 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--right&quot; style=&quot;top:20px;left:20px;&quot;&gt;  &lt;div class=&quot;popover__left-arrow&quot;&gt;&lt;/div&gt;  &lt;div class=&quot;popover__content&quot;&gt;    &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
-                </div>
-              </section>
-            </footer>
-          </article>
-          <article id="android-like-popover" class="component">
-            <header>
-              <h2>Android-like Popover</h2>
-            </header>
-            <section class="component">
-              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--up popover" style="top:10px;right:10px;">  <div class="popover__content popover__content--android">    <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>  </div></div></div>
-              </div>
-            </section>
-            <footer class="showcode"><a href="#">Show code snippets</a>
-              <section class="code">
-                <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--up popover&quot; style=&quot;top:10px;right:10px;&quot;&gt;  &lt;div class=&quot;popover__content popover__content--android&quot;&gt;    &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>

@@ -263,8 +263,11 @@ class PopoverElement extends BaseElement {
    * @param {Object} [options] options
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
+   * @param {Function} [options.callback] callback
    */
-  show(target, options) {
+  show(target, options = {}) {
+    const callback = options.callback || function() {};
+
     if (typeof target === 'string') {
       target = document.querySelector(target);
     } else if (target instanceof Event) {
@@ -275,7 +278,6 @@ class PopoverElement extends BaseElement {
      throw new Error('Target undefined');
     }
 
-    options = options || {};
 
     if (options.animation &&
       !(options.animation in _animatorDict)) {
@@ -310,6 +312,7 @@ class PopoverElement extends BaseElement {
           unlock();
 
           util.triggerElementEvent(this, 'postshow', {popover: this});
+          callback();
         });
       });
     }
@@ -321,9 +324,10 @@ class PopoverElement extends BaseElement {
    * @param {Object} [options] options
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
+   * @param {Function} [options.callback] callback
    */
-  hide(options) {
-    options = options || {};
+  hide(options = {}) {
+    const callback = options.callback || function() {};
 
     let canceled = false;
     util.triggerElementEvent(this, 'prehide', {
@@ -343,6 +347,7 @@ class PopoverElement extends BaseElement {
           this._visible = false;
           unlock();
           util.triggerElementEvent(this, 'posthide', {popover: this});
+          callback();
         });
       });
     }

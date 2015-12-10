@@ -56,23 +56,38 @@ internal.waitDOMContentLoaded = (callback) => {
  * @return {Boolean}
  */
 internal.shouldFillStatusBar = (element) => {
-  if (internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above()) {
-    if (!(element instanceof HTMLElement)) {
-      throw new Error('element must be an instance of HTMLElement');
-    }
-
-    for (;;) {
-      if (element.hasAttribute('no-status-bar-fill')) {
-        return false;
+  const checkStatusBar = () => {
+    if (internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above()) {
+      if (!(element instanceof HTMLElement)) {
+        throw new Error('element must be an instance of HTMLElement');
       }
 
-      element = element.parentNode;
-      if (!element || !element.hasAttribute) {
-        return true;
+      for (;;) {
+        if (element.hasAttribute('no-status-bar-fill')) {
+          return false;
+        }
+
+        element = element.parentNode;
+        if (!element || !element.hasAttribute) {
+          return true;
+        }
       }
     }
-  }
-  return false;
+    return false;
+  };
+
+  return new Promise(function(resolve, reject) {
+    if (typeof device === 'object') {
+      document.addEventListener('deviceready', () => {
+        if (checkStatusBar()) {
+          resolve();
+        }
+      });
+    } else if (checkStatusBar()) {
+      resolve();
+    }
+    reject();
+  });
 };
 
 internal.templateStore = {

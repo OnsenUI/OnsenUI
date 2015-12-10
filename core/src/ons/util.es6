@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import animationOptionsParser from './animation-options-parser';
+
 const util = {};
 
 /**
@@ -259,5 +261,11 @@ util.hasModifier = (target, modifierName) => {
 
   return false;
 };
+
+/**
+ * @param {String}
+ * @return {Object}
+ */
+util.animationOptionsParse = animationOptionsParser.parse;
 
 export default util;

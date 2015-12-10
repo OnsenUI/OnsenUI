@@ -52,7 +52,10 @@ const MaterialTemplateElement = util.createElement(`
 `);
 
 const scheme = {
-  '.toolbar-button--quiet': 'toolbar-button--*'
+  '': 'back-button--*',
+  '.toolbar-button--quiet': 'toolbar-button--*',
+  '.back-button__icon': 'back-button--*__icon',
+  '.back-button__label': 'back-button--*__label'
 };
 
 class BackButtonElement extends BaseElement {
@@ -64,11 +67,11 @@ class BackButtonElement extends BaseElement {
   }
 
   _compile() {
-    const toolbar = ons._util.findParent(this, 'ons-toolbar');
+    const toolbar = util.findParent(this, 'ons-toolbar');
 
     let template;
 
-    if (toolbar && ons._util.hasModifier(toolbar, 'material')) {
+    if (toolbar && util.hasModifier(toolbar, 'material')) {
       template = MaterialTemplateElement.cloneNode(true);
     }
     else {
@@ -82,10 +85,42 @@ class BackButtonElement extends BaseElement {
     this.appendChild(template);
   }
 
+  /**
+   * @return {object}
+   */
+  get options() {
+    return this._options;
+  }
+
+  /**
+   * @param {object}
+   */
+  set options(object) {
+    this._options = object;
+  }
+
   _onClick() {
     const navigator = util.findParent(this, 'ons-navigator');
     if (navigator) {
-      navigator.popPage({cancelIfRunning: true});
+      this.options.cancelIfRunning = true;
+
+      if (this.hasAttribute('animation')) {
+        this.options.animation = this.getAttribute('animation');
+      }
+
+      if (this.hasAttribute('animation-options')) {
+        this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
+      }
+
+      if (this.hasAttribute('on-transition-end')) {
+        this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+      }
+
+      if (this.hasAttribute('refresh')) {
+        this.options.refresh = this.getAttribute('refresh') === 'true';
+      }
+
+      navigator.popPage(this.options);
     }
   }
 
@@ -101,6 +136,14 @@ class BackButtonElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+  }
+
+  show() {
+    this.style.display = 'inline-block';
+  }
+
+  hide() {
+    this.style.display = 'none';
   }
 }
 

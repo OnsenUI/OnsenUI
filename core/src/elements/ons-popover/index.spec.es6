@@ -301,14 +301,13 @@ describe('OnsPopoverElement', () => {
     });
 
     it('should change the direction dynamically', (done) => {
-      popover.show(target, {animation: 'none'});
       popover.setAttribute('direction', 'up');
-
       expect(el.classList.contains('popover--up')).to.be.false;
-      setImmediate(() => {
+
+      popover.show(target, {animation: 'none', callback: () => {
         expect(el.classList.contains('popover--up')).to.be.true;
         done();
-      });
+      }});
     });
 
     it('can have the value \'up\'', () => {
