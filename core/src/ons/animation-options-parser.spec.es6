@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ons._animationOptionsParser', () => {
   it('exists', () => {
     expect(ons._animationOptionsParser).to.be.ok;

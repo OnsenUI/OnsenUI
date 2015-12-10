@@ -10,7 +10,7 @@ import orientation from './ons/orientation';
 import softwareKeyboard from './ons/software-keyboard';
 import PageAttributeExpression from './ons/page-attribute-expression';
 import BaseElement from './ons/base-element';
-
+import animationOptionsParser from './ons/animation-options-parser';
 
 ons._util = util;
 ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
@@ -21,11 +21,11 @@ ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
+ons._animationOptionsParser = animationOptionsParser;
 
 window.addEventListener('DOMContentLoaded', function() {
   ons._deviceBackButtonDispatcher.enable();
 });
-
 
 import './elements/ons-alert-dialog';
 import './elements/ons-back-button';
