@@ -75,9 +75,7 @@ limitations under the License.
      * @param {Object} defaultAnimator The default animator instance
      * @return {Object} An animator instance
      */
-    newAnimator(options, defaultAnimator) {
-      options = options || {};
-
+    newAnimator(options = {}, defaultAnimator) {
       let animator = null;
 
       if (options.animation instanceof this._baseClass) {

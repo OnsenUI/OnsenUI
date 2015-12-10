@@ -117,9 +117,7 @@ limitations under the License.
    * @param {Function} [options.link]
    * @return {Promise}
    */
-  ons._createPopoverOriginal = function(page, options) {
-    options = options || {};
-
+  ons._createPopoverOriginal = function(page, options = {}) {
     if (!page) {
       throw new Error('Page url must be defined.');
     }
@@ -153,9 +151,7 @@ limitations under the License.
    * @param {Function} [options.link]
    * @return {Promise}
    */
-  ons._createDialogOriginal = function(page, options) {
-    options = options || {};
-
+  ons._createDialogOriginal = function(page, options = {}) {
     if (!page) {
       throw new Error('Page url must be defined.');
     }
@@ -189,9 +185,7 @@ limitations under the License.
    * @param {Function} [options.link]
    * @return {Promise}
    */
-  ons._createAlertDialogOriginal = function(page, options) {
-    options = options || {};
-
+  ons._createAlertDialogOriginal = function(page, options = {}) {
     if (!page) {
       throw new Error('Page url must be defined.');
     }
