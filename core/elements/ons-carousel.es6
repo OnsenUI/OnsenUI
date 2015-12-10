@@ -261,9 +261,7 @@ limitations under the License.
      * @param {Function} [options.callback]
      * @param {String} [options.animation]
      */
-    setActiveCarouselItemIndex(index, options) {
-      options = options || {};
-
+    setActiveCarouselItemIndex(index, options = {}) {
       index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
       const scroll = this._getCarouselItemSize() * index;
       const max = this._calculateMaxScroll();
@@ -566,8 +564,7 @@ limitations under the License.
      * @param {Number} scroll
      * @param {Object} [options]
      */
-    _scrollTo(scroll, options) {
-      options = options || {};
+    _scrollTo(scroll, options = {}) {
       const isOverscrollable = this.isOverscrollable();
 
       const normalizeScroll = (scroll) => {

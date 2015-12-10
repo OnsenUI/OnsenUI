@@ -88,9 +88,7 @@ limitations under the License.
      * @param {String} page
      * @param {Object} [options]
      */
-    replacePage(page, options) {
-      options = options || {};
-
+    replacePage(page, options = {}) {
       const onTransitionEnd = options.onTransitionEnd || function() {};
 
       if (this._pages.length === 1) {
@@ -117,9 +115,7 @@ limitations under the License.
      * @param {Function} [options.onTransitionEnd]
      * @param {Boolean} [options.cancelIfRunning]
      */
-    popPage(options) {
-      options = options || {};
-
+    popPage(options = {}) {
       if (options.cancelIfRunning && this._isPopping) {
         return;
       }
@@ -221,10 +217,7 @@ limitations under the License.
      * @param {Object} [options]
      * @param {String/NavigatorTransitionAnimator} [options.animation]
      */
-    insertPage(index, page, options) {
-
-      options = options || {};
-
+    insertPage(index, page, options = {}) {
       if (options && typeof options != 'object') {
         throw new Error('options must be an object. You supplied ' + options);
       }
@@ -320,9 +313,7 @@ limitations under the License.
      * @param {String/undefined} page
      * @param {Object} [options]
      */
-    resetToPage(page, options) {
-      options = options || {};
-
+    resetToPage(page, options = {}) {
       if (!options.animator && !options.animation) {
         options.animation = 'none';
       }
@@ -385,9 +376,7 @@ limitations under the License.
      * @param {Boolean} [options.cancelIfRunning]
      * @param {String} [options.pageHTML]
      */
-    pushPage(page, options) {
-      options = options || {};
-
+    pushPage(page, options = {}) {
       options.animationOptions = util.extend(
         options.animationOptions || {},
         AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
@@ -495,9 +484,7 @@ limitations under the License.
      * @param {String|Number} item Page name or valid index.
      * @param {Object} options
      */
-    bringPageTop(item, options) {
-      options = options || {};
-
+    bringPageTop(item, options = {}) {
       if (options && typeof options != 'object') {
         throw new Error('options must be an object. You supplied ' + options);
       }

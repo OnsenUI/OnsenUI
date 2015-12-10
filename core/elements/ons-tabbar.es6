@@ -169,8 +169,7 @@ limitations under the License.
      * @param {Object} [options.animation]
      * @param {Object} [options.callback]
      */
-    loadPage(page, options) {
-      options = options || {};
+    loadPage(page, options = {}) {
       options._removeElement = true;
       return this._loadPage(page, options);
     }
@@ -193,9 +192,7 @@ limitations under the License.
      * @param {Object} [options.animation]
      * @param {Object} [options.callback]
      */
-    _loadPageDOMAsync(pageElement, options) {
-      options = options || {};
-
+    _loadPageDOMAsync(pageElement, options = {}) {
       rewritables.link(this, pageElement, pageElement => {
         this._contentElement.appendChild(pageElement);
         this._switchPage(pageElement, options);
@@ -284,10 +281,7 @@ limitations under the License.
      * @param {Object} [options.animationOptions]
      * @return {Boolean} success or not
      */
-    setActiveTab(index, options) {
-
-      options = options || {};
-
+    setActiveTab(index, options = {}) {
       options.animationOptions = util.extend(
         options.animationOptions || {},
         AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
@@ -391,9 +385,7 @@ limitations under the License.
      * @param {Object} options
      * @param {Object} options.animation
      */
-    _loadPersistentPageDOM(element, options) {
-      options = options || {};
-
+    _loadPersistentPageDOM(element, options = {}) {
       if (!util.isAttached(element)) {
         this._contentElement.appendChild(element);
       }
