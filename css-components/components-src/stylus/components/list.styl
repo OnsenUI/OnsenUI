@@ -109,7 +109,6 @@ list__item()
   display flex
   flex-direction row
   justify-content flex-start
-  align-items center
 
 .list--noborder
   border-top none
@@ -263,19 +262,26 @@ list__item()
 */
 
 .list__item__left
+  display flex
   min-width 32px
   order 0
+  align-items center
+  display flex
 
 .list__item__center
   display flex
-  flex-direction column
   flex-grow 1
+  flex-wrap wrap
+  flex-direction row
   order 1
   margin-right auto
+  align-items center
 
 .list__item__right
+  display flex
   margin-left auto
   order 2
+  align-items center
 
 /*! topdoc
   name: List Item with Chevron
@@ -486,13 +492,14 @@ list__item()
 */
 
 .list__item__title
+  flex-basis 100%
   order 0
 
 .list__item__subtitle
   opacity 0.75
   font-size var-font-size--mini
   order 1
-  width 100%
+  flex-basis 100%
 
 /*! topdoc
   name: List Item with Thumbnail
@@ -600,8 +607,8 @@ list__item()
 
 .list__item--material
   border 0
-  min-height initial
-  padding 14px 16px
+  min-height 56px
+  padding 0 0 0 16px
   line-height normal
 
 .list__item--material__subtitle
@@ -615,10 +622,17 @@ list__item()
   border 0
 
 .list__item--material__left
-  min-width 54px
+  padding 16px 0px 16px 16px
+  margin-left -16px
+  min-width 56px
   line-height 1
 
+.list__item--material__center
+  padding 16px 0
+  margin-right 16px
+
 .list__item--material__right
+  padding 16px 16px 16px 0px
   line-height 1
 
 /*! topdoc
@@ -777,12 +791,10 @@ list__item()
           </label>
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <label for="checkbox5" class="list__item__center list__item--material__center">
-            <div class="list__item__title list__item--material__title">Notifications</div>
-            <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
-          </label>
-        </div>
+        <label for="checkbox5" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
       </li>
 
       <li class="list__item list__item--material list__item--short-divider">
@@ -793,12 +805,10 @@ list__item()
           </label>
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <label for="checkbox6" class="list__item__center list__item--material__center">
-            <div class="list__item__title list__item--material__title">Sound</div>
-            <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
-          </label>
-        </div>
+        <label for="checkbox6" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
       </li>
     </ul>
 */
@@ -826,12 +836,10 @@ list__item()
           </label>
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <label for="checkbox7" class="list__item__center list__item--material__center">
-            <div class="list__item__title list__item--material__title">Notifications</div>
-            <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
-          </label>
-        </div>
+        <label for="checkbox7" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
       </li>
 
       <li class="list__item list__item--material list__item--divider">
@@ -842,12 +850,10 @@ list__item()
           </label>
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <label for="checkbox8" class="list__item__center list__item--material__center">
-            <div class="list__item__title list__item--material__title">Sound</div>
-            <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
-          </label>
-        </div>
+        <label for="checkbox8" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
       </li>
     </ul>
 */
