@@ -129,11 +129,11 @@ describe('OnsBackButtonElement', () => {
         onTransitionEnd: () => {
           let element = nav.querySelector('ons-back-button');
           element.setAttribute('on-transition-end',
-            'function() {\
+            `function() {\
               var localPromise = window.onTransitionEndCompleted;\
               window.onTransitionEndCompleted = null;\
               localPromise();\
-            }');
+            }`);
           element._onClick();
         }
       });
