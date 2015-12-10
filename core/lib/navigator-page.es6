@@ -72,11 +72,12 @@ limitations under the License.
     }
 
     updateBackButton() {
-      if(this.backButton) {
-        if(this.navigator._pages.length > 1) {
-          this.backButton.style.display = 'inline-block';
+      if (this.backButton) {
+        if (this.navigator._pages.length === 1 || this.options._forceHideBackButton) {
+          this.backButton.hide();
+          this.options._forceHideBackButton = false;
         } else {
-          this.backButton.style.display = 'none';
+          this.backButton.show();
         }
       }
     }

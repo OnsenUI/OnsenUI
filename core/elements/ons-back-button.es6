@@ -30,6 +30,7 @@ limitations under the License.
   class BackButtonElement extends ons._BaseElement {
 
     createdCallback() {
+      this.options = {};
       this._compile();
       this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
@@ -52,10 +53,42 @@ limitations under the License.
       this.appendChild(label);
     }
 
+    /**
+     * @return {object}
+     */
+    get options() {
+      return this._options;
+    }
+
+    /**
+     * @param {object}
+     */
+    set options(object) {
+      this._options = object;
+    }
+
     _onClick() {
       const navigator = util.findParent(this, 'ons-navigator');
       if (navigator) {
-        navigator.popPage({cancelIfRunning: true});
+        this.options.cancelIfRunning = true;
+
+        if (this.hasAttribute('animation')) {
+          this.options.animation = this.getAttribute('animation');
+        }
+
+        if (this.hasAttribute('animation-options')) {
+          this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
+        }
+
+        if (this.hasAttribute('on-transition-end')) {
+          this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+        }
+
+        if (this.hasAttribute('refresh')) {
+          this.options.refresh = this.getAttribute('refresh') === 'true';
+        }
+
+        navigator.popPage(this.options);
       }
     }
 
@@ -71,6 +104,14 @@ limitations under the License.
 
     detachedCallback() {
       this.removeEventListener('click', this._boundOnClick, false);
+    }
+
+    show() {
+      this.style.display = 'inline-block';
+    }
+
+    hide() {
+      this.style.display = 'none';
     }
   }
 
