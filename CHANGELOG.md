@@ -8,6 +8,7 @@ v2.0.0-beta.3
  * ons-back-button: Add "material" modifier.
  * ons-range: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/1082).
  * ons-popover: Added callback for `show` and `hide` methods.
+ * ons-list-item: Fixed active touch behavior, closes [#740](https://github.com/OnsenUI/OnsenUI/issues/740).
 
 v2.0.0-beta.2
 ----
