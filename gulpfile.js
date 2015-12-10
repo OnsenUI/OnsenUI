@@ -396,7 +396,7 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core-test'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
