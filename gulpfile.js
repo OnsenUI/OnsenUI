@@ -102,7 +102,7 @@ function bundleBrowserify(browserify) {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', function(done) {
+gulp.task('watch-core', function() {
   var b = createBrowserify({watch: true});
 
   b.on('update', function(event) {
@@ -399,7 +399,7 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core-test'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
