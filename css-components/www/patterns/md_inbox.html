@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
   <link rel="stylesheet" href="md_inbox.css">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700italic,700,500italic,500' rel='stylesheet' type='text/css'>
 
   <script src="lib/onsen/js/onsenui.js"></script>
   <script src="lib/onsen/js/angular/angular.js"></script>
@@ -20,7 +20,7 @@
 
 <body>
   <ons-page modifier="material">
-    <ons-toolbar modifier="material" class="inbox-interface">
+    <ons-toolbar modifier="material">
       <div class="left">
         <ons-toolbar-button modifier="material">
           <ons-icon icon="md-menu"></ons-icon>
@@ -34,33 +34,27 @@
       </div>
     </ons-toolbar>
 
-   <ons-list modifier="material">
-      <ons-list-item class="inbox-li" ng-repeat="i in [1,2,3,4,5,6,7,8,9]">
-        <ons-ripple color="rgba(0, 0, 0, 0.03)"></ons-ripple>
-        <ons-row>
-          <ons-col width="56px">
-            <img ng-src="images/profile-image-0{{i}}.png" class="inbox-image">
-          </ons-col>
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">Today</ons-list-header>
+      <ons-list-item modifier="material short-divider" ng-repeat="i in [1,2,3,4,5,6,7,8,9]">
+        <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+        <div class="list__item__left">
+          <img ng-src="images/profile-image-0{{i}}.png" class="list__item__thumbnail">
+        </div>
 
-          <ons-col>
-            <div class="inbox-details">
-              <ons-icon icon="md-attachment" class="inbox-clip-icon"></ons-icon>
-              <span class="inbox-date">
-                20th May
-              </span>
-            </div>
-            <div class="inbox-from">
-              <span class="inbox-name">Dave Graham</span>
-              <span class="inbox-subject">Erised stra ehru oyt ube caf...</span>
-            </div>
-            <div class="inbox-fav-star">
-              <ons-icon icon="md-star-outline" size="26px"></ons-icon>
-            </div>
-            <div class="inbox-message">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </div>
-          </ons-col>
-        </ons-row>
+        <div class="list__item__center">
+          <div class="inbox-title">
+            Lorem ipsum
+          </div>
+          <div class="inbox-message">
+            <span class="inbox-name">Dave Graham</span>
+            <span class="inbox-body">&mdash; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</span>
+          </div>
+        </div>
+
+        <div class="list__item__right">
+
+        </div>
       </ons-list-item>
     </ons-list>
 
