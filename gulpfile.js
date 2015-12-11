@@ -158,38 +158,11 @@ gulp.task('html2js', function() {
     .pipe(gulp.dest('bindings/angular1/directives/'));
 });
 
-////////////////////////////////////////
-// jshint-vanilla
-////////////////////////////////////////
-gulp.task('jshint-vanilla', function() {
-  gulp.src([
-    'core/elements/*.js',
-    'core/lib/*.js',
-    'core/*.js',
-    'bindings/angular1/js/*.js',
-    'bindings/angular1/directives/*.js',
-    'bindings/angular1/services/*.js',
-    'bindings/angular1/elements/*.js',
-    'bindings/angular1/views/*.js'
-  ])
-    .pipe($.cached('jshint-vanilla'))
-    .pipe($.jshint())
-    .pipe($.remember('jshint-vanilla'))
-    .pipe($.jshint.reporter('jshint-stylish'));
-});
-
 /////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
 gulp.task('eslint', function() {
-  return gulp.src([
-    'core/src/**/*.es6',
-    'bindings/angular1/*/*.es6',
-    'bindings/angular1/directives/*.es6',
-    'bindings/angular1/services/*.es6',
-    'bindings/angular1/elements/*.es6',
-    'bindings/angular1/views/*.es6'
-  ])
+  return gulp.src(eslintTargets())
     .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
     .pipe($.remember('eslint'))
@@ -197,9 +170,25 @@ gulp.task('eslint', function() {
 });
 
 /////////////////////////////////////////
-// jshint
+// watch-eslint
 ////////////////////////////////////////
-gulp.task('jshint', ['jshint-vanilla', 'eslint']);
+gulp.task('watch-eslint', ['eslint'], function() {
+  gulp.watch(eslintTargets(), ['eslint']);
+});
+
+function eslintTargets() {
+  return [
+    'gulpfile.js',
+    'docs/packages/**/*.{js,es6}',
+    'core/src/*.{js,es6}',
+    'core/src/**/*.{js,es6}',
+    'bindings/angular1/js/*.{js,es6}',
+    'bindings/angular1/directives/*.{js,es6}',
+    'bindings/angular1/services/*.{js,es6}',
+    'bindings/angular1/elements/*.{js,es6}',
+    'bindings/angular1/views/*.{js,es6}'
+  ];
+}
 
 ////////////////////////////////////////
 // clean
@@ -389,7 +378,7 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
+gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], function() {
   gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
   var watched = [
@@ -404,7 +393,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function
 
   gulp.watch(watched, {
     debounceDelay: 300
-  }, ['jshint', 'prepare']);
+  }, ['prepare']);
 
   // for livereload
   gulp.watch([
