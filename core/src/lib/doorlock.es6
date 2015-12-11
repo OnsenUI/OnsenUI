@@ -34,8 +34,7 @@ window.DoorLock = (() => {
    */
   class DoorLock {
 
-    constructor(options) {
-      options = options || {};
+    constructor(options = {}) {
       this._lockList = [];
       this._waitList = [];
       this._log = options.log || function() {};

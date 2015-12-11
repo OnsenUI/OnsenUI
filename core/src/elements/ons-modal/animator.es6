@@ -23,10 +23,9 @@ export default class ModalAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options) {
+  constructor(options = {}) {
     this.delay = 0;
     this.duration = 0.2;
-    options = options || {};
 
     this.timing = options.timing || this.timing;
     this.duration = options.duration !== undefined ? options.duration : this.duration;

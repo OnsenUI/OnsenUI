@@ -90,8 +90,7 @@ class NavigatorElement extends BaseElement {
    * @param {String} page
    * @param {Object} [options]
    */
-  replacePage(page, options) {
-    options = options || {};
+  replacePage(page, options = {}) {
 
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
@@ -119,8 +118,7 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [options.onTransitionEnd]
    * @param {Boolean} [options.cancelIfRunning]
    */
-  popPage(options) {
-    options = options || {};
+  popPage(options = {}) {
 
     if (options.cancelIfRunning && this._isPopping) {
       return;
@@ -223,7 +221,7 @@ class NavigatorElement extends BaseElement {
    * @param {Object} [options]
    * @param {String/NavigatorTransitionAnimator} [options.animation]
    */
-  insertPage(index, page, options) {
+  insertPage(index, page, options = {}) {
 
     options = options || {};
 
@@ -322,8 +320,7 @@ class NavigatorElement extends BaseElement {
    * @param {String/undefined} page
    * @param {Object} [options]
    */
-  resetToPage(page, options) {
-    options = options || {};
+  resetToPage(page, options = {}) {
 
     if (!options.animator && !options.animation) {
       options.animation = 'none';
@@ -386,8 +383,7 @@ class NavigatorElement extends BaseElement {
    * @param {Boolean} [options.cancelIfRunning]
    * @param {String} [options.pageHTML]
    */
-  pushPage(page, options) {
-    options = options || {};
+  pushPage(page, options = {}) {
 
     options.animationOptions = util.extend(
       options.animationOptions || {},
@@ -496,8 +492,7 @@ class NavigatorElement extends BaseElement {
    * @param {String|Number} item Page name or valid index.
    * @param {Object} options
    */
-  bringPageTop(item, options) {
-    options = options || {};
+  bringPageTop(item, options = {}) {
 
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
@@ -545,7 +540,7 @@ class NavigatorElement extends BaseElement {
         if (options.animation) {
           options.animator = this._animatorFactory.newAnimator(options);
         }
-    
+
         pageObject.options = util.extend(pageObject.options, options);
         this._pushPageDOM(pageObject, done);
       });

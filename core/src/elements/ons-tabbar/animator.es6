@@ -23,9 +23,7 @@ export class TabbarAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options) {
-    options = options || {};
-
+  constructor(options = {}) {
     this.timing = options.timing || 'linear';
     this.duration = options.duration !== undefined ? options.duration : '0.4';
     this.delay = options.delay !== undefined ? options.delay : '0';
