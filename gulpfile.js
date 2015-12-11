@@ -417,45 +417,23 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function
 });
 
 ////////////////////////////////////////
-// build-doc-ja
+// build-doc
 ////////////////////////////////////////
-gulp.task('build-doc-ja', function(done) {
-  njglobals.rootUrl = '/';
-  njglobals.lang = 'ja';
-
-  new dgeni([require('./docs/package')]).generate().then(function() {
-    done();
-  });
-});
-
-////////////////////////////////////////
-// build-doc-en
-////////////////////////////////////////
-gulp.task('build-doc-en', function(done) {
+gulp.task('build-doc', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'en';
-
-  new dgeni([require('./docs/package')]).generate().then(function() {
-    done();
-  });
+  new dgeni([require('./docs/package')]).generate().then(done);
 })
 
 ////////////////////////////////////////
-// build-docs
+// watch-doc
 ////////////////////////////////////////
-gulp.task('build-docs', function(done) {
-  runSequence('build-doc-ja', 'build-doc-en', done);
-});
-
-////////////////////////////////////////
-// watch-docs
-////////////////////////////////////////
-gulp.task('watch-docs', ['build-docs'], function(done) {
+gulp.task('watch-doc', ['build-doc'], function(done) {
   gulp.watch([
     './docs/**/*',
     './bindings/angular1/directives/*.js',
     './bindings/angular1/js/*.js',
-  ], ['build-docs']);
+  ], ['build-doc']);
 });
 
 ////////////////////////////////////////
