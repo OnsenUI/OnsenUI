@@ -75,8 +75,7 @@ export default class AnimatorFactory {
    * @param {Object} defaultAnimator The default animator instance
    * @return {Object} An animator instance
    */
-  newAnimator(options, defaultAnimator) {
-    options = options || {};
+  newAnimator(options = {}, defaultAnimator) {
 
     let animator = null;
 

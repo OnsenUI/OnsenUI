@@ -118,8 +118,7 @@ ons.enableAnimations = () => {
  * @param {Function} [options.link]
  * @return {Promise}
  */
-ons._createPopoverOriginal = function(page, options) {
-  options = options || {};
+ons._createPopoverOriginal = function(page, options = {}) {
 
   if (!page) {
     throw new Error('Page url must be defined.');
@@ -154,8 +153,7 @@ ons.createPopover = ons._createPopoverOriginal;
  * @param {Function} [options.link]
  * @return {Promise}
  */
-ons._createDialogOriginal = function(page, options) {
-  options = options || {};
+ons._createDialogOriginal = function(page, options = {}) {
 
   if (!page) {
     throw new Error('Page url must be defined.');
@@ -190,8 +188,7 @@ ons.createDialog = ons._createDialogOriginal;
  * @param {Function} [options.link]
  * @return {Promise}
  */
-ons._createAlertDialogOriginal = function(page, options) {
-  options = options || {};
+ons._createAlertDialogOriginal = function(page, options = {}) {
 
   if (!page) {
     throw new Error('Page url must be defined.');
