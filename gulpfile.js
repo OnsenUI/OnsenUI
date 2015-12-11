@@ -102,7 +102,7 @@ function bundleBrowserify(browserify) {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', function() {
+gulp.task('watch-core', function(done) {
   var b = createBrowserify({watch: true});
 
   b.on('update', function(event) {
@@ -113,7 +113,10 @@ gulp.task('watch-core', function() {
     });
   });
 
-  return bundleBrowserify(b);
+  bundleBrowserify(b).on('end', function() {
+    $.util.log('Finished browserify bundle');
+    browserSync.reload();
+  });
 });
 
 ////////////////////////////////////////
