@@ -185,7 +185,6 @@ gulp.task('clean', function() {
   return gulp.src([
     '.tmp',
     'build',
-    'app/lib/onsen/',
     '.selenium/'
   ], {read: false}).pipe($.clean());
 });
@@ -207,7 +206,6 @@ gulp.task('minify-js', function() {
       }))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js'))
   );
 });
 
@@ -239,22 +237,19 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
 
     // onsen-css-components
     gulp.src([
       'css-components/components-src/dist/*.css',
     ])
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // stylus files
     gulp.src([
       'css-components/components-src/stylus/**/*'
     ])
-      .pipe(gulp.dest('app/lib/onsen/stylus'))
       .pipe(gulp.dest('build/stylus/')),
 
 
@@ -267,28 +262,23 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // angular.js copy
     gulp.src('framework/lib/angular/*.*')
-      .pipe(gulp.dest('app/lib/onsen/js/angular/'))
       .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome fle copy
     gulp.src('core/css/font_awesome/**/*')
-      .pipe(gulp.dest('build/css/font_awesome/'))
-      .pipe(gulp.dest('app/lib/onsen/css/font_awesome/')),
+      .pipe(gulp.dest('build/css/font_awesome/')),
 
     // ionicons file copy
     gulp.src('core/css/ionicons/**/*')
-      .pipe(gulp.dest('build/css/ionicons/'))
-      .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
+      .pipe(gulp.dest('build/css/ionicons/')),
 
     // material icons file copy
     gulp.src('core/css/material-design-iconic-font/**/*')
-      .pipe(gulp.dest('build/css/material-design-iconic-font/'))
-      .pipe(gulp.dest('app/lib/onsen/css/material-design-iconic-font/')),
+      .pipe(gulp.dest('build/css/material-design-iconic-font/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
@@ -403,8 +393,6 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 
   // for livereload
   gulp.watch([
-    'app/*.{js,css,html}',
-    'app/*/*.{js,css,html}',
     'demo/*/*.{js,css,html}',
     'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {
