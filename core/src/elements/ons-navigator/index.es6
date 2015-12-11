@@ -540,7 +540,7 @@ class NavigatorElement extends BaseElement {
         if (options.animation) {
           options.animator = this._animatorFactory.newAnimator(options);
         }
-    
+
         pageObject.options = util.extend(pageObject.options, options);
         this._pushPageDOM(pageObject, done);
       });
