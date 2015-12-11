@@ -58,7 +58,7 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function() {
+gulp.task('core', ['prepare'], function() {
   return bundleBrowserify(createBrowserify());
 });
 
@@ -102,7 +102,7 @@ function bundleBrowserify(browserify) {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', function() {
+gulp.task('watch-core', ['prepare'], function() {
   var b = createBrowserify({watch: true});
 
   b.on('update', function(event) {
