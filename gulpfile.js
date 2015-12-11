@@ -527,7 +527,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   });
 
   var conf = {
-    configFile: 'protractor.conf.js',
+    configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
       '--seleniumServerJar', __dirname + '/.selenium/selenium-server-standalone-2.45.0.jar',
