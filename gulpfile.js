@@ -149,10 +149,10 @@ gulp.task('watch-core-test', ['watch-core'], function() {
 // html2js
 ////////////////////////////////////////
 gulp.task('html2js', function() {
-  return gulp.src('framework/templates/*.tpl')
-    .pipe($.html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
+  return gulp.src('bindings/angular1/templates/*.tpl')
+    .pipe($.html2js({base: __dirname + '/bindings/angular1', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
     .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('framework/directives/'));
+    .pipe(gulp.dest('bindings/angular1/directives/'));
 });
 
 ////////////////////////////////////////
@@ -163,11 +163,11 @@ gulp.task('jshint-vanilla', function() {
     'core/elements/*.js',
     'core/lib/*.js',
     'core/*.js',
-    'framework/js/*.js',
-    'framework/directives/*.js',
-    'framework/services/*.js',
-    'framework/elements/*.js',
-    'framework/views/*.js'
+    'bindings/angular1/js/*.js',
+    'bindings/angular1/directives/*.js',
+    'bindings/angular1/services/*.js',
+    'bindings/angular1/elements/*.js',
+    'bindings/angular1/views/*.js'
   ])
     .pipe($.cached('jshint-vanilla'))
     .pipe($.jshint())
@@ -181,11 +181,11 @@ gulp.task('jshint-vanilla', function() {
 gulp.task('eslint', function() {
   return gulp.src([
     'core/src/**/*.es6',
-    'framework/*/*.es6',
-    'framework/directives/*.es6',
-    'framework/services/*.es6',
-    'framework/elements/*.es6',
-    'framework/views/*.es6'
+    'bindings/angular1/*/*.es6',
+    'bindings/angular1/directives/*.es6',
+    'bindings/angular1/services/*.es6',
+    'bindings/angular1/elements/*.es6',
+    'bindings/angular1/views/*.es6'
   ])
     .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
@@ -242,14 +242,14 @@ gulp.task('prepare', ['html2js'], function() {
 
     // angular-onsenui.js
     gulp.src([
-      'framework/vendor/*.js',
-      'framework/lib/*.{es6,js}',
-      'framework/directives/templates.js',
-      'framework/js/onsen.js',
-      'framework/views/*.{es6,js}',
-      'framework/directives/*.{es6,js}',
-      'framework/services/*.{es6,js}',
-      'framework/js/*.{es6,js}'
+      'bindings/angular1/vendor/*.js',
+      'bindings/angular1/lib/*.{es6,js}',
+      'bindings/angular1/directives/templates.js',
+      'bindings/angular1/js/onsen.js',
+      'bindings/angular1/views/*.{es6,js}',
+      'bindings/angular1/directives/*.{es6,js}',
+      'bindings/angular1/services/*.{es6,js}',
+      'bindings/angular1/js/*.{es6,js}'
     ])
       .pipe($.plumber())
       .pipe(onlyES6 = $.filter('*.es6'))
@@ -291,7 +291,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulp.dest('app/lib/onsen/css')),
 
     // angular.js copy
-    gulp.src('framework/lib/angular/*.*')
+    gulp.src('bindings/angular1/lib/angular/*.*')
       .pipe(gulp.dest('app/lib/onsen/js/angular/'))
       .pipe(gulp.dest('build/js/angular/')),
 
@@ -397,10 +397,10 @@ gulp.task('dist-no-build', [], distFiles);
 // serve
 ////////////////////////////////////////
 gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core-test'], function() {
-  gulp.watch(['framework/templates/*.tpl'], ['html2js']);
+  gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
   var watched = [
-    'framework/*/*',
+    'bindings/angular1/*/*',
     'core/css/*.css',
     'css-components/components-src/dist/*.css'
   ];
@@ -462,8 +462,8 @@ gulp.task('build-docs', function(done) {
 gulp.task('watch-docs', ['build-docs'], function(done) {
   gulp.watch([
     './docs/**/*',
-    './framework/directives/*.js',
-    './framework/js/*.js',
+    './bindings/angular1/directives/*.js',
+    './bindings/angular1/js/*.js',
   ], ['build-docs']);
 });
 
