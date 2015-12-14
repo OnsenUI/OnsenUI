@@ -3,6 +3,7 @@ machine:
     version: 5.2.0
 dependencies:
   pre:
+    - sudo apt-get update; sudo apt-get install g++
     - npm install
     - npm install -g coveralls
     - cd css-components; npm install
