@@ -14,63 +14,85 @@
 </head>
 
 <body>
-
-  <ons-navigator title="List">
+ons-page>
     <ons-toolbar>
       <div class="center">List Composition</div>
     </ons-toolbar>
-    <br>
 
     <ons-list>
       <ons-list-header>Checkbox</ons-list-header>
       <ons-list-item modifier="tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox" class="checkbox__input" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" checked>
+            <div class="checkbox__checkmark checkbox--noborder"></div>
+          </label>
+        </div>
+
+        <label for="checkbox1" class="list__item__center">
           Checkbox
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox" class="checkbox__input">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input type="checkbox" id="checkbox2" class="checkbox__input">
+            <div class="checkbox__checkmark checkbox--noborder"></div>
+          </label>
+        </div>
+
+        <label for="checkbox2" class="list__item__center">
           Checkbox
         </label>
       </ons-list-item>
 
       <ons-list-header>Switch</ons-list-header>
       <ons-list-item>
-        Label
-        <ons-switch modifier="list-item"></ons-switch>
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <ons-switch></ons-switch>
+        </div>
       </ons-list-item>
 
       <ons-list-header>Radio Button</ons-list-header>
       <ons-list-item modifier="tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b" checked="checked">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
-          Radio Button
+        <div class="list__item__left">
+          <label class="radio-button radio-button--noborder">
+            <input type="radio" id="radio1" class="radio-button__input" name="radio" checked>
+            <div class="radio-button__checkmark radio-button--noborder"></div>
+          </label>
+        </div>
+
+        <label for="radio1" class="list__item__center">
+          Radio button
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
-          Radio Button
+        <div class="list__item__left">
+          <label class="radio-button radio-button--noborder">
+            <input type="radio" id="radio2" class="radio-button__input" name="radio">
+            <div class="radio-button__checkmark radio-button--noborder"></div>
+          </label>
+        </div>
+
+        <label for="radio2" class="list__item__center">
+          Radio button
         </label>
       </ons-list-item>
 
       <ons-list-header>Text Input</ons-list-header>
       <ons-list-item>
-        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+        <input type="text" class="text-input text-input--transparent" placeholder="Name">
       </ons-list-item>
 
       <ons-list-header>Textarea</ons-list-header>
       <ons-list-item>
-        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+        <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
       </ons-list-item>
     </ons-list>
-  </ons-navigator>
+  </ons-page>
 
 </body>
 </html>
