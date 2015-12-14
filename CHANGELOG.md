@@ -11,6 +11,7 @@ v2.0.0-beta.3
  * ons-back-button: Accepts `options` object. Fixed [#1040](https://github.com/OnsenUI/OnsenUI/issues/1040).
  * core: Implemented ES6 imports.
  * css-components: Fixed flexbox for MD styles in toolbar.
+ * core: Fixed [#1085](https://github.com/OnsenUI/OnsenUI/issues/1085)
 
 v2.0.0-beta.2
 ----
