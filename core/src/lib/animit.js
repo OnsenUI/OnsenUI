@@ -485,9 +485,14 @@ window.animit = (function(){
     var a = 'A'.charCodeAt(0);
     var z = 'z'.charCodeAt(0);
 
-    for (var key in styles) {
+    for (var i = 0; i < styles.length; i++) {
+      var key = styles[i]
+        .replace(/^[\-]+/, '')
+        .replace(/[\-][a-z]/g, function(s) { return s.substr(1).toUpperCase(); })
+        .replace(/^moz/, 'Moz');
+
       if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
-        if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
+        if (key !== 'cssText' && key !== 'parentText') {
           dict[key] = true;
         }
       }
@@ -569,11 +574,11 @@ window.animit = (function(){
   })();
 
   util.transitionPropertyName = (function() {
-    if (util.hasCssProperty('transition')) {
+    if (util.hasCssProperty('transitionDuration')) {
       return 'transition';
     }
 
-    if (util.hasCssProperty(util.vendorPrefix + 'Transition')) {
+    if (util.hasCssProperty(util.vendorPrefix + 'TransitionDuration')) {
       return util.vendorPrefix + 'Transition';
     }
 
