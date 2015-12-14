@@ -32,6 +32,9 @@ var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
 ////////////////////////////////////////
 // browser-sync
@@ -56,43 +59,64 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  var onlyES6 = $.filter('*.es6');
+  return bundleBrowserify(createBrowserify());
+});
 
-  // onsenui.js
-  return gulp.src([
-    'core/vendor/winstore-jscompat.js',
-    'core/vendor/*.js',
-    'core/lib/animit.js',
-    'core/lib/doorlock.es6',
-    'core/lib/ons-gesture-detector.es6',
-    'core/lib/device-back-button-dispatcher.es6',
-    'core/lib/ons.es6',
-    'core/lib/animationOptionsParser.es6',
-    'core/lib/ons-util.es6',
-    'core/lib/modal-animator.es6',
-    'core/lib/splitter-animator.es6',
-    'core/lib/navigator-transition-animator.es6',
-    'core/lib/popover-animator.es6',
-    'core/lib/ons-platform.es6',
-    'core/lib/*.{es6,js}',
-    'core/*.{es6,js}',
-    'core/elements/ons-template.es6',
-    'core/elements/ons-splitter.es6',
-    'core/elements/ons-tab.es6',
-    'core/elements/*.{es6,js}',
-    '!core/**/*.spec.{es6,js}',
-  ])
-    .pipe($.cached('onsenui.js'))
-    .pipe($.sourcemaps.init())
+function createBrowserify(options) {
+  options = options || {};
+
+  var b = browserify({
+    entries: ['./core/src/index.es6'],
+    debug: true,
+    extensions: ['.js', '.es6'],
+    cache: {},
+    packageCache: {},
+    paths: ['./core/src']
+  });
+
+  if (options.watch) {
+    b = b.plugin(watchify);
+  }
+
+  return b
+    .transform('babelify', {
+      extensions: ['.es6'],
+      presets: ['es2015']
+    })
+    .transform('concatenify');
+}
+
+function bundleBrowserify(browserify) {
+  return browserify
+    .bundle()
+    .on('error', function(error) {
+      $.util.log($.util.colors.red(error.toString()));
+    })
+    .pipe(source('onsenui.js'))
     .pipe($.plumber())
-    .pipe(onlyES6 = $.filter('*.es6'))
-    .pipe($.babel({modules: 'ignore'}))
-    .pipe(onlyES6.restore())
-    .pipe($.remember('onsenui.js'))
-    .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
+}
+
+
+////////////////////////////////////////
+// watch-core
+////////////////////////////////////////
+gulp.task('watch-core', function() {
+  var b = createBrowserify({watch: true});
+
+  b.on('update', function(event) {
+    $.util.log('Changed ' + $.util.colors.magenta(JSON.stringify(event)));
+    bundleBrowserify(b).on('end', function() {
+      $.util.log('Finished browserify rebundle');
+      browserSync.reload();
+    });
+  });
+
+  bundleBrowserify(b).on('end', function() {
+    $.util.log('Finished browserify bundle');
+    browserSync.reload();
+  });
 });
 
 ////////////////////////////////////////
@@ -105,6 +129,7 @@ gulp.task('core-test', ['core'], function() {
       action: 'run'
     }))
     .on('error', function(err) {
+      $.util.log($.util.colors.red(err.message));
       throw err;
     });
 });
@@ -112,7 +137,7 @@ gulp.task('core-test', ['core'], function() {
 ////////////////////////////////////////
 // watch-core-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', function() {
+gulp.task('watch-core-test', ['watch-core'], function() {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
@@ -158,10 +183,8 @@ gulp.task('jshint-vanilla', function() {
 ////////////////////////////////////////
 gulp.task('eslint', function() {
   return gulp.src([
-    'core/elements/*.es6',
-    'core/lib/*.es6',
-    'core/*.es6',
-    'framework/js/*.es6',
+    'core/src/**/*.es6',
+    'framework/*/*.es6',
     'framework/directives/*.es6',
     'framework/services/*.es6',
     'framework/elements/*.es6',
@@ -185,7 +208,6 @@ gulp.task('clean', function() {
   return gulp.src([
     '.tmp',
     'build',
-    'app/lib/onsen/',
     '.selenium/'
   ], {read: false}).pipe($.clean());
 });
@@ -207,14 +229,13 @@ gulp.task('minify-js', function() {
       }))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js'))
   );
 });
 
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js', 'core'], function() {
+gulp.task('prepare', ['html2js'], function() {
 
   var onlyES6;
 
@@ -239,22 +260,19 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
 
     // onsen-css-components
     gulp.src([
       'css-components/components-src/dist/*.css',
     ])
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // stylus files
     gulp.src([
       'css-components/components-src/stylus/**/*'
     ])
-      .pipe(gulp.dest('app/lib/onsen/stylus'))
       .pipe(gulp.dest('build/stylus/')),
 
 
@@ -267,28 +285,23 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // angular.js copy
     gulp.src('framework/lib/angular/*.*')
-      .pipe(gulp.dest('app/lib/onsen/js/angular/'))
       .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome fle copy
     gulp.src('core/css/font_awesome/**/*')
-      .pipe(gulp.dest('build/css/font_awesome/'))
-      .pipe(gulp.dest('app/lib/onsen/css/font_awesome/')),
+      .pipe(gulp.dest('build/css/font_awesome/')),
 
     // ionicons file copy
     gulp.src('core/css/ionicons/**/*')
-      .pipe(gulp.dest('build/css/ionicons/'))
-      .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
+      .pipe(gulp.dest('build/css/ionicons/')),
 
     // material icons file copy
     gulp.src('core/css/material-design-iconic-font/**/*')
-      .pipe(gulp.dest('build/css/material-design-iconic-font/'))
-      .pipe(gulp.dest('app/lib/onsen/css/material-design-iconic-font/')),
+      .pipe(gulp.dest('build/css/material-design-iconic-font/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
@@ -327,6 +340,7 @@ gulp.task('compress-distribution-package', function() {
 gulp.task('build', function(done) {
   return runSequence(
     'clean',
+    'core',
     'prepare',
     'minify-js',
     'build-docs',
@@ -343,6 +357,7 @@ gulp.task('build', function(done) {
 gulp.task('soft-build', function(done) {
   return runSequence(
     'clean',
+    'core',
     'prepare',
     'minify-js',
     done
@@ -372,22 +387,12 @@ gulp.task('dist', ['soft-build'], distFiles);
 gulp.task('dist-no-build', [], distFiles);
 
 ////////////////////////////////////////
-// default
-////////////////////////////////////////
-gulp.task('default', function() {
-  return runSequence('prepare');
-});
-
-////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
-    'core/*.{js,es6}',
-    'core/*/*.{js,es6}',
-    '!core/*/*.spec.js',
     'framework/*/*',
     'core/css/*.css',
     'css-components/components-src/dist/*.css'
@@ -403,8 +408,6 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 
   // for livereload
   gulp.watch([
-    'app/*.{js,css,html}',
-    'app/*/*.{js,css,html}',
     'demo/*/*.{js,css,html}',
     'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {

@@ -6,8 +6,12 @@ v2.0.0-beta.3
 ----
  * core: Fixed animationOptions parsing.
  * ons-back-button: Add "material" modifier.
- * ons-range: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/1082).
+ * ons-range: Fixed [#1082](https://github.com/OnsenUI/OnsenUI/issues/1082).
  * ons-popover: Added callback for `show` and `hide` methods.
+ * ons-back-button: Accepts `options` object. Fixed [#1040](https://github.com/OnsenUI/OnsenUI/issues/1040).
+ * core: Implemented ES6 imports.
+ * css-components: Fixed flexbox for MD styles in toolbar.
+ * core: Fixed [#1085](https://github.com/OnsenUI/OnsenUI/issues/1085)
 
 v2.0.0-beta.2
 ----
