@@ -62,3 +62,5 @@ MicroEvent.mixin  = function(destObject){
 if( typeof module !== "undefined" && ('exports' in module)){
   module.exports  = MicroEvent;
 }
+
+window.MicroEvent = MicroEvent;
