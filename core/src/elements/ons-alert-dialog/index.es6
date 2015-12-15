@@ -1,0 +1,297 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+import util from 'ons/util';
+import ModifierUtil from 'ons/internal/modifier-util';
+import AnimatorFactory from 'ons/internal/animator-factory';
+import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
+import platform from 'ons/platform';
+import BaseElement from 'ons/base-element';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+
+const scheme = {
+  '': 'alert-dialog--*',
+  '.alert-dialog-container': 'alert-dialog-container--*',
+  '.alert-dialog-title': 'alert-dialog-title--*',
+  '.alert-dialog-content': 'alert-dialog-content--*',
+  '.alert-dialog-footer': 'alert-dialog-footer--*',
+  '.alert-dialog-button': 'alert-dialog-button--*',
+  '.alert-dialog-footer--one': 'alert-dialog-footer--one--*',
+  '.alert-dialog-button--one': 'alert-dialog-button--one--*',
+  '.alert-dialog-button--primal': 'alert-dialog-button--primal--*'
+};
+
+const _animatorDict = {
+  'default': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+  'fade': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+  'none': AlertDialogAnimator
+};
+
+class AlertDialogElement extends BaseElement {
+
+  get _titleElement() {
+    return util.findChild(this.children[0], '.alert-dialog-title');
+  }
+
+  get _contentElement() {
+    return util.findChild(this.children[0], '.alert-dialog-content');
+  }
+
+  get _dialog() {
+    return this;
+  }
+
+  createdCallback() {
+    this._compile();
+    this._mask = this._createMask(this.getAttribute('mask-color'));
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this._animatorFactory = new AnimatorFactory({
+      animators: _animatorDict,
+      baseClass: AlertDialogAnimator,
+      baseClassName: 'AlertDialogAnimator',
+      defaultAnimation: this.getAttribute('animation')
+    });
+
+    this._visible = false;
+    this._doorLock = new DoorLock();
+    this._boundCancel = this._cancel.bind(this);
+  }
+
+  _compile() {
+    this.style.display = 'none';
+    this.style.zIndex = '20001';
+    this.classList.add('alert-dialog');
+  }
+
+  /**
+   * Disable or enable alert dialog.
+   *
+   * @param {Boolean}
+   */
+  setDisabled(disabled) {
+    if (typeof disabled !== 'boolean') {
+      throw new Error('Argument must be a boolean.');
+    }
+
+    if (disabled) {
+      this.setAttribute('disabled', '');
+    } else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  /**
+   * True if alert dialog is disabled.
+   *
+   * @return {Boolean}
+   */
+  isDisabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  /**
+   * Make alert dialog cancelable or uncancelable.
+   *
+   * @param {Boolean}
+   */
+  setCancelable(cancelable) {
+    if (typeof cancelable !== 'boolean') {
+      throw new Error('Argument must be a boolean.');
+    }
+
+    if (cancelable) {
+      this.setAttribute('cancelable', '');
+    } else {
+      this.removeAttribute('cancelable');
+    }
+  }
+
+  /**
+   * Show alert dialog.
+   *
+   * @param {Object} [options]
+   * @param {String} [options.animation] animation type
+   * @param {Object} [options.animationOptions] animation options
+   * @param {Function} [options.callback] callback after dialog is shown
+   */
+  show(options = {}) {
+    let cancel = false;
+    const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    util.triggerElementEvent(this, 'preshow', {
+      alertDialog: this,
+      cancel: function() {
+        cancel = true;
+      }
+    });
+
+    if (!cancel) {
+      this._doorLock.waitUnlock(() => {
+        const unlock = this._doorLock.lock();
+
+        this._mask.style.display = 'block';
+        this._mask.style.opacity = 1;
+        this.style.display = 'block';
+
+        const animator = this._animatorFactory.newAnimator(options);
+        animator.show(this, () => {
+          this._visible = true;
+          unlock();
+          util.triggerElementEvent(this, 'postshow', {alertDialog: this});
+          callback();
+        });
+      });
+    }
+  }
+
+  /**
+   * Hide alert dialog.
+   *
+   * @param {Object} [options]
+   * @param {String} [options.animation] animation type
+   * @param {Object} [options.animationOptions] animation options
+   * @param {Function} [options.callback] callback after dialog is hidden
+   */
+  hide(options = {}) {
+    let cancel = false;
+    const callback = options.callback || function() {};
+
+    util.triggerElementEvent(this, 'prehide', {
+      alertDialog: this,
+      cancel: function() {
+        cancel = true;
+      }
+    });
+
+    if (!cancel) {
+      this._doorLock.waitUnlock(() => {
+        const unlock = this._doorLock.lock();
+
+        const animator = this._animatorFactory.newAnimator(options);
+        animator.hide(this, () => {
+          this.style.display = 'none';
+          this._mask.style.display = 'none';
+          this._visible = false;
+          unlock();
+          util.triggerElementEvent(this, 'posthide', {alertDialog: this});
+          callback();
+        });
+      });
+    }
+  }
+
+  /**
+   * True if alert dialog is visible.
+   *
+   * @return {Boolean}
+   */
+  isShown() {
+    return this._visible;
+  }
+
+  /**
+   * Destroy alert dialog.
+   */
+  destroy() {
+    if (this.parentElement) {
+      this.parentElement.removeChild(this);
+    }
+
+    if (this._mask.parentElement) {
+      this._mask.parentElement.removeChild(this._mask);
+    }
+  }
+
+  isCancelable() {
+    return this.hasAttribute('cancelable');
+  }
+
+  _onDeviceBackButton(event) {
+    if (this.isCancelable()) {
+      this._cancel();
+    } else {
+      event.callParentHandler();
+    }
+  }
+
+  _cancel() {
+    if (this.isCancelable()) {
+      this.hide({
+        callback: () => {
+          util.triggerElementEvent(this, 'cancel');
+        }
+      });
+    }
+  }
+
+  _createMask(color) {
+    this._mask = util.createElement('<div></div>');
+    this._mask.classList.add('alert-dialog-mask');
+    this._mask.style.zIndex = 20000;
+    this._mask.style.display = 'none';
+
+    if (color) {
+      this._mask.style.backgroundColor = color;
+    }
+
+    document.body.appendChild(this._mask);
+    return this._mask;
+  }
+
+  attachedCallback() {
+    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+
+    this._mask.addEventListener('click', this._boundCancel, false);
+  }
+
+  detachedCallback() {
+    this._deviceBackButtonHandler.destroy();
+    this._deviceBackButtonHandler = null;
+
+    this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
+  }
+
+  attributeChangedCallback(name, last, current) {
+    if (name === 'modifier') {
+      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
+  }
+}
+
+const OnsAlertDialogElement = window.OnsAlertDialogElement = document.registerElement('ons-alert-dialog', {
+  prototype: AlertDialogElement.prototype
+});
+
+/**
+ * @param {String} name
+ * @param {DialogAnimator} Animator
+ */
+OnsAlertDialogElement.registerAnimator = function(name, Animator) {
+  if (!(Animator.prototype instanceof AlertDialogAnimator)) {
+    throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
+  }
+  _animatorDict[name] = Animator;
+};
+
+OnsAlertDialogElement.AlertDialogAnimator = AlertDialogAnimator;

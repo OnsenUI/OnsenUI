@@ -220,3 +220,7 @@ ons-material-input[disabled] {
   opacity: 0.5;
   pointer-events: none;
 }
+
+ons-toolbar-button > ons-icon[icon*="ion-"] {
+  font-size: 32px;
+}

@@ -184,6 +184,9 @@ range--disabled()
 
 var-material-range-track-height = 2px
 var-material-range-thumb-width  = 12px
+var-material-range-thumb-radius = var-material-range-thumb-width / 2
+var-material-range-thumb-vertical-margin = 24px
+var-material-range-thumb-horizontal-margin = 2px
 
 .range--material
   background-image linear-gradient(var-material-range-track-color, var-material-range-track-color)
@@ -193,12 +196,12 @@ var-material-range-thumb-width  = 12px
 
 .range--material::-webkit-slider-thumb
   top 1px
-  border 3px solid var-material-range-track-color
-  height var-material-range-thumb-width
-  width var-material-range-thumb-width
-  border-radius 100%
-  border-color var-material-range-thumb-color
-  background-color var-material-range-thumb-color
+  border none
+  height var-material-range-thumb-width + var-material-range-thumb-vertical-margin
+  width var-material-range-thumb-width + var-material-range-thumb-horizontal-margin
+  border-radius 0
+  background-color transparent
+  background-image radial-gradient(circle var-material-range-thumb-radius at var-material-range-thumb-radius + var-material-range-thumb-horizontal-margin / 2, var-material-range-thumb-color 0%, var-material-range-thumb-color var-material-range-thumb-radius, transparent var-material-range-thumb-radius + 1);
   margin-top -1px
 
 .range--material::-moz-range-thumb
@@ -219,10 +222,6 @@ var-material-range-thumb-width  = 12px
   height var-material-range-thumb-width
   width var-material-range-thumb-width
   border-radius 100%;
-  border-color var-material-range-thumb-color
-  background-color var-material-range-thumb-color
-
-.range--material:focus::-webkit-slider-thumb
   border-color var-material-range-thumb-color
   background-color var-material-range-thumb-color
 
@@ -262,6 +261,9 @@ range--material--thumb--after()
   margin-top -3px
   margin-left -3px
   range--material--thumb--after()
+  display inline-block
+  margin-left (var-material-range-thumb-horizontal-margin / 2)
+  margin-top (var-material-range-thumb-vertical-margin / 2)
 
 .range--material::-ms-fill-upper
   margin-top: -6px;

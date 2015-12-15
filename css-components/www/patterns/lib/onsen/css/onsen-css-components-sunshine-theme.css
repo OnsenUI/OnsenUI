@@ -518,13 +518,14 @@ h6 {
 }
 .range--material::-webkit-slider-thumb {
   top: 1px;
-  border: 3px solid #e0e0e0;
-  height: 12px;
-  width: 12px;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-  border-color: #009688;
-  background-color: #009688;
+  border: none;
+  height: 36px;
+  width: 14px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: -webkit-radial-gradient(7px, circle 6px, #009688 0%, #009688 6px, transparent 7px);
+  background-image: radial-gradient(circle 6px at 7px, #009688 0%, #009688 6px, transparent 7px);
   margin-top: -1px;
 }
 .range--material::-moz-range-thumb {
@@ -545,10 +546,6 @@ h6 {
   height: 12px;
   width: 12px;
   border-radius: 100%;
-  border-color: #009688;
-  background-color: #009688;
-}
-.range--material:focus::-webkit-slider-thumb {
   border-color: #009688;
   background-color: #009688;
 }
@@ -593,6 +590,9 @@ h6 {
   opacity: 0.2;
   -webkit-transition: -webkit-transform 0.1s linear;
   transition: transform 0.1s linear;
+  display: inline-block;
+  margin-left: 1px;
+  margin-top: 12px;
 }
 .range--material::-ms-fill-upper {
   margin-top: -6px;
@@ -2597,6 +2597,49 @@ h6 {
   margin-right: 4px;
 }
 .toolbar-button--material:active {
+  opacity: 1;
+  background-color: #26a69a;
+}
+.back-button {
+  height: 44px;
+  line-height: 44px;
+  padding-left: 8px;
+  color: #eb5e2f;
+  background-color: rgba(0,0,0,0);
+}
+.back-button:active {
+  opacity: 0.2;
+}
+.back-button__label {
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  margin-left: 12px;
+}
+.back-button__icon {
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+}
+.back-button__icon:before {
+  font-family: 'Ionicons';
+  content: "\f3cf";
+  font-size: 32px;
+}
+.back-button--material {
+  font-size: 22px;
+  color: #fff;
+  display: inline-block;
+  padding: 0 12px;
+  height: 100%;
+  margin: 0 0 0 4px;
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  vertical-align: initial;
+  line-height: 56px;
+}
+.back-button--material:active {
   opacity: 1;
   background-color: #26a69a;
 }
