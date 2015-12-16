@@ -26,8 +26,10 @@ var-material-dialog-background-color = $material-dialog-background-color
   markup:
     <div class="dialog-mask"></div>
     <div class="dialog">
-      <div class="page">
-        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      <div class="dialog-container">
+        <div class="page">
+          <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+        </div>
       </div>
     </div>
 */
@@ -41,13 +43,17 @@ var-material-dialog-background-color = $material-dialog-background-color
   left 50%
   transform translate(-50%, -50%)
   margin auto auto
-  background-color var-dialog-background-color
-  box-shadow 0 2px 12px rgba(0, 0, 0, 0.07)
   overflow hidden
   min-width 270px
   min-height 100px
   text-align left
+
+.dialog-container
+  height inherit
+  overflow hidden
   border-radius 4px
+  background-color var-dialog-background-color
+  -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
 
 .dialog-mask
   reset-base()
@@ -65,13 +71,17 @@ var-material-dialog-background-color = $material-dialog-background-color
   markup:
     <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
-      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      <div class="dialog dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
     </div>
 */
 
 .dialog--material
-  shadow-5()
   material-font()
-  background-color var-material-dialog-background-color
-  border-radius 2px
   text-align left
+  shadow-5()
+
+.dialog-container--material
+  border-radius 2px
+  background-color var-material-dialog-background-color

@@ -12,6 +12,9 @@ v2.0.0-beta.3
  * core: Implemented ES6 imports.
  * css-components: Fixed flexbox for MD styles in toolbar.
  * core: Fixed [#1085](https://github.com/OnsenUI/OnsenUI/issues/1085)
+ * ons-alert-dialog: [BC] Changed DOM structure to improve performance. Fixed [#1008](https://github.com/OnsenUI/OnsenUI/issues/1008).
+ * ons-dialog: [BC] Changed DOM structure to improve performance.
+ * ons-dialog, ons-alert-dialog, ons-popover: removed iOS shadow to match the original.
  * Changed the directory structure.
 
 v2.0.0-beta.2

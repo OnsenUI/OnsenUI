@@ -45,13 +45,13 @@
         'modal-text-color': '#fff',
 
         // Alert Dialog
-        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-background-color': '#f4f4f4',
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': 'rgba(24,103,194,0.81)',
         'alert-dialog-separator-color': '#ddd',
 
         // Dialog
-        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'dialog-background-color': '#f4f4f4',
 
         // Popover
         'popover-background-color': 'white',
@@ -162,13 +162,13 @@
         'modal-text-color': '#fff',
 
         // Alert Dialog
-        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-background-color': '#f4f4f4',
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#1284ff',
         'alert-dialog-separator-color': '#ddd',
 
         // Dialog
-        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'dialog-background-color': '#f4f4f4',
 
         // Popover
         'popover-background-color': 'white',
@@ -279,13 +279,13 @@
         'modal-text-color': '#fff',
 
         // Alert Dialog
-        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-background-color': '#f4f4f4',
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#3d74ff',
         'alert-dialog-separator-color': '#ddd',
 
         // Dialog
-        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'dialog-background-color': '#f4f4f4',
 
         // Popover
         'popover-background-color': 'black',
@@ -395,13 +395,13 @@
         'modal-text-color': '#fff',
 
         // Alert Dialog
-        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-background-color': '#f4f4f4',
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#eb482f',
         'alert-dialog-separator-color': '#ddd',
 
         // Dialog
-        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'dialog-background-color': '#f4f4f4',
 
         // Popover
         'popover-background-color': 'white',
@@ -512,13 +512,13 @@
         'modal-text-color': '#fff',
 
         // Alert Dialog
-        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-background-color': '#f4f4f4',
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#574bdb',
         'alert-dialog-separator-color': '#ddd',
 
         // Dialog
-        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'dialog-background-color': '#f4f4f4',
 
         // Popover
         'popover-background-color': 'white',
