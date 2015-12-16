@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Switch | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -27,58 +28,48 @@
     </ons-toolbar>
 
     <ons-list>
-      <ons-list-item>Switch<ons-switch modifier="list-item"></ons-switch></ons-list-item>
-      <ons-list-item>Switch(checked)<ons-switch modifier="list-item" checked></ons-switch></ons-list-item>
-    </ons-list>
-
-    <br>
-
-    <ons-list>
-      <ons-list-item>Switch(disabled)<ons-switch modifier="list-item" disabled></ons-switch></ons-list-item>
-      <ons-list-item>Switch(disabled, checked)<ons-switch modifier="list-item" checked disabled></ons-switch></ons-list-item>
-    </ons-list>
-
-    <br>
-
-    <ons-list>
+      <ons-list-header>iOS Switch</ons-list-header>
       <ons-list-item>
-        Switch State: {{switchState}}
-        <ons-switch modifier="list-item" ng-model="switchState"></ons-switch>
+        <div class="list__item__center">Switch</div>
+        <div class="list__item__right"><ons-switch></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="list__item__center">Switch (checked)</div>
+        <div class="list__item__right"><ons-switch checked></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="list__item__center">Switch (disabled)</div>
+        <div class="list__item__right"><ons-switch disabled></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="list__item__center">Switch (disabled, checked)</div>
+        <div class="list__item__right"><ons-switch disabled checked></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="list__item__center">Switch state: {{ switchState || false }}</div>
+        <div class="list__item__right"><ons-switch ng-model="switchState"></ons-switch></div>
       </ons-list-item>
     </ons-list>
 
-    <br>
-
-    <ons-list>
-      <ons-list-item style="height: 44px">
-        <div style="text-align: center; margin-top: 12px;"><ons-switch checked></ons-switch> <ons-switch></ons-switch></div>
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">Material Design Switch</ons-list-header>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">Switch</div>
+        <div class="list__item__right"><ons-switch modifier="material"></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">Switch (checked)</div>
+        <div class="list__item__right"><ons-switch modifier="material" checked></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">Switch (disabled)</div>
+        <div class="list__item__right"><ons-switch modifier="material" disabled></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">Switch (disabled, checked)</div>
+        <div class="list__item__right"><ons-switch modifier="material" disabled checked></ons-switch></div>
       </ons-list-item>
     </ons-list>
-
-    <br>
-
-    <ons-list>
-      <ons-list-item style="height: 44px">
-        <div style="text-align: center; margin-top: 12px;"><ons-switch checked modifier="material"></ons-switch> <ons-switch modifier="material"></ons-switch></div>
-      </ons-list-item>
-    </ons-list>
-
-    <ons-list>
-      <ons-list-item style="height: 44px">
-        <div style="text-align: center; margin-top: 12px;">
-          <label class="switch switch--material">
-            <input type="checkbox" class="switch__input switch--material__input">
-            <div class="switch__toggle switch--material__toggle"><ons-ripple></ons-ripple></div>
-          </label>
-        </div>
-      </ons-list-item>
-    </ons-list>
-
-
-    <ons-bottom-toolbar style="text-align: center; padding-top: 6px;">
-      <ons-switch></ons-switch>
-    </ons-bottom-toolbar>
-
   </ons-navigator>
 
 </body>

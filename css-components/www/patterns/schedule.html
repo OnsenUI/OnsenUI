@@ -43,7 +43,7 @@
           </div>
           <div class="right">
             <ons-toolbar-button>
-              <ons-icon icon="ion-plus" fixed-width="false" style="vertical-align: -4px;"></ons-icon>
+              <ons-icon icon="ion-plus"></ons-icon>
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
@@ -67,7 +67,7 @@
         </div>
 
         <ons-list class="plan-list">
-          <ons-list-item modifier="chevron" class="plan" ng-repeat="a in [1,2,3,4,5,6,7,8,9,10]">
+          <ons-list-item modifier="chevron tappable" class="plan" ng-repeat="a in [1,2,3,4,5,6,7,8,9,10]">
             <ons-row>
               <ons-col width="80px" class="plan-left">
                 <div class="plan-date">5:30 PM</div>
@@ -82,11 +82,11 @@
 
                 <div class="plan-info">
                   <div ng-hide="a % 4 == 0">
-                    <ons-icon icon="fa-phone"></ons-icon>123-456-789
+                    <ons-icon class="plan-icon" icon="fa-phone"></ons-icon>123-456-789
                   </div>
 
                   <div ng-hide="a % 3 == 0">
-                    <ons-icon icon="fa-map-marker"></ons-icon>Moscone, San Francisco
+                    <ons-icon class="plan-icon" icon="fa-map-marker"></ons-icon>Moscone, San Francisco
                   </div>
                 </div>
               </ons-col>

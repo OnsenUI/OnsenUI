@@ -28,7 +28,7 @@
         <ons-toolbar>
           <div class="left">
             <ons-toolbar-button ng-click="menu.toggleMenu()">
-              <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+              <ons-icon icon="ion-navicon"></ons-icon>
             </ons-toolbar-button>
           </div>
           <div class="center">Title</div>
@@ -39,14 +39,6 @@
 
     <ons-template id="menu.html">
       <ons-page modifier="menu-page">
-        <ons-toolbar modifier="transparent">
-          <div class="right">
-            <ons-toolbar-button class="menu-closeMenu" ng-click="menu.closeMenu()">
-              </ons-icon>Close
-            </ons-toolbar-button>
-          </div>
-        </ons-toolbar>
-
         <ons-list class="menu-list">
           <ons-list-item class="menu-item" ng-click="menu.closeMenu()">
             <ons-icon icon="fa-plus"></ons-icon>
