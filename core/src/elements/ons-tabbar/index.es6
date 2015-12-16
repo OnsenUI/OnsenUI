@@ -46,9 +46,10 @@ const rewritables = {
   /**
    * @param {Element} tabbarElement
    * @param {Element} target
+   * @param {Object} options
    * @param {Function} callback
    */
-  link(tabbarElement, target, callback) {
+  link(tabbarElement, target, options, callback) {
     callback(target);
   },
 
@@ -189,7 +190,7 @@ class TabbarElement extends BaseElement {
    */
   _loadPageDOMAsync(pageElement, options = {}) {
 
-    rewritables.link(this, pageElement, pageElement => {
+    rewritables.link(this, pageElement, options, pageElement => {
       this._contentElement.appendChild(pageElement);
       this._switchPage(pageElement, options);
     });
@@ -243,7 +244,7 @@ class TabbarElement extends BaseElement {
         if (oldPageElement !== internal.nullElement) {
           if (options._removeElement) {
             rewritables.unlink(this, oldPageElement, pageElement => {
-              oldPageElement._destroy();
+              pageElement._destroy();
             });
           } else {
             oldPageElement.style.display = 'none';
@@ -361,7 +362,7 @@ class TabbarElement extends BaseElement {
 
       if (selectedTab.isPersistent()) {
         const link = (element, callback) => {
-          rewritables.link(this, element, callback);
+          rewritables.link(this, element, options, callback);
         };
         selectedTab._loadPageElement(pageElement => {
           this._loadPersistentPageDOM(pageElement, params);
