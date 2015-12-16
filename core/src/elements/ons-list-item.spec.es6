@@ -60,22 +60,27 @@ describe('OnsListItemElement', () => {
   });
 
   describe('#_onTouch()', () => {
-    it('should add the active style', () => {
-      listItem.setAttribute('modifier', 'tappable');
-      expect(listItem.classList.contains('list__item--tappable')).to.be.true;
-      expect(listItem.classList.contains('list__item--tappable--active')).not.to.be.true;
+    it('should add change the background color.', () => {
+      const color = 'rgb(250, 250, 250)';
 
+      listItem.setAttribute('tappable', color);
+      expect(listItem.style.backgroundColor).not.to.equal(color);
       listItem._onTouch();
-      expect(listItem.classList.contains('list__item--tappable--active')).to.be.true;
+      expect(listItem.style.backgroundColor).to.equal(color);
     });
   });
 
   describe('#_onRelease()', () => {
-    it('should remove the active style', () => {
-      listItem.classList.add('list__item--tappable--active');
+    it('should restore the background color.', () => {
+      const origColor = 'rgb(250, 250, 250)';
+      const newColor = 'rgb(255, 255, 255)';
 
+      listItem.setAttribute('tappable', newColor);
+      listItem.style.backgroundColor = origColor;
+      listItem._onTouch();
+      expect(listItem.style.backgroundColor).to.equal(newColor);
       listItem._onRelease();
-      expect(listItem.classList.contains('list__item--tappable--active')).not.to.be.true;
+      expect(listItem.style.backgroundColor).to.equal(origColor);
     });
   });
 });
