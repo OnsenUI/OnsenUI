@@ -58,4 +58,29 @@ describe('OnsListItemElement', () => {
       expect(listItem._shouldLockOnDrag()).to.be.true;
     });
   });
+
+  describe('#_onTouch()', () => {
+    it('should add change the background color.', () => {
+      const color = 'rgb(250, 250, 250)';
+
+      listItem.setAttribute('tappable', color);
+      expect(listItem.style.backgroundColor).not.to.equal(color);
+      listItem._onTouch();
+      expect(listItem.style.backgroundColor).to.equal(color);
+    });
+  });
+
+  describe('#_onRelease()', () => {
+    it('should restore the background color.', () => {
+      const origColor = 'rgb(250, 250, 250)';
+      const newColor = 'rgb(255, 255, 255)';
+
+      listItem.setAttribute('tappable', newColor);
+      listItem.style.backgroundColor = origColor;
+      listItem._onTouch();
+      expect(listItem.style.backgroundColor).to.equal(newColor);
+      listItem._onRelease();
+      expect(listItem.style.backgroundColor).to.equal(origColor);
+    });
+  });
 });

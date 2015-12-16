@@ -7,7 +7,7 @@
  *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
  *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
  * @modifier tappable
- *   [en]Make the list item change appearance when it's tapped.[/en]
+ *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" attribute for better behavior when scrolling.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
@@ -49,6 +49,15 @@
  * @description
  *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
  *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name tappable
+ * @type {Color}
+ * @description
+ *   [en]Changes the background color when tapped. An optional color value can be defined. Default color is "#d9d9d9".[/en]
+ *   [ja][/ja]
  */
 
 (function() {
