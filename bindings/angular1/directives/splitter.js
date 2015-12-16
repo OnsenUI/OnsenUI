@@ -71,7 +71,7 @@
  *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
  *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
  */
- 
+
 /**
  * @ngdoc method
  * @signature closeRight([options])

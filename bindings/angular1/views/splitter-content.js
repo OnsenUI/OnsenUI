@@ -34,7 +34,6 @@ limitations under the License.
       },
 
       _link: function(fragment, done) {
-        
         var link = $compile(fragment);
         var pageScope = this._createPageScope();
         link(pageScope);

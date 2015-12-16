@@ -23,7 +23,7 @@ limitations under the License.
   module.factory('PageView', function($onsen, $parse) {
 
     var PageView = Class.extend({
-      _nullElement : window.document.createElement('div'),
+      _nullElement: window.document.createElement('div'),
 
       init: function(scope, element, attrs) {
         this._scope = scope;
@@ -53,7 +53,7 @@ limitations under the License.
         if (this._attrs.onDeviceBackbutton) {
           var lastEvent = window.$event;
           window.$event = $event;
-          new Function(this._attrs.onDeviceBackbutton)();
+          new Function(this._attrs.onDeviceBackbutton)(); // eslint-disable-line no-new-func
           window.$event = lastEvent;
         }
         /* jshint ignore:end */

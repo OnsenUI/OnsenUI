@@ -11,7 +11,7 @@
  * <script>
  * ons.ready(function() {
  *   ons.createPopover('popover.html').then(function(popover) {
- *     popover.show('#mybutton');   
+ *     popover.show('#mybutton');
  *   });
  * });
  * </script>
@@ -33,7 +33,7 @@
  * @param {Object} event.popover
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Call this function to stop the popover from being shown.[/en]
  *   [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]
  */
@@ -60,7 +60,7 @@
  * @param {Object} event.popover
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Call this function to stop the popover from being hidden.[/en]
  *   [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]
  */

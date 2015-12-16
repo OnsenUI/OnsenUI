@@ -20,7 +20,7 @@ limitations under the License.
  * @name ons.notification
  * @category dialog
  * @codepen Qwwxyp
- * @description 
+ * @description
  *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
  *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  * @example
@@ -80,7 +80,7 @@ limitations under the License.
  * @param {Function} [options.callback]
  *   [en]Function that executes after dialog has been closed.[/en]
  *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
- * @description 
+ * @description
  *   [en]
  *     Display an alert dialog to show the user a message.
  *     The content of the message can be either simple text or HTML.
@@ -132,7 +132,7 @@ limitations under the License.
  *     この関数の引数として、押されたボタンのインデックス値が渡されます。
  *     もしダイアログがキャンセルされた場合には-1が渡されます。
  *   [/ja]
- * @description 
+ * @description
  *   [en]
  *     Display a dialog to ask the user for confirmation.
  *     The default button labels are "Cancel" and "OK" but they can be customized.
@@ -196,9 +196,9 @@ limitations under the License.
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
  *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
- * @description 
+ * @description
  *   [en]
- *     Display a dialog with a prompt to ask the user a question. 
+ *     Display a dialog with a prompt to ask the user a question.
  *     Must specify either message or messageHTML.
  *   [/en]
  *   [ja]

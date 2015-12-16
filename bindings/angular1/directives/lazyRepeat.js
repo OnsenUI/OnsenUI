@@ -4,7 +4,7 @@
  * @name ons-lazy-repeat
  * @extensionOf angular
  * @category control
- * @description 
+ * @description
  *   [en]
  *     Using this component a list with millions of items can be rendered without a drop in performance.
  *     It does that by "lazily" loading elements into the DOM when they come into view and
@@ -16,7 +16,7 @@
  *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
  *   [/ja]
  * @codepen QwrGBm
- * @guide UsingLazyRepeat 
+ * @guide UsingLazyRepeat
  *   [en]How to use Lazy Repeat[/en]
  *   [ja]レイジーリピートの使い方[/ja]
  * @example

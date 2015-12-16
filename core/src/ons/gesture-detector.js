@@ -5,6 +5,8 @@
 (function(window) {
   'use strict';
 
+var Event, Utils, Detection, PointerEvent;
+
 /**
  * @param {HTMLElement} element
  * @param {Object} [options={}]
@@ -185,7 +187,7 @@ function setup() {
  * @class Utils
  * @static
  */
-var Utils = GestureDetector.utils = {
+Utils = GestureDetector.utils = {
   /**
    * extend method, could also be used for cloning when `dest` is an empty object.
    * changes the dest object
@@ -541,7 +543,7 @@ var Utils = GestureDetector.utils = {
  * @class Event
  * @static
  */
-var Event = GestureDetector.event = {
+Event = GestureDetector.event = {
   /**
    * when touch events have been fired, this is true
    * this is used to stop mouse events
@@ -878,7 +880,7 @@ var Event = GestureDetector.event = {
  * @class PointerEvent
  * @static
  */
-var PointerEvent = GestureDetector.PointerEvent = {
+PointerEvent = GestureDetector.PointerEvent = {
   /**
    * holds all pointers, by `identifier`
    * @property pointers
@@ -951,7 +953,7 @@ var PointerEvent = GestureDetector.PointerEvent = {
  * @class Detection
  * @static
  */
-var Detection = GestureDetector.detection = {
+Detection = GestureDetector.detection = {
   // contains all registered GestureDetector.gestures in the correct order
   gestures: [],
 
@@ -1028,7 +1030,7 @@ var Detection = GestureDetector.detection = {
       this.stopDetect();
     }
 
-    return eventData;
+    return eventData; // eslint-disable-line consistent-return
   },
 
   /**
@@ -1333,7 +1335,7 @@ GestureDetector.Instance.prototype = {
     Utils.toggleBehavior(this.element, this.options.behavior, false);
 
     // unbind all custom event handlers
-    for(i = -1; (eh = this.eventHandlers[++i]);) {
+    for(i = -1; (eh = this.eventHandlers[++i]);) { // eslint-disable-line no-cond-assign
       Utils.off(this.element, eh.gesture, eh.handler);
     }
 

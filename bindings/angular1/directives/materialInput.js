@@ -73,13 +73,11 @@
 
           element[0]._input.addEventListener('input', function() {
             set(scope.$parent, element[0].value);
-
             if (attrs.ngChange) {
               scope.$eval(attrs.ngChange);
             }
-
             scope.$parent.$evalAsync();
-          }.bind(this));
+          });
         }
       }
     };

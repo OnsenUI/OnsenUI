@@ -290,7 +290,7 @@ limitations under the License.
               var classes = element.attr('class').split(/\s+/),
                   patt = template.replace('*', '.');
 
-              for (var i=0; i < classes.length; i++) {
+              for (var i = 0; i < classes.length; i++) {
                 var cls = classes[i];
 
                 if (cls.match(patt)) {
@@ -346,9 +346,8 @@ limitations under the License.
          * @param object
          */
         declareVarAttribute: function(attrs, object) {
-          if (typeof attrs['var'] === 'string') {
-            var varName = attrs['var'];
-
+          if (typeof attrs.var === 'string') {
+            var varName = attrs.var;
             this._defineVar(varName, object);
           }
         },
@@ -376,7 +375,7 @@ limitations under the License.
         registerEventHandlers: function(component, eventNames) {
           eventNames = eventNames.trim().split(/\s+/);
 
-          for (var i = 0, l = eventNames.length; i < l; i ++) {
+          for (var i = 0, l = eventNames.length; i < l; i++) {
             var eventName = eventNames[i];
             this._registerEventHandler(component, eventName);
           }
@@ -468,7 +467,7 @@ limitations under the License.
 
             container[names[names.length - 1]] = object;
 
-            if (container[names[names.length -1]] !== object) {
+            if (container[names[names.length - 1]] !== object) {
               throw new Error('Cannot set var="' + object._attrs.var + '" because it will overwrite a read-only variable.');
             }
           }
