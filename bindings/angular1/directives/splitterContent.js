@@ -58,9 +58,9 @@
   window.OnsSplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
   var lastLink = window.OnsSplitterContentElement.rewritables.link;
-  window.OnsSplitterContentElement.rewritables.link = function(element, target, callback) {
+  window.OnsSplitterContentElement.rewritables.link = function(element, target, options, callback) {
     var view = angular.element(element).data('ons-splitter-content');
-    lastLink(element, target, function(target) {
+    lastLink(element, target, options, function(target) {
       view._link(target, callback);
     });
   };
