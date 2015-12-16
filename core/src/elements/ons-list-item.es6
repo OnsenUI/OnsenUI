@@ -38,6 +38,7 @@ class ListItemElement extends BaseElement {
 
   attachedCallback() {
     this.addEventListener('drag', this._onDrag);
+
     this.addEventListener('touchstart', this._onTouch);
     this.addEventListener('mousedown', this._onTouch);
     this.addEventListener('touchend', this._onRelease);
@@ -47,27 +48,31 @@ class ListItemElement extends BaseElement {
 
     this._originalBackgroundColor = this.style.backgroundColor;
 
-    this.style.transition = this.transition;
-    this.style.webkitTransition = this.transition;
-    this.style.MozTransition = this.transition;
+    this.style.transition = this._transition;
+    this.style.webkitTransition = this._transition;
+    this.style.MozTransition = this._transition;
   }
 
   detachedCallback() {
     this.removeEventListener('drag', this._onDrag);
+
     this.removeEventListener('touchstart', this._onTouch);
-    this.removeEventListener('touchstart', this._onRelease);
-    this.removeEventListener('touchstart', this._onRelease);
+    this.removeEventListener('mousedown', this._onTouch);
+    this.removeEventListener('touchend', this._onRelease);
+    this.removeEventListener('touchmove', this._onRelease);
+    this.removeEventListener('touchcancel', this._onRelease);
+    this.removeEventListener('mouseup', this._onRelease);
   }
 
-  get transition() {
+  get _transition() {
     return 'background-color 0.0s linear 0.15s';
   }
 
-  get tappable() {
+  get _tappable() {
     return this.hasAttribute('tappable');
   }
 
-  get tapColor() {
+  get _tapColor() {
     return this.getAttribute('tappable') || '#d9d9d9';
   }
 
@@ -80,12 +85,12 @@ class ListItemElement extends BaseElement {
   }
 
   _onTouch() {
-    if (this.tappable) {
+    if (this._tappable) {
       if (this.style.backgroundColor) {
         this._originalBackgroundColor = this.style.backgroundColor;
       }
 
-      this.style.backgroundColor = this.tapColor;
+      this.style.backgroundColor = this._tapColor;
     }
   }
 
