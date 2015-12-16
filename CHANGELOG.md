@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.4
+----
+
 v2.0.0-beta.3
 ----
  * core: Fixed animationOptions parsing.
