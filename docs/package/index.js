@@ -15,12 +15,12 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
     readFilesProcessor.basePath = path.resolve(__dirname, '../..');
     readFilesProcessor.sourceFiles = [
       {
-        include: 'framework/directives/*.js',
-        basePath: path.resolve(__dirname, '/framework/directives')
+        include: 'bindings/angular1/directives/*.js',
+        basePath: path.resolve(__dirname, '/bindings/angular1/directives')
       },
       {
-        include: 'framework/js/*.js',
-        basePath: path.resolve(__dirname, '/framework/js')
+        include: 'bindings/angular1/js/*.js',
+        basePath: path.resolve(__dirname, '/bindings/angular1/js')
       },
       {
         include: 'docs/guides/*.ngdoc',
