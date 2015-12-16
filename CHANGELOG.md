@@ -9,6 +9,7 @@ v2.0.0-beta.3
  * ons-range: Fixed [#1082](https://github.com/OnsenUI/OnsenUI/issues/1082).
  * ons-popover: Added callback for `show` and `hide` methods.
  * ons-back-button: Accepts `options` object. Fixed [#1040](https://github.com/OnsenUI/OnsenUI/issues/1040).
+ * ons-list-item: Fixed "tappable" modifier behavior on iOS. Fixed [#740](https://github.com/OnsenUI/OnsenUI/issues/740).
  * core: Implemented ES6 imports.
  * css-components: Fixed flexbox for MD styles in toolbar.
  * core: Fixed [#1085](https://github.com/OnsenUI/OnsenUI/issues/1085)
@@ -16,6 +17,7 @@ v2.0.0-beta.3
  * ons-dialog: [BC] Changed DOM structure to improve performance.
  * ons-dialog, ons-alert-dialog, ons-popover: removed iOS shadow to match the original.
  * Changed the directory structure.
+ * ons-list-item: Add "tappable" attribute.
 
 v2.0.0-beta.2
 ----

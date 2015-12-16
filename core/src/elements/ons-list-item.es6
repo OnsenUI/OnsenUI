@@ -38,7 +38,6 @@ class ListItemElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this._gestureDetector = new GestureDetector(this);
-    this._boundOnDrag = this._onDrag.bind(this);
   }
 
   attributeChangedCallback(name, last, current) {
@@ -48,11 +47,43 @@ class ListItemElement extends BaseElement {
   }
 
   attachedCallback() {
-    this.addEventListener('drag', this._boundOnDrag);
+    this.addEventListener('drag', this._onDrag);
+
+    this.addEventListener('touchstart', this._onTouch);
+    this.addEventListener('mousedown', this._onTouch);
+    this.addEventListener('touchend', this._onRelease);
+    this.addEventListener('touchmove', this._onRelease);
+    this.addEventListener('touchcancel', this._onRelease);
+    this.addEventListener('mouseup', this._onRelease);
+
+    this._originalBackgroundColor = this.style.backgroundColor;
+
+    this.style.transition = this._transition;
+    this.style.webkitTransition = this._transition;
+    this.style.MozTransition = this._transition;
   }
 
   detachedCallback() {
-    this.removeEventListener('drag', this._boundOnDrag);
+    this.removeEventListener('drag', this._onDrag);
+
+    this.removeEventListener('touchstart', this._onTouch);
+    this.removeEventListener('mousedown', this._onTouch);
+    this.removeEventListener('touchend', this._onRelease);
+    this.removeEventListener('touchmove', this._onRelease);
+    this.removeEventListener('touchcancel', this._onRelease);
+    this.removeEventListener('mouseup', this._onRelease);
+  }
+
+  get _transition() {
+    return 'background-color 0.0s linear 0.15s';
+  }
+
+  get _tappable() {
+    return this.hasAttribute('tappable');
+  }
+
+  get _tapColor() {
+    return this.getAttribute('tappable') || '#d9d9d9';
   }
 
   _onDrag(event) {
@@ -61,6 +92,20 @@ class ListItemElement extends BaseElement {
     if (this._shouldLockOnDrag() && ['left', 'right'].indexOf(gesture.direction) > -1) {
       gesture.preventDefault();
     }
+  }
+
+  _onTouch() {
+    if (this._tappable) {
+      if (this.style.backgroundColor) {
+        this._originalBackgroundColor = this.style.backgroundColor;
+      }
+
+      this.style.backgroundColor = this._tapColor;
+    }
+  }
+
+  _onRelease() {
+    this.style.backgroundColor = this._originalBackgroundColor || '';
   }
 
   _shouldLockOnDrag() {
