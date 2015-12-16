@@ -30,9 +30,11 @@ notification._createAlertDialog = function(title, message,
 
   let dialogElement = util.createElement(`
   <ons-alert-dialog>
-    ${titleElementHTML}
-    <div class="alert-dialog-content"></div>
-    <div class="alert-dialog-footer"></div>
+    <div class="alert-dialog-container">
+      ${titleElementHTML}
+      <div class="alert-dialog-content"></div>
+      <div class="alert-dialog-footer"></div>
+    </div>
   </ons-alert-dialog>`);
 
   let titleElement = dialogElement.querySelector('.alert-dialog-title');

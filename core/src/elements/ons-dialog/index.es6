@@ -23,13 +23,16 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '.dialog': 'dialog--*'
+  '.dialog': 'dialog--*',
+  '.dialog-container': 'dialog-container--*'
 };
 
 const templateSource = util.createElement(`
   <div>
     <div class="dialog-mask"></div>
-    <div class="dialog"></div>
+    <div class="dialog">
+      <div class="dialog-container"></div>
+    </div>
   </div>
 `);
 
@@ -85,7 +88,7 @@ class DialogElement extends BaseElement {
     }
 
     while (this.firstChild) {
-      dialog.appendChild(this.firstChild);
+      dialog.children[0].appendChild(this.firstChild);
     }
 
     while (template.firstChild) {

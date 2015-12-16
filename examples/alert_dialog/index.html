@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Alert dialog | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      ons.createAlertDialog('alertMaterial.html').then(function(alertDialog) {
+        $scope.alertDialog = alertDialog;
+      });
+
+      $scope.fromTemplate = function() {
+        $scope.alertDialog.show();
+      };
+
+      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        $scope.alertDialog2 = alertDialog;
+      });
+
+      $scope.fromTemplate2 = function() {
+        $scope.alertDialog2.show();
+      };
+
+      $scope.close = function() {
+        if($scope.alertDialog && $scope.alertDialog.isShown()) {
+          $scope.alertDialog.hide();
+        }
+      };
+
+      $scope.close2 = function() {
+        if($scope.alertDialog2 && $scope.alertDialog2.isShown()) {
+          $scope.alertDialog2.hide();
+        }
+      };
+
+      $scope.alert = function() {
+        ons.notification.alert({message: "Hello, world!"});
+      };
+
+      $scope.alertMaterial = function() {
+        ons.notification.alert({message: 'Hello, world!', modifier: 'material'});
+      };
+
+      $scope.confirm = function() {
+        ons.notification.confirm({
+          message: "Do you like ramen?",
+          buttonLabels: ["Yes", "No"],
+          callback: function(i) {
+            if (i==0) {
+              ons.notification.alert({message: "Me too!"});
+            } else {
+              ons.notification.alert({message: "That's too bad..."});
+            }
+          }
+        });
+      };
+
+      $scope.confirmMaterial = function() {
+        ons.notification.confirm({
+          message: "Do you like ramen?",
+          modifier: 'material',
+          buttonLabels: ["Yes", "No"],
+          callback: function(i) {
+            if (i==0) {
+              ons.notification.alert({message: "Me too!", modifier: 'material'});
+            } else {
+              ons.notification.alert({message: "That's too bad...", modifier: 'material'});
+            }
+          }
+        });
+      };
+
+      $scope.prompt = function() {
+        var fn = function() {
+          ons.notification.prompt({
+            message: "What is the meaning of Life, the Universe and Everything?",
+            callback: function(answer) {
+              if (answer === "42") {
+                ons.notification.alert({message: "That's the correct answer!"});
+              } else {
+                ons.notification.alert({
+                  message: "Incorrect! Please try again!",
+                  callback: fn
+                });
+              }
+            }
+          });
+        };
+
+        fn();
+      };
+
+      $scope.promptMaterial = function() {
+        var fn = function() {
+          ons.notification.prompt({
+            message: "What is the meaning of Life, the Universe and Everything?",
+            callback: function(answer) {
+              if (answer === "42") {
+                ons.notification.alert({message: "That's the correct answer!", modifier: 'material'});
+              } else {
+                ons.notification.alert({
+                  message: "Incorrect! Please try again!",
+                  callback: fn,
+                  modifier: 'material'
+                });
+              }
+            },
+            modifier: 'material'
+          });
+        };
+
+        fn();
+      };
+
+      $scope.cancelable = function() {
+        ons.notification.confirm({
+          message: "This dialog can be canceled by tapping the background or using the back button on your device.",
+          cancelable: true,
+          callback: function(i) {
+            if (i == -1) {
+              ons.notification.alert({message: "You canceled it!"});
+            }
+          }
+        });
+      };
+    });
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Alert dialog</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <h2 style="font-family: 'Roboto', 'Noto', sans-serif;">Material Design</h2>
+      <ons-button modifier="material" ng-click="fromTemplate()">Create from template</ons-button>
+      <ons-button modifier="material" ng-click="alertMaterial()">Alert</ons-button>
+      <ons-button modifier="material" ng-click="confirmMaterial()">Confirm</ons-button>
+      <ons-button modifier="material" ng-click="promptMaterial()">Prompt</ons-button>
+
+      <h2>iOS</h2>
+      <ons-button ng-click="fromTemplate2()">Create from template</ons-button>
+      <ons-button ng-click="alert()">Alert</ons-button>
+      <ons-button ng-click="confirm()">Confirm</ons-button>
+      <ons-button ng-click="prompt()">Prompt</ons-button>
+      <ons-button ng-click="cancelable()">Cancelable</ons-button>
+    </div>
+  </ons-page>
+
+  <script type="text/ons-template" id="alertMaterial.html">
+    <ons-alert-dialog modifier="material">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Warning!</div>
+        <div class="alert-dialog-content">
+          An error has occurred!
+        </div>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button" ng-click="close()">
+            <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+            Cancel
+          </button>
+          <button class="alert-dialog-button" ng-click="close()">
+            <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+            Ok
+          </button>
+        </div>
+      </div>
+    </ons-alert-dialog>
+  </script>
+
+  <script type="text/ons-template" id="alert.html">
+    <ons-alert-dialog>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Warning!</div>
+        <div class="alert-dialog-content">
+          An error has occurred!
+        </div>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button" ng-click="close2()">Cancel</button>
+          <button class="alert-dialog-button" ng-click="close2()">OK</button>
+        </div>
+      </div>
+    </ons-alert-dialog>
+  </script>
+
+</body>
+</html>
