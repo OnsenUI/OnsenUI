@@ -253,12 +253,8 @@ list__item()
     </ul>
  */
 
-.list__item--tappable
-  transition background-color 0.2s linear
-
-.list__item--tappable--active
+.list__item--tappable:active
   background-color var-list-item-active-background-color
-  transition background-color 0.0s linear 0.15s
 
 /*! topdoc
   name: Switch in List Item
