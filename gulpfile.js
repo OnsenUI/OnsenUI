@@ -332,7 +332,7 @@ gulp.task('build', function(done) {
     'core',
     'prepare',
     'minify-js',
-    'build-docs',
+    'build-doc',
     'prepare-css-components',
     'compress-distribution-package',
     done
