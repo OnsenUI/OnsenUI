@@ -18,6 +18,7 @@ v2.0.0-beta.3
  * ons-dialog, ons-alert-dialog, ons-popover: removed iOS shadow to match the original.
  * Changed the directory structure.
  * ons-list-item: Add "tappable" attribute.
+ * ons-list-item: Add child classes to make it easier to compose lists.
 
 v2.0.0-beta.2
 ----
