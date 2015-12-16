@@ -17,6 +17,7 @@ v2.0.0-beta.3
  * ons-dialog: [BC] Changed DOM structure to improve performance.
  * ons-dialog, ons-alert-dialog, ons-popover: removed iOS shadow to match the original.
  * Changed the directory structure.
+ * ons-list-item: Add "tappable" attribute.
 
 v2.0.0-beta.2
 ----
