@@ -58,7 +58,7 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function() {
+gulp.task('core', ['prepare'], function() {
   return bundleBrowserify(createBrowserify());
 });
 
@@ -102,7 +102,7 @@ function bundleBrowserify(browserify) {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', function() {
+gulp.task('watch-core', ['prepare'], function() {
   var b = createBrowserify({watch: true});
 
   b.on('update', function(event) {
@@ -152,44 +152,17 @@ gulp.task('watch-core-test', ['watch-core'], function() {
 // html2js
 ////////////////////////////////////////
 gulp.task('html2js', function() {
-  return gulp.src('framework/templates/*.tpl')
-    .pipe($.html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
+  return gulp.src('bindings/angular1/templates/*.tpl')
+    .pipe($.html2js({base: __dirname + '/bindings/angular1', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
     .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('framework/directives/'));
-});
-
-////////////////////////////////////////
-// jshint-vanilla
-////////////////////////////////////////
-gulp.task('jshint-vanilla', function() {
-  gulp.src([
-    'core/elements/*.js',
-    'core/lib/*.js',
-    'core/*.js',
-    'framework/js/*.js',
-    'framework/directives/*.js',
-    'framework/services/*.js',
-    'framework/elements/*.js',
-    'framework/views/*.js'
-  ])
-    .pipe($.cached('jshint-vanilla'))
-    .pipe($.jshint())
-    .pipe($.remember('jshint-vanilla'))
-    .pipe($.jshint.reporter('jshint-stylish'));
+    .pipe(gulp.dest('bindings/angular1/directives/'));
 });
 
 /////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
 gulp.task('eslint', function() {
-  return gulp.src([
-    'core/src/**/*.es6',
-    'framework/*/*.es6',
-    'framework/directives/*.es6',
-    'framework/services/*.es6',
-    'framework/elements/*.es6',
-    'framework/views/*.es6'
-  ])
+  return gulp.src(eslintTargets())
     .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
     .pipe($.remember('eslint'))
@@ -197,9 +170,25 @@ gulp.task('eslint', function() {
 });
 
 /////////////////////////////////////////
-// jshint
+// watch-eslint
 ////////////////////////////////////////
-gulp.task('jshint', ['jshint-vanilla', 'eslint']);
+gulp.task('watch-eslint', ['eslint'], function() {
+  gulp.watch(eslintTargets(), ['eslint']);
+});
+
+function eslintTargets() {
+  return [
+    'gulpfile.js',
+    'docs/packages/**/*.{js,es6}',
+    'core/src/*.{js,es6}',
+    'core/src/**/*.{js,es6}',
+    'bindings/angular1/js/*.{js,es6}',
+    'bindings/angular1/directives/*.{js,es6}',
+    'bindings/angular1/services/*.{js,es6}',
+    'bindings/angular1/elements/*.{js,es6}',
+    'bindings/angular1/views/*.{js,es6}'
+  ];
+}
 
 ////////////////////////////////////////
 // clean
@@ -243,14 +232,14 @@ gulp.task('prepare', ['html2js'], function() {
 
     // angular-onsenui.js
     gulp.src([
-      'framework/vendor/*.js',
-      'framework/lib/*.{es6,js}',
-      'framework/directives/templates.js',
-      'framework/js/onsen.js',
-      'framework/views/*.{es6,js}',
-      'framework/directives/*.{es6,js}',
-      'framework/services/*.{es6,js}',
-      'framework/js/*.{es6,js}'
+      'bindings/angular1/vendor/*.js',
+      'bindings/angular1/lib/*.{es6,js}',
+      'bindings/angular1/directives/templates.js',
+      'bindings/angular1/js/onsen.js',
+      'bindings/angular1/views/*.{es6,js}',
+      'bindings/angular1/directives/*.{es6,js}',
+      'bindings/angular1/services/*.{es6,js}',
+      'bindings/angular1/js/*.{es6,js}'
     ])
       .pipe($.plumber())
       .pipe(onlyES6 = $.filter('*.es6'))
@@ -288,7 +277,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // angular.js copy
-    gulp.src('framework/lib/angular/*.*')
+    gulp.src('bindings/angular1/lib/angular/*.*')
       .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome fle copy
@@ -343,7 +332,7 @@ gulp.task('build', function(done) {
     'core',
     'prepare',
     'minify-js',
-    'build-docs',
+    'build-doc',
     'prepare-css-components',
     'compress-distribution-package',
     done
@@ -389,11 +378,11 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function() {
-  gulp.watch(['framework/templates/*.tpl'], ['html2js']);
+gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], function() {
+  gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
   var watched = [
-    'framework/*/*',
+    'bindings/angular1/*/*',
     'core/css/*.css',
     'css-components/components-src/dist/*.css'
   ];
@@ -404,7 +393,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function
 
   gulp.watch(watched, {
     debounceDelay: 300
-  }, ['jshint', 'prepare']);
+  }, ['prepare']);
 
   // for livereload
   gulp.watch([
@@ -417,45 +406,23 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync', 'watch-core'], function
 });
 
 ////////////////////////////////////////
-// build-doc-ja
+// build-doc
 ////////////////////////////////////////
-gulp.task('build-doc-ja', function(done) {
-  njglobals.rootUrl = '/';
-  njglobals.lang = 'ja';
-
-  new dgeni([require('./docs/package')]).generate().then(function() {
-    done();
-  });
-});
-
-////////////////////////////////////////
-// build-doc-en
-////////////////////////////////////////
-gulp.task('build-doc-en', function(done) {
+gulp.task('build-doc', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'en';
-
-  new dgeni([require('./docs/package')]).generate().then(function() {
-    done();
-  });
+  new dgeni([require('./docs/package')]).generate().then(done);
 })
 
 ////////////////////////////////////////
-// build-docs
+// watch-doc
 ////////////////////////////////////////
-gulp.task('build-docs', function(done) {
-  runSequence('build-doc-ja', 'build-doc-en', done);
-});
-
-////////////////////////////////////////
-// watch-docs
-////////////////////////////////////////
-gulp.task('watch-docs', ['build-docs'], function(done) {
+gulp.task('watch-doc', ['build-doc'], function(done) {
   gulp.watch([
     './docs/**/*',
-    './framework/directives/*.js',
-    './framework/js/*.js',
-  ], ['build-docs']);
+    './bindings/angular1/directives/*.js',
+    './bindings/angular1/js/*.js',
+  ], ['build-doc']);
 });
 
 ////////////////////////////////////////
@@ -518,7 +485,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   });
 
   var conf = {
-    configFile: 'protractor.conf.js',
+    configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
       '--seleniumServerJar', __dirname + '/.selenium/selenium-server-standalone-2.45.0.jar',
