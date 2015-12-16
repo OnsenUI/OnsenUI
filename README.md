@@ -102,9 +102,9 @@ $ [sudo] npm install -g gulp
 $ gulp build
 ```
 
-The files will be built and copied into **build**, **demo/lib/onsen/**, and **app/lib/onsen/** folder.
+The files will be built and copied into **build** and **examples/lib/onsen/** folder.
 
-## Running Demo
+## Running Examples
 
 ```bash
 $ npm install
@@ -112,7 +112,7 @@ $ [sudo] npm install -g gulp
 $ gulp serve
 ```
 
-* Then navigate your browser to [http://0.0.0.0:3000/demo/index.html](http://0.0.0.0:3000/demo/index.html)
+* Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)
 
 ## Running the test suite
 
@@ -160,7 +160,7 @@ Run gulp task to develop Onsen UI itself with livereload.
 
     gulp serve
 
-Access [http://0.0.0.0:3000/demo/index.html](http://0.0.0.0:3000/demo/index.html) and your code changes will be reloaded.
+Access [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html) and your code changes will be reloaded.
 
 ## Contributors
 
