@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.2 - 2015-12-07 */
+/*! onsenui - v2.0.0-beta.2 - 2015-12-16 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -223,6 +223,10 @@ ons-material-input[disabled] {
   pointer-events: none;
 }
 
+ons-toolbar-button > ons-icon[icon*="ion-"] {
+  font-size: 26px;
+}
+
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -372,7 +376,6 @@ limitations under the License.
   display: inline-block;
   font-style: normal;
   font-weight: normal;
-  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

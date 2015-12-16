@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-beta.2 - 2015-12-07 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta.2 - 2015-12-16 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -1057,21 +1057,20 @@ limitations under the License.
           userDelegate.reload = function() {
             oldReload();
             provider._onChange();
-          }.bind(this);
+          };
         }
         else {
           userDelegate.reload = function() {
             provider._onChange();
-          }.bind(this);
+          };
         }
-      }.bind(this),
+      },
 
       _getDelegate: function() {
         var delegate = this._scope.$eval(this._attrs.onsLazyRepeat);
 
         if (typeof delegate === 'undefined') {
-          /*jshint evil:true */
-          delegate = eval(this._attrs.onsLazyRepeat);
+          delegate = eval(this._attrs.onsLazyRepeat); // eslint-disable-line no-eval
         }
 
         return delegate;
@@ -1776,7 +1775,7 @@ limitations under the License.
   module.factory('PageView', ['$onsen', '$parse', function($onsen, $parse) {
 
     var PageView = Class.extend({
-      _nullElement : window.document.createElement('div'),
+      _nullElement: window.document.createElement('div'),
 
       init: function(scope, element, attrs) {
         this._scope = scope;
@@ -1806,7 +1805,7 @@ limitations under the License.
         if (this._attrs.onDeviceBackbutton) {
           var lastEvent = window.$event;
           window.$event = $event;
-          new Function(this._attrs.onDeviceBackbutton)();
+          new Function(this._attrs.onDeviceBackbutton)(); // eslint-disable-line no-new-func
           window.$event = lastEvent;
         }
         /* jshint ignore:end */
@@ -2005,8 +2004,7 @@ limitations under the License.
         if (this._attrs.ngAction) {
           this._scope.$eval(this._attrs.ngAction, {$done: done});
         } else if (this._attrs.onAction) {
-          /*jshint evil:true */
-          eval(this._attrs.onAction);
+          eval(this._attrs.onAction); //eslint-disable-line no-eval
         }
       },
 
@@ -3497,7 +3495,7 @@ limitations under the License.
       /**
        * @param {String} page
        */
-      setSecondaryPage : function(page) {
+      setSecondaryPage: function(page) {
         if (page) {
           $onsen.getPageHTMLAsync(page).then(function(html) {
             this._appendSecondPage(angular.element(html.trim()));
@@ -3512,7 +3510,7 @@ limitations under the License.
       /**
        * @param {String} page
        */
-      setMainPage : function(page) {
+      setMainPage: function(page) {
         if (page) {
           $onsen.getPageHTMLAsync(page).then(function(html) {
             this._appendMainPage(angular.element(html.trim()));
@@ -3567,9 +3565,9 @@ limitations under the License.
         var should = this._shouldCollapse();
 
         if (this._doSplit) {
-          this._activateSplitMode(); 
+          this._activateSplitMode();
         } else if (this._doCollapse) {
-          this._activateCollapseMode(); 
+          this._activateCollapseMode();
         } else if (should) {
           this._activateCollapseMode();
         } else if (!should) {
@@ -3605,10 +3603,10 @@ limitations under the License.
           return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
           return $onsGlobal.orientation.isLandscape();
-        } else if (c.substr(0,5) == 'width') {
+        } else if (c.substr(0, 5) == 'width') {
           var num = c.split(' ')[1];
           if (num.indexOf('px') >= 0) {
-            num = num.substr(0,num.length-2);
+            num = num.substr(0, num.length - 2);
           }
 
           var width = window.innerWidth;
@@ -3644,7 +3642,7 @@ limitations under the License.
         this.emit(name, {
           splitView: this,
           width: window.innerWidth,
-          orientation: this._getOrientation() 
+          orientation: this._getOrientation()
         });
       },
 
@@ -3665,13 +3663,12 @@ limitations under the License.
           },
           width: window.innerWidth,
           orientation: this._getOrientation()
-        }); 
+        });
       },
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
           this._fireEvent('precollapse');
-       
           this._secondaryPage.attr('style', '');
           this._mainPage.attr('style', '');
 
@@ -3699,7 +3696,7 @@ limitations under the License.
 
           this._mode = SPLIT_MODE;
           this._setSize();
-       
+
           this._fireEvent('postsplit');
         }
       },
@@ -3760,7 +3757,6 @@ limitations under the License.
       },
 
       _link: function(fragment, done) {
-        
         var link = $compile(fragment);
         var pageScope = this._createPageScope();
         link(pageScope);
@@ -3849,7 +3845,6 @@ limitations under the License.
       },
 
       _link: function(fragment, done) {
-        
         var link = $compile(fragment);
         var pageScope = this._createPageScope();
         link(pageScope);
@@ -4533,16 +4528,16 @@ limitations under the License.
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
  *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
  * @codepen aHmGL
- * @seealso ons-toolbar 
+ * @seealso ons-toolbar
  *   [en]ons-toolbar component[/en]
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-navigator
  *   [en]ons-navigator component[/en]
  *   [ja]ons-navigatorコンポーネント[/en]
- * @guide Addingatoolbar 
+ * @guide Addingatoolbar
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
- * @guide Returningfromapage 
+ * @guide Returningfromapage
  *   [en]Returning from a page[/en]
  *   [ja]一つ前のページに戻る[/ja]
  * @example
@@ -4839,7 +4834,7 @@ limitations under the License.
  * @description
  *   [en]Fired when the carousel has been overscrolled.[/en]
  *   [ja]カルーセルがオーバースクロールした時に発火します。[/ja]
- * @param {Object} event 
+ * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel
@@ -5392,7 +5387,7 @@ limitations under the License.
  * @param {Object} event.dialog
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute this function to stop the dialog from being shown.[/en]
  *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
  */
@@ -5419,7 +5414,7 @@ limitations under the License.
  * @param {Object} event.dialog
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute this function to stop the dialog from being hidden.[/en]
  *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
  */
@@ -5722,7 +5717,6 @@ limitations under the License.
     return {
       restrict: 'E',
       scope: true,
-      
       compile: function(element, attrs) {
         CustomElements.upgrade(element[0]);
 
@@ -6284,7 +6278,7 @@ limitations under the License.
  * @name ons-lazy-repeat
  * @extensionOf angular
  * @category control
- * @description 
+ * @description
  *   [en]
  *     Using this component a list with millions of items can be rendered without a drop in performance.
  *     It does that by "lazily" loading elements into the DOM when they come into view and
@@ -6296,7 +6290,7 @@ limitations under the License.
  *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
  *   [/ja]
  * @codepen QwrGBm
- * @guide UsingLazyRepeat 
+ * @guide UsingLazyRepeat
  *   [en]How to use Lazy Repeat[/en]
  *   [ja]レイジーリピートの使い方[/ja]
  * @example
@@ -6488,7 +6482,7 @@ limitations under the License.
  *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
  *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
  * @modifier tappable
- *   [en]Make the list item change appearance when it's tapped.[/en]
+ *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" attribute for better behavior when scrolling.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
@@ -6530,6 +6524,15 @@ limitations under the License.
  * @description
  *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
  *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name tappable
+ * @type {Color}
+ * @description
+ *   [en]Changes the background color when tapped. An optional color value can be defined. Default color is "#d9d9d9".[/en]
+ *   [ja][/ja]
  */
 
 (function() {
@@ -6669,13 +6672,11 @@ limitations under the License.
 
           element[0]._input.addEventListener('input', function() {
             set(scope.$parent, element[0].value);
-
             if (attrs.ngChange) {
               scope.$eval(attrs.ngChange);
             }
-
             scope.$parent.$evalAsync();
-          }.bind(this));
+          });
         }
       }
     };
@@ -6687,7 +6688,7 @@ limitations under the License.
  * @id modal
  * @name ons-modal
  * @category modal
- * @description 
+ * @description
  *   [en]
  *     Modal component that masks current screen.
  *     Underlying components are not subject to any events while the modal component is shown.
@@ -7325,10 +7326,10 @@ limitations under the License.
   window.OnsNavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
 
   var lastLink = window.OnsNavigatorElement.rewritables.link;
-  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, callback) {
+  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
     var view = angular.element(navigatorElement).data('ons-navigator');
     view._compileAndLink(target, function(target) {
-      lastLink(navigatorElement, target, callback);
+      lastLink(navigatorElement, target, options, callback);
     });
   };
 
@@ -7648,7 +7649,7 @@ limitations under the License.
  * <script>
  * ons.ready(function() {
  *   ons.createPopover('popover.html').then(function(popover) {
- *     popover.show('#mybutton');   
+ *     popover.show('#mybutton');
  *   });
  * });
  * </script>
@@ -7670,7 +7671,7 @@ limitations under the License.
  * @param {Object} event.popover
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Call this function to stop the popover from being shown.[/en]
  *   [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]
  */
@@ -7697,7 +7698,7 @@ limitations under the License.
  * @param {Object} event.popover
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Call this function to stop the popover from being hidden.[/en]
  *   [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]
  */
@@ -7864,6 +7865,9 @@ limitations under the License.
  * @param {String} [options.animationOptions]
  *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
  *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function is called after the popover has been revealed.[/en]
+ *   [ja]ポップオーバーが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
  *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
@@ -7881,6 +7885,9 @@ limitations under the License.
  * @param {String} [options.animationOptions]
  *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
  *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+ * @param {Function} [options.callback]
+ *   [en]This functions is called after the popover has been hidden.[/en]
+ *   [ja]ポップオーバーが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Close the popover.[/en]
  *   [ja]ポップオーバーを閉じます。[/ja]
@@ -9739,7 +9746,7 @@ limitations under the License.
  *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
  *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
  */
- 
+
 /**
  * @ngdoc method
  * @signature closeRight([options])
@@ -9961,9 +9968,9 @@ limitations under the License.
   window.OnsSplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
   var lastLink = window.OnsSplitterContentElement.rewritables.link;
-  window.OnsSplitterContentElement.rewritables.link = function(element, target, callback) {
+  window.OnsSplitterContentElement.rewritables.link = function(element, target, options, callback) {
     var view = angular.element(element).data('ons-splitter-content');
-    lastLink(element, target, function(target) {
+    lastLink(element, target, options, function(target) {
       view._link(target, callback);
     });
   };
@@ -10308,9 +10315,9 @@ limitations under the License.
   window.OnsSplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
 
   var lastLink = window.OnsSplitterSideElement.rewritables.link;
-  window.OnsSplitterSideElement.rewritables.link = function(element, target, callback) {
+  window.OnsSplitterSideElement.rewritables.link = function(element, target, options, callback) {
     var view = angular.element(element).data('ons-splitter-side');
-    lastLink(element, target, function(target) {
+    lastLink(element, target, options, function(target) {
       view._link(target, callback);
     });
   };
@@ -10528,9 +10535,9 @@ limitations under the License.
           $onsen.removeModifierMethods(switchView);
           element.data('ons-switch', undefined);
           $onsen.clearComponent({
-            element : element,
-            scope : scope,
-            attrs : attrs
+            element: element,
+            scope: scope,
+            attrs: attrs
           });
           element = attrs = scope = null;
         });
@@ -11032,10 +11039,10 @@ limitations under the License.
   window.OnsTabbarElement.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
 
   var lastLink = window.OnsTabbarElement.rewritables.link;
-  window.OnsTabbarElement.rewritables.link = function(tabbarElement, target, callback) {
+  window.OnsTabbarElement.rewritables.link = function(tabbarElement, target, options, callback) {
     var view = angular.element(tabbarElement).data('ons-tabbar');
     view._compileAndLink(target, function(target) {
-      lastLink(tabbarElement, target, callback);
+      lastLink(tabbarElement, target, options, callback);
     });
   };
 
@@ -11331,7 +11338,6 @@ limitations under the License.
   var module = angular.module('onsen');
 
   var ComponentCleaner = {
-    
     /**
      * @param {jqLite} element
      */
@@ -11395,7 +11401,7 @@ limitations under the License.
               return function(scope, element, attr) {
                 var listener = function(event) {
                   scope.$apply(function() {
-                    fn(scope, {$event:event});
+                    fn(scope, {$event: event});
                   });
                 };
                 element.on(name, listener);
@@ -11729,7 +11735,7 @@ limitations under the License.
               var classes = element.attr('class').split(/\s+/),
                   patt = template.replace('*', '.');
 
-              for (var i=0; i < classes.length; i++) {
+              for (var i = 0; i < classes.length; i++) {
                 var cls = classes[i];
 
                 if (cls.match(patt)) {
@@ -11785,9 +11791,8 @@ limitations under the License.
          * @param object
          */
         declareVarAttribute: function(attrs, object) {
-          if (typeof attrs['var'] === 'string') {
-            var varName = attrs['var'];
-
+          if (typeof attrs.var === 'string') {
+            var varName = attrs.var;
             this._defineVar(varName, object);
           }
         },
@@ -11815,7 +11820,7 @@ limitations under the License.
         registerEventHandlers: function(component, eventNames) {
           eventNames = eventNames.trim().split(/\s+/);
 
-          for (var i = 0, l = eventNames.length; i < l; i ++) {
+          for (var i = 0, l = eventNames.length; i < l; i++) {
             var eventName = eventNames[i];
             this._registerEventHandler(component, eventName);
           }
@@ -11907,7 +11912,7 @@ limitations under the License.
 
             container[names[names.length - 1]] = object;
 
-            if (container[names[names.length -1]] !== object) {
+            if (container[names[names.length - 1]] !== object) {
               throw new Error('Cannot set var="' + object._attrs.var + '" because it will overwrite a read-only variable.');
             }
           }
@@ -11966,7 +11971,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.GestureDetector
  * @category util
- * @description 
+ * @description
  *   [en]Utility class for gesture detection.[/en]
  *   [ja]ジェスチャを検知するためのユーティリティクラスです。[/ja]
  */
@@ -12055,7 +12060,7 @@ limitations under the License.
  * @name ons.notification
  * @category dialog
  * @codepen Qwwxyp
- * @description 
+ * @description
  *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
  *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  * @example
@@ -12115,7 +12120,7 @@ limitations under the License.
  * @param {Function} [options.callback]
  *   [en]Function that executes after dialog has been closed.[/en]
  *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
- * @description 
+ * @description
  *   [en]
  *     Display an alert dialog to show the user a message.
  *     The content of the message can be either simple text or HTML.
@@ -12167,7 +12172,7 @@ limitations under the License.
  *     この関数の引数として、押されたボタンのインデックス値が渡されます。
  *     もしダイアログがキャンセルされた場合には-1が渡されます。
  *   [/ja]
- * @description 
+ * @description
  *   [en]
  *     Display a dialog to ask the user for confirmation.
  *     The default button labels are "Cancel" and "OK" but they can be customized.
@@ -12231,9 +12236,9 @@ limitations under the License.
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
  *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
- * @description 
+ * @description
  *   [en]
- *     Display a dialog with a prompt to ask the user a question. 
+ *     Display a dialog with a prompt to ask the user a question.
  *     Must specify either message or messageHTML.
  *   [/en]
  *   [ja]
@@ -12299,7 +12304,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.orientation
  * @category util
- * @description 
+ * @description
  *   [en]Utility methods for orientation detection.[/en]
  *   [ja]画面のオリエンテーション検知のためのユーティリティメソッドを収めているオブジェクトです。[/ja]
  */
@@ -12324,7 +12329,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the current orientation is portrait mode.[/en]
  *   [ja]オリエンテーションがportraitモードの場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns whether the current screen orientation is portrait or not.[/en]
  *   [ja]オリエンテーションがportraitモードかどうかを返します。[/ja]
  */
@@ -12335,7 +12340,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the current orientation is landscape mode.[/en]
  *   [ja]オリエンテーションがlandscapeモードの場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns whether the current screen orientation is landscape or not.[/en]
  *   [ja]オリエンテーションがlandscapeモードかどうかを返します。[/ja]
  */
@@ -12403,7 +12408,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.platform
  * @category util
- * @description 
+ * @description
  *   [en]Utility methods to detect current platform.[/en]
  *   [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  */
@@ -12414,7 +12419,7 @@ limitations under the License.
  * @param  {string} platform Name of the platform.
  *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれかを指定します。[/ja]
- * @description 
+ * @description
  *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
  *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
  */
@@ -12422,7 +12427,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isWebView()
- * @description 
+ * @description
  *   [en]Returns whether app is running in Cordova.[/en]
  *   [ja]Cordova内で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12431,7 +12436,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIOS()
- * @description 
+ * @description
  *   [en]Returns whether the OS is iOS.[/en]
  *   [ja]iOS上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12440,7 +12445,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroid()
- * @description 
+ * @description
  *   [en]Returns whether the OS is Android.[/en]
  *   [ja]Android上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12449,7 +12454,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroidPhone()
- * @description 
+ * @description
  *   [en]Returns whether the device is Android phone.[/en]
  *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12458,7 +12463,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroidTablet()
- * @description 
+ * @description
  *   [en]Returns whether the device is Android tablet.[/en]
  *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12467,7 +12472,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIPhone()
- * @description 
+ * @description
  *   [en]Returns whether the device is iPhone.[/en]
  *   [ja]iPhone上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12476,7 +12481,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIPad()
- * @description 
+ * @description
  *   [en]Returns whether the device is iPad.[/en]
  *   [ja]iPad上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12485,7 +12490,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isBlackBerry()
- * @description 
+ * @description
  *   [en]Returns whether the device is BlackBerry.[/en]
  *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12494,7 +12499,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isOpera()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Opera.[/en]
  *   [ja]Opera上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12503,7 +12508,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isFirefox()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Firefox.[/en]
  *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12512,7 +12517,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isSafari()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Safari.[/en]
  *   [ja]Safari上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12521,7 +12526,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isChrome()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Chrome.[/en]
  *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12530,7 +12535,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIE()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Internet Explorer.[/en]
  *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12539,7 +12544,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isEdge()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Edge.[/en]
  *   [ja]Edge上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -12548,7 +12553,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIOS7above()
- * @description 
+ * @description
  *   [en]Returns whether the iOS version is 7 or above.[/en]
  *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
