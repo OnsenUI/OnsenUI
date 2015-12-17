@@ -73,23 +73,17 @@ export class LazyRepeatProvider {
 
   /**
    * @param {Element} wrapperElement
-   * @param {Element} templateElement
    * @param {LazyRepeatDelegate} delegate
    */
-  constructor(wrapperElement, templateElement, delegate) {
+  constructor(wrapperElement, delegate) {
     if (!(delegate instanceof LazyRepeatDelegate)) {
       throw new Error('"delegate" parameter must be an instance of ons._internal.LazyRepeatDelegate.');
-    }
-
-    if (!(templateElement instanceof Element)) {
-      throw new Error('"templateElement" parameter must be an instance of Element.');
     }
 
     if (!(wrapperElement instanceof Element)) {
       throw new Error('"wrapperElement" parameter must be an instance of Element.');
     }
 
-    this._templateElement = templateElement;
     this._wrapperElement = wrapperElement;
     this._delegate = delegate;
 
@@ -356,7 +350,7 @@ export class LazyRepeatProvider {
 
   destroy() {
     this._delegate.destroy();
-    this._parentElement = this._templateElement = this._delegate = this._renderedItems = null;
+    this._parentElement = this._delegate = this._renderedItems = null;
     this._removeEventListeners();
   }
 }

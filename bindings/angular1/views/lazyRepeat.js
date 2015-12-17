@@ -37,7 +37,7 @@ limitations under the License.
         var userDelegate = this._getDelegate();
         var internalDelegate = new AngularLazyRepeatDelegate(element[0], userDelegate, element.scope());
 
-        this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, element[0], internalDelegate);
+        this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
         element.remove();
 
         this._injectReloadMethod(userDelegate, this._provider);
