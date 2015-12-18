@@ -23,13 +23,25 @@ class InternalDelegate extends LazyRepeatDelegate {
   }
 
   prepareItem(index, done) {
+    const content = this._userDelegate.createItemContent(index);
+    
+    if (!(content instanceof Element)) {
+      throw new Error('createItemContent() must return an instance of Element.');
+    }
+
     done({
-      element: this._userDelegate.createItemContent(index)
+      element: content
     });
   }
 
   countItems() {
-    return this._userDelegate.countItems();
+    const count = this._userDelegate.countItems();
+    
+    if (typeof count !== 'number') {
+      throw new Error('countItems() must return number.');
+    }
+
+    return count;
   }
 
   updateItem(index, item) {
@@ -39,7 +51,13 @@ class InternalDelegate extends LazyRepeatDelegate {
   }
 
   calculateItemHeight(index) {
-    return this._userDelegate.calculateItemHeight(index);
+    const height = this._userDelegate.calculateItemHeight(index);
+
+    if (typeof height !== 'number') {
+      throw new Error('calculateItemHeight() must return number.');
+    }
+
+    return height;
   }
 
   destroyItem(index, item) {
@@ -61,13 +79,6 @@ class LazyRepeatElement extends BaseElement {
     this.style.display = 'none';
   }
 
-  setup(delegate) {
-    this.refresh();
-  }
-
-  _compile() {
-  }
-
   attributeChangedCallback(name, last, current) {
   }
 
@@ -85,20 +96,6 @@ class LazyRepeatElement extends BaseElement {
       return window[name];
     } else {
       return null;
-    }
-  }
-
-  _verifyUserDelegate(delegate) {
-    if (!(delegate.countItems instanceof Function)) {
-      throw Error();
-    }
-
-    if (!(delegate.createItemContent instanceof Function)) {
-      throw Error();
-    }
-
-    if (!(delegate.calculateItemHeight instanceof Function)) {
-      throw Error();
     }
   }
 
