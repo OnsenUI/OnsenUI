@@ -385,6 +385,8 @@ class TabbarElement extends BaseElement {
     if (!util.isAttached(element)) {
       this._contentElement.appendChild(element);
     }
+
+    element.removeAttribute('style');
     this._switchPage(element, options);
   }
 
