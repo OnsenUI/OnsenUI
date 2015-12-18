@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Lazy Repeat | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <style>
+    .item {
+      height: 40px;
+    }
+  </style>
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    window.onload = setup;
+
+    function setup() {
+      document.querySelector('#my-list').delegate = {
+        calculateItemHeight: function(i) {
+          return 44;
+        },
+
+        createItemContent: function(i, template) {
+          var dom = template.cloneNode(true);
+          dom.innerText = i;
+
+          return dom;
+        },
+
+        countItems: function() {
+          return 10000000;
+        }
+      };
+    }
+  </script>
+
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Lazy Repeat</div>
+      <div class="right"><ons-toolbar-button onclick="setup()">Setup</ons-toolbar-button></div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-lazy-repeat id="my-list">
+        <ons-list-item>
+          item
+        </ons-list-item>
+      </ons-lazy-repeat>
+    </ons-list>
+  </ons-page>
+</body>
+</html>
