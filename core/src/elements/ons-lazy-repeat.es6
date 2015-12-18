@@ -17,13 +17,24 @@ import util from 'ons/util';
 import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
 
 class InternalDelegate extends LazyRepeatDelegate {
-  constructor(userDelegate) {
+
+  /**
+   * @param {Object} userDelegate
+   * @param {Element/null} [templateElement]
+   */
+  constructor(userDelegate, templateElement = null) {
     super();
     this._userDelegate = userDelegate;
+
+    if (templateElement instanceof Element || templateElement === null) {
+      this._templateElement = templateElement;
+    } else {
+      throw new Error('templateElemenet parameter must be an instance of Element or null.');
+    }
   }
 
   prepareItem(index, done) {
-    const content = this._userDelegate.createItemContent(index);
+    const content = this._userDelegate.createItemContent(index, this._templateElement);
     
     if (!(content instanceof Element)) {
       throw new Error('createItemContent() must return an instance of Element.');
@@ -84,9 +95,17 @@ class LazyRepeatElement extends BaseElement {
 
   attachedCallback() {
     if (this.hasAttribute('delegate')) {
-      const delegate = new InternalDelegate(this._getUserDelegate());
+      const delegate = new InternalDelegate(this._getUserDelegate(), this._getTemplateElement());
       this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
     }
+  }
+
+  _getTemplateElement() {
+    if (this.children[0] && !this._templateElement) {
+      this._templateElement = this.removeChild(this.children[0]);
+    } 
+
+    return this._templateElement || null;
   }
 
   _getUserDelegate() {
@@ -112,12 +131,17 @@ class LazyRepeatElement extends BaseElement {
   /**
    * @param {Object} delegate
    */
-  setDelegate(delegate) {
+  setDelegate(userDelegate) {
     if (this._lazyRepeatProvider) {
       this._lazyRepeatProvider.destroy();
     }
 
-    this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, new InternalDelegate(delegate));
+    const delegate = new InternalDelegate(userDelegate, this._getTemplateElement());
+    this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
+  }
+
+  set delegate(userDelegate) {
+    this.setDelegate(userDelegate);
   }
 }
 
