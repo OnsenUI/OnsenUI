@@ -119,7 +119,10 @@ class LazyRepeatElement extends BaseElement {
   }
 
   detachedCallback() {
-    this._lazyRepeatProvider = null;
+    if (this._lazyRepeatProvider) {
+      this._lazyRepeatProvider.destroy();
+      this._lazyRepeatProvider = null;
+    }
   }
 
   refresh() {
