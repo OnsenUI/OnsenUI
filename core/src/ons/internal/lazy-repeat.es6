@@ -348,6 +348,7 @@ export class LazyRepeatProvider {
   }
 
   destroy() {
+    this._removeAllElements();
     this._delegate.destroy();
     this._parentElement = this._delegate = this._renderedItems = null;
     this._removeEventListeners();
