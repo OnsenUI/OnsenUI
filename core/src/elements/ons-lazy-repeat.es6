@@ -152,3 +152,4 @@ window.OnsLazyRepeatElement = document.registerElement('ons-lazy-repeat', {
   prototype: LazyRepeatElement.prototype
 });
 
+
