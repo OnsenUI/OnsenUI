@@ -178,7 +178,6 @@ export class LazyRepeatProvider {
     }
 
     this._delegate.prepareItem(index, (item) => {
-
       const element = item.element;
 
       element.style.position = 'absolute';
