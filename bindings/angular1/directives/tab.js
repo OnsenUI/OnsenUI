@@ -109,14 +109,6 @@
 
 /**
  * @ngdoc attribute
- * @name no-reload
- * @description
- *   [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *   [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
- */
-
-/**
- * @ngdoc attribute
  * @name persistent
  * @description
  *   [en]
