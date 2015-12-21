@@ -80,27 +80,6 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('no-reload attribute', () => {
-    it('sets the tab as no-reloadable', function() {
-      let tabbar = ons._util.createElement(`
-        <ons-tabbar>
-        </ons-tabbar>
-      `);
-
-      tabbar.appendChild(element);
-      document.body.appendChild(tabbar);
-      expect(element.canReload()).to.be.true;
-
-      element.setAttribute('no-reload', '');
-      expect(element.canReload()).not.to.be.true;
-
-      element.removeAttribute('no-reload');
-      expect(element.canReload()).to.be.true;
-
-      document.body.removeChild(tabbar);
-    });
-  });
-
   describe('active attribute', () => {
     it('sets whether a tab should be active or not', () => {
       expect(element.hasAttribute('active')).not.to.be.true;
