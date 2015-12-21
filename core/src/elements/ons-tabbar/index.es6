@@ -291,7 +291,7 @@ class TabbarElement extends BaseElement {
       return false;
     }
 
-    if ((selectedTab.hasAttribute('no-reload') || selectedTab.isPersistent()) && index === previousTabIndex) {
+    if (index === previousTabIndex) {
       util.triggerElementEvent(this, 'reactive', {
         index: index,
         tabItem: selectedTab
