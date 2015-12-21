@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.4
+----
+ * ons-tabbar: Fixed [#1132](https://github.com/OnsenUI/OnsenUI/issues/1132).
+
 v2.0.0-beta.3
 ----
  * core: Fixed animationOptions parsing.
