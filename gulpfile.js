@@ -45,7 +45,7 @@ gulp.task('browser-sync', function() {
     server: {
       baseDir: __dirname,
       index: 'index.html',
-      directory: false
+      directory: true
     },
     files: [],
     watchOptions: {
