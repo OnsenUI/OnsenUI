@@ -96,13 +96,13 @@
       tabs[1].click();
       tabs[1].click();
       tabs[0].click();
-      expect(timesReactivated.getText()).toBe('1');
+      expect(timesReactivated.getText()).toBe('2');
 
       tabs[2].click();
       tabs[2].click();
       tabs[2].click();
       tabs[0].click();
-      expect(timesReactivated.getText()).toBe('3');
+      expect(timesReactivated.getText()).toBe('4');
     });
 
     it('should be possible to hide tabs', function() {
