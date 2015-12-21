@@ -67,7 +67,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * Disable this framework to handle cordova "backbutton" event.
  */
 ons.disableDeviceBackButtonHandler = function() {
-  deviceBackButtonDispatcher.disable();
+  ons._deviceBackButtonDispatcher.disable();
 };
 
 /**

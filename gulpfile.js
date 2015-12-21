@@ -398,7 +398,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 
   // for livereload
   gulp.watch([
-    'demo/*/*.{js,css,html}',
+    'examples/*/*.{js,css,html}',
     'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
