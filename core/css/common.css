@@ -193,6 +193,10 @@ ons-material-input {
   position: relative;
 }
 
+ons-material-input > input {
+  width: 100%;
+}
+
 ons-material-input > .text-input--material__label {
   position: absolute;
   left: 0px;
