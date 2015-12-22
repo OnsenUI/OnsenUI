@@ -20,7 +20,7 @@ import NavigatorTransitionAnimator from './animator';
 /**
  * Fade-in screen transition.
  */
-export class FadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class FadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
     options = ons._util.extend({
