@@ -8,6 +8,7 @@ v2.0.0-beta.4
  * ons-tabbar: `no-reload` is now the default behavior.
  * ons-ripple: Fixed [#1140](https://github.com/OnsenUI/OnsenUI/issues/1140).
  * ons-navigator: Fixed Fade animator export.
+ * ons-material-input: Make it resizable.
 
 v2.0.0-beta.3
 ----
