@@ -10,6 +10,7 @@
       colors: {
         // Global
         'background-color': '#f9f9f9',
+        'material-background-color': '#fafafa',
         'text-color': '#1f1f21',
         'sub-text-color': '#999',
         'highlight-color': 'rgba(24,103,194,0.81)',
@@ -127,6 +128,7 @@
       colors: {
         // Global
         'background-color': '#fff',
+        'material-background-color': '#fafafa',
         'text-color': '#1f1f21',
         'sub-text-color': '#999',
         'highlight-color': '#1284ff',
@@ -244,6 +246,7 @@
       colors: {
         // Global
         'background-color': '#242424',
+        'material-background-color': '#333333',
         'text-color': '#fff',
         'sub-text-color': '#87888f',
         'highlight-color': '#3d74ff',
@@ -360,6 +363,7 @@
       colors: {
         // Global
         'background-color': '#f9f9f9',
+        'material-background-color': '#fafafa',
         'text-color': '#333',
         'sub-text-color': '#999',
         'highlight-color': '#eb482f',
@@ -477,6 +481,7 @@
       colors: {
         // Global
         'background-color': '#f3f3f3',
+        'material-background-color': '#fafafa',
         'text-color': '#524b57',
         'sub-text-color': '#ccc',
         'highlight-color': '#8962ed',

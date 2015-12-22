@@ -2,6 +2,7 @@
 
 // internal variables
 var-page-background-color = $background-color
+var-page-material-background-color = $material-background-color
 
 .page
   reset-font()
@@ -54,3 +55,6 @@ var-page-background-color = $background-color
 .page--material__content h5
   material-font()
   font-weight 400
+
+.page--material__background
+  background-color var-page-material-background-color
