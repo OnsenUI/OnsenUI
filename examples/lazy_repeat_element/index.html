@@ -36,6 +36,10 @@
         }
       };
     }
+    
+    function refresh() {
+      document.querySelector('#my-list').refresh();
+    }
   </script>
 
 </head>
@@ -43,6 +47,7 @@
 <body>
   <ons-page>
     <ons-toolbar>
+      <div class="left"><ons-toolbar-button onclick="refresh()">Refresh</ons-toolbar-button></div>
       <div class="center">Lazy Repeat</div>
       <div class="right"><ons-toolbar-button onclick="setup()">Setup</ons-toolbar-button></div>
     </ons-toolbar>

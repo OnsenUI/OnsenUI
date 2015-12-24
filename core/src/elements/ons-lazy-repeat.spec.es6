@@ -48,6 +48,16 @@ describe('OnsLazyRepeatElement', () => {
     expect(window.OnsLazyRepeatElement).to.be.ok;
   });
 
+  it('should exist', () => {
+    expect(window.OnsLazyRepeatElement).to.be.ok;
+  });
+
+  describe('#refresh', () => {
+    it('should be callable', () => {
+      lazyRepeat.refresh();
+    });
+  });
+
   describe('#delegate', () => {
     it('should accept delegate object twice', () => {
       lazyRepeat.delegete = {};

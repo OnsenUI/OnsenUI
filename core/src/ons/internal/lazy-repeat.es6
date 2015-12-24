@@ -126,6 +126,10 @@ export class LazyRepeatProvider {
     this._render();
   }
 
+  refresh() {
+    this._onChange();
+  }
+
   _render() {
     const items = this._getItemsInView();
     const keep = {};
