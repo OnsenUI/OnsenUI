@@ -330,11 +330,13 @@ export class LazyRepeatProvider {
       this._boundOnChange = this._onChange.bind(this);
     }
 
+    this._boundDoubleFireOnTouchend = this._doubleFireOnTouchend.bind(this);
+
     this._pageContent.addEventListener('scroll', this._boundOnChange, true);
 
     if (platform.isIOS()) {
       this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
-      this._pageContent.addEventListener('touchend', this._doubleFireOnTouchend, true);
+      this._pageContent.addEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
     window.document.addEventListener('resize', this._boundOnChange, true);
@@ -345,7 +347,7 @@ export class LazyRepeatProvider {
 
     if (platform.isIOS()) {
       this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
-      this._pageContent.removeEventListener('touchend', this._doubleFireOnTouchend, true);
+      this._pageContent.removeEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
     window.document.removeEventListener('resize', this._boundOnChange, true);
