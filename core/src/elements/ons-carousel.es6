@@ -176,6 +176,30 @@ class CarouselElement extends BaseElement {
     };
   }
 
+  _displayFullscreenCarouselItems(currentIndex, lastActiveIndex) {
+    let children = this._getCarouselItemElements();
+
+    if (currentIndex > lastActiveIndex) {
+      if (lastActiveIndex > 0) {
+        children[lastActiveIndex - 1].style.visibility = 'hidden';
+        children[lastActiveIndex - 1].style.display = 'none';
+      }
+      if(currentIndex < children.length - 1) {
+        children[currentIndex + 1].style.visibility = 'visible';
+        children[currentIndex + 1].style.display = 'block';
+      }
+    } else {
+      if (lastActiveIndex < children.length - 1) {
+        children[lastActiveIndex + 1].visibility = 'hidden';
+        children[lastActiveIndex + 1].style.display = 'none';
+      }
+      if (currentIndex > 0) {
+        this.children[currentIndex - 1].style.visibility = 'visible';
+        this.children[currentIndex - 1].style.display = 'block';
+      }
+    }
+  }
+
   /**
    * @return {Number}
    */
@@ -443,6 +467,10 @@ class CarouselElement extends BaseElement {
     if (this._lastActiveIndex !== currentIndex) {
       const lastActiveIndex = this._lastActiveIndex;
       this._lastActiveIndex = currentIndex;
+
+      if (this.isFullscreen()) {
+        this._displayFullscreenCarouselItems(currentIndex, lastActiveIndex);
+      }
 
       util.triggerElementEvent(this, 'postchange', {
         carousel: this,
