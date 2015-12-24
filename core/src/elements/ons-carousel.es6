@@ -517,8 +517,9 @@ class CarouselElement extends BaseElement {
     if (this.isAutoScrollEnabled()) {
       let arr = [];
       const size = this._getCarouselItemSize();
+      const nbrOfItems = this.getCarouselItemCount();
 
-      for (let i = 0; i < this.getCarouselItemCount(); i++) {
+      for (let i = 0; i < nbrOfItems; i++) {
         if (max >= i * size) {
           arr.push(i * size);
         }
