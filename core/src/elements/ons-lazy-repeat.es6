@@ -35,7 +35,7 @@ class InternalDelegate extends LazyRepeatDelegate {
 
   prepareItem(index, done) {
     const content = this._userDelegate.createItemContent(index, this._templateElement);
-    
+
     if (!(content instanceof Element)) {
       throw new Error('createItemContent() must return an instance of Element.');
     }
@@ -47,7 +47,7 @@ class InternalDelegate extends LazyRepeatDelegate {
 
   countItems() {
     const count = this._userDelegate.countItems();
-    
+
     if (typeof count !== 'number') {
       throw new Error('countItems() must return number.');
     }
@@ -103,13 +103,13 @@ class LazyRepeatElement extends BaseElement {
   _getTemplateElement() {
     if (this.children[0] && !this._templateElement) {
       this._templateElement = this.removeChild(this.children[0]);
-    } 
+    }
 
     return this._templateElement || null;
   }
 
   _getUserDelegate() {
-    const name = this.getAttribute('delegate') || this.getAttribute('ons-lazy-repeat');;
+    const name = this.getAttribute('delegate') || this.getAttribute('ons-lazy-repeat');
 
     if (window[name]) {
       return window[name];
