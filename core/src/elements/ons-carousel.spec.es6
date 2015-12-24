@@ -451,5 +451,16 @@ describe('OnsCarouselElement', () => {
       expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
     });
   });
+
+  describe('#isFullscreen()', () => {
+    it('returns \'false\' if carousel is not fullscreen', () => {
+      expect(carousel.isFullscreen()).to.be.false;
+    });
+
+    it('returns \'true\' if carousel is fullscreen', () => {
+      carousel.setAttribute('fullscreen', true);
+      expect(carousel.isFullscreen()).to.be.true;
+    });
+  });
 });
 
