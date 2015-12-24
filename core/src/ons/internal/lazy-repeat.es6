@@ -127,6 +127,7 @@ export class LazyRepeatProvider {
   }
 
   refresh() {
+    this._removeAllElements();
     this._onChange();
   }
 
