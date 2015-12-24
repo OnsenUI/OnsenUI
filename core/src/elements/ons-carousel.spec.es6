@@ -9,6 +9,7 @@ describe('OnsCarouselElement', () => {
       <ons-carousel-item>Item 1</ons-carousel-item>
       <ons-carousel-item>Item 2</ons-carousel-item>
       <ons-carousel-item>Item 3</ons-carousel-item>
+      <ons-carousel-item>Item 4</ons-carousel-item>
       </ons-carosel>
     `);
     document.body.appendChild(carousel);
@@ -162,7 +163,7 @@ describe('OnsCarouselElement', () => {
 
     it('should force to maximum index', () => {
       carousel.setActiveCarouselItemIndex(100);
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+      expect(carousel.getActiveCarouselItemIndex()).to.equal(3);
     });
 
     it('should fire \'postchange\' event', () => {
@@ -381,7 +382,7 @@ describe('OnsCarouselElement', () => {
     it('returns the carousel item elements', () => {
       let rv = carousel._getCarouselItemElements();
 
-      expect(rv.length).to.equal(3);
+      expect(rv.length).to.equal(4);
 
       for (let i = 0; i < rv.length; i++) {
         expect(rv[i]).to.be.an.instanceof(OnsCarouselItemElement);
@@ -448,13 +449,35 @@ describe('OnsCarouselElement', () => {
     it('sets the current index to the last position', () => {
       expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
       carousel.last();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+      expect(carousel.getActiveCarouselItemIndex()).to.equal(3);
     });
   });
 
   describe('#isFullscreen()', () => {
     it('returns \'false\' if carousel is not fullscreen', () => {
       expect(carousel.isFullscreen()).to.be.false;
+    });
+
+    it('returns \'true\' if carousel is fullscreen', () => {
+      carousel.setAttribute('fullscreen', true);
+      expect(carousel.isFullscreen()).to.be.true;
+    });
+  });
+
+  describe('#_hideFullscreenCarouselItems', () => {
+    it('it should not hide the active element and previous/next one', () => {
+      let children = carousel._getCarouselItemElements();
+      carousel.setAttribute('fullscreen', true);
+      carousel.setActiveCarouselItemIndex(1);
+      carousel._hideFullscreenCarouselItems();
+
+      expect(carousel.children[0].style.visibility).to.equal('visible');
+      expect(carousel.children[1].style.visibility).to.equal('visible');
+      expect(carousel.children[2].style.visibility).to.equal('visible');
+
+      expect(carousel.children[0].style.display).to.equal('block');
+      expect(carousel.children[2].style.display).to.equal('block');
+      expect(carousel.children[3].style.display).not.to.equal('block');
     });
 
     it('returns \'true\' if carousel is fullscreen', () => {
