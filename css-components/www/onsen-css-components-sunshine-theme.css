@@ -137,6 +137,7 @@ h6 {
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
+  min-width: 51px;
   font-size: 17px;
   padding: 0 20px;
   border: none;
@@ -276,8 +277,9 @@ h6 {
 */
 .switch--material {
   width: 36px;
-  height: 20px;
+  height: 24px;
   padding: 0 10px;
+  min-width: 36px;
 }
 .switch--material__toggle {
   background-color: #b0afaf;
@@ -473,9 +475,8 @@ h6 {
 .range::-webkit-slider-thumb:before {
   position: absolute;
   top: 13px;
-  right: 0px;
-  left: -1024px;
-  width: 1024px;
+  right: 28px;
+  left: -10000px;
   height: 2px;
   background-color: #eb482f;
   content: '';
@@ -994,6 +995,7 @@ h6 {
   height: 56px;
   min-width: 72px;
   width: auto;
+  float: initial;
   line-height: 56px;
 }
 .navigation-bar--material__center {
@@ -1012,10 +1014,14 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  float: initial;
   line-height: 56px;
 }
 .navigation-bar--material__center:first-child {
-  margin-left: 72px;
+  margin-left: 16px;
+}
+.navigation-bar--material__left:empty {
+  min-width: 16px;
 }
 .navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -1025,6 +1031,7 @@ h6 {
   color: #fff;
   height: 56px;
   width: auto;
+  float: initial;
   line-height: 56px;
 }
 /* topdoc
@@ -2438,7 +2445,13 @@ h6 {
 .tab-bar--material__label {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+.tab-bar--material__label:first-child {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.015em;
   font-weight: 500;
+  font-size: 14px;
 }
 .tab-bar--material__icon + .tab-bar--material__label {
   font-size: 10px;
@@ -2526,7 +2539,6 @@ h6 {
   letter-spacing: 0;
   color: #eb5e2f;
   text-shadow: 0 1px none;
-  vertical-align: baseline;
   background-color: rgba(0,0,0,0);
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -2537,7 +2549,6 @@ h6 {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  vertical-align: middle;
 }
 .toolbar-button:active,
 .toolbar-button--outline:active,
@@ -2683,7 +2694,6 @@ h6 {
   font-weight: 400;
   font-size: 17px;
   line-height: 24px;
-  margin: 10px 0;
 }
 .checkbox__checkmark {
   -webkit-box-sizing: border-box;
@@ -2873,7 +2883,6 @@ h6 {
   font-weight: 400;
   font-size: 17px;
   line-height: 24px;
-  margin: 10px 0;
   position: relative;
   overflow: hidden;
 }
@@ -3147,7 +3156,6 @@ h6 {
   overflow: hidden;
   line-height: 24px;
   text-align: left;
-  margin: 10px 0;
 }
 .radio-button__checkmark:before {
   content: '';
@@ -3336,10 +3344,13 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Dog
       </li>
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Cat
+      </li>
+      <li class="list__item">
+        Hamster
       </li>
     </ul>
 */
@@ -3424,9 +3435,6 @@ h6 {
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
   }
 }
-.list + .list {
-  border-top: 0;
-}
 .list__item {
   margin: 0;
   padding: 0;
@@ -3435,22 +3443,35 @@ h6 {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  display: block;
-  padding: 0 10px 0 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -moz-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 6px 10px;
   margin: 0 0 0 0;
   border-top: none;
   border-bottom: 1px solid #ddd;
   color: #333;
   background-color: transparent;
   min-height: 44px;
-  line-height: 44px;
-}
-.list__item--no-padding {
-  padding: 0;
-}
-.list__item__line-height,
-.list__item--line-height {
-  line-height: 44px;
 }
 .list__item_active:active {
   background-color: #d9d9d9;
@@ -3490,10 +3511,10 @@ h6 {
   markup:
     <ul class="list list--noborder">
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Item
       </li>
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Item
       </li>
     </ul>
  */
@@ -3524,40 +3545,6 @@ h6 {
     </ul>
  */
 /* topdoc
-  name: Tight List
-  class: list__item--tight
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--tight">
-        Sed ut perspiciatis unde omnis iste laudantium, totam rem aperiam.
-      </li>
-       <li class="list__item list__item--tight">
-        Eaque ipsa quae ab illo inventore vitae dicta sunt explicabo.
-      </li>
-    </ul>
- */
-.list__item--tight {
-  -webkit-transition: background-color 0.2s linear;
-  -moz-transition: background-color 0.2s linear;
-  -o-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
-  min-height: inherit;
-  line-height: inherit;
-}
-.list__item--tight:active {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.list__item--tight:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-/* topdoc
   name: Tappable List
   class: list__item--tappable
   use: List
@@ -3568,62 +3555,126 @@ h6 {
       </li>
     </ul>
  */
-.list__item--tappable {
-  -webkit-transition: background-color 0.2s linear;
-  -moz-transition: background-color 0.2s linear;
-  -o-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
-}
 .list__item--tappable:active {
   background-color: #d9d9d9;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.list__item--tappable:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
 }
 /* topdoc
   name: Switch in List Item
-  class: switch--list-item
   use: Switch, List
   markup:
     <ul class="list">
       <li class="list__item">
-        Label
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input" checked>
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle"></div>
+          </label>
+        </div>
       </li>
       <li class="list__item">
-        Label
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input">
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle"></div>
+          </label>
+        </div>
       </li>
     </ul>
 */
-.switch--list-item {
-  float: right;
-  margin-top: 6px;
-  margin-right: 10px;
+.list__item__left {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 32px;
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -moz-box-ordinal-group: 1;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+}
+.list__item__center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -moz-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+  margin-right: auto;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+}
+.list__item__right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+  -moz-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
 }
 /* topdoc
   name: List Item with Chevron
   class: list__item--chevron
-  use: List
+  use: List, Tappable List
   markup:
     <ul class="list">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
     </ul>
@@ -3635,13 +3686,6 @@ h6 {
   transition: background-color 0.2s linear;
   overflow: hidden;
 }
-.list__item--chevron:active {
-  background-color: #d9d9d9;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
 .list__item--chevron:hover {
   -webkit-transition: none;
   -moz-transition: none;
@@ -3649,32 +3693,33 @@ h6 {
   transition: none;
 }
 .list__item--chevron:before {
-  position: absolute;
-  right: 16px;
-  top: 50%;
   color: #ddd;
-  line-height: 28px;
-  height: 28px;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+  -moz-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
   font-size: 28px;
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
   content: "\f105";
+  margin-left: auto;
+  width: 18px;
+  text-align: right;
 }
 /* topdoc
   name: Inset List
-  use: List, List Item with Chevron
+  use: List, List Item with Chevron, Tappable List
   markup:
     <ul class="list list--inset">
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
     </ul>
@@ -3694,83 +3739,78 @@ h6 {
 /* topdoc
   name: Radio Button in List Item
   modifiers:
-  use: Radio Button, List, Tappable List
+  use: Radio Button, List, Tappable List, Switch in List Item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b" checked="checked">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="radio1" class="radio-button__input" name="b" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio1" class="list__item__center">
           Radio Button
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="radio2" class="radio-button__input" name="b" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio2" class="list__item__center">
           Radio Button
         </label>
       </li>
     </ul>
 */
-.radio-button--list-item {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  line-height: 44px;
-}
-.radio-button--list-item__checkmark {
-  margin-top: 10px;
-}
 /* topdoc
   name: Checkbox in List Item
-  use: Checkbox, List, Tappable List
+  use: Checkbox, List, Tappable List, Switch in List Item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--list-item">
-          <input type="checkbox" class="checkbox__input">
-          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox1" class="list__item__center">
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--list-item">
-          <input type="checkbox" class="checkbox__input" checked>
-          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox2" class="list__item__center">
           Checkbox
         </label>
       </li>
     </ul>
 */
-.checkbox--list-item {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  line-height: 44px;
-}
-.checkbox--list-item__checkmark {
-  margin-top: 10px;
-}
 /* topdoc
   name: No border Checkbox in List Item
   use: Checkbox in List Item, No border Checkbox
-  class: chckbox--list-item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
+        <label class="checkbox checkbox--noborder">
           <input type="checkbox" class="checkbox__input checkbox--noborder__input">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
+        <label class="checkbox checkbox--noborder">
           <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           Checkbox
         </label>
       </li>
@@ -3782,10 +3822,10 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+        <input type="text" class="text-input text-input--transparent" placeholder="Name">
       </li>
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+        <input type="text" class="text-input text-input--transparent" placeholder="Email">
       </li>
     </ul>
 */
@@ -3795,41 +3835,162 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item">
-        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+        <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
       </li>
     </ul>
 */
 /* topdoc
   name: Right Label in List Item
-  use: List
+  use: List, Switch in List Item
   class: list__right-label
   markup:
     <ul class="list">
       <li class="list__item">
-        <div class="list__right-label">Label</div>
-        Label
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
       </li>
     </ul>
 */
-.list__right-label {
+.list__item__label {
   font-size: 14px;
-  padding-right: 8px;
-  float: right;
+  opacity: 0.6;
+}
+/* topdoc
+  name: List Item with Subtitle
+  use: List, Switch in List Item
+  class: list__item__subtitle
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          <div class="list__item__title">
+            Title
+          </div>
+          <div class="list__item__subtitle">
+            Subtitle
+          </div>
+        </div>
+      </li>
+    </ul>
+*/
+.list__item__title {
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -moz-box-ordinal-group: 1;
+  -ms-flex-order: 0;
+  order: 0;
+}
+.list__item__subtitle {
+  opacity: 0.75;
+  font-size: 14px;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -moz-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+}
+/* topdoc
+  name: List Item with Thumbnail
+  use: List, List Item with Subtitle
+  class: list__item__thumbnail
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Lily</div>
+          <div class="list__item__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Molly</div>
+          <div class="list__item__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    </ul>
+*/
+.list__item__thumbnail {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  margin-right: 10px;
+  display: block;
+}
+/* topdoc
+  name: List Item with Icon
+  use: List, List Item with Thumbnail
+  class: list__item__icon
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Alice</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Bob</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+    </ul>
+*/
+.list__item__icon {
+  font-size: 22px;
 }
 /* topdoc
   name: Material List
-  use: List
+  use: List Item with Subtitle
   class: list--material
   markup:
     <ul class="list list--material">
       <li class="list__item list__item--material">
-        Orange
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Orange</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
       </li>
       <li class="list__item list__item--material">
-        Pear
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
-      </li>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Pear</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Funny-shaped fruit.</div>
+        </div>
       </li>
     </ul>
 */
@@ -3845,9 +4006,12 @@ h6 {
 }
 .list__item--material {
   border: 0;
-  min-height: initial;
-  padding: 14px 16px;
+  min-height: 56px;
+  padding: 0 0 0 16px;
   line-height: normal;
+}
+.list__item--material__subtitle {
+  margin-top: 4px;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list__item--material:not(:last-child) {
@@ -3856,6 +4020,20 @@ h6 {
 }
 .list__item--material:first-child {
   border: 0;
+}
+.list__item--material__left {
+  padding: 16px 0px 16px 16px;
+  margin-left: -16px;
+  min-width: 56px;
+  line-height: 1;
+}
+.list__item--material__center {
+  padding: 16px 0;
+  margin-right: 16px;
+}
+.list__item--material__right {
+  padding: 16px 16px 16px 0px;
+  line-height: 1;
 }
 /* topdoc
   name: Material List with Header
@@ -3867,15 +4045,17 @@ h6 {
         Fruits
       </li>
       <li class="list__item list__item--material">
-        Apple
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Orange</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
       </li>
     </ul>
 */
 .list__header--material {
   background: none;
-  font-size: 14px;
-  margin: 0 0 2px 0;
+  font-size: 15px;
+  margin: 0;
   color: #6c6c6c;
   font-weight: 500;
   padding: 12px 16px;
@@ -3883,6 +4063,205 @@ h6 {
 .list__header--material:not(:first-of-type) {
   border-top: 1px solid #ececec;
   margin-top: 16px;
+}
+/* topdoc
+  name: Material List with Checkboxes
+  use: Material List, Material Checkbox
+  class: list__header--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox3" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox4" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+
+    </ul>
+*/
+/* topdoc
+  name: Material List with Thumbnails
+  use: Material List, List Item with Thumbnail
+  class: list__item--material__thumbnail
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Lily</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Molly</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+    </ul>
+*/
+.list__item--material__thumbnail {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+/* topdoc
+  name: Material List with Icons
+  use: Material List, Material List with Thumbnails
+  class: list__item--material__icon
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Alice</div>
+        </div>
+
+        <div class="list__item__right list__item--material__right">
+          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Bob</div>
+        </div>
+
+        <div class="list__item__right list__item--material__right">
+          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+    </ul>
+*/
+.list__item--material__icon {
+  font-size: 20px;
+  padding: 0 4px;
+}
+/* topdoc
+  name: Material List with Short Dividers
+  use: Material List, Material Checkbox
+  class: list__item--short-divider
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material list__item--short-divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox5" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox5" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material list__item--short-divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox6" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox6" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+    </ul>
+*/
+.list__item--material.list__item--short-divider:after {
+  content: '';
+  height: 1px;
+  background-color: #ececec;
+  position: absolute;
+  bottom: 0px;
+  left: 72px;
+  right: 0px;
+}
+/* topdoc
+  name: Material List with Long Dividers
+  use: Material List, Material Checkbox
+  class: list__item--divider
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material list__item--divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox7" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox7" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material list__item--divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox8" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox8" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+    </ul>
+*/
+.list__item--material.list__item--divider:after {
+  content: '';
+  height: 1px;
+  background-color: #ececec;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 /* topdoc
   name: Search Input
@@ -4387,6 +4766,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-appearance: none;
+  width: 100%;
 }
 .textarea:disabled {
   opacity: 0.3;
@@ -4442,6 +4822,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-appearance: none;
+  width: 100%;
 }
 .textarea--transparent:disabled {
   opacity: 0.3;
@@ -4459,8 +4840,10 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="dialog-mask"></div>
     <div class="dialog">
-      <div class="page">
-        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      <div class="dialog-container">
+        <div class="page">
+          <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+        </div>
       </div>
     </div>
 */
@@ -4496,15 +4879,18 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   margin: auto auto;
-  background-color: rgba(255,255,255,0.92);
-  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   overflow: hidden;
   min-width: 270px;
   min-height: 100px;
   text-align: left;
+}
+.dialog-container {
+  height: inherit;
+  overflow: hidden;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  background-color: #f4f4f4;
+  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
 }
 .dialog-mask {
   padding: 0;
@@ -4532,18 +4918,22 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
-      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      <div class="dialog dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
     </div>
 */
 .dialog--material {
-  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
-  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #fafafa;
+  text-align: left;
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+}
+.dialog-container--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  text-align: left;
+  background-color: #fafafa;
 }
 /* topdoc
   name: Alert Dialog
@@ -4552,14 +4942,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
 
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -4596,15 +4988,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   transform: translate(-50%, -50%);
   width: 270px;
   margin: auto auto;
-  background-color: rgba(255,255,255,0.92);
-  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  background-color: #f4f4f4;
   -webkit-border-radius: 8px;
   border-radius: 8px;
-  overflow: hidden;
-  padding: 16px 0 0 0;
+  overflow: visible;
   max-width: 95%;
   color: #1f1f21;
+}
+.alert-dialog-container {
+  height: inherit;
+  padding-top: 16px;
+  overflow: hidden;
 }
 .alert-dialog-title {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -4775,12 +5169,14 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -4791,13 +5187,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button">Cancel</button>
-        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button">Cancel</button>
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
 */
@@ -4808,16 +5206,18 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   markup:
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
-      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
 
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer alert-dialog-footer--one">
-        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
-        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
-        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        <div class="alert-dialog-footer alert-dialog-footer--one">
+          <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+          <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        </div>
       </div>
     </div>
 */
@@ -4827,23 +5227,27 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   height: 360px
   markup:
     <div class="alert-dialog alert-dialog--material">
-      <div class="alert-dialog-title alert-dialog-title--material">
-        Dialog title
-      </div>
-      <div class="alert-dialog-content alert-dialog-content--material">
-        Some dialog content.
-      </div>
-      <div class="alert-dialog-footer alert-dialog-footer--material">
-        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
-        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      <div class="alert-dialog-container alert-dialog-container--material">
+        <div class="alert-dialog-title alert-dialog-title--material">
+          Dialog title
+        </div>
+        <div class="alert-dialog-content alert-dialog-content--material">
+          Some dialog content.
+        </div>
+        <div class="alert-dialog-footer alert-dialog-footer--material">
+          <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+        </div>
       </div>
     </div>
 */
 .alert-dialog--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  padding-top: 22px;
   background-color: #fafafa;
+}
+.alert-dialog-container--material {
+  padding-top: 22px;
   -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
 }
@@ -4968,12 +5372,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: #fff;
   -webkit-border-radius: 8px;
   border-radius: 8px;
-  -webkit-box-shadow: 0 2px 16px rgba(0,0,0,0.1);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
   color: #1f1f21;
   overflow: hidden;
   min-height: 100px;
   height: 100%;
+  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
 }
 .popover__content > * {
   overflow: hidden;

@@ -55,21 +55,20 @@ limitations under the License.
           userDelegate.reload = function() {
             oldReload();
             provider._onChange();
-          }.bind(this);
+          };
         }
         else {
           userDelegate.reload = function() {
             provider._onChange();
-          }.bind(this);
+          };
         }
-      }.bind(this),
+      },
 
       _getDelegate: function() {
         var delegate = this._scope.$eval(this._attrs.onsLazyRepeat);
 
         if (typeof delegate === 'undefined') {
-          /*jshint evil:true */
-          delegate = eval(this._attrs.onsLazyRepeat);
+          delegate = eval(this._attrs.onsLazyRepeat); // eslint-disable-line no-eval
         }
 
         return delegate;

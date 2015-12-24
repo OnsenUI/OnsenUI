@@ -193,6 +193,10 @@ ons-material-input {
   position: relative;
 }
 
+ons-material-input > input {
+  width: 100%;
+}
+
 ons-material-input > .text-input--material__label {
   position: absolute;
   left: 0px;
@@ -222,5 +226,5 @@ ons-material-input[disabled] {
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {
-  font-size: 32px;
+  font-size: 26px;
 }

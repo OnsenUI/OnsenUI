@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <title>List Demo | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
@@ -17,7 +18,6 @@
     <ons-toolbar>
       <div class="center">List</div>
     </ons-toolbar>
-    <br>
 
     <h2>iOS</h2>
 
@@ -36,38 +36,339 @@
       <ons-list-item modifier="chevron">One</ons-list-item>
       <ons-list-item modifier="chevron">Two</ons-list-item>
       <ons-list-item modifier="chevron">Three</ons-list-item>
+
+      <ons-list-header>List with Switch</ons-list-header>
+      <ons-list-item>
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-switch></ons-switch>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-switch></ons-switch>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with Radio Buttons</ons-list-header>
+      <ons-list-item>
+        <div class="list__item__left">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" id="radio1" class="radio-button__input radio-button--list-item__input" name="b" checked="checked">
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio1" class="list__item__center">
+          Radio Button
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__left">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" id="radio2" class="radio-button__input radio-button--list-item__input" name="b">
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio2" class="list__item__center">
+          Radio Button
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>List with Checkboxes</ons-list-header>
+      <ons-list-item>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__input">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          Checkbox
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__input">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          Checkbox
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with Labels</ons-list-header>
+      <ons-list-item>
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with Subtitles</ons-list-header>
+
+      <ons-list-item>
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__input">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__input">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with Thumbnails</ons-list-header>
+
+      <ons-list-item>
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with icons</ons-list-header>
+
+      <ons-list-item>
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item>
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+        </div>
+      </ons-list-item>
+
     </ons-list>
 
     <h2>Material Design</h2>
 
     <ons-list modifier="material">
-      <ons-list-header modifier="material">
-        Fruits
-      </ons-list-header>
+      <ons-list-header modifier="material">Normal List</ons-list-header>
+      <ons-list-item modifier="material">One</ons-list-item>
+      <ons-list-item modifier="material">Two</ons-list-item>
+      <ons-list-item modifier="material">Three</ons-list-item>
+
+     <ons-list-header modifier="material">List with Switch</ons-list-header>
       <ons-list-item modifier="material">
-        Orange
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-switch modifier="material"></ons-switch>
+        </div>
       </ons-list-item>
+
       <ons-list-item modifier="material">
-        Apple
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-switch modifier="material"></ons-switch>
+        </div>
       </ons-list-item>
-      <ons-list-item modifier="material">
-        Banana
+
+      <ons-list-header modifier="material">List with Radio Buttons</ons-list-header>
+      <ons-list-item modifier="material short-divider">
+        <div class="list__item__left">
+          <label class="radio-button radio-button--material">
+            <input type="radio" id="radio3" class="radio-button__input radio-button--material__input" name="b" checked="checked">
+            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio3" class="list__item__center">
+          Radio Button
+        </label>
       </ons-list-item>
-      <ons-list-header modifier="material">
-        Vegetables
-      </ons-list-header>
+
       <ons-list-item modifier="material">
-        Carrot
+        <div class="list__item__left">
+          <label class="radio-button radio-button--material">
+            <input type="radio" id="radio4" class="radio-button__input radio-button--material__input" name="b">
+            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio4" class="list__item__center">
+          Radio Button
+        </label>
       </ons-list-item>
-      <ons-list-item modifier="material">
-        Potato
+
+      <ons-list-header modifier="material">List with Checkboxes</ons-list-header>
+      <ons-list-item modifier="material short-divider">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          Checkbox
+        </div>
       </ons-list-item>
+
       <ons-list-item modifier="material">
-        Tomato
+        <div class="list__item__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          Checkbox
+        </div>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">List with Labels</ons-list-header>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">List with Subtitles</ons-list-header>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">List with Thumbnails</ons-list-header>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">List with icons</ons-list-header>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-icon class="list__item__icon" icon="md-comment"></ons-icon>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <ons-icon class="list__item__icon" icon="md-comment"></ons-icon>
+        </div>
       </ons-list-item>
 
     </ons-list>
-
   </ons-page>
 </body>
 </html>

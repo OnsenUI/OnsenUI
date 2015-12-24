@@ -45,7 +45,7 @@
  * @param {Object} event.dialog
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute this function to stop the dialog from being shown.[/en]
  *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
  */
@@ -72,7 +72,7 @@
  * @param {Object} event.dialog
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute this function to stop the dialog from being hidden.[/en]
  *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
  */
@@ -375,7 +375,6 @@
     return {
       restrict: 'E',
       scope: true,
-      
       compile: function(element, attrs) {
         CustomElements.upgrade(element[0]);
 

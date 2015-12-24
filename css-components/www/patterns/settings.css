@@ -35,3 +35,9 @@
 .settings-list {
   margin-top: 10px;
 }
+
+.settings-logout {
+  font-size: 24px;
+  opacity: 0.8;
+  margin-right: 6px;
+}

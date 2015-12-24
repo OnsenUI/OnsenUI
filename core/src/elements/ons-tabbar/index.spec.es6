@@ -353,10 +353,11 @@ describe('OnsTabbarElement', () => {
       let element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>
+          <ons-tab label="Fuga" page="fuga"></ons-tab>
         </ons-tabbar>
       `);
 
-      element.setActiveTab(0);
+      element.setActiveTab(1);
 
       element.addEventListener('prechange', (event) => {
         event.detail.cancel();

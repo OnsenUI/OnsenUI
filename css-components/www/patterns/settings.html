@@ -33,24 +33,32 @@
 
       <ons-list modifier="inset" class="settings-list">
         <ons-list-item>
-          Twitter
-          <ons-switch modifier="list-item"></ons-switch>
+          <div class="list__item__center">
+            Twitter
+          </div>
+          <div class="list__item__right">
+            <ons-switch></ons-switch>
+          </div>
         </ons-list-item>
 
         <ons-list-item>
-          Facebook
-          <ons-switch modifier="list-item" checked></ons-switch>
+          <div class="list__item__center">
+            Facebook
+          </div>
+          <div class="list__item__right">
+            <ons-switch checked></ons-switch>
+          </div>
         </ons-list-item>
       </ons-list>
 
       <div class="settings-header">Others</div>
 
       <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron">
+        <ons-list-item modifier="chevron tappable">
           Terms of Use
         </ons-list-item>
 
-        <ons-list-item modifier="chevron">
+        <ons-list-item modifier="chevron tappable">
           Privacy Policy
         </ons-list-item>
       </ons-list>
@@ -59,7 +67,7 @@
 
       <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="tappable">
-          <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
+          <ons-icon icon="ion-log-out" class="settings-logout"></ons-icon>
           Sign out
         </ons-list-item>
       </ons-list>

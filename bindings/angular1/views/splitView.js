@@ -110,7 +110,7 @@ limitations under the License.
       /**
        * @param {String} page
        */
-      setSecondaryPage : function(page) {
+      setSecondaryPage: function(page) {
         if (page) {
           $onsen.getPageHTMLAsync(page).then(function(html) {
             this._appendSecondPage(angular.element(html.trim()));
@@ -125,7 +125,7 @@ limitations under the License.
       /**
        * @param {String} page
        */
-      setMainPage : function(page) {
+      setMainPage: function(page) {
         if (page) {
           $onsen.getPageHTMLAsync(page).then(function(html) {
             this._appendMainPage(angular.element(html.trim()));
@@ -180,9 +180,9 @@ limitations under the License.
         var should = this._shouldCollapse();
 
         if (this._doSplit) {
-          this._activateSplitMode(); 
+          this._activateSplitMode();
         } else if (this._doCollapse) {
-          this._activateCollapseMode(); 
+          this._activateCollapseMode();
         } else if (should) {
           this._activateCollapseMode();
         } else if (!should) {
@@ -218,10 +218,10 @@ limitations under the License.
           return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
           return $onsGlobal.orientation.isLandscape();
-        } else if (c.substr(0,5) == 'width') {
+        } else if (c.substr(0, 5) == 'width') {
           var num = c.split(' ')[1];
           if (num.indexOf('px') >= 0) {
-            num = num.substr(0,num.length-2);
+            num = num.substr(0, num.length - 2);
           }
 
           var width = window.innerWidth;
@@ -257,7 +257,7 @@ limitations under the License.
         this.emit(name, {
           splitView: this,
           width: window.innerWidth,
-          orientation: this._getOrientation() 
+          orientation: this._getOrientation()
         });
       },
 
@@ -278,13 +278,12 @@ limitations under the License.
           },
           width: window.innerWidth,
           orientation: this._getOrientation()
-        }); 
+        });
       },
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
           this._fireEvent('precollapse');
-       
           this._secondaryPage.attr('style', '');
           this._mainPage.attr('style', '');
 
@@ -312,7 +311,7 @@ limitations under the License.
 
           this._mode = SPLIT_MODE;
           this._setSize();
-       
+
           this._fireEvent('postsplit');
         }
       },

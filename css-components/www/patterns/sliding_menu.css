@@ -28,9 +28,14 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.menu-item > ons-icon {
+  font-size: 24px;
+  margin-right: 6px;
+}
+
 .menu-notification {
   display: inline-block;
-  margin-top: 12px;
+  margin: -2px 0px 0px 4px;
   font-size: 14px;
   height: 16px;
   line-height: 16px;

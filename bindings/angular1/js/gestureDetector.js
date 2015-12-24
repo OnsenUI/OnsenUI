@@ -19,7 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.GestureDetector
  * @category util
- * @description 
+ * @description
  *   [en]Utility class for gesture detection.[/en]
  *   [ja]ジェスチャを検知するためのユーティリティクラスです。[/ja]
  */

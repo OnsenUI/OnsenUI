@@ -182,9 +182,9 @@
           $onsen.removeModifierMethods(switchView);
           element.data('ons-switch', undefined);
           $onsen.clearComponent({
-            element : element,
-            scope : scope,
-            attrs : attrs
+            element: element,
+            scope: scope,
+            attrs: attrs
           });
           element = attrs = scope = null;
         });

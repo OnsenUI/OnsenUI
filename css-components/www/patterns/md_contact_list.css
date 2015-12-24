@@ -1,46 +1,9 @@
-body {
-  font-family: 'Roboto', 'Noto', sans-serif;
-}
-
-.contact-toolbar-buttons * {
-  padding-right: 6px;
-}
-
-ons-list-item {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-}
-
-ons-list-item ons-col {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-ons-list:first-child {
-  margin-top: 10px;
-}
-
 .contact-initials {
-  padding-left: 8px;
   color: #9E9E9E;
   font-weight: 400;
   font-size: 20px;
-  line-height: 50px;
 }
 
-.contact-item {
-  margin-left: 14px;
-  padding-left: 14px;
-}
-
-.contact-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.contact-name {
-  font-weight: 400;
-  padding-left: 18px;
-  line-height: 40px;
+.list__item__center {
+  padding-left: 16px;
 }

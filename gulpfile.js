@@ -20,6 +20,7 @@ var CORDOVA_APP = false;
 ////////////////////////////////////////
 
 var gulp = require('gulp');
+var path = require('path');
 var $ = require('gulp-load-plugins')();
 var gulpIf = require('gulp-if');
 var pkg = require('./package.json');
@@ -42,7 +43,7 @@ var watchify = require('watchify');
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: __dirname + '/',
+      baseDir: __dirname,
       index: 'index.html',
       directory: true
     },
@@ -153,7 +154,7 @@ gulp.task('watch-core-test', ['watch-core'], function() {
 ////////////////////////////////////////
 gulp.task('html2js', function() {
   return gulp.src('bindings/angular1/templates/*.tpl')
-    .pipe($.html2js({base: __dirname + '/bindings/angular1', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
+    .pipe($.html2js({base: path.join(__dirname, 'bindings/angular1'), outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
     .pipe($.concat('templates.js'))
     .pipe(gulp.dest('bindings/angular1/directives/'));
 });
@@ -245,7 +246,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
-      .pipe($.ngAnnotate({add: true, single_quotes: true}))
+      .pipe($.ngAnnotate({add: true, single_quotes: true})) // eslint-disable-line camelcase
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
@@ -313,14 +314,14 @@ gulp.task('prepare-css-components', ['prepare'], function() {
 ////////////////////////////////////////
 gulp.task('compress-distribution-package', function() {
   var src = [
-    __dirname + '/build/**',
-    '!' + __dirname + '/build/docs/**',
-    '!' + __dirname + '/build/stylus/**'
+    path.join(__dirname, 'build/**'),
+    '!' + path.join(__dirname, 'build/docs/**'),
+    '!' + path.join(__dirname, 'build/stylus/**')
   ];
 
   return gulp.src(src)
     .pipe($.zip('onsenui.zip'))
-    .pipe(gulp.dest(__dirname + '/build'));
+    .pipe(gulp.dest(path.join(__dirname, 'build')));
 });
 
 ////////////////////////////////////////
@@ -397,7 +398,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 
   // for livereload
   gulp.watch([
-    'demo/*/*.{js,css,html}',
+    'examples/*/*.{js,css,html}',
     'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
@@ -411,8 +412,8 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 gulp.task('build-doc', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'en';
-  new dgeni([require('./docs/package')]).generate().then(done);
-})
+  new dgeni([require('./docs/package')]).generate().then(done); // eslint-disable-line new-cap
+});
 
 ////////////////////////////////////////
 // watch-doc
@@ -437,7 +438,7 @@ gulp.task('webdriver-download', function() {
   var chromeDriverUrl,
     platform = os.platform();
 
-  var destDir = __dirname + '/.selenium/';
+  var destDir = path.join(__dirname, '.selenium');
 
   // Only download once.
   if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
@@ -445,7 +446,7 @@ gulp.task('webdriver-download', function() {
   }
 
   if (platform === 'linux') {
-    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip'; 
+    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip';
   }
   else if (platform === 'darwin') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_mac32.zip';
@@ -488,8 +489,8 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', __dirname + '/.selenium/selenium-server-standalone-2.45.0.jar',
-      '--chromeDriver', __dirname + '/.selenium/chromedriver'
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.45.0.jar'),
+      '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
     ]
   };
 
@@ -500,7 +501,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))
     .on('error', function(e) {
-      console.log(e)
+      console.log(e);
       $.connect.serverClose();
     })
     .on('end', function() {

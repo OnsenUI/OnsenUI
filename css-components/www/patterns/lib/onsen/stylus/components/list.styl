@@ -31,7 +31,7 @@ var-list-header-font-size = 15px
 var-list-border = 1px solid var-list-item-separator-color
 
 var-list-item-margin = 0 0 0 0
-var-list-item-padding = 0 10px 0 10px
+var-list-item-padding = 6px 10px
 var-list-header-padding = 0 0 0 10px
 var-list-item-min-height = 44px
 var-list-header-min-height = 24px
@@ -48,10 +48,13 @@ var-list-border-bottom = 1px solid var-list-item-separator-color
   markup:
     <ul class="list">
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Dog
       </li>
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Cat
+      </li>
+      <li class="list__item">
+        Hamster
       </li>
     </ul>
 */
@@ -103,7 +106,10 @@ list__item()
   position relative
   list-style none
   box-sizing border-box
-  display block
+  display flex
+  flex-direction row
+  justify-content flex-start
+  align-items center
 
 .list--noborder
   border-top none
@@ -134,9 +140,6 @@ list__item()
   background-color var-list-background-color
   retina-list-border()
 
-.list + .list
-  border-top 0
-
 .list__item
   list__item()
   padding var-list-item-padding
@@ -146,14 +149,6 @@ list__item()
   color var-list-item-color
   background-color transparent
   min-height var-list-item-min-height
-  line-height var-list-item-min-height
-
-.list__item--no-padding
-  padding 0
-
-.list__item__line-height,
-.list__item--line-height
-  line-height var-list-item-min-height
 
 .list__item_active:active
   background-color var-list-item-active-background-color
@@ -180,10 +175,10 @@ list__item()
   markup:
     <ul class="list list--noborder">
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Item
       </li>
       <li class="list__item">
-        <span class="list__item__line-height">Item</span>
+        Item
       </li>
     </ul>
  */
@@ -216,32 +211,6 @@ list__item()
  */
 
 /*! topdoc
-  name: Tight List
-  class: list__item--tight
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--tight">
-        Sed ut perspiciatis unde omnis iste laudantium, totam rem aperiam.
-      </li>
-       <li class="list__item list__item--tight">
-        Eaque ipsa quae ab illo inventore vitae dicta sunt explicabo.
-      </li>
-    </ul>
- */
-
-.list__item--tight
-  transition background-color 0.2s linear
-  min-height inherit
-  line-height inherit
-
-.list__item--tight:active
-  transition none
-
-.list__item--tight:hover
-  transition none
-
-/*! topdoc
   name: Tappable List
   class: list__item--tappable
   use: List
@@ -253,54 +222,73 @@ list__item()
     </ul>
  */
 
-.list__item--tappable
-  transition background-color 0.2s linear
-
 .list__item--tappable:active
   background-color var-list-item-active-background-color
-  transition none
-
-.list__item--tappable:hover
-  transition none
 
 /*! topdoc
   name: Switch in List Item
-  class: switch--list-item
   use: Switch, List
   markup:
     <ul class="list">
       <li class="list__item">
-        Label
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input" checked>
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle"></div>
+          </label>
+        </div>
       </li>
       <li class="list__item">
-        Label
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input">
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle"></div>
+          </label>
+        </div>
       </li>
     </ul>
 */
 
-.switch--list-item
-  float right
-  margin-top 6px
-  margin-right 10px
+.list__item__left
+  display flex
+  min-width 32px
+  order 0
+  align-items center
+  align-self stretch
+
+.list__item__center
+  display flex
+  flex-grow 1
+  flex-wrap wrap
+  flex-direction row
+  order 1
+  margin-right auto
+  align-items center
+  align-self stretch
+
+.list__item__right
+  display flex
+  margin-left auto
+  order 2
+  align-items center
+  align-self stretch
 
 /*! topdoc
   name: List Item with Chevron
   class: list__item--chevron
-  use: List
+  use: List, Tappable List
   markup:
     <ul class="list">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list__item--chevron list__item--tappable">
         Tappable Item
       </li>
     </ul>
@@ -310,36 +298,31 @@ list__item()
   transition background-color 0.2s linear
   overflow hidden
 
-.list__item--chevron:active
-  background-color var-list-item-active-background-color
-  transition none
-
 .list__item--chevron:hover
   transition none
 
 .list__item--chevron:before
-  position absolute
-  right 16px
-  top 50%
   color var-list-item-separator-color
-  line-height 28px
-  height 28px
-  transform translateY(-50%)
+  order 3
+  align-self center
   font-size 28px
   font-family FontAwesome
   font-style normal
   font-weight normal
   content "\f105"
+  margin-left auto
+  width 18px
+  text-align right
 
 /*! topdoc
   name: Inset List
-  use: List, List Item with Chevron
+  use: List, List Item with Chevron, Tappable List
   markup:
     <ul class="list list--inset">
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
-      <li class="list__item list--inset__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         List Item with Chevron
       </li>
     </ul>
@@ -359,85 +342,80 @@ list__item()
 /*! topdoc
   name: Radio Button in List Item
   modifiers:
-  use: Radio Button, List, Tappable List
+  use: Radio Button, List, Tappable List, Switch in List Item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b" checked="checked">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="radio1" class="radio-button__input" name="b" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio1" class="list__item__center">
           Radio Button
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="radio-button radio-button--list-item">
-          <input type="radio" class="radio-button__input" name="b">
-          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="radio2" class="radio-button__input" name="b" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="radio2" class="list__item__center">
           Radio Button
         </label>
       </li>
     </ul>
 */
-
-.radio-button--list-item
-  width 100%
-  height 100%
-  padding 0
-  margin 0
-  line-height var-list-item-min-height
-
-.radio-button--list-item__checkmark
-  margin-top 10px
 
 /*! topdoc
   name: Checkbox in List Item
-  use: Checkbox, List, Tappable List
+  use: Checkbox, List, Tappable List, Switch in List Item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--list-item">
-          <input type="checkbox" class="checkbox__input">
-          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox1" class="list__item__center">
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--list-item">
-          <input type="checkbox" class="checkbox__input" checked>
-          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox2" class="list__item__center">
           Checkbox
         </label>
       </li>
     </ul>
 */
-
-.checkbox--list-item
-  width 100%
-  height 100%
-  padding 0
-  margin 0
-  line-height var-list-item-min-height
-
-.checkbox--list-item__checkmark
-  margin-top 10px
 
 /*! topdoc
   name: No border Checkbox in List Item
   use: Checkbox in List Item, No border Checkbox
-  class: chckbox--list-item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
+        <label class="checkbox checkbox--noborder">
           <input type="checkbox" class="checkbox__input checkbox--noborder__input">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder checkbox--list-item">
+        <label class="checkbox checkbox--noborder">
           <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           Checkbox
         </label>
       </li>
@@ -450,10 +428,10 @@ list__item()
   markup:
     <ul class="list">
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+        <input type="text" class="text-input text-input--transparent" placeholder="Name">
       </li>
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+        <input type="text" class="text-input text-input--transparent" placeholder="Email">
       </li>
     </ul>
 */
@@ -464,44 +442,154 @@ list__item()
   markup:
     <ul class="list">
       <li class="list__item">
-        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+        <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
       </li>
     </ul>
 */
 
 /*! topdoc
   name: Right Label in List Item
-  use: List
+  use: List, Switch in List Item
   class: list__right-label
   markup:
     <ul class="list">
       <li class="list__item">
-        <div class="list__right-label">Label</div>
-        Label
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
       </li>
     </ul>
 */
 
-.list__right-label {
-  font-size: var-font-size--mini;
-  padding-right: 8px;
-  float: right;
-}
+.list__item__label
+  font-size var-font-size--mini
+  opacity 0.6
+
+/*! topdoc
+  name: List Item with Subtitle
+  use: List, Switch in List Item
+  class: list__item__subtitle
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          <div class="list__item__title">
+            Title
+          </div>
+          <div class="list__item__subtitle">
+            Subtitle
+          </div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__title
+  flex-basis 100%
+  order 0
+
+.list__item__subtitle
+  opacity 0.75
+  font-size var-font-size--mini
+  order 1
+  flex-basis 100%
+
+/*! topdoc
+  name: List Item with Thumbnail
+  use: List, List Item with Subtitle
+  class: list__item__thumbnail
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Lily</div>
+          <div class="list__item__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Molly</div>
+          <div class="list__item__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__thumbnail
+  width 40px
+  height 40px
+  border-radius 6px
+  margin-right 10px
+  display block
+
+/*! topdoc
+  name: List Item with Icon
+  use: List, List Item with Thumbnail
+  class: list__item__icon
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Alice</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Bob</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__icon
+  font-size 22px
 
 /*! topdoc
   name: Material List
-  use: List
+  use: List Item with Subtitle
   class: list--material
   markup:
     <ul class="list list--material">
       <li class="list__item list__item--material">
-        Orange
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Orange</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
       </li>
       <li class="list__item list__item--material">
-        Pear
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
-      </li>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Pear</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Funny-shaped fruit.</div>
+        </div>
       </li>
     </ul>
 */
@@ -515,9 +603,12 @@ list__item()
 
 .list__item--material
   border 0
-  min-height initial
-  padding 14px 16px
+  min-height 56px
+  padding 0 0 0 16px
   line-height normal
+
+.list__item--material__subtitle
+  margin-top 4px
 
 .list__item--material:not(:last-child)
   +retina-query()
@@ -525,6 +616,20 @@ list__item()
 
 .list__item--material:first-child
   border 0
+
+.list__item--material__left
+  padding 16px 0px 16px 16px
+  margin-left -16px
+  min-width 56px
+  line-height 1
+
+.list__item--material__center
+  padding 16px 0
+  margin-right 16px
+
+.list__item--material__right
+  padding 16px 16px 16px 0px
+  line-height 1
 
 /*! topdoc
   name: Material List with Header
@@ -536,20 +641,225 @@ list__item()
         Fruits
       </li>
       <li class="list__item list__item--material">
-        Apple
-        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Orange</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
       </li>
     </ul>
 */
 
 .list__header--material
   background none
-  font-size 14px
-  margin 0 0 2px 0
+  font-size 15px
+  margin 0
   color #6c6c6c
   font-weight 500
   padding 12px 16px
 
 .list__header--material:not(:first-of-type)
-  border-top 1px solid #ECECEC
+  border-top 1px solid #ececec
   margin-top 16px
+
+/*! topdoc
+  name: Material List with Checkboxes
+  use: Material List, Material Checkbox
+  class: list__header--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox3" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox4" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+
+    </ul>
+*/
+
+/*! topdoc
+  name: Material List with Thumbnails
+  use: Material List, List Item with Thumbnail
+  class: list__item--material__thumbnail
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Lily</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Molly</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+    </ul>
+*/
+
+.list__item--material__thumbnail
+  width 40px
+  height 40px
+  border-radius 100%
+
+/*! topdoc
+  name: Material List with Icons
+  use: Material List, Material List with Thumbnails
+  class: list__item--material__icon
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Alice</div>
+        </div>
+
+        <div class="list__item__right list__item--material__right">
+          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+
+      <li class="list__item list__item--material">
+        <div class="list__item__left list__item--material__left">
+          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Bob</div>
+        </div>
+
+        <div class="list__item__right list__item--material__right">
+          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item--material__icon
+  font-size 20px
+  padding 0 4px
+
+/*! topdoc
+  name: Material List with Short Dividers
+  use: Material List, Material Checkbox
+  class: list__item--short-divider
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material list__item--short-divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox5" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox5" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material list__item--short-divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox6" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox6" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+    </ul>
+*/
+
+.list__item--material.list__item--short-divider:after
+  content ''
+  height 1px
+  background-color #ececec
+  position absolute
+  bottom 0px
+  left 72px
+  right 0px
+
+/*! topdoc
+  name: Material List with Long Dividers
+  use: Material List, Material Checkbox
+  class: list__item--divider
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material list__item--divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox7" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox7" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Notifications</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list__item list__item--material list__item--divider">
+        <div class="list__item__left list__item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox8" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox8" class="list__item__center list__item--material__center">
+          <div class="list__item__title list__item--material__title">Sound</div>
+          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+    </ul>
+*/
+
+.list__item--material.list__item--divider:after
+  content ''
+  height 1px
+  background-color #ececec
+  position absolute
+  bottom 0px
+  left 0px
+  right 0px

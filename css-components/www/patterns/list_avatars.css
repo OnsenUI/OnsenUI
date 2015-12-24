@@ -1,17 +1,20 @@
 .list-item-container {
-  line-height: 1;
   font-size: 14px;
-  padding: 15px 0px 15px 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .list-item-left {
   width: 60px;
   margin-right: -60px;
+  margin-bottom: auto;
   float: left;
 }
 
 .list-item-right {
   width: 100%;
+  margin-bottom: auto;
   float: right;
 }
 

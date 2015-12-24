@@ -20,7 +20,17 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 
-const scheme = {'': 'list__item--*'};
+const scheme = {
+  '': 'list__item--*',
+  '.list__item__left': 'list__item--*__left',
+  '.list__item__center': 'list__item--*__center',
+  '.list__item__right': 'list__item--*__right',
+  '.list__item__label': 'list__item--*__label',
+  '.list__item__title': 'list__item--*__title',
+  '.list__item__subtitle': 'list__item--*__subtitle',
+  '.list__item__thumbnail': 'list__item--*__thumbnail',
+  '.list__item__icon': 'list__item--*__icon'
+};
 
 class ListItemElement extends BaseElement {
   createdCallback() {

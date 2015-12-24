@@ -2,6 +2,15 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.4
+----
+ * ons-tabbar: Fixed [#1132](https://github.com/OnsenUI/OnsenUI/issues/1132).
+ * ons-tabbar: `no-reload` is now the default behavior.
+ * ons-ripple: Fixed [#1140](https://github.com/OnsenUI/OnsenUI/issues/1140).
+ * ons-navigator: Fixed Fade animator export.
+ * ons-material-input: Make it resizable.
+ * Added ons-lazy-repeat custom elements.
+
 v2.0.0-beta.3
 ----
  * core: Fixed animationOptions parsing.
@@ -18,7 +27,7 @@ v2.0.0-beta.3
  * ons-dialog, ons-alert-dialog, ons-popover: removed iOS shadow to match the original.
  * Changed the directory structure.
  * ons-list-item: Add "tappable" attribute.
- * Added ons-lazy-repeat custom elements.
+ * ons-list-item: Add child classes to make it easier to compose lists.
 
 v2.0.0-beta.2
 ----

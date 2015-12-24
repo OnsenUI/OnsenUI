@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+  <ons-page modifier="material">
+    <ons-toolbar modifier="material">
+      <div class="center">List Composition Material</div>
+    </ons-toolbar>
+
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">Checkbox</ons-list-header>
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox1" class="checkbox__input checkbox--material__input" checked>
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox1" class="list__item__center">
+          Checkbox
+        </label>
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox2" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox2" class="list__item__center">
+          Checkbox
+        </label>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">Switch</ons-list-header>
+      <ons-list-item modifier="material">
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <ons-switch modifier="material"></ons-switch>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">Radio Button</ons-list-header>
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <label class="radio-button radio-button--material">
+            <input type="radio" id="radio1" class="radio-button__input radio-button--material__input" name="radio" checked>
+            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="radio1" class="list__item__center">
+          Radio button
+        </label>
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        <div class="list__item__left">
+          <label class="radio-button radio-button--material">
+            <input type="radio" id="radio2" class="radio-button__input radio-button--material__input" name="radio">
+            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="radio2" class="list__item__center">
+          Radio button
+        </label>
+      </ons-list-item>
+
+      <ons-list-header modifier="material">Text Input</ons-list-header>
+      <ons-list-item modifier="material">
+        <ons-material-input label="Name">
+      </ons-list-item>
+
+      <ons-list-header modifier="material">Textarea</ons-list-header>
+      <ons-list-item modifier="material">
+        <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
+
+</body>
+</html>

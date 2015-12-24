@@ -19,7 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.orientation
  * @category util
- * @description 
+ * @description
  *   [en]Utility methods for orientation detection.[/en]
  *   [ja]画面のオリエンテーション検知のためのユーティリティメソッドを収めているオブジェクトです。[/ja]
  */
@@ -44,7 +44,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the current orientation is portrait mode.[/en]
  *   [ja]オリエンテーションがportraitモードの場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns whether the current screen orientation is portrait or not.[/en]
  *   [ja]オリエンテーションがportraitモードかどうかを返します。[/ja]
  */
@@ -55,7 +55,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the current orientation is landscape mode.[/en]
  *   [ja]オリエンテーションがlandscapeモードの場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns whether the current screen orientation is landscape or not.[/en]
  *   [ja]オリエンテーションがlandscapeモードかどうかを返します。[/ja]
  */

@@ -81,20 +81,24 @@ class RippleElement extends BaseElement {
   }
 
   _addListener() {
+    this.addEventListener('mousedown', this._boundOnClick);
+
     if (this._isTouchDevice()) {
-      this.addEventListener('touchstart', this._boundOnClick);
-    }
-    else {
-      this.addEventListener('mousedown', this._boundOnClick);
+      const initTouchHandler = e => {
+        this.removeEventListener('mousedown', this._boundOnClick);
+        this.removeEventListener('touchstart', initTouchHandler);
+        this.addEventListener('touchstart', this._boundOnClick);
+        this._boundOnClick(e);
+      };
+
+      this.addEventListener('touchstart', initTouchHandler);
     }
   }
 
   _removeListener() {
+    this.removeEventListener('mousedown', this._boundOnClick);
     if (this._isTouchDevice()) {
       this.removeEventListener('touchstart', this._boundOnClick);
-    }
-    else {
-      this.removeEventListener('mousedown', this._boundOnClick);
     }
   }
 

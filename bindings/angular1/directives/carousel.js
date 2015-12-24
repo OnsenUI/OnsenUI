@@ -61,7 +61,7 @@
  * @description
  *   [en]Fired when the carousel has been overscrolled.[/en]
  *   [ja]カルーセルがオーバースクロールした時に発火します。[/ja]
- * @param {Object} event 
+ * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel

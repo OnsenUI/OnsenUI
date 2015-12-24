@@ -21,7 +21,6 @@ limitations under the License.
   var module = angular.module('onsen');
 
   var ComponentCleaner = {
-    
     /**
      * @param {jqLite} element
      */
@@ -85,7 +84,7 @@ limitations under the License.
               return function(scope, element, attr) {
                 var listener = function(event) {
                   scope.$apply(function() {
-                    fn(scope, {$event:event});
+                    fn(scope, {$event: event});
                   });
                 };
                 element.on(name, listener);

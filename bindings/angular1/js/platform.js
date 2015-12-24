@@ -19,7 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.platform
  * @category util
- * @description 
+ * @description
  *   [en]Utility methods to detect current platform.[/en]
  *   [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  */
@@ -30,7 +30,7 @@ limitations under the License.
  * @param  {string} platform Name of the platform.
  *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれかを指定します。[/ja]
- * @description 
+ * @description
  *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
  *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
  */
@@ -38,7 +38,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isWebView()
- * @description 
+ * @description
  *   [en]Returns whether app is running in Cordova.[/en]
  *   [ja]Cordova内で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -47,7 +47,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIOS()
- * @description 
+ * @description
  *   [en]Returns whether the OS is iOS.[/en]
  *   [ja]iOS上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -56,7 +56,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroid()
- * @description 
+ * @description
  *   [en]Returns whether the OS is Android.[/en]
  *   [ja]Android上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -65,7 +65,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroidPhone()
- * @description 
+ * @description
  *   [en]Returns whether the device is Android phone.[/en]
  *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -74,7 +74,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isAndroidTablet()
- * @description 
+ * @description
  *   [en]Returns whether the device is Android tablet.[/en]
  *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -83,7 +83,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIPhone()
- * @description 
+ * @description
  *   [en]Returns whether the device is iPhone.[/en]
  *   [ja]iPhone上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -92,7 +92,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIPad()
- * @description 
+ * @description
  *   [en]Returns whether the device is iPad.[/en]
  *   [ja]iPad上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -101,7 +101,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isBlackBerry()
- * @description 
+ * @description
  *   [en]Returns whether the device is BlackBerry.[/en]
  *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -110,7 +110,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isOpera()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Opera.[/en]
  *   [ja]Opera上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -119,7 +119,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isFirefox()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Firefox.[/en]
  *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -128,7 +128,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isSafari()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Safari.[/en]
  *   [ja]Safari上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -137,7 +137,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isChrome()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Chrome.[/en]
  *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -146,7 +146,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIE()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Internet Explorer.[/en]
  *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -155,7 +155,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isEdge()
- * @description 
+ * @description
  *   [en]Returns whether the browser is Edge.[/en]
  *   [ja]Edge上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
@@ -164,7 +164,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature isIOS7above()
- * @description 
+ * @description
  *   [en]Returns whether the iOS version is 7 or above.[/en]
  *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}

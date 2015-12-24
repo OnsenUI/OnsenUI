@@ -24,6 +24,191 @@ window.animit = (function(){
 
   var TIMEOUT_RATIO = 1.4;
 
+  var util = {
+  };
+
+  // capitalize string
+  util.capitalize = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  /**
+  * @param {Object} params
+  * @param {String} params.property
+  * @param {Float} params.duration
+  * @param {String} params.timing
+  */
+  util.buildTransitionValue = function(params) {
+    params.property = params.property || 'all';
+    params.duration = params.duration || 0.4;
+    params.timing = params.timing || 'linear';
+
+    var props = params.property.split(/ +/);
+
+    return props.map(function(prop) {
+      return prop + ' ' + params.duration + 's ' + params.timing;
+    }).join(', ');
+  };
+
+  /**
+  * Add an event handler on "transitionend" event.
+  */
+  util.onceOnTransitionEnd = function(element, callback) {
+    if (!element) {
+      return function() {};
+    }
+
+    var fn = function(event) {
+      if (element == event.target) {
+        event.stopPropagation();
+        removeListeners();
+
+        callback();
+      }
+    };
+
+    var removeListeners = function() {
+      util._transitionEndEvents.forEach(function(eventName) {
+        element.removeEventListener(eventName, fn, false);
+      });
+    };
+
+    util._transitionEndEvents.forEach(function(eventName) {
+      element.addEventListener(eventName, fn, false);
+    });
+
+    return removeListeners;
+  };
+
+  util._transitionEndEvents = (function() {
+
+    if ('ontransitionend' in window) {
+      return ['transitionend'];
+    }
+
+    if ('onwebkittransitionend' in window) {
+      return ['webkitTransitionEnd'];
+    }
+
+    if (util.vendorPrefix === 'webkit' || util.vendorPrefix === 'o' || util.vendorPrefix === 'moz' || util.vendorPrefix === 'ms') {
+      return [util.vendorPrefix + 'TransitionEnd', 'transitionend'];
+    }
+
+    return [];
+  })();
+
+  util._cssPropertyDict = (function() {
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var dict = {};
+    var a = 'A'.charCodeAt(0);
+    var z = 'z'.charCodeAt(0);
+
+    var upper = function(s) {
+      return s.substr(1).toUpperCase();
+    };
+
+    for (var i = 0; i < styles.length; i++) {
+
+      var key = styles[i]
+        .replace(/^[\-]+/, '')
+        .replace(/[\-][a-z]/g, upper)
+        .replace(/^moz/, 'Moz');
+
+      if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
+        if (key !== 'cssText' && key !== 'parentText') {
+          dict[key] = true;
+        }
+      }
+    }
+
+    return dict;
+  })();
+
+  util.hasCssProperty = function(name) {
+    return name in util._cssPropertyDict;
+  };
+
+  /**
+   * Vendor prefix for css property.
+   */
+  util.vendorPrefix = (function() {
+    var styles = window.getComputedStyle(document.documentElement, ''),
+    pre = (Array.prototype.slice
+      .call(styles)
+      .join('')
+      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+    return pre;
+  })();
+
+  util.forceLayoutAtOnce = function(elements, callback) {
+    this.batchImmediate(function() {
+      elements.forEach(function(element) {
+        // force layout
+        element.offsetHeight;
+      });
+      callback();
+    });
+  };
+
+  util.batchImmediate = (function() {
+    var callbacks = [];
+
+    return function(callback) {
+      if (callbacks.length === 0) {
+        setImmediate(function() {
+          var concreateCallbacks = callbacks.slice(0);
+          callbacks = [];
+          concreateCallbacks.forEach(function(callback) {
+            callback();
+          });
+        });
+      }
+
+      callbacks.push(callback);
+    };
+  })();
+
+  util.batchAnimationFrame = (function() {
+    var callbacks = [];
+
+    var raf = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback) {
+      setTimeout(callback, 1000 / 60);
+    };
+
+    return function(callback) {
+      if (callbacks.length === 0) {
+        raf(function() {
+          var concreateCallbacks = callbacks.slice(0);
+          callbacks = [];
+          concreateCallbacks.forEach(function(callback) {
+            callback();
+          });
+        });
+      }
+
+      callbacks.push(callback);
+    };
+  })();
+
+  util.transitionPropertyName = (function() {
+    if (util.hasCssProperty('transitionDuration')) {
+      return 'transition';
+    }
+
+    if (util.hasCssProperty(util.vendorPrefix + 'TransitionDuration')) {
+      return util.vendorPrefix + 'Transition';
+    }
+
+    throw new Error('Invalid state');
+  })();
+
+
   /**
    * @param {HTMLElement} element
    */
@@ -168,6 +353,13 @@ window.animit = (function(){
 
         this.transitionQueue.push(function(done) {
           var elements = this.elements;
+          var timeoutId;
+
+          var clearTransition = function() {
+            elements.forEach(function(element) {
+              element.style[transitionName] = '';
+            });
+          };
 
           // add "transitionend" event handler
           var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
@@ -177,7 +369,7 @@ window.animit = (function(){
           });
 
           // for fail safe.
-          var timeoutId = setTimeout(function() {
+          timeoutId = setTimeout(function() {
             removeListeners();
             clearTransition();
             done();
@@ -212,12 +404,6 @@ window.animit = (function(){
 
             element.style[transitionName] = transitionValue;
           });
-
-          var clearTransition = function() {
-            elements.forEach(function(element) {
-              element.style[transitionName] = '';
-            });
-          };
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -336,13 +522,14 @@ window.animit = (function(){
         return function(callback) {
           var elements = this.elements;
           var timeout = self.options.duration * 1000 * TIMEOUT_RATIO;
+          var timeoutId;
 
           var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             callback();
           });
 
-          var timeoutId = setTimeout(function() {
+          timeoutId = setTimeout(function() {
             removeListeners();
             callback();
           }, timeout);
@@ -406,184 +593,6 @@ window.animit = (function(){
     }
   };
 
-  var util = {
-  };
-
-  // capitalize string
-  util.capitalize = function(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-
-  /**
-  * @param {Object} params
-  * @param {String} params.property
-  * @param {Float} params.duration
-  * @param {String} params.timing
-  */
-  util.buildTransitionValue = function(params) {
-    params.property = params.property || 'all';
-    params.duration = params.duration || 0.4;
-    params.timing = params.timing || 'linear';
-
-    var props = params.property.split(/ +/);
-
-    return props.map(function(prop) {
-      return prop + ' ' + params.duration + 's ' + params.timing;
-    }).join(', ');
-  };
-
-  /**
-  * Add an event handler on "transitionend" event.
-  */
-  util.onceOnTransitionEnd = function(element, callback) {
-    if (!element) {
-      return function() {};
-    }
-
-    var fn = function(event) {
-      if (element == event.target) {
-        event.stopPropagation();
-        removeListeners();
-
-        callback();
-      }
-    };
-
-    var removeListeners = function() {
-      util._transitionEndEvents.forEach(function(eventName) {
-        element.removeEventListener(eventName, fn, false);
-      });
-    };
-
-    util._transitionEndEvents.forEach(function(eventName) {
-      element.addEventListener(eventName, fn, false);
-    });
-
-    return removeListeners;
-  };
-
-  util._transitionEndEvents = (function() {
-
-    if ('ontransitionend' in window) {
-      return ['transitionend'];
-    }
-
-    if ('onwebkittransitionend' in window) {
-      return ['webkitTransitionEnd'];
-    }
-
-    if (util.vendorPrefix === 'webkit' || util.vendorPrefix === 'o' || util.vendorPrefix === 'moz' || util.vendorPrefix === 'ms') {
-      return [util.vendorPrefix + 'TransitionEnd', 'transitionend'];
-    }
-
-    return [];
-  })();
-
-  util._cssPropertyDict = (function() {
-    var styles = window.getComputedStyle(document.documentElement, '');
-    var dict = {};
-    var a = 'A'.charCodeAt(0);
-    var z = 'z'.charCodeAt(0);
-
-    for (var i = 0; i < styles.length; i++) {
-      var key = styles[i]
-        .replace(/^[\-]+/, '')
-        .replace(/[\-][a-z]/g, function(s) { return s.substr(1).toUpperCase(); })
-        .replace(/^moz/, 'Moz');
-
-      if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
-        if (key !== 'cssText' && key !== 'parentText') {
-          dict[key] = true;
-        }
-      }
-    }
-
-    return dict;
-  })();
-
-  util.hasCssProperty = function(name) {
-    return name in util._cssPropertyDict;
-  };
-
-  /**
-   * Vendor prefix for css property.
-   */
-  util.vendorPrefix = (function() {
-    var styles = window.getComputedStyle(document.documentElement, ''),
-    pre = (Array.prototype.slice
-      .call(styles)
-      .join('') 
-      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-    )[1];
-    return pre;
-  })();
-
-  util.forceLayoutAtOnce = function(elements, callback) {
-    this.batchImmediate(function() {
-      elements.forEach(function(element) {
-        // force layout
-        element.offsetHeight;
-      });
-      callback();
-    });
-  };
-
-  util.batchImmediate = (function() {
-    var callbacks = [];
-
-    return function(callback) {
-      if (callbacks.length === 0) {
-        setImmediate(function() {
-          var concreateCallbacks = callbacks.slice(0);
-          callbacks = [];
-          concreateCallbacks.forEach(function(callback) {
-            callback();
-          });
-        });
-      }
-
-      callbacks.push(callback);
-    };
-  })();
-
-  util.batchAnimationFrame = (function() {
-    var callbacks = [];
-
-    var raf = window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function(callback) {
-      setTimeout(callback, 1000 / 60);
-    };
-
-    return function(callback) {
-      if (callbacks.length === 0) {
-        raf(function() {
-          var concreateCallbacks = callbacks.slice(0);
-          callbacks = [];
-          concreateCallbacks.forEach(function(callback) {
-            callback();
-          });
-        });
-      }
-
-      callbacks.push(callback);
-    };
-  })();
-
-  util.transitionPropertyName = (function() {
-    if (util.hasCssProperty('transitionDuration')) {
-      return 'transition';
-    }
-
-    if (util.hasCssProperty(util.vendorPrefix + 'TransitionDuration')) {
-      return util.vendorPrefix + 'Transition';
-    }
-
-    throw new Error('Invalid state');
-  })();
 
   return Animit;
 })();

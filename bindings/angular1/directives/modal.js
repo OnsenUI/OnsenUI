@@ -3,7 +3,7 @@
  * @id modal
  * @name ons-modal
  * @category modal
- * @description 
+ * @description
  *   [en]
  *     Modal component that masks current screen.
  *     Underlying components are not subject to any events while the modal component is shown.

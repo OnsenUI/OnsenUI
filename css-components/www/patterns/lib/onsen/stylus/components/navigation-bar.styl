@@ -338,6 +338,7 @@ navigation-bar--material-font()
   height var-navigation-bar-material-height
   min-width 72px
   width auto
+  float initial
   line-height var-navigation-bar-material-height
 
 .navigation-bar--material__center
@@ -348,15 +349,20 @@ navigation-bar--material-font()
   overflow hidden
   text-overflow ellipsis
   text-align left
+  float initial
   line-height var-navigation-bar-material-height
 
 .navigation-bar--material__center:first-child
-  margin-left 72px
+  margin-left 16px
+
+.navigation-bar--material__left:empty
+  min-width 16px
 
 .navigation-bar--material__right
   navigation-bar--material-font()
   height var-navigation-bar-material-height
   width auto
+  float initial
   line-height var-navigation-bar-material-height
 
 /*! topdoc

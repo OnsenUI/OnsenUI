@@ -2,6 +2,8 @@
 
 distrepo='OnsenUI-dist'
 
+cd ..
+
 if [ ! -d $distrepo ]
 then
 	echo "* $(tput setaf 3)Cloning OnsenUI/$distrepo$(tput setaf 7)..."
