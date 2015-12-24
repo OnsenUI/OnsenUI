@@ -58,9 +58,7 @@ class ListItemElement extends BaseElement {
 
     this._originalBackgroundColor = this.style.backgroundColor;
 
-    this.style.transition = this._transition;
-    this.style.webkitTransition = this._transition;
-    this.style.MozTransition = this._transition;
+    this.tapped = false;
   }
 
   detachedCallback() {
@@ -95,6 +93,16 @@ class ListItemElement extends BaseElement {
   }
 
   _onTouch() {
+    if (this.tapped) {
+      return;
+    }
+
+    this.tapped = true;
+
+    this.style.transition = this._transition;
+    this.style.webkitTransition = this._transition;
+    this.style.MozTransition = this._transition;
+
     if (this._tappable) {
       if (this.style.backgroundColor) {
         this._originalBackgroundColor = this.style.backgroundColor;
@@ -105,6 +113,12 @@ class ListItemElement extends BaseElement {
   }
 
   _onRelease() {
+    this.tapped = false;
+
+    this.style.transition = '';
+    this.style.webkitTransition = '';
+    this.style.MozTransition = '';
+
     this.style.backgroundColor = this._originalBackgroundColor || '';
   }
 
