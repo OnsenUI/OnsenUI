@@ -50,7 +50,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
       for (let i = 0; i < elements.length; i++) {
         if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-          const iconElement = elements[i].querySelector('.ons-back-button__icon');
+          const iconElement = elements[i].querySelector('.back-button__icon');
           if (iconElement) {
             result.push(iconElement);
           }
