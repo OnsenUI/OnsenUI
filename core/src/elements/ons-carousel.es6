@@ -351,6 +351,13 @@ class CarouselElement extends BaseElement {
   }
 
   /**
+  * @return {Boolean}
+  */
+  isFullscreen() {
+    return this.hasAttribute('fullscreen');
+  }
+
+  /**
    * @param {Boolean} scrollable
    */
   setOverscrollable(scrollable) {
