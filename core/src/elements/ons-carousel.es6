@@ -126,6 +126,32 @@ class CarouselElement extends BaseElement {
     this._saveLastState();
   }
 
+  _hideFullscreenCarouselItems() {
+    let activeIndex = this.getActiveCarouselItemIndex();
+
+    if (this.isFullscreen() && typeof activeIndex !== 'undefined') {
+      let children = this._getCarouselItemElements();
+
+      for (let i = 0; i < children.length; i++)
+      {
+        children[i].style.visibility = 'hidden';
+        children[i].style.display = 'none';
+      }
+
+      children[activeIndex].style.visibility = 'visible';
+      children[activeIndex].style.display = 'block';
+
+      if (activeIndex < children.length - 1) {
+        children[activeIndex + 1].style.visibility = 'visible';
+        children[activeIndex + 1].style.display = 'block';
+      }
+      if (activeIndex > 0) {
+        children[activeIndex - 1].style.visibility = 'visible';
+        children[activeIndex - 1].style.display = 'block';
+      }
+    }
+  }
+
   _onResize() {
     this.refresh();
   }
@@ -148,6 +174,32 @@ class CarouselElement extends BaseElement {
       carouselElementCount: this.getCarouselItemCount(),
       width: this._getCarouselItemSize() * this.getCarouselItemCount()
     };
+  }
+
+  _manageFullscreenCarouselItems(currentIndex, lastActiveIndex) {
+    let children = this._getCarouselItemElements();
+
+    if (currentIndex > lastActiveIndex && (currentIndex - lastActiveIndex) === 1) {
+      if (lastActiveIndex > 0) {
+        children[lastActiveIndex - 1].style.visibility = 'hidden';
+        children[lastActiveIndex - 1].style.display = 'none';
+      }
+      if(currentIndex < children.length - 1) {
+        children[currentIndex + 1].style.visibility = 'visible';
+        children[currentIndex + 1].style.display = 'block';
+      }
+    } else if (currentIndex < lastActiveIndex && (lastActiveIndex - currentIndex) === 1){
+      if (lastActiveIndex < children.length - 1) {
+        children[lastActiveIndex + 1].visibility = 'hidden';
+        children[lastActiveIndex + 1].style.display = 'none';
+      }
+      if (currentIndex > 0) {
+        this.children[currentIndex - 1].style.visibility = 'visible';
+        this.children[currentIndex - 1].style.display = 'block';
+      }
+    } else {
+      this._hideFullscreenCarouselItems();
+    }
   }
 
   /**
@@ -351,6 +403,13 @@ class CarouselElement extends BaseElement {
   }
 
   /**
+  * @return {Boolean}
+  */
+  isFullscreen() {
+    return this.hasAttribute('fullscreen');
+  }
+
+  /**
    * @param {Boolean} scrollable
    */
   setOverscrollable(scrollable) {
@@ -410,6 +469,10 @@ class CarouselElement extends BaseElement {
     if (this._lastActiveIndex !== currentIndex) {
       const lastActiveIndex = this._lastActiveIndex;
       this._lastActiveIndex = currentIndex;
+
+      if (this.isFullscreen()) {
+        this._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+      }
 
       util.triggerElementEvent(this, 'postchange', {
         carousel: this,
@@ -729,6 +792,7 @@ class CarouselElement extends BaseElement {
     this._setupInitialIndex();
 
     this._saveLastState();
+    this._hideFullscreenCarouselItems();
   }
 
   attributeChangedCallback(name, last, current) {
