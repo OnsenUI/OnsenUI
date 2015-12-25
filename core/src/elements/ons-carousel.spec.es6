@@ -467,6 +467,7 @@ describe('OnsCarouselElement', () => {
   describe('#_hideFullscreenCarouselItems', () => {
     it('it should not hide the active element and previous/next one', () => {
       let children = carousel._getCarouselItemElements();
+
       carousel.setAttribute('fullscreen', true);
       carousel.setActiveCarouselItemIndex(1);
       carousel._hideFullscreenCarouselItems();
@@ -474,15 +475,12 @@ describe('OnsCarouselElement', () => {
       expect(carousel.children[0].style.visibility).to.equal('visible');
       expect(carousel.children[1].style.visibility).to.equal('visible');
       expect(carousel.children[2].style.visibility).to.equal('visible');
+      expect(carousel.children[3].style.visibility).not.to.equal('visible');
 
       expect(carousel.children[0].style.display).to.equal('block');
+      expect(carousel.children[1].style.display).to.equal('block');
       expect(carousel.children[2].style.display).to.equal('block');
       expect(carousel.children[3].style.display).not.to.equal('block');
-    });
-
-    it('returns \'true\' if carousel is fullscreen', () => {
-      carousel.setAttribute('fullscreen', true);
-      expect(carousel.isFullscreen()).to.be.true;
     });
   });
 });
