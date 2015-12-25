@@ -176,7 +176,7 @@ class CarouselElement extends BaseElement {
     };
   }
 
-  _displayFullscreenCarouselItems(currentIndex, lastActiveIndex) {
+  _manageFullscreenCarouselItems(currentIndex, lastActiveIndex) {
     let children = this._getCarouselItemElements();
 
     if (currentIndex > lastActiveIndex && (currentIndex - lastActiveIndex) === 1) {
@@ -471,7 +471,7 @@ class CarouselElement extends BaseElement {
       this._lastActiveIndex = currentIndex;
 
       if (this.isFullscreen()) {
-        this._displayFullscreenCarouselItems(currentIndex, lastActiveIndex);
+        this._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
       }
 
       util.triggerElementEvent(this, 'postchange', {
