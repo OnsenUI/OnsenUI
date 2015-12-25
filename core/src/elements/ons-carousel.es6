@@ -179,7 +179,7 @@ class CarouselElement extends BaseElement {
   _displayFullscreenCarouselItems(currentIndex, lastActiveIndex) {
     let children = this._getCarouselItemElements();
 
-    if (currentIndex > lastActiveIndex) {
+    if (currentIndex > lastActiveIndex && (currentIndex - lastActiveIndex) === 1) {
       if (lastActiveIndex > 0) {
         children[lastActiveIndex - 1].style.visibility = 'hidden';
         children[lastActiveIndex - 1].style.display = 'none';
@@ -188,7 +188,7 @@ class CarouselElement extends BaseElement {
         children[currentIndex + 1].style.visibility = 'visible';
         children[currentIndex + 1].style.display = 'block';
       }
-    } else {
+    } else if (currentIndex < lastActiveIndex && (lastActiveIndex - currentIndex) === 1){
       if (lastActiveIndex < children.length - 1) {
         children[lastActiveIndex + 1].visibility = 'hidden';
         children[lastActiveIndex + 1].style.display = 'none';
@@ -197,6 +197,8 @@ class CarouselElement extends BaseElement {
         this.children[currentIndex - 1].style.visibility = 'visible';
         this.children[currentIndex - 1].style.display = 'block';
       }
+    } else {
+      this._hideFullscreenCarouselItems();
     }
   }
 
