@@ -483,5 +483,108 @@ describe('OnsCarouselElement', () => {
       expect(carousel.children[3].style.display).not.to.equal('block');
     });
   });
+
+  describe('#_manageFullscreenCarouselItems', () => {
+    it('it should not hide the active element and previous/next one', () => {
+      let children = carousel._getCarouselItemElements();
+      let currentIndex = 2;
+      let lastActiveIndex = 1;
+
+      carousel.setAttribute('fullscreen', true);
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+      carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+
+      expect(carousel.children[0].style.visibility).not.to.equal('visible');
+      expect(carousel.children[1].style.visibility).to.equal('visible');
+      expect(carousel.children[2].style.visibility).to.equal('visible');
+      expect(carousel.children[3].style.visibility).to.equal('visible');
+
+      expect(carousel.children[0].style.display).not.to.equal('block');
+      expect(carousel.children[1].style.display).to.equal('block');
+      expect(carousel.children[2].style.display).to.equal('block');
+      expect(carousel.children[3].style.display).to.equal('block');
+    });
+
+    it('it should change the visibility when moving forward', () => {
+      let children = carousel._getCarouselItemElements();
+      let currentIndex = 1;
+      let lastActiveIndex = 0;
+
+      carousel.setAttribute('fullscreen', true);
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+      carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+
+      expect(carousel.children[0].style.visibility).to.equal('visible');
+      expect(carousel.children[3].style.visibility).not.to.equal('visible');
+
+      expect(carousel.children[0].style.display).to.equal('block');
+      expect(carousel.children[3].style.display).not.to.equal('block');
+
+      currentIndex = 2;
+      lastActiveIndex = 1;
+
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+      carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+
+      expect(carousel.children[0].style.visibility).not.to.equal('visible');
+      expect(carousel.children[3].style.visibility).to.equal('visible');
+
+      expect(carousel.children[0].style.display).not.to.equal('block');
+      expect(carousel.children[3].style.display).to.equal('block');
+    });
+
+    it('it should change the visibility when moving backward', () => {
+      let children = carousel._getCarouselItemElements();
+      let currentIndex = 2;
+      let lastActiveIndex = 3;
+
+      carousel.setAttribute('fullscreen', true);
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+      carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+
+      expect(carousel.children[0].style.visibility).not.to.equal('visible');
+      expect(carousel.children[3].style.visibility).to.equal('visible');
+
+      expect(carousel.children[0].style.display).not.to.equal('block');
+      expect(carousel.children[3].style.display).to.equal('block');
+
+      currentIndex = 1;
+      lastActiveIndex = 2;
+
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+      carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex);
+
+      expect(carousel.children[0].style.visibility).to.equal('visible');
+      expect(carousel.children[3].style.visibility).not.to.equal('visible');
+
+      expect(carousel.children[0].style.display).to.equal('block');
+      expect(carousel.children[3].style.display).not.to.equal('block');
+    });
+
+    it('it should not throw error when the first/last element is active', () => {
+      let children = carousel._getCarouselItemElements();
+      let currentIndex = 0;
+      let lastActiveIndex = 1;
+
+      carousel.setAttribute('fullscreen', true);
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+
+      expect(() => carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex)).not.to.throw(Error);
+
+      currentIndex = 3;
+      lastActiveIndex = 0;
+
+      carousel.setActiveCarouselItemIndex(currentIndex);
+      carousel._hideFullscreenCarouselItems();
+
+      expect(() => carousel._manageFullscreenCarouselItems(currentIndex, lastActiveIndex)).not.to.throw(Error);
+    });
+  });
 });
 
