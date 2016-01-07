@@ -15,15 +15,15 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       '../../build/js/onsenui.js',
-      '../../core/test/setup.es6',
-      '../../core/src/**/*.spec.es6',
+      '../../core/test/setup.js',
+      '../../core/src/**/*.spec.js',
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
     ],
 
     preprocessors: {
-      '../../core/test/setup.es6': ['babel'],
-      '../../core/src/**/*.spec.es6': ['babel']
+      '../../core/test/setup.js': ['babel'],
+      '../../core/src/**/*.spec.js': ['babel']
     },
 
     babelPreprocessor: {
@@ -42,28 +42,6 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
-
-
-    // preprocess matching files before serving them to the browser
-    /*
-    webpack: {
-      module: {
-        preLoaders: [
-          {
-            test: /spec\.es6$/,
-            loader: 'babel',
-            query: {
-              //presets: ['es2015']
-            }
-          },
-          {
-            test: /\.es6$/,
-            exclude: /spec\.es6$/,
-            loader: 'isparta'
-          }
-        ],
-      }
-    },*/
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

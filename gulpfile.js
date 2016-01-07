@@ -33,9 +33,10 @@ var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
-var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
+var npm  = require('rollup-plugin-npm');
+var babel = require('rollup-plugin-babel');
 
 ////////////////////////////////////////
 // browser-sync
@@ -59,65 +60,28 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', ['prepare'], function() {
-  return bundleBrowserify(createBrowserify());
-});
-
-function createBrowserify(options) {
-  options = options || {};
-
-  var b = browserify({
-    entries: ['./core/src/index.es6'],
-    debug: true,
-    extensions: ['.js', '.es6'],
-    cache: {},
-    packageCache: {},
-    paths: ['./core/src']
-  });
-
-  if (options.watch) {
-    b = b.plugin(watchify);
-  }
-
-  return b
-    .transform('babelify', {
-      extensions: ['.es6'],
-      presets: ['es2015']
-    })
-    .transform('concatenify');
-}
-
-function bundleBrowserify(browserify) {
-  return browserify
-    .bundle()
-    .on('error', function(error) {
-      $.util.log($.util.colors.red(error.toString()));
-    })
-    .pipe(source('onsenui.js'))
-    .pipe($.plumber())
+gulp.task('core', function() {
+  return gulp.src(['core/vendor/*.js', 'core/src/setup.js'], {read: false})
+    .pipe($.rollup({
+      sourceMap: true,
+      plugins: [
+        babel({presets: ['es2015-rollup']}), npm()
+      ]
+    }))
+    .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe(gulp.dest('build/js/'));
-}
-
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('build/js'))
+    .on('end', function() {
+      browserSync.reload();
+    });
+});
 
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
 gulp.task('watch-core', ['prepare'], function() {
-  var b = createBrowserify({watch: true});
-
-  b.on('update', function(event) {
-    $.util.log('Changed ' + $.util.colors.magenta(JSON.stringify(event)));
-    bundleBrowserify(b).on('end', function() {
-      $.util.log('Finished browserify rebundle');
-      browserSync.reload();
-    });
-  });
-
-  bundleBrowserify(b).on('end', function() {
-    $.util.log('Finished browserify bundle');
-    browserSync.reload();
-  });
+  return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
 });
 
 ////////////////////////////////////////
@@ -296,9 +260,7 @@ gulp.task('prepare', ['html2js'], function() {
     // auto prepare
     gulp.src('cordova-app/www/index.html')
       .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
-  ).on('end', function() {
-    browserSync.reload();
-  });
+  );
 });
 
 ////////////////////////////////////////
