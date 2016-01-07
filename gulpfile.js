@@ -90,7 +90,7 @@ gulp.task('watch-core', ['prepare'], function() {
 ////////////////////////////////////////
 // core-test
 ////////////////////////////////////////
-gulp.task('core-test', ['core'], function() {
+gulp.task('core-test', ['prepare', 'core'], function() {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
