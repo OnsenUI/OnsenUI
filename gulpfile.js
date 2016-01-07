@@ -61,13 +61,16 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  return gulp.src(['core/vendor/*.js', 'core/src/setup.js'], {read: false})
+  return gulp.src(['core/src/setup.js'], {read: false})
     .pipe($.rollup({
       sourceMap: 'inline',
       plugins: [
         babel({presets: ['es2015-rollup']}), npm()
-      ]
+      ],
+      format: 'umd',
+      moduleName: 'ons'
     }))
+    .pipe($.addSrc.prepend('core/vendor/*.js'))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())

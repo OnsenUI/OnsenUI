@@ -91,11 +91,4 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
     window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
 });
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = ons;
-}
-
-if (typeof window !== 'undefined') {
-  window.ons = ons;
-}
-
+export default ons;
