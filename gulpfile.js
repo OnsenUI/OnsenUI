@@ -63,14 +63,14 @@ gulp.task('browser-sync', function() {
 gulp.task('core', function() {
   return gulp.src(['core/vendor/*.js', 'core/src/setup.js'], {read: false})
     .pipe($.rollup({
-      sourceMap: true,
+      sourceMap: 'inline',
       plugins: [
         babel({presets: ['es2015-rollup']}), npm()
       ]
     }))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe($.sourcemaps.write('.'))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js'))
     .on('end', function() {
       browserSync.reload();
