@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.6
+----
+ * css-components: Add San Francisco font for iOS9 devices.
+
 v2.0.0-beta.5
 ----
  * core: Add link to library in package.json for browserify, etc.
