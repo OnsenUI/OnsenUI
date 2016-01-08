@@ -19,7 +19,7 @@ import util from 'ons/util';
 
 export default class SplitterAnimator {
   constructor(options = {}) {
-    options = ons._util.extend({
+    options = util.extend({
       timing: 'linear',
       duration: '0.3',
       delay: '0'

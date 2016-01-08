@@ -81,7 +81,7 @@ class TabbarElement extends BaseElement {
     });
 
     this._compile();
-    this._contentElement = ons._util.findChild(this, '.tab-bar__content');
+    this._contentElement = util.findChild(this, '.tab-bar__content');
     ModifierUtil.initModifier(this, scheme);
   }
 
@@ -117,8 +117,8 @@ class TabbarElement extends BaseElement {
 
   _prepareForTopTabbar() {
 
-    var content = ons._util.findChild(this, '.tab-bar__content');
-    var tabbar = ons._util.findChild(this, '.tab-bar');
+    var content = util.findChild(this, '.tab-bar__content');
+    var tabbar = util.findChild(this, '.tab-bar');
 
     content.setAttribute('no-status-bar-fill', '');
 
@@ -478,3 +478,4 @@ window.OnsTabbarElement.registerAnimator = function(name, Animator) {
 window.OnsTabbarElement.rewritables = rewritables;
 window.OnsTabbarElement.TabbarAnimator = TabbarAnimator;
 
+export default OnsTabbarElement;

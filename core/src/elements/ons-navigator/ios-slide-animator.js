@@ -24,7 +24,7 @@ import util from 'ons/util';
 export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
-    options = ons._util.extend({
+    options = util.extend({
       duration: 0.4,
       timing: 'cubic-bezier(.1, .7, .1, 1)',
       delay: 0
@@ -32,7 +32,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     super(options);
 
-    this.backgroundMask = ons._util.createElement(`
+    this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
         background-color: black; opacity: 0;"></div>
     `);

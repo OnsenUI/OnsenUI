@@ -94,7 +94,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getContentElement() {
-    const result = ons._util.findChild(this, '.page__content');
+    const result = util.findChild(this, '.page__content');
     if (result) {
       return result;
     }
@@ -105,14 +105,14 @@ class PageElement extends BaseElement {
    * @return {Boolean}
    */
   _hasToolbarElement() {
-    return !!ons._util.findChild(this, 'ons-toolbar');
+    return !!util.findChild(this, 'ons-toolbar');
   }
 
   /**
    * @return {Boolean}
    */
   _canAnimateToolbar() {
-    const toolbar = ons._util.findChild(this, 'ons-toolbar');
+    const toolbar = util.findChild(this, 'ons-toolbar');
     if (toolbar) {
       return true;
     }
@@ -131,7 +131,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getBackgroundElement() {
-    const result = ons._util.findChild(this, '.page__background');
+    const result = util.findChild(this, '.page__background');
     if (result) {
       return result;
     }
@@ -142,7 +142,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getBottomToolbarElement() {
-    return ons._util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
+    return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
   }
 
 
@@ -150,7 +150,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getToolbarElement() {
-    return ons._util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+    return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
 
   /**
@@ -161,7 +161,7 @@ class PageElement extends BaseElement {
   _registerToolbar(element) {
     this._getContentElement().setAttribute('no-status-bar-fill', '');
 
-    if (ons._util.findChild(this, '.page__status-bar-fill')) {
+    if (util.findChild(this, '.page__status-bar-fill')) {
       this.insertBefore(element, this.children[1]);
     } else {
       this.insertBefore(element, this.children[0]);
@@ -174,7 +174,7 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerBottomToolbar(element) {
-    if (!ons._util.findChild(this, '.page__status-bar-fill')) {
+    if (!util.findChild(this, '.page__status-bar-fill')) {
       const fill = document.createElement('div');
       fill.classList.add('page__bottom-bar-fill');
       fill.style.width = '0px';
@@ -196,7 +196,7 @@ class PageElement extends BaseElement {
   }
 
   _compile() {
-    if (util.findChild(this, '.page__background') && ons._util.findChild(this, '.page__content')) {
+    if (util.findChild(this, '.page__background') && util.findChild(this, '.page__content')) {
       return;
     }
 
@@ -223,7 +223,7 @@ class PageElement extends BaseElement {
   }
 
   _registerExtraElement(element) {
-    let extra = ons._util.findChild(this, '.page__extra');
+    let extra = util.findChild(this, '.page__extra');
     if (!extra) {
       extra = document.createElement('div');
       extra.classList.add('page__extra');
@@ -275,7 +275,7 @@ class PageElement extends BaseElement {
   }
 
   _show() {
-    if (!this.isShown && ons._util.isAttached(this)) {
+    if (!this.isShown && util.isAttached(this)) {
       this.isShown = true;
 
       if (!this._isMuted) {
@@ -294,7 +294,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'hide', this.eventDetail);
       }
 
-      ons._util.propagateAction(this._getContentElement(), '_hide');
+      util.propagateAction(this._getContentElement(), '_hide');
     }
   }
 
