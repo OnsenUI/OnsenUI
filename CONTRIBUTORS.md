@@ -29,7 +29,7 @@ List of code contributors (in no particular order):
 * [Adrian Stanecki](https://github.com/astanecki)
 * [snito](https://github.com/snito)
 * [dzeims](https://github.com/dzeims)
-* [ataruohto0121](https://github.com/ataruohto0121]
+* [ataruohto0121](https://github.com/ataruohto0121)
 * [roboncode](https://github.com/roboncode)
 
 Please add yourself if you're not on this list but feel that you should be.
