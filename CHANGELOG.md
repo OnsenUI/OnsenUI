@@ -9,7 +9,8 @@ v2.0.0-beta.4
  * ons-ripple: Fixed [#1140](https://github.com/OnsenUI/OnsenUI/issues/1140).
  * ons-navigator: Fixed Fade animator export.
  * ons-material-input: Make it resizable.
- * Added ons-lazy-repeat custom elements.
+ * Added ons-lazy-repeat custom element.
+ * core: Use [rollup.js](http://rollupjs.org/) for bundling.
 
 v2.0.0-beta.3
 ----

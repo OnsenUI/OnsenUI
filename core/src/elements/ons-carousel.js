@@ -19,6 +19,7 @@ import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
+import DoorLock from 'ons/doorlock';
 
 const scheme = {'': 'carousel--*'};
 
@@ -517,8 +518,9 @@ class CarouselElement extends BaseElement {
     if (this.isAutoScrollEnabled()) {
       let arr = [];
       const size = this._getCarouselItemSize();
+      const nbrOfItems = this.getCarouselItemCount();
 
-      for (let i = 0; i < this.getCarouselItemCount(); i++) {
+      for (let i = 0; i < nbrOfItems; i++) {
         if (max >= i * size) {
           arr.push(i * size);
         }

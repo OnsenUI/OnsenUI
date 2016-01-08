@@ -25,7 +25,6 @@ class ButtonElement extends BaseElement {
 
   createdCallback() {
     this.classList.add('button');
-
     ModifierUtil.initModifier(this, scheme);
   }
 

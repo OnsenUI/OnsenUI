@@ -2,8 +2,7 @@
  * Gesture detector library that forked from github.com/EightMedia/hammer.js.
  */
 
-(function(window) {
-  'use strict';
+'use strict';
 
 var Event, Utils, Detection, PointerEvent;
 
@@ -2061,6 +2060,4 @@ GestureDetector.Instance.prototype = {
     };
   })('transform');
 
-  module.exports = GestureDetector;
-
-})(window);
+export default GestureDetector;

@@ -24,9 +24,10 @@ notification._createAlertDialog = function(title, message,
   messageIsHTML, cancelable, promptDialog, autofocus, placeholder,
   defaultValue, submitOnEnter, compile) {
 
-  compile = compile || ((object) => object);
+  compile = compile || function(object) { return object; };
 
   const titleElementHTML = typeof title === 'string' ? '<div class="alert-dialog-title"></div>' : '';
+
 
   let dialogElement = util.createElement(`
   <ons-alert-dialog>
