@@ -33,8 +33,6 @@ var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
-var source = require('vinyl-source-stream');
-var watchify = require('watchify');
 var npm  = require('rollup-plugin-npm');
 var babel = require('rollup-plugin-babel');
 
@@ -218,18 +216,15 @@ gulp.task('prepare', ['html2js'], function() {
     // angular-onsenui.js
     gulp.src([
       'bindings/angular1/vendor/*.js',
-      'bindings/angular1/lib/*.{es6,js}',
+      'bindings/angular1/lib/*.js',
       'bindings/angular1/directives/templates.js',
       'bindings/angular1/js/onsen.js',
-      'bindings/angular1/views/*.{es6,js}',
-      'bindings/angular1/directives/*.{es6,js}',
-      'bindings/angular1/services/*.{es6,js}',
-      'bindings/angular1/js/*.{es6,js}'
+      'bindings/angular1/views/*.js',
+      'bindings/angular1/directives/*.js',
+      'bindings/angular1/services/*.js',
+      'bindings/angular1/js/*.js'
     ])
       .pipe($.plumber())
-      .pipe(onlyES6 = $.filter('*.es6'))
-      .pipe($.babel({modules: 'ignore'}))
-      .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true})) // eslint-disable-line camelcase
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
