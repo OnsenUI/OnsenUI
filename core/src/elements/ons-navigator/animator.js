@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import util from 'ons/util';
+
 export default class NavigatorTransitionAnimator {
 
   /**
@@ -24,7 +26,7 @@ export default class NavigatorTransitionAnimator {
    * @param {Number} options.delay
    */
   constructor(options) {
-    options = ons._util.extend({
+    options = util.extend({
       timing: 'linear',
       duration: '0.4',
       delay: '0'
