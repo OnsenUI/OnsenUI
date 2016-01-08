@@ -60,7 +60,8 @@ input, textarea {
   background: transparent !important;
 }
 
-.page__status-bar-fill + .page__background + .page__content {
+.page__status-bar-fill + .page__background + .page__content,
+.page__status-bar-fill + .page__bottom-bar-fill + .page__background + .page__content {
   padding-top: 20px;
 }
 
@@ -73,33 +74,37 @@ ons-toolbar + .page__background + .page__content {
   top: 56px;
 }
 
-.page__status-bar-fill + ons-toolbar {
+.page__status-bar-fill + ons-toolbar,
+.page__status-bar-fill + .page__bottom-bar-fill + ons-toolbar {
   height: 64px;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] {
+.page__status-bar-fill ~ ons-toolbar[modifier~="material"] {
   height: 76px;
 }
 
 .page__status-bar-fill + ons-toolbar > .center,
 .page__status-bar-fill + ons-toolbar > .left,
-.page__status-bar-fill + ons-toolbar > .right {
+.page__status-bar-fill + ons-toolbar > .right,
+.page__status-bar-fill + .page__bottom-bar-fill + ons-toolbar > .center,
+.page__status-bar-fill + .page__bottom-bar-fill + ons-toolbar > .left,
+.page__status-bar-fill + .page__bottom-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
+.page__status-bar-fill ~ ons-toolbar[modifier~="material"] > .center,
+.page__status-bar-fill ~ ons-toolbar[modifier~="material"] > .left,
+.page__status-bar-fill ~ ons-toolbar[modifier~="material"] > .right {
   height: 76px;
 }
 
-
-.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
+.page__status-bar-fill + ons-toolbar + .page__background + .page__content,
+.page__status-bar-fill + .page__bottom-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
+.page__status-bar-fill ~ ons-toolbar[modifier~="material"] + .page__background + .page__content {
   top: 76px;
 }
 
@@ -126,7 +131,7 @@ ons-toolbar + .page__background + .page__content {
   padding-top: 22px;
 }
 
-ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
+ons-tabbar[position="top"] .page__status-bar-fill ~ .page__background + .page__content {
   padding-top: 0px;
 }
 
