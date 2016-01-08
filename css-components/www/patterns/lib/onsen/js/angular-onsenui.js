@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-beta.3 - 2015-12-16 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta.4 - 2016-01-08 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -1039,7 +1039,7 @@ limitations under the License.
         var userDelegate = this._getDelegate();
         var internalDelegate = new AngularLazyRepeatDelegate(element[0], userDelegate, element.scope());
 
-        this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, element[0], internalDelegate);
+        this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
         element.remove();
 
         this._injectReloadMethod(userDelegate, this._provider);
@@ -1161,8 +1161,6 @@ limitations under the License.
         }
 
         this._linker(scope, function(cloned) {
-          cloned[0].style.display = 'none';
-
           if (!this._usingBinding()) {
             var contentElement = this._userDelegate.createItemContent(index, null);
             cloned.append(contentElement);
@@ -1172,10 +1170,6 @@ limitations under the License.
           done({
             element: cloned[0],
             scope: scope
-          });
-
-          scope.$evalAsync(function() {
-            cloned[0].style.display = 'block';
           });
 
         }.bind(this));
@@ -2715,7 +2709,7 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
-        this._doorLock = new DoorLock();
+        this._doorLock = new ons._DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
 
@@ -3422,7 +3416,7 @@ limitations under the License.
 
         this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
         this._mode = SPLIT_MODE;
-        this._doorLock = new DoorLock();
+        this._doorLock = new ons._DoorLock();
 
         this._doSplit = false;
         this._doCollapse = false;
@@ -6276,7 +6270,6 @@ limitations under the License.
  * @ngdoc directive
  * @id lazy-repeat
  * @name ons-lazy-repeat
- * @extensionOf angular
  * @category control
  * @description
  *   [en]
@@ -6338,6 +6331,14 @@ limitations under the License.
  * @description
  *  [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]
  *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc property
+ * @name delegate
+ * @description
+ *  [en]Specify a delegate object to load and unload item elements.[/en]
+ *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
  */
 
 (function() {
@@ -10659,14 +10660,6 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name no-reload
- * @description
- *   [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *   [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
- */
-
-/**
- * @ngdoc attribute
  * @name persistent
  * @description
  *   [en]
@@ -11944,12 +11937,6 @@ limitations under the License.
   }]);
 })();
 
-// confirm to use jqLite
-'use strict';
-
-if (window.jQuery && angular.element === window.jQuery) {
-  console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
-}
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -12559,6 +12546,11 @@ limitations under the License.
  * @return {Boolean}
  */
 
+
+// confirm to use jqLite
+if (window.jQuery && angular.element === window.jQuery) {
+  console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
+}
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION

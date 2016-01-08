@@ -151,7 +151,7 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
 
 .back-button__icon:before
   font-family 'Ionicons'
-  content "\f3cf"
+  content '\f3cf'
   font-size 32px
 
 .back-button--material
@@ -165,6 +165,15 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
   border-radius 0
   vertical-align initial
   line-height 56px
+
+.back-button--material__label
+  display none
+  font-size 20px
+
+.back-button--material__icon:before
+  font-family 'Material-Design-Iconic-Font'
+  content: '\f2ea'
+  font-size 26px
 
 .back-button--material:active
   opacity 1

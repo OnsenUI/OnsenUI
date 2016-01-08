@@ -106,6 +106,9 @@ h6 {
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
 }
+.page--material__background {
+  background-color: #fafafa;
+}
 /* topdoc
   name: Switch
   class: switch
@@ -2634,7 +2637,7 @@ h6 {
 }
 .back-button__icon:before {
   font-family: 'Ionicons';
-  content: "\f3cf";
+  content: '\f3cf';
   font-size: 32px;
 }
 .back-button--material {
@@ -2649,6 +2652,15 @@ h6 {
   border-radius: 0;
   vertical-align: initial;
   line-height: 56px;
+}
+.back-button--material__label {
+  display: none;
+  font-size: 20px;
+}
+.back-button--material__icon:before {
+  font-family: 'Material-Design-Iconic-Font';
+  content: '\f2ea';
+  font-size: 26px;
 }
 .back-button--material:active {
   opacity: 1;
