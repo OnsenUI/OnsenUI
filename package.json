@@ -22,6 +22,7 @@
   "scripts": {
     "test": "gulp test"
   },
+  "main": "js/onsenui.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/OnsenUI/OnsenUI"
@@ -36,6 +37,7 @@
     "url": "https://github.com/OnsenUI/OnsenUI/issues"
   },
   "homepage": "http://onsen.io/",
+  "main": "js/onsenui.js",
   "devDependencies": {
     "babel-core": "^6.3.15",
     "babel-eslint": "^3.1.30",
