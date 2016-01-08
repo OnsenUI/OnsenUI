@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from 'ons/util';
 import NavigatorTransitionAnimator from './animator';
 
 /**
@@ -23,7 +24,7 @@ import NavigatorTransitionAnimator from './animator';
 export default class SimpleSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
-    options = ons._util.extend({
+    options = util.extend({
       duration: 0.3,
       timing: 'cubic-bezier(.1, .7, .4, 1)',
       delay: 0
@@ -31,7 +32,7 @@ export default class SimpleSlideNavigatorTransitionAnimator extends NavigatorTra
 
     super(options);
 
-    this.backgroundMask = ons._util.createElement(`
+    this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%; z-index: 2;
         background-color: black; opacity: 0;"></div>
     `);

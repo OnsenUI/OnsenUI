@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import NavigatorTransitionAnimator from './animator';
+import util from 'ons/util';
 
 /**
  * Fade-in screen transition.
@@ -23,7 +24,7 @@ import NavigatorTransitionAnimator from './animator';
 export default class FadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
-    options = ons._util.extend({
+    options = util.extend({
       timing: 'linear',
       duration: '0.4',
       delay: '0'

@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
-import internal from 'ons/internal/internal';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
@@ -81,7 +81,7 @@ class TabbarElement extends BaseElement {
     });
 
     this._compile();
-    this._contentElement = ons._util.findChild(this, '.tab-bar__content');
+    this._contentElement = util.findChild(this, '.tab-bar__content');
     ModifierUtil.initModifier(this, scheme);
   }
 
@@ -117,8 +117,8 @@ class TabbarElement extends BaseElement {
 
   _prepareForTopTabbar() {
 
-    var content = ons._util.findChild(this, '.tab-bar__content');
-    var tabbar = ons._util.findChild(this, '.tab-bar');
+    var content = util.findChild(this, '.tab-bar__content');
+    var tabbar = util.findChild(this, '.tab-bar');
 
     content.setAttribute('no-status-bar-fill', '');
 
@@ -130,7 +130,7 @@ class TabbarElement extends BaseElement {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
     }
 
-    ons._internal.shouldFillStatusBar(this)
+    internal.shouldFillStatusBar(this)
       .then(() => {
         let fill = this.querySelector('.tab-bar__status-bar-fill');
 
@@ -478,3 +478,4 @@ window.OnsTabbarElement.registerAnimator = function(name, Animator) {
 window.OnsTabbarElement.rewritables = rewritables;
 window.OnsTabbarElement.TabbarAnimator = TabbarAnimator;
 
+export default OnsTabbarElement;

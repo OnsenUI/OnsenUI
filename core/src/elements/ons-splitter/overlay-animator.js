@@ -21,7 +21,7 @@ import SplitterAnimator from './animator';
 export default class OverlaySplitterAnimator extends SplitterAnimator {
 
   constructor(options = {}) {
-    options = ons._util.extend({
+    options = util.extend({
       timing: 'cubic-bezier(.1, .7, .1, 1)',
       duration: '0.3',
       delay: '0'

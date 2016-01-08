@@ -19,6 +19,7 @@ import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
+import OnsTabbarElement from './ons-tabbar';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -220,7 +221,7 @@ class TabElement extends BaseElement {
     if (this.hasAttribute('active')) {
       const tabIndex = this._findTabIndex();
 
-      window.OnsTabbarElement.rewritables.ready(tabbar, () => {
+      OnsTabbarElement.rewritables.ready(tabbar, () => {
         setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
       });
     }
