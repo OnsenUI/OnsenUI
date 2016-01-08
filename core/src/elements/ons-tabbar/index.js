@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import internal from 'ons/internal/internal';
 import AnimatorFactory from 'ons/internal/animator-factory';
@@ -130,7 +131,7 @@ class TabbarElement extends BaseElement {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
     }
 
-    ons._internal.shouldFillStatusBar(this)
+    internal.shouldFillStatusBar(this)
       .then(() => {
         let fill = this.querySelector('.tab-bar__status-bar-fill');
 

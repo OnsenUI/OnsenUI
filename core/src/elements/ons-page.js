@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import ons from 'ons/ons';
 import internal from 'ons/internal/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
