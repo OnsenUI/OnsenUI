@@ -39,6 +39,7 @@ import './elements/ons-dialog';
 import './elements/ons-fab';
 import './elements/ons-gesture-detector';
 import './elements/ons-icon';
+import './elements/ons-lazy-repeat';
 import './elements/ons-list-header';
 import './elements/ons-list-item';
 import './elements/ons-list';

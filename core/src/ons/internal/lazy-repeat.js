@@ -73,23 +73,17 @@ export class LazyRepeatProvider {
 
   /**
    * @param {Element} wrapperElement
-   * @param {Element} templateElement
    * @param {LazyRepeatDelegate} delegate
    */
-  constructor(wrapperElement, templateElement, delegate) {
+  constructor(wrapperElement, delegate) {
     if (!(delegate instanceof LazyRepeatDelegate)) {
       throw new Error('"delegate" parameter must be an instance of ons._internal.LazyRepeatDelegate.');
-    }
-
-    if (!(templateElement instanceof Element)) {
-      throw new Error('"templateElement" parameter must be an instance of Element.');
     }
 
     if (!(wrapperElement instanceof Element)) {
       throw new Error('"wrapperElement" parameter must be an instance of Element.');
     }
 
-    this._templateElement = templateElement;
     this._wrapperElement = wrapperElement;
     this._delegate = delegate;
 
@@ -130,6 +124,11 @@ export class LazyRepeatProvider {
 
   _onChange() {
     this._render();
+  }
+
+  refresh() {
+    this._removeAllElements();
+    this._onChange();
   }
 
   _render() {
@@ -184,7 +183,6 @@ export class LazyRepeatProvider {
     }
 
     this._delegate.prepareItem(index, (item) => {
-
       const element = item.element;
 
       element.style.position = 'absolute';
@@ -333,11 +331,13 @@ export class LazyRepeatProvider {
       this._boundOnChange = this._onChange.bind(this);
     }
 
+    this._boundDoubleFireOnTouchend = this._doubleFireOnTouchend.bind(this);
+
     this._pageContent.addEventListener('scroll', this._boundOnChange, true);
 
     if (platform.isIOS()) {
       this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
-      this._pageContent.addEventListener('touchend', this._doubleFireOnTouchend, true);
+      this._pageContent.addEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
     window.document.addEventListener('resize', this._boundOnChange, true);
@@ -348,15 +348,16 @@ export class LazyRepeatProvider {
 
     if (platform.isIOS()) {
       this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
-      this._pageContent.removeEventListener('touchend', this._doubleFireOnTouchend, true);
+      this._pageContent.removeEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
     window.document.removeEventListener('resize', this._boundOnChange, true);
   }
 
   destroy() {
+    this._removeAllElements();
     this._delegate.destroy();
-    this._parentElement = this._templateElement = this._delegate = this._renderedItems = null;
+    this._parentElement = this._delegate = this._renderedItems = null;
     this._removeEventListeners();
   }
 }

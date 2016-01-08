@@ -100,7 +100,7 @@ gulp.task('core', function() {
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', ['prepare'], function() {
+gulp.task('watch-core', ['prepare', 'core'], function() {
   return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
 });
 

@@ -91,7 +91,7 @@ describe('LazyRepeatProvider', () => {
 
     document.body.appendChild(page);
 
-    provider = new LazyRepeatProvider(wrapper, template, delegate);
+    provider = new LazyRepeatProvider(wrapper, delegate);
   });
 
   afterEach(() => {
@@ -104,23 +104,18 @@ describe('LazyRepeatProvider', () => {
 
   describe('#constructor()', () => {
     it('throws error if \'delegate\' is not a LazyRepeatDelegate', () => {
-      expect(() => new LazyRepeatProvider(wrapper, template, 'hoge')).to.throw(Error);
-      expect(() => new LazyRepeatProvider(wrapper, template, delegate)).not.to.throw(Error);
-    });
-
-    it('throws error if \'templateElement\' is not an Element', () => {
-      expect(() => new LazyRepeatProvider(wrapper, 'hoge', delegate)).to.throw(Error);
-      expect(() => new LazyRepeatProvider(wrapper, template, delegate)).not.to.throw(Error);
+      expect(() => new LazyRepeatProvider(wrapper, 'hoge')).to.throw(Error);
+      expect(() => new LazyRepeatProvider(wrapper, delegate)).not.to.throw(Error);
     });
 
     it('throws error if \'wrapperElement\' is not an Element', () => {
-      expect(() => new LazyRepeatProvider('hoge', template, delegate)).to.throw(Error);
-      expect(() => new LazyRepeatProvider(wrapper, template, delegate)).not.to.throw(Error);
+      expect(() => new LazyRepeatProvider('hoge', delegate)).to.throw(Error);
+      expect(() => new LazyRepeatProvider(wrapper, delegate)).not.to.throw(Error);
     });
 
     it('throws error if \'wrapperElement\' is not a descendant of OnsPageElement', () => {
       let wrapper = document.createElement('div');
-      expect(() => new LazyRepeatProvider(wrapper, template, delegate)).to.throw(Error);
+      expect(() => new LazyRepeatProvider(wrapper, delegate)).to.throw(Error);
     });
   });
 
