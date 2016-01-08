@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
 
 const scheme = {
   '.text-input--material': 'text-input--material--*',

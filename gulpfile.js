@@ -65,7 +65,24 @@ gulp.task('core', function() {
     .pipe($.rollup({
       sourceMap: 'inline',
       plugins: [
-        babel({presets: ['es2015-rollup']}), npm()
+        {
+          resolveId: function(code, id) {
+            if (id && code.charAt(0) !== '.') {
+              var p = path.join(__dirname, 'core', 'src', code);
+
+              if (fs.existsSync(p)) {
+                p = path.join(p, 'index.js');
+              }
+              else {
+                p = p + '.js';
+              }
+
+              return p;
+            }
+          }
+        },
+        npm(),
+        babel({presets: ['es2015-rollup']})
       ],
       format: 'umd',
       moduleName: 'ons'

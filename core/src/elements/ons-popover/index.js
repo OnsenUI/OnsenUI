@@ -15,15 +15,15 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import AnimatorFactory from '../../ons/internal/animator-factory';
+import util from 'ons/util';
+import ModifierUtil from 'ons/internal/modifier-util';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import PopoverAnimator from './animator';
 import FadePopoverAnimator from './fade-animator';
-import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
-import DoorLock from '../../ons/doorlock';
+import platform from 'ons/platform';
+import BaseElement from 'ons/base-element';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.popover': 'popover--*',

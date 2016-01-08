@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
 
 const scheme = {'': 'toolbar-button--*'};
 

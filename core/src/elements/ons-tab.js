@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import util from '../ons/util';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
-import internal from '../ons/internal';
+import util from 'ons/util';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
+import internal from 'ons/internal';
 
 const scheme = {
   '': 'tab-bar--*__item',

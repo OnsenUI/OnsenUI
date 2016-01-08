@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import NavigatorTransitionAnimator from './animator';
-import util from '../../ons/util';
+import util from 'ons/util';
 
 /**
  * Lift screen transition.

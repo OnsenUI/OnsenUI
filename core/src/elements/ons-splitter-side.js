@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import util from '../ons/util';
-import AnimatorFactory from '../ons/internal/animator-factory';
-import internal from '../ons/internal/internal';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import util from 'ons/util';
+import AnimatorFactory from 'ons/internal/animator-factory';
+import internal from 'ons/internal/internal';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
 import SplitterAnimator from './ons-splitter/animator';
-import GestureDetector from '../ons/gesture-detector';
-import DoorLock from '../ons/doorlock';
+import GestureDetector from 'ons/gesture-detector';
+import DoorLock from 'ons/doorlock';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
