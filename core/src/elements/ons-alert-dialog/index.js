@@ -22,6 +22,7 @@ import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator}
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '': 'alert-dialog--*',

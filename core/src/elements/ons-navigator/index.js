@@ -29,6 +29,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import NavigatorPage from './navigator-page';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
   'default': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,

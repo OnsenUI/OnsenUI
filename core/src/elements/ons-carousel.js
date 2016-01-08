@@ -19,6 +19,7 @@ import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
+import DoorLock from 'ons/doorlock';
 
 const scheme = {'': 'carousel--*'};
 

@@ -37,7 +37,7 @@ limitations under the License.
 
         this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
         this._mode = SPLIT_MODE;
-        this._doorLock = new DoorLock();
+        this._doorLock = new ons._DoorLock();
 
         this._doSplit = false;
         this._doCollapse = false;

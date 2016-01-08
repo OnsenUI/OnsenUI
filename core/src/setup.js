@@ -1,4 +1,3 @@
-
 import ons from './ons/ons';
 import util from './ons/util';
 import GestureDetector from './ons/gesture-detector';
@@ -11,6 +10,7 @@ import softwareKeyboard from './ons/software-keyboard';
 import PageAttributeExpression from './ons/page-attribute-expression';
 import BaseElement from './ons/base-element';
 import animationOptionsParser from './ons/animation-options-parser';
+import DoorLock from './ons/doorlock';
 
 ons._util = util;
 ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
@@ -22,6 +22,7 @@ ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
 ons._animationOptionsParser = animationOptionsParser;
+ons._DoorLock = DoorLock;
 
 window.addEventListener('DOMContentLoaded', function() {
   ons._deviceBackButtonDispatcher.enable();
@@ -65,7 +66,6 @@ import './elements/ons-template';
 import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
 
-
 // fastclick
 window.addEventListener('load', () => FastClick.attach(document.body), false);
 
@@ -91,11 +91,4 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
     window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
 });
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = ons;
-}
-
-if (typeof window !== 'undefined') {
-  window.ons = ons;
-}
-
+export default ons;

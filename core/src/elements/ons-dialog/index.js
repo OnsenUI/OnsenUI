@@ -21,6 +21,7 @@ import AnimatorFactory from 'ons/internal/animator-factory';
 import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator} from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
+import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.dialog': 'dialog--*',
