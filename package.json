@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -22,7 +22,6 @@
   "scripts": {
     "test": "gulp test"
   },
-  "main": "js/onsenui.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/OnsenUI/OnsenUI"
