@@ -11,6 +11,7 @@ v2.0.0-beta.4
  * ons-material-input: Make it resizable.
  * Added ons-lazy-repeat custom element.
  * core: Use [rollup.js](http://rollupjs.org/) for bundling.
+ * ons-lazy-repeat: Remove "display: block" rule for Angular bindings.
 
 v2.0.0-beta.3
 ----
