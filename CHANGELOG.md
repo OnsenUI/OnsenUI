@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.5
+----
+ * core: Add link to library in package.json for browserify, etc.
+
 v2.0.0-beta.4
 ----
  * ons-tabbar: Fixed [#1132](https://github.com/OnsenUI/OnsenUI/issues/1132).
