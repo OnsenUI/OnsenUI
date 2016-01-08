@@ -12,6 +12,7 @@ v2.0.0-beta.4
  * Added ons-lazy-repeat custom element.
  * core: Use [rollup.js](http://rollupjs.org/) for bundling.
  * ons-tabbar: Fixed [#1158](https://github.com/OnsenUI/OnsenUI/issues/1158).
+ * ons-lazy-repeat: Remove "display: block" rule for Angular bindings.
 
 v2.0.0-beta.3
 ----

@@ -74,8 +74,6 @@ limitations under the License.
         }
 
         this._linker(scope, function(cloned) {
-          cloned[0].style.display = 'none';
-
           if (!this._usingBinding()) {
             var contentElement = this._userDelegate.createItemContent(index, null);
             cloned.append(contentElement);
@@ -85,10 +83,6 @@ limitations under the License.
           done({
             element: cloned[0],
             scope: scope
-          });
-
-          scope.$evalAsync(function() {
-            cloned[0].style.display = 'block';
           });
 
         }.bind(this));
