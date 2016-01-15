@@ -168,7 +168,6 @@ range--disabled()
 .range:disabled
   range--disabled()
 
-
 /*! topdoc
   name: Material Range
   use: Range
@@ -278,3 +277,12 @@ range--material--thumb--after()
 .range--material:active::-ms-fill-upper
   transform scale(2.5)
 
+.range--material__left
+  position relative
+  top -16px
+  height 2px
+  width 0
+  background-color var-material-range-thumb-color
+
+.range--material:disabled + .range--material__left
+  display none
