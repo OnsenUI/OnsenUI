@@ -43,7 +43,7 @@ import './elements/ons-lazy-repeat';
 import './elements/ons-list-header';
 import './elements/ons-list-item';
 import './elements/ons-list';
-import './elements/ons-material-input';
+import './elements/ons-input';
 import './elements/ons-modal';
 import './elements/ons-navigator';
 import './elements/ons-page';

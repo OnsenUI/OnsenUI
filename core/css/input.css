@@ -1,0 +1,40 @@
+ons-input {
+  display: inline-block;
+  position: relative;
+}
+
+ons-input > input {
+  width: 100%;
+}
+
+ons-input > .text-input--material__label {
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  pointer-events: none;
+}
+
+ons-input > .text-input__label:not(.text-input--material__label) {
+  display: none;
+}
+
+ons-input > .text-input__label--active {
+  transform: translate3d(0, -75%, 0) scale(0.75);
+  -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
+  transform-origin: left top;
+  -webkit-transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+  -webkit-transition: transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+ons-input:not([float]) > .text-input__label--active {
+  display: none;
+}
+
+ons-input[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}

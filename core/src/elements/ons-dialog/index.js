@@ -26,7 +26,8 @@ import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.dialog': 'dialog--*',
-  '.dialog-container': 'dialog-container--*'
+  '.dialog-container': 'dialog-container--*',
+  '.dialog-mask': 'dialog-mask--*'
 };
 
 const templateSource = util.createElement(`

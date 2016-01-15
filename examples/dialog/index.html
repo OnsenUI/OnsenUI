@@ -69,7 +69,7 @@
           </ons-toolbar>
           <br />
           <div style="text-align: center">
-            <input id="name" class="text-input" ng-model="data.name">
+            <ons-input id="name" label="Name" ng-model="data.name"></ons-input>
             <p>
               <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Next</ons-button>
             </p>
@@ -88,7 +88,7 @@
           </ons-toolbar>
           <br />
           <div style="text-align: center; margin-top: 30px;">
-            <ons-material-input id="name" label="Name" ng-model="data.name"></ons-material-input>
+            <ons-input modifier="material" float id="name" label="Name" ng-model="data.name"></ons-input>
             <p>
               <ons-button modifier="material" ng-click="app.navi2.pushPage('page2.html');">Next</ons-button>
             </p>
@@ -105,7 +105,7 @@
       </ons-toolbar>
       <br />
       <div style="text-align: center">
-        <input id="description" class="text-input" ng-model="data.description">
+        <ons-input id="description" ng-model="data.description"></ons-input>
         <p>
           <ons-button modifier="light" ng-click="app.navi.popPage();">Previous</ons-button>
         </p>
@@ -120,7 +120,7 @@
       </ons-toolbar>
       <br />
       <div style="text-align: center; margin-top: 30px;">
-        <ons-material-input id="description" label="Description" ng-model="data.description"></ons-material-input>
+        <ons-input float modifier="material" id="description" label="Description" ng-model="data.description"></ons-input>
         <p>
           <ons-button modifier="material" ng-click="app.navi2.popPage();">Previous</ons-button>
         </p>

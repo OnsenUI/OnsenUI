@@ -70,7 +70,7 @@ var-material-dialog-background-color = $material-dialog-background-color
   name: Material Dialog
   use: Dialog
   markup:
-    <div class="dialog-mask dialog--material-mask"></div>
+    <div class="dialog-mask dialog-mask--material"></div>
     <div class="dialog dialog--material">
       <div class="dialog dialog-container--material">
         <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
@@ -86,3 +86,6 @@ var-material-dialog-background-color = $material-dialog-background-color
 .dialog-container--material
   border-radius 2px
   background-color var-material-dialog-background-color
+
+.dialog-mask--material
+  background-color rgba(0, 0, 0, 0.3)
