@@ -66,6 +66,7 @@ import './elements/ons-tabbar';
 import './elements/ons-template';
 import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
+import './elements/ons-range';
 
 // fastclick
 window.addEventListener('load', () => FastClick.attach(document.body), false);

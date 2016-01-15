@@ -191,3 +191,12 @@ ons-splitter-side {
 ons-toolbar-button > ons-icon[icon*="ion-"] {
   font-size: 26px;
 }
+
+ons-range {
+  display: inline-block;
+}
+
+ons-range > input {
+  min-width: 50px;
+  width: 100%;
+}
