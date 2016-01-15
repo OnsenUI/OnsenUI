@@ -51,7 +51,6 @@ class MaterialInputElement extends BaseElement {
   }
 
   _onChange() {
-    console.log(this._ratio);
     this._left.style.width = (100 * this._ratio) + '%';
   }
 
