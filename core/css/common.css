@@ -195,3 +195,8 @@ ons-toolbar-button > ons-icon[icon*="ion-"] {
 ons-range {
   display: inline-block;
 }
+
+ons-range > input {
+  min-width: 50px;
+  width: 100%;
+}
