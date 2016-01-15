@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.6
 ----
  * css-components: Add San Francisco font for iOS9 devices.
+ * css-components: Fixed [#1162](https://github.com/OnsenUI/OnsenUI/issues/1162).
  * ons-input: Add "ons-input" component and remove "ons-material-input" component.
 
 v2.0.0-beta.5
