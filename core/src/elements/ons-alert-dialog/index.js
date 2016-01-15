@@ -267,10 +267,6 @@ class AlertDialogElement extends BaseElement {
     if (this.parentElement) {
       this.parentElement.removeChild(this);
     }
-
-    if (this._mask.parentElement) {
-      this._mask.parentElement.removeChild(this._mask);
-    }
   }
 
   isCancelable() {
