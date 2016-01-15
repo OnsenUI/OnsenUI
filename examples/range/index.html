@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Range | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -16,32 +17,92 @@
   </script>
 
   <style>
-    ons-range {
-      width: 120px;
+    .volume-item {
+      padding: 0;
     }
+
+    .volume-slider {
+      width: 100%;
+    }
+
+    .volume-icon {
+      text-align: center !important;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .list__item__right {
+      margin-left: 16px;
+    }
+
   </style>
 </head>
 
 <body>
-  <ons-navigator>
+  <ons-navigator ng-init="numberSelection = 30; numberSelection2 = 55">
     <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
 
-    <div style="text-align: center" ng-init="numberSelection = 30; numberSelection2 = 50">
-      <p>
-        <ons-range ng-model="numberSelection"></ons-range>
-      </p>
-      <p>
-        <ons-range ng-model="numberSelection" disabled></ons-range>
-      </p>
-      <p>
-        <ons-range modifier="material" ng-model="numberSelection2"></ons-range>
-      </p>
-      <p>
-        <ons-range modifier="material" ng-model="numberSelection2" disabled></ons-range>
-      </p>
-      <h3>{{numberSelection}}</h3>
-      <h3>{{numberSelection2}}</h3>
-    </div>
+    <ons-list>
+      <ons-list-header>Flat Design (iOS)</ons-list-header>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" ng-model="numberSelection"></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" value="50" disabled></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
+
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">Material Design</ons-list-header>
+      <ons-list-item modifier="material" class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range modifier="material" class="volume-slider" ng-model="numberSelection2"></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+      <ons-list-item modifier="material" class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range modifier="material" class="volume-slider" disabled></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
+
+    <h3>{{numberSelection}}</h3>
+    <h3>{{numberSelection2}}</h3>
   </ons-navigator>
 </body>
 </html>
