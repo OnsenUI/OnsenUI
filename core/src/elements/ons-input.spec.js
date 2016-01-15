@@ -1,11 +1,11 @@
 'use strict';
 
-describe('OnsMaterialInputElement', () => {
+describe('OnsInputElement', () => {
   let element;
 
   beforeEach(() => {
     element = ons._util.createElement(`
-      <ons-material-input label="Username"></ons-material-input>
+      <ons-input label="Username"></ons-input>
     `);
 
     document.body.appendChild(element);
@@ -17,21 +17,21 @@ describe('OnsMaterialInputElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsMaterialInputElement).to.be.ok;
+    expect(window.OnsInputElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
-    expect(element._input.classList.contains('text-input--material--hoge')).to.be.true;
-    expect(element._label.classList.contains('text-input--material__label--hoge')).to.be.true;
+    expect(element._input.classList.contains('text-input--hoge')).to.be.true;
+    expect(element._label.classList.contains('text-input--hoge__label')).to.be.true;
 
     element.setAttribute('modifier', 'foo bar');
-    expect(element._input.classList.contains('text-input--material--foo')).to.be.true;
-    expect(element._label.classList.contains('text-input--material__label--foo')).to.be.true;
-    expect(element._input.classList.contains('text-input--material--bar')).to.be.true;
-    expect(element._label.classList.contains('text-input--material__label--bar')).to.be.true;
-    expect(element._input.classList.contains('text-input--material--hoge')).to.be.false;
-    expect(element._label.classList.contains('text-input--material__label--hoge')).to.be.false;
+    expect(element._input.classList.contains('text-input--foo')).to.be.true;
+    expect(element._label.classList.contains('text-input--foo__label')).to.be.true;
+    expect(element._input.classList.contains('text-input--bar')).to.be.true;
+    expect(element._label.classList.contains('text-input--bar__label')).to.be.true;
+    expect(element._input.classList.contains('text-input--hoge')).to.be.false;
+    expect(element._label.classList.contains('text-input--hoge__label')).to.be.false;
   });
 
   describe('#_updateLabel()', () => {

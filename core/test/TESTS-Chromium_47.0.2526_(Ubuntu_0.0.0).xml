@@ -1,0 +1,640 @@
+<?xml version="1.0"?>
+<testsuite name="Chromium 47.0.2526 (Ubuntu 0.0.0)" package="" timestamp="2016-01-08T15:00:13" id="0" hostname="andreas" tests="629" errors="0" failures="0" time="3.668">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36"/>
+  </properties>
+  <testcase name="exists" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="is an HTML element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="is an HTML element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="is an HTML element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="only accepts a boolean argument" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="disables the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="enables the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="returns whether the dialog is disabled or not" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="only accepts a boolean argument" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="makes the dialog cancelable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="makes the dialog not cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="returns whether the dialog is cancelable or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="shows the dialog" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="emits 'preshow' event" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="emits 'postshow' event" time="0.029" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="can be cancelled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="hides the dialog" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="emits 'prehide' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="emits 'posthide' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="can be cancelled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="removes the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="cancels if dialog is cancelable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="calls parent handler if dialog is not cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="hides the dialog if it is cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="returns whether the dialog is visible or not" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="throws an error if animator is not a DialogAnimator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="registers a new animator" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsAlertDialogElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="has two children" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="will pop a page" time="0.083" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="takes 'animation' attribute" time="0.05" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="takes 'animation-options' attribute" time="0.054" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="takes 'refresh' attribute" time="0.052" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="takes 'onTransitionEnd' attribute" time="0.084" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsBackButtonElement"/>
+  <testcase name="provides 'OnsBottomToolbarElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-bottom-toolbar"/>
+  <testcase name="classList contains 'bottom-bar' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-bottom-toolbar"/>
+  <testcase name="default 'position' is 'absolute' and default 'z-index' is '0'" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-bottom-toolbar"/>
+  <testcase name="provides 'modifier' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-bottom-toolbar"/>
+  <testcase name="provides 'inline' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-bottom-toolbar"/>
+  <testcase name="provides 'OnsButtonElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-button"/>
+  <testcase name="provides modifier attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-button"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselItemElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselItemElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="provides 'modifier' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="fires 'refresh' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="is fired when the 'direction' attribute is changed" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="saves the last state" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns the 'item-width' attribute if horizontal" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns the 'item-height' attribute if vertical" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 0 by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="return the 'initial-index' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can set the 'swipeable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can remove the 'swipeable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'false' if carousel is not swipeable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'true' if carousel is swipeable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="only accepts values between 0.0 and 1.0" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can set the 'auto-scroll-ratio' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns '0.5' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="throws an error if the 'auto-scroll-ratio' attribute is invalid" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns the value of the 'auto-scroll-ratio' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should change the current active index" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should force to maximum index" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should fire 'postchange' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should return the active item index" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should increase the current index" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should decrease the current index" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can set the 'auto-scroll' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can remove the 'auto-scroll' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'true' if 'auto-scroll' attribute exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'false' if 'auto-scroll' attribute does not exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can set the 'disabled' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can remove the 'disabled' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'true' if 'disabled' attribute exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'false' if 'disabled' attribute does not exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can set the 'overscrollable' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="can remove the 'overscrollable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'true' if 'overscrollable' attribute exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns 'false' if 'overscrollable' attribute does not exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should be true if auto scroll is enabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should be false if auto scroll is not enabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="fires 'refresh' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="renders dynamically added items" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should not work if the carousel is not swipeable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should not work if the direction is vertical" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should work if carousel is swipeable and direction is horizontal" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should not work if carousel is not swipeable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should work if carousel is swipeable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should call '_scrollToKillOverScroll' if overscrolled" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="returns the carousel item elements" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="doesn't return the items in child carousels (issue #844)" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should change the scroll value" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="sets the current index to 0" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="sets the current index to the last position" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsCarouselElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsColElement"/>
+  <testcase name="provides 'width' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsColElement"/>
+  <testcase name="provides 'width' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsColElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="is an HTML element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="is an HTML element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="copies style to child" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="returns the back button handler" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="cancels if dialog is cancelable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="calls parent handler if dialog is not cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="hides the dialog if it is cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="emits a 'cancel' event" time="0.005" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="shows the dialog" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="emits 'preshow' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="emits 'postshow' event" time="0.018" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="can be cancelled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="hides the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="emits 'prehide' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="emits 'posthide' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="can be cancelled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="removes the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="returns whether the dialog is visible or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="returns whether the dialog is cancelable or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="only accepts a boolean argument" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="disables the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="enables the dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="returns whether the dialog is disabled or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="only accepts a boolean argument" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="makes the dialog cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="makes the dialog not cancelable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="throws an error if animator is not a DialogAnimator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="registers a new animator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsDialogElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="provides modifier attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="does nothing if element is inline" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="calls show() if element is not inline" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="does nothing if element is inline" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="calls hide() if element is not inline" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="is called when the &quot;position&quot; attribute changes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="adds the correct class" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="does nothing if position &quot;attribute&quot; is incorrect" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="sets scale transform to 1" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="sets scale transform to 0" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="throws an error if argument is not boolean" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="sets the disabled attribute if argument is true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="removes the disabled attribute if argument is false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="returns whether the disabled attribute is set or not" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="returns whether the inline attribute is set or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="returns whether the element is currently shown or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="calls #hide() if element is shown" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="calls #show() if element is hidden" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsFabElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsGestureDetectorElement"/>
+  <testcase name="is correctly created" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsGestureDetectorElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsIconElement"/>
+  <testcase name="provides 'icon' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsIconElement"/>
+  <testcase name="provides 'size' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsIconElement"/>
+  <testcase name="provides 'OnsHeaderListElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list-header"/>
+  <testcase name="classList contains 'list__header' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list-header"/>
+  <testcase name="provides modifier attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list-header"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="classList contains 'list__item' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="should prevent default if 'lock-on-drag' attribute is present" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="returns false if 'lock-on-drag' element is not present" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="returns true if 'lock-on-drag' element is present" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="should add change the background color." time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="should restore the background color." time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsListItemElement"/>
+  <testcase name="provides 'OnsListElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list"/>
+  <testcase name="classList contains 'list' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-list"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="is called when the label attribute changes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="removes the label text if there is no label attribute" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="is called when one of the bound attribute changes" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="removes attributes from the input element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="sets the text color" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="calls the #_updateLabelColor()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="is called when the value changes" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="calls #_updateLabelColor()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="calls #_updateLabelColor()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="is an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="is an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="returns the value of the internal input element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsMaterialInputElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="is not displayed by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="adds a class 'modal' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="adds a 'modal__content' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="displays the modal" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="hides the modal" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="alternates the modal displaying state" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="returns whether the modal is shown" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="returns nothing by default" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="gets the callback" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="overwrites the callback" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="does not register extra element when has no parent ons-page" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="registers extra element when has parent ons-page" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="triggers 'onModifierChanged()' method" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="throws an error if animator is not a ModalAnimator" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="registers a new animator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsModalElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="provides 'page' attribute" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="provides 'pages' getter" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="provides 'pages' property" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="should have one page by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="adds a new page to the top of the page stack" time="0.045" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="only accepts object options" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="is canceled if already performing another pushPage" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'prepush' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="should be possible to cancel the 'prepush' event" time="0.041" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'postpush' event" time="0.047" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'hide' event" time="0.08" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="fallback to pushPage if the given page does not exist" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="does nothing when the page is already on top" time="0.047" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="brings the given pageUrl to the top" time="0.146" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="brings the given page index to the top" time="0.148" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="only accepts string or number as first parameter" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="throws error if the given index is not valid" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="only accepts object options" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="is canceled if already performing another bringPageTop" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="should be possible to cancel the 'prepush' event" time="0.044" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="inserts a new page on a given index" time="0.049" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="only accepts object options" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="redirects to pushPage if the insertion is at the top" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="normalizes the index" time="0.045" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="removes the top page from the stack" time="0.079" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="is canceled if already performing another popPage" time="0.049" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="can refresh the previous page" time="0.128" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="throws error when refreshing pages directly inside the navigator" time="0.047" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'prepop' event" time="0.048" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="should be possible to cancel the 'prepop' event" time="0.048" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'postpop' event" time="0.08" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="emits 'show' event" time="0.08" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="replaces the current page with a new one" time="0.098" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="replaces all the page stack with only a new page" time="0.065" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="returns the current page" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="throws error if page stack is empty" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="returns whether a page can be popped" time="0.043" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="destroys all the pages" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="throws an error when no ons-page is provided" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="pops a page if there are more than one" time="0.046" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="calls event parent handler if there are less than two pages" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="fires 'show' event" time="0.018" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="fires 'hide' event" time="0.024" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="fires 'destroy' event" time="0.047" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="throws an error if animator is not a NavigatorAnimator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="registers a new animator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsNavigatorElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="has page class" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="fires 'init' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="consumes _skipinit attribute if present" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="fires 'destroy' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="sets the callback" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="overwrites the callback" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="is correctly deleted" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="gets page__background" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="throws page__background error" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="throws page__content error" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="returns if a toolbar exists" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="works with normal toolbar" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="works with toolbar in page__content" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="returns the toolbar element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="inserts toolbar as a child" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="inserts toolbar as a child after status-bar-fill" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="inserts bottomToolbar as a child" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="attaches a new child to the page" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="fills status bar" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="triggers 'onModifierChanged()' method" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="fires 'show' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="fires 'hide' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="does not compile twice" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="uses style attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPageElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="provides 'modifier' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should be hidden by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should be an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should be an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should be an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should be an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should hide the popover if it is cancelable" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should not hide the popover if it is not cancelable" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="only accepts up, down, left, right" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can set the direction" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="requires a target" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="accepts an HTML element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="accepts a CSS selector" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="accepts an Event object" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="has an 'animation' parameter" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="has an 'animationOptions' parameter" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="is fired" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can be cancelled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="is fired" time="0.033" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="hides the popover" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="is fired" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can be cancelled" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="is fired" time="0.056" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should return 'true' if popover is visible" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should return 'false' if popover is not visible" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="only accepts boolean arguments" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="sets the 'cancelable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="removes the 'cancelable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="returns 'true' if 'cancelable' attribute exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="returns 'false' if 'cancelable' attribute does not exist" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should remove the popover from the DOM" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should hide the popover if it is not cancelable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should hide the popover if it is cancelable" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="should change the direction dynamically" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can have the value 'up'" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can have the value 'down'" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can have the value 'left'" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="can have the value 'right'" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="throws an error if animator is not a PopoverAnimator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="registers a new animator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPopoverElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="is called when the &quot;indeterminate&quot; attribute is changed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="is called when the &quot;value&quot; attribute is changed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="is called when the &quot;secondary-value&quot; attribute is changed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="is called when an element is created" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressBarElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="provides modifier attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="is called when the &quot;indeterminate&quot; attribute is changed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="is called when the &quot;value&quot; attribute is changed" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="is called when the &quot;secondary-value&quot; attribute is changed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="is called when an element is created" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsProgressCircularElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="throws an error if is not a descendant of ons-page or ons-scroller" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="creates a scroll element" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="calls getHeight()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="resets the scroll if negative" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns a string" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="does nothing if disabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="does nothing if direction is horizontal" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="translates the element" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="translates the element when interimDirection is not 'down'" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="changes the state" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="bounces back if pull distance is higher than threshold" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="does nothing if the pull hook is disabled" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="saves the current scroll" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="does nothing if the pull hook is disabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="changes the state" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="translates back" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="sets a callback" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="calls the argument" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="calls the callback if it exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="translates the pull hook" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns 64 by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns the height" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="sets the height" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="calls _setStyle()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="sets threshold height" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns 96 by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns threshold height" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns the state" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns the state" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns the current page scroll" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns the current translation" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns true if the pull hook is disabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns false if the pull hook is not disabled" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns true if the pull hook is fixed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns false if the pull hook is not fixed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="disables the pull hook" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns itself if content is fixed" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns another element if content is not fixed" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="returns an integer" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsPullHookElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="is called when an element is created" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="creates a &quot;wave&quot; element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="sets the background based on the &quot;color&quot; attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="is called when the &quot;target&quot; attribute changes" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="is called when the &quot;center&quot; attribute changes" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="returns false if device is not a touch device" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="sets the position of the wave" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="throws an error if argument is not boolean" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="sets the disabled attribute if argument is true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="removes the disabled attribute if argument is false" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="returns whether the disabled attribute is set or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRippleElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsRowElement"/>
+  <testcase name="provides 'OnsRowElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-scroller"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialItemElement"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialItemElement"/>
+  <testcase name="should stop propagation" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialItemElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="should be a list of OnsSpeedDialItemElement" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="should call #toggleItems()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="does nothing if element is inline" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls show() if element is not inline" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="does nothing if element is inline" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls hide() if element is not inline" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="is called when element is created" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="is called with the value of the direction attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="is called when direction changes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="sets the position of the items" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="throws an error if the argument is incorrect" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="is called when the &quot;position&quot; attribute changes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="adds the correct class" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="does nothing if position &quot;attribute&quot; is incorrect" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #show() on the child OnsFabElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #hideItems()" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="eventually calls #hide() on the child OnsFabElement" time="0.201" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="sets scale transform to 1 for all items" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="sets scale transform to 0 for all items" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="throws an error if argument is not boolean" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="sets the disabled attribute if argument is true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="removes the disabled attribute if argument is false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="is called if the disabled attribute is present on element creation" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="returns whether the disabled attribute is set or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="returns whether the inline attribute is set or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="returns whether the element is currently shown or not" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #show() if element is hidden" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #hide() if element is shown" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #showItems() if items are hidden" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="calls #hideItems() if items are shown" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSpeedDialElement"/>
+  <testcase name="provides 'OnsSplitterContentElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-splitter-content"/>
+  <testcase name="provides _hide(), _show(), _destroy() methods" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-splitter-content"/>
+  <testcase name="should pass though child nodes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-splitter-content"/>
+  <testcase name="should load page url" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-splitter-content"/>
+  <testcase name="should return current page url" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-splitter-content"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterMaskElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="provides _hide(), _show(), _destroy() methods" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="should open ons-splitter-side" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="should close ons-splitter-side" time="0.023" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="should return boolean" time="0.009" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="toggle open or close state" time="0.011" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="should return current mode" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterSideElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="provides _hide(), _show(), _destroy() methods" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should trigger &quot;init&quot; lifecyle event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should trigger &quot;show&quot; lifecyle event" time="0.006" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should open right ons-splitter-side" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should return false on &quot;split&quot; mode with ons-splitter-side element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should close right ons-splitter-side" time="0.014" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should return false on &quot;split&quot; mode with ons-splitter-side element" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="should return handler object" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSplitterElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="classList contains 'switch' by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="has a 'input' child by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="has a 'div' child by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="is a boolean" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="adds the 'checked' attribute when set to true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="removes the 'checked' attribute when set to false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="accepts truthy and falsy values" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="is a boolean" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="adds the 'disabled' attribute when set to true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="removes the 'disabled' attribute when set to false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="accepts truthy and falsy values" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="removes the 'checked' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="adds the 'checked' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="returns true if switch is on" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="returns false if switch is off" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="sets the 'checked' attribute to true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="sets the 'checked' attribute to false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsSwitchElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="has a default template" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="modifies the classList of the tab" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="adds a persistent state to the tab" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="sets whether a tab should be active or not" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="sets icon name for the tab" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="sets label name for the tab" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="are, by default, two" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="should be an 'ons-tabbar' element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="is, by default, true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="is false when one of the tab's children is a ELEMENT_NODE" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="will return if there is not a default template" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="returns the current tab _pageElement, if the tab has persistent attribute and a _pageElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="sets the tab _pageElement as null, if the tab doesn't has a persistent attribute" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="will set the tab as active" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabElement"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="has 'position' attribute" time="0.007" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="has two children by default" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="provides a unique auto generated id" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="sets the element visible or invisible" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="accepts only 'ons-page' as current page element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="has active tab property" time="0.009" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'prechange' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'postchange' event" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'show' event" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'hide' event" time="0.007" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'reactive' event" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'show' event" time="0.006" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'hide' event" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fires 'destroy' event" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="loads a page" time="0.003" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="loads a persistent tab" time="0.005" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="returns false if index does not exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="can be canceled" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="does not remove persistent tabs" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="keeps the page when option 'keepPage' is true" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="fills status bar" time="1" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="throws an error if animator is not a TabbarAnimator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="registers a new animator" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsTabbarElement"/>
+  <testcase name="provides 'OnsTemplateElement' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-template"/>
+  <testcase name="doesn't have any children" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-template"/>
+  <testcase name="has a 'createdCallback()' function" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-template"/>
+  <testcase name="provides 'OnsToolbarButton' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-toolbar-button"/>
+  <testcase name="provides modifier attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-toolbar-button"/>
+  <testcase name="should exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="provides 'modifier' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="has 'left' class value in its first child" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="has 'center' class value in its second child" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="has 'right' class value in its third child" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="does not register extra element when has no parent ons-page" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="removes non-element children" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="sorts its children depending on their class" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).OnsToolbarElement"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons._animationOptionsParser"/>
+  <testcase name="parses valid strings" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons._animationOptionsParser"/>
+  <testcase name="parses HTML attributes" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons._animationOptionsParser"/>
+  <testcase name="throws error when the string is invalid" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons._animationOptionsParser"/>
+  <testcase name="throws an error if the first parameter is not an HTMLElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).deviceBackButtonDispatcher"/>
+  <testcase name="throws an error if the first parameter is not a function" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).deviceBackButtonDispatcher"/>
+  <testcase name="disables the handler" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).deviceBackButtonDispatcher"/>
+  <testcase name="exits the app" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).deviceBackButtonDispatcher"/>
+  <testcase name="fires 'backbutton' event" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).deviceBackButtonDispatcher"/>
+  <testcase name="should throw an error" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="should throw an error" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="should throw an error" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="should throw an error" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="should throw an error" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="should throw an error" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatDelegate"/>
+  <testcase name="throws error if 'delegate' is not a LazyRepeatDelegate" time="0.006" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="throws error if 'wrapperElement' is not an Element" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="throws error if 'wrapperElement' is not a descendant of OnsPageElement" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should return the number of items" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should return the item height" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should return the top of the wrapper element" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should call '_render()'" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should remove items that are not in view" time="0.004" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should return true if an item is rendered" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should return false if an item is not rendered" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should call 'updateItem()' if it is already rendered" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should call 'prepareItem()' if it is not already rendered" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should not do anything if the element is not rendered" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should call 'destroyItem()' if the element is rendered" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should remove all elements" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="should call the 'destroy()' method" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).LazyRepeatProvider"/>
+  <testcase name="provide 'ons._internal.ModifierUtil' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).modifier"/>
+  <testcase name="should calculate modifier diff" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).modifier"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="requires a message" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'messageHTML' parameter" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="displays an alert dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'modifier' parameter" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="hides the dialog when a button is clicked" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="requires a message" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'messageHTML' parameter" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="displays an alert dialog" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'modifier' parameter" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="hides the dialog when a button is clicked" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'cancelable' attribute" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="requires a message" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'messageHTML' parameter" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="displays an alert dialog" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'modifier' parameter" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'submitOnEnter' parameter" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="hides the dialog when a button is clicked" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="accepts a 'cancelable' attribute" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.notification"/>
+  <testcase name="sets autoStatusBarFill to false" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="throws an error if ons is ready" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="disables the device back button" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="enables the device back button" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="changes the default callback" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="sets autoStatusBarFill to true" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="throws an error if ons is ready" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="enables animations" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="throws error when no page is provided" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="calls the linking function" time="0.006" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="returns a valid popover element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="throws error when no page is provided" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="calls the linking function" time="0.005" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="returns a valid dialog element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="throws error when no page is provided" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="calls the linking function" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="returns a valid alertDialog element" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="resolves the placeholder" time="0.002" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="resolves the placeholder" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons"/>
+  <testcase name="should define a variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="must have a string as &quot;name&quot; argument." time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="must have a function or string as &quot;value&quot; argument" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="can only overwrite variables if &quot;overwrite&quot; argument is true" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="removes a variables" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="returns all variables" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="requires a string with length more than 0" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="does not support nested interpolation" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="requires } to be preceeded by ${" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="requires all interpolations to be terminated" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="returns an Array" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="splits the string into tokens" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="does not replace if the token is not in the form &quot;${name}&quot;" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="throws an error if the variable does not exist" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="throws an error if the variable is a function and it does not return a string." time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="replaces the token" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="supports leading and trailing whitespaces for the variable name" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="returns an Array" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="returns a list of pages" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="replaces ${hoge} with the value of &quot;hoge&quot;" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="replaces ${foo} with the return volue of &quot;foo&quot;" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="supports multiple interpolations in one string" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="supports leading and trailing whitespaces" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="requires a valid string" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.pageAttributeExpression"/>
+  <testcase name="exists" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="sets the render platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="return false if platform is not a WebView" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not IOS" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not Android" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not an Android Phone" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not an Android Tablet" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not WP" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is iPhone" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is iPad" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not BlackBerry" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not Opera" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not Firefox" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not Safari" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns true if platform is Chrome" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0.001" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not IE" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="supports forcing the platform" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="returns false if platform is not iOS 7 or above" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons.platform"/>
+  <testcase name="provide 'ons._util' global variable" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-util"/>
+  <testcase name="should parse normal JSON" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-util"/>
+  <testcase name="should parse broken JSON" time="0" classname="Chromium_47_0_2526_(Ubuntu_0_0_0).ons-util"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
