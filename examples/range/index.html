@@ -22,17 +22,17 @@
   <ons-navigator>
     <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
 
-    <div style="text-align: center">
+    <div style="text-align: center" ng-init="numberSelection = 30; numberSelection2 = 50">
 
       <br><br><br>
-      <input type="range" value="{{numberSelection}}" ng-model="numberSelection" class="range">
+      <ons-range ng-model="numberSelection"></ons-range>
       <br><br><br>
-      <input type="range" class="range" disabled>
+      <ons-range ng-model="numberSelection" disabled></ons-range>
 
       <br><br><br>
-      <input type="range" value="{{numberSelection2}}" ng-model="numberSelection2" class="range range--material">
+      <ons-range modifier="material" ng-model="numberSelection2"></ons-range>
       <br><br><br>
-      <input type="range" class="range range--material" disabled>
+      <ons-range modifier="material" ng-model="numberSelection2" disabled></ons-range>
 
       <h3>{{numberSelection}}</h3>
       <h3>{{numberSelection2}}</h3>
