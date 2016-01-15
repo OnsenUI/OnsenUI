@@ -1,11 +1,11 @@
 /**
  * @ngdoc directive
- * @id material-input
- * @name ons-material-input
+ * @id input
+ * @name ons-input
  * @category form
  * @description
- *  [en]Material Design input component.[/en]
- *  [ja]Material Designのinputコンポ―ネントです。[/ja]
+ *  [en]Input component.[/en]
+ *  [ja]inputコンポ―ネントです。[/ja]
  * @codepen ojQxLj
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
@@ -14,7 +14,8 @@
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
  * @example
- * <ons-material-input label="Username"></ons-material-input>
+ * <ons-input></ons-input>
+ * <ons-input modifier="material" label="Username"></ons-input>
  */
 
 /**
@@ -28,10 +29,10 @@
 
 /**
  * @ngdoc attribute
- * @name no-float
+ * @name float
  * @description
- *  [en]If this attribute is present, the label will not be animated.[/en]
- *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
+ *  [en]If this attribute is present, the label will be animated.[/en]
+ *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
  */
 
 /**
@@ -55,7 +56,7 @@
 (function(){
   'use strict';
 
-  angular.module('onsen').directive('onsMaterialInput', function($parse) {
+  angular.module('onsen').directive('onsInput', function($parse) {
     return {
       restrict: 'E',
       replace: false,

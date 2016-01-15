@@ -15,8 +15,8 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '.text-input--material': 'text-input--material--*',
-  '.text-input--material__label': 'text-input--material__label--*'
+  '.text-input': 'text-input--*',
+  '.text-input__label': 'text-input--*__label'
 };
 
 const INPUT_ATTRIBUTES = [
@@ -63,9 +63,9 @@ class MaterialInputElement extends BaseElement {
     }
 
     this.appendChild(document.createElement('input'));
-    this._input.classList.add('text-input--material');
+    this._input.classList.add('text-input');
     this.appendChild(document.createElement('span'));
-    this._label.classList.add('text-input--material__label');
+    this._label.classList.add('text-input__label');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -131,10 +131,10 @@ class MaterialInputElement extends BaseElement {
 
   _updateLabelClass() {
     if (this.value === '') {
-      this._label.classList.remove('text-input--material__label--active');
+      this._label.classList.remove('text-input__label--active');
     }
     else {
-      this._label.classList.add('text-input--material__label--active');
+      this._label.classList.add('text-input__label--active');
     }
   }
 
@@ -181,6 +181,6 @@ class MaterialInputElement extends BaseElement {
   }
 }
 
-window.OnsMaterialInputElement = document.registerElement('ons-material-input', {
+window.OnsInputElement = document.registerElement('ons-input', {
   prototype: MaterialInputElement.prototype
 });

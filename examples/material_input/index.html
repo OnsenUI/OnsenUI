@@ -40,36 +40,36 @@
     <h3>Normal input</h3>
 
     <p>
-      <ons-material-input label="Username"></ons-material-input>
+      <ons-input modifier="material" float label="Username"></ons-input>
     </p>
     <p>
-      <ons-material-input type="password" label="Password"></ons-material-input>
+      <ons-input modifier="material" float type="password" label="Password"></ons-input>
     </p>
     <p>
-      <ons-material-input label="Favorite food" value="Pasta"></ons-material-input>
+      <ons-input modifier="material" float label="Favorite food" value="Pasta"></ons-input>
     </p>
 
     <h3>Without floating label</h3>
 
     <p>
-      <ons-material-input type="password" label="Password" no-float></ons-material-input>
+      <ons-input modifier="material" type="password" label="Password"></ons-input>
     </p>
 
     <h3>Disabled</h3>
 
     <p>
-    <ons-material-input label="Username" disabled></ons-material-input>
+    <ons-input modifier="material" float label="Username" disabled></ons-input>
     </p>
 
     <h3>Other types</h3>
     <p>
-      <ons-material-input label="Age" type="number" min="0" max="200"></ons-material-input>
+      <ons-input modifier="material" float label="Age" type="number" min="0" max="200"></ons-input>
     </p>
 
     <h3>Use with AngularJS</h3>
     <div ng-controller="InputController">
       <p>
-        <ons-material-input ng-model="name" ng-change="doSomething()" label="Name"></ons-material-input>
+        <ons-input modifier="material" float ng-model="name" ng-change="doSomething()" label="Name"></ons-input>
       </p>
       <p>
         Hello there, {{ name || 'Stranger' }}!
