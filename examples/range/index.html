@@ -15,29 +15,33 @@
     ons.bootstrap();
   </script>
 
+  <style>
+    ons-range {
+      width: 120px;
+    }
+  </style>
 </head>
 
 <body>
-
   <ons-navigator>
     <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
 
     <div style="text-align: center" ng-init="numberSelection = 30; numberSelection2 = 50">
-
-      <br><br><br>
-      <ons-range ng-model="numberSelection"></ons-range>
-      <br><br><br>
-      <ons-range ng-model="numberSelection" disabled></ons-range>
-
-      <br><br><br>
-      <ons-range modifier="material" ng-model="numberSelection2"></ons-range>
-      <br><br><br>
-      <ons-range modifier="material" ng-model="numberSelection2" disabled></ons-range>
-
+      <p>
+        <ons-range ng-model="numberSelection"></ons-range>
+      </p>
+      <p>
+        <ons-range ng-model="numberSelection" disabled></ons-range>
+      </p>
+      <p>
+        <ons-range modifier="material" ng-model="numberSelection2"></ons-range>
+      </p>
+      <p>
+        <ons-range modifier="material" ng-model="numberSelection2" disabled></ons-range>
+      </p>
       <h3>{{numberSelection}}</h3>
       <h3>{{numberSelection2}}</h3>
     </div>
   </ons-navigator>
-
 </body>
 </html>
