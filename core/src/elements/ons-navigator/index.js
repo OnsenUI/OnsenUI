@@ -94,6 +94,10 @@ class NavigatorElement extends BaseElement {
    */
   replacePage(page, options = {}) {
 
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
     if (this._pages.length === 1) {
@@ -121,6 +125,10 @@ class NavigatorElement extends BaseElement {
    * @param {Boolean} [options.cancelIfRunning]
    */
   popPage(options = {}) {
+
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
 
     if (options.cancelIfRunning && this._isPopping) {
       return;
@@ -225,8 +233,6 @@ class NavigatorElement extends BaseElement {
    */
   insertPage(index, page, options = {}) {
 
-    options = options || {};
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -324,6 +330,10 @@ class NavigatorElement extends BaseElement {
    */
   resetToPage(page, options = {}) {
 
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+
     if (!options.animator && !options.animation) {
       options.animation = 'none';
     }
@@ -387,22 +397,22 @@ class NavigatorElement extends BaseElement {
    */
   pushPage(page, options = {}) {
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
 
     if (options.cancelIfRunning && this._isPushing) {
       return;
     }
 
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
     if (this._emitPrePushEvent()) {
       return;
     }
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     this._doorLock.waitUnlock(() => this._pushPage(page, options));
   }

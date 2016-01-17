@@ -273,6 +273,10 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#popPage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.popPage('hoge', 'string')).to.throw(Error);
+    });
+
     it('removes the top page from the stack', (done) => {
       expect(() => nav.popPage()).to.throw(Error);
 
@@ -394,6 +398,10 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#replacePage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
+    });
+
     it('replaces the current page with a new one', (done) => {
       nav.pushPage('hoge', {
         onTransitionEnd: () => {
@@ -414,7 +422,11 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  describe('#replaceToPage()', () => {
+  describe('#resetToPage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.resetToPage('hoge', 'string')).to.throw(Error);
+    });
+
     it('replaces all the page stack with only a new page', (done) => {
       nav.pushPage('fuga', {onTransitionEnd: () => {
         nav.resetToPage('hoge', {
