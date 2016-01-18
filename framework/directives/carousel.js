@@ -165,7 +165,7 @@
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
