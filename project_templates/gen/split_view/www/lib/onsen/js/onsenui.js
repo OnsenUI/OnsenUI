@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.15 - 2016-01-14 */
+/*! onsenui - v1.3.15 - 2016-01-18 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -14908,7 +14908,7 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
