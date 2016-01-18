@@ -275,7 +275,7 @@ docCategory: 'js'
     url: 'https://onsen.io/reference/{$ doc.name $}.html',
     tags: [{title: '{$ doc.name $}'}],
     cid: 9,
-    markDownContent: '<div>' + '{$ doc.description $}' + '</div>'
+    markDownContent: '<div>' + '{$ doc.description | lang | nl2ws $}' + '</div>'
   };
 
   (function() {
