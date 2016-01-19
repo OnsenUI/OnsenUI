@@ -325,6 +325,14 @@ describe('OnsTabbarElement', () => {
         }
       });
     });
+
+    it('returns a promise that resolves to the new page', () => {
+      expect(element.innerHTML.indexOf('fugafuga')).to.be.below(0);
+      return expect(element.loadPage('fuga')).to.eventually.be.fulfilled.then(page => {
+        expect(element.innerHTML.indexOf('fugafuga')).not.to.be.below(0);
+        expect(page).to.equal(element._getCurrentPageElement());
+      });
+    });
   });
 
   describe('#setActiveTab()', () => {
@@ -345,8 +353,8 @@ describe('OnsTabbarElement', () => {
       });
     });
 
-    it('returns false if index does not exists', () => {
-      expect(element.setActiveTab(0)).to.be.false;
+    it('rejects the promise if index does not exist', () => {
+      return expect(element.setActiveTab(0)).to.eventually.be.rejected;
     });
 
     it('can be canceled', (done) => {
@@ -404,6 +412,20 @@ describe('OnsTabbarElement', () => {
       element.setActiveTab(1, {'keepPage': true});
     });
 
+    it('returns a promise that resolves to the new page', () => {
+      let element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
+          <ons-tab label="Fuga" page="fuga"></ons-tab>
+        </ons-tabbar>
+      `);
+
+      expect(element.innerHTML.indexOf('fugafuga')).to.be.below(0);
+      return expect(element.setActiveTab(1)).to.eventually.be.fulfilled.then(page => {
+        expect(element.innerHTML.indexOf('fugafuga')).not.to.be.below(0);
+        expect(page).to.equal(element._getCurrentPageElement());
+      });
+    });
   });
 
   describe('#_compile()', () => {
