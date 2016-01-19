@@ -44,6 +44,7 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
 
     templateEngine.filters.push(require('./filters/lang'));
     templateEngine.filters.push(require('./filters/nl2ws'));
+    templateEngine.filters.push(require('./filters/escape'));
     templateEngine.filters.push(require('./filters/dump'));
 
     checkAnchorLinksProcessor.$enabled = false;
