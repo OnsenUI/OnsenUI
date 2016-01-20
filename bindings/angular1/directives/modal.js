@@ -1,131 +1,15 @@
 /**
- * @ngdoc directive
- * @id modal
- * @name ons-modal
- * @category modal
- * @description
- *   [en]
- *     Modal component that masks current screen.
- *     Underlying components are not subject to any events while the modal component is shown.
- *   [/en]
- *   [ja]
- *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
- *     モーダルが表示されている間はイベント通知が行われません。
- *   [/ja]
- * @guide UsingModal
- *   [en]Using ons-modal component[/en]
- *   [ja]モーダルの使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript
- *   [en]Using navigator from JavaScript[/en]
- *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @codepen devIg
- * @example
- * <ons-modal>
- *   ...
- * </ons-modal>
+ * @element ons-modal
  */
 
 /**
- * @ngdoc attribute
- * @name var
+ * @attribute var
  * @type {String}
  * @extensionOf angular
  * @initonly
  * @description
  *   [en]Variable name to refer this modal.[/en]
  *   [ja]このモーダルを参照するための名前を指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name animation
- * @type {String}
- * @default default
- * @description
- *  [en]The animation used when showing and hiding the modal. Can be either "none" or "fade".[/en]
- *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name animation-options
- * @type {Expression}
- * @description
- *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
- *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature toggle([options])
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "none" and "fade".[/en]
- *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
- * @param {String} [options.animationOptions]
- *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
- *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
- * @description
- *   [en]Toggle modal visibility.[/en]
- *   [ja]モーダルの表示を切り替えます。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature show([options])
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "none" and "fade".[/en]
- *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
- * @param {String} [options.animationOptions]
- *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
- *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
- * @description
- *   [en]Show modal.[/en]
- *   [ja]モーダルを表示します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature hide([options])
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "none" and "fade".[/en]
- *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
- * @param {String} [options.animationOptions]
- *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
- *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
- * @description
- *   [en]Hide modal.[/en]
- *   [ja]モーダルを非表示にします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isShown()
- * @return {Boolean}
- *   [en]true if the modal is visible.[/en]
- *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
- * @description
- *   [en]Returns whether the modal is visible or not.[/en]
- *   [ja]モーダルが表示されているかどうかを返します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature getDeviceBackButtonHandler()
- * @return {Object}
- *   [en]Device back button handler.[/en]
- *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
- * @description
- *   [en]Retrieve the back button handler.[/en]
- *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
  */
 
 (function() {

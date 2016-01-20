@@ -1,7 +1,5 @@
 /**
- * @ngdoc directive
- * @id if-platform
- * @name ons-if-platform
+ * @element ons-if-platform
  * @category util
  * @extensionOf angular
  * @description
@@ -16,8 +14,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-if-platform
+ * @attribute ons-if-platform
  * @type {String}
  * @initonly
  * @extensionOf angular

@@ -24,7 +24,66 @@ const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
 
+/**
+ * @element ons-pull-hook
+ * @category control
+ * @description
+ *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
+ *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ * @codepen WbJogM
+ * @guide UsingPullHook
+ *   [en]How to use Pull Hook[/en]
+ *   [ja]プルフックを使う[/ja]
+ * @example
+ *   TODO
+ */
 class PullHookElement extends BaseElement {
+
+  /**
+   * @event changestate
+   * @description
+   *   [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[/en]
+   *   [ja]コンポーネントの状態が変わった場合に発火します。状態は、"initial", "preaction", "action"のいずれかです。[/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Object} event.pullHook
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   * @param {String} event.state
+   *   [en]Current state.[/en]
+   *   [ja]現在の状態名を参照できます。[/ja]
+   */
+
+  /**
+   * @attribute disabled
+   * @description
+   *   [en]If this attribute is set the "pull-to-refresh" functionality is disabled.[/en]
+   *   [ja]この属性がある時、disabled状態になりアクションが実行されなくなります[/ja]
+   */
+
+  /**
+   * @attribute height
+   * @type {String}
+   * @description
+   *   [en]Specify the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".[/en]
+   *   [ja]コンポーネントの高さを指定します。この高さ以上にpull downすると"preaction"状態に移行します。デフォルトの値は"64px"です。[/ja]
+   */
+
+  /**
+   * @attribute threshold-height
+   * @type {String}
+   * @description
+   *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.[/en]
+   *   [ja]閾値となる高さを指定します。この値で指定した高さよりもpull downすると、このコンポーネントは自動的に"action"状態に移行します。[/ja]
+   */
+
+  /**
+   * @attribute fixed-content
+   * @description
+   *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
+   *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
+   */
 
   createdCallback() {
     this._scrollElement = this._createScrollElement();
@@ -181,14 +240,26 @@ class PullHookElement extends BaseElement {
   }
 
   /**
+   * @method getHeight
+   * @signature getHeight()
    * @return {Number}
+   * @description
+   *   [en]Returns the height of the pull hook in pixels.[/en]
+   *   [ja]プルフックの高さをピクセル数で返します。[/ja]
    */
   getHeight() {
     return parseInt(this.getAttribute('height') || '64', 10);
   }
 
   /**
+   * @method setHeight
+   * @signature setHeight(height)
    * @param {Number} height
+   *   [en]Desired height.[/en]
+   *   [ja]要素の高さを指定します。[/ja]
+   * @description
+   *   [en]Specify the height.[/en]
+   *   [ja]高さを指定できます。[/ja]
    */
   setHeight(height) {
     this.setAttribute('height', height + 'px');
@@ -197,13 +268,25 @@ class PullHookElement extends BaseElement {
   }
 
   /**
+   * @method setThresholdHeight
+   * @signature setThresholdHeight(thresholdHeight)
    * @param {Number} thresholdHeight
+   *   [en]Desired threshold height.[/en]
+   *   [ja]プルフックのアクションを起こす閾値となる高さを指定します。[/ja]
+   * @description
+   *   [en]Specify the threshold height.[/en]
+   *   [ja]閾値となる高さを指定できます。[/ja]
    */
   setThresholdHeight(thresholdHeight) {
     this.setAttribute('threshold-height', thresholdHeight + 'px');
   }
 
   /**
+   * @method getThresholdHeight
+   * @signature getThresholdHeight()
+   * @description
+   *   [en]Returns the height of the threshold in pixels.[/en]
+   *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
    * @return {Number}
    */
   getThresholdHeight() {
@@ -233,6 +316,14 @@ class PullHookElement extends BaseElement {
     return this.getAttribute('state');
   }
 
+  /**
+   * @method getCurrentState
+   * @signature getCurrentState()
+   * @return {String}
+   * @description
+   *   [en]Returns the current state of the element.[/en]
+   *   [ja]要素の現在の状態を返します。[/ja]
+   */
   getCurrentState() {
     return this._getState();
   }
@@ -241,10 +332,28 @@ class PullHookElement extends BaseElement {
     return this._pageElement.scrollTop;
   }
 
+  /**
+   * @method getPullDistance
+   * @signature getPullDistance()
+   * @return {Number}
+   * @description
+   *   [en]Returns the current number of pixels the pull hook has moved.[/en]
+   *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
+   */
   getPullDistance() {
     return this._currentTranslation;
   }
 
+  /**
+   * @method isDisabled
+   * @signature isDisabled()
+   * @return {Boolean}
+   *   [en]true if the pull hook is disabled.[/en]
+   *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
+   * @description
+   *   [en]Returns whether the component is disabled or enabled.[/en]
+   *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
+   */
   isDisabled() {
     return this.hasAttribute('disabled');
   }
@@ -253,6 +362,16 @@ class PullHookElement extends BaseElement {
     return this.hasAttribute('fixed-content');
   }
 
+  /**
+   * @method setDisabled
+   * @signature setDisabled(disabled)
+   * @param {Boolean} disabled
+   *   [en]If true the pull hook will be disabled.[/en]
+   *   [ja]trueを指定すると、プルフックがdisabled状態になります。[/ja]
+   * @description
+   *   [en]Disable or enable the component.[/en]
+   *   [ja]disabled状態にするかどうかを設定できます。[/ja]
+   */
   setDisabled(disabled) {
     if (disabled) {
       this.setAttribute('disabled', '');

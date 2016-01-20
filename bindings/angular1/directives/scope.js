@@ -1,7 +1,5 @@
 /**
- * @ngdoc directive
- * @id scope
- * @name ons-scope
+ * @element ons-scope
  * @category util
  * @extensionOf angular
  * @description

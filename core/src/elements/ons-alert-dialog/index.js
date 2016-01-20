@@ -42,7 +42,147 @@ const _animatorDict = {
   'none': AlertDialogAnimator
 };
 
+/**
+ * @element ons-alert-dialog
+ * @category dialog
+ * @description
+ *   [en]Alert dialog that is displayed on top of the current screen.[/en]
+ *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
+ * @codepen Qwwxyp
+ * @guide UsingAlert
+ *   [en]Learn how to use the alert dialog.[/en]
+ *   [ja]アラートダイアログの使い方の解説。[/ja]
+ * @seealso ons-dialog
+ *   [en]ons-dialog component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons.notification
+ *   [en]Using ons.notification utility functions.[/en]
+ *   [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできます。[/ja]
+ * @example
+ * <script>
+ *   ons.ready(function() {
+ *     ons.createAlertDialog('alert.html').then(function(alertDialog) {
+ *       alertDialog.show();
+ *     });
+ *   });
+ * </script>
+ *
+ * <script type="text/ons-template" id="alert.html">
+ *   <ons-alert-dialog animation="default" cancelable>
+ *     <div class="alert-dialog-title">Warning!</div>
+ *     <div class="alert-dialog-content">
+ *       An error has occurred!
+ *     </div>
+ *     <div class="alert-dialog-footer">
+ *       <button class="alert-dialog-button">OK</button>
+ *     </div>
+ *   </ons-alert-dialog>
+ * </script>
+ */
 class AlertDialogElement extends BaseElement {
+
+  /**
+   * @event preshow
+   * @description
+   *   [en]Fired just before the alert dialog is displayed.[/en]
+   *   [ja]アラートダイアログが表示される直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.alertDialog
+   *   [en]Alert dialog object.[/en]
+   *   [ja]アラートダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the dialog from showing.[/en]
+   *   [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]
+   */
+
+  /**
+   * @event postshow
+   * @description
+   *   [en]Fired just after the alert dialog is displayed.[/en]
+   *   [ja]アラートダイアログが表示された直後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.alertDialog
+   *   [en]Alert dialog object.[/en]
+   *   [ja]アラートダイアログのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event prehide
+   * @description
+   *   [en]Fired just before the alert dialog is hidden.[/en]
+   *   [ja]アラートダイアログが隠れる直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.alertDialog
+   *   [en]Alert dialog object.[/en]
+   *   [ja]アラートダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the dialog from hiding.[/en]
+   *   [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]
+   */
+
+  /**
+   * @event posthide
+   * @description
+   * [en]Fired just after the alert dialog is hidden.[/en]
+   * [ja]アラートダイアログが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.alertDialog
+   *   [en]Alert dialog object.[/en]
+   *   [ja]アラートダイアログのオブジェクト。[/ja]
+   */
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *  [en]The appearance of the dialog.[/en]
+   *  [ja]ダイアログの見た目を指定します。[/ja]
+   */
+
+  /**
+   * @attribute cancelable
+   * @description
+   *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
+   *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+   */
+
+  /**
+   * @attribute disabled
+   * @description
+   *  [en]If this attribute is set the dialog is disabled.[/en]
+   *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
+   */
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
+   *  [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは"none"か"default"が指定できます。[/ja]
+   */
+
+  /**
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
+
+
+  /**
+   * @attribute mask-color
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
 
   get _titleElement() {
     return util.findChild(this.children[0], '.alert-dialog-title');
@@ -81,9 +221,14 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * Disable or enable alert dialog.
-   *
-   * @param {Boolean}
+   * @method setDisabled
+   * @signature setDisabled(disabled)
+   * @description
+   *   [en]Disable or enable the alert dialog.[/en]
+   *   [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
+   * @param {Boolean} disabled
+   *   [en]If true the dialog will be disabled.[/en]
+   *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
    */
   setDisabled(disabled) {
     if (typeof disabled !== 'boolean') {
@@ -98,18 +243,28 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * True if alert dialog is disabled.
-   *
+   * @method isDisabled
+   * @signature isDisabled()
+   * @description
+   *   [en]Returns whether the dialog is disabled or enabled.[/en]
+   *   [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
    * @return {Boolean}
+   *   [en]true if the dialog is disabled.[/en]
+   *   [ja]disabled状態であればtrueを返します。[/ja]
    */
   isDisabled() {
     return this.hasAttribute('disabled');
   }
 
   /**
-   * Make alert dialog cancelable or uncancelable.
-   *
-   * @param {Boolean}
+   * @method setCancelable
+   * @signature setCancelable(cancelable)
+   * @description
+   *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+   *   [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+   * @param {Boolean} cancelable
+   *   [en]If true the dialog will be cancelable.[/en]
+   *   [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]
    */
   setCancelable(cancelable) {
     if (typeof cancelable !== 'boolean') {
@@ -124,12 +279,23 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * Show alert dialog.
-   *
+   * @method show
+   * @signature show([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after dialog is shown
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクトです。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+   *   [ja]アニメーション名を指定します。指定できるのは、"fade", "slide", "none"のいずれかです。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Function} [options.callback]
+   *   [en]Function to execute after the dialog has been revealed.[/en]
+   *   [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]
+   * @description
+   *   [en]Show the alert dialog.[/en]
+   *   [ja]ダイアログを表示します。[/ja]
    */
   show(options = {}) {
     let cancel = false;
@@ -167,12 +333,23 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * Hide alert dialog.
-   *
+   * @method hide
+   * @signature hide([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after dialog is hidden
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+   *   [ja]アニメーション名を指定します。"fade", "slide", "none"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Function} [options.callback]
+   *   [en]Function to execute after the dialog has been hidden.[/en]
+   *   [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]
+   * @description
+   *   [en]Hide the alert dialog.[/en]
+   *   [ja]ダイアログを閉じます。[/ja]
    */
   hide(options = {}) {
     let cancel = false;
@@ -203,16 +380,26 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * True if alert dialog is visible.
-   *
+   * @method isShown
+   * @signature isShown()
    * @return {Boolean}
+   * @description
+   *   [en]Returns whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   *   [en]true if the dialog is currently visible.[/en]
+   *   [ja]ダイアログが表示されていればtrueを返します。[/ja]
    */
   isShown() {
     return this._visible;
   }
 
   /**
-   * Destroy alert dialog.
+   * @method destroy
+   * @signature destroy()
+   * @description
+   *   [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
+   *   [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
    */
   destroy() {
     if (this.parentElement) {
@@ -224,6 +411,16 @@ class AlertDialogElement extends BaseElement {
     }
   }
 
+  /**
+   * @method isCancelable
+   * @signature isCancelable()
+   * @description
+   *   [en]Returns whether the dialog is cancelable or not.[/en]
+   *   [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
+   * @return {Boolean}
+   *   [en]true if the dialog is cancelable.[/en]
+   *   [ja]キャンセル可能であればtrueを返します。[/ja]
+   */
   isCancelable() {
     return this.hasAttribute('cancelable');
   }

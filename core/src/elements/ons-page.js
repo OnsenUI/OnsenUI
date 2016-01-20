@@ -29,7 +29,89 @@ const scheme = {
 
 const nullToolbarElement = document.createElement('ons-toolbar');
 
+/**
+ * @element ons-page
+ * @category page
+ * @description
+ *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ * @guide ManagingMultiplePages
+ *   [en]Managing multiple pages[/en]
+ *   [ja]複数のページを管理する[/ja]
+ * @guide Pagelifecycle
+ *   [en]Page life cycle events[/en]
+ *   [ja]ページライフサイクルイベント[/ja]
+ * @guide HandlingBackButton
+ *   [en]Handling back button[/en]
+ *   [ja]バックボタンに対応する[/ja]
+ * @guide OverridingCSSstyles
+ *   [en]Overriding CSS styles[/en]
+ *   [ja]CSSスタイルのオーバーライド[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ * <ons-page>
+ *   <ons-toolbar>
+ *     <div class="center">Title</div>
+ *   </ons-toolbar>
+ *
+ *   ...
+ * </ons-page>
+ */
 class PageElement extends BaseElement {
+
+  /**
+   * @event init
+   * @description
+   *   [en]Fired right after the page is attached.[/en]
+   *   [ja]ページがアタッチされた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.page
+   *   [en]Page object.[/en]
+   *   [ja]ページのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event show
+   * @description
+   *   [en]Fired right after the page is shown.[/en]
+   *   [ja]ページが表示された後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.page
+   *   [en]Page object.[/en]
+   *   [ja]ページのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event hide
+   * @description
+   *   [en]Fired right after the page is hidden.[/en]
+   *   [ja]ページが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.page
+   *   [en]Page object.[/en]
+   *   [ja]ページのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event destroy
+   * @description
+   *   [en]Fired right before the page is destroyed.[/en]
+   *   [ja]ページが破棄される前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.page
+   *   [en]Page object.[/en]
+   *   [ja]ページのオブジェクト。[/ja]
+   */
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]Specify modifier name to specify custom styles.[/en]
+   *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+   */
 
   createdCallback() {
     this.classList.add('page');
@@ -74,7 +156,14 @@ class PageElement extends BaseElement {
   }
 
   /**
+   * @method getDeviceBackButtonHandler
+   * @signature getDeviceBackButtonHandler()
    * @return {Object/null}
+   *   [en]Device back button handler.[/en]
+   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @description
+   *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+   *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
    */
   getDeviceBackButtonHandler() {
     return this._deviceBackButtonHandler || null;

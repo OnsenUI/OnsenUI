@@ -16,27 +16,14 @@ limitations under the License.
 */
 
 /**
- * @ngdoc object
- * @name ons
- * @category util
+ * @object ons
  * @description
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
  *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
  */
 
 /**
- * @ngdoc method
- * @signature ready(callback)
- * @description
- *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
- *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
- * @param {Function} callback
- *   [en]Function that executes after Onsen UI has been initialized.[/en]
- *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
- */
-
-/**
- * @ngdoc method
+ * @method bootstrap
  * @signature bootstrap([moduleName, [dependencies]])
  * @extensionOf angular
  * @description
@@ -53,40 +40,9 @@ limitations under the License.
  *   [ja]AngularJSのModuleオブジェクトを表します。[/ja]
  */
 
-/**
- * @ngdoc method
- * @signature enableAutoStatusBarFill()
- * @description
- *   [en]Enable status bar fill feature on iOS7 and above.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
- */
 
 /**
- * @ngdoc method
- * @signature disableAutoStatusBarFill()
- * @description
- *   [en]Disable status bar fill feature on iOS7 and above.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature disableAnimations()
- * @description
- *   [en]Disable all animations. Could be handy for testing and older devices.[/en]
- *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature enableAnimations()
- * @description
- *   [en]Enable animations (default).[/en]
- *   [ja]アニメーションを有効にします。[/ja]
- */
-
-/**
- * @ngdoc method
+ * @method findParentComponentUntil
  * @signature findParentComponentUntil(name, [dom])
  * @extensionOf angular
  * @param {String} name
@@ -104,7 +60,7 @@ limitations under the License.
  */
 
 /**
- * @ngdoc method
+ * @method findComponent
  * @signature findComponent(selector, [dom])
  * @extensionOf angular
  * @param {String} selector
@@ -121,46 +77,10 @@ limitations under the License.
  *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
  */
 
-/**
- * @ngdoc method
- * @signature setDefaultDeviceBackButtonListener(listener)
- * @param {Function} listener
- *   [en]Function that executes when device back button is pressed.[/en]
- *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
- * @description
- *   [en]Set default handler for device back button.[/en]
- *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
- */
+
 
 /**
- * @ngdoc method
- * @signature disableDeviceBackButtonHandler()
- * @description
- * [en]Disable device back button event handler.[/en]
- * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature enableDeviceBackButtonHandler()
- * @description
- * [en]Enable device back button event handler.[/en]
- * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isReady()
- * @return {Boolean}
- *   [en]Will be true if Onsen UI is initialized.[/en]
- *   [ja]初期化されているかどうかを返します。[/ja]
- * @description
- *   [en]Returns true if Onsen UI is initialized.[/en]
- *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
- */
-
-/**
- * @ngdoc method
+ * @method compile
  * @signature compile(dom)
  * @extensionOf angular
  * @param {HTMLElement} dom
@@ -172,18 +92,7 @@ limitations under the License.
  */
 
 /**
- * @ngdoc method
- * @signature isWebView()
- * @return {Boolean}
- *   [en]Will be true if the app is running in Cordova.[/en]
- *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
- * @description
- *   [en]Returns true if running inside Cordova.[/en]
- *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
- */
-
-/**
- * @ngdoc method
+ * @method createAlertDialog
  * @signature createAlertDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
@@ -203,7 +112,7 @@ limitations under the License.
  */
 
 /**
- * @ngdoc method
+ * @method createDialog
  * @signature createDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
@@ -223,7 +132,7 @@ limitations under the License.
  */
 
 /**
- * @ngdoc method
+ * @method createPopover
  * @signature createPopover(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
@@ -240,17 +149,6 @@ limitations under the License.
  * @description
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature resolveLoadingPlaceholder(page)
- * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
- * @description
- *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
- *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
  */
 
 (function(ons){
