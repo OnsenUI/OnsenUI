@@ -199,12 +199,14 @@ class TabbarElement extends BaseElement {
         this._contentElement.appendChild(pageElement);
 
         if (this.getActiveTabIndex() !== -1) {
-          this._switchPage(pageElement, options);
-        } else if (options.callback instanceof Function) {
-            options.callback();
-        }
+          resolve(this._switchPage(pageElement, options));
+        } else {
+          if (options.callback instanceof Function) {
+              options.callback();
+          }
 
-        resolve(pageElement);
+          resolve(pageElement);
+        }
       });
     });
   }
@@ -245,6 +247,7 @@ class TabbarElement extends BaseElement {
    * @param {Boolean} options._removeElement
    * @param {Number} options.selectedTabIndex
    * @param {Number} options.previousTabIndex
+   * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
 
@@ -252,24 +255,28 @@ class TabbarElement extends BaseElement {
     this._oldPageElement = element;
     var animator = this._animatorFactory.newAnimator(options);
 
-    animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
-      if (oldPageElement !== internal.nullElement) {
-        if (options._removeElement) {
-          rewritables.unlink(this, oldPageElement, pageElement => {
-            pageElement._destroy();
-          });
-        } else {
-          oldPageElement.style.display = 'none';
-          oldPageElement._hide();
+    return new Promise(resolve => {
+      animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
+        if (oldPageElement !== internal.nullElement) {
+          if (options._removeElement) {
+            rewritables.unlink(this, oldPageElement, pageElement => {
+              pageElement._destroy();
+            });
+          } else {
+            oldPageElement.style.display = 'none';
+            oldPageElement._hide();
+          }
         }
-      }
 
-      element.style.display = 'block';
-      element._show();
+        element.style.display = 'block';
+        element._show();
 
-      if (options.callback instanceof Function) {
-        options.callback();
-      }
+        if (options.callback instanceof Function) {
+          options.callback();
+        }
+
+        resolve(element);
+      });
     });
   }
 
@@ -350,41 +357,39 @@ class TabbarElement extends BaseElement {
         removeElement = false;
       }
 
-      return new Promise(resolve => {
+      var params = {
+        callback: () => {
+          util.triggerElementEvent(this, 'postchange', {
+            index: selectedTabIndex,
+            tabItem: selectedTab
+          });
 
-        var params = {
-          callback: () => {
-            util.triggerElementEvent(this, 'postchange', {
-              index: selectedTabIndex,
-              tabItem: selectedTab
-            });
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+        },
+        previousTabIndex: previousTabIndex,
+        selectedTabIndex: selectedTabIndex,
+        _removeElement: removeElement
+      };
 
-            if (options.callback instanceof Function) {
-              options.callback();
-            }
+      if (options.animation) {
+        params.animation = options.animation;
+      }
 
-            resolve(this._getCurrentPageElement());
-          },
-          previousTabIndex: previousTabIndex,
-          selectedTabIndex: selectedTabIndex,
-          _removeElement: removeElement
+      if (selectedTab.isPersistent()) {
+        const link = (element, callback) => {
+          rewritables.link(this, element, options, callback);
         };
 
-        if (options.animation) {
-          params.animation = options.animation;
-        }
-
-        if (selectedTab.isPersistent()) {
-          const link = (element, callback) => {
-            rewritables.link(this, element, options, callback);
-          };
+        return new Promise(resolve => {
           selectedTab._loadPageElement(pageElement => {
-            this._loadPersistentPageDOM(pageElement, params);
+            resolve(this._loadPersistentPageDOM(pageElement, params));
           }, link);
-        } else {
-          this._loadPage(selectedTab.getAttribute('page'), params);
-        }
-      });
+        });
+      } else {
+        return this._loadPage(selectedTab.getAttribute('page'), params);
+      }
     }
 
     return Promise.resolve(this._getCurrentPageElement());
@@ -402,7 +407,7 @@ class TabbarElement extends BaseElement {
     }
 
     element.removeAttribute('style');
-    this._switchPage(element, options);
+    return this._switchPage(element, options);
   }
 
   /**
