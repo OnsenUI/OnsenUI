@@ -239,6 +239,11 @@ class AlertDialogElement extends BaseElement {
     let cancel = false;
     const callback = options.callback || function() {};
 
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
     util.triggerElementEvent(this, 'prehide', {
       alertDialog: this,
       cancel: function() {
