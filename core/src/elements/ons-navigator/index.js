@@ -434,6 +434,8 @@ class NavigatorElement extends BaseElement {
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
+    this._isPushing = true;
+
     return new Promise(resolve => {
       this._doorLock.waitUnlock(() => resolve(this._pushPage(page, options)));
     });

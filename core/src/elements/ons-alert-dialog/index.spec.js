@@ -6,15 +6,13 @@ describe('OnsAlertDialogElement', () => {
   beforeEach(() => {
     dialog = ons._util.createElement(`
       <ons-alert-dialog mask-color="red">
-        <div class="alert-dialog-container">
-          <div class="alert-dialog-title">Warning!</div>
-          <div class="alert-dialog-content">
-            An error has occurred!
-          </div>
-          <div class="alert-dialog-footer">
-            <button class="alert-dialog-button">Cancel</button>
-            <button class="alert-dialog-button">OK</button>
-          </div>
+        <div class="alert-dialog-title">Warning!</div>
+        <div class="alert-dialog-content">
+          An error has occurred!
+        </div>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button">Cancel</button>
+          <button class="alert-dialog-button">OK</button>
         </div>
       </ons-alert-dialog>
     `);
@@ -32,22 +30,23 @@ describe('OnsAlertDialogElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let content = dialog.querySelector('.alert-dialog-content'),
+    let element = dialog.querySelector('.alert-dialog'),
+      content = dialog.querySelector('.alert-dialog-content'),
       title = dialog.querySelector('.alert-dialog-title');
 
     dialog.setAttribute('modifier', 'hoge');
-    expect(dialog.classList.contains('alert-dialog--hoge')).to.be.true;
+    expect(element.classList.contains('alert-dialog--hoge')).to.be.true;
     expect(content.classList.contains('alert-dialog-content--hoge')).to.be.true;
     expect(title.classList.contains('alert-dialog-title--hoge')).to.be.true;
 
     dialog.setAttribute('modifier', ' foo bar');
-    expect(dialog.classList.contains('alert-dialog--foo')).to.be.true;
+    expect(element.classList.contains('alert-dialog--foo')).to.be.true;
     expect(content.classList.contains('alert-dialog-content--foo')).to.be.true;
     expect(title.classList.contains('alert-dialog-title--foo')).to.be.true;
-    expect(dialog.classList.contains('alert-dialog--bar')).to.be.true;
+    expect(element.classList.contains('alert-dialog--bar')).to.be.true;
     expect(content.classList.contains('alert-dialog-content--bar')).to.be.true;
     expect(title.classList.contains('alert-dialog-title--bar')).to.be.true;
-    expect(dialog.classList.contains('alert-dialog--hoge')).not.to.be.true;
+    expect(element.classList.contains('alert-dialog--hoge')).not.to.be.true;
     expect(content.classList.contains('alert-dialog-content--hoge')).not.to.be.true;
     expect(title.classList.contains('alert-dialog-title--hoge')).not.to.be.true;
   });

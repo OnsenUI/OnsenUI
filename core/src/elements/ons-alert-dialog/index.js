@@ -25,7 +25,7 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
 
 const scheme = {
-  '': 'alert-dialog--*',
+  '.alert-dialog': 'alert-dialog--*',
   '.alert-dialog-container': 'alert-dialog-container--*',
   '.alert-dialog-title': 'alert-dialog-title--*',
   '.alert-dialog-content': 'alert-dialog-content--*',
@@ -33,8 +33,18 @@ const scheme = {
   '.alert-dialog-button': 'alert-dialog-button--*',
   '.alert-dialog-footer--one': 'alert-dialog-footer--one--*',
   '.alert-dialog-button--one': 'alert-dialog-button--one--*',
-  '.alert-dialog-button--primal': 'alert-dialog-button--primal--*'
+  '.alert-dialog-button--primal': 'alert-dialog-button--primal--*',
+  '.alert-dialog-mask': 'alert-dialog-mask--*'
 };
+
+const templateSource = util.createElement(`
+  <div>
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container"></div>
+    </div>
+  </div>
+`);
 
 const _animatorDict = {
   'default': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
@@ -44,21 +54,38 @@ const _animatorDict = {
 
 class AlertDialogElement extends BaseElement {
 
-  get _titleElement() {
-    return util.findChild(this.children[0], '.alert-dialog-title');
+  /**
+   * @return {Element}
+   */
+  get _mask() {
+    return util.findChild(this, '.alert-dialog-mask');
   }
 
-  get _contentElement() {
-    return util.findChild(this.children[0], '.alert-dialog-content');
-  }
-
+  /**
+   * @return {Element}
+   */
   get _dialog() {
-    return this;
+    return util.findChild(this, '.alert-dialog');
+
+  }
+
+  /**
+   * @return {Element}
+   */
+  get _titleElement() {
+    return util.findChild(this._dialog.children[0], '.alert-dialog-title');
+  }
+
+  /**
+   * @return {Element}
+   */
+  get _contentElement() {
+    return util.findChild(this._dialog.children[0], '.alert-dialog-content');
   }
 
   createdCallback() {
     this._compile();
-    this._mask = this._createMask(this.getAttribute('mask-color'));
+    //this._mask = this._createMask(this.getAttribute('mask-color'));
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -75,9 +102,31 @@ class AlertDialogElement extends BaseElement {
   }
 
   _compile() {
+    const style = this.getAttribute('style');
+
     this.style.display = 'none';
-    this.style.zIndex = '20001';
-    this.classList.add('alert-dialog');
+
+    const template = templateSource.cloneNode(true);
+    const alertDialog = template.children[1];
+
+    if (style) {
+      alertDialog.setAttribute('style', style);
+    }
+
+    while (this.firstChild) {
+      alertDialog.children[0].appendChild(this.firstChild);
+    }
+
+    while (template.firstChild) {
+      this.appendChild(template.firstChild);
+    }
+
+    this._dialog.style.zIndex = 20001;
+    this._mask.style.zIndex = 20000;
+
+    if (this.getAttribute('mask-color')) {
+      this._mask.style.backgroundColor = this.getAttribute('mask-color');
+    }
   }
 
   /**
@@ -240,10 +289,6 @@ class AlertDialogElement extends BaseElement {
     if (this.parentElement) {
       this.parentElement.removeChild(this);
     }
-
-    if (this._mask.parentElement) {
-      this._mask.parentElement.removeChild(this._mask);
-    }
   }
 
   isCancelable() {
@@ -266,20 +311,6 @@ class AlertDialogElement extends BaseElement {
         }
       });
     }
-  }
-
-  _createMask(color) {
-    this._mask = util.createElement('<div></div>');
-    this._mask.classList.add('alert-dialog-mask');
-    this._mask.style.zIndex = 20000;
-    this._mask.style.display = 'none';
-
-    if (color) {
-      this._mask.style.backgroundColor = color;
-    }
-
-    document.body.appendChild(this._mask);
-    return this._mask;
   }
 
   attachedCallback() {
