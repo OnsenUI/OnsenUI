@@ -140,46 +140,46 @@ class NavigatorElement extends BaseElement {
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
-    return new Promise((resolve, reject) => {
-      const popPage = () => {
-        if (this._pages.length <= 1) {
-          throw new Error('ons-navigator\'s page stack is empty.');
+    const tryPopPage = () => {
+      if (this._pages.length <= 1) {
+        throw new Error('ons-navigator\'s page stack is empty.');
+      }
+
+      if (this._emitPrePopEvent()) {
+        return Promise.reject('Canceled in prepop event.');
+      }
+
+      const unlock = this._doorLock.lock();
+
+      if (options.refresh) {
+        const index = this._pages.length - 2;
+
+        if (!this._pages[index].page) {
+          throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
         }
 
-        if (this._emitPrePopEvent()) {
-          return reject('Canceled in prepop event.');
-        }
+        return internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
+          const element = this._createPageElement(templateHTML);
+          const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
 
-        const unlock = this._doorLock.lock();
+          return new Promise(resolve => {
+            rewritables.link(this, element, this._pages[index].options, element => {
+              this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+              this._pages.splice(index, 0, pageObject);
 
-        if (options.refresh) {
-          const index = this._pages.length - 2;
-
-          if (!this._pages[index].page) {
-            throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-          }
-
-          return internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
-            const element = this._createPageElement(templateHTML);
-            const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
-
-            return new Promise(resolve => {
-              rewritables.link(this, element, this._pages[index].options, element => {
-                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-                this._pages.splice(index, 0, pageObject);
-
-                this._pages[index + 1].destroy();
-                resolve(this._popPage(options, unlock));
-              });
+              this._pages[index + 1].destroy();
+              resolve(this._popPage(options, unlock));
             });
           });
+        });
 
-        } else {
-          return this._popPage(options, unlock);
-        }
-      };
+      } else {
+        return this._popPage(options, unlock);
+      }
+    };
 
-      this._doorLock.waitUnlock(() => resolve(popPage()));
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => resolve(tryPopPage()));
     });
   }
 
@@ -254,32 +254,32 @@ class NavigatorElement extends BaseElement {
       return this.pushPage.apply(this, [].slice.call(arguments, 1));
     }
 
-    return new Promise(resolve => {
-      const insertPage = () => {
-        const unlock = this._doorLock.lock();
+    const tryInsertPage = () => {
+      const unlock = this._doorLock.lock();
 
-        return internal.getPageHTMLAsync(page).then(templateHTML => {
-          const element = this._createPageElement(templateHTML);
-          const pageObject = this._createPageObject(page, element, options);
+      return internal.getPageHTMLAsync(page).then(templateHTML => {
+        const element = this._createPageElement(templateHTML);
+        const pageObject = this._createPageObject(page, element, options);
 
-          return new Promise(resolve => {
-            rewritables.link(this, element, options, element => {
-              element.style.display = 'none';
-              this.insertBefore(element, this._pages[index].element);
-              this._pages.splice(index, 0, pageObject);
-              this.getCurrentPage().updateBackButton();
+        return new Promise(resolve => {
+          rewritables.link(this, element, options, element => {
+            element.style.display = 'none';
+            this.insertBefore(element, this._pages[index].element);
+            this._pages.splice(index, 0, pageObject);
+            this.getCurrentPage().updateBackButton();
 
-              setTimeout(() => {
-                unlock();
-                element = null;
-                resolve(this._pages[index]);
-              }, 1000 / 60);
-            });
+            setTimeout(() => {
+              unlock();
+              element = null;
+              resolve(this._pages[index]);
+            }, 1000 / 60);
           });
         });
-      };
+      });
+    };
 
-      this._doorLock.waitUnlock(() => resolve(insertPage()));
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => resolve(tryInsertPage()));
     });
   }
 
@@ -573,7 +573,7 @@ class NavigatorElement extends BaseElement {
       return Promise.resolve(this._pages[index]);
     } else {
       // Bring to top
-      const bringToTop = () => {
+      const tryBringPageTop = () => {
         const unlock = this._doorLock.lock();
         const done = function() {
           unlock();
@@ -592,7 +592,7 @@ class NavigatorElement extends BaseElement {
       };
 
       return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(bringToTop()));
+        this._doorLock.waitUnlock(() => resolve(tryBringPageTop()));
       });
     }
   }
