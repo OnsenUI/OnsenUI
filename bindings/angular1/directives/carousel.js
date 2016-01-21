@@ -22,7 +22,6 @@
  * @attribute var
  * @initonly
  * @type {String}
- * @extensionOf angular
  * @description
  *   [en]Variable name to refer this carousel.[/en]
  *   [ja]このカルーセルを参照するための変数名を指定します。[/ja]
@@ -32,7 +31,6 @@
  * @attribute ons-postchange
  * @initonly
  * @type {Expression}
- * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
  *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -42,7 +40,6 @@
  * @attribute ons-refresh
  * @initonly
  * @type {Expression}
- * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
  *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -52,7 +49,6 @@
  * @attribute ons-overscroll
  * @initonly
  * @type {Expression}
- * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
  *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -62,7 +58,6 @@
  * @attribute ons-destroy
  * @initonly
  * @type {Expression}
- * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
  *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -71,7 +66,6 @@
 /**
  * @method once
  * @signature once(eventName, listener)
- * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
@@ -86,7 +80,6 @@
 /**
  * @method off
  * @signature off(eventName, [listener])
- * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]
@@ -101,7 +94,6 @@
 /**
  * @method on
  * @signature on(eventName, listener)
- * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]

@@ -4,7 +4,6 @@
 
 /**
  * @attribute var
- * @extensionOf angular
  * @initonly
  * @type {String}
  * @description
@@ -14,7 +13,6 @@
 
 /**
  * @attribute ons-destroy
- * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -25,7 +23,6 @@
 /**
  * @method on
  * @signature on(eventName, listener)
- * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -40,7 +37,6 @@
 /**
  * @method once
  * @signature once(eventName, listener)
- * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -55,7 +51,6 @@
 /**
  * @method off
  * @signature off(eventName, [listener])
- * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]

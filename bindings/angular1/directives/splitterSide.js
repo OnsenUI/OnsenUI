@@ -5,7 +5,6 @@
 /**
  * @attribute ons-destroy
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -15,7 +14,6 @@
 /**
  * @attribute ons-preopen
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -25,7 +23,6 @@
 /**
  * @attribute ons-preclose
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -34,7 +31,6 @@
 
 /**
  * @attribute ons-postopen
- * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -44,7 +40,6 @@
 
 /**
  * @attribute ons-postclose
- * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description

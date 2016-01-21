@@ -34,7 +34,6 @@
 
 /**
  * @attribute var
- * @extensionOf angular
  * @initonly
  * @type {String}
  * @description
@@ -45,7 +44,6 @@
 /**
  * @attribute ng-action
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *   [en]Use to specify custom behavior when the page is pulled down. A <code>$done</code> function is available to tell the component that the action is completed.[/en]
@@ -63,7 +61,6 @@
 /**
  * @attribute ons-changestate
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]
@@ -73,7 +70,6 @@
 /**
  * @method on
  * @signature on(eventName, listener)
- * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -88,7 +84,6 @@
 /**
  * @method once
  * @signature once(eventName, listener)
- * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -103,7 +98,6 @@
 /**
  * @method off
  * @signature off(eventName, [listener])
- * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]

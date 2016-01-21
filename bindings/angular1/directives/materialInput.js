@@ -4,7 +4,6 @@
 
 /**
  * @attribute ng-model
- * @extensionOf angular
  * @description
  *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
  *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
@@ -12,7 +11,6 @@
 
 /**
  * @attribute ng-change
- * @extensionOf angular
  * @description
  *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
  *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]

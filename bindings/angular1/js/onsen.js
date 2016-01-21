@@ -25,7 +25,6 @@ limitations under the License.
 /**
  * @method bootstrap
  * @signature bootstrap([moduleName, [dependencies]])
- * @extensionOf angular
  * @description
  *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
@@ -44,7 +43,6 @@ limitations under the License.
 /**
  * @method findParentComponentUntil
  * @signature findParentComponentUntil(name, [dom])
- * @extensionOf angular
  * @param {String} name
  *   [en]Name of component, i.e. 'ons-page'.[/en]
  *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
@@ -62,7 +60,6 @@ limitations under the License.
 /**
  * @method findComponent
  * @signature findComponent(selector, [dom])
- * @extensionOf angular
  * @param {String} selector
  *   [en]CSS selector[/en]
  *   [ja]CSSセレクターを指定します。[/ja]
@@ -82,7 +79,6 @@ limitations under the License.
 /**
  * @method compile
  * @signature compile(dom)
- * @extensionOf angular
  * @param {HTMLElement} dom
  *   [en]Element to compile.[/en]
  *   [ja]コンパイルする要素を指定します。[/ja]

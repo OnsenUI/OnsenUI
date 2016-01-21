@@ -4,7 +4,6 @@
 
 /**
  * @attribute ons-destroy
- * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description

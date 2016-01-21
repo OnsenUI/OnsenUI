@@ -1,13 +1,11 @@
 
 /**
  * @element ons-button
- * @extensionOf angular
  */
 
 /**
  * @method setDisabled
  * @signature setDisabled(disabled)
- * @extensionOf angular
  * @description
  *   [en]Disable or enable the button.[/en]
  *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
@@ -19,7 +17,6 @@
 /**
  * @method isDisabled
  * @signature isDisabled()
- * @extensionOf angular
  * @return {Boolean}
  *   [en]true if the button is disabled.[/en]
  *   [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]

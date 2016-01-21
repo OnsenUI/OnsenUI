@@ -5,7 +5,6 @@
 /**
  * @attribute var
  * @initonly
- * @extensionOf angular
  * @type {String}
  * @description
  *   [en]Variable name to refer this page.[/en]
@@ -15,7 +14,6 @@
 /**
  * @attribute on-device-backbutton
  * @type {Expression}
- * @extensionOf angular
  * @description
  *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
@@ -24,7 +22,6 @@
 /**
  * @attribute ng-device-backbutton
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
@@ -34,7 +31,6 @@
 /**
  * @attribute ons-init
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "init" event is fired.[/en]
@@ -44,7 +40,6 @@
 /**
  * @attribute ons-show
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "show" event is fired.[/en]
@@ -54,7 +49,6 @@
 /**
  * @attribute ons-hide
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "hide" event is fired.[/en]
@@ -64,7 +58,6 @@
 /**
  * @attribute ons-destroy
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]

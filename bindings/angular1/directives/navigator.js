@@ -29,7 +29,6 @@
 /**
  * @attribute var
  * @initonly
- * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this navigator.[/en]
@@ -39,7 +38,6 @@
 /**
  * @attribute ons-prepush
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
@@ -49,7 +47,6 @@
 /**
  * @attribute ons-prepop
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
@@ -59,7 +56,6 @@
 /**
  * @attribute ons-postpush
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
@@ -69,7 +65,6 @@
 /**
  * @attribute ons-postpop
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
@@ -79,7 +74,6 @@
 /**
  * @attribute ons-init
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -89,7 +83,6 @@
 /**
  * @attribute ons-show
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -99,7 +92,6 @@
 /**
  * @attribute ons-hide
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -109,7 +101,6 @@
 /**
  * @attribute ons-destroy
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
@@ -141,7 +132,6 @@
 /**
  * @method on
  * @signature on(eventName, listener)
- * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -156,7 +146,6 @@
 /**
  * @method once
  * @signature once(eventName, listener)
- * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -171,7 +160,6 @@
 /**
  * @method off
  * @signature off(eventName, [listener])
- * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
