@@ -396,7 +396,7 @@ gulp.task('build-doc', function(done) {
 // build-wcdoc
 ////////////////////////////////////////
 gulp.task('build-wcdoc', function() {
-  require('./docs/wcdoc').run();
+  require('./docs/wcdoc');
 });
 
 ////////////////////////////////////////
