@@ -279,16 +279,15 @@ class PopoverElement extends BaseElement {
      throw new Error('Target undefined');
     }
 
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     if (options.animation &&
       !(options.animation in _animatorDict)) {
       throw new Error(`Animator ${options.animation} is not registered.`);
     }
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
 
     let canceled = false;
     util.triggerElementEvent(this, 'preshow', {
@@ -329,6 +328,16 @@ class PopoverElement extends BaseElement {
    */
   hide(options = {}) {
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    if (options.animation &&
+      !(options.animation in _animatorDict)) {
+      throw new Error(`Animator ${options.animation} is not registered.`);
+    }
 
     let canceled = false;
     util.triggerElementEvent(this, 'prehide', {
