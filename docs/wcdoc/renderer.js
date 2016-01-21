@@ -19,13 +19,14 @@ function renderElement(params) {
     name: main.name,
     path: main.file.relativePath,
     category: tagdict.get('category'),
+    description: main.description || '',
     deprecated: main.isDeprecated,
     note: tagdict.getMany('note'),
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
-    modifier: tagdict.getMany('modifier').map(renderNamedDescription),
-    codepen: tagdict.getMany('codepen'),
+    modifiers: tagdict.getMany('modifier').map(renderNamedDescription),
+    codepens: tagdict.getMany('codepen'),
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
     attributes: properties.map(renderAttribute),
@@ -52,12 +53,13 @@ function renderObject(params) {
     name: main.name,
     path: main.file.relativePath,
     category: tagdict.get('category'),
+    description: main.description || '',
     deprecated: main.isDeprecated,
     note: tagdict.getMany('note'),
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
-    codepen: tagdict.getMany('modifier').map(renderNamedDescription),
+    codepens: tagdict.getMany('modifier').map(renderNamedDescription),
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
     methods: methods.map(renderMethod),
@@ -71,7 +73,7 @@ function renderObject(params) {
 function renderEvent(event) {
   return {
     name: event.name,
-    params: event.params,
+    params: event.params.map(renderParam),
     description: event.description || '',
     examples: event.tagdict.getMany('example'),
     deprecated: event.isDeprecated
@@ -120,7 +122,7 @@ function renderAttribute(attribute) {
     name: attribute.name,
     type: renderType(attribute.type),
     description: attribute.description || '',
-    deprecated: attribute.deprecated
+    deprecated: attribute.isDeprecated
   };
 }
 
@@ -152,7 +154,7 @@ function renderReturns(returns) {
     };
   } else {
     return {
-      type: undefined,
+      type: null,
       description: ''
     };
   }
@@ -162,7 +164,7 @@ function renderReturns(returns) {
  * @return {string}
  */
 function renderType(type) {
-  return type ? type.toString() : undefined;
+  return type ? type.toString() : null;
 }
 
 module.exports = {

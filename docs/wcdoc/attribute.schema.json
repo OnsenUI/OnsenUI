@@ -1,0 +1,22 @@
+{
+  "id": "/attribute",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": ["string", "null"],
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

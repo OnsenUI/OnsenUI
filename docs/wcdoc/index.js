@@ -4,6 +4,7 @@ var fs = require('fs');
 var mkpath = require('mkpath');
 var resolve = require('path').resolve;
 var join = require('path').join;
+var validator = require('./validator');
 
 /**
  * @param {Array} docs
@@ -89,27 +90,35 @@ function run() {
     var elementIndex = createElementIndex(fileIndex);
     var objectIndex = createObjectIndex(fileIndex);
 
+    mkpath.sync(resolve(__dirname + '/../../build/wcdoc/element'));
+    mkpath.sync(resolve(__dirname + '/../../build/wcdoc/object'));
+
     Object.keys(elementIndex).forEach(function(key) {
       var element = elementIndex[key];
-      var dir = resolve(__dirname + '/../../build/wcdoc/element/');
-      var path = join(dir, element.name + '.json');
+      var path = resolve(__dirname + '/../../build/wcdoc/element/' + element.name + '.json');
 
-      mkpath.sync(dir);
+      validator.validateElement(element).errors.forEach(function(error) {
+        throw error;
+      });
+
       fs.writeFileSync(path, JSON.stringify(element, null, '  '));
     });
 
     Object.keys(objectIndex).forEach(function(key) {
       var object = objectIndex[key];
-      var dir = resolve(__dirname + '/../../build/wcdoc/object/');
-      var path = join(dir, object.name + '.json');
+      var path = resolve(__dirname + '/../../build/wcdoc/object/' + object.name + '.json');
 
-      mkpath.sync(dir);
+      validator.validateObject(object).errors.forEach(function(error) {
+        throw error;
+      });
+
       fs.writeFileSync(path, JSON.stringify(object, null, '  '));
     });
 
   }).catch(function(reason) {
     console.log(reason);
     console.log(reason.stack);
+    throw reason;
   });
 }
 
