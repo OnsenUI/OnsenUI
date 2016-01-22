@@ -28,8 +28,6 @@ var merge = require('event-stream').merge;
 var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
-var dgeni = require('dgeni');
-var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
@@ -386,28 +384,8 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 ////////////////////////////////////////
 // build-doc
 ////////////////////////////////////////
-gulp.task('build-doc', function(done) {
-  njglobals.rootUrl = '/';
-  njglobals.lang = 'en';
-  new dgeni([require('./docs/package')]).generate().then(done); // eslint-disable-line new-cap
-});
-
-////////////////////////////////////////
-// build-wcdoc
-////////////////////////////////////////
-gulp.task('build-wcdoc', function() {
+gulp.task('build-doc', function() {
   require('./docs/wcdoc');
-});
-
-////////////////////////////////////////
-// watch-doc
-////////////////////////////////////////
-gulp.task('watch-doc', ['build-doc'], function(done) {
-  gulp.watch([
-    './docs/**/*',
-    './bindings/angular1/directives/*.js',
-    './bindings/angular1/js/*.js',
-  ], ['build-doc']);
 });
 
 ////////////////////////////////////////
