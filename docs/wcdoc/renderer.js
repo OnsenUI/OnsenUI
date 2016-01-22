@@ -21,15 +21,15 @@ function renderElement(params) {
     category: tagdict.get('category'),
     description: main.description || '',
     deprecated: main.isDeprecated,
-    note: tagdict.getMany('note'),
+    note: tagdict.get('note') || undefined,
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
     modifiers: tagdict.getMany('modifier').map(renderNamedDescription),
-    codepens: tagdict.getMany('codepen'),
+    codepens: tagdict.getMany('codepen').map(renderCodepen),
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
-    attributes: properties.map(renderAttribute),
+    attributes: attributes.map(renderAttribute),
     methods: methods.map(renderMethod),
   };
 }
@@ -55,11 +55,11 @@ function renderObject(params) {
     category: tagdict.get('category'),
     description: main.description || '',
     deprecated: main.isDeprecated,
-    note: tagdict.getMany('note'),
+    note: tagdict.get('note') || undefined,
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
-    codepens: tagdict.getMany('modifier').map(renderNamedDescription),
+    codepens: tagdict.getMany('codepen').map(renderCodepen),
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
     methods: methods.map(renderMethod),
@@ -95,6 +95,25 @@ function renderProperty(property) {
 }
 
 /**
+ * @param {string}
+ * @return {Object}
+ */
+function renderCodepen(codepen) {
+  var matches = ('' + codepen).match(/^\s*(\S+)(?:\s+(\{wide})\s*)$/);
+  if (matches) {
+    return {
+      isWide: true,
+      id: matches[1]
+    };
+  } else {
+    return {
+      isWide: false,
+      id: codepen
+    };
+  }
+}
+
+/**
  * @param {MethodDoc} method
  * @return {Object}
  */
@@ -122,7 +141,9 @@ function renderAttribute(attribute) {
     name: attribute.name,
     type: renderType(attribute.type),
     description: attribute.description || '',
-    deprecated: attribute.isDeprecated
+    deprecated: attribute.isDeprecated,
+    required: attribute.tagdict.has('required'),
+    default: attribute.tagdict.get('default') || undefined
   };
 }
 

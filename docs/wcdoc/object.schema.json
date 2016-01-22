@@ -19,9 +19,7 @@
       "required": true
     },
     "note": {
-      "type": "array",
-      "items": {"type": "string"},
-      "required": true
+      "type": "string"
     },
     "examples": {
       "type": "array",
@@ -52,7 +50,7 @@
     },
     "codepens": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {"$ref": "/codepen"},
       "required": true
     },
     "events": {

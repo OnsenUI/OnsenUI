@@ -19,9 +19,7 @@
       "required": true
     },
     "note": {
-      "type": "array",
-      "items": {"type": "string"},
-      "required": true
+      "type": "string"
     },
     "examples": {
       "type": "array",
@@ -55,7 +53,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": {"required": true},
+          "name": {"type": "string", "required": true},
           "description": {"type": "string", "required": true}
         }
       },
@@ -63,7 +61,7 @@
     },
     "codepens": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {"$ref": "/codepen"},
       "required": true
     },
     "events": {

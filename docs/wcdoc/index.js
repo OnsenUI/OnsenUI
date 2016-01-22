@@ -91,8 +91,8 @@ function writeIndex(dir, docIndex) {
 
 function validateIndex(schema, docIndex) {
   Object.keys(docIndex).forEach(function(key) {
-    var doc = docIndex[key];
-    validate(doc, schema).errors.forEach(function(error) {
+    validate(docIndex[key], schema).errors.forEach(function(error) {
+      console.log(error);
       throw error;
     });
   });
@@ -113,14 +113,14 @@ function run(params) {
     var elementIndex = createElementIndex(fileIndex);
     var objectIndex = createObjectIndex(fileIndex);
 
-    var dir = resolve(params.outputDir);
+    validateIndex(elementIndex, {$ref: '/element'});
+    validateIndex(objectIndex, {$ref: '/object'});
 
+    var dir = resolve(params.outputDir);
     mkpath.sync(join(dir, 'element'));
     mkpath.sync(join(dir, 'object'));
     writeIndex(join(dir, 'element'), elementIndex);
     writeIndex(join(dir, 'object'), objectIndex);
-    validateIndex(elementIndex, {$ref: '/element'});
-    validateIndex(objectIndex, {$ref: '/object'});
   });
 }
 

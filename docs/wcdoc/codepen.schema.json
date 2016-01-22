@@ -1,0 +1,14 @@
+{
+  "id": "/codepen",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "isWide": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

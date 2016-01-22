@@ -17,6 +17,13 @@
     "deprecated": {
       "type": "boolean",
       "required": true
+    },
+    "default": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "required": true
     }
   }
 }
