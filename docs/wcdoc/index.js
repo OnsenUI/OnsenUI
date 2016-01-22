@@ -4,7 +4,7 @@ var fs = require('fs');
 var mkpath = require('mkpath');
 var resolve = require('path').resolve;
 var join = require('path').join;
-var validator = require('./validator');
+var validate = require('./validator');
 
 /**
  * @param {Array} docs
@@ -80,46 +80,62 @@ function createObjectIndex(fileIndex) {
   return objectIndex;
 }
 
-function run() {
-  wcdoc.run({
-    src: ['./core/src/elements/**/*.js', './core/src/ons/**/*.js', '!**/*.spec.js'],
+function writeIndex(dir, docIndex) {
+  Object.keys(docIndex).forEach(function(key) {
+    var doc = docIndex[key];
+    var path = dir + '/' + doc.name + '.json';
+
+    fs.writeFileSync(path, JSON.stringify(doc, null, '  '));
+  });
+}
+
+function validateIndex(schema, docIndex) {
+  Object.keys(docIndex).forEach(function(key) {
+    var doc = docIndex[key];
+    validate(doc, schema).errors.forEach(function(error) {
+      throw error;
+    });
+  });
+}
+
+/**
+ * @param {Object} params
+ * @param {Array} params.src
+ * @param {string} params.outputDir
+ * @return {Promise}
+ */
+function run(params) {
+  return wcdoc.run({
+    src: params.src,
     basePath: __dirname + '/../../'
   }).then(function(result) {
     var fileIndex = createFileIndex(result);
-
     var elementIndex = createElementIndex(fileIndex);
     var objectIndex = createObjectIndex(fileIndex);
 
-    mkpath.sync(resolve(__dirname + '/../../build/wcdoc/element'));
-    mkpath.sync(resolve(__dirname + '/../../build/wcdoc/object'));
+    var dir = resolve(params.outputDir);
 
-    Object.keys(elementIndex).forEach(function(key) {
-      var element = elementIndex[key];
-      var path = resolve(__dirname + '/../../build/wcdoc/element/' + element.name + '.json');
+    mkpath.sync(join(dir, 'element'));
+    mkpath.sync(join(dir, 'object'));
+    writeIndex(join(dir, 'element'), elementIndex);
+    writeIndex(join(dir, 'object'), objectIndex);
+    validateIndex(elementIndex, {$ref: '/element'});
+    validateIndex(objectIndex, {$ref: '/object'});
+  });
+}
 
-      validator.validateElement(element).errors.forEach(function(error) {
-        throw error;
-      });
-
-      fs.writeFileSync(path, JSON.stringify(element, null, '  '));
+module.exports = function() {
+  return run({
+    src: ['./core/src/elements/**/*.js', './core/src/ons/**/*.js', '!**/*.spec.js'],
+    outputDir: __dirname + '/../../build/docs/core'
+  }).then(function() {
+    run({
+      src: ['./bindings/angular1/directives/*.js', './bindings/angular1/js/*.js'],
+      outputDir: __dirname + '/../../build/docs/angular1-binding'
     });
-
-    Object.keys(objectIndex).forEach(function(key) {
-      var object = objectIndex[key];
-      var path = resolve(__dirname + '/../../build/wcdoc/object/' + object.name + '.json');
-
-      validator.validateObject(object).errors.forEach(function(error) {
-        throw error;
-      });
-
-      fs.writeFileSync(path, JSON.stringify(object, null, '  '));
-    });
-
   }).catch(function(reason) {
     console.log(reason);
     console.log(reason.stack);
     throw reason;
   });
-}
-
-run();
+};

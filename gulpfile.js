@@ -308,7 +308,7 @@ gulp.task('build', function(done) {
     'core',
     'prepare',
     'minify-js',
-    'build-doc',
+    'build-docs',
     'prepare-css-components',
     'compress-distribution-package',
     done
@@ -382,10 +382,10 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 });
 
 ////////////////////////////////////////
-// build-doc
+// build-docs
 ////////////////////////////////////////
-gulp.task('build-doc', function() {
-  require('./docs/wcdoc');
+gulp.task('build-docs', function() {
+  return require('./docs/wcdoc')();
 });
 
 ////////////////////////////////////////

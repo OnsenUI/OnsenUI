@@ -9,12 +9,4 @@ validator.addSchema(require('./event.schema.json'));
 validator.addSchema(require('./property.schema.json'));
 validator.addSchema(require('./parameter.schema.json'));
 
-module.exports = {
-  validateElement: function(element) {
-    return validator.validate(element, {$ref: '/element'});
-  },
-
-  validateObject: function(object) {
-    return validator.validate(object, {$ref: '/object'});
-  }
-};
+module.exports = validator.validate.bind(validator);
