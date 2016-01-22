@@ -261,6 +261,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @return {Promise} Resolves to the carousel element
    */
   setActiveCarouselItemIndex(index, options = {}) {
 
@@ -269,9 +270,11 @@ class CarouselElement extends BaseElement {
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
-    this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback});
+    return this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback}).then(() => {
+      this._tryFirePostChangeEvent();
+      return this;
+    });
 
-    this._tryFirePostChangeEvent();
   }
 
   /**
@@ -301,6 +304,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @return {Promise} Resolves to the carousel element
    */
   next(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() + 1, options);
@@ -310,6 +314,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @return {Promise} Resolves to the carousel element
    */
   prev(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() - 1, options);
@@ -566,6 +571,7 @@ class CarouselElement extends BaseElement {
   /**
    * @param {Number} scroll
    * @param {Object} [options]
+   * @return {Promise} Resolves to the carousel element
    */
   _scrollTo(scroll, options = {}) {
     const isOverscrollable = this.isOverscrollable();
@@ -585,22 +591,19 @@ class CarouselElement extends BaseElement {
       return scroll;
     };
 
-    if (options.animate) {
+    return new Promise(resolve => {
+      const animationOptions = options.animate ? { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' } : {};
       animit(this._getCarouselItemElements())
         .queue({
           transform: this._generateScrollTransform(normalizeScroll(scroll))
-        }, {
-          duration: 0.3,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .play(options.callback);
-    } else {
-      animit(this._getCarouselItemElements())
-        .queue({
-          transform: this._generateScrollTransform(normalizeScroll(scroll))
-        })
-        .play(options.callback);
-    }
+        }, animationOptions)
+        .play(() => {
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+          resolve();
+        });
+    });
   }
 
   _calculateMaxScroll() {
@@ -713,13 +716,25 @@ class CarouselElement extends BaseElement {
     util.triggerElementEvent(this, 'refresh', {carousel: this});
   }
 
-  first() {
-    this.setActiveCarouselItemIndex(0);
+  /**
+   * @param {Object} [options]
+   * @param {Function} [options.callback]
+   * @param {String} [options.animation]
+   * @return {Promise} Resolves to the carousel element
+   */
+  first(options) {
+    return this.setActiveCarouselItemIndex(0, options);
   }
 
-  last() {
-    this.setActiveCarouselItemIndex(
-      Math.max(this.getCarouselItemCount() - 1, 0)
+  /**
+   * @param {Object} [options]
+   * @param {Function} [options.callback]
+   * @param {String} [options.animation]
+   * @return {Promise} Resolves to the carousel element
+   */
+  last(options) {
+    return this.setActiveCarouselItemIndex(
+      Math.max(this.getCarouselItemCount() - 1, 0), options
     );
   }
 
