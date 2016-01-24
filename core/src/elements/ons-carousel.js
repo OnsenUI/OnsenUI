@@ -261,16 +261,27 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
   setActiveCarouselItemIndex(index, options = {}) {
+
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+
+    options.animationOptions = util.extend(
+      { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
+      options.animationOptions || {},
+      this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
+    );
 
     index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
     const scroll = this._getCarouselItemSize() * index;
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
-    return this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback}).then(() => {
+    return this._scrollTo(this._scroll, options).then(() => {
       this._tryFirePostChangeEvent();
       return this;
     });
@@ -304,6 +315,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
   next(options) {
@@ -314,6 +326,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
   prev(options) {
@@ -592,11 +605,10 @@ class CarouselElement extends BaseElement {
     };
 
     return new Promise(resolve => {
-      const animationOptions = options.animate ? { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' } : {};
       animit(this._getCarouselItemElements())
         .queue({
           transform: this._generateScrollTransform(normalizeScroll(scroll))
-        }, animationOptions)
+        }, options.animation  !== 'none' ? options.animationOptions : {})
         .play(() => {
           if (options.callback instanceof Function) {
             options.callback();
@@ -720,6 +732,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
   first(options) {
@@ -730,6 +743,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
   last(options) {
