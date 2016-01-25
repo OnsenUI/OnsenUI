@@ -84,6 +84,7 @@ class SplitterElement extends BaseElement {
 
   /**
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   openRight(options = {}) {
     return this._open('right', options);
@@ -96,22 +97,30 @@ class SplitterElement extends BaseElement {
 
   /**
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   openLeft(options = {}) {
     return this._open('left', options);
   }
 
+  /**
+   * @param {String} side
+   * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
+   */
   _open(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.open(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   closeRight(options = {}) {
     return this._close('right', options);
@@ -119,6 +128,7 @@ class SplitterElement extends BaseElement {
 
   /**
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   closeLeft(options = {}) {
     return this._close('left', options);
@@ -127,19 +137,21 @@ class SplitterElement extends BaseElement {
   /**
    * @param {String} side
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   _close(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.close(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
    * @param {Object} [options]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   toggleLeft(options = {}) {
     return this._toggle('left', options);
@@ -147,19 +159,25 @@ class SplitterElement extends BaseElement {
 
   /**
    * @param {Object} [options]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   toggleRight(options = {}) {
     return this._toggle('right', options);
   }
 
+  /**
+   * @param {String} side
+   * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
+   */
   _toggle(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.toggle(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
