@@ -9,6 +9,11 @@ v2.0.0-beta.6
  * ons-input: Add "ons-input" component and remove "ons-material-input" component.
  * ons-range: Add "ons-range" component.
  * ons-navigator: Fixed [#1175](https://github.com/OnsenUI/OnsenUI/issues/1175).
+ * ons-tabbar: Correctly applies animation-options.
+ * ons-popover: Correctly applies animation-options.
+ * ons-alert-dialog: Correctly applies animation-options.
+ * ons-carousel: Accepts animation-options.
+ * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
 
 v2.0.0-beta.5
 ----
