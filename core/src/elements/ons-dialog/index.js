@@ -79,6 +79,10 @@ class DialogElement extends BaseElement {
   }
 
   _compile() {
+    if (util.findChild(this, '.dialog') && util.findChild(this, '.dialog-mask')) {
+      return;
+    }
+
     const style = this.getAttribute('style');
 
     this.style.display = 'none';
