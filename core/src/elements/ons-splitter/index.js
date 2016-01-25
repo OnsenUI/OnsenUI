@@ -165,26 +165,26 @@ class SplitterElement extends BaseElement {
   /**
    * @return {Boolean}
    */
-  leftIsOpened() {
-    return this._isOpened('left');
+  leftIsOpen() {
+    return this._isOpen('left');
   }
 
   /**
    * @return {Boolean}
    */
-  rightIsOpened() {
-    return this._isOpened('right');
+  rightIsOpen() {
+    return this._isOpen('right');
   }
 
   /**
    * @param {String} side
    * @return {Boolean}
    */
-  _isOpened(side) {
+  _isOpen(side) {
     const menu = this._getSideElement(side);
 
     if (menu) {
-      return menu.isOpened();
+      return menu.isOpen();
     }
 
     return false;
@@ -208,12 +208,12 @@ class SplitterElement extends BaseElement {
     const left = this._getSideElement('left');
     const right = this._getSideElement('right');
 
-    if (left.isOpened()) {
+    if (left.isOpen()) {
       left.close();
       return;
     }
 
-    if (right.isOpened()) {
+    if (right.isOpen()) {
       right.close();
       return;
     }

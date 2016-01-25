@@ -124,23 +124,23 @@
 
 /**
  * @ngdoc method
- * @signature leftIsOpened()
+ * @signature leftIsOpen()
  * @return {Boolean}
- *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Whether the left ons-splitter-side on collapse mode is open.[/en]
  *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
  * @description
- *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Determines whether the left ons-splitter-side on collapse mode is open.[/en]
  *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
  */
 
 /**
  * @ngdoc method
- * @signature rightIsOpened()
+ * @signature rightIsOpen()
  * @return {Boolean}
- *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Whether the right ons-splitter-side on collapse mode is open.[/en]
  *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
  * @description
- *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Determines whether the right ons-splitter-side on collapse mode is open.[/en]
  *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
  */
 
