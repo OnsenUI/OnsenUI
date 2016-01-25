@@ -26,7 +26,7 @@ class FabElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
     this.classList.add('fab');
     this._updatePosition();
-    this.show();
+    this.hide();
   }
 
   _compile() {
