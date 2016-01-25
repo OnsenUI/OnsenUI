@@ -403,9 +403,8 @@ class NavigatorElement extends BaseElement {
     if (this._emitPrePushEvent()) {
       return;
     }
-    
+
     this._isPushing = true;
-    
     this._doorLock.waitUnlock(() => this._pushPage(page, options));
   }
 
