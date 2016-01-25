@@ -377,6 +377,8 @@ class TabbarElement extends BaseElement {
         params.animation = options.animation;
       }
 
+      params.animationOptions = options.animationOptions || {};
+
       if (selectedTab.isPersistent()) {
         const link = (element, callback) => {
           rewritables.link(this, element, options, callback);
