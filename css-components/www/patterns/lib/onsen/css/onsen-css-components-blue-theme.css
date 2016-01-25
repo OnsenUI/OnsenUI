@@ -44,7 +44,7 @@ h6 {
   font-size: 18px;
 }
 .page {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -623,6 +623,17 @@ h6 {
   -ms-transform: scale(2.5);
   transform: scale(2.5);
 }
+.range--material__left {
+  position: relative;
+  top: -16px;
+  height: 2px;
+  width: 0;
+  background-color: #009688;
+  pointer-events: none;
+}
+.range--material:disabled + .range--material__left {
+  display: none;
+}
 /* topdoc
   name: Navigation Bar
   class: navigation-bar
@@ -632,7 +643,7 @@ h6 {
     </div>
 */
 .navigation-bar {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -864,7 +875,7 @@ h6 {
     </div>
 */
 .bottom-bar {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1092,7 +1103,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1213,7 +1224,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1299,7 +1310,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1421,7 +1432,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1512,7 +1523,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1603,7 +1614,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1696,7 +1707,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1794,7 +1805,7 @@ h6 {
     </div>
 */
 .button-bar {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1809,7 +1820,7 @@ h6 {
   border: none;
 }
 .button-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1860,7 +1871,7 @@ h6 {
   border-bottom-right-radius: 4px;
 }
 .button-bar__button {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2011,7 +2022,7 @@ h6 {
     </div>
 */
 .tab-bar {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2044,7 +2055,7 @@ h6 {
   }
 }
 .tab-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2079,7 +2090,7 @@ h6 {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2133,7 +2144,7 @@ h6 {
   height: 32px;
 }
 .tab-bar__label {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2483,7 +2494,7 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2533,7 +2544,7 @@ h6 {
 .toolbar-button,
 .toolbar-button--outline,
 .toolbar-button--quiet {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2700,7 +2711,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2721,7 +2732,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2794,7 +2805,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2889,7 +2900,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3201,7 +3212,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3416,7 +3427,7 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4303,7 +4314,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
   line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4387,7 +4398,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
   line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4469,7 +4480,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
   line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4552,7 +4563,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
   line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4640,7 +4651,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
   line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4758,7 +4769,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4812,7 +4823,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4877,7 +4888,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -4898,6 +4909,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 }
 .dialog-container {
   height: inherit;
+  min-height: inherit;
   overflow: hidden;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -4928,7 +4940,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   name: Material Dialog
   use: Dialog
   markup:
-    <div class="dialog-mask dialog--material-mask"></div>
+    <div class="dialog-mask dialog-mask--material"></div>
     <div class="dialog dialog--material">
       <div class="dialog dialog-container--material">
         <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
@@ -4946,6 +4958,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   background-color: #fafafa;
+}
+.dialog-mask--material {
+  background-color: rgba(0,0,0,0.3);
 }
 /* topdoc
   name: Alert Dialog
@@ -4985,7 +5000,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5013,7 +5028,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   overflow: hidden;
 }
 .alert-dialog-title {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5052,7 +5067,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5238,6 +5253,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Alert Dialog
   height: 360px
   markup:
+    <div class="alert-dialog-mask alert-dialog-mask--material"></div>
     <div class="alert-dialog alert-dialog--material">
       <div class="alert-dialog-container alert-dialog-container--material">
         <div class="alert-dialog-title alert-dialog-title--material">
@@ -5332,6 +5348,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     background: none;
   }
 }
+.alert-dialog-mask--material {
+  background-color: rgba(0,0,0,0.3);
+}
 /* topdoc
   name: Popover
   class: popover
@@ -5370,7 +5389,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5568,7 +5587,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5606,7 +5625,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -5968,7 +5987,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background: transparent;
   border: none;
   line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;

@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.3 - 2016-01-08 */
+/*! onsenui - v2.0.0-beta.5 - 2016-01-25 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -189,46 +189,17 @@ ons-splitter-side {
   z-index: 1;
 }
 
-ons-material-input {
-  display: inline-block;
-  position: relative;
-}
-
-ons-material-input > input {
-  width: 100%;
-}
-
-ons-material-input > .text-input--material__label {
-  position: absolute;
-  left: 0px;
-  top: 2px;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Roboto', 'Noto', sans-serif;
-  pointer-events: none;
-}
-
-ons-material-input > .text-input--material__label--active {
-  transform: translate3d(0, -75%, 0) scale(0.75);
-  -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
-  -ms-transform-origin: left top;
-      transform-origin: left top;
-  -webkit-transform-origin: left top;
-  transition: transform 0.1s ease-in, color 0.1s ease-in;
-  -webkit-transition: -webkit-transform 0.1s ease-in, color 0.1s ease-in;
-}
-
-ons-material-input[no-float] > .text-input--material__label--active {
-  display: none;
-}
-
-ons-material-input[disabled] {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
 ons-toolbar-button > ons-icon[icon*="ion-"] {
   font-size: 26px;
+}
+
+ons-range {
+  display: inline-block;
+}
+
+ons-range > input {
+  min-width: 50px;
+  width: 100%;
 }
 
 /*
@@ -469,6 +440,48 @@ ons-icon[fixed-width="true"] {
 
 .ons-icon--5x {
   font-size: 5em;
+}
+
+ons-input {
+  display: inline-block;
+  position: relative;
+}
+
+ons-input > input {
+  width: 100%;
+}
+
+ons-input > .text-input--material__label {
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  pointer-events: none;
+}
+
+ons-input > .text-input__label:not(.text-input--material__label) {
+  display: none;
+}
+
+ons-input > .text-input__label--active {
+  transform: translate3d(0, -75%, 0) scale(0.75);
+  -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
+  -ms-transform-origin: left top;
+      transform-origin: left top;
+  -webkit-transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+  -webkit-transition: -webkit-transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+ons-input:not([float]) > .text-input__label--active {
+  display: none;
+}
+
+ons-input[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /*
