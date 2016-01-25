@@ -68,7 +68,7 @@ describe('OnsSplitterElement', () => {
     it('should open right ons-splitter-side', () => {
       expect(splitter.openRight()).to.be.true;
       expect(splitter.openLeft()).to.be.false;
-      expect(splitter.rightIsOpened()).to.be.true;
+      expect(splitter.rightIsOpen()).to.be.true;
     });
   });
 
@@ -80,12 +80,12 @@ describe('OnsSplitterElement', () => {
 
   describe('#closeRight()', () => {
     it('should close right ons-splitter-side', (done) => {
-      expect(splitter.rightIsOpened()).to.be.false;
+      expect(splitter.rightIsOpen()).to.be.false;
 
       expect(splitter.openRight({callback: () => {
-        expect(splitter.rightIsOpened()).to.be.true;
+        expect(splitter.rightIsOpen()).to.be.true;
         expect(splitter.closeRight({callback: () => {
-          expect(splitter.rightIsOpened()).to.be.false;
+          expect(splitter.rightIsOpen()).to.be.false;
           done();
         }})).to.be.true;
       }})).to.be.true;

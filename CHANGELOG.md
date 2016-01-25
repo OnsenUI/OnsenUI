@@ -8,6 +8,8 @@ v2.0.0-beta.6
  * css-components: Fixed [#1162](https://github.com/OnsenUI/OnsenUI/issues/1162).
  * ons-input: Add "ons-input" component and remove "ons-material-input" component.
  * ons-range: Add "ons-range" component.
+ * ons-navigator: Fixed [#1175](https://github.com/OnsenUI/OnsenUI/issues/1175).
+ * ons-tabbar: Fixed [#1184](https://github.com/OnsenUI/OnsenUI/issues/1184).
 
 v2.0.0-beta.5
 ----

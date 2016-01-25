@@ -240,6 +240,11 @@ class TabbarElement extends BaseElement {
       this._oldPageElement = element;
       var animator = this._animatorFactory.newAnimator(options);
 
+
+      if (oldPageElement !== internal.nullElement) {
+        oldPageElement._hide();
+      }
+
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
         if (oldPageElement !== internal.nullElement) {
           if (options._removeElement) {
@@ -248,7 +253,6 @@ class TabbarElement extends BaseElement {
             });
           } else {
             oldPageElement.style.display = 'none';
-            oldPageElement._hide();
           }
         }
 
