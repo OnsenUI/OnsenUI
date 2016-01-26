@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.7
+----
+ * core: Fixed [#1181](https://github.com/OnsenUI/OnsenUI/issues/1181).
+
 v2.0.0-beta.6
 ----
  * css-components: Add San Francisco font for iOS9 devices.
