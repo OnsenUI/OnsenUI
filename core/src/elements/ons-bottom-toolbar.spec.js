@@ -39,4 +39,14 @@ describe('ons-bottom-toolbar', () => {
     expect(element.style.position).to.equal('static');
     expect(element.style.position).not.to.equal('absolute');
   });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-bottom-toolbar></ons-bottom-toolbar>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
 });

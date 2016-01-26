@@ -56,6 +56,14 @@ describe('OnsDialogElement', () => {
       let dialog = ons._util.createElement('<ons-dialog style="background-color: red"></ons-dialog>');
       expect(dialog._dialog.style.backgroundColor).to.equal('red');
     });
+
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-dialog></ons-dialog>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
   });
 
   describe('#getDeviceBackButtonHandler()', () => {
