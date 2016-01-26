@@ -27,7 +27,15 @@ const STATE_ACTION = 'action';
 class PullHookElement extends BaseElement {
 
   createdCallback() {
-    this._scrollElement = this._createScrollElement();
+    if (!this.hasAttribute('_compiled')) {
+      this._scrollElement = this._createScrollElement();
+      this.setAttribute('_compiled', '');
+    } else {
+      this._scrollElement = this.parentElement;
+    }
+
+    this._scrollElement = this.hasAttribute('_compiled') ? this.parentElement : this._createScrollElement();
+
     this._pageElement = this._scrollElement.parentElement;
 
     if (!this._pageElement.classList.contains('page__content') && !this._pageElement.classList.contains('ons-scroller__content')) {

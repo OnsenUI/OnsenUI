@@ -43,10 +43,14 @@ const defaultInnerTemplateSource = util.createElement(`
 class TabElement extends BaseElement {
 
   createdCallback() {
-    this._compile();
-    this._boundOnClick = this._onClick.bind(this);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
 
-    ModifierUtil.initModifier(this, scheme);
+      this.setAttribute('_compiled', '');
+    }
+
+    this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {

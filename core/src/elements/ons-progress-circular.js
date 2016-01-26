@@ -34,9 +34,12 @@ const template = util.createElement(`
 
 class ProgressCircularElement extends BaseElement {
   createdCallback() {
-    this._compile();
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
 
-    ModifierUtil.initModifier(this, scheme);
+      this.setAttribute('_compiled', '');
+    }
   }
 
   attributeChangedCallback(name, last, current) {

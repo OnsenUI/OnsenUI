@@ -21,13 +21,17 @@ import BaseElement from 'ons/base-element';
 class RippleElement extends BaseElement {
 
   createdCallback() {
-    this.classList.add('ripple');
-    this._compile();
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+
+      this.setAttribute('_compiled', '');
+    }
 
     this._boundOnClick = this._onMouseDown.bind(this);
   }
 
   _compile() {
+    this.classList.add('ripple');
     this._wave = document.createElement('span');
     this._wave.classList.add('ripple__wave');
     this.insertBefore(this._wave, this.children[0]);

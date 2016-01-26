@@ -73,16 +73,21 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
+    this._contentElement = util.findChild(this, '.tab-bar__content');
+
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: TabbarAnimator,
       baseClassName: 'TabbarAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
-
-    this._compile();
-    this._contentElement = util.findChild(this, '.tab-bar__content');
-    ModifierUtil.initModifier(this, scheme);
   }
 
   _compile() {

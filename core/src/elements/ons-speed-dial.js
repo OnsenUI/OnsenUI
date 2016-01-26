@@ -22,10 +22,15 @@ const scheme = {
 class SpeedDialElement extends BaseElement {
 
   createdCallback() {
-    this._compile();
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._shown = true;
     this._itemShown = false;
-    ModifierUtil.initModifier(this, scheme);
     this._boundOnClick = this._onClick.bind(this);
     this.classList.add('speed__dial');
 
