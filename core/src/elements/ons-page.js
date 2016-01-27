@@ -53,7 +53,7 @@ class PageElement extends BaseElement {
     }
 
     if (!util.hasAnyComponentAsParent(this)) {
-      this._show();
+      setImmediate(() => this._show());
     }
 
     this._tryToFillStatusBar();
