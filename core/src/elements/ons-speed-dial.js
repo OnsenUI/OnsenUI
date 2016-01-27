@@ -49,7 +49,13 @@ class SpeedDialElement extends BaseElement {
   _compile() {
     let content = document.createElement('ons-fab');
 
-    const children = util.arrayFrom(this.childNodes).forEach(element => (element.nodeName.toLowerCase() !== 'ons-speed-dial-item') ? content.firstChild.appendChild(element) : true);
+    util.arrayFrom(this.childNodes).forEach(node => {
+      if (node.nodeType == 8  || (node.nodeType === 3 && !/\S/.test(node.nodeValue))) {
+        node.remove();
+      } else if (node.nodeName.toLowerCase() !== 'ons-speed-dial-item') {
+        content.firstChild.appendChild(node);
+      }
+    });
 
     this.insertBefore(content, this.firstChild);
   }

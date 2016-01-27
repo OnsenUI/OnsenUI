@@ -334,7 +334,7 @@ describe('OnsSpeedDialElement', () => {
         </ons-speed-dial>
       `;
       div2.innerHTML = div1.innerHTML;
-      expect(div1.innerHTML === div2.innerHTML).to.be.true;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });
