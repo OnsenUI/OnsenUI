@@ -175,6 +175,13 @@ class LazyRepeatElement extends BaseElement {
     }
   }
 
+  /**
+   * @method refresh
+   * @signature refresh()
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
   refresh() {
     if (this._lazyRepeatProvider) {
       this._lazyRepeatProvider.refresh();
@@ -182,7 +189,12 @@ class LazyRepeatElement extends BaseElement {
   }
 
   /**
-   * @param {Object} delegate
+   * @method setDelegate
+   * @signature setDelegate(userDelegate)
+   * @param {Object} userDelegate
+   * @description
+   *  [en]Specify a delegate object to load and unload item elements.[/en]
+   *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
    */
   setDelegate(userDelegate) {
     if (this._lazyRepeatProvider) {
