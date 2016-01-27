@@ -179,10 +179,11 @@ describe('OnsPageElement', () => {
 
   describe('#_show()', () => {
     it('fires \'show\' event', () => {
-      var spy = chai.spy();
-      document.addEventListener('show', spy);
+      var showPromise = new Promise(resolve => {
+        document.addEventListener('show', resolve);
+      });
       document.body.appendChild(element);
-      expect(spy).to.have.been.called.once;
+      return expect(showPromise).to.eventually.be.fulfilled;
     });
   });
 
@@ -191,6 +192,7 @@ describe('OnsPageElement', () => {
       var spy = chai.spy();
       document.addEventListener('hide', spy);
       document.body.appendChild(element);
+      element.isShown = true;
       element._hide();
       expect(spy).to.have.been.called.once;
     });
