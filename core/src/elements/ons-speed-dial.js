@@ -26,24 +26,24 @@ class SpeedDialElement extends BaseElement {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
 
+      this.classList.add('speed__dial');
+
+      if (this.hasAttribute('direction')) {
+        this._updateDirection(this.getAttribute('direction'));
+      } else {
+        this._updateDirection('up');
+      }
+      this._updatePosition();
+
+      if (this.hasAttribute('disabled')) {
+        this.setDisabled(true);
+      }
       this.setAttribute('_compiled', '');
     }
 
     this._shown = true;
     this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
-    this.classList.add('speed__dial');
-
-    if (this.hasAttribute('direction')) {
-      this._updateDirection(this.getAttribute('direction'));
-    } else {
-      this._updateDirection('up');
-    }
-    this._updatePosition();
-
-    if (this.hasAttribute('disabled')) {
-      this.setDisabled(true);
-    }
   }
 
   _compile() {
