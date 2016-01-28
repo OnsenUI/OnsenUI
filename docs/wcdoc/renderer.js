@@ -184,7 +184,11 @@ function renderReturns(returns) {
  * @return {string}
  */
 function renderType(type) {
-  return type ? type.toString() : null;
+  if (typeof type === 'string') {
+    return type.replace(/^\{|}$/g, '');
+  } else {
+    return null;
+  }
 }
 
 module.exports = {
