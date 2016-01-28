@@ -44,8 +44,13 @@ const INPUT_ATTRIBUTES = [
 class MaterialInputElement extends BaseElement {
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._updateLabel();
     this._updateLabelColor();
     this._updateBoundAttributes();
@@ -58,10 +63,6 @@ class MaterialInputElement extends BaseElement {
   }
 
   _compile() {
-    if (this._input) {
-      return;
-    }
-
     this.appendChild(document.createElement('input'));
     this._input.classList.add('text-input');
     this.appendChild(document.createElement('span'));

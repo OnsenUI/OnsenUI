@@ -33,8 +33,14 @@ class PageElement extends BaseElement {
 
   createdCallback() {
     this.classList.add('page');
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._isShown = false;
     this._isMuted = this.hasAttribute('_muted');
     this._skipInit = this.hasAttribute('_skipinit');
@@ -197,10 +203,6 @@ class PageElement extends BaseElement {
   }
 
   _compile() {
-    if (util.findChild(this, '.page__background') && util.findChild(this, '.page__content')) {
-      return;
-    }
-
     const background = document.createElement('div');
     background.classList.add('page__background');
 

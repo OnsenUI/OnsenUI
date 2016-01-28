@@ -84,10 +84,16 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    //this._mask = this._createMask(this.getAttribute('mask-color'));
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
 
-    ModifierUtil.initModifier(this, scheme);
+      this.setAttribute('_compiled', '');
+    }
+
+    this._visible = false;
+    this._doorLock = new DoorLock();
+    this._boundCancel = this._cancel.bind(this);
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -95,10 +101,6 @@ class AlertDialogElement extends BaseElement {
       baseClassName: 'AlertDialogAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
-
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
   }
 
   _compile() {

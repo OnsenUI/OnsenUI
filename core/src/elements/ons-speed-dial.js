@@ -22,29 +22,40 @@ const scheme = {
 class SpeedDialElement extends BaseElement {
 
   createdCallback() {
-    this._compile();
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.classList.add('speed__dial');
+
+      if (this.hasAttribute('direction')) {
+        this._updateDirection(this.getAttribute('direction'));
+      } else {
+        this._updateDirection('up');
+      }
+      this._updatePosition();
+
+      if (this.hasAttribute('disabled')) {
+        this.setDisabled(true);
+      }
+      this.setAttribute('_compiled', '');
+    }
+
     this._shown = true;
     this._itemShown = false;
-    ModifierUtil.initModifier(this, scheme);
     this._boundOnClick = this._onClick.bind(this);
-    this.classList.add('speed__dial');
-
-    if (this.hasAttribute('direction')) {
-      this._updateDirection(this.getAttribute('direction'));
-    } else {
-      this._updateDirection('up');
-    }
-    this._updatePosition();
-
-    if (this.hasAttribute('disabled')) {
-      this.setDisabled(true);
-    }
   }
 
   _compile() {
     let content = document.createElement('ons-fab');
 
-    const children = util.arrayFrom(this.childNodes).forEach(element => (element.nodeName.toLowerCase() !== 'ons-speed-dial-item') ? content.firstChild.appendChild(element) : true);
+    util.arrayFrom(this.childNodes).forEach(node => {
+      if (node.nodeType == 8  || (node.nodeType === 3 && !/\S/.test(node.nodeValue))) {
+        node.remove();
+      } else if (node.nodeName.toLowerCase() !== 'ons-speed-dial-item') {
+        content.firstChild.appendChild(node);
+      }
+    });
 
     this.insertBefore(content, this.firstChild);
   }

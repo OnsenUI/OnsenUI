@@ -49,4 +49,14 @@ describe('OnsIconElement', () => {
     expect(element.classList.contains('fa-6x')).not.to.be.true;
     expect(element.classList.contains('fa-5x')).not.to.be.true;
   });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-icon icon="fa-twitter" size="10px"></ons-icon>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
 });

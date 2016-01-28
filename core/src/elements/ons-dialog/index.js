@@ -63,8 +63,12 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -79,10 +83,6 @@ class DialogElement extends BaseElement {
   }
 
   _compile() {
-    if (util.findChild(this, '.dialog') && util.findChild(this, '.dialog-mask')) {
-      return;
-    }
-
     const style = this.getAttribute('style');
 
     this.style.display = 'none';

@@ -36,6 +36,14 @@ describe('OnsModalElement', () => {
       element.appendChild(wrapper);
       expect(element.children[0].classList.contains('modal__content')).to.be.true;
     });
+
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-modal></ons-modal>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
   });
 
   describe('#show()', () => {

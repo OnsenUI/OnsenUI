@@ -28,10 +28,15 @@ var scheme = {
 class BackButtonElement extends BaseElement {
 
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._options = {};
-    this._compile();
     this._boundOnClick = this._onClick.bind(this);
-    ModifierUtil.initModifier(this, scheme);
   }
 
   _compile() {

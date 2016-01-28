@@ -200,9 +200,11 @@ describe('OnsPageElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      var formerLastChild = element.lastChild;
-      element._compile();
-      expect(element.lastChild).to.equal(formerLastChild);
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-page></ons-page>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
 
     it('uses style attribute', () => {
