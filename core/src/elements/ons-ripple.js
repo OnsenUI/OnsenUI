@@ -27,17 +27,19 @@ class RippleElement extends BaseElement {
       this.setAttribute('_compiled', '');
     }
 
+    this._wave = util.findChild(this, '.ripple__wave');
     this._boundOnClick = this._onMouseDown.bind(this);
   }
 
   _compile() {
     this.classList.add('ripple');
-    this._wave = document.createElement('span');
-    this._wave.classList.add('ripple__wave');
-    this.insertBefore(this._wave, this.children[0]);
+
+    const wave = document.createElement('span');
+    wave.classList.add('ripple__wave');
+    this.insertBefore(wave, this.children[0]);
 
     if (this.hasAttribute('color')) {
-      this._wave.style.background = this.getAttribute('color');
+      wave.style.background = this.getAttribute('color');
     }
   }
 
