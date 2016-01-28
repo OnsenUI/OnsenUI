@@ -18,7 +18,7 @@ function renderElement(params) {
   return {
     name: main.name,
     path: main.file.relativePath,
-    category: tagdict.get('category'),
+    category: tagdict.get('category', ''),
     description: main.description || '',
     deprecated: main.isDeprecated,
     note: tagdict.get('note') || undefined,
@@ -52,7 +52,7 @@ function renderObject(params) {
   return {
     name: main.name,
     path: main.file.relativePath,
-    category: tagdict.get('category'),
+    category: tagdict.get('category', ''),
     description: main.description || '',
     deprecated: main.isDeprecated,
     note: tagdict.get('note') || undefined,
@@ -90,7 +90,7 @@ function renderProperty(property) {
     type: renderType(property.type),
     description: property.description || '',
     initonly: property.tagdict.has('initonly'),
-    deprecated: property.isDeprecated,
+    deprecated: property.isDeprecated
   };
 }
 
@@ -122,6 +122,7 @@ function renderMethod(method) {
     name: method.name,
     params: method.params.map(renderParam),
     returns: renderReturns(method.returns),
+    signature: method.tagdict.get('signature', method.name + '()'),
     description: method.description || '',
     deprecated: method.isDeprecated,
   };
@@ -140,10 +141,11 @@ function renderAttribute(attribute) {
   return {
     name: attribute.name,
     type: renderType(attribute.type),
-    description: attribute.description || '',
-    deprecated: attribute.isDeprecated,
+    description: attribute.tagdict.get('description', ''),
+    deprecated: !!attribute.isDeprecated,
     required: attribute.tagdict.has('required'),
-    default: attribute.tagdict.get('default') || undefined
+    default: attribute.tagdict.get('default', null),
+    initonly: attribute.tagdict.has('initonly')
   };
 }
 
@@ -168,16 +170,13 @@ function renderNamedDescription(target) {
 }
 
 function renderReturns(returns) {
-  if (returns) {
+  if (returns && typeof returns.type === 'string') {
     return {
       type: renderType(returns.type),
       description: returns.description || ''
     };
   } else {
-    return {
-      type: null,
-      description: ''
-    };
+    return null;
   }
 }
 

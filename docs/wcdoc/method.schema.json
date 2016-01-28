@@ -6,6 +6,10 @@
       "type": "string",
       "required": true
     },
+    "signature": {
+      "type": "string",
+      "required": true
+    },
     "params": {
       "type": "array",
       "items": {"type": "object"},
@@ -16,7 +20,7 @@
       "required": true
     },
     "returns": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "type": {
           "required": true

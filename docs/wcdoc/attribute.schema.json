@@ -19,7 +19,12 @@
       "required": true
     },
     "default": {
-      "type": "string"
+      "type": ["string", "null"],
+      "required": true
+    },
+    "initonly": {
+      "type": "boolean",
+      "required": true
     },
     "required": {
       "type": "boolean",

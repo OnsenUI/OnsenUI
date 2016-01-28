@@ -89,9 +89,10 @@ function writeIndex(dir, docIndex) {
   });
 }
 
-function validateIndex(schema, docIndex) {
+function validateIndex(docIndex, schema) {
   Object.keys(docIndex).forEach(function(key) {
     validate(docIndex[key], schema).errors.forEach(function(error) {
+      console.log(docIndex[key]);
       console.log(error);
       throw error;
     });
