@@ -24,6 +24,12 @@ function createFileIndex(docs) {
       fileIndex[path][doc.docType] = [];
     }
 
+    var matches = path.match(/bindings\/([^\/]+)\//);
+    if (matches) {
+      var name = matches[1];
+      doc.extensionOf = name;
+    }
+
     fileIndex[path][doc.docType].push(doc);
   });
 
@@ -35,21 +41,40 @@ function createFileIndex(docs) {
  * @return {Array}
  */
 function createElementIndex(fileIndex) {
-  var elementIndex = {};
+  var index = {};
 
   Object.keys(fileIndex).forEach(function(path) {
     var docdict = fileIndex[path];
 
     if (docdict.element) {
       var element = docdict.element[0];
-      elementIndex[element.name] = renderer.renderElement({
-        main: element,
-        attributes: docdict.attribute || [],
-        methods: docdict.method || [],
-        events: docdict.event || [],
-        properties: docdict.property || [],
-      });
+      if (!index.hasOwnProperty(element.name)) {
+        index[element.name] = [];
+      }
+
+      index[element.name].push(docdict);
     }
+  });
+
+  var elementIndex = {};
+  Object.keys(index).forEach(function(elementName) {
+    
+    var docdict = mergeDocdict(index[elementName]);
+
+    var element = docdict.element.find(function(element) {
+      return !element.extensionOf;
+    }) || docdict.element[0];
+
+    elementIndex[elementName] = renderer.renderElement({
+      main: element,
+      elements: docdict.element.filter(function(extraElement) {
+        return extraElement !== element;
+      }),
+      attributes: docdict.attribute || [],
+      methods: docdict.method || [],
+      events: docdict.event || [],
+      properties: docdict.property || []
+    });
   });
 
   return elementIndex;
@@ -60,33 +85,85 @@ function createElementIndex(fileIndex) {
  * @return {Array}
  */
 function createObjectIndex(fileIndex) {
-  var objectIndex = {};
+  var index = {};
 
   Object.keys(fileIndex).forEach(function(path) {
     var docdict = fileIndex[path];
 
     if (docdict.object) {
       var object = docdict.object[0];
-      objectIndex[object.name] = renderer.renderObject({
-        main: object,
-        attributes: null,
-        methods: docdict.method || [],
-        events: docdict.event || [],
-        properties: docdict.property || [],
-      });
+      if (!index.hasOwnProperty(object.name)) {
+        index[object.name] = [];
+      }
+
+      index[object.name].push(docdict);
     }
+  });
+
+  var objectIndex = {};
+  Object.keys(index).forEach(function(objectName) {
+    
+    var docdict = mergeDocdict(index[objectName]);
+
+    var object = docdict.object.find(function(object) {
+      return !object.extensionOf;
+    }) || docdict.object[0];
+
+    objectIndex[objectName] = renderer.renderObject({
+      main: object,
+      objects: docdict.object.filter(function(extraObject) {
+        return object !== extraObject;
+      }),
+      methods: docdict.method || [],
+      events: docdict.event || [],
+      properties: docdict.property || []
+    });
   });
 
   return objectIndex;
 }
 
-function writeIndex(dir, docIndex) {
-  Object.keys(docIndex).forEach(function(key) {
-    var doc = docIndex[key];
-    var path = dir + '/' + doc.name + '.json';
+function mergeDocdict(docdicts) {
+  return docdicts.reduce(function(result, docdict) {
+    Object.keys(docdict).forEach(function(key) {
+      if (!result[key]) {
+        result[key] = docdict[key];
+      } else {
+        result[key] = result[key].concat(docdict[key]);
+      }
+    });
 
-    fs.writeFileSync(path, JSON.stringify(doc, null, '  '));
+    return result;
+  }, {});
+}
+
+function mkdir(path) {
+  return new Promise(function(resolve, reject) {
+    mkpath(path, function(error) {
+      if (error) { 
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
   });
+}
+
+function writeIndex(dir, docIndex) {
+  return mkdir(dir).then(Promise.all(Object.keys(docIndex).map(function(key) {
+    return new Promise(function(resolve, reject) {
+      var doc = docIndex[key];
+      var path = join(dir, doc.name + '.json');
+
+      fs.writeFile(path, JSON.stringify(doc, null, '  '), function(error) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  })));
 }
 
 function validateIndex(docIndex, schema) {
@@ -100,12 +177,10 @@ function validateIndex(docIndex, schema) {
 }
 
 /**
- * @param {Object} params
- * @param {Array} params.src
- * @param {string} params.outputDir
+ * @param {string} params.src
  * @return {Promise}
  */
-function run(params) {
+function collect(params) {
   return wcdoc.run({
     src: params.src,
     basePath: __dirname + '/../../'
@@ -117,22 +192,30 @@ function run(params) {
     validateIndex(elementIndex, {$ref: '/element'});
     validateIndex(objectIndex, {$ref: '/object'});
 
-    var dir = resolve(params.outputDir);
-    mkpath.sync(join(dir, 'element'));
-    mkpath.sync(join(dir, 'object'));
-    writeIndex(join(dir, 'element'), elementIndex);
-    writeIndex(join(dir, 'object'), objectIndex);
+    return {
+      element: elementIndex,
+      object: objectIndex
+    };
   });
 }
 
-module.exports = function() {
-  return run({
-    src: ['./core/src/elements/**/*.js', './core/src/ons/**/*.js', '!**/*.spec.js'],
-    outputDir: __dirname + '/../../build/docs/core'
-  }).then(function() {
-    run({
-      src: ['./bindings/angular1/directives/*.js', './bindings/angular1/js/*.js'],
-      outputDir: __dirname + '/../../build/docs/angular1-binding'
+/** 
+ * @param {string} out
+ * @return {Promise}
+ */
+module.exports = function(out) {
+  out = resolve(out);
+  return collect({
+    src: [
+      './core/src/elements/**/*.js', 
+      './core/src/ons/**/*.js',
+      './bindings/angular1/directives/*.js',
+      './bindings/angular1/js/*.js',
+      '!**/*.spec.js'
+    ]
+  }).then(function(result) {
+    return writeIndex(join(out, 'object'), result.object).then(function() {
+      return writeIndex(join(out, 'element'), result.element);
     });
   }).catch(function(reason) {
     console.log(reason);

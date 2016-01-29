@@ -10,6 +10,9 @@
       "type": "string",
       "required": true
     },
+    "extensionOf": {
+      "type": "string"
+    },
     "type": {
       "type": ["string", "null"],
       "required": true
@@ -30,5 +33,6 @@
       "type": "boolean",
       "required": true
     }
-  }
+  },
+  "additionalProperties": false
 }

@@ -385,7 +385,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 // build-docs
 ////////////////////////////////////////
 gulp.task('build-docs', function() {
-  return require('./docs/wcdoc')();
+  return require('./docs/wcdoc')(__dirname + '/build/docs');
 });
 
 ////////////////////////////////////////

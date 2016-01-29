@@ -21,6 +21,9 @@
     "note": {
       "type": "string"
     },
+    "extensionOf": {
+      "type": "string"
+    },
     "examples": {
       "type": "array",
       "items": {"type": "string"},
@@ -71,6 +74,11 @@
     "description": {
       "type": "string",
       "required": true
+    },
+    "objects": {
+      "type": "array",
+      "items": {"$ref": "/extra-object"}
     }
-  }
+  },
+  "additionalProperties": false
 }

@@ -15,6 +15,9 @@
       "items": {"type": "object"},
       "required": true
     },
+    "extensionOf": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
       "required": true
@@ -36,5 +39,6 @@
       "type": "boolean",
       "required": true
     }
-  }
+  },
+  "additionalProperties": false
 }

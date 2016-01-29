@@ -1,5 +1,5 @@
 {
-  "id": "/element",
+  "id": "/extra-object",
   "type": "object",
   "properties": {
     "name": {
@@ -10,18 +10,14 @@
       "type": "string",
       "required": true
     },
-    "category": {
-      "type": "string",
-      "required": true
-    },
     "deprecated": {
       "type": "boolean",
       "required": true
     },
-    "extensionOf": {
+    "note": {
       "type": "string"
     },
-    "note": {
+    "extensionOf": {
       "type": "string"
     },
     "examples": {
@@ -51,49 +47,14 @@
       },
       "required": true
     },
-    "modifiers": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {"type": "string", "required": true},
-          "description": {"type": "string", "required": true}
-        }
-      },
-      "required": true
-    },
     "codepens": {
       "type": "array",
       "items": {"$ref": "/codepen"},
       "required": true
     },
-    "events": {
-      "type": "array",
-      "items": {"$ref": "/event"},
-      "required": true
-    },
-    "properties": {
-      "type": "array",
-      "items": {"$ref": "/property"},
-      "required": true
-    },
-    "attributes": {
-      "type": "array",
-      "items": {"$ref": "/attribute"},
-      "required": true
-    },
-    "methods": {
-      "type": "array",
-      "items": {"$ref": "/method"},
-      "required": true
-    },
     "description": {
       "type": "string",
       "required": true
-    },
-    "elements": {
-      "type": "array",
-      "items": {"$ref": "/extra-element"}
     }
   },
   "additionalProperties": false
