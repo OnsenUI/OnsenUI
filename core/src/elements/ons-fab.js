@@ -22,11 +22,16 @@ const scheme = {
 class FabElement extends BaseElement {
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this.classList.add('fab');
     this._updatePosition();
-    this.show();
+    this.hide();
   }
 
   _compile() {

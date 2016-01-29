@@ -78,12 +78,12 @@ describe('OnsSplitterSideElement', () => {
     });
   });
 
-  describe('#isOpened()', () => {
+  describe('#isOpen()', () => {
     it('should return boolean', (done) => {
-      expect(right.isOpened()).to.be.false;
-      expect(left.isOpened()).to.be.false;
+      expect(right.isOpen()).to.be.false;
+      expect(left.isOpen()).to.be.false;
       right.open({callback: () => {
-        expect(right.isOpened()).to.be.true;
+        expect(right.isOpen()).to.be.true;
         done();
       }});
     });
@@ -91,9 +91,9 @@ describe('OnsSplitterSideElement', () => {
 
   describe('#toggle()', () => {
     it('toggle open or close state', (done) => {
-      expect(right.isOpened()).to.be.false;
+      expect(right.isOpen()).to.be.false;
       right.toggle({callback: () => {
-        expect(right.isOpened()).to.be.true;
+        expect(right.isOpen()).to.be.true;
         done();
       }});
     });

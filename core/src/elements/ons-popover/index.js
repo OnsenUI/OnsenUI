@@ -65,15 +65,11 @@ class PopoverElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    this.style.display = 'none';
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
 
-    this._mask.style.zIndex = '20000';
-    this._popover.style.zIndex = '20001';
-
-    if (this.hasAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -252,6 +248,15 @@ class PopoverElement extends BaseElement {
 
     if (style) {
       this._popover.setAttribute('style', style);
+    }
+
+    this.style.display = 'none';
+
+    this._mask.style.zIndex = '20000';
+    this._popover.style.zIndex = '20001';
+
+    if (this.hasAttribute('mask-color')) {
+      this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
   }
 

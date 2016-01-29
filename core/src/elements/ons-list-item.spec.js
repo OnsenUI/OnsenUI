@@ -83,4 +83,14 @@ describe('OnsListItemElement', () => {
       expect(listItem.style.backgroundColor).to.equal(origColor);
     });
   });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-list-item>Content</ons-list-item>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
 });

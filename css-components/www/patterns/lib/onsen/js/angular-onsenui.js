@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-beta.5 - 2016-01-08 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta.6 - 2016-01-25 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -6151,6 +6151,93 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id input
+ * @name ons-input
+ * @category form
+ * @description
+ *  [en]Input component.[/en]
+ *  [ja]inputコンポ―ネントです。[/ja]
+ * @codepen ojQxLj
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @example
+ * <ons-input></ons-input>
+ * <ons-input modifier="material" label="Username"></ons-input>
+ */
+
+/**
+ * @ngdoc attribute
+ * @name label
+ * @type {String}
+ * @description
+ *   [en]Text for animated floating label.[/en]
+ *   [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name float
+ * @description
+ *  [en]If this attribute is present, the label will be animated.[/en]
+ *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-model
+ * @extensionOf angular
+ * @description
+ *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
+ *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-change
+ * @extensionOf angular
+ * @description
+ *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
+ *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]
+ */
+
+(function(){
+  'use strict';
+
+  angular.module('onsen').directive('onsInput', ['$parse', function($parse) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: true,
+
+      link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+
+        if (attrs.ngModel) {
+          var set = $parse(attrs.ngModel).assign;
+
+          scope.$parent.$watch(attrs.ngModel, function(value) {
+            element[0].value = value;
+          });
+
+          element[0]._input.addEventListener('input', function() {
+            set(scope.$parent, element[0].value);
+            if (attrs.ngChange) {
+              scope.$eval(attrs.ngChange);
+            }
+            scope.$parent.$evalAsync();
+          });
+        }
+      }
+    };
+  }]);
+})();
+
+/**
+ * @ngdoc directive
  * @id ons-keyboard-active
  * @name ons-keyboard-active
  * @category input
@@ -6596,92 +6683,6 @@ limitations under the License.
       }
     };
   });
-})();
-
-/**
- * @ngdoc directive
- * @id material-input
- * @name ons-material-input
- * @category form
- * @description
- *  [en]Material Design input component.[/en]
- *  [ja]Material Designのinputコンポ―ネントです。[/ja]
- * @codepen ojQxLj
- * @guide UsingFormComponents
- *   [en]Using form components[/en]
- *   [ja]フォームを使う[/ja]
- * @guide EventHandling
- *   [en]Event handling descriptions[/en]
- *   [ja]イベント処理の使い方[/ja]
- * @example
- * <ons-material-input label="Username"></ons-material-input>
- */
-
-/**
- * @ngdoc attribute
- * @name label
- * @type {String}
- * @description
- *   [en]Text for animated floating label.[/en]
- *   [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name no-float
- * @description
- *  [en]If this attribute is present, the label will not be animated.[/en]
- *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name ng-model
- * @extensionOf angular
- * @description
- *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
- *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name ng-change
- * @extensionOf angular
- * @description
- *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
- *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]
- */
-
-(function(){
-  'use strict';
-
-  angular.module('onsen').directive('onsMaterialInput', ['$parse', function($parse) {
-    return {
-      restrict: 'E',
-      replace: false,
-      scope: true,
-
-      link: function(scope, element, attrs) {
-        CustomElements.upgrade(element[0]);
-
-        if (attrs.ngModel) {
-          var set = $parse(attrs.ngModel).assign;
-
-          scope.$parent.$watch(attrs.ngModel, function(value) {
-            element[0].value = value;
-          });
-
-          element[0]._input.addEventListener('input', function() {
-            set(scope.$parent, element[0].value);
-            if (attrs.ngChange) {
-              scope.$eval(attrs.ngChange);
-            }
-            scope.$parent.$evalAsync();
-          });
-        }
-      }
-    };
-  }]);
 })();
 
 /**
@@ -8446,6 +8447,76 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id range
+ * @name ons-range
+ * @category form
+ * @description
+ *  [en]Range input component.[/en]
+ *  [ja][/ja]
+ * @codepen ojQxLj
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @example
+ * <ons-range value="20"></ons-range>
+ * <ons-range modifier="material" value="10"></range>
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-model
+ * @extensionOf angular
+ * @description
+ *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
+ *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-change
+ * @extensionOf angular
+ * @description
+ *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
+ *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]
+ */
+
+(function(){
+  'use strict';
+
+  angular.module('onsen').directive('onsRange', ['$parse', function($parse) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: true,
+
+      link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+
+        if (attrs.ngModel) {
+          var set = $parse(attrs.ngModel).assign;
+
+          scope.$parent.$watch(attrs.ngModel, function(value) {
+            element[0].value = value;
+          });
+
+          element[0]._input.addEventListener('input', function() {
+            set(scope.$parent, element[0].value);
+            if (attrs.ngChange) {
+              scope.$eval(attrs.ngChange);
+            }
+            scope.$parent.$evalAsync();
+          });
+        }
+      }
+    };
+  }]);
+})();
+
+/**
+ * @ngdoc directive
  * @id ripple
  * @name ons-ripple
  * @category form
@@ -9800,23 +9871,23 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature leftIsOpened()
+ * @signature leftIsOpen()
  * @return {Boolean}
- *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Whether the left ons-splitter-side on collapse mode is open.[/en]
  *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
  * @description
- *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Determines whether the left ons-splitter-side on collapse mode is open.[/en]
  *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
  */
 
 /**
  * @ngdoc method
- * @signature rightIsOpened()
+ * @signature rightIsOpen()
  * @return {Boolean}
- *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Whether the right ons-splitter-side on collapse mode is open.[/en]
  *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
  * @description
- *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [en]Determines whether the right ons-splitter-side on collapse mode is open.[/en]
  *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
  */
 

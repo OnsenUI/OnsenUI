@@ -129,7 +129,7 @@ class MediaQueryCollapseDetection extends CollapseDetection {
 }
 
 class BaseMode {
-  isOpened() {
+  isOpen() {
     return false;
   }
   openMenu() {
@@ -150,7 +150,7 @@ class SplitMode extends BaseMode {
     this._element = element;
   }
 
-  isOpened() {
+  isOpen() {
     return false;
   }
 
@@ -197,8 +197,8 @@ class CollapseMode extends BaseMode {
     return 'closed';
   }
 
-  static get OPENED_STATE() {
-    return 'opened';
+  static get OPEN_STATE() {
+    return 'open';
   }
 
   static get CHANGING_STATE() {
@@ -222,7 +222,7 @@ class CollapseMode extends BaseMode {
     return this._lock.isLocked();
   }
 
-  isOpened() {
+  isOpen() {
     return this._state !== CollapseMode.CLOSED_STATE;
   }
 
@@ -235,7 +235,7 @@ class CollapseMode extends BaseMode {
       return;
     }
 
-    if (this._openedOtherSideMenu()) {
+    if (this._isOpenOtherSideMenu()) {
       return;
     }
 
@@ -257,7 +257,7 @@ class CollapseMode extends BaseMode {
   _onDragStart(event) {
     this._ignoreDrag = false;
 
-    if (!this.isOpened() && this._openedOtherSideMenu()) {
+    if (!this.isOpen() && this._isOpenOtherSideMenu()) {
       this._ignoreDrag = true;
     } else if (this._element._swipeTargetWidth > 0) {
       const distance = this._element._isLeftSide()
@@ -277,9 +277,9 @@ class CollapseMode extends BaseMode {
 
     const startEvent = event.gesture.startEvent;
 
-    if (!('isOpened' in startEvent)) {
-      startEvent.isOpened = this.isOpened();
-      startEvent.distance = startEvent.isOpened ? this._element._getWidthInPixel() : 0;
+    if (!('isOpen' in startEvent)) {
+      startEvent.isOpen = this.isOpen();
+      startEvent.distance = startEvent.isOpen ? this._element._getWidthInPixel() : 0;
       startEvent.width = this._element._getWidthInPixel();
     }
 
@@ -293,7 +293,7 @@ class CollapseMode extends BaseMode {
       return;
     }
 
-    const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
+    const distance = startEvent.isOpen ? deltaDistance + width : deltaDistance;
     const normalizedDistance = Math.max(0, Math.min(width, distance));
 
     startEvent.distance = normalizedDistance;
@@ -306,7 +306,7 @@ class CollapseMode extends BaseMode {
     const deltaX = event.gesture.deltaX;
     const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
     const width = event.gesture.startEvent.width;
-    const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
+    const distance = event.gesture.startEvent.isOpen ? deltaDistance + width : deltaDistance;
     const direction = event.gesture.interimDirection;
     const shouldOpen =
       (this._element._isLeftSide() && direction === 'right' && distance > width * this._element._getThresholdRatioIfShouldOpen()) ||
@@ -329,7 +329,7 @@ class CollapseMode extends BaseMode {
       if (this._animator.isActivated()) {
         this._animator.layoutOnClose();
       }
-    } else if (this._state === CollapseMode.OPENED_STATE) {
+    } else if (this._state === CollapseMode.OPEN_STATE) {
       if (this._animator.isActivated()) {
         this._animator.layoutOnOpen();
       }
@@ -353,11 +353,11 @@ class CollapseMode extends BaseMode {
   /**
    * @return {Boolean}
    */
-  _openedOtherSideMenu() {
+  _isOpenOtherSideMenu() {
     return util.arrayFrom(this._element.parentElement.children).filter(child => {
       return child.nodeName.toLowerCase() === 'ons-splitter-side' && this._element !== child;
     }).filter(side => {
-      return side.isOpened();
+      return side.isOpen();
     }).length > 0;
   }
 
@@ -386,7 +386,7 @@ class CollapseMode extends BaseMode {
       return Promise.reject('Splitter side is locked.');
     }
 
-    if (this._openedOtherSideMenu()) {
+    if (this._isOpenOtherSideMenu()) {
       return Promise.reject('Another menu is already open.');
     }
 
@@ -404,7 +404,7 @@ class CollapseMode extends BaseMode {
     };
 
     if (options.withoutAnimation) {
-      this._state = CollapseMode.OPENED_STATE;
+      this._state = CollapseMode.OPEN_STATE;
       this.layout();
       done();
       return Promise.resolve(this._element);
@@ -412,7 +412,7 @@ class CollapseMode extends BaseMode {
       this._state = CollapseMode.CHANGING_STATE;
       return new Promise(resolve => {
         this._animator.open(() => {
-          this._state = CollapseMode.OPENED_STATE;
+          this._state = CollapseMode.OPEN_STATE;
           this.layout();
           done();
           resolve(this._element);
@@ -426,7 +426,7 @@ class CollapseMode extends BaseMode {
    * @return {Promise} Resolves to the splitter side element
    */
   closeMenu(options = {}) {
-    if (this._state !== CollapseMode.OPENED_STATE) {
+    if (this._state !== CollapseMode.OPEN_STATE) {
       return Promise.reject('Not in Collapse Mode.');
     }
 
@@ -729,8 +729,8 @@ class SplitterSideElement extends BaseElement {
   /**
    * @return {Boolean}
    */
-  isOpened() {
-    return this._getModeStrategy().isOpened();
+  isOpen() {
+    return this._getModeStrategy().isOpen();
   }
 
   /**
@@ -787,7 +787,7 @@ class SplitterSideElement extends BaseElement {
    * @param {Object} [options]
    */
   toggle(options = {}) {
-    return this.isOpened() ? this.close(options) : this.open(options);
+    return this.isOpen() ? this.close(options) : this.open(options);
   }
 
   attributeChangedCallback(name, last, current) {

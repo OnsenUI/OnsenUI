@@ -67,7 +67,7 @@ describe('OnsSplitterElement', () => {
   describe('#openRight()', () => {
     it('should open right ons-splitter-side', () => {
       return expect(splitter.openRight()).to.eventually.be.fulfilled.then(() => {
-        expect(splitter.rightIsOpened()).to.be.true;
+        expect(splitter.rightIsOpen()).to.be.true;
         return expect(splitter.openLeft()).to.eventually.be.rejected;
       });
     });
@@ -81,11 +81,11 @@ describe('OnsSplitterElement', () => {
 
   describe('#closeRight()', () => {
     it('should close right ons-splitter-side', () => {
-      expect(splitter.rightIsOpened()).to.be.false;
+      expect(splitter.rightIsOpen()).to.be.false;
       return splitter.openRight().then(() => {
-        expect(splitter.rightIsOpened()).to.be.true;
+        expect(splitter.rightIsOpen()).to.be.true;
         return expect(splitter.closeRight()).to.eventually.be.fulfilled.then(() => {
-          expect(splitter.rightIsOpened()).to.be.false;
+          expect(splitter.rightIsOpen()).to.be.false;
         });
       });
     });
@@ -100,6 +100,22 @@ describe('OnsSplitterElement', () => {
   describe('#getDeviceBackButtonHandler()', () => {
     it('should return handler object', () => {
       expect(splitter.getDeviceBackButtonHandler()).to.be.an('object');
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = `
+        <ons-splitter>
+          <ons-splitter-side side="left">Left</ons-splitter-side>
+          <ons-splitter-side side="right" collapse>Right</ons-splitter-side>
+          <ons-splitter-content>Content</ons-splitter-content>
+        </ons-splitter>
+      `;
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });
