@@ -226,7 +226,19 @@ class TabElement extends BaseElement {
       const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+        tabbar.setActiveTab(tabIndex, {animation: 'none'});
+      });
+    } else if (this.isPersistent() && !this.hasAttribute('lazy-load')) {
+      OnsTabbarElement.rewritables.ready(tabbar, () => {
+        if (!this._pageElement) {
+          this._createPageElement(this.getAttribute('page'), pageElement => {
+            OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
+              this._pageElement = pageElement;
+              this._pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(this._pageElement);
+            });
+          });
+        }
       });
     }
 
