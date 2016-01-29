@@ -666,6 +666,7 @@ class NavigatorElement extends BaseElement {
       return;
     }
 
+    this._isPushing = true;
     this._doorLock.waitUnlock(() => this._pushPage(page, options));
   }
 

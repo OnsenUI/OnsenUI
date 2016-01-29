@@ -242,6 +242,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   use: Alert Dialog
   height: 360px
   markup:
+    <div class="alert-dialog-mask alert-dialog-mask--material"></div>
     <div class="alert-dialog alert-dialog--material">
       <div class="alert-dialog-container alert-dialog-container--material">
         <div class="alert-dialog-title alert-dialog-title--material">
@@ -319,3 +320,6 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-weight 500
   +retina-query()
     background none
+
+.alert-dialog-mask--material
+  background-color rgba(0, 0, 0, 0.3)

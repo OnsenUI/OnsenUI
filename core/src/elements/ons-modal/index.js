@@ -80,16 +80,21 @@ class ModalElement extends BaseElement {
    */
 
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._doorLock = new DoorLock();
+
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: ModalAnimator,
       baseClassName: 'ModalAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
-
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
   }
 
   /**

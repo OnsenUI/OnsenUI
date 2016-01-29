@@ -422,6 +422,19 @@ describe('OnsTabbarElement', () => {
         done();
       }, 1000);
     });
+
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = `
+        <ons-tabbar>
+          <ons-tab page="hoge">hoge</ons-tab>
+          <ons-tab page="fuga">fuga</ons-tab>
+        </ons-tabbar>
+      `;
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
   });
 
   describe('#registerAnimator()', () => {

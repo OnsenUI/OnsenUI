@@ -224,8 +224,8 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @method leftIsOpened
-   * @signature leftIsOpened()
+   * @method leftIsOpen
+   * @signature leftIsOpen()
    * @return {Boolean}
    *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -233,13 +233,13 @@ class SplitterElement extends BaseElement {
    *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
-  leftIsOpened() {
-    return this._isOpened('left');
+  leftIsOpen() {
+    return this._isOpen('left');
   }
 
   /**
-   * @method rightIsOpened
-   * @signature rightIsOpened()
+   * @method rightIsOpen
+   * @signature rightIsOpen()
    * @return {Boolean}
    *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -247,19 +247,19 @@ class SplitterElement extends BaseElement {
    *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
-  rightIsOpened() {
-    return this._isOpened('right');
+  rightIsOpen() {
+    return this._isOpen('right');
   }
 
   /**
    * @param {String} side
    * @return {Boolean}
    */
-  _isOpened(side) {
+  _isOpen(side) {
     const menu = this._getSideElement(side);
 
     if (menu) {
-      return menu.isOpened();
+      return menu.isOpen();
     }
 
     return false;
@@ -273,7 +273,7 @@ class SplitterElement extends BaseElement {
    *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
    * @description
    *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
-   *   [ja]ons-splitter-content用紙に表示されるページをpageUrlに指定します。[/ja]
+   *   [ja]ons-splitter-content要素に表示されるページをpageUrlに指定します。[/ja]
    */
   loadContentPage(page, options = {}) {
     const content = this._getContentElement();
@@ -289,12 +289,12 @@ class SplitterElement extends BaseElement {
     const left = this._getSideElement('left');
     const right = this._getSideElement('right');
 
-    if (left.isOpened()) {
+    if (left.isOpen()) {
       left.close();
       return;
     }
 
-    if (right.isOpened()) {
+    if (right.isOpen()) {
       right.close();
       return;
     }

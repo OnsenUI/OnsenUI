@@ -26,7 +26,8 @@ import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.dialog': 'dialog--*',
-  '.dialog-container': 'dialog-container--*'
+  '.dialog-container': 'dialog-container--*',
+  '.dialog-mask': 'dialog-mask--*'
 };
 
 const templateSource = util.createElement(`
@@ -194,8 +195,12 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
 
     this._visible = false;
     this._doorLock = new DoorLock();

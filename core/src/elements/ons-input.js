@@ -15,8 +15,8 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '.text-input--material': 'text-input--material--*',
-  '.text-input--material__label': 'text-input--material__label--*'
+  '.text-input': 'text-input--*',
+  '.text-input__label': 'text-input--*__label'
 };
 
 const INPUT_ATTRIBUTES = [
@@ -75,8 +75,13 @@ class MaterialInputElement extends BaseElement {
    */
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
+
     this._updateLabel();
     this._updateLabelColor();
     this._updateBoundAttributes();
@@ -89,14 +94,10 @@ class MaterialInputElement extends BaseElement {
   }
 
   _compile() {
-    if (this._input) {
-      return;
-    }
-
     this.appendChild(document.createElement('input'));
-    this._input.classList.add('text-input--material');
+    this._input.classList.add('text-input');
     this.appendChild(document.createElement('span'));
-    this._label.classList.add('text-input--material__label');
+    this._label.classList.add('text-input__label');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -162,10 +163,10 @@ class MaterialInputElement extends BaseElement {
 
   _updateLabelClass() {
     if (this.value === '') {
-      this._label.classList.remove('text-input--material__label--active');
+      this._label.classList.remove('text-input__label--active');
     }
     else {
-      this._label.classList.add('text-input--material__label--active');
+      this._label.classList.add('text-input__label--active');
     }
   }
 
@@ -212,6 +213,6 @@ class MaterialInputElement extends BaseElement {
   }
 }
 
-window.OnsMaterialInputElement = document.registerElement('ons-material-input', {
+window.OnsInputElement = document.registerElement('ons-input', {
   prototype: MaterialInputElement.prototype
 });

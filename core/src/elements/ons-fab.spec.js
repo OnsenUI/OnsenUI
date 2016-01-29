@@ -127,7 +127,7 @@ describe('OnsFabElement', () => {
   describe('#show()', () => {
     it('sets scale transform to 1', () => {
       fab.hide();
-      expect(fab.style.transform).not.to.equal('scale(1)');
+      expect(fab.style.transform).to.equal('scale(0)');
       fab.show();
       expect(fab.style.transform).to.equal('scale(1)');
     });
@@ -135,7 +135,8 @@ describe('OnsFabElement', () => {
 
   describe('#hide()', () => {
     it('sets scale transform to 0', () => {
-      expect(fab.style.transform).not.to.equal('scale(0)');
+      fab.show();
+      expect(fab.style.transform).to.equal('scale(1)');
       fab.hide();
       expect(fab.style.transform).to.equal('scale(0)');
     });
@@ -179,29 +180,40 @@ describe('OnsFabElement', () => {
 
   describe('#isShown()', () => {
     it('returns whether the element is currently shown or not', () => {
-      expect(fab.isShown()).to.be.true;
-      fab.hide();
       expect(fab.isShown()).to.be.false;
       fab.show();
       expect(fab.isShown()).to.be.true;
+      fab.hide();
+      expect(fab.isShown()).to.be.false;
       fab.style.display = 'none';
+      fab.show();
       expect(fab.isShown()).to.be.false;
     });
   });
 
   describe('#toggle()', () => {
-    it('calls #hide() if element is shown', () => {
-      let spy = chai.spy.on(fab, 'hide');
+    it('calls #show() if element is hidden', () => {
+      let spy = chai.spy.on(fab, 'show');
       fab.toggle();
       expect(spy).to.have.been.called.once;
     });
 
-    it('calls #show() if element is hidden', () => {
-      let spy = chai.spy.on(fab, 'show');
+    it('calls #hide() if element is shown', () => {
+      let spy = chai.spy.on(fab, 'hide');
       fab.toggle();
       expect(spy).not.to.have.been.called();
       fab.toggle();
       expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-fab></ons-fab>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });
