@@ -169,6 +169,7 @@ class TabbarElement extends BaseElement {
    * @param {Object} [options]
    * @param {Object} [options.animation]
    * @param {Object} [options.callback]
+   * @return {Promise} Resolves to the new page element.
    */
   loadPage(page, options = {}) {
     options._removeElement = true;
@@ -180,10 +181,13 @@ class TabbarElement extends BaseElement {
    * @param {Object} [options]
    * @param {Object} [options.animation]
    * @param {Object} [options.callback]
+   * @return {Promise} Resolves to the new page element.
    */
   _loadPage(page, options) {
-    OnsTabElement.prototype._createPageElement(page, pageElement => {
-      this._loadPageDOMAsync(pageElement, options);
+    return new Promise(resolve => {
+      OnsTabElement.prototype._createPageElement(page, pageElement => {
+        resolve(this._loadPageDOMAsync(pageElement, options));
+      });
     });
   }
 
@@ -192,12 +196,23 @@ class TabbarElement extends BaseElement {
    * @param {Object} [options]
    * @param {Object} [options.animation]
    * @param {Object} [options.callback]
+   * @return {Promise} Resolves to the new page element.
    */
   _loadPageDOMAsync(pageElement, options = {}) {
+    return new Promise(resolve => {
+      rewritables.link(this, pageElement, options, pageElement => {
+        this._contentElement.appendChild(pageElement);
 
-    rewritables.link(this, pageElement, options, pageElement => {
-      this._contentElement.appendChild(pageElement);
-      this._switchPage(pageElement, options);
+        if (this.getActiveTabIndex() !== -1) {
+          resolve(this._switchPage(pageElement, options));
+        } else {
+          if (options.callback instanceof Function) {
+              options.callback();
+          }
+
+          resolve(pageElement);
+        }
+      });
     });
   }
 
@@ -237,15 +252,15 @@ class TabbarElement extends BaseElement {
    * @param {Boolean} options._removeElement
    * @param {Number} options.selectedTabIndex
    * @param {Number} options.previousTabIndex
+   * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
 
-    if (this.getActiveTabIndex() !== -1) {
-      var oldPageElement = this._oldPageElement || internal.nullElement;
-      this._oldPageElement = element;
-      var animator = this._animatorFactory.newAnimator(options);
+    var oldPageElement = this._oldPageElement || internal.nullElement;
+    this._oldPageElement = element;
+    var animator = this._animatorFactory.newAnimator(options);
 
-
+    return new Promise(resolve => {
       if (oldPageElement !== internal.nullElement) {
         oldPageElement._hide();
       }
@@ -267,13 +282,10 @@ class TabbarElement extends BaseElement {
         if (options.callback instanceof Function) {
           options.callback();
         }
-      });
 
-    } else {
-      if (options.callback instanceof Function) {
-        options.callback();
-      }
-    }
+        resolve(element);
+      });
+    });
   }
 
   /**
@@ -282,9 +294,13 @@ class TabbarElement extends BaseElement {
    * @param {Boolean} [options.keepPage]
    * @param {String} [options.animation]
    * @param {Object} [options.animationOptions]
-   * @return {Boolean} success or not
+   * @return {Promise} Resolves to the new page element.
    */
   setActiveTab(index, options = {}) {
+
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
 
     options.animationOptions = util.extend(
       options.animationOptions || {},
@@ -297,22 +313,22 @@ class TabbarElement extends BaseElement {
       selectedTabIndex = index;
 
     if (!selectedTab) {
-      return false;
+      return Promise.reject('Specified index does not match any tab.');
     }
 
-    if (index === previousTabIndex) {
+    if (selectedTabIndex === previousTabIndex) {
       util.triggerElementEvent(this, 'reactive', {
-        index: index,
+        index: selectedTabIndex,
         tabItem: selectedTab
       });
 
-      return false;
+      return Promise.resolve(this._getCurrentPageElement());
     }
 
     var canceled = false;
 
     util.triggerElementEvent(this, 'prechange', {
-      index: index,
+      index: selectedTabIndex,
       tabItem: selectedTab,
       cancel: () => canceled = true
     });
@@ -322,7 +338,7 @@ class TabbarElement extends BaseElement {
       if (previousTab) {
         previousTab.setActive();
       }
-      return false;
+      return Promise.reject('Canceled in prechange event.');
     }
 
     selectedTab.setActive();
@@ -335,7 +351,7 @@ class TabbarElement extends BaseElement {
       } else {
         if (!needLoad) {
           util.triggerElementEvent(this, 'postchange', {
-            index: index,
+            index: selectedTabIndex,
             tabItem: selectedTab
           });
         }
@@ -352,7 +368,7 @@ class TabbarElement extends BaseElement {
       var params = {
         callback: () => {
           util.triggerElementEvent(this, 'postchange', {
-            index: index,
+            index: selectedTabIndex,
             tabItem: selectedTab
           });
 
@@ -369,19 +385,24 @@ class TabbarElement extends BaseElement {
         params.animation = options.animation;
       }
 
+      params.animationOptions = options.animationOptions || {};
+
       if (selectedTab.isPersistent()) {
         const link = (element, callback) => {
           rewritables.link(this, element, options, callback);
         };
-        selectedTab._loadPageElement(pageElement => {
-          this._loadPersistentPageDOM(pageElement, params);
-        }, link);
+
+        return new Promise(resolve => {
+          selectedTab._loadPageElement(pageElement => {
+            resolve(this._loadPersistentPageDOM(pageElement, params));
+          }, link);
+        });
       } else {
-        this._loadPage(selectedTab.getAttribute('page'), params);
+        return this._loadPage(selectedTab.getAttribute('page'), params);
       }
     }
 
-    return true;
+    return Promise.resolve(this._getCurrentPageElement());
   }
 
   /**
@@ -396,7 +417,7 @@ class TabbarElement extends BaseElement {
     }
 
     element.removeAttribute('style');
-    this._switchPage(element, options);
+    return this._switchPage(element, options);
   }
 
   /**

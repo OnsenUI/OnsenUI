@@ -134,6 +134,7 @@ class ModalElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback after modal is shown
+   * @return {Promise} Resolves to the displayed element
    */
   show(options = {}) {
     options.animationOptions = util.extend(
@@ -141,17 +142,25 @@ class ModalElement extends BaseElement {
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
-    var callback = options.callback || function() {};
+    const callback = options.callback || function() {};
 
-    this._doorLock.waitUnlock(() => {
-      var unlock = this._doorLock.lock(),
-        animator = this._animatorFactory.newAnimator(options);
+    const tryShow = () => {
+      const unlock = this._doorLock.lock();
+      const animator = this._animatorFactory.newAnimator(options);
 
       this.style.display = 'table';
-      animator.show(this, function() {
-        unlock();
-        callback();
+      return new Promise(resolve => {
+        animator.show(this, () => {
+          unlock();
+
+          callback();
+          resolve(this);
+        });
       });
+    };
+
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => resolve(tryShow()));
     });
   }
 
@@ -178,6 +187,7 @@ class ModalElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback after modal is hidden
+   * @return {Promise} Resolves to the hidden element
    */
   hide(options = {}) {
     options.animationOptions = util.extend(
@@ -187,15 +197,23 @@ class ModalElement extends BaseElement {
 
     const callback = options.callback || function() {};
 
-    this._doorLock.waitUnlock(() => {
-      const unlock = this._doorLock.lock(),
-        animator = this._animatorFactory.newAnimator(options);
+    const tryHide = () => {
+      const unlock = this._doorLock.lock();
+      const animator = this._animatorFactory.newAnimator(options);
 
-      animator.hide(this, () => {
-        this.style.display = 'none';
-        unlock();
-        callback();
+      return new Promise(resolve => {
+        animator.hide(this, () => {
+          this.style.display = 'none';
+          unlock();
+
+          callback();
+          resolve(this);
+        });
       });
+    };
+
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => resolve(tryHide()));
     });
   }
 
