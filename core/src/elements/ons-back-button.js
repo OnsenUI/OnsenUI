@@ -29,8 +29,8 @@ class BackButtonElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -54,6 +54,12 @@ class BackButtonElement extends BaseElement {
 
     this.appendChild(icon);
     this.appendChild(label);
+
+    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   /**
