@@ -74,8 +74,8 @@ class TabbarElement extends BaseElement {
     this._tabbarId = generateId();
 
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -114,6 +114,8 @@ class TabbarElement extends BaseElement {
     if (this._hasTopTabbar()) {
       this._prepareForTopTabbar();
     }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   _hasTopTabbar() {
