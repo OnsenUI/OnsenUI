@@ -263,6 +263,43 @@ util.hasModifier = (target, modifierName) => {
 };
 
 /**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @return {Boolean} Whether it was added or not.
+ */
+util.addModifier = (target, modifierName) => {
+  if (util.hasModifier(target, modifierName)) {
+    return false;
+  }
+
+  modifierName = modifierName.trim();
+  let modifierAttribute = target.getAttribute('modifier') || '';
+  target.setAttribute('modifier', modifierAttribute ? modifierAttribute.trim() + ' ' + modifierName : modifierName);
+  return true;
+};
+
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @return {Boolean} Whether it was found or not.
+ */
+util.removeModifier = (target, modifierName) => {
+  if (!target.getAttribute('modifier')) {
+    return false;
+  }
+
+  const modifiers = target
+    .getAttribute('modifier')
+    .trim()
+    .split(/\s+/);
+
+  const newModifiers = modifiers.filter(item => item && item !== modifierName);
+  target.setAttribute('modifier', newModifiers.join(' '));
+
+  return modifiers.length !== newModifiers.length;
+};
+
+/**
  * @param {String}
  * @return {Object}
  */

@@ -17,13 +17,15 @@ limitations under the License.
 
 import deviceBackButtonDispatcher from './device-back-button-dispatcher';
 import DoorLock from './doorlock';
+import platform from './platform';
 
 const ons = {};
 
 ons._readyLock = new DoorLock();
 ons._config = {
   autoStatusBarFill: true,
-  animationsDisabled: false
+  animationsDisabled: false,
+  autoStyling: true
 };
 
 waitDeviceReady();
@@ -111,6 +113,100 @@ ons.disableAnimations = () => {
  */
 ons.enableAnimations = () => {
   ons._config.animationsDisabled = false;
+};
+
+/**
+ * Disable automatic styling.
+ */
+ons.disableAutoStyling = () => {
+  ons._config.autoStyling = false;
+};
+
+/**
+ * Enable automatic styling based on OS (default).
+ */
+ons.enableAutoStyling = () => {
+  ons._config.autoStyling = true;
+};
+
+/**
+ * @param {HTMLElement} element
+ */
+ons._prepareAutoStyling = element => {
+  if (!ons._config.autoStyling || element.hasAttribute('disable-auto-styling')) {
+    return;
+  }
+
+  switch (platform.getMobileOS()) {
+
+    case 'android':
+
+      if (!/ons-fab|ons-speed-dial|ons-progress/.test(element.tagName.toLowerCase()) &&
+        !/material/.test(element.getAttribute('modifier'))) {
+
+        const modifiersMap = {
+          'quiet': 'material--flat',
+          'light': 'material--flat',
+          'outline': 'material--flat',
+          'cta': '',
+          'large--quiet': 'material--flat large',
+          'large--cta': 'large',
+          'noborder': '',
+          'chevron': '',
+          'tappable': ''
+        };
+
+        const oldModifier = element.getAttribute('modifier') || '';
+        element.setAttribute('modifier', '');
+
+        let newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
+        newModifier.unshift('material');
+
+        element.setAttribute('modifier', newModifier.join(' ').trim());
+      }
+
+      if (/ons.*-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/
+        .test(element.tagName.toLowerCase())
+        && !element.hasAttribute('effect')
+        && !ons._util.findChild(element, 'ons-ripple')) {
+
+
+        if (element.tagName.toLowerCase() === 'ons-list-item') {
+          if (element.hasAttribute('tappable')) {
+            element.setAttribute('effect', 'ripple');
+            element.removeAttribute('tappable');
+          }
+        } else {
+          element.setAttribute('effect', 'ripple');
+        }
+      }
+
+      break;
+
+    case 'ios':
+
+      if (/material/.test(element.getAttribute('modifier'))) {
+        ons._util.removeModifier(element, 'material');
+
+        if (ons._util.removeModifier(element, 'material--flat')) {
+          ons._util.addModifier(element, (ons._util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
+        }
+
+        if (!element.getAttribute('modifier')) {
+          element.removeAttribute('modifier');
+        }
+      }
+
+      if (element.hasAttribute('effect')) {
+        if (element.getAttribute('effect') === 'ripple' && element.tagName.toLowerCase() === 'ons-list-item') {
+          element.setAttribute('tappable', '');
+        }
+
+        element.removeAttribute('effect');
+      }
+
+      break;
+  }
 };
 
 /**
