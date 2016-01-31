@@ -151,4 +151,24 @@ describe('OnsBackButtonElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-back-button');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+
+    it('removes \'material\' modifiers and effects on iOS', () => {
+      ons.platform.select('ios');
+      let e = ons._util.createElement('<ons-back-button modifier="material" effect="ripple"></ons-back-button>');
+      expect(e.getAttribute('modifier')).not.to.equal('material');
+      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      expect(e.firstChild.tagName.toLowerCase()).not.to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+  });
 });
