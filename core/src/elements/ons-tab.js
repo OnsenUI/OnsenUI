@@ -44,8 +44,8 @@ class TabElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -82,6 +82,12 @@ class TabElement extends BaseElement {
       this._hasDefaultTemplate = true;
       this._updateDefaultTemplate();
     }
+
+    if (this.getAttribute('effect') === 'ripple' && !util.findChild(button, 'ons-ripple')) {
+      button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   _updateDefaultTemplate() {
