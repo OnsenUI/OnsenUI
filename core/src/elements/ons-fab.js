@@ -23,24 +23,30 @@ class FabElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
+      this._updatePosition();
+      this.hide();
 
       this.setAttribute('_compiled', '');
     }
-
-    this.classList.add('fab');
-    this._updatePosition();
-    this.hide();
   }
 
   _compile() {
-    var content = document.createElement('span');
+    this.classList.add('fab');
+
+    let content = document.createElement('span');
     content.classList.add('fab__icon');
 
-    const children = util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
+    util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
 
     this.insertBefore(content, this.firstChild);
+
+    if (this.getAttribute('effect') === 'ripple' && !util.findChild(content, 'ons-ripple')) {
+      content.insertBefore(document.createElement('ons-ripple'), content.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   attributeChangedCallback(name, last, current) {
