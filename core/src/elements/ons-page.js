@@ -35,8 +35,8 @@ class PageElement extends BaseElement {
     this.classList.add('page');
 
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -223,6 +223,8 @@ class PageElement extends BaseElement {
     fragment.appendChild(content);
 
     this.appendChild(fragment);
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   _registerExtraElement(element) {
