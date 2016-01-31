@@ -285,4 +285,24 @@ describe('OnsTabElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-tab');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.querySelector('.tab-bar__button').firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+
+    it('removes \'material\' modifiers and effects on iOS', () => {
+      ons.platform.select('ios');
+      let e = ons._util.createElement('<ons-tab modifier="material" effect="ripple"></ons-tab>');
+      expect(e.getAttribute('modifier')).not.to.equal('material');
+      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      expect(e.querySelector('.tab-bar__button').childNodes).to.be.empty;
+      ons.platform.select('');
+    });
+  });
 });
