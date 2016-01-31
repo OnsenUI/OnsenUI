@@ -24,14 +24,28 @@ const scheme = {'': 'button--*'};
 class ButtonElement extends BaseElement {
 
   createdCallback() {
-    this.classList.add('button');
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
+      this._compile();
+
+      this.setAttribute('_compiled', '');
+    }
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
+  }
+
+  _compile() {
+    this.classList.add('button');
+
+    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 }
 
