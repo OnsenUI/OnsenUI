@@ -108,4 +108,20 @@ describe('OnsToolbarElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-toolbar');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+
+    it('removes \'material\' modifier on iOS', () => {
+      ons.platform.select('ios');
+      let e = ons._util.createElement('<ons-toolbar modifier="material"></ons-toolbar>');
+      expect(e.getAttribute('modifier')).not.to.equal('material');
+      ons.platform.select('');
+    });
+  });
 });
