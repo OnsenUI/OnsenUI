@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from 'ons/ons';
 import util from 'ons/util';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
@@ -31,8 +32,8 @@ class ToolbarElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -116,6 +117,8 @@ class ToolbarElement extends BaseElement {
     }
 
     this._ensureToolbarItemElements();
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   _ensureToolbarItemElements() {
