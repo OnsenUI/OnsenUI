@@ -97,8 +97,8 @@ class SwitchElement extends ExtendableLabelElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -130,6 +130,8 @@ class SwitchElement extends ExtendableLabelElement {
       this.appendChild(template.children[0]);
     }
     this._getCheckbox().setAttribute('name', generateId());
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   detachedCallback() {
