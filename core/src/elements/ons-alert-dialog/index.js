@@ -85,8 +85,8 @@ class AlertDialogElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -129,6 +129,8 @@ class AlertDialogElement extends BaseElement {
     if (this.getAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   /**
