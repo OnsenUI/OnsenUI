@@ -59,6 +59,24 @@ describe('OnsRippleElement', () => {
     });
   });
 
+  describe('#attachedCallback()', () => {
+    beforeEach(() => {
+      var container = document.createElement('div');
+      var ripple = new OnsRippleElement();
+    });
+
+    it('changes parent position', () => {
+      container.appendChild(ripple);
+      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('relative');
+    });
+
+    it('it doesn\'t change parent position', () => {
+      container.style.position = 'absolute';
+      container.appendChild(ripple);
+      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('absolute');
+    });
+  });
+
   describe('#attributeChangedCallback()', () => {
     var attributes = ['color', 'target', 'center', 'start-radius', 'background'];
 

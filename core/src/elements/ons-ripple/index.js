@@ -139,7 +139,8 @@ class RippleElement extends BaseElement {
 
 
   attachedCallback() {
-    if (window.getComputedStyle(this.parentNode).getPropertyValue('position') == 'static') {
+    if (this.getAttribute('target') != 'autofind' &&
+        window.getComputedStyle(this.parentNode).getPropertyValue('position') == 'static') {
       this.parentNode.style.position = 'relative';
     }
 
