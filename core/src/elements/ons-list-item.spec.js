@@ -93,4 +93,35 @@ describe('OnsListItemElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android if tappable', () => {
+      ons.platform.select('android');
+      let e = ons._util.createElement('<ons-list-item tappable></ons-list-item>');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+
+    it('adds \'material\' effects on Android inside label if ons-input exists', () => {
+      ons.platform.select('android');
+      let e = ons._util.createElement('<ons-list-item tappable><ons-input></ons-input></ons-list-item>');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('label');
+      expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+
+    it('removes \'material\' modifiers and effects on iOS', () => {
+      ons.platform.select('ios');
+      let e = ons._util.createElement('<ons-list-item modifier="material" effect="ripple"></ons-list-item>');
+      expect(e.getAttribute('modifier')).not.to.equal('material');
+      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      expect(e.querySelector('ons-ripple')).not.to.be.ok;
+      expect(e.hasAttribute('tappable')).to.be.ok;
+      ons.platform.select('');
+    });
+  });
 });
