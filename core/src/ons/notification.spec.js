@@ -176,4 +176,26 @@ describe('ons.notification', () => {
       expect(callback).to.have.been.called.with(null);
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', (done) => {
+      ons.platform.select('android');
+      ons.notification.alert({message: 'test'})
+        .then((dialog) => {
+          expect(dialog.getAttribute('modifier')).to.equal('material');
+          ons.platform.select('');
+          done();
+        });
+    });
+
+    it('removes \'material\' modifier on iOS', () => {
+      ons.platform.select('ios');
+      ons.notification.alert({message: 'test'})
+        .then((dialog) => {
+          expect(dialog.getAttribute('modifier')).not.to.equal('material');
+          ons.platform.select('');
+          done();
+        });
+    });
+  });
 });
