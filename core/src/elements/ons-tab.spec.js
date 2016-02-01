@@ -301,7 +301,7 @@ describe('OnsTabElement', () => {
       let e = ons._util.createElement('<ons-tab modifier="material" effect="ripple"></ons-tab>');
       expect(e.getAttribute('modifier')).not.to.equal('material');
       expect(e.getAttribute('effect')).not.to.equal('ripple');
-      expect(e.querySelector('.tab-bar__button').childNodes).to.be.empty;
+      expect(e.querySelector('ons-ripple')).not.to.be.ok;
       ons.platform.select('');
     });
   });

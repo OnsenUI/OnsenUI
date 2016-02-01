@@ -50,7 +50,7 @@ describe('ons-button', () => {
       let e = ons._util.createElement('<ons-button modifier="material" effect="ripple"></ons-button>');
       expect(e.getAttribute('modifier')).not.to.equal('material');
       expect(e.getAttribute('effect')).not.to.equal('ripple');
-      expect(e.childNodes).to.be.empty;
+      expect(e.querySelector('ons-ripple')).not.to.be.ok;
       e = ons._util.createElement('<ons-button modifier="material--flat"></ons-button>');
       expect(e.getAttribute('modifier')).to.equal('quiet');
       ons.platform.select('');

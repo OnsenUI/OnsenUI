@@ -230,7 +230,7 @@ describe('OnsFabElement', () => {
       ons.platform.select('ios');
       let e = ons._util.createElement('<ons-fab effect="ripple"></ons-fab>');
       expect(e.getAttribute('effect')).not.to.equal('ripple');
-      expect(e.firstChild.childNodes).to.be.empty;
+      expect(e.querySelector('ons-ripple')).not.to.be.ok;
       ons.platform.select('');
     });
   });
