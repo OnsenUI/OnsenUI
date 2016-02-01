@@ -265,3 +265,19 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-alert-dialog');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+
+    it('removes \'material\' modifier on iOS', () => {
+      ons.platform.select('ios');
+      let e = ons._util.createElement('<ons-alert-dialog modifier="material"></ons-alert-dialog>');
+      expect(e.getAttribute('modifier')).not.to.equal('material');
+      ons.platform.select('');
+    });
+  });
