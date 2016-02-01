@@ -14,162 +14,39 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
  */
-
 .ripple {
   display: block;
   position: absolute;
-  border-radius: inherit;
   overflow: hidden;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 }
-  
-.ripple__wave {
-  display: block;
+
+.ripple[target="children"]{
+  display: inline-block;
+  position: relative;
+}
+
+.ripple__background {
+  background: rgba(255, 255, 255, 0.2);
   position: absolute;
-  background: rgba(255,255,255,.3);
-  border-radius: 100%;
-  -webkit-transform: scale(0);
-  transform: scale(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+.ripple__wave {
+  background: rgba(255, 255, 255, 0.2);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
   pointer-events: none;
-}
-
-.ripple__wave--animate {
-  -webkit-animation: ripple 0.3s linear;
-  animation: ripple 0.3s linear;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-}
-  
-.ripple__wave--animate-center {
-  -webkit-animation: rippleCenter 0.1s linear;
-  animation: rippleCenter 0.1s linear;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-}
-  
-.ripple__wave--done {
-  -webkit-animation: rippleOut 0.2s linear;
-  animation: rippleOut 0.2s linear;
-}
-  
-.ripple__wave--done-center {
-  -webkit-animation: rippleOutCenter 0.2s linear;
-  animation: rippleOutCenter 0.2s linear;
-}
-
-@-webkit-keyframes rippleOut {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-}
-
-@keyframes rippleOut { 
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-}
-
-
-@-webkit-keyframes ripple {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-}
-
-@keyframes ripple { 
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-}
-
-
-@-webkit-keyframes rippleCenter {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@keyframes rippleCenter { 
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@-webkit-keyframes rippleOutCenter {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@keyframes rippleOutCenter { 
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
 }
