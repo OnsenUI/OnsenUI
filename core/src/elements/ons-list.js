@@ -23,6 +23,15 @@ const scheme = {'': 'list--*'};
 
 class ListElement extends BaseElement {
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
+      this._compile();
+
+      this.setAttribute('_compiled', '');
+    }
+  }
+
+  _compile() {
     this.classList.add('list');
     ModifierUtil.initModifier(this, scheme);
   }
