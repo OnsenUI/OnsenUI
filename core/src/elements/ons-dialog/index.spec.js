@@ -144,6 +144,15 @@ describe('OnsDialogElement', () => {
       dialog.show();
       expect(dialog.style.display).to.equal('none');
     });
+
+    it('returns a promise that resolves to the displayed element', () => {
+      return expect(dialog.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(dialog);
+          expect(element.style.display).to.equal('block');
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
@@ -184,6 +193,15 @@ describe('OnsDialogElement', () => {
 
       dialog.hide({animation: 'none'});
       expect(dialog.style.display).to.equal('block');
+    });
+
+    it('returns a promise that resolves to the hidden element', () => {
+      return expect(dialog.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(dialog);
+          expect(element.style.display).to.equal('none');
+        }
+      );
     });
   });
 

@@ -29,6 +29,12 @@ limitations under the License.
   position: relative;
 }
 
+ons-list-item .ripple__wave, ons-list-item .ripple__background,
+.button--material--flat .ripple__wave, .button--material--flat .ripple__background{
+  background: rgba(189, 189, 189, 0.3);
+}
+
+
 .ripple__background {
   background: rgba(255, 255, 255, 0.2);
   position: absolute;

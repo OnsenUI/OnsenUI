@@ -5,7 +5,13 @@ CHANGELOG
 v2.0.0-beta.7
 ----
  * core: Fixed [#1181](https://github.com/OnsenUI/OnsenUI/issues/1181).
- * core: Fixed [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
+ * ons-fab: Fixed [#1192](https://github.com/OnsenUI/OnsenUI/issues/1192).
+ * ons-tabbar: Correctly applies animation-options.
+ * ons-popover: Correctly applies animation-options.
+ * ons-alert-dialog: Correctly applies animation-options.
+ * ons-carousel: Accepts animation-options.
+ * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
+ * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
 
 v2.0.0-beta.6
 ----

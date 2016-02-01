@@ -81,10 +81,10 @@ describe('OnsRippleElement', () => {
 
     it('sets the color of the background based on the "background" attribute', () => {
       ripple.setAttribute('color', 'black');
-      ripple.setAttribute('background', 'cyan');
-      expect(background.style.background).to.equal('cyan');
+      ripple.setAttribute('background', 'rgb(0, 255, 255)');
+      expect(background.style.background).to.equal('rgb(0, 255, 255)');
       ripple.setAttribute('color', 'lime');
-      expect(background.style.background).to.equal('cyan');
+      expect(background.style.background).to.equal('rgb(0, 255, 255)');
     });
 
     it('disables background if the "background" attribute is "none"', () => {
@@ -94,7 +94,7 @@ describe('OnsRippleElement', () => {
 
     it('makes sure the background is enabled if "background != none"', () => {
       background.setAttribute('disabled', 'disabled');
-      ripple.setAttribute('background', 'royalblue');
+      ripple.setAttribute('background', 'rgb(0, 123, 5)');
       expect(background.hasAttribute('disabled')).to.be.false;
     });
   });
