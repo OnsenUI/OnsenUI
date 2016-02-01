@@ -34,10 +34,33 @@ const scheme = {
 
 class ListItemElement extends BaseElement {
   createdCallback() {
-    this.classList.add('list__item');
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
+      this._compile();
+
+      this.setAttribute('_compiled', '');
+    }
 
     this._gestureDetector = new GestureDetector(this);
+  }
+
+  _compile() {
+    this.classList.add('list__item');
+
+    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+        let ripple = document.createElement('ons-ripple');
+        this.insertBefore(ripple, this.firstChild);
+
+      if (this.querySelector('ons-input')) {
+        ripple.setAttribute('target', 'autofind');
+        let content = document.createElement('label');
+        content.style.display = 'inherit';
+        util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
+        this.appendChild(content);
+      }
+    }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   attributeChangedCallback(name, last, current) {
