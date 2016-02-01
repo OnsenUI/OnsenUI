@@ -66,8 +66,8 @@ class PopoverElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
+      ons._prepareAutoStyling(this);
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.setAttribute('_compiled', '');
     }
@@ -258,6 +258,8 @@ class PopoverElement extends BaseElement {
     if (this.hasAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   /**
