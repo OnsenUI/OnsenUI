@@ -68,9 +68,10 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static applyDiffToElement(diff, element, scheme) {
+    const matches = (e, s) => (e.matches || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector).call(e, s);
     for (let selector in scheme) {
       if (scheme.hasOwnProperty(selector)) {
-        let targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
+        let targetElements = !selector || matches(element, selector) ? [element] : element.querySelectorAll(selector);
         for (let i = 0; i < targetElements.length; i++) {
           ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
         }
