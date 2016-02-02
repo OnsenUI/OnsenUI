@@ -4,6 +4,10 @@ describe('OnsRippleElement', () => {
   var container, ripple, wave, background;
 
   var spyOn = chai.spy.on.bind(chai.spy, OnsRippleElement.prototype);
+  var dummyDetector = {
+    on: () => {},
+    off: () => {}
+  };
 
   beforeEach(() => {
     container = ons._util.createElement(`
@@ -59,7 +63,7 @@ describe('OnsRippleElement', () => {
     });
   });
 
-  describe('#attachedCallback()', () => {
+  describe('#_updateParent()', () => {
     beforeEach(() => {
       var container = document.createElement('div');
       var ripple = new OnsRippleElement();
@@ -67,13 +71,22 @@ describe('OnsRippleElement', () => {
 
     it('changes parent position', () => {
       container.appendChild(ripple);
+      ripple._updateParent();
       expect(window.getComputedStyle(container).getPropertyValue('position')).equal('relative');
     });
 
-    it('it doesn\'t change parent position', () => {
+    it('it doesn\'t change parent position when != static', () => {
       container.style.position = 'absolute';
       container.appendChild(ripple);
+      ripple._updateParent();
       expect(window.getComputedStyle(container).getPropertyValue('position')).equal('absolute');
+    });
+
+    it('it doesn\'t change parent position when `target="autofind"`', () => {
+      ripple.setAttribute('target', 'autofind');
+      container.appendChild(ripple);
+      ripple._updateParent();
+      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('static');
     });
   });
 
@@ -155,13 +168,14 @@ describe('OnsRippleElement', () => {
     });
   });
 
-
-  var itCalls = (calling) => {
+  var itCalls = calling => {
     return {
       whenUsing: (whenUsing, ...rest) => {
         it(`calls ${calling}`, () => {
           var spy = spyOn(calling),
             ripple = new OnsRippleElement();
+
+          ripple._gestureDetector = dummyDetector;
 
           ripple[whenUsing].apply(ripple, rest);
           expect(spy).to.have.been.called.once;
@@ -197,18 +211,22 @@ describe('OnsRippleElement', () => {
 
   describe('#_onTap()', () => {
     itCalls('_rippleAnimation').whenUsing('_onTap', e);
+    itCalls('_updateParent').whenUsing('_onTap', e);
   });
 
   describe('#_onHold()', () => {
     itCalls('_rippleAnimation').whenUsing('_onHold', e);
+    itCalls('_updateParent').whenUsing('_onHold', e);
 
     it('sets _holding', () => {
+      ripple._gestureDetector = dummyDetector;
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
     });
 
     it('unsets _holding', () => {
+      ripple._gestureDetector = dummyDetector;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
       setTimeout(() => {
@@ -223,6 +241,7 @@ describe('OnsRippleElement', () => {
     it('calls _onRelease', () => {
       var spy = spyOn('_onRelease');
 
+      ripple._gestureDetector = dummyDetector;
       ripple._onHold(e);
       ripple._onDragStart(e);
       expect(spy).to.have.been.called.once;
@@ -231,6 +250,7 @@ describe('OnsRippleElement', () => {
 
   describe('#_onRelease()', () => {
     it('unsets _holding', () => {
+      ripple._gestureDetector = dummyDetector;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
       ripple._onRelease(e);

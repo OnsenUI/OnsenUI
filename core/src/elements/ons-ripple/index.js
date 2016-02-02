@@ -18,10 +18,8 @@ limitations under the License.
 import util from 'ons/util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
-import AnimatorJS from './animator-js';
-import AnimatorCSS from './animator-css';
-
-var Animator = [AnimatorJS, AnimatorCSS][1];
+import Animator from './animator-css';
+// import Animator from './animator-js';
 
 class RippleElement extends BaseElement {
 
@@ -36,7 +34,6 @@ class RippleElement extends BaseElement {
     }
 
     this._animator = new Animator();
-    this._gestureDetector = new GestureDetector(this, {holdTimeout: 300});
 
     ['color', 'target', 'center', 'start-radius', 'background'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
@@ -96,9 +93,19 @@ class RippleElement extends BaseElement {
     }, duration);
   }
 
+  _updateParent(){
+    if (!this._parentUpdated && this.parentNode) {
+      if (this.getAttribute('target') != 'autofind' &&
+          window.getComputedStyle(this.parentNode).getPropertyValue('position') == 'static') {
+        this.parentNode.style.position = 'relative';
+      }
+      this._parentUpdated = true;
+    }
+  }
 
   _onTap(e){
     if (!this.isDisabled()) {
+      this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
         this._animator.fade(this._wave);
         this._animator.fade(this._background);
@@ -109,6 +116,7 @@ class RippleElement extends BaseElement {
 
   _onHold(e){
     if (!this.isDisabled()) {
+      this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
 
       this._gestureDetector.on('release', this._onRelease);
@@ -139,14 +147,10 @@ class RippleElement extends BaseElement {
 
 
   attachedCallback() {
-    if (this.getAttribute('target') != 'autofind' &&
-        window.getComputedStyle(this.parentNode).getPropertyValue('position') == 'static') {
-      this.parentNode.style.position = 'relative';
-    }
-
     if (ons._config.animationsDisabled) {
       this.setDisabled(true);
     } else {
+      this._gestureDetector = new GestureDetector(this, {holdTimeout: 300});
       this._gestureDetector.on('tap', this._onTap);
       this._gestureDetector.on('hold', this._onHold);
       this._gestureDetector.on('dragstart', this._onDragStart);
@@ -155,9 +159,11 @@ class RippleElement extends BaseElement {
 
 
   detachedCallback() {
-    this._gestureDetector.off('tap', this._onTap);
-    this._gestureDetector.off('hold', this._onHold);
-    this._gestureDetector.off('dragstart', this._onDragStart);
+    if (this._gestureDetector) {
+      this._gestureDetector.off('tap', this._onTap);
+      this._gestureDetector.off('hold', this._onHold);
+      this._gestureDetector.off('dragstart', this._onDragStart);
+    }
   }
 
 
@@ -205,7 +211,7 @@ class RippleElement extends BaseElement {
   }
 
   /**
-   * True if either ripple-effect is disabled.
+   * True if ripple-effect is disabled.
    *
    * @return {Boolean}
    */
