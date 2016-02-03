@@ -250,8 +250,8 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @method leftIsOpened
-   * @signature leftIsOpened()
+   * @method leftIsOpen
+   * @signature leftIsOpen()
    * @return {Boolean}
    *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -264,8 +264,8 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @method rightIsOpened
-   * @signature rightIsOpened()
+   * @method rightIsOpen
+   * @signature rightIsOpen()
    * @return {Boolean}
    *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -299,7 +299,7 @@ class SplitterElement extends BaseElement {
    *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
    * @description
    *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
-   *   [ja]ons-splitter-content用紙に表示されるページをpageUrlに指定します。[/ja]
+   *   [ja]ons-splitter-content要素に表示されるページをpageUrlに指定します。[/ja]
    */
   loadContentPage(page, options = {}) {
     const content = this._getContentElement();

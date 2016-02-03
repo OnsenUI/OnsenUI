@@ -6,6 +6,7 @@
  * @param {Array} params.attributes
  * @param {Array} params.events
  * @param {Array} params.properties
+ * @param {Array} params.elements
  */
 function renderElement(params) {
   var main = params.main;
@@ -14,6 +15,7 @@ function renderElement(params) {
   var attributes = params.attributes;
   var events = params.events;
   var properties = params.properties;
+  var elements = params.elements;
 
   return {
     name: main.name,
@@ -22,15 +24,34 @@ function renderElement(params) {
     description: main.description || '',
     deprecated: main.isDeprecated,
     note: tagdict.get('note') || undefined,
+    extensionOf: main.extensionOf,
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
     modifiers: tagdict.getMany('modifier').map(renderNamedDescription),
     codepens: tagdict.getMany('codepen').map(renderCodepen),
+    attributes: attributes.map(renderAttribute),
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
-    attributes: attributes.map(renderAttribute),
     methods: methods.map(renderMethod),
+    elements: elements.map(renderExtraElement)
+  };
+}
+
+function renderExtraElement(element) {
+  var tagdict = element.tagdict;
+
+  return {
+    name: element.name,
+    path: element.file.relativePath,
+    description: element.description || '',
+    deprecated: element.isDeprecated,
+    extensionOf: element.extensionOf,
+    note: tagdict.get('note') || undefined,
+    examples: tagdict.getMany('example'),
+    seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
+    guides: tagdict.getMany('guide').map(renderNamedDescription),
+    codepens: tagdict.getMany('codepen').map(renderCodepen),
   };
 }
 
@@ -41,6 +62,7 @@ function renderElement(params) {
  * @param {Array} params.methods
  * @param {Array} params.events
  * @param {Array} params.properties
+ * @param {Array} params.objects
  */
 function renderObject(params) {
   var main = params.main;
@@ -48,6 +70,7 @@ function renderObject(params) {
   var methods = params.methods;
   var events = params.events;
   var properties = params.properties;
+  var objects = params.objects;
 
   return {
     name: main.name,
@@ -55,6 +78,7 @@ function renderObject(params) {
     category: tagdict.get('category', ''),
     description: main.description || '',
     deprecated: main.isDeprecated,
+    extensionOf: main.extensionOf,
     note: tagdict.get('note') || undefined,
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
@@ -63,6 +87,24 @@ function renderObject(params) {
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
     methods: methods.map(renderMethod),
+    objects: objects.map(renderExtraObject)
+  };
+}
+
+function renderExtraObject(object) {
+  var tagdict = object.tagdict;
+
+  return {
+    name: object.name,
+    path: object.file.relativePath,
+    description: object.description || '',
+    deprecated: object.isDeprecated,
+    extensionOf: object.extensionOf,
+    note: object.tagdict.get('note') || undefined,
+    examples: object.tagdict.getMany('example'),
+    seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
+    guides: tagdict.getMany('guide').map(renderNamedDescription),
+    codepens: tagdict.getMany('codepen').map(renderCodepen)
   };
 }
 
@@ -74,6 +116,7 @@ function renderEvent(event) {
   return {
     name: event.name,
     params: event.params.map(renderParam),
+    extensionOf: event.extensionOf,
     description: event.description || '',
     examples: event.tagdict.getMany('example'),
     deprecated: event.isDeprecated
@@ -82,6 +125,7 @@ function renderEvent(event) {
 
 /**
  * @param {PropertyDoc} property
+ * @param {string} [extensionName]
  * @return {Object}
  */
 function renderProperty(property) {
@@ -89,6 +133,7 @@ function renderProperty(property) {
     name: property.name,
     type: renderType(property.type),
     description: property.description || '',
+    extensionOf: property.extensionOf,
     initonly: property.tagdict.has('initonly'),
     deprecated: property.isDeprecated
   };
@@ -122,6 +167,7 @@ function renderMethod(method) {
     name: method.name,
     params: method.params.map(renderParam),
     returns: renderReturns(method.returns),
+    extensionOf: method.extensionOf,
     signature: method.tagdict.get('signature', method.name + '()'),
     description: method.description || '',
     deprecated: method.isDeprecated,
@@ -132,7 +178,7 @@ function renderParam(param) {
   return {
     name: param.name,
     type: renderType(param.type),
-    isOptional: param.isOptional,
+    isOptional: param.isOptional(),
     description: param.description
   };
 }
@@ -143,6 +189,7 @@ function renderAttribute(attribute) {
     type: renderType(attribute.type),
     description: attribute.tagdict.get('description', ''),
     deprecated: !!attribute.isDeprecated,
+    extensionOf: attribute.extensionOf,
     required: attribute.tagdict.has('required'),
     default: attribute.tagdict.get('default', null),
     initonly: attribute.tagdict.has('initonly')
@@ -184,7 +231,11 @@ function renderReturns(returns) {
  * @return {string}
  */
 function renderType(type) {
-  return type ? type.toString() : null;
+  if (typeof type === 'string') {
+    return type.replace(/^\{|}$/g, '');
+  } else {
+    return null;
+  }
 }
 
 module.exports = {

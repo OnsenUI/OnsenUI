@@ -13,6 +13,11 @@
     "description": {
       "type": "string",
       "required": true
+    },
+    "isOptional": {
+      "type": "boolean",
+      "required": true
     }
-  }
+  },
+  "additionalProperties": false
 }

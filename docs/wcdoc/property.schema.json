@@ -14,6 +14,9 @@
       "type": "string",
       "required": true
     },
+    "extensionOf": {
+      "type": "string"
+    },
     "initonly": {
       "type": "boolean",
       "required": true
@@ -22,5 +25,6 @@
       "type": "boolean",
       "required": true
     }
-  }
+  },
+  "additionalProperties": false
 }
