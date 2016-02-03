@@ -183,6 +183,7 @@ class AlertDialogElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback after dialog is shown
+   * @return {Promise} Resolves to the displayed element
    */
   show(options = {}) {
     let cancel = false;
@@ -201,21 +202,31 @@ class AlertDialogElement extends BaseElement {
     });
 
     if (!cancel) {
-      this._doorLock.waitUnlock(() => {
+      const tryShow = () => {
         const unlock = this._doorLock.lock();
-
-        this._mask.style.display = 'block';
-        this._mask.style.opacity = 1;
-        this.style.display = 'block';
-
         const animator = this._animatorFactory.newAnimator(options);
-        animator.show(this, () => {
-          this._visible = true;
-          unlock();
-          util.triggerElementEvent(this, 'postshow', {alertDialog: this});
-          callback();
+
+        this.style.display = 'block';
+        this._mask.style.opacity = '1';
+
+        return new Promise(resolve => {
+          animator.show(this, () => {
+            this._visible = true;
+            unlock();
+
+            util.triggerElementEvent(this, 'postshow', {alertDialog: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryShow()));
       });
+    } else {
+      return Promise.reject('Canceled in preshow event.');
     }
   }
 
@@ -226,10 +237,16 @@ class AlertDialogElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback after dialog is hidden
+   * @return {Promise} Resolves to the hidden element
    */
   hide(options = {}) {
     let cancel = false;
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     util.triggerElementEvent(this, 'prehide', {
       alertDialog: this,
@@ -239,19 +256,29 @@ class AlertDialogElement extends BaseElement {
     });
 
     if (!cancel) {
-      this._doorLock.waitUnlock(() => {
+      const tryHide = () => {
         const unlock = this._doorLock.lock();
-
         const animator = this._animatorFactory.newAnimator(options);
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          this._mask.style.display = 'none';
-          this._visible = false;
-          unlock();
-          util.triggerElementEvent(this, 'posthide', {alertDialog: this});
-          callback();
+
+        return new Promise(resolve => {
+          animator.hide(this, () => {
+            this.style.display = 'none';
+            this._visible = false;
+            unlock();
+
+            util.triggerElementEvent(this, 'posthide', {alertDialog: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryHide()));
       });
+    } else {
+      return Promise.reject('Canceled in prehide event.');
     }
   }
 

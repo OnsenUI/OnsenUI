@@ -272,6 +272,7 @@ class PopoverElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback
+   * @return {Promise} Resolves to the displayed element
    */
   show(target, options = {}) {
     const callback = options.callback || function() {};
@@ -286,16 +287,15 @@ class PopoverElement extends BaseElement {
      throw new Error('Target undefined');
     }
 
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     if (options.animation &&
       !(options.animation in _animatorDict)) {
       throw new Error(`Animator ${options.animation} is not registered.`);
     }
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
 
     let canceled = false;
     util.triggerElementEvent(this, 'preshow', {
@@ -306,23 +306,33 @@ class PopoverElement extends BaseElement {
     });
 
     if (!canceled) {
-      this._doorLock.waitUnlock(() => {
+      const tryShow = () => {
         const unlock = this._doorLock.lock();
+        const animator = this._animatorFactory.newAnimator(options);
 
         this.style.display = 'block';
 
         this._currentTarget = target;
         this._positionPopover(target);
 
-        const animator = this._animatorFactory.newAnimator(options);
-        animator.show(this, () => {
-          this._visible = true;
-          unlock();
+        return new Promise(resolve => {
+          animator.show(this, () => {
+            this._visible = true;
+            unlock();
 
-          util.triggerElementEvent(this, 'postshow', {popover: this});
-          callback();
+            util.triggerElementEvent(this, 'postshow', {popover: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryShow()));
       });
+    } else {
+      return Promise.reject('Canceled in preshow event.');
     }
   }
 
@@ -333,9 +343,20 @@ class PopoverElement extends BaseElement {
    * @param {String} [options.animation] animation type
    * @param {Object} [options.animationOptions] animation options
    * @param {Function} [options.callback] callback
+   * @return {Promise} Resolves to the hidden element
    */
   hide(options = {}) {
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    if (options.animation &&
+      !(options.animation in _animatorDict)) {
+      throw new Error(`Animator ${options.animation} is not registered.`);
+    }
 
     let canceled = false;
     util.triggerElementEvent(this, 'prehide', {
@@ -346,18 +367,29 @@ class PopoverElement extends BaseElement {
     });
 
     if (!canceled) {
-      this._doorLock.waitUnlock(() => {
+      const tryHide = () => {
         const unlock = this._doorLock.lock();
-
         const animator = this._animatorFactory.newAnimator(options);
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          this._visible = false;
-          unlock();
-          util.triggerElementEvent(this, 'posthide', {popover: this});
-          callback();
+
+        return new Promise(resolve => {
+          animator.hide(this, () => {
+            this.style.display = 'none';
+            this._visible = false;
+            unlock();
+
+            util.triggerElementEvent(this, 'posthide', {popover: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryHide()));
       });
+    } else {
+      return Promise.reject('Canceled in prehide event.');
     }
   }
 

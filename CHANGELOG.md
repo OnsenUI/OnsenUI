@@ -5,6 +5,12 @@ CHANGELOG
 v2.0.0-beta.7
 ----
  * core: Fixed [#1181](https://github.com/OnsenUI/OnsenUI/issues/1181).
+ * ons-fab: Fixed [#1192](https://github.com/OnsenUI/OnsenUI/issues/1192).
+ * ons-tabbar: Correctly applies animation-options.
+ * ons-popover: Correctly applies animation-options.
+ * ons-alert-dialog: Correctly applies animation-options.
+ * ons-carousel: Accepts animation-options.
+ * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
 
 v2.0.0-beta.6
 ----
@@ -322,7 +328,7 @@ v1.2.0
  * ons-navigator: Fixed [#228](https://github.com/OnsenUI/OnsenUI/issues/228).
  * ons-switch: Fixed [#252](https://github.com/OnsenUI/OnsenUI/issues/252). Model change is now bound correctly when using ngModel.
  * css-components: Fixed [#177](https://github.com/OnsenUI/OnsenUI/issues/177). Checkboxes and radio buttons are now clickable on iOS.
- * ons-button: Added several methods to the component. 
+ * ons-button: Added several methods to the component.
 
 v1.1.4
 ----

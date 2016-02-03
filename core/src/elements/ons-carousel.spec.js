@@ -173,6 +173,13 @@ describe('OnsCarouselElement', () => {
       carousel.setActiveCarouselItemIndex(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('returns a promise that resolves to the element', () => {
+      return expect(carousel.setActiveCarouselItemIndex(1)).to.be.eventually.fulfilled.then(element => {
+        expect(element).to.equal(carousel);
+        expect(element.getActiveCarouselItemIndex()).to.equal(1);
+      });
+    });
   });
 
   describe('#getActiveCarouselItemIndex()', () => {

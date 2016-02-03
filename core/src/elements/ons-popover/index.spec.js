@@ -181,12 +181,23 @@ describe('OnsPopoverElement', () => {
         return expect(promise).to.eventually.be.fulfilled;
       });
     });
+
+    it('returns a promise that resolves to the displayed element', () => {
+      return expect(popover.show(target)).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(popover);
+          expect(element.style.display).to.equal('block');
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    it('hides the popover', () => {
-      expect(popover.style.display).to.equal('none');
+    beforeEach(() => {
       popover.show(target, {animation: 'none'});
+    });
+
+    it('hides the popover', () => {
       expect(popover.style.display).to.equal('block');
       popover.hide({animation: 'none'});
       expect(popover.style.display).to.equal('none');
@@ -197,21 +208,19 @@ describe('OnsPopoverElement', () => {
         let promise = new Promise((resolve) =>
           popover.addEventListener('prehide', resolve)
         );
-        popover.show(target);
+
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
+
       it('can be cancelled', () => {
         popover.addEventListener('prehide', (event) => {
           event.detail.cancel();
         });
 
-        popover.show(target, {animation: 'none'});
-        expect(popover.style.display).to.equal('block');
-        popover.hide(target, {animation: 'none'});
+        popover.hide({animation: 'none'});
         expect(popover.style.display).to.equal('block');
       });
-
     });
 
     describe('\'posthide\' event', () => {
@@ -219,10 +228,19 @@ describe('OnsPopoverElement', () => {
         let promise = new Promise((resolve) =>
           popover.addEventListener('posthide', resolve)
         );
-        popover.show(target);
+
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
+    });
+
+    it('returns a promise that resolves to the hidden element', () => {
+      return expect(popover.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(popover);
+          expect(element.style.display).to.equal('none');
+        }
+      );
     });
   });
 
