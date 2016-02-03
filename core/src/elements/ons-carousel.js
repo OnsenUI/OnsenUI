@@ -518,21 +518,26 @@ class CarouselElement extends BaseElement {
   }
 
   /**
-   */
-  /**
    * @method next
    * @signature next([options])
    * @param {Object} [options]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {Function} [options.callback]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
-<<<<<<< HEAD
+   *   [en][/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animationOptions]
+   *   [en][/en]
+   *   [ja][/ja]
+   * @return {Promise}
+   *   [en]Resolves to the carousel element[/en]
+   *   [ja][/ja]
    * @description
    *   [en]Show next ons-carousel item.[/en]
    *   [ja]次のons-carousel-itemを表示します。[/ja]
-=======
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the carousel element
->>>>>>> master
    */
   next(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() + 1, options);
@@ -542,16 +547,23 @@ class CarouselElement extends BaseElement {
    * @method prev
    * @signature prev([options])
    * @param {Object} [options]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {Function} [options.callback]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
-<<<<<<< HEAD
+   *   [en][/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animationOptions]
+   *   [en][/en]
+   *   [ja][/ja]
+   * @return {Promise}
+   *   [en]Resolves to the carousel element[/en]
+   *   [ja][/ja]
    * @description
    *   [en]Show previous ons-carousel item.[/en]
    *   [ja]前のons-carousel-itemを表示します。[/ja]
-=======
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the carousel element
->>>>>>> master
    */
   prev(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() - 1, options);
@@ -1006,49 +1018,32 @@ class CarouselElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method first
    * @signature first()
+   * @return {Promise}
+   *   [en]Resolves to the carousel element[/en]
+   *   [ja][/ja]
    * @description
    *   [en]Show first ons-carousel item.[/en]
    *   [ja]最初のons-carousel-itemを表示します。[/ja]
-   */
-  first() {
-    this.setActiveCarouselItemIndex(0);
-  }
-
-  /**
-   * @method last
-   * @signature last()
-   * @description
-   *   [en]Show last ons-carousel item.[/en]
-   *   [ja]最後のons-carousel-itemを表示します。[/ja]
-   */
-  last() {
-    this.setActiveCarouselItemIndex(
-      Math.max(this.getCarouselItemCount() - 1, 0)
-=======
-   * @param {Object} [options]
-   * @param {Function} [options.callback]
-   * @param {String} [options.animation]
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the carousel element
    */
   first(options) {
     return this.setActiveCarouselItemIndex(0, options);
   }
 
   /**
-   * @param {Object} [options]
-   * @param {Function} [options.callback]
-   * @param {String} [options.animation]
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the carousel element
+   * @method last
+   * @signature last()
+   * @return {Promise}
+   *   [en]Resolves to the carousel element[/en]
+   *   [ja]Resolves to the carousel element[/ja]
+   * @description
+   *   [en]Show last ons-carousel item.[/en]
+   *   [ja]最後のons-carousel-itemを表示します。[/ja]
    */
   last(options) {
-    return this.setActiveCarouselItemIndex(
+    this.setActiveCarouselItemIndex(
       Math.max(this.getCarouselItemCount() - 1, 0), options
->>>>>>> master
     );
   }
 
