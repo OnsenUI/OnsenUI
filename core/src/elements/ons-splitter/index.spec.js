@@ -66,41 +66,56 @@ describe('OnsSplitterElement', () => {
 
   describe('#openRight()', () => {
     it('should open right ons-splitter-side', () => {
-      expect(splitter.openRight()).to.be.true;
-      expect(splitter.openLeft()).to.be.false;
-      expect(splitter.rightIsOpened()).to.be.true;
+      return expect(splitter.openRight()).to.eventually.be.fulfilled.then(() => {
+        expect(splitter.rightIsOpen()).to.be.true;
+        return expect(splitter.openLeft()).to.eventually.be.rejected;
+      });
     });
   });
 
   describe('#openLeft()', () => {
-    it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.false;
+    it('should be rejected on "split" mode with ons-splitter-side element', () => {
+      return expect(splitter.openLeft()).to.eventually.be.rejected;
     });
   });
 
   describe('#closeRight()', () => {
-    it('should close right ons-splitter-side', (done) => {
-      expect(splitter.rightIsOpened()).to.be.false;
-
-      expect(splitter.openRight({callback: () => {
-        expect(splitter.rightIsOpened()).to.be.true;
-        expect(splitter.closeRight({callback: () => {
-          expect(splitter.rightIsOpened()).to.be.false;
-          done();
-        }})).to.be.true;
-      }})).to.be.true;
+    it('should close right ons-splitter-side', () => {
+      expect(splitter.rightIsOpen()).to.be.false;
+      return splitter.openRight().then(() => {
+        expect(splitter.rightIsOpen()).to.be.true;
+        return expect(splitter.closeRight()).to.eventually.be.fulfilled.then(() => {
+          expect(splitter.rightIsOpen()).to.be.false;
+        });
+      });
     });
   });
 
   describe('#closeLeft()', () => {
-    it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.false;
+    it('should be rejected on "split" mode with ons-splitter-side element', () => {
+      expect(splitter.closeLeft()).to.eventually.be.rejected;
     });
   });
 
   describe('#getDeviceBackButtonHandler()', () => {
     it('should return handler object', () => {
       expect(splitter.getDeviceBackButtonHandler()).to.be.an('object');
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = `
+        <ons-splitter>
+          <ons-splitter-side side="left">Left</ons-splitter-side>
+          <ons-splitter-side side="right" collapse>Right</ons-splitter-side>
+          <ons-splitter-content>Content</ons-splitter-content>
+        </ons-splitter>
+      `;
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });

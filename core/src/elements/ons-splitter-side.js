@@ -129,7 +129,7 @@ class MediaQueryCollapseDetection extends CollapseDetection {
 }
 
 class BaseMode {
-  isOpened() {
+  isOpen() {
     return false;
   }
   openMenu() {
@@ -150,8 +150,15 @@ class SplitMode extends BaseMode {
     this._element = element;
   }
 
-  isOpened() {
+  isOpen() {
     return false;
+  }
+
+  openMenu() {
+    return Promise.reject('Not possible in Split Mode');
+  }
+  closeMenu() {
+    return Promise.reject('Not possible in Split Mode');
   }
 
   /**
@@ -190,8 +197,8 @@ class CollapseMode extends BaseMode {
     return 'closed';
   }
 
-  static get OPENED_STATE() {
-    return 'opened';
+  static get OPEN_STATE() {
+    return 'open';
   }
 
   static get CHANGING_STATE() {
@@ -215,7 +222,7 @@ class CollapseMode extends BaseMode {
     return this._lock.isLocked();
   }
 
-  isOpened() {
+  isOpen() {
     return this._state !== CollapseMode.CLOSED_STATE;
   }
 
@@ -228,7 +235,7 @@ class CollapseMode extends BaseMode {
       return;
     }
 
-    if (this._openedOtherSideMenu()) {
+    if (this._isOpenOtherSideMenu()) {
       return;
     }
 
@@ -250,7 +257,7 @@ class CollapseMode extends BaseMode {
   _onDragStart(event) {
     this._ignoreDrag = false;
 
-    if (!this.isOpened() && this._openedOtherSideMenu()) {
+    if (!this.isOpen() && this._isOpenOtherSideMenu()) {
       this._ignoreDrag = true;
     } else if (this._element._swipeTargetWidth > 0) {
       const distance = this._element._isLeftSide()
@@ -270,9 +277,9 @@ class CollapseMode extends BaseMode {
 
     const startEvent = event.gesture.startEvent;
 
-    if (!('isOpened' in startEvent)) {
-      startEvent.isOpened = this.isOpened();
-      startEvent.distance = startEvent.isOpened ? this._element._getWidthInPixel() : 0;
+    if (!('isOpen' in startEvent)) {
+      startEvent.isOpen = this.isOpen();
+      startEvent.distance = startEvent.isOpen ? this._element._getWidthInPixel() : 0;
       startEvent.width = this._element._getWidthInPixel();
     }
 
@@ -286,7 +293,7 @@ class CollapseMode extends BaseMode {
       return;
     }
 
-    const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
+    const distance = startEvent.isOpen ? deltaDistance + width : deltaDistance;
     const normalizedDistance = Math.max(0, Math.min(width, distance));
 
     startEvent.distance = normalizedDistance;
@@ -299,7 +306,7 @@ class CollapseMode extends BaseMode {
     const deltaX = event.gesture.deltaX;
     const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
     const width = event.gesture.startEvent.width;
-    const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
+    const distance = event.gesture.startEvent.isOpen ? deltaDistance + width : deltaDistance;
     const direction = event.gesture.interimDirection;
     const shouldOpen =
       (this._element._isLeftSide() && direction === 'right' && distance > width * this._element._getThresholdRatioIfShouldOpen()) ||
@@ -322,7 +329,7 @@ class CollapseMode extends BaseMode {
       if (this._animator.isActivated()) {
         this._animator.layoutOnClose();
       }
-    } else if (this._state === CollapseMode.OPENED_STATE) {
+    } else if (this._state === CollapseMode.OPEN_STATE) {
       if (this._animator.isActivated()) {
         this._animator.layoutOnOpen();
       }
@@ -346,11 +353,11 @@ class CollapseMode extends BaseMode {
   /**
    * @return {Boolean}
    */
-  _openedOtherSideMenu() {
+  _isOpenOtherSideMenu() {
     return util.arrayFrom(this._element.parentElement.children).filter(child => {
       return child.nodeName.toLowerCase() === 'ons-splitter-side' && this._element !== child;
     }).filter(side => {
-      return side.isOpened();
+      return side.isOpen();
     }).length > 0;
   }
 
@@ -358,11 +365,11 @@ class CollapseMode extends BaseMode {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {Boolean} [options.withoutAnimation]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   openMenu(options = {}) {
     if (this._state !== CollapseMode.CLOSED_STATE) {
-      return false;
+      return Promise.reject('Not in Collapse Mode.');
     }
 
     return this._openMenu(options);
@@ -372,19 +379,19 @@ class CollapseMode extends BaseMode {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {Boolean} [options.withoutAnimation]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   _openMenu(options = {}) {
     if (this._isLocked()) {
-      return false;
+      return Promise.reject('Splitter side is locked.');
     }
 
-    if (this._openedOtherSideMenu()) {
-      return false;
+    if (this._isOpenOtherSideMenu()) {
+      return Promise.reject('Another menu is already open.');
     }
 
     if (this._element._emitPreOpenEvent()) {
-      return false;
+      return Promise.reject('Canceled in preopen event.');
     }
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
@@ -397,28 +404,30 @@ class CollapseMode extends BaseMode {
     };
 
     if (options.withoutAnimation) {
-      this._state = CollapseMode.OPENED_STATE;
+      this._state = CollapseMode.OPEN_STATE;
       this.layout();
       done();
+      return Promise.resolve(this._element);
     } else {
       this._state = CollapseMode.CHANGING_STATE;
-      this._animator.open(() => {
-        this._state = CollapseMode.OPENED_STATE;
-        this.layout();
-        done();
+      return new Promise(resolve => {
+        this._animator.open(() => {
+          this._state = CollapseMode.OPEN_STATE;
+          this.layout();
+          done();
+          resolve(this._element);
+        });
       });
     }
-
-    return true;
   }
 
   /**
    * @param {Object} [options]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   closeMenu(options = {}) {
-    if (this._state !== CollapseMode.OPENED_STATE) {
-      return false;
+    if (this._state !== CollapseMode.OPEN_STATE) {
+      return Promise.reject('Not in Collapse Mode.');
     }
 
     return this._closeMenu(options);
@@ -426,14 +435,15 @@ class CollapseMode extends BaseMode {
 
   /**
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   _closeMenu(options = {}) {
     if (this._isLocked()) {
-      return false;
+      return Promise.reject('Splitter side is locked.');
     }
 
     if (this._element._emitPreCloseEvent()) {
-      return false;
+      return Promise.reject('Canceled in preclose event.');
     }
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
@@ -449,16 +459,18 @@ class CollapseMode extends BaseMode {
       this._state = CollapseMode.CLOSED_STATE;
       this.layout();
       done();
+      return Promise.resolve(this._element);
     } else {
       this._state = CollapseMode.CHANGING_STATE;
-      this._animator.close(() => {
-        this._state = CollapseMode.CLOSED_STATE;
-        this.layout();
-        done();
+      return new Promise(resolve => {
+        this._animator.close(() => {
+          this._state = CollapseMode.CLOSED_STATE;
+          this.layout();
+          done();
+          resolve(this._element);
+        });
       });
     }
-
-    return true;
   }
 }
 
@@ -905,8 +917,8 @@ class SplitterSideElement extends BaseElement {
   /**
    * @return {Boolean}
    */
-  isOpened() {
-    return this._getModeStrategy().isOpened();
+  isOpen() {
+    return this._getModeStrategy().isOpen();
   }
 
   /**
@@ -921,6 +933,9 @@ class SplitterSideElement extends BaseElement {
    * @description
    *   [en]Open menu in collapse mode.[/en]
    *   [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   open(options = {}) {
     return this._getModeStrategy().openMenu(options);
@@ -935,10 +950,12 @@ class SplitterSideElement extends BaseElement {
    * @param {Function} [options.callback]
    *   [en]This function will be called after the menu has been closed.[/en]
    *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
-   * @return {Boolean}
    * @description
    *   [en]Close menu in collapse mode.[/en]
    *   [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   close(options = {}) {
     return this._getModeStrategy().closeMenu(options);
@@ -955,28 +972,34 @@ class SplitterSideElement extends BaseElement {
    * @description
    *   [en]Show the page specified in pageUrl in the right section[/en]
    *   [ja]指定したURLをメインページを読み込みます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element[/en]
+   *   [ja][/ja]
    */
   load(page, options = {}) {
     this._page = page;
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
-    ons.getPageHTMLAsync(page).then((html) => {
-      rewritables.link(this, util.createFragment(html), options, (fragment) => {
-        while (this.childNodes[0]) {
-          if (this.childNodes[0]._hide instanceof Function) {
-            this.childNodes[0]._hide();
+    return internal.getPageHTMLAsync(page).then((html) => {
+      return new Promise(resolve => {
+        rewritables.link(this, util.createFragment(html), options, (fragment) => {
+          while (this.childNodes[0]) {
+            if (this.childNodes[0]._hide instanceof Function) {
+              this.childNodes[0]._hide();
+            }
+            this.removeChild(this.childNodes[0]);
           }
-          this.removeChild(this.childNodes[0]);
-        }
 
-        this.appendChild(fragment);
-        util.arrayFrom(fragment.childNodes).forEach(node => {
-          if (node._show instanceof Function) {
-            node._show();
-          }
+          this.appendChild(fragment);
+          util.arrayFrom(fragment.childNodes).forEach(node => {
+            if (node._show instanceof Function) {
+              node._show();
+            }
+          });
+
+          options.callback();
+          resolve(this.firstChild);
         });
-
-        options.callback();
       });
     });
   }
@@ -985,7 +1008,7 @@ class SplitterSideElement extends BaseElement {
    * @param {Object} [options]
    */
   toggle(options = {}) {
-    return this.isOpened() ? this.close(options) : this.open(options);
+    return this.isOpen() ? this.close(options) : this.open(options);
   }
 
   attributeChangedCallback(name, last, current) {

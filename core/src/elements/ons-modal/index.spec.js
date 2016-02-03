@@ -36,6 +36,14 @@ describe('OnsModalElement', () => {
       element.appendChild(wrapper);
       expect(element.children[0].classList.contains('modal__content')).to.be.true;
     });
+
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-modal></ons-modal>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
   });
 
   describe('#show()', () => {
@@ -44,15 +52,37 @@ describe('OnsModalElement', () => {
       element.show();
       expect(element.style.display).to.equal('table');
     });
+
+    it('returns a promise that resolves to the displayed element', () => {
+      let modal = element;
+      return expect(modal.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(modal);
+          expect(element.style.display).to.equal('table');
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    it('hides the modal', () => {
-      expect(element.style.display).to.equal('none');
+    beforeEach(() => {
       element.show();
+    });
+
+    it('hides the modal', () => {
       expect(element.style.display).to.equal('table');
       element.hide();
       expect(element.style.display).to.equal('none');
+    });
+
+    it('returns a promise that resolves to the hidden element', () => {
+      let modal = element;
+      return expect(modal.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(modal);
+          expect(element.style.display).to.equal('none');
+        }
+      );
     });
   });
 

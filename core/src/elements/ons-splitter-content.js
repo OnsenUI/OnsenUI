@@ -88,28 +88,34 @@ class SplitterContentElement extends BaseElement {
    * @description
    *   [en]Show the page specified in pageUrl in the right section[/en]
    *   [ja]指定したURLをメインページを読み込みます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element[/en]
+   *   [ja][/ja]
    */
   load(page, options = {}) {
     this._page = page;
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
-    internal.getPageHTMLAsync(page).then((html) => {
-      rewritables.link(this, util.createFragment(html), options, (fragment) => {
-        while (this.childNodes[0]) {
-          if (this.childNodes[0]._hide instanceof Function) {
-            this.childNodes[0]._hide();
+    return internal.getPageHTMLAsync(page).then((html) => {
+      return new Promise(resolve => {
+        rewritables.link(this, util.createFragment(html), options, (fragment) => {
+          while (this.childNodes[0]) {
+            if (this.childNodes[0]._hide instanceof Function) {
+              this.childNodes[0]._hide();
+            }
+            this.removeChild(this.childNodes[0]);
           }
-          this.removeChild(this.childNodes[0]);
-        }
 
-        this.appendChild(fragment);
-        util.arrayFrom(fragment.children).forEach(child => {
-          if (child._show instanceof Function) {
-            child._show();
-          }
+          this.appendChild(fragment);
+          util.arrayFrom(fragment.children).forEach(child => {
+            if (child._show instanceof Function) {
+              child._show();
+            }
+          });
+
+          options.callback();
+          resolve(this.firstChild);
         });
-
-        options.callback();
       });
     });
   }

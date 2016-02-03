@@ -125,6 +125,12 @@ describe('OnsNavigatorElement', () => {
 
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge').then(
+        page => expect(page).to.equal(nav.getCurrentPage())
+      );
+    });
   });
 
   describe('#bringPageTop()', () => {
@@ -226,6 +232,16 @@ describe('OnsNavigatorElement', () => {
         done();
       }});
     });
+
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge').then(() => {
+        return nav.pushPage('fuga').then(() => {
+          return expect(nav.bringPageTop('hoge')).to.eventually.be.fulfilled.then(
+            page => expect(page).to.equal(nav.getCurrentPage())
+          );
+        });
+      });
+    });
   });
 
   describe('#insertPage()', () => {
@@ -270,12 +286,26 @@ describe('OnsNavigatorElement', () => {
         }
       });
     });
+
+    it('returns a promise that resolves to the inserted page', () => {
+      return nav.pushPage('hoge').then(() => {
+        return expect(nav.insertPage(0, 'fuga')).to.eventually.be.fulfilled.then(
+          page => expect(page).to.equal(nav.pages[0])
+        );
+      });
+    });
   });
 
   describe('#popPage()', () => {
-    it('removes the top page from the stack', (done) => {
-      expect(() => nav.popPage()).to.throw(Error);
+    it('only accepts object options', () => {
+      expect(() => nav.popPage('hoge', 'string')).to.throw(Error);
+    });
 
+    it('throws error if the stack is empty', () => {
+      return expect(nav.popPage()).to.eventually.be.rejectedWith(Error);
+    });
+
+    it('removes the top page from the stack', (done) => {
       nav.pushPage('hoge', {
         onTransitionEnd: () => {
           let content = nav.getCurrentPage().element._getContentElement();
@@ -327,13 +357,11 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    it('throws error when refreshing pages directly inside the navigator', (done) => {
+    it('throws error when refreshing pages directly inside the navigator', () => {
       nav.innerHTML = '<ons-page> Test </ons-page>';
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          expect(() => nav.popPage({ refresh: true })).to.throw(Error);
-          done();
-        }
+
+      return nav.pushPage('hoge').then(() => {
+        return expect(nav.popPage({ refresh: true })).to.eventually.be.rejectedWith(Error);
       });
     });
 
@@ -391,9 +419,21 @@ describe('OnsNavigatorElement', () => {
 
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge').then(() => {
+        return expect(nav.popPage()).to.eventually.be.fulfilled.then(
+          page => expect(page).to.equal(nav.getCurrentPage())
+        );
+      });
+    });
   });
 
   describe('#replacePage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
+    });
+
     it('replaces the current page with a new one', (done) => {
       nav.pushPage('hoge', {
         onTransitionEnd: () => {
@@ -412,9 +452,21 @@ describe('OnsNavigatorElement', () => {
         }
       });
     });
+
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge').then(() => {
+        return expect(nav.replacePage('fuga')).to.eventually.be.fulfilled.then(
+          page => expect(page).to.equal(nav.getCurrentPage())
+        );
+      });
+    });
   });
 
-  describe('#replaceToPage()', () => {
+  describe('#resetToPage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.resetToPage('hoge', 'string')).to.throw(Error);
+    });
+
     it('replaces all the page stack with only a new page', (done) => {
       nav.pushPage('fuga', {onTransitionEnd: () => {
         nav.resetToPage('hoge', {
@@ -426,6 +478,14 @@ describe('OnsNavigatorElement', () => {
           }
         });
       }});
+    });
+
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge').then(() => {
+        return expect(nav.resetToPage('fuga')).to.eventually.be.fulfilled.then(
+          page => expect(page).to.equal(nav.getCurrentPage())
+        );
+      });
     });
   });
 
@@ -543,6 +603,16 @@ describe('OnsNavigatorElement', () => {
       }
 
       window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-navigator></ons-navigator>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });

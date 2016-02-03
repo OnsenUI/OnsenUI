@@ -190,15 +190,11 @@ class PopoverElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    this.style.display = 'none';
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
 
-    this._mask.style.zIndex = '20000';
-    this._popover.style.zIndex = '20001';
-
-    if (this.hasAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -378,9 +374,19 @@ class PopoverElement extends BaseElement {
     if (style) {
       this._popover.setAttribute('style', style);
     }
+
+    this.style.display = 'none';
+
+    this._mask.style.zIndex = '20000';
+    this._popover.style.zIndex = '20001';
+
+    if (this.hasAttribute('mask-color')) {
+      this._mask.style.backgroundColor = this.getAttribute('mask-color');
+    }
   }
 
   /**
+<<<<<<< HEAD
    * @method show
    * @signature show(target, [options])
    * @param {String|Event|HTMLElement} target
@@ -401,6 +407,9 @@ class PopoverElement extends BaseElement {
    * @description
    *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
    *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the displayed element[/en]
+   *   [ja][/ja]
    */
   show(target, options = {}) {
     const callback = options.callback || function() {};
@@ -415,16 +424,15 @@ class PopoverElement extends BaseElement {
      throw new Error('Target undefined');
     }
 
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     if (options.animation &&
       !(options.animation in _animatorDict)) {
       throw new Error(`Animator ${options.animation} is not registered.`);
     }
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
 
     let canceled = false;
     util.triggerElementEvent(this, 'preshow', {
@@ -435,27 +443,38 @@ class PopoverElement extends BaseElement {
     });
 
     if (!canceled) {
-      this._doorLock.waitUnlock(() => {
+      const tryShow = () => {
         const unlock = this._doorLock.lock();
+        const animator = this._animatorFactory.newAnimator(options);
 
         this.style.display = 'block';
 
         this._currentTarget = target;
         this._positionPopover(target);
 
-        const animator = this._animatorFactory.newAnimator(options);
-        animator.show(this, () => {
-          this._visible = true;
-          unlock();
+        return new Promise(resolve => {
+          animator.show(this, () => {
+            this._visible = true;
+            unlock();
 
-          util.triggerElementEvent(this, 'postshow', {popover: this});
-          callback();
+            util.triggerElementEvent(this, 'postshow', {popover: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryShow()));
       });
+    } else {
+      return Promise.reject('Canceled in preshow event.');
     }
   }
 
   /**
+<<<<<<< HEAD
    * @method hide
    * @signature hide([options])
    * @param {Object} [options]
@@ -473,9 +492,22 @@ class PopoverElement extends BaseElement {
    * @description
    *   [en]Close the popover.[/en]
    *   [ja]ポップオーバーを閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the hidden element[/en]
+   *   [ja][/ja]
    */
   hide(options = {}) {
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    if (options.animation &&
+      !(options.animation in _animatorDict)) {
+      throw new Error(`Animator ${options.animation} is not registered.`);
+    }
 
     let canceled = false;
     util.triggerElementEvent(this, 'prehide', {
@@ -486,18 +518,29 @@ class PopoverElement extends BaseElement {
     });
 
     if (!canceled) {
-      this._doorLock.waitUnlock(() => {
+      const tryHide = () => {
         const unlock = this._doorLock.lock();
-
         const animator = this._animatorFactory.newAnimator(options);
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          this._visible = false;
-          unlock();
-          util.triggerElementEvent(this, 'posthide', {popover: this});
-          callback();
+
+        return new Promise(resolve => {
+          animator.hide(this, () => {
+            this.style.display = 'none';
+            this._visible = false;
+            unlock();
+
+            util.triggerElementEvent(this, 'posthide', {popover: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryHide()));
       });
+    } else {
+      return Promise.reject('Canceled in prehide event.');
     }
   }
 

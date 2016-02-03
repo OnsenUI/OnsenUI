@@ -173,6 +173,13 @@ describe('OnsCarouselElement', () => {
       carousel.setActiveCarouselItemIndex(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('returns a promise that resolves to the element', () => {
+      return expect(carousel.setActiveCarouselItemIndex(1)).to.be.eventually.fulfilled.then(element => {
+        expect(element).to.equal(carousel);
+        expect(element.getActiveCarouselItemIndex()).to.equal(1);
+      });
+    });
   });
 
   describe('#getActiveCarouselItemIndex()', () => {
@@ -449,6 +456,22 @@ describe('OnsCarouselElement', () => {
       expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
       carousel.last();
       expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = `
+        <ons-carousel>
+        <ons-carousel-item>Item 1</ons-carousel-item>
+        <ons-carousel-item>Item 2</ons-carousel-item>
+        <ons-carousel-item>Item 3</ons-carousel-item>
+        </ons-carosel>
+      `;
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });

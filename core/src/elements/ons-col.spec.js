@@ -45,5 +45,15 @@ describe('OnsColElement', () => {
       expect(element.style.maxWidth ).to.equal('100px');
     });
   });
+
+  describe('#_compile()', () => {
+    it('does not compile twice', () => {
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-col width="50px"></ons-col>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
 });
 

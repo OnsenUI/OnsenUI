@@ -39,8 +39,13 @@ describe('ons-splitter-content', () => {
   });
 
   describe('#load()', () => {
-    it('should load page url', () => {
-      content.load('hoge.html');
+    it('returns a promise that resolves to the new page element', () => {
+      return expect(content.load('hoge.html')).to.eventually.be.fulfilled.then(
+        page => {
+          expect(page).to.equal(content.firstChild);
+          expect(content.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge content');
+        }
+      );
     });
   });
 

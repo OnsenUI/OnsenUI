@@ -28,6 +28,7 @@ window.addEventListener('DOMContentLoaded', function() {
   ons._deviceBackButtonDispatcher.enable();
 });
 
+import './elements/ons-template';
 import './elements/ons-alert-dialog';
 import './elements/ons-back-button';
 import './elements/ons-bottom-toolbar';
@@ -43,7 +44,7 @@ import './elements/ons-lazy-repeat';
 import './elements/ons-list-header';
 import './elements/ons-list-item';
 import './elements/ons-list';
-import './elements/ons-material-input';
+import './elements/ons-input';
 import './elements/ons-modal';
 import './elements/ons-navigator';
 import './elements/ons-page';
@@ -63,9 +64,9 @@ import './elements/ons-splitter';
 import './elements/ons-switch';
 import './elements/ons-tab';
 import './elements/ons-tabbar';
-import './elements/ons-template';
 import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
+import './elements/ons-range';
 
 // fastclick
 window.addEventListener('load', () => FastClick.attach(document.body), false);

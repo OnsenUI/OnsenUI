@@ -26,7 +26,8 @@ import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.dialog': 'dialog--*',
-  '.dialog-container': 'dialog-container--*'
+  '.dialog-container': 'dialog-container--*',
+  '.dialog-mask': 'dialog-mask--*'
 };
 
 const templateSource = util.createElement(`
@@ -194,8 +195,12 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
-    this._compile();
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+
+      this.setAttribute('_compiled', '');
+    }
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -285,10 +290,16 @@ class DialogElement extends BaseElement {
    * @description
    *  [en]Show the dialog.[/en]
    *  [ja]ダイアログを開きます。[/ja]
+   * @return {Promise} Resolves to the displayed element.
    */
   show(options = {}) {
     let cancel = false;
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     util.triggerElementEvent(this, 'preshow', {
       dialog: this,
@@ -297,29 +308,32 @@ class DialogElement extends BaseElement {
       }
     });
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
     if (!cancel) {
-      this._doorLock.waitUnlock(() => {
+      const tryShow = () => {
         const unlock = this._doorLock.lock();
+        const animator = this._animatorFactory.newAnimator(options);
 
         this.style.display = 'block';
         this._mask.style.opacity = '1';
 
-        const animator = this._animatorFactory.newAnimator(options);
+        return new Promise(resolve => {
+          animator.show(this, () => {
+            this._visible = true;
+            unlock();
 
-        animator.show(this, () => {
-          this._visible = true;
-          unlock();
+            util.triggerElementEvent(this, 'postshow', {dialog: this});
 
-          util.triggerElementEvent(this, 'postshow', {dialog: this});
-
-          callback();
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryShow()));
       });
+    } else {
+      return Promise.reject('Canceled in preshow event.');
     }
   }
 
@@ -341,10 +355,18 @@ class DialogElement extends BaseElement {
    * @description
    *   [en]Hide the dialog.[/en]
    *   [ja]ダイアログを閉じます。[/ja]
+   * @return {Promise} 
+   *   [en]Resolves to the hidden element[/en]
+   *   [ja][/ja]
    */
   hide(options = {}) {
     let cancel = false;
     const callback = options.callback || function() {};
+
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
 
     util.triggerElementEvent(this, 'prehide', {
       dialog: this,
@@ -353,24 +375,30 @@ class DialogElement extends BaseElement {
       }
     });
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
     if (!cancel) {
-      this._doorLock.waitUnlock(() => {
+      const tryHide = () => {
         const unlock = this._doorLock.lock();
         const animator = this._animatorFactory.newAnimator(options);
 
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          this._visible = false;
-          unlock();
-          util.triggerElementEvent(this, 'posthide', {dialog: this});
-          callback();
+        return new Promise(resolve => {
+          animator.hide(this, () => {
+            this.style.display = 'none';
+            this._visible = false;
+            unlock();
+
+            util.triggerElementEvent(this, 'posthide', {dialog: this});
+
+            callback();
+            resolve(this);
+          });
         });
+      };
+
+      return new Promise(resolve => {
+        this._doorLock.waitUnlock(() => resolve(tryHide()));
       });
+    } else {
+      return Promise.reject('Canceled in prehide event.');
     }
   }
 

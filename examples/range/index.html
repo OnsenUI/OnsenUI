@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Range | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -15,29 +16,93 @@
     ons.bootstrap();
   </script>
 
+  <style>
+    .volume-item {
+      padding: 0;
+    }
+
+    .volume-slider {
+      width: 100%;
+    }
+
+    .volume-icon {
+      text-align: center !important;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .list__item__right {
+      margin-left: 16px;
+    }
+
+  </style>
 </head>
 
 <body>
-
-  <ons-navigator>
+  <ons-navigator ng-init="numberSelection = 30; numberSelection2 = 55">
     <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
 
-    <div style="text-align: center">
+    <ons-list>
+      <ons-list-header>Flat Design (iOS)</ons-list-header>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" ng-model="numberSelection"></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" value="50" disabled></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
 
-      <br><br><br>
-      <input type="range" value="{{numberSelection}}" ng-model="numberSelection" class="range">
-      <br><br><br>
-      <input type="range" class="range" disabled>
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">Material Design</ons-list-header>
+      <ons-list-item modifier="material" class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range modifier="material" class="volume-slider" ng-model="numberSelection2"></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+      <ons-list-item modifier="material" class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range modifier="material" class="volume-slider" disabled></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
 
-      <br><br><br>
-      <input type="range" value="{{numberSelection2}}" ng-model="numberSelection2" class="range range--material">
-      <br><br><br>
-      <input type="range" class="range range--material" disabled>
-
-      <h3>{{numberSelection}}</h3>
-      <h3>{{numberSelection2}}</h3>
-    </div>
+    <h3>{{numberSelection}}</h3>
+    <h3>{{numberSelection2}}</h3>
   </ons-navigator>
-
 </body>
 </html>

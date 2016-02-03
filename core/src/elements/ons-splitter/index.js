@@ -115,6 +115,9 @@ class SplitterElement extends BaseElement {
    * @description
    *   [en]Open right ons-splitter-side menu on collapse mode.[/en]
    *   [ja]右のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   openRight(options = {}) {
     return this._open('right', options);
@@ -137,18 +140,27 @@ class SplitterElement extends BaseElement {
    * @description
    *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
    *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   openLeft(options = {}) {
     return this._open('left', options);
   }
 
+  /**
+   * @param {String} side
+   * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
+   */
   _open(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.open(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
@@ -163,6 +175,9 @@ class SplitterElement extends BaseElement {
    * @description
    *   [en]Close right ons-splitter-side menu on collapse mode.[/en]
    *   [ja]右のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   closeRight(options = {}) {
     return this._close('right', options);
@@ -180,6 +195,9 @@ class SplitterElement extends BaseElement {
    * @description
    *   [en]Close left ons-splitter-side menu on collapse mode.[/en]
    *   [ja]左のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   closeLeft(options = {}) {
     return this._close('left', options);
@@ -188,19 +206,21 @@ class SplitterElement extends BaseElement {
   /**
    * @param {String} side
    * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
    */
   _close(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.close(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
    * @param {Object} [options]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   toggleLeft(options = {}) {
     return this._toggle('left', options);
@@ -208,19 +228,25 @@ class SplitterElement extends BaseElement {
 
   /**
    * @param {Object} [options]
-   * @return {Boolean}
+   * @return {Promise} Resolves to the splitter side element
    */
   toggleRight(options = {}) {
     return this._toggle('right', options);
   }
 
+  /**
+   * @param {String} side
+   * @param {Object} [options]
+   * @return {Promise} Resolves to the splitter side element
+   */
   _toggle(side, options = {}) {
     const menu = this._getSideElement(side);
 
     if (menu) {
       return menu.toggle(options);
+    } else {
+      throw new Error('child "ons-splitter-side" element is not found in this element.');
     }
-    return false;
   }
 
   /**
@@ -233,8 +259,8 @@ class SplitterElement extends BaseElement {
    *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
-  leftIsOpened() {
-    return this._isOpened('left');
+  leftIsOpen() {
+    return this._isOpen('left');
   }
 
   /**
@@ -247,19 +273,19 @@ class SplitterElement extends BaseElement {
    *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
    *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
-  rightIsOpened() {
-    return this._isOpened('right');
+  rightIsOpen() {
+    return this._isOpen('right');
   }
 
   /**
    * @param {String} side
    * @return {Boolean}
    */
-  _isOpened(side) {
+  _isOpen(side) {
     const menu = this._getSideElement(side);
 
     if (menu) {
-      return menu.isOpened();
+      return menu.isOpen();
     }
 
     return false;
@@ -289,12 +315,12 @@ class SplitterElement extends BaseElement {
     const left = this._getSideElement('left');
     const right = this._getSideElement('right');
 
-    if (left.isOpened()) {
+    if (left.isOpen()) {
       left.close();
       return;
     }
 
-    if (right.isOpened()) {
+    if (right.isOpen()) {
       right.close();
       return;
     }

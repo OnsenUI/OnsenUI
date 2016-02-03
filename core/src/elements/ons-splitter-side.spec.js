@@ -31,30 +31,59 @@ describe('OnsSplitterSideElement', () => {
     expect(left._destroy instanceof Function).to.be.ok;
   });
 
+  describe('#load()', () => {
+    let template;
+
+    beforeEach(() => {
+      template = ons._util.createElement(`<ons-template id="hoge.html">hoge</ons-template>`);
+      document.body.appendChild(template);
+    });
+
+    afterEach(() => {
+      template.remove();
+      template = null;
+    });
+
+    it('returns a promise that resolves to the new page element', () => {
+      return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(
+        page => {
+          expect(page).to.equal(left.firstChild);
+          expect(left.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge');
+        }
+      );
+    });
+  });
+
   describe('#open()', () => {
     it('should open ons-splitter-side', () => {
-      expect(right.open()).to.be.true;
-      expect(left.open()).to.be.false;
+      return expect(right.open()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element).to.equal(right);
+          return expect(left.open()).to.eventually.be.rejected;
+        }
+      );
     });
   });
 
   describe('#close()', () => {
-    it('should close ons-splitter-side', (done) => {
-      expect(left.close()).to.be.false;
-      right.open({callback: () => {
-        right.close({callback: () => {
-          done();
-        }});
-      }});
+    it('should close ons-splitter-side', () => {
+      return right.open().then(() => {
+        return expect(right.close()).to.eventually.be.fulfilled.then(
+          element => {
+            expect(element).to.equal(right);
+            return expect(left.close()).to.eventually.be.rejected;
+          }
+        );
+      });
     });
   });
 
-  describe('#isOpened()', () => {
+  describe('#isOpen()', () => {
     it('should return boolean', (done) => {
-      expect(right.isOpened()).to.be.false;
-      expect(left.isOpened()).to.be.false;
+      expect(right.isOpen()).to.be.false;
+      expect(left.isOpen()).to.be.false;
       right.open({callback: () => {
-        expect(right.isOpened()).to.be.true;
+        expect(right.isOpen()).to.be.true;
         done();
       }});
     });
@@ -62,9 +91,9 @@ describe('OnsSplitterSideElement', () => {
 
   describe('#toggle()', () => {
     it('toggle open or close state', (done) => {
-      expect(right.isOpened()).to.be.false;
+      expect(right.isOpen()).to.be.false;
       right.toggle({callback: () => {
-        expect(right.isOpened()).to.be.true;
+        expect(right.isOpen()).to.be.true;
         done();
       }});
     });

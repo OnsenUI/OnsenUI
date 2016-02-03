@@ -443,7 +443,7 @@ class CarouselElement extends BaseElement {
 
   /**
    * @method setActiveCarouselItemIndex
-   * @signature setActiveCarouselItemIndex(index)
+   * @signature setActiveCarouselItemIndex(index, [options])
    * @param {Number} index
    *   [en]The index that the carousel should be set to.[/en]
    *   [ja]carousel要素のインデックスを指定します。[/ja]
@@ -459,17 +459,32 @@ class CarouselElement extends BaseElement {
    * @description
    *   [en]Specify the index of the ons-carousel-item to show.[/en]
    *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
+   * @param {Object} [options.animationOptions]
+   * @return {Promise} Resolves to the carousel element
+>>>>>>> master
    */
   setActiveCarouselItemIndex(index, options = {}) {
+
+    if (options && typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+
+    options.animationOptions = util.extend(
+      { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
+      options.animationOptions || {},
+      this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
+    );
 
     index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
     const scroll = this._getCarouselItemSize() * index;
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
-    this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback});
+    return this._scrollTo(this._scroll, options).then(() => {
+      this._tryFirePostChangeEvent();
+      return this;
+    });
 
-    this._tryFirePostChangeEvent();
   }
 
   /**
@@ -510,9 +525,14 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+<<<<<<< HEAD
    * @description
    *   [en]Show next ons-carousel item.[/en]
    *   [ja]次のons-carousel-itemを表示します。[/ja]
+=======
+   * @param {Object} [options.animationOptions]
+   * @return {Promise} Resolves to the carousel element
+>>>>>>> master
    */
   next(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() + 1, options);
@@ -524,9 +544,14 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {String} [options.animation]
+<<<<<<< HEAD
    * @description
    *   [en]Show previous ons-carousel item.[/en]
    *   [ja]前のons-carousel-itemを表示します。[/ja]
+=======
+   * @param {Object} [options.animationOptions]
+   * @return {Promise} Resolves to the carousel element
+>>>>>>> master
    */
   prev(options) {
     return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() - 1, options);
@@ -825,6 +850,7 @@ class CarouselElement extends BaseElement {
   /**
    * @param {Number} scroll
    * @param {Object} [options]
+   * @return {Promise} Resolves to the carousel element
    */
   _scrollTo(scroll, options = {}) {
     const isOverscrollable = this.isOverscrollable();
@@ -844,22 +870,18 @@ class CarouselElement extends BaseElement {
       return scroll;
     };
 
-    if (options.animate) {
+    return new Promise(resolve => {
       animit(this._getCarouselItemElements())
         .queue({
           transform: this._generateScrollTransform(normalizeScroll(scroll))
-        }, {
-          duration: 0.3,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .play(options.callback);
-    } else {
-      animit(this._getCarouselItemElements())
-        .queue({
-          transform: this._generateScrollTransform(normalizeScroll(scroll))
-        })
-        .play(options.callback);
-    }
+        }, options.animation  !== 'none' ? options.animationOptions : {})
+        .play(() => {
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+          resolve();
+        });
+    });
   }
 
   _calculateMaxScroll() {
@@ -984,6 +1006,7 @@ class CarouselElement extends BaseElement {
   }
 
   /**
+<<<<<<< HEAD
    * @method first
    * @signature first()
    * @description
@@ -1004,6 +1027,28 @@ class CarouselElement extends BaseElement {
   last() {
     this.setActiveCarouselItemIndex(
       Math.max(this.getCarouselItemCount() - 1, 0)
+=======
+   * @param {Object} [options]
+   * @param {Function} [options.callback]
+   * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
+   * @return {Promise} Resolves to the carousel element
+   */
+  first(options) {
+    return this.setActiveCarouselItemIndex(0, options);
+  }
+
+  /**
+   * @param {Object} [options]
+   * @param {Function} [options.callback]
+   * @param {String} [options.animation]
+   * @param {Object} [options.animationOptions]
+   * @return {Promise} Resolves to the carousel element
+   */
+  last(options) {
+    return this.setActiveCarouselItemIndex(
+      Math.max(this.getCarouselItemCount() - 1, 0), options
+>>>>>>> master
     );
   }
 

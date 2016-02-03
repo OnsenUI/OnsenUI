@@ -179,10 +179,11 @@ describe('OnsPageElement', () => {
 
   describe('#_show()', () => {
     it('fires \'show\' event', () => {
-      var spy = chai.spy();
-      document.addEventListener('show', spy);
+      var showPromise = new Promise(resolve => {
+        document.addEventListener('show', resolve);
+      });
       document.body.appendChild(element);
-      expect(spy).to.have.been.called.once;
+      return expect(showPromise).to.eventually.be.fulfilled;
     });
   });
 
@@ -191,6 +192,7 @@ describe('OnsPageElement', () => {
       var spy = chai.spy();
       document.addEventListener('hide', spy);
       document.body.appendChild(element);
+      element.isShown = true;
       element._hide();
       expect(spy).to.have.been.called.once;
     });
@@ -198,9 +200,11 @@ describe('OnsPageElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      var formerLastChild = element.lastChild;
-      element._compile();
-      expect(element.lastChild).to.equal(formerLastChild);
+      let div1 = document.createElement('div');
+      let div2 = document.createElement('div');
+      div1.innerHTML = '<ons-page></ons-page>';
+      div2.innerHTML = div1.innerHTML;
+      expect(div1.isEqualNode(div2)).to.be.true;
     });
 
     it('uses style attribute', () => {
