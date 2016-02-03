@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 import './elements/ons-template';
+import './elements/ons-if';
 import './elements/ons-alert-dialog';
 import './elements/ons-back-button';
 import './elements/ons-bottom-toolbar';
