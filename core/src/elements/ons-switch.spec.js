@@ -110,28 +110,28 @@ describe('OnsSwitchElement', () => {
     });
   });
 
-  describe('#_isChecked()', () => {
+  describe('#isChecked()', () => {
     it('returns true if switch is on', () => {
       element.checked = true;
-      expect(element._isChecked()).to.be.true;
+      expect(element.isChecked()).to.be.true;
     });
 
     it('returns false if switch is off', () => {
       element.checked = false;
-      expect(element._isChecked()).to.be.false;
+      expect(element.isChecked()).to.be.false;
     });
   });
 
-  describe('#_setChecked()', () => {
+  describe('#setChecked()', () => {
     it('sets the \'checked\' attribute to true', () => {
       element.checked = false;
-      element._setChecked(true);
+      element.setChecked(true);
       expect(element.checked).to.be.true;
     });
 
     it('sets the \'checked\' attribute to false', () => {
       element.checked = true;
-      element._setChecked(false);
+      element.setChecked(false);
       expect(element.checked).to.be.false;
     });
   });
