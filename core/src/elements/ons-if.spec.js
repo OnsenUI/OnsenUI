@@ -23,7 +23,7 @@ describe('ons-if', () => {
   it('filters depending on \'orientation\' attribute', (done) => {
     const originalIsPortrait = ons.orientation._isPortrait;
     let isPortrait = true;
-    ons.orientation._isPortrait = () => {console.log('called, returning: ', isPortrait); return isPortrait;};
+    ons.orientation._isPortrait = () => isPortrait;
 
     let element = ons._util.createElement('<ons-if orientation="landscape">Content</ons-if>');
     document.body.appendChild(element);
@@ -32,6 +32,7 @@ describe('ons-if', () => {
 
     isPortrait = false;
     ons.orientation.emit('change');
+
     setImmediate(() => {
       expect(element.style.display).to.equal('');
 
@@ -39,6 +40,6 @@ describe('ons-if', () => {
       element.remove();
 
       done();
-    })
+    });
   });
 });
