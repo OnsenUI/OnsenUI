@@ -18,7 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-// import GestureDetector from 'ons/gesture-detector';
+import GestureDetector from 'ons/gesture-detector';
 
 const scheme = {
   '': 'switch--*',
@@ -144,9 +144,12 @@ class SwitchElement extends BaseElement {
 
   detachedCallback() {
     this._checkbox.removeEventListener('change', this._onChangeListener);
+    this.removeEventListener('dragstart', this._onDragStartListener);
+    this.removeEventListener('tap', this._onTapListener);
   }
 
   attachedCallback() {
+    this._gestureDetector = new GestureDetector(this);
     this._checkbox.addEventListener('change', this._onChangeListener);
     this.addEventListener('dragstart', this._onDragStartListener);
     this.addEventListener('tap', this._onTapListener);
@@ -174,7 +177,7 @@ class SwitchElement extends BaseElement {
     var handle = this._handle;
     var startX = getX(e);
     var l = locations[this._isMaterial ? 'material' : 'ios'];
-    var checked = this.checked >> 0;
+    var checked = this.checked ? 1 : 0;
 
     var onDrag = (e) => {
       e.gesture.srcEvent.preventDefault();
