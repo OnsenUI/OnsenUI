@@ -1,6 +1,7 @@
 var OnsNavigator = React.createClass({
   componentDidMount: function() {
-    var node = ReactDOM.findDOMNode(this);
+    var node = this.node = ReactDOM.findDOMNode(this);
+    
     var page = this.props.children;
 
     if (!reactUtil.rendersToOnsPage(page)) {
@@ -31,6 +32,32 @@ var OnsNavigator = React.createClass({
      );
   },
 
+  resetToPage: function() {
+    var page = this.props.children;
+    this.elements = [];
+    this.elements.push({elem:page});
+
+
+    var htmlString = ReactDOMServer.renderToStaticMarkup(page);
+
+    var node = this.node;
+    this.node.firstChild.children[0].style.display = 'block';
+    this.myDom = ReactDOM.render(
+      <ons-navigator>
+         {page}
+       </ons-navigator>, node
+    );
+
+    this.node.firstChild.resetToPage('', {pageHTML: htmlString}).then(
+      function() {
+        this.myDom = ReactDOM.render(
+          <ons-navigator>
+              {page}
+          </ons-navigator>, node
+        );
+      });
+  },
+
   popPage: function() {
     var navNode = ReactDOM.findDOMNode(this).firstChild;
     navNode.popPage();
@@ -57,6 +84,7 @@ var OnsNavigator = React.createClass({
   render: function() {
     return <div />;
   }, 
+
 
   componentWillReceiveProps: function(newProps) {
     var props = newProps || this.props;
