@@ -12,6 +12,7 @@ var MyPage = React.createClass({
         <ons-button onClick={this.props.pushPage}> Push </ons-button>
         {this.props.popPage ?<ons-button style={{marginLeft: 10}} onClick={this.props.popPage}> Pop </ons-button> :''}
         {this.props.resetPage ? <ons-button style={{marginLeft: 10}} onClick={this.props.resetPage}> Reset to page 1 </ons-button> : ''}
+        {this.props.resetPageCustom ? <ons-button style={{marginLeft: 10}} onClick={this.props.resetPageCustom }> Reset to custom Component </ons-button> : ''}
         <div style={{flex: 1}} />
       </div>
     </OnsPage>
@@ -23,8 +24,15 @@ var MyNav  = React.createClass({
     return {};
   },
 
+  resetPageCustom: function() {
+    this.refs.navi.resetToPage(
+      <MyPage title="A different page" popPage={this.popPage} pushPage={this.pushPage}  />
+    );
+  },
+
+
+
   resetPage: function() {
-    console.log('reset pressed');
     this.refs.navi.resetToPage();
   },
 
@@ -34,11 +42,17 @@ var MyNav  = React.createClass({
   },
 
   pushPage: function() {
+    console.log('pushPage');
     this.counter++;
     var navTitle = "Navigator "+ this.counter;
 
     this.refs.navi.pushComponent(
-      <MyPage title={navTitle} popPage={this.popPage} pushPage={this.pushPage} resetPage={this.resetPage} />
+      <MyPage title={navTitle} 
+        popPage={this.popPage} 
+        pushPage={this.pushPage} 
+        resetPage={this.resetPage} 
+        resetPageCustom={this.resetPageCustom} 
+      />
     );
   },
 
