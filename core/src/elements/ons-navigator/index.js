@@ -367,7 +367,7 @@ class NavigatorElement extends BaseElement {
       onTransitionEnd();
     };
 
-    if (page === undefined || page === '') {
+    if (options.pageHTML == undefined && (page === undefined || page === '')) {
       if (this.hasAttribute('page')) {
         page = this.getAttribute('page');
       } else {
