@@ -40,6 +40,7 @@
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
     "babel-preset-es2015-rollup": "^1.0.0",
+    "babel-preset-react": "^6.5.0",
     "browser-sync": "^2.11.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
