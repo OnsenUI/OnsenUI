@@ -27,7 +27,7 @@ const scheme = {
   '.switch__toggle': 'switch--*__toggle'
 };
 
-const templateSource = util.createFragment(`
+const template = util.createFragment(`
   <input type="checkbox" class="switch__input">
   <div class="switch__toggle">
     <div class="switch__handle"></div>
@@ -58,13 +58,15 @@ class SwitchElement extends BaseElement {
   }
 
   set checked(value) {
-    this._checkbox.checked = value;
-    if (this.checked) {
-      this.setAttribute('checked', '');
-    } else {
-      this.removeAttribute('checked');
+    if (!!value != this._checkbox.checked) {
+      this._checkbox.click();
+      this._checkbox.checked = !!value;
+      if (this.checked) {
+        this.setAttribute('checked', '');
+      } else {
+        this.removeAttribute('checked');
+      }
     }
-    this._updateForCheckedAttribute();
   }
 
   get disabled() {
@@ -104,112 +106,91 @@ class SwitchElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
-    } else {
-      this._checkbox = this.querySelector('input[type=checkbox]');
     }
+    this._checkbox = this.querySelector('input[type=checkbox]');
     this._handle = this.querySelector('.switch__handle');
 
-    this._isMaterial = (this.getAttribute('modifier') || '').indexOf('material') != -1;
-
-    this._updateForCheckedAttribute();
-    this._updateForDisabledAttribute();
-  }
-
-  _updateForCheckedAttribute() {
-    if (this.hasAttribute('checked')) {
-      this._checkbox.checked = true;
-    } else {
-      this._checkbox.checked = false;
-    }
-  }
-
-  _updateForDisabledAttribute() {
-    if (this.hasAttribute('disabled')) {
-      this._checkbox.setAttribute('disabled', '');
-    } else {
-      this._checkbox.removeAttribute('disabled');
-    }
+    ['checked', 'disabled', 'modifier', 'name'].forEach(e => {
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
+    });
   }
 
   _compile() {
     this.classList.add('switch');
-    this.appendChild(templateSource.cloneNode(true));
-
-    this._checkbox = this.querySelector('input[type=checkbox]');
-    this._checkbox.setAttribute('name', generateId());
+    this.appendChild(template.cloneNode(true));
+    this.setAttribute('name', generateId());
+    this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {
-    this._checkbox.removeEventListener('change', this._onChangeListener);
-    this.removeEventListener('dragstart', this._onDragStartListener);
-    this.removeEventListener('tap', this._onTapListener);
+    this._checkbox.removeEventListener('change', this._onChange);
+    this.removeEventListener('dragstart', this._onDragStart);
+    this.removeEventListener('tap', this.click);
   }
 
   attachedCallback() {
+    this._checkbox.addEventListener('change', this._onChange);
     this._gestureDetector = new GestureDetector(this);
-    this._checkbox.addEventListener('change', this._onChangeListener);
-    this.addEventListener('dragstart', this._onDragStartListener);
-    this.addEventListener('tap', this._onTapListener);
+    this.addEventListener('dragstart', this._onDragStart);
+    this.addEventListener('tap', this.click);
   }
 
-  _onChangeListener() {
-    if (this.checked !== true) {
-      this.removeAttribute('checked');
+  _onChange() {
+    if (this.checked) {
+      this.parentNode.setAttribute('checked', '');
     } else {
-      this.setAttribute('checked', '');
+      this.parentNode.removeAttribute('checked');
     }
   }
 
-  _onTapListener(e) {
+  click() {
     if (!this.disabled) {
       this.checked = !this.checked;
     }
   }
 
-  _onDragStartListener(e) {
-    if (this.disabled || ['up', 'down'].indexOf(e.gesture.direction) != -1) {
-      return;
-    }
+  _onDragStart(e) {
     this.classList.add('switch--active');
-    var handle = this._handle;
     var startX = getX(e);
     var l = locations[this._isMaterial ? 'material' : 'ios'];
-    var checked = this.checked ? 1 : 0;
 
     var onDrag = (e) => {
       e.gesture.srcEvent.preventDefault();
-      var delta = getX(e) - startX;
-      handle.style.left = Math.min(l[1], Math.max(l[0], l[checked] + delta * 1.2)) + 'px';
+      var position = l[this.checked] + getX(e) - startX;
+      this._handle.style.left = Math.min(l[1], Math.max(l[0], position)) + 'px';
     };
 
     var onDragEnd = (e) => {
-      var left = parseInt(handle.style.left);
-
       this.removeEventListener('drag', onDrag);
       document.removeEventListener('release', onDragEnd);
 
-      handle.style.left = '';
-      handle.style.transitionDuration = '0.35s';
-      this.checked = left - l[0] > l[1] - left;
+      this.checked = parseInt(this._handle.style.left) > (l[0] + l[1]) / 2;
+      this._handle.style.left = '';
       this.classList.remove('switch--active');
     };
 
-    handle.style.transitionDuration = '0s';
     this.addEventListener('drag', onDrag);
     document.addEventListener('release', onDragEnd);
   }
 
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    } else if (name === 'checked') {
-      this._updateForCheckedAttribute();
-    } else if (name === 'disabled') {
-      this._updateForDisabledAttribute();
+    switch(name) {
+    case 'modifier':
+      this._isMaterial = (current || '').indexOf('material') !== -1;
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      break;
+    case 'name':
+      this._checkbox.setAttribute(name, current || generateId());
+      break;
+    case 'checked':
+      this._checkbox.checked = current !== null;
+    case 'disabled':
+      if (current !== null) {
+        this._checkbox.setAttribute(name, '');
+      } else {
+        this._checkbox.removeAttribute(name);
+      }
     }
   }
 }

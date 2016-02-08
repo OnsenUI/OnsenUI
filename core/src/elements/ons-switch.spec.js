@@ -29,6 +29,7 @@ describe('OnsSwitchElement', () => {
     expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
 
+
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('switch--hoge')).to.be.true;
@@ -53,6 +54,7 @@ describe('OnsSwitchElement', () => {
       element.removeAttribute('checked');
       element.checked = true;
       expect(element.hasAttribute('checked')).to.be.true;
+      expect(element._checkbox.hasAttribute('checked')).to.be.true;
     });
 
     it('removes the \'checked\' attribute when set to false', () => {
@@ -60,6 +62,7 @@ describe('OnsSwitchElement', () => {
       expect(element.checked).to.be.true;
       element.checked = false;
       expect(element.hasAttribute('checked')).to.be.false;
+      expect(element._checkbox.hasAttribute('checked')).to.be.false;
     });
 
     it('accepts truthy and falsy values', () => {
@@ -96,20 +99,6 @@ describe('OnsSwitchElement', () => {
     });
   });
 
-  describe('#_onChangeListener()', () => {
-    it('removes the \'checked\' attribute', () => {
-      element.checked = true;
-      element._onChangeListener();
-      expect(element.hasAttribute('checked')).to.be.true;
-    });
-
-    it('adds the \'checked\' attribute', () => {
-      element.checked = false;
-      element._onChangeListener();
-      expect(element.hasAttribute('checked')).to.be.false;
-    });
-  });
-
   describe('#isChecked()', () => {
     it('returns true if switch is on', () => {
       element.checked = true;
@@ -142,7 +131,90 @@ describe('OnsSwitchElement', () => {
       let div2 = document.createElement('div');
       div1.innerHTML = '<ons-switch></ons-switch>';
       div2.innerHTML = div1.innerHTML;
+      expect(div1.innerHTML).to.equal(div2.innerHTML);
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('#_onChange()', () => {
+    it('adds the \'checked\' attribute', () => {
+      element.checked = true;
+      element._onChange();
+      expect(element.hasAttribute('checked')).to.be.true;
+    });
+
+    it('removes the \'checked\' attribute', () => {
+      element.checked = false;
+      element._onChange();
+      expect(element.hasAttribute('checked')).to.be.false;
+    });
+  });
+
+  describe('#click()', () => {
+    it('changes the value of the checkbox', () => {
+      expect(element._checkbox.checked).to.be.false;
+      element.click();
+      expect(element._checkbox.checked).to.be.true;
+    });
+
+    it('cares if it\'s disabled', () => {
+      element.disabled = true;
+      expect(element._checkbox.checked).to.be.false;
+      element.click();
+      expect(element._checkbox.checked).to.be.false;
+      element.disabled = false;
+      element.click();
+      expect(element._checkbox.checked).to.be.true;
+    });
+  });
+
+  describe('#attributeChangedCallback()', () => {
+    it('toggles material design', () => {
+      element._isMaterial = false;
+      element.setAttribute('modifier', 'material');
+      expect(element._isMaterial).to.be.true;
+      element.setAttribute('modifier', 'hoge');
+      expect(element._isMaterial).to.be.false;
+    });
+
+    it('sets a name for the checkbox', () => {
+      expect(element._checkbox.getAttribute('name')).to.match(/ons-switch-id-\d+/);
+    });
+
+    it('updates the name of the checkbox', () => {
+      element.setAttribute('name', 'gozen');
+      expect(element._checkbox.getAttribute('name')).to.equal('gozen');
+      element.setAttribute('name', 'gogo');
+      expect(element._checkbox.getAttribute('name')).to.equal('gogo');
+    });
+
+    // What should be the correct behaviour here?
+    // it('does not remove the name of the checkbox', () => {
+    //   element.setAttribute('name', 'gozen');
+    //   element.setAttribute('name', '');
+    //   expect(element._checkbox.getAttribute('name')).to.equal('gozen');
+    // });
+
+    it('generates a new name for the checkbox', () => {
+      element.setAttribute('name', 'gozen');
+      element.setAttribute('name', '');
+      expect(element._checkbox.getAttribute('name')).to.match(/ons-switch-id-\d+/);
+    });
+
+    it('checks the checkbox', () => {
+      element.setAttribute('checked', '');
+      expect(element._checkbox.checked).to.be.true;
+      expect(element._checkbox.hasAttribute('checked')).to.be.true;
+    });
+
+    it('disables the checkbox', () => {
+      element.setAttribute('disabled', '');
+      expect(element._checkbox.disabled).to.be.true;
+      expect(element._checkbox.hasAttribute('disabled')).to.be.true;
+      element.removeAttribute('disabled');
+      expect(element._checkbox.disabled).to.be.false;
+      expect(element._checkbox.hasAttribute('disabled')).to.be.false;
+    });
+  });
+
 });
