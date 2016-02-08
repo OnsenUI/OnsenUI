@@ -28,12 +28,14 @@ var MyNav  = React.createClass({
     this.refs.navi.resetToPage(
       <MyPage title="A different page" popPage={this.popPage} pushPage={this.pushPage}  />
     );
+    this.counter = 1;
   },
 
 
 
   resetPage: function() {
     this.refs.navi.resetToPage();
+    this.counter = 1;
   },
 
   popPage: function() {
