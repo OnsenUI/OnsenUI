@@ -69,6 +69,10 @@ class NavigatorElement extends BaseElement {
     this._isPushing = this._isPopping = false;
 
     this._initialHTML = this.innerHTML;
+
+    console.log('created callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    console.log('inner html');
+    console.log(this._initialHTML);
     this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
@@ -257,15 +261,18 @@ class NavigatorElement extends BaseElement {
     const tryInsertPage = () => {
       const unlock = this._doorLock.lock();
 
-      return internal.getPageHTMLAsync(page).then(templateHTML => {
+      var run = templateHTML => {
+        // console.log(templateHTML);
         const element = this._createPageElement(templateHTML);
         const pageObject = this._createPageObject(page, element, options);
 
         return new Promise(resolve => {
           rewritables.link(this, element, options, element => {
             element.style.display = 'none';
+
             this.insertBefore(element, this._pages[index].element);
             this._pages.splice(index, 0, pageObject);
+
             this.getCurrentPage().updateBackButton();
 
             setTimeout(() => {
@@ -275,7 +282,13 @@ class NavigatorElement extends BaseElement {
             }, 1000 / 60);
           });
         });
-      });
+      };
+
+      if (options.pageHTML) {
+        return run(options.pageHTML);
+      } else {
+        return internal.getPageHTMLAsync(page).then(run);
+      }
     };
 
     return new Promise(resolve => {
@@ -384,6 +397,8 @@ class NavigatorElement extends BaseElement {
   attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
+    console.log('attached');
+
     rewritables.ready(this, () => {
       if (this._pages.length === 0) {
         if (!this.getAttribute('page')) {
@@ -398,6 +413,7 @@ class NavigatorElement extends BaseElement {
   }
 
   detachedCallback() {
+    console.log('detached');
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
   }
@@ -416,7 +432,7 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
-
+    console.log('push page');
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -442,6 +458,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _pushPage(page, options) {
+    console.log('push page _');
     const unlock = this._doorLock.lock();
     const done = function() {
       unlock();
@@ -464,6 +481,7 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [unlock]
    */
  _pushPageDOM(pageObject, unlock) {
+    console.log('push dom_');
     unlock = unlock || function() {};
 
     let element = pageObject.element;
@@ -509,14 +527,25 @@ class NavigatorElement extends BaseElement {
             const leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
 
+            console.log('add Child');
             this.appendChild(element);
-            leavePage.element._hide();
-            enterPage.element._show();
+            setImmediate(function () {
+              leavePage.element._hide();
+            });
+
+            setImmediate(function () {
+              enterPage.element._show();
+            });
 
             options.animator.push(enterPage, leavePage, done);
           } else {
+            this.innerHTML = '';
+            console.log('add child');
             this.appendChild(element);
-            element._show();
+
+            setImmediate(function () {
+              element._show();
+            });
 
             done();
           }
@@ -659,6 +688,7 @@ class NavigatorElement extends BaseElement {
    */
   _createPageObject(page, element, options) {
 
+    console.log('create page object');
     options.animator = this._animatorFactory.newAnimator(options);
 
     return new NavigatorPage({
@@ -670,6 +700,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _createPageElement(templateHTML) {
+    console.log('create page element');
     const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
 
     if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
