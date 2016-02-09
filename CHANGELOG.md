@@ -11,6 +11,7 @@ v2.0.0-beta.7
  * ons-alert-dialog: Correctly applies animation-options.
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
+ * ons-tab: Persistent tabs are preloaded by default.
 
 v2.0.0-beta.6
 ----
