@@ -1,0 +1,23 @@
+{
+  "id": "/parameter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": ["string", "null"],
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "isOptional": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,61 @@
+{
+  "id": "/extra-object",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "path": {
+      "type": "string",
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    },
+    "note": {
+      "type": "string"
+    },
+    "extensionOf": {
+      "type": "string"
+    },
+    "examples": {
+      "type": "array",
+      "items": {"type": "string"},
+      "required": true
+    },
+    "seealsos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"required": true},
+          "description": {"type": "string", "required": true}
+        }
+      },
+      "required": true
+    },
+    "guides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"required": true},
+          "description": {"type": "string", "required": true}
+        }
+      },
+      "required": true
+    },
+    "codepens": {
+      "type": "array",
+      "items": {"$ref": "/codepen"},
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "additionalProperties": false
+}

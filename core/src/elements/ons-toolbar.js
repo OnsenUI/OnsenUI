@@ -27,7 +27,52 @@ const scheme = {
   '.navigation-bar__right': 'navigation-bar--*__right'
 };
 
+/**
+ * @element ons-toolbar
+ * @category page
+ * @modifier transparent
+ *   [en]Transparent toolbar[/en]
+ *   [ja]透明な背景を持つツールバーを表示します。[/ja]
+ * @description
+ *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
+ * @codepen aHmGL
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @seealso ons-bottom-toolbar
+ *   [en]ons-bottom-toolbar component[/en]
+ *   [ja]ons-bottom-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button
+ *   [en]ons-toolbar-button component[/en]
+ *   [ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @example
+ * <ons-page>
+ *   <ons-toolbar>
+ *     <div class="left"><ons-back-button>Back</ons-back-button></div>
+ *     <div class="center">Title</div>
+ *     <div class="right">Label</div>
+ *   </ons-toolbar>
+ * </ons-page>
+ */
+
 class ToolbarElement extends BaseElement {
+
+  /**
+   * @attribute inline
+   * @initonly
+   * @description
+   *   [en]Display the toolbar as an inline element.[/en]
+   *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+   */
+
+  /**
+   * @attribute modifier
+   * @description
+   *   [en]The appearance of the toolbar.[/en]
+   *   [ja]ツールバーの表現を指定します。[/ja]
+   */
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {

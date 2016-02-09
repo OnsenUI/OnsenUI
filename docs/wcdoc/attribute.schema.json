@@ -1,0 +1,38 @@
+{
+  "id": "/attribute",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "extensionOf": {
+      "type": "string"
+    },
+    "type": {
+      "type": ["string", "null"],
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    },
+    "default": {
+      "type": ["string", "null"],
+      "required": true
+    },
+    "initonly": {
+      "type": "boolean",
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "additionalProperties": false
+}

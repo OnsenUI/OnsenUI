@@ -1,0 +1,30 @@
+{
+  "id": "/property",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": ["string", "null"],
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "extensionOf": {
+      "type": "string"
+    },
+    "initonly": {
+      "type": "boolean",
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "additionalProperties": false
+}

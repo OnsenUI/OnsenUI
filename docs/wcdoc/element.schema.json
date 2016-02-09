@@ -1,0 +1,100 @@
+{
+  "id": "/element",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "path": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    },
+    "extensionOf": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "examples": {
+      "type": "array",
+      "items": {"type": "string"},
+      "required": true
+    },
+    "seealsos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"required": true},
+          "description": {"type": "string", "required": true}
+        }
+      },
+      "required": true
+    },
+    "guides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"required": true},
+          "description": {"type": "string", "required": true}
+        }
+      },
+      "required": true
+    },
+    "modifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "required": true},
+          "description": {"type": "string", "required": true}
+        }
+      },
+      "required": true
+    },
+    "codepens": {
+      "type": "array",
+      "items": {"$ref": "/codepen"},
+      "required": true
+    },
+    "events": {
+      "type": "array",
+      "items": {"$ref": "/event"},
+      "required": true
+    },
+    "properties": {
+      "type": "array",
+      "items": {"$ref": "/property"},
+      "required": true
+    },
+    "attributes": {
+      "type": "array",
+      "items": {"$ref": "/attribute"},
+      "required": true
+    },
+    "methods": {
+      "type": "array",
+      "items": {"$ref": "/method"},
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "elements": {
+      "type": "array",
+      "items": {"$ref": "/extra-element"}
+    }
+  },
+  "additionalProperties": false
+}

@@ -19,7 +19,44 @@ const scheme = {
   '': 'fab--*',
 };
 
+/**
+ * @element ons-fab
+ * @category fab
+ * @description
+ *   [en][/en]
+ *   [ja][/ja]
+ */
 class FabElement extends BaseElement {
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *  [en]The appearance of the button.[/en]
+   *  [ja]ボタンの表現を指定します。[/ja]
+   */
+
+  /**
+   * @attribute position
+   * @type {String}
+   * @description
+   *  [en][/en]
+   *  [ja]fabコンポーネントを表示する位置を指定します。 上下位置と左右位置を指定します。 上下位置に指定できるのは`top`か`bottom`です。左右位置で指定できるのは`left`か`right`か`center`です。`top left`と指定すると、左上に表示されます。`bottom center`と指定すると、下部中央に表示されます。[/ja]
+   */
+
+  /**
+   * @attribute inline
+   * @description
+   *  [en][/en]
+   *  [ja]この属性が設定されると、このコンポーネントはposition属性を無視してインラインに表示されます。[/ja]
+   */
+
+  /**
+   * @attribute disabled
+   * @description
+   *   [en]Specify if button should be disabled.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
@@ -103,20 +140,37 @@ class FabElement extends BaseElement {
     }
   }
 
+  /**
+   * @method show
+   * @signature show()
+   * @description
+   *  [en][/en]
+   *  [ja][/ja]
+   */
   show(options = {}) {
     this.style.transform = 'scale(1)';
     this.style.webkitTransform = 'scale(1)';
   }
 
+  /**
+   * @method hide
+   * @signature hide()
+   * @description
+   *  [en][/en]
+   *  [ja][/ja]
+   */
   hide(options = {}) {
     this.style.transform = 'scale(0)';
     this.style.webkitTransform = 'scale(0)';
   }
 
   /**
-   * Disable of enable fab.
-   *
-   * @param {Boolean}
+   * @method setDisabled
+   * @signature setDisabled(disabled)
+   * @param {Boolean} disabled
+   * @description
+   *  [en]Disabled of enable fab.[/en]
+   *  [ja][/ja]
    */
   setDisabled(disabled) {
     if (typeof disabled !== 'boolean') {
@@ -131,8 +185,11 @@ class FabElement extends BaseElement {
   }
 
   /**
-   * True if fab is disabled.
-   *
+   * @method isDisabled
+   * @signature isDisabled()
+   * @description
+   *   [en]True if fab is disabled.[/en]
+   *   [ja]disabled状態であるかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isDisabled() {
@@ -144,19 +201,37 @@ class FabElement extends BaseElement {
    *
    * @return {Boolean}
    */
+  /**
+   * @method isInline
+   * @signature isInline()
+   * @description
+   *   [en]True if fab is inline.[/en]
+   *   [ja]inline属性があるかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
   isInline() {
     return this.hasAttribute('inline');
   }
 
   /**
-   * True if fab is shown
-   *
+   * @method isShown
+   * @signature isShown()
+   * @description
+   *   [en]True if fab is shown.[/en]
+   *   [ja]このコンポーネントが表示されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isShown() {
     return this.style.transform === 'scale(1)' && this.style.display !== 'none';
   }
 
+  /**
+   * @method toggle
+   * @signature toggle()
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
   toggle() {
     if (this.isShown()) {
       this.hide();

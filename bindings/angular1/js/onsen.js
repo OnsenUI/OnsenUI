@@ -16,241 +16,10 @@ limitations under the License.
 */
 
 /**
- * @ngdoc object
- * @name ons
- * @category util
+ * @object ons
  * @description
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
  *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
- */
-
-/**
- * @ngdoc method
- * @signature ready(callback)
- * @description
- *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
- *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
- * @param {Function} callback
- *   [en]Function that executes after Onsen UI has been initialized.[/en]
- *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature bootstrap([moduleName, [dependencies]])
- * @extensionOf angular
- * @description
- *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
- *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
- * @param {String} [moduleName]
- *   [en]AngularJS module name.[/en]
- *   [ja]Angular.jsでのモジュール名[/ja]
- * @param {Array} [dependencies]
- *   [en]List of AngularJS module dependencies.[/en]
- *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
- * @return {Object}
- *   [en]An AngularJS module object.[/en]
- *   [ja]AngularJSのModuleオブジェクトを表します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature enableAutoStatusBarFill()
- * @description
- *   [en]Enable status bar fill feature on iOS7 and above.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature disableAutoStatusBarFill()
- * @description
- *   [en]Disable status bar fill feature on iOS7 and above.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature disableAnimations()
- * @description
- *   [en]Disable all animations. Could be handy for testing and older devices.[/en]
- *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature enableAnimations()
- * @description
- *   [en]Enable animations (default).[/en]
- *   [ja]アニメーションを有効にします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature findParentComponentUntil(name, [dom])
- * @extensionOf angular
- * @param {String} name
- *   [en]Name of component, i.e. 'ons-page'.[/en]
- *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
- * @param {Object|jqLite|HTMLElement} [dom]
- *   [en]$event, jqLite or HTMLElement object.[/en]
- *   [ja]$eventオブジェクト、jqLiteオブジェクト、HTMLElementオブジェクトのいずれかを指定できます。[/ja]
- * @return {Object}
- *   [en]Component object. Will return null if no component was found.[/en]
- *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description
- *   [en]Find parent component object of <code>dom</code> element.[/en]
- *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature findComponent(selector, [dom])
- * @extensionOf angular
- * @param {String} selector
- *   [en]CSS selector[/en]
- *   [ja]CSSセレクターを指定します。[/ja]
- * @param {HTMLElement} [dom]
- *   [en]DOM element to search from.[/en]
- *   [ja]検索対象とするDOM要素を指定します。[/ja]
- * @return {Object}
- *   [en]Component object. Will return null if no component was found.[/en]
- *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description
- *   [en]Find component object using CSS selector.[/en]
- *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature setDefaultDeviceBackButtonListener(listener)
- * @param {Function} listener
- *   [en]Function that executes when device back button is pressed.[/en]
- *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
- * @description
- *   [en]Set default handler for device back button.[/en]
- *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature disableDeviceBackButtonHandler()
- * @description
- * [en]Disable device back button event handler.[/en]
- * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature enableDeviceBackButtonHandler()
- * @description
- * [en]Enable device back button event handler.[/en]
- * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isReady()
- * @return {Boolean}
- *   [en]Will be true if Onsen UI is initialized.[/en]
- *   [ja]初期化されているかどうかを返します。[/ja]
- * @description
- *   [en]Returns true if Onsen UI is initialized.[/en]
- *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature compile(dom)
- * @extensionOf angular
- * @param {HTMLElement} dom
- *   [en]Element to compile.[/en]
- *   [ja]コンパイルする要素を指定します。[/ja]
- * @description
- *   [en]Compile Onsen UI components.[/en]
- *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isWebView()
- * @return {Boolean}
- *   [en]Will be true if the app is running in Cordova.[/en]
- *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
- * @description
- *   [en]Returns true if running inside Cordova.[/en]
- *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature createAlertDialog(page, [options])
- * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {Object} [options.parentScope]
- *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
- * @return {Promise}
- *   [en]Promise object that resolves to the alert dialog component object.[/en]
- *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description
- *   [en]Create a alert dialog instance from a template.[/en]
- *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature createDialog(page, [options])
- * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {Object} [options.parentScope]
- *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
- * @return {Promise}
- *   [en]Promise object that resolves to the dialog component object.[/en]
- *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description
- *   [en]Create a dialog instance from a template.[/en]
- *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature createPopover(page, [options])
- * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {Object} [options.parentScope]
- *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
- * @return {Promise}
- *   [en]Promise object that resolves to the popover component object.[/en]
- *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description
- *   [en]Create a popover instance from a template.[/en]
- *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature resolveLoadingPlaceholder(page)
- * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
- * @description
- *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
- *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
  */
 
 (function(ons){
@@ -304,10 +73,20 @@ limitations under the License.
     ons.componentBase = window;
 
     /**
-     * Bootstrap this document as a Onsen UI application.
-     *
-     * @param {String} [name] optional name
-     * @param {Array} [deps] optional dependency modules
+     * @method bootstrap
+     * @signature bootstrap([moduleName, [dependencies]])
+     * @description
+     *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
+     *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
+     * @param {String} [moduleName]
+     *   [en]AngularJS module name.[/en]
+     *   [ja]Angular.jsでのモジュール名[/ja]
+     * @param {Array} [dependencies]
+     *   [en]List of AngularJS module dependencies.[/en]
+     *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
+     * @return {Object}
+     *   [en]An AngularJS module object.[/en]
+     *   [ja]AngularJSのModuleオブジェクトを表します。[/ja]
      */
     ons.bootstrap = function(name, deps) {
       if (angular.isArray(name)) {
@@ -337,9 +116,20 @@ limitations under the License.
     };
 
     /**
-     * @param {String} [name]
-     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+     * @method findParentComponentUntil
+     * @signature findParentComponentUntil(name, [dom])
+     * @param {String} name
+     *   [en]Name of component, i.e. 'ons-page'.[/en]
+     *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
+     * @param {Object/jqLite/HTMLElement} [dom]
+     *   [en]$event, jqLite or HTMLElement object.[/en]
+     *   [ja]$eventオブジェクト、jqLiteオブジェクト、HTMLElementオブジェクトのいずれかを指定できます。[/ja]
      * @return {Object}
+     *   [en]Component object. Will return null if no component was found.[/en]
+     *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
+     * @description
+     *   [en]Find parent component object of <code>dom</code> element.[/en]
+     *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
      */
     ons.findParentComponentUntil = function(name, dom) {
       var element;
@@ -355,11 +145,20 @@ limitations under the License.
     };
 
     /**
-     * Find view object correspond dom element queried by CSS selector.
-     *
-     * @param {String} selector CSS selector
+     * @method findComponent
+     * @signature findComponent(selector, [dom])
+     * @param {String} selector
+     *   [en]CSS selector[/en]
+     *   [ja]CSSセレクターを指定します。[/ja]
      * @param {HTMLElement} [dom]
-     * @return {Object/void}
+     *   [en]DOM element to search from.[/en]
+     *   [ja]検索対象とするDOM要素を指定します。[/ja]
+     * @return {Object/null}
+     *   [en]Component object. Will return null if no component was found.[/en]
+     *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
+     * @description
+     *   [en]Find component object using CSS selector.[/en]
+     *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
      */
     ons.findComponent = function(selector, dom) {
       var target = (dom ? dom : document).querySelector(selector);
@@ -367,7 +166,14 @@ limitations under the License.
     };
 
     /**
+     * @method compile
+     * @signature compile(dom)
      * @param {HTMLElement} dom
+     *   [en]Element to compile.[/en]
+     *   [ja]コンパイルする要素を指定します。[/ja]
+     * @description
+     *   [en]Compile Onsen UI components.[/en]
+     *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
      */
     ons.compile = function(dom) {
       if (!ons.$compile) {
@@ -414,10 +220,23 @@ limitations under the License.
     };
 
     /**
+     * @method createAlertDialog
+     * @signature createAlertDialog(page, [options])
      * @param {String} page
+     *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
+     *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
      * @param {Object} [options]
+     *   [en]Parameter object.[/en]
+     *   [ja]オプションを指定するオブジェクト。[/ja]
      * @param {Object} [options.parentScope]
+     *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+     *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
      * @return {Promise}
+     *   [en]Promise object that resolves to the alert dialog component object.[/en]
+     *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+     * @description
+     *   [en]Create a alert dialog instance from a template.[/en]
+     *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
      */
     ons.createAlertDialog = function(page, options) {
       options = options || {};
@@ -436,10 +255,23 @@ limitations under the License.
     };
 
     /**
+     * @method createDialog
+     * @signature createDialog(page, [options])
      * @param {String} page
+     *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+     *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
      * @param {Object} [options]
+     *   [en]Parameter object.[/en]
+     *   [ja]オプションを指定するオブジェクト。[/ja]
      * @param {Object} [options.parentScope]
+     *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+     *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
      * @return {Promise}
+     *   [en]Promise object that resolves to the dialog component object.[/en]
+     *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+     * @description
+     *   [en]Create a dialog instance from a template.[/en]
+     *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
      */
     ons.createDialog = function(page, options) {
       options = options || {};
@@ -458,10 +290,23 @@ limitations under the License.
     };
 
     /**
+     * @method createPopover
+     * @signature createPopover(page, [options])
      * @param {String} page
+     *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+     *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
      * @param {Object} [options]
+     *   [en]Parameter object.[/en]
+     *   [ja]オプションを指定するオブジェクト。[/ja]
      * @param {Object} [options.parentScope]
+     *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+     *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
      * @return {Promise}
+     *   [en]Promise object that resolves to the popover component object.[/en]
+     *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+     * @description
+     *   [en]Create a popover instance from a template.[/en]
+     *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
      */
     ons.createPopover = function(page, options) {
       options = options || {};

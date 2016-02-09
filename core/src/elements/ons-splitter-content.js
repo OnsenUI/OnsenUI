@@ -40,7 +40,34 @@ const rewritables = {
   }
 };
 
+/**
+ * @element ons-splitter-content
+ * @category control
+ * @description
+ *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
+ *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
+ * @codepen rOQOML
+ * @example
+ * <ons-splitter>
+ *   <ons-splitter-content>
+ *     ...
+ *   </ons-splitter-content>
+ *
+ *   <ons-splitter-side side="left" width="80%" collapse>
+ *     ...
+ *   </ons-splitter-side>
+ * </ons-splitter>
+ */
 class SplitterContentElement extends BaseElement {
+
+  /**
+   * @attribute page
+   * @initonly
+   * @type {String}
+   * @description
+   *   [en]The url of the menu page.[/en]
+   *   [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]
+   */
 
   get page() {
     return this._page;
@@ -51,10 +78,19 @@ class SplitterContentElement extends BaseElement {
   }
 
   /**
-   * @param {String} page
+   * @method load
+   * @signature load(pageUrl)
+   * @param {String} pageUrl
+   *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+   *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
    * @param {Object} [options]
    * @param {Function} [options.callback]
-   * @return {Promise} Resolves to the new page element
+   * @description
+   *   [en]Show the page specified in pageUrl in the right section[/en]
+   *   [ja]指定したURLをメインページを読み込みます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element[/en]
+   *   [ja][/ja]
    */
   load(page, options = {}) {
     this._page = page;
