@@ -110,6 +110,44 @@ var OnsNavigator = React.createClass({
     );
   },
 
+  replacePage: function(reactPage) {
+    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
+    var node = this.node;
+    var navNode = this.node.firstChild;
+
+    this.elements.pop();
+    this.elements.push({elem: reactPage});
+    var help = [];
+    for (var i =0; i < this.elements.length; i++) {
+      help.push(this.elements[i].elem);
+    }
+
+    var deleteElem = navNode.children[navNode.children.length - 1];
+
+    this.node.firstChild.replacePage('', {pageHTML: htmlString})
+    .then(function(){
+
+      var lastNode = navNode.children[navNode.children.length -1];
+
+      navNode.insertBefore(
+        deleteElem, 
+        navNode.children[navNode.children.length -1]
+      );
+        var node2 =ReactDOM.render(
+          <ons-navigator >
+            {help}
+          </ons-navigator>, 
+          node
+        );
+
+        var index = navNode.children.length - 2;
+        navNode.children[index].style.display = 'block';
+        navNode._pages[index].element = node.firstChild.children[index];
+        navNode.removeChild(lastNode);
+    });
+  },
+
+
   insertComponent: function(reactPage, insertPos) {
     var node =  ReactDOM.findDOMNode(this)
     insertPos = node.firstChild._normalizeIndex(insertPos);
