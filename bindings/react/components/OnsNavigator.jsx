@@ -28,8 +28,6 @@ var OnsNavigator = React.createClass({
      );
   },
 
-
-
   resetToPage: function(reactPage) {
     var page = arguments.length > 0 ? reactPage : this.elements[0].elem;
     this.elements = [];
@@ -112,9 +110,7 @@ var OnsNavigator = React.createClass({
     );
   },
 
-
   insertComponent: function(reactPage, insertPos) {
-
     var node =  ReactDOM.findDOMNode(this)
     insertPos = node.firstChild._normalizeIndex(insertPos);
 
@@ -168,8 +164,6 @@ var OnsNavigator = React.createClass({
        for (var i =0; i < elements.length; i++) {
          help.push(elements[i].elem);
        }
-
-
 
        var node2 =ReactDOM.render(
          <ons-navigator >
