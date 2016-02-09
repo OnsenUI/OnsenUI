@@ -44,7 +44,7 @@ export class TabbarAnimator {
 
 export class TabbarNoneAnimator extends TabbarAnimator {
   apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
-    done();
+    setTimeout(done, 1000 / 60);
   }
 }
 

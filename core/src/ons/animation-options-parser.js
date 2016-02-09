@@ -17,9 +17,32 @@ limitations under the License.
 
 'use strict';
 
-const animationOptionsParser = {};
+const unwrap = string => string.slice(1, -1);
+const isObjectString = string => string.startsWith('{') && string.endsWith('}');
+const isArrayString = string => string.startsWith('[') && string.endsWith(']');
+const isQuotedString = string => (string.startsWith('\'') && string.endsWith('\'')) || (string.startsWith('"') && string.endsWith('"'));
 
-animationOptionsParser.nextToken = (string) => {
+const error = (token, string, originalString) => {
+  throw new Error('Unexpected token \'' + token + '\' at position ' + (originalString.length - string.length - 1) + ' in string: \'' + originalString + '\'');
+};
+
+const processToken = (token, string, originalString) => {
+  if (token === 'true' || token === 'false') {
+    return token === 'true';
+  } else if (isQuotedString(token)) {
+    return unwrap(token);
+  } else if (!isNaN(token)) {
+    return +(token);
+  } else if (isObjectString(token)) {
+    return parseObject(unwrap(token));
+  } else if (isArrayString(token)) {
+    return parseArray(unwrap(token));
+  } else {
+    error(token, string, originalString);
+  }
+};
+
+const nextToken = (string) => {
   string = string.trimLeft();
   let limit = string.length;
 
@@ -66,7 +89,7 @@ animationOptionsParser.nextToken = (string) => {
   return string.slice(0, limit);
 };
 
-animationOptionsParser.parseObject = (string, isObjectString, isArrayString, isQuotedString, processToken, error) => {
+const parseObject = (string) => {
   const isValidKey = key => /^[A-Z_\$][A-Z0-9_\$]*$/i.test(key);
 
   string = string.trim();
@@ -74,7 +97,7 @@ animationOptionsParser.parseObject = (string, isObjectString, isArrayString, isQ
 
   while(string.length > 0) {
     previousToken = token;
-    token = animationOptionsParser.nextToken(string);
+    token = nextToken(string);
     string = string.slice(token.length, string.length).trimLeft();
 
     if ((token === ':' && (!readingKey || !previousToken || previousToken === ','))
@@ -101,13 +124,13 @@ animationOptionsParser.parseObject = (string, isObjectString, isArrayString, isQ
   return object;
 };
 
-animationOptionsParser.parseArray = (string, isObjectString, isArrayString, isQuotedString, processToken, error) => {
+const parseArray = (string) => {
   string = string.trim();
   let originalString = string, previousToken, token, array = [];
 
   while(string.length > 0) {
     previousToken = token;
-    token = animationOptionsParser.nextToken(string);
+    token = nextToken(string);
     string = string.slice(token.length, string.length).trimLeft();
 
     if (token === ',' && (!previousToken || previousToken === ',')) {
@@ -128,40 +151,16 @@ animationOptionsParser.parseArray = (string, isObjectString, isArrayString, isQu
   return array;
 };
 
-animationOptionsParser.parse = (string) => {
-  let methods;
-  const unwrap = string => string.slice(1, -1);
-  const error = (token, string, originalString) => { throw new Error('Unexpected token \'' + token + '\' at position ' + (originalString.length - string.length - 1) + ' in string: \'' + originalString + '\''); };
-  const isObjectString = string => string.startsWith('{') && string.endsWith('}');
-  const isArrayString = string => string.startsWith('[') && string.endsWith(']');
-  const isQuotedString = string => (string.startsWith('\'') && string.endsWith('\'')) || (string.startsWith('"') && string.endsWith('"'));
-  const processToken = (token, string, originalString) => {
-    if (token === 'true' || token === 'false') {
-      return token === 'true';
-    } else if (isQuotedString(token)) {
-      return unwrap(token);
-    } else if (!isNaN(token)) {
-      return +(token);
-    } else if (isObjectString(token)) {
-      return animationOptionsParser.parseObject(unwrap(token), ...methods);
-    } else if (isArrayString(token)) {
-      return animationOptionsParser.parseArray(unwrap(token), ...methods);
-    } else {
-      error(token, string, originalString);
-    }
-  };
-
-  methods = [isObjectString, isArrayString, isQuotedString, processToken, error];
-
+const parse = (string) => {
   string = string.trim();
 
   if (isObjectString(string)) {
-    return animationOptionsParser.parseObject(unwrap(string), ...methods);
+    return parseObject(unwrap(string));
   } else if (isArrayString(string)) {
-    return animationOptionsParser.parseArray(unwrap(string), ...methods);
+    return parseArray(unwrap(string));
   } else {
     throw new Error('Provided string must be object or array like: ' + string);
   }
 };
 
-export default animationOptionsParser;
+export default parse;
