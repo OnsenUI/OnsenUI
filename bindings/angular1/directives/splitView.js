@@ -1,8 +1,5 @@
 /**
- * @ngdoc directive
- * @id split-view
- * @name ons-split-view
- * @extensionOf angular
+ * @element ons-split-view
  * @category control
  * @description
  *  [en]Divides the screen into a left and right section.[/en]
@@ -24,8 +21,7 @@
  */
 
 /**
- * @ngdoc event
- * @name update
+ * @event update
  * @description
  *   [en]Fired when the split view is updated.[/en]
  *   [ja]split viewの状態が更新された際に発火します。[/ja]
@@ -56,8 +52,7 @@
  */
 
 /**
- * @ngdoc event
- * @name presplit
+ * @event presplit
  * @description
  *   [en]Fired just before the view is split.[/en]
  *   [ja]split状態にる前に発火します。[/ja]
@@ -76,8 +71,7 @@
  */
 
 /**
- * @ngdoc event
- * @name postsplit
+ * @event postsplit
  * @description
  *   [en]Fired just after the view is split.[/en]
  *   [ja]split状態になった後に発火します。[/ja]
@@ -96,8 +90,7 @@
  */
 
 /**
- * @ngdoc event
- * @name precollapse
+ * @event precollapse
  * @description
  *   [en]Fired just before the view is collapsed.[/en]
  *   [ja]collapse状態になる前に発火します。[/ja]
@@ -116,8 +109,7 @@
  */
 
 /**
- * @ngdoc event
- * @name postcollapse
+ * @event postcollapse
  * @description
  *   [en]Fired just after the view is collapsed.[/en]
  *   [ja]collapse状態になった後に発火します。[/ja]
@@ -136,8 +128,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name var
+ * @attribute var
  * @initonly
  * @type {String}
  * @description
@@ -146,9 +137,8 @@
  */
 
 /**
- * @ngdoc attribute
+ * @attribute main-page
  * @initonly
- * @name main-page
  * @type {String}
  * @description
  *   [en]The url of the page on the right.[/en]
@@ -156,8 +146,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name main-page-width
+ * @attribute main-page-width
  * @initonly
  * @type {Number}
  * @description
@@ -166,8 +155,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name secondary-page
+ * @attribute secondary-page
  * @initonly
  * @type {String}
  * @description
@@ -176,8 +164,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name collapse
+ * @attribute collapse
  * @initonly
  * @type {String}
  * @description
@@ -196,8 +183,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-update
+ * @attribute ons-update
  * @initonly
  * @type {Expression}
  * @description
@@ -206,8 +192,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-presplit
+ * @attribute ons-presplit
  * @initonly
  * @type {Expression}
  * @description
@@ -216,8 +201,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-precollapse
+ * @attribute ons-precollapse
  * @initonly
  * @type {Expression}
  * @description
@@ -226,8 +210,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-postsplit
+ * @attribute ons-postsplit
  * @initonly
  * @type {Expression}
  * @description
@@ -236,8 +219,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-postcollapse
+ * @attribute ons-postcollapse
  * @initonly
  * @type {Expression}
  * @description
@@ -246,8 +228,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-init
+ * @attribute ons-init
  * @initonly
  * @type {Expression}
  * @description
@@ -256,8 +237,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-show
+ * @attribute ons-show
  * @initonly
  * @type {Expression}
  * @description
@@ -266,8 +246,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-hide
+ * @attribute ons-hide
  * @initonly
  * @type {Expression}
  * @description
@@ -276,8 +255,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-destroy
+ * @attribute ons-destroy
  * @initonly
  * @type {Expression}
  * @description
@@ -286,7 +264,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method setMainPage
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
@@ -297,7 +275,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method setSecondaryPage
  * @signature setSecondaryPage(pageUrl)
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
@@ -308,7 +286,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method update
  * @signature update()
  * @description
  *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
@@ -316,7 +294,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method on
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]
@@ -330,7 +308,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method once
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
@@ -344,7 +322,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method off
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]

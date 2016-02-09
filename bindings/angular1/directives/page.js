@@ -1,89 +1,10 @@
 /**
- * @ngdoc directive
- * @id page
- * @name ons-page
- * @category page
- * @description
- *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
- *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
- * @guide ManagingMultiplePages
- *   [en]Managing multiple pages[/en]
- *   [ja]複数のページを管理する[/ja]
- * @guide Pagelifecycle
- *   [en]Page life cycle events[/en]
- *   [ja]ページライフサイクルイベント[/ja]
- * @guide HandlingBackButton
- *   [en]Handling back button[/en]
- *   [ja]バックボタンに対応する[/ja]
- * @guide OverridingCSSstyles
- *   [en]Overriding CSS styles[/en]
- *   [ja]CSSスタイルのオーバーライド[/ja]
- * @guide DefiningMultiplePagesinSingleHTML
- *   [en]Defining multiple pages in single html[/en]
- *   [ja]複数のページを1つのHTMLに記述する[/ja]
- * @example
- * <ons-page>
- *   <ons-toolbar>
- *     <div class="center">Title</div>
- *   </ons-toolbar>
- *
- *   ...
- * </ons-page>
+ * @element ons-page
  */
 
 /**
- * @ngdoc event
- * @name init
- * @description
- *   [en]Fired right after the page is attached.[/en]
- *   [ja]ページがアタッチされた後に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
- * @param {Object} event.page
- *   [en]Page object.[/en]
- *   [ja]ページのオブジェクト。[/ja]
- */
-
-/**
- * @ngdoc event
- * @name show
- * @description
- *   [en]Fired right after the page is shown.[/en]
- *   [ja]ページが表示された後に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
- * @param {Object} event.page
- *   [en]Page object.[/en]
- *   [ja]ページのオブジェクト。[/ja]
- */
-
-/**
- * @ngdoc event
- * @name hide
- * @description
- *   [en]Fired right after the page is hidden.[/en]
- *   [ja]ページが隠れた後に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
- * @param {Object} event.page
- *   [en]Page object.[/en]
- *   [ja]ページのオブジェクト。[/ja]
- */
-
-/**
- * @ngdoc event
- * @name destroy
- * @description
- *   [en]Fired right before the page is destroyed.[/en]
- *   [ja]ページが破棄される前に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
- * @param {Object} event.page
- *   [en]Page object.[/en]
- *   [ja]ページのオブジェクト。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name var
+ * @attribute var
  * @initonly
- * @extensionOf angular
  * @type {String}
  * @description
  *   [en]Variable name to refer this page.[/en]
@@ -91,39 +12,25 @@
  */
 
 /**
- * @ngdoc attribute
- * @name modifier
- * @type {String}
- * @description
- *   [en]Specify modifier name to specify custom styles.[/en]
- *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name on-device-backbutton
+ * @attribute on-device-backbutton
  * @type {Expression}
- * @extensionOf angular
  * @description
  *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
  */
 
 /**
- * @ngdoc attribute
- * @name ng-device-backbutton
+ * @attribute ng-device-backbutton
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  */
+
 /**
- * @ngdoc attribute
- * @name ons-init
+ * @attribute ons-init
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "init" event is fired.[/en]
@@ -131,10 +38,8 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-show
+ * @attribute ons-show
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "show" event is fired.[/en]
@@ -142,10 +47,8 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-hide
+ * @attribute ons-hide
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "hide" event is fired.[/en]
@@ -153,25 +56,12 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-destroy
+ * @attribute ons-destroy
  * @initonly
- * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
  *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature getDeviceBackButtonHandler()
- * @return {Object}
- *   [en]Device back button handler.[/en]
- *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
- * @description
- *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
- *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
  */
 
 (function() {
