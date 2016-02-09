@@ -51,7 +51,7 @@ const getX = (e) => {
   return e.clientX || e.changedTouches[0].clientX;
 };
 
-class SwitchElement extends ExtendableLabelElement {
+class SwitchElement extends BaseElement {
   /**
    * @element ons-switch
    * @category form
