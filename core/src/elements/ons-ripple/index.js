@@ -19,7 +19,6 @@ import util from 'ons/util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 import Animator from './animator-css';
-// import Animator from './animator-js';
 
 /**
  * @element ons-ripple
@@ -142,7 +141,6 @@ class RippleElement extends BaseElement {
     });
 
     return _animator.animate(_wave, {
-      // opacity: 1,
       top: y - r,
       left: x - r,
       height: 2 * r,
@@ -150,17 +148,17 @@ class RippleElement extends BaseElement {
     }, duration);
   }
 
-  _updateParent(){
+  _updateParent() {
     if (!this._parentUpdated && this.parentNode) {
-      if (this.getAttribute('target') != 'autofind' &&
-          window.getComputedStyle(this.parentNode).getPropertyValue('position') == 'static') {
+      if (this.getAttribute('target') !== 'autofind' &&
+          window.getComputedStyle(this.parentNode).getPropertyValue('position') === 'static') {
         this.parentNode.style.position = 'relative';
       }
       this._parentUpdated = true;
     }
   }
 
-  _onTap(e){
+  _onTap(e) {
     if (!this.isDisabled()) {
       this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
@@ -170,8 +168,7 @@ class RippleElement extends BaseElement {
     }
   }
 
-
-  _onHold(e){
+  _onHold(e) {
     if (!this.isDisabled()) {
       this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
@@ -180,8 +177,7 @@ class RippleElement extends BaseElement {
     }
   }
 
-
-  _onRelease(e){
+  _onRelease(e) {
     this._holding.speed(300).then(() => {
       this._animator.stopAll({stopNext: true});
       this._animator.fade(this._wave);
@@ -191,7 +187,6 @@ class RippleElement extends BaseElement {
     this._holding = false;
     this._gestureDetector.off('release', this._onRelease);
   }
-
 
   _onDragStart(e) {
     if (this._holding) {
@@ -225,17 +220,17 @@ class RippleElement extends BaseElement {
 
 
   attributeChangedCallback(name, last, current) {
-    if (name == 'start-radius') {
+    if (name === 'start-radius') {
       this._minR = Math.max(0, parseFloat(current) || 0);
     }
-    if (name == 'color' && current) {
+    if (name === 'color' && current) {
       this._wave.style.background = current;
       if (!this.hasAttribute('background')) {
         this._background.style.background = current;
       }
     }
-    if (name == 'background' && (current || last)) {
-      if (current == 'none') {
+    if (name === 'background' && (current || last)) {
+      if (current === 'none') {
         this._background.setAttribute('disabled', 'disabled');
         this._background.style.background = 'transparent';
       } else {
