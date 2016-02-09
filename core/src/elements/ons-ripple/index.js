@@ -51,10 +51,18 @@ class RippleElement extends BaseElement {
    */
 
   /**
-   * @attribute center
+   * @attribute color
+   * @type {String}
    * @description
-   *   [en]If this attribute is set, the effect will originate from the center.[/en]
-   *   [ja]この属性が設定された場合、その効果は要素の中央から始まります。[/ja]
+   *   [en]Color of the ripple effect.[/en]
+   *   [ja]リップルエフェクトの色を指定します。[/ja]
+   */
+
+  /**
+   * @attribute background 
+   * @description
+   *   [en]Color of the background.[/en]
+   *   [ja]背景の色を設定します。[/ja]
    */
 
   /**
