@@ -253,7 +253,7 @@ class SpeedDialElement extends BaseElement {
   }
 
   /**
-   * @method show 
+   * @method show
    * @signature show()
    * @description
    *   [en]Show the speed dial.[/en]

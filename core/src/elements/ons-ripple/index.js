@@ -58,7 +58,7 @@ class RippleElement extends BaseElement {
    */
 
   /**
-   * @attribute background 
+   * @attribute background
    * @description
    *   [en]Color of the background.[/en]
    *   [ja]背景の色を設定します。[/ja]

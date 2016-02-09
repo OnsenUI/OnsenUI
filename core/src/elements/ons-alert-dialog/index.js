@@ -413,7 +413,7 @@ class AlertDialogElement extends BaseElement {
    * @description
    *   [en]Hide the alert dialog.[/en]
    *   [ja]ダイアログを閉じます。[/ja]
-   * @return {Promise} 
+   * @return {Promise}
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
