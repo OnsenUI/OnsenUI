@@ -1,9 +1,6 @@
 /**
- * @ngdoc directive
- * @id if-platform
- * @name ons-if-platform
+ * @element ons-if-platform
  * @category util
- * @extensionOf angular
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios" and "wp".[/en]
  *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。opera, firefox, safari, chrome, ie, edge, android, blackberry, ios, wpのいずれかの値を空白区切りで複数指定できます。[/ja]
@@ -16,11 +13,9 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-if-platform
+ * @attribute ons-if-platform
  * @type {String}
  * @initonly
- * @extensionOf angular
  * @description
  *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios" or "wp".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "edge", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]

@@ -1,9 +1,6 @@
 /**
- * @ngdoc directive
- * @id ons-keyboard-active
- * @name ons-keyboard-active
+ * @element ons-keyboard-active
  * @category input
- * @extensionOf angular
  * @description
  *   [en]
  *     Conditionally display content depending on if the software keyboard is visible or hidden.
@@ -26,16 +23,14 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-keyboard-active
+ * @attribute ons-keyboard-active
  * @description
  *   [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
  *   [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
  */
 
 /**
- * @ngdoc attribute
- * @name ons-keyboard-inactive
+ * @attribute ons-keyboard-inactive
  * @description
  *   [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
  *   [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]

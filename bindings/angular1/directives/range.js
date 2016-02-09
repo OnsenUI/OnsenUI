@@ -1,4 +1,7 @@
 /**
+<<<<<<< HEAD
+ * @element ons-material-input
+=======
  * @ngdoc directive
  * @id range
  * @name ons-range
@@ -16,21 +19,18 @@
  * @example
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
+>>>>>>> master
  */
 
 /**
- * @ngdoc attribute
- * @name ng-model
- * @extensionOf angular
+ * @attribute ng-model
  * @description
  *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
  *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
  */
 
 /**
- * @ngdoc attribute
- * @name ng-change
- * @extensionOf angular
+ * @attribute ng-change
  * @description
  *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
  *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]

@@ -23,6 +23,27 @@ import SplitterAnimator from './animator';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 
+/**
+ * @element ons-splitter
+ * @category control
+ * @description
+ *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
+ *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
+ * @codepen rOQOML
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using components from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @example
+ * <ons-splitter>
+ *   <ons-splitter-content>
+ *     ...
+ *   </ons-splitter-content>
+ *
+ *   <ons-splitter-side side="left" width="80%" collapse>
+ *     ...
+ *   </ons-splitter-side>
+ * </ons-splitter>
+ */
 class SplitterElement extends BaseElement {
 
   createdCallback() {
@@ -83,8 +104,20 @@ class SplitterElement extends BaseElement {
   }
 
   /**
+   * @method openRight
+   * @signature openRight([options])
    * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function will be called after the menu has been opened.[/en]
+   *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *   [en]Open right ons-splitter-side menu on collapse mode.[/en]
+   *   [ja]右のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   openRight(options = {}) {
     return this._open('right', options);
@@ -96,8 +129,20 @@ class SplitterElement extends BaseElement {
   }
 
   /**
+   * @method openLeft
+   * @signature openLeft([options])
    * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function will be called after the menu has been opened.[/en]
+   *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
+   *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   openLeft(options = {}) {
     return this._open('left', options);
@@ -119,16 +164,40 @@ class SplitterElement extends BaseElement {
   }
 
   /**
+   * @method closeRight
+   * @signature closeRight([options])
    * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function will be called after the menu has been closed.[/en]
+   *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *   [en]Close right ons-splitter-side menu on collapse mode.[/en]
+   *   [ja]右のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   closeRight(options = {}) {
     return this._close('right', options);
   }
 
   /**
+   * @method closeLeft
+   * @signature closeLeft([options])
    * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function will be called after the menu has been closed.[/en]
+   *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *   [en]Close left ons-splitter-side menu on collapse mode.[/en]
+   *   [ja]左のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
    */
   closeLeft(options = {}) {
     return this._close('left', options);
@@ -181,14 +250,28 @@ class SplitterElement extends BaseElement {
   }
 
   /**
+   * @method leftIsOpen
+   * @signature leftIsOpen()
    * @return {Boolean}
+   *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
+   *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
+   * @description
+   *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
+   *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
   leftIsOpen() {
     return this._isOpen('left');
   }
 
   /**
+   * @method rightIsOpen
+   * @signature rightIsOpen()
    * @return {Boolean}
+   *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
+   *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
+   * @description
+   *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
+   *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
    */
   rightIsOpen() {
     return this._isOpen('right');
@@ -209,8 +292,14 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @param {String} page
-   * @param {Object} [options]
+   * @method loadContentPage
+   * @signature loadContentPage(pageUrl)
+   * @param {String} pageUrl
+   *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+   *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+   * @description
+   *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
+   *   [ja]ons-splitter-content要素に表示されるページをpageUrlに指定します。[/ja]
    */
   loadContentPage(page, options = {}) {
     const content = this._getContentElement();
@@ -249,7 +338,14 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @return {Object/null}
+   * @method getDeviceBackButtonHandler
+   * @signature getDeviceBackButtonHandler()
+   * @return {Object}
+   *   [en]Device back-button handler.[/en]
+   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @description
+   *   [en]Retrieve the back-button handler.[/en]
+   *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
    */
   getDeviceBackButtonHandler() {
     return this._deviceBackButtonHandler;

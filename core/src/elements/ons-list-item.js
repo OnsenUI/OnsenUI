@@ -32,7 +32,64 @@ const scheme = {
   '.list__item__icon': 'list__item--*__icon'
 };
 
+/**
+ * @element ons-list-item
+ * @category list
+ * @modifier tight
+ *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
+ *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
+ * @modifier tappable
+ *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" attribute for better behavior when scrolling.[/en]
+ *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
+ * @modifier chevron
+ *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
+ *   [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]
+ * @description
+ *   [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]
+ *   [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-header
+ *   [en]ons-list-header component[/en]
+ *   [ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList
+ *   [en]Using lists[/en]
+ *   [ja]リストを使う[/ja]
+ * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
+ */
 class ListItemElement extends BaseElement {
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]The appearance of the list item.[/en]
+   *   [ja]各要素の表現を指定します。[/ja]
+   */
+
+  /**
+   * @attribute lock-on-drag
+   * @type {String}
+   * @description
+   *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
+   *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+   */
+
+  /**
+   * @attribute tappable
+   * @type {Color}
+   * @description
+   *   [en]Changes the background color when tapped. An optional color value can be defined. Default color is "#d9d9d9".[/en]
+   *   [ja][/ja]
+   */
+
   createdCallback() {
     this.classList.add('list__item');
     ModifierUtil.initModifier(this, scheme);

@@ -15,4 +15,15 @@ limitations under the License.
 
 */
 
+/**
+ * @element ons-scroller
+ * @category page
+ * @description
+ *   [en]Makes the content inside this tag scrollable.[/en]
+ *   [ja]要素内をスクロール可能にします。[/ja]
+ * @example
+ * <ons-scroller style="height: 200px; width: 100%">
+ *   ...
+ * </ons-scroller>
+ */
 window.OnsScrollerElement = window.OnsScrollerElement ? window.OnsScrollerElement : document.registerElement('ons-scroller');

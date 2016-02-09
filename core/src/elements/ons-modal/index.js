@@ -36,7 +36,48 @@ const _animatorDict = {
   'none': ModalAnimator
 };
 
+/**
+ * @element ons-modal
+ * @category modal
+ * @description
+ *   [en]
+ *     Modal component that masks current screen.
+ *     Underlying components are not subject to any events while the modal component is shown.
+ *   [/en]
+ *   [ja]
+ *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *     モーダルが表示されている間はイベント通知が行われません。
+ *   [/ja]
+ * @guide UsingModal
+ *   [en]Using ons-modal component[/en]
+ *   [ja]モーダルの使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @codepen devIg
+ * @example
+ * <ons-modal>
+ *   ...
+ * </ons-modal>
+ */
 class ModalElement extends BaseElement {
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the modal. Can be either "none" or "fade".[/en]
+   *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
+   */
+
+  /**
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
@@ -56,10 +97,30 @@ class ModalElement extends BaseElement {
     });
   }
 
+  /**
+   * @method getDeviceBackButtonHandler
+   * @signature getDeviceBackButtonHandler()
+   * @return {Object}
+   *   [en]Device back button handler.[/en]
+   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @description
+   *   [en]Retrieve the back button handler.[/en]
+   *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
+   */
   getDeviceBackButtonHandler() {
     return this._deviceBackButtonHandler;
   }
 
+  /**
+   * @method setDeviceBackButtonHandler
+   * @signature setDeviceBackButtonHandler(callback)
+   * @return {Function} callback
+   *   [en][/en]
+   *   [ja][/ja]
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
   setDeviceBackButtonHandler(callback) {
     if (this._deviceBackButtonHandler) {
       this._deviceBackButtonHandler.destroy();
@@ -123,18 +184,38 @@ class ModalElement extends BaseElement {
     }
   }
 
+  /**
+   * @method isShown
+   * @signature isShown()
+   * @return {Boolean}
+   *   [en]true if the modal is visible.[/en]
+   *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
+   * @description
+   *   [en]Returns whether the modal is visible or not.[/en]
+   *   [ja]モーダルが表示されているかどうかを返します。[/ja]
+   */
   isShown() {
     return this.style.display !== 'none';
   }
 
   /**
-   * Show modal view.
-   *
+   * @method show
+   * @signature show([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after modal is shown
-   * @return {Promise} Resolves to the displayed element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @description
+   *   [en]Show modal.[/en]
+   *   [ja]モーダルを表示します。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the displayed element[/en]
+   *   [ja][/ja]
    */
   show(options = {}) {
     options.animationOptions = util.extend(
@@ -165,12 +246,20 @@ class ModalElement extends BaseElement {
   }
 
   /**
-   * Toggle modal view.
-   *
+   * @method toggle
+   * @signature toggle([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after modal is toggled
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @description
+   *   [en]Toggle modal visibility.[/en]
+   *   [ja]モーダルの表示を切り替えます。[/ja]
    */
   toggle() {
     if (this.isShown()) {
@@ -181,13 +270,23 @@ class ModalElement extends BaseElement {
   }
 
   /**
-   * Hide modal view.
-   *
+   * @method hide
+   * @signature hide([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after modal is hidden
-   * @return {Promise} Resolves to the hidden element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @description
+   *   [en]Hide modal.[/en]
+   *   [ja]モーダルを非表示にします。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the hidden element[/en]
+   *   [ja][/ja]
    */
   hide(options = {}) {
     options.animationOptions = util.extend(
