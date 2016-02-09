@@ -28,7 +28,7 @@ var OnsNavigator = React.createClass({
      );
   },
 
-  resetToPage: function(reactPage) {
+  resetToPage: function(reactPage, options) {
     var page = arguments.length > 0 ? reactPage : this.elements[0].elem;
     this.elements = [];
     this.elements.push({elem:page});
@@ -38,6 +38,11 @@ var OnsNavigator = React.createClass({
 
     var htmlString = ReactDOMServer.renderToStaticMarkup(page);
 
+    if (options == undefined) {
+      options = {};
+    }
+    options.pageHTML = htmlString;
+
     var children = [];
     for (var i =0; i < this.node.firstChild.children.length; i++) {
       children.push(this.node.firstChild.children[i].cloneNode(true));
@@ -45,7 +50,7 @@ var OnsNavigator = React.createClass({
 
     var node = this.node;
 
-     this.node.firstChild.resetToPage('', {pageHTML: htmlString}).then(
+     this.node.firstChild.resetToPage('', options).then(
        function() {
          var newNode = node.firstChild.children[0];
          for (var i =0; i < children.length; i++) {
@@ -64,9 +69,10 @@ var OnsNavigator = React.createClass({
      });
   },
 
-  popPage: function() {
+  popPage: function(options) {
+
     var navNode = ReactDOM.findDOMNode(this).firstChild;
-    navNode.popPage();
+    navNode.popPage(options);
 
     this.elements.pop();
 
@@ -110,8 +116,15 @@ var OnsNavigator = React.createClass({
     );
   },
 
-  replacePage: function(reactPage) {
+  replacePage: function(reactPage, options) {
     var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
+
+    if (options == undefined) {
+      options = {};
+    }
+    options.pageHTML = htmlString;
+
+
     var node = this.node;
     var navNode = this.node.firstChild;
 
@@ -124,7 +137,7 @@ var OnsNavigator = React.createClass({
 
     var deleteElem = navNode.children[navNode.children.length - 1];
 
-    this.node.firstChild.replacePage('', {pageHTML: htmlString})
+    this.node.firstChild.replacePage('', options)
     .then(function(){
 
       var lastNode = navNode.children[navNode.children.length -1];
@@ -185,19 +198,25 @@ var OnsNavigator = React.createClass({
        }.bind(this));
   },
 
-  pushComponent: function(reactPage) {
+  pushComponent: function(reactPage, options) {
     if (!reactUtil.rendersToOnsPage(reactPage)) {
       throw new Error("The component that react pushes needs to render to <ons-page>");
     }
+
+    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
+
+    if (options == undefined) {
+      options = {};
+    }
+    options.pageHTML = htmlString;
 
 
     this.elements.push({elem:reactPage});
     var elements = this.elements;
 
-    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
 
-    var node =  ReactDOM.findDOMNode(this)
-    node.firstChild._pushPage(null, {pageHTML: htmlString}).then(function() {
+        var node =  ReactDOM.findDOMNode(this)
+    node.firstChild._pushPage(null, options).then(function() {
        var help = [];
        for (var i =0; i < elements.length; i++) {
          help.push(elements[i].elem);
