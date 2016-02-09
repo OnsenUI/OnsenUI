@@ -13,35 +13,41 @@
   <script src="../../build/js/angular-onsenui.js"></script>
   <script>
     ons.bootstrap();
+    // window.addEventListener("contextmenu", function(e) { e.preventDefault(); })
   </script>
 </head>
 
 <body>
   <ons-page modifier="material">
+
     <ons-toolbar modifier="material">
-      <ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>
+      <ons-ripple></ons-ripple>
       <div class="center">Ripple</div>
     </ons-toolbar>
 
     <ons-list>
-      <ons-list-item><ons-ripple color="rgba(0, 255, 0, 0.3)"></ons-ripple>One</ons-list-item>
-      <ons-list-item><ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>Two</ons-list-item>
-      <ons-list-item><ons-ripple color="rgba(219, 63, 49, 0.3)"></ons-ripple>Three</ons-list-item>
+      <ons-list-item><ons-ripple></ons-ripple>Default</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(49, 63, 219, 0.3)"></ons-ripple>Color</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(0, 255, 0, 0.3)" center="true"></ons-ripple>Center</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(0, 0, 0, 0.3)" background="rgba(0,100,200,0.1)"></ons-ripple>Different background</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(66, 133, 244, 0.3)" background="none"></ons-ripple>No background</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(219, 63, 49, 0.3)" start-radius="30"></ons-ripple>Start radius</ons-list-item>
       <ons-list-item><ons-ripple disabled color="rgba(66, 133, 244, 0.3)"></ons-ripple>Disabled</ons-list-item>
     </ons-list>
 
-    <ons-ripple style="width: 100%; text-align: center;" target="children" color="rgba(0, 0, 0, 0.3)">
+    <ons-ripple style="width: 100%; text-align: center;" target="children" color="rgba(0, 0, 0, 0.3)" background="none">
       <p>Target</p>
       <p>Children</p>
     </ons-ripple>
 
+
     <ons-fab>
-      <ons-ripple></ons-ripple>
+      <ons-ripple color="rgba(255,255,255,0.2)"></ons-ripple>
       <ons-icon icon="md-car"></ons-icon>
     </ons-fab>
 
     <ons-speed-dial position="right bottom" direction="up">
-      <ons-ripple></ons-ripple>
+      <ons-ripple color="rgba(255,255,255,0.3)" background="none"></ons-ripple>
       <ons-icon icon="md-car"></ons-icon>
       <ons-speed-dial-item>
         <ons-ripple></ons-ripple>
@@ -57,6 +63,15 @@
       </ons-speed-dial-item>
 
     </ons-speed-dial>
+    <ons-button modifier="material">
+      <ons-ripple></ons-ripple>
+      material button
+    </ons-button>
+    <ons-button modifier="material--flat">
+      <ons-ripple></ons-ripple>
+      flat button
+    </ons-button>
+
   </ons-page>
 </body>
 </html>
