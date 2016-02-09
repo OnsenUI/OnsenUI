@@ -240,7 +240,7 @@ class RippleElement extends BaseElement {
         this._background.style.background = current;
       }
     }
-    if (name == 'center') {
+    if (name === 'center') {
       this._center = current != null && current != 'false';
     }
   }
