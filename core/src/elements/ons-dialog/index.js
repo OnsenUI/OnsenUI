@@ -46,7 +46,139 @@ const _animatorDict = {
   'none': DialogAnimator
 };
 
+/**
+ * @element ons-dialog
+ * @category dialog
+ * @modifier material
+ *   [en]Display a Material Design dialog.[/en]
+ *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
+ * @description
+ *  [en]Dialog that is displayed on top of current screen.[/en]
+ *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
+ * @codepen zxxaGa
+ * @guide UsingDialog
+ *   [en]Learn how to use the dialog component.[/en]
+ *   [ja]ダイアログコンポーネントの使い方[/ja]
+ * @seealso ons-alert-dialog
+ *   [en]ons-alert-dialog component[/en]
+ *   [ja]ons-alert-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-popoverコンポーネント[/ja]
+ * @example
+ * <script>
+ *   ons.ready(function() {
+ *     ons.createDialog('dialog.html').then(function(dialog) {
+ *       dialog.show();
+ *     });
+ *   });
+ * </script>
+ *
+ * <script type="text/ons-template" id="dialog.html">
+ *   <ons-dialog cancelable>
+ *     ...
+ *   </ons-dialog>
+ * </script>
+ */
 class DialogElement extends BaseElement {
+
+  /**
+   * @event preshow
+   * @description
+   * [en]Fired just before the dialog is displayed.[/en]
+   * [ja]ダイアログが表示される直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.dialog
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute this function to stop the dialog from being shown.[/en]
+   *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
+   */
+
+  /**
+   * @event postshow
+   * @description
+   * [en]Fired just after the dialog is displayed.[/en]
+   * [ja]ダイアログが表示された直後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.dialog
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event prehide
+   * @description
+   * [en]Fired just before the dialog is hidden.[/en]
+   * [ja]ダイアログが隠れる直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.dialog
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute this function to stop the dialog from being hidden.[/en]
+   *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
+   */
+
+  /**
+   * @event posthide
+   * @description
+   * [en]Fired just after the dialog is hidden.[/en]
+   * [ja]ダイアログが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.dialog
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   */
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *  [en]The appearance of the dialog.[/en]
+   *  [ja]ダイアログの表現を指定します。[/ja]
+   */
+
+  /**
+   * @attribute cancelable
+   * @description
+   *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
+   *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+   */
+
+  /**
+   * @attribute disabled
+   * @description
+   *  [en]If this attribute is set the dialog is disabled.[/en]
+   *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
+   */
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
+   *  [ja]ダイアログを表示する際のアニメーション名を指定します。"none"もしくは"default"を指定できます。[/ja]
+   */
+
+  /**
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
+
+  /**
+   * @attribute mask-color
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
 
   /**
    * @return {Element}
@@ -111,7 +243,14 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   *  @return {Object}
+   * @method getDeviceBackButtonHandler
+   * @signature getDeviceBackButtonHandler()
+   * @return {Object/null}
+   *   [en]Device back button handler.[/en]
+   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @description
+   *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
+   *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
    */
   getDeviceBackButtonHandler() {
     return this._deviceBackButtonHandler;
@@ -136,12 +275,23 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * Show dialog.
-   *
+   * @method show
+   * @signature show([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after dialog is shown
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function is called after the dialog has been revealed.[/en]
+   *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *  [en]Show the dialog.[/en]
+   *  [ja]ダイアログを開きます。[/ja]
    * @return {Promise} Resolves to the displayed element.
    */
   show(options = {}) {
@@ -190,13 +340,26 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * Hide dialog.
-   *
+   * @method hide
+   * @signature hide([options])
    * @param {Object} [options]
-   * @param {String} [options.animation] animation type
-   * @param {Object} [options.animationOptions] animation options
-   * @param {Function} [options.callback] callback after dialog is hidden
-   * @return {Promise} Resolves to the hidden element
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Function} [options.callback]
+   *   [en]This functions is called after the dialog has been hidden.[/en]
+   *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
+   * @description
+   *   [en]Hide the dialog.[/en]
+   *   [ja]ダイアログを閉じます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the hidden element[/en]
+   *   [ja][/ja]
    */
   hide(options = {}) {
     let cancel = false;
@@ -242,7 +405,11 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * Destroy dialog.
+   * @method destroy
+   * @signature destroy()
+   * @description
+   *  [en]Destroy the dialog and remove it from the DOM tree.[/en]
+   *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
    */
   destroy() {
     if (this.parentElement) {
@@ -251,27 +418,42 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * True if dialog is visible.
-   *
+   * @method isShown
+   * @signature isShown()
+   * @description
+   *   [en]Returns whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
    * @return {Boolean}
+   *   [en]true if the dialog is visible.[/en]
+   *   [ja]ダイアログが表示されている場合にtrueを返します。[/ja]
    */
   isShown() {
     return this._visible;
   }
 
   /**
-   * True if the dialog is cancelable.
-   *
+   * @method isCancelable
+   * @signature isCancelable()
+   * @description
+   *   [en]Returns whether the dialog is cancelable or not.[/en]
+   *   [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
    * @return {Boolean}
+   *   [en]true if the dialog is cancelable.[/en]
+   *   [ja]ダイアログがキャンセル可能な場合trueを返します。[/ja]
    */
   isCancelable() {
     return this.hasAttribute('cancelable');
   }
 
   /**
-   * Disable or enable dialog.
-   *
-   * @param {Boolean}
+   * @method setDisabled
+   * @signature setDisabled(disabled)
+   * @description
+   *   [en]Disable or enable the dialog.[/en]
+   *   [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
+   * @param {Boolean} disabled
+   *   [en]If true the dialog will be disabled.[/en]
+   *   [ja]trueを指定するとダイアログをdisabled状態になります。[/ja]
    */
   setDisabled(disabled) {
     if (typeof disabled !== 'boolean') {
@@ -286,18 +468,28 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * True if dialog is disabled.
-   *
+   * @method isDisabled
+   * @signature isDisabled()
+   * @description
+   *   [en]Returns whether the dialog is disabled or enabled.[/en]
+   *   [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
    * @return {Boolean}
+   *   [en]true if the dialog is disabled.[/en]
+   *   [ja]ダイアログがdisabled状態の場合trueを返します。[/ja]
    */
   isDisabled() {
     return this.hasAttribute('disabled');
   }
 
   /**
-   * Make dialog cancelable or uncancelable.
-   *
-   * @param {Boolean}
+   * @method setCancelable
+   * @signature setCancelable(cancelable)
+   * @param {Boolean} cancelable
+   *   [en]If true the dialog will be cancelable.[/en]
+   *   [ja]ダイアログをキャンセル可能にする場合trueを指定します。[/ja]
+   * @description
+   *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+   *   [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
    */
   setCancelable(cancelable) {
     if (typeof cancelable !== 'boolean') {

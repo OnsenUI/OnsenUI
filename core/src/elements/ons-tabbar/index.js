@@ -68,7 +68,138 @@ const generateId = (() => {
   return () => 'ons-tabbar-gen-' + (i++);
 })();
 
+/**
+ * @element ons-tabbar
+ * @category navigation
+ * @description
+ *   [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
+ * @codepen pGuDL
+ * @guide UsingTabBar
+ *   [en]Using tab bar[/en]
+ *   [ja]タブバーを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tab
+ *   [en]ons-tab component[/en]
+ *   [ja]ons-tabコンポーネント[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
+ * @example
+ * <ons-tabbar>
+ *   <ons-tab page="home.html" active="true">
+ *     <ons-icon icon="ion-home"></ons-icon>
+ *     <span style="font-size: 14px">Home</span>
+ *   </ons-tab>
+ *   <ons-tab page="fav.html" active="true">
+ *     <ons-icon icon="ion-star"></ons-icon>
+ *     <span style="font-size: 14px">Favorites</span>
+ *   </ons-tab>
+ *   <ons-tab page="settings.html" active="true">
+ *     <ons-icon icon="ion-gear-a"></ons-icon>
+ *     <span style="font-size: 14px">Settings</span>
+ *   </ons-tab>
+ * </ons-tabbar>
+ *
+ * <ons-template id="home.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="fav.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="settings.html">
+ *   ...
+ * </ons-template>
+ */
 class TabbarElement extends BaseElement {
+
+  /**
+   * @event prechange
+   * @description
+   *   [en]Fires just before the tab is changed.[/en]
+   *   [ja]アクティブなタブが変わる前に発火します。[/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Number} event.index
+   *   [en]Current index.[/en]
+   *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+   * @param {Object} event.tabItem
+   *   [en]Tab item object.[/en]
+   *   [ja]tabItemオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Call this function to cancel the change event.[/en]
+   *   [ja]この関数を呼び出すと、アクティブなタブの変更がキャンセルされます。[/ja]
+   */
+
+  /**
+   * @event postchange
+   * @description
+   *   [en]Fires just after the tab is changed.[/en]
+   *   [ja]アクティブなタブが変わった後に発火します。[/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Number} event.index
+   *   [en]Current index.[/en]
+   *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+   * @param {Object} event.tabItem
+   *   [en]Tab item object.[/en]
+   *   [ja]tabItemオブジェクト。[/ja]
+   */
+
+  /**
+   * @event reactive
+   * @description
+   *   [en]Fires if the already open tab is tapped again.[/en]
+   *   [ja]すでにアクティブになっているタブがもう一度タップやクリックされた場合に発火します。[/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Number} event.index
+   *   [en]Current index.[/en]
+   *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+   * @param {Object} event.tabItem
+   *   [en]Tab item object.[/en]
+   *   [ja]tabItemオブジェクト。[/ja]
+   */
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default none
+   * @description
+   *   [en]Animation name. Preset values are "none", "slide" and "fade". Default is "none".[/en]
+   *   [ja]ページ読み込み時のアニメーションを指定します。"none"、"fade"、"slide"のいずれかを選択できます。デフォルトは"none"です。[/ja]
+   */
+
+  /**
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
+
+  /**
+   * @attribute position
+   * @initonly
+   * @type {String}
+   * @default bottom
+   * @description
+   *   [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
+   *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
+   */
 
   createdCallback() {
     this._tabbarId = generateId();
@@ -167,11 +298,26 @@ class TabbarElement extends BaseElement {
   }
 
   /**
-   * @param {String} page
+   * @method loadPage
+   * @signature loadPage(url, [options])
+   * @param {String} url
+   *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+   *   [ja]pageのURLか、もしくは<code>&lt;ons-template&gt;</code>で宣言したid属性の値を利用できます。[/ja]
+   * @description
+   *   [en]Displays a new page without changing the active index.[/en]
+   *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
    * @param {Object} [options]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {Object} [options.animation]
+   *   [en][/en]
+   *   [ja][/ja]
    * @param {Object} [options.callback]
-   * @return {Promise} Resolves to the new page element.
+   *   [en][/en]
+   *   [ja][/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element.[/en]
+   *   [ja][/ja]
    */
   loadPage(page, options = {}) {
     options._removeElement = true;
@@ -291,12 +437,29 @@ class TabbarElement extends BaseElement {
   }
 
   /**
+   * @method setActiveTab
+   * @signature setActiveTab(index, [options])
    * @param {Number} index
+   *   [en]Tab index.[/en]
+   *   [ja]タブのインデックスを指定します。[/ja]
    * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {Boolean} [options.keepPage]
+   *   [en]If true the page will not be changed.[/en]
+   *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
    * @param {String} [options.animation]
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the new page element.
+   *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+   *   [ja]アニメーション名を指定します。"fade"、"slide"、"none"のいずれかを指定できます。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @description
+   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+   *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element.[/en]
+   *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
 
@@ -423,7 +586,12 @@ class TabbarElement extends BaseElement {
   }
 
   /**
+   * @method setTabbarVisibility
+   * @signature setTabbarVisibility(visible)
    * @param {Boolean} visible
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
     this._contentElement.style[this._hasTopTabbar() ? 'top' : 'bottom'] = visible ? '' : '0px';
@@ -431,7 +599,14 @@ class TabbarElement extends BaseElement {
   }
 
   /**
-   * @return {Number} When active tab is not found, returns -1.
+   * @method getActiveTabIndex
+   * @signature getActiveTabIndex()
+   * @return {Number}
+   *   [en]The index of the currently active tab.[/en]
+   *   [ja]現在アクティブになっているタブのインデックスを返します。[/ja]
+   * @description
+   *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
+   *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
    */
   getActiveTabIndex() {
     var tabs = this._getTabbarElement().children;

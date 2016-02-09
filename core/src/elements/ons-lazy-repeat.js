@@ -84,6 +84,56 @@ class InternalDelegate extends LazyRepeatDelegate {
   }
 }
 
+/**
+ * @element ons-lazy-repeat
+ * @category control
+ * @description
+ *   [en]
+ *     Using this component a list with millions of items can be rendered without a drop in performance.
+ *     It does that by "lazily" loading elements into the DOM when they come into view and
+ *     removing items from the DOM when they are not visible.
+ *   [/en]
+ *   [ja]
+ *     このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、
+ *     画面から見えなくなった場合にはその要素は動的にアンロードされます。
+ *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
+ *   [/ja]
+ * @codepen QwrGBm
+ * @guide UsingLazyRepeat
+ *   [en]How to use Lazy Repeat[/en]
+ *   [ja]レイジーリピートの使い方[/ja]
+ * @example
+ * <script>
+ *   window.addEventListener('load', function() {
+ *     var lazyRepeat = document.querySelector('#list');
+ *     lazyRepeat.delegate = {
+ *      calculateItemHeight: function(i) {
+ *        return 44;
+ *      },
+ *      createItemContent: function(i, template) {
+ *        var dom = template.cloneNode(true);
+ *        dom.innerText = i;
+ *
+ *        return dom;
+ *      },
+ *      countItems: function() {
+ *         // Return number of items.
+ *        return 10000000;
+ *      },
+ *      destroyItem: function(index, item) {
+ *        // Optional method that is called when an item is unloaded.
+ *        console.log('Destroyed item with index: ' + index);
+ *      }
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-list>
+ *   <ons-lazy-repeat>
+ *     <ons-list-item></ons-list-item>
+ *   </ons-lazy-repeat>
+ * </ons-list>
+ */
 class LazyRepeatElement extends BaseElement {
 
   createdCallback() {
@@ -125,6 +175,13 @@ class LazyRepeatElement extends BaseElement {
     }
   }
 
+  /**
+   * @method refresh
+   * @signature refresh()
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
   refresh() {
     if (this._lazyRepeatProvider) {
       this._lazyRepeatProvider.refresh();
@@ -132,7 +189,12 @@ class LazyRepeatElement extends BaseElement {
   }
 
   /**
-   * @param {Object} delegate
+   * @method setDelegate
+   * @signature setDelegate(userDelegate)
+   * @param {Object} userDelegate
+   * @description
+   *  [en]Specify a delegate object to load and unload item elements.[/en]
+   *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
    */
   setDelegate(userDelegate) {
     if (this._lazyRepeatProvider) {
@@ -143,6 +205,12 @@ class LazyRepeatElement extends BaseElement {
     this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
   }
 
+  /**
+   * @property delegate
+   * @description
+   *  [en]Specify a delegate object to load and unload item elements.[/en]
+   *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
+   */
   set delegate(userDelegate) {
     this.setDelegate(userDelegate);
   }

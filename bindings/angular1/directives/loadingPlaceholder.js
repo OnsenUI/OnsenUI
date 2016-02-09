@@ -1,7 +1,5 @@
 /**
- * @ngdoc directive
- * @id loading-placeholder
- * @name ons-loading-placeholder
+ * @element ons-loading-placeholder
  * @category util
  * @description
  *   [en]Display a placeholder while the content is loading.[/en]
@@ -14,8 +12,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-loading-placeholder
+ * @attribute ons-loading-placeholder
  * @initonly
  * @type {String}
  * @description

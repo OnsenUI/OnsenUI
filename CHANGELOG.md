@@ -16,6 +16,7 @@ v2.0.0-beta.7
  * ons-navigator: New Lift and Fade animators that match Material Design styles.
  * ons-input: Extended component to support type `checkbox` and `radio`.
  * ons-ripple: Can be added by using `effect="ripple"` attribute.
+ * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
 
 v2.0.0-beta.6
 ----
