@@ -12,6 +12,7 @@ v2.0.0-beta.7
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
  * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
+ * ons-switch: Switch is now draggable.
 
 v2.0.0-beta.6
 ----
