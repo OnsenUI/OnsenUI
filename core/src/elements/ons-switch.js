@@ -44,13 +44,6 @@ const locations = {
   material: [0, 16]
 };
 
-const getX = (e) => {
-  if (e.gesture) {
-    e = e.gesture.srcEvent;
-  }
-  return e.clientX || e.changedTouches[0].clientX;
-};
-
 class SwitchElement extends BaseElement {
   /**
    * @element ons-switch
@@ -232,13 +225,16 @@ class SwitchElement extends BaseElement {
   }
 
   _onDragStart(e) {
+    if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
+      return;
+    }
     this.classList.add('switch--active');
-    var startX = getX(e);
     var l = locations[this._isMaterial ? 'material' : 'ios'];
+    var startX = l[this.checked ? 1 : 0];
 
     var onDrag = (e) => {
       e.gesture.srcEvent.preventDefault();
-      var position = l[this.checked] + getX(e) - startX;
+      var position = startX + e.gesture.deltaX;
       this._handle.style.left = Math.min(l[1], Math.max(l[0], position)) + 'px';
     };
 
@@ -265,7 +261,7 @@ class SwitchElement extends BaseElement {
     case 'name':
       this._checkbox.setAttribute(name, current || generateId());
       break;
-    case 'checked':
+    case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;
     case 'disabled':
       if (current !== null) {
