@@ -201,13 +201,6 @@ class TabElement extends BaseElement {
     return this.classList.contains('active');
   }
 
-  /**
-   * @return {Boolean}
-   */
-  canReload() {
-    return !this.hasAttribute('no-reload');
-  }
-
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }

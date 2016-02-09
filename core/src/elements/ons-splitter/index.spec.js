@@ -66,35 +66,34 @@ describe('OnsSplitterElement', () => {
 
   describe('#openRight()', () => {
     it('should open right ons-splitter-side', () => {
-      expect(splitter.openRight()).to.be.true;
-      expect(splitter.openLeft()).to.be.false;
-      expect(splitter.rightIsOpen()).to.be.true;
+      return expect(splitter.openRight()).to.eventually.be.fulfilled.then(() => {
+        expect(splitter.rightIsOpen()).to.be.true;
+        return expect(splitter.openLeft()).to.eventually.be.rejected;
+      });
     });
   });
 
   describe('#openLeft()', () => {
-    it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.false;
+    it('should be rejected on "split" mode with ons-splitter-side element', () => {
+      return expect(splitter.openLeft()).to.eventually.be.rejected;
     });
   });
 
   describe('#closeRight()', () => {
-    it('should close right ons-splitter-side', (done) => {
+    it('should close right ons-splitter-side', () => {
       expect(splitter.rightIsOpen()).to.be.false;
-
-      expect(splitter.openRight({callback: () => {
+      return splitter.openRight().then(() => {
         expect(splitter.rightIsOpen()).to.be.true;
-        expect(splitter.closeRight({callback: () => {
+        return expect(splitter.closeRight()).to.eventually.be.fulfilled.then(() => {
           expect(splitter.rightIsOpen()).to.be.false;
-          done();
-        }})).to.be.true;
-      }})).to.be.true;
+        });
+      });
     });
   });
 
   describe('#closeLeft()', () => {
-    it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.false;
+    it('should be rejected on "split" mode with ons-splitter-side element', () => {
+      expect(splitter.closeLeft()).to.eventually.be.rejected;
     });
   });
 

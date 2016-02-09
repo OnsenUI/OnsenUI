@@ -54,28 +54,32 @@ class SplitterContentElement extends BaseElement {
    * @param {String} page
    * @param {Object} [options]
    * @param {Function} [options.callback]
+   * @return {Promise} Resolves to the new page element
    */
   load(page, options = {}) {
     this._page = page;
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
-    internal.getPageHTMLAsync(page).then((html) => {
-      rewritables.link(this, util.createFragment(html), options, (fragment) => {
-        while (this.childNodes[0]) {
-          if (this.childNodes[0]._hide instanceof Function) {
-            this.childNodes[0]._hide();
+    return internal.getPageHTMLAsync(page).then((html) => {
+      return new Promise(resolve => {
+        rewritables.link(this, util.createFragment(html), options, (fragment) => {
+          while (this.childNodes[0]) {
+            if (this.childNodes[0]._hide instanceof Function) {
+              this.childNodes[0]._hide();
+            }
+            this.removeChild(this.childNodes[0]);
           }
-          this.removeChild(this.childNodes[0]);
-        }
 
-        this.appendChild(fragment);
-        util.arrayFrom(fragment.children).forEach(child => {
-          if (child._show instanceof Function) {
-            child._show();
-          }
+          this.appendChild(fragment);
+          util.arrayFrom(fragment.children).forEach(child => {
+            if (child._show instanceof Function) {
+              child._show();
+            }
+          });
+
+          options.callback();
+          resolve(this.firstChild);
         });
-
-        options.callback();
       });
     });
   }
