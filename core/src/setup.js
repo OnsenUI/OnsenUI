@@ -53,6 +53,7 @@ import './elements/ons-pull-hook';
 import './elements/ons-ripple';
 import './elements/ons-row';
 import './elements/ons-scroller';
+import './elements/ons-scrollbar';
 import './elements/ons-speed-dial-item';
 import './elements/ons-speed-dial';
 import './elements/ons-splitter-content';
