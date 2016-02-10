@@ -215,22 +215,22 @@ var OnsNavigator = React.createClass({
     var elements = this.elements;
 
 
-        var node =  ReactDOM.findDOMNode(this)
+    var node =  ReactDOM.findDOMNode(this)
     node.firstChild._pushPage(null, options).then(function() {
-       var help = [];
-       for (var i =0; i < elements.length; i++) {
-         help.push(elements[i].elem);
-       }
+      var help = [];
+      for (var i =0; i < elements.length; i++) {
+        help.push(elements[i].elem);
+      }
 
-       var node2 =ReactDOM.render(
-         <ons-navigator >
-           {help}
-         </ons-navigator>, 
-         node
-       );
+      var node2 =ReactDOM.render(
+        <ons-navigator >
+          {help}
+        </ons-navigator>, 
+        node
+      );
 
-        node2._pages[elements.length-1].element = node2.children[elements.length-1];
-        node2.removeChild(node2.children[elements.length]);
+      node2._pages[elements.length-1].element = node2.children[elements.length-1];
+      node2.removeChild(node2.children[elements.length]);
     });
   },
 });
