@@ -160,7 +160,7 @@ util.createFragment = (html) => {
   wrapper.innerHTML = html;
   const fragment = document.createDocumentFragment();
 
-  if (wrapper.firstChild) {
+  while (wrapper.firstChild) {
     fragment.appendChild(wrapper.firstChild);
   }
 
