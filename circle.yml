@@ -5,6 +5,7 @@ dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install g++
     - npm install
+    - npm install -g npm
     - npm install -g coveralls
     - cd css-components; npm install
 deployment:
