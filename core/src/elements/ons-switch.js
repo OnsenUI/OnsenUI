@@ -44,27 +44,28 @@ const locations = {
   material: [0, 16]
 };
 
+/**
+ * @element ons-switch
+ * @category form
+ * @description
+ *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
+ *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @codepen LpXZQQ
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @seealso ons-button
+ *   [en]ons-button component[/en]
+ *   [ja]ons-buttonコンポーネント[/ja]
+ * @example
+ * <ons-switch checked></ons-switch>
+ * <ons-switch modifier="material"></ons-switch>
+ */
+
 class SwitchElement extends BaseElement {
-  /**
-   * @element ons-switch
-   * @category form
-   * @description
-   *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
-   *  [ja]スイッチを表示するコンポーネントです。[/ja]
-   * @codepen LpXZQQ
-   * @guide UsingFormComponents
-   *   [en]Using form components[/en]
-   *   [ja]フォームを使う[/ja]
-   * @guide EventHandling
-   *   [en]Event handling descriptions[/en]
-   *   [ja]イベント処理の使い方[/ja]
-   * @seealso ons-button
-   *   [en]ons-button component[/en]
-   *   [ja]ons-buttonコンポーネント[/ja]
-   * @example
-   * <ons-switch checked></ons-switch>
-   * <ons-switch modifier="material"></ons-switch>
-   */
 
   /**
    * @event change
