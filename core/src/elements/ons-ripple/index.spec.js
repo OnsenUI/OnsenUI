@@ -224,15 +224,6 @@ describe('OnsRippleElement', () => {
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
     });
-
-    it('unsets _holding', () => {
-      ripple._gestureDetector = dummyDetector;
-      ripple._onHold(e);
-      expect(ripple._holding).to.be.ok;
-      setTimeout(() => {
-        expect(ripple._holding).to.not.be.ok;
-      }, 2200);
-    });
   });
 
   describe('#_onDragStart()', () => {
