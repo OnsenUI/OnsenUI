@@ -208,9 +208,8 @@ var OnsNavigator = React.createClass({
     if (options == undefined) {
       options = {};
     }
+
     options.pageHTML = htmlString;
-
-
     this.elements.push({elem:reactPage});
     var elements = this.elements;
 

@@ -134,6 +134,8 @@ class TabElement extends BaseElement {
   }
 
   setActive() {
+    console.log('call active');
+    console.log(this);
     const radio = util.findChild(this, 'input');
     radio.checked = true;
     this.classList.add('active');

@@ -378,12 +378,11 @@ gulp.task('dist-no-build', [], distFiles);
 gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], function() {
   gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
-  gulp.watch(['./bindings/react/components/*.jsx'], ['prepare']);
-
   var watched = [
     'bindings/angular1/*/*',
     'core/css/*.css',
-    'css-components/components-src/dist/*.css'
+    'css-components/components-src/dist/*.css',
+    './bindings/react/components/*.jsx'
   ];
 
   if (CORDOVA_APP) {
