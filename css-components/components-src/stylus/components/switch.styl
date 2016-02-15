@@ -85,7 +85,6 @@ switch__toggle()
 
 .switch__input
   hide-input()
-  z-index -1
 
 // switch toggle background
 .switch__toggle
@@ -120,16 +119,23 @@ switch__toggle()
 .switch--active .switch__handle
   transition-duration 0s
 
-.switch[checked] .switch__toggle
+input:checked + .switch__toggle
   box-shadow inset 0 0 0 2px var-switch-checked-background-color
   background-color var-switch-checked-background-color
 
-.switch[checked] .switch__handle
+input:checked + .switch__toggle .switch__handle
   left 21px
   box-shadow 0 3px 2px rgba(0,0,0,0.25)
 
-.switch[disabled] .switch__toggle
+input:disabled + .switch__toggle
   disabled()
+
+.switch__touch
+  position absolute
+  top -5px
+  bottom -5px
+  left -10px
+  right -10px
 
 /*! topdoc
   name: Material Switch
@@ -161,58 +167,65 @@ switch__toggle()
     </label>
 */
 
-.switch--material
+.switch.switch--material
   width 36px
   height 24px
   padding 0 10px
   min-width 36px
 
-.switch.switch--material .switch--material__toggle
-  background-color var-material-switch-inactive-background-color
-  margin-top 5px
-  height 14px
-  box-shadow none
+  .switch__toggle
+    background-color var-material-switch-inactive-background-color
+    margin-top 5px
+    height 14px
+    box-shadow none
 
-.switch.switch--material .switch--material__input
-  hide-input()
+  .switch__input
+    hide-input()
+
+  // switch toggle circle
+  .switch__handle
+    background-color var-material-switch-inactive-thumb-color
+    left 0px
+    margin-top -5px
+    width 20px
+    height 20px
+    shadow-2()
+
+  input:checked + .switch__toggle
+    background-color var-material-switch-active-background-color
+    box-shadow none
+
+    .switch__handle
+      left 16px
+      background-color var-material-switch-active-thumb-color
+      shadow-1()
+
+  input:disabled + .switch__toggle
+    disabled()
+
+  .switch__handle:before
+    background transparent
+    content ''
+    display block
+    width 100%
+    height 100%
+    border-radius 50%
+    z-index -1
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.12)
+    transition box-shadow 0.1s linear
+
+  &.switch--active .switch__handle:before
+    box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12)
+
+  &.switch--active input:checked + .switch__toggle .switch__handle:before
+    box-shadow: 0px 0px 0px 14px alpha(var-material-switch-active-thumb-color, 0.2)
+
+  .switch__touch
+    position absolute
+    top -10px
+    bottom -10px
+    left -15px
+    right -15px
+
+ons-switch.switch input, ons-switch.switch.switch--material input
   z-index -1
-
-.switch.switch--material[checked] .switch--material__handle
-  left 16px
-
-// switch toggle circle
-.switch.switch--material .switch--material__handle
-  background-color var-material-switch-active-thumb-color
-  left 0px
-  margin-top -5px
-  width 20px
-  height 20px
-  shadow-2()
-
-.switch.switch--material[checked] .switch--material__toggle
-  background-color var-material-switch-active-background-color
-  box-shadow none
-
-.switch.switch--material:not([checked]) .switch--material__handle
-  background-color var-material-switch-inactive-thumb-color
-  shadow-1()
-
-.switch--material[disabled] .switch--material__toggle
-  disabled()
-
-.switch--material__handle:before
-  background transparent
-  content ''
-  display block
-  width 100%
-  height 100%
-  border-radius 50%
-  z-index -1
-  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.12)
-  transition box-shadow 0.1s linear
-
-.switch--active .switch--material__handle:before
-  box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12)
-
-.switch--material.switch--active[checked] .switch--material__handle:before
-  box-shadow: 0px 0px 0px 14px alpha(var-material-switch-active-thumb-color, 0.2)
