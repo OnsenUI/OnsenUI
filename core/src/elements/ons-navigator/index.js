@@ -483,7 +483,7 @@ class NavigatorElement extends BaseElement {
     const tryInsertPage = () => {
       const unlock = this._doorLock.lock();
 
-      return internal.getPageHTMLAsync(page).then(templateHTML => {
+      var run = templateHTML => {
         const element = this._createPageElement(templateHTML);
         const pageObject = this._createPageObject(page, element, options);
 
@@ -501,7 +501,13 @@ class NavigatorElement extends BaseElement {
             }, 1000 / 60);
           });
         });
-      });
+      };
+
+      if (options.pageHTML) {
+        return run(options.pageHTML);
+      } else {
+        return internal.getPageHTMLAsync(page).then(run);
+      }
     };
 
     return new Promise(resolve => {
