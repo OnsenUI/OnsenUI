@@ -186,6 +186,7 @@ class TabbarElement extends BaseElement {
   _loadPage(page, options) {
     return new Promise(resolve => {
       OnsTabElement.prototype._createPageElement(page, pageElement => {
+        pageElement.setAttribute('_remove-element', options._removeElement);
         resolve(this._loadPageDOMAsync(pageElement, options));
       });
     });
@@ -265,9 +266,9 @@ class TabbarElement extends BaseElement {
         oldPageElement._hide();
       }
 
-      animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
+      animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          if (options._removeElement) {
+          if (options._removeElement && oldPageElement.hasAttribute('_remove-element')) {
             rewritables.unlink(this, oldPageElement, pageElement => {
               pageElement._destroy();
             });
@@ -310,7 +311,8 @@ class TabbarElement extends BaseElement {
     var previousTab = this._getActiveTabElement(),
       selectedTab = this._getTabElement(index),
       previousTabIndex = this.getActiveTabIndex(),
-      selectedTabIndex = index;
+      selectedTabIndex = index,
+      previousPageElement = this._getCurrentPageElement();
 
     if (!selectedTab) {
       return Promise.reject('Specified index does not match any tab.');
@@ -359,10 +361,10 @@ class TabbarElement extends BaseElement {
     });
 
     if (needLoad) {
-      var removeElement = true;
+      var removeElement = false;
 
-      if (previousTab && previousTab.isPersistent()) {
-        removeElement = false;
+      if (!previousTab || (previousPageElement && previousPageElement.hasAttribute('_remove-element'))) {
+        removeElement = true;
       }
 
       var params = {
@@ -387,19 +389,16 @@ class TabbarElement extends BaseElement {
 
       params.animationOptions = options.animationOptions || {};
 
-      if (selectedTab.isPersistent()) {
-        const link = (element, callback) => {
-          rewritables.link(this, element, options, callback);
-        };
 
-        return new Promise(resolve => {
-          selectedTab._loadPageElement(pageElement => {
-            resolve(this._loadPersistentPageDOM(pageElement, params));
-          }, link);
-        });
-      } else {
-        return this._loadPage(selectedTab.getAttribute('page'), params);
-      }
+      const link = (element, callback) => {
+        rewritables.link(this, element, options, callback);
+      };
+
+      return new Promise(resolve => {
+        selectedTab._loadPageElement(pageElement => {
+          resolve(this._loadPersistentPageDOM(pageElement, params));
+        }, link);
+      });
     }
 
     return Promise.resolve(this._getCurrentPageElement());
