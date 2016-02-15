@@ -336,10 +336,10 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#setActiveTab()', () => {
-    it('loads a persistent tab', (done) => {
+    it('loads any tab as persistent', (done) => {
       let element = ons._util.createElement(`
         <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge" persistent></ons-tab>
+          <ons-tab label="Hoge" page="hoge"></ons-tab>
         </ons-tabbar>
       `);
       document.body.appendChild(element);
@@ -375,11 +375,11 @@ describe('OnsTabbarElement', () => {
       expect(element.setActiveTab(0)).to.be.false;
     });
 
-    it('does not remove persistent tabs', (done) => {
+    it('does not remove tabs', (done) => {
       let element = ons._util.createElement(`
         <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge" persistent></ons-tab>
-          <ons-tab label="fuga" page="fuga" persistent></ons-tab>
+          <ons-tab label="Hoge" page="hoge"></ons-tab>
+          <ons-tab label="fuga" page="fuga"></ons-tab>
         </ons-tabbar>
       `);
 
@@ -397,8 +397,8 @@ describe('OnsTabbarElement', () => {
     it('keeps the page when option \'keepPage\' is true', (done) => {
       let element = ons._util.createElement(`
         <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge" persistent active="true"></ons-tab>
-          <ons-tab label="fuga" page="fuga" persistent></ons-tab>
+          <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
+          <ons-tab label="fuga" page="fuga"></ons-tab>
         </ons-tabbar>
       `);
 
