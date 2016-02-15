@@ -232,12 +232,18 @@ class NavigatorElement extends BaseElement {
   /**
    * @method replacePage
    * @signature replacePage(pageUrl, [options])
-   * @param {String} pageUrl
+   * @param {String} [pageUrl]
    *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
    *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.pageHTML]
+   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
    *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
@@ -260,6 +266,12 @@ class NavigatorElement extends BaseElement {
    */
   replacePage(page, options = {}) {
 
+    if (typeof page === 'object' && page !== null) {
+      options = page;
+    } else {
+      options.page = page;
+    }
+
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -277,7 +289,7 @@ class NavigatorElement extends BaseElement {
       onTransitionEnd();
     };
 
-    return this.pushPage(page, options);
+    return this.pushPage(options.page, options);
   }
 
   /**
@@ -452,6 +464,12 @@ class NavigatorElement extends BaseElement {
    */
   insertPage(index, page, options = {}) {
 
+    if (typeof page === 'object' && page !== null) {
+      options = page;
+    } else {
+      options.page = page;
+    }
+
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -558,12 +576,18 @@ class NavigatorElement extends BaseElement {
   /**
    * @method resetTopage
    * @signature resetToPage(pageUrl, [options])
-   * @param {String/undefined} pageUrl
+   * @param {String/undefined} [pageUrl]
    *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
    *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.pageHTML]
+   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
    *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
@@ -588,6 +612,12 @@ class NavigatorElement extends BaseElement {
    */
   resetToPage(page, options = {}) {
 
+    if (typeof page === 'object' && page !== null) {
+      options = page;
+    } else {
+      options.page = page;
+    }
+
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -606,15 +636,16 @@ class NavigatorElement extends BaseElement {
       onTransitionEnd();
     };
 
-    if (options.pageHTML == undefined && (page === undefined || page === '')) {
+    if (!options.pageHTML && (options.page === undefined || page === '')) {
       if (this.hasAttribute('page')) {
-        page = this.getAttribute('page');
+        options.page = this.getAttribute('page');
       } else {
         options.pageHTML = this._initialHTML;
-        page = '';
+        options.page = '';
       }
     }
-    return this.pushPage(page, options);
+
+    return this.pushPage(options.page, options);
   }
 
   attributeChangedCallback(name, last, current) {
@@ -644,12 +675,18 @@ class NavigatorElement extends BaseElement {
   /**
    * @method pushPage
    * @signature pushPage(page, [options])
-   * @param {String} page
+   * @param {String} [page]
    *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
    *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.pageHTML]
+   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
    *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
@@ -679,6 +716,12 @@ class NavigatorElement extends BaseElement {
    */
   pushPage(page, options = {}) {
 
+    if (typeof page === 'object' && page !== null) {
+      options = page;
+    } else {
+      options.page = page;
+    }
+
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -699,11 +742,11 @@ class NavigatorElement extends BaseElement {
     this._isPushing = true;
 
     return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(this._pushPage(page, options)));
+      this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
     });
   }
 
-  _pushPage(page, options) {
+  _pushPage(options) {
     const unlock = this._doorLock.lock();
     const done = function() {
       unlock();
@@ -711,13 +754,13 @@ class NavigatorElement extends BaseElement {
 
     const run = templateHTML => {
       const element = this._createPageElement(templateHTML);
-      return this._pushPageDOM(this._createPageObject(page, element, options), done);
+      return this._pushPageDOM(this._createPageObject(options.page, element, options), done);
     };
 
     if (options.pageHTML) {
       return run(options.pageHTML);
     } else {
-      return internal.getPageHTMLAsync(page).then(run);
+      return internal.getPageHTMLAsync(options.page).then(run);
     }
   }
 
@@ -835,16 +878,16 @@ class NavigatorElement extends BaseElement {
     }
 
 
-    let index, page;
+    let index;
     if (typeof item === 'string') {
-      page = item;
-      index = this._lastIndexOfPage(page);
+      options.page = item;
+      index = this._lastIndexOfPage(options.page);
     } else if (typeof item === 'number') {
       index = this._normalizeIndex(item);
       if (item >= this._pages.length) {
         throw new Error('The provided index does not match an existing page.');
       }
-      page = this._pages[index].page;
+      options.page = this._pages[index].page;
     } else {
       throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
@@ -853,7 +896,7 @@ class NavigatorElement extends BaseElement {
     if (index < 0) {
       // Fallback pushPage
       return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(this._pushPage(page, options)));
+        this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
       });
     } else if (index === this._pages.length - 1) {
       // Page is already the top
