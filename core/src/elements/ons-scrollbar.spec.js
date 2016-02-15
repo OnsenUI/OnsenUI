@@ -4,6 +4,10 @@ describe('OnsScrollbarElement', () => {
   var div, text, container, scrollbar, content;
   const spyOn = chai.spy.on.bind(chai.spy, OnsScrollbarElement.prototype);
 
+  const getValue = (element, property) => {
+    return window.getComputedStyle(element).getPropertyValue(property);
+  };
+
   beforeEach(() => {
     text = `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquet est eros, et euismod lorem pretium non. Nunc lorem libero, egestas ut sapien vel, pretium porta neque. Sed felis enim, lobortis eu velit in, condimentum laoreet odio. In a elit sed urna rutrum suscipit ac vel orci. Vestibulum maximus neque a justo faucibus euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam vel ipsum sed metus tristique venenatis. In ultrices ipsum vitae ligula vestibulum egestas. Morbi nec erat vehicula, semper diam ac, aliquet ex. Sed ut facilisis mi. Nunc laoreet est urna, vel iaculis dolor pharetra sed.
@@ -15,11 +19,14 @@ describe('OnsScrollbarElement', () => {
 
     document.body.appendChild(div);
     div.appendChild(scrollbar);
+
+    content = scrollbar._content;
   });
 
   afterEach(() => {
     // container.remove();
   });
+
 
   it('exists', () => {
     expect(window.OnsScrollbarElement).to.be.ok;
@@ -60,7 +67,15 @@ describe('OnsScrollbarElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    it.skip('is not called when an element is moved', () => {
+    it('is makes sure the parent will be scrollable', () => {
+      var div = document.createElement('div');
+      div.appendChild(new OnsScrollbarElement());
+
+      expect(getValue(div, 'position')).to.not.equal('static');
+      expect(getValue(div, 'overflow')).to.not.equal('scroll');
+    });
+
+    it('is not called when an element is moved', () => {
       var spy = spyOn('_attach'),
         div1 = document.createElement('div'),
         div2 = document.createElement('div');
@@ -72,7 +87,6 @@ describe('OnsScrollbarElement', () => {
 
       expect(spy).to.have.been.called.once;
       expect(div1.innerHTML).to.equal(div2.innerHTML);
-      expect(div1.isEqualNode(div2)).to.be.true;
 
       document.body.removeChild(div1);
       document.body.removeChild(div2);
@@ -80,50 +94,112 @@ describe('OnsScrollbarElement', () => {
   });
 
   describe('#_onScroll()', () => {
-    it('exists', () => {
-      expect(scrollbar._onScroll).to.be.ok;
-    });
-  });
+    it('is called when scrolling', (done) => {
+      var spy = spyOn('_onScroll');
 
-  describe('#_updateAutohide()', () => {
-    it('exists', () => {
-      expect(scrollbar._updateAutohide).to.be.ok;
-    });
-  });
+      div = document.createElement('div')
+      scrollbar = new OnsScrollbarElement();
+      div.innerHTML = text;
+      div.appendChild(scrollbar);
+      document.body.appendChild(div);
 
-  describe('#_overLimit()', () => {
-    it('exists', () => {
-      expect(scrollbar._overLimit).to.be.ok;
+      scrollbar._content.scrollTop = 10;
+      setTimeout(() => {
+        expect(spy).to.have.been.called.once;
+        done();
+      }, 100);
+    });
+
+    it('calls updateScrollbarHeight and updateScrollbarLocation', () => {
+      var spies = [spyOn('updateScrollbarHeight'), spyOn('updateScrollbarHeight')];
+      scrollbar._onScroll();
+      expect(spies[0]).to.have.been.called.once;
+      expect(spies[1]).to.have.been.called.once;
+    });
+
+    it('becomes visible if set to autohide', () => {
+      scrollbar._visibility = 'autohide';
+      scrollbar._onScroll();
+      expect(scrollbar._scroll.classList.contains('scrollbar-autohide-visible')).to.be.true;
+    });
+
+    it('becomes invisible after some time', (done) => {
+      scrollbar._visibility = 'autohide';
+      scrollbar._onScroll();
+      setTimeout(() => {
+        expect(scrollbar._scroll.classList.contains('scrollbar-autohide-visible')).to.be.false;
+        done();
+      }, 300);
+    });
+
+    it('calls onInfiniteScroll', (done) => {
+      var i = 0;
+      scrollbar.onInfiniteScrollLimit = 0.1;
+      scrollbar.onInfiniteScroll = done => {
+        i++;
+        done();
+      };
+      var maxScroll = content.scrollHeight - content.clientHeight;
+      content.scrollTop = 0.15 * maxScroll;
+      setTimeout(() => {
+        expect(i).to.equal(1);
+        done();
+      }, 100);
+    });
+
+    it('waits for onInfiniteScroll to finish', (done) => {
+      var i = 0;
+      scrollbar.onInfiniteScrollLimit = 0.1;
+      scrollbar.onInfiniteScroll = (done) => {
+        i++;
+        setTimeout(done, 300);
+      };
+      content.scrollTop = 0.2 * (content.scrollHeight - content.clientHeight);
+      setTimeout(() => { scrollbar._onScroll(); }, 100);
+      setTimeout(() => { scrollbar._onScroll(); }, 200);
+      setTimeout(() => { scrollbar._onScroll(); }, 400);
+
+      setTimeout(() => {
+        expect(i).to.equal(2);
+        done();
+      }, 500);
     });
   });
 
   describe('#updateScrollbarHeight()', () => {
-    it('exists', () => {
-      expect(scrollbar.updateScrollbarHeight).to.be.ok;
+    it('changes the height', () => {
+      var height = getValue(scrollbar._scroll, 'height');
+
+      content.innerHTML += content.innerHTML;
+      scrollbar.updateScrollbarHeight();
+      expect(getValue(scrollbar._scroll, 'height')).to.not.equal(height);
     });
   });
 
   describe('#updateScrollbarLocation()', () => {
-    it('exists', () => {
-      expect(scrollbar.updateScrollbarLocation).to.be.ok;
-    });
-  });
+    it('changes the location', () => {
+      content.scrollTop = 0.15 * (content.scrollHeight - content.clientHeight);
+      var y = getValue(scrollbar._scroll, 'top');
 
-  describe('#_onDragStart()', () => {
-    it('exists', () => {
-      expect(scrollbar._onDragStart).to.be.ok;
+      content.innerHTML += content.innerHTML;
+      scrollbar.updateScrollbarLocation();
+
+      expect(getValue(scrollbar._scroll, 'top')).to.not.equal(y);
     });
   });
 
   describe('#attachedCallback()', () => {
-    it('exists', () => {
-      expect(scrollbar.attachedCallback).to.be.ok;
-    });
-  });
+    it('updates scrollbar location and height', () => {
+      var spy1 = spyOn('updateScrollbarLocation'),
+        spy2 = spyOn('updateScrollbarHeight'),
+        div = document.createElement('div'),
+        scrollbar = new OnsScrollbarElement();
 
-  describe('#attributeChangedCallback()', () => {
-    it('exists', () => {
-      expect(scrollbar.attributeChangedCallback).to.be.ok;
+      document.body.appendChild(div);
+      div.appendChild(scrollbar);
+
+      expect(spy1).to.have.been.called.once;
+      expect(spy2).to.have.been.called.once;
     });
   });
 

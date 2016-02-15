@@ -22,11 +22,11 @@ class ScrollbarElement extends BaseElement {
       });
     };
     this.onInfiniteScrollLimit = 0.9;
-    this.onInfiniteScroll = (done) => {
-      this._content.innerHTML += Array(100).join('koko ');
-      console.log('genkai da!');
-      setTimeout(done, 500);
-    };
+    // this.onInfiniteScroll = (done) => {
+    //   this._content.innerHTML += Array(100).join('koko ');
+    //   console.log('genkai da!');
+    //   setTimeout(done, 500);
+    // };
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
@@ -44,6 +44,14 @@ class ScrollbarElement extends BaseElement {
   }
 
   _attach() {
+    var styles = window.getComputedStyle(this.parentNode);
+    if (styles.getPropertyValue('position') === 'static') {
+      this.parentNode.style.position = 'relative';
+    }
+    if (styles.getPropertyValue('overflow') !== 'scroll') {
+      this.parentNode.style.overflow = 'scroll';
+    }
+
     this._content = util.createElement(`<div class="content"></div>`);
     Array.prototype.slice.call(this.parentNode.childNodes).forEach(e => {
       if (e != this) {
@@ -63,7 +71,7 @@ class ScrollbarElement extends BaseElement {
     }
     if (!this._limitReached && this._overLimit()) {
       this._limitReached = 1;
-      this.onInfiniteScroll && this.onInfiniteScroll.call(this._content, () => {
+      this.onInfiniteScroll && this.onInfiniteScroll(() => {
         this.updateScrollbarHeight();
         this._limitReached = 0;
       });
@@ -128,18 +136,6 @@ class ScrollbarElement extends BaseElement {
     } else {
       this._content = this.parentNode.querySelector('.content');
     }
-    var styles = window.getComputedStyle(this.parentNode);
-    if (styles.getPropertyValue('position') == 'static') {
-      this.parentNode.style.position = 'relative';
-    }
-    if (styles.getPropertyValue('overflow') == 'scroll') {
-      this.parentNode.style.overflow = 'scroll';
-    }
-
-    window.oncontextmenu = (e) => {
-      e.buttons == 3 && e.preventDefault();
-    };
-    window.q = new ons.GestureDetector(this);
 
     this._content.addEventListener('scroll', this._boundOnScroll);
     this._onScroll();
