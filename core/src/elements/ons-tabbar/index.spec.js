@@ -232,8 +232,8 @@ describe('OnsTabbarElement', () => {
       template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
       element = ons._util.createElement(`
         <ons-tabbar>
-          <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
-          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
+          <ons-tab label="Page 1" page="page1"></ons-tab>
+          <ons-tab label="Page 2" page="page1"></ons-tab>
         </ons-tabbar>
       `);
       document.body.appendChild(template);
@@ -266,18 +266,24 @@ describe('OnsTabbarElement', () => {
       let promise = new Promise((resolve) => {
         element.addEventListener('hide', resolve);
       });
-      element.setActiveTab(0);
-      element.setActiveTab(1);
-      return expect(promise).to.eventually.be.fulfilled;
+
+      return element.setActiveTab(0).then(function() {
+        element.setActiveTab(1);
+        return expect(promise).to.eventually.be.fulfilled;
+      });
     });
 
     it('fires \'destroy\' event', () => {
       let promise = new Promise((resolve) => {
         element.addEventListener('destroy', resolve);
       });
-      element.setActiveTab(0);
-      element.setActiveTab(1);
-      return expect(promise).to.eventually.be.fulfilled;
+
+      return element.setActiveTab(0).then(() => {
+        return element.loadPage('page1').then(() => {
+          element.setActiveTab(1);
+          return expect(promise).to.eventually.be.fulfilled;
+        });
+      });
     });
   });
 
