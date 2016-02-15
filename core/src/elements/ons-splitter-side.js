@@ -255,7 +255,7 @@ class CollapseMode extends BaseMode {
   }
 
   _onDragStart(event) {
-    this._ignoreDrag = false;
+    this._ignoreDrag = ['left', 'right'].indexOf(event.gesture.direction) === -1;
 
     if (!this.isOpen() && this._isOpenOtherSideMenu()) {
       this._ignoreDrag = true;
