@@ -505,3 +505,36 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
       $.connect.serverClose();
     });
 });
+
+
+gulp.task('react-test', ['webdriver-download', 'prepare'], function() {
+  var port = 8081;
+
+  $.connect.server({
+    root: __dirname,
+    port: port
+  });
+
+  var conf = {
+    configFile: './test/e2e/protractor.conf.js',
+    args: [
+      '--baseUrl', 'http://127.0.0.1:' + port,
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.45.0.jar'),
+      '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
+    ]
+  };
+
+  var specs = argv.specs ?
+    argv.specs.split(',').map(function(s) { return s.trim(); }) :
+    ['test/react/*.js'];
+
+  return gulp.src(specs)
+    .pipe($.protractor.protractor(conf))
+    .on('error', function(e) {
+      console.log(e);
+      $.connect.serverClose();
+    })
+    .on('end', function() {
+      $.connect.serverClose();
+    });
+});

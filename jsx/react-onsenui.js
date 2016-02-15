@@ -261,6 +261,8 @@ var OnsTabbar = React.createClass({
     window.OnsTabbarElement.rewritables.link = (function (el, target, options, callback) {
       lastLink(el, target, options, callback);
     }).bind(this);
+
+    internal.internal.getPageHTMLAsync(page);
   },
   render: function () {
     var children = [];
