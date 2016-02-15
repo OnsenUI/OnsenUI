@@ -21,11 +21,11 @@ describe('OnsSwitchElement', () => {
     expect(element.classList.contains('switch')).to.be.true;
   });
 
-  it('has a \'input\' child by default', () => {
+  it('has an \'input\' child by default', () => {
     expect(element.children[0].classList.contains('switch__input')).to.be.true;
   });
 
-  it('has a \'div\' child by default', () => {
+  it('has a \'.switch__toggle\' child by default', () => {
     expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
 
@@ -177,34 +177,13 @@ describe('OnsSwitchElement', () => {
       expect(element._isMaterial).to.be.false;
     });
 
-    it('sets a name for the checkbox', () => {
-      expect(element._checkbox.getAttribute('name')).to.match(/ons-switch-id-\d+/);
-    });
-
-    it('updates the name of the checkbox', () => {
-      element.setAttribute('name', 'gozen');
-      expect(element._checkbox.getAttribute('name')).to.equal('gozen');
-      element.setAttribute('name', 'gogo');
-      expect(element._checkbox.getAttribute('name')).to.equal('gogo');
-    });
-
-    // What should be the correct behaviour here?
-    // it('does not remove the name of the checkbox', () => {
-    //   element.setAttribute('name', 'gozen');
-    //   element.setAttribute('name', '');
-    //   expect(element._checkbox.getAttribute('name')).to.equal('gozen');
-    // });
-
-    it('generates a new name for the checkbox', () => {
-      element.setAttribute('name', 'gozen');
-      element.setAttribute('name', '');
-      expect(element._checkbox.getAttribute('name')).to.match(/ons-switch-id-\d+/);
-    });
-
     it('checks the checkbox', () => {
       element.setAttribute('checked', '');
       expect(element._checkbox.checked).to.be.true;
       expect(element._checkbox.hasAttribute('checked')).to.be.true;
+      element.removeAttribute('checked');
+      expect(element._checkbox.checked).to.be.false;
+      expect(element._checkbox.hasAttribute('checked')).to.be.false;
     });
 
     it('disables the checkbox', () => {

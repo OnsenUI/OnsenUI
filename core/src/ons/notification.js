@@ -56,7 +56,7 @@ import util from './util';
 const notification = {};
 
 notification._createAlertDialog = function(title, message,
-  buttonLabels, primaryButtonIndex, modifier, animation, callback,
+  buttonLabels, primaryButtonIndex, modifier, animation, id, callback,
   messageIsHTML, cancelable, promptDialog, autofocus, placeholder,
   defaultValue, submitOnEnter, compile) {
 
@@ -72,10 +72,19 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-footer"></div>
   </ons-alert-dialog>`);
 
+  if (id) {
+    dialogElement.setAttribute('id', id);
+  }
+
   let titleElement = dialogElement.querySelector('.alert-dialog-title');
   let messageElement = dialogElement.querySelector('.alert-dialog-content');
   let footerElement = dialogElement.querySelector('.alert-dialog-footer');
-  let inputElement;
+  let inputElement, result = {};
+
+  result.promise = new Promise((resolve, reject) => {
+    result.resolve = resolve;
+    result.reject = reject;
+  });
 
   if (typeof title === 'string') {
     titleElement.textContent = title;
@@ -111,6 +120,7 @@ notification._createAlertDialog = function(title, message,
           dialogElement.hide({
             callback: function() {
               callback(inputElement.value);
+              result.resolve(inputElement.value);
               dialogElement.destroy();
               dialogElement = null;
             }
@@ -147,8 +157,10 @@ notification._createAlertDialog = function(title, message,
         callback: function() {
           if (promptDialog) {
             callback(inputElement.value);
+            result.resolve(inputElement.value);
           } else {
             callback(i);
+            result.resolve(i);
           }
           dialogElement.destroy();
           dialogElement = inputElement = buttonElement = null;
@@ -169,8 +181,10 @@ notification._createAlertDialog = function(title, message,
     dialogElement.addEventListener('cancel', function() {
       if (promptDialog) {
         callback(null);
+        result.reject(null);
       } else {
         callback(-1);
+        result.reject(-1);
       }
       setTimeout(function() {
         dialogElement.destroy();
@@ -194,7 +208,7 @@ notification._createAlertDialog = function(title, message,
     dialogElement.setAttribute('modifier', modifier);
   }
 
-  return Promise.resolve(dialogElement);
+  return result.promise;
 };
 
 notification._alertOriginal = function(options) {
@@ -217,6 +231,7 @@ notification._alertOriginal = function(options) {
     0,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     false, false, false, '', '', false,
@@ -241,6 +256,9 @@ notification._alertOriginal = function(options) {
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Alert".[/en]
  *   [ja]アラートダイアログの上部に表示するタイトルを指定します。"Alert"がデフォルトです。[/ja]
@@ -287,6 +305,7 @@ notification._confirmOriginal = function(options) {
     options.primaryButtonIndex,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     options.cancelable,
@@ -318,6 +337,9 @@ notification._confirmOriginal = function(options) {
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Confirm".[/en]
  *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
@@ -373,6 +395,7 @@ notification._promptOriginal = function(options) {
     0,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     options.cancelable,
@@ -410,6 +433,9 @@ notification._promptOriginal = function(options) {
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Alert".[/en]
  *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
