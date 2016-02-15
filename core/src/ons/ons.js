@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import deviceBackButtonDispatcher from './device-back-button-dispatcher';
+import DeviceBackButtonDispatcher from './device-back-button-dispatcher';
 import DoorLock from './doorlock';
 
 /**
@@ -107,7 +107,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
 ons.disableDeviceBackButtonHandler = function() {
-  ons._deviceBackButtonDispatcher.disable();
+  DeviceBackButtonDispatcher.disable();
 };
 
 /**
@@ -118,7 +118,7 @@ ons.disableDeviceBackButtonHandler = function() {
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
 ons.enableDeviceBackButtonHandler = function() {
-  ons._deviceBackButtonDispatcher.enable();
+  DeviceBackButtonDispatcher.enable();
 };
 
 

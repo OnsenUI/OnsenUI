@@ -42,15 +42,21 @@ var-material-switch-inactive-background-color = $material-switch-inactive-backgr
   markup:
     <label class="switch">
       <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
     <label class="switch">
       <input type="checkbox" class="switch__input" checked>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
     <label class="switch">
       <input type="checkbox" class="switch__input" disabled>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
 */
 
@@ -79,12 +85,7 @@ switch__toggle()
 
 .switch__input
   hide-input()
-  width var-switch-width
-  height 44px
-  margin-top -((44px-(var-switch-height))/2px)
-  top 0px
-  left 0px
-  transition all 0.2s linear
+  z-index -1
 
 // switch toggle background
 .switch__toggle
@@ -101,7 +102,7 @@ switch__toggle()
   box-shadow inset 0 0 0 2px #e5e5e5
 
 // switch toggle circle
-.switch__toggle:before
+.switch__handle
   reset-box-model()
   position absolute
   content ''
@@ -109,25 +110,25 @@ switch__toggle()
   height 28px
   width 28px
   background-color var-switch-thumb-background-color
-  left 2px
+  left 1px
   top 2px
   transition-property all
   transition-duration 0.35s
   transition-timing-function cubic-bezier(.59,.01,.5,.99)
   box-shadow 0 0 0 1px #E4E4E4, 0 3px 2px rgba(0,0,0,0.25)
 
-.switch__input:checked + .switch__toggle
+.switch--active .switch__handle
+  transition-duration 0s
+
+.switch[checked] .switch__toggle
   box-shadow inset 0 0 0 2px var-switch-checked-background-color
   background-color var-switch-checked-background-color
 
-.switch__input:checked + .switch__toggle:before
-  transform translateX(20px)
+.switch[checked] .switch__handle
+  left 21px
   box-shadow 0 3px 2px rgba(0,0,0,0.25)
 
-.switch__input:not(:checked) + .switch__toggle:before
-  transform translateX(-1px)
-
-.switch__input:disabled + .switch__toggle
+.switch[disabled] .switch__toggle
   disabled()
 
 /*! topdoc
@@ -139,15 +140,24 @@ switch__toggle()
   markup:
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input">
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" checked>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" disabled>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
 */
 
@@ -157,20 +167,21 @@ switch__toggle()
   padding 0 10px
   min-width 36px
 
-.switch--material__toggle
+.switch.switch--material .switch--material__toggle
   background-color var-material-switch-inactive-background-color
   margin-top 5px
   height 14px
   box-shadow none
 
-.switch--material__input
+.switch.switch--material .switch--material__input
   hide-input()
+  z-index -1
 
-.switch--material__input:checked + .switch--material__toggle:before
-  transform translateX(16px)
+.switch.switch--material[checked] .switch--material__handle
+  left 16px
 
 // switch toggle circle
-.switch--material__toggle:before
+.switch.switch--material .switch--material__handle
   background-color var-material-switch-active-thumb-color
   left 0px
   margin-top -5px
@@ -178,14 +189,30 @@ switch__toggle()
   height 20px
   shadow-2()
 
-.switch--material__input:checked + .switch--material__toggle
+.switch.switch--material[checked] .switch--material__toggle
   background-color var-material-switch-active-background-color
   box-shadow none
 
-.switch--material__input:not(:checked) + .switch--material__toggle:before
+.switch.switch--material:not([checked]) .switch--material__handle
   background-color var-material-switch-inactive-thumb-color
   shadow-1()
-  transform translateX(0px)
 
-.switch--material__input:disabled + .switch--material__toggle
+.switch--material[disabled] .switch--material__toggle
   disabled()
+
+.switch--material__handle:before
+  background transparent
+  content ''
+  display block
+  width 100%
+  height 100%
+  border-radius 50%
+  z-index -1
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.12)
+  transition box-shadow 0.1s linear
+
+.switch--active .switch--material__handle:before
+  box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12)
+
+.switch--material.switch--active[checked] .switch--material__handle:before
+  box-shadow: 0px 0px 0px 14px alpha(var-material-switch-active-thumb-color, 0.2)
