@@ -215,23 +215,6 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it('fires \'show\' event', () => {
-      let promise = new Promise((resolve) => {
-        element.addEventListener('show', resolve);
-      });
-      element.setActiveTab(0);
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('fires \'hide\' event', () => {
-      let promise = new Promise((resolve) => {
-        element.addEventListener('hide', resolve);
-      });
-      element.setActiveTab(0);
-      element.setActiveTab(1);
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
     it('fires \'reactive\' event', () => {
       let promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
@@ -263,47 +246,38 @@ describe('OnsTabbarElement', () => {
       template = element = null;
     });
 
-    it('fires \'show\' event', (done) => {
-      element.setActiveTab(0);
-      setImmediate(() => {
-        let promise = new Promise((resolve) => {
-          element.addEventListener('show', () => {
-            resolve();
-            done();
-          });
-        });
-        element._hide();
-        element._show();
-        return expect(promise).to.eventually.be.fulfilled;
+    it('fires \'init\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('init', resolve);
       });
+      element.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it('fires \'hide\' event', (done) => {
-      element.setActiveTab(0);
-      setImmediate(() => {
-        let promise = new Promise((resolve) => {
-          element.addEventListener('hide', () => {
-            resolve();
-            done();
-          });
-        });
-        element._hide();
-        return expect(promise).to.eventually.be.fulfilled;
+    it('fires \'show\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('show', resolve);
       });
+      element.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it('fires \'destroy\' event', (done) => {
-      element.setActiveTab(0);
-      setImmediate(() => {
-        let promise = new Promise((resolve) => {
-          element.addEventListener('destroy', () => {
-            resolve();
-            done();
-          });
-        });
-        element._destroy();
-        return expect(promise).to.eventually.be.fulfilled;
+    it('fires \'hide\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('hide', resolve);
       });
+      element.setActiveTab(0);
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'destroy\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('destroy', resolve);
+      });
+      element.setActiveTab(0);
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled;
     });
   });
 

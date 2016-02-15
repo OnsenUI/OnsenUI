@@ -9,7 +9,6 @@ import orientation from './ons/orientation';
 import softwareKeyboard from './ons/software-keyboard';
 import PageAttributeExpression from './ons/page-attribute-expression';
 import BaseElement from './ons/base-element';
-import animationOptionsParser from './ons/animation-options-parser';
 import DoorLock from './ons/doorlock';
 
 ons._util = util;
@@ -21,7 +20,6 @@ ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
-ons._animationOptionsParser = animationOptionsParser;
 ons._DoorLock = DoorLock;
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -76,6 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
   ons._defaultDeviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     navigator.app.exitApp();
   });
+  document.body._gestureDetector = new GestureDetector(document.body);
 }, false);
 
 // setup loading placeholder

@@ -17,6 +17,13 @@ limitations under the License.
 
 import ons from './ons';
 
+/**
+ * @object ons.platform
+ * @category util
+ * @description
+ *   [en]Utility methods to detect current platform.[/en]
+ *   [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
+ */
 class Platform {
 
   /**
@@ -28,14 +35,25 @@ class Platform {
   }
 
   /**
-   * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
+   * @method select
+   * @signature select(platform)
    * @param  {string} platform Name of the platform.
+   *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
+   *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれかを指定します。[/ja]
+   * @description
+   *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
+   *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
    */
   select(platform) {
     this._renderPlatform = platform.trim().toLowerCase();
   }
 
   /**
+   * @method isWebView
+   * @signature isWebView()
+   * @description
+   *   [en]Returns whether app is running in Cordova.[/en]
+   *   [ja]Cordova内で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isWebView() {
@@ -43,6 +61,11 @@ class Platform {
   }
 
   /**
+   * @method isIOS
+   * @signature isIOS()
+   * @description
+   *   [en]Returns whether the OS is iOS.[/en]
+   *   [ja]iOS上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIOS() {
@@ -56,6 +79,11 @@ class Platform {
   }
 
   /**
+   * @method isAndroid
+   * @signature isAndroid()
+   * @description
+   *   [en]Returns whether the OS is Android.[/en]
+   *   [ja]Android上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isAndroid() {
@@ -69,6 +97,11 @@ class Platform {
   }
 
   /**
+   * @method isAndroidPhone
+   * @signature isAndroidPhone()
+   * @description
+   *   [en]Returns whether the device is Android phone.[/en]
+   *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isAndroidPhone() {
@@ -76,6 +109,11 @@ class Platform {
   }
 
   /**
+   * @method isAndroidTablet
+   * @signature isAndroidTablet()
+   * @description
+   *   [en]Returns whether the device is Android tablet.[/en]
+   *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isAndroidTablet() {
@@ -96,6 +134,11 @@ class Platform {
   }
 
   /**
+   * @methos isIPhone
+   * @signature isIPhone()
+   * @description
+   *   [en]Returns whether the device is iPhone.[/en]
+   *   [ja]iPhone上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIPhone() {
@@ -103,6 +146,11 @@ class Platform {
   }
 
   /**
+   * @method isIPad
+   * @signature isIPad()
+   * @description
+   *   [en]Returns whether the device is iPad.[/en]
+   *   [ja]iPad上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIPad() {
@@ -117,6 +165,11 @@ class Platform {
   }
 
   /**
+   * @method isBlackBerry
+   * @signature isBlackBerry()
+   * @description
+   *   [en]Returns whether the device is BlackBerry.[/en]
+   *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isBlackBerry() {
@@ -130,6 +183,11 @@ class Platform {
   }
 
   /**
+   * @method isOpera
+   * @signature isOpera()
+   * @description
+   *   [en]Returns whether the browser is Opera.[/en]
+   *   [ja]Opera上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isOpera() {
@@ -141,6 +199,11 @@ class Platform {
   }
 
   /**
+   * @method isFirefox
+   * @signature isFirefox()
+   * @description
+   *   [en]Returns whether the browser is Firefox.[/en]
+   *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isFirefox() {
@@ -152,6 +215,11 @@ class Platform {
   }
 
   /**
+   * @method isSafari
+   * @signature isSafari()
+   * @description
+   *   [en]Returns whether the browser is Safari.[/en]
+   *   [ja]Safari上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isSafari() {
@@ -163,6 +231,11 @@ class Platform {
   }
 
   /**
+   * @method isChrome
+   * @signature isChrome()
+   * @description
+   *   [en]Returns whether the browser is Chrome.[/en]
+   *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isChrome() {
@@ -174,6 +247,11 @@ class Platform {
   }
 
   /**
+   * @method isIE
+   * @signature isIE()
+   * @description
+   *   [en]Returns whether the browser is Internet Explorer.[/en]
+   *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIE() {
@@ -185,6 +263,11 @@ class Platform {
   }
 
   /**
+   * @method isEdge
+   * @signature isEdge()
+   * @description
+   *   [en]Returns whether the browser is Edge.[/en]
+   *   [ja]Edge上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isEdge() {
@@ -196,6 +279,11 @@ class Platform {
   }
 
   /**
+   * @method isIOS7above
+   * @signature isIOS7above()
+   * @description
+   *   [en]Returns whether the iOS version is 7 or above.[/en]
+   *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIOS7above() {

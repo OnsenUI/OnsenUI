@@ -17,10 +17,46 @@ limitations under the License.
 
 import util from './util';
 
+/**
+ * @object ons.notification
+ * @category dialog
+ * @codepen Qwwxyp
+ * @description
+ *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
+ *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
+ * @example
+ * <script>
+ *   ons.notification.alert({
+ *     message: 'Hello, world!'
+ *   });
+ *
+ *   // Show a Material Design alert dialog.
+ *   ons.notification.alert({
+ *    message: 'Hello, world!',
+ *    modifier: 'material'
+ *   });
+ *
+ *   ons.notification.confirm({
+ *     message: 'Are you ready?',
+ *     callback: function(answer) {
+ *       // Do something here.
+ *     }
+ *   });
+ *
+ *   ons.notification.prompt({
+ *     message: 'How old are you?',
+ *     callback: function(age) {
+ *       ons.notification.alert({
+ *         message: 'You are ' + age + ' years old.'
+ *       });
+ *     });
+ *   });
+ * </script>
+ */
 const notification = {};
 
 notification._createAlertDialog = function(title, message,
-  buttonLabels, primaryButtonIndex, modifier, animation, callback,
+  buttonLabels, primaryButtonIndex, modifier, animation, id, callback,
   messageIsHTML, cancelable, promptDialog, autofocus, placeholder,
   defaultValue, submitOnEnter, compile) {
 
@@ -36,10 +72,19 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-footer"></div>
   </ons-alert-dialog>`);
 
+  if (id) {
+    dialogElement.setAttribute('id', id);
+  }
+
   let titleElement = dialogElement.querySelector('.alert-dialog-title');
   let messageElement = dialogElement.querySelector('.alert-dialog-content');
   let footerElement = dialogElement.querySelector('.alert-dialog-footer');
-  let inputElement;
+  let inputElement, result = {};
+
+  result.promise = new Promise((resolve, reject) => {
+    result.resolve = resolve;
+    result.reject = reject;
+  });
 
   if (typeof title === 'string') {
     titleElement.textContent = title;
@@ -75,6 +120,7 @@ notification._createAlertDialog = function(title, message,
           dialogElement.hide({
             callback: function() {
               callback(inputElement.value);
+              result.resolve(inputElement.value);
               dialogElement.destroy();
               dialogElement = null;
             }
@@ -111,8 +157,10 @@ notification._createAlertDialog = function(title, message,
         callback: function() {
           if (promptDialog) {
             callback(inputElement.value);
+            result.resolve(inputElement.value);
           } else {
             callback(i);
+            result.resolve(i);
           }
           dialogElement.destroy();
           dialogElement = inputElement = buttonElement = null;
@@ -133,8 +181,10 @@ notification._createAlertDialog = function(title, message,
     dialogElement.addEventListener('cancel', function() {
       if (promptDialog) {
         callback(null);
+        result.reject(null);
       } else {
         callback(-1);
+        result.reject(-1);
       }
       setTimeout(function() {
         dialogElement.destroy();
@@ -158,7 +208,7 @@ notification._createAlertDialog = function(title, message,
     dialogElement.setAttribute('modifier', modifier);
   }
 
-  return Promise.resolve(dialogElement);
+  return result.promise;
 };
 
 notification._alertOriginal = function(options) {
@@ -181,6 +231,7 @@ notification._alertOriginal = function(options) {
     0,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     false, false, false, '', '', false,
@@ -189,16 +240,45 @@ notification._alertOriginal = function(options) {
 };
 
 /**
+ * @method alert(options)
  * @param {Object} options
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
  * @param {String} [options.message]
+ *   [en]Alert message.[/en]
+ *   [ja]アラートダイアログに表示する文字列を指定します。[/ja]
  * @param {String} [options.messageHTML]
+ *   [en]Alert message in HTML.[/en]
+ *   [ja]アラートダイアログに表示するHTMLを指定します。[/ja]
  * @param {String} [options.buttonLabel]
+ *   [en]Label for confirmation button. Default is "OK".[/en]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
  * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Alert".[/en]
+ *   [ja]アラートダイアログの上部に表示するタイトルを指定します。"Alert"がデフォルトです。[/ja]
  * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]
  * @param {Function} [options.callback]
- * @param {Function} [options.compile]
- * @return {Promise}
+ *   [en]Function that executes after dialog has been closed.[/en]
+ *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]
+ *     Display an alert dialog to show the user a message.
+ *     The content of the message can be either simple text or HTML.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーへメッセージを見せるためのアラートダイアログを表示します。
+ *     表示するメッセージは、テキストかもしくはHTMLを指定できます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 notification.alert = notification._alertOriginal;
 
@@ -225,6 +305,7 @@ notification._confirmOriginal = function(options) {
     options.primaryButtonIndex,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     options.cancelable,
@@ -234,18 +315,58 @@ notification._confirmOriginal = function(options) {
 };
 
 /**
+ * @method confirm
+ * @signature confirm(options)
  * @param {Object} options
+ *   [en]Parameter object.[/en]
  * @param {String} [options.message]
+ *   [en]Confirmation question.[/en]
+ *   [ja]確認ダイアログに表示するメッセージを指定します。[/ja]
  * @param {String} [options.messageHTML]
+ *   [en]Dialog content in HTML.[/en]
+ *   [ja]確認ダイアログに表示するHTMLを指定します。[/ja]
  * @param {Array} [options.buttonLabels]
+ *   [en]Labels for the buttons. Default is ["Cancel", "OK"].[/en]
+ *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is 1.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
  * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
  * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Confirm".[/en]
+ *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
  * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
  * @param {Function} [options.callback]
- * @param {Function} [options.compile]
- * @return {Promise}
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。
+ *     この関数の引数として、押されたボタンのインデックス値が渡されます。
+ *     もしダイアログがキャンセルされた場合には-1が渡されます。
+ *   [/ja]
+ * @description
+ *   [en]
+ *     Display a dialog to ask the user for confirmation.
+ *     The default button labels are "Cancel" and "OK" but they can be customized.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザに確認を促すダイアログを表示します。
+ *     デオルとのボタンラベルは、"Cancel"と"OK"ですが、これはこのメソッドの引数でカスタマイズできます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 notification.confirm = notification._confirmOriginal;
 
@@ -274,6 +395,7 @@ notification._promptOriginal = function(options) {
     0,
     options.modifier,
     options.animation,
+    options.id,
     options.callback,
     !options.message ? true : false,
     options.cancelable,
@@ -287,21 +409,69 @@ notification._promptOriginal = function(options) {
 };
 
 /**
- * @param {Object} options
- * @param {String} [options.message]
- * @param {String} [options.messageHTML]
- * @param {String} [options.buttonLabel]
- * @param {Boolean} [options.cancelable]
- * @param {String} [options.animation]
- * @param {String} [options.placeholder]
- * @param {String} [options.defaultValue]
- * @param {String} [options.title]
- * @param {String} [options.modifier]
- * @param {Function} [options.callback]
- * @param {Boolean} [options.autofocus]
- * @param {Boolean} [options.submitOnEnter]
- * @param {Function} [options.compile]
+ * @method prompt
+ * @signature prompt(options)
  * @return {Promise}
+ * @param {Object} options
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
+ * @param {String} [options.message]
+ *   [en]Prompt question.[/en]
+ *   [ja]ダイアログに表示するメッセージを指定します。[/ja]
+ * @param {String} [options.messageHTML]
+ *   [en]Dialog content in HTML.[/en]
+ *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
+ * @param {String} [options.buttonLabel]
+ *   [en]Label for confirmation button. Default is "OK".[/en]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
+ * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is 1.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.id]
+ *   [en]ons-alert-dialog element's ID.[/en]
+ *   [ja]ons-alert-dialog要素のID。[/ja]
+ * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Alert".[/en]
+ *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
+ * @param {String} [options.placeholder]
+ *   [en]Placeholder for the text input.[/en]
+ *   [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]
+ * @param {String} [options.defaultValue]
+ *   [en]Default value for the text input.[/en]
+ *   [ja]テキスト欄のデフォルトの値を指定します。[/ja]
+ * @param {Boolean} [options.autofocus]
+ *   [en]Autofocus the input element. Default is true.[/en]
+ *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the value of the input field or null if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
+ *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
+ *   [/ja]
+ * @param {Boolean} [options.submitOnEnter]
+ *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
+ *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
+ * @description
+ *   [en]
+ *     Display a dialog with a prompt to ask the user a question.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーに入力を促すダイアログを表示します。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 notification.prompt = notification._promptOriginal;
 

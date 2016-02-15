@@ -20,6 +20,22 @@ import BaseElement from 'ons/base-element';
 import ModifierUtil from 'ons/internal/modifier-util';
 const scheme = {'': 'carousel-item--*'};
 
+/**
+ * @element ons-carousel-item
+ * @category carousel
+ * @description
+ *   [en]Carousel item component.[/en]
+ *   [ja]カルーセルの要素を表現するコンポーネント。[/ja]
+ * @example
+ * <ons-carousel style="width: 100%; height: 200px">
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ * </ons-carousel>
+ */
 class CarouselItemElement extends BaseElement {
 
   createdCallback() {

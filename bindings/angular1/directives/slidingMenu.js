@@ -1,9 +1,6 @@
 /**
- * @ngdoc directive
- * @id sliding_menu
- * @name ons-sliding-menu
+ * @element ons-sliding-menu
  * @category navigation
- * @extensionOf angular
  * @description
  *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
@@ -44,8 +41,7 @@
  */
 
 /**
- * @ngdoc event
- * @name preopen
+ * @event preopen
  * @description
  *   [en]Fired just before the sliding menu is opened.[/en]
  *   [ja]スライディングメニューが開く前に発火します。[/ja]
@@ -58,8 +54,7 @@
  */
 
 /**
- * @ngdoc event
- * @name postopen
+ * @event postopen
  * @description
  *   [en]Fired just after the sliding menu is opened.[/en]
  *   [ja]スライディングメニューが開き終わった後に発火します。[/ja]
@@ -72,8 +67,7 @@
  */
 
 /**
- * @ngdoc event
- * @name preclose
+ * @event preclose
  * @description
  *   [en]Fired just before the sliding menu is closed.[/en]
  *   [ja]スライディングメニューが閉じる前に発火します。[/ja]
@@ -86,8 +80,7 @@
  */
 
 /**
- * @ngdoc event
- * @name postclose
+ * @event postclose
  * @description
  *   [en]Fired just after the sliding menu is closed.[/en]
  *   [ja]スライディングメニューが閉じ終わった後に発火します。[/ja]
@@ -100,8 +93,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name var
+ * @attribute var
  * @initonly
  * @type {String}
  * @description
@@ -110,8 +102,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name menu-page
+ * @attribute menu-page
  * @initonly
  * @type {String}
  * @description
@@ -120,8 +111,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name main-page
+ * @attribute main-page
  * @initonly
  * @type {String}
  * @description
@@ -130,8 +120,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name swipeable
+ * @attribute swipeable
  * @initonly
  * @type {Boolean}
  * @description
@@ -140,8 +129,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name swipe-target-width
+ * @attribute swipe-target-width
  * @initonly
  * @type {String}
  * @description
@@ -150,8 +138,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name max-slide-distance
+ * @attribute max-slide-distance
  * @initonly
  * @type {String}
  * @description
@@ -160,8 +147,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name side
+ * @attribute side
  * @initonly
  * @type {String}
  * @description
@@ -170,8 +156,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name type
+ * @attribute type
  * @initonly
  * @type {String}
  * @description
@@ -180,8 +165,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-preopen
+ * @attribute ons-preopen
  * @initonly
  * @type {Expression}
  * @description
@@ -190,8 +174,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-preclose
+ * @attribute ons-preclose
  * @initonly
  * @type {Expression}
  * @description
@@ -200,8 +183,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-postopen
+ * @attribute ons-postopen
  * @initonly
  * @type {Expression}
  * @description
@@ -210,8 +192,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-postclose
+ * @attribute ons-postclose
  * @initonly
  * @type {Expression}
  * @description
@@ -220,8 +201,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-init
+ * @attribute ons-init
  * @initonly
  * @type {Expression}
  * @description
@@ -230,8 +210,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-show
+ * @attribute ons-show
  * @initonly
  * @type {Expression}
  * @description
@@ -240,8 +219,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-hide
+ * @attribute ons-hide
  * @initonly
  * @type {Expression}
  * @description
@@ -250,8 +228,7 @@
  */
 
 /**
- * @ngdoc attribute
- * @name ons-destroy
+ * @attribute ons-destroy
  * @initonly
  * @type {Expression}
  * @description
@@ -260,7 +237,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method setMainPage
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
@@ -280,7 +257,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method setMenuPage
  * @signature setMenuPage(pageUrl, [options])
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
@@ -300,7 +277,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method openMenu
  * @signature openMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -314,7 +291,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method closeMenu
  * @signature closeMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -328,7 +305,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method toggleMenu
  * @signature toggleMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -342,7 +319,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method isMenuOpened
  * @signature isMenuOpened()
  * @return {Boolean}
  *   [en]true if the menu is currently open.[/en]
@@ -353,7 +330,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method getDeviceBackButtonHandler
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
@@ -364,7 +341,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method setSwipeable
  * @signature setSwipeable(swipeable)
  * @param {Boolean} swipeable
  *   [en]If true the menu will be swipeable.[/en]
@@ -375,7 +352,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method on
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]
@@ -389,7 +366,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method once
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
@@ -403,7 +380,7 @@
  */
 
 /**
- * @ngdoc method
+ * @method off
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]

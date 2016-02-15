@@ -1,29 +1,3 @@
-/**
- * @ngdoc directive
- * @id back_button
- * @name ons-back-button
- * @category page
- * @description
- *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
- *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
- * @codepen aHmGL
- * @seealso ons-toolbar
- *   [en]ons-toolbar component[/en]
- *   [ja]ons-toolbarコンポーネント[/ja]
- * @seealso ons-navigator
- *   [en]ons-navigator component[/en]
- *   [ja]ons-navigatorコンポーネント[/en]
- * @guide Addingatoolbar
- *   [en]Adding a toolbar[/en]
- *   [ja]ツールバーの追加[/ja]
- * @guide Returningfromapage
- *   [en]Returning from a page[/en]
- *   [ja]一つ前のページに戻る[/ja]
- * @example
- * <ons-back-button>
- *   Back
- * </ons-back-button>
- */
 (function(){
   'use strict';
   var module = angular.module('onsen');

@@ -41,7 +41,38 @@ const INPUT_ATTRIBUTES = [
   'value'
 ];
 
+/**
+ * @element ons-material-input
+ * @category form
+ * @description
+ *  [en]Material Design input component.[/en]
+ *  [ja]Material Designのinputコンポ―ネントです。[/ja]
+ * @codepen ojQxLj
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @example
+ * <ons-material-input label="Username"></ons-material-input>
+ */
 class MaterialInputElement extends BaseElement {
+
+  /**
+   * @attribute label
+   * @type {String}
+   * @description
+   *   [en]Text for animated floating label.[/en]
+   *   [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]
+   */
+
+  /**
+   * @attribute no-float
+   * @description
+   *  [en]If this attribute is present, the label will not be animated.[/en]
+   *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
+   */
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {

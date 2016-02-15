@@ -107,5 +107,17 @@ describe('OnsSplitterSideElement', () => {
       expect(right.getCurrentMode()).to.be.equal('split');
     });
   });
+
+  describe('#handleGesture()', () => {
+    it('should ignore scrolling', () => {
+      let mode = right._getModeStrategy();
+      mode.handleGesture({type: 'dragstart', gesture: {direction: 'up'}});
+      expect(mode._ignoreDrag).to.be.true;
+      mode.handleGesture({type: 'dragstart', gesture: {direction: 'left'}});
+      expect(mode._ignoreDrag).to.be.false;
+      mode.handleGesture({type: 'dragstart', gesture: {direction: 'down'}});
+      expect(mode._ignoreDrag).to.be.true;
+    });
+  });
 });
 
