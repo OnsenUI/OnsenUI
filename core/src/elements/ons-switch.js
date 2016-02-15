@@ -110,7 +110,7 @@ class SwitchElement extends BaseElement {
   }
 
   set checked(value) {
-    if (!!value != this._checkbox.checked) {
+    if (!!value !== this._checkbox.checked) {
       this._checkbox.click();
       this._checkbox.checked = !!value;
       if (this.checked) {
