@@ -12,7 +12,6 @@ var OnsNavigator = React.createClass({
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback) {
-
       if (node.firstChild._pages.length == 1 && !this.insert) {
         node.firstChild.innerHTML = node.firstChild._initialHTML;
       }
@@ -257,10 +256,17 @@ var OnsPage = React.createClass({
 var OnsTabbar = React.createClass({
   displayName: 'OnsTabbar',
 
+  componentDidMount: function () {
+    var lastLink = window.OnsTabbarElement.rewritables.link;
+    window.OnsTabbarElement.rewritables.link = (function (el, target, options, callback) {
+      lastLink(el, target, options, callback);
+    }).bind(this);
+  },
   render: function () {
     var children = [];
+    this.childIndex = [];
 
-    React.Children.forEach(this.props.children, function (child) {
+    React.Children.forEach(this.props.children, (function (child) {
       // TODO CHECK FOR onsTab
       counter = -1;
       var myChildren = React.Children.map(child.props.children, function (child2) {
@@ -268,22 +274,31 @@ var OnsTabbar = React.createClass({
         return React.cloneElement(child2, { 'data-ons-react': counter });
       });
 
+      this.childIndex.push(child.props.page);
+
       var mychild = React.cloneElement(child, {}, myChildren);
       var renderString = ReactDOMServer.renderToStaticMarkup(mychild);
 
       var el = document.createElement('div');
       el.innerHTML = renderString;
-      console.log(el.innerHTML);
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
       children.push(newElement);
-    });
+    }).bind(this));
+
+    var element = this.props.mypage;
+
+    console.log(element);
 
     return React.createElement(
       'ons-tabbar',
-      { 'var': 'tabbar', animation: 'fade', _compiled: '', 'class': 'ng-scope' },
-      React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' }),
+      { 'var': 'tabbar', animation: 'fade', _compiled: 'true', 'class': 'ng-scope' },
+      React.createElement(
+        'div',
+        { className: 'ons-tab-bar__content tab-bar__content' },
+        element
+      ),
       React.createElement(
         'div',
         { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' },
@@ -352,6 +367,9 @@ var MyElem = React.createClass({
 var OnsTemplate = React.createClass({
   displayName: 'OnsTemplate',
 
+  componentDidMount: function () {
+    reactUtil.templateMap[this.props.id] = this;
+  },
   render: function () {
     return React.createElement(
       'ons-template',
@@ -372,3 +390,5 @@ reactUtil.rendersToOnsToolbar = function (obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-toolbar');
 };
+
+reactUtil.templateMap = {};

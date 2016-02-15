@@ -1,7 +1,19 @@
 var OnsTabbar = React.createClass({
+  componentDidMount: function() {
+    var lastLink = window.OnsTabbarElement.rewritables.link;
+    window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
+      lastLink(el, target, options, callback);
+    }.bind(this);
+
+
+
+
+  internal.internal.getPageHTMLAsync(page)
+
+  },
   render: function() {
     var children= [];
-
+    this.childIndex = [];
 
     React.Children.forEach(this.props.children, function(child) {
       // TODO CHECK FOR onsTab
@@ -11,23 +23,28 @@ var OnsTabbar = React.createClass({
         return React.cloneElement(child2, {'data-ons-react':  counter});
       });
 
+      this.childIndex.push(child.props.page);
+
       var mychild=  React.cloneElement(child, {}, myChildren);
       var renderString = ReactDOMServer.renderToStaticMarkup(mychild);
 
       var el = document.createElement('div');
       el.innerHTML = renderString;
-      console.log(el.innerHTML);
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
       children.push(newElement);
-    });
+    }.bind(this));
 
 
+    var element = this.props.mypage;
+
+    console.log(element);
 
     return (
-      <ons-tabbar var="tabbar" animation="fade" _compiled="" class="ng-scope">
+      <ons-tabbar var="tabbar" animation="fade" _compiled="true" class="ng-scope">
         <div className="ons-tab-bar__content tab-bar__content"> 
+          {element}
         </div> 
         <div className="tab-bar ons-tab-bar__footer ons-tabbar-inner">
           {children} 
@@ -59,7 +76,7 @@ var buildComponent = function(domElement, reactChildren) {
 };
 
 var OnsTab = React.createClass({
-  render: function() {
+    render: function() {
     return (<ons-tab {...this.props} > {this.props.children} </ons-tab>);
   }, 
 });
@@ -83,6 +100,9 @@ var MyElem = React.createClass({
 });
 
 var OnsTemplate = React.createClass({
+  componentDidMount: function() {
+    reactUtil.templateMap[this.props.id] = this;
+  },
   render: function() {
     return (
       <ons-template type="text/ons-template" id={this.props.id}>

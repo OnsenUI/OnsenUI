@@ -10,12 +10,11 @@ var OnsNavigator = React.createClass({
     
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
-
       if (node.firstChild._pages.length == 1 && !this.insert) {
           node.firstChild.innerHTML = node.firstChild._initialHTML;
       } 
-       lastLink(navigatorElement, target, options, callback);
-       console.log('link finished');
+      lastLink(navigatorElement, target, options, callback);
+      console.log('link finished');
     }.bind(this);
 
      this.elements = [];

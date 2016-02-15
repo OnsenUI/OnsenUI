@@ -10,3 +10,5 @@ reactUtil.rendersToOnsToolbar = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-toolbar');
 };
+
+reactUtil.templateMap = {};

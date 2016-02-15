@@ -56,6 +56,15 @@ const rewritables = {
   /**
    * @param {Element} tabbarElement
    * @param {Element} target
+   * @param {Object} options
+   * @param {Function} callback
+   */
+
+  loadPage(page, callback),
+
+  /**
+   * @param {Element} tabbarElement
+   * @param {Element} target
    * @param {Function} callback
    */
   unlink(tabbarElement, target, callback) {
@@ -393,7 +402,7 @@ class TabbarElement extends BaseElement {
         };
 
         return new Promise(resolve => {
-          selectedTab._loadPageElement(pageElement => {
+          selectedTab._loadPageElement(index, pageElement => {
             resolve(this._loadPersistentPageDOM(pageElement, params));
           }, link);
         });

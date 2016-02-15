@@ -168,7 +168,7 @@ class TabElement extends BaseElement {
    * @param {Function} callback
    * @param {Function} link
    */
-  _loadPageElement(callback, link) {
+  _loadPageElement(index, callback, link) {
     if (this.isPersistent()) {
       if (!this._pageElement) {
         this._createPageElement(this.getAttribute('page'), (element) => {
