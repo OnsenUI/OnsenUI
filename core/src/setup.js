@@ -74,6 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
   ons._defaultDeviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     navigator.app.exitApp();
   });
+  document.body._gestureDetector = new GestureDetector(document.body);
 }, false);
 
 // setup loading placeholder

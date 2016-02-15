@@ -17,7 +17,6 @@ limitations under the License.
 
 import util from 'ons/util';
 import BaseElement from 'ons/base-element';
-import GestureDetector from 'ons/gesture-detector';
 import Animator from './animator-css';
 
 /**
@@ -81,12 +80,11 @@ class RippleElement extends BaseElement {
 
   createdCallback() {
     this.classList.add('ripple');
-    if (this.hasAttribute('_compiled')) {
-      ['_wave', '_background'].forEach(e => {
-        this[e] = this.getElementsByClassName('ripple_' + e)[0];
-      });
-    } else {
+    if (!this.hasAttribute('_compiled')) {
       this._compile();
+    } else {
+      this._background = this.getElementsByClassName('ripple__background')[0];
+      this._wave = this.getElementsByClassName('ripple__wave')[0];
     }
 
     this._animator = new Animator();
@@ -95,7 +93,6 @@ class RippleElement extends BaseElement {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
-
 
   _compile() {
     ['_wave', '_background'].forEach(e => {
@@ -122,7 +119,6 @@ class RippleElement extends BaseElement {
     }
     return {x, y, r};
   }
-
 
   _rippleAnimation(e, duration = 300) {
     var
@@ -173,7 +169,7 @@ class RippleElement extends BaseElement {
       this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
 
-      this._gestureDetector.on('release', this._onRelease);
+      this.addEventListener('release', this._onRelease);
     }
   }
 
@@ -185,7 +181,7 @@ class RippleElement extends BaseElement {
     });
 
     this._holding = false;
-    this._gestureDetector.off('release', this._onRelease);
+    this.removeEventListener('release', this._onRelease);
   }
 
   _onDragStart(e) {
@@ -197,27 +193,21 @@ class RippleElement extends BaseElement {
     }
   }
 
-
   attachedCallback() {
     if (ons._config.animationsDisabled) {
       this.setDisabled(true);
     } else {
-      this._gestureDetector = new GestureDetector(this, {holdTimeout: 300});
-      this._gestureDetector.on('tap', this._onTap);
-      this._gestureDetector.on('hold', this._onHold);
-      this._gestureDetector.on('dragstart', this._onDragStart);
+      this.addEventListener('tap', this._onTap);
+      this.addEventListener('hold', this._onHold);
+      this.addEventListener('dragstart', this._onDragStart);
     }
   }
-
 
   detachedCallback() {
-    if (this._gestureDetector) {
-      this._gestureDetector.off('tap', this._onTap);
-      this._gestureDetector.off('hold', this._onHold);
-      this._gestureDetector.off('dragstart', this._onDragStart);
-    }
+    this.removeEventListener('tap', this._onTap);
+    this.removeEventListener('hold', this._onHold);
+    this.removeEventListener('dragstart', this._onDragStart);
   }
-
 
   attributeChangedCallback(name, last, current) {
     if (name === 'start-radius') {
@@ -244,7 +234,6 @@ class RippleElement extends BaseElement {
       this._center = current != null && current != 'false';
     }
   }
-
 
   /**
   * Disable or enable ripple-effect.
