@@ -70,9 +70,6 @@ class NavigatorElement extends BaseElement {
 
     this._initialHTML = this.innerHTML;
 
-    console.log('created callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    console.log('inner html');
-    console.log(this._initialHTML);
     this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
@@ -262,7 +259,6 @@ class NavigatorElement extends BaseElement {
       const unlock = this._doorLock.lock();
 
       var run = templateHTML => {
-        // console.log(templateHTML);
         const element = this._createPageElement(templateHTML);
         const pageObject = this._createPageObject(page, element, options);
 
@@ -382,7 +378,6 @@ class NavigatorElement extends BaseElement {
 
     if (options.pageHTML == undefined && (page === undefined || page === '')) {
       if (this.hasAttribute('page')) {
-        console.log('is page');
         page = this.getAttribute('page');
       } else {
         options.pageHTML = this._initialHTML;
@@ -398,7 +393,6 @@ class NavigatorElement extends BaseElement {
   attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
-    console.log('attached');
 
     rewritables.ready(this, () => {
       if (this._pages.length === 0) {
@@ -414,7 +408,6 @@ class NavigatorElement extends BaseElement {
   }
 
   detachedCallback() {
-    console.log('detached');
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
   }
@@ -433,7 +426,6 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
-    console.log('push page');
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -459,7 +451,6 @@ class NavigatorElement extends BaseElement {
   }
 
   _pushPage(page, options) {
-    console.log('push page _');
     const unlock = this._doorLock.lock();
     const done = function() {
       unlock();
@@ -482,7 +473,6 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [unlock]
    */
  _pushPageDOM(pageObject, unlock) {
-    console.log('push dom_');
     unlock = unlock || function() {};
 
     let element = pageObject.element;
@@ -528,7 +518,6 @@ class NavigatorElement extends BaseElement {
             const leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
 
-            console.log('add Child');
             this.appendChild(element);
             setImmediate(function () {
               leavePage.element._hide();
@@ -541,7 +530,6 @@ class NavigatorElement extends BaseElement {
             options.animator.push(enterPage, leavePage, done);
           } else {
             this.innerHTML = '';
-            console.log('add child');
             this.appendChild(element);
 
             setImmediate(function () {
@@ -689,7 +677,6 @@ class NavigatorElement extends BaseElement {
    */
   _createPageObject(page, element, options) {
 
-    console.log('create page object');
     options.animator = this._animatorFactory.newAnimator(options);
 
     return new NavigatorPage({
@@ -701,7 +688,6 @@ class NavigatorElement extends BaseElement {
   }
 
   _createPageElement(templateHTML) {
-    console.log('create page element');
     const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
 
     if (pageElement.nodeName.toLowerCase() !== 'ons-page') {

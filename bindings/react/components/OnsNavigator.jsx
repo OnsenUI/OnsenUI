@@ -1,30 +1,31 @@
 var OnsNavigator = React.createClass({
   componentDidMount: function() {
     var node = this.node = ReactDOM.findDOMNode(this);
-    
+
     var page = this.props.children;
 
     if (!reactUtil.rendersToOnsPage(page)) {
       throw new Error("OnsNavigator has to contain exactly one child of type OnsPage");
     }
-    
-    var lastLink = window.OnsNavigatorElement.rewritables.link;
-    window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
-      if (node.firstChild._pages.length == 1 && !this.insert) {
-          node.firstChild.innerHTML = node.firstChild._initialHTML;
-      } 
-      lastLink(navigatorElement, target, options, callback);
-      console.log('link finished');
-    }.bind(this);
 
-     this.elements = [];
-     this.elements.push({elem:this.props.children});
-    
-     this.myDom = ReactDOM.render(
-       <ons-navigator {...this.props}>
-          {page}
-       </ons-navigator>, node
-     );
+    var lastLink = window.OnsNavigatorElement.rewritables.link;
+    window.OnsNavigatorElement.rewritables.link = 
+      function(navigatorElement, target, options, callback) {
+        if (node.firstChild._pages.length == 1 && !this.insert) {
+          node.firstChild.innerHTML = node.firstChild._initialHTML;
+        } 
+        lastLink(navigatorElement, target, options, callback);
+        console.log('link finished');
+      }.bind(this);
+
+    this.elements = [];
+    this.elements.push({elem:this.props.children});
+
+    this.myDom = ReactDOM.render(
+      <ons-navigator {...this.props}>
+        {page}
+      </ons-navigator>, node
+    );
   },
 
   resetToPage: function(reactPage, options) {
@@ -49,23 +50,23 @@ var OnsNavigator = React.createClass({
 
     var node = this.node;
 
-     this.node.firstChild.resetToPage('', options).then(
-       function() {
-         var newNode = node.firstChild.children[0];
-         for (var i =0; i < children.length; i++) {
-           children[i].style.display = i==0 ? 'block' : 'none';
-           node.firstChild.insertBefore(children[i], newNode);
-         }
+    this.node.firstChild.resetToPage('', options).then(
+      function() {
+        var newNode = node.firstChild.children[0];
+        for (var i =0; i < children.length; i++) {
+          children[i].style.display = i==0 ? 'block' : 'none';
+          node.firstChild.insertBefore(children[i], newNode);
+        }
 
-         this.myDom = ReactDOM.render(
-           <ons-navigator>
-               {page}
-           </ons-navigator>, node
-         );
+        this.myDom = ReactDOM.render(
+          <ons-navigator>
+            {page}
+          </ons-navigator>, node
+        );
 
-         node.firstChild.removeChild(newNode);
-         node.firstChild._pages[0].element = node.firstChild.children[0];
-     });
+        node.firstChild.removeChild(newNode);
+        node.firstChild._pages[0].element = node.firstChild.children[0];
+      });
   },
 
   popPage: function(options) {
@@ -80,14 +81,14 @@ var OnsNavigator = React.createClass({
     for (var i =0; i < this.elements.length; i++) {
       help.push(this.elements[i].elem);
     }
-  
+
     var node = ReactDOM.findDOMNode(this);
-        var node2 =ReactDOM.render(
-            <ons-navigator >
-              {help}
-            </ons-navigator>, 
-            node
-          );
+    var node2 =ReactDOM.render(
+      <ons-navigator >
+        {help}
+      </ons-navigator>, 
+      node
+    );
   },
   render: function() {
     return <div />;
@@ -96,17 +97,17 @@ var OnsNavigator = React.createClass({
 
   componentWillReceiveProps: function(newProps) {
     var props = newProps || this.props;
-  
+
     var help = [];
     this.elements = [];
     this.elements.push({elem: props.children});
-  
+
     for (var i =0; i < this.elements.length; i++) {
       help.push(this.elements[i].elem);
     }
-  
+
     var node = ReactDOM.findDOMNode(this);
-  
+
     ReactDOM.render(
       <ons-navigator >
         {help}
@@ -145,17 +146,17 @@ var OnsNavigator = React.createClass({
         deleteElem, 
         navNode.children[navNode.children.length -1]
       );
-        var node2 =ReactDOM.render(
-          <ons-navigator >
-            {help}
-          </ons-navigator>, 
-          node
-        );
+      var node2 =ReactDOM.render(
+        <ons-navigator >
+          {help}
+        </ons-navigator>, 
+        node
+      );
 
-        var index = navNode.children.length - 2;
-        navNode.children[index].style.display = 'block';
-        navNode._pages[index].element = node.firstChild.children[index];
-        navNode.removeChild(lastNode);
+      var index = navNode.children.length - 2;
+      navNode.children[index].style.display = 'block';
+      navNode._pages[index].element = node.firstChild.children[index];
+      navNode.removeChild(lastNode);
     });
   },
 
@@ -179,22 +180,22 @@ var OnsNavigator = React.createClass({
 
     var elements = this.elements;
     node.firstChild.insertPage( insertPos, '', {pageHTML: htmlString})
-      .then(function() {
-        this.insert = false;
-        var node2 =ReactDOM.render(
-          <ons-navigator >
-            {help}
-          </ons-navigator>, 
-          node
-        );
+    .then(function() {
+      this.insert = false;
+      var node2 =ReactDOM.render(
+        <ons-navigator >
+          {help}
+        </ons-navigator>, 
+        node
+      );
 
-       for (var i=0; i < elements.length -1; i++) {
-          var index = i;
-          if (index >= insertPos + 1) index++;
-            node.firstChild._pages[i].element = node.firstChild.children[index];
-          }
-          node.firstChild.removeChild(node.firstChild.children[insertPos+1]);
-       }.bind(this));
+      for (var i=0; i < elements.length -1; i++) {
+        var index = i;
+        if (index >= insertPos + 1) index++;
+        node.firstChild._pages[i].element = node.firstChild.children[index];
+      }
+      node.firstChild.removeChild(node.firstChild.children[insertPos+1]);
+    }.bind(this));
   },
 
   pushComponent: function(reactPage, options) {
