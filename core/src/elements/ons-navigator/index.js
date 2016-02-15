@@ -483,7 +483,7 @@ class NavigatorElement extends BaseElement {
     const tryInsertPage = () => {
       const unlock = this._doorLock.lock();
 
-      var run = templateHTML => {
+      const run = templateHTML => {
         const element = this._createPageElement(templateHTML);
         const pageObject = this._createPageObject(page, element, options);
 

@@ -9,7 +9,7 @@ v2.0.0-beta.7
  * ons-tabbar: Correctly applies animation-options.
  * ons-popover: Correctly applies animation-options.
  * ons-alert-dialog: Correctly applies animation-options.
- * ons-navigator: ons-navigator: add "pageHTML" option to "insertPage()" method
+ * ons-navigator: Closes [#1208](https://github.com/OnsenUI/OnsenUI/issues/1208).
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
  * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
