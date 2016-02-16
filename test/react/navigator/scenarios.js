@@ -17,49 +17,42 @@
       driver.findElement(by.id('page_1'));
     });
 
+    var pushPage = function(start, end) {
+      for (var i = start; i < end; i++) {
+        driver.sleep(100);
+        var pushBtn = driver.findElement(by.id('push_page_' + i));
+        pushBtn.click();
+        driver.wait(until.elementLocated(by.id('page_' + (i + 1))), 100);
+        driver.findElement(by.id('push_page_' + (i + 1)));
+        driver.findElement(by.id('pop_page_' + (i + 1)));
+        var page  = driver.findElement(by.id('page_' + (i + 1)));
+        expect(page.isDisplayed()).toBe(true);
+      }
+    };
+
+    var popPage = function(start, end) {
+      for (var i = start; i > end; i--) {
+        var popBtn = driver.findElement(by.id('pop_page_' + i));
+        popBtn.click();
+        driver.sleep(100);
+        expect(driver.isElementPresent(by.id('page_' + (i)))).toBe(false);
+      }
+    };
+
     describe('page pushing', function () {
       it('should switch page when a button is clicked', function() {
-        var pushBtn = driver.findElement(by.id('push_page_1'));
-        pushBtn.click();
-
-        driver.wait(until.elementLocated(by.id('page_2')), 1000);
-        var page1 = driver.findElement(by.id('page_1'));
-        var page2 = driver.findElement(by.id('page_2'));
-        driver.findElement(by.id('push_page_2'));
-        driver.findElement(by.id('pop_page_2'));
-        expect(page2.isDisplayed()).toBe(true);
 
         // push 9 pages
-        for (var i = 2; i < 10; i++) {
-          driver.sleep(50);
-          pushBtn = driver.findElement(by.id('push_page_' + i));
-          pushBtn.click();
-          driver.wait(until.elementLocated(by.id('page_' + (i + 1))), 100);
-          driver.findElement(by.id('push_page_' + (i + 1)));
-          driver.findElement(by.id('pop_page_' + (i + 1)));
-          var page  = driver.findElement(by.id('page_' + (i + 1)));
-          expect(page.isDisplayed()).toBe(true);
-        }
+        pushPage(1, 10);
 
         // pop  5 pages
-        for (var i = 10; i > 5; i--) {
-          var popBtn = driver.findElement(by.id('pop_page_' + i));
-          popBtn.click();
-          driver.sleep(50);
-          expect(driver.isElementPresent(by.id('page_' + (i)))).toBe(false);
-        }
+        popPage(10, 5);
 
         // push 3 pages
-        for (var i = 5; i < 9; i++) {
-          driver.sleep(50);
-          pushBtn = driver.findElement(by.id('push_page_' + i));
-          pushBtn.click();
-          driver.wait(until.elementLocated(by.id('page_' + (i + 1))), 100);
-          driver.findElement(by.id('push_page_' + (i + 1)));
-          driver.findElement(by.id('pop_page_' + (i + 1)));
-          var page  = driver.findElement(by.id('page_' + (i + 1)));
-          expect(page.isDisplayed()).toBe(true);
-        }
+        pushPage(5, 9);
+
+        // pop the rest
+        popPage(9, 1);
       });
     });
 
