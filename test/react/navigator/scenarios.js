@@ -98,7 +98,6 @@
 
         expect(driver.isElementPresent(by.id('page_2'))).toBe(false);
         expect(driver.isElementPresent(by.id('page_3'))).toBe(false);
-
       });
     });
 
