@@ -3,8 +3,9 @@ var OnsNavigator = React.createClass({
 
   componentDidMount: function () {
     var node = this.node = ReactDOM.findDOMNode(this);
-
     var page = this.props.children;
+
+    this.init = true;
 
     if (!reactUtil.rendersToOnsPage(page)) {
       throw new Error("OnsNavigator has to contain exactly one child of type OnsPage");
@@ -12,11 +13,12 @@ var OnsNavigator = React.createClass({
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback) {
-      if (node.firstChild._pages.length == 1 && !this.insert) {
+      console.log('link');
+      if (this.init) {
+        this.init = false;
         node.firstChild.innerHTML = node.firstChild._initialHTML;
       }
       lastLink(navigatorElement, target, options, callback);
-      console.log('link finished');
     }).bind(this);
 
     this.elements = [];
@@ -70,24 +72,34 @@ var OnsNavigator = React.createClass({
   },
 
   popPage: function (options) {
-
     var navNode = ReactDOM.findDOMNode(this).firstChild;
-    navNode.popPage(options);
+    var lastChild = reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
-    this.elements.pop();
+    navNode.popPage(options).then((function () {
+      console.log(navNode.children[0]);
+      console.log(navNode.children[1]);
+      setTimeout((function () {
+        console.log('pop page');
+        this.elements.pop();
+        var help = [];
 
-    var help = [];
+        lastChild.style.display = 'none';
+        // TODO insert at the right position
+        dfgfdgfddgf;
+        navNode.appendChild(lastChild);
 
-    for (var i = 0; i < this.elements.length; i++) {
-      help.push(this.elements[i].elem);
-    }
+        for (var i = 0; i < this.elements.length; i++) {
+          help.push(this.elements[i].elem);
+        }
 
-    var node = ReactDOM.findDOMNode(this);
-    var node2 = ReactDOM.render(React.createElement(
-      'ons-navigator',
-      null,
-      help
-    ), node);
+        var node = ReactDOM.findDOMNode(this);
+        var node2 = ReactDOM.render(React.createElement(
+          'ons-navigator',
+          null,
+          help
+        ), node);
+      }).bind(this), 100);
+    }).bind(this));
   },
   render: function () {
     return React.createElement('div', null);
@@ -391,6 +403,10 @@ reactUtil.rendersToOnsPage = function (obj) {
 reactUtil.rendersToOnsToolbar = function (obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-toolbar');
+};
+
+reactUtil.lastChild = function (el) {
+  return el.children[el.children.length - 1];
 };
 
 reactUtil.templateMap = {};

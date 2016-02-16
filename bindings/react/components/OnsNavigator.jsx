@@ -1,8 +1,9 @@
 var OnsNavigator = React.createClass({
   componentDidMount: function() {
     var node = this.node = ReactDOM.findDOMNode(this);
-
     var page = this.props.children;
+
+    this.init = true;
 
     if (!reactUtil.rendersToOnsPage(page)) {
       throw new Error("OnsNavigator has to contain exactly one child of type OnsPage");
@@ -11,7 +12,9 @@ var OnsNavigator = React.createClass({
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = 
       function(navigatorElement, target, options, callback) {
-        if (node.firstChild._pages.length == 1 && !this.insert) {
+        console.log('link');
+        if (this.init) {
+          this.init = false;
           node.firstChild.innerHTML = node.firstChild._initialHTML;
         } 
         lastLink(navigatorElement, target, options, callback);
@@ -72,11 +75,19 @@ var OnsNavigator = React.createClass({
     var navNode = ReactDOM.findDOMNode(this).firstChild;
     var lastChild =  reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
+    
+
     navNode.popPage(options).then(function() {
+      console.log(navNode.children[0]);
+      console.log(navNode.children[1]);
+      setTimeout(function() {
+      console.log('pop page');
       this.elements.pop();
       var help = [];
 
       lastChild.style.display = 'none';
+      // TODO insert at the right position
+      dfgfdgfddgf
       navNode.appendChild(lastChild);
 
       for (var i =0; i < this.elements.length; i++) {
@@ -90,7 +101,7 @@ var OnsNavigator = React.createClass({
         </ons-navigator>, 
         node
       );
-
+      }.bind(this), 100);
     }.bind(this));
 
   },
@@ -216,7 +227,6 @@ var OnsNavigator = React.createClass({
     options.pageHTML = htmlString;
     this.elements.push({elem:reactPage});
     var elements = this.elements;
-
 
     var node =  ReactDOM.findDOMNode(this)
     node.firstChild._pushPage(null, options).then(function() {
