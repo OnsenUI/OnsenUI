@@ -2,6 +2,8 @@ var MyPage = React.createClass({
   render: function() {
     var popButton;
     var replaceButton;
+    var resetButton;
+
 
     if (this.props.popPage) { 
       popButton = <ons-button id={'pop_' + this.props.id} 
@@ -9,8 +11,13 @@ var MyPage = React.createClass({
     } 
 
     if (this.props.replacePage) {
-     replaceButton = <ons-button id={'replace_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.replacePage}> Replace </ons-button>;
+      replaceButton = <ons-button id={'replace_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.replacePage}> Replace </ons-button>;
     }
+
+    if (this.props.resetPage) {
+      resetButton = <ons-button id={'reset_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.resetPage}> Reset Page </ons-button>;
+    }
+
 
     return <OnsPage id={this.props.id}>
       <ons-toolbar>
@@ -25,6 +32,7 @@ var MyPage = React.createClass({
           Push 
         </ons-button>
         {replaceButton}
+        {resetButton}
         <div style={{flex: 1}} />
       </div>
     </OnsPage>
@@ -37,7 +45,6 @@ var MyNav  = React.createClass({
     return {};
   },
 
-
   popPage: function() {
 
     this.counter--;
@@ -48,8 +55,16 @@ var MyNav  = React.createClass({
     console.log('replace page');
     var id='page_' + this.counter;
     this.refs.navi.replacePage(
-          <MyPage title="Replaced Page" id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
-        );
+      <MyPage title="Replaced Page" id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
+    );
+  },
+
+  resetPage: function() {
+    this.counter = 1;
+    var id='page_' + this.counter;
+    this.refs.navi.resetToPage(
+      <MyPage title="Reset Page" id={id} pushPage={this.pushPage}  />
+    );
   },
 
   pushPage: function() {
@@ -59,7 +74,7 @@ var MyNav  = React.createClass({
     var id='page_' + this.counter;
 
     this.refs.navi.pushComponent(
-      <MyPage title={navTitle} id={id} replacePage={this.replacePage} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
+      <MyPage title={navTitle} id={id} resetPage={this.resetPage} replacePage={this.replacePage} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
     );
   },
 
@@ -69,7 +84,7 @@ var MyNav  = React.createClass({
   
   render: function() {
     return <OnsNavigator id="mynav" ref="navi">
-      <MyPage title="Navigator 1" id="page_1" pushPage={this.pushPage} />
+      <MyPage title="Navigator 1" id="page_1" resetPage={this.resetPage} pushPage={this.pushPage} />
     </OnsNavigator>
   }
 });
