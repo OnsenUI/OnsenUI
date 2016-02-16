@@ -516,7 +516,7 @@ gulp.task('react-test', ['webdriver-download', 'prepare'], function() {
   });
 
   var conf = {
-    configFile: './test/e2e/protractor.conf.js',
+    configFile: './test/react/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
       '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.45.0.jar'),
@@ -526,7 +526,7 @@ gulp.task('react-test', ['webdriver-download', 'prepare'], function() {
 
   var specs = argv.specs ?
     argv.specs.split(',').map(function(s) { return s.trim(); }) :
-    ['test/react/*.js'];
+    ['test/react/**/*.js'];
 
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))

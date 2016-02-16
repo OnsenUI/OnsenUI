@@ -15,7 +15,6 @@ var OnsNavigator = React.createClass({
           node.firstChild.innerHTML = node.firstChild._initialHTML;
         } 
         lastLink(navigatorElement, target, options, callback);
-        console.log('link finished');
       }.bind(this);
 
     this.elements = [];
@@ -70,25 +69,30 @@ var OnsNavigator = React.createClass({
   },
 
   popPage: function(options) {
-
     var navNode = ReactDOM.findDOMNode(this).firstChild;
-    navNode.popPage(options);
+    var lastChild =  reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
-    this.elements.pop();
+    navNode.popPage(options).then(function() {
+      this.elements.pop();
+      var help = [];
 
-    var help = [];
+      lastChild.style.display = 'none';
+      navNode.appendChild(lastChild);
 
-    for (var i =0; i < this.elements.length; i++) {
-      help.push(this.elements[i].elem);
-    }
+      for (var i =0; i < this.elements.length; i++) {
+        help.push(this.elements[i].elem);
+      }
 
-    var node = ReactDOM.findDOMNode(this);
-    var node2 =ReactDOM.render(
-      <ons-navigator >
-        {help}
-      </ons-navigator>, 
-      node
-    );
+      var node = ReactDOM.findDOMNode(this);
+      var node2 =ReactDOM.render(
+        <ons-navigator >
+          {help}
+        </ons-navigator>, 
+        node
+      );
+
+    }.bind(this));
+
   },
   render: function() {
     return <div />;

@@ -11,4 +11,8 @@ reactUtil.rendersToOnsToolbar = function(obj) {
   return htmlString.startsWith('<ons-toolbar');
 };
 
+reactUtil.lastChild = function(el) {
+  return el.children[el.children.length - 1];
+};
+
 reactUtil.templateMap = {};
