@@ -85,7 +85,7 @@ class ScrollbarElement extends BaseElement {
     }
     this._timeout = false;
     this._limitReached = 0;
-    this._autohideDelay = 200;
+    this._autohideDelay = 500;
     this.onInfiniteScrollLimit = 0.75;
     // this.onInfiniteScroll = (done) => {
     //   this._content.innerHTML += Array(100).join('koko ');
