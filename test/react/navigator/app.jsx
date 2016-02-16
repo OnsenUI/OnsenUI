@@ -1,31 +1,30 @@
 var MyPage = React.createClass({
-  getInitialState: function() {
-      return { };
-  },
-  pushPage : function() {
-   this.props.pushPage();
-  },
-  popPage : function() {
-   this.props.popPage();
-  },
-
   render: function() {
-
     var popButton;
+    var replaceButton;
 
     if (this.props.popPage) { 
-      popButton =<ons-button id={'pop_' + this.props.id} 
-      style={{marginRight: 10}} onClick={this.popPage}> Pop </ons-button>
+      popButton = <ons-button id={'pop_' + this.props.id} 
+        style={{marginRight: 10}} onClick={this.props.popPage}> Pop </ons-button>
+    } 
+
+    if (this.props.replacePage) {
+     replaceButton = <ons-button id={'replace_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.replacePage}> Replace </ons-button>;
     }
 
     return <OnsPage id={this.props.id}>
       <ons-toolbar>
-        <div className="center"> {this.props.title} </div>
+        <div className="center" id={'title_' + this.props.id}> {this.props.title} </div>
       </ons-toolbar>
       <div style={{display: 'flex'}}> 
         <div style={{flex: 1}} />
         {popButton}
-        <ons-button id={'push_' + this.props.id} onClick={this.pushPage}> Push </ons-button>
+        <ons-button 
+          id={'push_' + this.props.id} 
+          onClick={this.props.pushPage}> 
+          Push 
+        </ons-button>
+        {replaceButton}
         <div style={{flex: 1}} />
       </div>
     </OnsPage>
@@ -45,17 +44,22 @@ var MyNav  = React.createClass({
     this.refs.navi.popPage();
   },
 
-  pushPage: function() {
-    //console.log('push page');
-    // this.setState({navNumber: this.state.navNumber +1});
+  replacePage: function() {
+    console.log('replace page');
+    var id='page_' + this.counter;
+    this.refs.navi.replacePage(
+          <MyPage title="Replaced Page" id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
+        );
+  },
 
+  pushPage: function() {
     this.counter++;
     var navTitle = "Navigator "+ this.counter;
 
     var id='page_' + this.counter;
 
     this.refs.navi.pushComponent(
-      <MyPage title={navTitle} id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
+      <MyPage title={navTitle} id={id} replacePage={this.replacePage} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
     );
   },
 

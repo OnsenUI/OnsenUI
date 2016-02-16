@@ -125,34 +125,6 @@
     //   });
     // });
 
-    // describe('pop and refresh page', function () {
-    //   it('should refresh previous page when a button is clicked', function () {
-    //     var page1 = element(by.id('page1'));
-    //     var page2 = element(by.id('page2'));
-    //     var status = element(by.id('status'));
-    //
-    //     expect(status.getText()).toBe('init');
-    //
-    //     element(by.id('btn1')).click();
-    //     browser.wait(EC.visibilityOf(page2));
-    //     browser.wait(EC.invisibilityOf(page1));
-    //
-    //     // Check that page2 was created and that it's displayed.
-    //     expect((page2).isDisplayed()).toBeTruthy();
-    //     expect((page1).isDisplayed()).not.toBeTruthy();
-    //     expect((page1).isPresent()).toBeTruthy();
-    //
-    //     element(by.id('btn5')).click();
-    //     browser.wait(EC.stalenessOf(page2));
-    //
-    //     // Check that page2 was destroyed.
-    //     expect((page1).isDisplayed()).toBeTruthy();
-    //     expect((page2).isPresent()).not.toBeTruthy();
-    //
-    //     // Check that page1 object is a new unmodified object.
-    //     expect(status.getText()).toBe('init');
-    //   });
-    // });
 
     // it('should emit events', function() {
     //   var pops = element(by.id('pops')),
