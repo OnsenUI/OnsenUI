@@ -1,8 +1,81 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
 
 import util from 'ons/util';
 import BaseElement from 'ons/base-element';
 
+// TODO: Add codepen example.
+
+/**
+ * @element ons-ripple
+ * @category control
+ * @description
+ *   [en]Adds scrollbar to the parent element. Note: the parent should have a fixed size. [/en]
+ *   [ja][/ja]
+ * @example
+ * <div>
+ *   Lorem ipsum dolor sit amet...
+ *   <ons-scrollbar draggable></ons-scrollbar>
+ * </div>
+ *
+ * <div>
+ *   Lorem ipsum dolor sit amet...
+ *   <ons-scrollbar autohide></ons-scrollbar>
+ * </div>
+ */
 class ScrollbarElement extends BaseElement {
+
+  /**
+   * @attribute height
+   * @type {Number}
+   * @description
+   *   [en]If set then the height of the scrollbar will be fixed to this value. Otherwise it will be a dynamic value based on the visible proportion of the content. The value can only be in px and is ignored if it's zero.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute draggable
+   * @description
+   *   [en]If this attribute is set then the scrollbar will be draggable.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute autohide
+   * @type {String}
+   * @description
+   *   [en]If this attribute is set then the scrollbar will disappear shortly after scrolling.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute hidden
+   * @type {String}
+   * @description
+   *   [en]If this attribute is set then the scrollbar will be hidden with `display: none`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute update-on-scroll
+   * @description
+   *   [en]If this attribute is set then the scrollbar will update it's size and container on every scroll event. Useful if the size of the content changes frequently. Otherwise `updateScrollbar` method should be called manually when the content size changes. [/en]
+   *   [ja][/ja]
+   */
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
@@ -93,6 +166,10 @@ class ScrollbarElement extends BaseElement {
   }
 
 
+  /**
+   * Updates the scrollbar size and location. Should be called if the size of the content changes.
+   * Automatically called when onInfiniteScroll handler is finished.
+   */
   updateScrollbar() {
     var [content, scroll, container] = [this._content, this._scroll, this];
     if (!this._hidden) {
