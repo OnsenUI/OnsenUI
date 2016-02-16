@@ -11,17 +11,9 @@ class ScrollbarElement extends BaseElement {
       this._scroll = this.getElementsByClassName('scrollbar')[0];
     }
     this._timeout = false;
-    this._visibility = 'auto';
     this._limitReached = 0;
-    this._limitCallback = () => {
-      this._limitReached = 1;
-      this.onInfiniteScroll && this.onInfiniteScroll(() => {
-        this._limitReached = 0;
-        this.updateScrollbarHeight();
-        this.updateScrollbarLocation();
-      });
-    };
-    this.onInfiniteScrollLimit = 0.9;
+    this._autohideDelay = 200;
+    this.onInfiniteScrollLimit = 0.75;
     // this.onInfiniteScroll = (done) => {
     //   this._content.innerHTML += Array(100).join('koko ');
     //   console.log('genkai da!');
@@ -31,10 +23,11 @@ class ScrollbarElement extends BaseElement {
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
 
-    ['visibility'].forEach(e => {
+    ['height', 'draggable', 'autohide', 'hidden', 'update-on-scroll'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
+
 
   _compile() {
     this.classList.add('scrollbar-container');
@@ -43,13 +36,11 @@ class ScrollbarElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
+
   _attach() {
     var styles = window.getComputedStyle(this.parentNode);
     if (styles.getPropertyValue('position') === 'static') {
       this.parentNode.style.position = 'relative';
-    }
-    if (styles.getPropertyValue('overflow') !== 'scroll') {
-      this.parentNode.style.overflow = 'scroll';
     }
 
     this._content = util.createElement(`<div class="content"></div>`);
@@ -62,66 +53,73 @@ class ScrollbarElement extends BaseElement {
     this.setAttribute('_attached', '');
   }
 
-  _onScroll(e) {
-    this.updateScrollbarHeight();
-    this.updateScrollbarLocation();
 
-    if (this._visibility === 'autohide') {
+  _onScroll(e) {
+    if (this._updateOnScroll) {
+      this.updateScrollbar();
+    } else {
+      this._updateScrollbarLocation();
+    }
+
+    if (this._autohide) {
       this._updateAutohide();
     }
     if (!this._limitReached && this._overLimit()) {
       this._limitReached = 1;
       this.onInfiniteScroll && this.onInfiniteScroll(() => {
-        this.updateScrollbarHeight();
+        this.updateScrollbar();
         this._limitReached = 0;
       });
     }
   }
 
+
   _updateAutohide(){
     if (!this._scrolling) {
       this._scrolling = true;
-      this._scroll.classList.add('scrollbar-autohide-visible');
+      this.classList.add('scrollbar-autohide-visible');
     }
     clearTimeout(this._timeout);
     this._timeout = setTimeout(() => {
       this._scrolling = false;
-      this._scroll.classList.remove('scrollbar-autohide-visible');
-    }, 200);
+      this.classList.remove('scrollbar-autohide-visible');
+    }, this._autohideDelay);
   }
+
 
   _overLimit(e){
     var c = this._content;
     return (c.scrollTop + c.clientHeight) / c.scrollHeight >= this.onInfiniteScrollLimit;
   }
 
-  updateScrollbarHeight() {
+
+  updateScrollbar() {
     var [content, scroll, container] = [this._content, this._scroll, this];
-
-    if (this._visibility === 'auto' && content.clientHeight >= content.scrollHeight) {
-      scroll.style.height = '0px';
-    } else {
-      scroll.style.height = Math.round(container.clientHeight * content.clientHeight / content.scrollHeight) + 'px';
+    if (!this._hidden) {
+      scroll.style.display = (content.clientHeight >= content.scrollHeight) ? 'none' : 'block';
+      scroll.style.height = Math.round(this._height || (container.clientHeight * content.clientHeight / content.scrollHeight)) + 'px';
+      this._contentMax = content.scrollHeight - content.clientHeight;
+      this._scrollMax = container.clientHeight - scroll.clientHeight;
+      this._updateScrollbarLocation();
     }
-
-    this._contentMax = content.scrollHeight - content.clientHeight;
-    this._scrollMax = container.clientHeight - scroll.clientHeight;
   }
 
-  updateScrollbarLocation(){
+
+  _updateScrollbarLocation() {
     this._scroll.style.top = Math.round(this._scrollMax * this._content.scrollTop / this._contentMax) + 'px';
   }
 
+
   _onDragStart(e) {
-    this.updateScrollbarHeight();
     var startY = this._scroll.offsetTop;
     var onMove = (e) => {
+      this.classList.add('scrollbar-dragging');
       var progress = Math.min(1, Math.max(0, (startY + e.gesture.deltaY) / this._scrollMax));
       this._content.scrollTop = this._contentMax * progress;
-      this._onDrag(startY, e.gesture.deltaY);
     };
     document.addEventListener('drag', onMove);
     document.addEventListener('release', () => {
+      this.classList.remove('scrollbar-dragging');
       document.removeEventListener('drag', onMove);
     });
   }
@@ -138,9 +136,9 @@ class ScrollbarElement extends BaseElement {
     }
 
     this._content.addEventListener('scroll', this._boundOnScroll);
-    this._onScroll();
+    this.updateScrollbar();
 
-    if (this._visibility === 'visible' || this._visibility === 'auto') {
+    if (this._draggable) {
       this._scroll.addEventListener('dragstart', this._boundOnDragStart);
       this._scroll.addEventListener('touchstart', this._onTouchStart);
     }
@@ -156,13 +154,16 @@ class ScrollbarElement extends BaseElement {
 
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'visibility') {
-      if (last === 'hidden' || last === 'autohide' && current !== 'hidden' && current !== 'autohide') {
-        this._scroll.addEventListener('dragstart', this._boundOnDragStart);
-        this._scroll.addEventListener('touchstart', this._onTouchStart);
-      }
-      this._visibility = current || 'auto';
+    if (name === 'update-on-scroll') {
+      this._updateOnScroll = current !== null;
     }
+    if (name === 'height') {
+      this._height = parseInt(current) || 0;
+    }
+    if (['draggable', 'autohide', 'hidden'].indexOf(name) !== -1) {
+      this['_' + name] = current !== null;
+    }
+    this._content && this.updateScrollbar();
   }
 
 }
