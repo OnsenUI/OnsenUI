@@ -318,21 +318,8 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   loadPage(page, options = {}) {
-    options._removeElement = true;
-    return this._loadPage(page, options);
-  }
-
-  /**
-   * @param {String} page
-   * @param {Object} [options]
-   * @param {Object} [options.animation]
-   * @param {Object} [options.callback]
-   * @return {Promise} Resolves to the new page element.
-   */
-  _loadPage(page, options) {
     return new Promise(resolve => {
       OnsTabElement.prototype._createPageElement(page, pageElement => {
-        pageElement.setAttribute('_remove-element', options._removeElement);
         resolve(this._loadPageDOMAsync(pageElement, options));
       });
     });
@@ -357,6 +344,7 @@ class TabbarElement extends BaseElement {
               options.callback();
           }
 
+          this._oldPageElement = pageElement;
           resolve(pageElement);
         }
       });
@@ -414,7 +402,7 @@ class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          if (options._removeElement && oldPageElement.hasAttribute('_remove-element')) {
+          if (options._removeElement) {
             rewritables.unlink(this, oldPageElement, pageElement => {
               pageElement._destroy();
             });
@@ -487,7 +475,7 @@ class TabbarElement extends BaseElement {
         tabItem: selectedTab
       });
 
-      return Promise.resolve(this._getCurrentPageElement());
+      return Promise.resolve(previousPageElement);
     }
 
     var canceled = false;
@@ -526,7 +514,7 @@ class TabbarElement extends BaseElement {
     if (needLoad) {
       var removeElement = false;
 
-      if (!previousTab || (previousPageElement && previousPageElement.hasAttribute('_remove-element'))) {
+      if ((!previousTab && previousPageElement) || (previousTab && previousTab._pageElement !== previousPageElement)) {
         removeElement = true;
       }
 
@@ -564,7 +552,7 @@ class TabbarElement extends BaseElement {
       });
     }
 
-    return Promise.resolve(this._getCurrentPageElement());
+    return Promise.resolve(previousPageElement);
   }
 
   /**
