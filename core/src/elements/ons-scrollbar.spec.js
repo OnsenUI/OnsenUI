@@ -104,12 +104,13 @@ describe('OnsScrollbarElement', () => {
       div.appendChild(scrollbar);
       document.body.appendChild(div);
 
-      scrollbar._content.scrollTop = 11;
+      ons._util.triggerElementEvent(scrollbar._content, 'scroll');
+      // scrollbar._content.scrollTop = 11;
       setTimeout(() => {
         expect(spy).to.have.been.called.once;
         document.body.removeChild(div);
         done();
-      }, 10);
+      }, 50);
     });
 
     it('calls _updateScrollbarLocation', () => {
@@ -131,7 +132,7 @@ describe('OnsScrollbarElement', () => {
       setTimeout(() => {
         expect(scrollbar.classList.contains('scrollbar-autohide-visible')).to.be.true;
         done();
-      }, 10);
+      }, 50);
     });
 
     it('becomes invisible after some time', (done) => {
@@ -141,7 +142,7 @@ describe('OnsScrollbarElement', () => {
       setTimeout(() => {
         expect(scrollbar.classList.contains('scrollbar-autohide-visible')).to.be.false;
         done();
-      }, 110);
+      }, 150);
     });
 
     it('calls onInfiniteScroll', (done) => {
@@ -156,7 +157,7 @@ describe('OnsScrollbarElement', () => {
       setTimeout(() => {
         expect(i).to.equal(1);
         done();
-      }, 10);
+      }, 50);
     });
 
     it('waits for onInfiniteScroll to finish', (done) => {
@@ -180,14 +181,6 @@ describe('OnsScrollbarElement', () => {
 
   describe('#updateScrollbar()', () => {
     it('changes the height', () => {
-      var height = getValue(scrollbar._scroll, 'height');
-
-      content.innerHTML += content.innerHTML;
-      scrollbar.updateScrollbar();
-      expect(getValue(scrollbar._scroll, 'height')).to.not.equal(height);
-    });
-
-    it('changes the location', () => {
       var height = getValue(scrollbar._scroll, 'height');
 
       content.innerHTML += content.innerHTML;
