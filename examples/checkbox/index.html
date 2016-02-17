@@ -25,54 +25,54 @@
     <ons-list>
       <ons-list-header>Flat Checkbox</ons-list-header>
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
+        <div class="left">
           <label class="checkbox" style="width: 100%; padding: 10px 0; margin: 0;">
             <input id="checkbox1" type="checkbox" class="checkbox__input" ng-model="a">
             <div class="checkbox__checkmark"></div>
           </label>
         </div>
-        <label for="checkbox1" id="list__item__center">
+        <div class="center">
           {{a ? 'YES' : 'NO'}}
-        </label>
+        </div>
       </ons-list-item>
 
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
+        <div class="left">
           <label class="checkbox checkbox--noborder" style="width: 100%; padding: 10px 0; margin: 0;">
             <input id="checkbox2" type="checkbox" class="checkbox__input checkbox--noborder__input" ng-model="b">
             <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
           </label>
         </div>
-        <label for="checkbox2" id="list__item__center">
+        <div class="center">
           {{b ? 'YES' : 'NO'}}
-        </label>
+        </div>
       </ons-list-item>
     </ons-list>
 
     <ons-list modifier="material">
       <ons-list-header modifier="material">Material Checkbox</ons-list-header>
       <ons-list-item modifier="material">
-        <div class="list__item__left">
+        <div class="left">
           <label class="checkbox checkbox--material" style="width: 100%; padding: 10px 0; margin: 0;">
             <input id="checkbox3" type="checkbox" class="checkbox__input checkbox--material__input" ng-model="c">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox3" class="list__item__center">
+        <label for="checkbox3" class="center">
           {{c ? 'YES' : 'NO'}}
         </label>
       </ons-list-item>
 
       <ons-list-item modifier="material">
-        <div class="list__item__left">
+        <div class="left">
           <label class="checkbox checkbox--material" style="width: 100%; padding: 10px 0; margin: 0;">
             <input id="checkbox4" type="checkbox" class="checkbox__input checkbox--material__input" ng-model="d" disabled>
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox4" class="list__item__center">
+        <label for="checkbox4" class="center">
           {{d ? 'YES' : 'NO'}}
         </label>
       </ons-list-item>
