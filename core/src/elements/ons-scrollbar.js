@@ -116,7 +116,7 @@ class ScrollbarElement extends BaseElement {
       this.parentNode.style.position = 'relative';
     }
 
-    this._content = util.createElement(`<div class="content"></div>`);
+    this._content = util.createElement(`<div class="scrollbar-content"></div>`);
     Array.prototype.slice.call(this.parentNode.childNodes).forEach(e => {
       if (e != this) {
         this._content.appendChild(e);
@@ -209,7 +209,7 @@ class ScrollbarElement extends BaseElement {
     if (!this.hasAttribute('_attached')) {
       this._attach();
     } else {
-      this._content = this.parentNode.querySelector('.content');
+      this._content = this.parentNode.getElementsByClassName('scrollbar-content')[0];
     }
 
     this._content.addEventListener('scroll', this._boundOnScroll);
