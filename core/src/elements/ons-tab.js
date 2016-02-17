@@ -244,10 +244,6 @@ class TabElement extends BaseElement {
     }
   }
 
-  isPersistent() {
-    return this.hasAttribute('persistent');
-  }
-
   setActive() {
     const radio = util.findChild(this, 'input');
     radio.checked = true;
@@ -282,20 +278,15 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(callback, link) {
-    if (this.isPersistent()) {
-      if (!this._pageElement) {
-        this._createPageElement(this.getAttribute('page'), (element) => {
-          link(element, element => {
-            this._pageElement = element;
-            callback(element);
-          });
+    if (!this._pageElement) {
+      this._createPageElement(this.getAttribute('page'), (element) => {
+        link(element, element => {
+          this._pageElement = element;
+          callback(element);
         });
-      } else {
-        callback(this._pageElement);
-      }
+      });
     } else {
-      this._pageElement = null;
-      this._createPageElement(this.getAttribute('page'), callback);
+      callback(this._pageElement);
     }
   }
 
@@ -334,7 +325,19 @@ class TabElement extends BaseElement {
       const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+        tabbar.setActiveTab(tabIndex, {animation: 'none'});
+      });
+    } else {
+      OnsTabbarElement.rewritables.ready(tabbar, () => {
+        if (!this._pageElement) {
+          this._createPageElement(this.getAttribute('page'), pageElement => {
+            OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
+              this._pageElement = pageElement;
+              this._pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(this._pageElement);
+            });
+          });
+        }
       });
     }
 

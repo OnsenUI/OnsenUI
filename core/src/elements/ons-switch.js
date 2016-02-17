@@ -30,14 +30,11 @@ const scheme = {
 const template = util.createFragment(`
   <input type="checkbox" class="switch__input">
   <div class="switch__toggle">
-    <div class="switch__handle"></div>
+    <div class="switch__handle">
+      <div class="switch__touch"></div>
+    </div>
   </div>
 `);
-
-const generateId = (() => {
-  let i = 0;
-  return () => 'ons-switch-id-' + (i++);
-})();
 
 const locations = {
   ios: [1, 21],
@@ -113,7 +110,7 @@ class SwitchElement extends BaseElement {
   }
 
   set checked(value) {
-    if (!!value != this._checkbox.checked) {
+    if (!!value !== this._checkbox.checked) {
       this._checkbox.click();
       this._checkbox.checked = !!value;
       if (this.checked) {
@@ -194,21 +191,24 @@ class SwitchElement extends BaseElement {
   _compile() {
     this.classList.add('switch');
     this.appendChild(template.cloneNode(true));
-    this.setAttribute('name', generateId());
     this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {
     this._checkbox.removeEventListener('change', this._onChange);
     this.removeEventListener('dragstart', this._onDragStart);
+    this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
+    this._gestureDetector.dispose();
   }
 
   attachedCallback() {
     this._checkbox.addEventListener('change', this._onChange);
-    this._gestureDetector = new GestureDetector(this);
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
     this.addEventListener('dragstart', this._onDragStart);
+    this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
+    this._boundOnRelease = this._onRelease.bind(this);
   }
 
   _onChange() {
@@ -225,42 +225,47 @@ class SwitchElement extends BaseElement {
     }
   }
 
+  _onHold(e) {
+    if (!this.disabled) {
+      this.classList.add('switch--active');
+      document.addEventListener('release', this._boundOnRelease);
+    }
+  }
+
   _onDragStart(e) {
     if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
+      this.classList.remove('switch--active');
       return;
     }
     this.classList.add('switch--active');
-    var l = locations[this._isMaterial ? 'material' : 'ios'];
-    var startX = l[this.checked ? 1 : 0];
+    this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
 
-    var onDrag = (e) => {
-      e.gesture.srcEvent.preventDefault();
-      var position = startX + e.gesture.deltaX;
-      this._handle.style.left = Math.min(l[1], Math.max(l[0], position)) + 'px';
-    };
-
-    var onDragEnd = (e) => {
-      this.removeEventListener('drag', onDrag);
-      document.removeEventListener('release', onDragEnd);
-
-      this.checked = parseInt(this._handle.style.left) > (l[0] + l[1]) / 2;
-      this._handle.style.left = '';
-      this.classList.remove('switch--active');
-    };
-
-    this.addEventListener('drag', onDrag);
-    document.addEventListener('release', onDragEnd);
+    this.addEventListener('drag', this._onDrag);
+    document.addEventListener('release', this._boundOnRelease);
   }
 
+  _onDrag(e) {
+    e.gesture.srcEvent.preventDefault();
+    var l = this._locations;
+    var position = Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
+    this._handle.style.left = position + 'px';
+    this.checked = position >= (l[0] + l[1]) / 2;
+  };
+
+  _onRelease(e) {
+    this.removeEventListener('drag', this._onDrag);
+    document.removeEventListener('release', this._boundOnRelease);
+
+    this._handle.style.left = '';
+    this.classList.remove('switch--active');
+  }
 
   attributeChangedCallback(name, last, current) {
     switch(name) {
     case 'modifier':
       this._isMaterial = (current || '').indexOf('material') !== -1;
+      this._locations = locations[this._isMaterial ? 'material' : 'ios'];
       ModifierUtil.onModifierChanged(last, current, this, scheme);
-      break;
-    case 'name':
-      this._checkbox.setAttribute(name, current || generateId());
       break;
     case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;

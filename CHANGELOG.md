@@ -9,10 +9,14 @@ v2.0.0-beta.7
  * ons-tabbar: Correctly applies animation-options.
  * ons-popover: Correctly applies animation-options.
  * ons-alert-dialog: Correctly applies animation-options.
+ * ons-navigator: Closes [#1208](https://github.com/OnsenUI/OnsenUI/issues/1208).
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
+ * ons-tab: Tabs are always persistent.
  * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
  * ons-switch: Switch is now draggable.
+ * core: Use a global gesture detector to improve performance.
+ * ons-splitter-side: Fixed [#1222](https://github.com/OnsenUI/OnsenUI/issues/1222).
 
 v2.0.0-beta.6
 ----

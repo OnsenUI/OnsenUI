@@ -24,7 +24,7 @@ import BaseElement from 'ons/base-element';
  * @element ons-ripple
  * @category control
  * @description
- *   [en]Adds scrollbar to the parent element. Note: the parent should have a fixed size. [/en]
+ *   [en]Adds scrollbar to the parent element. NOTE: the parent should have a fixed size.[/en]
  *   [ja][/ja]
  * @example
  * <div>
@@ -87,20 +87,15 @@ class ScrollbarElement extends BaseElement {
     this._limitReached = 0;
     this._autohideDelay = 500;
     this.onInfiniteScrollLimit = 0.75;
-    // this.onInfiniteScroll = (done) => {
-    //   this._content.innerHTML += Array(100).join('koko ');
-    //   console.log('genkai da!');
-    //   setTimeout(done, 500);
-    // };
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
+    this._boundOnResize = this._onResize.bind(this);
 
     ['height', 'draggable', 'autohide', 'hidden', 'update-on-scroll'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
-
 
   _compile() {
     this.classList.add('scrollbar-container');
@@ -108,7 +103,6 @@ class ScrollbarElement extends BaseElement {
     this.appendChild(this._scroll);
     this.setAttribute('_compiled', '');
   }
-
 
   _attach() {
     var styles = window.getComputedStyle(this.parentNode);
@@ -125,7 +119,6 @@ class ScrollbarElement extends BaseElement {
     this.parentNode.insertBefore(this._content, this);
     this.setAttribute('_attached', '');
   }
-
 
   _onScroll(e) {
     if (this._updateOnScroll) {
@@ -146,6 +139,9 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
+  _onResize(e) {
+    this.updateScrollbar();
+  }
 
   _updateAutohide(){
     if (!this._scrolling) {
@@ -159,16 +155,17 @@ class ScrollbarElement extends BaseElement {
     }, this._autohideDelay);
   }
 
-
   _overLimit(e){
     var c = this._content;
     return (c.scrollTop + c.clientHeight) / c.scrollHeight >= this.onInfiniteScrollLimit;
   }
 
-
   /**
-   * Updates the scrollbar size and location. Should be called if the size of the content changes.
-   * Automatically called when onInfiniteScroll handler is finished.
+   * @method updateScrollbar
+   * @signature updateScrollbar()
+   * @description
+   *   [en]Updates teh scrollbar size and location. Should be called if the size of the content changes. Automatically called when onInfiniteScroll handler is finished.[/en]
+   *   [ja][/ja]
    */
   updateScrollbar() {
     var [content, scroll, container] = [this._content, this._scroll, this];
@@ -181,11 +178,9 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-
   _updateScrollbarLocation() {
     this._scroll.style.top = Math.round(this._scrollMax * this._content.scrollTop / this._contentMax) + 'px';
   }
-
 
   _onDragStart(e) {
     var startY = this._scroll.offsetTop;
@@ -213,6 +208,7 @@ class ScrollbarElement extends BaseElement {
     }
 
     this._content.addEventListener('scroll', this._boundOnScroll);
+    window.addEventListener('resize', this._boundOnResize);
     this.updateScrollbar();
 
     if (this._draggable) {
@@ -221,14 +217,13 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-
   detachedCallback() {
     this._content.removeEventListener('scroll', this._boundOnScroll);
     this._scroll.removeEventListener('dragstart', this._boundOnDragStart);
     this._scroll.removeEventListener('touchstart', this._onTouchStart);
     this._timeout && clearTimeout(this._timeout);
+    window.removeEventListener('resize', this._boundOnResize);
   }
-
 
   attributeChangedCallback(name, last, current) {
     if (name === 'update-on-scroll') {
