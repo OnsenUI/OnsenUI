@@ -152,6 +152,14 @@ util.createElement = (html) => {
 };
 
 /**
+ * @param {Element} node
+ * @return {Element}
+ */
+util.lastChild= (node) => {
+  return node.children[node.children.length -1];
+};
+
+/**
  * @param {String} html
  * @return {HTMLFragment}
  */
