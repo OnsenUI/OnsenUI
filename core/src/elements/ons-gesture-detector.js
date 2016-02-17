@@ -18,6 +18,20 @@ limitations under the License.
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 
+/**
+ * @element ons-gesture-detector
+ * @category input
+ * @description
+ *   [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
+ *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
+ * @guide DetectingFingerGestures
+ *   [en]Detecting finger gestures[/en]
+ *   [ja]ジェスチャー操作の検知[/ja]
+ * @example
+ * <ons-gesture-detector style="height: 100%; width: 100%;">
+ *   ...
+ * </ons-gesture-detector>
+ */
 class GestureDetectorElement extends BaseElement {
   createdCallback() {
     this._gestureDetector = new GestureDetector(this);

@@ -19,28 +19,12 @@
       ];
 
       tabs[0].click();
-      expect(element(by.id('page1')).isPresent()).toBe(true);
-      expect(element(by.id('page2')).isPresent()).not.toBe(true);
+      expect(element(by.id('page1')).isDisplayed()).toBeTruthy();
+      expect(element(by.id('page2')).isDisplayed()).toBeFalsy();
 
       tabs[1].click();
-      expect(element(by.id('page2')).isPresent()).toBe(true);
-      expect(element(by.id('page1')).isPresent()).not.toBe(true);
-    });
-
-    it('should reload non-persistent tabs', function() {
-      var tabs = [
-        element(by.id('tab1')),
-        element(by.id('tab2'))
-      ];
-
-      var input = element(by.id('page2-input'));
-
-      tabs[1].click();
-      input.sendKeys('Hello');
-      expect(input.getAttribute('value')).toBe('Hello');
-      tabs[0].click();
-      tabs[1].click();
-      expect(input.getAttribute('value')).not.toBe('Hello');
+      expect(element(by.id('page2')).isDisplayed()).toBeTruthy();
+      expect(element(by.id('page1')).isDisplayed()).toBeFalsy();
     });
 
     it('should not reload persistent tabs', function() {

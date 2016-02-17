@@ -21,7 +21,35 @@ import BaseElement from 'ons/base-element';
 
 const scheme = {'': 'list__header--*'};
 
+/**
+ * @element ons-list-header
+ * @category list
+ * @description
+ *   [en]Header element for list items. Must be put inside ons-list component.[/en]
+ *   [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
+ */
 class ListHeaderElement extends BaseElement {
+
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]The appearance of the list header.[/en]
+   *   [ja]ヘッダーの表現を指定します。[/ja]
+   */
+
   createdCallback() {
     this.classList.add('list__header');
     ModifierUtil.initModifier(this, scheme);

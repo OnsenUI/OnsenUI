@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import animationOptionsParser from './animation-options-parser';
+import animationOptionsParse  from './animation-options-parser';
 
 const util = {};
 
@@ -168,7 +168,7 @@ util.createFragment = (html) => {
   wrapper.innerHTML = html;
   const fragment = document.createDocumentFragment();
 
-  if (wrapper.firstChild) {
+  while (wrapper.firstChild) {
     fragment.appendChild(wrapper.firstChild);
   }
 
@@ -274,6 +274,6 @@ util.hasModifier = (target, modifierName) => {
  * @param {String}
  * @return {Object}
  */
-util.animationOptionsParse = animationOptionsParser.parse;
+util.animationOptionsParse = animationOptionsParse;
 
 export default util;

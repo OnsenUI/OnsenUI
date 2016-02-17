@@ -1,0 +1,32 @@
+{
+  "id": "/event",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "params": {
+      "type": "array",
+      "items": {"$ref": "/parameter"},
+      "required": true
+    },
+    "extensionOf": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "examples": {
+      "type": "array",
+      "items": {"type": "string"},
+      "required": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "additionalProperties": false
+}

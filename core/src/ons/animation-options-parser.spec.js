@@ -2,16 +2,15 @@
 
 describe('ons._animationOptionsParser', () => {
   it('exists', () => {
-    expect(ons._animationOptionsParser).to.be.ok;
-    expect(ons._util.animationOptionsParse).to.equal(ons._animationOptionsParser.parse);
+    expect(ons._util.animationOptionsParse).to.be.an.instanceOf(Function);
   });
 
   it('parses valid strings', () => {
-    let result = ons._animationOptionsParser.parse('{ }');
+    let result = ons._util.animationOptionsParse('{ }');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(0);
 
-    result = ons._animationOptionsParser.parse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, as :\' a\'}');
+    result = ons._util.animationOptionsParse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, as :\' a\'}');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(4);
     expect(result._v).to.equal(false);
@@ -19,7 +18,7 @@ describe('ons._animationOptionsParser', () => {
     expect(result.w$_.x).to.equal(1000);
     expect(result.as).to.equal(' a');
 
-    result = ons._animationOptionsParser.parse('{_2  : [6, {x : \'%^&\'}, 8] ,  q:{x:{p:[1,2]}} , xc:"bnm"   }');
+    result = ons._util.animationOptionsParse('{_2  : [6, {x : \'%^&\'}, 8] ,  q:{x:{p:[1,2]}} , xc:"bnm"   }');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(3);
     expect(result._2.length).to.equal(3);
@@ -27,11 +26,11 @@ describe('ons._animationOptionsParser', () => {
     expect(result.q.x.p.length).to.equal(2);
     expect(result.xc).to.equal('bnm');
 
-    result = ons._animationOptionsParser.parse('[ ]');
+    result = ons._util.animationOptionsParse('[ ]');
     expect(result).to.be.ok;
     expect(result.length).to.equal(0);
 
-    result = ons._animationOptionsParser.parse('[{ i: 1},3,  "qw",\'zx\', 1e2  ]');
+    result = ons._util.animationOptionsParse('[{ i: 1},3,  "qw",\'zx\', 1e2  ]');
     expect(result).to.be.ok;
     expect(result.length).to.equal(5);
     expect(result[0].i).to.equal(1);
@@ -53,14 +52,14 @@ describe('ons._animationOptionsParser', () => {
   });
 
   it('throws error when the string is invalid', () => {
-    expect(() => ons._animationOptionsParser.parse('q:1')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{@q:1}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{2:1}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{\'q\':1}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{:1}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{x: {w:1}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('{x: [1,2}')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('[,,]')).to.throw(Error);
-    expect(() => ons._animationOptionsParser.parse('[4,5,]')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('q:1')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{@q:1}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{2:1}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{\'q\':1}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{:1}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{x: {w:1}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('{x: [1,2}')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('[,,]')).to.throw(Error);
+    expect(() => ons._util.animationOptionsParse('[4,5,]')).to.throw(Error);
   });
 });

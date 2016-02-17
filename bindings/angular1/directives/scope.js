@@ -1,9 +1,6 @@
 /**
- * @ngdoc directive
- * @id scope
- * @name ons-scope
+ * @element ons-scope
  * @category util
- * @extensionOf angular
  * @description
  *   [en]All child elements using the "var" attribute will be attached to the scope of this element.[/en]
  *   [ja]"var"属性を使っている全ての子要素のviewオブジェクトは、この要素のAngularJSスコープに追加されます。[/ja]

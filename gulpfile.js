@@ -28,8 +28,6 @@ var merge = require('event-stream').merge;
 var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
-var dgeni = require('dgeni');
-var njglobals = require('nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
@@ -87,6 +85,7 @@ gulp.task('core', function() {
       moduleName: 'ons'
     }))
     .pipe($.addSrc.prepend('core/vendor/*.js'))
+    .pipe($.sourcemaps.init())
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
@@ -328,7 +327,7 @@ gulp.task('build', function(done) {
     'core',
     'prepare',
     'minify-js',
-    'build-doc',
+    'build-docs',
     'prepare-css-components',
     'compress-distribution-package',
     done
@@ -404,23 +403,10 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 });
 
 ////////////////////////////////////////
-// build-doc
+// build-docs
 ////////////////////////////////////////
-gulp.task('build-doc', function(done) {
-  njglobals.rootUrl = '/';
-  njglobals.lang = 'en';
-  new dgeni([require('./docs/package')]).generate().then(done); // eslint-disable-line new-cap
-});
-
-////////////////////////////////////////
-// watch-doc
-////////////////////////////////////////
-gulp.task('watch-doc', ['build-doc'], function(done) {
-  gulp.watch([
-    './docs/**/*',
-    './bindings/angular1/directives/*.js',
-    './bindings/angular1/js/*.js',
-  ], ['build-doc']);
+gulp.task('build-docs', function() {
+  return require('./docs/wcdoc')(path.join(__dirname, '/build/docs'));
 });
 
 ////////////////////////////////////////

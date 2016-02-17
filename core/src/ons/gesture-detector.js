@@ -7,13 +7,31 @@
 var Event, Utils, Detection, PointerEvent;
 
 /**
- * @param {HTMLElement} element
- * @param {Object} [options={}]
- * @return {GestureDetector.Instance}
+ * @object ons.GestureDetector
+ * @category util
+ * @description
+ *   [en]Utility class for gesture detection.[/en]
+ *   [ja]ジェスチャを検知するためのユーティリティクラスです。[/ja]
+ */
+
+/**
+ * @method constructor
+ * @signature constructor(element[, options])
+ * @description
+ *  [en]Create a new GestureDetector instance.[/en]
+ *  [ja]GestureDetectorのインスタンスを生成します。[/ja]
+ * @param {Element} element
+ *   [en]Name of the event.[/en]
+ *   [ja]ジェスチャを検知するDOM要素を指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Options object.[/en]
+ *   [ja]オプションを指定します。[/ja]
+ * @return {ons.GestureDetector.Instance}
  */
 var GestureDetector = function GestureDetector(element, options) {
   return new GestureDetector.Instance(element, options || {});
 };
+
 
 /**
  * default settings.
@@ -190,7 +208,6 @@ Utils = GestureDetector.utils = {
   /**
    * extend method, could also be used for cloning when `dest` is an empty object.
    * changes the dest object
-   * @method extend
    * @param {Object} dest
    * @param {Object} src
    * @param {Boolean} [merge=false]  do a merge
@@ -207,7 +224,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * simple addEventListener wrapper
-   * @method on
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
@@ -218,7 +234,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * simple removeEventListener wrapper
-   * @method off
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
@@ -229,7 +244,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * forEach over arrays and objects
-   * @method each
    * @param {Object|Array} obj
    * @param {Function} iterator
    * @param {any} iterator.item
@@ -263,7 +277,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * find if a string contains the string using indexOf
-   * @method inStr
    * @param {String} src
    * @param {String} find
    * @return {Boolean} found
@@ -274,7 +287,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * find if a array contains the object using indexOf or a simple polyfill
-   * @method inArray
    * @param {String} src
    * @param {String} find
    * @return {Boolean|Number} false when not found, or the index
@@ -295,7 +307,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * convert an array-like object (`arguments`, `touchlist`) to an array
-   * @method toArray
    * @param {Object} obj
    * @return {Array}
    */
@@ -305,7 +316,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * find if a node is in the given parent
-   * @method hasParent
    * @param {HTMLElement} node
    * @param {HTMLElement} parent
    * @return {Boolean} found
@@ -322,7 +332,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * get the center of all the touches
-   * @method getCenter
    * @param {Array} touches
    * @return {Object} center contains `pageX`, `pageY`, `clientX` and `clientY` properties
    */
@@ -361,7 +370,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * calculate the velocity between two points. unit is in px per ms.
-   * @method getVelocity
    * @param {Number} deltaTime
    * @param {Number} deltaX
    * @param {Number} deltaY
@@ -376,7 +384,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * calculate the angle between two coordinates
-   * @method getAngle
    * @param {Touch} touch1
    * @param {Touch} touch2
    * @return {Number} angle
@@ -390,7 +397,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * do a small comparison to get the direction between two touches.
-   * @method getDirection
    * @param {Touch} touch1
    * @param {Touch} touch2
    * @return {String} direction matches `DIRECTION_LEFT|RIGHT|UP|DOWN`
@@ -407,7 +413,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * calculate the distance between two touches
-   * @method getDistance
    * @param {Touch}touch1
    * @param {Touch} touch2
    * @return {Number} distance
@@ -422,7 +427,6 @@ Utils = GestureDetector.utils = {
   /**
    * calculate the scale factor between two touchLists
    * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
-   * @method getScale
    * @param {Array} start array of touches
    * @param {Array} end array of touches
    * @return {Number} scale
@@ -437,7 +441,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * calculate the rotation degrees between two touchLists
-   * @method getRotation
    * @param {Array} start array of touches
    * @param {Array} end array of touches
    * @return {Number} rotation
@@ -452,7 +455,6 @@ Utils = GestureDetector.utils = {
 
   /**
    * find out if the direction is vertical   *
-   * @method isVertical
    * @param {String} direction matches `DIRECTION_UP|DOWN`
    * @return {Boolean} is_vertical
    */
@@ -492,7 +494,6 @@ Utils = GestureDetector.utils = {
    * `userSelect='none'` also sets `element.onselectstart` to false
    * `userDrag='none'` also sets `element.ondragstart` to false
    *
-   * @method toggleBehavior
    * @param {HtmlElement} element
    * @param {Object} props
    * @param {Boolean} [toggle=true]
@@ -570,7 +571,6 @@ Event = GestureDetector.event = {
 
   /**
    * simple event binder with a hook and support for multiple types
-   * @method on
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
@@ -587,7 +587,6 @@ Event = GestureDetector.event = {
 
   /**
    * simple event unbinder with a hook and support for multiple types
-   * @method off
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
@@ -605,7 +604,6 @@ Event = GestureDetector.event = {
   /**
    * the core touch event handler.
    * this finds out if we should to detect gestures
-   * @method onTouch
    * @param {HTMLElement} element
    * @param {String} eventType matches `EVENT_START|MOVE|END`
    * @param {Function} handler
@@ -668,7 +666,6 @@ Event = GestureDetector.event = {
   /**
    * the core detection method
    * this finds out what GestureDetector-touch-events to trigger
-   * @method doDetect
    * @param {Object} ev
    * @param {String} eventType matches `EVENT_START|MOVE|END`
    * @param {HTMLElement} element
@@ -739,7 +736,6 @@ Event = GestureDetector.event = {
    * we have different events for each device/browser
    * determine what we need and set them in the EVENT_TYPES constant
    * the `onTouch` method is bind to these properties.
-   * @method determineEventTypes
    * @return {Object} events
    */
   determineEventTypes: function determineEventTypes() {
@@ -780,7 +776,6 @@ Event = GestureDetector.event = {
 
   /**
    * create touchList depending on the event
-   * @method getTouchList
    * @param {Object} ev
    * @param {String} eventType
    * @return {Array} touches
@@ -818,7 +813,6 @@ Event = GestureDetector.event = {
 
   /**
    * collect basic event data
-   * @method collectEventData
    * @param {HTMLElement} element
    * @param {String} eventType matches `EVENT_START|MOVE|END`
    * @param {Array} touches
@@ -889,7 +883,6 @@ PointerEvent = GestureDetector.PointerEvent = {
 
   /**
    * get the pointers as an array
-   * @method getTouchList
    * @return {Array} touchlist
    */
   getTouchList: function getTouchList() {
@@ -903,7 +896,6 @@ PointerEvent = GestureDetector.PointerEvent = {
 
   /**
    * update the position of a pointer
-   * @method updatePointer
    * @param {String} eventType matches `EVENT_START|MOVE|END`
    * @param {Object} pointerEvent
    */
@@ -918,7 +910,6 @@ PointerEvent = GestureDetector.PointerEvent = {
 
   /**
    * check if ev matches pointertype
-   * @method matchType
    * @param {String} pointerType matches `POINTER_MOUSE|TOUCH|PEN`
    * @param {PointerEvent} ev
    */
@@ -938,7 +929,6 @@ PointerEvent = GestureDetector.PointerEvent = {
 
   /**
    * reset the stored pointers
-   * @method reset
    */
   reset: function resetList() {
     this.pointers = {};
@@ -968,7 +958,6 @@ Detection = GestureDetector.detection = {
 
   /**
    * start GestureDetector.gesture detection
-   * @method startDetect
    * @param {GestureDetector.Instance} inst
    * @param {Object} eventData
    */
@@ -996,7 +985,6 @@ Detection = GestureDetector.detection = {
 
   /**
    * GestureDetector.gesture detection
-   * @method detect
    * @param {Object} eventData
    * @return {any}
    */
@@ -1036,7 +1024,6 @@ Detection = GestureDetector.detection = {
    * clear the GestureDetector.gesture vars
    * this is called on endDetect, but can also be used when a final GestureDetector.gesture has been detected
    * to stop other GestureDetector.gestures from being fired
-   * @method stopDetect
    */
   stopDetect: function stopDetect() {
     // clone current data to the store as the previous gesture
@@ -1050,7 +1037,6 @@ Detection = GestureDetector.detection = {
 
   /**
    * calculate velocity, angle and direction
-   * @method getVelocityData
    * @param {Object} ev
    * @param {Object} center
    * @param {Number} deltaTime
@@ -1092,7 +1078,6 @@ Detection = GestureDetector.detection = {
 
   /**
    * extend eventData for GestureDetector.gestures
-   * @method extendEventData
    * @param {Object} ev
    * @return {Object} ev
    */
@@ -1137,7 +1122,6 @@ Detection = GestureDetector.detection = {
 
   /**
    * register new gesture
-   * @method register
    * @param {Object} gesture object, see `gestures/` for documentation
    * @return {Array} gestures
    */
@@ -1248,12 +1232,17 @@ GestureDetector.Instance = function(element, options) {
 
 GestureDetector.Instance.prototype = {
   /**
-   * bind events to the instance
    * @method on
-   * @chainable
-   * @param {String} gestures multiple gestures by splitting with a space
+   * @signature on(gestures, handler)
+   * @description
+   *  [en]Adds an event handler for a gesture. Available gestures are: drag, dragleft, dragright, dragup, dragdown, hold, release, swipe, swipeleft, swiperight, swipeup, swipedown, tap, doubletap, touch, transform, pinch, pinchin, pinchout and rotate. [/en]
+   *  [ja]ジェスチャに対するイベントハンドラを追加します。指定できるジェスチャ名は、drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate です。[/ja]
+   * @param {String} gestures
+   *   [en]A space separated list of gestures.[/en]
+   *   [ja]検知するジェスチャ名を指定します。スペースで複数指定することができます。[/ja]
    * @param {Function} handler
-   * @param {Object} handler.ev event object
+   *   [en]An event handling function.[/en]
+   *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
    */
   on: function onEvent(gestures, handler) {
     var self = this;
@@ -1264,11 +1253,17 @@ GestureDetector.Instance.prototype = {
   },
 
   /**
-   * unbind events to the instance
    * @method off
-   * @chainable
+   * @signature off(gestures, handler)
+   * @description
+   *  [en]Remove an event listener.[/en]
+   *  [ja]イベントリスナーを削除します。[/ja]
    * @param {String} gestures
+   *   [en]A space separated list of gestures.[/en]
+   *   [ja]ジェスチャ名を指定します。スペースで複数指定することができます。[/ja]
    * @param {Function} handler
+   *   [en]An event handling function.[/en]
+   *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
    */
   off: function offEvent(gestures, handler) {
     var self = this;
@@ -1285,7 +1280,7 @@ GestureDetector.Instance.prototype = {
   /**
    * trigger gesture event
    * @method trigger
-   * @chainable
+   * @signature trigger(gesture, eventData)
    * @param {String} gesture
    * @param {Object} [eventData]
    */
@@ -1312,10 +1307,14 @@ GestureDetector.Instance.prototype = {
   },
 
   /**
-   * enable of disable GestureDetector.js detection
    * @method enable
-   * @chainable
+   * @signature enable(state)
+   * @description
+   *  [en]Enable or disable gesture detection.[/en]
+   *  [ja]ジェスチャ検知を有効化/無効化します。[/ja]
    * @param {Boolean} state
+   *   [en]Specify if it should be enabled or not.[/en]
+   *   [ja]有効にするかどうかを指定します。[/ja]
    */
   enable: function enable(state) {
     this.enabled = state;
@@ -1323,9 +1322,11 @@ GestureDetector.Instance.prototype = {
   },
 
   /**
-   * dispose this GestureDetector instance
    * @method dispose
-   * @return {Null}
+   * @signature dispose()
+   * @description
+   *  [en]Remove and destroy all event handlers for this instance.[/en]
+   *  [ja]このインスタンスでのジェスチャの検知や、イベントハンドラを全て解除して廃棄します。[/ja]
    */
   dispose: function dispose() {
     var i, eh;
