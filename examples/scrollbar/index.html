@@ -13,7 +13,6 @@
   <script src="../../build/js/angular-onsenui.js"></script>
   <script>
     ons.bootstrap();
-    // window.addEventListener("contextmenu", function(e) { e.preventDefault(); })
   </script>
   <style>
     body {
@@ -45,7 +44,6 @@
 
 <body>
   <ons-page modifier="material">
-    <ons-scrollbar id="main-scrollbar"></ons-scrollbar>
 
     <ons-toolbar modifier="material">
       <div class="center">Scrollbar</div>
@@ -74,6 +72,8 @@
       <div class="text"></div>
       <ons-scrollbar height="100"></ons-scrollbar>
     </div>
+
+    <ons-scrollbar></ons-scrollbar>
   </ons-page>
   <ons-template id="text">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sem quis sem scelerisque fermentum. Aliquam erat volutpat. Mauris imperdiet consequat quam, vitae bibendum ante viverra eu. Maecenas fringilla venenatis dictum. Vivamus non dapibus leo. In tempus dui eu lobortis venenatis. Suspendisse a metus urna. Suspendisse bibendum at nunc ut rutrum. Vestibulum non laoreet neque. Donec lacinia scelerisque tempus. Nunc efficitur diam eget consectetur commodo. Morbi nec purus ut leo venenatis tristique. Nulla id diam a diam bibendum posuere eget eget lorem.
@@ -87,19 +87,18 @@ Aenean gravida tristique dolor, blandit facilisis nulla sodales sit amet. Praese
 In non dolor nec quam euismod ultrices. Suspendisse a purus quis dolor dignissim ultricies. Etiam aliquam blandit velit, vitae iaculis libero mollis et. Vestibulum auctor nisl in odio mollis bibendum. Curabitur sed congue augue. Curabitur molestie augue nec lacinia tincidunt. Nam congue nunc ultricies ipsum cursus convallis.
   </ons-template>
   <script>
-    var each = function(className, callback) {
-      Array.prototype.slice.call(document.getElementsByClassName(className)).forEach(callback);
-    };
-    var template = document.getElementById('text').template;
-    each('text', function(e) {
-      e.innerHTML = template;
+    ons.ready(function(){
+      var each = function(className, callback) {
+        Array.prototype.slice.call(document.getElementsByClassName(className)).forEach(callback);
+      };
+      var template = document.getElementById('text').template;
+      each('text', function(e) {
+        e.innerHTML = template;
+      });
+      each('scrollbar-container', function(e) {
+        e.updateScrollbar();
+      });
     });
-    each('scrollbar-container', function(e) {
-      e.updateScrollbar();
-    });
-    window.onresize = function() {
-      document.getElementById('main-scrollbar').updateScrollbar();
-    };
   </script>
 </body>
 </html>
