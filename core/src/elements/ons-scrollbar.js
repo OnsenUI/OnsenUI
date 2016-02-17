@@ -90,6 +90,7 @@ class ScrollbarElement extends BaseElement {
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
+    this._boundOnResize = this._onResize.bind(this);
 
     ['height', 'draggable', 'autohide', 'hidden', 'update-on-scroll'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
@@ -136,6 +137,10 @@ class ScrollbarElement extends BaseElement {
         this._limitReached = 0;
       });
     }
+  }
+
+  _onResize(e) {
+    this.updateScrollbar();
   }
 
   _updateAutohide(){
@@ -203,6 +208,7 @@ class ScrollbarElement extends BaseElement {
     }
 
     this._content.addEventListener('scroll', this._boundOnScroll);
+    window.addEventListener('resize', this._boundOnResize);
     this.updateScrollbar();
 
     if (this._draggable) {
@@ -216,6 +222,7 @@ class ScrollbarElement extends BaseElement {
     this._scroll.removeEventListener('dragstart', this._boundOnDragStart);
     this._scroll.removeEventListener('touchstart', this._onTouchStart);
     this._timeout && clearTimeout(this._timeout);
+    window.removeEventListener('resize', this._boundOnResize);
   }
 
   attributeChangedCallback(name, last, current) {
