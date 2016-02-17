@@ -165,10 +165,12 @@ class ScrollbarElement extends BaseElement {
     return (c.scrollTop + c.clientHeight) / c.scrollHeight >= this.onInfiniteScrollLimit;
   }
 
-
   /**
-   * Updates the scrollbar size and location. Should be called if the size of the content changes.
-   * Automatically called when onInfiniteScroll handler is finished.
+   * @method updateScrollbar
+   * @signature updateScrollbar()
+   * @description
+   *   [en]Updates teh scrollbar size and location. Should be called if the size of the content changes. Automatically called when onInfiniteScroll handler is finished.[/en]
+   *   [ja][/ja]
    */
   updateScrollbar() {
     var [content, scroll, container] = [this._content, this._scroll, this];
