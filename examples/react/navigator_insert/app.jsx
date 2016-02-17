@@ -55,21 +55,22 @@ var MyNav  = React.createClass({
     console.log('counterStr');
     console.log(counterStr);
     this.refs.navi.insertComponent(
-      <MyPage key={counterStr} title={Title}
-        insertPage={this.insertPage} popPage={this.popPage}
+      <MyPage  title={Title}
+        insertPageFront={this.insertPage.bind(this, 0)}
+        insertPageBack={this.insertPage.bind(this,-1)}
+        popPage={this.popPage}
       />, pos
     );
   },
   
   render: function() {
     return <OnsNavigator ref="navi">
-      <MyPage key="0" 
+      <MyPage  
         title="Navigator" 
         insertPageFront={this.insertPage.bind(this, 0)}
         insertPageBack={this.insertPage.bind(this,-1)}
         popPage={this.popPage}
-        
-        popPage={this.popPage}/>
+        />
     </OnsNavigator>
   }
 });

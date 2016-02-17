@@ -2,6 +2,7 @@ const util = window.ons._util;
 
 var OnsNavigator = React.createClass({
   componentDidMount: function() {
+    this.counter = 0;
     var node = this.node = ReactDOM.findDOMNode(this);
     var page = this.props.children;
 
@@ -80,11 +81,12 @@ var OnsNavigator = React.createClass({
 
     navNode.popPage(options).then(function() {
 
-            this.elements.pop();
+      console.log('pop');
+
+      this.elements.pop();
       var help = [];
 
       lastChild.style.display = 'none';
-
 
       // this can happen in animation, that there is some div
       if (util.lastChild(navNode).nodeName == 'ONS-PAGE') {
@@ -179,10 +181,12 @@ var OnsNavigator = React.createClass({
 
 
   insertComponent: function(reactPage, insertPos) {
+
+    this.counter ++;
     var node =  ReactDOM.findDOMNode(this)
+    var navNode = node.firstChild;
     insertPos = node.firstChild._normalizeIndex(insertPos);
 
-    this.insert = true;
     if (!reactUtil.rendersToOnsPage(reactPage)) {
       throw new Error("The component that react inserts needs to render to <ons-page>");
     }
@@ -195,10 +199,17 @@ var OnsNavigator = React.createClass({
       help.push(this.elements[i].elem);
     }
 
+    var counter = this.counter;
+
     var elements = this.elements;
     node.firstChild.insertPage( insertPos, '', {pageHTML: htmlString})
     .then(function() {
-      this.insert = false;
+
+      // delete the node again
+      console.log('insertPos: ' + insertPos + ' pages : ' + navNode._pages.length);
+
+      navNode.removeChild(navNode.children[insertPos]);
+      // console.log(navNode._pages);
       var node2 =ReactDOM.render(
         <ons-navigator >
           {help}
@@ -206,12 +217,15 @@ var OnsNavigator = React.createClass({
         node
       );
 
-      for (var i=0; i < elements.length -1; i++) {
-        var index = i;
-        if (index >= insertPos + 1) index++;
-        node.firstChild._pages[i].element = node.firstChild.children[index];
+      for (var i=0;  i< navNode.children.length-1; i++) {
+        navNode.children[i].style.display = 'none';
       }
-      node.firstChild.removeChild(node.firstChild.children[insertPos+1]);
+      
+      console.log('insertPos: ' + insertPos + ' pages : ' + navNode._pages.length);
+      for (var i=0; i < navNode.children.length; i++) {
+        navNode._pages[i].element = navNode.children[i];
+      }
+
     }.bind(this));
   },
 
