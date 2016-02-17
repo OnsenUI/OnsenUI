@@ -23,6 +23,7 @@ import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAni
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
+import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 
 const scheme = {
   '.dialog': 'dialog--*',
@@ -502,7 +503,7 @@ class DialogElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._mask.addEventListener('click', this._boundCancel, false);
 

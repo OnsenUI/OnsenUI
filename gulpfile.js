@@ -84,6 +84,7 @@ gulp.task('core', function() {
       moduleName: 'ons'
     }))
     .pipe($.addSrc.prepend('core/vendor/*.js'))
+    .pipe($.sourcemaps.init())
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
