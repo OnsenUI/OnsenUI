@@ -63,6 +63,14 @@ class ScrollbarElement extends BaseElement {
    */
 
   /**
+   * @attribute autohide-delay
+   * @type {Number}
+   * @description
+   *   [en]Delay (in ms) after which the scrollbar will disappear if autohide is set.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute hidden
    * @type {String}
    * @description
@@ -85,14 +93,13 @@ class ScrollbarElement extends BaseElement {
     }
     this._timeout = false;
     this._limitReached = 0;
-    this._autohideDelay = 500;
     this.onInfiniteScrollLimit = 0.75;
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
     this._boundOnResize = this._onResize.bind(this);
 
-    ['height', 'draggable', 'autohide', 'hidden', 'update-on-scroll'].forEach(e => {
+    ['height', 'draggable', 'autohide', 'autohide-delay', 'hidden', 'update-on-scroll'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -228,6 +235,9 @@ class ScrollbarElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'update-on-scroll') {
       this._updateOnScroll = current !== null;
+    }
+    if (name === 'autohide-delay') {
+      this._autohideDelay = parseInt(current) || 500;
     }
     if (name === 'height') {
       this._height = parseInt(current) || 0;
