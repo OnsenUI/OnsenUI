@@ -251,7 +251,7 @@ var OnsNavigator = React.createClass({
     var elements = this.elements;
 
     var node =  ReactDOM.findDOMNode(this)
-    node.firstChild._pushPage(null, options).then(function() {
+    node.firstChild._pushPage(options).then(function() {
       var help = [];
       for (var i =0; i < elements.length; i++) {
         help.push(elements[i].elem);
