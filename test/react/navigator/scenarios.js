@@ -7,6 +7,8 @@
     var until = protractor.until;
     var driver = browser.driver;
 
+    var waitingTime = 50;
+
     beforeEach(function () {
       browser.get(path);
     });
@@ -20,10 +22,10 @@
 
     var pushPage = function(start, end) {
       for (var i = start; i < end; i++) {
-        driver.sleep(100);
+        driver.sleep(waitingTime);
         var pushBtn = driver.findElement(by.id('push_page_' + i));
         pushBtn.click();
-        driver.wait(until.elementLocated(by.id('page_' + (i + 1))), 100);
+        driver.wait(until.elementLocated(by.id('page_' + (i + 1))), waitingTime);
         driver.findElement(by.id('push_page_' + (i + 1)));
         driver.findElement(by.id('pop_page_' + (i + 1)));
         var page  = driver.findElement(by.id('page_' + (i + 1)));
@@ -36,7 +38,7 @@
       for (var i = start; i > end; i--) {
         var popBtn = driver.findElement(by.id('pop_page_' + i));
         popBtn.click();
-        driver.sleep(100);
+        driver.sleep(waitingTime);
         expect(driver.isElementPresent(by.id('page_' + (i)))).toBe(false);
       }
     };
@@ -60,46 +62,46 @@
        popPage(9, 1);
      });
    });
-   //
-   // describe('page replacing', function () {
-   //     it('should replace current page when a button is clicked', function () {
-   //    titleTest(1);
-   //    // push page
-   //    pushPage(1, 2);
-   //    var replaceBtn = driver.findElement(by.id('replace_page_2'));
-   //    replaceBtn.click();
-   //    driver.sleep(100);
-   //    titleTest(2, 'Replaced Page');
-   //    pushPage(2, 3);
-   //    replaceBtn = driver.findElement(by.id('replace_page_3'));
-   //    replaceBtn.click();
-   //    driver.sleep(100);
-   //    titleTest(3, 'Replaced Page');
-   //    popPage(3, 2);
-   //    driver.sleep(100);
-   //    titleTest(2, 'Replaced Page');
-   //    popPage(2, 1);
-   //    titleTest(1);
-   //    });
-   //  });
-   //
-   //  describe('page reset', function () {
-   //     it('should reset current page when the button is clicked', function () {
-   //       var resetButton = driver.findElement(by.id('reset_page_1'));
-   //       resetButton.click();
-   //       driver.sleep(100);
-   //       titleTest(1, 'Reset Page');
-   //
-   //       pushPage(1, 3);
-   //       var resetButton = driver.findElement(by.id('reset_page_3'));
-   //       resetButton.click();
-   //       driver.sleep(100);
-   //       titleTest(1, 'Reset Page');
-   //
-   //      expect(driver.isElementPresent(by.id('page_2'))).toBe(false);
-   //      expect(driver.isElementPresent(by.id('page_3'))).toBe(false);
-   //    });
-   //  });
+
+   describe('page replacing', function () {
+      it('should replace current page when a button is clicked', function () {
+     titleTest(1);
+     // push page
+     pushPage(1, 2);
+     var replaceBtn = driver.findElement(by.id('replace_page_2'));
+     replaceBtn.click();
+     driver.sleep(waitingTime);
+     titleTest(2, 'Replaced Page');
+     pushPage(2, 3);
+     replaceBtn = driver.findElement(by.id('replace_page_3'));
+     replaceBtn.click();
+     driver.sleep(waitingTime);
+     titleTest(3, 'Replaced Page');
+     popPage(3, 2);
+     driver.sleep(waitingTime);
+     titleTest(2, 'Replaced Page');
+     popPage(2, 1);
+     titleTest(1);
+     });
+   });
+
+   describe('page reset', function () {
+      it('should reset current page when the button is clicked', function () {
+        var resetButton = driver.findElement(by.id('reset_page_1'));
+        resetButton.click();
+        driver.sleep(waitingTime);
+        titleTest(1, 'Reset Page');
+
+        pushPage(1, 3);
+        var resetButton = driver.findElement(by.id('reset_page_3'));
+        resetButton.click();
+        driver.sleep(waitingTime);
+        titleTest(1, 'Reset Page');
+
+       expect(driver.isElementPresent(by.id('page_2'))).toBe(false);
+       expect(driver.isElementPresent(by.id('page_3'))).toBe(false);
+     });
+   });
    //
     // TODO PAGE INSERT
     // BACK BUTTON HANDLER
