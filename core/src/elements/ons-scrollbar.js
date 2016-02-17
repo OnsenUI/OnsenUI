@@ -24,7 +24,7 @@ import BaseElement from 'ons/base-element';
  * @element ons-ripple
  * @category control
  * @description
- *   [en]Adds scrollbar to the parent element. Note: the parent should have a fixed size. [/en]
+ *   [en]Adds scrollbar to the parent element. NOTE: the parent should have a fixed size.[/en]
  *   [ja][/ja]
  * @example
  * <div>
@@ -87,11 +87,6 @@ class ScrollbarElement extends BaseElement {
     this._limitReached = 0;
     this._autohideDelay = 500;
     this.onInfiniteScrollLimit = 0.75;
-    // this.onInfiniteScroll = (done) => {
-    //   this._content.innerHTML += Array(100).join('koko ');
-    //   console.log('genkai da!');
-    //   setTimeout(done, 500);
-    // };
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
@@ -101,14 +96,12 @@ class ScrollbarElement extends BaseElement {
     });
   }
 
-
   _compile() {
     this.classList.add('scrollbar-container');
     this._scroll = util.createElement(`<div class="scrollbar"><div class="scrollbar-touch"></div></div>`);
     this.appendChild(this._scroll);
     this.setAttribute('_compiled', '');
   }
-
 
   _attach() {
     var styles = window.getComputedStyle(this.parentNode);
@@ -125,7 +118,6 @@ class ScrollbarElement extends BaseElement {
     this.parentNode.insertBefore(this._content, this);
     this.setAttribute('_attached', '');
   }
-
 
   _onScroll(e) {
     if (this._updateOnScroll) {
@@ -146,7 +138,6 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-
   _updateAutohide(){
     if (!this._scrolling) {
       this._scrolling = true;
@@ -158,7 +149,6 @@ class ScrollbarElement extends BaseElement {
       this.classList.remove('scrollbar-autohide-visible');
     }, this._autohideDelay);
   }
-
 
   _overLimit(e){
     var c = this._content;
@@ -183,11 +173,9 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-
   _updateScrollbarLocation() {
     this._scroll.style.top = Math.round(this._scrollMax * this._content.scrollTop / this._contentMax) + 'px';
   }
-
 
   _onDragStart(e) {
     var startY = this._scroll.offsetTop;
@@ -223,14 +211,12 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-
   detachedCallback() {
     this._content.removeEventListener('scroll', this._boundOnScroll);
     this._scroll.removeEventListener('dragstart', this._boundOnDragStart);
     this._scroll.removeEventListener('touchstart', this._onTouchStart);
     this._timeout && clearTimeout(this._timeout);
   }
-
 
   attributeChangedCallback(name, last, current) {
     if (name === 'update-on-scroll') {
