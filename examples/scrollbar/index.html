@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scrollbar | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+  <style>
+    body {
+      text-align: center;
+    }
+    .page__background {
+      background: #eee;
+    }
+    .container {
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      width: 300px;
+      height: 300px;
+      margin:20px;
+      display: inline-block;
+      text-align: left;
+      background: #f9f9f9;
+    }
+    .title {
+      text-align: center;
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+    .text {
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <ons-page modifier="material">
+
+    <ons-toolbar modifier="material">
+      <div class="center">Scrollbar</div>
+    </ons-toolbar>
+
+    <div class="container">
+      <div class="title">Default</div>
+      <div class="text"></div>
+      <ons-scrollbar></ons-scrollbar>
+    </div>
+
+    <div class="container">
+      <div class="title">Draggable</div>
+      <div class="text"></div>
+      <ons-scrollbar draggable></ons-scrollbar>
+    </div>
+
+    <div class="container">
+      <div class="title">Autohide</div>
+      <div class="text"></div>
+      <ons-scrollbar autohide></ons-scrollbar>
+    </div>
+
+    <div class="container">
+      <div class="title">Fixed height</div>
+      <div class="text"></div>
+      <ons-scrollbar height="100"></ons-scrollbar>
+    </div>
+
+    <ons-scrollbar></ons-scrollbar>
+  </ons-page>
+  <ons-template id="text">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sem quis sem scelerisque fermentum. Aliquam erat volutpat. Mauris imperdiet consequat quam, vitae bibendum ante viverra eu. Maecenas fringilla venenatis dictum. Vivamus non dapibus leo. In tempus dui eu lobortis venenatis. Suspendisse a metus urna. Suspendisse bibendum at nunc ut rutrum. Vestibulum non laoreet neque. Donec lacinia scelerisque tempus. Nunc efficitur diam eget consectetur commodo. Morbi nec purus ut leo venenatis tristique. Nulla id diam a diam bibendum posuere eget eget lorem.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus diam orci, ultrices ut tellus nec, vestibulum aliquam tortor. Praesent congue ante non pharetra lobortis. Vestibulum risus est, dictum sit amet mi sed, fringilla interdum purus. Nullam venenatis dolor aliquet nulla sollicitudin, ut venenatis dolor sollicitudin. Pellentesque sed molestie est. Nunc a maximus lacus. Curabitur mollis, tellus a porta consequat, tellus quam lacinia ante, eget aliquam augue nisi ut velit. Morbi tincidunt viverra arcu, in rutrum sem semper at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+
+Cras dictum leo odio, porttitor sagittis mauris suscipit eu. Aliquam rutrum nisi a ex mattis, vel congue tellus condimentum. Pellentesque at eros mollis, porttitor nisi tempus, vehicula nibh. Sed aliquet ipsum eros, ac blandit neque imperdiet id. Donec ex ligula, mollis at cursus quis, elementum non metus. In eget erat semper, tempor massa rhoncus, volutpat enim. Vivamus vulputate, neque vitae fermentum rutrum, urna tortor pellentesque velit, ut eleifend tortor felis ac metus.
+
+Aenean gravida tristique dolor, blandit facilisis nulla sodales sit amet. Praesent ac mattis lorem. Praesent at dapibus ante. Maecenas consectetur risus ipsum, et tincidunt turpis varius quis. In consectetur fermentum urna id vestibulum. Vivamus libero sem, pulvinar dapibus ex non, commodo iaculis dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum scelerisque porta. Donec lobortis diam et lacinia suscipit.
+
+In non dolor nec quam euismod ultrices. Suspendisse a purus quis dolor dignissim ultricies. Etiam aliquam blandit velit, vitae iaculis libero mollis et. Vestibulum auctor nisl in odio mollis bibendum. Curabitur sed congue augue. Curabitur molestie augue nec lacinia tincidunt. Nam congue nunc ultricies ipsum cursus convallis.
+  </ons-template>
+  <script>
+    ons.ready(function(){
+      var each = function(className, callback) {
+        Array.prototype.slice.call(document.getElementsByClassName(className)).forEach(callback);
+      };
+      var template = document.getElementById('text').template;
+      each('text', function(e) {
+        e.innerHTML = template;
+      });
+      each('scrollbar-container', function(e) {
+        e.updateScrollbar();
+      });
+    });
+  </script>
+</body>
+</html>

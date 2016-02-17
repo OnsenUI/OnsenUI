@@ -1,0 +1,62 @@
+
+.scrollbar-content {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding:10px;
+}
+
+.scrollbar-touch{
+  background:transparent;
+  position:absolute;
+  width:100%;
+  height:100%;
+  padding:10px;
+  right:-10px;
+  top: -10px;
+}
+
+.scrollbar-container {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  top: 5px;
+  width: 0px;
+  pointer-events: none;
+  /*width: 30px;*/
+  /*background:rgba(0,0,0,0.05);*/
+}
+
+.scrollbar-container[draggable] {
+  pointer-events: auto;
+}
+
+.scrollbar {
+  position: absolute;
+  right: 0;
+  width: 5px;
+  min-height: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.scrollbar-container[hidden] {
+  display: none;
+}
+
+.scrollbar-container[autohide] .scrollbar{
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scrollbar-autohide-visible[autohide] .scrollbar,
+.scrollbar-dragging[autohide] .scrollbar{
+  opacity: 1;
+}
+
+.scrollbar-dragging .scrollbar{
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 2px 1px darkgray;
+}
+
