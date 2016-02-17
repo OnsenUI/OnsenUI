@@ -90,8 +90,39 @@ class ListItemElement extends BaseElement {
    */
 
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+      ModifierUtil.initModifier(this, scheme);
+    }
+  }
+
+  _compile() {
+    let left, center, right;
+
+    Array.from(this.children).forEach((el) => {
+      if (el.classList.contains('left')) {
+        left = el.innerHTML;
+      }
+      else if (el.classList.contains('center')) {
+        center = el.innerHTML;
+      }
+      else if (el.classList.contains('right')) {
+        right = el.innerHTML;
+      }
+    });
+
+    if (typeof center === 'undefined') {
+      center = this.innerHTML;
+    }
+
+    this.innerHTML = `
+      <div class="list__item__left">${left || ''}</div>
+      <div class="list__item__center">${center}</div>
+      <div class="list__item__right">${right || ''}</div>
+    `;
+
     this.classList.add('list__item');
-    ModifierUtil.initModifier(this, scheme);
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
