@@ -63,14 +63,14 @@ var OnsNavigator = React.createClass({
         }
 
         this.myDom = ReactDOM.render(
-          <ons-navigator>
+          <ons-navigator {...this.props}  >
             {page}
           </ons-navigator>, node
         );
 
         node.firstChild.removeChild(newNode);
         node.firstChild._pages[0].element = node.firstChild.children[0];
-      });
+      }.bind(this));
   },
 
   popPage: function(options) {
@@ -101,7 +101,7 @@ var OnsNavigator = React.createClass({
 
       var node = ReactDOM.findDOMNode(this);
       var node2 =ReactDOM.render(
-        <ons-navigator >
+        <ons-navigator {...this.props} >
           {help}
         </ons-navigator>, 
         node
@@ -128,7 +128,7 @@ var OnsNavigator = React.createClass({
     var node = ReactDOM.findDOMNode(this);
 
     ReactDOM.render(
-      <ons-navigator >
+      <ons-navigator {...this.props}>
         {help}
       </ons-navigator>, 
       node
@@ -166,7 +166,7 @@ var OnsNavigator = React.createClass({
         navNode.children[navNode.children.length -1]
       );
       var node2 =ReactDOM.render(
-        <ons-navigator >
+        <ons-navigator {...this.props}>
           {help}
         </ons-navigator>, 
         node
@@ -176,11 +176,21 @@ var OnsNavigator = React.createClass({
       navNode.children[index].style.display = 'block';
       navNode._pages[index].element = node.firstChild.children[index];
       navNode.removeChild(lastNode);
-    });
+    }.bind(this));
   },
 
 
-  insertComponent: function(reactPage, insertPos) {
+  insertComponent: function(reactPage, insertPos, options) {
+
+    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
+
+    if (options == undefined) {
+      options = {};
+    }
+    options.pageHTML = htmlString;
+
+
+
 
     this.counter ++;
     var node =  ReactDOM.findDOMNode(this)
@@ -191,7 +201,6 @@ var OnsNavigator = React.createClass({
       throw new Error("The component that react inserts needs to render to <ons-page>");
     }
 
-    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
     this.elements.splice(insertPos, 0, {elem: reactPage});
 
     var help = [];
@@ -202,16 +211,14 @@ var OnsNavigator = React.createClass({
     var counter = this.counter;
 
     var elements = this.elements;
-    node.firstChild.insertPage( insertPos, '', {pageHTML: htmlString})
+    node.firstChild.insertPage( insertPos, '', options)
     .then(function() {
 
       // delete the node again
-      console.log('insertPos: ' + insertPos + ' pages : ' + navNode._pages.length);
-
       navNode.removeChild(navNode.children[insertPos]);
       // console.log(navNode._pages);
       var node2 =ReactDOM.render(
-        <ons-navigator >
+        <ons-navigator {...this.props}>
           {help}
         </ons-navigator>, 
         node
@@ -221,7 +228,6 @@ var OnsNavigator = React.createClass({
         navNode.children[i].style.display = 'none';
       }
       
-      console.log('insertPos: ' + insertPos + ' pages : ' + navNode._pages.length);
       for (var i=0; i < navNode.children.length; i++) {
         navNode._pages[i].element = navNode.children[i];
       }
@@ -239,8 +245,8 @@ var OnsNavigator = React.createClass({
     if (options == undefined) {
       options = {};
     }
-
     options.pageHTML = htmlString;
+
     this.elements.push({elem:reactPage});
     var elements = this.elements;
 
@@ -252,7 +258,7 @@ var OnsNavigator = React.createClass({
       }
 
       var node2 =ReactDOM.render(
-        <ons-navigator >
+        <ons-navigator {...this.props}>
           {help}
         </ons-navigator>, 
         node
@@ -260,6 +266,6 @@ var OnsNavigator = React.createClass({
 
       node2._pages[elements.length-1].element = node2.children[elements.length-1];
       node2.removeChild(node2.children[elements.length]);
-    });
+    }.bind(this));
   },
 });

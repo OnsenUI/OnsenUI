@@ -20,11 +20,11 @@ var MyPage = React.createClass({
     }
 
     if (this.props.insertPageFront) {
-      insertFrontButton = <ons-button id={'reset_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.insertPageFront}>  Insert Background (front) </ons-button>;
+      insertFrontButton = <ons-button id={'insert_front_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.insertPageFront}>  Insert Background (front) </ons-button>;
     }
 
     if (this.props.insertPageBack) {
-      insertBackButton  = <ons-button id={'reset_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.insertBackButton}>  Insert Background (Back)</ons-button>;
+      insertBackButton  = <ons-button id={'insert_back_' + this.props.id} style={{marginLeft: 10}} onClick={this.props.insertPageBack}>  Insert Background (Back)</ons-button>;
     }
 
     return <OnsPage id={this.props.id}>
@@ -59,7 +59,7 @@ var MyNav  = React.createClass({
   },
   popPage: function() {
     this.counter--;
-    this.refs.navi.popPage();
+    this.refs.navi.popPage({animation: 'none'});
   },
   replacePage: function() {
     console.log('replace page');
@@ -83,22 +83,26 @@ var MyNav  = React.createClass({
       <MyPage title={navTitle}
       id={id} resetPage={this.resetPage} 
       replacePage={this.replacePage} 
+      insertPageFront={this.insertPage.bind(this, -1)}
+      insertPageBack={this.insertPage.bind(this,0)}
       popPage={this.popPage} 
       pushPage={this.pushPage} />, 
       {animation: 'none'}
     );
   },
-// insertPage: function(pos) {
-//   this.counter++;
-//   var title = 'Navigator ' +  this.counter;
-//     this.refs.navi.insertComponent(
-//       <MyPage title={title}
-//         popPage={this.popPage}
-//         insertPageFront={this.insertPage.bind(this, 0)}
-//         insertPageBack={this.insertPage.bind(this,-1)}
-//       />, pos
-//     );
-//   },
+  insertPage: function(pos) {
+    this.counter++;
+    var title = 'Navigator ' +  this.counter;
+    var id='page_' + this.counter;
+    this.refs.navi.insertComponent(
+      <MyPage title={title}
+        id={id}
+        popPage={this.popPage}
+        insertPageFront={this.insertPage.bind(this, -1)}
+        insertPageBack={this.insertPage.bind(this, 0)}
+      />, pos, {animation: 'none'}
+    );
+  },
 
   componentDidMount: function() {
     this.counter = 1;
@@ -107,7 +111,13 @@ var MyNav  = React.createClass({
   render: function() {
     return <OnsNavigator id="mynav" ref="navi">
       <MyPage 
-        title="Navigator 1" id="page_1" resetPage={this.resetPage} pushPage={this.pushPage} />
+       insertPageFront={this.insertPage.bind(this, -1)}
+       insertPageBack={this.insertPage.bind(this, 0)}
+       title="Navigator 1" 
+       id="page_1" 
+       popPage={this.popPage}
+       resetPage={this.resetPage} 
+       pushPage={this.pushPage} />
     </OnsNavigator>
   }
 });

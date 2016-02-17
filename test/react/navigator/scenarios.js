@@ -35,12 +35,18 @@
     };
 
     var popPage = function(start, end) {
+      if (end == undefined) end = start - 1;
       for (var i = start; i > end; i--) {
         var popBtn = driver.findElement(by.id('pop_page_' + i));
         popBtn.click();
         driver.sleep(waitingTime);
         expect(driver.isElementPresent(by.id('page_' + (i)))).toBe(false);
       }
+    };
+
+    var press = function(buttonId) {
+        var button = driver.findElement(by.id(buttonId));
+        button.click();
     };
 
     it('should exist with page', function() {
@@ -102,45 +108,35 @@
        expect(driver.isElementPresent(by.id('page_3'))).toBe(false);
      });
    });
-   //
-    // TODO PAGE INSERT
-    // BACK BUTTON HANDLER
+
+  describe('page insert', function () {
+      it('should reset current page when the button is clicked', function () {
+        pushPage(1, 3);
+
+        press('insert_front_page_3');
+        driver.sleep(waitingTime);
+
+        press('insert_front_page_3');
+        driver.sleep(waitingTime);
+
+        press('insert_back_page_3');
+        driver.sleep(waitingTime);
+
+        press('insert_back_page_3');
+        driver.sleep(waitingTime);
 
 
+        var elOrder = [7, 6, 1, 2, 4, 5, 3];
 
-    // describe('backbutton handler', function () {
-    //   it('should work on \'backbutton\' event', function() {
-    //     var page1 = element(by.id('page1'));
-    //     var page2 = element(by.id('page2'));
-    //
-    //     element(by.id('btn1')).click();
-    //     browser.wait(EC.visibilityOf(page2));
-    //     browser.wait(EC.invisibilityOf(page1));
-    //
-    //     element(by.id('btn4-device-backbutton')).click();
-    //     browser.wait(EC.stalenessOf(page2));
-    //
-    //     // Check that page2 was destroyed.
-    //     expect((page1).isDisplayed()).toBeTruthy();
-    //     expect((page2).isPresent()).not.toBeTruthy();
-    //   });
-    // });
+        while (elOrder.length > 1) {
+          for (var i = 1; i < elOrder.length; i++) {
+            var page = driver.findElement(by.id('page_' + elOrder[i]));
+            expect(page.isDisplayed()).toBe(i == (elOrder.length - 1) );
+          }
 
-
-    // it('should emit events', function() {
-    //   var pops = element(by.id('pops')),
-    //     pushes = element(by.id('pushes'));
-    //
-    //   expect(pops.getText()).toBe('0');
-    //   expect(pushes.getText()).toBe('1');
-    //
-    //   element(by.id('btn1')).click();
-    //   browser.wait(EC.visibilityOf(element(by.id('btn2'))));
-    //   element(by.id('btn2')).click();
-    //   browser.wait(EC.textToBePresentInElement(pops, '1'));
-    //
-    //   expect(pops.getText()).toBe('1');
-    //   expect(pushes.getText()).toBe('2');
-    // });
+          popPage(elOrder.pop());
+        }
+      });
+   });
   });
 })();

@@ -61,7 +61,7 @@ var MyNav  = React.createClass({
   },
   
   render: function() {
-    return <OnsNavigator ref="navi">
+    return <OnsNavigator id="myNav" ref="navi">
       <MyPage title="Navigator 1" pushPage={this.pushPage} />
     </OnsNavigator>
   }
