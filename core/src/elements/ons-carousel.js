@@ -461,7 +461,6 @@ class CarouselElement extends BaseElement {
    *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
    * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
->>>>>>> master
    */
   setActiveCarouselItemIndex(index, options = {}) {
 
