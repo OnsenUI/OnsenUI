@@ -20,23 +20,22 @@ import BaseElement from 'ons/base-element';
 class ConditionalElement extends BaseElement {
 
   createdCallback() {
-    if (this.getAttribute('platform') && this.getAttribute('platform').split(/\s+/).indexOf(ons.platform.getMobileOS()) === -1) {
-      while (this.firstChild) {
-        this.removeChild(this.firstChild);
-      }
-    } else {
-      this._allowedPlatform = true;
+    this._isAllowedPlatform = !this.getAttribute('platform') || this.getAttribute('platform').split(/\s+/).indexOf(ons.platform.getMobileOS()) >= 0;
+
+    if (this._isAllowedPlatform) {
       this._onOrientationChange();
+    } else {
+      this.innerHTML = '';
     }
   }
 
   attachedCallback() {
-    if (this._allowedPlatform){
+    if (this._isAllowedPlatform) {
       ons.orientation.on('change', this._onOrientationChange.bind(this));
     }
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(name) {
     if (name === 'orientation') {
       this._onOrientationChange();
     }
