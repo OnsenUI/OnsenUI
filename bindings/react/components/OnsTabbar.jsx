@@ -1,5 +1,7 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
+
+
     var lastLink = window.OnsTabbarElement.rewritables.link;
     window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
       lastLink(el, target, options, callback);
@@ -7,15 +9,17 @@ var OnsTabbar = React.createClass({
 
 
 
+    var node = this.node = ReactDOM.findDOMNode(this);
 
-  internal.internal.getPageHTMLAsync(page)
-
-  },
-  render: function() {
-    var children= [];
+var children= [];
     this.childIndex = [];
 
+    var tabContent = [];
+
+    var activeIndex = -1;
+    var index = -1;
     React.Children.forEach(this.props.children, function(child) {
+      index++;
       // TODO CHECK FOR onsTab
       counter = -1;
       var myChildren = React.Children.map(child.props.children, function(child2) {
@@ -24,6 +28,18 @@ var OnsTabbar = React.createClass({
       });
 
       this.childIndex.push(child.props.page);
+
+      if (child.props.page) {
+        var el = child.props.page;
+        tabContent.push(el);
+
+        if (child.props.active) {
+          activeIndex = index;
+        }
+        
+      } else {
+        throw Error("OnsTab must contain a page property");
+      }
 
       var mychild=  React.cloneElement(child, {}, myChildren);
       var renderString = ReactDOMServer.renderToStaticMarkup(mychild);
@@ -37,20 +53,37 @@ var OnsTabbar = React.createClass({
     }.bind(this));
 
 
-    var element = this.props.mypage;
-
-    console.log(element);
-
-    return (
+      ReactDOM.render(
       <ons-tabbar var="tabbar" animation="fade" _compiled="true" class="ng-scope">
         <div className="ons-tab-bar__content tab-bar__content"> 
-          {element}
+          {tabContent}
         </div> 
         <div className="tab-bar ons-tab-bar__footer ons-tabbar-inner">
           {children} 
         </div>
-      </ons-tabbar>
-    );
+      </ons-tabbar>, node
+      );
+
+      for (var i=0; i < node.firstChild.children[1].children.length; i++) {
+        node.firstChild.children[1].children[i]._pageElement = 
+                node.firstChild.firstChild.children[i];
+      }
+
+      for (var i =0; i < node.firstChild.firstChild.children.length; i++) {
+        node.firstChild.firstChild.children[i].style.display = 'none';
+      }
+
+      node.firstChild.setActiveTab(activeIndex);
+
+
+      // some small things
+
+
+  },
+  render: function() {
+
+    return <div> </div>
+    
   }, 
 });
 
@@ -85,6 +118,8 @@ var MyElem = React.createClass({
   componentDidMount: function() {
 
     var elem = this.props.domNode;
+    console.log(elem.nodeName);
+    console.log(elem.attributes);
     for (var i = 0; i < elem.attributes.length; i++) {
       var attrib = elem.attributes[i];
         ReactDOM.findDOMNode(this).setAttribute(attrib.name, attrib.value);
