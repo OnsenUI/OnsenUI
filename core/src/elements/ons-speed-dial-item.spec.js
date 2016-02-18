@@ -60,13 +60,5 @@ describe('OnsSpeedDialItemElement', () => {
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
-
-    it('removes \'material\' effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-speed-dial-item ripple></ons-speed-dial-item>');
-      expect(e.hasAttribute('ripple')).to.be.false;
-      expect(e.querySelector('ons-ripple')).not.to.be.ok;
-      ons.platform.select('');
-    });
   });
 });

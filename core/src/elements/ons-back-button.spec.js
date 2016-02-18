@@ -159,12 +159,5 @@ describe('OnsBackButtonElement', () => {
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifiers and effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-back-button modifier="material"></ons-back-button>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      ons.platform.select('');
-    });
   });
 });

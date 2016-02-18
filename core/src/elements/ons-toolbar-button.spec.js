@@ -40,13 +40,6 @@ describe('ons-toolbar-button', () => {
       expect(e.getAttribute('modifier')).to.contain('material--flat');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifiers and effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-toolbar-button modifier="material"></ons-toolbar-button>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      ons.platform.select('');
-    });
   });
 });
 

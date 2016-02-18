@@ -20,23 +20,23 @@ import util from './util';
 
 let autoStyleEnabled = true;
 
-const modifiersMap = {
-  'quiet': 'material--flat',
-  'light': 'material--flat',
-  'outline': 'material--flat',
-  'cta': '',
-  'large--quiet': 'material--flat large',
-  'large--cta': 'large',
-  'noborder': '',
-  'chevron': '',
-  'tappable': ''
-};
-
 const platforms = {};
 
 platforms.android = element => {
 
   // Modifiers
+  const modifiersMap = {
+    'quiet': 'material--flat',
+    'light': 'material--flat',
+    'outline': 'material--flat',
+    'cta': '',
+    'large--quiet': 'material--flat large',
+    'large--cta': 'large',
+    'noborder': '',
+    'chevron': '',
+    'tappable': ''
+  };
+
   if (!/ons-fab|ons-speed-dial|ons-progress/.test(element.tagName.toLowerCase()) &&
     !/material/.test(element.getAttribute('modifier'))) {
 
@@ -62,31 +62,6 @@ platforms.android = element => {
     } else {
       element.setAttribute('ripple', '');
     }
-  }
-};
-
-platforms.ios = element => {
-
-  // Modifiers
-  if (/material/.test(element.getAttribute('modifier'))) {
-    util.removeModifier(element, 'material');
-
-    if (util.removeModifier(element, 'material--flat')) {
-      util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
-    }
-
-    if (!element.getAttribute('modifier')) {
-      element.removeAttribute('modifier');
-    }
-  }
-
-  // Effects
-  if (element.hasAttribute('ripple')) {
-    if (element.tagName.toLowerCase() === 'ons-list-item') {
-      element.setAttribute('tappable', '');
-    }
-
-    element.removeAttribute('ripple');
   }
 };
 

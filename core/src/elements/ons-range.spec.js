@@ -55,12 +55,5 @@ describe('OnsRangeElement', () => {
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifier on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-range modifier="material"></ons-range>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      ons.platform.select('');
-    });
   });
 });

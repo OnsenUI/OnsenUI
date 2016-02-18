@@ -44,17 +44,6 @@ describe('ons-button', () => {
       expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material--flat');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifiers and effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-button modifier="material" ripple></ons-button>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.hasAttribute('ripple')).to.be.false;
-      expect(e.querySelector('ons-ripple')).not.to.be.ok;
-      e = ons._util.createElement('<ons-button modifier="material--flat"></ons-button>');
-      expect(e.getAttribute('modifier')).to.equal('quiet');
-      ons.platform.select('');
-    });
   });
 });
 

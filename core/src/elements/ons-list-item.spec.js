@@ -113,15 +113,5 @@ describe('OnsListItemElement', () => {
       expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifiers and effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-list-item modifier="material" ripple></ons-list-item>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.hasAttribute('ripple')).be.false;
-      expect(e.querySelector('ons-ripple')).not.to.be.ok;
-      expect(e.hasAttribute('tappable')).to.be.ok;
-      ons.platform.select('');
-    });
   });
 });

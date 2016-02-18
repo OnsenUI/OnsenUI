@@ -264,14 +264,5 @@ describe('OnsTabElement', () => {
       expect(e.querySelector('.tab-bar__button').firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifiers and effects on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-tab modifier="material" ripple></ons-tab>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.hasAttribute('ripple')).to.be.false;
-      expect(e.querySelector('ons-ripple')).not.to.be.ok;
-      ons.platform.select('');
-    });
   });
 });

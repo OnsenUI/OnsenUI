@@ -477,12 +477,5 @@ describe('OnsTabbarElement', () => {
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
-
-    it('removes \'material\' modifier on iOS', () => {
-      ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-tabbar modifier="material"></ons-tabbar>');
-      expect(e.getAttribute('modifier')).not.to.equal('material');
-      ons.platform.select('');
-    });
   });
 });
