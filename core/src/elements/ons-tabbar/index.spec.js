@@ -49,34 +49,47 @@ describe('OnsTabbarElement', () => {
   it('has \'position\' attribute', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
+    ons.platform.select('android');
     div.innerHTML = `
       <ons-page>
         <ons-tabbar id="top" position="top">
         </ons-tabbar>
         <ons-tabbar id="bottom" position="bottom">
         </ons-tabbar>
+        <ons-tabbar id="auto-android" position="auto">
+        </ons-tabbar>
       </ons-page>
     `;
+
+    ons.platform.select('');
 
     var topElement = document.getElementById('top');
     var bottomElement = document.getElementById('bottom');
 
+    var autoAndroidElement = document.getElementById('auto-android');
+
     setImmediate(() => {
       expect(topElement.style.top).to.equal('0px');
       expect(bottomElement.style.top).not.to.equal('0px');
+      expect(autoAndroidElement.style.top).to.equal('0px');
 
       expect(topElement._hasTopTabbar()).to.be.true;
       expect(bottomElement._hasTopTabbar()).not.to.be.true;
+      expect(autoAndroidElement._hasTopTabbar()).to.be.true;
 
       expect(topElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
       expect(bottomElement.children[0].classList.contains('tab-bar--top__content')).not.to.be.true;
+      expect(autoAndroidElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
 
       expect((topElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
       expect((bottomElement.children[0]).hasAttribute('no-status-bar-fill')).not.to.be.true;
+      expect((autoAndroidElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
 
       expect(topElement.children[1].classList.contains('tab-bar--top')).to.be.true;
       expect(bottomElement.children[1].classList.contains('tab-bar--top')).not.to.be.true;
+      expect(autoAndroidElement.children[1].classList.contains('tab-bar--top')).to.be.true;
 
+      div.remove();
       done();
     });
   });
@@ -132,6 +145,8 @@ describe('OnsTabbarElement', () => {
       expect(topElement._getTabbarElement().style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
       expect(bottomElement._getTabbarElement().style.display).to.equal('');
+
+      div.remove();
     });
   });
 
@@ -173,6 +188,7 @@ describe('OnsTabbarElement', () => {
         document.getElementById('tab2').click();
         expect(element.getActiveTabIndex()).to.equal(1);
 
+        div.remove();
         done();
       });
     });
@@ -301,6 +317,7 @@ describe('OnsTabbarElement', () => {
       element.loadPage('hoge', {
         callback: function() {
           expect(element.innerHTML.indexOf('hogehoge')).not.to.be.below(0);
+          element.remove();
           done();
         }
       });
@@ -329,6 +346,7 @@ describe('OnsTabbarElement', () => {
 
       setImmediate(() => {
         expect(spy).to.have.been.called.once;
+        element.remove();
         done();
       });
     });

@@ -221,6 +221,10 @@ class TabbarElement extends BaseElement {
   _compile() {
     ons._autoStyle.prepare(this);
 
+    if (this.getAttribute('position') === 'auto') {
+      this.setAttribute('position', ons.platform.isAndroid() ? 'top' : 'bottom');
+    }
+
     var wrapper = document.createDocumentFragment();
 
     var content = document.createElement('div');
