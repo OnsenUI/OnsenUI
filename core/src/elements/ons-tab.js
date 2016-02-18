@@ -197,7 +197,7 @@ class TabElement extends BaseElement {
       this._updateDefaultTemplate();
     }
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(button, 'ons-ripple')) {
+    if (this.hasAttribute('ripple') && !util.findChild(button, 'ons-ripple')) {
       button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
     }
 

@@ -76,7 +76,7 @@ class FabElement extends BaseElement {
 
     this.insertBefore(content, this.firstChild);
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(content, 'ons-ripple')) {
+    if (this.hasAttribute('ripple') && !util.findChild(content, 'ons-ripple')) {
       content.insertBefore(document.createElement('ons-ripple'), content.firstChild);
     }
 

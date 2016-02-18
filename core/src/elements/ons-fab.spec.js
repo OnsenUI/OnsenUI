@@ -221,15 +221,15 @@ describe('OnsFabElement', () => {
     it('adds \'material\' effects on Android', () => {
       ons.platform.select('android');
       let e = document.createElement('ons-fab');
-      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
 
     it('removes \'material\' effects on iOS', () => {
       ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-fab effect="ripple"></ons-fab>');
-      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      let e = ons._util.createElement('<ons-fab ripple></ons-fab>');
+      expect(e.hasAttribute('ripple')).to.be.false;
       expect(e.querySelector('ons-ripple')).not.to.be.ok;
       ons.platform.select('');
     });

@@ -85,7 +85,7 @@ class SpeedDialItemElement extends BaseElement {
     this.classList.add('fab--mini');
     this.classList.add('speed-dial__item');
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
       this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
     }
 

@@ -99,7 +99,7 @@ describe('OnsListItemElement', () => {
       ons.platform.select('android');
       let e = ons._util.createElement('<ons-list-item tappable></ons-list-item>');
       expect(e.getAttribute('modifier')).to.equal('material');
-      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
@@ -108,7 +108,7 @@ describe('OnsListItemElement', () => {
       ons.platform.select('android');
       let e = ons._util.createElement('<ons-list-item tappable><ons-input></ons-input></ons-list-item>');
       expect(e.getAttribute('modifier')).to.equal('material');
-      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('label');
       expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
@@ -116,9 +116,9 @@ describe('OnsListItemElement', () => {
 
     it('removes \'material\' modifiers and effects on iOS', () => {
       ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-list-item modifier="material" effect="ripple"></ons-list-item>');
+      let e = ons._util.createElement('<ons-list-item modifier="material" ripple></ons-list-item>');
       expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      expect(e.hasAttribute('ripple')).be.false;
       expect(e.querySelector('ons-ripple')).not.to.be.ok;
       expect(e.hasAttribute('tappable')).to.be.ok;
       ons.platform.select('');

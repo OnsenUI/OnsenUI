@@ -36,7 +36,7 @@ describe('ons-button', () => {
       ons.platform.select('android');
       let e = document.createElement('ons-button');
       expect(e.getAttribute('modifier')).to.equal('material');
-      expect(e.getAttribute('effect')).to.equal('ripple');
+      expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       e = ons._util.createElement('<ons-button modifier="quiet"></ons-button>');
       expect(e.getAttribute('modifier')).to.contain('material--flat');
@@ -47,9 +47,9 @@ describe('ons-button', () => {
 
     it('removes \'material\' modifiers and effects on iOS', () => {
       ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-button modifier="material" effect="ripple"></ons-button>');
+      let e = ons._util.createElement('<ons-button modifier="material" ripple></ons-button>');
       expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.getAttribute('effect')).not.to.equal('ripple');
+      expect(e.hasAttribute('ripple')).to.be.false;
       expect(e.querySelector('ons-ripple')).not.to.be.ok;
       e = ons._util.createElement('<ons-button modifier="material--flat"></ons-button>');
       expect(e.getAttribute('modifier')).to.equal('quiet');

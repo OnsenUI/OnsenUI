@@ -51,16 +51,16 @@ platforms.android = element => {
 
   // Effects
   if (/ons-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/.test(element.tagName.toLowerCase())
-    && !element.hasAttribute('effect')
+    && !element.hasAttribute('ripple')
     && !util.findChild(element, 'ons-ripple')) {
 
     if (element.tagName.toLowerCase() === 'ons-list-item') {
       if (element.hasAttribute('tappable')) {
-        element.setAttribute('effect', 'ripple');
+        element.setAttribute('ripple', '');
         element.removeAttribute('tappable');
       }
     } else {
-      element.setAttribute('effect', 'ripple');
+      element.setAttribute('ripple', '');
     }
   }
 };
@@ -81,12 +81,12 @@ platforms.ios = element => {
   }
 
   // Effects
-  if (element.hasAttribute('effect')) {
-    if (element.getAttribute('effect') === 'ripple' && element.tagName.toLowerCase() === 'ons-list-item') {
+  if (element.hasAttribute('ripple')) {
+    if (element.tagName.toLowerCase() === 'ons-list-item') {
       element.setAttribute('tappable', '');
     }
 
-    element.removeAttribute('effect');
+    element.removeAttribute('ripple');
   }
 };
 

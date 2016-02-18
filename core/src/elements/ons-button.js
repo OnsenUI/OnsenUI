@@ -91,7 +91,7 @@ class ButtonElement extends BaseElement {
 
     this.classList.add('button');
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
       this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
     }
 

@@ -103,7 +103,7 @@ class ListItemElement extends BaseElement {
 
     this.classList.add('list__item');
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
+    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
         let ripple = document.createElement('ons-ripple');
         this.insertBefore(ripple, this.firstChild);
 
