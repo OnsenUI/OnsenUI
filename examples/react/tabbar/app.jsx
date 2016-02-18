@@ -43,12 +43,12 @@ var MyNav  = React.createClass({
         page = {
           <MyPage title="Home"  content="Home content" />
         }>
-        <div ons-tab-active>
+        <ons-tab-active>
           HOME
-        </div>
-        <div ons-tab-inactive>
+        </ons-tab-active>
+        <ons-tab-inactive>
           home
-        </div>
+        </ons-tab-inactive>
       </OnsTab>
       <OnsTab
         page = {
