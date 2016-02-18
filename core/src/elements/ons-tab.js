@@ -249,9 +249,9 @@ class TabElement extends BaseElement {
     radio.checked = true;
     this.classList.add('active');
 
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'none');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
       .forEach(element => element.style.display = 'inherit');
   }
 
@@ -260,9 +260,9 @@ class TabElement extends BaseElement {
     radio.checked = false;
     this.classList.remove('active');
 
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'inherit');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
       .forEach(element => element.style.display = 'none');
   }
 
