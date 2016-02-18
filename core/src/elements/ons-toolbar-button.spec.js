@@ -36,8 +36,6 @@ describe('ons-toolbar-button', () => {
       ons.platform.select('android');
       let e = document.createElement('ons-toolbar-button');
       expect(e.getAttribute('modifier')).to.equal('material');
-      expect(e.getAttribute('effect')).to.equal('ripple');
-      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       e = ons._util.createElement('<ons-toolbar-button modifier="outline"></ons-toolbar-button>');
       expect(e.getAttribute('modifier')).to.contain('material--flat');
       ons.platform.select('');
@@ -45,10 +43,8 @@ describe('ons-toolbar-button', () => {
 
     it('removes \'material\' modifiers and effects on iOS', () => {
       ons.platform.select('ios');
-      let e = ons._util.createElement('<ons-toolbar-button modifier="material" effect="ripple"></ons-toolbar-button>');
+      let e = ons._util.createElement('<ons-toolbar-button modifier="material"></ons-toolbar-button>');
       expect(e.getAttribute('modifier')).not.to.equal('material');
-      expect(e.getAttribute('effect')).not.to.equal('ripple');
-      expect(e.querySelector('ons-ripple')).not.to.be.ok;
       ons.platform.select('');
     });
   });

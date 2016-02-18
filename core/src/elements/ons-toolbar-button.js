@@ -79,10 +79,6 @@ class ToolbarButtonElement extends BaseElement {
   _compile() {
     this.classList.add('toolbar-button');
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
-
     ModifierUtil.initModifier(this, scheme);
   }
 

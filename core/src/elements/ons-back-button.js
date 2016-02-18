@@ -79,10 +79,6 @@ class BackButtonElement extends BaseElement {
     this.appendChild(icon);
     this.appendChild(label);
 
-    if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
-
     ModifierUtil.initModifier(this, scheme);
   }
 

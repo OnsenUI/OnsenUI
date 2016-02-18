@@ -227,11 +227,10 @@ ons._autoStyling.android = element => {
     element.setAttribute('modifier', newModifier.join(' ').trim());
   }
 
-  if (/ons.*-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/
+  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/
     .test(element.tagName.toLowerCase())
     && !element.hasAttribute('effect')
     && !ons._util.findChild(element, 'ons-ripple')) {
-
 
     if (element.tagName.toLowerCase() === 'ons-list-item') {
       if (element.hasAttribute('tappable')) {
