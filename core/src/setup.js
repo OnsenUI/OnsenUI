@@ -1,32 +1,4 @@
 import ons from './ons/ons';
-import util from './ons/util';
-import GestureDetector from './ons/gesture-detector';
-import deviceBackButtonDispatcher from './ons/device-back-button-dispatcher';
-import platform from './ons/platform';
-import notification from './ons/notification';
-import internal from './ons/internal';
-import orientation from './ons/orientation';
-import softwareKeyboard from './ons/software-keyboard';
-import PageAttributeExpression from './ons/page-attribute-expression';
-import BaseElement from './ons/base-element';
-import animationOptionsParser from './ons/animation-options-parser';
-import DoorLock from './ons/doorlock';
-
-ons._util = util;
-ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
-ons._internal = internal;
-ons.GestureDetector = GestureDetector;
-ons.platform = platform;
-ons.softwareKeyboard = softwareKeyboard;
-ons.pageAttributeExpression = PageAttributeExpression;
-ons.orientation = orientation;
-ons.notification = notification;
-ons._animationOptionsParser = animationOptionsParser;
-ons._DoorLock = DoorLock;
-
-window.addEventListener('DOMContentLoaded', function() {
-  ons._deviceBackButtonDispatcher.enable();
-});
 
 import './elements/ons-template';
 import './elements/ons-if';
@@ -74,7 +46,8 @@ window.addEventListener('load', () => FastClick.attach(document.body), false);
 
 // ons._defaultDeviceBackButtonHandler
 window.addEventListener('DOMContentLoaded', () => {
-  ons._defaultDeviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(window.document.body, () => {
+  ons._deviceBackButtonDispatcher.enable();
+  ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     navigator.app.exitApp();
   });
 }, false);

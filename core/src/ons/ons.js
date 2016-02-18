@@ -15,9 +15,17 @@ limitations under the License.
 
 */
 
-import deviceBackButtonDispatcher from './device-back-button-dispatcher';
-import DoorLock from './doorlock';
+import util from './util';
+import GestureDetector from './gesture-detector';
 import platform from './platform';
+import notification from './notification';
+import internal from './internal';
+import orientation from './orientation';
+import softwareKeyboard from './software-keyboard';
+import PageAttributeExpression from './page-attribute-expression';
+import deviceBackButtonDispatcher from './device-back-button-dispatcher';
+import animationOptionsParser from './animation-options-parser';
+import DoorLock from './doorlock';
 
 /**
  * @object ons
@@ -28,7 +36,20 @@ import platform from './platform';
  */
 const ons = {};
 
+ons._util = util;
+ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
+ons._internal = internal;
+ons.GestureDetector = GestureDetector;
+ons.platform = platform;
+ons.softwareKeyboard = softwareKeyboard;
+ons.pageAttributeExpression = PageAttributeExpression;
+ons.orientation = orientation;
+ons.notification = notification;
+ons._animationOptionsParser = animationOptionsParser;
+ons._DoorLock = DoorLock;
+
 ons._readyLock = new DoorLock();
+
 ons._config = {
   autoStatusBarFill: true,
   animationsDisabled: false,
