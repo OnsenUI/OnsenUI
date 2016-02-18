@@ -20,7 +20,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '': 'list__item--*',
+  '.list__item': 'list__item--*',
   '.list__item__left': 'list__item--*__left',
   '.list__item__center': 'list__item--*__center',
   '.list__item__right': 'list__item--*__right',
@@ -98,20 +98,14 @@ class ListItemElement extends BaseElement {
   _compile() {
     ons._autoStyle.prepare(this);
 
-    this.classList.add('list__item');
-
-    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
-        let ripple = document.createElement('ons-ripple');
-        this.insertBefore(ripple, this.firstChild);
-
-      if (this.querySelector('ons-input')) {
-        ripple.setAttribute('target', 'autofind');
-        let content = document.createElement('label');
-        content.style.display = 'inherit';
-        util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
-        this.appendChild(content);
-      }
+    let ripple = '';
+    if (this.hasAttribute('ripple')) {
+      ripple = '<ons-ripple></ons-ripple>';
     }
+
+    this.innerHTML = `<label>${ripple}${this.innerHTML}</label>`;
+    this.firstChild.classList.add('list__item');
+    this.style.display = this.firstChild.style.display = 'flex';
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -120,7 +114,7 @@ class ListItemElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
     }
   }
 
