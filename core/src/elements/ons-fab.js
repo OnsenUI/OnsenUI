@@ -60,16 +60,13 @@ class FabElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-      this._updatePosition();
-      this.hide();
-
-      this.setAttribute('_compiled', '');
     }
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('fab');
 
     let content = document.createElement('span');
@@ -84,6 +81,11 @@ class FabElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this._updatePosition();
+    this.hide();
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

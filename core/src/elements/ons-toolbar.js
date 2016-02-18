@@ -75,10 +75,7 @@ class ToolbarElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._tryToEnsureNodePosition();
@@ -147,6 +144,8 @@ class ToolbarElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     var inline = this.hasAttribute('inline');
 
     this.classList.add('navigation-bar');
@@ -162,6 +161,8 @@ class ToolbarElement extends BaseElement {
     this._ensureToolbarItemElements();
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _ensureToolbarItemElements() {

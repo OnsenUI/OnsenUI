@@ -196,10 +196,7 @@ class DialogElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -215,6 +212,8 @@ class DialogElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const style = this.getAttribute('style');
 
     this.style.display = 'none';
@@ -240,6 +239,8 @@ class DialogElement extends BaseElement {
     this.setAttribute('no-status-bar-fill', '');
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

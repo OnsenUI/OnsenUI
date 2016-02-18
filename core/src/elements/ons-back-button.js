@@ -53,10 +53,7 @@ class BackButtonElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._options = {};
@@ -64,6 +61,8 @@ class BackButtonElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('back-button');
 
     const label = util.createElement(`
@@ -80,6 +79,8 @@ class BackButtonElement extends BaseElement {
     this.appendChild(label);
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

@@ -179,10 +179,7 @@ class SwitchElement extends ExtendableLabelElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._updateForCheckedAttribute();
@@ -206,6 +203,8 @@ class SwitchElement extends ExtendableLabelElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('switch');
     const template = templateSource.cloneNode(true);
     while (template.children[0]) {
@@ -214,6 +213,8 @@ class SwitchElement extends ExtendableLabelElement {
     this._getCheckbox().setAttribute('name', generateId());
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {

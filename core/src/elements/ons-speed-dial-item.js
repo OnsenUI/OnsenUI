@@ -54,10 +54,7 @@ class SpeedDialItemElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._boundOnClick = this._onClick.bind(this);
@@ -82,6 +79,7 @@ class SpeedDialItemElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
 
     this.classList.add('fab');
     this.classList.add('fab--mini');
@@ -92,6 +90,8 @@ class SpeedDialItemElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 }
 

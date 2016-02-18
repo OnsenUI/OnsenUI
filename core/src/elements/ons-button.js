@@ -76,10 +76,7 @@ class ButtonElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
   }
 
@@ -90,6 +87,8 @@ class ButtonElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('button');
 
     if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
@@ -97,6 +96,8 @@ class ButtonElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 }
 

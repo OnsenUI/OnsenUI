@@ -52,16 +52,17 @@ class ListHeaderElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('list__header');
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

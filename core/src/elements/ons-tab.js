@@ -159,16 +159,15 @@ class TabElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const fragment = document.createDocumentFragment();
     let hasChildren = false;
 
@@ -203,6 +202,8 @@ class TabElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _updateDefaultTemplate() {

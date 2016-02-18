@@ -38,10 +38,7 @@ class MaterialInputElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._updateBoundAttributes();
@@ -49,12 +46,16 @@ class MaterialInputElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.innerHTML = `
       <input type="range" class="range">
       <div class="range__left"></div>
     `;
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _onChange() {

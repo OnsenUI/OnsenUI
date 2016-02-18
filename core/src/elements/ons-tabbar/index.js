@@ -205,10 +205,7 @@ class TabbarElement extends BaseElement {
     this._tabbarId = generateId();
 
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._contentElement = util.findChild(this, '.tab-bar__content');
@@ -222,6 +219,8 @@ class TabbarElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     var wrapper = document.createDocumentFragment();
 
     var content = document.createElement('div');
@@ -247,6 +246,8 @@ class TabbarElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _hasTopTabbar() {

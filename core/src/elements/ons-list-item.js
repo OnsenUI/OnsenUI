@@ -92,16 +92,15 @@ class ListItemElement extends BaseElement {
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
-      ons._prepareAutoStyling(this);
       this._compile();
-
-      this.setAttribute('_compiled', '');
     }
 
     this._gestureDetector = new GestureDetector(this);
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('list__item');
 
     if (this.getAttribute('effect') === 'ripple' && !util.findChild(this, 'ons-ripple')) {
@@ -118,6 +117,8 @@ class ListItemElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
