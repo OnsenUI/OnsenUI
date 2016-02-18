@@ -20,6 +20,7 @@ import ons from 'ons/ons';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 
 const scheme = {
   '': 'page--*',
@@ -180,7 +181,7 @@ class PageElement extends BaseElement {
       this._deviceBackButtonHandler.destroy();
     }
 
-    this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+    this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**

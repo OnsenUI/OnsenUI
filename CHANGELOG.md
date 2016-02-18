@@ -10,13 +10,18 @@ v2.0.0-beta.7
  * ons-tabbar: Correctly applies animation-options.
  * ons-popover: Correctly applies animation-options.
  * ons-alert-dialog: Correctly applies animation-options.
+ * ons-navigator: Closes [#1208](https://github.com/OnsenUI/OnsenUI/issues/1208).
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
  * ons-if: Added new conditional component with `platform` and `orientation` attributes.
  * ons-navigator: New Lift and Fade animators that match Material Design styles.
  * ons-input: Extended component to support type `checkbox` and `radio`.
- * ons-ripple: Can be added by using `effect="ripple"` attribute.
+ * ons-ripple: Can be added by using `ripple` attribute.
+ * ons-tab: Tabs are always persistent.
  * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
+ * ons-switch: Switch is now draggable.
+ * core: Use a global gesture detector to improve performance.
+ * ons-splitter-side: Fixed [#1222](https://github.com/OnsenUI/OnsenUI/issues/1222).
 
 v2.0.0-beta.6
 ----

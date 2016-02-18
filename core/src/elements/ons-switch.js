@@ -17,33 +17,29 @@ limitations under the License.
 
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
+import GestureDetector from 'ons/gesture-detector';
 
 const scheme = {
   '': 'switch--*',
   '.switch__input': 'switch--*__input',
+  '.switch__handle': 'switch--*__handle',
   '.switch__toggle': 'switch--*__toggle'
 };
 
-const templateSource = util.createElement(`
-  <div>
-    <input type="checkbox" class="switch__input">
-    <div class="switch__toggle"></div>
+const template = util.createFragment(`
+  <input type="checkbox" class="switch__input">
+  <div class="switch__toggle">
+    <div class="switch__handle">
+      <div class="switch__touch"></div>
+    </div>
   </div>
 `);
 
-let ExtendableLabelElement;
-if (typeof HTMLLabelElement !== 'function') {
-  // for Safari
-  ExtendableLabelElement = () => {};
-  ExtendableLabelElement.prototype = document.createElement('label');
-} else {
-  ExtendableLabelElement = HTMLLabelElement;
-}
-
-const generateId = (() => {
-  let i = 0;
-  return () => 'ons-switch-id-' + (i++);
-})();
+const locations = {
+  ios: [1, 21],
+  material: [0, 16]
+};
 
 /**
  * @element ons-switch
@@ -65,7 +61,8 @@ const generateId = (() => {
  * <ons-switch checked></ons-switch>
  * <ons-switch modifier="material"></ons-switch>
  */
-class SwitchElement extends ExtendableLabelElement {
+
+class SwitchElement extends BaseElement {
 
   /**
    * @event change
@@ -109,25 +106,27 @@ class SwitchElement extends ExtendableLabelElement {
    */
 
   get checked() {
-    return this._getCheckbox().checked;
+    return this._checkbox.checked;
   }
 
   set checked(value) {
-    this._getCheckbox().checked = value;
-    if (this.checked) {
-      this.setAttribute('checked', '');
-    } else {
-      this.removeAttribute('checked');
+    if (!!value !== this._checkbox.checked) {
+      this._checkbox.click();
+      this._checkbox.checked = !!value;
+      if (this.checked) {
+        this.setAttribute('checked', '');
+      } else {
+        this.removeAttribute('checked');
+      }
     }
-    this._updateForCheckedAttribute();
   }
 
   get disabled() {
-    return this._getCheckbox().disabled;
+    return this._checkbox.disabled;
   }
 
   set disabled(value) {
-    this._getCheckbox().disabled = value;
+    this._checkbox.disabled = value;
     if (this.disabled) {
       this.setAttribute('disabled', '');
     } else {
@@ -174,96 +173,112 @@ class SwitchElement extends ExtendableLabelElement {
    *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
    */
   getCheckboxElement() {
-    return this._getCheckbox();
+    return this._checkbox;
   }
 
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+    this._checkbox = this.querySelector('input[type=checkbox]');
+    this._handle = this.querySelector('.switch__handle');
 
-    this._updateForCheckedAttribute();
-    this._updateForDisabledAttribute();
-  }
-
-  _updateForCheckedAttribute() {
-    if (this.hasAttribute('checked')) {
-      this._getCheckbox().checked = true;
-    } else {
-      this._getCheckbox().checked = false;
-    }
-  }
-
-  _updateForDisabledAttribute() {
-    if (this.hasAttribute('disabled')) {
-      this._getCheckbox().setAttribute('disabled', '');
-    } else {
-      this._getCheckbox().removeAttribute('disabled');
-    }
+    ['checked', 'disabled', 'modifier', 'name'].forEach(e => {
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
+    });
   }
 
   _compile() {
     ons._autoStyle.prepare(this);
 
     this.classList.add('switch');
-    const template = templateSource.cloneNode(true);
-    while (template.children[0]) {
-      this.appendChild(template.children[0]);
-    }
-    this._getCheckbox().setAttribute('name', generateId());
 
-    ModifierUtil.initModifier(this, scheme);
+    this.appendChild(template.cloneNode(true));
 
     this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {
-    this._getCheckbox().removeEventListener('change', this._onChangeListener);
+    this._checkbox.removeEventListener('change', this._onChange);
+    this.removeEventListener('dragstart', this._onDragStart);
+    this.removeEventListener('hold', this._onHold);
+    this.removeEventListener('tap', this.click);
+    this._gestureDetector.dispose();
   }
 
   attachedCallback() {
-    this._getCheckbox().addEventListener('change', this._onChangeListener);
+    this._checkbox.addEventListener('change', this._onChange);
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+    this.addEventListener('dragstart', this._onDragStart);
+    this.addEventListener('hold', this._onHold);
+    this.addEventListener('tap', this.click);
+    this._boundOnRelease = this._onRelease.bind(this);
   }
 
-  _onChangeListener() {
-    if (this.checked !== true) {
-      this.removeAttribute('checked');
+  _onChange() {
+    if (this.checked) {
+      this.parentNode.setAttribute('checked', '');
     } else {
-      this.setAttribute('checked', '');
+      this.parentNode.removeAttribute('checked');
     }
   }
 
-  /**
-   * @return {Boolean}
-   */
-  _isChecked() {
-    return this._getCheckbox().checked;
-  }
-
-  /**
-   * @param {Boolean}
-   */
-  _setChecked(isChecked) {
-    isChecked = !!isChecked;
-
-    const checkbox = this._getCheckbox();
-
-    if (checkbox.checked != isChecked) {
-      checkbox.checked = isChecked;
+  click() {
+    if (!this.disabled) {
+      this.checked = !this.checked;
     }
   }
 
-  _getCheckbox() {
-    return this.querySelector('input[type=checkbox]');
+  _onHold(e) {
+    if (!this.disabled) {
+      this.classList.add('switch--active');
+      document.addEventListener('release', this._boundOnRelease);
+    }
+  }
+
+  _onDragStart(e) {
+    if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
+      this.classList.remove('switch--active');
+      return;
+    }
+    this.classList.add('switch--active');
+    this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
+
+    this.addEventListener('drag', this._onDrag);
+    document.addEventListener('release', this._boundOnRelease);
+  }
+
+  _onDrag(e) {
+    e.gesture.srcEvent.preventDefault();
+    var l = this._locations;
+    var position = Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
+    this._handle.style.left = position + 'px';
+    this.checked = position >= (l[0] + l[1]) / 2;
+  }
+
+  _onRelease(e) {
+    this.removeEventListener('drag', this._onDrag);
+    document.removeEventListener('release', this._boundOnRelease);
+
+    this._handle.style.left = '';
+    this.classList.remove('switch--active');
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    } else if (name === 'checked') {
-      this._updateForCheckedAttribute();
-    } else if (name === 'disabled') {
-      this._updateForDisabledAttribute();
+    switch(name) {
+    case 'modifier':
+      this._isMaterial = (current || '').indexOf('material') !== -1;
+      this._locations = locations[this._isMaterial ? 'material' : 'ios'];
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      break;
+    case 'checked':   // eslint-disable-line no-fallthrough
+      this._checkbox.checked = current !== null;
+    case 'disabled':
+      if (current !== null) {
+        this._checkbox.setAttribute(name, '');
+      } else {
+        this._checkbox.removeAttribute(name);
+      }
     }
   }
 }

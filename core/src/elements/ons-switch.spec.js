@@ -21,13 +21,14 @@ describe('OnsSwitchElement', () => {
     expect(element.classList.contains('switch')).to.be.true;
   });
 
-  it('has a \'input\' child by default', () => {
+  it('has an \'input\' child by default', () => {
     expect(element.children[0].classList.contains('switch__input')).to.be.true;
   });
 
-  it('has a \'div\' child by default', () => {
+  it('has a \'.switch__toggle\' child by default', () => {
     expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
+
 
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
@@ -53,6 +54,7 @@ describe('OnsSwitchElement', () => {
       element.removeAttribute('checked');
       element.checked = true;
       expect(element.hasAttribute('checked')).to.be.true;
+      expect(element._checkbox.hasAttribute('checked')).to.be.true;
     });
 
     it('removes the \'checked\' attribute when set to false', () => {
@@ -60,6 +62,7 @@ describe('OnsSwitchElement', () => {
       expect(element.checked).to.be.true;
       element.checked = false;
       expect(element.hasAttribute('checked')).to.be.false;
+      expect(element._checkbox.hasAttribute('checked')).to.be.false;
     });
 
     it('accepts truthy and falsy values', () => {
@@ -96,42 +99,28 @@ describe('OnsSwitchElement', () => {
     });
   });
 
-  describe('#_onChangeListener()', () => {
-    it('removes the \'checked\' attribute', () => {
-      element.checked = true;
-      element._onChangeListener();
-      expect(element.hasAttribute('checked')).to.be.true;
-    });
-
-    it('adds the \'checked\' attribute', () => {
-      element.checked = false;
-      element._onChangeListener();
-      expect(element.hasAttribute('checked')).to.be.false;
-    });
-  });
-
-  describe('#_isChecked()', () => {
+  describe('#isChecked()', () => {
     it('returns true if switch is on', () => {
       element.checked = true;
-      expect(element._isChecked()).to.be.true;
+      expect(element.isChecked()).to.be.true;
     });
 
     it('returns false if switch is off', () => {
       element.checked = false;
-      expect(element._isChecked()).to.be.false;
+      expect(element.isChecked()).to.be.false;
     });
   });
 
-  describe('#_setChecked()', () => {
+  describe('#setChecked()', () => {
     it('sets the \'checked\' attribute to true', () => {
       element.checked = false;
-      element._setChecked(true);
+      element.setChecked(true);
       expect(element.checked).to.be.true;
     });
 
     it('sets the \'checked\' attribute to false', () => {
       element.checked = true;
-      element._setChecked(false);
+      element.setChecked(false);
       expect(element.checked).to.be.false;
     });
   });
@@ -142,7 +131,68 @@ describe('OnsSwitchElement', () => {
       let div2 = document.createElement('div');
       div1.innerHTML = '<ons-switch></ons-switch>';
       div2.innerHTML = div1.innerHTML;
+      expect(div1.innerHTML).to.equal(div2.innerHTML);
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
+
+  describe('#_onChange()', () => {
+    it('adds the \'checked\' attribute', () => {
+      element.checked = true;
+      element._onChange();
+      expect(element.hasAttribute('checked')).to.be.true;
+    });
+
+    it('removes the \'checked\' attribute', () => {
+      element.checked = false;
+      element._onChange();
+      expect(element.hasAttribute('checked')).to.be.false;
+    });
+  });
+
+  describe('#click()', () => {
+    it('changes the value of the checkbox', () => {
+      expect(element._checkbox.checked).to.be.false;
+      element.click();
+      expect(element._checkbox.checked).to.be.true;
+    });
+
+    it('cares if it\'s disabled', () => {
+      element.disabled = true;
+      expect(element._checkbox.checked).to.be.false;
+      element.click();
+      expect(element._checkbox.checked).to.be.false;
+      element.disabled = false;
+      element.click();
+      expect(element._checkbox.checked).to.be.true;
+    });
+  });
+
+  describe('#attributeChangedCallback()', () => {
+    it('toggles material design', () => {
+      element._isMaterial = false;
+      element.setAttribute('modifier', 'material');
+      expect(element._isMaterial).to.be.true;
+      element.setAttribute('modifier', 'hoge');
+      expect(element._isMaterial).to.be.false;
+    });
+
+    it('checks the checkbox', () => {
+      element.setAttribute('checked', '');
+      expect(element._checkbox.checked).to.be.true;
+      expect(element._checkbox.hasAttribute('checked')).to.be.true;
+      element.removeAttribute('checked');
+      expect(element._checkbox.checked).to.be.false;
+      expect(element._checkbox.hasAttribute('checked')).to.be.false;
+    });
+
+    it('disables the checkbox', () => {
+      element.setAttribute('disabled', '');
+      expect(element._checkbox.disabled).to.be.true;
+      expect(element._checkbox.hasAttribute('disabled')).to.be.true;
+      element.removeAttribute('disabled');
+      expect(element._checkbox.disabled).to.be.false;
+      expect(element._checkbox.hasAttribute('disabled')).to.be.false;
     });
   });
 

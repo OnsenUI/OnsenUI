@@ -59,27 +59,6 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('persistent attribute', () => {
-    it('adds a persistent state to the tab', function() {
-      let tabbar = ons._util.createElement(`
-        <ons-tabbar>
-        </ons-tabbar>
-      `);
-
-      tabbar.appendChild(element);
-      document.body.appendChild(tabbar);
-      expect(element.isPersistent()).not.to.be.true;
-
-      element.setAttribute('persistent', '');
-      expect(element.isPersistent()).to.be.true;
-
-      element.removeAttribute('persistent');
-      expect(element.isPersistent()).not.to.be.true;
-
-      document.body.removeChild(tabbar);
-    });
-  });
-
   describe('active attribute', () => {
     it('sets whether a tab should be active or not', () => {
       expect(element.hasAttribute('active')).not.to.be.true;
@@ -212,9 +191,9 @@ describe('OnsTabElement', () => {
   });
 
   describe('#_loadPage()', () => {
-    it('returns the current tab _pageElement, if the tab has persistent attribute and a _pageElement', (done) => {
+    it('returns the current tab _pageElement', (done) => {
       element = ons._util.createElement(`
-        <ons-tab persistent>
+        <ons-tab>
         </ons-tab>
       `);
 
@@ -223,16 +202,6 @@ describe('OnsTabElement', () => {
         done();
       };
       element._pageElement = true;
-      element._loadPageElement(myFunction);
-    });
-
-    it('sets the tab _pageElement as null, if the tab doesn\'t has a persistent attribute', (done) => {
-      element.setAttribute('page', 'page1');
-
-      let myFunction = () => {
-        expect(element._pageElement).to.be.null;
-        done();
-      };
       element._loadPageElement(myFunction);
     });
   });

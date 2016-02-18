@@ -18,7 +18,6 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import GestureDetector from 'ons/gesture-detector';
 
 const scheme = {
   '': 'list__item--*',
@@ -94,8 +93,6 @@ class ListItemElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
-
-    this._gestureDetector = new GestureDetector(this);
   }
 
   _compile() {
@@ -129,7 +126,6 @@ class ListItemElement extends BaseElement {
 
   attachedCallback() {
     this.addEventListener('drag', this._onDrag);
-
     this.addEventListener('touchstart', this._onTouch);
     this.addEventListener('mousedown', this._onTouch);
     this.addEventListener('touchend', this._onRelease);

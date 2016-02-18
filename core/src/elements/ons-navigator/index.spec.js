@@ -64,6 +64,18 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
+    it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
+      nav.pushPage({
+        pageHTML: '<ons-page>hoge</ons-page>',
+        onTransitionEnd: () => {
+          let content = nav.getCurrentPage().element._getContentElement();
+          expect(nav.pages.length).to.equal(2);
+          expect(content.innerHTML).to.equal('hoge');
+          done();
+        }
+      });
+    });
+
     it('only accepts object options', () => {
       expect(() => nav.pushPage('hoge', 'string')).to.throw(Error);
     });
@@ -249,6 +261,22 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage('hoge', {
         onTransitionEnd: () => {
           nav.insertPage(0, 'fuga');
+          setImmediate(() => {
+            expect(nav.pages.length).to.equal(3);
+
+            let content = nav.pages[0].element._getContentElement();
+            expect(content.innerHTML).to.equal('fuga');
+
+            done();
+          });
+        }
+      });
+    });
+
+    it('inserts a new page on a given index using `options.pageHTML`', (done) => {
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => {
+          nav.insertPage(0, {pageHTML: '<ons-page>fuga</ons-page>'});
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 

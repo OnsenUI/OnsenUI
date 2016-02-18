@@ -349,7 +349,7 @@ class AlertDialogElement extends BaseElement {
    * @description
    *   [en]Show the alert dialog.[/en]
    *   [ja]ダイアログを表示します。[/ja]
-   * @return {Promise} 
+   * @return {Promise}
    *   [en]Resolves to the displayed element[/en]
    *   [ja][/ja]
    */

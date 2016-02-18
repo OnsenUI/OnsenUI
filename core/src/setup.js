@@ -28,6 +28,7 @@ import './elements/ons-pull-hook';
 import './elements/ons-ripple';
 import './elements/ons-row';
 import './elements/ons-scroller';
+import './elements/ons-scrollbar';
 import './elements/ons-speed-dial-item';
 import './elements/ons-speed-dial';
 import './elements/ons-splitter-content';
@@ -50,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
   ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     navigator.app.exitApp();
   });
+  document.body._gestureDetector = new ons.GestureDetector(document.body);
 }, false);
 
 // setup loading placeholder

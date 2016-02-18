@@ -34,6 +34,23 @@ const INPUT_ATTRIBUTES = [
   'value'
 ];
 
+/**
+ * @element ons-range
+ * @category form
+ * @description
+ *   [en]Range input component.[/en]
+ *   [ja][/ja]
+ * @codepen xZQomM
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @example
+ * <ons-range value="20"></ons-range>
+ * <ons-range modifier="material" value="10"></range>
+ */
 class MaterialInputElement extends BaseElement {
 
   createdCallback() {

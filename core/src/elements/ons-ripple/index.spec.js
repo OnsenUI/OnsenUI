@@ -4,10 +4,6 @@ describe('OnsRippleElement', () => {
   var container, ripple, wave, background;
 
   var spyOn = chai.spy.on.bind(chai.spy, OnsRippleElement.prototype);
-  var dummyDetector = {
-    on: () => {},
-    off: () => {}
-  };
 
   beforeEach(() => {
     container = ons._util.createElement(`
@@ -175,7 +171,6 @@ describe('OnsRippleElement', () => {
           var spy = spyOn(calling),
             ripple = new OnsRippleElement();
 
-          ripple._gestureDetector = dummyDetector;
 
           ripple[whenUsing].apply(ripple, rest);
           expect(spy).to.have.been.called.once;
@@ -219,19 +214,9 @@ describe('OnsRippleElement', () => {
     itCalls('_updateParent').whenUsing('_onHold', e);
 
     it('sets _holding', () => {
-      ripple._gestureDetector = dummyDetector;
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
-    });
-
-    it('unsets _holding', () => {
-      ripple._gestureDetector = dummyDetector;
-      ripple._onHold(e);
-      expect(ripple._holding).to.be.ok;
-      setTimeout(() => {
-        expect(ripple._holding).to.not.be.ok;
-      }, 2200);
     });
   });
 
@@ -241,7 +226,6 @@ describe('OnsRippleElement', () => {
     it('calls _onRelease', () => {
       var spy = spyOn('_onRelease');
 
-      ripple._gestureDetector = dummyDetector;
       ripple._onHold(e);
       ripple._onDragStart(e);
       expect(spy).to.have.been.called.once;
@@ -250,7 +234,6 @@ describe('OnsRippleElement', () => {
 
   describe('#_onRelease()', () => {
     it('unsets _holding', () => {
-      ripple._gestureDetector = dummyDetector;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
       ripple._onRelease(e);
