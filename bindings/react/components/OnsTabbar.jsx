@@ -1,12 +1,10 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
 
-
     var lastLink = window.OnsTabbarElement.rewritables.link;
     window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
       lastLink(el, target, options, callback);
     }.bind(this);
-
 
 
     var node = this.node = ReactDOM.findDOMNode(this);
@@ -16,11 +14,16 @@ var children= [];
 
     var tabContent = [];
 
+    var newModifier = this.props.modifier;
+
     var activeIndex = -1;
     var index = -1;
     React.Children.forEach(this.props.children, function(child) {
       index++;
       // TODO CHECK FOR onsTab
+
+      child = React.cloneElement(child, {modifier: newModifier});
+
       counter = -1;
       var myChildren = React.Children.map(child.props.children, function(child2) {
         counter++;
@@ -53,16 +56,33 @@ var children= [];
     }.bind(this));
 
 
+    var newNode = React.cloneElement(this, {}, null);
+
+ 
+    var renderString = ReactDOMServer.renderToStaticMarkup(
+      <ons-tabbar {...newNode.props} >
+        {children}
+      </ons-tabbar>
+    );
+
+    var el = document.createElement('div');
+    el.innerHTML = renderString;
+
+    var contentClass = el.firstChild.children[0].className;
+    var barClass = el.firstChild.children[1].className;
+
+
       ReactDOM.render(
-      <ons-tabbar var="tabbar" animation="fade" _compiled="true" class="ng-scope">
-        <div className="ons-tab-bar__content tab-bar__content"> 
+      <ons-tabbar {...newNode.props} _compiled="true">
+        <div no-status-bar-fill className={contentClass}> 
           {tabContent}
         </div> 
-        <div className="tab-bar ons-tab-bar__footer ons-tabbar-inner">
+        <div className={barClass}>
           {children} 
         </div>
       </ons-tabbar>, node
       );
+
 
       for (var i=0; i < node.firstChild.children[1].children.length; i++) {
         node.firstChild.children[1].children[i]._pageElement = 
@@ -74,11 +94,6 @@ var children= [];
       }
 
       node.firstChild.setActiveTab(activeIndex);
-
-
-      // some small things
-
-
   },
   render: function() {
 
@@ -104,22 +119,20 @@ var buildComponent = function(domElement, reactChildren) {
     } else {
       return <MyElem domNode={domElement} myClass={domElement.className} styleString={domElement.style.cssText} /> ;
     }
-
   }
 };
 
 var OnsTab = React.createClass({
-    render: function() {
-    return (<ons-tab {...this.props} > {this.props.children} </ons-tab>);
+  render: function() {
+    return <ons-tab {...this.props}> {this.props.children} </ons-tab>;
   }, 
 });
+
 
 var MyElem = React.createClass({
   componentDidMount: function() {
 
     var elem = this.props.domNode;
-    console.log(elem.nodeName);
-    console.log(elem.attributes);
     for (var i = 0; i < elem.attributes.length; i++) {
       var attrib = elem.attributes[i];
         ReactDOM.findDOMNode(this).setAttribute(attrib.name, attrib.value);

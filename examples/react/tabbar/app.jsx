@@ -1,7 +1,24 @@
+var HTMLDOMLegacyPropertyConfig = {
+  isCustomAttribute: function(attributeName) {
+    return -1 !== [
+      'ons-tab-active'
+     ].indexOf(attributeName);
+  },
+  Properties: {
+    align: null,
+    bgcolor: null,
+    border: null
+  },
+  DOMAttributeNames: {
+  },
+  DOMPropertyNames: {
+  }
+};
+
 var MyPage = React.createClass({
   render: function() {
     return (
-    <OnsPage>
+      <OnsPage {...this.props}>
           <ons-toolbar>
             <div className="center"> {this.props.title} </div>
           </ons-toolbar>
@@ -10,8 +27,6 @@ var MyPage = React.createClass({
     );
   },
 });
-
-
 
 var MyNav  = React.createClass({
   getInitialState: function() {
@@ -22,15 +37,12 @@ var MyNav  = React.createClass({
   render: function() {
     return (
     <div> 
-      <OnsTabbar
-        mypage= {
-          <MyPage title="Home"  content="Home content" />
-        }
-        >
+      <OnsTabbar>
       <OnsTab
         active="true" 
-        page="page1.html"
-        >
+        page = {
+          <MyPage title="Home"  content="Home content" />
+        }>
         <div ons-tab-active>
           HOME
         </div>
@@ -39,13 +51,17 @@ var MyNav  = React.createClass({
         </div>
       </OnsTab>
       <OnsTab
-        page="page2.html"
+        page = {
+          <MyPage title="Comments"  content="Comment content" />
+        }
         icon="ion-chatbox-working"
         label="Comments">
       </OnsTab>
       <OnsTab
         icon="ion-ios-cog"
-        page="page3.html"
+        page = {
+          <MyPage title="Settings"  content="Setting content" />
+        }
         label="Settings"
         ></OnsTab>
     </OnsTabbar>
