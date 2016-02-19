@@ -29,20 +29,16 @@ var MyNav  = React.createClass({
           <ons-toolbar-button modifier="material"><ons-icon icon="md-more-vert"></ons-icon></ons-toolbar-button>
         </div>
       </ons-toolbar>
-      <OnsTabbar position="top" modifier="material" var="tabbar">
-        <OnsTab
-          icon="md-search"
-          active="true"
-          page = { <MyPage  title="Search"/> }>
-        </OnsTab>
-        <OnsTab
-          icon="md-favorite"
-          page = { <MyPage  title="Favorite"/> }>
-        </OnsTab>
-        <OnsTab
-          icon="md-phone"
-          page = { <MyPage  title="Call"/> }>
-        </OnsTab>
+      <OnsTabbar position="top" modifier="material" var="tabbar"
+        pages= {[
+          <MyPage title="Search"  content="Search content" />,
+          <MyPage title="Favorite"  content="Favorite content" />,
+          <MyPage title="Call"  content="Call content" />,
+          ]}
+        >
+        <OnsTab icon="md-search" active="true" />
+        <OnsTab icon="md-favorite" />
+        <OnsTab icon="md-phone" />
       </OnsTabbar>
     </OnsPage>
 

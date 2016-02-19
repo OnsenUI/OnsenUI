@@ -12,36 +12,27 @@ var OnsTabbar = React.createClass({
 var children= [];
     this.childIndex = [];
 
-    var tabContent = [];
 
     var newModifier = this.props.modifier;
 
     var activeIndex = -1;
     var index = -1;
+
+
     React.Children.forEach(this.props.children, function(child) {
       index++;
-      // TODO CHECK FOR onsTab
-
       child = React.cloneElement(child, {modifier: newModifier});
 
       counter = -1;
+
       var myChildren = React.Children.map(child.props.children, function(child2) {
         counter++;
         return React.cloneElement(child2, {'data-ons-react':  counter});
       });
 
       this.childIndex.push(child.props.page);
-
-      if (child.props.page) {
-        var el = child.props.page;
-        tabContent.push(el);
-
-        if (child.props.active) {
-          activeIndex = index;
-        }
-        
-      } else {
-        throw Error("OnsTab must contain a page property");
+      if (child.props.active) {
+        activeIndex = index;
       }
 
       var mychild=  React.cloneElement(child, {}, myChildren);
@@ -55,10 +46,8 @@ var children= [];
       children.push(newElement);
     }.bind(this));
 
-
     var newNode = React.cloneElement(this, {}, null);
 
- 
     var renderString = ReactDOMServer.renderToStaticMarkup(
       <ons-tabbar {...newNode.props} >
         {children}
@@ -71,29 +60,27 @@ var children= [];
     var contentClass = el.firstChild.children[0].className;
     var barClass = el.firstChild.children[1].className;
 
-
-      ReactDOM.render(
+    ReactDOM.render(
       <ons-tabbar {...newNode.props} _compiled="true">
         <div no-status-bar-fill className={contentClass}> 
-          {tabContent}
+          {this.props.pages}
         </div> 
         <div className={barClass}>
           {children} 
         </div>
       </ons-tabbar>, node
-      );
+    );
 
+    for (var i=0; i < node.firstChild.children[1].children.length; i++) {
+      node.firstChild.children[1].children[i]._pageElement = 
+              node.firstChild.firstChild.children[i];
+    }
 
-      for (var i=0; i < node.firstChild.children[1].children.length; i++) {
-        node.firstChild.children[1].children[i]._pageElement = 
-                node.firstChild.firstChild.children[i];
-      }
+    for (var i =0; i < node.firstChild.firstChild.children.length; i++) {
+      node.firstChild.firstChild.children[i].style.display = 'none';
+    }
 
-      for (var i =0; i < node.firstChild.firstChild.children.length; i++) {
-        node.firstChild.firstChild.children[i].style.display = 'none';
-      }
-
-      node.firstChild.setActiveTab(activeIndex);
+    node.firstChild.setActiveTab(activeIndex);
   },
   render: function() {
 

@@ -28,55 +28,39 @@ var MyPage = React.createClass({
   },
 });
 
+var MyTab = React.createClass({
+  render: function() {
+    return (
+      <OnsTab {...this.props}>
+        <ons-tab-active>
+          {this.props.title.toUpperCase()}
+        </ons-tab-active>
+        <ons-tab-inactive>
+          {this.props.title.toLowerCase()}
+        </ons-tab-inactive>
+      </OnsTab>
+    );
+  },
+});
+
 var MyNav  = React.createClass({
   getInitialState: function() {
     return {};
   },
 
-  
   render: function() {
     return (
-    <div> 
-      <OnsTabbar>
-      <OnsTab
-        active="true" 
-        page = {
-          <MyPage title="Home"  content="Home content" />
-        }>
-        <ons-tab-active>
-          HOME
-        </ons-tab-active>
-        <ons-tab-inactive>
-          home
-        </ons-tab-inactive>
-      </OnsTab>
-      <OnsTab
-        page = {
-          <MyPage title="Comments"  content="Comment content" />
-        }
-        >
-        <ons-tab-active>
-          COMMMENTS 
-        </ons-tab-active>
-        <ons-tab-inactive>
-          comments
-        </ons-tab-inactive>
-
-      </OnsTab>
-      <OnsTab
-        page = {
+      <OnsTabbar
+        pages= {[
+          <MyPage title="Home"  content="Home content" />,
+          <MyPage title="Comments"  content="Comment content" />,
           <MyPage title="Settings"  content="Setting content" />
-        }
-        >
-        <ons-tab-active>
-          SETTINGS 
-        </ons-tab-active>
-        <ons-tab-inactive>
-          settings
-        </ons-tab-inactive>
-      </OnsTab>
+          ]}>
+      <MyTab active="true" title="home" />
+      <MyTab  title="comments" />
+      <MyTab  title="settings" />
     </OnsTabbar>
-   </div>);
+    );
   }
 });
 

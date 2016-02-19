@@ -37,12 +37,14 @@ var MyNav  = React.createClass({
   render: function() {
     return (
     <div> 
-      <OnsTabbar>
-      <OnsTab
-        active="true" 
-        page = {
-          <MyPage title="Home"  content="Home content" />
-        }>
+      <OnsTabbar
+        pages= {[
+          <MyPage title="Home"  content="Home content" />,
+          <MyPage title="Comments"  content="Comment content" />,
+          <MyPage title="Settings"  content="Setting content" />
+        ]}
+        >
+      <OnsTab active="true">
         <ons-tab-active>
           HOME
         </ons-tab-active>
@@ -51,30 +53,13 @@ var MyNav  = React.createClass({
         </ons-tab-inactive>
       </OnsTab>
       <OnsTab
-        page = {
-          <MyPage title="Comments"  content="Comment content" />
-        }
         icon="ion-chatbox-working"
-        label="Comments">
-      </OnsTab>
+        label="Comments" />
       <OnsTab
         icon="ion-ios-cog"
-        page = {
-          <MyPage title="Settings"  content="Setting content" />
-        }
-        label="Settings"
-        ></OnsTab>
+        label="Settings" />
     </OnsTabbar>
-    <OnsTemplate id="page1.html"> 
-      <MyPage title="Home" content="Home content" />
-    </OnsTemplate>
-    <OnsTemplate id="page2.html"> 
-      <MyPage title="Comments" content="Comment content" />
-    </OnsTemplate>
-    <OnsTemplate id="page3.html"> 
-      <MyPage title="Settings" content="Settings content" />
-    </OnsTemplate>
-  </div>);
+    </div>);
   }
 });
 
