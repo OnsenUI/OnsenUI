@@ -121,7 +121,7 @@ class ListItemElement extends BaseElement {
 
     this.innerHTML = `
       <label>
-        {ripple}
+        ${ripple}
         <div class="list__item__left left">${left || ''}</div>
         <div class="list__item__center center">${center}</div>
         <div class="list__item__right right">${right || ''}</div>
