@@ -87,10 +87,11 @@ export class LazyRepeatProvider {
     this._wrapperElement = wrapperElement;
     this._delegate = delegate;
 
-    this._pageContent = util.findParent(wrapperElement, '.page__content');
+    // to be removed soon
+    this._pageContent = util.findParent(wrapperElement, '.ons-scroller__content');
 
     if (!this._pageContent) {
-      this._pageContent = util.findParent(wrapperElement, '.ons-scroller__content');
+      this._pageContent = util.findParent(wrapperElement, '.page__content');
     }
 
     if (!this._pageContent) {
@@ -115,11 +116,16 @@ export class LazyRepeatProvider {
   }
 
   _getTopOffset() {
-    if (typeof this._wrapperElement !== 'undefined' && this._wrapperElement !== null) {
-      return this._wrapperElement.getBoundingClientRect().top;
-    } else {
-      return 0;
-    }
+
+    var toolbar = document.getElementsByTagName('ons-toolbar');
+    var toolbarHeight = toolbar.length > 0 ? toolbar[0].clientHeight : 0;
+    return this._wrapperElement.getBoundingClientRect().top + toolbarHeight;
+
+    // if (typeof this._wrapperElement !== 'undefined' && this._wrapperElement !== null) {
+    //   return this._wrapperElement.getBoundingClientRect().top;
+    // } else {
+    //   return 0;
+    // }
   }
 
   _onChange() {
@@ -177,7 +183,9 @@ export class LazyRepeatProvider {
 
       // Fix position.
       let element = this._renderedItems[index].element;
-      element.style.top = (this._wrapperElement.offsetTop + top) + 'px';
+      element.style.top = top + 'px';
+      // element.style.top = (this._wrapperElement.offsetTop + top) + 'px';
+      // currentItem.element.style.top = top + 'px';
 
       return;
     }
