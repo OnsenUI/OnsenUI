@@ -5,7 +5,7 @@ describe('OnsInputElement', () => {
 
   beforeEach(() => {
     element = ons._util.createElement(`
-      <ons-input label="Username"></ons-input>
+      <ons-input placeholder="Username"></ons-input>
     `);
 
     document.body.appendChild(element);
@@ -23,28 +23,28 @@ describe('OnsInputElement', () => {
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element._input.classList.contains('text-input--hoge')).to.be.true;
-    expect(element._label.classList.contains('text-input--hoge__label')).to.be.true;
+    expect(element._helper.classList.contains('text-input--hoge__label')).to.be.true;
 
     element.setAttribute('modifier', 'foo bar');
     expect(element._input.classList.contains('text-input--foo')).to.be.true;
-    expect(element._label.classList.contains('text-input--foo__label')).to.be.true;
+    expect(element._helper.classList.contains('text-input--foo__label')).to.be.true;
     expect(element._input.classList.contains('text-input--bar')).to.be.true;
-    expect(element._label.classList.contains('text-input--bar__label')).to.be.true;
+    expect(element._helper.classList.contains('text-input--bar__label')).to.be.true;
     expect(element._input.classList.contains('text-input--hoge')).to.be.false;
-    expect(element._label.classList.contains('text-input--hoge__label')).to.be.false;
+    expect(element._helper.classList.contains('text-input--hoge__label')).to.be.false;
   });
 
   describe('#_updateLabel()', () => {
-    it('is called when the label attribute changes', () => {
+    it('is called when the placeholder attribute changes', () => {
       const spy = chai.spy.on(element, '_updateLabel');
 
-      element.setAttribute('label', 'Password');
+      element.setAttribute('placeholder', 'Password');
       expect(spy).to.have.been.called.once;
     });
 
-    it('removes the label text if there is no label attribute', () => {
-      element.removeAttribute('label');
-      expect(element._label.innerText).to.equal('');
+    it('removes the label text if there is no placeholder attribute', () => {
+      element.removeAttribute('placeholder');
+      expect(element._helper.innerText).to.equal('');
     });
   });
 
@@ -68,7 +68,7 @@ describe('OnsInputElement', () => {
       element.value = 'abc';
       element._input.focus();
       element._updateLabelColor();
-      expect(element._label.style.color).to.equal('');
+      expect(element._helper.style.color).to.equal('');
     });
   });
 
@@ -109,9 +109,9 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('#_label', () => {
+  describe('#_helper', () => {
     it('is an HTMLElement', () => {
-      expect(element._label).be.an.instanceof(HTMLElement);
+      expect(element._helper).be.an.instanceof(HTMLElement);
     });
   });
 
@@ -122,6 +122,68 @@ describe('OnsInputElement', () => {
       expect(element.value).to.equal(element._input.value);
       element.value = 'fuga';
       expect(element.value).to.equal(element._input.value);
+    });
+  });
+
+  describe('input label', () => {
+    it('assigns ID to the inner input element', () => {
+      let element = ons._util.createElement('<ons-input id="myInput"></ons-input>');
+      expect(element.querySelector('input').id).to.equal('inner-myInput');
+    });
+
+    it('provides \'content-left\' attribute', () => {
+      let element = ons._util.createElement('<ons-input>content</ons-input>');
+      expect(element.firstChild.lastChild.className).to.equal('input-label');
+      element = ons._util.createElement('<ons-input content-left>content</ons-input>');
+      expect(element.firstChild.firstChild.className).to.equal('input-label');
+    });
+  });
+
+  describe('#type attribute', () => {
+    it('creates checkbox', () => {
+      let element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
+      expect(element.className).to.contain('checkbox');
+      expect(element._input.className).to.contain('checkbox__input');
+      expect(element._input.type).to.equal('checkbox');
+      expect(element._helper.className).to.contain('checkbox__checkmark');
+
+      expect(element.checked).to.be.false;
+      expect(element._input.checked).to.be.false;
+      element.setAttribute('checked', '');
+      expect(element.checked).to.be.true;
+      expect(element._input.checked).to.be.true;
+      element.checked = false;
+      expect(element._input.checked).to.be.false;
+    });
+
+    it('creates radio button', () => {
+      let element = ons._util.createElement('<ons-input type="radio"></ons-input>');
+      expect(element.className).to.contain('radio-button');
+      expect(element._input.className).to.contain('radio-button__input');
+      expect(element._input.type).to.equal('radio');
+      expect(element._helper.className).to.contain('radio-button__checkmark');
+
+      element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"></ons-input><ons-input type="radio" name="radiogroup"></ons-input></div>');
+      document.body.appendChild(element);
+      let r = element.querySelectorAll('ons-input[type=radio]');
+      expect(r[0].checked).to.be.false;
+      expect(r[1].checked).to.be.false;
+      r[0].checked = true;
+      expect(r[0].checked).to.be.true;
+      expect(r[1].checked).to.be.false;
+      r[1].checked = true;
+      expect(r[0].checked).to.be.false;
+      expect(r[1].checked).to.be.true;
+      element.remove();
+    });
+  });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-input');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
     });
   });
 });

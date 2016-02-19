@@ -254,4 +254,15 @@ describe('OnsTabElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-tab');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.hasAttribute('ripple')).to.be.true;
+      expect(e.querySelector('.tab-bar__button').firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+  });
 });

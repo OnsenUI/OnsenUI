@@ -81,9 +81,6 @@ class ProgressBarElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
   }
 
@@ -123,6 +120,10 @@ class ProgressBarElement extends BaseElement {
     this._updateValue();
 
     this.appendChild(this._template);
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 }
 

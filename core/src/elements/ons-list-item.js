@@ -20,7 +20,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '': 'list__item--*',
+  '.list__item': 'list__item--*',
   '.list__item__left': 'list__item--*__left',
   '.list__item__center': 'list__item--*__center',
   '.list__item__right': 'list__item--*__right',
@@ -90,13 +90,31 @@ class ListItemElement extends BaseElement {
    */
 
   createdCallback() {
-    this.classList.add('list__item');
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
+  }
+
+  _compile() {
+    ons._autoStyle.prepare(this);
+
+    let ripple = '';
+    if (this.hasAttribute('ripple')) {
+      ripple = '<ons-ripple></ons-ripple>';
+    }
+
+    this.innerHTML = `<label>${ripple}${this.innerHTML}</label>`;
+    this.firstChild.classList.add('list__item');
+    this.style.display = this.firstChild.style.display = 'flex';
+
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
     }
   }
 

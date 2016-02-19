@@ -192,9 +192,6 @@ class PopoverElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -355,6 +352,8 @@ class PopoverElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const templateElement = templateSource.cloneNode(true);
     const content = templateElement.querySelector('.popover__content');
     const style = this.getAttribute('style');
@@ -383,6 +382,10 @@ class PopoverElement extends BaseElement {
     if (this.hasAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

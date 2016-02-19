@@ -75,14 +75,29 @@ class ButtonElement extends BaseElement {
    */
 
   createdCallback() {
-    this.classList.add('button');
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
+  }
+
+  _compile() {
+    ons._autoStyle.prepare(this);
+
+    this.classList.add('button');
+
+    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 }
 

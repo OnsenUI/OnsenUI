@@ -12,22 +12,22 @@ describe('OnsListItemElement', () => {
   });
 
   it('classList contains \'list__item\' by default', () => {
-    expect(listItem.classList.contains('list__item')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item')).to.be.true;
   });
 
   it('provides modifier attribute', () => {
     listItem.setAttribute('modifier', 'hoge');
-    expect(listItem.classList.contains('list__item--hoge')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--hoge')).to.be.true;
 
     listItem.setAttribute('modifier', ' foo bar');
-    expect(listItem.classList.contains('list__item--foo')).to.be.true;
-    expect(listItem.classList.contains('list__item--bar')).to.be.true;
-    expect(listItem.classList.contains('list__item--hoge')).not.to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--foo')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--bar')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--hoge')).not.to.be.true;
 
-    listItem.classList.add('list__item--piyo');
+    listItem.firstChild.classList.add('list__item--piyo');
     listItem.setAttribute('modifier', 'fuga');
-    expect(listItem.classList.contains('list__item--piyo')).to.be.true;
-    expect(listItem.classList.contains('list__item--fuga')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--piyo')).to.be.true;
+    expect(listItem.firstChild.classList.contains('list__item--fuga')).to.be.true;
   });
 
   describe('#_onDrag()', () => {
@@ -91,6 +91,23 @@ describe('OnsListItemElement', () => {
       div1.innerHTML = '<ons-list-item>Content</ons-list-item>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+
+    it('wraps the content inside a label', () => {
+      let e = ons._util.createElement('<ons-list-item>test</ons-list-item>');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('label');
+      expect(e.firstChild.innerHTML).to.equal('test');
+    });
+  });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android if tappable', () => {
+      ons.platform.select('android');
+      let e = ons._util.createElement('<ons-list-item tappable></ons-list-item>');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.hasAttribute('ripple')).to.be.true;
+      expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
     });
   });
 });

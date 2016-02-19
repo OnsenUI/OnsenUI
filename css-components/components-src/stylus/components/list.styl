@@ -103,6 +103,7 @@ list__header()
 list__item()
   margin 0
   padding 0
+  width 100%
   position relative
   list-style none
   box-sizing border-box
@@ -265,6 +266,10 @@ list__item()
   order 0
   align-items center
   align-self stretch
+  pointer-events none
+
+.list__item__left *
+  pointer-events auto
 
 .list__item__center
   display flex
@@ -275,6 +280,10 @@ list__item()
   margin-right auto
   align-items center
   align-self stretch
+  pointer-events none
+
+.list__item__center *
+  pointer-events auto
 
 .list__item__right
   display flex
@@ -282,6 +291,10 @@ list__item()
   order 2
   align-items center
   align-self stretch
+  pointer-events none
+
+.list__item__right *
+  pointer-events auto
 
 /*! topdoc
   name: List Item with Chevron

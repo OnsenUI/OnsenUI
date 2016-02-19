@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-beta.7
 ----
+ * core: Automatic Styling feature depending on current platform.
  * core: Fixed [#1181](https://github.com/OnsenUI/OnsenUI/issues/1181).
  * ons-fab: Fixed [#1192](https://github.com/OnsenUI/OnsenUI/issues/1192).
  * ons-tabbar: Correctly applies animation-options.
@@ -12,6 +13,10 @@ v2.0.0-beta.7
  * ons-navigator: Closes [#1208](https://github.com/OnsenUI/OnsenUI/issues/1208).
  * ons-carousel: Accepts animation-options.
  * core: Async methods return promises. Closes [#1054](https://github.com/OnsenUI/OnsenUI/issues/1054).
+ * ons-if: Added new conditional component with `platform` and `orientation` attributes.
+ * ons-navigator: New Lift and Fade animators that match Material Design styles.
+ * ons-input: Extended component to support type `checkbox` and `radio`.
+ * ons-ripple: Can be added by using `ripple` attribute.
  * ons-tab: Tabs are always persistent.
  * ons-ripple: Improve ripple effect. Closes [#1193](https://github.com/OnsenUI/OnsenUI/issues/1193).
  * ons-switch: Switch is now draggable.
