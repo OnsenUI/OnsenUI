@@ -838,7 +838,7 @@ class NavigatorElement extends BaseElement {
   }
 
   /**
-   * @method bingPageTop
+   * @method bringPageTop
    * @signature bringPageTop(item, [options])
    * @param {String|Number} item
    *   [en]Page URL or index of an existing page in navigator's stack.[/en]
