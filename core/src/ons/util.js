@@ -83,7 +83,7 @@ util.findParent = (element, query) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (!parent) {
+    if (!parent || parent === document) {
       return null;
     }
     if (match(parent)) {
