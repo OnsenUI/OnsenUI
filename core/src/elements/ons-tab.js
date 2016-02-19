@@ -160,15 +160,14 @@ class TabElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const fragment = document.createDocumentFragment();
     let hasChildren = false;
 
@@ -197,6 +196,14 @@ class TabElement extends BaseElement {
       this._hasDefaultTemplate = true;
       this._updateDefaultTemplate();
     }
+
+    if (this.hasAttribute('ripple') && !util.findChild(button, 'ons-ripple')) {
+      button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _updateDefaultTemplate() {
@@ -249,9 +256,9 @@ class TabElement extends BaseElement {
     radio.checked = true;
     this.classList.add('active');
 
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'none');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
       .forEach(element => element.style.display = 'inherit');
   }
 
@@ -260,9 +267,9 @@ class TabElement extends BaseElement {
     radio.checked = false;
     this.classList.remove('active');
 
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'inherit');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
       .forEach(element => element.style.display = 'none');
   }
 

@@ -196,4 +196,12 @@ describe('OnsSwitchElement', () => {
     });
   });
 
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-switch');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+  });
 });

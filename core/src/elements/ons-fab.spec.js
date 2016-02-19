@@ -216,4 +216,14 @@ describe('OnsFabElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-fab');
+      expect(e.hasAttribute('ripple')).to.be.true;
+      expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+  });
 });

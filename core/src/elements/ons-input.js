@@ -16,7 +16,13 @@ import BaseElement from 'ons/base-element';
 
 const scheme = {
   '.text-input': 'text-input--*',
-  '.text-input__label': 'text-input--*__label'
+  '.text-input__label': 'text-input--*__label',
+  '.radio-button': 'radio-button--*',
+  '.radio-button__input': 'radio-button--*__input',
+  '.radio-button__checkmark': 'radio-button--*__checkmark',
+  '.checkbox': 'checkbox--*',
+  '.checkbox__input': 'checkbox--*__input',
+  '.checkbox__checkmark': 'checkbox--*__checkmark'
 };
 
 const INPUT_ATTRIBUTES = [
@@ -24,6 +30,7 @@ const INPUT_ATTRIBUTES = [
   'autocomplete',
   'autocorrect',
   'autofocus',
+  'checked',
   'disabled',
   'inputmode',
   'max',
@@ -77,34 +84,77 @@ class MaterialInputElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
-
-    this._updateLabel();
-    this._updateLabelColor();
-    this._updateBoundAttributes();
-    this._updateLabelClass();
-
-    this._boundOnInput = this._onInput.bind(this);
-    this._boundOnFocusin = this._onFocusin.bind(this);
-    this._boundOnFocusout = this._onFocusout.bind(this);
-    this._boundDelegateEvent = this._delegateEvent.bind(this);
   }
 
   _compile() {
-    this.appendChild(document.createElement('input'));
-    this._input.classList.add('text-input');
-    this.appendChild(document.createElement('span'));
-    this._label.classList.add('text-input__label');
+    ons._autoStyle.prepare(this);
+
+    let helper = document.createElement('span');
+    helper.classList.add('_helper');
+
+    let inputContainer = document.createElement('span');
+    inputContainer.appendChild(document.createElement('input'));
+    inputContainer.appendChild(helper);
+
+    let content = document.createElement('label');
+    content.appendChild(inputContainer);
+
+    let label = document.createElement('span');
+    label.classList.add('input-label');
+
+    ons._util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
+    this.hasAttribute('content-left') ? content.insertBefore(label, content.firstChild) : content.appendChild(label);
+
+    this.appendChild(content);
+
+    switch (this.getAttribute('type')) {
+      case 'checkbox':
+        this.classList.add('checkbox');
+        this._input.classList.add('checkbox__input');
+        this._helper.classList.add('checkbox__checkmark');
+        this._updateBoundAttributes();
+        break;
+
+      case 'radio':
+        this.classList.add('radio-button');
+        this._input.classList.add('radio-button__input');
+        this._helper.classList.add('radio-button__checkmark');
+        this._updateBoundAttributes();
+        break;
+
+      default:
+        this._input.classList.add('text-input');
+        this._helper.classList.add('text-input__label');
+        this._input.parentElement.classList.add('text-input__container');
+
+        this._updateLabel();
+        this._updateLabelColor();
+        this._updateBoundAttributes();
+        this._updateLabelClass();
+
+        this._boundOnInput = this._onInput.bind(this);
+        this._boundOnFocusin = this._onFocusin.bind(this);
+        this._boundOnFocusout = this._onFocusout.bind(this);
+        break;
+    }
+
+    this._boundDelegateEvent = this._delegateEvent.bind(this);
+
+    if (this.id) {
+      this._input.id = 'inner-' + this.id;
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
-    else if (name === 'label') {
+    else if (name === 'placeholder') {
       return this._updateLabel();
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
@@ -113,9 +163,12 @@ class MaterialInputElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._input.addEventListener('input', this._boundOnInput);
-    this._input.addEventListener('focusin', this._boundOnFocusin);
-    this._input.addEventListener('focusout', this._boundOnFocusout);
+    if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
+      this._input.addEventListener('input', this._boundOnInput);
+      this._input.addEventListener('focusin', this._boundOnFocusin);
+      this._input.addEventListener('focusout', this._boundOnFocusout);
+    }
+
     this._input.addEventListener('focus', this._boundDelegateEvent);
     this._input.addEventListener('blur', this._boundDelegateEvent);
   }
@@ -124,21 +177,21 @@ class MaterialInputElement extends BaseElement {
     this._input.removeEventListener('input', this._boundOnInput);
     this._input.removeEventListener('focusin', this._boundOnFocusin);
     this._input.removeEventListener('focusout', this._boundOnFocusout);
-    this._input.addEventListener('focus', this._boundDelegateEvent);
-    this._input.addEventListener('blur', this._boundDelegateEvent);
+    this._input.removeEventListener('focus', this._boundDelegateEvent);
+    this._input.removeEventListener('blur', this._boundDelegateEvent);
   }
 
   _setLabel(value) {
-    if (typeof this._label.textContent !== 'undefined') {
-      this._label.textContent = value;
+    if (typeof this._helper.textContent !== 'undefined') {
+      this._helper.textContent = value;
     }
     else {
-      this._label.innerText = value;
+      this._helper.innerText = value;
     }
   }
 
   _updateLabel() {
-    this._setLabel(this.hasAttribute('label') ? this.getAttribute('label') : '');
+    this._setLabel(this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : '');
   }
 
   _updateBoundAttributes() {
@@ -154,19 +207,19 @@ class MaterialInputElement extends BaseElement {
 
   _updateLabelColor() {
     if (this.value.length > 0 && this._input === document.activeElement) {
-      this._label.style.color = '';
+      this._helper.style.color = '';
     }
     else {
-      this._label.style.color = 'rgba(0, 0, 0, 0.5)';
+      this._helper.style.color = 'rgba(0, 0, 0, 0.5)';
     }
   }
 
   _updateLabelClass() {
     if (this.value === '') {
-      this._label.classList.remove('text-input__label--active');
+      this._helper.classList.remove('text-input__label--active');
     }
     else {
-      this._label.classList.add('text-input__label--active');
+      this._helper.classList.add('text-input__label--active');
     }
   }
 
@@ -197,8 +250,8 @@ class MaterialInputElement extends BaseElement {
     return this.querySelector('input');
   }
 
-  get _label() {
-    return this.querySelector('span');
+  get _helper() {
+    return this.querySelector('._helper');
   }
 
   get value() {
@@ -210,6 +263,14 @@ class MaterialInputElement extends BaseElement {
     this._onInput();
 
     return this._input.val;
+  }
+
+  get checked() {
+    return this._input.checked;
+  }
+
+  set checked(val) {
+    this._input.checked = val;
   }
 }
 

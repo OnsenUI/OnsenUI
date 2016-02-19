@@ -21,6 +21,8 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
+import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
+import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
 import SimpleSlideNavigatorTransitionAnimator from './simple-slide-animator';
 import LiftNavigatorTransitionAnimator from './lift-animator';
 import FadeNavigatorTransitionAnimator from './fade-animator';
@@ -32,11 +34,13 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'default': platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'slide': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': LiftNavigatorTransitionAnimator,
+  'lift': platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
+  'simplelift': LiftNavigatorTransitionAnimator,
   'fade': FadeNavigatorTransitionAnimator,
+  'mdfade': MDFadeNavigatorTransitionAnimator,
   'none': NoneNavigatorTransitionAnimator
 };
 
@@ -838,7 +842,7 @@ class NavigatorElement extends BaseElement {
   }
 
   /**
-   * @method bingPageTop
+   * @method bringPageTop
    * @signature bringPageTop(item, [options])
    * @param {String|Number} item
    *   [en]Page URL or index of an existing page in navigator's stack.[/en]

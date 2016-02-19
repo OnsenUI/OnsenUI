@@ -20,7 +20,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '': 'list__item--*',
+  '.list__item': 'list__item--*',
   '.list__item__left': 'list__item--*__left',
   '.list__item__center': 'list__item--*__center',
   '.list__item__right': 'list__item--*__right',
@@ -92,7 +92,6 @@ class ListItemElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
     }
   }
 
@@ -115,19 +114,31 @@ class ListItemElement extends BaseElement {
       center = this.innerHTML;
     }
 
+    let ripple = '';
+    if (this.hasAttribute('ripple')) {
+      ripple = '<ons-ripple></ons-ripple>';
+    }
+
     this.innerHTML = `
-      <div class="list__item__left left">${left || ''}</div>
-      <div class="list__item__center center">${center}</div>
-      <div class="list__item__right right">${right || ''}</div>
+      <label>
+        {ripple}
+        <div class="list__item__left left">${left || ''}</div>
+        <div class="list__item__center center">${center}</div>
+        <div class="list__item__right right">${right || ''}</div>
+      </label>
     `;
 
     this.classList.add('list__item');
+    ons._autoStyle.prepare(this);
+
+    ModifierUtil.initModifier(this, scheme);
+
     this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
     }
   }
 

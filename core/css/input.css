@@ -1,13 +1,13 @@
-ons-input {
+ons-input input, ons-input > label {
+  width: inherit;
+}
+
+ons-input .text-input__container {
   display: inline-block;
   position: relative;
 }
 
-ons-input > input {
-  width: 100%;
-}
-
-ons-input > .text-input--material__label {
+ons-input .text-input--material__label {
   position: absolute;
   left: 0px;
   top: 2px;
@@ -17,11 +17,11 @@ ons-input > .text-input--material__label {
   pointer-events: none;
 }
 
-ons-input > .text-input__label:not(.text-input--material__label) {
+ons-input .text-input__label:not(.text-input--material__label) {
   display: none;
 }
 
-ons-input > .text-input__label--active {
+ons-input .text-input__label--active {
   transform: translate3d(0, -75%, 0) scale(0.75);
   -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
   transform-origin: left top;
@@ -30,11 +30,23 @@ ons-input > .text-input__label--active {
   -webkit-transition: transform 0.1s ease-in, color 0.1s ease-in;
 }
 
-ons-input:not([float]) > .text-input__label--active {
+ons-input:not([float]) .text-input__label--active {
   display: none;
 }
 
 ons-input[disabled] {
   opacity: 0.5;
   pointer-events: none;
+}
+
+ons-input input.text-input--material::-webkit-input-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material::-moz-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material:-ms-input-placeholder {
+  color: transparent;
 }

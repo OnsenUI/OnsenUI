@@ -151,4 +151,13 @@ describe('OnsBackButtonElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-back-button');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+  });
 });

@@ -93,8 +93,6 @@ class PullHookElement extends BaseElement {
       this._scrollElement = this.parentElement;
     }
 
-    this._scrollElement = this.hasAttribute('_compiled') ? this.parentElement : this._createScrollElement();
-
     this._pageElement = this._scrollElement.parentElement;
 
     if (!this._pageElement.classList.contains('page__content') && !this._pageElement.classList.contains('ons-scroller__content')) {

@@ -189,8 +189,12 @@ class SwitchElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('switch');
+
     this.appendChild(template.cloneNode(true));
+
     this.setAttribute('_compiled', '');
   }
 
@@ -250,7 +254,7 @@ class SwitchElement extends BaseElement {
     var position = Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
     this._handle.style.left = position + 'px';
     this.checked = position >= (l[0] + l[1]) / 2;
-  };
+  }
 
   _onRelease(e) {
     this.removeEventListener('drag', this._onDrag);

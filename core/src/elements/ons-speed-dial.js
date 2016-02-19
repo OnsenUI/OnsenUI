@@ -88,7 +88,6 @@ class SpeedDialElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this.classList.add('speed__dial');
 
@@ -102,7 +101,6 @@ class SpeedDialElement extends BaseElement {
       if (this.hasAttribute('disabled')) {
         this.setDisabled(true);
       }
-      this.setAttribute('_compiled', '');
     }
 
     this._shown = true;
@@ -122,6 +120,10 @@ class SpeedDialElement extends BaseElement {
     });
 
     this.insertBefore(content, this.firstChild);
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

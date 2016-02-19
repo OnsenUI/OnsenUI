@@ -225,9 +225,6 @@ class AlertDialogElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -243,6 +240,8 @@ class AlertDialogElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const style = this.getAttribute('style');
 
     this.style.display = 'none';
@@ -268,6 +267,10 @@ class AlertDialogElement extends BaseElement {
     if (this.getAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

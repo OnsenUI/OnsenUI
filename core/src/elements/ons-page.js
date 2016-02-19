@@ -119,9 +119,6 @@ class PageElement extends BaseElement {
 
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._isShown = false;
@@ -293,6 +290,8 @@ class PageElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const background = document.createElement('div');
     background.classList.add('page__background');
 
@@ -313,6 +312,10 @@ class PageElement extends BaseElement {
     fragment.appendChild(content);
 
     this.appendChild(fragment);
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _registerExtraElement(element) {

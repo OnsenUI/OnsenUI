@@ -41,7 +41,6 @@ describe('OnsSpeedDialItemElement', () => {
       expect(e.stopPropagation).to.have.been.called.once;
     });
   });
-});
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
@@ -52,3 +51,14 @@ describe('OnsSpeedDialItemElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-speed-dial-item');
+      expect(e.hasAttribute('ripple')).to.be.true;
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+  });
+});

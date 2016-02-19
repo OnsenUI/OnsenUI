@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -67,9 +68,19 @@ class ToolbarButtonElement extends BaseElement {
    */
 
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
+  }
+
+  _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('toolbar-button');
 
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
