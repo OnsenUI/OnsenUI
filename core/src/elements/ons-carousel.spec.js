@@ -282,6 +282,31 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#setCentered()', () => {
+    it('can set the \'centered\' attribute', () => {
+      expect(carousel.hasAttribute('centered')).to.be.false;
+      carousel.setCentered(true);
+      expect(carousel.hasAttribute('centered')).to.be.true;
+    });
+
+    it('can remove the \'centered\' attribute', () => {
+      carousel.setAttribute('centered', '');
+      carousel.setCentered(false);
+      expect(carousel.hasAttribute('centered')).to.be.false;
+    });
+  });
+
+  describe('#isCentered()', () => {
+    it('returns \'true\' if \'centered\' attribute exists', () => {
+      expect(carousel.isCentered()).to.be.false;
+    });
+
+    it('returns \'false\' if \'centered\' attribute does not exists', () => {
+      carousel.setAttribute('centered', '');
+      expect(carousel.isCentered()).to.be.true;
+    });
+  });
+
   describe('#_isEnabledChangeEvent()', () => {
     it('should be true if auto scroll is enabled', () => {
       carousel.setAutoScrollEnabled(true);

@@ -45,23 +45,39 @@ const VerticalModeTrait = {
     return 'translate3d(0px, ' + -scroll + 'px, 0px)';
   },
 
+  _updateDimensionData: function(){
+    this._style = window.getComputedStyle(this);
+    this._dimensions = this.getBoundingClientRect();
+  },
+
+  _updateOffset: function(){
+    if (this.isCentered()) {
+      const height = (this._dimensions.height || 0) - parseInt(this._style.paddingTop, 10) - parseInt(this._style.paddingBottom, 10);
+      this._offset = -(height - this._getCarouselItemSize()) / 2;
+    }
+  },
+
   _layoutCarouselItems: function() {
     const children = this._getCarouselItemElements();
 
     const sizeAttr = this._getCarouselItemSizeAttr();
     const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-    const computedStyle = window.getComputedStyle(this);
-    const totalWidth = this.getBoundingClientRect().width || 0;
-    const finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
+    const width = (this._dimensions.width || 0) - parseInt(this._style.paddingLeft, 10) - parseInt(this._style.paddingRight, 10);
 
     for (let i = 0; i < children.length; i++) {
       children[i].style.position = 'absolute';
       children[i].style.height = sizeAttr;
-      children[i].style.width = finalWidth + 'px';
+      children[i].style.width = width + 'px';
       children[i].style.visibility = 'visible';
       children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
     }
+  },
+
+  _setup: function(){
+    this._updateDimensionData();
+    this._updateOffset();
+    this._layoutCarouselItems();
   }
 };
 
@@ -87,23 +103,39 @@ const HorizontalModeTrait = {
     return 'translate3d(' + -scroll + 'px, 0px, 0px)';
   },
 
+  _updateDimensionData: function(){
+    this._style = window.getComputedStyle(this);
+    this._dimensions = this.getBoundingClientRect();
+  },
+
+  _updateOffset: function(){
+    if (this.isCentered()) {
+      const width = (this._dimensions.width || 0) - parseInt(this._style.paddingLeft, 10) - parseInt(this._style.paddingRight, 10);
+      this._offset = -(width - this._getCarouselItemSize()) / 2;
+    }
+  },
+
   _layoutCarouselItems: function() {
     const children = this._getCarouselItemElements();
 
     const sizeAttr = this._getCarouselItemSizeAttr();
     const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-    const computedStyle = window.getComputedStyle(this);
-    const totalHeight = this.getBoundingClientRect().height || 0;
-    const finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
+    const height = (this._dimensions.height || 0) - parseInt(this._style.paddingTop, 10) - parseInt(this._style.paddingBottom, 10);
 
     for (let i = 0; i < children.length; i++) {
       children[i].style.position = 'absolute';
-      children[i].style.height = finalHeight + 'px';
+      children[i].style.height = height + 'px';
       children[i].style.width = sizeAttr;
       children[i].style.visibility = 'visible';
       children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
     }
+  },
+
+  _setup: function(){
+    this._updateDimensionData();
+    this._updateOffset();
+    this._layoutCarouselItems();
   }
 };
 
@@ -206,6 +238,13 @@ class CarouselElement extends BaseElement {
    */
 
   /**
+   * @attribute centered
+   * @description
+   *   [en]If this attribute is set the carousel then the selected item will be in the center of the carousel instead of the beginning. Useful only when the items are smaller than the carousel. [/en]
+   *   [ja]この属性がある時、選んでいるons-carousel-itemはカルーセルの真ん中へ行きます。項目がカルーセルよりも小さい場合にのみ、これは便利です。[/ja]
+   */
+
+  /**
    * @attribute item-width
    * @type {String}
    * @description
@@ -270,6 +309,7 @@ class CarouselElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
     this._doorLock = new DoorLock();
     this._scroll = 0;
+    this._offset = 0;
     this._lastActiveIndex = 0;
 
     this._boundOnDrag = this._onDrag.bind(this);
@@ -278,7 +318,7 @@ class CarouselElement extends BaseElement {
 
     this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
-    this._layoutCarouselItems();
+    this._setup();
     this._setupInitialIndex();
 
     this._saveLastState();
@@ -361,7 +401,7 @@ class CarouselElement extends BaseElement {
   }
 
   _setupInitialIndex() {
-    this._scroll = this._getCarouselItemSize() * this._getInitialIndex();
+    this._scroll = (this._offset || 0) + this._getCarouselItemSize() * this._getInitialIndex();
     this._lastActiveIndex = this._getInitialIndex();
     this._scrollTo(this._scroll);
   }
@@ -475,7 +515,8 @@ class CarouselElement extends BaseElement {
     );
 
     index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
-    const scroll = this._getCarouselItemSize() * index;
+    const scroll = (this._offset || 0) + this._getCarouselItemSize() * index;
+    console.log('s2', scroll);
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
@@ -497,7 +538,7 @@ class CarouselElement extends BaseElement {
    *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
    */
   getActiveCarouselItemIndex() {
-    const scroll = this._scroll;
+    const scroll = this._scroll - (this._offset || 0);
     const count = this.getCarouselItemCount();
     const size = this._getCarouselItemSize();
 
@@ -665,6 +706,38 @@ class CarouselElement extends BaseElement {
   }
 
   /**
+   * @method setCentered
+   * @signature setCentered(centered)
+   * @param {Boolean} centered
+   *   [en]If true the carousel will be centered.[/en]
+   *   [ja]centeredできるかどうかを指定します。[/ja]
+   * @description
+   *   [en]Set whether the carousel is centered or not.[/en]
+   *   [ja]centered属性があるかどうかを設定します。[/ja]
+   */
+  setCentered(centered) {
+    if (centered) {
+      this.setAttribute('centered', '');
+    } else {
+      this.removeAttribute('centered');
+    }
+  }
+
+  /**
+   * @method isCentered
+   * @signature isCentered()
+   * @return {Boolean}
+   *   [en]Whether the carousel is centered or not.[/en]
+   *   [ja]centeredできればtrueを返します。[/ja]
+   * @description
+   *   [en]Returns whether the carousel is centered or not.[/en]
+   *   [ja]centered属性があるかどうかを返します。[/ja]
+   */
+  isCentered() {
+    return this.hasAttribute('centered');
+  }
+
+  /**
    * @return {Boolean}
    */
   _isEnabledChangeEvent() {
@@ -810,44 +883,44 @@ class CarouselElement extends BaseElement {
   _normalizeScrollPosition(scroll) {
     const max = this._calculateMaxScroll();
 
-    if (this.isAutoScrollEnabled()) {
-      let arr = [];
-      const size = this._getCarouselItemSize();
-      const nbrOfItems = this.getCarouselItemCount();
-
-      for (let i = 0; i < nbrOfItems; i++) {
-        if (max >= i * size) {
-          arr.push(i * size);
-        }
-      }
-      arr.push(max);
-
-      arr.sort(function(left, right) {
-        left = Math.abs(left - scroll);
-        right = Math.abs(right - scroll);
-
-        return left - right;
-      });
-
-      arr = arr.filter(function(item, pos) {
-        return !pos || item != arr[pos - 1];
-      });
-
-      const lastScroll = this._lastActiveIndex * size;
-      const scrollRatio = Math.abs(scroll - lastScroll) / size;
-
-      if (scrollRatio <= this.getAutoScrollRatio()) {
-        return lastScroll;
-      } else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
-        if (arr[0] === lastScroll && arr.length > 1) {
-          return arr[1];
-        }
-      }
-
-      return arr[0];
-    } else {
+    if (!this.isAutoScrollEnabled()) {
       return Math.max(0, Math.min(max, scroll));
     }
+    let arr = [];
+    const size = this._getCarouselItemSize();
+    const nbrOfItems = this.getCarouselItemCount();
+
+    for (let i = 0; i < nbrOfItems; i++) {
+      if (i * size + this._offset < max) {
+        arr.push(i * size + this._offset);
+      }
+    }
+    arr.push(max);
+
+    arr.sort(function(left, right) {
+      left = Math.abs(left - scroll);
+      right = Math.abs(right - scroll);
+
+      return left - right;
+    });
+
+    arr = arr.filter(function(item, pos) {
+      return !pos || item != arr[pos - 1];
+    });
+
+    const lastScroll = this._lastActiveIndex * size + this._offset;
+    const scrollRatio = Math.abs(scroll - lastScroll) / size;
+    let result = arr[0];
+
+    if (scrollRatio <= this.getAutoScrollRatio()) {
+      result = lastScroll;
+    } else if (scrollRatio < 1.0) {
+      if (arr[0] === lastScroll && arr.length > 1) {
+        result = arr[1];
+      }
+    }
+
+    return Math.max(0, Math.min(max, result));
   }
 
   /**
@@ -995,10 +1068,10 @@ class CarouselElement extends BaseElement {
     }
 
     this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
-    this._layoutCarouselItems();
+    this._setup();
 
     if (this._lastState && this._lastState.width > 0) {
-      let scroll = this._scroll;
+      let scroll = this._scroll;// - this._offset;
 
       if (this._isOverScroll(scroll)) {
         this._scrollToKillOverScroll();
@@ -1049,7 +1122,7 @@ class CarouselElement extends BaseElement {
   attachedCallback() {
     this._prepareEventListeners();
 
-    this._layoutCarouselItems();
+    this._setup();
     this._setupInitialIndex();
 
     this._saveLastState();
