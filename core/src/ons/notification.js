@@ -214,7 +214,10 @@ notification._createAlertDialog = function(title, message,
   return result.promise;
 };
 
-notification._alertOriginal = function(options) {
+notification._alertOriginal = function(message, options = {}) {
+
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var defaults = {
     buttonLabel: 'OK',
     animation: 'default',

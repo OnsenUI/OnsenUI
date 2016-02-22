@@ -15,7 +15,11 @@ limitations under the License.
 
 */
 
-ons.notification.alert = function(options) {
+ons.notification.alert = function(message, options) {
+  if (!options) {
+    options = message;
+  }
+
   var originalCompile = options.compile || function(element) {
     return element;
   };
@@ -24,7 +28,7 @@ ons.notification.alert = function(options) {
     ons.compile(originalCompile(element));
   };
 
-  return ons.notification._alertOriginal(options);
+  return ons.notification._alertOriginal(message, options);
 };
 
 ons.notification.confirm = function(options) {
