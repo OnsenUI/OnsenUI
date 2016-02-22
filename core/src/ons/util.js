@@ -128,7 +128,7 @@ util.hasAnyComponentAsParent = (element) => {
 util.propagateAction = (element, action) => {
   for (let i = 0; i < element.childNodes.length; i++) {
     let child = element.childNodes[i];
-    if (child[action]) {
+    if (child[action] instanceof Function) {
       child[action]();
     } else {
       util.propagateAction(child, action);

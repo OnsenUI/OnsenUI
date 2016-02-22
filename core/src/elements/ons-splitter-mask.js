@@ -26,8 +26,8 @@ class SplitterMaskElement extends BaseElement {
   _onClick(event) {
     if (this.parentElement && this.parentElement.nodeName.toLowerCase() === 'ons-splitter') {
       // close side menus
-      this.parentElement.closeRight();
-      this.parentElement.closeLeft();
+      this.parentElement.closeRight().catch(() => {});
+      this.parentElement.closeLeft().catch(() => {});
     }
     event.stopPropagation();
   }
