@@ -114,6 +114,8 @@ class ListItemElement extends BaseElement {
       center = this.innerHTML;
     }
 
+    ons._autoStyle.prepare(this);
+
     let ripple = '';
     if (this.hasAttribute('ripple')) {
       ripple = '<ons-ripple></ons-ripple>';
@@ -127,7 +129,6 @@ class ListItemElement extends BaseElement {
     `;
 
     this.classList.add('list__item');
-    ons._autoStyle.prepare(this);
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -136,7 +137,7 @@ class ListItemElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
