@@ -22,6 +22,7 @@ v2.0.0-beta.7
  * ons-switch: Switch is now draggable.
  * core: Use a global gesture detector to improve performance.
  * ons-splitter-side: Fixed [#1222](https://github.com/OnsenUI/OnsenUI/issues/1222).
+ * ons.notification: Closes [#1127](https://github.com/OnsenUI/OnsenUI/issues/1127).
 
 v2.0.0-beta.6
 ----
