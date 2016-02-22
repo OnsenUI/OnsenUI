@@ -120,12 +120,10 @@ class ListItemElement extends BaseElement {
     }
 
     this.innerHTML = `
-      <label>
-        ${ripple}
-        <div class="list__item__left left">${left || ''}</div>
-        <div class="list__item__center center">${center}</div>
-        <div class="list__item__right right">${right || ''}</div>
-      </label>
+      ${ripple}
+      <div class="list__item__left left">${left || ''}</div>
+      <div class="list__item__center center">${center}</div>
+      <div class="list__item__right right">${right || ''}</div>
     `;
 
     this.classList.add('list__item');
