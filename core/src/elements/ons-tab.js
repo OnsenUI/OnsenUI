@@ -143,20 +143,6 @@ class TabElement extends BaseElement {
    *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  /**
-   * @attribute persistent
-   * @description
-   *   [en]
-   *     Set to make the tab content persistent.
-   *     If this attribute it set the DOM will not be destroyed when navigating to another tab.
-   *   [/en]
-   *   [ja]
-   *     このタブで読み込んだページを永続化します。
-   *     この属性があるとき、別のタブのページに切り替えても、
-   *     読み込んだページのDOM要素は破棄されずに単に非表示になります。
-   *   [/ja]
-   */
-
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
@@ -332,19 +318,19 @@ class TabElement extends BaseElement {
       const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        tabbar.setActiveTab(tabIndex, {animation: 'none'});
+        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
       });
     } else {
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        if (!this._pageElement) {
+        setImmediate(() =>
           this._createPageElement(this.getAttribute('page'), pageElement => {
             OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
               this._pageElement = pageElement;
               this._pageElement.style.display = 'none';
               tabbar._contentElement.appendChild(this._pageElement);
             });
-          });
-        }
+          })
+        );
       });
     }
 
