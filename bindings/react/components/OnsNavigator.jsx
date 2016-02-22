@@ -16,9 +16,13 @@ var OnsNavigator = React.createClass({
     window.OnsNavigatorElement.rewritables.link = 
       function(navigatorElement, target, options, callback) {
         if (this.init) {
+          console.log('init');
           this.init = false;
           node.firstChild.innerHTML = node.firstChild._initialHTML;
-        } 
+          console.log('html');
+          console.log(node.firstChild.innerHTML);
+        }  
+
         lastLink(navigatorElement, target, options, callback);
       }.bind(this);
 

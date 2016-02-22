@@ -1,7 +1,10 @@
+const util = window.ons._util;
+
 var OnsNavigator = React.createClass({
   displayName: 'OnsNavigator',
 
   componentDidMount: function () {
+    this.counter = 0;
     var node = this.node = ReactDOM.findDOMNode(this);
     var page = this.props.children;
 
@@ -13,11 +16,14 @@ var OnsNavigator = React.createClass({
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback) {
-      console.log('link');
       if (this.init) {
+        console.log('init');
         this.init = false;
         node.firstChild.innerHTML = node.firstChild._initialHTML;
+        console.log('html');
+        console.log(node.firstChild.innerHTML);
       }
+
       lastLink(navigatorElement, target, options, callback);
     }).bind(this);
 
@@ -53,7 +59,7 @@ var OnsNavigator = React.createClass({
 
     var node = this.node;
 
-    this.node.firstChild.resetToPage('', options).then(function () {
+    this.node.firstChild.resetToPage('', options).then((function () {
       var newNode = node.firstChild.children[0];
       for (var i = 0; i < children.length; i++) {
         children[i].style.display = i == 0 ? 'block' : 'none';
@@ -62,13 +68,13 @@ var OnsNavigator = React.createClass({
 
       this.myDom = ReactDOM.render(React.createElement(
         'ons-navigator',
-        null,
+        this.props,
         page
       ), node);
 
       node.firstChild.removeChild(newNode);
       node.firstChild._pages[0].element = node.firstChild.children[0];
-    });
+    }).bind(this));
   },
 
   popPage: function (options) {
@@ -76,29 +82,31 @@ var OnsNavigator = React.createClass({
     var lastChild = reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
     navNode.popPage(options).then((function () {
-      console.log(navNode.children[0]);
-      console.log(navNode.children[1]);
-      setTimeout((function () {
-        console.log('pop page');
-        this.elements.pop();
-        var help = [];
 
-        lastChild.style.display = 'none';
-        // TODO insert at the right position
-        dfgfdgfddgf;
+      console.log('pop');
+
+      this.elements.pop();
+      var help = [];
+
+      lastChild.style.display = 'none';
+
+      // this can happen in animation, that there is some div
+      if (util.lastChild(navNode).nodeName == 'ONS-PAGE') {
         navNode.appendChild(lastChild);
+      } else {
+        navNode.insertBefore(lastChild, util.lastChild(navNode));
+      }
 
-        for (var i = 0; i < this.elements.length; i++) {
-          help.push(this.elements[i].elem);
-        }
+      for (var i = 0; i < this.elements.length; i++) {
+        help.push(this.elements[i].elem);
+      }
 
-        var node = ReactDOM.findDOMNode(this);
-        var node2 = ReactDOM.render(React.createElement(
-          'ons-navigator',
-          null,
-          help
-        ), node);
-      }).bind(this), 100);
+      var node = ReactDOM.findDOMNode(this);
+      var node2 = ReactDOM.render(React.createElement(
+        'ons-navigator',
+        this.props,
+        help
+      ), node);
     }).bind(this));
   },
   render: function () {
@@ -120,7 +128,7 @@ var OnsNavigator = React.createClass({
 
     ReactDOM.render(React.createElement(
       'ons-navigator',
-      null,
+      this.props,
       help
     ), node);
   },
@@ -145,14 +153,14 @@ var OnsNavigator = React.createClass({
 
     var deleteElem = navNode.children[navNode.children.length - 1];
 
-    this.node.firstChild.replacePage('', options).then(function () {
+    this.node.firstChild.replacePage('', options).then((function () {
 
       var lastNode = navNode.children[navNode.children.length - 1];
 
       navNode.insertBefore(deleteElem, navNode.children[navNode.children.length - 1]);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        null,
+        this.props,
         help
       ), node);
 
@@ -160,19 +168,27 @@ var OnsNavigator = React.createClass({
       navNode.children[index].style.display = 'block';
       navNode._pages[index].element = node.firstChild.children[index];
       navNode.removeChild(lastNode);
-    });
+    }).bind(this));
   },
 
-  insertComponent: function (reactPage, insertPos) {
+  insertComponent: function (reactPage, insertPos, options) {
+
+    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
+
+    if (options == undefined) {
+      options = {};
+    }
+    options.pageHTML = htmlString;
+
+    this.counter++;
     var node = ReactDOM.findDOMNode(this);
+    var navNode = node.firstChild;
     insertPos = node.firstChild._normalizeIndex(insertPos);
 
-    this.insert = true;
     if (!reactUtil.rendersToOnsPage(reactPage)) {
       throw new Error("The component that react inserts needs to render to <ons-page>");
     }
 
-    var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
     this.elements.splice(insertPos, 0, { elem: reactPage });
 
     var help = [];
@@ -180,21 +196,27 @@ var OnsNavigator = React.createClass({
       help.push(this.elements[i].elem);
     }
 
+    var counter = this.counter;
+
     var elements = this.elements;
-    node.firstChild.insertPage(insertPos, '', { pageHTML: htmlString }).then((function () {
-      this.insert = false;
+    node.firstChild.insertPage(insertPos, '', options).then((function () {
+
+      // delete the node again
+      navNode.removeChild(navNode.children[insertPos]);
+      // console.log(navNode._pages);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        null,
+        this.props,
         help
       ), node);
 
-      for (var i = 0; i < elements.length - 1; i++) {
-        var index = i;
-        if (index >= insertPos + 1) index++;
-        node.firstChild._pages[i].element = node.firstChild.children[index];
+      for (var i = 0; i < navNode.children.length - 1; i++) {
+        navNode.children[i].style.display = 'none';
       }
-      node.firstChild.removeChild(node.firstChild.children[insertPos + 1]);
+
+      for (var i = 0; i < navNode.children.length; i++) {
+        navNode._pages[i].element = navNode.children[i];
+      }
     }).bind(this));
   },
 
@@ -208,13 +230,13 @@ var OnsNavigator = React.createClass({
     if (options == undefined) {
       options = {};
     }
-
     options.pageHTML = htmlString;
+
     this.elements.push({ elem: reactPage });
     var elements = this.elements;
 
     var node = ReactDOM.findDOMNode(this);
-    node.firstChild._pushPage(null, options).then(function () {
+    node.firstChild._pushPage(options).then((function () {
       var help = [];
       for (var i = 0; i < elements.length; i++) {
         help.push(elements[i].elem);
@@ -222,13 +244,13 @@ var OnsNavigator = React.createClass({
 
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        null,
+        this.props,
         help
       ), node);
 
       node2._pages[elements.length - 1].element = node2.children[elements.length - 1];
       node2.removeChild(node2.children[elements.length]);
-    });
+    }).bind(this));
   }
 });
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -265,30 +287,44 @@ var OnsPage = React.createClass({
     );
   }
 });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var OnsTabbar = React.createClass({
   displayName: 'OnsTabbar',
 
   componentDidMount: function () {
+    console.log('component did mount');
+
     var lastLink = window.OnsTabbarElement.rewritables.link;
     window.OnsTabbarElement.rewritables.link = (function (el, target, options, callback) {
       lastLink(el, target, options, callback);
     }).bind(this);
 
-    internal.internal.getPageHTMLAsync(page);
-  },
-  render: function () {
+    var node = this.node = ReactDOM.findDOMNode(this);
+
     var children = [];
     this.childIndex = [];
 
+    var newModifier = this.props.modifier;
+
+    var activeIndex = -1;
+    var index = -1;
+
     React.Children.forEach(this.props.children, (function (child) {
-      // TODO CHECK FOR onsTab
+      index++;
+      child = React.cloneElement(child, { modifier: newModifier });
+
       counter = -1;
+
       var myChildren = React.Children.map(child.props.children, function (child2) {
         counter++;
         return React.cloneElement(child2, { 'data-ons-react': counter });
       });
 
       this.childIndex.push(child.props.page);
+      if (child.props.active) {
+        activeIndex = index;
+      }
 
       var mychild = React.cloneElement(child, {}, myChildren);
       var renderString = ReactDOMServer.renderToStaticMarkup(mychild);
@@ -301,23 +337,64 @@ var OnsTabbar = React.createClass({
       children.push(newElement);
     }).bind(this));
 
-    var element = this.props.mypage;
+    var newNode = React.cloneElement(this, {}, null);
 
-    console.log(element);
-
-    return React.createElement(
+    var renderString = ReactDOMServer.renderToStaticMarkup(React.createElement(
       'ons-tabbar',
-      { 'var': 'tabbar', animation: 'fade', _compiled: 'true', 'class': 'ng-scope' },
+      newNode.props,
+      children
+    ));
+
+    var el = document.createElement('div');
+    el.innerHTML = renderString;
+
+    var contentClass = el.firstChild.children[0].className;
+    var barClass = el.firstChild.children[1].className;
+
+    ReactDOM.render(React.createElement(
+      'ons-tabbar',
+      _extends({}, newNode.props, { _compiled: 'true' }),
       React.createElement(
         'div',
-        { className: 'ons-tab-bar__content tab-bar__content' },
-        element
+        { 'no-status-bar-fill': true, className: contentClass },
+        this.props.pages
       ),
       React.createElement(
         'div',
-        { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' },
+        { className: barClass },
         children
       )
+    ), node);
+
+    for (var i = 0; i < node.firstChild.children[1].children.length; i++) {
+      node.firstChild.children[1].children[i]._pageElement = node.firstChild.firstChild.children[i];
+    }
+
+    for (var i = 0; i < node.firstChild.firstChild.children.length; i++) {
+      node.firstChild.firstChild.children[i].style.display = 'none';
+    }
+
+    node.firstChild.setActiveTab(activeIndex);
+  },
+
+  // add this hook
+  componentWillReceiveProps: function (newProps) {
+    // its important to pass the new props in
+    console.log('will receive props');
+    // this.renderDialogContent(newProps);
+  },
+
+  shouldComponentUpdate: function () {
+    console.log('rerender');
+    return false;
+  },
+
+  render: function () {
+    console.log('render tab');
+    return React.createElement(
+      'div',
+      null,
+      ' This is a nice text'
     );
   }
 });

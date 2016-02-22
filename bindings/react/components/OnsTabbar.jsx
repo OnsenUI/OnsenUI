@@ -1,5 +1,6 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
+    console.log('component did mount');
 
     var lastLink = window.OnsTabbarElement.rewritables.link;
     window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
@@ -82,9 +83,24 @@ var children= [];
 
     node.firstChild.setActiveTab(activeIndex);
   },
-  render: function() {
 
-    return <div> </div>
+
+  // add this hook
+  componentWillReceiveProps: function(newProps) {
+    // its important to pass the new props in
+    console.log('will receive props');
+    // this.renderDialogContent(newProps);
+  },
+
+  shouldComponentUpdate: function() {
+    console.log('rerender');
+    return false;
+  },
+
+
+  render: function() {
+    console.log('render tab');
+    return <div> This is a nice text</div>
     
   }, 
 });

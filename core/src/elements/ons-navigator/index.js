@@ -819,6 +819,9 @@ class NavigatorElement extends BaseElement {
       rewritables.link(this, element, options, element => {
         CustomElements.upgrade(element);
 
+        console.log('are we here?');
+        console.log(this._pages.length);
+
         setTimeout(() => {
           if (this._pages.length > 1) {
             const leavePage = this._pages.slice(-2)[0];
