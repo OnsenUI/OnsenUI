@@ -4,6 +4,7 @@ var OnsPage = React.createClass({
     var otherChildren = [];
 
     React.Children.forEach(this.props.children, function(child) {
+      if (child == null) return;
       if (reactUtil.rendersToOnsToolbar(child)) {
         toolbar = child;
       } else {

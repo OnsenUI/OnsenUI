@@ -1,22 +1,53 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
-    console.log('component did mount');
 
-    var lastLink = window.OnsTabbarElement.rewritables.link;
-    window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
-      lastLink(el, target, options, callback);
-    }.bind(this);
-
+    // var lastLink = window.OnsTabbarElement.rewritables.link;
+    // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
+    //   lastLink(el, target, options, callback);
+    // }.bind(this);
+    //
+    console.log('onsbar mount');
 
     var node = this.node = ReactDOM.findDOMNode(this);
 
-var children= [];
+
+    for (var i=0; i < node.children[1].children.length; i++) {
+      node.children[1].children[i]._pageElement = 
+              node.firstChild.children[i];
+    }
+
+    for (var i =0; i < node.firstChild.children.length; i++) {
+      node.firstChild.children[i].style.display = 'none';
+    }
+
+    node.setActiveTab(this.activeIndex);
+  },
+
+
+  // add this hook
+  componentWillReceiveProps: function(newProps) {
+    // its important to pass the new props in
+    console.log('will receive props');
+    // this.renderDialogContent(newProps);
+  },
+
+  shouldComponentUpdate: function() {
+    console.log('rerender');
+    return false;
+  },
+
+
+  render: function() {
+
+    var children = [];
     this.childIndex = [];
 
 
     var newModifier = this.props.modifier;
 
-    var activeIndex = -1;
+    var self = this;
+
+    self.activeIndex = -1;
     var index = -1;
 
 
@@ -33,7 +64,7 @@ var children= [];
 
       this.childIndex.push(child.props.page);
       if (child.props.active) {
-        activeIndex = index;
+        self.activeIndex = index;
       }
 
       var mychild=  React.cloneElement(child, {}, myChildren);
@@ -61,7 +92,9 @@ var children= [];
     var contentClass = el.firstChild.children[0].className;
     var barClass = el.firstChild.children[1].className;
 
-    ReactDOM.render(
+    this.activeIndex = self.activeIndex;
+
+    return (
       <ons-tabbar {...newNode.props} _compiled="true">
         <div no-status-bar-fill className={contentClass}> 
           {this.props.pages}
@@ -69,39 +102,8 @@ var children= [];
         <div className={barClass}>
           {children} 
         </div>
-      </ons-tabbar>, node
+      </ons-tabbar>
     );
-
-    for (var i=0; i < node.firstChild.children[1].children.length; i++) {
-      node.firstChild.children[1].children[i]._pageElement = 
-              node.firstChild.firstChild.children[i];
-    }
-
-    for (var i =0; i < node.firstChild.firstChild.children.length; i++) {
-      node.firstChild.firstChild.children[i].style.display = 'none';
-    }
-
-    node.firstChild.setActiveTab(activeIndex);
-  },
-
-
-  // add this hook
-  componentWillReceiveProps: function(newProps) {
-    // its important to pass the new props in
-    console.log('will receive props');
-    // this.renderDialogContent(newProps);
-  },
-
-  shouldComponentUpdate: function() {
-    console.log('rerender');
-    return false;
-  },
-
-
-  render: function() {
-    console.log('render tab');
-    return <div> This is a nice text</div>
-    
   }, 
 });
 
@@ -146,7 +148,53 @@ var MyElem = React.createClass({
     }
   },
   render: function() {
-    return React.createElement(this.props.domNode.nodeName, {'_compiled': ''}, this.props.children);
+
+    var obj = {'_compiled': 'true'};
+
+    var elem = this.props.domNode;
+    for (var i = 0; i < elem.attributes.length; i++) {
+      var attrib = elem.attributes[i];
+
+      if (attrib.name == 'class') {
+        // obj.class = attrib.value;
+        obj.className = attrib.value;
+      } else if (attrib.name == 'label') {
+        obj.label = attrib.value;
+      } else if (attrib.name == 'icon') {
+        obj.icon = attrib.value;
+      } else if (attrib.name == 'style') {
+        var style = attrib.value;
+
+        var parts = style.split(";")
+        var styleObj = {}
+        for (var i=0;i<parts.length;i++) {
+          var subParts = parts[i].split(':');
+          subParts[0] = subParts[0].trim();
+
+          if (subParts[0].length == 0) continue;
+
+          if (subParts[0] == 'display') {
+            styleObj.display = subParts[1];
+          }  else if (subParts[0] == 'font-size') {
+            styleObj.fontSize = subParts[1];
+          } else if (subParts[0] == 'line-height') {
+            styleObj.lineHeight = subParts[1];
+          } else if (subParts[0] == 'vertical-align') {
+            styleObj.verticalAlign = subParts[1];
+          } else {
+            throw new Error( '.' + subParts[0] + '.');
+          }
+        }
+        obj.style = styleObj;
+      }
+    }
+
+    var str = elem.innerHTML;
+    if (!this.props.children && str.length > 0 ) {
+      return React.createElement(this.props.domNode.nodeName, obj, str);
+   } else {
+     return React.createElement(this.props.domNode.nodeName, obj, this.props.children);
+   }
   },
 });
 

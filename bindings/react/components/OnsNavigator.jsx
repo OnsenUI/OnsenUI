@@ -14,26 +14,38 @@ var OnsNavigator = React.createClass({
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = 
-      function(navigatorElement, target, options, callback) {
+      function(navigatorElement, target, options, callback, done) {
+        console.log('link');
         if (this.init) {
-          console.log('init');
           this.init = false;
-          node.firstChild.innerHTML = node.firstChild._initialHTML;
-          console.log('html');
-          console.log(node.firstChild.innerHTML);
-        }  
 
-        lastLink(navigatorElement, target, options, callback);
+          this.done = done;
+          /// console.log('init : ' + node.firstChild.innerHTML);
+          //  node.firstChild.innerHTML = node.firstChild._initialHTML;
+          //
+          // this.helpFun = function() {
+          //   var myTarget = node.firstChild.cloneNode(true);
+          //   lastLink(navigatorElement, myTarget, options, callback);
+          // }
+        }   else {
+          console.log('else');
+           lastLink(navigatorElement, target, options, callback);
+         }
       }.bind(this);
 
     this.elements = [];
     this.elements.push({elem:this.props.children});
 
     this.myDom = ReactDOM.render(
-      <ons-navigator {...this.props}>
+      <ons-navigator>
         {page}
       </ons-navigator>, node
     );
+    console.log('rendered');
+
+    console.log('calling done');
+    node.firstChild._pages[0].element = node.firstChild.children[0];
+    this.done();
   },
 
   resetToPage: function(reactPage, options) {
@@ -67,7 +79,7 @@ var OnsNavigator = React.createClass({
         }
 
         this.myDom = ReactDOM.render(
-          <ons-navigator {...this.props}  >
+          <ons-navigator  >
             {page}
           </ons-navigator>, node
         );
@@ -105,7 +117,7 @@ var OnsNavigator = React.createClass({
 
       var node = ReactDOM.findDOMNode(this);
       var node2 =ReactDOM.render(
-        <ons-navigator {...this.props} >
+        <ons-navigator >
           {help}
         </ons-navigator>, 
         node
@@ -132,7 +144,7 @@ var OnsNavigator = React.createClass({
     var node = ReactDOM.findDOMNode(this);
 
     ReactDOM.render(
-      <ons-navigator {...this.props}>
+      <ons-navigator >
         {help}
       </ons-navigator>, 
       node
@@ -170,7 +182,7 @@ var OnsNavigator = React.createClass({
         navNode.children[navNode.children.length -1]
       );
       var node2 =ReactDOM.render(
-        <ons-navigator {...this.props}>
+        <ons-navigator >
           {help}
         </ons-navigator>, 
         node
@@ -222,7 +234,7 @@ var OnsNavigator = React.createClass({
       navNode.removeChild(navNode.children[insertPos]);
       // console.log(navNode._pages);
       var node2 =ReactDOM.render(
-        <ons-navigator {...this.props}>
+        <ons-navigator >
           {help}
         </ons-navigator>, 
         node
@@ -262,7 +274,7 @@ var OnsNavigator = React.createClass({
       }
 
       var node2 =ReactDOM.render(
-        <ons-navigator {...this.props}>
+        <ons-navigator >
           {help}
         </ons-navigator>, 
         node

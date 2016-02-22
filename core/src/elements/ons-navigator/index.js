@@ -212,8 +212,9 @@ class NavigatorElement extends BaseElement {
     this._isPushing = this._isPopping = false;
 
     this._initialHTML = this.innerHTML;
+    this._initialNode = this.firstChild.cloneNode(true);
 
-    this.innerHTML = '';
+    // this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -848,7 +849,7 @@ class NavigatorElement extends BaseElement {
             done();
           }
         }, 1000 / 60);
-      });
+      }, done);
 
     });
   }

@@ -15,16 +15,23 @@ var OnsNavigator = React.createClass({
     }
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
-    window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback) {
+    window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback, done) {
+      console.log('link');
       if (this.init) {
-        console.log('init');
         this.init = false;
-        node.firstChild.innerHTML = node.firstChild._initialHTML;
-        console.log('html');
-        console.log(node.firstChild.innerHTML);
-      }
 
-      lastLink(navigatorElement, target, options, callback);
+        this.done = done;
+        /// console.log('init : ' + node.firstChild.innerHTML);
+        //  node.firstChild.innerHTML = node.firstChild._initialHTML;
+        //
+        // this.helpFun = function() {
+        //   var myTarget = node.firstChild.cloneNode(true);
+        //   lastLink(navigatorElement, myTarget, options, callback);
+        // }
+      } else {
+          console.log('else');
+          lastLink(navigatorElement, target, options, callback);
+        }
     }).bind(this);
 
     this.elements = [];
@@ -32,9 +39,14 @@ var OnsNavigator = React.createClass({
 
     this.myDom = ReactDOM.render(React.createElement(
       'ons-navigator',
-      this.props,
+      null,
       page
     ), node);
+    console.log('rendered');
+
+    console.log('calling done');
+    node.firstChild._pages[0].element = node.firstChild.children[0];
+    this.done();
   },
 
   resetToPage: function (reactPage, options) {
@@ -68,7 +80,7 @@ var OnsNavigator = React.createClass({
 
       this.myDom = ReactDOM.render(React.createElement(
         'ons-navigator',
-        this.props,
+        null,
         page
       ), node);
 
@@ -104,7 +116,7 @@ var OnsNavigator = React.createClass({
       var node = ReactDOM.findDOMNode(this);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        this.props,
+        null,
         help
       ), node);
     }).bind(this));
@@ -128,7 +140,7 @@ var OnsNavigator = React.createClass({
 
     ReactDOM.render(React.createElement(
       'ons-navigator',
-      this.props,
+      null,
       help
     ), node);
   },
@@ -160,7 +172,7 @@ var OnsNavigator = React.createClass({
       navNode.insertBefore(deleteElem, navNode.children[navNode.children.length - 1]);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        this.props,
+        null,
         help
       ), node);
 
@@ -206,7 +218,7 @@ var OnsNavigator = React.createClass({
       // console.log(navNode._pages);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        this.props,
+        null,
         help
       ), node);
 
@@ -244,7 +256,7 @@ var OnsNavigator = React.createClass({
 
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
-        this.props,
+        null,
         help
       ), node);
 
@@ -263,6 +275,7 @@ var OnsPage = React.createClass({
     var otherChildren = [];
 
     React.Children.forEach(this.props.children, function (child) {
+      if (child == null) return;
       if (reactUtil.rendersToOnsToolbar(child)) {
         toolbar = child;
       } else {
@@ -293,21 +306,49 @@ var OnsTabbar = React.createClass({
   displayName: 'OnsTabbar',
 
   componentDidMount: function () {
-    console.log('component did mount');
 
-    var lastLink = window.OnsTabbarElement.rewritables.link;
-    window.OnsTabbarElement.rewritables.link = (function (el, target, options, callback) {
-      lastLink(el, target, options, callback);
-    }).bind(this);
+    // var lastLink = window.OnsTabbarElement.rewritables.link;
+    // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
+    //   lastLink(el, target, options, callback);
+    // }.bind(this);
+    //
+    console.log('onsbar mount');
 
     var node = this.node = ReactDOM.findDOMNode(this);
+
+    for (var i = 0; i < node.children[1].children.length; i++) {
+      node.children[1].children[i]._pageElement = node.firstChild.children[i];
+    }
+
+    for (var i = 0; i < node.firstChild.children.length; i++) {
+      node.firstChild.children[i].style.display = 'none';
+    }
+
+    node.setActiveTab(this.activeIndex);
+  },
+
+  // add this hook
+  componentWillReceiveProps: function (newProps) {
+    // its important to pass the new props in
+    console.log('will receive props');
+    // this.renderDialogContent(newProps);
+  },
+
+  shouldComponentUpdate: function () {
+    console.log('rerender');
+    return false;
+  },
+
+  render: function () {
 
     var children = [];
     this.childIndex = [];
 
     var newModifier = this.props.modifier;
 
-    var activeIndex = -1;
+    var self = this;
+
+    self.activeIndex = -1;
     var index = -1;
 
     React.Children.forEach(this.props.children, (function (child) {
@@ -323,7 +364,7 @@ var OnsTabbar = React.createClass({
 
       this.childIndex.push(child.props.page);
       if (child.props.active) {
-        activeIndex = index;
+        self.activeIndex = index;
       }
 
       var mychild = React.cloneElement(child, {}, myChildren);
@@ -351,7 +392,9 @@ var OnsTabbar = React.createClass({
     var contentClass = el.firstChild.children[0].className;
     var barClass = el.firstChild.children[1].className;
 
-    ReactDOM.render(React.createElement(
+    this.activeIndex = self.activeIndex;
+
+    return React.createElement(
       'ons-tabbar',
       _extends({}, newNode.props, { _compiled: 'true' }),
       React.createElement(
@@ -364,37 +407,6 @@ var OnsTabbar = React.createClass({
         { className: barClass },
         children
       )
-    ), node);
-
-    for (var i = 0; i < node.firstChild.children[1].children.length; i++) {
-      node.firstChild.children[1].children[i]._pageElement = node.firstChild.firstChild.children[i];
-    }
-
-    for (var i = 0; i < node.firstChild.firstChild.children.length; i++) {
-      node.firstChild.firstChild.children[i].style.display = 'none';
-    }
-
-    node.firstChild.setActiveTab(activeIndex);
-  },
-
-  // add this hook
-  componentWillReceiveProps: function (newProps) {
-    // its important to pass the new props in
-    console.log('will receive props');
-    // this.renderDialogContent(newProps);
-  },
-
-  shouldComponentUpdate: function () {
-    console.log('rerender');
-    return false;
-  },
-
-  render: function () {
-    console.log('render tab');
-    return React.createElement(
-      'div',
-      null,
-      ' This is a nice text'
     );
   }
 });
@@ -451,7 +463,53 @@ var MyElem = React.createClass({
     }
   },
   render: function () {
-    return React.createElement(this.props.domNode.nodeName, { '_compiled': '' }, this.props.children);
+
+    var obj = { '_compiled': 'true' };
+
+    var elem = this.props.domNode;
+    for (var i = 0; i < elem.attributes.length; i++) {
+      var attrib = elem.attributes[i];
+
+      if (attrib.name == 'class') {
+        // obj.class = attrib.value;
+        obj.className = attrib.value;
+      } else if (attrib.name == 'label') {
+        obj.label = attrib.value;
+      } else if (attrib.name == 'icon') {
+        obj.icon = attrib.value;
+      } else if (attrib.name == 'style') {
+        var style = attrib.value;
+
+        var parts = style.split(";");
+        var styleObj = {};
+        for (var i = 0; i < parts.length; i++) {
+          var subParts = parts[i].split(':');
+          subParts[0] = subParts[0].trim();
+
+          if (subParts[0].length == 0) continue;
+
+          if (subParts[0] == 'display') {
+            styleObj.display = subParts[1];
+          } else if (subParts[0] == 'font-size') {
+            styleObj.fontSize = subParts[1];
+          } else if (subParts[0] == 'line-height') {
+            styleObj.lineHeight = subParts[1];
+          } else if (subParts[0] == 'vertical-align') {
+            styleObj.verticalAlign = subParts[1];
+          } else {
+            throw new Error('.' + subParts[0] + '.');
+          }
+        }
+        obj.style = styleObj;
+      }
+    }
+
+    var str = elem.innerHTML;
+    if (!this.props.children && str.length > 0) {
+      return React.createElement(this.props.domNode.nodeName, obj, str);
+    } else {
+      return React.createElement(this.props.domNode.nodeName, obj, this.props.children);
+    }
   }
 });
 
