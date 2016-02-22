@@ -208,6 +208,7 @@ list__item()
   color var-list-item-color
   background-color var-list-background-color
   min-height var-list-item-min-height
+  z-index -1
 
 .list__item:first-child
   box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
@@ -703,9 +704,6 @@ list__item()
   material-font()
   border 0
 
-  +retina-query()
-    background initial
-
 .list__item--material
   border 0
   min-height 56px
@@ -714,10 +712,6 @@ list__item()
 
 .list__item--material__subtitle
   margin-top 4px
-
-.list__item--material:not(:last-child)
-  +retina-query()
-    background initial
 
 .list__item--material:first-child
   border 0
