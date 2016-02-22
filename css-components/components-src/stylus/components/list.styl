@@ -199,7 +199,6 @@ list__item()
 .list
   list()
   padding var-list-padding
-  border-top var-list-border-top
   border-bottom var-list-border-bottom
   retina-list-border()
 
@@ -210,6 +209,9 @@ list__item()
   color var-list-item-color
   background-color var-list-background-color
   min-height var-list-item-min-height
+
+.list__item:first-child
+  box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
 
 .list__item_active:active
   background-color var-list-item-active-background-color
