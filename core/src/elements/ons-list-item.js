@@ -98,7 +98,9 @@ class ListItemElement extends BaseElement {
   _compile() {
     let left, center, right;
 
-    Array.from(this.children).forEach((el) => {
+    for (let i = 0; i < this.children.length; i++) {
+      const el = this.children[i];
+
       if (el.classList.contains('left')) {
         left = el.innerHTML;
       }
@@ -108,7 +110,7 @@ class ListItemElement extends BaseElement {
       else if (el.classList.contains('right')) {
         right = el.innerHTML;
       }
-    });
+    };
 
     if (typeof center === 'undefined') {
       center = this.innerHTML;
