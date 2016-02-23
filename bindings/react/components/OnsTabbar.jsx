@@ -1,43 +1,68 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
 
-    // var lastLink = window.OnsTabbarElement.rewritables.link;
-    // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
-    //   lastLink(el, target, options, callback);
-    // }.bind(this);
-    //
-    console.log('onsbar mount');
-
-    var node = this.node = ReactDOM.findDOMNode(this);
-
-
-    for (var i=0; i < node.children[1].children.length; i++) {
-      node.children[1].children[i]._pageElement = 
-              node.firstChild.children[i];
-    }
-
-    for (var i =0; i < node.firstChild.children.length; i++) {
-      node.firstChild.children[i].style.display = 'none';
-    }
-
-    node.setActiveTab(this.activeIndex);
+     // var lastLink = window.OnsTabbarElement.rewritables.link;
+     // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
+     //   lastLink(el, target, options, callback);
+     // }.bind(this);
+     //
+     // var node = this.node = ReactDOM.findDOMNode(this);
+     //
+     // for (var i=0; i < node.children[1].children.length; i++) {
+     //   node.children[1].children[i]._pageElement = 
+     //           node.firstChild.children[i];
+     // }
+     //
+     // for (var i =0; i < node.firstChild.children.length; i++) {
+     //   node.firstChild.children[i].style.display = 'none';
+     // }
+     //
+     // node.setActiveTab(this.activeIndex);
   },
-
 
   // add this hook
   componentWillReceiveProps: function(newProps) {
     // its important to pass the new props in
-    console.log('will receive props');
     // this.renderDialogContent(newProps);
   },
 
   shouldComponentUpdate: function() {
-    console.log('rerender');
     return false;
   },
 
 
   render: function() {
+
+    var lastReady = window.OnsTabbarElement.rewritables.ready;
+    window.OnsTabbarElement.rewritables.ready = function(node, callback) {
+      for (var i=0; i < node.children[1].children.length; i++) {
+        node.children[1].children[i]._pageElement = node.firstChild.children[i];
+      }
+      
+      for (var i =0; i < node.firstChild.children.length; i++) {
+          node.firstChild.children[i].style.display = 'none';
+      }
+      lastReady(node, callback);
+    };
+
+
+    // if (!this.link) {
+    //   this.link = true;
+    //   var lastReady = window.OnsTabbarElement.rewritables.ready;
+    //   
+    //
+    //     console.log('tablength ' + node.children[1].children.length + " " + node.children[0].children.length);
+    //     console.log(node.children[1].children.length);
+    //     for (var i=0; i < node.children[1].children.length; i++) {
+    //       node.children[1].children[i]._pageElement = 
+    //         node.firstChild.children[i];
+    //     }
+    //
+    //     lastReady(node, callback);
+    //   }.bind(this);
+    // }
+    //
+
 
     var children = [];
     this.childIndex = [];
@@ -72,6 +97,7 @@ var OnsTabbar = React.createClass({
 
       var el = document.createElement('div');
       el.innerHTML = renderString;
+
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
@@ -136,16 +162,16 @@ var OnsTab = React.createClass({
 
 var MyElem = React.createClass({
   componentDidMount: function() {
-
-    var elem = this.props.domNode;
-    for (var i = 0; i < elem.attributes.length; i++) {
-      var attrib = elem.attributes[i];
-        ReactDOM.findDOMNode(this).setAttribute(attrib.name, attrib.value);
-    }
-
-    if (!this.props.children) {
-      ReactDOM.findDOMNode(this).innerHTML = elem.innerHTML;
-    }
+    //
+    // var elem = this.props.domNode;
+    // for (var i = 0; i < elem.attributes.length; i++) {
+    //   var attrib = elem.attributes[i];
+    //     ReactDOM.findDOMNode(this).setAttribute(attrib.name, attrib.value);
+    // }
+    //
+    // if (!this.props.children) {
+    //   ReactDOM.findDOMNode(this).innerHTML = elem.innerHTML;
+    // }
   },
   render: function() {
 
@@ -156,12 +182,16 @@ var MyElem = React.createClass({
       var attrib = elem.attributes[i];
 
       if (attrib.name == 'class') {
-        // obj.class = attrib.value;
         obj.className = attrib.value;
+        obj.class = attrib.value;
       } else if (attrib.name == 'label') {
         obj.label = attrib.value;
+      } else if (attrib.name == 'active') {
+        obj.active = attrib.value;
       } else if (attrib.name == 'icon') {
         obj.icon = attrib.value;
+      } else if (attrib.name == 'type') {
+        obj.type = attrib.value;
       } else if (attrib.name == 'style') {
         var style = attrib.value;
 
@@ -186,6 +216,7 @@ var MyElem = React.createClass({
           }
         }
         obj.style = styleObj;
+      } else {
       }
     }
 

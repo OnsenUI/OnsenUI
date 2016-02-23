@@ -127,7 +127,7 @@ var OnsNavigator = React.createClass({
   },
   render: function() {
     return <div />;
-  }, 
+   }, 
 
 
   componentWillReceiveProps: function(newProps) {

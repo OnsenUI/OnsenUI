@@ -9,8 +9,8 @@ var TabPage = React.createClass({
             >
             <OnsTab
               active="true"
-            icon="gear"
-            label="Settings" />
+              icon="gear"
+              label="Settings" />
           <OnsTab
             icon="star"
             label="Favorite" />

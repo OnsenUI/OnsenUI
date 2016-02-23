@@ -204,6 +204,8 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
+    console.log('tabbar created');
+
     if (!this.hasAttribute('_compiled')) {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
@@ -449,7 +451,6 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -499,6 +500,7 @@ class TabbarElement extends BaseElement {
     var needLoad = !selectedTab.isLoaded() && !options.keepPage;
 
     util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
+      console.log(tab);
       if (tab != selectedTab) {
         tab.setInactive();
       } else {
@@ -546,6 +548,8 @@ class TabbarElement extends BaseElement {
       };
 
       return new Promise(resolve => {
+
+
         selectedTab._loadPageElement(pageElement => {
           resolve(this._loadPersistentPageDOM(pageElement, params));
         }, link);
@@ -621,7 +625,10 @@ class TabbarElement extends BaseElement {
 
   detachedCallback() { }
 
-  attachedCallback() { }
+  attachedCallback() {
+    console.log('Tabbar attached');
+  
+  }
 
   _show() {
     let currentPageElement = this._getCurrentPageElement();

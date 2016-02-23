@@ -278,6 +278,7 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(callback, link) {
+    console.log('load page element');
     if (!this._pageElement) {
       this._createPageElement(this.getAttribute('page'), (element) => {
         link(element, element => {
@@ -295,6 +296,8 @@ class TabElement extends BaseElement {
    * @param {Function} callback
    */
   _createPageElement(page, callback) {
+    console.log('my-page');
+    console.log(page);
     internal.getPageHTMLAsync(page).then(html => {
       callback(util.createElement(html.trim()));
     });
@@ -312,6 +315,7 @@ class TabElement extends BaseElement {
   }
 
   attachedCallback() {
+    console.log('attach Tab');
     this._ensureElementPosition();
 
     const tabbar = this._findTabbarElement();
@@ -321,14 +325,20 @@ class TabElement extends BaseElement {
       this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
     }
 
-    if (this.hasAttribute('active')) {
-      const tabIndex = this._findTabIndex();
+    console.log('attached');
+    console.log(this);
+    const tabIndex = this._findTabIndex();
+    console.log(tabIndex);
 
-      OnsTabbarElement.rewritables.ready(tabbar, () => {
-        tabbar.setActiveTab(tabIndex, {animation: 'none'});
-      });
+
+    if (this.hasAttribute('active')) {
+        const tabIndex = this._findTabIndex();
+        OnsTabbarElement.rewritables.ready(tabbar, () => {
+          setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+        });
     } else {
       OnsTabbarElement.rewritables.ready(tabbar, () => {
+        console.log('ready');
         if (!this._pageElement) {
           this._createPageElement(this.getAttribute('page'), pageElement => {
             OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
