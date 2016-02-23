@@ -27,7 +27,7 @@ export default class FadePopoverAnimator extends PopoverAnimator {
   * @param {Function} callback
   */
   show(popover, callback) {
-    const pop = popover.querySelector('.popover');
+    const pop = popover.querySelector('.popover__container');
     const mask = popover.querySelector('.popover-mask');
 
     animit.runAll(
@@ -70,7 +70,7 @@ export default class FadePopoverAnimator extends PopoverAnimator {
   * @param {Function} callback
   */
   hide(popover, callback) {
-    const pop = popover.querySelector('.popover');
+    const pop = popover.querySelector('.popover__container');
     const mask = popover.querySelector('.popover-mask');
 
     animit.runAll(

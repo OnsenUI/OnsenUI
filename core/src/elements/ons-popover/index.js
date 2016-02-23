@@ -27,13 +27,16 @@ import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.popover': 'popover--*',
-  '.popover__content': 'popover__content--*'
+  '.popover-mask': 'popover-mask--*',
+  '.popover__container': 'popover__container--*',
+  '.popover__content': 'popover__content--*',
+  '.popover__arrow': 'popover__arrow--*'
 };
 
 const templateSource = util.createElement(`
   <div>
     <div class="popover-mask"></div>
-    <div class="popover">
+    <div class="popover__container">
       <div class="popover__content"></div>
       <div class="popover__arrow"></div>
     </div>
@@ -150,6 +153,13 @@ class PopoverElement extends BaseElement {
    */
 
   /**
+   * @attribute cover-target
+   * @description
+   *   [en]If set the popover will cover the target on the screen.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @description
@@ -250,13 +260,12 @@ class PopoverElement extends BaseElement {
   }
 
   _positionPopoverByDirection(target, direction) {
-    const el = this._popover;
+    const {_arrow: arrow, _borderRadius: radius, _popover: el, _margin: margin} = this;
     const pos = target.getBoundingClientRect();
     let own = el.getBoundingClientRect();
-    const arrow = el.children[1];
-    const offset = 14;
-    const margin = 6;
-    const radius = parseInt(window.getComputedStyle(el.querySelector('.popover__content')).borderRadius);
+    const isMD = util.hasModifier(this, 'material');
+    const coverTarget = this.hasAttribute('cover-target') && isMD;
+    const offset = isMD ? 0 : 14;
 
     arrow.style.top = '';
     arrow.style.left = '';
@@ -264,18 +273,23 @@ class PopoverElement extends BaseElement {
     this._setDirection(direction);
 
     // Position popover next to the target.
+    el.style.top = el.style.bottom = el.style.left = el.style.right = '';
+    this.style.top = this.style.bottom = this.style.left = this.style.right = '';
+
     if (['left', 'right'].indexOf(direction) > -1) {
       if (direction == 'left') {
-        el.style.left = (pos.right - pos.width - own.width - offset) + 'px';
+        this.style.left = (pos.right - pos.width - own.width - offset) + 'px';
       } else {
-        el.style.left = (pos.right + offset) + 'px';
+        this.style.left = (pos.right + offset) + 'px';
       }
       el.style.top = (pos.bottom - pos.height / 2 - own.height / 2) + 'px';
     } else {
       if (direction == 'up') {
-        el.style.top = (pos.bottom - pos.height - own.height - offset) + 'px';
+        this.style.bottom = Math.max(margin, window.innerHeight - (coverTarget ? (pos.bottom + 1) : pos.top) + offset) + 'px';
+        el.style.bottom = 0;
       } else {
-        el.style.top = (pos.bottom + offset) + 'px';
+        this.style.top = Math.max(margin, (coverTarget ?  (pos.top - 1) : pos.bottom) + offset) + 'px';
+        el.style.top = 0;
       }
       el.style.left = (pos.right - pos.width / 2 - own.width / 2) + 'px';
     }
@@ -294,19 +308,20 @@ class PopoverElement extends BaseElement {
     // Keep popover inside window and arrow inside popover.
     if (['left', 'right'].indexOf(direction) > -1) {
       if (own.top < margin) {
-        arrow.style.top = Math.max(own.height / 2 + own.top - margin, limit)  + 'px';
-        el.style.top = margin + 'px';
+        arrow.style.top = Math.max(own.height / 2 + own.top, limit)  + 'px';
+        this.style.top = '0';
       } else if (own.bottom > window.innerHeight - margin) {
-        arrow.style.top = Math.min(own.height / 2 - (window.innerHeight - own.bottom) + margin, own.height - limit) + 'px';
-        el.style.top = (window.innerHeight - own.height - margin) + 'px';
+        arrow.style.top = Math.min(own.height / 2 - (window.innerHeight - own.bottom), own.height - limit) + 'px';
+        this.style.bottom = '0';
       }
     } else {
       if (own.left < margin) {
-        arrow.style.left = Math.max(own.width / 2 + own.left - margin, limit) + 'px';
-        el.style.left = margin + 'px';
+        arrow.style.left = Math.max(own.width / 2 + own.left, limit) + 'px';
+        el.style.left = '0';
       } else if (own.right > window.innerWidth - margin) {
-        arrow.style.left = Math.min(own.width / 2 - (window.innerWidth - own.right) + margin, own.width - limit) + 'px';
-        el.style.left = (window.innerWidth - own.width - margin) + 'px';
+        el.style.right = '0';
+        el.style.left = 'auto';
+        arrow.style.left = Math.min(own.width / 2 - (window.innerWidth - own.right), own.width - limit) + 'px';
       }
     }
 
@@ -354,6 +369,8 @@ class PopoverElement extends BaseElement {
   _compile() {
     ons._autoStyle.prepare(this);
 
+    this.classList.add('popover');
+
     const templateElement = templateSource.cloneNode(true);
     const content = templateElement.querySelector('.popover__content');
     const style = this.getAttribute('style');
@@ -389,7 +406,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method show
    * @signature show(target, [options])
    * @param {String|Event|HTMLElement} target
@@ -477,7 +493,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method hide
    * @signature hide([options])
    * @param {Object} [options]
@@ -562,6 +577,9 @@ class PopoverElement extends BaseElement {
   }
 
   attachedCallback() {
+    this._margin = parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+    this._borderRadius = parseInt(window.getComputedStyle(this._popover.querySelector('.popover__content')).borderRadius);
+
     this._mask.addEventListener('click', this._boundCancel, false);
 
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
