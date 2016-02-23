@@ -98,6 +98,10 @@
             el._updateLabelClass();
           });
         }
+
+        scope.$on('$destroy', function() {
+          scope = element = attrs = el = null;
+        });
       }
     };
   });
