@@ -204,7 +204,6 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
-    console.log('tabbar created');
 
     if (!this.hasAttribute('_compiled')) {
       this._compile();
@@ -500,7 +499,6 @@ class TabbarElement extends BaseElement {
     var needLoad = !selectedTab.isLoaded() && !options.keepPage;
 
     util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
-      console.log(tab);
       if (tab != selectedTab) {
         tab.setInactive();
       } else {
@@ -626,7 +624,6 @@ class TabbarElement extends BaseElement {
   detachedCallback() { }
 
   attachedCallback() {
-    console.log('Tabbar attached');
   
   }
 

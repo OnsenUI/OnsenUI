@@ -46,22 +46,6 @@ var OnsTabbar = React.createClass({
     };
 
 
-    // if (!this.link) {
-    //   this.link = true;
-    //   var lastReady = window.OnsTabbarElement.rewritables.ready;
-    //   
-    //
-    //     console.log('tablength ' + node.children[1].children.length + " " + node.children[0].children.length);
-    //     console.log(node.children[1].children.length);
-    //     for (var i=0; i < node.children[1].children.length; i++) {
-    //       node.children[1].children[i]._pageElement = 
-    //         node.firstChild.children[i];
-    //     }
-    //
-    //     lastReady(node, callback);
-    //   }.bind(this);
-    // }
-    //
 
 
     var children = [];
@@ -97,7 +81,16 @@ var OnsTabbar = React.createClass({
 
       var el = document.createElement('div');
       el.innerHTML = renderString;
+      CustomElements.upgrade(el.firstChild);
 
+      console.log('el');
+      console.log(el.firstChild);
+
+
+      setTimeout(function() {
+        console.log('el2');
+        console.log(el.firstChild._compile);
+      }, 10);
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
@@ -114,6 +107,8 @@ var OnsTabbar = React.createClass({
 
     var el = document.createElement('div');
     el.innerHTML = renderString;
+    CustomElements.upgrade(el.firstChild);
+
 
     var contentClass = el.firstChild.children[0].className;
     var barClass = el.firstChild.children[1].className;
@@ -161,18 +156,6 @@ var OnsTab = React.createClass({
 
 
 var MyElem = React.createClass({
-  componentDidMount: function() {
-    //
-    // var elem = this.props.domNode;
-    // for (var i = 0; i < elem.attributes.length; i++) {
-    //   var attrib = elem.attributes[i];
-    //     ReactDOM.findDOMNode(this).setAttribute(attrib.name, attrib.value);
-    // }
-    //
-    // if (!this.props.children) {
-    //   ReactDOM.findDOMNode(this).innerHTML = elem.innerHTML;
-    // }
-  },
   render: function() {
 
     var obj = {'_compiled': 'true'};
@@ -222,9 +205,9 @@ var MyElem = React.createClass({
 
     var str = elem.innerHTML;
     if (!this.props.children && str.length > 0 ) {
-      return React.createElement(this.props.domNode.nodeName, obj, str);
+      return React.createElement(this.props.domNode.nodeName.toLowerCase(), obj, str);
    } else {
-     return React.createElement(this.props.domNode.nodeName, obj, this.props.children);
+     return React.createElement(this.props.domNode.nodeName.toLowerCase(), obj, this.props.children);
    }
   },
 });
