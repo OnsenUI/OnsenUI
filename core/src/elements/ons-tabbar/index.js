@@ -623,9 +623,7 @@ class TabbarElement extends BaseElement {
 
   detachedCallback() { }
 
-  attachedCallback() {
-  
-  }
+  attachedCallback() { }
 
   _show() {
     let currentPageElement = this._getCurrentPageElement();

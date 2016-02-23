@@ -20,16 +20,17 @@ var OnsTabbar = React.createClass({
      // node.setActiveTab(this.activeIndex);
   },
 
-  // add this hook
-  componentWillReceiveProps: function(newProps) {
-    // its important to pass the new props in
-    // this.renderDialogContent(newProps);
+  setActiveTab: function(index, options) {
+    ReactDOM.findDOMNode(this).setActiveTab(index, options);
+  },
+
+  getActiveTabIndex: function() {
+    return ReactDOM.findDOMNode(this).getActiveTabIndex();
   },
 
   shouldComponentUpdate: function() {
     return false;
   },
-
 
   render: function() {
 
