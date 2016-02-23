@@ -170,10 +170,6 @@ list__item()
 .list__item__right *
   pointer-events auto
 
-.list--noborder
-  border-top none
-  border-bottom none
-
 .list__header
   list__header()
   padding var-list-header-padding
@@ -238,8 +234,7 @@ list__item()
   background-image none
 
 .list--noborder .list__item:first-child
-  border-top none
-  background-image none
+  box-shadow none
 
 /*! topdoc
   name: List item without divider
@@ -427,7 +422,7 @@ list__item()
   background-image none
 
 .list--inset__item:first-child
-  border none
+  box-shadow none
 
 /*! topdoc
   name: Radio Button in List Item
@@ -714,7 +709,7 @@ list__item()
   margin-top 4px
 
 .list__item--material:first-child
-  border 0
+  box-shadow none
 
 .list__item--material__left
   padding 16px 0px 16px 16px
