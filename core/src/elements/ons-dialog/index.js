@@ -41,8 +41,6 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };
@@ -196,6 +194,10 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
+    if (!_animatorDict.hasOwnProperty('default')) {
+      _animatorDict.default = _animatorDict.fade = platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator;
+    }
+
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }

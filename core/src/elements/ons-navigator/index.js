@@ -34,10 +34,7 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
   'simplelift': LiftNavigatorTransitionAnimator,
   'fade': FadeNavigatorTransitionAnimator,
   'mdfade': MDFadeNavigatorTransitionAnimator,
@@ -210,6 +207,12 @@ class NavigatorElement extends BaseElement {
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
   createdCallback() {
+    if (!_animatorDict.hasOwnProperty('default')) {
+      _animatorDict.slide = platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator;
+      _animatorDict.lift = platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator;
+      _animatorDict.default = platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator;
+    }
+
     this._doorLock = new DoorLock();
     this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
