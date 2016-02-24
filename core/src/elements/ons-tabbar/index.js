@@ -271,6 +271,10 @@ class TabbarElement extends BaseElement {
     var page = util.findParent(this, 'ons-page');
     if (page) {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
+
+      if (page.firstChild.tagName.toLowerCase() === 'ons-toolbar') {
+        util.addModifier(page.firstChild, 'noshadow');
+      }
     }
 
     internal.shouldFillStatusBar(this)

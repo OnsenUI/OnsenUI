@@ -65,6 +65,7 @@ input, textarea {
 }
 
 ons-toolbar + .page__background + .page__content {
+  margin-top: -1px;
   top: 44px;
 }
 
