@@ -1,11 +1,16 @@
 var MyPage = React.createClass({
 
+  rightClick: function(){
+    this.refs.rightMenu.open();
+  },
+  leftClick: function(){
+    this.refs.leftMenu.open();
+  },
+
   render: function() {
-
-
     return (
   <ons-splitter>
-    <ons-splitter-side side="left" width="200px" collapse swipeable>
+    <ons-splitter-side ref="leftMenu" side="left" width="200px" collapse swipeable>
       <OnsPage>
         <ons-toolbar>
           <div className="center">content</div>
@@ -20,17 +25,17 @@ var MyPage = React.createClass({
         </ons-toolbar>
 
         <p style={{padding: 10}}>
-          <ons-button onclick="toggle('left')">toggle left menu</ons-button>
+          <ons-button onClick={this.leftClick}>toggle left menu</ons-button>
         </p>
 
         <p style={{padding: 10}}>
-          <ons-button onclick="toggle('right')">toggle right menu</ons-button>
+          <ons-button onClick={this.rightClick}>toggle right menu</ons-button>
         </p>
 
       </ons-page>
     </ons-splitter-content>
 
-    <ons-splitter-side side="right" width="300px" collapse swipeable threhold-ratio-should-open="0.4">
+    <ons-splitter-side ref="rightMenu" side="right" width="300px" collapse swipeable threhold-ratio-should-open="0.4">
       <ons-page>
         <ons-toolbar>
           <div className="left">
