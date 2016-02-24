@@ -191,11 +191,7 @@ util.extend = (dst, ...args) => {
  * @return {Array}
  */
 util.arrayFrom = (arrayLike) => {
-  const result = [];
-  for (let i = 0; i < arrayLike.length; i++) {
-    result.push(arrayLike[i]);
-  }
-  return result;
+  return Array.prototype.slice.apply(arrayLike);
 };
 
 /**
