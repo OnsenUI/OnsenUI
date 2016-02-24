@@ -726,6 +726,7 @@ class SplitterSideElement extends BaseElement {
    * @return {Boolean}
    */
   isSwipeable() {
+    console.log('swipable : ' + this.hasAttribute('swipeable'));
     return this.hasAttribute('swipeable');
   }
 
