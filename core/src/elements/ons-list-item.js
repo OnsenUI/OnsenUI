@@ -96,41 +96,51 @@ class ListItemElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+    this.classList.add('list__item');
+
     let left, center, right;
 
     for (let i = 0; i < this.children.length; i++) {
       const el = this.children[i];
 
       if (el.classList.contains('left')) {
-        left = el.innerHTML;
+        el.classList.add('list__item__left');
+        left = el;
       }
       else if (el.classList.contains('center')) {
-        center = el.innerHTML;
+        center = el;
       }
       else if (el.classList.contains('right')) {
-        right = el.innerHTML;
+        el.classList.add('list__item__right');
+        right = el;
       }
-    };
-
-    if (typeof center === 'undefined') {
-      center = this.innerHTML;
     }
 
-    ons._autoStyle.prepare(this);
+    if (!center) {
+      center = document.createElement('div');
 
-    let ripple = '';
+      if (!left && !right) {
+        center.innerHTML = this.innerHTML;
+        this.innerHTML = '';
+      } else {
+
+        for (let i = this.childNodes.length - 1; i >= 0; i--) {
+          let el = this.childNodes[i];
+          if (el !== left && el !== right) {
+            center.insertBefore(el, center.firstChild);
+          }
+        }
+      }
+
+      this.insertBefore(center, right || null);
+    }
+
+    center.classList.add('list__item__center');
+
     if (this.hasAttribute('ripple')) {
-      ripple = '<ons-ripple></ons-ripple>';
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
     }
-
-    this.innerHTML = `
-      ${ripple}
-      <div class="list__item__left left">${left || ''}</div>
-      <div class="list__item__center center">${center}</div>
-      <div class="list__item__right right">${right || ''}</div>
-    `;
-
-    this.classList.add('list__item');
 
     ModifierUtil.initModifier(this, scheme);
 
