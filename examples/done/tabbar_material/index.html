@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+    <script src="../../build/js/onsenui.js"></script>
+    <script src="../../build/js/angular/angular.js"></script>
+    <script src="../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+
+  </head>
+
+  <body>
+
+    <ons-page>
+      <ons-toolbar modifier="material noshadow">
+        <div class="left">
+          <ons-toolbar-button modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">
+          Title
+        </div>
+        <div class="right">
+          <ons-toolbar-button modifier="material"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
+          <ons-toolbar-button modifier="material"><ons-icon icon="md-more-vert"></ons-icon></ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+      <ons-tabbar position="top" modifier="material" var="tabbar">
+        <ons-tab label="music" page="page1.html" active="true"></ons-tab>
+        <ons-tab label="movies" page="page2.html"></ons-tab>
+        <ons-tab label="books" page="page3.html"></ons-tab>
+        <ons-tab label="games" page="page4.html"></ons-tab>
+      </ons-tabbar>
+    </ons-page>
+
+    <ons-template type="text/ons-template" id="page1.html">
+      <h2>Music</h2>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="page2.html">
+      <h2>Movies</h2>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="page3.html">
+      <h2>Books</h2>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="page4.html">
+      <h2>Games</h2>
+    </ons-template>
+
+  </body>
+</html>
