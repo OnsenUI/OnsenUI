@@ -8,6 +8,7 @@ var OnsNavigator = React.createClass({
 
     this.init = true;
 
+
     if (!reactUtil.rendersToOnsPage(page)) {
       throw new Error("OnsNavigator has to contain exactly one child of type OnsPage");
     }
@@ -19,18 +20,18 @@ var OnsNavigator = React.createClass({
           console.log('init');
           this.init = false;
           node.firstChild.innerHTML = node.firstChild._initialHTML;
-          console.log('html');
-          console.log(node.firstChild.innerHTML);
-        }  
-
-        lastLink(navigatorElement, target, options, callback);
+          lastLink(navigatorElement, node.firstChild.children[0], options, callback);
+        }  else {
+          node.firstChild._pages[0].element = node.firstChild.children[0];
+          lastLink(navigatorElement, target, options, callback);
+        }
       }.bind(this);
 
     this.elements = [];
     this.elements.push({elem:this.props.children});
 
     this.myDom = ReactDOM.render(
-      <ons-navigator {...this.props}>
+      <ons-navigator {...this.props}> 
         {page}
       </ons-navigator>, node
     );

@@ -1,29 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Button Demo | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
-  <link rel="stylesheet" href="../../build/css/onsenui.css">
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
-  <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
-
-  <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
-  <script>
-    ons.bootstrap();
-  </script>
-</head>
-
-<body>
-  <ons-navigator>
-    <ons-toolbar>
-      <div class="center">Button</div>
+var MyPage  = React.createClass({
+  render: function() {
+    return (
+    <OnsPage>
+<ons-toolbar>
+      <div className="center">Button</div>
     </ons-toolbar>
 
-    <section style="padding: 8px">
+    <section style={{padding: 8}}>
       <p></p>
       <h3>Material design buttons</h3>
       <ons-button modifier="material">
@@ -39,9 +22,13 @@
       <ons-button modifier="material--flat">flat</ons-button>
       <ons-button modifier="material--flat" disabled>flat disabled</ons-button>
     </section>
-    <section style="padding: 8px">
+    <section style={{padding: 8}}>
       <h3>iOS buttons</h3>
 
+      <button> Ilia </button> {' '}
+      <button> Ilia </button> 
+      <button> Ilia </button>
+      <ons-button modifier="light">light</ons-button>
       <ons-button modifier="light">light</ons-button>
       <ons-button modifier="outline">outline</ons-button>
       <ons-button modifier="quiet">quiet</ons-button>
@@ -55,8 +42,8 @@
       <ons-button modifier="large--cta">large--cta</ons-button>
     </section>
 
-    <section style="padding: 8px">
-      <p></p><br><br>
+    <section style={{padding: 8}}>
+      <p></p><br /><br />
       <ons-button modifier="light" disabled="true">light</ons-button>
       <ons-button modifier="outline" disabled="true">outline</ons-button>
       <ons-button modifier="quiet" disabled="true">quiet</ons-button>
@@ -69,6 +56,9 @@
       <p></p>
       <ons-button modifier="large--cta" disabled="true">large--cta</ons-button>
     </section>
-  </ons-navigator>
-</body>
-</html>
+
+    </OnsPage>);
+  }
+});
+
+ReactDOM.render(<MyPage />, document.getElementById('app'));

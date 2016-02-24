@@ -212,9 +212,8 @@ class NavigatorElement extends BaseElement {
     this._isPushing = this._isPopping = false;
 
     this._initialHTML = this.innerHTML;
-    this._initialNode = this.firstChild.cloneNode(true);
 
-    // this.innerHTML = '';
+    this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -825,8 +824,11 @@ class NavigatorElement extends BaseElement {
 
         setTimeout(() => {
           if (this._pages.length > 1) {
-            const leavePage = this._pages.slice(-2)[0];
+            var leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
+
+            leavePage.element = this.firstChild;
+
 
             this.appendChild(element);
             setImmediate(function () {
@@ -841,7 +843,7 @@ class NavigatorElement extends BaseElement {
           } else {
             this.innerHTML = '';
             this.appendChild(element);
-
+            
             setImmediate(function () {
               element._show();
             });
