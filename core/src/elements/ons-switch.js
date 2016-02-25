@@ -203,6 +203,7 @@ class SwitchElement extends BaseElement {
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
+    this.removeEventListener('click', this._onClick);
     this._gestureDetector.dispose();
   }
 
@@ -213,6 +214,7 @@ class SwitchElement extends BaseElement {
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
     this._boundOnRelease = this._onRelease.bind(this);
+    this.addEventListener('click', this._onClick);
   }
 
   _onChange() {
@@ -220,6 +222,12 @@ class SwitchElement extends BaseElement {
       this.parentNode.setAttribute('checked', '');
     } else {
       this.parentNode.removeAttribute('checked');
+    }
+  }
+
+  _onClick(ev) {
+    if (ev.target.classList.contains('switch__touch')) {
+      ev.preventDefault();
     }
   }
 
