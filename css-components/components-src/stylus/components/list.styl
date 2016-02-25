@@ -146,6 +146,7 @@ list__item()
 
 .list__item:last-child .list__item__center
   border-bottom none
+  background-image none
 
 .list__item__right
   display flex
@@ -160,6 +161,7 @@ list__item()
 
 .list__item:last-child .list__item__right
   border-bottom none
+  background-image none
 
 .list__item__left *
   pointer-events auto
@@ -186,9 +188,6 @@ list__item()
   font-size 12px
   position relative
 
-.list__header:first-child
-  retina-list-header-border()
-
 .list__header:not(:first-of-type)
   border-top var-list-border
 
@@ -196,7 +195,6 @@ list__item()
   list()
   padding var-list-padding
   border-bottom var-list-border-bottom
-  retina-list-border()
 
 .list__item
   list__item()
@@ -255,6 +253,10 @@ list__item()
   background-image none
 
 .list__item--nodivider__right
+  border none
+  background-image none
+
+.list__item--nodivider.list__item--chevron:before
   border none
   background-image none
 
