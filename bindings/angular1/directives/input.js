@@ -56,30 +56,52 @@
 (function(){
   'use strict';
 
-  angular.module('onsen').directive('onsInput', function($parse) {
+  var ATTRS = [
+    'ngModel',
+    'ngChange',
+    'ngRequired',
+    'ngMinlength',
+    'ngMaxlength',
+    'ngPattern',
+    'ngTrim',
+    'ngValue',
+    'ngTrueValue',
+    'ngFalseValue'
+  ];
+
+  angular.module('onsen').directive('onsInput', function($compile) {
     return {
       restrict: 'E',
       replace: false,
-      scope: true,
+      scope: false,
 
       link: function(scope, element, attrs) {
         CustomElements.upgrade(element[0]);
 
-        if (attrs.ngModel) {
-          var set = $parse(attrs.ngModel).assign;
+        var el = element[0];
+        var type = el.getAttribute('type');
 
-          scope.$parent.$watch(attrs.ngModel, function(value) {
-            element[0].value = value;
+        ATTRS.forEach(function(attr) {
+          var kebabCase = attr.replace(/[A-Z]/g, function(letter, pos) {
+            return (pos ? '-' : '') + letter.toLowerCase();
           });
 
-          element[0]._input.addEventListener('input', function() {
-            set(scope.$parent, element[0].value);
-            if (attrs.ngChange) {
-              scope.$eval(attrs.ngChange);
-            }
-            scope.$parent.$evalAsync();
+          if (attrs.hasOwnProperty(attr)) {
+            el._input.setAttribute(kebabCase, attrs[attr]);
+          }
+        });
+
+        $compile(el._input)(scope);
+
+        if (el._isTextInput && attrs.ngModel) {
+          scope.$watch(attrs.ngModel, function(value) {
+            el._updateLabelClass();
           });
         }
+
+        scope.$on('$destroy', function() {
+          scope = element = attrs = el = null;
+        });
       }
     };
   });

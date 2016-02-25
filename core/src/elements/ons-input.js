@@ -272,6 +272,10 @@ class MaterialInputElement extends BaseElement {
   set checked(val) {
     this._input.checked = val;
   }
+
+  get _isTextInput() {
+    return this._input.classList.contains('text-input');
+  }
 }
 
 window.OnsInputElement = document.registerElement('ons-input', {
