@@ -819,16 +819,10 @@ class NavigatorElement extends BaseElement {
       rewritables.link(this, element, options, element => {
         CustomElements.upgrade(element);
 
-        console.log('are we here?');
-        console.log(this._pages.length);
-
         setTimeout(() => {
           if (this._pages.length > 1) {
             var leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
-
-            leavePage.element = this.firstChild;
-
 
             this.appendChild(element);
             setImmediate(function () {
@@ -843,7 +837,6 @@ class NavigatorElement extends BaseElement {
           } else {
             this.innerHTML = '';
             this.appendChild(element);
-            
             setImmediate(function () {
               element._show();
             });
