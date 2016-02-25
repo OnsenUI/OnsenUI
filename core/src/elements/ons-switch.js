@@ -231,7 +231,7 @@ class SwitchElement extends BaseElement {
     }
   }
 
-  click(ev) {
+  click() {
     if (!this.disabled) {
       this.checked = !this.checked;
     }
