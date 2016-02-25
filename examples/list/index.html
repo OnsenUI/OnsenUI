@@ -10,7 +10,11 @@
 
   <script src="../../build/js/angular/angular.js"></script>
   <script src="../../build/js/onsenui.js"></script>
+  <script>
+    ons.platform.select('android');
+  </script>
   <script src="../app.js"></script>
+
 </head>
 
 <body>
@@ -204,6 +208,20 @@
         </div>
       </ons-list-item>
 
+    </ons-list>
+
+    <br />
+
+    <ons-list modifier="noborder">
+      <ons-list-item modifier="chevron">With chevron</ons-list-item>
+      <ons-list-item>Without chevron</ons-list-item>
+    </ons-list>
+
+    <br />
+
+    <ons-list>
+      <ons-list-item modifier="chevron nodivider">With chevron</ons-list-item>
+      <ons-list-item modifier="nodivider">Without chevron</ons-list-item>
     </ons-list>
 
     <h2>Material Design</h2>
