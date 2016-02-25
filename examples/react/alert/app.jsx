@@ -21,7 +21,7 @@ var MyDialog = React.createClass({
 
 var MyPage  = React.createClass({
   showAlert: function() {
-    reactUtil.createAlertDialog(
+    reactUtil.createCustomDialog(
       <MyDialog />
     ).then(function(obj) {
       obj.show();
