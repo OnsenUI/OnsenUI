@@ -17,7 +17,6 @@ var OnsNavigator = React.createClass({
     window.OnsNavigatorElement.rewritables.link = 
       function(navigatorElement, target, options, callback) {
         if (this.init) {
-          console.log('init');
           this.init = false;
           node.firstChild.innerHTML = node.firstChild._initialHTML;
           lastLink(navigatorElement, node.firstChild.children[0], options, callback);
@@ -86,7 +85,6 @@ var OnsNavigator = React.createClass({
 
     navNode.popPage(options).then(function() {
 
-      console.log('pop');
 
       this.elements.pop();
       var help = [];
@@ -221,7 +219,6 @@ var OnsNavigator = React.createClass({
 
       // delete the node again
       navNode.removeChild(navNode.children[insertPos]);
-      // console.log(navNode._pages);
       var node2 =ReactDOM.render(
         <ons-navigator {...this.props}>
           {help}

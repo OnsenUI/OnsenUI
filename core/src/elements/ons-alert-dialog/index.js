@@ -223,10 +223,10 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
+    console.log('create');
     if (!this.hasAttribute('_compiled')) {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
-
       this.setAttribute('_compiled', '');
     }
 
@@ -511,6 +511,7 @@ class AlertDialogElement extends BaseElement {
   }
 
   _cancel() {
+    console.log('cancel');
     if (this.isCancelable()) {
       this.hide({
         callback: () => {

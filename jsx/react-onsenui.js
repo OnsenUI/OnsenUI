@@ -1,3 +1,4 @@
+
 const util = window.ons._util;
 
 var OnsNavigator = React.createClass({
@@ -17,7 +18,6 @@ var OnsNavigator = React.createClass({
     var lastLink = window.OnsNavigatorElement.rewritables.link;
     window.OnsNavigatorElement.rewritables.link = (function (navigatorElement, target, options, callback) {
       if (this.init) {
-        console.log('init');
         this.init = false;
         node.firstChild.innerHTML = node.firstChild._initialHTML;
         lastLink(navigatorElement, node.firstChild.children[0], options, callback);
@@ -82,8 +82,6 @@ var OnsNavigator = React.createClass({
     var lastChild = reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
     navNode.popPage(options).then((function () {
-
-      console.log('pop');
 
       this.elements.pop();
       var help = [];
@@ -203,7 +201,6 @@ var OnsNavigator = React.createClass({
 
       // delete the node again
       navNode.removeChild(navNode.children[insertPos]);
-      // console.log(navNode._pages);
       var node2 = ReactDOM.render(React.createElement(
         'ons-navigator',
         this.props,
@@ -389,14 +386,6 @@ var OnsTabbar = React.createClass({
       el.innerHTML = renderString;
       CustomElements.upgrade(el.firstChild);
 
-      console.log('el');
-      console.log(el.firstChild);
-
-      setTimeout(function () {
-        console.log('el2');
-        console.log(el.firstChild._compile);
-      }, 10);
-
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
       children.push(newElement);
@@ -565,6 +554,18 @@ reactUtil.rendersToOnsModal = function (obj) {
 
 reactUtil.lastChild = function (el) {
   return el.children[el.children.length - 1];
+};
+
+reactUtil.createCustomDialog = function (component) {
+  var body = document.body;
+  var container = document.createElement('div');
+  body.appendChild(container);
+
+  return new Promise(function (resolve) {
+    ReactDOM.render(component, container, function () {
+      resolve(container.firstChild);
+    });
+  });
 };
 
 reactUtil.templateMap = {};

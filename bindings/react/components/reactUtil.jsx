@@ -23,4 +23,16 @@ reactUtil.lastChild = function(el) {
   return el.children[el.children.length - 1];
 };
 
+reactUtil.createCustomDialog = function(component) {
+  var body = document.body;
+  var container = document.createElement('div');
+  body.appendChild(container);
+
+  return new Promise(function(resolve) {
+    ReactDOM.render(component, container, function() {
+      resolve(container.firstChild);
+    });
+  });
+};
+
 reactUtil.templateMap = {};

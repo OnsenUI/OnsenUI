@@ -84,14 +84,8 @@ var OnsTabbar = React.createClass({
       el.innerHTML = renderString;
       CustomElements.upgrade(el.firstChild);
 
-      console.log('el');
-      console.log(el.firstChild);
 
 
-      setTimeout(function() {
-        console.log('el2');
-        console.log(el.firstChild._compile);
-      }, 10);
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
