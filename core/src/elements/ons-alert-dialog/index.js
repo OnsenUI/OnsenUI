@@ -47,7 +47,9 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'none': AlertDialogAnimator
+  'none': AlertDialogAnimator,
+  'default': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+  'fade': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator
 };
 
 /**
@@ -221,10 +223,6 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!_animatorDict.hasOwnProperty('default')) {
-      _animatorDict.default = _animatorDict.fade = platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator;
-    }
-
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
