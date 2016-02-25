@@ -1,10 +1,91 @@
+'use strict';
 
-const util = window.ons._util;
+// var OnsAlertDialog = React.createClass({
+//   show: function() {
+//     this.node.firstChild.show();
+//   },
+//   hide: function() {
+//      this.node.firstChild.hide();
+//   },
+//   componentDidMount: function() {
+//     this.node = document.createElement('div');
+//     document.body.appendChild(this.node);
+//     this.renderPortal(this.props);
+//   },
+//   componentWillReceiveProps: function(newProps) {
+//     this.renderPortal(newProps);
+//   },
+//   componentWillUnmount: function() {
+//     ReactDOM.unmountComponentAtNode(this.node);
+//     document.body.removeChild(this.node);
+//   },
+//   renderPortal: function(props) {
+//     ReactDOM.render(<ons-alert-dialog {...this.props} />, this.node,
+//                     function() {
+//                       if (this.props.isOpen) {
+//                         this.show();
+//                       } else {
+//                         this.hide();
+//                       }
+//                     }.bind(this));
+//   },
+//   render: function() {
+//       return React.DOM.noscript();
+//   }
+// });
+
+var createDialogClass = function createDialogClass(domName) {
+  return React.createClass({
+    show: function show() {
+      this.node.firstChild.show();
+    },
+    hide: function hide() {
+      this.node.firstChild.hide();
+    },
+    componentDidMount: function componentDidMount() {
+      this.node = document.createElement('div');
+      document.body.appendChild(this.node);
+
+      this.node.addEventListener('cancel', (function () {
+        console.log('call cancel');
+        this.props.onCancel();
+      }).bind(this));
+      this.renderPortal(this.props);
+    },
+    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+      this.renderPortal(newProps);
+    },
+    componentWillUnmount: function componentWillUnmount() {
+      ReactDOM.unmountComponentAtNode(this.node);
+      document.body.removeChild(this.node);
+    },
+    renderPortal: function renderPortal(props) {
+      var element = React.createElement(domName, this.props);
+      ReactDOM.render(element, this.node, (function () {
+
+        if (this.props.isOpen) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }).bind(this));
+    },
+    render: function render() {
+      return React.DOM.noscript();
+    }
+  });
+};
+
+var OnsAlertDialog = createDialogClass('ons-alert-dialog');
+var OnsDialog = createDialogClass('ons-dialog');
+'use strict';
+
+var util = window.ons._util;
 
 var OnsNavigator = React.createClass({
   displayName: 'OnsNavigator',
 
-  componentDidMount: function () {
+  componentDidMount: function componentDidMount() {
     this.counter = 0;
     var node = this.node = ReactDOM.findDOMNode(this);
     var page = this.props.children;
@@ -37,7 +118,7 @@ var OnsNavigator = React.createClass({
     ), node);
   },
 
-  resetToPage: function (reactPage, options) {
+  resetToPage: function resetToPage(reactPage, options) {
     var page = arguments.length > 0 ? reactPage : this.elements[0].elem;
     this.elements = [];
     this.elements.push({ elem: page });
@@ -77,7 +158,7 @@ var OnsNavigator = React.createClass({
     }).bind(this));
   },
 
-  popPage: function (options) {
+  popPage: function popPage(options) {
     var navNode = ReactDOM.findDOMNode(this).firstChild;
     var lastChild = reactUtil.lastChild(this.node.firstChild).cloneNode(true);
 
@@ -107,11 +188,11 @@ var OnsNavigator = React.createClass({
       ), node);
     }).bind(this));
   },
-  render: function () {
+  render: function render() {
     return React.createElement('div', null);
   },
 
-  componentWillReceiveProps: function (newProps) {
+  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
     var props = newProps || this.props;
 
     var help = [];
@@ -131,7 +212,7 @@ var OnsNavigator = React.createClass({
     ), node);
   },
 
-  replacePage: function (reactPage, options) {
+  replacePage: function replacePage(reactPage, options) {
     var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
 
     if (options == undefined) {
@@ -169,7 +250,7 @@ var OnsNavigator = React.createClass({
     }).bind(this));
   },
 
-  insertComponent: function (reactPage, insertPos, options) {
+  insertComponent: function insertComponent(reactPage, insertPos, options) {
 
     var htmlString = ReactDOMServer.renderToStaticMarkup(reactPage);
 
@@ -217,7 +298,7 @@ var OnsNavigator = React.createClass({
     }).bind(this));
   },
 
-  pushComponent: function (reactPage, options) {
+  pushComponent: function pushComponent(reactPage, options) {
     if (!reactUtil.rendersToOnsPage(reactPage)) {
       throw new Error("The component that react pushes needs to render to <ons-page>");
     }
@@ -250,63 +331,59 @@ var OnsNavigator = React.createClass({
     }).bind(this));
   }
 });
+"use strict";
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var OnsPage = React.createClass({
-  displayName: 'OnsPage',
+  displayName: "OnsPage",
 
-  render: function () {
+  render: function render() {
     var toolbar;
     var modal;
     var otherChildren = [];
 
-    console.log('render page');
-
     React.Children.forEach(this.props.children, function (child) {
-      console.log('child');
-      console.log(child);
       if (child == null) return;
       if (reactUtil.rendersToOnsToolbar(child)) {
-        console.log('toolbar');
         toolbar = child;
       } else if (reactUtil.rendersToOnsModal(child)) {
-        console.log('model');
         modal = child;
       } else {
         otherChildren.push(child);
       }
     });
 
-    console.log('compile');
-
     return React.createElement(
-      'ons-page',
-      _extends({}, this.props, { _compiled: 'true' }),
+      "ons-page",
+      _extends({}, this.props, { _compiled: "true" }),
       toolbar,
       React.createElement(
-        'div',
-        { className: 'page__background' },
-        ' '
+        "div",
+        { className: "page__background" },
+        " "
       ),
       React.createElement(
-        'div',
-        { className: 'page__content' },
+        "div",
+        { className: "page__content" },
         otherChildren
       ),
       React.createElement(
-        'div',
-        { className: 'page__extra', style: { zIndex: 10001 } },
+        "div",
+        { className: "page__extra", style: { zIndex: 10001 } },
         modal
       )
     );
   }
 });
+'use strict';
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var OnsTabbar = React.createClass({
   displayName: 'OnsTabbar',
 
-  componentDidMount: function () {
+  componentDidMount: function componentDidMount() {
 
     // var lastLink = window.OnsTabbarElement.rewritables.link;
     // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
@@ -327,19 +404,19 @@ var OnsTabbar = React.createClass({
     // node.setActiveTab(this.activeIndex);
   },
 
-  setActiveTab: function (index, options) {
+  setActiveTab: function setActiveTab(index, options) {
     ReactDOM.findDOMNode(this).setActiveTab(index, options);
   },
 
-  getActiveTabIndex: function () {
+  getActiveTabIndex: function getActiveTabIndex() {
     return ReactDOM.findDOMNode(this).getActiveTabIndex();
   },
 
-  shouldComponentUpdate: function () {
+  shouldComponentUpdate: function shouldComponentUpdate() {
     return false;
   },
 
-  render: function () {
+  render: function render() {
 
     var lastReady = window.OnsTabbarElement.rewritables.ready;
     window.OnsTabbarElement.rewritables.ready = function (node, callback) {
@@ -425,7 +502,7 @@ var OnsTabbar = React.createClass({
   }
 });
 
-var buildComponent = function (domElement, reactChildren) {
+var buildComponent = function buildComponent(domElement, reactChildren) {
   if (domElement.hasAttribute('data-ons-react')) {
     var index = parseInt(domElement.getAttribute('data-ons-react'));
     return reactChildren[index];
@@ -450,7 +527,7 @@ var buildComponent = function (domElement, reactChildren) {
 var OnsTab = React.createClass({
   displayName: 'OnsTab',
 
-  render: function () {
+  render: function render() {
     return React.createElement(
       'ons-tab',
       this.props,
@@ -464,7 +541,7 @@ var OnsTab = React.createClass({
 var MyElem = React.createClass({
   displayName: 'MyElem',
 
-  render: function () {
+  render: function render() {
 
     var obj = { '_compiled': 'true' };
 
@@ -522,10 +599,10 @@ var MyElem = React.createClass({
 var OnsTemplate = React.createClass({
   displayName: 'OnsTemplate',
 
-  componentDidMount: function () {
+  componentDidMount: function componentDidMount() {
     reactUtil.templateMap[this.props.id] = this;
   },
-  render: function () {
+  render: function render() {
     return React.createElement(
       'ons-template',
       { type: 'text/ons-template', id: this.props.id },
@@ -533,6 +610,8 @@ var OnsTemplate = React.createClass({
     );
   }
 });
+'use strict';
+
 var ReactTestUtils = React.addons.TestUtils;
 var reactUtil = {};
 
@@ -548,7 +627,6 @@ reactUtil.rendersToOnsToolbar = function (obj) {
 
 reactUtil.rendersToOnsModal = function (obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-  console.log(htmlString);
   return htmlString.startsWith('<ons-modal');
 };
 

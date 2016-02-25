@@ -38,7 +38,7 @@ var MyDialog = React.createClass({
   },
   render: function() {
     return (
-    <ons-dialog style={{height: 250}} animation="default" cancelable>
+    <OnsDialog onCancel={this.props.onCancel} isOpen={this.props.isOpen} style={{height: 250}} animation="default" cancelable>
       <OnsNavigator animation="slide" ref="navi">
         <OnsPage>
           <ons-toolbar>
@@ -53,18 +53,23 @@ var MyDialog = React.createClass({
             </div>
           </OnsPage>
       </OnsNavigator>
-    </ons-dialog>
+    </OnsDialog>
     );
   },
 });
 
 var MyPage  = React.createClass({
+  getInitialState: function() {
+    return {dialogOpen: false};
+  },
+  hide: function() {
+    this.setState({dialogOpen: false});
+  },
+  hello: function() {
+    this.setState({name: 'test'});
+  },
   showAlert: function() {
-    reactUtil.createCustomDialog(
-      <MyDialog />
-    ).then(function(obj) {
-      obj.show();
-    });
+    this.setState({dialogOpen: true});
   },
   showAlert2: function() {
     ons.notification.alert({
@@ -76,8 +81,10 @@ var MyPage  = React.createClass({
     <OnsPage>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
+        <ons-button onClick={this.hello}>Hello  </ons-button>
         <ons-button onClick={this.showAlert}> Show Alert </ons-button>
       </div>
+      <MyDialog onCancel={this.hide} isOpen={this.state.dialogOpen}  />
     </OnsPage>
     );
   }

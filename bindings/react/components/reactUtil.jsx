@@ -13,7 +13,6 @@ reactUtil.rendersToOnsToolbar = function(obj) {
 
 reactUtil.rendersToOnsModal = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-  console.log(htmlString);
   return htmlString.startsWith('<ons-modal');
 };
 
