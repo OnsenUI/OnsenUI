@@ -119,7 +119,6 @@ list__item()
   align-items center
   align-self stretch
   padding-left 10px
-  pointer-events none
 
 .list__item__left:empty
   width 26px
@@ -138,7 +137,6 @@ list__item()
   align-self stretch
   margin-left 26px
   border-bottom var-list-border
-  pointer-events none
   retina-list-item-border()
 
 .list__item__left + .list__item__center
@@ -156,21 +154,11 @@ list__item()
   align-items center
   align-self stretch
   border-bottom var-list-border
-  pointer-events none
   retina-list-item-border()
 
 .list__item:last-child .list__item__right
   border-bottom none
   background-image none
-
-.list__item__left *
-  pointer-events auto
-
-.list__item__center *
-  pointer-events auto
-
-.list__item__right *
-  pointer-events auto
 
 .list__header
   list__header()
