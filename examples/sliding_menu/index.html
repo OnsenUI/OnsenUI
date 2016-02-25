@@ -39,14 +39,22 @@
         <ons-list-item
           modifier="tappable" class="list__item__line-height"
           ng-click="app.slidingMenu.setMainPage('page1.html', {closeMenu: true})">
-          <i class="fa fa-home fa-lg" style="color: #666"></i>
-          &nbsp; Page 1
+          <div class="left">
+            <ons-icon icon="fa-home" class="list__item__icon"></ons-icon>
+          </div>
+          <div class="center">
+            Page 1
+          </div>
         </ons-list-item>
         <ons-list-item
           modifier="tappable" class="list__item__line-height"
           ng-click="app.slidingMenu.setMainPage('page2.html', {closeMenu: true})">
-          <i class="fa fa-gear fa-lg" style="color: #666"></i>
-          &nbsp; Page 2
+          <div class="left">
+            <ons-icon icon="fa-gear" class="list__item__icon"></ons-icon>
+          </div>
+          <div class="center">
+            Page 2
+          </div>
         </ons-list-item>
       </ons-list>
     </ons-page>
