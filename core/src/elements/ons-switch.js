@@ -180,10 +180,11 @@ class SwitchElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
-    this._checkbox = this.querySelector('input[type=checkbox]');
+
+    this._checkbox = this.querySelector('.switch__input');
     this._handle = this.querySelector('.switch__handle');
 
-    ['checked', 'disabled', 'modifier', 'name'].forEach(e => {
+    ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -203,6 +204,7 @@ class SwitchElement extends BaseElement {
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
+    this.removeEventListener('click', this._onClick);
     this._gestureDetector.dispose();
   }
 
@@ -213,6 +215,7 @@ class SwitchElement extends BaseElement {
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
     this._boundOnRelease = this._onRelease.bind(this);
+    this.addEventListener('click', this._onClick);
   }
 
   _onChange() {
@@ -220,6 +223,12 @@ class SwitchElement extends BaseElement {
       this.parentNode.setAttribute('checked', '');
     } else {
       this.parentNode.removeAttribute('checked');
+    }
+  }
+
+  _onClick(ev) {
+    if (ev.target.classList.contains('switch__touch')) {
+      ev.preventDefault();
     }
   }
 
@@ -270,6 +279,9 @@ class SwitchElement extends BaseElement {
       this._isMaterial = (current || '').indexOf('material') !== -1;
       this._locations = locations[this._isMaterial ? 'material' : 'ios'];
       ModifierUtil.onModifierChanged(last, current, this, scheme);
+      break;
+    case 'input-id':
+      this._checkbox.id = current;
       break;
     case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;

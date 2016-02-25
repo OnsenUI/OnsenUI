@@ -97,15 +97,50 @@ class ListItemElement extends BaseElement {
 
   _compile() {
     ons._autoStyle.prepare(this);
+    this.classList.add('list__item');
 
-    let ripple = '';
-    if (this.hasAttribute('ripple')) {
-      ripple = '<ons-ripple></ons-ripple>';
+    let left, center, right;
+
+    for (let i = 0; i < this.children.length; i++) {
+      const el = this.children[i];
+
+      if (el.classList.contains('left')) {
+        el.classList.add('list__item__left');
+        left = el;
+      }
+      else if (el.classList.contains('center')) {
+        center = el;
+      }
+      else if (el.classList.contains('right')) {
+        el.classList.add('list__item__right');
+        right = el;
+      }
     }
 
-    this.innerHTML = `<label>${ripple}${this.innerHTML}</label>`;
-    this.firstChild.classList.add('list__item');
-    this.style.display = this.firstChild.style.display = 'flex';
+    if (!center) {
+      center = document.createElement('div');
+
+      if (!left && !right) {
+        center.innerHTML = this.innerHTML;
+        this.innerHTML = '';
+      } else {
+
+        for (let i = this.childNodes.length - 1; i >= 0; i--) {
+          let el = this.childNodes[i];
+          if (el !== left && el !== right) {
+            center.insertBefore(el, center.firstChild);
+          }
+        }
+      }
+
+      this.insertBefore(center, right || null);
+    }
+
+    center.classList.add('list__item__center');
+
+    if (this.hasAttribute('ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -114,7 +149,7 @@ class ListItemElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
