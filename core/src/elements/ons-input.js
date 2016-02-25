@@ -141,8 +141,8 @@ class MaterialInputElement extends BaseElement {
 
     this._boundDelegateEvent = this._delegateEvent.bind(this);
 
-    if (this.id) {
-      this._input.id = 'inner-' + this.id;
+    if (this.hasAttribute('input-id')) {
+      this._input.id = this.getAttribute('input-id');
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -153,9 +153,10 @@ class MaterialInputElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'placeholder') {
+    } else if (name === 'placeholder') {
       return this._updateLabel();
+    } if (name === 'input-id') {
+      this._input.id = current;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return this._updateBoundAttributes();

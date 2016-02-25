@@ -180,10 +180,11 @@ class SwitchElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
-    this._checkbox = this.querySelector('input[type=checkbox]');
+
+    this._checkbox = this.querySelector('.switch__input');
     this._handle = this.querySelector('.switch__handle');
 
-    ['checked', 'disabled', 'modifier', 'name'].forEach(e => {
+    ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -270,6 +271,9 @@ class SwitchElement extends BaseElement {
       this._isMaterial = (current || '').indexOf('material') !== -1;
       this._locations = locations[this._isMaterial ? 'material' : 'ios'];
       ModifierUtil.onModifierChanged(last, current, this, scheme);
+      break;
+    case 'input-id':
+      this._checkbox.id = current;
       break;
     case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;

@@ -127,8 +127,8 @@ describe('OnsInputElement', () => {
 
   describe('input label', () => {
     it('assigns ID to the inner input element', () => {
-      let element = ons._util.createElement('<ons-input id="myInput"></ons-input>');
-      expect(element.querySelector('input').id).to.equal('inner-myInput');
+      let element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
+      expect(element.querySelector('input').id).to.equal('myInput');
     });
 
     it('provides \'content-left\' attribute', () => {

@@ -194,6 +194,11 @@ describe('OnsSwitchElement', () => {
       expect(element._checkbox.disabled).to.be.false;
       expect(element._checkbox.hasAttribute('disabled')).to.be.false;
     });
+
+    it('changes the inner input ID', () => {
+      element.setAttribute('input-id', 'myID');
+      expect(element._checkbox.id).to.equal('myID');
+    });
   });
 
   describe('autoStyling', () => {
