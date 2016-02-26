@@ -22,18 +22,13 @@ limitations under the License.
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.ripple[target="children"]{
-  display: inline-block;
-  position: relative;
+  pointer-events: none;
 }
 
 ons-list-item .ripple__wave, ons-list-item .ripple__background,
 .button--material--flat .ripple__wave, .button--material--flat .ripple__background{
   background: rgba(189, 189, 189, 0.3);
 }
-
 
 .ripple__background {
   background: rgba(255, 255, 255, 0.2);
@@ -43,6 +38,7 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   right: 0;
   bottom: 0;
   opacity: 0;
+  pointer-events: none;
 }
 
 .ripple__wave {
