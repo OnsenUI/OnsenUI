@@ -21,7 +21,7 @@ var MyPage  = React.createClass({
         <ons-button onClick={this.showAlert}> Show Alert </ons-button>
         <ons-button onClick={this.showAlert2}> Show Alert 2 </ons-button>
       </div>
-      <OnsAlertDialog ref="dialog" onClose={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
+      <OnsAlertDialog ref="dialog" onCancel={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
         <div className="alert-dialog-title">Warning!</div>
           <div className="alert-dialog-content">
           An error has occurred!

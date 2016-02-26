@@ -18,8 +18,7 @@ var createDialogClass = function createDialogClass(domName, showFun) {
       document.body.appendChild(this.node);
 
       this.node.addEventListener('cancel', function () {
-        console.log('cance???');
-        _this.props.onCancel;
+        _this.props.onCancel();
       });
       this.renderPortal(this.props);
     },

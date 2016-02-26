@@ -418,6 +418,7 @@ class AlertDialogElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
+    console.log('hide!!!');
     let cancel = false;
     const callback = options.callback || function() {};
 
@@ -511,7 +512,6 @@ class AlertDialogElement extends BaseElement {
   }
 
   _cancel() {
-    console.log('cancel');
     if (this.isCancelable()) {
       this.hide({
         callback: () => {
