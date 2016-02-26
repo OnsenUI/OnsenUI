@@ -389,7 +389,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method show
    * @signature show(target, [options])
    * @param {String|Event|HTMLElement} target
@@ -477,7 +476,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method hide
    * @signature hide([options])
    * @param {Object} [options]
@@ -647,7 +645,11 @@ class PopoverElement extends BaseElement {
 
   _cancel() {
     if (this.isCancelable()) {
-      this.hide();
+      this.hide({
+        callback: () => {
+          util.triggerElementEvent(this, 'cancel');
+        }
+      });
     }
   }
 }

@@ -40,6 +40,10 @@ ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
 
+ons-fab {
+  z-index: 3;
+}
+
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

@@ -47,9 +47,9 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'fade': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'none': AlertDialogAnimator
+  'none': AlertDialogAnimator,
+  'default': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+  'fade': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator
 };
 
 /**

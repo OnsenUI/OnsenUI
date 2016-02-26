@@ -102,6 +102,10 @@ export default class AnimatorFactory {
       );
 
       animator = new Animator(animationOpts);
+
+      if (typeof animator === 'function') {
+        animator = new animator(animationOpts); // eslint-disable-line new-cap
+      }
     }
 
     if (!(animator instanceof this._baseClass)) {

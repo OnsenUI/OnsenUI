@@ -263,7 +263,7 @@ class CollapseMode extends BaseMode {
       const distance = this._element._isLeftSide()
         ? event.gesture.center.clientX
         : window.innerWidth - event.gesture.center.clientX;
-      if (distance > this._element._swipeTargetWidth) {
+      if (!this.isOpen() && distance > this._element._swipeTargetWidth) {
         this._ignoreDrag = true;
       }
     }
@@ -693,10 +693,6 @@ class SplitterSideElement extends BaseElement {
     this._page = null;
     this._isAttached = false;
 
-    if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'left');
-    }
-
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
@@ -716,7 +712,7 @@ class SplitterSideElement extends BaseElement {
 
     this._updateForAnimationAttribute();
     this._updateForWidthAttribute();
-    this._updateForSideAttribute();
+    this.hasAttribute('side') ? this._updateForSideAttribute() : this.setAttribute('side', 'left');
     this._updateForCollapseAttribute();
     this._updateForSwipeableAttribute();
     this._updateForSwipeTargetWidthAttribute();
