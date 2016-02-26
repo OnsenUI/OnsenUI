@@ -34,10 +34,10 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'slide': () => platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
+  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
   'simplelift': LiftNavigatorTransitionAnimator,
   'fade': FadeNavigatorTransitionAnimator,
   'mdfade': MDFadeNavigatorTransitionAnimator,
