@@ -136,6 +136,7 @@ class ListItemElement extends BaseElement {
       this.insertBefore(center, right || null);
     }
 
+    center.classList.add('center');
     center.classList.add('list__item__center');
 
     if (this.hasAttribute('ripple')) {
