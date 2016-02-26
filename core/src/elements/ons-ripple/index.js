@@ -132,8 +132,19 @@ class RippleElement extends BaseElement {
     }, duration);
   }
 
+  _updateParent() {
+    if (!this._parentUpdated) {
+      const computedStyle = window.getComputedStyle(this.parentNode);
+      if (computedStyle.getPropertyValue('position') === 'static') {
+        this.parentNode.style.position = 'relative';
+      }
+      this._parentUpdated = true;
+    }
+  }
+
   _onTap(e) {
     if (!this.isDisabled()) {
+      this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
         this._animator.fade(this._wave);
         this._animator.fade(this._background);
@@ -143,10 +154,9 @@ class RippleElement extends BaseElement {
 
   _onHold(e) {
     if (!this.isDisabled()) {
+      this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
-      ['release', 'mouseout', 'touchleave'].forEach((eventType) => {
-        this.parentNode.addEventListener(eventType, this._boundOnRelease);
-      });
+      document.addEventListener('release', this._boundOnRelease);
     }
   }
 
@@ -161,9 +171,7 @@ class RippleElement extends BaseElement {
       this._holding = false;
     }
 
-    ['release', 'mouseout', 'touchleave'].forEach((eventType) => {
-      this.parentNode.removeEventListener(eventType, this._boundOnRelease);
-    });
+    document.removeEventListener('release', this._boundOnRelease);
   }
 
   _onDragStart(e) {
