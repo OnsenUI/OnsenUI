@@ -263,7 +263,7 @@ class CollapseMode extends BaseMode {
       const distance = this._element._isLeftSide()
         ? event.gesture.center.clientX
         : window.innerWidth - event.gesture.center.clientX;
-      if (distance > this._element._swipeTargetWidth) {
+      if (!this.isOpen() && distance > this._element._swipeTargetWidth) {
         this._ignoreDrag = true;
       }
     }
