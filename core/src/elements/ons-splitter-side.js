@@ -693,10 +693,6 @@ class SplitterSideElement extends BaseElement {
     this._page = null;
     this._isAttached = false;
 
-    if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'left');
-    }
-
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
@@ -716,7 +712,7 @@ class SplitterSideElement extends BaseElement {
 
     this._updateForAnimationAttribute();
     this._updateForWidthAttribute();
-    this._updateForSideAttribute();
+    this.hasAttribute('side') ? this._updateForSideAttribute() : this.setAttribute('side', 'left');
     this._updateForCollapseAttribute();
     this._updateForSwipeableAttribute();
     this._updateForSwipeTargetWidthAttribute();
@@ -775,7 +771,7 @@ class SplitterSideElement extends BaseElement {
 
     const collapse = ('' + this.getAttribute('collapse')).trim();
 
-    if (collapse === '' || collapse === 'true') {
+    if (collapse === '') {
       this._updateCollapseStrategy(new StaticCollapseDetection());
     } else if (collapse === 'portrait' || collapse === 'landscape') {
       this._updateCollapseStrategy(new OrientationCollapseDetection(collapse));
