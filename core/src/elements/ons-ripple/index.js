@@ -132,15 +132,8 @@ class RippleElement extends BaseElement {
     }, duration);
   }
 
-  _updateParent() {
-    if (!this._parentUpdated && this.parentNode) {
-      this._parentUpdated = true;
-    }
-  }
-
   _onTap(e) {
     if (!this.isDisabled()) {
-      this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
         this._animator.fade(this._wave);
         this._animator.fade(this._background);
@@ -150,11 +143,10 @@ class RippleElement extends BaseElement {
 
   _onHold(e) {
     if (!this.isDisabled()) {
-      this._updateParent();
-
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
-
-      this.parentNode.addEventListener('release', this._boundOnRelease);
+      ['release', 'mouseout', 'touchleave'].forEach((eventType) => {
+        this.parentNode.addEventListener(eventType, this._boundOnRelease);
+      });
     }
   }
 
@@ -169,7 +161,9 @@ class RippleElement extends BaseElement {
       this._holding = false;
     }
 
-    this.removeEventListener('release', this._boundOnRelease);
+    ['release', 'mouseout', 'touchleave'].forEach((eventType) => {
+      this.parentNode.removeEventListener(eventType, this._boundOnRelease);
+    });
   }
 
   _onDragStart(e) {
