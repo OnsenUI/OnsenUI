@@ -7,7 +7,7 @@ var MyPage2  = React.createClass({
         </ons-toolbar>
         <br />
         <div style={{textAlign: 'center'}}>
-          <ons-input id="description"></ons-input>
+          <OnsInput value={this.props.description} onChange={this.props.onChange} />
           <p>
             <ons-button modifier="light" onClick={this.props.popPage}>Previous</ons-button>
           </p>
@@ -18,20 +18,28 @@ var MyPage2  = React.createClass({
 });
 
 
+var a;
+var b;
 
 var MyDialog = React.createClass({
-  getInitialState: function() {
-    return {name: ''};
+  componentDidMount: function() {
+    console.log('mounting 1');
   },
   popPage: function() {
    this.refs.navi.popPage();
   },
-  next: function() {
-    console.log('click this dialog');
-    this.refs.navi.pushComponent(<MyPage2 popPage={this.popPage} />);
+  pushPage: function() {
+    this.refs.navi.pushComponent(<MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
   },
-  handleChange: function(event) {
-    this.setState({name: event.target.value});
+  getInitialState: function() {
+    return {value: ''};
+  },
+  onNameChanged: function(event) {
+    this.props.onNameChanged(event.target.value);
+  },
+  onDescriptionChanged: function(event) {
+    console.log('description changed');
+    this.props.onDescriptionChanged(event.target.value);
   },
   render: function() {
     return (
@@ -39,15 +47,15 @@ var MyDialog = React.createClass({
       <OnsNavigator animation="slide" ref="navi">
         <OnsPage>
           <ons-toolbar>
-            <div className="center">Name</div>
+          <div className="center">Name</div>
           </ons-toolbar>
           <br />
-            <div style={{textAlign: 'center'}}>
-              <ons-input id="name" value={this.state.name} onChange={this.handleChange} label="Name"></ons-input>
-              <p>
-                <ons-button modifier="light" onClick={this.next}>Next</ons-button>
-              </p>
-            </div>
+          <div style={{textAlign: 'center'}}>
+            <OnsInput value={this.props.name} onChange={this.onNameChanged}  />
+            <p>
+              <ons-button modifier="light"  onClick={this.pushPage}>Next</ons-button>
+            </p>
+          </div>
           </OnsPage>
       </OnsNavigator>
     </OnsDialog>
@@ -57,13 +65,16 @@ var MyDialog = React.createClass({
 
 var MyPage  = React.createClass({
   getInitialState: function() {
-    return {dialogOpen: false};
+    return {dialogOpen: false, name: '', description: ''};
   },
   hide: function() {
     this.setState({dialogOpen: false});
   },
-  hello: function() {
-    this.setState({name: 'test'});
+  onNameChanged: function(value) {
+    this.setState({name: value});
+  },
+  onDescriptionChanged: function(value) {
+    this.setState({description: value});
   },
   showAlert: function() {
     this.setState({dialogOpen: true});
@@ -80,8 +91,13 @@ var MyPage  = React.createClass({
         <h1>Page Content</h1>
         <ons-button onClick={this.hello}>Hello  </ons-button>
         <ons-button onClick={this.showAlert}> Show Alert </ons-button>
+        <div> Name : {this.state.name} </div>
+        <div> Description : {this.state.description} </div>
       </div>
-      <MyDialog onCancel={this.hide} isOpen={this.state.dialogOpen}  />
+      <MyDialog onCancel={this.hide} name={this.state.name} description={this.state.description}
+        onNameChanged={this.onNameChanged}
+        onDescriptionChanged={this.onDescriptionChanged}
+        isOpen={this.state.dialogOpen}  />
     </OnsPage>
     );
   }

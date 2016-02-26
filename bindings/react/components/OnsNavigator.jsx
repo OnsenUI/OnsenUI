@@ -115,13 +115,13 @@ var OnsNavigator = React.createClass({
   render: function() {
     return <div />;
   },
-
-
   componentWillReceiveProps: function(newProps) {
+    console.log('will receive props');
     var props = newProps || this.props;
 
     var help = [];
     this.elements = [];
+
     this.elements.push({elem: props.children});
 
     for (var i =0; i < this.elements.length; i++) {
@@ -129,6 +129,8 @@ var OnsNavigator = React.createClass({
     }
 
     var node = ReactDOM.findDOMNode(this);
+
+    console.log(this.elements.length);
 
     ReactDOM.render(
       <ons-navigator {...this.props}>
@@ -251,6 +253,8 @@ var OnsNavigator = React.createClass({
 
     this.elements.push({elem:reactPage});
     var elements = this.elements;
+
+    console.log('push length: ' + this.elements.length);
 
     var node =  ReactDOM.findDOMNode(this)
     node.firstChild._pushPage(options).then(function() {

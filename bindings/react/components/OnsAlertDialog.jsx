@@ -1,7 +1,6 @@
 var ReactTestUtils = React.addons.TestUtils;
 
 var createDialogClass = function(domName, showFun) {
-
   var myClass = {
     show: function() {
       this.node.firstChild.show();
@@ -10,6 +9,7 @@ var createDialogClass = function(domName, showFun) {
       this.node.firstChild.hide();
     },
     componentDidMount: function() {
+      console.log('mounting');
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
 
@@ -19,6 +19,12 @@ var createDialogClass = function(domName, showFun) {
       this.renderPortal(this.props);
     },
     componentWillReceiveProps: function(newProps) {
+      console.log('will receive pos');
+
+      if (newProps.isOpen != this.props.isOpen) {
+        console.log('true');
+        this.animateShow = true;
+      }
       this.renderPortal(newProps);
     },
     componentWillUnmount: function() {
@@ -28,20 +34,27 @@ var createDialogClass = function(domName, showFun) {
     _update: function() {
       CustomElements.upgrade(this.node.firstChild);
       if (this.props.isOpen) {
-        this.show();
+        if (this.animateShow) {
+          console.log('show');
+          this.show();
+        }
+        this.animateShow = false;
       } else {
         this.hide();
       }
     },
     renderPortal: function(props) {
-      var element = React.createElement(domName, this.props);
+      var element = React.createElement(domName, props);
       ReactDOM.render(element, this.node, this._update);
     },
+    shouldComponentUpdate: function() {
+      return false;
+    },
     render: function() {
+      console.log('myrender');
       return React.DOM.noscript();
     }
   };
-
   if (showFun) {
     myClass.show = showFun;
   };
@@ -53,13 +66,10 @@ var OnsAlertDialog = createDialogClass('ons-alert-dialog');
 var OnsDialog = createDialogClass('ons-dialog');
 
 var showFun = function() {
-  console.log('showFun');
   var target = this.props.getTarget();
   if (ReactTestUtils.isElement(target)) {
     target = ReactDOM.findDOMNode(target);
   }
-  console.log('showFun');
-  console.log(target);
   return this.node.firstChild.show(target);
 };
 

@@ -3,7 +3,6 @@
 var ReactTestUtils = React.addons.TestUtils;
 
 var createDialogClass = function createDialogClass(domName, showFun) {
-
   var myClass = {
     show: function show() {
       this.node.firstChild.show();
@@ -14,6 +13,7 @@ var createDialogClass = function createDialogClass(domName, showFun) {
     componentDidMount: function componentDidMount() {
       var _this = this;
 
+      console.log('mounting');
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
 
@@ -23,6 +23,12 @@ var createDialogClass = function createDialogClass(domName, showFun) {
       this.renderPortal(this.props);
     },
     componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+      console.log('will receive pos');
+
+      if (newProps.isOpen != this.props.isOpen) {
+        console.log('true');
+        this.animateShow = true;
+      }
       this.renderPortal(newProps);
     },
     componentWillUnmount: function componentWillUnmount() {
@@ -32,20 +38,27 @@ var createDialogClass = function createDialogClass(domName, showFun) {
     _update: function _update() {
       CustomElements.upgrade(this.node.firstChild);
       if (this.props.isOpen) {
-        this.show();
+        if (this.animateShow) {
+          console.log('show');
+          this.show();
+        }
+        this.animateShow = false;
       } else {
         this.hide();
       }
     },
     renderPortal: function renderPortal(props) {
-      var element = React.createElement(domName, this.props);
+      var element = React.createElement(domName, props);
       ReactDOM.render(element, this.node, this._update);
     },
+    shouldComponentUpdate: function shouldComponentUpdate() {
+      return false;
+    },
     render: function render() {
+      console.log('myrender');
       return React.DOM.noscript();
     }
   };
-
   if (showFun) {
     myClass.show = showFun;
   };
@@ -57,17 +70,34 @@ var OnsAlertDialog = createDialogClass('ons-alert-dialog');
 var OnsDialog = createDialogClass('ons-dialog');
 
 var showFun = function showFun() {
-  console.log('showFun');
   var target = this.props.getTarget();
   if (ReactTestUtils.isElement(target)) {
     target = ReactDOM.findDOMNode(target);
   }
-  console.log('showFun');
-  console.log(target);
   return this.node.firstChild.show(target);
 };
 
 var OnsPopover = createDialogClass('ons-popover', showFun);
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var OnsInput = React.createClass({
+  displayName: "OnsInput",
+
+  render: function render() {
+    return React.createElement(
+      "ons-input",
+      { value: this.props.value, _compiled: "" },
+      React.createElement("input", _extends({ className: "text-input" }, this.props)),
+      React.createElement(
+        "span",
+        { className: "text-input__label", style: { color: 'rgba(0, 0, 0, 0.498039)' } },
+        " "
+      )
+    );
+  }
+});
 'use strict';
 
 var util = window.ons._util;
@@ -181,12 +211,13 @@ var OnsNavigator = React.createClass({
   render: function render() {
     return React.createElement('div', null);
   },
-
   componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+    console.log('will receive props');
     var props = newProps || this.props;
 
     var help = [];
     this.elements = [];
+
     this.elements.push({ elem: props.children });
 
     for (var i = 0; i < this.elements.length; i++) {
@@ -194,6 +225,8 @@ var OnsNavigator = React.createClass({
     }
 
     var node = ReactDOM.findDOMNode(this);
+
+    console.log(this.elements.length);
 
     ReactDOM.render(React.createElement(
       'ons-navigator',
@@ -302,6 +335,8 @@ var OnsNavigator = React.createClass({
 
     this.elements.push({ elem: reactPage });
     var elements = this.elements;
+
+    console.log('push length: ' + this.elements.length);
 
     var node = ReactDOM.findDOMNode(this);
     node.firstChild._pushPage(options).then((function () {
