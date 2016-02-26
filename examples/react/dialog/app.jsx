@@ -23,11 +23,8 @@ var MyDialog = React.createClass({
   getInitialState: function() {
     return {name: ''};
   },
-  okClick: function() {
-    this.refs.dialog.hide();
-  },
   popPage: function() {
-   this.refs.navi.popPage(); 
+   this.refs.navi.popPage();
   },
   next: function() {
     console.log('click this dialog');

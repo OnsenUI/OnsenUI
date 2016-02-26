@@ -10,7 +10,7 @@ var MyPage  = React.createClass({
       message: 'You pressed "ok"'
     });
   },
-  okClick : function() {
+  close: function() {
     this.setState({alertOpen: false});
   },
   render: function() {
@@ -21,13 +21,13 @@ var MyPage  = React.createClass({
         <ons-button onClick={this.showAlert}> Show Alert </ons-button>
         <ons-button onClick={this.showAlert2}> Show Alert 2 </ons-button>
       </div>
-      <OnsAlertDialog ref="dialog" isOpen={this.state.alertOpen} animation="default" cancelable>
+      <OnsAlertDialog ref="dialog" onClose={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
         <div className="alert-dialog-title">Warning!</div>
           <div className="alert-dialog-content">
           An error has occurred!
           </div>
         <div className="alert-dialog-footer">
-        <button onClick={this.okClick} className="alert-dialog-button">OK</button>
+        <button onClick={this.close} className="alert-dialog-button">OK</button>
         </div>
       </OnsAlertDialog>
     </OnsPage>
