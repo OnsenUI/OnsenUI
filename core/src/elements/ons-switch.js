@@ -235,7 +235,13 @@ class SwitchElement extends BaseElement {
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
+      util.triggerElementEvent(this.getCheckboxElement(), 'change');
     }
+  }
+
+  _getPosition(e) {
+    const l = this._locations;
+    return Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
   }
 
   _onHold(e) {
@@ -259,13 +265,15 @@ class SwitchElement extends BaseElement {
 
   _onDrag(e) {
     e.gesture.srcEvent.preventDefault();
-    var l = this._locations;
-    var position = Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
-    this._handle.style.left = position + 'px';
-    this.checked = position >= (l[0] + l[1]) / 2;
+    this._handle.style.left = this._getPosition(e) + 'px';
   }
 
   _onRelease(e) {
+    const l = this._locations;
+    const position = this._getPosition(e);
+
+    this.checked = position >= (l[0] + l[1]) / 2;
+
     this.removeEventListener('drag', this._onDrag);
     document.removeEventListener('release', this._boundOnRelease);
 
