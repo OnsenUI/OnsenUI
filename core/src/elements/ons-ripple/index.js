@@ -33,10 +33,6 @@ import Animator from './animator-css';
  *    Click me!
  *   </ons-list-item>
  * </ons-list>
- *
- * <ons-ripple target="children" color="rgba(0, 0, 0, 0.3)">
- *   <p>Click me!</p>
- * </ons-ripple>
  */
 class RippleElement extends BaseElement {
 
@@ -64,14 +60,6 @@ class RippleElement extends BaseElement {
    */
 
   /**
-   * @attribute target
-   * @type {String}
-   * @description
-   *   [en]If this attribute is set to children, the effect will be applied to the children of the component instead of the parent.[/en]
-   *   [ja]この属性に"children"を設定されたとき、リップルエフェクトはこのコンポーネントの子要素に適用されます。そうでなければ、親要素に適用されます。[/ja]
-   */
-
-  /**
    * @attribute disabled
    * @description
    *   [en]If this attribute is set, the ripple effect will be disabled.[/en]
@@ -89,7 +77,7 @@ class RippleElement extends BaseElement {
 
     this._animator = new Animator();
 
-    ['color', 'target', 'center', 'start-radius', 'background'].forEach(e => {
+    ['color', 'center', 'start-radius', 'background'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -146,10 +134,6 @@ class RippleElement extends BaseElement {
 
   _updateParent() {
     if (!this._parentUpdated && this.parentNode) {
-      if (this.getAttribute('target') !== 'autofind' &&
-          window.getComputedStyle(this.parentNode).getPropertyValue('position') === 'static') {
-        this.parentNode.style.position = 'relative';
-      }
       this._parentUpdated = true;
     }
   }
@@ -167,21 +151,25 @@ class RippleElement extends BaseElement {
   _onHold(e) {
     if (!this.isDisabled()) {
       this._updateParent();
+
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
 
-      this.addEventListener('release', this._onRelease);
+      this.parentNode.addEventListener('release', this._boundOnRelease);
     }
   }
 
   _onRelease(e) {
-    this._holding.speed(300).then(() => {
-      this._animator.stopAll({stopNext: true});
-      this._animator.fade(this._wave);
-      this._animator.fade(this._background);
-    });
+    if (this._holding) {
+      this._holding.speed(300).then(() => {
+        this._animator.stopAll({stopNext: true});
+        this._animator.fade(this._wave);
+        this._animator.fade(this._background);
+      });
 
-    this._holding = false;
-    this.removeEventListener('release', this._onRelease);
+      this._holding = false;
+    }
+
+    this.removeEventListener('release', this._boundOnRelease);
   }
 
   _onDragStart(e) {
@@ -194,19 +182,24 @@ class RippleElement extends BaseElement {
   }
 
   attachedCallback() {
+    this._boundOnTap = this._onTap.bind(this);
+    this._boundOnHold = this._onHold.bind(this);
+    this._boundOnDragStart = this._onDragStart.bind(this);
+    this._boundOnRelease = this._onRelease.bind(this);
+
     if (ons._config.animationsDisabled) {
       this.setDisabled(true);
     } else {
-      this.addEventListener('tap', this._onTap);
-      this.addEventListener('hold', this._onHold);
-      this.addEventListener('dragstart', this._onDragStart);
+      this.parentNode.addEventListener('tap', this._boundOnTap);
+      this.parentNode.addEventListener('hold', this._boundOnHold);
+      this.parentNode.addEventListener('dragstart', this._boundOnDragStart);
     }
   }
 
   detachedCallback() {
-    this.removeEventListener('tap', this._onTap);
-    this.removeEventListener('hold', this._onHold);
-    this.removeEventListener('dragstart', this._onDragStart);
+    this.parentNode.removeEventListener('tap', this._boundOnTap);
+    this.parentNode.removeEventListener('hold', this._boundOnHold);
+    this.parentNode.removeEventListener('dragstart', this._boundOnDragStart);
   }
 
   attributeChangedCallback(name, last, current) {
