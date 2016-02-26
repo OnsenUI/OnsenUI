@@ -34,7 +34,8 @@ platforms.android = element => {
     'large--cta': 'large',
     'noborder': '',
     'chevron': '',
-    'tappable': ''
+    'tappable': '',
+    'underbar': ''
   };
 
   if (!/ons-fab|ons-speed-dial|ons-progress/.test(element.tagName.toLowerCase()) &&
