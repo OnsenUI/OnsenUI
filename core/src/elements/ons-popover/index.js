@@ -389,7 +389,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method show
    * @signature show(target, [options])
    * @param {String|Event|HTMLElement} target
@@ -477,7 +476,6 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-<<<<<<< HEAD
    * @method hide
    * @signature hide([options])
    * @param {Object} [options]
