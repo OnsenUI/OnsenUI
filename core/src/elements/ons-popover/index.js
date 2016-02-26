@@ -645,7 +645,11 @@ class PopoverElement extends BaseElement {
 
   _cancel() {
     if (this.isCancelable()) {
-      this.hide();
+      this.hide({
+        callback: () => {
+          util.triggerElementEvent(this, 'cancel');
+        }
+      });
     }
   }
 }
