@@ -133,7 +133,7 @@ class RippleElement extends BaseElement {
   }
 
   _updateParent() {
-    if (!this._parentUpdated) {
+    if (!this._parentUpdated && this.parentNode) {
       const computedStyle = window.getComputedStyle(this.parentNode);
       if (computedStyle.getPropertyValue('position') === 'static') {
         this.parentNode.style.position = 'relative';
