@@ -1,7 +1,10 @@
 'use strict';
 
-var createDialogClass = function createDialogClass(domName) {
-  return React.createClass({
+var ReactTestUtils = React.addons.TestUtils;
+
+var createDialogClass = function createDialogClass(domName, showFun) {
+
+  var myClass = {
     show: function show() {
       this.node.firstChild.show();
     },
@@ -9,10 +12,15 @@ var createDialogClass = function createDialogClass(domName) {
       this.node.firstChild.hide();
     },
     componentDidMount: function componentDidMount() {
+      var _this = this;
+
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
 
-      this.node.addEventListener('cancel', this.props.onCancel);
+      this.node.addEventListener('cancel', function () {
+        console.log('cance???');
+        _this.props.onCancel;
+      });
       this.renderPortal(this.props);
     },
     componentWillReceiveProps: function componentWillReceiveProps(newProps) {
@@ -37,11 +45,30 @@ var createDialogClass = function createDialogClass(domName) {
     render: function render() {
       return React.DOM.noscript();
     }
-  });
+  };
+
+  if (showFun) {
+    myClass.show = showFun;
+  };
+
+  return React.createClass(myClass);
 };
 
 var OnsAlertDialog = createDialogClass('ons-alert-dialog');
 var OnsDialog = createDialogClass('ons-dialog');
+
+var showFun = function showFun() {
+  console.log('showFun');
+  var target = this.props.getTarget();
+  if (ReactTestUtils.isElement(target)) {
+    target = ReactDOM.findDOMNode(target);
+  }
+  console.log('showFun');
+  console.log(target);
+  return this.node.firstChild.show(target);
+};
+
+var OnsPopover = createDialogClass('ons-popover', showFun);
 'use strict';
 
 var util = window.ons._util;
@@ -57,7 +84,7 @@ var OnsNavigator = React.createClass({
     this.init = true;
 
     if (!reactUtil.rendersToOnsPage(page)) {
-      throw new Error("OnsNavigator has to contain exactly one child of type OnsPage");
+      throw new Error('OnsNavigator has to contain exactly one child that renders to ons-page');
     }
 
     var lastLink = window.OnsNavigatorElement.rewritables.link;
