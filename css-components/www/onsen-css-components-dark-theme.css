@@ -3580,7 +3580,6 @@ input:disabled + .switch__toggle {
   overflow: auto;
   display: block;
   -webkit-overflow-scrolling: touch;
-  margin-top: -1px;
   border-bottom: 1px solid #424242;
   overflow: hidden;
 }
