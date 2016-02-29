@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.6 - 2016-02-26 */
+/*! onsenui - v2.0.0-beta.6 - 2016-02-29 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -428,13 +428,14 @@ ons-icon[fixed-width="true"] {
   font-size: 5em;
 }
 
-ons-input input, ons-input > label {
-  width: inherit;
+ons-input {
+  display: inline-block;
+  position: relative;
 }
 
 ons-input .text-input__container {
+  width: 100%;
   display: inline-block;
-  position: relative;
 }
 
 ons-input .text-input--material__label {
