@@ -1,10 +1,11 @@
-ons-input input, ons-input > label {
-  width: inherit;
+ons-input {
+  display: inline-block;
+  position: relative;
 }
 
 ons-input .text-input__container {
+  width: 100%;
   display: inline-block;
-  position: relative;
 }
 
 ons-input .text-input--material__label {
