@@ -30,7 +30,7 @@ var-list-padding = 0
 var-list-header-font-size = 15px
 var-list-border = 1px solid var-list-item-separator-color
 
-var-list-item-margin = 0 0 0 0
+var-list-item-margin = 1px 0 -1px 0
 var-list-item-padding = 0
 var-list-header-padding = 20px 0 0 26px
 var-list-item-min-height = 44px
@@ -142,10 +142,6 @@ list__item()
 .list__item__left + .list__item__center
   margin-left 0
 
-.list__item:last-child .list__item__center
-  border-bottom none
-  background-image none
-
 .list__item__right
   display flex
   margin-left auto
@@ -155,10 +151,6 @@ list__item()
   align-self stretch
   border-bottom var-list-border
   retina-list-item-border()
-
-.list__item:last-child .list__item__right
-  border-bottom none
-  background-image none
 
 .list__header
   list__header()
@@ -183,6 +175,7 @@ list__item()
   list()
   padding var-list-padding
   border-bottom var-list-border-bottom
+  overflow hidden
 
 .list__item
   list__item()
@@ -290,12 +283,6 @@ list__item()
       <li class="list__item">
         <div class="list__item__center">Item</div>
       </li>
-      <li class="list__header">
-        Header
-      </li>
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
-      </li>
     </ul>
  */
 
@@ -386,9 +373,6 @@ list__item()
   border-bottom var-list-border
   retina-list-item-border()
 
-.list__item--chevron:last-child:before
-  border-bottom none
-  background-image none
 
 /*! topdoc
   name: Inset List
