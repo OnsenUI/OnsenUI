@@ -6,6 +6,11 @@ reactUtil.rendersToOnsPage =  function(obj) {
    return htmlString.startsWith('<ons-page');
 };
 
+reactUtil.rendersTo =  function(obj, str) {
+   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
+   return htmlString.startsWith(str);
+}
+
 reactUtil.rendersToOnsToolbar = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-toolbar');
