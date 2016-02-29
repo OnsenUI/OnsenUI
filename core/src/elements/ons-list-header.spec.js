@@ -35,4 +35,13 @@ describe('ons-list-header', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-list-header');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+  });
 });

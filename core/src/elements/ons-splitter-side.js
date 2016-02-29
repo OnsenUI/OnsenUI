@@ -263,7 +263,7 @@ class CollapseMode extends BaseMode {
       const distance = this._element._isLeftSide()
         ? event.gesture.center.clientX
         : window.innerWidth - event.gesture.center.clientX;
-      if (distance > this._element._swipeTargetWidth) {
+      if (!this.isOpen() && distance > this._element._swipeTargetWidth) {
         this._ignoreDrag = true;
       }
     }
@@ -631,7 +631,7 @@ class SplitterSideElement extends BaseElement {
    * @attribute side
    * @type {String}
    * @description
-   *   [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are "left" and "right".[/en]
+   *   [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are "left" (default) and "right".[/en]
    *   [ja]この要素が左か右かを指定します。指定できる値は"left"か"right"のみです。[/ja]
    */
 
@@ -692,6 +692,7 @@ class SplitterSideElement extends BaseElement {
     this._mode = null;
     this._page = null;
     this._isAttached = false;
+
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
@@ -711,7 +712,7 @@ class SplitterSideElement extends BaseElement {
 
     this._updateForAnimationAttribute();
     this._updateForWidthAttribute();
-    this._updateForSideAttribute();
+    this.hasAttribute('side') ? this._updateForSideAttribute() : this.setAttribute('side', 'left');
     this._updateForCollapseAttribute();
     this._updateForSwipeableAttribute();
     this._updateForSwipeTargetWidthAttribute();
@@ -984,19 +985,12 @@ class SplitterSideElement extends BaseElement {
     return internal.getPageHTMLAsync(page).then((html) => {
       return new Promise(resolve => {
         rewritables.link(this, util.createFragment(html), options, (fragment) => {
-          while (this.childNodes[0]) {
-            if (this.childNodes[0]._hide instanceof Function) {
-              this.childNodes[0]._hide();
-            }
-            this.removeChild(this.childNodes[0]);
-          }
+          util.propagateAction(this, '_hide');
+          this.innerHTML = '';
 
           this.appendChild(fragment);
-          util.arrayFrom(fragment.childNodes).forEach(node => {
-            if (node._show instanceof Function) {
-              node._show();
-            }
-          });
+
+          util.propagateAction(this, '_show');
 
           options.callback();
           resolve(this.firstChild);
@@ -1089,27 +1083,15 @@ class SplitterSideElement extends BaseElement {
   }
 
   _show() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._show instanceof Function) {
-        child._show();
-      }
-    });
+    util.propagateAction(this, '_show');
   }
 
   _hide() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._hide instanceof Function) {
-        child._hide();
-      }
-    });
+    util.propagateAction(this, '_hide');
   }
 
   _destroy() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._destroy instanceof Function) {
-        child._destroy();
-      }
-    });
+    util.propagateAction(this, '_destroy');
     this.remove();
   }
 

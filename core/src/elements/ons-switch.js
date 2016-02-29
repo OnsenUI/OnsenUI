@@ -180,17 +180,22 @@ class SwitchElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
-    this._checkbox = this.querySelector('input[type=checkbox]');
+
+    this._checkbox = this.querySelector('.switch__input');
     this._handle = this.querySelector('.switch__handle');
 
-    ['checked', 'disabled', 'modifier', 'name'].forEach(e => {
+    ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     this.classList.add('switch');
+
     this.appendChild(template.cloneNode(true));
+
     this.setAttribute('_compiled', '');
   }
 
@@ -199,6 +204,7 @@ class SwitchElement extends BaseElement {
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
+    this.removeEventListener('click', this._onClick);
     this._gestureDetector.dispose();
   }
 
@@ -209,6 +215,7 @@ class SwitchElement extends BaseElement {
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
     this._boundOnRelease = this._onRelease.bind(this);
+    this.addEventListener('click', this._onClick);
   }
 
   _onChange() {
@@ -219,10 +226,22 @@ class SwitchElement extends BaseElement {
     }
   }
 
+  _onClick(ev) {
+    if (ev.target.classList.contains('switch__touch')) {
+      ev.preventDefault();
+    }
+  }
+
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
+      util.triggerElementEvent(this.getCheckboxElement(), 'change');
     }
+  }
+
+  _getPosition(e) {
+    const l = this._locations;
+    return Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
   }
 
   _onHold(e) {
@@ -246,13 +265,15 @@ class SwitchElement extends BaseElement {
 
   _onDrag(e) {
     e.gesture.srcEvent.preventDefault();
-    var l = this._locations;
-    var position = Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
-    this._handle.style.left = position + 'px';
-    this.checked = position >= (l[0] + l[1]) / 2;
-  };
+    this._handle.style.left = this._getPosition(e) + 'px';
+  }
 
   _onRelease(e) {
+    const l = this._locations;
+    const position = this._getPosition(e);
+
+    this.checked = position >= (l[0] + l[1]) / 2;
+
     this.removeEventListener('drag', this._onDrag);
     document.removeEventListener('release', this._boundOnRelease);
 
@@ -266,6 +287,9 @@ class SwitchElement extends BaseElement {
       this._isMaterial = (current || '').indexOf('material') !== -1;
       this._locations = locations[this._isMaterial ? 'material' : 'ios'];
       ModifierUtil.onModifierChanged(last, current, this, scheme);
+      break;
+    case 'input-id':
+      this._checkbox.id = current;
       break;
     case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;

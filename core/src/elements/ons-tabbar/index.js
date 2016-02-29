@@ -207,9 +207,6 @@ class TabbarElement extends BaseElement {
 
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._contentElement = util.findChild(this, '.tab-bar__content');
@@ -223,6 +220,12 @@ class TabbarElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
+    if (this.getAttribute('position') === 'auto') {
+      this.setAttribute('position', ons.platform.isAndroid() ? 'top' : 'bottom');
+    }
+
     var wrapper = document.createDocumentFragment();
 
     var content = document.createElement('div');
@@ -246,6 +249,10 @@ class TabbarElement extends BaseElement {
     if (this._hasTopTabbar()) {
       this._prepareForTopTabbar();
     }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _hasTopTabbar() {
@@ -265,6 +272,10 @@ class TabbarElement extends BaseElement {
     var page = util.findParent(this, 'ons-page');
     if (page) {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
+
+      if (page.firstChild.tagName.toLowerCase() === 'ons-toolbar') {
+        util.addModifier(page.firstChild, 'noshadow');
+      }
     }
 
     internal.shouldFillStatusBar(this)

@@ -30,5 +30,16 @@ describe('ons-toolbar-button', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-toolbar-button');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      e = ons._util.createElement('<ons-toolbar-button modifier="outline"></ons-toolbar-button>');
+      expect(e.getAttribute('modifier')).to.contain('material--flat');
+      ons.platform.select('');
+    });
+  });
 });
 

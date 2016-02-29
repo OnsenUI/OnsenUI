@@ -41,8 +41,8 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'fade': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };
@@ -198,9 +198,6 @@ class DialogElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._visible = false;
@@ -216,6 +213,8 @@ class DialogElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const style = this.getAttribute('style');
 
     this.style.display = 'none';
@@ -239,6 +238,10 @@ class DialogElement extends BaseElement {
     this._mask.style.zIndex = 20000;
 
     this.setAttribute('no-status-bar-fill', '');
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

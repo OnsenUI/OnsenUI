@@ -143,32 +143,17 @@ class TabElement extends BaseElement {
    *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  /**
-   * @attribute persistent
-   * @description
-   *   [en]
-   *     Set to make the tab content persistent.
-   *     If this attribute it set the DOM will not be destroyed when navigating to another tab.
-   *   [/en]
-   *   [ja]
-   *     このタブで読み込んだページを永続化します。
-   *     この属性があるとき、別のタブのページに切り替えても、
-   *     読み込んだページのDOM要素は破棄されずに単に非表示になります。
-   *   [/ja]
-   */
-
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const fragment = document.createDocumentFragment();
     let hasChildren = false;
 
@@ -197,6 +182,14 @@ class TabElement extends BaseElement {
       this._hasDefaultTemplate = true;
       this._updateDefaultTemplate();
     }
+
+    if (this.hasAttribute('ripple') && !util.findChild(button, 'ons-ripple')) {
+      button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _updateDefaultTemplate() {
@@ -323,23 +316,20 @@ class TabElement extends BaseElement {
 
     const tabIndex = this._findTabIndex();
 
-
-    if (this.hasAttribute('active')) {
-        const tabIndex = this._findTabIndex();
-        OnsTabbarElement.rewritables.ready(tabbar, () => {
-          setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
-        });
+      OnsTabbarElement.rewritables.ready(tabbar, () => {
+        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+      });
     } else {
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        if (!this._pageElement) {
+        setImmediate(() =>
           this._createPageElement(this.getAttribute('page'), pageElement => {
             OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
               this._pageElement = pageElement;
               this._pageElement.style.display = 'none';
               tabbar._contentElement.appendChild(this._pageElement);
             });
-          });
-        }
+          })
+        );
       });
     }
 

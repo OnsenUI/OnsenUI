@@ -119,12 +119,10 @@ class PageElement extends BaseElement {
 
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._isShown = false;
+    this._contentElement = this._getContentElement();
     this._isMuted = this.hasAttribute('_muted');
     this._skipInit = this.hasAttribute('_skipinit');
     this.eventDetail = {
@@ -214,7 +212,7 @@ class PageElement extends BaseElement {
       return true;
     }
 
-    const elements = this._getContentElement().children;
+    const elements = this._contentElement.children;
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
         return true;
@@ -256,7 +254,7 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerToolbar(element) {
-    this._getContentElement().setAttribute('no-status-bar-fill', '');
+    this._contentElement.setAttribute('no-status-bar-fill', '');
 
     if (util.findChild(this, '.page__status-bar-fill')) {
       this.insertBefore(element, this.children[1]);
@@ -293,6 +291,8 @@ class PageElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const background = document.createElement('div');
     background.classList.add('page__background');
 
@@ -313,6 +313,10 @@ class PageElement extends BaseElement {
     fragment.appendChild(content);
 
     this.appendChild(fragment);
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   _registerExtraElement(element) {
@@ -375,7 +379,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'show', this.eventDetail);
       }
 
-      util.propagateAction(this._getContentElement(), '_show');
+      util.propagateAction(this._contentElement, '_show');
     }
   }
 
@@ -387,7 +391,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'hide', this.eventDetail);
       }
 
-      util.propagateAction(this._getContentElement(), '_hide');
+      util.propagateAction(this._contentElement, '_hide');
     }
   }
 
@@ -402,7 +406,7 @@ class PageElement extends BaseElement {
       this.getDeviceBackButtonHandler().destroy();
     }
 
-    util.propagateAction(this._getContentElement(), '_destroy');
+    util.propagateAction(this._contentElement, '_destroy');
 
     this.remove();
   }

@@ -7,18 +7,13 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <style>
-    .item {
-      height: 40px;
-    }
-  </style>
-
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
     window.onload = setup;
 
     function setup() {
+
       document.querySelector('#my-list').delegate = {
         calculateItemHeight: function(i) {
           return 44;
@@ -26,7 +21,8 @@
 
         createItemContent: function(i, template) {
           var dom = template.cloneNode(true);
-          dom.innerText = i;
+
+          dom.innerHTML = dom.innerHTML.replace('{{item}}', i);
 
           return dom;
         },
@@ -36,7 +32,7 @@
         }
       };
     }
-    
+
     function refresh() {
       document.querySelector('#my-list').refresh();
     }
@@ -55,7 +51,7 @@
     <ons-list>
       <ons-lazy-repeat id="my-list">
         <ons-list-item>
-          item
+          {{item}}
         </ons-list-item>
       </ons-lazy-repeat>
     </ons-list>

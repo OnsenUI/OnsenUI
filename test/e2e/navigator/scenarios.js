@@ -96,6 +96,46 @@
       });
     });
 
+    describe('page insert', function () {
+      it('should insert in background', function () {
+        var page1 = element(by.id('page1'));
+        var page2 = element(by.id('page2'));
+        element(by.id('btn1')).click();
+        browser.wait(EC.visibilityOf(page2));
+        browser.wait(EC.invisibilityOf(page1));
+
+        element(by.id('btn-insert1')).click();
+        browser.wait(protractor.until.elementLocated(by.id('background_1'), 500));
+
+        element(by.id('btn-insert2')).click();
+        browser.wait(protractor.until.elementLocated(by.id('background_2'), 500));
+
+        var page3 = element(by.id('background_1'));
+        var page4 = element(by.id('background_2'));
+
+        expect(element(by.id('page1')).isDisplayed()).toBe(false);
+        expect(element(by.id('page2')).isDisplayed()).toBe(true);
+        expect(element(by.id('background_1')).isDisplayed()).toBe(false);
+        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
+
+        // pop
+        element(by.id('btn2')).click();
+        browser.wait(EC.stalenessOf(page2));
+        expect(element(by.id('page1')).isDisplayed()).toBe(false);
+        expect(element(by.id('background_1')).isDisplayed()).toBe(true);
+        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
+
+        element(by.id('background_1_btn')).click();
+        browser.wait(EC.stalenessOf(page3));
+        expect(element(by.id('page1')).isDisplayed()).toBe(true);
+        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
+
+        element(by.id('btn1-pop')).click();
+        browser.wait(EC.stalenessOf(page1));
+        expect(element(by.id('background_2')).isDisplayed()).toBe(true);
+      });
+    });
+
     describe('backbutton handler', function () {
       it('should work on \'backbutton\' event', function() {
         var page1 = element(by.id('page1'));

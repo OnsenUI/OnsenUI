@@ -20,7 +20,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
 const scheme = {
-  '': 'list__item--*',
+  '.list__item': 'list__item--*',
   '.list__item__left': 'list__item--*__left',
   '.list__item__center': 'list__item--*__center',
   '.list__item__right': 'list__item--*__right',
@@ -90,8 +90,62 @@ class ListItemElement extends BaseElement {
    */
 
   createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
+  }
+
+  _compile() {
+    ons._autoStyle.prepare(this);
     this.classList.add('list__item');
+
+    let left, center, right;
+
+    for (let i = 0; i < this.children.length; i++) {
+      const el = this.children[i];
+
+      if (el.classList.contains('left')) {
+        el.classList.add('list__item__left');
+        left = el;
+      }
+      else if (el.classList.contains('center')) {
+        center = el;
+      }
+      else if (el.classList.contains('right')) {
+        el.classList.add('list__item__right');
+        right = el;
+      }
+    }
+
+    if (!center) {
+      center = document.createElement('div');
+
+      if (!left && !right) {
+        center.innerHTML = this.innerHTML;
+        this.innerHTML = '';
+      } else {
+
+        for (let i = this.childNodes.length - 1; i >= 0; i--) {
+          let el = this.childNodes[i];
+          if (el !== left && el !== right) {
+            center.insertBefore(el, center.firstChild);
+          }
+        }
+      }
+
+      this.insertBefore(center, right || null);
+    }
+
+    center.classList.add('center');
+    center.classList.add('list__item__center');
+
+    if (this.hasAttribute('ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
+
     ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

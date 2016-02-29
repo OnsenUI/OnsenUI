@@ -287,4 +287,13 @@ describe('OnsDialogElement', () => {
       window.OnsDialogElement.registerAnimator('hoge', MyAnimator);
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      let e = document.createElement('ons-dialog');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+    });
+  });
 });

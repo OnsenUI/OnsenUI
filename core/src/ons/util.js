@@ -83,7 +83,7 @@ util.findParent = (element, query) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (!parent) {
+    if (!parent || parent === document) {
       return null;
     }
     if (match(parent)) {
@@ -128,7 +128,7 @@ util.hasAnyComponentAsParent = (element) => {
 util.propagateAction = (element, action) => {
   for (let i = 0; i < element.childNodes.length; i++) {
     let child = element.childNodes[i];
-    if (child[action]) {
+    if (child[action] instanceof Function) {
       child[action]();
     } else {
       util.propagateAction(child, action);
@@ -199,11 +199,7 @@ util.extend = (dst, ...args) => {
  * @return {Array}
  */
 util.arrayFrom = (arrayLike) => {
-  const result = [];
-  for (let i = 0; i < arrayLike.length; i++) {
-    result.push(arrayLike[i]);
-  }
-  return result;
+  return Array.prototype.slice.apply(arrayLike);
 };
 
 /**
@@ -268,6 +264,43 @@ util.hasModifier = (target, modifierName) => {
   }
 
   return false;
+};
+
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @return {Boolean} Whether it was added or not.
+ */
+util.addModifier = (target, modifierName) => {
+  if (util.hasModifier(target, modifierName)) {
+    return false;
+  }
+
+  modifierName = modifierName.trim();
+  let modifierAttribute = target.getAttribute('modifier') || '';
+  target.setAttribute('modifier', modifierAttribute ? modifierAttribute.trim() + ' ' + modifierName : modifierName);
+  return true;
+};
+
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @return {Boolean} Whether it was found or not.
+ */
+util.removeModifier = (target, modifierName) => {
+  if (!target.getAttribute('modifier')) {
+    return false;
+  }
+
+  const modifiers = target
+    .getAttribute('modifier')
+    .trim()
+    .split(/\s+/);
+
+  const newModifiers = modifiers.filter(item => item && item !== modifierName);
+  target.setAttribute('modifier', newModifiers.join(' '));
+
+  return modifiers.length !== newModifiers.length;
 };
 
 /**

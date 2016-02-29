@@ -10,77 +10,52 @@
   <script src="../../build/js/onsenui.js"></script>
   <script src="../../build/js/angular/angular.js"></script>
   <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
   <script>
-    ons.bootstrap();
+    ons.bootstrap()
+      .controller('PageController', function($scope) {
+        $scope.name = 'green';
+        $scope.specialValue = 'green';
+      });
   </script>
 
 </head>
 
 <body>
-
-  <ons-navigator>
+  <ons-page ng-controller="PageController">
     <ons-toolbar><div class="center">Radio Button</div></ons-toolbar>
 
-    <div style="text-align: center">
-      <p>Choose Level</p>
+    <p>Select your favorite color:<p>
 
-      <ons-list>
-        <ons-list-item modifier="tappable">
-          <label class="radio-button" style="width:100%; height: 24px; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input" name="level" ng-model="selectedLevel" value="easy">
-            <div class="radio-button__checkmark"></div>
-            Easy
-          </label>
-        </ons-list-item>
+    <label>
+      <ons-input type="radio" ng-model="name" value="red">
+      Red
+    </label><br/>
+    <label>
+      <ons-input type="radio" ng-model="name" ng-value="specialValue">
+      Green
+    </label><br/>
+    <label>
+      <ons-input type="radio" ng-model="name" value="blue">
+      Blue
+    </label><br/>
 
-        <ons-list-item modifier="tappable">
-          <label class="radio-button" style="width:100%; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input" name="level" ng-model="selectedLevel" value="medium">
-            <div class="radio-button__checkmark"></div>
-            Medium
-          </label>
-        </ons-list-item>
+    <p>Some material radio buttons</p>
 
-        <ons-list-item modifier="tappable">
-          <label class="radio-button" style="width:100%; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input" name="level" ng-model="selectedLevel" value="hard">
-            <div class="radio-button__checkmark"></div>
-            Hard
-          </label>
-        </ons-list-item>
-      </ons-list>
-      <br>
-      <ons-list>
-        <ons-list-item modifier="tappable">
-          <label class="radio-button radio-button--material" style="width:100%; height: 24px; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="level2" ng-model="selectedLevel2" value="easy">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Easy
-          </label>
-        </ons-list-item>
+    <label>
+      <ons-input modifier="material" type="radio" ng-model="name" value="red">
+      Red
+    </label><br/>
+    <label>
+      <ons-input modifier="material" type="radio" ng-model="name" value="green">
+      Green
+    </label><br/>
+    <label>
+      <ons-input modifier="material" type="radio" ng-model="name" value="blue">
+      Blue
+    </label><br/>
 
-        <ons-list-item modifier="tappable">
-          <label class="radio-button radio-button--material" style="width:100%; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="level2" ng-model="selectedLevel2" value="medium">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Medium
-          </label>
-        </ons-list-item>
+    <p>My favorite color is <strong>{{ name }}</strong>.</p>
 
-        <ons-list-item modifier="tappable">
-          <label class="radio-button radio-button--material" style="width:100%; display: block; margin: 0; padding: 10px 0;">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="level2" ng-model="selectedLevel2" value="hard">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Hard
-          </label>
-        </ons-list-item>
-      </ons-list>
-
-      <h3>{{selectedLevel}}</h3>
-      <h3>{{selectedLevel2}}</h3>
-    </div>
-  </ons-navigator>
-
+  </ons-page>
 </body>
 </html>

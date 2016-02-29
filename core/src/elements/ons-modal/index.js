@@ -82,9 +82,6 @@ class ModalElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
-
-      this.setAttribute('_compiled', '');
     }
 
     this._doorLock = new DoorLock();
@@ -149,6 +146,10 @@ class ModalElement extends BaseElement {
     }
 
     this.appendChild(wrapper);
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {

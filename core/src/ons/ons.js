@@ -15,7 +15,17 @@ limitations under the License.
 
 */
 
-import DeviceBackButtonDispatcher from './device-back-button-dispatcher';
+import util from './util';
+import GestureDetector from './gesture-detector';
+import platform from './platform';
+import notification from './notification';
+import internal from './internal';
+import orientation from './orientation';
+import softwareKeyboard from './software-keyboard';
+import PageAttributeExpression from './page-attribute-expression';
+import deviceBackButtonDispatcher from './device-back-button-dispatcher';
+import animationOptionsParser from './animation-options-parser';
+import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 
 /**
@@ -27,7 +37,21 @@ import DoorLock from './doorlock';
  */
 const ons = {};
 
+ons._util = util;
+ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
+ons._internal = internal;
+ons.GestureDetector = GestureDetector;
+ons.platform = platform;
+ons.softwareKeyboard = softwareKeyboard;
+ons.pageAttributeExpression = PageAttributeExpression;
+ons.orientation = orientation;
+ons.notification = notification;
+ons._animationOptionsParser = animationOptionsParser;
+ons._autoStyle = autoStyle;
+ons._DoorLock = DoorLock;
+
 ons._readyLock = new DoorLock();
+
 ons._config = {
   autoStatusBarFill: true,
   animationsDisabled: false
@@ -107,7 +131,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
 ons.disableDeviceBackButtonHandler = function() {
-  DeviceBackButtonDispatcher.disable();
+  ons._deviceBackButtonDispatcher.disable();
 };
 
 /**
@@ -118,7 +142,7 @@ ons.disableDeviceBackButtonHandler = function() {
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
 ons.enableDeviceBackButtonHandler = function() {
-  DeviceBackButtonDispatcher.enable();
+  ons._deviceBackButtonDispatcher.enable();
 };
 
 
@@ -171,6 +195,16 @@ ons.disableAnimations = () => {
 ons.enableAnimations = () => {
   ons._config.animationsDisabled = false;
 };
+
+/**
+ * Disable automatic styling.
+ */
+ons.disableAutoStyling = ons._autoStyle.disable;
+
+/**
+ * Enable automatic styling based on OS (default).
+ */
+ons.enableAutoStyling = ons._autoStyle.enable;
 
 /**
  * @param {String} page

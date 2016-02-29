@@ -93,4 +93,15 @@ describe('OnsListItemElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifiers and effects on Android if tappable', () => {
+      ons.platform.select('android');
+      let e = ons._util.createElement('<ons-list-item tappable></ons-list-item>');
+      expect(e.getAttribute('modifier')).to.equal('material');
+      expect(e.hasAttribute('ripple')).to.be.true;
+      expect(e.children[0].tagName.toLowerCase()).to.equal('ons-ripple');
+      ons.platform.select('');
+    });
+  });
 });

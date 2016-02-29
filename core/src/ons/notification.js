@@ -86,6 +86,8 @@ notification._createAlertDialog = function(title, message,
     result.reject = reject;
   });
 
+  modifier = modifier || dialogElement.getAttribute('modifier');
+
   if (typeof title === 'string') {
     titleElement.textContent = title;
   }
@@ -140,7 +142,7 @@ notification._createAlertDialog = function(title, message,
 
   const createButton = function(i) {
     let buttonElement = util.createElement('<button class="alert-dialog-button"></button>');
-    buttonElement.textContent = buttonLabels[i];
+    buttonElement.appendChild(document.createTextNode(buttonLabels[i]));
 
     if (i == primaryButtonIndex) {
       buttonElement.classList.add('alert-dialog-button--primal');
@@ -205,13 +207,17 @@ notification._createAlertDialog = function(title, message,
   messageElement = footerElement = null;
 
   if (modifier) {
+    dialogElement.setAttribute('modifier', '');
     dialogElement.setAttribute('modifier', modifier);
   }
 
   return result.promise;
 };
 
-notification._alertOriginal = function(options) {
+notification._alertOriginal = function(message, options = {}) {
+
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var defaults = {
     buttonLabel: 'OK',
     animation: 'default',

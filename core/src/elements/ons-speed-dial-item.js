@@ -53,10 +53,10 @@ class SpeedDialItemElement extends BaseElement {
    */
 
   createdCallback() {
-    ModifierUtil.initModifier(this, scheme);
-    this.classList.add('fab');
-    this.classList.add('fab--mini');
-    this.classList.add('speed-dial__item');
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
+
     this._boundOnClick = this._onClick.bind(this);
   }
 
@@ -76,6 +76,22 @@ class SpeedDialItemElement extends BaseElement {
 
   _onClick(e) {
     e.stopPropagation();
+  }
+
+  _compile() {
+    ons._autoStyle.prepare(this);
+
+    this.classList.add('fab');
+    this.classList.add('fab--mini');
+    this.classList.add('speed-dial__item');
+
+    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 }
 

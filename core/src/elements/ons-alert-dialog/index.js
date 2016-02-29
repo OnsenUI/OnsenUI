@@ -47,9 +47,9 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'fade': platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'none': AlertDialogAnimator
+  'none': AlertDialogAnimator,
+  'default': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+  'fade': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator
 };
 
 /**
@@ -243,6 +243,8 @@ class AlertDialogElement extends BaseElement {
   }
 
   _compile() {
+    ons._autoStyle.prepare(this);
+
     const style = this.getAttribute('style');
 
     this.style.display = 'none';
@@ -268,6 +270,10 @@ class AlertDialogElement extends BaseElement {
     if (this.getAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
+
+    ModifierUtil.initModifier(this, scheme);
+
+    this.setAttribute('_compiled', '');
   }
 
   /**

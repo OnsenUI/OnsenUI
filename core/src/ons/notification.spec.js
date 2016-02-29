@@ -196,4 +196,24 @@ describe('ons.notification', () => {
       dialog.querySelector('button').click();
     });
   });
+
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', () => {
+      ons.platform.select('android');
+      ons.notification.alert({message: 'test', id: 'test'});
+      let dialog = document.getElementById('test');
+      expect(dialog.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
+      dialog.remove();
+    });
+
+    it('removes \'material\' modifier on iOS', () => {
+      ons.platform.select('ios');
+      ons.notification.alert({message: 'test', id: 'test'});
+      let dialog = document.getElementById('test');
+      expect(dialog.getAttribute('modifier')).not.to.equal('material');
+      ons.platform.select('');
+      dialog.remove();
+    });
+  });
 });
