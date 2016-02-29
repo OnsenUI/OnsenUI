@@ -93,20 +93,17 @@ class MaterialInputElement extends BaseElement {
     let helper = document.createElement('span');
     helper.classList.add('_helper');
 
-    let inputContainer = document.createElement('span');
-    inputContainer.appendChild(document.createElement('input'));
-    inputContainer.appendChild(helper);
-
-    let content = document.createElement('label');
-    content.appendChild(inputContainer);
+    let container = document.createElement('label');
+    container.appendChild(document.createElement('input'));
+    container.appendChild(helper);
 
     let label = document.createElement('span');
     label.classList.add('input-label');
 
     ons._util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
-    this.hasAttribute('content-left') ? content.insertBefore(label, content.firstChild) : content.appendChild(label);
+    this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
 
-    this.appendChild(content);
+    this.appendChild(container);
 
     switch (this.getAttribute('type')) {
       case 'checkbox':
