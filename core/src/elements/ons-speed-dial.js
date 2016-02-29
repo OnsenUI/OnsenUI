@@ -88,7 +88,15 @@ class SpeedDialElement extends BaseElement {
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
+      this._updateClasses();
+    }
 
+    this._shown = true;
+    this._itemShown = false;
+    this._boundOnClick = this._onClick.bind(this);
+  }
+
+  _updateClasses() {
       this.classList.add('speed__dial');
 
       if (this.hasAttribute('direction')) {
@@ -101,11 +109,6 @@ class SpeedDialElement extends BaseElement {
       if (this.hasAttribute('disabled')) {
         this.setDisabled(true);
       }
-    }
-
-    this._shown = true;
-    this._itemShown = false;
-    this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {
