@@ -26,8 +26,7 @@ var-list-item-color = $text-color
 var-list-item-active-background-color = $list-tap-active-background-color
 var-list-item-separator-color = $border-color
 
-var-list-padding = 0
-var-list-header-font-size = 15px
+var-list-header-font-size = 12px
 var-list-border = 1px solid var-list-item-separator-color
 
 var-list-item-margin = 1px 0 -1px 0
@@ -165,7 +164,6 @@ list__item()
   line-height @min-height
   margin-top -1px
   text-transform uppercase
-  font-size 12px
   position relative
 
 .list__header:not(:first-of-type)
@@ -173,7 +171,6 @@ list__item()
 
 .list
   list()
-  padding var-list-padding
   border-bottom var-list-border-bottom
   overflow hidden
 
