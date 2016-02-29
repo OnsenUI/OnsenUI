@@ -65,7 +65,7 @@ var OnsTabbar = React.createClass({
       index++;
       child = React.cloneElement(child, {modifier: newModifier});
 
-      counter = -1;
+      var counter = -1;
 
       var myChildren = React.Children.map(child.props.children, function(child2) {
         counter++;
