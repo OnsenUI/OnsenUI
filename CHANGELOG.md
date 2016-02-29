@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.8
+----
+
 v2.0.0-beta.7
 ----
  * core: Automatic Styling feature depending on current platform.
