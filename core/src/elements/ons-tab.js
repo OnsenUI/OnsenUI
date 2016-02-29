@@ -314,6 +314,7 @@ class TabElement extends BaseElement {
       this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
     }
 
+    if (this.hasAttribute('active')) {
     const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
