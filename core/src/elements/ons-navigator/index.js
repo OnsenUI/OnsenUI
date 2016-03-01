@@ -242,6 +242,9 @@ class NavigatorElement extends BaseElement {
 
   set options(object) {
     this._options = object;
+    if (!this._options.hasOwnProperty('cancelIfRunning')) {
+      this._options.cancelIfRunning = true;
+    }
   }
 
   /**
