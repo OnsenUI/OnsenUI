@@ -470,6 +470,10 @@ class TabbarElement extends BaseElement {
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
+    if (!options.animation && this.hasAttribute('animation')) {
+      options.animation = this.getAttribute('animation');
+    }
+
     var previousTab = this._getActiveTabElement(),
       selectedTab = this._getTabElement(index),
       previousTabIndex = this.getActiveTabIndex(),

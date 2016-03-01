@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-beta.8
 ----
+ * core: Small fix for Autostyling.
 
 v2.0.0-beta.7
 ----
