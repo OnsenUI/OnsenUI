@@ -26,6 +26,10 @@ const scheme = {'': 'carousel-item--*'};
  * @description
  *   [en]Carousel item component.[/en]
  *   [ja]カルーセルの要素を表現するコンポーネント。[/ja]
+ * @codepen xbbzOQ
+ * @seealso ons-carousel
+ *   [en]ons-carousel components[/en]
+ *   [ja]ons-carouselコンポーネント[/ja]
  * @example
  * <ons-carousel style="width: 100%; height: 200px">
  *   <ons-carousel-item>

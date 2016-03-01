@@ -156,24 +156,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle(),
 
-        animit(enterPageDecomposition.toolbar)
-          .saveStyle()
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay + 0.3)
-          .restoreStyle({
-            duration: 0.1,
-            transition:
-              'background-color 0.1s linear, ' +
-              'border-color 0.1s linear'
-          }),
-
         animit(enterPageDecomposition.pageLabels)
           .saveStyle()
           .queue({

@@ -3320,7 +3320,7 @@ input:disabled + .switch__toggle {
     </label>
 */
 .radio-button--material {
-  line-height: 20px;
+  line-height: 22px;
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -3332,6 +3332,9 @@ input:disabled + .switch__toggle {
 .radio-button--material__checkmark:before {
   background: transparent;
   border: 2px solid #717171;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   width: 20px;
@@ -3489,10 +3492,6 @@ input:disabled + .switch__toggle {
 .list__item__left + .list__item__center {
   margin-left: 0;
 }
-.list__item:last-child .list__item__center {
-  border-bottom: none;
-  background-image: none;
-}
 .list__item__right {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3529,10 +3528,6 @@ input:disabled + .switch__toggle {
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
   }
 }
-.list__item:last-child .list__item__right {
-  border-bottom: none;
-  background-image: none;
-}
 .list__header {
   margin: 0;
   padding: 0;
@@ -3543,17 +3538,18 @@ input:disabled + .switch__toggle {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 20px 0 0 26px;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 500;
   color: #524b57;
   text-shadow: none;
   border-top: none;
   border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0px 1px 0px 0px #fff;
+  box-shadow: 0px 1px 0px 0px #fff;
   min-height: 24px;
   line-height: 24px;
   margin-top: -1px;
   text-transform: uppercase;
-  font-size: 12px;
   position: relative;
 }
 .list__header:not(:first-of-type) {
@@ -3584,8 +3580,9 @@ input:disabled + .switch__toggle {
   overflow: auto;
   display: block;
   -webkit-overflow-scrolling: touch;
-  padding: 0;
+  margin-top: -1px;
   border-bottom: 1px solid #ddd;
+  overflow: hidden;
 }
 .list__item {
   margin: 0;
@@ -3619,7 +3616,7 @@ input:disabled + .switch__toggle {
   -ms-flex-align: center;
   align-items: center;
   padding: 0;
-  margin: 0 0 0 0;
+  margin: 1px 0 -1px 0;
   color: #524b57;
   background-color: #fff;
   min-height: 44px;
@@ -3627,6 +3624,7 @@ input:disabled + .switch__toggle {
 .list__item:first-child {
   -webkit-box-shadow: inset 0px 1px 0px 0px #ddd;
   box-shadow: inset 0px 1px 0px 0px #ddd;
+  margin-top: 0;
 }
 .list__item_active:active {
   background-color: #d9d9d9;
@@ -3732,12 +3730,6 @@ input:disabled + .switch__toggle {
   use: List
   markup:
     <ul class="list">
-      <li class="list__header">
-        Header
-      </li>
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
-      </li>
       <li class="list__header">
         Header
       </li>
@@ -3863,10 +3855,6 @@ input:disabled + .switch__toggle {
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
   }
 }
-.list__item--chevron:last-child:before {
-  border-bottom: none;
-  background-image: none;
-}
 /* topdoc
   name: Inset List
   use: List, List Item with Chevron, Tappable List
@@ -3982,17 +3970,17 @@ input:disabled + .switch__toggle {
 */
 /* topdoc
   name: Text Input in List Item
-  use: List, Transparent Text Input
+  use: List
   markup:
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
-          <input type="text" class="text-input text-input--transparent" placeholder="Name">
+          <input type="text" class="text-input" placeholder="Name">
         </div>
       </li>
       <li class="list__item">
         <div class="list__item__center">
-          <input type="text" class="text-input text-input--transparent" placeholder="Email">
+          <input type="text" class="text-input" placeholder="Email">
         </div>
       </li>
     </ul>
@@ -4467,6 +4455,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #524b57;
   padding: 0;
   margin: 0;
+  width: 100%;
   font-size: 15px;
   height: 31px;
   font-weight: 400;
@@ -4558,6 +4547,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #524b57;
   padding: 0;
   margin: 0;
+  width: 100%;
   font-size: 15px;
   height: 31px;
   font-weight: 400;
