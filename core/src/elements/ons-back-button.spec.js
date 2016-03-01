@@ -50,9 +50,12 @@ describe('OnsBackButtonElement', () => {
       `);
 
       nav = new OnsNavigatorElement();
+      nav._options = {cancelIfRunning: false};
       document.body.appendChild(div);
       document.body.appendChild(nav);
-      nav.resetToPage('page1', {animation: 'default', onTransitionEnd: done});
+      nav.pushPage('page1').then(function(e) {
+        done();
+      });
     });
 
     afterEach(() => {
@@ -68,11 +71,9 @@ describe('OnsBackButtonElement', () => {
         });
       });
 
-      nav.pushPage('page2', {
-        onTransitionEnd: () => {
-          let element = nav.querySelector('ons-back-button');
-          element._onClick();
-        }
+      nav.pushPage('page2').then(function(page) {
+        let element = nav.querySelector('ons-back-button');
+        nav.querySelector('ons-back-button')._onClick();
       });
 
       return expect(promise).to.eventually.be.fulfilled;
@@ -98,7 +99,7 @@ describe('OnsBackButtonElement', () => {
           element.setAttribute('animation-options', '{delay: .1, duration: .2, timing: \'ease-out\'}');
           let spy = chai.spy.on(nav, 'popPage');
           element._onClick();
-          expect(spy).to.have.been.called.with({cancelIfRunning: true, animationOptions: {delay: 0.1, duration: 0.2, timing: 'ease-out'}});
+          expect(spy).to.have.been.called.with({animationOptions: {delay: 0.1, duration: 0.2, timing: 'ease-out'}});
           done();
         }
       });

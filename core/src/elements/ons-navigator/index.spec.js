@@ -9,6 +9,7 @@ describe('OnsNavigatorElement', () => {
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     nav = new OnsNavigatorElement();
+    nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
   });
 
@@ -25,6 +26,7 @@ describe('OnsNavigatorElement', () => {
     let nav = ons._util.createElement(`
       <ons-navigator page='hoge'></ons-navigator>
     `);
+    nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
 
     setImmediate(() => {
