@@ -218,7 +218,6 @@ gulp.task('prepare', ['html2js'], function() {
     gulp.src( 'bindings/react/components/*.jsx')
    .pipe(babel2({ presets: ['react', 'es2015'] }))
    .pipe($.concat('react-onsenui.js'))
-   .pipe(gulp.dest('jsx/'))
    .pipe($.header('/*! react-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
    .pipe(gulp.dest('build/js/')),
 
