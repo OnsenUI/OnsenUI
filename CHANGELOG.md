@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.8
+----
+ * core: Small fix for Autostyling.
+ * ons-list-item: Fix "tappable" attribute.
+
 v2.0.0-beta.7
 ----
  * core: Automatic Styling feature depending on current platform.
