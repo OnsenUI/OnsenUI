@@ -303,11 +303,6 @@ class PageElement extends BaseElement {
       content.appendChild(this.childNodes[0]);
     }
 
-    if (this.hasAttribute('style')) {
-      background.setAttribute('style', this.getAttribute('style'));
-      this.removeAttribute('style', null);
-    }
-
     const fragment = document.createDocumentFragment();
     fragment.appendChild(background);
     fragment.appendChild(content);
