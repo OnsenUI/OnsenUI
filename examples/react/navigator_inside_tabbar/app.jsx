@@ -24,7 +24,7 @@ var Nav = React.createClass({
   },
   pushPage: function() {
     console.log('push page');
-    this.refs.nav.pushComponent(<NavPage title="Page 2" popPage={this.popPage} />);
+    this.refs.nav.pushPage(<NavPage title="Page 2" popPage={this.popPage} />);
   },
   render: function() {
     return (

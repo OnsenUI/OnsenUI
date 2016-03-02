@@ -3,6 +3,7 @@ var App = React.createClass({
     this.refs.navi.pushPage(
       <OnsPage>
         <ons-toolbar>
+          <div className="left"><ons-back-button>Back</ons-back-button></div>
           <div className="center">{ this.index }</div>
         </ons-toolbar>
         <br />

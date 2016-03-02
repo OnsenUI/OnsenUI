@@ -43,7 +43,7 @@ var MyNav  = React.createClass({
     this.counter++;
     var navTitle = "Navigator "+ this.counter;
 
-    this.refs.navi.pushComponent(
+    this.refs.navi.pushPage(
       <MyPage title={navTitle} popPage={this.popPage} pushPage={this.pushPage} replacePage={this.replacePage} />
     );
   },

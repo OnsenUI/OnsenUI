@@ -4,7 +4,7 @@ var MyPage  = React.createClass({
     <OnsNavigator>
       <OnsPage>
     <ons-toolbar>
-      <div class="center">Scroller</div>
+      <div className="center">Scroller</div>
     </ons-toolbar>
     <ons-scroller style={{height: 200, backgroundColor: 'white'}}>
       <div style={{textAlign: 'center'}}>
