@@ -7,6 +7,9 @@ v2.0.0-beta.8
  * core: Small fix for Autostyling.
  * ons-list-item: Fix "tappable" attribute.
  * ons-navigator: Added default `options` poperty.
+ * ons-navigator: Fixed flickering in Lift animation for iOS.
+ * ons-page: Does not remove 'style' attribute anymore.
+ * ons.notification: Fixed an issue in iOS related to CustomElements.
 
 v2.0.0-beta.7
 ----
