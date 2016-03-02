@@ -481,6 +481,12 @@ class CollapseMode extends BaseMode {
  *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
+ * @seealso ons-splitter
+ *  [en]ons-splitter component[/en]
+ *  [ja]ons-splitterコンポーネント[/ja]
+ * @seealso ons-splitter-content
+ *  [en]ons-splitter-content component[/en]
+ *  [ja]ons-splitter-contentコンポーネント[/ja]
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>

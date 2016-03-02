@@ -26,11 +26,10 @@ var-list-item-color = $text-color
 var-list-item-active-background-color = $list-tap-active-background-color
 var-list-item-separator-color = $border-color
 
-var-list-padding = 0
-var-list-header-font-size = 15px
+var-list-header-font-size = 12px
 var-list-border = 1px solid var-list-item-separator-color
 
-var-list-item-margin = 0 0 0 0
+var-list-item-margin = 1px 0 -1px 0
 var-list-item-padding = 0
 var-list-header-padding = 20px 0 0 26px
 var-list-item-min-height = 44px
@@ -142,10 +141,6 @@ list__item()
 .list__item__left + .list__item__center
   margin-left 0
 
-.list__item:last-child .list__item__center
-  border-bottom none
-  background-image none
-
 .list__item__right
   display flex
   margin-left auto
@@ -156,10 +151,6 @@ list__item()
   border-bottom var-list-border
   retina-list-item-border()
 
-.list__item:last-child .list__item__right
-  border-bottom none
-  background-image none
-
 .list__header
   list__header()
   padding var-list-header-padding
@@ -169,11 +160,11 @@ list__item()
   text-shadow var-list-header-text-shadow
   border-top none
   border-bottom var-list-border
+  box-shadow 0px 1px 0px 0px var-list-background-color;
   min-height var-list-header-min-height
   line-height @min-height
   margin-top -1px
   text-transform uppercase
-  font-size 12px
   position relative
 
 .list__header:not(:first-of-type)
@@ -181,8 +172,9 @@ list__item()
 
 .list
   list()
-  padding var-list-padding
+  margin-top -1px
   border-bottom var-list-border-bottom
+  overflow hidden
 
 .list__item
   list__item()
@@ -194,6 +186,7 @@ list__item()
 
 .list__item:first-child
   box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
+  margin-top 0
 
 .list__item_active:active
   background-color var-list-item-active-background-color
@@ -290,12 +283,6 @@ list__item()
       <li class="list__item">
         <div class="list__item__center">Item</div>
       </li>
-      <li class="list__header">
-        Header
-      </li>
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
-      </li>
     </ul>
  */
 
@@ -386,9 +373,6 @@ list__item()
   border-bottom var-list-border
   retina-list-item-border()
 
-.list__item--chevron:last-child:before
-  border-bottom none
-  background-image none
 
 /*! topdoc
   name: Inset List
@@ -507,17 +491,17 @@ list__item()
 
 /*! topdoc
   name: Text Input in List Item
-  use: List, Transparent Text Input
+  use: List
   markup:
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
-          <input type="text" class="text-input text-input--transparent" placeholder="Name">
+          <input type="text" class="text-input" placeholder="Name">
         </div>
       </li>
       <li class="list__item">
         <div class="list__item__center">
-          <input type="text" class="text-input text-input--transparent" placeholder="Email">
+          <input type="text" class="text-input" placeholder="Email">
         </div>
       </li>
     </ul>

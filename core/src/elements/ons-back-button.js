@@ -100,8 +100,6 @@ class BackButtonElement extends BaseElement {
   _onClick() {
     const navigator = util.findParent(this, 'ons-navigator');
     if (navigator) {
-      this.options.cancelIfRunning = true;
-
       if (this.hasAttribute('animation')) {
         this.options.animation = this.getAttribute('animation');
       }

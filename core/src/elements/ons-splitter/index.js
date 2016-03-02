@@ -30,6 +30,12 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
  *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
  * @codepen rOQOML
+ * @seealso ons-splitter-content
+ *  [en]ons-splitter-content component[/en]
+ *  [ja]ons-splitter-contentコンポーネント[/ja]
+ * @seealso ons-splitter-side
+ *  [en]ons-splitter-side component[/en]
+ *  [ja]ons-splitter-sideコンポーネント[/ja]
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]

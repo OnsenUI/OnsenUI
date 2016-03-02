@@ -72,6 +72,8 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-footer"></div>
   </ons-alert-dialog>`);
 
+  CustomElements.upgrade(dialogElement);
+
   if (id) {
     dialogElement.setAttribute('id', id);
   }
