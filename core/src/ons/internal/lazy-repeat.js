@@ -139,6 +139,12 @@ export class LazyRepeatProvider {
 
   _render() {
     const items = this._getItemsInView();
+
+    if (this._delegate.hasRenderFunction()) {
+      this._delegate.render(items, this._calculateListHeight(items));
+      return;
+    }
+
     const keep = {};
 
     for (let i = 0, l = items.length; i < l; i++) {
@@ -153,11 +159,12 @@ export class LazyRepeatProvider {
       }
     }
 
-    this._wrapperElement.style.height = this._calculateListHeight() + 'px';
+    this._wrapperElement.style.height = this._calculateListHeight(items) + 'px';
+
   }
 
-  _calculateListHeight() {
-    let indices = Object.keys(this._renderedItems).map((n) => parseInt(n));
+  _calculateListHeight(items) {
+    let indices = items.map((item) => parseInt(item.index));
     return this._itemHeightSum[indices.pop()] || 0;
   }
 

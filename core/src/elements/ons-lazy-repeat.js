@@ -45,6 +45,14 @@ class InternalDelegate extends LazyRepeatDelegate {
     });
   }
 
+  hasRenderFunction() {
+    return this._userDelegate.render !== undefined;
+  }
+
+  render(items, height) {
+    this._userDelegate.render(items, height);
+  }
+
   countItems() {
     const count = this._userDelegate.countItems();
 
