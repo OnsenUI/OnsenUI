@@ -337,7 +337,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       })
       .restoreStyle()
       .queue((done) => {
-        this.backgroundMask.remove();
         done();
       });
 
@@ -445,9 +444,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue(function(finish) {
             enterPage.element.style.zIndex = '';
             leavePage.element.style.zIndex = '';
+            this.backgroundMask.remove();
             done();
             finish();
-          }),
+          }.bind(this)),
 
         animit(leavePageDecomposition.other)
           .queue({
