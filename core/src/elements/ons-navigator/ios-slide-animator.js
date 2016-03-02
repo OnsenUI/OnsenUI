@@ -34,7 +34,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black; opacity: 0;"></div>
+        background-color: black; opacity: 0; z-index: 2"></div>
     `);
   }
 
@@ -131,9 +131,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -208,8 +205,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           }),
@@ -252,9 +247,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     } else {
 
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -295,8 +287,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           })
@@ -343,10 +333,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -442,8 +428,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .wait(0)
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             this.backgroundMask.remove();
             done();
             finish();
@@ -496,10 +480,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
       );
     } else {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -540,8 +520,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             done();
             finish();
           })
