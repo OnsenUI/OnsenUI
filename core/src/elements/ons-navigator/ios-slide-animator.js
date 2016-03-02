@@ -520,9 +520,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .queue(function(finish) {
+            this.backgroundMask.remove();
             done();
             finish();
-          })
+          }.bind(this))
       );
     }
   }
