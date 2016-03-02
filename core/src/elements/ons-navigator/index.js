@@ -217,8 +217,6 @@ class NavigatorElement extends BaseElement {
 
     this._initialHTML = this.innerHTML;
 
-    this.innerHTML = '';
-
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: NavigatorTransitionAnimator,
@@ -666,19 +664,6 @@ class NavigatorElement extends BaseElement {
 
   attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
-
-
-    rewritables.ready(this, () => {
-      if (this._pages.length === 0) {
-        if (!this.getAttribute('page')) {
-          const element = this._createPageElement(this._initialHTML || '');
-
-          this._pushPageDOM(this._createPageObject('', element, {}), function() {});
-        } else {
-          this.pushPage(this.getAttribute('page'), {animation: 'none'});
-        }
-      }
-    });
   }
 
   detachedCallback() {
@@ -757,6 +742,32 @@ class NavigatorElement extends BaseElement {
 
     return new Promise(resolve => {
       this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
+    });
+  }
+
+  _myPushPage(enterPage, leavePage, options = {}) {
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    options.animator = this._animatorFactory.newAnimator(options);
+
+    return new Promise((resolve) => {
+      options.animator.push(enterPage, leavePage, resolve);
+    });
+  }
+
+  _myPopPage(enterPage, leavePage, options = {}) {
+    options.animationOptions = util.extend(
+      options.animationOptions || {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    );
+
+    options.animator = this._animatorFactory.newAnimator(options);
+
+    return new Promise((resolve) => {
+      options.animator.pop(enterPage, leavePage, resolve);
     });
   }
 
