@@ -21,11 +21,16 @@ var App = React.createClass({
 
   componentDidMount: function() {
     this.index = 0;
-    this.pushPage();
   },
 
   render: function() {
-    return <OnsNavigator id="myNav" animation="fade" ref="navi"></OnsNavigator>
+    return (
+      <OnsNavigator id="myNav" animation="fade" ref="navi">
+        <OnsPage>
+          <ons-button onClick={this.pushPage}>Push!</ons-button>
+        </OnsPage>
+      </OnsNavigator>
+    );
   }
 });
 

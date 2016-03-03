@@ -1,9 +1,3 @@
-class OnsNavigatorPage extends React.Component {
-  render() {
-    return this.props.children;
-  }
-}
-
 class OnsNavigator extends React.Component {
   constructor(props) {
     super(props);
@@ -27,22 +21,20 @@ class OnsNavigator extends React.Component {
     this.refs.navi._popPage(options, this.update.bind(this), this.state.pages);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (typeof this.props.children !== 'undefined') {
-      this.pushPage(this.props.children);
+      this.setState({pages: React.Children.toArray(this.props.children)});
     }
+  }
 
+  componentDidMount() {
     this.refs.navi.popPage = this.popPage.bind(this);
   }
 
   render() {
     return (
       <ons-navigator {...this.props} ref="navi">
-        {
-          this.state.pages.map((page, idx) => {
-            return <OnsNavigatorPage ref={`item${idx}`}>{page}</OnsNavigatorPage>
-          })
-        }
+        {this.state.pages}
       </ons-navigator>
     );
   }
