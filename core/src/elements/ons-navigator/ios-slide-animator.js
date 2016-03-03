@@ -39,8 +39,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   }
 
   _decompose(page) {
-    CustomElements.upgrade(page.element);
-    const toolbar = page.element._getToolbarElement();
+    CustomElements.upgrade(page);
+    const toolbar = page._getToolbarElement();
     CustomElements.upgrade(toolbar);
     const left = toolbar._getToolbarLeftItemsElement();
     const right = toolbar._getToolbarRightItemsElement();
@@ -74,20 +74,20 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     return {
       pageLabels: pageLabels,
       other: other,
-      content: page.element._getContentElement(),
-      background: page.element._getBackgroundElement(),
+      content: page._getContentElement(),
+      background: page._getBackgroundElement(),
       toolbar: toolbar,
-      bottomToolbar: page.element._getBottomToolbarElement()
+      bottomToolbar: page._getBottomToolbarElement()
     };
   }
 
   _shouldAnimateToolbar(enterPage, leavePage) {
     const bothPageHasToolbar =
-      enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
+      enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
 
     var noMaterialToolbar =
-      !enterPage.element._getToolbarElement().classList.contains('navigation-bar--material') &&
-      !leavePage.element._getToolbarElement().classList.contains('navigation-bar--material');
+      !enterPage._getToolbarElement().classList.contains('navigation-bar--material') &&
+      !leavePage._getToolbarElement().classList.contains('navigation-bar--material');
 
     return bothPageHasToolbar && noMaterialToolbar;
   }
@@ -99,13 +99,13 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
+    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
 
     const delta = (() => {
-      const rect = leavePage.element.getBoundingClientRect();
+      const rect = leavePage.getBoundingClientRect();
       return Math.round(((rect.right - rect.left) / 2) * 0.6);
     })();
 
@@ -251,7 +251,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
         maskClear,
 
-        animit(enterPage.element)
+        animit(enterPage)
           .saveStyle()
           .queue({
             css: {
@@ -269,7 +269,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle(),
 
-        animit(leavePage.element)
+        animit(leavePage)
           .saveStyle()
           .queue({
             css: {
@@ -302,13 +302,13 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   pop(enterPage, leavePage, done) {
     this.backgroundMask.remove();
-    enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
 
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
 
     const delta = (function() {
-      const rect = leavePage.element.getBoundingClientRect();
+      const rect = leavePage.getBoundingClientRect();
       return Math.round(((rect.right - rect.left) / 2) * 0.6);
     })();
 
@@ -484,7 +484,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
         maskClear,
 
-        animit(enterPage.element)
+        animit(enterPage)
           .saveStyle()
           .queue({
             css: {
@@ -504,7 +504,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle(),
 
-        animit(leavePage.element)
+        animit(leavePage)
           .queue({
             css: {
               transform: 'translate3D(0px, 0px, 0px)'
