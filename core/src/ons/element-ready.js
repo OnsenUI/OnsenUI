@@ -31,7 +31,7 @@ const elementReady = function(element) {
  * @param {Function} ready a function returns promise.
  */
 elementReady.installImplementation = function(ready) {
-  elementRead._ready = ready;
+  elementReady._ready = ready;
 };
 
 // Install default implementation
