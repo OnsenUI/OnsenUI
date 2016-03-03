@@ -25,7 +25,7 @@ var App = React.createClass({
   },
 
   render: function() {
-    return <OnsNavigator id="myNav" ref="navi"></OnsNavigator>
+    return <OnsNavigator id="myNav" animation="fade" ref="navi"></OnsNavigator>
   }
 });
 
