@@ -20,35 +20,32 @@ limitations under the License.
 
   angular.module('onsen').factory('AngularLazyRepeatDelegate', function($compile) {
 
-    const directiveAttributes = ['ons-lazy-repeat', 'ons:lazy:repeat', 'ons_lazy_repeat', 'data-ons-lazy-repeat', 'x-ons-lazy-repeat'];
-    const scheme = {
-      configureItemScope: {type: 'function', safeCall: true},
-      destroyItemScope: {type: 'function', safeCall: true}
+    var AngularLazyRepeatDelegate = function() {
+      AngularLazyRepeatDelegate.prototype.init.apply(this, arguments);
     };
+    AngularLazyRepeatDelegate.prototype = Object.create(ons._internal.LazyRepeatDelegate.prototype);
 
-    class AngularLazyRepeatDelegate extends ons._internal.LazyRepeatDelegate {
+    angular.extend(AngularLazyRepeatDelegate.prototype, {
+
       /**
        * @param {Object} userDelegate
        * @param {Element} templateElement
        * @param {Scope} parentScope
        */
-      constructor(userDelegate, templateElement, parentScope) {
-        super(userDelegate, templateElement);
+      init: function(userDelegate, templateElement, parentScope) {
+        this._templateElement = templateElement.cloneNode(true);
+        this._userDelegate = userDelegate;
         this._parentScope = parentScope;
 
-        directiveAttributes.forEach(attr => templateElement.removeAttribute(attr));
-        this._linker = $compile(templateElement ? templateElement.cloneNode(true) : null);
-      }
+        this._removeLazyRepeatDirective();
 
-      configureItemScope(item, scope){
-        return this._validated('configureItemScope', scheme)(item, scope);
-      }
+        this._linker = $compile(this._templateElement.cloneNode(true));
+      },
 
-      destroyItemScope(item, element){
-        return this._validated('destroyItemScope', scheme)(item, element);
-      }
-
-      _usingBinding() {
+      /**
+       * @return {Boolean}
+       */
+      _usingBinding: function() {
         if (this._userDelegate.configureItemScope) {
           return true;
         }
@@ -58,51 +55,63 @@ limitations under the License.
         }
 
         throw new Error('`lazy-repeat` delegate object is vague.');
-      }
+      },
 
+      _removeLazyRepeatDirective: function() {
+        this._templateElement.removeAttribute('ons-lazy-repeat');
+        this._templateElement.removeAttribute('ons:lazy:repeat');
+        this._templateElement.removeAttribute('ons_lazy_repeat');
+        this._templateElement.removeAttribute('data-ons-lazy-repeat');
+        this._templateElement.removeAttribute('x-ons-lazy-repeat');
+      },
 
-      prepareItem(index, done) {
-        const scope = this._parentScope.$new();
+      prepareItem: function(index, done) {
+        var scope = this._parentScope.$new();
         this._addSpecialProperties(index, scope);
 
         if (this._usingBinding()) {
-          this.configureItemScope(index, scope);
+          this._userDelegate.configureItemScope(index, scope);
         }
 
-        this._linker(scope, (cloned) => {
-          const element = cloned[0];
+        this._linker(scope, function(cloned) {
           if (!this._usingBinding()) {
-            element = this._userDelegate.createItemContent(index, element);
-            $compile(element)(scope);
+            var contentElement = this._userDelegate.createItemContent(index, null);
+            cloned.append(contentElement);
+            $compile(cloned[0].firstChild)(scope);
           }
 
-          done({element, scope});
-        });
-      }
+          done({
+            element: cloned[0],
+            scope: scope
+          });
+
+        }.bind(this));
+      },
 
       /**
        * @param {Number} index
        * @param {Object} scope
        */
-      _addSpecialProperties(i, scope) {
-        const last = this.countItems() - 1;
-        angular.extend(scope, {
-          $index: i,
-          $first: i === 0,
-          $last: i === last,
-          $middle: i !== 0 && i !== last,
-          $even: i % 2 === 0,
-          $odd: i % 2 === 1
-        });
-      }
+      _addSpecialProperties: function(index, scope) {
+        scope.$index = index;
+        scope.$first = index === 0;
+        scope.$last = index === this.countItems() - 1;
+        scope.$middle = !scope.$first && !scope.$last;
+        scope.$even = index % 2 === 0;
+        scope.$odd = !scope.$even;
+      },
 
-      updateItem(index, item) {
+      countItems: function() {
+        return this._userDelegate.countItems();
+      },
+
+      updateItem: function(index, item) {
         if (this._usingBinding()) {
-          item.scope.$evalAsync(() => this.configureItemScope(index, item.scope));
-        } else {
-          super.updateItem(index, item);
+          item.scope.$evalAsync(function() {
+            this._userDelegate.configureItemScope(index, item.scope);
+          }.bind(this));
         }
-      }
+      },
 
       /**
        * @param {Number} index
@@ -110,21 +119,27 @@ limitations under the License.
        * @param {Object} item.scope
        * @param {Element} item.element
        */
-      destroyItem(index, item) {
+      destroyItem: function(index, item) {
         if (this._usingBinding()) {
-          this.destroyItemScope(index, item.scope);
+          if (this._userDelegate.destroyItemScope instanceof Function) {
+            this._userDelegate.destroyItemScope(index, item.scope);
+          }
         } else {
-          super.destroyItem(index, item.element);
+          if (this._userDelegate.destroyItemContent instanceof Function) {
+            this._userDelegate.destroyItemContent(index, item.element);
+          }
         }
         item.scope.$destroy();
-      }
+      },
 
-      destroy() {
-        super.destroy();
-        this._scope = null;
-      }
+      destroy: function() {
+        this._userDelegate = this._templateElement = this._scope = null;
+      },
 
-    }
+      calculateItemHeight: function(index) {
+        return this._userDelegate.calculateItemHeight(index);
+      }
+    });
 
     return AngularLazyRepeatDelegate;
   });
