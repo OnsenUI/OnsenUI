@@ -1,23 +1,16 @@
 var OnsTabbar = React.createClass({
   componentDidMount: function() {
-
-     // var lastLink = window.OnsTabbarElement.rewritables.link;
-     // window.OnsTabbarElement.rewritables.link = function(el, target, options, callback) {
-     //   lastLink(el, target, options, callback);
-     // }.bind(this);
-     //
-     // var node = this.node = ReactDOM.findDOMNode(this);
-     //
-     // for (var i=0; i < node.children[1].children.length; i++) {
-     //   node.children[1].children[i]._pageElement = 
-     //           node.firstChild.children[i];
-     // }
-     //
-     // for (var i =0; i < node.firstChild.children.length; i++) {
-     //   node.firstChild.children[i].style.display = 'none';
-     // }
-     //
-     // node.setActiveTab(this.activeIndex);
+     var node = this.node = ReactDOM.findDOMNode(this);
+     
+     for (var i=0; i < node.children[1].children.length; i++) {
+       node.children[1].children[i]._pageElement = node.firstChild.children[i];
+     }
+     
+     for (var i =0; i < node.firstChild.children.length; i++) {
+       node.firstChild.children[i].style.display = 'none';
+     }
+     
+     node.setActiveTab(this.activeIndex);
   },
 
   setActiveTab: function(index, options) {
@@ -45,8 +38,6 @@ var OnsTabbar = React.createClass({
       }
       lastReady(node, callback);
     };
-
-
 
 
     var children = [];
@@ -83,9 +74,6 @@ var OnsTabbar = React.createClass({
       var el = document.createElement('div');
       el.innerHTML = renderString;
       CustomElements.upgrade(el.firstChild);
-
-
-
 
       var newElement = buildComponent(el.firstChild, React.Children.toArray(child.props.children));
 
@@ -149,56 +137,18 @@ var OnsTab = React.createClass({
   }, 
 });
 
-
 var MyElem = React.createClass({
-  render: function() {
-
-    var obj = {'_compiled': 'true'};
-
+  componentDidMount: function() {
+    var node = ReactDOM.findDOMNode(this);
     var elem = this.props.domNode;
     for (var i = 0; i < elem.attributes.length; i++) {
       var attrib = elem.attributes[i];
-
-      if (attrib.name == 'class') {
-        obj.className = attrib.value;
-        obj.class = attrib.value;
-      } else if (attrib.name == 'label') {
-        obj.label = attrib.value;
-      } else if (attrib.name == 'active') {
-        obj.active = attrib.value;
-      } else if (attrib.name == 'icon') {
-        obj.icon = attrib.value;
-      } else if (attrib.name == 'type') {
-        obj.type = attrib.value;
-      } else if (attrib.name == 'style') {
-        var style = attrib.value;
-
-        var parts = style.split(";")
-        var styleObj = {}
-        for (var i=0;i<parts.length;i++) {
-          var subParts = parts[i].split(':');
-          subParts[0] = subParts[0].trim();
-
-          if (subParts[0].length == 0) continue;
-
-          if (subParts[0] == 'display') {
-            styleObj.display = subParts[1];
-          }  else if (subParts[0] == 'font-size') {
-            styleObj.fontSize = subParts[1];
-          } else if (subParts[0] == 'line-height') {
-            styleObj.lineHeight = subParts[1];
-          } else if (subParts[0] == 'vertical-align') {
-            styleObj.verticalAlign = subParts[1];
-          } else {
-            throw new Error( '.' + subParts[0] + '.');
-          }
-        }
-        obj.style = styleObj;
-      } else {
-      }
+      node.setAttribute(attrib.name, attrib.value);
     }
-
-    var str = elem.innerHTML;
+  },
+  render: function() {
+    var obj = {'_compiled': 'true'};
+    var str = this.props.domNode.innerHTML;
     if (!this.props.children && str.length > 0 ) {
       return React.createElement(this.props.domNode.nodeName.toLowerCase(), obj, str);
    } else {
