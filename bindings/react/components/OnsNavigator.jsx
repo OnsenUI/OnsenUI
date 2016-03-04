@@ -3,7 +3,7 @@ class OnsNavigator extends React.Component {
     super(props);
 
     this.state = {
-      pages: []
+      pages: React.Children.toArray(this.props.children),
     };
   }
 
@@ -19,12 +19,6 @@ class OnsNavigator extends React.Component {
 
   popPage(options = {}) {
     this.refs.navi._popPage(options, this.update.bind(this), this.state.pages);
-  }
-
-  componentWillMount() {
-    if (typeof this.props.children !== 'undefined') {
-      this.setState({pages: React.Children.toArray(this.props.children)});
-    }
   }
 
   componentDidMount() {
