@@ -91,8 +91,6 @@
     "mkpath": "^1.0.0",
     "mocha": "^2.3.4",
     "nunjucks": "^2.3.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
     "rollup-plugin-babel": "^2.3.8",
     "rollup-plugin-npm": "^1.2.1",
     "run-sequence": "^1.1.5",
