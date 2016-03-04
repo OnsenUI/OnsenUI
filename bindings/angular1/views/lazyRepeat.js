@@ -34,7 +34,7 @@ limitations under the License.
         this._attrs = attrs;
         this._linker = linker;
 
-        var userDelegate = this._getDelegate();
+        var userDelegate = this._scope.$eval(this._attrs.onsLazyRepeat);
         var internalDelegate = new AngularLazyRepeatDelegate(userDelegate, element[0], element.scope());
 
         this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
@@ -44,16 +44,6 @@ limitations under the License.
         this._scope.$watch(internalDelegate.countItems.bind(internalDelegate), this._provider._onChange.bind(this._provider));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _getDelegate: function() {
-        var delegate = this._scope.$eval(this._attrs.onsLazyRepeat);
-
-        if (typeof delegate === 'undefined') {
-          delegate = eval(this._attrs.onsLazyRepeat); // eslint-disable-line no-eval
-        }
-
-        return delegate;
       },
 
       _destroy: function() {
