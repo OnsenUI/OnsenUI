@@ -2,14 +2,14 @@ var MyPage2  = React.createClass({
   render: function() {
     return (
       <OnsPage>
-        <ons-toolbar>
+        <OnsToolbar>
           <div className="center">Description</div>
-        </ons-toolbar>
+        </OnsToolbar>
         <br />
         <div style={{textAlign: 'center'}}>
           <OnsInput value={this.props.description} onChange={this.props.onChange} />
           <p>
-            <ons-button modifier="light" onClick={this.props.popPage}>Previous</ons-button>
+            <OnsButton modifier="light" onClick={this.props.popPage}>Previous</OnsButton>
           </p>
         </div>
       </OnsPage>
@@ -46,14 +46,14 @@ var MyDialog = React.createClass({
     <OnsDialog onCancel={this.props.onCancel} isOpen={this.props.isOpen} style={{height: 250}} animation="default" cancelable>
       <OnsNavigator animation="slide" ref="navi">
         <OnsPage>
-          <ons-toolbar>
+          <OnsToolbar>
           <div className="center">Name</div>
-          </ons-toolbar>
+          </OnsToolbar>
           <br />
           <div style={{textAlign: 'center'}}>
             <OnsInput value={this.props.name} onChange={this.onNameChanged}  />
             <p>
-              <ons-button modifier="light"  onClick={this.pushPage}>Next</ons-button>
+              <OnsButton modifier="light"  onClick={this.pushPage}>Next</OnsButton>
             </p>
           </div>
           </OnsPage>
@@ -89,8 +89,8 @@ var MyPage  = React.createClass({
     <OnsPage>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
-        <ons-button onClick={this.hello}>Hello  </ons-button>
-        <ons-button onClick={this.showAlert}> Show Alert </ons-button>
+        <OnsButton onClick={this.hello}>Hello  </OnsButton>
+        <OnsButton onClick={this.showAlert}> Show Alert </OnsButton>
         <div> Name : {this.state.name} </div>
         <div> Description : {this.state.description} </div>
       </div>

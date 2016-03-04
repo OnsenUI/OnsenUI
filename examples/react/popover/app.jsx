@@ -1,17 +1,3 @@
-var Popover = React.createClass({
- getInitialState: function() {
-    return { };
-  },
-  render: function() {
-    return (<ons-popover direction="up down" cancelable>
-        <div style={{textAlign: 'center', opacity: 0.5}}>
-          <p>This is a popover!</p>
-          <p><small>Click the background to remove the popover.</small></p>
-        </div>
-      </ons-popover>);
-  }
-});
-
 var MyPage  = React.createClass({
   getInitialState: function() {
      return {isOpen: false};
@@ -49,7 +35,7 @@ var MyPage  = React.createClass({
       <div style={{textAlign: 'center'}}>
         <br />
         <br />
-        <ons-button ref="button" onClick={() => this.showClick(this.refs.button)}>Click me!</ons-button>
+        <OnsButton ref="button" onClick={() => this.showClick(this.refs.button)}>Click me!</OnsButton>
       </div>
 
       <div className="tab-bar">

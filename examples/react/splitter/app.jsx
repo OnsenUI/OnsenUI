@@ -12,17 +12,17 @@ var MyPage = React.createClass({
   <ons-splitter>
     <ons-splitter-side ref="leftMenu" side="left" width="200px" collapse swipeable>
       <OnsPage>
-        <ons-toolbar>
+        <OnsToolbar>
           <div className="center">content</div>
-        </ons-toolbar>
+        </OnsToolbar>
       </OnsPage>
     </ons-splitter-side>
 
     <ons-splitter-content>
-      <ons-page>
-        <ons-toolbar>
+      <OnsPage>
+        <OnsToolbar>
           <div className="center">ons-splitter-content</div>
-        </ons-toolbar>
+        </OnsToolbar>
 
         <p style={{padding: 10}}>
           <ons-button onClick={this.leftClick}>toggle left menu</ons-button>
@@ -32,28 +32,21 @@ var MyPage = React.createClass({
           <ons-button onClick={this.rightClick}>toggle right menu</ons-button>
         </p>
 
-      </ons-page>
+      </OnsPage>
     </ons-splitter-content>
 
     <ons-splitter-side ref="rightMenu" side="right" width="300px" collapse swipeable threhold-ratio-should-open="0.4">
-      <ons-page>
-        <ons-toolbar>
+      <OnsPage>
+        <OnsToolbar>
           <div className="left">
-            <ons-toolbar-button >Close</ons-toolbar-button>
+            <OnsToolbarButton >Button</OnsToolbarButton>
           </div>
           <div className="center">ons-splitter-side</div>
-        </ons-toolbar>
+        </OnsToolbar>
 
-      </ons-page>
+      </OnsPage>
     </ons-splitter-side>
   </ons-splitter>);
-
-  
-  
-  
-  
-  
-  
   }
 });
 

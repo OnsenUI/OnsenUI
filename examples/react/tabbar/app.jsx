@@ -19,9 +19,9 @@ var MyPage = React.createClass({
   render: function() {
     return (
       <OnsPage {...this.props}>
-          <ons-toolbar>
+          <OnsToolbar>
             <div className="center"> {this.props.title} </div>
-          </ons-toolbar>
+          </OnsToolbar>
           <div> {this.props.content} </div>
         </OnsPage>
     );
@@ -32,8 +32,6 @@ var MyNav  = React.createClass({
   getInitialState: function() {
     return {};
   },
-
-  
   render: function() {
     return (
     <div> 
@@ -45,12 +43,12 @@ var MyNav  = React.createClass({
         ]}
         >
       <OnsTab active="true">
-        <ons-tab-active>
+        <OnsTabActive>
           HOME
-        </ons-tab-active>
-        <ons-tab-inactive>
+        </OnsTabActive>
+        <OnsTabInactive>
           home
-        </ons-tab-inactive>
+        </OnsTabInactive>
       </OnsTab>
       <OnsTab
         icon="ion-chatbox-working"

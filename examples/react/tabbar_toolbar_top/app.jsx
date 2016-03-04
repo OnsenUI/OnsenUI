@@ -27,9 +27,9 @@ var MyNav  = React.createClass({
   render: function() {
     return (
       <OnsPage>
-        <ons-toolbar>
+        <OnsToolbar>
           <div className="center">Title</div>
-        </ons-toolbar>
+        </OnsToolbar>
       <OnsTabbar
           position="top" var="tabbar" modifier="top-border"
         pages= {[

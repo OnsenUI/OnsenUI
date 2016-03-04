@@ -14,7 +14,7 @@ var MyPage2 = React.createClass({
   render: function() {
     return (
       <OnsPage {...this.props}>
-        <ons-toolbar  modifier="transparent"> <div className="center"> {this.props.title} </div></ons-toolbar> 
+        <OnsToolbar  modifier="transparent"> <div className="center"> {this.props.title} </div></OnsToolbar>
       </OnsPage>
     );
   },
@@ -25,12 +25,11 @@ var MyNav  = React.createClass({
     return {};
   },
 
-  
   render: function() {
     return (
       <OnsPage>
       <OnsTabbar
-          position="top" var="tabbar" 
+          position="top" var="tabbar"
         pages= {[
           <MyPage />,
           <MyPage2 title="Page 2"/>,

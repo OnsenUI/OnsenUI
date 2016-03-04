@@ -5,34 +5,32 @@ var MyPage = React.createClass({
       indexText: '',
     };
   },
-
   askIndex: function(num) {
     this.setState({indexText: 'Our current index is ' + this.props.getIndex()});
   },
-
   goTo: function(num) {
     this.props.goTo(num);
   },
   render: function() {
     return (
       <OnsPage {...this.props}>
-          <ons-toolbar>
+          <OnsToolbar>
             <div className="center"> {this.props.title} </div>
-          </ons-toolbar>
+          </OnsToolbar>
           <div style={{textAlign: 'center'}}>
             <br />
             <div>
             { [0,1,2].map(function(num) { 
-              return <ons-button 
+              return <OnsButton 
                 onClick={this.goTo.bind(this, num)} 
                 style={{marginRight:10}}>
                 Go {num}
-              </ons-button>
+              </OnsButton>
               }.bind(this))
             }
           </div>
             <br />
-            <ons-button onClick={this.askIndex}> Ask for Index </ons-button>
+            <OnsButton onClick={this.askIndex}> Ask for Index </OnsButton>
             <div style={{marginTop: 10}}> {this.state.indexText} </div>
         </div>
         </OnsPage>
@@ -64,12 +62,12 @@ var MyNav  = React.createClass({
         ]}
         >
       <OnsTab active="true">
-        <ons-tab-active>
+        <OnsTabActive>
           HOME
-        </ons-tab-active>
-        <ons-tab-inactive>
+        </OnsTabActive>
+        <OnsTabInactive>
           home
-        </ons-tab-inactive>
+        </OnsTabInactive>
       </OnsTab>
       <OnsTab
         icon="ion-chatbox-working"

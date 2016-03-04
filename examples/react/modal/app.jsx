@@ -9,19 +9,19 @@ var Page2 = React.createClass({
   render: function() {
     return (
       <OnsPage>
-        <ons-toolbar>
+        <OnsToolbar>
           <div className="center">Modal</div>
-        </ons-toolbar>
+        </OnsToolbar>
 
         <ons-modal ref="modal">
-          <ons-icon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}}></ons-icon>
+          <OnsIcon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}}></OnsIcon>
           <span style={{lineHeight: 20, fontSize: 15}}>Loading...</span>
         </ons-modal>
         <p style={{textAlign: 'center'}}>
-          <ons-button onClick={this.props.popPage}>Pop Page</ons-button>
+          <OnsButton onClick={this.props.popPage}>Pop Page</OnsButton>
         </p>
         <p style={{textAlign: 'center'}}>
-          <ons-button modifier="light" onClick={this.openModal}>Open Modal</ons-button>
+          <OnsButton modifier="light" onClick={this.openModal}>Open Modal</OnsButton>
         </p>
       </OnsPage>
     );
@@ -53,19 +53,19 @@ var MyPage  = React.createClass({
       <OnsNavigator ref="nav">
         <OnsPage>
         <ons-modal ref="modal">
-          <ons-icon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}}></ons-icon>
+          <OnsIcon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}} />
           <span style={{lineHeight: 20, fontSize: 15}}>Loading...</span>
         </ons-modal>
 
-        <ons-toolbar>
+        <OnsToolbar>
           <div className="center">Modal</div>
-        </ons-toolbar>
+        </OnsToolbar>
 
         <p style={{textAlign: 'center'}}>
-          <ons-button onClick={this.push}> Push Page </ons-button>
+          <OnsButton onClick={this.push}> Push Page </OnsButton>
         </p>
         <p style={{textAlign: 'center'}}>
-          <ons-button modifier="light" onClick={this.openModal}>Open Modal</ons-button>
+          <OnsButton modifier="light" onClick={this.openModal}>Open Modal</OnsButton>
         </p>
       </OnsPage>
     </OnsNavigator>

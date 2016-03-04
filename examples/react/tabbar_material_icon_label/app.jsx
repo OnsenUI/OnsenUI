@@ -17,18 +17,18 @@ var MyNav  = React.createClass({
     return (
       <div> 
    <OnsPage>
-      <ons-toolbar modifier="material noshadow">
+      <OnsToolbar modifier="material noshadow">
         <div className="left">
-          <ons-toolbar-button modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+          <OnsToolbarButton modifier="material"><OnsIcon icon="md-menu"></OnsIcon></OnsToolbarButton>
         </div>
         <div className="center">
           Title
         </div>
         <div className="right">
-          <ons-toolbar-button modifier="material"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
-          <ons-toolbar-button modifier="material"><ons-icon icon="md-more-vert"></ons-icon></ons-toolbar-button>
+          <OnsToolbarButton modifier="material"><OnsIcon icon="md-search"></OnsIcon></OnsToolbarButton>
+          <OnsToolbarButton modifier="material"><OnsIcon icon="md-more-vert"></OnsIcon></OnsToolbarButton>
         </div>
-      </ons-toolbar>
+      </OnsToolbar>
       <OnsTabbar position="top" modifier="material" 
         pages= {[
           <MyPage title="Search"  />,

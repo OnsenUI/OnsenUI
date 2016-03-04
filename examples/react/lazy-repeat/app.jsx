@@ -6,21 +6,21 @@ var OnsLazyRepeat = React.createClass({
       },
       createElement: function({index: index, top: top}) {
         return (
-          <ons-list-item
+          <OnsListItem
             style={{position: 'absolute', top: top, left: 0, right: 0}}>
               {index}
-          </ons-list-item>
+          </OnsListItem>
         );
       },
       render: function(items, newHeight) {
         console.log('myrender');
         var createElement =  function({index: index, top: top}) {
         return (
-          <ons-list-item key={index} class="list__item" _compiled style={{position: 'absolute', top: top, left: 0, right: 0}}>
+          <OnsListItem key={index} class="list__item" _compiled style={{position: 'absolute', top: top, left: 0, right: 0}}>
             <div className="list__item__center">
               {index}
             </div>
-          </ons-list-item>
+          </OnsListItem>
         ) };
 
         var el = items.map(createElement);
@@ -44,12 +44,11 @@ var OnsLazyRepeat = React.createClass({
   },
   render: function() {
     return (
-      <ons-list ref="lazyRepeat" class="list" style={{position: 'relative', height: this.state.height}}> 
+      <OnsList ref="lazyRepeat" class="list" style={{position: 'relative', height: this.state.height}}>
       <ons-lazy-repeat >
       </ons-lazy-repeat>
       {this.state.children}
-  </ons-list>
-    
+  </OnsList>
     );
   }
 });

@@ -3,7 +3,7 @@ var App = React.createClass({
     this.refs.navi.pushPage(
       <OnsPage>
         <ons-toolbar>
-          <div className="left"><ons-back-button>Back</ons-back-button></div>
+          <div className="left"><OnsBackButton>Back </OnsBackButton></div>
           <div className="center">{ this.index }</div>
         </ons-toolbar>
         <br />
@@ -27,6 +27,10 @@ var App = React.createClass({
     return (
       <OnsNavigator id="myNav" animation="fade" ref="navi">
         <OnsPage>
+          <ons-toolbar>
+            <div className="left"><ons-back-button>Back</ons-back-button></div>
+            <div className="center">{ this.index }</div>
+          </ons-toolbar>
           <ons-button onClick={this.pushPage}>Push!</ons-button>
         </OnsPage>
       </OnsNavigator>

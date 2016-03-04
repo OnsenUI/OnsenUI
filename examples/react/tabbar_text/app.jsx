@@ -1,7 +1,7 @@
 var HTMLDOMLegacyPropertyConfig = {
   isCustomAttribute: function(attributeName) {
     return -1 !== [
-      'ons-tab-active'
+      'OnsTabActive'
      ].indexOf(attributeName);
   },
   Properties: {
@@ -19,9 +19,9 @@ var MyPage = React.createClass({
   render: function() {
     return (
       <OnsPage {...this.props}>
-          <ons-toolbar>
+          <OnsToolbar>
             <div className="center"> {this.props.title} </div>
-          </ons-toolbar>
+          </OnsToolbar>
           <div> {this.props.content} </div>
         </OnsPage>
     );
@@ -32,12 +32,12 @@ var MyTab = React.createClass({
   render: function() {
     return (
       <OnsTab {...this.props}>
-        <ons-tab-active>
+        <OnsTabActive>
           {this.props.title.toUpperCase()}
-        </ons-tab-active>
-        <ons-tab-inactive>
+        </OnsTabActive>
+        <OnsTabInactive>
           {this.props.title.toLowerCase()}
-        </ons-tab-inactive>
+        </OnsTabInactive>
       </OnsTab>
     );
   },

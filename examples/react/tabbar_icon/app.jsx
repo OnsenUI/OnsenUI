@@ -2,9 +2,9 @@ var MyPage = React.createClass({
   render: function() {
     return (
       <OnsPage {...this.props}>
-         <ons-toolbar>
+         <OnsToolbar>
            <div className="center">{this.props.title}</div>
-         </ons-toolbar>
+         </OnsToolbar>
          <div>{this.props.content}</div>
        </OnsPage>
     );

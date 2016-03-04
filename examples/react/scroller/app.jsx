@@ -3,10 +3,10 @@ var MyPage  = React.createClass({
     return (
     <OnsNavigator>
       <OnsPage>
-    <ons-toolbar>
+    <OnsToolbar>
       <div className="center">Scroller</div>
-    </ons-toolbar>
-    <ons-scroller style={{height: 200, backgroundColor: 'white'}}>
+    </OnsToolbar>
+    <OnsScroller style={{height: 200, backgroundColor: 'white'}}>
       <div style={{textAlign: 'center'}}>
         <h2>I am now scrollable!</h2>
         <h3>Happy scrolling!</h3>
@@ -35,14 +35,11 @@ var MyPage  = React.createClass({
         <h3>Happy scrolling!</h3>
         <h3>Happy scrolling!</h3>
       </div>
-    </ons-scroller>
+    </OnsScroller>
   </OnsPage>
   </OnsNavigator>
   );
 
-    
-    
-    
   }
 });
 

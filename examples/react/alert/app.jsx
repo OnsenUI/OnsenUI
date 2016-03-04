@@ -18,8 +18,8 @@ var MyPage  = React.createClass({
     <OnsPage>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
-        <ons-button onClick={this.showAlert}> Show Alert </ons-button>
-        <ons-button onClick={this.showAlert2}> Show Alert 2 </ons-button>
+        <OnsButton onClick={this.showAlert}> Show Alert </OnsButton>
+        <OnsButton onClick={this.showAlert2}> Show Alert 2 </OnsButton>
       </div>
       <OnsAlertDialog ref="dialog" onCancel={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
         <div className="alert-dialog-title">Warning!</div>
