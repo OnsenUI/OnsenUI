@@ -206,16 +206,6 @@ describe('OnsPageElement', () => {
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
-
-    it('uses style attribute', () => {
-      while (element.lastChild) {
-        element.removeChild(element.lastChild);
-      }
-      element.setAttribute('style', 'hoge');
-      element._compile();
-      expect(element.hasAttribute('style')).to.be.false;
-      expect(element.firstChild.hasAttribute('style')).to.be.true;
-    });
   });
 
   describe('autoStyling', () => {

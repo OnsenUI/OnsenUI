@@ -162,6 +162,8 @@ class ListItemElement extends BaseElement {
     this.addEventListener('touchmove', this._onRelease);
     this.addEventListener('touchcancel', this._onRelease);
     this.addEventListener('mouseup', this._onRelease);
+    this.addEventListener('mouseout', this._onRelease);
+    this.addEventListener('touchleave', this._onRelease);
 
     this._originalBackgroundColor = this.style.backgroundColor;
 
@@ -170,17 +172,18 @@ class ListItemElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('drag', this._onDrag);
-
     this.removeEventListener('touchstart', this._onTouch);
     this.removeEventListener('mousedown', this._onTouch);
     this.removeEventListener('touchend', this._onRelease);
     this.removeEventListener('touchmove', this._onRelease);
     this.removeEventListener('touchcancel', this._onRelease);
     this.removeEventListener('mouseup', this._onRelease);
+    this.removeEventListener('mouseout', this._onRelease);
+    this.removeEventListener('touchleave', this._onRelease);
   }
 
   get _transition() {
-    return 'background-color 0.0s linear 0.15s';
+    return 'background-color 0.0s linear 0.02s';
   }
 
   get _tappable() {

@@ -19,13 +19,13 @@ var MyPage = React.createClass({
         <br />
 
       <ons-button modifier="light" onClick={this.props.insertPageBack}> 
-        Insert Page to Background  (First)
+        Insert Page to Background
       </ons-button>
 
       <br />
 
       <ons-button modifier="light" onClick={this.props.insertPageFront}> 
-        Insert Page to Background  (Last)
+        Insert Page to Front
       </ons-button>
       <br />
      <ons-button modifier="light" onClick={this.props.popPage}> 
@@ -54,9 +54,9 @@ var MyNav  = React.createClass({
     var Title = "Back Page " + this.counter;
     console.log('counterStr');
     console.log(counterStr);
-    this.refs.navi.insertComponent(
+    this.refs.navi.insertPage(
       <MyPage  title={Title}
-        insertPageFront={this.insertPage.bind(this, 0)}
+        insertPageFront={this.insertPage.bind(this, 1000)}
         insertPageBack={this.insertPage.bind(this,-1)}
         popPage={this.popPage}
       />, pos
@@ -67,7 +67,7 @@ var MyNav  = React.createClass({
     return <OnsNavigator ref="navi">
       <MyPage  
         title="Navigator" 
-        insertPageFront={this.insertPage.bind(this, 0)}
+        insertPageFront={this.insertPage.bind(this, 1000)}
         insertPageBack={this.insertPage.bind(this,-1)}
         popPage={this.popPage}
         />

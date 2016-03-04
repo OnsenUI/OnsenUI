@@ -52,10 +52,10 @@ var MyNav  = React.createClass({
 
   tabPage: function() {
 
-    this.refs.nav.pushComponent(<TabPage />);
+    this.refs.nav.pushPage(<TabPage />);
   },
   pushPage: function() {
-    this.refs.nav.pushComponent(<MyPage title="Pushed Page " pushPage={this.tabPage} popPage={this.popPage} content="This page is special" />);
+    this.refs.nav.pushPage(<MyPage title="Pushed Page " pushPage={this.tabPage} popPage={this.popPage} content="This page is special" />);
   },
 
   popPage: function() {

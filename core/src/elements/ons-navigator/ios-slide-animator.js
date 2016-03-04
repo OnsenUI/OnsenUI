@@ -34,13 +34,13 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black; opacity: 0;"></div>
+        background-color: black; opacity: 0; z-index: 2"></div>
     `);
   }
 
   _decompose(page) {
-    CustomElements.upgrade(page.element);
-    const toolbar = page.element._getToolbarElement();
+    CustomElements.upgrade(page);
+    const toolbar = page._getToolbarElement();
     CustomElements.upgrade(toolbar);
     const left = toolbar._getToolbarLeftItemsElement();
     const right = toolbar._getToolbarRightItemsElement();
@@ -74,20 +74,20 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     return {
       pageLabels: pageLabels,
       other: other,
-      content: page.element._getContentElement(),
-      background: page.element._getBackgroundElement(),
+      content: page._getContentElement(),
+      background: page._getBackgroundElement(),
       toolbar: toolbar,
-      bottomToolbar: page.element._getBottomToolbarElement()
+      bottomToolbar: page._getBottomToolbarElement()
     };
   }
 
   _shouldAnimateToolbar(enterPage, leavePage) {
     const bothPageHasToolbar =
-      enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
+      enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
 
     var noMaterialToolbar =
-      !enterPage.element._getToolbarElement().classList.contains('navigation-bar--material') &&
-      !leavePage.element._getToolbarElement().classList.contains('navigation-bar--material');
+      !enterPage._getToolbarElement().classList.contains('navigation-bar--material') &&
+      !leavePage._getToolbarElement().classList.contains('navigation-bar--material');
 
     return bothPageHasToolbar && noMaterialToolbar;
   }
@@ -99,13 +99,13 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
+    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
 
     const delta = (() => {
-      const rect = leavePage.element.getBoundingClientRect();
+      const rect = leavePage.getBoundingClientRect();
       return Math.round(((rect.right - rect.left) / 2) * 0.6);
     })();
 
@@ -131,9 +131,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -155,24 +152,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .restoreStyle(),
-
-        animit(enterPageDecomposition.toolbar)
-          .saveStyle()
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay + 0.3)
-          .restoreStyle({
-            duration: 0.1,
-            transition:
-              'background-color 0.1s linear, ' +
-              'border-color 0.1s linear'
-          }),
 
         animit(enterPageDecomposition.pageLabels)
           .saveStyle()
@@ -226,8 +205,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           }),
@@ -270,14 +247,11 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     } else {
 
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
 
-        animit(enterPage.element)
+        animit(enterPage)
           .saveStyle()
           .queue({
             css: {
@@ -295,7 +269,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle(),
 
-        animit(leavePage.element)
+        animit(leavePage)
           .saveStyle()
           .queue({
             css: {
@@ -313,8 +287,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           })
@@ -330,15 +302,17 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   pop(enterPage, leavePage, done) {
     this.backgroundMask.remove();
-    enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
 
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
 
     const delta = (function() {
-      const rect = leavePage.element.getBoundingClientRect();
+      const rect = leavePage.getBoundingClientRect();
       return Math.round(((rect.right - rect.left) / 2) * 0.6);
     })();
+
+    console.log(this.duration);
 
     const maskClear = animit(this.backgroundMask)
       .saveStyle()
@@ -355,17 +329,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       })
       .restoreStyle()
       .queue((done) => {
-        this.backgroundMask.remove();
         done();
       });
 
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -461,11 +430,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .wait(0)
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
+            this.backgroundMask.remove();
             done();
             finish();
-          }),
+          }.bind(this)),
 
         animit(leavePageDecomposition.other)
           .queue({
@@ -514,15 +482,11 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
       );
     } else {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
 
-        animit(enterPage.element)
+        animit(enterPage)
           .saveStyle()
           .queue({
             css: {
@@ -542,7 +506,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle(),
 
-        animit(leavePage.element)
+        animit(leavePage)
           .queue({
             css: {
               transform: 'translate3D(0px, 0px, 0px)'
@@ -558,11 +522,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
+            this.backgroundMask.remove();
             done();
             finish();
-          })
+          }.bind(this))
       );
     }
   }

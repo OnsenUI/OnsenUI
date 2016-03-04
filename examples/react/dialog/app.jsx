@@ -29,7 +29,7 @@ var MyDialog = React.createClass({
    this.refs.navi.popPage();
   },
   pushPage: function() {
-    this.refs.navi.pushComponent(<MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
+    this.refs.navi.pushPage(<MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
   },
   getInitialState: function() {
     return {value: ''};

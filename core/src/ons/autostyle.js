@@ -42,7 +42,6 @@ platforms.android = element => {
     !/material/.test(element.getAttribute('modifier'))) {
 
     const oldModifier = element.getAttribute('modifier') || '';
-    element.setAttribute('modifier', '');
 
     let newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
     newModifier.unshift('material');
