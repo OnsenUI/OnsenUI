@@ -36,6 +36,10 @@ export class LazyRepeatDelegate {
     this._templateElement = util.validated('templateElement', templateElement, [Element, 'null']);
   }
 
+  get itemHeight() {
+    return this._userDelegate.itemHeight;
+  }
+
   _validated(key, _scheme = scheme) {
     return util.validated(key, null, util.extend({}, _scheme[key], {
       dynamicCall: {object: this._userDelegate, key}
@@ -123,8 +127,32 @@ export class LazyRepeatProvider {
     this._topPositions = [];
     this._renderedItems = {};
 
+    try {
+      this._delegate.itemHeight || this._delegate.calculateItemHeight(0);
+    } catch (e) {
+      if (!/must be (a|an instance of) function/.test('' + e)) {
+        throw e;
+      }
+      this._unknownItemHeight = true;
+    }
     this._addEventListeners();
     this._onChange();
+  }
+
+  _checkItemHeight(callback) {
+    this._delegate.prepareItem(0, ({element}) => {
+      if (this._unknownItemHeight) {
+        this._wrapperElement.appendChild(element);
+        this._itemHeight = element.offsetHeight;
+        this._wrapperElement.removeChild(element);
+        delete this._unknownItemHeight;
+        callback();
+      }
+    });
+  }
+
+  get staticItemHeight() {
+    return this._delegate.itemHeight || this._itemHeight;
   }
 
   _countItems() {
@@ -132,7 +160,7 @@ export class LazyRepeatProvider {
   }
 
   _getItemHeight(i) {
-    return this._delegate.calculateItemHeight(i);
+    return this.staticItemHeight || this._delegate.calculateItemHeight(i);
   }
 
   _onChange() {
@@ -145,6 +173,10 @@ export class LazyRepeatProvider {
   }
 
   _render() {
+    if (this._unknownItemHeight) {
+      return this._checkItemHeight(this._render.bind(this));
+    }
+
     const items = this._getItemsInView();
     const keep = {};
 
@@ -157,7 +189,6 @@ export class LazyRepeatProvider {
 
     this._wrapperElement.style.height = this._listHeight + 'px';
   }
-
 
   /**
    * @param {Object} item
@@ -207,6 +238,10 @@ export class LazyRepeatProvider {
   _calculateStartIndex(current) {
     let start = 0;
     let end = this._itemCount - 1;
+
+    if (this.staticItemHeight) {
+      return parseInt(-current / this.staticItemHeight);
+    }
 
     // Binary search for index at top of screen so we can speed up rendering.
     for (;;) {
@@ -261,9 +296,9 @@ export class LazyRepeatProvider {
   }
 
   _debounce(func, wait, immediate) {
-    var timeout;
+    let timeout;
     return function() {
-      var callNow = immediate && !timeout;
+      let callNow = immediate && !timeout;
       clearTimeout(timeout);
       if (callNow) {
         func.apply(this, arguments);

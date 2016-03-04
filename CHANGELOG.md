@@ -11,6 +11,7 @@ v2.0.0-beta.8
  * ons-page: Does not remove 'style' attribute anymore.
  * ons.notification: Fixed an issue in iOS related to CustomElements.
  * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
+ * ons-lazy-repeat: Auto calculate item height if no information is provided.
 
 v2.0.0-beta.7
 ----

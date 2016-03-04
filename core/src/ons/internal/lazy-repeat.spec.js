@@ -1,6 +1,6 @@
 'use strict';
 
-let LazyRepeatProvider = ons._internal.LazyRepeatProvider,
+const LazyRepeatProvider = ons._internal.LazyRepeatProvider,
   LazyRepeatDelegate = ons._internal.LazyRepeatDelegate;
 
 
@@ -113,7 +113,7 @@ describe('LazyRepeatProvider', () => {
     });
 
     it('throws error if \'wrapperElement\' is not a descendant of OnsPageElement', () => {
-      let wrapper = document.createElement('div');
+      const wrapper = document.createElement('div');
       expect(() => new LazyRepeatProvider(wrapper, delegate)).to.throw(Error);
     });
   });
@@ -131,9 +131,24 @@ describe('LazyRepeatProvider', () => {
     });
   });
 
+  describe('#_checkItemHeight()', () => {
+    it('sets _itemHeight', (done) => {
+      provider._unknownItemHeight = true;
+      provider._checkItemHeight(() => {
+        try {
+          expect(provider._unknownItemHeight).to.not.be.ok;
+          expect(provider._itemHeight).to.be.ok;
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
+    });
+  });
+
   describe('#_onChange()', () => {
     it('calls \'_render()\'', () => {
-      let spy = chai.spy.on(provider, '_render');
+      const spy = chai.spy.on(provider, '_render');
       provider._onChange();
       expect(spy).to.have.been.called.once;
     });
@@ -143,7 +158,7 @@ describe('LazyRepeatProvider', () => {
     it('removes items that are not in view', () => {
       expect(provider._renderedItems.hasOwnProperty(0)).to.be.true;
 
-      var pageContent = page.querySelector('.page__content');
+      const pageContent = page.querySelector('.page__content');
       pageContent.scrollTop = 10000;
 
       provider._render();
@@ -153,13 +168,13 @@ describe('LazyRepeatProvider', () => {
 
   describe('#_renderElement()', () => {
     it('calls \'updateItem()\' if it is already rendered', () => {
-      let spy = chai.spy.on(delegate, 'updateItem');
+      const spy = chai.spy.on(delegate, 'updateItem');
       provider._renderElement({index: 0, top: 0});
       expect(spy).to.have.been.called.once;
     });
 
     it('calls \'prepareItem()\' if it is not already rendered', () => {
-      let spy = chai.spy.on(delegate, 'prepareItem');
+      const spy = chai.spy.on(delegate, 'prepareItem');
       provider._renderElement({index: 1000, top: 0});
       expect(spy).to.have.been.called.once;
     });
@@ -167,7 +182,7 @@ describe('LazyRepeatProvider', () => {
 
   describe('#_removeElement()', () => {
     it('calls \'destroyItem()\'', () => {
-      let spy = chai.spy.on(delegate, 'destroyItem');
+      const spy = chai.spy.on(delegate, 'destroyItem');
       provider._removeElement(0);
       expect(spy).to.have.been.called.once;
     });
@@ -183,7 +198,7 @@ describe('LazyRepeatProvider', () => {
 
   describe('#destroy()', () => {
     it('calls the \'destroy()\' method', () => {
-      var spy = chai.spy.on(delegate, 'destroy');
+      const spy = chai.spy.on(delegate, 'destroy');
       provider.destroy();
       expect(spy).to.have.been.called.once;
     });
