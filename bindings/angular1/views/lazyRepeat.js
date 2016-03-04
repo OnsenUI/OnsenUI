@@ -40,28 +40,10 @@ limitations under the License.
         this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
         element.remove();
 
-        this._injectReloadMethod(userDelegate, this._provider);
-
         // Render when number of items change.
         this._scope.$watch(internalDelegate.countItems.bind(internalDelegate), this._provider._onChange.bind(this._provider));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _injectReloadMethod: function(userDelegate, provider) {
-        var oldReload = userDelegate.reload;
-
-        if (typeof oldReload === 'function') {
-          userDelegate.reload = function() {
-            oldReload();
-            provider._onChange();
-          };
-        }
-        else {
-          userDelegate.reload = function() {
-            provider._onChange();
-          };
-        }
       },
 
       _getDelegate: function() {
