@@ -45,11 +45,9 @@ limitations under the License.
         // Render when number of items change.
         this._scope.$watch(internalDelegate.countItems.bind(internalDelegate), this._provider._onChange.bind(this._provider));
 
-        this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _destroy: function() {
-        this._element = this._scope = this._attrs = this._linker = null;
+        this._scope.$on('$destroy', () => {
+          this._element = this._scope = this._attrs = this._linker = null;
+        });
       }
     });
 
