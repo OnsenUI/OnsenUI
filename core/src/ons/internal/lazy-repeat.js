@@ -140,7 +140,8 @@ export class LazyRepeatProvider {
   _render() {
     const items = this._getItemsInView();
 
-    if (this._delegate.hasRenderFunction()) {
+    if (this._delegate.hasRenderFunction &&
+        this._delegate.hasRenderFunction()) {
       this._delegate.render(items, this._calculateListHeight(items));
       return;
     }
