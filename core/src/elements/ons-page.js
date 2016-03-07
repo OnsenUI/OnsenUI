@@ -59,6 +59,12 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *
  *   ...
  * </ons-page>
+ *
+ *
+ * // Infinite Scroll handler
+ * page.onInfiniteScroll = function(done) {
+ *   // load more content and call done
+ * };
  */
 class PageElement extends BaseElement {
 
@@ -112,6 +118,21 @@ class PageElement extends BaseElement {
    * @description
    *   [en]Specify modifier name to specify custom styles.[/en]
    *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+   */
+
+  /**
+   * @attribute on[-]infinite[-]scroll
+   * @type {String}
+   * @description
+   *   [en]Path of the function to be executed on infinite scrolling. Example: app.loadData[/en]
+   *   [ja]機能スクロール上で実行されている関数のパス。例：app.loadData[/ja]
+   */
+
+  /**
+   * @property onInfiniteScroll
+   * @description
+   *  [en]Function to be executed on infinite scroll. [/en]
+   *  [ja]機能スクロール上で実行されている関数。[/ja]
    */
 
   createdCallback() {
