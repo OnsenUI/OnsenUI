@@ -1,7 +1,23 @@
 var OnsTabbar = React.createClass({
+  getInitialState: function() {
+    return {
+      activeIndex: this.props.initialIndex || 0
+    };
+  },
+
   componentDidMount: function() {
     const node = ReactDOM.findDOMNode(this);
-    node.setActiveTab(this.props.initialIndex || 0);
+    node.setActiveTab(this.state.activeIndex);
+    node.addEventListener('prechange', this.handleChange);
+  },
+
+  componentWillUnmount: function() {
+    const node = ReactDOM.findDOMNode(this);
+    node.removeEventListener('prechange', this.handleChange);
+  },
+
+  handleChange: function(event) {
+    this.setState({activeIndex: event.index});
   },
 
   setActiveTab: function(index, options) {
@@ -13,7 +29,7 @@ var OnsTabbar = React.createClass({
   },
 
   render: function() {
-    const tabs = this.props.renderTabs(this);
+    const tabs = this.props.renderTabs(this.state.activeIndex, this);
 
     return (
       <ons-tabbar {...this.props} _compiled="true">
