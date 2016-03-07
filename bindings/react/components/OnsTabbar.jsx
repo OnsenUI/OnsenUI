@@ -26,20 +26,6 @@ var OnsTabbar = React.createClass({
   },
 
   render: function() {
-
-    var lastReady = window.OnsTabbarElement.rewritables.ready;
-    window.OnsTabbarElement.rewritables.ready = function(node, callback) {
-      for (var i=0; i < node.children[1].children.length; i++) {
-        node.children[1].children[i]._pageElement = node.firstChild.children[i];
-      }
-      
-      for (var i =0; i < node.firstChild.children.length; i++) {
-          node.firstChild.children[i].style.display = 'none';
-      }
-      lastReady(node, callback);
-    };
-
-
     var children = [];
     this.childIndex = [];
 
@@ -49,18 +35,12 @@ var OnsTabbar = React.createClass({
     var self = this;
 
     self.activeIndex = -1;
-    var index = -1;
 
-
-    React.Children.forEach(this.props.children, function(child) {
-      index++;
+    React.Children.forEach(this.props.children, function(child, index) {
       child = React.cloneElement(child, {modifier: newModifier});
 
-      var counter = -1;
-
-      var myChildren = React.Children.map(child.props.children, function(child2) {
-        counter++;
-        return React.cloneElement(child2, {'data-ons-react':  counter});
+      var myChildren = React.Children.map(child.props.children, function(child2, index) {
+        return React.cloneElement(child2, {'data-ons-react':  index});
       });
 
       this.childIndex.push(child.props.page);
