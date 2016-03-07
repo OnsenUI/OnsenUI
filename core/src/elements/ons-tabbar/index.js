@@ -395,7 +395,6 @@ class TabbarElement extends BaseElement {
    * @param {String} [options.animation]
    * @param {Function} [options.callback]
    * @param {Object} [options.animationOptions]
-   * @param {Boolean} options._removeElement
    * @param {Number} options.selectedTabIndex
    * @param {Number} options.previousTabIndex
    * @return {Promise} Resolves to the new page element.
@@ -413,13 +412,7 @@ class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          if (options._removeElement) {
-            rewritables.unlink(this, oldPageElement, pageElement => {
-              pageElement._destroy();
-            });
-          } else {
-            oldPageElement.style.display = 'none';
-          }
+          oldPageElement.style.display = 'none';
         }
 
         element.style.display = 'block';
@@ -545,8 +538,7 @@ class TabbarElement extends BaseElement {
           }
         },
         previousTabIndex: previousTabIndex,
-        selectedTabIndex: selectedTabIndex,
-        _removeElement: removeElement
+        selectedTabIndex: selectedTabIndex
       };
 
       if (options.animation) {
