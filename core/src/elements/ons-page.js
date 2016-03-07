@@ -144,6 +144,9 @@ class PageElement extends BaseElement {
     }
 
     this._tryToFillStatusBar();
+
+    const infiniteScroll = this.getAttribute('on-infinite-scroll') || this.getAttribute('oninfinitescroll');
+    this.attributeChangedCallback('oninfinitescroll', null, infiniteScroll);
   }
 
   /**
@@ -178,7 +181,7 @@ class PageElement extends BaseElement {
   }
 
   _onScroll() {
-    let c = this._contentElement,
+    const c = this._contentElement,
       overLimit = (c.scrollTop + c.clientHeight) / c.scrollHeight >= this._infiniteScrollLimit;
 
     if (this._onInfiniteScroll && !this._loadingContent && overLimit) {
@@ -314,6 +317,13 @@ class PageElement extends BaseElement {
       this._isMuted = this.hasAttribute('_muted');
     } else if (name === '_skipinit') {
       this._skipInit = this.hasAttribute('_skipinit');
+    } else if (name.match(/on-?infinite-?scroll/i)) {
+      // this.onInfiniteScroll = util.findFromPath(current);
+      this.onInfiniteScroll = (done) => {
+        const f = util.findFromPath(current);
+        this.onInfiniteScroll = f;
+        f(done);
+      };
     }
   }
 
