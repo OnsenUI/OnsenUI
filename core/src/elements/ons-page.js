@@ -59,6 +59,12 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *
  *   ...
  * </ons-page>
+ *
+ *
+ * // Infinite Scroll handler
+ * page.onInfiniteScroll = function(done) {
+ *   // load more content and call done
+ * };
  */
 class PageElement extends BaseElement {
 
@@ -114,6 +120,21 @@ class PageElement extends BaseElement {
    *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
    */
 
+  /**
+   * @attribute on[-]infinite[-]scroll
+   * @type {String}
+   * @description
+   *   [en]Path of the function to be executed on infinite scrolling. Example: app.loadData[/en]
+   *   [ja]機能スクロール上で実行されている関数のパス。例：app.loadData[/ja]
+   */
+
+  /**
+   * @property onInfiniteScroll
+   * @description
+   *  [en]Function to be executed on infinite scroll. [/en]
+   *  [ja]機能スクロール上で実行されている関数。[/ja]
+   */
+
   createdCallback() {
     this.classList.add('page');
 
@@ -144,6 +165,9 @@ class PageElement extends BaseElement {
     }
 
     this._tryToFillStatusBar();
+
+    const infiniteScroll = this.getAttribute('on-infinite-scroll') || this.getAttribute('oninfinitescroll');
+    this.attributeChangedCallback('oninfinitescroll', null, infiniteScroll);
   }
 
   /**
@@ -158,6 +182,33 @@ class PageElement extends BaseElement {
    */
   set isShown(value) {
     this._isShown = value;
+  }
+
+  set onInfiniteScroll(value) {
+    if (value === null) {
+      this._onInfiniteScroll = null;
+      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      return;
+    }
+    if (!(value instanceof Function)) {
+      throw new Error('onInfiniteScroll must be a function or null');
+    }
+    if (!this._onInfiniteScroll) {
+      this._infiniteScrollLimit = 0.9;
+      this._boundOnScroll = this._onScroll.bind(this);
+      this._contentElement.addEventListener('scroll', this._boundOnScroll);
+    }
+    this._onInfiniteScroll = value;
+  }
+
+  _onScroll() {
+    const c = this._contentElement,
+      overLimit = (c.scrollTop + c.clientHeight) / c.scrollHeight >= this._infiniteScrollLimit;
+
+    if (this._onInfiniteScroll && !this._loadingContent && overLimit) {
+      this._loadingContent = true;
+      this._onInfiniteScroll(() => this._loadingContent = false);
+    }
   }
 
   /**
@@ -287,6 +338,13 @@ class PageElement extends BaseElement {
       this._isMuted = this.hasAttribute('_muted');
     } else if (name === '_skipinit') {
       this._skipInit = this.hasAttribute('_skipinit');
+    } else if (name.match(/on-?infinite-?scroll/i)) {
+      // this.onInfiniteScroll = util.findFromPath(current);
+      this.onInfiniteScroll = (done) => {
+        const f = util.findFromPath(current);
+        this.onInfiniteScroll = f;
+        f(done);
+      };
     }
   }
 

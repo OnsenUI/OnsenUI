@@ -23,8 +23,6 @@ limitations under the License.
   module.factory('PageView', function($onsen, $parse) {
 
     var PageView = Class.extend({
-      _nullElement: window.document.createElement('div'),
-
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
@@ -37,6 +35,11 @@ limitations under the License.
         this._userDeviceBackButtonListener = angular.noop;
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
           this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
+        }
+        if (this._attrs.ngInfiniteScroll) {
+          this._element[0].onInfiniteScroll = (done) => {
+            $parse(this._attrs.ngInfiniteScroll)(this._scope)(done);
+          };
         }
       },
 
@@ -79,7 +82,6 @@ limitations under the License.
         this._clearDerivingEvents();
 
         this._element = null;
-        this._nullElement = null;
         this._scope = null;
 
         this._clearListener();
