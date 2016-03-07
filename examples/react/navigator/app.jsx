@@ -1,22 +1,53 @@
-var App = React.createClass({
-  pushPage: function() {
-    this.refs.navi.pushPage(
-      <OnsPage>
+var FirstPage = React.createClass({
+ getInitialState: function() {
+    return { };
+  },
+  render: function() {
+    return <OnsPage>
+      <ons-toolbar>
+        <div className="left"><ons-back-button>Back</ons-back-button></div>
+        <div className="center">{ this.props.index }</div>
+      </ons-toolbar>
+      <ons-button onClick={this.props.pushPage}>Push!</ons-button>
+    </OnsPage>;
+  }
+});
+
+var SecondPage
+
+var SecondPage = React.createClass({
+ getInitialState: function() {
+    return { };
+  },
+  render: function() {
+    return <OnsPage>
         <ons-toolbar>
           <div className="left"><OnsBackButton>Back </OnsBackButton></div>
-          <div className="center">{ this.index }</div>
+          <div className="center">{ this.props.index }</div>
         </ons-toolbar>
         <br />
-        <ons-button onClick={this.pushPage}>Push</ons-button>
-        <ons-button onClick={this.popPage}>Pop</ons-button>
-      </OnsPage>
-    );
+        <ons-button onClick={this.props.pushPage}>Push</ons-button>
+        <ons-button onClick={this.props.popPage}>Pop</ons-button>
+      </OnsPage>;
+  }
+});
 
+var App = React.createClass({
+  pushPage: function() {
     this.index++;
+    this.refs.navi.pushPage(
+      { comp: SecondPage,
+        props: {index: this.index, pushPage: this.pushPage, popPage: this.popPage}
+      }
+    );
   },
 
   popPage: function() {
     this.refs.navi.popPage();
+  },
+
+  renderScene: function(navigator, route) {
+    return React.createElement(route.comp, route.props);
   },
 
   componentDidMount: function() {
@@ -25,14 +56,9 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <OnsNavigator id="myNav" animation="fade" ref="navi">
-        <OnsPage>
-          <ons-toolbar>
-            <div className="left"><ons-back-button>Back</ons-back-button></div>
-            <div className="center">{ this.index }</div>
-          </ons-toolbar>
-          <ons-button onClick={this.pushPage}>Push!</ons-button>
-        </OnsPage>
+      <OnsNavigator id="myNav" animation="fade" ref="navi"
+        initialRoute={{comp: FirstPage, props: {index: 0, pushPage: this.pushPage}}}
+        renderScene={this.renderScene} >
       </OnsNavigator>
     );
   }
