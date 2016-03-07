@@ -37,9 +37,9 @@ limitations under the License.
           this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
         }
         if (this._attrs.ngInfiniteScroll) {
-          this._element[0].onInfiniteScroll = (done) => {
+          this._element[0].onInfiniteScroll = function(done) {
             $parse(this._attrs.ngInfiniteScroll)(this._scope)(done);
-          };
+          }.bind(this);
         }
       },
 
