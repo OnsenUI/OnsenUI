@@ -160,6 +160,33 @@ class PageElement extends BaseElement {
     this._isShown = value;
   }
 
+  set onInfiniteScroll(value) {
+    if (value === null) {
+      this._onInfiniteScroll = null;
+      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      return;
+    }
+    if (!(value instanceof Function)) {
+      throw new Error('onInfiniteScroll must be a function or null');
+    }
+    if (!this._onInfiniteScroll) {
+      this._infiniteScrollLimit = 0.9;
+      this._boundOnScroll = this._onScroll.bind(this);
+      this._contentElement.addEventListener('scroll', this._boundOnScroll);
+    }
+    this._onInfiniteScroll = value;
+  }
+
+  _onScroll() {
+    let c = this._contentElement,
+      overLimit = (c.scrollTop + c.clientHeight) / c.scrollHeight >= this._infiniteScrollLimit;
+
+    if (this._onInfiniteScroll && !this._loadingContent && overLimit) {
+      this._loadingContent = true;
+      this._onInfiniteScroll(() => this._loadingContent = false);
+    }
+  }
+
   /**
    * @method getDeviceBackButtonHandler
    * @signature getDeviceBackButtonHandler()
