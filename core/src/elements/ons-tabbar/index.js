@@ -209,7 +209,7 @@ class TabbarElement extends BaseElement {
       this._compile();
     }
 
-    this._contentElement = util.findChild(this, '.tab-bar__content');
+    ModifierUtil.initModifier(this, scheme);
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -217,6 +217,10 @@ class TabbarElement extends BaseElement {
       baseClassName: 'TabbarAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
+  }
+
+  get _contentElement() {
+    return util.findChild(this, '.tab-bar__content');
   }
 
   _compile() {
@@ -249,8 +253,6 @@ class TabbarElement extends BaseElement {
     if (this._hasTopTabbar()) {
       this._prepareForTopTabbar();
     }
-
-    ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
   }
@@ -390,19 +392,21 @@ class TabbarElement extends BaseElement {
     return page;
   }
 
+  get pages() {
+    return util.arrayFrom(this._contentElement.children);
+  }
+
   /**
    * @param {Element} element
    * @param {Object} options
    * @param {String} [options.animation]
    * @param {Function} [options.callback]
    * @param {Object} [options.animationOptions]
-   * @param {Boolean} options._removeElement
    * @param {Number} options.selectedTabIndex
    * @param {Number} options.previousTabIndex
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-
     var oldPageElement = this._oldPageElement || internal.nullElement;
     this._oldPageElement = element;
     var animator = this._animatorFactory.newAnimator(options);
@@ -414,13 +418,7 @@ class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          if (options._removeElement) {
-            rewritables.unlink(this, oldPageElement, pageElement => {
-              pageElement._destroy();
-            });
-          } else {
-            oldPageElement.style.display = 'none';
-          }
+          oldPageElement.style.display = 'none';
         }
 
         element.style.display = 'block';
@@ -529,7 +527,7 @@ class TabbarElement extends BaseElement {
     if (needLoad) {
       var removeElement = false;
 
-      if ((!previousTab && previousPageElement) || (previousTab && previousTab._pageElement !== previousPageElement)) {
+      if ((!previousTab && previousPageElement) || (previousTab && previousTab.pageElement !== previousPageElement)) {
         removeElement = true;
       }
 
@@ -545,8 +543,7 @@ class TabbarElement extends BaseElement {
           }
         },
         previousTabIndex: previousTabIndex,
-        selectedTabIndex: selectedTabIndex,
-        _removeElement: removeElement
+        selectedTabIndex: selectedTabIndex
       };
 
       if (options.animation) {
@@ -561,8 +558,6 @@ class TabbarElement extends BaseElement {
       };
 
       return new Promise(resolve => {
-
-
         selectedTab._loadPageElement(pageElement => {
           resolve(this._loadPersistentPageDOM(pageElement, params));
         }, link);

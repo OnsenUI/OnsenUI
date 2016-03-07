@@ -271,16 +271,31 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(callback, link) {
-    if (!this._pageElement) {
+    if (!this.pageElement) {
       this._createPageElement(this.getAttribute('page'), (element) => {
         link(element, element => {
-          this._pageElement = element;
+          this.pageElement = element;
           callback(element);
         });
       });
     } else {
-      callback(this._pageElement);
+      callback(this.pageElement);
     }
+  }
+
+  set pageElement(el) {
+    this._pageElement = el;
+  }
+
+  get pageElement() {
+    if (typeof this._pageElement !== 'undefined') {
+      return this._pageElement;
+    }
+
+    const tabbar = this._findTabbarElement();
+    const index = this._findTabIndex();
+
+    return tabbar._contentElement.children[index];
   }
 
   /**
@@ -315,21 +330,27 @@ class TabElement extends BaseElement {
     }
 
     if (this.hasAttribute('active')) {
-    const tabIndex = this._findTabIndex();
+      const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
         setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
       });
     } else {
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() =>
-          this._createPageElement(this.getAttribute('page'), pageElement => {
-            OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-              this._pageElement = pageElement;
-              this._pageElement.style.display = 'none';
-              tabbar._contentElement.appendChild(this._pageElement);
-            });
-          })
+        setImmediate(() => {
+            if (this.hasAttribute('page')) {
+              this._createPageElement(this.getAttribute('page'), pageElement => {
+                OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
+                  this.pageElement = pageElement;
+                  this.pageElement.style.display = 'none';
+                  tabbar._contentElement.appendChild(this.pageElement);
+                });
+              });
+            }
+            else {
+              this.pageElement.style.display = 'none';
+            }
+          }
         );
       });
     }
