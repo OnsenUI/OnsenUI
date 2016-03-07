@@ -218,7 +218,7 @@ util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
 util.findFromPath = (path) => {
   path = path.split('.');
   var el = window, key;
-  while (key = path.shift()) {
+  while (key = path.shift()) { // eslint-disable-line no-cond-assign
     el = el[key];
   }
   return el;
