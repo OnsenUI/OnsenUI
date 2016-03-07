@@ -38,23 +38,19 @@ var MyPage2  = React.createClass({
   }
 });
 
-
-var MyPage  = React.createClass({
-  showPage1: function() {
-    this.refs.navi.pushPage(
-      <MyPage2 />
-      );
+var FirstPage = React.createClass({
+ getInitialState: function() {
+    return { };
   },
   render: function() {
     return (
-    <OnsNavigator ref="navi">
       <OnsPage>
         <OnsToolbar>
           <div className="center">Carousel</div>
         </OnsToolbar>
         <br />
         <ons-list>
-                <ons-list-item onClick={this.showPage1} modifier="chevron">Example1</ons-list-item>
+                <ons-list-item onClick={this.props.showPage1} modifier="chevron">Example1</ons-list-item>
                 {/* <ons-list-item ng-click="navi.pushPage('example2.html')" modifier="chevron">Example2</ons-list-item> */}
                 {/* <ons-list-item ng-click="navi.pushPage('example3.html')" modifier="chevron">Example3</ons-list-item> */}
                 {/* <ons-list-item ng-click="navi.pushPage('example4.html')" modifier="chevron">Example4</ons-list-item> */}
@@ -64,7 +60,27 @@ var MyPage  = React.createClass({
                 {/* <ons-list-item ng-click="navi.pushPage('example8.html')" modifier="chevron">Example8</ons-list-item> */}
               </ons-list>
             </OnsPage>
-          </OnsNavigator>
+    );
+  }
+});
+
+
+var MyPage  = React.createClass({
+  showPage1: function() {
+    this.refs.navi.pushPage({comp: MyPage2});
+  },
+
+  renderScene: function(navigator, route) {
+    return React.createElement(route.comp, route.props);
+  },
+
+  render: function() {
+    return (
+      <OnsNavigator ref="navi"
+        initialRoute={{comp: FirstPage, props: {showPage1: this.showPage1}}}
+        renderScene={this.renderScene}
+        >
+      </OnsNavigator>
     );
   }
 });

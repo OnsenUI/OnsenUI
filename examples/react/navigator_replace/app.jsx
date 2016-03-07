@@ -42,7 +42,6 @@ var MyNav  = React.createClass({
   pushPage: function() {
     this.counter++;
     var navTitle = "Navigator "+ this.counter;
-
     this.refs.navi.pushPage(
       <MyPage title={navTitle} popPage={this.popPage} pushPage={this.pushPage} replacePage={this.replacePage} />
     );
@@ -51,7 +50,6 @@ var MyNav  = React.createClass({
   componentDidMount: function() {
     this.counter = 1;
   },
-  
   render: function() {
     return <OnsNavigator ref="navi">
       <MyPage title="Navigator 1" pushPage={this.pushPage} />

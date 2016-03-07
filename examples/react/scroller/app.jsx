@@ -1,7 +1,6 @@
 var MyPage  = React.createClass({
   render: function() {
     return (
-    <OnsNavigator>
       <OnsPage>
     <OnsToolbar>
       <div className="center">Scroller</div>
@@ -37,7 +36,6 @@ var MyPage  = React.createClass({
       </div>
     </OnsScroller>
   </OnsPage>
-  </OnsNavigator>
   );
 
   }

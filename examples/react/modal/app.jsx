@@ -30,8 +30,10 @@ var Page2 = React.createClass({
 
 });
 
-var MyPage  = React.createClass({
-
+var FirstPage = React.createClass({
+ getInitialState: function() {
+    return { };
+  },
   openModal: function() {
     console.log('open modal');
     this.refs.modal.show();
@@ -41,19 +43,10 @@ var MyPage  = React.createClass({
     }.bind(this), 500);
 
   },
-  popPage: function() {
-    this.refs.nav.popPage();
-  },
-  push: function() {
-    this.refs.nav.pushPage(<Page2 popPage={this.popPage}/>);
-  },
   render: function() {
-    return (
-
-      <OnsNavigator ref="nav">
-        <OnsPage>
+    return (<OnsPage>
         <ons-modal ref="modal">
-          <OnsIcon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}} />
+          <OnsIcon icon="gear" spin="true" style={{lineHeight: 20, verticalAlign: 'middle'}} />
           <span style={{lineHeight: 20, fontSize: 15}}>Loading...</span>
         </ons-modal>
 
@@ -62,13 +55,32 @@ var MyPage  = React.createClass({
         </OnsToolbar>
 
         <p style={{textAlign: 'center'}}>
-          <OnsButton onClick={this.push}> Push Page </OnsButton>
+          <OnsButton onClick={this.props.push}> Push Page </OnsButton>
         </p>
         <p style={{textAlign: 'center'}}>
           <OnsButton modifier="light" onClick={this.openModal}>Open Modal</OnsButton>
         </p>
-      </OnsPage>
-    </OnsNavigator>
+      </OnsPage>);
+  }
+});
+
+var MyPage  = React.createClass({
+
+  popPage: function() {
+    this.refs.nav.popPage();
+  },
+  renderScene: function(navigator, route) {
+    return React.createElement(route.comp, route.props);
+  },
+  push: function() {
+    this.refs.nav.pushPage({comp: Page2, props: {popPage: this.popPage}});
+  },
+  render: function() {
+    return (
+
+      <OnsNavigator ref="nav"
+       initialRoute={{comp: FirstPage, props: {push: this.push} }}
+       renderScene={this.renderScene} />
   );
   }
 });
