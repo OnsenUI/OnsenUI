@@ -212,6 +212,19 @@ util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
 };
 
 /**
+ * @param {String} path - path such as 'myApp.controllers.data.loadData'
+ * @return {Any} - whatever is located at that path
+ */
+util.findFromPath = (path) => {
+  path = path.split('.');
+  var el = window, key;
+  while (key = path.shift()) { // eslint-disable-line no-cond-assign
+    el = el[key];
+  }
+  return el;
+};
+
+/**
  * @param {Element} element
  * @param {String} eventName
  * @param {Object} [detail]

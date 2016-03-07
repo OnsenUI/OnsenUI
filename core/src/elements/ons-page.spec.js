@@ -216,5 +216,49 @@ describe('OnsPageElement', () => {
       ons.platform.select('');
     });
   });
+
+  describe('infiniteScroll', () => {
+    var content, page, i, maxScroll;
+    beforeEach(() => {
+      i = 0;
+      page = element;
+      content = page._getContentElement();
+      document.body.appendChild(page);
+      content.innerHTML = '<div style="height: ' + (2 * content.clientHeight) + 'px"></div>';
+      maxScroll = content.scrollHeight - content.clientHeight;
+    });
+
+    afterEach(() => {
+      document.body.removeChild(page);
+    });
+
+    it('calls onInfiniteScroll', (done) => {
+      element.onInfiniteScroll = done => {
+        i++;
+        done();
+      };
+      content.scrollTop = 0.95 * maxScroll;
+      setTimeout(() => {
+        expect(i).to.equal(1);
+        done();
+      }, 50);
+    });
+
+    it('waits for onInfiniteScroll to finish', (done) => {
+      element.onInfiniteScroll = (done) => {
+        i++;
+        setTimeout(done, 200);
+      };
+      content.scrollTop = 0.95 * maxScroll;
+      setTimeout(element._boundOnScroll, 50);
+      setTimeout(element._boundOnScroll, 150);
+      setTimeout(element._boundOnScroll, 250);
+
+      setTimeout(() => {
+        expect(i).to.equal(2);
+        done();
+      }, 300);
+    });
+  });
 });
 
