@@ -119,16 +119,12 @@ class IconElement extends BaseElement {
    * Remove unneeded class value.
    */
   _cleanClassAttribute() {
-    const classList = this.classList;
+    util.arrayFrom(this.classList)
+      .filter(className => /^(fa$|fa-|ion-|zmdi-)/.test(className))
+      .forEach(className => this.classList.remove(className));
 
-    Array.apply(null, this.classList).filter(klass => {
-      return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0 || klass.indexOf('zmdi-') === 0;
-    }).forEach(className => {
-      classList.remove(className);
-    });
-
-    classList.remove('zmdi');
-    classList.remove('ons-icon--ion');
+    this.classList.remove('zmdi');
+    this.classList.remove('ons-icon--ion');
   }
 
   _buildClassAndStyle() {
