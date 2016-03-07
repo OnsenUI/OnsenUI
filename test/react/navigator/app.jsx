@@ -61,63 +61,73 @@ var MyNav  = React.createClass({
     this.counter--;
     this.refs.navi.popPage({animation: 'none'});
   },
-  replacePage: function() {
-    console.log('replace page');
-    var id='page_' + this.counter;
-    this.refs.navi.replacePage(
-      <MyPage title="Replaced Page" id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
-    );
-  },
-  resetPage: function() {
-    this.counter = 1;
-    var id='page_' + this.counter;
-    this.refs.navi.resetToPage(
-      <MyPage title="Reset Page" id={id} pushPage={this.pushPage}  />
-    );
-  },
+  // replacePage: function() {
+  //   console.log('replace page');
+  //   var id='page_' + this.counter;
+  //   this.refs.navi.replacePage(
+  //     <MyPage title="Replaced Page" id={id} popPage={this.popPage} pushPage={this.pushPage} />, {animation: 'none'}
+  //   );
+  // },
+  // resetPage: function() {
+  //   this.counter = 1;
+  //   var id='page_' + this.counter;
+  //   this.refs.navi.resetToPage(
+  //     <MyPage title="Reset Page" id={id} pushPage={this.pushPage}  />
+  //   );
+  // },
   pushPage: function() {
     this.counter++;
-    var navTitle = "Navigator "+ this.counter;
+    var navTitle = 'Navigator ' + this.counter;
     var id='page_' + this.counter;
-    this.refs.navi.pushComponent(
-      <MyPage title={navTitle}
-      id={id} resetPage={this.resetPage} 
-      replacePage={this.replacePage} 
-      insertPageFront={this.insertPage.bind(this, -1)}
-      insertPageBack={this.insertPage.bind(this,0)}
-      popPage={this.popPage} 
-      pushPage={this.pushPage} />, 
-      {animation: 'none'}
-    );
+
+    var myProps = {
+      title: navTitle,
+      id: id,
+      // resetPage: this.resetPage,
+      // replacePage: this.replacePage,
+      // insertPageFront: this.insertPage.bind(this, -1),
+      // insertPageBack: this.insertPage.bind(this,0),
+      popPage: this.popPage,
+      pushPage: this.pushPage
+    };
+
+    this.refs.navi.pushPage( {comp: MyPage, props: myProps}, {animation: 'none'});
   },
-  insertPage: function(pos) {
-    this.counter++;
-    var title = 'Navigator ' +  this.counter;
-    var id='page_' + this.counter;
-    this.refs.navi.insertComponent(
-      <MyPage title={title}
-        id={id}
-        popPage={this.popPage}
-        insertPageFront={this.insertPage.bind(this, -1)}
-        insertPageBack={this.insertPage.bind(this, 0)}
-      />, pos, {animation: 'none'}
-    );
-  },
+  // insertPage: function(pos) {
+  //   this.counter++;
+  //   var title = 'Navigator ' +  this.counter;
+  //   var id='page_' + this.counter;
+  //   this.refs.navi.insertComponent(
+  //     <MyPage title={title}
+  //       id={id}
+  //       popPage={this.popPage}
+  //       insertPageFront={this.insertPage.bind(this, -1)}
+  //       insertPageBack={this.insertPage.bind(this, 0)}
+  //     />, pos, {animation: 'none'}
+  //   );
+  // },
 
   componentDidMount: function() {
     this.counter = 1;
   },
-  
+  renderScene: function(navigator, route) {
+    return React.createElement(route.comp, route.props);
+  },
   render: function() {
-    return <OnsNavigator id="mynav" ref="navi">
-      <MyPage 
-       insertPageFront={this.insertPage.bind(this, -1)}
-       insertPageBack={this.insertPage.bind(this, 0)}
-       title="Navigator 1" 
-       id="page_1" 
-       popPage={this.popPage}
-       resetPage={this.resetPage} 
-       pushPage={this.pushPage} />
+
+    var navProps = {
+       // insertPageFront: this.insertPage.bind(this, -1),
+      // insertPageBack: this.insertPage.bind(this, 0),
+      // resetPage: this.resetPage,
+       title: 'Navigator 1',
+       id: 'page_1',
+       popPage: this.popPage,
+       pushPage: this.pushPage,
+    };
+
+    return <OnsNavigator id="mynav" ref="navi"
+      initialRoute={{comp: MyPage , props: navProps}}
+      renderScene={this.renderScene}>
     </OnsNavigator>
   }
 });

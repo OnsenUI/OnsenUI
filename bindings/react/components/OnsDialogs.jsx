@@ -19,7 +19,6 @@ var createDialogClass = function(domName, showFun) {
       this.renderPortal(this.props);
     },
     componentWillReceiveProps: function(newProps) {
-      console.log('will receive pos');
 
       if (newProps.isOpen != this.props.isOpen) {
         console.log('true');
@@ -51,7 +50,6 @@ var createDialogClass = function(domName, showFun) {
       return false;
     },
     render: function() {
-      console.log('myrender');
       return React.DOM.noscript();
     }
   };
