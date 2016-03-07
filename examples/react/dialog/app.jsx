@@ -21,6 +21,26 @@ var MyPage2  = React.createClass({
 var a;
 var b;
 
+var FirstPage  = React.createClass({
+ getInitialState: function() {
+    return { };
+  },
+  render: function() {
+    return (<OnsPage>
+      <OnsToolbar>
+        <div className="center">Name</div>
+      </OnsToolbar>
+      <br />
+      <div style={{textAlign: 'center'}}>
+        <OnsInput value={this.props.name} onChange={this.props.onNameChanged}  />
+        <p>
+          <OnsButton modifier="light"  onClick={this.props.pushPage}>Next</OnsButton>
+        </p>
+      </div>
+    </OnsPage>);
+  }
+});
+
 var MyDialog = React.createClass({
   componentDidMount: function() {
     console.log('mounting 1');
@@ -29,7 +49,9 @@ var MyDialog = React.createClass({
    this.refs.navi.popPage();
   },
   pushPage: function() {
-    this.refs.navi.pushPage(<MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
+    this.refs.navi.pushPage(
+      {comp: MyPage2, props: {onChange: this.onDescriptionChanged, popPage: this.popPage}});
+      // <MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
   },
   getInitialState: function() {
     return {value: ''};
@@ -41,23 +63,22 @@ var MyDialog = React.createClass({
     console.log('description changed');
     this.props.onDescriptionChanged(event.target.value);
   },
+  renderScene: function(navigator, route) {
+    var comp = route.comp;
+    var props = route.props;
+    props.description = this.props.description;
+    props.name = this.props.name;
+
+    return React.createElement(comp, props);
+  },
   render: function() {
     return (
     <OnsDialog onCancel={this.props.onCancel} isOpen={this.props.isOpen} style={{height: 250}} animation="default" cancelable>
-      <OnsNavigator animation="slide" ref="navi">
-        <OnsPage>
-          <OnsToolbar>
-          <div className="center">Name</div>
-          </OnsToolbar>
-          <br />
-          <div style={{textAlign: 'center'}}>
-            <OnsInput value={this.props.name} onChange={this.onNameChanged}  />
-            <p>
-              <OnsButton modifier="light"  onClick={this.pushPage}>Next</OnsButton>
-            </p>
-          </div>
-          </OnsPage>
-      </OnsNavigator>
+      <OnsNavigator animation="slide" ref="navi"
+        initialRoute={{comp: FirstPage, props: {
+          pushPage: this.pushPage, onNameChanged: this.onNameChanged }}}
+        renderScene={this.renderScene}>
+              </OnsNavigator>
     </OnsDialog>
     );
   },

@@ -13,8 +13,6 @@ var FirstPage = React.createClass({
   }
 });
 
-var SecondPage
-
 var SecondPage = React.createClass({
  getInitialState: function() {
     return { };
