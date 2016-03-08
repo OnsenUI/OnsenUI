@@ -32,7 +32,7 @@ var OnsTabbar = React.createClass({
     const tabs = this.props.renderTabs(this.state.activeIndex, this);
 
     return (
-      <ons-tabbar {...this.props} _compiled="true">
+      <ons-tabbar {...this.props} activeIndex={this.state.activeIndex} _compiled="true">
         <div no-status-bar-fill className="ons-tab-bar__content tab-bar__content">
           {tabs.map((tab) => tab.content)}
         </div>

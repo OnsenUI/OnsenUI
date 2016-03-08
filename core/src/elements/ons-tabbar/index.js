@@ -204,10 +204,16 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
-
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+
+    for (var i = 0; i < this.firstChild.children.length; i++) {
+        this.firstChild.children[i].style.display = 'none';
+    }
+
+    var activeIndex = this.getAttribute('activeIndex');
+    this.children[1].children[activeIndex].setAttribute('active', 'true');
 
     ModifierUtil.initModifier(this, scheme);
 
