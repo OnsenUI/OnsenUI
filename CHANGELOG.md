@@ -12,6 +12,7 @@ v2.0.0-beta.8
  * ons.notification: Fixed an issue in iOS related to CustomElements.
  * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
  * ons-icon: Fixed a bug in old Android versions.
+ * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
 
 v2.0.0-beta.7
 ----
