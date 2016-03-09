@@ -320,11 +320,11 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerBottomToolbar(element) {
-    if (!util.findChild(this, '.page__status-bar-fill')) {
+    if (!util.findChild(this, '.page__bottom-bar-fill')) {
       const fill = document.createElement('div');
       fill.classList.add('page__bottom-bar-fill');
-      fill.style.width = '0px';
-      fill.style.height = '0px';
+      // fill.style.width = '0px';
+      // fill.style.height = '0px';
 
       this.insertBefore(fill, this.children[0]);
       this.insertBefore(element, null);
@@ -395,22 +395,12 @@ class PageElement extends BaseElement {
 
         fill = document.createElement('div');
         fill.classList.add('page__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
 
-        let bottomBarFill;
-
-        for (let i = 0; i < this.children.length; i++) {
-          if (this.children[i].classList.contains('page__bottom-bar-fill')) {
-            bottomBarFill = this.children[i];
-            break;
-          }
-        }
+        let bottomBarFill = util.findChild(this, '.page__bottom-bar-fill');
 
         if (bottomBarFill) {
           this.insertBefore(fill, bottomBarFill.nextSibling);
-        }
-        else {
+        } else {
           this.insertBefore(fill, this.children[0]);
         }
 
