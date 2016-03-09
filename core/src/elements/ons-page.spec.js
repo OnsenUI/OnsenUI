@@ -94,14 +94,6 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#_hasToolbarElement()', () => {
-    it('returns if a toolbar exists', () => {
-      expect(element._hasToolbarElement()).to.be.false;
-      element._registerToolbar(new OnsToolbarElement());
-      expect(element._hasToolbarElement()).to.be.true;
-    });
-  });
-
   describe('#_canAnimateToolbar()', () => {
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;

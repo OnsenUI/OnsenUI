@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import ons from 'ons/ons';
+import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -97,20 +98,9 @@ class ToolbarElement extends BaseElement {
     if (!this.parentNode || this.hasAttribute('inline')) {
       return;
     }
+    let page = util.findParent(this, 'ons-page');
 
-    if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
-      var page = this;
-      for (;;) {
-        page = page.parentNode;
-
-        if (!page) {
-          return;
-        }
-
-        if (page.nodeName.toLowerCase() === 'ons-page') {
-          break;
-        }
-      }
+    if (page && page !== this.parentNode) {
       page._registerToolbar(this);
     }
   }
@@ -168,7 +158,6 @@ class ToolbarElement extends BaseElement {
   _ensureToolbarItemElements() {
 
     var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
-    var center;
 
     for (var i = 0; i < this.childNodes.length; i++) {
       // case of not element
@@ -177,10 +166,10 @@ class ToolbarElement extends BaseElement {
       }
     }
 
-    if (hasCenterClassElementOnly) {
-      center = this._ensureToolbarItemContainer('center');
-    } else {
-      center = this._ensureToolbarItemContainer('center');
+    var center = this._ensureToolbarItemContainer('center');
+    center.classList.add('navigation-bar__title');
+
+    if (!hasCenterClassElementOnly) {
       var left = this._ensureToolbarItemContainer('left');
       var right = this._ensureToolbarItemContainer('right');
 
@@ -195,26 +184,18 @@ class ToolbarElement extends BaseElement {
           this.removeChild(right);
         }
 
-        var fragment = document.createDocumentFragment();
-        fragment.appendChild(left);
-        fragment.appendChild(center);
-        fragment.appendChild(right);
-
-        this.appendChild(fragment);
+        this.appendChild(left);
+        this.appendChild(center);
+        this.appendChild(right);
       }
     }
-    center.classList.add('navigation-bar__title');
   }
 
   _ensureToolbarItemContainer(name) {
-    var container = ons._util.findChild(this, '.' + name);
-
-    if (!container) {
-      container = document.createElement('div');
-      container.classList.add(name);
-    }
+    var container = util.findChild(this, '.' + name) || util.create('.' + name);
 
     container.classList.add('navigation-bar__' + name);
+
     return container;
   }
 
