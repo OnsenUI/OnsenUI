@@ -25,8 +25,22 @@ class OnsNavigator extends React.Component {
 
   componentDidMount() {
     this.refs.navi.popPage = this.popPage.bind(this);
-    this.routes= [this.props.initialRoute];
-    this.pages = [this.props.renderScene(this, this.props.initialRoute)];
+
+    if (this.props.initialRoute && this.props.initialRoutes) {
+      throw 'In OnsNavigator either initalRoute or initalRoutes can be set';
+    }
+
+    if (this.props.initialRoute) {
+      this.routes= [this.props.initialRoute];
+    } else if (this.props.initialRoutes) {
+      this.routes= this.props.initialRoutes;
+    } else {
+      this.routes = [];
+    }
+
+    this.pages = this.routes.map(
+      (route) => this.props.renderScene(this, route)
+    );
     this.setState({});
   }
 
