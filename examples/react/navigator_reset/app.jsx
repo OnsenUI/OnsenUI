@@ -39,16 +39,16 @@ var App = React.createClass({
       { comp: SecondPage,
         props: {index: this.index, pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack }
       }
-    );
+    ).then(() => console.log('page pushed'));
   },
 
   popPage: function() {
     this.index--;
-    this.refs.navi.popPage();
+    this.refs.navi.popPage().then(() => console.log('page popped'));
   },
   resetPage: function() {
     this.index = 0;
-    this.refs.navi.resetPage({comp: FirstPage, props: {index: 'Reset Page', pushPage: this.pushPage}});
+    this.refs.navi.resetPage({comp: FirstPage, props: {index: 'Reset Page', pushPage: this.pushPage}}).then(() => console.log('page resetted'));
   },
 
   renderScene: function(navigator, route) {
@@ -66,7 +66,7 @@ var App = React.createClass({
         {comp: FirstPage, props: {index: 'Reset Page 1', pushPage: this.pushPage}},
         {comp: SecondPage, props: {index: 'Reset Page 2', pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack}},
         {comp: SecondPage, props: {index: 'Reset Page 3', pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack}}
-      ]);
+      ]).then(() => console.log('page stack resetted'));
   },
 
   render: function() {
