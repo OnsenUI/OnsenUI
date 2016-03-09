@@ -11,6 +11,24 @@ class OnsNavigator extends React.Component {
     });
   }
 
+  resetPage(route, options = {}) {
+    this.resetPageStack([route], options);
+  }
+
+  resetPageStack(routes, options = {}) {
+    var lastRoute = routes[routes.length -1];
+    var newPage = this.props.renderScene(this, lastRoute);
+    this.routes.push(lastRoute);
+
+    this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage).then( () => {
+        this.routes = routes;
+        var renderScene = this.props.renderScene.bind(this, this);
+        this.pages = routes.map(renderScene);
+        this.update();
+      }
+    );
+  }
+
   pushPage(route, options = {}) {
     var newPage = this.props.renderScene(this, route);
 
