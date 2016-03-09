@@ -20,11 +20,12 @@ limitations under the License.
 /**
  * Wait until custom elements can initialize.
  * This function is used in indivisual element instances on createdCallback() and attachedCallback().
+ *
  * @param {Element} element
- * @return {Promise}
+ * @param {Function} callback
  */
-const elementReady = function(element) {
-  return elementReady._ready(element);
+const elementReady = function(element, callback) {
+  return elementReady._ready(element, callback);
 };
 
 /**
@@ -37,6 +38,6 @@ elementReady.installImplementation = function(ready) {
 };
 
 // Install default implementation
-elementReady.installImplementation(element => Promise.resolve());
+elementReady.installImplementation((element, callback) => callback());
 
 export default elementReady;

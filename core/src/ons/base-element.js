@@ -34,25 +34,25 @@ export default class BaseElement extends getElementClass() {
 
   createdCallback() {
     if (this._createdCallback) {
-      elementReady(this).then(this._createdCallback.bind(this));
+      elementReady(this, this._createdCallback.bind(this));
     }
   }
 
   attachedCallback() {
     if (this._attachedCallback) {
-      elementReady(this).then(this._attachedCallback.bind(this));
+      elementReady(this, this._attachedCallback.bind(this));
     }
   }
 
   detachedCallback() {
     if (this._detachedCallback) {
-      elementReady(this).then(this._detachedCallback.bind(this));
+      elementReady(this, this._detachedCallback.bind(this));
     }
   }
 
   attributeChangedCallback(name, last, current) {
     if (this._attributeChangedCallback) {
-      elementReady(this).then(() => this._attributeChangedCallback(name, last, current));
+      elementReady(this, () => this._attributeChangedCallback(name, last, current));
     }
   }
 }
