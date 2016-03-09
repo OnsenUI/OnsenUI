@@ -269,7 +269,7 @@ class CarouselElement extends BaseElement {
    *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されるようになります。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     ModifierUtil.initModifier(this, scheme);
     this._doorLock = new DoorLock();
     this._scroll = 0;
@@ -1049,7 +1049,7 @@ class CarouselElement extends BaseElement {
     );
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._prepareEventListeners();
 
     this._layoutCarouselItems();
@@ -1058,7 +1058,7 @@ class CarouselElement extends BaseElement {
     this._saveLastState();
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     } else if (name === 'direction') {
@@ -1066,7 +1066,7 @@ class CarouselElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._removeEventListeners();
   }
 }

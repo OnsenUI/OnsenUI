@@ -81,7 +81,7 @@ class MaterialInputElement extends BaseElement {
    *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -147,7 +147,7 @@ class MaterialInputElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     } else if (name === 'placeholder') {
@@ -160,7 +160,7 @@ class MaterialInputElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
       this._input.addEventListener('input', this._boundOnInput);
       this._input.addEventListener('focusin', this._boundOnFocusin);
@@ -171,7 +171,7 @@ class MaterialInputElement extends BaseElement {
     this._input.addEventListener('blur', this._boundDelegateEvent);
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._input.removeEventListener('input', this._boundOnInput);
     this._input.removeEventListener('focusin', this._boundOnFocusin);
     this._input.removeEventListener('focusout', this._boundOnFocusout);

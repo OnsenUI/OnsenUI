@@ -42,12 +42,12 @@ const scheme = {'': 'carousel-item--*'};
  */
 class CarouselItemElement extends BaseElement {
 
-  createdCallback() {
+  _createdCallback() {
     this.style.width = '100%';
     ModifierUtil.initModifier(this, scheme);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

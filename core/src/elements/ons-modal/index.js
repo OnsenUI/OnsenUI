@@ -79,7 +79,7 @@ class ModalElement extends BaseElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -152,13 +152,13 @@ class ModalElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     if (this._deviceBackButtonHandler) {
       this._deviceBackButtonHandler.destroy();
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     setImmediate(this._ensureNodePosition.bind(this));
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
   }
@@ -317,7 +317,7 @@ class ModalElement extends BaseElement {
     });
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

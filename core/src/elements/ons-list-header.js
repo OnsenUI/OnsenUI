@@ -50,7 +50,7 @@ class ListHeaderElement extends BaseElement {
    *   [ja]ヘッダーの表現を指定します。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -65,7 +65,7 @@ class ListHeaderElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

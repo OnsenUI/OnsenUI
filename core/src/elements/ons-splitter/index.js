@@ -52,7 +52,7 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
  */
 class SplitterElement extends BaseElement {
 
-  createdCallback() {
+  _createdCallback() {
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._boundOnModeChange = this._onModeChange.bind(this);
   }
@@ -106,7 +106,7 @@ class SplitterElement extends BaseElement {
     return util.findChild(this, 'ons-splitter-content');
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
   }
 
   /**
@@ -318,7 +318,7 @@ class SplitterElement extends BaseElement {
     handler.callParentHandler();
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
     this._assertChildren();
 
@@ -379,7 +379,7 @@ class SplitterElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
 

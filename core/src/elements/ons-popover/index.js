@@ -189,7 +189,7 @@ class PopoverElement extends BaseElement {
     return this._popover.children[1];
   }
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -559,7 +559,7 @@ class PopoverElement extends BaseElement {
     return this._visible;
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._mask.addEventListener('click', this._boundCancel, false);
 
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
@@ -570,7 +570,7 @@ class PopoverElement extends BaseElement {
     window.addEventListener('resize', this._boundOnChange, false);
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._mask.removeEventListener('click', this._boundCancel, false);
 
     this._deviceBackButtonHandler.destroy();
@@ -582,7 +582,7 @@ class PopoverElement extends BaseElement {
     window.removeEventListener('resize', this._boundOnChange, false);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

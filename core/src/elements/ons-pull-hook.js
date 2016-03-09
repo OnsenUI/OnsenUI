@@ -97,7 +97,7 @@ class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._scrollElement = this._createScrollElement();
       this.setAttribute('_compiled', '');
@@ -478,15 +478,15 @@ class PullHookElement extends BaseElement {
     this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._createEventListeners();
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._destroyEventListeners();
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
   }
 }
 

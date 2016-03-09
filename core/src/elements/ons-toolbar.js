@@ -73,7 +73,7 @@ class ToolbarElement extends BaseElement {
    *   [ja]ツールバーの表現を指定します。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -82,13 +82,13 @@ class ToolbarElement extends BaseElement {
     setImmediate(() => this._tryToEnsureNodePosition());
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._tryToEnsureNodePosition();
     setImmediate(() => this._tryToEnsureNodePosition());
   }

@@ -222,7 +222,7 @@ class AlertDialogElement extends BaseElement {
     return util.findChild(this._dialog.children[0], '.alert-dialog-content');
   }
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -523,20 +523,20 @@ class AlertDialogElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._mask.addEventListener('click', this._boundCancel, false);
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

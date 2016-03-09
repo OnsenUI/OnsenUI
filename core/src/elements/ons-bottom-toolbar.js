@@ -56,7 +56,7 @@ class BottomToolbarElement extends BaseElement {
    *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     this.classList.add('bottom-bar');
     this.style.zIndex = '0';
     this._update();
@@ -64,7 +64,7 @@ class BottomToolbarElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'inline') {
       this._update();
     } else if (name === 'modifier') {

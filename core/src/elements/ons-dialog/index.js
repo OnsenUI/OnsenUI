@@ -195,7 +195,7 @@ class DialogElement extends BaseElement {
     return util.findChild(this, '.dialog');
   }
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -505,21 +505,21 @@ class DialogElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._mask.addEventListener('click', this._boundCancel, false);
 
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

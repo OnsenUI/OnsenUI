@@ -20,6 +20,8 @@ limitations under the License.
 /**
  * Wait until custom elements can initialize.
  * This function is used in indivisual element instances on createdCallback() and attachedCallback().
+ * @param {Element} element
+ * @return {Promise}
  */
 const elementReady = function(element) {
   return elementReady._ready(element);

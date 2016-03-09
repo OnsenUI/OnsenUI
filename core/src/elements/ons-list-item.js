@@ -89,7 +89,7 @@ class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -148,13 +148,13 @@ class ListItemElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this.addEventListener('drag', this._onDrag);
     this.addEventListener('touchstart', this._onTouch);
     this.addEventListener('mousedown', this._onTouch);
@@ -170,7 +170,7 @@ class ListItemElement extends BaseElement {
     this.tapped = false;
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this.removeEventListener('drag', this._onDrag);
     this.removeEventListener('touchstart', this._onTouch);
     this.removeEventListener('mousedown', this._onTouch);

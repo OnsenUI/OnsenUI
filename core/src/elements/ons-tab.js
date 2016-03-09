@@ -143,7 +143,7 @@ class TabElement extends BaseElement {
    *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -300,11 +300,11 @@ class TabElement extends BaseElement {
     return this.classList.contains('active');
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._ensureElementPosition();
 
     const tabbar = this._findTabbarElement();
@@ -364,7 +364,7 @@ class TabElement extends BaseElement {
     }
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (this._hasDefaultTemplate) {
       if (name === 'icon' || name === 'label') {
         this._updateDefaultTemplate();

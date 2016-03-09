@@ -209,7 +209,7 @@ class NavigatorElement extends BaseElement {
    *   [en]Object of the previous page.[/en]
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
-  createdCallback() {
+  _createdCallback() {
     this._doorLock = new DoorLock();
     this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
@@ -681,10 +681,10 @@ class NavigatorElement extends BaseElement {
     return this.pushPage(options.page, options);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
@@ -700,7 +700,7 @@ class NavigatorElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
   }

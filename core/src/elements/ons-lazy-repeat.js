@@ -136,14 +136,14 @@ class InternalDelegate extends LazyRepeatDelegate {
  */
 class LazyRepeatElement extends BaseElement {
 
-  createdCallback() {
+  _createdCallback() {
     this.style.display = 'none';
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     if (!this._parentUpdated && this.parentElement) {
       if (window.getComputedStyle(this.parentElement).getPropertyValue('position') === 'static') {
         this.parentElement.style.position = 'relative';
@@ -169,7 +169,7 @@ class LazyRepeatElement extends BaseElement {
     return window[name] || null;
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     if (this._lazyRepeatProvider) {
       this._lazyRepeatProvider.destroy();
       this._lazyRepeatProvider = null;

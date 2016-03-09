@@ -694,7 +694,7 @@ class SplitterSideElement extends BaseElement {
     }
   }
 
-  createdCallback() {
+  _createdCallback() {
     this._mode = null;
     this._page = null;
     this._isAttached = false;
@@ -1011,7 +1011,7 @@ class SplitterSideElement extends BaseElement {
     return this.isOpen() ? this.close(options) : this.open(options);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'width') {
       this._updateForWidthAttribute();
     } else if (name === 'side') {
@@ -1060,7 +1060,7 @@ class SplitterSideElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._isAttached = true;
     this._collapseStrategy.activate(this);
     this._assertParent();
@@ -1073,7 +1073,7 @@ class SplitterSideElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this._isAttached = false;
     this._collapseStrategy.inactivate();
 

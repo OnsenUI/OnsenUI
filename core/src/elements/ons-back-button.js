@@ -51,7 +51,7 @@ var scheme = {
  */
 class BackButtonElement extends BaseElement {
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -120,17 +120,17 @@ class BackButtonElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 

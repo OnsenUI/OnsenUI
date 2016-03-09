@@ -10,6 +10,7 @@ v2.0.0-beta.8
  * ons-navigator: Fixed flickering in Lift animation for iOS.
  * ons-page: Does not remove 'style' attribute anymore.
  * ons.notification: Fixed an issue in iOS related to CustomElements.
+ * core: Added ons._elementReady() and changed all elements to use elementReady().
 
 v2.0.0-beta.7
 ----

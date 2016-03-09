@@ -87,11 +87,11 @@ class IconElement extends BaseElement {
    *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     this._update();
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (['icon', 'size'].indexOf(name) !== -1) {
       this._update();
     }

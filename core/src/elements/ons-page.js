@@ -114,7 +114,7 @@ class PageElement extends BaseElement {
    *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     this.classList.add('page');
 
     if (!this.hasAttribute('_compiled')) {
@@ -130,7 +130,7 @@ class PageElement extends BaseElement {
     };
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     if (!this._isMuted) {
       if (this._skipInit) {
         this.removeAttribute('_skipinit');
@@ -280,7 +280,7 @@ class PageElement extends BaseElement {
     }
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     } else if (name === '_muted') {

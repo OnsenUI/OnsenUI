@@ -52,7 +52,7 @@ class SpeedDialItemElement extends BaseElement {
    *   [ja]このコンポーネントの表現を指定します。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -60,17 +60,17 @@ class SpeedDialItemElement extends BaseElement {
     this._boundOnClick = this._onClick.bind(this);
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 

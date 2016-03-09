@@ -19,7 +19,7 @@ import BaseElement from 'ons/base-element';
 
 class ConditionalElement extends BaseElement {
 
-  createdCallback() {
+  _createdCallback() {
     this._isAllowedPlatform = !this.getAttribute('platform') || this.getAttribute('platform').split(/\s+/).indexOf(ons.platform.getMobileOS()) >= 0;
 
     if (this._isAllowedPlatform) {
@@ -29,19 +29,19 @@ class ConditionalElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     if (this._isAllowedPlatform) {
       ons.orientation.on('change', this._onOrientationChange.bind(this));
     }
   }
 
-  attributeChangedCallback(name) {
+  _attributeChangedCallback(name) {
     if (name === 'orientation') {
       this._onOrientationChange();
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
     ons.orientation.off('change', this._onOrientationChange);
   }
 

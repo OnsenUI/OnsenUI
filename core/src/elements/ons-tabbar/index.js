@@ -201,7 +201,7 @@ class TabbarElement extends BaseElement {
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
-  createdCallback() {
+  _createdCallback() {
     this._tabbarId = generateId();
 
     if (!this.hasAttribute('_compiled')) {
@@ -634,9 +634,9 @@ class TabbarElement extends BaseElement {
     return this._getTabbarElement().children[index];
   }
 
-  detachedCallback() { }
+  _detachedCallback() { }
 
-  attachedCallback() { }
+  _attachedCallback() { }
 
   _show() {
     let currentPageElement = this._getCurrentPageElement();
@@ -660,7 +660,7 @@ class TabbarElement extends BaseElement {
     this.remove();
   }
 
-  attributeChangedCallback(name, last, current) {
+  _attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

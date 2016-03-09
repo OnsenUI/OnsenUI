@@ -79,7 +79,7 @@ class SplitterContentElement extends BaseElement {
     return this._page;
   }
 
-  createdCallback() {
+  _createdCallback() {
     this._page = null;
   }
 
@@ -119,7 +119,7 @@ class SplitterContentElement extends BaseElement {
     });
   }
 
-  attachedCallback() {
+  _attachedCallback() {
     this._assertParent();
 
     if (this.hasAttribute('page')) {
@@ -127,7 +127,7 @@ class SplitterContentElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  _detachedCallback() {
   }
 
   _show() {
