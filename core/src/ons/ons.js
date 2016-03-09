@@ -417,7 +417,7 @@ ons._resolveLoadingPlaceholder = function(element, page, link) {
 
 function waitDeviceReady() {
   const unlockDeviceReady = ons._readyLock.lock();
-  window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('WebComponentsReady', () => {
     if (ons.isWebView()) {
       window.document.addEventListener('deviceready', unlockDeviceReady, false);
     } else {

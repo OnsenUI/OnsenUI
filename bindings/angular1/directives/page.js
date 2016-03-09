@@ -12,6 +12,15 @@
  */
 
 /**
+ * @attribute ng-infinite-scroll
+ * @initonly
+ * @type {String}
+ * @description
+ *   [en]Path of the function to be executed on infinite scrolling. The path is relative to $scope.[/en]
+ *   [ja]機能スクロール上で実行されている関数のパス。パスは$scopeに対して相対的です。[/ja]
+ */
+
+/**
  * @attribute on-device-backbutton
  * @type {Expression}
  * @description
