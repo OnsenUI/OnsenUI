@@ -306,10 +306,8 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerBottomToolbar(element) {
-    if (!util.findChild(this, '.page__bottom-bar-fill')) {
-      this.insertBefore(util.create('.page__bottom-bar-fill'), this.children[0]);
-      this.appendChild(element);
-    }
+    this.classList.add('page-with-bottom-toolbar');
+    this.appendChild(element);
   }
 
   attributeChangedCallback(name, last, current) {
@@ -365,13 +363,7 @@ class PageElement extends BaseElement {
         if (!fill) {
           fill = util.create('.page__status-bar-fill');
 
-          let bottomBarFill = util.findChild(this, '.page__bottom-bar-fill');
-
-          if (bottomBarFill) {
-            this.insertBefore(fill, bottomBarFill.nextSibling);
-          } else {
-            this.insertBefore(fill, this.children[0]);
-          }
+          this.insertBefore(fill, this.children[0]);
         }
 
         return fill;

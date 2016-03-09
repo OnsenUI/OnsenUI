@@ -129,7 +129,7 @@ ons-toolbar + .page__background + .page__content {
   -ms-touch-action: pan-y;
 }
 
-.page__bottom-bar-fill ~ .page__content {
+.page-with-bottom-toolbar > .page__content {
   bottom: 44px;
 }
 
