@@ -136,17 +136,7 @@ class ToolbarElement extends BaseElement {
   _compile() {
     ons._autoStyle.prepare(this);
 
-    var inline = this.hasAttribute('inline');
-
     this.classList.add('navigation-bar');
-
-    if (!inline) {
-      this.style.position = 'absolute';
-      this.style.zIndex = '10000';
-      this.style.left = '0px';
-      this.style.right = '0px';
-      this.style.top = '0px';
-    }
 
     this._ensureToolbarItemElements();
 
@@ -166,12 +156,12 @@ class ToolbarElement extends BaseElement {
       }
     }
 
-    var center = this._ensureToolbarItemContainer('center');
+    var center = this._ensureToolbarElement('center');
     center.classList.add('navigation-bar__title');
 
     if (!hasCenterClassElementOnly) {
-      var left = this._ensureToolbarItemContainer('left');
-      var right = this._ensureToolbarItemContainer('right');
+      var left = this._ensureToolbarElement('left');
+      var right = this._ensureToolbarElement('right');
 
       if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
         if (left.parentNode) {
@@ -191,12 +181,12 @@ class ToolbarElement extends BaseElement {
     }
   }
 
-  _ensureToolbarItemContainer(name) {
-    var container = util.findChild(this, '.' + name) || util.create('.' + name);
+  _ensureToolbarElement(name) {
+    var element = util.findChild(this, '.' + name) || util.create('.' + name);
 
-    container.classList.add('navigation-bar__' + name);
+    element.classList.add('navigation-bar__' + name);
 
-    return container;
+    return element;
   }
 
 }

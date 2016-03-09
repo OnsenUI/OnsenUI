@@ -58,8 +58,6 @@ class BottomToolbarElement extends BaseElement {
 
   createdCallback() {
     this.classList.add('bottom-bar');
-    // this.style.zIndex = '0';
-    this._update();
 
     ModifierUtil.initModifier(this, scheme);
   }
@@ -72,16 +70,11 @@ class BottomToolbarElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'inline') {
-      this._update();
-    } else if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    if (name === 'modifier') {
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  _update() {
-    this.style.position = this.hasAttribute('inline') ? 'static' : 'absolute';
-  }
 }
 
 window.OnsBottomToolbarElement = document.registerElement('ons-bottom-toolbar', {
