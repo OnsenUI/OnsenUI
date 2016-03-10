@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components-default.css">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css">
+
+    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <script src="../../../build/js/onsenui.js"></script>
+
+    <script>
+
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+
+      System.import('../src/main.js').then(function() {
+        return System.import('../src/examples/button.js');
+      }, console.error.bind(console));
+
+    </script>
+
+  </head>
+
+  <body>
+    
+    <my-app></my-app>
+
+  </body>
+
+</html>
