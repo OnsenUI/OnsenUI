@@ -1,72 +1,86 @@
-var MyPage = React.createClass({
-  getInitialState: function() {
-      return { };
+var FirstPage = React.createClass({
+ getInitialState: function() {
+    return { };
   },
   render: function() {
     return <OnsPage>
       <ons-toolbar>
-        <div className="center"> {this.props.title} </div>
+        <div className="left"><ons-back-button>Back</ons-back-button></div>
+        <div className="center">{ this.props.index }</div>
       </ons-toolbar>
-      <div style={{display: 'flex'}}> 
-        <div style={{flex: 1}} />
-        <ons-button onClick={this.props.pushPage}> Push </ons-button>
-        {this.props.popPage ?<ons-button style={{marginLeft: 10}} onClick={this.props.popPage}> Pop </ons-button> :''}
-        {this.props.resetPage ? <ons-button style={{marginLeft: 10}} onClick={this.props.resetPage}> Reset to page 1 </ons-button> : ''}
-        {this.props.resetPageCustom ? <ons-button style={{marginLeft: 10}} onClick={this.props.resetPageCustom }> Reset to custom Component </ons-button> : ''}
-        <div style={{flex: 1}} />
-      </div>
-    </OnsPage>
+      <ons-button onClick={this.props.pushPage}>Push!</ons-button>
+    </OnsPage>;
   }
 });
 
-var MyNav  = React.createClass({
-  getInitialState: function() {
-    return {};
+var SecondPage = React.createClass({
+ getInitialState: function() {
+    return { };
   },
+  render: function() {
+    return <OnsPage>
+        <ons-toolbar>
+          <div className="left"><OnsBackButton>Back </OnsBackButton></div>
+          <div className="center">{ this.props.index }</div>
+        </ons-toolbar>
+        <br />
+        <ons-button class="space" onClick={this.props.pushPage}>Push</ons-button>
+        <ons-button class="space" onClick={this.props.popPage}>Pop</ons-button>
+        <ons-button class="space" onClick={this.props.resetPage}>Reset</ons-button>
+        <ons-button class="space" onClick={this.props.resetStack}>Reset Stack</ons-button>
+      </OnsPage>;
+  }
+});
 
-  resetPageCustom: function() {
-    this.refs.navi.resetToPage(
-      <MyPage title="A different page" popPage={this.popPage} pushPage={this.pushPage}  />
-    );
-    this.counter = 1;
-  },
-
-
-
-  resetPage: function() {
-    this.refs.navi.resetToPage();
-    this.counter = 1;
+var App = React.createClass({
+  pushPage: function() {
+    this.index++;
+    this.refs.navi.pushPage(
+      { comp: SecondPage,
+        props: {index: this.index, pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack }
+      }
+    ).then(() => console.log('page pushed'));
   },
 
   popPage: function() {
-    this.counter--;
-    this.refs.navi.popPage();
+    this.index--;
+    this.refs.navi.popPage().then(() => console.log('page popped'));
+  },
+  resetPage: function() {
+    this.index = 0;
+    this.refs.navi.resetPage({comp: FirstPage, props: {index: 'Reset Page', pushPage: this.pushPage}}).then(() => console.log('page resetted'));
   },
 
-  pushPage: function() {
-    console.log('pushPage');
-    this.counter++;
-    var navTitle = "Navigator "+ this.counter;
-
-    this.refs.navi.pushComponent(
-      <MyPage title={navTitle} 
-        popPage={this.popPage} 
-        pushPage={this.pushPage} 
-        resetPage={this.resetPage} 
-        resetPageCustom={this.resetPageCustom} 
-      />
-    );
+  renderScene: function(navigator, route) {
+    return React.createElement(route.comp, route.props);
   },
 
   componentDidMount: function() {
-    this.counter = 1;
+    this.index = 0;
   },
-  
+
+  resetStack: function() {
+    this.index = 0;
+    this.refs.navi.resetPageStack(
+      [
+        {comp: FirstPage, props: {index: 'Reset Page 1', pushPage: this.pushPage}},
+        {comp: SecondPage, props: {index: 'Reset Page 2', pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack}},
+        {comp: SecondPage, props: {index: 'Reset Page 3', pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack}}
+      ]).then(() => console.log('page stack resetted'));
+  },
+
   render: function() {
-    return <OnsNavigator ref="navi">
-      <MyPage title="Navigator 1" pushPage={this.pushPage} />
-    </OnsNavigator>
+    return (
+      <OnsNavigator id="myNav" animation="fade" ref="navi"
+        initialRoutes={[
+        {comp: FirstPage, props: {index: 'Page 1', pushPage: this.pushPage}},
+        {comp: SecondPage, props: {index: 'Page 2', pushPage: this.pushPage, popPage: this.popPage, resetPage: this.resetPage, resetStack: this.resetStack}
+        }
+        ]}
+        renderScene={this.renderScene} >
+      </OnsNavigator>
+    );
   }
 });
 
-ReactDOM.render(<MyNav />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
