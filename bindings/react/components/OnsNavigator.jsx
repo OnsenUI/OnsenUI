@@ -12,21 +12,37 @@ class OnsNavigator extends React.Component {
   }
 
   pushPage(route, options = {}) {
-    var newPage = this.props.renderScene(this, route);
+    if (this.running) {
+      return;
+    }
 
+    var newPage = this.props.renderScene(route, this);
+
+    this.running = true;
     this.routes.push(route);
-    this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage);
+    this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage)
+      .then(() => {
+        this.running = false;
+      });
   }
 
   popPage(options = {}) {
+    if (this.running) {
+      return;
+    }
+
+    this.running = true;
     this.routes.pop();
-    this.refs.navi._popPage(options, this.update.bind(this), this.pages);
+    this.refs.navi._popPage(options, this.update.bind(this), this.pages)
+      .then(() => {
+        this.running = false;
+      });
   }
 
   componentDidMount() {
     this.refs.navi.popPage = this.popPage.bind(this);
     this.routes= [this.props.initialRoute];
-    this.pages = [this.props.renderScene(this, this.props.initialRoute)];
+    this.pages = [this.props.renderScene(this.props.initialRoute, this)];
     this.setState({});
   }
 
@@ -34,7 +50,7 @@ class OnsNavigator extends React.Component {
     // render the last two pages
     for (var index = this.pages.length -1;
          index >= this.pages.length -2 && index >= 0; index--) {
-      this.pages[index] = this.props.renderScene(this, this.routes[index]);
+      this.pages[index] = this.props.renderScene(this.routes[index], this);
     }
 
     return (

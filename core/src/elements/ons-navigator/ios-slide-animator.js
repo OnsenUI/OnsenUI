@@ -312,8 +312,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       return Math.round(((rect.right - rect.left) / 2) * 0.6);
     })();
 
-    console.log(this.duration);
-
     const maskClear = animit(this.backgroundMask)
       .saveStyle()
       .queue({
