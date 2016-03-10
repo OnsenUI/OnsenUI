@@ -250,27 +250,13 @@ class PageElement extends BaseElement {
   /**
    * @return {Boolean}
    */
-  _hasToolbarElement() {
-    return !!util.findChild(this, 'ons-toolbar');
-  }
-
-  /**
-   * @return {Boolean}
-   */
   _canAnimateToolbar() {
-    const toolbar = util.findChild(this, 'ons-toolbar');
-    if (toolbar) {
+    if (util.findChild(this, 'ons-toolbar')) {
       return true;
     }
-
-    const elements = this._contentElement.children;
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
-        return true;
-      }
-    }
-
-    return false;
+    return !!util.findChild(this._contentElement, (e) => {
+      return e.nodeName.toLowerCase() === 'ons-toolbar' && !e.hasAttribute('inline');
+    });
   }
 
   /**
@@ -320,15 +306,8 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerBottomToolbar(element) {
-    if (!util.findChild(this, '.page__status-bar-fill')) {
-      const fill = document.createElement('div');
-      fill.classList.add('page__bottom-bar-fill');
-      fill.style.width = '0px';
-      fill.style.height = '0px';
-
-      this.insertBefore(fill, this.children[0]);
-      this.insertBefore(element, null);
-    }
+    this.classList.add('page-with-bottom-toolbar');
+    this.appendChild(element);
   }
 
   attributeChangedCallback(name, last, current) {
@@ -351,21 +330,15 @@ class PageElement extends BaseElement {
   _compile() {
     ons._autoStyle.prepare(this);
 
-    const background = document.createElement('div');
-    background.classList.add('page__background');
+    const background = util.create('.page__background');
+    const content = util.create('.page__content');
 
-    const content = document.createElement('div');
-    content.classList.add('page__content');
-
-    while (this.childNodes[0]) {
-      content.appendChild(this.childNodes[0]);
+    while (this.firstChild) {
+      content.appendChild(this.firstChild);
     }
 
-    const fragment = document.createDocumentFragment();
-    fragment.appendChild(background);
-    fragment.appendChild(content);
-
-    this.appendChild(fragment);
+    this.appendChild(background);
+    this.appendChild(content);
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -375,13 +348,11 @@ class PageElement extends BaseElement {
   _registerExtraElement(element) {
     let extra = util.findChild(this, '.page__extra');
     if (!extra) {
-      extra = document.createElement('div');
-      extra.classList.add('page__extra');
-      extra.style.zIndex = '10001';
-      this.insertBefore(extra, null);
+      extra = util.create('.page__extra', {zIndex: 10001});
+      this.appendChild(extra);
     }
 
-    extra.insertBefore(element, null);
+    extra.appendChild(element);
   }
 
   _tryToFillStatusBar() {
@@ -389,28 +360,9 @@ class PageElement extends BaseElement {
       .then(() => {
         let fill = this.querySelector('.page__status-bar-fill');
 
-        if (fill instanceof HTMLElement) {
-          return fill;
-        }
+        if (!fill) {
+          fill = util.create('.page__status-bar-fill');
 
-        fill = document.createElement('div');
-        fill.classList.add('page__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
-
-        let bottomBarFill;
-
-        for (let i = 0; i < this.children.length; i++) {
-          if (this.children[i].classList.contains('page__bottom-bar-fill')) {
-            bottomBarFill = this.children[i];
-            break;
-          }
-        }
-
-        if (bottomBarFill) {
-          this.insertBefore(fill, bottomBarFill.nextSibling);
-        }
-        else {
           this.insertBefore(fill, this.children[0]);
         }
 
@@ -418,9 +370,7 @@ class PageElement extends BaseElement {
       })
       .catch(() => {
         const el = this.querySelector('.page__status-bar-fill');
-        if (el instanceof HTMLElement) {
-          el.remove();
-        }
+        el && el.remove();
       });
   }
 

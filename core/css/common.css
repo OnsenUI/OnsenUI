@@ -58,6 +58,21 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
+ons-toolbar:not([inline]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+}
+
+ons-bottom-toolbar:not([inline]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .page,
 .page__content {
   background-color: transparent !important;
@@ -114,7 +129,7 @@ ons-toolbar + .page__background + .page__content {
   -ms-touch-action: pan-y;
 }
 
-.page__bottom-bar-fill ~ .page__content {
+.page-with-bottom-toolbar > .page__content {
   bottom: 44px;
 }
 
