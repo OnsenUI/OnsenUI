@@ -51,7 +51,7 @@ var App = React.createClass({
     this.refs.navi.resetPage({comp: FirstPage, props: {index: 'Reset Page', pushPage: this.pushPage}}).then(() => console.log('page resetted'));
   },
 
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
 
