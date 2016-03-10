@@ -44,7 +44,7 @@ var App = React.createClass({
     this.refs.navi.popPage();
   },
 
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
 
