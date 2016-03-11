@@ -22,11 +22,11 @@ export class TemplateLoader {
   /**
    * @param {String} page
    * @param {Element} parent
-   * @param {Number} position
+   * @param {Element/null} element
    * @param {Function} callback
    * @return {Promise} resolve element
    */
-  loadPage(page, parent, position, callback) {
+  loadPageBefore(page, parent, element, callback) {
     throw new Error('implements this method'); // eslint-disable-line no-unreachable
   }
 
@@ -51,12 +51,12 @@ export class GlobalTemplateLoader {
   /**
    * @param {String} page
    * @param {Element} parent
+   * @param {Element/null} element
    * @param {Function} callback
-   * @param {Number} position
    * @return {Promise} resolve element
    */
-  loadPage(page, parent, position, callback) {
-    return this._loader.load(page, parent, position, callback);
+  loadPageBefore(page, parent, element, callback) {
+    return this._loader.load(page, parent, element, callback);
   }
 
   /**
