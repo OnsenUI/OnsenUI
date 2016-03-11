@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import internal from 'ons/internal';
+import ons from 'ons/ons';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
@@ -217,9 +218,6 @@ class NavigatorElement extends BaseElement {
     this.options = {
       cancelIfRunning: true
     };
-
-    this._initialHTML = this.innerHTML;
-    this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -689,12 +687,12 @@ class NavigatorElement extends BaseElement {
 
     rewritables.ready(this, () => {
       if (this._pages.length === 0) {
-        if (!this.getAttribute('page')) {
-          const element = this._createPageElement(this._initialHTML || '');
-
-          this._pushPageDOM(this._createPageObject('', element, {}), function() {});
-        } else {
+        if (this.hasAttribute('page')) {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
+        } else {
+          this._pages.push(this._createPageObject('', this.children[0], {
+            page: ''
+          }));
         }
       }
     });
@@ -793,9 +791,10 @@ class NavigatorElement extends BaseElement {
     };
 
     if (options.pageHTML) {
-      return run(options.pageHTML);
+      // TODO: implement options.pageHTML
+      throw new Error('options.pageHTML is not implemented');
     } else {
-      return internal.getPageHTMLAsync(options.page).then(run);
+      return this._pushPageDOM(this._createPageObject(options.page, null, options), done);
     }
   }
 
@@ -806,8 +805,7 @@ class NavigatorElement extends BaseElement {
  _pushPageDOM(pageObject, unlock) {
     unlock = unlock || function() {};
 
-    let element = pageObject.element;
-    let options = pageObject.options;
+    const options = pageObject.options;
 
     // for "postpush" event
     const eventDetail = {
@@ -834,33 +832,32 @@ class NavigatorElement extends BaseElement {
         if (typeof options.onTransitionEnd === 'function') {
           options.onTransitionEnd();
         }
-        element = null;
 
         resolve(this._pages[this._pages.length - 1]);
       };
 
       this._isPushing = true;
 
-      rewritables.link(this, element, options, element => {
-        CustomElements.upgrade(element);
 
-        setTimeout(() => {
+      ons._templateLoader.loadPageBefore(pageObject.page, this, null, element => {
+        rewritables.link(this, element, options, element => {
+          CustomElements.upgrade(element);
+          pageObject.element = element;
+
           if (this._pages.length > 1) {
             const leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
 
-            this.appendChild(element);
             leavePage.element._hide();
             enterPage.element._show();
 
             options.animator.push(enterPage, leavePage, done);
           } else {
-            this.appendChild(element);
             element._show();
 
             done();
           }
-        }, 1000 / 60);
+        });
       });
 
     });
@@ -954,7 +951,7 @@ class NavigatorElement extends BaseElement {
         }
 
         pageObject.options = util.extend(pageObject.options, options);
-        return this._pushPageDOM(pageObject, done);
+        return this._pushPageDOM(pageObject, pageObject.element, done);
       };
 
       return new Promise(resolve => {
@@ -1018,7 +1015,7 @@ class NavigatorElement extends BaseElement {
 
   /**
    * @param {String} page
-   * @param {Element} element
+   * @param {Element/null} element
    * @param {Object} options
    */
   _createPageObject(page, element, options) {

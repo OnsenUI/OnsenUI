@@ -56,7 +56,7 @@ export class GlobalTemplateLoader {
    * @return {Promise} resolve element
    */
   loadPageBefore(page, parent, element, callback) {
-    return this._loader.load(page, parent, element, callback);
+    return this._loader.loadPageBefore(page, parent, element, callback);
   }
 
   /**

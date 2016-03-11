@@ -54,14 +54,15 @@ export default class DefaultTemplateLoader extends TemplateLoader {
     const pageElement = this._createElement(template);
 
     parent.insertBefore(pageElement, element);
-    
+
     callback(pageElement);
 
     return Promise.resolve(pageElement);
   }
 
   unload(element) {
-    // TODO: implement
+    element.remove();
+
     return Promise.resolve();
   }
 
