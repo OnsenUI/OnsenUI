@@ -46,11 +46,11 @@ class InternalDelegate extends LazyRepeatDelegate {
   }
 
   hasRenderFunction() {
-    return this._userDelegate.render !== undefined;
+    return this._userDelegate._render !== undefined;
   }
 
   render(items, height) {
-    this._userDelegate.render(items, height);
+    this._userDelegate._render(items, height);
   }
 
   countItems() {

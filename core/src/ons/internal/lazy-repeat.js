@@ -161,7 +161,6 @@ export class LazyRepeatProvider {
     }
 
     this._wrapperElement.style.height = this._calculateListHeight(items) + 'px';
-
   }
 
   _calculateListHeight(items) {
