@@ -167,6 +167,30 @@ describe('OnsPageElement', () => {
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
     });
+
+    it('sets _onInfiniteScroll', () => {
+      let i = 0;
+      window._testApp = {
+        a: () => i += 42
+      };
+      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      element._onInfiniteScroll();
+      expect(i).to.equal(42);
+      delete window._testApp;
+      expect(element._onInfiniteScroll).to.be.ok;
+      element._onInfiniteScroll();
+      expect(i).to.equal(84);
+    });
+
+    it('infiniteScroll doesn\'t throw error until it\'s called', () => {
+      let app = {a: () => 42};
+      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      window._testApp = app;
+      expect(() => element._onInfiniteScroll()).to.not.throw(Error);
+      element.attributeChangedCallback('oninfinitescroll', '', 'doge');
+      expect(() => element._onInfiniteScroll()).to.throw(Error);
+      delete window._testApp;
+    });
   });
 
   describe('#_show()', () => {
@@ -222,6 +246,13 @@ describe('OnsPageElement', () => {
 
     afterEach(() => {
       document.body.removeChild(page);
+    });
+
+    it('throws error on invalid input', () => {
+      expect(() => element.onInfiniteScroll = 5).to.throw(Error);
+      expect(() => element.onInfiniteScroll = []).to.throw(Error);
+      expect(() => element.onInfiniteScroll = {}).to.throw(Error);
+      expect(() => element.onInfiniteScroll = () => 42).to.not.throw(Error);
     });
 
     it('calls onInfiniteScroll', (done) => {
