@@ -318,12 +318,15 @@ class PageElement extends BaseElement {
     } else if (name === '_skipinit') {
       this._skipInit = this.hasAttribute('_skipinit');
     } else if (name.match(/on-?infinite-?scroll/i)) {
-      // this.onInfiniteScroll = util.findFromPath(current);
-      this.onInfiniteScroll = (done) => {
-        const f = util.findFromPath(current);
-        this.onInfiniteScroll = f;
-        f(done);
-      };
+      if (current === null) {
+        this.onInfiniteScroll = null;
+      } else {
+        this.onInfiniteScroll = (done) => {
+          const f = util.findFromPath(current);
+          this.onInfiniteScroll = f;
+          f(done);
+        };
+      }
     }
   }
 
