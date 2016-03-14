@@ -30,6 +30,12 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
  *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
  * @codepen rOQOML
+ * @seealso ons-splitter-content
+ *  [en]ons-splitter-content component[/en]
+ *  [ja]ons-splitter-contentコンポーネント[/ja]
+ * @seealso ons-splitter-side
+ *  [en]ons-splitter-side component[/en]
+ *  [ja]ons-splitter-sideコンポーネント[/ja]
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -156,11 +162,7 @@ class SplitterElement extends BaseElement {
   _open(side, options = {}) {
     const menu = this._getSideElement(side);
 
-    if (menu) {
-      return menu.open(options);
-    } else {
-      throw new Error('child "ons-splitter-side" element is not found in this element.');
-    }
+    return menu ? menu.open(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
   }
 
   /**
@@ -211,11 +213,7 @@ class SplitterElement extends BaseElement {
   _close(side, options = {}) {
     const menu = this._getSideElement(side);
 
-    if (menu) {
-      return menu.close(options);
-    } else {
-      throw new Error('child "ons-splitter-side" element is not found in this element.');
-    }
+    return menu ? menu.close(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
   }
 
   /**
@@ -242,11 +240,7 @@ class SplitterElement extends BaseElement {
   _toggle(side, options = {}) {
     const menu = this._getSideElement(side);
 
-    if (menu) {
-      return menu.toggle(options);
-    } else {
-      throw new Error('child "ons-splitter-side" element is not found in this element.');
-    }
+    return menu ? menu.toggle(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
   }
 
   /**
@@ -304,11 +298,7 @@ class SplitterElement extends BaseElement {
   loadContentPage(page, options = {}) {
     const content = this._getContentElement();
 
-    if (content) {
-      return content.load(page, options);
-    } else {
-      throw new Error('child "ons-splitter-content" element is not found in this element.');
-    }
+    return content ? content.load(page, options) : Promise.reject('child "ons-splitter-content" element is not found in this element.');
   }
 
   _onDeviceBackButton(handler) {

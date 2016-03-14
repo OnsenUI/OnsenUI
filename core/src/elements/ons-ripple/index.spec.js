@@ -59,35 +59,8 @@ describe('OnsRippleElement', () => {
     });
   });
 
-  describe('#_updateParent()', () => {
-    beforeEach(() => {
-      var container = document.createElement('div');
-      var ripple = new OnsRippleElement();
-    });
-
-    it('changes parent position', () => {
-      container.appendChild(ripple);
-      ripple._updateParent();
-      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('relative');
-    });
-
-    it('it doesn\'t change parent position when != static', () => {
-      container.style.position = 'absolute';
-      container.appendChild(ripple);
-      ripple._updateParent();
-      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('absolute');
-    });
-
-    it('it doesn\'t change parent position when `target="autofind"`', () => {
-      ripple.setAttribute('target', 'autofind');
-      container.appendChild(ripple);
-      ripple._updateParent();
-      expect(window.getComputedStyle(container).getPropertyValue('position')).equal('static');
-    });
-  });
-
   describe('#attributeChangedCallback()', () => {
-    var attributes = ['color', 'target', 'center', 'start-radius', 'background'];
+    var attributes = ['color', 'center', 'start-radius', 'background'];
 
     it('is called when an element is created', () => {
       var spy = spyOn('attributeChangedCallback'),
@@ -206,13 +179,9 @@ describe('OnsRippleElement', () => {
 
   describe('#_onTap()', () => {
     itCalls('_rippleAnimation').whenUsing('_onTap', e);
-    itCalls('_updateParent').whenUsing('_onTap', e);
   });
 
   describe('#_onHold()', () => {
-    itCalls('_rippleAnimation').whenUsing('_onHold', e);
-    itCalls('_updateParent').whenUsing('_onHold', e);
-
     it('sets _holding', () => {
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);

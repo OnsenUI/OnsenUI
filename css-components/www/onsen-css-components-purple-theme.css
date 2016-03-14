@@ -59,6 +59,10 @@ h6 {
   font-size: 17px;
   color: #524b57;
   -ms-overflow-style: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 .page::-webkit-scrollbar {
   display: none;
@@ -118,15 +122,21 @@ h6 {
   markup:
     <label class="switch">
       <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
     <label class="switch">
       <input type="checkbox" class="switch__input" checked>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
     <label class="switch">
       <input type="checkbox" class="switch__input" disabled>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
 */
 .switch {
@@ -168,15 +178,7 @@ h6 {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  width: 51px;
-  height: 44px;
-  margin-top: -6px;
-  top: 0px;
-  left: 0px;
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+  z-index: -1;
 }
 .switch__toggle {
   background-color: #fff;
@@ -202,7 +204,7 @@ h6 {
   -webkit-box-shadow: inset 0 0 0 2px #e5e5e5;
   box-shadow: inset 0 0 0 2px #e5e5e5;
 }
-.switch__toggle:before {
+.switch__handle {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -215,7 +217,7 @@ h6 {
   height: 28px;
   width: 28px;
   background-color: #fff;
-  left: 2px;
+  left: 1px;
   top: 2px;
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -232,31 +234,33 @@ h6 {
   -webkit-box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0,0,0,0.25);
   box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0,0,0,0.25);
 }
-.switch__input:checked + .switch__toggle {
+.switch--active .switch__handle {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+input:checked + .switch__toggle {
   -webkit-box-shadow: inset 0 0 0 2px #574bdb;
   box-shadow: inset 0 0 0 2px #574bdb;
   background-color: #574bdb;
 }
-.switch__input:checked + .switch__toggle:before {
-  -webkit-transform: translateX(20px);
-  -moz-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  -o-transform: translateX(20px);
-  transform: translateX(20px);
+input:checked + .switch__toggle .switch__handle {
+  left: 21px;
   -webkit-box-shadow: 0 3px 2px rgba(0,0,0,0.25);
   box-shadow: 0 3px 2px rgba(0,0,0,0.25);
 }
-.switch__input:not(:checked) + .switch__toggle:before {
-  -webkit-transform: translateX(-1px);
-  -moz-transform: translateX(-1px);
-  -ms-transform: translateX(-1px);
-  -o-transform: translateX(-1px);
-  transform: translateX(-1px);
-}
-.switch__input:disabled + .switch__toggle {
+input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+.switch__touch {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: -10px;
+  right: -10px;
 }
 /* topdoc
   name: Material Switch
@@ -267,31 +271,40 @@ h6 {
   markup:
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input">
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" checked>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" disabled>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
     </label>
 */
-.switch--material {
+.switch.switch--material {
   width: 36px;
   height: 24px;
   padding: 0 10px;
   min-width: 36px;
 }
-.switch--material__toggle {
+.switch.switch--material .switch__toggle {
   background-color: #b0afaf;
   margin-top: 5px;
   height: 14px;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.switch--material__input {
+.switch.switch--material .switch__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -309,16 +322,10 @@ h6 {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
+  z-index: -1;
 }
-.switch--material__input:checked + .switch--material__toggle:before {
-  -webkit-transform: translateX(16px);
-  -moz-transform: translateX(16px);
-  -ms-transform: translateX(16px);
-  -o-transform: translateX(16px);
-  transform: translateX(16px);
-}
-.switch--material__toggle:before {
-  background-color: #009688;
+.switch.switch--material .switch__handle {
+  background-color: #f1f1f1;
   left: 0px;
   margin-top: -5px;
   width: 20px;
@@ -326,25 +333,52 @@ h6 {
   -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
   box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
 }
-.switch--material__input:checked + .switch--material__toggle {
+.switch.switch--material input:checked + .switch__toggle {
   background-color: #77c2bb;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.switch--material__input:not(:checked) + .switch--material__toggle:before {
-  background-color: #f1f1f1;
+.switch.switch--material input:checked + .switch__toggle .switch__handle {
+  left: 16px;
+  background-color: #009688;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-  -webkit-transform: translateX(0px);
-  -moz-transform: translateX(0px);
-  -ms-transform: translateX(0px);
-  -o-transform: translateX(0px);
-  transform: translateX(0px);
 }
-.switch--material__input:disabled + .switch--material__toggle {
+.switch.switch--material input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+.switch.switch--material .switch__handle:before {
+  background: transparent;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  z-index: -1;
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.12);
+  -webkit-transition: -webkit-box-shadow 0.1s linear;
+  -moz-transition: box-shadow 0.1s linear;
+  -o-transition: box-shadow 0.1s linear;
+  transition: box-shadow 0.1s linear;
+}
+.switch.switch--material.switch--active .switch__handle:before {
+  -webkit-box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12);
+  box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12);
+}
+.switch.switch--material.switch--active input:checked + .switch__toggle .switch__handle:before {
+  -webkit-box-shadow: 0px 0px 0px 14px rgba(0,150,136,0.2);
+  box-shadow: 0px 0px 0px 14px rgba(0,150,136,0.2);
+}
+.switch.switch--material .switch__touch {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -15px;
+  right: -15px;
 }
 /* topdoc
   name: Range
@@ -999,6 +1033,8 @@ h6 {
 .navigation-bar--noshadow {
   -webkit-box-shadow: none;
   box-shadow: none;
+  background-image: none;
+  border-bottom: none;
 }
 .navigation-bar--material__left {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -2390,7 +2426,7 @@ h6 {
   background-color: transparent;
   color: #fff;
 }
-.tab-bar--material__item:active {
+.tab-bar--material__item:not([ripple]):active {
   background-color: #26a69a;
 }
 /* topdoc
@@ -2760,8 +2796,6 @@ h6 {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 0;
-  width: 0;
 }
 .checkbox__input:checked {
   background: #8962ed;
@@ -2944,8 +2978,6 @@ h6 {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 0;
-  width: 0;
 }
 .checkbox--noborder__input:checked + .checkbox--noborder__checkmark:before {
   background: transparent;
@@ -3151,8 +3183,6 @@ h6 {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 0px;
-  width: 0px;
 }
 .radio-button__input:active,
 .radio-button__input:focus {
@@ -3290,7 +3320,7 @@ h6 {
     </label>
 */
 .radio-button--material {
-  line-height: 20px;
+  line-height: 22px;
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -3302,6 +3332,9 @@ h6 {
 .radio-button--material__checkmark:before {
   background: transparent;
   border: 2px solid #717171;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   width: 20px;
@@ -3367,246 +3400,13 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item">
-        Dog
+        <div class="list__item__center">Dog</div>
       </li>
       <li class="list__item">
-        Cat
+        <div class="list__item__center">Cat</div>
       </li>
       <li class="list__item">
-        Hamster
-      </li>
-    </ul>
-*/
-.list--noborder {
-  border-top: none;
-  border-bottom: none;
-}
-.list__header {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: left;
-  display: block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 0 0 10px;
-  font-size: 15px;
-  font-weight: 500;
-  background-color: #eee;
-  color: #524b57;
-  text-shadow: none;
-  border-top: none;
-  border-bottom: none;
-  min-height: 24px;
-  line-height: 24px;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__header:first-child {
-    border-top: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
-  }
-}
-.list {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  text-align: left;
-  overflow: auto;
-  display: block;
-  -webkit-overflow-scrolling: touch;
-  padding: 0;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list {
-    border: none;
-    -webkit-background-size: 100% 1px, 100% 1px;
-    background-size: 100% 1px, 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom, top;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
-  }
-}
-.list__item {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -moz-box-orient: horizontal;
-  -moz-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -moz-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 6px 10px;
-  margin: 0 0 0 0;
-  border-top: none;
-  border-bottom: 1px solid #ddd;
-  color: #524b57;
-  background-color: transparent;
-  min-height: 44px;
-}
-.list__item_active:active {
-  background-color: #d9d9d9;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.list__item:first-child {
-  border-top: none;
-  border-bottom: 1px solid #ddd;
-}
-.list__item:last-child {
-  border-bottom: none;
-}
-.list__item:first-child:last-child {
-  border-top: none;
-  border-bottom: none;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__item:not(:last-child) {
-    border-bottom: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
-  }
-}
-/* topdoc
-  name: Noborder List
-  class: list--noborder
-  use: List
-  markup:
-    <ul class="list list--noborder">
-      <li class="list__item">
-        Item
-      </li>
-      <li class="list__item">
-        Item
-      </li>
-    </ul>
- */
-.list--noborder {
-  background-color: #fff;
-  border-top: none;
-  border-bottom: none;
-  background-image: none;
-}
-/* topdoc
-  name: Category List Header
-  class: list__header
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__header">
-        Header
-      </li>
-      <li class="list__item">
-        Item
-      </li>
-      <li class="list__header">
-        Header
-      </li>
-      <li class="list__item">
-        Item
-      </li>
-    </ul>
- */
-/* topdoc
-  name: Tappable List
-  class: list__item--tappable
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--tappable">
-        Tappable Item
-      </li>
-    </ul>
- */
-.list__item--tappable:active {
-  background-color: #d9d9d9;
-}
-/* topdoc
-  name: Switch in List Item
-  use: Switch, List
-  markup:
-    <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
-          Label
-        </div>
-        <div class="list__item__right">
-          <label class="switch">
-            <input type="checkbox" class="switch__input" checked>
-            <div class="switch__toggle"></div>
-          </label>
-        </div>
-      </li>
-      <li class="list__item">
-        <div class="list__item__center">
-          Label
-        </div>
-        <div class="list__item__right">
-          <label class="switch">
-            <input type="checkbox" class="switch__input">
-            <div class="switch__toggle"></div>
-          </label>
-        </div>
+        <div class="list__item__center">Hamster</div>
       </li>
     </ul>
 */
@@ -3630,6 +3430,13 @@ h6 {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
+  padding-left: 10px;
+}
+.list__item__left:empty {
+  width: 26px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
 }
 .list__item__center {
   display: -webkit-box;
@@ -3666,6 +3473,24 @@ h6 {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
+  margin-left: 26px;
+  border-bottom: 1px solid #ddd;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item__center {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.list__item__left + .list__item__center {
+  margin-left: 0;
 }
 .list__item__right {
   display: -webkit-box;
@@ -3674,6 +3499,7 @@ h6 {
   display: -ms-flexbox;
   display: flex;
   margin-left: auto;
+  padding-right: 12px;
   -webkit-box-ordinal-group: 3;
   -webkit-order: 2;
   -moz-box-ordinal-group: 3;
@@ -3687,18 +3513,288 @@ h6 {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
+  border-bottom: 1px solid #ddd;
 }
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item__right {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.list__header {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px 0 0 26px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #524b57;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0px 1px 0px 0px #fff;
+  box-shadow: 0px 1px 0px 0px #fff;
+  min-height: 24px;
+  line-height: 24px;
+  margin-top: -1px;
+  text-transform: uppercase;
+  position: relative;
+}
+.list__header:not(:first-of-type) {
+  border-top: 1px solid #ddd;
+}
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+}
+.list__item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  list-style: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -moz-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0;
+  margin: 1px 0 -1px 0;
+  color: #524b57;
+  background-color: #fff;
+  min-height: 44px;
+}
+.list__item:first-child {
+  -webkit-box-shadow: inset 0px 1px 0px 0px #ddd;
+  box-shadow: inset 0px 1px 0px 0px #ddd;
+  margin-top: 0;
+}
+.list__item_active:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+/* topdoc
+  name: Noborder List
+  class: list--noborder
+  use: List
+  markup:
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+    </ul>
+ */
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+  background-image: none;
+}
+.list--noborder .list__item:first-child {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* topdoc
+  name: List item without divider
+  class: list__item--nodivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--nodivider__center {
+  border: none;
+  background-image: none;
+}
+.list__item--nodivider__right {
+  border: none;
+  background-image: none;
+}
+.list__item--nodivider.list__item--chevron:before {
+  border: none;
+  background-image: none;
+}
+/* topdoc
+  name: List item with long divider
+  class: list__item--longdivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--longdivider {
+  border-bottom: 1px solid #ddd;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--longdivider {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.list__item--longdivider:last-of-type {
+  border: none;
+  background-image: none;
+}
+.list__item--longdivider__center {
+  border: none;
+  background-image: none;
+}
+.list__item--longdivider__right {
+  border: none;
+  background-image: none;
+}
+/* topdoc
+  name: Category List Header
+  class: list__header
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+    </ul>
+ */
+/* topdoc
+  name: Tappable List
+  class: list__item--tappable
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <div class="list__item__center">Tappable Item</div>
+      </li>
+    </ul>
+ */
+.list__item--tappable:active {
+  background-color: #d9d9d9;
+}
+/* topdoc
+  name: Switch in List Item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+    </ul>
+*/
 /* topdoc
   name: List Item with Chevron
   class: list__item--chevron
-  use: List, Tappable List
+  use: List
   markup:
     <ul class="list">
-      <li class="list__item list__item--chevron list__item--tappable">
-        Tappable Item
+      <li class="list__item list__item--chevron">
+        <div class="list__item__center">Item A</div>
       </li>
-      <li class="list__item list__item--chevron list__item--tappable">
-        Tappable Item
+      <li class="list__item list__item--chevron">
+        <div class="list__item__center">Item B</div>
       </li>
     </ul>
  */
@@ -3716,15 +3812,25 @@ h6 {
   transition: none;
 }
 .list__item--chevron:before {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: #ddd;
   -webkit-box-ordinal-group: 4;
   -webkit-order: 3;
   -moz-box-ordinal-group: 4;
   -ms-flex-order: 3;
   order: 3;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
   font-size: 28px;
   font-family: FontAwesome;
   font-style: normal;
@@ -3733,6 +3839,20 @@ h6 {
   margin-left: auto;
   width: 18px;
   text-align: right;
+  border-bottom: 1px solid #ddd;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--chevron:before {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 /* topdoc
   name: Inset List
@@ -3740,10 +3860,10 @@ h6 {
   markup:
     <ul class="list list--inset">
       <li class="list__item list--inset__item list__item--chevron list__item--tappable">
-        List Item with Chevron
+        <div class="list__item__center">List Item with Chevron</div>
       </li>
       <li class="list__item list--inset__item list__item--chevron list__item--tappable">
-        List Item with Chevron
+        <div class="list__item__center">List Item with Chevron</div>
       </li>
     </ul>
  */
@@ -3755,35 +3875,35 @@ h6 {
   border-radius: 4px;
   background-image: none;
 }
-.list--inset__item:not(:last-child) {
-  border-bottom: 1px solid #ddd;
-  background-image: none;
+.list--inset__item:first-child {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 /* topdoc
   name: Radio Button in List Item
   modifiers:
-  use: Radio Button, List, Tappable List, Switch in List Item
+  use: Radio Button, List
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
           <label class="radio-button">
-            <input type="radio" id="radio1" class="radio-button__input" name="b" checked="checked">
+            <input type="radio" id="r1" class="radio-button__input" name="r" checked="checked">
             <div class="radio-button__checkmark"></div>
           </label>
         </div>
-        <label for="radio1" class="list__item__center">
+        <label for="r1" class="list__item__center">
           Radio Button
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
           <label class="radio-button">
-            <input type="radio" id="radio2" class="radio-button__input" name="b" checked="checked">
+            <input type="radio" id="r2" class="radio-button__input" name="r">
             <div class="radio-button__checkmark"></div>
           </label>
         </div>
-        <label for="radio2" class="list__item__center">
+        <label for="r2" class="list__item__center">
           Radio Button
         </label>
       </li>
@@ -3824,16 +3944,24 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder">
-          <input type="checkbox" class="checkbox__input checkbox--noborder__input">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s1" type="checkbox" class="checkbox__input checkbox--noborder__input">
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s1" class="list__item__center">
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
-        <label class="checkbox checkbox--noborder">
-          <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s2" type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s2" class="list__item__center">
           Checkbox
         </label>
       </li>
@@ -3841,14 +3969,18 @@ h6 {
 */
 /* topdoc
   name: Text Input in List Item
-  use: List, Transparent Text Input
+  use: List
   markup:
     <ul class="list">
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" placeholder="Name">
+        <div class="list__item__center">
+          <input type="text" class="text-input" placeholder="Name">
+        </div>
       </li>
       <li class="list__item">
-        <input type="text" class="text-input text-input--transparent" placeholder="Email">
+        <div class="list__item__center">
+          <input type="text" class="text-input" placeholder="Email">
+        </div>
       </li>
     </ul>
 */
@@ -3858,7 +3990,9 @@ h6 {
   markup:
     <ul class="list">
       <li class="list__item">
-        <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
+        <div class="list__item__center">
+          <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
+        </div>
       </li>
     </ul>
 */
@@ -3880,6 +4014,7 @@ h6 {
 */
 .list__item__label {
   font-size: 14px;
+  padding: 0 4px;
   opacity: 0.6;
 }
 /* topdoc
@@ -3956,8 +4091,8 @@ h6 {
   height: 40px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  margin-right: 10px;
   display: block;
+  margin: 8px 10px 8px 0px;
 }
 /* topdoc
   name: List Item with Icon
@@ -3996,6 +4131,7 @@ h6 {
 */
 .list__item__icon {
   font-size: 22px;
+  padding: 0 6px;
 }
 /* topdoc
   name: Material List
@@ -4022,37 +4158,30 @@ h6 {
   -webkit-font-smoothing: antialiased;
   border: 0;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list--material {
-    background: initial;
-  }
-}
 .list__item--material {
   border: 0;
   min-height: 56px;
-  padding: 0 0 0 16px;
+  padding: 0;
   line-height: normal;
 }
 .list__item--material__subtitle {
   margin-top: 4px;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__item--material:not(:last-child) {
-    background: initial;
-  }
-}
 .list__item--material:first-child {
-  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .list__item--material__left {
   padding: 16px 0px 16px 16px;
-  margin-left: -16px;
   min-width: 56px;
   line-height: 1;
 }
+.list__item--material__left:empty {
+  width: 16px;
+}
 .list__item--material__center {
   padding: 16px 0;
-  margin-right: 16px;
+  margin-left: 16px;
 }
 .list__item--material__right {
   padding: 16px 16px 16px 0px;
@@ -4076,16 +4205,18 @@ h6 {
     </ul>
 */
 .list__header--material {
-  background: none;
-  font-size: 15px;
-  margin: 0;
+  background: #fff;
+  border: none;
+  font-size: 14px;
+  text-transform: none;
+  margin: -1px 0 0 0;
   color: #6c6c6c;
   font-weight: 500;
-  padding: 12px 16px;
+  padding: 8px 16px;
 }
 .list__header--material:not(:first-of-type) {
-  border-top: 1px solid #ececec;
-  margin-top: 16px;
+  border-top: 1px solid var-list-border-color;
+  padding-top: 16px;
 }
 /* topdoc
   name: Material List with Checkboxes
@@ -4197,94 +4328,6 @@ h6 {
 .list__item--material__icon {
   font-size: 20px;
   padding: 0 4px;
-}
-/* topdoc
-  name: Material List with Short Dividers
-  use: Material List, Material Checkbox
-  class: list__item--short-divider
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material list__item--short-divider">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox5" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox5" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Notifications</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
-        </label>
-      </li>
-
-      <li class="list__item list__item--material list__item--short-divider">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox6" class="checkbox__input checkbox--material__input" checked="checked">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox6" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Sound</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
-        </label>
-      </li>
-    </ul>
-*/
-.list__item--material.list__item--short-divider:after {
-  content: '';
-  height: 1px;
-  background-color: #ececec;
-  position: absolute;
-  bottom: 0px;
-  left: 72px;
-  right: 0px;
-}
-/* topdoc
-  name: Material List with Long Dividers
-  use: Material List, Material Checkbox
-  class: list__item--divider
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material list__item--divider">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox7" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox7" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Notifications</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
-        </label>
-      </li>
-
-      <li class="list__item list__item--material list__item--divider">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox8" class="checkbox__input checkbox--material__input" checked="checked">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox8" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Sound</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
-        </label>
-      </li>
-    </ul>
-*/
-.list__item--material.list__item--divider:after {
-  content: '';
-  height: 1px;
-  background-color: #ececec;
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
 }
 /* topdoc
   name: Search Input
@@ -4403,16 +4446,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
+  border: none;
+  background-color: transparent;
   letter-spacing: 0;
-  border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f3f3f3;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #524b57;
-  padding: 4px 8px 0 8px;
+  padding: 0;
   margin: 0;
+  width: 100%;
   font-size: 15px;
   height: 31px;
   font-weight: 400;
@@ -4436,108 +4478,36 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+  border: none;
+  background-color: transparent;
 }
 .text-input:disabled::-webkit-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
 }
 .text-input:disabled::-moz-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
 }
 .text-input:disabled::-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
 }
 .text-input:disabled:-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
 }
 .text-input::-ms-clear {
   display: none;
 }
 .text-input:invalid {
-  border: 1px solid #ddd;
+  border: none;
+  background-color: transparent;
   color: #524b57;
-}
-/* topdoc
-  name: Transparent Text Input
-  class: text-input--transparent
-  markup:
-    <input type="text" class="text-input--transparent" placeholder="text" value="">
-    <br>
-    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
-*/
-.text-input--transparent {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  vertical-align: top;
-  outline: none;
-  line-height: 1;
-  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  letter-spacing: 0;
-  border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f3f3f3;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #524b57;
-  padding: 4px 8px 0 8px;
-  margin: 0;
-  font-size: 15px;
-  height: 31px;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: none;
-  background-color: transparent;
-  padding-left: 0;
-  padding-right: 0;
-}
-.text-input--transparent:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-  border: none;
-  background-color: transparent;
-}
-.text-input--transparent:disabled::-webkit-input-placeholder {
-  color: #ccc;
-  border: none;
-  background-color: transparent;
-}
-.text-input--transparent:disabled::-moz-placeholder {
-  color: #ccc;
-  border: none;
-  background-color: transparent;
-}
-.text-input--transparent:disabled::-ms-input-placeholder {
-  color: #ccc;
-  border: none;
-  background-color: transparent;
-}
-.text-input--transparent:disabled:-ms-input-placeholder {
-  color: #ccc;
-  border: none;
-  background-color: transparent;
-}
-.text-input--transparent:invalid {
-  border: 1px solid #ddd;
-  color: #524b57;
-  border: none;
-  background-color: transparent;
 }
 /* topdoc
   name: Underbar Text Input
@@ -4568,16 +4538,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
+  border: none;
+  background-color: transparent;
   letter-spacing: 0;
-  border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f3f3f3;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #524b57;
-  padding: 4px 8px 0 8px;
+  padding: 0;
   margin: 0;
+  width: 100%;
   font-size: 15px;
   height: 31px;
   font-weight: 400;
@@ -4596,30 +4565,41 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   pointer-events: none;
   border: none;
   background-color: transparent;
+  border: none;
+  background-color: transparent;
   border-bottom: 1px solid #ddd;
 }
 .text-input--underbar:disabled::-webkit-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:disabled::-moz-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:disabled::-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:disabled:-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
   color: #ccc;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid #ddd;
+  border: none;
+  background-color: transparent;
   color: #524b57;
   border: none;
   background-color: transparent;

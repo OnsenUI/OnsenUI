@@ -93,20 +93,17 @@ class MaterialInputElement extends BaseElement {
     let helper = document.createElement('span');
     helper.classList.add('_helper');
 
-    let inputContainer = document.createElement('span');
-    inputContainer.appendChild(document.createElement('input'));
-    inputContainer.appendChild(helper);
-
-    let content = document.createElement('label');
-    content.appendChild(inputContainer);
+    let container = document.createElement('label');
+    container.appendChild(document.createElement('input'));
+    container.appendChild(helper);
 
     let label = document.createElement('span');
     label.classList.add('input-label');
 
     ons._util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
-    this.hasAttribute('content-left') ? content.insertBefore(label, content.firstChild) : content.appendChild(label);
+    this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
 
-    this.appendChild(content);
+    this.appendChild(container);
 
     switch (this.getAttribute('type')) {
       case 'checkbox':
@@ -141,8 +138,8 @@ class MaterialInputElement extends BaseElement {
 
     this._boundDelegateEvent = this._delegateEvent.bind(this);
 
-    if (this.id) {
-      this._input.id = 'inner-' + this.id;
+    if (this.hasAttribute('input-id')) {
+      this._input.id = this.getAttribute('input-id');
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -153,9 +150,10 @@ class MaterialInputElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'placeholder') {
+    } else if (name === 'placeholder') {
       return this._updateLabel();
+    } if (name === 'input-id') {
+      this._input.id = current;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return this._updateBoundAttributes();
@@ -271,6 +269,10 @@ class MaterialInputElement extends BaseElement {
 
   set checked(val) {
     this._input.checked = val;
+  }
+
+  get _isTextInput() {
+    return this._input.classList.contains('text-input');
   }
 }
 

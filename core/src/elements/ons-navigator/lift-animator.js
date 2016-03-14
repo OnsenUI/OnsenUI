@@ -34,7 +34,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black;"></div>
+        background: linear-gradient(black, white);"></div>
     `);
   }
 

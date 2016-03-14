@@ -84,8 +84,6 @@ radio-button--disabled()
 
 .radio-button__input
   hide-input()
-  height 0px
-  width 0px
 
 .radio-button__input:active,
 .radio-button__input:focus
@@ -172,7 +170,7 @@ radio-button--disabled()
 */
 
 .radio-button--material
-  line-height var-material-radio-button-size
+  line-height var-material-radio-button-size + 2px
   material-font()
 
 .radio-button--material__checkmark
@@ -183,6 +181,7 @@ radio-button--disabled()
 .radio-button--material__checkmark:before
   background transparent
   border 2px solid $material-radio-button-inactive-color
+  box-sizing border-box
   border-radius 50%
   width var-material-radio-button-size
   height var-material-radio-button-size
@@ -190,10 +189,10 @@ radio-button--disabled()
 
 .radio-button--material__checkmark:after
   transition background 0.2s ease, transform 0.2s ease
-  top 5px
-  left 5px
-  width 10px
-  height 10px
+  top (var-material-radio-button-size / 4)
+  left (var-material-radio-button-size / 4)
+  width (var-material-radio-button-size / 2)
+  height (var-material-radio-button-size / 2)
   border none
   border-radius 50%
   transform scale(0)

@@ -2,6 +2,20 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.8
+----
+ * core: Small fix for Autostyling.
+ * ons-list-item: Fix "tappable" attribute.
+ * ons-navigator: Added default `options` poperty.
+ * ons-navigator: Fixed flickering in Lift animation for iOS.
+ * ons-page: Does not remove 'style' attribute anymore.
+ * ons.notification: Fixed an issue in iOS related to CustomElements.
+ * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
+ * ons-icon: Fixed a bug in old Android versions.
+ * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
+ * ons-bottom-toolbar: Fixed a bug making it scroll with the content in some cases.
+ * ons-carousel: Added `centered` attribute.
+
 v2.0.0-beta.7
 ----
  * core: Automatic Styling feature depending on current platform.
@@ -22,7 +36,14 @@ v2.0.0-beta.7
  * ons-switch: Switch is now draggable.
  * core: Use a global gesture detector to improve performance.
  * ons-splitter-side: Fixed [#1222](https://github.com/OnsenUI/OnsenUI/issues/1222).
- * ons-carousel: Added `centered` attribute.
+ * css-components: Improve list item style.
+ * ons.notification: Closes [#1127](https://github.com/OnsenUI/OnsenUI/issues/1127).
+ * ons-splitter: Improved performance and fixed minor bugs.
+ * ons-lazy-repeat: Fixed [[#1236](https://github.com/OnsenUI/OnsenUI/issues/1236), [#1029](https://github.com/OnsenUI/OnsenUI/issues/1029), [#470](https://github.com/OnsenUI/OnsenUI/issues/470)], and [#1035](https://github.com/OnsenUI/OnsenUI/issues/1035).
+ * ons-input: Transparent style is now default in iOS (removed 'transparent' modifier).
+ * ons-input: Update Angular bindings to work better with checkboxes and radio buttons.
+ * ons-switch: Fix so it works inside a <label> element.
+ * ons-ripple: Attach event listeners to parent to avoid blocking cliks.
 
 v2.0.0-beta.6
 ----

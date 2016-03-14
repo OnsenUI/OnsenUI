@@ -41,8 +41,8 @@ const templateSource = util.createElement(`
 `);
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'fade': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };

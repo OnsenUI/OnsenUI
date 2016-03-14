@@ -288,19 +288,6 @@ describe('OnsTabbarElement', () => {
         return expect(promise).to.eventually.be.fulfilled;
       });
     });
-
-    it('fires \'destroy\' event', () => {
-      let promise = new Promise((resolve) => {
-        element.addEventListener('destroy', resolve);
-      });
-
-      return element.setActiveTab(0).then(() => {
-        return element.loadPage('page1').then(() => {
-          element.setActiveTab(1);
-          return expect(promise).to.eventually.be.fulfilled;
-        });
-      });
-    });
   });
 
   describe('#loadPage()', () => {

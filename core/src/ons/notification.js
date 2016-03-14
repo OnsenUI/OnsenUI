@@ -72,6 +72,8 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-footer"></div>
   </ons-alert-dialog>`);
 
+  CustomElements.upgrade(dialogElement);
+
   if (id) {
     dialogElement.setAttribute('id', id);
   }
@@ -214,7 +216,10 @@ notification._createAlertDialog = function(title, message,
   return result.promise;
 };
 
-notification._alertOriginal = function(options) {
+notification._alertOriginal = function(message, options = {}) {
+
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var defaults = {
     buttonLabel: 'OK',
     animation: 'default',

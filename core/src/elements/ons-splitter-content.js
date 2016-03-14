@@ -47,6 +47,12 @@ const rewritables = {
  *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
+ * @seealso ons-splitter
+ *  [en]ons-splitter component[/en]
+ *  [ja]ons-splitterコンポーネント[/ja]
+ * @seealso ons-splitter-side
+ *  [en]ons-splitter-side component[/en]
+ *  [ja]ons-splitter-sideコンポーネント[/ja]
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>
@@ -99,19 +105,12 @@ class SplitterContentElement extends BaseElement {
     return internal.getPageHTMLAsync(page).then((html) => {
       return new Promise(resolve => {
         rewritables.link(this, util.createFragment(html), options, (fragment) => {
-          while (this.childNodes[0]) {
-            if (this.childNodes[0]._hide instanceof Function) {
-              this.childNodes[0]._hide();
-            }
-            this.removeChild(this.childNodes[0]);
-          }
+          util.propagateAction(this, '_hide');
+          this.innerHTML = '';
 
           this.appendChild(fragment);
-          util.arrayFrom(fragment.children).forEach(child => {
-            if (child._show instanceof Function) {
-              child._show();
-            }
-          });
+
+          util.propagateAction(this, '_show');
 
           options.callback();
           resolve(this.firstChild);
@@ -132,27 +131,15 @@ class SplitterContentElement extends BaseElement {
   }
 
   _show() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._show instanceof Function) {
-        child._show();
-      }
-    });
+    util.propagateAction(this, '_show');
   }
 
   _hide() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._hide instanceof Function) {
-        child._hide();
-      }
-    });
+    util.propagateAction(this, '_hide');
   }
 
   _destroy() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._destroy instanceof Function) {
-        child._destroy();
-      }
-    });
+    util.propagateAction(this, '_destroy');
     this.remove();
   }
 

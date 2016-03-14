@@ -97,15 +97,51 @@ class ListItemElement extends BaseElement {
 
   _compile() {
     ons._autoStyle.prepare(this);
+    this.classList.add('list__item');
 
-    let ripple = '';
-    if (this.hasAttribute('ripple')) {
-      ripple = '<ons-ripple></ons-ripple>';
+    let left, center, right;
+
+    for (let i = 0; i < this.children.length; i++) {
+      const el = this.children[i];
+
+      if (el.classList.contains('left')) {
+        el.classList.add('list__item__left');
+        left = el;
+      }
+      else if (el.classList.contains('center')) {
+        center = el;
+      }
+      else if (el.classList.contains('right')) {
+        el.classList.add('list__item__right');
+        right = el;
+      }
     }
 
-    this.innerHTML = `<label>${ripple}${this.innerHTML}</label>`;
-    this.firstChild.classList.add('list__item');
-    this.style.display = this.firstChild.style.display = 'flex';
+    if (!center) {
+      center = document.createElement('div');
+
+      if (!left && !right) {
+        center.innerHTML = this.innerHTML;
+        this.innerHTML = '';
+      } else {
+
+        for (let i = this.childNodes.length - 1; i >= 0; i--) {
+          let el = this.childNodes[i];
+          if (el !== left && el !== right) {
+            center.insertBefore(el, center.firstChild);
+          }
+        }
+      }
+
+      this.insertBefore(center, right || null);
+    }
+
+    center.classList.add('center');
+    center.classList.add('list__item__center');
+
+    if (this.hasAttribute('ripple')) {
+      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -114,7 +150,7 @@ class ListItemElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this.firstChild, scheme);
+      return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
@@ -126,6 +162,8 @@ class ListItemElement extends BaseElement {
     this.addEventListener('touchmove', this._onRelease);
     this.addEventListener('touchcancel', this._onRelease);
     this.addEventListener('mouseup', this._onRelease);
+    this.addEventListener('mouseout', this._onRelease);
+    this.addEventListener('touchleave', this._onRelease);
 
     this._originalBackgroundColor = this.style.backgroundColor;
 
@@ -134,17 +172,18 @@ class ListItemElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('drag', this._onDrag);
-
     this.removeEventListener('touchstart', this._onTouch);
     this.removeEventListener('mousedown', this._onTouch);
     this.removeEventListener('touchend', this._onRelease);
     this.removeEventListener('touchmove', this._onRelease);
     this.removeEventListener('touchcancel', this._onRelease);
     this.removeEventListener('mouseup', this._onRelease);
+    this.removeEventListener('mouseout', this._onRelease);
+    this.removeEventListener('touchleave', this._onRelease);
   }
 
   get _transition() {
-    return 'background-color 0.0s linear 0.15s';
+    return 'background-color 0.0s linear 0.02s';
   }
 
   get _tappable() {

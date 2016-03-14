@@ -34,10 +34,10 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
-  'default': platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'slide': () => platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
   'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
+  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
   'simplelift': LiftNavigatorTransitionAnimator,
   'fade': FadeNavigatorTransitionAnimator,
   'mdfade': MDFadeNavigatorTransitionAnimator,
@@ -214,6 +214,9 @@ class NavigatorElement extends BaseElement {
     this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._isPushing = this._isPopping = false;
+    this.options = {
+      cancelIfRunning: true
+    };
 
     this._initialHTML = this.innerHTML;
     this.innerHTML = '';
@@ -224,6 +227,24 @@ class NavigatorElement extends BaseElement {
       baseClassName: 'NavigatorTransitionAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
+  }
+
+
+  /**
+   * @property {object} [options]
+   * @description
+   *   [en]Default options object.[/en]
+   *   [ja][/ja]
+   */
+  get options() {
+    return this._options;
+  }
+
+  set options(object) {
+    this._options = object;
+    if (!this._options.hasOwnProperty('cancelIfRunning')) {
+      this._options.cancelIfRunning = true;
+    }
   }
 
   /**
@@ -335,6 +356,8 @@ class NavigatorElement extends BaseElement {
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
+
+    options = util.extend({}, this.options || {}, options);
 
     if (options.cancelIfRunning && this._isPopping) {
       return Promise.reject('popPage is already running.');
@@ -736,6 +759,8 @@ class NavigatorElement extends BaseElement {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
+    options = util.extend({}, this.options || {}, options);
+
     if (options.cancelIfRunning && this._isPushing) {
       return Promise.reject('pushPage is already running.');
     }
@@ -879,6 +904,8 @@ class NavigatorElement extends BaseElement {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
+    options = util.extend({}, this.options || {}, options);
+
     if (options.cancelIfRunning && this._isPushing) {
       return Promise.reject('pushPage is already running.');
     }
@@ -886,7 +913,6 @@ class NavigatorElement extends BaseElement {
     if (this._emitPrePushEvent()) {
       return Promise.reject('Canceled in prepush event.');
     }
-
 
     let index;
     if (typeof item === 'string') {

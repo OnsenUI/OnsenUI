@@ -146,6 +146,9 @@ const HorizontalModeTrait = {
  *   [en]Carousel component.[/en]
  *   [ja]カルーセルを表示できるコンポーネント。[/ja]
  * @codepen xbbzOQ
+ * @seealso ons-carousel-item
+ *   [en]ons-carousel-item component[/en]
+ *   [ja]ons-carousel-itemコンポーネント[/ja]
  * @guide UsingCarousel
  *   [en]Learn how to use the carousel component.[/en]
  *   [ja]carouselコンポーネントの使い方[/ja]

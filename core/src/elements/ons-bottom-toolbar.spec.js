@@ -10,13 +10,6 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar')).to.be.true;
   });
 
-  it('default \'position\' is \'absolute\' and default \'z-index\' is \'0\'', () => {
-    var element = new OnsBottomToolbarElement();
-    expect(element.style.zIndex).to.equal('0');
-    expect(element.style.position).to.equal('absolute');
-    expect(element.style.position).not.to.equal('relative');
-  });
-
   it('provides \'modifier\' attribute', () => {
     var element = new OnsBottomToolbarElement();
     element.setAttribute('modifier', 'hoge');
@@ -33,11 +26,16 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  it('provides \'inline\' attribute', () => {
-    var element = new OnsBottomToolbarElement();
-    element.setAttribute('inline', '');
-    expect(element.style.position).to.equal('static');
-    expect(element.style.position).not.to.equal('absolute');
+  it('ensures it\'s location in the page', () => {
+    var element = new OnsBottomToolbarElement(),
+      page = new OnsPageElement();
+
+    document.body.appendChild(page);
+    page.appendChild(element);
+
+    expect(element.parentNode).to.equal(page);
+
+    document.body.removeChild(page);
   });
 
   describe('#_compile()', () => {

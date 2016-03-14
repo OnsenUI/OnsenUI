@@ -29,7 +29,7 @@ class InternalDelegate extends LazyRepeatDelegate {
     if (templateElement instanceof Element || templateElement === null) {
       this._templateElement = templateElement;
     } else {
-      throw new Error('templateElemenet parameter must be an instance of Element or null.');
+      throw new Error('templateElement parameter must be an instance of Element or null.');
     }
   }
 
@@ -129,7 +129,7 @@ class InternalDelegate extends LazyRepeatDelegate {
  * </script>
  *
  * <ons-list>
- *   <ons-lazy-repeat>
+ *   <ons-lazy-repeat id="list">
  *     <ons-list-item></ons-list-item>
  *   </ons-lazy-repeat>
  * </ons-list>
@@ -144,9 +144,14 @@ class LazyRepeatElement extends BaseElement {
   }
 
   attachedCallback() {
+    if (!this._parentUpdated && this.parentElement) {
+      if (window.getComputedStyle(this.parentElement).getPropertyValue('position') === 'static') {
+        this.parentElement.style.position = 'relative';
+      }
+      this._parentUpdated = true;
+    }
     if (this.hasAttribute('delegate')) {
-      const delegate = new InternalDelegate(this._getUserDelegate(), this._getTemplateElement());
-      this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
+      this.setDelegate(this._getUserDelegate());
     }
   }
 
@@ -161,11 +166,7 @@ class LazyRepeatElement extends BaseElement {
   _getUserDelegate() {
     const name = this.getAttribute('delegate') || this.getAttribute('ons-lazy-repeat');
 
-    if (window[name]) {
-      return window[name];
-    } else {
-      return null;
-    }
+    return window[name] || null;
   }
 
   detachedCallback() {
