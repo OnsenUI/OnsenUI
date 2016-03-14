@@ -710,7 +710,7 @@ class CarouselElement extends BaseElement {
    * @signature setCentered(centered)
    * @param {Boolean} centered
    *   [en]If true the carousel will be centered.[/en]
-   *   [ja]centeredできるかどうかを指定します。[/ja]
+   *   [ja]centered状態にする場合にはtrueを指定します。[/ja]
    * @description
    *   [en]Set whether the carousel is centered or not.[/en]
    *   [ja]centered属性があるかどうかを設定します。[/ja]
@@ -728,7 +728,7 @@ class CarouselElement extends BaseElement {
    * @signature isCentered()
    * @return {Boolean}
    *   [en]Whether the carousel is centered or not.[/en]
-   *   [ja]centeredできればtrueを返します。[/ja]
+   *   [ja]centered状態になっていればtrueを返します。[/ja]
    * @description
    *   [en]Returns whether the carousel is centered or not.[/en]
    *   [ja]centered属性があるかどうかを返します。[/ja]
