@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import internal from 'ons/internal';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
@@ -219,7 +220,7 @@ class TabbarElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     if (this.getAttribute('position') === 'auto') {
       this.setAttribute('position', ons.platform.isAndroid() ? 'top' : 'bottom');
