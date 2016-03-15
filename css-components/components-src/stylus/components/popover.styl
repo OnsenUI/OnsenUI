@@ -47,6 +47,8 @@ var-popover-margin-material = 4px
   right var-popover-margin
   bottom var-popover-margin
   left var-popover-margin
+  z-index 20000
+  display none
 
 .popover-mask
   left 0
@@ -57,6 +59,14 @@ var-popover-margin-material = 4px
   position fixed
 
 .popover__container
+  width 100%
+  height 100%
+
+.popover__content
+  background-color var-popover-background-color
+  border-radius var-popover-radius
+  color var-popover-text-color
+
   reset-box-model()
   reset-base()
   reset-cursor()
@@ -64,16 +74,12 @@ var-popover-margin-material = 4px
   position absolute
   display block
   width 220px
+  // min-height 100px
+  overflow auto
   min-height 100px
-
-.popover__content
-  background-color var-popover-background-color
-  border-radius var-popover-radius
-  color var-popover-text-color
-  overflow hidden
-  min-height 100px
-  height: 100%
-  -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
+  max-height 100%
+  // height: 100%
+  // -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
 
 .popover__content > *
   overflow hidden
@@ -83,7 +89,7 @@ var-popover-margin-material = 4px
   position static
 
 popover-arrow()
-  content ''
+  // content ''
   position absolute
   width var-popover-arrow-size
   height var-popover-arrow-size
@@ -91,38 +97,39 @@ popover-arrow()
   background-color transparent
   background-image linear-gradient(45deg, var-popover-background-color, var-popover-background-color 50%, transparent 50%)
   border-radius 0 0 0 var-popover-arrow-radius
+  margin (-(var-popover-arrow-size / 2))px
 
 .popover__bottom-arrow
   popover-arrow()
   transform rotate(-45deg)
-  bottom 0
-  left 50%
-  margin-left -(var-popover-arrow-size / 2 + var-popover-margin)px
-  margin-bottom -(var-popover-arrow-size / 2)px
+  bottom 1px
+  // left 50%
+  // margin-left -(var-popover-arrow-size / 2)px
+  // margin-bottom -(var-popover-arrow-size / 2)px
 
 .popover__top-arrow
   popover-arrow()
   transform rotate(135deg)
-  top 0
-  left 50%
-  margin-left -(var-popover-arrow-size / 2 + var-popover-margin)px
-  margin-top -(var-popover-arrow-size / 2)px
+  top 1px
+  // left 50%
+  // margin-left -(var-popover-arrow-size / 2)px
+  // margin-top -(var-popover-arrow-size / 2)px
 
 .popover__left-arrow
   popover-arrow()
   transform rotate(45deg)
-  top 50%
-  left 0
-  margin-left -(var-popover-arrow-size / 2)px
-  margin-top -(var-popover-arrow-size / 2)px
+  // top 50%
+  left 1px
+  // margin-left -(var-popover-arrow-size / 2)px
+  // margin-top -(var-popover-arrow-size / 2)px
 
 .popover__right-arrow
   popover-arrow()
   transform rotate(225deg)
-  top 50%
-  right 0
-  margin-right -(var-popover-arrow-size / 2)px
-  margin-top -(var-popover-arrow-size / 2)px
+  // top 50%
+  right 1px
+  // margin-right -(var-popover-arrow-size / 2)px
+  // margin-top -(var-popover-arrow-size / 2)px
 
 /*! topdoc
   name: Popover(down)
@@ -177,9 +184,8 @@ popover-arrow()
   reset-base()
   reset-cursor()
   reset-font()
-  position absolute
+  // position absolute
   display inline-block
-  shadow-1()
   max-height 100%
   overflow auto
   /*border-bottom 4px solid transparent*/
@@ -188,6 +194,7 @@ popover-arrow()
   background-color var-popover-background-color-material
   border-radius var-popover-radius-material
   color var-popover-text-color
+  shadow-1()
 
 .popover__arrow--material
   display none
