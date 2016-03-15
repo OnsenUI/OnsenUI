@@ -82,7 +82,7 @@ class AnimatorCSS {
         return result;
       },
       speed: (newDuration) => {
-        if (ons._config.animationsDisabled) {
+        if (ons._internal.config.animationsDisabled) {
           newDuration = 0;
         }
         if (!stopped) {
@@ -119,7 +119,7 @@ class AnimatorCSS {
       }
     };
 
-    if (el.hasAttribute('disabled') || stopped || ons._config.animationsDisabled) {
+    if (el.hasAttribute('disabled') || stopped || ons._internal.config.animationsDisabled) {
       return result;
     }
 

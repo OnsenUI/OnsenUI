@@ -15,8 +15,6 @@ limitations under the License.
 
 */
 
-import ons from './ons';
-
 /**
  * @object ons.platform
  * @category util
@@ -57,7 +55,11 @@ class Platform {
    * @return {Boolean}
    */
   isWebView() {
-    return ons.isWebView();
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      throw new Error('isWebView() method is available after dom contents loaded.');
+    }
+
+    return !!(window.cordova || window.phonegap || window.PhoneGap);
   }
 
   /**
