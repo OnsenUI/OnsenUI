@@ -18,9 +18,7 @@
           ons.createPopover('popover.html').then(function(popover) {
             $scope.popover = popover;
           });
-          // $scope.popover = document.querySelector('ons-popover');
         });
-        $scope.items = Array(25);
         $scope.show = function(e) {
           $scope.popover.show(e);
         }
@@ -30,10 +28,12 @@
   </head>
 
   <body ng-controller="MyController">
-    <ons-page style="background:#999">
+    <ons-page>
       <ons-toolbar>
         <div class="left">
-          <i class="ion-navicon" id="navigation" ng-click="show('#navigation')" style="font-size:32px; padding: 9px 13px;"></i>
+          <ons-toolbar-button modifier="outline" id="navigation" ng-click="show('#navigation')">
+            <i class="ion-navicon" style="font-size:32px; vertical-align: -6px"></i>
+          </ons-toolbar-button>
         </div>
 
         <div class="center">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="right">
-          <ons-toolbar-button id="top-right" ng-click="show('#top-right')">Button</ons-toolbar-button>
+          <ons-toolbar-button modifier="outline" id="top-right" ng-click="show('#top-right')">Button</ons-toolbar-button>
         </div>
       </ons-toolbar>
 
@@ -51,13 +51,6 @@
         <ons-button id="button" ng-click="show('#button')">Click me!</ons-button>
       </div>
 
-      <!-- <ons-tabbar>
-        <ons-tab id="#stop" ng-click="show('#stop')" icon="ion-stop" active></ons-tab>
-        <ons-tab id="#record" ng-click="show('#record')" icon="ion-record"></ons-tab>
-        <ons-tab id="#star" ng-click="show('#star')" icon="ion-star"></ons-tab>
-        <ons-tab id="#cloud" ng-click="show('#cloud')" icon="ion-ios-cloud-outline"></ons-tab>
-        <ons-tab id="#pie" ng-click="show('#pie')" icon="ion-ios-pie"></ons-tab>
-      </ons-tabbar> -->
       <div class="tab-bar">
         <label ng-click="show('#stop')" class="tab-bar__item">
           <input type="radio" name="tab-bar-b" checked="checked">
@@ -95,18 +88,13 @@
         </label>
       </div>
     </ons-page>
-<!--
+
+    <script type="text/ons-template" id="popover.html">
+      <ons-popover direction="up down" cancelable>
         <div style="text-align: center; opacity: 0.5;">
           <p>This is a popover!</p>
           <p><small>Click the background to remove the popover.</small></p>
         </div>
--->
-
-    <script type="text/ons-template" id="popover.html">
-      <ons-popover direction="up down" cancelable>
-        <ons-list>
-          <ons-list-item ng-repeat="item in items track by $index">{{$index}}</ons-list-item>
-        </ons-list>
       </ons-popover>
     </script>
 
