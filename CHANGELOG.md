@@ -10,6 +10,10 @@ v2.0.0-beta.8
  * ons-navigator: Fixed flickering in Lift animation for iOS.
  * ons-page: Does not remove 'style' attribute anymore.
  * ons.notification: Fixed an issue in iOS related to CustomElements.
+ * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
+ * ons-icon: Fixed a bug in old Android versions.
+ * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
+ * ons-bottom-toolbar: Fixed a bug making it scroll with the content in some cases.
 
 v2.0.0-beta.7
 ----
