@@ -347,9 +347,6 @@ class TabElement extends BaseElement {
                 });
               });
             }
-            else {
-              this.pageElement.style.display = 'none';
-            }
           }
         );
       });
