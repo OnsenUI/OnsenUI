@@ -63,10 +63,6 @@ var-popover-margin-material = 4px
   height 100%
 
 .popover__content
-  background-color var-popover-background-color
-  border-radius var-popover-radius
-  color var-popover-text-color
-
   reset-box-model()
   reset-base()
   reset-cursor()
@@ -74,12 +70,12 @@ var-popover-margin-material = 4px
   position absolute
   display block
   width 220px
-  // min-height 100px
   overflow auto
   min-height 100px
   max-height 100%
-  // height: 100%
-  // -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
+  background-color var-popover-background-color
+  border-radius var-popover-radius
+  color var-popover-text-color
 
 .popover__content > *
   overflow hidden
@@ -89,7 +85,6 @@ var-popover-margin-material = 4px
   position static
 
 .popover__arrow
-  // content ''
   position absolute
   width var-popover-arrow-size
   height var-popover-arrow-size
