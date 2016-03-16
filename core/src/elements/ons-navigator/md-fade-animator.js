@@ -43,7 +43,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
 
     animit.runAll(
 
-      animit(enterPage.element)
+      animit(enterPage)
         .saveStyle()
         .queue({
           css: {
@@ -78,7 +78,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
   pop(enterPage, leavePage, callback) {
     animit.runAll(
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)'
@@ -98,7 +98,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
           done();
         }),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             opacity: 1

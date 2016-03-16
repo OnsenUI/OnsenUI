@@ -43,7 +43,7 @@ export default class FadeNavigatorTransitionAnimator extends NavigatorTransition
 
     animit.runAll(
 
-      animit([enterPage.element._getContentElement(), enterPage.element._getBackgroundElement()])
+      animit([enterPage._getContentElement(), enterPage._getBackgroundElement()])
         .saveStyle()
         .queue({
           css: {
@@ -67,7 +67,7 @@ export default class FadeNavigatorTransitionAnimator extends NavigatorTransition
           done();
         }),
 
-      animit(enterPage.element._getToolbarElement())
+      animit(enterPage._getToolbarElement())
         .saveStyle()
         .queue({
           css: {
@@ -98,7 +98,7 @@ export default class FadeNavigatorTransitionAnimator extends NavigatorTransition
   pop(enterPage, leavePage, callback) {
     animit.runAll(
 
-      animit([leavePage.element._getContentElement(), leavePage.element._getBackgroundElement()])
+      animit([leavePage._getContentElement(), leavePage._getBackgroundElement()])
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',
@@ -120,7 +120,7 @@ export default class FadeNavigatorTransitionAnimator extends NavigatorTransition
           done();
         }),
 
-      animit(leavePage.element._getToolbarElement())
+      animit(leavePage._getToolbarElement())
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',

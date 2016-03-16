@@ -218,9 +218,6 @@ class NavigatorElement extends BaseElement {
       cancelIfRunning: true
     };
 
-    this._initialHTML = this.innerHTML;
-    this.innerHTML = '';
-
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: NavigatorTransitionAnimator,
@@ -352,110 +349,35 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   popPage(options = {}) {
+    if (this.pages.length <= 1) {
+      throw new Error('ons-navigator\'s page stack is empty.');
+    }
 
-    if (options && typeof options != 'object') {
+    return this._popPage(options, () => {
+      this.pages[this.pages.length - 1].remove();
+    });
+  }
+
+  _popPage(options, update = () => Promise.resolve(), pages = []) {
+    if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isPopping) {
-      return Promise.reject('popPage is already running.');
-    }
-
     options.animationOptions = util.extend(
       options.animationOptions || {},
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
-    const tryPopPage = () => {
-      if (this._pages.length <= 1) {
-        throw new Error('ons-navigator\'s page stack is empty.');
-      }
+    const animator = this._animatorFactory.newAnimator(options);
+    const l = this.pages.length;
 
-      if (this._emitPrePopEvent()) {
-        return Promise.reject('Canceled in prepop event.');
-      }
-
-      const unlock = this._doorLock.lock();
-
-      if (options.refresh) {
-        const index = this._pages.length - 2;
-
-        if (!this._pages[index].page) {
-          throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-        }
-
-        return internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
-          const element = this._createPageElement(templateHTML);
-          const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
-
-          return new Promise(resolve => {
-            rewritables.link(this, element, this._pages[index].options, element => {
-              this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-              this._pages.splice(index, 0, pageObject);
-
-              this._pages[index + 1].destroy();
-              resolve(this._popPage(options, unlock));
-            });
-          });
-        });
-
-      } else {
-        return this._popPage(options, unlock);
-      }
-    };
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryPopPage()));
-    });
-  }
-
-  _popPage(options, unlock) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const leavePage = this._pages.pop();
-    const enterPage = this._pages[this._pages.length - 1];
-
-    enterPage.updateBackButton();
-
-    leavePage.element._hide();
-    if (enterPage) {
-      enterPage.element.style.display = 'block';
-      enterPage.element._show();
-    }
-
-    // for "postpop" event
-    const eventDetail = {
-      leavePage: leavePage,
-      enterPage: this._pages[this._pages.length - 1],
-      navigator: this
-    };
-
-    return new Promise(resolve => {
-      const callback = () => {
-        leavePage.destroy();
-
-        this._isPopping = false;
-        unlock();
-
-        const event = util.triggerElementEvent(this, 'postpop', eventDetail);
-        event.leavePage = null;
-
-        if (typeof options.onTransitionEnd === 'function') {
-          options.onTransitionEnd();
-        }
-
-        resolve(enterPage);
-      };
-
-      this._isPopping = true;
-
-      const animator = this._animatorFactory.newAnimator(options, leavePage.options.animator);
-      animator.pop(enterPage, leavePage, callback);
+    return new Promise((resolve) => {
+      animator.pop(this.pages[l - 2], this.pages[l - 1], () => {
+        pages.pop();
+        resolve(update(pages, this));
+      });
     });
   }
 
@@ -595,7 +517,7 @@ class NavigatorElement extends BaseElement {
   }
 
   get pages() {
-    return this._pages.slice(0);
+    return this.children;
   }
 
   _onDeviceBackButton(event) {
@@ -689,11 +611,7 @@ class NavigatorElement extends BaseElement {
 
     rewritables.ready(this, () => {
       if (this._pages.length === 0) {
-        if (!this.getAttribute('page')) {
-          const element = this._createPageElement(this._initialHTML || '');
-
-          this._pushPageDOM(this._createPageObject('', element, {}), function() {});
-        } else {
+        if (this.hasAttribute('page')) {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
         }
       }
@@ -748,122 +666,57 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
-
     if (typeof page === 'object' && page !== null) {
       options = page;
     } else {
       options.page = page;
     }
 
-    if (options && typeof options != 'object') {
+    const run = templateHTML => {
+      const element = this._createPageElement(templateHTML);
+      CustomElements.upgrade(element);
+
+      return new Promise((resolve) => {
+        rewritables.link(this, element, options, element => {
+          this.appendChild(element);
+          resolve(this._pushPage(options));
+        });
+      });
+    };
+
+    if (options.pageHTML) {
+      return run(options.pageHTML);
+    }
+    else {
+      return internal.getPageHTMLAsync(page).then(run);
+    }
+  }
+
+  _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
+    if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
     options = util.extend({}, this.options || {}, options);
-
-    if (options.cancelIfRunning && this._isPushing) {
-      return Promise.reject('pushPage is already running.');
-    }
-
-    if (this._emitPrePushEvent()) {
-      return Promise.reject('Canceled in prepush event.');
-    }
 
     options.animationOptions = util.extend(
       options.animationOptions || {},
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
-    this._isPushing = true;
+    const animator = this._animatorFactory.newAnimator(options);
 
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
-    });
-  }
+    pages.push(page);
 
-  _pushPage(options) {
-    const unlock = this._doorLock.lock();
-    const done = function() {
-      unlock();
-    };
-
-    const run = templateHTML => {
-      const element = this._createPageElement(templateHTML);
-      return this._pushPageDOM(this._createPageObject(options.page, element, options), done);
-    };
-
-    if (options.pageHTML) {
-      return run(options.pageHTML);
-    } else {
-      return internal.getPageHTMLAsync(options.page).then(run);
-    }
-  }
-
-  /**
-   * @param {Object} pageObject
-   * @param {Function} [unlock]
-   */
- _pushPageDOM(pageObject, unlock) {
-    unlock = unlock || function() {};
-
-    let element = pageObject.element;
-    let options = pageObject.options;
-
-    // for "postpush" event
-    const eventDetail = {
-      enterPage: pageObject,
-      leavePage: this._pages[this._pages.length - 1],
-      navigator: this
-    };
-
-    this._pages.push(pageObject);
-    pageObject.updateBackButton();
-
-    return new Promise(resolve => {
-
-      const done = () => {
-        if (this._pages[this._pages.length - 2]) {
-          this._pages[this._pages.length - 2].element.style.display = 'none';
-        }
-
-        this._isPushing = false;
-        unlock();
-
-        util.triggerElementEvent(this, 'postpush', eventDetail);
-
-        if (typeof options.onTransitionEnd === 'function') {
-          options.onTransitionEnd();
-        }
-        element = null;
-
-        resolve(this._pages[this._pages.length - 1]);
-      };
-
-      this._isPushing = true;
-
-      rewritables.link(this, element, options, element => {
-        CustomElements.upgrade(element);
-
-        setTimeout(() => {
-          if (this._pages.length > 1) {
-            const leavePage = this._pages.slice(-2)[0];
-            const enterPage = this._pages.slice(-1)[0];
-
-            this.appendChild(element);
-            leavePage.element._hide();
-            enterPage.element._show();
-
-            options.animator.push(enterPage, leavePage, done);
-          } else {
-            this.appendChild(element);
-            element._show();
-
-            done();
+    return update(pages, this)
+      .then(() => {
+        return new Promise((resolve) => {
+          if (this.pages.length > 1) {
+            const l = this.pages.length;
+            animator.push(this.pages[l - 1], this.pages[l - 2], resolve);
           }
-        }, 1000 / 60);
+        });
       });
-
-    });
   }
 
   /**
