@@ -777,7 +777,7 @@ class SplitterSideElement extends BaseElement {
 
     const collapse = ('' + this.getAttribute('collapse')).trim();
 
-    if (collapse === '') {
+    if (collapse === '' || collapse === 'true') {
       this._updateCollapseStrategy(new StaticCollapseDetection());
     } else if (collapse === 'portrait' || collapse === 'landscape') {
       this._updateCollapseStrategy(new OrientationCollapseDetection(collapse));
