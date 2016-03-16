@@ -22,18 +22,20 @@
       it('should trigger events', function() {
         browser.get(path);
 
-        var alertDialog = element(by.css('ons-alert-dialog')),
-          isVisible = element(by.id('alert-dialog-visible')).isDisplayed;
+        var alertDialog = element(by.css('ons-alert-dialog'));
+        browser.wait(EC.presenceOf(alertDialog));
+        var helpElement = element(by.id('alert-dialog-visible'));
+        browser.wait(EC.presenceOf(helpElement));
 
-        expect(isVisible()).not.toBeTruthy();
+        expect(helpElement.isDisplayed()).not.toBeTruthy();
 
         element(by.id('show-alert-dialog')).click();
         browser.wait(EC.visibilityOf(alertDialog));
-        expect(isVisible()).toBeTruthy();
+        expect(helpElement.isDisplayed()).toBeTruthy();
 
         element(by.css('button.alert-dialog-button')).click();
         browser.wait(EC.invisibilityOf(alertDialog));
-        expect(isVisible()).not.toBeTruthy();
+        expect(helpElement.isDisplayed()).not.toBeTruthy();
       });
     });
   });
