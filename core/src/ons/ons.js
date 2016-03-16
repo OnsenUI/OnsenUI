@@ -57,6 +57,8 @@ ons._config = {
   animationsDisabled: false
 };
 
+ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1] || '');
+
 waitDeviceReady();
 
 /**
