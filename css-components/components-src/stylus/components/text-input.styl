@@ -49,16 +49,19 @@ input()
 input--disabled()
   disabled()
 
+transparent()
+  border none
+  background-color transparent
+
 text-input()
   input()
+  transparent()
   letter-spacing var-letter-spacing
-  border var-input-border
-  border-radius var-border-radius
-  background-color var-input-bg-color
   box-shadow var-box-shadow--text-input
   color var-input-text-color
-  padding 4px 8px 0 8px
+  padding 0
   margin 0
+  width 100%
   font-size var-text-input-font-size
   height var-text-input-height
   font-weight var-font-weight
@@ -66,12 +69,14 @@ text-input()
 
 text-input--disabled()
   input--disabled()
+  transparent()
 
 webkit-input-placeholder()
+  transparent()
   color var-input-placeholder-color
 
 text-input--invalid()
-  border 1px solid var-input-invalid-border-color
+  transparent()
   color var-input-invalid-text-color
 
 .text-input
@@ -109,51 +114,6 @@ text-input--invalid()
 
 .text-input:invalid
   text-input--invalid()
-
-/*! topdoc
-  name: Transparent Text Input
-  class: text-input--transparent
-  markup:
-    <input type="text" class="text-input--transparent" placeholder="text" value="">
-    <br>
-    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
-*/
-
-.text-input--transparent
-  text-input()
-  border none
-  background-color transparent
-  padding-left 0
-  padding-right 0
-
-.text-input--transparent:disabled
-  text-input--disabled()
-  border none
-  background-color transparent
-
-
-text-input-transparent-disabled()
-  webkit-input-placeholder()
-  border none
-  background-color transparent
-
-.text-input--transparent:disabled::-webkit-input-placeholder
-  text-input-transparent-disabled()
-
-.text-input--transparent:disabled::-moz-placeholder
-  text-input-transparent-disabled()
-
-.text-input--transparent:disabled::-ms-input-placeholder
-  text-input-transparent-disabled()
-
-.text-input--transparent:disabled:-ms-input-placeholder
-  text-input-transparent-disabled()
-
-
-.text-input--transparent:invalid
-  text-input--invalid()
-  border none
-  background-color transparent
 
 /*! topdoc
   name: Underbar Text Input

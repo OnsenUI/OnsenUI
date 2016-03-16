@@ -129,7 +129,7 @@ class InternalDelegate extends LazyRepeatDelegate {
  * </script>
  *
  * <ons-list>
- *   <ons-lazy-repeat>
+ *   <ons-lazy-repeat id="list">
  *     <ons-list-item></ons-list-item>
  *   </ons-lazy-repeat>
  * </ons-list>

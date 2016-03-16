@@ -24,11 +24,19 @@ const util = {};
  * @return {Function}
  */
 util.prepareQuery = (query) => {
-  return query instanceof Function
-    ? query
-    : query.substr(0, 1) === '.' ?
-      (node) => node.classList.contains(query.substr(1)) :
-      (node) => node.nodeName.toLowerCase() === query;
+  return query instanceof Function ? query : (element) => util.match(element, query);
+};
+
+/**
+ * @param {Element} element
+ * @param {String/Function} query dot class name or node name.
+ * @return {Boolean}
+ */
+util.match = (element, query) => {
+  if (query[0] === '.') {
+    return element.classList.contains(query.slice(1));
+  }
+  return element.nodeName.toLowerCase() === query;
 };
 
 /**
@@ -73,13 +81,11 @@ util.findChildRecursively = (element, query) => {
 
 /**
  * @param {Element} element
- * @param {String} query dot class name or node name.
+ * @param {String/Function} query dot class name or node name or matcher function.
  * @return {HTMLElement/null}
  */
 util.findParent = (element, query) => {
-  const match = query.substr(0, 1) === '.' ?
-    (node) => node.classList.contains(query.substr(1)) :
-    (node) => node.nodeName.toLowerCase() === query;
+  const match = util.prepareQuery(query);
 
   let parent = element.parentNode;
   for (;;) {
@@ -134,6 +140,25 @@ util.propagateAction = (element, action) => {
       util.propagateAction(child, action);
     }
   }
+};
+
+
+/**
+ * @param {String} selector - tag and class only
+ * @param {Object} style
+ * @param {Element}
+ */
+util.create = (selector = '', style = {}) => {
+  let classList = selector.split('.'),
+    element = document.createElement(classList.shift() || 'div');
+
+  if (classList.length) {
+    element.className = classList.join(' ');
+  }
+
+  util.extend(element.style, style);
+
+  return element;
 };
 
 /**
@@ -191,11 +216,7 @@ util.extend = (dst, ...args) => {
  * @return {Array}
  */
 util.arrayFrom = (arrayLike) => {
-  const result = [];
-  for (let i = 0; i < arrayLike.length; i++) {
-    result.push(arrayLike[i]);
-  }
-  return result;
+  return Array.prototype.slice.apply(arrayLike);
 };
 
 /**
@@ -213,6 +234,19 @@ util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
     return failSafe;
   }
   return failSafe;
+};
+
+/**
+ * @param {String} path - path such as 'myApp.controllers.data.loadData'
+ * @return {Any} - whatever is located at that path
+ */
+util.findFromPath = (path) => {
+  path = path.split('.');
+  var el = window, key;
+  while (key = path.shift()) { // eslint-disable-line no-cond-assign
+    el = el[key];
+  }
+  return el;
 };
 
 /**

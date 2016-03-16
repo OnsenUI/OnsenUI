@@ -34,14 +34,14 @@ platforms.android = element => {
     'large--cta': 'large',
     'noborder': '',
     'chevron': '',
-    'tappable': ''
+    'tappable': '',
+    'underbar': ''
   };
 
   if (!/ons-fab|ons-speed-dial|ons-progress/.test(element.tagName.toLowerCase()) &&
     !/material/.test(element.getAttribute('modifier'))) {
 
     const oldModifier = element.getAttribute('modifier') || '';
-    element.setAttribute('modifier', '');
 
     let newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
     newModifier.unshift('material');

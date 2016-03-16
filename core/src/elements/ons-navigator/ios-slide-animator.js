@@ -34,7 +34,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black; opacity: 0;"></div>
+        background-color: black; opacity: 0; z-index: 2"></div>
     `);
   }
 
@@ -131,9 +131,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -155,24 +152,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .restoreStyle(),
-
-        animit(enterPageDecomposition.toolbar)
-          .saveStyle()
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay + 0.3)
-          .restoreStyle({
-            duration: 0.1,
-            transition:
-              'background-color 0.1s linear, ' +
-              'border-color 0.1s linear'
-          }),
 
         animit(enterPageDecomposition.pageLabels)
           .saveStyle()
@@ -226,8 +205,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           }),
@@ -270,9 +247,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     } else {
 
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -313,8 +287,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .restoreStyle()
           .queue(function(done) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
             callback();
             done();
           })
@@ -355,17 +327,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       })
       .restoreStyle()
       .queue((done) => {
-        this.backgroundMask.remove();
         done();
       });
 
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
     if (shouldAnimateToolbar) {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -461,11 +428,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
           .wait(0)
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
+            this.backgroundMask.remove();
             done();
             finish();
-          }),
+          }.bind(this)),
 
         animit(leavePageDecomposition.other)
           .queue({
@@ -514,10 +480,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           })
       );
     } else {
-
-      enterPage.element.style.zIndex = 'auto';
-      leavePage.element.style.zIndex = 'auto';
-
       animit.runAll(
 
         maskClear,
@@ -558,11 +520,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .queue(function(finish) {
-            enterPage.element.style.zIndex = '';
-            leavePage.element.style.zIndex = '';
+            this.backgroundMask.remove();
             done();
             finish();
-          })
+          }.bind(this))
       );
     }
   }

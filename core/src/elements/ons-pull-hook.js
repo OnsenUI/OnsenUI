@@ -35,7 +35,19 @@ const STATE_ACTION = 'action';
  *   [en]How to use Pull Hook[/en]
  *   [ja]プルフックを使う[/ja]
  * @example
- *   TODO
+ * <ons-page>
+ *   <ons-pull-hook>
+ *     Release to refresh
+ *   </ons-pull-hook>
+ * </ons-page>
+ *
+ * <script>
+ *   var loadStuff = function(done) {
+ *     setTimeout(done, 1000);
+ *   };
+ *
+ *   document.querySelector('ons-pull-hook').setActionCallback(loadStuff);
+ * </script>
  */
 class PullHookElement extends BaseElement {
 

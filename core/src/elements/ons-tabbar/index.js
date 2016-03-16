@@ -271,6 +271,10 @@ class TabbarElement extends BaseElement {
     var page = util.findParent(this, 'ons-page');
     if (page) {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
+
+      if (page.firstChild.tagName.toLowerCase() === 'ons-toolbar') {
+        util.addModifier(page.firstChild, 'noshadow');
+      }
     }
 
     internal.shouldFillStatusBar(this)
@@ -391,7 +395,6 @@ class TabbarElement extends BaseElement {
    * @param {String} [options.animation]
    * @param {Function} [options.callback]
    * @param {Object} [options.animationOptions]
-   * @param {Boolean} options._removeElement
    * @param {Number} options.selectedTabIndex
    * @param {Number} options.previousTabIndex
    * @return {Promise} Resolves to the new page element.
@@ -409,13 +412,7 @@ class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          if (options._removeElement) {
-            rewritables.unlink(this, oldPageElement, pageElement => {
-              pageElement._destroy();
-            });
-          } else {
-            oldPageElement.style.display = 'none';
-          }
+          oldPageElement.style.display = 'none';
         }
 
         element.style.display = 'block';
@@ -465,6 +462,10 @@ class TabbarElement extends BaseElement {
       options.animationOptions || {},
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
+
+    if (!options.animation && this.hasAttribute('animation')) {
+      options.animation = this.getAttribute('animation');
+    }
 
     var previousTab = this._getActiveTabElement(),
       selectedTab = this._getTabElement(index),
@@ -537,8 +538,7 @@ class TabbarElement extends BaseElement {
           }
         },
         previousTabIndex: previousTabIndex,
-        selectedTabIndex: selectedTabIndex,
-        _removeElement: removeElement
+        selectedTabIndex: selectedTabIndex
       };
 
       if (options.animation) {

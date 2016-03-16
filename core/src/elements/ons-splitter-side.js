@@ -263,7 +263,7 @@ class CollapseMode extends BaseMode {
       const distance = this._element._isLeftSide()
         ? event.gesture.center.clientX
         : window.innerWidth - event.gesture.center.clientX;
-      if (distance > this._element._swipeTargetWidth) {
+      if (!this.isOpen() && distance > this._element._swipeTargetWidth) {
         this._ignoreDrag = true;
       }
     }
@@ -481,6 +481,12 @@ class CollapseMode extends BaseMode {
  *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
+ * @seealso ons-splitter
+ *  [en]ons-splitter component[/en]
+ *  [ja]ons-splitterコンポーネント[/ja]
+ * @seealso ons-splitter-content
+ *  [en]ons-splitter-content component[/en]
+ *  [ja]ons-splitter-contentコンポーネント[/ja]
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>
@@ -693,10 +699,6 @@ class SplitterSideElement extends BaseElement {
     this._page = null;
     this._isAttached = false;
 
-    if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'left');
-    }
-
     this._collapseStrategy = new CollapseDetection();
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
@@ -716,7 +718,7 @@ class SplitterSideElement extends BaseElement {
 
     this._updateForAnimationAttribute();
     this._updateForWidthAttribute();
-    this._updateForSideAttribute();
+    this.hasAttribute('side') ? this._updateForSideAttribute() : this.setAttribute('side', 'left');
     this._updateForCollapseAttribute();
     this._updateForSwipeableAttribute();
     this._updateForSwipeTargetWidthAttribute();

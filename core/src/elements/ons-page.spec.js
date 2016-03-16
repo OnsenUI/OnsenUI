@@ -94,14 +94,6 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#_hasToolbarElement()', () => {
-    it('returns if a toolbar exists', () => {
-      expect(element._hasToolbarElement()).to.be.false;
-      element._registerToolbar(new OnsToolbarElement());
-      expect(element._hasToolbarElement()).to.be.true;
-    });
-  });
-
   describe('#_canAnimateToolbar()', () => {
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;
@@ -175,6 +167,30 @@ describe('OnsPageElement', () => {
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
     });
+
+    it('sets _onInfiniteScroll', () => {
+      let i = 0;
+      window._testApp = {
+        a: () => i += 42
+      };
+      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      element._onInfiniteScroll();
+      expect(i).to.equal(42);
+      delete window._testApp;
+      expect(element._onInfiniteScroll).to.be.ok;
+      element._onInfiniteScroll();
+      expect(i).to.equal(84);
+    });
+
+    it('infiniteScroll doesn\'t throw error until it\'s called', () => {
+      let app = {a: () => 42};
+      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      window._testApp = app;
+      expect(() => element._onInfiniteScroll()).to.not.throw(Error);
+      element.attributeChangedCallback('oninfinitescroll', '', 'doge');
+      expect(() => element._onInfiniteScroll()).to.throw(Error);
+      delete window._testApp;
+    });
   });
 
   describe('#_show()', () => {
@@ -206,16 +222,6 @@ describe('OnsPageElement', () => {
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
-
-    it('uses style attribute', () => {
-      while (element.lastChild) {
-        element.removeChild(element.lastChild);
-      }
-      element.setAttribute('style', 'hoge');
-      element._compile();
-      expect(element.hasAttribute('style')).to.be.false;
-      expect(element.firstChild.hasAttribute('style')).to.be.true;
-    });
   });
 
   describe('autoStyling', () => {
@@ -224,6 +230,57 @@ describe('OnsPageElement', () => {
       let e = document.createElement('ons-page');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
+    });
+  });
+
+  describe('infiniteScroll', () => {
+    var content, page, i, maxScroll;
+    beforeEach(() => {
+      i = 0;
+      page = element;
+      content = page._getContentElement();
+      document.body.appendChild(page);
+      content.innerHTML = '<div style="height: ' + (2 * content.clientHeight) + 'px"></div>';
+      maxScroll = content.scrollHeight - content.clientHeight;
+    });
+
+    afterEach(() => {
+      document.body.removeChild(page);
+    });
+
+    it('throws error on invalid input', () => {
+      expect(() => element.onInfiniteScroll = 5).to.throw(Error);
+      expect(() => element.onInfiniteScroll = []).to.throw(Error);
+      expect(() => element.onInfiniteScroll = {}).to.throw(Error);
+      expect(() => element.onInfiniteScroll = () => 42).to.not.throw(Error);
+    });
+
+    it('calls onInfiniteScroll', (done) => {
+      element.onInfiniteScroll = done => {
+        i++;
+        done();
+      };
+      content.scrollTop = 0.95 * maxScroll;
+      setTimeout(() => {
+        expect(i).to.equal(1);
+        done();
+      }, 50);
+    });
+
+    it('waits for onInfiniteScroll to finish', (done) => {
+      element.onInfiniteScroll = (done) => {
+        i++;
+        setTimeout(done, 200);
+      };
+      content.scrollTop = 0.95 * maxScroll;
+      setTimeout(element._boundOnScroll, 50);
+      setTimeout(element._boundOnScroll, 150);
+      setTimeout(element._boundOnScroll, 250);
+
+      setTimeout(() => {
+        expect(i).to.equal(2);
+        done();
+      }, 300);
     });
   });
 });

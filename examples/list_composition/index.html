@@ -22,69 +22,57 @@
     <ons-list>
       <ons-list-header>Checkbox</ons-list-header>
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
-          <label class="checkbox checkbox--noborder">
-            <input type="checkbox" id="checkbox1" class="checkbox__input" checked>
-            <div class="checkbox__checkmark checkbox--noborder"></div>
-          </label>
+        <div class="left">
+          <ons-input type="checkbox" input-id="checkbox1"></ons-input>
         </div>
 
-        <label for="checkbox1" class="list__item__center">
+        <label for="checkbox1" class="center">
           Checkbox
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
-          <label class="checkbox checkbox--noborder">
-            <input type="checkbox" id="checkbox2" class="checkbox__input">
-            <div class="checkbox__checkmark checkbox--noborder"></div>
-          </label>
+        <div class="left">
+          <ons-input type="checkbox" input-id="checkbox2"></ons-input>
         </div>
 
-        <label for="checkbox2" class="list__item__center">
+        <label for="checkbox2" class="center">
           Checkbox
         </label>
       </ons-list-item>
 
       <ons-list-header>Switch</ons-list-header>
       <ons-list-item>
-        <div class="list__item__center">
+        <label for="switch1" class="center">
           Label
-        </div>
-        <div class="list__item__right">
-          <ons-switch></ons-switch>
+        </label>
+        <div class="right">
+          <ons-switch input-id="switch1"></ons-switch>
         </div>
       </ons-list-item>
 
       <ons-list-header>Radio Button</ons-list-header>
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
-          <label class="radio-button radio-button--noborder">
-            <input type="radio" id="radio1" class="radio-button__input" name="radio" checked>
-            <div class="radio-button__checkmark radio-button--noborder"></div>
-          </label>
+        <div class="left">
+          <ons-input type="radio" input-id="radio1" name="radio" checked></ons-input>
         </div>
 
-        <label for="radio1" class="list__item__center">
+        <label for="radio1" class="center">
           Radio button
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
-        <div class="list__item__left">
-          <label class="radio-button radio-button--noborder">
-            <input type="radio" id="radio2" class="radio-button__input" name="radio">
-            <div class="radio-button__checkmark radio-button--noborder"></div>
-          </label>
+        <div class="left">
+          <ons-input type="radio" input-id="radio2" name="radio"></ons-input>
         </div>
 
-        <label for="radio2" class="list__item__center">
+        <label for="radio2" class="center">
           Radio button
         </label>
       </ons-list-item>
 
       <ons-list-header>Text Input</ons-list-header>
       <ons-list-item>
-        <input type="text" class="text-input text-input--transparent" placeholder="Name">
+        <ons-input type="text" placeholder="Name" float></ons-input>
       </ons-list-item>
 
       <ons-list-header>Textarea</ons-list-header>

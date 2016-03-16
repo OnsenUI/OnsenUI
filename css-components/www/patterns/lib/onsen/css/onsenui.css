@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.5 - 2016-01-25 */
+/*! onsenui - v2.0.0-beta.6 - 2016-02-29 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -39,6 +39,10 @@ ons-tabbar {
 
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
+}
+
+ons-fab {
+  z-index: 3;
 }
 
 * {
@@ -257,13 +261,9 @@ ons-carousel[disabled] {
 
 ons-row {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -moz-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
 }
@@ -271,28 +271,25 @@ ons-row {
 ons-row[vertical-align="top"], ons-row[align="top"] {
   -webkit-box-align: start;
   box-align: start;
-  -ms-flex-align: start;
-  -webkit-align-items: flex-start;
   -moz-align-items: flex-start;
-  align-items: flex-start;
+  -ms-grid-row-align: flex-start;
+      align-items: flex-start;
 }
 
 ons-row[vertical-align="bottom"], ons-row[align="bottom"] {
   -webkit-box-align: end;
   box-align: end;
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
   -moz-align-items: flex-end;
-  align-items: flex-end;
+  -ms-grid-row-align: flex-end;
+      align-items: flex-end;
 }
 
 ons-row[vertical-align="center"], ons-row[align="center"] {
   -webkit-box-align: center;
   box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
   -moz-align-items: center;
-  align-items: center;
+  -ms-grid-row-align: center;
+      align-items: center;
   text-align: inherit;
 }
 
@@ -302,9 +299,7 @@ ons-row + ons-row {
 
 ons-col {
   -webkit-box-flex: 1;
-  -webkit-flex: 1;
   -moz-flex: 1;
-  -ms-flex: 1;
   flex: 1;
   display: block;
   width: 100%;
@@ -312,14 +307,10 @@ ons-col {
 }
 
 ons-col[vertical-align="top"], ons-col[align="top"] {
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
   align-self: flex-start;
 }
 
 ons-col[vertical-align="bottom"], ons-col[align="bottom"] {
-  -webkit-align-self: flex-end;
-  -ms-flex-item-align: end;
   align-self: flex-end; }
 
 ons-col[vertical-align="center"], ons-col[align="center"] {
@@ -387,32 +378,27 @@ ons-icon[spin="true"] {
 
 .ons-icon[rotate="90"] {
   -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-      transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .ons-icon[rotate="180"] {
   -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-      transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .ons-icon[rotate="270"] {
   -webkit-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-      transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 ons-icon[flip="horizontal"] {
   -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-      transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 ons-icon[flip="vertical"] {
   -webkit-transform: scale(1, -1);
-  -ms-transform: scale(1, -1);
-      transform: scale(1, -1);
+  transform: scale(1, -1);
 }
 
 ons-icon[fixed-width="true"] {
@@ -447,11 +433,12 @@ ons-input {
   position: relative;
 }
 
-ons-input > input {
+ons-input .text-input__container {
   width: 100%;
+  display: inline-block;
 }
 
-ons-input > .text-input--material__label {
+ons-input .text-input--material__label {
   position: absolute;
   left: 0px;
   top: 2px;
@@ -461,27 +448,41 @@ ons-input > .text-input--material__label {
   pointer-events: none;
 }
 
-ons-input > .text-input__label:not(.text-input--material__label) {
+ons-input .text-input__label:not(.text-input--material__label) {
   display: none;
 }
 
-ons-input > .text-input__label--active {
+ons-input .text-input__label--active {
   transform: translate3d(0, -75%, 0) scale(0.75);
   -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
-  -ms-transform-origin: left top;
-      transform-origin: left top;
+  transform-origin: left top;
   -webkit-transform-origin: left top;
+  -webkit-transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
+  transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
   transition: transform 0.1s ease-in, color 0.1s ease-in;
-  -webkit-transition: -webkit-transform 0.1s ease-in, color 0.1s ease-in;
+  transition: transform 0.1s ease-in, color 0.1s ease-in, -webkit-transform 0.1s ease-in;
+  -webkit-transition: transform 0.1s ease-in, color 0.1s ease-in;
 }
 
-ons-input:not([float]) > .text-input__label--active {
+ons-input:not([float]) .text-input__label--active {
   display: none;
 }
 
 ons-input[disabled] {
   opacity: 0.5;
   pointer-events: none;
+}
+
+ons-input input.text-input--material::-webkit-input-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material::-moz-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material:-ms-input-placeholder {
+  color: transparent;
 }
 
 /*
@@ -532,166 +533,109 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
  */
-
 .ripple {
   display: block;
   position: absolute;
-  border-radius: inherit;
   overflow: hidden;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-}
-  
-.ripple__wave {
-  display: block;
-  position: absolute;
-  background: rgba(255,255,255,.3);
-  border-radius: 100%;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-      transform: scale(0);
   pointer-events: none;
 }
 
-.ripple__wave--animate {
-  -webkit-animation: ripple 0.3s linear;
-  animation: ripple 0.3s linear;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-}
-  
-.ripple__wave--animate-center {
-  -webkit-animation: rippleCenter 0.1s linear;
-  animation: rippleCenter 0.1s linear;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-}
-  
-.ripple__wave--done {
-  -webkit-animation: rippleOut 0.2s linear;
-  animation: rippleOut 0.2s linear;
-}
-  
-.ripple__wave--done-center {
-  -webkit-animation: rippleOutCenter 0.2s linear;
-  animation: rippleOutCenter 0.2s linear;
+ons-list-item .ripple__wave, ons-list-item .ripple__background,
+.button--material--flat .ripple__wave, .button--material--flat .ripple__background{
+  background: rgba(189, 189, 189, 0.3);
 }
 
-@-webkit-keyframes rippleOut {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
+.ripple__background {
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
-@keyframes rippleOut { 
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
+.ripple__wave {
+  background: rgba(255, 255, 255, 0.2);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 
-@-webkit-keyframes ripple {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
+.scrollbar-content {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding:10px;
 }
 
-@keyframes ripple { 
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(2.5);
-    transform: scale(2.5);
-  }
+.scrollbar-touch{
+  background:transparent;
+  position:absolute;
+  width:100%;
+  height:100%;
+  padding:10px;
+  right:-10px;
+  top: -10px;
+}
+
+.scrollbar-container {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  top: 5px;
+  width: 0px;
+  pointer-events: none;
+  /*width: 30px;*/
+  /*background:rgba(0,0,0,0.05);*/
+}
+
+.scrollbar-container[draggable] {
+  pointer-events: auto;
+}
+
+.scrollbar {
+  position: absolute;
+  right: 0;
+  width: 5px;
+  min-height: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.scrollbar-container[hidden] {
+  display: none;
+}
+
+.scrollbar-container[autohide] .scrollbar{
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scrollbar-autohide-visible[autohide] .scrollbar,
+.scrollbar-dragging[autohide] .scrollbar{
+  opacity: 1;
+}
+
+.scrollbar-dragging .scrollbar{
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 2px 1px darkgray;
 }
 
 
-@-webkit-keyframes rippleCenter {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@keyframes rippleCenter { 
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@-webkit-keyframes rippleOutCenter {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
-
-@keyframes rippleOutCenter { 
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    top: 0;
-    left: 0;
-  }
-}
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
