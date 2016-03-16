@@ -32,8 +32,8 @@ var-popover-margin-material = 4px
   markup:
     <div class="popover">
       <div class="popover-mask"></div>
-      <div class="popover popover--up" style="bottom:20px;left:50px;">
-        <div class="popover__bottom-arrow"></div>
+      <div class="popover popover--bottom" style="bottom:20px;left:50px;">
+        <div class="popover__arrow"></div>
         <div class="popover__content">
           <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
         </div>
@@ -88,7 +88,7 @@ var-popover-margin-material = 4px
 .popover__content .page__content
   position static
 
-popover-arrow()
+.popover__arrow
   // content ''
   position absolute
   width var-popover-arrow-size
@@ -99,45 +99,29 @@ popover-arrow()
   border-radius 0 0 0 var-popover-arrow-radius
   margin (-(var-popover-arrow-size / 2))px
 
-.popover__bottom-arrow
-  popover-arrow()
+.popover--bottom .popover__arrow
   transform rotate(-45deg)
   bottom 1px
-  // left 50%
-  // margin-left -(var-popover-arrow-size / 2)px
-  // margin-bottom -(var-popover-arrow-size / 2)px
 
-.popover__top-arrow
-  popover-arrow()
+.popover--top .popover__arrow
   transform rotate(135deg)
   top 1px
-  // left 50%
-  // margin-left -(var-popover-arrow-size / 2)px
-  // margin-top -(var-popover-arrow-size / 2)px
 
-.popover__left-arrow
-  popover-arrow()
+.popover--left .popover__arrow
   transform rotate(45deg)
-  // top 50%
   left 1px
-  // margin-left -(var-popover-arrow-size / 2)px
-  // margin-top -(var-popover-arrow-size / 2)px
 
-.popover__right-arrow
-  popover-arrow()
+.popover--right .popover__arrow
   transform rotate(225deg)
-  // top 50%
   right 1px
-  // margin-right -(var-popover-arrow-size / 2)px
-  // margin-top -(var-popover-arrow-size / 2)px
 
 /*! topdoc
   name: Popover(down)
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--down" style="top:20px;left:50px;">
-      <div class="popover__top-arrow"></div>
+    <div class="popover popover--top" style="top:20px;left:50px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -149,8 +133,8 @@ popover-arrow()
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--left" style="top:20px;right:20px;">
-      <div class="popover__right-arrow"></div>
+    <div class="popover popover--right" style="top:20px;right:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -162,8 +146,8 @@ popover-arrow()
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--right" style="top:20px;left:20px;">
-      <div class="popover__left-arrow"></div>
+    <div class="popover popover--left" style="top:20px;left:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
