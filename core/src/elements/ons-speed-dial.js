@@ -86,7 +86,6 @@ class SpeedDialElement extends BaseElement {
    */
 
   createdCallback() {
-    console.log('attri : ' +  this.hasAttribute('_compiled'));
     if (!this.hasAttribute('_compiled')) {
       this._compile();
       this._updateClasses();
@@ -98,7 +97,6 @@ class SpeedDialElement extends BaseElement {
   }
 
   _updateClasses() {
-    console.log('update classes');
     this.classList.add('speed__dial');
 
     if (this.hasAttribute('direction')) {
