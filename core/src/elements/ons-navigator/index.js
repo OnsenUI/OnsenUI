@@ -211,7 +211,6 @@ class NavigatorElement extends BaseElement {
    */
   createdCallback() {
     this._doorLock = new DoorLock();
-    this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._isPushing = this._isPopping = false;
     this.options = {
@@ -248,7 +247,7 @@ class NavigatorElement extends BaseElement {
    * @return {Boolean}
    */
   canPopPage() {
-    return this._pages.length > 1;
+    return this.pages.length > 1;
   }
 
   /**
@@ -300,13 +299,13 @@ class NavigatorElement extends BaseElement {
 
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
-    if (this._pages.length === 1) {
+    if (this.pages.length === 1) {
       options._forceHideBackButton = true;
     }
 
     options.onTransitionEnd = () => {
-      if (this._pages.length > 1) {
-        this._pages[this._pages.length - 2].destroy();
+      if (this.pages.length > 1) {
+        this.pages[this.pages.length - 2].destroy();
       }
       onTransitionEnd();
     };
@@ -425,7 +424,7 @@ class NavigatorElement extends BaseElement {
 
     index = this._normalizeIndex(index);
 
-    if (index >= this._pages.length) {
+    if (index >= this.pages.length) {
       return this.pushPage.apply(this, [].slice.call(arguments, 1));
     }
 
@@ -439,14 +438,14 @@ class NavigatorElement extends BaseElement {
         return new Promise(resolve => {
           rewritables.link(this, element, options, element => {
             element.style.display = 'none';
-            this.insertBefore(element, this._pages[index].element);
-            this._pages.splice(index, 0, pageObject);
+            this.insertBefore(element, this.pages[index].element);
+            this.pages.splice(index, 0, pageObject);
             this.getCurrentPage().updateBackButton();
 
             setTimeout(() => {
               unlock();
               element = null;
-              resolve(this._pages[index]);
+              resolve(this.pages[index]);
             }, 1000 / 60);
           });
         });
@@ -466,7 +465,7 @@ class NavigatorElement extends BaseElement {
 
   _normalizeIndex(index) {
     if (index < 0) {
-      index = Math.abs(this._pages.length + index) % this._pages.length;
+      index = Math.abs(this.pages.length + index) % this.pages.length;
     }
     return index;
   }
@@ -491,27 +490,27 @@ class NavigatorElement extends BaseElement {
    * @return {Object}
    */
   getCurrentPage() {
-    if (this._pages.length <= 0) {
+    if (this.pages.length <= 0) {
       throw new Error('Invalid state');
     }
-    return this._pages[this._pages.length - 1];
+    return this.pages[this.pages.length - 1];
   }
 
   _show() {
-    if (this._pages[this._pages.length - 1]) {
-      this._pages[this._pages.length - 1].element._show();
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1].element._show();
     }
   }
 
   _hide() {
-    if (this._pages[this._pages.length - 1]) {
-      this._pages[this._pages.length - 1].element._hide();
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1].element._hide();
     }
   }
 
   _destroy() {
-    for (let i = this._pages.length - 1; i >= 0; i--) {
-      this._pages[i].destroy();
+    for (let i = this.pages.length - 1; i >= 0; i--) {
+      this.pages[i].destroy();
     }
     this.remove();
   }
@@ -521,7 +520,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _onDeviceBackButton(event) {
-    if (this._pages.length > 1) {
+    if (this.pages.length > 1) {
       this.popPage();
     } else {
       event.callParentHandler();
@@ -584,10 +583,10 @@ class NavigatorElement extends BaseElement {
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
     options.onTransitionEnd = () => {
-      while (this._pages.length > 1) {
-        this._pages.shift().destroy();
+      while (this.pages.length > 1) {
+        this.pages.shift().destroy();
       }
-      this._pages[0].updateBackButton();
+      this.pages[0].updateBackButton();
       onTransitionEnd();
     };
 
@@ -610,7 +609,7 @@ class NavigatorElement extends BaseElement {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
-      if (this._pages.length === 0) {
+      if (this.pages.length === 0) {
         if (this.hasAttribute('page')) {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
         }
@@ -712,6 +711,9 @@ class NavigatorElement extends BaseElement {
       .then(() => {
         return new Promise((resolve) => {
           if (this.pages.length > 1) {
+            // set the properties of the page TODO
+            this.pages[l-1].name = options.page;
+
             const l = this.pages.length;
             animator.push(this.pages[l - 1], this.pages[l - 2], resolve);
           }
@@ -773,10 +775,10 @@ class NavigatorElement extends BaseElement {
       index = this._lastIndexOfPage(options.page);
     } else if (typeof item === 'number') {
       index = this._normalizeIndex(item);
-      if (item >= this._pages.length) {
+      if (item >= this.pages.length) {
         throw new Error('The provided index does not match an existing page.');
       }
-      options.page = this._pages[index].page;
+      options.page = this.pages[index].page;
     } else {
       throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
@@ -787,9 +789,9 @@ class NavigatorElement extends BaseElement {
       return new Promise(resolve => {
         this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
       });
-    } else if (index === this._pages.length - 1) {
+    } else if (index === this.pages.length - 1) {
       // Page is already the top
-      return Promise.resolve(this._pages[index]);
+      return Promise.resolve(this.pages[index]);
     } else {
       // Bring to top
       const tryBringPageTop = () => {
@@ -798,7 +800,7 @@ class NavigatorElement extends BaseElement {
           unlock();
         };
 
-        let pageObject = this._pages.splice(index, 1)[0];
+        let pageObject = this.pages.splice(index, 1)[0];
         pageObject.element.style.display = 'block';
         pageObject.element.setAttribute('_skipinit', '');
 
@@ -823,8 +825,8 @@ class NavigatorElement extends BaseElement {
    */
   _lastIndexOfPage(page) {
     let index;
-    for (index = this._pages.length - 1; index >= 0; index--) {
-      if (this._pages[index].page === page) {
+    for (index = this.pages.length - 1; index >= 0; index--) {
+      if (this.pages[index].page === page) {
         break;
       }
     }
@@ -839,7 +841,7 @@ class NavigatorElement extends BaseElement {
 
     util.triggerElementEvent(this, 'prepush', {
       navigator: this,
-      currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+      currentPage: this.pages.length > 0 ? this.getCurrentPage() : undefined,
       cancel: function() {
         isCanceled = true;
       }
@@ -860,7 +862,7 @@ class NavigatorElement extends BaseElement {
       // TODO: currentPage will be deprecated
       currentPage: leavePage,
       leavePage: leavePage,
-      enterPage: this._pages[this._pages.length - 2],
+      enterPage: this.pages[this.pages.length - 2],
       cancel: function() {
         isCanceled = true;
       }

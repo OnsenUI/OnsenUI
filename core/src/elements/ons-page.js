@@ -170,6 +170,14 @@ class PageElement extends BaseElement {
     this.attributeChangedCallback('oninfinitescroll', null, infiniteScroll);
   }
 
+  set name(str) {
+    this.setAttribute('name', str);
+  }
+
+  get name() {
+   return this.getAttribute('name');
+  }
+
   /**
    * @return {boolean}
    */
