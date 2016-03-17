@@ -243,6 +243,22 @@ class NavigatorElement extends BaseElement {
     }
   }
 
+  set _isPushing(value) {
+    this.setAttribute('_isPushing', value);
+  }
+
+  get _isPushing() {
+   return this.getAttribute('_isPushing');
+  }
+
+  set _isPopping(value) {
+    this.setAttribute('_isPopping', value);
+  }
+
+  get _isPopping() {
+   return this.getAttribute('_isPoppping');
+  }
+
   /**
    * @return {Boolean}
    */
@@ -696,6 +712,14 @@ class NavigatorElement extends BaseElement {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
+    if (options.cancelIfRunning && this._isPushing) {
+       return Promise.reject('pushPage is already running.');
+    }
+
+    if (this._emitPrePushEvent()) {
+      return Promise.reject('Canceled in prepush event.');
+    }
+
     options = util.extend({}, this.options || {}, options);
 
     options.animationOptions = util.extend(
@@ -710,12 +734,41 @@ class NavigatorElement extends BaseElement {
     return update(pages, this)
       .then(() => {
         return new Promise((resolve) => {
-          if (this.pages.length > 1) {
-            // set the properties of the page TODO
-            this.pages[l-1].name = options.page;
+          const pageLength = this.pages.length;
+          this.pages[pageLength -1].name = options.page;
+          const leavePage = this.pages[pageLength - 2];
+          const enterPage = this.pages[pageLength - 1];
 
-            const l = this.pages.length;
-            animator.push(this.pages[l - 1], this.pages[l - 2], resolve);
+          var done = () => {
+
+            if (leavePage) {
+              leavePage.style.display = 'none';
+            }
+
+            this._isPushing = false;
+
+            const eventDetail = {
+              leavePage: leavePage,
+              enterPage: enterPage,
+              navigator: this
+            };
+
+            util.triggerElementEvent(this, 'postpush', eventDetail);
+
+            if (typeof options.onTransitionEnd === 'function') {
+              options.onTransitionEnd();
+            }
+
+            resolve(this.pages[this.pages.length - 1]);
+          };
+
+          if (pageLength > 1) {
+            leavePage._hide();
+            enterPage._show();
+            animator.push(enterPage, leavePage, done);
+          } else {
+            enterPage._show();
+            done();
           }
         });
       });
