@@ -525,9 +525,11 @@ class NavigatorElement extends BaseElement {
   }
 
   _destroy() {
+    // these are children anymore
     for (let i = this.pages.length - 1; i >= 0; i--) {
-      this.pages[i].destroy();
+      this.pages[i]._destroy();
     }
+
     this.remove();
   }
 
@@ -681,6 +683,7 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
+    console.log('pushPage');
     if (typeof page === 'object' && page !== null) {
       options = page;
     } else {
@@ -700,14 +703,17 @@ class NavigatorElement extends BaseElement {
     };
 
     if (options.pageHTML) {
+      console.log('a');
       return run(options.pageHTML);
     }
     else {
+      console.log('b');
       return internal.getPageHTMLAsync(page).then(run);
     }
   }
 
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
+    console.log('_pushPage');
     const tryPushPage = () => {
 
       const unlock = this._doorLock.lock();
@@ -822,6 +828,7 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     if (options.cancelIfRunning && this._isPushing) {
       return Promise.reject('pushPage is already running.');
     }
@@ -847,9 +854,7 @@ class NavigatorElement extends BaseElement {
 
     if (index < 0) {
       // Fallback pushPage
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
-      });
+      return this._pushPage(options);
     } else if (index === this.pages.length - 1) {
       // Page is already the top
       return Promise.resolve(this.pages[index]);
