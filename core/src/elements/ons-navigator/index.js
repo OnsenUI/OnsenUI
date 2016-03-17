@@ -708,36 +708,41 @@ class NavigatorElement extends BaseElement {
   }
 
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
-    if (typeof options !== 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
+    const tryPushPage = () => {
 
-    if (options.cancelIfRunning && this._isPushing) {
-       return Promise.reject('pushPage is already running.');
-    }
+      const unlock = this._doorLock.lock();
 
-    if (this._emitPrePushEvent()) {
-      return Promise.reject('Canceled in prepush event.');
-    }
+      if (typeof options !== 'object') {
+        throw new Error('options must be an object. You supplied ' + options);
+      }
 
-    options = util.extend({}, this.options || {}, options);
+      if (options.cancelIfRunning && this._isPushing) {
+        return Promise.reject('pushPage is already running.');
+      }
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
+      if (this._emitPrePushEvent()) {
+        return Promise.reject('Canceled in prepush event.');
+      }
 
-    const animator = this._animatorFactory.newAnimator(options);
+      options = util.extend({}, this.options || {}, options);
 
-    pages.push(page);
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
-    return update(pages, this)
+      const animator = this._animatorFactory.newAnimator(options);
+
+      pages.push(page);
+
+      return update(pages, this)
       .then(() => {
         return new Promise((resolve) => {
           const pageLength = this.pages.length;
           this.pages[pageLength -1].name = options.page;
-          const leavePage = this.pages[pageLength - 2];
-          const enterPage = this.pages[pageLength - 1];
+
+          var enterPage  = this.pages[this.pages.length - 1];
+          var leavePage = this.pages[this.pages.length - 2];
 
           var done = () => {
 
@@ -746,6 +751,7 @@ class NavigatorElement extends BaseElement {
             }
 
             this._isPushing = false;
+            unlock();
 
             const eventDetail = {
               leavePage: leavePage,
@@ -759,22 +765,24 @@ class NavigatorElement extends BaseElement {
               options.onTransitionEnd();
             }
 
-            resolve(this.pages[this.pages.length - 1]);
+            resolve(enterPage);
           };
 
           if (pageLength > 1) {
-            leavePage._hide();
-            enterPage._show();
             animator.push(enterPage, leavePage, done);
           } else {
-            enterPage._show();
             done();
           }
         });
       });
+    };
+
+   return new Promise(resolve => {
+     this._doorLock.waitUnlock(() => resolve(this._doorLock.waitUnlock(tryPushPage)));
+   });
   }
 
-  /**
+    /**
    * @method bringPageTop
    * @signature bringPageTop(item, [options])
    * @param {String|Number} item
@@ -876,10 +884,10 @@ class NavigatorElement extends BaseElement {
    * @return {Number} Returns the last index at which the given page
    * is found in the page-stack, or -1 if it is not present.
    */
-  _lastIndexOfPage(page) {
+  _lastIndexOfPage(pageName) {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
-      if (this.pages[index].page === page) {
+      if (this.pages[index].name === pageName) {
         break;
       }
     }
