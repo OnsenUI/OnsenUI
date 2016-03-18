@@ -683,52 +683,52 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
-    console.log('pushPage');
     if (typeof page === 'object' && page !== null) {
       options = page;
     } else {
       options.page = page;
     }
 
-    const run = templateHTML => {
+    const run = (templateHTML) => new Promise((resolve) => {
       const element = this._createPageElement(templateHTML);
       CustomElements.upgrade(element);
-
-      return new Promise((resolve) => {
-        rewritables.link(this, element, options, element => {
-          this.appendChild(element);
-          resolve(this._pushPage(options));
-        });
+      rewritables.link(this, element, options, element => {
+        console.log('link');
+        this.appendChild(element);
+        resolve();
       });
-    };
+    })
+
+    let update;
 
     if (options.pageHTML) {
-      console.log('a');
-      return run(options.pageHTML);
+      // TODO testing
+      update = () => run(options.pageHTML);
+    } else {
+      update = () => internal.getPageHTMLAsync(page).then(run);
     }
-    else {
-      console.log('b');
-      return internal.getPageHTMLAsync(page).then(run);
-    }
+
+    return this._pushPage(options, update);
   }
 
+
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
-    console.log('_pushPage');
+    if (typeof options !== 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+
+    if (options.cancelIfRunning && this._isPushing) {
+      return Promise.reject('pushPage is already running.');
+    }
+
+    if (this._emitPrePushEvent()) {
+      return Promise.reject('Canceled in prepush event.');
+    }
+
+    this._isPushing = true;
+
     const tryPushPage = () => {
-
       const unlock = this._doorLock.lock();
-
-      if (typeof options !== 'object') {
-        throw new Error('options must be an object. You supplied ' + options);
-      }
-
-      if (options.cancelIfRunning && this._isPushing) {
-        return Promise.reject('pushPage is already running.');
-      }
-
-      if (this._emitPrePushEvent()) {
-        return Promise.reject('Canceled in prepush event.');
-      }
 
       options = util.extend({}, this.options || {}, options);
 
@@ -743,6 +743,7 @@ class NavigatorElement extends BaseElement {
 
       return update(pages, this)
       .then(() => {
+        console.log('updated');
         return new Promise((resolve) => {
           const pageLength = this.pages.length;
           this.pages[pageLength -1].name = options.page;
@@ -752,9 +753,9 @@ class NavigatorElement extends BaseElement {
 
           var done = () => {
 
-            if (leavePage) {
-              leavePage.style.display = 'none';
-            }
+            // if (leavePage) {
+            //   leavePage.style.display = 'none';
+            // }
 
             this._isPushing = false;
             unlock();
@@ -783,9 +784,9 @@ class NavigatorElement extends BaseElement {
       });
     };
 
-   return new Promise(resolve => {
-     this._doorLock.waitUnlock(() => resolve(this._doorLock.waitUnlock(tryPushPage)));
-   });
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => resolve(this._doorLock.waitUnlock(tryPushPage)));
+    });
   }
 
     /**
