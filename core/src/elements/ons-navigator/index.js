@@ -514,13 +514,13 @@ class NavigatorElement extends BaseElement {
 
   _show() {
     if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1].element._show();
+      this.pages[this.pages.length - 1]._show();
     }
   }
 
   _hide() {
     if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1].element._hide();
+      this.pages[this.pages.length - 1]._hide();
     }
   }
 
@@ -773,8 +773,11 @@ class NavigatorElement extends BaseElement {
           };
 
           if (pageLength > 1) {
+            leavePage._hide();
+            enterPage._show();
             animator.push(enterPage, leavePage, done);
           } else {
+            enterPage._show();
             done();
           }
       });
