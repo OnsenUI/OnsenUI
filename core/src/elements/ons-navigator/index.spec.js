@@ -15,7 +15,9 @@ describe('OnsNavigatorElement', () => {
     nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
 
-    setImmediate(() => done());
+    setImmediate(() => {
+      done()
+    });
   });
 
   afterEach(() => {
@@ -24,10 +26,6 @@ describe('OnsNavigatorElement', () => {
   });
 
 
-  // use itI instead of it so we have the page loaded
-  // var itI = (a, b) => it(a, (done) => setImmediate(() => b(done) ));
-
-  
   it('should exist', () => {
     expect(window.OnsNavigatorElement).to.be.ok;
   });
@@ -39,12 +37,6 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#pages', () => {
-    // TODO what type is this.children?
-    // it('provides \'pages\' getter', (done) => {
-    //     console.log(nav.pages);
-    //     expect(nav.pages).to.be.an('object');
-    //     done();
-    // });
     it('provides \'pages\' property', () => {
         let pages = nav.pages;
         expect(pages[0]).to.be.an.instanceof(Element);
@@ -84,15 +76,43 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.pushPage('hoge', 'string')).to.throw(Error);
     });
 
-     it('is canceled if already performing another pushPage', () => {
-       console.log('cancel');
+     it('is canceled if already performing another pushPage', (done, rej) => {
        var spy = chai.spy.on(nav, '_pushPage');
-       nav.pushPage('hoge', {});
-       nav.pushPage('hoge', {'cancelIfRunning': true});
-       expect(spy).to.have.been.called.once;
+
+       var counter = 0;
+
+       var myFun = (num, ok) => {
+         counter++;
+
+         if (num == 0 && !ok) {
+           throw 'First pushPage should go through';
+         }
+
+         if (num == 1 && ok) {
+           throw 'Second pushPage should not go through';
+         }
+
+         if (counter == 2) {
+           done();
+         }
+       }
+
+       var promise1 = nav.pushPage('hoge', {}).then(() => {
+         myFun(0, true);
+       }, () => {
+         myFun(0, false);
+       });
+
+       var promise2 =nav.pushPage('hoge', {'cancelIfRunning': true}).then(() => {
+         myFun(1, true);
+       }, () => {
+         myFun(1, false);
+       });
+
+       expect(promise1).to.eventually.be.fulfilled;
+       expect(promise2).to.eventually.be.rejected;
      });
 
-    /*
     it('emits \'prepush\' event', () => {
       let promise = new Promise((resolve) => {
         nav.addEventListener('prepush', (event) => { resolve(event); });
@@ -129,26 +149,31 @@ describe('OnsNavigatorElement', () => {
      });
 
 
-    it('emits \'hide\' event', (done) => {
-      let promise = new Promise((resolve) => {
-        nav.addEventListener('hide', (event) => { resolve(event); });
-      });
-
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage({
-          onTransitionEnd: () => done()
-        })
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('returns a promise that resolves to the new top page', () => {
-      return nav.pushPage('hoge').then(
-        page => expect(page).to.equal(nav.getCurrentPage())
+     // TODO
+    // it('emits \'hide\' event', (done) => {
+    //   let promise = new Promise((resolve) => {
+    //     nav.addEventListener('hide', (event) => { resolve(event); });
+    //   });
+    //
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => nav.popPage({
+    //       onTransitionEnd: () => done()
+    //     })
+    //   });
+    //
+    //   return expect(promise).to.eventually.be.fulfilled;
+    // });
+    //
+    it('returns a promise that resolves to the new top page', (done) => {
+      nav.pushPage('hoge').then(
+        (page) =>  {
+          console.log('page');
+          console.log(page);
+          expect(page).to.equal(nav.getCurrentPage());
+          done();
+        }
       );
     });
-    */
   });
 
   /*

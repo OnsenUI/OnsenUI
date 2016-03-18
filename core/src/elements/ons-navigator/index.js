@@ -693,7 +693,6 @@ class NavigatorElement extends BaseElement {
       const element = this._createPageElement(templateHTML);
       CustomElements.upgrade(element);
       rewritables.link(this, element, options, element => {
-        console.log('link');
         this.appendChild(element);
         resolve();
       });
@@ -727,7 +726,7 @@ class NavigatorElement extends BaseElement {
 
     this._isPushing = true;
 
-    const tryPushPage = () => {
+    const tryPushPage = (resolve) => () => {
       const unlock = this._doorLock.lock();
 
       options = util.extend({}, this.options || {}, options);
@@ -743,8 +742,6 @@ class NavigatorElement extends BaseElement {
 
       return update(pages, this)
       .then(() => {
-        console.log('updated');
-        return new Promise((resolve) => {
           const pageLength = this.pages.length;
           this.pages[pageLength -1].name = options.page;
 
@@ -780,12 +777,11 @@ class NavigatorElement extends BaseElement {
           } else {
             done();
           }
-        });
       });
     };
 
     return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(this._doorLock.waitUnlock(tryPushPage)));
+      this._doorLock.waitUnlock(() => this._doorLock.waitUnlock(tryPushPage(resolve)));
     });
   }
 
@@ -829,7 +825,6 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     if (options.cancelIfRunning && this._isPushing) {
       return Promise.reject('pushPage is already running.');
     }
