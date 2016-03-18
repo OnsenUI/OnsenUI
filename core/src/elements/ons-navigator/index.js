@@ -365,17 +365,16 @@ class NavigatorElement extends BaseElement {
    */
   popPage(options = {}) {
 
+    var lastPage = this.pages[this.pages.length - 1];
     var popUpdate = () => {
       // TODO options.refresh
         return new Promise((resolve) => {
-          this.pages[this.pages.length - 1].remove();
+          lastPage._destroy();
           resolve();
         });
     };
 
-    return this._popPage(options, () => {
-      this.pages[this.pages.length - 1].remove();
-    });
+    return this._popPage(options, popUpdate);
   }
 
   _popPage(options, update = () => Promise.resolve(), pages = []) {
@@ -398,12 +397,11 @@ class NavigatorElement extends BaseElement {
     const animator = this._animatorFactory.newAnimator(options);
     const l = this.pages.length;
 
-    const tryPopPage = () => {
+    const tryPopPage = (resolve) =>  () => {
       if (this.pages.length <= 1) {
         throw new Error('ons-navigator\'s page stack is empty.');
       }
 
-      console.log(this.pages.length);
       if (this._emitPrePopEvent()) {
         return Promise.reject('Canceled in prepop event.');
       }
@@ -415,15 +413,15 @@ class NavigatorElement extends BaseElement {
 
       // update backButton
       // TODO where to show
-      leavePage.element._hide();
+      leavePage._hide();
 
       if (enterPage) {
         enterPage.style.display = 'block';
         // TODO where to show
-        enterPage.style._show();
+        enterPage._show();
       }
 
-      const eventDetails= {
+      const eventDetail = {
         leavePage: leavePage,
         enterPage: enterPage,
         navigator: this
@@ -431,8 +429,6 @@ class NavigatorElement extends BaseElement {
 
       return new Promise(resolve => {
         const callback = () => {
-          leavePage.destroy();
-
           pages.pop();
           this._isPopping = false;
           unlock();
@@ -988,12 +984,13 @@ class NavigatorElement extends BaseElement {
     let isCanceled = false;
 
     const leavePage = this.getCurrentPage();
+    const enterPage = this.pages[this.pages.length - 2];
     util.triggerElementEvent(this, 'prepop', {
       navigator: this,
       // TODO: currentPage will be deprecated
       currentPage: leavePage,
       leavePage: leavePage,
-      enterPage: this.pages[this.pages.length - 2],
+      enterPage: enterPage,
       cancel: function() {
         isCanceled = true;
       }
