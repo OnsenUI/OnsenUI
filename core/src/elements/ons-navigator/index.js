@@ -256,7 +256,7 @@ class NavigatorElement extends BaseElement {
   }
 
   get _isPopping() {
-   return this.getAttribute('_isPoppping');
+   return this.getAttribute('_isPopping');
   }
 
   /**
@@ -378,6 +378,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _popPage(options, update = () => Promise.resolve(), pages = []) {
+    console.log('popPage');
 
     if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
@@ -386,6 +387,8 @@ class NavigatorElement extends BaseElement {
     if (options.cancelIfRunning && this._isPopping) {
       return Promise.reject('popPage is already running.');
     }
+
+    this._isPopping = true;
 
     options = util.extend({}, this.options || {}, options);
 
@@ -398,6 +401,8 @@ class NavigatorElement extends BaseElement {
     const l = this.pages.length;
 
     const tryPopPage = (resolve) =>  () => {
+      console.log('tryPop');
+      const unlock = this._doorLock.lock();
       if (this.pages.length <= 1) {
         throw new Error('ons-navigator\'s page stack is empty.');
       }
@@ -406,18 +411,15 @@ class NavigatorElement extends BaseElement {
         return Promise.reject('Canceled in prepop event.');
       }
 
-      const unlock = this._doorLock.lock();
 
       var leavePage = this.pages[l - 1];
       var enterPage = this.pages[l - 2];
 
-      // update backButton
-      // TODO where to show
+      // TODO update backButton
       leavePage._hide();
 
       if (enterPage) {
         enterPage.style.display = 'block';
-        // TODO where to show
         enterPage._show();
       }
 
@@ -427,21 +429,18 @@ class NavigatorElement extends BaseElement {
         navigator: this
       }
 
-      return new Promise(resolve => {
+      return new Promise( () => {
         const callback = () => {
-          pages.pop();
-          this._isPopping = false;
-          unlock();
-
-          const event = util.triggerElementEvent(this, 'postpop', eventDetail);
-          event.leavePage = null;
-
-          if (typeof options.onTransitionEnd === 'function') {
-            options.onTransitionEnd();
-          }
-
-          pages.pop();
           update(pages, this).then( () => {
+            this._isPopping = false;
+            unlock();
+
+            const event = util.triggerElementEvent(this, 'postpop', eventDetail);
+
+            if (typeof options.onTransitionEnd === 'function') {
+              options.onTransitionEnd();
+            }
+
             resolve(enterPage);
           });
         };
