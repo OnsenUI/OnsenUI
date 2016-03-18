@@ -305,12 +305,12 @@ class SplitterElement extends BaseElement {
     const left = this._getSideElement('left');
     const right = this._getSideElement('right');
 
-    if (left.isOpen()) {
+    if (left && left.isOpen()) {
       left.close();
       return;
     }
 
-    if (right.isOpen()) {
+    if (right && right.isOpen()) {
       right.close();
       return;
     }
