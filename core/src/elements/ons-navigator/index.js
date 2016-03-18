@@ -364,9 +364,14 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   popPage(options = {}) {
-    if (this.pages.length <= 1) {
-      throw new Error('ons-navigator\'s page stack is empty.');
-    }
+
+    var popUpdate = () => {
+      // TODO options.refresh
+        return new Promise((resolve) => {
+          this.pages[this.pages.length - 1].remove();
+          resolve();
+        });
+    };
 
     return this._popPage(options, () => {
       this.pages[this.pages.length - 1].remove();
@@ -374,8 +379,13 @@ class NavigatorElement extends BaseElement {
   }
 
   _popPage(options, update = () => Promise.resolve(), pages = []) {
+
     if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
+    }
+
+    if (options.cancelIfRunning && this._isPopping) {
+      return Promise.reject('popPage is already running.');
     }
 
     options = util.extend({}, this.options || {}, options);
@@ -388,13 +398,67 @@ class NavigatorElement extends BaseElement {
     const animator = this._animatorFactory.newAnimator(options);
     const l = this.pages.length;
 
-    return new Promise((resolve) => {
-      animator.pop(this.pages[l - 2], this.pages[l - 1], () => {
-        pages.pop();
-        resolve(update(pages, this));
+    const tryPopPage = () => {
+      if (this.pages.length <= 1) {
+        throw new Error('ons-navigator\'s page stack is empty.');
+      }
+
+      console.log(this.pages.length);
+      if (this._emitPrePopEvent()) {
+        return Promise.reject('Canceled in prepop event.');
+      }
+
+      const unlock = this._doorLock.lock();
+
+      var leavePage = this.pages[l - 1];
+      var enterPage = this.pages[l - 2];
+
+      // update backButton
+      // TODO where to show
+      leavePage.element._hide();
+
+      if (enterPage) {
+        enterPage.style.display = 'block';
+        // TODO where to show
+        enterPage.style._show();
+      }
+
+      const eventDetails= {
+        leavePage: leavePage,
+        enterPage: enterPage,
+        navigator: this
+      }
+
+      return new Promise(resolve => {
+        const callback = () => {
+          leavePage.destroy();
+
+          pages.pop();
+          this._isPopping = false;
+          unlock();
+
+          const event = util.triggerElementEvent(this, 'postpop', eventDetail);
+          event.leavePage = null;
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+
+          pages.pop();
+          update(pages, this).then( () => {
+            resolve(enterPage);
+          });
+        };
+
+        animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
       });
+    };
+
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => this._doorLock.waitUnlock(tryPopPage(resolve)));
     });
   }
+
 
   /**
    * @method insertPage
@@ -744,6 +808,8 @@ class NavigatorElement extends BaseElement {
       .then(() => {
           const pageLength = this.pages.length;
           this.pages[pageLength -1].name = options.page;
+          // TODO set options
+          // this.pages[pageLength -1].options = options;
 
           var enterPage  = this.pages[this.pages.length - 1];
           var leavePage = this.pages[this.pages.length - 2];

@@ -173,6 +173,141 @@ describe('OnsNavigatorElement', () => {
   //   });
   // });
 
+  describe('#popPage()', () => {
+    it('only accepts object options', () => {
+      expect(() => nav.popPage('hoge', 'string')).to.throw(Error);
+    });
+
+    it('throws error if the stack is empty', (done) => {
+      nav.popPage().then( null, () => {
+        done();
+      });
+    });
+
+    it('removes the top page from the stack', (done) => {
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => {
+          let content = nav.getCurrentPage()._getContentElement();
+          expect(content.innerHTML).to.equal('hoge');
+
+          nav.popPage({
+            onTransitionEnd: () => {
+              expect(nav.pages.length).to.equal(1);
+              let content = nav.getCurrentPage()._getContentElement();
+              expect(content.innerHTML).not.to.be.ok;
+              done();
+            }
+          });
+        }
+      });
+    });
+
+    // it('is canceled if already performing another popPage', (done) => {
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => {
+    //       var spy = chai.spy.on(nav, '_popPage');
+    //       nav.popPage();
+    //       nav.popPage({'cancelIfRunning': true});
+    //       expect(spy).to.have.been.called.once;
+    //       done();
+    //     }
+    //   });
+    // });
+    //
+    // it('can refresh the previous page', (done) => {
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => {
+    //       var content = nav.getCurrentPage().element._getContentElement();
+    //       content.innerHTML = 'piyo';
+    //
+    //       nav.pushPage('fuga', {
+    //         onTransitionEnd: () => {
+    //           nav.popPage({
+    //             refresh: true,
+    //             onTransitionEnd: () => {
+    //               var content = nav.getCurrentPage().element._getContentElement();
+    //               expect(content.innerHTML).to.equal('hoge');
+    //               done();
+    //             }
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+    // });
+    //
+    // it('throws error when refreshing pages directly inside the navigator', () => {
+    //   nav.innerHTML = '<ons-page> Test </ons-page>';
+    //
+    //   return nav.pushPage('hoge').then(() => {
+    //     return expect(nav.popPage({ refresh: true })).to.eventually.be.rejectedWith(Error);
+    //   });
+    // });
+    //
+    // it('emits \'prepop\' event', () => {
+    //   let promise = new Promise((resolve) => {
+    //     nav.addEventListener('prepop', (event) => { resolve(event); });
+    //   });
+    //
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => nav.popPage()
+    //   });
+    //
+    //   return expect(promise).to.eventually.be.fulfilled;
+    // });
+    //
+    // it('should be possible to cancel the \'prepop\' event', (done) => {
+    //   nav.addEventListener('prepop', (event) => {
+    //     event.detail.cancel();
+    //   });
+    //
+    //   expect(nav.pages.length).to.equal(1);
+    //
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => {
+    //       expect(nav.pages.length).to.equal(2);
+    //       nav.popPage();
+    //       expect(nav.pages.length).to.equal(2);
+    //       done();
+    //     }
+    //   });
+    // });
+    //
+    // it('emits \'postpop\' event', () => {
+    //   let promise = new Promise((resolve) => {
+    //     nav.addEventListener('postpop', (event) => { resolve(event); });
+    //   });
+    //
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => nav.popPage()
+    //   });
+    //
+    //   return expect(promise).to.eventually.be.fulfilled;
+    // });
+    //
+    // it('emits \'show\' event', (done) => {
+    //   let promise = new Promise((resolve) => {
+    //     nav.addEventListener('show', (event) => { resolve(event); });
+    //   });
+    //
+    //   nav.pushPage('hoge', {
+    //     onTransitionEnd: () => nav.popPage({
+    //       onTransitionEnd: () => done()
+    //     })
+    //   });
+    //
+    //   return expect(promise).to.eventually.be.fulfilled;
+    // });
+    //
+    // it('returns a promise that resolves to the new top page', () => {
+    //   return nav.pushPage('hoge').then(() => {
+    //     return expect(nav.popPage()).to.eventually.be.fulfilled.then(
+    //       page => expect(page).to.equal(nav.getCurrentPage())
+    //     );
+    //   });
+    // });
+  });
+
   /*
   describe('#bringPageTop()', () => {
 
@@ -358,139 +493,7 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  describe('#popPage()', () => {
-    it('only accepts object options', () => {
-      expect(() => nav.popPage('hoge', 'string')).to.throw(Error);
-    });
-
-    it('throws error if the stack is empty', () => {
-      return expect(nav.popPage()).to.eventually.be.rejectedWith(Error);
-    });
-
-    it('removes the top page from the stack', (done) => {
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          let content = nav.getCurrentPage().element._getContentElement();
-          expect(content.innerHTML).to.equal('hoge');
-
-          nav.popPage({
-            onTransitionEnd: () => {
-              expect(nav.pages.length).to.equal(1);
-              let content = nav.getCurrentPage().element._getContentElement();
-              expect(content.innerHTML).not.to.be.ok;
-              done();
-            }
-          });
-        }
-      });
-    });
-
-    it('is canceled if already performing another popPage', (done) => {
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          var spy = chai.spy.on(nav, '_popPage');
-          nav.popPage();
-          nav.popPage({'cancelIfRunning': true});
-          expect(spy).to.have.been.called.once;
-          done();
-        }
-      });
-    });
-
-    it('can refresh the previous page', (done) => {
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          var content = nav.getCurrentPage().element._getContentElement();
-          content.innerHTML = 'piyo';
-
-          nav.pushPage('fuga', {
-            onTransitionEnd: () => {
-              nav.popPage({
-                refresh: true,
-                onTransitionEnd: () => {
-                  var content = nav.getCurrentPage().element._getContentElement();
-                  expect(content.innerHTML).to.equal('hoge');
-                  done();
-                }
-              });
-            }
-          });
-        }
-      });
-    });
-
-    it('throws error when refreshing pages directly inside the navigator', () => {
-      nav.innerHTML = '<ons-page> Test </ons-page>';
-
-      return nav.pushPage('hoge').then(() => {
-        return expect(nav.popPage({ refresh: true })).to.eventually.be.rejectedWith(Error);
-      });
-    });
-
-    it('emits \'prepop\' event', () => {
-      let promise = new Promise((resolve) => {
-        nav.addEventListener('prepop', (event) => { resolve(event); });
-      });
-
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage()
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('should be possible to cancel the \'prepop\' event', (done) => {
-      nav.addEventListener('prepop', (event) => {
-        event.detail.cancel();
-      });
-
-      expect(nav.pages.length).to.equal(1);
-
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          expect(nav.pages.length).to.equal(2);
-          nav.popPage();
-          expect(nav.pages.length).to.equal(2);
-          done();
-        }
-      });
-    });
-
-    it('emits \'postpop\' event', () => {
-      let promise = new Promise((resolve) => {
-        nav.addEventListener('postpop', (event) => { resolve(event); });
-      });
-
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage()
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('emits \'show\' event', (done) => {
-      let promise = new Promise((resolve) => {
-        nav.addEventListener('show', (event) => { resolve(event); });
-      });
-
-      nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage({
-          onTransitionEnd: () => done()
-        })
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('returns a promise that resolves to the new top page', () => {
-      return nav.pushPage('hoge').then(() => {
-        return expect(nav.popPage()).to.eventually.be.fulfilled.then(
-          page => expect(page).to.equal(nav.getCurrentPage())
-        );
-      });
-    });
-  });
-
+  
   describe('#replacePage()', () => {
     it('only accepts object options', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
