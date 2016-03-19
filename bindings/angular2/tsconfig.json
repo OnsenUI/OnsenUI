@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "system",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -10,6 +10,7 @@
     "noImplicitAny": false
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build"
   ]
 }

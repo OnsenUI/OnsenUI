@@ -17,7 +17,16 @@ limitations under the License.
 
 'use strict';
 
-export default class TemplateLoader {
+import TemplateLoader from './template-loader';
+
+export class GlobalTemplateLoader {
+
+  installImplementation(loader) {
+    if (!(loader instanceof TemplateLoader)) {
+      throw new Error('"loader" parameter must be an instance of TemplateLoader.');
+    }
+    this._loader = loader;
+  }
 
   /**
    * @param {String} page
@@ -27,7 +36,7 @@ export default class TemplateLoader {
    * @return {Promise} resolve element
    */
   loadPageBefore(page, parent, element, callback) {
-    throw new Error('implements this method'); // eslint-disable-line no-unreachable
+    return this._loader.loadPageBefore(page, parent, element, callback);
   }
 
   /**
@@ -35,7 +44,10 @@ export default class TemplateLoader {
    * @return {Promise}
    */
   unload(element) {
-    throw new Error('implements this method'); // eslint-disable-line no-unreachable
+    return this._loader(element);
   }
 }
 
+const loader = new GlobalTemplateLoader();
+
+export default loader;

@@ -1,1 +1,7 @@
 npm_modules
+examples/*.js
+examples/*.js.map
+src/**/*.js
+src/**/*.js.map
+src/*.js
+src/*.js.map

@@ -318,6 +318,9 @@ class NavigatorElement extends BaseElement {
   /**
    * @method popPage
    * @signature popPage([options])
+   * @return {Promise}
+   *   [en]Resolves to the new top page object.[/en]
+   *   [ja]Resolves to the new top page object.[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -837,7 +840,6 @@ class NavigatorElement extends BaseElement {
       };
 
       this._isPushing = true;
-
 
       ons._templateLoader.loadPageBefore(pageObject.page, this, null, element => {
         rewritables.link(this, element, options, element => {

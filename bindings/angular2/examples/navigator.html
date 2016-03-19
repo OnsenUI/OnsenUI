@@ -14,16 +14,16 @@
     <script>
 
       System.config({
-        packages: {        
-          app: {
-            format: 'register',
+        packages: {
+          'onsenui': {
+            main: '../../build/angular2-onsenui.js',
             defaultExtension: 'js'
           }
         }
       });
 
-      System.import('../src/main.js').then(function() {
-        return System.import('../src/examples/navigator.js');
+      System.import('../build/angular2-onsenui.js').then(function() {
+        System.import('./navigator.js');
       }, console.error.bind(console));
 
     </script>

@@ -19,11 +19,10 @@ import {
   ViewChild
 } from 'angular2/core';
 
-declare var ons: {_elementReady:{installImplementation: Function}};
+console.log("!!!!");
 
-ons._elementReady.installImplementation(function(element, callback) {
-  setImmediate(callback);
-});
+
+declare var ons: {_elementReady:{installImplementation: Function}};
 
 function initAngular2Binding(injector: Injector) {
   console.log('initialize Angular2 Binding');
@@ -55,3 +54,7 @@ function bootstrapWithOnsenUI(componentType: Function) {
 
 //bootstrapWithOnsenUI(AppComponent);
 //bootstrap(AppComponent);
+
+ons._elementReady.installImplementation(function(element, callback) {
+  setImmediate(callback);
+});

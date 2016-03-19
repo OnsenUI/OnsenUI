@@ -2,10 +2,7 @@
   "name": "onsenui-angular2-binding",
   "version": "0.0.1",
   "scripts": {
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server --baseDir='../../'",
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+    "start": "gulp serve"
   },
   "licenses": [
     {
@@ -24,7 +21,14 @@
   },
   "devDependencies": {
     "concurrently": "^1.0.0",
+    "gulp-shell": "^0.5.2",
     "lite-server": "^1.3.4",
+    "systemjs-builder": "^0.15.13",
     "typescript": "^1.7.5"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   }
 }

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import {TemplateLoader} from './template-loader';
+import TemplateLoader from './template-loader';
 
 export default class DefaultTemplateLoader extends TemplateLoader {
 
