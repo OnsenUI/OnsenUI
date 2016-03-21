@@ -33,6 +33,7 @@ var fs = require('fs');
 var argv = require('yargs').argv;
 var npm  = require('rollup-plugin-npm');
 var babel = require('rollup-plugin-babel');
+var babel2 = require('gulp-babel');
 
 ////////////////////////////////////////
 // browser-sync
@@ -100,6 +101,7 @@ gulp.task('core', function() {
 gulp.task('watch-core', ['prepare', 'core'], function() {
   return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
 });
+
 
 ////////////////////////////////////////
 // core-test
@@ -188,7 +190,7 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 gulp.task('minify-js', function() {
   return merge(
-    gulp.src('build/js/{onsenui,angular-onsenui}.js')
+    gulp.src('build/js/{onsenui,angular-onsenui,react-onsenui}.js')
       .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
@@ -211,6 +213,21 @@ gulp.task('prepare', ['html2js'], function() {
   var onlyES6;
 
   return merge(
+
+    // react-onsenui.js
+    gulp.src( 'bindings/react/components/*.jsx')
+   .pipe(babel2({ presets: ['react', 'es2015'] }))
+   .pipe($.concat('react-onsenui.js'))
+   .pipe($.header('/*! react-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+   .pipe(gulp.dest('build/js/')),
+
+    // react.js , react-dom.js , react-addons.js
+    gulp.src('bindings/react/lib/react/*.js')
+      .pipe(gulp.dest('build/js/react/')),
+
+    // babel for jsx
+    gulp.src('bindings/react/lib/babel/*.js')
+      .pipe(gulp.dest('build/js/react/')),
 
     // angular-onsenui.js
     gulp.src([
@@ -337,6 +354,7 @@ function distFiles() {
     '!build/docs/',
     '!build/js/angular/**/*',
     '!build/js/angular/',
+    '!build/js/react/',
     '!build/onsenui.zip',
     'bower.json',
     'package.json',
@@ -361,7 +379,8 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
   var watched = [
     'bindings/angular1/*/*',
     'core/css/*.css',
-    'css-components/components-src/dist/*.css'
+    'css-components/components-src/dist/*.css',
+    './bindings/react/components/*.jsx'
   ];
 
   if (CORDOVA_APP) {
@@ -460,6 +479,39 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   var specs = argv.specs ?
     argv.specs.split(',').map(function(s) { return s.trim(); }) :
     ['test/e2e/**/*.js'];
+
+  return gulp.src(specs)
+    .pipe($.protractor.protractor(conf))
+    .on('error', function(e) {
+      console.log(e);
+      $.connect.serverClose();
+    })
+    .on('end', function() {
+      $.connect.serverClose();
+    });
+});
+
+
+gulp.task('react-test', ['webdriver-download', 'prepare'], function() {
+  var port = 8081;
+
+  $.connect.server({
+    root: __dirname,
+    port: port
+  });
+
+  var conf = {
+    configFile: './test/react/protractor.conf.js',
+    args: [
+      '--baseUrl', 'http://127.0.0.1:' + port,
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.45.0.jar'),
+      '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
+    ]
+  };
+
+  var specs = argv.specs ?
+    argv.specs.split(',').map(function(s) { return s.trim(); }) :
+    ['test/react/**/*.js'];
 
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))

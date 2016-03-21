@@ -204,6 +204,7 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
+
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -453,7 +454,6 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -553,6 +553,8 @@ class TabbarElement extends BaseElement {
       };
 
       return new Promise(resolve => {
+
+
         selectedTab._loadPageElement(pageElement => {
           resolve(this._loadPersistentPageDOM(pageElement, params));
         }, link);

@@ -315,7 +315,7 @@ class TabElement extends BaseElement {
     }
 
     if (this.hasAttribute('active')) {
-      const tabIndex = this._findTabIndex();
+    const tabIndex = this._findTabIndex();
 
       OnsTabbarElement.rewritables.ready(tabbar, () => {
         setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));

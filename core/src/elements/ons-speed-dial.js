@@ -86,26 +86,31 @@ class SpeedDialElement extends BaseElement {
    */
 
   createdCallback() {
+    console.log('attri : ' +  this.hasAttribute('_compiled'));
     if (!this.hasAttribute('_compiled')) {
       this._compile();
-
-      this.classList.add('speed__dial');
-
-      if (this.hasAttribute('direction')) {
-        this._updateDirection(this.getAttribute('direction'));
-      } else {
-        this._updateDirection('up');
-      }
-      this._updatePosition();
-
-      if (this.hasAttribute('disabled')) {
-        this.setDisabled(true);
-      }
+      this._updateClasses();
     }
 
     this._shown = true;
     this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
+  }
+
+  _updateClasses() {
+    console.log('update classes');
+    this.classList.add('speed__dial');
+
+    if (this.hasAttribute('direction')) {
+      this._updateDirection(this.getAttribute('direction'));
+    } else {
+      this._updateDirection('up');
+    }
+    this._updatePosition();
+
+    if (this.hasAttribute('disabled')) {
+      this.setDisabled(true);
+    }
   }
 
   _compile() {
