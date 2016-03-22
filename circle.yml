@@ -4,6 +4,7 @@ machine:
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install g++
+    - npm install -g npm
     - npm install
     - npm install -g coveralls gulp
     - cd css-components; npm install; gulp build

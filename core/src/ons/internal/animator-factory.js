@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../util';
-import ons from '../ons';
+import internal from '../internal';
 
 export default class AnimatorFactory {
 
@@ -98,7 +98,7 @@ export default class AnimatorFactory {
         {},
         this._animationOptions,
         options.animationOptions || {},
-        ons._config.animationsDisabled ? {duration: 0, delay: 0} : {}
+        internal.config.animationsDisabled ? {duration: 0, delay: 0} : {}
       );
 
       animator = new Animator(animationOpts);

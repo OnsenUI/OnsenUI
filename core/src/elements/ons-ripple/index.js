@@ -189,7 +189,7 @@ class RippleElement extends BaseElement {
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnRelease = this._onRelease.bind(this);
 
-    if (ons._config.animationsDisabled) {
+    if (ons._internal.config.animationsDisabled) {
       this.setDisabled(true);
     } else {
       this.parentNode.addEventListener('tap', this._boundOnTap);

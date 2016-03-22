@@ -15,7 +15,9 @@ limitations under the License.
 
 */
 
-import ons from 'ons/ons';
+import util from 'ons/util';
+import internal from 'ons/internal';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -97,20 +99,9 @@ class ToolbarElement extends BaseElement {
     if (!this.parentNode || this.hasAttribute('inline')) {
       return;
     }
+    let page = util.findParent(this, 'ons-page');
 
-    if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
-      var page = this;
-      for (;;) {
-        page = page.parentNode;
-
-        if (!page) {
-          return;
-        }
-
-        if (page.nodeName.toLowerCase() === 'ons-page') {
-          break;
-        }
-      }
+    if (page && page !== this.parentNode) {
       page._registerToolbar(this);
     }
   }
@@ -119,44 +110,34 @@ class ToolbarElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getToolbarLeftItemsElement() {
-    return this.querySelector('.left') || ons._internal.nullElement;
+    return this.querySelector('.left') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarCenterItemsElement() {
-    return this.querySelector('.center') || ons._internal.nullElement;
+    return this.querySelector('.center') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarRightItemsElement() {
-    return this.querySelector('.right') || ons._internal.nullElement;
+    return this.querySelector('.right') || internal.nullElement;
   }
 
   /**
    * @return {HTMLElement}
    */
   _getToolbarBackButtonLabelElement() {
-    return this.querySelector('ons-back-button .back-button__label') || ons._internal.nullElement;
+    return this.querySelector('ons-back-button .back-button__label') || internal.nullElement;
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
-
-    var inline = this.hasAttribute('inline');
+    autoStyle.prepare(this);
 
     this.classList.add('navigation-bar');
-
-    if (!inline) {
-      this.style.position = 'absolute';
-      this.style.zIndex = '10000';
-      this.style.left = '0px';
-      this.style.right = '0px';
-      this.style.top = '0px';
-    }
 
     this._ensureToolbarItemElements();
 
@@ -168,7 +149,6 @@ class ToolbarElement extends BaseElement {
   _ensureToolbarItemElements() {
 
     var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
-    var center;
 
     for (var i = 0; i < this.childNodes.length; i++) {
       // case of not element
@@ -177,12 +157,12 @@ class ToolbarElement extends BaseElement {
       }
     }
 
-    if (hasCenterClassElementOnly) {
-      center = this._ensureToolbarItemContainer('center');
-    } else {
-      center = this._ensureToolbarItemContainer('center');
-      var left = this._ensureToolbarItemContainer('left');
-      var right = this._ensureToolbarItemContainer('right');
+    var center = this._ensureToolbarElement('center');
+    center.classList.add('navigation-bar__title');
+
+    if (!hasCenterClassElementOnly) {
+      var left = this._ensureToolbarElement('left');
+      var right = this._ensureToolbarElement('right');
 
       if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
         if (left.parentNode) {
@@ -195,27 +175,19 @@ class ToolbarElement extends BaseElement {
           this.removeChild(right);
         }
 
-        var fragment = document.createDocumentFragment();
-        fragment.appendChild(left);
-        fragment.appendChild(center);
-        fragment.appendChild(right);
-
-        this.appendChild(fragment);
+        this.appendChild(left);
+        this.appendChild(center);
+        this.appendChild(right);
       }
     }
-    center.classList.add('navigation-bar__title');
   }
 
-  _ensureToolbarItemContainer(name) {
-    var container = ons._util.findChild(this, '.' + name);
+  _ensureToolbarElement(name) {
+    var element = util.findChild(this, '.' + name) || util.create('.' + name);
 
-    if (!container) {
-      container = document.createElement('div');
-      container.classList.add(name);
-    }
+    element.classList.add('navigation-bar__' + name);
 
-    container.classList.add('navigation-bar__' + name);
-    return container;
+    return element;
   }
 
 }

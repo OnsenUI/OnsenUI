@@ -11,6 +11,12 @@ v2.0.0-beta.8
  * ons-page: Does not remove 'style' attribute anymore.
  * ons.notification: Fixed an issue in iOS related to CustomElements.
  * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
+ * ons-icon: Fixed a bug in old Android versions.
+ * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
+ * ons-bottom-toolbar: Fixed a bug making it scroll with the content in some cases.
+ * ons-popover: Added material popover.
+ * ons-splitter: Fixed [#1300](https://github.com/OnsenUI/OnsenUI/issues/1300).
+ * ons-list-item: Fix chevron position when list content is large.
  * ons-lazy-repeat: Auto calculate item height if no information is provided.
 
 v2.0.0-beta.7

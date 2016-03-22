@@ -155,10 +155,10 @@ class SplitMode extends BaseMode {
   }
 
   openMenu() {
-    return Promise.reject('Not possible in Split Mode');
+    return Promise.resolve();
   }
   closeMenu() {
-    return Promise.reject('Not possible in Split Mode');
+    return Promise.resolve();
   }
 
   /**
@@ -369,7 +369,7 @@ class CollapseMode extends BaseMode {
    */
   openMenu(options = {}) {
     if (this._state !== CollapseMode.CLOSED_STATE) {
-      return Promise.reject('Not in Collapse Mode.');
+      return Promise.resolve();
     }
 
     return this._openMenu(options);
@@ -383,15 +383,15 @@ class CollapseMode extends BaseMode {
    */
   _openMenu(options = {}) {
     if (this._isLocked()) {
-      return Promise.reject('Splitter side is locked.');
+      return Promise.resolve();
     }
 
     if (this._isOpenOtherSideMenu()) {
-      return Promise.reject('Another menu is already open.');
+      return Promise.resolve();
     }
 
     if (this._element._emitPreOpenEvent()) {
-      return Promise.reject('Canceled in preopen event.');
+      return Promise.resolve();
     }
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
@@ -427,7 +427,7 @@ class CollapseMode extends BaseMode {
    */
   closeMenu(options = {}) {
     if (this._state !== CollapseMode.OPEN_STATE) {
-      return Promise.reject('Not in Collapse Mode.');
+      return Promise.resolve();
     }
 
     return this._closeMenu(options);
@@ -439,11 +439,11 @@ class CollapseMode extends BaseMode {
    */
   _closeMenu(options = {}) {
     if (this._isLocked()) {
-      return Promise.reject('Splitter side is locked.');
+      return Promise.resolve();
     }
 
     if (this._element._emitPreCloseEvent()) {
-      return Promise.reject('Canceled in preclose event.');
+      return Promise.resolve();
     }
 
     options.callback = options.callback instanceof Function ? options.callback : () => {};
@@ -777,7 +777,7 @@ class SplitterSideElement extends BaseElement {
 
     const collapse = ('' + this.getAttribute('collapse')).trim();
 
-    if (collapse === '') {
+    if (collapse === '' || collapse === 'true') {
       this._updateCollapseStrategy(new StaticCollapseDetection());
     } else if (collapse === 'portrait' || collapse === 'landscape') {
       this._updateCollapseStrategy(new OrientationCollapseDetection(collapse));

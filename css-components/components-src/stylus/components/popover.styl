@@ -17,32 +17,52 @@ limitations under the License.
 
 // internal variables
 var-popover-background-color = $popover-background-color
+var-popover-background-color-material = #FAFAFA
 var-popover-text-color = $popover-text-color
 var-popover-arrow-size = 18px
 var-popover-arrow-radius = 4px
 var-popover-radius = 8px
+var-popover-radius-material = 2px
+var-popover-margin = 6px
+var-popover-margin-material = 4px
 
 /*! topdoc
   name: Popover
   class: popover
   markup:
-    <div class="popover-mask"></div>
-    <div class="popover popover--up" style="bottom:20px;left:50px;">
-      <div class="popover__bottom-arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    <div class="popover">
+      <div class="popover-mask"></div>
+      <div class="popover popover--bottom" style="bottom:20px;left:50px;">
+        <div class="popover__arrow"></div>
+        <div class="popover__content">
+          <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+        </div>
       </div>
     </div>
 */
-.popover-mask
+
+.popover
   position absolute
+  top var-popover-margin
+  right var-popover-margin
+  bottom var-popover-margin
+  left var-popover-margin
+  z-index 20000
+  display none
+
+.popover-mask
   left 0
   right 0
   top 0
   bottom 0
   background-color rgba(0, 0, 0, 0.1)
+  position fixed
 
-.popover
+.popover__container
+  width 100%
+  height 100%
+
+.popover__content
   reset-box-model()
   reset-base()
   reset-cursor()
@@ -50,22 +70,21 @@ var-popover-radius = 8px
   position absolute
   display block
   width 220px
+  overflow auto
   min-height 100px
-
-.popover__content
+  max-height 100%
   background-color var-popover-background-color
   border-radius var-popover-radius
   color var-popover-text-color
-  overflow hidden
-  min-height 100px
-  height: 100%
-  -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
 
 .popover__content > *
   overflow hidden
 
-popover-arrow()
-  content ''
+.popover__content .page,
+.popover__content .page__content
+  position static
+
+.popover__arrow
   position absolute
   width var-popover-arrow-size
   height var-popover-arrow-size
@@ -73,46 +92,31 @@ popover-arrow()
   background-color transparent
   background-image linear-gradient(45deg, var-popover-background-color, var-popover-background-color 50%, transparent 50%)
   border-radius 0 0 0 var-popover-arrow-radius
+  margin (-(var-popover-arrow-size / 2))px
 
-.popover__bottom-arrow
-  popover-arrow()
+.popover--bottom .popover__arrow
   transform rotate(-45deg)
-  bottom 0
-  left 50%
-  margin-left -(var-popover-arrow-size / 2)px
-  margin-bottom -(var-popover-arrow-size / 2)px
+  bottom 1px
 
-.popover__top-arrow
-  popover-arrow()
+.popover--top .popover__arrow
   transform rotate(135deg)
-  top 0
-  left 50%
-  margin-left -(var-popover-arrow-size / 2)px
-  margin-top -(var-popover-arrow-size / 2)px
+  top 1px
 
-.popover__left-arrow
-  popover-arrow()
+.popover--left .popover__arrow
   transform rotate(45deg)
-  top 50%
-  left 0
-  margin-left -(var-popover-arrow-size / 2)px
-  margin-top -(var-popover-arrow-size / 2)px
+  left 1px
 
-.popover__right-arrow
-  popover-arrow()
+.popover--right .popover__arrow
   transform rotate(225deg)
-  top 50%
-  right 0
-  margin-right -(var-popover-arrow-size / 2)px
-  margin-top -(var-popover-arrow-size / 2)px
+  right 1px
 
 /*! topdoc
   name: Popover(down)
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--down" style="top:20px;left:50px;">
-      <div class="popover__top-arrow"></div>
+    <div class="popover popover--top" style="top:20px;left:50px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -124,8 +128,8 @@ popover-arrow()
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--left" style="top:20px;right:20px;">
-      <div class="popover__right-arrow"></div>
+    <div class="popover popover--right" style="top:20px;right:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -137,11 +141,39 @@ popover-arrow()
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--right" style="top:20px;left:20px;">
-      <div class="popover__left-arrow"></div>
+    <div class="popover popover--left" style="top:20px;left:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
     </div>
 */
 
+.popover--material
+  top var-popover-margin-material
+  right var-popover-margin-material
+  bottom var-popover-margin-material
+  left var-popover-margin-material
+
+.popover-mask--material
+  background-color transparent
+
+.popover__container--material
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  reset-font()
+  // position absolute
+  display inline-block
+  max-height 100%
+  overflow auto
+  /*border-bottom 4px solid transparent*/
+
+.popover__content--material
+  background-color var-popover-background-color-material
+  border-radius var-popover-radius-material
+  color var-popover-text-color
+  shadow-1()
+
+.popover__arrow--material
+  display none

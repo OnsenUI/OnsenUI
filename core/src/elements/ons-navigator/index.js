@@ -17,15 +17,14 @@ limitations under the License.
 
 import util from 'ons/util';
 import internal from 'ons/internal';
-import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
-import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
+import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
+import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
+import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
 import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
-import SimpleSlideNavigatorTransitionAnimator from './simple-slide-animator';
-import LiftNavigatorTransitionAnimator from './lift-animator';
-import FadeNavigatorTransitionAnimator from './fade-animator';
+import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
@@ -35,12 +34,15 @@ import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': () => platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
-  'simplelift': LiftNavigatorTransitionAnimator,
-  'fade': FadeNavigatorTransitionAnimator,
-  'mdfade': MDFadeNavigatorTransitionAnimator,
+  'slide': () => platform.isAndroid() ? MDSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : IOSLiftNavigatorTransitionAnimator,
+  'fade': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSFadeNavigatorTransitionAnimator,
+  'slide-ios': IOSSlideNavigatorTransitionAnimator,
+  'slide-md': MDSlideNavigatorTransitionAnimator,
+  'lift-ios': IOSLiftNavigatorTransitionAnimator,
+  'lift-md': MDLiftNavigatorTransitionAnimator,
+  'fade-ios': IOSFadeNavigatorTransitionAnimator,
+  'fade-md': MDFadeNavigatorTransitionAnimator,
   'none': NoneNavigatorTransitionAnimator
 };
 
@@ -607,7 +609,7 @@ class NavigatorElement extends BaseElement {
   }
 
   /**
-   * @method resetTopage
+   * @method resetToPage
    * @signature resetToPage(pageUrl, [options])
    * @param {String/undefined} [pageUrl]
    *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]

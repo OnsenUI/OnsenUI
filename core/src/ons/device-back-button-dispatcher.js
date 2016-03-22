@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from './ons';
+import platform from './platform';
 
 
 const util = {
@@ -26,7 +26,7 @@ const util = {
   _onDOMContentLoaded: () => {
     util._domContentLoaded = true;
 
-    if (ons.isWebView()) {
+    if (platform.isWebView()) {
       window.document.addEventListener('deviceready', () => {
         util._ready = true;
       }, false);

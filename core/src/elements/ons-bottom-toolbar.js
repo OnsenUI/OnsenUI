@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -58,25 +59,23 @@ class BottomToolbarElement extends BaseElement {
 
   createdCallback() {
     this.classList.add('bottom-bar');
-    this.style.zIndex = '0';
-    this._update();
 
     ModifierUtil.initModifier(this, scheme);
   }
 
-  attributeChangedCallback(name, last, current) {
-    if (name === 'inline') {
-      this._update();
-    } else if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+  attachedCallback() {
+    const page = util.findParent(this, 'ons-page');
+    if (this.parentNode != page) {
+      page._registerBottomToolbar(this);
     }
   }
 
-  _update() {
-    const inline = typeof this.getAttribute('inline') === 'string';
-
-    this.style.position = inline ? 'static' : 'absolute';
+  attributeChangedCallback(name, last, current) {
+    if (name === 'modifier') {
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
   }
+
 }
 
 window.OnsBottomToolbarElement = document.registerElement('ons-bottom-toolbar', {
