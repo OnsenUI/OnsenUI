@@ -17,7 +17,6 @@ limitations under the License.
 
 import util from 'ons/util';
 import internal from 'ons/internal';
-import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';

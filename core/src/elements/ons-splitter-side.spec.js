@@ -59,7 +59,7 @@ describe('OnsSplitterSideElement', () => {
       return expect(right.open()).to.eventually.be.fulfilled.then(
         element => {
           expect(element).to.equal(right);
-          return expect(left.open()).to.eventually.be.rejected;
+          return expect(left.open()).to.eventually.be.fulfilled.then(element => expect(element).not.to.be.ok);
         }
       );
     });
@@ -71,7 +71,7 @@ describe('OnsSplitterSideElement', () => {
         return expect(right.close()).to.eventually.be.fulfilled.then(
           element => {
             expect(element).to.equal(right);
-            return expect(left.close()).to.eventually.be.rejected;
+            return expect(left.close()).to.eventually.be.fulfilled.then(element => expect(element).not.to.be.ok);
           }
         );
       });

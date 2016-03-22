@@ -50,10 +50,6 @@ ons-fab {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 input, textarea {
   -webkit-user-select: auto;
 }
@@ -71,6 +67,15 @@ ons-bottom-toolbar:not([inline]) {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
 }
 
 .page,
@@ -123,7 +128,7 @@ ons-toolbar + .page__background + .page__content {
 }
 
 .page__content {
-  overflow: scroll;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 0;
   -ms-touch-action: pan-y;
@@ -131,10 +136,6 @@ ons-toolbar + .page__background + .page__content {
 
 .page-with-bottom-toolbar > .page__content {
   bottom: 44px;
-}
-
-.page__content::-webkit-scrollbar {
-  display: none;
 }
 
 .tab-bar__status-bar-fill + .tab-bar--top__content {
