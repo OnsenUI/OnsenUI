@@ -42,19 +42,25 @@
         popPage = element(by.id('pop-page')),
         hideDialog = element(by.id('hide-dialog'));
 
+      browser.wait(EC.visibilityOf(pushPage));
       pushPage.click();
+
       browser.wait(EC.visibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).toBeTruthy();
-
       hideDialog.click();
+
       browser.wait(EC.invisibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).not.toBeTruthy();
 
+
+      browser.wait(EC.visibilityOf(popPage));
       popPage.click();
       browser.wait(EC.stalenessOf(popPage));
       expect(popPage.isPresent()).not.toBeTruthy();
 
+      browser.wait(EC.visibilityOf(pushPage));
       pushPage.click();
+
       browser.wait(EC.visibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).toBeTruthy();
     });

@@ -187,10 +187,18 @@
       var pops = element(by.id('pops')),
         pushes = element(by.id('pushes'));
 
+      var page1 = element(by.id('page1'));
+      var page2 = element(by.id('page2'));
+
       expect(pops.getText()).toBe('0');
       expect(pushes.getText()).toBe('1');
 
+      browser.wait(EC.visibilityOf(element(by.id('btn1'))));
       element(by.id('btn1')).click();
+
+      browser.wait(EC.visibilityOf(page2));
+      browser.wait(EC.invisibilityOf(page1));
+
       browser.wait(EC.visibilityOf(element(by.id('btn2'))));
       element(by.id('btn2')).click();
       browser.wait(EC.textToBePresentInElement(pops, '1'));
