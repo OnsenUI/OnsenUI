@@ -16,6 +16,30 @@ class ChildComponent {
 }
 
 @Component({
+  template: `
+    <ons-page _compiled class="page hoge" style="display: block">
+      <ons-toolbar>
+        <div class="center">Page2</div>
+      </ons-toolbar>
+      <div class="page__background"></div>
+      <div class="page__content" no-status-bar-fill>
+        <div style="text-align: center; margin: 10px">
+          <p>page2</p>
+        </div>
+      </div>
+    </ons-page>
+  `
+})
+export class PageComponent {
+  constructor(/*private _navigator: OnsNavigator*/) {
+  }
+
+  push() {
+    //this._navigator.pushComponent(null);
+  }
+}
+
+@Component({
   selector: 'my-app',
   directives: [OnsNavigator, ChildComponent],
   template: `
@@ -43,7 +67,7 @@ export class AppComponent {
   }
 
   push() {
-    this.navigator.pushComponent(null);
+    this.navigator.pushComponent(PageComponent);
   }
 }
 
