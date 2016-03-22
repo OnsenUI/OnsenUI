@@ -1,41 +1,9 @@
-import 'onsenui';
-import {bootstrap} from 'angular2/platform/browser';
 import {
+  bootstrap,
   Component,
-  AfterViewInit,
-  ElementRef,
-  Type,
   ViewChild,
-  Directive,
-  DynamicComponentLoader,
-  Query,
-  QueryList
-} from 'angular2/core';
-
-@Directive({
-  selector: 'ons-page',
-  providers: []
-})
-export class OnsPage {
-  constructor(public elementRef: ElementRef) {
-
-  }
-}
-
-
-@Directive({
-  selector: 'ons-navigator',
-  providers: []
-})
-export class OnsNavigator {
-  constructor(private elementRef: ElementRef) {
-    //pageQueryList.changes.subscribe(() => console.log(pageQueryList.length));
-  }
-
-  pushComponent(type: Type) {
-    console.log('pushComponent');
-  }
-}
+  OnsNavigator
+} from '../src/angular2-onsenui';
 
 @Component({
   selector: 'child-component',
@@ -49,9 +17,9 @@ class ChildComponent {
 
 @Component({
   selector: 'my-app',
-  directives: [OnsNavigator, OnsPage, ChildComponent],
+  directives: [OnsNavigator, ChildComponent],
   template: `
-  <ons-navigator #myNavigator>
+  <ons-navigator>
     <ons-page _compiled class="page hoge" style="display: block">
       <ons-toolbar>
         <div class="center">Page</div>
@@ -68,14 +36,14 @@ class ChildComponent {
   `
 })
 export class AppComponent {
-  @ViewChild(OnsNavigator) myNavi: OnsNavigator
+  @ViewChild(OnsNavigator) navigator: OnsNavigator
 
   constructor() {
 
   }
 
   push() {
-    this.myNavi.pushComponent(null);
+    this.navigator.pushComponent(null);
   }
 }
 

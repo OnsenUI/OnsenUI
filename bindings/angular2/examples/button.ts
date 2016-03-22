@@ -1,8 +1,4 @@
-import {bootstrap} from 'angular2/platform/browser'
-import {
-  Component,
-  AfterViewInit
-} from 'angular2/core';
+import {bootstrap, Component} from '../src/angular2-onsenui';
 
 declare var alert: Function;
 
@@ -20,11 +16,8 @@ declare var alert: Function;
   </ons-page>
     `
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   constructor() {
-  }
-
-  ngAfterViewInit() {
   }
 
   onClick() {

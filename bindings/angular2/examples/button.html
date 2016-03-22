@@ -10,22 +10,16 @@
     <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
 
     <script src="../../../build/js/onsenui.js"></script>
+    <!-- <script src="../build/angular2-onsenui.js"></script> -->
 
     <script>
-
       System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
+        packages: {
+          '../src': {}
         }
       });
 
-      System.import('../src/main.js').then(function() {
-        return System.import('../src/examples/button.js');
-      }, console.error.bind(console));
-
+      System.import('./button.js').catch(console.log.bind(console));
     </script>
 
   </head>

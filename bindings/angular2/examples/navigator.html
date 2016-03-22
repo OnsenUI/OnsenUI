@@ -10,22 +10,16 @@
     <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
 
     <script src="../../../build/js/onsenui.js"></script>
+    <!-- <script src="../build/angular2-onsenui.js"></script> -->
 
     <script>
-
       System.config({
         packages: {
-          'onsenui': {
-            main: '../../build/angular2-onsenui.js',
-            defaultExtension: 'js'
-          }
+          '../src': {}
         }
       });
 
-      System.import('../build/angular2-onsenui.js').then(function() {
-        System.import('./navigator.js');
-      }, console.error.bind(console));
-
+      System.import('./navigator.js').catch(console.log.bind(console));
     </script>
 
   </head>
