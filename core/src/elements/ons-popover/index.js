@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import PopoverAnimator from './animator';
@@ -352,7 +353,7 @@ class PopoverElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     const templateElement = templateSource.cloneNode(true);
     const content = templateElement.querySelector('.popover__content');
