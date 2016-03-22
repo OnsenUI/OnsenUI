@@ -21,7 +21,7 @@ import util from 'ons/util';
 /**
  * Fade-in screen transition.
  */
-export default class FadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
     options = util.extend({
