@@ -13,13 +13,6 @@ import {
   ResolvedProvider,
   Input
 } from 'angular2/core';
-import {
-  wtfLeave,
-  wtfCreateScope,
-  WtfScopeFn,
-  wtfStartTimeRange,
-  wtfEndTimeRange
-} from 'angular2/instrumentation';
 
 declare class NavigatorElement {
   public pushPage(page: string);
@@ -31,9 +24,13 @@ declare class NavigatorElement {
 })
 export class OnsNavigator {
   private _navigator: NavigatorElement;
+  private _providers: ResolvedProvider[];
 
   constructor(private _elementRef: ElementRef, private _compiler: Compiler, private _viewManager: AppViewManager) {
     this._navigator = _elementRef.nativeElement;
+    this._providers = Injector.resolve([
+      provide(OnsNavigator, {useValue: this})
+    ]);
   }
 
   pushComponent(type: Type): Promise<any> {
@@ -50,7 +47,7 @@ export class OnsNavigator {
     this._compiler.compileInHost(type).then(hostProtoViewRef => {
       const location = this._elementRef;
       const viewContainer = this._viewManager.getViewContainer(location);
-      const hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, []);
+      const hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, this._providers);
       const elementRef = this._viewManager.getHostElement(hostViewRef);
       const component = this._viewManager.getComponent(elementRef);
 

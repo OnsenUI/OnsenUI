@@ -24,6 +24,7 @@ class ChildComponent {
       <div class="page__background"></div>
       <div class="page__content" no-status-bar-fill>
         <div style="text-align: center; margin: 10px">
+          <ons-button (click)="push()">push</ons-button>
           <p>page2</p>
         </div>
       </div>
@@ -31,11 +32,11 @@ class ChildComponent {
   `
 })
 export class PageComponent {
-  constructor(/*private _navigator: OnsNavigator*/) {
+  constructor(private _navigator: OnsNavigator) {
   }
 
   push() {
-    //this._navigator.pushComponent(null);
+    this._navigator.pushComponent(PageComponent);
   }
 }
 
@@ -52,7 +53,6 @@ export class PageComponent {
       <div class="page__content" no-status-bar-fill>
         <div style="text-align: center; margin: 10px">
           <ons-button (click)="push()">push</ons-button>
-          <child-component></child-component>
         </div>
       </div>
     </ons-page>
