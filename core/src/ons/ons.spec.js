@@ -23,7 +23,7 @@ describe('ons', () => {
       let tmp = ons.isReady;
       ons.isReady = () => false;
       ons.disableAutoStatusBarFill();
-      expect(ons._config.autoStatusBarFill).to.be.false;
+      expect(ons._internal.config.autoStatusBarFill).to.be.false;
       ons.isReady = tmp;
     });
 
@@ -61,7 +61,7 @@ describe('ons', () => {
       let tmp = ons.isReady;
       ons.isReady = () => false;
       ons.enableAutoStatusBarFill();
-      expect(ons._config.autoStatusBarFill).to.be.true;
+      expect(ons._internal.config.autoStatusBarFill).to.be.true;
       ons.isReady = tmp;
     });
 
@@ -73,11 +73,11 @@ describe('ons', () => {
 
   describe('#enableAnimations()', () => {
     it('enables animations', () => {
-      expect(ons._config.animationsDisabled).to.be.true;
+      expect(ons._internal.config.animationsDisabled).to.be.true;
       ons.enableAnimations();
-      expect(ons._config.animationsDisabled).to.be.false;
+      expect(ons._internal.config.animationsDisabled).to.be.false;
       ons.disableAnimations();
-      expect(ons._config.animationsDisabled).to.be.true;
+      expect(ons._internal.config.animationsDisabled).to.be.true;
     });
   });
 
