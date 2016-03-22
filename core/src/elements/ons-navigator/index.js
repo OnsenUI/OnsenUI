@@ -20,11 +20,11 @@ import internal from 'ons/internal';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
-import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
+import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
+import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
+import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
 import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
-import SimpleSlideNavigatorTransitionAnimator from './simple-slide-animator';
-import LiftNavigatorTransitionAnimator from './lift-animator';
-import FadeNavigatorTransitionAnimator from './fade-animator';
+import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
@@ -34,12 +34,15 @@ import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': () => platform.isAndroid() ? SimpleSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'simpleslide': SimpleSlideNavigatorTransitionAnimator,
-  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : LiftNavigatorTransitionAnimator,
-  'simplelift': LiftNavigatorTransitionAnimator,
-  'fade': FadeNavigatorTransitionAnimator,
-  'mdfade': MDFadeNavigatorTransitionAnimator,
+  'slide': () => platform.isAndroid() ? MDSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
+  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : IOSLiftNavigatorTransitionAnimator,
+  'fade': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSFadeNavigatorTransitionAnimator,
+  'slide-ios': IOSSlideNavigatorTransitionAnimator,
+  'slide-md': MDSlideNavigatorTransitionAnimator,
+  'lift-ios': IOSLiftNavigatorTransitionAnimator,
+  'lift-md': MDLiftNavigatorTransitionAnimator,
+  'fade-ios': IOSFadeNavigatorTransitionAnimator,
+  'fade-md': MDFadeNavigatorTransitionAnimator,
   'none': NoneNavigatorTransitionAnimator
 };
 

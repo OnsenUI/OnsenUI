@@ -198,6 +198,22 @@ ons.disableAutoStyling = ons._autoStyle.disable;
 ons.enableAutoStyling = ons._autoStyle.enable;
 
 /**
+ * @method forcePlatformStyling
+ * @signature forcePlatformStyling(platform)
+ * @description
+ *   [en]Refresh styling for the given platform.[/en]
+ *   [ja][/ja]
+ * @param {string} platform New platform to style the elements.
+ */
+ons.forcePlatformStyling = function(newPlatform) {
+  ons.enableAutoStyling();
+  ons.platform.select(newPlatform || 'ios');
+  ons._util.arrayFrom(document.querySelectorAll('[_compiled]')).forEach(function(element) {
+    ons._autoStyle.prepare(element, true);
+  });
+};
+
+/**
  * @param {String} page
  * @param {Object} [options]
  * @param {Function} [options.link]
