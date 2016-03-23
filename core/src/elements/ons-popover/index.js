@@ -258,13 +258,28 @@ class PopoverElement extends BaseElement {
     el.style[primary] = 0;
 
     const l = vertical ? 'width' : 'height';
-    const diff = parseInt(window.getComputedStyle(el).getPropertyValue(l)) - pos[l];
+    const sizes = (style => ({
+      width: parseInt(style.getPropertyValue('width')),
+      height: parseInt(style.getPropertyValue('height'))
+    }))(window.getComputedStyle(el));
 
-    el.style[secondary] = Math.max(0, distance[secondary] - diff / 2) + 'px';
+    el.style[secondary] = Math.max(0, distance[secondary] - (sizes[l] - pos[l]) / 2) + 'px';
     this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2) + 'px';
+
+    this._setTransformOrigin(distance, sizes, pos, primary);
 
     // Prevent animit from restoring the style.
     el.removeAttribute('data-animit-orig-style');
+  }
+
+  _setTransformOrigin(distance, sizes, pos, primary) {
+    const calc = (a, o, l) => primary === a ? sizes[l] / 2 : distance[a] + (primary === o ? -sizes[l] : sizes[l] - pos[l]) / 2;
+    const [x, y] = [calc('left', 'right', 'width') + 'px', calc('top', 'bottom', 'height') + 'px'];
+    util.extend(this._popover.style, {
+      transformOrigin: x + ' ' + y,
+      webkitTransformOriginX: x,
+      webkitTransformOriginY: y
+    });
   }
 
   _calculateDirections(distance) {
