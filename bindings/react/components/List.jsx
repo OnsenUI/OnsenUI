@@ -1,4 +1,6 @@
-class OnsList extends React.Component {
+import React from 'react';
+
+class List extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,3 +14,5 @@ class OnsList extends React.Component {
     );
   }
 }
+
+export default List;

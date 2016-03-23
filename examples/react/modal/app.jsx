@@ -8,22 +8,22 @@ var Page2 = React.createClass({
   },
   render: function() {
     return (
-      <OnsPage>
-        <OnsToolbar>
+      <Ons.Page>
+        <Ons.Toolbar>
           <div className="center">Modal</div>
-        </OnsToolbar>
+        </Ons.Toolbar>
 
         <ons-modal ref="modal">
-          <OnsIcon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}}></OnsIcon>
+          <Ons.Icon icon="gear" spin="true" style={{lineHeight : 20, verticalAlign: 'middle'}}></Ons.Icon>
           <span style={{lineHeight: 20, fontSize: 15}}>Loading...</span>
         </ons-modal>
         <p style={{textAlign: 'center'}}>
-          <OnsButton onClick={this.props.popPage}>Pop Page</OnsButton>
+          <Ons.Button onClick={this.props.popPage}>Pop Page</Ons.Button>
         </p>
         <p style={{textAlign: 'center'}}>
-          <OnsButton modifier="light" onClick={this.openModal}>Open Modal</OnsButton>
+          <Ons.Button modifier="light" onClick={this.openModal}>Open Modal</Ons.Button>
         </p>
-      </OnsPage>
+      </Ons.Page>
     );
   }
 
@@ -44,23 +44,23 @@ var FirstPage = React.createClass({
 
   },
   render: function() {
-    return (<OnsPage>
+    return (<Ons.Page>
         <ons-modal ref="modal">
-          <OnsIcon icon="gear" spin="true" style={{lineHeight: 20, verticalAlign: 'middle'}} />
+          <Ons.Icon icon="gear" spin="true" style={{lineHeight: 20, verticalAlign: 'middle'}} />
           <span style={{lineHeight: 20, fontSize: 15}}>Loading...</span>
         </ons-modal>
 
-        <OnsToolbar>
+        <Ons.Toolbar>
           <div className="center">Modal</div>
-        </OnsToolbar>
+        </Ons.Toolbar>
 
         <p style={{textAlign: 'center'}}>
-          <OnsButton onClick={this.props.push}> Push Page </OnsButton>
+          <Ons.Button onClick={this.props.push}> Push Page </Ons.Button>
         </p>
         <p style={{textAlign: 'center'}}>
-          <OnsButton modifier="light" onClick={this.openModal}>Open Modal</OnsButton>
+          <Ons.Button modifier="light" onClick={this.openModal}>Open Modal</Ons.Button>
         </p>
-      </OnsPage>);
+      </Ons.Page>);
   }
 });
 
@@ -69,7 +69,7 @@ var MyPage  = React.createClass({
   popPage: function() {
     this.refs.nav.popPage();
   },
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
   push: function() {
@@ -78,7 +78,7 @@ var MyPage  = React.createClass({
   render: function() {
     return (
 
-      <OnsNavigator ref="nav"
+      <Ons.Navigator ref="nav"
        initialRoute={{comp: FirstPage, props: {push: this.push} }}
        renderScene={this.renderScene} />
   );

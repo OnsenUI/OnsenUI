@@ -3,7 +3,7 @@
 var NavPage = React.createClass({
   render: function() {
     return (
-      <OnsPage {...this.props}>
+      <Ons.Page {...this.props}>
         <ons-toolbar>
           <div className="center"> {this.props.title} </div>
         </ons-toolbar>
@@ -11,7 +11,7 @@ var NavPage = React.createClass({
           <br />
           <ons-button onClick={this.props.popPage}> Pop me </ons-button>
         </div>
-      </OnsPage>
+      </Ons.Page>
     );
   },
 });
@@ -21,7 +21,7 @@ var FirstPage = React.createClass({
     return { };
   },
   render: function() {
-    return (<OnsPage {...this.props}>
+    return (<Ons.Page {...this.props}>
       <ons-toolbar>
         <div className="center"> {this.props.title} </div>
       </ons-toolbar>
@@ -29,7 +29,7 @@ var FirstPage = React.createClass({
         <br />
         <ons-button onClick={this.props.pushPage}> Push me </ons-button>
       </div>
-    </OnsPage>);
+    </Ons.Page>);
   }
 });
 
@@ -38,7 +38,7 @@ var Nav = React.createClass({
   popPage: function() {
     this.refs.nav.popPage();
   },
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
   pushPage: function() {
@@ -50,10 +50,10 @@ var Nav = React.createClass({
   },
   render: function() {
     return (
-      <OnsPage>
-        <OnsNavigator ref="nav" initialRoute={{comp: FirstPage, props: {title: this.props.title, pushPage: this.pushPage}}}
+      <Ons.Page>
+        <Ons.Navigator ref="nav" initialRoute={{comp: FirstPage, props: {title: this.props.title, pushPage: this.pushPage}}}
           renderScene={this.renderScene} />
-      </OnsPage>
+      </Ons.Page>
     );
   },
 });
@@ -61,12 +61,12 @@ var Nav = React.createClass({
 var MyPage = React.createClass({
   render: function() {
     return (
-      <OnsPage {...this.props}>
+      <Ons.Page {...this.props}>
         <ons-toolbar>
           <div className="center"> {this.props.title} </div>
         </ons-toolbar>
         <div> {this.props.content} </div>
-      </OnsPage>
+      </Ons.Page>
     );
   },
 });
@@ -79,26 +79,23 @@ var MyNav  = React.createClass({
   render: function() {
     return (
       <div>
-        <OnsTabbar
-          pages= {[
-            <Nav title="Page 1" />,
-              <MyPage title="Settings "  content="Settings content" />,
-                <MyPage title="Favorite "  content="Favorite content" />
-                ]}
-                >
-
-                <OnsTab
-                  icon="home"
-                  label="Page1"
-                  active="true" />
-                <OnsTab
-                  icon="gear"
-                  label="Settings" />
-                <OnsTab
-                  icon="star"
-                  label="Favorite" />
-              </OnsTabbar>
-            </div>);
+        <Ons.Tabbar
+          initialIndex={1}
+          renderTabs={() => [
+            {
+              content: <Nav title="Page 1" />,
+              tab: <Ons.Tab icon="home" label="Page1" />
+            },
+            {
+              content: <MyPage title="Settings" content="Settings content" />,
+              tab: <Ons.Tab icon="gear" label="Settings" />
+            },
+            {
+              content: <MyPage title="Favorite" content="Favorite content" />,
+              tab: <Ons.Tab icon="star" label="Favorite" />
+            }
+          ]} />
+      </div>);
   }
 });
 

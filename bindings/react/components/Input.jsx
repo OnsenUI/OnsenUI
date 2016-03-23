@@ -1,4 +1,6 @@
-var OnsInput = React.createClass({
+import React from 'react';
+
+var Input = React.createClass({
   render: function() {
     return (
       <ons-input value={this.props.value}  _compiled="">
@@ -8,3 +10,5 @@ var OnsInput = React.createClass({
     );
   }
 });
+
+export default Input;

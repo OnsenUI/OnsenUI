@@ -1,4 +1,6 @@
-var OnsSwitch= React.createClass({
+import React from 'react';
+
+var Switch = React.createClass({
   render: function() {
     var myStyle= {
       WebkitUserSelect: 'none',
@@ -18,3 +20,5 @@ var OnsSwitch= React.createClass({
     );
   }
 });
+
+export default Switch;

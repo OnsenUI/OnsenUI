@@ -10,7 +10,7 @@ var MyPage  = React.createClass({
   render: function() {
     return (      <div style={{textAlign: 'center'}}>
       <h1>Page Content</h1>
-        <OnsInput type="text" value={this.state.name} onChange={this.onChange} />
+        <Ons.Input type="text" value={this.state.name} onChange={this.onChange} />
         <div style={{marginTop: 10}}> The input is {this.state.name} </div>
       </div>
     );

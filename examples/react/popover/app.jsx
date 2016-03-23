@@ -15,7 +15,7 @@ var MyPage  = React.createClass({
   },
   render: function() {
     return (
-      <OnsPage>
+      <Ons.Page>
       <div className="navigation-bar">
         <div className="navigation-bar__left">
           <span ref="navigation" onClick={() => this.showClick(this.refs.navigation)} className="toolbar-button--outline navigation-bar__line-height">
@@ -35,7 +35,7 @@ var MyPage  = React.createClass({
       <div style={{textAlign: 'center'}}>
         <br />
         <br />
-        <OnsButton ref="button" onClick={() => this.showClick(this.refs.button)}>Click me!</OnsButton>
+        <Ons.Button ref="button" onClick={() => this.showClick(this.refs.button)}>Click me!</Ons.Button>
       </div>
 
       <div className="tab-bar">
@@ -74,13 +74,13 @@ var MyPage  = React.createClass({
           </button>
         </label>
       </div>
-      <OnsPopover isOpen={this.state.isOpen} onCancel={this.cancel} getTarget={this.getTarget} direction="up down" cancelable>
+      <Ons.Popover isOpen={this.state.isOpen} onCancel={this.cancel} getTarget={this.getTarget} direction="up down" cancelable>
         <div style={{textAlign: 'center', opacity: 0.5}}>
           <p>This is a popover!</p>
           <p><small>Click the background to remove the popover.</small></p>
         </div>
-        </OnsPopover>
-    </OnsPage>
+        </Ons.Popover>
+    </Ons.Page>
     );
   }
 });

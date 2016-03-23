@@ -1,4 +1,7 @@
-class OnsLazyList extends React.Component {
+import React from 'react';
+import {ListItem} from './SimpleWrapper.jsx';
+
+class LazyList extends React.Component {
   componentDidMount() {
     var self = this;
 
@@ -9,9 +12,9 @@ class OnsLazyList extends React.Component {
     _render: function(items, newHeight) {
         var createElement =  function({index: index, top: top}) {
         return (
-          <OnsListItem key={index} class="list__item" _compiled>
+          <ListItem key={index} class="list__item" _compiled>
             {self.props.renderRow(index)}
-          </OnsListItem>
+          </ListItem>
         )};
 
         var el = items.map(createElement);
@@ -50,8 +53,11 @@ class OnsLazyList extends React.Component {
     );
   }
 }
-OnsLazyList.propTypes = {
+
+LazyList.propTypes = {
   length: React.PropTypes.number.isRequired,
   renderRow: React.PropTypes.func.isRequired,
   calculateItemHeight: React.PropTypes.func.isRequired,
 };
+
+export default LazyList;

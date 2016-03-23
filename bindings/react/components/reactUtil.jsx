@@ -1,27 +1,29 @@
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+
+
 var ReactTestUtils = React.addons.TestUtils;
 var reactUtil = {};
 
-reactUtil.rendersToOnsPage =  function(obj) {
+reactUtil.rendersToPage =  function(obj) {
    var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
    return htmlString.startsWith('<ons-page');
 };
 
 reactUtil.rendersTo =  function(obj, str) {
-   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-   return htmlString.startsWith(str);
+  var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
+  return htmlString.startsWith(str);
 }
 
-reactUtil.rendersToOnsToolbar = function(obj) {
+reactUtil.rendersToToolbar = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-toolbar');
 };
 
-reactUtil.rendersToOnsModal = function(obj) {
+reactUtil.rendersToModal = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith('<ons-modal');
 };
-
-
 
 reactUtil.lastChild = function(el) {
   return el.children[el.children.length - 1];
@@ -40,3 +42,5 @@ reactUtil.createCustomDialog = function(component) {
 };
 
 reactUtil.templateMap = {};
+
+export default reactUtil;

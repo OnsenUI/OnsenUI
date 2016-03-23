@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 var ReactTestUtils = React.addons.TestUtils;
 
 var createDialogClass = function(domName, showFun) {
@@ -60,8 +63,8 @@ var createDialogClass = function(domName, showFun) {
   return React.createClass(myClass);
 };
 
-var OnsAlertDialog = createDialogClass('ons-alert-dialog');
-var OnsDialog = createDialogClass('ons-dialog');
+var AlertDialog = createDialogClass('ons-alert-dialog');
+var Dialog = createDialogClass('ons-dialog');
 
 var showFun = function() {
   var target = this.props.getTarget();
@@ -71,4 +74,6 @@ var showFun = function() {
   return this.node.firstChild.show(target);
 };
 
-var OnsPopover = createDialogClass('ons-popover', showFun);
+var Popover = createDialogClass('ons-popover', showFun);
+
+export {AlertDialog, Dialog, Popover};

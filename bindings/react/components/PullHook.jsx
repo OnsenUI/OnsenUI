@@ -1,4 +1,6 @@
-var OnsPullHook  = React.createClass({
+import React from 'react';
+
+var PullHook  = React.createClass({
   componentDidMount: function() {
     window.addEventListener('changestate', this.props.onChange);
     this.refs.pullHook.setActionCallback(this.props.onLoad);
@@ -10,3 +12,5 @@ var OnsPullHook  = React.createClass({
     return <ons-pull-hook ref="pullHook" {...this.props} />;
   }
 });
+
+export default PullHook;

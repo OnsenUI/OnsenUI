@@ -1,3 +1,5 @@
+import React from 'react';
+
 var createSimpleWrapperClass = function(domName) {
   var myClass = {
     render: function() {
@@ -7,19 +9,34 @@ var createSimpleWrapperClass = function(domName) {
   return React.createClass(myClass);
 };
 
-var OnsButton = createSimpleWrapperClass('ons-button');
-var OnsToolbar = createSimpleWrapperClass('ons-toolbar');
-var OnsBackButton = createSimpleWrapperClass('ons-back-button');
-var OnsRipple = createSimpleWrapperClass('ons-ripple');
-var OnsCarousel = createSimpleWrapperClass('ons-carousel');
-var OnsCarouselItem = createSimpleWrapperClass('ons-carousel-item');
-var OnsCarouselCover = createSimpleWrapperClass('ons-carousel-cover');
-var OnsToolbarButton = createSimpleWrapperClass('ons-toolbar-button');
-var OnsBottomToolbar = createSimpleWrapperClass('ons-buttom-toolbar');
-var OnsListItem = createSimpleWrapperClass('ons-list-item');
-// var OnsList = createSimpleWrapperClass('ons-list');
-var OnsIcon = createSimpleWrapperClass('ons-icon');
-var OnsScroller = createSimpleWrapperClass('ons-scroller');
-var OnsTabActive = createSimpleWrapperClass('ons-tab-active');
-var OnsTabInactive = createSimpleWrapperClass('ons-tab-inactive');
+var Button = createSimpleWrapperClass('ons-button');
+var Toolbar = createSimpleWrapperClass('ons-toolbar');
+var BackButton = createSimpleWrapperClass('ons-back-button');
+var Ripple = createSimpleWrapperClass('ons-ripple');
+var Carousel = createSimpleWrapperClass('ons-carousel');
+var CarouselItem = createSimpleWrapperClass('ons-carousel-item');
+var CarouselCover = createSimpleWrapperClass('ons-carousel-cover');
+var ToolbarButton = createSimpleWrapperClass('ons-toolbar-button');
+var BottomToolbar = createSimpleWrapperClass('ons-buttom-toolbar');
+var ListItem = createSimpleWrapperClass('ons-list-item');
+var Icon = createSimpleWrapperClass('ons-icon');
+var Scroller = createSimpleWrapperClass('ons-scroller');
+var TabActive = createSimpleWrapperClass('ons-tab-active');
+var TabInactive = createSimpleWrapperClass('ons-tab-inactive');
 
+export {
+  Button,
+  Toolbar,
+  BackButton,
+  Ripple,
+  Carousel,
+  CarouselItem,
+  CarouselCover,
+  ToolbarButton,
+  BottomToolbar,
+  ListItem,
+  Icon,
+  Scroller,
+  TabActive,
+  TabInactive
+};

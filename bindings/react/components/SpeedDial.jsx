@@ -1,4 +1,10 @@
-var OnsSpeedDial = React.createClass({
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reactUtil from './reactUtil.jsx';
+
+import Fab from './Fab.jsx';
+
+var SpeedDial = React.createClass({
   componentDidMount: function() {
     var node = this.node = ReactDOM.findDOMNode(this);
     node._updateClasses();
@@ -7,7 +13,8 @@ var OnsSpeedDial = React.createClass({
     var items  = [];
     var btnContent = [];
     React.Children.forEach(this.props.children, function(child) {
-      if (child == null) return; 
+      if (child == null) return;
+
       if (reactUtil.rendersTo(child, '<ons-speed-dial-item')) {
         items.push(child);
       } else {
@@ -17,10 +24,12 @@ var OnsSpeedDial = React.createClass({
 
     return(
       <ons-speed-dial {...this.props} _compiled="">
-        <OnsFab>
+        <Fab>
           {btnContent}
-        </OnsFab>
+        </Fab>
         {items}
       </ons-speed-dial>);
     }
 });
+
+export default SpeedDial;

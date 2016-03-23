@@ -1,4 +1,6 @@
-class OnsNavigator extends React.Component {
+import React from 'react';
+
+class Navigator extends React.Component {
   constructor(props) {
     super(props);
     this.pages = [];
@@ -57,7 +59,7 @@ class OnsNavigator extends React.Component {
     this.refs.navi.popPage = this.popPage.bind(this);
 
     if (this.props.initialRoute && this.props.initialRoutes) {
-      throw 'In OnsNavigator either initalRoute or initalRoutes can be set';
+      throw 'In Navigator either initalRoute or initalRoutes can be set';
     }
 
     if (this.props.initialRoute) {
@@ -88,3 +90,5 @@ class OnsNavigator extends React.Component {
     );
   }
 }
+
+export default Navigator;

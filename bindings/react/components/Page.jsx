@@ -1,4 +1,7 @@
-var OnsPage = React.createClass({
+import React from 'react';
+import reactUtil from './reactUtil.jsx';
+
+var Page = React.createClass({
   render: function() {
     var toolbar;
     var modal;
@@ -6,9 +9,9 @@ var OnsPage = React.createClass({
 
     React.Children.forEach(this.props.children, function(child) {
       if (child == null) return;
-      if (reactUtil.rendersToOnsToolbar(child)) {
+      if (reactUtil.rendersToToolbar(child)) {
         toolbar = child;
-      }  else if (reactUtil.rendersToOnsModal(child)) {
+      }  else if (reactUtil.rendersToModal(child)) {
         modal = child;
       } else {
         otherChildren.push(child);
@@ -25,5 +28,7 @@ var OnsPage = React.createClass({
           {modal}
         </div>
       </ons-page>;
-    }, 
+    },
 });
+
+export default Page;

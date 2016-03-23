@@ -1,0 +1,25 @@
+{
+  "name": "react-onsenui",
+  "version": "0.0.1",
+  "description": "React extension for the Onsen UI library.",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OnsenUI/OnsenUI"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/OnsenUI/OnsenUI/issues"
+  },
+  "homepage": "http://onsen.io/",
+  "main": "index.js",
+  "peerDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  }
+}
