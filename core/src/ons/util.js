@@ -334,6 +334,21 @@ util.removeModifier = (target, modifierName) => {
 };
 
 /**
+ * @param {Element} target
+ */
+util.updateRipple = (target) => {
+  let rippleElement = util.findChild(target, 'ons-ripple');
+
+  if (target.hasAttribute('ripple')) {
+    if (!rippleElement) {
+      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+    }
+  } else if (rippleElement) {
+    rippleElement.remove();
+  }
+};
+
+/**
  * @param {String}
  * @return {Object}
  */

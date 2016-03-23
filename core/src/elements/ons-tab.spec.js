@@ -261,7 +261,7 @@ describe('OnsTabElement', () => {
       let e = document.createElement('ons-tab');
       expect(e.getAttribute('modifier')).to.equal('material');
       expect(e.hasAttribute('ripple')).to.be.true;
-      expect(e.querySelector('.tab-bar__button').firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
   });

@@ -184,13 +184,15 @@ class TabElement extends BaseElement {
       this._updateDefaultTemplate();
     }
 
-    if (this.hasAttribute('ripple') && !util.findChild(button, 'ons-ripple')) {
-      button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _updateDefaultTemplate() {
@@ -366,14 +368,16 @@ class TabElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (this._hasDefaultTemplate) {
-      if (name === 'icon' || name === 'label') {
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
+        break;
+      case 'icon':
+      case 'label':
         this._updateDefaultTemplate();
-      }
-    }
-
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 }
