@@ -74,8 +74,13 @@ export class OnsNavigator {
   }
 
   popComponent(): Promise<any> {
-    // TODO: implement
-    return Promise.reject(null);
+    return new Promise((resolve, reject) => {
+      const page: NavigatorPage = this._pages.pop();
+      page.dispose();
+
+      resolve();
+    });
+
   }
 }
 

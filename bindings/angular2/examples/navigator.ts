@@ -25,6 +25,7 @@ class ChildComponent {
     <div class="page__content" no-status-bar-fill>
       <div style="text-align: center; margin: 10px">
         <ons-button (click)="push()">push</ons-button>
+        <ons-button (click)="pop()">pop</ons-button>
         <p>page2</p>
       </div>
     </div>
@@ -36,6 +37,10 @@ export class PageComponent {
 
   push() {
     this._navigator.pushComponent(PageComponent);
+  }
+
+  pop() {
+    this._navigator.popComponent();
   }
 }
 
