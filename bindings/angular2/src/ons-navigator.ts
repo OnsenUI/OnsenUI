@@ -18,8 +18,20 @@ declare class NavigatorElement {
   public pushPage(page: string);
 };
 
+export class PageParams {
+  constructor(private _data = {}) {}
+
+  at(key: string): any {
+    return this._data[key];
+  }
+
+  get data() {
+    return this._data;
+  }
+}
+
 export class NavigatorPage {
-  constructor(public elementRef: ElementRef, public component: Type, public type: Function, public dispose: Function, public params: Object) {
+  constructor(public elementRef: ElementRef, public component: Type, public type: Function, public dispose: Function, public params: PageParams) {
   }
 }
 
@@ -41,9 +53,9 @@ export class OnsNavigator {
 
   /**
    * @method pushComponent
-   * @signature pushComponent(type: Type, params: Object = {})
+   * @signature pushComponent(type: Type, params: Map = {})
    * @param {Type} type
-   * @param {Object} params
+   * @param {Map} params
    */
   pushComponent(type: Type, params: Object = {}): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -57,8 +69,12 @@ export class OnsNavigator {
   private loadPageComponent(type: Type, params: Object, done: Function): void {
     this._compiler.compileInHost(type).then(hostProtoViewRef => {
       const location = this._elementRef;
+      const pageParams = new PageParams(params);
+      const providers = this._providers.concat(Injector.resolve([
+        provide(PageParams, {useValue: pageParams})
+      ]));
       const viewContainer = this._viewManager.getViewContainer(location);
-      const hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, this._providers);
+      const hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, providers);
       const elementRef = this._viewManager.getHostElement(hostViewRef);
       const component = this._viewManager.getComponent(elementRef);
 
@@ -69,7 +85,7 @@ export class OnsNavigator {
         }
       };
 
-      done(new NavigatorPage(elementRef, component, type, dispose, params));
+      done(new NavigatorPage(elementRef, component, type, dispose, pageParams));
     });
   }
 
@@ -80,7 +96,6 @@ export class OnsNavigator {
 
       resolve();
     });
-
   }
 }
 

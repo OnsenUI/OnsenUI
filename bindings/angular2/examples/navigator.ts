@@ -2,7 +2,8 @@ import {
   bootstrap,
   Component,
   ViewChild,
-  OnsNavigator
+  OnsNavigator,
+  PageParams
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -32,11 +33,12 @@ class ChildComponent {
   `
 })
 export class PageComponent {
-  constructor(private _navigator: OnsNavigator) {
+  constructor(private _navigator: OnsNavigator, private _params: PageParams) {
+    console.log('parameters:', _params.data);
   }
 
   push() {
-    this._navigator.pushComponent(PageComponent);
+    this._navigator.pushComponent(PageComponent, {random: Math.random()});
   }
 
   pop() {
@@ -64,14 +66,12 @@ export class PageComponent {
   `
 })
 export class AppComponent {
-  @ViewChild(OnsNavigator) navigator: OnsNavigator
+  @ViewChild(OnsNavigator) private navigator: OnsNavigator
 
-  constructor() {
-
-  }
+  constructor() { }
 
   push() {
-    this.navigator.pushComponent(PageComponent);
+    this.navigator.pushComponent(PageComponent, {key: 'value'});
   }
 }
 
