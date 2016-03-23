@@ -18,18 +18,25 @@ declare class NavigatorElement {
   public pushPage(page: string);
 };
 
+export class NavigatorPage {
+  constructor(public elementRef: ElementRef, public component: Type, public type: Function, public dispose: Function, public params: Object) {
+  }
+}
+
 @Directive({
   selector: 'ons-navigator > ons-page'
 })
 export class OnsNavigator {
   private _navigator: NavigatorElement;
   private _providers: ResolvedProvider[];
+  private _pages: NavigatorPage[];
 
   constructor(private _elementRef: ElementRef, private _compiler: Compiler, private _viewManager: AppViewManager) {
     this._navigator = _elementRef.nativeElement;
     this._providers = Injector.resolve([
       provide(OnsNavigator, {useValue: this})
     ]);
+    this._pages = [];
   }
 
   /**
@@ -40,8 +47,9 @@ export class OnsNavigator {
    */
   pushComponent(type: Type, params: Object = {}): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.loadPageComponent(type, params, result => {
-        resolve(result);
+      this.loadPageComponent(type, params, navigatorPage => {
+        this._pages.push(navigatorPage);
+        resolve(navigatorPage);
       });
     });
   }
@@ -61,7 +69,7 @@ export class OnsNavigator {
         }
       };
 
-      done({elementRef, component, type, dispose, params});
+      done(new NavigatorPage(elementRef, component, type, dispose, params));
     });
   }
 
