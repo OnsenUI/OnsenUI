@@ -18,30 +18,113 @@ limitations under the License.
 import util from 'ons/util';
 
 export default class SplitterAnimator {
+
   constructor(options = {}) {
-    options = util.extend({
-      timing: 'linear',
+    this._options = {
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
       duration: '0.3',
       delay: '0'
-    }, options || {});
+    };
+    this.updateOptions(options);
+  }
 
-    this._timing = options.timing;
-    this._duration = options.duration;
-    this._delay = options.delay;
+  updateOptions(options = {}) {
+    util.extend(this._options, options);
+    this._timing = this._options.timing;
+    this._duration = this._options.duration;
+    this._delay = this._options.delay;
   }
-  layoutOnOpen() {}
-  layoutOnClose() {}
-  translate(distance) {}
+
+  /**
+   * @param {Element} contentElement
+   * @param {Element} sideElement
+   * @param {Element} maskElement
+   */
+  activate(contentElement, sideElement, maskElement) {
+    this._content = contentElement;
+    this._side = sideElement;
+    this._mask = maskElement;
+  }
+
+  inactivate() {
+    this._content = this._side = this._mask = null;
+  }
+
+  rightSideMinus() {
+    return this._side._side === 'right' ? '-' : '';
+  }
+
+  translate(distance) {
+    animit(this._side)
+      .queue({
+        transform: `translate3d(${this.rightSideMinus() + distance}px, 0px, 0px)`
+      })
+      .play();
+  }
+
+  /**
+   * @param {Function} done
+   */
   open(done) {
-    done();
+    animit.runAll(
+      animit(this._side)
+        .wait(this._delay)
+        .queue({
+          transform: `translate3d(${this.rightSideMinus()}100%, 0px, 0px)`
+        }, {
+          duration: this._duration,
+          timing: this._timing
+        })
+        .queue(callback => {
+          callback();
+          done && done();
+        }),
+
+      animit(this._mask)
+        .wait(this._delay)
+        .queue({
+          display: 'block'
+        })
+        .queue({
+          opacity: '1'
+        }, {
+          duration: this._duration,
+          timing: 'linear',
+        })
+    );
   }
+
+  /**
+   * @param {Function} done
+   */
   close(done) {
-    done();
-  }
-  activate(contentElement, sideElement, maskElement) {}
-  inactivate() {}
-  isActivated() {
-    throw new Error();
+
+    animit.runAll(
+      animit(this._side)
+        .wait(this._delay)
+        .queue({
+          transform: 'translate3d(0px, 0px, 0px)'
+        }, {
+          duration: this._duration,
+          timing: this._timing
+        })
+        .queue(callback => {
+          this._side.style.webkitTransition = '';
+          done && done();
+          callback();
+        }),
+
+      animit(this._mask)
+        .wait(this._delay)
+        .queue({
+          opacity: '0'
+        }, {
+          duration: this._duration,
+          timing: 'linear',
+        })
+        .queue({
+          display: 'none'
+        })
+    );
   }
 }
-

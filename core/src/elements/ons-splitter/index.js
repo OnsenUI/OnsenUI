@@ -18,7 +18,6 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import OverlaySplitterAnimator from './overlay-animator';
 import SplitterAnimator from './animator';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -87,7 +86,7 @@ class SplitterElement extends BaseElement {
     const content = this._getContentElement();
     if (content) {
       this._getAvailableSides().forEach(side => {
-        content.style[side._side] = side.getCurrentMode() === 'split' ? side._width : 0;
+        content.style[side._side] = side.mode === 'split' ? side._width : 0;
       });
     }
   }
@@ -295,15 +294,7 @@ class SplitterElement extends BaseElement {
   }
 
   _onDeviceBackButton(handler) {
-    this._getAvailableSides().some(side => {
-      return side.isOpen() ? (side.close() || true) : false;
-    })
-    ['left', 'right'].map(e => this._getSideElement(e)).some(e => {
-      if (side.isOpen()) {
-        side.close();
-        return true;
-      }
-    }) || handler.callParentHandler();
+    this._getAvailableSides().some(side => side.isOpen() ? side.close() : false) || handler.callParentHandler();
   }
 
   attachedCallback() {
@@ -405,8 +396,8 @@ window.OnsSplitterElement = document.registerElement('ons-splitter', {
 });
 
 window.OnsSplitterElement._animatorDict = {
-  default: OverlaySplitterAnimator,
-  overlay: OverlaySplitterAnimator
+  default: SplitterAnimator,
+  overlay: SplitterAnimator
 };
 
 window.OnsSplitterElement.registerAnimator = function(name, Animator) {

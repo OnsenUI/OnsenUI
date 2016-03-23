@@ -204,7 +204,24 @@ ons-splitter-content {
 }
 
 ons-splitter-side {
+  right: auto;
   z-index: 1;
+}
+
+ons-splitter-side[side="right"] {
+  right: 0;
+  left: auto;
+}
+
+ons-splitter-side[mode="collapse"] {
+  z-index: 3;
+  left: auto;
+  right: 100%;
+}
+
+ons-splitter-side[side="right"][mode="collapse"] {
+  right: auto;
+  left: 100%;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {

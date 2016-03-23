@@ -58,10 +58,12 @@ class CollapseDetection {
   }
 
   changeTarget(target) {
-    this._target && this.inactivate();
+    this.disable();
     this._target = target;
-    this._orientation = ['portrait', 'landscape'].indexOf(target) !== -1;
-    this.activate();
+    if (target) {
+      this._orientation = ['portrait', 'landscape'].indexOf(target) !== -1;
+      this.activate();
+    }
   }
 
   _match(value) {
@@ -86,10 +88,10 @@ class CollapseDetection {
     }
   }
 
-  inactivate() {
+  disable() {
     if (this._orientation) {
       ons.orientation.off('change', this._boundOnChange);
-    } else {
+    } else if (this._queryResult) {
       this._queryResult.removeListener(this._boundOnChange);
       this._queryResult = null;
     }
@@ -154,11 +156,11 @@ class CollapseMode {
     const {_distance: distance, _width: width, _element: el} = this;
     const direction = event.gesture.interimDirection;
     const shouldOpen = el._side !== direction && distance > width * el._threshold;
-    this._executeAction(shouldOpen ? 'open' : 'close');
+    this.executeAction(shouldOpen ? 'open' : 'close');
   }
 
   layout() {
-    if (this._animator.isActivated() && this._state === OPEN_STATE) {
+    if (this._active && this._state === OPEN_STATE) {
       this._animator.open();
     }
   }
@@ -167,17 +169,13 @@ class CollapseMode {
   enterMode() {
     if (!this._active) {
       this._active = true;
-      this._animator.activate();
       this.layout();
     }
   }
 
   // exit collapse mode
   exitMode() {
-    if (this._active) {
-      this._active = false;
-      this._animator.inactivate();
-    }
+    this._active = false;
   }
 
   _isOpenOtherSideMenu() {
@@ -193,7 +191,7 @@ class CollapseMode {
    * @param {Boolean} [options.withoutAnimation]
    * @return {Promise} Resolves to the splitter side element
    */
-  _executeAction(name, options = {}) {
+  executeAction(name, options = {}) {
     const FINAL_STATE = name === 'open' ? OPEN_STATE : CLOSED_STATE;
 
     if (!this._active || this._state === FINAL_STATE) {
@@ -231,32 +229,8 @@ class CollapseMode {
       });
     });
   }
-
-  /**
-   * @param {Object} [options]
-   * @param {Function} [options.callback]
-   * @param {Boolean} [options.withoutAnimation]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  open(options = {}) {
-    return this._executeAction('open', options);
-  }
-
-  /**
-   * @param {Object} [options]
-   * @param {Function} [options.callback]
-   * @param {Boolean} [options.withoutAnimation]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  close(options = {}) {
-    return this._executeAction('close', options);
-  }
 }
 
-const watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
-const updateFunctionName = (name) => {
-  return '_updateFor' + name.split('-').map((e) => e[0].toUpperCase() + e.slice(1)).join('') + 'Attribute';
-};
 /**
  * @element ons-splitter-side
  * @category control
@@ -359,7 +333,6 @@ class SplitterSideElement extends BaseElement {
 
   /**
    * @attribute animation
-   * @initonly
    * @type {String}
    * @description
    *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
@@ -449,6 +422,125 @@ class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
+  createdCallback() {
+    this._collapseMode = new CollapseMode(this);
+    this._collapseDetection = new CollapseDetection(this);
+    this._animatorFactory = new AnimatorFactory({
+      animators: window.OnsSplitterElement._animatorDict,
+      baseClass: SplitterAnimator,
+      baseClassName: 'SplitterAnimator',
+      defaultAnimation: this.getAttribute('animation')
+    });
+    this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
+    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
+  }
+
+  attachedCallback() {
+    if (!util.match(this.parentNode, 'ons-splitter')) {
+      throw new Error('Parent must be an ons-splitter element.');
+    }
+    this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
+    this._update(this._watchedAttributes);
+  }
+
+  detachedCallback() {
+    this._collapseDetection.disable();
+    this._gestureDetector.dispose();
+    this._gestureDetector = null;
+  }
+
+  attributeChangedCallback(name, last, current) {
+    if (this._watchedAttributes.indexOf(name) !== -1) {
+      this._update(name, current);
+    }
+  }
+
+  _update(name, value) {
+    if (Array.isArray(name)) {
+      return name.forEach(e => this._update(e));
+    }
+    name = '_updateFor' + name.split('-').map(e => e[0].toUpperCase() + e.slice(1)).join('') + 'Attribute';
+    return this[name](value);
+  }
+
+  _emitEvent(name) {
+    if (name.slice(0, 3) !== 'pre') {
+      return util.triggerElementEvent(this, name, {side: this});
+    }
+    let isCanceled = false;
+
+    util.triggerElementEvent(this, name, {
+      side: this,
+      cancel: () => isCanceled = true
+    });
+
+    return isCanceled;
+  }
+
+  _updateCollapse(value = this.getAttribute('collapse')) {
+    if (value === null || value === 'split') {
+      this._collapseDetection.disable();
+      return this._updateMode(SPLIT_MODE);
+    }
+    if (value === '' || value === 'collapse') {
+      this._collapseDetection.disable();
+      return this._updateMode(COLLAPSE_MODE);
+    }
+
+    this._collapseDetection.changeTarget(value);
+  }
+
+  // readonly attribute for the users
+  _updateMode(mode) {
+    if (mode !== this._mode) {
+      this._mode = mode;
+      this._collapseMode[mode === COLLAPSE_MODE ? 'enterMode' : 'exitMode']();
+      this.setAttribute('mode', mode);
+
+      util.triggerElementEvent(this, 'modechange', {side: this, mode: mode});
+    }
+  }
+
+  _updatePage(page = this.getAttribute('page')) {
+    if (page !== null) {
+      rewritables.ready(this, () => this.load(page));
+    }
+  }
+
+  _updateOpenThreshold(threshold = this.getAttribute('open-threshold')) {
+    this._threshold = Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
+  }
+
+  _updateSwipeable(swipeable = this.getAttribute('swipeable')) {
+    const action = swipeable === null ? 'off' : 'on';
+    this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+  }
+
+  _updateSwipeTargetWidth(value = this.getAttribute('swipe-target-width')) {
+    this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
+  }
+
+  _updateWidth(width = this.getAttribute('width')) {
+    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
+    this.style.width = this._width;
+  }
+
+  _updateSide(side = this.getAttribute('side')) {
+    this._side = side === 'right' ? side : 'left';
+  }
+
+  _updateAnimation(animation = this.getAttribute('animation')) {
+    this._animator = this._animatorFactory.newAnimator({animation});
+
+    const content = util.findChild(this.parentElement, 'ons-splitter-content');
+    const mask = util.findChild(this.parentElement, 'ons-splitter-mask');
+    this._animator.activate(content, this, mask);
+  }
+
+  _updateAnimationOptions(value = this.getAttribute('animation-options')) {
+    this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(value));
+  }
+
   get page() {
     return this._page;
   }
@@ -469,137 +561,12 @@ class SplitterSideElement extends BaseElement {
   }
 
   isOpen() {
-    return this._collapseMethod('isOpen');
+    return this._collapseMode.isOpen();
   }
 
   isSwipeable() {
     return this.hasAttribute('swipeable');
   }
-
-  _collapseMethod(name, ...args) {
-    return this._mode === COLLAPSE_MODE && this._collapseMode[name](...args);
-  }
-
-  createdCallback() {
-    this._collapseStrategy = new CollapseDetection(this);
-    this._animatorFactory = new AnimatorFactory({
-      animators: window.OnsSplitterElement._animatorDict,
-      baseClass: SplitterAnimator,
-      baseClassName: 'SplitterAnimator',
-      defaultAnimation: this.getAttribute('animation')
-    });
-
-    this._collapseMode = new CollapseMode(this);
-
-    this._boundHandleGesture = (e) => this._collapseMethod('handleGesture', e);
-
-    watchedAttributes.filter(e => e !== 'collapse').forEach(e => this[updateFunctionName(e)]());
-  }
-
-  _emitEvent(name) {
-    if (name.slice(0, 3) !== 'pre') {
-      return util.triggerElementEvent(this, name, {side: this});
-    }
-    let isCanceled = false;
-
-    util.triggerElementEvent(this, name, {
-      side: this,
-      cancel: () => isCanceled = true
-    });
-
-    return isCanceled;
-  }
-
-  _updateForCollapseAttribute(value = this.getAttribute('collapse')) {
-    if (value === null || value === 'split') {
-      return this._updateMode(SPLIT_MODE);
-    }
-    if (value === '' || value === 'collapse') {
-      return this._updateMode(COLLAPSE_MODE);
-    }
-    const strategy = new CollapseDetection(this, value);
-    if (this._isAttached) {
-      this._collapseStrategy.inactivate();
-      strategy.activate();
-    }
-
-    this._collapseStrategy = strategy;
-  }
-
-  _updateMode(mode) {
-    if (mode !== this._mode) {
-      this._mode = mode;
-      this._collapseMethod(mode === COLLAPSE_MODE ? 'enterMode' : 'exitMode');
-      this.setAttribute('mode', mode);
-
-      util.triggerElementEvent(this, 'modechange', {side: this, mode: mode});
-    }
-  }
-
-  _updateForModeAttribute(mode = this.getAttribute('mode')) {
-    this._updateMode(mode || SPLIT_MODE);
-  }
-
-  _updateForOpenThresholdAttribute(threshold = this.getAttribute('open-threshold')) {
-    this._threshold = Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
-  }
-
-  _updateForSwipeableAttribute(swipeable = this.getAttribute('swipeable')) {
-    if (this._gestureDetector) {
-      const action = swipeable === null ? 'off' : 'on';
-      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
-    }
-  }
-
-  _updateForSwipeTargetWidthAttribute(value = this.getAttribute('swipe-target-width')) {
-    this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
-  }
-
-  _updateForWidthAttribute(width = this.getAttribute('width')) {
-    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
-    this.style.width = this._width;
-    this._collapseMethod('layout');
-  }
-
-  _updateForSideAttribute(side = this.getAttribute('side')) {
-    this._side = side === 'right' ? side : 'left';
-    this._collapseMethod('layout');
-  }
-
-  _updateForAnimationAttribute() {
-    this._updateAnimator();
-  }
-
-  _updateForAnimationOptionsAttribute(value = this.getAttribute('animation-options')) {
-    // this._animationOptions = util.parseJSONObjectSafely(value, {});
-    this._updateAnimator();
-  }
-
-  _updateAnimator(){
-    const [oldAnimator, newAnimator] = [this._animator, this._initAnimator()];
-
-    if (oldAnimator && oldAnimator.isActivated()) {
-      oldAnimator.inactivate();
-      newAnimator.activate();
-    }
-  }
-
-  _initAnimator() {
-    const animator = this._animatorFactory.newAnimator({
-      animation: this.getAttribute('animation'),
-      animationOptions: AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    });
-
-    animator.activate = (oldActivate => {
-      const content = util.findChild(this.parentElement, 'ons-splitter-content');
-      const mask = util.findChild(this.parentElement, 'ons-splitter-mask');
-      return oldActivate.bind(animator, content, this, mask);
-    })(animator.activate);
-
-    this._animator = animator;
-    return animator;
-  }
-
 
   /**
    * @method open
@@ -618,7 +585,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   open(options = {}) {
-    return this._collapseMethod('open', options);
+    return this._collapseMode.executeAction('open', options);
   }
 
   /**
@@ -638,7 +605,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   close(options = {}) {
-    return this._collapseMethod('close', options);
+    return this._collapseMode.executeAction('close', options);
   }
 
   /**
@@ -679,37 +646,6 @@ class SplitterSideElement extends BaseElement {
    */
   toggle(options = {}) {
     return this.isOpen() ? this.close(options) : this.open(options);
-  }
-
-  attributeChangedCallback(name, last, current) {
-    if (watchedAttributes.indexOf(name) !== -1) {
-      this[updateFunctionName(name)](current, last);
-    }
-  }
-
-  attachedCallback() {
-    this._isAttached = true;
-    this._updateForCollapseAttribute();
-    this._updateForWidthAttribute();
-
-    if (!util.match(this.parentNode, 'ons-splitter')) {
-      throw new Error('Parent must be an ons-splitter element.');
-    }
-
-    this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
-    this._updateForSwipeableAttribute();
-
-    if (this.hasAttribute('page')) {
-      rewritables.ready(this, () => this.load(this.getAttribute('page')));
-    }
-  }
-
-  detachedCallback() {
-    this._isAttached = false;
-    this._collapseStrategy.inactivate();
-
-    this._gestureDetector.dispose();
-    this._gestureDetector = null;
   }
 
   _show() {
