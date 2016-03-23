@@ -16,19 +16,18 @@ class ChildComponent {
 }
 
 @Component({
+  selector: 'ons-page',
   template: `
-    <ons-page _compiled class="page hoge" style="display: block">
-      <ons-toolbar>
-        <div class="center">Page2</div>
-      </ons-toolbar>
-      <div class="page__background"></div>
-      <div class="page__content" no-status-bar-fill>
-        <div style="text-align: center; margin: 10px">
-          <ons-button (click)="push()">push</ons-button>
-          <p>page2</p>
-        </div>
+    <ons-toolbar>
+      <div class="center">Page2</div>
+    </ons-toolbar>
+    <div class="page__background"></div>
+    <div class="page__content" no-status-bar-fill>
+      <div style="text-align: center; margin: 10px">
+        <ons-button (click)="push()">push</ons-button>
+        <p>page2</p>
       </div>
-    </ons-page>
+    </div>
   `
 })
 export class PageComponent {
@@ -45,7 +44,7 @@ export class PageComponent {
   directives: [OnsNavigator, ChildComponent],
   template: `
   <ons-navigator>
-    <ons-page _compiled class="page hoge" style="display: block">
+    <ons-page _compiled class="page hoge" #aaa>
       <ons-toolbar>
         <div class="center">Page</div>
       </ons-toolbar>

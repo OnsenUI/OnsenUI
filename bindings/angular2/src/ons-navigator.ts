@@ -19,8 +19,7 @@ declare class NavigatorElement {
 };
 
 @Directive({
-  selector: 'ons-navigator',
-  providers: []
+  selector: 'ons-navigator > ons-page'
 })
 export class OnsNavigator {
   private _navigator: NavigatorElement;
@@ -33,17 +32,21 @@ export class OnsNavigator {
     ]);
   }
 
-  pushComponent(type: Type): Promise<any> {
-    console.log("this is pushComponent");
-
-    this.loadPageComponent(type, component => {
-      console.log('kita-!', component);
+  /**
+   * @method pushComponent
+   * @signature pushComponent(type: Type, params: Object = {})
+   * @param {Type} type
+   * @param {Object} params
+   */
+  pushComponent(type: Type, params: Object = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.loadPageComponent(type, params, result => {
+        resolve(result);
+      });
     });
-
-    return Promise.reject(null);
   }
 
-  private loadPageComponent(type: Type, done: Function): void {
+  private loadPageComponent(type: Type, params: Object, done: Function): void {
     this._compiler.compileInHost(type).then(hostProtoViewRef => {
       const location = this._elementRef;
       const viewContainer = this._viewManager.getViewContainer(location);
@@ -51,7 +54,14 @@ export class OnsNavigator {
       const elementRef = this._viewManager.getHostElement(hostViewRef);
       const component = this._viewManager.getComponent(elementRef);
 
-      done(component);
+      const dispose = () => {
+        const index = viewContainer.indexOf(hostViewRef);
+        if (!hostViewRef.destroyed && index !== -1) {
+          viewContainer.remove(index);
+        }
+      };
+
+      done({elementRef, component, type, dispose, params});
     });
   }
 
