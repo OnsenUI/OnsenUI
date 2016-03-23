@@ -609,7 +609,7 @@ class NavigatorElement extends BaseElement {
   }
 
   /**
-   * @method resetTopage
+   * @method resetToPage
    * @signature resetToPage(pageUrl, [options])
    * @param {String/undefined} [pageUrl]
    *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
