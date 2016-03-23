@@ -26,6 +26,9 @@ import DoorLock from 'ons/doorlock';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
+const CLOSED_STATE = 'closed';
+const OPEN_STATE = 'open';
+const CHANGING_STATE = 'changing';
 
 const rewritables = {
   /**
@@ -50,9 +53,15 @@ const rewritables = {
 class CollapseDetection {
   constructor(element, target) {
     this._element = element;
+    this._boundOnChange = this._onChange.bind(this);
+    target && this.changeTarget(target);
+  }
+
+  changeTarget(target) {
+    this._target && this.inactivate();
     this._target = target;
     this._orientation = ['portrait', 'landscape'].indexOf(target) !== -1;
-    this._boundOnChange = this._onChange.bind(this);
+    this.activate();
   }
 
   _match(value) {
@@ -87,96 +96,29 @@ class CollapseDetection {
   }
 }
 
+const sizeToPx = (width, parent) => {
+  const [value, px] = [parseInt(width, 10), /px/.test(width)];
+  return px ? value : Math.round(parent.offsetWidth * value / 100);
+};
 
-class BaseMode {
-  isOpen() {
-    return false;
-  }
-  openMenu() {
-    return false;
-  }
-  closeMenu() {
-    return false;
-  }
-  enterMode() {}
-  exitMode() {}
-  handleGesture() {}
-}
-
-class SplitMode extends BaseMode {
-  constructor(element) {
-    super();
-    this._element = element;
-  }
-
-  isOpen() {
-    return false;
-  }
-
-  openMenu() {
-    return Promise.reject('Not possible in Split Mode');
-  }
-
-  closeMenu() {
-    return Promise.reject('Not possible in Split Mode');
-  }
-
-  layout() {
-    const side = this._element._getSide();
-    this._element.style.width = this._element._getWidth();
-    ['left', 'right'].forEach(e => this._element.style[e] = e === side ? '0' : 'auto');
-  }
-
-  enterMode() {
-    this.layout();
-  }
-
-  exitMode() {
-    util.extend(this._element.style, {left: '', right: '', width: ''}); // is zIndex needed?
-  }
-}
-
-class CollapseMode extends BaseMode {
-
-  static get CLOSED_STATE() {
-    return 'closed';
-  }
-
-  static get OPEN_STATE() {
-    return 'open';
-  }
-
-  static get CHANGING_STATE() {
-    return 'changing';
-  }
-
+class CollapseMode {
   get _animator() {
-    return this._element._getAnimator();
+    return this._element._animator;
   }
 
   constructor(element) {
-    super();
-
-    this._state = CollapseMode.CLOSED_STATE;
-    this._distance = 0;
+    this._active = false;
+    this._state = CLOSED_STATE;
     this._element = element;
     this._lock = new DoorLock();
   }
 
-  _isLocked() {
-    return this._lock.isLocked();
-  }
-
   isOpen() {
-    return this._state !== CollapseMode.CLOSED_STATE;
-  }
-
-  isClosed() {
-    return this._state === CollapseMode.CLOSED_STATE;
+    return this._active && this._state !== CLOSED_STATE;
   }
 
   handleGesture(e) {
-    if (this._isLocked() || this._isOpenOtherSideMenu()) {
+    if (!this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
       return;
     }
     if (e.type === 'dragstart') {
@@ -187,80 +129,57 @@ class CollapseMode extends BaseMode {
   }
 
   _onDragStart(event) {
-    const distance = this._element._isLeftSide() ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
+    const distance = this._element._side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
+    const area = this._element._swipeTargetWidth;
+    const isOpen = this.isOpen();
 
-    this._ignoreDrag = [
-      ['left', 'right'].indexOf(event.gesture.direction) === -1,
-      !this.isOpen() && this._isOpenOtherSideMenu(),
-      !this.isOpen() && this._element._swipeTargetWidth > 0 && distance > this._element._swipeTargetWidth
-    ].some(e => e);
+    this._ignoreDrag = !/left|right/.test(event.gesture.direction) || (!isOpen && area && distance > area);
+
+    this._width = sizeToPx(this._element._width, this._element.parentNode);
+    this._startDistance = this._distance = isOpen ? this._width : 0;
   }
 
   _onDrag(event) {
     event.gesture.preventDefault();
-
-    const deltaX = event.gesture.deltaX;
-    const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
-
-    const startEvent = event.gesture.startEvent;
-
-    if (!('isOpen' in startEvent)) {
-      startEvent.isOpen = this.isOpen();
-      startEvent.distance = startEvent.isOpen ? this._element._getWidthInPixel() : 0;
-      startEvent.width = this._element._getWidthInPixel();
+    const delta = this._element._side === 'left' ? event.gesture.deltaX : -event.gesture.deltaX;
+    const distance = Math.max(0, Math.min(this._width, this._startDistance + delta));
+    if (distance !== this._distance) {
+      this._animator.translate(distance);
+      this._distance = distance;
+      this._state = CHANGING_STATE;
     }
-
-    const width = this._element._getWidthInPixel();
-
-    if (deltaDistance < 0 && startEvent.distance <= 0) {
-      return;
-    }
-
-    if (deltaDistance > 0 && startEvent.distance >= width) {
-      return;
-    }
-
-    const distance = startEvent.isOpen ? deltaDistance + width : deltaDistance;
-    const normalizedDistance = Math.max(0, Math.min(width, distance));
-
-    startEvent.distance = normalizedDistance;
-
-    this._state = CollapseMode.CHANGING_STATE;
-    this._animator.translate(normalizedDistance);
   }
 
   _onDragEnd(event) {
-    const deltaX = event.gesture.deltaX;
-    const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
-    const width = event.gesture.startEvent.width;
-    const distance = event.gesture.startEvent.isOpen ? deltaDistance + width : deltaDistance;
+    const {_distance: distance, _width: width, _element: el} = this;
     const direction = event.gesture.interimDirection;
-    const shouldOpen = this._element._getSide() != direction && this._element._shouldOpen(distance, width);
-
+    const shouldOpen = el._side !== direction && distance > width * el._threshold;
     this._executeAction(shouldOpen ? 'open' : 'close');
   }
 
   layout() {
-    if (this._animator.isActivated() && this._state !== CollapseMode.CHANGING_STATE) {
-      this._animator[this._state === CollapseMode.CLOSED_STATE ? 'layoutOnClose' : 'layoutOnOpen']();
+    if (this._animator.isActivated() && this._state === OPEN_STATE) {
+      this._animator.open();
     }
   }
 
   // enter collapse mode
   enterMode() {
-    this._animator.activate(this._element._getContentElement(), this._element, this._element._getMaskElement());
-
-    this.layout();
+    if (!this._active) {
+      this._active = true;
+      this._animator.activate();
+      this.layout();
+    }
   }
 
   // exit collapse mode
   exitMode() {
-    this._animator.inactivate();
+    if (this._active) {
+      this._active = false;
+      this._animator.inactivate();
+    }
   }
 
-  /**
-   * @return {Boolean}
-   */
   _isOpenOtherSideMenu() {
     return util.arrayFrom(this._element.parentElement.children).some(e => {
       return util.match(e, 'ons-splitter-side') && e !== this._element && e.isOpen();
@@ -275,23 +194,28 @@ class CollapseMode extends BaseMode {
    * @return {Promise} Resolves to the splitter side element
    */
   _executeAction(name, options = {}) {
-    if (this._isLocked()) {
+    const FINAL_STATE = name === 'open' ? OPEN_STATE : CLOSED_STATE;
+
+    if (!this._active || this._state === FINAL_STATE) {
+      return Promise.resolve(this._element);
+    }
+    if (this._lock.isLocked()) {
       return Promise.reject('Splitter side is locked.');
     }
     if (name === 'open' && this._isOpenOtherSideMenu()) {
       return Promise.reject('Another menu is already open.');
     }
-    if (this._element._emitEvent('pre' + name)) {
+    if (this._element._emitEvent(`pre${name}`)) {
       return Promise.reject(`Canceled in pre${name} event.`);
     }
 
     const callback = options.callback;
     const unlock = this._lock.lock();
     const done = () => {
-      this._state = CollapseMode[name === 'open' ? 'OPEN_STATE' : 'CLOSED_STATE'];
+      this._state = FINAL_STATE;
       this.layout();
       unlock();
-      this._element._emitEvent('post' + name);
+      this._element._emitEvent(`post${name}`);
       callback && callback();
     };
 
@@ -299,7 +223,7 @@ class CollapseMode extends BaseMode {
       done();
       return Promise.resolve(this._element);
     }
-    this._state = CollapseMode.CHANGING_STATE;
+    this._state = CHANGING_STATE;
     return new Promise(resolve => {
       this._animator[name](() => {
         done();
@@ -314,28 +238,22 @@ class CollapseMode extends BaseMode {
    * @param {Boolean} [options.withoutAnimation]
    * @return {Promise} Resolves to the splitter side element
    */
-  openMenu(options = {}) {
-    if (this._state !== CollapseMode.CLOSED_STATE) {
-      return Promise.reject('Not in Collapse Mode.');
-    }
-
+  open(options = {}) {
     return this._executeAction('open', options);
   }
 
   /**
    * @param {Object} [options]
+   * @param {Function} [options.callback]
+   * @param {Boolean} [options.withoutAnimation]
    * @return {Promise} Resolves to the splitter side element
    */
-  closeMenu(options = {}) {
-    if (this._state !== CollapseMode.OPEN_STATE) {
-      return Promise.reject('Not in Collapse Mode.');
-    }
-
+  close(options = {}) {
     return this._executeAction('close', options);
   }
 }
 
-const watchedAttributes = ['width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'animation'];
+const watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
 const updateFunctionName = (name) => {
   return '_updateFor' + name.split('-').map((e) => e[0].toUpperCase() + e.slice(1)).join('') + 'Attribute';
 };
@@ -457,7 +375,7 @@ class SplitterSideElement extends BaseElement {
    */
 
   /**
-   * @attribute threshold-ratio-should-open
+   * @attribute open-threshold
    * @type {Number}
    * @description
    *  [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]
@@ -536,30 +454,33 @@ class SplitterSideElement extends BaseElement {
   }
 
   get mode() {
-    this._mode;
+    return this._mode;
   }
 
-  _updateForAnimationOptionsAttribute(value = this.getAttribute('animation-options')) {
-    this._animationOptions = util.parseJSONObjectSafely(value, {});
+  /**
+   * @method getCurrentMode
+   * @signature getCurrentMode()
+   * @return {String}
+   *   [en]Get current mode. Possible values are "collapse" or "split".[/en]
+   *   [ja]このons-splitter-side要素の現在のモードを返します。"split"かもしくは"collapse"のどちらかです。[/ja]
+   */
+  getCurrentMode() {
+    return this._mode;
   }
 
-  _getMaskElement() {
-    return util.findChild(this.parentElement, 'ons-splitter-mask');
+  isOpen() {
+    return this._collapseMethod('isOpen');
   }
 
-  _getContentElement() {
-    return util.findChild(this.parentElement, 'ons-splitter-content');
+  isSwipeable() {
+    return this.hasAttribute('swipeable');
   }
 
-  _getModeStrategy() {
-    return this._mode === COLLAPSE_MODE ? this._collapseMode : this._splitMode;
+  _collapseMethod(name, ...args) {
+    return this._mode === COLLAPSE_MODE && this._collapseMode[name](...args);
   }
 
   createdCallback() {
-    this._mode = null;
-    this._page = null;
-    this._isAttached = false;
-
     this._collapseStrategy = new CollapseDetection(this);
     this._animatorFactory = new AnimatorFactory({
       animators: window.OnsSplitterElement._animatorDict,
@@ -569,32 +490,10 @@ class SplitterSideElement extends BaseElement {
     });
 
     this._collapseMode = new CollapseMode(this);
-    this._splitMode = new SplitMode(this);
 
-    this._boundHandleGesture = this._handleGesture.bind(this);
+    this._boundHandleGesture = (e) => this._collapseMethod('handleGesture', e);
 
-    this._cancelModeDetection = () => {};
-
-    this._updateMode(SPLIT_MODE);
-
-    this._updateForAnimationAttribute();
-    this._updateForWidthAttribute();
-    this.hasAttribute('side') ? this._updateForSideAttribute() : this.setAttribute('side', 'left');
-    // this._updateForCollapseAttribute();
-    this._updateForSwipeableAttribute();
-    this._updateForSwipeTargetWidthAttribute();
-    this._updateForAnimationOptionsAttribute();
-  }
-
-  _getAnimator() {
-    return this._animator;
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  isSwipeable() {
-    return this.hasAttribute('swipeable');
+    watchedAttributes.filter(e => e !== 'collapse').forEach(e => this[updateFunctionName(e)]());
   }
 
   _emitEvent(name) {
@@ -627,90 +526,80 @@ class SplitterSideElement extends BaseElement {
     this._collapseStrategy = strategy;
   }
 
-  /**
-   * @param {String} mode
-   */
   _updateMode(mode) {
-    if (mode === this._mode) {
-      return;
+    if (mode !== this._mode) {
+      this._mode = mode;
+      this._collapseMethod(mode === COLLAPSE_MODE ? 'enterMode' : 'exitMode');
+      this.setAttribute('mode', mode);
+
+      util.triggerElementEvent(this, 'modechange', {side: this, mode: mode});
     }
-
-    (mode => mode && mode.exitMode())(this._getModeStrategy());
-
-    this._mode = mode;
-    this._getModeStrategy().enterMode();
-    this.setAttribute('mode', mode);
-
-    util.triggerElementEvent(this, 'modechange', {
-      side: this,
-      mode: mode
-    });
   }
 
-  _shouldOpen(distance, width, threshold = this.getAttribute('threshold-ratio-should-open')) {
-    return distance > width * Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
+  _updateForModeAttribute(mode = this.getAttribute('mode')) {
+    this._updateMode(mode || SPLIT_MODE);
   }
 
-  _layout() {
-    this._getModeStrategy().layout();
+  _updateForOpenThresholdAttribute(threshold = this.getAttribute('open-threshold')) {
+    this._threshold = Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
+  }
+
+  _updateForSwipeableAttribute(swipeable = this.getAttribute('swipeable')) {
+    if (this._gestureDetector) {
+      const action = swipeable === null ? 'off' : 'on';
+      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+    }
   }
 
   _updateForSwipeTargetWidthAttribute(value = this.getAttribute('swipe-target-width')) {
-    this._swipeTargetWidth = value === null ? -1 : Math.max(0, parseInt(value, 10));
+    this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
   }
 
-  /**
-   * @return {String} \d+(px|%)
-   */
-  _getWidth() {
-    const width = this.getAttribute('width');
-    return /^\d+(px|%)$/.test(width) ? width : '80%';
+  _updateForWidthAttribute(width = this.getAttribute('width')) {
+    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
+    this.style.width = this._width;
+    this._collapseMethod('layout');
   }
 
-  _getWidthInPixel() {
-    const width = this._getWidth();
-    const value = parseInt(width, 10);
-    const px = /px/.test(width);
-    return px ? value : Math.round(this.parentElement.offsetWidth * value / 100);
+  _updateForSideAttribute(side = this.getAttribute('side')) {
+    this._side = side === 'right' ? side : 'left';
+    this._collapseMethod('layout');
   }
 
-  /**
-   * @return {String} 'left' or 'right'.
-   */
-  _getSide() {
-    const side = this.getAttribute('side');
-    return side === 'right' ? side : 'left';
+  _updateForAnimationAttribute() {
+    this._updateAnimator();
   }
 
-  _isLeftSide() {
-    return this._getSide() === 'left';
+  _updateForAnimationOptionsAttribute(value = this.getAttribute('animation-options')) {
+    // this._animationOptions = util.parseJSONObjectSafely(value, {});
+    this._updateAnimator();
   }
 
-  _updateForWidthAttribute() {
-    this._getModeStrategy().layout();
+  _updateAnimator(){
+    const [oldAnimator, newAnimator] = [this._animator, this._initAnimator()];
+
+    if (oldAnimator && oldAnimator.isActivated()) {
+      oldAnimator.inactivate();
+      newAnimator.activate();
+    }
   }
 
-  _updateForSideAttribute() {
-    this._getModeStrategy().layout();
+  _initAnimator() {
+    const animator = this._animatorFactory.newAnimator({
+      animation: this.getAttribute('animation'),
+      animationOptions: AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+    });
+
+    animator.activate = (oldActivate => {
+      const content = util.findChild(this.parentElement, 'ons-splitter-content');
+      const mask = util.findChild(this.parentElement, 'ons-splitter-mask');
+      return oldActivate.bind(animator, content, this, mask);
+    })(animator.activate);
+
+    this._animator = animator;
+    return animator;
   }
 
-  /**
-   * @method getCurrentMode
-   * @signature getCurrentMode()
-   * @return {String}
-   *   [en]Get current mode. Possible values are "collapse" or "split".[/en]
-   *   [ja]このons-splitter-side要素の現在のモードを返します。"split"かもしくは"collapse"のどちらかです。[/ja]
-   */
-  getCurrentMode() {
-    return this._mode;
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  isOpen() {
-    return this._getModeStrategy().isOpen();
-  }
 
   /**
    * @method open
@@ -729,7 +618,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   open(options = {}) {
-    return this._getModeStrategy().openMenu(options);
+    return this._collapseMethod('open', options);
   }
 
   /**
@@ -749,7 +638,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   close(options = {}) {
-    return this._getModeStrategy().closeMenu(options);
+    return this._collapseMethod('close', options);
   }
 
   /**
@@ -769,23 +658,20 @@ class SplitterSideElement extends BaseElement {
    */
   load(page, options = {}) {
     this._page = page;
+    const callback = options.callback;
 
-    options.callback = options.callback instanceof Function ? options.callback : () => {};
-    return internal.getPageHTMLAsync(page).then((html) => {
-      return new Promise(resolve => {
-        rewritables.link(this, util.createFragment(html), options, (fragment) => {
-          util.propagateAction(this, '_hide');
-          this.innerHTML = '';
+    return internal.getPageHTMLAsync(page).then(html => new Promise(resolve => {
+      rewritables.link(this, util.createFragment(html), options, fragment => {
+        this._hide();
 
-          this.appendChild(fragment);
+        this.innerHTML = '';
+        this.appendChild(fragment);
 
-          util.propagateAction(this, '_show');
-
-          options.callback();
-          resolve(this.firstChild);
-        });
+        this._show();
+        callback && callback();
+        resolve(this.firstChild);
       });
-    });
+    }));
   }
 
   /**
@@ -797,56 +683,18 @@ class SplitterSideElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (watchedAttributes.indexOf(name) !== -1) {
-      this[updateFunctionName(name)](current, prev);
-    }
-    // if (name === 'width') {
-    //   this._updateForWidthAttribute();
-    // } else if (name === 'side') {
-    //   this._updateForSideAttribute();
-    // } else if (name === 'collapse') {
-    //   this._updateForCollapseAttribute();
-    // } else if (name === 'swipeable') {
-    //   this._updateForSwipeableAttribute();
-    // } else if (name === 'swipe-target-width') {
-    //   this._updateForSwipeTargetWidthAttribute();
-    // } else if (name === 'animation-options') {
-    //   this._updateForAnimationOptionsAttribute();
-    // } else if (name === 'animation') {
-    //   this._updateForAnimationAttribute();
-    // }
-  }
-
-  _updateForAnimationAttribute() {
-    const isActivated = this._animator && this._animator.isActivated();
-
-    if (isActivated) {
-      this._animator.inactivate();
-    }
-
-    this._animator = this._createAnimator();
-
-    if (isActivated) {
-      this._animator.activate(this._getContentElement(), this, this._getMaskElement());
-    }
-  }
-
-  _updateForSwipeableAttribute() {
-    if (this._gestureDetector) {
-      this._gestureDetector[this.isSwipeable() ? 'on' : 'off']('dragstart dragleft dragright dragend', this._boundHandleGesture);
-    }
-  }
-
-  _assertParent() {
-    const parentElementName = this.parentElement.nodeName.toLowerCase();
-    if (parentElementName !== 'ons-splitter') {
-      throw new Error(`"${parentElementName}" element is not allowed as parent element.`);
+      this[updateFunctionName(name)](current, last);
     }
   }
 
   attachedCallback() {
     this._isAttached = true;
     this._updateForCollapseAttribute();
-    this._assertParent();
+    this._updateForWidthAttribute();
+
+    if (!util.match(this.parentNode, 'ons-splitter')) {
+      throw new Error('Parent must be an ons-splitter element.');
+    }
 
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
     this._updateForSwipeableAttribute();
@@ -864,10 +712,6 @@ class SplitterSideElement extends BaseElement {
     this._gestureDetector = null;
   }
 
-  _handleGesture(event) {
-    return this._getModeStrategy().handleGesture(event);
-  }
-
   _show() {
     util.propagateAction(this, '_show');
   }
@@ -879,13 +723,6 @@ class SplitterSideElement extends BaseElement {
   _destroy() {
     util.propagateAction(this, '_destroy');
     this.remove();
-  }
-
-  _createAnimator() {
-    return this._animatorFactory.newAnimator({
-      animation: this.getAttribute('animation'),
-      animationOptions: AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    });
   }
 }
 

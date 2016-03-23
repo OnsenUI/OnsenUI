@@ -68,34 +68,27 @@ class SplitterElement extends BaseElement {
    * @return {Element}
    */
   _getSideElement(side) {
-    const result = util.findChild(this, element => {
-      return element.nodeName.toLowerCase() === 'ons-splitter-side' && element.getAttribute('side') === side;
+    const element = util.findChild(this, e => {
+      return util.match(e, 'ons-splitter-side') && e._side === side;
     });
 
-    if (result) {
-      CustomElements.upgrade(result);
+    if (element) {
+      CustomElements.upgrade(element);
     }
 
-    return result;
+    return element;
+  }
+
+  _getAvailableSides() {
+    return ['left', 'right'].map(e => this._getSideElement(e)).filter(e => e);
   }
 
   _layout() {
     const content = this._getContentElement();
-    const left = this._getSideElement('left');
-    const right = this._getSideElement('right');
-
     if (content) {
-      if (left && left.getCurrentMode && left.getCurrentMode() === 'split') {
-        content.style.left = left._getWidth();
-      } else {
-        content.style.left = '0px';
-      }
-
-      if (right && right.getCurrentMode && right.getCurrentMode() === 'split') {
-        content.style.right = right._getWidth();
-      } else {
-        content.style.right = '0px';
-      }
+      this._getAvailableSides().forEach(side => {
+        content.style[side._side] = side.getCurrentMode() === 'split' ? side._width : 0;
+      });
     }
   }
 
@@ -302,20 +295,15 @@ class SplitterElement extends BaseElement {
   }
 
   _onDeviceBackButton(handler) {
-    const left = this._getSideElement('left');
-    const right = this._getSideElement('right');
-
-    if (left.isOpen()) {
-      left.close();
-      return;
-    }
-
-    if (right.isOpen()) {
-      right.close();
-      return;
-    }
-
-    handler.callParentHandler();
+    this._getAvailableSides().some(side => {
+      return side.isOpen() ? (side.close() || true) : false;
+    })
+    ['left', 'right'].map(e => this._getSideElement(e)).some(e => {
+      if (side.isOpen()) {
+        side.close();
+        return true;
+      }
+    }) || handler.callParentHandler();
   }
 
   attachedCallback() {

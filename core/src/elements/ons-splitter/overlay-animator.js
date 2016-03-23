@@ -34,28 +34,6 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
     return this._isActivated;
   }
 
-  layoutOnClose() {
-    animit(this._side)
-      .queue({
-        transform: 'translateX(0%)',
-        width: this._side._getWidth()
-      })
-      .play();
-
-    this._mask.style.display = 'none';
-  }
-
-  layoutOnOpen() {
-    animit(this._side)
-      .queue({
-        transform: 'translate3d(' + (this._side._isLeftSide() ? '' : '-') + '100%, 0px, 0px)',
-        width: this._side._getWidth()
-      })
-      .play();
-
-    this._mask.style.display = 'block';
-  }
-
   /**
    * @param {Element} contentElement
    * @param {Element} sideElement
@@ -76,13 +54,14 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
     this._content = this._side = this._mask = null;
   }
 
-  /**
-   * @param {Number} distance
-   */
+  rightSideMinus() {
+    return this._side._side === 'right' ? '-' : '';
+  }
+
   translate(distance) {
     animit(this._side)
       .queue({
-        transform: 'translate3d(' + (this._side._isLeftSide() ? '' : '-') + distance + 'px, 0px, 0px)'
+        transform: `translate3d(${this.rightSideMinus() + distance}px, 0px, 0px)`
       })
       .play();
   }
@@ -94,47 +73,39 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
     side.style.zIndex = '';
     side.style.right = '';
     side.style.left = '';
-    side.style.transform = side.style.webkitTransform = '';
-    side.style.transition = side.style.webkitTransition = '';
-    side.style.width = '';
-    side.style.display = '';
+    // side.style.transform = side.style.webkitTransform = '';
+    // side.style.transition = side.style.webkitTransition = '';
+    // side.style.width = '';
+    // side.style.display = '';
 
-    mask.style.display = 'none';
+    // mask.style.display = 'none';
   }
 
   _setupLayout() {
     const side = this._side;
 
     side.style.zIndex = 3;
-    side.style.display = 'block';
+    // side.style.display = 'block';
 
-    if (side._isLeftSide()) {
-      side.style.left = 'auto';
-      side.style.right = '100%';
-    } else {
-      side.style.left = '100%';
-      side.style.right = 'auto';
-    }
+    ['left', 'right'].forEach(e => side.style[e] = e === side._side ? 'auto' : '100%')
   }
 
   /**
    * @param {Function} done
    */
   open(done) {
-    const transform = this._side._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
-
     animit.runAll(
       animit(this._side)
         .wait(this._delay)
         .queue({
-          transform: transform
+          transform: `translate3d(${this.rightSideMinus()}100%, 0px, 0px)`
         }, {
           duration: this._duration,
           timing: this._timing
         })
         .queue(callback => {
           callback();
-          done();
+          done && done();
         }),
 
       animit(this._mask)
@@ -167,7 +138,7 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
         })
         .queue(callback => {
           this._side.style.webkitTransition = '';
-          done();
+          done && done();
           callback();
         }),
 
