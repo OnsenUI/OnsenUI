@@ -43,7 +43,9 @@ class Platform {
    *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
    */
   select(platform) {
-    this._renderPlatform = platform.trim().toLowerCase();
+    if (typeof platform === 'string') {
+      this._renderPlatform = platform.trim().toLowerCase();
+    }
   }
 
   /**

@@ -52,7 +52,7 @@ ons._DoorLock = DoorLock;
 
 ons._readyLock = new DoorLock();
 
-ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1] || '');
+ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]);
 
 waitDeviceReady();
 
@@ -208,6 +208,9 @@ ons.enableAutoStyling = ons._autoStyle.enable;
 ons.forcePlatformStyling = function(newPlatform) {
   ons.enableAutoStyling();
   ons.platform.select(newPlatform || 'ios');
+  ons._util.arrayFrom(document.querySelectorAll('ons-if')).forEach(function(element) {
+    element._platformUpdate();
+  });
   ons._util.arrayFrom(document.querySelectorAll('[_compiled]')).forEach(function(element) {
     ons._autoStyle.prepare(element, true);
   });
