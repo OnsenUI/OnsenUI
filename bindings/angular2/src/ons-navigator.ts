@@ -14,9 +14,10 @@ import {
   Input
 } from 'angular2/core';
 
-declare class NavigatorElement {
-  public pushPage(page: string);
-};
+interface NavigatorElement {
+  pushPage(page: string): Promise<any>;
+  popPage(): Promise<any>;
+}
 
 export class PageParams {
   constructor(private _data = {}) {}
@@ -107,6 +108,14 @@ export class OnsNavigator {
     });
   }
 
+  /**
+   * @method popComponent
+   * @signature popComponent()
+   * @return {Promise}
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
   popComponent(): Promise<any> {
     return new Promise((resolve, reject) => {
       // TODO implement animation
@@ -125,10 +134,6 @@ export class OnsNavigator {
   destoryComponent(index: number): Promise<any> {
     // TODO implement
     return Promise.resolve();
-  }
-
-  private update(): void {
-    // TODO implement
   }
 }
 
