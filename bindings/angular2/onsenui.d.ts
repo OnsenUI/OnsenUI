@@ -838,8 +838,14 @@ interface onsStatic {
      * @description Utility methods to detect current platform
      */
     platform: onsPlatform;
+
+    _elementReady: elementReady;
 }
 
+interface elementReady {
+  (element: any, callback: Function): void;
+  installImplementation: Function;
+}
 
 interface alertOptions {
     message?: string;
