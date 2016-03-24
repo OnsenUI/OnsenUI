@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components-default.css">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css">
+
+    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <script src="../../../build/js/onsenui.js"></script>
+    <!-- <script src="../build/angular2-onsenui.js"></script> -->
+
+    <script>
+      System.config({
+        packages: {
+          '../src': {}
+        }
+      });
+
+      System.import('./carousel.js').catch(console.log.bind(console));
+    </script>
+
+  </head>
+
+  <body>
+    
+    <my-app></my-app>
+
+    <ons-template id="page.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page</div>
+        </ons-toolbar>
+
+        <div style="text-align: center; margin: 10px">
+          <ons-button>push</ons-button>
+        </div>
+      </ons-page>
+    </ons-template>
+
+  </body>
+
+</html>
