@@ -40,6 +40,7 @@ var-list-header-text-shadow = none
 var-list-border-top = 1px solid var-list-item-separator-color
 var-list-border-bottom = 1px solid var-list-item-separator-color
 
+var-material-list-item-padding = 0 0 0 16px
 
 /*! topdoc
   name: List
@@ -676,7 +677,7 @@ list__item()
 .list__item--material
   border 0
   min-height 56px
-  padding 0
+  padding var-material-list-item-padding
   line-height normal
 
 .list__item--material__subtitle
@@ -686,7 +687,7 @@ list__item()
   box-shadow none
 
 .list__item--material__left
-  padding 16px 0px 16px 16px
+  padding 16px 0px 16px 0px
   min-width 56px
   line-height 1
 
