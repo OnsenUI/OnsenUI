@@ -34,7 +34,10 @@
       browser.wait(EC.invisibilityOf(button));
       expect(button.isDisplayed()).not.toBeTruthy();
 
-      element(by.id('close-dialog')).click();
+      var closeDialog = element(by.id('close-dialog'))
+      browser.wait(EC.visibilityOf(closeDialog));
+      closeDialog.click();
+
       browser.wait(EC.visibilityOf(button));
       expect(button.isDisplayed()).toBeTruthy();
     });

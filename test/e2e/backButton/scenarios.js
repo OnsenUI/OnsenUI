@@ -13,7 +13,11 @@
       browser.wait(EC.presenceOf(button));
 
       button.click();
-      expect(element(by.css('ons-back-button')).isDisplayed()).toBeTruthy();
+
+      var backbutton = element(by.css('ons-back-button'));
+      browser.wait(EC.presenceOf(backbutton));
+
+      expect(backbutton.isDisplayed()).toBeTruthy();
     });
 
     it('should switch page when a button is clicked', function() {

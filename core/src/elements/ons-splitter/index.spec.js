@@ -68,14 +68,14 @@ describe('OnsSplitterElement', () => {
     it('should open right ons-splitter-side', () => {
       return expect(splitter.openRight()).to.eventually.be.fulfilled.then(() => {
         expect(splitter.rightIsOpen()).to.be.true;
-        return expect(splitter.openLeft()).to.eventually.be.rejected;
+        return expect(splitter.openLeft()).to.eventually.be.fulfilled.then(e => expect(e).not.to.be.ok);
       });
     });
   });
 
   describe('#openLeft()', () => {
     it('should be rejected on "split" mode with ons-splitter-side element', () => {
-      return expect(splitter.openLeft()).to.eventually.be.rejected;
+      return expect(splitter.openLeft()).to.eventually.be.fulfilled.then(e => expect(e).not.to.be.ok);
     });
   });
 

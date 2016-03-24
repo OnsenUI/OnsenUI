@@ -15,6 +15,9 @@ v2.0.0-beta.8
  * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
  * ons-bottom-toolbar: Fixed a bug making it scroll with the content in some cases.
  * ons-carousel: Added `centered` attribute.
+ * ons-popover: Added material popover.
+ * ons-splitter: Fixed [#1300](https://github.com/OnsenUI/OnsenUI/issues/1300).
+ * ons-list-item: Fix chevron position when list content is large.
 
 v2.0.0-beta.7
 ----

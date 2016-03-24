@@ -79,6 +79,15 @@ class ScrollbarElement extends BaseElement {
    */
 
   /**
+   * @attribute native
+   * @type {String}
+   * @initonly
+   * @description
+   *   [en]If this attribute is set then native scrollbar will be used instead of the javascript one.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute update-on-scroll
    * @description
    *   [en]If this attribute is set then the scrollbar will update it's size and container on every scroll event. Useful if the size of the content changes frequently. Otherwise `updateScrollbar` method should be called manually when the content size changes. [/en]
@@ -89,17 +98,15 @@ class ScrollbarElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     } else {
-      this._scroll = this.getElementsByClassName('scrollbar')[0];
+      this._scroll = util.findChild(this, '.scrollbar');
     }
     this._timeout = false;
-    this._limitReached = 0;
-    this.onInfiniteScrollLimit = 0.75;
 
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
     this._boundOnResize = this._onResize.bind(this);
 
-    ['height', 'draggable', 'autohide', 'autohide-delay', 'hidden', 'update-on-scroll'].forEach(e => {
+    ['height', 'draggable', 'autohide', 'autohide-delay', 'hidden', 'native', 'update-on-scroll'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -137,13 +144,6 @@ class ScrollbarElement extends BaseElement {
     if (this._autohide) {
       this._updateAutohide();
     }
-    if (!this._limitReached && this._overLimit()) {
-      this._limitReached = 1;
-      this.onInfiniteScroll && this.onInfiniteScroll(() => {
-        this.updateScrollbar();
-        this._limitReached = 0;
-      });
-    }
   }
 
   _onResize(e) {
@@ -162,21 +162,16 @@ class ScrollbarElement extends BaseElement {
     }, this._autohideDelay);
   }
 
-  _overLimit(e){
-    var c = this._content;
-    return (c.scrollTop + c.clientHeight) / c.scrollHeight >= this.onInfiniteScrollLimit;
-  }
-
   /**
    * @method updateScrollbar
    * @signature updateScrollbar()
    * @description
-   *   [en]Updates teh scrollbar size and location. Should be called if the size of the content changes. Automatically called when onInfiniteScroll handler is finished.[/en]
+   *   [en]Updates the scrollbar size and location. Should be called if the size of the content changes. Automatically called when onInfiniteScroll handler is finished.[/en]
    *   [ja][/ja]
    */
   updateScrollbar() {
     var [content, scroll, container] = [this._content, this._scroll, this];
-    if (!this._hidden) {
+    if (!this._hidden && !this._native) {
       scroll.style.display = (content.clientHeight >= content.scrollHeight) ? 'none' : 'block';
       scroll.style.height = Math.round(this._height || (container.clientHeight * content.clientHeight / content.scrollHeight)) + 'px';
       this._contentMax = content.scrollHeight - content.clientHeight;
@@ -214,6 +209,10 @@ class ScrollbarElement extends BaseElement {
       this._content = this.parentNode.getElementsByClassName('scrollbar-content')[0];
     }
 
+    if (this._native) {
+      this._content.classList.add('scrollbar-native');
+    }
+
     this._content.addEventListener('scroll', this._boundOnScroll);
     window.addEventListener('resize', this._boundOnResize);
     this.updateScrollbar();
@@ -242,7 +241,7 @@ class ScrollbarElement extends BaseElement {
     if (name === 'height') {
       this._height = parseInt(current) || 0;
     }
-    if (['draggable', 'autohide', 'hidden'].indexOf(name) !== -1) {
+    if (['draggable', 'autohide', 'hidden', 'native'].indexOf(name) !== -1) {
       this['_' + name] = current !== null;
     }
     this._content && this.updateScrollbar();

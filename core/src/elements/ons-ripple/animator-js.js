@@ -76,7 +76,7 @@ class AnimatorJS {
       },
       finish: (milliseconds = 50) => {
         var k = milliseconds / (duration - elapsed);
-        if (ons._config.animationsDisabled) {
+        if (ons._internal.config.animationsDisabled) {
           k = 0;
         }
         if (k < 1) {
@@ -90,7 +90,7 @@ class AnimatorJS {
       }
     };
 
-    if (el.hasAttribute('disabled') || ons._config.animationsDisabled) {
+    if (el.hasAttribute('disabled') || ons._internal.config.animationsDisabled) {
       return result;
     }
 

@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 import util from 'ons/util';
-import ons from 'ons/ons';
 import internal from 'ons/internal';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -331,7 +331,7 @@ class PageElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     const background = util.create('.page__background');
     const content = util.create('.page__content');

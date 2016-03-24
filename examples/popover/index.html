@@ -19,7 +19,6 @@
             $scope.popover = popover;
           });
         });
-
         $scope.show = function(e) {
           $scope.popover.show(e);
         }
@@ -30,21 +29,21 @@
 
   <body ng-controller="MyController">
     <ons-page>
-      <div class="navigation-bar">
-        <div class="navigation-bar__left">
-          <span id="navigation" ng-click="show('#navigation')" class="toolbar-button--outline navigation-bar__line-height">
-            <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
-          </span>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button modifier="outline" id="navigation" ng-click="show('#navigation')">
+            <i class="ion-navicon" style="font-size:32px; vertical-align: -6px"></i>
+          </ons-toolbar-button>
         </div>
 
-        <div class="navigation-bar__center">
+        <div class="center">
           Popover demo!
         </div>
 
-        <div class="navigation-bar__right">
-          <span id="top-right" ng-click="show('#top-right')" class="toolbar-button--outline navigation-bar__line-height">Button</span>
+        <div class="right">
+          <ons-toolbar-button modifier="outline" id="top-right" ng-click="show('#top-right')">Button</ons-toolbar-button>
         </div>
-      </div>
+      </ons-toolbar>
 
       <div style="text-align: center">
         <br />
