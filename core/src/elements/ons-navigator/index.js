@@ -219,7 +219,6 @@ class NavigatorElement extends BaseElement {
     };
 
     this._initialHTML = this.innerHTML;
-    this.innerHTML = '';
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -695,7 +694,7 @@ class NavigatorElement extends BaseElement {
         if (!this.getAttribute('page')) {
           const element = this._createPageElement(this._initialHTML || '');
 
-          this._pushPageDOM(this._createPageObject('', element, {}), function() {});
+          this._pages.push(this._createPageObject('', this.children[0], {}), function() {});
         } else {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
         }
