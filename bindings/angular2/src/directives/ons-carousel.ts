@@ -17,7 +17,7 @@ import {
 interface CarouselElement {}
 
 /**
- * @element ons-navigator
+ * @element ons-carousel
  */
 @Directive({
   selector: 'ons-carousel'
