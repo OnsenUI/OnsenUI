@@ -18,57 +18,13 @@ limitations under the License.
 import TemplateLoader from './template-loader';
 
 export default class DefaultTemplateLoader extends TemplateLoader {
-
-  constructor() {
-    super();
-
-    this._store = new Map();
-    this._initListeners();
-  }
-
-  _initListeners() {
-    window.document.addEventListener('_templateloaded', e => {
-      if (e.target.nodeName.toLowerCase() === 'ons-template') {
-        this._store.set(e.templateId, e.template);
-      }
-    }, false);
-
-    window.document.addEventListener('DOMContentLoaded', () => {
-      const register = query => {
-        const templates = window.document.querySelectorAll(query);
-        for (let i = 0; i < templates.length; i++) {
-          this._store.set(templates[i].getAttribute('id'), templates[i].textContent);
-        }
-      };
-
-      register('script[type="text/ons-template"]');
-      register('script[type="text/template"]');
-      register('script[type="text/ng-template"]');
-    }, false);
-  }
-
-  loadPageBefore(page, parent, element, callback) {
-    // TODO: 真面目に実装する
-
-    const template = this._store.get(page);
-    const pageElement = this._createElement(template);
-
-    parent.insertBefore(pageElement, element);
-    
-    callback(pageElement);
-
-    return Promise.resolve(pageElement);
+  loadPage(page, parent, position, callback) {
+    // TODO: implement
+    return Promise.resolve();
   }
 
   unload(element) {
     // TODO: implement
     return Promise.resolve();
   }
-
-  _createElement(template) {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = template;
-    return wrapper.children[0];
-  }
-
 }
