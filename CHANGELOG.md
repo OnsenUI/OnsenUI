@@ -19,6 +19,7 @@ v2.0.0-beta.8
  * ons-splitter: Fixed [#1300](https://github.com/OnsenUI/OnsenUI/issues/1300).
  * ons-list-item: Fix chevron position when list content is large.
  * ons-lazy-repeat: Auto calculate item height if no information is provided.
+ * ons-carousel: Removes event listeners if it's not swipeable.
 
 v2.0.0-beta.7
 ----
