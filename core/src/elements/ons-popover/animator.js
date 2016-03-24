@@ -86,7 +86,7 @@ const fade = {
   }
 };
 
-class SimpleFadePopoverAnimator extends PopoverAnimator {
+class MDFadePopoverAnimator extends PopoverAnimator {
   show(popover, callback) {
     this._animateAll(popover, {
       _mask: fade.in,
@@ -102,7 +102,7 @@ class SimpleFadePopoverAnimator extends PopoverAnimator {
   }
 }
 
-class FadePopoverAnimator extends SimpleFadePopoverAnimator {
+class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
   show(popover, callback) {
     this._animateAll(popover, {
       _mask: fade.in,
@@ -122,4 +122,4 @@ class FadePopoverAnimator extends SimpleFadePopoverAnimator {
   }
 }
 
-export default {PopoverAnimator, FadePopoverAnimator, SimpleFadePopoverAnimator};
+export default {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator};

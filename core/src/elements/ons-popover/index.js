@@ -34,9 +34,10 @@ const scheme = {
 };
 
 const _animatorDict = {
-  none: animators.PopoverAnimator,
-  fade: animators.FadePopoverAnimator,
-  simplefade: animators.SimpleFadePopoverAnimator
+  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
+  'none': animators.PopoverAnimator,
+  'fade-ios': animators.IOSFadePopoverAnimator,
+  'fade-md': animators.MDFadePopoverAnimator
 };
 
 const templateSource = util.createFragment(`
@@ -219,12 +220,11 @@ class PopoverElement extends BaseElement {
   }
 
   _initAnimatorFactory() {
-    const defaultAnimation = util.hasModifier(this, 'material') ? 'simplefade' : 'fade';
     const factory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: animators.PopoverAnimator,
       baseClassName: 'PopoverAnimator',
-      defaultAnimation: this.getAttribute('animation') || defaultAnimation
+      defaultAnimation: this.getAttribute('animation') || 'default'
     });
     this._animator = (options) => factory.newAnimator(options);
   }
@@ -397,8 +397,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
@@ -439,8 +439,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]

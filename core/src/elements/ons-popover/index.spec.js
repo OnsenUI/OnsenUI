@@ -115,12 +115,6 @@ describe('OnsPopoverElement', () => {
       expect(popoverDisplay()).to.equal('block');
     });
 
-    it('has an \'animation\' parameter', () => {
-      expect(() => popover.show(target, {animation: 'fade'})).not.to.throw(Error);
-      expect(() => popover.show(target, {animation: 'none'})).not.to.throw(Error);
-      expect(() => popover.show(target, {animation: 'hoge'})).to.throw(Error);
-    });
-
     it('has an \'animationOptions\' parameter', () => {
       expect(() => popover.show(target, {animationOptions: {'duration': 1.0, delay: 1.0}}))
         .not.to.throw(Error);
