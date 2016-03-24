@@ -59,15 +59,14 @@ var-popover-margin-material = 4px
   position fixed
 
 .popover__container
-  width 100%
-  height 100%
+  position absolute
 
 .popover__content
   reset-box-model()
   reset-base()
   reset-cursor()
   reset-font()
-  position absolute
+  position relative
   display block
   width 220px
   overflow auto
@@ -166,7 +165,7 @@ var-popover-margin-material = 4px
   // position absolute
   display inline-block
   max-height 100%
-  overflow auto
+  overflow visible
   /*border-bottom 4px solid transparent*/
 
 .popover__content--material

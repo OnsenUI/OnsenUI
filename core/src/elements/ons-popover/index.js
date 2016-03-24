@@ -254,14 +254,14 @@ class PopoverElement extends BaseElement {
     this._popover.classList.add('popover--' + primary);
 
     const offset = cover ? 0 : (vertical ? pos.height : pos.width) + (isMD ? 0 : 14);
-    this.style[primary] = Math.max(0, distance[primary] + offset) + margin + 'px';
-    el.style[primary] = 0;
+    this._popover.style[primary] = Math.max(0, distance[primary] + offset) + margin + 'px';
 
     const l = vertical ? 'width' : 'height';
     const diff = parseInt(window.getComputedStyle(el).getPropertyValue(l)) - pos[l];
 
-    el.style[secondary] = Math.max(0, distance[secondary] - diff / 2) + 'px';
-    this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2) + 'px';
+    const secPos = Math.max(0, distance[secondary] - diff / 2);
+    this._popover.style[secondary] = secPos + 'px';
+    this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2 - secPos) + 'px';
 
     // Prevent animit from restoring the style.
     el.removeAttribute('data-animit-orig-style');
@@ -284,7 +284,7 @@ class PopoverElement extends BaseElement {
 
   _clearStyles() {
     ['top', 'bottom', 'left', 'right'].forEach(e => {
-      this._arrow.style[e] = this._content.style[e] = this.style[e] = '';
+      this._arrow.style[e] = this._popover.style[e] = this.style[e] = '';
       this._popover.classList.remove(`popover--${e}`);
     });
   }
