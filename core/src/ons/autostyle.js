@@ -50,7 +50,7 @@ platforms.android = element => {
   }
 
   // Effects
-  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/.test(element.tagName.toLowerCase())
+  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
     && !element.hasAttribute('ripple')
     && !util.findChild(element, 'ons-ripple')) {
 

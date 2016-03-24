@@ -34,9 +34,10 @@ const scheme = {
 };
 
 const _animatorDict = {
-  none: animators.PopoverAnimator,
-  fade: animators.FadePopoverAnimator,
-  simplefade: animators.SimpleFadePopoverAnimator
+  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
+  'none': animators.PopoverAnimator,
+  'fade-ios': animators.IOSFadePopoverAnimator,
+  'fade-md': animators.MDFadePopoverAnimator
 };
 
 const templateSource = util.createFragment(`
@@ -219,12 +220,11 @@ class PopoverElement extends BaseElement {
   }
 
   _initAnimatorFactory() {
-    const defaultAnimation = util.hasModifier(this, 'material') ? 'simplefade' : 'fade';
     const factory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: animators.PopoverAnimator,
       baseClassName: 'PopoverAnimator',
-      defaultAnimation: this.getAttribute('animation') || defaultAnimation
+      defaultAnimation: this.getAttribute('animation') || 'default'
     });
     this._animator = (options) => factory.newAnimator(options);
   }
@@ -258,13 +258,28 @@ class PopoverElement extends BaseElement {
     el.style[primary] = 0;
 
     const l = vertical ? 'width' : 'height';
-    const diff = parseInt(window.getComputedStyle(el).getPropertyValue(l)) - pos[l];
+    const sizes = (style => ({
+      width: parseInt(style.getPropertyValue('width')),
+      height: parseInt(style.getPropertyValue('height'))
+    }))(window.getComputedStyle(el));
 
-    el.style[secondary] = Math.max(0, distance[secondary] - diff / 2) + 'px';
+    el.style[secondary] = Math.max(0, distance[secondary] - (sizes[l] - pos[l]) / 2) + 'px';
     this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2) + 'px';
+
+    this._setTransformOrigin(distance, sizes, pos, primary);
 
     // Prevent animit from restoring the style.
     el.removeAttribute('data-animit-orig-style');
+  }
+
+  _setTransformOrigin(distance, sizes, pos, primary) {
+    const calc = (a, o, l) => primary === a ? sizes[l] / 2 : distance[a] + (primary === o ? -sizes[l] : sizes[l] - pos[l]) / 2;
+    const [x, y] = [calc('left', 'right', 'width') + 'px', calc('top', 'bottom', 'height') + 'px'];
+    util.extend(this._popover.style, {
+      transformOrigin: x + ' ' + y,
+      webkitTransformOriginX: x,
+      webkitTransformOriginY: y
+    });
   }
 
   _calculateDirections(distance) {
@@ -382,8 +397,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
@@ -424,8 +439,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]

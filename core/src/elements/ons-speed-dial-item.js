@@ -62,8 +62,12 @@ class SpeedDialItemElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
     }
   }
 
@@ -73,6 +77,10 @@ class SpeedDialItemElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _onClick(e) {
@@ -86,9 +94,7 @@ class SpeedDialItemElement extends BaseElement {
     this.classList.add('fab--mini');
     this.classList.add('speed-dial__item');
 
-    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
