@@ -15,24 +15,24 @@ limitations under the License.
 
 */
 
+import orientation from 'ons/orientation';
+import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 
 class ConditionalElement extends BaseElement {
 
   createdCallback() {
-    this._isAllowedPlatform = !this.getAttribute('platform') || this.getAttribute('platform').split(/\s+/).indexOf(ons.platform.getMobileOS()) >= 0;
-
-    if (this._isAllowedPlatform) {
-      this._onOrientationChange();
-    } else {
+    if (platform._renderPlatform !== null) {
+      this._platformUpdate();
+    } else if (!this._isAllowedPlatform()){
       this.innerHTML = '';
     }
+
+    this._onOrientationChange();
   }
 
   attachedCallback() {
-    if (this._isAllowedPlatform) {
-      ons.orientation.on('change', this._onOrientationChange.bind(this));
-    }
+    orientation.on('change', this._onOrientationChange.bind(this));
   }
 
   attributeChangedCallback(name) {
@@ -42,19 +42,23 @@ class ConditionalElement extends BaseElement {
   }
 
   detachedCallback() {
-    ons.orientation.off('change', this._onOrientationChange);
+    orientation.off('change', this._onOrientationChange);
+  }
+
+  _platformUpdate() {
+    this.style.display = this._isAllowedPlatform() ? '' : 'none';
+  }
+
+  _isAllowedPlatform() {
+    return !this.getAttribute('platform') || this.getAttribute('platform').split(/\s+/).indexOf(platform.getMobileOS()) >= 0;
   }
 
   _onOrientationChange() {
-    if (this.hasAttribute('orientation')) {
+    if (this.hasAttribute('orientation') && this._isAllowedPlatform()) {
       const conditionalOrientation = this.getAttribute('orientation').toLowerCase();
-      const currentOrientation = ons.orientation.isPortrait() ? 'portrait' : 'landscape';
+      const currentOrientation = orientation.isPortrait() ? 'portrait' : 'landscape';
 
-      if(conditionalOrientation === currentOrientation) {
-        this.style.display = '';
-      } else {
-        this.style.display = 'none';
-      }
+      this.style.display = (conditionalOrientation === currentOrientation) ? '' : 'none';
     }
   }
 }

@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import internal from 'ons/internal';
 
 /**
  * @class AnimatorCSS - implementation of Animator class using css transitions
@@ -82,7 +83,7 @@ class AnimatorCSS {
         return result;
       },
       speed: (newDuration) => {
-        if (ons._config.animationsDisabled) {
+        if (internal.config.animationsDisabled) {
           newDuration = 0;
         }
         if (!stopped) {
@@ -119,7 +120,7 @@ class AnimatorCSS {
       }
     };
 
-    if (el.hasAttribute('disabled') || stopped || ons._config.animationsDisabled) {
+    if (el.hasAttribute('disabled') || stopped || internal.config.animationsDisabled) {
       return result;
     }
 

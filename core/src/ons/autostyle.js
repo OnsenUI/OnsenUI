@@ -20,23 +20,23 @@ import util from './util';
 
 let autoStyleEnabled = true;
 
+// Modifiers
+const modifiersMap = {
+  'quiet': 'material--flat',
+  'light': 'material--flat',
+  'outline': 'material--flat',
+  'cta': '',
+  'large--quiet': 'material--flat large',
+  'large--cta': 'large',
+  'noborder': '',
+  'chevron': '',
+  'tappable': '',
+  'underbar': ''
+};
+
 const platforms = {};
 
 platforms.android = element => {
-
-  // Modifiers
-  const modifiersMap = {
-    'quiet': 'material--flat',
-    'light': 'material--flat',
-    'outline': 'material--flat',
-    'cta': '',
-    'large--quiet': 'material--flat large',
-    'large--cta': 'large',
-    'noborder': '',
-    'chevron': '',
-    'tappable': '',
-    'underbar': ''
-  };
 
   if (!/ons-fab|ons-speed-dial|ons-progress/.test(element.tagName.toLowerCase()) &&
     !/material/.test(element.getAttribute('modifier'))) {
@@ -50,7 +50,7 @@ platforms.android = element => {
   }
 
   // Effects
-  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial-item|ons-tab$/.test(element.tagName.toLowerCase())
+  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
     && !element.hasAttribute('ripple')
     && !util.findChild(element, 'ons-ripple')) {
 
@@ -65,10 +65,39 @@ platforms.android = element => {
   }
 };
 
-const prepareAutoStyle = element => {
+platforms.ios = element => {
+
+ // Modifiers
+ if (/material/.test(element.getAttribute('modifier'))) {
+   util.removeModifier(element, 'material');
+
+   if (util.removeModifier(element, 'material--flat')) {
+     util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
+   }
+
+   if (!element.getAttribute('modifier')) {
+     element.removeAttribute('modifier');
+   }
+ }
+
+ // Effects
+ if (element.hasAttribute('ripple')) {
+   if (element.tagName.toLowerCase() === 'ons-list-item') {
+     element.setAttribute('tappable', '');
+   }
+
+   element.removeAttribute('ripple');
+ }
+};
+
+const unlocked = {
+  android: true
+};
+
+const prepareAutoStyle = (element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     let mobileOS = onsPlatform.getMobileOS();
-    if (platforms.hasOwnProperty(mobileOS)) {
+    if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
       platforms[mobileOS](element);
     }
   }

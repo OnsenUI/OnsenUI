@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -81,23 +82,29 @@ class ButtonElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
     }
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     this.classList.add('button');
 
-    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 }
 

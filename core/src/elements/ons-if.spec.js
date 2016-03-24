@@ -14,10 +14,9 @@ describe('ons-if', () => {
     ons.platform.select('android');
     let element = ons._util.createElement('<ons-if platform="android">Content</ons-if>');
     expect(element.hasChildNodes()).to.be.true;
-    ons.platform.select('ios');
+    ons.platform._renderPlatform = null;
     element = ons._util.createElement('<ons-if platform="android">Content</ons-if>');
     expect(element.hasChildNodes()).not.to.be.true;
-    ons.platform.select('');
   });
 
   it('filters depending on \'orientation\' attribute', (done) => {

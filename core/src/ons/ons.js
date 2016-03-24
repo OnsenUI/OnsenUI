@@ -52,12 +52,7 @@ ons._DoorLock = DoorLock;
 
 ons._readyLock = new DoorLock();
 
-ons._config = {
-  autoStatusBarFill: true,
-  animationsDisabled: false
-};
-
-ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1] || '');
+ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]);
 
 waitDeviceReady();
 
@@ -85,13 +80,7 @@ ons.isReady = () => {
  *   [en]Returns true if running inside Cordova.[/en]
  *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
  */
-ons.isWebView = () => {
-  if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-    throw new Error('isWebView() method is available after dom contents loaded.');
-  }
-
-  return !!(window.cordova || window.phonegap || window.PhoneGap);
-};
+ons.isWebView = ons.platform.isWebView;
 
 /**
  * @method ready
@@ -159,7 +148,7 @@ ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._config.autoStatusBarFill = true;
+  ons._internal.config.autoStatusBarFill = true;
 };
 
 /**
@@ -173,7 +162,7 @@ ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._config.autoStatusBarFill = false;
+  ons._internal.config.autoStatusBarFill = false;
 };
 
 /**
@@ -184,7 +173,7 @@ ons.disableAutoStatusBarFill = () => {
  *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
  */
 ons.disableAnimations = () => {
-  ons._config.animationsDisabled = true;
+  ons._internal.config.animationsDisabled = true;
 };
 
 /**
@@ -195,7 +184,7 @@ ons.disableAnimations = () => {
  *   [ja]アニメーションを有効にします。[/ja]
  */
 ons.enableAnimations = () => {
-  ons._config.animationsDisabled = false;
+  ons._internal.config.animationsDisabled = false;
 };
 
 /**
@@ -207,6 +196,25 @@ ons.disableAutoStyling = ons._autoStyle.disable;
  * Enable automatic styling based on OS (default).
  */
 ons.enableAutoStyling = ons._autoStyle.enable;
+
+/**
+ * @method forcePlatformStyling
+ * @signature forcePlatformStyling(platform)
+ * @description
+ *   [en]Refresh styling for the given platform.[/en]
+ *   [ja][/ja]
+ * @param {string} platform New platform to style the elements.
+ */
+ons.forcePlatformStyling = function(newPlatform) {
+  ons.enableAutoStyling();
+  ons.platform.select(newPlatform || 'ios');
+  ons._util.arrayFrom(document.querySelectorAll('ons-if')).forEach(function(element) {
+    element._platformUpdate();
+  });
+  ons._util.arrayFrom(document.querySelectorAll('[_compiled]')).forEach(function(element) {
+    ons._autoStyle.prepare(element, true);
+  });
+};
 
 /**
  * @param {String} page

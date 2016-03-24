@@ -144,39 +144,6 @@ describe('OnsScrollbarElement', () => {
         done();
       }, 150);
     });
-
-    it('calls onInfiniteScroll', (done) => {
-      var i = 0;
-      scrollbar.onInfiniteScrollLimit = 0.1;
-      scrollbar.onInfiniteScroll = done => {
-        i++;
-        done();
-      };
-      var maxScroll = content.scrollHeight - content.clientHeight;
-      content.scrollTop = 0.15 * maxScroll;
-      setTimeout(() => {
-        expect(i).to.equal(1);
-        done();
-      }, 50);
-    });
-
-    it('waits for onInfiniteScroll to finish', (done) => {
-      var i = 0;
-      scrollbar.onInfiniteScrollLimit = 0.1;
-      scrollbar.onInfiniteScroll = (done) => {
-        i++;
-        setTimeout(done, 200);
-      };
-      content.scrollTop = 0.2 * (content.scrollHeight - content.clientHeight);
-      setTimeout(() => { scrollbar._onScroll(); }, 50);
-      setTimeout(() => { scrollbar._onScroll(); }, 150);
-      setTimeout(() => { scrollbar._onScroll(); }, 250);
-
-      setTimeout(() => {
-        expect(i).to.equal(2);
-        done();
-      }, 300);
-    });
   });
 
   describe('#updateScrollbar()', () => {
@@ -208,8 +175,18 @@ describe('OnsScrollbarElement', () => {
 
       document.body.appendChild(div);
       div.appendChild(new OnsScrollbarElement());
+      document.body.removeChild(div);
 
       expect(spy).to.have.been.called.at.least.once;
+    });
+
+    it('cares about native attribute', () => {
+      var div = document.createElement('div');
+      div.innerHTML = '<ons-scrollbar native></ons-scrollbar>';
+
+      document.body.appendChild(div);
+      expect(div.querySelector('.scrollbar-content').classList.contains('scrollbar-native')).to.be.true;
+      document.body.removeChild(div);
     });
   });
 

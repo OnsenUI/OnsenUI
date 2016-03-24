@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.6 - 2016-02-29 */
+/*! onsenui - v2.0.0-beta.7 - 2016-03-22 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -51,12 +51,32 @@ ons-fab {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 input, textarea {
   -webkit-user-select: auto;
+}
+
+ons-toolbar:not([inline]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+}
+
+ons-bottom-toolbar:not([inline]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
 }
 
 .page,
@@ -109,18 +129,14 @@ ons-toolbar + .page__background + .page__content {
 }
 
 .page__content {
-  overflow: scroll;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 0;
   -ms-touch-action: pan-y;
 }
 
-.page__bottom-bar-fill ~ .page__content {
+.page-with-bottom-toolbar > .page__content {
   bottom: 44px;
-}
-
-.page__content::-webkit-scrollbar {
-  display: none;
 }
 
 .tab-bar__status-bar-fill + .tab-bar--top__content {
@@ -453,8 +469,8 @@ ons-input .text-input__label:not(.text-input--material__label) {
 }
 
 ons-input .text-input__label--active {
-  transform: translate3d(0, -75%, 0) scale(0.75);
-  -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
+  transform: translate(0, -75%) scale(0.75);
+  -webkit-transform: translate(0, -75%) scale(0.75);
   transform-origin: left top;
   -webkit-transform-origin: left top;
   -webkit-transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
@@ -591,6 +607,11 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   top: -10px;
 }
 
+.page__content > ons-scrollbar .scrollbar-touch {
+  top: -15px;
+  right: -5px;
+}
+
 .scrollbar-container {
   position: absolute;
   right: 5px;
@@ -600,6 +621,14 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   pointer-events: none;
   /*width: 30px;*/
   /*background:rgba(0,0,0,0.05);*/
+}
+
+.scrollbar-content:not(.scrollbar-native)::-webkit-scrollbar {
+  display: none;
+}
+
+ons-scrollbar[native] {
+  display: none;
 }
 
 .scrollbar-container[draggable] {
@@ -635,41 +664,6 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   box-shadow: 0 0 2px 1px darkgray;
 }
 
-
-/*
-Copyright 2013-2015 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-ons-scroller {
-  display: block;
-  height: 100%;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;   
-  -ms-overflow-style: none;
-  -ms-scroll-snap-type: mandatory;
-}
-
-ons-scroller::-webkit-scrollbar {
-  display: none;
-}
-
-.ons-scroller__content {
-  height: 100%;
-  overflow: scroll;
-}
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION

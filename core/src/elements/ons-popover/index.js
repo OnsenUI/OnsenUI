@@ -16,10 +16,10 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import PopoverAnimator from './animator';
-import FadePopoverAnimator from './fade-animator';
+import animators from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -27,24 +27,35 @@ import DoorLock from 'ons/doorlock';
 
 const scheme = {
   '.popover': 'popover--*',
-  '.popover__content': 'popover__content--*'
+  '.popover-mask': 'popover-mask--*',
+  '.popover__container': 'popover__container--*',
+  '.popover__content': 'popover__content--*',
+  '.popover__arrow': 'popover__arrow--*'
 };
 
-const templateSource = util.createElement(`
-  <div>
-    <div class="popover-mask"></div>
-    <div class="popover">
-      <div class="popover__content"></div>
-      <div class="popover__arrow"></div>
-    </div>
+const _animatorDict = {
+  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
+  'none': animators.PopoverAnimator,
+  'fade-ios': animators.IOSFadePopoverAnimator,
+  'fade-md': animators.MDFadePopoverAnimator
+};
+
+const templateSource = util.createFragment(`
+  <div class="popover-mask"></div>
+  <div class="popover__container">
+    <div class="popover__content"></div>
+    <div class="popover__arrow"></div>
   </div>
 `);
 
-const _animatorDict = {
-  'fade': FadePopoverAnimator,
-  'none': PopoverAnimator
+const positions = {
+  up: 'bottom',
+  left: 'right',
+  down: 'top',
+  right: 'left'
 };
 
+const directions = Object.keys(positions);
 /**
  * @element ons-popover
  * @category popover
@@ -150,6 +161,13 @@ class PopoverElement extends BaseElement {
    */
 
   /**
+   * @attribute cover-target
+   * @description
+   *   [en]If set the popover will cover the target on the screen.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @description
@@ -194,22 +212,21 @@ class PopoverElement extends BaseElement {
       this._compile();
     }
 
-    this._visible = false;
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
     this._boundCancel = this._cancel.bind(this);
 
-
-    this._animatorFactory = this._createAnimatorFactory();
+    this._initAnimatorFactory();
   }
 
-  _createAnimatorFactory() {
-    return new AnimatorFactory({
+  _initAnimatorFactory() {
+    const factory = new AnimatorFactory({
       animators: _animatorDict,
-      baseClass: PopoverAnimator,
+      baseClass: animators.PopoverAnimator,
       baseClassName: 'PopoverAnimator',
-      defaultAnimation: this.getAttribute('animation') || 'fade'
+      defaultAnimation: this.getAttribute('animation') || 'default'
     });
+    this._animator = (options) => factory.newAnimator(options);
   }
 
   _onDeviceBackButton(event) {
@@ -220,127 +237,71 @@ class PopoverElement extends BaseElement {
     }
   }
 
-  _setDirection(direction) {
-    let arrowPosition;
-    if (direction === 'up') {
-      arrowPosition = 'bottom';
-    } else if (direction === 'left') {
-      arrowPosition = 'right';
-    } else if (direction === 'down') {
-      arrowPosition = 'top';
-    } else if (direction == 'right') {
-      arrowPosition = 'left';
-    } else {
-      throw new Error('Invalid direction.');
-    }
-
-    const popoverClassList = this._popover.classList;
-    popoverClassList.remove('popover--up');
-    popoverClassList.remove('popover--down');
-    popoverClassList.remove('popover--left');
-    popoverClassList.remove('popover--right');
-    popoverClassList.add('popover--' + direction);
-
-    const arrowClassList = this._arrow.classList;
-    arrowClassList.remove('popover__top-arrow');
-    arrowClassList.remove('popover__bottom-arrow');
-    arrowClassList.remove('popover__left-arrow');
-    arrowClassList.remove('popover__right-arrow');
-    arrowClassList.add('popover__' + arrowPosition + '-arrow');
-  }
-
-  _positionPopoverByDirection(target, direction) {
-    const el = this._popover;
+  _positionPopover(target) {
+    const {_radius: radius, _content: el, _margin: margin} = this;
     const pos = target.getBoundingClientRect();
-    let own = el.getBoundingClientRect();
-    const arrow = el.children[1];
-    const offset = 14;
-    const margin = 6;
-    const radius = parseInt(window.getComputedStyle(el.querySelector('.popover__content')).borderRadius);
+    const isMD = util.hasModifier(this, 'material');
+    const cover = isMD && this.hasAttribute('cover-target');
 
-    arrow.style.top = '';
-    arrow.style.left = '';
+    const distance = {
+      top: pos.top - margin,
+      left: pos.left - margin,
+      right: window.innerWidth - pos.right - margin,
+      bottom: window.innerHeight - pos.bottom - margin
+    };
 
-    this._setDirection(direction);
+    const {vertical, primary, secondary} = this._calculateDirections(distance);
+    this._popover.classList.add('popover--' + primary);
 
-    // Position popover next to the target.
-    if (['left', 'right'].indexOf(direction) > -1) {
-      if (direction == 'left') {
-        el.style.left = (pos.right - pos.width - own.width - offset) + 'px';
-      } else {
-        el.style.left = (pos.right + offset) + 'px';
-      }
-      el.style.top = (pos.bottom - pos.height / 2 - own.height / 2) + 'px';
-    } else {
-      if (direction == 'up') {
-        el.style.top = (pos.bottom - pos.height - own.height - offset) + 'px';
-      } else {
-        el.style.top = (pos.bottom + offset) + 'px';
-      }
-      el.style.left = (pos.right - pos.width / 2 - own.width / 2) + 'px';
-    }
+    const offset = cover ? 0 : (vertical ? pos.height : pos.width) + (isMD ? 0 : 14);
+    this.style[primary] = Math.max(0, distance[primary] + offset) + margin + 'px';
+    el.style[primary] = 0;
 
-    own = el.getBoundingClientRect();
+    const l = vertical ? 'width' : 'height';
+    const sizes = (style => ({
+      width: parseInt(style.getPropertyValue('width')),
+      height: parseInt(style.getPropertyValue('height'))
+    }))(window.getComputedStyle(el));
 
-    // This is the difference between the side and the hypothenuse of the arrow.
-    const diff = (function(x) {
-      return (x / 2) * Math.sqrt(2) - x / 2;
-    })(parseInt(window.getComputedStyle(arrow).width));
+    el.style[secondary] = Math.max(0, distance[secondary] - (sizes[l] - pos[l]) / 2) + 'px';
+    this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2) + 'px';
 
-    // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-    const limit = margin + radius + diff + 2;
-
-
-    // Keep popover inside window and arrow inside popover.
-    if (['left', 'right'].indexOf(direction) > -1) {
-      if (own.top < margin) {
-        arrow.style.top = Math.max(own.height / 2 + own.top - margin, limit)  + 'px';
-        el.style.top = margin + 'px';
-      } else if (own.bottom > window.innerHeight - margin) {
-        arrow.style.top = Math.min(own.height / 2 - (window.innerHeight - own.bottom) + margin, own.height - limit) + 'px';
-        el.style.top = (window.innerHeight - own.height - margin) + 'px';
-      }
-    } else {
-      if (own.left < margin) {
-        arrow.style.left = Math.max(own.width / 2 + own.left - margin, limit) + 'px';
-        el.style.left = margin + 'px';
-      } else if (own.right > window.innerWidth - margin) {
-        arrow.style.left = Math.min(own.width / 2 - (window.innerWidth - own.right) + margin, own.width - limit) + 'px';
-        el.style.left = (window.innerWidth - own.width - margin) + 'px';
-      }
-    }
+    this._setTransformOrigin(distance, sizes, pos, primary);
 
     // Prevent animit from restoring the style.
     el.removeAttribute('data-animit-orig-style');
   }
 
-  _positionPopover(target) {
-    const directions = (() => {
-      if (!this.hasAttribute('direction')) {
-        return ['up', 'down', 'left', 'right'];
-      } else {
-        return this.getAttribute('direction').split(/\s+/);
-      }
-    })();
+  _setTransformOrigin(distance, sizes, pos, primary) {
+    const calc = (a, o, l) => primary === a ? sizes[l] / 2 : distance[a] + (primary === o ? -sizes[l] : sizes[l] - pos[l]) / 2;
+    const [x, y] = [calc('left', 'right', 'width') + 'px', calc('top', 'bottom', 'height') + 'px'];
+    util.extend(this._popover.style, {
+      transformOrigin: x + ' ' + y,
+      webkitTransformOriginX: x,
+      webkitTransformOriginY: y
+    });
+  }
 
-    const position = target.getBoundingClientRect();
+  _calculateDirections(distance) {
+    const options = (this.getAttribute('direction') || 'up down left right').split(/\s+/).map(e => positions[e]);
+    const primary = options.sort((a, b) => distance[a] - distance[b])[0];
+    const vertical = ['top', 'bottom'].indexOf(primary) !== -1;
+    let secondary;
 
-    // The popover should be placed on the side with the most space.
-    const scores = {
-      left: position.left,
-      right: window.innerWidth - position.right,
-      up: position.top,
-      down: window.innerHeight - position.bottom
-    };
-
-    const orderedDirections = Object.keys(scores).sort((a, b) => -(scores[a] - scores[b]));
-    for (let i = 0, l = orderedDirections.length; i < l; i++) {
-      const direction = orderedDirections[i];
-      if (directions.indexOf(direction) > -1) {
-        this._positionPopoverByDirection(target, direction);
-        return;
-      }
+    if (vertical) {
+      secondary = distance.left < distance.right ? 'left' : 'right';
+    } else {
+      secondary = distance.top < distance.bottom ? 'top' : 'bottom';
     }
+
+    return {vertical, primary, secondary};
+  }
+
+  _clearStyles() {
+    ['top', 'bottom', 'left', 'right'].forEach(e => {
+      this._arrow.style[e] = this._content.style[e] = this.style[e] = '';
+      this._popover.classList.remove(`popover--${e}`);
+    });
   }
 
   _onChange() {
@@ -352,32 +313,23 @@ class PopoverElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
-    const templateElement = templateSource.cloneNode(true);
-    const content = templateElement.querySelector('.popover__content');
-    const style = this.getAttribute('style');
+    this.classList.add('popover');
 
-    if (style) {
-      this.removeAttribute('style');
-    }
+    const template = templateSource.cloneNode(true);
+    const content = template.querySelector('.popover__content');
 
     while (this.childNodes[0]) {
       content.appendChild(this.childNodes[0]);
     }
 
-    while (templateElement.children[0]) {
-      this.appendChild(templateElement.children[0]);
+    this.appendChild(template);
+
+    if (this.hasAttribute('style')) {
+      this._popover.setAttribute('style', this.getAttribute('style'));
+      this.removeAttribute('style');
     }
-
-    if (style) {
-      this._popover.setAttribute('style', style);
-    }
-
-    this.style.display = 'none';
-
-    this._mask.style.zIndex = '20000';
-    this._popover.style.zIndex = '20001';
 
     if (this.hasAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
@@ -386,6 +338,53 @@ class PopoverElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
+  }
+
+  _prepareAnimationOptions(options) {
+    if (options.animation && !(options.animation in _animatorDict)) {
+      throw new Error(`Animator ${options.animation} is not registered.`);
+    }
+
+    options.animationOptions = util.extend(
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+      options.animationOptions || {}
+    );
+  }
+
+  _executeAction(actions, options = {}) {
+    const callback = options.callback;
+    const {action, before, after} = actions;
+
+    this._prepareAnimationOptions(options);
+
+    let canceled = false;
+    util.triggerElementEvent(this, `pre${action}`, { // synchronous
+      popover: this,
+      cancel: () => canceled = true
+    });
+
+    if (canceled) {
+      return Promise.reject(`Canceled in pre${action} event.`);
+    }
+
+    return new Promise(resolve => {
+      this._doorLock.waitUnlock(() => {
+        const unlock = this._doorLock.lock();
+
+        before && before();
+
+        this._animator(options)[action](this, () => {
+          after && after();
+
+          unlock();
+
+          util.triggerElementEvent(this, `post${action}`, {popover: this});
+
+          callback && callback();
+          resolve(this);
+        });
+      });
+    });
   }
 
   /**
@@ -398,8 +397,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
@@ -414,65 +413,23 @@ class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   show(target, options = {}) {
-    const callback = options.callback || function() {};
-
     if (typeof target === 'string') {
       target = document.querySelector(target);
     } else if (target instanceof Event) {
       target = target.target;
     }
-
-    if (!target) {
-     throw new Error('Target undefined');
+    if (!(target instanceof HTMLElement)) {
+     throw new Error('Invalid target');
     }
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    if (options.animation &&
-      !(options.animation in _animatorDict)) {
-      throw new Error(`Animator ${options.animation} is not registered.`);
-    }
-
-    let canceled = false;
-    util.triggerElementEvent(this, 'preshow', {
-      popover: this,
-      cancel: function() {
-        canceled = true;
-      }
-    });
-
-    if (!canceled) {
-      const tryShow = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
+    return this._executeAction({
+      action: 'show',
+      before: () => {
         this.style.display = 'block';
-
         this._currentTarget = target;
         this._positionPopover(target);
-
-        return new Promise(resolve => {
-          animator.show(this, () => {
-            this._visible = true;
-            unlock();
-
-            util.triggerElementEvent(this, 'postshow', {popover: this});
-
-            callback();
-            resolve(this);
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryShow()));
-      });
-    } else {
-      return Promise.reject('Canceled in preshow event.');
-    }
+      }
+    }, options);
   }
 
   /**
@@ -482,8 +439,8 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
@@ -498,51 +455,13 @@ class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    if (options.animation &&
-      !(options.animation in _animatorDict)) {
-      throw new Error(`Animator ${options.animation} is not registered.`);
-    }
-
-    let canceled = false;
-    util.triggerElementEvent(this, 'prehide', {
-      popover: this,
-      cancel: function() {
-        canceled = true;
+    return this._executeAction({
+      action: 'hide',
+      after: () => {
+        this.style.display = 'none';
+        this._clearStyles();
       }
-    });
-
-    if (!canceled) {
-      const tryHide = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        return new Promise(resolve => {
-          animator.hide(this, () => {
-            this.style.display = 'none';
-            this._visible = false;
-            unlock();
-
-            util.triggerElementEvent(this, 'posthide', {popover: this});
-
-            callback();
-            resolve(this);
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryHide()));
-      });
-    } else {
-      return Promise.reject('Canceled in prehide event.');
-    }
+    }, options);
   }
 
   /**
@@ -556,10 +475,13 @@ class PopoverElement extends BaseElement {
    *   [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
    */
   isShown() {
-    return this._visible;
+    return window.getComputedStyle(this).getPropertyValue('display') !== 'none';
   }
 
   attachedCallback() {
+    this._margin = parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+    this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
+
     this._mask.addEventListener('click', this._boundCancel, false);
 
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
@@ -586,11 +508,11 @@ class PopoverElement extends BaseElement {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
-    else if (name === 'direction') {
-      this._boundOnChange();
+    if (name === 'direction') {
+      return this._boundOnChange();
     }
-    else if (name === 'animation' || name === 'animation-options') {
-      this._animatorFactory = this._createAnimatorFactory();
+    if (name === 'animation') {
+      this._initAnimatorFactory();
     }
   }
 
@@ -663,11 +585,11 @@ window.OnsPopoverElement = document.registerElement('ons-popover', {
  * @param {PopoverAnimator} Animator
  */
 window.OnsPopoverElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof PopoverAnimator)) {
+  if (!(Animator.prototype instanceof animators.PopoverAnimator)) {
     throw new Error('"Animator" param must inherit PopoverAnimator');
   }
   _animatorDict[name] = Animator;
 };
 
-window.OnsPopoverElement.PopoverAnimator = PopoverAnimator;
+window.OnsPopoverElement.PopoverAnimator = animators.PopoverAnimator;
 

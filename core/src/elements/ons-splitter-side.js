@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import AnimatorFactory from 'ons/internal/animator-factory';
+import orientation from 'ons/orientation';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';

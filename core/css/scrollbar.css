@@ -17,6 +17,11 @@
   top: -10px;
 }
 
+.page__content > ons-scrollbar .scrollbar-touch {
+  top: -15px;
+  right: -5px;
+}
+
 .scrollbar-container {
   position: absolute;
   right: 5px;
@@ -26,6 +31,14 @@
   pointer-events: none;
   /*width: 30px;*/
   /*background:rgba(0,0,0,0.05);*/
+}
+
+.scrollbar-content:not(.scrollbar-native)::-webkit-scrollbar {
+  display: none;
+}
+
+ons-scrollbar[native] {
+  display: none;
 }
 
 .scrollbar-container[draggable] {

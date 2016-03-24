@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-beta.6 - 2016-02-29 */
+/*! angular-onsenui.js for onsenui - v2.0.0-beta.7 - 2016-03-22 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -1614,8 +1614,6 @@ limitations under the License.
   module.factory('PageView', ['$onsen', '$parse', function($onsen, $parse) {
 
     var PageView = Class.extend({
-      _nullElement: window.document.createElement('div'),
-
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
@@ -1628,6 +1626,11 @@ limitations under the License.
         this._userDeviceBackButtonListener = angular.noop;
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
           this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
+        }
+        if (this._attrs.ngInfiniteScroll) {
+          this._element[0].onInfiniteScroll = function(done) {
+            $parse(this._attrs.ngInfiniteScroll)(this._scope)(done);
+          }.bind(this);
         }
       },
 
@@ -1670,7 +1673,6 @@ limitations under the License.
         this._clearDerivingEvents();
 
         this._element = null;
-        this._nullElement = null;
         this._scope = null;
 
         this._clearListener();
@@ -4143,13 +4145,6 @@ limitations under the License.
           GenericView.register(scope, element, attrs, {
             viewKey: 'ons-bottomToolbar'
           });
-
-          var inline = typeof attrs.inline !== 'undefined';
-          var pageView = element.inheritedData('ons-page');
-
-          if (pageView && !inline) {
-            pageView._element[0]._registerBottomToolbar(element[0]);
-          }
         },
 
         post: function(scope, element, attrs) {
@@ -5546,6 +5541,15 @@ limitations under the License.
  * @description
  *   [en]Variable name to refer this page.[/en]
  *   [ja]このページを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @attribute ng-infinite-scroll
+ * @initonly
+ * @type {String}
+ * @description
+ *   [en]Path of the function to be executed on infinite scrolling. The path is relative to $scope.[/en]
+ *   [ja]機能スクロール上で実行されている関数のパス。パスは$scopeに対して相対的です。[/ja]
  */
 
 /**

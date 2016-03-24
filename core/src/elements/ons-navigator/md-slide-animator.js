@@ -21,7 +21,7 @@ import NavigatorTransitionAnimator from './animator';
 /**
  * Slide animator for navigator transition.
  */
-export default class SimpleSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
     options = util.extend({

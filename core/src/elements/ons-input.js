@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -88,7 +90,7 @@ class MaterialInputElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     let helper = document.createElement('span');
     helper.classList.add('_helper');
@@ -100,7 +102,7 @@ class MaterialInputElement extends BaseElement {
     let label = document.createElement('span');
     label.classList.add('input-label');
 
-    ons._util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
+    util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
     this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
 
     this.appendChild(container);

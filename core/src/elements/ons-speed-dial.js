@@ -12,6 +12,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -109,17 +110,21 @@ class SpeedDialElement extends BaseElement {
   }
 
   _compile() {
+    autoStyle.prepare(this);
+
     let content = document.createElement('ons-fab');
 
     util.arrayFrom(this.childNodes).forEach(node => {
       if (node.nodeType == 8  || (node.nodeType === 3 && !/\S/.test(node.nodeValue))) {
         node.remove();
       } else if (node.nodeName.toLowerCase() !== 'ons-speed-dial-item') {
-        content.firstChild.appendChild(node);
+        util.findChild(content, 'span').appendChild(node);
       }
     });
 
     this.insertBefore(content, this.firstChild);
+
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -127,21 +132,21 @@ class SpeedDialElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'direction') {
-      this._updateDirection(current);
-    }
-    else if (name === 'position') {
-      this._updatePosition();
-    }
-    else if (name === 'disabled') {
-      if (current !== null) {
-        this.setDisabled(true);
-      } else {
-        this.setDisabled(false);
-      }
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
+        break;
+      case 'direction':
+        this._updateDirection(current);
+        break;
+      case 'position':
+        this._updatePosition();
+        break;
+      case 'disabled':
+        this.setDisabled(current !== null);
     }
   }
 
@@ -173,6 +178,11 @@ class SpeedDialElement extends BaseElement {
     if (!this.isInline()) {
       this.hide();
     }
+  }
+
+  _updateRipple() {
+    const fab = util.findChild(this, 'ons-fab');
+    this.hasAttribute('ripple') ? fab.setAttribute('ripple', '') : fab.removeAttribute('ripple');
   }
 
   _updateDirection(direction) {

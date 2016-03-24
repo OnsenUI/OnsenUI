@@ -14,37 +14,46 @@
       expect(element(by.css('ons-sliding-menu')).isPresent()).toBeTruthy();
     });
 
-    it('should open when swipe', function() {
-      var button = element(by.css('ons-toolbar-button')),
-        slidingMenu = element(by.css('ons-sliding-menu'));
+    it('should open when swipe', function(done) {
+      var button = element(by.css('ons-toolbar-button'));
+      var slidingMenu = element(by.css('ons-sliding-menu'));
 
       browser.wait(EC.presenceOf(button));
       browser.wait(EC.presenceOf(slidingMenu));
 
-      // Get location before clicking the button.
-      var locationBefore = button.getLocation();
+      var oldLocation;
+      button.getLocation().then(function(loc) {
+        oldLocation = loc;
 
-      browser.actions()
-      .mouseMove(slidingMenu, {x: 500, y: 100})
-      .mouseDown()
-      .mouseMove({x: -400, y: 0})
-      .mouseUp()
-      .perform();
+        // wait until its actually clickable
+        browser.wait(
+          function() {
+            var deferred = protractor.promise.defer();
+            element(by.id('some-element')).isPresent()
+            .then(function (isPresent) {
+              deferred.fulfill(!isPresent);
+            });
+            return deferred.promise;
+          });
 
-      browser.wait(function() {
-        var oldLocation;
-
-        return locationBefore.then(function(loc) {
-          oldLocation = loc;
-
-          return button.getLocation();
-        })
-        .then(function(newLocation) {
-          return newLocation.x !== oldLocation.x;
-        });
+        // for some reason, angular has a setTimeOut of 400,
+        // so we need to wait here until its swipable since only styles are set
+        browser.sleep(400);
+        browser.actions()
+          .mouseMove(slidingMenu, {x: 1000, y: 200})
+          .mouseDown()
+          .mouseMove({x: -800, y: 0})
+          .mouseUp()
+          .perform();
       });
 
-      expect(locationBefore).not.toEqual(button.getLocation());
+      return button.getLocation().then(function(newLocation) {
+          if (newLocation.x == oldLocation.x &&
+             newLocation.y== oldLocation.y) {
+            throw 'locations of buttons should be different';
+          }
+          done();
+      });
     });
 
     it('should close when swipe', function() {
@@ -90,7 +99,6 @@
       var locationBefore = button.getLocation();
 
       button.click();
-      browser.waitForAngular();
 
       browser.wait(function() {
         var oldLocation;
@@ -155,17 +163,20 @@
         browser.get(path);
 
         var button = element(by.id('open-menu'));
-        expect(button.isDisplayed()).toBeTruthy();
+        browser.wait(EC.presenceOf(button));
 
+        expect(button.isDisplayed()).toBeTruthy();
         button.click();
+
         browser.wait(EC.invisibilityOf(button));
         expect(button.isDisplayed()).not.toBeTruthy();
 
-        element(by.id('close-menu')).click();
+        var button2 = element(by.id('close-menu'));
+        browser.wait(EC.visibilityOf(button2));
+        button2.click();
         browser.wait(EC.visibilityOf(button));
         expect(button.isDisplayed()).toBeTruthy();
       });
     });
-
   });
 })();

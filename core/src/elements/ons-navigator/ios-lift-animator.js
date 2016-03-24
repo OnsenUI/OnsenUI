@@ -21,7 +21,7 @@ import util from 'ons/util';
 /**
  * Lift screen transition.
  */
-export default class LiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
     options = util.extend({

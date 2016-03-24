@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import animationOptionsParse  from './animation-options-parser';
+import animationOptionsParse from './animation-options-parser';
 
 const util = {};
 
@@ -281,19 +281,7 @@ util.hasModifier = (target, modifierName) => {
   if (!target.hasAttribute('modifier')) {
     return false;
   }
-
-  const modifiers = target
-    .getAttribute('modifier')
-    .trim()
-    .split(/\s+/);
-
-  for (let i = 0; i < modifiers.length; i++) {
-    if (modifiers[i] === modifierName) {
-      return true;
-    }
-  }
-
-  return false;
+  return target.getAttribute('modifier').split(/\s+/).some(e => e === modifierName);
 };
 
 /**
@@ -308,7 +296,7 @@ util.addModifier = (target, modifierName) => {
 
   modifierName = modifierName.trim();
   let modifierAttribute = target.getAttribute('modifier') || '';
-  target.setAttribute('modifier', modifierAttribute ? modifierAttribute.trim() + ' ' + modifierName : modifierName);
+  target.setAttribute('modifier', (modifierAttribute + ' ' + modifierName).trim());
   return true;
 };
 
@@ -322,15 +310,137 @@ util.removeModifier = (target, modifierName) => {
     return false;
   }
 
-  const modifiers = target
-    .getAttribute('modifier')
-    .trim()
-    .split(/\s+/);
+  const modifiers = target.getAttribute('modifier').split(/\s+/);
 
   const newModifiers = modifiers.filter(item => item && item !== modifierName);
   target.setAttribute('modifier', newModifiers.join(' '));
 
   return modifiers.length !== newModifiers.length;
+};
+
+util.updateParentPosition = (el) => {
+  if (!el._parentUpdated && el.parentElement) {
+    if (window.getComputedStyle(el.parentElement).getPropertyValue('position') === 'static') {
+      el.parentElement.style.position = 'relative';
+    }
+    el._parentUpdated = true;
+  }
+};
+
+util.bindListeners = (element, listenerNames) => {
+  listenerNames.forEach(name => {
+    let boundName = name.replace(/^_[a-z]/, '_bound' + name[1].toUpperCase());
+    element[boundName] = element[boundName] || element[name].bind(element);
+  });
+};
+
+util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
+
+let safe = f => function(){
+  if (f instanceof Function) {
+    return f.apply(this, arguments);
+  }
+};
+util.safeCall = (object, prop, ...rest) => safe(object[prop]).apply(object, rest);
+util.safeApply = (object, prop,   rest) => safe(object[prop]).apply(object, rest);
+
+let isOfType = (object, type) => {
+  if (Array.isArray(type)) {
+    return type.some(type => isOfType(object, type));
+  }
+  if (object === null) {
+    return type === 'null';
+  }
+  return (type instanceof Function && object instanceof type) ||
+         (typeof type === 'string' && typeof object === type);
+};
+
+let _printType = type => {
+  if (Array.isArray(type)) {
+    return type.map(_printType).join(' or ');
+  }
+  return (type instanceof Function && 'an instance of ' + type) ||
+    (type === 'null' && 'null') || (typeof type === 'string' && 'a ' + type) || JSON.stringify(type);
+};
+
+
+/**
+ * @param {String} name - name which will be used in the error if the validation fails
+ * @param {Function|String|Number|Boolean} object - object to be validated
+ * @param {Object} options - validation options or type
+ * @param {Array|String|Function} options.type - expected type or array of valid types
+ * @param {Array|String|Function} options.returns - expected type of return value of the function
+ * @param {Boolean} options.safeCall - if this is true then return a function which calls the `object` argument if it's a function. It will not throw an error it it's not.
+ * @param {Object} options.dynamicCall - if this is set then all checks will be completed when trying to execute the resulting function. Furthermore instead of using the `object` argument it will use options.dynamicCall's `object[key]`.
+ * @param {Object} options.dynamicCall.object - required if dynamicCall is exists
+ * @param {String} options.dynamicCall.key - required if dynamicCall is exists
+ * @param {Object} options.context - this is still an experimental setting. Context of the function. Used only with dynamicCall and returns. Defaults to dynamicCall.object.
+ * @return validated object
+ * @throws Error if the validation fails
+ * @example
+ *    doge = validated('doge', doge, [Doge, 'string']);
+ *    foo = validated('foo', foo, {type: ['number', Array, 'null']});
+ *    bar = validated('bar', bar, {type: 'function', safeCall: true});
+ *    baz = validated('baz', null, {type: 'function', returns: 'string', dynamicCall: {object: obj, key: 'foo'}});
+ *
+ *    hoge = validated('hoge', obj, {
+ *      type: [Doge, Duck],
+ *      object: {
+ *        name: 'string',
+ *        wow: 'boolean',
+ *        walk: {type: 'function', returns: 'boolean'},
+ *        talk: {type: 'function', dynamicCall: {object: obj, key: 'quack'}, safeCall: true}
+ *      }
+ *    });
+ *
+ * @todo Support for functions with options.object - {type: Function, object: obj}
+ */
+
+let validated = util.validated = (name, object, options) => {
+  let type = options && options.type || (!options.object && options);
+  if (type && !isOfType(object, type) && !(options.dynamicCall || options.safeCall)) {
+    throw new Error(name + ' must be ' + _printType(type) + '. You provided ' + object);
+  }
+  if (options && options.object) {
+    name = name ? name + '.' : '';
+    let result = {};
+    Object.keys(options.object).forEach(key => {
+      let dynamicCall = options.object[key].dynamicCall;
+      if (dynamicCall) {
+        dynamicCall.object = dynamicCall.object || object;
+        dynamicCall.key = dynamicCall.key || key;
+      }
+      result[key] = validated(name + key, object[key], options.object[key]);
+    });
+    return result;
+  }
+  if (type === Function || type === 'function') {
+    let {object: obj, key} = options.dynamicCall || {};
+    let context = options.context || obj;
+    let test = options.safeCall ? safe : options.dynamicCall ? f => validated(name, f, Function) : f => f;
+
+    object = options.dynamicCall ? (...rest) => test(obj[key]).apply(context, rest) : test(object);
+
+    if (options.returns) {
+      return (...rest) =>  validated(name + '\'s result', object.apply(context, rest), options.returns);
+    }
+  }
+  return object;
+};
+
+/**
+ * @param {Element} target
+ */
+util.updateRipple = (target) => {
+  let rippleElement = util.findChild(target, 'ons-ripple');
+
+  if (target.hasAttribute('ripple')) {
+    if (!rippleElement) {
+      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+    }
+  } else if (rippleElement) {
+    rippleElement.remove();
+  }
 };
 
 /**
