@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import internal from 'ons/internal';
 import BaseElement from 'ons/base-element';
 import Animator from './animator-css';
 
@@ -190,7 +191,7 @@ class RippleElement extends BaseElement {
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnRelease = this._onRelease.bind(this);
 
-    if (ons._internal.config.animationsDisabled) {
+    if (internal.config.animationsDisabled) {
       this.setDisabled(true);
     } else {
       this._parentNode.addEventListener('tap', this._boundOnTap);

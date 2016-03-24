@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import AnimatorFactory from 'ons/internal/animator-factory';
+import orientation from 'ons/orientation';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
@@ -56,21 +57,21 @@ class OrientationCollapseDetection extends CollapseDetection {
   /**
    * @param {String} orientation
    */
-  constructor(orientation) {
+  constructor(newOrientation) {
     super();
 
-    if (orientation !== 'portrait' && orientation !== 'landscape') {
-      throw new Error(`Invalid orientation: ${orientation}`);
+    if (newOrientation !== 'portrait' && newOrientation !== 'landscape') {
+      throw new Error(`Invalid orientation: ${newOrientation}`);
     }
 
     this._boundOnOrientationChange = this._onOrientationChange.bind(this);
-    this._targetOrientation = orientation;
+    this._targetOrientation = newOrientation;
   }
 
   activate(element) {
     this._element = element;
-    ons.orientation.on('change', this._boundOnOrientationChange);
-    this._update(ons.orientation.isPortrait());
+    orientation.on('change', this._boundOnOrientationChange);
+    this._update(orientation.isPortrait());
   }
 
   _onOrientationChange(info) {
@@ -89,7 +90,7 @@ class OrientationCollapseDetection extends CollapseDetection {
 
   inactivate() {
     this._element = null;
-    ons.orientation.off('change', this._boundOnOrientationChange);
+    orientation.off('change', this._boundOnOrientationChange);
   }
 }
 
