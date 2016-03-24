@@ -225,8 +225,17 @@ gulp.task('prepare', ['html2js'], function() {
     ])
       .pipe($.plumber())
       .pipe($.ngAnnotate({add: true, single_quotes: true})) // eslint-disable-line camelcase
+      .pipe($.rollup({
+        sourceMap: 'inline',
+        plugins: [
+          npm(),
+          babel({presets: ['es2015-rollup']})
+        ]
+      }))
+      .pipe($.sourcemaps.init())
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.sourcemaps.write())
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
 
