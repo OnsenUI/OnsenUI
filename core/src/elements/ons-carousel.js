@@ -519,7 +519,6 @@ class CarouselElement extends BaseElement {
 
     index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
     const scroll = (this._offset || 0) + this._getCarouselItemSize() * index;
-    console.log('s2', scroll);
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
