@@ -15,74 +15,6 @@ import BaseElement from 'ons/base-element';
 import util from 'ons/util';
 import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
 
-class InternalDelegate extends LazyRepeatDelegate {
-
-  /**
-   * @param {Object} userDelegate
-   * @param {Element/null} [templateElement]
-   */
-  constructor(userDelegate, templateElement = null) {
-    super();
-    this._userDelegate = userDelegate;
-
-    if (templateElement instanceof Element || templateElement === null) {
-      this._templateElement = templateElement;
-    } else {
-      throw new Error('templateElement parameter must be an instance of Element or null.');
-    }
-  }
-
-  prepareItem(index, done) {
-    const content = this._userDelegate.createItemContent(index, this._templateElement);
-
-    if (!(content instanceof Element)) {
-      throw new Error('createItemContent() must return an instance of Element.');
-    }
-
-    done({
-      element: content
-    });
-  }
-
-  countItems() {
-    const count = this._userDelegate.countItems();
-
-    if (typeof count !== 'number') {
-      throw new Error('countItems() must return number.');
-    }
-
-    return count;
-  }
-
-  updateItem(index, item) {
-    if (this._userDelegate.updateItemContent instanceof Function) {
-      this._userDelegate.updateItemContent(index, item);
-    }
-  }
-
-  calculateItemHeight(index) {
-    const height = this._userDelegate.calculateItemHeight(index);
-
-    if (typeof height !== 'number') {
-      throw new Error('calculateItemHeight() must return number.');
-    }
-
-    return height;
-  }
-
-  destroyItem(index, item) {
-    if (this._userDelegate.destroyItem instanceof Function) {
-      this._userDelegate.destroyItem(index, item);
-    }
-  }
-
-  destroy() {
-    if (this._userDelegate.destroy instanceof Function) {
-      this._userDelegate.destroy();
-    }
-  }
-}
-
 /**
  * @element ons-lazy-repeat
  * @category control
@@ -106,9 +38,10 @@ class InternalDelegate extends LazyRepeatDelegate {
  *   window.addEventListener('load', function() {
  *     var lazyRepeat = document.querySelector('#list');
  *     lazyRepeat.delegate = {
- *      calculateItemHeight: function(i) {
- *        return 44;
- *      },
+ *      // calculateItemHeight: function(i) {
+ *      //  // specify this if the height depends on the element
+ *      //  return Math.floor(42 * Math.random());
+ *      // },
  *      createItemContent: function(i, template) {
  *        var dom = template.cloneNode(true);
  *        dom.innerText = i;
@@ -127,8 +60,8 @@ class InternalDelegate extends LazyRepeatDelegate {
  *   });
  * </script>
  *
- * <ons-list>
- *   <ons-lazy-repeat id="list">
+ * <ons-list id="list">
+ *   <ons-lazy-repeat>
  *     <ons-list-item></ons-list-item>
  *   </ons-lazy-repeat>
  * </ons-list>
@@ -139,52 +72,12 @@ class LazyRepeatElement extends BaseElement {
     this.style.display = 'none';
   }
 
-  attributeChangedCallback(name, last, current) {
-  }
-
   attachedCallback() {
-    if (!this._parentUpdated && this.parentElement) {
-      if (window.getComputedStyle(this.parentElement).getPropertyValue('position') === 'static') {
-        this.parentElement.style.position = 'relative';
-      }
-      this._parentUpdated = true;
-    }
+    util.updateParentPosition(this);
+
+    // not very good idea
     if (this.hasAttribute('delegate')) {
-      this.setDelegate(this._getUserDelegate());
-    }
-  }
-
-  _getTemplateElement() {
-    if (this.children[0] && !this._templateElement) {
-      this._templateElement = this.removeChild(this.children[0]);
-    }
-
-    return this._templateElement || null;
-  }
-
-  _getUserDelegate() {
-    const name = this.getAttribute('delegate') || this.getAttribute('ons-lazy-repeat');
-
-    return window[name] || null;
-  }
-
-  detachedCallback() {
-    if (this._lazyRepeatProvider) {
-      this._lazyRepeatProvider.destroy();
-      this._lazyRepeatProvider = null;
-    }
-  }
-
-  /**
-   * @method refresh
-   * @signature refresh()
-   * @description
-   *   [en][/en]
-   *   [ja][/ja]
-   */
-  refresh() {
-    if (this._lazyRepeatProvider) {
-      this._lazyRepeatProvider.refresh();
+      this.setDelegate(window[this.getAttribute('delegate')]);
     }
   }
 
@@ -197,11 +90,13 @@ class LazyRepeatElement extends BaseElement {
    *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
    */
   setDelegate(userDelegate) {
-    if (this._lazyRepeatProvider) {
-      this._lazyRepeatProvider.destroy();
+    this._lazyRepeatProvider && this._lazyRepeatProvider.destroy();
+
+    if (!this._templateElement && this.children[0]) {
+      this._templateElement = this.removeChild(this.children[0]);
     }
 
-    const delegate = new InternalDelegate(userDelegate, this._getTemplateElement());
+    const delegate = new LazyRepeatDelegate(userDelegate, this._templateElement || null);
     this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
   }
 
@@ -214,6 +109,27 @@ class LazyRepeatElement extends BaseElement {
   set delegate(userDelegate) {
     this.setDelegate(userDelegate);
   }
+
+  /**
+   * @method refresh
+   * @signature refresh()
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+  refresh() {
+    this._lazyRepeatProvider && this._lazyRepeatProvider.refresh();
+  }
+
+  attributeChangedCallback(name, last, current) {}
+
+  detachedCallback() {
+    if (this._lazyRepeatProvider) {
+      this._lazyRepeatProvider.destroy();
+      this._lazyRepeatProvider = null;
+    }
+  }
+
 }
 
 window.OnsLazyRepeatElement = document.registerElement('ons-lazy-repeat', {

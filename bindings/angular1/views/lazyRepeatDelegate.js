@@ -20,32 +20,35 @@ limitations under the License.
 
   angular.module('onsen').factory('AngularLazyRepeatDelegate', function($compile) {
 
-    var AngularLazyRepeatDelegate = function() {
-      AngularLazyRepeatDelegate.prototype.init.apply(this, arguments);
+    const directiveAttributes = ['ons-lazy-repeat', 'ons:lazy:repeat', 'ons_lazy_repeat', 'data-ons-lazy-repeat', 'x-ons-lazy-repeat'];
+    const scheme = {
+      configureItemScope: {type: 'function', safeCall: true},
+      destroyItemScope: {type: 'function', safeCall: true}
     };
-    AngularLazyRepeatDelegate.prototype = Object.create(ons._internal.LazyRepeatDelegate.prototype);
 
-    angular.extend(AngularLazyRepeatDelegate.prototype, {
-
+    class AngularLazyRepeatDelegate extends ons._internal.LazyRepeatDelegate {
       /**
-       * @param {Element} templateElement
        * @param {Object} userDelegate
+       * @param {Element} templateElement
        * @param {Scope} parentScope
        */
-      init: function(templateElement, userDelegate, parentScope) {
-        this._templateElement = templateElement.cloneNode(true);
-        this._userDelegate = userDelegate;
+      constructor(userDelegate, templateElement, parentScope) {
+        super(userDelegate, templateElement);
         this._parentScope = parentScope;
 
-        this._removeLazyRepeatDirective();
+        directiveAttributes.forEach(attr => templateElement.removeAttribute(attr));
+        this._linker = $compile(templateElement ? templateElement.cloneNode(true) : null);
+      }
 
-        this._linker = $compile(this._templateElement.cloneNode(true));
-      },
+      configureItemScope(item, scope){
+        return this._validated('configureItemScope', scheme)(item, scope);
+      }
 
-      /**
-       * @return {Boolean}
-       */
-      _usingBinding: function() {
+      destroyItemScope(item, element){
+        return this._validated('destroyItemScope', scheme)(item, element);
+      }
+
+      _usingBinding() {
         if (this._userDelegate.configureItemScope) {
           return true;
         }
@@ -55,63 +58,51 @@ limitations under the License.
         }
 
         throw new Error('`lazy-repeat` delegate object is vague.');
-      },
+      }
 
-      _removeLazyRepeatDirective: function() {
-        this._templateElement.removeAttribute('ons-lazy-repeat');
-        this._templateElement.removeAttribute('ons:lazy:repeat');
-        this._templateElement.removeAttribute('ons_lazy_repeat');
-        this._templateElement.removeAttribute('data-ons-lazy-repeat');
-        this._templateElement.removeAttribute('x-ons-lazy-repeat');
-      },
 
-      prepareItem: function(index, done) {
-        var scope = this._parentScope.$new();
+      prepareItem(index, done) {
+        const scope = this._parentScope.$new();
         this._addSpecialProperties(index, scope);
 
         if (this._usingBinding()) {
-          this._userDelegate.configureItemScope(index, scope);
+          this.configureItemScope(index, scope);
         }
 
-        this._linker(scope, function(cloned) {
+        this._linker(scope, (cloned) => {
+          let element = cloned[0];
           if (!this._usingBinding()) {
-            var contentElement = this._userDelegate.createItemContent(index, null);
-            cloned.append(contentElement);
-            $compile(cloned[0].firstChild)(scope);
+            element = this._userDelegate.createItemContent(index, element);
+            $compile(element)(scope);
           }
 
-          done({
-            element: cloned[0],
-            scope: scope
-          });
-
-        }.bind(this));
-      },
+          done({element, scope});
+        });
+      }
 
       /**
        * @param {Number} index
        * @param {Object} scope
        */
-      _addSpecialProperties: function(index, scope) {
-        scope.$index = index;
-        scope.$first = index === 0;
-        scope.$last = index === this.countItems() - 1;
-        scope.$middle = !scope.$first && !scope.$last;
-        scope.$even = index % 2 === 0;
-        scope.$odd = !scope.$even;
-      },
+      _addSpecialProperties(i, scope) {
+        const last = this.countItems() - 1;
+        angular.extend(scope, {
+          $index: i,
+          $first: i === 0,
+          $last: i === last,
+          $middle: i !== 0 && i !== last,
+          $even: i % 2 === 0,
+          $odd: i % 2 === 1
+        });
+      }
 
-      countItems: function() {
-        return this._userDelegate.countItems();
-      },
-
-      updateItem: function(index, item) {
+      updateItem(index, item) {
         if (this._usingBinding()) {
-          item.scope.$evalAsync(function() {
-            this._userDelegate.configureItemScope(index, item.scope);
-          }.bind(this));
+          item.scope.$evalAsync(() => this.configureItemScope(index, item.scope));
+        } else {
+          super.updateItem(index, item);
         }
-      },
+      }
 
       /**
        * @param {Number} index
@@ -119,27 +110,21 @@ limitations under the License.
        * @param {Object} item.scope
        * @param {Element} item.element
        */
-      destroyItem: function(index, item) {
+      destroyItem(index, item) {
         if (this._usingBinding()) {
-          if (this._userDelegate.destroyItemScope instanceof Function) {
-            this._userDelegate.destroyItemScope(index, item.scope);
-          }
+          this.destroyItemScope(index, item.scope);
         } else {
-          if (this._userDelegate.destroyItemContent instanceof Function) {
-            this._userDelegate.destroyItemContent(index, item.element);
-          }
+          super.destroyItem(index, item.element);
         }
         item.scope.$destroy();
-      },
-
-      destroy: function() {
-        this._userDelegate = this._templateElement = this._scope = null;
-      },
-
-      calculateItemHeight: function(index) {
-        return this._userDelegate.calculateItemHeight(index);
       }
-    });
+
+      destroy() {
+        super.destroy();
+        this._scope = null;
+      }
+
+    }
 
     return AngularLazyRepeatDelegate;
   });
