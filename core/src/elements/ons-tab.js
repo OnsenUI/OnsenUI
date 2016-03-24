@@ -199,9 +199,11 @@ class TabElement extends BaseElement {
 
     const button = util.findChild(this, '.tab-bar__button');
 
-    const template = defaultInnerTemplateSource.cloneNode(true);
-    while (template.children[0]) {
-      button.appendChild(template.children[0]);
+    if (button.children.length == 0) {
+      const template = defaultInnerTemplateSource.cloneNode(true);
+      while (template.children[0]) {
+        button.appendChild(template.children[0]);
+      }
     }
 
     const self = this;
