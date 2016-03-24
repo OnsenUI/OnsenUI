@@ -28,9 +28,6 @@ import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import elementReady from './element-ready';
-import TemplateLoader from './template-loader';
-import DefaultTemplateLoader from './default-template-loader';
-import globalTemplateLoader from './global-template-loader';
 
 /**
  * @object ons
@@ -54,9 +51,6 @@ ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
 ons._elementReady = elementReady;
-ons._templateLoader = globalTemplateLoader;
-ons._templateLoader.installImplementation(new DefaultTemplateLoader());
-ons.TemplateLoader = TemplateLoader;
 
 ons._readyLock = new DoorLock();
 
