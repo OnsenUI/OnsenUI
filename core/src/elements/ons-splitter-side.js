@@ -459,7 +459,7 @@ class SplitterSideElement extends BaseElement {
     if (Array.isArray(name)) {
       return name.forEach(e => this._update(e));
     }
-    name = '_updateFor' + name.split('-').map(e => e[0].toUpperCase() + e.slice(1)).join('') + 'Attribute';
+    name = '_update' + name.split('-').map(e => e[0].toUpperCase() + e.slice(1)).join('');
     return this[name](value);
   }
 
@@ -541,6 +541,7 @@ class SplitterSideElement extends BaseElement {
     this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(value));
   }
 
+  // TODO: add documentation support for property getters
   get page() {
     return this._page;
   }
@@ -550,22 +551,17 @@ class SplitterSideElement extends BaseElement {
   }
 
   /**
-   * @method getCurrentMode
-   * @signature getCurrentMode()
-   * @return {String}
-   *   [en]Get current mode. Possible values are "collapse" or "split".[/en]
-   *   [ja]このons-splitter-side要素の現在のモードを返します。"split"かもしくは"collapse"のどちらかです。[/ja]
+   * @method isOpen
+   * @signature isOpen()
+   * @return {Boolean}
+   *   [en]true if the menu is open.[/en]
+   *   [ja]メニューが開いている場合はtrueとなります。[/ja]
+   * @description
+   *   [en]Returns whether the popover is visible or not.[/en]
+   *   [ja]メニューが開いているかどうかを返します。[/ja]
    */
-  getCurrentMode() {
-    return this._mode;
-  }
-
   isOpen() {
     return this._collapseMode.isOpen();
-  }
-
-  isSwipeable() {
-    return this.hasAttribute('swipeable');
   }
 
   /**
@@ -579,7 +575,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
    *   [en]Open menu in collapse mode.[/en]
-   *   [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]
+   *   [ja]collapseモードになっているons-splitter-side要素を開きます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the splitter side element[/en]
    *   [ja][/ja]
@@ -606,6 +602,21 @@ class SplitterSideElement extends BaseElement {
    */
   close(options = {}) {
     return this._collapseMode.executeAction('close', options);
+  }
+
+  /**
+   * @method toggle
+   * @signature toggle([options])
+   * @param {Object} [options]
+   * @description
+   *   [en]Opens if it's closed. Closes if it's open.[/en]
+   *   [ja]開けている場合は要素を閉じますそして開けている場合は要素を開きます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the splitter side element[/en]
+   *   [ja][/ja]
+   */
+  toggle(options = {}) {
+    return this.isOpen() ? this.close(options) : this.open(options);
   }
 
   /**
@@ -639,13 +650,6 @@ class SplitterSideElement extends BaseElement {
         resolve(this.firstChild);
       });
     }));
-  }
-
-  /**
-   * @param {Object} [options]
-   */
-  toggle(options = {}) {
-    return this.isOpen() ? this.close(options) : this.open(options);
   }
 
   _show() {

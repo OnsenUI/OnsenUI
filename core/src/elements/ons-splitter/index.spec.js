@@ -63,45 +63,13 @@ describe('OnsSplitterElement', () => {
     });
   });
 
-
-  describe('#openRight()', () => {
-    it('should open right ons-splitter-side', () => {
-      return expect(splitter.openRight()).to.eventually.be.fulfilled.then(() => {
-        expect(splitter.rightIsOpen()).to.be.true;
-        return expect(splitter.openLeft()).to.eventually.be.rejected;
+  describe('children elements', () => {
+    ['left', 'right', 'content', 'mask'].forEach(name => {
+      it(`has a #${name} element`, () => {
+        expect(splitter.left).to.be.an.instanceof(HTMLElement);
       });
     });
-  });
-
-  describe('#openLeft()', () => {
-    it('should be rejected on "split" mode with ons-splitter-side element', () => {
-      return expect(splitter.openLeft()).to.eventually.be.rejected;
-    });
-  });
-
-  describe('#closeRight()', () => {
-    it('should close right ons-splitter-side', () => {
-      expect(splitter.rightIsOpen()).to.be.false;
-      return splitter.openRight().then(() => {
-        expect(splitter.rightIsOpen()).to.be.true;
-        return expect(splitter.closeRight()).to.eventually.be.fulfilled.then(() => {
-          expect(splitter.rightIsOpen()).to.be.false;
-        });
-      });
-    });
-  });
-
-  describe('#closeLeft()', () => {
-    it('should be rejected on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.closeLeft()).to.eventually.be.rejected;
-    });
-  });
-
-  describe('#getDeviceBackButtonHandler()', () => {
-    it('should return handler object', () => {
-      expect(splitter.getDeviceBackButtonHandler()).to.be.an('object');
-    });
-  });
+  })
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {

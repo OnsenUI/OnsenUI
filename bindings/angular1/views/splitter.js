@@ -25,33 +25,19 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
         this._attrs = attrs;
-
-        this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'getDeviceBackButtonHandler',
-          'openRight',
-          'openLeft',
-          'closeRight',
-          'closeLeft',
-          'toggleRight',
-          'toggleLeft',
-          'rightIsOpened',
-          'leftIsOpened',
-          'loadContentPage'
-        ]);
-
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _destroy: function() {
         this.emit('destroy');
-
-        this._clearDerivingMethods();
-
         this._element = this._scope = this._attrs = null;
       }
     });
 
     MicroEvent.mixin(Splitter);
+    $onsen.derivePropertiesFromElement(Splitter, [
+      'left', 'right', 'content', 'mask', 'backButtonHandler'
+    ]);
 
     return Splitter;
   });
