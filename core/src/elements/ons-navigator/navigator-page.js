@@ -22,20 +22,19 @@ export default class NavigatorPage {
   /**
    * @param {Object} params
    * @param {Object} params.page
-   * @param {Object} [params.element]
+   * @param {Object} params.element
    * @param {Object} params.options
    * @param {Object} params.navigator
-   * @param {String} [params.initialContent]
+   * @param {String} params.initialContent
    */
   constructor(params) {
     this.page = params.page;
     this.name = params.page;
-    this._element = params.element || null;
+    this.element = params.element;
     this.options = params.options;
     this.navigator = params.navigator;
-    this.initialContent = params.initialContent || null;
-    // TODO: fix
-    this.backButton = this.element ? util.findChildRecursively(this.element, 'ons-back-button') : null;
+    this.initialContent = params.initialContent;
+    this.backButton = util.findChildRecursively(this.element, 'ons-back-button');
 
     if (this.backButton) {
       CustomElements.upgrade(this.backButton);
@@ -49,18 +48,7 @@ export default class NavigatorPage {
       }
     };
 
-    if (this._element) {
-      this._pointerEvents.forEach(event => this.element.addEventListener(event, this._blockEvents), false);
-    }
-  }
-
-  get element() {
-    return this._element;
-  }
-
-  set element(element) {
-    this._element = element;
-    this.backButton = element ? util.findChildRecursively(element, 'ons-back-button') : null;
+    this._pointerEvents.forEach(event => this.element.addEventListener(event, this._blockEvents), false);
   }
 
   get _pointerEvents() {
@@ -96,16 +84,14 @@ export default class NavigatorPage {
   }
 
   destroy() {
-    if (this._element) {
-      this._pointerEvents.forEach(event => this._element.removeEventListener(event, this._blockEvents), false);
-      this._element._destroy();
-    }
+    this._pointerEvents.forEach(event => this.element.removeEventListener(event, this._blockEvents), false);
+    this.element._destroy();
 
     const index = this.navigator._pages.indexOf(this);
     if (index !== -1) {
       this.navigator._pages.splice(index, 1);
     }
 
-    this._element = this._page = this.options = this.navigator = null;
+    this.element = this._page = this.options = this.navigator = null;
   }
 }
