@@ -18,6 +18,7 @@ v2.0.0-beta.8
  * ons-popover: Added material popover.
  * ons-splitter: Fixed [#1300](https://github.com/OnsenUI/OnsenUI/issues/1300).
  * ons-list-item: Fix chevron position when list content is large.
+ * ons-lazy-repeat: Auto calculate item height if no information is provided.
 
 v2.0.0-beta.7
 ----

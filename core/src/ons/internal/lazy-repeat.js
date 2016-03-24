@@ -18,20 +18,49 @@ limitations under the License.
 import util from '../util';
 import platform from '../platform';
 
+/* eslint-disable key-spacing */
+const scheme = {
+  createItemContent:   {type: 'function', returns: Element},
+  countItems:          {type: 'function', returns: 'number'},
+  calculateItemHeight: {type: 'function', returns: 'number'},
+  updateItemContent:   {type: 'function', safeCall: true},
+  destroy:             {type: 'function', safeCall: true},
+  destroyItem:         {type: 'function', safeCall: true}
+};
+/* eslint-enable key-spacing */
+
 export class LazyRepeatDelegate {
+
+  constructor(userDelegate, templateElement = null) {
+    this._userDelegate = util.validated('delegate', userDelegate, 'object');
+    this._templateElement = util.validated('templateElement', templateElement, [Element, 'null']);
+  }
+
+  get itemHeight() {
+    return this._userDelegate.itemHeight;
+  }
+
+  _validated(key, _scheme = scheme) {
+    return util.validated(key, null, util.extend({}, _scheme[key], {
+      dynamicCall: {object: this._userDelegate, key}
+    }));
+  }
+
   /**
    * @param {Number}
    * @param {Function} done A function that take item object as parameter.
    */
   prepareItem(index, done) {
-    throw new Error('This is an abstract method.');
+    return done({
+      element: this._validated('createItemContent')(index, this._templateElement)
+    });
   }
 
   /**
    * @return {Number}
    */
   countItems() {
-    throw new Error('This is an abstract method.');
+    return this._validated('countItems')();
   }
 
   /**
@@ -40,14 +69,14 @@ export class LazyRepeatDelegate {
    * @param {Element} item.element
    */
   updateItem(index, item) {
-    throw new Error('This is an abstract method.');
+    return this._validated('updateItemContent')(index, item);
   }
 
   /**
    * @return {Number}
    */
   calculateItemHeight(index) {
-    throw new Error('This is an abstract method.');
+    return this._validated('calculateItemHeight')(index);
   }
 
   /**
@@ -55,14 +84,15 @@ export class LazyRepeatDelegate {
    * @param {Object} item
    */
   destroyItem(index, item) {
-    throw new Error('This is an abstract method.');
+    return this._validated('destroyItem')(index, item);
   }
 
   /**
    * @return {void}
    */
   destroy() {
-    throw new Error('This is an abstract method.');
+    this._validated('destroy')();
+    this._userDelegate = this._templateElement = null;
   }
 }
 
@@ -76,16 +106,12 @@ export class LazyRepeatProvider {
    * @param {LazyRepeatDelegate} delegate
    */
   constructor(wrapperElement, delegate) {
-    if (!(delegate instanceof LazyRepeatDelegate)) {
-      throw new Error('"delegate" parameter must be an instance of ons._internal.LazyRepeatDelegate.');
-    }
+    this._wrapperElement = util.validated('wrapperElement', wrapperElement, Element);
+    this._delegate = util.validated('delegate', delegate, LazyRepeatDelegate);
 
-    if (!(wrapperElement instanceof Element)) {
-      throw new Error('"wrapperElement" parameter must be an instance of Element.');
+    if (wrapperElement.tagName.toLowerCase() === 'ons-list') {
+      wrapperElement.classList.add('lazy-list');
     }
-
-    this._wrapperElement = wrapperElement;
-    this._delegate = delegate;
 
     // to be removed soon
     this._pageContent = util.findParent(wrapperElement, '.ons-scroller__content');
@@ -98,13 +124,35 @@ export class LazyRepeatProvider {
       throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
     }
 
-    this._itemHeightSum = [];
-    this._maxIndex = 0;
+    this._topPositions = [];
     this._renderedItems = {};
 
+    try {
+      this._delegate.itemHeight || this._delegate.calculateItemHeight(0);
+    } catch (e) {
+      if (!/must be (a|an instance of) function/.test('' + e)) {
+        throw e;
+      }
+      this._unknownItemHeight = true;
+    }
     this._addEventListeners();
-
     this._onChange();
+  }
+
+  _checkItemHeight(callback) {
+    this._delegate.prepareItem(0, ({element}) => {
+      if (this._unknownItemHeight) {
+        this._wrapperElement.appendChild(element);
+        this._itemHeight = element.offsetHeight;
+        this._wrapperElement.removeChild(element);
+        delete this._unknownItemHeight;
+        callback();
+      }
+    });
+  }
+
+  get staticItemHeight() {
+    return this._delegate.itemHeight || this._itemHeight;
   }
 
   _countItems() {
@@ -112,20 +160,7 @@ export class LazyRepeatProvider {
   }
 
   _getItemHeight(i) {
-    return this._delegate.calculateItemHeight(i);
-  }
-
-  _getTopOffset() {
-
-    var toolbar = document.getElementsByTagName('ons-toolbar');
-    var toolbarHeight = toolbar.length > 0 ? toolbar[0].clientHeight : 0;
-    return this._wrapperElement.getBoundingClientRect().top + toolbarHeight;
-
-    // if (typeof this._wrapperElement !== 'undefined' && this._wrapperElement !== null) {
-    //   return this._wrapperElement.getBoundingClientRect().top;
-    // } else {
-    //   return 0;
-    // }
+    return this.staticItemHeight || this._delegate.calculateItemHeight(i);
   }
 
   _onChange() {
@@ -138,35 +173,21 @@ export class LazyRepeatProvider {
   }
 
   _render() {
+    if (this._unknownItemHeight) {
+      return this._checkItemHeight(this._render.bind(this));
+    }
+
     const items = this._getItemsInView();
     const keep = {};
 
-    for (let i = 0, l = items.length; i < l; i++) {
-      let _item = items[i];
-      this._renderElement(_item);
-      keep[_item.index] = true;
-    }
+    items.forEach(item => {
+      this._renderElement(item);
+      keep[item.index] = true;
+    });
 
-    for (let key in this._renderedItems) {
-      if (this._renderedItems.hasOwnProperty(key) && !keep.hasOwnProperty(key)) {
-        this._removeElement(key);
-      }
-    }
+    Object.keys(this._renderedItems).forEach(key => keep[key] || this._removeElement(key));
 
-    this._wrapperElement.style.height = this._calculateListHeight() + 'px';
-  }
-
-  _calculateListHeight() {
-    let indices = Object.keys(this._renderedItems).map((n) => parseInt(n));
-    return this._itemHeightSum[indices.pop()] || 0;
-  }
-
-  /**
-   * @param {Number} index
-   * @return {Boolean}
-   */
-  _isRendered(index) {
-    return this._renderedItems.hasOwnProperty(index);
+    this._wrapperElement.style.height = this._listHeight + 'px';
   }
 
   /**
@@ -174,32 +195,23 @@ export class LazyRepeatProvider {
    * @param {Number} item.index
    * @param {Number} item.top
    */
-  _renderElement({index: index, top: top}) {
-    if (this._isRendered(index)) {
-      // Update content even if it's already added to DOM
-      // to account for changes within the list.
-      const currentItem = this._renderedItems[index];
-      this._delegate.updateItem(index, currentItem);
-
-      // Fix position.
-      let element = this._renderedItems[index].element;
-      element.style.top = top + 'px';
-      // element.style.top = (this._wrapperElement.offsetTop + top) + 'px';
-      // currentItem.element.style.top = top + 'px';
-
+  _renderElement({index, top}) {
+    let item = this._renderedItems[index];
+    if (item) {
+      this._delegate.updateItem(index, item); // update if it exists
+      item.element.style.top = top + 'px';
       return;
     }
 
     this._delegate.prepareItem(index, (item) => {
-      const element = item.element;
+      util.extend(item.element.style, {
+        position: 'absolute',
+        top: top + 'px',
+        left: 0,
+        right: 0
+      });
 
-      element.style.position = 'absolute';
-      element.style.top = top + 'px';
-      element.style.left = '0px';
-      element.style.right = '0px';
-
-      this._wrapperElement.appendChild(element);
-
+      this._wrapperElement.appendChild(item.element);
       this._renderedItems[index] = item;
     });
   }
@@ -208,10 +220,6 @@ export class LazyRepeatProvider {
    * @param {Number} index
    */
   _removeElement(index) {
-    if (!this._isRendered(index)) {
-      return;
-    }
-
     let item = this._renderedItems[index];
 
     this._delegate.destroyItem(index, item);
@@ -219,32 +227,30 @@ export class LazyRepeatProvider {
     if (item.element.parentElement) {
       item.element.parentElement.removeChild(item.element);
     }
-    item = null;
 
     delete this._renderedItems[index];
   }
 
   _removeAllElements() {
-    for (let key in this._renderedItems) {
-      if (this._renderedItems.hasOwnProperty(key)) {
-        this._removeElement(key);
-      }
-    }
+    Object.keys(this._renderedItems).forEach(key => this._removeElement(key));
   }
 
   _calculateStartIndex(current) {
     let start = 0;
-    let end = this._maxIndex;
+    let end = this._itemCount - 1;
 
-    // Binary search for index at top of screen so
-    // we can speed up rendering.
+    if (this.staticItemHeight) {
+      return parseInt(-current / this.staticItemHeight);
+    }
+
+    // Binary search for index at top of screen so we can speed up rendering.
     for (;;) {
       const middle = Math.floor((start + end) / 2);
-      const value = current + this._itemHeightSum[middle];
+      const value = current + this._topPositions[middle];
 
       if (end < start) {
         return 0;
-      } else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
+      } else if (value <= 0 && value + this._getItemHeight(middle) > 0) {
         return middle;
       } else if (isNaN(value) || value >= 0) {
         end = middle - 1;
@@ -254,74 +260,53 @@ export class LazyRepeatProvider {
     }
   }
 
-  _recalculateItemHeightSum() {
-    let sums = this._itemHeightSum;
-    for (let i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
-      sum += this._getItemHeight(i);
-      sums[i] = sum;
+  _recalculateTopPositions() {
+    let l = Math.min(this._topPositions.length, this._itemCount);
+    this._topPositions[0] = 0;
+    for (let i = 1, l; i < l; i++) {
+      this._topPositions[i] = this._topPositions[i - 1] + this._getItemHeight(i);
     }
   }
 
   _getItemsInView() {
-    const topOffset = this._getTopOffset();
-    let topPosition = topOffset;
-    const cnt = this._countItems();
+    const offset = this._wrapperElement.getBoundingClientRect().top;
+    const limit = 4 * window.innerHeight - offset;
+    const count = this._countItems();
 
-    if (cnt !== this._itemCount){
-      this._recalculateItemHeightSum();
-      this._maxIndex = cnt - 1;
+    if (count !== this._itemCount){
+      this._itemCount = count;
+      this._recalculateTopPositions();
     }
-    this._itemCount = cnt;
 
-    let startIndex = this._calculateStartIndex(topPosition);
-    startIndex = Math.max(startIndex - 30, 0);
-
-    if (startIndex > 0) {
-      topPosition += this._itemHeightSum[startIndex - 1];
-    }
+    let i = Math.max(0, this._calculateStartIndex(offset) - 30);
 
     const items = [];
-    for (let i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-      const h = this._getItemHeight(i);
-
-      if (i >= this._itemHeightSum.length) {
-        this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
+    for (var top = this._topPositions[i]; i < count && top < limit; i++) {
+      if (i >= this._topPositions.length) { // perf optimization
+        this._topPositions.length += 100;
       }
 
-      if (i > 0) {
-        this._itemHeightSum[i] = this._itemHeightSum[i - 1] + h;
-      } else {
-        this._itemHeightSum[i] = h;
-      }
-
-      this._maxIndex = Math.max(i, this._maxIndex);
-
-      items.push({
-        index: i,
-        top: topPosition - topOffset
-      });
-
-      topPosition += h;
+      this._topPositions[i] = top;
+      items.push({top, index: i});
+      top += this._getItemHeight(i);
     }
+    this._listHeight = top;
 
     return items;
   }
 
   _debounce(func, wait, immediate) {
-    var timeout;
+    let timeout;
     return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      };
-      var callNow = immediate && !timeout;
+      let callNow = immediate && !timeout;
       clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
       if (callNow) {
-        func.apply(context, args);
+        func.apply(this, arguments);
+      } else {
+        timeout = setTimeout(() => {
+          timeout = null;
+          func.apply(this, arguments);
+        }, wait);
       }
     };
   }
@@ -332,14 +317,11 @@ export class LazyRepeatProvider {
   }
 
   _addEventListeners() {
-    if (platform.isIOS()) {
-      this._boundOnChange = this._debounce(this._onChange.bind(this), 30);
-    }
-    else {
-      this._boundOnChange = this._onChange.bind(this);
-    }
+    util.bindListeners(this, ['_onChange', '_doubleFireOnTouchend']);
 
-    this._boundDoubleFireOnTouchend = this._doubleFireOnTouchend.bind(this);
+    if (platform.isIOS()) {
+      this._boundOnChange = this._debounce(this._boundOnChange, 30);
+    }
 
     this._pageContent.addEventListener('scroll', this._boundOnChange, true);
 
