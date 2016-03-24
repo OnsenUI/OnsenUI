@@ -230,12 +230,14 @@ gulp.task('react', function() {
         ],
         external: [
           'react',
-          'react-dom'
+          'react-dom',
+          'react/addons'
         ],
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
-          'react/server': 'ReactDOMServer'
+          'react/server': 'ReactDOMServer',
+          'react/addons': 'React.addons'
         },
         format: 'umd',
         moduleName: 'Ons'

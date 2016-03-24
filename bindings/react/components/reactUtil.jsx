@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-
-var ReactTestUtils = React.addons.TestUtils;
 var reactUtil = {};
 
 reactUtil.rendersToPage =  function(obj) {
