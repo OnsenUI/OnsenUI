@@ -41,14 +41,16 @@
 
   <script type="text/ons-template" id="page1.html">
     <ons-navigator var="myNavigator">
-      <ons-toolbar>
-        <div class="center">Page 1</div>
-      </ons-toolbar>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page 1</div>
+        </ons-toolbar>
 
-      <div style="text-align: center">
-        <h1>Page 1</h1>
-        <ons-button ng-click="myNavigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
-      </div>
+        <div style="text-align: center">
+          <h1>Page 1</h1>
+          <ons-button ng-click="myNavigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
+          </div>
+      </ons-page>
     </ons-navigator>
   </script>
 
