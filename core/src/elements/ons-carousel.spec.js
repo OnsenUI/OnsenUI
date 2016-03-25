@@ -23,19 +23,17 @@ describe('OnsCarouselElement', () => {
     expect(window.OnsCarouselElement).to.be.ok;
   });
 
-  it('provides \'modifier\' attribute', () => {
-    carousel.setAttribute('modifier', 'hoge');
-    expect(carousel.classList.contains('carousel--hoge')).to.be.true;
+  describe('#_updateSwipeable()', () => {
+    it ('attaches and removes listeners', () => {
+      let spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
+        spyOff = chai.spy.on(carousel._gestureDetector, 'off');
 
-    carousel.setAttribute('modifier', ' foo bar');
-    expect(carousel.classList.contains('carousel--foo')).to.be.true;
-    expect(carousel.classList.contains('carousel--bar')).to.be.true;
-    expect(carousel.classList.contains('carousel--hoge')).not.to.be.true;
+      carousel.setAttribute('swipeable', '');
+      expect(spyOn).to.have.been.called.at.least.once;
 
-    carousel.classList.add('carousel--piyo');
-    carousel.setAttribute('modifier', 'fuga');
-    expect(carousel.classList.contains('carousel--piyo')).to.be.true;
-    expect(carousel.classList.contains('carousel--fuga')).to.be.true;
+      carousel.removeAttribute('swipeable');
+      expect(spyOff).to.have.been.called.at.least.once;
+    });
   });
 
   describe('#_onResize()', () => {
@@ -354,11 +352,6 @@ describe('OnsCarouselElement', () => {
       };
     });
 
-    it('should not work if the carousel is not swipeable', () => {
-      carousel._onDrag(ev);
-      expect(carousel._lastDragEvent).not.to.be.ok;
-    });
-
     it('should not work if the direction is vertical', () => {
       ev.gesture.direction = 'up';
       carousel._onDrag(ev);
@@ -383,11 +376,6 @@ describe('OnsCarouselElement', () => {
         velocityX: -10,
         preventDefault: () => {}
       };
-    });
-
-    it('should not work if carousel is not swipeable', () => {
-      carousel._onDragEnd(ev);
-      expect(carousel._scroll).to.equal(0);
     });
 
     it('should work if carousel is swipeable', () => {

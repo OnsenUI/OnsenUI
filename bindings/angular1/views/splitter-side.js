@@ -27,13 +27,7 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'isSwipeable',
-          'getCurrentMode',
-          'isOpened',
-          'open',
-          'close',
-          'toggle',
-          'load',
+          'isOpen', 'open', 'close', 'toggle', 'load'
         ]);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
@@ -73,15 +67,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(SplitterSide);
-
-    Object.defineProperty(SplitterSide.prototype, 'page', {
-      get: function () {
-        return this._element[0].page;
-      },
-      set: function() {
-        throw new Error();
-      }
-    });
+    $onsen.derivePropertiesFromElement(SplitterSide, ['page', 'mode']);
 
     return SplitterSide;
   });

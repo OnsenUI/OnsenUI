@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import platform from 'ons/platform';
 import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
@@ -223,7 +224,7 @@ class TabbarElement extends BaseElement {
     autoStyle.prepare(this);
 
     if (this.getAttribute('position') === 'auto') {
-      this.setAttribute('position', ons.platform.isAndroid() ? 'top' : 'bottom');
+      this.setAttribute('position', platform.isAndroid() ? 'top' : 'bottom');
     }
 
     var wrapper = document.createDocumentFragment();

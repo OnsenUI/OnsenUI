@@ -73,28 +73,35 @@ class FabElement extends BaseElement {
     let content = document.createElement('span');
     content.classList.add('fab__icon');
 
-    util.arrayFrom(this.childNodes).forEach(element => content.appendChild(element));
+    util.arrayFrom(this.childNodes).forEach(element => {
+      if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
+       content.appendChild(element);
+      }
+    });
 
-    this.insertBefore(content, this.firstChild);
+    this.appendChild(content);
 
-    if (this.hasAttribute('ripple') && !util.findChild(content, 'ons-ripple')) {
-      content.insertBefore(document.createElement('ons-ripple'), content.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
     this._updatePosition();
+
     this.hide();
 
     this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    if (name === 'position') {
-      this._updatePosition();
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
+        break;
+      case 'position':
+        this._updatePosition();
     }
   }
 
@@ -108,6 +115,10 @@ class FabElement extends BaseElement {
     if (!this.isInline()) {
       this.hide();
     }
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _updatePosition() {

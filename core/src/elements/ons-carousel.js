@@ -16,12 +16,9 @@ limitations under the License.
 */
 
 import util from 'ons/util';
-import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
-
-const scheme = {'': 'carousel--*'};
 
 const VerticalModeTrait = {
 
@@ -309,7 +306,6 @@ class CarouselElement extends BaseElement {
    */
 
   createdCallback() {
-    ModifierUtil.initModifier(this, scheme);
     this._doorLock = new DoorLock();
     this._scroll = 0;
     this._offset = 0;
@@ -519,7 +515,6 @@ class CarouselElement extends BaseElement {
 
     index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
     const scroll = (this._offset || 0) + this._getCarouselItemSize() * index;
-    console.log('s2', scroll);
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
@@ -762,18 +757,28 @@ class CarouselElement extends BaseElement {
       dragMinDistance: 1
     });
 
-    this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
-    this._gestureDetector.on('dragend', this._boundOnDragEnd);
+    this._updateSwipeable();
 
     window.addEventListener('resize', this._boundOnResize, true);
   }
 
   _removeEventListeners() {
-    this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
-    this._gestureDetector.off('dragend', this._boundOnDragEnd);
     this._gestureDetector.dispose();
+    this._gestureDetector = null;
 
     window.removeEventListener('resize', this._boundOnResize, true);
+  }
+
+  _updateSwipeable() {
+    if (this._gestureDetector) {
+      if (this.isSwipeable()) {
+        this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
+        this._gestureDetector.on('dragend', this._boundOnDragEnd);
+      } else {
+        this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
+        this._gestureDetector.off('dragend', this._boundOnDragEnd);
+      }
+    }
   }
 
   _tryFirePostChangeEvent() {
@@ -792,10 +797,6 @@ class CarouselElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (!this.isSwipeable()) {
-      return;
-    }
-
     const direction = event.gesture.direction;
     if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
       return;
@@ -814,10 +815,6 @@ class CarouselElement extends BaseElement {
 
   _onDragEnd(event) {
     this._currentElementSize = undefined;
-
-    if (!this.isSwipeable()) {
-      return;
-    }
 
     this._scroll = this._scroll - this._getScrollDelta(event);
 
@@ -1132,10 +1129,12 @@ class CarouselElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    } else if (name === 'direction') {
-      this._onDirectionChange();
+    switch (name) {
+      case 'swipeable':
+        this._updateSwipeable();
+        break;
+      case 'direction':
+        this._onDirectionChange();
     }
   }
 

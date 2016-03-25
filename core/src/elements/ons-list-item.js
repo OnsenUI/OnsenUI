@@ -140,9 +140,7 @@ class ListItemElement extends BaseElement {
     center.classList.add('center');
     center.classList.add('list__item__center');
 
-    if (this.hasAttribute('ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -150,8 +148,12 @@ class ListItemElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
     }
   }
 
@@ -193,6 +195,10 @@ class ListItemElement extends BaseElement {
 
   get _tapColor() {
     return this.getAttribute('tappable') || '#d9d9d9';
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _onDrag(event) {
