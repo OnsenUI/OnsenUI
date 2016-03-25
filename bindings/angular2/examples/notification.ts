@@ -1,7 +1,7 @@
 import {
   bootstrap,
   Component,
-  notification
+  onsNotification
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -9,7 +9,7 @@ import {
   template: `
   <ons-page _compiled>
     <ons-toolbar>
-      <div class="center">Notification Example</div>
+      <div class="center">onsNotification Example</div>
     </ons-toolbar>
 
     <div class="page__background"></div>
@@ -29,11 +29,11 @@ export class AppComponent {
   constructor() { }
 
   alert() {
-    notification.alert({message: 'Hello, world!'});
+    onsNotification.alert({message: 'Hello, world!'});
   }
 
   confirm() {
-    notification.confirm({
+    onsNotification.confirm({
       message: 'This dialog can be canceled by tapping the background or using the back button on your device.',
       cancelable: true,
       callback: i => {
@@ -45,7 +45,7 @@ export class AppComponent {
   }
 
   prompt() {
-    notification.prompt({
+    onsNotification.prompt({
       message: 'What is the meaning of Life, the Universe and Everything?',
       callback: answer => {
         if (answer === '42') {
