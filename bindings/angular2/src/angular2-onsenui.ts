@@ -7,6 +7,7 @@ export * from './directives/ons-navigator';
 export * from './directives/ons-carousel';
 export * from './directives/ons-tabbar';
 export * from './ons/notification';
+export * from './ons/platform';
 
 export function bootstrap(type: Type, providers: Array<any> = []) {
   return browser.bootstrap(type, providers);
