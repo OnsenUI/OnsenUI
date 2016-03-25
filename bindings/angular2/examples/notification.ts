@@ -1,0 +1,61 @@
+import {
+  bootstrap,
+  Component,
+  notification
+} from '../src/angular2-onsenui';
+
+@Component({
+  selector: 'my-app',
+  template: `
+  <ons-page _compiled>
+    <ons-toolbar>
+      <div class="center">Notification Example</div>
+    </ons-toolbar>
+
+    <div class="page__background"></div>
+    <div class="page__content">
+      <div style="margin: 10px; text-align: center;">
+
+        <ons-button (click)="alert()">alert()</ons-button>
+        <ons-button (click)="confirm()">confirm()</ons-button>
+        <ons-button (click)="prompt()">prompt()</ons-button>
+
+      </div>
+    </div>
+  </ons-page>
+  `
+})
+export class AppComponent {
+  constructor() { }
+
+  alert() {
+    notification.alert({message: 'Hello, world!'});
+  }
+
+  confirm() {
+    notification.confirm({
+      message: 'This dialog can be canceled by tapping the background or using the back button on your device.',
+      cancelable: true,
+      callback: i => {
+        if (i == -1) {
+          ons.notification.alert({message: 'You canceled it!'});
+        }
+      }
+    });
+  }
+
+  prompt() {
+    notification.prompt({
+      message: 'What is the meaning of Life, the Universe and Everything?',
+      callback: answer => {
+        if (answer === '42') {
+          ons.notification.alert({message: 'That\'s the correct answer!'});
+        } else {
+          ons.notification.alert({message: 'Incorrect! Please try again!'});
+        }
+      }
+    });
+  }
+}
+
+bootstrap(AppComponent);
