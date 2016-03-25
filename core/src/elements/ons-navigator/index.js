@@ -215,7 +215,7 @@ class NavigatorElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-    this._isPushing = this._isPopping = false;
+    this._isRunning = this._isRunning = false;
     this.options = {
       cancelIfRunning: true
     };
@@ -361,7 +361,7 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isPopping) {
+    if (options.cancelIfRunning && this._isRunning) {
       return Promise.reject('popPage is already running.');
     }
 
@@ -441,7 +441,7 @@ class NavigatorElement extends BaseElement {
       const callback = () => {
         leavePage.destroy();
 
-        this._isPopping = false;
+        this._isRunning = false;
         unlock();
 
         const event = util.triggerElementEvent(this, 'postpop', eventDetail);
@@ -454,7 +454,7 @@ class NavigatorElement extends BaseElement {
         resolve(enterPage);
       };
 
-      this._isPopping = true;
+      this._isRunning = true;
 
       const animator = this._animatorFactory.newAnimator(options, leavePage.options.animator);
       animator.pop(enterPage, leavePage, callback);
@@ -763,7 +763,7 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isPushing) {
+    if (options.cancelIfRunning && this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
 
@@ -776,7 +776,7 @@ class NavigatorElement extends BaseElement {
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
-    this._isPushing = true;
+    this._isRunning = true;
 
     return new Promise(resolve => {
       this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
@@ -828,7 +828,7 @@ class NavigatorElement extends BaseElement {
           this._pages[this._pages.length - 2].element.style.display = 'none';
         }
 
-        this._isPushing = false;
+        this._isRunning = false;
         unlock();
 
         util.triggerElementEvent(this, 'postpush', eventDetail);
@@ -841,7 +841,7 @@ class NavigatorElement extends BaseElement {
         resolve(this._pages[this._pages.length - 1]);
       };
 
-      this._isPushing = true;
+      this._isRunning = true;
 
       rewritables.link(this, element, options, element => {
         CustomElements.upgrade(element);
@@ -908,7 +908,7 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isPushing) {
+    if (options.cancelIfRunning && this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
 
