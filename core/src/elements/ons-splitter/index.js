@@ -18,7 +18,6 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import OverlaySplitterAnimator from './overlay-animator';
 import SplitterAnimator from './animator';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -52,284 +51,37 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
  */
 class SplitterElement extends BaseElement {
 
-  createdCallback() {
-    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-    this._boundOnModeChange = this._onModeChange.bind(this);
-  }
-
-  _onModeChange(event) {
-    if (event.target.parentElement === this) {
-      this._layout();
-    }
-  }
-
-  /**
-   * @param {String} side 'left' or 'right'.
-   * @return {Element}
-   */
-  _getSideElement(side) {
-    const result = util.findChild(this, element => {
-      return element.nodeName.toLowerCase() === 'ons-splitter-side' && element.getAttribute('side') === side;
+  _getSide(side) {
+    const element = util.findChild(this, e => {
+      return util.match(e, 'ons-splitter-side') && e.getAttribute('side') === side;
     });
-
-    if (result) {
-      CustomElements.upgrade(result);
-    }
-
-    return result;
+    element && CustomElements.upgrade(element);
+    return element;
   }
 
-  _layout() {
-    const content = this._getContentElement();
-    const left = this._getSideElement('left');
-    const right = this._getSideElement('right');
+  get left() {
+    return this._getSide('left');
+  }
 
-    if (content) {
-      if (left && left.getCurrentMode && left.getCurrentMode() === 'split') {
-        content.style.left = left._getWidth();
-      } else {
-        content.style.left = '0px';
-      }
+  get right() {
+    return this._getSide('right');
+  }
 
-      if (right && right.getCurrentMode && right.getCurrentMode() === 'split') {
-        content.style.right = right._getWidth();
-      } else {
-        content.style.right = '0px';
-      }
-    }
+  get _sides() {
+    return [this.left, this.right].filter(e => e);
+  }
+
+  get content() {
+    return util.findChild(this, 'ons-splitter-content') || this.appendChild(document.createElement('ons-splitter-content'));
+  }
+
+  get mask() {
+    return util.findChild(this, 'ons-splitter-mask') || this.appendChild(document.createElement('ons-splitter-mask'));
   }
 
   /**
-   * @return {Element}
-   */
-  _getContentElement() {
-    return util.findChild(this, 'ons-splitter-content');
-  }
-
-  attributeChangedCallback(name, last, current) {
-  }
-
-  /**
-   * @method openRight
-   * @signature openRight([options])
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Function} [options.callback]
-   *   [en]This function will be called after the menu has been opened.[/en]
-   *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Open right ons-splitter-side menu on collapse mode.[/en]
-   *   [ja]右のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
-   * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
-   *   [ja][/ja]
-   */
-  openRight(options = {}) {
-    return this._open('right', options);
-  }
-
-  _getMaskElement() {
-    const mask = util.findChild(this, 'ons-splitter-mask');
-    return mask || this.appendChild(document.createElement('ons-splitter-mask'));
-  }
-
-  /**
-   * @method openLeft
-   * @signature openLeft([options])
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Function} [options.callback]
-   *   [en]This function will be called after the menu has been opened.[/en]
-   *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
-   *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
-   * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
-   *   [ja][/ja]
-   */
-  openLeft(options = {}) {
-    return this._open('left', options);
-  }
-
-  /**
-   * @param {String} side
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  _open(side, options = {}) {
-    const menu = this._getSideElement(side);
-
-    return menu ? menu.open(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
-  }
-
-  /**
-   * @method closeRight
-   * @signature closeRight([options])
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Function} [options.callback]
-   *   [en]This function will be called after the menu has been closed.[/en]
-   *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Close right ons-splitter-side menu on collapse mode.[/en]
-   *   [ja]右のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
-   * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
-   *   [ja][/ja]
-   */
-  closeRight(options = {}) {
-    return this._close('right', options);
-  }
-
-  /**
-   * @method closeLeft
-   * @signature closeLeft([options])
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Function} [options.callback]
-   *   [en]This function will be called after the menu has been closed.[/en]
-   *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Close left ons-splitter-side menu on collapse mode.[/en]
-   *   [ja]左のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
-   * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
-   *   [ja][/ja]
-   */
-  closeLeft(options = {}) {
-    return this._close('left', options);
-  }
-
-  /**
-   * @param {String} side
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  _close(side, options = {}) {
-    const menu = this._getSideElement(side);
-
-    return menu ? menu.close(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
-  }
-
-  /**
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  toggleLeft(options = {}) {
-    return this._toggle('left', options);
-  }
-
-  /**
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  toggleRight(options = {}) {
-    return this._toggle('right', options);
-  }
-
-  /**
-   * @param {String} side
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the splitter side element
-   */
-  _toggle(side, options = {}) {
-    const menu = this._getSideElement(side);
-
-    return menu ? menu.toggle(options) : Promise.reject('child "ons-splitter-side" element is not found in this element.');
-  }
-
-  /**
-   * @method leftIsOpen
-   * @signature leftIsOpen()
-   * @return {Boolean}
-   *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
-   *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
-   * @description
-   *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
-   *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
-   */
-  leftIsOpen() {
-    return this._isOpen('left');
-  }
-
-  /**
-   * @method rightIsOpen
-   * @signature rightIsOpen()
-   * @return {Boolean}
-   *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
-   *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
-   * @description
-   *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
-   *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
-   */
-  rightIsOpen() {
-    return this._isOpen('right');
-  }
-
-  /**
-   * @param {String} side
-   * @return {Boolean}
-   */
-  _isOpen(side) {
-    const menu = this._getSideElement(side);
-
-    if (menu) {
-      return menu.isOpen();
-    }
-
-    return false;
-  }
-
-  /**
-   * @method loadContentPage
-   * @signature loadContentPage(pageUrl)
-   * @param {String} pageUrl
-   *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
-   * @description
-   *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
-   *   [ja]ons-splitter-content要素に表示されるページをpageUrlに指定します。[/ja]
-   */
-  loadContentPage(page, options = {}) {
-    const content = this._getContentElement();
-
-    return content ? content.load(page, options) : Promise.reject('child "ons-splitter-content" element is not found in this element.');
-  }
-
-  _onDeviceBackButton(handler) {
-    const left = this._getSideElement('left');
-    const right = this._getSideElement('right');
-
-    if (left && left.isOpen()) {
-      left.close();
-      return;
-    }
-
-    if (right && right.isOpen()) {
-      right.close();
-      return;
-    }
-
-    handler.callParentHandler();
-  }
-
-  attachedCallback() {
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
-    this._assertChildren();
-
-    this.addEventListener('modechange', this._boundOnModeChange, false);
-
-    setImmediate(() => this._layout());
-  }
-
-  /**
-   * @method getDeviceBackButtonHandler
-   * @signature getDeviceBackButtonHandler()
+   * @property backButtonHandler
+   * @signature backButtonHandler
    * @return {Object}
    *   [en]Device back-button handler.[/en]
    *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
@@ -337,77 +89,55 @@ class SplitterElement extends BaseElement {
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
    */
-  getDeviceBackButtonHandler() {
-    return this._deviceBackButtonHandler;
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
-  _assertChildren() {
-    const names = ['ons-splitter-content', 'ons-splitter-side', 'ons-splitter-mask'];
-    let contentCount = 0;
-    let sideCount = 0;
-    let maskCount = 0;
+  _onDeviceBackButton(handler) {
+    this._sides.some(s => s.isOpen() ? s.close() : false) || handler.callParentHandler();
+  }
 
-    util.arrayFrom(this.children).forEach(element => {
-      const name = element.nodeName.toLowerCase();
-      if (names.indexOf(name) === -1) {
-        throw new Error(`"${name}" element is not allowed in "ons-splitter" element.`);
-      }
+  _onModeChange(e) {
+    if (e.target.parentNode) {
+      this._layout();
+    }
+  }
 
-      if (name === 'ons-splitter-content') {
-        contentCount++;
-      } else if (name === 'ons-splitter-content') {
-        sideCount++;
-      } else if (name === 'ons-splitter-mask') {
-        maskCount++;
-      }
+  _layout() {
+    this._sides.forEach(side => {
+      this.content.style[side._side] = side.mode === 'split' ? side._width : 0;
     });
+  }
 
-    if (contentCount > 1) {
-      throw new Error('too many <ons-splitter-content> elements.');
-    }
+  createdCallback() {
+    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
+    this._boundOnModeChange = this._onModeChange.bind(this);
+  }
 
-    if (sideCount > 2) {
-      throw new Error('too many <ons-splitter-side> elements.');
-    }
-
-    if (maskCount > 1) {
-      throw new Error('too many <ons-splitter-mask> elements.');
-    }
-
-    if (maskCount === 0) {
-      this.appendChild(document.createElement('ons-splitter-mask'));
-    }
+  attachedCallback() {
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this.addEventListener('modechange', this._boundOnModeChange, false);
+    setImmediate(() => this._layout());
   }
 
   detachedCallback() {
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
-
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
     this.removeEventListener('modechange', this._boundOnModeChange, false);
   }
 
+  attributeChangedCallback(name, last, current) {}
+
   _show() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._show instanceof Function) {
-        child._show();
-      }
-    });
+    util.propagateAction(this, '_show');
   }
 
   _hide() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._hide instanceof Function) {
-        child._hide();
-      }
-    });
+    util.propagateAction(this, '_hide');
   }
 
   _destroy() {
-    util.arrayFrom(this.children).forEach(child => {
-      if (child._destroy instanceof Function) {
-        child._destroy();
-      }
-    });
+    util.propagateAction(this, '_destroy');
     this.remove();
   }
 }
@@ -417,8 +147,8 @@ window.OnsSplitterElement = document.registerElement('ons-splitter', {
 });
 
 window.OnsSplitterElement._animatorDict = {
-  default: OverlaySplitterAnimator,
-  overlay: OverlaySplitterAnimator
+  default: SplitterAnimator,
+  overlay: SplitterAnimator
 };
 
 window.OnsSplitterElement.registerAnimator = function(name, Animator) {
