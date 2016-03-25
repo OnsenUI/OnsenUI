@@ -36,28 +36,27 @@ export default class SplitterAnimator {
   }
 
   /**
-   * @param {Element} contentElement
    * @param {Element} sideElement
-   * @param {Element} maskElement
    */
-  activate(contentElement, sideElement, maskElement) {
-    this._content = contentElement;
+  activate(sideElement) {
+    const splitter = sideElement.parentNode;
     this._side = sideElement;
-    this._mask = maskElement;
+    this._content = splitter.content;
+    this._mask = splitter.mask;
   }
 
   inactivate() {
     this._content = this._side = this._mask = null;
   }
 
-  rightSideMinus() {
+  get minus() {
     return this._side._side === 'right' ? '-' : '';
   }
 
   translate(distance) {
     animit(this._side)
       .queue({
-        transform: `translate3d(${this.rightSideMinus() + distance}px, 0px, 0px)`
+        transform: `translate3d(${this.minus + distance}px, 0px, 0px)`
       })
       .play();
   }
@@ -70,7 +69,7 @@ export default class SplitterAnimator {
       animit(this._side)
         .wait(this._delay)
         .queue({
-          transform: `translate3d(${this.rightSideMinus()}100%, 0px, 0px)`
+          transform: `translate3d(${this.minus}100%, 0px, 0px)`
         }, {
           duration: this._duration,
           timing: this._timing

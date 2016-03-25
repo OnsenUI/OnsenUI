@@ -99,7 +99,7 @@ class CollapseDetection {
   }
 }
 
-const sizeToPx = (width, parent) => {
+const widthToPx = (width, parent) => {
   const [value, px] = [parseInt(width, 10), /px/.test(width)];
   return px ? value : Math.round(parent.offsetWidth * value / 100);
 };
@@ -132,13 +132,13 @@ class CollapseMode {
   }
 
   _onDragStart(event) {
+    const scrolling = !/left|right/.test(event.gesture.direction);
     const distance = this._element._side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
     const isOpen = this.isOpen();
+    this._ignoreDrag = scrolling || (area && distance > area);
 
-    this._ignoreDrag = !/left|right/.test(event.gesture.direction) || (!isOpen && area && distance > area);
-
-    this._width = sizeToPx(this._element._width, this._element.parentNode);
+    this._width = widthToPx(this._element._width, this._element.parentNode);
     this._startDistance = this._distance = isOpen ? this._width : 0;
   }
 
@@ -190,12 +190,16 @@ class CollapseMode {
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @param {Boolean} [options.withoutAnimation]
-   * @return {Promise} Resolves to the splitter side element
+   * @return {Promise} Resolves to the splitter side element or false if not in collapse mode
    */
   executeAction(name, options = {}) {
     const FINAL_STATE = name === 'open' ? OPEN_STATE : CLOSED_STATE;
 
-    if (!this._active || this._state === FINAL_STATE) {
+    if (!this._active) {
+      return Promise.resolve(false);
+    }
+
+    if (this._state === FINAL_STATE) {
       return Promise.resolve(this._element);
     }
     if (this._lock.isLocked()) {
@@ -441,7 +445,7 @@ class SplitterSideElement extends BaseElement {
       throw new Error('Parent must be an ons-splitter element.');
     }
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
-    this._update(this._watchedAttributes);
+    this._watchedAttributes.forEach(e => this._update(e));
   }
 
   detachedCallback() {
@@ -457,9 +461,6 @@ class SplitterSideElement extends BaseElement {
   }
 
   _update(name, value) {
-    if (Array.isArray(name)) {
-      return name.forEach(e => this._update(e));
-    }
     name = '_update' + name.split('-').map(e => e[0].toUpperCase() + e.slice(1)).join('');
     return this[name](value);
   }
@@ -532,10 +533,7 @@ class SplitterSideElement extends BaseElement {
 
   _updateAnimation(animation = this.getAttribute('animation')) {
     this._animator = this._animatorFactory.newAnimator({animation});
-
-    const content = util.findChild(this.parentElement, 'ons-splitter-content');
-    const mask = util.findChild(this.parentElement, 'ons-splitter-mask');
-    this._animator.activate(content, this, mask);
+    this._animator.activate(this);
   }
 
   _updateAnimationOptions(value = this.getAttribute('animation-options')) {
@@ -578,7 +576,7 @@ class SplitterSideElement extends BaseElement {
    *   [en]Open menu in collapse mode.[/en]
    *   [ja]collapseモードになっているons-splitter-side要素を開きます。[/ja]
    * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
+   *   [en]Resolves to the splitter side element or false if not in collapse mode[/en]
    *   [ja][/ja]
    */
   open(options = {}) {
@@ -598,7 +596,7 @@ class SplitterSideElement extends BaseElement {
    *   [en]Close menu in collapse mode.[/en]
    *   [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]
    * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
+   *   [en]Resolves to the splitter side element or false if not in collapse mode[/en]
    *   [ja][/ja]
    */
   close(options = {}) {
@@ -613,7 +611,7 @@ class SplitterSideElement extends BaseElement {
    *   [en]Opens if it's closed. Closes if it's open.[/en]
    *   [ja]開けている場合は要素を閉じますそして開けている場合は要素を開きます。[/ja]
    * @return {Promise}
-   *   [en]Resolves to the splitter side element[/en]
+   *   [en]Resolves to the splitter side element or false if not in collapse mode[/en]
    *   [ja][/ja]
    */
   toggle(options = {}) {

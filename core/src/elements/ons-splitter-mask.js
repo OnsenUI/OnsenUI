@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import BaseElement from 'ons/base-element';
+import util from 'ons/util';
 
 class SplitterMaskElement extends BaseElement {
 
@@ -24,10 +25,8 @@ class SplitterMaskElement extends BaseElement {
   }
 
   _onClick(event) {
-    if (this.parentElement && this.parentElement.nodeName.toLowerCase() === 'ons-splitter') {
-      // close side menus
-      this.parentElement.closeRight().catch(() => {});
-      this.parentElement.closeLeft().catch(() => {});
+    if (util.match(this.parentNode, 'ons-splitter')) {
+      this.parentNode._sides.forEach(side => side.close('left').catch(() => {}));
     }
     event.stopPropagation();
   }
