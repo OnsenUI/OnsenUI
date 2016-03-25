@@ -7,16 +7,6 @@ import {
 } from '../src/angular2-onsenui';
 
 @Component({
-  selector: 'child-component',
-  template: 'This is child component'
-})
-class ChildComponent {
-  constructor(navi: OnsNavigator) {
-    console.log('this is child', navi);
-  }
-}
-
-@Component({
   selector: 'ons-page',
   template: `
     <ons-toolbar>
@@ -48,7 +38,7 @@ export class PageComponent {
 
 @Component({
   selector: 'my-app',
-  directives: [OnsNavigator, ChildComponent],
+  directives: [OnsNavigator],
   template: `
   <ons-navigator>
     <ons-page _compiled class="page hoge" #aaa>
