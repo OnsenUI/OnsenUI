@@ -90,14 +90,12 @@ limitations under the License.
 
       _onPrepop: function(event) {
         var pages = event.detail.navigator.pages;
-        angular.element(pages[pages.length - 2].element).scope().$evalAsync();
-
-        this._previousPageScope = angular.element(pages[pages.length - 1].element).scope();
+        angular.element(pages[pages.length - 2]).data('_scope').$evalAsync();
+        this._previousPageScope = angular.element(pages[pages.length - 1]).data('_scope');
       },
 
       _onPostpop: function(event) {
         this._previousPageScope.$destroy();
-        this._previoousPageScope = null;
       },
 
       _compileAndLink: function(pageElement, callback) {

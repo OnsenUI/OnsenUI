@@ -121,7 +121,7 @@
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
       transclude: false,
-      scope: false,
+      scope: true,
 
       compile: function(element, attrs) {
         CustomElements.upgrade(element[0]);
