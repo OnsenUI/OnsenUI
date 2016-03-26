@@ -210,7 +210,17 @@ class TabbarElement extends BaseElement {
       this._compile();
     }
 
-    this._contentElement = util.findChild(this, '.tab-bar__content');
+    for (var i = 0; i < this.firstChild.children.length; i++) {
+      this.firstChild.children[i].style.display = 'none';
+    }
+
+    var activeIndex = this.getAttribute('activeIndex');
+
+    if (activeIndex && this.children[1].children.length > activeIndex) {
+      this.children[1].children[activeIndex].setAttribute('active', 'true');
+    }
+
+    ModifierUtil.initModifier(this, scheme);
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -218,6 +228,10 @@ class TabbarElement extends BaseElement {
       baseClassName: 'TabbarAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
+  }
+
+  get _contentElement() {
+    return util.findChild(this, '.tab-bar__content');
   }
 
   _compile() {
@@ -250,8 +264,6 @@ class TabbarElement extends BaseElement {
     if (this._hasTopTabbar()) {
       this._prepareForTopTabbar();
     }
-
-    ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
   }
@@ -391,6 +403,10 @@ class TabbarElement extends BaseElement {
     return page;
   }
 
+  get pages() {
+    return util.arrayFrom(this._contentElement.children);
+  }
+
   /**
    * @param {Element} element
    * @param {Object} options
@@ -402,7 +418,6 @@ class TabbarElement extends BaseElement {
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-
     var oldPageElement = this._oldPageElement || internal.nullElement;
     this._oldPageElement = element;
     var animator = this._animatorFactory.newAnimator(options);
@@ -455,7 +470,6 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
