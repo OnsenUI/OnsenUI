@@ -6,11 +6,13 @@ var MyPage  = React.createClass({
   render: function() {
     return (
       <Ons.Page>
-            <Ons.List dataSource={this.myData} renderRow={(rowData) => <Ons.ListItem> {rowData} </Ons.ListItem>}>
-            </Ons.List>
-          </Ons.Page>
-            
-            );
+        <Ons.List
+          dataSource={this.myData} 
+          renderHeader={() => <Ons.ListHeader>Numbers</Ons.ListHeader>}
+          renderRow={(rowData) => <Ons.ListItem> {rowData} </Ons.ListItem>}
+        />
+      </Ons.Page>
+    );
   }
 });
 
