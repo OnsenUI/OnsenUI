@@ -19,6 +19,7 @@ var CarouselCover = createSimpleWrapperClass('ons-carousel-cover');
 var ToolbarButton = createSimpleWrapperClass('ons-toolbar-button');
 var BottomToolbar = createSimpleWrapperClass('ons-buttom-toolbar');
 var ListItem = createSimpleWrapperClass('ons-list-item');
+var ListHeader = createSimpleWrapperClass('ons-list-header');
 var Icon = createSimpleWrapperClass('ons-icon');
 var Scroller = createSimpleWrapperClass('ons-scroller');
 var TabActive = createSimpleWrapperClass('ons-tab-active');
@@ -35,6 +36,7 @@ export {
   ToolbarButton,
   BottomToolbar,
   ListItem,
+  ListHeader,
   Icon,
   Scroller,
   TabActive,
