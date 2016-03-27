@@ -230,13 +230,14 @@ gulp.task('react', function() {
         ],
         external: [
           'react',
+          'react-dom/server',
           'react-dom',
           'react-addons-test-utils'
         ],
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
-          'react/server': 'ReactDOMServer',
+          'react-dom/server': 'ReactDOMServer',
           'react-addons-test-utils': 'React.addons.TestUtils'
         },
         format: 'umd',
