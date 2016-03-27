@@ -1,17 +1,19 @@
 var MyPage  = React.createClass({
   getInitialState: function() {
     return {
-      name: 'placeholder',
+      name: 'Andreas',
     };
   },
   onChange: function(event) {
     this.setState({name: event.target.value});
   },
+
   render: function() {
-    return (      <div style={{textAlign: 'center'}}>
-      <h1>Page Content</h1>
-        <Ons.Input type="text" value={this.state.name} onChange={this.onChange} />
-        <div style={{marginTop: 10}}> The input is {this.state.name} </div>
+    return (
+      <div style={{textAlign: 'center'}}>
+        <br />
+        <Ons.Input placeholder="Name" float value={this.state.name} onChange={this.onChange} />
+        <p>Hello there, {this.state.name}!</p>
       </div>
     );
   }
