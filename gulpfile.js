@@ -245,7 +245,7 @@ gulp.task('react', function() {
       }))
       .pipe(gulp.dest(dst)),
 
-    gulp.src(path.join(dst, 'package.json'))
+    gulp.src(path.join(src, 'package.json'))
       .pipe(gulp.dest(dst))
   );
 });
