@@ -6,7 +6,7 @@ class List extends React.Component {
   }
 
   render() {
-    var pages = this.props.dataSource.map( (data) => this.props.renderRow(data));
+    var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
     return (
       <ons-list {...this.props} ref="list">
         {pages}
