@@ -1,12 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var PullHook  = React.createClass({
   componentDidMount: function() {
-    window.addEventListener('changestate', this.props.onChange);
+    var node = ReactDOM.findDOMNode(this);
+    node.addEventListener('changestate', this.props.onChange);
     this.refs.pullHook.setActionCallback(this.props.onLoad);
   },
   componentWillUnmount: function() {
-    this.refs.pullHook.removeEventListener('changestate', this.pullHookChanged);
+    var node = ReactDOM.findDOMNode(this);
+    node.removeEventListener('changestate', this.props.onChange);
   },
   render: function() {
     return <ons-pull-hook ref="pullHook" {...this.props} />;
