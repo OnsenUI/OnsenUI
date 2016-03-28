@@ -1,6 +1,9 @@
 import React from 'react';
 
 var Switch = React.createClass({
+  componentDidMount: function() {
+    ons._autoStyle.prepare(this.refs.switch);
+  },
   render: function() {
     var myStyle= {
       WebkitUserSelect: 'none',
@@ -9,7 +12,7 @@ var Switch = React.createClass({
       WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
     };
     return (
-      <ons-switch style={myStyle} class="switch" _compiled="" {...this.props} >
+      <ons-switch ref="switch" style={myStyle} class="switch" _compiled="" {...this.props} >
        <input type="checkbox" className="switch__input" {...this.props} />
        <div className="switch__toggle">
          <div className="switch__handle">
