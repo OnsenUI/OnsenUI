@@ -3,7 +3,13 @@ import React from 'react';
 var createSimpleWrapperClass = function(domName) {
   var myClass = {
     render: function() {
-      return React.createElement(domName, this.props, this.props.children);
+      var {disabled, ...others} = this.props;
+
+      if (disabled) {
+        others.disabled = 'disabled';
+      }
+
+      return React.createElement(domName, others, this.props.children);
     }
   };
   return React.createClass(myClass);
