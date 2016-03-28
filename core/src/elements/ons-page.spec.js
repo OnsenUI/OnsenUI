@@ -38,6 +38,18 @@ describe('OnsPageElement', () => {
     });
   });
 
+  describe('#_tryToFillStatusBar()', (done) => {
+    it('fills status bar', () => {
+      var tmp = ons._internal.shouldFillStatusBar;
+      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
+      element._tryToFillStatusBar().then(() => {
+        expect(element.hasAttribute('status-bar-fill')).to.be.true;
+        done();
+      });
+      ons._internal.shouldFillStatusBar = tmp;
+    });
+  });
+
   describe('#detachedCallback', () => {
     it('fires \'destroy\' event', () => {
       var spy = chai.spy();
@@ -146,18 +158,6 @@ describe('OnsPageElement', () => {
       expect(element.lastChild.className).to.equal('page__content');
       element._registerExtraElement(document.createElement('div'));
       expect(element.lastChild.className).to.equal('page__extra');
-    });
-  });
-
-  describe('#_tryToFillStatusBar()', (done) => {
-    it('fills status bar', () => {
-      var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
-      element._tryToFillStatusBar().then(() => {
-        expect(element.firstChild.className).to.equal('page__status-bar-fill');
-        done();
-      });
-      ons._internal.shouldFillStatusBar = tmp;
     });
   });
 
