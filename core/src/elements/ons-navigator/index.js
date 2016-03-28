@@ -664,13 +664,14 @@ class NavigatorElement extends BaseElement {
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
     options.onTransitionEnd = () => {
-      while (this._pages.length > 1) {
-        this._pages.shift().destroy();
-      }
-      this._pages[0].updateBackButton();
+      
       onTransitionEnd();
     };
-
+    while (this._pages.length > 1) {
+        this._pages.shift().destroy();
+    }
+    this._pages[0].updateBackButton();
+      
     if (!options.pageHTML && (options.page === undefined || page === '')) {
       if (this.hasAttribute('page')) {
         options.page = this.getAttribute('page');
