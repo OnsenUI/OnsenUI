@@ -24,7 +24,7 @@ var Input = React.createClass({
     var {checked, ...other} = this.props;
 
     return (
-      <ons-input checked={checked ? '' : null} {...other}></ons-input>
+      <ons-input checked={checked ? '' : null} {...other} />
     );
   }
 });
