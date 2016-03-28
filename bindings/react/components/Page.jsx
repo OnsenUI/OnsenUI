@@ -1,7 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import reactUtil from './reactUtil.jsx';
 
 var Page = React.createClass({
+  componentDidMount: function() {
+    var node = ReactDOM.findDOMNode(this);
+    CustomElements.upgrade(node);
+  },
+
   render: function() {
     var toolbar;
     var modal;
@@ -18,7 +24,7 @@ var Page = React.createClass({
       }
     });
 
-    return <ons-page   {...this.props}  _compiled="true" >
+    return <ons-page {...this.props}  _compiled="true" >
         {toolbar}
         <div className="page__background"> </div>
         <div className="page__content">
