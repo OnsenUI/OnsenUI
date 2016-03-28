@@ -377,24 +377,22 @@ class NavigatorElement extends BaseElement {
         });
       };
 
-       var preFun = () => new Promise(resolve => {
+      var preFun = () => new Promise(resolve => {
         internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
 
           element.name =  this.name;
           element.options = options;
 
-            rewritables.link(this, element, this.pages[index].options, element => {
-              this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
-              this.pages[index + 1]._destroy();
-              resolve();
-            });
-          });
+          this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
+          this.pages[index + 1]._destroy();
+          resolve();
         });
+      });
 
-        return preFun().then( () => {
-          return this._popPage(options, popUpdate);
-        });
+      return preFun().then( () => {
+        return this._popPage(options, popUpdate);
+      });
     } else {
       var popUpdate = () => {
         return new Promise((resolve) => {
@@ -538,11 +536,11 @@ class NavigatorElement extends BaseElement {
         element.options = options;
 
         return new Promise(resolve => {
-          rewritables.link(this, element, options, element => {
             element.style.display = 'none';
             this.insertBefore(element, this.pages[index]);
             this.getCurrentPage().updateBackButton(true);
 
+          rewritables.link(this, element, options, element => {
             setTimeout(() => {
               element = null;
               resolve(this.pages[index]);
@@ -782,12 +780,9 @@ class NavigatorElement extends BaseElement {
     const run = (templateHTML) => new Promise((resolve) => {
       const element = this._createPageElement(templateHTML);
       CustomElements.upgrade(element);
-
-      rewritables.link(this, element, options, element => {
-        this.appendChild(element);
-        resolve();
-      });
-    })
+      this.appendChild(element);
+      resolve();
+    });
 
     let update;
 
@@ -832,7 +827,7 @@ class NavigatorElement extends BaseElement {
 
           var enterPage  = this.pages[this.pages.length - 1];
           var leavePage = this.pages[this.pages.length - 2];
-          enterPage.updateBackButton(this.pages.length -1);
+          enterPage.updateBackButton(this.pages.length - 1);
 
           this.pages[pageLength - 1].name = options.page;
           this.pages[pageLength -1].options = options;
@@ -849,23 +844,27 @@ class NavigatorElement extends BaseElement {
                 navigator: this
               };
 
-              util.triggerElementEvent(this, 'postpush', eventDetail);
+                util.triggerElementEvent(this, 'postpush', eventDetail);
 
-              if (typeof options.onTransitionEnd === 'function') {
-                options.onTransitionEnd();
-              }
+                if (typeof options.onTransitionEnd === 'function') {
+                  options.onTransitionEnd();
+                }
 
-              resolve(enterPage);
+                resolve(enterPage);
             };
 
-            if (pageLength > 1) {
-              leavePage._hide();
-              enterPage._show();
-              animator.push(enterPage, leavePage, done);
-            } else {
-              enterPage._show();
-              done();
-            }
+              enterPage.style.display = 'none';
+            rewritables.link(this, enterPage, options, () =>  {
+              enterPage.style.display = 'block';
+                if (pageLength > 1) {
+                  leavePage._hide();
+                  enterPage._show();
+                  animator.push(enterPage, leavePage, done);
+                } else {
+                  enterPage._show();
+                  done();
+                }
+              });
           });
       });
     };
