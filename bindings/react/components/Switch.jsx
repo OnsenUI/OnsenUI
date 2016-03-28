@@ -1,22 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var Switch = React.createClass({
+  componentDidMount: function() {
+    var node = ReactDOM.findDOMNode(this);
+    node.addEventListener('change', this.props.onChange);
+  },
+
+  componentWillUnmount: function() {
+    var node = ReactDOM.findDOMNode(this);
+    node.removeEventListener('change', this.props.onChange);
+  },
+
   render: function() {
-    var myStyle= {
-      WebkitUserSelect: 'none',
-      TouchAction: 'pan-y',
-      WebkitUserDrag: 'none',
-      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
-    };
+    var {checked, ...other} = this.props;
+
     return (
-      <ons-switch style={myStyle} class="switch" _compiled="" {...this.props} >
-       <input type="checkbox" className="switch__input" {...this.props} />
-       <div className="switch__toggle">
-         <div className="switch__handle">
-           <div className="switch__touch"></div>
-         </div>
-       </div>
-     </ons-switch>
+      <ons-switch checked={checked ? '' : null} {...other} />
     );
   }
 });
