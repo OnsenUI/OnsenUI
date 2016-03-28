@@ -660,16 +660,23 @@ class NavigatorElement extends BaseElement {
     if (!options.animator && !options.animation) {
       options.animation = 'none';
     }
-
+    var self = this;
     const onTransitionEnd = options.onTransitionEnd || function() {};
-
+    const destroyPages = function(){
+       if(typeof(self._pages) !== "undefined" ){
+         while (self._pages.length > 1) {
+           self._pages.shift().destroy();
+         }    
+       }
+   }
+   var needToDestroyPages = true;
     options.onTransitionEnd = () => {
-      
+      if(needToDestroyPages === true){
+         destroyPages();
+         needToDestroyPages  = false;
+      }
       onTransitionEnd();
     };
-    while (this._pages.length > 1) {
-        this._pages.shift().destroy();
-    }
     this._pages[0].updateBackButton();
       
     if (!options.pageHTML && (options.page === undefined || page === '')) {
