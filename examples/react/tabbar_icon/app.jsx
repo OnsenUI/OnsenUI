@@ -1,12 +1,12 @@
 var MyPage = React.createClass({
   render: function() {
     return (
-      <OnsPage {...this.props}>
-         <OnsToolbar>
+      <Ons.Page {...this.props}>
+         <Ons.Toolbar>
            <div className="center">{this.props.title}</div>
-         </OnsToolbar>
+         </Ons.Toolbar>
          <div>{this.props.content}</div>
-       </OnsPage>
+       </Ons.Page>
     );
   },
 });
@@ -15,20 +15,26 @@ var MyNav  = React.createClass({
   getInitialState: function() {
     return {};
   },
-  
+
   render: function() {
     return (
-    <div> 
-      <OnsTabbar
-        pages= {[
-          <MyPage title="Home"  content="Home content" />,
-          <MyPage title="Comments"  content="Comment content" />,
-          <MyPage title="Settings"  content="Setting content" />
-        ]}>
-        <OnsTab icon="ion-home" active="true" />
-        <OnsTab icon="ion-chatbox-working" />
-        <OnsTab icon="ion-ios-cog" />
-    </OnsTabbar>
+    <div>
+      <Ons.Tabbar
+        initialIndex={1}
+        renderTabs={() => [
+          {
+            content: <MyPage title="Home" content="Home content" />,
+            tab: <Ons.Tab icon="ion-home" />
+          },
+          {
+            content: <MyPage title="Comments" content="Comments content" />,
+            tab: <Ons.Tab icon="ion-chatbox-working" />
+          },
+          {
+            content: <MyPage title="Settings" content="Settings content" />,
+            tab: <Ons.Tab icon="ion-ios-cog" />
+          }
+        ]} />
   </div>);
   }
 });

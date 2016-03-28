@@ -13,10 +13,10 @@ var MyPage = React.createClass({
 
   render: function() {
     return (
-      <OnsPage {...this.props}>
-        <OnsToolbar>
+      <Ons.Page {...this.props}>
+        <Ons.Toolbar>
           <div className="center"> {this.props.title} </div>
-        </OnsToolbar>
+        </Ons.Toolbar>
 
         <div> {this.props.content} </div>
 
@@ -24,7 +24,7 @@ var MyPage = React.createClass({
           <input value={this.state.value} onChange={this.handleChange} />
         </label>
         <p>Hello, {this.state.value}!</p>
-      </OnsPage>
+      </Ons.Page>
     );
   },
 });
@@ -71,32 +71,32 @@ var MyNav  = React.createClass({
 
   render: function() {
     return (
-      <OnsTabbar
+      <Ons.Tabbar
         initialIndex={2}
         animation="fade"
         renderTabs={(activeIndex, tabbar) => {
           return [
             {
               content: <MyPage title="Home" content="Home content" />,
-              tab: <OnsTab label="Home" />
+              tab: <Ons.Tab label="Home" />
             },
             {
               content: <MyPage title="Comments" content="Comment content" />,
-              tab: <OnsTab label="Comments" />
+              tab: <Ons.Tab label="Comments" />
             },
             {
               content:
-                <OnsPage>
+                <Ons.Page>
                   <ons-toolbar><div className="center">{this.state.label}</div></ons-toolbar>
                   <ons-button onClick={tabbar.setActiveTab.bind(null, 0)}>Go home</ons-button>
                   {activeIndex === 2 ? <LoadStuff /> : null}
-                </OnsPage>,
-              tab: <OnsTab label={this.state.label} />
+                </Ons.Page>,
+              tab: <Ons.Tab label={this.state.label} />
             }
           ]
           }
         }>
-      </OnsTabbar>
+      </Ons.Tabbar>
     );
   }
 });

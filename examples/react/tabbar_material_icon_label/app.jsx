@@ -1,9 +1,9 @@
 var MyPage = React.createClass({
   render: function() {
     return (
-      <OnsPage {...this.props}>
+      <Ons.Page {...this.props}>
         <h2>{this.props.title}</h2>
-      </OnsPage>
+      </Ons.Page>
     );
   },
 });
@@ -16,38 +16,36 @@ var MyNav  = React.createClass({
   render: function() {
     return (
       <div> 
-   <OnsPage>
-      <OnsToolbar modifier="material noshadow">
+   <Ons.Page>
+      <Ons.Toolbar modifier="material noshadow">
         <div className="left">
-          <OnsToolbarButton modifier="material"><OnsIcon icon="md-menu"></OnsIcon></OnsToolbarButton>
+          <Ons.ToolbarButton modifier="material"><Ons.Icon icon="md-menu"></Ons.Icon></Ons.ToolbarButton>
         </div>
         <div className="center">
           Title
         </div>
         <div className="right">
-          <OnsToolbarButton modifier="material"><OnsIcon icon="md-search"></OnsIcon></OnsToolbarButton>
-          <OnsToolbarButton modifier="material"><OnsIcon icon="md-more-vert"></OnsIcon></OnsToolbarButton>
+          <Ons.ToolbarButton modifier="material"><Ons.Icon icon="md-search"></Ons.Icon></Ons.ToolbarButton>
+          <Ons.ToolbarButton modifier="material"><Ons.Icon icon="md-more-vert"></Ons.Icon></Ons.ToolbarButton>
         </div>
-      </OnsToolbar>
-      <OnsTabbar position="top" modifier="material" 
-        pages= {[
-          <MyPage title="Search"  />,
-          <MyPage title="Favorite" />,
-          <MyPage title="Call" />,
-          ]}
-        >
-        <OnsTab
-          icon="md-search"
-          label="search"
-          active="true" />
-        <OnsTab
-          icon="md-favorite"
-          label="favorite" />
-        <OnsTab
-          icon="md-phone"
-          label="phone" />
-      </OnsTabbar>
-    </OnsPage>
+      </Ons.Toolbar>
+      <Ons.Tabbar position="top" modifier="material" 
+        initialIndex={1}
+        renderTabs={() => [
+          {
+            content: <MyPage title="Search" />,
+            tab: <Ons.Tab icon="md-search" label="search" />
+          },
+          {
+            content: <MyPage title="Favorite" />,
+            tab: <Ons.Tab icon="md-favorite" label="favorite" />
+          },
+          {
+            content: <MyPage title="Call" />,
+            tab: <Ons.Tab icon="md-phone" label="Call" />
+          },
+        ]} />
+    </Ons.Page>
   </div>);
   }
 });

@@ -1,10 +1,10 @@
 var MyPage  = React.createClass({
   render: function() {
-    return <OnsPage>
+    return <Ons.Page>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
       </div>
-    </OnsPage>
+    </Ons.Page>
   }
 });
 

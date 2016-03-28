@@ -15,13 +15,13 @@ var MyPage  = React.createClass({
   },
   render: function() {
     return (
-    <OnsPage>
+    <Ons.Page>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
-        <OnsButton onClick={this.showAlert}> Show Alert </OnsButton>
-        <OnsButton onClick={this.showAlert2}> Show Alert 2 </OnsButton>
+        <Ons.Button onClick={this.showAlert}> Show Alert </Ons.Button>
+        <Ons.Button onClick={this.showAlert2}> Show Alert 2 </Ons.Button>
       </div>
-      <OnsAlertDialog ref="dialog" onCancel={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
+      <Ons.AlertDialog ref="dialog" onCancel={this.close} isOpen={this.state.alertOpen} animation="default" cancelable>
         <div className="alert-dialog-title">Warning!</div>
           <div className="alert-dialog-content">
           An error has occurred!
@@ -29,8 +29,8 @@ var MyPage  = React.createClass({
         <div className="alert-dialog-footer">
         <button onClick={this.close} className="alert-dialog-button">OK</button>
         </div>
-      </OnsAlertDialog>
-    </OnsPage>
+      </Ons.AlertDialog>
+    </Ons.Page>
     );
   }
 });

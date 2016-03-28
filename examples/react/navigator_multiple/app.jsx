@@ -3,13 +3,13 @@ var FirstPage = React.createClass({
     return { };
   },
   render: function() {
-    return <OnsPage>
+    return <Ons.Page>
       <ons-toolbar>
         <div className="left"><ons-back-button>Back</ons-back-button></div>
         <div className="center">{ this.props.index }</div>
       </ons-toolbar>
       <ons-button onClick={this.props.pushPage}>Push!</ons-button>
-    </OnsPage>;
+    </Ons.Page>;
   }
 });
 
@@ -18,15 +18,15 @@ var SecondPage = React.createClass({
     return { };
   },
   render: function() {
-    return <OnsPage>
+    return <Ons.Page>
         <ons-toolbar>
-          <div className="left"><OnsBackButton>Back </OnsBackButton></div>
+          <div className="left"><Ons.BackButton>Back </Ons.BackButton></div>
           <div className="center">{ this.props.index }</div>
         </ons-toolbar>
         <br />
         <ons-button onClick={this.props.pushPage}>Push</ons-button>
         <ons-button onClick={this.props.popPage}>Pop</ons-button>
-      </OnsPage>;
+      </Ons.Page>;
   }
 });
 
@@ -44,7 +44,7 @@ var App = React.createClass({
     this.refs.navi.popPage();
   },
 
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
 
@@ -54,14 +54,14 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <OnsNavigator id="myNav" animation="fade" ref="navi"
+      <Ons.Navigator id="myNav" animation="fade" ref="navi"
         initialRoutes={[
         {comp: FirstPage, props: {index: 0, pushPage: this.pushPage}},
         {comp: SecondPage, props: {index: this.index, pushPage: this.pushPage, popPage: this.popPage}
         }
         ]}
         renderScene={this.renderScene} >
-      </OnsNavigator>
+      </Ons.Navigator>
     );
   }
 });

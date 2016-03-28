@@ -13,40 +13,34 @@ var MyPullHook = React.createClass({
     var child;
 
     if (this.state.pullHookState == 'initial') {
-      child = <span ><OnsIcon size="35px" spin="false" icon="ion-arrow-down-a"></OnsIcon> Pull down to refresh</span>;
+      child = <span ><Ons.Icon size="35px" spin="false" icon="ion-arrow-down-a"></Ons.Icon> Pull down to refresh</span>;
     } else if (this.state.pullHookState == 'preaction') {
-      child = <span><OnsIcon  size="35px" spin="false" icon="ion-arrow-up-a"></OnsIcon> Release to refresh</span>;
+      child = <span><Ons.Icon  size="35px" spin="false" icon="ion-arrow-up-a"></Ons.Icon> Release to refresh</span>;
     } else {
-      child = <span><OnsIcon size="35px" spin="true" icon="ion-load-d"></OnsIcon> Loading data...</span>;
+      child = <span><Ons.Icon size="35px" spin="true" icon="ion-load-d"></Ons.Icon> Loading data...</span>;
     }
 
     return (
-      <OnsPullHook onChange={this.onChange} onLoad={this.onLoad}>
+      <Ons.PullHook onChange={this.onChange} onLoad={this.onLoad}>
         {child}
-      </OnsPullHook>
+      </Ons.PullHook>
     );
   }
 });
 
 var MyPage  = React.createClass({
   render: function() {
-    return <OnsPage >
+    return <Ons.Page >
       <MyPullHook />
 
-    <OnsToolbar>
+    <Ons.Toolbar>
       <div className="center">Pull to refresh</div>
-    </OnsToolbar>
+    </Ons.Toolbar>
 
-    <OnsList>
-      {[1,2,3,4,5].map( function(num) {
-        return (
-      <OnsListItem >
-        {'Item ' + num}
-      </OnsListItem>
-      )
-      })}
-    </OnsList>
-  </OnsPage>
+    <Ons.List
+      dataSource={[1, 2, 3, 4]}
+      renderRow={(data) => <Ons.ListItem>{data}</Ons.ListItem>} />
+  </Ons.Page>
   }
 });
 

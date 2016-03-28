@@ -1,18 +1,18 @@
 var MyPage2  = React.createClass({
   render: function() {
     return (
-      <OnsPage>
-        <OnsToolbar>
+      <Ons.Page>
+        <Ons.Toolbar>
           <div className="center">Description</div>
-        </OnsToolbar>
+        </Ons.Toolbar>
         <br />
         <div style={{textAlign: 'center'}}>
-          <OnsInput value={this.props.description} onChange={this.props.onChange} />
+          <Ons.Input value={this.props.description} onChange={this.props.onChange} />
           <p>
-            <OnsButton modifier="light" onClick={this.props.popPage}>Previous</OnsButton>
+            <Ons.Button modifier="light" onClick={this.props.popPage}>Previous</Ons.Button>
           </p>
         </div>
-      </OnsPage>
+      </Ons.Page>
     );
   }
 });
@@ -26,18 +26,18 @@ var FirstPage  = React.createClass({
     return { };
   },
   render: function() {
-    return (<OnsPage>
-      <OnsToolbar>
+    return (<Ons.Page>
+      <Ons.Toolbar>
         <div className="center">Name</div>
-      </OnsToolbar>
+      </Ons.Toolbar>
       <br />
       <div style={{textAlign: 'center'}}>
-        <OnsInput value={this.props.name} onChange={this.props.onNameChanged}  />
+        <Ons.Input value={this.props.name} onChange={this.props.onNameChanged}  />
         <p>
-          <OnsButton modifier="light"  onClick={this.props.pushPage}>Next</OnsButton>
+          <Ons.Button modifier="light"  onClick={this.props.pushPage}>Next</Ons.Button>
         </p>
       </div>
-    </OnsPage>);
+    </Ons.Page>);
   }
 });
 
@@ -63,7 +63,7 @@ var MyDialog = React.createClass({
     console.log('description changed');
     this.props.onDescriptionChanged(event.target.value);
   },
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     var comp = route.comp;
     var props = route.props;
     props.description = this.props.description;
@@ -73,13 +73,13 @@ var MyDialog = React.createClass({
   },
   render: function() {
     return (
-    <OnsDialog onCancel={this.props.onCancel} isOpen={this.props.isOpen} style={{height: 250}} animation="default" cancelable>
-      <OnsNavigator animation="slide" ref="navi"
+    <Ons.Dialog onCancel={this.props.onCancel} isOpen={this.props.isOpen} style={{height: 250}} animation="default" cancelable>
+      <Ons.Navigator animation="slide" ref="navi"
         initialRoute={{comp: FirstPage, props: {
           pushPage: this.pushPage, onNameChanged: this.onNameChanged }}}
         renderScene={this.renderScene}>
-              </OnsNavigator>
-    </OnsDialog>
+              </Ons.Navigator>
+    </Ons.Dialog>
     );
   },
 });
@@ -107,11 +107,11 @@ var MyPage  = React.createClass({
   },
   render: function() {
     return (
-    <OnsPage>
+    <Ons.Page>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
-        <OnsButton onClick={this.hello}>Hello  </OnsButton>
-        <OnsButton onClick={this.showAlert}> Show Alert </OnsButton>
+        <Ons.Button onClick={this.hello}>Hello  </Ons.Button>
+        <Ons.Button onClick={this.showAlert}> Show Alert </Ons.Button>
         <div> Name : {this.state.name} </div>
         <div> Description : {this.state.description} </div>
       </div>
@@ -119,7 +119,7 @@ var MyPage  = React.createClass({
         onNameChanged={this.onNameChanged}
         onDescriptionChanged={this.onDescriptionChanged}
         isOpen={this.state.dialogOpen}  />
-    </OnsPage>
+    </Ons.Page>
     );
   }
 });

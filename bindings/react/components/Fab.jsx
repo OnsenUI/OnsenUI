@@ -1,4 +1,6 @@
-var OnsFab = React.createClass({
+import React from 'react';
+
+var Fab = React.createClass({
   render: function() {
     return(
       <ons-fab {...this.props} class="fab" _compiled="">
@@ -8,3 +10,5 @@ var OnsFab = React.createClass({
       </ons-fab>);
     }
 });
+
+export default Fab;

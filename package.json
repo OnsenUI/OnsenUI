@@ -39,6 +39,8 @@
   "main": "js/onsenui.js",
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
+    "babel-plugin-transform-react-jsx": "^6.6.5",
     "babel-preset-es2015": "https://registry.npmjs.org/babel-preset-es2015/-/babel-preset-es2015-6.1.18.tgz",
     "babel-preset-es2015-rollup": "^1.0.0",
     "babel-preset-react": "^6.5.0",
@@ -92,7 +94,10 @@
     "mocha": "^2.3.4",
     "nunjucks": "^2.3.0",
     "rollup-plugin-babel": "^2.3.8",
+    "rollup-plugin-commonjs": "^2.2.1",
+    "rollup-plugin-node-resolve": "^1.5.0",
     "rollup-plugin-npm": "^1.2.1",
+    "rollup-plugin-replace": "^1.1.0",
     "run-sequence": "^1.1.5",
     "wcdoc": "^0.1.10"
   }

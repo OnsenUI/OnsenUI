@@ -31,8 +31,10 @@ var browserSync = require('browser-sync');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
-var npm  = require('rollup-plugin-npm');
+var nodeResolve  = require('rollup-plugin-node-resolve');
 var babel = require('rollup-plugin-babel');
+var commonjs = require('rollup-plugin-commonjs');
+var replace = require('rollup-plugin-replace');
 var babel2 = require('gulp-babel');
 
 ////////////////////////////////////////
@@ -78,7 +80,7 @@ gulp.task('core', function() {
             }
           }
         },
-        npm(),
+        nodeResolve(),
         babel({presets: ['es2015-rollup']})
       ],
       format: 'umd',
@@ -206,21 +208,56 @@ gulp.task('minify-js', function() {
 });
 
 ////////////////////////////////////////
+// react
+////////////////////////////////////////
+gulp.task('react', function() {
+  var src = 'bindings/react/';
+  var dst = 'build/bindings/react';
+
+  return merge(
+    gulp.src(path.join(src, 'index.js'), {read: false})
+      .pipe($.rollup({
+        sourceMap: 'inline',
+        plugins: [
+          nodeResolve(),
+          commonjs({
+            'node_modules/react-dom/server.js': ['ReactDOMServer']
+          }),
+          replace({
+            'process.env.NODE_ENV': JSON.stringify('production')
+          }),
+          babel({presets: ['es2015-rollup'], plugins: ['transform-react-jsx', 'transform-object-rest-spread']})
+        ],
+        external: [
+          'react',
+          'react-dom/server',
+          'react-dom',
+          'react-addons-test-utils'
+        ],
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+          'react-dom/server': 'ReactDOMServer',
+          'react-addons-test-utils': 'React.addons.TestUtils'
+        },
+        format: 'umd',
+        moduleName: 'Ons'
+      }))
+      .pipe(gulp.dest(dst)),
+
+    gulp.src(path.join(src, 'package.json'))
+      .pipe(gulp.dest(dst))
+  );
+});
+
+////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], function() {
+gulp.task('prepare', ['html2js', 'react'], function() {
 
   var onlyES6;
 
   return merge(
-
-    // react-onsenui.js
-    gulp.src( 'bindings/react/components/*.jsx')
-   .pipe(babel2({ presets: ['react', 'es2015'] }))
-   .pipe($.concat('react-onsenui.js'))
-   .pipe($.header('/*! react-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-   .pipe(gulp.dest('build/js/')),
-
     // react.js , react-dom.js , react-addons.js
     gulp.src('bindings/react/lib/react/*.js')
       .pipe(gulp.dest('build/js/react/')),

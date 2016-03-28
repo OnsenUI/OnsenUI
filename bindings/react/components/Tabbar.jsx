@@ -1,4 +1,7 @@
-var OnsTabbar = React.createClass({
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+var Tabbar = React.createClass({
   getInitialState: function() {
     return {
       activeIndex: this.props.initialIndex || 0
@@ -7,6 +10,7 @@ var OnsTabbar = React.createClass({
 
   componentDidMount: function() {
     const node = ReactDOM.findDOMNode(this);
+    CustomElements.upgrade(node);
     node.setActiveTab(this.state.activeIndex);
     node.addEventListener('prechange', this.handleChange);
   },
@@ -44,8 +48,10 @@ var OnsTabbar = React.createClass({
   }
 });
 
-var OnsTab = React.createClass({
+var Tab = React.createClass({
   render: function() {
     return <ons-tab {...this.props}></ons-tab>;
   }
 });
+
+export {Tabbar, Tab};

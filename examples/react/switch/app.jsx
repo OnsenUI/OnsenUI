@@ -12,7 +12,7 @@ var MyPage  = React.createClass({
       <h1>Page Content</h1>
       <input type="checkbox" checked={this.state.checked} onChange={this.onChange} />
       <p />
-      <OnsSwitch checked={this.state.checked} onChange={this.onChange} />
+      <Ons.Switch checked={this.state.checked} onChange={this.onChange} />
       <p />
       <div style={{marginTop: 10}}> The switch is {this.state.checked ? 'on' : 'off'} </div>
       </div>

@@ -7,33 +7,33 @@ var MyPage2  = React.createClass({
   },
   render: function() {
     return (
-      <OnsPage>
-        <OnsToolbar>
+      <Ons.Page>
+        <Ons.Toolbar>
            <div className="left"><ons-back-button>Back</ons-back-button></div>
            <div className="center">Fullscreen</div>
-        </OnsToolbar>
+        </Ons.Toolbar>
 
-        <OnsCarousel ref="carousel" swipeable overscrollable auto-scroll fullscreen auto-scroll-ratio="0.2" var="carousel">
-        <OnsCarouselItem style={{backgroundColor: 'gray'}}>
+        <Ons.Carousel ref="carousel" swipeable overscrollable auto-scroll fullscreen auto-scroll-ratio="0.2" var="carousel">
+        <Ons.CarouselItem style={{backgroundColor: 'gray'}}>
           <div className="item-label">GRAY</div>
-        </OnsCarouselItem>
-        <OnsCarouselItem style={{backgroundColor: '#085078'}}>
+        </Ons.CarouselItem>
+        <Ons.CarouselItem style={{backgroundColor: '#085078'}}>
           <div className="item-label">BLUE</div>
-        </OnsCarouselItem>
-        <OnsCarouselItem style={{backgroundColor: '#373B44'}}>
+        </Ons.CarouselItem>
+        <Ons.CarouselItem style={{backgroundColor: '#373B44'}}>
           <div className="item-label">DARK</div>
-        </OnsCarouselItem>
-        <OnsCarouselItem style={{backgroundColor: '#D38312'}}>
+        </Ons.CarouselItem>
+        <Ons.CarouselItem style={{backgroundColor: '#D38312'}}>
           <div className="item-label">ORANGE</div>
-        </OnsCarouselItem>
-        <OnsCarouselCover><div className="cover-label">OnsCarouselCover</div></OnsCarouselCover>
-      </OnsCarousel>
+        </Ons.CarouselItem>
+        <Ons.CarouselCover><div className="cover-label">Ons.CarouselCover</div></Ons.CarouselCover>
+      </Ons.Carousel>
 
-      <OnsBottomToolbar>
-        <OnsToolbarButton style={{float: 'right'}} onClick={this.moveRight}>Next</OnsToolbarButton>
-        <OnsToolbarButton style={{float: 'left'}} onClick={this.moveLeft}>Prev</OnsToolbarButton>
-      </OnsBottomToolbar>
-    </OnsPage>
+      <Ons.BottomToolbar>
+        <Ons.ToolbarButton style={{float: 'right'}} onClick={this.moveRight}>Next</Ons.ToolbarButton>
+        <Ons.ToolbarButton style={{float: 'left'}} onClick={this.moveLeft}>Prev</Ons.ToolbarButton>
+      </Ons.BottomToolbar>
+    </Ons.Page>
   );
   }
 });
@@ -44,10 +44,10 @@ var FirstPage = React.createClass({
   },
   render: function() {
     return (
-      <OnsPage>
-        <OnsToolbar>
+      <Ons.Page>
+        <Ons.Toolbar>
           <div className="center">Carousel</div>
-        </OnsToolbar>
+        </Ons.Toolbar>
         <br />
         <ons-list>
                 <ons-list-item onClick={this.props.showPage1} modifier="chevron">Example1</ons-list-item>
@@ -59,7 +59,7 @@ var FirstPage = React.createClass({
                 {/* <ons-list-item ng-click="navi.pushPage('example7.html')" modifier="chevron">Example7</ons-list-item> */}
                 {/* <ons-list-item ng-click="navi.pushPage('example8.html')" modifier="chevron">Example8</ons-list-item> */}
               </ons-list>
-            </OnsPage>
+            </Ons.Page>
     );
   }
 });
@@ -70,17 +70,17 @@ var MyPage  = React.createClass({
     this.refs.navi.pushPage({comp: MyPage2});
   },
 
-  renderScene: function(navigator, route) {
+  renderScene: function(route, navigator) {
     return React.createElement(route.comp, route.props);
   },
 
   render: function() {
     return (
-      <OnsNavigator ref="navi"
+      <Ons.Navigator ref="navi"
         initialRoute={{comp: FirstPage, props: {showPage1: this.showPage1}}}
         renderScene={this.renderScene}
         >
-      </OnsNavigator>
+      </Ons.Navigator>
     );
   }
 });

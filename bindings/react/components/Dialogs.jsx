@@ -1,4 +1,6 @@
-var ReactTestUtils = React.addons.TestUtils;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-addons-test-utils';
 
 var createDialogClass = function(domName, showFun) {
   var myClass = {
@@ -9,7 +11,6 @@ var createDialogClass = function(domName, showFun) {
       this.node.firstChild.hide();
     },
     componentDidMount: function() {
-      console.log('mounting');
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
 
@@ -21,7 +22,6 @@ var createDialogClass = function(domName, showFun) {
     componentWillReceiveProps: function(newProps) {
 
       if (newProps.isOpen != this.props.isOpen) {
-        console.log('true');
         this.animateShow = true;
       }
       this.renderPortal(newProps);
@@ -34,7 +34,6 @@ var createDialogClass = function(domName, showFun) {
       CustomElements.upgrade(this.node.firstChild);
       if (this.props.isOpen) {
         if (this.animateShow) {
-          console.log('show');
           this.show();
         }
         this.animateShow = false;
@@ -60,8 +59,8 @@ var createDialogClass = function(domName, showFun) {
   return React.createClass(myClass);
 };
 
-var OnsAlertDialog = createDialogClass('ons-alert-dialog');
-var OnsDialog = createDialogClass('ons-dialog');
+var AlertDialog = createDialogClass('ons-alert-dialog');
+var Dialog = createDialogClass('ons-dialog');
 
 var showFun = function() {
   var target = this.props.getTarget();
@@ -71,4 +70,6 @@ var showFun = function() {
   return this.node.firstChild.show(target);
 };
 
-var OnsPopover = createDialogClass('ons-popover', showFun);
+var Popover = createDialogClass('ons-popover', showFun);
+
+export {AlertDialog, Dialog, Popover};

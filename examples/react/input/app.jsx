@@ -1,17 +1,27 @@
 var MyPage  = React.createClass({
   getInitialState: function() {
     return {
-      name: 'placeholder',
+      name: 'Andreas',
+      checked: true,
     };
   },
-  onChange: function(event) {
+
+  onInputChange: function(event) {
     this.setState({name: event.target.value});
   },
+
+  onCheckboxChange: function(event) {
+    this.setState({checked: event.target.checked});
+  },
+
   render: function() {
-    return (      <div style={{textAlign: 'center'}}>
-      <h1>Page Content</h1>
-        <OnsInput type="text" value={this.state.name} onChange={this.onChange} />
-        <div style={{marginTop: 10}}> The input is {this.state.name} </div>
+    return (
+      <div style={{textAlign: 'center'}}>
+        <br />
+        <Ons.Input placeholder="Name" float value={this.state.name} onChange={this.onInputChange} />
+        <Ons.Input type="checkbox" checked={this.state.checked} onChange={this.onCheckboxChange} />
+        <p>Hello there, {this.state.name}!</p>
+        <p>Checkbox is {this.state.checked ? 'on' : 'off'}!</p>
       </div>
     );
   }

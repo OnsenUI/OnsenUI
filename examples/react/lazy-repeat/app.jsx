@@ -1,24 +1,24 @@
 var MyPage  = React.createClass({
   renderRow: function(index) {
-    return <OnsListItem key={index}>
+    return <Ons.ListItem key={index}>
       {'Item ' + (index + 1)}
-    </OnsListItem>;
+    </Ons.ListItem>;
   },
   render: function() {
-    return <OnsPage>
+    return <Ons.Page>
     <ons-toolbar>
       <div className="center">Lazy Repeat</div>
     </ons-toolbar>
 
     <div style={{height: 100}}>
-      <OnsLazyList
+      <Ons.LazyList
         length={1000}
         renderRow={this.renderRow}
         calculateItemHeight={() => 44}
       />
     </div>
 
-    </OnsPage>
+    </Ons.Page>
   }
 });
 

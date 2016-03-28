@@ -1,11 +1,11 @@
 var MyPage = React.createClass({
   render: function() {
     return (
-      <OnsPage {...this.props}>
+      <Ons.Page {...this.props}>
          <ons-toolbar>
             <div class="center">Page</div>
           </ons-toolbar>
-       </OnsPage>
+       </Ons.Page>
     );
   },
 });
@@ -18,21 +18,21 @@ var MyNav  = React.createClass({
   render: function() {
     return (
     <div> 
-      <OnsTabbar>
-        <OnsTab
+      <Ons.Tabbar>
+        <Ons.Tab
           icon="ion-home"
           active="true"
           page = { <MyPage /> }>
-        </OnsTab>
-    <OnsTab
+        </Ons.Tab>
+    <Ons.Tab
           icon="ion-chatbox-working"
           page = { <MyPage /> }>
-        </OnsTab>
-      <OnsTab
+        </Ons.Tab>
+      <Ons.Tab
           icon="ion-ios-cog"
           page = { <MyPage /> }>
-      </OnsTab>
-    </OnsTabbar>
+      </Ons.Tab>
+    </Ons.Tabbar>
   </div>);
   }
 });

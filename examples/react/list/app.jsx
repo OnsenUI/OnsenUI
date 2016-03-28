@@ -1,15 +1,19 @@
 var MyPage  = React.createClass({
   myData: [
-'1', '2', '3'
+    '1', '2', '3'
   ],
+
   render: function() {
     return (
-      <OnsPage>
-            <OnsList dataSource={this.myData} renderRow={(rowData) => <OnsListItem> {rowData} </OnsListItem>}>
-            </OnsList>
-          </OnsPage>
-            
-            );
+      <Ons.Page>
+        <Ons.List
+          dataSource={this.myData} 
+          renderHeader={() => <Ons.ListHeader>Numbers</Ons.ListHeader>}
+          renderFooter={() => <Ons.ListItem>Footer</Ons.ListItem>}
+          renderRow={(rowData) => <Ons.ListItem> {rowData} </Ons.ListItem>}
+        />
+      </Ons.Page>
+    );
   }
 });
 
