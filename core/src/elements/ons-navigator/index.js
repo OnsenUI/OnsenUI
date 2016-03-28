@@ -384,9 +384,11 @@ class NavigatorElement extends BaseElement {
           element.name =  this.name;
           element.options = options;
 
-          this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
-          this.pages[index + 1]._destroy();
-          resolve();
+          rewritables.link(this, element, this.pages[index].options, element => {
+            this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
+            this.pages[index + 1]._destroy();
+            resolve();
+          });
         });
       });
 

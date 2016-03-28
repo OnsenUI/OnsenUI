@@ -220,6 +220,7 @@ class TabbarElement extends BaseElement {
       this.children[1].children[activeIndex].setAttribute('active', 'true');
     }
 
+    autoStyle.prepare(this);
     ModifierUtil.initModifier(this, scheme);
 
     this._animatorFactory = new AnimatorFactory({
@@ -235,8 +236,6 @@ class TabbarElement extends BaseElement {
   }
 
   _compile() {
-    autoStyle.prepare(this);
-
     if (this.getAttribute('position') === 'auto') {
       this.setAttribute('position', platform.isAndroid() ? 'top' : 'bottom');
     }
