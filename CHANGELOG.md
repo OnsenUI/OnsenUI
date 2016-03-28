@@ -23,6 +23,7 @@ v2.0.0-beta.8
  * ons-list-item: Fix chevron position when list content is large.
  * ons-lazy-repeat: Auto calculate item height if no information is provided.
  * ons-carousel: Removes event listeners if it's not swipeable.
+ * ons-splitter: Update API.
 
 v2.0.0-beta.7
 ----
