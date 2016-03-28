@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.9
 ----
  * ons-splitter: Fixed memory leak.
+ * ons-page: Fixed [#1315](https://github.com/OnsenUI/OnsenUI/issues/1315).
 
 v2.0.0-beta.8
 ----
