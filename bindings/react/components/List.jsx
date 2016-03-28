@@ -6,21 +6,21 @@ class List extends React.Component {
   }
 
   render() {
-    var header = this.props.renderHeader ?
-      this.props.renderHeader() : null;
-
-    var footer = this.props.renderFooter ?
-      this.props.renderFooter() : null;
-
     var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
+
     return (
       <ons-list {...this.props} ref="list">
-        {header}
+        {this.props.renderHeader()}
         {pages}
-        {footer}
+        {this.props.renderFooter()}
       </ons-list>
     );
   }
 }
+
+List.defaultProps = {
+  renderHeader: () => null,
+  renderFooter: () => null
+};
 
 export default List;
