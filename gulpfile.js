@@ -226,7 +226,7 @@ gulp.task('react', function() {
           replace({
             'process.env.NODE_ENV': JSON.stringify('production')
           }),
-          babel({presets: ['es2015-rollup'], plugins: ['transform-react-jsx']})
+          babel({presets: ['es2015-rollup'], plugins: ['transform-react-jsx', 'transform-object-rest-spread']})
         ],
         external: [
           'react',
