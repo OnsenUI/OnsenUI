@@ -11,7 +11,6 @@ var createDialogClass = function(domName, showFun) {
       this.node.firstChild.hide();
     },
     componentDidMount: function() {
-      console.log('mounting');
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
 
@@ -23,7 +22,6 @@ var createDialogClass = function(domName, showFun) {
     componentWillReceiveProps: function(newProps) {
 
       if (newProps.isOpen != this.props.isOpen) {
-        console.log('true');
         this.animateShow = true;
       }
       this.renderPortal(newProps);
@@ -36,7 +34,6 @@ var createDialogClass = function(domName, showFun) {
       CustomElements.upgrade(this.node.firstChild);
       if (this.props.isOpen) {
         if (this.animateShow) {
-          console.log('show');
           this.show();
         }
         this.animateShow = false;

@@ -31,7 +31,6 @@ class LazyList extends React.Component {
                       });
       }.bind(this),
       countItems: function() {
-        console.log('items : ' + self.props.length);
         return self.props.length;
       },
     };
