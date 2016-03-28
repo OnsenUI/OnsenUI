@@ -26,46 +26,28 @@ limitations under the License.
         this._scope = scope;
         this._attrs = attrs;
 
-        this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'load'
-        ]);
-
+        this.load = (...args) => {
+          this._pageScope && this._pageScope.$destroy();
+          this._element[0].load(...args);
+        };
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _link: function(fragment, done) {
-        var link = $compile(fragment);
-        var pageScope = this._createPageScope();
-        link(pageScope);
+        this._pageScope = this._scope.$new();
+        $compile(fragment)(this._pageScope);
 
-        pageScope.$evalAsync(function() {
-          done(fragment);
-        });
-      },
-
-      _createPageScope: function() {
-         return this._scope.$new();
+        this._pageScope.$evalAsync(() => done(fragment));
       },
 
       _destroy: function() {
         this.emit('destroy');
-
-        this._clearDerivingMethods();
-
-        this._element = this._scope = this._attrs = null;
+        this._element = this._scope = this._attrs = this.load = this._pageScope = null;
       }
     });
 
     MicroEvent.mixin(SplitterContent);
-
-    Object.defineProperty(SplitterContent.prototype, 'page', {
-      get: function () {
-        return this._element[0].page;
-      },
-      set: function() {
-        throw new Error();
-      }
-    });
+    $onsen.derivePropertiesFromElement(SplitterContent, ['page']);
 
     return SplitterContent;
   });
