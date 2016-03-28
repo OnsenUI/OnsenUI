@@ -9,6 +9,7 @@ var MyPage  = React.createClass({
         <Ons.List
           dataSource={this.myData} 
           renderHeader={() => <Ons.ListHeader>Numbers</Ons.ListHeader>}
+          renderFooter={() => <Ons.ListItem>Footer</Ons.ListItem>}
           renderRow={(rowData) => <Ons.ListItem> {rowData} </Ons.ListItem>}
         />
       </Ons.Page>
