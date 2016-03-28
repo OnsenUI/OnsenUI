@@ -10,6 +10,7 @@ var Tabbar = React.createClass({
 
   componentDidMount: function() {
     const node = ReactDOM.findDOMNode(this);
+    CustomElements.upgrade(node);
     node.setActiveTab(this.state.activeIndex);
     node.addEventListener('prechange', this.handleChange);
   },
