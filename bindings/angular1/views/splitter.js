@@ -20,7 +20,6 @@ limitations under the License.
   angular.module('onsen').factory('Splitter', function($onsen) {
 
     var Splitter = Class.extend({
-
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
@@ -35,9 +34,16 @@ limitations under the License.
     });
 
     MicroEvent.mixin(Splitter);
-    $onsen.derivePropertiesFromElement(Splitter, [
-      'left', 'right', 'content', 'mask', 'backButtonHandler'
-    ]);
+    $onsen.derivePropertiesFromElement(Splitter, ['backButtonHandler']);
+
+    ['left', 'right', 'content', 'mask'].forEach((prop, i) => {
+      Object.defineProperty(Splitter.prototype, prop, {
+        get: function () {
+          var tagName = `ons-splitter-${i < 2 ? 'side' : prop}`;
+          return angular.element(this._element[0][prop]).data(tagName);
+        }
+      });
+    });
 
     return Splitter;
   });

@@ -27,33 +27,27 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'isOpen', 'open', 'close', 'toggle', 'load'
+          'isOpen', 'open', 'close', 'toggle'
         ]);
+
+        this.load = (...args) => {
+          this._pageScope && this._pageScope.$destroy();
+          this._element[0].load(...args);
+        };
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
           'modechange', 'preopen', 'preclose', 'postopen', 'postclose'
-        ], function(detail) {
-          if (detail.side) {
-            detail.side = this;
-          }
-          return detail;
-        }.bind(this));
+        ], detail => detail.side ? angular.extend(detail, {side: this}) : detail);
 
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _link: function(fragment, done) {
         var link = $compile(fragment);
-        var pageScope = this._createPageScope();
-        link(pageScope);
+        this._pageScope = this._scope.$new();
+        link(this._pageScope);
 
-        pageScope.$evalAsync(function() {
-          done(fragment);
-        });
-      },
-
-      _createPageScope: function() {
-         return this._scope.$new();
+        this._pageScope.$evalAsync(() => done(fragment));
       },
 
       _destroy: function() {
@@ -62,7 +56,7 @@ limitations under the License.
         this._clearDerivingMethods();
         this._clearDerivingEvents();
 
-        this._element = this._scope = this._attrs = null;
+        this._element = this._scope = this._attrs = this.load = this._pageScope = null;
       }
     });
 

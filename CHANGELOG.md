@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-beta.9
 ----
+ * ons-splitter: Fixed memory leak.
 
 v2.0.0-beta.8
 ----
