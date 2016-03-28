@@ -267,9 +267,11 @@ class DialogElement extends BaseElement {
   }
 
   _cancel() {
-    if (this.isCancelable()) {
+    if (this.isCancelable() && !this._running) {
+      this._running = true;
       this.hide({
         callback: () => {
+          this._running = false;
           util.triggerElementEvent(this, 'cancel');
         }
       });
@@ -507,9 +509,7 @@ class DialogElement extends BaseElement {
 
   attachedCallback() {
     this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-
     this._mask.addEventListener('click', this._boundCancel, false);
-
   }
 
   detachedCallback() {

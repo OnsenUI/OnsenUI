@@ -515,9 +515,11 @@ class AlertDialogElement extends BaseElement {
   }
 
   _cancel() {
-    if (this.isCancelable()) {
+    if (this.isCancelable() && !this._running) {
+      this._running = true;
       this.hide({
         callback: () => {
+          this._running = false;
           util.triggerElementEvent(this, 'cancel');
         }
       });
