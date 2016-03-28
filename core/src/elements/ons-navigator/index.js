@@ -455,11 +455,11 @@ class NavigatorElement extends BaseElement {
             navigator: this
           }
 
-          update(pages, this).then( () => {
+          pages.pop();
+          update(pages, this).then(() => {
+            this._isRunning = false;
 
-          this._isRunning = false;
-
-          const event = util.triggerElementEvent(this, 'postpop', eventDetail);
+            const event = util.triggerElementEvent(this, 'postpop', eventDetail);
 
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
