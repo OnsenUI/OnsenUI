@@ -192,12 +192,13 @@ export class LazyRepeatProvider {
       return this._checkItemHeight(this._render.bind(this));
     }
 
+    const items = this._getItemsInView();
+
     if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
       this._delegate.render(items, this._listHeight);
       return;
     }
 
-    const items = this._getItemsInView();
     const keep = {};
 
     items.forEach(item => {
