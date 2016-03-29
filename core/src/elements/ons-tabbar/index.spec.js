@@ -65,7 +65,6 @@ describe('OnsTabbarElement', () => {
 
     var topElement = document.getElementById('top');
     var bottomElement = document.getElementById('bottom');
-
     var autoAndroidElement = document.getElementById('auto-android');
 
     setImmediate(() => {
@@ -73,9 +72,9 @@ describe('OnsTabbarElement', () => {
       expect(bottomElement.style.top).not.to.equal('0px');
       expect(autoAndroidElement.style.top).to.equal('0px');
 
-      expect(topElement._hasTopTabbar()).to.be.true;
-      expect(bottomElement._hasTopTabbar()).not.to.be.true;
-      expect(autoAndroidElement._hasTopTabbar()).to.be.true;
+      expect(topElement._top).to.be.true;
+      expect(bottomElement._top).not.to.be.true;
+      expect(autoAndroidElement._top).to.be.true;
 
       expect(topElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
       expect(bottomElement.children[0].classList.contains('tab-bar--top__content')).not.to.be.true;
@@ -414,20 +413,18 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('fills status bar', (done) => {
-      var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
-      let element = ons._util.createElement(`
-        <ons-tabbar position="top">
-        </ons-tabbar>
-      `);
-      ons._internal.shouldFillStatusBar = tmp;
+    [true, false].forEach(isTop => {
+      it('fills status bar - ' + isTop, (done) => {
+        var tmp = ons._internal.shouldFillStatusBar;
+        ons._internal.shouldFillStatusBar = () => Promise.resolve();
+        let element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"></ons-tabbar>`);
+        ons._internal.shouldFillStatusBar = tmp;
 
-      setTimeout(() => {
-        expect(element._hasTopTabbar()).to.be.true;
-        expect(element.hasAttribute('status-bar-fill')).to.be.true;
-        done();
-      }, 1000);
+        setTimeout(() => {
+          expect(element.hasAttribute('status-bar-fill')).to.equal(isTop);
+          done();
+        }, 200);
+      });
     });
 
     it('does not compile twice', () => {
