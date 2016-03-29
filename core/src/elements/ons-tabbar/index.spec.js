@@ -425,7 +425,7 @@ describe('OnsTabbarElement', () => {
 
       setTimeout(() => {
         expect(element._hasTopTabbar()).to.be.true;
-        expect(element.firstChild.className).to.equal('tab-bar__status-bar-fill');
+        expect(element.hasAttribute('status-bar-fill')).to.be.true;
         done();
       }, 1000);
     });

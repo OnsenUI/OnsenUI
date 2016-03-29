@@ -213,6 +213,7 @@ class NavigatorElement extends BaseElement {
    */
   createdCallback() {
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
+
     this._isRunning = false;
 
     this._animatorFactory = new AnimatorFactory({
@@ -472,7 +473,6 @@ class NavigatorElement extends BaseElement {
         animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
       });
     };
-
 
     return tryPopPage()
       .catch(() => {

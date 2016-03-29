@@ -54,19 +54,12 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
-ons-toolbar:not([inline]) {
+ons-toolbar:not([inline]), ons-bottom-toolbar:not([inline]) {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   z-index: 10000;
-}
-
-ons-bottom-toolbar:not([inline]) {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .scroller {
@@ -78,53 +71,9 @@ ons-bottom-toolbar:not([inline]) {
   -ms-scroll-snap-type: mandatory;
 }
 
-.page,
-.page__content {
+.page, .page__content {
   background-color: transparent !important;
   background: transparent !important;
-}
-
-.page__status-bar-fill + .page__background + .page__content {
-  padding-top: 20px;
-}
-
-ons-toolbar + .page__background + .page__content {
-  margin-top: -1px;
-  top: 44px;
-}
-
-.navigation-bar--material + .page__background + .page__content {
-  top: 56px;
-}
-
-.page__status-bar-fill + ons-toolbar {
-  height: 64px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] {
-  height: 76px;
-}
-
-.page__status-bar-fill + ons-toolbar > .center,
-.page__status-bar-fill + ons-toolbar > .left,
-.page__status-bar-fill + ons-toolbar > .right {
-  padding-top: 20px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
-  height: 76px;
-}
-
-
-.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
-  top: 64px;
-  padding-top: 0px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
-  top: 76px;
 }
 
 .page__content {
@@ -134,28 +83,54 @@ ons-toolbar + .page__background + .page__content {
   -ms-touch-action: pan-y;
 }
 
-.page-with-bottom-toolbar > .page__content {
-  bottom: 44px;
+.navigation-bar + .page__background + .page__content {
+  margin-top: -1px;
+  top: 44px;
 }
 
-.tab-bar__status-bar-fill + .tab-bar--top__content {
+.navigation-bar--material + .page__background + .page__content {
+  top: 56px;
+}
+
+.page[status-bar-fill] > .page__content {
+  top: 20px;
+}
+
+.page[status-bar-fill] > .navigation-bar {
+  padding-top: 20px;
+  box-sizing: content-box;
+}
+
+.page[status-bar-fill] > .navigation-bar + .page__background + .page__content {
+  top: 64px;
+}
+
+.page[status-bar-fill] > .navigation-bar--material + .page__background + .page__content {
+  top: 76px;
+}
+
+ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
+ons-tabbar[status-bar-fill] > .tab-bar--top {
   padding-top: 22px;
 }
 
-ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
-  padding-top: 0px;
+ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
+  top: 0px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content {
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top {
+  top: 0px;
+}
+
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 49px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
-  padding-top: 0px;
+.page-with-bottom-toolbar > .page__content {
+  bottom: 44px;
 }
 
 ons-dialog[disabled] > .dialog,
@@ -205,7 +180,24 @@ ons-splitter-content {
 }
 
 ons-splitter-side {
+  right: auto;
   z-index: 1;
+}
+
+ons-splitter-side[side="right"] {
+  right: 0;
+  left: auto;
+}
+
+ons-splitter-side[mode="collapse"] {
+  z-index: 3;
+  left: auto;
+  right: 100%;
+}
+
+ons-splitter-side[side="right"][mode="collapse"] {
+  right: auto;
+  left: 100%;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {

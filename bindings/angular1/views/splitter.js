@@ -20,38 +20,30 @@ limitations under the License.
   angular.module('onsen').factory('Splitter', function($onsen) {
 
     var Splitter = Class.extend({
-
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
         this._attrs = attrs;
-
-        this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'getDeviceBackButtonHandler',
-          'openRight',
-          'openLeft',
-          'closeRight',
-          'closeLeft',
-          'toggleRight',
-          'toggleLeft',
-          'rightIsOpened',
-          'leftIsOpened',
-          'loadContentPage'
-        ]);
-
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _destroy: function() {
         this.emit('destroy');
-
-        this._clearDerivingMethods();
-
         this._element = this._scope = this._attrs = null;
       }
     });
 
     MicroEvent.mixin(Splitter);
+    $onsen.derivePropertiesFromElement(Splitter, ['backButtonHandler']);
+
+    ['left', 'right', 'content', 'mask'].forEach((prop, i) => {
+      Object.defineProperty(Splitter.prototype, prop, {
+        get: function () {
+          var tagName = `ons-splitter-${i < 2 ? 'side' : prop}`;
+          return angular.element(this._element[0][prop]).data(tagName);
+        }
+      });
+    });
 
     return Splitter;
   });

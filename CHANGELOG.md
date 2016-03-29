@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.9
+----
+ * ons-splitter: Fixed memory leak.
+ * ons-page: Fixed [#1315](https://github.com/OnsenUI/OnsenUI/issues/1315).
+
 v2.0.0-beta.8
 ----
  * core: Small fix for Autostyling.
@@ -20,6 +25,7 @@ v2.0.0-beta.8
  * ons-list-item: Fix chevron position when list content is large.
  * ons-lazy-repeat: Auto calculate item height if no information is provided.
  * ons-carousel: Removes event listeners if it's not swipeable.
+ * ons-splitter: Update API.
 
 v2.0.0-beta.7
 ----

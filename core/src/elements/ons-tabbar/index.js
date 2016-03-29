@@ -285,34 +285,14 @@ class TabbarElement extends BaseElement {
     if (page) {
       this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
 
-      if (page.firstChild.tagName.toLowerCase() === 'ons-toolbar') {
+      if (util.match(page.firstChild, 'ons-toolbar')) {
         util.addModifier(page.firstChild, 'noshadow');
       }
     }
-
-    internal.shouldFillStatusBar(this)
-      .then(() => {
-        let fill = this.querySelector('.tab-bar__status-bar-fill');
-
-        if (fill instanceof HTMLElement) {
-          return fill;
-        }
-
-        fill = document.createElement('div');
-        fill.classList.add('tab-bar__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
-
-        this.insertBefore(fill, this.children[0]);
-
-        return fill;
-      })
-      .catch(() => {
-        const el = this.querySelector('.tab-bar__status-bar-fill');
-        if (el instanceof HTMLElement) {
-          el.remove();
-        }
-      });
+    internal.shouldFillStatusBar(this).then(
+      () => this.setAttribute('status-bar-fill', ''),
+      () => this.removeAttribute('status-bar-fill')
+    );
   }
 
   _getTabbarElement() {

@@ -193,6 +193,13 @@ class PageElement extends BaseElement {
     return util.findChildRecursively(this, 'ons-back-button');
   }
 
+  _tryToFillStatusBar(){
+    return internal.shouldFillStatusBar(this).then(
+      () => this.setAttribute('status-bar-fill', ''),
+      () => this.removeAttribute('status-bar-fill')
+    );
+  }
+
   /**
    * @return {boolean}
    */
@@ -277,8 +284,8 @@ class PageElement extends BaseElement {
     if (util.findChild(this, 'ons-toolbar')) {
       return true;
     }
-    return !!util.findChild(this._contentElement, (e) => {
-      return e.nodeName.toLowerCase() === 'ons-toolbar' && !e.hasAttribute('inline');
+    return !!util.findChild(this._contentElement, el => {
+      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
     });
   }
 
@@ -315,12 +322,7 @@ class PageElement extends BaseElement {
    */
   _registerToolbar(element) {
     this._contentElement.setAttribute('no-status-bar-fill', '');
-
-    if (util.findChild(this, '.page__status-bar-fill')) {
-      this.insertBefore(element, this.children[1]);
-    } else {
-      this.insertBefore(element, this.children[0]);
-    }
+    this.insertBefore(element, this.children[0]);
   }
 
   /**
@@ -379,25 +381,6 @@ class PageElement extends BaseElement {
     }
 
     extra.appendChild(element);
-  }
-
-  _tryToFillStatusBar() {
-    return internal.shouldFillStatusBar(this)
-      .then(() => {
-        let fill = this.querySelector('.page__status-bar-fill');
-
-        if (!fill) {
-          fill = util.create('.page__status-bar-fill');
-
-          this.insertBefore(fill, this.children[0]);
-        }
-
-        return fill;
-      })
-      .catch(() => {
-        const el = this.querySelector('.page__status-bar-fill');
-        el && el.remove();
-      });
   }
 
   _show() {
