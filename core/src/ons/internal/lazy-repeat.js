@@ -25,7 +25,8 @@ const scheme = {
   calculateItemHeight: {type: 'function', returns: 'number'},
   updateItemContent:   {type: 'function', safeCall: true},
   destroy:             {type: 'function', safeCall: true},
-  destroyItem:         {type: 'function', safeCall: true}
+  destroyItem:         {type: 'function', safeCall: true},
+  render:              {type: 'function', safeCall: true}
 };
 /* eslint-enable key-spacing */
 
@@ -44,6 +45,20 @@ export class LazyRepeatDelegate {
     return util.validated(key, null, util.extend({}, _scheme[key], {
       dynamicCall: {object: this._userDelegate, key}
     }));
+  }
+
+  /**
+   * @return {Boolean}
+   */
+  hasRenderFunction() {
+    return this._userDelegate._render !== undefined;
+  }
+
+  /**
+   * @return {void}
+   */
+  render(items, height) {
+    this._validated('render')(items, height);
   }
 
   /**
@@ -175,6 +190,11 @@ export class LazyRepeatProvider {
   _render() {
     if (this._unknownItemHeight) {
       return this._checkItemHeight(this._render.bind(this));
+    }
+
+    if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
+      this._delegate.render(items, this._listHeight);
+      return;
     }
 
     const items = this._getItemsInView();
