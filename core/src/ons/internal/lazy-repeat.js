@@ -26,7 +26,7 @@ const scheme = {
   updateItemContent:   {type: 'function', safeCall: true},
   destroy:             {type: 'function', safeCall: true},
   destroyItem:         {type: 'function', safeCall: true},
-  render:              {type: 'function', safeCall: true}
+  _render:             {type: 'function', safeCall: true}
 };
 /* eslint-enable key-spacing */
 
@@ -57,8 +57,8 @@ export class LazyRepeatDelegate {
   /**
    * @return {void}
    */
-  render(items, height) {
-    this._validated('render')(items, height);
+  _render(items, height) {
+    this._validated('_render')(items, height);
   }
 
   /**
@@ -195,7 +195,7 @@ export class LazyRepeatProvider {
     const items = this._getItemsInView();
 
     if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
-      this._delegate.render(items, this._listHeight);
+      this._delegate._render(items, this._listHeight);
       return;
     }
 
