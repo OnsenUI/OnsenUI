@@ -69,7 +69,7 @@ describe('OnsSplitterElement', () => {
         expect(splitter.left).to.be.an.instanceof(HTMLElement);
       });
     });
-  })
+  });
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {

@@ -24,7 +24,7 @@ describe('OnsCarouselElement', () => {
   });
 
   describe('#_updateSwipeable()', () => {
-    it ('attaches and removes listeners', () => {
+    it('attaches and removes listeners', () => {
       let spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
         spyOff = chai.spy.on(carousel._gestureDetector, 'off');
 

@@ -80,7 +80,7 @@ limitations under the License.
                 return this._element[0][property];
               },
               set: function(value) {
-                return this._element[0][property] = value;
+                return this._element[0][property] = value; // eslint-disable-line no-return-assign
               }
             });
           });
