@@ -112,18 +112,6 @@ class SpeedDialElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    let content = document.createElement('ons-fab');
-
-    util.arrayFrom(this.childNodes).forEach(node => {
-      if (node.nodeType == 8  || (node.nodeType === 3 && !/\S/.test(node.nodeValue))) {
-        node.remove();
-      } else if (node.nodeName.toLowerCase() !== 'ons-speed-dial-item') {
-        util.findChild(content, 'span').appendChild(node);
-      }
-    });
-
-    this.insertBefore(content, this.firstChild);
-
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
@@ -347,10 +335,10 @@ class SpeedDialElement extends BaseElement {
     if (disabled) {
       this.hideItems();
       this.setAttribute('disabled', '');
-      util.arrayFrom(this.childNodes).forEach(element => (element.classList.contains('fab')) ? element.setAttribute('disabled', '') : true);
+      util.arrayFrom(this.children).forEach(element => (element.classList.contains('fab')) ? element.setAttribute('disabled', '') : true);
     } else {
       this.removeAttribute('disabled');
-      util.arrayFrom(this.childNodes).forEach(element => (element.classList.contains('fab')) ? element.removeAttribute('disabled') : true);
+      util.arrayFrom(this.children).forEach(element => (element.classList.contains('fab')) ? element.removeAttribute('disabled') : true);
     }
   }
 
