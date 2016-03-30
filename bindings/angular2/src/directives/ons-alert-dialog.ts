@@ -1,0 +1,61 @@
+import {
+  Component,
+  DynamicComponentLoader,
+  Injector,
+  Directive,
+  ElementRef,
+  Type,
+  Compiler,
+  provide,
+  NgZone,
+  AppViewManager,
+  Renderer,
+  ResolvedProvider,
+  Input
+} from 'angular2/core';
+
+@Directive({
+  selector: 'ons-alert-dialog'
+})
+export class OnsAlertDialog {
+  _onsAlertDialog: any;
+
+  constructor(elementRef: ElementRef) {
+    this._onsAlertDialog = elementRef.nativeElement;
+  }
+
+  /**
+   * @method show
+   * @signature show()
+   * @return Promise<any>
+   */
+  show() {
+    return this._onsAlertDialog.show();
+  }
+
+  /**
+   * @method hide
+   * @signature hide()
+   * @return Promise<any>
+   */
+  hide() {
+    return this._onsAlertDialog.hide();
+  }
+
+  /**
+   * @method destroy
+   * @signature destroy()
+   * @return Promise<any>
+   */
+  destroy() {
+    return this._onsAlertDialog.destroy();
+  }
+
+  /**
+   * @return {Element}
+   */
+  get element(): any {
+    return this._onsAlertDialog;
+  }
+}
+

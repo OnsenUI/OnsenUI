@@ -56,12 +56,12 @@ export class PageComponent {
   `
 })
 export class AppComponent {
-  @ViewChild(OnsNavigator) private navigator: OnsNavigator
+  @ViewChild(OnsNavigator) private _navigator: OnsNavigator;
 
   constructor() { }
 
   push() {
-    this.navigator.pushComponent(PageComponent, {key: 'value'});
+    this._navigator.pushComponent(PageComponent, {key: 'value'});
   }
 }
 
