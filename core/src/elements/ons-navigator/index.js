@@ -212,16 +212,9 @@ class NavigatorElement extends BaseElement {
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
   createdCallback() {
-    this._doorLock = new DoorLock();
-    this._pages = [];
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-    this._isRunning = this._isRunning = false;
-    this.options = {
-      cancelIfRunning: true
-    };
 
-    this._initialHTML = this.innerHTML;
-    this.innerHTML = '';
+    this._isRunning = false;
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -244,16 +237,26 @@ class NavigatorElement extends BaseElement {
 
   set options(object) {
     this._options = object;
-    if (!this._options.hasOwnProperty('cancelIfRunning')) {
-      this._options.cancelIfRunning = true;
+  }
+
+  set _isRunning(value) {
+    if (value) {
+      this.setAttribute('_is-running', 'true');
     }
+    else {
+      this.setAttribute('_is-running', 'false');
+    }
+  }
+
+  get _isRunning() {
+   return JSON.parse(this.getAttribute('_is-running'));
   }
 
   /**
    * @return {Boolean}
    */
   canPopPage() {
-    return this._pages.length > 1;
+    return this.pages.length > 1;
   }
 
   /**
@@ -305,18 +308,22 @@ class NavigatorElement extends BaseElement {
 
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
-    if (this._pages.length === 1) {
-      options._forceHideBackButton = true;
-    }
-
     options.onTransitionEnd = () => {
-      if (this._pages.length > 1) {
-        this._pages[this._pages.length - 2].destroy();
+      if (this.pages.length > 1) {
+        this.pages[this.pages.length - 2]._destroy();
       }
+
+      this._updateLastPageBackButton();
+
       onTransitionEnd();
     };
 
     return this.pushPage(options.page, options);
+  }
+
+  _updateLastPageBackButton() {
+    const index = this.pages.length -1;
+    this.pages[index].updateBackButton(index > 0);
   }
 
   /**
@@ -355,111 +362,124 @@ class NavigatorElement extends BaseElement {
    */
   popPage(options = {}) {
 
-    if (options && typeof options != 'object') {
+    var lastPage = this.pages[this.pages.length - 1];
+    if (options.refresh) {
+      const index = this.pages.length - 2;
+
+
+      if (!this.pages[index].name) {
+        throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
+      }
+
+      var popUpdate = () => {
+        return new Promise((resolve) => {
+          this.pages[this.pages.length -1]._destroy();
+          resolve();
+        });
+      };
+
+      var preFun = () => new Promise(resolve => {
+        internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
+          const element = this._createPageElement(templateHTML);
+
+          element.name =  this.name;
+          element.options = options;
+
+          rewritables.link(this, element, this.pages[index].options, element => {
+            this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
+            this.pages[index + 1]._destroy();
+            resolve();
+          });
+        });
+      });
+
+      return preFun().then( () => {
+        return this._popPage(options, popUpdate);
+      });
+    } else {
+      var popUpdate = () => {
+        return new Promise((resolve) => {
+          lastPage._destroy();
+          resolve();
+        });
+      };
+
+      return this._popPage(options, popUpdate);
+    }
+
+  }
+
+  _popPage(options, update = () => Promise.resolve(), pages = []) {
+    if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
+    }
+
+    if (this._isRunning) {
+      return Promise.reject('popPage is already running.');
+    }
+
+    if (this.pages.length <= 1) {
+      return Promise.reject('ons-navigator\'s page stack is empty.');
     }
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isRunning) {
-      return Promise.reject('popPage is already running.');
-    }
-
     options.animationOptions = util.extend(
       options.animationOptions || {},
       AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
     );
 
+    const animator = this._animatorFactory.newAnimator(options);
+    const l = this.pages.length;
+
     const tryPopPage = () => {
-      if (this._pages.length <= 1) {
-        throw new Error('ons-navigator\'s page stack is empty.');
-      }
+
+      this._isRunning = true;
 
       if (this._emitPrePopEvent()) {
         return Promise.reject('Canceled in prepop event.');
       }
+      this.pages[l - 2].updateBackButton((l - 2) > 0);
 
-      const unlock = this._doorLock.lock();
+      return new Promise(resolve => {
+        var leavePage = this.pages[l - 1];
+        var enterPage = this.pages[l - 2];
+        enterPage.style.display = 'block';
 
-      if (options.refresh) {
-        const index = this._pages.length - 2;
+        const callback = () => {
+          enterPage._show();
+          leavePage._hide();
 
-        if (!this._pages[index].page) {
-          throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-        }
+          const eventDetail = {
+            leavePage: leavePage,
+            enterPage: enterPage,
+            navigator: this
+          }
 
-        return internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
-          const element = this._createPageElement(templateHTML);
-          const pageObject = this._createPageObject(this._pages[index].page, element, this._pages[index].options);
+          pages.pop();
+          update(pages, this).then(() => {
+            this._isRunning = false;
 
-          return new Promise(resolve => {
-            rewritables.link(this, element, this._pages[index].options, element => {
-              this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-              this._pages.splice(index, 0, pageObject);
+            const event = util.triggerElementEvent(this, 'postpop', eventDetail);
 
-              this._pages[index + 1].destroy();
-              resolve(this._popPage(options, unlock));
-            });
+            if (typeof options.onTransitionEnd === 'function') {
+              options.onTransitionEnd();
+            }
+
+            resolve(enterPage);
           });
-        });
+        };
 
-      } else {
-        return this._popPage(options, unlock);
-      }
+        animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
+      });
     };
 
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryPopPage()));
-    });
-  }
-
-  _popPage(options, unlock) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const leavePage = this._pages.pop();
-    const enterPage = this._pages[this._pages.length - 1];
-
-    enterPage.updateBackButton();
-
-    leavePage.element._hide();
-    if (enterPage) {
-      enterPage.element.style.display = 'block';
-      enterPage.element._show();
-    }
-
-    // for "postpop" event
-    const eventDetail = {
-      leavePage: leavePage,
-      enterPage: this._pages[this._pages.length - 1],
-      navigator: this
-    };
-
-    return new Promise(resolve => {
-      const callback = () => {
-        leavePage.destroy();
-
+    return tryPopPage()
+      .catch(() => {
         this._isRunning = false;
-        unlock();
-
-        const event = util.triggerElementEvent(this, 'postpop', eventDetail);
-        event.leavePage = null;
-
-        if (typeof options.onTransitionEnd === 'function') {
-          options.onTransitionEnd();
-        }
-
-        resolve(enterPage);
-      };
-
-      this._isRunning = true;
-
-      const animator = this._animatorFactory.newAnimator(options, leavePage.options.animator);
-      animator.pop(enterPage, leavePage, callback);
-    });
+      });
   }
+
 
   /**
    * @method insertPage
@@ -505,28 +525,27 @@ class NavigatorElement extends BaseElement {
 
     index = this._normalizeIndex(index);
 
-    if (index >= this._pages.length) {
+    if (index >= this.pages.length) {
       return this.pushPage.apply(this, [].slice.call(arguments, 1));
     }
 
     const tryInsertPage = () => {
-      const unlock = this._doorLock.lock();
-
       const run = templateHTML => {
         const element = this._createPageElement(templateHTML);
-        const pageObject = this._createPageObject(page, element, options);
+        CustomElements.upgrade(element);
+
+        element.name = page;
+        element.options = options;
 
         return new Promise(resolve => {
-          rewritables.link(this, element, options, element => {
             element.style.display = 'none';
-            this.insertBefore(element, this._pages[index].element);
-            this._pages.splice(index, 0, pageObject);
-            this.getCurrentPage().updateBackButton();
+            this.insertBefore(element, this.pages[index]);
+            this.getCurrentPage().updateBackButton(true);
 
+          rewritables.link(this, element, options, element => {
             setTimeout(() => {
-              unlock();
               element = null;
-              resolve(this._pages[index]);
+              resolve(this.pages[index]);
             }, 1000 / 60);
           });
         });
@@ -539,14 +558,12 @@ class NavigatorElement extends BaseElement {
       }
     };
 
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryInsertPage()));
-    });
+    return tryInsertPage();
   }
 
   _normalizeIndex(index) {
     if (index < 0) {
-      index = Math.abs(this._pages.length + index) % this._pages.length;
+      index = Math.abs(this.pages.length + index) % this.pages.length;
     }
     return index;
   }
@@ -571,37 +588,39 @@ class NavigatorElement extends BaseElement {
    * @return {Object}
    */
   getCurrentPage() {
-    if (this._pages.length <= 0) {
+    if (this.pages.length <= 0) {
       throw new Error('Invalid state');
     }
-    return this._pages[this._pages.length - 1];
+    return this.pages[this.pages.length - 1];
   }
 
   _show() {
-    if (this._pages[this._pages.length - 1]) {
-      this._pages[this._pages.length - 1].element._show();
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1]._show();
     }
   }
 
   _hide() {
-    if (this._pages[this._pages.length - 1]) {
-      this._pages[this._pages.length - 1].element._hide();
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1]._hide();
     }
   }
 
   _destroy() {
-    for (let i = this._pages.length - 1; i >= 0; i--) {
-      this._pages[i].destroy();
+    // these are children anymore
+    for (let i = this.pages.length - 1; i >= 0; i--) {
+      this.pages[i]._destroy();
     }
+
     this.remove();
   }
 
   get pages() {
-    return this._pages.slice(0);
+    return this.children;
   }
 
   _onDeviceBackButton(event) {
-    if (this._pages.length > 1) {
+    if (this.pages.length > 1) {
       this.popPage();
     } else {
       event.callParentHandler();
@@ -664,10 +683,11 @@ class NavigatorElement extends BaseElement {
     const onTransitionEnd = options.onTransitionEnd || function() {};
 
     options.onTransitionEnd = () => {
-      while (this._pages.length > 1) {
-        this._pages.shift().destroy();
+      while (this.pages.length > 1) {
+        this.pages[0]._destroy();
       }
-      this._pages[0].updateBackButton();
+
+      this.pages[0].updateBackButton(false);
       onTransitionEnd();
     };
 
@@ -690,14 +710,17 @@ class NavigatorElement extends BaseElement {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
-      if (this._pages.length === 0) {
-        if (!this.getAttribute('page')) {
-          const element = this._createPageElement(this._initialHTML || '');
-
-          this._pushPageDOM(this._createPageObject('', element, {}), function() {});
-        } else {
+      if (this.pages.length === 0) {
+        if (this.hasAttribute('page')) {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
         }
+      } else {
+        for (var i=0; i < this.pages.length; i++) {
+          if (this.pages[i].nodeName !== 'ONS-PAGE') {
+            throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
+          }
+        }
+        this._updateLastPageBackButton();
       }
     });
   }
@@ -750,20 +773,37 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   pushPage(page, options = {}) {
-
     if (typeof page === 'object' && page !== null) {
       options = page;
     } else {
       options.page = page;
     }
 
-    if (options && typeof options != 'object') {
+    const run = (templateHTML) => new Promise((resolve) => {
+      const element = this._createPageElement(templateHTML);
+      CustomElements.upgrade(element);
+      this.appendChild(element);
+      resolve();
+    });
+
+    let update;
+
+    if (options.pageHTML) {
+      update = () => run(options.pageHTML);
+    } else {
+      update = () => internal.getPageHTMLAsync(page).then(run);
+    }
+
+    return this._pushPage(options, update);
+  }
+
+
+  _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
+    if (typeof options !== 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
-    options = util.extend({}, this.options || {}, options);
-
-    if (options.cancelIfRunning && this._isRunning) {
+    if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
 
@@ -771,104 +811,75 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
+    const tryPushPage = () => {
+      options = util.extend({}, this.options || {}, options);
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
+      const animator = this._animatorFactory.newAnimator(options);
+
+      pages.push(page);
+
+      return update(pages, this)
+        .then(() => {
+          const pageLength = this.pages.length;
+
+          var enterPage  = this.pages[this.pages.length - 1];
+          var leavePage = this.pages[this.pages.length - 2];
+          enterPage.updateBackButton(this.pages.length - 1);
+
+          this.pages[pageLength - 1].name = options.page;
+          this.pages[pageLength -1].options = options;
+
+
+          return new Promise(resolve => {
+            var done = () => {
+              this._isRunning = false;
+              leavePage.style.display = 'none';
+
+              const eventDetail = {
+                leavePage: leavePage,
+                enterPage: enterPage,
+                navigator: this
+              };
+
+                util.triggerElementEvent(this, 'postpush', eventDetail);
+
+                if (typeof options.onTransitionEnd === 'function') {
+                  options.onTransitionEnd();
+                }
+
+                resolve(enterPage);
+            };
+
+              enterPage.style.display = 'none';
+            rewritables.link(this, enterPage, options, () =>  {
+              enterPage.style.display = 'block';
+                if (pageLength > 1) {
+                  leavePage._hide();
+                  enterPage._show();
+                  animator.push(enterPage, leavePage, done);
+                } else {
+                  enterPage._show();
+                  done();
+                }
+              });
+          });
+      });
+    };
 
     this._isRunning = true;
 
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
-    });
-  }
-
-  _pushPage(options) {
-    const unlock = this._doorLock.lock();
-    const done = function() {
-      unlock();
-    };
-
-    const run = templateHTML => {
-      const element = this._createPageElement(templateHTML);
-      return this._pushPageDOM(this._createPageObject(options.page, element, options), done);
-    };
-
-    if (options.pageHTML) {
-      return run(options.pageHTML);
-    } else {
-      return internal.getPageHTMLAsync(options.page).then(run);
-    }
-  }
-
-  /**
-   * @param {Object} pageObject
-   * @param {Function} [unlock]
-   */
- _pushPageDOM(pageObject, unlock) {
-    unlock = unlock || function() {};
-
-    let element = pageObject.element;
-    let options = pageObject.options;
-
-    // for "postpush" event
-    const eventDetail = {
-      enterPage: pageObject,
-      leavePage: this._pages[this._pages.length - 1],
-      navigator: this
-    };
-
-    this._pages.push(pageObject);
-    pageObject.updateBackButton();
-
-    return new Promise(resolve => {
-
-      const done = () => {
-        if (this._pages[this._pages.length - 2]) {
-          this._pages[this._pages.length - 2].element.style.display = 'none';
-        }
-
+    return tryPushPage()
+      .catch(() => {
         this._isRunning = false;
-        unlock();
-
-        util.triggerElementEvent(this, 'postpush', eventDetail);
-
-        if (typeof options.onTransitionEnd === 'function') {
-          options.onTransitionEnd();
-        }
-        element = null;
-
-        resolve(this._pages[this._pages.length - 1]);
-      };
-
-      this._isRunning = true;
-
-      rewritables.link(this, element, options, element => {
-        CustomElements.upgrade(element);
-
-        setTimeout(() => {
-          if (this._pages.length > 1) {
-            const leavePage = this._pages.slice(-2)[0];
-            const enterPage = this._pages.slice(-1)[0];
-
-            this.appendChild(element);
-            leavePage.element._hide();
-            enterPage.element._show();
-
-            options.animator.push(enterPage, leavePage, done);
-          } else {
-            this.appendChild(element);
-            element._show();
-
-            done();
-          }
-        }, 1000 / 60);
       });
-
-    });
   }
 
-  /**
+    /**
    * @method bringPageTop
    * @signature bringPageTop(item, [options])
    * @param {String|Number} item
@@ -908,7 +919,7 @@ class NavigatorElement extends BaseElement {
 
     options = util.extend({}, this.options || {}, options);
 
-    if (options.cancelIfRunning && this._isRunning) {
+    if (this.isRunning) {
       return Promise.reject('pushPage is already running.');
     }
 
@@ -922,10 +933,10 @@ class NavigatorElement extends BaseElement {
       index = this._lastIndexOfPage(options.page);
     } else if (typeof item === 'number') {
       index = this._normalizeIndex(item);
-      if (item >= this._pages.length) {
+      if (item >= this.pages.length) {
         throw new Error('The provided index does not match an existing page.');
       }
-      options.page = this._pages[index].page;
+      options.page = this.pages[index].name;
     } else {
       throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
@@ -933,35 +944,20 @@ class NavigatorElement extends BaseElement {
 
     if (index < 0) {
       // Fallback pushPage
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(this._pushPage(options)));
-      });
-    } else if (index === this._pages.length - 1) {
+      return this.pushPage(options.page, options);
+    } else if (index === this.pages.length - 1) {
       // Page is already the top
-      return Promise.resolve(this._pages[index]);
+      return Promise.resolve(this.pages[index]);
     } else {
       // Bring to top
-      const tryBringPageTop = () => {
-        const unlock = this._doorLock.lock();
-        const done = function() {
-          unlock();
-        };
+        let selectedPage = this.pages[index];
+         selectedPage.style.display = 'block';
+        selectedPage.setAttribute('_skipinit', '');
 
-        let pageObject = this._pages.splice(index, 1)[0];
-        pageObject.element.style.display = 'block';
-        pageObject.element.setAttribute('_skipinit', '');
-
-        if (options.animation) {
-          options.animator = this._animatorFactory.newAnimator(options);
-        }
-
-        pageObject.options = util.extend(pageObject.options, options);
-        return this._pushPageDOM(pageObject, done);
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryBringPageTop()));
-      });
+        // move element to the last child
+        selectedPage.parentNode.appendChild(selectedPage);
+        selectedPage.options = options;
+        return this._pushPage(options);
     }
   }
 
@@ -970,10 +966,10 @@ class NavigatorElement extends BaseElement {
    * @return {Number} Returns the last index at which the given page
    * is found in the page-stack, or -1 if it is not present.
    */
-  _lastIndexOfPage(page) {
+  _lastIndexOfPage(pageName) {
     let index;
-    for (index = this._pages.length - 1; index >= 0; index--) {
-      if (this._pages[index].page === page) {
+    for (index = this.pages.length - 1; index >= 0; index--) {
+      if (this.pages[index].name === pageName) {
         break;
       }
     }
@@ -988,7 +984,7 @@ class NavigatorElement extends BaseElement {
 
     util.triggerElementEvent(this, 'prepush', {
       navigator: this,
-      currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+      currentPage: this.pages.length > 0 ? this.getCurrentPage() : undefined,
       cancel: function() {
         isCanceled = true;
       }
@@ -1004,12 +1000,13 @@ class NavigatorElement extends BaseElement {
     let isCanceled = false;
 
     const leavePage = this.getCurrentPage();
+    const enterPage = this.pages[this.pages.length - 2];
+
     util.triggerElementEvent(this, 'prepop', {
       navigator: this,
-      // TODO: currentPage will be deprecated
       currentPage: leavePage,
       leavePage: leavePage,
-      enterPage: this._pages[this._pages.length - 2],
+      enterPage: enterPage,
       cancel: function() {
         isCanceled = true;
       }

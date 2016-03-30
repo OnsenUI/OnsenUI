@@ -210,7 +210,18 @@ class TabbarElement extends BaseElement {
       this._compile();
     }
 
-    this._contentElement = util.findChild(this, '.tab-bar__content');
+    for (var i = 0; i < this.firstChild.children.length; i++) {
+      this.firstChild.children[i].style.display = 'none';
+    }
+
+    var activeIndex = this.getAttribute('activeIndex');
+
+    if (activeIndex && this.children[1].children.length > activeIndex) {
+      this.children[1].children[activeIndex].setAttribute('active', 'true');
+    }
+
+    autoStyle.prepare(this);
+    ModifierUtil.initModifier(this, scheme);
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -220,9 +231,11 @@ class TabbarElement extends BaseElement {
     });
   }
 
-  _compile() {
-    autoStyle.prepare(this);
+  get _contentElement() {
+    return util.findChild(this, '.tab-bar__content');
+  }
 
+  _compile() {
     var content = util.create('.ons-tab-bar__content.tab-bar__content');
     var tabbar = util.create('.tab-bar.ons-tab-bar__footer.ons-tabbar-inner');
 
@@ -233,7 +246,6 @@ class TabbarElement extends BaseElement {
     this.appendChild(content);
     this.appendChild(tabbar);
 
-    ModifierUtil.initModifier(this, scheme);
     this._updatePosition();
 
     this.setAttribute('_compiled', '');
@@ -351,6 +363,10 @@ class TabbarElement extends BaseElement {
     return page;
   }
 
+  get pages() {
+    return util.arrayFrom(this._contentElement.children);
+  }
+
   /**
    * @param {Element} element
    * @param {Object} options
@@ -362,7 +378,6 @@ class TabbarElement extends BaseElement {
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-
     var oldPageElement = this._oldPageElement || internal.nullElement;
     this._oldPageElement = element;
     var animator = this._animatorFactory.newAnimator(options);
@@ -415,7 +430,6 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }

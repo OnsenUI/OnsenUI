@@ -77,8 +77,6 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this._element[0]._destroy();
-
         this._clearDerivingEvents();
 
         this._element = null;

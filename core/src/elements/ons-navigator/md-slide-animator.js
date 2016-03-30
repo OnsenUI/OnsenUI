@@ -46,7 +46,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.element.parentElement.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
+    leavePage.parentElement.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
     animit.runAll(
 
@@ -69,7 +69,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
           done();
         }),
 
-      animit(enterPage.element)
+      animit(enterPage)
         .saveStyle()
         .queue({
           css: {
@@ -87,7 +87,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
         })
         .restoreStyle(),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .saveStyle()
         .queue({
           css: {
@@ -119,7 +119,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
    */
   pop(enterPage, leavePage, done) {
     this.backgroundMask.remove();
-    enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
 
     animit.runAll(
 
@@ -142,7 +142,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
           done();
         }),
 
-      animit(enterPage.element)
+      animit(enterPage)
         .saveStyle()
         .queue({
           css: {
@@ -162,7 +162,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
         })
         .restoreStyle(),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             transform: 'translate3D(0px, 0px, 0px)'
