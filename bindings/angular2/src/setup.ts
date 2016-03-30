@@ -5,7 +5,8 @@ ons._elementReady.installImplementation(function(element, callback) {
     'ons-navigator',
     'ons-page',
     'ons-toolbar',
-    'ons-alert-dialog'
+    'ons-alert-dialog',
+    'ons-popover'
   ];
 
   if (delayElements.indexOf(name) !== -1) {

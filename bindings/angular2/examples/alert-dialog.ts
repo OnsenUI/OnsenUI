@@ -28,6 +28,8 @@ class MyAlertDialogComponent {
 
   constructor() {
   }
+
+  // TODO: add dipose component
 }
 
 @Component({
