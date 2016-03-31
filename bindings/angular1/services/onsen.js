@@ -70,6 +70,23 @@ limitations under the License.
         },
 
         /**
+         * @param {Class} klass
+         * @param {Array} properties
+         */
+        derivePropertiesFromElement: function(klass, properties) {
+          properties.forEach(function(property) {
+            Object.defineProperty(klass.prototype, property, {
+              get: function () {
+                return this._element[0][property];
+              },
+              set: function(value) {
+                return this._element[0][property] = value; // eslint-disable-line no-return-assign
+              }
+            });
+          });
+        },
+
+        /**
          * @param {Object} view
          * @param {Element} element
          * @param {Array} eventNames

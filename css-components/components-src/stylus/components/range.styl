@@ -89,7 +89,7 @@ range--disabled()
   background-size 100% 2px
   background-repeat no-repeat
   overflow hidden
-  height 31px
+  height 32px
 
 .range::-moz-range-track
   position relative
@@ -167,6 +167,18 @@ range--disabled()
 
 .range:disabled
   range--disabled()
+
+.range__left
+  position relative
+  top 17px
+  height 2px
+  width 0
+  background-color var-range-track-background-color-active
+  pointer-events none
+
+[disabled] > .range__left
+.range--material:disabled + .range__left
+  display none
 
 /*! topdoc
   name: Material Range
@@ -278,12 +290,5 @@ range--material--thumb--after()
   transform scale(2.5)
 
 .range--material__left
-  position relative
-  top -16px
-  height 2px
-  width 0
   background-color var-material-range-thumb-color
-  pointer-events none
 
-.range--material:disabled + .range--material__left
-  display none

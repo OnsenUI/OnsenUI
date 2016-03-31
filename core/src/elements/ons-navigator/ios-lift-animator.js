@@ -21,7 +21,7 @@ import util from 'ons/util';
 /**
  * Lift screen transition.
  */
-export default class LiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor(options) {
     options = util.extend({
@@ -45,7 +45,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element);
+    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     const maskClear = animit(this.backgroundMask)
       .wait(0.6)
@@ -58,7 +58,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
 
       maskClear,
 
-      animit(enterPage.element)
+      animit(enterPage)
         .saveStyle()
         .queue({
           css: {
@@ -81,7 +81,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
           done();
         }),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',
@@ -109,7 +109,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
    */
   pop(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
     animit.runAll(
 
@@ -120,7 +120,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
           done();
         }),
 
-      animit(enterPage.element)
+      animit(enterPage)
         .queue({
           css: {
             transform: 'translate3D(0, -10%, 0)',
@@ -143,7 +143,7 @@ export default class LiftNavigatorTransitionAnimator extends NavigatorTransition
           done();
         }),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)'

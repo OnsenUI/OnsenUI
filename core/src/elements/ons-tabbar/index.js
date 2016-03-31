@@ -16,7 +16,9 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import platform from 'ons/platform';
 import internal from 'ons/internal';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
@@ -208,7 +210,18 @@ class TabbarElement extends BaseElement {
       this._compile();
     }
 
-    this._contentElement = util.findChild(this, '.tab-bar__content');
+    for (var i = 0; i < this.firstChild.children.length; i++) {
+      this.firstChild.children[i].style.display = 'none';
+    }
+
+    var activeIndex = this.getAttribute('activeIndex');
+
+    if (activeIndex && this.children[1].children.length > activeIndex) {
+      this.children[1].children[activeIndex].setAttribute('active', 'true');
+    }
+
+    autoStyle.prepare(this);
+    ModifierUtil.initModifier(this, scheme);
 
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
@@ -218,88 +231,49 @@ class TabbarElement extends BaseElement {
     });
   }
 
+  get _contentElement() {
+    return util.findChild(this, '.tab-bar__content');
+  }
+
   _compile() {
-    ons._autoStyle.prepare(this);
+    var content = util.create('.ons-tab-bar__content.tab-bar__content');
+    var tabbar = util.create('.tab-bar.ons-tab-bar__footer.ons-tabbar-inner');
 
-    if (this.getAttribute('position') === 'auto') {
-      this.setAttribute('position', ons.platform.isAndroid() ? 'top' : 'bottom');
+    while (this.firstChild) {
+      tabbar.appendChild(this.firstChild);
     }
 
-    var wrapper = document.createDocumentFragment();
+    this.appendChild(content);
+    this.appendChild(tabbar);
 
-    var content = document.createElement('div');
-    content.classList.add('ons-tab-bar__content');
-    content.classList.add('tab-bar__content');
-
-    var tabbar = document.createElement('div');
-    tabbar.classList.add('tab-bar');
-    tabbar.classList.add('ons-tab-bar__footer');
-    tabbar.classList.add('ons-tabbar-inner');
-
-    wrapper.appendChild(content);
-    wrapper.appendChild(tabbar);
-
-    while (this.childNodes[0]) {
-      tabbar.appendChild(this.removeChild(this.childNodes[0]));
-    }
-
-    this.appendChild(wrapper);
-
-    if (this._hasTopTabbar()) {
-      this._prepareForTopTabbar();
-    }
-
-    ModifierUtil.initModifier(this, scheme);
+    this._updatePosition();
 
     this.setAttribute('_compiled', '');
   }
 
-  _hasTopTabbar() {
-    return this.getAttribute('position') === 'top';
-  }
-
-  _prepareForTopTabbar() {
+  _updatePosition(position = this.getAttribute('position')) {
+    var top = this._top = position === 'top' || (position === 'auto' && platform.isAndroid());
+    var action = top ? util.addModifier : util.removeModifier;
 
     var content = util.findChild(this, '.tab-bar__content');
     var tabbar = util.findChild(this, '.tab-bar');
 
-    content.setAttribute('no-status-bar-fill', '');
-
-    content.classList.add('tab-bar--top__content');
-    tabbar.classList.add('tab-bar--top');
+    top && content.setAttribute('no-status-bar-fill', '');
+    action(this, 'top');
 
     var page = util.findParent(this, 'ons-page');
     if (page) {
-      this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
+      this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
 
-      if (page.firstChild.tagName.toLowerCase() === 'ons-toolbar') {
-        util.addModifier(page.firstChild, 'noshadow');
+      if (util.match(page.firstChild, 'ons-toolbar')) {
+        action(page.firstChild, 'noshadow');
       }
     }
 
-    internal.shouldFillStatusBar(this)
-      .then(() => {
-        let fill = this.querySelector('.tab-bar__status-bar-fill');
-
-        if (fill instanceof HTMLElement) {
-          return fill;
-        }
-
-        fill = document.createElement('div');
-        fill.classList.add('tab-bar__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
-
-        this.insertBefore(fill, this.children[0]);
-
-        return fill;
-      })
-      .catch(() => {
-        const el = this.querySelector('.tab-bar__status-bar-fill');
-        if (el instanceof HTMLElement) {
-          el.remove();
-        }
-      });
+    top && internal.shouldFillStatusBar(this).then(
+      () => this.setAttribute('status-bar-fill', ''),
+      () => this.removeAttribute('status-bar-fill')
+    );
   }
 
   _getTabbarElement() {
@@ -389,6 +363,10 @@ class TabbarElement extends BaseElement {
     return page;
   }
 
+  get pages() {
+    return util.arrayFrom(this._contentElement.children);
+  }
+
   /**
    * @param {Element} element
    * @param {Object} options
@@ -400,7 +378,6 @@ class TabbarElement extends BaseElement {
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-
     var oldPageElement = this._oldPageElement || internal.nullElement;
     this._oldPageElement = element;
     var animator = this._animatorFactory.newAnimator(options);
@@ -453,7 +430,6 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -586,7 +562,7 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
-    this._contentElement.style[this._hasTopTabbar() ? 'top' : 'bottom'] = visible ? '' : '0px';
+    this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
     this._getTabbarElement().style.display = visible ? '' : 'none';
   }
 

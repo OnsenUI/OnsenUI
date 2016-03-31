@@ -6,6 +6,9 @@ describe('OnsSpeedDialElement', () => {
   beforeEach(() => {
     speedDial = ons._util.createElement(`
       <ons-speed-dial>
+        <ons-fab>
+          A
+        </ons-fab>
         <ons-speed-dial-item>Item 1</ons-speed-dial-item>
         <ons-speed-dial-item>Item 2</ons-speed-dial-item>
         <ons-speed-dial-item>Item 3</ons-speed-dial-item>
@@ -89,7 +92,9 @@ describe('OnsSpeedDialElement', () => {
   describe('#_updateDirection()', () => {
     it('is called when element is created', () => {
       let spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection'),
-        speedDial = new OnsSpeedDialElement();
+        speedDial = ons._util.createElement(`
+          <ons-speed-dial direction="up"><ons-fab></ons-fab></ons-speed-dial>
+        `);
 
       expect(spy).to.have.been.called.with('up');
     });
@@ -97,7 +102,7 @@ describe('OnsSpeedDialElement', () => {
     it('is called with the value of the direction attribute', () => {
       let spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection'),
         speedDial = ons._util.createElement(`
-          <ons-speed-dial direction="down"></ons-speed-dial>
+          <ons-speed-dial direction="down"><ons-fab></ons-fab></ons-speed-dial>
         `);
 
       expect(spy).to.have.been.called.with('down');
@@ -256,7 +261,7 @@ describe('OnsSpeedDialElement', () => {
     it('is called if the disabled attribute is present on element creation', () => {
       let spy = chai.spy.on(OnsSpeedDialElement.prototype, 'setDisabled'),
         speedDial = ons._util.createElement(`
-          <ons-speed-dial disabled></ons-speed-dial>
+          <ons-speed-dial disabled><ons-fab></ons-fab></ons-speed-dial>
         `);
       expect(spy).to.have.been.called.with(true);
     });
@@ -328,6 +333,7 @@ describe('OnsSpeedDialElement', () => {
       let div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-speed-dial>
+          <ons-fab>A</ons-fab>
           <ons-speed-dial-item>Item 1</ons-speed-dial-item>
           <ons-speed-dial-item>Item 2</ons-speed-dial-item>
           <ons-speed-dial-item>Item 3</ons-speed-dial-item>

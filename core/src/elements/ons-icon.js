@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
-import ModifierUtil from 'ons/internal/modifier-util';
+import autoStyle from 'ons/autostyle';
 import BaseElement from 'ons/base-element';
 
 /**
@@ -87,32 +87,36 @@ class IconElement extends BaseElement {
    *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  _createdCallback() {
-    this._update();
+  createdCallback() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
+    }
   }
 
-  _attributeChangedCallback(name, last, current) {
-    if (['icon', 'size'].indexOf(name) !== -1) {
+  attributeChangedCallback(name, last, current) {
+    if (['icon', 'size', 'modifier'].indexOf(name) !== -1) {
       this._update();
     }
   }
 
-  _update() {
-    this._cleanClassAttribute();
-
-    const builded = this._buildClassAndStyle(this);
-
-    for (let key in builded.style) {
-      if (builded.style.hasOwnProperty(key)) {
-        this.style[key] = builded.style[key];
-      }
-    }
-
-    builded.classList.forEach(className => this.classList.add(className));
+  _compile() {
+    autoStyle.prepare(this);
+    this._update();
+    this.setAttribute('_compiled', '');
   }
 
-  get _iconName() {
-    return '' + this.getAttribute('icon');
+  _update() {
+    this._cleanClassAttribute();
+    const {classList, style} = this._buildClassAndStyle(this._getAttribute('icon'), this._getAttribute('size'));
+    util.extend(this.style, style);
+
+    classList.forEach(className => this.classList.add(className));
+  }
+
+  _getAttribute(attr) {
+    let [def, md] = (this.getAttribute(attr) || '').split(/\s*,\s*/);
+    md = (md || '').split(/\s*:\s*/);
+    return (util.hasModifier(this, md[0]) ? md[1] : def) || '';
   }
 
   /**
@@ -127,12 +131,11 @@ class IconElement extends BaseElement {
     this.classList.remove('ons-icon--ion');
   }
 
-  _buildClassAndStyle() {
+  _buildClassAndStyle(iconName, size) {
     const classList = ['ons-icon'];
     const style = {};
 
-    // icon
-    const iconName = this._iconName;
+    // Icon
     if (iconName.indexOf('ion-') === 0) {
       classList.push(iconName);
       classList.push('ons-icon--ion');
@@ -147,8 +150,7 @@ class IconElement extends BaseElement {
       classList.push('fa-' + iconName);
     }
 
-    // size
-    const size = '' + this.getAttribute('size');
+    // Size
     if (size.match(/^[1-5]x|lg$/)) {
       classList.push('fa-' + size);
       this.style.removeProperty('font-size');

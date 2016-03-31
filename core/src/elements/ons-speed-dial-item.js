@@ -12,6 +12,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -60,9 +61,13 @@ class SpeedDialItemElement extends BaseElement {
     this._boundOnClick = this._onClick.bind(this);
   }
 
-  _attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
     }
   }
 
@@ -74,20 +79,22 @@ class SpeedDialItemElement extends BaseElement {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
+  _updateRipple() {
+    util.updateRipple(this);
+  }
+
   _onClick(e) {
     e.stopPropagation();
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     this.classList.add('fab');
     this.classList.add('fab--mini');
     this.classList.add('speed-dial__item');
 
-    if (this.hasAttribute('ripple') && !util.findChild(this, 'ons-ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 

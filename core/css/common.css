@@ -36,6 +36,10 @@ ons-tabbar {
   overflow: hidden;
 }
 
+ons-tab {
+  transform: translate3d(0, 0, 0);
+}
+
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
@@ -50,25 +54,40 @@ ons-fab {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 input, textarea {
   -webkit-user-select: auto;
 }
 
-.page,
-.page__content {
+ons-toolbar:not([inline]), ons-bottom-toolbar:not([inline]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+}
+
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
+}
+
+.page, .page__content {
   background-color: transparent !important;
   background: transparent !important;
 }
 
-.page__status-bar-fill + .page__background + .page__content {
-  padding-top: 20px;
+.page__content {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 0;
+  -ms-touch-action: pan-y;
 }
 
-ons-toolbar + .page__background + .page__content {
+.navigation-bar + .page__background + .page__content {
   margin-top: -1px;
   top: 44px;
 }
@@ -77,69 +96,45 @@ ons-toolbar + .page__background + .page__content {
   top: 56px;
 }
 
-.page__status-bar-fill + ons-toolbar {
-  height: 64px;
+.page[status-bar-fill] > .page__content {
+  top: 20px;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] {
-  height: 76px;
-}
-
-.page__status-bar-fill + ons-toolbar > .center,
-.page__status-bar-fill + ons-toolbar > .left,
-.page__status-bar-fill + ons-toolbar > .right {
+.page[status-bar-fill] > .navigation-bar {
   padding-top: 20px;
+  box-sizing: content-box;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
-  height: 76px;
-}
-
-
-.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
+.page[status-bar-fill] > .navigation-bar + .page__background + .page__content {
   top: 64px;
-  padding-top: 0px;
 }
 
-.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
+.page[status-bar-fill] > .navigation-bar--material + .page__background + .page__content {
   top: 76px;
 }
 
-.page__content {
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  z-index: 0;
-  -ms-touch-action: pan-y;
-}
-
-.page__bottom-bar-fill ~ .page__content {
-  bottom: 44px;
-}
-
-.page__content::-webkit-scrollbar {
-  display: none;
-}
-
-.tab-bar__status-bar-fill + .tab-bar--top__content {
+ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
+ons-tabbar[status-bar-fill] > .tab-bar--top {
   padding-top: 22px;
 }
 
-ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
-  padding-top: 0px;
+ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
+  top: 0px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content {
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top {
+  top: 0px;
+}
+
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 49px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
-  padding-top: 0px;
+.page-with-bottom-toolbar > .page__content {
+  bottom: 44px;
 }
 
 ons-dialog[disabled] > .dialog,
@@ -189,7 +184,24 @@ ons-splitter-content {
 }
 
 ons-splitter-side {
+  right: auto;
   z-index: 1;
+}
+
+ons-splitter-side[side="right"] {
+  right: 0;
+  left: auto;
+}
+
+ons-splitter-side[mode="collapse"] {
+  z-index: 3;
+  left: auto;
+  right: 100%;
+}
+
+ons-splitter-side[side="right"][mode="collapse"] {
+  right: auto;
+  left: 100%;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {

@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 import util from 'ons/util';
-import ons from 'ons/ons';
 import internal from 'ons/internal';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -121,18 +121,18 @@ class PageElement extends BaseElement {
    */
 
   /**
-   * @attribute on[-]infinite[-]scroll
+   * @attribute on-infinite-scroll
    * @type {String}
    * @description
-   *   [en]Path of the function to be executed on infinite scrolling. Example: app.loadData[/en]
-   *   [ja]機能スクロール上で実行されている関数のパス。例：app.loadData[/ja]
+   *   [en]Path of the function to be executed on infinite scrolling. Example: `app.loadData`. The function receives a done callback that must be called when it's finished.[/en]
+   *   [ja][/ja]
    */
 
   /**
    * @property onInfiniteScroll
    * @description
-   *  [en]Function to be executed on infinite scroll. [/en]
-   *  [ja]機能スクロール上で実行されている関数。[/ja]
+   *  [en]Function to be executed on infinite scroll. The function receives a done callback that must be called when it's finished.[/en]
+   *  [ja][/ja]
    */
 
   _createdCallback() {
@@ -149,6 +149,7 @@ class PageElement extends BaseElement {
     this.eventDetail = {
       page: this
     };
+    this.options = {};
   }
 
   _attachedCallback() {
@@ -166,8 +167,38 @@ class PageElement extends BaseElement {
 
     this._tryToFillStatusBar();
 
-    const infiniteScroll = this.getAttribute('on-infinite-scroll') || this.getAttribute('oninfinitescroll');
-    this.attributeChangedCallback('oninfinitescroll', null, infiniteScroll);
+    if (this.hasAttribute('on-infinite-scroll')) {
+      this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
+    }
+  }
+
+  updateBackButton(shouldShowButton) {
+    if (this.backButton) {
+      if (shouldShowButton) {
+        this.backButton.show();
+      } else {
+        this.backButton.hide();
+      }
+    }
+  }
+
+  set name(str) {
+    this.setAttribute('name', str);
+  }
+
+  get name() {
+   return this.getAttribute('name');
+  }
+
+  get backButton() {
+    return util.findChildRecursively(this, 'ons-back-button');
+  }
+
+  _tryToFillStatusBar(){
+    return internal.shouldFillStatusBar(this).then(
+      () => this.setAttribute('status-bar-fill', ''),
+      () => this.removeAttribute('status-bar-fill')
+    );
   }
 
   /**
@@ -250,27 +281,13 @@ class PageElement extends BaseElement {
   /**
    * @return {Boolean}
    */
-  _hasToolbarElement() {
-    return !!util.findChild(this, 'ons-toolbar');
-  }
-
-  /**
-   * @return {Boolean}
-   */
   _canAnimateToolbar() {
-    const toolbar = util.findChild(this, 'ons-toolbar');
-    if (toolbar) {
+    if (util.findChild(this, 'ons-toolbar')) {
       return true;
     }
-
-    const elements = this._contentElement.children;
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
-        return true;
-      }
-    }
-
-    return false;
+    return !!util.findChild(this._contentElement, el => {
+      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
+    });
   }
 
   /**
@@ -306,12 +323,7 @@ class PageElement extends BaseElement {
    */
   _registerToolbar(element) {
     this._contentElement.setAttribute('no-status-bar-fill', '');
-
-    if (util.findChild(this, '.page__status-bar-fill')) {
-      this.insertBefore(element, this.children[1]);
-    } else {
-      this.insertBefore(element, this.children[0]);
-    }
+    this.insertBefore(element, this.children[0]);
   }
 
   /**
@@ -320,15 +332,8 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerBottomToolbar(element) {
-    if (!util.findChild(this, '.page__status-bar-fill')) {
-      const fill = document.createElement('div');
-      fill.classList.add('page__bottom-bar-fill');
-      fill.style.width = '0px';
-      fill.style.height = '0px';
-
-      this.insertBefore(fill, this.children[0]);
-      this.insertBefore(element, null);
-    }
+    this.classList.add('page-with-bottom-toolbar');
+    this.appendChild(element);
   }
 
   _attributeChangedCallback(name, last, current) {
@@ -338,34 +343,31 @@ class PageElement extends BaseElement {
       this._isMuted = this.hasAttribute('_muted');
     } else if (name === '_skipinit') {
       this._skipInit = this.hasAttribute('_skipinit');
-    } else if (name.match(/on-?infinite-?scroll/i)) {
-      // this.onInfiniteScroll = util.findFromPath(current);
-      this.onInfiniteScroll = (done) => {
-        const f = util.findFromPath(current);
-        this.onInfiniteScroll = f;
-        f(done);
-      };
+    } else if (name === 'on-infinite-scroll') {
+      if (current === null) {
+        this.onInfiniteScroll = null;
+      } else {
+        this.onInfiniteScroll = (done) => {
+          const f = util.findFromPath(current);
+          this.onInfiniteScroll = f;
+          f(done);
+        };
+      }
     }
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
-    const background = document.createElement('div');
-    background.classList.add('page__background');
+    const background = util.create('.page__background');
+    const content = util.create('.page__content');
 
-    const content = document.createElement('div');
-    content.classList.add('page__content');
-
-    while (this.childNodes[0]) {
-      content.appendChild(this.childNodes[0]);
+    while (this.firstChild) {
+      content.appendChild(this.firstChild);
     }
 
-    const fragment = document.createDocumentFragment();
-    fragment.appendChild(background);
-    fragment.appendChild(content);
-
-    this.appendChild(fragment);
+    this.appendChild(background);
+    this.appendChild(content);
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -375,53 +377,11 @@ class PageElement extends BaseElement {
   _registerExtraElement(element) {
     let extra = util.findChild(this, '.page__extra');
     if (!extra) {
-      extra = document.createElement('div');
-      extra.classList.add('page__extra');
-      extra.style.zIndex = '10001';
-      this.insertBefore(extra, null);
+      extra = util.create('.page__extra', {zIndex: 10001});
+      this.appendChild(extra);
     }
 
-    extra.insertBefore(element, null);
-  }
-
-  _tryToFillStatusBar() {
-    return internal.shouldFillStatusBar(this)
-      .then(() => {
-        let fill = this.querySelector('.page__status-bar-fill');
-
-        if (fill instanceof HTMLElement) {
-          return fill;
-        }
-
-        fill = document.createElement('div');
-        fill.classList.add('page__status-bar-fill');
-        fill.style.width = '0px';
-        fill.style.height = '0px';
-
-        let bottomBarFill;
-
-        for (let i = 0; i < this.children.length; i++) {
-          if (this.children[i].classList.contains('page__bottom-bar-fill')) {
-            bottomBarFill = this.children[i];
-            break;
-          }
-        }
-
-        if (bottomBarFill) {
-          this.insertBefore(fill, bottomBarFill.nextSibling);
-        }
-        else {
-          this.insertBefore(fill, this.children[0]);
-        }
-
-        return fill;
-      })
-      .catch(() => {
-        const el = this.querySelector('.page__status-bar-fill');
-        if (el instanceof HTMLElement) {
-          el.remove();
-        }
-      });
+    extra.appendChild(element);
   }
 
   _show() {

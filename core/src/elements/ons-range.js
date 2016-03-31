@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -63,11 +64,11 @@ class MaterialInputElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     this.innerHTML = `
-      <input type="range" class="range">
       <div class="range__left"></div>
+      <input type="range" class="range">
     `;
 
     ModifierUtil.initModifier(this, scheme);

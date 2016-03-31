@@ -23,19 +23,17 @@ describe('OnsCarouselElement', () => {
     expect(window.OnsCarouselElement).to.be.ok;
   });
 
-  it('provides \'modifier\' attribute', () => {
-    carousel.setAttribute('modifier', 'hoge');
-    expect(carousel.classList.contains('carousel--hoge')).to.be.true;
+  describe('#_updateSwipeable()', () => {
+    it('attaches and removes listeners', () => {
+      let spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
+        spyOff = chai.spy.on(carousel._gestureDetector, 'off');
 
-    carousel.setAttribute('modifier', ' foo bar');
-    expect(carousel.classList.contains('carousel--foo')).to.be.true;
-    expect(carousel.classList.contains('carousel--bar')).to.be.true;
-    expect(carousel.classList.contains('carousel--hoge')).not.to.be.true;
+      carousel.setAttribute('swipeable', '');
+      expect(spyOn).to.have.been.called.at.least.once;
 
-    carousel.classList.add('carousel--piyo');
-    carousel.setAttribute('modifier', 'fuga');
-    expect(carousel.classList.contains('carousel--piyo')).to.be.true;
-    expect(carousel.classList.contains('carousel--fuga')).to.be.true;
+      carousel.removeAttribute('swipeable');
+      expect(spyOff).to.have.been.called.at.least.once;
+    });
   });
 
   describe('#_onResize()', () => {
@@ -282,6 +280,31 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#setCentered()', () => {
+    it('can set the \'centered\' attribute', () => {
+      expect(carousel.hasAttribute('centered')).to.be.false;
+      carousel.setCentered(true);
+      expect(carousel.hasAttribute('centered')).to.be.true;
+    });
+
+    it('can remove the \'centered\' attribute', () => {
+      carousel.setAttribute('centered', '');
+      carousel.setCentered(false);
+      expect(carousel.hasAttribute('centered')).to.be.false;
+    });
+  });
+
+  describe('#isCentered()', () => {
+    it('returns \'true\' if \'centered\' attribute exists', () => {
+      expect(carousel.isCentered()).to.be.false;
+    });
+
+    it('returns \'false\' if \'centered\' attribute does not exists', () => {
+      carousel.setAttribute('centered', '');
+      expect(carousel.isCentered()).to.be.true;
+    });
+  });
+
   describe('#_isEnabledChangeEvent()', () => {
     it('should be true if auto scroll is enabled', () => {
       carousel.setAutoScrollEnabled(true);
@@ -329,11 +352,6 @@ describe('OnsCarouselElement', () => {
       };
     });
 
-    it('should not work if the carousel is not swipeable', () => {
-      carousel._onDrag(ev);
-      expect(carousel._lastDragEvent).not.to.be.ok;
-    });
-
     it('should not work if the direction is vertical', () => {
       ev.gesture.direction = 'up';
       carousel._onDrag(ev);
@@ -358,11 +376,6 @@ describe('OnsCarouselElement', () => {
         velocityX: -10,
         preventDefault: () => {}
       };
-    });
-
-    it('should not work if carousel is not swipeable', () => {
-      carousel._onDragEnd(ev);
-      expect(carousel._scroll).to.equal(0);
     });
 
     it('should work if carousel is swipeable', () => {

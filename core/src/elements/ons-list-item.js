@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 
@@ -96,7 +97,7 @@ class ListItemElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
     this.classList.add('list__item');
 
     let left, center, right;
@@ -139,18 +140,20 @@ class ListItemElement extends BaseElement {
     center.classList.add('center');
     center.classList.add('list__item__center');
 
-    if (this.hasAttribute('ripple')) {
-      this.insertBefore(document.createElement('ons-ripple'), this.firstChild);
-    }
+    this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
   }
 
-  _attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
     }
   }
 
@@ -183,7 +186,7 @@ class ListItemElement extends BaseElement {
   }
 
   get _transition() {
-    return 'background-color 0.0s linear 0.02s';
+    return 'background-color 0.0s linear 0.02s, box-shadow 0.0s linear 0.02s';
   }
 
   get _tappable() {
@@ -192,6 +195,10 @@ class ListItemElement extends BaseElement {
 
   get _tapColor() {
     return this.getAttribute('tappable') || '#d9d9d9';
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _onDrag(event) {
@@ -219,6 +226,7 @@ class ListItemElement extends BaseElement {
       }
 
       this.style.backgroundColor = this._tapColor;
+      this.style.boxShadow = `0px -1px 0px 0px ${this._tapColor}`;
     }
   }
 
@@ -230,6 +238,7 @@ class ListItemElement extends BaseElement {
     this.style.MozTransition = '';
 
     this.style.backgroundColor = this._originalBackgroundColor || '';
+    this.style.boxShadow = '';
   }
 
   _shouldLockOnDrag() {

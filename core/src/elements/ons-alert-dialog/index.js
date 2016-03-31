@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
@@ -240,7 +241,7 @@ class AlertDialogElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     const style = this.getAttribute('style');
 
@@ -514,9 +515,11 @@ class AlertDialogElement extends BaseElement {
   }
 
   _cancel() {
-    if (this.isCancelable()) {
+    if (this.isCancelable() && !this._running) {
+      this._running = true;
       this.hide({
         callback: () => {
+          this._running = false;
           util.triggerElementEvent(this, 'cancel');
         }
       });

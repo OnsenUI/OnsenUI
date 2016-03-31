@@ -16,8 +16,8 @@
  * @initonly
  * @type {String}
  * @description
- *   [en]Path of the function to be executed on infinite scrolling. The path is relative to $scope.[/en]
- *   [ja]機能スクロール上で実行されている関数のパス。パスは$scopeに対して相対的です。[/ja]
+ *   [en]Path of the function to be executed on infinite scrolling. The path is relative to $scope. The function receives a done callback that must be called when it's finished.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -121,7 +121,7 @@
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
       transclude: false,
-      scope: false,
+      scope: true,
 
       compile: function(element, attrs) {
         CustomElements.upgrade(element[0]);

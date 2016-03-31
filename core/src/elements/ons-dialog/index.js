@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import ons from 'ons/ons';
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator} from './animator';
@@ -213,7 +213,7 @@ class DialogElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     const style = this.getAttribute('style');
 
@@ -267,9 +267,11 @@ class DialogElement extends BaseElement {
   }
 
   _cancel() {
-    if (this.isCancelable()) {
+    if (this.isCancelable() && !this._running) {
+      this._running = true;
       this.hide({
         callback: () => {
+          this._running = false;
           util.triggerElementEvent(this, 'cancel');
         }
       });
@@ -507,9 +509,7 @@ class DialogElement extends BaseElement {
 
   _attachedCallback() {
     this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-
     this._mask.addEventListener('click', this._boundCancel, false);
-
   }
 
   _detachedCallback() {

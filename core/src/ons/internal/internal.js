@@ -20,13 +20,18 @@ import pageAttributeExpression from '../page-attribute-expression';
 
 const internal = {};
 
+internal.config = {
+  autoStatusBarFill: true,
+  animationsDisabled: false
+};
+
 internal.nullElement = window.document.createElement('div');
 
 /**
  * @return {Boolean}
  */
 internal.isEnabledAutoStatusBarFill = () => {
-  return !!ons._config.autoStatusBarFill;
+  return !!internal.config.autoStatusBarFill;
 };
 
 /**

@@ -222,7 +222,7 @@ describe('OnsFabElement', () => {
       ons.platform.select('android');
       let e = document.createElement('ons-fab');
       expect(e.hasAttribute('ripple')).to.be.true;
-      expect(e.firstChild.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
     });
   });

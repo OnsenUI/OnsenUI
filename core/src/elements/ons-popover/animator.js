@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+import util from 'ons/util';
 
-export default class PopoverAnimator {
+class PopoverAnimator {
 
   /**
    * @param {Object} options
@@ -23,16 +24,12 @@ export default class PopoverAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options) {
-    options = ons._util.extend({
+  constructor(options = {}) {
+    this.options = util.extend({
       timing: 'cubic-bezier(.1, .7, .4, 1)',
       duration: 0.2,
       delay: 0
-    }, options || {});
-
-    this.timing = options.timing;
-    this.duration = options.duration;
-    this.delay = options.delay;
+    }, options);
   }
 
   show(popover, callback) {
@@ -42,4 +39,87 @@ export default class PopoverAnimator {
   hide(popover, callback) {
     callback();
   }
+
+  _animate(element, {from, to, options, callback, restore = false, animation}) {
+    options = util.extend({}, this.options, options);
+
+    if (animation) {
+      from = animation.from;
+      to = animation.to;
+    }
+
+    animation = animit(element);
+    if (restore) {
+      animation = animation.saveStyle();
+    }
+    animation = animation.queue(from).wait(options.delay).queue({
+      css: to,
+      duration: options.duration,
+      timing: options.timing
+    });
+    if (restore) {
+      animation = animation.restoreStyle();
+    }
+    if (callback) {
+      animation = animation.queue((done) => {
+        callback();
+        done();
+      });
+    }
+    return animation;
+  }
+
+  _animateAll(element, animations) {
+    Object.keys(animations).forEach(key => this._animate(element[key], animations[key]).play());
+  }
+
 }
+
+const fade = {
+  out: {
+    from: {opacity: 1.0},
+    to: {opacity: 0}
+  },
+  in: {
+    from: {opacity: 0},
+    to: {opacity: 1.0}
+  }
+};
+
+class MDFadePopoverAnimator extends PopoverAnimator {
+  show(popover, callback) {
+    this._animateAll(popover, {
+      _mask: fade.in,
+      _popover: {animation: fade.in, restore: true, callback}
+    });
+  }
+
+  hide(popover, callback) {
+    this._animateAll(popover, {
+      _mask: fade.out,
+      _popover: {animation: fade.out, restore: true, callback}
+    });
+  }
+}
+
+class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
+  show(popover, callback) {
+    this._animateAll(popover, {
+      _mask: fade.in,
+      _popover: {
+        from: {
+          transform: 'scale3d(1.3, 1.3, 1.0)',
+          opacity: 0
+        },
+        to: {
+          transform: 'scale3d(1.0, 1.0,  1.0)',
+          opacity: 1.0
+        },
+        restore: true,
+        callback
+      }
+    });
+  }
+}
+
+export default {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator};

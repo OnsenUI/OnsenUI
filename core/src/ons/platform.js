@@ -15,8 +15,6 @@ limitations under the License.
 
 */
 
-import ons from './ons';
-
 /**
  * @object ons.platform
  * @category util
@@ -45,7 +43,9 @@ class Platform {
    *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
    */
   select(platform) {
-    this._renderPlatform = platform.trim().toLowerCase();
+    if (typeof platform === 'string') {
+      this._renderPlatform = platform.trim().toLowerCase();
+    }
   }
 
   /**
@@ -57,7 +57,11 @@ class Platform {
    * @return {Boolean}
    */
   isWebView() {
-    return ons.isWebView();
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      throw new Error('isWebView() method is available after dom contents loaded.');
+    }
+
+    return !!(window.cordova || window.phonegap || window.PhoneGap);
   }
 
   /**

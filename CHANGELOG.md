@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.9
+----
+ * ons-splitter: Fixed memory leak.
+ * ons-page: Fixed [#1315](https://github.com/OnsenUI/OnsenUI/issues/1315).
+ * ons-icon: Accepts two icon values at once for Auto Styling.
+ * ons-tab: Fix glitch where content was removed during `<ons-navigator>` slide animation.
+
 v2.0.0-beta.8
 ----
  * core: Small fix for Autostyling.
@@ -14,6 +21,14 @@ v2.0.0-beta.8
  * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
  * ons-icon: Fixed a bug in old Android versions.
  * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
+ * ons-bottom-toolbar: Fixed a bug making it scroll with the content in some cases.
+ * ons-carousel: Added `centered` attribute.
+ * ons-popover: Added material popover.
+ * ons-splitter: Fixed [#1300](https://github.com/OnsenUI/OnsenUI/issues/1300).
+ * ons-list-item: Fix chevron position when list content is large.
+ * ons-lazy-repeat: Auto calculate item height if no information is provided.
+ * ons-carousel: Removes event listeners if it's not swipeable.
+ * ons-splitter: Update API.
 
 v2.0.0-beta.7
 ----

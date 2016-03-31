@@ -15,10 +15,6 @@
     function setup() {
 
       document.querySelector('#my-list').delegate = {
-        calculateItemHeight: function(i) {
-          return 44;
-        },
-
         createItemContent: function(i, template) {
           var dom = template.cloneNode(true);
 

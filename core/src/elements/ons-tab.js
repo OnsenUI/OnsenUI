@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
@@ -152,7 +153,7 @@ class TabElement extends BaseElement {
   }
 
   _compile() {
-    ons._autoStyle.prepare(this);
+    autoStyle.prepare(this);
 
     const fragment = document.createDocumentFragment();
     let hasChildren = false;
@@ -183,13 +184,13 @@ class TabElement extends BaseElement {
       this._updateDefaultTemplate();
     }
 
-    if (this.hasAttribute('ripple') && !util.findChild(button, 'ons-ripple')) {
-      button.insertBefore(document.createElement('ons-ripple'), button.firstChild);
-    }
-
-    ModifierUtil.initModifier(this, scheme);
+    this._updateRipple();
 
     this.setAttribute('_compiled', '');
+  }
+
+  _updateRipple() {
+    util.updateRipple(this);
   }
 
   _updateDefaultTemplate() {
@@ -273,17 +274,32 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(callback, link) {
-    if (!this._pageElement) {
+    if (!this.pageElement) {
       this._createPageElement(this.getAttribute('page'), (element) => {
         link(element, element => {
-          this._pageElement = element;
+          this.pageElement = element;
           callback(element);
         });
       });
     } else {
-      callback(this._pageElement);
+      callback(this.pageElement);
     }
   }
+
+  set pageElement(el) {
+    this._pageElement = el;
+  }
+
+get pageElement() {
+  if (typeof this._pageElement !== 'undefined') {
+    return this._pageElement;
+  }
+
+  const tabbar = this._findTabbarElement();
+  const index = this._findTabIndex();
+
+  return tabbar._contentElement.children[index];
+}
 
   /**
    * @param {String} page
@@ -324,15 +340,17 @@ class TabElement extends BaseElement {
       });
     } else {
       OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() =>
-          this._createPageElement(this.getAttribute('page'), pageElement => {
-            OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-              this._pageElement = pageElement;
-              this._pageElement.style.display = 'none';
-              tabbar._contentElement.appendChild(this._pageElement);
+        setImmediate(() => {
+          if (this.hasAttribute('page')) {
+            this._createPageElement(this.getAttribute('page'), pageElement => {
+              OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
+                this.pageElement = pageElement;
+                this.pageElement.style.display = 'none';
+                tabbar._contentElement.appendChild(this.pageElement);
+              });
             });
-          })
-        );
+          }
+        });
       });
     }
 
@@ -366,15 +384,17 @@ class TabElement extends BaseElement {
     }
   }
 
-  _attributeChangedCallback(name, last, current) {
-    if (this._hasDefaultTemplate) {
-      if (name === 'icon' || name === 'label') {
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        this._updateRipple();
+        break;
+      case 'icon':
+      case 'label':
         this._updateDefaultTemplate();
-      }
-    }
-
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 }

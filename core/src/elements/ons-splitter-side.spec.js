@@ -45,35 +45,29 @@ describe('OnsSplitterSideElement', () => {
     });
 
     it('returns a promise that resolves to the new page element', () => {
-      return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(
-        page => {
-          expect(page).to.equal(left.firstChild);
-          expect(left.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge');
-        }
-      );
+      return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(page => {
+        expect(page).to.equal(left.firstChild);
+        expect(left.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge');
+      });
     });
   });
 
   describe('#open()', () => {
     it('should open ons-splitter-side', () => {
-      return expect(right.open()).to.eventually.be.fulfilled.then(
-        element => {
-          expect(element).to.equal(right);
-          return expect(left.open()).to.eventually.be.rejected;
-        }
-      );
+      return expect(right.open()).to.eventually.be.fulfilled.then(element => {
+        expect(element).to.equal(right);
+        return expect(left.open()).to.eventually.be.fulfilled.then(element => expect(element).not.to.be.ok);
+      });
     });
   });
 
   describe('#close()', () => {
     it('should close ons-splitter-side', () => {
       return right.open().then(() => {
-        return expect(right.close()).to.eventually.be.fulfilled.then(
-          element => {
-            expect(element).to.equal(right);
-            return expect(left.close()).to.eventually.be.rejected;
-          }
-        );
+        return expect(right.close()).to.eventually.be.fulfilled.then(element => {
+          expect(element).to.equal(right);
+          return expect(left.close()).to.eventually.be.fulfilled.then(element => expect(element).not.to.be.ok);
+        });
       });
     });
   });
@@ -99,24 +93,29 @@ describe('OnsSplitterSideElement', () => {
     });
   });
 
-  describe('#getCurrentMode()', () => {
-    it('should return current mode', () => {
-      expect(right.getCurrentMode()).to.be.equal('collapse');
-      expect(left.getCurrentMode()).to.be.equal('split');
-      right.removeAttribute('collapse');
-      expect(right.getCurrentMode()).to.be.equal('split');
-    });
-  });
-
   describe('#handleGesture()', () => {
+    const shouldIgnore = (gesture, value) => {
+      gesture.center = gesture.center || {};
+      right._boundHandleGesture({type: 'dragstart', gesture});
+      expect(!!right._collapseMode._ignoreDrag).to.equal(value);
+    };
+
     it('should ignore scrolling', () => {
-      let mode = right._getModeStrategy();
-      mode.handleGesture({type: 'dragstart', gesture: {direction: 'up'}});
-      expect(mode._ignoreDrag).to.be.true;
-      mode.handleGesture({type: 'dragstart', gesture: {direction: 'left'}});
-      expect(mode._ignoreDrag).to.be.false;
-      mode.handleGesture({type: 'dragstart', gesture: {direction: 'down'}});
-      expect(mode._ignoreDrag).to.be.true;
+      shouldIgnore({direction: 'up'}, true);
+      shouldIgnore({direction: 'left'}, false);
+      shouldIgnore({direction: 'down'}, true);
+    });
+
+    it('should ignore drags outside the target area', () => {
+      const w = window.innerWidth;
+      shouldIgnore({direction: 'left'}, false);
+      shouldIgnore({direction: 'right', center: {clientX: 10}}, false);
+      right._swipeTargetWidth = 30;
+      shouldIgnore({direction: 'left', center: {clientX: w - 10}}, false);
+      shouldIgnore({direction: 'right', center: {clientX: w - 40}}, true);
+      right._side = 'left';
+      shouldIgnore({direction: 'right', center: {clientX: 10}}, false);
+      shouldIgnore({direction: 'left', center: {clientX: 40}}, true);
     });
   });
 });

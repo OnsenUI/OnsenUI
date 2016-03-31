@@ -1,8 +1,8 @@
 'use strict';
 
 describe('OnsPopoverElement', () => {
-  let popover,
-    target;
+  let popover, target;
+  const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
   beforeEach(() => {
     popover = new OnsPopoverElement();
@@ -23,53 +23,44 @@ describe('OnsPopoverElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let parent = popover.querySelector('.popover'),
-      child = popover.querySelector('.popover__content');
+    let container = popover.querySelector('.popover__container'),
+      content = popover.querySelector('.popover__content');
 
     popover.setAttribute('modifier', 'hoge');
-    expect(parent.classList.contains('popover--hoge')).to.be.true;
-    expect(child.classList.contains('popover__content--hoge')).to.be.true;
+    expect(popover.classList.contains('popover--hoge')).to.be.true;
+    expect(container.classList.contains('popover__container--hoge')).to.be.true;
+    expect(content.classList.contains('popover__content--hoge')).to.be.true;
 
     popover.setAttribute('modifier', ' foo bar');
-    expect(parent.classList.contains('popover--foo')).to.be.true;
-    expect(parent.classList.contains('popover--bar')).to.be.true;
-    expect(parent.classList.contains('popover--hoge')).not.to.be.true;
-    expect(child.classList.contains('popover__content--foo')).to.be.true;
-    expect(child.classList.contains('popover__content--bar')).to.be.true;
-    expect(child.classList.contains('popover__content--hoge')).not.to.be.true;
+    expect(popover.classList.contains('popover--foo')).to.be.true;
+    expect(popover.classList.contains('popover--bar')).to.be.true;
+    expect(popover.classList.contains('popover--hoge')).not.to.be.true;
+    expect(container.classList.contains('popover__container--foo')).to.be.true;
+    expect(container.classList.contains('popover__container--bar')).to.be.true;
+    expect(container.classList.contains('popover__container--hoge')).not.to.be.true;
+    expect(content.classList.contains('popover__content--foo')).to.be.true;
+    expect(content.classList.contains('popover__content--bar')).to.be.true;
+    expect(content.classList.contains('popover__content--hoge')).not.to.be.true;
 
-    parent.classList.add('popover--piyo');
+    popover.classList.add('popover--piyo');
+    container.classList.add('popover__container--piyo');
     popover.setAttribute('modifier', 'fuga');
-    expect(parent.classList.contains('popover--piyo')).to.be.true;
-    expect(parent.classList.contains('popover--fuga')).to.be.true;
+    expect(popover.classList.contains('popover--piyo')).to.be.true;
+    expect(popover.classList.contains('popover--fuga')).to.be.true;
+    expect(container.classList.contains('popover__container--piyo')).to.be.true;
+    expect(container.classList.contains('popover__container--fuga')).to.be.true;
   });
 
   it('should be hidden by default', () => {
-    expect(popover.style.display).to.equal('none');
+    expect(popoverDisplay()).to.equal('none');
   });
 
-  describe('#_mask', () => {
-    it('should be an HTMLElement', () =>
-      expect(popover._mask).to.be.an.instanceof(HTMLElement)
-    );
-  });
-
-  describe('#_popover', () => {
-    it('should be an HTMLElement', () =>
-      expect(popover._popover).to.be.an.instanceof(HTMLElement)
-    );
-  });
-
-  describe('#_content', () => {
-    it('should be an HTMLElement', () =>
-      expect(popover._content).to.be.an.instanceof(HTMLElement)
-    );
-  });
-
-  describe('#_arrow', () => {
-    it('should be an HTMLElement', () =>
-      expect(popover._arrow).to.be.an.instanceof(HTMLElement)
-    );
+  describe('elements', () => {
+    ['_mask', '_popover', '_content', '_arrow'].forEach(name => {
+      it(`has an element '${name}'`, () => {
+        expect(popover[name]).to.be.an.instanceof(HTMLElement);
+      });
+    });
   });
 
   describe('#_onDeviceBackButton()', () => {
@@ -78,74 +69,50 @@ describe('OnsPopoverElement', () => {
       popover.setAttribute('cancelable', '');
 
       popover.show(target);
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
 
       popover._onDeviceBackButton({callParentHandler: () => {}});
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
     });
 
     it('should not hide the popover if it is not cancelable', () => {
       popover.setAttribute('animation', 'none');
 
       popover.show(target);
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
 
       popover._onDeviceBackButton({callParentHandler: () => {}});
-      expect(popover.style.display).to.equal('block');
-    });
-  });
-
-  describe('#_setDirection()', () => {
-    it('only accepts up, down, left, right', () => {
-      expect(() => popover._setDirection()).to.throw(Error);
-      expect(() => popover._setDirection('hoge')).to.throw(Error);
-      expect(() => popover._setDirection('up')).not.to.throw(Error);
-      expect(() => popover._setDirection('down')).not.to.throw(Error);
-      expect(() => popover._setDirection('left')).not.to.throw(Error);
-      expect(() => popover._setDirection('right')).not.to.throw(Error);
-    });
-
-    it('can set the direction', () => {
-      popover._setDirection('up');
-      expect(popover._popover.classList.contains('popover--up')).to.be.true;
-      popover._setDirection('down');
-      expect(popover._popover.classList.contains('popover--down')).to.be.true;
-      popover._setDirection('left');
-      expect(popover._popover.classList.contains('popover--left')).to.be.true;
-      popover._setDirection('right');
-      expect(popover._popover.classList.contains('popover--right')).to.be.true;
+      expect(popoverDisplay()).to.equal('block');
     });
   });
 
   describe('#show()', () => {
-    it('requires a target', () => {
+    it('throws an error when called with invalid targets', () => {
       expect(() => popover.show()).to.throw(Error);
+      expect(() => popover.show(42)).to.throw(Error);
+      expect(() => popover.show({})).to.throw(Error);
+      expect(() => popover.show([])).to.throw(Error);
+      expect(() => popover.show(null)).to.throw(Error);
     });
 
     it('accepts an HTML element', () => {
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
       popover.show(target);
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
     });
 
     it('accepts a CSS selector', () => {
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
       popover.show('div');
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
     });
 
     it('accepts an Event object', () => {
       var ev = new Event('dummy');
       target.dispatchEvent(ev);
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
       popover.show(ev);
-      expect(popover.style.display).to.equal('block');
-    });
-
-    it('has an \'animation\' parameter', () => {
-      expect(() => popover.show(target, {animation: 'fade'})).not.to.throw(Error);
-      expect(() => popover.show(target, {animation: 'none'})).not.to.throw(Error);
-      expect(() => popover.show(target, {animation: 'hoge'})).to.throw(Error);
+      expect(popoverDisplay()).to.equal('block');
     });
 
     it('has an \'animationOptions\' parameter', () => {
@@ -155,40 +122,31 @@ describe('OnsPopoverElement', () => {
 
     describe('\'preshow\' event', () => {
       it('is fired', () => {
-        let promise = new Promise((resolve) =>
-          popover.addEventListener('preshow', resolve)
-        );
+        let promise = new Promise(resolve => popover.addEventListener('preshow', resolve));
         popover.show(target);
         return expect(promise).to.eventually.be.fulfilled;
       });
 
       it('can be cancelled', () => {
-        popover.addEventListener('preshow', (event) => {
-          event.detail.cancel();
-        });
-
+        popover.addEventListener('preshow', e => e.cancel());
         popover.show(target);
-        expect(popover.style.display).to.equal('none');
+        expect(popoverDisplay()).to.equal('none');
       });
     });
 
     describe('\'postshow\' event', () => {
       it('is fired', () => {
-        let promise = new Promise((resolve) =>
-          popover.addEventListener('postshow', resolve)
-        );
+        let promise = new Promise(resolve => popover.addEventListener('postshow', resolve));
         popover.show(target);
         return expect(promise).to.eventually.be.fulfilled;
       });
     });
 
     it('returns a promise that resolves to the displayed element', () => {
-      return expect(popover.show(target)).to.eventually.be.fulfilled.then(
-        element => {
-          expect(element).to.equal(popover);
-          expect(element.style.display).to.equal('block');
-        }
-      );
+      return expect(popover.show(target)).to.eventually.be.fulfilled.then(element => {
+        expect(element).to.equal(popover);
+        expect(popoverDisplay()).to.equal('block');
+      });
     });
   });
 
@@ -198,49 +156,38 @@ describe('OnsPopoverElement', () => {
     });
 
     it('hides the popover', () => {
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
       popover.hide({animation: 'none'});
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
     });
 
     describe('\'prehide\' event', () => {
       it('is fired', () => {
-        let promise = new Promise((resolve) =>
-          popover.addEventListener('prehide', resolve)
-        );
-
+        let promise = new Promise(resolve => popover.addEventListener('prehide', resolve));
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
 
       it('can be cancelled', () => {
-        popover.addEventListener('prehide', (event) => {
-          event.detail.cancel();
-        });
-
+        popover.addEventListener('prehide', e => e.cancel());
         popover.hide({animation: 'none'});
-        expect(popover.style.display).to.equal('block');
+        expect(popoverDisplay()).to.equal('block');
       });
     });
 
     describe('\'posthide\' event', () => {
       it('is fired', () => {
-        let promise = new Promise((resolve) =>
-          popover.addEventListener('posthide', resolve)
-        );
-
+        let promise = new Promise(resolve => popover.addEventListener('posthide', resolve));
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
     });
 
     it('returns a promise that resolves to the hidden element', () => {
-      return expect(popover.hide()).to.eventually.be.fulfilled.then(
-        element => {
-          expect(element).to.equal(popover);
-          expect(element.style.display).to.equal('none');
-        }
-      );
+      return expect(popover.hide()).to.eventually.be.fulfilled.then(element => {
+        expect(element).to.equal(popover);
+        expect(popoverDisplay()).to.equal('none');
+      });
     });
   });
 
@@ -299,7 +246,7 @@ describe('OnsPopoverElement', () => {
     it('should hide the popover if it is not cancelable', () => {
       popover.show(target, {animation: 'none'});
       popover._cancel();
-      expect(popover.style.display).to.equal('block');
+      expect(popoverDisplay()).to.equal('block');
     });
 
     it('should hide the popover if it is cancelable', () => {
@@ -307,50 +254,26 @@ describe('OnsPopoverElement', () => {
       popover.show(target);
       popover.setAttribute('cancelable', '');
       popover._cancel();
-      expect(popover.style.display).to.equal('none');
+      expect(popoverDisplay()).to.equal('none');
     });
   });
 
   describe('\'direction\' attribute', () => {
-    let el;
+    const classes = {
+      up: 'popover--bottom',
+      down: 'popover--top',
+      left: 'popover--right',
+      right: 'popover--left'
+    };
 
-    beforeEach(() => {
-      el = popover.querySelector('.popover');
+    Object.keys(classes).forEach(key => {
+      it(`can have the value '${key}'`, () => {
+        popover.setAttribute('direction', key);
+        popover.show(target, {animation: 'none'});
+        expect(popover._popover.classList.contains(classes[key])).to.be.true;
+      });
     });
 
-    it('should change the direction dynamically', (done) => {
-      popover.setAttribute('direction', 'up');
-      expect(el.classList.contains('popover--up')).to.be.false;
-
-      popover.show(target, {animation: 'none', callback: () => {
-        expect(el.classList.contains('popover--up')).to.be.true;
-        done();
-      }});
-    });
-
-    it('can have the value \'up\'', () => {
-      popover.setAttribute('direction', 'up');
-      popover.show(target, {animation: 'none'});
-      expect(el.classList.contains('popover--up')).to.be.true;
-    });
-
-    it('can have the value \'down\'', () => {
-      popover.setAttribute('direction', 'down');
-      popover.show(target, {animation: 'none'});
-      expect(el.classList.contains('popover--down')).to.be.true;
-    });
-
-    it('can have the value \'left\'', () => {
-      popover.setAttribute('direction', 'left');
-      popover.show(target, {animation: 'none'});
-      expect(el.classList.contains('popover--left')).to.be.true;
-    });
-
-    it('can have the value \'right\'', () => {
-      popover.setAttribute('direction', 'right');
-      popover.show(target, {animation: 'none'});
-      expect(el.classList.contains('popover--right')).to.be.true;
-    });
   });
 
   describe('\'mask-color\' attribute', () => {

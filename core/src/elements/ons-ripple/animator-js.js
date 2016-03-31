@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import internal from 'ons/internal';
+
 
 var raf = (window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame)
           || (cb => { setTimeout(() => { cb(new Date().getTime()); }, 1000 / 60); });
@@ -76,7 +78,7 @@ class AnimatorJS {
       },
       finish: (milliseconds = 50) => {
         var k = milliseconds / (duration - elapsed);
-        if (ons._config.animationsDisabled) {
+        if (internal.config.animationsDisabled) {
           k = 0;
         }
         if (k < 1) {
@@ -90,7 +92,7 @@ class AnimatorJS {
       }
     };
 
-    if (el.hasAttribute('disabled') || ons._config.animationsDisabled) {
+    if (el.hasAttribute('disabled') || internal.config.animationsDisabled) {
       return result;
     }
 

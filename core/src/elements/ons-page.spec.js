@@ -38,6 +38,18 @@ describe('OnsPageElement', () => {
     });
   });
 
+  describe('#_tryToFillStatusBar()', (done) => {
+    it('fills status bar', () => {
+      var tmp = ons._internal.shouldFillStatusBar;
+      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
+      element._tryToFillStatusBar().then(() => {
+        expect(element.hasAttribute('status-bar-fill')).to.be.true;
+        done();
+      });
+      ons._internal.shouldFillStatusBar = tmp;
+    });
+  });
+
   describe('#detachedCallback', () => {
     it('fires \'destroy\' event', () => {
       var spy = chai.spy();
@@ -91,14 +103,6 @@ describe('OnsPageElement', () => {
     it('throws page__content error', () => {
       element.removeChild(element.getElementsByClassName('page__content')[0]);
       expect(() => element._getContentElement()).to.throw(Error);
-    });
-  });
-
-  describe('#_hasToolbarElement()', () => {
-    it('returns if a toolbar exists', () => {
-      expect(element._hasToolbarElement()).to.be.false;
-      element._registerToolbar(new OnsToolbarElement());
-      expect(element._hasToolbarElement()).to.be.true;
     });
   });
 
@@ -157,23 +161,35 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#_tryToFillStatusBar()', (done) => {
-    it('fills status bar', () => {
-      var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
-      element._tryToFillStatusBar().then(() => {
-        expect(element.firstChild.className).to.equal('page__status-bar-fill');
-        done();
-      });
-      ons._internal.shouldFillStatusBar = tmp;
-    });
-  });
-
   describe('#attributeChangedCallback()', () => {
     it('triggers \'onModifierChanged()\' method', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
+    });
+
+    it('sets _onInfiniteScroll', () => {
+      let i = 0;
+      window._testApp = {
+        a: () => i += 42
+      };
+      element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
+      element._onInfiniteScroll();
+      expect(i).to.equal(42);
+      delete window._testApp;
+      expect(element._onInfiniteScroll).to.be.ok;
+      element._onInfiniteScroll();
+      expect(i).to.equal(84);
+    });
+
+    it('infiniteScroll doesn\'t throw error until it\'s called', () => {
+      let app = {a: () => 42};
+      element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
+      window._testApp = app;
+      expect(() => element._onInfiniteScroll()).to.not.throw(Error);
+      element.attributeChangedCallback('on-infinite-scroll', '', 'doge');
+      expect(() => element._onInfiniteScroll()).to.throw(Error);
+      delete window._testApp;
     });
   });
 
@@ -230,6 +246,13 @@ describe('OnsPageElement', () => {
 
     afterEach(() => {
       document.body.removeChild(page);
+    });
+
+    it('throws error on invalid input', () => {
+      expect(() => element.onInfiniteScroll = 5).to.throw(Error);
+      expect(() => element.onInfiniteScroll = []).to.throw(Error);
+      expect(() => element.onInfiniteScroll = {}).to.throw(Error);
+      expect(() => element.onInfiniteScroll = () => 42).to.not.throw(Error);
     });
 
     it('calls onInfiniteScroll', (done) => {

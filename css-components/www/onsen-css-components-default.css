@@ -3416,7 +3416,7 @@ input:disabled + .switch__toggle {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  min-width: 32px;
+  padding-right: 14px;
   -webkit-box-ordinal-group: 1;
   -webkit-order: 0;
   -moz-box-ordinal-group: 1;
@@ -3430,10 +3430,9 @@ input:disabled + .switch__toggle {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  padding-left: 10px;
 }
 .list__item__left:empty {
-  width: 26px;
+  width: 0;
   min-width: 0;
   padding: 0;
   margin: 0;
@@ -3473,7 +3472,7 @@ input:disabled + .switch__toggle {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  margin-left: 26px;
+  margin-left: 0;
   border-bottom: 1px solid #ccc;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -3488,9 +3487,6 @@ input:disabled + .switch__toggle {
     background-image: -o-linear-gradient(90deg, #ccc, #ccc 50%, transparent 50%);
     background-image: linear-gradient(0deg, #ccc, #ccc 50%, transparent 50%);
   }
-}
-.list__item__left + .list__item__center {
-  margin-left: 0;
 }
 .list__item__right {
   display: -webkit-box;
@@ -3537,7 +3533,7 @@ input:disabled + .switch__toggle {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px 0 0 26px;
+  padding: 20px 0 0 15px;
   font-size: 12px;
   font-weight: 500;
   color: #1f1f21;
@@ -3614,7 +3610,7 @@ input:disabled + .switch__toggle {
   -moz-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 0;
+  padding: 0 0 0 14px;
   margin: 1px 0 -1px 0;
   color: #1f1f21;
   background-color: #fff;
@@ -3840,6 +3836,8 @@ input:disabled + .switch__toggle {
   width: 18px;
   text-align: right;
   border-bottom: 1px solid #ccc;
+  width: 10px;
+  padding-right: 8px;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list__item--chevron:before {
@@ -4161,7 +4159,7 @@ input:disabled + .switch__toggle {
 .list__item--material {
   border: 0;
   min-height: 56px;
-  padding: 0;
+  padding: 0 0 0 16px;
   line-height: normal;
 }
 .list__item--material__subtitle {
@@ -4172,16 +4170,13 @@ input:disabled + .switch__toggle {
   box-shadow: none;
 }
 .list__item--material__left {
-  padding: 16px 0px 16px 16px;
+  padding: 16px 0px 16px 0px;
   min-width: 56px;
   line-height: 1;
 }
-.list__item--material__left:empty {
-  width: 16px;
-}
+.list__item--material__left:empty,
 .list__item--material__center {
   padding: 16px 0;
-  margin-left: 16px;
 }
 .list__item--material__right {
   padding: 16px 16px 16px 0px;
@@ -5335,23 +5330,38 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   name: Popover
   class: popover
   markup:
-    <div class="popover-mask"></div>
-    <div class="popover popover--up" style="bottom:20px;left:50px;">
-      <div class="popover__bottom-arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    <div class="popover">
+      <div class="popover-mask"></div>
+      <div class="popover popover--bottom" style="bottom:20px;left:50px;">
+        <div class="popover__arrow"></div>
+        <div class="popover__content">
+          <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+        </div>
       </div>
     </div>
 */
-.popover-mask {
+.popover {
   position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  left: 6px;
+  z-index: 20000;
+  display: none;
+}
+.popover-mask {
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.1);
+  position: fixed;
 }
-.popover {
+.popover__container {
+  width: 100%;
+  height: 100%;
+}
+.popover__content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -5377,23 +5387,22 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   position: absolute;
   display: block;
   width: 220px;
+  overflow: auto;
   min-height: 100px;
-}
-.popover__content {
+  max-height: 100%;
   background-color: #fff;
   -webkit-border-radius: 8px;
   border-radius: 8px;
   color: #1f1f21;
-  overflow: hidden;
-  min-height: 100px;
-  height: 100%;
-  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
 }
 .popover__content > * {
   overflow: hidden;
 }
-.popover__bottom-arrow {
-  content: '';
+.popover__content .page,
+.popover__content .page__content {
+  position: static;
+}
+.popover__arrow {
   position: absolute;
   width: 18px;
   height: 18px;
@@ -5409,104 +5418,47 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
   -webkit-border-radius: 0 0 0 4px;
   border-radius: 0 0 0 4px;
+  margin: -9px;
+}
+.popover--bottom .popover__arrow {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  bottom: 0;
-  left: 50%;
-  margin-left: -9px;
-  margin-bottom: -9px;
+  bottom: 1px;
 }
-.popover__top-arrow {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  -webkit-transform-origin: 50% 50% 0;
-  -moz-transform-origin: 50% 50% 0;
-  -ms-transform-origin: 50% 50% 0;
-  -o-transform-origin: 50% 50% 0;
-  transform-origin: 50% 50% 0;
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  -webkit-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
+.popover--top .popover__arrow {
   -webkit-transform: rotate(135deg);
   -moz-transform: rotate(135deg);
   -ms-transform: rotate(135deg);
   -o-transform: rotate(135deg);
   transform: rotate(135deg);
-  top: 0;
-  left: 50%;
-  margin-left: -9px;
-  margin-top: -9px;
+  top: 1px;
 }
-.popover__left-arrow {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  -webkit-transform-origin: 50% 50% 0;
-  -moz-transform-origin: 50% 50% 0;
-  -ms-transform-origin: 50% 50% 0;
-  -o-transform-origin: 50% 50% 0;
-  transform-origin: 50% 50% 0;
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  -webkit-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
+.popover--left .popover__arrow {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  top: 50%;
-  left: 0;
-  margin-left: -9px;
-  margin-top: -9px;
+  left: 1px;
 }
-.popover__right-arrow {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  -webkit-transform-origin: 50% 50% 0;
-  -moz-transform-origin: 50% 50% 0;
-  -ms-transform-origin: 50% 50% 0;
-  -o-transform-origin: 50% 50% 0;
-  transform-origin: 50% 50% 0;
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
-  -webkit-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
+.popover--right .popover__arrow {
   -webkit-transform: rotate(225deg);
   -moz-transform: rotate(225deg);
   -ms-transform: rotate(225deg);
   -o-transform: rotate(225deg);
   transform: rotate(225deg);
-  top: 50%;
-  right: 0;
-  margin-right: -9px;
-  margin-top: -9px;
+  right: 1px;
 }
 /* topdoc
   name: Popover(down)
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--down" style="top:20px;left:50px;">
-      <div class="popover__top-arrow"></div>
+    <div class="popover popover--top" style="top:20px;left:50px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -5517,8 +5469,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--left" style="top:20px;right:20px;">
-      <div class="popover__right-arrow"></div>
+    <div class="popover popover--right" style="top:20px;right:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
@@ -5529,13 +5481,61 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--right" style="top:20px;left:20px;">
-      <div class="popover__left-arrow"></div>
+    <div class="popover popover--left" style="top:20px;left:20px;">
+      <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
       </div>
     </div>
 */
+.popover--material {
+  top: 4px;
+  right: 4px;
+  bottom: 4px;
+  left: 4px;
+}
+.popover-mask--material {
+  background-color: transparent;
+}
+.popover__container--material {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: inline-block;
+  max-height: 100%;
+  overflow: auto;
+/*border-bottom 4px solid transparent*/
+}
+.popover__content--material {
+  background-color: #fafafa;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  color: #1f1f21;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.popover__arrow--material {
+  display: none;
+}
 /* topdoc
   name: Modal
   class: modal

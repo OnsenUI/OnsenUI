@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import internal from 'ons/internal';
 import BaseElement from 'ons/base-element';
 import Animator from './animator-css';
 
@@ -183,25 +184,26 @@ class RippleElement extends BaseElement {
     }
   }
 
-  _attachedCallback() {
+  attachedCallback() {
+    this._parentNode = this.parentNode;
     this._boundOnTap = this._onTap.bind(this);
     this._boundOnHold = this._onHold.bind(this);
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnRelease = this._onRelease.bind(this);
 
-    if (ons._config.animationsDisabled) {
+    if (internal.config.animationsDisabled) {
       this.setDisabled(true);
     } else {
-      this.parentNode.addEventListener('tap', this._boundOnTap);
-      this.parentNode.addEventListener('hold', this._boundOnHold);
-      this.parentNode.addEventListener('dragstart', this._boundOnDragStart);
+      this._parentNode.addEventListener('tap', this._boundOnTap);
+      this._parentNode.addEventListener('hold', this._boundOnHold);
+      this._parentNode.addEventListener('dragstart', this._boundOnDragStart);
     }
   }
 
-  _detachedCallback() {
-    this.parentNode.removeEventListener('tap', this._boundOnTap);
-    this.parentNode.removeEventListener('hold', this._boundOnHold);
-    this.parentNode.removeEventListener('dragstart', this._boundOnDragStart);
+  detachedCallback() {
+    this._parentNode.removeEventListener('tap', this._boundOnTap);
+    this._parentNode.removeEventListener('hold', this._boundOnHold);
+    this._parentNode.removeEventListener('dragstart', this._boundOnDragStart);
   }
 
   _attributeChangedCallback(name, last, current) {

@@ -20,9 +20,11 @@
   </head>
   <body>
     <ons-navigator var="navi">
-      <p style="text-align: center;">
-        <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
-      </p>
+      <ons-page>
+        <p style="text-align: center;">
+          <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
+        </p>
+      </ons-page>
     </ons-navigator>
 
     <ons-template id="page2.html">
@@ -34,7 +36,7 @@
     </ons-template>
 
     <ons-template id="dialog.html">
-      <ons-dialog var="dialog">
+      <ons-dialog var="dialog" animation="none">
         <p style="text-align: center;">
           <ons-button id='hide-dialog' ng-click="dialog.hide()">Hide</ons-button>
         </p>
