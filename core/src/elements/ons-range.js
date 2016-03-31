@@ -67,8 +67,8 @@ class MaterialInputElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.innerHTML = `
-      <input type="range" class="range">
       <div class="range__left"></div>
+      <input type="range" class="range">
     `;
 
     ModifierUtil.initModifier(this, scheme);
