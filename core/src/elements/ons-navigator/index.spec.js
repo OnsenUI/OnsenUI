@@ -5,7 +5,7 @@ describe('OnsNavigatorElement', () => {
 
   beforeEach((done) => {
     let tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`),
-      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`), 
+      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`),
       tpl3 = ons._util.createElement(`<ons-template id="info"><ons-page>info</ons-page></ons-template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
@@ -18,7 +18,7 @@ describe('OnsNavigatorElement', () => {
     document.body.appendChild(nav);
 
     setImmediate(() => {
-      done()
+      done();
     });
   });
 
@@ -95,7 +95,7 @@ describe('OnsNavigatorElement', () => {
         if (counter == 2) {
           done();
         }
-      }
+      };
 
       var promise1 = nav.pushPage('hoge', {}).then(() => {
         myFun(0, true);
@@ -103,7 +103,7 @@ describe('OnsNavigatorElement', () => {
         myFun(0, false);
       });
 
-      var promise2 =nav.pushPage('hoge', {'cancelIfRunning': true}).then(() => {
+      var promise2 = nav.pushPage('hoge', {'cancelIfRunning': true}).then(() => {
         myFun(1, true);
       }, () => {
         myFun(1, false);
@@ -631,7 +631,7 @@ describe('OnsNavigatorElement', () => {
       document.body.appendChild(nav2);
 
       setImmediate(() => {
-        done()
+        done();
       });
     });
 

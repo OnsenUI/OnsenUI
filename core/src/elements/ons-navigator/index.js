@@ -322,7 +322,7 @@ class NavigatorElement extends BaseElement {
   }
 
   _updateLastPageBackButton() {
-    const index = this.pages.length -1;
+    const index = this.pages.length - 1;
     this.pages[index].updateBackButton(index > 0);
   }
 
@@ -373,7 +373,7 @@ class NavigatorElement extends BaseElement {
 
       var popUpdate = () => {
         return new Promise((resolve) => {
-          this.pages[this.pages.length -1]._destroy();
+          this.pages[this.pages.length - 1]._destroy();
           resolve();
         });
       };
@@ -454,7 +454,7 @@ class NavigatorElement extends BaseElement {
             leavePage: leavePage,
             enterPage: enterPage,
             navigator: this
-          }
+          };
 
           pages.pop();
           update(pages, this).then(() => {
@@ -715,7 +715,7 @@ class NavigatorElement extends BaseElement {
           this.pushPage(this.getAttribute('page'), {animation: 'none'});
         }
       } else {
-        for (var i=0; i < this.pages.length; i++) {
+        for (var i = 0; i < this.pages.length; i++) {
           if (this.pages[i].nodeName !== 'ONS-PAGE') {
             throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
           }
@@ -832,7 +832,7 @@ class NavigatorElement extends BaseElement {
           enterPage.updateBackButton(this.pages.length - 1);
 
           this.pages[pageLength - 1].name = options.page;
-          this.pages[pageLength -1].options = options;
+          this.pages[pageLength - 1].options = options;
 
 
           return new Promise(resolve => {

@@ -196,7 +196,7 @@ export class LazyRepeatProvider {
 
     if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
       this._delegate._render(items, this._listHeight);
-      return;
+      return null;
     }
 
     const keep = {};

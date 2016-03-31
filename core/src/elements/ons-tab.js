@@ -346,7 +346,7 @@ get pageElement() {
                 this.pageElement.style.display = 'none';
                 tabbar._contentElement.appendChild(this.pageElement);
               });
-            })
+            });
           }
         });
       });
