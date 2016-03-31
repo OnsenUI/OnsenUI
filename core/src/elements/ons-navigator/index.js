@@ -821,51 +821,59 @@ class NavigatorElement extends BaseElement {
 
       pages.push(page);
 
-      return update(pages, this)
-        .then(() => {
-          const pageLength = this.pages.length;
+      return update(pages, this).then(() => {
+        const pageLength = this.pages.length;
 
-          var enterPage  = this.pages[this.pages.length - 1];
-          var leavePage = this.pages[this.pages.length - 2];
-          enterPage.updateBackButton(this.pages.length - 1);
+        var enterPage  = this.pages[pageLength - 1];
+        var leavePage = this.pages[pageLength - 2];
+        enterPage.updateBackButton(pageLength - 1);
 
-          this.pages[pageLength - 1].name = options.page;
-          this.pages[pageLength - 1].options = options;
+        enterPage.name = options.page;
+        enterPage.options = options;
 
+        return new Promise(resolve => {
+          var done = () => {
+            this._isRunning = false;
 
-          return new Promise(resolve => {
-            var done = () => {
-              this._isRunning = false;
+            if (leavePage) {
               leavePage.style.display = 'none';
+            }
 
-              const eventDetail = {
-                leavePage: leavePage,
-                enterPage: enterPage,
-                navigator: this
-              };
-
-                util.triggerElementEvent(this, 'postpush', eventDetail);
-
-                if (typeof options.onTransitionEnd === 'function') {
-                  options.onTransitionEnd();
-                }
-
-                resolve(enterPage);
+            const eventDetail = {
+              leavePage: leavePage,
+              enterPage: enterPage,
+              navigator: this
             };
 
-              enterPage.style.display = 'none';
-            rewritables.link(this, enterPage, options, () =>  {
-              enterPage.style.display = 'block';
-                if (pageLength > 1) {
-                  leavePage._hide();
-                  enterPage._show();
-                  animator.push(enterPage, leavePage, done);
-                } else {
-                  enterPage._show();
-                  done();
-                }
-              });
-          });
+            util.triggerElementEvent(this, 'postpush', eventDetail);
+
+            if (typeof options.onTransitionEnd === 'function') {
+              options.onTransitionEnd();
+            }
+
+            resolve(enterPage);
+          };
+
+          enterPage.style.display = 'none';
+
+          var push = () =>  {
+            enterPage.style.display = 'block';
+            if (leavePage) {
+              leavePage._hide();
+              enterPage._show();
+              animator.push(enterPage, leavePage, done);
+            } else {
+              enterPage._show();
+              done();
+            }
+          };
+
+          if (options._linked) {
+            push();
+          } else {
+            rewritables.link(this, enterPage, options, push);
+          }
+        });
       });
     };
 
@@ -939,7 +947,6 @@ class NavigatorElement extends BaseElement {
       throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
 
-
     if (index < 0) {
       // Fallback pushPage
       return this.pushPage(options.page, options);
@@ -949,13 +956,14 @@ class NavigatorElement extends BaseElement {
     } else {
       // Bring to top
         let selectedPage = this.pages[index];
-         selectedPage.style.display = 'block';
+        selectedPage.style.display = 'block';
         selectedPage.setAttribute('_skipinit', '');
 
         // move element to the last child
         selectedPage.parentNode.appendChild(selectedPage);
         selectedPage.options = options;
-        return this._pushPage(options);
+
+        return this._pushPage(util.extend({_linked: 1}, options));
     }
   }
 
