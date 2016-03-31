@@ -186,7 +186,7 @@ class ListItemElement extends BaseElement {
   }
 
   get _transition() {
-    return 'background-color 0.0s linear 0.02s';
+    return 'background-color 0.0s linear 0.02s, box-shadow 0.0s linear 0.02s';
   }
 
   get _tappable() {
@@ -226,6 +226,7 @@ class ListItemElement extends BaseElement {
       }
 
       this.style.backgroundColor = this._tapColor;
+      this.style.boxShadow = `0px -1px 0px 0px ${this._tapColor}`;
     }
   }
 
@@ -237,6 +238,7 @@ class ListItemElement extends BaseElement {
     this.style.MozTransition = '';
 
     this.style.backgroundColor = this._originalBackgroundColor || '';
+    this.style.boxShadow = '';
   }
 
   _shouldLockOnDrag() {
