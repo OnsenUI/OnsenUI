@@ -30,8 +30,7 @@ const modifiersMap = {
   'large--cta': 'large',
   'noborder': '',
   'chevron': '',
-  'tappable': '',
-  'underbar': ''
+  'tappable': ''
 };
 
 const platforms = {};
