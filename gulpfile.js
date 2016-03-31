@@ -58,6 +58,10 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 gulp.task('core', function() {
   return gulp.src(['core/src/setup.js'], {read: false})
+    .pipe($.plumber(function(error) {
+      $.util.log(error.message);
+      this.emit('end');
+    }))
     .pipe($.rollup({
       sourceMap: 'inline',
       plugins: [
