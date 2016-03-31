@@ -357,7 +357,6 @@ class NavigatorElement extends BaseElement {
    * @param {Object} [options.animationOptions]
    * @param {Boolean} [options.refresh]
    * @param {Function} [options.onTransitionEnd]
-   * @param {Boolean} [options.cancelIfRunning]
    * @return {Promise} Resolves to the new top page object.
    */
   popPage(options = {}) {
@@ -768,7 +767,6 @@ class NavigatorElement extends BaseElement {
    * @param {String/NavigatorTransitionAnimator} [options.animation]
    * @param {Object} [options.animationOptions]
    * @param {Function} [options.onTransitionEnd]
-   * @param {Boolean} [options.cancelIfRunning]
    * @param {String} [options.pageHTML]
    * @return {Promise} Resolves to the new top page object.
    */
