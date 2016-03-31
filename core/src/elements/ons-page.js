@@ -135,7 +135,7 @@ class PageElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     this.classList.add('page');
 
     if (!this.hasAttribute('_compiled')) {
@@ -152,7 +152,7 @@ class PageElement extends BaseElement {
     this.options = {};
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     if (!this._isMuted) {
       if (this._skipInit) {
         this.removeAttribute('_skipinit');
@@ -336,7 +336,7 @@ class PageElement extends BaseElement {
     this.appendChild(element);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     } else if (name === '_muted') {

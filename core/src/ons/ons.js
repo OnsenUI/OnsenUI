@@ -27,7 +27,6 @@ import deviceBackButtonDispatcher from './device-back-button-dispatcher';
 import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
-import elementReady from './element-ready';
 
 /**
  * @object ons
@@ -50,7 +49,6 @@ ons.notification = notification;
 ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
-ons._elementReady = elementReady;
 
 ons._readyLock = new DoorLock();
 

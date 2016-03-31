@@ -52,7 +52,7 @@ var scheme = {
  */
 class BackButtonElement extends BaseElement {
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -121,17 +121,17 @@ class BackButtonElement extends BaseElement {
     }
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 

@@ -177,7 +177,7 @@ class SwitchElement extends BaseElement {
     return this._checkbox;
   }
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -186,7 +186,7 @@ class SwitchElement extends BaseElement {
     this._handle = this.querySelector('.switch__handle');
 
     ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
-      this._attributeChangedCallback(e, null, this.getAttribute(e));
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
 
@@ -200,7 +200,7 @@ class SwitchElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this._checkbox.removeEventListener('change', this._onChange);
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
@@ -209,7 +209,7 @@ class SwitchElement extends BaseElement {
     this._gestureDetector.dispose();
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this._checkbox.addEventListener('change', this._onChange);
     this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
     this.addEventListener('dragstart', this._onDragStart);
@@ -282,7 +282,7 @@ class SwitchElement extends BaseElement {
     this.classList.remove('switch--active');
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     switch(name) {
     case 'modifier':
       this._isMaterial = (current || '').indexOf('material') !== -1;

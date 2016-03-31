@@ -35,7 +35,7 @@ class ConditionalElement extends BaseElement {
     orientation.on('change', this._onOrientationChange.bind(this));
   }
 
-  _attributeChangedCallback(name) {
+  attributeChangedCallback(name) {
     if (name === 'orientation') {
       this._onOrientationChange();
     }

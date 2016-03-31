@@ -32,7 +32,7 @@ import BaseElement from 'ons/base-element';
  * </ons-template>
  */
 class TemplateElement extends BaseElement {
-  _createdCallback() {
+  createdCallback() {
     this.template = this.innerHTML;
 
     while (this.firstChild) {
@@ -40,7 +40,7 @@ class TemplateElement extends BaseElement {
     }
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
     event.template = this.template;
     event.templateId = this.getAttribute('id');

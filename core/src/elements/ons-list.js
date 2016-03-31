@@ -61,7 +61,7 @@ class ListElement extends BaseElement {
    *   [ja]リストの表現を指定します。[/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -76,7 +76,7 @@ class ListElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

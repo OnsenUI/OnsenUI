@@ -86,7 +86,7 @@ class SpeedDialElement extends BaseElement {
    *   [ja]無効化する場合に指定します。[/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
 
@@ -138,11 +138,11 @@ class SpeedDialElement extends BaseElement {
     }
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 

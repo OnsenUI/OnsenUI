@@ -94,7 +94,7 @@ class ScrollbarElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     } else {
@@ -202,7 +202,7 @@ class ScrollbarElement extends BaseElement {
     e.preventDefault();
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     if (!this.hasAttribute('_attached')) {
       this._attach();
     } else {
@@ -223,7 +223,7 @@ class ScrollbarElement extends BaseElement {
     }
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this._content.removeEventListener('scroll', this._boundOnScroll);
     this._scroll.removeEventListener('dragstart', this._boundOnDragStart);
     this._scroll.removeEventListener('touchstart', this._onTouchStart);
@@ -231,7 +231,7 @@ class ScrollbarElement extends BaseElement {
     window.removeEventListener('resize', this._boundOnResize);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'update-on-scroll') {
       this._updateOnScroll = current !== null;
     }

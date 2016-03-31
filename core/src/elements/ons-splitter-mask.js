@@ -20,7 +20,7 @@ import util from 'ons/util';
 
 class SplitterMaskElement extends BaseElement {
 
-  _createdCallback() {
+  createdCallback() {
     this._boundOnClick = this._onClick.bind(this);
   }
 
@@ -31,14 +31,14 @@ class SplitterMaskElement extends BaseElement {
     event.stopPropagation();
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this.addEventListener('click', this._boundOnClick);
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this.removeEventListener('click', this._boundOnClick);
   }
 }

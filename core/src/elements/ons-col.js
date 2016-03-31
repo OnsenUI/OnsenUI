@@ -53,13 +53,13 @@ import BaseElement from 'ons/base-element';
  */
 class ColumnElement extends BaseElement {
 
-  _createdCallback() {
+  createdCallback() {
     if (this.getAttribute('width')) {
       this._updateWidth();
     }
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'width') {
       this._updateWidth();
     }

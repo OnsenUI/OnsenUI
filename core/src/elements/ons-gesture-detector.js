@@ -33,7 +33,7 @@ import GestureDetector from 'ons/gesture-detector';
  * </ons-gesture-detector>
  */
 class GestureDetectorElement extends BaseElement {
-  _createdCallback() {
+  createdCallback() {
     this._gestureDetector = new GestureDetector(this);
   }
 }

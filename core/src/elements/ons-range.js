@@ -54,7 +54,7 @@ const INPUT_ATTRIBUTES = [
  */
 class MaterialInputElement extends BaseElement {
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -88,7 +88,7 @@ class MaterialInputElement extends BaseElement {
     return (this.value - min) / (max - min);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
@@ -101,11 +101,11 @@ class MaterialInputElement extends BaseElement {
     }
  }
 
-  _attachedCallback() {
+  attachedCallback() {
     this.addEventListener('input', this._onChange);
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this.removeEventListener('input', this._onChange);
   }
 

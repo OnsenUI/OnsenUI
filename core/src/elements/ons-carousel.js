@@ -1119,7 +1119,7 @@ class CarouselElement extends BaseElement {
     );
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this._prepareEventListeners();
 
     this._setup();
@@ -1138,7 +1138,7 @@ class CarouselElement extends BaseElement {
     }
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this._removeEventListeners();
   }
 }

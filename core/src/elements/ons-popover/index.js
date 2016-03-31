@@ -207,7 +207,7 @@ class PopoverElement extends BaseElement {
     return this._popover.children[1];
   }
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -492,7 +492,7 @@ class PopoverElement extends BaseElement {
     window.addEventListener('resize', this._boundOnChange, false);
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this._mask.removeEventListener('click', this._boundCancel, false);
 
     this._deviceBackButtonHandler.destroy();
@@ -504,7 +504,7 @@ class PopoverElement extends BaseElement {
     window.removeEventListener('resize', this._boundOnChange, false);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }

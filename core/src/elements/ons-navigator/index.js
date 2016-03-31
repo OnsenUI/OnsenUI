@@ -705,10 +705,10 @@ class NavigatorElement extends BaseElement {
     return this.pushPage(options.page, options);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
@@ -727,7 +727,7 @@ class NavigatorElement extends BaseElement {
     });
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
   }

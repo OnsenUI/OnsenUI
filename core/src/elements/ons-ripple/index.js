@@ -67,7 +67,7 @@ class RippleElement extends BaseElement {
    *   [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     this.classList.add('ripple');
     if (!this.hasAttribute('_compiled')) {
       this._compile();
@@ -79,7 +79,7 @@ class RippleElement extends BaseElement {
     this._animator = new Animator();
 
     ['color', 'center', 'start-radius', 'background'].forEach(e => {
-      this._attributeChangedCallback(e, null, this.getAttribute(e));
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
 
@@ -206,7 +206,7 @@ class RippleElement extends BaseElement {
     this._parentNode.removeEventListener('dragstart', this._boundOnDragStart);
   }
 
-  _attributeChangedCallback(name, last, current) {
+  attributeChangedCallback(name, last, current) {
     if (name === 'start-radius') {
       this._minR = Math.max(0, parseFloat(current) || 0);
     }

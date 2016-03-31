@@ -144,7 +144,7 @@ class TabElement extends BaseElement {
    *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -318,11 +318,11 @@ get pageElement() {
     return this.classList.contains('active');
   }
 
-  _detachedCallback() {
+  detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
-  _attachedCallback() {
+  attachedCallback() {
     this._ensureElementPosition();
 
     const tabbar = this._findTabbarElement();

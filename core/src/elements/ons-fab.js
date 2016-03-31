@@ -59,7 +59,7 @@ class FabElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  _createdCallback() {
+  createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
