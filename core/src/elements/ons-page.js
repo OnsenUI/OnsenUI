@@ -121,18 +121,18 @@ class PageElement extends BaseElement {
    */
 
   /**
-   * @attribute on[-]infinite[-]scroll
+   * @attribute on-infinite-scroll
    * @type {String}
    * @description
-   *   [en]Path of the function to be executed on infinite scrolling. Example: app.loadData[/en]
-   *   [ja]機能スクロール上で実行されている関数のパス。例：app.loadData[/ja]
+   *   [en]Path of the function to be executed on infinite scrolling. Example: `app.loadData`. The function receives a done callback that must be called when it's finished.[/en]
+   *   [ja][/ja]
    */
 
   /**
    * @property onInfiniteScroll
    * @description
-   *  [en]Function to be executed on infinite scroll. [/en]
-   *  [ja]機能スクロール上で実行されている関数。[/ja]
+   *  [en]Function to be executed on infinite scroll. The function receives a done callback that must be called when it's finished.[/en]
+   *  [ja][/ja]
    */
 
   createdCallback() {
@@ -167,8 +167,9 @@ class PageElement extends BaseElement {
 
     this._tryToFillStatusBar();
 
-    const infiniteScroll = this.getAttribute('on-infinite-scroll') || this.getAttribute('oninfinitescroll');
-    this.attributeChangedCallback('oninfinitescroll', null, infiniteScroll);
+    if (this.hasAttribute('on-infinite-scroll')) {
+      this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
+    }
   }
 
   updateBackButton(shouldShowButton) {
@@ -342,7 +343,7 @@ class PageElement extends BaseElement {
       this._isMuted = this.hasAttribute('_muted');
     } else if (name === '_skipinit') {
       this._skipInit = this.hasAttribute('_skipinit');
-    } else if (name.match(/on-?infinite-?scroll/i)) {
+    } else if (name === 'on-infinite-scroll') {
       if (current === null) {
         this.onInfiniteScroll = null;
       } else {

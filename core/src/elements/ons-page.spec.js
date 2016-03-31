@@ -173,7 +173,7 @@ describe('OnsPageElement', () => {
       window._testApp = {
         a: () => i += 42
       };
-      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
       element._onInfiniteScroll();
       expect(i).to.equal(42);
       delete window._testApp;
@@ -184,10 +184,10 @@ describe('OnsPageElement', () => {
 
     it('infiniteScroll doesn\'t throw error until it\'s called', () => {
       let app = {a: () => 42};
-      element.attributeChangedCallback('oninfinitescroll', '', '_testApp.a');
+      element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
       window._testApp = app;
       expect(() => element._onInfiniteScroll()).to.not.throw(Error);
-      element.attributeChangedCallback('oninfinitescroll', '', 'doge');
+      element.attributeChangedCallback('on-infinite-scroll', '', 'doge');
       expect(() => element._onInfiniteScroll()).to.throw(Error);
       delete window._testApp;
     });
