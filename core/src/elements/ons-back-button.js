@@ -19,6 +19,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 var scheme = {
   '': 'back-button--*',
@@ -53,9 +54,11 @@ var scheme = {
 class BackButtonElement extends BaseElement {
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
 
     this._options = {};
     this._boundOnClick = this._onClick.bind(this);
@@ -66,18 +69,25 @@ class BackButtonElement extends BaseElement {
 
     this.classList.add('back-button');
 
-    const label = util.createElement(`
-      <span class="back-button__label">${this.innerHTML}</span>
-    `);
+    if (!util.findChild(this, '.back-button__label')) {
+      const label = util.createElement(`
+        <span class="back-button__label"></span>
+      `);
 
-    this.innerHTML = '';
+      while (this.childNodes[0]) {
+        label.appendChild(this.childNodes[0]);
+      }
 
-    const icon = util.createElement(`
-      <span class="back-button__icon"></span>
-    `);
+      this.appendChild(label);
+    }
 
-    this.appendChild(icon);
-    this.appendChild(label);
+    if (!util.findChild(this, '.back-button__icon')) {
+      const icon = util.createElement(`
+        <span class="back-button__icon"></span>
+      `);
+
+      this.insertBefore(icon, this.children[0]);
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
