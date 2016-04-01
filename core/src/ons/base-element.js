@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-export default (() => {
+function getElementClass() {
   if (typeof HTMLElement !== 'function') {
     const BaseElement = () => {};
     BaseElement.prototype = document.createElement('div');
@@ -23,4 +23,25 @@ export default (() => {
   } else {
     return HTMLElement;
   }
-})();
+}
+
+export default class BaseElement extends getElementClass() {
+
+  onContentReady(fn) {
+    if (this.childNodes.length > 0) {
+      fn();
+      return;
+    }
+
+    const observer = new MutationObserver(changes => {
+      fn();
+      observer.disconnect();
+    });
+
+    observer.observe(this, {
+      childList: true,
+      characterData: true
+    });
+  }
+
+}
