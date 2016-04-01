@@ -1,7 +1,7 @@
 'use strict';
 
 describe('OnsScrollbarElement', () => {
-  var div, text, container, scrollbar, content;
+  let div, text, container, scrollbar, content;
   const spyOn = chai.spy.on.bind(chai.spy, OnsScrollbarElement.prototype);
 
   const getValue = (element, property) => {
@@ -33,14 +33,14 @@ describe('OnsScrollbarElement', () => {
 
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
-      var spy = spyOn('_compile'),
+      const spy = spyOn('_compile'),
         _ = new OnsScrollbarElement();
 
       expect(spy).to.have.been.called.once;
     });
 
     it('is not called when an element is copied', () => {
-      var spy = spyOn('_compile'),
+      const spy = spyOn('_compile'),
         div1 = document.createElement('div'),
         div2 = document.createElement('div');
 
@@ -59,7 +59,7 @@ describe('OnsScrollbarElement', () => {
 
   describe('#_attach()', () => {
     it('is called when an element is attached to the DOM', () => {
-      var spy = spyOn('_attach');
+      const spy = spyOn('_attach');
 
       div.appendChild(new OnsScrollbarElement());
 
@@ -67,7 +67,7 @@ describe('OnsScrollbarElement', () => {
     });
 
     it('is makes sure the parent will be scrollable', () => {
-      var div = document.createElement('div');
+      const div = document.createElement('div');
       div.appendChild(new OnsScrollbarElement());
 
       expect(getValue(div, 'position')).to.not.equal('static');
@@ -75,7 +75,7 @@ describe('OnsScrollbarElement', () => {
     });
 
     it('is not called when an element is moved', () => {
-      var spy = spyOn('_attach'),
+      const spy = spyOn('_attach'),
         div1 = document.createElement('div'),
         div2 = document.createElement('div');
 
@@ -93,9 +93,9 @@ describe('OnsScrollbarElement', () => {
 
   describe('#_onScroll()', () => {
     it('is called when scrolling', (done) => {
-      var spy = spyOn('_onScroll');
-      var div = document.createElement('div');
-      var scrollbar = new OnsScrollbarElement();
+      const spy = spyOn('_onScroll');
+      const div = document.createElement('div');
+      const scrollbar = new OnsScrollbarElement();
 
       div.style.width = '50px';
       div.style.height = '50px';
@@ -114,13 +114,13 @@ describe('OnsScrollbarElement', () => {
     });
 
     it('calls _updateScrollbarLocation', () => {
-      var spy = spyOn('_updateScrollbarLocation');
+      const spy = spyOn('_updateScrollbarLocation');
       scrollbar._onScroll();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls updateScrollbar when updateOnScroll flag is true', () => {
-      var spy = spyOn('updateScrollbar');
+      const spy = spyOn('updateScrollbar');
       scrollbar._updateOnScroll = true;
       scrollbar._onScroll();
       expect(spy).to.have.been.called.once;
@@ -148,7 +148,7 @@ describe('OnsScrollbarElement', () => {
 
   describe('#updateScrollbar()', () => {
     it('changes the height', () => {
-      var height = getValue(scrollbar._scroll, 'height');
+      const height = getValue(scrollbar._scroll, 'height');
 
       content.innerHTML += content.innerHTML;
       scrollbar.updateScrollbar();
@@ -159,7 +159,7 @@ describe('OnsScrollbarElement', () => {
   describe('#_updateScrollbarLocation()', () => {
     it('changes the location', () => {
       content.scrollTop = 0.15 * (content.scrollHeight - content.clientHeight);
-      var y = getValue(scrollbar._scroll, 'top');
+      const y = getValue(scrollbar._scroll, 'top');
 
       content.innerHTML += content.innerHTML;
       scrollbar._updateScrollbarLocation();
@@ -170,7 +170,7 @@ describe('OnsScrollbarElement', () => {
 
   describe('#attachedCallback()', () => {
     it('updates scrollbar', () => {
-      var div = document.createElement('div'),
+      const div = document.createElement('div'),
         spy = spyOn('updateScrollbar');
 
       document.body.appendChild(div);
@@ -181,7 +181,7 @@ describe('OnsScrollbarElement', () => {
     });
 
     it('cares about native attribute', () => {
-      var div = document.createElement('div');
+      const div = document.createElement('div');
       div.innerHTML = '<ons-scrollbar native></ons-scrollbar>';
 
       document.body.appendChild(div);
