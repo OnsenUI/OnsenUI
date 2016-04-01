@@ -20,6 +20,7 @@ import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'navigation-bar--*',
@@ -76,7 +77,7 @@ class ToolbarElement extends BaseElement {
    */
 
   createdCallback() {
-    this.onContentReady(() => {
+    contentReady(this, () => {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
       }

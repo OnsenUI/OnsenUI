@@ -15,15 +15,19 @@ limitations under the License.
 
 */
 
-function getElementClass() {
-  if (typeof HTMLElement !== 'function') {
-    const BaseElement = () => {};
-    BaseElement.prototype = document.createElement('div');
-    return BaseElement;
-  } else {
-    return HTMLElement;
+export default function contentReady(element, fn) {
+  if (element.childNodes.length > 0) {
+    fn();
+    return;
   }
-}
 
-export default class BaseElement extends getElementClass() {
+  const observer = new MutationObserver(changes => {
+    fn();
+    observer.disconnect();
+  });
+
+  observer.observe(element, {
+    childList: true,
+    characterData: true
+  });
 }
