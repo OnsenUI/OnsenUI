@@ -21,6 +21,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'page--*',
@@ -138,38 +139,42 @@ class PageElement extends BaseElement {
   createdCallback() {
     this.classList.add('page');
 
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
 
-    this._isShown = false;
-    this._contentElement = this._getContentElement();
-    this._isMuted = this.hasAttribute('_muted');
-    this._skipInit = this.hasAttribute('_skipinit');
-    this.eventDetail = {
-      page: this
-    };
-    this.options = {};
+      this._isShown = false;
+      this._contentElement = this._getContentElement();
+      this._isMuted = this.hasAttribute('_muted');
+      this._skipInit = this.hasAttribute('_skipinit');
+      this.eventDetail = {
+        page: this
+      };
+      this.options = {};
+    });
   }
 
   attachedCallback() {
-    if (!this._isMuted) {
-      if (this._skipInit) {
-        this.removeAttribute('_skipinit');
-      } else {
-        util.triggerElementEvent(this, 'init', this.eventDetail);
+    contentReady(this, () => {
+      if (!this._isMuted) {
+        if (this._skipInit) {
+          this.removeAttribute('_skipinit');
+        } else {
+          util.triggerElementEvent(this, 'init', this.eventDetail);
+        }
       }
-    }
 
-    if (!util.hasAnyComponentAsParent(this)) {
-      setImmediate(() => this._show());
-    }
+      if (!util.hasAnyComponentAsParent(this)) {
+        setImmediate(() => this._show());
+      }
 
-    this._tryToFillStatusBar();
+      this._tryToFillStatusBar();
 
-    if (this.hasAttribute('on-infinite-scroll')) {
-      this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
-    }
+      if (this.hasAttribute('on-infinite-scroll')) {
+        this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
+      }
+    });
   }
 
   updateBackButton(shouldShowButton) {
@@ -359,15 +364,18 @@ class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    const background = util.create('.page__background');
-    const content = util.create('.page__content');
+    if (!util.findChild(this, '.page__background') || !util.findChild(this, '.page__content')) {
 
-    while (this.firstChild) {
-      content.appendChild(this.firstChild);
+      const background = util.create('.page__background');
+      const content = util.create('.page__content');
+
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
+
+      this.appendChild(background);
+      this.appendChild(content);
     }
-
-    this.appendChild(background);
-    this.appendChild(content);
 
     ModifierUtil.initModifier(this, scheme);
 
