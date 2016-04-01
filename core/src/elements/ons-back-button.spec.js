@@ -39,7 +39,7 @@ describe('OnsBackButtonElement', () => {
       div = ons._util.createElement(`
         <div>
           <ons-template id="page1">
-            <ons-page id="p1"></ons-page>
+            <ons-page id="p1">page1 content</ons-page>
           </ons-template>
           <ons-template id="page2">
             <ons-page id="p2">
@@ -69,11 +69,11 @@ describe('OnsBackButtonElement', () => {
         nav.addEventListener('postpop', () => {
           resolve();
         });
-      });
 
-      nav.pushPage('page2').then(function(page) {
-        let element = nav.querySelector('ons-back-button');
-        nav.querySelector('ons-back-button')._onClick();
+        nav.pushPage('page2').then(function(page) {
+          let element = nav.querySelector('ons-back-button');
+          nav.querySelector('ons-back-button')._onClick();
+        });
       });
 
       return expect(promise).to.eventually.be.fulfilled;
