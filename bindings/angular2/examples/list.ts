@@ -10,9 +10,9 @@ import {
 @Component({
   selector: 'app',
   template: `
-  <ons-page class="page" _compiled>
+  <ons-page>
     <ons-toolbar>
-      <div class="center">Popover</div>
+      <div class="center">List</div>
     </ons-toolbar>
     <div class="page__background"></div>
     <div class="page__content">
@@ -22,11 +22,21 @@ import {
         </ons-list-header>
 
         <ons-list-item>
-          One
+          <div class="center">
+            One
+          </div>
+          <div class="right">
+            label
+          </div>
         </ons-list-item>
 
         <ons-list-item>
-          Two
+          <div class="center">
+            Two
+          </div>
+          <div class="right">
+            label
+          </div>
         </ons-list-item>
       </ons-list>
     </div>
