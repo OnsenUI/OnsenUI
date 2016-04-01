@@ -4,7 +4,7 @@ describe('OnsPageElement', () => {
   let element;
 
   beforeEach(() => {
-    element = new OnsPageElement();
+    element = ons._util.createElement('<ons-page>content</ons-page>');
   });
 
   afterEach(() => {
@@ -227,7 +227,7 @@ describe('OnsPageElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-page');
+      let e = ons._util.createElement('<ons-page>content</ons-page>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
