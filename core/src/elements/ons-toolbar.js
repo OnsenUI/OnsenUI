@@ -76,9 +76,11 @@ class ToolbarElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this.onContentReady(() => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
 
     this._tryToEnsureNodePosition();
     setImmediate(() => this._tryToEnsureNodePosition());
@@ -136,18 +138,13 @@ class ToolbarElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add('navigation-bar');
-
     this._ensureToolbarItemElements();
-
     ModifierUtil.initModifier(this, scheme);
-
     this.setAttribute('_compiled', '');
   }
 
   _ensureToolbarItemElements() {
-
     var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
 
     for (var i = 0; i < this.childNodes.length; i++) {
@@ -189,9 +186,9 @@ class ToolbarElement extends BaseElement {
 
     return element;
   }
-
 }
 
 window.OnsToolbarElement = document.registerElement('ons-toolbar', {
   prototype: ToolbarElement.prototype
 });
+

@@ -27,4 +27,21 @@ function getElementClass() {
 
 export default class BaseElement extends getElementClass() {
 
+  onContentReady(fn) {
+    if (this.childNodes.length > 0) {
+      fn();
+      return;
+    }
+
+    const observer = new MutationObserver(changes => {
+      fn();
+      observer.disconnect();
+    });
+
+    observer.observe(this, {
+      childList: true,
+      characterData: true
+    });
+  }
+
 }
