@@ -6,11 +6,10 @@ describe('OnsBackButtonElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let element = new OnsBackButtonElement();
+    let element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
 
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('back-button--hoge')).to.be.true;
-
 
     element.setAttribute('modifier', 'foo bar');
     expect(element.classList.contains('back-button--foo')).to.be.true;
@@ -24,7 +23,7 @@ describe('OnsBackButtonElement', () => {
   });
 
   it('has two children', () => {
-    let element = new OnsBackButtonElement();
+    let element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
     document.body.appendChild(element);
 
     expect(element.children[0]).to.be.ok;
@@ -156,7 +155,7 @@ describe('OnsBackButtonElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-back-button');
+      let e = ons._util.createElement('<ons-back-button>label</ons-back-button>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
