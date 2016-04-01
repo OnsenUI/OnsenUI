@@ -10,7 +10,7 @@
       colors: {
         // Global
         'background-color': '#f9f9f9',
-        'material-background-color': '#fafafa',
+        'material-background-color': '#ffffff',
         'text-color': '#1f1f21',
         'sub-text-color': '#999',
         'highlight-color': 'rgba(24,103,194,0.81)',
@@ -96,10 +96,10 @@
         'material-text-input-inactive-color': '#afafaf',
 
         // Material Dialog
-        'material-dialog-background-color': '#fafafa',
+        'material-dialog-background-color': '#ffffff',
 
         // Material Alert Dialog
-        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-background-color': '#ffffff',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
         'material-alert-dialog-button-color': '#009688',
@@ -118,7 +118,7 @@
         'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
-        'fab-text-color': '#fafafa',
+        'fab-text-color': '#ffffff',
         'fab-background-color': '#009688'
       }
     },
@@ -128,7 +128,7 @@
       colors: {
         // Global
         'background-color': '#fff',
-        'material-background-color': '#fafafa',
+        'material-background-color': '#ffffff',
         'text-color': '#1f1f21',
         'sub-text-color': '#999',
         'highlight-color': '#1284ff',
@@ -214,10 +214,10 @@
         'material-text-input-inactive-color': '#afafaf',
 
         // Material Dialog
-        'material-dialog-background-color': '#fafafa',
+        'material-dialog-background-color': '#ffffff',
 
         // Material Alert Dialog
-        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-background-color': '#ffffff',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
         'material-alert-dialog-button-color': '#009688',
@@ -236,7 +236,7 @@
         'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
-        'fab-text-color': '#fafafa',
+        'fab-text-color': '#ffffff',
         'fab-background-color': '#009688'
       }
     },
@@ -354,7 +354,7 @@
         'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
-        'fab-text-color': '#fafafa',
+        'fab-text-color': '#ffffff',
         'fab-background-color': '#80cbc4'
       }
     },
@@ -363,7 +363,7 @@
       colors: {
         // Global
         'background-color': '#f9f9f9',
-        'material-background-color': '#fafafa',
+        'material-background-color': '#ffffff',
         'text-color': '#333',
         'sub-text-color': '#999',
         'highlight-color': '#eb482f',
@@ -449,10 +449,10 @@
         'material-text-input-inactive-color': '#afafaf',
 
         // Material Dialog
-        'material-dialog-background-color': '#fafafa',
+        'material-dialog-background-color': '#ffffff',
 
         // Material Alert Dialog
-        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-background-color': '#ffffff',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
         'material-alert-dialog-button-color': '#009688',
@@ -471,7 +471,7 @@
         'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
-        'fab-text-color': '#fafafa',
+        'fab-text-color': '#ffffff',
         'fab-background-color': '#009688'
       }
     },
@@ -481,7 +481,7 @@
       colors: {
         // Global
         'background-color': '#f3f3f3',
-        'material-background-color': '#fafafa',
+        'material-background-color': '#ffffff',
         'text-color': '#524b57',
         'sub-text-color': '#ccc',
         'highlight-color': '#8962ed',
@@ -567,10 +567,10 @@
         'material-text-input-inactive-color': '#afafaf',
 
         // Material Dialog
-        'material-dialog-background-color': '#fafafa',
+        'material-dialog-background-color': '#ffffff',
 
         // Material Alert Dialog
-        'material-alert-dialog-background-color': '#fafafa',
+        'material-alert-dialog-background-color': '#ffffff',
         'material-alert-dialog-title-color': '#212121',
         'material-alert-dialog-content-color': '#727272',
         'material-alert-dialog-button-color': '#009688',
@@ -589,7 +589,7 @@
         'material-tabbar-highlight-color': '#26a69a',
 
         // Floating Action Button
-        'fab-text-color': '#fafafa',
+        'fab-text-color': '#ffffff',
         'fab-background-color': '#009688'
       }
     }
