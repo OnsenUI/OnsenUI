@@ -6,10 +6,10 @@ import {
 } from '../src/angular2-onsenui';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   directives: [OnsCarousel],
   template: `
-  <ons-page _compiled>
+  <ons-page>
     <ons-toolbar>
       <div class="left"><ons-toolbar-button (click)="myCarousel.prev()">Prev</ons-toolbar-button></div>
       <div class="center">Carousel Example</div>
