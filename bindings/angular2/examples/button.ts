@@ -9,9 +9,11 @@ declare var alert: Function;
     <ons-toolbar>
       <div class="center">Button Example</div>
     </ons-toolbar>
-
-    <div style="text-align: center; margin: 10px;">
-      <ons-button (click)="onClick()">MyButton</ons-button>
+    <div class="page__background"></div>
+    <div class="page__content">
+      <div style="text-align: center; margin: 10px;">
+        <ons-button (click)="onClick()">MyButton</ons-button>
+      </div>
     </div>
   </ons-page>
     `
