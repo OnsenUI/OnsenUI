@@ -119,7 +119,7 @@ class ScrollbarElement extends BaseElement {
   }
 
   _attach() {
-    var styles = window.getComputedStyle(this.parentNode);
+    const styles = window.getComputedStyle(this.parentNode);
     if (styles.getPropertyValue('position') === 'static') {
       this.parentNode.style.position = 'relative';
     }
@@ -170,7 +170,7 @@ class ScrollbarElement extends BaseElement {
    *   [ja][/ja]
    */
   updateScrollbar() {
-    var [content, scroll, container] = [this._content, this._scroll, this];
+    const [content, scroll, container] = [this._content, this._scroll, this];
     if (!this._hidden && !this._native) {
       scroll.style.display = (content.clientHeight >= content.scrollHeight) ? 'none' : 'block';
       scroll.style.height = Math.round(this._height || (container.clientHeight * content.clientHeight / content.scrollHeight)) + 'px';
@@ -185,10 +185,10 @@ class ScrollbarElement extends BaseElement {
   }
 
   _onDragStart(e) {
-    var startY = this._scroll.offsetTop;
-    var onMove = (e) => {
+    const startY = this._scroll.offsetTop;
+    const onMove = (e) => {
       this.classList.add('scrollbar-dragging');
-      var progress = Math.min(1, Math.max(0, (startY + e.gesture.deltaY) / this._scrollMax));
+      const progress = Math.min(1, Math.max(0, (startY + e.gesture.deltaY) / this._scrollMax));
       this._content.scrollTop = this._contentMax * progress;
     };
     document.addEventListener('drag', onMove);
