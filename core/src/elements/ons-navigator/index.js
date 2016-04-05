@@ -30,7 +30,6 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import NavigatorPage from './navigator-page';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
@@ -254,7 +253,7 @@ class NavigatorElement extends BaseElement {
     return this.pages.length > 1;
   }
 
-  _prepareOptions(page, options = {}) {
+  _prepareOptions(options = {}, page) {
     if (typeof page === 'object' && page !== null) {
       options = page;
       page = options.page;
@@ -262,6 +261,7 @@ class NavigatorElement extends BaseElement {
     if (typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
+    page = page || options.page;
 
     return util.extend({}, this.options || {}, options, {page});
   }
@@ -296,7 +296,7 @@ class NavigatorElement extends BaseElement {
    */
 
   replacePage(page, options = {}) {
-    options = this._prepareOptions(page, options);
+    options = this._prepareOptions(options, page);
     const callback = options.onTransitionEnd;
 
     options.onTransitionEnd = () => {
@@ -312,7 +312,9 @@ class NavigatorElement extends BaseElement {
 
   _updateLastPageBackButton() {
     const index = this.pages.length - 1;
-    this.pages[index].updateBackButton(index > 0);
+    if (index >= 0) {
+      this.pages[index].updateBackButton(index > 0);
+    }
   }
 
   /**
@@ -454,7 +456,7 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the inserted page object
    */
   insertPage(index, page, options = {}) {
-    options = this._prepareOptions(page, options);
+    options = this._prepareOptions(options, page);
     index = this._normalizeIndex(index);
 
     if (index >= this.pages.length) {
@@ -583,7 +585,7 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   resetToPage(page, options = {}) {
-    options = this._prepareOptions(page, options);
+    options = this._prepareOptions(options, page);
 
     if (!options.animator && !options.animation) {
       options.animation = 'none';
@@ -667,19 +669,20 @@ class NavigatorElement extends BaseElement {
    */
 
   pushPage(page, options = {}) {
-    options = this._prepareOptions(page, options);
+    options = this._prepareOptions(options, page);
     const run = templateHTML => new Promise(resolve => {
       this.appendChild(this._createPageElement(templateHTML));
       resolve();
     });
-    const html = options.pageHTML;
 
-    return this._pushPage(options, () => html ? run(html) : internal.getPageHTMLAsync(page).then(run));
+    if (options.pageHTML) {
+      return this._pushPage(options, () => run(options.pageHTML));
+    }
+    return this._pushPage(options, () => internal.getPageHTMLAsync(options.page).then(run));
   }
 
 
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
-    console.log(this._isRunning);
     if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
@@ -780,12 +783,17 @@ class NavigatorElement extends BaseElement {
    * @return {Promise} Resolves to the new top page object.
    */
   bringPageTop(item, options = {}) {
+    if (['number', 'string'].indexOf(typeof item) === -1) {
+      throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+    }
     const index = typeof item === 'number' ? this._normalizeIndex(item) : this._lastIndexOfPage(item);
     const page = this.pages[index];
 
     if (index < 0) {
       return this.pushPage(item, options);
     }
+    options = this._prepareOptions(options);
+
     if (index === this.pages.length - 1) {
       return Promise.resolve(page);
     }
@@ -799,7 +807,7 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    options = util.extend({}, options, {
+    util.extend(options, {
       page: page.name,
       _linked: true
     });
