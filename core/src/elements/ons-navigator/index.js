@@ -28,7 +28,6 @@ import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
-import NavigatorPage from './navigator-page';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 
 const _animatorDict = {
@@ -221,36 +220,6 @@ class NavigatorElement extends BaseElement {
       baseClassName: 'NavigatorTransitionAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
-  }
-
-
-  /**
-   * @property {object} [options]
-   * @description
-   *   [en]Default options object.[/en]
-   *   [ja][/ja]
-   */
-  get options() {
-    return this._options;
-  }
-
-  set options(object) {
-    this._options = object;
-  }
-
-  set _isRunning(value) {
-    this.setAttribute('_is-running', value ? 'true' : 'false');
-  }
-
-  get _isRunning() {
-   return JSON.parse(this.getAttribute('_is-running'));
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  canPopPage() {
-    return this.pages.length > 1;
   }
 
   _prepareOptions(options = {}, page) {
@@ -871,23 +840,6 @@ class NavigatorElement extends BaseElement {
     return isCanceled;
   }
 
-  /**
-   * @param {String} page
-   * @param {Element} element
-   * @param {Object} options
-   */
-  _createPageObject(page, element, options) {
-
-    options.animator = this._animatorFactory.newAnimator(options);
-
-    return new NavigatorPage({
-      page: page,
-      element: element,
-      options: options,
-      navigator: this
-    });
-  }
-
   _createPageElement(templateHTML) {
     const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
 
@@ -900,6 +852,28 @@ class NavigatorElement extends BaseElement {
     return pageElement;
   }
 
+
+  /**
+   * @property {object} [options]
+   * @description
+   *   [en]Default options object.[/en]
+   *   [ja][/ja]
+   */
+  get options() {
+    return this._options;
+  }
+
+  set options(object) {
+    this._options = object;
+  }
+
+  set _isRunning(value) {
+    this.setAttribute('_is-running', value ? 'true' : 'false');
+  }
+
+  get _isRunning() {
+   return JSON.parse(this.getAttribute('_is-running'));
+  }
 }
 
 window.OnsNavigatorElement = document.registerElement('ons-navigator', {
