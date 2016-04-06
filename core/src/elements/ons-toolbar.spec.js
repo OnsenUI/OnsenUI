@@ -4,7 +4,7 @@ describe('OnsToolbarElement', () => {
   let element;
 
   beforeEach(() => {
-    element = new OnsToolbarElement();
+    element = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');
   });
 
   afterEach(() => {
@@ -112,7 +112,7 @@ describe('OnsToolbarElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-toolbar');
+      let e = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

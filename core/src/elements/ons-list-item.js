@@ -19,6 +19,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.list__item': 'list__item--*',
@@ -91,9 +92,11 @@ class ListItemElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
   }
 
   _compile() {
@@ -122,12 +125,12 @@ class ListItemElement extends BaseElement {
       center = document.createElement('div');
 
       if (!left && !right) {
-        center.innerHTML = this.innerHTML;
-        this.innerHTML = '';
+        while (this.childNodes[0]) {
+          center.appendChild(this.childNodes[0]);
+        }
       } else {
-
         for (let i = this.childNodes.length - 1; i >= 0; i--) {
-          let el = this.childNodes[i];
+          const el = this.childNodes[i];
           if (el !== left && el !== right) {
             center.insertBefore(el, center.firstChild);
           }
