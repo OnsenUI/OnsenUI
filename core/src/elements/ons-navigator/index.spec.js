@@ -507,16 +507,6 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  describe('#canPopPage()', () => {
-    it('returns whether a page can be popped', (done) => {
-      expect(nav.canPopPage()).to.be.false;
-      nav.pushPage('hoge', {onTransitionEnd: () => {
-        expect(nav.canPopPage()).to.be.true;
-        done();
-      }});
-    });
-  });
-
   describe('#_destroy()', () => {
     it('destroys all the pages', () => {
       expect(nav.pages.length).to.equal(1);
