@@ -62,8 +62,13 @@ ons-toolbar:not([inline]), ons-bottom-toolbar:not([inline]) {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
   z-index: 10000;
+}
+ons-toolbar:not([inline]) {
+  top: 0;
+}
+ons-bottom-toolbar:not([inline]) {
+  bottom: 0;
 }
 
 .scroller {
