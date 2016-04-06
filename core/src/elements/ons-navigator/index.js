@@ -318,11 +318,6 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepop event.');
     }
 
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
     const animator = this._animatorFactory.newAnimator(options);
     const l = this.pages.length;
 
@@ -334,6 +329,9 @@ class NavigatorElement extends BaseElement {
       var leavePage = this.pages[l - 1];
       var enterPage = this.pages[l - 2];
       enterPage.style.display = 'block';
+
+      options.animation = leavePage.options.animation || options.animation;
+      options.animationOptions = util.extend({}, leavePage.options.animationOptions, options.animationOptions || {});
 
       const callback = () => {
         enterPage._show();
@@ -416,8 +414,9 @@ class NavigatorElement extends BaseElement {
     options = util.extend({}, this.options || {}, options);
 
     options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+      options.animationOptions || {}
     );
 
     const animator = this._animatorFactory.newAnimator(options);
@@ -554,6 +553,12 @@ class NavigatorElement extends BaseElement {
         name: options.page,
         options: options
       });
+
+      options.animationOptions = util.extend(
+        {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+        options.animationOptions || {}
+      );
 
       return new Promise(resolve => {
         element.style.display = 'none';
