@@ -48,7 +48,7 @@ const VerticalModeTrait = {
   },
 
   _updateOffset: function(){
-    if (this.isCentered()) {
+    if (this.centered) {
       const height = (this._dimensions.height || 0) - parseInt(this._style.paddingTop, 10) - parseInt(this._style.paddingBottom, 10);
       this._offset = -(height - this._getCarouselItemSize()) / 2;
     }
@@ -106,7 +106,7 @@ const HorizontalModeTrait = {
   },
 
   _updateOffset: function(){
-    if (this.isCentered()) {
+    if (this.centered) {
       const width = (this._dimensions.width || 0) - parseInt(this._style.paddingLeft, 10) - parseInt(this._style.paddingRight, 10);
       this._offset = -(width - this._getCarouselItemSize()) / 2;
     }
@@ -342,8 +342,8 @@ class CarouselElement extends BaseElement {
   _saveLastState() {
     this._lastState = {
       elementSize: this._getCarouselItemSize(),
-      carouselElementCount: this.getCarouselItemCount(),
-      width: this._getCarouselItemSize() * this.getCarouselItemCount()
+      carouselElementCount: this.itemCount,
+      width: this._getCarouselItemSize() * this.itemCount
     };
   }
 
@@ -371,7 +371,7 @@ class CarouselElement extends BaseElement {
     const index = parseInt(this.getAttribute('initial-index'), 10);
 
     if (typeof index === 'number' && !isNaN(index)) {
-      return Math.max(Math.min(index, this.getCarouselItemCount() - 1), 0);
+      return Math.max(Math.min(index, this.itemCount - 1), 0);
     } else {
       return 0;
     }
@@ -406,83 +406,8 @@ class CarouselElement extends BaseElement {
   }
 
   /**
-   * @method setSwipeable
-   * @signature setSwipeable(swipeable)
-   * @param {Boolean} swipeable
-   *   [en]If value is true the carousel will be swipeable.[/en]
-   *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
-   * @description
-   *   [en]Set whether the carousel is swipeable or not.[/en]
-   *   [ja]swipeできるかどうかを指定します。[/ja]
-   */
-  setSwipeable(swipeable) {
-    if (swipeable) {
-      this.setAttribute('swipeable', '');
-    } else {
-      this.removeAttribute('swipeable');
-    }
-  }
-
-  /**
-   * @method isSwipeable
-   * @signature isSwipeable()
-   * @return {Boolean}
-   *   [en]true if the carousel is swipeable.[/en]
-   *   [ja]swipeableであればtrueを返します。[/ja]
-   * @description
-   *   [en]Returns whether the carousel is swipeable or not.[/en]
-   *   [ja]swipeable属性があるかどうかを返します。[/ja]
-   */
-  isSwipeable() {
-    return this.hasAttribute('swipeable');
-  }
-
-  /**
-   * @method setAutoScrollRatio
-   * @signature setAutoScrollRatio(ratio)
-   * @param {Number} ratio
-   *   [en]The desired ratio.[/en]
-   *   [ja]オートスクロールするのに必要な0.0から1.0までのratio値を指定します。[/ja]
-   * @description
-   *   [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
-   *   [ja]オートスクロールするのに必要なratio値を指定します。0.0から1.0を必ず指定しなければならない。[/ja]
-   */
-  setAutoScrollRatio(ratio) {
-    if (ratio < 0.0 || ratio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
-    this.setAttribute('auto-scroll-ratio', ratio);
-  }
-
-  /**
-   * @method getAutoScrollRatio
-   * @signature getAutoScrollRatio()
-   * @return {Number}
-   *   [en]The current auto scroll ratio.[/en]
-   *   [ja]現在のオートスクロールのratio値。[/ja]
-   * @description
-   *   [en]Returns the current auto scroll ratio.[/en]
-   *   [ja]現在のオートスクロールのratio値を返します。[/ja]
-   */
-  getAutoScrollRatio() {
-    const attr = this.getAttribute('auto-scroll-ratio');
-
-    if (!attr) {
-      return 0.5;
-    }
-
-    const scrollRatio = parseFloat(attr);
-    if (scrollRatio < 0.0 || scrollRatio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
-    return isNaN(scrollRatio) ? 0.5 : scrollRatio;
-  }
-
-  /**
-   * @method setActiveCarouselItemIndex
-   * @signature setActiveCarouselItemIndex(index, [options])
+   * @method setActiveIndex
+   * @signature setActiveIndex(index, [options])
    * @param {Number} index
    *   [en]The index that the carousel should be set to.[/en]
    *   [ja]carousel要素のインデックスを指定します。[/ja]
@@ -501,7 +426,7 @@ class CarouselElement extends BaseElement {
    * @param {Object} [options.animationOptions]
    * @return {Promise} Resolves to the carousel element
    */
-  setActiveCarouselItemIndex(index, options = {}) {
+  setActiveIndex(index, options = {}) {
 
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
@@ -513,7 +438,7 @@ class CarouselElement extends BaseElement {
       this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
     );
 
-    index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
+    index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = (this._offset || 0) + this._getCarouselItemSize() * index;
     const max = this._calculateMaxScroll();
 
@@ -526,8 +451,8 @@ class CarouselElement extends BaseElement {
   }
 
   /**
-   * @method getActiveCarouselItemIndex
-   * @signature getActiveCarouselItemIndex()
+   * @method getActiveIndex
+   * @signature getActiveIndex()
    * @return {Number}
    *   [en]The current carousel item index.[/en]
    *   [ja]現在表示しているカルーセル要素のインデックスが返されます。[/ja]
@@ -535,9 +460,9 @@ class CarouselElement extends BaseElement {
    *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
    *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
    */
-  getActiveCarouselItemIndex() {
+  getActiveIndex() {
     const scroll = this._scroll - (this._offset || 0);
-    const count = this.getCarouselItemCount();
+    const count = this.itemCount;
     const size = this._getCarouselItemSize();
 
     if (scroll < 0) {
@@ -578,7 +503,7 @@ class CarouselElement extends BaseElement {
    *   [ja]次のons-carousel-itemを表示します。[/ja]
    */
   next(options) {
-    return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() + 1, options);
+    return this.setActiveIndex(this.getActiveIndex() + 1, options);
   }
 
   /**
@@ -604,135 +529,7 @@ class CarouselElement extends BaseElement {
    *   [ja]前のons-carousel-itemを表示します。[/ja]
    */
   prev(options) {
-    return this.setActiveCarouselItemIndex(this.getActiveCarouselItemIndex() - 1, options);
-  }
-
-  /**
-   * @method setAutoScrollEnabled
-   * @signature setAutoScrollEnabled(enabled)
-   * @param {Boolean} enabled
-   *   [en]If true auto scroll will be enabled.[/en]
-   *   [ja]オートスクロールを有効にする場合にはtrueを渡します。[/ja]
-   * @description
-   *   [en]Enable or disable "auto-scroll" attribute.[/en]
-   *   [ja]auto-scroll属性があるかどうかを設定します。[/ja]
-   */
-  setAutoScrollEnabled(enabled) {
-    if (enabled) {
-      this.setAttribute('auto-scroll', '');
-    } else {
-      this.removeAttribute('auto-scroll');
-    }
-  }
-
-  /**
-   * @method isAutoScrollEnabled
-   * @signature isAutoScrollEnabled()
-   * @return {Boolean}
-   *   [en]true if auto scroll is enabled.[/en]
-   *   [ja]オートスクロールが有効であればtrueを返します。[/ja]
-   * @description
-   *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
-   *   [ja]auto-scroll属性があるかどうかを返します。[/ja]
-   */
-  isAutoScrollEnabled() {
-    return this.hasAttribute('auto-scroll');
-  }
-
-  /**
-   * @method setDisabled
-   * @signature setDisabled(disabled)
-   * @param {Boolean} disabled
-   *   [en]If true the carousel will be disabled.[/en]
-   *   [ja]disabled状態にする場合にはtrueを指定します。[/ja]
-   * @description
-   *   [en]Disable or enable the dialog.[/en]
-   *   [ja]disabled属性があるかどうかを設定します。[/ja]
-   */
-  setDisabled(disabled) {
-    if (disabled) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
-  }
-
-  /**
-   * @method isDisabled
-   * @signature isDisabled()
-   * @return {Boolean}
-   *   [en]Whether the carousel is disabled or not.[/en]
-   *   [ja]disabled状態になっていればtrueを返します。[/ja]
-   * @description
-   *   [en]Returns whether the dialog is disabled or enabled.[/en]
-   *   [ja]disabled属性があるかどうかを返します。[/ja]
-   */
-  isDisabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  /**
-   * @method setOverscrollable
-   * @signature setOverscrollable(overscrollable)
-   * @param {Boolean} overscrollable
-   *   [en]If true the carousel will be overscrollable.[/en]
-   *   [ja]overscrollできるかどうかを指定します。[/ja]
-   * @description
-   *   [en]Set whether the carousel is overscrollable or not.[/en]
-   *   [ja]overscroll属性があるかどうかを設定します。[/ja]
-   */
-  setOverscrollable(scrollable) {
-    if (scrollable) {
-      this.setAttribute('overscrollable', '');
-    } else {
-      this.removeAttribute('overscrollable');
-    }
-  }
-
-  /**
-   * @method isOverscrollable
-   * @signature isOverscrollable()
-   * @return {Boolean}
-   *   [en]Whether the carousel is overscrollable or not.[/en]
-   *   [ja]overscrollできればtrueを返します。[/ja]
-   * @description
-   *   [en]Returns whether the carousel is overscrollable or not.[/en]
-   *   [ja]overscroll属性があるかどうかを返します。[/ja]
-   */
-  isOverscrollable() {
-    return this.hasAttribute('overscrollable');
-  }
-
-  /**
-   * @method setCentered
-   * @signature setCentered(centered)
-   * @param {Boolean} centered
-   *   [en]If true the carousel will be centered.[/en]
-   *   [ja]centered状態にする場合にはtrueを指定します。[/ja]
-   * @description
-   *   [en]Set whether the carousel is centered or not.[/en]
-   *   [ja]centered属性があるかどうかを設定します。[/ja]
-   */
-  setCentered(centered) {
-    if (centered) {
-      this.setAttribute('centered', '');
-    } else {
-      this.removeAttribute('centered');
-    }
-  }
-
-  /**
-   * @method isCentered
-   * @signature isCentered()
-   * @return {Boolean}
-   *   [en]Whether the carousel is centered or not.[/en]
-   *   [ja]centered状態になっていればtrueを返します。[/ja]
-   * @description
-   *   [en]Returns whether the carousel is centered or not.[/en]
-   *   [ja]centered属性があるかどうかを返します。[/ja]
-   */
-  isCentered() {
-    return this.hasAttribute('centered');
+    return this.setActiveIndex(this.getActiveIndex() - 1, options);
   }
 
   /**
@@ -742,7 +539,7 @@ class CarouselElement extends BaseElement {
     const elementSize = this._getElementSize();
     const carouselItemSize = this._getCarouselItemSize();
 
-    return this.isAutoScrollEnabled() && elementSize === carouselItemSize;
+    return this.autoScroll && elementSize === carouselItemSize;
   }
 
   /**
@@ -771,7 +568,7 @@ class CarouselElement extends BaseElement {
 
   _updateSwipeable() {
     if (this._gestureDetector) {
-      if (this.isSwipeable()) {
+      if (this.swipeable) {
         this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
         this._gestureDetector.on('dragend', this._boundOnDragEnd);
       } else {
@@ -782,7 +579,7 @@ class CarouselElement extends BaseElement {
   }
 
   _tryFirePostChangeEvent() {
-    const currentIndex = this.getActiveCarouselItemIndex();
+    const currentIndex = this.getActiveIndex();
 
     if (this._lastActiveIndex !== currentIndex) {
       const lastActiveIndex = this._lastActiveIndex;
@@ -826,7 +623,7 @@ class CarouselElement extends BaseElement {
       let waitForAction = false;
       util.triggerElementEvent(this, 'overscroll', {
         carousel: this,
-        activeIndex: this.getActiveCarouselItemIndex(),
+        activeIndex: this.getActiveIndex(),
         direction: this._getOverScrollDirection(),
         waitToReturn: (promise) => {
           waitForAction = true;
@@ -883,12 +680,12 @@ class CarouselElement extends BaseElement {
   _normalizeScrollPosition(scroll) {
     const max = this._calculateMaxScroll();
 
-    if (!this.isAutoScrollEnabled()) {
+    if (!this.autoScroll) {
       return Math.max(0, Math.min(max, scroll));
     }
     let arr = [];
     const size = this._getCarouselItemSize();
-    const nbrOfItems = this.getCarouselItemCount();
+    const nbrOfItems = this.itemCount;
 
     for (let i = 0; i < nbrOfItems; i++) {
       if (i * size + this._offset < max) {
@@ -912,7 +709,7 @@ class CarouselElement extends BaseElement {
     const scrollRatio = Math.abs(scroll - lastScroll) / size;
     let result = arr[0];
 
-    if (scrollRatio <= this.getAutoScrollRatio()) {
+    if (scrollRatio <= this.autoScrollRatio) {
       result = lastScroll;
     } else if (scrollRatio < 1.0) {
       if (arr[0] === lastScroll && arr.length > 1) {
@@ -937,7 +734,7 @@ class CarouselElement extends BaseElement {
    * @return {Promise} Resolves to the carousel element
    */
   _scrollTo(scroll, options = {}) {
-    const isOverscrollable = this.isOverscrollable();
+    const isOverscrollable = this.overscrollable;
 
     const normalizeScroll = (scroll) => {
       const ratio = 0.35;
@@ -969,7 +766,7 @@ class CarouselElement extends BaseElement {
   }
 
   _calculateMaxScroll() {
-    const max = this.getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+    const max = this.itemCount * this._getCarouselItemSize() - this._getElementSize();
     return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
   }
 
@@ -982,19 +779,9 @@ class CarouselElement extends BaseElement {
 
   _getOverScrollDirection() {
     if (this._isVertical()) {
-      if (this._scroll <= 0) {
-        return 'up';
-      }
-      else {
-        return 'down';
-      }
+      return this._scroll <= 0 ? 'up' : 'down';
     } else {
-      if (this._scroll <= 0) {
-        return 'left';
-      }
-      else {
-        return 'right';
-      }
+      return this._scroll <= 0 ? 'left' : 'right';
     }
   }
 
@@ -1041,16 +828,14 @@ class CarouselElement extends BaseElement {
   }
 
   /**
-   * @method getCarouselItemCount
-   * @signature getCarouselItemCount)
-   * @return {Number}
+   * @property itemCount
+   * @readonly
+   * @type {Number}
+   * @description
    *   [en]The number of carousel items.[/en]
    *   [ja]カルーセル要素の数です。[/ja]
-   * @description
-   *   [en]Returns the current number of carousel items..[/en]
-   *   [ja]現在のカルーセル要素を数を返します。[/ja]
    */
-  getCarouselItemCount() {
+  get itemCount() {
     return this._getCarouselItemElements().length;
   }
 
@@ -1060,7 +845,7 @@ class CarouselElement extends BaseElement {
    * @description
    *   [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
    *   [ja]レイアウトや内部の状態を最新のものに更新します。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用します。[/ja]
- */
+   */
   refresh() {
     // Bug fix
     if (this._getCarouselItemSize() === 0) {
@@ -1076,7 +861,7 @@ class CarouselElement extends BaseElement {
       if (this._isOverScroll(scroll)) {
         this._scrollToKillOverScroll();
       } else {
-        if (this.isAutoScrollEnabled()) {
+        if (this.autoScroll) {
           scroll = this._normalizeScrollPosition(scroll);
         }
 
@@ -1100,7 +885,7 @@ class CarouselElement extends BaseElement {
    *   [ja]最初のons-carousel-itemを表示します。[/ja]
    */
   first(options) {
-    return this.setActiveCarouselItemIndex(0, options);
+    return this.setActiveIndex(0, options);
   }
 
   /**
@@ -1114,8 +899,8 @@ class CarouselElement extends BaseElement {
    *   [ja]最後のons-carousel-itemを表示します。[/ja]
    */
   last(options) {
-    this.setActiveCarouselItemIndex(
-      Math.max(this.getCarouselItemCount() - 1, 0), options
+    this.setActiveIndex(
+      Math.max(this.itemCount - 1, 0), options
     );
   }
 
@@ -1140,6 +925,113 @@ class CarouselElement extends BaseElement {
 
   detachedCallback() {
     this._removeEventListeners();
+  }
+
+  /**
+   * @property autoScrollRatio
+   * @type {Number}
+   * @description
+   *   [en]The current auto scroll ratio. [/en]
+   *   [ja]現在のオートスクロールのratio値。[/ja]
+   */
+  get autoScrollRatio() {
+    const attr = this.getAttribute('auto-scroll-ratio');
+
+    if (!attr) {
+      return 0.5;
+    }
+
+    const scrollRatio = parseFloat(attr);
+    if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+      throw new Error('Invalid ratio.');
+    }
+
+    return isNaN(scrollRatio) ? 0.5 : scrollRatio;
+  }
+
+  set autoScrollRatio(ratio) {
+    if (ratio < 0.0 || ratio > 1.0) {
+      throw new Error('Invalid ratio.');
+    }
+
+    this.setAttribute('auto-scroll-ratio', ratio);
+  }
+
+  _updateBooleanAttribute(name, enable) {
+    if (enable) {
+      this.setAttribute(name, '');
+    } else {
+      this.removeAttribute(name);
+    }
+  }
+  /**
+   * @property swipeable
+   * @type {Boolean}
+   * @description
+   *   [en]true if the carousel is swipeable.[/en]
+   *   [ja]swipeableであればtrueを返します。[/ja]
+   */
+  get swipeable() {
+    return this.hasAttribute('swipeable');
+  }
+  set swipeable(value) {
+    return this._updateBooleanAttribute('swipeable', value);
+  }
+
+  /**
+   * @property autoScroll
+   * @type {Boolean}
+   * @description
+   *   [en]true if auto scroll is enabled.[/en]
+   *   [ja]オートスクロールが有効であればtrueを返します。[/ja]
+   */
+  get autoScroll() {
+    return this.hasAttribute('auto-scroll');
+  }
+  set autoScroll(value) {
+    return this._updateBooleanAttribute('auto-scroll', value);
+  }
+
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the carousel is disabled or not.[/en]
+   *   [ja]disabled状態になっていればtrueを返します。[/ja]
+   */
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+  set disabled(value) {
+    return this._updateBooleanAttribute('disabled', value);
+  }
+
+  /**
+   * @property overscrollable
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the carousel is overscrollable or not.[/en]
+   *   [ja]overscrollできればtrueを返します。[/ja]
+   */
+  get overscrollable() {
+    return this.hasAttribute('overscrollable');
+  }
+  set overscrollable(value) {
+    return this._updateBooleanAttribute('overscrollable', value);
+  }
+
+  /**
+   * @property centered
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the carousel is centered or not.[/en]
+   *   [ja]centered状態になっていればtrueを返します。[/ja]
+   */
+  get centered() {
+    return this.hasAttribute('centered');
+  }
+  set centered(value) {
+    return this._updateBooleanAttribute('centered', value);
   }
 }
 
