@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-beta.10
 ----
+ * core: Expose FastClick instance as `ons.fastClick`.
 
 v2.0.0-beta.9
 ----
