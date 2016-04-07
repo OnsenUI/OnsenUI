@@ -51,11 +51,14 @@ const INPUT_ATTRIBUTES = [
 ];
 
 /**
- * @element ons-material-input
+ * @element ons-input
  * @category form
  * @description
- *  [en]Material Design input component.[/en]
- *  [ja]Material Designのinputコンポ―ネントです。[/ja]
+ *  [en]
+ *    Input component. Can be both a text input as well as a checkbox or radio button.
+ *    When using the "material" modifier the text input will have a floating label.
+ *  [/en]
+ *  [ja][/ja]
  * @codepen ojQxLj
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
@@ -64,23 +67,30 @@ const INPUT_ATTRIBUTES = [
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
  * @example
- * <ons-material-input label="Username"></ons-material-input>
+ * <ons-input placeholder="Username" float></ons-input>
  */
-class MaterialInputElement extends BaseElement {
+class InputElement extends BaseElement {
 
   /**
-   * @attribute label
+   * @attribute placeholder
    * @type {String}
    * @description
-   *   [en]Text for animated floating label.[/en]
-   *   [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]
+   *   [en]Placeholder text. In Material Design, this placeholder will be a floating label.[/en]
+   *   [ja][/ja]
    */
 
   /**
-   * @attribute no-float
+   * @attribute float
    * @description
-   *  [en]If this attribute is present, the label will not be animated.[/en]
-   *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
+   *  [en]If this attribute is present, the placeholder will be animated in Material Design.[/en]
+   *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
+   */
+
+  /**
+   * @attribute type
+   * @description
+   *  [en]Specify the input type. This is the same as the "type" attribute for normal inputs. However, for "range" you should instead use <ons-range> element.[/en]
+   *  [ja][/ja]
    */
 
   createdCallback() {
@@ -279,5 +289,5 @@ class MaterialInputElement extends BaseElement {
 }
 
 window.OnsInputElement = document.registerElement('ons-input', {
-  prototype: MaterialInputElement.prototype
+  prototype: InputElement.prototype
 });

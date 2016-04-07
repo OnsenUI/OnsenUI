@@ -3,8 +3,10 @@
 describe('OnsListItemElement', () => {
   let listItem;
 
-  beforeEach(() => {
-    listItem = new OnsListItemElement();
+  beforeEach(done => {
+    listItem = ons._util.createElement('<ons-list-item>content</ons-list-item>');
+
+    setImmediate(done);
   });
 
   it('exists', () => {
@@ -97,7 +99,7 @@ describe('OnsListItemElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android if tappable', () => {
       ons.platform.select('android');
-      let e = ons._util.createElement('<ons-list-item tappable></ons-list-item>');
+      let e = ons._util.createElement('<ons-list-item tappable>Content</ons-list-item>');
       expect(e.getAttribute('modifier')).to.equal('material');
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.children[0].tagName.toLowerCase()).to.equal('ons-ripple');
