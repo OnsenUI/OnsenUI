@@ -111,7 +111,7 @@ h6 {
   font-weight: 400;
 }
 .page--material__background {
-  background-color: #fafafa;
+  background-color: #fff;
 }
 /* topdoc
   name: Switch
@@ -448,7 +448,7 @@ input:disabled + .switch__toggle {
   background-size: 100% 2px;
   background-repeat: no-repeat;
   overflow: hidden;
-  height: 31px;
+  height: 32px;
 }
 .range::-moz-range-track {
   position: relative;
@@ -531,6 +531,18 @@ input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+.range__left {
+  position: relative;
+  top: 17px;
+  height: 2px;
+  width: 0;
+  background-color: rgba(24,103,194,0.81);
+  pointer-events: none;
+}
+[disabled] > .range__left,
+.range--material:disabled + .range__left {
+  display: none;
 }
 /* topdoc
   name: Material Range
@@ -658,15 +670,7 @@ input:disabled + .switch__toggle {
   transform: scale(2.5);
 }
 .range--material__left {
-  position: relative;
-  top: -16px;
-  height: 2px;
-  width: 0;
   background-color: #009688;
-  pointer-events: none;
-}
-.range--material:disabled + .range--material__left {
-  display: none;
 }
 /* topdoc
   name: Navigation Bar
@@ -4932,7 +4936,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .dialog-container--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #fafafa;
+  background-color: #fff;
 }
 .dialog-mask--material {
   background-color: rgba(0,0,0,0.3);
@@ -5247,7 +5251,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .alert-dialog--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #fafafa;
+  background-color: #fff;
 }
 .alert-dialog-container--material {
   padding-top: 22px;
@@ -5985,7 +5989,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-size: 25px;
   line-height: 56px;
   letter-spacing: 0;
-  color: #fafafa;
+  color: #fff;
   vertical-align: middle;
   text-align: center;
   background-color: #009688;

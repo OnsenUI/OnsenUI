@@ -103,6 +103,10 @@ const HandlerRepository = {
   },
 
   has: function(element) {
+    if (!element.dataset) {
+      return false;
+    }
+
     const id = element.dataset.deviceBackButtonHandlerId;
 
     return !!this._store[id];

@@ -40,23 +40,7 @@ limitations under the License.
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
-          'setSwipeable',
-          'isSwipeable',
-          'setAutoScrollRatio',
-          'getAutoScrollRatio',
-          'setActiveCarouselItemIndex',
-          'getActiveCarouselItemIndex',
-          'next',
-          'prev',
-          'setAutoScrollEnabled',
-          'isAutoScrollEnabled',
-          'setDisabled',
-          'isDisabled',
-          'setOverscrollable',
-          'isOverscrollable',
-          'refresh',
-          'first',
-          'last'
+          'setActiveIndex', 'getActiveIndex', 'next', 'prev', 'refresh', 'first', 'last'
         ]);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['refresh', 'postchange', 'overscroll'], function(detail) {
@@ -78,6 +62,10 @@ limitations under the License.
     });
 
     MicroEvent.mixin(CarouselView);
+
+    $onsen.derivePropertiesFromElement(CarouselView, [
+      'centered', 'overscrollable', 'disabled', 'autoScroll', 'swipeable', 'autoScrollRatio', 'itemCount'
+    ]);
 
     return CarouselView;
   });

@@ -41,7 +41,10 @@ class IconElement extends BaseElement {
    * @attribute icon
    * @type {String}
    * @description
-   *   [en]The icon name. "md-" prefix for Material Icons, "fa-" for Font Awesome and "ion-" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+   *   [en]
+   *     The icon name. "md-" prefix for Material Icons, "fa-" for Font Awesome and "ion-" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.
+   *     Icons can also be styled based on modifier presence. Add comma-separated icons with "modifierName:" prefix. E.g. `<ons-icon icon="ion-edit, material:md-edit" size="32px, material:24px">` will display "md-edit" for Material Design and "ion-edit" as default icon.
+   *   [/en]
    *   [ja]アイコン名を指定します。<code>md-</code>で始まるものはMaterial Iconsとして、<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://zavoloklom.github.io/material-design-iconic-font/icons.html http://fontawesome.io/icons/ http://ionicons.com[/ja]
    */
 
@@ -49,7 +52,10 @@ class IconElement extends BaseElement {
    * @attribute size
    * @type {String}
    * @description
-   *   [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
+   *   [en]
+   *     The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.
+   *     Icons can also be styled based on modifier presence. Add comma-separated icons with "modifierName:" prefix. E.g. `<ons-icon icon="ion-edit, material:md-edit" size="32px, material:24px">` will display "md-edit" for Material Design and "ion-edit" as default icon.
+   *   [/en]
    *   [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
    */
 
@@ -80,11 +86,9 @@ class IconElement extends BaseElement {
 
   /**
    * @attribute spin
-   * @type {Boolean}
-   * @default false
    * @description
-   *   [en]Specify whether the icon should be spinning. Valid values are true and false.[/en]
-   *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+   *   [en]Specify whether the icon should be spinning.[/en]
+   *   [ja]アイコンを回転するかどうかを指定します。[/ja]
    */
 
   createdCallback() {
