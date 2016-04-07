@@ -136,7 +136,7 @@ class CollapseMode {
     const distance = this._element._side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
     const isOpen = this.isOpen();
-    this._ignoreDrag = scrolling || (area && distance > area);
+    this._ignoreDrag = scrolling || (area && distance > area && !isOpen);
 
     this._width = widthToPx(this._element._width, this._element.parentNode);
     this._startDistance = this._distance = isOpen ? this._width : 0;
@@ -445,7 +445,11 @@ class SplitterSideElement extends BaseElement {
     if (!util.match(this.parentNode, 'ons-splitter')) {
       throw new Error('Parent must be an ons-splitter element.');
     }
+
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
+    if (!this.hasAttribute('side')) {
+      this.setAttribute('side', 'left');
+    }
     this._watchedAttributes.forEach(e => this._update(e));
   }
 
