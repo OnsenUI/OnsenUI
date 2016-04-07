@@ -8,7 +8,7 @@ v2.0.0-beta.9
  * ons-page: Fixed [#1315](https://github.com/OnsenUI/OnsenUI/issues/1315).
  * ons-icon: Accepts two icon values at once for Auto Styling.
  * ons-tab: Fix glitch where content was removed during `<ons-navigator>` slide animation.
-
+ * ons-icon: 'spin' attribute does not require boolean values anymore.
 
 v2.0.0-beta.8
 ----

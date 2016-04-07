@@ -86,11 +86,9 @@ class IconElement extends BaseElement {
 
   /**
    * @attribute spin
-   * @type {Boolean}
-   * @default false
    * @description
-   *   [en]Specify whether the icon should be spinning. Valid values are true and false.[/en]
-   *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+   *   [en]Specify whether the icon should be spinning.[/en]
+   *   [ja]アイコンを回転するかどうかを指定します。[/ja]
    */
 
   createdCallback() {

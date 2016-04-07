@@ -28,7 +28,7 @@ limitations under the License.
   vertical-align: -25%;
 }
 
-ons-icon[spin="true"] {
+ons-icon[spin] {
   -webkit-animation: ons-icon-spin 2s infinite linear;
   -moz-animation: ons-icon-spin 2s infinite linear;
   animation: ons-icon-spin 2s infinite linear;
