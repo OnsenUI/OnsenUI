@@ -128,15 +128,10 @@ export class LazyRepeatProvider {
       wrapperElement.classList.add('lazy-list');
     }
 
-    // to be removed soon
-    this._pageContent = util.findParent(wrapperElement, '.ons-scroller__content');
+    this._pageContent = util.findParent(wrapperElement, '.page__content');
 
     if (!this._pageContent) {
-      this._pageContent = util.findParent(wrapperElement, '.page__content');
-    }
-
-    if (!this._pageContent) {
-      throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
+      throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an element.');
     }
 
     this._topPositions = [];
