@@ -72,7 +72,7 @@ class BackButtonElement extends BaseElement {
    */
 
   /**
-   * @attribute on-transition-end
+   * @attribute callback
    * @type {String}
    * @description
    *   [en]Function that is called when the transition has ended.[/en]
@@ -148,7 +148,7 @@ class BackButtonElement extends BaseElement {
    */
 
   /**
-   * @property options.onTransitionEnd
+   * @property options.callback
    * @type {String}
    * @description
    *   [en]Function that is called when the transition has ended.[/en]
@@ -182,8 +182,8 @@ class BackButtonElement extends BaseElement {
         this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
       }
 
-      if (this.hasAttribute('on-transition-end')) {
-        this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+      if (this.hasAttribute('callback')) {
+        this.options.callback = window.eval('(' + this.getAttribute('callback') + ')');
       }
 
       if (this.hasAttribute('refresh')) {

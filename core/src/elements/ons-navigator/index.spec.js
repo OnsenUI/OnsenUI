@@ -32,7 +32,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'page\' attribute', () => {
-      let content = nav.getCurrentPage()._getContentElement();
+      let content = nav.topPage._getContentElement();
       expect(content.innerHTML).to.equal('hoge');
   });
 
@@ -51,8 +51,8 @@ describe('OnsNavigatorElement', () => {
   describe('#pushPage()', () => {
     it('adds a new page to the top of the page stack', (done) => {
       nav.pushPage('hoge', {
-        onTransitionEnd: () => {
-          let content = nav.getCurrentPage()._getContentElement();
+        callback: () => {
+          let content = nav.topPage._getContentElement();
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge');
           done();
@@ -63,8 +63,8 @@ describe('OnsNavigatorElement', () => {
     it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
       nav.pushPage({
         pageHTML: '<ons-page>hoge2</ons-page>',
-        onTransitionEnd: () => {
-          let content = nav.getCurrentPage()._getContentElement();
+        callback: () => {
+          let content = nav.topPage._getContentElement();
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge2');
           done();
@@ -128,14 +128,14 @@ describe('OnsNavigatorElement', () => {
 
     it('removes the top page from the stack', (done) => {
       nav.pushPage('fuga', {
-        onTransitionEnd: () => {
-          let content = nav.getCurrentPage()._getContentElement();
+        callback: () => {
+          let content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('fuga');
 
           nav.popPage({
-            onTransitionEnd: () => {
+            callback: () => {
               expect(nav.pages.length).to.equal(1);
-              let content = nav.getCurrentPage()._getContentElement();
+              let content = nav.topPage._getContentElement();
               expect(content.innerHTML).equal('hoge');
               done();
             }
@@ -154,7 +154,7 @@ describe('OnsNavigatorElement', () => {
       };
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => {
+        callback: () => {
           var spy = chai.spy.on(nav, '_popPage');
           var promise1 = nav.popPage().then((happy) => {
             finished(0);
@@ -172,16 +172,16 @@ describe('OnsNavigatorElement', () => {
 
     it('can refresh the previous page', (done) => {
       nav.pushPage('info', {
-        onTransitionEnd: () => {
-          var content = nav.getCurrentPage()._getContentElement();
+        callback: () => {
+          var content = nav.topPage._getContentElement();
           content.innerHTML = 'piyo';
 
           nav.pushPage('fuga', {
-            onTransitionEnd: () => {
+            callback: () => {
               nav.popPage({
                 refresh: true,
-                onTransitionEnd: () => {
-                  var content = nav.getCurrentPage()._getContentElement();
+                callback: () => {
+                  var content = nav.topPage._getContentElement();
                   expect(content.innerHTML).to.equal('info');
                   done();
                 }
@@ -210,7 +210,7 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage()
+        callback: () => nav.popPage()
       });
 
       return expect(promise).to.eventually.be.fulfilled;
@@ -224,7 +224,7 @@ describe('OnsNavigatorElement', () => {
       expect(nav.pages.length).to.equal(1);
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => {
+        callback: () => {
           expect(nav.pages.length).to.equal(2);
           nav.popPage();
           expect(nav.pages.length).to.equal(2);
@@ -239,7 +239,7 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage()
+        callback: () => nav.popPage()
       });
 
       return expect(promise).to.eventually.be.fulfilled;
@@ -251,8 +251,8 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => nav.popPage({
-          onTransitionEnd: () => done()
+        callback: () => nav.popPage({
+          callback: () => done()
         })
       });
 
@@ -262,7 +262,7 @@ describe('OnsNavigatorElement', () => {
     it('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.popPage()).to.eventually.be.fulfilled.then(
-          page => expect(page).to.equal(nav.getCurrentPage())
+          page => expect(page).to.equal(nav.topPage)
         );
       });
     });
@@ -286,15 +286,15 @@ describe('OnsNavigatorElement', () => {
 
     it('brings the given pageUrl to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
-      expect(nav.getCurrentPage().name).to.equal('hoge');
+      expect(nav.topPage.name).to.equal('hoge');
       nav.bringPageTop('fuga', {
-        onTransitionEnd: () => {
+        callback: () => {
           expect(nav.pages.length).to.equal(2);
-          expect(nav.getCurrentPage().name).to.equal('fuga');
+          expect(nav.topPage.name).to.equal('fuga');
           nav.bringPageTop('hoge', {
-            onTransitionEnd: () => {
+            callback: () => {
               expect(nav.pages.length).to.equal(2);
-              expect(nav.getCurrentPage().name).to.equal('hoge');
+              expect(nav.topPage.name).to.equal('hoge');
               expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
               done();
             }
@@ -305,15 +305,15 @@ describe('OnsNavigatorElement', () => {
 
     it('brings the given page index to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
-      expect(nav.getCurrentPage().name).to.equal('hoge');
+      expect(nav.topPage.name).to.equal('hoge');
       nav.bringPageTop('fuga', {
-        onTransitionEnd: () => {
+        callback: () => {
           expect(nav.pages.length).to.equal(2);
-          expect(nav.getCurrentPage().name).to.equal('fuga');
+          expect(nav.topPage.name).to.equal('fuga');
           nav.bringPageTop(0, {
-            onTransitionEnd: () => {
+            callback: () => {
               expect(nav.pages.length).to.equal(2);
-              expect(nav.getCurrentPage().name).to.equal('hoge');
+              expect(nav.topPage.name).to.equal('hoge');
               expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
               done();
             }
@@ -338,7 +338,7 @@ describe('OnsNavigatorElement', () => {
     it('should be possible to cancel the \'prepush\' event', (done) => {
       expect(nav.pages.length).to.equal(1);
 
-      nav.bringPageTop('info', {onTransitionEnd: () => {
+      nav.bringPageTop('info', {callback: () => {
         expect(nav.pages.length).to.equal(2);
 
         nav.addEventListener('prepush', (event) => {
@@ -356,7 +356,7 @@ describe('OnsNavigatorElement', () => {
       return nav.pushPage('info').then(() => {
         return nav.pushPage('fuga').then(() => {
           return expect(nav.bringPageTop('info')).to.eventually.be.fulfilled.then(
-            page => expect(page).to.equal(nav.getCurrentPage())
+            page => expect(page).to.equal(nav.topPage)
           );
         });
       });
@@ -366,7 +366,7 @@ describe('OnsNavigatorElement', () => {
   describe('#insertPage()', () => {
     it('inserts a new page on a given index', (done) => {
       nav.pushPage('info', {
-        onTransitionEnd: () => {
+        callback: () => {
           nav.insertPage(0, 'fuga');
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
@@ -382,7 +382,7 @@ describe('OnsNavigatorElement', () => {
 
     it('inserts a new page on a given index using `options.pageHTML`', (done) => {
       nav.pushPage('info', {
-        onTransitionEnd: () => {
+        callback: () => {
           nav.insertPage(0, {pageHTML: '<ons-page>fuga</ons-page>'});
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
@@ -408,7 +408,7 @@ describe('OnsNavigatorElement', () => {
 
     it('normalizes the index', (done) => {
       nav.pushPage('info', {
-        onTransitionEnd: () => {
+        callback: () => {
           nav.insertPage(-2, 'fuga').then( () => {
             expect(nav.pages.length).to.equal(3);
 
@@ -437,15 +437,15 @@ describe('OnsNavigatorElement', () => {
 
     it('replaces the current page with a new one', (done) => {
       nav.pushPage('info', {
-        onTransitionEnd: () => {
+        callback: () => {
           expect(nav.pages.length).to.equal(2);
-          let content = nav.getCurrentPage()._getContentElement();
+          let content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('info');
 
           nav.replacePage('fuga', {
-            onTransitionEnd: () => {
+            callback: () => {
               expect(nav.pages.length).to.equal(2);
-              let content = nav.getCurrentPage()._getContentElement();
+              let content = nav.topPage._getContentElement();
               expect(content.innerHTML).to.equal('fuga');
               done();
             }
@@ -458,7 +458,7 @@ describe('OnsNavigatorElement', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.replacePage('fuga')).to.eventually.be.fulfilled.then(
           page => {
-            expect(page).to.equal(nav.getCurrentPage());
+            expect(page).to.equal(nav.topPage);
             done();
           }
         );
@@ -472,11 +472,11 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('replaces all the page stack with only a new page', (done) => {
-      nav.pushPage('fuga', {onTransitionEnd: () => {
+      nav.pushPage('fuga', {callback: () => {
         nav.resetToPage('hoge', {
-          onTransitionEnd: () => {
+          callback: () => {
             expect(nav.pages.length).to.equal(1);
-            let content = nav.getCurrentPage()._getContentElement();
+            let content = nav.topPage._getContentElement();
             expect(content.innerHTML).to.equal('hoge');
             done();
           }
@@ -487,15 +487,15 @@ describe('OnsNavigatorElement', () => {
     it('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.resetToPage('fuga')).to.eventually.be.fulfilled.then(
-          page => expect(page).to.equal(nav.getCurrentPage())
+          page => expect(page).to.equal(nav.topPage)
         );
       });
     });
   });
 
-  describe('#getCurrentPage()', () => {
+  describe('#topPage', () => {
     it('returns the current page', () => {
-      let page = nav.getCurrentPage();
+      let page = nav.topPage;
 
       expect(page).to.be.an.instanceof(Element);
       expect(page.name).to.be.an('string');
@@ -503,7 +503,7 @@ describe('OnsNavigatorElement', () => {
 
     it('throws error if page stack is empty', () => {
       nav._destroy();
-      expect(() => nav.getCurrentPage()).to.throw(Error);
+      expect(nav.topPage).to.equal(null);
     });
   });
 
@@ -527,7 +527,7 @@ describe('OnsNavigatorElement', () => {
   describe('#_onDeviceBackButton()', () => {
     it('pops a page if there are more than one', (done) => {
       nav.pushPage('hoge', {
-        onTransitionEnd: () => {
+        callback: () => {
           var spy = chai.spy.on(nav, 'popPage');
           nav._onDeviceBackButton();
           expect(spy).to.have.been.called.once;
@@ -552,7 +552,7 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => {
+        callback: () => {
           nav._hide();
           nav._show();
         }
@@ -567,7 +567,7 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => nav._hide()
+        callback: () => nav._hide()
       });
 
       return expect(promise).to.eventually.be.fulfilled;
@@ -579,7 +579,7 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge', {
-        onTransitionEnd: () => nav._destroy()
+        callback: () => nav._destroy()
       });
 
       return expect(promise).to.eventually.be.fulfilled;
@@ -626,13 +626,13 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('should not display on first page', () => {
-        let backBtn = nav2.getCurrentPage().backButton;
+        let backBtn = nav2.topPage.backButton;
         expect(backBtn.style.display).to.equal('none');
     });
 
     it('should display button after push', (done) => {
         nav2.pushPage('backPage').then(() => {
-          const backBtn = nav2.getCurrentPage().backButton;
+          const backBtn = nav2.topPage.backButton;
           expect(backBtn.style.display).to.equal('inline-block');
           done();
         });
@@ -640,11 +640,11 @@ describe('OnsNavigatorElement', () => {
 
     it('should display button after insert and hide after pop', (done) => {
         nav2.insertPage(0, 'backPage').then(() => {
-          var backBtn = nav2.getCurrentPage().backButton;
+          var backBtn = nav2.topPage.backButton;
           expect(backBtn.style.display).to.equal('inline-block');
 
           nav2.popPage().then(() => {
-            backBtn = nav2.getCurrentPage().backButton;
+            backBtn = nav2.topPage.backButton;
             expect(backBtn.style.display).to.equal('none');
             done();
           });
@@ -654,11 +654,11 @@ describe('OnsNavigatorElement', () => {
 
     it('should display button after insert and hide after reset', (done) => {
         nav2.pushPage('backPage2').then(() => {
-          var backBtn = nav2.getCurrentPage().backButton;
+          var backBtn = nav2.topPage.backButton;
           expect(backBtn.style.display).to.equal('inline-block');
 
           nav2.resetToPage('backPage').then(() => {
-            backBtn = nav2.getCurrentPage().backButton;
+            backBtn = nav2.topPage.backButton;
             expect(backBtn.style.display).to.equal('none');
             done();
           });
