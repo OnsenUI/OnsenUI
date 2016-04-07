@@ -551,6 +551,10 @@ class AlertDialogElement extends BaseElement {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+
       this._mask.addEventListener('click', this._boundCancel, false);
     });
   }
