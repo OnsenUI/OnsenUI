@@ -28,22 +28,11 @@ import Animator from './animator-css';
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
  * @example
- * <ons-list>
- *   <ons-list-item>
- *    <ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>
- *    Click me!
- *   </ons-list-item>
- * </ons-list>
+ * <div class="my-div">
+ *  <ons-ripple></ons-ripple>
+ * </div>
  */
 class RippleElement extends BaseElement {
-
-  /**
-   * @attribute color
-   * @type {String}
-   * @description
-   *   [en]Color of the ripple effect.[/en]
-   *   [ja]リップルエフェクトの色を指定します。[/ja]
-   */
 
   /**
    * @attribute color
