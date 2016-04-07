@@ -59,10 +59,25 @@ class SplitterElement extends BaseElement {
     return element;
   }
 
+  /**
+   * @property left
+   * @readonly
+   * @type {HTMLElement}
+   * @description
+   *   [en]Left OnsSplitterSide element.[/en]
+   *   [ja][/ja]
+   */
   get left() {
     return this._getSide('left');
   }
-
+  /**
+   * @property right
+   * @readonly
+   * @type {HTMLElement}
+   * @description
+   *   [en]Right OnsSplitterSide element.[/en]
+   *   [ja][/ja]
+   */
   get right() {
     return this._getSide('right');
   }
@@ -70,7 +85,14 @@ class SplitterElement extends BaseElement {
   get _sides() {
     return [this.left, this.right].filter(e => e);
   }
-
+  /**
+   * @property content
+   * @readonly
+   * @type {HTMLElement}
+   * @description
+   *   [en]OnsSplitterContent element.[/en]
+   *   [ja][/ja]
+   */
   get content() {
     return util.findChild(this, 'ons-splitter-content') || this.appendChild(document.createElement('ons-splitter-content'));
   }
@@ -81,10 +103,8 @@ class SplitterElement extends BaseElement {
 
   /**
    * @property backButtonHandler
-   * @signature backButtonHandler
-   * @return {Object}
-   *   [en]Device back-button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @readonly
+   * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]

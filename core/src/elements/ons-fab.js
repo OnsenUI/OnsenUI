@@ -38,6 +38,13 @@ class FabElement extends BaseElement {
    */
 
   /**
+   * @attribute ripple
+   * @description
+   *  [en]If this attribute is defined, the button will have a ripple effect.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute position
    * @type {String}
    * @description

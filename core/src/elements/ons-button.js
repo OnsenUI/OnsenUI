@@ -69,6 +69,13 @@ class ButtonElement extends BaseElement {
    */
 
   /**
+   * @attribute ripple
+   * @description
+   *  [en]If this attribute is defined, the button will have a ripple effect.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]Specify if button should be disabled.[/en]

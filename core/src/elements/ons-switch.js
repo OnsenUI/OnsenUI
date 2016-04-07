@@ -106,6 +106,14 @@ class SwitchElement extends BaseElement {
    *   [ja]スイッチがONの状態にするときに指定します。[/ja]
    */
 
+  /**
+   * @attribute input-id
+   * @type {String}
+   * @description
+   *  [en]Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements.[/en]
+   *  [ja][/ja]
+   */
+
   get checked() {
     return this._checkbox.checked;
   }

@@ -106,8 +106,8 @@ class PullHookElement extends BaseElement {
 
     this._pageElement = this._scrollElement.parentElement;
 
-    if (!this._pageElement.classList.contains('page__content') && !this._pageElement.classList.contains('ons-scroller__content')) {
-      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> or an <ons-scroller> element.');
+    if (!this._pageElement.classList.contains('page__content')) {
+      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
     }
 
     this._boundOnDrag = this._onDrag.bind(this);
