@@ -60,9 +60,11 @@ const scheme = {
  * @codepen yxcCt
  * @example
  * <ons-list>
- *   <ons-list-header>Header Text</ons-list-header>
- *   <ons-list-item>Item</ons-list-item>
- *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>
+ *     <div class="list__item__left">Left</div>
+ *     <div class="list__item__center">Center</div>
+ *     <div class="list__item__right">Right</div>
+ *   </ons-list-item>
  * </ons-list>
  */
 class ListItemElement extends BaseElement {
