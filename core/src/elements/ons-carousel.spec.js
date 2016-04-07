@@ -89,78 +89,53 @@ describe('OnsCarouselElement', () => {
     });
   });
 
-  describe('#setSwipeable()', () => {
-    it('can set the \'swipeable\' attribute', () => {
-      expect(carousel.hasAttribute('swipeable')).to.be.false;
-      carousel.setSwipeable(true);
-      expect(carousel.hasAttribute('swipeable')).to.be.true;
-    });
-
-    it('can remove the \'swipeable\' attribute', () => {
-      carousel.setAttribute('swipeable', '');
-      carousel.setSwipeable(false);
-      expect(carousel.hasAttribute('swipeable')).to.be.false;
-    });
-  });
-
-  describe('#isSwipeable()', () => {
-    it('returns \'false\' if carousel is not swipeable', () => {
-      expect(carousel.isSwipeable()).to.be.false;
-    });
-
-    it('returns \'true\' if carousel is swipeable', () => {
-      carousel.setSwipeable(true);
-      expect(carousel.isSwipeable()).to.be.true;
-    });
-  });
-
-  describe('#setAutoScrollRatio()', () => {
+  describe('#set autoScrollRatio()', () => {
     it('only accepts values between 0.0 and 1.0', () => {
-      expect(() => carousel.setAutoScrollRatio(-1)).to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio('2.0')).to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(1.01)).to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(-0.01)).to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(1.0)).not.to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(0.0)).not.to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(0.5)).not.to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(1)).not.to.throw(Error);
-      expect(() => carousel.setAutoScrollRatio(0)).not.to.throw(Error);
+      expect(() => carousel.autoScrollRatio = -1).to.throw(Error);
+      expect(() => carousel.autoScrollRatio = '2.0').to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 1.01).to.throw(Error);
+      expect(() => carousel.autoScrollRatio = -0.01).to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 1.0).not.to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 0.0).not.to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 0.5).not.to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 1).not.to.throw(Error);
+      expect(() => carousel.autoScrollRatio = 0).not.to.throw(Error);
     });
 
     it('can set the \'auto-scroll-ratio\' attribute', () => {
       expect(carousel.hasAttribute('auto-scroll-ratio')).to.be.false;
-      carousel.setAutoScrollRatio(0.5);
+      carousel.autoScrollRatio = 0.5;
       expect(carousel.hasAttribute('auto-scroll-ratio')).to.be.true;
       expect(carousel.getAttribute('auto-scroll-ratio')).to.equal('0.5');
     });
   });
 
-  describe('#getAutoScrollRatio()', () => {
+  describe('#get autoScrollRatio', () => {
     it('returns \'0.5\' by default', () => {
-      expect(carousel.getAutoScrollRatio()).to.equal(0.5);
+      expect(carousel.autoScrollRatio).to.equal(0.5);
     });
 
     it('throws an error if the \'auto-scroll-ratio\' attribute is invalid', () => {
       carousel.setAttribute('auto-scroll-ratio', '2.0');
-      expect(() => carousel.getAutoScrollRatio()).to.throw(Error);
+      expect(() => carousel.autoScrollRatio).to.throw(Error);
     });
 
     it('returns the value of the \'auto-scroll-ratio\' attribute', () => {
       carousel.setAttribute('auto-scroll-ratio', '0.7');
-      expect(carousel.getAutoScrollRatio()).to.equal(0.7);
+      expect(carousel.autoScrollRatio).to.equal(0.7);
     });
   });
 
-  describe('#setActiveCarouselItemIndex()', () => {
+  describe('#setActiveIndex()', () => {
     it('should change the current active index', () => {
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
-      carousel.setActiveCarouselItemIndex(1);
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(1);
+      expect(carousel.getActiveIndex()).to.equal(0);
+      carousel.setActiveIndex(1);
+      expect(carousel.getActiveIndex()).to.equal(1);
     });
 
     it('should force to maximum index', () => {
-      carousel.setActiveCarouselItemIndex(100);
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+      carousel.setActiveIndex(100);
+      expect(carousel.getActiveIndex()).to.equal(2);
     });
 
     it('should fire \'postchange\' event', () => {
@@ -168,146 +143,47 @@ describe('OnsCarouselElement', () => {
         carousel.addEventListener('postchange', resolve)
       );
 
-      carousel.setActiveCarouselItemIndex(1);
+      carousel.setActiveIndex(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
 
     it('returns a promise that resolves to the element', () => {
-      return expect(carousel.setActiveCarouselItemIndex(1)).to.be.eventually.fulfilled.then(element => {
+      return expect(carousel.setActiveIndex(1)).to.be.eventually.fulfilled.then(element => {
         expect(element).to.equal(carousel);
-        expect(element.getActiveCarouselItemIndex()).to.equal(1);
+        expect(element.getActiveIndex()).to.equal(1);
       });
     });
   });
 
-  describe('#getActiveCarouselItemIndex()', () => {
+  describe('#getActiveIndex()', () => {
     it('should return the active item index', () => {
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
-      carousel.setActiveCarouselItemIndex(1);
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(1);
+      expect(carousel.getActiveIndex()).to.equal(0);
+      carousel.setActiveIndex(1);
+      expect(carousel.getActiveIndex()).to.equal(1);
     });
   });
 
   describe('#next()', () => {
     it('should increase the current index', () => {
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
+      expect(carousel.getActiveIndex()).to.equal(0);
       carousel.next();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(1);
+      expect(carousel.getActiveIndex()).to.equal(1);
     });
   });
 
   describe('#prev()', () => {
     it('should decrease the current index', () => {
       carousel.next();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(1);
+      expect(carousel.getActiveIndex()).to.equal(1);
       carousel.prev();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
+      expect(carousel.getActiveIndex()).to.equal(0);
     });
   });
 
-  describe('#setAutoScrollEnabled()', () => {
-    it('can set the \'auto-scroll\' attribute', () => {
-      expect(carousel.hasAttribute('auto-scroll')).to.be.false;
-      carousel.setAutoScrollEnabled(true);
-      expect(carousel.hasAttribute('auto-scroll')).to.be.true;
-    });
-
-    it('can remove the \'auto-scroll\' attribute', () => {
-      carousel.setAttribute('auto-scroll', '');
-      carousel.setAutoScrollEnabled(false);
-      expect(carousel.hasAttribute('auto-scroll')).to.be.false;
-    });
-  });
-
-  describe('#isAutoScrollEnabled()', () => {
-    it('returns \'true\' if \'auto-scroll\' attribute exists', () => {
-      expect(carousel.isAutoScrollEnabled()).to.be.false;
-    });
-
-    it('returns \'false\' if \'auto-scroll\' attribute does not exists', () => {
-      carousel.setAttribute('auto-scroll', '');
-      expect(carousel.isAutoScrollEnabled()).to.be.true;
-    });
-  });
-
-  describe('#setDisabled()', () => {
-    it('can set the \'disabled\' attribute', () => {
-      expect(carousel.hasAttribute('disabled')).to.be.false;
-      carousel.setDisabled(true);
-      expect(carousel.hasAttribute('disabled')).to.be.true;
-    });
-
-    it('can remove the \'disabled\' attribute', () => {
-      carousel.setAttribute('disabled', '');
-      carousel.setDisabled(false);
-      expect(carousel.hasAttribute('disabled')).to.be.false;
-    });
-  });
-
-  describe('#isDisabled()', () => {
-    it('returns \'true\' if \'disabled\' attribute exists', () => {
-      expect(carousel.isDisabled()).to.be.false;
-    });
-
-    it('returns \'false\' if \'disabled\' attribute does not exists', () => {
-      carousel.setAttribute('disabled', '');
-      expect(carousel.isDisabled()).to.be.true;
-    });
-  });
-
-  describe('#setOverscrollable()', () => {
-    it('can set the \'overscrollable\' attribute', () => {
-      expect(carousel.hasAttribute('overscrollable')).to.be.false;
-      carousel.setOverscrollable(true);
-      expect(carousel.hasAttribute('overscrollable')).to.be.true;
-    });
-
-    it('can remove the \'overscrollable\' attribute', () => {
-      carousel.setAttribute('overscrollable', '');
-      carousel.setOverscrollable(false);
-      expect(carousel.hasAttribute('overscrollable')).to.be.false;
-    });
-  });
-
-  describe('#isOverscrollable()', () => {
-    it('returns \'true\' if \'overscrollable\' attribute exists', () => {
-      expect(carousel.isOverscrollable()).to.be.false;
-    });
-
-    it('returns \'false\' if \'overscrollable\' attribute does not exists', () => {
-      carousel.setAttribute('overscrollable', '');
-      expect(carousel.isOverscrollable()).to.be.true;
-    });
-  });
-
-  describe('#setCentered()', () => {
-    it('can set the \'centered\' attribute', () => {
-      expect(carousel.hasAttribute('centered')).to.be.false;
-      carousel.setCentered(true);
-      expect(carousel.hasAttribute('centered')).to.be.true;
-    });
-
-    it('can remove the \'centered\' attribute', () => {
-      carousel.setAttribute('centered', '');
-      carousel.setCentered(false);
-      expect(carousel.hasAttribute('centered')).to.be.false;
-    });
-  });
-
-  describe('#isCentered()', () => {
-    it('returns \'true\' if \'centered\' attribute exists', () => {
-      expect(carousel.isCentered()).to.be.false;
-    });
-
-    it('returns \'false\' if \'centered\' attribute does not exists', () => {
-      carousel.setAttribute('centered', '');
-      expect(carousel.isCentered()).to.be.true;
-    });
-  });
 
   describe('#_isEnabledChangeEvent()', () => {
     it('should be true if auto scroll is enabled', () => {
-      carousel.setAutoScrollEnabled(true);
+      carousel.autoScroll = true;
       expect(carousel._isEnabledChangeEvent()).to.be.true;
     });
 
@@ -379,14 +255,14 @@ describe('OnsCarouselElement', () => {
     });
 
     it('should work if carousel is swipeable', () => {
-      carousel.setSwipeable(true);
+      carousel.swipeable = true;
       carousel._onDragEnd(ev);
       expect(carousel._scroll).to.not.equal(0);
     });
 
     it('should call \'_scrollToKillOverScroll\' if overscrolled', () => {
-      carousel.setOverscrollable(true);
-      carousel.setSwipeable(true);
+      carousel.overscrollable = true;
+      carousel.swipeable = true;
 
       ev.gesture.deltaX = 10;
       ev.gesture.velocityX = 10;
@@ -444,7 +320,7 @@ describe('OnsCarouselElement', () => {
     });
 
     it('should change the scroll value', () => {
-      carousel.setSwipeable(true);
+      carousel.swipeable = true;
 
       let scroll = carousel._scroll;
 
@@ -457,18 +333,18 @@ describe('OnsCarouselElement', () => {
 
   describe('#first()', () => {
     it('sets the current index to 0', () => {
-      carousel.setActiveCarouselItemIndex(2);
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+      carousel.setActiveIndex(2);
+      expect(carousel.getActiveIndex()).to.equal(2);
       carousel.first();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
+      expect(carousel.getActiveIndex()).to.equal(0);
     });
   });
 
   describe('#last()', () => {
     it('sets the current index to the last position', () => {
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(0);
+      expect(carousel.getActiveIndex()).to.equal(0);
       carousel.last();
-      expect(carousel.getActiveCarouselItemIndex()).to.equal(2);
+      expect(carousel.getActiveIndex()).to.equal(2);
     });
   });
 
