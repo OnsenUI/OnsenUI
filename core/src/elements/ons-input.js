@@ -83,6 +83,13 @@ class MaterialInputElement extends BaseElement {
    *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
    */
 
+  /**
+   * @attribute content-left
+   * @description
+   *  [en]The HTML content of ons-input is placed before the actual input as a label. Omit this to display it after the input.[/en]
+   *  [ja][/ja]
+   */
+
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
