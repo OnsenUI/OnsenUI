@@ -37,7 +37,7 @@ export class PageComponent {
 }
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   directives: [OnsNavigator],
   template: `
   <ons-navigator>

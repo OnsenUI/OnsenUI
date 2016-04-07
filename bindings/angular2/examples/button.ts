@@ -3,7 +3,7 @@ import {bootstrap, Component} from '../src/angular2-onsenui';
 declare var alert: Function;
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   template: `
   <ons-page>
     <ons-toolbar>

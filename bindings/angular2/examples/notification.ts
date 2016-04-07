@@ -5,7 +5,7 @@ import {
 } from '../src/angular2-onsenui';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   template: `
   <ons-page _compiled>
     <ons-toolbar>

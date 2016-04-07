@@ -29,7 +29,7 @@ export class PageComponent {
 }
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   directives: [OnsTabbar, OnsTab],
   template: `
   <ons-tabbar>
