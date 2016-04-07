@@ -1,4 +1,4 @@
-mport {
+import {
   bootstrap,
   Component,
   onsPlatform
