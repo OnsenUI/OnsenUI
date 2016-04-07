@@ -1,4 +1,4 @@
-import {
+mport {
   bootstrap,
   Component,
   onsPlatform
@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'app',
   template: `
-  <ons-page _compiled>
+  <ons-page>
     <ons-toolbar>
       <div class="center">onsPlatform Example</div>
     </ons-toolbar>

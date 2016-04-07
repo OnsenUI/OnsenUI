@@ -41,7 +41,7 @@ export class PageComponent {
   directives: [OnsNavigator],
   template: `
   <ons-navigator>
-    <ons-page _compiled class="page hoge" #aaa>
+    <ons-page>
       <ons-toolbar>
         <div class="center">Page</div>
       </ons-toolbar>

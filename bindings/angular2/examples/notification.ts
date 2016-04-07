@@ -7,9 +7,9 @@ import {
 @Component({
   selector: 'app',
   template: `
-  <ons-page _compiled>
+  <ons-page>
     <ons-toolbar>
-      <div class="center">onsNotification Example</div>
+      <div class="center">OnsNotification Example</div>
     </ons-toolbar>
 
     <div class="page__background"></div>

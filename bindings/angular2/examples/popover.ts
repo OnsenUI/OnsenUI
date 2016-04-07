@@ -31,7 +31,7 @@ class MyPopoverComponent {
   selector: 'app',
   providers: [PopoverFactory],
   template: `
-  <ons-page class="page" _compiled>
+  <ons-page class="page">
     <ons-toolbar>
       <div class="center">Popover</div>
     </ons-toolbar>

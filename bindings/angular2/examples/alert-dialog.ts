@@ -36,7 +36,7 @@ class MyAlertDialogComponent {
   selector: 'app',
   providers: [AlertDialogFactory],
   template: `
-  <ons-page class="page" _compiled>
+  <ons-page class="page">
     <ons-toolbar>
       <div class="center">Alert Dialog</div>
     </ons-toolbar>
