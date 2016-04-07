@@ -528,9 +528,9 @@ class NavigatorElement extends BaseElement {
 
     const run = templateHTML => {
       const element = util.extend(this._createPageElement(templateHTML), {
-        name: options.page,
+        _name: options.page,
         data: options.data,
-        options: options
+        pushedOptions: options
       });
 
       options.animationOptions = util.extend(
