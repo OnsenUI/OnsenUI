@@ -436,4 +436,5 @@ function waitDeviceReady() {
   }, false);
 }
 
+window._super_secret_ons = ons;
 export default ons;
