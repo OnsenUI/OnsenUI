@@ -74,7 +74,6 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           duration: this.duration,
           timing: this.timing
         })
-        .wait(0.5)
         .restoreStyle()
         .queue(function(done) {
           callback();
@@ -135,7 +134,6 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           duration: this.duration,
           timing: this.timing
         })
-        .wait(0.4)
         .queue(function(done) {
           callback();
           done();
