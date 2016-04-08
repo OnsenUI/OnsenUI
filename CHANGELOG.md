@@ -17,6 +17,7 @@ v2.0.0-beta.9
  * ons-icon: 'spin' attribute does not require boolean values anymore.
  * core: Fix DeviceBackButton dispatcher for pages containing SVG elements.
  * ons-navigator: Changed part of the API.
+ * ons-navigator: Fixed [#1324](https://github.com/OnsenUI/OnsenUI/issues/1324), [#1325](https://github.com/OnsenUI/OnsenUI/issues/1325).
 
 v2.0.0-beta.8
 ----
