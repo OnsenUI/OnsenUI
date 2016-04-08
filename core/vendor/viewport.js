@@ -31,14 +31,16 @@
             return;
         }
 
-        if (this.platform.name == 'ios') {
-            if (this.platform.version >= 7 && isWebView()) {
-                this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
+        if (!this.viewportElement.getAttribute('content')) {
+            if (this.platform.name == 'ios') {
+                if (this.platform.version >= 7 && isWebView()) {
+                    this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
+                } else {
+                    this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
+                }
             } else {
-                this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
+                this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
             }
-        } else {
-            this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
         }
 
         function isWebView() {
