@@ -45,7 +45,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element);
+    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     const maskClear = animit(this.backgroundMask)
       .wait(0.6)
@@ -58,7 +58,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
 
       maskClear,
 
-      animit(enterPage.element)
+      animit(enterPage)
         .saveStyle()
         .queue({
           css: {
@@ -81,7 +81,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           done();
         }),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             opacity: 1.0
@@ -107,7 +107,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
    */
   pop(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
     animit.runAll(
 
@@ -118,7 +118,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           done();
         }),
 
-      animit(enterPage.element)
+      animit(enterPage)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',
@@ -141,7 +141,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           done();
         }),
 
-      animit(leavePage.element)
+      animit(leavePage)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)'
