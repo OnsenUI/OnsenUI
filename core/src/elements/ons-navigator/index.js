@@ -326,7 +326,6 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepop event.');
     }
 
-    const animator = this._animatorFactory.newAnimator(options);
     const l = this.pages.length;
 
     this._isRunning = true;
@@ -359,6 +358,7 @@ class NavigatorElement extends BaseElement {
         });
       };
 
+      const animator = this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
     }).catch(() => this._isRunning = false);
   }
