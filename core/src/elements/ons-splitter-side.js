@@ -491,7 +491,7 @@ class SplitterSideElement extends BaseElement {
       this._collapseDetection.disable();
       return this._updateMode(SPLIT_MODE);
     }
-    if (value === '' || value === 'collapse') {
+    if (value === '' || value === 'collapse' || value === 'true') {
       this._collapseDetection.disable();
       return this._updateMode(COLLAPSE_MODE);
     }
