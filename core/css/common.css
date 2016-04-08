@@ -71,15 +71,6 @@ ons-bottom-toolbar:not([inline]) {
   bottom: 0;
 }
 
-.scroller {
-  display: block;
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  -ms-scroll-snap-type: mandatory;
-}
-
 .page, .page__content {
   background-color: transparent !important;
   background: transparent !important;

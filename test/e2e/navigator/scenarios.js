@@ -191,7 +191,7 @@
       var page2 = element(by.id('page2'));
 
       expect(pops.getText()).toBe('0');
-      expect(pushes.getText()).toBe('0');
+      expect(pushes.getText()).toBe('1'); // initial page was pushed
 
       browser.wait(EC.visibilityOf(element(by.id('btn1'))));
       element(by.id('btn1')).click();
@@ -204,7 +204,7 @@
       browser.wait(EC.textToBePresentInElement(pops, '1'));
 
       expect(pops.getText()).toBe('1');
-      expect(pushes.getText()).toBe('1');
+      expect(pushes.getText()).toBe('2');
     });
   });
 })();

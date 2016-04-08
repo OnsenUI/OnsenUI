@@ -199,7 +199,7 @@ class TabbarElement extends BaseElement {
    * @type {String}
    * @default bottom
    * @description
-   *   [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
+   *   [en]Tabbar's position. Preset values are "bottom" and "top". Use "auto" to choose position depending on platform (iOS bottom, Android top).[/en]
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 

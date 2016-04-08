@@ -39,7 +39,7 @@ var scheme = {
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-navigator
  *   [en]ons-navigator component[/en]
- *   [ja]ons-navigatorコンポーネント[/en]
+ *   [ja]ons-navigatorコンポーネント[/ja]
  * @guide Addingatoolbar
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
@@ -47,11 +47,45 @@ var scheme = {
  *   [en]Returning from a page[/en]
  *   [ja]一つ前のページに戻る[/ja]
  * @example
- * <ons-back-button>
+ * <ons-back-button refresh animation="fade">
  *   Back
  * </ons-back-button>
  */
 class BackButtonElement extends BaseElement {
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @description
+   *   [en]Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute animation-options
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
+   */
+
+  /**
+   * @attribute callback
+   * @type {Function}
+   * @description
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   */
+
+  /**
+   * @attribute refresh
+   * @description
+   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   */
 
   createdCallback() {
     contentReady(this, () => {
@@ -95,15 +129,50 @@ class BackButtonElement extends BaseElement {
   }
 
   /**
-   * @return {object}
+   * @property options
+   * @type {Object}
+   * @description
+   *   [en]Options object. Attributes have priority over this property.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
    */
+
+  /**
+   * @property options.animation
+   * @type {String}
+   * @description
+   *   [en]Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property options.animationOptions
+   * @type {String}
+   * @description
+   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
+   */
+
+  /**
+   * @property options.callback
+   * @type {String}
+   * @description
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   */
+
+  /**
+   * @property options.refresh
+   * @description
+   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   */
+
   get options() {
     return this._options;
   }
-
-  /**
-   * @param {object}
-   */
   set options(object) {
     this._options = object;
   }
@@ -119,12 +188,12 @@ class BackButtonElement extends BaseElement {
         this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
       }
 
-      if (this.hasAttribute('on-transition-end')) {
-        this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+      if (this.hasAttribute('callback')) {
+        this.options.callback = window.eval('(' + this.getAttribute('callback') + ')');
       }
 
       if (this.hasAttribute('refresh')) {
-        this.options.refresh = this.getAttribute('refresh') === 'true';
+        this.options.refresh = true;
       }
 
       navigator.popPage(this.options);

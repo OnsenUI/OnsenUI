@@ -27,7 +27,6 @@ import './elements/ons-progress-circular';
 import './elements/ons-pull-hook';
 import './elements/ons-ripple';
 import './elements/ons-row';
-import './elements/ons-scrollbar';
 import './elements/ons-speed-dial-item';
 import './elements/ons-speed-dial';
 import './elements/ons-splitter-content';
@@ -42,7 +41,9 @@ import './elements/ons-toolbar';
 import './elements/ons-range';
 
 // fastclick
-window.addEventListener('load', () => FastClick.attach(document.body), false);
+window.addEventListener('load', () => {
+    ons.fastClick = FastClick.attach(document.body);
+}, false);
 
 // ons._defaultDeviceBackButtonHandler
 window.addEventListener('DOMContentLoaded', () => {
@@ -60,12 +61,5 @@ ons.ready(function() {
 
 // viewport.js
 new Viewport().setup();
-
-// modernize
-Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
-  Modernizr.addTest(
-    'overflowtouch',
-    window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-});
 
 export default ons;
