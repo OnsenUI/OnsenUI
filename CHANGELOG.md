@@ -5,6 +5,9 @@ CHANGELOG
 v2.0.0-beta.10
 ----
  * core: Expose FastClick instance as `ons.fastClick`.
+ * ons-navigator: Fixed a bug where popPage always showed the default animation.
+ * ons-navigator: Fixed md-lift-animator.
+ * ons-navigator: Removed small delay after Lift animators.
 
 v2.0.0-beta.9
 ----
