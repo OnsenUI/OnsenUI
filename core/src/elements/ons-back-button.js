@@ -46,7 +46,7 @@ var scheme = {
  *   [en]Returning from a page[/en]
  *   [ja]一つ前のページに戻る[/ja]
  * @example
- * <ons-back-button>
+ * <ons-back-button refresh animation="fade">
  *   Back
  * </ons-back-button>
  */
@@ -65,15 +65,15 @@ class BackButtonElement extends BaseElement {
 
   /**
    * @attribute animation-options
-   * @type {String}
+   * @type {Object}
    * @description
    *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
    */
 
   /**
-   * @attribute on-transition-end
-   * @type {String}
+   * @attribute callback
+   * @type {Function}
    * @description
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -81,8 +81,6 @@ class BackButtonElement extends BaseElement {
 
   /**
    * @attribute refresh
-   * @default  false
-   * @type {Boolean}
    * @description
    *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
    *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
@@ -148,7 +146,7 @@ class BackButtonElement extends BaseElement {
    */
 
   /**
-   * @property options.onTransitionEnd
+   * @property options.callback
    * @type {String}
    * @description
    *   [en]Function that is called when the transition has ended.[/en]
@@ -157,8 +155,6 @@ class BackButtonElement extends BaseElement {
 
   /**
    * @property options.refresh
-   * @default  false
-   * @type {Boolean}
    * @description
    *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
    *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
@@ -182,12 +178,12 @@ class BackButtonElement extends BaseElement {
         this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
       }
 
-      if (this.hasAttribute('on-transition-end')) {
-        this.options.onTransitionEnd = window.eval('(' + this.getAttribute('on-transition-end') + ')');
+      if (this.hasAttribute('callback')) {
+        this.options.callback = window.eval('(' + this.getAttribute('callback') + ')');
       }
 
       if (this.hasAttribute('refresh')) {
-        this.options.refresh = this.getAttribute('refresh') === 'true';
+        this.options.refresh = true;
       }
 
       navigator.popPage(this.options);

@@ -16,6 +16,7 @@ v2.0.0-beta.9
  * ons-carousel: Update API.
  * ons-icon: 'spin' attribute does not require boolean values anymore.
  * core: Fix DeviceBackButton dispatcher for pages containing SVG elements.
+ * ons-navigator: Changed part of the API.
 
 v2.0.0-beta.8
 ----
