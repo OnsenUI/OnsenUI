@@ -32,6 +32,15 @@ import BaseElement from 'ons/base-element';
  * </ons-template>
  */
 class TemplateElement extends BaseElement {
+
+  /**
+   * @property template
+   * @type {String}
+   * @description
+   *  [en]Template content.[/en]
+   *  [ja][/ja]
+   */
+
   createdCallback() {
     this.template = this.innerHTML;
 
