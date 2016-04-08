@@ -66,6 +66,14 @@ const rewritables = {
  */
 class SplitterContentElement extends BaseElement {
 
+  /**
+   * @attribute page
+   * @type {String}
+   * @description
+   *   [en]The url of the content page.[/en]
+   *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
+   */
+
   createdCallback() {
     this._page = null;
   }
@@ -86,11 +94,12 @@ class SplitterContentElement extends BaseElement {
   }
 
   /**
-   * @attribute page
-   * @type {String}
+   * @property page
+   * @readonly
+   * @type {HTMLElement}
    * @description
-   *   [en]The url of the content page.[/en]
-   *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
+   *   [en]Page element loaded in the splitter content.[/en]
+   *   [ja][/ja]
    */
   get page() {
     return this._page;

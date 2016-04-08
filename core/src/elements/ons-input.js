@@ -88,8 +88,24 @@ class InputElement extends BaseElement {
 
   /**
    * @attribute type
+   * @type {String}
    * @description
    *  [en]Specify the input type. This is the same as the "type" attribute for normal inputs. However, for "range" you should instead use <ons-range> element.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @attribute input-id
+   * @type {String}
+   * @description
+   *  [en]Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @attribute content-left
+   * @description
+   *  [en]The HTML content of ons-input is placed before the actual input as a label. Omit this to display it after the input.[/en]
    *  [ja][/ja]
    */
 
