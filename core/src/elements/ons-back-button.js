@@ -38,7 +38,7 @@ var scheme = {
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-navigator
  *   [en]ons-navigator component[/en]
- *   [ja]ons-navigatorコンポーネント[/en]
+ *   [ja]ons-navigatorコンポーネント[/ja]
  * @guide Addingatoolbar
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
