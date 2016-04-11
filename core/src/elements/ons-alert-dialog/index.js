@@ -216,9 +216,6 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
-    contentReady(this, () => {
-      this._compile();
-    });
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -235,7 +232,6 @@ class AlertDialogElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    const style = this.getAttribute('style');
     this.style.display = 'none';
 
     /**
@@ -276,10 +272,6 @@ class AlertDialogElement extends BaseElement {
     }
 
     this._dialog.children[0].appendChild(content);
-
-    if (style) {
-      this._dialog.setAttribute('style', style);
-    }
 
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
@@ -548,7 +540,6 @@ class AlertDialogElement extends BaseElement {
 
     contentReady(this, () => {
       this._compile();
-
       this._mask.addEventListener('click', this._boundCancel, false);
     });
   }
