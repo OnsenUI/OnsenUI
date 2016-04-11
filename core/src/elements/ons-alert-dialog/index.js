@@ -216,6 +216,9 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
+    contentReady(this, () => {
+      this._compile();
+    });
 
     this._visible = false;
     this._doorLock = new DoorLock();
