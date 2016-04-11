@@ -217,9 +217,7 @@ class AlertDialogElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
     });
 
     this._visible = false;
@@ -291,8 +289,6 @@ class AlertDialogElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   /**
@@ -551,9 +547,7 @@ class AlertDialogElement extends BaseElement {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
 
       this._mask.addEventListener('click', this._boundCancel, false);
     });
