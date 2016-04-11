@@ -95,9 +95,7 @@ class ListItemElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
     });
   }
 
@@ -148,8 +146,6 @@ class ListItemElement extends BaseElement {
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
