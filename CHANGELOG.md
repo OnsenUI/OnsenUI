@@ -8,6 +8,7 @@ v2.0.0-beta.10
  * ons-navigator: Fixed a bug where popPage always showed the default animation.
  * ons-navigator: Fixed md-lift-animator.
  * ons-navigator: Removed small delay after Lift animators.
+ * css-components: Fixed issue with list item using both "chevron" and "longdivider" modifiers.
 
 v2.0.0-beta.9
 ----
