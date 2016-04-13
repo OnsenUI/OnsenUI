@@ -41,7 +41,9 @@ import './elements/ons-toolbar';
 import './elements/ons-range';
 
 // fastclick
-window.addEventListener('load', () => FastClick.attach(document.body), false);
+window.addEventListener('load', () => {
+    ons.fastClick = FastClick.attach(document.body);
+}, false);
 
 // ons._defaultDeviceBackButtonHandler
 window.addEventListener('DOMContentLoaded', () => {

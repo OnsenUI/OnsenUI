@@ -35,7 +35,7 @@ const templateSource = util.createElement(`
 const defaultInnerTemplateSource = util.createElement(`
   <div>
     <div class="tab-bar__icon">
-      <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
+      <ons-icon icon="ion-cloud"></ons-icon>
     </div>
     <div class="tab-bar__label">label</div>
   </div>

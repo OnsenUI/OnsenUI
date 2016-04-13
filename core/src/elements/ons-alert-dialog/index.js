@@ -217,9 +217,7 @@ class AlertDialogElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
     });
 
     this._visible = false;
@@ -237,7 +235,6 @@ class AlertDialogElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    const style = this.getAttribute('style');
     this.style.display = 'none';
 
     /**
@@ -279,10 +276,6 @@ class AlertDialogElement extends BaseElement {
 
     this._dialog.children[0].appendChild(content);
 
-    if (style) {
-      this._dialog.setAttribute('style', style);
-    }
-
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
@@ -291,8 +284,6 @@ class AlertDialogElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   /**
@@ -551,10 +542,7 @@ class AlertDialogElement extends BaseElement {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
-
+      this._compile();
       this._mask.addEventListener('click', this._boundCancel, false);
     });
   }

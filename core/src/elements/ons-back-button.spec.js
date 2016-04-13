@@ -80,7 +80,7 @@ describe('OnsBackButtonElement', () => {
 
     it('takes \'animation\' attribute', (done) => {
       nav.pushPage('page2', {
-        onTransitionEnd: () => {
+        callback: () => {
           let element = nav.querySelector('ons-back-button');
           let animation = 'fade';
           element.setAttribute('animation', animation);
@@ -93,7 +93,7 @@ describe('OnsBackButtonElement', () => {
 
     it('takes \'animation-options\' attribute', (done) => {
       nav.pushPage('page2', {
-        onTransitionEnd: () => {
+        callback: () => {
           let element = nav.querySelector('ons-back-button');
           element.setAttribute('animation-options', '{delay: .1, duration: .2, timing: \'ease-out\'}');
           let spy = chai.spy.on(nav, 'popPage');
@@ -114,7 +114,7 @@ describe('OnsBackButtonElement', () => {
       });
 
       nav.pushPage('page2', {
-        onTransitionEnd: () => {
+        callback: () => {
           let element = nav.querySelector('ons-back-button');
           element.setAttribute('refresh', true);
           element._onClick();
@@ -124,16 +124,16 @@ describe('OnsBackButtonElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it('takes \'onTransitionEnd\' attribute', (done) => {
-      window.onTransitionEndCompleted = done;
+    it('takes \'callback\' attribute', (done) => {
+      window.callbackCompleted = done;
 
       nav.pushPage('page2', {
-        onTransitionEnd: () => {
+        callback: () => {
           let element = nav.querySelector('ons-back-button');
-          element.setAttribute('on-transition-end',
+          element.setAttribute('callback',
             `function() {\
-              var localPromise = window.onTransitionEndCompleted;\
-              window.onTransitionEndCompleted = null;\
+              var localPromise = window.callbackCompleted;\
+              window.callbackCompleted = null;\
               localPromise();\
             }`);
           element._onClick();

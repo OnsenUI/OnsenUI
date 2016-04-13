@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.10
+----
+ * core: Expose FastClick instance as `ons.fastClick`.
+ * ons-navigator: Fixed a bug where popPage always showed the default animation.
+ * ons-navigator: Fixed md-lift-animator.
+ * ons-navigator: Removed small delay after Lift animators.
+ * css-components: Fixed issue with list item using both "chevron" and "longdivider" modifiers.
+
 v2.0.0-beta.9
 ----
  * ons-splitter: Fixed memory leak.
@@ -12,6 +20,8 @@ v2.0.0-beta.9
  * ons-carousel: Update API.
  * ons-icon: 'spin' attribute does not require boolean values anymore.
  * core: Fix DeviceBackButton dispatcher for pages containing SVG elements.
+ * ons-navigator: Changed part of the API.
+ * ons-navigator: Fixed [#1324](https://github.com/OnsenUI/OnsenUI/issues/1324), [#1325](https://github.com/OnsenUI/OnsenUI/issues/1325).
 
 v2.0.0-beta.8
 ----

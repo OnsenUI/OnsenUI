@@ -25,7 +25,6 @@ import BaseElement from 'ons/base-element';
  * @description
  *   [en]Conditionally display content depending on the platform, device orientation or both.[/en]
  *   [ja][/ja]
- * @codepen yrhtv
  * @guide UtilityAPIs
  *   [en]Other utility APIs[/en]
  *   [ja]他のユーティリティAPI[/ja]
@@ -51,7 +50,9 @@ class ConditionalElement extends BaseElement {
    * @description
    *  [en]Space-separated platform names. Possible values are "ios", "android", "windows" and "other".[/en]
    *  [ja][/ja]
-   *
+   */
+
+  /**
    * @attribute orientation
    * @type {string}
    * @description

@@ -117,14 +117,6 @@ const rewritables = {
 class NavigatorElement extends BaseElement {
 
   /**
-   * @attribute animation-options
-   * @type {Expression}
-   * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
-   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
-   */
-
-  /**
    * @attribute page
    * @initonly
    * @type {String}
@@ -138,12 +130,24 @@ class NavigatorElement extends BaseElement {
    * @type {String}
    * @default default
    * @description
-   *  [en]Specify the transition animation. Use one of "slide", "simpleslide", "fade", "lift", "none" and "default".[/en]
-   *  [ja]画面遷移する際のアニメーションを指定します。"slide", "simpleslide", "fade", "lift", "none", "default"のいずれかを指定できます。[/ja]
+   *   [en]
+   *     Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
    */
 
   /**
-   * @attribute prepush
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/ja]
+   */
+
+  /**
+   * @event prepush
    * @description
    *   [en]Fired just before a page is pushed.[/en]
    *   [ja]pageがpushされる直前に発火されます。[/ja]
@@ -160,7 +164,7 @@ class NavigatorElement extends BaseElement {
    */
 
   /**
-   * @attribute prepop
+   * @event prepop
    * @description
    *   [en]Fired just before a page is popped.[/en]
    *   [ja]pageがpopされる直前に発火されます。[/ja]
@@ -177,7 +181,7 @@ class NavigatorElement extends BaseElement {
    */
 
   /**
-   * @attribute postpush
+   * @event postpush
    * @description
    *   [en]Fired just after a page is pushed.[/en]
    *   [ja]pageがpushされてアニメーションが終了してから発火されます。[/ja]
@@ -255,15 +259,19 @@ class NavigatorElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   *   [en]
+   *     Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
    * @param {Boolean} [options.refresh]
    *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
    *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
-   * @param {Function} [options.onTransitionEnd]
+   * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
    * @return {Promise}
@@ -318,7 +326,6 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepop event.');
     }
 
-    const animator = this._animatorFactory.newAnimator(options);
     const l = this.pages.length;
 
     this._isRunning = true;
@@ -330,8 +337,8 @@ class NavigatorElement extends BaseElement {
       var enterPage = this.pages[l - 2];
       enterPage.style.display = 'block';
 
-      options.animation = leavePage.options.animation || options.animation;
-      options.animationOptions = util.extend({}, leavePage.options.animationOptions, options.animationOptions || {});
+      options.animation = leavePage.pushedOptions.animation || options.animation;
+      options.animationOptions = util.extend({}, leavePage.pushedOptions.animationOptions, options.animationOptions || {});
 
       const callback = () => {
         enterPage._show();
@@ -343,14 +350,15 @@ class NavigatorElement extends BaseElement {
 
           util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
 
-          if (typeof options.onTransitionEnd === 'function') {
-            options.onTransitionEnd();
+          if (typeof options.callback === 'function') {
+            options.callback();
           }
 
           resolve(enterPage);
         });
       };
 
+      const animator = this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
     }).catch(() => this._isRunning = false);
   }
@@ -360,32 +368,39 @@ class NavigatorElement extends BaseElement {
    * @method pushPage
    * @signature pushPage(page, [options])
    * @param {String} [page]
-   *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
+   *   [en]Page URL. Can be either a HTML document or a `&lt;ons-template&gt;`.[/en]
    *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.page]
-   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
+   *   [en]Page URL. Only necessary if `page` parameter is omitted.[/en]
    *   [ja][/ja]
    * @param {String} [options.pageHTML]
    *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
    *   [ja][/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   *   [en]
+   *     Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
-   * @param {Function} [options.onTransitionEnd]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
+   * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+   * @param {Any} [options.data]
+   *   [en]Custom data that will be stored in the new page element.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the pushed page.[/en]
    *   [ja]追加したページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Pushes the specified pageUrl into the page stack.[/en]
-   *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+   *   [en]Pushes the specified page into the stack.[/en]
+   *   [ja]指定したpageを新しいページスタックに追加します。新しいページが表示されます。[/ja]
    */
   pushPage(page, options = {}) {
     options = this._prepareOptions(options, page);
@@ -411,13 +426,8 @@ class NavigatorElement extends BaseElement {
 
     this._isRunning = true;
 
-    options = util.extend({}, this.options || {}, options);
-
-    options.animationOptions = util.extend(
-      {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
-      options.animationOptions || {}
-    );
+    const animationOptions = AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
+    options = util.extend({}, this.options || {}, {animationOptions}, options);
 
     const animator = this._animatorFactory.newAnimator(options);
 
@@ -430,8 +440,9 @@ class NavigatorElement extends BaseElement {
       var leavePage = this.pages[pageLength - 2];
       enterPage.updateBackButton(pageLength - 1);
 
-      enterPage.name = options.page;
-      enterPage.options = options;
+      enterPage.data = options.data;
+      enterPage._name = options.page;
+      enterPage.pushedOptions = options;
 
       return new Promise(resolve => {
         var done = () => {
@@ -443,8 +454,8 @@ class NavigatorElement extends BaseElement {
 
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
-          if (typeof options.onTransitionEnd === 'function') {
-            options.onTransitionEnd();
+          if (typeof options.callback === 'function') {
+            options.callback();
           }
 
           resolve(enterPage);
@@ -471,40 +482,19 @@ class NavigatorElement extends BaseElement {
 
   /**
    * @method replacePage
-   * @signature replacePage(pageUrl, [options])
-   * @param {String} [pageUrl]
-   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.page]
-   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.pageHTML]
-   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @signature replacePage(page, [options])
    * @return {Promise}
    *   [en]Promise which resolves to the new page.[/en]
    *   [ja]新しいページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Replaces the current page with the specified one.[/en]
+   *   [en]Replaces the current page with the specified one. Extends pushPage parameters.[/en]
    *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
    */
   replacePage(page, options = {}) {
     options = this._prepareOptions(options, page);
-    const callback = options.onTransitionEnd;
+    const callback = options.callback;
 
-    options.onTransitionEnd = () => {
+    options.callback = () => {
       if (this.pages.length > 1) {
         this.pages[this.pages.length - 2]._destroy();
       }
@@ -517,28 +507,16 @@ class NavigatorElement extends BaseElement {
 
   /**
    * @method insertPage
-   * @signature insertPage(index, pageUrl, [options])
+   * @signature insertPage(index, page, [options])
    * @param {Number} index
    *   [en]The index where it should be inserted.[/en]
    *   [ja]スタックに挿入する位置のインデックスを指定します。[/ja]
-   * @param {String} [pageUrl]
-   *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.page]
-   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the inserted page.[/en]
    *   [ja]指定したページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
-   *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+   *   [en]Insert the specified page into the stack with specified index. Extends pushPage parameters.[/en]
+   *   [ja]指定したpageをページスタックのindexで指定した位置に追加します。[/ja]
    */
   insertPage(index, page, options = {}) {
     options = this._prepareOptions(options, page);
@@ -550,8 +528,9 @@ class NavigatorElement extends BaseElement {
 
     const run = templateHTML => {
       const element = util.extend(this._createPageElement(templateHTML), {
-        name: options.page,
-        options: options
+        _name: options.page,
+        data: options.data,
+        pushedOptions: options
       });
 
       options.animationOptions = util.extend(
@@ -563,7 +542,7 @@ class NavigatorElement extends BaseElement {
       return new Promise(resolve => {
         element.style.display = 'none';
         this.insertBefore(element, this.pages[index]);
-        this.getCurrentPage().updateBackButton(true);
+        this.topPage.updateBackButton(true);
 
         rewritables.link(this, element, options, element => {
           setTimeout(() => {
@@ -583,30 +562,12 @@ class NavigatorElement extends BaseElement {
 
   /**
    * @method resetToPage
-   * @signature resetToPage(pageUrl, [options])
-   * @param {String/undefined} [pageUrl]
-   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.page]
-   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.pageHTML]
-   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @signature resetToPage(page, [options])
    * @return {Promise}
    *   [en]Promise which resolves to the new top page.[/en]
    *   [ja]新しいトップページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
+   *   [en]Clears page stack and adds the specified page to the stack. Extends pushPage parameters.[/en]
    *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
    */
   resetToPage(page, options = {}) {
@@ -616,9 +577,9 @@ class NavigatorElement extends BaseElement {
       options.animation = 'none';
     }
 
-    const callback = options.onTransitionEnd;
+    const callback = options.callback;
 
-    options.onTransitionEnd = () => {
+    options.callback = () => {
       while (this.pages.length > 1) {
         this.pages[0]._destroy();
       }
@@ -640,23 +601,11 @@ class NavigatorElement extends BaseElement {
    * @param {String|Number} item
    *   [en]Page URL or index of an existing page in navigator's stack.[/en]
    *   [ja]ページのURLかもしくはons-navigatorのページスタックのインデックス値を指定します。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the new top page.[/en]
    *   [ja]新しいトップページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't.[/en]
+   *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't. Extends pushPage parameters.[/en]
    *   [ja]指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。[/ja]
    */
   bringPageTop(item, options = {}) {
@@ -773,36 +722,76 @@ class NavigatorElement extends BaseElement {
   }
 
   /**
-   * @method getCurrentPage
-   * @signature getCurrentPage()
-   * @return {Object}
-   *   [en]Current page object.[/en]
-   *   [ja]現在のpageオブジェクト。[/ja]
+   * @property topPage
+   * @readonly
+   * @type {HTMLElement}
    * @description
-   *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+   *   [en]Current top page element. Use this method to access options passed by pushPage-like methods.[/en]
    *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
    */
-  getCurrentPage() {
-    if (this.pages.length <= 0) {
-      throw new Error('Invalid state');
-    }
-    return this.pages[this.pages.length - 1];
+  get topPage() {
+    return this.pages[this.pages.length - 1] || null;
   }
 
+  /**
+   * @property pages
+   * @readonly
+   * @type {HTMLCollection}
+   * @description
+   *   [en]Navigator's page stack.[/en]
+   *   [ja][/ja]
+   */
   get pages() {
     return this.children;
   }
 
   /**
-   * @property {object} [options]
+   * @property options
+   * @type {Object}
    * @description
-   *   [en]Default options object.[/en]
+   *   [en]Default options object. Attributes have priority over this property.[/en]
    *   [ja][/ja]
+   */
+
+  /**
+   * @property options.animation
+   * @type {String}
+   * @description
+   *   [en]
+   *     Animation name. Available animations are "slide", "lift", "fade" and "none".
+   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
+   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
+   *   [/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property options.animationOptions
+   * @type {String}
+   * @description
+   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
+   */
+
+  /**
+   * @property options.callback
+   * @type {String}
+   * @description
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   */
+
+  /**
+   * @property options.refresh
+   * @default  false
+   * @type {Boolean}
+   * @description
+   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
    */
   get options() {
     return this._options;
   }
-
   set options(object) {
     this._options = object;
   }
@@ -810,7 +799,6 @@ class NavigatorElement extends BaseElement {
   set _isRunning(value) {
     this.setAttribute('_is-running', value ? 'true' : 'false');
   }
-
   get _isRunning() {
    return JSON.parse(this.getAttribute('_is-running'));
   }
