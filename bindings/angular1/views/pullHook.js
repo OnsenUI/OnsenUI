@@ -61,8 +61,6 @@ limitations under the License.
       _onAction: function(done) {
         if (this._attrs.ngAction) {
           this._scope.$eval(this._attrs.ngAction, {$done: done});
-        } else if (this._attrs.onAction) {
-          eval(this._attrs.onAction); //eslint-disable-line no-eval
         }
       },
 

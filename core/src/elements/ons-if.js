@@ -19,7 +19,45 @@ import orientation from 'ons/orientation';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 
+/**
+ * @element ons-if
+ * @category util
+ * @description
+ *   [en]Conditionally display content depending on the platform, device orientation or both.[/en]
+ *   [ja][/ja]
+ * @codepen yrhtv
+ * @guide UtilityAPIs
+ *   [en]Other utility APIs[/en]
+ *   [ja]他のユーティリティAPI[/ja]
+ * @example
+ * <ons-page>
+ *   <ons-if orientation="landscape">
+ *     Landscape view!
+ *   </ons-if>
+ *   <ons-if platform="android">
+ *     This is Android.
+ *   </ons-if>
+ *   <ons-if platform="ios other">
+ *     This is not Android.
+ *   </ons-if>
+ * </ons-page>
+ */
 class ConditionalElement extends BaseElement {
+
+  /**
+   * @attribute platform
+   * @initonly
+   * @type {string}
+   * @description
+   *  [en]Space-separated platform names. Possible values are "ios", "android", "windows" and "other".[/en]
+   *  [ja][/ja]
+   *
+   * @attribute orientation
+   * @type {string}
+   * @description
+   *  [en]Either "portrait" or "landscape".[/en]
+   *  [ja]portraitもしくはlandscapeを指定します[/ja]
+   */
 
   createdCallback() {
     if (platform._renderPlatform !== null) {

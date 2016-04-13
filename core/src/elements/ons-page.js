@@ -161,7 +161,7 @@ class PageElement extends BaseElement {
         if (this._skipInit) {
           this.removeAttribute('_skipinit');
         } else {
-          util.triggerElementEvent(this, 'init', this.eventDetail);
+          setImmediate(() => util.triggerElementEvent(this, 'init', this.eventDetail));
         }
       }
 

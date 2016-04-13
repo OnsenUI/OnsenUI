@@ -106,7 +106,7 @@ describe('OnsBackButtonElement', () => {
 
     it('takes \'refresh\' attribute', () => {
       let promise = new Promise((resolve) => {
-        nav.addEventListener('init', event => {
+        nav.addEventListener('destroy', event => {
           if (event.detail.page.id === 'p1') {
             return resolve();
           }

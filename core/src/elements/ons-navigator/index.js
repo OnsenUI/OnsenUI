@@ -28,9 +28,7 @@ import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
-import NavigatorPage from './navigator-page';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import DoorLock from 'ons/doorlock';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
@@ -211,6 +209,7 @@ class NavigatorElement extends BaseElement {
    *   [en]Object of the previous page.[/en]
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
+
   createdCallback() {
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
 
@@ -224,498 +223,12 @@ class NavigatorElement extends BaseElement {
     });
   }
 
-
-  /**
-   * @property {object} [options]
-   * @description
-   *   [en]Default options object.[/en]
-   *   [ja][/ja]
-   */
-  get options() {
-    return this._options;
-  }
-
-  set options(object) {
-    this._options = object;
-  }
-
-  set _isRunning(value) {
-    if (value) {
-      this.setAttribute('_is-running', 'true');
-    }
-    else {
-      this.setAttribute('_is-running', 'false');
-    }
-  }
-
-  get _isRunning() {
-   return JSON.parse(this.getAttribute('_is-running'));
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  canPopPage() {
-    return this.pages.length > 1;
-  }
-
-  /**
-   * @method replacePage
-   * @signature replacePage(pageUrl, [options])
-   * @param {String} [pageUrl]
-   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.page]
-   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.pageHTML]
-   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Replaces the current page with the specified one.[/en]
-   *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
-   */
-
-  /**
-   * Replaces the current page with the specified one.
-   *
-   * @param {String} page
-   * @param {Object} [options]
-   */
-  replacePage(page, options = {}) {
-
-    if (typeof page === 'object' && page !== null) {
-      options = page;
-    } else {
-      options.page = page;
-    }
-
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    const onTransitionEnd = options.onTransitionEnd || function() {};
-
-    options.onTransitionEnd = () => {
-      if (this.pages.length > 1) {
-        this.pages[this.pages.length - 2]._destroy();
-      }
-
-      this._updateLastPageBackButton();
-
-      onTransitionEnd();
-    };
-
-    return this.pushPage(options.page, options);
-  }
-
-  _updateLastPageBackButton() {
-    const index = this.pages.length - 1;
-    this.pages[index].updateBackButton(index > 0);
-  }
-
-  /**
-   * @method popPage
-   * @signature popPage([options])
-   * @return {Promise}
-   *   [en]Resolves to the new top page object.[/en]
-   *   [ja]Resolves to the new top page object.[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
-   * @param {Boolean} [options.refresh]
-   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
-   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
-   *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
-   */
-
-  /**
-   * Pops current page from the page stack.
-   *
-   * @param {Object} [options]
-   * @param {String} [options.animation]
-   * @param {Object} [options.animationOptions]
-   * @param {Boolean} [options.refresh]
-   * @param {Function} [options.onTransitionEnd]
-   * @return {Promise} Resolves to the new top page object.
-   */
-  popPage(options = {}) {
-
-    var lastPage = this.pages[this.pages.length - 1];
-    if (options.refresh) {
-      const index = this.pages.length - 2;
-
-
-      if (!this.pages[index].name) {
-        throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-      }
-
-      var popUpdate = () => {
-        return new Promise((resolve) => {
-          this.pages[this.pages.length - 1]._destroy();
-          resolve();
-        });
-      };
-
-      var preFun = () => new Promise(resolve => {
-        internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
-          const element = this._createPageElement(templateHTML);
-
-          element.name =  this.name;
-          element.options = options;
-
-          rewritables.link(this, element, this.pages[index].options, element => {
-            this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
-            this.pages[index + 1]._destroy();
-            resolve();
-          });
-        });
-      });
-
-      return preFun().then( () => {
-        return this._popPage(options, popUpdate);
-      });
-    } else {
-      var popUpdate = () => {
-        return new Promise((resolve) => {
-          lastPage._destroy();
-          resolve();
-        });
-      };
-
-      return this._popPage(options, popUpdate);
-    }
-
-  }
-
-  _popPage(options, update = () => Promise.resolve(), pages = []) {
-    if (typeof options !== 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    if (this._isRunning) {
-      return Promise.reject('popPage is already running.');
-    }
-
-    if (this.pages.length <= 1) {
-      return Promise.reject('ons-navigator\'s page stack is empty.');
-    }
-
-    options = util.extend({}, this.options || {}, options);
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const animator = this._animatorFactory.newAnimator(options);
-    const l = this.pages.length;
-
-    const tryPopPage = () => {
-
-      this._isRunning = true;
-
-      if (this._emitPrePopEvent()) {
-        return Promise.reject('Canceled in prepop event.');
-      }
-      this.pages[l - 2].updateBackButton((l - 2) > 0);
-
-      return new Promise(resolve => {
-        var leavePage = this.pages[l - 1];
-        var enterPage = this.pages[l - 2];
-        enterPage.style.display = 'block';
-
-        const callback = () => {
-          enterPage._show();
-          leavePage._hide();
-
-          const eventDetail = {
-            leavePage: leavePage,
-            enterPage: enterPage,
-            navigator: this
-          };
-
-          pages.pop();
-          update(pages, this).then(() => {
-            this._isRunning = false;
-
-            const event = util.triggerElementEvent(this, 'postpop', eventDetail);
-
-            if (typeof options.onTransitionEnd === 'function') {
-              options.onTransitionEnd();
-            }
-
-            resolve(enterPage);
-          });
-        };
-
-        animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
-      });
-    };
-
-    return tryPopPage()
-      .catch(() => {
-        this._isRunning = false;
-      });
-  }
-
-
-  /**
-   * @method insertPage
-   * @signature insertPage(index, pageUrl, [options])
-   * @param {Number} index
-   *   [en]The index where it should be inserted.[/en]
-   *   [ja]スタックに挿入する位置のインデックスを指定します。[/ja]
-   * @param {String} pageUrl
-   *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @description
-   *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
-   *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
-   */
-
-  /**
-   * Insert page object that has the specified pageUrl into the page stack and
-   * if options object is specified, apply the options.
-   *
-   * @param {Number} index
-   * @param {String} page
-   * @param {Object} [options]
-   * @param {String/NavigatorTransitionAnimator} [options.animation]
-   * @return {Promise} Resolves to the inserted page object
-   */
-  insertPage(index, page, options = {}) {
-
-    if (typeof page === 'object' && page !== null) {
-      options = page;
-    } else {
-      options.page = page;
-    }
-
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    index = this._normalizeIndex(index);
-
-    if (index >= this.pages.length) {
-      return this.pushPage.apply(this, [].slice.call(arguments, 1));
-    }
-
-    const tryInsertPage = () => {
-      const run = templateHTML => {
-        const element = this._createPageElement(templateHTML);
-        CustomElements.upgrade(element);
-
-        element.name = page;
-        element.options = options;
-
-        return new Promise(resolve => {
-            element.style.display = 'none';
-            this.insertBefore(element, this.pages[index]);
-            this.getCurrentPage().updateBackButton(true);
-
-          rewritables.link(this, element, options, element => {
-            setTimeout(() => {
-              element = null;
-              resolve(this.pages[index]);
-            }, 1000 / 60);
-          });
-        });
-      };
-
-      if (options.pageHTML) {
-        return run(options.pageHTML);
-      } else {
-        return internal.getPageHTMLAsync(page).then(run);
-      }
-    };
-
-    return tryInsertPage();
-  }
-
-  _normalizeIndex(index) {
-    if (index < 0) {
-      index = Math.abs(this.pages.length + index) % this.pages.length;
-    }
-    return index;
-  }
-
-  /**
-   * @method getCurrentPage
-   * @signature getCurrentPage()
-   * @return {Object}
-   *   [en]Current page object.[/en]
-   *   [ja]現在のpageオブジェクト。[/ja]
-   * @description
-   *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
-   *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
-   */
-
-  /**
-   * Get current page's navigator item.
-   *
-   * Use this method to access options passed by pushPage() or resetToPage() method.
-   * eg. ons.navigator.getCurrentPage().options
-   *
-   * @return {Object}
-   */
-  getCurrentPage() {
-    if (this.pages.length <= 0) {
-      throw new Error('Invalid state');
-    }
-    return this.pages[this.pages.length - 1];
-  }
-
-  _show() {
-    if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1]._show();
-    }
-  }
-
-  _hide() {
-    if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1]._hide();
-    }
-  }
-
-  _destroy() {
-    // these are children anymore
-    for (let i = this.pages.length - 1; i >= 0; i--) {
-      this.pages[i]._destroy();
-    }
-
-    this.remove();
-  }
-
-  get pages() {
-    return this.children;
-  }
-
-  _onDeviceBackButton(event) {
-    if (this.pages.length > 1) {
-      this.popPage();
-    } else {
-      event.callParentHandler();
-    }
-  }
-
-  /**
-   * @method resetToPage
-   * @signature resetToPage(pageUrl, [options])
-   * @param {String/undefined} [pageUrl]
-   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.page]
-   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.pageHTML]
-   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
-   *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
-   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
-   * @param {Function} [options.onTransitionEnd]
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
-   * @description
-   *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
-   *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
-   */
-
-  /**
-   * Clears page stack and add the specified pageUrl to the page stack.
-   * If options object is specified, apply the options.
-   * the options object include all the attributes of this navigator.
-   *
-   * If page is undefined, navigator will push initial page contents instead of.
-   *
-   * @param {String/undefined} page
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the new top page object.
-   */
-  resetToPage(page, options = {}) {
-
-    if (typeof page === 'object' && page !== null) {
-      options = page;
-    } else {
-      options.page = page;
-    }
-
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    if (!options.animator && !options.animation) {
-      options.animation = 'none';
-    }
-
-    const onTransitionEnd = options.onTransitionEnd || function() {};
-
-    options.onTransitionEnd = () => {
-      while (this.pages.length > 1) {
-        this.pages[0]._destroy();
-      }
-
-      this.pages[0].updateBackButton(false);
-      onTransitionEnd();
-    };
-
-    if (!options.pageHTML && (options.page === undefined || page === '')) {
-      if (this.hasAttribute('page')) {
-        options.page = this.getAttribute('page');
-      } else {
-        options.pageHTML = this._initialHTML;
-        options.page = '';
-      }
-    }
-
-    return this.pushPage(options.page, options);
-  }
-
-  attributeChangedCallback(name, last, current) {
-  }
-
   attachedCallback() {
     this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
     rewritables.ready(this, () => {
-      if (this.pages.length === 0) {
-        if (this.hasAttribute('page')) {
-          this.pushPage(this.getAttribute('page'), {animation: 'none'});
-        }
+      if (this.pages.length === 0 && this.hasAttribute('page')) {
+        this.pushPage(this.getAttribute('page'), {animation: 'none'});
       } else {
         for (var i = 0; i < this.pages.length; i++) {
           if (this.pages[i].nodeName !== 'ONS-PAGE') {
@@ -732,6 +245,117 @@ class NavigatorElement extends BaseElement {
     this._deviceBackButtonHandler = null;
   }
 
+  attributeChangedCallback(name, last, current) {
+  }
+
+  /**
+   * @method popPage
+   * @signature popPage([options])
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Boolean} [options.refresh]
+   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   * @param {Function} [options.onTransitionEnd]
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the revealed page.[/en]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
+   *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+   */
+  popPage(options = {}) {
+    const popUpdate = () => new Promise((resolve) => {
+      this.pages[this.pages.length - 1]._destroy();
+      resolve();
+    });
+    options = this._prepareOptions(options);
+
+    if (!options.refresh) {
+      return this._popPage(options, popUpdate);
+    }
+    const index = this.pages.length - 2;
+
+    if (!this.pages[index].name) {
+      throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
+    }
+
+    return new Promise(resolve => {
+      internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
+        const element = util.extend(this._createPageElement(templateHTML), {
+          name: this.name,
+          options: options
+        });
+
+        rewritables.link(this, element, this.pages[index].options, element => {
+          this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
+          this.pages[index + 1]._destroy();
+          resolve();
+        });
+      });
+    }).then(() => this._popPage(options, popUpdate));
+  }
+
+  _popPage(options, update = () => Promise.resolve(), pages = []) {
+    if (this._isRunning) {
+      return Promise.reject('popPage is already running.');
+    }
+
+    if (this.pages.length <= 1) {
+      return Promise.reject('ons-navigator\'s page stack is empty.');
+    }
+
+    if (this._emitPrePopEvent()) {
+      return Promise.reject('Canceled in prepop event.');
+    }
+
+    const animator = this._animatorFactory.newAnimator(options);
+    const l = this.pages.length;
+
+    this._isRunning = true;
+
+    this.pages[l - 2].updateBackButton((l - 2) > 0);
+
+    return new Promise(resolve => {
+      var leavePage = this.pages[l - 1];
+      var enterPage = this.pages[l - 2];
+      enterPage.style.display = 'block';
+
+      options.animation = leavePage.options.animation || options.animation;
+      options.animationOptions = util.extend({}, leavePage.options.animationOptions, options.animationOptions || {});
+
+      const callback = () => {
+        enterPage._show();
+        leavePage._hide();
+
+        pages.pop();
+        update(pages, this).then(() => {
+          this._isRunning = false;
+
+          util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+
+          resolve(enterPage);
+        });
+      };
+
+      animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
+    }).catch(() => this._isRunning = false);
+  }
+
+
   /**
    * @method pushPage
    * @signature pushPage(page, [options])
@@ -742,7 +366,7 @@ class NavigatorElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.page]
-   *   [en]PageURL. Only necssary if `page` parameter is omitted.[/en]
+   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
    *   [ja][/ja]
    * @param {String} [options.pageHTML]
    *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
@@ -756,54 +380,27 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [options.onTransitionEnd]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the pushed page.[/en]
+   *   [ja]追加したページを解決するPromiseを返します。[/ja]
    * @description
    *   [en]Pushes the specified pageUrl into the page stack.[/en]
    *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
    */
-
-  /**
-   * Pushes the specified pageUrl into the page stack and
-   * if options object is specified, apply the options.
-   *
-   * @param {String} page
-   * @param {Object} [options]
-   * @param {String/NavigatorTransitionAnimator} [options.animation]
-   * @param {Object} [options.animationOptions]
-   * @param {Function} [options.onTransitionEnd]
-   * @param {String} [options.pageHTML]
-   * @return {Promise} Resolves to the new top page object.
-   */
   pushPage(page, options = {}) {
-    if (typeof page === 'object' && page !== null) {
-      options = page;
-    } else {
-      options.page = page;
-    }
-
-    const run = (templateHTML) => new Promise((resolve) => {
-      const element = this._createPageElement(templateHTML);
-      CustomElements.upgrade(element);
-      this.appendChild(element);
+    options = this._prepareOptions(options, page);
+    const run = templateHTML => new Promise(resolve => {
+      this.appendChild(this._createPageElement(templateHTML));
       resolve();
     });
 
-    let update;
-
     if (options.pageHTML) {
-      update = () => run(options.pageHTML);
-    } else {
-      update = () => internal.getPageHTMLAsync(page).then(run);
+      return this._pushPage(options, () => run(options.pageHTML));
     }
-
-    return this._pushPage(options, update);
+    return this._pushPage(options, () => internal.getPageHTMLAsync(options.page).then(run));
   }
 
-
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
-    if (typeof options !== 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
     if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
@@ -812,75 +409,232 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    const tryPushPage = () => {
-      options = util.extend({}, this.options || {}, options);
+    this._isRunning = true;
+
+    options = util.extend({}, this.options || {}, options);
+
+    options.animationOptions = util.extend(
+      {},
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+      options.animationOptions || {}
+    );
+
+    const animator = this._animatorFactory.newAnimator(options);
+
+    pages.push(page);
+
+    return update(pages, this).then(() => {
+      const pageLength = this.pages.length;
+
+      var enterPage  = this.pages[pageLength - 1];
+      var leavePage = this.pages[pageLength - 2];
+      enterPage.updateBackButton(pageLength - 1);
+
+      enterPage.name = options.page;
+      enterPage.options = options;
+
+      return new Promise(resolve => {
+        var done = () => {
+          this._isRunning = false;
+
+          if (leavePage) {
+            leavePage.style.display = 'none';
+          }
+
+          util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+
+          resolve(enterPage);
+        };
+
+        enterPage.style.display = 'none';
+
+        var push = () =>  {
+          enterPage.style.display = 'block';
+          if (leavePage) {
+            leavePage._hide();
+            enterPage._show();
+            animator.push(enterPage, leavePage, done);
+          } else {
+            enterPage._show();
+            done();
+          }
+        };
+
+        options._linked ? push() : rewritables.link(this, enterPage, options, push);
+      });
+    }).catch(() => this._isRunning = false);
+  }
+
+  /**
+   * @method replacePage
+   * @signature replacePage(pageUrl, [options])
+   * @param {String} [pageUrl]
+   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.pageHTML]
+   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   * @param {Function} [options.onTransitionEnd]
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the new page.[/en]
+   *   [ja]新しいページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Replaces the current page with the specified one.[/en]
+   *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
+   */
+  replacePage(page, options = {}) {
+    options = this._prepareOptions(options, page);
+    const callback = options.onTransitionEnd;
+
+    options.onTransitionEnd = () => {
+      if (this.pages.length > 1) {
+        this.pages[this.pages.length - 2]._destroy();
+      }
+      this._updateLastPageBackButton();
+      callback && callback();
+    };
+
+    return this.pushPage(options);
+  }
+
+  /**
+   * @method insertPage
+   * @signature insertPage(index, pageUrl, [options])
+   * @param {Number} index
+   *   [en]The index where it should be inserted.[/en]
+   *   [ja]スタックに挿入する位置のインデックスを指定します。[/ja]
+   * @param {String} [pageUrl]
+   *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
+   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+   *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the inserted page.[/en]
+   *   [ja]指定したページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+   *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+   */
+  insertPage(index, page, options = {}) {
+    options = this._prepareOptions(options, page);
+    index = this._normalizeIndex(index);
+
+    if (index >= this.pages.length) {
+      return this.pushPage(options);
+    }
+
+    const run = templateHTML => {
+      const element = util.extend(this._createPageElement(templateHTML), {
+        name: options.page,
+        options: options
+      });
 
       options.animationOptions = util.extend(
-        options.animationOptions || {},
-        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+        {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+        options.animationOptions || {}
       );
 
-      const animator = this._animatorFactory.newAnimator(options);
+      return new Promise(resolve => {
+        element.style.display = 'none';
+        this.insertBefore(element, this.pages[index]);
+        this.getCurrentPage().updateBackButton(true);
 
-      pages.push(page);
-
-      return update(pages, this)
-        .then(() => {
-          const pageLength = this.pages.length;
-
-          var enterPage  = this.pages[this.pages.length - 1];
-          var leavePage = this.pages[this.pages.length - 2];
-          enterPage.updateBackButton(this.pages.length - 1);
-
-          this.pages[pageLength - 1].name = options.page;
-          this.pages[pageLength - 1].options = options;
-
-
-          return new Promise(resolve => {
-            var done = () => {
-              this._isRunning = false;
-              leavePage.style.display = 'none';
-
-              const eventDetail = {
-                leavePage: leavePage,
-                enterPage: enterPage,
-                navigator: this
-              };
-
-                util.triggerElementEvent(this, 'postpush', eventDetail);
-
-                if (typeof options.onTransitionEnd === 'function') {
-                  options.onTransitionEnd();
-                }
-
-                resolve(enterPage);
-            };
-
-              enterPage.style.display = 'none';
-            rewritables.link(this, enterPage, options, () =>  {
-              enterPage.style.display = 'block';
-                if (pageLength > 1) {
-                  leavePage._hide();
-                  enterPage._show();
-                  animator.push(enterPage, leavePage, done);
-                } else {
-                  enterPage._show();
-                  done();
-                }
-              });
-          });
+        rewritables.link(this, element, options, element => {
+          setTimeout(() => {
+            element = null;
+            resolve(this.pages[index]);
+          }, 1000 / 60);
+        });
       });
     };
 
-    this._isRunning = true;
-
-    return tryPushPage()
-      .catch(() => {
-        this._isRunning = false;
-      });
+    if (options.pageHTML) {
+      return run(options.pageHTML);
+    } else {
+      return internal.getPageHTMLAsync(options.page).then(run);
+    }
   }
 
-    /**
+  /**
+   * @method resetToPage
+   * @signature resetToPage(pageUrl, [options])
+   * @param {String/undefined} [pageUrl]
+   *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
+   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.page]
+   *   [en]PageURL. Only necessary if `page` parameter is omitted.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.pageHTML]
+   *   [en]HTML code that will be computed as a new page. Overwrites `page` parameter.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+   *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+   * @param {Function} [options.onTransitionEnd]
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the new top page.[/en]
+   *   [ja]新しいトップページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
+   *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
+   */
+  resetToPage(page, options = {}) {
+    options = this._prepareOptions(options, page);
+
+    if (!options.animator && !options.animation) {
+      options.animation = 'none';
+    }
+
+    const callback = options.onTransitionEnd;
+
+    options.onTransitionEnd = () => {
+      while (this.pages.length > 1) {
+        this.pages[0]._destroy();
+      }
+
+      this.pages[0].updateBackButton(false);
+      callback && callback();
+    };
+
+    if (!options.page && !options.pageHTML && this.hasAttribute('page')) {
+      options.page = this.getAttribute('page');
+    }
+
+    return this.pushPage(options);
+  }
+
+  /**
    * @method bringPageTop
    * @signature bringPageTop(item, [options])
    * @param {String|Number} item
@@ -898,75 +652,80 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [options.onTransitionEnd]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the new top page.[/en]
+   *   [ja]新しいトップページを解決するPromiseを返します。[/ja]
    * @description
    *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't.[/en]
    *   [ja]指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。[/ja]
    */
-
-  /**
-   * Brings the given pageUrl or index to the top of the page stack
-   * if already exists or pushes the page into the stack if doesn't.
-   * If options object is specified, apply the options.
-   *
-   * @param {String|Number} item Page name or valid index.
-   * @param {Object} options
-   * @return {Promise} Resolves to the new top page object.
-   */
   bringPageTop(item, options = {}) {
-
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
+    if (['number', 'string'].indexOf(typeof item) === -1) {
+      throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
+    const index = typeof item === 'number' ? this._normalizeIndex(item) : this._lastIndexOfPage(item);
+    const page = this.pages[index];
 
-    options = util.extend({}, this.options || {}, options);
+    if (index < 0) {
+      return this.pushPage(item, options);
+    }
+    options = this._prepareOptions(options);
 
-    if (this.isRunning) {
+    if (index === this.pages.length - 1) {
+      return Promise.resolve(page);
+    }
+    if (!page) {
+      throw new Error('Failed to find item ' + item);
+    }
+    if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
-
     if (this._emitPrePushEvent()) {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    let index;
-    if (typeof item === 'string') {
-      options.page = item;
-      index = this._lastIndexOfPage(options.page);
-    } else if (typeof item === 'number') {
-      index = this._normalizeIndex(item);
-      if (item >= this.pages.length) {
-        throw new Error('The provided index does not match an existing page.');
-      }
-      options.page = this.pages[index].name;
-    } else {
-      throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+    util.extend(options, {
+      page: page.name,
+      _linked: true
+    });
+    page.style.display = 'block';
+    page.setAttribute('_skipinit', '');
+    page.parentNode.appendChild(page);
+    return this._pushPage(options);
+  }
+
+  _prepareOptions(options = {}, page) {
+    if (typeof page === 'object' && page !== null) {
+      options = page;
+      page = options.page;
     }
+    if (typeof options != 'object') {
+      throw new Error('options must be an object. You supplied ' + options);
+    }
+    page = page || options.page;
 
+    return util.extend({}, this.options || {}, options, {page});
+  }
 
-    if (index < 0) {
-      // Fallback pushPage
-      return this.pushPage(options.page, options);
-    } else if (index === this.pages.length - 1) {
-      // Page is already the top
-      return Promise.resolve(this.pages[index]);
-    } else {
-      // Bring to top
-        let selectedPage = this.pages[index];
-         selectedPage.style.display = 'block';
-        selectedPage.setAttribute('_skipinit', '');
-
-        // move element to the last child
-        selectedPage.parentNode.appendChild(selectedPage);
-        selectedPage.options = options;
-        return this._pushPage(options);
+  _updateLastPageBackButton() {
+    const index = this.pages.length - 1;
+    if (index >= 0) {
+      this.pages[index].updateBackButton(index > 0);
     }
   }
 
-  /**
-   * @param {String} page
-   * @return {Number} Returns the last index at which the given page
-   * is found in the page-stack, or -1 if it is not present.
-   */
+  _normalizeIndex(index) {
+    return index >= 0 ? index : Math.abs(this.pages.length + index) % this.pages.length;
+  }
+
+  _onDeviceBackButton(event) {
+    if (this.pages.length > 1) {
+      this.popPage();
+    } else {
+      event.callParentHandler();
+    }
+  }
+
   _lastIndexOfPage(pageName) {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
@@ -977,59 +736,27 @@ class NavigatorElement extends BaseElement {
     return index;
   }
 
-  /**
-   * @return {Boolean} Whether if event is canceled.
-   */
+  _emitPreEvent(name, data = {}) {
+    let isCanceled = false;
+
+    util.triggerElementEvent(this, 'pre' + name, util.extend({
+      navigator: this,
+      currentPage: this.pages[this.pages.length - 1],
+      cancel: () => isCanceled = true
+    }, data));
+
+    return isCanceled;
+  }
+
   _emitPrePushEvent() {
-    let isCanceled = false;
-
-    util.triggerElementEvent(this, 'prepush', {
-      navigator: this,
-      currentPage: this.pages.length > 0 ? this.getCurrentPage() : undefined,
-      cancel: function() {
-        isCanceled = true;
-      }
-    });
-
-    return isCanceled;
+    return this._emitPreEvent('push');
   }
 
-  /**
-   * @return {Boolean} Whether if event is canceled.
-   */
   _emitPrePopEvent() {
-    let isCanceled = false;
-
-    const leavePage = this.getCurrentPage();
-    const enterPage = this.pages[this.pages.length - 2];
-
-    util.triggerElementEvent(this, 'prepop', {
-      navigator: this,
-      currentPage: leavePage,
-      leavePage: leavePage,
-      enterPage: enterPage,
-      cancel: function() {
-        isCanceled = true;
-      }
-    });
-
-    return isCanceled;
-  }
-
-  /**
-   * @param {String} page
-   * @param {Element} element
-   * @param {Object} options
-   */
-  _createPageObject(page, element, options) {
-
-    options.animator = this._animatorFactory.newAnimator(options);
-
-    return new NavigatorPage({
-      page: page,
-      element: element,
-      options: options,
-      navigator: this
+    const l = this.pages.length;
+    return this._emitPreEvent('pop', {
+      leavePage: this.pages[l - 1],
+      enterPage: this.pages[l - 2]
     });
   }
 
@@ -1040,7 +767,72 @@ class NavigatorElement extends BaseElement {
       throw new Error('You must supply an "ons-page" element to "ons-navigator".');
     }
 
+    CustomElements.upgrade(pageElement);
+
     return pageElement;
+  }
+
+  /**
+   * @method getCurrentPage
+   * @signature getCurrentPage()
+   * @return {Object}
+   *   [en]Current page object.[/en]
+   *   [ja]現在のpageオブジェクト。[/ja]
+   * @description
+   *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+   *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
+   */
+  getCurrentPage() {
+    if (this.pages.length <= 0) {
+      throw new Error('Invalid state');
+    }
+    return this.pages[this.pages.length - 1];
+  }
+
+  get pages() {
+    return this.children;
+  }
+
+  /**
+   * @property {object} [options]
+   * @description
+   *   [en]Default options object.[/en]
+   *   [ja][/ja]
+   */
+  get options() {
+    return this._options;
+  }
+
+  set options(object) {
+    this._options = object;
+  }
+
+  set _isRunning(value) {
+    this.setAttribute('_is-running', value ? 'true' : 'false');
+  }
+
+  get _isRunning() {
+   return JSON.parse(this.getAttribute('_is-running'));
+  }
+
+  _show() {
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1]._show();
+    }
+  }
+
+  _hide() {
+    if (this.pages[this.pages.length - 1]) {
+      this.pages[this.pages.length - 1]._hide();
+    }
+  }
+
+  _destroy() {
+    for (let i = this.pages.length - 1; i >= 0; i--) {
+      this.pages[i]._destroy();
+    }
+
+    this.remove();
   }
 
 }

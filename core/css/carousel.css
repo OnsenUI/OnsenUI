@@ -28,15 +28,6 @@ ons-carousel-item {
   visibility: hidden;
 }
 
-ons-carousel-cover {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
 ons-carousel[fullscreen] {
   position: absolute;
   top: 0px;

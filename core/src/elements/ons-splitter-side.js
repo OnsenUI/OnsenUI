@@ -339,6 +339,7 @@ class SplitterSideElement extends BaseElement {
   /**
    * @attribute animation
    * @type {String}
+   * @default  default
    * @description
    *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
    *  [ja]アニメーションを指定します。"overlay", "default"のいずれかを指定できます。[/ja]
@@ -355,8 +356,9 @@ class SplitterSideElement extends BaseElement {
   /**
    * @attribute open-threshold
    * @type {Number}
+   * @default  0.3
    * @description
-   *  [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1. Default is 0.3.[/en]
+   *  [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1.[/en]
    *  [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]
    */
 
@@ -397,8 +399,9 @@ class SplitterSideElement extends BaseElement {
   /**
    * @attribute side
    * @type {String}
+   * @default  left
    * @description
-   *   [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are "left" (default) and "right".[/en]
+   *   [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are "left" and "right".[/en]
    *   [ja]この要素が左か右かを指定します。指定できる値は"left"か"right"のみです。[/ja]
    */
 
@@ -545,11 +548,26 @@ class SplitterSideElement extends BaseElement {
     this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(value));
   }
 
-  // TODO: add documentation support for property getters
+  /**
+   * @property page
+   * @readonly
+   * @type {HTMLElement}
+   * @description
+   *   [en]Page element loaded in the splitter side.[/en]
+   *   [ja][/ja]
+   */
   get page() {
     return this._page;
   }
 
+  /**
+   * @property mode
+   * @readonly
+   * @type {String}
+   * @description
+   *   [en]Current mode. Possible values are "split", "collapse", "closed", "open" or "changing".[/en]
+   *   [ja][/ja]
+   */
   get mode() {
     return this._mode;
   }
