@@ -29,9 +29,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   }
 
   _onChange(event) {
-    if (event.isTrusted) {
-      this._valueChange.emit(this._element.checked);
-    }
+    this._valueChange.emit(this._element.checked);
   }
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
