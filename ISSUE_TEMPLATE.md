@@ -1,0 +1,12 @@
+[](Github issues should be used only for bugs and feature requests. For questions please visit stackoverflow.com/tags/onsen-ui or community.onsen.io. For bugs please use the following template.)
+
+__Environment__
+Onsen beta 6
+Angular 1.5.2
+iOS 9.2
+
+__Encountered problem__
+
+
+__How to reproduce__
+
