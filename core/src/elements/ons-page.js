@@ -151,7 +151,7 @@ class PageElement extends BaseElement {
       this.eventDetail = {
         page: this
       };
-      this.options = {};
+      this.pushedOptions = {};
     });
   }
 
