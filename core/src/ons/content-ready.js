@@ -14,20 +14,50 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+const readyMap = new WeakMap();
+const queueMap = new WeakMap();
+
+function isContentReady(element) {
+  if (element.childNodes.length > 0) {
+    setContentReady(element);
+  }
+  return readyMap.has(element);
+}
+
+function setContentReady(element) {
+  readyMap.set(element, true);
+}
+
+function addCallback(element, fn) {
+  if (!queueMap.has(element)) {
+    queueMap.set(element, []);
+  }
+  queueMap.get(element).push(fn);
+}
+
+function consumeQueue(element) {
+  const callbacks = queueMap.get(element, []) || [];
+  queueMap.delete(element);
+  callbacks.forEach(callback => callback());
+}
 
 export default function contentReady(element, fn) {
-  if (element.childNodes.length > 0) {
-    fn();
+  addCallback(element, fn);
+
+  if (isContentReady(element)) {
+    consumeQueue(element);
     return;
   }
 
   const observer = new MutationObserver(changes => {
-    fn();
-    observer.disconnect();
+    setContentReady(element);
+    consumeQueue(element);
   });
+  observer.observe(element, {childList: true, characterData: true});
 
-  observer.observe(element, {
-    childList: true,
-    characterData: true
+  // failback for elements has empty content.
+  setImmediate(() => {
+    setContentReady(element);
+    consumeQueue(element);
   });
 }
