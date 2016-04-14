@@ -14,11 +14,18 @@ limitations under the License.
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.range': 'range--*',
   '.range__left': 'range--*__left'
 };
+
+const templateSource = util.createElement(`<div>
+  <div class="range__left"></div>
+  <input type="range" class="range">
+</div>`);
 
 const INPUT_ATTRIBUTES = [
   'autofocus',
@@ -52,24 +59,28 @@ const INPUT_ATTRIBUTES = [
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
  */
-class MaterialInputElement extends BaseElement {
+class RangeElement extends BaseElement {
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
 
-    this._updateBoundAttributes();
-    this._onChange();
+      this._updateBoundAttributes();
+      this._onChange();
+    });
   }
 
   _compile() {
     autoStyle.prepare(this);
 
-    this.innerHTML = `
-      <div class="range__left"></div>
-      <input type="range" class="range">
-    `;
+    if (!(util.findChild(this, '.range__left') && util.findChild(this, 'input'))) {
+      const template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -93,11 +104,13 @@ class MaterialInputElement extends BaseElement {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
-      this._updateBoundAttributes();
+      contentReady(this, () => {
+        this._updateBoundAttributes();
 
-      if (name === 'min' || name === 'max') {
-        this._onChange();
-      }
+        if (name === 'min' || name === 'max') {
+          this._onChange();
+        }
+      });
     }
  }
 
@@ -140,5 +153,5 @@ class MaterialInputElement extends BaseElement {
 }
 
 window.OnsRangeElement = document.registerElement('ons-range', {
-  prototype: MaterialInputElement.prototype
+  prototype: RangeElement.prototype
 });
