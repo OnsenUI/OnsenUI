@@ -3,12 +3,13 @@
 describe('OnsTabbarElement', () => {
   let element, template, template2;
 
-  beforeEach(() => {
+  beforeEach(done => {
     template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
     template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>');
     element = new OnsTabbarElement();
     document.body.appendChild(template);
     document.body.appendChild(template2);
+    ons._contentReady(element, done);
   });
 
   afterEach(() => {
@@ -417,7 +418,7 @@ describe('OnsTabbarElement', () => {
       it('fills status bar - ' + isTop, (done) => {
         var tmp = ons._internal.shouldFillStatusBar;
         ons._internal.shouldFillStatusBar = () => Promise.resolve();
-        let element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"></ons-tabbar>`);
+        let element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
         ons._internal.shouldFillStatusBar = tmp;
 
         setTimeout(() => {
@@ -455,11 +456,14 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    it('adds \'material\' modifier on Android', done => {
       ons.platform.select('android');
-      let e = document.createElement('ons-tabbar');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      ons.platform.select('');
+      const element = document.createElement('ons-tabbar');
+      setImmediate(() => {
+        expect(element.getAttribute('modifier')).to.equal('material');
+        ons.platform.select('');
+        done();
+      });
     });
   });
 });

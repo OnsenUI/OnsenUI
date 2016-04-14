@@ -21,6 +21,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
 import OnsTabbarElement from './ons-tabbar';
+import contentReady from '/ons/content-ready';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -145,8 +146,16 @@ class TabElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+    if (this.hasAttribute('label') || this.hasAttribute('icon')) {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    } else {
+      contentReady(this, () => {
+        if (!this.hasAttribute('_compiled')) {
+          this._compile();
+        }
+      });
     }
 
     this._boundOnClick = this._onClick.bind(this);
@@ -215,13 +224,18 @@ class TabElement extends BaseElement {
       getIconElement().setAttribute('icon', icon);
     } else {
       const wrapper = button.querySelector('.tab-bar__icon');
-      wrapper.parentNode.removeChild(wrapper);
+      if (wrapper) {
+        wrapper.remove();
+      }
     }
 
     if (typeof label === 'string') {
       getLabelElement().textContent = label;
     } else {
-      getLabelElement().parentNode.removeChild(getLabelElement());
+      const label = getLabelElement();
+      if (label) {
+        label.remove();
+      }
     }
 
     function getLabelElement() {
@@ -290,16 +304,16 @@ class TabElement extends BaseElement {
     this._pageElement = el;
   }
 
-get pageElement() {
-  if (typeof this._pageElement !== 'undefined') {
-    return this._pageElement;
+  get pageElement() {
+    if (typeof this._pageElement !== 'undefined') {
+      return this._pageElement;
+    }
+
+    const tabbar = this._findTabbarElement();
+    const index = this._findTabIndex();
+
+    return tabbar._contentElement.children[index];
   }
-
-  const tabbar = this._findTabbarElement();
-  const index = this._findTabIndex();
-
-  return tabbar._contentElement.children[index];
-}
 
   /**
    * @param {String} page
@@ -323,38 +337,40 @@ get pageElement() {
   }
 
   attachedCallback() {
-    this._ensureElementPosition();
+    contentReady(this, () => {
+      this._ensureElementPosition();
 
-    const tabbar = this._findTabbarElement();
+      const tabbar = this._findTabbarElement();
 
-    if (tabbar.hasAttribute('modifier')) {
-      const prefix = this.hasAttribute('modifier') ? this.getAttribute('modifier') + ' ' : '';
-      this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
-    }
+      if (tabbar.hasAttribute('modifier')) {
+        const prefix = this.hasAttribute('modifier') ? this.getAttribute('modifier') + ' ' : '';
+        this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
+      }
 
-    if (this.hasAttribute('active')) {
-      const tabIndex = this._findTabIndex();
+      if (this.hasAttribute('active')) {
+        const tabIndex = this._findTabIndex();
 
-      OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
-      });
-    } else {
-      OnsTabbarElement.rewritables.ready(tabbar, () => {
-        setImmediate(() => {
-          if (this.hasAttribute('page')) {
-            this._createPageElement(this.getAttribute('page'), pageElement => {
-              OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-                this.pageElement = pageElement;
-                this.pageElement.style.display = 'none';
-                tabbar._contentElement.appendChild(this.pageElement);
-              });
-            });
-          }
+        OnsTabbarElement.rewritables.ready(tabbar, () => {
+          setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
-      });
-    }
+      } else {
+        OnsTabbarElement.rewritables.ready(tabbar, () => {
+          setImmediate(() => {
+            if (this.hasAttribute('page')) {
+              this._createPageElement(this.getAttribute('page'), pageElement => {
+                OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
+                  this.pageElement = pageElement;
+                  this.pageElement.style.display = 'none';
+                  tabbar._contentElement.appendChild(this.pageElement);
+                });
+              });
+            }
+          });
+        });
+      }
 
-    this.addEventListener('click', this._boundOnClick, false);
+      this.addEventListener('click', this._boundOnClick, false);
+    });
   }
 
   _findTabbarElement() {
@@ -387,14 +403,15 @@ get pageElement() {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;
       case 'ripple':
-        this._updateRipple();
+        contentReady(this, () => this._updateRipple());
         break;
       case 'icon':
       case 'label':
-        this._updateDefaultTemplate();
+        contentReady(this, () => this._updateDefaultTemplate());
+        break;
     }
   }
 }
