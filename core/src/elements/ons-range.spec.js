@@ -49,14 +49,15 @@ describe('OnsRangeElement', () => {
     });
   });
 
-  describe('autoStyling', done => {
-    it('adds \'material\' modifier on Android', () => {
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', done => {
       ons.platform.select('android');
       const range = document.createElement('ons-range');
 
       ons._contentReady(range, () => {
         expect(range.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
+        
         done();
       });
     });
