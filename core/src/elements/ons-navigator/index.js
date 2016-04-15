@@ -239,7 +239,13 @@ class NavigatorElement extends BaseElement {
             throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
           }
         }
-        this._updateLastPageBackButton();
+
+        if (this.topPage) {
+          setTimeout(() => {
+            this.topPage._show();
+            this._updateLastPageBackButton();
+          }, 0);
+        }
       }
     });
   }
