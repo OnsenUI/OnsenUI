@@ -9,6 +9,7 @@ export * from './directives/ons-tabbar';
 export * from './directives/ons-alert-dialog';
 export * from './directives/ons-popover';
 export * from './directives/ons-switch';
+export * from './directives/ons-range';
 export * from './ons/notification';
 export * from './ons/platform';
 export * from './ons/createAlertDialog';
