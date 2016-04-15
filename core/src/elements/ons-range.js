@@ -146,9 +146,10 @@ class RangeElement extends BaseElement {
   }
 
   set value(val) {
-    this._input.value = val;
-    this._onChange();
-    return this._input.val;
+    contentReady(this, () => {
+      this._input.value = val;
+      this._onChange();
+    });
   }
 }
 
