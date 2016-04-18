@@ -49,14 +49,6 @@ class BottomToolbarElement extends BaseElement {
    *   [ja]ツールバーの見た目の表現を指定します。[/ja]
    */
 
-  /**
-   * @attribute inline
-   * @initonly
-   * @description
-   *   [en]Display the toolbar as an inline element.[/en]
-   *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
-   */
-
   createdCallback() {
     this.classList.add('bottom-bar');
 
