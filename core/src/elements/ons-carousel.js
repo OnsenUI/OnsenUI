@@ -556,12 +556,21 @@ class CarouselElement extends BaseElement {
 
     this._updateSwipeable();
 
+    this._mutationObserver = new MutationObserver(() => {
+      if (this.hasAttribute('auto-refresh')) {
+        this.refresh();
+      }
+    });
+    this._mutationObserver.observe(this, {childList: true});
+
     window.addEventListener('resize', this._boundOnResize, true);
   }
 
   _removeEventListeners() {
     this._gestureDetector.dispose();
     this._gestureDetector = null;
+
+    this._mutationObserver.disconnect();
 
     window.removeEventListener('resize', this._boundOnResize, true);
   }
