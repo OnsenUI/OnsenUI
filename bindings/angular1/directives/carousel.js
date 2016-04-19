@@ -138,10 +138,6 @@
             element = null;
           });
 
-          setImmediate(function() {
-            carousel.refresh();
-          });
-
           $onsen.fireComponentEvent(element[0], 'init');
         };
       },
