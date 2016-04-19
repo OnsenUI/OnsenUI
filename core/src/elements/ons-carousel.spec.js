@@ -25,7 +25,7 @@ describe('OnsCarouselElement', () => {
 
   describe('#_updateSwipeable()', () => {
     it('attaches and removes listeners', () => {
-      let spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
+      const spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
         spyOff = chai.spy.on(carousel._gestureDetector, 'off');
 
       carousel.setAttribute('swipeable', '');
@@ -36,9 +36,38 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#_updateAutoRefresh()', () => {
+    it('starts and stops observing', () => {
+      const spyOn = chai.spy.on(carousel._mutationObserver, 'observe'),
+        spyOff = chai.spy.on(carousel._mutationObserver, 'disconnect');
+
+      carousel.setAttribute('auto-scroll', '');
+      expect(spyOn).to.have.been.called.at.least.once;
+
+      carousel.removeAttribute('auto-scroll');
+      expect(spyOff).to.have.been.called.at.least.once;
+    });
+  });
+
+  describe('auto-refresh', () => {
+    it('calls refresh on appendChild', () => {
+      const spy = chai.spy.on(carousel, 'refresh');
+      carousel.setAttribute('auto-scroll', '');
+      carousel.appendChild(ons._util.createElement('<ons-carousel-item>Item X</ons-carousel-item>'));
+      expect(spy).to.have.been.called.at.least.once;
+    });
+
+    it('calls refresh on innerHTML change', () => {
+      const spy = chai.spy.on(carousel, 'refresh');
+      carousel.setAttribute('auto-scroll', '');
+      carousel.innerHTML += '<ons-carousel-item>Item X</ons-carousel-item>';
+      expect(spy).to.have.been.called.at.least.once;
+    });
+  });
+
   describe('#_onResize()', () => {
     it('fires \'refresh\' event', () => {
-      var promise = new Promise((resolve) =>
+      const promise = new Promise((resolve) =>
         carousel.addEventListener('refresh', resolve)
       );
 
@@ -49,7 +78,7 @@ describe('OnsCarouselElement', () => {
 
   describe('#_onDirectionChange()', () => {
     it('is fired when the \'direction\' attribute is changed', () => {
-      let spy = chai.spy.on(carousel, '_onDirectionChange');
+      const spy = chai.spy.on(carousel, '_onDirectionChange');
       carousel.setAttribute('direction', 'vertical');
       carousel.setAttribute('direction', 'horizontal');
       expect(spy).to.have.been.called.twice;
@@ -139,7 +168,7 @@ describe('OnsCarouselElement', () => {
     });
 
     it('should fire \'postchange\' event', () => {
-      var promise = new Promise((resolve) =>
+      const promise = new Promise((resolve) =>
         carousel.addEventListener('postchange', resolve)
       );
 
@@ -204,7 +233,7 @@ describe('OnsCarouselElement', () => {
     });
 
     it('renders dynamically added items', () => {
-      var item = ons._util.createElement(`
+      const item = ons._util.createElement(`
         <ons-carousel-item>Item 4</ons-carousel-item>
       `);
 

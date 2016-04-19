@@ -550,18 +550,11 @@ class CarouselElement extends BaseElement {
   }
 
   _prepareEventListeners() {
-    this._gestureDetector = new GestureDetector(this, {
-      dragMinDistance: 1
-    });
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1});
+    this._mutationObserver = new MutationObserver(() => this.refresh());
 
     this._updateSwipeable();
-
-    this._mutationObserver = new MutationObserver(() => {
-      if (this.hasAttribute('auto-refresh')) {
-        this.refresh();
-      }
-    });
-    this._mutationObserver.observe(this, {childList: true});
+    this._updateAutoRefresh();
 
     window.addEventListener('resize', this._boundOnResize, true);
   }
@@ -571,6 +564,7 @@ class CarouselElement extends BaseElement {
     this._gestureDetector = null;
 
     this._mutationObserver.disconnect();
+    this._mutationObserver = null;
 
     window.removeEventListener('resize', this._boundOnResize, true);
   }
@@ -583,6 +577,16 @@ class CarouselElement extends BaseElement {
       } else {
         this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
         this._gestureDetector.off('dragend', this._boundOnDragEnd);
+      }
+    }
+  }
+
+  _updateAutoRefresh() {
+    if (this._mutationObserver) {
+      if (this.hasAttribute('auto-refresh')) {
+        this._mutationObserver.observe(this, {childList: true});
+      } else {
+        this._mutationObserver.disconnect();
       }
     }
   }
@@ -926,6 +930,9 @@ class CarouselElement extends BaseElement {
     switch (name) {
       case 'swipeable':
         this._updateSwipeable();
+        break;
+      case 'auto-refresh':
+        this._updateAutoRefresh();
         break;
       case 'direction':
         this._onDirectionChange();
