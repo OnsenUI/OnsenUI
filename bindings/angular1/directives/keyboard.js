@@ -1,6 +1,6 @@
 /**
  * @element ons-keyboard-active
- * @category input
+ * @category form
  * @description
  *   [en]
  *     Conditionally display content depending on if the software keyboard is visible or hidden.
