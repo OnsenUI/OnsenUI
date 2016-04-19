@@ -27,7 +27,7 @@ import BaseElement from 'ons/base-element';
  *     Displays an icon. The following icon suites are available:
  *
  *     * [Font Awesome](https://fortawesome.github.io/Font-Awesome/)
- *     * [Ionicons](http://ionicons.com)
+ *     * [Ionicons](http://ionicons.com/)
  *     * [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
  *   [/en]
  *   [ja][/ja]
@@ -81,7 +81,7 @@ class IconElement extends BaseElement {
    * @description
    *   [en]
    *     The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in the size in pixels.
-   *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix. 
+   *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix.
    *
    *     The code:
    *
