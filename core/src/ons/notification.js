@@ -181,7 +181,7 @@ notification._createAlertDialog = function(title, message,
   }
 
   if (cancelable) {
-    dialogElement.setCancelable(cancelable);
+    dialogElement.cancelable = true;
     dialogElement.addEventListener('cancel', function() {
       if (promptDialog) {
         callback(null);
