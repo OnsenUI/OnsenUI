@@ -11,6 +11,7 @@ v2.0.0-beta.10
  * css-components: Fixed issue with list item using both "chevron" and "longdivider" modifiers.
  * core: Fixed an issue preventing users from selecting text in inputs and textareas.
  * ons-carousel: Added `auto-refresh` attribute.
+ * ons-carousel: Fixed an issue causing improper carousel size when used with angular and ons-navigator.
 
 v2.0.0-beta.9
 ----
