@@ -52,7 +52,7 @@ const _animatorDict = {
  *   [en]
  *     Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
  *
- *     To use the element it can either be attached directly to the `<body>` tag or dynamically created from a template using the `ons.createAlertDialog(template)` utility function.
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<ons-template>` tag.
  *   [/en]
  *   [ja][/ja]
  * @codepen Qwwxyp

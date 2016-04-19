@@ -50,35 +50,37 @@ const _animatorDict = {
 /**
  * @element ons-dialog
  * @category dialog
+ * @description
+ *   [en]
+ *     Dialog that is displayed on top of current screen. As opposed to the `<ons-alert-dialog>` element, this component can contain any kind of content.
+ *
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `<ons.createDialog(template)` utility function and the `<ons-template>` tag.
+ *
+ *     The dialog is useful for displaying menus, additional information or to ask the user to make a decision.
+ *
+ *     It will automatically be displayed as Material Design when running on an Android device.
+ *   [/en]
+ *   [ja][/ja]
  * @modifier material
  *   [en]Display a Material Design dialog.[/en]
  *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
- * @description
- *  [en]Dialog that is displayed on top of current screen.[/en]
- *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
  * @codepen zxxaGa
  * @guide UsingDialog
  *   [en]Learn how to use the dialog component.[/en]
  *   [ja]ダイアログコンポーネントの使い方[/ja]
  * @seealso ons-alert-dialog
- *   [en]ons-alert-dialog component[/en]
+ *   [en]`<ons-alert-dialog>` component[/en]
  *   [ja]ons-alert-dialogコンポーネント[/ja]
  * @seealso ons-popover
- *   [en]ons-popover component[/en]
+ *   [en]`<ons-popover>` component[/en]
  *   [ja]ons-popoverコンポーネント[/ja]
  * @example
- * <script>
- *   ons.ready(function() {
- *     ons.createDialog('dialog.html').then(function(dialog) {
- *       dialog.show();
- *     });
- *   });
- * </script>
+ * <ons-dialog id="dialog">
+ *   <p>This is a dialog!</p>
+ * </ons-dialog>
  *
- * <script type="text/ons-template" id="dialog.html">
- *   <ons-dialog cancelable>
- *     ...
- *   </ons-dialog>
+ * <script>
+ *   document.getElementById('dialog').show();
  * </script>
  */
 class DialogElement extends BaseElement {
@@ -144,8 +146,8 @@ class DialogElement extends BaseElement {
   /**
    * @attribute cancelable
    * @description
-   *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
-   *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+   *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
+   *  [ja][/ja]
    */
 
   /**
@@ -160,7 +162,7 @@ class DialogElement extends BaseElement {
    * @type {String}
    * @default default
    * @description
-   *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
+   *  [en]The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.[/en]
    *  [ja]ダイアログを表示する際のアニメーション名を指定します。"none"もしくは"default"を指定できます。[/ja]
    */
 
@@ -168,8 +170,8 @@ class DialogElement extends BaseElement {
    * @attribute animation-options
    * @type {Expression}
    * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
-   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/ja]
    */
 
   /**
@@ -177,7 +179,7 @@ class DialogElement extends BaseElement {
    * @type {String}
    * @default rgba(0, 0, 0, 0.2)
    * @description
-   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [en]Color of the background mask. Default is `"rgba(0, 0, 0, 0.2)"`.[/en]
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
@@ -259,7 +261,7 @@ class DialogElement extends BaseElement {
   }
 
   _onDeviceBackButton(event) {
-    if (this.isCancelable()) {
+    if (this.cancelable) {
       this._cancel();
     } else {
       event.callParentHandler();
@@ -267,7 +269,7 @@ class DialogElement extends BaseElement {
   }
 
   _cancel() {
-    if (this.isCancelable() && !this._running) {
+    if (this.cancelable && !this._running) {
       this._running = true;
       this.hide({
         callback: () => {
@@ -285,11 +287,11 @@ class DialogElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+   *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
    *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
    * @param {Function} [options.callback]
    *   [en]This function is called after the dialog has been revealed.[/en]
    *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -350,11 +352,11 @@ class DialogElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+   *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
    *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/ja]
    * @param {Function} [options.callback]
    *   [en]This functions is called after the dialog has been hidden.[/en]
    *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -436,76 +438,49 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * @method isCancelable
-   * @signature isCancelable()
+   * @property disabled
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the dialog is cancelable or not.[/en]
-   *   [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
-   * @return {Boolean}
-   *   [en]true if the dialog is cancelable.[/en]
-   *   [ja]ダイアログがキャンセル可能な場合trueを返します。[/ja]
+   *   [en]A boolean value that specifies whether the dialog is disabled or not.[/en]
+   *   [ja][/ja]
    */
-  isCancelable() {
-    return this.hasAttribute('cancelable');
-  }
-
-  /**
-   * @method setDisabled
-   * @signature setDisabled(disabled)
-   * @description
-   *   [en]Disable or enable the dialog.[/en]
-   *   [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
-   * @param {Boolean} disabled
-   *   [en]If true the dialog will be disabled.[/en]
-   *   [ja]trueを指定するとダイアログをdisabled状態になります。[/ja]
-   */
-  setDisabled(disabled) {
-    if (typeof disabled !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-
-    if (disabled) {
+  set disabled(value) {
+    if (value) {
       this.setAttribute('disabled', '');
-    } else {
+    }
+    else {
       this.removeAttribute('disabled');
     }
   }
 
-  /**
-   * @method isDisabled
-   * @signature isDisabled()
-   * @description
-   *   [en]Returns whether the dialog is disabled or enabled.[/en]
-   *   [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
-   * @return {Boolean}
-   *   [en]true if the dialog is disabled.[/en]
-   *   [ja]ダイアログがdisabled状態の場合trueを返します。[/ja]
-   */
-  isDisabled() {
+  get disabled() {
     return this.hasAttribute('disabled');
   }
 
   /**
-   * @method setCancelable
-   * @signature setCancelable(cancelable)
-   * @param {Boolean} cancelable
-   *   [en]If true the dialog will be cancelable.[/en]
-   *   [ja]ダイアログをキャンセル可能にする場合trueを指定します。[/ja]
+   * @property cancelable
+   * @type {Boolean}
    * @description
-   *   [en]Define whether the dialog can be canceled by the user or not.[/en]
-   *   [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+   *   [en]
+   *     A boolean value that specifies whether the dialog is cancelable or not.
+   *
+   *     When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
+   *   [/en]
+   *   [ja][/ja]
    */
-  setCancelable(cancelable) {
-    if (typeof cancelable !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-
-    if (cancelable) {
+  set cancelable(value) {
+    if (value) {
       this.setAttribute('cancelable', '');
-    } else {
+    }
+    else {
       this.removeAttribute('cancelable');
     }
   }
+
+  get cancelable() {
+    return this.hasAttribute('cancelable');
+  }
+
 
   attachedCallback() {
     this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
