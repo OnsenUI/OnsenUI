@@ -77,69 +77,6 @@ describe('OnsBackButtonElement', () => {
 
       return expect(promise).to.eventually.be.fulfilled;
     });
-
-    it('takes \'animation\' attribute', (done) => {
-      nav.pushPage('page2', {
-        callback: () => {
-          let element = nav.querySelector('ons-back-button');
-          let animation = 'fade';
-          element.setAttribute('animation', animation);
-          let tmp = nav.popPage;
-          nav.popPage = options => { if (options.animation === animation) { nav.popPage = tmp; done(); } };
-          element._onClick();
-        }
-      });
-    });
-
-    it('takes \'animation-options\' attribute', (done) => {
-      nav.pushPage('page2', {
-        callback: () => {
-          let element = nav.querySelector('ons-back-button');
-          element.setAttribute('animation-options', '{delay: .1, duration: .2, timing: \'ease-out\'}');
-          let spy = chai.spy.on(nav, 'popPage');
-          element._onClick();
-          expect(spy).to.have.been.called.with({animationOptions: {delay: 0.1, duration: 0.2, timing: 'ease-out'}});
-          done();
-        }
-      });
-    });
-
-    it('takes \'refresh\' attribute', () => {
-      let promise = new Promise((resolve) => {
-        nav.addEventListener('destroy', event => {
-          if (event.detail.page.id === 'p1') {
-            return resolve();
-          }
-        });
-      });
-
-      nav.pushPage('page2', {
-        callback: () => {
-          let element = nav.querySelector('ons-back-button');
-          element.setAttribute('refresh', true);
-          element._onClick();
-        }
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
-    it('takes \'callback\' attribute', (done) => {
-      window.callbackCompleted = done;
-
-      nav.pushPage('page2', {
-        callback: () => {
-          let element = nav.querySelector('ons-back-button');
-          element.setAttribute('callback',
-            `function() {\
-              var localPromise = window.callbackCompleted;\
-              window.callbackCompleted = null;\
-              localPromise();\
-            }`);
-          element._onClick();
-        }
-      });
-    });
   });
 
   describe('#_compile()', () => {
