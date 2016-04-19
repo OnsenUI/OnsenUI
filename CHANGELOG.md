@@ -12,6 +12,7 @@ v2.0.0-beta.10
  * core: Fixed an issue preventing users from selecting text in inputs and textareas.
  * ons-carousel: Added `auto-refresh` attribute.
  * ons-carousel: Fixed an issue causing improper carousel size when used with angular and ons-navigator.
+ * ons-icon: Delete attribute `flip` from ons-icon (obsolete, since everything can be done with `rotate`)
 
 v2.0.0-beta.9
 ----
