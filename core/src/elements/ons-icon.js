@@ -68,14 +68,6 @@ class IconElement extends BaseElement {
    */
 
   /**
-   * @attribute flip
-   * @type {String}
-   * @description
-   *   [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
-   *   [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
-   */
-
-  /**
    * @attribute fixed-width
    * @type {Boolean}
    * @default false
