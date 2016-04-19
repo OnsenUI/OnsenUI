@@ -26,14 +26,19 @@ const scheme = {'': 'list__header--*'};
  * @element ons-list-header
  * @category list
  * @description
- *   [en]Header element for list items. Must be put inside ons-list component.[/en]
+ *   [en]Header element for list items. Must be put inside the `<ons-list>` component.[/en]
  *   [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
  * @seealso ons-list
- *   [en]ons-list component[/en]
+ *   [en]The `<ons-list>` component[/en]
  *   [ja]ons-listコンポーネント[/ja]
- * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+ * @seealso ons-list-item
+ *   [en]The `<ons-list-item>` component[/en]
+ *   [ja]ons-list-itemコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @modifier material
+ *   [en]Display a Material Design list header.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-list>
  *   <ons-list-header>Header Text</ons-list-header>
@@ -50,7 +55,6 @@ class ListHeaderElement extends BaseElement {
    *   [en]The appearance of the list header.[/en]
    *   [ja]ヘッダーの表現を指定します。[/ja]
    */
-
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
