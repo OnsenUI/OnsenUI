@@ -37,7 +37,7 @@ const scheme = {'': 'bottom-bar--*'};
  *   [ja]ツールバーの追加[/ja]
  * @example
  * <ons-bottom-toolbar>
- *   <div style="text-align: center; line-height: 44px">Text</div>
+ *   Content
  * </ons-bottom-toolbar>
  */
 class BottomToolbarElement extends BaseElement {
