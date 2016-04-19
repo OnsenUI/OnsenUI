@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-beta.7 - 2016-03-25 */
+/*! onsenui - v2.0.0-beta.10 - 2016-04-19 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -37,6 +37,11 @@ ons-tabbar {
   overflow: hidden;
 }
 
+ons-tab {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
@@ -55,77 +60,22 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
-ons-toolbar:not([inline]) {
+ons-toolbar:not([inline]), ons-bottom-toolbar {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
   z-index: 10000;
 }
-
-ons-bottom-toolbar:not([inline]) {
-  position: absolute;
-  left: 0;
-  right: 0;
+ons-toolbar:not([inline]) {
+  top: 0;
+}
+ons-bottom-toolbar {
   bottom: 0;
 }
 
-.scroller {
-  display: block;
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  -ms-scroll-snap-type: mandatory;
-}
-
-.page,
-.page__content {
+.page, .page__content {
   background-color: transparent !important;
   background: transparent !important;
-}
-
-.page__status-bar-fill + .page__background + .page__content {
-  padding-top: 20px;
-}
-
-ons-toolbar + .page__background + .page__content {
-  margin-top: -1px;
-  top: 44px;
-}
-
-.navigation-bar--material + .page__background + .page__content {
-  top: 56px;
-}
-
-.page__status-bar-fill + ons-toolbar {
-  height: 64px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] {
-  height: 76px;
-}
-
-.page__status-bar-fill + ons-toolbar > .center,
-.page__status-bar-fill + ons-toolbar > .left,
-.page__status-bar-fill + ons-toolbar > .right {
-  padding-top: 20px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .center,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .left,
-.page__status-bar-fill + ons-toolbar[modifier~="material"] > .right {
-  height: 76px;
-}
-
-
-.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
-  top: 64px;
-  padding-top: 0px;
-}
-
-.page__status-bar-fill + ons-toolbar[modifier~="material"] + .page__background + .page__content {
-  top: 76px;
 }
 
 .page__content {
@@ -135,28 +85,54 @@ ons-toolbar + .page__background + .page__content {
   -ms-touch-action: pan-y;
 }
 
-.page-with-bottom-toolbar > .page__content {
-  bottom: 44px;
+.navigation-bar + .page__background + .page__content {
+  margin-top: -1px;
+  top: 44px;
 }
 
-.tab-bar__status-bar-fill + .tab-bar--top__content {
+.navigation-bar--material + .page__background + .page__content {
+  top: 56px;
+}
+
+.page[status-bar-fill] > .page__content {
+  top: 20px;
+}
+
+.page[status-bar-fill] > .navigation-bar {
+  padding-top: 20px;
+  box-sizing: content-box;
+}
+
+.page[status-bar-fill] > .navigation-bar + .page__background + .page__content {
+  top: 64px;
+}
+
+.page[status-bar-fill] > .navigation-bar--material + .page__background + .page__content {
+  top: 76px;
+}
+
+ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 71px;
 }
 
-.tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
+ons-tabbar[status-bar-fill] > .tab-bar--top {
   padding-top: 22px;
 }
 
-ons-tabbar[position="top"] .page__status-bar-fill + .page__background + .page__content {
-  padding-top: 0px;
+ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
+  top: 0px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content {
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top {
+  top: 0px;
+}
+
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top__content {
   top: 49px;
 }
 
-ons-toolbar + .page__background + .page__content ons-tabbar > .tab-bar__status-bar-fill + .tab-bar--top__content + .tab-bar--top {
-  padding-top: 0px;
+.page-with-bottom-toolbar > .page__content {
+  bottom: 44px;
 }
 
 ons-dialog[disabled] > .dialog,
@@ -269,15 +245,6 @@ ons-carousel-item {
   visibility: hidden;
 }
 
-ons-carousel-cover {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
 ons-carousel[fullscreen] {
   position: absolute;
   top: 0px;
@@ -294,9 +261,13 @@ ons-carousel[disabled] {
 
 ons-row {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
 }
@@ -304,25 +275,28 @@ ons-row {
 ons-row[vertical-align="top"], ons-row[align="top"] {
   -webkit-box-align: start;
   box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
   -moz-align-items: flex-start;
-  -ms-grid-row-align: flex-start;
-      align-items: flex-start;
+  align-items: flex-start;
 }
 
 ons-row[vertical-align="bottom"], ons-row[align="bottom"] {
   -webkit-box-align: end;
   box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
   -moz-align-items: flex-end;
-  -ms-grid-row-align: flex-end;
-      align-items: flex-end;
+  align-items: flex-end;
 }
 
 ons-row[vertical-align="center"], ons-row[align="center"] {
   -webkit-box-align: center;
   box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   -moz-align-items: center;
-  -ms-grid-row-align: center;
-      align-items: center;
+  align-items: center;
   text-align: inherit;
 }
 
@@ -332,7 +306,9 @@ ons-row + ons-row {
 
 ons-col {
   -webkit-box-flex: 1;
+  -webkit-flex: 1;
   -moz-flex: 1;
+  -ms-flex: 1;
   flex: 1;
   display: block;
   width: 100%;
@@ -340,10 +316,14 @@ ons-col {
 }
 
 ons-col[vertical-align="top"], ons-col[align="top"] {
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
   align-self: flex-start;
 }
 
 ons-col[vertical-align="bottom"], ons-col[align="bottom"] {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
   align-self: flex-end; }
 
 ons-col[vertical-align="center"], ons-col[align="center"] {
@@ -384,7 +364,7 @@ limitations under the License.
   vertical-align: -25%;
 }
 
-ons-icon[spin="true"] {
+ons-icon[spin] {
   -webkit-animation: ons-icon-spin 2s infinite linear;
   animation: ons-icon-spin 2s infinite linear;
 }
@@ -411,30 +391,23 @@ ons-icon[spin="true"] {
 
 .ons-icon[rotate="90"] {
   -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
 }
 
 .ons-icon[rotate="180"] {
   -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
 }
 
 .ons-icon[rotate="270"] {
   -webkit-transform: rotate(270deg);
-  transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
 }
 
-ons-icon[flip="horizontal"] {
-  -webkit-transform: scale(-1, 1);
-  transform: scale(-1, 1);
-}
-
-ons-icon[flip="vertical"] {
-  -webkit-transform: scale(1, -1);
-  transform: scale(1, -1);
-}
-
-ons-icon[fixed-width="true"] {
+ons-icon[fixed-width] {
   width: 1.28571429em;
   text-align: center;
 }
@@ -486,15 +459,14 @@ ons-input .text-input__label:not(.text-input--material__label) {
 }
 
 ons-input .text-input__label--active {
-  transform: translate(0, -75%) scale(0.75);
+  -ms-transform: translate(0, -75%) scale(0.75);
+      transform: translate(0, -75%) scale(0.75);
   -webkit-transform: translate(0, -75%) scale(0.75);
-  transform-origin: left top;
+  -ms-transform-origin: left top;
+      transform-origin: left top;
   -webkit-transform-origin: left top;
-  -webkit-transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
-  transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
   transition: transform 0.1s ease-in, color 0.1s ease-in;
-  transition: transform 0.1s ease-in, color 0.1s ease-in, -webkit-transform 0.1s ease-in;
-  -webkit-transition: transform 0.1s ease-in, color 0.1s ease-in;
+  -webkit-transition: -webkit-transform 0.1s ease-in, color 0.1s ease-in;
 }
 
 ons-input:not([float]) .text-input__label--active {
@@ -604,83 +576,6 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   z-index: 0;
   pointer-events: none;
 }
-
-
-.scrollbar-content {
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
-  box-sizing: border-box;
-  padding:10px;
-}
-
-.scrollbar-touch{
-  background:transparent;
-  position:absolute;
-  width:100%;
-  height:100%;
-  padding:10px;
-  right:-10px;
-  top: -10px;
-}
-
-.page__content > ons-scrollbar .scrollbar-touch {
-  top: -15px;
-  right: -5px;
-}
-
-.scrollbar-container {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  top: 5px;
-  width: 0px;
-  pointer-events: none;
-  /*width: 30px;*/
-  /*background:rgba(0,0,0,0.05);*/
-}
-
-.scrollbar-content:not(.scrollbar-native)::-webkit-scrollbar {
-  display: none;
-}
-
-ons-scrollbar[native] {
-  display: none;
-}
-
-.scrollbar-container[draggable] {
-  pointer-events: auto;
-}
-
-.scrollbar {
-  position: absolute;
-  right: 0;
-  width: 5px;
-  min-height: 10px;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.scrollbar-container[hidden] {
-  display: none;
-}
-
-.scrollbar-container[autohide] .scrollbar{
-  opacity: 0;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.scrollbar-autohide-visible[autohide] .scrollbar,
-.scrollbar-dragging[autohide] .scrollbar{
-  opacity: 1;
-}
-
-.scrollbar-dragging .scrollbar{
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 2px 1px darkgray;
-}
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
