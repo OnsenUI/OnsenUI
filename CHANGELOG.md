@@ -10,6 +10,7 @@ v2.0.0-beta.10
  * ons-navigator: Removed small delay after Lift animators.
  * css-components: Fixed issue with list item using both "chevron" and "longdivider" modifiers.
  * core: Fixed an issue preventing users from selecting text in inputs and textareas.
+ * ons-carousel: Added `auto-refresh` attribute.
 
 v2.0.0-beta.9
 ----
