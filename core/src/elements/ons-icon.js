@@ -23,17 +23,27 @@ import BaseElement from 'ons/base-element';
  * @element ons-icon
  * @category icon
  * @description
- *   [en]Displays an icon. Font Awesome(https://fortawesome.github.io/Font-Awesome/) and Ionicon icons(http://ionicons.com) and Material Design Iconic Font(http://zavoloklom.github.io/material-design-iconic-font/) are supported.[/en]
- *   [ja]アイコンを表示するコンポーネントです。Font Awesome(https://fortawesome.github.io/Font-Awesome/)もしくはIonicons(http://ionicons.com)もしくはMaterial Design Iconic Font(http://zavoloklom.github.io/material-design-iconic-font/)から選択できます。[/ja]
+ *   [en]
+ *     Displays an icon. The following icon suites are available:
+ *
+ *     * [Font Awesome](https://fortawesome.github.io/Font-Awesome/)
+ *     * [Ionicons](http://ionicons.com)
+ *     * [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
+ *   [/en]
+ *   [ja][/ja]
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
  * <ons-icon
  *   icon="md-car"
  *   size="20px"
- *   fixed-width="false"
  *   style="color: red">
  * </ons-icon>
+ *
+ * <ons-button>
+ *   <ons-icon icon="md-car"></ons-icon>
+ *   Car
+ * </ons-button>
  */
 class IconElement extends BaseElement {
 
@@ -42,10 +52,27 @@ class IconElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The icon name. "md-" prefix for Material Icons, "fa-" for Font Awesome and "ion-" prefix for Ionicons icons. See all icons at http://zavoloklom.github.io/material-design-iconic-font/icons.html, http://fontawesome.io/icons/ and http://ionicons.com.
-   *     Icons can also be styled based on modifier presence. Add comma-separated icons with "modifierName:" prefix. E.g. `<ons-icon icon="ion-edit, material:md-edit" size="32px, material:24px">` will display "md-edit" for Material Design and "ion-edit" as default icon.
+   *     The icon name. `"md-"` prefix for Material Icons, `"fa-"` for Font Awesome and `"ion-"` prefix for Ionicons.
+   *
+   *     See all available icons on their respective sites:
+   *
+   *     * [Font Awesome](https://fortawesome.github.io/Font-Awesome/)
+   *     * [Ionicons](http://ionicons.com)
+   *     * [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
+   *
+   *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix.
+   *
+   *     The code:
+   *
+   *     ```
+   *     <ons-icon
+   *       icon="ion-edit, material:md-edit">
+   *     </ons-icon>
+   *     ```
+   *
+   *     will display `"md-edit"` for Material Design and `"ion-edit"` as the default icon.
    *   [/en]
-   *   [ja]アイコン名を指定します。<code>md-</code>で始まるものはMaterial Iconsとして、<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://zavoloklom.github.io/material-design-iconic-font/icons.html http://fontawesome.io/icons/ http://ionicons.com[/ja]
+   *   [ja][/ja]
    */
 
   /**
@@ -53,17 +80,28 @@ class IconElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.
-   *     Icons can also be styled based on modifier presence. Add comma-separated icons with "modifierName:" prefix. E.g. `<ons-icon icon="ion-edit, material:md-edit" size="32px, material:24px">` will display "md-edit" for Material Design and "ion-edit" as default icon.
+   *     The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in the size in pixels.
+   *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix. 
+   *
+   *     The code:
+   *
+   *     ```
+   *     <ons-icon
+   *       icon="ion-edit"
+   *       size="32px, material:24px">
+   *     </ons-icon>
+   *     ```
+   *
+   *     will render as a `24px` icon if the `"material"` modifier is present and `32px` otherwise.
    *   [/en]
-   *   [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
+   *   [ja][/ja]
    */
 
   /**
    * @attribute rotate
    * @type {Number}
    * @description
-   *   [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
+   *   [en]Number of degrees to rotate the icon. Valid values are 90, 180 and 270.[/en]
    *   [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
    */
 
@@ -72,8 +110,8 @@ class IconElement extends BaseElement {
    * @type {Boolean}
    * @default false
    * @description
-   *  [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
-   *  [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
+   *  [en]When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute.[/en]
+   *  [ja][/ja]
    */
 
   /**
