@@ -81,7 +81,7 @@ ons-icon[spin] {
   transform: rotate(270deg);
 }
 
-ons-icon[fixed-width="true"] {
+ons-icon[fixed-width] {
   width: 1.28571429em;
   text-align: center;
 }
