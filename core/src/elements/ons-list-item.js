@@ -42,6 +42,12 @@ const scheme = {
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped. The chevron is not displayed in Material Design.[/en]
  *   [ja][/ja]
+ * @modifier longdivider
+ *   [en]Displays a long horizontal divider between items.[/en]
+ *   [ja][/ja]
+ * @modifier nodivider
+ *   [en]Removes the divider between list items.[/en]
+ *   [ja][/ja]
  * @modifier material
  *   [en]Display a Material Design list item.[/en]
  *   [ja][/ja]
