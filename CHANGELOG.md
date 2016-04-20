@@ -14,6 +14,7 @@ v2.0.0-beta.10
  * ons-carousel: Fixed an issue causing improper carousel size when used with angular and ons-navigator.
  * ons-icon: Delete attribute `flip` from ons-icon (obsolete, since everything can be done with `rotate`)
  * ons-alert-dialog: Fixed [#1347](https://github.com/OnsenUI/OnsenUI/issues/1347).
+ * ons-progress-var: Add `value`, `secondaryValue` and `indeterminate` properties.
 
 v2.0.0-beta.9
 ----
