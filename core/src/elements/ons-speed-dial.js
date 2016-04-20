@@ -98,10 +98,6 @@ class SpeedDialElement extends BaseElement {
         this._updateDirection('up');
       }
       this._updatePosition();
-
-      if (this.hasAttribute('disabled')) {
-        this.setDisabled(true);
-      }
     }
 
     this._shown = true;
@@ -133,8 +129,6 @@ class SpeedDialElement extends BaseElement {
       case 'position':
         this._updatePosition();
         break;
-      case 'disabled':
-        this.setDisabled(current !== null);
     }
   }
 
@@ -151,19 +145,19 @@ class SpeedDialElement extends BaseElement {
   }
 
   _onClick(e) {
-    if (!this.isDisabled()) {
+    if (!this.disabled) {
       this.toggleItems();
     }
   }
 
   _show() {
-    if (!this.isInline()) {
+    if (!this.inline) {
       this.show();
     }
   }
 
   _hide() {
-    if (!this.isInline()) {
+    if (!this.inline) {
       this.hide();
     }
   }
@@ -320,65 +314,48 @@ class SpeedDialElement extends BaseElement {
   }
 
   /**
-   * @method setDisabled
-   * @signature setDisabled(disabled)
-   * @param {Boolean}
+   * @property disabled
+   * @type {Boolean}
    * @description
-   *   [en]Disable or enable the element.[/en]
-   *   [ja]disabled状態にするかどうかを設定します。[/ja]
+   *   [en]Whether the speed dial is disabled or not.[/en]
+   *   [ja][/ja]
    */
-  setDisabled(disabled) {
-    if (typeof disabled !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-
-    if (disabled) {
+  set disabled(value) {
+    if (value) {
       this.hideItems();
-      this.setAttribute('disabled', '');
-      util.arrayFrom(this.children).forEach(element => (element.classList.contains('fab')) ? element.setAttribute('disabled', '') : true);
-    } else {
-      this.removeAttribute('disabled');
-      util.arrayFrom(this.children).forEach(element => (element.classList.contains('fab')) ? element.removeAttribute('disabled') : true);
     }
+    util.arrayFrom(this.children).forEach(e => {
+      util.match(e, '.fab') && util.toggleAttribute(e, 'disabled', value)
+    });
+
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
-  /**
-   * @method isDisabled
-   * @signature isDisabled()
-   * @return {Boolean}
-   *   [en]true if the element is disabled.[/en]
-   *   [ja]disabled状態になっているかどうかを返します。[/ja]
-   * @description
-   *   [en]Returns whether the component is enabled or not.[/en]
-   *   [ja]この要素を無効化するかどうかを指定します。[/ja]
-   */
-  isDisabled() {
+  get disabled() {
     return this.hasAttribute('disabled');
   }
 
   /**
-   * @method isInline
-   * @signature isInline()
-   * @return {Boolean}
+   * @property inline
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the component is inline or not.[/en]
-   *   [ja]この要素がインライン要素かどうかを返します。[/ja]
+   *   [en]Whether the component is inline or not.[/en]
+   *   [ja]この要素がインライン要素かどうか。[/ja]
    */
-  isInline() {
+  get inline() {
     return this.hasAttribute('inline');
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
-   * @return {Boolean}
-   *   [en]True if the component is visible.[/en]
-   *   [ja]表示されているかどうかを返します。[/ja]
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Return whether the component is visible or not.[/en]
-   *   [ja]表示されているかどうかを返します。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return this._shown && this.style.display !== 'none';
   }
 
@@ -394,11 +371,7 @@ class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの表示非表示を切り替えます。[/ja]
    */
   toggle() {
-    if (this.isShown()) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.visible ? this.hide() : this.show();
   }
 
   /**
