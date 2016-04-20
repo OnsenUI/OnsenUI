@@ -22,7 +22,7 @@ import Animator from './animator-css';
 
 /**
  * @element ons-ripple
- * @category form
+ * @category material
  * @description
  *   [en]Adds a Material Design "ripple" effect to an element.[/en]
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]

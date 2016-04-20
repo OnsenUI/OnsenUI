@@ -34,7 +34,7 @@ const template = util.createElement(`
 
 /**
  * @element ons-progress-bar
- * @category progress
+ * @category visuals
  * @description
  *   [en]A material design progress component. It's displayed as a linear progress indicator.[/en]
  *   [ja]マテリアルデザインのprogressコンポーネントです。linearなプログレスインジケータを表示します。[/ja]

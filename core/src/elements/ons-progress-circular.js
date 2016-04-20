@@ -34,7 +34,7 @@ const template = util.createElement(`
 
 /**
  * @element ons-progress-circular
- * @category progress
+ * @category visuals
  * @description
  *   [en]A material design progress component. It's displayed as a circular progress indicator.[/en]
  *   [ja]マテリアルデザインのprogressコンポーネントです。circularなプログレスインジケータを表示します。[/ja]
