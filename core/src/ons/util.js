@@ -449,4 +449,13 @@ util.updateRipple = (target) => {
  */
 util.animationOptionsParse = animationOptionsParse;
 
+/**
+ * @param {*} value
+ */
+util.isInteger = (value) => {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value;
+};
+
 export default util;
