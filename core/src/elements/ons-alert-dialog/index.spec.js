@@ -69,57 +69,19 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#setDisabled()', () => {
-    it('only accepts a boolean argument', () => {
-      expect(() => dialog.setDisabled('hoge')).to.throw(Error);
-    });
-
-    it('disables the dialog', () => {
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
-    });
-
-    it('enables the dialog', () => {
-      dialog.setDisabled(false);
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      expect(dialog.hasAttribute('disabled')).to.be.false;
+      dialog.disabled = true;
+      expect(dialog.hasAttribute('disabled')).to.be.true;
     });
   });
 
-  describe('#isDisabled()', () => {
-    it('returns whether the dialog is disabled or not', () => {
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
-    });
-  });
-
-  describe('#setCancelable()', () => {
-    it('only accepts a boolean argument', () => {
-      expect(() => dialog.setCancelable('hoge')).to.throw(Error);
-    });
-
-    it('makes the dialog cancelable', () => {
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
-    });
-
-    it('makes the dialog not cancelable', () => {
-      dialog.setCancelable(false);
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
-    });
-  });
-
-  describe('#isCancelable()', () => {
-    it('returns whether the dialog is cancelable or not', () => {
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
+  describe('#cancelable', () => {
+    it('changes the "cancelable" attribute', () => {
+      expect(dialog.hasAttribute('cancelable')).to.be.false;
+      dialog.cancelable = true;
+      expect(dialog.hasAttribute('cancelable')).to.be.true;
     });
   });
 
@@ -219,14 +181,6 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#destroy()', () => {
-    it('removes the dialog', () => {
-      expect(dialog.parentElement).to.be.ok;
-      dialog.destroy();
-      expect(dialog.parentElement).not.to.be.ok;
-    });
-  });
-
   describe('#_onDeviceBackButton()', () => {
     it('cancels if dialog is cancelable', () => {
       let spy = chai.spy.on(dialog, '_cancel');
@@ -253,11 +207,11 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
-      expect(dialog.isShown()).to.be.false;
+      expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
-      expect(dialog.isShown()).to.be.true;
+      expect(dialog.visible).to.be.true;
     });
   });
 
@@ -277,9 +231,16 @@ describe('OnsAlertDialogElement', () => {
     it('does not compile twice', () => {
       let div1 = document.createElement('div');
       let div2 = document.createElement('div');
-      div1.innerHTML = '<ons-alert-dialog></ons-alert-dialog>';
+      div1.innerHTML = '<ons-alert-dialog>text</ons-alert-dialog>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+
+    it('does not compile when _compiled attribute exists', () => {
+      const spy = chai.spy.on(OnsAlertDialogElement.prototype, '_compile');
+      let div1 = document.createElement('div');
+      div1.innerHTML = '<ons-alert-dialog _compiled>text</ons-alert-dialog>';
+      expect(spy).to.have.been.called.exactly(0);
     });
   });
 });

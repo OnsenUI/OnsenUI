@@ -23,7 +23,11 @@ import BaseElement from 'ons/base-element';
  * @element ons-if
  * @category util
  * @description
- *   [en]Conditionally display content depending on the platform, device orientation or both.[/en]
+ *   [en]
+ *     Conditionally display content depending on the platform, device orientation or both.
+ *
+ *     Sometimes it is useful to conditionally hide or show certain components based on platform. When running on iOS the `<ons-if>` element can be used to hide the `<ons-fab>` element.
+ *   [/en]
  *   [ja][/ja]
  * @guide UtilityAPIs
  *   [en]Other utility APIs[/en]
@@ -48,7 +52,7 @@ class ConditionalElement extends BaseElement {
    * @initonly
    * @type {string}
    * @description
-   *  [en]Space-separated platform names. Possible values are "ios", "android", "windows" and "other".[/en]
+   *  [en]Space-separated platform names. Possible values are `"ios"`, `"android"`, `"windows"` and `"other"`.[/en]
    *  [ja][/ja]
    */
 
@@ -56,7 +60,7 @@ class ConditionalElement extends BaseElement {
    * @attribute orientation
    * @type {string}
    * @description
-   *  [en]Either "portrait" or "landscape".[/en]
+   *  [en]Either `"portrait"` or `"landscape"`.[/en]
    *  [ja]portraitもしくはlandscapeを指定します[/ja]
    */
 

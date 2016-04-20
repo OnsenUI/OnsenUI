@@ -31,9 +31,16 @@ var scheme = {
  * @element ons-back-button
  * @category page
  * @description
- *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
- *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
+ *   [en]
+ *     Back button component for `<ons-toolbar>`. Put it in the left part of the `<ons-toolbar>`.
+ *
+ *     It will find the parent `<ons-navigator>` element and pop a page when clicked.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen aHmGL
+ * @modifier material
+ *   [en]Material Design style[/en]
+ *   [ja][/ja]
  * @seealso ons-toolbar
  *   [en]ons-toolbar component[/en]
  *   [ja]ons-toolbarコンポーネント[/ja]
@@ -47,44 +54,23 @@ var scheme = {
  *   [en]Returning from a page[/en]
  *   [ja]一つ前のページに戻る[/ja]
  * @example
- * <ons-back-button refresh animation="fade">
- *   Back
- * </ons-back-button>
+ * <ons-toolbar>
+ *   <div class="left">
+ *     <ons-back-button>Back</ons-back-button>
+ *   </div>
+ *   <div class="center">
+ *     Title
+ *   <div>
+ * </ons-toolbar>
  */
-class BackButtonElement extends BaseElement {
 
+class BackButtonElement extends BaseElement {
   /**
-   * @attribute animation
+   * @attribute modifier
    * @type {String}
    * @description
-   *   [en]Animation name. Available animations are "slide", "lift", "fade" and "none".
-   *     These are platform based animations. For fixed animations, add "-ios" or "-md"
-   *     suffix to the animation name. E.g. "lift-ios", "lift-md". Defaults values are "slide-ios" and "fade-md".
-   *   [/en]
-   *   [ja][/ja]
-   */
-
-  /**
-   * @attribute animation-options
-   * @type {Object}
-   * @description
-   *   [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
-   */
-
-  /**
-   * @attribute callback
-   * @type {Function}
-   * @description
-   *   [en]Function that is called when the transition has ended.[/en]
-   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
-   */
-
-  /**
-   * @attribute refresh
-   * @description
-   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
-   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   *  [en]The appearance of the back button.[/en]
+   *  [ja]バックボタンの見た目を指定します。[/ja]
    */
 
   createdCallback() {
@@ -131,7 +117,7 @@ class BackButtonElement extends BaseElement {
    * @property options
    * @type {Object}
    * @description
-   *   [en]Options object. Attributes have priority over this property.[/en]
+   *   [en]Options object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    */
 
@@ -168,10 +154,10 @@ class BackButtonElement extends BaseElement {
    *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
    *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
    */
-
   get options() {
     return this._options;
   }
+
   set options(object) {
     this._options = object;
   }
@@ -179,22 +165,6 @@ class BackButtonElement extends BaseElement {
   _onClick() {
     const navigator = util.findParent(this, 'ons-navigator');
     if (navigator) {
-      if (this.hasAttribute('animation')) {
-        this.options.animation = this.getAttribute('animation');
-      }
-
-      if (this.hasAttribute('animation-options')) {
-        this.options.animationOptions = util.animationOptionsParse(this.getAttribute('animation-options'));
-      }
-
-      if (this.hasAttribute('callback')) {
-        this.options.callback = window.eval('(' + this.getAttribute('callback') + ')');
-      }
-
-      if (this.hasAttribute('refresh')) {
-        this.options.refresh = true;
-      }
-
       navigator.popPage(this.options);
     }
   }

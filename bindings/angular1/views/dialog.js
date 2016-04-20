@@ -30,11 +30,7 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'getDeviceBackButtonHandler',
-          'show',
-          'hide',
-          'isShown',
-          'destroy'
+          'show', 'hide'
         ]);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
@@ -69,6 +65,7 @@ limitations under the License.
     };
 
     MicroEvent.mixin(DialogView);
+    $onsen.derivePropertiesFromElement(DialogView, ['disabled', 'cancelable', 'visible', 'backButtonHandler']);
 
     return DialogView;
   });

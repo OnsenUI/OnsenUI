@@ -53,13 +53,28 @@ const INPUT_ATTRIBUTES = [
 /**
  * @element ons-input
  * @category form
+ * @modifier material
+ *  [en]Displays a Material Design input.[/en]
+ *  [ja][/ja]
+ * @modifier underbar
+ *  [en]Displays a horizontal line underneath a text input.[/en]
+ *  [ja][/ja]
  * @description
  *  [en]
- *    Input component. Can be both a text input as well as a checkbox or radio button.
- *    When using the "material" modifier the text input will have a floating label.
+ *    An input element. The `type` attribute can be used to change the input type. All text input types as well as `checkbox` and `radio` are supported.
+ *
+ *    The component will automatically render as a Material Design input on Android devices.
+ *
+ *    Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-input>` element..
  *  [/en]
  *  [ja][/ja]
  * @codepen ojQxLj
+ * @seealso ons-range
+ *   [en]The `<ons-range>` element is used to display a range slider.[/en]
+ *   [ja][/ja]
+ * @seealso ons-switch
+ *   [en]The `<ons-switch>` element is used to display a draggable toggle switch.[/en]
+ *   [ja][/ja]
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -68,6 +83,7 @@ const INPUT_ATTRIBUTES = [
  *   [ja]イベント処理の使い方[/ja]
  * @example
  * <ons-input placeholder="Username" float></ons-input>
+ * <ons-input type="checkbox" checked></ons-input>
  */
 class InputElement extends BaseElement {
 
@@ -90,7 +106,11 @@ class InputElement extends BaseElement {
    * @attribute type
    * @type {String}
    * @description
-   *  [en]Specify the input type. This is the same as the "type" attribute for normal inputs. However, for "range" you should instead use <ons-range> element.[/en]
+   *  [en]
+   *    Specify the input type. This is the same as the "type" attribute for normal inputs. However, for "range" you should instead use <ons-range> element.
+   *
+   *    Please take a look at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type) for an exhaustive list of possible values. Depending on the platform and browser version some of these might not work.
+   *  [/en]
    *  [ja][/ja]
    */
 
@@ -105,7 +125,7 @@ class InputElement extends BaseElement {
   /**
    * @attribute content-left
    * @description
-   *  [en]The HTML content of ons-input is placed before the actual input as a label. Omit this to display it after the input.[/en]
+   *  [en]The HTML content of `<ons-input>` is placed before the actual input as a label. Omit this to display it after the input.[/en]
    *  [ja][/ja]
    */
 
@@ -280,6 +300,13 @@ class InputElement extends BaseElement {
     return this.querySelector('._helper');
   }
 
+  /**
+   * @property value
+   * @type {String}
+   * @description
+   *   [en]The current value of the input.[/en]
+   *   [ja][/ja]
+   */
   get value() {
     return this._input.value;
   }
@@ -291,6 +318,13 @@ class InputElement extends BaseElement {
     return this._input.val;
   }
 
+  /**
+   * @property checked
+   * @type {Boolean}
+   * @description
+   *   [en]This boolean specifies whether the input is checked or not. Only works for `radio` and `checkbox` type inputs.[/en]
+   *   [ja][/ja]
+   */
   get checked() {
     return this._input.checked;
   }
@@ -298,6 +332,27 @@ class InputElement extends BaseElement {
   set checked(val) {
     this._input.checked = val;
   }
+
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]A boolean value that specifies whether the input is disabled or not.[/en]
+   *   [ja][/ja]
+   */
+  set disabled(value) {
+    if (value) {
+      this.setAttribute('disabled', '');
+    }
+    else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
 
   get _isTextInput() {
     return this._input.classList.contains('text-input');

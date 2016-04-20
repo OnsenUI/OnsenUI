@@ -58,7 +58,7 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
-ons-toolbar:not([inline]), ons-bottom-toolbar:not([inline]) {
+ons-toolbar:not([inline]), ons-bottom-toolbar {
   position: absolute;
   left: 0;
   right: 0;
@@ -67,7 +67,7 @@ ons-toolbar:not([inline]), ons-bottom-toolbar:not([inline]) {
 ons-toolbar:not([inline]) {
   top: 0;
 }
-ons-bottom-toolbar:not([inline]) {
+ons-bottom-toolbar {
   bottom: 0;
 }
 

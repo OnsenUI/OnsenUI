@@ -46,12 +46,19 @@ const scheme = {'': 'button--*'};
  * @modifier large--cta
  *   [en]Large call to action button.[/en]
  *   [ja]横いっぱいに広がるctaボタンを表示します。[/ja]
+ * @modifier material
+ *   [en]Material Design button[/en]
+ *   [ja]マテリアルデザインのボタン[/ja]
  * @description
- *   [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
+ *   [en]
+ *     Button component. If you want to place a button in a toolbar, use `<ons-toolbar-button>` or `<ons-back-button>` instead.
+ *
+ *     Will automatically display as a Material Design button with a ripple effect on Android.
+ *   [/en]
  *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用します。[/ja]
  * @codepen hLayx
- * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
- * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide Button [en]Guide for `<ons-button>`[/en][ja]<ons-button>の使い方[/ja]
+ * @guide OverridingCSSstyles [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-button modifier="large--cta">
  *   Tap Me
@@ -81,7 +88,6 @@ class ButtonElement extends BaseElement {
    *   [en]Specify if button should be disabled.[/en]
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
-
   createdCallback() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
@@ -96,6 +102,25 @@ class ButtonElement extends BaseElement {
       case 'ripple':
         this._updateRipple();
     }
+  }
+
+  /**
+   * @property disabled
+   * @description
+   *   [en]A boolean value that specifies if the button is disabled or not.[/en]
+   *   [ja][/ja]
+   */
+  set disabled(value) {
+    if (value) {
+      this.setAttribute('disabled', '');
+    }
+    else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
   }
 
   _compile() {

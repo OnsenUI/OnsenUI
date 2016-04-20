@@ -17,7 +17,7 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
 
 /**
  * @element ons-lazy-repeat
- * @category control
+ * @category list
  * @description
  *   [en]
  *     Using this component a list with millions of items can be rendered without a drop in performance.
@@ -30,6 +30,9 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
  *   [/ja]
  * @codepen QwrGBm
+ * @seealso ons-list
+ *   [en]The `<ons-list>` element is used to render a list.[/en]
+ *   [ja][/ja]
  * @guide UsingLazyRepeat
  *   [en]How to use Lazy Repeat[/en]
  *   [ja]レイジーリピートの使い方[/ja]
@@ -38,10 +41,6 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  *   window.addEventListener('load', function() {
  *     var lazyRepeat = document.querySelector('#list');
  *     lazyRepeat.delegate = {
- *      // calculateItemHeight: function(i) {
- *      //  // specify this if the height depends on the element
- *      //  return Math.floor(42 * Math.random());
- *      // },
  *      createItemContent: function(i, template) {
  *        var dom = template.cloneNode(true);
  *        dom.innerText = i;
@@ -49,11 +48,9 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  *        return dom;
  *      },
  *      countItems: function() {
- *         // Return number of items.
  *        return 10000000;
  *      },
  *      destroyItem: function(index, item) {
- *        // Optional method that is called when an item is unloaded.
  *        console.log('Destroyed item with index: ' + index);
  *      }
  *     };
@@ -98,19 +95,71 @@ class LazyRepeatElement extends BaseElement {
 
   /**
    * @property delegate
+   * @type {Object}
    * @description
    *  [en]Specify a delegate object to load and unload item elements.[/en]
    *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
    */
+
+  /**
+   * @property delegate.createItemContent
+   * @type {Function}
+   * @description
+   *   [en]
+   *     This function should return a `HTMLElement`.
+   *
+   *     To help rendering the element, the current index and a template is supplied as arguments. The template is the initial content of the `<ons-lazy-repeat>` element.
+   *   [/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property delegate.countItems
+   * @type {Function}
+   * @description
+   *   [en]Should return the number of items in the list.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property delegate.calculateItemHeight
+   * @type {Function}
+   * @description
+   *   [en]
+   *     Should return the height of an item. The index is provided as an argument.
+   *
+   *     This is important when rendering lists where the items have different height.
+   *
+   *     The function is optional and if it isn't present the height of the first item will be automatically calculated and used for all other items.
+   *   [/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property delegate.destroyItem
+   * @type {Function}
+   * @description
+   *   [en]
+   *     This function is used called when an item is removed from the DOM. The index and DOM element is provided as arguments.
+   *
+   *     The function is optional but may be important in order to avoid memory leaks.
+   *   [/en]
+   *   [ja][/ja]
+   */
+
   set delegate(userDelegate) {
     this.setDelegate(userDelegate);
+  }
+
+  get delegate() {
+    throw new Error('This property can only be used to set the delegate object.');
   }
 
   /**
    * @method refresh
    * @signature refresh()
    * @description
-   *   [en][/en]
+   *   [en]Refresh the list. Use this method when the data has changed.[/en]
    *   [ja][/ja]
    */
   refresh() {
@@ -131,5 +180,3 @@ class LazyRepeatElement extends BaseElement {
 window.OnsLazyRepeatElement = document.registerElement('ons-lazy-repeat', {
   prototype: LazyRepeatElement.prototype
 });
-
-

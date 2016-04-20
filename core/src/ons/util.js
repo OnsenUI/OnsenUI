@@ -327,6 +327,14 @@ util.updateParentPosition = (el) => {
   }
 };
 
+util.toggleAttribute = (element, name, enable) => {
+  if (enable) {
+    element.setAttribute(name, '');
+  } else {
+    element.removeAttribute(name);
+  }
+};
+
 util.bindListeners = (element, listenerNames) => {
   listenerNames.forEach(name => {
     let boundName = name.replace(/^_[a-z]/, '_bound' + name[1].toUpperCase());
@@ -448,5 +456,14 @@ util.updateRipple = (target) => {
  * @return {Object}
  */
 util.animationOptionsParse = animationOptionsParse;
+
+/**
+ * @param {*} value
+ */
+util.isInteger = (value) => {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value;
+};
 
 export default util;

@@ -66,9 +66,9 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#getDeviceBackButtonHandler()', () => {
+  describe('#backButtonHandler', () => {
     it('returns the back button handler', () => {
-      expect(dialog.getDeviceBackButtonHandler()).to.be.an('object');
+      expect(dialog.backButtonHandler).to.be.an('object');
     });
   });
 
@@ -106,6 +106,22 @@ describe('OnsDialogElement', () => {
       dialog._cancel();
 
       return expect(promise).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      expect(dialog.hasAttribute('disabled')).to.be.false;
+      dialog.disabled = true;
+      expect(dialog.hasAttribute('disabled')).to.be.true;
+    });
+  });
+
+  describe('#cancelable', () => {
+    it('changes the "cancelable" attribute', () => {
+      expect(dialog.hasAttribute('cancelable')).to.be.false;
+      dialog.cancelable = true;
+      expect(dialog.hasAttribute('cancelable')).to.be.true;
     });
   });
 
@@ -205,75 +221,14 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#destroy()', () => {
-    it('removes the dialog', () => {
-      expect(dialog.parentElement).to.be.ok;
-      dialog.destroy();
-      expect(dialog.parentElement).not.to.be.ok;
-    });
-  });
-
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
-      expect(dialog.isShown()).to.be.false;
+      expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
-      expect(dialog.isShown()).to.be.true;
+      expect(dialog.visible).to.be.true;
     });
   });
 
-  describe('#isCancelable()', () => {
-    it('returns whether the dialog is cancelable or not', () => {
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
-    });
-  });
-
-  describe('#setDisabled()', () => {
-    it('only accepts a boolean argument', () => {
-      expect(() => dialog.setDisabled('hoge')).to.throw(Error);
-    });
-
-    it('disables the dialog', () => {
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
-    });
-
-    it('enables the dialog', () => {
-      dialog.setDisabled(false);
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
-    });
-  });
-
-  describe('#isDisabled()', () => {
-    it('returns whether the dialog is disabled or not', () => {
-      expect(dialog.isDisabled()).to.be.false;
-      dialog.setDisabled(true);
-      expect(dialog.isDisabled()).to.be.true;
-    });
-  });
-
-  describe('#setCancelable()', () => {
-    it('only accepts a boolean argument', () => {
-      expect(() => dialog.setCancelable('hoge')).to.throw(Error);
-    });
-
-    it('makes the dialog cancelable', () => {
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
-    });
-
-    it('makes the dialog not cancelable', () => {
-      dialog.setCancelable(false);
-      expect(dialog.isCancelable()).to.be.false;
-      dialog.setCancelable(true);
-      expect(dialog.isCancelable()).to.be.true;
-    });
-  });
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {

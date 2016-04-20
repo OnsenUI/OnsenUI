@@ -16,9 +16,7 @@ describe('ons.notification', () => {
     });
 
     afterEach(() => {
-      if (dialog.parentNode) {
-        dialog.destroy();
-      }
+      dialog.remove();
       dialog = null;
     });
 
@@ -31,7 +29,7 @@ describe('ons.notification', () => {
       ons.notification.alert({messageHTML: message, id: 'test'});
       let dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-      dialog.destroy();
+      dialog.remove();
     });
 
     it('displays an alert dialog', () => {
@@ -72,9 +70,7 @@ describe('ons.notification', () => {
     });
 
     afterEach(() => {
-      if (dialog.parentNode) {
-        dialog.destroy();
-      }
+      dialog.remove();
       dialog = null;
     });
 
@@ -87,7 +83,7 @@ describe('ons.notification', () => {
       ons.notification.confirm({messageHTML: message, id: 'test'});
       let dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-      dialog.destroy();
+      dialog.remove();
     });
 
     it('displays an alert dialog', () => {
@@ -134,9 +130,7 @@ describe('ons.notification', () => {
     });
 
     afterEach(() => {
-      if (dialog.parentNode) {
-        dialog.destroy();
-      }
+      dialog.remove();
       dialog = null;
     });
 
@@ -149,7 +143,7 @@ describe('ons.notification', () => {
       ons.notification.prompt({messageHTML: message, id: 'test'});
       let dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-      dialog.destroy();
+      dialog.remove();
     });
 
     it('displays an alert dialog', () => {

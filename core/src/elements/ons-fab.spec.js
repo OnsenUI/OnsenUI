@@ -27,14 +27,7 @@ describe('OnsFabElement', () => {
   });
 
   describe('#_show()', () => {
-    it('does nothing if element is inline', () => {
-      let spy = chai.spy.on(fab, 'show');
-      fab.setAttribute('inline', '');
-      fab._show();
-      expect(spy).to.not.have.been.called();
-    });
-
-    it('calls show() if element is not inline', () => {
+    it('calls show()', () => {
       let spy = chai.spy.on(fab, 'show');
       fab._show();
       expect(spy).to.have.been.called.once;
@@ -42,14 +35,7 @@ describe('OnsFabElement', () => {
   });
 
   describe('#_hide()', () => {
-    it('does nothing if element is inline', () => {
-      let spy = chai.spy.on(fab, 'hide');
-      fab.setAttribute('inline', '');
-      fab._hide();
-      expect(spy).to.not.have.been.called();
-    });
-
-    it('calls hide() if element is not inline', () => {
+    it('calls hide()', () => {
       let spy = chai.spy.on(fab, 'hide');
       fab._hide();
       expect(spy).to.have.been.called.once;
@@ -142,42 +128,6 @@ describe('OnsFabElement', () => {
     });
   });
 
-  describe('#setDisabled()', () => {
-    it('throws an error if argument is not boolean', () => {
-      expect(() => fab.setDisabled('hoge')).to.throw(Error);
-    });
-
-    it('sets the disabled attribute if argument is true', () => {
-      expect(fab.hasAttribute('disabled')).to.be.false;
-      fab.setDisabled(true);
-      expect(fab.hasAttribute('disabled')).to.be.true;
-    });
-
-    it('removes the disabled attribute if argument is false', () => {
-      fab.setAttribute('disabled', '');
-      fab.setDisabled(false);
-      expect(fab.hasAttribute('disabled')).to.be.false;
-    });
-  });
-
-  describe('#isDisabled()', () => {
-    it('returns whether the disabled attribute is set or not', () => {
-      fab.setAttribute('disabled', '');
-      expect(fab.isDisabled()).to.be.true;
-      fab.removeAttribute('disabled');
-      expect(fab.isDisabled()).to.be.false;
-    });
-  });
-
-  describe('#isInline()', () => {
-    it('returns whether the inline attribute is set or not', () => {
-      fab.setAttribute('inline', '');
-      expect(fab.isInline()).to.be.true;
-      fab.removeAttribute('inline');
-      expect(fab.isInline()).to.be.false;
-    });
-  });
-
   describe('#isShown()', () => {
     it('returns whether the element is currently shown or not', () => {
       expect(fab.isShown()).to.be.false;
@@ -188,6 +138,14 @@ describe('OnsFabElement', () => {
       fab.style.display = 'none';
       fab.show();
       expect(fab.isShown()).to.be.false;
+    });
+  });
+
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      expect(fab.hasAttribute('disabled')).to.be.false;
+      fab.disabled = true;
+      expect(fab.hasAttribute('disabled')).to.be.true;
     });
   });
 

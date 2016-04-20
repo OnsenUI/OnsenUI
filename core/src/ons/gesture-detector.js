@@ -49,7 +49,7 @@ var GestureDetector = function GestureDetector(element, options) {
  */
 GestureDetector.defaults = {
   behavior: {
-    userSelect: 'none',
+    // userSelect: 'none', // Also disables selection in `input` children
     touchAction: 'pan-y',
     touchCallout: 'none',
     contentZooming: 'none',

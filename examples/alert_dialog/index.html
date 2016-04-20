@@ -33,13 +33,13 @@
       };
 
       $scope.close = function() {
-        if($scope.alertDialog && $scope.alertDialog.isShown()) {
+        if($scope.alertDialog && $scope.alertDialog.visible) {
           $scope.alertDialog.hide();
         }
       };
 
       $scope.close2 = function() {
-        if($scope.alertDialog2 && $scope.alertDialog2.isShown()) {
+        if($scope.alertDialog2 && $scope.alertDialog2.visible) {
           $scope.alertDialog2.hide();
         }
       };

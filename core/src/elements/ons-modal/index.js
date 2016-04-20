@@ -41,8 +41,9 @@ const _animatorDict = {
  * @category modal
  * @description
  *   [en]
- *     Modal component that masks current screen.
- *     Underlying components are not subject to any events while the modal component is shown.
+ *     Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.
+ *
+ *     This component can be used to block user input while some operation is running or to show some information to the user.
  *   [/en]
  *   [ja]
  *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
@@ -54,11 +55,18 @@ const _animatorDict = {
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using navigator from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @seealso ons-dialog
+ *   [en]The `<ons-dialog>` component can be used to create a modal dialog.[/en]
+ *   [ja][/ja]
  * @codepen devIg
  * @example
- * <ons-modal>
- *   ...
+ * <ons-modal id="modal">
+ *   Modal content
  * </ons-modal>
+ * <script>
+ *   var modal = document.getElementById('modal');
+ *   modal.show();
+ * </script>
  */
 class ModalElement extends BaseElement {
 
@@ -67,7 +75,7 @@ class ModalElement extends BaseElement {
    * @type {String}
    * @default default
    * @description
-   *  [en]The animation used when showing and hiding the modal. Can be either "none" or "fade".[/en]
+   *  [en]The animation used when showing and hiding the modal. Can be either `"none"` or `"fade"`.[/en]
    *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
    */
 
@@ -75,7 +83,7 @@ class ModalElement extends BaseElement {
    * @attribute animation-options
    * @type {Expression}
    * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
@@ -94,37 +102,25 @@ class ModalElement extends BaseElement {
     });
   }
 
+
   /**
-   * @method getDeviceBackButtonHandler
-   * @signature getDeviceBackButtonHandler()
-   * @return {Object}
-   *   [en]Device back button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @property backButtonHandler
+   * @type {Object}
    * @description
-   *   [en]Retrieve the back button handler.[/en]
-   *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
-  getDeviceBackButtonHandler() {
-    return this._deviceBackButtonHandler;
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
-  /**
-   * @method setDeviceBackButtonHandler
-   * @signature setDeviceBackButtonHandler(callback)
-   * @return {Function} callback
-   *   [en][/en]
-   *   [ja][/ja]
-   * @description
-   *   [en][/en]
-   *   [ja][/ja]
-   */
-  setDeviceBackButtonHandler(callback) {
-    if (this._deviceBackButtonHandler) {
-      this._deviceBackButtonHandler.destroy();
+  set backButtonHandler(handler) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
 
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
-    this._onDeviceBackButton = callback;
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
+    this._onDeviceBackButton = handler;
   }
 
   _onDeviceBackButton() {
@@ -153,14 +149,14 @@ class ModalElement extends BaseElement {
   }
 
   detachedCallback() {
-    if (this._deviceBackButtonHandler) {
-      this._deviceBackButtonHandler.destroy();
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
   }
 
   attachedCallback() {
     setImmediate(this._ensureNodePosition.bind(this));
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
   }
 
   _ensureNodePosition() {
@@ -186,16 +182,14 @@ class ModalElement extends BaseElement {
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
-   * @return {Boolean}
-   *   [en]true if the modal is visible.[/en]
-   *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the modal is visible or not.[/en]
-   *   [ja]モーダルが表示されているかどうかを返します。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return this.style.display !== 'none';
   }
 
@@ -206,11 +200,11 @@ class ModalElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [en]Animation name. Available animations are `"none"` and `"fade"`.[/en]
    *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
    *   [en]Show modal.[/en]
    *   [ja]モーダルを表示します。[/ja]
@@ -253,17 +247,17 @@ class ModalElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [en]Animation name. Available animations are `"none"` and `"fade"`.[/en]
    *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
    *   [en]Toggle modal visibility.[/en]
    *   [ja]モーダルの表示を切り替えます。[/ja]
    */
   toggle() {
-    if (this.isShown()) {
+    if (this.visible) {
       return this.hide.apply(this, arguments);
     } else {
       return this.show.apply(this, arguments);
@@ -277,11 +271,11 @@ class ModalElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "none" and "fade".[/en]
+   *   [en]Animation name. Available animations are `"none"` and `"fade"`.[/en]
    *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
    *   [en]Hide modal.[/en]
    *   [ja]モーダルを非表示にします。[/ja]

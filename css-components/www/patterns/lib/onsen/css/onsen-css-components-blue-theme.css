@@ -111,7 +111,7 @@ h6 {
   font-weight: 400;
 }
 .page--material__background {
-  background-color: #fafafa;
+  background-color: #fff;
 }
 /* topdoc
   name: Switch
@@ -448,7 +448,7 @@ input:disabled + .switch__toggle {
   background-size: 100% 2px;
   background-repeat: no-repeat;
   overflow: hidden;
-  height: 31px;
+  height: 32px;
 }
 .range::-moz-range-track {
   position: relative;
@@ -531,6 +531,18 @@ input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+.range__left {
+  position: relative;
+  top: 17px;
+  height: 2px;
+  width: 0;
+  background-color: #1284ff;
+  pointer-events: none;
+}
+[disabled] > .range__left,
+.range--material:disabled + .range__left {
+  display: none;
 }
 /* topdoc
   name: Material Range
@@ -658,15 +670,7 @@ input:disabled + .switch__toggle {
   transform: scale(2.5);
 }
 .range--material__left {
-  position: relative;
-  top: -16px;
-  height: 2px;
-  width: 0;
   background-color: #009688;
-  pointer-events: none;
-}
-.range--material:disabled + .range--material__left {
-  display: none;
 }
 /* topdoc
   name: Navigation Bar
@@ -3719,6 +3723,10 @@ input:disabled + .switch__toggle {
   border: none;
   background-image: none;
 }
+.list__item--longdivider.list__item--chevron:before {
+  border: none;
+  background-image: none;
+}
 /* topdoc
   name: Category List Header
   class: list__header
@@ -4177,10 +4185,55 @@ input:disabled + .switch__toggle {
 .list__item--material__left:empty,
 .list__item--material__center {
   padding: 16px 0;
+  border-color: #eee;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--material__left:empty,
+  .list__item--material__center {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #eee, #eee 50%, transparent 50%);
+  }
 }
 .list__item--material__right {
   padding: 16px 16px 16px 0px;
   line-height: 1;
+  border-color: #eee;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--material__right {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #eee, #eee 50%, transparent 50%);
+  }
+}
+.list__item--material.list__item--longdivider {
+  border-bottom: 1px solid #eee;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--material.list__item--longdivider {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #eee, #eee 50%, transparent 50%);
+  }
 }
 /* topdoc
   name: Material List with Header
@@ -4210,7 +4263,7 @@ input:disabled + .switch__toggle {
   padding: 8px 16px;
 }
 .list__header--material:not(:first-of-type) {
-  border-top: 1px solid var-list-border-color;
+  border-top: 1px solid #eee;
   padding-top: 16px;
 }
 /* topdoc
@@ -4932,7 +4985,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .dialog-container--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #fafafa;
+  background-color: #fff;
 }
 .dialog-mask--material {
   background-color: rgba(0,0,0,0.3);
@@ -5247,7 +5300,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .alert-dialog--material {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #fafafa;
+  background-color: #fff;
 }
 .alert-dialog-container--material {
   padding-top: 22px;
@@ -5985,7 +6038,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-size: 25px;
   line-height: 56px;
   letter-spacing: 0;
-  color: #fafafa;
+  color: #fff;
   vertical-align: middle;
   text-align: center;
   background-color: #009688;

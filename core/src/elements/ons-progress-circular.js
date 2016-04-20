@@ -36,13 +36,19 @@ const template = util.createElement(`
  * @element ons-progress-circular
  * @category progress
  * @description
- *   [en]A material design progress component. It's displayed as a circular progress indicator.[/en]
- *   [ja]マテリアルデザインのprogressコンポーネントです。circularなプログレスインジケータを表示します。[/ja]
+ *   [en]
+ *     This component displays a circular progress indicator. It can either be used to show how much of a task has been completed or to show a looping animation to indicate that an operation is currently running.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen EVzMjR
  * @example
  * <ons-progress-circular
  *  value="55"
  *  secondary-value="87">
+ * </ons-progress-circular>
+ *
+ * <ons-progress-circular
+ *  indeterminate>
  * </ons-progress-circular>
  */
 class ProgressCircularElement extends BaseElement {
@@ -114,6 +120,64 @@ class ProgressCircularElement extends BaseElement {
       let per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
       this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
     }
+  }
+
+  /**
+   * @property value
+   * @type {Number}
+   * @description
+   *   [en]Current progress. Should be a value between 0 and 100.[/en]
+   *   [ja]現在の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+   */
+  set value(value) {
+    if (typeof value !== 'number' || value < 0 || value > 100) {
+      throw new Error('Invalid value');
+    }
+
+    this.setAttribute('value', Math.floor(value));
+  }
+
+  get value() {
+    return parseInt(this.getAttribute('value') || '0');
+  }
+
+  /**
+   * @property secondaryValue
+   * @type {Number}
+   * @description
+   *   [en]Current secondary progress. Should be a value between 0 and 100.[/en]
+   *   [ja]現在の２番目の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+   */
+  set secondaryValue(value) {
+    if (typeof value !== 'number' || value < 0 || value > 100) {
+      throw new Error('Invalid value');
+    }
+
+    this.setAttribute('secondary-value', Math.floor(value));
+  }
+
+  get secondaryValue() {
+    return parseInt(this.getAttribute('secondary-value') || '0');
+  }
+
+  /**
+   * @property indeterminate
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is `true`, an infinite looping animation will be shown.[/en]
+   *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
+   */
+  set indeterminate(value) {
+    if (value) {
+      this.setAttribute('indeterminate', '');
+    }
+    else {
+      this.removeAttribute('indeterminate');
+    }
+  }
+
+  get indeterminate() {
+    return this.hasAttribute('indeterminate');
   }
 
   _compile() {

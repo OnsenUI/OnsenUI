@@ -22,9 +22,16 @@ const scheme = {
 
 /**
  * @element ons-fab
- * @category fab
+ * @category form
  * @description
- *   [en][/en]
+ *   [en]
+ *     The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
+ *
+ *     It can be displayed either as an inline element or in one of the corners. Normally it will be positioned in the lower right corner of the screen.
+ *   [/en]
+ *   [ja][/ja]
+ * @seealso ons-speed-dial
+ *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]
  */
 class FabElement extends BaseElement {
@@ -40,7 +47,7 @@ class FabElement extends BaseElement {
   /**
    * @attribute ripple
    * @description
-   *  [en]If this attribute is defined, the button will have a ripple effect.[/en]
+   *  [en]If this attribute is defined, the button will have a ripple effect when tapped.[/en]
    *  [ja][/ja]
    */
 
@@ -48,15 +55,8 @@ class FabElement extends BaseElement {
    * @attribute position
    * @type {String}
    * @description
-   *  [en][/en]
-   *  [ja]fabコンポーネントを表示する位置を指定します。 上下位置と左右位置を指定します。 上下位置に指定できるのは`top`か`bottom`です。左右位置で指定できるのは`left`か`right`か`center`です。`top left`と指定すると、左上に表示されます。`bottom center`と指定すると、下部中央に表示されます。[/ja]
-   */
-
-  /**
-   * @attribute inline
-   * @description
-   *  [en][/en]
-   *  [ja]この属性が設定されると、このコンポーネントはposition属性を無視してインラインに表示されます。[/ja]
+   *  [en]The position of the button. Should be a string like `"bottom right"` or `"top left"`. If this attribute is not defined it will be displayed as an inline element.[/en]
+   *  [ja][/ja]
    */
 
   /**
@@ -113,15 +113,11 @@ class FabElement extends BaseElement {
   }
 
   _show() {
-    if (!this.isInline()) {
-      this.show();
-    }
+    this.show();
   }
 
   _hide() {
-    if (!this.isInline()) {
-      this.hide();
-    }
+    this.hide();
   }
 
   _updateRipple() {
@@ -171,7 +167,7 @@ class FabElement extends BaseElement {
    * @method show
    * @signature show()
    * @description
-   *  [en][/en]
+   *  [en]Show the floating action button.[/en]
    *  [ja][/ja]
    */
   show(options = {}) {
@@ -183,7 +179,7 @@ class FabElement extends BaseElement {
    * @method hide
    * @signature hide()
    * @description
-   *  [en][/en]
+   *  [en]Hide the floating action button.[/en]
    *  [ja][/ja]
    */
   hide(options = {}) {
@@ -192,52 +188,23 @@ class FabElement extends BaseElement {
   }
 
   /**
-   * @method setDisabled
-   * @signature setDisabled(disabled)
-   * @param {Boolean} disabled
+   * @property disabled
+   * @type {Boolean}
    * @description
-   *  [en]Disabled of enable fab.[/en]
-   *  [ja][/ja]
+   *   [en]A boolean value that specifies whether the floating action button is disabled or not.[/en]
+   *   [ja][/ja]
    */
-  setDisabled(disabled) {
-    if (typeof disabled !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-
-    if (disabled) {
+  set disabled(value) {
+    if (value) {
       this.setAttribute('disabled', '');
-    } else {
+    }
+    else {
       this.removeAttribute('disabled');
     }
   }
 
-  /**
-   * @method isDisabled
-   * @signature isDisabled()
-   * @description
-   *   [en]True if fab is disabled.[/en]
-   *   [ja]disabled状態であるかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isDisabled() {
+  get disabled() {
     return this.hasAttribute('disabled');
-  }
-
-  /**
-   * True if fab is inline element.
-   *
-   * @return {Boolean}
-   */
-  /**
-   * @method isInline
-   * @signature isInline()
-   * @description
-   *   [en]True if fab is inline.[/en]
-   *   [ja]inline属性があるかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isInline() {
-    return this.hasAttribute('inline');
   }
 
   /**
@@ -256,7 +223,7 @@ class FabElement extends BaseElement {
    * @method toggle
    * @signature toggle()
    * @description
-   *   [en][/en]
+   *   [en]Toggle the visibility of the button.[/en]
    *   [ja][/ja]
    */
   toggle() {

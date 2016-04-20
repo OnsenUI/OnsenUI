@@ -267,6 +267,10 @@ list__item()
   border none
   background-image none
 
+.list__item--longdivider.list__item--chevron:before
+  border none
+  background-image none
+
 /*! topdoc
   name: Category List Header
   class: list__header
@@ -692,10 +696,18 @@ list__item()
 
 .list__item--material__center
   padding 16px 0
+  border-color #eee
+  retina-list-item-border(#eee)
 
 .list__item--material__right
   padding 16px 16px 16px 0px
   line-height 1
+  border-color #eee
+  retina-list-item-border(#eee)
+
+.list__item--material.list__item--longdivider
+  border-bottom 1px solid #eee
+  retina-list-item-border(#eee)
 
 /*! topdoc
   name: Material List with Header
@@ -726,7 +738,7 @@ list__item()
   padding 8px 16px
 
 .list__header--material:not(:first-of-type)
-  border-top 1px solid var-list-border-color
+  border-top 1px solid #eee
   padding-top 16px
 
 /*! topdoc

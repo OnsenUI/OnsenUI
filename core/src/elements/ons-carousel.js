@@ -140,11 +140,15 @@ const HorizontalModeTrait = {
  * @element ons-carousel
  * @category carousel
  * @description
- *   [en]Carousel component.[/en]
- *   [ja]カルーセルを表示できるコンポーネント。[/ja]
+ *   [en]
+ *     Carousel component. A carousel can be used to display several items in the same space.
+ *
+ *     The component supports displaying content both horizontally and vertically. The user can scroll through the items by dragging and it can also be controller programmatically.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen xbbzOQ
  * @seealso ons-carousel-item
- *   [en]ons-carousel-item component[/en]
+ *   [en]`<ons-carousel-item>` component[/en]
  *   [ja]ons-carousel-itemコンポーネント[/ja]
  * @guide UsingCarousel
  *   [en]Learn how to use the carousel component.[/en]
@@ -305,6 +309,14 @@ class CarouselElement extends BaseElement {
    *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されるようになります。[/ja]
    */
 
+  /**
+   * @attribute animation-options
+   * @type {Expression}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
   createdCallback() {
     this._doorLock = new DoorLock();
     this._scroll = 0;
@@ -412,22 +424,25 @@ class CarouselElement extends BaseElement {
    *   [en]The index that the carousel should be set to.[/en]
    *   [ja]carousel要素のインデックスを指定します。[/ja]
    * @param {Object} [options]
-   *   [en][/en]
+   *   [en]Parameter object.[/en]
    *   [ja][/ja]
    * @param {Function} [options.callback]
-   *   [en][/en]
+   *   [en]A function that will be called after the animation is finished.[/en]
    *   [ja][/ja]
    * @param {String} [options.animation]
-   *   [en][/en]
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animationOptions]
+   *   [en]An object that can be used to specify duration, delay and timing function of the animation.[/en]
    *   [ja][/ja]
    * @description
-   *   [en]Specify the index of the ons-carousel-item to show.[/en]
+   *   [en]Specify the index of the `<ons-carousel-item>` to show.[/en]
    *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
-   * @param {Object} [options.animationOptions]
-   * @return {Promise} Resolves to the carousel element
+   * @return {Promise}
+   *   [en]Resolves to the carousel element.[/en]
+   *   [ja][/ja]
    */
   setActiveIndex(index, options = {}) {
-
     if (options && typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
@@ -457,7 +472,7 @@ class CarouselElement extends BaseElement {
    *   [en]The current carousel item index.[/en]
    *   [ja]現在表示しているカルーセル要素のインデックスが返されます。[/ja]
    * @description
-   *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
+   *   [en]Returns the index of the currently visible `<ons-carousel-item>`.[/en]
    *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
    */
   getActiveIndex() {
@@ -484,22 +499,22 @@ class CarouselElement extends BaseElement {
    * @method next
    * @signature next([options])
    * @param {Object} [options]
-   *   [en][/en]
+   *   [en]Parameter object.[/en]
    *   [ja][/ja]
    * @param {Function} [options.callback]
-   *   [en][/en]
+   *   [en]A function that will be executed after the animation has finished.[/en]
    *   [ja][/ja]
    * @param {String} [options.animation]
-   *   [en][/en]
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *   [ja][/ja]
    * @param {Object} [options.animationOptions]
-   *   [en][/en]
+   *   [en]An object that can be used to specify the duration, delay and timing function of the animation.[/en]
    *   [ja][/ja]
    * @return {Promise}
    *   [en]Resolves to the carousel element[/en]
    *   [ja][/ja]
    * @description
-   *   [en]Show next ons-carousel item.[/en]
+   *   [en]Show next `<ons-carousel-item>`.[/en]
    *   [ja]次のons-carousel-itemを表示します。[/ja]
    */
   next(options) {
@@ -510,22 +525,22 @@ class CarouselElement extends BaseElement {
    * @method prev
    * @signature prev([options])
    * @param {Object} [options]
-   *   [en][/en]
+   *   [en]Parameter object.[/en]
    *   [ja][/ja]
    * @param {Function} [options.callback]
-   *   [en][/en]
+   *   [en]A function that will be executed after the animation has finished.[/en]
    *   [ja][/ja]
    * @param {String} [options.animation]
-   *   [en][/en]
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *   [ja][/ja]
    * @param {Object} [options.animationOptions]
-   *   [en][/en]
+   *   [en]An object that can be used to specify the duration, delay and timing function of the animation.[/en]
    *   [ja][/ja]
    * @return {Promise}
    *   [en]Resolves to the carousel element[/en]
    *   [ja][/ja]
    * @description
-   *   [en]Show previous ons-carousel item.[/en]
+   *   [en]Show previous `<ons-carousel-item>`.[/en]
    *   [ja]前のons-carousel-itemを表示します。[/ja]
    */
   prev(options) {
@@ -550,11 +565,11 @@ class CarouselElement extends BaseElement {
   }
 
   _prepareEventListeners() {
-    this._gestureDetector = new GestureDetector(this, {
-      dragMinDistance: 1
-    });
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1});
+    this._mutationObserver = new MutationObserver(() => this.refresh());
 
     this._updateSwipeable();
+    this._updateAutoRefresh();
 
     window.addEventListener('resize', this._boundOnResize, true);
   }
@@ -562,6 +577,9 @@ class CarouselElement extends BaseElement {
   _removeEventListeners() {
     this._gestureDetector.dispose();
     this._gestureDetector = null;
+
+    this._mutationObserver.disconnect();
+    this._mutationObserver = null;
 
     window.removeEventListener('resize', this._boundOnResize, true);
   }
@@ -574,6 +592,16 @@ class CarouselElement extends BaseElement {
       } else {
         this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
         this._gestureDetector.off('dragend', this._boundOnDragEnd);
+      }
+    }
+  }
+
+  _updateAutoRefresh() {
+    if (this._mutationObserver) {
+      if (this.hasAttribute('auto-refresh')) {
+        this._mutationObserver.observe(this, {childList: true});
+      } else {
+        this._mutationObserver.disconnect();
       }
     }
   }
@@ -843,7 +871,7 @@ class CarouselElement extends BaseElement {
    * @method refresh
    * @signature refresh()
    * @description
-   *   [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
+   *   [en]Update the layout of the carousel. Used when adding `<ons-carousel-items>` dynamically or to automatically adjust the size.[/en]
    *   [ja]レイアウトや内部の状態を最新のものに更新します。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用します。[/ja]
    */
   refresh() {
@@ -877,11 +905,23 @@ class CarouselElement extends BaseElement {
   /**
    * @method first
    * @signature first()
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja][/ja]
+   * @param {Function} [options.callback]
+   *   [en]A function that will be executed after the animation has finished.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.animation]
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animationOptions]
+   *   [en]An object that can be used to specify the duration, delay and timing function of the animation.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Resolves to the carousel element[/en]
    *   [ja][/ja]
    * @description
-   *   [en]Show first ons-carousel item.[/en]
+   *   [en]Show first `<ons-carousel-item>`.[/en]
    *   [ja]最初のons-carousel-itemを表示します。[/ja]
    */
   first(options) {
@@ -891,6 +931,18 @@ class CarouselElement extends BaseElement {
   /**
    * @method last
    * @signature last()
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja][/ja]
+   * @param {Function} [options.callback]
+   *   [en]A function that will be executed after the animation has finished.[/en]
+   *   [ja][/ja]
+   * @param {String} [options.animation]
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animationOptions]
+   *   [en]An object that can be used to specify the duration, delay and timing function of the animation.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Resolves to the carousel element[/en]
    *   [ja]Resolves to the carousel element[/ja]
@@ -917,6 +969,9 @@ class CarouselElement extends BaseElement {
     switch (name) {
       case 'swipeable':
         this._updateSwipeable();
+        break;
+      case 'auto-refresh':
+        this._updateAutoRefresh();
         break;
       case 'direction':
         this._onDirectionChange();
@@ -957,13 +1012,6 @@ class CarouselElement extends BaseElement {
     this.setAttribute('auto-scroll-ratio', ratio);
   }
 
-  _updateBooleanAttribute(name, enable) {
-    if (enable) {
-      this.setAttribute(name, '');
-    } else {
-      this.removeAttribute(name);
-    }
-  }
   /**
    * @property swipeable
    * @type {Boolean}
@@ -974,8 +1022,9 @@ class CarouselElement extends BaseElement {
   get swipeable() {
     return this.hasAttribute('swipeable');
   }
+
   set swipeable(value) {
-    return this._updateBooleanAttribute('swipeable', value);
+    return util.toggleAttribute(this, 'swipeable', value);
   }
 
   /**
@@ -988,8 +1037,9 @@ class CarouselElement extends BaseElement {
   get autoScroll() {
     return this.hasAttribute('auto-scroll');
   }
+
   set autoScroll(value) {
-    return this._updateBooleanAttribute('auto-scroll', value);
+    return util.toggleAttribute(this, 'auto-scroll', value);
   }
 
   /**
@@ -1002,8 +1052,9 @@ class CarouselElement extends BaseElement {
   get disabled() {
     return this.hasAttribute('disabled');
   }
+
   set disabled(value) {
-    return this._updateBooleanAttribute('disabled', value);
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   /**
@@ -1016,8 +1067,9 @@ class CarouselElement extends BaseElement {
   get overscrollable() {
     return this.hasAttribute('overscrollable');
   }
+
   set overscrollable(value) {
-    return this._updateBooleanAttribute('overscrollable', value);
+    return util.toggleAttribute(this, 'overscrollable', value);
   }
 
   /**
@@ -1030,8 +1082,9 @@ class CarouselElement extends BaseElement {
   get centered() {
     return this.hasAttribute('centered');
   }
+
   set centered(value) {
-    return this._updateBooleanAttribute('centered', value);
+    return util.toggleAttribute(this, 'centered', value);
   }
 }
 

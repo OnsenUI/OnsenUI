@@ -98,13 +98,13 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the modal is shown', () => {
       expect(element.style.display).to.equal('none');
-      expect(element.isShown()).to.be.false;
+      expect(element.visible).to.be.false;
       element.show();
       expect(element.style.display).to.equal('table');
-      expect(element.isShown()).to.be.true;
+      expect(element.visible).to.be.true;
     });
   });
 
@@ -114,18 +114,16 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#getDeviceBackButtonHandler()', () => {
+  describe('#backButtonHandler', () => {
     it('gets the callback', () => {
-      expect(element.getDeviceBackButtonHandler()).to.be.ok;
+      expect(element.backButtonHandler).to.be.ok;
     });
-  });
 
-  describe('#setDeviceBackButtonHandler()', () => {
     it('overwrites the callback', () => {
-      var spy = chai.spy.on(element._deviceBackButtonHandler, 'destroy');
-      element.setDeviceBackButtonHandler(() => { return; });
+      var spy = chai.spy.on(element._backButtonHandler, 'destroy');
+      element.backButtonHandler = () => { return; };
       expect(spy).to.have.been.called.once;
-      expect(element._deviceBackButtonHandler).to.be.ok;
+      expect(element._backButtonHandler).to.be.ok;
     });
   });
 

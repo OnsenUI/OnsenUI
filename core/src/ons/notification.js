@@ -125,7 +125,7 @@ notification._createAlertDialog = function(title, message,
             callback: function() {
               callback(inputElement.value);
               result.resolve(inputElement.value);
-              dialogElement.destroy();
+              dialogElement.remove();
               dialogElement = null;
             }
           });
@@ -166,7 +166,7 @@ notification._createAlertDialog = function(title, message,
             callback(i);
             result.resolve(i);
           }
-          dialogElement.destroy();
+          dialogElement.remove();
           dialogElement = inputElement = buttonElement = null;
         }
       });
@@ -181,7 +181,7 @@ notification._createAlertDialog = function(title, message,
   }
 
   if (cancelable) {
-    dialogElement.setCancelable(cancelable);
+    dialogElement.cancelable = true;
     dialogElement.addEventListener('cancel', function() {
       if (promptDialog) {
         callback(null);
@@ -191,7 +191,7 @@ notification._createAlertDialog = function(title, message,
         result.reject(-1);
       }
       setTimeout(function() {
-        dialogElement.destroy();
+        dialogElement.remove();
         dialogElement = null;
         inputElement = null;
       });
@@ -217,7 +217,6 @@ notification._createAlertDialog = function(title, message,
 };
 
 notification._alertOriginal = function(message, options = {}) {
-
   typeof message === 'string' ? (options.message = message) : (options = message);
 
   var defaults = {
@@ -290,7 +289,9 @@ notification._alertOriginal = function(message, options = {}) {
  */
 notification.alert = notification._alertOriginal;
 
-notification._confirmOriginal = function(options) {
+notification._confirmOriginal = function(message, options = {}) {
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var defaults = {
     buttonLabels: ['Cancel', 'OK'],
     primaryButtonIndex: 1,
@@ -378,7 +379,9 @@ notification._confirmOriginal = function(options) {
  */
 notification.confirm = notification._confirmOriginal;
 
-notification._promptOriginal = function(options) {
+notification._promptOriginal = function(message, options = {}) {
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var defaults = {
     buttonLabel: 'OK',
     animation: 'default',

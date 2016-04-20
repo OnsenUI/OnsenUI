@@ -20,9 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('NavigatorView', function($http, $parse, $compile, $onsen, $timeout, AnimationChooser,
-    SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
-    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
+  module.factory('NavigatorView', function($compile, $onsen) {
 
     /**
      * Manages the page navigation backed by page stack.
@@ -83,7 +81,6 @@ limitations under the License.
           'popPage',
           'replacePage',
           'resetToPage',
-          'getCurrentPage',
           'canPopPage'
         ]);
       },
@@ -119,28 +116,11 @@ limitations under the License.
 
       _createPageScope: function() {
          return this._scope.$new();
-      },
-
-      /**
-       * Retrieve the entire page stages of the navigator.
-       *
-       * @return {Array}
-       */
-      getPages: function() {
-        return this._element[0].pages;
       }
     });
 
     MicroEvent.mixin(NavigatorView);
-
-    Object.defineProperty(NavigatorView.prototype, 'pages', {
-      get: function () {
-        return this.getPages();
-      },
-      set: function() {
-        throw new Error();
-      }
-    });
+    $onsen.derivePropertiesFromElement(NavigatorView, ['pages', 'topPage']);
 
     return NavigatorView;
   });

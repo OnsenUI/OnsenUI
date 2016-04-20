@@ -25,10 +25,14 @@ const STATE_ACTION = 'action';
 
 /**
  * @element ons-pull-hook
- * @category control
+ * @category page
  * @description
- *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
- *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ *   [en]
+ *     Component that adds **Pull to refresh** functionality to an `<ons-page>` element.
+ *
+ *     It can be used to perform a task when the user pulls down at the top of the page. A common usage is to refresh the data displayed in a page.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen WbJogM
  * @guide UsingPullHook
  *   [en]How to use Pull Hook[/en]
@@ -136,7 +140,7 @@ class PullHookElement extends BaseElement {
   }
 
   _setStyle() {
-    const height = this.getHeight();
+    const height = this.height;
 
     this.style.top = '-' + height + 'px';
     this.style.height = height + 'px';
@@ -156,7 +160,7 @@ class PullHookElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (this.isDisabled()) {
+    if (this.disabled) {
       return;
     }
 
@@ -187,16 +191,16 @@ class PullHookElement extends BaseElement {
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
 
-    if (this._thresholdHeightEnabled() && scroll >= this.getThresholdHeight()) {
+    if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
       event.gesture.stopDetect();
 
       setImmediate(() => {
         this._setState(STATE_ACTION);
-        this._translateTo(this.getHeight(), {animate: true});
+        this._translateTo(this.height, {animate: true});
 
         this._waitForAction(this._onDone.bind(this));
       });
-    } else if (scroll >= this.getHeight()) {
+    } else if (scroll >= this.height) {
       this._setState(STATE_PREACTION);
     } else {
       this._setState(STATE_INITIAL);
@@ -207,7 +211,7 @@ class PullHookElement extends BaseElement {
   }
 
   _onDragStart(event) {
-    if (this.isDisabled()) {
+    if (this.disabled) {
       return;
     }
 
@@ -215,17 +219,17 @@ class PullHookElement extends BaseElement {
   }
 
   _onDragEnd(event) {
-    if (this.isDisabled()) {
+    if (this.disabled) {
       return;
     }
 
     if (this._currentTranslation > 0) {
       const scroll = this._currentTranslation;
 
-      if (scroll > this.getHeight()) {
+      if (scroll > this.height) {
         this._setState(STATE_ACTION);
 
-        this._translateTo(this.getHeight(), {animate: true});
+        this._translateTo(this.height, {animate: true});
 
         this._waitForAction(this._onDone.bind(this));
       } else {
@@ -235,6 +239,11 @@ class PullHookElement extends BaseElement {
   }
 
   /**
+   * @method setActionCallback
+   * @signature setActionCallback(callback)
+   * @description
+   *   [en]Define the function that will be called in the `"action"` state.[/en]
+   *   [ja][/ja]
    * @param {Function} callback
    */
   setActionCallback(callback) {
@@ -257,62 +266,46 @@ class PullHookElement extends BaseElement {
   }
 
   /**
-   * @method getHeight
-   * @signature getHeight()
-   * @return {Number}
+   * @property height
+   * @type {Number}
    * @description
-   *   [en]Returns the height of the pull hook in pixels.[/en]
-   *   [ja]プルフックの高さをピクセル数で返します。[/ja]
+   *   [en]The height of the pull hook in pixels. The default value is `64px`.[/en]
+   *   [ja][/ja]
    */
-  getHeight() {
+  set height(value) {
+    if (!util.isInteger(value)) {
+      throw new Error('The height must be an integer');
+    }
+
+    this.setAttribute('height', `${value}px`);
+  }
+
+  get height() {
     return parseInt(this.getAttribute('height') || '64', 10);
   }
 
   /**
-   * @method setHeight
-   * @signature setHeight(height)
-   * @param {Number} height
-   *   [en]Desired height.[/en]
-   *   [ja]要素の高さを指定します。[/ja]
+   * @property thresholdHeight
+   * @type {Number}
    * @description
-   *   [en]Specify the height.[/en]
-   *   [ja]高さを指定できます。[/ja]
+   *   [en]The thresholdHeight of the pull hook in pixels. The default value is `96px`.[/en]
+   *   [ja][/ja]
    */
-  setHeight(height) {
-    this.setAttribute('height', height + 'px');
+  set thresholdHeight(value) {
+    if (!util.isInteger(value)) {
+      throw new Error('The threshold height must be an integer');
+    }
 
-    this._setStyle();
+    this.setAttribute('threshold-height', `${value}px`);
   }
 
-  /**
-   * @method setThresholdHeight
-   * @signature setThresholdHeight(thresholdHeight)
-   * @param {Number} thresholdHeight
-   *   [en]Desired threshold height.[/en]
-   *   [ja]プルフックのアクションを起こす閾値となる高さを指定します。[/ja]
-   * @description
-   *   [en]Specify the threshold height.[/en]
-   *   [ja]閾値となる高さを指定できます。[/ja]
-   */
-  setThresholdHeight(thresholdHeight) {
-    this.setAttribute('threshold-height', thresholdHeight + 'px');
-  }
-
-  /**
-   * @method getThresholdHeight
-   * @signature getThresholdHeight()
-   * @description
-   *   [en]Returns the height of the threshold in pixels.[/en]
-   *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
-   * @return {Number}
-   */
-  getThresholdHeight() {
+  get thresholdHeight() {
     return parseInt(this.getAttribute('threshold-height') || '96', 10);
   }
 
   _thresholdHeightEnabled() {
-    const th = this.getThresholdHeight();
-    return th > 0 && th >= this.getHeight();
+    const th = this.thresholdHeight;
+    return th > 0 && th >= this.height;
   }
 
   _setState(state, noEvent) {
@@ -334,14 +327,14 @@ class PullHookElement extends BaseElement {
   }
 
   /**
-   * @method getCurrentState
-   * @signature getCurrentState()
-   * @return {String}
+   * @property state
+   * @readonly
+   * @type {String}
    * @description
-   *   [en]Returns the current state of the element.[/en]
-   *   [ja]要素の現在の状態を返します。[/ja]
+   *   [en]Current state of the element.[/en]
+   *   [ja][/ja]
    */
-  getCurrentState() {
+  get state() {
     return this._getState();
   }
 
@@ -362,39 +355,27 @@ class PullHookElement extends BaseElement {
   }
 
   /**
-   * @method isDisabled
-   * @signature isDisabled()
-   * @return {Boolean}
-   *   [en]true if the pull hook is disabled.[/en]
-   *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
+   * @property disabled
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the component is disabled or enabled.[/en]
-   *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
+   *   [en]A boolean value that specifies whether the element is disabled or not.[/en]
+   *   [ja][/ja]
    */
-  isDisabled() {
+  set disabled(value) {
+    if (value) {
+      this.setAttribute('disabled', '');
+    }
+    else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  get disabled() {
     return this.hasAttribute('disabled');
   }
 
   _isContentFixed() {
     return this.hasAttribute('fixed-content');
-  }
-
-  /**
-   * @method setDisabled
-   * @signature setDisabled(disabled)
-   * @param {Boolean} disabled
-   *   [en]If true the pull hook will be disabled.[/en]
-   *   [ja]trueを指定すると、プルフックがdisabled状態になります。[/ja]
-   * @description
-   *   [en]Disable or enable the component.[/en]
-   *   [ja]disabled状態にするかどうかを設定できます。[/ja]
-   */
-  setDisabled(disabled) {
-    if (disabled) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
   }
 
   _getScrollableElement() {

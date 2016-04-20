@@ -21,10 +21,10 @@ import BaseElement from 'ons/base-element';
  * @element ons-col
  * @category grid
  * @description
- *   [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
+ *   [en]Represents a column in the grid system. Use with `<ons-row>` to layout components.[/en]
  *   [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントのレイアウトに利用します。[/ja]
  * @note
- *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one alignment.[/en]
  *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
  * @codepen GgujC {wide}
  * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]

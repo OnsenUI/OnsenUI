@@ -24,7 +24,7 @@ const scheme = {'': 'bottom-bar--*'};
 
 /**
  * @element ons-bottom-toolbar
- * @category page
+ * @category toolbar
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
@@ -37,7 +37,7 @@ const scheme = {'': 'bottom-bar--*'};
  *   [ja]ツールバーの追加[/ja]
  * @example
  * <ons-bottom-toolbar>
- *   <div style="text-align: center; line-height: 44px">Text</div>
+ *   Content
  * </ons-bottom-toolbar>
  */
 class BottomToolbarElement extends BaseElement {
@@ -47,14 +47,6 @@ class BottomToolbarElement extends BaseElement {
    * @description
    *   [en]The appearance of the toolbar.[/en]
    *   [ja]ツールバーの見た目の表現を指定します。[/ja]
-   */
-
-  /**
-   * @attribute inline
-   * @initonly
-   * @description
-   *   [en]Display the toolbar as an inline element.[/en]
-   *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
    */
 
   createdCallback() {

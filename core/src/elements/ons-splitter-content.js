@@ -42,7 +42,7 @@ const rewritables = {
 
 /**
  * @element ons-splitter-content
- * @category control
+ * @category splitter
  * @description
  *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]

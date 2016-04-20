@@ -24,7 +24,7 @@ const scheme = {'': 'toolbar-button--*'};
 
 /**
  * @element ons-toolbar-button
- * @category page
+ * @category toolbar
  * @modifier outline
  *   [en]A button with an outline.[/en]
  *   [ja]アウトラインをもったボタンを表示します。[/ja]

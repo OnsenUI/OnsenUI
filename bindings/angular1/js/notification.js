@@ -15,10 +15,8 @@ limitations under the License.
 
 */
 
-ons.notification.alert = function(message, options) {
-  if (!options) {
-    options = message;
-  }
+ons.notification.alert = function(message, options = {}) {
+  typeof message === 'string' ? (options.message = message) : (options = message);
 
   var originalCompile = options.compile || function(element) {
     return element;
@@ -28,10 +26,12 @@ ons.notification.alert = function(message, options) {
     ons.compile(originalCompile(element));
   };
 
-  return ons.notification._alertOriginal(message, options);
+  return ons.notification._alertOriginal(options);
 };
 
-ons.notification.confirm = function(options) {
+ons.notification.confirm = function(message, options = {}) {
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var originalCompile = options.compile || function(element) {
     return element;
   };
@@ -43,7 +43,9 @@ ons.notification.confirm = function(options) {
   return ons.notification._confirmOriginal(options);
 };
 
-ons.notification.prompt = function(options) {
+ons.notification.prompt = function(message, options = {}) {
+  typeof message === 'string' ? (options.message = message) : (options = message);
+
   var originalCompile = options.compile || function(element) {
     return element;
   };
