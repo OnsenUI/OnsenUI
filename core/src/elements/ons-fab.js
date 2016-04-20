@@ -195,12 +195,7 @@ class FabElement extends BaseElement {
    *   [ja][/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {
@@ -208,14 +203,14 @@ class FabElement extends BaseElement {
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]True if fab is shown.[/en]
-   *   [ja]このコンポーネントが表示されているかどうかを返します。[/ja]
-   * @return {Boolean}
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return this.style.transform === 'scale(1)' && this.style.display !== 'none';
   }
 
@@ -227,11 +222,7 @@ class FabElement extends BaseElement {
    *   [ja][/ja]
    */
   toggle() {
-    if (this.isShown()) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.visible ? this.hide() : this.show();
   }
 }
 

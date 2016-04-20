@@ -28,17 +28,6 @@ limitations under the License.
         this._scope = scope;
         this._attrs = attrs;
 
-        this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'getHeight',
-          'setHeight',
-          'setThresholdHeight',
-          'getThresholdHeight',
-          'getCurrentState',
-          'getPullDistance',
-          'isDisabled',
-          'setDisabled'
-        ]);
-
         this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
           'changestate',
         ], function(detail) {
@@ -67,7 +56,6 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
-        this._clearDerivingMethods();
         this._clearDerivingEvents();
 
         this._element = this._scope = this._attrs = null;
@@ -75,6 +63,8 @@ limitations under the License.
     });
 
     MicroEvent.mixin(PullHookView);
+    $onsen.derivePropertiesFromElement(PullHookView, ['state', 'pullDistance', 'height', 'thresholdHeight', 'disabled']);
+
     return PullHookView;
   });
 })();

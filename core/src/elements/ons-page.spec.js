@@ -61,27 +61,27 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#setDeviceBackButtonHandler()', () => {
+  describe('#set backButtonHandler', () => {
     it('sets the callback', () => {
-      expect(element._deviceBackButtonHandler).not.to.be.ok;
-      element.setDeviceBackButtonHandler(() => { return; });
-      expect(element._deviceBackButtonHandler).to.be.ok;
+      expect(element._backButtonHandler).not.to.be.ok;
+      element.backButtonHandler = () => { return; };
+      expect(element._backButtonHandler).to.be.ok;
     });
 
     it('overwrites the callback', () => {
-      expect(element._deviceBackButtonHandler).not.to.be.ok;
-      element.setDeviceBackButtonHandler(() => { return; });
-      expect(element._deviceBackButtonHandler).to.be.ok;
+      expect(element._backButtonHandler).not.to.be.ok;
+      element.backButtonHandler = () => { return; };
+      expect(element._backButtonHandler).to.be.ok;
 
-      var spy = chai.spy.on(element._deviceBackButtonHandler, 'destroy');
-      element.setDeviceBackButtonHandler(() => { return; });
-      expect(element._deviceBackButtonHandler).to.be.ok;
+      var spy = chai.spy.on(element._backButtonHandler, 'destroy');
+      element.backButtonHandler = () => { return; };
+      expect(element._backButtonHandler).to.be.ok;
       expect(spy).to.have.been.called.once;
     });
 
     it('is correctly deleted', () => {
-      element.setDeviceBackButtonHandler(() => { return; });
-      expect(element._deviceBackButtonHandler).to.be.ok;
+      element.backButtonHandler = () => { return; };
+      expect(element._backButtonHandler).to.be.ok;
 
       element._destroy();
       expect(element.parentNode).not.to.be.ok;
@@ -208,7 +208,7 @@ describe('OnsPageElement', () => {
       var spy = chai.spy();
       document.addEventListener('hide', spy);
       document.body.appendChild(element);
-      element.isShown = true;
+      element._isShown = true;
       element._hide();
       expect(spy).to.have.been.called.once;
     });

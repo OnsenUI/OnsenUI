@@ -134,7 +134,7 @@ class RippleElement extends BaseElement {
   }
 
   _onTap(e) {
-    if (!this.isDisabled()) {
+    if (!this.disabled) {
       this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
         this._animator.fade(this._wave);
@@ -144,7 +144,7 @@ class RippleElement extends BaseElement {
   }
 
   _onHold(e) {
-    if (!this.isDisabled()) {
+    if (!this.disabled) {
       this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
       document.addEventListener('release', this._boundOnRelease);
@@ -182,7 +182,7 @@ class RippleElement extends BaseElement {
     this._boundOnRelease = this._onRelease.bind(this);
 
     if (internal.config.animationsDisabled) {
-      this.setDisabled(true);
+      this.disabled = true;
     } else {
       this._parentNode.addEventListener('tap', this._boundOnTap);
       this._parentNode.addEventListener('hold', this._boundOnHold);
@@ -223,30 +223,19 @@ class RippleElement extends BaseElement {
   }
 
   /**
-  * Disable or enable ripple-effect.
-  *
-  * @param {Boolean}
-  */
-  setDisabled(disabled) {
-    if (typeof disabled !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-    if (disabled) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
-  }
-
-  /**
-   * True if ripple-effect is disabled.
-   *
-   * @return {Boolean}
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the ripple is disabled or not.[/en]
+   *   [ja][/ja]
    */
-  isDisabled() {
-    return this.hasAttribute('disabled');// || this.parentNode.hasAttribute('disabled');
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
 }
 
 window.OnsRippleElement = document.registerElement('ons-ripple', {

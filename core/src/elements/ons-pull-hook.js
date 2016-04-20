@@ -343,14 +343,14 @@ class PullHookElement extends BaseElement {
   }
 
   /**
-   * @method getPullDistance
-   * @signature getPullDistance()
-   * @return {Number}
+   * @property pullDistance
+   * @readonly
+   * @type {Number}
    * @description
-   *   [en]Returns the current number of pixels the pull hook has moved.[/en]
-   *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
+   *   [en]The current number of pixels the pull hook has moved.[/en]
+   *   [ja]現在のプルフックが引き出された距離をピクセル数。[/ja]
    */
-  getPullDistance() {
+  get pullDistance() {
     return this._currentTranslation;
   }
 

@@ -217,20 +217,6 @@ class PageElement extends BaseElement {
   }
 
   /**
-   * @return {boolean}
-   */
-  get isShown() {
-    return this._isShown;
-  }
-
-  /**
-   * @param {boolean}
-   */
-  set isShown(value) {
-    this._isShown = value;
-  }
-
-  /**
    * @property onInfiniteScroll
    * @description
    *  [en]Function to be executed when scrolling to the bottom of the page. The function receives a done callback as an argument that must be called when it's finished.[/en]
@@ -267,36 +253,24 @@ class PageElement extends BaseElement {
     }
   }
 
+
   /**
-   * @method getDeviceBackButtonHandler
-   * @signature getDeviceBackButtonHandler()
-   * @return {Object/null}
-   *   [en]Device back button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @property backButtonHandler
+   * @type {Object}
    * @description
-   *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
-   *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
-  getDeviceBackButtonHandler() {
-    return this._deviceBackButtonHandler || null;
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
-  /**
-   * @method setDeviceBackButtonHandler
-   * @signature setDeviceBackButtonHandler(callback)
-   * @param {Function} callback
-   *   [en]Device back button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
-   * @description
-   *   [en]Set the associated back button handler.[/en]
-   *   [ja]バックボタンハンドラを設定します。[/ja]
-   */
-  setDeviceBackButtonHandler(callback) {
-    if (this._deviceBackButtonHandler) {
-      this._deviceBackButtonHandler.destroy();
+  set backButtonHandler(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
 
-    this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
+    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**
@@ -420,8 +394,8 @@ class PageElement extends BaseElement {
   }
 
   _show() {
-    if (!this.isShown && util.isAttached(this)) {
-      this.isShown = true;
+    if (!this._isShown && util.isAttached(this)) {
+      this._isShown = true;
 
       if (!this._isMuted) {
         util.triggerElementEvent(this, 'show', this.eventDetail);
@@ -432,8 +406,8 @@ class PageElement extends BaseElement {
   }
 
   _hide() {
-    if (this.isShown) {
-      this.isShown = false;
+    if (this._isShown) {
+      this._isShown = false;
 
       if (!this._isMuted) {
         util.triggerElementEvent(this, 'hide', this.eventDetail);
@@ -450,8 +424,8 @@ class PageElement extends BaseElement {
       util.triggerElementEvent(this, 'destroy', this.eventDetail);
     }
 
-    if (this.getDeviceBackButtonHandler()) {
-      this.getDeviceBackButtonHandler().destroy();
+    if (this.backButtonHandler) {
+      this.backButtonHandler.destroy();
     }
 
     util.propagateAction(this._contentElement, '_destroy');

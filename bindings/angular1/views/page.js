@@ -32,19 +32,33 @@ limitations under the License.
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
 
-        this._userDeviceBackButtonListener = angular.noop;
+        Object.defineProperty(this, 'backButtonHandler', {
+          get: () => this._element[0].backButtonHandler,
+          set: value => {
+            if (!this._userBackButtonHandler) {
+              this._enableBackButtonHandler();
+            }
+            this._userBackButtonHandler = value;
+          }
+        });
+
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
-          this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
+          this._enableBackButtonHandler();
         }
         if (this._attrs.ngInfiniteScroll) {
-          this._element[0].onInfiniteScroll = function(done) {
+          this._element[0].onInfiniteScroll = (done) => {
             $parse(this._attrs.ngInfiniteScroll)(this._scope)(done);
-          }.bind(this);
+          };
         }
       },
 
+      _enableBackButtonHandler: function() {
+        this._userBackButtonHandler = angular.noop;
+        this._element[0].backButtonHandler = this._onDeviceBackButton.bind(this);
+      },
+
       _onDeviceBackButton: function($event) {
-        this._userDeviceBackButtonListener($event);
+        this._userBackButtonHandler($event);
 
         // ng-device-backbutton
         if (this._attrs.ngDeviceBackbutton) {
@@ -60,20 +74,6 @@ limitations under the License.
           window.$event = lastEvent;
         }
         /* jshint ignore:end */
-      },
-
-      /**
-       * @param {Function} callback
-       */
-      setDeviceBackButtonHandler: function(callback) {
-        this._userDeviceBackButtonListener = callback;
-      },
-
-      /**
-       * @return {Object/null}
-       */
-      getDeviceBackButtonHandler: function() {
-        return this._element[0].getDeviceBackButtonHandler();
       },
 
       _destroy: function() {

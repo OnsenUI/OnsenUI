@@ -1,9 +1,9 @@
 'use strict';
 
 describe('OnsRippleElement', () => {
-  var container, ripple, wave, background;
+  let container, ripple, wave, background;
 
-  var spyOn = chai.spy.on.bind(chai.spy, OnsRippleElement.prototype);
+  const spyOn = chai.spy.on.bind(chai.spy, OnsRippleElement.prototype);
 
   beforeEach(() => {
     container = ons._util.createElement(`
@@ -31,14 +31,14 @@ describe('OnsRippleElement', () => {
 
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
-      var spy = spyOn('_compile'),
+      const spy = spyOn('_compile'),
         _ = new OnsRippleElement();
 
       expect(spy).to.have.been.called.once;
     });
 
     it('is not called when an element is copied', () => {
-      var spy = spyOn('_compile'),
+      const spy = spyOn('_compile'),
         div1 = document.createElement('div'),
         div2 = document.createElement('div');
 
@@ -60,10 +60,10 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#attributeChangedCallback()', () => {
-    var attributes = ['color', 'center', 'start-radius', 'background'];
+    const attributes = ['color', 'center', 'start-radius', 'background'];
 
     it('is called when an element is created', () => {
-      var spy = spyOn('attributeChangedCallback'),
+      const spy = spyOn('attributeChangedCallback'),
         _ = new OnsRippleElement();
 
       expect(spy).to.have.been.called.exactly(attributes.length);
@@ -101,14 +101,14 @@ describe('OnsRippleElement', () => {
 
 
   describe('#_calculateCoords()', () => {
-    var e = {
+    const e = {
       changedTouches: [{
         clientX: 350,
         clientY: 250
       }]
     };
 
-    var style = {
+    const style = {
       width: '650px',
       height: '450px',
       position: 'fixed',
@@ -119,7 +119,7 @@ describe('OnsRippleElement', () => {
     it('can do math', () => {
       ons._util.extend(ripple.style, style);
 
-      var coords = ripple._calculateCoords(e);
+      const coords = ripple._calculateCoords(e);
 
       expect(coords.x).to.equal(250);
       expect(coords.y).to.equal(150);
@@ -129,7 +129,7 @@ describe('OnsRippleElement', () => {
     it('cares about it\'s center', () => {
       ons._util.extend(ripple.style, style);
       ripple.setAttribute('center', 'true');
-      var coords = ripple._calculateCoords({clientY: 0, clientX: 0});
+      const coords = ripple._calculateCoords({clientY: 0, clientX: 0});
 
       expect(coords.x).to.equal(325);
       expect(coords.y).to.equal(225);
@@ -137,11 +137,11 @@ describe('OnsRippleElement', () => {
     });
   });
 
-  var itCalls = calling => {
+  const itCalls = calling => {
     return {
       whenUsing: (whenUsing, ...rest) => {
         it(`calls ${calling}`, () => {
-          var spy = spyOn(calling),
+          const spy = spyOn(calling),
             ripple = new OnsRippleElement();
 
 
@@ -152,7 +152,7 @@ describe('OnsRippleElement', () => {
     };
   };
 
-  var e = {
+  const e = {
     gesture: {
       direction: 'left',
       srcEvent: {
@@ -166,7 +166,7 @@ describe('OnsRippleElement', () => {
 
   describe('#_rippleAnimation()', () => {
     it('changes the location of the wave', () => {
-      var {left, top} = wave.style;
+      const {left, top} = wave.style;
 
       ripple._rippleAnimation(e.gesture.srcEvent);
 
@@ -175,7 +175,6 @@ describe('OnsRippleElement', () => {
     });
 
   });
-
 
   describe('#_onTap()', () => {
     itCalls('_rippleAnimation').whenUsing('_onTap', e);
@@ -193,7 +192,7 @@ describe('OnsRippleElement', () => {
     itCalls('_rippleAnimation').whenUsing('_onDragStart', e);
 
     it('calls _onRelease', () => {
-      var spy = spyOn('_onRelease');
+      const spy = spyOn('_onRelease');
 
       ripple._onHold(e);
       ripple._onDragStart(e);
@@ -207,34 +206,6 @@ describe('OnsRippleElement', () => {
       expect(ripple._holding).to.be.ok;
       ripple._onRelease(e);
       expect(ripple._holding).to.not.be.ok;
-    });
-  });
-
-
-  describe('#setDisabled()', () => {
-    it('throws an error if argument is not boolean', () => {
-      expect(() => ripple.setDisabled('hoge')).to.throw(Error);
-    });
-
-    it('sets the disabled attribute if argument is true', () => {
-      expect(ripple.hasAttribute('disabled')).to.be.false;
-      ripple.setDisabled(true);
-      expect(ripple.hasAttribute('disabled')).to.be.true;
-    });
-
-    it('removes the disabled attribute if argument is false', () => {
-      ripple.setAttribute('disabled', '');
-      ripple.setDisabled(false);
-      expect(ripple.hasAttribute('disabled')).to.be.false;
-    });
-  });
-
-  describe('#isDisabled()', () => {
-    it('returns whether the disabled attribute is set or not', () => {
-      ripple.setAttribute('disabled', '');
-      expect(ripple.isDisabled()).to.be.true;
-      ripple.removeAttribute('disabled');
-      expect(ripple.isDisabled()).to.be.false;
     });
   });
 });
