@@ -432,13 +432,12 @@ class CarouselElement extends BaseElement {
    * @param {String} [options.animation]
    *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *   [ja][/ja]
-   * @param {String} [options.animationOptions]
+   * @param {Object} [options.animationOptions]
    *   [en]An object that can be used to specify duration, delay and timing function of the animation.[/en]
    *   [ja][/ja]
    * @description
    *   [en]Specify the index of the `<ons-carousel-item>` to show.[/en]
    *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
-   * @param {Object} [options.animationOptions]
    * @return {Promise}
    *   [en]Resolves to the carousel element.[/en]
    *   [ja][/ja]
@@ -1013,14 +1012,6 @@ class CarouselElement extends BaseElement {
     this.setAttribute('auto-scroll-ratio', ratio);
   }
 
-  _updateBooleanAttribute(name, enable) {
-    if (enable) {
-      this.setAttribute(name, '');
-    } else {
-      this.removeAttribute(name);
-    }
-  }
-
   /**
    * @property swipeable
    * @type {Boolean}
@@ -1033,7 +1024,7 @@ class CarouselElement extends BaseElement {
   }
 
   set swipeable(value) {
-    return this._updateBooleanAttribute('swipeable', value);
+    return util.toggleAttribute(this, 'swipeable', value);
   }
 
   /**
@@ -1048,7 +1039,7 @@ class CarouselElement extends BaseElement {
   }
 
   set autoScroll(value) {
-    return this._updateBooleanAttribute('auto-scroll', value);
+    return util.toggleAttribute(this, 'auto-scroll', value);
   }
 
   /**
@@ -1063,7 +1054,7 @@ class CarouselElement extends BaseElement {
   }
 
   set disabled(value) {
-    return this._updateBooleanAttribute('disabled', value);
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   /**
@@ -1078,7 +1069,7 @@ class CarouselElement extends BaseElement {
   }
 
   set overscrollable(value) {
-    return this._updateBooleanAttribute('overscrollable', value);
+    return util.toggleAttribute(this, 'overscrollable', value);
   }
 
   /**
@@ -1093,7 +1084,7 @@ class CarouselElement extends BaseElement {
   }
 
   set centered(value) {
-    return this._updateBooleanAttribute('centered', value);
+    return util.toggleAttribute(this, 'centered', value);
   }
 }
 

@@ -191,54 +191,14 @@ describe('OnsPopoverElement', () => {
     });
   });
 
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('should return \'true\' if popover is visible', () => {
       popover.show(target, {animation: 'none'});
-      expect(popover.isShown()).to.be.true;
+      expect(popover.visible).to.be.true;
     });
 
     it('should return \'false\' if popover is not visible', () => {
-      expect(popover.isShown()).to.be.false;
-    });
-  });
-
-  describe('#setCancelable()', () => {
-    it('only accepts boolean arguments', () => {
-      expect(() => popover.setCancelable()).to.throw(Error);
-      expect(() => popover.setCancelable('hoge')).to.throw(Error);
-      expect(() => popover.setCancelable(true)).not.to.throw(Error);
-      expect(() => popover.setCancelable(false)).not.to.throw(Error);
-    });
-
-    it('sets the \'cancelable\' attribute', () => {
-      expect(popover.hasAttribute('cancelable')).to.be.false;
-      popover.setCancelable(true);
-      expect(popover.hasAttribute('cancelable')).to.be.true;
-    });
-
-    it('removes the \'cancelable\' attribute', () => {
-      popover.setAttribute('cancelable', '');
-      popover.setCancelable(false);
-      expect(popover.hasAttribute('cancelable')).to.be.false;
-    });
-  });
-
-  describe('#isCancelable()', () => {
-    it('returns \'true\' if \'cancelable\' attribute exists', () => {
-      popover.setAttribute('cancelable', '');
-      expect(popover.isCancelable()).to.be.true;
-    });
-
-    it('returns \'false\' if \'cancelable\' attribute does not exist', () => {
-      expect(popover.isCancelable()).to.be.false;
-    });
-  });
-
-  describe('#destroy()', () => {
-    it('should remove the popover from the DOM', () => {
-      expect(popover.parentNode).to.be.ok;
-      popover.destroy();
-      expect(popover.parentNode).not.to.be.ok;
+      expect(popover.visible).to.be.false;
     });
   });
 

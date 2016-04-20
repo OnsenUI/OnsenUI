@@ -66,9 +66,9 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#getDeviceBackButtonHandler()', () => {
+  describe('#backButtonHandler', () => {
     it('returns the back button handler', () => {
-      expect(dialog.getDeviceBackButtonHandler()).to.be.an('object');
+      expect(dialog.backButtonHandler).to.be.an('object');
     });
   });
 
@@ -221,19 +221,11 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#destroy()', () => {
-    it('removes the dialog', () => {
-      expect(dialog.parentElement).to.be.ok;
-      dialog.destroy();
-      expect(dialog.parentElement).not.to.be.ok;
-    });
-  });
-
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
-      expect(dialog.isShown()).to.be.false;
+      expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
-      expect(dialog.isShown()).to.be.true;
+      expect(dialog.visible).to.be.true;
     });
   });
 

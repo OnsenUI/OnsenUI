@@ -125,7 +125,7 @@ notification._createAlertDialog = function(title, message,
             callback: function() {
               callback(inputElement.value);
               result.resolve(inputElement.value);
-              dialogElement.destroy();
+              dialogElement.remove();
               dialogElement = null;
             }
           });
@@ -166,7 +166,7 @@ notification._createAlertDialog = function(title, message,
             callback(i);
             result.resolve(i);
           }
-          dialogElement.destroy();
+          dialogElement.remove();
           dialogElement = inputElement = buttonElement = null;
         }
       });
@@ -191,7 +191,7 @@ notification._createAlertDialog = function(title, message,
         result.reject(-1);
       }
       setTimeout(function() {
-        dialogElement.destroy();
+        dialogElement.remove();
         dialogElement = null;
         inputElement = null;
       });

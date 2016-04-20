@@ -181,14 +181,6 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#destroy()', () => {
-    it('removes the dialog', () => {
-      expect(dialog.parentElement).to.be.ok;
-      dialog.destroy();
-      expect(dialog.parentElement).not.to.be.ok;
-    });
-  });
-
   describe('#_onDeviceBackButton()', () => {
     it('cancels if dialog is cancelable', () => {
       let spy = chai.spy.on(dialog, '_cancel');
@@ -215,11 +207,11 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
-      expect(dialog.isShown()).to.be.false;
+      expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
-      expect(dialog.isShown()).to.be.true;
+      expect(dialog.visible).to.be.true;
     });
   });
 
