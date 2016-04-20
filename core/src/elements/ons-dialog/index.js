@@ -183,16 +183,10 @@ class DialogElement extends BaseElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
-  /**
-   * @return {Element}
-   */
   get _mask() {
     return util.findChild(this, '.dialog-mask');
   }
 
-  /**
-   * @return {Element}
-   */
   get _dialog() {
     return util.findChild(this, '.dialog');
   }
@@ -247,17 +241,15 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * @method getDeviceBackButtonHandler
-   * @signature getDeviceBackButtonHandler()
-   * @return {Object/null}
-   *   [en]Device back button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @property backButtonHandler
+   * @readonly
+   * @type {Object}
    * @description
-   *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
-   *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
+   *   [en]Retrieve the back-button handler.[/en]
+   *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  getDeviceBackButtonHandler() {
-    return this._deviceBackButtonHandler;
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
   _onDeviceBackButton(event) {
@@ -411,29 +403,14 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * @method destroy
-   * @signature destroy()
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *  [en]Destroy the dialog and remove it from the DOM tree.[/en]
-   *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  destroy() {
-    if (this.parentElement) {
-      this.parentElement.removeChild(this);
-    }
-  }
-
-  /**
-   * @method isShown
-   * @signature isShown()
-   * @description
-   *   [en]Returns whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   *   [en]true if the dialog is visible.[/en]
-   *   [ja]ダイアログが表示されている場合にtrueを返します。[/ja]
-   */
-  isShown() {
+  get visible() {
     return this._visible;
   }
 
@@ -445,12 +422,7 @@ class DialogElement extends BaseElement {
    *   [ja][/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {
@@ -469,12 +441,7 @@ class DialogElement extends BaseElement {
    *   [ja][/ja]
    */
   set cancelable(value) {
-    if (value) {
-      this.setAttribute('cancelable', '');
-    }
-    else {
-      this.removeAttribute('cancelable');
-    }
+    return util.toggleAttribute(this, 'cancelable', value);
   }
 
   get cancelable() {
@@ -483,13 +450,13 @@ class DialogElement extends BaseElement {
 
 
   attachedCallback() {
-    this._deviceBackButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     this._mask.addEventListener('click', this._boundCancel, false);
   }
 
   detachedCallback() {
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
   }

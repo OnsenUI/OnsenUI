@@ -230,7 +230,7 @@ class PopoverElement extends BaseElement {
   }
 
   _onDeviceBackButton(event) {
-    if (this.isCancelable()) {
+    if (this.cancelable) {
       this._cancel();
     } else {
       event.callParentHandler();
@@ -465,17 +465,46 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
-   * @return {Boolean}
-   *   [en]true if the popover is visible.[/en]
-   *   [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the popover is visible or not.[/en]
-   *   [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return window.getComputedStyle(this).getPropertyValue('display') !== 'none';
+  }
+
+  /**
+   * @property cancelable
+   * @type {Boolean}
+   * @description
+   *   [en]
+   *     A boolean value that specifies whether the popover is cancelable or not.
+   *
+   *     When the popover is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
+   *   [/en]
+   *   [ja][/ja]
+   */
+  set cancelable(value) {
+    return util.toggleAttribute(this, 'cancelable', value);
+  }
+
+  get cancelable() {
+    return this.hasAttribute('cancelable');
+  }
+
+  /**
+   * @property backButtonHandler
+   * @readonly
+   * @type {Object}
+   * @description
+   *   [en]Retrieve the back-button handler.[/en]
+   *   [ja]バックボタンハンドラを取得します。[/ja]
+   */
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
   attachedCallback() {
@@ -484,7 +513,7 @@ class PopoverElement extends BaseElement {
 
     this._mask.addEventListener('click', this._boundCancel, false);
 
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
     this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
@@ -495,8 +524,8 @@ class PopoverElement extends BaseElement {
   detachedCallback() {
     this._mask.removeEventListener('click', this._boundCancel, false);
 
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
 
     this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
     this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
@@ -516,57 +545,9 @@ class PopoverElement extends BaseElement {
     }
   }
 
-  /**
-   * @method setCancelable
-   * @signature setCancelable(cancelable)
-   * @param {Boolean} cancelable
-   *   [en]If true the popover will be cancelable.[/en]
-   *   [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]
-   * @description
-   *   [en]Set whether the popover can be canceled by the user when it is shown.[/en]
-   *   [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]
-   */
-  setCancelable(cancelable) {
-    if (typeof cancelable !== 'boolean') {
-      throw new Error('Argument must be a boolean.');
-    }
-
-    if (cancelable) {
-      this.setAttribute('cancelable', '');
-    } else {
-      this.removeAttribute('cancelable');
-    }
-  }
-
-  /**
-   * @method isCancelable
-   * @signature isCancelable()
-   * @return {Boolean}
-   *   [en]true if the popover is cancelable.[/en]
-   *   [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]
-   * @description
-   *   [en]Returns whether the popover is cancelable or not.[/en]
-   *   [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]
-   */
-  isCancelable() {
-    return this.hasAttribute('cancelable');
-  }
-
-  /**
-   * @method destroy
-   * @signature destroy()
-   * @description
-   *   [en]Destroy the popover and remove it from the DOM tree.[/en]
-   *   [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]
-   */
-  destroy() {
-    if (this.parentElement) {
-      this.parentElement.removeChild(this);
-    }
-  }
 
   _cancel() {
-    if (this.isCancelable()) {
+    if (this.cancelable) {
       this.hide({
         callback: () => {
           util.triggerElementEvent(this, 'cancel');

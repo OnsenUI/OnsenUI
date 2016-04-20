@@ -102,37 +102,25 @@ class ModalElement extends BaseElement {
     });
   }
 
+
   /**
-   * @method getDeviceBackButtonHandler
-   * @signature getDeviceBackButtonHandler()
-   * @return {Object}
-   *   [en]The device back button handler.[/en]
-   *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+   * @property backButtonHandler
+   * @type {Object}
    * @description
-   *   [en]Retrieve the back button handler.[/en]
-   *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
-  getDeviceBackButtonHandler() {
-    return this._deviceBackButtonHandler;
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
 
-  /**
-   * @method setDeviceBackButtonHandler
-   * @signature setDeviceBackButtonHandler(callback)
-   * @return {Function} callback
-   *   [en][/en]
-   *   [ja][/ja]
-   * @description
-   *   [en][/en]
-   *   [ja][/ja]
-   */
-  setDeviceBackButtonHandler(callback) {
-    if (this._deviceBackButtonHandler) {
-      this._deviceBackButtonHandler.destroy();
+  set backButtonHandler(handler) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
 
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
-    this._onDeviceBackButton = callback;
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
+    this._onDeviceBackButton = handler;
   }
 
   _onDeviceBackButton() {
@@ -161,14 +149,14 @@ class ModalElement extends BaseElement {
   }
 
   detachedCallback() {
-    if (this._deviceBackButtonHandler) {
-      this._deviceBackButtonHandler.destroy();
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
   }
 
   attachedCallback() {
     setImmediate(this._ensureNodePosition.bind(this));
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
   }
 
   _ensureNodePosition() {
@@ -194,16 +182,14 @@ class ModalElement extends BaseElement {
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
-   * @return {Boolean}
-   *   [en]Returns `true` if the modal is visible.[/en]
-   *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the modal is visible or not.[/en]
-   *   [ja]モーダルが表示されているかどうかを返します。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return this.style.display !== 'none';
   }
 
@@ -271,7 +257,7 @@ class ModalElement extends BaseElement {
    *   [ja]モーダルの表示を切り替えます。[/ja]
    */
   toggle() {
-    if (this.isShown()) {
+    if (this.visible) {
       return this.hide.apply(this, arguments);
     } else {
       return this.show.apply(this, arguments);

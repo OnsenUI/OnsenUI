@@ -35,11 +35,7 @@ limitations under the License.
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'show',
-          'hide',
-          'isShown',
-          'setCancelable',
-          'destroy'
+          'show', 'hide'
         ]);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
@@ -68,6 +64,8 @@ limitations under the License.
     });
 
     MicroEvent.mixin(PopoverView);
+    $onsen.derivePropertiesFromElement(PopoverView, ['cancelable', 'disabled', 'backButtonHandler']);
+
 
     return PopoverView;
   });

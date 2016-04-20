@@ -37,14 +37,6 @@ limitations under the License.
         element[0]._animatorFactory.setAnimationOptions($parse(attrs.animationOptions)());
       },
 
-      getDeviceBackButtonHandler: function() {
-        return this._element[0].getDeviceBackButtonHandler();
-      },
-
-      setDeviceBackButtonHandler: function(callback) {
-        this._element[0].setDeviceBackButtonHandler(callback);
-      },
-
       show: function(options) {
         return this._element[0].show(options);
       },
@@ -69,6 +61,8 @@ limitations under the License.
     };
 
     MicroEvent.mixin(ModalView);
+    $onsen.derivePropertiesFromElement(ModalView, ['backButtonHandler']);
+
 
     return ModalView;
   });

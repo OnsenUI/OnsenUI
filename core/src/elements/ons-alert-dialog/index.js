@@ -293,12 +293,7 @@ class AlertDialogElement extends BaseElement {
    *   [ja][/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {
@@ -317,12 +312,7 @@ class AlertDialogElement extends BaseElement {
    *   [ja][/ja]
    */
   set cancelable(value) {
-    if (value) {
-      this.setAttribute('cancelable', '');
-    }
-    else {
-      this.removeAttribute('cancelable');
-    }
+    return util.toggleAttribute(this, 'cancelable', value);
   }
 
   get cancelable() {
@@ -462,32 +452,29 @@ class AlertDialogElement extends BaseElement {
   }
 
   /**
-   * @method isShown
-   * @signature isShown()
-   * @return {Boolean}
+   * @property visible
+   * @readonly
+   * @type {Boolean}
    * @description
-   *   [en]Returns whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   *   [en]true if the dialog is currently visible.[/en]
-   *   [ja]ダイアログが表示されていればtrueを返します。[/ja]
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]ダイアログが表示されているかどうか。[/ja]
    */
-  isShown() {
+  get visible() {
     return this._visible;
   }
 
   /**
-   * @method destroy
-   * @signature destroy()
+   * @property backButtonHandler
+   * @readonly
+   * @type {Object}
    * @description
-   *   [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
-   *   [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
+   *   [en]Retrieve the back-button handler.[/en]
+   *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  destroy() {
-    if (this.parentElement) {
-      this.parentElement.removeChild(this);
-    }
+  get backButtonHandler() {
+    return this._backButtonHandler;
   }
+
 
   _onDeviceBackButton(event) {
     if (this.cancelable) {
@@ -510,7 +497,7 @@ class AlertDialogElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
       if (!this.hasAttribute('_compiled')) {
@@ -521,8 +508,8 @@ class AlertDialogElement extends BaseElement {
   }
 
   detachedCallback() {
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
   }
