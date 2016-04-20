@@ -3,31 +3,16 @@
     <title></title>
     <link rel="stylesheet" href="../../../build/css/onsen-css-components-default.css">
     <link rel="stylesheet" href="../../../build/css/onsenui.css">
-
-    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
-
-    <script src="../../../build/js/onsenui.js"></script>
-    <!-- <script src="../build/angular2-onsenui.js"></script> -->
-
-    <script>
-      System.config({
-        packages: {
-          '../src': {}
-        }
-      });
-
-      System.import('./range.js').catch(console.log.bind(console));
-    </script>
-
   </head>
-
   <body>
     
     <app></app>
 
-  </body>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script src="../dist/polyfills.js"></script>
+    <script src="../dist/vendor.js"></script>
+    <script src="../dist/angular2-onsenui.js"></script>
+    <script src="../dist/range-example.js"></script>
 
+  </body>
 </html>

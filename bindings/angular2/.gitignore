@@ -5,4 +5,7 @@ src/**/*.js
 src/**/*.js.map
 src/*.js
 src/*.js.map
-build/*
+build
+dist
+npm-debug.log
+typings
