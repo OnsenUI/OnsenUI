@@ -17,6 +17,7 @@ v2.0.0-beta.10
  * ons-alert-dialog: Fixed [#1347](https://github.com/OnsenUI/OnsenUI/issues/1347).
  * ons-progress-bar: Add `value`, `secondaryValue` and `indeterminate` properties.
  * ons-progress-circular: Add `value`, `secondaryValue` and `indeterminate` properties.
+ * ons-pull-hook: Add `height`, `thresholdHeight` and `disabled` properties.
 
 v2.0.0-beta.9
 ----
