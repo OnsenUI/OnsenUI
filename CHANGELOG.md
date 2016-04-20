@@ -13,6 +13,7 @@ v2.0.0-beta.10
  * ons-carousel: Added `auto-refresh` attribute.
  * ons-carousel: Fixed an issue causing improper carousel size when used with angular and ons-navigator.
  * ons-icon: Delete attribute `flip` from ons-icon (obsolete, since everything can be done with `rotate`)
+ * ons-list-item: Make the attribute `tappable` a boolean and add attribute `tap-background-color`
  * ons-alert-dialog: Fixed [#1347](https://github.com/OnsenUI/OnsenUI/issues/1347).
  * ons-progress-bar: Add `value`, `secondaryValue` and `indeterminate` properties.
  * ons-progress-circular: Add `value`, `secondaryValue` and `indeterminate` properties.

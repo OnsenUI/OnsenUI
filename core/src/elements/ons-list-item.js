@@ -37,7 +37,7 @@ const scheme = {
  * @element ons-list-item
  * @category list
  * @modifier tappable
- *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" attribute for better behavior when scrolling.[/en]
+ *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" and "tap-background-color" attribute for better behavior when scrolling.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped. The chevron is not displayed in Material Design.[/en]
@@ -112,9 +112,17 @@ class ListItemElement extends BaseElement {
 
   /**
    * @attribute tappable
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element react to taps.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute tap-background-color
    * @type {Color}
    * @description
-   *   [en]Changes the background color when tapped. An optional color value can be defined. Default color is "#d9d9d9". Will display as a ripple effect on Android.[/en]
+   *   [en] Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.[/en]
    *   [ja][/ja]
    */
 
@@ -219,8 +227,8 @@ class ListItemElement extends BaseElement {
     return this.hasAttribute('tappable');
   }
 
-  get _tapColor() {
-    return this.getAttribute('tappable') || '#d9d9d9';
+  get _tapBackgroundColor() {
+    return this.getAttribute('tap-background-color') || '#d9d9d9';
   }
 
   _updateRipple() {
@@ -251,8 +259,8 @@ class ListItemElement extends BaseElement {
         this._originalBackgroundColor = this.style.backgroundColor;
       }
 
-      this.style.backgroundColor = this._tapColor;
-      this.style.boxShadow = `0px -1px 0px 0px ${this._tapColor}`;
+      this.style.backgroundColor = this._tapBackgroundColor;
+      this.style.boxShadow = `0px -1px 0px 0px ${this._tapBackgroundColor}`;
     }
   }
 
