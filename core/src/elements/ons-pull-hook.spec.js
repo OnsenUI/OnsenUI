@@ -58,14 +58,6 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#_setStyle()', () => {
-    it('calls getHeight()', () => {
-      let spy = chai.spy.on(pullHook, 'getHeight');
-      pullHook._setStyle();
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
   describe('#_onScroll()', () => {
     it('resets the scroll if negative', () => {
       // This test only works on browsers that support negative scroll.
@@ -221,45 +213,27 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#getHeight()', () => {
-    it('returns 64 by default', () => {
-      expect(pullHook.getHeight()).to.equal(64);
+  describe('#height', () => {
+    it('is 64 by default', () => {
+      expect(pullHook.height).to.equal(64);
     });
 
-    it('returns the height', () => {
-      pullHook.setAttribute('height', '100');
-      expect(pullHook.getHeight()).to.equal(100);
-    });
-  });
-
-  describe('#setHeight()', () => {
-    it('sets the height', () => {
-      pullHook.setHeight(100);
+    it('changes the "height" attribute', () => {
+      pullHook.height = 100;
+      expect(pullHook.height).to.equal(100);
       expect(pullHook.getAttribute('height')).to.equal('100px');
     });
-
-    it('calls _setStyle()', () => {
-      let spy = chai.spy.on(pullHook, '_setStyle');
-      pullHook.setHeight(100);
-      expect(spy).to.have.been.called.once;
-    });
   });
 
-  describe('#setThresholdHeight()', () => {
-    it('sets threshold height', () => {
-      pullHook.setThresholdHeight(100);
+  describe('#thresholdHeight', () => {
+    it('is 96 by default', () => {
+      expect(pullHook.thresholdHeight).to.equal(96);
+    });
+
+    it('changes the "threshold-height" attribute', () => {
+      pullHook.thresholdHeight = 100;
+      expect(pullHook.thresholdHeight).to.equal(100);
       expect(pullHook.getAttribute('threshold-height')).to.equal('100px');
-    });
-  });
-
-  describe('#getThresholdHeight()', () => {
-    it('returns 96 by default', () => {
-      expect(pullHook.getThresholdHeight()).to.equal(96);
-    });
-
-    it('returns threshold height', () => {
-      pullHook.setAttribute('threshold-height', '100');
-      expect(pullHook.getThresholdHeight()).to.equal(100);
     });
   });
 
@@ -270,10 +244,10 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#getCurrentState()', () => {
+  describe('#state', () => {
     it('returns the state', () => {
       pullHook.setAttribute('state', 'hoge');
-      expect(pullHook.getCurrentState()).to.equal('hoge');
+      expect(pullHook.state).to.equal('hoge');
     });
   });
 
@@ -289,14 +263,11 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#isDisabled()', () => {
-    it('returns true if the pull hook is disabled', () => {
-      pullHook.setAttribute('disabled', '');
-      expect(pullHook.isDisabled()).to.be.true;
-    });
-
-    it('returns false if the pull hook is not disabled', () => {
-      expect(pullHook.isDisabled()).to.be.false;
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      expect(pullHook.hasAttribute('disabled')).to.be.false;
+      pullHook.disabled = true;
+      expect(pullHook.hasAttribute('disabled')).to.be.true;
     });
   });
 
@@ -308,16 +279,6 @@ describe('OnsPullHookElement', () => {
 
     it('returns false if the pull hook is not fixed', () => {
       expect(pullHook._isContentFixed()).to.be.false;
-    });
-  });
-
-  describe('#setDisabled()', () => {
-    it('disables the pull hook', () => {
-      expect(pullHook.isDisabled()).to.be.false;
-      pullHook.setDisabled(true);
-      expect(pullHook.isDisabled()).to.be.true;
-      pullHook.setDisabled(false);
-      expect(pullHook.isDisabled()).to.be.false;
     });
   });
 
