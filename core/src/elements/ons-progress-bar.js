@@ -36,13 +36,22 @@ const template = util.createElement(`
  * @element ons-progress-bar
  * @category progress
  * @description
- *   [en]A material design progress component. It's displayed as a linear progress indicator.[/en]
- *   [ja]マテリアルデザインのprogressコンポーネントです。linearなプログレスインジケータを表示します。[/ja]
+ *   [en]
+ *     The component is used to display a linear progress bar. It can either display a progress bar that shows the user how much of a task has been completed. In the case where the percentage is not known it can be used to display an animated progress bar so the user can see that an operation is in progress.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen zvQbGj
+ * @seealso ons-progress-circular
+ *   [en]The `<ons-progress-circular>` component displays a circular progress indicator.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-progress-bar
  *  value="55"
  *  secondary-value="87">
+ * </ons-progress-bar>
+ *
+ * <ons-progress-bar
+ *  indeterminate>
  * </ons-progress-bar>
  */
 class ProgressBarElement extends BaseElement {
@@ -108,6 +117,64 @@ class ProgressBarElement extends BaseElement {
   _updateValue() {
     this._primary.style.width = (this.hasAttribute('value')) ? this.getAttribute('value') + '%' : '0%';
     this._secondary.style.width = this.hasAttribute('secondary-value') ? this.getAttribute('secondary-value') + '%' : '0%';
+  }
+
+  /**
+   * @property value
+   * @type {Number}
+   * @description
+   *   [en]Current progress. Should be a value between 0 and 100.[/en]
+   *   [ja]現在の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+   */
+  set value(value) {
+    if (typeof value !== 'number' || value < 0 || value > 100) {
+      throw new Error('Invalid value');
+    }
+
+    this.setAttribute('value', Math.floor(value));
+  }
+
+  get value() {
+    return parseInt(this.getAttribute('value') || '0');
+  }
+
+  /**
+   * @property secondaryValue
+   * @type {Number}
+   * @description
+   *   [en]Current secondary progress. Should be a value between 0 and 100.[/en]
+   *   [ja]現在の２番目の進行状況の値を指定します。0から100の間の値を指定して下さい。[/ja]
+   */
+  set secondaryValue(value) {
+    if (typeof value !== 'number' || value < 0 || value > 100) {
+      throw new Error('Invalid value');
+    }
+
+    this.setAttribute('secondary-value', Math.floor(value));
+  }
+
+  get secondaryValue() {
+    return parseInt(this.getAttribute('secondary-value') || '0');
+  }
+
+  /**
+   * @property indeterminate
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is `true`, an infinite looping animation will be shown.[/en]
+   *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
+   */
+  set indeterminate(value) {
+    if (value) {
+      this.setAttribute('indeterminate', '');
+    }
+    else {
+      this.removeAttribute('indeterminate');
+    }
+  }
+
+  get indeterminate() {
+    return this.hasAttribute('indeterminate');
   }
 
   _compile() {

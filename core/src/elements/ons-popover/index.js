@@ -60,22 +60,27 @@ const directions = Object.keys(positions);
  * @element ons-popover
  * @category popover
  * @description
- *  [en]A component that displays a popover next to an element.[/en]
+ *  [en]
+ *    A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.
+ *
+ *    Another common way to use the popover is to display a menu when a button on the screen is tapped.
+ *  [/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
  * @codepen ZYYRKo
  * @example
- * <script>
- * ons.ready(function() {
- *   ons.createPopover('popover.html').then(function(popover) {
- *     popover.show('#mybutton');
- *   });
- * });
- * </script>
+ * <ons-button onclick="showPopover(this)">
+ *   Click me!
+ * </ons-button>
  *
- * <script type="text/ons-template" id="popover.html">
- *   <ons-popover cancelable>
- *     <p style="text-align: center; opacity: 0.5;">This popover will choose which side it's displayed on automatically.</p>
- *   </ons-popover>
+ * <ons-popover direction="down" id="popover">
+ *   <p>This is a popover!</p>
+ * </ons-popover>
+ *
+ * <script>
+ *   var showPopover = function(element) {
+ *     var popover = document.getElementById('popover');
+ *     popover.show(element);
+ *   };
  * </script>
  */
 class PopoverElement extends BaseElement {
@@ -144,7 +149,7 @@ class PopoverElement extends BaseElement {
    * @description
    *  [en]
    *    A space separated list of directions. If more than one direction is specified,
-   *    it will be chosen automatically. Valid directions are "up", "down", "left" and "right".
+   *    it will be chosen automatically. Valid directions are `"up"`, `"down"`, `"left"` and `"right"`.
    *  [/en]
    *  [ja]
    *    ポップオーバーを表示する方向を空白区切りで複数指定できます。
@@ -171,7 +176,7 @@ class PopoverElement extends BaseElement {
    * @attribute animation
    * @type {String}
    * @description
-   *   [en]The animation used when showing an hiding the popover. Can be either "none" or "fade".[/en]
+   *   [en]The animation used when showing an hiding the popover. Can be either `"none"`, `"default"`, `"fade-ios"` or `"fade-md"`.[/en]
    *   [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]
    */
 
@@ -179,15 +184,15 @@ class PopoverElement extends BaseElement {
    * @attribute animation-options
    * @type {Expression}
    * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
-   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
   /**
    * @attribute mask-color
    * @type {Color}
    * @description
-   *   [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *   [en]Color of the background mask. Default is `"rgba(0, 0, 0, 0.2)"`.[/en]
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
    */
 
@@ -397,16 +402,16 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [en]Animation name.  Use one of `"fade-ios"`, `"fade-md"`, `"none"` and `"default"`.[/en]
    *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @param {Function} [options.callback]
    *   [en]This function is called after the popover has been revealed.[/en]
    *   [ja]ポップオーバーが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
-   *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
+   *   [en]Open the popover and point it at a target. The target can be either an event, a CSS selector or a DOM element..[/en]
    *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the displayed element[/en]
@@ -439,11 +444,11 @@ class PopoverElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name.  Use one of "fade-ios", "fade-md", "none" and "default".[/en]
+   *   [en]Animation name.  Use one of `"fade-ios"`, `"fade-md"`, `"none"` and `"default"`.[/en]
    *   [ja]アニメーション名を指定します。"fade-ios", "fade-md", "none", "default"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @param {Function} [options.callback]
    *   [en]This functions is called after the popover has been hidden.[/en]
    *   [ja]ポップオーバーが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]

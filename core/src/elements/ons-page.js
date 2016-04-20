@@ -34,8 +34,15 @@ const nullToolbarElement = document.createElement('ons-toolbar');
 /**
  * @element ons-page
  * @category page
+ * @modifier material
+ *   [en]Material Design style[/en]
+ *   [ja][/ja]
  * @description
- *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *   [en]
+ *     This component defines the root of each page. If the content is large it will become scrollable.
+ *
+ *     A navigation bar can be added to the top of the page using the `<ons-toolbar>` element.
+ *   [/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @guide ManagingMultiplePages
  *   [en]Managing multiple pages[/en]
@@ -52,19 +59,29 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  * @guide DefiningMultiplePagesinSingleHTML
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-toolbar
+ *   [en]Use the `<ons-toolbar>` element to add a navigation bar to the top of the page.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
+ *     <div class="left">
+ *       <ons-back-button>Back</ons-back-button>
+ *     </div>
  *     <div class="center">Title</div>
+ *     <div class="right">
+ *       <ons-toolbar-button>
+ *         <ons-icon icon="md-menu"></ons-icon>
+ *       </ons-toolbar-button>
+ *     </div>
  *   </ons-toolbar>
  *
- *   ...
+ *   <p>Page content</p>
  * </ons-page>
- *
  *
  * // Infinite Scroll handler
  * page.onInfiniteScroll = function(done) {
- *   // load more content and call done
+ *   loadMore().then(done);
  * };
  */
 class PageElement extends BaseElement {
@@ -127,13 +144,6 @@ class PageElement extends BaseElement {
    * @description
    *   [en]Path of the function to be executed on infinite scrolling. Example: `app.loadData`. The function receives a done callback that must be called when it's finished.[/en]
    *   [ja][/ja]
-   */
-
-  /**
-   * @property onInfiniteScroll
-   * @description
-   *  [en]Function to be executed on infinite scroll. The function receives a done callback that must be called when it's finished.[/en]
-   *  [ja][/ja]
    */
 
   createdCallback() {
@@ -220,6 +230,12 @@ class PageElement extends BaseElement {
     this._isShown = value;
   }
 
+  /**
+   * @property onInfiniteScroll
+   * @description
+   *  [en]Function to be executed when scrolling to the bottom of the page. The function receives a done callback as an argument that must be called when it's finished.[/en]
+   *  [ja][/ja]
+   */
   set onInfiniteScroll(value) {
     if (value === null) {
       this._onInfiniteScroll = null;
@@ -235,6 +251,10 @@ class PageElement extends BaseElement {
       this._contentElement.addEventListener('scroll', this._boundOnScroll);
     }
     this._onInfiniteScroll = value;
+  }
+
+  get onInfiniteScroll() {
+    return this._onInfiniteScroll;
   }
 
   _onScroll() {
@@ -439,14 +459,6 @@ class PageElement extends BaseElement {
     this.remove();
   }
 
-  /**
-   * @property name
-   * @readonly
-   * @type {String}
-   * @description
-   *   [en]Page's name. Matches its filename or ons-template ID if applicable.[/en]
-   *   [ja][/ja]
-   */
   get name() {
     return this._name;
   }
@@ -455,7 +467,7 @@ class PageElement extends BaseElement {
    * @property data
    * @type {*}
    * @description
-   *   [en]User's custom data passed to pushPage-like methods.[/en]
+   *   [en]User's custom data passed to `pushPage()`-like methods.[/en]
    *   [ja][/ja]
    */
 }

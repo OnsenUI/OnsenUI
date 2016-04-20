@@ -65,7 +65,8 @@ describe('OnsListItemElement', () => {
     it('should add change the background color.', () => {
       const color = 'rgb(250, 250, 250)';
 
-      listItem.setAttribute('tappable', color);
+      listItem.setAttribute('tappable', true);
+      listItem.setAttribute('tap-background-color', color);
       expect(listItem.style.backgroundColor).not.to.equal(color);
       listItem._onTouch();
       expect(listItem.style.backgroundColor).to.equal(color);
@@ -77,7 +78,8 @@ describe('OnsListItemElement', () => {
       const origColor = 'rgb(250, 250, 250)';
       const newColor = 'rgb(255, 255, 255)';
 
-      listItem.setAttribute('tappable', newColor);
+      listItem.setAttribute('tappable', true);
+      listItem.setAttribute('tap-background-color', newColor);
       listItem.style.backgroundColor = origColor;
       listItem._onTouch();
       expect(listItem.style.backgroundColor).to.equal(newColor);
