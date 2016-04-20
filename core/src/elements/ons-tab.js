@@ -43,7 +43,7 @@ const defaultInnerTemplateSource = util.createElement(`
 
 /**
  * @element ons-tab
- * @category navigation
+ * @category tabbar
  * @description
  *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *   [ja]
