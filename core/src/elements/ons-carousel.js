@@ -432,13 +432,12 @@ class CarouselElement extends BaseElement {
    * @param {String} [options.animation]
    *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *   [ja][/ja]
-   * @param {String} [options.animationOptions]
+   * @param {Object} [options.animationOptions]
    *   [en]An object that can be used to specify duration, delay and timing function of the animation.[/en]
    *   [ja][/ja]
    * @description
    *   [en]Specify the index of the `<ons-carousel-item>` to show.[/en]
    *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
-   * @param {Object} [options.animationOptions]
    * @return {Promise}
    *   [en]Resolves to the carousel element.[/en]
    *   [ja][/ja]
