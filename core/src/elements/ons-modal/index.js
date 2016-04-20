@@ -38,7 +38,7 @@ const _animatorDict = {
 
 /**
  * @element ons-modal
- * @category modal
+ * @category dialog
  * @description
  *   [en]
  *     Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.

@@ -58,7 +58,7 @@ const positions = {
 const directions = Object.keys(positions);
 /**
  * @element ons-popover
- * @category popover
+ * @category dialog
  * @description
  *  [en]A component that displays a popover next to an element.[/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]

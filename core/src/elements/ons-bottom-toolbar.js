@@ -24,7 +24,7 @@ const scheme = {'': 'bottom-bar--*'};
 
 /**
  * @element ons-bottom-toolbar
- * @category toolbar
+ * @category page
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
