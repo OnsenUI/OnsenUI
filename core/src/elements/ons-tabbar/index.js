@@ -23,6 +23,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.tab-bar__content': 'tab-bar--*__content',
@@ -206,29 +207,32 @@ class TabbarElement extends BaseElement {
   createdCallback() {
     this._tabbarId = generateId();
 
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
 
-    for (var i = 0; i < this.firstChild.children.length; i++) {
-      this.firstChild.children[i].style.display = 'none';
-    }
+      for (var i = 0; i < this.firstChild.children.length; i++) {
+        this.firstChild.children[i].style.display = 'none';
+      }
 
-    var activeIndex = this.getAttribute('activeIndex');
+      var activeIndex = this.getAttribute('activeIndex');
 
-    if (activeIndex && this.children[1].children.length > activeIndex) {
-      this.children[1].children[activeIndex].setAttribute('active', 'true');
-    }
+      if (activeIndex && this.children[1].children.length > activeIndex) {
+        this.children[1].children[activeIndex].setAttribute('active', 'true');
+      }
 
-    autoStyle.prepare(this);
-    ModifierUtil.initModifier(this, scheme);
+      autoStyle.prepare(this);
+      ModifierUtil.initModifier(this, scheme);
 
-    this._animatorFactory = new AnimatorFactory({
-      animators: _animatorDict,
-      baseClass: TabbarAnimator,
-      baseClassName: 'TabbarAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      this._animatorFactory = new AnimatorFactory({
+        animators: _animatorDict,
+        baseClass: TabbarAnimator,
+        baseClassName: 'TabbarAnimator',
+        defaultAnimation: this.getAttribute('animation')
+      });
     });
+
   }
 
   get _contentElement() {
