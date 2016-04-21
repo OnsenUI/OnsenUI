@@ -9,6 +9,7 @@
   },
   "rules": {
     "strict": 0,
+    "prefer-const": 1,
     "block-scoped-var": 0,
     "camelcase": 2,
     "curly": [
