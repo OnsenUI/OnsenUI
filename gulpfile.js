@@ -139,7 +139,13 @@ gulp.task('watch-core-test', ['watch-core'], function() {
 ////////////////////////////////////////
 gulp.task('html2js', function() {
   return gulp.src('bindings/angular1/templates/*.tpl')
-    .pipe($.html2js({base: path.join(__dirname, 'bindings/angular1'), outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
+    .pipe($.html2js('angular.js', {
+      adapter: 'angular',
+      base: path.join(__dirname, 'bindings/angular1'),
+      name: 'templates-main',
+      useStrict: true,
+      quoteChar: '\''
+    }))
     .pipe($.concat('templates.js'))
     .pipe(gulp.dest('bindings/angular1/directives/'));
 });
@@ -227,8 +233,10 @@ gulp.task('prepare', ['html2js'], function() {
       'bindings/angular1/services/*.js',
       'bindings/angular1/js/*.js'
     ])
-      .pipe($.plumber())
-      .pipe($.ngAnnotate({add: true, single_quotes: true})) // eslint-disable-line camelcase
+      .pipe($.plumber({errorHandler: function(error) {
+        console.log(Error().stack);
+        $.util.log(error);
+      }}))
       .pipe($.rollup({
         sourceMap: 'inline',
         plugins: [
@@ -236,6 +244,10 @@ gulp.task('prepare', ['html2js'], function() {
           babel({presets: ['es2015-rollup']})
         ]
       }))
+      .pipe($.ngAnnotate({
+        add: true,
+        single_quotes: true // eslint-disable-line camelcase
+      })) 
       .pipe($.sourcemaps.init())
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
