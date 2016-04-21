@@ -57,7 +57,6 @@ describe('OnsRangeElement', () => {
       ons._contentReady(range, () => {
         expect(range.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
-        
         done();
       });
     });
