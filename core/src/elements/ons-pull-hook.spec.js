@@ -257,9 +257,9 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#getPullDistance()', () => {
+  describe('#pullDistance', () => {
     it('returns the current translation', () => {
-      expect(pullHook.getPullDistance()).to.equal(0);
+      expect(pullHook.pullDistance).to.equal(0);
     });
   });
 

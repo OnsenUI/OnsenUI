@@ -241,59 +241,22 @@ describe('OnsSpeedDialElement', () => {
     });
   });
 
-  describe('#setDisabled()', () => {
-    it('throws an error if argument is not boolean', () => {
-      expect(() => speedDial.setDisabled('hoge')).to.throw(Error);
-    });
-
-    it('sets the disabled attribute if argument is true', () => {
-      expect(speedDial.hasAttribute('disabled')).to.be.false;
-      speedDial.setDisabled(true);
-      expect(speedDial.hasAttribute('disabled')).to.be.true;
-    });
-
-    it('removes the disabled attribute if argument is false', () => {
-      speedDial.setAttribute('disabled', '');
-      speedDial.setDisabled(false);
-      expect(speedDial.hasAttribute('disabled')).to.be.false;
-    });
-
-    it('is called if the disabled attribute is present on element creation', () => {
-      let spy = chai.spy.on(OnsSpeedDialElement.prototype, 'setDisabled'),
-        speedDial = ons._util.createElement(`
-          <ons-speed-dial disabled><ons-fab></ons-fab></ons-speed-dial>
-        `);
-      expect(spy).to.have.been.called.with(true);
+  describe('#set disabled()', () => {
+    it('disables it\'s direct fab element', () => {
+      speedDial.disabled = true;
+      expect(ons._util.findChild(speedDial, '.fab').disabled).to.be.true;
     });
   });
 
-  describe('#isDisabled()', () => {
-    it('returns whether the disabled attribute is set or not', () => {
-      speedDial.setAttribute('disabled', '');
-      expect(speedDial.isDisabled()).to.be.true;
-      speedDial.removeAttribute('disabled');
-      expect(speedDial.isDisabled()).to.be.false;
-    });
-  });
-
-  describe('#isInline()', () => {
-    it('returns whether the inline attribute is set or not', () => {
-      speedDial.setAttribute('inline', '');
-      expect(speedDial.isInline()).to.be.true;
-      speedDial.removeAttribute('inline');
-      expect(speedDial.isInline()).to.be.false;
-    });
-  });
-
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the element is currently shown or not', () => {
-      expect(speedDial.isShown()).to.be.true;
+      expect(speedDial.visible).to.be.true;
       speedDial.hide();
-      expect(speedDial.isShown()).to.be.false;
+      expect(speedDial.visible).to.be.false;
       speedDial.show();
-      expect(speedDial.isShown()).to.be.true;
+      expect(speedDial.visible).to.be.true;
       speedDial.style.display = 'none';
-      expect(speedDial.isShown()).to.be.false;
+      expect(speedDial.visible).to.be.false;
     });
   });
 

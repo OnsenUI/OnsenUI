@@ -111,12 +111,7 @@ class ButtonElement extends BaseElement {
    *   [ja][/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {

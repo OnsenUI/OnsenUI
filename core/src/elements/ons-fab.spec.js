@@ -128,16 +128,16 @@ describe('OnsFabElement', () => {
     });
   });
 
-  describe('#isShown()', () => {
+  describe('#visible', () => {
     it('returns whether the element is currently shown or not', () => {
-      expect(fab.isShown()).to.be.false;
+      expect(fab.visible).to.be.false;
       fab.show();
-      expect(fab.isShown()).to.be.true;
+      expect(fab.visible).to.be.true;
       fab.hide();
-      expect(fab.isShown()).to.be.false;
+      expect(fab.visible).to.be.false;
       fab.style.display = 'none';
       fab.show();
-      expect(fab.isShown()).to.be.false;
+      expect(fab.visible).to.be.false;
     });
   });
 
