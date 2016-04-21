@@ -104,17 +104,17 @@ class ModalElement extends BaseElement {
 
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @type {Object}
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  set backButtonHandler(handler) {
+  set onDeviceBackButton(handler) {
     if (this._backButtonHandler) {
       this._backButtonHandler.destroy();
     }

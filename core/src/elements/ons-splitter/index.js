@@ -102,14 +102,14 @@ class SplitterElement extends BaseElement {
   }
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @readonly
    * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 

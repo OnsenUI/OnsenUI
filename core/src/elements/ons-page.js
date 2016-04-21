@@ -255,17 +255,17 @@ class PageElement extends BaseElement {
 
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @type {Object}
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  set backButtonHandler(callback) {
+  set onDeviceBackButton(callback) {
     if (this._backButtonHandler) {
       this._backButtonHandler.destroy();
     }
@@ -424,8 +424,8 @@ class PageElement extends BaseElement {
       util.triggerElementEvent(this, 'destroy', this.eventDetail);
     }
 
-    if (this.backButtonHandler) {
-      this.backButtonHandler.destroy();
+    if (this.onDeviceBackButton) {
+      this.onDeviceBackButton.destroy();
     }
 
     util.propagateAction(this._contentElement, '_destroy');
