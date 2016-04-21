@@ -233,10 +233,7 @@ gulp.task('prepare', ['html2js'], function() {
       'bindings/angular1/services/*.js',
       'bindings/angular1/js/*.js'
     ])
-      .pipe($.plumber({errorHandler: function(error) {
-        console.log(Error().stack);
-        $.util.log(error);
-      }}))
+      .pipe($.plumber())
       .pipe($.rollup({
         sourceMap: 'inline',
         plugins: [
