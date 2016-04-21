@@ -3,8 +3,9 @@
 describe('OnsFabElement', () => {
   let fab;
 
-  beforeEach(() => {
+  beforeEach(done => {
     fab = new OnsFabElement();
+    ons._contentReady(fab, done);
   });
 
   it('exists', () => {
@@ -178,7 +179,8 @@ describe('OnsFabElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' effects on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-fab');
+      const e = ons._util.createElement('<ons-fab> </ons-fab>');
+
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
