@@ -8,59 +8,59 @@
     "builtin": true
   },
   "rules": {
-    "strict": 0,
-    "prefer-const": 1,
-    "block-scoped-var": 0,
-    "camelcase": 2,
+    "strict": "off",
+    "prefer-const": "warn",
+    "block-scoped-var": "off",
+    "camelcase": "error",
     "curly": [
-      2,
+      "error",
       "all"
     ],
     "eqeqeq": [
-      0
+      "off"
     ],
     "global-strict": [
-      0,
+      "off",
       "never"
     ],
-    "guard-for-in": 2,
-    "new-cap": 2,
-    "no-bitwise": 2,
-    "no-caller": 2,
-    "no-empty": 2,
-    "no-extend-native": 2,
-    "no-irregular-whitespace": 2,
-    "no-iterator": 0,
-    "no-new": 2,
-    "no-underscore-dangle": 0,
-    "comma-dangle": 0,
-    "no-extra-strict": 0,
-    "no-extra-parens": 0,
-    "no-lone-blocks": 1,
-    "no-unused-expressions": 0,
-    "no-trailing-spaces": 1,
-    "no-multi-spaces": 0,
-    "no-shadow": 0,
-    "no-redeclare": 0,
-    "no-sequences": 2,
-    "no-undef": 0,
-    "no-unused-vars": 0,
-    "key-spacing": [2, {
+    "guard-for-in": "error",
+    "new-cap": "error",
+    "no-bitwise": "error",
+    "no-caller": "error",
+    "no-empty": "error",
+    "no-extend-native": "error",
+    "no-irregular-whitespace": "error",
+    "no-iterator": "off",
+    "no-new": "error",
+    "no-underscore-dangle": "off",
+    "comma-dangle": "off",
+    "no-extra-strict": "off",
+    "no-extra-parens": "off",
+    "no-lone-blocks": "warn",
+    "no-unused-expressions": "off",
+    "no-trailing-spaces": "warn",
+    "no-multi-spaces": "off",
+    "no-shadow": "off",
+    "no-redeclare": "off",
+    "no-sequences": "error",
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "key-spacing": ["error", {
       "beforeColon": false,
       "afterColon": true
     }],
     "no-use-before-define": [
-      2,
+      "error",
       "nofunc"
     ],
-    "no-with": 2,
+    "no-with": "error",
     "quotes": [
-      2,
+      "error",
       "single"
     ],
-    "valid-typeof": 2,
+    "valid-typeof": "error",
     "wrap-iife": [
-      2,
+      "error",
       "inside"
     ]
   }
