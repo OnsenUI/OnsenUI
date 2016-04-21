@@ -1,4 +1,5 @@
 {
+  "extends": "eslint:recommended",
   "parser": "babel-eslint",
   "env": {
     "jasmine": true,
@@ -12,6 +13,7 @@
     "prefer-const": "warn",
     "block-scoped-var": "off",
     "camelcase": "error",
+    "no-console": "warn",
     "curly": [
       "error",
       "all"
@@ -55,7 +57,7 @@
     ],
     "no-with": "error",
     "quotes": [
-      "error",
+      "warn",
       "single"
     ],
     "valid-typeof": "error",
