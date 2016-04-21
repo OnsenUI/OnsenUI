@@ -232,8 +232,8 @@ class RippleElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the ripple is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);

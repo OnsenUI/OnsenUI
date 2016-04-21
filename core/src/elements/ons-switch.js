@@ -143,10 +143,9 @@ class SwitchElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]This value is `true` if the switch is disabled.[/en]
+   *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-
   get disabled() {
     return this._checkbox.disabled;
   }

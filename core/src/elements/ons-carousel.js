@@ -1047,7 +1047,7 @@ class CarouselElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the carousel is disabled or not.[/en]
-   *   [ja]disabled状態になっていればtrueを返します。[/ja]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   get disabled() {
     return this.hasAttribute('disabled');
