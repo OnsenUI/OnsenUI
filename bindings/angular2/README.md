@@ -3,15 +3,10 @@
 ## Running Examples
 
 ```bash
-$ npm install
-$ [sudo] npm install -g gulp
-$ gulp serve
-
-# On another terminal 
 $ cd bindings/angular2
 $ npm install
-$ gulp watch
+$ gulp serve
 ```
 
-* Then navigate your browser to [http://0.0.0.0:3000/bindings/angular2/examples/index.html](http://0.0.0.0:3000/bindings/angular2/examples/index.html)
+* Then navigate your browser to [http://0.0.0.0:3030/bindings/angular2/examples/button.html](http://0.0.0.0:3000/bindings/angular2/examples/button.html)
 

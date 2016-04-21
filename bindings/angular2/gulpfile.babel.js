@@ -12,5 +12,6 @@ gulp.task('watch', shell.task(`
 `));
 
 gulp.task('serve', shell.task(`
-  webpack-dev-server ${flags} --port 3030  --content-base ../..
+  webpack-dev-server ${flags} --port 3030
 `));
+

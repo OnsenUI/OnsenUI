@@ -21,15 +21,8 @@ var webpackConfig = {
 
   output: {
     path: './dist',
+    publicPath: '/bundles/'
   },
-
-  /*
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['angular2-onsenui', 'vendor', 'polyfills'],
-      minChunks: Infinity
-    })
-  ],*/
 
   module: {
     loaders: [
@@ -76,7 +69,8 @@ var defaultConfig = {
 
   devServer: {
     historyApiFallback: true,
-    watchOptions: {aggregateTimeout: 300, poll: 1000}
+    watchOptions: {aggregateTimeout: 300, poll: 1000},
+    contentBase: '../..'
   },
 
   node: {
