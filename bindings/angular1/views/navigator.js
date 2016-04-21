@@ -77,7 +77,6 @@ limitations under the License.
           'insertPage',
           'pushPage',
           'bringPageTop',
-          'getDeviceBackButtonHandler',
           'popPage',
           'replacePage',
           'resetToPage',
