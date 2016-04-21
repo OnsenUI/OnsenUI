@@ -49,6 +49,14 @@ describe('OnsRangeElement', () => {
     });
   });
 
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      expect(element.hasAttribute('disabled')).to.be.false;
+      element.disabled = true;
+      expect(element.hasAttribute('disabled')).to.be.true;
+    });
+  });
+
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', done => {
       ons.platform.select('android');
