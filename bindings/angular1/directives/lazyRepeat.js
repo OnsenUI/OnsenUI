@@ -60,6 +60,14 @@
  *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]
  */
 
+/**
+ * @property delegate.configureItemScope
+ * @type {Function}
+ * @description
+ *   [en]Function which recieves an index and the scope for the item. Can be used to configure values in the item scope.[/en]
+ *   [ja][/ja]
+ */
+
 (function() {
   'use strict';
 
