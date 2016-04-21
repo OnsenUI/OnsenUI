@@ -3,9 +3,10 @@
 describe('OnsRangeElement', () => {
   let element;
 
-  beforeEach(() => {
+  beforeEach(done => {
     element = new OnsRangeElement();
     document.body.appendChild(element);
+    ons._contentReady(element, done);
   });
 
   afterEach(() => {
@@ -40,8 +41,8 @@ describe('OnsRangeElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-range></ons-range>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -49,11 +50,16 @@ describe('OnsRangeElement', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    it('adds \'material\' modifier on Android', done => {
       ons.platform.select('android');
-      let e = document.createElement('ons-range');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      ons.platform.select('');
+      const range = document.createElement('ons-range');
+
+      ons._contentReady(range, () => {
+        expect(range.getAttribute('modifier')).to.equal('material');
+        ons.platform.select('');
+        
+        done();
+      });
     });
   });
 });
