@@ -3,11 +3,9 @@
 describe('OnsTabElement', () => {
   let element;
 
-  beforeEach(() => {
-    element = ons._util.createElement(`
-      <ons-tab>
-      </ons-tab>
-    `);
+  beforeEach(done => {
+    element = ons._util.createElement(`<ons-tab> </ons-tab>`);
+    ons._contentReady(element, done);
   });
 
   afterEach(() => {
@@ -82,7 +80,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('icon attribute', () => {
-    it('sets icon name for the tab', () => {
+    it('sets icon name for the tab', done => {
       let tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -90,22 +88,27 @@ describe('OnsTabElement', () => {
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
-      expect(element.querySelector('ons-icon')).not.to.be.ok;
 
-      element.setAttribute('icon', 'ion-map');
-      expect(element.querySelector('ons-icon')).to.be.ok;
-      expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-map');
+      ons._contentReady(tabbar, () => {
+        expect(element.querySelector('ons-icon')).not.to.be.ok;
 
-      element.setAttribute('icon', 'ion-home');
-      expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
-      expect(element.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-map');
+        element.setAttribute('icon', 'ion-map');
+        expect(element.querySelector('ons-icon')).to.be.ok;
+        expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-map');
 
-      document.body.removeChild(tabbar);
+        element.setAttribute('icon', 'ion-home');
+        expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
+        expect(element.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-map');
+
+        document.body.removeChild(tabbar);
+
+        done();
+      });
     });
   });
 
   describe('label attribute', () => {
-    it('sets label name for the tab', () => {
+    it('sets label name for the tab', done => {
       let tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -113,17 +116,20 @@ describe('OnsTabElement', () => {
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
-      expect(document.getElementsByClassName('tab-bar__label')[0]).not.to.be.ok;
+      setImmediate(() => {
+        expect(document.getElementsByClassName('tab-bar__label')[0]).not.to.be.ok;
 
-      element.setAttribute('label', 'text');
-      expect(document.getElementsByClassName('tab-bar__label')[0]).to.be.ok;
-      expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('text');
+        element.setAttribute('label', 'text');
+        expect(document.getElementsByClassName('tab-bar__label')[0]).to.be.ok;
+        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('text');
 
-      element.setAttribute('label', 'new text');
-      expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('new text');
-      expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).not.to.equal('text');
+        element.setAttribute('label', 'new text');
+        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('new text');
+        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).not.to.equal('text');
 
-      document.body.removeChild(tabbar);
+        document.body.removeChild(tabbar);
+        done();
+      });
     });
   });
 
@@ -207,7 +213,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('#setActive()', () => {
-    it('will set the tab as active', () => {
+    it('will set the tab as active', done => {
       let tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>
@@ -226,43 +232,54 @@ describe('OnsTabElement', () => {
       document.body.appendChild(template1);
       document.body.appendChild(template2);
 
-      let tab1 = tabbar.querySelector('#tab1');
-      let tab2 = tabbar.querySelector('#tab2');
-      expect(tabbar.getActiveTabIndex()).to.equal(-1);
+      setImmediate(() => {
+        let tab1 = tabbar.querySelector('#tab1');
+        let tab2 = tabbar.querySelector('#tab2');
+        expect(tabbar.getActiveTabIndex()).to.equal(-1);
 
-      tab1.setActive();
-      expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
-      expect(tabbar.getActiveTabIndex()).to.equal(0);
+        tab1.setActive();
+        expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
+        expect(tabbar.getActiveTabIndex()).to.equal(0);
 
-      tab2.setActive();
-      tab1.classList.remove('active');
-      expect(tabbar.getActiveTabIndex()).not.to.equal(0);
-      expect(tabbar.getActiveTabIndex()).to.equal(1);
+        tab2.setActive();
+        tab1.classList.remove('active');
+        expect(tabbar.getActiveTabIndex()).not.to.equal(0);
+        expect(tabbar.getActiveTabIndex()).to.equal(1);
 
-      document.body.removeChild(tabbar);
-      document.body.removeChild(template1);
-      document.body.removeChild(template2);
+        document.body.removeChild(tabbar);
+        document.body.removeChild(template1);
+        document.body.removeChild(template2);
+
+        done();
+      });
     });
   });
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
+
       div1.innerHTML = '<ons-tab></ons-tab>';
       div2.innerHTML = div1.innerHTML;
+
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 
-  describe('autoStyling', () => {
-    it('adds \'material\' modifiers and effects on Android', () => {
+  describe('autoStyling', done => {
+    it('adds \'material\' modifiers and effects on Android', done => {
       ons.platform.select('android');
-      let e = document.createElement('ons-tab');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      expect(e.hasAttribute('ripple')).to.be.true;
-      expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
-      ons.platform.select('');
+      const tab = document.createElement('ons-tab');
+
+      setImmediate(() => {
+        expect(tab.getAttribute('modifier')).to.equal('material');
+        expect(tab.hasAttribute('ripple')).to.be.true;
+        expect(tab.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
+        ons.platform.select('');
+
+        done();
+      });
     });
   });
 });

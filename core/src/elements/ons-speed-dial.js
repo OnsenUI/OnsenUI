@@ -325,7 +325,7 @@ class SpeedDialElement extends BaseElement {
       this.hideItems();
     }
     util.arrayFrom(this.children).forEach(e => {
-      util.match(e, '.fab') && util.toggleAttribute(e, 'disabled', value)
+      util.match(e, '.fab') && util.toggleAttribute(e, 'disabled', value);
     });
 
     return util.toggleAttribute(this, 'disabled', value);

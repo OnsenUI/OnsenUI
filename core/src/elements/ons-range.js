@@ -14,11 +14,18 @@ limitations under the License.
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.range': 'range--*',
   '.range__left': 'range--*__left'
 };
+
+const templateSource = util.createElement(`<div>
+  <div class="range__left"></div>
+  <input type="range" class="range">
+</div>`);
 
 const INPUT_ATTRIBUTES = [
   'autofocus',
@@ -38,8 +45,15 @@ const INPUT_ATTRIBUTES = [
 /**
  * @element ons-range
  * @category form
+ * @modifier material
+ *   [en]Material Design slider[/en]
+ *   [ja][/ja]
  * @description
- *   [en]Range input component.[/en]
+ *   [en]
+ *     Range input component. Used to display a draggable slider.
+ *
+ *     Works very similar to the `<input type="range">` element.
+ *   [/en]
  *   [ja][/ja]
  * @codepen xZQomM
  * @guide UsingFormComponents
@@ -48,28 +62,35 @@ const INPUT_ATTRIBUTES = [
  * @guide EventHandling
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
+ * @seealso ons-input
+ *   [en]The `<ons-input>` component is used to display text inputs, radio buttons and checkboxes.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
  */
-class MaterialInputElement extends BaseElement {
+class RangeElement extends BaseElement {
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
 
-    this._updateBoundAttributes();
-    this._onChange();
+      this._updateBoundAttributes();
+      this._onChange();
+    });
   }
 
   _compile() {
     autoStyle.prepare(this);
 
-    this.innerHTML = `
-      <div class="range__left"></div>
-      <input type="range" class="range">
-    `;
+    if (!(util.findChild(this, '.range__left') && util.findChild(this, 'input'))) {
+      const template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -93,11 +114,13 @@ class MaterialInputElement extends BaseElement {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
-      this._updateBoundAttributes();
+      contentReady(this, () => {
+        this._updateBoundAttributes();
 
-      if (name === 'min' || name === 'max') {
-        this._onChange();
-      }
+        if (name === 'min' || name === 'max') {
+          this._onChange();
+        }
+      });
     }
  }
 
@@ -128,17 +151,40 @@ class MaterialInputElement extends BaseElement {
     return this.querySelector('.range__left');
   }
 
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]A boolean value that specifies whether the element is disabled or not.[/en]
+   *   [ja][/ja]
+   */
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  /**
+   * @property value
+   * @type {Number}
+   * @description
+   *   [en]Current value.[/en]
+   *   [ja][/ja]
+   */
   get value() {
     return this._input.value;
   }
 
   set value(val) {
-    this._input.value = val;
-    this._onChange();
-    return this._input.val;
+    contentReady(this, () => {
+      this._input.value = val;
+      this._onChange();
+    });
   }
 }
 
 window.OnsRangeElement = document.registerElement('ons-range', {
-  prototype: MaterialInputElement.prototype
+  prototype: RangeElement.prototype
 });

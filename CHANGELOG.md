@@ -25,6 +25,7 @@ v2.0.0-beta.10
  * ons-splitter-side: Changed `isOpen` to a property.
  * ons-navigator: Removed old angular methods (`getPages`, `getBackButtonHandler`).
  * ons-lazy-repeat: Removed `setDelegate` in favor of the `delegate` property.
+ * ons-range: Fixes memory leak in AngularJS bindings.
 
 v2.0.0-beta.9
 ----
