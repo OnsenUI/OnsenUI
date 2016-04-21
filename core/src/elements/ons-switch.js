@@ -95,7 +95,7 @@ class SwitchElement extends BaseElement {
   /**
    * @attribute disabled
    * @description
-   *   [en]Whether the switch should be disabled.[/en]
+   *   [en]Whether the switch is be disabled.[/en]
    *   [ja]スイッチを無効の状態にする場合に指定します。[/ja]
    */
 
@@ -114,6 +114,14 @@ class SwitchElement extends BaseElement {
    *  [ja][/ja]
    */
 
+  /**
+   * @property checked
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the switch is checked.[/en]
+   *   [ja]スイッチがONの場合に`true`。[/ja]
+   */
+
   get checked() {
     return this._checkbox.checked;
   }
@@ -122,13 +130,17 @@ class SwitchElement extends BaseElement {
     if (!!value !== this._checkbox.checked) {
       this._checkbox.click();
       this._checkbox.checked = !!value;
-      if (this.checked) {
-        this.setAttribute('checked', '');
-      } else {
-        this.removeAttribute('checked');
-      }
+      return util.toggleAttribute(this, 'checked', this.checked);
     }
   }
+
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the switch is be disabled.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
+   */
 
   get disabled() {
     return this._checkbox.disabled;
@@ -136,52 +148,18 @@ class SwitchElement extends BaseElement {
 
   set disabled(value) {
     this._checkbox.disabled = value;
-    if (this.disabled) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', this.disabled);
   }
 
   /**
-   * @method isChecked
-   * @signature isChecked()
-   * @return {Boolean}
-   *   [en]true if the switch is on.[/en]
-   *   [ja]ONになっている場合にはtrueになります。[/ja]
+   * @method checkbox
+   * @readonly
+   * @type {HTMLElement}
    * @description
-   *   [en]Returns true if the switch is ON.[/en]
-   *   [ja]スイッチがONの場合にtrueを返します。[/ja]
-   */
-  isChecked() {
-    return this.checked;
-  }
-
-  /**
-   * @method setChecked
-   * @signature setChecked(checked)
-   * @param {Boolean} checked
-   *   [en]If true the switch will be set to on.[/en]
-   *   [ja]ONにしたい場合にはtrueを指定します。[/ja]
-   * @description
-   *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
-   *   [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
-   */
-  setChecked(isChecked) {
-    this.checked = !!isChecked;
-  }
-
-  /**
-   * @method getCheckboxElement
-   * @signature getCheckboxElement()
-   * @return {HTMLElement}
    *   [en]The underlying checkbox element.[/en]
    *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
-   * @description
-   *   [en]Get inner input[type=checkbox] element.[/en]
-   *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
    */
-  getCheckboxElement() {
+  get checkbox() {
     return this._checkbox;
   }
 
@@ -244,7 +222,7 @@ class SwitchElement extends BaseElement {
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
-      util.triggerElementEvent(this.getCheckboxElement(), 'change');
+      util.triggerElementEvent(this.checkbox, 'change');
     }
   }
 
@@ -303,11 +281,7 @@ class SwitchElement extends BaseElement {
     case 'checked':   // eslint-disable-line no-fallthrough
       this._checkbox.checked = current !== null;
     case 'disabled':
-      if (current !== null) {
-        this._checkbox.setAttribute(name, '');
-      } else {
-        this._checkbox.removeAttribute(name);
-      }
+      util.toggleAttribute(this._checkbox, name, current !== null);
     }
   }
 }

@@ -32,48 +32,41 @@ limitations under the License.
         this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
         this._scope = scope;
 
-        this._checkbox.on('change', function() {
+        this._checkbox.on('change', () => {
           this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
-        }.bind(this));
+        });
 
         this._prepareNgModel(element, scope, attrs);
 
-        this._scope.$on('$destroy', this._destroy.bind(this));
-
-        this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
-          'isChecked',
-          'setChecked',
-          'getCheckboxElement'
-        ]);
+        this._scope.$on('$destroy', () => {
+          this.emit('destroy');
+          this._element = this._checkbox = this._scope = null;
+        });
       },
 
       _prepareNgModel: function(element, scope, attrs) {
         if (attrs.ngModel) {
           var set = $parse(attrs.ngModel).assign;
 
-          scope.$parent.$watch(attrs.ngModel, function(value) {
-            this.setChecked(!!value);
-          }.bind(this));
+          scope.$parent.$watch(attrs.ngModel, value => {
+            this.checked = !!value;
+          });
 
-          this._checkbox.on('change', function(e) {
-            set(scope.$parent, this.isChecked());
+          this._checkbox.on('change', e => {
+            set(scope.$parent, this.checked);
 
             if (attrs.ngChange) {
               scope.$eval(attrs.ngChange);
             }
 
             scope.$parent.$evalAsync();
-          }.bind(this));
+          });
         }
-      },
-
-      _destroy: function() {
-        this.emit('destroy');
-        this._clearDerivingMethods();
-        this._element = this._checkbox = this._scope = null;
       }
     });
+
     MicroEvent.mixin(SwitchView);
+    $onsen.derivePropertiesFromElement(SwitchView, ['disabled', 'checked', 'checkbox']);
 
     return SwitchView;
   });

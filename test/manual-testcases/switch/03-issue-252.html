@@ -8,7 +8,7 @@
     <script src="../../../build/js/onsenui.js"></script>
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/angular-onsenui.js"></script>
-    <script src="../vendor/jquery.js"></script>    
+    <script src="../vendor/jquery.js"></script>
     <script>
       var app = angular.module('myApp', ['onsen']);
 
@@ -22,14 +22,14 @@
         $("#switch").children().click();
 
         if ($("#checkbox").prop("checked")) {
-          alert("OK 1");  
+          alert("OK 1");
         } else {
           alert("NG 1");
         }
 
         $("#checkbox").click();
 
-        if (mySwitch.isChecked()) {
+        if (mySwitch.checked) {
           alert("NG 2");
         } else {
           alert("OK 2");
