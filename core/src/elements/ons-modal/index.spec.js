@@ -114,14 +114,14 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#backButtonHandler', () => {
+  describe('#onDeviceBackButton', () => {
     it('gets the callback', () => {
-      expect(element.backButtonHandler).to.be.ok;
+      expect(element.onDeviceBackButton).to.be.ok;
     });
 
     it('overwrites the callback', () => {
       var spy = chai.spy.on(element._backButtonHandler, 'destroy');
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(spy).to.have.been.called.once;
       expect(element._backButtonHandler).to.be.ok;
     });

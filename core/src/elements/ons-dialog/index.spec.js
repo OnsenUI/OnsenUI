@@ -66,9 +66,9 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#backButtonHandler', () => {
+  describe('#onDeviceBackButton', () => {
     it('returns the back button handler', () => {
-      expect(dialog.backButtonHandler).to.be.an('object');
+      expect(dialog.onDeviceBackButton).to.be.an('object');
     });
   });
 

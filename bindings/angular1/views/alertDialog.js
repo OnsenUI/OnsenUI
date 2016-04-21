@@ -68,7 +68,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(AlertDialogView);
-    $onsen.derivePropertiesFromElement(AlertDialogView, ['disabled', 'cancelable', 'visible', 'backButtonHandler']);
+    $onsen.derivePropertiesFromElement(AlertDialogView, ['disabled', 'cancelable', 'visible', 'onDeviceBackButton']);
 
     return AlertDialogView;
   });
