@@ -580,6 +580,7 @@ class SplitterSideElement extends BaseElement {
   /**
    * @property isOpen
    * @type {Boolean}
+   * @readonly
    * @description
    *   [en]This value is `true` when the menu is open..[/en]
    *   [ja][/ja]
