@@ -21,6 +21,10 @@ v2.0.0-beta.10
  * ons-page: Update API (`disabled`, `backButtonHandler` properties).
  * ons-button, ons-ripple: Update API (`disabled` property).
  * ons-speeddial: Updated API (`disabled`, `visible`, `inline` properties).
+ * ons-switch: Updated API (`disabled`, `checked`, `checkbox` properties).
+ * ons-splitter-side: Changed `isOpen` to a property.
+ * ons-navigator: Removed old angular methods (`getPages`, `getBackButtonHandler`).
+ * ons-lazy-repeat: Removed `setDelegate` in favor of the `delegate` property.
  * ons-range: Fixes memory leak in AngularJS bindings.
 
 v2.0.0-beta.9

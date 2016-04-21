@@ -12,9 +12,9 @@
       var module = angular.module('my-app', ['onsen']);
 
       module.controller('SecondPageController', function($scope) {
-        alert($scope.navi.getPages().length >= 2 ? 'OK' : 'NG');
+        alert($scope.navi.pages.length >= 2 ? 'OK' : 'NG');
       });
-      
+
     </script>
 
     <style>
@@ -49,6 +49,6 @@
         </p>
       </ons-page>
     </script>
-   
+
   </body>
 </html>

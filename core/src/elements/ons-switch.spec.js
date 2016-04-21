@@ -74,10 +74,6 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('#disabled', () => {
-    it('is a boolean', () => {
-      expect(element.disabled).to.be.a('boolean');
-    });
-
     it('adds the \'disabled\' attribute when set to true', () => {
       element.removeAttribute('disabled');
       element.disabled = true;
@@ -91,37 +87,33 @@ describe('OnsSwitchElement', () => {
       expect(element.hasAttribute('disabled')).to.be.false;
     });
 
-    it('accepts truthy and falsy values', () => {
-      element.disabled = 1;
-      expect(element.disabled).to.be.true;
-      element.disabled = 0;
-      expect(element.disabled).to.be.false;
+    it('changes the \'disabled\' property of it\'s checkbox', () => {
+      element.disabled = true;
+      expect(element._checkbox.disabled).to.be.true;
+      element.disabled = false;
+      expect(element._checkbox.disabled).to.be.false;
     });
   });
 
-  describe('#isChecked()', () => {
-    it('returns true if switch is on', () => {
+  describe('#checked', () => {
+    it('adds the \'checked\' attribute when set to true', () => {
+      element.removeAttribute('checked');
       element.checked = true;
-      expect(element.isChecked()).to.be.true;
+      expect(element.hasAttribute('checked')).to.be.true;
     });
 
-    it('returns false if switch is off', () => {
-      element.checked = false;
-      expect(element.isChecked()).to.be.false;
-    });
-  });
-
-  describe('#setChecked()', () => {
-    it('sets the \'checked\' attribute to true', () => {
-      element.checked = false;
-      element.setChecked(true);
+    it('removes the \'checked\' attribute when set to false', () => {
+      element.setAttribute('checked', '');
       expect(element.checked).to.be.true;
+      element.checked = false;
+      expect(element.hasAttribute('checked')).to.be.false;
     });
 
-    it('sets the \'checked\' attribute to false', () => {
+    it('changes the \'checked\' property of it\'s checkbox', () => {
       element.checked = true;
-      element.setChecked(false);
-      expect(element.checked).to.be.false;
+      expect(element._checkbox.checked).to.be.true;
+      element.checked = false;
+      expect(element._checkbox.checked).to.be.false;
     });
   });
 

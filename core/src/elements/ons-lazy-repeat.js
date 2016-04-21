@@ -72,29 +72,10 @@ class LazyRepeatElement extends BaseElement {
   attachedCallback() {
     util.updateParentPosition(this);
 
-    // not very good idea
+    // not very good idea and also not documented
     if (this.hasAttribute('delegate')) {
-      this.setDelegate(window[this.getAttribute('delegate')]);
+      this.delegate = window[this.getAttribute('delegate')];
     }
-  }
-
-  /**
-   * @method setDelegate
-   * @signature setDelegate(userDelegate)
-   * @param {Object} userDelegate
-   * @description
-   *  [en]Specify a delegate object to load and unload item elements.[/en]
-   *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。[/ja]
-   */
-  setDelegate(userDelegate) {
-    this._lazyRepeatProvider && this._lazyRepeatProvider.destroy();
-
-    if (!this._templateElement && this.children[0]) {
-      this._templateElement = this.removeChild(this.children[0]);
-    }
-
-    const delegate = new LazyRepeatDelegate(userDelegate, this._templateElement || null);
-    this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
   }
 
   /**
@@ -152,7 +133,14 @@ class LazyRepeatElement extends BaseElement {
    */
 
   set delegate(userDelegate) {
-    this.setDelegate(userDelegate);
+    this._lazyRepeatProvider && this._lazyRepeatProvider.destroy();
+
+    if (!this._templateElement && this.children[0]) {
+      this._templateElement = this.removeChild(this.children[0]);
+    }
+
+    const delegate = new LazyRepeatDelegate(userDelegate, this._templateElement || null);
+    this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
   }
 
   get delegate() {
