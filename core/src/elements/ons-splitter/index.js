@@ -26,28 +26,37 @@ import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
  * @element ons-splitter
  * @category splitter
  * @description
- *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
- *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
+ *  [en]
+ *    A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.
+ *
+ *    It can be configured to automatically expand into a column layout on large screens and collapse the menu on smaller screens. When the menu is collapsed the user can open it by swiping.
+ *  [/en]
+ *  [ja][/ja]
  * @codepen rOQOML
  * @seealso ons-splitter-content
- *  [en]ons-splitter-content component[/en]
+ *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]
  * @seealso ons-splitter-side
- *  [en]ons-splitter-side component[/en]
+ *  [en]The `<ons-splitter-side>` component contains the menu.[/en]
  *  [ja]ons-splitter-sideコンポーネント[/ja]
  * @guide CallingComponentAPIsfromJavaScript
  *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
- * <ons-splitter>
+ * <ons-splitter id="splitter">
  *   <ons-splitter-content>
  *     ...
  *   </ons-splitter-content>
  *
- *   <ons-splitter-side side="left" width="80%" collapse>
+ *   <ons-splitter-side side="left" width="80%" collapse swipeable>
  *     ...
  *   </ons-splitter-side>
  * </ons-splitter>
+ *
+ * <script>
+ *   var splitter = document.getElementById('splitter');
+ *   splitter.left.open();
+ * </script>
  */
 class SplitterElement extends BaseElement {
 
@@ -64,7 +73,7 @@ class SplitterElement extends BaseElement {
    * @readonly
    * @type {HTMLElement}
    * @description
-   *   [en]Left OnsSplitterSide element.[/en]
+   *   [en]Left `<ons-splitter-side>` element.[/en]
    *   [ja][/ja]
    */
   get left() {
@@ -75,7 +84,7 @@ class SplitterElement extends BaseElement {
    * @readonly
    * @type {HTMLElement}
    * @description
-   *   [en]Right OnsSplitterSide element.[/en]
+   *   [en]Right `<ons-splitter-side>` element.[/en]
    *   [ja][/ja]
    */
   get right() {
@@ -90,7 +99,7 @@ class SplitterElement extends BaseElement {
    * @readonly
    * @type {HTMLElement}
    * @description
-   *   [en]OnsSplitterContent element.[/en]
+   *   [en]The `<ons-splitter-content>` element.[/en]
    *   [ja][/ja]
    */
   get content() {
@@ -106,7 +115,7 @@ class SplitterElement extends BaseElement {
    * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
+   *   [en]Retrieve the back button handler.[/en]
    *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
    */
   get onDeviceBackButton() {

@@ -46,8 +46,15 @@ const locations = {
  * @element ons-switch
  * @category form
  * @description
- *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
- *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ *   [en]
+ *     Switch component. The switch can be toggled both by dragging and tapping.
+ *
+ *     Will automatically displays a Material Design switch on Android devices.
+ *   [/en]
+ *   [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @modifier material
+ *   [en]Material Design switch[/en]
+ *   [ja][/ja]
  * @codepen LpXZQQ
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
@@ -55,11 +62,9 @@ const locations = {
  * @guide EventHandling
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
- * @seealso ons-button
- *   [en]ons-button component[/en]
- *   [ja]ons-buttonコンポーネント[/ja]
  * @example
  * <ons-switch checked></ons-switch>
+ * <ons-switch disabled></ons-switch>
  * <ons-switch modifier="material"></ons-switch>
  */
 
@@ -68,7 +73,7 @@ class SwitchElement extends BaseElement {
   /**
    * @event change
    * @description
-   *   [en]Fired when the value is changed.[/en]
+   *   [en]Fired when the switch is toggled.[/en]
    *   [ja]ON/OFFが変わった時に発火します。[/ja]
    * @param {Object} event
    *   [en]Event object.[/en]
@@ -110,7 +115,7 @@ class SwitchElement extends BaseElement {
    * @attribute input-id
    * @type {String}
    * @description
-   *  [en]Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements.[/en]
+   *  [en]Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
    *  [ja][/ja]
    */
 
@@ -118,7 +123,7 @@ class SwitchElement extends BaseElement {
    * @property checked
    * @type {Boolean}
    * @description
-   *   [en]Whether the switch is checked.[/en]
+   *   [en]This value is `true` if the switch is checked.[/en]
    *   [ja]スイッチがONの場合に`true`。[/ja]
    */
 
@@ -138,7 +143,7 @@ class SwitchElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the switch is be disabled.[/en]
+   *   [en]This value is `true` if the switch is disabled.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
 
@@ -152,7 +157,7 @@ class SwitchElement extends BaseElement {
   }
 
   /**
-   * @method checkbox
+   * @property checkbox
    * @readonly
    * @type {HTMLElement}
    * @description

@@ -28,7 +28,9 @@ import BaseElement from 'ons/base-element';
  *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
  * @codepen GgujC {wide}
  * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]
- * @seealso ons-row [en]ons-row component[/en][ja]ons-rowコンポーネント[/ja]
+ * @seealso ons-row
+ *   [en]The `<ons-row>` component is the parent of `<ons-col>`.[/en]
+ *   [ja]ons-rowコンポーネント[/ja]
  * @example
  * <ons-row>
  *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>

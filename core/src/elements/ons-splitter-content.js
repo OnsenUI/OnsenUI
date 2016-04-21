@@ -44,14 +44,18 @@ const rewritables = {
  * @element ons-splitter-content
  * @category splitter
  * @description
- *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
+ *  [en]
+ *    The `<ons-splitter-content>` element is used as a child element of `<ons-splitter>`.
+ *
+ *    It contains the main content of the page while `<ons-splitter-side>` contains the list.
+ *  [/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
  * @seealso ons-splitter
- *  [en]ons-splitter component[/en]
+ *  [en]The `<ons-splitter>` component is the parent element.[/en]
  *  [ja]ons-splitterコンポーネント[/ja]
  * @seealso ons-splitter-side
- *  [en]ons-splitter-side component[/en]
+ *  [en]The `<ons-splitter-side>` component contains the menu.[/en]
  *  [ja]ons-splitter-sideコンポーネント[/ja]
  * @example
  * <ons-splitter>
@@ -70,10 +74,13 @@ class SplitterContentElement extends BaseElement {
    * @attribute page
    * @type {String}
    * @description
-   *   [en]The url of the content page.[/en]
+   *   [en]
+   *     The url of the content page. If this attribute is used the content will be loaded from a `<ons-template>` tag or a remote file.
+   *
+   *     It is also possible to put `<ons-page>` element as a child of the element.
+   *   [/en]
    *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
    */
-
   createdCallback() {
     this._page = null;
   }
@@ -109,15 +116,15 @@ class SplitterContentElement extends BaseElement {
    * @method load
    * @signature load(page, [options])
    * @param {String} page, [options]
-   *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+   *   [en]Page URL. Can be either an HTML document or an `<ons-template>` id.[/en]
    *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @description
-   *   [en]Show the page specified in pageUrl in the right section[/en]
+   *   [en]Show the page specified in `page` in the content.[/en]
    *   [ja]指定したURLをメインページを読み込みます。[/ja]
    * @return {Promise}
-   *   [en]Resolves to the new page element[/en]
+   *   [en]Resolves to the new `<ons-page>` element[/en]
    *   [ja][/ja]
    */
   load(page, options = {}) {

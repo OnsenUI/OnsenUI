@@ -19,14 +19,14 @@ limitations under the License.
  * @element ons-row
  * @category grid
  * @description
- *   [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *   [en]Represents a row in the grid system. Use with `<ons-col>` to layout components.[/en]
  *   [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @codepen GgujC {wide}
  * @guide Layouting
  *   [en]Layouting guide[/en]
  *   [ja]レイアウト調整[/ja]
  * @seealso ons-col
- *   [en]ons-col component[/en]
+ *   [en]The `<ons-col>` component is used as children of `<ons-row>`.[/en]
  *   [ja]ons-colコンポーネント[/ja]
  * @note
  *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-col, they may not be displayed correctly. You can use only one vertical-align.[/en]
