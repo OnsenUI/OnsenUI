@@ -15,6 +15,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'fab--*',
@@ -67,9 +68,11 @@ class FabElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
   }
 
   _compile() {
@@ -77,12 +80,12 @@ class FabElement extends BaseElement {
 
     this.classList.add('fab');
 
-    let content = document.createElement('span');
+    const content = document.createElement('span');
     content.classList.add('fab__icon');
 
     util.arrayFrom(this.childNodes).forEach(element => {
       if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
-       content.appendChild(element);
+        content.appendChild(element);
       }
     });
 
