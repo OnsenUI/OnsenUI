@@ -181,7 +181,7 @@ class CollapseMode {
 
   _isOpenOtherSideMenu() {
     return util.arrayFrom(this._element.parentElement.children).some(e => {
-      return util.match(e, 'ons-splitter-side') && e !== this._element && e.isOpen();
+      return util.match(e, 'ons-splitter-side') && e !== this._element && e.isOpen;
     });
   }
 
@@ -572,16 +572,14 @@ class SplitterSideElement extends BaseElement {
   }
 
   /**
-   * @method isOpen
-   * @signature isOpen()
-   * @return {Boolean}
+   * @property isOpen
+   * @readonly
+   * @type {Boolean}
+   * @description
    *   [en]true if the menu is open.[/en]
    *   [ja]メニューが開いている場合はtrueとなります。[/ja]
-   * @description
-   *   [en]Returns whether the popover is visible or not.[/en]
-   *   [ja]メニューが開いているかどうかを返します。[/ja]
    */
-  isOpen() {
+  get isOpen() {
     return this._collapseMode.isOpen();
   }
 
@@ -637,7 +635,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   toggle(options = {}) {
-    return this.isOpen() ? this.close(options) : this.open(options);
+    return this.isOpen ? this.close(options) : this.open(options);
   }
 
   /**

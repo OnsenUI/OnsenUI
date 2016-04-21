@@ -114,7 +114,7 @@ class SplitterElement extends BaseElement {
   }
 
   _onDeviceBackButton(handler) {
-    this._sides.some(s => s.isOpen() ? s.close() : false) || handler.callParentHandler();
+    this._sides.some(s => s.isOpen ? s.close() : false) || handler.callParentHandler();
   }
 
   _onModeChange(e) {

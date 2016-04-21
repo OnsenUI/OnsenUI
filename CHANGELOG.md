@@ -22,6 +22,7 @@ v2.0.0-beta.10
  * ons-button, ons-ripple: Update API (`disabled` property).
  * ons-speeddial: Updated API (`disabled`, `visible`, `inline` properties).
  * ons-switch: Updated API (`disabled`, `checked`, `checkbox` properties).
+ * ons-splitter-side: Changed `isOpen` to a property.
 
 v2.0.0-beta.9
 ----
