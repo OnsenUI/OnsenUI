@@ -31,6 +31,16 @@ describe('ons-toolbar-button', () => {
     });
   });
 
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      var element = new OnsToolbarButton();
+
+      expect(element.hasAttribute('disabled')).to.be.false;
+      element.disabled = true;
+      expect(element.hasAttribute('disabled')).to.be.true;
+    });
+  });
+
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android', () => {
       ons.platform.select('android');

@@ -25,6 +25,9 @@ const scheme = {'': 'toolbar-button--*'};
 /**
  * @element ons-toolbar-button
  * @category toolbar
+ * @modifier material
+ *   [en]Material Design toolbar button.[/en]
+ *   [ja][/ja]
  * @modifier outline
  *   [en]A button with an outline.[/en]
  *   [ja]アウトラインをもったボタンを表示します。[/ja]
@@ -36,19 +39,26 @@ const scheme = {'': 'toolbar-button--*'};
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
  * @seealso ons-toolbar
- *   [en]ons-toolbar component[/en]
+ *   [en]The `<ons-toolbar>` component displays a navigation bar at the top of a page.[/en]
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-back-button
- *   [en]ons-back-button component[/en]
+ *   [en]The `<ons-back-button>` displays a back button in the navigation bar.[/en]
  *   [ja]ons-back-buttonコンポーネント[/ja]
- * @seealso ons-toolbar-button
- *   [en]ons-toolbar-button component[/en]
- *   [ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example
  * <ons-toolbar>
- *   <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
- *   <div class="center">Title</div>
- *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navicon" size="28px"></ons-icon></ons-toolbar-button></div>
+ *   <div class="left">
+ *     <ons-toolbar-button>
+ *       Button
+ *     </ons-toolbar-button>
+ *   </div>
+ *   <div class="center">
+ *     Title
+ *   </div>
+ *   <div class="right">
+ *     <ons-toolbar-button>
+ *       <ons-icon icon="ion-navicon" size="28px"></ons-icon>
+ *     </ons-toolbar-button>
+ *   </div>
  * </ons-toolbar>
  */
 class ToolbarButtonElement extends BaseElement {
@@ -72,6 +82,21 @@ class ToolbarButtonElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+  }
+
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
+   */
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
   }
 
   _compile() {
