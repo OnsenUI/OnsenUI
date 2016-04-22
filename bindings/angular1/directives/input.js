@@ -81,26 +81,29 @@
         var el = element[0];
         var type = el.getAttribute('type');
 
-        ATTRS.forEach(function(attr) {
-          var kebabCase = attr.replace(/[A-Z]/g, function(letter, pos) {
-            return (pos ? '-' : '') + letter.toLowerCase();
+        ons._contentReady(element[0], function() {
+
+          ATTRS.forEach(function(attr) {
+            var kebabCase = attr.replace(/[A-Z]/g, function(letter, pos) {
+              return (pos ? '-' : '') + letter.toLowerCase();
+            });
+
+            if (attrs.hasOwnProperty(attr)) {
+              el._input.setAttribute(kebabCase, attrs[attr]);
+            }
           });
 
-          if (attrs.hasOwnProperty(attr)) {
-            el._input.setAttribute(kebabCase, attrs[attr]);
+          $compile(el._input)(scope);
+
+          if (el._isTextInput && attrs.ngModel) {
+            scope.$watch(attrs.ngModel, function(value) {
+              el._updateLabelClass();
+            });
           }
-        });
 
-        $compile(el._input)(scope);
-
-        if (el._isTextInput && attrs.ngModel) {
-          scope.$watch(attrs.ngModel, function(value) {
-            el._updateLabelClass();
+          scope.$on('$destroy', function() {
+            scope = element = attrs = el = null;
           });
-        }
-
-        scope.$on('$destroy', function() {
-          scope = element = attrs = el = null;
         });
       }
     };
