@@ -15,6 +15,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.text-input': 'text-input--*',
@@ -130,22 +131,24 @@ class InputElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
   }
 
   _compile() {
     autoStyle.prepare(this);
 
-    let helper = document.createElement('span');
+    const helper = document.createElement('span');
     helper.classList.add('_helper');
 
-    let container = document.createElement('label');
+    const container = document.createElement('label');
     container.appendChild(document.createElement('input'));
     container.appendChild(helper);
 
-    let label = document.createElement('span');
+    const label = document.createElement('span');
     label.classList.add('input-label');
 
     util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
@@ -197,34 +200,38 @@ class InputElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      return contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
     } else if (name === 'placeholder') {
-      return this._updateLabel();
+      return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
       this._input.id = current;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
-      return this._updateBoundAttributes();
+      return contentReady(this, () => this._updateBoundAttributes());
     }
   }
 
   attachedCallback() {
-    if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
-      this._input.addEventListener('input', this._boundOnInput);
-      this._input.addEventListener('focusin', this._boundOnFocusin);
-      this._input.addEventListener('focusout', this._boundOnFocusout);
-    }
+    contentReady(this, () => {
+      if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
+        this._input.addEventListener('input', this._boundOnInput);
+        this._input.addEventListener('focusin', this._boundOnFocusin);
+        this._input.addEventListener('focusout', this._boundOnFocusout);
+      }
 
-    this._input.addEventListener('focus', this._boundDelegateEvent);
-    this._input.addEventListener('blur', this._boundDelegateEvent);
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
+    });
   }
 
   detachedCallback() {
-    this._input.removeEventListener('input', this._boundOnInput);
-    this._input.removeEventListener('focusin', this._boundOnFocusin);
-    this._input.removeEventListener('focusout', this._boundOnFocusout);
-    this._input.removeEventListener('focus', this._boundDelegateEvent);
-    this._input.removeEventListener('blur', this._boundDelegateEvent);
+    contentReady(this, () => {
+      this._input.removeEventListener('input', this._boundOnInput);
+      this._input.removeEventListener('focusin', this._boundOnFocusin);
+      this._input.removeEventListener('focusout', this._boundOnFocusout);
+      this._input.removeEventListener('focus', this._boundDelegateEvent);
+      this._input.removeEventListener('blur', this._boundDelegateEvent);
+    });
   }
 
   _setLabel(value) {
@@ -308,14 +315,16 @@ class InputElement extends BaseElement {
    *   [ja][/ja]
    */
   get value() {
-    return this._input.value;
+    return this._input ? this._input.value : '';
   }
 
   set value(val) {
-    this._input.value = val;
-    this._onInput();
+    contentReady(this, () => {
+      this._input.value = val;
+      this._onInput();
+    });
 
-    return this._input.val;
+    return val;
   }
 
   /**
