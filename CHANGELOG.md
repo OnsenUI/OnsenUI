@@ -28,6 +28,7 @@ v2.0.0-beta.10
  * ons-lazy-repeat: Removed `setDelegate` in favor of the `delegate` property.
  * ons-range: Fixes memory leak in AngularJS bindings.
  * ons-toolbar-button: Add `disabled` property.
+ * css-components: Fixes list layout glitch on older Android devices.
 
 v2.0.0-beta.9
 ----
