@@ -30,7 +30,6 @@ export class OnsInput implements OnChanges, OnDestroy {
   }
 
   _onChange(event) {
-    console.log("change----");
     this._valueChange.emit(this._element.value);
   }
 
