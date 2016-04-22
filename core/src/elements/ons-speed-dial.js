@@ -318,8 +318,8 @@ class SpeedDialElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the speed dial is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     if (value) {
@@ -341,8 +341,8 @@ class SpeedDialElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the component is inline or not.[/en]
-   *   [ja]この要素がインライン要素かどうか。[/ja]
+   *   [en]Whether the element is inline or not.[/en]
+   *   [ja]インライン要素の場合に`true`。[/ja]
    */
   get inline() {
     return this.hasAttribute('inline');
@@ -353,8 +353,8 @@ class SpeedDialElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [en]Whether the element is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this._shown && this.style.display !== 'none';

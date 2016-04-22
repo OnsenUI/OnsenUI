@@ -61,26 +61,26 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#set backButtonHandler', () => {
+  describe('#onDeviceBackButton', () => {
     it('sets the callback', () => {
       expect(element._backButtonHandler).not.to.be.ok;
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
     });
 
     it('overwrites the callback', () => {
       expect(element._backButtonHandler).not.to.be.ok;
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
 
       var spy = chai.spy.on(element._backButtonHandler, 'destroy');
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
       expect(spy).to.have.been.called.once;
     });
 
     it('is correctly deleted', () => {
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
 
       element._destroy();

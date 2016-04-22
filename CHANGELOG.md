@@ -15,10 +15,11 @@ v2.0.0-beta.10
  * ons-icon: Delete attribute `flip` from ons-icon (obsolete, since everything can be done with `rotate`)
  * ons-list-item: Make the attribute `tappable` a boolean and add attribute `tap-background-color`
  * ons-alert-dialog: Fixed [#1347](https://github.com/OnsenUI/OnsenUI/issues/1347).
- * ons-alert-dialog, ons-dialog, ons-popover, ons-modal: Updated API (`disabled`, `visible`, `backButtonHandler` properties).
  * ons-progress-bar, ons-progress-circular: Add `value`, `secondaryValue` and `indeterminate` properties.
  * ons-pull-hook: Add `state`, `pullDistance`, `height`, `thresholdHeight` and `disabled` properties.
- * ons-page: Update API (`disabled`, `backButtonHandler` properties).
+ * ons-alert-dialog, ons-dialog, ons-popover, ons-modal: Updated API (`disabled`, `visible`, `onDeviceBackButton` properties).
+ * ons-page: Update API (`disabled`, `onDeviceBackButton` properties, `on-device-back-button` and `ng-device-back-button` attributes).
+ * ons-splitter: Renamed property `deviceBackButton` to a `onDeviceBackButton`.
  * ons-button, ons-ripple: Update API (`disabled` property).
  * ons-speeddial: Updated API (`disabled`, `visible`, `inline` properties).
  * ons-switch: Updated API (`disabled`, `checked`, `checkbox` properties).

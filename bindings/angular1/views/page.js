@@ -32,8 +32,8 @@ limitations under the License.
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
 
-        Object.defineProperty(this, 'backButtonHandler', {
-          get: () => this._element[0].backButtonHandler,
+        Object.defineProperty(this, 'onDeviceBackButton', {
+          get: () => this._element[0].onDeviceBackButton,
           set: value => {
             if (!this._userBackButtonHandler) {
               this._enableBackButtonHandler();
@@ -42,7 +42,7 @@ limitations under the License.
           }
         });
 
-        if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
+        if (this._attrs.ngDeviceBackButton || this._attrs.onDeviceBackButton) {
           this._enableBackButtonHandler();
         }
         if (this._attrs.ngInfiniteScroll) {
@@ -54,23 +54,23 @@ limitations under the License.
 
       _enableBackButtonHandler: function() {
         this._userBackButtonHandler = angular.noop;
-        this._element[0].backButtonHandler = this._onDeviceBackButton.bind(this);
+        this._element[0].onDeviceBackButton = this._onDeviceBackButton.bind(this);
       },
 
       _onDeviceBackButton: function($event) {
         this._userBackButtonHandler($event);
 
         // ng-device-backbutton
-        if (this._attrs.ngDeviceBackbutton) {
-          $parse(this._attrs.ngDeviceBackbutton)(this._scope, {$event: $event});
+        if (this._attrs.ngDeviceBackButton) {
+          $parse(this._attrs.ngDeviceBackButton)(this._scope, {$event: $event});
         }
 
         // on-device-backbutton
         /* jshint ignore:start */
-        if (this._attrs.onDeviceBackbutton) {
+        if (this._attrs.onDeviceBackButton) {
           var lastEvent = window.$event;
           window.$event = $event;
-          new Function(this._attrs.onDeviceBackbutton)(); // eslint-disable-line no-new-func
+          new Function(this._attrs.onDeviceBackButton)(); // eslint-disable-line no-new-func
           window.$event = lastEvent;
         }
         /* jshint ignore:end */
