@@ -32,29 +32,48 @@ const scheme = {
 /**
  * @element ons-toolbar
  * @category toolbar
+ * @modifier material
+ *   [en]Material Design toolbar.[/en]
+ *   [ja][/ja]
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
  * @description
- *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *   [en]
+ *     Toolbar component that can be used with navigation.
+ *
+ *     Left, center and right container can be specified by class names.
+ *
+ *     This component will automatically displays as a Material Design toolbar when running on Android devices.
+ *   [/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar
- *   [en]ons-bottom-toolbar component[/en]
+ *   [en]The `<ons-bottom-toolbar>` displays a toolbar on the bottom of the page.[/en]
  *   [ja]ons-bottom-toolbarコンポーネント[/ja]
  * @seealso ons-back-button
- *   [en]ons-back-button component[/en]
+ *   [en]The `<ons-back-button>` component displays a back button inside the toolbar.[/en]
  *   [ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button
- *   [en]ons-toolbar-button component[/en]
+ *   [en]The `<ons-toolbar-button>` component displays a toolbar button inside the toolbar.[/en]
  *   [ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
- *     <div class="left"><ons-back-button>Back</ons-back-button></div>
- *     <div class="center">Title</div>
- *     <div class="right">Label</div>
+ *     <div class="left">
+ *       <ons-back-button>
+ *         Back
+ *       </ons-back-button>
+ *     </div>
+ *     <div class="center">
+ *       Title
+ *     </div>
+ *     <div class="right">
+ *       <ons-toolbar-button>
+ *         <ons-icon icon="md-menu"></ons-icon>
+ *       </ons-toolbar-button>
+ *     </div>
  *   </ons-toolbar>
  * </ons-page>
  */
