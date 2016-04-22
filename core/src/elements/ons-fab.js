@@ -18,7 +18,7 @@ import util from 'ons/util';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
-  '': 'fab--*',
+  '': 'fab--*'
 };
 
 /**
