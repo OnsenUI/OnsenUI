@@ -105,7 +105,7 @@ notification._createAlertDialog = function(title, message,
   }
 
   if (promptDialog) {
-    inputElement = util.createElement('<input class="text-input" type="text"></input>');
+    inputElement = util.createElement('<input class="text-input text-input--underbar" type="text"></input>');
 
     if (modifier) {
       inputElement.classList.add(`text-input--${modifier}`);
