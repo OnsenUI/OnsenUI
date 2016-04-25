@@ -356,7 +356,7 @@ class NavigatorElement extends BaseElement {
       options.animationOptions = util.extend({}, leavePage.pushedOptions.animationOptions, options.animationOptions || {});
 
       const callback = () => {
-        enterPage._show();
+        setImmediate(() => enterPage._show());
         leavePage._hide();
 
         pages.pop();
@@ -482,10 +482,10 @@ class NavigatorElement extends BaseElement {
           enterPage.style.display = 'block';
           if (leavePage) {
             leavePage._hide();
-            enterPage._show();
+            setImmediate(() => enterPage._show());
             animator.push(enterPage, leavePage, done);
           } else {
-            enterPage._show();
+            setImmediate(() => enterPage._show());
             done();
           }
         };
@@ -818,14 +818,14 @@ class NavigatorElement extends BaseElement {
   }
 
   _show() {
-    if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1]._show();
+    if (this.topPage) {
+      this.topPage._show();
     }
   }
 
   _hide() {
-    if (this.pages[this.pages.length - 1]) {
-      this.pages[this.pages.length - 1]._hide();
+    if (this.topPage) {
+      this.topPage._hide();
     }
   }
 
