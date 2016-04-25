@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.14
 ----
  * vendor: Add `MutationObserver` polyfill for older webviews.
+ * ons-page: Fix [#1359](https://github.com/OnsenUI/OnsenUI/issues/1359).
 
 v2.0.0-beta.13
 ----
