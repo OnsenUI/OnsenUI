@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.12
+----
+
 v2.0.0-beta.11
 ----
  * core: Fixed forcePlatformStyling.
