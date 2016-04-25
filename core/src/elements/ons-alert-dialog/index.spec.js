@@ -235,13 +235,6 @@ describe('OnsAlertDialogElement', () => {
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
-
-    it('does not compile when _compiled attribute exists', () => {
-      const spy = chai.spy.on(OnsAlertDialogElement.prototype, '_compile');
-      const div1 = document.createElement('div');
-      div1.innerHTML = '<ons-alert-dialog _compiled>text</ons-alert-dialog>';
-      expect(spy).to.have.been.called.exactly(0);
-    });
   });
 });
 
