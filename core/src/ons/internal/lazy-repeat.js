@@ -121,7 +121,7 @@ export class LazyRepeatProvider {
    * @param {LazyRepeatDelegate} delegate
    */
   constructor(wrapperElement, delegate) {
-    this._wrapperElement = util.validated('wrapperElement', wrapperElement, Element);
+    this._wrapperElement = wrapperElement;
     this._delegate = util.validated('delegate', delegate, LazyRepeatDelegate);
 
     if (wrapperElement.tagName.toLowerCase() === 'ons-list') {
