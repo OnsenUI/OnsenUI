@@ -3,6 +3,7 @@ CHANGELOG
 ====
 
 v2.0.0-beta.11
+ * core: Fixed forcePlatformStyling.
  * ons-navigator: Fixed an issue where 'show' event could be fired before 'init'.
 
 v2.0.0-beta.10

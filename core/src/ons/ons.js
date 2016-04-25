@@ -207,15 +207,16 @@ ons.enableAutoStyling = ons._autoStyle.enable;
  *   [ja][/ja]
  * @param {string} platform New platform to style the elements.
  */
-ons.forcePlatformStyling = function(newPlatform) {
+ons.forcePlatformStyling = newPlatform => {
   ons.enableAutoStyling();
   ons.platform.select(newPlatform || 'ios');
-  ons._util.arrayFrom(document.querySelectorAll('ons-if')).forEach(function(element) {
-    element._platformUpdate();
-  });
-  ons._util.arrayFrom(document.querySelectorAll('[_compiled]')).forEach(function(element) {
-    ons._autoStyle.prepare(element, true);
-  });
+
+  ons._util.arrayFrom(document.querySelectorAll('ons-if'))
+    .forEach(element => element._platformUpdate());
+
+  ons._util.arrayFrom(document.querySelectorAll('*'))
+    .filter(element => element.tagName.match(/^ons-/i))
+    .forEach(element => ons._autoStyle.prepare(element, true));
 };
 
 /**
