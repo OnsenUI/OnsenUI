@@ -69,11 +69,11 @@ util.findChildRecursively = (element, query) => {
     if (match(node)) {
       return node;
     } else {
-      let nodeMatch = util.findChildRecursively(node, match);
+      const nodeMatch = util.findChildRecursively(node, match);
       if (nodeMatch) {
         return nodeMatch;
       }
-    }
+    }3
   }
 
   return null;
@@ -133,7 +133,7 @@ util.hasAnyComponentAsParent = (element) => {
  */
 util.propagateAction = (element, action) => {
   for (let i = 0; i < element.childNodes.length; i++) {
-    let child = element.childNodes[i];
+    const child = element.childNodes[i];
     if (child[action] instanceof Function) {
       child[action]();
     } else {
@@ -149,8 +149,8 @@ util.propagateAction = (element, action) => {
  * @param {Element}
  */
 util.create = (selector = '', style = {}) => {
-  let classList = selector.split('.'),
-    element = document.createElement(classList.shift() || 'div');
+  const classList = selector.split('.');
+  const element = document.createElement(classList.shift() || 'div');
 
   if (classList.length) {
     element.className = classList.join(' ');
@@ -295,7 +295,7 @@ util.addModifier = (target, modifierName) => {
   }
 
   modifierName = modifierName.trim();
-  let modifierAttribute = target.getAttribute('modifier') || '';
+  const modifierAttribute = target.getAttribute('modifier') || '';
   target.setAttribute('modifier', (modifierAttribute + ' ' + modifierName).trim());
   return true;
 };
@@ -337,14 +337,14 @@ util.toggleAttribute = (element, name, enable) => {
 
 util.bindListeners = (element, listenerNames) => {
   listenerNames.forEach(name => {
-    let boundName = name.replace(/^_[a-z]/, '_bound' + name[1].toUpperCase());
+    const boundName = name.replace(/^_[a-z]/, '_bound' + name[1].toUpperCase());
     element[boundName] = element[boundName] || element[name].bind(element);
   });
 };
 
 util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
-let safe = f => function(){
+const safe = f => function(){
   if (f instanceof Function) {
     return f.apply(this, arguments);
   }
@@ -352,7 +352,7 @@ let safe = f => function(){
 util.safeCall = (object, prop, ...rest) => safe(object[prop]).apply(object, rest);
 util.safeApply = (object, prop,   rest) => safe(object[prop]).apply(object, rest);
 
-let isOfType = (object, type) => {
+const isOfType = (object, type) => {
   if (Array.isArray(type)) {
     return type.some(type => isOfType(object, type));
   }
@@ -363,7 +363,7 @@ let isOfType = (object, type) => {
          (typeof type === 'string' && typeof object === type);
 };
 
-let _printType = type => {
+const _printType = type => {
   if (Array.isArray(type)) {
     return type.map(_printType).join(' or ');
   }
@@ -404,16 +404,16 @@ let _printType = type => {
  * @todo Support for functions with options.object - {type: Function, object: obj}
  */
 
-let validated = util.validated = (name, object, options) => {
-  let type = options && options.type || (!options.object && options);
+const validated = util.validated = (name, object, options) => {
+  const type = options && options.type || (!options.object && options);
   if (type && !isOfType(object, type) && !(options.dynamicCall || options.safeCall)) {
     throw new Error(name + ' must be ' + _printType(type) + '. You provided ' + object);
   }
   if (options && options.object) {
     name = name ? name + '.' : '';
-    let result = {};
+    const result = {};
     Object.keys(options.object).forEach(key => {
-      let dynamicCall = options.object[key].dynamicCall;
+      const dynamicCall = options.object[key].dynamicCall;
       if (dynamicCall) {
         dynamicCall.object = dynamicCall.object || object;
         dynamicCall.key = dynamicCall.key || key;
@@ -423,9 +423,9 @@ let validated = util.validated = (name, object, options) => {
     return result;
   }
   if (type === Function || type === 'function') {
-    let {object: obj, key} = options.dynamicCall || {};
-    let context = options.context || obj;
-    let test = options.safeCall ? safe : options.dynamicCall ? f => validated(name, f, Function) : f => f;
+    const {object: obj, key} = options.dynamicCall || {};
+    const context = options.context || obj;
+    const test = options.safeCall ? safe : options.dynamicCall ? f => validated(name, f, Function) : f => f;
 
     object = options.dynamicCall ? (...rest) => test(obj[key]).apply(context, rest) : test(object);
 
@@ -440,7 +440,7 @@ let validated = util.validated = (name, object, options) => {
  * @param {Element} target
  */
 util.updateRipple = (target) => {
-  let rippleElement = util.findChild(target, 'ons-ripple');
+  const rippleElement = util.findChild(target, 'ons-ripple');
 
   if (target.hasAttribute('ripple')) {
     if (!rippleElement) {

@@ -78,7 +78,8 @@ notification._createAlertDialog = function(title, message,
   let titleElement = dialogElement.querySelector('.alert-dialog-title');
   let messageElement = dialogElement.querySelector('.alert-dialog-content');
   let footerElement = dialogElement.querySelector('.alert-dialog-footer');
-  let inputElement, result = {};
+  let inputElement;
+  const result = {};
 
   result.promise = new Promise((resolve, reject) => {
     result.resolve = resolve;

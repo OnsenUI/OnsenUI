@@ -121,7 +121,7 @@ class ToolbarElement extends BaseElement {
     if (!this.parentNode || this.hasAttribute('inline')) {
       return;
     }
-    let page = util.findParent(this, 'ons-page');
+    const page = util.findParent(this, 'ons-page');
 
     if (page && page !== this.parentNode) {
       page._registerToolbar(this);

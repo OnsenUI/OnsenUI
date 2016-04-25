@@ -11,7 +11,7 @@ describe('deviceBackButtonDispatcher', () => {
     });
 
     it('disables the handler', () => {
-      let handler = ons._deviceBackButtonDispatcher.createHandler(document.createElement('div'), () => { return; });
+      const handler = ons._deviceBackButtonDispatcher.createHandler(document.createElement('div'), () => { return; });
       expect(handler.isEnabled()).to.be.true;
       handler.disable();
       expect(handler.isEnabled()).to.be.false;
@@ -22,7 +22,7 @@ describe('deviceBackButtonDispatcher', () => {
     it('exits the app', () => {
       navigator.app = {};
       navigator.app.exitApp = () => { return; };
-      let spy = chai.spy.on(navigator.app, 'exitApp');
+      const spy = chai.spy.on(navigator.app, 'exitApp');
       ons._deviceBackButtonDispatcher._callback();
       expect(spy).to.have.been.called.once;
     });
@@ -30,7 +30,7 @@ describe('deviceBackButtonDispatcher', () => {
 
   describe('#fireDeviceBackButtonEvent()', () => {
     it('fires \'backbutton\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         document.addEventListener('backbutton', () => { resolve(); });
       });
 

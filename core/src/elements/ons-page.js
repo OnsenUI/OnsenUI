@@ -418,10 +418,6 @@ class PageElement extends BaseElement {
     this.remove();
   }
 
-  get name() {
-    return this._name;
-  }
-
   /**
    * @property data
    * @type {*}

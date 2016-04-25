@@ -8,8 +8,8 @@ describe('OnsPullHookElement', () => {
   let page, pullHook, event;
 
   beforeEach(() => {
-    let n = 100,
-      items = [];
+    let n = 100;
+    const items = [];
 
     while (n--) {
       items.push(`
@@ -53,7 +53,7 @@ describe('OnsPullHookElement', () => {
 
   describe('#_createScrollElement()', () => {
     it('creates a scroll element', () => {
-      let scrollElement = pullHook._createScrollElement();
+      const scrollElement = pullHook._createScrollElement();
       expect(scrollElement.classList.contains('scroll')).to.be.true;
     });
   });
@@ -69,14 +69,14 @@ describe('OnsPullHookElement', () => {
 
   describe('#_generateTranslationTransform()', () => {
     it('returns a string', () => {
-      let transform = pullHook._generateTranslationTransform(100);
+      const transform = pullHook._generateTranslationTransform(100);
       expect(transform).to.be.a('string');
     });
   });
 
   describe('#_onDrag()', () => {
     it('does nothing if disabled', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
 
       pullHook.setAttribute('disabled', '');
       pullHook._onDrag();
@@ -85,7 +85,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('does nothing if direction is horizontal', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
 
       pullHook._onDrag({
         gesture: {
@@ -97,7 +97,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('translates the element', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
 
       // Need to initiate the dragging.
       pullHook._onDragStart();
@@ -107,7 +107,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('translates the element when interimDirection is not \'down\'', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
 
       event.gesture.interimDirection = 'up';
       // Need to initiate the dragging.
@@ -128,7 +128,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('bounces back if pull distance is higher than threshold', () => {
-      let spy = chai.spy.on(event.gesture, 'stopDetect');
+      const spy = chai.spy.on(event.gesture, 'stopDetect');
 
       pullHook._onDragStart();
       event.gesture.deltaY = 200;
@@ -158,7 +158,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('changes the state', () => {
-      let spy = chai.spy.on(pullHook, '_setState');
+      const spy = chai.spy.on(pullHook, '_setState');
 
       pullHook.setAttribute('height', 10);
       event.gesture.deltaY = 20;
@@ -171,7 +171,7 @@ describe('OnsPullHookElement', () => {
     });
 
     it('translates back', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
 
       pullHook._onDragStart();
       pullHook._onDrag(event);
@@ -183,7 +183,7 @@ describe('OnsPullHookElement', () => {
 
   describe('#setActionCallback()', () => {
     it('sets a callback', () => {
-      let cb = () => null;
+      const cb = () => null;
 
       pullHook.setActionCallback(cb);
       expect(pullHook._callback).to.equal(cb);
@@ -192,13 +192,13 @@ describe('OnsPullHookElement', () => {
 
   describe('#_waitForAction()', () => {
     it('calls the argument', () => {
-      let spy = chai.spy();
+      const spy = chai.spy();
       pullHook._waitForAction(spy);
       expect(spy).to.have.been.called.once;
     });
 
     it('calls the callback if it exists', () =>{
-      let spy = chai.spy();
+      const spy = chai.spy();
       pullHook.setActionCallback(spy);
       pullHook._waitForAction(() => null);
       expect(spy).to.have.been.called.once;
@@ -207,7 +207,7 @@ describe('OnsPullHookElement', () => {
 
   describe('#_onDone()', () => {
     it('translates the pull hook', () => {
-      let spy = chai.spy.on(pullHook, '_translateTo');
+      const spy = chai.spy.on(pullHook, '_translateTo');
       pullHook._onDone();
       expect(spy).to.have.been.called.once;
     });
@@ -301,8 +301,8 @@ describe('OnsPullHookElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-page><ons-pull-hook></ons-pull-hook></ons-page>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;

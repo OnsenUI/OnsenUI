@@ -136,7 +136,7 @@ class ModalElement extends BaseElement {
     wrapper.classList.add('modal__content');
 
     while (this.childNodes[0]) {
-      let node = this.childNodes[0];
+      const node = this.childNodes[0];
       this.removeChild(node);
       wrapper.insertBefore(node, null);
     }

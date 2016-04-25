@@ -456,7 +456,7 @@ class NavigatorElement extends BaseElement {
       enterPage.updateBackButton(pageLength - 1);
 
       enterPage.data = options.data;
-      enterPage._name = options.page;
+      enterPage.name = options.page;
       enterPage.pushedOptions = options;
 
       return new Promise(resolve => {
@@ -543,7 +543,7 @@ class NavigatorElement extends BaseElement {
 
     const run = templateHTML => {
       const element = util.extend(this._createPageElement(templateHTML), {
-        _name: options.page,
+        name: options.page,
         data: options.data,
         pushedOptions: options
       });

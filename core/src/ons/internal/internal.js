@@ -172,9 +172,9 @@ internal.getTemplateHTMLAsync = function(page) {
  * @return {Promise}
  */
 internal.getPageHTMLAsync = function(page) {
-  let pages = pageAttributeExpression.evaluate(page);
+  const pages = pageAttributeExpression.evaluate(page);
 
-  let getPage = (page) => {
+  const getPage = (page) => {
     if (typeof page !== 'string') {
       return Promise.reject('Must specify a page.');
     }
