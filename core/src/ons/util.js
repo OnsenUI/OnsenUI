@@ -61,29 +61,6 @@ util.findChild = (element, query) => {
  * @param {String/Function} query dot class name or node name or matcher function.
  * @return {HTMLElement/null}
  */
-util.findChildRecursively = (element, query) => {
-  const match = util.prepareQuery(query);
-
-  for (let i = 0; i < element.children.length; i++) {
-    const node = element.children[i];
-    if (match(node)) {
-      return node;
-    } else {
-      const nodeMatch = util.findChildRecursively(node, match);
-      if (nodeMatch) {
-        return nodeMatch;
-      }
-    }3
-  }
-
-  return null;
-};
-
-/**
- * @param {Element} element
- * @param {String/Function} query dot class name or node name or matcher function.
- * @return {HTMLElement/null}
- */
 util.findParent = (element, query) => {
   const match = util.prepareQuery(query);
 

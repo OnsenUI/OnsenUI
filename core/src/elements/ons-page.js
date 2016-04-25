@@ -172,13 +172,9 @@ class PageElement extends BaseElement {
     });
   }
 
-  updateBackButton(shouldShowButton) {
+  updateBackButton(show) {
     if (this.backButton) {
-      if (shouldShowButton) {
-        this.backButton.show();
-      } else {
-        this.backButton.hide();
-      }
+      show ? this.backButton.show() : this.backButton.hide();
     }
   }
 
@@ -191,7 +187,7 @@ class PageElement extends BaseElement {
   }
 
   get backButton() {
-    return util.findChildRecursively(this, 'ons-back-button');
+    return this.querySelector('ons-back-button');
   }
 
   _tryToFillStatusBar(){
