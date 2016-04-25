@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.15
+----
+
 v2.0.0-beta.14
 ----
  * vendor: Add `MutationObserver` polyfill for older webviews.
