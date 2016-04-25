@@ -30,9 +30,9 @@ describe('OnsAlertDialogElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let element = dialog.querySelector('.alert-dialog'),
-      content = dialog.querySelector('.alert-dialog-content'),
-      title = dialog.querySelector('.alert-dialog-title');
+    const element = dialog.querySelector('.alert-dialog');
+    const content = dialog.querySelector('.alert-dialog-content');
+    const title = dialog.querySelector('.alert-dialog-title');
 
     dialog.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('alert-dialog--hoge')).to.be.true;
@@ -93,7 +93,7 @@ describe('OnsAlertDialogElement', () => {
     });
 
     it('emits \'preshow\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('preshow', resolve);
       });
 
@@ -103,7 +103,7 @@ describe('OnsAlertDialogElement', () => {
     });
 
     it('emits \'postshow\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('postshow', resolve);
       });
 
@@ -143,7 +143,7 @@ describe('OnsAlertDialogElement', () => {
     });
 
     it('emits \'prehide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('prehide', resolve);
       });
 
@@ -153,7 +153,7 @@ describe('OnsAlertDialogElement', () => {
     });
 
     it('emits \'posthide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('posthide', resolve);
       });
 
@@ -183,15 +183,15 @@ describe('OnsAlertDialogElement', () => {
 
   describe('#_onDeviceBackButton()', () => {
     it('cancels if dialog is cancelable', () => {
-      let spy = chai.spy.on(dialog, '_cancel');
+      const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
       dialog._onDeviceBackButton();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls parent handler if dialog is not cancelable', () => {
-      let event = {},
-        spy = chai.spy.on(event, 'callParentHandler');
+      const event = {};
+      const spy = chai.spy.on(event, 'callParentHandler');
 
       dialog._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
@@ -200,7 +200,7 @@ describe('OnsAlertDialogElement', () => {
 
   describe('#_cancel()', () => {
     it('hides the dialog if it is cancelable', () => {
-      let spy = chai.spy.on(dialog, 'hide');
+      const spy = chai.spy.on(dialog, 'hide');
       dialog.setAttribute('cancelable', '');
       dialog._cancel();
       expect(spy).to.have.been.called.once;
@@ -229,8 +229,8 @@ describe('OnsAlertDialogElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-alert-dialog>text</ons-alert-dialog>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -238,7 +238,7 @@ describe('OnsAlertDialogElement', () => {
 
     it('does not compile when _compiled attribute exists', () => {
       const spy = chai.spy.on(OnsAlertDialogElement.prototype, '_compile');
-      let div1 = document.createElement('div');
+      const div1 = document.createElement('div');
       div1.innerHTML = '<ons-alert-dialog _compiled>text</ons-alert-dialog>';
       expect(spy).to.have.been.called.exactly(0);
     });
@@ -248,7 +248,7 @@ describe('OnsAlertDialogElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = ons._util.createElement('<ons-alert-dialog>contents</ons-alert-dialog>');
+      const e = ons._util.createElement('<ons-alert-dialog>contents</ons-alert-dialog>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

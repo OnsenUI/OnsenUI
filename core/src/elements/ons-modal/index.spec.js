@@ -32,14 +32,14 @@ describe('OnsModalElement', () => {
     });
 
     it('adds a \'modal__content\' by default', () => {
-      var wrapper = document.createElement('div');
+      const wrapper = document.createElement('div');
       element.appendChild(wrapper);
       expect(element.children[0].classList.contains('modal__content')).to.be.true;
     });
 
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-modal></ons-modal>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -54,7 +54,7 @@ describe('OnsModalElement', () => {
     });
 
     it('returns a promise that resolves to the displayed element', () => {
-      let modal = element;
+      const modal = element;
       return expect(modal.show()).to.eventually.be.fulfilled.then(
         element => {
           expect(element).to.equal(modal);
@@ -76,7 +76,7 @@ describe('OnsModalElement', () => {
     });
 
     it('returns a promise that resolves to the hidden element', () => {
-      let modal = element;
+      const modal = element;
       return expect(modal.hide()).to.eventually.be.fulfilled.then(
         element => {
           expect(element).to.equal(modal);
@@ -120,7 +120,7 @@ describe('OnsModalElement', () => {
     });
 
     it('overwrites the callback', () => {
-      var spy = chai.spy.on(element._backButtonHandler, 'destroy');
+      const spy = chai.spy.on(element._backButtonHandler, 'destroy');
       element.onDeviceBackButton = () => { return; };
       expect(spy).to.have.been.called.once;
       expect(element._backButtonHandler).to.be.ok;
@@ -129,15 +129,15 @@ describe('OnsModalElement', () => {
 
   describe('#_ensureNodePosition()', () => {
     it('does not register extra element when has no parent ons-page', () => {
-      var spy = chai.spy.on(element, '_registerExtraElement');
+      const spy = chai.spy.on(element, '_registerExtraElement');
       expect(element._ensureNodePosition()).not.to.be.ok;
       expect(spy).to.not.have.been.called();
     });
 
     it('registers extra element when has parent ons-page', () => {
-      let element = new OnsModalElement();
-      let parent = new OnsPageElement();
-      var spy = chai.spy.on(parent, '_registerExtraElement');
+      const element = new OnsModalElement();
+      const parent = new OnsPageElement();
+      const spy = chai.spy.on(parent, '_registerExtraElement');
       parent._registerExtraElement(element);
       element._ensureNodePosition();
       expect(spy).to.have.been.called.twice;
@@ -146,7 +146,7 @@ describe('OnsModalElement', () => {
 
   describe('#attributeChangedCallback()', () => {
     it('triggers \'onModifierChanged()\' method', () => {
-      var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
+      const spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
     });

@@ -77,7 +77,7 @@ class FabElement extends BaseElement {
 
     this.classList.add('fab');
 
-    let content = document.createElement('span');
+    const content = document.createElement('span');
     content.classList.add('fab__icon');
 
     util.arrayFrom(this.childNodes).forEach(element => {

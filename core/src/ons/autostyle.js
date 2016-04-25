@@ -42,7 +42,7 @@ platforms.android = element => {
 
     const oldModifier = element.getAttribute('modifier') || '';
 
-    let newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
+    const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
     newModifier.unshift('material');
 
     element.setAttribute('modifier', newModifier.join(' ').trim());
@@ -95,7 +95,7 @@ const unlocked = {
 
 const prepareAutoStyle = (element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
-    let mobileOS = onsPlatform.getMobileOS();
+    const mobileOS = onsPlatform.getMobileOS();
     if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
       platforms[mobileOS](element);
     }

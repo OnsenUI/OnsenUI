@@ -148,7 +148,9 @@ class IconElement extends BaseElement {
   }
 
   _getAttribute(attr) {
-    let [def, md] = (this.getAttribute(attr) || '').split(/\s*,\s*/);
+    const parts = (this.getAttribute(attr) || '').split(/\s*,\s*/);
+    const def = parts[0];
+    let md = parts[1];
     md = (md || '').split(/\s*:\s*/);
     return (util.hasModifier(this, md[0]) ? md[1] : def) || '';
   }

@@ -223,7 +223,7 @@ describe('OnsCarouselElement', () => {
 
   describe('#refresh()', () => {
     it('fires \'refresh\' event', () => {
-      let promise = new Promise((resolve) =>
+      const promise = new Promise((resolve) =>
         carousel.addEventListener('refresh', resolve)
       );
 
@@ -296,7 +296,7 @@ describe('OnsCarouselElement', () => {
       ev.gesture.deltaX = 10;
       ev.gesture.velocityX = 10;
 
-      let spy = chai.spy.on(carousel, '_scrollToKillOverScroll');
+      const spy = chai.spy.on(carousel, '_scrollToKillOverScroll');
       carousel._onDragEnd(ev);
       expect(spy).to.be.called.once;
     });
@@ -304,7 +304,7 @@ describe('OnsCarouselElement', () => {
 
   describe('#_getCarouselItemElements()', () => {
     it('returns the carousel item elements', () => {
-      let rv = carousel._getCarouselItemElements();
+      const rv = carousel._getCarouselItemElements();
 
       expect(rv.length).to.equal(3);
 
@@ -314,7 +314,7 @@ describe('OnsCarouselElement', () => {
     });
 
     it('doesn\'t return the items in child carousels (issue #844)', () => {
-      let carousel = ons._util.createElement(`
+      const carousel = ons._util.createElement(`
         <ons-carousel>
           <ons-carousel-item>
             <ons-carousel>
@@ -325,7 +325,7 @@ describe('OnsCarouselElement', () => {
         </ons-carousel>
       `);
 
-      let rv = carousel._getCarouselItemElements();
+      const rv = carousel._getCarouselItemElements();
       expect(rv.length).to.equal(1);
     });
   });
@@ -351,7 +351,7 @@ describe('OnsCarouselElement', () => {
     it('should change the scroll value', () => {
       carousel.swipeable = true;
 
-      let scroll = carousel._scroll;
+      const scroll = carousel._scroll;
 
       carousel._lastDragEvent = ev;
       carousel._startMomentumScroll(ev);
@@ -379,8 +379,8 @@ describe('OnsCarouselElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-carousel>
         <ons-carousel-item>Item 1</ons-carousel-item>

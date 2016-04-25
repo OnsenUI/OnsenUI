@@ -274,18 +274,20 @@ class SwitchElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     switch(name) {
-    case 'modifier':
-      this._isMaterial = (current || '').indexOf('material') !== -1;
-      this._locations = locations[this._isMaterial ? 'material' : 'ios'];
-      ModifierUtil.onModifierChanged(last, current, this, scheme);
-      break;
-    case 'input-id':
-      this._checkbox.id = current;
-      break;
-    case 'checked':   // eslint-disable-line no-fallthrough
-      this._checkbox.checked = current !== null;
-    case 'disabled':
-      util.toggleAttribute(this._checkbox, name, current !== null);
+      case 'modifier':
+        this._isMaterial = (current || '').indexOf('material') !== -1;
+        this._locations = locations[this._isMaterial ? 'material' : 'ios'];
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'input-id':
+        this._checkbox.id = current;
+        break;
+      case 'checked':
+        this._checkbox.checked = current !== null;
+        util.toggleAttribute(this._checkbox, name, current !== null);
+        break;
+      case 'disabled':
+        util.toggleAttribute(this._checkbox, name, current !== null);
     }
   }
 }

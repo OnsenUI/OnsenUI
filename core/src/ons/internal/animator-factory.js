@@ -47,7 +47,7 @@ export default class AnimatorFactory {
   static parseAnimationOptionsString(jsonString) {
     try {
       if (typeof jsonString === 'string') {
-        let result = util.animationOptionsParse(jsonString);
+        const result = util.animationOptionsParse(jsonString);
         if (typeof result === 'object' && result !== null) {
           return result;
         } else {

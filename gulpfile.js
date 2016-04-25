@@ -244,7 +244,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe($.ngAnnotate({
         add: true,
         single_quotes: true // eslint-disable-line camelcase
-      })) 
+      }))
       .pipe($.sourcemaps.init())
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -486,7 +486,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))
     .on('error', function(e) {
-      console.log(e);
+      console.error(e);
       $.connect.serverClose();
     })
     .on('end', function() {

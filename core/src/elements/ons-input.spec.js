@@ -127,7 +127,7 @@ describe('OnsInputElement', () => {
 
   describe('input label', () => {
     it('assigns ID to the inner input element', () => {
-      let element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
+      const element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
       expect(element.querySelector('input').id).to.equal('myInput');
     });
 
@@ -141,7 +141,7 @@ describe('OnsInputElement', () => {
 
   describe('#type attribute', () => {
     it('creates checkbox', () => {
-      let element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
+      const element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
       expect(element.className).to.contain('checkbox');
       expect(element._input.className).to.contain('checkbox__input');
       expect(element._input.type).to.equal('checkbox');
@@ -165,7 +165,7 @@ describe('OnsInputElement', () => {
 
       element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"></ons-input><ons-input type="radio" name="radiogroup"></ons-input></div>');
       document.body.appendChild(element);
-      let r = element.querySelectorAll('ons-input[type=radio]');
+      const r = element.querySelectorAll('ons-input[type=radio]');
       expect(r[0].checked).to.be.false;
       expect(r[1].checked).to.be.false;
       r[0].checked = true;
@@ -189,7 +189,7 @@ describe('OnsInputElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-input');
+      const e = document.createElement('ons-input');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

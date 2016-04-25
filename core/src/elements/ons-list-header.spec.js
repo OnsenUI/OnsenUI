@@ -28,8 +28,8 @@ describe('ons-list-header', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-list-header>Content</ons-list-header>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -39,7 +39,7 @@ describe('ons-list-header', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-list-header');
+      const e = document.createElement('ons-list-header');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

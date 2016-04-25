@@ -605,21 +605,21 @@ class TabbarElement extends BaseElement {
   attachedCallback() { }
 
   _show() {
-    let currentPageElement = this._getCurrentPageElement();
+    const currentPageElement = this._getCurrentPageElement();
     if (currentPageElement) {
       currentPageElement._show();
     }
   }
 
   _hide() {
-    let currentPageElement = this._getCurrentPageElement();
+    const currentPageElement = this._getCurrentPageElement();
     if (currentPageElement) {
       currentPageElement._hide();
     }
   }
 
   _destroy() {
-    let pages = this._contentElement.children;
+    const pages = this._contentElement.children;
     for (let i = pages.length - 1; i >= 0; i--) {
       pages[i]._destroy();
     }

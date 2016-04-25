@@ -13,7 +13,11 @@
     "prefer-const": "warn",
     "block-scoped-var": "off",
     "camelcase": "error",
-    "no-console": "warn",
+    "no-console": ["warn",
+      {
+        allow: ["warn", "error"]
+      }
+    ],
     "curly": [
       "error",
       "all"
@@ -58,7 +62,10 @@
     "no-with": "error",
     "quotes": [
       "warn",
-      "single"
+      "single", {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
     ],
     "valid-typeof": "error",
     "wrap-iife": [

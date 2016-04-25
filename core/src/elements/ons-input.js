@@ -138,14 +138,14 @@ class InputElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    let helper = document.createElement('span');
+    const helper = document.createElement('span');
     helper.classList.add('_helper');
 
-    let container = document.createElement('label');
+    const container = document.createElement('label');
     container.appendChild(document.createElement('input'));
     container.appendChild(helper);
 
-    let label = document.createElement('span');
+    const label = document.createElement('span');
     label.classList.add('input-label');
 
     util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
