@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-beta.14
+----
+ * vendor: Add `MutationObserver` polyfill for older webviews.
+
 v2.0.0-beta.13
 ----
  * ons-lazy-repeat: Fixes issue on Safari.
