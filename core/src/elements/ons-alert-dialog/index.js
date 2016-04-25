@@ -215,9 +215,7 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      contentReady(this, () => this._compile());
-    }
+    contentReady(this, () => this._compile());
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -496,9 +494,6 @@ class AlertDialogElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
       this._mask.addEventListener('click', this._boundCancel, false);
     });
   }
