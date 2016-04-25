@@ -2179,9 +2179,9 @@ input:disabled + .switch__toggle {
   font-size: 24px;
   padding: 0;
   margin: 0;
-  line-height: 32px;
+  line-height: 26px;
   display: block;
-  height: 32px;
+  height: 28px;
 }
 .tab-bar__label {
   font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
