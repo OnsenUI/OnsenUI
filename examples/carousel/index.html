@@ -153,8 +153,12 @@
     </ons-carousel>
 
     <ons-bottom-toolbar>
-      <ons-toolbar-button style="float:right" ng-click="carousel.next()">Next</ons-toolbar-button>
-      <ons-toolbar-button style="float:left" ng-click="carousel.prev()">Prev</ons-toolbar-button>
+      <div style="float:right" ng-click="carousel.next()">
+        <ons-button modifier="quiet">Next</ons-button>
+      </div>
+      <div style="float:left" ng-click="carousel.prev()">
+        <ons-button modifier="quiet">Prev</ons-button>
+      </div>
     </ons-bottom-toolbar>
   </ons-template>
 
@@ -202,25 +206,25 @@
       <div class="center"></div>
     </ons-toolbar>
 
-    <ons-carousel swipeable style="margin-top: 5px; height: 70px;" overscrollable auto-scroll item-width="70px">
+    <ons-carousel auto-refresh swipeable style="margin-top: 5px; height: 70px;" overscrollable auto-scroll item-width="70px">
       <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
         <div style="background-color: #ccc; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
       </ons-carousel-item>
     </ons-carousel>
 
-    <ons-carousel swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
       <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
         <div style="background-color: #ddd; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
       </ons-carousel-item>
     </ons-carousel>
 
-    <ons-carousel swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
       <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
         <div style="background-color: #ccc; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
       </ons-carousel-item>
     </ons-carousel>
 
-    <ons-carousel swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
       <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
         <div style="background-color: #ddd; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
       </ons-carousel-item>
@@ -318,7 +322,7 @@
         <div class="left"><ons-back-button>Back</ons-back-button></div>
         <div class="center">Example7</div>
       </ons-toolbar>
-      <ons-carousel swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
+      <ons-carousel auto-refresh swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
         <ons-carousel-item ng-repeat="i in [0,1]">
           <ons-list>
             <ons-list-item ng-repeat="j in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
