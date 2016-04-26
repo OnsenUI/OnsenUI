@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-beta.15
 ----
  * ons-carousel: Fix rendering glitch on Android 4.1.
+ * core: Fix broken validation on Android 4.1.
 
 v2.0.0-beta.14
 ----
