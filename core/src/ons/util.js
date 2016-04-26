@@ -336,8 +336,12 @@ const isOfType = (object, type) => {
   if (object === null) {
     return type === 'null';
   }
-  return ((typeof type === 'function' || type instanceof Function) && object instanceof type) ||
-         (typeof type === 'string' && typeof object === type);
+
+  try {
+    return object instanceof type;
+  } catch (e) {
+    return typeof type === 'string' && typeof object === type;
+  }
 };
 
 const _printType = type => {
