@@ -181,35 +181,24 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#setActionCallback()', () => {
-    it('sets a callback', () => {
-      const cb = () => null;
-
-      pullHook.setActionCallback(cb);
-      expect(pullHook._callback).to.equal(cb);
-    });
-  });
-
-  describe('#_waitForAction()', () => {
-    it('calls the argument', () => {
+  describe('#_finish()', () => {
+    it('calls the onAction if it exists', () =>{
       const spy = chai.spy();
-      pullHook._waitForAction(spy);
+      pullHook.onAction = spy;
+      pullHook._finish();
       expect(spy).to.have.been.called.once;
     });
 
-    it('calls the callback if it exists', () =>{
-      const spy = chai.spy();
-      pullHook.setActionCallback(spy);
-      pullHook._waitForAction(() => null);
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
-  describe('#_onDone()', () => {
-    it('translates the pull hook', () => {
+    it('translates to the pull hook when called', () =>{
       const spy = chai.spy.on(pullHook, '_translateTo');
-      pullHook._onDone();
+      pullHook.onAction = () => null;
+      pullHook._finish();
       expect(spy).to.have.been.called.once;
+    });
+
+    it('changes the state', () =>{
+      pullHook._finish();
+      expect(pullHook.state).to.equal('initial');
     });
   });
 

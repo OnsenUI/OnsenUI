@@ -6,6 +6,7 @@ v2.0.0-beta.15
 ----
  * ons-carousel: Fix rendering glitch on Android 4.1.
  * core: Fix broken validation on Android 4.1.
+ * ons-pull-hook: Update API (property `onAction` instead of `setActionCallback` method).
 
 v2.0.0-beta.14
 ----
@@ -485,4 +486,3 @@ v1.1.2
  * ons-tabbar: Added tabbar.loadPage(), tabbar.getActiveTabIndex().
  * ons-tabbar: Changed tab-change behaivior to be cancelable with event.cancel() method on 'prechange' events.
  * ons-tabbar: Added 'animation' attribute and TabbarView.registerAnimator() to use tabbar animation on loading.
-
