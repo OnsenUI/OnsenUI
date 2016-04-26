@@ -963,6 +963,11 @@ class CarouselElement extends BaseElement {
     this._setupInitialIndex();
 
     this._saveLastState();
+
+    // Fix rendering glitch on Android 4.1
+    if (this.offsetHeight === 0) {
+      setImmediate(() => this.refresh());
+    }
   }
 
   attributeChangedCallback(name, last, current) {
