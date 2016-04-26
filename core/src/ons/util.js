@@ -336,7 +336,7 @@ const isOfType = (object, type) => {
   if (object === null) {
     return type === 'null';
   }
-  return (type instanceof Function && object instanceof type) ||
+  return ((typeof type === 'function' || type instanceof Function) && object instanceof type) ||
          (typeof type === 'string' && typeof object === type);
 };
 
