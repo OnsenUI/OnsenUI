@@ -45,11 +45,9 @@ const STATE_ACTION = 'action';
  * </ons-page>
  *
  * <script>
- *   var loadStuff = function(done) {
+ *   document.querySelector('ons-pull-hook').onAction = function(done) {
  *     setTimeout(done, 1000);
  *   };
- *
- *   document.querySelector('ons-pull-hook').setActionCallback(loadStuff);
  * </script>
  */
 class PullHookElement extends BaseElement {
@@ -194,12 +192,7 @@ class PullHookElement extends BaseElement {
     if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
       event.gesture.stopDetect();
 
-      setImmediate(() => {
-        this._setState(STATE_ACTION);
-        this._translateTo(this.height, {animate: true});
-
-        this._waitForAction(this._onDone.bind(this));
-      });
+      setImmediate(() => this._finish());
     } else if (scroll >= this.height) {
       this._setState(STATE_PREACTION);
     } else {
@@ -227,11 +220,7 @@ class PullHookElement extends BaseElement {
       const scroll = this._currentTranslation;
 
       if (scroll > this.height) {
-        this._setState(STATE_ACTION);
-
-        this._translateTo(this.height, {animate: true});
-
-        this._waitForAction(this._onDone.bind(this));
+        this._finish();
       } else {
         this._translateTo(0, {animate: true});
       }
@@ -239,30 +228,21 @@ class PullHookElement extends BaseElement {
   }
 
   /**
-   * @method setActionCallback
-   * @signature setActionCallback(callback)
+   * @property onAction
+   * @type {Function}
    * @description
-   *   [en]Define the function that will be called in the `"action"` state.[/en]
+   *   [en]This will be called in the `action` state if it exists. The function will be given a `done` callback as it's first argument.[/en]
    *   [ja][/ja]
-   * @param {Function} callback
    */
-  setActionCallback(callback) {
-    this._callback = callback;
-  }
 
-  _waitForAction(done) {
-    if (this._callback instanceof Function) {
-      this._callback.call(null, done);
-    } else {
-      done();
-    }
-
-  }
-
-  _onDone(done) {
-    // Check if the pull hook still exists.
-    this._translateTo(0, {animate: true});
-    this._setState(STATE_INITIAL);
+  _finish() {
+    this._setState(STATE_ACTION);
+    this._translateTo(this.height, {animate: true});
+    const action = this.onAction || (done => done());
+    action(() => {
+      this._translateTo(0, {animate: true});
+      this._setState(STATE_INITIAL);
+    });
   }
 
   /**
