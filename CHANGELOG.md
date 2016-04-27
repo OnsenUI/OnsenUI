@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.0
 ----
+ * ons-input: Fix behavior of `checked` attribute.
 
 v2.0.0-beta.15
 ----
