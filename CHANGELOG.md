@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.0
+----
+
 v2.0.0-beta.15
 ----
  * ons-carousel: Fix rendering glitch on Android 4.1.
