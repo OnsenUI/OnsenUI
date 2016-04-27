@@ -24,6 +24,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.popover': 'popover--*',
@@ -197,31 +198,33 @@ class PopoverElement extends BaseElement {
    */
 
   get _mask() {
-    return this.children[0];
+    return util.findChild(this, '.popover-mask');
   }
 
   get _popover() {
-    return this.children[1];
+    return util.findChild(this, '.popover__container');
   }
 
   get _content() {
-    return this._popover.children[0];
+    return util.findChild(this._popover, '.popover__content');
   }
 
   get _arrow() {
-    return this._popover.children[1];
+    return util.findChild(this._popover, '.popover__arrow');
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+
+      this._initAnimatorFactory();
+    });
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
     this._boundCancel = this._cancel.bind(this);
-
-    this._initAnimatorFactory();
   }
 
   _initAnimatorFactory() {
@@ -322,14 +325,33 @@ class PopoverElement extends BaseElement {
 
     this.classList.add('popover');
 
-    const template = templateSource.cloneNode(true);
-    const content = template.querySelector('.popover__content');
+    const hasDefaultContainer = this._popover && this._content;
 
-    while (this.childNodes[0]) {
-      content.appendChild(this.childNodes[0]);
+    if (hasDefaultContainer) {
+
+      if (!this._mask) {
+        const mask = document.createElement('div');
+        mask.classList.add('popover-mask');
+        this.insertBefore(mask, this.firstChild);
+      }
+
+      if (!this._arrow) {
+        const arrow = document.createElement('div');
+        arrow.classList.add('popover__arrow');
+        this._popover.appendChild(arrow);
+      }
+
+    } else {
+
+      const template = templateSource.cloneNode(true);
+      const content = template.querySelector('.popover__content');
+
+      while (this.childNodes[0]) {
+        content.appendChild(this.childNodes[0]);
+      }
+
+      this.appendChild(template);
     }
-
-    this.appendChild(template);
 
     if (this.hasAttribute('style')) {
       this._popover.setAttribute('style', this.getAttribute('style'));
@@ -513,29 +535,33 @@ class PopoverElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
-    this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
+    contentReady(this, () => {
+      this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
 
-    this._mask.addEventListener('click', this._boundCancel, false);
+      this._mask.addEventListener('click', this._boundCancel, false);
 
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
-    this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
-    this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
+      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-    window.addEventListener('resize', this._boundOnChange, false);
+      window.addEventListener('resize', this._boundOnChange, false);
+    });
   }
 
   detachedCallback() {
-    this._mask.removeEventListener('click', this._boundCancel, false);
+    contentReady(this, () => {
+      this._mask.removeEventListener('click', this._boundCancel, false);
 
-    this._backButtonHandler.destroy();
-    this._backButtonHandler = null;
+      this._backButtonHandler.destroy();
+      this._backButtonHandler = null;
 
-    this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-    this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-    window.removeEventListener('resize', this._boundOnChange, false);
+      window.removeEventListener('resize', this._boundOnChange, false);
+    });
   }
 
   attributeChangedCallback(name, last, current) {
