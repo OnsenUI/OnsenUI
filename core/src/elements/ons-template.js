@@ -19,7 +19,7 @@ import BaseElement from 'ons/base-element';
 
 /**
  * @element ons-template
- * @category util
+ * @category template
  * @description
  *   [en]
  *     Define a separate HTML fragment and use as a template.

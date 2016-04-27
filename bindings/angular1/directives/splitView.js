@@ -1,6 +1,6 @@
 /**
  * @element ons-split-view
- * @category control
+ * @category split-view
  * @description
  *  [en]Divides the screen into a left and right section.[/en]
  *  [ja]画面を左右に分割するコンポーネントです。[/ja]
