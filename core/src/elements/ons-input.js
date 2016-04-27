@@ -32,7 +32,6 @@ const INPUT_ATTRIBUTES = [
   'autocomplete',
   'autocorrect',
   'autofocus',
-  'checked',
   'disabled',
   'inputmode',
   'max',
@@ -133,6 +132,8 @@ class InputElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+
+    this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
   }
 
   _compile() {
@@ -202,6 +203,8 @@ class InputElement extends BaseElement {
       return this._updateLabel();
     } if (name === 'input-id') {
       this._input.id = current;
+    } if (name === 'checked') {
+      this.checked = current !== null;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return this._updateBoundAttributes();
