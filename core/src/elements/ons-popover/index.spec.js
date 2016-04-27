@@ -4,12 +4,14 @@ describe('OnsPopoverElement', () => {
   let popover, target;
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
-  beforeEach(() => {
-    popover = new OnsPopoverElement();
+  beforeEach(done => {
+    popover = ons._util.createElement('<ons-popover>content</ons-popover>');
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);
     document.body.appendChild(popover);
+
+    ons._contentReady(popover, done);
   });
 
   afterEach(() => {
@@ -237,7 +239,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'mask-color\' attribute', () => {
-    const popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
+    const popover = ons._util.createElement('<ons-popover mask-color="red">contents</ons-popover>');
     expect(popover._mask.style.backgroundColor).to.equal('red');
   });
 
@@ -264,7 +266,7 @@ describe('OnsPopoverElement', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
-      div1.innerHTML = '<ons-popover></ons-popover>';
+      div1.innerHTML = '<ons-popover>contents</ons-popover>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
@@ -273,8 +275,8 @@ describe('OnsPopoverElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      const e = document.createElement('ons-popover');
-      expect(e.getAttribute('modifier')).to.equal('material');
+      const element = ons._util.createElement('<ons-popover>contents</ons-popover>');
+      expect(element.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
   });
