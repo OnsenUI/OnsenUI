@@ -253,10 +253,6 @@ class TabbarElement extends BaseElement {
     var top = this._top = position === 'top' || (position === 'auto' && platform.isAndroid());
     var action = top ? util.addModifier : util.removeModifier;
 
-    var content = util.findChild(this, '.tab-bar__content');
-    var tabbar = util.findChild(this, '.tab-bar');
-
-    top && content.setAttribute('no-status-bar-fill', '');
     action(this, 'top');
 
     var page = util.findParent(this, 'ons-page');
@@ -268,10 +264,10 @@ class TabbarElement extends BaseElement {
       }
     }
 
-    top && internal.shouldFillStatusBar(this).then(
-      () => this.setAttribute('status-bar-fill', ''),
-      () => this.removeAttribute('status-bar-fill')
-    );
+    internal.autoStatusBarFill(() => {
+      const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'));
+      util.toggleAttribute(this, 'status-bar-fill', top && !filled);
+    });
   }
 
   _getTabbarElement() {

@@ -6,6 +6,7 @@ v2.0.0-rc.0
 ----
  * ons-input: Fix behavior of `checked` attribute.
  * ons-popover: Fix glitch on iOS for bottom popover.
+ * core: Fix [#1340](https://github.com/OnsenUI/OnsenUI/issues/1340) (auto status bar fill issue).
 
 v2.0.0-beta.15
 ----

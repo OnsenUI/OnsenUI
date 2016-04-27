@@ -38,7 +38,7 @@ internal.isEnabledAutoStatusBarFill = () => {
  * @param {String} html
  * @return {String}
  */
-internal.normalizePageHTML = (html) => {
+internal.normalizePageHTML = html => {
   html = ('' + html).trim();
 
   if (!html.match(/^<ons-page/)) {
@@ -48,7 +48,7 @@ internal.normalizePageHTML = (html) => {
   return html;
 };
 
-internal.waitDOMContentLoaded = (callback) => {
+internal.waitDOMContentLoaded = callback => {
   if (window.document.readyState === 'loading' || window.document.readyState == 'uninitialized') {
     window.document.addEventListener('DOMContentLoaded', callback);
   } else {
@@ -56,44 +56,21 @@ internal.waitDOMContentLoaded = (callback) => {
   }
 };
 
-/**
- * @param {HTMLElement} element
- * @return {Boolean}
- */
-internal.shouldFillStatusBar = (element) => {
-  const checkStatusBar = () => {
-    if (internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above()) {
-      if (!(element instanceof HTMLElement)) {
-        throw new Error('element must be an instance of HTMLElement');
-      }
-
-      for (;;) {
-        if (element.hasAttribute('no-status-bar-fill')) {
-          return false;
-        }
-
-        element = element.parentNode;
-        if (!element || !element.hasAttribute) {
-          return true;
-        }
-      }
+internal.autoStatusBarFill = action => {
+  const onReady = () => {
+    if (internal.shouldFillStatusBar()) {
+      action();
     }
-    return false;
   };
 
-  return new Promise(function(resolve, reject) {
-    if (typeof device === 'object') {
-      document.addEventListener('deviceready', () => {
-        if (checkStatusBar()) {
-          resolve();
-        }
-      });
-    } else if (checkStatusBar()) {
-      resolve();
-    }
-    reject();
-  });
+  if (typeof device === 'object') {
+    document.addEventListener('deviceready', onReady);
+  } else {
+    onReady();
+  }
 };
+
+internal.shouldFillStatusBar = () => internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above();
 
 internal.templateStore = {
   _storage: {},
