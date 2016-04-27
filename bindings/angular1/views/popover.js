@@ -64,7 +64,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(PopoverView);
-    $onsen.derivePropertiesFromElement(PopoverView, ['cancelable', 'disabled', 'backButtonHandler']);
+    $onsen.derivePropertiesFromElement(PopoverView, ['cancelable', 'disabled', 'onDeviceBackButton']);
 
 
     return PopoverView;

@@ -1,7 +1,7 @@
 'use strict';
 
 describe('ons.pageAttributeExpression', () => {
-  let pae = ons.pageAttributeExpression;
+  const pae = ons.pageAttributeExpression;
 
   describe('#defineVariable()', () => {
     it('should define a variable', () => {
@@ -46,7 +46,7 @@ describe('ons.pageAttributeExpression', () => {
       pae.defineVariable('hoge', 'fuga');
       pae.defineVariable('foo', 'bar');
 
-      let variables = pae.getAllVariables();
+      const variables = pae.getAllVariables();
       expect(variables.hoge).to.equal('fuga');
       expect(variables.foo).to.equal('bar');
       pae.removeVariable('hoge');
@@ -76,7 +76,7 @@ describe('ons.pageAttributeExpression', () => {
     });
 
     it('splits the string into tokens', () => {
-      let rv = pae._parsePart('${hoge}${foo}.html');
+      const rv = pae._parsePart('${hoge}${foo}.html');
       expect(rv[0]).to.equal('${hoge}');
       expect(rv[1]).to.equal('${foo}');
       expect(rv[2]).to.equal('.html');
@@ -136,36 +136,36 @@ describe('ons.pageAttributeExpression', () => {
     });
 
     it('returns a list of pages', () => {
-      let rv = pae.evaluate('page1.html, page2.html');
+      const rv = pae.evaluate('page1.html, page2.html');
       expect(rv.length).to.equal(2);
       expect(rv[0]).to.equal('page1.html');
       expect(rv[1]).to.equal('page2.html');
     });
 
     it('replaces ${hoge} with the value of "hoge"', () => {
-      let rv = pae.evaluate('${hoge}.html');
+      const rv = pae.evaluate('${hoge}.html');
       expect(rv[0]).to.equal('fuga.html');
     });
 
     it('replaces ${foo} with the return volue of "foo"', () => {
-      let rv = pae.evaluate('${foo}.html');
+      const rv = pae.evaluate('${foo}.html');
       expect(rv[0]).to.equal('bar.html');
     });
 
     it('supports multiple interpolations in one string', () => {
-      let rv = pae.evaluate('${foo}${hoge}.html, ${hoge}${foo}.html');
+      const rv = pae.evaluate('${foo}${hoge}.html, ${hoge}${foo}.html');
       expect(rv[0]).to.equal('barfuga.html');
       expect(rv[1]).to.equal('fugabar.html');
     });
 
     it('supports leading and trailing whitespaces', () => {
-      let rv = pae.evaluate(' ${foo}${hoge}.html, ${hoge}${foo}.html ');
+      const rv = pae.evaluate(' ${foo}${hoge}.html, ${hoge}${foo}.html ');
       expect(rv[0]).to.equal('barfuga.html');
       expect(rv[1]).to.equal('fugabar.html');
     });
 
     it('requires a valid string', () => {
-      let invalidArguments = [
+      const invalidArguments = [
         ',hoge.html',
         'hoge.html,',
         'hoge.html,,fuga.html',

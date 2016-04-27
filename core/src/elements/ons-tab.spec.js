@@ -24,7 +24,7 @@ describe('OnsTabElement', () => {
 
   describe('modifier attribute', () => {
     it('modifies the classList of the tab', () => {
-      let parent = ons._util.createElement(`
+      const parent = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -61,7 +61,7 @@ describe('OnsTabElement', () => {
     it('sets whether a tab should be active or not', () => {
       expect(element.hasAttribute('active')).not.to.be.true;
 
-      let tabbar = ons._util.createElement(`
+      const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -81,7 +81,7 @@ describe('OnsTabElement', () => {
 
   describe('icon attribute', () => {
     it('sets icon name for the tab', done => {
-      let tabbar = ons._util.createElement(`
+      const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -109,7 +109,7 @@ describe('OnsTabElement', () => {
 
   describe('label attribute', () => {
     it('sets label name for the tab', done => {
-      let tabbar = ons._util.createElement(`
+      const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -153,7 +153,7 @@ describe('OnsTabElement', () => {
     it('should be an \'ons-tabbar\' element', () => {
       expect(() => element._ensureElementPosition()).to.throw('This ons-tab element is must be child of ons-tabbar element.');
 
-      let parent = ons._util.createElement(`
+      const parent = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -169,7 +169,7 @@ describe('OnsTabElement', () => {
     });
 
   it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
-      let tabbar = ons._util.createElement(`
+      const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
       `);
@@ -203,7 +203,7 @@ describe('OnsTabElement', () => {
         </ons-tab>
       `);
 
-      let myFunction = (value) => {
+      const myFunction = (value) => {
         expect(value).to.equal(element._pageElement);
         done();
       };
@@ -214,17 +214,17 @@ describe('OnsTabElement', () => {
 
   describe('#setActive()', () => {
     it('will set the tab as active', done => {
-      let tabbar = ons._util.createElement(`
+      const tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>
         </ons-tabbar>
       `);
 
-      let template1 = ons._util.createElement(`
+      const template1 = ons._util.createElement(`
         <ons-template id="page1"><ons-page></ons-page></ons-template>
       `);
 
-      let template2 = ons._util.createElement(`
+      const template2 = ons._util.createElement(`
         <ons-template id="page2"><ons-page></ons-page></ons-template>
       `);
 
@@ -233,8 +233,8 @@ describe('OnsTabElement', () => {
       document.body.appendChild(template2);
 
       setImmediate(() => {
-        let tab1 = tabbar.querySelector('#tab1');
-        let tab2 = tabbar.querySelector('#tab2');
+        const tab1 = tabbar.querySelector('#tab1');
+        const tab2 = tabbar.querySelector('#tab2');
         expect(tabbar.getActiveTabIndex()).to.equal(-1);
 
         tab1.setActive();

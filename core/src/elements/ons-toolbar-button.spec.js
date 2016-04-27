@@ -23,11 +23,21 @@ describe('ons-toolbar-button', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-toolbar-button>Back</ons-toolbar-button>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
+
+  describe('#disabled', () => {
+    it('changes the "disabled" attribute', () => {
+      var element = new OnsToolbarButton();
+
+      expect(element.hasAttribute('disabled')).to.be.false;
+      element.disabled = true;
+      expect(element.hasAttribute('disabled')).to.be.true;
     });
   });
 

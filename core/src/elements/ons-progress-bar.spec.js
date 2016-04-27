@@ -46,14 +46,14 @@ describe('OnsProgressBarElement', () => {
 
   describe('#_updateValue()', () => {
     it('is called when the "value" attribute is changed', () => {
-      let spy = chai.spy.on(progress, '_updateValue');
+      const spy = chai.spy.on(progress, '_updateValue');
 
       progress.setAttribute('value', '10');
       expect(spy).to.have.been.called.once;
     });
 
     it('is called when the "secondary-value" attribute is changed', () => {
-      let spy = chai.spy.on(progress, '_updateValue');
+      const spy = chai.spy.on(progress, '_updateValue');
 
       progress.setAttribute('secondary-value', '10');
       expect(spy).to.have.been.called.once;
@@ -69,8 +69,8 @@ describe('OnsProgressBarElement', () => {
     });
 
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-progress-bar></ons-progress-bar>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;

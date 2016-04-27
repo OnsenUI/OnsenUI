@@ -24,23 +24,24 @@ const scheme = {
  * @element ons-speed-dial
  * @category speeddial
  * @description
- *   [en]Element that displays a Material Design Speed Dialog component.[/en]
- *   [ja]Material DesignのSpeed dialコンポーネントを表現する要素です。[/ja]
+ *   [en]
+ *     Element that displays a Material Design Speed Dialog component. It is useful when there are more than one primary action that can be performed in a page.
+ *
+ *     The Speed dial looks like a `<ons-fab>` element but will expand a menu when tapped.
+ *   [/en]
+ *   [ja][/ja]
  * @codepen dYQYLg
  * @seealso ons-speed-dial-item
- *   [en]ons-speed-dial-item component[/en]
+ *   [en]The `<ons-speed-dial-item>` represents a menu item.[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]
  * @example
  * <ons-speed-dial position="left bottom">
- *   <ons-icon
- *     icon="fa-twitter"
- *     size="26px"
- *     fixed-width="false"
- *     style="vertical-align:middle;">
- *   </ons-icon>
- *   <ons-speed-dial-item><ons-ripple></ons-ripple>C</ons-speed-dial-item>
- *   <ons-speed-dial-item><ons-ripple></ons-ripple>B</ons-speed-dial-item>
- *   <ons-speed-dial-item><ons-ripple></ons-ripple>A</ons-speed-dial-item>
+ *   <ons-fab>
+ *     <ons-icon icon="fa-twitter"></ons-icon>
+ *   </ons-fab>
+ *   <ons-speed-dial-item>A</ons-speed-dial-item>
+ *   <ons-speed-dial-item>B</ons-speed-dial-item>
+ *   <ons-speed-dial-item>C</ons-speed-dial-item>
  * </ons-speed-dial>
  */
 class SpeedDialElement extends BaseElement {
@@ -317,8 +318,8 @@ class SpeedDialElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the speed dial is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     if (value) {
@@ -340,8 +341,8 @@ class SpeedDialElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the component is inline or not.[/en]
-   *   [ja]この要素がインライン要素かどうか。[/ja]
+   *   [en]Whether the element is inline or not.[/en]
+   *   [ja]インライン要素の場合に`true`。[/ja]
    */
   get inline() {
     return this.hasAttribute('inline');
@@ -352,8 +353,8 @@ class SpeedDialElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [en]Whether the element is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this._shown && this.style.display !== 'none';

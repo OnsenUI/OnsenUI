@@ -92,9 +92,6 @@ class PageElement extends BaseElement {
    *   [en]Fired right after the page is attached.[/en]
    *   [ja]ページがアタッチされた後に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.page
-   *   [en]Page object.[/en]
-   *   [ja]ページのオブジェクト。[/ja]
    */
 
   /**
@@ -103,9 +100,6 @@ class PageElement extends BaseElement {
    *   [en]Fired right after the page is shown.[/en]
    *   [ja]ページが表示された後に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.page
-   *   [en]Page object.[/en]
-   *   [ja]ページのオブジェクト。[/ja]
    */
 
   /**
@@ -114,9 +108,6 @@ class PageElement extends BaseElement {
    *   [en]Fired right after the page is hidden.[/en]
    *   [ja]ページが隠れた後に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.page
-   *   [en]Page object.[/en]
-   *   [ja]ページのオブジェクト。[/ja]
    */
 
   /**
@@ -125,9 +116,6 @@ class PageElement extends BaseElement {
    *   [en]Fired right before the page is destroyed.[/en]
    *   [ja]ページが破棄される前に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.page
-   *   [en]Page object.[/en]
-   *   [ja]ページのオブジェクト。[/ja]
    */
 
   /**
@@ -158,9 +146,6 @@ class PageElement extends BaseElement {
       this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
-      this.eventDetail = {
-        page: this
-      };
       this.pushedOptions = {};
     });
   }
@@ -171,7 +156,7 @@ class PageElement extends BaseElement {
         if (this._skipInit) {
           this.removeAttribute('_skipinit');
         } else {
-          setImmediate(() => util.triggerElementEvent(this, 'init', this.eventDetail));
+          setImmediate(() => util.triggerElementEvent(this, 'init'));
         }
       }
 
@@ -187,13 +172,9 @@ class PageElement extends BaseElement {
     });
   }
 
-  updateBackButton(shouldShowButton) {
+  updateBackButton(show) {
     if (this.backButton) {
-      if (shouldShowButton) {
-        this.backButton.show();
-      } else {
-        this.backButton.hide();
-      }
+      show ? this.backButton.show() : this.backButton.hide();
     }
   }
 
@@ -206,7 +187,7 @@ class PageElement extends BaseElement {
   }
 
   get backButton() {
-    return util.findChildRecursively(this, 'ons-back-button');
+    return this.querySelector('ons-back-button');
   }
 
   _tryToFillStatusBar(){
@@ -255,17 +236,17 @@ class PageElement extends BaseElement {
 
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @type {Object}
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  set backButtonHandler(callback) {
+  set onDeviceBackButton(callback) {
     if (this._backButtonHandler) {
       this._backButtonHandler.destroy();
     }
@@ -398,7 +379,7 @@ class PageElement extends BaseElement {
       this._isShown = true;
 
       if (!this._isMuted) {
-        util.triggerElementEvent(this, 'show', this.eventDetail);
+        util.triggerElementEvent(this, 'show');
       }
 
       util.propagateAction(this._contentElement, '_show');
@@ -410,7 +391,7 @@ class PageElement extends BaseElement {
       this._isShown = false;
 
       if (!this._isMuted) {
-        util.triggerElementEvent(this, 'hide', this.eventDetail);
+        util.triggerElementEvent(this, 'hide');
       }
 
       util.propagateAction(this._contentElement, '_hide');
@@ -421,20 +402,16 @@ class PageElement extends BaseElement {
     this._hide();
 
     if (!this._isMuted) {
-      util.triggerElementEvent(this, 'destroy', this.eventDetail);
+      util.triggerElementEvent(this, 'destroy');
     }
 
-    if (this.backButtonHandler) {
-      this.backButtonHandler.destroy();
+    if (this.onDeviceBackButton) {
+      this.onDeviceBackButton.destroy();
     }
 
     util.propagateAction(this._contentElement, '_destroy');
 
     this.remove();
-  }
-
-  get name() {
-    return this._name;
   }
 
   /**

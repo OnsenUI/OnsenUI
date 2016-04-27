@@ -113,11 +113,11 @@ class ProgressCircularElement extends BaseElement {
 
   _updateValue() {
     if (this.hasAttribute('value')) {
-      let per = Math.ceil(this.getAttribute('value') * 251.32 * 0.01);
+      const per = Math.ceil(this.getAttribute('value') * 251.32 * 0.01);
       this._primary.style['stroke-dasharray'] = per + '%, 251.32%';
     }
     if (this.hasAttribute('secondary-value')) {
-      let per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
+      const per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
       this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
     }
   }

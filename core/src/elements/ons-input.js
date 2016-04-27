@@ -331,7 +331,7 @@ class InputElement extends BaseElement {
    * @property checked
    * @type {Boolean}
    * @description
-   *   [en]This boolean specifies whether the input is checked or not. Only works for `radio` and `checkbox` type inputs.[/en]
+   *   [en]Whether the input is checked or not. Only works for `radio` and `checkbox` type inputs.[/en]
    *   [ja][/ja]
    */
   get checked() {
@@ -346,16 +346,11 @@ class InputElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the input is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the input is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {

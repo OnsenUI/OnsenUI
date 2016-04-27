@@ -41,11 +41,11 @@ describe('ons._animationOptionsParser', () => {
   });
 
   it('parses HTML attributes', () => {
-    let alertDialog = ons._util.createElement(
+    const alertDialog = ons._util.createElement(
       `<ons-alert-dialog animation="default" animation-options="{delay: 1, duration: 1, timing: 'ease-in'}">
       </ons-alert-dialog>`
     );
-    let spy = chai.spy.on(alertDialog._animatorFactory, 'newAnimator');
+    const spy = chai.spy.on(alertDialog._animatorFactory, 'newAnimator');
     alertDialog.show();
     expect(spy).to.have.been.called.with({animationOptions: {delay: 1, duration: 1, timing: 'ease-in'}});
     alertDialog.remove();

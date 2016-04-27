@@ -24,13 +24,19 @@ import Animator from './animator-css';
  * @element ons-ripple
  * @category form
  * @description
- *   [en]Adds a Material Design "ripple" effect to an element.[/en]
+ *   [en]
+ *     Adds a Material Design "ripple" effect to an element. The ripple effect will spread from the position where the user taps.
+ *
+ *     Some elements such as `<ons-button>` and `<ons-fab>`  support a `ripple` attribute.
+ *   [/en]
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
  * @example
  * <div class="my-div">
  *  <ons-ripple></ons-ripple>
  * </div>
+ *
+ * <ons-button ripple>Click me!</ons-button>
  */
 class RippleElement extends BaseElement {
 
@@ -226,8 +232,8 @@ class RippleElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the ripple is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);

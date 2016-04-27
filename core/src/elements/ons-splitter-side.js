@@ -181,7 +181,7 @@ class CollapseMode {
 
   _isOpenOtherSideMenu() {
     return util.arrayFrom(this._element.parentElement.children).some(e => {
-      return util.match(e, 'ons-splitter-side') && e !== this._element && e.isOpen();
+      return util.match(e, 'ons-splitter-side') && e !== this._element && e.isOpen;
     });
   }
 
@@ -240,14 +240,20 @@ class CollapseMode {
  * @element ons-splitter-side
  * @category splitter
  * @description
- *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
+ *  [en]
+ *    The `<ons-splitter-side>` element is used as a child element of `<ons-splitter>`.
+ *
+ *    It will be displayed on either the left or right side of the `<ons-splitte-content>` element.
+ *
+ *    It supports two modes: collapsed and split. When it's in collapsed mode it will be hidden from view and can be displayed when the user swipes the screen or taps a button. In split mode the element is always shown. It can be configured to automatically switch between the two modes depending on the screen size.
+ *  [/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
  * @seealso ons-splitter
- *  [en]ons-splitter component[/en]
+ *  [en]The `<ons-splitter>` is the parent component.[/en]
  *  [ja]ons-splitterコンポーネント[/ja]
  * @seealso ons-splitter-content
- *  [en]ons-splitter-content component[/en]
+ *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]
  * @example
  * <ons-splitter>
@@ -274,7 +280,7 @@ class SplitterSideElement extends BaseElement {
    *   [en]Component object.[/en]
    *   [ja]コンポーネントのオブジェクト。[/ja]
    * @param {String} event.mode
-   *   [en]Returns the current mode. Can be either "collapse" or "split".[/en]
+   *   [en]Returns the current mode. Can be either `"collapse"` or `"split"`.[/en]
    *   [ja]現在のモードを返します。[/ja]
    */
 
@@ -341,7 +347,7 @@ class SplitterSideElement extends BaseElement {
    * @type {String}
    * @default  default
    * @description
-   *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
+   *  [en]Specify the animation. Use one of `"overlay"`, and `"default"`.[/en]
    *  [ja]アニメーションを指定します。"overlay", "default"のいずれかを指定できます。[/ja]
    */
 
@@ -349,8 +355,8 @@ class SplitterSideElement extends BaseElement {
    * @attribute animation-options
    * @type {Expression}
    * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
-   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
   /**
@@ -358,7 +364,7 @@ class SplitterSideElement extends BaseElement {
    * @type {Number}
    * @default  0.3
    * @description
-   *  [en]Specify how much the menu needs to be swiped before opening. A value between 0 and 1.[/en]
+   *  [en]Specify how much the menu needs to be swiped before opening. A value between `0` and `1`.[/en]
    *  [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]
    */
 
@@ -367,10 +373,10 @@ class SplitterSideElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     Specify the collapse behavior. Valid values are "portrait", "landscape" or a media query.
-   *     "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation.
-   *     If the value is a media query, the view will collapse when the media query is true.
-   *     If the value is not defined, the view always be in "collapse" mode.
+   *     Specify the collapse behavior. Valid values are `"portrait"`, `"landscape"` or a media query.
+   *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.
+   *     If the value is a media query, the view will collapse when the media query resolves to `true`.
+   *     If the value is not defined, the view always be in `"collapse"` mode.
    *   [/en]
    *   [ja]
    *     左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。
@@ -392,16 +398,16 @@ class SplitterSideElement extends BaseElement {
    * @attribute width
    * @type {String}
    * @description
-   *   [en]Can be specified in either pixels or as a percentage, e.g. "90%" or "200px".[/en]
+   *   [en]Can be specified in either pixels or as a percentage, e.g. `90%` or `200px`.[/en]
    *   [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]
    */
 
   /**
    * @attribute side
    * @type {String}
-   * @default  left
+   * @default left
    * @description
-   *   [en]Specify which side of the screen the ons-splitter-side element is located on. Possible values are "left" and "right".[/en]
+   *   [en]Specify which side of the screen the `<ons-splitter-side>` element is located. Possible values are `"left"` and `"right"`.[/en]
    *   [ja]この要素が左か右かを指定します。指定できる値は"left"か"right"のみです。[/ja]
    */
 
@@ -409,7 +415,7 @@ class SplitterSideElement extends BaseElement {
    * @attribute mode
    * @type {String}
    * @description
-   *   [en]Current mode. Possible values are "collapse" or "split". This attribute is read only.[/en]
+   *   [en]Current mode. Possible values are `"collapse"` or `"split"`. This attribute is read only.[/en]
    *   [ja]現在のモードが設定されます。"collapse"もしくは"split"が指定されます。この属性は読み込み専用です。[/ja]
    */
 
@@ -418,7 +424,7 @@ class SplitterSideElement extends BaseElement {
    * @initonly
    * @type {String}
    * @description
-   *   [en]The url of the menu page.[/en]
+   *   [en]The URL of the menu page.[/en]
    *   [ja]ons-splitter-side要素に表示するページのURLを指定します。[/ja]
    */
 
@@ -573,16 +579,14 @@ class SplitterSideElement extends BaseElement {
   }
 
   /**
-   * @method isOpen
-   * @signature isOpen()
-   * @return {Boolean}
-   *   [en]true if the menu is open.[/en]
-   *   [ja]メニューが開いている場合はtrueとなります。[/ja]
+   * @property isOpen
+   * @type {Boolean}
+   * @readonly
    * @description
-   *   [en]Returns whether the popover is visible or not.[/en]
-   *   [ja]メニューが開いているかどうかを返します。[/ja]
+   *   [en]This value is `true` when the menu is open..[/en]
+   *   [ja][/ja]
    */
-  isOpen() {
+  get isOpen() {
     return this._collapseMode.isOpen();
   }
 
@@ -638,7 +642,7 @@ class SplitterSideElement extends BaseElement {
    *   [ja][/ja]
    */
   toggle(options = {}) {
-    return this.isOpen() ? this.close(options) : this.open(options);
+    return this.isOpen ? this.close(options) : this.open(options);
   }
 
   /**

@@ -542,7 +542,7 @@ input:disabled + .switch__toggle {
 }
 [disabled] > .range__left,
 .range--material:disabled + .range__left {
-  display: none;
+  visibility: hidden;
 }
 /* topdoc
   name: Material Range
@@ -2179,9 +2179,9 @@ input:disabled + .switch__toggle {
   font-size: 24px;
   padding: 0;
   margin: 0;
-  line-height: 32px;
+  line-height: 26px;
   display: block;
-  height: 32px;
+  height: 28px;
 }
 .tab-bar__label {
   font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -3415,6 +3415,7 @@ input:disabled + .switch__toggle {
     </ul>
 */
 .list__item__left {
+  min-height: 44px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -3442,6 +3443,7 @@ input:disabled + .switch__toggle {
   margin: 0;
 }
 .list__item__center {
+  min-height: 44px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -3493,6 +3495,7 @@ input:disabled + .switch__toggle {
   }
 }
 .list__item__right {
+  min-height: 44px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -3816,6 +3819,7 @@ input:disabled + .switch__toggle {
   transition: none;
 }
 .list__item--chevron:before {
+  min-height: 44px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

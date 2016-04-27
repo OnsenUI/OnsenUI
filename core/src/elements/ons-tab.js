@@ -46,7 +46,7 @@ const defaultInnerTemplateSource = util.createElement(`
  * @element ons-tab
  * @category tabbar
  * @description
- *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
+ *   [en]Represents a tab inside tab bar. Each `<ons-tab>` represents a page.[/en]
  *   [ja]
  *     タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。
  *     ons-tab要素の中には、タブに表示されるコンテンツを直接記述することが出来ます。
@@ -69,17 +69,15 @@ const defaultInnerTemplateSource = util.createElement(`
  *   [ja]ons-iconコンポーネント[/ja]
  * @example
  * <ons-tabbar>
- *   <ons-tab page="home.html" active="true">
- *     <ons-icon icon="ion-home"></ons-icon>
- *     <span style="font-size: 14px">Home</span>
+ *   <ons-tab
+ *     page="home.html"
+ *     label="Home"
+ *     active>
  *   </ons-tab>
- *   <ons-tab page="fav.html" active="true">
- *     <ons-icon icon="ion-star"></ons-icon>
- *     <span style="font-size: 14px">Favorites</span>
- *   </ons-tab>
- *   <ons-tab page="settings.html" active="true">
- *     <ons-icon icon="ion-gear-a"></ons-icon>
- *     <span style="font-size: 14px">Settings</span>
+ *   <ons-tab
+ *     page="settings.html"
+ *     label="Settings"
+ *     active>
  *   </ons-tab>
  * </ons-tabbar>
  *
@@ -87,13 +85,10 @@ const defaultInnerTemplateSource = util.createElement(`
  *   ...
  * </ons-template>
  *
- * <ons-template id="fav.html">
- *   ...
- * </ons-template>
- *
  * <ons-template id="settings.html">
  *   ...
  * </ons-template>
+
  */
 class TabElement extends BaseElement {
 
@@ -102,8 +97,8 @@ class TabElement extends BaseElement {
    * @initonly
    * @type {String}
    * @description
-   *   [en]The page that this <code>&lt;ons-tab&gt;</code> points to.[/en]
-   *   [ja]<code>&lt;ons-tab&gt;</code>が参照するページへのURLを指定します。[/ja]
+   *   [en]The page that is displayed when the tab is tapped.[/en]
+   *   [ja]ons-tabが参照するページへのURLを指定します。[/ja]
    */
 
   /**
@@ -111,11 +106,11 @@ class TabElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The icon name for the tab. Can specify the same icon name as <code>&lt;ons-icon&gt;</code>.
-   *     If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.
+   *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`.
+   *     If you need to use your own icon, create a CSS class with `background-image` or any CSS properties and specify the name of your CSS class here.
    *   [/en]
    *   [ja]
-   *     アイコン名を指定します。<code>&lt;ons-icon&gt;</code>と同じアイコン名を指定できます。
+   *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
    *     個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。
    *   [/ja]
    */
@@ -138,11 +133,9 @@ class TabElement extends BaseElement {
 
   /**
    * @attribute active
-   * @type {Boolean}
-   * @default false
    * @description
-   *   [en]Set whether this item should be active or not. Valid values are true and false.[/en]
-   *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+   *   [en]This attribute should be set to the tab that is active by default.[/en]
+   *   [ja][/ja]
    */
 
   createdCallback() {

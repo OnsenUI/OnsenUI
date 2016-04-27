@@ -75,7 +75,7 @@ const generateId = (() => {
  * @element ons-tabbar
  * @category tabbar
  * @description
- *   [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *   [en]A component to display a tab bar on the bottom of a page. Used with `<ons-tab>` to manage pages using tabs.[/en]
  *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar
@@ -91,32 +91,26 @@ const generateId = (() => {
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-tab
- *   [en]ons-tab component[/en]
+ *   [en]The `<ons-tab>` component.[/en]
  *   [ja]ons-tabコンポーネント[/ja]
  * @seealso ons-page
- *   [en]ons-page component[/en]
+ *   [en]The `<ons-page>` component.[/en]
  *   [ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
- *   <ons-tab page="home.html" active="true">
- *     <ons-icon icon="ion-home"></ons-icon>
- *     <span style="font-size: 14px">Home</span>
+ *   <ons-tab
+ *     page="home.html"
+ *     label="Home"
+ *     active>
  *   </ons-tab>
- *   <ons-tab page="fav.html" active="true">
- *     <ons-icon icon="ion-star"></ons-icon>
- *     <span style="font-size: 14px">Favorites</span>
- *   </ons-tab>
- *   <ons-tab page="settings.html" active="true">
- *     <ons-icon icon="ion-gear-a"></ons-icon>
- *     <span style="font-size: 14px">Settings</span>
+ *   <ons-tab
+ *     page="settings.html"
+ *     label="Settings"
+ *     active>
  *   </ons-tab>
  * </ons-tabbar>
  *
  * <ons-template id="home.html">
- *   ...
- * </ons-template>
- *
- * <ons-template id="fav.html">
  *   ...
  * </ons-template>
  *
@@ -182,7 +176,7 @@ class TabbarElement extends BaseElement {
    * @type {String}
    * @default none
    * @description
-   *   [en]Animation name. Preset values are "none", "slide" and "fade". Default is "none".[/en]
+   *   [en]Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`.[/en]
    *   [ja]ページ読み込み時のアニメーションを指定します。"none"、"fade"、"slide"のいずれかを選択できます。デフォルトは"none"です。[/ja]
    */
 
@@ -190,8 +184,8 @@ class TabbarElement extends BaseElement {
    * @attribute animation-options
    * @type {Expression}
    * @description
-   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
-   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
   /**
@@ -200,7 +194,7 @@ class TabbarElement extends BaseElement {
    * @type {String}
    * @default bottom
    * @description
-   *   [en]Tabbar's position. Preset values are "bottom" and "top". Use "auto" to choose position depending on platform (iOS bottom, Android top).[/en]
+   *   [en]Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top).[/en]
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
@@ -288,8 +282,8 @@ class TabbarElement extends BaseElement {
    * @method loadPage
    * @signature loadPage(url, [options])
    * @param {String} url
-   *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
-   *   [ja]pageのURLか、もしくは<code>&lt;ons-template&gt;</code>で宣言したid属性の値を利用できます。[/ja]
+   *   [en]Page URL. Can be either an HTML document or an `<ons-template>` id.[/en]
+   *   [ja]pageのURLか、もしくはons-templateで宣言したid属性の値を利用できます。[/ja]
    * @description
    *   [en]Displays a new page without changing the active index.[/en]
    *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
@@ -421,11 +415,11 @@ class TabbarElement extends BaseElement {
    *   [en]If true the page will not be changed.[/en]
    *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
-   *   [ja]アニメーション名を指定します。"fade"、"slide"、"none"のいずれかを指定できます。[/ja]
+   *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
+   *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
    *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
    *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
@@ -562,7 +556,7 @@ class TabbarElement extends BaseElement {
    * @signature setTabbarVisibility(visible)
    * @param {Boolean} visible
    * @description
-   *   [en][/en]
+   *   [en]Used to hide or show the tab bar.[/en]
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
@@ -611,21 +605,21 @@ class TabbarElement extends BaseElement {
   attachedCallback() { }
 
   _show() {
-    let currentPageElement = this._getCurrentPageElement();
+    const currentPageElement = this._getCurrentPageElement();
     if (currentPageElement) {
       currentPageElement._show();
     }
   }
 
   _hide() {
-    let currentPageElement = this._getCurrentPageElement();
+    const currentPageElement = this._getCurrentPageElement();
     if (currentPageElement) {
       currentPageElement._hide();
     }
   }
 
   _destroy() {
-    let pages = this._contentElement.children;
+    const pages = this._contentElement.children;
     for (let i = pages.length - 1; i >= 0; i--) {
       pages[i]._destroy();
     }

@@ -51,14 +51,6 @@
  */
 
 /**
- * @attribute on-action
- * @type {Expression}
- * @description
- *   [en]Same as <code>ng-action</code> but can be used without AngularJS. A function called <code>done</code> is available to call when action is complete.[/en]
- *   [ja]<code>ng-action</code>と同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には<code>done</code>関数を呼び出します。[/ja]
- */
-
-/**
  * @attribute ons-changestate
  * @initonly
  * @type {Expression}

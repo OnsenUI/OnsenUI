@@ -6,7 +6,7 @@ describe('OnsBackButtonElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
+    const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
 
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('back-button--hoge')).to.be.true;
@@ -23,7 +23,7 @@ describe('OnsBackButtonElement', () => {
   });
 
   it('has two children', () => {
-    let element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
+    const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
     document.body.appendChild(element);
 
     expect(element.children[0]).to.be.ok;
@@ -64,13 +64,13 @@ describe('OnsBackButtonElement', () => {
     });
 
     it('will pop a page', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('postpop', () => {
           resolve();
         });
 
         nav.pushPage('page2').then(function(page) {
-          let element = nav.querySelector('ons-back-button');
+          const element = nav.querySelector('ons-back-button');
           nav.querySelector('ons-back-button')._onClick();
         });
       });
@@ -81,8 +81,8 @@ describe('OnsBackButtonElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-back-button>Back</ons-back-button>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -92,7 +92,7 @@ describe('OnsBackButtonElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android', () => {
       ons.platform.select('android');
-      let e = ons._util.createElement('<ons-back-button>label</ons-back-button>');
+      const e = ons._util.createElement('<ons-back-button>label</ons-back-button>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

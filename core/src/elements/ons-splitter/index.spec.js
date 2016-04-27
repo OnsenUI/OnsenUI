@@ -73,8 +73,8 @@ describe('OnsSplitterElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-splitter>
           <ons-splitter-side side="left">Left</ons-splitter-side>

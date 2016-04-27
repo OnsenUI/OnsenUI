@@ -27,7 +27,7 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'isOpen', 'open', 'close', 'toggle'
+          'open', 'close', 'toggle'
         ]);
 
         this.load = (...args) => {
@@ -61,7 +61,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(SplitterSide);
-    $onsen.derivePropertiesFromElement(SplitterSide, ['page', 'mode']);
+    $onsen.derivePropertiesFromElement(SplitterSide, ['page', 'mode', 'isOpen']);
 
     return SplitterSide;
   });

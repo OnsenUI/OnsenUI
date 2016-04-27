@@ -89,9 +89,9 @@ class AnimatorCSS {
         if (!stopped) {
           timeout && clearTimeout(timeout);
 
-          let passed = (new Date()).getTime() - start;
-          let k = passed / duration;
-          let remaining = newDuration * (1 - k);
+          const passed = (new Date()).getTime() - start;
+          const  k = passed / duration;
+          const remaining = newDuration * (1 - k);
 
           properties.forEach(i => {
             el.style[i] = (1 - k) * initial[i] + k * final[i] + (i == 'opacity' ? '' : 'px');
@@ -126,7 +126,7 @@ class AnimatorCSS {
 
     var style = window.getComputedStyle(el);
     properties.forEach(e => {
-      let v = parseFloat(style.getPropertyValue(e));
+      const v = parseFloat(style.getPropertyValue(e));
       initial[e] = isNaN(v) ? 0 : v;
     });
 
