@@ -11,10 +11,12 @@ import {
   directives: [OnsPopover],
   template: `
     <ons-popover direction="up down" cancelable>
-      <div style="text-align: center; opacity: 0.5;">
-        <p>This is a popover!</p>
-        <p><small>Click the background to remove the popover.</small></p>
-      </div>
+      <div class="popover__container"><div class="popover__content">
+        <div style="text-align: center; opacity: 0.5;">
+          <p>This is a popover!</p>
+          <p><small>Click the background to remove the popover.</small></p>
+        </div>
+      </div></div>
     </ons-popover>
   `
 })
