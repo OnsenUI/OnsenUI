@@ -51,7 +51,7 @@ const INPUT_ATTRIBUTES = [
 
 /**
  * @element ons-input
- * @category form
+ * @category input
  * @modifier material
  *  [en]Displays a Material Design input.[/en]
  *  [ja][/ja]

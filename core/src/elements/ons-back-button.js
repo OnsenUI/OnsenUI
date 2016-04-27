@@ -29,7 +29,7 @@ var scheme = {
 
 /**
  * @element ons-back-button
- * @category page
+ * @category toolbar
  * @description
  *   [en]
  *     Back button component for `<ons-toolbar>`. Put it in the left part of the `<ons-toolbar>`.

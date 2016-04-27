@@ -25,7 +25,7 @@ const STATE_ACTION = 'action';
 
 /**
  * @element ons-pull-hook
- * @category page
+ * @category pull-hook
  * @description
  *   [en]
  *     Component that adds **Pull to refresh** functionality to an `<ons-page>` element.
