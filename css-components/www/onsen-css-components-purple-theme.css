@@ -1040,7 +1040,8 @@ input:disabled + .switch__toggle {
   background-image: none;
   border-bottom: none;
 }
-.navigation-bar--material__left {
+.navigation-bar--material__left,
+.navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
@@ -1074,19 +1075,12 @@ input:disabled + .switch__toggle {
 .navigation-bar--material__center:first-child {
   margin-left: 16px;
 }
-.navigation-bar--material__left:empty {
-  min-width: 16px;
+.navigation-bar--material__center:last-child {
+  margin-right: 16px;
 }
-.navigation-bar--material__right {
-  font-family: 'Roboto', 'Noto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 20px;
-  font-weight: 500;
-  color: #fff;
-  height: 56px;
-  width: auto;
-  float: initial;
-  line-height: 56px;
+.navigation-bar--material__left:empty,
+.navigation-bar--material__right:empty {
+  min-width: 16px;
 }
 /* topdoc
   name: Material Navigation Bar with Icons
@@ -5417,6 +5411,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .popover__container {
   width: 100%;
   height: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
 }
 .popover__content {
   -webkit-box-sizing: border-box;
@@ -5451,6 +5450,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-border-radius: 8px;
   border-radius: 8px;
   color: #1f1f21;
+  pointer-events: auto;
 }
 .popover__content > * {
   overflow: hidden;
