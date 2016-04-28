@@ -165,33 +165,21 @@ class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarItemElements() {
-    var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
-
-    for (var i = 0; i < this.childNodes.length; i++) {
+    for (let i = this.childNodes.length - 1; i >= 0 ; i--) {
       // case of not element
       if (this.childNodes[i].nodeType != 1) {
         this.removeChild(this.childNodes[i]);
       }
     }
 
-    var center = this._ensureToolbarElement('center');
+    const center = this._ensureToolbarElement('center');
     center.classList.add('navigation-bar__title');
 
-    if (!hasCenterClassElementOnly) {
-      var left = this._ensureToolbarElement('left');
-      var right = this._ensureToolbarElement('right');
+    if (this.children.length !== 1 || !this.children[0].classList.contains('center')) {
+      const left = this._ensureToolbarElement('left');
+      const right = this._ensureToolbarElement('right');
 
       if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
-        if (left.parentNode) {
-          this.removeChild(left);
-        }
-        if (center.parentNode) {
-          this.removeChild(center);
-        }
-        if (right.parentNode) {
-          this.removeChild(right);
-        }
-
         this.appendChild(left);
         this.appendChild(center);
         this.appendChild(right);
@@ -200,7 +188,7 @@ class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarElement(name) {
-    var element = util.findChild(this, '.' + name) || util.create('.' + name);
+    const element = util.findChild(this, '.' + name) || util.create('.' + name);
 
     element.classList.add('navigation-bar__' + name);
 
