@@ -61,10 +61,16 @@ internal.autoStatusBarFill = action => {
     if (internal.shouldFillStatusBar()) {
       action();
     }
+    document.removeEventListener('deviceready', onReady);
+    document.removeEventListener('DOMContentLoaded', onReady);
   };
 
   if (typeof device === 'object') {
     document.addEventListener('deviceready', onReady);
+  } else if (['complete', 'interactive'].indexOf(document.readyState) === -1) {
+    document.addEventListener('DOMContentLoaded', function() {
+      onReady();
+    });
   } else {
     onReady();
   }
