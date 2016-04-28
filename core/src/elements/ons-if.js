@@ -22,7 +22,7 @@ import contentReady from 'ons/content-ready';
 
 /**
  * @element ons-if
- * @category util
+ * @category conditional
  * @description
  *   [en]
  *     Conditionally display content depending on the platform, device orientation or both.

@@ -191,10 +191,14 @@ class PageElement extends BaseElement {
   }
 
   _tryToFillStatusBar(){
-    return internal.shouldFillStatusBar(this).then(
-      () => this.setAttribute('status-bar-fill', ''),
-      () => this.removeAttribute('status-bar-fill')
-    );
+    internal.autoStatusBarFill(() => {
+      const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'));
+      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageControlChild()));
+    });
+  }
+
+  _hasAPageControlChild() {
+    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
   }
 
   /**
@@ -309,7 +313,6 @@ class PageElement extends BaseElement {
    * @param {HTMLElement} element
    */
   _registerToolbar(element) {
-    this._contentElement.setAttribute('no-status-bar-fill', '');
     this.insertBefore(element, this.children[0]);
   }
 

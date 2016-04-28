@@ -233,7 +233,7 @@ class DialogElement extends BaseElement {
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
-    this.setAttribute('no-status-bar-fill', '');
+    this.setAttribute('status-bar-fill', '');
 
     ModifierUtil.initModifier(this, scheme);
 

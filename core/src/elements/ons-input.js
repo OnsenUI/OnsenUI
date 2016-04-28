@@ -33,7 +33,6 @@ const INPUT_ATTRIBUTES = [
   'autocomplete',
   'autocorrect',
   'autofocus',
-  'checked',
   'disabled',
   'inputmode',
   'max',
@@ -53,7 +52,7 @@ const INPUT_ATTRIBUTES = [
 
 /**
  * @element ons-input
- * @category form
+ * @category input
  * @modifier material
  *  [en]Displays a Material Design input.[/en]
  *  [ja][/ja]
@@ -136,6 +135,8 @@ class InputElement extends BaseElement {
         this._compile();
       }
     });
+
+    this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
   }
 
   _compile() {
@@ -205,6 +206,8 @@ class InputElement extends BaseElement {
       return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
       this._input.id = current;
+    } if (name === 'checked') {
+      this.checked = current !== null;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return contentReady(this, () => this._updateBoundAttributes());
