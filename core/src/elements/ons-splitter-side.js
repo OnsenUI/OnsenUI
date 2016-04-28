@@ -24,6 +24,7 @@ import BaseElement from 'ons/base-element';
 import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
+import contentReady from 'ons/content-ready';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -458,7 +459,10 @@ class SplitterSideElement extends BaseElement {
     if (!this.hasAttribute('side')) {
       this.setAttribute('side', 'left');
     }
-    this._watchedAttributes.forEach(e => this._update(e));
+
+    contentReady(this, () => {
+      this._watchedAttributes.forEach(e => this._update(e));
+    });
   }
 
   detachedCallback() {

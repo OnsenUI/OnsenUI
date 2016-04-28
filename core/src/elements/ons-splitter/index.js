@@ -21,6 +21,7 @@ import AnimatorFactory from 'ons/internal/animator-factory';
 import SplitterAnimator from './animator';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import contentReady from 'ons/content-ready';
 
 /**
  * @element ons-splitter
@@ -103,11 +104,11 @@ class SplitterElement extends BaseElement {
    *   [ja][/ja]
    */
   get content() {
-    return util.findChild(this, 'ons-splitter-content') || this.appendChild(document.createElement('ons-splitter-content'));
+    return util.findChild(this, 'ons-splitter-content');
   }
 
   get mask() {
-    return util.findChild(this, 'ons-splitter-mask') || this.appendChild(document.createElement('ons-splitter-mask'));
+    return util.findChild(this, 'ons-splitter-mask');
   }
 
   /**
@@ -128,7 +129,9 @@ class SplitterElement extends BaseElement {
 
   _onModeChange(e) {
     if (e.target.parentNode) {
-      this._layout();
+      contentReady(this, () => {
+        this._layout();
+      });
     }
   }
 
@@ -141,12 +144,22 @@ class SplitterElement extends BaseElement {
   createdCallback() {
     this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._boundOnModeChange = this._onModeChange.bind(this);
+
+    contentReady(this, () => {
+      this._compile();
+      this._layout();
+    });
+  }
+
+  _compile() {
+    if (!this.mask) {
+      this.appendChild(document.createElement('ons-splitter-mask'));
+    }
   }
 
   attachedCallback() {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
     this.addEventListener('modechange', this._boundOnModeChange, false);
-    setImmediate(() => this._layout());
   }
 
   detachedCallback() {
