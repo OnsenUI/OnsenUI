@@ -134,9 +134,9 @@ class InputElement extends BaseElement {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
       }
-    });
 
-    this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
+      this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
+    });
   }
 
   _compile() {
