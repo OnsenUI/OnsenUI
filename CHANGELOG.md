@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v2.0.0-rc.0
+v2.0.0-rc.1
 ----
  * ons-input: Fix behavior of `checked` attribute.
  * ons-popover: Fix glitch on iOS for bottom popover.
