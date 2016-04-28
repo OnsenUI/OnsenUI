@@ -24,6 +24,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'modal--*',
@@ -88,9 +89,11 @@ class ModalElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
+      }
+    });
 
     this._doorLock = new DoorLock();
 
@@ -132,16 +135,18 @@ class ModalElement extends BaseElement {
     this.style.display = 'none';
     this.classList.add('modal');
 
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('modal__content');
+    if (!util.findChild(this, '.modal__content')) {
+      const content = document.createElement('div');
+      content.classList.add('modal__content');
 
-    while (this.childNodes[0]) {
-      const node = this.childNodes[0];
-      this.removeChild(node);
-      wrapper.insertBefore(node, null);
+      while (this.childNodes[0]) {
+        const node = this.childNodes[0];
+        this.removeChild(node);
+        content.insertBefore(node, null);
+      }
+
+      this.appendChild(content);
     }
-
-    this.appendChild(wrapper);
 
     ModifierUtil.initModifier(this, scheme);
 
