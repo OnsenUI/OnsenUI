@@ -35,6 +35,20 @@
   "bugs": {
     "url": "https://github.com/OnsenUI/OnsenUI/issues"
   },
+  "keywords": [
+    "phonegap",
+    "cordova",
+    "react",
+    "components",
+    "angular",
+    "angular2",
+    "hybrid",
+    "app",
+    "ui",
+    "mobile",
+    "onsen",
+    "onsenui"
+  ],
   "homepage": "http://onsen.io/",
   "main": "js/onsenui.js",
   "devDependencies": {
