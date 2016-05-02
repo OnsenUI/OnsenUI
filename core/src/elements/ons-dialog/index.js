@@ -24,6 +24,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
 import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.dialog': 'dialog--*',
@@ -192,9 +193,7 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => this._compile());
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -211,16 +210,14 @@ class DialogElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    const style = this.getAttribute('style');
-
     this.style.display = 'none';
+
+    if (this._dialog) {
+      return;
+    }
 
     const template = templateSource.cloneNode(true);
     const dialog = template.children[1];
-
-    if (style) {
-      dialog.setAttribute('style', style);
-    }
 
     while (this.firstChild) {
       dialog.children[0].appendChild(this.firstChild);
@@ -236,8 +233,6 @@ class DialogElement extends BaseElement {
     this.setAttribute('status-bar-fill', '');
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   /**
@@ -447,7 +442,10 @@ class DialogElement extends BaseElement {
 
   attachedCallback() {
     this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-    this._mask.addEventListener('click', this._boundCancel, false);
+
+    contentReady(this, () => {
+      this._mask.addEventListener('click', this._boundCancel, false);
+    });
   }
 
   detachedCallback() {
