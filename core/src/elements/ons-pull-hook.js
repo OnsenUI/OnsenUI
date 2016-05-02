@@ -99,19 +99,6 @@ class PullHookElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._scrollElement = this._createScrollElement();
-      this.setAttribute('_compiled', '');
-    } else {
-      this._scrollElement = this.parentElement;
-    }
-
-    this._pageElement = this._scrollElement.parentElement;
-
-    if (!this._pageElement.classList.contains('page__content')) {
-      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
-    }
-
     this._boundOnDrag = this._onDrag.bind(this);
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnDragEnd = this._onDragEnd.bind(this);
@@ -124,6 +111,10 @@ class PullHookElement extends BaseElement {
   }
 
   _createScrollElement() {
+    if (this.parentElement.classList.contains('scroll')) {
+      return this.parentElement;
+    }
+
     const scrollElement = util.createElement('<div class="scroll"><div>');
 
     const pageElement = this.parentElement;
@@ -423,17 +414,29 @@ class PullHookElement extends BaseElement {
   }
 
   _destroyEventListeners() {
-    this._gestureDetector.off('drag', this._boundOnDrag);
-    this._gestureDetector.off('dragstart', this._boundOnDragStart);
-    this._gestureDetector.off('dragend', this._boundOnDragEnd);
+    if (this._gestureDetector) {
+      this._gestureDetector.off('drag', this._boundOnDrag);
+      this._gestureDetector.off('dragstart', this._boundOnDragStart);
+      this._gestureDetector.off('dragend', this._boundOnDragEnd);
 
-    this._gestureDetector.dispose();
-    this._gestureDetector = null;
+      this._gestureDetector.dispose();
+      this._gestureDetector = null;
+    }
 
-    this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
+    if (this._scrollElement && this._scrollElement.parentElement) {
+      this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
+    }
   }
 
   attachedCallback() {
+    this._scrollElement = this._createScrollElement();
+
+    this._pageElement = this._scrollElement.parentElement;
+
+    if (!this._pageElement.classList.contains('page__content')) {
+      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+    }
+
     this._createEventListeners();
   }
 
