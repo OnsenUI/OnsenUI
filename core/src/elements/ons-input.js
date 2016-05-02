@@ -32,7 +32,6 @@ const INPUT_ATTRIBUTES = [
   'autocomplete',
   'autocorrect',
   'autofocus',
-  'checked',
   'disabled',
   'inputmode',
   'max',
@@ -52,7 +51,7 @@ const INPUT_ATTRIBUTES = [
 
 /**
  * @element ons-input
- * @category form
+ * @category input
  * @modifier material
  *  [en]Displays a Material Design input.[/en]
  *  [ja][/ja]
@@ -133,19 +132,21 @@ class InputElement extends BaseElement {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+
+    this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
   }
 
   _compile() {
     autoStyle.prepare(this);
 
-    let helper = document.createElement('span');
+    const helper = document.createElement('span');
     helper.classList.add('_helper');
 
-    let container = document.createElement('label');
+    const container = document.createElement('label');
     container.appendChild(document.createElement('input'));
     container.appendChild(helper);
 
-    let label = document.createElement('span');
+    const label = document.createElement('span');
     label.classList.add('input-label');
 
     util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
@@ -202,6 +203,8 @@ class InputElement extends BaseElement {
       return this._updateLabel();
     } if (name === 'input-id') {
       this._input.id = current;
+    } if (name === 'checked') {
+      this.checked = current !== null;
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return this._updateBoundAttributes();
@@ -322,7 +325,7 @@ class InputElement extends BaseElement {
    * @property checked
    * @type {Boolean}
    * @description
-   *   [en]This boolean specifies whether the input is checked or not. Only works for `radio` and `checkbox` type inputs.[/en]
+   *   [en]Whether the input is checked or not. Only works for `radio` and `checkbox` type inputs.[/en]
    *   [ja][/ja]
    */
   get checked() {
@@ -337,16 +340,11 @@ class InputElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the input is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the input is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    }
-    else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {

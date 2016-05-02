@@ -24,7 +24,7 @@ describe('ons-if', () => {
     let isPortrait = true;
     ons.orientation._isPortrait = () => isPortrait;
 
-    let element = ons._util.createElement('<ons-if orientation="landscape">Content</ons-if>');
+    const element = ons._util.createElement('<ons-if orientation="landscape">Content</ons-if>');
     document.body.appendChild(element);
 
     expect(element.style.display).to.equal('none');

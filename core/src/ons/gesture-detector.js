@@ -8,7 +8,7 @@ var Event, Utils, Detection, PointerEvent;
 
 /**
  * @object ons.GestureDetector
- * @category util
+ * @category gesture
  * @description
  *   [en]Utility class for gesture detection.[/en]
  *   [ja]ジェスチャを検知するためのユーティリティクラスです。[/ja]

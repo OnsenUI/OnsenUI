@@ -30,27 +30,24 @@ limitations under the License.
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
           'changestate',
-        ], function(detail) {
+        ], detail => {
           if (detail.pullHook) {
             detail.pullHook = this;
           }
           return detail;
-        }.bind(this));
+        });
 
-        this.on('changestate', function(event) {
-          this._scope.$evalAsync();
-        }.bind(this));
+        this.on('changestate', () => this._scope.$evalAsync());
 
-        this._boundOnAction = this._onAction.bind(this);
-        this._element[0].setActionCallback(this._boundOnAction);
+        this._element[0].onAction = done => {
+          if (this._attrs.ngAction) {
+            this._scope.$eval(this._attrs.ngAction, {$done: done});
+          } else {
+            this.onAction ? this.onAction(done) : done();
+          }
+        };
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _onAction: function(done) {
-        if (this._attrs.ngAction) {
-          this._scope.$eval(this._attrs.ngAction, {$done: done});
-        }
       },
 
       _destroy: function() {

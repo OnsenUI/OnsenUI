@@ -474,8 +474,8 @@ class PopoverElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [en]Whether the element is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return window.getComputedStyle(this).getPropertyValue('display') !== 'none';
@@ -501,14 +501,14 @@ class PopoverElement extends BaseElement {
   }
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @readonly
    * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 

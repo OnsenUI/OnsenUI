@@ -52,7 +52,7 @@ const nextToken = (string) => {
 
   } else if (string[0] === '{' || string[0] === '[') {
 
-    let c = string.charCodeAt(0);
+    const c = string.charCodeAt(0);
     let nestedObject = 1;
     for (let i = 1; i < string.length; i++) {
       if (string.charCodeAt(i) === c) {
@@ -93,7 +93,9 @@ const parseObject = (string) => {
   const isValidKey = key => /^[A-Z_\$][A-Z0-9_\$]*$/i.test(key);
 
   string = string.trim();
-  let originalString = string, readingKey = true, key, previousToken, token, object = {};
+  const originalString = string;
+  const object = {};
+  let readingKey = true, key, previousToken, token;
 
   while(string.length > 0) {
     previousToken = token;
@@ -126,7 +128,9 @@ const parseObject = (string) => {
 
 const parseArray = (string) => {
   string = string.trim();
-  let originalString = string, previousToken, token, array = [];
+  const originalString = string;
+  const array = [];
+  let previousToken, token;
 
   while(string.length > 0) {
     previousToken = token;

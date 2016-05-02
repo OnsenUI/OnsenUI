@@ -44,10 +44,17 @@ const locations = {
 
 /**
  * @element ons-switch
- * @category form
+ * @category switch
  * @description
- *  [en]Switch component. Can display either an iOS flat switch or a Material Design switch.[/en]
- *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ *   [en]
+ *     Switch component. The switch can be toggled both by dragging and tapping.
+ *
+ *     Will automatically displays a Material Design switch on Android devices.
+ *   [/en]
+ *   [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @modifier material
+ *   [en]Material Design switch[/en]
+ *   [ja][/ja]
  * @codepen LpXZQQ
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
@@ -55,11 +62,9 @@ const locations = {
  * @guide EventHandling
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
- * @seealso ons-button
- *   [en]ons-button component[/en]
- *   [ja]ons-buttonコンポーネント[/ja]
  * @example
  * <ons-switch checked></ons-switch>
+ * <ons-switch disabled></ons-switch>
  * <ons-switch modifier="material"></ons-switch>
  */
 
@@ -68,7 +73,7 @@ class SwitchElement extends BaseElement {
   /**
    * @event change
    * @description
-   *   [en]Fired when the value is changed.[/en]
+   *   [en]Fired when the switch is toggled.[/en]
    *   [ja]ON/OFFが変わった時に発火します。[/ja]
    * @param {Object} event
    *   [en]Event object.[/en]
@@ -95,7 +100,7 @@ class SwitchElement extends BaseElement {
   /**
    * @attribute disabled
    * @description
-   *   [en]Whether the switch should be disabled.[/en]
+   *   [en]Whether the switch is be disabled.[/en]
    *   [ja]スイッチを無効の状態にする場合に指定します。[/ja]
    */
 
@@ -110,8 +115,16 @@ class SwitchElement extends BaseElement {
    * @attribute input-id
    * @type {String}
    * @description
-   *  [en]Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements.[/en]
+   *  [en]Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
    *  [ja][/ja]
+   */
+
+  /**
+   * @property checked
+   * @type {Boolean}
+   * @description
+   *   [en]This value is `true` if the switch is checked.[/en]
+   *   [ja]スイッチがONの場合に`true`。[/ja]
    */
 
   get checked() {
@@ -122,66 +135,35 @@ class SwitchElement extends BaseElement {
     if (!!value !== this._checkbox.checked) {
       this._checkbox.click();
       this._checkbox.checked = !!value;
-      if (this.checked) {
-        this.setAttribute('checked', '');
-      } else {
-        this.removeAttribute('checked');
-      }
+      return util.toggleAttribute(this, 'checked', this.checked);
     }
   }
 
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
+   */
   get disabled() {
     return this._checkbox.disabled;
   }
 
   set disabled(value) {
     this._checkbox.disabled = value;
-    if (this.disabled) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
+    return util.toggleAttribute(this, 'disabled', this.disabled);
   }
 
   /**
-   * @method isChecked
-   * @signature isChecked()
-   * @return {Boolean}
-   *   [en]true if the switch is on.[/en]
-   *   [ja]ONになっている場合にはtrueになります。[/ja]
+   * @property checkbox
+   * @readonly
+   * @type {HTMLElement}
    * @description
-   *   [en]Returns true if the switch is ON.[/en]
-   *   [ja]スイッチがONの場合にtrueを返します。[/ja]
-   */
-  isChecked() {
-    return this.checked;
-  }
-
-  /**
-   * @method setChecked
-   * @signature setChecked(checked)
-   * @param {Boolean} checked
-   *   [en]If true the switch will be set to on.[/en]
-   *   [ja]ONにしたい場合にはtrueを指定します。[/ja]
-   * @description
-   *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
-   *   [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
-   */
-  setChecked(isChecked) {
-    this.checked = !!isChecked;
-  }
-
-  /**
-   * @method getCheckboxElement
-   * @signature getCheckboxElement()
-   * @return {HTMLElement}
    *   [en]The underlying checkbox element.[/en]
    *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
-   * @description
-   *   [en]Get inner input[type=checkbox] element.[/en]
-   *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
    */
-  getCheckboxElement() {
+  get checkbox() {
     return this._checkbox;
   }
 
@@ -244,7 +226,7 @@ class SwitchElement extends BaseElement {
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
-      util.triggerElementEvent(this.getCheckboxElement(), 'change');
+      util.triggerElementEvent(this.checkbox, 'change');
     }
   }
 
@@ -292,22 +274,20 @@ class SwitchElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     switch(name) {
-    case 'modifier':
-      this._isMaterial = (current || '').indexOf('material') !== -1;
-      this._locations = locations[this._isMaterial ? 'material' : 'ios'];
-      ModifierUtil.onModifierChanged(last, current, this, scheme);
-      break;
-    case 'input-id':
-      this._checkbox.id = current;
-      break;
-    case 'checked':   // eslint-disable-line no-fallthrough
-      this._checkbox.checked = current !== null;
-    case 'disabled':
-      if (current !== null) {
-        this._checkbox.setAttribute(name, '');
-      } else {
-        this._checkbox.removeAttribute(name);
-      }
+      case 'modifier':
+        this._isMaterial = (current || '').indexOf('material') !== -1;
+        this._locations = locations[this._isMaterial ? 'material' : 'ios'];
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'input-id':
+        this._checkbox.id = current;
+        break;
+      case 'checked':
+        this._checkbox.checked = current !== null;
+        util.toggleAttribute(this._checkbox, name, current !== null);
+        break;
+      case 'disabled':
+        util.toggleAttribute(this._checkbox, name, current !== null);
     }
   }
 }

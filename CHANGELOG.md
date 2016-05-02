@@ -2,6 +2,42 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.2
+----
+ * ons-tab: Fix dynamic `icon` and `label` attributes.
+
+v2.0.0-rc.1
+----
+ * ons-input: Fix behavior of `checked` attribute.
+ * ons-popover: Fix glitch on iOS for bottom popover.
+ * core: Fix [#1340](https://github.com/OnsenUI/OnsenUI/issues/1340) (auto status bar fill issue).
+
+v2.0.0-beta.15
+----
+ * ons-carousel: Fix rendering glitch on Android 4.1.
+ * core: Fix broken validation on Android 4.1.
+ * ons-pull-hook: Update API (property `onAction` instead of `setActionCallback` method).
+
+v2.0.0-beta.14
+----
+ * vendor: Add `MutationObserver` polyfill for older webviews.
+ * ons-page: Fix [#1359](https://github.com/OnsenUI/OnsenUI/issues/1359).
+
+v2.0.0-beta.13
+----
+ * ons-lazy-repeat: Fixes issue on Safari.
+
+v2.0.0-beta.12
+----
+ * ons-alert-dialog: Only compile once. This fixes issue with `ons.notification` in Firefox.
+ * css-components: Refine tab style.
+
+v2.0.0-beta.11
+----
+ * core: Fixed forcePlatformStyling.
+ * ons-navigator: Fixed an issue where 'show' event could be fired before 'init'.
+ * ons-page: Removed unnecessary 'event.page' parameter.
+
 v2.0.0-beta.10
 ----
  * core: Expose FastClick instance as `ons.fastClick`.
@@ -15,12 +51,20 @@ v2.0.0-beta.10
  * ons-icon: Delete attribute `flip` from ons-icon (obsolete, since everything can be done with `rotate`)
  * ons-list-item: Make the attribute `tappable` a boolean and add attribute `tap-background-color`
  * ons-alert-dialog: Fixed [#1347](https://github.com/OnsenUI/OnsenUI/issues/1347).
- * ons-alert-dialog, ons-dialog, ons-popover, ons-modal: Updated API (`disabled`, `visible`, `backButtonHandler` properties).
  * ons-progress-bar, ons-progress-circular: Add `value`, `secondaryValue` and `indeterminate` properties.
  * ons-pull-hook: Add `state`, `pullDistance`, `height`, `thresholdHeight` and `disabled` properties.
- * ons-page: Update API (`disabled`, `backButtonHandler` properties).
+ * ons-alert-dialog, ons-dialog, ons-popover, ons-modal: Updated API (`disabled`, `visible`, `onDeviceBackButton` properties).
+ * ons-page: Update API (`disabled`, `onDeviceBackButton` properties, `on-device-back-button` and `ng-device-back-button` attributes).
+ * ons-splitter: Renamed property `deviceBackButton` to a `onDeviceBackButton`.
  * ons-button, ons-ripple: Update API (`disabled` property).
  * ons-speeddial: Updated API (`disabled`, `visible`, `inline` properties).
+ * ons-switch: Updated API (`disabled`, `checked`, `checkbox` properties).
+ * ons-splitter-side: Changed `isOpen` to a property.
+ * ons-navigator: Removed old angular methods (`getPages`, `getBackButtonHandler`).
+ * ons-lazy-repeat: Removed `setDelegate` in favor of the `delegate` property.
+ * ons-range: Fixes memory leak in AngularJS bindings.
+ * ons-toolbar-button: Add `disabled` property.
+ * css-components: Fixes list layout glitch on older Android devices.
 
 v2.0.0-beta.9
 ----
@@ -452,4 +496,3 @@ v1.1.2
  * ons-tabbar: Added tabbar.loadPage(), tabbar.getActiveTabIndex().
  * ons-tabbar: Changed tab-change behaivior to be cancelable with event.cancel() method on 'prechange' events.
  * ons-tabbar: Added 'animation' attribute and TabbarView.registerAnimator() to use tabbar animation on loading.
-

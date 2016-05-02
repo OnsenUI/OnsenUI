@@ -24,7 +24,7 @@ const scheme = {'': 'button--*'};
 
 /**
  * @element ons-button
- * @category form
+ * @category button
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja]アウトラインを持ったボタンを表示します。[/ja]
@@ -106,9 +106,10 @@ class ButtonElement extends BaseElement {
 
   /**
    * @property disabled
+   * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies if the button is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the button is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);

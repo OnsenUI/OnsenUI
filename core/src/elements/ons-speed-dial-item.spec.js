@@ -44,8 +44,8 @@ describe('OnsSpeedDialItemElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-speed-dial-item>Content</ons-speed-dial-item>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -55,7 +55,7 @@ describe('OnsSpeedDialItemElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' effects on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-speed-dial-item');
+      const e = document.createElement('ons-speed-dial-item');
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');

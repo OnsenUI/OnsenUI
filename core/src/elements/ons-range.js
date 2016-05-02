@@ -44,9 +44,16 @@ const INPUT_ATTRIBUTES = [
 
 /**
  * @element ons-range
- * @category form
+ * @category range
+ * @modifier material
+ *   [en]Material Design slider[/en]
+ *   [ja][/ja]
  * @description
- *   [en]Range input component.[/en]
+ *   [en]
+ *     Range input component. Used to display a draggable slider.
+ *
+ *     Works very similar to the `<input type="range">` element.
+ *   [/en]
  *   [ja][/ja]
  * @codepen xZQomM
  * @guide UsingFormComponents
@@ -55,6 +62,9 @@ const INPUT_ATTRIBUTES = [
  * @guide EventHandling
  *   [en]Event handling descriptions[/en]
  *   [ja]イベント処理の使い方[/ja]
+ * @seealso ons-input
+ *   [en]The `<ons-input>` component is used to display text inputs, radio buttons and checkboxes.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
@@ -141,6 +151,28 @@ class RangeElement extends BaseElement {
     return this.querySelector('.range__left');
   }
 
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
+   */
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  /**
+   * @property value
+   * @type {Number}
+   * @description
+   *   [en]Current value.[/en]
+   *   [ja][/ja]
+   */
   get value() {
     return this._input.value;
   }

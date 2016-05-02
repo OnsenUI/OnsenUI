@@ -19,17 +19,35 @@ import BaseElement from 'ons/base-element';
 
 /**
  * @element ons-template
- * @category util
+ * @category template
  * @description
- *   [en]Define a separate HTML fragment and use as a template.[/en]
+ *   [en]
+ *     Define a separate HTML fragment and use as a template.
+ *
+ *     These templates can be loaded as pages in `<ons-navigator>`, `<ons-tabbar>` and `<ons-splitter>`. They can also be used to generate dialogs.
+ *   [/en]
  *   [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。この要素でHTMLを宣言すると、id属性に指定した名前をpageのURLとしてons-navigatorなどのコンポーネントから参照できます。[/ja]
  * @guide DefiningMultiplePagesinSingleHTML
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-navigator
+ *   [en]The `<ons-navigator>` component enables stack based navigation.[/en]
+ *   [ja][/ja]
+ * @seealso ons-tabbar
+ *   [en]The `<ons-tabbar>` component is used to add tab navigation.[/en]
+ *   [ja][/ja]
+ * @seealso ons-splitter
+ *   [en]The `<ons-splitter>` component can be used to create a draggable menu or column based layout.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-template id="foobar.html">
- *   ...
+ *   <ons-page>
+ *     Page content
+ *   </ons-page>
  * </ons-template>
+ *
+ * <ons-navigator page="foobar.html">
+ * </ons-navigator>
  */
 class TemplateElement extends BaseElement {
 
@@ -37,10 +55,9 @@ class TemplateElement extends BaseElement {
    * @property template
    * @type {String}
    * @description
-   *  [en]Template content.[/en]
+   *  [en]Template content. This property can not be used with AngularJS bindings.[/en]
    *  [ja][/ja]
    */
-
   createdCallback() {
     this.template = this.innerHTML;
 

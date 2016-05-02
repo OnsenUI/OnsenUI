@@ -32,29 +32,48 @@ const scheme = {
 /**
  * @element ons-toolbar
  * @category toolbar
+ * @modifier material
+ *   [en]Material Design toolbar.[/en]
+ *   [ja][/ja]
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
  * @description
- *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *   [en]
+ *     Toolbar component that can be used with navigation.
+ *
+ *     Left, center and right container can be specified by class names.
+ *
+ *     This component will automatically displays as a Material Design toolbar when running on Android devices.
+ *   [/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar
- *   [en]ons-bottom-toolbar component[/en]
+ *   [en]The `<ons-bottom-toolbar>` displays a toolbar on the bottom of the page.[/en]
  *   [ja]ons-bottom-toolbarコンポーネント[/ja]
  * @seealso ons-back-button
- *   [en]ons-back-button component[/en]
+ *   [en]The `<ons-back-button>` component displays a back button inside the toolbar.[/en]
  *   [ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button
- *   [en]ons-toolbar-button component[/en]
+ *   [en]The `<ons-toolbar-button>` component displays a toolbar button inside the toolbar.[/en]
  *   [ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
- *     <div class="left"><ons-back-button>Back</ons-back-button></div>
- *     <div class="center">Title</div>
- *     <div class="right">Label</div>
+ *     <div class="left">
+ *       <ons-back-button>
+ *         Back
+ *       </ons-back-button>
+ *     </div>
+ *     <div class="center">
+ *       Title
+ *     </div>
+ *     <div class="right">
+ *       <ons-toolbar-button>
+ *         <ons-icon icon="md-menu"></ons-icon>
+ *       </ons-toolbar-button>
+ *     </div>
  *   </ons-toolbar>
  * </ons-page>
  */
@@ -102,7 +121,7 @@ class ToolbarElement extends BaseElement {
     if (!this.parentNode || this.hasAttribute('inline')) {
       return;
     }
-    let page = util.findParent(this, 'ons-page');
+    const page = util.findParent(this, 'ons-page');
 
     if (page && page !== this.parentNode) {
       page._registerToolbar(this);
@@ -146,33 +165,21 @@ class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarItemElements() {
-    var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
-
-    for (var i = 0; i < this.childNodes.length; i++) {
+    for (let i = this.childNodes.length - 1; i >= 0 ; i--) {
       // case of not element
       if (this.childNodes[i].nodeType != 1) {
         this.removeChild(this.childNodes[i]);
       }
     }
 
-    var center = this._ensureToolbarElement('center');
+    const center = this._ensureToolbarElement('center');
     center.classList.add('navigation-bar__title');
 
-    if (!hasCenterClassElementOnly) {
-      var left = this._ensureToolbarElement('left');
-      var right = this._ensureToolbarElement('right');
+    if (this.children.length !== 1 || !this.children[0].classList.contains('center')) {
+      const left = this._ensureToolbarElement('left');
+      const right = this._ensureToolbarElement('right');
 
       if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
-        if (left.parentNode) {
-          this.removeChild(left);
-        }
-        if (center.parentNode) {
-          this.removeChild(center);
-        }
-        if (right.parentNode) {
-          this.removeChild(right);
-        }
-
         this.appendChild(left);
         this.appendChild(center);
         this.appendChild(right);
@@ -181,7 +188,7 @@ class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarElement(name) {
-    var element = util.findChild(this, '.' + name) || util.create('.' + name);
+    const element = util.findChild(this, '.' + name) || util.create('.' + name);
 
     element.classList.add('navigation-bar__' + name);
 

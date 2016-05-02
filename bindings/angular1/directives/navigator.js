@@ -108,28 +108,6 @@
  */
 
 /**
- * @method getPages
- * @signature getPages()
- * @return {List}
- *   [en]List of page objects.[/en]
- *   [ja]pageオブジェクトの配列。[/ja]
- * @description
- *   [en]Retrieve the entire page stack of the navigator.[/en]
- *   [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
- */
-
-/**
- * @method getDeviceBackButtonHandler
- * @signature getDeviceBackButtonHandler()
- * @return {Object}
- *   [en]Device back button handler.[/en]
- *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
- * @description
- *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
- */
-
-/**
  * @method on
  * @signature on(eventName, listener)
  * @description

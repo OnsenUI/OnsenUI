@@ -113,6 +113,7 @@ list__item()
   align-items center
 
 .list__item__left
+  min-height var-list-item-min-height
   display flex
   padding-right 14px
   order 0
@@ -126,6 +127,7 @@ list__item()
   margin 0
 
 .list__item__center
+  min-height var-list-item-min-height
   display flex
   flex-grow 1
   flex-wrap wrap
@@ -139,6 +141,7 @@ list__item()
   retina-list-item-border()
 
 .list__item__right
+  min-height var-list-item-min-height
   display flex
   margin-left auto
   padding-right 12px
@@ -357,6 +360,7 @@ list__item()
   transition none
 
 .list__item--chevron:before
+  min-height var-list-item-min-height
   display flex
   align-items center
   color var-list-item-separator-color

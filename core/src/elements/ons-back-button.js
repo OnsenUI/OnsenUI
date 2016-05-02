@@ -29,7 +29,7 @@ var scheme = {
 
 /**
  * @element ons-back-button
- * @category page
+ * @category toolbar
  * @description
  *   [en]
  *     Back button component for `<ons-toolbar>`. Put it in the left part of the `<ons-toolbar>`.
@@ -90,9 +90,7 @@ class BackButtonElement extends BaseElement {
     this.classList.add('back-button');
 
     if (!util.findChild(this, '.back-button__label')) {
-      const label = util.createElement(`
-        <span class="back-button__label"></span>
-      `);
+      const label = util.create('span.back-button__label');
 
       while (this.childNodes[0]) {
         label.appendChild(this.childNodes[0]);
@@ -102,9 +100,7 @@ class BackButtonElement extends BaseElement {
     }
 
     if (!util.findChild(this, '.back-button__icon')) {
-      const icon = util.createElement(`
-        <span class="back-button__icon"></span>
-      `);
+      const icon = util.create('span.back-button__icon');
 
       this.insertBefore(icon, this.children[0]);
     }

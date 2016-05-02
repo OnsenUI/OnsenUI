@@ -233,7 +233,7 @@ class DialogElement extends BaseElement {
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
-    this.setAttribute('no-status-bar-fill', '');
+    this.setAttribute('status-bar-fill', '');
 
     ModifierUtil.initModifier(this, scheme);
 
@@ -241,14 +241,14 @@ class DialogElement extends BaseElement {
   }
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @readonly
    * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
@@ -408,7 +408,7 @@ class DialogElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this._visible;
@@ -418,8 +418,8 @@ class DialogElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the dialog is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the dialog is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);
@@ -433,11 +433,7 @@ class DialogElement extends BaseElement {
    * @property cancelable
    * @type {Boolean}
    * @description
-   *   [en]
-   *     A boolean value that specifies whether the dialog is cancelable or not.
-   *
-   *     When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
-   *   [/en]
+   *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
    */
   set cancelable(value) {

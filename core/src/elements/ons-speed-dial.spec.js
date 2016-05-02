@@ -53,7 +53,7 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_onClick()', () => {
     it('should call #toggleItems()', () => {
-      let spy = chai.spy.on(speedDial, 'toggleItems');
+      const spy = chai.spy.on(speedDial, 'toggleItems');
       speedDial._onClick();
       expect(spy).to.have.been.called.once;
     });
@@ -61,14 +61,14 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_show()', () => {
     it('does nothing if element is inline', () => {
-      let spy = chai.spy.on(speedDial, 'show');
+      const spy = chai.spy.on(speedDial, 'show');
       speedDial.setAttribute('inline', '');
       speedDial._show();
       expect(spy).to.not.have.been.called();
     });
 
     it('calls show() if element is not inline', () => {
-      let spy = chai.spy.on(speedDial, 'show');
+      const spy = chai.spy.on(speedDial, 'show');
       speedDial._show();
       expect(spy).to.have.been.called.once;
     });
@@ -76,14 +76,14 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_hide()', () => {
     it('does nothing if element is inline', () => {
-      let spy = chai.spy.on(speedDial, 'hide');
+      const spy = chai.spy.on(speedDial, 'hide');
       speedDial.setAttribute('inline', '');
       speedDial._hide();
       expect(spy).to.not.have.been.called();
     });
 
     it('calls hide() if element is not inline', () => {
-      let spy = chai.spy.on(speedDial, 'hide');
+      const spy = chai.spy.on(speedDial, 'hide');
       speedDial._hide();
       expect(spy).to.have.been.called.once;
     });
@@ -91,8 +91,8 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_updateDirection()', () => {
     it('is called when element is created', () => {
-      let spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection'),
-        speedDial = ons._util.createElement(`
+      const spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection');
+      const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="up"><ons-fab></ons-fab></ons-speed-dial>
         `);
 
@@ -100,8 +100,8 @@ describe('OnsSpeedDialElement', () => {
     });
 
     it('is called with the value of the direction attribute', () => {
-      let spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection'),
-        speedDial = ons._util.createElement(`
+      const spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection');
+      const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="down"><ons-fab></ons-fab></ons-speed-dial>
         `);
 
@@ -109,7 +109,7 @@ describe('OnsSpeedDialElement', () => {
     });
 
     it('is called when direction changes', () => {
-      let spy = chai.spy.on(speedDial, '_updateDirection');
+      const spy = chai.spy.on(speedDial, '_updateDirection');
 
       speedDial.setAttribute('direction', 'left');
       expect(spy).to.have.been.called.with('left');
@@ -129,7 +129,7 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_updatePosition()', () => {
     it('is called when the "position" attribute changes', () => {
-      let spy = chai.spy.on(speedDial, '_updatePosition');
+      const spy = chai.spy.on(speedDial, '_updatePosition');
 
       speedDial.setAttribute('position', 'top left');
       speedDial.setAttribute('position', 'bottom left');
@@ -197,7 +197,7 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#show()', () => {
     it('calls #show() on the child OnsFabElement', () => {
-      let spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'show');
+      const spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'show');
       speedDial.show();
       expect(spy).to.have.been.called.once;
     });
@@ -205,13 +205,13 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#hide()', () => {
     it('calls #hideItems()', () => {
-      let spy = chai.spy.on(speedDial, 'hideItems');
+      const spy = chai.spy.on(speedDial, 'hideItems');
       speedDial.hide();
       expect(spy).to.have.been.called.once;
     });
 
     it('eventually calls #hide() on the child OnsFabElement', (done) => {
-      let spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'hide');
+      const spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'hide');
       speedDial.hide();
       setTimeout(() => {
         expect(spy).to.have.been.called.once;
@@ -262,14 +262,14 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#toggle()', () => {
     it('calls #show() if element is hidden', () => {
-      let spy = chai.spy.on(speedDial, 'show');
+      const spy = chai.spy.on(speedDial, 'show');
       speedDial.hide();
       speedDial.toggle();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls #hide() if element is shown', () => {
-      let spy = chai.spy.on(speedDial, 'hide');
+      const spy = chai.spy.on(speedDial, 'hide');
       speedDial.toggle();
       expect(spy).to.have.been.called.once;
     });
@@ -277,13 +277,13 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#toggleItems()', () => {
     it('calls #showItems() if items are hidden', () => {
-      let spy = chai.spy.on(speedDial, 'showItems');
+      const spy = chai.spy.on(speedDial, 'showItems');
       speedDial.toggleItems();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls #hideItems() if items are shown', () => {
-      let spy = chai.spy.on(speedDial, 'hideItems');
+      const spy = chai.spy.on(speedDial, 'hideItems');
       speedDial.showItems();
       speedDial.toggleItems();
       expect(spy).to.have.been.called.once;
@@ -292,8 +292,8 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-speed-dial>
           <ons-fab>A</ons-fab>

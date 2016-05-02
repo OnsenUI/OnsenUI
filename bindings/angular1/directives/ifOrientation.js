@@ -1,6 +1,6 @@
 /**
  * @element ons-if-orientation
- * @category util
+ * @category conditional
  * @description
  *   [en]Conditionally display content depending on screen orientation. Valid values are portrait and landscape. Different from other components, this component is used as attribute in any element.[/en]
  *   [ja]画面の向きに応じてコンテンツの制御を行います。portraitもしくはlandscapeを指定できます。すべての要素の属性に使用できます。[/ja]

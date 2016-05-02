@@ -61,7 +61,7 @@ limitations under the License.
     };
 
     MicroEvent.mixin(ModalView);
-    $onsen.derivePropertiesFromElement(ModalView, ['backButtonHandler']);
+    $onsen.derivePropertiesFromElement(ModalView, ['onDeviceBackButton']);
 
 
     return ModalView;
