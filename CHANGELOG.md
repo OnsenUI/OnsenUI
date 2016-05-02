@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.2
 ----
+ * ons-tab: Fix dynamic `icon` and `label` attributes.
 
 v2.0.0-rc.1
 ----
