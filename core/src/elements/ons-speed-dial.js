@@ -134,6 +134,7 @@ class SpeedDialElement extends BaseElement {
   }
 
   attachedCallback() {
+    this._updateDirection(this.hasAttribute('direction') ? this.getAttribute('direction') : 'up');
     this.addEventListener('click', this._boundOnClick, false);
   }
 
@@ -165,7 +166,10 @@ class SpeedDialElement extends BaseElement {
 
   _updateRipple() {
     const fab = util.findChild(this, 'ons-fab');
-    this.hasAttribute('ripple') ? fab.setAttribute('ripple', '') : fab.removeAttribute('ripple');
+
+    if (fab) {
+      this.hasAttribute('ripple') ? fab.setAttribute('ripple', '') : fab.removeAttribute('ripple');
+    }
   }
 
   _updateDirection(direction) {
