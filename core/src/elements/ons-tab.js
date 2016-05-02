@@ -186,13 +186,14 @@ class TabElement extends BaseElement {
       this._updateDefaultTemplate();
     }
 
+    ModifierUtil.initModifier(this, scheme);
     this._updateRipple();
 
     this.setAttribute('_compiled', '');
   }
 
   _updateRipple() {
-    util.updateRipple(this);
+    // util.updateRipple(this.querySelector('.tab-bar__button'), this);
   }
 
   _updateDefaultTemplate() {
