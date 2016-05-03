@@ -30,7 +30,7 @@
 
         scope.$on('$destroy', () => {
           element.off('input', onInput);
-          scope = element = attrs;
+          scope = element = attrs = null;
         });
       }
     };
