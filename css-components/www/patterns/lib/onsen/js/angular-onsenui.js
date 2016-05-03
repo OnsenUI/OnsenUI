@@ -1,4 +1,4 @@
-/*! angular-onsenui.js for onsenui - v2.0.0-rc.3 - 2016-05-03 */
+/*! angular-onsenui.js for onsenui - v2.0.0-rc.4 - 2016-05-03 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
