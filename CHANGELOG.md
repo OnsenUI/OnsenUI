@@ -8,6 +8,7 @@ v2.0.0-rc.3
  * ons-navigator: Support changing the `animation` attribute dynamically.
  * ons-dialog: Support changing the `animation` attribute dynamically.
  * ons-alert-dialog: Support changing the `animation` attribute dynamically.
+ * ons-popover: Fix shadow glitch.
 
 v2.0.0-rc.2
 ----
