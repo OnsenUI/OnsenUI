@@ -5,6 +5,9 @@ CHANGELOG
 v2.0.0-rc.3
 ----
  * core: Support creation with `document.createElement` for several components.
+ * ons-navigator: Support changing the `animation` attribute dynamically.
+ * ons-dialog: Support changing the `animation` attribute dynamically.
+ * ons-alert-dialog: Support changing the `animation` attribute dynamically.
 
 v2.0.0-rc.2
 ----
