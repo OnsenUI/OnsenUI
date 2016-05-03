@@ -535,7 +535,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('calls event parent handler if there are less than two pages', () => {
-      var event = { 'callParentHandler': () => { return; }};
+      var event = {callParentHandler: () => { return; }};
       var spy = chai.spy.on(event, 'callParentHandler');
       nav._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
