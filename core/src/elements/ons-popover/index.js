@@ -379,15 +379,17 @@ class PopoverElement extends BaseElement {
 
         before && before();
 
-        this._animator(options)[action](this, () => {
-          after && after();
+        contentReady(this, () => {
+          this._animator(options)[action](this, () => {
+            after && after();
 
-          unlock();
+            unlock();
 
-          util.triggerElementEvent(this, `post${action}`, {popover: this});
+            util.triggerElementEvent(this, `post${action}`, {popover: this});
 
-          callback && callback();
-          resolve(this);
+            callback && callback();
+            resolve(this);
+          });
         });
       });
     });

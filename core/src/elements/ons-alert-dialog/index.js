@@ -360,14 +360,16 @@ class AlertDialogElement extends BaseElement {
         this._mask.style.opacity = '1';
 
         return new Promise(resolve => {
-          animator.show(this, () => {
-            this._visible = true;
-            unlock();
+          contentReady(this, () => {
+            animator.show(this, () => {
+              this._visible = true;
+              unlock();
 
-            util.triggerElementEvent(this, 'postshow', {alertDialog: this});
+              util.triggerElementEvent(this, 'postshow', {alertDialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
@@ -424,15 +426,17 @@ class AlertDialogElement extends BaseElement {
         const animator = this._animatorFactory.newAnimator(options);
 
         return new Promise(resolve => {
-          animator.hide(this, () => {
-            this.style.display = 'none';
-            this._visible = false;
-            unlock();
+          contentReady(this, () => {
+            animator.hide(this, () => {
+              this.style.display = 'none';
+              this._visible = false;
+              unlock();
 
-            util.triggerElementEvent(this, 'posthide', {alertDialog: this});
+              util.triggerElementEvent(this, 'posthide', {alertDialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
