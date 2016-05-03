@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.3
+----
+ * core: Support creation with `document.createElement` for several components.
+
 v2.0.0-rc.2
 ----
  * ons-tab: Fix dynamic `icon` and `label` attributes.
