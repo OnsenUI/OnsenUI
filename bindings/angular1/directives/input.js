@@ -109,7 +109,6 @@
             ? element.off('input', onInput)
             : element.off('change', onInput);
 
-          console.log('DESTROY');
           scope = element = attrs = el = null;
         });
       }
