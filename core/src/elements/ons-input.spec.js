@@ -202,8 +202,8 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('autoStyling', (done) => {
-    it('adds \'material\' modifier on Android', () => {
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', (done) => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-input></ons-input>');
 
