@@ -221,6 +221,10 @@ class AlertDialogElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._boundCancel = this._cancel.bind(this);
 
+    this._updateAnimatorFactory();
+  }
+
+  _updateAnimatorFactory() {
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: AlertDialogAnimator,
@@ -512,6 +516,9 @@ class AlertDialogElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
+    else if (name === 'animation') {
+      this._updateAnimatorFactory();
     }
   }
 }
