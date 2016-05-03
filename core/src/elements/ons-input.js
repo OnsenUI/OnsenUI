@@ -203,7 +203,7 @@ class InputElement extends BaseElement {
     } else if (name === 'placeholder') {
       return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
-      this._input.id = current;
+      contentReady(this, () => this._input.id = current);
     } if (name === 'checked') {
       this.checked = current !== null;
     }
