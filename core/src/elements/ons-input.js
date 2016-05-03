@@ -201,7 +201,7 @@ class InputElement extends BaseElement {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     } else if (name === 'placeholder') {
-      return this._updateLabel();
+      return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
       this._input.id = current;
     } if (name === 'checked') {
