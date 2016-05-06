@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.5
 ----
  * css-components: Fix material list item paddings.
+ * ons-page: Toolbar animation works with nested components.
 
 v2.0.0-rc.4
 ----
