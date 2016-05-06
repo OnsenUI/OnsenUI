@@ -460,6 +460,11 @@ class NavigatorElement extends BaseElement {
 
       var enterPage  = this.pages[pageLength - 1];
       var leavePage = this.pages[pageLength - 2];
+
+      if (enterPage.nodeName !== 'ONS-PAGE') {
+        throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
+      }
+
       enterPage.updateBackButton(pageLength - 1);
 
       enterPage.data = options.data;
@@ -499,7 +504,10 @@ class NavigatorElement extends BaseElement {
 
         options._linked ? push() : rewritables.link(this, enterPage, options, push);
       });
-    }).catch(() => this._isRunning = false);
+    }).catch((error) => {
+      this._isRunning = false;
+      throw error;
+    });
   }
 
   /**
