@@ -273,12 +273,8 @@ class PageElement extends BaseElement {
    * @return {Boolean}
    */
   _canAnimateToolbar() {
-    if (util.findChild(this, 'ons-toolbar')) {
-      return true;
-    }
-    return !!util.findChild(this._contentElement, el => {
-      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
-    });
+    var toolbar = this.querySelector('ons-toolbar');
+    return !!toolbar && !toolbar.hasAttribute('inline');
   }
 
   /**
@@ -296,7 +292,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getBottomToolbarElement() {
-    return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
+    return this.querySelector('ons-bottom-toolbar') || internal.nullElement;
   }
 
 
@@ -304,7 +300,7 @@ class PageElement extends BaseElement {
    * @return {HTMLElement}
    */
   _getToolbarElement() {
-    return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+    return this.querySelector('ons-toolbar') || nullToolbarElement;
   }
 
   /**
