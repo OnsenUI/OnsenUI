@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.5
+----
+ * css-components: Fix material list item paddings.
+
 v2.0.0-rc.4
 ----
  * ons-input: Fix to `input-id` attribute.
