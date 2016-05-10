@@ -484,7 +484,7 @@ class PopoverElement extends BaseElement {
   }
 
   detachedCallback() {
-    if (this.mask) {
+    if (this._mask) {
       this._mask.removeEventListener('click', this._boundCancel, false);
     }
 
