@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.5
 ----
  * css-components: Fix material list item paddings.
+ * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
 
 v2.0.0-rc.4
 ----
