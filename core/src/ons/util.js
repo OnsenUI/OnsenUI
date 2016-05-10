@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import animationOptionsParse from './animation-options-parser';
+import contentReady from './content-ready';
 
 const util = {};
 
@@ -280,15 +281,17 @@ util.executeAction = (element, action, options, actionInfo = {}) => {
 
       before && before();
 
-      element._animator(options)[action](element, () => {
-        after && after();
+      contentReady(element, () => {
+        element._animator(options)[action](element, () => {
+          after && after();
 
-        unlock();
+          unlock();
 
-        events && util.emitEvent(element, `post${action}`, eventData);
+          events && util.emitEvent(element, `post${action}`, eventData);
 
-        callback && callback();
-        resolve(element);
+          callback && callback();
+          resolve(element);
+        });
       });
     });
   });
@@ -402,8 +405,12 @@ const isOfType = (object, type) => {
   if (object === null) {
     return type === 'null';
   }
-  return ((typeof type === 'function' || type instanceof Function) && object instanceof type) ||
-         (typeof type === 'string' && typeof object === type);
+
+  try {
+    return object instanceof type;
+  } catch (e) {
+    return typeof type === 'string' && typeof object === type;
+  }
 };
 
 const _printType = type => {

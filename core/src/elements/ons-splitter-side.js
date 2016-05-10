@@ -455,6 +455,7 @@ class SplitterSideElement extends BaseElement {
     }
 
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
+
     if (!this.hasAttribute('side')) {
       this.setAttribute('side', 'left');
     }
@@ -528,7 +529,10 @@ class SplitterSideElement extends BaseElement {
 
   _updateSwipeable(swipeable = this.getAttribute('swipeable')) {
     const action = swipeable === null ? 'off' : 'on';
-    this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+
+    if (this._gestureDetector) {
+      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+    }
   }
 
   _updateSwipeTargetWidth(value = this.getAttribute('swipe-target-width')) {

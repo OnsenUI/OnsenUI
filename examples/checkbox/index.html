@@ -15,7 +15,7 @@
   <script>
     ons.bootstrap()
       .controller('PageController', function($scope) {
-        $scope.checked = 'checked';
+        $scope.checked = true;
       });
   </script>
 
@@ -29,16 +29,13 @@
     </ons-toolbar>
 
     <p>
-      <label>
-        Checkbox
-        <ons-input type="checkbox" ng-model="checked" ng-true-value="'checked'" ng-false-value="'not checked'"></ons-input>
-      </label>
+      <input type="checkbox" ng-model="checked">
     </p>
 
     <p>
       <label>
-        Material checkbox
-        <ons-input modifier="material" type="checkbox" ng-model="checked" ng-true-value="'checked'" ng-false-value="'not checked'"></ons-input>
+        Checkbox
+        <ons-input type="checkbox" ng-change="console.log('change')" ng-model="checked"></ons-input>
       </label>
     </p>
 

@@ -22,7 +22,7 @@ import Animator from './animator-css';
 
 /**
  * @element ons-ripple
- * @category form
+ * @category ripple
  * @description
  *   [en]
  *     Adds a Material Design "ripple" effect to an element. The ripple effect will spread from the position where the user taps.

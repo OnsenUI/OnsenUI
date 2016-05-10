@@ -186,13 +186,14 @@ class TabElement extends BaseElement {
       this._updateDefaultTemplate();
     }
 
+    ModifierUtil.initModifier(this, scheme);
     this._updateRipple();
 
     this.setAttribute('_compiled', '');
   }
 
   _updateRipple() {
-    util.updateRipple(this);
+    // util.updateRipple(this.querySelector('.tab-bar__button'), this);
   }
 
   _updateDefaultTemplate() {
@@ -203,8 +204,13 @@ class TabElement extends BaseElement {
     const button = util.findChild(this, '.tab-bar__button');
 
     const template = defaultInnerTemplateSource.cloneNode(true);
-    while (template.children[0]) {
-      button.appendChild(template.children[0]);
+
+    if (!button.querySelector('.tab-bar__icon')) {
+      button.insertBefore(template.querySelector('.tab-bar__icon'), button.firstChild);
+    }
+
+    if (!button.querySelector('.tab-bar__label')) {
+      button.appendChild(template.querySelector('.tab-bar__label'));
     }
 
     const self = this;

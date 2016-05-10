@@ -228,12 +228,7 @@ class NavigatorElement extends BaseElement {
 
     this._isRunning = false;
 
-    this._animatorFactory = new AnimatorFactory({
-      animators: _animatorDict,
-      baseClass: NavigatorTransitionAnimator,
-      baseClassName: 'NavigatorTransitionAnimator',
-      defaultAnimation: this.getAttribute('animation')
-    });
+    this._updateAnimatorFactory();
   }
 
   attachedCallback() {
@@ -259,12 +254,24 @@ class NavigatorElement extends BaseElement {
     });
   }
 
+  _updateAnimatorFactory() {
+    this._animatorFactory = new AnimatorFactory({
+      animators: _animatorDict,
+      baseClass: NavigatorTransitionAnimator,
+      baseClassName: 'NavigatorTransitionAnimator',
+      defaultAnimation: this.getAttribute('animation')
+    });
+  }
+
   detachedCallback() {
     this._deviceBackButtonHandler.destroy();
     this._deviceBackButtonHandler = null;
   }
 
   attributeChangedCallback(name, last, current) {
+    if (name === 'animation') {
+      this._updateAnimatorFactory();
+    }
   }
 
   /**

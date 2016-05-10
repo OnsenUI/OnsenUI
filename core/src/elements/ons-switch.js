@@ -44,7 +44,7 @@ const locations = {
 
 /**
  * @element ons-switch
- * @category form
+ * @category switch
  * @description
  *   [en]
  *     Switch component. The switch can be toggled both by dragging and tapping.

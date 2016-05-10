@@ -40,13 +40,11 @@ describe('OnsPageElement', () => {
 
   describe('#_tryToFillStatusBar()', (done) => {
     it('fills status bar', () => {
-      var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
-      element._tryToFillStatusBar().then(() => {
-        expect(element.hasAttribute('status-bar-fill')).to.be.true;
-        done();
-      });
-      ons._internal.shouldFillStatusBar = tmp;
+      var tmp = ons._internal.autoStatusBarFill;
+      ons._internal.autoStatusBarFill = action => action();
+      element._tryToFillStatusBar();
+      expect(element.hasAttribute('status-bar-fill')).to.be.true;
+      ons._internal.autoStatusBarFill = tmp;
     });
   });
 

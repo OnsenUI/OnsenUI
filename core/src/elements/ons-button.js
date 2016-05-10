@@ -24,7 +24,7 @@ const scheme = {'': 'button--*'};
 
 /**
  * @element ons-button
- * @category form
+ * @category button
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja]アウトラインを持ったボタンを表示します。[/ja]
