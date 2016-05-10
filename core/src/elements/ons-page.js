@@ -143,7 +143,6 @@ class PageElement extends BaseElement {
       }
 
       this._isShown = false;
-      this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
       this.pushedOptions = {};
@@ -273,23 +272,23 @@ class PageElement extends BaseElement {
    * @return {Boolean}
    */
   _canAnimateToolbar() {
-    if (util.findChild(this, 'ons-toolbar')) {
-      return true;
-    }
-    return !!util.findChild(this._contentElement, el => {
+    const toolbar = util.findChild(this, 'ons-toolbar') || util.findChild(this._contentElement, el => {
       return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
     });
+
+    return toolbar && !util.hasModifier(toolbar, 'material');
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getBackgroundElement() {
-    const result = util.findChild(this, '.page__background');
-    if (result) {
-      return result;
-    }
-    throw Error('fail to get ".page__background" element.');
+  get _background() {
+    return util.findChild(this, '.page__background');
+  }
+
+  get _content() {
+    return util.findChild(this, '.page__content');
+  }
+
+  get _toolbar() {
+    return util.findChild(this, 'ons-toolbar');
   }
 
   /**
@@ -349,17 +348,19 @@ class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (!util.findChild(this, '.page__background') || !util.findChild(this, '.page__content')) {
-
+    if (!this._content) {
       const background = util.create('.page__background');
       const content = util.create('.page__content');
 
-      while (this.firstChild) {
-        content.appendChild(this.firstChild);
-      }
+      util.findChildren(this, e =>
+        e.className.match(/\bpage__/) || (e.nodeName.match(/ons-(bottom-)?toolbar/) && !e.hasAttribute('inline'))
+      ).forEach(e => content.appendChild(e));
 
-      this.appendChild(background);
-      this.appendChild(content);
+      const toolbar = this._toolbar;
+      const location = toolbar ? toolbar.nextSibling : (this.childNodes[0] || null);
+
+      this.insertBefore(content, location);
+      this.insertBefore(this._background || background, content);
     }
 
     ModifierUtil.initModifier(this, scheme);
