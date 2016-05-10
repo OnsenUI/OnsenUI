@@ -113,7 +113,6 @@ class CollapseMode {
     this._active = false;
     this._state = CLOSED_STATE;
     this._element = element;
-    this._lock = new DoorLock();
   }
 
   isOpen() {
@@ -202,7 +201,7 @@ class CollapseMode {
     if (this._state === FINAL_STATE) {
       return Promise.resolve(this._element);
     }
-    if (this._lock.isLocked()) {
+    if (this._element._doorLock.isLocked()) {
       return Promise.reject('Splitter side is locked.');
     }
     if (name === 'open' && this._isOpenOtherSideMenu()) {
@@ -222,10 +221,10 @@ class CollapseMode {
       callback && callback();
     };
 
-    if (options.withoutAnimation) {
-      done();
-      return Promise.resolve(this._element);
-    }
+    // if (options.withoutAnimation) {
+    //   done();
+    //   return Promise.resolve(this._element);
+    // }
     this._state = CHANGING_STATE;
     return new Promise(resolve => {
       this._animator[name](() => {
@@ -437,6 +436,7 @@ class SplitterSideElement extends BaseElement {
    */
 
   createdCallback() {
+    this._doorLock = new DoorLock();
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
     this._animatorFactory = new AnimatorFactory({

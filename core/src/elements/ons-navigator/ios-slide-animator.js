@@ -18,6 +18,14 @@ limitations under the License.
 import NavigatorTransitionAnimator from './animator';
 import util from 'ons/util';
 
+const nullElement = document.createElement('div');
+const find = (element, selectors) => {
+  if (Array.isArray(selectors)) {
+    return selectors.map(s => element.querySelector(s)).filter(e => e);
+  }
+  return element.querySelector(selectors) || nullElement;
+}
+
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
@@ -40,39 +48,19 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
   _decompose(page) {
     CustomElements.upgrade(page);
-    const toolbar = page._getToolbarElement();
-    CustomElements.upgrade(toolbar);
-    const left = toolbar._getToolbarLeftItemsElement();
-    const right = toolbar._getToolbarRightItemsElement();
+    const toolbar = util.findChild(page, 'ons-toolbar') || nullElement;
+    util.match(toolbar, 'ons-toolbar') && CustomElements.upgrade(toolbar);
 
-    const excludeBackButtonLabel = function(elements) {
-      const result = [];
+    const labels = find(toolbar, ['.center', '.back-button__label']);
 
-      for (let i = 0; i < elements.length; i++) {
-        if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-          const iconElement = elements[i].querySelector('.back-button__icon');
-          if (iconElement) {
-            result.push(iconElement);
-          }
-        } else {
-          result.push(elements[i]);
-        }
-      }
+    const sides = find(toolbar, ['.left', '.right']).map(e => e.children.length ? [].slice.call(e.children) : [e]);
 
-      return result;
-    };
-
-    const other = []
-      .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
-      .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
-
-    const pageLabels = [
-      toolbar._getToolbarCenterItemsElement(),
-      toolbar._getToolbarBackButtonLabelElement()
-    ];
+    const other = [].concat.apply([], sides).map(e => {
+      return util.match(e, 'ons-back-button') ? find(e, '.back-button__icon') : e
+    });
 
     return {
-      pageLabels: pageLabels,
+      pageLabels: labels,
       other: other,
       content: page._getContentElement(),
       background: page._getBackgroundElement(),

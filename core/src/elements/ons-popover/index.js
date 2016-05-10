@@ -303,6 +303,7 @@ class PopoverElement extends BaseElement {
   }
 
   _clearStyles() {
+    this.style.display = 'none';
     ['top', 'bottom', 'left', 'right'].forEach(e => {
       this._arrow.style[e] = this._content.style[e] = this.style[e] = '';
       this._popover.classList.remove(`popover--${e}`);
@@ -325,8 +326,8 @@ class PopoverElement extends BaseElement {
     const template = templateSource.cloneNode(true);
     const content = template.querySelector('.popover__content');
 
-    while (this.childNodes[0]) {
-      content.appendChild(this.childNodes[0]);
+    while (this.firstChild) {
+      content.appendChild(this.firstChild);
     }
 
     this.appendChild(template);
@@ -345,52 +346,6 @@ class PopoverElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _prepareAnimationOptions(options) {
-    if (options.animation && !(options.animation in _animatorDict)) {
-      throw new Error(`Animator ${options.animation} is not registered.`);
-    }
-
-    options.animationOptions = util.extend(
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
-      options.animationOptions || {}
-    );
-  }
-
-  _executeAction(actions, options = {}) {
-    const callback = options.callback;
-    const {action, before, after} = actions;
-
-    this._prepareAnimationOptions(options);
-
-    let canceled = false;
-    util.triggerElementEvent(this, `pre${action}`, { // synchronous
-      popover: this,
-      cancel: () => canceled = true
-    });
-
-    if (canceled) {
-      return Promise.reject(`Canceled in pre${action} event.`);
-    }
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => {
-        const unlock = this._doorLock.lock();
-
-        before && before();
-
-        this._animator(options)[action](this, () => {
-          after && after();
-
-          unlock();
-
-          util.triggerElementEvent(this, `post${action}`, {popover: this});
-
-          callback && callback();
-          resolve(this);
-        });
-      });
-    });
-  }
 
   /**
    * @method show
@@ -427,14 +382,15 @@ class PopoverElement extends BaseElement {
      throw new Error('Invalid target');
     }
 
-    return this._executeAction({
-      action: 'show',
+    return util.executeAction(this, 'show', options, {
+      events: true,
+      eventData: {popover: this},
       before: () => {
         this.style.display = 'block';
         this._currentTarget = target;
         this._positionPopover(target);
       }
-    }, options);
+    });
   }
 
   /**
@@ -460,13 +416,11 @@ class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
-    return this._executeAction({
-      action: 'hide',
-      after: () => {
-        this.style.display = 'none';
-        this._clearStyles();
-      }
-    }, options);
+    return util.executeAction(this, 'hide', options, {
+      events: true,
+      eventData: {popover: this},
+      after: () => this._clearStyles()
+    });
   }
 
   /**

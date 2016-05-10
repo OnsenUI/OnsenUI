@@ -240,14 +240,80 @@ util.triggerElementEvent = (target, eventName, detail = {}) => {
     detail: detail
   });
 
-  Object.keys(detail).forEach(key => {
-    event[key] = detail[key];
-  });
+  util.extend(event, detail); // do we really want this?
 
   target.dispatchEvent(event);
 
   return event;
 };
+
+
+/**
+ * @param {Element} element
+ * @param {String} action
+ * @param {Object} options
+ * @param {Object} [actionInfo]
+ * @param {Function} [actionInfo.before]
+ * @param {Function} [actionInfo.after]
+ * @param {Boolean}  [actionInfo.events]
+ * @param {Object}   [actionInfo.eventData]
+ * @return {Promise}
+ */
+util.executeAction = (element, action, options, actionInfo = {}) => {
+  const {before, after, events, eventData} = actionInfo;
+  const callback = options.callback;
+
+  options.animationOptions = util.extend(
+    AnimatorFactory.parseAnimationOptionsString(element.getAttribute('animation-options')),
+    options.animationOptions || {}
+  );
+
+  if (events && util.emitEvent(element, `pre${action}`, eventData)) {
+    return Promise.reject(`Canceled in pre${action} event.`);
+  }
+
+  return new Promise(resolve => {
+    // element._doorLock = element._doorLock || new DoorLock();
+
+    element._doorLock.waitUnlock(() => {
+      const unlock = element._doorLock.lock();
+
+      before && before();
+
+      element._animator(options)[action](element, () => {
+        after && after();
+
+        unlock();
+
+        events && util.emitEvent(element, `post${action}`, eventData);
+
+        callback && callback();
+        resolve(element);
+      });
+    });
+  });
+};
+
+/**
+ * @param {Element} element
+ * @param {String} eventName
+ * @param {Object} [eventData]
+ * @return {Boolean} canceled
+ */
+util.emitEvent = (element, eventName, eventData = {}) => {
+  if (eventName.slice(0, 3) !== 'pre') {
+    util.triggerElementEvent(element, eventName, eventData);
+    return false;
+  }
+  let canceled = false;
+
+  util.triggerElementEvent(element, eventName, util.extend({
+    cancel: () => canceled = true
+  }, eventData));
+
+  return canceled;
+};
+
 
 /**
  * @param {Element} target

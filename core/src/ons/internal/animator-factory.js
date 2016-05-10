@@ -45,20 +45,13 @@ export default class AnimatorFactory {
    * @return {Object/null}
    */
   static parseAnimationOptionsString(jsonString) {
-    try {
-      if (typeof jsonString === 'string') {
-        const result = util.animationOptionsParse(jsonString);
-        if (typeof result === 'object' && result !== null) {
-          return result;
-        } else {
-          console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
-        }
-      }
-      return {};
-    } catch (e) {
+    if (jsonString) {
+      try {
+        return util.animationOptionsParse(jsonString);
+      } catch (e) { }
       console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
-      return {};
     }
+    return {};
   }
 
   /**

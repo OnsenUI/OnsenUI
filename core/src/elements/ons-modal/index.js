@@ -132,13 +132,10 @@ class ModalElement extends BaseElement {
     this.style.display = 'none';
     this.classList.add('modal');
 
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('modal__content');
+    const wrapper = util.create('.modal__content');
 
-    while (this.childNodes[0]) {
-      const node = this.childNodes[0];
-      this.removeChild(node);
-      wrapper.insertBefore(node, null);
+    while (this.firstChild) {
+      wrapper.appendChild(this.firstChild);
     }
 
     this.appendChild(wrapper);
@@ -155,8 +152,10 @@ class ModalElement extends BaseElement {
   }
 
   attachedCallback() {
-    setImmediate(this._ensureNodePosition.bind(this));
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    setImmediate(() => {
+      this._ensureNodePosition();
+      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    });
   }
 
   _ensureNodePosition() {
@@ -256,12 +255,8 @@ class ModalElement extends BaseElement {
    *   [en]Toggle modal visibility.[/en]
    *   [ja]モーダルの表示を切り替えます。[/ja]
    */
-  toggle() {
-    if (this.visible) {
-      return this.hide.apply(this, arguments);
-    } else {
-      return this.show.apply(this, arguments);
-    }
+  toggle(options) {
+    return this.visible ? this.hide(options) : this.show(options);
   }
 
   /**
@@ -310,6 +305,8 @@ class ModalElement extends BaseElement {
       this._doorLock.waitUnlock(() => resolve(tryHide()));
     });
   }
+
+  // executeAction()
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
