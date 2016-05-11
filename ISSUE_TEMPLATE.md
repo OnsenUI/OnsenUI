@@ -9,4 +9,4 @@ __Encountered problem__
 
 
 __How to reproduce__
-
+[](If possible provide a working example where the issue is reproduced. For this, go to http://tutorial.onsen.io/ , select a framework and a template and modify or replace it. This will use the latest Onsen UI version released. After you finish, click 'Export to Codepen' button, save it and link it here.)
