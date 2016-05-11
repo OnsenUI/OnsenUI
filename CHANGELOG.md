@@ -9,7 +9,7 @@ v2.0.0-rc.5
  * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
  * ons-carousel: Fix [#1404](https://github.com/OnsenUI/OnsenUI/issues/1404).
  * ons-speed-dial: Add `isOpen()` method.
- * ons-speed-dial: Emit `show`, `hide`, `open` and `close` events.
+ * ons-speed-dial: Emit `open` and `close` events.
 
 v2.0.0-rc.4
 ----
