@@ -3,13 +3,12 @@
 describe('OnsInputElement', () => {
   let element;
 
-  beforeEach((done) => {
+  beforeEach(done => {
     element = ons._util.createElement(`
       <ons-input placeholder="Username"></ons-input>
     `);
 
     document.body.appendChild(element);
-
     setImmediate(done);
   });
 

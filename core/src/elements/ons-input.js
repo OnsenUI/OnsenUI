@@ -199,7 +199,7 @@ class InputElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      return contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
     } else if (name === 'placeholder') {
       return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
@@ -213,22 +213,26 @@ class InputElement extends BaseElement {
   }
 
   attachedCallback() {
-    if (this.type !== 'checkbox' && this.type !== 'radio') {
-      this.addEventListener('input', this._boundOnInput);
-      this.addEventListener('focusin', this._boundOnFocusin);
-      this.addEventListener('focusout', this._boundOnFocusout);
-    }
+    contentReady(this, () => {
+      if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
+        this._input.addEventListener('input', this._boundOnInput);
+        this._input.addEventListener('focusin', this._boundOnFocusin);
+        this._input.addEventListener('focusout', this._boundOnFocusout);
+      }
 
-    this.addEventListener('focus', this._boundDelegateEvent);
-    this.addEventListener('blur', this._boundDelegateEvent);
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
+    });
   }
 
   detachedCallback() {
-    this.removeEventListener('input', this._boundOnInput);
-    this.removeEventListener('focusin', this._boundOnFocusin);
-    this.removeEventListener('focusout', this._boundOnFocusout);
-    this.removeEventListener('focus', this._boundDelegateEvent);
-    this.removeEventListener('blur', this._boundDelegateEvent);
+    contentReady(this, () => {
+      this._input.removeEventListener('input', this._boundOnInput);
+      this._input.removeEventListener('focusin', this._boundOnFocusin);
+      this._input.removeEventListener('focusout', this._boundOnFocusout);
+      this._input.removeEventListener('focus', this._boundDelegateEvent);
+      this._input.removeEventListener('blur', this._boundDelegateEvent);
+    });
   }
 
   _setLabel(value) {
