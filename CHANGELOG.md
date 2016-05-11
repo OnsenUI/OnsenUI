@@ -11,6 +11,7 @@ v2.0.0-rc.5
  * ons-speed-dial: Add `isOpen()` method.
  * ons-speed-dial: Emit `open` and `close` events.
  * ons-speed-dial: Block clicks when hidden.
+ * ons-splitter: Correctly import dependency.
 
 v2.0.0-rc.4
 ----
