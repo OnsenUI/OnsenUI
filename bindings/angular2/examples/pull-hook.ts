@@ -1,10 +1,12 @@
 import {
   bootstrap,
-  Component
+  Component,
+  ONS_DIRECTIVES
 } from '../src/angular2-onsenui';
 
 @Component({
   selector: 'app',
+  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -15,7 +17,7 @@ import {
     <div class="page__content">
 
       <div class="scroll">
-        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState(pullHook)" #pullHook>
+        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState(pullHook)" [onAction]="onAction" #pullHook>
           {{message}}
         </ons-pull-hook>
 
@@ -37,6 +39,12 @@ export class AppComponent {
   message: string = 'Pull down to refresh';
 
   constructor() {
+  }
+
+  onAction(done: Function) {
+    setTimeout(() => { 
+      done();
+    }, 1000);
   }
 
   onChangeState(pullHook) {

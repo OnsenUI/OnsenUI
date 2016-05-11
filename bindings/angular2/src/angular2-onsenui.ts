@@ -11,6 +11,7 @@ export * from './directives/ons-popover';
 export * from './directives/ons-switch';
 export * from './directives/ons-range';
 export * from './directives/ons-input';
+export * from './directives/ons-pull-hook';
 
 
 export * from './ons/notification';
@@ -30,6 +31,7 @@ import {OnsPopover} from './directives/ons-popover';
 import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
+import {OnsPullHook} from './directives/ons-pull-hook';
 
 export const ONS_DIRECTIVES = [
   OnsNavigator,
@@ -39,5 +41,6 @@ export const ONS_DIRECTIVES = [
   OnsPopover,
   OnsSwitch,
   OnsRange,
-  OnsInput
+  OnsInput,
+  OnsPullHook
 ];
