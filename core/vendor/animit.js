@@ -224,7 +224,7 @@ window.animit = (function(){
     }
 
     this.elements = this.elements.filter(function(e) {
-      return element instanceof HTMLElement;
+      return e instanceof HTMLElement;
     });
 
     this.transitionQueue = [];
