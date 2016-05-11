@@ -188,3 +188,5 @@ window.OnsSplitterElement.registerAnimator = function(name, Animator) {
 };
 
 window.OnsSplitterElement.SplitterAnimator = SplitterAnimator;
+
+export default OnsSplitterElement;

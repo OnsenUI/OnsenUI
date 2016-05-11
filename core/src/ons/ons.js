@@ -211,12 +211,17 @@ ons.forcePlatformStyling = newPlatform => {
   ons.enableAutoStyling();
   ons.platform.select(newPlatform || 'ios');
 
-  ons._util.arrayFrom(document.querySelectorAll('ons-if'))
-    .forEach(element => element._platformUpdate());
-
   ons._util.arrayFrom(document.querySelectorAll('*'))
-    .filter(element => element.tagName.match(/^ons-/i))
-    .forEach(element => ons._autoStyle.prepare(element, true));
+    .forEach(function(element) {
+      if (element.tagName.toLowerCase() === 'ons-if') {
+        element._platformUpdate();
+      } else if (element.tagName.match(/^ons-/i)) {
+        ons._autoStyle.prepare(element, true);
+        if (element.tagName.toLowerCase() === 'ons-tabbar') {
+          element._updatePosition();
+        }
+      }
+    });
 };
 
 /**

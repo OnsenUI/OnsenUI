@@ -4,12 +4,14 @@ describe('OnsPopoverElement', () => {
   let popover, target;
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
-  beforeEach(() => {
+  beforeEach((done) => {
     popover = new OnsPopoverElement();
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);
     document.body.appendChild(popover);
+
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -237,8 +239,14 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'mask-color\' attribute', () => {
-    const popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
-    expect(popover._mask.style.backgroundColor).to.equal('red');
+    it ('works', (done) => {
+      const popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
+
+      setImmediate(() => {
+        expect(popover._mask.style.backgroundColor).to.equal('red');
+        done();
+      });
+    });
   });
 
   describe('\'style\' attribute', () => {
@@ -273,7 +281,7 @@ describe('OnsPopoverElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      const e = document.createElement('ons-popover');
+      const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

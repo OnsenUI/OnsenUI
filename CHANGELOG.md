@@ -2,7 +2,34 @@
 CHANGELOG
 ====
 
-v2.0.0-rc.0
+v2.0.0-rc.5
+----
+ * css-components: Fix material list item paddings.
+ * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
+ * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
+ * ons-carousel: Fix [#1404](https://github.com/OnsenUI/OnsenUI/issues/1404).
+ * ons-speed-dial: Add `isOpen()` method.
+ * ons-speed-dial: Emit `open` and `close` events.
+ * ons-speed-dial: Block clicks when hidden.
+ * ons-splitter: Correctly import dependency.
+
+v2.0.0-rc.4
+----
+ * ons-input: Fix to `input-id` attribute.
+
+v2.0.0-rc.3
+----
+ * core: Support creation with `document.createElement` for several components.
+ * ons-navigator: Support changing the `animation` attribute dynamically.
+ * ons-dialog: Support changing the `animation` attribute dynamically.
+ * ons-alert-dialog: Support changing the `animation` attribute dynamically.
+ * ons-popover: Fix shadow glitch.
+
+v2.0.0-rc.2
+----
+ * ons-tab: Fix dynamic `icon` and `label` attributes.
+
+v2.0.0-rc.1
 ----
  * ons-input: Fix behavior of `checked` attribute.
  * ons-popover: Fix glitch on iOS for bottom popover.

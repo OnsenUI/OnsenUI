@@ -20,7 +20,6 @@
 
 // internal variables
 var-list-background-color = $list-background-color
-var-list-header-background-color = $list-header-background-color
 var-list-header-color = $text-color
 var-list-item-color = $text-color
 var-list-item-active-background-color = $list-tap-active-background-color
@@ -695,18 +694,21 @@ list__item()
   padding 16px 0px 16px 0px
   min-width 56px
   line-height 1
+  box-sizing border-box
 
 .list__item--material__left:empty
 
 .list__item--material__center
   padding 16px 0
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material__right
   padding 16px 16px 16px 0px
   line-height 1
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material.list__item--longdivider

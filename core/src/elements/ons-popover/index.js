@@ -24,6 +24,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.popover': 'popover--*',
@@ -213,9 +214,7 @@ class PopoverElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => this._compile());
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
@@ -320,6 +319,10 @@ class PopoverElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
+    if (this.classList.contains('popover')) {
+      return;
+    }
+
     this.classList.add('popover');
 
     const template = templateSource.cloneNode(true);
@@ -341,8 +344,6 @@ class PopoverElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   _prepareAnimationOptions(options) {
@@ -378,15 +379,17 @@ class PopoverElement extends BaseElement {
 
         before && before();
 
-        this._animator(options)[action](this, () => {
-          after && after();
+        contentReady(this, () => {
+          this._animator(options)[action](this, () => {
+            after && after();
 
-          unlock();
+            unlock();
 
-          util.triggerElementEvent(this, `post${action}`, {popover: this});
+            util.triggerElementEvent(this, `post${action}`, {popover: this});
 
-          callback && callback();
-          resolve(this);
+            callback && callback();
+            resolve(this);
+          });
         });
       });
     });
@@ -513,27 +516,33 @@ class PopoverElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
-    this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
-
-    this._mask.addEventListener('click', this._boundCancel, false);
-
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
-    this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
-    this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
+    contentReady(this, () => {
+      this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
 
-    window.addEventListener('resize', this._boundOnChange, false);
+      this._mask.addEventListener('click', this._boundCancel, false);
+
+      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
+
+      window.addEventListener('resize', this._boundOnChange, false);
+    });
   }
 
   detachedCallback() {
-    this._mask.removeEventListener('click', this._boundCancel, false);
+    if (this.mask) {
+      this._mask.removeEventListener('click', this._boundCancel, false);
+    }
 
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
 
-    this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-    this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
+    if (this._popover) {
+      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
+    }
 
     window.removeEventListener('resize', this._boundOnChange, false);
   }

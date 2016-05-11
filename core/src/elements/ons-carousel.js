@@ -60,12 +60,9 @@ const VerticalModeTrait = {
     const sizeAttr = this._getCarouselItemSizeAttr();
     const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-    const width = (this._dimensions.width || 0) - parseInt(this._style.paddingLeft, 10) - parseInt(this._style.paddingRight, 10);
-
     for (let i = 0; i < children.length; i++) {
       children[i].style.position = 'absolute';
       children[i].style.height = sizeAttr;
-      children[i].style.width = width + 'px';
       children[i].style.visibility = 'visible';
       children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
     }
@@ -118,11 +115,8 @@ const HorizontalModeTrait = {
     const sizeAttr = this._getCarouselItemSizeAttr();
     const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-    const height = (this._dimensions.height || 0) - parseInt(this._style.paddingTop, 10) - parseInt(this._style.paddingBottom, 10);
-
     for (let i = 0; i < children.length; i++) {
       children[i].style.position = 'absolute';
-      children[i].style.height = height + 'px';
       children[i].style.width = sizeAttr;
       children[i].style.visibility = 'visible';
       children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
