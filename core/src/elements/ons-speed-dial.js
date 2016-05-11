@@ -47,20 +47,6 @@ const scheme = {
 class SpeedDialElement extends BaseElement {
 
   /**
-   * @event show
-   * @description
-   *   [en]Fired when the speed dial is shown.[/en]
-   *   [ja][/ja]
-   */
-
-  /**
-   * @event hide
-   * @description
-   *   [en]Fired when the speed dial is hidden.[/en]
-   *   [ja][/ja]
-   */
-
-  /**
    * @event open
    * @description
    *   [en]Fired when the menu items are shown.[/en]
@@ -289,7 +275,6 @@ class SpeedDialElement extends BaseElement {
   show(options = {}) {
     this.querySelector('ons-fab').show();
     this._shown = true;
-    util.triggerElementEvent(this, 'show');
   }
 
   /**
@@ -305,8 +290,6 @@ class SpeedDialElement extends BaseElement {
       this.querySelector('ons-fab').hide();
     }, 200);
     this._shown = false;
-
-    util.triggerElementEvent(this, 'hide');
   }
 
   /**
