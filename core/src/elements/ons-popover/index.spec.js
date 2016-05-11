@@ -239,8 +239,14 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'mask-color\' attribute', () => {
-    const popover = ons._util.createElement('<ons-popover mask-color="red">contents</ons-popover>');
-    expect(popover._mask.style.backgroundColor).to.equal('red');
+    it ('works', (done) => {
+      const popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
+
+      setImmediate(() => {
+        expect(popover._mask.style.backgroundColor).to.equal('red');
+        done();
+      });
+    });
   });
 
   describe('\'style\' attribute', () => {
@@ -275,8 +281,8 @@ describe('OnsPopoverElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      const element = ons._util.createElement('<ons-popover>contents</ons-popover>');
-      expect(element.getAttribute('modifier')).to.equal('material');
+      const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
+      expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
   });

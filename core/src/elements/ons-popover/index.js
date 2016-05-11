@@ -215,10 +215,7 @@ class PopoverElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
-
+      this._compile();
       this._initAnimatorFactory();
     });
 
@@ -323,6 +320,10 @@ class PopoverElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
+    if (this.classList.contains('popover')) {
+      return;
+    }
+
     this.classList.add('popover');
 
     const hasDefaultContainer = this._popover && this._content;
@@ -363,8 +364,6 @@ class PopoverElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   _prepareAnimationOptions(options) {
@@ -400,15 +399,17 @@ class PopoverElement extends BaseElement {
 
         before && before();
 
-        this._animator(options)[action](this, () => {
-          after && after();
+        contentReady(this, () => {
+          this._animator(options)[action](this, () => {
+            after && after();
 
-          unlock();
+            unlock();
 
-          util.triggerElementEvent(this, `post${action}`, {popover: this});
+            util.triggerElementEvent(this, `post${action}`, {popover: this});
 
-          callback && callback();
-          resolve(this);
+            callback && callback();
+            resolve(this);
+          });
         });
       });
     });
@@ -535,13 +536,13 @@ class PopoverElement extends BaseElement {
   }
 
   attachedCallback() {
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
       this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
 
       this._mask.addEventListener('click', this._boundCancel, false);
-
-      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
       this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
       this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
@@ -552,13 +553,17 @@ class PopoverElement extends BaseElement {
 
   detachedCallback() {
     contentReady(this, () => {
-      this._mask.removeEventListener('click', this._boundCancel, false);
+      if (this.mask) {
+        this._mask.removeEventListener('click', this._boundCancel, false);
+      }
 
       this._backButtonHandler.destroy();
       this._backButtonHandler = null;
 
-      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
+      if (this._popover) {
+        this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+        this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
+      }
 
       window.removeEventListener('resize', this._boundOnChange, false);
     });

@@ -274,8 +274,6 @@ describe('OnsTabElement', () => {
 
       setImmediate(() => {
         expect(tab.getAttribute('modifier')).to.equal('material');
-        expect(tab.hasAttribute('ripple')).to.be.true;
-        expect(tab.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
         ons.platform.select('');
 
         done();

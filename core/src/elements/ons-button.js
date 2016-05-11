@@ -49,6 +49,9 @@ const scheme = {'': 'button--*'};
  * @modifier material
  *   [en]Material Design button[/en]
  *   [ja]マテリアルデザインのボタン[/ja]
+ * @modifier material--flat
+ *   [en]Material Design flat button[/en]
+ *   [ja]マテリアルデザインのフラットボタン[/ja]
  * @description
  *   [en]
  *     Button component. If you want to place a button in a toolbar, use `<ons-toolbar-button>` or `<ons-back-button>` instead.

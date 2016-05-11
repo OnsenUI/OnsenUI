@@ -157,6 +157,7 @@ list__item()
   font-size var-list-header-font-size
   font-weight var-list-header-font-weight
   color var-list-header-color
+  background-color var-list-header-background-color
   text-shadow var-list-header-text-shadow
   border-top none
   border-bottom var-list-border
@@ -695,18 +696,21 @@ list__item()
   padding 16px 0px 16px 0px
   min-width 56px
   line-height 1
+  box-sizing border-box
 
 .list__item--material__left:empty
 
 .list__item--material__center
   padding 16px 0
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material__right
   padding 16px 16px 16px 0px
   line-height 1
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material.list__item--longdivider

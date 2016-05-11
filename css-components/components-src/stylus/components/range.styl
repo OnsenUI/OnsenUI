@@ -69,20 +69,43 @@ range()
 
 range__thumb()
   cursor pointer
+  position relative
+  height var-range-thumb-width
+  width var-range-thumb-width
+  background-color var-range-thumb-background-color
+  border var-range-thumb-border
+  border-radius var-round-border
+  box-shadow none
+  margin 0
+  padding 0
 
-range__thumb--webkit()
-  cursor pointer
-  -webkit-appearance none
+ons-range
+  &:before
+    content ''
+    display block
+    position relative
+    top 17px
+    height var-range-track-height
+    margin-bottom -(var-range-track-height)
+    background-color var-range-track-background-color
 
-range--disabled()
-  disabled()
+  .range
+    position relative
+    background transparent
+
+    &::-moz-range-track
+      background transparent
+
+  &[disabled]
+    disabled()
+
+    .range
+      opacity 1
 
 .range
   range()
-  border-radius var-border-radius
   border var-range-border
   height var-range-track-height
-  border-radius var-border-radius--large
   border-radius var-range-border-radius
   background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
   background-position left center
@@ -110,53 +133,16 @@ range--disabled()
   border-radius var-round-border
 
 .range::-webkit-slider-thumb
-  range__thumb--webkit()
-  position relative
-  height var-range-thumb-width
-  width var-range-thumb-width
-  background-color var-range-thumb-background-color
-  border var-range-thumb-border
-  border-radius var-round-border
-  box-shadow none
+  range__thumb()
+  -webkit-appearance none
   top 0
-  margin 0
-  padding 0
 
 .range::-moz-range-thumb
   range__thumb()
-  position relative
-  height var-range-thumb-width
-  width var-range-thumb-width
-  background-color var-range-thumb-background-color
-  border var-range-thumb-border
-  border-radius var-round-border
-  box-shadow none
-  margin 0
-  padding 0
 
 .range::-ms-thumb
   range__thumb()
-  position relative
-  height var-range-thumb-width
-  width var-range-thumb-width
-  background-color var-range-thumb-background-color
-  border var-range-thumb-border
-  border-radius var-round-border
-  box-shadow none
   top 0
-  margin 0
-  padding 0
-
-.range::-webkit-slider-thumb:before
-  position absolute
-  top 13px
-  right 28px
-  left -10000px
-  height 2px
-  background-color var-range-track-background-color-active
-  content ''
-  margin 0
-  padding 0
 
 .range::-ms-fill-lower
   height 2px
@@ -166,7 +152,7 @@ range--disabled()
   display none
 
 .range:disabled
-  range--disabled()
+  disabled()
 
 .range__left
   position relative

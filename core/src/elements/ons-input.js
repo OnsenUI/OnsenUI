@@ -131,16 +131,22 @@ class InputElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
-
+      this._compile();
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
     });
+
+    this._boundOnInput = this._onInput.bind(this);
+    this._boundOnFocusin = this._onFocusin.bind(this);
+    this._boundOnFocusout = this._onFocusout.bind(this);
+    this._boundDelegateEvent = this._delegateEvent.bind(this);
   }
 
   _compile() {
     autoStyle.prepare(this);
+
+    if (this.children.length !== 0) {
+      return;
+    }
 
     const helper = document.createElement('span');
     helper.classList.add('_helper');
@@ -181,22 +187,14 @@ class InputElement extends BaseElement {
         this._updateLabelColor();
         this._updateBoundAttributes();
         this._updateLabelClass();
-
-        this._boundOnInput = this._onInput.bind(this);
-        this._boundOnFocusin = this._onFocusin.bind(this);
-        this._boundOnFocusout = this._onFocusout.bind(this);
         break;
     }
-
-    this._boundDelegateEvent = this._delegateEvent.bind(this);
 
     if (this.hasAttribute('input-id')) {
       this._input.id = this.getAttribute('input-id');
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -205,7 +203,7 @@ class InputElement extends BaseElement {
     } else if (name === 'placeholder') {
       return contentReady(this, () => this._updateLabel());
     } if (name === 'input-id') {
-      this._input.id = current;
+      contentReady(this, () => this._input.id = current);
     } if (name === 'checked') {
       this.checked = current !== null;
     }
@@ -318,10 +316,14 @@ class InputElement extends BaseElement {
    *   [ja][/ja]
    */
   get value() {
-    return this._input ? this._input.value : '';
+    return this._input === null
+      ? this.getAttribute('value')
+      : this._input.value;
   }
 
   set value(val) {
+    this.setAttribute('value', val);
+
     contentReady(this, () => {
       this._input.value = val;
       this._onInput();
@@ -342,7 +344,9 @@ class InputElement extends BaseElement {
   }
 
   set checked(val) {
-    this._input.checked = val;
+    contentReady(this, () => {
+      this._input.checked = val;
+    });
   }
 
   /**
@@ -360,9 +364,12 @@ class InputElement extends BaseElement {
     return this.hasAttribute('disabled');
   }
 
-
   get _isTextInput() {
-    return this._input.classList.contains('text-input');
+    return this.type !== 'radio' && this.type !== 'checkbox';
+  }
+
+  get type() {
+    return this.getAttribute('type');
   }
 }
 

@@ -12,6 +12,12 @@
   <script src="../../build/js/angular-onsenui.js"></script>
   <script src="../app.js"></script>
 
+  <style>
+    .dialog-container {
+      height: 250px;
+    }
+  </style>
+
   <script>
     var app = angular.module('myApp', ['onsen']);
 
@@ -50,7 +56,7 @@
   </ons-page>
 
   <script type="text/ons-template" id="dialog.html">
-    <ons-dialog style="height: 250px" animation="default" cancelable>
+    <ons-dialog animation="default" cancelable>
       <ons-navigator animation="slide" var="app.navi">
         <ons-page>
           <ons-toolbar>

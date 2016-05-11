@@ -69,14 +69,16 @@ class FabElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
     });
   }
 
   _compile() {
     autoStyle.prepare(this);
+
+    if (this.classList.contains('fab')) {
+      return;
+    }
 
     this.classList.add('fab');
 
@@ -98,8 +100,6 @@ class FabElement extends BaseElement {
     this._updatePosition();
 
     this.hide();
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

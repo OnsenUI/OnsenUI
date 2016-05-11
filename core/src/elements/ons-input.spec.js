@@ -9,7 +9,7 @@ describe('OnsInputElement', () => {
     `);
 
     document.body.appendChild(element);
-    ons._contentReady(element, done);
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -127,9 +127,13 @@ describe('OnsInputElement', () => {
   });
 
   describe('input label', () => {
-    it('assigns ID to the inner input element', () => {
-      const element = ons._util.createElement('<ons-input input-id="myInput"> </ons-input>');
-      expect(element.querySelector('input').id).to.equal('myInput');
+    it('assigns ID to the inner input element', (done) => {
+      const element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
+
+      setImmediate(() => {
+        expect(element.querySelector('input').id).to.equal('myInput')
+        done();
+      });
     });
 
     it('provides \'content-left\' attribute', () => {
@@ -141,41 +145,51 @@ describe('OnsInputElement', () => {
   });
 
   describe('#type attribute', () => {
-    it('creates checkbox', () => {
-      const element = ons._util.createElement('<ons-input type="checkbox"> </ons-input>');
-      expect(element.className).to.contain('checkbox');
-      expect(element._input.className).to.contain('checkbox__input');
-      expect(element._input.type).to.equal('checkbox');
-      expect(element._helper.className).to.contain('checkbox__checkmark');
+    it('creates checkbox', (done) => {
+      const element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
 
-      expect(element.checked).to.be.false;
-      expect(element._input.checked).to.be.false;
-      element.setAttribute('checked', '');
-      expect(element.checked).to.be.true;
-      expect(element._input.checked).to.be.true;
-      element.checked = false;
-      expect(element._input.checked).to.be.false;
+      setImmediate(() => {
+        expect(element.className).to.contain('checkbox');
+        expect(element._input.className).to.contain('checkbox__input');
+        expect(element._input.type).to.equal('checkbox');
+        expect(element._helper.className).to.contain('checkbox__checkmark');
+        expect(element.checked).to.be.false;
+        expect(element._input.checked).to.be.false;
+        element.setAttribute('checked', '');
+        expect(element.checked).to.be.true;
+        expect(element._input.checked).to.be.true;
+        element.checked = false;
+        expect(element._input.checked).to.be.false;
+        done();
+      });
     });
 
-    it('creates radio button', () => {
-      let element = ons._util.createElement('<ons-input type="radio"> </ons-input>');
-      expect(element.className).to.contain('radio-button');
-      expect(element._input.className).to.contain('radio-button__input');
-      expect(element._input.type).to.equal('radio');
-      expect(element._helper.className).to.contain('radio-button__checkmark');
+    it('creates radio button', (done) => {
+      let element = ons._util.createElement('<ons-input type="radio"></ons-input>');
 
-      element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"> </ons-input><ons-input type="radio" name="radiogroup"> </ons-input></div>');
-      document.body.appendChild(element);
-      const r = element.querySelectorAll('ons-input[type=radio]');
-      expect(r[0].checked).to.be.false;
-      expect(r[1].checked).to.be.false;
-      r[0].checked = true;
-      expect(r[0].checked).to.be.true;
-      expect(r[1].checked).to.be.false;
-      r[1].checked = true;
-      expect(r[0].checked).to.be.false;
-      expect(r[1].checked).to.be.true;
-      element.remove();
+      setImmediate(() => {
+        expect(element.className).to.contain('radio-button');
+        expect(element._input.className).to.contain('radio-button__input');
+        expect(element._input.type).to.equal('radio');
+        expect(element._helper.className).to.contain('radio-button__checkmark');
+
+        element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"></ons-input><ons-input type="radio" name="radiogroup"></ons-input></div>');
+        document.body.appendChild(element);
+
+        setImmediate(() => {
+          const r = element.querySelectorAll('ons-input[type=radio]');
+          expect(r[0].checked).to.be.false;
+          expect(r[1].checked).to.be.false;
+          r[0].checked = true;
+          expect(r[0].checked).to.be.true;
+          expect(r[1].checked).to.be.false;
+          r[1].checked = true;
+          expect(r[0].checked).to.be.false;
+          expect(r[1].checked).to.be.true;
+          element.remove();
+          done();
+        });
+      });
     });
   });
 
@@ -188,11 +202,15 @@ describe('OnsInputElement', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    it('adds \'material\' modifier on Android', (done) => {
       ons.platform.select('android');
-      const e = ons._util.createElement('<ons-input> </ons-input>');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      ons.platform.select('');
+      const e = ons._util.createElement('<ons-input></ons-input>');
+
+      setImmediate(() => {
+        expect(e.getAttribute('modifier')).to.equal('material');
+        ons.platform.select('');
+        done();
+      });
     });
   });
 });
