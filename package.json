@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.0.0-beta.15",
+  "version": "2.0.0-rc.4",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -35,7 +35,21 @@
   "bugs": {
     "url": "https://github.com/OnsenUI/OnsenUI/issues"
   },
-  "homepage": "http://onsen.io/",
+  "keywords": [
+    "phonegap",
+    "cordova",
+    "react",
+    "components",
+    "angular",
+    "angular2",
+    "hybrid",
+    "app",
+    "ui",
+    "mobile",
+    "onsen",
+    "onsenui"
+  ],
+  "homepage": "https://onsen.io/",
   "main": "js/onsenui.js",
   "devDependencies": {
     "babel-eslint": "^6.0.3",

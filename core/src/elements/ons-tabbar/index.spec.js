@@ -81,10 +81,6 @@ describe('OnsTabbarElement', () => {
       expect(bottomElement.children[0].classList.contains('tab-bar--top__content')).not.to.be.true;
       expect(autoAndroidElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
 
-      expect((topElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
-      expect((bottomElement.children[0]).hasAttribute('no-status-bar-fill')).not.to.be.true;
-      expect((autoAndroidElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
-
       expect(topElement.children[1].classList.contains('tab-bar--top')).to.be.true;
       expect(bottomElement.children[1].classList.contains('tab-bar--top')).not.to.be.true;
       expect(autoAndroidElement.children[1].classList.contains('tab-bar--top')).to.be.true;
@@ -415,10 +411,10 @@ describe('OnsTabbarElement', () => {
   describe('#_compile()', () => {
     [true, false].forEach(isTop => {
       it('fills status bar - ' + isTop, (done) => {
-        const tmp = ons._internal.shouldFillStatusBar;
-        ons._internal.shouldFillStatusBar = () => Promise.resolve();
+        const tmp = ons._internal.autoStatusBarFill;
+        ons._internal.autoStatusBarFill = action => action();
         const element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
-        ons._internal.shouldFillStatusBar = tmp;
+        ons._internal.autoStatusBarFill = tmp;
 
         setTimeout(() => {
           expect(element.hasAttribute('status-bar-fill')).to.equal(isTop);

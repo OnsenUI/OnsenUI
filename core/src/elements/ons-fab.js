@@ -15,6 +15,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'fab--*',
@@ -22,7 +23,7 @@ const scheme = {
 
 /**
  * @element ons-fab
- * @category form
+ * @category fab
  * @description
  *   [en]
  *     The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
@@ -67,13 +68,17 @@ class FabElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
+    contentReady(this, () => {
       this._compile();
-    }
+    });
   }
 
   _compile() {
     autoStyle.prepare(this);
+
+    if (this.classList.contains('fab')) {
+      return;
+    }
 
     this.classList.add('fab');
 
@@ -82,7 +87,7 @@ class FabElement extends BaseElement {
 
     util.arrayFrom(this.childNodes).forEach(element => {
       if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
-       content.appendChild(element);
+        content.appendChild(element);
       }
     });
 
@@ -95,8 +100,6 @@ class FabElement extends BaseElement {
     this._updatePosition();
 
     this.hide();
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {

@@ -21,7 +21,7 @@ import BaseElement from 'ons/base-element';
 
 /**
  * @element ons-if
- * @category util
+ * @category conditional
  * @description
  *   [en]
  *     Conditionally display content depending on the platform, device orientation or both.

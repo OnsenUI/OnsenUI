@@ -2,6 +2,34 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.5
+----
+ * css-components: Fix material list item paddings.
+ * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
+ * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
+
+v2.0.0-rc.4
+----
+ * ons-input: Fix to `input-id` attribute.
+
+v2.0.0-rc.3
+----
+ * core: Support creation with `document.createElement` for several components.
+ * ons-navigator: Support changing the `animation` attribute dynamically.
+ * ons-dialog: Support changing the `animation` attribute dynamically.
+ * ons-alert-dialog: Support changing the `animation` attribute dynamically.
+ * ons-popover: Fix shadow glitch.
+
+v2.0.0-rc.2
+----
+ * ons-tab: Fix dynamic `icon` and `label` attributes.
+
+v2.0.0-rc.1
+----
+ * ons-input: Fix behavior of `checked` attribute.
+ * ons-popover: Fix glitch on iOS for bottom popover.
+ * core: Fix [#1340](https://github.com/OnsenUI/OnsenUI/issues/1340) (auto status bar fill issue).
+
 v2.0.0-beta.15
 ----
  * ons-carousel: Fix rendering glitch on Android 4.1.

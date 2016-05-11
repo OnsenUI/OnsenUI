@@ -17,7 +17,7 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
 
 /**
  * @element ons-lazy-repeat
- * @category list
+ * @category lazy-repeat
  * @description
  *   [en]
  *     Using this component a list with millions of items can be rendered without a drop in performance.

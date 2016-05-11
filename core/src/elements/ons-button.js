@@ -24,7 +24,7 @@ const scheme = {'': 'button--*'};
 
 /**
  * @element ons-button
- * @category form
+ * @category button
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja]アウトラインを持ったボタンを表示します。[/ja]
@@ -49,6 +49,9 @@ const scheme = {'': 'button--*'};
  * @modifier material
  *   [en]Material Design button[/en]
  *   [ja]マテリアルデザインのボタン[/ja]
+ * @modifier material--flat
+ *   [en]Material Design flat button[/en]
+ *   [ja]マテリアルデザインのフラットボタン[/ja]
  * @description
  *   [en]
  *     Button component. If you want to place a button in a toolbar, use `<ons-toolbar-button>` or `<ons-back-button>` instead.
