@@ -217,14 +217,15 @@ window.animit = (function(){
       return new Animit(element);
     }
 
-    if (element instanceof HTMLElement) {
-      this.elements = [element];
-    } else if (Object.prototype.toString.call(element) === '[object Array]') {
+    if (Array.isArray(element)) {
       this.elements = element;
-
     } else {
-      throw new Error('First argument must be an array or an instance of HTMLElement.');
+      this.elements = Array.prototype.slice.call(arguments);
     }
+
+    this.elements = this.elements.filter(function(e) {
+      return element instanceof HTMLElement;
+    });
 
     this.transitionQueue = [];
     this.lastStyleAttributeDict = [];
