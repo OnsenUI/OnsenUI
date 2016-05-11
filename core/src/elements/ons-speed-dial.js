@@ -15,6 +15,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'speed-dial--*',
@@ -88,18 +89,18 @@ class SpeedDialElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+    contentReady(this, () => {
 
-      this.classList.add('speed__dial');
+      this._compile();
 
       if (this.hasAttribute('direction')) {
         this._updateDirection(this.getAttribute('direction'));
       } else {
         this._updateDirection('up');
       }
+
       this._updatePosition();
-    }
+    });
 
     this._shown = true;
     this._itemShown = false;
@@ -107,13 +108,13 @@ class SpeedDialElement extends BaseElement {
   }
 
   _compile() {
+    this.classList.add('speed__dial');
+
     autoStyle.prepare(this);
 
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -122,13 +123,13 @@ class SpeedDialElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
       case 'ripple':
-        this._updateRipple();
+        contentReady(this, () => this._updateRipple());
         break;
       case 'direction':
-        this._updateDirection(current);
+        contentReady(this, () => this._updateDirection(current));
         break;
       case 'position':
-        this._updatePosition();
+        contentReady(this, () => this._updatePosition());
         break;
     }
   }
