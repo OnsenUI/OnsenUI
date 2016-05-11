@@ -122,12 +122,14 @@ limitations under the License.
         },
 
         /**
-         * @param {HTMLElement} element
          * @return {Boolean}
          */
-        shouldFillStatusBar: function(element) {
-          return $onsGlobal.shouldFillStatusBar(element);
-        },
+        shouldFillStatusBar: $onsGlobal.shouldFillStatusBar,
+
+        /**
+         * @param {Function} action
+         */
+        autoStatusBarFill: $onsGlobal.autoStatusBarFill,
 
         /**
          * @param {Object} params

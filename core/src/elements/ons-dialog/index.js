@@ -24,6 +24,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
 import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.dialog': 'dialog--*',
@@ -192,14 +193,16 @@ class DialogElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => this._compile());
 
     this._visible = false;
     this._doorLock = new DoorLock();
     this._boundCancel = this._cancel.bind(this);
 
+    this._updateAnimatorFactory();
+  }
+
+  _updateAnimatorFactory() {
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: DialogAnimator,
@@ -211,16 +214,14 @@ class DialogElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    const style = this.getAttribute('style');
-
     this.style.display = 'none';
+
+    if (this._dialog) {
+      return;
+    }
 
     const template = templateSource.cloneNode(true);
     const dialog = template.children[1];
-
-    if (style) {
-      dialog.setAttribute('style', style);
-    }
 
     while (this.firstChild) {
       dialog.children[0].appendChild(this.firstChild);
@@ -233,22 +234,20 @@ class DialogElement extends BaseElement {
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
-    this.setAttribute('no-status-bar-fill', '');
+    this.setAttribute('status-bar-fill', '');
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @readonly
    * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
@@ -317,14 +316,16 @@ class DialogElement extends BaseElement {
         this._mask.style.opacity = '1';
 
         return new Promise(resolve => {
-          animator.show(this, () => {
-            this._visible = true;
-            unlock();
+          contentReady(this, () => {
+            animator.show(this, () => {
+              this._visible = true;
+              unlock();
 
-            util.triggerElementEvent(this, 'postshow', {dialog: this});
+              util.triggerElementEvent(this, 'postshow', {dialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
@@ -381,15 +382,17 @@ class DialogElement extends BaseElement {
         const animator = this._animatorFactory.newAnimator(options);
 
         return new Promise(resolve => {
-          animator.hide(this, () => {
-            this.style.display = 'none';
-            this._visible = false;
-            unlock();
+          contentReady(this, () => {
+            animator.hide(this, () => {
+              this.style.display = 'none';
+              this._visible = false;
+              unlock();
 
-            util.triggerElementEvent(this, 'posthide', {dialog: this});
+              util.triggerElementEvent(this, 'posthide', {dialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
@@ -408,7 +411,7 @@ class DialogElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this._visible;
@@ -418,8 +421,8 @@ class DialogElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the dialog is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the dialog is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);
@@ -433,11 +436,7 @@ class DialogElement extends BaseElement {
    * @property cancelable
    * @type {Boolean}
    * @description
-   *   [en]
-   *     A boolean value that specifies whether the dialog is cancelable or not.
-   *
-   *     When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
-   *   [/en]
+   *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
    */
   set cancelable(value) {
@@ -451,7 +450,10 @@ class DialogElement extends BaseElement {
 
   attachedCallback() {
     this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-    this._mask.addEventListener('click', this._boundCancel, false);
+
+    contentReady(this, () => {
+      this._mask.addEventListener('click', this._boundCancel, false);
+    });
   }
 
   detachedCallback() {
@@ -464,6 +466,9 @@ class DialogElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
+    else if (name === 'animation') {
+      this._updateAnimatorFactory();
     }
   }
 }

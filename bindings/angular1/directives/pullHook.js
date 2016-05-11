@@ -18,7 +18,7 @@
  *
  * <ons-page ng-controller="MyController">
  *   <ons-pull-hook var="loader" ng-action="load($done)">
- *     <span ng-switch="loader.getCurrentState()">
+ *     <span ng-switch="loader.state">
  *       <span ng-switch-when="initial">Pull down to refresh</span>
  *       <span ng-switch-when="preaction">Release to refresh</span>
  *       <span ng-switch-when="action">Loading data. Please wait...</span>
@@ -48,14 +48,6 @@
  * @description
  *   [en]Use to specify custom behavior when the page is pulled down. A <code>$done</code> function is available to tell the component that the action is completed.[/en]
  *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には<code>$done</code>関数を呼び出します。[/ja]
- */
-
-/**
- * @attribute on-action
- * @type {Expression}
- * @description
- *   [en]Same as <code>ng-action</code> but can be used without AngularJS. A function called <code>done</code> is available to call when action is complete.[/en]
- *   [ja]<code>ng-action</code>と同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には<code>done</code>関数を呼び出します。[/ja]
  */
 
 /**

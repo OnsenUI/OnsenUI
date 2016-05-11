@@ -4,12 +4,14 @@ describe('OnsPopoverElement', () => {
   let popover, target;
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
-  beforeEach(() => {
+  beforeEach((done) => {
     popover = new OnsPopoverElement();
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);
     document.body.appendChild(popover);
+
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -23,8 +25,8 @@ describe('OnsPopoverElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let container = popover.querySelector('.popover__container'),
-      content = popover.querySelector('.popover__content');
+    const container = popover.querySelector('.popover__container');
+    const content = popover.querySelector('.popover__content');
 
     popover.setAttribute('modifier', 'hoge');
     expect(popover.classList.contains('popover--hoge')).to.be.true;
@@ -122,7 +124,7 @@ describe('OnsPopoverElement', () => {
 
     describe('\'preshow\' event', () => {
       it('is fired', () => {
-        let promise = new Promise(resolve => popover.addEventListener('preshow', resolve));
+        const promise = new Promise(resolve => popover.addEventListener('preshow', resolve));
         popover.show(target);
         return expect(promise).to.eventually.be.fulfilled;
       });
@@ -136,7 +138,7 @@ describe('OnsPopoverElement', () => {
 
     describe('\'postshow\' event', () => {
       it('is fired', () => {
-        let promise = new Promise(resolve => popover.addEventListener('postshow', resolve));
+        const promise = new Promise(resolve => popover.addEventListener('postshow', resolve));
         popover.show(target);
         return expect(promise).to.eventually.be.fulfilled;
       });
@@ -163,7 +165,7 @@ describe('OnsPopoverElement', () => {
 
     describe('\'prehide\' event', () => {
       it('is fired', () => {
-        let promise = new Promise(resolve => popover.addEventListener('prehide', resolve));
+        const promise = new Promise(resolve => popover.addEventListener('prehide', resolve));
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
@@ -177,7 +179,7 @@ describe('OnsPopoverElement', () => {
 
     describe('\'posthide\' event', () => {
       it('is fired', () => {
-        let promise = new Promise(resolve => popover.addEventListener('posthide', resolve));
+        const promise = new Promise(resolve => popover.addEventListener('posthide', resolve));
         popover.hide();
         return expect(promise).to.eventually.be.fulfilled;
       });
@@ -237,12 +239,18 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'mask-color\' attribute', () => {
-    let popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
-    expect(popover._mask.style.backgroundColor).to.equal('red');
+    it ('works', (done) => {
+      const popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
+
+      setImmediate(() => {
+        expect(popover._mask.style.backgroundColor).to.equal('red');
+        done();
+      });
+    });
   });
 
   describe('\'style\' attribute', () => {
-    let popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
+    const popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
     expect(popover._popover.style.background).to.equal('blue');
   });
 
@@ -262,8 +270,8 @@ describe('OnsPopoverElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-popover></ons-popover>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -273,7 +281,7 @@ describe('OnsPopoverElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-popover');
+      const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

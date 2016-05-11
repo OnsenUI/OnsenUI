@@ -36,13 +36,13 @@ describe('OnsListItemElement', () => {
     it('should prevent default if \'lock-on-drag\' attribute is present', () => {
       listItem.setAttribute('lock-on-drag', '');
 
-      let dummyEvent = {
+      const dummyEvent = {
         gesture: new CustomEvent('drag')
       };
 
       dummyEvent.gesture.direction = 'left';
 
-      let spy = chai.spy.on(dummyEvent.gesture, 'preventDefault');
+      const spy = chai.spy.on(dummyEvent.gesture, 'preventDefault');
 
       listItem._onDrag(dummyEvent);
 
@@ -90,8 +90,8 @@ describe('OnsListItemElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-list-item>Content</ons-list-item>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -101,7 +101,7 @@ describe('OnsListItemElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android if tappable', () => {
       ons.platform.select('android');
-      let e = ons._util.createElement('<ons-list-item tappable>Content</ons-list-item>');
+      const e = ons._util.createElement('<ons-list-item tappable>Content</ons-list-item>');
       expect(e.getAttribute('modifier')).to.equal('material');
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.children[0].tagName.toLowerCase()).to.equal('ons-ripple');

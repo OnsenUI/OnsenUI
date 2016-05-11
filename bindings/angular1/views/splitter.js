@@ -34,7 +34,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(Splitter);
-    $onsen.derivePropertiesFromElement(Splitter, ['backButtonHandler']);
+    $onsen.derivePropertiesFromElement(Splitter, ['onDeviceBackButton']);
 
     ['left', 'right', 'content', 'mask'].forEach((prop, i) => {
       Object.defineProperty(Splitter.prototype, prop, {

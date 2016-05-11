@@ -7,8 +7,9 @@ describe('ons.notification', () => {
 
   describe('#alert()', () => {
     let dialog,
-      resolvePromise,
-      callback = chai.spy();
+      resolvePromise;
+
+    const callback = chai.spy();
 
     beforeEach(() => {
       resolvePromise = ons.notification.alert({message: 'hoge', modifier: 'fuga', cancelable: true, callback: callback});
@@ -25,9 +26,9 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'messageHTML\' parameter', () => {
-      let message = '<strong>hoge</strong>';
+      const message = '<strong>hoge</strong>';
       ons.notification.alert({messageHTML: message, id: 'test'});
-      let dialog = document.getElementById('test');
+      const dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
       dialog.remove();
     });
@@ -42,9 +43,9 @@ describe('ons.notification', () => {
     });
 
     it('hides the dialog when a button is clicked', () => {
-      let button = dialog.querySelector('button');
-      let event = new CustomEvent('click');
-      let spy = chai.spy.on(dialog, 'hide');
+      const button = dialog.querySelector('button');
+      const event = new CustomEvent('click');
+      const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
       expect(spy).to.have.been.called.once;
     });
@@ -61,8 +62,9 @@ describe('ons.notification', () => {
 
   describe('#confirm()', () => {
     let dialog,
-      resolvePromise,
-      callback = chai.spy();
+      resolvePromise;
+
+    const callback = chai.spy();
 
     beforeEach(() => {
       resolvePromise = ons.notification.confirm({message: 'hoge', modifier: 'fuga', cancelable: true, callback: callback});
@@ -79,9 +81,9 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'messageHTML\' parameter', () => {
-      let message = '<strong>hoge</strong>';
+      const message = '<strong>hoge</strong>';
       ons.notification.confirm({messageHTML: message, id: 'test'});
-      let dialog = document.getElementById('test');
+      const dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
       dialog.remove();
     });
@@ -96,15 +98,15 @@ describe('ons.notification', () => {
     });
 
     it('hides the dialog when a button is clicked', () => {
-      let button = dialog.querySelector('button');
-      let event = new CustomEvent('click');
-      let spy = chai.spy.on(dialog, 'hide');
+      const button = dialog.querySelector('button');
+      const event = new CustomEvent('click');
+      const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
       expect(spy).to.have.been.called.once;
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      let event = new CustomEvent('cancel');
+      const event = new CustomEvent('cancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(-1);
     });
@@ -121,8 +123,9 @@ describe('ons.notification', () => {
 
   describe('#prompt()', () => {
     let dialog,
-      resolvePromise,
-      callback = chai.spy();
+      resolvePromise;
+
+    const callback = chai.spy();
 
     beforeEach(() => {
       resolvePromise = ons.notification.prompt({message: 'hoge', modifier: 'fuga', submitOnEnter: true, cancelable: true, callback: callback});
@@ -139,9 +142,9 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'messageHTML\' parameter', () => {
-      let message = '<strong>hoge</strong>';
+      const message = '<strong>hoge</strong>';
       ons.notification.prompt({messageHTML: message, id: 'test'});
-      let dialog = document.getElementById('test');
+      const dialog = document.getElementById('test');
       expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
       dialog.remove();
     });
@@ -156,26 +159,26 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'submitOnEnter\' parameter', () => {
-      let input = dialog.querySelector('input'),
-        event = new CustomEvent('keypress');
+      const input = dialog.querySelector('input');
+      const event = new CustomEvent('keypress');
       event.keyCode = 13;
 
-      let spy = chai.spy.on(dialog, 'hide');
+      const spy = chai.spy.on(dialog, 'hide');
 
       input.dispatchEvent(event);
       expect(spy).to.have.been.called.once;
     });
 
     it('hides the dialog when a button is clicked', () => {
-      let button = dialog.querySelector('button');
-      let event = new CustomEvent('click');
-      let spy = chai.spy.on(dialog, 'hide');
+      const button = dialog.querySelector('button');
+      const event = new CustomEvent('click');
+      const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
       expect(spy).to.have.been.called.once;
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      let event = new CustomEvent('cancel');
+      const event = new CustomEvent('cancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(null);
     });
@@ -195,7 +198,7 @@ describe('ons.notification', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       ons.notification.alert({message: 'test', id: 'test'});
-      let dialog = document.getElementById('test');
+      const dialog = document.getElementById('test');
       expect(dialog.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
       dialog.remove();
@@ -204,7 +207,7 @@ describe('ons.notification', () => {
     it('removes \'material\' modifier on iOS', () => {
       ons.platform.select('ios');
       ons.notification.alert({message: 'test', id: 'test'});
-      let dialog = document.getElementById('test');
+      const dialog = document.getElementById('test');
       expect(dialog.getAttribute('modifier')).not.to.equal('material');
       ons.platform.select('');
       dialog.remove();

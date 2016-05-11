@@ -81,10 +81,6 @@ describe('OnsTabbarElement', () => {
       expect(bottomElement.children[0].classList.contains('tab-bar--top__content')).not.to.be.true;
       expect(autoAndroidElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
 
-      expect((topElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
-      expect((bottomElement.children[0]).hasAttribute('no-status-bar-fill')).not.to.be.true;
-      expect((autoAndroidElement.children[0]).hasAttribute('no-status-bar-fill')).to.be.true;
-
       expect(topElement.children[1].classList.contains('tab-bar--top')).to.be.true;
       expect(bottomElement.children[1].classList.contains('tab-bar--top')).not.to.be.true;
       expect(autoAndroidElement.children[1].classList.contains('tab-bar--top')).to.be.true;
@@ -153,13 +149,13 @@ describe('OnsTabbarElement', () => {
 
   describe('#_getCurrentPageElement()', () => {
     it('accepts only \'ons-page\' as current page element', () => {
-      let page = new OnsPageElement();
+      const page = new OnsPageElement();
       element._contentElement.appendChild(page);
       expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
       expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
       element._contentElement.removeChild(element._contentElement.querySelector('ons-page'));
-      let button = new OnsButtonElement();
+      const button = new OnsButtonElement();
       element._contentElement.appendChild(button);
       expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
     });
@@ -167,7 +163,7 @@ describe('OnsTabbarElement', () => {
 
   describe('#getActiveTabIndex()', () => {
     it('has active tab property', function(done) {
-      let div = document.createElement('div');
+      const div = document.createElement('div');
       document.body.appendChild(div);
       div.innerHTML = `
         <ons-template id="page1"></ons-template>
@@ -179,7 +175,7 @@ describe('OnsTabbarElement', () => {
       `;
 
       setImmediate(() => {
-        let element = document.getElementById('myTabbar');
+        const element = document.getElementById('myTabbar');
         expect(element.getActiveTabIndex()).to.equal(-1);
 
         document.getElementById('tab1').click();
@@ -216,7 +212,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'prechange\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('prechange', resolve);
       });
       element.setActiveTab(0);
@@ -224,7 +220,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'postchange\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('postchange', resolve);
       });
       element.setActiveTab(0);
@@ -232,7 +228,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'reactive\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
       });
       element.setActiveTab(0);
@@ -263,7 +259,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'init\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('init', resolve);
       });
       element.setActiveTab(0);
@@ -271,7 +267,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'show\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('show', resolve);
       });
       element.setActiveTab(0);
@@ -279,7 +275,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('fires \'hide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         element.addEventListener('hide', resolve);
       });
 
@@ -292,8 +288,7 @@ describe('OnsTabbarElement', () => {
 
   describe('#loadPage()', () => {
     it('loads a page', (done) => {
-      let element;
-      element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge"></ons-tab>
         </ons-tabbar>
@@ -321,7 +316,7 @@ describe('OnsTabbarElement', () => {
 
   describe('#setActiveTab()', () => {
     it('loads any tab as persistent', (done) => {
-      let element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>
         </ons-tabbar>
@@ -343,7 +338,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('can be canceled', (done) => {
-      let element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>
           <ons-tab label="Fuga" page="fuga"></ons-tab>
@@ -361,7 +356,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('does not remove tabs', (done) => {
-      let element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>
           <ons-tab label="fuga" page="fuga"></ons-tab>
@@ -371,7 +366,7 @@ describe('OnsTabbarElement', () => {
       element.setActiveTab(0);
 
       setImmediate(() => {
-        let tmp = element._getCurrentPageElement();
+        const tmp = element._getCurrentPageElement();
         element.setActiveTab(1, {'callback': () => {
           expect(tmp.style.display).to.equal('none');
           done();
@@ -380,7 +375,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('keeps the page when option \'keepPage\' is true', (done) => {
-      let element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
           <ons-tab label="fuga" page="fuga"></ons-tab>
@@ -398,7 +393,7 @@ describe('OnsTabbarElement', () => {
     });
 
     it('returns a promise that resolves to the new page', () => {
-      let element = ons._util.createElement(`
+      const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
           <ons-tab label="Fuga" page="fuga"></ons-tab>
@@ -416,10 +411,10 @@ describe('OnsTabbarElement', () => {
   describe('#_compile()', () => {
     [true, false].forEach(isTop => {
       it('fills status bar - ' + isTop, (done) => {
-        var tmp = ons._internal.shouldFillStatusBar;
-        ons._internal.shouldFillStatusBar = () => Promise.resolve();
-        let element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
-        ons._internal.shouldFillStatusBar = tmp;
+        const tmp = ons._internal.autoStatusBarFill;
+        ons._internal.autoStatusBarFill = action => action();
+        const element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
+        ons._internal.autoStatusBarFill = tmp;
 
         setTimeout(() => {
           expect(element.hasAttribute('status-bar-fill')).to.equal(isTop);
@@ -429,8 +424,8 @@ describe('OnsTabbarElement', () => {
     });
 
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-tabbar>
           <ons-tab page="hoge">hoge</ons-tab>

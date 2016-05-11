@@ -14,7 +14,6 @@
     ons.bootstrap()
       .controller('PageController', function($scope) {
         $scope.name = 'green';
-        $scope.specialValue = 'green';
       });
   </script>
 
@@ -31,7 +30,7 @@
       Red
     </label><br/>
     <label>
-      <ons-input type="radio" ng-model="name" ng-value="specialValue">
+      <ons-input type="radio" ng-model="name" value="green">
       Green
     </label><br/>
     <label>
@@ -39,23 +38,9 @@
       Blue
     </label><br/>
 
-    <p>Some material radio buttons</p>
-
-    <label>
-      <ons-input modifier="material" type="radio" ng-model="name" value="red">
-      Red
-    </label><br/>
-    <label>
-      <ons-input modifier="material" type="radio" ng-model="name" value="green">
-      Green
-    </label><br/>
-    <label>
-      <ons-input modifier="material" type="radio" ng-model="name" value="blue">
-      Blue
-    </label><br/>
+    <ons-input modifier="underbar" ng-model="name"></ons-input>
 
     <p>My favorite color is <strong>{{ name }}</strong>.</p>
-
   </ons-page>
 </body>
 </html>

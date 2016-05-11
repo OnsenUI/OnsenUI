@@ -4,9 +4,9 @@ describe('OnsNavigatorElement', () => {
   let nav, nav2;
 
   beforeEach((done) => {
-    let tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`),
-      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`),
-      tpl3 = ons._util.createElement(`<ons-template id="info"><ons-page>info</ons-page></ons-template>`);
+    const tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`);
+    const tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`);
+    const tpl3 = ons._util.createElement(`<ons-template id="info"><ons-page>info</ons-page></ons-template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     document.body.appendChild(tpl3);
@@ -32,13 +32,13 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'page\' attribute', () => {
-      let content = nav.topPage._getContentElement();
+      const content = nav.topPage._getContentElement();
       expect(content.innerHTML).to.equal('hoge');
   });
 
   describe('#pages', () => {
     it('provides \'pages\' property', () => {
-        let pages = nav.pages;
+        const pages = nav.pages;
         expect(pages[0]).to.be.an.instanceof(Element);
         expect(pages[0].name).to.be.an('string');
     });
@@ -52,7 +52,7 @@ describe('OnsNavigatorElement', () => {
     it('adds a new page to the top of the page stack', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
-          let content = nav.topPage._getContentElement();
+          const content = nav.topPage._getContentElement();
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge');
           done();
@@ -64,7 +64,7 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage({
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
-          let content = nav.topPage._getContentElement();
+          const content = nav.topPage._getContentElement();
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge2');
           done();
@@ -129,13 +129,13 @@ describe('OnsNavigatorElement', () => {
     it('removes the top page from the stack', (done) => {
       nav.pushPage('fuga', {
         callback: () => {
-          let content = nav.topPage._getContentElement();
+          const content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('fuga');
 
           nav.popPage({
             callback: () => {
               expect(nav.pages.length).to.equal(1);
-              let content = nav.topPage._getContentElement();
+              const content = nav.topPage._getContentElement();
               expect(content.innerHTML).equal('hoge');
               done();
             }
@@ -161,11 +161,9 @@ describe('OnsNavigatorElement', () => {
           });
 
           var promise2 = nav.popPage({'cancelIfRunning': true}).then(() => {
-            console.log('ok 2');
           }, () => {
             finished(1);
           });
-
         }
       });
     });
@@ -205,7 +203,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('emits \'prepop\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('prepop', (event) => { resolve(event); });
       });
 
@@ -234,7 +232,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('emits \'postpop\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('postpop', (event) => { resolve(event); });
       });
 
@@ -246,7 +244,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('emits \'show\' event', (done) => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => { resolve(event); });
       });
 
@@ -271,14 +269,14 @@ describe('OnsNavigatorElement', () => {
   describe('#bringPageTop()', () => {
 
     it('fallback to pushPage if the given page does not exist', (done) => {
-      let spy = chai.spy.on(nav, '_pushPage');
+      const spy = chai.spy.on(nav, '_pushPage');
       nav.bringPageTop('info');
       expect(spy).to.have.been.called.once;
       done();
     });
 
     it('does nothing when the page is already on top', (done) => {
-      let spy = chai.spy.on(nav, '_pushPage');
+      const spy = chai.spy.on(nav, '_pushPage');
       nav.bringPageTop('hoge');
       expect(spy).not.to.have.been.called();
       done();
@@ -371,7 +369,7 @@ describe('OnsNavigatorElement', () => {
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
-            let content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._getContentElement();
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -387,7 +385,7 @@ describe('OnsNavigatorElement', () => {
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
-            let content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._getContentElement();
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -412,7 +410,7 @@ describe('OnsNavigatorElement', () => {
           nav.insertPage(-2, 'fuga').then( () => {
             expect(nav.pages.length).to.equal(3);
 
-            let content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._getContentElement();
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -439,13 +437,13 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage('info', {
         callback: () => {
           expect(nav.pages.length).to.equal(2);
-          let content = nav.topPage._getContentElement();
+          const content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('info');
 
           nav.replacePage('fuga', {
             callback: () => {
               expect(nav.pages.length).to.equal(2);
-              let content = nav.topPage._getContentElement();
+              const content = nav.topPage._getContentElement();
               expect(content.innerHTML).to.equal('fuga');
               done();
             }
@@ -476,7 +474,7 @@ describe('OnsNavigatorElement', () => {
         nav.resetToPage('hoge', {
           callback: () => {
             expect(nav.pages.length).to.equal(1);
-            let content = nav.topPage._getContentElement();
+            const content = nav.topPage._getContentElement();
             expect(content.innerHTML).to.equal('hoge');
             done();
           }
@@ -495,7 +493,7 @@ describe('OnsNavigatorElement', () => {
 
   describe('#topPage', () => {
     it('returns the current page', () => {
-      let page = nav.topPage;
+      const page = nav.topPage;
 
       expect(page).to.be.an.instanceof(Element);
       expect(page.name).to.be.an('string');
@@ -517,7 +515,7 @@ describe('OnsNavigatorElement', () => {
 
   describe('#_createPageElement()', () => {
     it('throws an error when no ons-page is provided', () => {
-      let tmp = ons._internal.normalizePageHTML;
+      const tmp = ons._internal.normalizePageHTML;
       ons._internal.normalizePageHTML = (html) => '<div>' + html + '</div>';
       expect(() => nav._createPageElement('Test')).to.throw(Error);
       ons._internal.normalizePageHTML = tmp;
@@ -537,7 +535,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('calls event parent handler if there are less than two pages', () => {
-      var event = { 'callParentHandler': () => { return; }};
+      var event = {callParentHandler: () => { return; }};
       var spy = chai.spy.on(event, 'callParentHandler');
       nav._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
@@ -547,7 +545,7 @@ describe('OnsNavigatorElement', () => {
   describe('propagate API', () => {
 
     it('fires \'show\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => resolve());
       });
 
@@ -562,7 +560,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('fires \'hide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('hide', () => resolve());
       });
 
@@ -574,7 +572,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('fires \'destroy\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         nav.addEventListener('destroy', () => resolve());
       });
 
@@ -601,8 +599,8 @@ describe('OnsNavigatorElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-navigator></ons-navigator>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -611,8 +609,8 @@ describe('OnsNavigatorElement', () => {
 
   describe('#backButton', () => {
     beforeEach((done) => {
-      let tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-back-button>Back</ons-back-button><ons-page>hoge</ons-page></ons-template>`),
-        tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-back-button>Back</ons-back-button><ons-page>hoge2</ons-page></ons-template>`);
+      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-back-button>Back</ons-back-button><ons-page>hoge</ons-page></ons-template>`)
+      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-back-button>Back</ons-back-button><ons-page>hoge2</ons-page></ons-template>`);
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);
@@ -626,7 +624,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('should not display on first page', () => {
-        let backBtn = nav2.topPage.backButton;
+        const backBtn = nav2.topPage.backButton;
         expect(backBtn.style.display).to.equal('none');
     });
 

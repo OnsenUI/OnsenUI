@@ -963,6 +963,11 @@ class CarouselElement extends BaseElement {
     this._setupInitialIndex();
 
     this._saveLastState();
+
+    // Fix rendering glitch on Android 4.1
+    if (this.offsetHeight === 0) {
+      setImmediate(() => this.refresh());
+    }
   }
 
   attributeChangedCallback(name, last, current) {
@@ -1047,7 +1052,7 @@ class CarouselElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the carousel is disabled or not.[/en]
-   *   [ja]disabled状態になっていればtrueを返します。[/ja]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   get disabled() {
     return this.hasAttribute('disabled');

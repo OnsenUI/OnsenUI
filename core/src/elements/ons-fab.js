@@ -15,6 +15,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'fab--*',
@@ -22,7 +23,7 @@ const scheme = {
 
 /**
  * @element ons-fab
- * @category form
+ * @category fab
  * @description
  *   [en]
  *     The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
@@ -67,22 +68,26 @@ class FabElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
+    contentReady(this, () => {
       this._compile();
-    }
+    });
   }
 
   _compile() {
     autoStyle.prepare(this);
 
+    if (this.classList.contains('fab')) {
+      return;
+    }
+
     this.classList.add('fab');
 
-    let content = document.createElement('span');
+    const content = document.createElement('span');
     content.classList.add('fab__icon');
 
     util.arrayFrom(this.childNodes).forEach(element => {
       if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
-       content.appendChild(element);
+        content.appendChild(element);
       }
     });
 
@@ -95,8 +100,6 @@ class FabElement extends BaseElement {
     this._updatePosition();
 
     this.hide();
-
-    this.setAttribute('_compiled', '');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -191,8 +194,8 @@ class FabElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the floating action button is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);
@@ -207,8 +210,8 @@ class FabElement extends BaseElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [en]Whether the element is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this.style.transform === 'scale(1)' && this.style.display !== 'none';

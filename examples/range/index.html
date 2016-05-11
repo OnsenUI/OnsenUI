@@ -33,11 +33,11 @@
 </head>
 
 <body>
-  <ons-navigator ng-init="numberSelection = 30; numberSelection2 = 55">
+  <ons-page ng-init="numberSelection = 30;">
     <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
 
     <ons-list>
-      <ons-list-header>Flat Design (iOS)</ons-list-header>
+      <ons-list-header>Range</ons-list-header>
       <ons-list-item class="volume-item">
         <ons-row>
           <ons-col class="volume-icon" align="center" width="36px">
@@ -66,38 +66,7 @@
       </ons-list-item>
     </ons-list>
 
-    <ons-list modifier="material">
-      <ons-list-header modifier="material">Material Design</ons-list-header>
-      <ons-list-item modifier="material" class="volume-item">
-        <ons-row>
-          <ons-col class="volume-icon" align="center" width="36px">
-            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
-          </ons-col>
-          <ons-col align="center">
-            <ons-range modifier="material" class="volume-slider" ng-model="numberSelection2"></ons-range>
-          </ons-col>
-          <ons-col class="volume-icon" align="center" width="36px">
-            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
-          </ons-col>
-        </ons-row>
-      </ons-list-item>
-      <ons-list-item modifier="material" class="volume-item">
-        <ons-row>
-          <ons-col class="volume-icon" align="center" width="36px">
-            <ons-icon size="18px" class="list__item__icon" icon="md-volume-down"></ons-icon>
-          </ons-col>
-          <ons-col align="center">
-            <ons-range modifier="material" class="volume-slider" disabled></ons-range>
-          </ons-col>
-          <ons-col class="volume-icon" align="center" width="36px">
-            <ons-icon size="18px" class="list__item__icon" icon="md-volume-up"></ons-icon>
-          </ons-col>
-        </ons-row>
-      </ons-list-item>
-    </ons-list>
-
     <h3>{{numberSelection}}</h3>
-    <h3>{{numberSelection2}}</h3>
-  </ons-navigator>
+  </ons-page>
 </body>
 </html>

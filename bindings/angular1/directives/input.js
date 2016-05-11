@@ -56,20 +56,7 @@
 (function(){
   'use strict';
 
-  var ATTRS = [
-    'ngModel',
-    'ngChange',
-    'ngRequired',
-    'ngMinlength',
-    'ngMaxlength',
-    'ngPattern',
-    'ngTrim',
-    'ngValue',
-    'ngTrueValue',
-    'ngFalseValue'
-  ];
-
-  angular.module('onsen').directive('onsInput', function($compile) {
+  angular.module('onsen').directive('onsInput', function($parse) {
     return {
       restrict: 'E',
       replace: false,
@@ -77,9 +64,10 @@
 
       link: function(scope, element, attrs) {
         CustomElements.upgrade(element[0]);
+        let el = element[0];
 
-        var el = element[0];
-        var type = el.getAttribute('type');
+        const onInput = () => {
+          const set = $parse(attrs.ngModel).assign;
 
         ons._contentReady(element[0], function() {
 
@@ -101,9 +89,47 @@
             });
           }
 
-          scope.$on('$destroy', function() {
-            scope = element = attrs = el = null;
-          });
+          if (el._isTextInput) {
+            set(scope, el.value);
+          }
+          else if (el.type === 'radio' && el.checked) {
+            set(scope, el.value);
+          }
+          else {
+            set(scope, el.checked);
+          }
+
+          if (attrs.ngChange) {
+            scope.$eval(attrs.ngChange);
+          }
+
+          scope.$parent.$evalAsync();
+
+          if (attrs.ngModel) {
+            scope.$watch(attrs.ngModel, (value) => {
+              if (el._isTextInput) {
+                el.value = value;
+              }
+              else if (el.type === 'radio') {
+                el.checked = value === el.value;
+              }
+              else {
+                el.checked = value;
+              }
+            });
+
+            el._isTextInput
+              ? element.on('input', onInput)
+              : element.on('change', onInput);
+          }
+        });
+
+        scope.$on('$destroy', () => {
+          el._isTextInput
+            ? element.off('input', onInput)
+            : element.off('change', onInput);
+
+          scope = element = attrs = el = null;
         });
       }
     };

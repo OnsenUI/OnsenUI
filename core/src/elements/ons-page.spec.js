@@ -40,13 +40,11 @@ describe('OnsPageElement', () => {
 
   describe('#_tryToFillStatusBar()', (done) => {
     it('fills status bar', () => {
-      var tmp = ons._internal.shouldFillStatusBar;
-      ons._internal.shouldFillStatusBar = () => { return Promise.resolve(); };
-      element._tryToFillStatusBar().then(() => {
-        expect(element.hasAttribute('status-bar-fill')).to.be.true;
-        done();
-      });
-      ons._internal.shouldFillStatusBar = tmp;
+      var tmp = ons._internal.autoStatusBarFill;
+      ons._internal.autoStatusBarFill = action => action();
+      element._tryToFillStatusBar();
+      expect(element.hasAttribute('status-bar-fill')).to.be.true;
+      ons._internal.autoStatusBarFill = tmp;
     });
   });
 
@@ -61,26 +59,26 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#set backButtonHandler', () => {
+  describe('#onDeviceBackButton', () => {
     it('sets the callback', () => {
       expect(element._backButtonHandler).not.to.be.ok;
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
     });
 
     it('overwrites the callback', () => {
       expect(element._backButtonHandler).not.to.be.ok;
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
 
       var spy = chai.spy.on(element._backButtonHandler, 'destroy');
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
       expect(spy).to.have.been.called.once;
     });
 
     it('is correctly deleted', () => {
-      element.backButtonHandler = () => { return; };
+      element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
 
       element._destroy();
@@ -183,7 +181,7 @@ describe('OnsPageElement', () => {
     });
 
     it('infiniteScroll doesn\'t throw error until it\'s called', () => {
-      let app = {a: () => 42};
+      const app = {a: () => 42};
       element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
       window._testApp = app;
       expect(() => element._onInfiniteScroll()).to.not.throw(Error);
@@ -216,8 +214,8 @@ describe('OnsPageElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-page></ons-page>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -227,7 +225,7 @@ describe('OnsPageElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = ons._util.createElement('<ons-page>content</ons-page>');
+      const e = ons._util.createElement('<ons-page>content</ons-page>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

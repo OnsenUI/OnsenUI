@@ -21,7 +21,7 @@
  */
 
 /**
- * @attribute on-device-backbutton
+ * @attribute on-device-back-button
  * @type {Expression}
  * @description
  *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
@@ -29,7 +29,7 @@
  */
 
 /**
- * @attribute ng-device-backbutton
+ * @attribute ng-device-back-button
  * @initonly
  * @type {Expression}
  * @description

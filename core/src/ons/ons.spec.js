@@ -20,7 +20,7 @@ describe('ons', () => {
 
   describe('#disableAutoStatusBarFill()', () => {
     it('sets autoStatusBarFill to false', () => {
-      let tmp = ons.isReady;
+      const tmp = ons.isReady;
       ons.isReady = () => false;
       ons.disableAutoStatusBarFill();
       expect(ons._internal.config.autoStatusBarFill).to.be.false;
@@ -49,7 +49,7 @@ describe('ons', () => {
 
   describe('#setDefaultDeviceBackButtonListener()', () => {
     it('changes the default callback', () => {
-      let tmp = ons._defaultDeviceBackButtonHandler._callback;
+      const tmp = ons._defaultDeviceBackButtonHandler._callback;
       ons.setDefaultDeviceBackButtonListener(() => undefined);
       expect(tmp).not.to.equal(ons._defaultDeviceBackButtonHandler._callback);
       ons.setDefaultDeviceBackButtonListener(tmp);
@@ -58,7 +58,7 @@ describe('ons', () => {
 
   describe('#enableAutoStatusBarFill()', () => {
     it('sets autoStatusBarFill to true', () => {
-      let tmp = ons.isReady;
+      const tmp = ons.isReady;
       ons.isReady = () => false;
       ons.enableAutoStatusBarFill();
       expect(ons._internal.config.autoStatusBarFill).to.be.true;
@@ -87,7 +87,7 @@ describe('ons', () => {
     });
 
     it('calls the linking function', (done) => {
-      let options = {};
+      const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
       ons.createPopover('page.html', options).then((element) => {
@@ -112,7 +112,7 @@ describe('ons', () => {
     });
 
     it('calls the linking function', (done) => {
-      let options = {};
+      const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
       ons.createDialog('page.html', options).then((element) => {
@@ -137,7 +137,7 @@ describe('ons', () => {
     });
 
     it('calls the linking function', (done) => {
-      let options = {};
+      const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
       ons.createAlertDialog('page.html', options).then((element) => {
@@ -158,7 +158,7 @@ describe('ons', () => {
 
   describe('#resolveLoadingPlaceholder()', () => {
     it('resolves the placeholder', () => {
-      let e = document.createElement('div');
+      const e = document.createElement('div');
       e.setAttribute('ons-loading-placeholder', 'page.html');
       document.body.appendChild(e);
       ons.resolveLoadingPlaceholder();
@@ -169,7 +169,7 @@ describe('ons', () => {
 
   describe('#_setupLoadingPlaceHolders()', () => {
     it('resolves the placeholder', () => {
-      let e = document.createElement('div');
+      const e = document.createElement('div');
       e.setAttribute('ons-loading-placeholder', 'page.html');
       document.body.appendChild(e);
       var spy = chai.spy.on(ons, '_resolveLoadingPlaceholder');

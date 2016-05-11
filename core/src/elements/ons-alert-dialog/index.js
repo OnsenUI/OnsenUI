@@ -215,14 +215,16 @@ class AlertDialogElement extends BaseElement {
   }
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      contentReady(this, () => this._compile());
-    }
+    contentReady(this, () => this._compile());
 
     this._visible = false;
     this._doorLock = new DoorLock();
     this._boundCancel = this._cancel.bind(this);
 
+    this._updateAnimatorFactory();
+  }
+
+  _updateAnimatorFactory() {
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: AlertDialogAnimator,
@@ -289,8 +291,8 @@ class AlertDialogElement extends BaseElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]A boolean value that specifies whether the dialog is disabled or not.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the element is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
     return util.toggleAttribute(this, 'disabled', value);
@@ -304,11 +306,7 @@ class AlertDialogElement extends BaseElement {
    * @property cancelable
    * @type {Boolean}
    * @description
-   *   [en]
-   *     A boolean value that specifies whether the dialog is cancelable or not.
-   *
-   *     When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
-   *   [/en]
+   *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
    */
   set cancelable(value) {
@@ -366,14 +364,16 @@ class AlertDialogElement extends BaseElement {
         this._mask.style.opacity = '1';
 
         return new Promise(resolve => {
-          animator.show(this, () => {
-            this._visible = true;
-            unlock();
+          contentReady(this, () => {
+            animator.show(this, () => {
+              this._visible = true;
+              unlock();
 
-            util.triggerElementEvent(this, 'postshow', {alertDialog: this});
+              util.triggerElementEvent(this, 'postshow', {alertDialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
@@ -430,15 +430,17 @@ class AlertDialogElement extends BaseElement {
         const animator = this._animatorFactory.newAnimator(options);
 
         return new Promise(resolve => {
-          animator.hide(this, () => {
-            this.style.display = 'none';
-            this._visible = false;
-            unlock();
+          contentReady(this, () => {
+            animator.hide(this, () => {
+              this.style.display = 'none';
+              this._visible = false;
+              unlock();
 
-            util.triggerElementEvent(this, 'posthide', {alertDialog: this});
+              util.triggerElementEvent(this, 'posthide', {alertDialog: this});
 
-            callback();
-            resolve(this);
+              callback();
+              resolve(this);
+            });
           });
         });
       };
@@ -457,21 +459,21 @@ class AlertDialogElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is visible or not.[/en]
-   *   [ja]ダイアログが表示されているかどうか。[/ja]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
     return this._visible;
   }
 
   /**
-   * @property backButtonHandler
+   * @property onDeviceBackButton
    * @readonly
    * @type {Object}
    * @description
    *   [en]Retrieve the back-button handler.[/en]
    *   [ja]バックボタンハンドラを取得します。[/ja]
    */
-  get backButtonHandler() {
+  get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
@@ -500,9 +502,6 @@ class AlertDialogElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
       this._mask.addEventListener('click', this._boundCancel, false);
     });
   }
@@ -517,6 +516,9 @@ class AlertDialogElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
+    else if (name === 'animation') {
+      this._updateAnimatorFactory();
     }
   }
 }

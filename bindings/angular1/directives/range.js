@@ -5,26 +5,33 @@
     return {
       restrict: 'E',
       replace: false,
-      scope: true,
+      scope: false,
 
       link: function(scope, element, attrs) {
         CustomElements.upgrade(element[0]);
 
-        if (attrs.ngModel) {
-          var set = $parse(attrs.ngModel).assign;
+        const onInput = () => {
+          const set = $parse(attrs.ngModel).assign;
 
-          scope.$parent.$watch(attrs.ngModel, function(value) {
+          set(scope, element[0].value);
+          if (attrs.ngChange) {
+            scope.$eval(attrs.ngChange);
+          }
+          scope.$parent.$evalAsync();
+        };
+
+        if (attrs.ngModel) {
+          scope.$watch(attrs.ngModel, (value) => {
             element[0].value = value;
           });
 
-          element[0]._input.addEventListener('input', function() {
-            set(scope.$parent, element[0].value);
-            if (attrs.ngChange) {
-              scope.$eval(attrs.ngChange);
-            }
-            scope.$parent.$evalAsync();
-          });
+          element.on('input', onInput);
         }
+
+        scope.$on('$destroy', () => {
+          element.off('input', onInput);
+          scope = element = attrs = null;
+        });
       }
     };
   });

@@ -23,7 +23,7 @@ describe('OnsDialogElement', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    let element = dialog.querySelector('.dialog');
+    const element = dialog.querySelector('.dialog');
 
     dialog.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('dialog--hoge')).to.be.true;
@@ -52,37 +52,32 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('copies style to child', () => {
-      let dialog = ons._util.createElement('<ons-dialog style="background-color: red"></ons-dialog>');
-      expect(dialog._dialog.style.backgroundColor).to.equal('red');
-    });
-
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-dialog></ons-dialog>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 
-  describe('#backButtonHandler', () => {
+  describe('#onDeviceBackButton', () => {
     it('returns the back button handler', () => {
-      expect(dialog.backButtonHandler).to.be.an('object');
+      expect(dialog.onDeviceBackButton).to.be.an('object');
     });
   });
 
   describe('#_onDeviceBackButton()', () => {
     it('cancels if dialog is cancelable', () => {
-      let spy = chai.spy.on(dialog, '_cancel');
+      const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
       dialog._onDeviceBackButton();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls parent handler if dialog is not cancelable', () => {
-      let event = {},
-        spy = chai.spy.on(event, 'callParentHandler');
+      const event = {};
+      const spy = chai.spy.on(event, 'callParentHandler');
 
       dialog._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
@@ -91,14 +86,14 @@ describe('OnsDialogElement', () => {
 
   describe('#_cancel()', () => {
     it('hides the dialog if it is cancelable', () => {
-      let spy = chai.spy.on(dialog, 'hide');
+      const spy = chai.spy.on(dialog, 'hide');
       dialog.setAttribute('cancelable', '');
       dialog._cancel();
       expect(spy).to.have.been.called.once;
     });
 
     it('emits a \'cancel\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('cancel', resolve);
       });
 
@@ -133,7 +128,7 @@ describe('OnsDialogElement', () => {
     });
 
     it('emits \'preshow\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('preshow', resolve);
       });
 
@@ -143,7 +138,7 @@ describe('OnsDialogElement', () => {
     });
 
     it('emits \'postshow\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('postshow', resolve);
       });
 
@@ -183,7 +178,7 @@ describe('OnsDialogElement', () => {
     });
 
     it('emits \'prehide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('prehide', resolve);
       });
 
@@ -193,7 +188,7 @@ describe('OnsDialogElement', () => {
     });
 
     it('emits \'posthide\' event', () => {
-      let promise = new Promise((resolve) => {
+      const promise = new Promise((resolve) => {
         dialog.addEventListener('posthide', resolve);
       });
 
@@ -246,7 +241,7 @@ describe('OnsDialogElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-dialog');
+      const e = ons._util.createElement('<ons-dialog>contents</ons-dialog>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

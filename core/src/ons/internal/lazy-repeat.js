@@ -121,7 +121,7 @@ export class LazyRepeatProvider {
    * @param {LazyRepeatDelegate} delegate
    */
   constructor(wrapperElement, delegate) {
-    this._wrapperElement = util.validated('wrapperElement', wrapperElement, Element);
+    this._wrapperElement = wrapperElement;
     this._delegate = util.validated('delegate', delegate, LazyRepeatDelegate);
 
     if (wrapperElement.tagName.toLowerCase() === 'ons-list') {
@@ -212,7 +212,7 @@ export class LazyRepeatProvider {
    * @param {Number} item.top
    */
   _renderElement({index, top}) {
-    let item = this._renderedItems[index];
+    const item = this._renderedItems[index];
     if (item) {
       this._delegate.updateItem(index, item); // update if it exists
       item.element.style.top = top + 'px';
@@ -236,7 +236,7 @@ export class LazyRepeatProvider {
    * @param {Number} index
    */
   _removeElement(index) {
-    let item = this._renderedItems[index];
+    const item = this._renderedItems[index];
 
     this._delegate.destroyItem(index, item);
 
@@ -277,7 +277,7 @@ export class LazyRepeatProvider {
   }
 
   _recalculateTopPositions() {
-    let l = Math.min(this._topPositions.length, this._itemCount);
+    const l = Math.min(this._topPositions.length, this._itemCount);
     this._topPositions[0] = 0;
     for (let i = 1, l; i < l; i++) {
       this._topPositions[i] = this._topPositions[i - 1] + this._getItemHeight(i);
@@ -314,7 +314,7 @@ export class LazyRepeatProvider {
   _debounce(func, wait, immediate) {
     let timeout;
     return function() {
-      let callNow = immediate && !timeout;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
       if (callNow) {
         func.apply(this, arguments);

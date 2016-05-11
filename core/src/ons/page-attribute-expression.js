@@ -74,8 +74,9 @@ const pageAttributeExpression = {
   _parsePart: function(part) {
     let c,
       inInterpolation = false,
-      currentIndex = 0,
-      tokens = [];
+      currentIndex = 0;
+
+    const tokens = [];
 
     if (part.length === 0) {
       throw new Error('Unable to parse empty string.');
@@ -89,7 +90,7 @@ const pageAttributeExpression = {
           throw new Error('Nested interpolation not supported.');
         }
 
-        let token = part.substring(currentIndex, i);
+        const token = part.substring(currentIndex, i);
         if (token.length > 0) {
           tokens.push(part.substring(currentIndex, i));
         }
@@ -102,7 +103,7 @@ const pageAttributeExpression = {
           throw new Error('} must be preceeded by ${');
         }
 
-        let token = part.substring(currentIndex, i + 1);
+        const token = part.substring(currentIndex, i + 1);
         if (token.length > 0) {
           tokens.push(part.substring(currentIndex, i + 1));
         }
@@ -125,8 +126,8 @@ const pageAttributeExpression = {
       match = token.match(re);
 
     if (match) {
-      let name = match[1].trim(),
-        variable = this.getVariable(name);
+      const name = match[1].trim();
+      const variable = this.getVariable(name);
 
       if (variable === null) {
         throw new Error(`Variable "${name}" does not exist.`);
@@ -135,7 +136,7 @@ const pageAttributeExpression = {
         return variable;
       }
       else {
-        let rv = variable();
+        const rv = variable();
 
         if (typeof rv !== 'string') {
           throw new Error('Must return a string.');

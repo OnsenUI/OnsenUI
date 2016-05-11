@@ -3,8 +3,9 @@
 describe('OnsFabElement', () => {
   let fab;
 
-  beforeEach(() => {
+  beforeEach(done => {
     fab = new OnsFabElement();
+    ons._contentReady(fab, done);
   });
 
   it('exists', () => {
@@ -28,7 +29,7 @@ describe('OnsFabElement', () => {
 
   describe('#_show()', () => {
     it('calls show()', () => {
-      let spy = chai.spy.on(fab, 'show');
+      const spy = chai.spy.on(fab, 'show');
       fab._show();
       expect(spy).to.have.been.called.once;
     });
@@ -36,7 +37,7 @@ describe('OnsFabElement', () => {
 
   describe('#_hide()', () => {
     it('calls hide()', () => {
-      let spy = chai.spy.on(fab, 'hide');
+      const spy = chai.spy.on(fab, 'hide');
       fab._hide();
       expect(spy).to.have.been.called.once;
     });
@@ -44,7 +45,7 @@ describe('OnsFabElement', () => {
 
   describe('#_updatePosition()', () => {
     it('is called when the "position" attribute changes', () => {
-      let spy = chai.spy.on(fab, '_updatePosition');
+      const spy = chai.spy.on(fab, '_updatePosition');
 
       fab.setAttribute('position', 'top left');
       fab.setAttribute('position', 'bottom left');
@@ -151,13 +152,13 @@ describe('OnsFabElement', () => {
 
   describe('#toggle()', () => {
     it('calls #show() if element is hidden', () => {
-      let spy = chai.spy.on(fab, 'show');
+      const spy = chai.spy.on(fab, 'show');
       fab.toggle();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls #hide() if element is shown', () => {
-      let spy = chai.spy.on(fab, 'hide');
+      const spy = chai.spy.on(fab, 'hide');
       fab.toggle();
       expect(spy).not.to.have.been.called();
       fab.toggle();
@@ -167,8 +168,8 @@ describe('OnsFabElement', () => {
 
   describe('#_compile()', () => {
     it('does not compile twice', () => {
-      let div1 = document.createElement('div');
-      let div2 = document.createElement('div');
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       div1.innerHTML = '<ons-fab></ons-fab>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
@@ -178,7 +179,7 @@ describe('OnsFabElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' effects on Android', () => {
       ons.platform.select('android');
-      let e = document.createElement('ons-fab');
+      const e = ons._util.createElement('<ons-fab> </ons-fab>');
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');

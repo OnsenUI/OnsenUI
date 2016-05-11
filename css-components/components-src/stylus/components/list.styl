@@ -113,6 +113,7 @@ list__item()
   align-items center
 
 .list__item__left
+  min-height var-list-item-min-height
   display flex
   padding-right 14px
   order 0
@@ -126,6 +127,7 @@ list__item()
   margin 0
 
 .list__item__center
+  min-height var-list-item-min-height
   display flex
   flex-grow 1
   flex-wrap wrap
@@ -139,6 +141,7 @@ list__item()
   retina-list-item-border()
 
 .list__item__right
+  min-height var-list-item-min-height
   display flex
   margin-left auto
   padding-right 12px
@@ -154,6 +157,7 @@ list__item()
   font-size var-list-header-font-size
   font-weight var-list-header-font-weight
   color var-list-header-color
+  background-color var-list-header-background-color
   text-shadow var-list-header-text-shadow
   border-top none
   border-bottom var-list-border
@@ -357,6 +361,7 @@ list__item()
   transition none
 
 .list__item--chevron:before
+  min-height var-list-item-min-height
   display flex
   align-items center
   color var-list-item-separator-color
@@ -691,18 +696,21 @@ list__item()
   padding 16px 0px 16px 0px
   min-width 56px
   line-height 1
+  box-sizing border-box
 
 .list__item--material__left:empty
 
 .list__item--material__center
   padding 16px 0
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material__right
   padding 16px 16px 16px 0px
   line-height 1
   border-color #eee
+  box-sizing border-box
   retina-list-item-border(#eee)
 
 .list__item--material.list__item--longdivider

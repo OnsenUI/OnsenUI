@@ -335,7 +335,7 @@ navigation-bar--material-font()
   font-weight 500
   color var-material-navigation-bar-color
 
-.navigation-bar--material__left
+.navigation-bar--material__left, .navigation-bar--material__right
   navigation-bar--material-font()
   height var-navigation-bar-material-height
   min-width 72px
@@ -357,15 +357,12 @@ navigation-bar--material-font()
 .navigation-bar--material__center:first-child
   margin-left 16px
 
-.navigation-bar--material__left:empty
+.navigation-bar--material__center:last-child
+  margin-right 16px
+
+.navigation-bar--material__left:empty, .navigation-bar--material__right:empty
   min-width 16px
 
-.navigation-bar--material__right
-  navigation-bar--material-font()
-  height var-navigation-bar-material-height
-  width auto
-  float initial
-  line-height var-navigation-bar-material-height
 
 /*! topdoc
   name: Material Navigation Bar with Icons
