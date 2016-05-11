@@ -43,7 +43,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
 
     animit.runAll(
 
-      animit([enterPage._getContentElement(), enterPage._getBackgroundElement()])
+      animit([enterPage._content, enterPage._background])
         .saveStyle()
         .queue({
           css: {
@@ -67,7 +67,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
           done();
         }),
 
-      animit(enterPage._getToolbarElement())
+      animit(enterPage._toolbar)
         .saveStyle()
         .queue({
           css: {
@@ -98,7 +98,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
   pop(enterPage, leavePage, callback) {
     animit.runAll(
 
-      animit([leavePage._getContentElement(), leavePage._getBackgroundElement()])
+      animit([leavePage._content, leavePage._background])
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',
@@ -120,7 +120,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
           done();
         }),
 
-      animit(leavePage._getToolbarElement())
+      animit(leavePage._toolbar)
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',

@@ -48,36 +48,30 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
   _decompose(page) {
     CustomElements.upgrade(page);
-    const toolbar = util.findChild(page, 'ons-toolbar') || nullElement;
-    util.match(toolbar, 'ons-toolbar') && CustomElements.upgrade(toolbar);
-
-    const labels = find(toolbar, ['.center', '.back-button__label']);
-
-    const sides = find(toolbar, ['.left', '.right']).map(e => e.children.length ? [].slice.call(e.children) : [e]);
-
-    const other = [].concat.apply([], sides).map(e => {
-      return util.match(e, 'ons-back-button') ? find(e, '.back-button__icon') : e
-    });
-
-    return {
-      pageLabels: labels,
-      other: other,
-      content: page._getContentElement(),
-      background: page._getBackgroundElement(),
-      toolbar: toolbar,
-      bottomToolbar: page._getBottomToolbarElement()
+    const toolbar = page._toolbar;
+    const result = {
+      content: page._content,
+      background: page._background,
+      bottomToolbar: page._bottomToolbar
     };
+    if (toolbar) {
+      CustomElements.upgrade(toolbar);
+      const pageLabels = find(toolbar, ['.center', '.back-button__label']);
+
+      const sides = find(toolbar, ['.left', '.right']).map(e => e.children.length ? [].slice.call(e.children) : [e]);
+
+      const other = [].concat.apply([], sides).map(e =>
+        util.match(e, 'ons-back-button') ? find(e, '.back-button__icon') : e
+      );
+
+      util.extend(result, {toolbar, pageLabels, other});
+    }
+
+    return result;
   }
 
   _shouldAnimateToolbar(enterPage, leavePage) {
-    const bothPageHasToolbar =
-      enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
-
-    var noMaterialToolbar =
-      !enterPage._getToolbarElement().classList.contains('navigation-bar--material') &&
-      !leavePage._getToolbarElement().classList.contains('navigation-bar--material');
-
-    return bothPageHasToolbar && noMaterialToolbar;
+    return enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
   }
 
   /**
@@ -92,10 +86,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
 
-    const delta = (() => {
-      const rect = leavePage.getBoundingClientRect();
-      return Math.round(((rect.right - rect.left) / 2) * 0.6);
-    })();
+    const delta = Math.round(leavePage.getBoundingClientRect().width * 0.3);
 
     const maskClear = animit(this.backgroundMask)
       .saveStyle()

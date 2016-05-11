@@ -60,6 +60,24 @@ util.findChild = (element, query) => {
 /**
  * @param {Element} element
  * @param {String/Function} query dot class name or node name or matcher function.
+ * @return {Array}
+ */
+util.findChildNodes = (element, query) => {
+  const match = util.prepareQuery(query);
+  const result = [];
+
+  for (let i = 0; i < element.childNodes.length; i++) {
+    const node = element.childNodes[i];
+    if (match(node)) {
+      result.push(node);
+    }
+  }
+  return result;
+};
+
+/**
+ * @param {Element} element
+ * @param {String/Function} query dot class name or node name or matcher function.
  * @return {HTMLElement/null}
  */
 util.findParent = (element, query) => {

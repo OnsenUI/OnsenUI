@@ -257,7 +257,7 @@ class TabbarElement extends BaseElement {
 
     var page = util.findParent(this, 'ons-page');
     if (page) {
-      this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
+      this.style.top = top ? window.getComputedStyle(page._content, null).getPropertyValue('padding-top') : '';
 
       if (util.match(page.firstChild, 'ons-toolbar')) {
         action(page.firstChild, 'noshadow');

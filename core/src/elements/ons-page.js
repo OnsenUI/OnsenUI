@@ -197,7 +197,7 @@ class PageElement extends BaseElement {
   }
 
   _hasAPageControlChild() {
-    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+    return util.findChild(this._content, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
   }
 
   /**
@@ -209,7 +209,7 @@ class PageElement extends BaseElement {
   set onInfiniteScroll(value) {
     if (value === null) {
       this._onInfiniteScroll = null;
-      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      this._content.removeEventListener('scroll', this._boundOnScroll);
       return;
     }
     if (!(value instanceof Function)) {
@@ -218,7 +218,7 @@ class PageElement extends BaseElement {
     if (!this._onInfiniteScroll) {
       this._infiniteScrollLimit = 0.9;
       this._boundOnScroll = this._onScroll.bind(this);
-      this._contentElement.addEventListener('scroll', this._boundOnScroll);
+      this._content.addEventListener('scroll', this._boundOnScroll);
     }
     this._onInfiniteScroll = value;
   }
@@ -228,7 +228,7 @@ class PageElement extends BaseElement {
   }
 
   _onScroll() {
-    const c = this._contentElement,
+    const c = this._content,
       overLimit = (c.scrollTop + c.clientHeight) / c.scrollHeight >= this._infiniteScrollLimit;
 
     if (this._onInfiniteScroll && !this._loadingContent && overLimit) {
@@ -236,7 +236,6 @@ class PageElement extends BaseElement {
       this._onInfiniteScroll(() => this._loadingContent = false);
     }
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -257,26 +256,8 @@ class PageElement extends BaseElement {
     this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getContentElement() {
-    const result = util.findChild(this, '.page__content');
-    if (result) {
-      return result;
-    }
-    throw Error('fail to get ".page__content" element.');
-  }
-
-  /**
-   * @return {Boolean}
-   */
   _canAnimateToolbar() {
-    const toolbar = util.findChild(this, 'ons-toolbar') || util.findChild(this._contentElement, el => {
-      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
-    });
-
-    return toolbar && !util.hasModifier(toolbar, 'material');
+    return !!util.findChild(this, e => util.match(e, 'ons-toolbar') && !e.hasAttribute('inline') && !util.hasModifier(e, 'material'));
   }
 
   get _background() {
@@ -291,39 +272,14 @@ class PageElement extends BaseElement {
     return util.findChild(this, 'ons-toolbar');
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getBottomToolbarElement() {
-    return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
+  get _extra() {
+    return util.findChild(this, '.page__extra') || this.appendChild(util.create('.page__extra'));
   }
 
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarElement() {
-    return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+  get _bottomToolbar() {
+    return util.findChild(this, 'ons-bottom-toolbar');
   }
 
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerToolbar(element) {
-    this.insertBefore(element, this.children[0]);
-  }
-
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerBottomToolbar(element) {
-    this.classList.add('page-with-bottom-toolbar');
-    this.appendChild(element);
-  }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
@@ -345,6 +301,10 @@ class PageElement extends BaseElement {
     }
   }
 
+  _shouldBeDirectChild(e) {
+    return (e.nodeName === 1 && e.className.match(/\bpage__/)) || (e.nodeName.match(/ons-(bottom-)?toolbar/i) && !e.hasAttribute('inline'));
+  }
+
   _compile() {
     autoStyle.prepare(this);
 
@@ -352,9 +312,7 @@ class PageElement extends BaseElement {
       const background = util.create('.page__background');
       const content = util.create('.page__content');
 
-      util.findChildren(this, e =>
-        e.className.match(/\bpage__/) || (e.nodeName.match(/ons-(bottom-)?toolbar/) && !e.hasAttribute('inline'))
-      ).forEach(e => content.appendChild(e));
+      util.findChildNodes(this, e => !this._shouldBeDirectChild(e)).forEach(e => content.appendChild(e));
 
       const toolbar = this._toolbar;
       const location = toolbar ? toolbar.nextSibling : (this.childNodes[0] || null);
@@ -368,16 +326,6 @@ class PageElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _registerExtraElement(element) {
-    let extra = util.findChild(this, '.page__extra');
-    if (!extra) {
-      extra = util.create('.page__extra', {zIndex: 10001});
-      this.appendChild(extra);
-    }
-
-    extra.appendChild(element);
-  }
-
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
@@ -386,7 +334,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'show');
       }
 
-      util.propagateAction(this._contentElement, '_show');
+      util.propagateAction(this._content, '_show');
     }
   }
 
@@ -398,7 +346,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'hide');
       }
 
-      util.propagateAction(this._contentElement, '_hide');
+      util.propagateAction(this._content, '_hide');
     }
   }
 
@@ -413,7 +361,7 @@ class PageElement extends BaseElement {
       this.onDeviceBackButton.destroy();
     }
 
-    util.propagateAction(this._contentElement, '_destroy');
+    util.propagateAction(this._content, '_destroy');
 
     this.remove();
   }

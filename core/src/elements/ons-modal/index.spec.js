@@ -115,32 +115,31 @@ describe('OnsModalElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
-    it('gets the callback', () => {
-      expect(element.onDeviceBackButton).to.be.ok;
+    it('gets the callback', (done) => {
+      setTimeout(() => {
+        expect(element.onDeviceBackButton).to.be.ok;
+        done();
+      }, 10);
     });
 
-    it('overwrites the callback', () => {
-      const spy = chai.spy.on(element._backButtonHandler, 'destroy');
-      element.onDeviceBackButton = () => { return; };
-      expect(spy).to.have.been.called.once;
-      expect(element._backButtonHandler).to.be.ok;
+    it('overwrites the callback', (done) => {
+      setTimeout(() => {
+        const spy = chai.spy.on(element._backButtonHandler, 'destroy');
+        element.onDeviceBackButton = () => { return; };
+        expect(spy).to.have.been.called.once;
+        expect(element._backButtonHandler).to.be.ok;
+        done();
+      }, 10);
     });
   });
 
   describe('#_ensureNodePosition()', () => {
-    it('does not register extra element when has no parent ons-page', () => {
-      const spy = chai.spy.on(element, '_registerExtraElement');
-      expect(element._ensureNodePosition()).not.to.be.ok;
-      expect(spy).to.not.have.been.called();
-    });
-
     it('registers extra element when has parent ons-page', () => {
       const element = new OnsModalElement();
       const parent = new OnsPageElement();
-      const spy = chai.spy.on(parent, '_registerExtraElement');
-      parent._registerExtraElement(element);
+      parent.appendChild(element);
       element._ensureNodePosition();
-      expect(spy).to.have.been.called.twice;
+      expect(element.parentNode.className).to.equal('page__extra');
     });
   });
 

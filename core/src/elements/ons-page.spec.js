@@ -86,76 +86,11 @@ describe('OnsPageElement', () => {
     });
   });
 
-  describe('#_getBackgroundElement()', () => {
-    it('gets page__background', () => {
-      expect(() => element._getBackgroundElement()).not.to.throw(Error);
-    });
-
-    it('throws page__background error', () => {
-      element.removeChild(element.getElementsByClassName('page__background')[0]);
-      expect(() => element._getBackgroundElement()).to.throw(Error);
-    });
-  });
-
-  describe('#_getContentElement()', () => {
-    it('throws page__content error', () => {
-      element.removeChild(element.getElementsByClassName('page__content')[0]);
-      expect(() => element._getContentElement()).to.throw(Error);
-    });
-  });
-
   describe('#_canAnimateToolbar()', () => {
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;
-      element._registerToolbar(new OnsToolbarElement());
+      element.insertBefore(new OnsToolbarElement(), element.childNodes[0]);
       expect(element._canAnimateToolbar()).to.be.true;
-    });
-
-    it('works with toolbar in page__content', () => {
-      expect(element._canAnimateToolbar()).to.be.false;
-      element.lastChild.appendChild(new OnsToolbarElement());
-      expect(element._canAnimateToolbar()).to.be.true;
-    });
-  });
-
-  describe('#_getToolbarElement()', () => {
-    it('returns the toolbar element', () => {
-      element._registerToolbar(new OnsToolbarElement());
-      expect(element._getToolbarElement()).to.be.ok;
-    });
-  });
-
-  describe('#_registerToolbar()', () => {
-    it('inserts toolbar as a child', () => {
-      var spy = chai.spy.on(element, 'insertBefore');
-      var toolbarElement = new OnsToolbarElement();
-      element._registerToolbar(toolbarElement);
-      expect(spy).to.have.been.called.with(toolbarElement, element.children[0]);
-    });
-
-    it('inserts toolbar as a child after status-bar-fill', () => {
-      var fill = document.createElement('div');
-      fill.classList.add('page__status-bar-fill');
-      element.insertBefore(fill, element.firstChild);
-      var toolbarElement = new OnsToolbarElement();
-      var spy = chai.spy.on(element, 'insertBefore');
-      element._registerToolbar(toolbarElement);
-      expect(spy).to.have.been.called.with(toolbarElement, element.children[1]);
-    });
-  });
-
-  describe('#_getBottomToolbarElement()', () => {
-    it('inserts bottomToolbar as a child', () => {
-      element._registerBottomToolbar(new OnsBottomToolbarElement());
-      expect(element._getBottomToolbarElement()).to.be.ok;
-    });
-  });
-
-  describe('#registerExtraElement()', () => {
-    it('attaches a new child to the page', () => {
-      expect(element.lastChild.className).to.equal('page__content');
-      element._registerExtraElement(document.createElement('div'));
-      expect(element.lastChild.className).to.equal('page__extra');
     });
   });
 
@@ -236,7 +171,7 @@ describe('OnsPageElement', () => {
     beforeEach(() => {
       i = 0;
       page = element;
-      content = page._getContentElement();
+      content = page._content;
       document.body.appendChild(page);
       content.innerHTML = '<div style="height: ' + (2 * content.clientHeight) + 'px"></div>';
       maxScroll = content.scrollHeight - content.clientHeight;

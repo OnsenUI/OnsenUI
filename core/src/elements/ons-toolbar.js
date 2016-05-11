@@ -101,9 +101,6 @@ class ToolbarElement extends BaseElement {
         this._compile();
       }
     });
-
-    this._tryToEnsureNodePosition();
-    setImmediate(() => this._tryToEnsureNodePosition());
   }
 
   attributeChangedCallback(name, last, current) {
@@ -113,48 +110,8 @@ class ToolbarElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._tryToEnsureNodePosition();
-    setImmediate(() => this._tryToEnsureNodePosition());
   }
 
-  _tryToEnsureNodePosition() {
-    if (!this.parentNode || this.hasAttribute('inline')) {
-      return;
-    }
-    const page = util.findParent(this, 'ons-page');
-
-    if (page && page !== this.parentNode) {
-      page._registerToolbar(this);
-    }
-  }
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarLeftItemsElement() {
-    return this.querySelector('.left') || internal.nullElement;
-  }
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarCenterItemsElement() {
-    return this.querySelector('.center') || internal.nullElement;
-  }
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarRightItemsElement() {
-    return this.querySelector('.right') || internal.nullElement;
-  }
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarBackButtonLabelElement() {
-    return this.querySelector('ons-back-button .back-button__label') || internal.nullElement;
-  }
 
   _compile() {
     autoStyle.prepare(this);

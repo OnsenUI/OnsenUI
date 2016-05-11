@@ -32,7 +32,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'page\' attribute', () => {
-      const content = nav.topPage._getContentElement();
+      const content = nav.topPage._content;
       expect(content.innerHTML).to.equal('hoge');
   });
 
@@ -52,7 +52,7 @@ describe('OnsNavigatorElement', () => {
     it('adds a new page to the top of the page stack', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
-          const content = nav.topPage._getContentElement();
+          const content = nav.topPage._content;
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge');
           done();
@@ -64,7 +64,7 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage({
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
-          const content = nav.topPage._getContentElement();
+          const content = nav.topPage._content;
           expect(nav.pages.length).to.equal(2);
           expect(content.innerHTML).to.equal('hoge2');
           done();
@@ -129,13 +129,13 @@ describe('OnsNavigatorElement', () => {
     it('removes the top page from the stack', (done) => {
       nav.pushPage('fuga', {
         callback: () => {
-          const content = nav.topPage._getContentElement();
+          const content = nav.topPage._content;
           expect(content.innerHTML).to.equal('fuga');
 
           nav.popPage({
             callback: () => {
               expect(nav.pages.length).to.equal(1);
-              const content = nav.topPage._getContentElement();
+              const content = nav.topPage._content;
               expect(content.innerHTML).equal('hoge');
               done();
             }
@@ -171,7 +171,7 @@ describe('OnsNavigatorElement', () => {
     it('can refresh the previous page', (done) => {
       nav.pushPage('info', {
         callback: () => {
-          var content = nav.topPage._getContentElement();
+          var content = nav.topPage._content;
           content.innerHTML = 'piyo';
 
           nav.pushPage('fuga', {
@@ -179,7 +179,7 @@ describe('OnsNavigatorElement', () => {
               nav.popPage({
                 refresh: true,
                 callback: () => {
-                  var content = nav.topPage._getContentElement();
+                  var content = nav.topPage._content;
                   expect(content.innerHTML).to.equal('info');
                   done();
                 }
@@ -369,7 +369,7 @@ describe('OnsNavigatorElement', () => {
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
-            const content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._content;
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -385,7 +385,7 @@ describe('OnsNavigatorElement', () => {
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
-            const content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._content;
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -410,7 +410,7 @@ describe('OnsNavigatorElement', () => {
           nav.insertPage(-2, 'fuga').then( () => {
             expect(nav.pages.length).to.equal(3);
 
-            const content = nav.pages[0]._getContentElement();
+            const content = nav.pages[0]._content;
             expect(content.innerHTML).to.equal('fuga');
 
             done();
@@ -437,13 +437,13 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage('info', {
         callback: () => {
           expect(nav.pages.length).to.equal(2);
-          const content = nav.topPage._getContentElement();
+          const content = nav.topPage._content;
           expect(content.innerHTML).to.equal('info');
 
           nav.replacePage('fuga', {
             callback: () => {
               expect(nav.pages.length).to.equal(2);
-              const content = nav.topPage._getContentElement();
+              const content = nav.topPage._content;
               expect(content.innerHTML).to.equal('fuga');
               done();
             }
@@ -474,7 +474,7 @@ describe('OnsNavigatorElement', () => {
         nav.resetToPage('hoge', {
           callback: () => {
             expect(nav.pages.length).to.equal(1);
-            const content = nav.topPage._getContentElement();
+            const content = nav.topPage._content;
             expect(content.innerHTML).to.equal('hoge');
             done();
           }

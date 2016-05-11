@@ -162,21 +162,10 @@ class ModalElement extends BaseElement {
     if (!this.parentNode || this.hasAttribute('inline')) {
       return;
     }
+    if (!util.match(this.parentNode, '.page__extra')) {
+      const page = util.findParent(this, 'ons-page');
 
-    if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
-      var page = this;
-      for (;;) {
-        page = page.parentNode;
-
-        if (!page) {
-          return;
-        }
-
-        if (page.nodeName.toLowerCase() === 'ons-page') {
-          break;
-        }
-      }
-      page._registerExtraElement(this);
+      page && page._extra.appendChild(this);
     }
   }
 
