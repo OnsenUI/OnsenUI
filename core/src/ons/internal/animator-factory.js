@@ -48,8 +48,9 @@ export default class AnimatorFactory {
     if (jsonString) {
       try {
         return util.animationOptionsParse(jsonString);
-      } catch (e) { }
-      console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+      } catch (e) {
+        console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+      }
     }
     return {};
   }

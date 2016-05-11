@@ -268,6 +268,21 @@ util.triggerElementEvent = (target, eventName, detail = {}) => {
 
 
 /**
+ * @param {String}
+ * @return {Object}
+ */
+util.animationOptionsParse = (jsonString) => {
+  if (jsonString) {
+    try {
+      return animationOptionsParse(jsonString);
+    } catch (e) {
+      console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+    }
+  }
+  return {};
+};
+
+/**
  * @param {Element} element
  * @param {String} action
  * @param {Object} options
@@ -283,7 +298,7 @@ util.executeAction = (element, action, options, actionInfo = {}) => {
   const callback = options.callback;
 
   options.animationOptions = util.extend(
-    AnimatorFactory.parseAnimationOptionsString(element.getAttribute('animation-options')),
+    util.animationOptionsParse(element.getAttribute('animation-options')),
     options.animationOptions || {}
   );
 
@@ -519,11 +534,6 @@ util.updateRipple = (target) => {
   }
 };
 
-/**
- * @param {String}
- * @return {Object}
- */
-util.animationOptionsParse = animationOptionsParse;
 
 /**
  * @param {*} value

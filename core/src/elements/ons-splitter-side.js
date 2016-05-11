@@ -120,7 +120,7 @@ class CollapseMode {
   }
 
   handleGesture(e) {
-    if (!this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
+    if (!this._active || this._element._doorLock.isLocked() || this._isOpenOtherSideMenu()) {
       return;
     }
     if (e.type === 'dragstart') {
@@ -212,7 +212,7 @@ class CollapseMode {
     }
 
     const callback = options.callback;
-    const unlock = this._lock.lock();
+    const unlock = this._element._doorLock.lock();
     const done = () => {
       this._state = FINAL_STATE;
       this.layout();
