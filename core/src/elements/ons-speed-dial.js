@@ -161,7 +161,7 @@ class SpeedDialElement extends BaseElement {
   }
 
   _onClick(e) {
-    if (!this.disabled) {
+    if (!this.disabled && this._shown) {
       this.toggleItems();
     }
   }
