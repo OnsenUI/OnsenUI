@@ -363,13 +363,11 @@ class NavigatorElement extends BaseElement {
       options.animationOptions = util.extend({}, leavePage.pushedOptions.animationOptions, options.animationOptions || {});
 
       const callback = () => {
-        setImmediate(() => enterPage._show());
-        leavePage._hide();
-
         pages.pop();
         update(pages, this).then(() => {
           this._isRunning = false;
 
+          enterPage._show();
           util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
 
           if (typeof options.callback === 'function') {
@@ -380,6 +378,7 @@ class NavigatorElement extends BaseElement {
         });
       };
 
+      leavePage._hide();
       const animator = this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
     }).catch(() => this._isRunning = false);
@@ -474,6 +473,7 @@ class NavigatorElement extends BaseElement {
             leavePage.style.display = 'none';
           }
 
+          enterPage._show();
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
           if (typeof options.callback === 'function') {
@@ -489,10 +489,8 @@ class NavigatorElement extends BaseElement {
           enterPage.style.display = 'block';
           if (leavePage) {
             leavePage._hide();
-            setImmediate(() => enterPage._show());
             animator.push(enterPage, leavePage, done);
           } else {
-            setImmediate(() => enterPage._show());
             done();
           }
         };
