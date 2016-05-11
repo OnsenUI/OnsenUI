@@ -290,6 +290,15 @@ describe('OnsSpeedDialElement', () => {
     });
   });
 
+  describe('#isOpen()', () => {
+    it('returns whether the menu is open or not.', () => {
+      speedDial.showItems();
+      expect(speedDial.isOpen()).to.be.true;
+      speedDial.hideItems();
+      expect(speedDial.isOpen()).to.be.false;
+    });
+  });
+
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');

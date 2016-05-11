@@ -25,6 +25,7 @@ import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
+import OnsSplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -441,7 +442,7 @@ class SplitterSideElement extends BaseElement {
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
     this._animatorFactory = new AnimatorFactory({
-      animators: window.OnsSplitterElement._animatorDict,
+      animators: OnsSplitterElement._animatorDict,
       baseClass: SplitterAnimator,
       baseClassName: 'SplitterAnimator',
       defaultAnimation: this.getAttribute('animation')
@@ -456,6 +457,7 @@ class SplitterSideElement extends BaseElement {
     }
 
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
+
     if (!this.hasAttribute('side')) {
       this.setAttribute('side', 'left');
     }
@@ -532,7 +534,10 @@ class SplitterSideElement extends BaseElement {
 
   _updateSwipeable(swipeable = this.getAttribute('swipeable')) {
     const action = swipeable === null ? 'off' : 'on';
-    this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+
+    if (this._gestureDetector) {
+      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+    }
   }
 
   _updateSwipeTargetWidth(value = this.getAttribute('swipe-target-width')) {

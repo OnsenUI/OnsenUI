@@ -52,11 +52,6 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('copies style to child', () => {
-      const dialog = ons._util.createElement('<ons-dialog style="background-color: red"></ons-dialog>');
-      expect(dialog._dialog.style.backgroundColor).to.equal('red');
-    });
-
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
@@ -246,7 +241,7 @@ describe('OnsDialogElement', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      const e = document.createElement('ons-dialog');
+      const e = ons._util.createElement('<ons-dialog>contents</ons-dialog>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });

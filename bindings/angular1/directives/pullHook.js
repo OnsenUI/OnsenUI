@@ -18,7 +18,7 @@
  *
  * <ons-page ng-controller="MyController">
  *   <ons-pull-hook var="loader" ng-action="load($done)">
- *     <span ng-switch="loader.getCurrentState()">
+ *     <span ng-switch="loader.state">
  *       <span ng-switch-when="initial">Pull down to refresh</span>
  *       <span ng-switch-when="preaction">Release to refresh</span>
  *       <span ng-switch-when="action">Loading data. Please wait...</span>
