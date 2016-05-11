@@ -69,26 +69,6 @@
         const onInput = () => {
           const set = $parse(attrs.ngModel).assign;
 
-        ons._contentReady(element[0], function() {
-
-          ATTRS.forEach(function(attr) {
-            var kebabCase = attr.replace(/[A-Z]/g, function(letter, pos) {
-              return (pos ? '-' : '') + letter.toLowerCase();
-            });
-
-            if (attrs.hasOwnProperty(attr)) {
-              el._input.setAttribute(kebabCase, attrs[attr]);
-            }
-          });
-
-          $compile(el._input)(scope);
-
-          if (el._isTextInput && attrs.ngModel) {
-            scope.$watch(attrs.ngModel, function(value) {
-              el._updateLabelClass();
-            });
-          }
-
           if (el._isTextInput) {
             set(scope, el.value);
           }
@@ -104,25 +84,25 @@
           }
 
           scope.$parent.$evalAsync();
+        };
 
-          if (attrs.ngModel) {
-            scope.$watch(attrs.ngModel, (value) => {
-              if (el._isTextInput) {
-                el.value = value;
-              }
-              else if (el.type === 'radio') {
-                el.checked = value === el.value;
-              }
-              else {
-                el.checked = value;
-              }
-            });
+        if (attrs.ngModel) {
+          scope.$watch(attrs.ngModel, (value) => {
+            if (el._isTextInput) {
+              el.value = value;
+            }
+            else if (el.type === 'radio') {
+              el.checked = value === el.value;
+            }
+            else {
+              el.checked = value;
+            }
+          });
 
-            el._isTextInput
-              ? element.on('input', onInput)
-              : element.on('change', onInput);
-          }
-        });
+          el._isTextInput
+            ? element.on('input', onInput)
+            : element.on('change', onInput);
+        }
 
         scope.$on('$destroy', () => {
           el._isTextInput
