@@ -159,7 +159,7 @@ class PageElement extends BaseElement {
         }
       }
 
-      if (!util.hasAnyComponentAsParent(this)) {
+      if (!util.findParent(this, util.isAPageManager)) {
         setImmediate(() => this._show());
       }
 
@@ -192,12 +192,12 @@ class PageElement extends BaseElement {
   _tryToFillStatusBar(){
     internal.autoStatusBarFill(() => {
       const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'));
-      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageControlChild()));
+      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageManagerChild()));
     });
   }
 
-  _hasAPageControlChild() {
-    return util.findChild(this._content, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+  _hasAPageManagerChild() {
+    return util.findChild(this._content, util.isAPageManager);
   }
 
   /**

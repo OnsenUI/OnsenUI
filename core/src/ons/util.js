@@ -113,15 +113,7 @@ util.isAttached = (element) => {
  * @param {Element} element
  * @return {boolean}
  */
-util.hasAnyComponentAsParent = (element) => {
-  while (element && document.documentElement !== element) {
-    element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-      return true;
-    }
-  }
-  return false;
-};
+util.isAPageManager = e => e.nodeName.match(/ons-(navigator|tabbar|sliding-menu|split(ter|-view))/i);
 
 /**
  * @param {Element} element
@@ -271,16 +263,22 @@ util.triggerElementEvent = (target, eventName, detail = {}) => {
  * @param {String}
  * @return {Object}
  */
-util.animationOptionsParse = (jsonString) => {
-  if (jsonString) {
+util.animationOptionsParse = optionsString => {
+  if (optionsString) {
     try {
-      return animationOptionsParse(jsonString);
+      return animationOptionsParse(optionsString);
     } catch (e) {
       console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
     }
   }
   return {};
 };
+
+/**
+ * @param {HTMLElement}
+ * @return {Object}
+ */
+util.getAnimationOptions = element => util.animationOptionsParse(element.getAttribute('animation-options'));
 
 /**
  * @param {Element} element
@@ -297,10 +295,7 @@ util.executeAction = (element, action, options, actionInfo = {}) => {
   const {before, after, events, eventData} = actionInfo;
   const callback = options.callback;
 
-  options.animationOptions = util.extend(
-    util.animationOptionsParse(element.getAttribute('animation-options')),
-    options.animationOptions || {}
-  );
+  options.animationOptions = util.extend(util.getAnimationOptions(element), options.animationOptions || {});
 
   if (events && util.emitEvent(element, `pre${action}`, eventData)) {
     return Promise.reject(`Canceled in pre${action} event.`);
