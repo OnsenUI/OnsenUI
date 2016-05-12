@@ -302,10 +302,10 @@ class SpeedDialElement extends BaseElement {
     if (!this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        children[i].style.transform = 'scale(1)';
-        children[i].style.webkitTransform = 'scale(1)';
-        children[i].style.transitionDelay = 25 * i + 'ms';
-        children[i].style.webkitTransitionDelay = 25 * i + 'ms';
+        animit(children[i]).queue({
+          transform: 'scale(1)',
+          transitionDelay: 25 * i + 'ms'
+        }).play();
       }
     }
     this._itemShown = true;
@@ -324,10 +324,10 @@ class SpeedDialElement extends BaseElement {
     if (this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        children[i].style.transform = 'scale(0)';
-        children[i].style.webkitTransform = 'scale(0)';
-        children[i].style.transitionDelay = 25 * (children.length - i) + 'ms';
-        children[i].style.webkitTransitionDelay = 25 * (children.length - i) + 'ms';
+        animit(children[i]).queue({
+          transform: 'scale(0)',
+          transitionDelay: 25 * (children.length - i) + 'ms'
+        }).play();
       }
     }
     this._itemShown = false;
