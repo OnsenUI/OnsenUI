@@ -76,22 +76,19 @@ class FabElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (this.classList.contains('fab')) {
-      return;
-    }
-
     this.classList.add('fab');
 
-    const content = document.createElement('span');
-    content.classList.add('fab__icon');
+    if (!util.findChild(this, '.fab__icon')) {
+      const content = document.createElement('span');
+      content.classList.add('fab__icon');
 
-    util.arrayFrom(this.childNodes).forEach(element => {
-      if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
-        content.appendChild(element);
-      }
-    });
-
-    this.appendChild(content);
+      util.arrayFrom(this.childNodes).forEach(element => {
+        if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
+          content.appendChild(element);
+        }
+      });
+      this.appendChild(content);
+    }
 
     this._updateRipple();
 
