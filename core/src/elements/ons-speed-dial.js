@@ -90,7 +90,6 @@ class SpeedDialElement extends BaseElement {
 
   createdCallback() {
     contentReady(this, () => {
-
       this._compile();
 
       if (this.hasAttribute('direction')) {
@@ -108,13 +107,12 @@ class SpeedDialElement extends BaseElement {
   }
 
   _compile() {
-    this.classList.add('speed__dial');
-
-    autoStyle.prepare(this);
-
-    this._updateRipple();
-
-    ModifierUtil.initModifier(this, scheme);
+    if (!this.classList.contains('speed__dial')) {
+      this.classList.add('speed__dial');
+      autoStyle.prepare(this);
+      this._updateRipple();
+      ModifierUtil.initModifier(this, scheme);
+    }
   }
 
   attributeChangedCallback(name, last, current) {
