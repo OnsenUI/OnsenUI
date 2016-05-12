@@ -16,6 +16,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import contentReady from 'ons/content-ready';
+import styler from 'lib/styler';
 
 const scheme = {
   '': 'speed-dial--*',
@@ -188,12 +189,13 @@ class SpeedDialElement extends BaseElement {
   _updateDirection(direction) {
     const children = this.items;
     for (let i = 0; i < children.length; i++) {
-      children[i].style.transitionDelay = 25 * i + 'ms';
-      children[i].style.webkitTransitionDelay = 25 * i + 'ms';
-      children[i].style.bottom = 'auto';
-      children[i].style.right = 'auto';
-      children[i].style.top = 'auto';
-      children[i].style.left = 'auto';
+      styler(children[i], {
+        transitionDelay: 25 * i + 'ms',
+        bottom: 'auto',
+        right: 'auto',
+        top: 'auto',
+        left: 'auto'
+      });
     }
     switch (direction) {
       case 'up':
@@ -302,10 +304,10 @@ class SpeedDialElement extends BaseElement {
     if (!this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        animit(children[i]).queue({
+        styler(children[i], {
           transform: 'scale(1)',
           transitionDelay: 25 * i + 'ms'
-        }).play();
+        });
       }
     }
     this._itemShown = true;
@@ -324,10 +326,10 @@ class SpeedDialElement extends BaseElement {
     if (this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        animit(children[i]).queue({
+        styler(children[i], {
           transform: 'scale(0)',
           transitionDelay: 25 * (children.length - i) + 'ms'
-        }).play();
+        });
       }
     }
     this._itemShown = false;
