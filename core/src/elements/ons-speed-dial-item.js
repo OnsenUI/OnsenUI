@@ -55,9 +55,7 @@ class SpeedDialItemElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
 
     this._boundOnClick = this._onClick.bind(this);
   }
@@ -98,8 +96,6 @@ class SpeedDialItemElement extends BaseElement {
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 }
 
