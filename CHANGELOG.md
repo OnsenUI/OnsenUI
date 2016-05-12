@@ -10,6 +10,11 @@ v2.0.0-rc.5
  * css-components: Fix material list item paddings.
  * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
  * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
+ * ons-carousel: Fix [#1404](https://github.com/OnsenUI/OnsenUI/issues/1404).
+ * ons-speed-dial: Add `isOpen()` method.
+ * ons-speed-dial: Emit `open` and `close` events.
+ * ons-speed-dial: Block clicks when hidden.
+ * ons-splitter: Correctly import dependency.
 
 v2.0.0-rc.4
 ----

@@ -544,6 +544,8 @@ class PopoverElement extends BaseElement {
 
       this._mask.addEventListener('click', this._boundCancel, false);
 
+      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+
       this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
       this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
@@ -553,17 +555,13 @@ class PopoverElement extends BaseElement {
 
   detachedCallback() {
     contentReady(this, () => {
-      if (this.mask) {
-        this._mask.removeEventListener('click', this._boundCancel, false);
-      }
+      this._mask.removeEventListener('click', this._boundCancel, false);
 
       this._backButtonHandler.destroy();
       this._backButtonHandler = null;
 
-      if (this._popover) {
-        this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-        this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
-      }
+      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
       window.removeEventListener('resize', this._boundOnChange, false);
     });

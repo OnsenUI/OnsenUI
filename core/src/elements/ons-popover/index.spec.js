@@ -5,7 +5,7 @@ describe('OnsPopoverElement', () => {
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
   beforeEach(done => {
-    popover = ons._util.createElement('<ons-popover>content</ons-popover>');
+    popover = new OnsPopoverElement();
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);

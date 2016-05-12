@@ -25,6 +25,7 @@ import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
+import OnsSplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -442,7 +443,7 @@ class SplitterSideElement extends BaseElement {
     this._collapseDetection = new CollapseDetection(this);
 
     this._animatorFactory = new AnimatorFactory({
-      animators: window.OnsSplitterElement._animatorDict,
+      animators: OnsSplitterElement._animatorDict,
       baseClass: SplitterAnimator,
       baseClassName: 'SplitterAnimator',
       defaultAnimation: this.getAttribute('animation')

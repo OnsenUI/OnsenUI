@@ -48,6 +48,20 @@ const scheme = {
 class SpeedDialElement extends BaseElement {
 
   /**
+   * @event open
+   * @description
+   *   [en]Fired when the menu items are shown.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @event close
+   * @description
+   *   [en]Fired when the menu items are hidden.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -148,7 +162,7 @@ class SpeedDialElement extends BaseElement {
   }
 
   _onClick(e) {
-    if (!this.disabled) {
+    if (!this.disabled && this._shown) {
       this.toggleItems();
     }
   }
@@ -297,6 +311,8 @@ class SpeedDialElement extends BaseElement {
       }
     }
     this._itemShown = true;
+
+    util.triggerElementEvent(this, 'open');
   }
 
   /**
@@ -317,6 +333,7 @@ class SpeedDialElement extends BaseElement {
       }
     }
     this._itemShown = false;
+    util.triggerElementEvent(this, 'close');
   }
 
   /**
@@ -365,7 +382,14 @@ class SpeedDialElement extends BaseElement {
     return this._shown && this.style.display !== 'none';
   }
 
-  isItemShown() {
+  /**
+   * @method isOpen
+   * @signature isOpen()
+   * @description
+   *   [en]Returns whether the menu is open or not.[/en]
+   *   [ja][/ja]
+   */
+  isOpen() {
     return this._itemShown;
   }
 
@@ -388,7 +412,7 @@ class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]
    */
   toggleItems() {
-    if (this.isItemShown()) {
+    if (this.isOpen()) {
       this.hideItems();
     } else {
       this.showItems();
