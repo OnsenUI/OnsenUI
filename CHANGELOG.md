@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.5
 ----
+ * ons-dialog: Make ons-dialog angular2 compatible.
  * ons-speed-dial, ons-speed-dial-item: Removed "_compiled" attribute.
  * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
  * css-components: Fix material list item paddings.

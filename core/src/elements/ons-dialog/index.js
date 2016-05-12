@@ -32,15 +32,6 @@ const scheme = {
   '.dialog-mask': 'dialog-mask--*'
 };
 
-const templateSource = util.createElement(`
-  <div>
-    <div class="dialog-mask"></div>
-    <div class="dialog">
-      <div class="dialog-container"></div>
-    </div>
-  </div>
-`);
-
 const _animatorDict = {
   'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'fade': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
@@ -216,19 +207,35 @@ class DialogElement extends BaseElement {
 
     this.style.display = 'none';
 
-    if (this._dialog) {
-      return;
+    /* Expected result:
+     *   <ons-dialog>
+     *     <div class="dialog-mask"></div>
+     *     <div class="dialog">
+     *       <div class="dialog-container">...</div>
+     *     </div>
+     *   </ons-dialog>
+     */
+
+    if (!this._dialog) {
+      const dialog = document.createElement('div');
+      dialog.classList.add('dialog');
+
+      const container = document.createElement('div');
+      dialog.classList.add('dialog-container');
+
+      dialog.appendChild(container);
+
+      while (this.firstChild) {
+        container.appendChild(this.firstChild);
+      }
+
+      this.appendChild(dialog);
     }
 
-    const template = templateSource.cloneNode(true);
-    const dialog = template.children[1];
-
-    while (this.firstChild) {
-      dialog.children[0].appendChild(this.firstChild);
-    }
-
-    while (template.firstChild) {
-      this.appendChild(template.firstChild);
+    if (!this._mask) {
+      const mask = document.createElement('div');
+      mask.classList.add('dialog-mask');
+      this.insertBefore(mask, this.firstChild);
     }
 
     this._dialog.style.zIndex = 20001;
