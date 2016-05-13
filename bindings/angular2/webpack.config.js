@@ -20,7 +20,7 @@ var webpackConfig = {
   })(),
 
   output: {
-    path: './dist',
+    path: __dirname + '/dist',
     publicPath: '/bundles/'
   },
 
