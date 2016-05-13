@@ -12,6 +12,8 @@ v2.0.0-rc.5
  * ons-speed-dial: Emit `open` and `close` events.
  * ons-speed-dial: Block clicks when hidden.
  * ons-splitter: Correctly import dependency.
+ * css-components: Fix border of inline list.
+ * css-components: Refine style of list item title and subtitle.
 
 v2.0.0-rc.4
 ----
