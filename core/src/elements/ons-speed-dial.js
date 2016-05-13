@@ -148,7 +148,6 @@ class SpeedDialElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._updateDirection(this.hasAttribute('direction') ? this.getAttribute('direction') : 'up');
     this.addEventListener('click', this._boundOnClick, false);
   }
 
