@@ -12,6 +12,7 @@ v2.0.0-rc.5
  * ons-speed-dial: Emit `open` and `close` events.
  * ons-speed-dial: Block clicks when hidden.
  * ons-splitter: Correctly import dependency.
+ * ons-toolbar: Fix [#1419](https://github.com/OnsenUI/OnsenUI/issues/1419).
 
 v2.0.0-rc.4
 ----
