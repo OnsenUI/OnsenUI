@@ -92,14 +92,6 @@ class SpeedDialElement extends BaseElement {
   createdCallback() {
     contentReady(this, () => {
       this._compile();
-
-      if (this.hasAttribute('direction')) {
-        this._updateDirection(this.getAttribute('direction'));
-      } else {
-        this._updateDirection('up');
-      }
-
-      this._updatePosition();
     });
 
     this._shown = true;
@@ -113,7 +105,15 @@ class SpeedDialElement extends BaseElement {
       autoStyle.prepare(this);
       this._updateRipple();
       ModifierUtil.initModifier(this, scheme);
+
+      if (this.hasAttribute('direction')) {
+        this._updateDirection(this.getAttribute('direction'));
+      } else {
+        this._updateDirection('up');
+      }
     }
+
+    this._updatePosition();
   }
 
   attributeChangedCallback(name, last, current) {
@@ -286,6 +286,13 @@ class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を表示します。[/ja]
    */
   showItems() {
+
+    if (this.hasAttribute('direction')) {
+      this._updateDirection(this.getAttribute('direction'));
+    } else {
+      this._updateDirection('up');
+    }
+
     if (!this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
