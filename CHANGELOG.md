@@ -14,6 +14,7 @@ v2.0.0-rc.5
  * ons-splitter: Correctly import dependency.
  * css-components: Fix border of inline list.
  * css-components: Refine style of list item title and subtitle.
+ * ons-toolbar: Fix [#1419](https://github.com/OnsenUI/OnsenUI/issues/1419).
 
 v2.0.0-rc.4
 ----
