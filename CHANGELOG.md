@@ -15,6 +15,7 @@ v2.0.0-rc.5
  * css-components: Fix border of inline list.
  * css-components: Refine style of list item title and subtitle.
  * ons-toolbar: Fix [#1419](https://github.com/OnsenUI/OnsenUI/issues/1419).
+ * css-components: Refine default paddings of list items.
 
 v2.0.0-rc.4
 ----
