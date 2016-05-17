@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Lazy Repeat | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <style>
+  </style>
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      $scope.MyDelegate = {
+        configureItemScope : function(index, itemScope) {
+          if (itemScope.item) {
+            return;
+          }
+
+          console.log("Created item #" + index);
+          itemScope.item = {
+            title: 'Item #' + (index + 1),
+            desc: 'Bla bla bla bla...',
+            rand: Math.random()
+          };
+        },
+        countItems : function() {
+          return 10000000;
+        },
+        destroyItemScope: function(index, scope) {
+          console.log("Destroyed item #" + index);
+        }
+      };
+    });
+
+  </script>
+
+
+</head>
+
+<body ng-controller="MyCtrl">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Lazy Repeat</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-item modifier="chevron" ons-lazy-repeat="MyDelegate">
+        <div class="left">
+          <img ng-src="http://lorempixel.com/40/40/?{{item.rand}}" class="list__item__thumbnail">
+        </div>
+        <div class="center">
+          <div class="list__item__title">{{ item.title }}</div>
+          <div class="list__item__subtitle">{{ item.desc }}</div>
+        </div>
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
+</body>
+</html>

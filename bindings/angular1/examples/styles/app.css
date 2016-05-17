@@ -1,0 +1,323 @@
+/* This is a CSS file */
+
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  /*  background-color: #153A5F;*/
+}
+
+.ioo7-no-active:active {
+    background-color: #fff !important;
+}
+
+.dark-container {
+    background-color: #454646;
+}
+
+.monaca-container {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;    
+}
+
+.absolute {
+    position: absolute;
+}
+
+.table {
+    display: table;
+    width: 100%;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.bg-orange {
+    background-color: lightsalmon !important;
+}
+
+.bg-gray {
+    background-color: lightgray !important;
+}
+
+.bg-green {
+    background-color: lightseagreen !important;
+}
+
+.space-top {
+    margin-top: 10px;
+}
+
+.space-top40 {
+    margin-top: 40px;
+}
+
+.space-left {
+    margin-left: 10px;
+}
+
+.padding-bottom70 {
+    padding-bottom: 70px;
+}
+
+.span20 {
+    width: 20%;
+}
+
+.span80 {
+    width: 80%;
+}
+
+.align-top{
+    vertical-align: top;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.separator {
+    border-bottom: lightgray solid 1px;
+}
+
+.list-style-none{
+    list-style-type: none;
+}
+
+.content-padding {
+    padding: 0 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.no-border-top {
+    border-top: none;
+}
+
+.margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+
+.float-left {
+    float: left;
+}
+
+.nav-bar {
+    box-shadow: 0px 4px 10px 10px #dbdbdb;
+}
+
+.half-width{
+    width: 50% !important;
+}
+
+.block {
+    display: block;
+    margin: 0;
+}
+
+
+.item-center {
+    margin-left:auto;
+    margin-right:auto;
+    width:70%;
+}
+
+.no-top-radius {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;    
+    border-top-width: 0;
+}
+
+.no-bottom-radius {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;    
+}
+
+.no-box-shadow {
+    box-shadow: none;
+}
+
+.item-title {    
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.item-subtitle{
+    font-size: 14px;
+}
+
+.center-with-logo {
+    margin-top: 30px;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.padding-5{
+    padding: 5px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.checkbox-right {        
+    margin-top: 30px;    
+    float: right;
+    width: auto;
+}
+
+.center-inside {
+    padding: 10px;
+    
+}
+
+.border {    
+    border-radius: 4px;
+    background-color: rgba(185, 185, 185, 0.8);
+}
+
+.li-icon{
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.width70 {
+    width: 70%;
+}
+
+.width75 {
+    width: 75%;
+}
+
+.width76 {
+    width: 76%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width82 {
+    width: 82%;
+}
+
+.width85 {
+    width: 85%;
+}
+
+.width86 {
+    width: 86%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.height100 {
+    height: 100%;
+}
+
+
+.margin5 {
+    margin: 5px;
+}
+
+.margin7{
+    margin: 7px;
+}
+
+* { -webkit-tap-highlight-color: rgba(0,0,0,0);} 
+
+
+.todo-input{
+    height: 50px !important;
+}
+
+.todo-add-button {
+    height: 32px;
+    line-height: 32px !important;
+    padding-top: 0;
+    margin-top: 1px;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+/* Your CSS content here */
+
+.page-padding {
+    padding: 10px;
+}
+
+.button--large--cta:active {
+    background-color:#000000; 
+    color:#FFFFFF; 
+}

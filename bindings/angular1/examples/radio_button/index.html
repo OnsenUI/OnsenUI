@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Radio Button | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap()
+      .controller('PageController', function($scope) {
+        $scope.name = 'green';
+      });
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="PageController">
+    <ons-toolbar><div class="center">Radio Button</div></ons-toolbar>
+
+    <p>Select your favorite color:<p>
+
+    <label>
+      <ons-input type="radio" ng-model="name" value="red">
+      Red
+    </label><br/>
+    <label>
+      <ons-input type="radio" ng-model="name" value="green">
+      Green
+    </label><br/>
+    <label>
+      <ons-input type="radio" ng-model="name" value="blue">
+      Blue
+    </label><br/>
+
+    <ons-input modifier="underbar" ng-model="name"></ons-input>
+
+    <p>My favorite color is <strong>{{ name }}</strong>.</p>
+  </ons-page>
+</body>
+</html>

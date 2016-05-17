@@ -1,0 +1,27 @@
+<ons-navigator>
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button ng-click="app.slidingMenu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+      </div>
+      <div class="center">Page 1</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <h1>Page 1</h1>
+      <ons-button 
+        ng-click="app.slidingMenu.toggleMenu()">
+        Toggle Menu
+      </ons-button>
+
+      <ons-button
+        ng-click="app.slidingMenu.toggleMenu({animation: 'none'})">
+        Toggle Menu (fast)
+      </ons-button>
+
+      <p> Click "Toggle Menu" to close/open menu, </p>
+      <p> You can also swipe the page left/right.  </p>
+      <img src="../images/ico_swipe_right_s.png" alt="">
+    </div>
+  </ons-page>
+</ons-navigator>

@@ -1,0 +1,29 @@
+.zoom.ng-enter {
+  -webkit-animation: zoom_enter_animation 250ms cubic-bezier(.1, .7, .1, 1); /* Safari/Chrome */
+  animation: zoom_enter_animation 250ms cubic-bezier(.1, .7, .1, 1); /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes zoom_enter_animation {
+  from { -webkit-transform: scale(0); }
+  to { -webkit-transform: scale(1); }
+}
+@keyframes zoom_enter_animation {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.zoom.ng-leave {
+  -webkit-animation: zoom_leave_animation 350ms cubic-bezier(.1, .7, .1, 1); /* Safari/Chrome */
+  animation: zoom_leave_animation 350ms cubic-bezier(.1, .7, .1, 1); /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes zoom_leave_animation {
+  from { 
+    -webkit-transform: scale(1);
+  }
+  to { 
+    -webkit-transform: scale(0); 
+  }
+}
+@keyframes zoom_leave_animation {
+  from { transform: scale(1); }
+  to { transform: scale(0); }
+}

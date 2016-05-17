@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+</head>
+<body>
+  <ons-navigator var="globalNavi">
+    <ons-page>
+      <ons-navigator var="navi" page="main.html">
+      </ons-navigator>
+    </ons-page>
+  </ons-navigator>
+
+  <ons-template id="main.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br>
+        <ons-button modifier="light"
+          ng-click="navi.pushPage('page1.html')">
+          Push Page 2
+        </ons-button>
+        <br>
+        <br>
+        <ons-button modifier="light"
+          ng-click="globalNavi.pushPage('modal.html', {animation: 'lift'})">
+          Open Modal
+        </ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="modal.html">
+    <ons-page>
+      <ons-toolbar modifier="transparent">
+        <div class="left"></div>
+        <div class="center">Modal</div>
+      </ons-toolbar>
+
+      <p style="text-align: center">
+        <ons-button modifier="light"
+          ng-click="globalNavi.popPage()">
+          Close
+        </ons-button>
+      </p>
+
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page1.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Page 2</h1>
+        <ons-button modifier="light"
+          ng-click="navi.pushPage('page1.html')">
+          Push Page
+          </ons-button>
+
+        <ons-button modifier="light"
+          ng-click="navi.popPage()">
+          Pop Page
+        </ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+</body>
+</html>
