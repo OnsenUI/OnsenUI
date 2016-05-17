@@ -34,7 +34,7 @@ var scheme = {
  *   [en]
  *     Back button component for `<ons-toolbar>`. Put it in the left part of the `<ons-toolbar>`.
  *
- *     It will find the parent `<ons-navigator>` element and pop a page when clicked.
+ *     It will find the parent `<ons-navigator>` element and pop a page when clicked. This behavior can be overriden by specifying the `onClick` property.
  *   [/en]
  *   [ja][/ja]
  * @codepen aHmGL
@@ -159,10 +159,23 @@ class BackButtonElement extends BaseElement {
     this._options = object;
   }
 
+  /**
+   * @property onClick
+   * @type {Function}
+   * @description
+   *   [en]Used to override the default back button behavior.[/en]
+   *   [ja][/ja]
+   */
   _onClick() {
-    const navigator = util.findParent(this, 'ons-navigator');
-    if (navigator) {
-      navigator.popPage(this.options);
+    console.log('onclick');
+    if (this.onClick) {
+      this.onClick.apply(this);
+    }
+    else {
+      const navigator = util.findParent(this, 'ons-navigator');
+      if (navigator) {
+        navigator.popPage(this.options);
+      }
     }
   }
 
