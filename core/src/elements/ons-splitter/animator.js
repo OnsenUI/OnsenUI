@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 export default class SplitterAnimator {
 
@@ -40,9 +41,12 @@ export default class SplitterAnimator {
    */
   activate(sideElement) {
     const splitter = sideElement.parentNode;
-    this._side = sideElement;
-    this._content = splitter.content;
-    this._mask = splitter.mask;
+
+    contentReady(splitter, () => {
+      this._side = sideElement;
+      this._content = splitter.content;
+      this._mask = splitter.mask;
+    });
   }
 
   inactivate() {
