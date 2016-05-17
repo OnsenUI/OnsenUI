@@ -1,53 +1,86 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
-<head>
-  <meta charset="utf-8">
-  <title>Pull Hook | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
-  <link rel="stylesheet" href="../../build/css/onsenui.css">
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pull Hook | Onsen UI</title>
+    <link rel="stylesheet" href="../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
+    <script src="../../build/js/onsenui.js"></script>
 
-  <script>
-    angular.module('myApp', ['onsen'])
+    <script>
+      ons.ready(function() {
+        var pullHook = document.getElementById('pull-hook');
 
-    .controller('DemoController', function($scope, $timeout) {
-      $scope.items = [3, 2, 1];
+        pullHook.addEventListener('changestate', function(event) {
+          var message = '';
 
-      $scope.load = function($done) {
-        $timeout(function() {
-          $scope.items.unshift($scope.items.length + 1);
-          $done();
-        }, 1000);
-      };
-    });
+          switch (event.state) {
+            case 'initial':
+              message = 'Pull to refresh';
+              break;
+            case 'preaction':
+              message = 'Release';
+              break;
+            case 'action':
+              message = 'Loading...';
+              break;
+          }
 
-  </script>
+          pullHook.querySelector('span').innerHTML = message;
+        });
 
-</head>
+        pullHook.onAction = function(done) {
+          setTimeout(done, 1000);
+        };
+      });
 
-<body>
-  <ons-page ng-controller="DemoController">
-    <ons-pull-hook ng-action="load($done)" var="loader">
-      <span ng-switch="loader.state">
-        <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
-        <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
-        <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
-      </span>
-    </ons-pull-hook>
+    </script>
 
-    <ons-toolbar>
-      <div class="center">Pull to refresh</div>
-    </ons-toolbar>
+    <style>
+      ons-pull-hook .arrow {
+        transition: all 0.3s ease-in-out;
+        transform: rotate3d(0, 0, 0, 0deg);
+      }
 
-    <ons-list>
-      <ons-list-item ng-repeat="item in items">
-        Item #{{ item }}
-      </ons-list-item>
-    </ons-list>
-  </ons-page>
-</body>
+      ons-pull-hook[state="preaction"] .arrow {
+        transform: rotate3d(0, 0, 1, 180deg);
+      }
+
+      ons-pull-hook[state="action"] .arrow {
+        display: none;
+      }
+
+      ons-pull-hook .loader {
+        display: none;
+        transition: all 0.3s ease-in-out 0.2s;
+      }
+
+      ons-pull-hook[state="action"] .loader {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Pull to refresh</div>
+      </ons-toolbar>
+
+      <ons-pull-hook id="pull-hook">
+        <ons-icon class="arrow" size="35px" icon="ion-arrow-down-a"></ons-icon>
+        <ons-icon class="loader" size="35px" spin="true" icon="ion-load-d"></ons-icon>
+        <span>Pull to refresh</span>
+      </ons-pull-hook>
+
+      <ons-list>
+        <ons-list-item>Item 1</ons-list-item>
+        <ons-list-item>Item 2</ons-list-item>
+        <ons-list-item>Item 3</ons-list-item>
+        <ons-list-item>Item 4</ons-list-item>
+        <ons-list-item>Item 5</ons-list-item>
+        <ons-list-item>Item 6</ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
 </html>

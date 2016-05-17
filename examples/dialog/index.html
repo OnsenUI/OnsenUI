@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Dialog | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
 
   <style>
     .dialog-container {
@@ -19,71 +15,81 @@
   </style>
 
   <script>
-    var app = angular.module('myApp', ['onsen']);
+    var app = {};
 
-    app.controller('MyCtrl', function($scope) {
-      $scope.data = {
-        name: '',
-        description: '',
-      };
+    app.show = function() {
+      app.dialog.show();
+    };
 
+    ons.ready(function() {
       ons.createDialog('dialog.html').then(function(dialog) {
-        $scope.dialog = dialog;
+        app.dialog = dialog;
       });
+    })
 
-      $scope.show = function() {
-        $scope.dialog.show();
-      };
-    });
+    document.addEventListener('init', function(event) {
+      if (event.target.id === 'dialog-page1') {
+        document.getElementById('name').oninput = function(event) {
+          document.getElementById('name-model').innerHTML = event.target.value || 'Unknown';
+        };
+      } else if (event.target.id === 'dialog-page2') {
+
+        document.getElementById('description').oninput = function(event) {
+          document.getElementById('description-model').innerHTML = event.target.value || 'No description yet...';
+        };
+      }
+    })
 
   </script>
 
 </head>
 
-<body ng-controller="MyCtrl">
+<body>
   <ons-page>
     <ons-toolbar>
       <div class="center">Dialog</div>
     </ons-toolbar>
 
     <div style="text-align: center">
-      <p>Name: <strong>{{ data.name || 'Unknown' }}</strong></p>
-      <p>Description: {{ data.description || 'No description yet...' }}</p>
+      <p>Name: <span style="font-weight: bold" id="name-model">Unknown</span style="font-weight: bold"></p>
+      <p>Description: <span id="description-model">No description yet...</span></p>
 
       <br />
-      <ons-button ng-click="show()">Edit</ons-button>
+      <ons-button onclick="app.show()">Edit</ons-button>
     </div>
   </ons-page>
 
-  <script type="text/ons-template" id="dialog.html">
+  <ons-template id="dialog.html">
     <ons-dialog animation="default" cancelable>
-      <ons-navigator animation="slide" var="app.navi">
-        <ons-page>
-          <ons-toolbar>
-          <div class="center">Name</div>
-          </ons-toolbar>
-          <br />
-          <div style="text-align: center">
-            <ons-input modifier="underbar" id="name" label="Name" ng-model="data.name"></ons-input>
-            <p>
-              <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Next</ons-button>
-            </p>
-          </div>
-          </ons-page>
-      </ons-navigator>
+      <ons-navigator animation="slide" id="navi" page="page1.html"></ons-navigator>
     </ons-dialog>
-  </script>
+  </ons-template>
 
-  <ons-template id="page.html">
-    <ons-page>
+  <ons-template id="page1.html">
+    <ons-page id ="dialog-page1">
+      <ons-toolbar>
+      <div class="center">Name</div>
+      </ons-toolbar>
+      <br />
+      <div style="text-align: center">
+        <ons-input modifier="underbar" id="name" label="Name"></ons-input>
+        <p>
+          <ons-button modifier="light" onclick="navi.bringPageTop('page2.html');">Description >></ons-button>
+        </p>
+      </div>
+      </ons-page>
+  </ons-template>
+
+  <ons-template id="page2.html">
+    <ons-page id ="dialog-page2">
       <ons-toolbar>
         <div class="center">Description</div>
       </ons-toolbar>
       <br />
       <div style="text-align: center">
-        <ons-input modifier="underbar" id="description" ng-model="data.description"></ons-input>
+        <ons-input modifier="underbar" id="description"></ons-input>
         <p>
-          <ons-button modifier="light" ng-click="app.navi.popPage();">Previous</ons-button>
+          <ons-button modifier="light" onclick="navi.bringPageTop('page1.html');">Name >></ons-button>
         </p>
       </div>
     </ons-page>

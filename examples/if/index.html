@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>If | Onsen UI</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+</head>
+
+<body class="center">
+
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Platform Detection</div>
+    </ons-toolbar>
+
+    <ons-if platform="android">
+      <h3>Show me only if run in Android.</h3>
+    </ons-if>
+
+    <ons-if platform="ios">
+      <h3>Show me only if run in iOS.</h3>
+    </ons-if>
+
+    <ons-if platform="windows">
+      <h3>Show me only if run in Windows Phone.</h3>
+    </ons-if>
+
+    <ons-if platform="other">
+      <h3>Show me only if this is not Android, iOS or Windows Phone.</h3>
+    </ons-if>
+
+  </ons-page>
+
+</body>
+</html>
