@@ -167,7 +167,6 @@ class BackButtonElement extends BaseElement {
    *   [ja][/ja]
    */
   _onClick() {
-    console.log('onclick');
     if (this.onClick) {
       this.onClick.apply(this);
     }
