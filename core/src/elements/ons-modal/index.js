@@ -18,8 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import ModalAnimator from './animator';
-import FadeModalAnimator from './fade-animator';
+import {ModalAnimator, FadeModalAnimator} from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -94,11 +93,9 @@ class ModalElement extends BaseElement {
 
     this._doorLock = new DoorLock();
 
-    this._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory(this, {
       animators: _animatorDict,
-      baseClass: ModalAnimator,
-      baseClassName: 'ModalAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      methods: ['show', 'hide']
     });
   }
 

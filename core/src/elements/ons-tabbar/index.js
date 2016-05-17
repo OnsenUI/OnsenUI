@@ -22,7 +22,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
-import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
+import {TabbarAnimator, TabbarFadeAnimator, TabbarSlideAnimator} from './animator';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -31,10 +31,10 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': TabbarNoneAnimator,
+  'default': TabbarAnimator,
   'fade': TabbarFadeAnimator,
   'slide': TabbarSlideAnimator,
-  'none': TabbarNoneAnimator
+  'none': TabbarAnimator
 };
 
 const rewritables = {
@@ -219,11 +219,9 @@ class TabbarElement extends BaseElement {
       autoStyle.prepare(this);
       ModifierUtil.initModifier(this, scheme);
 
-      this._animatorFactory = new AnimatorFactory({
+      this._animatorFactory = new AnimatorFactory(this, {
         animators: _animatorDict,
-        baseClass: TabbarAnimator,
-        baseClassName: 'TabbarAnimator',
-        defaultAnimation: this.getAttribute('animation')
+        methods: ['apply']
       });
     });
 
@@ -323,7 +321,7 @@ class TabbarElement extends BaseElement {
               options.callback();
           }
 
-          this._oldPageElement = pageElement;
+          this._oldPage = pageElement;
           resolve(pageElement);
         }
       });
@@ -341,14 +339,7 @@ class TabbarElement extends BaseElement {
    * @return {Element/null}
    */
   _getCurrentPageElement() {
-    var pages = this._contentElement.children;
-    var page = null;
-    for (var i = 0; i < pages.length; i++) {
-      if (pages[i].style.display !== 'none') {
-        page = pages[i];
-        break;
-      }
-    }
+    const page = util.findChild(this._contentElement, e => e.style.display !== 'none') || null;
 
     if (page && page.nodeName.toLowerCase() !== 'ons-page') {
       throw new Error('Invalid state: page element must be a "ons-page" element.');
@@ -372,26 +363,23 @@ class TabbarElement extends BaseElement {
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-    var oldPageElement = this._oldPageElement || internal.nullElement;
-    this._oldPageElement = element;
+    const oldPage = this._oldPage;
+    const callback = options.callback;
     var animator = this._animatorFactory.newAnimator(options);
 
     return new Promise(resolve => {
-      if (oldPageElement !== internal.nullElement) {
-        oldPageElement._hide();
-      }
+      oldPage && oldPage._hide();
 
-      animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
-        if (oldPageElement !== internal.nullElement) {
-          oldPageElement.style.display = 'none';
+      animator.apply(element, oldPage, options.selectedTabIndex, options.previousTabIndex, () => {
+        if (oldPage) {
+          oldPage.style.display = 'none';
         }
-
         element.style.display = 'block';
-        element._show();
 
-        if (options.callback instanceof Function) {
-          options.callback();
-        }
+        element._show();
+        this._oldPage = element;
+
+        callback && callback();
 
         resolve(element);
       });

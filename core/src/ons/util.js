@@ -199,6 +199,21 @@ util.extend = (dst, ...args) => {
   return dst;
 };
 
+
+/*
+ * @param {...Object} src Source object(s).
+ * @returns {Object} each property of which is the union of that specific property of the source objects.
+ */
+util.merge = (...args) => {
+  const result = {};
+  args.forEach(src => {
+    util.each(src, (key, value) => {
+      result[key] = util.extend(result[key] || {}, value);
+    });
+  });
+  return result;
+};
+
 /**
  * @param {Object} arrayLike
  * @return {Array}

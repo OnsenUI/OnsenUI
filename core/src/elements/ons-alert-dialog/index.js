@@ -225,11 +225,9 @@ class AlertDialogElement extends BaseElement {
   }
 
   _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory(this, {
       animators: _animatorDict,
-      baseClass: AlertDialogAnimator,
-      baseClassName: 'AlertDialogAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      methods: ['show', 'hide']
     });
   }
 

@@ -33,8 +33,6 @@ limitations under the License.
         this._scope = scope;
         this._element = element;
         this._scope.$on('$destroy', this._destroy.bind(this));
-
-        element[0]._animatorFactory.setAnimationOptions($parse(attrs.animationOptions)());
       },
 
       show: function(options) {

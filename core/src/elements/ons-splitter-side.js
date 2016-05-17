@@ -439,11 +439,9 @@ class SplitterSideElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
-    this._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory(this, {
       animators: window.OnsSplitterElement._animatorDict,
-      baseClass: SplitterAnimator,
-      baseClassName: 'SplitterAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      methods: ['open', 'close']
     });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
     this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];

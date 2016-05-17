@@ -25,7 +25,6 @@ import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
 import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
 import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
 import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
-import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -41,7 +40,7 @@ const _animatorDict = {
   'lift-md': MDLiftNavigatorTransitionAnimator,
   'fade-ios': IOSFadeNavigatorTransitionAnimator,
   'fade-md': MDFadeNavigatorTransitionAnimator,
-  'none': NoneNavigatorTransitionAnimator
+  'none': NavigatorTransitionAnimator
 };
 
 const rewritables = {
@@ -255,11 +254,9 @@ class NavigatorElement extends BaseElement {
   }
 
   _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory(this, {
       animators: _animatorDict,
-      baseClass: NavigatorTransitionAnimator,
-      baseClassName: 'NavigatorTransitionAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      methods: ['push', 'pop']
     });
   }
 

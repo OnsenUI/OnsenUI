@@ -17,26 +17,20 @@ limitations under the License.
 
 import util from 'ons/util';
 import NavigatorTransitionAnimator from './animator';
+import {union, translate, acceleration, animate} from 'ons/animations';
 
 /**
  * Slide animator for navigator transition.
  */
 export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.3,
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      delay: 0
-    }, options || {});
-
-    super(options);
+  constructor(options = {}) {
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)', duration: 0.3}, options));
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%; z-index: 2;
         background-color: black; opacity: 0;"></div>
     `);
-    this.blackMaskOpacity = 0.4;
   }
 
   /**
@@ -45,143 +39,48 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Function} callback
    */
   push(enterPage, leavePage, callback) {
-    this.backgroundMask.remove();
     leavePage.parentElement.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
-    animit.runAll(
-
-      animit(this.backgroundMask)
-        .saveStyle()
-        .queue({
-          opacity: 0,
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: this.blackMaskOpacity
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(done => {
-          this.backgroundMask.remove();
-          done();
-        }),
-
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(100%, 0, 0)',
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle(),
-
-      animit(leavePage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(-45%, 0px, 0px)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .wait(0.2)
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll({enterPage, leavePage, mask: this.backgroundMask}, {
+      mask: {
+        restore: true,
+        animation: union(acceleration, animate({opacity: [0, 0.4]})),
+        callback: () => this.backgroundMask.remove()
+      },
+      enterPage: {
+        restore: true,
+        animation: translate({from: '100%, 0'}),
+        callback
+      },
+      leavePage: {
+        restore: true,
+        animation: translate({to: '-45%, 0'})
+      }
+    });
   }
 
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
-   * @param {Function} done
+   * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
-    this.backgroundMask.remove();
+  pop(enterPage, leavePage, callback) {
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
 
-    animit.runAll(
-
-      animit(this.backgroundMask)
-        .saveStyle()
-        .queue({
-          opacity: this.blackMaskOpacity,
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(done => {
-          this.backgroundMask.remove();
-          done();
-        }),
-
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(-45%, 0px, 0px)',
-            opacity: 0.9
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle(),
-
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(100%, 0px, 0px)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .wait(0.2)
-        .queue(function(finish) {
-          done();
-          finish();
-        })
-    );
+    this._animateAll({enterPage, leavePage, mask: this.backgroundMask}, {
+      mask: {
+        restore: true,
+        animation: union(acceleration, animate({opacity: [0.4, 0]})),
+        callback: () => this.backgroundMask.remove()
+      },
+      enterPage: {
+        restore: true,
+        animation: union(translate({from: '-45%, 0'}), animate({opacity: [0.9, 1]})),
+        callback
+      },
+      leavePage: {
+        animation: translate({to: '100%, 0'})
+      }
+    });
   }
 }

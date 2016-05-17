@@ -14,13 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
+import {union, fade, translate, scale} from 'ons/animations';
 
-export class AlertDialogAnimator {
+export class AlertDialogAnimator extends BaseAnimator {
 
-  constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {
-    this.timing = timing;
-    this.delay = delay;
-    this.duration = duration;
+  constructor(options = {}) {
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options));
   }
 
   /**
@@ -44,56 +45,19 @@ export class AlertDialogAnimator {
  * Android style animator for alert dialog.
  */
 export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
-
-  constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', duration = 0.2, delay = 0} = {}) {
-    super({duration, timing, delay});
-  }
-
   /**
    * @param {Object} dialog
    * @param {Function} callback
    */
   show(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
-            opacity: 0.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.in,
+      _dialog: {
+        animation: union(fade.in, translate('-50%'), scale({from: 0.9})),
+        restore: true,
+        callback: callback
+      }
+    });
   }
 
   /**
@@ -101,46 +65,14 @@ export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
    * @param {Function} callback
    */
   hide(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
-            opacity: 0.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.out,
+      _dialog: {
+        animation: union(fade.out, translate('-50%'), scale({to: 0.9})),
+        restore: true,
+        callback: callback
+      }
+    });
   }
 }
 
@@ -148,56 +80,19 @@ export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
  * iOS style animator for alert dialog.
  */
 export class IOSAlertDialogAnimator extends AlertDialogAnimator {
-
-  constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', duration = 0.2, delay = 0} = {}) {
-    super({duration, timing, delay});
-  }
-
   /*
    * @param {Object} dialog
    * @param {Function} callback
    */
   show(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1.0)',
-            opacity: 0.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.in,
+      _dialog: {
+        animation: union(fade.in, translate('-50%'), scale({from: 1.3})),
+        restore: true,
+        callback: callback
+      }
+    });
   }
 
   /**
@@ -205,44 +100,9 @@ export class IOSAlertDialogAnimator extends AlertDialogAnimator {
    * @param {Function} callback
    */
   hide(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            opacity: 0.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-
-    );
+    this._animateAll(dialog, {
+      _mask: fade.out,
+      _dialog: {animation: fade.out, restore: true, callback}
+    });
   }
 }

@@ -16,25 +16,12 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
 
-export default class NavigatorTransitionAnimator {
+export default class NavigatorTransitionAnimator extends BaseAnimator {
 
-  /**
-   * @param {Object} options
-   * @param {String} options.timing
-   * @param {Number} options.duration
-   * @param {Number} options.delay
-   */
   constructor(options) {
-    options = util.extend({
-      timing: 'linear',
-      duration: '0.4',
-      delay: '0'
-    }, options || {});
-
-    this.timing = options.timing;
-    this.duration = options.duration;
-    this.delay = options.delay;
+    super(util.extend({duration: 0.4}, options));
   }
 
   push(enterPage, leavePage, callback) {

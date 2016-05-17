@@ -15,13 +15,11 @@ limitations under the License.
 
 */
 
-export class DialogAnimator {
+import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
+import {fade, union, translate} from 'ons/animations';
 
-  constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {
-    this.timing = timing;
-    this.delay = delay;
-    this.duration = duration;
-  }
+export class DialogAnimator extends BaseAnimator {
 
   /**
    * @param {HTMLElement} dialog
@@ -45,8 +43,8 @@ export class DialogAnimator {
  */
 export class AndroidDialogAnimator extends DialogAnimator {
 
-  constructor({timing = 'ease-in-out', delay = 0, duration = 0.3} = {}) {
-    super({timing, delay, duration});
+  constructor(options) {
+    super(util.extend({timing: 'ease-in-out', duration: 0.3}, options));
   }
 
   /**
@@ -54,46 +52,14 @@ export class AndroidDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   show(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -60%, 0)',
-            opacity: 0.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.in,
+      _dialog: {
+        animation: union(fade.in, translate({from: '-50%, -60%', to: '-50%, -50%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 
   /**
@@ -101,47 +67,14 @@ export class AndroidDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   hide(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0)',
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -60%, 0)',
-            opacity: 0.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-
-    );
+    this._animateAll(dialog, {
+      _mask: fade.out,
+      _dialog: {
+        animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, -60%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 }
 
@@ -150,8 +83,8 @@ export class AndroidDialogAnimator extends DialogAnimator {
  */
 export class IOSDialogAnimator extends DialogAnimator {
 
-  constructor({timing = 'ease-in-out', delay = 0, duration = 0.3} = {}) {
-    super({timing, delay, duration});
+  constructor(options) {
+    super({timing: 'ease-in-out', duration: 0.3}, options);
   }
 
   /**
@@ -159,44 +92,14 @@ export class IOSDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   show(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, 300%, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.in,
+      _dialog: {
+        animation: union(fade.in, translate({from: '-50%, 300%', to: '-50%, -50%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 
   /**
@@ -204,45 +107,14 @@ export class IOSDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   hide(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, 300%, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-
-    );
+    this._animateAll(dialog, {
+      _mask: fade.out,
+      _dialog: {
+        animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, 300%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 }
 
@@ -251,8 +123,8 @@ export class IOSDialogAnimator extends DialogAnimator {
  */
 export class SlideDialogAnimator extends DialogAnimator {
 
-  constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.2} = {}) {
-    super({timing, delay, duration});
+  constructor(options = {}) {
+    super({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options);
   }
 
   /**
@@ -260,44 +132,14 @@ export class SlideDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   show(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(-50%, -350%, 0)',
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(-50%, -50%, 0)',
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.in,
+      _dialog: {
+        animation: union(fade.in, translate({from: '-50%, -350%', to: '-50%, -50%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 
   /**
@@ -305,43 +147,13 @@ export class SlideDialogAnimator extends DialogAnimator {
    * @param {Function} callback
    */
   hide(dialog, callback) {
-    callback = callback ? callback : function() {};
-
-    animit.runAll(
-
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
-
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(-50%, -50%, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(-50%, -350%, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
+    this._animateAll(dialog, {
+      _mask: fade.out,
+      _dialog: {
+        animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, -350%'})),
+        restore: true,
+        callback
+      }
+    });
   }
 }

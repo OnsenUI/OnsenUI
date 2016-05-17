@@ -203,11 +203,9 @@ class DialogElement extends BaseElement {
   }
 
   _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory(this, {
       animators: _animatorDict,
-      baseClass: DialogAnimator,
-      baseClassName: 'DialogAnimator',
-      defaultAnimation: this.getAttribute('animation')
+      methods: ['show', 'hide']
     });
   }
 

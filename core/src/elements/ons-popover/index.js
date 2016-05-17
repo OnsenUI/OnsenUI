@@ -224,11 +224,9 @@ class PopoverElement extends BaseElement {
   }
 
   _initAnimatorFactory() {
-    const factory = new AnimatorFactory({
+    const factory = new AnimatorFactory(this, {
       animators: _animatorDict,
-      baseClass: animators.PopoverAnimator,
-      baseClassName: 'PopoverAnimator',
-      defaultAnimation: this.getAttribute('animation') || 'default'
+      methods: ['show', 'hide']
     });
     this._animator = (options) => factory.newAnimator(options);
   }

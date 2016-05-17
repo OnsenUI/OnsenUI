@@ -17,22 +17,17 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from 'ons/util';
+import {union, fade, translate} from 'ons/animations';
+
 
 /**
  * Fade-in + Lift screen transition.
  */
 export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      timing: 'ease-out',
-      duration: '0.25',
-      delay: '0.20'
-    }, options || {});
-
-    super(options);
+  constructor(options = {}) {
+    super(util.extend({timing: 'ease-out', duration: 0.25, delay: 0.2}, options));
   }
-
 
   /**
    * @param {Object} enterPage
@@ -40,34 +35,13 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Function} callback
    */
   push(enterPage, leavePage, callback) {
-
-    animit.runAll(
-
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 42px, 0)',
-            opacity: 0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        })
-    );
-
+    this._animateAll({enterPage}, {
+      enterPage: {
+        animation: union(translate({from: '0, 42px'}), fade.in),
+        restore: true,
+        callback
+      }
+    });
   }
 
   /**
@@ -76,43 +50,9 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Function} done
    */
   pop(enterPage, leavePage, callback) {
-    animit.runAll(
-
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)'
-          },
-          duration: 0
-        })
-        .wait(0.15)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 38px, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-
-      animit(leavePage)
-        .queue({
-          css: {
-            opacity: 1
-          },
-          duration: 0
-        })
-        .wait(0.04)
-        .queue({
-          css: {
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-    );
+    this._animateAll({move: leavePage, fade: leavePage}, {
+      move: {delay: 0.15, animation: translate({to: '0, 38px'}), callback},
+      fade: {delay: 0.04, animation: fade.out}
+    });
   }
 }

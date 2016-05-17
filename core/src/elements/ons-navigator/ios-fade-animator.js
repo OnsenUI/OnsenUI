@@ -16,23 +16,14 @@ limitations under the License.
 */
 
 import NavigatorTransitionAnimator from './animator';
-import util from 'ons/util';
+import {union, fade, acceleration} from 'ons/animations';
+
+const elements = page => [page._content, page._background, page._toolbar];
 
 /**
  * Fade-in screen transition.
  */
 export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
-
-  constructor(options) {
-    options = util.extend({
-      timing: 'linear',
-      duration: '0.4',
-      delay: '0'
-    }, options || {});
-
-    super(options);
-  }
-
 
   /**
    * @param {Object} enterPage
@@ -40,54 +31,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Function} callback
    */
   push(enterPage, leavePage, callback) {
-
-    animit.runAll(
-
-      animit([enterPage._content, enterPage._background])
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-
-      animit(enterPage._toolbar)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-    );
-
+    this._animate(elements(enterPage), {animation: union(fade.in, acceleration), restore: true, callback}).play();
   }
 
   /**
@@ -96,48 +40,6 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Function} done
    */
   pop(enterPage, leavePage, callback) {
-    animit.runAll(
-
-      animit([leavePage._content, leavePage._background])
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-
-      animit(leavePage._toolbar)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-
-    );
+    this._animate(elements(leavePage), {animation: union(fade.out, acceleration), callback}).play();
   }
 }

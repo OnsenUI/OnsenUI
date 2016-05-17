@@ -15,21 +15,13 @@ limitations under the License.
 
 */
 import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
+import {fade, union, scale} from 'ons/animations';
 
-class PopoverAnimator {
+class PopoverAnimator extends BaseAnimator {
 
-  /**
-   * @param {Object} options
-   * @param {String} options.timing
-   * @param {Number} options.duration
-   * @param {Number} options.delay
-   */
   constructor(options = {}) {
-    this.options = util.extend({
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2,
-      delay: 0
-    }, options);
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options));
   }
 
   show(popover, callback) {
@@ -39,52 +31,8 @@ class PopoverAnimator {
   hide(popover, callback) {
     callback();
   }
-
-  _animate(element, {from, to, options, callback, restore = false, animation}) {
-    options = util.extend({}, this.options, options);
-
-    if (animation) {
-      from = animation.from;
-      to = animation.to;
-    }
-
-    animation = animit(element);
-    if (restore) {
-      animation = animation.saveStyle();
-    }
-    animation = animation.queue(from).wait(options.delay).queue({
-      css: to,
-      duration: options.duration,
-      timing: options.timing
-    });
-    if (restore) {
-      animation = animation.restoreStyle();
-    }
-    if (callback) {
-      animation = animation.queue((done) => {
-        callback();
-        done();
-      });
-    }
-    return animation;
-  }
-
-  _animateAll(element, animations) {
-    Object.keys(animations).forEach(key => this._animate(element[key], animations[key]).play());
-  }
-
 }
 
-const fade = {
-  out: {
-    from: {opacity: 1.0},
-    to: {opacity: 0}
-  },
-  in: {
-    from: {opacity: 0},
-    to: {opacity: 1.0}
-  }
-};
 
 class MDFadePopoverAnimator extends PopoverAnimator {
   show(popover, callback) {
@@ -107,14 +55,7 @@ class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
     this._animateAll(popover, {
       _mask: fade.in,
       _popover: {
-        from: {
-          transform: 'scale3d(1.3, 1.3, 1.0)',
-          opacity: 0
-        },
-        to: {
-          transform: 'scale3d(1.0, 1.0,  1.0)',
-          opacity: 1.0
-        },
+        animation: union(scale({from: 1.3, to: 1}), fade.in),
         restore: true,
         callback
       }

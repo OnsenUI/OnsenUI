@@ -15,22 +15,11 @@ limitations under the License.
 
 */
 
-export default class ModalAnimator {
+import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
+import {fade} from 'ons/animations';
 
-  /**
-   * @param {Object} options
-   * @param {String} options.timing
-   * @param {Number} options.duration
-   * @param {Number} options.delay
-   */
-  constructor(options = {}) {
-    this.delay = 0;
-    this.duration = 0.2;
-
-    this.timing = options.timing || this.timing;
-    this.duration = options.duration !== undefined ? options.duration : this.duration;
-    this.delay = options.delay !== undefined ? options.delay : this.delay;
-  }
+export class ModalAnimator extends BaseAnimator {
 
   /**
    * @param {HTMLElement} modal
@@ -46,5 +35,31 @@ export default class ModalAnimator {
    */
   hide(modal, callback) {
     callback();
+  }
+}
+
+/**
+ * iOS style animator for dialog.
+ */
+export class FadeModalAnimator extends ModalAnimator {
+
+  constructor(options) {
+    super(util.extend({duration: 0.3}, options));
+  }
+
+  /**
+   * @param {HTMLElement} modal
+   * @param {Function} callback
+   */
+  show(modal, callback) {
+    this._animate(modal, {animation: fade.in, callback}).play();
+  }
+
+  /**
+   * @param {HTMLElement} modal
+   * @param {Function} callback
+   */
+  hide(modal, callback) {
+    this._animate(modal, {animation: fade.out, callback}).play();
   }
 }

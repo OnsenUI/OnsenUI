@@ -15,18 +15,14 @@ limitations under the License.
 
 */
 
-export class TabbarAnimator {
+import util from 'ons/util';
+import BaseAnimator from 'ons/base-animator';
+import {union, fade, acceleration, translate} from 'ons/animations';
 
-  /**
-   * @param {Object} options
-   * @param {String} options.timing
-   * @param {Number} options.duration
-   * @param {Number} options.delay
-   */
+export class TabbarAnimator extends BaseAnimator {
+
   constructor(options = {}) {
-    this.timing = options.timing || 'linear';
-    this.duration = options.duration !== undefined ? options.duration : '0.4';
-    this.delay = options.delay !== undefined ? options.delay : '0';
+    super(util.extend({duration: 0.4}, options));
   }
 
   /**
@@ -37,112 +33,35 @@ export class TabbarAnimator {
    * @param {Function} done
    */
   apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
-    throw new Error('This method must be implemented.');
+    done && done();
   }
 }
 
-
-export class TabbarNoneAnimator extends TabbarAnimator {
-  apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
-    setTimeout(done, 1000 / 60);
-  }
-}
 
 export class TabbarFadeAnimator extends TabbarAnimator {
 
-  constructor(options) {
-    options.timing = options.timing !== undefined ? options.timing : 'linear';
-    options.duration = options.duration !== undefined ? options.duration : '0.4';
-    options.delay = options.delay !== undefined ? options.delay : '0';
-
-    super(options);
-  }
-
   apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
-    animit.runAll(
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-          opacity: 1
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(callback) {
-          done();
-          callback();
-        }),
-
-      animit(leavePage)
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-          opacity: 1
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-    );
+    const pages = {enter: enterPage, leave: leavePage};
+    this._animateAll(pages, {
+      leave: {animation: union(fade.out, acceleration)},
+      enter: {animation: union(fade.in, acceleration), restore: true, callback: done}
+    });
   }
 }
 
 export class TabbarSlideAnimator extends TabbarAnimator {
 
-  constructor(options) {
-    options.timing = options.timing !== undefined ? options.timing : 'ease-in';
-    options.duration = options.duration !== undefined ? options.duration : '0.15';
-    options.delay = options.delay !== undefined ? options.delay : '0';
-
-    super(options);
+  constructor(options = {}) {
+    super(util.extend({timing: 'ease-in', duration: 0.15}, options));
   }
 
-  /**
-   * @param {jqLite} enterPage
-   * @param {jqLite} leavePage
-   */
   apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
-    const sgn = enterIndex > leaveIndex;
+    const signs = enterIndex > leaveIndex ? '- ' : ' -';
+    const pages = {enter: enterPage, leave: leavePage};
 
-    animit.runAll(
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          transform: 'translate3D(' + (sgn ? '' : '-') + '100%, 0, 0)',
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(callback) {
-          done();
-          callback();
-        }),
-      animit(leavePage)
-        .queue({
-          transform: 'translate3D(0, 0, 0)',
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3D(' + (sgn ? '-' : '') + '100%, 0, 0)',
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-    );
+    this._animateAll(pages, {
+      leave: {animation: translate({to: signs[0] + '100%, 0'})},
+      enter: {animation: translate({from: signs[1] + '100%, 0'}), restore: true, callback: done}
+    });
   }
 }

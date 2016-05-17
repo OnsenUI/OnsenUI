@@ -17,20 +17,17 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from 'ons/util';
+import {union, translate, partialFade} from 'ons/animations';
+
+const fade = partialFade(0.8);
 
 /**
  * Lift screen transition.
  */
 export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.4,
-      timing: 'cubic-bezier(.1, .7, .1, 1)',
-      delay: 0
-    }, options || {});
-
-    super(options);
+  constructor(options = {}) {
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)'}, options));
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
@@ -43,62 +40,17 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
-    this.backgroundMask.remove();
+  push(enterPage, leavePage, done) {
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
-    const maskClear = animit(this.backgroundMask)
-      .wait(0.6)
-      .queue(done => {
-        this.backgroundMask.remove();
-        done();
-      });
-
-    animit.runAll(
-
-      maskClear,
-
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 100%, 0)',
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, -10%, 0)',
-            opacity: 0.9
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-    );
-
+    this._animateAll({enterPage, leavePage}, {
+      enterPage: {
+        animation: translate({from: '0, 100%'}),
+        restore: true,
+        callback: () => {this.backgroundMask.remove(); done && done();}
+      },
+      leavePage: union(translate({to: '0, -10%'}), fade.out)
+    });
   }
 
   /**
@@ -106,57 +58,15 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  pop(enterPage, leavePage, callback) {
-    this.backgroundMask.remove();
+  pop(enterPage, leavePage, done) {
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
-    animit.runAll(
-
-      animit(this.backgroundMask)
-        .wait(0.4)
-        .queue(done => {
-          this.backgroundMask.remove();
-          done();
-        }),
-
-      animit(enterPage)
-        .queue({
-          css: {
-            transform: 'translate3D(0, -10%, 0)',
-            opacity: 0.9
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 100%, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-
-    );
+    this._animateAll({enterPage, leavePage}, {
+      enterPage: {
+        animation: union(translate({from: '0, -10%'}), fade.in),
+        callback: () => {this.backgroundMask.remove(); done && done();}
+      },
+      leavePage: translate({to: '0, 100%'})
+    });
   }
 }
