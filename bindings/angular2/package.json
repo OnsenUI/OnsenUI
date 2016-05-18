@@ -4,7 +4,8 @@
   "scripts": {
     "typings-install": "node_modules/typings/dist/bin.js install",
     "postinstall": "npm run typings-install",
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "test": "gulp test"
   },
   "licenses": [
     {
