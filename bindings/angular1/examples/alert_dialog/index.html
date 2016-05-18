@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Alert dialog | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        $scope.alertDialog = alertDialog;
+      });
+
+      $scope.fromTemplate = function() {
+        $scope.alertDialog.show();
+      };
+
+      $scope.close = function() {
+        if($scope.alertDialog && $scope.alertDialog.visible) {
+          $scope.alertDialog.hide();
+        }
+      };
+
+      $scope.alert = function() {
+        ons.notification.alert({message: "Hello, world!"});
+      };
+
+      $scope.confirm = function() {
+        ons.notification.confirm({
+          message: "Do you like ramen?",
+          buttonLabels: ["Yes", "No"],
+          callback: function(i) {
+            if (i==0) {
+              ons.notification.alert({message: "Me too!"});
+            } else {
+              ons.notification.alert({message: "That's too bad..."});
+            }
+          }
+        });
+      };
+
+      $scope.prompt = function() {
+        var fn = function() {
+          ons.notification.prompt({
+            message: "What is the meaning of Life, the Universe and Everything?",
+            callback: function(answer) {
+              if (answer === "42") {
+                ons.notification.alert({message: "That's the correct answer!"});
+              } else {
+                ons.notification.alert({
+                  message: "Incorrect! Please try again!",
+                  callback: fn
+                });
+              }
+            }
+          });
+        };
+
+        fn();
+      };
+
+      $scope.cancelable = function() {
+        ons.notification.confirm({
+          message: "This dialog can be canceled by tapping the background or using the back button on your device.",
+          cancelable: true,
+          callback: function(i) {
+            if (i == -1) {
+              ons.notification.alert({message: "You canceled it!"});
+            }
+          }
+        });
+      };
+    });
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Alert dialog</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button ng-click="fromTemplate()">Create from template</ons-button>
+      <ons-button ng-click="alert()">Alert</ons-button>
+      <ons-button ng-click="confirm()">Confirm</ons-button>
+      <ons-button ng-click="prompt()">Prompt</ons-button>
+      <ons-button ng-click="cancelable()">Cancelable</ons-button>
+    </p>
+  </ons-page>
+
+  <script type="text/ons-template" id="alert.html">
+    <ons-alert-dialog>
+      <div class="alert-dialog-title">Warning!</div>
+      <div class="alert-dialog-content">
+        An error has occurred!
+      </div>
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button" ng-click="close()">Cancel</button>
+        <button class="alert-dialog-button" ng-click="close()">OK</button>
+      </div>
+    </ons-alert-dialog>
+  </script>
+
+</body>
+</html>

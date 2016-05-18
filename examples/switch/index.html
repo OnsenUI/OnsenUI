@@ -4,17 +4,25 @@
   <meta charset="utf-8">
   <title>Switch | Onsen UI</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
   <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
 
   <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
+
+  <style>
+    #s5-value {
+      padding-left: 6px;
+      color: #666;
+    }
+  </style>
+
   <script>
-    ons.bootstrap();
+    document.addEventListener('change', function(event) {
+      if (event.target.id === 's5') {
+        document.querySelector('#s5-value').innerHTML = event.target.checked;
+      }
+    });
   </script>
 
 </head>
@@ -28,24 +36,24 @@
     <ons-list>
       <ons-list-header>Switch</ons-list-header>
       <ons-list-item>
-        <div class="center">Switch</div>
-        <div class="right"><ons-switch></ons-switch></div>
+        <label for="s1" class="center">Switch</label>
+        <div class="right"><ons-switch input-id="s1"></ons-switch></div>
       </ons-list-item>
       <ons-list-item>
-        <div class="center">Switch (checked)</div>
-        <div class="right"><ons-switch checked></ons-switch></div>
+        <label for="s2" class="center">Switch (checked)</label>
+        <div class="right"><ons-switch checked input-id="s2"></ons-switch></div>
       </ons-list-item>
       <ons-list-item>
-        <div class="center">Switch (disabled)</div>
-        <div class="right"><ons-switch disabled></ons-switch></div>
+        <label for="s3" class="center">Switch (disabled)</label>
+        <div class="right"><ons-switch disabled input-id="s3"></ons-switch></div>
       </ons-list-item>
       <ons-list-item>
-        <div class="center">Switch (disabled, checked)</div>
-        <div class="right"><ons-switch disabled checked></ons-switch></div>
+        <label for="s4" class="center">Switch (disabled, checked)</label>
+        <div class="right"><ons-switch disabled checked input-id="s4"></ons-switch></div>
       </ons-list-item>
       <ons-list-item>
-        <div class="center">Switch state: {{ switchState || false }}</div>
-        <div class="right"><ons-switch ng-model="switchState"></ons-switch></div>
+        <label for="s5" class="center">Switch state: <span id="s5-value">false</span></label>
+        <div class="right"><ons-switch input-id="s5"></ons-switch></div>
       </ons-list-item>
     </ons-list>
   </ons-page>

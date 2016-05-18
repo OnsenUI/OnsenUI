@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+  <ons-navigator var="myNavigator">
+    <ons-page>
+      <ons-sliding-menu main-page="main.html" menu-page="menu.html" max-slide-distance="200px">
+      </ons-sliding-menu>
+    </ons-page>
+  </ons-navigator>
+
+  <ons-template id="main.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br>
+        <ons-button modifier="light"
+          ng-click="myNavigator.pushPage('page1.html', {hoge: 'hoge'})">
+          Push Page 2
+        </ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="menu.html">
+    <ons-page>
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="myNavigator.pushPage('page1.html');">FooBar</ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page1.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Page 2</h1>
+        <ons-button modifier="light"
+          ng-click="myNavigator.pushPage('page1.html', {title: 'Page'})">
+          Push Page
+          </ons-button>
+
+        <ons-button modifier="light"
+          ng-click="myNavigator.popPage()">
+          Pop Page
+        </ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+</body>
+</html>

@@ -1,28 +1,24 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Gesture Detector | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
-
-  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
   <script>
-    var eventName =
-      'drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
-      'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate';
+    var eventNames =
+      ('drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
+            'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate').split(' ');
 
-    $(document).on(eventName, '#hoge', function(event) {
-      if (event.type !== 'release') {
-        $(this).text(event.type);
-      }
+    eventNames.forEach(function(eventName) {
+      document.addEventListener(eventName, function(event) {
+        if (event.type !== 'release') {
+          event.target.innerHTML = event.type;
+        }
+      });
     });
   </script>
 

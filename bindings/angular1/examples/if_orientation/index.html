@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Orientation | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+</head>
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Orientation Detection</div>
+    </ons-toolbar>
+    <div ons-if-orientation="portrait">
+      <p>Portrait content here!</p>
+    </div>
+
+    <div ons-if-orientation="landscape">
+      <p>Landscape content here!</p>
+    </div>
+  </ons-page>
+</body>
+</html>

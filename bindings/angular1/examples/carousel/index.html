@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Carousel</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <script>
+    var randomColor = function() {
+      return '#' + (function co(lor){   return (lor +=
+          [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+            && (lor.length == 6) ?  lor : co(lor); })('');
+    };
+
+    angular.module('myApp', ['onsen'])
+
+    .controller('DynamicCarouselController', function($scope, $q) {
+      $scope.$watch('carousel', function(carousel) {
+        carousel.on('overscroll', function(event) {
+          var deferred = $q.defer();
+
+          event.waitToReturn(deferred.promise);
+
+          setTimeout(function() {
+            if (event.direction === 'left') {
+              $scope.items.unshift(randomColor());
+            }
+            else {
+              $scope.items.push(randomColor());
+            }
+
+            deferred.resolve();
+
+          }, 1000);
+        });
+      });
+
+      $scope.items = [randomColor(), randomColor(), randomColor()];
+
+      $scope.add = function() {
+        $scope.items.push(randomColor());
+      };
+
+      $scope.remove = function() {
+        $scope.items.pop();
+      };
+    })
+
+    .controller('ListController', function($scope) {
+      $scope.items = ['Apple', 'Banana', 'Orange', 'Pear', 'Melon', 'Papaya', 'Mango'];
+    });
+  </script>
+
+  <style>
+    ons-carousel-item {
+      display: table;
+      text-align: center;
+    }
+    .item-label {
+      display: table-cell;
+      vertical-align: middle;
+      color: white;
+      line-height: 1;
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .list-item {
+      padding: 0;
+      height: 72px;
+    }
+
+    .list-action-menu {
+
+      background-color: #aaa;
+      color: white;
+      padding: 0 12px;
+      box-sizing: border-box;
+      line-height: 72px;
+    }
+    .list-action-menu:active {
+      background-color: #666;
+    }
+
+    .list-action-item {
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    .name {
+      margin-top: 10px;
+      line-height: 1.2;
+    }
+    .desc {
+      line-height: 1.2;
+      font-size: 14px;
+      color: #999;
+    }
+  </style>
+
+</head>
+
+<body>
+  <ons-navigator var="navi">
+
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Carousel</div>
+      </ons-toolbar>
+
+      <br>
+
+      <ons-list>
+        <ons-list-item ng-click="navi.pushPage('example1.html')" modifier="chevron">Example1</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example2.html')" modifier="chevron">Example2</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example3.html')" modifier="chevron">Example3</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example4.html')" modifier="chevron">Example4</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example5.html')" modifier="chevron">Example5</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example6.html')" modifier="chevron">Example6</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example7.html')" modifier="chevron">Example7</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example8.html')" modifier="chevron">Example8</ons-list-item>
+      </ons-list>
+
+    </ons-page>
+
+  </ons-navigator>
+
+  <ons-template id="example1.html">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center">Fullscreen</div>
+    </ons-toolbar>
+
+    <ons-carousel swipeable overscrollable auto-scroll fullscreen auto-scroll-ratio="0.2" animation-options="{duration: 0.1}" var="carousel">
+      <ons-carousel-item style="background-color: gray;">
+        <div class="item-label">GRAY</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #085078;">
+        <div class="item-label">BLUE</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #373B44;">
+        <div class="item-label">DARK</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #D38312;">
+        <div class="item-label">ORANGE</div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+    <ons-bottom-toolbar>
+      <div style="float:right" ng-click="carousel.next()">
+        <ons-button modifier="quiet">Next</ons-button>
+      </div>
+      <div style="float:left" ng-click="carousel.prev()">
+        <ons-button modifier="quiet">Prev</ons-button>
+      </div>
+    </ons-bottom-toolbar>
+  </ons-template>
+
+  <ons-template id="example2.html">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center">Vertical</div>
+    </ons-toolbar>
+
+    <ons-carousel swipeable overscrollable auto-scroll direction="vertical" style="height: 50%; width: 100%">
+      <ons-carousel-item style="background-color: gray;">
+        <div class="item-label">GRAY</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #085078;">
+        <div class="item-label">BLUE</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #373B44;">
+        <div class="item-label">DARK</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #D38312;">
+        <div class="item-label">ORANGE</div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+    <ons-carousel swipeable overscrollable auto-scroll direction="vertical" style="height: 50%; width: 100%" initial-index="2">
+      <ons-carousel-item style="background-color: gray;">
+        <div class="item-label">GRAY</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #085078;">
+        <div class="item-label">BLUE</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #373B44;">
+        <div class="item-label">DARK</div>
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #D38312;">
+        <div class="item-label">ORANGE</div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+  </ons-template>
+
+  <ons-template id="example3.html">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center"></div>
+    </ons-toolbar>
+
+    <ons-carousel auto-refresh swipeable style="margin-top: 5px; height: 70px;" overscrollable auto-scroll item-width="70px">
+      <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+        <div style="background-color: #ccc; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+      <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+        <div style="background-color: #ddd; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+      <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+        <div style="background-color: #ccc; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+    <ons-carousel auto-refresh swipeable style="height: 70px;" overscrollable auto-scroll item-width="70px">
+      <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+        <div style="background-color: #ddd; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+      </ons-carousel-item>
+    </ons-carousel>
+
+  </ons-template>
+
+  <ons-template id="example4.html">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center"></div>
+    </ons-toolbar>
+
+    <ons-carousel swipeable overscrollable style="height: 50%; width: 100%" initial-index="2" item-width="40%">
+      <ons-carousel-item style="background-color: gray">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #085078">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #373B44">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #D38312">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: gray">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #085078">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #373B44">
+      </ons-carousel-item>
+      <ons-carousel-item style="background-color: #D38312">
+      </ons-carousel-item>
+    </ons-carousel>
+  </ons-template>
+
+ <ons-template id="example5.html">
+    <ons-page ng-controller="DynamicCarouselController">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Dynamic carousel</div>
+        <div class="right">
+          <ons-toolbar-button ng-click="add()">Add</ons-toolbar-button>
+          <ons-toolbar-button ng-click="remove()">Remove</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <ons-carousel var="carousel" auto-refresh swipeable overscrollable style="height: 50%; width: 100%;" item-width="40%">
+        <ons-carousel-item ng-repeat="item in items" ng-attr-style="background-color: {{ item }}">
+          {{ item }}
+        </ons-carousel-item>
+      </ons-carousel>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="example6.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Carousel with list</div>
+      </ons-toolbar>
+
+      <ons-list>
+        <ons-list-item class="list-item" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+          <ons-carousel swipeable style="height: 72px; width: 100%;" initial-index="1" auto-scroll>
+            <ons-carousel-item class="list-action-menu">
+              list action menu
+            </ons-carousel-item>
+            <ons-carousel-item class="list-action-item">
+              <ons-row>
+                <ons-col width="52px" style="padding: 10px 0 0 0;">
+                  <div style="width: 42px; height: 42px; background-color: #ccc; border-radius: 6px;"></div>
+                </ons-col>
+                <ons-col>
+                  <div class="name">
+                    Lorem ipsum
+                  </div>
+                  <div class="desc">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </ons-col>
+              </ons-row>
+            </ons-carousel-item>
+          </ons-carousel>
+        </ons-list-item>
+      </ons-list>
+      <ons-carousel var="carousel" auto-refresh swipeable overscrollable style="height: 50%; width: 100%;" item-width="40%">
+        <ons-carousel-item ng-repeat="item in items" ng-attr-style="background-color: {{ item }}">
+          {{ item }}
+        </ons-carousel-item>
+      </ons-carousel>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="example7.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Example7</div>
+      </ons-toolbar>
+      <ons-carousel auto-refresh swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
+        <ons-carousel-item ng-repeat="i in [0,1]">
+          <ons-list>
+            <ons-list-item ng-repeat="j in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+              Item #{{ j + i * 21 }}
+            </ons-list-item>
+          </ons-list>
+        </ons-carousel-item>
+      </ons-carousel>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="example8.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Example 8</div>
+      </ons-toolbar>
+      <p><input ng-model="test"></p>
+      <ons-list ng-controller="ListController">
+        <ons-list-item ng-repeat="item in items">
+          <ons-carousel var="carousel" style="width: 100%; height: 44px" ons-scope>
+            <ons-carousel-item ng-click="carousel.next()">
+              {{ $index }}
+            </ons-carousel-item>
+            <ons-carousel-item ng-click="carousel.prev()">
+              {{ test }}
+              {{ item }}
+            </ons-carousel-item>
+          </ons-carousel>
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-template>
+
+</body>
+</html>

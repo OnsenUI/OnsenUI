@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Range | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+
+  <style>
+    .volume-item {
+      padding: 0;
+    }
+
+    .volume-slider {
+      width: 100%;
+    }
+
+    .volume-icon {
+      text-align: center !important;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <ons-page ng-init="numberSelection = 30;">
+    <ons-toolbar><div class="center">Range Demo</div></ons-toolbar>
+
+    <ons-list>
+      <ons-list-header>Range</ons-list-header>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" ng-model="numberSelection"></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+      <ons-list-item class="volume-item">
+        <ons-row>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-low"></ons-icon>
+          </ons-col>
+          <ons-col align="center">
+            <ons-range class="volume-slider" value="50" disabled></ons-range>
+          </ons-col>
+          <ons-col class="volume-icon" align="center" width="36px">
+            <ons-icon size="32px" class="list__item__icon" icon="ion-ios-volume-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>
+    </ons-list>
+
+    <h3>{{numberSelection}}</h3>
+  </ons-page>
+</body>
+</html>

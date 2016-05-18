@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <title>List Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">List</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-header>Normal List</ons-list-header>
+      <ons-list-item>One</ons-list-item>
+      <ons-list-item>Two</ons-list-item>
+      <ons-list-item>Three</ons-list-item>
+
+      <ons-list-header>Tappable List</ons-list-header>
+      <ons-list-item tappable>One</ons-list-item>
+      <ons-list-item tappable>Two</ons-list-item>
+      <ons-list-item tappable>Three</ons-list-item>
+
+      <ons-list-header>List with Chevron</ons-list-header>
+      <ons-list-item modifier="chevron">One</ons-list-item>
+      <ons-list-item modifier="chevron">Two</ons-list-item>
+      <ons-list-item modifier="chevron">Three</ons-list-item>
+
+      <ons-list-header>Long divider</ons-list-header>
+      <ons-list-item modifier="longdivider">One</ons-list-item>
+      <ons-list-item modifier="longdivider">Two</ons-list-item>
+      <ons-list-item modifier="longdivider">Three</ons-list-item>
+
+      <ons-list-header>List with Switch</ons-list-header>
+      <ons-list-item>
+        <label for="switch-1" class="center">
+          Title
+        </label>
+        <label class="right">
+          <ons-switch input-id="switch-1"></ons-switch>
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <label for="switch-2" class="center">
+          Title
+        </label>
+        <label class="right">
+          <ons-switch input-id="switch-2"></ons-switch>
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>List with Radio Buttons</ons-list-header>
+      <ons-list-item>
+        <label class="left">
+          <ons-input type="radio" input-id="radio-1" name="b"></ons-input>
+        </label>
+        <label for="radio-1" class="center">
+          Radio button
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <label class="left">
+          <ons-input type="radio" input-id="radio-2" name="b"></ons-input>
+        </label>
+        <label for="radio-2" class="center">
+          Radio button
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>List with Checkboxes</ons-list-header>
+      <ons-list-item>
+        <label class="left">
+          <ons-input type="checkbox" input-id="checkbox-1"></ons-input>
+        </label>
+        <label for="checkbox-1" class="center">
+          Checkbox
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <label class="left">
+          <ons-input type="checkbox" input-id="checkbox-2"></ons-input>
+        </label>
+        <label for="checkbox-2" class="center">
+          Checkbox
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>List with Labels</ons-list-header>
+      <ons-list-item>
+        <div class="center">
+          Title
+        </div>
+        <div class="right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="center">
+          Title
+        </div>
+        <div class="right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with Subtitles</ons-list-header>
+
+      <ons-list-item>
+        <div class="center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item>
+        <label class="left">
+          <ons-input type="checkbox" input-id="checkbox-3"></ons-input>
+        </label>
+        <label for="checkbox-3" class="center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <label class="left">
+          <ons-input type="checkbox" input-id="checkbox-4"></ons-input>
+        </label>
+        <label for="checkbox-4" class="center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>List with Thumbnails</ons-list-header>
+
+      <ons-list-item>
+        <div class="left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron">
+        <div class="left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="center">
+          <div class="list__item__title">Title</div>
+          <div class="list__item__subtitle">Subtitle</div>
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>List with icons</ons-list-header>
+
+      <ons-list-item>
+        <div class="center">
+          Title
+        </div>
+        <div class="right">
+          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+        </div>
+      </ons-list-item>
+
+      <ons-list-item>
+        <div class="center">
+          Title
+        </div>
+        <div class="right">
+          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+        </div>
+      </ons-list-item>
+
+    </ons-list>
+
+    <br />
+
+    <ons-list modifier="noborder">
+      <ons-list-item modifier="chevron">With chevron</ons-list-item>
+      <ons-list-item>Without chevron</ons-list-item>
+    </ons-list>
+
+    <br />
+
+    <ons-list>
+      <ons-list-item modifier="chevron nodivider">With chevron</ons-list-item>
+      <ons-list-item modifier="nodivider">Without chevron</ons-list-item>
+    </ons-list>
+  </ons-page>
+</body>
+</html>
