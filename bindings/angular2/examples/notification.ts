@@ -16,9 +16,9 @@ import {
     <div class="page__content">
       <div style="margin: 10px; text-align: center;">
 
-        <ons-button (click)="alert()">alert()</ons-button>
-        <ons-button (click)="confirm()">confirm()</ons-button>
-        <ons-button (click)="prompt()">prompt()</ons-button>
+        <ons-button (click)="alert()" id="alert-button">alert()</ons-button>
+        <ons-button (click)="confirm()" id="confirm-button">confirm()</ons-button>
+        <ons-button (click)="prompt()" id="prompt-button">prompt()</ons-button>
 
       </div>
     </div>
