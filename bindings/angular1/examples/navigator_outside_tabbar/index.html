@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Navigator outside of Tabbar | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+
+  </head>
+
+  <body>
+    <ons-navigator var="navi">
+      <ons-page>
+        <ons-tabbar var="tabbar" animation="fade">
+          <ons-tab page="page1.html" active="true">
+            <div ons-tab-active>
+              HOME
+            </div>
+            <div ons-tab-inactive>
+              home
+            </div>
+          </ons-tab>
+          <ons-tab
+            icon="ion-chatbox-working"
+            label="Comments"
+            page="page2.html"></ons-tab>
+          <ons-tab
+            icon="ion-ios-cog"
+            label="Settings"
+            page="page3.html"></ons-tab>
+        </ons-tabbar>
+      </ons-page>
+    </ons-navigator>
+
+    <ons-template type="text/ons-template" id="page1.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center"> Page 1 </div>
+        </ons-toolbar>
+        <div style="text-align: center;">
+          <br />
+          <ons-button  ng-click="navi.pushPage('newPage.html');"> Push Page</ons-button>
+        </div>
+      </ons-page>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="page2.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center"> Page 2 </div>
+        </ons-toolbar>
+      </ons-page>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="page3.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center"> Page 3 </div>
+        </ons-toolbar>
+      </ons-page>
+    </ons-template>
+
+    <ons-template type="text/ons-template" id="newPage.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center"> Pushed Page </div>
+        </ons-toolbar>
+        <div style="text-align: center;">
+          <br />
+          <ons-button ng-click="navi.popPage()"> Pop </ons-button>
+        </div>
+      </ons-page>
+    </ons-template>
+  </body>
+</html>

@@ -44,6 +44,7 @@ const scheme = {'': 'list--*'};
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @tutorial vanilla/Reference/list
  * @example
  * <ons-list>
  *   <ons-list-header>Header Text</ons-list-header>

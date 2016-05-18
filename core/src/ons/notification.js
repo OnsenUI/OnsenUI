@@ -21,6 +21,7 @@ import util from './util';
  * @object ons.notification
  * @category dialog
  * @codepen Qwwxyp
+ * @tutorial vanilla/Reference/dialog
  * @description
  *   [en]
  *     Utility methods to create different kinds of alert dialogs. There are three methods available:

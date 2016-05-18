@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <title>Checkbox | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <script>
+    ons.bootstrap()
+      .controller('PageController', function($scope) {
+        $scope.checked = true;
+      });
+  </script>
+
+</head>
+
+<body>
+
+  <ons-page ng-controller="PageController">
+    <ons-toolbar>
+      <div class="center">Checkbox</div>
+    </ons-toolbar>
+
+    <p>
+      <input type="checkbox" ng-model="checked">
+    </p>
+
+    <p>
+      <label>
+        Checkbox
+        <ons-input type="checkbox" ng-change="console.log('change')" ng-model="checked"></ons-input>
+      </label>
+    </p>
+
+    <p>The checkbox is {{ checked }}.</p>
+  </ons-page>
+
+</body>
+</html>

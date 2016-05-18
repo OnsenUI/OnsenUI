@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>&lt;ons-splitter&gt; demo | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
+  <title>Splitter | Onsen UI</title>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
 
   <style>
     ons-splitter-side[side="left"] {
@@ -21,6 +17,15 @@
       border-left: 1px solid #ddd;
     }
   </style>
+
+  <script>
+    function toggle(side) {
+      var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
+
+      side.toggle();
+    }
+  </script>
+
 </head>
 
 <body>
@@ -64,20 +69,6 @@
       </ons-page>
     </ons-splitter-side>
   </ons-splitter>
-
-  <script>
-    window.addEventListener('load', function() {
-      var right = document.querySelector('ons-splitter-side[side="right"]');
-
-      right.open();
-    });
-
-    function toggle(side) {
-      var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
-
-      side.toggle();
-    }
-  </script>
 
 </body>
 </html>

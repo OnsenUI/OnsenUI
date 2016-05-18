@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>&lt;ons-splitter&gt; demo | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+  <style>
+    ons-splitter-side[side="left"] {
+      border-right: 1px solid #ddd;
+    }
+
+    ons-splitter-side[side="right"] {
+      border-left: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ons-splitter>
+    <ons-splitter-side side="left" width="200px" collapse swipeable>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">content</div>
+        </ons-toolbar>
+
+      </ons-page>
+    </ons-splitter-side>
+
+    <ons-splitter-content>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">ons-splitter-content</div>
+        </ons-toolbar>
+
+        <p style="padding: 10px 20px;">
+          <ons-button onclick="toggle('left')">toggle left menu</ons-button>
+        </p>
+
+        <p style="padding: 10px 20px;">
+          <ons-button onclick="toggle('right')">toggle right menu</ons-button>
+        </p>
+
+      </ons-page>
+    </ons-splitter-content>
+
+    <ons-splitter-side side="right" width="300px" collapse swipeable threhold-ratio-should-open="0.4">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="toggle('right')">Close</ons-toolbar-button>
+          </div>
+          <div class="center">ons-splitter-side</div>
+        </ons-toolbar>
+
+      </ons-page>
+    </ons-splitter-side>
+  </ons-splitter>
+
+  <script>
+    window.addEventListener('load', function() {
+      var right = document.querySelector('ons-splitter-side[side="right"]');
+
+      right.open();
+    });
+
+    function toggle(side) {
+      var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
+
+      side.toggle();
+    }
+  </script>
+
+</body>
+</html>

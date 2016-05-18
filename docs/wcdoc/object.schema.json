@@ -21,6 +21,9 @@
     "note": {
       "type": "string"
     },
+    "tutorial": {
+      "type": "string"
+    },
     "extensionOf": {
       "type": "string"
     },

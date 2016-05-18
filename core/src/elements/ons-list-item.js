@@ -78,6 +78,7 @@ const scheme = {
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @tutorial vanilla/Reference/list
  * @example
  * <ons-list-item>
  *   <div class="left">

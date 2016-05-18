@@ -56,6 +56,7 @@ const locations = {
  *   [en]Material Design switch[/en]
  *   [ja][/ja]
  * @codepen LpXZQQ
+ * @tutorial vanilla/Reference/switch
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]

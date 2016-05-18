@@ -44,6 +44,7 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *     A navigation bar can be added to the top of the page using the `<ons-toolbar>` element.
  *   [/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ * @tutorial vanilla/Reference/page
  * @guide ManagingMultiplePages
  *   [en]Managing multiple pages[/en]
  *   [ja]複数のページを管理する[/ja]

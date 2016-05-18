@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Text Area | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+
+  </head>
+  <body>
+    <ons-page>
+
+      <ons-toolbar>
+        <div class="center">Textarea</div>
+      </ons-toolbar>
+
+      <section style="padding: 8px">
+        <textarea class="textarea" ng-model="text" placeholder="Type here" style="width: 100%; height: 100px;"></textarea>
+        <input type="text" class="text-input" style="width: 100%; margin-top: 8px; display: block"></input>
+        <ons-button modifier="large" style="margin-top: 8px;">Submit</ons-button>
+      </section>
+    </ons-page>
+  </body>
+</html>
