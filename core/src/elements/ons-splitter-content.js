@@ -51,6 +51,7 @@ const rewritables = {
  *  [/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
+ * @tutorial vanilla/Reference/splitter
  * @seealso ons-splitter
  *  [en]The `<ons-splitter>` component is the parent element.[/en]
  *  [ja]ons-splitterコンポーネント[/ja]

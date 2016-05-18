@@ -41,6 +41,7 @@ const template = util.createElement(`
  *   [/en]
  *   [ja][/ja]
  * @codepen EVzMjR
+ * @tutorial vanilla/Reference/progress
  * @example
  * <ons-progress-circular
  *  value="55"

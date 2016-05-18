@@ -69,6 +69,7 @@ const INPUT_ATTRIBUTES = [
  *  [/en]
  *  [ja][/ja]
  * @codepen ojQxLj
+ * @tutorial vanilla/Reference/input
  * @seealso ons-range
  *   [en]The `<ons-range>` element is used to display a range slider.[/en]
  *   [ja][/ja]

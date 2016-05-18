@@ -78,6 +78,7 @@ const generateId = (() => {
  *   [en]A component to display a tab bar on the bottom of a page. Used with `<ons-tab>` to manage pages using tabs.[/en]
  *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
+ * @tutorial vanilla/Reference/tabbar
  * @guide UsingTabBar
  *   [en]Using tab bar[/en]
  *   [ja]タブバーを使う[/ja]

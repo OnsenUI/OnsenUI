@@ -30,6 +30,7 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
  *   [/ja]
  * @codepen QwrGBm
+ * @tutorial vanilla/Reference/lazy-repeat
  * @seealso ons-list
  *   [en]The `<ons-list>` element is used to render a list.[/en]
  *   [ja][/ja]
