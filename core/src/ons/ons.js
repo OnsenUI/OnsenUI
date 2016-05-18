@@ -190,12 +190,20 @@ ons.enableAnimations = () => {
 };
 
 /**
- * Disable automatic styling.
+ * @method disableAutoStyling
+ * @signature disableAutoStyling()
+ * @description
+ *   [en]Disable automatic styling.[/en]
+ *   [ja][/ja]
  */
 ons.disableAutoStyling = ons._autoStyle.disable;
 
 /**
- * Enable automatic styling based on OS (default).
+ * @method enableAutoStyling
+ * @signature enableAutoStyling()
+ * @description
+ *   [en]Enable automatic styling based on OS (default).[/en]
+ *   [ja][/ja]
  */
 ons.enableAutoStyling = ons._autoStyle.enable;
 
