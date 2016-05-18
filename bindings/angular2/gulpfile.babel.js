@@ -20,7 +20,7 @@ gulp.task('serve', done => {
 gulp.task('test', ['test-e2e']);
 
 gulp.task('test-e2e', done => {
-  const server = createDevServer();
+  const server = createDevServer({quiet: true});
 
   server.listen(9090, '0.0.0.0', () => {
     setTimeout(() => {
@@ -34,9 +34,9 @@ gulp.task('test-e2e', done => {
   });
 });
 
-function createDevServer() {
+function createDevServer(options = {}) {
   const config = require('./webpack.config.js');
-  const serverConfig = Object.assign({
+  const serverConfig = Object.assign(options, {
     publicPath: config.output.publicPath,
     stats: {colors: true}
   }, config.devServer);
