@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Pull Hook | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <script>
+    angular.module('myApp', ['onsen'])
+
+    .controller('DemoController', function($scope, $timeout) {
+      $scope.items = [3, 2, 1];
+
+      $scope.load = function($done) {
+        $timeout(function() {
+          $scope.items.unshift($scope.items.length + 1);
+          $done();
+        }, 1000);
+      };
+    });
+
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="DemoController">
+    <ons-pull-hook ng-action="load($done)" var="loader">
+      <span ng-switch="loader.state">
+        <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+        <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+        <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
+      </span>
+    </ons-pull-hook>
+
+    <ons-toolbar>
+      <div class="center">Pull to refresh</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-item ng-repeat="item in items">
+        Item #{{ item }}
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
+</body>
+</html>

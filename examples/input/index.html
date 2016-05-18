@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Form Input | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    var login = function() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      if (username === 'bob' && password === 'secret') {
+        ons.notification.alert('Congratulations!');
+      }
+      else {
+        ons.notification.alert('Incorrect username or password.');
+      }
+    };
+  </script>
+</head>
+
+<body>
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Form Input</div>
+  </ons-toolbar>
+
+  <input type="search" class="search-input" placeholder="Search"></input>
+
+  <div style="text-align: center; margin-top: 30px;">
+    <p>
+      <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+    </p>
+    <p>
+      <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+    </p>
+    <p style="margin-top: 30px;">
+      <ons-button onclick="login()">Sign in</ons-button>
+    </p>
+  </div>
+
+  <ons-list>
+    <ons-list-header>Checkboxes</ons-list-header>
+    <ons-list-item tappable>
+      <label class="left">
+        <ons-input type="checkbox" input-id="check-1"></ons-input>
+      </label>
+      <label for="check-1" class="center">
+        Apple
+      </label>
+    </ons-list-item>
+    <ons-list-item tappable>
+      <label class="left">
+        <ons-input type="checkbox" input-id="check-2"></ons-input>
+      </label>
+      <label for="check-2" class="center">
+        Banana
+      </label>
+    </ons-list-item>
+  </ons-list>
+
+  <ons-list>
+    <ons-list-header>Radio buttons</ons-list-header>
+    <ons-list-item tappable>
+      <label class="left">
+        <ons-input name="color" type="radio" input-id="radio-1" checked></ons-input>
+      </label>
+      <label for="radio-1" class="center">
+        Red
+      </label>
+    </ons-list-item>
+    <ons-list-item tappable>
+      <label class="left">
+        <ons-input name="color" type="radio" input-id="radio-2"></ons-input>
+      </label>
+      <label for="radio-2" class="center">
+        Blue
+      </label>
+    </ons-list-item>
+  </ons-list>
+</ons-page>
+
+</body>
+</html>

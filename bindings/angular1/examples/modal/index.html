@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Modal | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+
+  <script>
+    var showModal = function() {
+      var modal = document.getElementById('modal');
+      modal.show();
+
+      setTimeout(modal.hide.bind(modal), 1000);
+    };
+  </script>
+</head>
+
+<body ng-controller="PageController">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Modal</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" onclick="showModal();">Open Modal</ons-button>
+    </p>
+  </ons-page>
+
+  <ons-modal id="modal">
+    <ons-icon icon="gear" spin="true" style="line-height: 20px; vertical-align: middle;"></ons-icon>
+    <span style="line-height: 20px; font-size: 15px;">Loading...</span>
+  </ons-modal>
+</body>
+</html>

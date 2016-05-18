@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Material Toolbar | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+
+  <style>
+    body, h1, h2, h3, h4, h5, h6, p, span, div {
+      font-family: 'Roboto', 'Noto', sans-serif;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+  <ons-page modifier="material">
+    <ons-toolbar modifier="material">
+      <div class="left">
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Toolbar
+      </div>
+      <div class="right">
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="md-search"></ons-icon>
+        </ons-toolbar-button>
+        <ons-toolbar-button modifier="material">
+          <ons-icon icon="md-refresh"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+    <h2>Test</h2>
+
+    <p>This is a Material Design Toolbar</p>
+  </ons-page>
+</body>
+</html>
