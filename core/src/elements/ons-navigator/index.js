@@ -75,6 +75,7 @@ const rewritables = {
  *   [/en]
  *   [ja][/ja]
  * @codepen yrhtv
+ * @tutorial vanilla/Reference/navigator
  * @guide PageNavigation
  *   [en]Guide for page navigation[/en]
  *   [ja]ページナビゲーションの概要[/ja]

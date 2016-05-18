@@ -34,6 +34,7 @@ const STATE_ACTION = 'action';
  *   [/en]
  *   [ja][/ja]
  * @codepen WbJogM
+ * @tutorial vanilla/Reference/pull-hook
  * @guide UsingPullHook
  *   [en]How to use Pull Hook[/en]
  *   [ja]プルフックを使う[/ja]

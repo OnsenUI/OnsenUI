@@ -38,6 +38,7 @@ var scheme = {
  *   [/en]
  *   [ja][/ja]
  * @codepen aHmGL
+ * @tutorial vanilla/Reference/navigator
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja][/ja]

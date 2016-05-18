@@ -34,6 +34,7 @@ import contentReady from 'ons/content-ready';
  *  [/en]
  *  [ja][/ja]
  * @codepen rOQOML
+ * @tutorial vanilla/Reference/splitter
  * @seealso ons-splitter-content
  *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]

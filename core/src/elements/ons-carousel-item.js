@@ -29,6 +29,7 @@ const scheme = {'': 'carousel-item--*'};
  *   [/en]
  *   [ja][/ja]
  * @codepen xbbzOQ
+ * @tutorial vanilla/Reference/carousel
  * @seealso ons-carousel
  *   [en]`<ons-carousel>` components[/en]
  *   [ja]<ons-carousel>コンポーネント[/ja]
