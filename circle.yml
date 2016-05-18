@@ -7,7 +7,7 @@ dependencies:
     - npm install
     - npm install -g coveralls gulp
     - cd css-components; npm install; gulp build
-    - cd bindings/angular2; npm installl
+    - cd bindings/angular2; npm install
 
 deployment:
   tasks:
