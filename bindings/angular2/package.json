@@ -24,6 +24,7 @@
     "es6-promise": "3.0.2",
     "es6-shim": "0.35.0",
     "gulp-shell": "^0.5.2",
+    "open": "0.0.5",
     "protractor": "^3.3.0",
     "reflect-metadata": "0.1.2",
     "selenium-server-standalone-jar": "^2.53.0",
@@ -32,7 +33,7 @@
     "typings": "^0.7.9",
     "webdriver-manager": "^10.0.1",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0",
+    "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.8.4"
   },
   "babel": {
