@@ -30,6 +30,7 @@ import util from './util';
  *     * `ons.notification.prompt()`
  *
  *     It will automatically display a Material Design dialog on Android devices.
+ *   [/en]
  *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  * @example
  * ons.notification.alert('Hello, world!');
