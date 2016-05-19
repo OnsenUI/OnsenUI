@@ -23,14 +23,14 @@ gulp.task('test-e2e', done => {
   const server = createDevServer({quiet: true});
 
   server.listen(9090, '0.0.0.0', () => {
-    setTimeout(() => {
-      childProcess.spawn('./node_modules/.bin/protractor', ['protractor-conf.js'], {
-        stdio: 'inherit'
-      }).once('exit', code => {
-        server.close();
+    runProtractor().then(code => {
+      server.close();
+      server.listeningApp.close();
+      if (code !== 0) {
         process.exit(code);
-      });
-    }, 8000);
+      }
+      done();
+    });
   });
 });
 
@@ -43,4 +43,14 @@ function createDevServer(options = {}) {
   const server = new WebpackDevServer(require('webpack')(config), serverConfig);
 
   return server;
+}
+
+function runProtractor() {
+  return new Promise(resolve => {
+      childProcess.spawn('./node_modules/.bin/protractor', ['protractor-conf.js'], {
+        stdio: 'inherit'
+      }).once('exit', code => {
+        resolve(code);
+      });
+  });
 }
