@@ -323,8 +323,9 @@ class NavigatorElement extends BaseElement {
     return new Promise(resolve => {
       internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
         const element = util.extend(this._createPageElement(templateHTML), {
-          name: this.name,
-          options: options
+          name: this.pages[index].name,
+          data: this.pages[index].data,
+          pushedOptions: this.pages[index].pushedOptions
         });
 
         rewritables.link(this, element, this.pages[index].options, element => {
