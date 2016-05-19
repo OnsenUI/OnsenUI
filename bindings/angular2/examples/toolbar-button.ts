@@ -8,9 +8,9 @@ import {
   template: `
   <ons-page class="page">
     <ons-toolbar>
-      <div class="left"><ons-toolbar-button>left</ons-toolbar-button></div>
+      <div class="left"><ons-toolbar-button id="left">Left</ons-toolbar-button></div>
       <div class="center">Toolbar Buttons</div>
-      <div class="right"><ons-toolbar-button>right</ons-toolbar-button></div>
+      <div class="right"><ons-toolbar-button id="right">Right</ons-toolbar-button></div>
     </ons-toolbar>
     <div class="page__background"></div>
     <div class="page__content">
