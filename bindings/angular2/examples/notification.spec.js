@@ -1,6 +1,6 @@
 const EC = protractor.ExpectedConditions;
 
-describe('ons-notification example', () => {
+describe('notification.html', () => {
   beforeEach(() => {
     browser.get('/bindings/angular2/examples/notification.html');
   });
