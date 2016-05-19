@@ -25,7 +25,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
-    this._element.getCheckboxElement().addEventListener('change', this._boundOnChange);
+    this._element.checkbox.addEventListener('change', this._boundOnChange);
   }
 
   _onChange(event) {
@@ -42,7 +42,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._element.getCheckboxElement().removeEventListener('change', this._boundOnChange);
+    this._element.checkbox.removeEventListener('change', this._boundOnChange);
     this._element = null;
   }
 }
