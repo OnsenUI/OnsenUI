@@ -3,6 +3,7 @@ import shell from 'gulp-shell';
 import WebpackDevServer from 'webpack-dev-server';
 import childProcess from 'child_process';
 import open from 'open';
+import yargs from 'yargs';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
@@ -46,8 +47,15 @@ function createDevServer(options = {}) {
 }
 
 function runProtractor() {
+  const args = ['protractor-conf.js'];
+
+  if (yargs.argv.specs) {
+    args.push('--specs');
+    args.push(yargs.argv.specs);
+  }
+
   return new Promise(resolve => {
-      childProcess.spawn('./node_modules/.bin/protractor', ['protractor-conf.js'], {
+      childProcess.spawn('./node_modules/.bin/protractor', args, {
         stdio: 'inherit'
       }).once('exit', code => {
         resolve(code);

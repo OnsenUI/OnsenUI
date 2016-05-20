@@ -35,7 +35,8 @@
     "webdriver-manager": "^10.0.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.8.4"
+    "webpack-merge": "^0.8.4",
+    "yargs": "^4.7.1"
   },
   "babel": {
     "presets": [
