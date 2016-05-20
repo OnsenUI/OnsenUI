@@ -33,6 +33,7 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @codepen dYQYLg
+ * @tutorial vanilla/Reference/speed-dial
  * @seealso ons-speed-dial-item
  *   [en]The `<ons-speed-dial-item>` represents a menu item.[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]

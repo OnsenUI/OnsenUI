@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Material Input | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <style type="text/css">
+    .page__content {
+      padding-left: 10px;
+      font-family: 'Roboto', 'Noto', sans-serif;
+    }
+  </style>
+
+  <script>
+    ons.bootstrap()
+      .controller('InputController', function($scope) {
+        $scope.name = 'Andreas';
+
+        $scope.doSomething = function() {
+          console.log('Changed!');
+        };
+      });
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar modifier="material">
+      <div class="center">Material Input</div>
+    </ons-toolbar>
+
+    <h3>Normal input</h3>
+
+    <p>
+      <ons-input modifier="material" float placeholder="Username"></ons-input>
+    </p>
+    <p>
+      <ons-input modifier="material" float type="password" placeholder="Password"></ons-input>
+    </p>
+    <p>
+      <ons-input modifier="material" float placeholder="Favorite food" value="Pasta"></ons-input>
+    </p>
+
+    <h3>Without floating label</h3>
+
+    <p>
+      <ons-input modifier="material" type="password" placeholder="Password"></ons-input>
+    </p>
+
+    <h3>Disabled</h3>
+
+    <p>
+    <ons-input modifier="material" float placeholder="Username" disabled></ons-input>
+    </p>
+
+    <h3>Other types</h3>
+    <p>
+      <ons-input modifier="material" float placeholder="Age" type="number" min="0" max="200"></ons-input>
+    </p>
+
+    <h3>Use with AngularJS</h3>
+    <div ng-controller="InputController">
+      <form name="myForm">
+      <p>
+        <ons-input modifier="material" float ng-model="name" name="name" ng-maxlength="10" ng-change="doSomething()" placeholder="Name"></ons-input>
+      </p>
+
+      <p>
+        Hello there, {{ name || 'Stranger' }}!
+      </p>
+
+      <p ng-show="myForm.name.$error.maxlength">
+        Too long!
+      </p>
+      </form>
+    </div>
+  </ons-page>
+
+</body>
+</html>

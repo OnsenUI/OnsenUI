@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Switch | Onsen UI</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Switch</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-header>Switch</ons-list-header>
+      <ons-list-item>
+        <div class="center">Switch</div>
+        <div class="right"><ons-switch></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">Switch (checked)</div>
+        <div class="right"><ons-switch checked></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">Switch (disabled)</div>
+        <div class="right"><ons-switch disabled></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">Switch (disabled, checked)</div>
+        <div class="right"><ons-switch disabled checked></ons-switch></div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">Switch state: {{ switchState || false }}</div>
+        <div class="right"><ons-switch ng-model="switchState"></ons-switch></div>
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+</head>
+
+<body>
+
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Title</div>
+    </ons-toolbar>
+    <ons-tabbar position="top" var="tabbar">
+      <ons-tab page="page.html" icon="ion-home" active="true"></ons-tab>
+      <ons-tab icon="ion-chatbox-working" page="page.html"></ons-tab>
+      <ons-tab icon="ion-ios-cog" page="page.html"></ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+
+  <ons-template type="text/ons-template" id="page.html">
+    <div style="text-align: center">
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+      <br><br><br><br><br><br><br><br><br><br><br>
+      <p>last</p>
+    </div>
+  </ons-template>
+</body>
+</html>

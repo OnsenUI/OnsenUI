@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Pull Hook with Transition | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      angular.module('myApp', ['onsen'])
+
+      .controller('DemoController', function($scope, $timeout) {
+        $scope.items = [3, 2, 1];
+
+        $scope.load = function($done) {
+          $timeout(function() {
+            $scope.items.unshift($scope.items.length + 1);
+            $done();
+          }, 1000);
+        };
+      });
+
+    </script>
+
+    <style>
+      ons-pull-hook .arrow {
+        transition: all 0.3s ease-in-out;
+        transform: rotate3d(0, 0, 0, 0deg);
+      }
+
+      ons-pull-hook[state="preaction"] .arrow {
+        transform: rotate3d(0, 0, 1, 180deg);
+      }
+
+      ons-pull-hook[state="action"] .arrow {
+        opacity: 0;
+      }
+
+      ons-pull-hook .loader {
+        position: relative;
+        top: -64px;
+        opacity: 0;
+        transition: all 0.3s ease-in-out 0.2s;
+      }
+
+      ons-pull-hook[state="action"] .loader {
+          opacity: 1.0;
+      }
+    </style>
+  </head>
+  <body>
+    <ons-page ng-controller="DemoController">
+      <ons-pull-hook ng-action="load($done)" threshold-height="-1px" var="loader">
+          <ons-icon class="arrow" size="35px" icon="ion-arrow-down-a"></ons-icon>
+          <br>
+          <ons-icon class="loader" size="35px" spin="true" icon="ion-load-d"></ons-icon>
+        </span>
+      </ons-pull-hook>
+
+      <ons-toolbar>
+      <div class="center">Pull to refresh</div>
+      </ons-toolbar>
+
+      <ons-list>
+        <ons-list-item ng-repeat="item in items">
+          Item #{{ item }}
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
+</html>

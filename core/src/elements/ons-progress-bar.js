@@ -41,6 +41,7 @@ const template = util.createElement(`
  *   [/en]
  *   [ja][/ja]
  * @codepen zvQbGj
+ * @tutorial vanilla/Reference/progress
  * @seealso ons-progress-circular
  *   [en]The `<ons-progress-circular>` component displays a circular progress indicator.[/en]
  *   [ja][/ja]

@@ -52,6 +52,7 @@ const defaultInnerTemplateSource = util.createElement(`
  *     ons-tab要素の中には、タブに表示されるコンテンツを直接記述することが出来ます。
  *   [/ja]
  * @codepen pGuDL
+ * @tutorial vanilla/Reference/tabbar
  * @guide UsingTabBar
  *   [en]Using tab bar[/en]
  *   [ja]タブバーを使う[/ja]

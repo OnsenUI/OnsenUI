@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ripple | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap();
+    // window.addEventListener("contextmenu", function(e) { e.preventDefault(); })
+  </script>
+</head>
+
+<body>
+  <ons-page modifier="material">
+
+    <ons-toolbar modifier="material">
+      <ons-ripple></ons-ripple>
+      <div class="center">Ripple</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-item ripple>In list item</ons-list-item>
+    </ons-list>
+
+    <div style="width: 100px; height: 100px; background-color: red;">
+      <ons-ripple></ons-ripple>
+      Click me!
+    </div>
+
+    <ons-fab ripple>
+      <ons-icon icon="md-car"></ons-icon>
+    </ons-fab>
+
+    <ons-speed-dial ripple position="right bottom" direction="up">
+      <ons-fab>
+        <ons-icon icon="md-car"></ons-icon>
+      </ons-fab>
+      <ons-speed-dial-item ripple>
+        <ons-icon icon="md-facebook"></ons-icon>
+      </ons-speed-dial-item>
+      <ons-speed-dial-item ripple>
+        <ons-icon icon="md-google"></ons-icon>
+      </ons-speed-dial-item>
+      <ons-speed-dial-item ripple>
+        <ons-icon icon="md-twitter"></ons-icon>
+      </ons-speed-dial-item>
+    </ons-speed-dial>
+
+    <ons-button modifier="material" ripple>
+      Material button
+    </ons-button>
+
+    <ons-button modifier="material--flat" ripple>
+      Flat button
+    </ons-button>
+
+  </ons-page>
+</body>
+</html>

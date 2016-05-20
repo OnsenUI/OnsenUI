@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Sliding Menu | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    ons.ready(function() {
+      app.slidingMenu.on('preopen', function() {
+        console.log('preopen');
+      });
+
+      app.slidingMenu.on('postopen', function() {
+        console.log('postopen');
+      });
+
+      app.slidingMenu.on('preclose', function() {
+        console.log('preclose');
+      });
+
+      app.slidingMenu.on('postclose', function() {
+        console.log('postclose');
+      });
+    });
+  </script>
+</head>
+<body>
+  <ons-sliding-menu var="app.slidingMenu" menu-page="menu.html" main-page="page1.html" side="right" type="overlay" max-slide-distance="200px">
+  </ons-sliding-menu>
+  <script type="text/ons-template" id="menu.html">
+    <ons-page style="background-color: white">
+      <ons-list>
+        <ons-list-item
+          modifier="tappable" class="list__item__line-height"
+          ng-click="app.slidingMenu.setMainPage('page1.html', {closeMenu: true})">
+          <div class="left">
+            <ons-icon icon="fa-home" class="list__item__icon"></ons-icon>
+          </div>
+          <div class="center">
+            Page 1
+          </div>
+        </ons-list-item>
+        <ons-list-item
+          modifier="tappable" class="list__item__line-height"
+          ng-click="app.slidingMenu.setMainPage('page2.html', {closeMenu: true})">
+          <div class="left">
+            <ons-icon icon="fa-gear" class="list__item__icon"></ons-icon>
+          </div>
+          <div class="center">
+            Page 2
+          </div>
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </script>
+</body>
+</html>

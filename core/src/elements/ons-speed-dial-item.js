@@ -31,6 +31,7 @@ const scheme = {
  *     Material DesignのSpeed dialの子要素を表現する要素です。
  *   [/ja]
  * @codepen dYQYLg
+ * @tutorial vanilla/Reference/speed-dial
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component.[/en]
  *   [ja]ons-speed-dialコンポーネント[/ja]
