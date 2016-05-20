@@ -4,6 +4,8 @@ CHANGELOG
 
 v2.0.0-rc.6
 ----
+ * ons-splitter: 'load' methods return promises in Angular1 bindings.
+ * ons-navigator: Fix 'popPage' with 'refresh' parameter.
 
 v2.0.0-rc.5
 ----

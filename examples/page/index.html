@@ -1,16 +1,27 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Page | Onsen UI</title>
-  <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/onsenui.js"></script>
-  <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
-  <script src="../app.js"></script>
+
+  <script>
+    document.addEventListener('init', function(event) {
+      console.log('init');
+    });
+
+    document.addEventListener('show', function(event) {
+      console.log('show');
+    });
+
+    ons.ready(function() {
+      console.log('ons.ready');
+    });
+  </script>
+
 </head>
 <body>
   <ons-page>

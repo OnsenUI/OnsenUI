@@ -31,6 +31,7 @@ import Animator from './animator-css';
  *   [/en]
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
+ * @tutorial vanilla/Reference/ripple
  * @example
  * <div class="my-div">
  *  <ons-ripple></ons-ripple>

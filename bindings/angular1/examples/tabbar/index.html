@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Tabbar | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+
+    <script>
+      ons.ready(function() {
+        tabbar.on('prechange', function(event) {
+          /*if (!confirm('change?')) {
+            event.cancel();
+          }*/
+        });
+
+        tabbar.on('postchange', function() {
+          console.log('postchange');
+        });
+      });
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <ons-tabbar var="tabbar">
+      <ons-tab page="page1.html" active="true">
+        <div ons-tab-active>
+          HOME
+        </div>
+        <div ons-tab-inactive>
+          home
+        </div>
+      </ons-tab>
+      <ons-tab
+        icon="ion-chatbox-working"
+        label="Comments"
+        page="page2.html"></ons-tab>
+      <ons-tab
+        icon="ion-ios-cog"
+        label="Settings"
+        page="page3.html"></ons-tab>
+    </ons-tabbar>
+
+    <script type="text/ons-template" id="page3.html">
+      <ons-toolbar>
+        <div class="center">Page3</div>
+      </ons-toolbar>
+    </script>
+
+  </body>
+</html>
