@@ -18,9 +18,9 @@ gulp.task('serve', done => {
   });
 });
   
-gulp.task('test', ['test-e2e']);
+gulp.task('test', ['e2e-test']);
 
-gulp.task('test-e2e', done => {
+gulp.task('e2e-test', done => {
   const server = createDevServer({quiet: true});
 
   server.listen(9090, '0.0.0.0', () => {

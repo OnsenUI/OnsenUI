@@ -21,6 +21,6 @@ $ gulp test
 To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
 
 ```bash
-$ gulp test-e2e --specs ./examples/button.spec.js
+$ gulp e2e-test --specs ./examples/button.spec.js
 ```
 
