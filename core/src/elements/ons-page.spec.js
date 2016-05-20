@@ -25,7 +25,6 @@ describe('OnsPageElement', () => {
       <div class="page__content">...</div>
     </ons-page>`);
     expect(page.querySelector('.page__background')).to.be.ok;
-    console.log(page.innerHTML);
   });
 
   describe('#attachedCallback()', () => {
