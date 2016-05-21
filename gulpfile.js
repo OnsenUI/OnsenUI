@@ -33,6 +33,11 @@ var fs = require('fs');
 var argv = require('yargs').argv;
 var npm  = require('rollup-plugin-npm');
 var babel = require('rollup-plugin-babel');
+var stylus = require('gulp-stylus');
+var minifyCSS = require('gulp-minify-css');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var autoprefixer = require('gulp-autoprefixer');
 
 ////////////////////////////////////////
 // browser-sync
@@ -403,6 +408,33 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
       .pipe(browserSync.reload({stream: true, once: true}));
   });
 });
+
+////////////////////////////////////////
+// develop
+////////////////////////////////////////
+gulp.task('develop', function() {
+
+});
+
+////////////////////////////////////////
+// stylus
+////////////////////////////////////////
+gulp.task('stylus', function () {
+  gulp.src([
+    './css-components/components-src/stylus/blue-basic-theme.styl',
+    './css-components/components-src/stylus/components/index.styl'
+  ])
+      .pipe(concat('onsen-css-components.styl'))
+      .pipe(stylus({error: true}))
+      .pipe(autoprefixer({
+        browsers: ['last 2 versions', 'Android >= 4.0', 'iOS >= 8']
+      }))
+      .pipe(gulp.dest('./build/css/'))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(minifyCSS())
+      .pipe(gulp.dest('./build/css/'));
+});
+
 
 ////////////////////////////////////////
 // build-docs
