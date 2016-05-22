@@ -18,76 +18,71 @@ limitations under the License.
 /**
  * Minimal utility library for manipulating element's style.
  */
-window.styler = (function() {
-  'use strict';
+const styler = function(element, style) {
+  return styler.css.apply(styler, arguments);
+};
 
-  var styler = function(element, style) {
-    return styler.css.apply(styler, arguments);
-  };
-
-  /**
-   * Set element's style.
-   *
-   * @param {Element} element
-   * @param {Object} styles
-   * @return {Element}
-   */
-  styler.css = function(element, styles) {
-    var keys = Object.keys(styles);
-    keys.forEach(function(key) {
-      if (key in element.style) {
-        element.style[key] = styles[key];
-      } else if (styler._prefix(key) in element.style) {
-        element.style[styler._prefix(key)] = styles[key];
-      } else {
-        console.warn('No such style property: ' + key);
-      }
-    });
-    return element;
-  };
-
-  /**
-   * Add vendor prefix.
-   *
-   * @param {String} name
-   * @return {String}
-   */
-  styler._prefix = (function() {
-    var styles = window.getComputedStyle(document.documentElement, '');
-    var prefix = (Array.prototype.slice
-      .call(styles)
-      .join('')
-      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-    )[1];
-
-    return function(name) {
-      return prefix + name.substr(0, 1).toUpperCase() + name.substr(1);
-    };
-  })();
-
-  /**
-   * @param {Element} element
-   */
-  styler.clear = function(element) {
-    styler._clear(element);
-  };
-
-  /**
-   * @param {Element} element
-   */
-  styler._clear = function(element) {
-    var len = element.style.length;
-    var style = element.style;
-    var keys = [];
-    for (var i = 0; i < len; i++) {
-      keys.push(style[i]);
+/**
+ * Set element's style.
+ *
+ * @param {Element} element
+ * @param {Object} styles
+ * @return {Element}
+ */
+styler.css = function(element, styles) {
+  var keys = Object.keys(styles);
+  keys.forEach(function(key) {
+    if (key in element.style) {
+      element.style[key] = styles[key];
+    } else if (styler._prefix(key) in element.style) {
+      element.style[styler._prefix(key)] = styles[key];
+    } else {
+      console.warn('No such style property: ' + key);
     }
+  });
+  return element;
+};
 
-    keys.forEach(function(key) {
-      style[key] = '';
-    });
+/**
+ * Add vendor prefix.
+ *
+ * @param {String} name
+ * @return {String}
+ */
+styler._prefix = (function() {
+  var styles = window.getComputedStyle(document.documentElement, '');
+  var prefix = (Array.prototype.slice
+    .call(styles)
+    .join('')
+    .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+  )[1];
+
+  return function(name) {
+    return prefix + name.substr(0, 1).toUpperCase() + name.substr(1);
   };
-
-  return styler;
-
 })();
+
+/**
+ * @param {Element} element
+ */
+styler.clear = function(element) {
+  styler._clear(element);
+};
+
+/**
+ * @param {Element} element
+ */
+styler._clear = function(element) {
+  var len = element.style.length;
+  var style = element.style;
+  var keys = [];
+  for (var i = 0; i < len; i++) {
+    keys.push(style[i]);
+  }
+
+  keys.forEach(function(key) {
+    style[key] = '';
+  });
+};
+
+export default styler;
