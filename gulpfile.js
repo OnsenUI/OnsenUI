@@ -38,6 +38,16 @@ var minifyCSS = require('gulp-minify-css');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
+var sass = require('gulp-sass');
+
+var cssConfig = {
+  prefixerScheme: ['> 1%', 'last 2 versions', 'Android >= 4.0', 'iOS >= 8'],
+  writePath: 'build/css/',
+  onsenFileName: 'onsenui',
+  onsenComponentsFileName: 'onsen-css-components.styl',
+  bhComponentsFileName: 'bh-components'
+};
+
 
 ////////////////////////////////////////
 // browser-sync
@@ -94,7 +104,8 @@ gulp.task('core', function() {
     }))
     .pipe($.addSrc.prepend('core/vendor/*.js'))
     .pipe($.sourcemaps.init())
-    .pipe($.concat('onsenui.js'))
+    .pipe($.concat('bh.js'))
+    // .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js'))
@@ -409,32 +420,6 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
   });
 });
 
-////////////////////////////////////////
-// develop
-////////////////////////////////////////
-gulp.task('develop', function() {
-
-});
-
-////////////////////////////////////////
-// stylus
-////////////////////////////////////////
-gulp.task('stylus', function () {
-  gulp.src([
-    './css-components/components-src/stylus/blue-basic-theme.styl',
-    './css-components/components-src/stylus/components/index.styl'
-  ])
-      .pipe(concat('onsen-css-components.styl'))
-      .pipe(stylus({error: true}))
-      .pipe(autoprefixer({
-        browsers: ['last 2 versions', 'Android >= 4.0', 'iOS >= 8']
-      }))
-      .pipe(gulp.dest('./build/css/'))
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(minifyCSS())
-      .pipe(gulp.dest('./build/css/'));
-});
-
 
 ////////////////////////////////////////
 // build-docs
@@ -524,4 +509,107 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     .on('end', function() {
       $.connect.serverClose();
     });
+});
+
+
+////////////////////////////////////////
+// develop
+//开发模式
+////////////////////////////////////////
+gulp.task('develop', ['watch-eslint', 'copy-icon', 'browser-sync', 'watch-core-js', 'watch-develop-style'], function() {
+  // for livereload
+  //监听文件变化,刷新浏览器
+  gulp.watch([
+    'examples/*/*.{js,css,html}',
+    'test/e2e/*/*.{js,css,html}',
+    'build/*/*.{js,css}'
+  ]).on('change', function(changedFile) {
+    gulp.src(changedFile.path)
+        .pipe(browserSync.reload({stream: true, once: true}));
+  });
+});
+
+gulp.task('watch-develop-js', ['core'], function() {
+  //监听js文件,并编译
+  return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
+});
+
+gulp.task('watch-develop-style', ['style'], function() {
+  //监听样式文件并编译
+  return gulp.watch(
+      [
+        'css-components/components-src/stylus/**/*.styl',
+        'css-components/components-src/bh/**/*.scss',
+        'core/sass/**/*.scss'
+      ],
+      ['style']);
+});
+
+//复制字体文件
+gulp.task('copy-icon', function() {
+  return merge(
+      // font-awesome fle copy
+      gulp.src('core/css/font_awesome/**/*')
+          .pipe(gulp.dest('build/css/font_awesome/')),
+
+      // ionicons file copy
+      gulp.src('core/css/ionicons/**/*')
+          .pipe(gulp.dest('build/css/ionicons/')),
+
+      // material icons file copy
+      gulp.src('core/css/material-design-iconic-font/**/*')
+          .pipe(gulp.dest('build/css/material-design-iconic-font/')),
+  );
+});
+
+//编译样式
+gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-style'], function() {
+  return gulp.src([
+    cssConfig.writePath+cssConfig.onsenFileName+'.css',
+    cssConfig.writePath+cssConfig.onsenComponentsFileName+'.css',
+    cssConfig.writePath+cssConfig.bhComponentsFileName+'.css'
+  ])
+      .pipe($.concat('bh.css'))
+      .pipe(autoprefixer({
+        browsers: cssConfig.prefixerScheme
+      }))
+      .pipe(gulp.dest(cssConfig.writePath))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(minifyCSS())
+      .pipe(gulp.dest(cssConfig.writePath));
+});
+
+////////////////////////////////////////
+// 编译onsenui基础样式
+////////////////////////////////////////
+gulp.task('onsen-common-style', function () {
+  return gulp.src([
+    'core/css/common.css',
+    'core/css/*.css'
+  ])
+      .pipe($.concat(cssConfig.onsenFileName+'.css'))
+      .pipe(gulp.dest(cssConfig.writePath))
+});
+
+////////////////////////////////////////
+// 编译onsenui组件样式
+////////////////////////////////////////
+gulp.task('onsen-components-style', function () {
+  return gulp.src([
+    './css-components/components-src/stylus/blue-basic-theme.styl',
+    './css-components/components-src/stylus/components/index.styl'
+  ])
+      .pipe(concat(cssConfig.onsenComponentsFileName+'.styl'))
+      .pipe(stylus({error: true}))
+      .pipe(gulp.dest(cssConfig.writePath))
+});
+
+////////////////////////////////////////
+// 编译bh组件样式
+////////////////////////////////////////
+gulp.task('bh-components-style', function() {
+  return gulp.src('./css-components/components-src/bh/**/*.scss')
+      .pipe(concat(cssConfig.bhComponentsFileName+'.scss'))
+      .pipe(sass().on('error', sass.logError))
+      .pipe(gulp.dest(cssConfig.writePath))
 });
