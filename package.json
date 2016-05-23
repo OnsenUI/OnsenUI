@@ -84,6 +84,7 @@
     "gulp-remember": "^0.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-rollup": "^1.7.0",
+    "gulp-sass": "^2.3.1",
     "gulp-shell": "^0.5.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.1",

@@ -447,4 +447,22 @@ util.isInteger = (value) => {
     Math.floor(value) === value;
 };
 
+/**
+ * 判断该元素是否存在该样式类
+ * @param target 要判断的元素
+ * @param className 要判断的样式类
+ * @returns {boolean}
+ */
+util.hasClass = (target, className) => {
+  let flag = false;
+  if(target){
+    const targetClass = target.className;
+    const re = new RegExp('^'+className+'$|^'+className+'\s{1}|\s{1}'+className+'\s{1}');
+    if(re.test(targetClass)){
+      flag = true;
+    }
+  }
+  return flag;
+};
+
 export default util;
