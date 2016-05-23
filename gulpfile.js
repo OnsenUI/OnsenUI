@@ -516,7 +516,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
 // develop
 //开发模式
 ////////////////////////////////////////
-gulp.task('develop', ['watch-eslint', 'copy-icon', 'browser-sync', 'watch-core-js', 'watch-develop-style'], function() {
+gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 'browser-sync'], function() {
   // for livereload
   //监听文件变化,刷新浏览器
   gulp.watch([
@@ -558,12 +558,12 @@ gulp.task('copy-icon', function() {
 
       // material icons file copy
       gulp.src('core/css/material-design-iconic-font/**/*')
-          .pipe(gulp.dest('build/css/material-design-iconic-font/')),
+          .pipe(gulp.dest('build/css/material-design-iconic-font/'))
   );
 });
 
 //编译样式
-gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-style'], function() {
+gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-components-style'], function() {
   return gulp.src([
     cssConfig.writePath+cssConfig.onsenFileName+'.css',
     cssConfig.writePath+cssConfig.onsenComponentsFileName+'.css',
@@ -608,7 +608,11 @@ gulp.task('onsen-components-style', function () {
 // 编译bh组件样式
 ////////////////////////////////////////
 gulp.task('bh-components-style', function() {
-  return gulp.src('./css-components/components-src/bh/**/*.scss')
+  return gulp.src([
+      './core/sass/**/*.scss',
+      './core/skins/default/*.scss',
+      './css-components/components-src/bh/**/*.scss'
+  ])
       .pipe(concat(cssConfig.bhComponentsFileName+'.scss'))
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest(cssConfig.writePath))
