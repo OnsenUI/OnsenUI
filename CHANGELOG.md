@@ -6,11 +6,12 @@ v2.0.0-rc.6
 ----
  * ons-splitter: 'load' methods return promises in Angular1 bindings.
  * ons-navigator: Fix 'popPage' with 'refresh' parameter.
+ * ons-dialog: Make ons-dialog angular2 compatible.
+ * ons-speed-dial, ons-speed-dial-item: Removed `_compiled` attribute.
+ * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
 
 v2.0.0-rc.5
 ----
- * ons-speed-dial, ons-speed-dial-item: Removed "_compiled" attribute.
- * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
  * css-components: Fix material list item paddings.
  * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
  * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
