@@ -1,0 +1,57 @@
+$step-icon-width: 32px;
+$step-icon-height: $step-icon-width;
+
+bh-stepping{
+  &:after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.bh-stepping-icon{
+  position: relative;
+  cursor: pointer;
+  width: pxToRem($step-icon-width);
+  height: pxToRem($step-icon-width);
+  background-color: $gray-lv4;
+
+  &:before,
+  &:after{
+    content: "";
+    position: absolute;
+    background-color: $brand-white;
+  }
+
+  &.bh-left,
+  &.bh-right{
+    float: left;
+
+    &:before{
+      top: pxToRem(14px);
+      left: pxToRem(8px);
+      width: pxToRem(14px);
+      height: pxToRem(2px);
+    }
+  }
+
+  &.bh-right{
+    &:after{
+      width: pxToRem(2px);
+      height: pxToRem(14px);
+      top: pxToRem(8px);
+      left: pxToRem(14px);
+    }
+  }
+}
+
+.bh-stepping-input{
+  font-size: pxToRem(24px);
+  width: pxToRem(68px);
+  height: pxToRem($step-icon-width);
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  float: left;
+}
+

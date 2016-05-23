@@ -520,9 +520,10 @@ gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 
   // for livereload
   //监听文件变化,刷新浏览器
   gulp.watch([
-    'examples/*/*.{js,css,html}',
-    'test/e2e/*/*.{js,css,html}',
-    'build/*/*.{js,css}'
+    'examples/**/*.{js,css,html}',
+    'test/e2e/**/*.{js,css,html}',
+    'build/css/bh.css',
+    'build/js/bh.js'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
         .pipe(browserSync.reload({stream: true, once: true}));

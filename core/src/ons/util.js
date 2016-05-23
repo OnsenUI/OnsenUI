@@ -457,7 +457,7 @@ util.hasClass = (target, className) => {
   let flag = false;
   if(target){
     const targetClass = target.className;
-    const re = new RegExp('^'+className+'$|^'+className+'\s{1}|\s{1}'+className+'\s{1}');
+    const re = new RegExp('^'+className+'$|^'+className+' | '+className+' | '+className+'$');
     if(re.test(targetClass)){
       flag = true;
     }
