@@ -141,6 +141,7 @@ const HorizontalModeTrait = {
  *   [/en]
  *   [ja][/ja]
  * @codepen xbbzOQ
+ * @tutorial vanilla/Reference/carousel
  * @seealso ons-carousel-item
  *   [en]`<ons-carousel-item>` component[/en]
  *   [ja]ons-carousel-itemコンポーネント[/ja]

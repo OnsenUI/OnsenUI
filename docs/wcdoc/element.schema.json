@@ -24,6 +24,9 @@
     "note": {
       "type": "string"
     },
+    "tutorial": {
+      "type": "string"
+    },
     "examples": {
       "type": "array",
       "items": {"type": "string"},

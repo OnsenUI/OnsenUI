@@ -28,7 +28,7 @@ limitations under the License.
 
         this.load = (...args) => {
           this._pageScope && this._pageScope.$destroy();
-          this._element[0].load(...args);
+          return this._element[0].load(...args);
         };
         scope.$on('$destroy', this._destroy.bind(this));
       },

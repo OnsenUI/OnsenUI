@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Navigator Reset | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+
+  <ons-navigator var="navi">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Page 1</h1>
+        <ons-button ng-click="navi.pushPage('page2.html', { title: 'Page 2' })">Push Page 2</ons-button>
+        <h1>Pop</h1>
+        <ons-button ng-click="navi.popPage()">Pop Page
+        </ons-button>
+      </div>
+    </ons-page>
+
+  </ons-navigator>
+</body>
+</html>

@@ -31,6 +31,7 @@ const scheme = {
  *     It can be displayed either as an inline element or in one of the corners. Normally it will be positioned in the lower right corner of the screen.
  *   [/en]
  *   [ja][/ja]
+ * @tutorial vanilla/Reference/fab
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]

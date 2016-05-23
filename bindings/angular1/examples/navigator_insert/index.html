@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Navigator | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+  <ons-navigator var="myNavigator">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button ng-show="myNavigator.pages.length > 1">Back</ons-back-button></div>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br>
+        <ons-button modifier="light"
+          ng-click="myNavigator.insertPage(-1, 'page1.html', {hoge: 'hoge'})">
+          Insert Page to Background
+        </ons-button>
+      </div>
+    </ons-page>
+  </ons-navigator>
+
+  <script type="text/ons-template" id="page1.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button ng-show="myNavigator.pages.length > 1">Back</ons-back-button></div>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br>
+        Inserted Page
+        <br>
+        <br>
+        <ons-button modifier="light"
+          ng-click="myNavigator.insertPage(-1, 'page1.html', {hoge: 'hoge'})">
+          Insert Page to Background
+        </ons-button>
+      </div>
+    </ons-page>
+  </script>
+
+</body>
+</html>

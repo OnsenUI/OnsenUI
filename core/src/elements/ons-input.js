@@ -65,10 +65,11 @@ const INPUT_ATTRIBUTES = [
  *
  *    The component will automatically render as a Material Design input on Android devices.
  *
- *    Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-input>` element..
+ *    Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-input>` element.
  *  [/en]
  *  [ja][/ja]
  * @codepen ojQxLj
+ * @tutorial vanilla/Reference/input
  * @seealso ons-range
  *   [en]The `<ons-range>` element is used to display a range slider.[/en]
  *   [ja][/ja]
@@ -118,7 +119,7 @@ class InputElement extends BaseElement {
    * @attribute input-id
    * @type {String}
    * @description
-   *  [en]Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements.[/en]
+   *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements.[/en]
    *  [ja][/ja]
    */
 

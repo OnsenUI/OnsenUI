@@ -15,6 +15,8 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
+import styler from 'lib/styler';
 
 const scheme = {
   '': 'speed-dial--*',
@@ -31,6 +33,7 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @codepen dYQYLg
+ * @tutorial vanilla/Reference/speed-dial
  * @seealso ons-speed-dial-item
  *   [en]The `<ons-speed-dial-item>` represents a menu item.[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]
@@ -102,18 +105,9 @@ class SpeedDialElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
+    contentReady(this, () => {
       this._compile();
-
-      this.classList.add('speed__dial');
-
-      if (this.hasAttribute('direction')) {
-        this._updateDirection(this.getAttribute('direction'));
-      } else {
-        this._updateDirection('up');
-      }
-      this._updatePosition();
-    }
+    });
 
     this._shown = true;
     this._itemShown = false;
@@ -121,13 +115,20 @@ class SpeedDialElement extends BaseElement {
   }
 
   _compile() {
-    autoStyle.prepare(this);
+    if (!this.classList.contains('speed__dial')) {
+      this.classList.add('speed__dial');
+      autoStyle.prepare(this);
+      this._updateRipple();
+      ModifierUtil.initModifier(this, scheme);
 
-    this._updateRipple();
+      if (this.hasAttribute('direction')) {
+        this._updateDirection(this.getAttribute('direction'));
+      } else {
+        this._updateDirection('up');
+      }
+    }
 
-    ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
+    this._updatePosition();
   }
 
   attributeChangedCallback(name, last, current) {
@@ -136,19 +137,18 @@ class SpeedDialElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
       case 'ripple':
-        this._updateRipple();
+        contentReady(this, () => this._updateRipple());
         break;
       case 'direction':
-        this._updateDirection(current);
+        contentReady(this, () => this._updateDirection(current));
         break;
       case 'position':
-        this._updatePosition();
+        contentReady(this, () => this._updatePosition());
         break;
     }
   }
 
   attachedCallback() {
-    this._updateDirection(this.hasAttribute('direction') ? this.getAttribute('direction') : 'up');
     this.addEventListener('click', this._boundOnClick, false);
   }
 
@@ -189,12 +189,13 @@ class SpeedDialElement extends BaseElement {
   _updateDirection(direction) {
     const children = this.items;
     for (let i = 0; i < children.length; i++) {
-      children[i].style.transitionDelay = 25 * i + 'ms';
-      children[i].style.webkitTransitionDelay = 25 * i + 'ms';
-      children[i].style.bottom = 'auto';
-      children[i].style.right = 'auto';
-      children[i].style.top = 'auto';
-      children[i].style.left = 'auto';
+      styler(children[i], {
+        transitionDelay: 25 * i + 'ms',
+        bottom: 'auto',
+        right: 'auto',
+        top: 'auto',
+        left: 'auto'
+      });
     }
     switch (direction) {
       case 'up':
@@ -300,13 +301,20 @@ class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を表示します。[/ja]
    */
   showItems() {
+
+    if (this.hasAttribute('direction')) {
+      this._updateDirection(this.getAttribute('direction'));
+    } else {
+      this._updateDirection('up');
+    }
+
     if (!this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        children[i].style.transform = 'scale(1)';
-        children[i].style.webkitTransform = 'scale(1)';
-        children[i].style.transitionDelay = 25 * i + 'ms';
-        children[i].style.webkitTransitionDelay = 25 * i + 'ms';
+        styler(children[i], {
+          transform: 'scale(1)',
+          transitionDelay: 25 * i + 'ms'
+        });
       }
     }
     this._itemShown = true;
@@ -325,10 +333,10 @@ class SpeedDialElement extends BaseElement {
     if (this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        children[i].style.transform = 'scale(0)';
-        children[i].style.webkitTransform = 'scale(0)';
-        children[i].style.transitionDelay = 25 * (children.length - i) + 'ms';
-        children[i].style.webkitTransitionDelay = 25 * (children.length - i) + 'ms';
+        styler(children[i], {
+          transform: 'scale(0)',
+          transitionDelay: 25 * (children.length - i) + 'ms'
+        });
       }
     }
     this._itemShown = false;

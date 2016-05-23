@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Split View | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+  </head>
+  <body>
+    <ons-split-view
+      var="app.splitView"
+      secondary-page="secondary.html"
+      main-page="page1.html"
+      main-page-width="40%"
+      collapse="width 500px">
+    </ons-split-view>
+    <script type="text/ons-template" id="secondary.html">
+      <ons-page style="background-color: white">
+        <ons-list>
+          <ons-list-item
+            modifier="tappable"
+            class="list__item__line-height"
+            ng-click="
+              app.splitView.setMainPage('page1.html');">
+            <div class="left">
+              <ons-icon icon="fa-home" class="list__item__icon"></ons-icon>
+            </div>
+            <div class="center">
+              Page 1
+            </div>
+          </ons-list-item>
+
+          <ons-list-item
+            modifier="tappable"
+            class="list__item__line-height"
+            ng-click="
+              app.splitView.setMainPage('page2.html');">
+            <div class="left">
+              <ons-icon icon="fa-gear" class="list__item__icon"></ons-icon>
+            </div>
+            <div class="center">
+              Page 2
+            </div>
+          </ons-list-item>
+
+        </ons-list>
+      </ons-page>
+    </script>
+  </body>
+</html>

@@ -79,6 +79,16 @@ describe('OnsBackButtonElement', () => {
     });
   });
 
+  describe('#onClick', () => {
+    it ('overrides the default click handler', () => {
+      const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
+      backButton.onClick = function () {};
+      const spy = chai.spy.on(backButton, 'onClick');
+      backButton._onClick();
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');

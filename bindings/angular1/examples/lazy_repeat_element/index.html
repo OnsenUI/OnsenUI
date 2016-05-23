@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Lazy Repeat | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+
+  <script>
+    window.onload = setup;
+
+    function setup() {
+
+      document.querySelector('#my-list').delegate = {
+        createItemContent: function(i, template) {
+          var dom = template.cloneNode(true);
+
+          dom.innerHTML = dom.innerHTML.replace('{{item}}', i);
+
+          return dom;
+        },
+
+        countItems: function() {
+          return 10000000;
+        }
+      };
+    }
+
+    function refresh() {
+      document.querySelector('#my-list').refresh();
+    }
+  </script>
+
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="left"><ons-toolbar-button onclick="refresh()">Refresh</ons-toolbar-button></div>
+      <div class="center">Lazy Repeat</div>
+      <div class="right"><ons-toolbar-button onclick="setup()">Setup</ons-toolbar-button></div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-lazy-repeat id="my-list">
+        <ons-list-item>
+          {{item}}
+        </ons-list-item>
+      </ons-lazy-repeat>
+    </ons-list>
+  </ons-page>
+</body>
+</html>

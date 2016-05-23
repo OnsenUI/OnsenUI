@@ -57,6 +57,7 @@ const _animatorDict = {
  *   [en]Display a Material Design dialog.[/en]
  *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @codepen zxxaGa
+ * @tutorial vanilla/Reference/dialog
  * @guide UsingDialog
  *   [en]Learn how to use the dialog component.[/en]
  *   [ja]ダイアログコンポーネントの使い方[/ja]

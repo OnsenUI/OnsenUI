@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Navigator | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body class="center">
+
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Platform Detection</div>
+    </ons-toolbar>
+    <div ons-if-platform="Android">
+      <h3>Show me only if run in Android.</h3>
+    </div>
+
+    <div ons-if-platform="iOS">
+      <h3>Show me only if run in iOS.</h3>
+    </div>
+
+    <div ons-if-platform="BlackBerry">
+      <h3>Show me only if run in BlackBerry.</h3>
+    </div>
+
+    <div ons-if-platform="chrome">
+      <h3>Show me only if run in Chrome.</h3>
+    </div>
+
+    <div ons-if-platform="safari">
+      <h3>Show me only if run in Safari.</h3>
+    </div>
+
+    <div ons-if-platform="firefox">
+      <h3>Show me only if run in Firefox.</h3>
+    </div>
+
+    <div ons-if-platform="Opera">
+      <h3>Show me only if run in Opera.</h3>
+    </div>
+
+    <div ons-if-platform="Edge">
+      <h3>Show me only if run in Edge.</h3>
+    </div>
+  </ons-page>
+
+</body>
+</html>

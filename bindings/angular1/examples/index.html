@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Demo Index | Onsen UI</title>
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="app.js"></script>
+  <script>
+  var module = angular.module('myApp', ['onsen.directives']);
+  module.controller('DemoListController', function($scope, $window) {
+    $scope.containerDemoList = [
+      {href : 'alert_dialog/index.html', name : 'Alert dialog'},
+      {href : 'bottom_toolbar/index.html', name : 'Bottom Toolbar'},
+      {href : 'carousel/index.html', name : 'Carousel'},
+      {href : 'carousel_pull_hook/index.html', name : 'Carousel and Pull Hook'},
+      {href : 'dialog/index.html', name : 'Dialog'},
+      {href : 'fab/index.html', name: 'Floating Action Button'},
+      {href : 'gesture_detector/index.html', name : 'Gesture Detector'},
+      {href : 'grid/index.html', name : 'Grid'},
+      {href : 'if_orientation/index.html', name : 'Orientation'},
+      {href : 'if_platform/index.html', name : 'Platform'},
+      {href : 'lazy_repeat/index.html', name : 'Lazy Repeat'},
+      {href : 'loading_placeholder/index.html', name : 'Loading Placeholder'},
+      {href : 'list/index.html', name : 'List'},
+      {href : 'list_composition/index.html', name : 'List Composition'},
+      {href : 'list_composition_material/index.html', name : 'Material List Composition'},
+      {href : 'material_toolbar/index.html', name : 'Material Toolbar'},
+      {href : 'modal/index.html', name : 'Modal'},
+      {href : 'navigator/index.html', name : 'Navigator'},
+      {href : 'navigator_insert/index.html', name : 'Navigator: Insert page'},
+      {href : 'navigator_inside_tabbar/index.html', name : 'Navigator inside Tabbar'},
+      {href : 'navigator_navigator/index.html', name : 'Nesting Navigator'},
+      {href : 'navigator_reset/index.html', name : 'Navigator: Reset'},
+      {href : 'navigator_sliding-menu/index.html', name : 'Sliding Menu inside Navigator'},
+      {href : 'navigator_split-view/index.html', name : 'Split View inside Navigator'},
+      {href : 'page/index.html', name : 'Page'},
+      {href : 'popover/index.html', name : 'Popover'},
+      {href : 'pull_hook/index.html', name : 'Pull Hook'},
+      {href : 'pull_hook_transition/index.html', name : 'Pull Hook with CSS transition'},
+      {href : 'sliding_menu/index.html', name : 'Sliding Menu'},
+      {href : 'splitter/index.html', name : 'Splitter'},
+      {href : 'split_view/index.html', name : 'Split View'},
+      {href : 'tabbar/index.html', name : 'Tabbar (Icon with Label)'},
+      {href : 'tabbar_icon/index.html', name : 'Tabbar (Icon only)'},
+      {href : 'tabbar_material/index.html', name : 'Material Tabbar'},
+      {href : 'tabbar_material_icon/index.html', name : 'Material Tabbar (Icon only)'},
+      {href : 'tabbar_material_icon_label/index.html', name : 'Material Tabbar (Icon and label)'},
+      {href : 'tabbar_text/index.html', name : 'Tabbar (Label only)'},
+      {href : 'tabbar_top/index.html', name : 'Top Tabbar'},
+      {href : 'tabbar_toolbar_top/index.html', name : 'Toolbar and Top Tabbar'},
+      {href : 'material_toolbar/index.html', name : 'Material Toolbar'},
+      {href : 'scroller/index.html', name : 'Scroller'}
+    ];
+    $scope.inlineDemoList = [
+      {href : 'button/index.html', name : 'Button'},
+      {href : 'checkbox/index.html', name : 'Checkbox'},
+      {href : 'icon/index.html', name : 'Icons'},
+      {href : 'material_input/index.html', name : 'Material Input'},
+      {href : 'progress/index.html', name : 'Material Progress'},
+      {href : 'ripple/index.html', name: 'Material Ripple'},
+      {href : 'radio_button/index.html', name : 'Radio Button'},
+      {href : 'search_input/index.html', name : 'Search Input'},
+      {href : 'speed_dial/index.html', name : 'Speed Dial'},
+      {href : 'switch/index.html', name : 'Switch'},
+      {href : 'text_input/index.html', name : 'Text Input'},
+      {href : 'textarea/index.html', name : 'Text Area'}
+    ];
+    $scope.go = function(demo) {
+      $window.location.href = demo.href;
+    };
+  });
+  </script>
+
+</head>
+
+<body ng-controller="DemoListController">
+
+  <ons-navigator>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Demo</div>
+      </ons-toolbar>
+      <ons-list>
+        <ons-list-header>Container Elements</ons-list-header>
+        <ons-list-item modifier="chevron" ng-repeat="demo in containerDemoList">
+          <div ng-click="go(demo)">
+            {{demo.name}}
+          </div>
+        </ons-list-item>
+        <ons-list-header>Inline Elements</ons-list-header>
+        <ons-list-item modifier="chevron" ng-repeat="demo in inlineDemoList">
+          <div ng-click="go(demo)">
+            {{demo.name}}
+          </div>
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-navigator>
+
+</body>
+</html>

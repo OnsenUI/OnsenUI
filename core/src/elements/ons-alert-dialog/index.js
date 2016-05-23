@@ -56,6 +56,7 @@ const _animatorDict = {
  *   [/en]
  *   [ja][/ja]
  * @codepen Qwwxyp
+ * @tutorial vanilla/Reference/dialog
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja][/ja]

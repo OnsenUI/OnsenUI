@@ -28,10 +28,10 @@ var-list-item-separator-color = $border-color
 var-list-header-font-size = 12px
 var-list-border = 1px solid var-list-item-separator-color
 
+var-list-item-min-height = 44px
 var-list-item-margin = 1px 0 -1px 0
 var-list-item-padding = 0 0 0 14px
 var-list-header-padding = 20px 0 0 15px
-var-list-item-min-height = 44px
 var-list-header-min-height = 24px
 var-list-header-font-weight = var-font-weight--large
 var-list-header-text-shadow = none
@@ -39,6 +39,7 @@ var-list-header-text-shadow = none
 var-list-border-top = 1px solid var-list-item-separator-color
 var-list-border-bottom = 1px solid var-list-item-separator-color
 
+var-material-list-item-min-height = 48px
 var-material-list-item-padding = 0 0 0 16px
 
 /*! topdoc
@@ -59,11 +60,13 @@ var-material-list-item-padding = 0 0 0 16px
 */
 
 retina-list-item-border(color = var-list-item-separator-color)
+  border-bottom none
+  background-size 100% 1px
+  background-repeat no-repeat
+  background-position bottom
+  background-image linear-gradient(0deg, color, color 100%)
+
   +retina-query()
-    border-bottom none
-    background-size 100% 1px
-    background-repeat no-repeat
-    background-position bottom
     background-image linear-gradient(0deg, color, color 50%, transparent 50%)
 
 retina-list-border(color = var-list-item-separator-color)
@@ -112,12 +115,14 @@ list__item()
   align-items center
 
 .list__item__left
-  min-height var-list-item-min-height
+  box-sizing border-box
   display flex
-  padding-right 14px
+  padding 12px 14px 12px 0
   order 0
   align-items center
   align-self stretch
+  line-height 1.2em
+  min-height var-list-item-min-height
 
 .list__item__left:empty
   width 0
@@ -126,7 +131,7 @@ list__item()
   margin 0
 
 .list__item__center
-  min-height var-list-item-min-height
+  box-sizing border-box
   display flex
   flex-grow 1
   flex-wrap wrap
@@ -136,19 +141,22 @@ list__item()
   align-items center
   align-self stretch
   margin-left 0
-  border-bottom var-list-border
   retina-list-item-border()
+  padding 12px 6px 12px 0
+  line-height 1.2em
+  min-height var-list-item-min-height
 
 .list__item__right
-  min-height var-list-item-min-height
+  box-sizing border-box
   display flex
   margin-left auto
-  padding-right 12px
+  padding 12px 12px 12px 0
   order 2
   align-items center
   align-self stretch
-  border-bottom var-list-border
   retina-list-item-border()
+  line-height 1.2em
+  min-height var-list-item-min-height
 
 .list__header
   list__header()
@@ -180,7 +188,6 @@ list__item()
   margin var-list-item-margin
   color var-list-item-color
   background-color var-list-background-color
-  min-height var-list-item-min-height
 
 .list__item:first-child
   box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
@@ -359,7 +366,6 @@ list__item()
   transition none
 
 .list__item--chevron:before
-  min-height var-list-item-min-height
   display flex
   align-items center
   color var-list-item-separator-color
@@ -400,7 +406,7 @@ list__item()
   border-radius 4px
   background-image none
 
-.list--inset__item:first-child
+.list--inset > .list__item:first-child
   box-shadow none
 
 /*! topdoc
@@ -568,6 +574,7 @@ list__item()
 
 .list__item__title
   flex-basis 100%
+  align-self flex-end
   order 0
 
 .list__item__subtitle
@@ -575,6 +582,7 @@ list__item()
   font-size var-font-size--mini
   order 1
   flex-basis 100%
+  align-self flex-start
 
 /*! topdoc
   name: List Item with Thumbnail
@@ -611,7 +619,7 @@ list__item()
   height 40px
   border-radius 6px
   display block
-  margin 8px 10px 8px 0px
+  margin 0
 
 /*! topdoc
   name: List Item with Icon
@@ -680,7 +688,6 @@ list__item()
 
 .list__item--material
   border 0
-  min-height 56px
   padding var-material-list-item-padding
   line-height normal
 
@@ -691,25 +698,25 @@ list__item()
   box-shadow none
 
 .list__item--material__left
-  padding 16px 0px 16px 0px
+  padding 14px 0
   min-width 56px
   line-height 1
-  box-sizing border-box
+  min-height var-material-list-item-min-height
 
 .list__item--material__left:empty
 
 .list__item--material__center
-  padding 16px 0
+  padding 14px 6px 14px 0
   border-color #eee
-  box-sizing border-box
   retina-list-item-border(#eee)
+  min-height var-material-list-item-min-height
 
 .list__item--material__right
-  padding 16px 16px 16px 0px
+  padding 14px 16px 14px 0px
   line-height 1
   border-color #eee
-  box-sizing border-box
   retina-list-item-border(#eee)
+  min-height var-material-list-item-min-height
 
 .list__item--material.list__item--longdivider
   border-bottom 1px solid #eee

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Carousel | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+
+  <style>
+    ons-carousel-item {
+      display: table;
+      text-align: center;
+    }
+    .item-label {
+      display: table-cell;
+      vertical-align: middle;
+      color: white;
+      line-height: 1;
+      font-size: 48px;
+      font-weight: bold;
+    }
+    .cover-label {
+      text-align: center;
+      position: absolute;
+      left: 0px;
+      width: 100%;
+      bottom: 10px;
+      color: white;
+    }
+
+    .list-item {
+      padding: 0;
+      height: 72px;
+    }
+
+    .list-action-menu {
+      background-color: #aaa;
+      color: white;
+      padding: 0 12px;
+      box-sizing: border-box;
+      line-height: 72px;
+    }
+    .list-action-menu:active {
+      background-color: #666;
+    }
+
+    .list-action-item {
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    .name {
+      margin-top: 10px;
+      line-height: 1.2;
+    }
+    .desc {
+      line-height: 1.2;
+      font-size: 14px;
+      color: #999;
+    }
+  </style>
+
+  <script>
+    angular.module('myApp', ['onsen'])
+
+    .controller('MainController', function($scope, $timeout) {
+      $scope.load = function($done) {
+        $timeout(function() {
+          $done();
+        }, 1000);
+      };
+    });
+  </script>
+</head>
+
+<body>
+  <ons-page ng-controller="MainController">
+    <ons-toolbar>
+      <div class="center">Carousel with list</div>
+    </ons-toolbar>
+
+    <ons-pull-hook ng-action="load($done)">
+      Load!
+    </ons-pull-hook>
+
+    <ons-list>
+      <ons-list-item class="list-item" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+        <ons-carousel swipeable style="height: 72px; width: 100%;" initial-index="1" auto-scroll>
+          <ons-carousel-item class="list-action-menu">
+            list action menu
+          </ons-carousel-item>
+          <ons-carousel-item class="list-action-item">
+            <ons-row>
+              <ons-col width="52px" style="padding: 10px 0 0 0;">
+                <div style="width: 42px; height: 42px; background-color: #ccc; border-radius: 6px;"></div>
+              </ons-col>
+              <ons-col>
+                <div class="name">
+                  Lorem ipsum
+                </div>
+                <div class="desc">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+              </ons-col>
+            </ons-row>
+          </ons-carousel-item>
+        </ons-carousel>
+      </ons-list-item>
+    </ons-list>
+    <ons-carousel var="carousel" auto-refresh swipeable overscrollable style="height: 50%; width: 100%;" item-width="40%">
+      <ons-carousel-item ng-repeat="item in items" ng-attr-style="background-color: {{ item }}">
+        {{ item }}
+      </ons-carousel-item>
+    </ons-carousel>
+  </ons-page>
+
+</body>
+</html>

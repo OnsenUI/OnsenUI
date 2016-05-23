@@ -32,6 +32,7 @@ import BaseElement from 'ons/base-element';
  *   [/en]
  *   [ja][/ja]
  * @codepen xAhvg
+ * @tutorial vanilla/Reference/icon
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
  * <ons-icon
