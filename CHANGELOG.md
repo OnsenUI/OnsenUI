@@ -9,6 +9,7 @@ v2.0.0-rc.6
  * ons-dialog: Make ons-dialog angular2 compatible.
  * ons-speed-dial, ons-speed-dial-item: Removed `_compiled` attribute.
  * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
+ * ons-carousel: Fix [#1423](https://github.com/OnsenUI/OnsenUI/issues/1423).
 
 v2.0.0-rc.5
 ----
