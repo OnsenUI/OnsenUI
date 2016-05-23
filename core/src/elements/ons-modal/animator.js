@@ -17,29 +17,21 @@ limitations under the License.
 
 import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import {fade} from 'ons/animations';
 
 export class ModalAnimator extends BaseAnimator {
-
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  show(modal, callback) {
-    callback();
+  show({element, callback}) {
+    callback && callback();
   }
 
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  hide(modal, callback) {
-    callback();
+  hide({element, callback}) {
+    callback && callback();
   }
 }
 
 /**
- * iOS style animator for dialog.
+ * Fade animator for dialog.
  */
 export class FadeModalAnimator extends ModalAnimator {
 
@@ -47,19 +39,22 @@ export class FadeModalAnimator extends ModalAnimator {
     super(util.extend({duration: 0.3}, options));
   }
 
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  show(modal, callback) {
+  show({element, callback}) {
     this._animate(modal, {animation: fade.in, callback}).play();
   }
 
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  hide(modal, callback) {
+  hide({element, callback}) {
     this._animate(modal, {animation: fade.out, callback}).play();
   }
 }
+
+export default new AnimatorFactory({
+  base: ModalAnimator,
+  animators: {
+    'default': 'none',
+    'fade': FadeModalAnimator,
+    'none': ModalAnimator
+  },
+  methods: ['show', 'hide']
+});
+

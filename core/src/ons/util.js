@@ -293,7 +293,22 @@ util.animationOptionsParse = optionsString => {
  * @param {HTMLElement}
  * @return {Object}
  */
-util.getAnimationOptions = element => util.animationOptionsParse(element.getAttribute('animation-options'));
+util.getAnimationOptions = (...args) => {
+  args = args.map(e => {
+    if (e instanceof HTMLElement) {
+      return util.animationOptionsParse(e.getAttribute('animation-options'));
+    }
+    return e && e.animationOptions;
+  });
+  args.unshift({});
+  return util.extend.apply(null, args);
+};
+
+const easyLock = {
+  lock: x => x,
+  waitUnlock: x => x(),
+  isLocked: x => false
+};
 
 /**
  * @param {Element} element
@@ -304,38 +319,42 @@ util.getAnimationOptions = element => util.animationOptionsParse(element.getAttr
  * @param {Function} [actionInfo.after]
  * @param {Boolean}  [actionInfo.events]
  * @param {Object}   [actionInfo.eventData]
+ * @param {Boolean}  [actionInfo.unlocked]
+ * @param {Any}      [actionInfo.resolveTo]
  * @return {Promise}
  */
 util.executeAction = (element, action, options, actionInfo = {}) => {
-  const {before, after, events, eventData} = actionInfo;
+  const {before, after, events, eventData, unlocked, rejectIfLocked} = actionInfo;
+  const resolveTo = actionInfo.hasOwnProperty('resolveTo') ? actionInfo.resolveTo : element;
   const callback = options.callback;
+  const lock = unlocked ? easyLock : element._doorLock || easyLock;
 
-  options.animationOptions = util.extend(util.getAnimationOptions(element), options.animationOptions || {});
+  options = util.extend({}, options, util.getAnimationOptions(element, options), {element});
 
   if (events && util.emitEvent(element, `pre${action}`, eventData)) {
     return Promise.reject(`Canceled in pre${action} event.`);
   }
+  if (rejectIfLocked && lock.isLocked()) {
+    return Promise.reject('Element is locked.');
+  }
 
   return new Promise(resolve => {
-    // element._doorLock = element._doorLock || new DoorLock();
+    lock.waitUnlock(() => {
+      const unlock = lock.lock();
+      const animator = element._animator(options);
+      options.callback = () => {
+        after && after();
+        unlock && unlock();
 
-    element._doorLock.waitUnlock(() => {
-      const unlock = element._doorLock.lock();
+        events && util.emitEvent(element, `post${action}`, eventData);
+
+        callback && callback();
+        resolve(resolveTo);
+      };
 
       before && before();
 
-      contentReady(element, () => {
-        element._animator(options)[action](element, () => {
-          after && after();
-
-          unlock();
-
-          events && util.emitEvent(element, `post${action}`, eventData);
-
-          callback && callback();
-          resolve(element);
-        });
-      });
+      contentReady(element, () => animator[action](options));
     });
   });
 };

@@ -18,8 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import animators from './animator';
+import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -34,12 +33,6 @@ const scheme = {
   '.popover__arrow': 'popover__arrow--*'
 };
 
-const _animatorDict = {
-  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
-  'none': animators.PopoverAnimator,
-  'fade-ios': animators.IOSFadePopoverAnimator,
-  'fade-md': animators.MDFadePopoverAnimator
-};
 
 const templateSource = util.createFragment(`
   <div class="popover-mask"></div>
@@ -220,16 +213,9 @@ class PopoverElement extends BaseElement {
     this._boundOnChange = this._onChange.bind(this);
     this._boundCancel = this._cancel.bind(this);
 
-    this._initAnimatorFactory();
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
-  _initAnimatorFactory() {
-    const factory = new AnimatorFactory(this, {
-      animators: _animatorDict,
-      methods: ['show', 'hide']
-    });
-    this._animator = (options) => factory.newAnimator(options);
-  }
 
   _onDeviceBackButton(event) {
     if (this.cancelable) {
@@ -504,9 +490,6 @@ class PopoverElement extends BaseElement {
     if (name === 'direction') {
       return this._boundOnChange();
     }
-    if (name === 'animation') {
-      this._initAnimatorFactory();
-    }
   }
 
 
@@ -525,16 +508,4 @@ window.OnsPopoverElement = document.registerElement('ons-popover', {
   prototype: PopoverElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {PopoverAnimator} Animator
- */
-window.OnsPopoverElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof animators.PopoverAnimator)) {
-    throw new Error('"Animator" param must inherit PopoverAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsPopoverElement.PopoverAnimator = animators.PopoverAnimator;
-
+animatorFactory.assign(window.OnsPopoverElement);

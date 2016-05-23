@@ -17,52 +17,50 @@ limitations under the License.
 
 import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
+import AnimatorFactory from 'ons/internal/animator-factory';
 
-export default class SplitterAnimator extends BaseAnimator {
+
+class SplitterAnimator extends BaseAnimator {
 
   constructor(options = {}) {
     super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)', duration: 0.3}, options));
+    this.side = options.element;
   }
 
-  updateOptions(options = {}) {
-    util.extend(this.options, options);
+  get mask() {
+    return this.side.parentNode.mask;
   }
 
-  /**
-   * @param {Element} sideElement
-   */
-  activate(sideElement) {
-    this._side = sideElement;
-    this._mask = sideElement.parentNode.mask;
+  get sign() {
+    return this.side._side === 'right' ? '-' : '';
   }
 
-  inactivate() {
-    this._side = this._mask = null;
+  translate({distance}) {
+    animit(this.side).queue({
+      transform: `translate3d(${this.sign + distance}px, 0, 0)`
+    }).play();
   }
 
-  get minus() {
-    return this._side._side === 'right' ? '-' : '';
-  }
-
-  translate(distance) {
-    animit(this._side)
-      .queue({
-        transform: `translate3d(${this.minus + distance}px, 0px, 0px)`
-      })
-      .play();
-  }
-
-  open(callback) {
+  open({callback} = {}) {
     this._animateAll(this, {
-      _mask: {from: {display: 'block'}, to: {opacity: 1}, timing: 'linear'},
-      _side: {to: {transform: `translate3d(${this.minus}100%, 0px, 0px)`}, callback},
+      mask: {from: {display: 'block'}, to: {opacity: 1}, timing: 'linear'},
+      side: {to: {transform: `translate3d(${this.sign}100%, 0, 0)`}, callback},
     });
   }
 
-  close(callback) {
+  close({callback} = {}) {
     this._animateAll(this, {
-      _mask: {to: {opacity: 0}, timing: 'linear', after: {display: 'none'}},
-      _side: {to: {transform: 'translate3d(0, 0, 0)'}, callback}
+      mask: {to: {opacity: 0}, timing: 'linear', after: {display: 'none'}},
+      side: {to: {transform: 'translate3d(0, 0, 0)'}, callback}
     });
   }
 }
+
+export default new AnimatorFactory({
+  base: SplitterAnimator,
+  animators: {
+    'default': 'overlay',
+    'overlay': SplitterAnimator
+  },
+  methods: ['open', 'close', 'translate']
+});

@@ -24,13 +24,12 @@ const elements = page => [page._content, page._background, page._toolbar];
  * Fade-in screen transition.
  */
 export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
-
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
+  push({enterPage, leavePage, callback}) {
     this._animate(elements(enterPage), {animation: union(fade.in, acceleration), restore: true, callback}).play();
   }
 
@@ -39,7 +38,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Object} leavePage
    * @param {Function} done
    */
-  pop(enterPage, leavePage, callback) {
+  pop({enterPage, leavePage, callback}) {
     this._animate(elements(leavePage), {animation: union(fade.out, acceleration), callback}).play();
   }
 }

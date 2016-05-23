@@ -17,24 +17,16 @@ limitations under the License.
 
 import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import {fade, union, translate} from 'ons/animations';
 
 export class DialogAnimator extends BaseAnimator {
-
-  /**
-   * @param {HTMLElement} dialog
-   * @param {Function} done
-   */
-  show(dialog, done) {
-    done();
+  show({element, callback}) {
+    callback && callback();
   }
 
-  /**
-   * @param {HTMLElement} dialog
-   * @param {Function} done
-   */
-  hide(dialog, done) {
-    done();
+  hide({element, callback}) {
+    callback && callback();
   }
 }
 
@@ -47,12 +39,8 @@ export class AndroidDialogAnimator extends DialogAnimator {
     super(util.extend({timing: 'ease-in-out', duration: 0.3}, options));
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  show(dialog, callback) {
-    this._animateAll(dialog, {
+  show({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.in,
       _dialog: {
         animation: union(fade.in, translate({from: '-50%, -60%', to: '-50%, -50%'})),
@@ -62,12 +50,8 @@ export class AndroidDialogAnimator extends DialogAnimator {
     });
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  hide(dialog, callback) {
-    this._animateAll(dialog, {
+  hide({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.out,
       _dialog: {
         animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, -60%'})),
@@ -87,12 +71,8 @@ export class IOSDialogAnimator extends DialogAnimator {
     super({timing: 'ease-in-out', duration: 0.3}, options);
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  show(dialog, callback) {
-    this._animateAll(dialog, {
+  show({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.in,
       _dialog: {
         animation: union(fade.in, translate({from: '-50%, 300%', to: '-50%, -50%'})),
@@ -102,12 +82,8 @@ export class IOSDialogAnimator extends DialogAnimator {
     });
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  hide(dialog, callback) {
-    this._animateAll(dialog, {
+  hide({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.out,
       _dialog: {
         animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, 300%'})),
@@ -127,12 +103,8 @@ export class SlideDialogAnimator extends DialogAnimator {
     super({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options);
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  show(dialog, callback) {
-    this._animateAll(dialog, {
+  show({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.in,
       _dialog: {
         animation: union(fade.in, translate({from: '-50%, -350%', to: '-50%, -50%'})),
@@ -142,12 +114,8 @@ export class SlideDialogAnimator extends DialogAnimator {
     });
   }
 
-  /**
-   * @param {Object} dialog
-   * @param {Function} callback
-   */
-  hide(dialog, callback) {
-    this._animateAll(dialog, {
+  hide({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.out,
       _dialog: {
         animation: union(fade.out, translate({from: '-50%, -50%', to: '-50%, -350%'})),
@@ -157,3 +125,16 @@ export class SlideDialogAnimator extends DialogAnimator {
     });
   }
 }
+
+export default new AnimatorFactory({
+  base: DialogAnimator,
+  animators: {
+    'default': 'fade',
+    'fade-ios': IOSDialogAnimator,
+    'fade-md': AndroidDialogAnimator,
+    'slide': SlideDialogAnimator,
+    'none': DialogAnimator
+  },
+  methods: ['show', 'hide']
+});
+

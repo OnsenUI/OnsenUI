@@ -18,8 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
+import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -39,11 +38,6 @@ const scheme = {
   '.alert-dialog-mask': 'alert-dialog-mask--*'
 };
 
-const _animatorDict = {
-  'none': AlertDialogAnimator,
-  'default': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'fade': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator
-};
 
 /**
  * @element ons-alert-dialog
@@ -200,20 +194,6 @@ class AlertDialogElement extends BaseElement {
 
   }
 
-  /**
-   * @return {Element}
-   */
-  get _titleElement() {
-    return util.findChild(this._dialog.children[0], '.alert-dialog-title');
-  }
-
-  /**
-   * @return {Element}
-   */
-  get _contentElement() {
-    return util.findChild(this._dialog.children[0], '.alert-dialog-content');
-  }
-
   createdCallback() {
     contentReady(this, () => this._compile());
 
@@ -221,14 +201,7 @@ class AlertDialogElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._boundCancel = this._cancel.bind(this);
 
-    this._updateAnimatorFactory();
-  }
-
-  _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory(this, {
-      animators: _animatorDict,
-      methods: ['show', 'hide']
-    });
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
   _compile() {
@@ -239,7 +212,7 @@ class AlertDialogElement extends BaseElement {
     /**
      * Expected result after compile:
      *
-     * <ons-alert-dialog style="none">
+     * <ons-alert-dialog style="display: none">
      *   <div class="alert-dialog-mask"></div>
      *   <div class="alert-dialog">
      *     <div class="alert-dialog-container">...</div>
@@ -256,21 +229,15 @@ class AlertDialogElement extends BaseElement {
     }
 
     if (!this._mask) {
-      const mask = document.createElement('div');
-      mask.classList.add('alert-dialog-mask');
-      this.insertBefore(mask, this.children[0]);
+      this.insertBefore(util.create('.alert-dialog-mask'), this.children[0]);
     }
 
     if (!this._dialog) {
-      const dialog = document.createElement('div');
-      dialog.classList.add('alert-dialog');
-      this.insertBefore(dialog, null);
+      this.insertBefore(util.create('.alert-dialog'), null);
     }
 
     if (!util.findChild(this._dialog, '.alert-dialog-container')) {
-      const container = document.createElement('div');
-      container.classList.add('alert-dialog-container');
-      this._dialog.appendChild(container);
+      this._dialog.appendChild(util.create('.alert-dialog-container'));
     }
 
     this._dialog.children[0].appendChild(content);
@@ -338,50 +305,15 @@ class AlertDialogElement extends BaseElement {
    *   [ja][/ja]
    */
   show(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'preshow', {
-      alertDialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryShow = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
+    return util.executeAction(this, 'show', options, {
+      events: true,
+      eventData: {alertDialog: this},
+      before: () => {
         this.style.display = 'block';
         this._mask.style.opacity = '1';
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.show(this, () => {
-              this._visible = true;
-              unlock();
-
-              util.triggerElementEvent(this, 'postshow', {alertDialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryShow()));
-      });
-    } else {
-      return Promise.reject('Canceled in preshow event.');
-    }
+      },
+      after: () => this._visible = true
+    });
   }
 
   /**
@@ -407,48 +339,14 @@ class AlertDialogElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'prehide', {
-      alertDialog: this,
-      cancel: function() {
-        cancel = true;
+    return util.executeAction(this, 'hide', options, {
+      events: true,
+      eventData: {alertDialog: this},
+      after: () => {
+        this.style.display = 'none';
+        this._visible = false;
       }
     });
-
-    if (!cancel) {
-      const tryHide = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.hide(this, () => {
-              this.style.display = 'none';
-              this._visible = false;
-              unlock();
-
-              util.triggerElementEvent(this, 'posthide', {alertDialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryHide()));
-      });
-    } else {
-      return Promise.reject('Canceled in prehide event.');
-    }
   }
 
   /**
@@ -474,7 +372,6 @@ class AlertDialogElement extends BaseElement {
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
-
 
   _onDeviceBackButton(event) {
     if (this.cancelable) {
@@ -508,15 +405,12 @@ class AlertDialogElement extends BaseElement {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
 
-    this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
+    this._mask.removeEventListener('click', this._boundCancel, false);
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'animation') {
-      this._updateAnimatorFactory();
     }
   }
 }
@@ -525,15 +419,4 @@ const OnsAlertDialogElement = window.OnsAlertDialogElement = document.registerEl
   prototype: AlertDialogElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {DialogAnimator} Animator
- */
-OnsAlertDialogElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof AlertDialogAnimator)) {
-    throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-OnsAlertDialogElement.AlertDialogAnimator = AlertDialogAnimator;
+animatorFactory.assign(OnsAlertDialogElement);

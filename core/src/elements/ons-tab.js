@@ -158,16 +158,9 @@ class TabElement extends BaseElement {
     autoStyle.prepare(this);
 
     const fragment = document.createDocumentFragment();
-    let hasChildren = false;
 
-    while (this.childNodes[0]) {
-      const node = this.childNodes[0];
-      this.removeChild(node);
-      fragment.appendChild(node);
-
-      if (node.nodeType == Node.ELEMENT_NODE) {
-        hasChildren = true;
-      }
+    while (this.firstChild) {
+      fragment.appendChild(this.firstChild);
     }
 
     const template = templateSource.cloneNode(true);
@@ -178,7 +171,7 @@ class TabElement extends BaseElement {
 
     const button = util.findChild(this, '.tab-bar__button');
 
-    if (hasChildren) {
+    if (fragment.children.length) {
       button.appendChild(fragment);
       this._hasDefaultTemplate = false;
     } else {
@@ -213,34 +206,19 @@ class TabElement extends BaseElement {
       button.appendChild(template.querySelector('.tab-bar__label'));
     }
 
-    const self = this;
-    const icon = this.getAttribute('icon');
-    const label = this.getAttribute('label');
-
-    if (typeof icon === 'string') {
-      getIconElement().setAttribute('icon', icon);
+    if (this.hasAttribute('icon')) {
+      this.querySelector('ons-icon').setAttribute('icon', this.getAttribute('icon'));
     } else {
       const wrapper = button.querySelector('.tab-bar__icon');
-      if (wrapper) {
-        wrapper.remove();
-      }
+      wrapper && wrapper.remove();
     }
 
-    if (typeof label === 'string') {
-      getLabelElement().textContent = label;
+    const label = this.querySelector('.tab-bar__label');
+
+    if (this.hasAttribute('label')) {
+      label.textContent = this.getAttribute('label');
     } else {
-      const label = getLabelElement();
-      if (label) {
-        label.remove();
-      }
-    }
-
-    function getLabelElement() {
-      return self.querySelector('.tab-bar__label');
-    }
-
-    function getIconElement() {
-      return self.querySelector('ons-icon');
+      label && label.remove();
     }
   }
 
@@ -309,7 +287,7 @@ class TabElement extends BaseElement {
     const tabbar = this._findTabbarElement();
     const index = this._findTabIndex();
 
-    return tabbar._contentElement.children[index];
+    return tabbar._content.children[index];
   }
 
   /**
@@ -358,7 +336,7 @@ class TabElement extends BaseElement {
                 OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
                   this.pageElement = pageElement;
                   this.pageElement.style.display = 'none';
-                  tabbar._contentElement.appendChild(this.pageElement);
+                  tabbar._content.appendChild(this.pageElement);
                 });
               });
             }

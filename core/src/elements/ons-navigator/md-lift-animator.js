@@ -41,14 +41,14 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, done) {
+  push({enterPage, leavePage, callback}) {
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     this._animateAll({enterPage, leavePage}, {
       enterPage: {
         animation: translate({from: '0, 100%'}),
         restore: true,
-        callback: () => {this.backgroundMask.remove(); done && done();}
+        callback: () => {this.backgroundMask.remove(); callback && callback();}
       },
       leavePage: {animation: fade.out, delay: 0}
     });
@@ -59,13 +59,13 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
+  pop({enterPage, leavePage, callback}) {
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
     this._animateAll({enterPage, leavePage}, {
       enterPage: {
         animation: union(fade.in, acceleration),
-        callback: () => {this.backgroundMask.remove(); done && done();}
+        callback: () => {this.backgroundMask.remove(); callback && callback();}
       },
       leavePage: translate({to: '0, 100%'})
     });

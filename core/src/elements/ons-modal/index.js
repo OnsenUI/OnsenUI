@@ -17,8 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import {ModalAnimator, FadeModalAnimator} from './animator';
+import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -27,12 +26,6 @@ import DoorLock from 'ons/doorlock';
 const scheme = {
   '': 'modal--*',
   'modal__content': 'modal--*__content'
-};
-
-const _animatorDict = {
-  'default': ModalAnimator,
-  'fade': FadeModalAnimator,
-  'none': ModalAnimator
 };
 
 /**
@@ -92,11 +85,7 @@ class ModalElement extends BaseElement {
     }
 
     this._doorLock = new DoorLock();
-
-    this._animatorFactory = new AnimatorFactory(this, {
-      animators: _animatorDict,
-      methods: ['show', 'hide']
-    });
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
 
@@ -198,30 +187,33 @@ class ModalElement extends BaseElement {
    *   [ja][/ja]
    */
   show(options = {}) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
+    return util.executeAction(this, 'show', options, {
+      before: () => this.style.display = 'table'
+    });
+  }
 
-    const callback = options.callback || function() {};
-
-    const tryShow = () => {
-      const unlock = this._doorLock.lock();
-      const animator = this._animatorFactory.newAnimator(options);
-
-      this.style.display = 'table';
-      return new Promise(resolve => {
-        animator.show(this, () => {
-          unlock();
-
-          callback();
-          resolve(this);
-        });
-      });
-    };
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryShow()));
+  /**
+   * @method hide
+   * @signature hide([options])
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are `"none"` and `"fade"`.[/en]
+   *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @description
+   *   [en]Hide modal.[/en]
+   *   [ja]モーダルを非表示にします。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the hidden element[/en]
+   *   [ja][/ja]
+   */
+  hide(options = {}) {
+    return util.executeAction(this, 'hide', options, {
+      before: () => this.style.display = 'none'
     });
   }
 
@@ -245,55 +237,6 @@ class ModalElement extends BaseElement {
     return this.visible ? this.hide(options) : this.show(options);
   }
 
-  /**
-   * @method hide
-   * @signature hide([options])
-   * @param {Object} [options]
-   *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are `"none"` and `"fade"`.[/en]
-   *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
-   * @description
-   *   [en]Hide modal.[/en]
-   *   [ja]モーダルを非表示にします。[/ja]
-   * @return {Promise}
-   *   [en]Resolves to the hidden element[/en]
-   *   [ja][/ja]
-   */
-  hide(options = {}) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const callback = options.callback || function() {};
-
-    const tryHide = () => {
-      const unlock = this._doorLock.lock();
-      const animator = this._animatorFactory.newAnimator(options);
-
-      return new Promise(resolve => {
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          unlock();
-
-          callback();
-          resolve(this);
-        });
-      });
-    };
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryHide()));
-    });
-  }
-
-  // executeAction()
-
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -305,16 +248,4 @@ window.OnsModalElement = document.registerElement('ons-modal', {
   prototype: ModalElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsModalElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof ModalAnimator)) {
-    throw new Error('"Animator" param must inherit OnsModalElement.ModalAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsModalElement.ModalAnimator = ModalAnimator;
-
+animatorFactory.assign(window.OnsModalElement);

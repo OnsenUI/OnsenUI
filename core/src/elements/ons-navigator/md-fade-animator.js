@@ -34,7 +34,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
+  push({enterPage, leavePage, callback}) {
     this._animateAll({enterPage}, {
       enterPage: {
         animation: union(translate({from: '0, 42px'}), fade.in),
@@ -49,7 +49,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Object} leavePage
    * @param {Function} done
    */
-  pop(enterPage, leavePage, callback) {
+  pop({enterPage, leavePage, callback}) {
     this._animateAll({move: leavePage, fade: leavePage}, {
       move: {delay: 0.15, animation: translate({to: '0, 38px'}), callback},
       fade: {delay: 0.04, animation: fade.out}

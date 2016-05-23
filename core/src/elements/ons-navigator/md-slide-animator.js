@@ -38,7 +38,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
+  push({enterPage, leavePage, callback}) {
     leavePage.parentElement.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
     this._animateAll({enterPage, leavePage, mask: this.backgroundMask}, {
@@ -64,7 +64,7 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  pop(enterPage, leavePage, callback) {
+  pop({enterPage, leavePage, callback}) {
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
 
     this._animateAll({enterPage, leavePage, mask: this.backgroundMask}, {

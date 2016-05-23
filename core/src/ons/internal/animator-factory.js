@@ -17,6 +17,9 @@ limitations under the License.
 
 import util from '../util';
 import internal from '../internal';
+import platform from '../platform';
+
+const platformSuffix = () => platform.isAndroid() ? '-md' : '-ios';
 
 export default class AnimatorFactory {
 
@@ -26,42 +29,42 @@ export default class AnimatorFactory {
    * @param {Object} options.animators The dictionary for animator classes
    * @param {Object} options.methods
    */
-  constructor(element, options) {
-    this._element = element;
-    this._animators = options.animators;
-    this._methods = options.methods;
+  constructor(options) {
+    this.animators = options.animators;
+    this.methods = options.methods;
+    this.base = options.base;
   }
 
-  getAnimator(animation) {
+  getAnimator(animation, options = {}) {
     while (typeof animation === 'function') {
-      animation = new animation(); // eslint-disable-line new-cap
+      animation = new animation(options); // eslint-disable-line new-cap
     }
     if (typeof animation === 'string') {
-      return this.getAnimator(this._animators[animation]);
+      if (this.animators[animation]) {
+        return this.getAnimator(this.animators[animation], options);
+      }
+      return this.getAnimator(this.animators[animation + platformSuffix()], options);
     }
     if (!animation) {
       throw new Error('animation not found');
     }
-    if (this._methods.every(e => typeof animation[e] === 'function')) {
+    if (this.methods.every(e => typeof animation[e] === 'function')) {
       return animation;
     }
-    throw new Error(`"animator" is missing some of these methods: ${JSON.stringify(this._methods)}.`);
+    throw new Error(`"animator" is missing some of these methods: ${JSON.stringify(this.methods)}.`);
   }
 
-  getAnimatorOptions(options) {
+  getAnimatorOptions(element, options) {
     return util.extend(
-      {},
-      util.getAnimationOptions(this._element),
-      this._animationOptions || {},
-      options.animationOptions || {},
+      util.getAnimationOptions(element, options),
       internal.config.animationsDisabled ? {duration: 0, delay: 0} : {}
     );
   }
 
-  newAnimator(options = {}) {
-    const animator = this.getAnimator(options.animation || this._element.getAttribute('animation') || 'default');
-    animator.options = util.extend(animator.options || {}, this.getAnimatorOptions(options));
-    return animator;
+  newAnimator(element, options = {}) {
+    options = util.extend({element}, options, this.getAnimatorOptions(element, options));
+    delete options.animationOptions;
+    return this.getAnimator(options.animation || element.getAttribute('animation') || 'default', options);
   }
 
   addAnimator(name, Animator) {
@@ -72,19 +75,19 @@ export default class AnimatorFactory {
       // let animator = new Animator();
 
       this.getAnimator.call({
-        _animators: util.extend({}, this._animators, {[name]: Animator}),
-        _methods: this._methods
+        animators: util.extend({}, this.animators, {[name]: Animator}),
+        methods: this.methods
       }, name);
 
-      this._animators[name] = Animator;
+      this.animators[name] = Animator;
     }
   }
 
-  /**
-   * @param {String} jsonString
-   * @return {Object/null}
-   */
-  static parseAnimationOptionsString(jsonString) {
-    return util.animationOptionsParse(jsonString);
+  assign(object) {
+    util.extend(object, {
+      addAnimator: (...args) => this.addAnimator(...args),
+      baseAnimator: this.base
+    });
   }
 }
+

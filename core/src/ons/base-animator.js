@@ -23,34 +23,36 @@ export default class BaseAnimator {
     util.extend(this, this.options);
   }
 
-  _animate(element, {from, to, after, options, callback, restore = false, animation}) {
-    options = util.extend({}, this.options, options);
+  _animate(element, options) {
+    options = util.extend({}, this.options, options, options.animation);
+    const {from, to, after, restore, duration, delay, timing} = options;
+    let callback = options.callback;
 
-    if (animation) {
-      from = animation.from;
-      to = animation.to;
-    }
-
-    animation = animit(element);
+    let animation = animit(element);
     if (restore) {
       animation = animation.saveStyle();
     }
     if (from) {
       animation = animation.queue(from);
     }
-    animation = animation.wait(options.delay).queue({
+    animation = animation.wait(delay).queue({
       css: to,
-      duration: options.duration,
-      timing: options.timing
+      duration: duration,
+      timing: timing
     });
     if (restore) {
       animation = animation.restoreStyle();
     }
     if (after) {
-      animation = animation.queue({css: after});
+      if (typeof after !== 'function') {
+        animation = animation.queue({css: after});
+      } else {
+        callback = callback ? () => {after(element); options.callback();} : () => after(element);
+      }
     }
+
     if (callback) {
-      animation = animation.queue((done) => {
+      animation = animation.queue(done => {
         callback();
         done();
       });
@@ -58,7 +60,32 @@ export default class BaseAnimator {
     return animation;
   }
 
-  _animateAll(element, animations) {
-    Object.keys(animations).forEach(key => this._animate(element[key], animations[key]).play());
+  _animateAll(elements, animations) {
+    util.each(animations, (key, animation) => {
+      animation = util.extend({}, animation, {
+        callback: animation.callback === true ? this.callback : animation.callback
+      });
+      this._animate(elements[key], animation).play()
+    });
+  }
+
+  animate(options, elements, animations) {
+    if (arguments.length < 3) {
+      animations = elements;
+      elements = options.elements || options.element || options;
+      // options = util.filter(options, ['from', 'to', 'after', 'duration', 'delay', 'timing', 'animation', 'callback']);
+    }
+    if (Array.isArray(elements)) {
+      return this._animate(elements, animations).play();
+    }
+
+    util.each(animations, (key, animation) => {
+      animation = util.extend({}, options, animation, {
+        callback: animation.callback === true ? options.callback : animation.callback
+      });
+      this._animate(elements[key], animation).play();
+    });
   }
 }
+
+export const animate = (...args) => (new BaseAnimator()).animate(...args);

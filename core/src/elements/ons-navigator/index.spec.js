@@ -584,19 +584,6 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a NavigatorAnimator', () => {
-      expect(() => window.OnsNavigatorElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.OnsNavigatorElement.NavigatorTransitionAnimator {
-      }
-
-      window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
-    });
-  });
-
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');

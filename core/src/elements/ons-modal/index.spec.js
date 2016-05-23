@@ -150,17 +150,4 @@ describe('OnsModalElement', () => {
       expect(spy).to.have.been.called.once;
     });
   });
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a ModalAnimator', () => {
-      expect(() => window.OnsModalElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.OnsModalElement.ModalAnimator {
-      }
-
-      window.OnsModalElement.registerAnimator('hoge', MyAnimator);
-    });
-  });
 });

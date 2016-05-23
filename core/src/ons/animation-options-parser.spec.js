@@ -45,10 +45,9 @@ describe('ons._animationOptionsParser', () => {
       `<ons-alert-dialog animation="default" animation-options="{delay: 1, duration: 1, timing: 'ease-in'}">
       </ons-alert-dialog>`
     );
-    const spy = chai.spy.on(alertDialog._animatorFactory, 'newAnimator');
-    alertDialog.show();
-    expect(spy).to.have.been.called.with({animationOptions: {delay: 1, duration: 1, timing: 'ease-in'}});
-    alertDialog.remove();
+
+    const attribute = ons._animationOptionsParser(alertDialog.getAttribute('animation-options'));
+    expect(attribute).to.deep.equal({delay: 1, duration: 1, timing: 'ease-in'});
   });
 
   it('throws error if string is invalid', () => {

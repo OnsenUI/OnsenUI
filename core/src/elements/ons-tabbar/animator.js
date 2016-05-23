@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import {union, fade, acceleration, translate} from 'ons/animations';
 
 export class TabbarAnimator extends BaseAnimator {
@@ -32,19 +33,18 @@ export class TabbarAnimator extends BaseAnimator {
    * @param {Number} leavePageIndex
    * @param {Function} done
    */
-  apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
-    done && done();
+  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
+    callback && callback();
   }
 }
 
 
 export class TabbarFadeAnimator extends TabbarAnimator {
 
-  apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
-    const pages = {enter: enterPage, leave: leavePage};
-    this._animateAll(pages, {
-      leave: {animation: union(fade.out, acceleration)},
-      enter: {animation: union(fade.in, acceleration), restore: true, callback: done}
+  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
+    this._animateAll({oldPage, newPage}, {
+      oldPage: {animation: union(fade.out, acceleration)},
+      newPage: {animation: union(fade.in, acceleration), restore: true, callback}
     });
   }
 }
@@ -55,13 +55,24 @@ export class TabbarSlideAnimator extends TabbarAnimator {
     super(util.extend({timing: 'ease-in', duration: 0.15}, options));
   }
 
-  apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
-    const signs = enterIndex > leaveIndex ? '- ' : ' -';
-    const pages = {enter: enterPage, leave: leavePage};
+  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
+    const signs = newIndex > oldIndex ? '- ' : ' -';
 
-    this._animateAll(pages, {
-      leave: {animation: translate({to: signs[0] + '100%, 0'})},
-      enter: {animation: translate({from: signs[1] + '100%, 0'}), restore: true, callback: done}
+    this._animateAll({oldPage, newPage}, {
+      oldPage: {animation: translate({to: signs[0] + '100%, 0'})},
+      newPage: {animation: translate({from: signs[1] + '100%, 0'}), restore: true, callback}
     });
   }
 }
+
+export default new AnimatorFactory({
+  base: TabbarAnimator,
+  animators: {
+    'default': 'none',
+    'fade': TabbarFadeAnimator,
+    'slide': TabbarSlideAnimator,
+    'none': TabbarAnimator
+  },
+  methods: ['switchTab']
+});
+

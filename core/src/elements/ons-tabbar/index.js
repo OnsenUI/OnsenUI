@@ -20,21 +20,13 @@ import platform from 'ons/platform';
 import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
-import {TabbarAnimator, TabbarFadeAnimator, TabbarSlideAnimator} from './animator';
+import animatorFactory from './animator';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.tab-bar__content': 'tab-bar--*__content',
   '.tab-bar': 'tab-bar--*'
-};
-
-const _animatorDict = {
-  'default': TabbarAnimator,
-  'fade': TabbarFadeAnimator,
-  'slide': TabbarSlideAnimator,
-  'none': TabbarAnimator
 };
 
 const rewritables = {
@@ -65,11 +57,6 @@ const rewritables = {
     callback(target);
   }
 };
-
-const generateId = (() => {
-  var i = 0;
-  return () => 'ons-tabbar-gen-' + (i++);
-})();
 
 /**
  * @element ons-tabbar
@@ -199,8 +186,6 @@ class TabbarElement extends BaseElement {
    */
 
   createdCallback() {
-    this._tabbarId = generateId();
-
     contentReady(this, () => {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
@@ -218,16 +203,11 @@ class TabbarElement extends BaseElement {
 
       autoStyle.prepare(this);
       ModifierUtil.initModifier(this, scheme);
-
-      this._animatorFactory = new AnimatorFactory(this, {
-        animators: _animatorDict,
-        methods: ['apply']
-      });
     });
-
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
-  get _contentElement() {
+  get _content() {
     return util.findChild(this, '.tab-bar__content');
   }
 
@@ -268,7 +248,7 @@ class TabbarElement extends BaseElement {
     });
   }
 
-  _getTabbarElement() {
+  get _tabbar() {
     return util.findChild(this, '.tab-bar');
   }
 
@@ -312,7 +292,7 @@ class TabbarElement extends BaseElement {
   _loadPageDOMAsync(pageElement, options = {}) {
     return new Promise(resolve => {
       rewritables.link(this, pageElement, options, pageElement => {
-        this._contentElement.appendChild(pageElement);
+        this._content.appendChild(pageElement);
 
         if (this.getActiveTabIndex() !== -1) {
           resolve(this._switchPage(pageElement, options));
@@ -329,17 +309,10 @@ class TabbarElement extends BaseElement {
   }
 
   /**
-   * @return {String}
-   */
-  getTabbarId() {
-    return this._tabbarId;
-  }
-
-  /**
    * @return {Element/null}
    */
   _getCurrentPageElement() {
-    const page = util.findChild(this._contentElement, e => e.style.display !== 'none') || null;
+    const page = util.findChild(this._content, e => e.style.display !== 'none') || null;
 
     if (page && page.nodeName.toLowerCase() !== 'ons-page') {
       throw new Error('Invalid state: page element must be a "ons-page" element.');
@@ -349,7 +322,7 @@ class TabbarElement extends BaseElement {
   }
 
   get pages() {
-    return util.arrayFrom(this._contentElement.children);
+    return util.arrayFrom(this._content.children);
   }
 
   /**
@@ -358,31 +331,25 @@ class TabbarElement extends BaseElement {
    * @param {String} [options.animation]
    * @param {Function} [options.callback]
    * @param {Object} [options.animationOptions]
-   * @param {Number} options.selectedTabIndex
-   * @param {Number} options.previousTabIndex
+   * @param {Number} options.newindex
+   * @param {Number} options.oldIndex
    * @return {Promise} Resolves to the new page element.
    */
-  _switchPage(element, options) {
+  _switchPage(newPage, options) {
     const oldPage = this._oldPage;
-    const callback = options.callback;
-    var animator = this._animatorFactory.newAnimator(options);
 
-    return new Promise(resolve => {
-      oldPage && oldPage._hide();
-
-      animator.apply(element, oldPage, options.selectedTabIndex, options.previousTabIndex, () => {
+    return util.executeAction(this, 'switchTab', util.extend({newPage, oldPage}, options), {
+      before: () => oldPage && oldPage._hide(),
+      after: () => {
         if (oldPage) {
           oldPage.style.display = 'none';
         }
-        element.style.display = 'block';
+        newPage.style.display = 'block';
 
-        element._show();
-        this._oldPage = element;
-
-        callback && callback();
-
-        resolve(element);
-      });
+        newPage._show();
+        this._oldPage = newPage;
+      },
+      resolveTo: newPage
     });
   }
 
@@ -412,128 +379,64 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(index, options = {}) {
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    if (!options.animation && this.hasAttribute('animation')) {
-      options.animation = this.getAttribute('animation');
-    }
-
-    var previousTab = this._getActiveTabElement(),
-      selectedTab = this._getTabElement(index),
-      previousTabIndex = this.getActiveTabIndex(),
-      selectedTabIndex = index,
-      previousPageElement = this._getCurrentPageElement();
+    const selectedTab = this._tabbar.children[index],
+      oldIndex = this.getActiveTabIndex(),
+      previousPage = this._getCurrentPageElement(),
+      eventData = {index, tabItem: selectedTab},
+      callback = options.callback;
 
     if (!selectedTab) {
       return Promise.reject('Specified index does not match any tab.');
     }
 
-    if (selectedTabIndex === previousTabIndex) {
-      util.triggerElementEvent(this, 'reactive', {
-        index: selectedTabIndex,
-        tabItem: selectedTab
-      });
+    if (index === oldIndex) {
+      util.triggerElementEvent(this, 'reactive', eventData);
 
-      return Promise.resolve(previousPageElement);
+      return Promise.resolve(previousPage);
     }
 
-    var canceled = false;
-
-    util.triggerElementEvent(this, 'prechange', {
-      index: selectedTabIndex,
-      tabItem: selectedTab,
-      cancel: () => canceled = true
-    });
-
-    if (canceled) {
-      selectedTab.setInactive();
-      if (previousTab) {
-        previousTab.setActive();
-      }
+    if (util.emitEvent(this, 'prechange', eventData)) {
       return Promise.reject('Canceled in prechange event.');
     }
 
     selectedTab.setActive();
 
-    var needLoad = !selectedTab.isLoaded() && !options.keepPage;
-
-    util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
+    util.arrayFrom(this._tabbar.children).forEach(tab => {
       if (tab != selectedTab) {
         tab.setInactive();
-      } else {
-        if (!needLoad) {
-          util.triggerElementEvent(this, 'postchange', {
-            index: selectedTabIndex,
-            tabItem: selectedTab
-          });
-        }
       }
     });
 
-    if (needLoad) {
-      var removeElement = false;
-
-      if ((!previousTab && previousPageElement) || (previousTab && previousTab._pageElement !== previousPageElement)) {
-        removeElement = true;
-      }
-
-      var params = {
-        callback: () => {
-          util.triggerElementEvent(this, 'postchange', {
-            index: selectedTabIndex,
-            tabItem: selectedTab
-          });
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        },
-        previousTabIndex: previousTabIndex,
-        selectedTabIndex: selectedTabIndex
-      };
-
-      if (options.animation) {
-        params.animation = options.animation;
-      }
-
-      params.animationOptions = options.animationOptions || {};
-
-
-      const link = (element, callback) => {
-        rewritables.link(this, element, options, callback);
-      };
-
-      return new Promise(resolve => {
-        selectedTab._loadPageElement(pageElement => {
-          resolve(this._loadPersistentPageDOM(pageElement, params));
-        }, link);
-      });
+    if (selectedTab.isLoaded() || options.keepPage) {
+      util.triggerElementEvent(this, 'postchange', eventData);
+      return Promise.resolve(previousPage);
     }
 
-    return Promise.resolve(previousPageElement);
+    const params = util.extend({}, options, {
+      oldIndex: oldIndex,
+      newIndex: index,
+      callback: () => {
+        util.triggerElementEvent(this, 'postchange', eventData);
+        callback && callback();
+      }
+    });
+
+    const link = (element, callback) => {
+      rewritables.link(this, element, options, callback);
+    };
+
+    return new Promise(resolve => {
+      selectedTab._loadPageElement(page => {
+        if (!util.isAttached(page)) {
+          this._content.appendChild(page);
+        }
+
+        page.removeAttribute('style');
+        resolve(this._switchPage(page, params));
+      }, link);
+    });
   }
 
-  /**
-   * @param {Element} element
-   * @param {Object} options
-   * @param {Object} options.animation
-   */
-  _loadPersistentPageDOM(element, options = {}) {
-
-    if (!util.isAttached(element)) {
-      this._contentElement.appendChild(element);
-    }
-
-    element.removeAttribute('style');
-    return this._switchPage(element, options);
-  }
 
   /**
    * @method setTabbarVisibility
@@ -544,8 +447,8 @@ class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
-    this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
-    this._getTabbarElement().style.display = visible ? '' : 'none';
+    this._content.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
+    this._tabbar.style.display = visible ? '' : 'none';
   }
 
   /**
@@ -559,7 +462,7 @@ class TabbarElement extends BaseElement {
    *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
    */
   getActiveTabIndex() {
-    var tabs = this._getTabbarElement().children;
+    var tabs = this._tabbar.children;
 
     for (var i = 0; i < tabs.length; i++) {
       if (tabs[i] instanceof window.OnsTabElement && tabs[i].isActive && tabs[i].isActive()) {
@@ -568,20 +471,6 @@ class TabbarElement extends BaseElement {
     }
 
     return -1;
-  }
-
-  /**
-   * @return {Number} When active tab is not found, returns -1.
-   */
-  _getActiveTabElement() {
-    return this._getTabElement(this.getActiveTabIndex());
-  }
-
-  /**
-   * @return {Element}
-   */
-  _getTabElement(index) {
-    return this._getTabbarElement().children[index];
   }
 
   detachedCallback() { }
@@ -603,7 +492,7 @@ class TabbarElement extends BaseElement {
   }
 
   _destroy() {
-    const pages = this._contentElement.children;
+    const pages = this._content.children;
     for (let i = pages.length - 1; i >= 0; i--) {
       pages[i]._destroy();
     }
@@ -620,19 +509,8 @@ class TabbarElement extends BaseElement {
 window.OnsTabbarElement = document.registerElement('ons-tabbar', {
   prototype: TabbarElement.prototype
 });
-
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsTabbarElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof TabbarAnimator)) {
-    throw new Error('"Animator" param must inherit OnsTabbarElement.TabbarAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
+animatorFactory.assign(window.OnsTabbarElement);
 
 window.OnsTabbarElement.rewritables = rewritables;
-window.OnsTabbarElement.TabbarAnimator = TabbarAnimator;
 
 export default OnsTabbarElement;

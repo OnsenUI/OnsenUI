@@ -24,12 +24,12 @@ export default class NavigatorTransitionAnimator extends BaseAnimator {
     super(util.extend({duration: 0.4}, options));
   }
 
-  push(enterPage, leavePage, callback) {
-    callback();
+  push({enterPage, leavePage, callback}) {
+    callback && callback();
   }
 
-  pop(enterPage, leavePage, callback) {
-    callback();
+  pop({enterPage, leavePage, callback}) {
+    callback && callback();
   }
 }
 

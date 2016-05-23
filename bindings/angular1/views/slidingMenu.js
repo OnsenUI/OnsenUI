@@ -221,11 +221,12 @@ limitations under the License.
 
           this._menuPage.css({opacity: 1});
 
-          var animationChooser = new AnimationChooser(element[0], {
+          var animationChooser = new AnimationChooser({
+            base: SlidingMenuAnimator,
             animators: SlidingMenuView._animatorDict,
             methods: ['setup', 'onResized', 'openMenu', 'closeMenu', 'destroy', 'translateMenu', 'copy']
           });
-          this._animator = animationChooser.newAnimator();
+          this._animator = animationChooser.newAnimator(element[0]);
           this._animator.setup(
             this._element,
             this._mainPage,

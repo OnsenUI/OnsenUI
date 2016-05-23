@@ -70,7 +70,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
+  push({enterPage, leavePage, callback}) {
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
     // const callback = () => { this.backgroundMask.remove(); cb && cb(); };
 
@@ -132,18 +132,17 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
-   * @param {Function} done
+   * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
+  pop({enterPage, leavePage, callback}) {
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
-    // const done = () => { this.backgroundMask.remove(); cb && cb(); };
 
     const mask = {
       restore: true,
       animation: union(acceleration, animate({opacity: [0.1, 0]})),
       callback: () => {
         this.backgroundMask.remove();
-        done && done();
+        callback && callback();
       }
     };
 

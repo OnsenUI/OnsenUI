@@ -16,6 +16,7 @@ limitations under the License.
 */
 import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
+import AnimatorFactory from 'ons/internal/animator-factory';
 import {fade, union, scale} from 'ons/animations';
 
 class PopoverAnimator extends BaseAnimator {
@@ -24,26 +25,26 @@ class PopoverAnimator extends BaseAnimator {
     super(util.extend({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options));
   }
 
-  show(popover, callback) {
+  show({element, callback}) {
     callback();
   }
 
-  hide(popover, callback) {
+  hide({element, callback}) {
     callback();
   }
 }
 
 
 class MDFadePopoverAnimator extends PopoverAnimator {
-  show(popover, callback) {
-    this._animateAll(popover, {
+  show({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.in,
       _popover: {animation: fade.in, restore: true, callback}
     });
   }
 
-  hide(popover, callback) {
-    this._animateAll(popover, {
+  hide({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.out,
       _popover: {animation: fade.out, restore: true, callback}
     });
@@ -51,8 +52,8 @@ class MDFadePopoverAnimator extends PopoverAnimator {
 }
 
 class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
-  show(popover, callback) {
-    this._animateAll(popover, {
+  show({element, callback}) {
+    this._animateAll(element, {
       _mask: fade.in,
       _popover: {
         animation: union(scale({from: 1.3, to: 1}), fade.in),
@@ -63,4 +64,13 @@ class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
   }
 }
 
-export default {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator};
+export default new AnimatorFactory({
+  base: PopoverAnimator,
+  animators: {
+    'default': 'fade',
+    'none': PopoverAnimator,
+    'fade-ios': IOSFadePopoverAnimator,
+    'fade-md': MDFadePopoverAnimator
+  },
+  methods: ['show', 'hide']
+});

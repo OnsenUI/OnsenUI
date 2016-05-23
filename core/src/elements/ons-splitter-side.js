@@ -21,7 +21,7 @@ import orientation from 'ons/orientation';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import SplitterAnimator from './ons-splitter/animator';
+import animatorFactory from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 
@@ -63,7 +63,7 @@ class CollapseDetection {
     this._target = target;
     if (target) {
       this._orientation = ['portrait', 'landscape'].indexOf(target) !== -1;
-      this.activate();
+      this.enable();
     }
   }
 
@@ -78,7 +78,7 @@ class CollapseDetection {
     this._element._updateMode(this._match(value) ? COLLAPSE_MODE : SPLIT_MODE);
   }
 
-  activate() {
+  enable() {
     if (this._orientation) {
       ons.orientation.on('change', this._boundOnChange);
       this._onChange({isPortrait: ons.orientation.isPortrait()});
@@ -106,7 +106,7 @@ const widthToPx = (width, parent) => {
 
 class CollapseMode {
   get _animator() {
-    return this._element._animator;
+    return this._element._animator({element: this._element});
   }
 
   constructor(element) {
@@ -188,7 +188,6 @@ class CollapseMode {
    * @param {String} name - 'open' or 'close'
    * @param {Object} [options]
    * @param {Function} [options.callback]
-   * @param {Boolean} [options.withoutAnimation]
    * @return {Promise} Resolves to the splitter side element or false if not in collapse mode
    */
   executeAction(name, options = {}) {
@@ -197,40 +196,20 @@ class CollapseMode {
     if (!this._active) {
       return Promise.resolve(false);
     }
-
     if (this._state === FINAL_STATE) {
       return Promise.resolve(this._element);
-    }
-    if (this._element._doorLock.isLocked()) {
-      return Promise.reject('Splitter side is locked.');
     }
     if (name === 'open' && this._isOpenOtherSideMenu()) {
       return Promise.reject('Another menu is already open.');
     }
-    if (this._element._emitEvent(`pre${name}`)) {
-      return Promise.reject(`Canceled in pre${name} event.`);
-    }
-
-    const callback = options.callback;
-    const unlock = this._element._doorLock.lock();
-    const done = () => {
-      this._state = FINAL_STATE;
-      this.layout();
-      unlock();
-      this._element._emitEvent(`post${name}`);
-      callback && callback();
-    };
-
-    // if (options.withoutAnimation) {
-    //   done();
-    //   return Promise.resolve(this._element);
-    // }
-    this._state = CHANGING_STATE;
-    return new Promise(resolve => {
-      this._animator[name](() => {
-        done();
-        resolve(this._element);
-      });
+    return util.executeAction(this._element, name, options, {
+      events: true,
+      eventData: {side: this._element},
+      rejectIfLocked: true,
+      after: () => {
+        this._state = FINAL_STATE;
+        this.layout();
+      }
     });
   }
 }
@@ -439,12 +418,9 @@ class SplitterSideElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
-    this._animatorFactory = new AnimatorFactory(this, {
-      animators: window.OnsSplitterElement._animatorDict,
-      methods: ['open', 'close']
-    });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
+    this._animator = options => animatorFactory.newAnimator(this, options);
+    this._watchedAttributes = ['width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'open-threshold', 'page'];
   }
 
   attachedCallback() {
@@ -475,20 +451,6 @@ class SplitterSideElement extends BaseElement {
   _update(name, value) {
     name = '_update' + name.split('-').map(e => e[0].toUpperCase() + e.slice(1)).join('');
     return this[name](value);
-  }
-
-  _emitEvent(name) {
-    if (name.slice(0, 3) !== 'pre') {
-      return util.triggerElementEvent(this, name, {side: this});
-    }
-    let isCanceled = false;
-
-    util.triggerElementEvent(this, name, {
-      side: this,
-      cancel: () => isCanceled = true
-    });
-
-    return isCanceled;
   }
 
   _updateCollapse(value = this.getAttribute('collapse')) {
@@ -544,15 +506,6 @@ class SplitterSideElement extends BaseElement {
 
   _updateSide(side = this.getAttribute('side')) {
     this._side = side === 'right' ? side : 'left';
-  }
-
-  _updateAnimation(animation = this.getAttribute('animation')) {
-    this._animator = this._animatorFactory.newAnimator({animation});
-    this._animator.activate(this);
-  }
-
-  _updateAnimationOptions(value = this.getAttribute('animation-options')) {
-    this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(value));
   }
 
   /**
