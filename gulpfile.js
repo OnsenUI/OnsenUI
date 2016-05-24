@@ -541,7 +541,8 @@ gulp.task('watch-develop-style', ['style'], function() {
       [
         'css-components/components-src/stylus-bh/**/*.styl',
         'css-components/components-src/bh/**/*.scss',
-        'core/sass/**/*.scss'
+        'core/style/**/*.scss',
+        'core/style/**/*.styl'
       ],
       ['style']);
 });
@@ -585,10 +586,15 @@ gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-componen
 ////////////////////////////////////////
 gulp.task('onsen-common-style', function () {
   return gulp.src([
-    'core/css/common.css',
-    'core/css/*.css'
+    './core/style/skins/default/*.scss',
+    './core/style/variable/*.scss',
+    './core/style/utils/*.scss',
+    './core/style/mixins/*.scss',
+    './core/style/ons/common.scss',
+    './core/style/ons/*.scss'
   ])
-      .pipe($.concat(cssConfig.onsenFileName+'.css'))
+      .pipe($.concat(cssConfig.onsenFileName+'.scss'))
+      .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest(cssConfig.writePath))
 });
 
@@ -597,9 +603,10 @@ gulp.task('onsen-common-style', function () {
 ////////////////////////////////////////
 gulp.task('onsen-components-style', function () {
   return gulp.src([
-    './core/skins/default/color.styl',
+    './core/style/skins/default/*.styl',
+    './core/style/variable/*.styl',
+    './core/style/utils/*.styl',
     './css-components/components-src/stylus-bh/bh-default-theme.styl',
-    // './css-components/components-src/stylus-bh/components/index.styl',
     './css-components/components-src/stylus-bh/components/util.styl',
     './css-components/components-src/stylus-bh/components/global.styl',
     './css-components/components-src/stylus-bh/components/*.styl'
@@ -614,9 +621,12 @@ gulp.task('onsen-components-style', function () {
 ////////////////////////////////////////
 gulp.task('bh-components-style', function() {
   return gulp.src([
-    './core/skins/default/*.scss',
-    './core/sass/index.scss',
-      './css-components/components-src/bh/**/*.scss'
+    './core/style/skins/default/*.scss',
+    './core/style/variable/*.scss',
+    './core/style/utils/*.scss',
+    './core/style/mixins/*.scss',
+    './core/style/*.scss',
+    './css-components/components-src/bh/**/*.scss'
   ])
       .pipe(concat(cssConfig.bhComponentsFileName+'.scss'))
       .pipe(sass().on('error', sass.logError))

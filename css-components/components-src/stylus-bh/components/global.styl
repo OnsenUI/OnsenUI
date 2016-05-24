@@ -10,12 +10,12 @@ var-input-invalid-text-color = $text-color
 var-alpha-lighten = 0.2
 
 // Font
-var-font-size = 17px
+var-font-size = $font-size
 var-font-weight = 400
 var-letter-spacing = 0
 var-text-color = $text-color
 var-font-size--mini = var-font-size - 3px
-var-font-size--large = 17px
+var-font-size--large = $font-size
 var-font-weight--large = 500
 
 // Input
@@ -53,6 +53,7 @@ body
 
 *
   -webkit-tap-highlight-color rgba(0, 0, 0, 0)
+  box-sizing border-box
 
 input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus
   outline none
