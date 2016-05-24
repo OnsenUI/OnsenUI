@@ -1,0 +1,46 @@
+
+//字符截断
+.bh-str-cut{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+//清除浮动
+.bh-clearfix {
+  clear: both;
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+//清除该元素内的子元素的浮动
+.bh-clearfix-child{
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+//右浮动
+.bh-pull-right {
+  float: right !important;
+}
+//左浮动
+.bh-pull-left {
+  float: left !important;
+}
+
+
+@include make-padding-margin(margin, m, 4, pxToRem(4px));
+@include make-padding-margin(margin, m, 8, pxToRem(8px));
+@include make-padding-margin(margin, m, 16, pxToRem(16px));
+@include make-padding-margin(margin, m, 24, pxToRem(24px));
+@include make-padding-margin(margin, m, 32, pxToRem(32px));
+
+@include make-padding-margin(padding, p, 4, pxToRem(4px));
+@include make-padding-margin(padding, p, 8, pxToRem(8px));
+@include make-padding-margin(padding, p, 16, pxToRem(16px));
+@include make-padding-margin(padding, p, 24, pxToRem(24px));
+@include make-padding-margin(padding, p, 32, pxToRem(32px));

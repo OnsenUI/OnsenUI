@@ -11,7 +11,8 @@ import contentReady from 'ons/content-ready';
 
 const space = {
     //该组件的根样式名
-    rootClassName: 'bh-step'
+    rootClassName: 'bh-stepping',
+    value: 1
 };
 
 //继承标签开发所需的类
@@ -86,6 +87,13 @@ class BhSteppingElement extends BaseElement {
 
         const input = document.createElement('input');
         input.classList.add(space.rootClassName+'-input');
+        
+        const initValue = this.getAttribute('value');
+        if(initValue){
+            input.value = initValue;
+        }else{
+            input.value = space.value;
+        }
 
         //将创建的标签添加到组件里
         this.appendChild(leftIcon);

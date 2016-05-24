@@ -1,0 +1,54 @@
+@mixin padding-margin-all($type, $pixel){
+  #{$type}: $pixel !important;
+}
+
+@mixin padding-margin-horizontal($type, $pixel){
+  #{$type}-left: $pixel !important;
+  #{$type}-right: $pixel !important;
+}
+
+@mixin padding-margin-vertical($type, $pixel){
+  #{$type}-top: $pixel !important;
+  #{$type}-bottom: $pixel !important;
+}
+
+@mixin padding-margin-top($type, $pixel){
+  #{$type}-top: $pixel !important;
+}
+
+@mixin padding-margin-right($type, $pixel){
+  #{$type}-right: $pixel !important;
+}
+
+@mixin padding-margin-bottom($type, $pixel){
+  #{$type}-bottom: $pixel !important;
+}
+
+@mixin padding-margin-left($type, $pixel){
+  #{$type}-left: $pixel !important;
+}
+
+@mixin make-padding-margin($type, $typeShot, $step, $pixel){
+  .bh-#{$typeShot}-#{$step} {
+    @include padding-margin-all($type, $pixel);
+  }
+  .bh-#{$typeShot}h-#{$step} {
+    @include padding-margin-horizontal($type, $pixel);
+  }
+  .bh-#{$typeShot}v-#{$step} {
+    @include padding-margin-vertical($type, $pixel);
+  }
+  .bh-#{$typeShot}t-#{$step} {
+    @include padding-margin-top($type, $pixel);
+  }
+  .bh-#{$typeShot}r-#{$step} {
+    @include padding-margin-right($type, $pixel);
+  }
+  .bh-#{$typeShot}b-#{$step} {
+    @include padding-margin-bottom($type, $pixel);
+  }
+  .bh-#{$typeShot}l-#{$step} {
+    @include padding-margin-left($type, $pixel);
+  }
+}
+
