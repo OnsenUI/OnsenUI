@@ -2,6 +2,7 @@ $step-icon-width: 32px;
 $step-icon-height: $step-icon-width;
 
 bh-stepping{
+  display: block;
   &:after{
     content: "";
     display: table;
@@ -14,7 +15,9 @@ bh-stepping{
   cursor: pointer;
   width: pxToRem($step-icon-width);
   height: pxToRem($step-icon-width);
+  line-height: pxToRem($step-icon-width);
   background-color: $gray-lv4;
+  text-align: center;
 
   &.bh-left,
   &.bh-right{
