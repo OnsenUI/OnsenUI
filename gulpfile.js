@@ -44,7 +44,7 @@ var cssConfig = {
   prefixerScheme: ['> 1%', 'last 2 versions', 'Android >= 4.0', 'iOS >= 8'],
   writePath: 'build/css/',
   onsenFileName: 'onsenui',
-  onsenComponentsFileName: 'onsen-css-components.styl',
+  onsenComponentsFileName: 'onsen-css-components',
   bhComponentsFileName: 'bh-components'
 };
 
@@ -277,7 +277,7 @@ gulp.task('prepare', ['html2js'], function() {
 
     // stylus files
     gulp.src([
-      'css-components/components-src/stylus/**/*'
+      'css-components/components-src/stylus-bh/**/*'
     ])
       .pipe(gulp.dest('build/stylus/')),
 
@@ -539,7 +539,7 @@ gulp.task('watch-develop-style', ['style'], function() {
   //监听样式文件并编译
   return gulp.watch(
       [
-        'css-components/components-src/stylus/**/*.styl',
+        'css-components/components-src/stylus-bh/**/*.styl',
         'css-components/components-src/bh/**/*.scss',
         'core/sass/**/*.scss'
       ],
@@ -597,11 +597,11 @@ gulp.task('onsen-common-style', function () {
 ////////////////////////////////////////
 gulp.task('onsen-components-style', function () {
   return gulp.src([
-    './css-components/components-src/stylus/blue-basic-theme.styl',
-    './css-components/components-src/stylus/components/index.styl',
-    './css-components/components-src/stylus/components/*.styl'
+    './css-components/components-src/stylus-bh/blue-basic-theme.styl',
+    './css-components/components-src/stylus-bh/components/index.styl',
+    './css-components/components-src/stylus-bh/components/*.styl'
   ])
-      .pipe(concat(cssConfig.onsenComponentsFileName+'.styl'))
+      .pipe(concat(cssConfig.onsenComponentsFileName+ '.styl'))
       .pipe(stylus({error: true}))
       .pipe(gulp.dest(cssConfig.writePath))
 });

@@ -1,0 +1,476 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-tab-bar-background-color = $tabbar-background-color // Background color
+var-tab-bar-border-color = $tabbar-border-color // Separator
+var-tab-bar-button-color = $tabbar-text-color // Text color
+var-tab-bar-active-color = $tabbar-highlight-text-color // Text color active
+var-material-tab-bar-background-color = $material-tabbar-background-color
+var-material-tab-bar-text-color = $material-tabbar-text-color
+var-material-tab-bar-current-color = $material-tabbar-highlight-text-color
+var-material-tab-bar-highlight-color = $material-tabbar-highlight-color
+
+var-tab-bar-active-border-top = none
+var-tab-bar-focus-border-top = none
+var-tab-bar-height = 49px
+var-tab-bar-button-line-height = 49px
+var-tab-bar-button-border = none
+var-tab-bar-active-box-shadow = none
+var-tab-bar-button-focus-box-shadow = none
+var-tab-bar-border-top = 1px solid var-tab-bar-border-color
+
+/*! topdoc
+  name: Icon Tab Bar
+  class: tab-bar
+  use: Tab Bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+/*! topdoc
+  name: Tab Bar
+  class: tab-bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
+  +retina-query()
+    border-{border-position} none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position border-position
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%) if border-position == 'bottom'
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%) if border-position == 'top'
+
+.tab-bar
+  reset-font()
+  display table
+  table-layout fixed
+  position absolute
+  bottom 0px
+  left 0px
+  right 0px
+  white-space nowrap
+  margin 0
+  padding 0
+  height var-tab-bar-height
+  background-color var-tab-bar-background-color
+  border-top var-tab-bar-border-top
+  width 100%
+  retina-tabbar-border(var-tab-bar-border-color)
+
+.tab-bar__item
+  reset-font()
+  hide-input-parent()
+  display table-cell
+  width auto
+  border-radius 0
+
+.tab-bar__item > input
+  hide-input()
+
+.tab-bar__button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+  padding 0
+  height var-tab-bar-button-line-height
+  letter-spacing var-letter-spacing
+  color var-tab-bar-button-color
+  text-shadow var-text-shadow
+  vertical-align top
+  background-color transparent
+  box-shadow var-box-shadow
+  border-top var-tab-bar-button-border
+  width 100%
+  font-weight var-font-weight
+  line-height var-tab-bar-button-line-height
+  +retina-query()
+    border-top none
+
+.tab-bar__icon
+  font-size 24px
+  padding 0
+  margin 0
+  line-height 26px
+  display block
+  height 28px
+
+.tab-bar__label
+  reset-font()
+
+.tab-bar__icon + .tab-bar__label
+  font-size 10px
+  line-height 1
+  margin 0
+  font-weight var-font-weight
+
+.tab-bar__label:first-child
+  font-size 16px
+  line-height var-tab-bar-button-line-height
+  margin 0
+  padding 0
+
+.tab-bar__button
+  color var-tab-bar-button-color
+
+:checked + .tab-bar__button
+  color var-tab-bar-active-color
+  background-color transparent
+  box-shadow var-tab-bar-active-box-shadow
+  border-top var-tab-bar-active-border-top
+
+.tab-bar__button:disabled
+  disabled()
+
+.tab-bar__button:focus
+  z-index 1
+  border-top var-tab-bar-focus-border-top
+  box-shadow var-tab-bar-button-focus-box-shadow
+  outline 0
+
+.tab-bar__content
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom var-tab-bar-height
+  z-index 0
+
+/*! topdoc
+  name: Icon Only Tab Bar
+  use: Tab Bar
+  class: tab-bar
+  hint: .tab-bar .fa
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+        </button>
+      </label>
+
+    </div>
+*/
+
+/*! topdoc
+  name: Top Tab Bar
+  class: tab-bar--top
+  use: Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top">
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--top
+  position relative
+  top 0px
+  left 0px
+  right 0px
+  bottom auto
+  border-top none
+  border-bottom var-tab-bar-border-top
+  retina-tabbar-border(var-tab-bar-border-color, bottom)
+
+.tab-bar--top__content
+  top var-tab-bar-height
+  left 0
+  right 0
+  bottom 0
+  z-index 0
+
+/*! topdoc
+  name: Bordered Top Tab Bar
+  class: tab-bar--top-border
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--top-border">
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b" checked="checked">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+*/
+
+/*! topdoc
+  name: Material Tab Bar
+  class: tab-bar--material
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          Music
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Movies
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Books
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Games
+        </button>
+      </label>
+
+    </div>
+*/
+
+.tab-bar--top-border__button
+  background-color transparent
+  border-bottom 4px solid transparent
+
+:checked + .tab-bar--top-border__button
+  background-color transparent
+  border-bottom 4px solid var-tab-bar-active-color
+
+.tab-bar--material
+  background-color var-material-tab-bar-background-color
+  border-bottom-width 0px
+  box-shadow 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2)
+
+.tab-bar--material__button
+  background-color transparent
+  color var-material-tab-bar-text-color
+  text-transform uppercase
+  font-size 14px
+  font-weight 500
+  material-font()
+
+.tab-bar--material__button:after
+  content ''
+  display block
+  width 0px
+  height 2px
+  bottom 0px
+  position absolute
+  margin-top -2px
+  background-color var-material-tab-bar-current-color
+
+:checked + .tab-bar--material__button:after
+  width 100%
+  transition width 0.2s ease-in-out
+
+:checked + .tab-bar--material__button
+  background-color transparent
+  color var-material-tab-bar-current-color
+
+.tab-bar--material__item:not([ripple]):active
+  background-color var-material-tab-bar-highlight-color
+
+/*! topdoc
+  name: Material Tab Bar (Icon only)
+  class: tab-bar--material__icon
+  use:  Material Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account"></i>
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--material__icon
+  font-size 22px
+  line-height 36px
+
+/*! topdoc
+  name: Material Tab Bar (Icon and Label)
+  class: tab-bar--material__label
+  use:  Material Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
+          <div class="tab-bar__label tab-bar--material__label">Call</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
+          <div class="tab-bar__label tab-bar--material__label">Favorites</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-delete"></i>
+          <div class="tab-bar__label tab-bar--material__label">Delete</div>
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--material__label
+  material-font()
+
+.tab-bar--material__label:first-child
+  material-font()
+  letter-spacing 0.015em
+  font-weight 500
+  font-size 14px
+
+.tab-bar--material__icon + .tab-bar--material__label
+  font-size 10px

@@ -1,0 +1,91 @@
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-dialog-background-color = $dialog-background-color
+
+var-material-dialog-background-color = $material-dialog-background-color
+
+/*! topdoc
+  name: Dialog
+  class: dialog
+  markup:
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="dialog-container">
+        <div class="page">
+          <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+        </div>
+      </div>
+    </div>
+*/
+.dialog
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  reset-font()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  margin auto auto
+  overflow hidden
+  min-width 270px
+  min-height 100px
+  text-align left
+
+.dialog-container
+  height inherit
+  min-height inherit
+  overflow hidden
+  border-radius 4px
+  background-color var-dialog-background-color
+  -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
+
+.dialog-mask
+  reset-base()
+  reset-cursor()
+  position absolute
+  top 0
+  right 0
+  left 0
+  bottom 0
+  background-color rgba(0, 0, 0, 0.2)
+
+/*! topdoc
+  name: Material Dialog
+  use: Dialog
+  markup:
+    <div class="dialog-mask dialog-mask--material"></div>
+    <div class="dialog dialog--material">
+      <div class="dialog dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
+    </div>
+*/
+
+.dialog--material
+  material-font()
+  text-align left
+  shadow-5()
+
+.dialog-container--material
+  border-radius 2px
+  background-color var-material-dialog-background-color
+
+.dialog-mask--material
+  background-color rgba(0, 0, 0, 0.3)

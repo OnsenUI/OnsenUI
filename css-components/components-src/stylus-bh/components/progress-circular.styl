@@ -1,0 +1,64 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-progress-circle-color = $material-progress-circle-primary-color
+var-progress-circle-secondary-color = $material-progress-circle-secondary-color
+
+/*! topdoc
+  name: Progress Circle
+  class: progres-circle
+  markup:
+    <svg class="progress-circular">
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
+    </svg>
+    <svg class="progress-circular progress-circular--determinate">
+      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:140%,251.32%"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10" style="stroke-dasharray:100%,251.32%"/>
+    </svg>
+
+*/
+
+.progress-circular
+ animation progress__rotate 2s linear infinite
+ height 80px
+ position relative
+ width 80px
+
+.progress-circular__primary
+  stroke-dasharray 1,200
+  stroke-dashoffset 0
+  animation progress__dash 1.5s ease-in-out infinite
+  stroke var-progress-circle-color
+  transition all 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+.progress-circular--determinate
+  transform rotate(270deg)
+  animation none
+
+.progress-circular--determinate > .progress-circular__primary
+  animation none
+
+.progress-circular--determinate > .progress-circular__secondary
+  animation none
+  stroke var-progress-circle-secondary-color
+
+@keyframes progress__rotate {
+  100% {
+    transform rotate(360deg);
+  }
+}
+
+@keyframes progress__dash {
+  0% {
+    stroke-dasharray 10%, 241.32%;
+    stroke-dashoffset 0%;
+  }
+  50% {
+    stroke-dasharray 201%, 50.322%;
+    stroke-dashoffset -100.0%;
+  }
+  100% {
+    stroke-dasharray 10%, 241.32%;
+    stroke-dashoffset -251.32%;
+  }
+}
