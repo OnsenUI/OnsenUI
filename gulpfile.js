@@ -598,7 +598,8 @@ gulp.task('onsen-common-style', function () {
 gulp.task('onsen-components-style', function () {
   return gulp.src([
     './css-components/components-src/stylus/blue-basic-theme.styl',
-    './css-components/components-src/stylus/components/index.styl'
+    './css-components/components-src/stylus/components/index.styl',
+    './css-components/components-src/stylus/components/*.styl'
   ])
       .pipe(concat(cssConfig.onsenComponentsFileName+'.styl'))
       .pipe(stylus({error: true}))
