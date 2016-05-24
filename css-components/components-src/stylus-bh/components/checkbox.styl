@@ -1,0 +1,327 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-background-color-checked--checkbox = $highlight-color // background color active
+var-checkbox-border-color = $highlight-color // boder color
+var-checkbox-border-color-active = $highlight-color // boder color active
+var-checkmark-color = #fff // indicator color
+
+var-checkmark-foot-height = 6px
+var-checkbox-border = 1px solid var-checkbox-border-color
+var-background-color--before--checkbox = var-background-color-checked--checkbox
+var-checkmark-border = 3px solid var-checkmark-color
+var-checkmark-tail-width = 12px
+var-checkmark-border-width = 2px
+var-checkmark-top = 6px
+var-checkmark-left = 5px
+var-checkbox-size = 24px
+var-border--checkmark--noborder = 3px solid var-checkbox-border-color
+var-checkbox-border-radius = 16px
+var-checkmark-border-radius = 0px
+
+var-material-checkbox-size = 18px
+var-material-checkbox-active-color = $material-checkbox-active-color
+var-material-checkbox-inactive-color = $material-checkbox-inactive-color
+var-material-checkbox-checkmark-color = $material-checkbox-checkmark-color
+
+/*! topdoc
+  name: Checkbox
+  class: checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input" disabled>
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+checkbox()
+  reset-box-model()
+  inline-block()
+  reset-cursor()
+  reset-font()
+  hide-input-parent()
+
+checkbox__label()
+  inline-block()
+  reset-cursor()
+  reset-font()
+
+checkbox--disabled()
+  disabled()
+
+checkbox--before()
+  content ''
+  position absolute
+
+checkbox--after()
+  checkbox--before()
+
+.checkbox
+  checkbox__label()
+  line-height var-checkbox-size
+
+.checkbox__checkmark
+  checkbox()
+  height var-checkbox-size
+  pointer-events none
+
+.checkbox__input
+  hide-input()
+
+.checkbox__input:checked
+  background var-background-color-checked--checkbox
+
+.checkbox__input:checked + .checkbox__checkmark:before
+  background var-background-color--before--checkbox
+  border var-checkbox-border
+
+.checkbox__input:checked + .checkbox__checkmark:after
+  opacity 1
+
+.checkbox__checkmark:before
+  checkbox--before()
+  reset-box-model()
+  width var-checkbox-size
+  height var-checkbox-size
+  background transparent
+  border var-checkbox-border
+  border-radius var-checkbox-border-radius
+  box-shadow var-box-shadow
+  left 0
+
+.checkbox__checkmark
+  checkbox()
+  width var-checkbox-size
+  height var-checkbox-size
+
+// checkmark's line
+.checkbox__checkmark:after
+  checkbox--after()
+  top var-checkmark-top
+  left var-checkmark-left
+  width var-checkmark-tail-width
+  height var-checkmark-foot-height
+  background transparent
+  border var-checkmark-border
+  border-width var-checkmark-border-width
+  border-top none
+  border-right none
+  border-radius var-checkmark-border-radius
+  transform rotate(-45deg)
+  opacity 0
+
+.checkbox__input:focus + .checkbox__checkmark:before
+  box-shadow var-box-shadow--cta
+
+.checkbox__input:disabled + .checkbox__checkmark
+  checkbox--disabled()
+
+.checkbox__input:disabled:active + .checkbox__checkmark:before
+  background transparent
+  box-shadow var-box-shadow
+
+/*! topdoc
+  name: No border Checkbox
+  class: checkbox--noborder
+  markup:
+    <label class="checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      Disabled
+    </label>
+ */
+
+.checkbox--noborder__input
+  hide-input()
+
+.checkbox--noborder
+  checkbox__label()
+  line-height var-checkbox-size
+  hide-input-parent()
+
+.checkbox--noborder__checkmark
+  inline-block()
+  reset-cursor()
+  reset-box-model()
+  height var-checkbox-size
+  background transparent
+
+.checkbox--noborder__input
+  hide-input()
+
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:before
+  background transparent
+  border none
+
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:after
+  opacity 1
+
+.checkbox--noborder__checkmark:before
+  content ''
+  position absolute
+  width var-checkbox-size
+  height var-checkbox-size
+  background transparent
+  border none
+  border-radius var-checkbox-border-radius
+  left 0
+
+.checkbox--noborder__checkmark
+  inline-block()
+  reset-cursor()
+  reset-box-model()
+  width var-checkbox-size
+  height var-checkbox-size
+  border none
+
+.checkbox--noborder__checkmark:after
+  content ''
+  position absolute
+  top var-checkmark-top
+  left var-checkmark-left
+  opacity 0
+  width var-checkmark-tail-width
+  height var-checkmark-foot-height
+  background transparent
+  border var-border--checkmark--noborder
+  border-width var-checkmark-border-width
+  border-top none
+  border-right none
+  border-radius var-checkmark-border-radius
+  transform rotate(-45deg)
+
+.checkbox--noborder__input:focus + .checkbox--noborder__checkmark:before
+  border none
+  box-shadow var-box-shadow--cta
+
+.checkbox--noborder__input:disabled + .checkbox--noborder__checkmark
+  disabled()
+
+.checkbox--noborder__input:disabled:active + .checkbox--noborder__checkmark:before
+  background transparent
+  box-shadow var-box-shadow
+  border none
+
+/*! topdoc
+  name: Material Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox--material
+  line-height var-material-checkbox-size
+  material-font()
+
+.checkbox--material__checkmark
+  width var-material-checkbox-size
+  height var-material-checkbox-size
+
+.checkbox--material__checkmark:before
+  border 2px solid var-material-checkbox-inactive-color
+
+.checkbox--material__input:checked + .checkbox--material__checkmark:before
+  background-color var-material-checkbox-active-color
+  border none
+
+.checkbox--material__input + .checkbox--material__checkmark:after
+  border-color var-material-checkbox-checkmark-color
+  transition transform 0.3s ease
+  width 10px
+  height 5px
+  top 4px
+  left 3px
+  transform scale(0) rotate(-45deg)
+
+.checkbox--material__input:checked + .checkbox--material__checkmark:after
+  top 4px
+  left 3px
+  transform scale(1) rotate(-45deg)
+
+.checkbox--material__input:disabled + .checkbox--material__checkmark
+  opacity 1
+
+.checkbox--material__input:disabled + .checkbox--material__checkmark:before
+  border-color #afafaf
+
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before
+  background-color #afafaf
+
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:after
+  border-color #ffffff
+
+.checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before
+  background-color #afafaf
+
+.checkbox--material__checkmark:before
+  border-radius 2px
+  width var-material-checkbox-size
+  height var-material-checkbox-size
