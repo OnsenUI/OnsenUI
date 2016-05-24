@@ -597,8 +597,11 @@ gulp.task('onsen-common-style', function () {
 ////////////////////////////////////////
 gulp.task('onsen-components-style', function () {
   return gulp.src([
-    './css-components/components-src/stylus-bh/blue-basic-theme.styl',
-    './css-components/components-src/stylus-bh/components/index.styl',
+    './core/skins/default/color.styl',
+    './css-components/components-src/stylus-bh/bh-default-theme.styl',
+    // './css-components/components-src/stylus-bh/components/index.styl',
+    './css-components/components-src/stylus-bh/components/util.styl',
+    './css-components/components-src/stylus-bh/components/global.styl',
     './css-components/components-src/stylus-bh/components/*.styl'
   ])
       .pipe(concat(cssConfig.onsenComponentsFileName+ '.styl'))
