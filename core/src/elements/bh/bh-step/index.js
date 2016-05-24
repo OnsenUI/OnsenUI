@@ -9,7 +9,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import contentReady from 'ons/content-ready';
 
-let space = {
+const space = {
     //该组件的根样式名
     rootClassName: 'bh-stepping',
     value: 1
@@ -58,19 +58,23 @@ class BhSteppingElement extends BaseElement {
     _stepAction(event){
         const target = event.target;
 
-        if(util.hasClass(target, 'bh-right')){
+        if(util.hasClass(target, 'bh-right') || util.findParent(target, 'bh-right')){
             this._add();
-        }else if(util.hasClass(target, 'bh-left')){
+        }else if(util.hasClass(target, 'bh-left') || util.findParent(target, 'bh-left')){
             this._down();
         }
     }
 
-    _touchStart(event){
-        // alert('1111')
-    }
-
-    _touchEnd(event){
-        alert('2222')
+    _iconActiveHandle(event){
+        let target = event.target;
+        if(util.hasClass(target, space.rootClassName+'-icon')){
+            target.classList.toggle('bh-active');
+        }else{
+            target = util.findParent(target, space.rootClassName+'-icon');
+            if(target){
+                target.classList.toggle('bh-active');
+            }
+        }
     }
 
     //组件加载完毕的回调,相当于该组件的入口方法
@@ -91,40 +95,16 @@ class BhSteppingElement extends BaseElement {
 
         const stepHtml = `
             <div class="${space.rootClassName}-icon bh-left"><i class="iconfont icon-add"></i></div>
-            <input class="${space.rootClassName}-input" value="${space.value}" />
+            <input class="${space.rootClassName}-input" value="${space.value}" type="number" />
             <div class="${space.rootClassName}-icon bh-right"><i class="iconfont icon-remove"></i></div>
         `;
-
-        //创建标签,添加样式
-        // const leftIcon = document.createElement('div');
-        // leftIcon.classList.add(space.rootClassName+'-icon');
-        // leftIcon.classList.add('bh-left');
-        //
-        // const rightIcon = document.createElement('div');
-        // rightIcon.classList.add(space.rootClassName+'-icon');
-        // rightIcon.classList.add('bh-right');
-        //
-        // const input = document.createElement('input');
-        // input.classList.add(space.rootClassName+'-input');
-        //
-        // const initValue = this.getAttribute('value');
-        // if(initValue){
-        //     input.value = initValue;
-        // }else{
-        //     input.value = space.value;
-        // }
-
-        //将创建的标签添加到组件里
-        // this.appendChild(leftIcon);
-        // this.appendChild(input);
-        // this.appendChild(rightIcon);
 
         this.innerHTML = stepHtml;
 
         //监听该组件的事件
         this.addEventListener('click', this._stepAction, false);
-        this.addEventListener('touchstart', this._touchStart, false);
-        this.addEventListener('touchend', this._touchEnd, false);
+        this.addEventListener('touchstart', this._iconActiveHandle, false);
+        this.addEventListener('touchend', this._iconActiveHandle, false);
     }
 
 }
