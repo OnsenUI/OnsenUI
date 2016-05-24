@@ -612,8 +612,11 @@ gulp.task('onsen-components-style', function () {
 gulp.task('bh-components-style', function() {
   return gulp.src([
     './core/skins/default/*.scss',
-    './core/sass/index.scss',
-      './css-components/components-src/bh/**/*.scss'
+    './core/sass/mixins/*.scss',
+    './core/sass/variable/*.scss',
+    './core/sass/utils/*.scss',
+    './core/sass/*.scss',
+    './css-components/components-src/bh/**/*.scss'
   ])
       .pipe(concat(cssConfig.bhComponentsFileName+'.scss'))
       .pipe(sass().on('error', sass.logError))

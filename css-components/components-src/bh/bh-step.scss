@@ -16,32 +16,13 @@ bh-stepping{
   height: pxToRem($step-icon-width);
   background-color: $gray-lv4;
 
-  &:before,
-  &:after{
-    content: "";
-    position: absolute;
-    background-color: $brand-white;
-  }
-
   &.bh-left,
   &.bh-right{
     float: left;
-
-    &:before{
-      top: pxToRem(14px);
-      left: pxToRem(8px);
-      width: pxToRem(14px);
-      height: pxToRem(2px);
-    }
   }
 
-  &.bh-right{
-    &:after{
-      width: pxToRem(2px);
-      height: pxToRem(14px);
-      top: pxToRem(8px);
-      left: pxToRem(14px);
-    }
+  &.bh-active{
+    background-color: $primary-lv1;
   }
 }
 
