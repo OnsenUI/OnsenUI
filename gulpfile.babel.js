@@ -31,27 +31,14 @@ import babel from 'rollup-plugin-babel';
 
 ////////////////////////////////////////
 
-<<<<<<< HEAD:gulpfile.js
-var gulp = require('gulp');
-var path = require('path');
 var $ = require('gulp-load-plugins')();
-var gulpIf = require('gulp-if');
-var pkg = require('./package.json');
-var merge = require('event-stream').merge;
-var runSequence = require('run-sequence');
-var dateformat = require('dateformat');
-var browserSync = require('browser-sync');
-var os = require('os');
-var fs = require('fs');
-var argv = require('yargs').argv;
-var npm  = require('rollup-plugin-npm');
-var babel = require('rollup-plugin-babel');
 var stylus = require('gulp-stylus');
 var minifyCSS = require('gulp-minify-css');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
+const CORDOVA_APP = false;
 
 var cssConfig = {
   prefixerScheme: ['> 1%', 'last 2 versions', 'Android >= 4.0', 'iOS >= 8'],
@@ -61,10 +48,7 @@ var cssConfig = {
   bhComponentsFileName: 'bh-components'
 };
 
-=======
-const $ = require('gulp-load-plugins')();
-const CORDOVA_APP = false;
->>>>>>> caa5c2ba4aeaa0b08c1847efb5d8f9cadc4a6df9:gulpfile.babel.js
+
 
 ////////////////////////////////////////
 // browser-sync
