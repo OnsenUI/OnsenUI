@@ -323,11 +323,6 @@ class CarouselElement extends BaseElement {
     this._boundOnResize = this._onResize.bind(this);
 
     this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
-
-    this._setup();
-    this._setupInitialIndex();
-
-    this._saveLastState();
   }
 
   _onResize() {

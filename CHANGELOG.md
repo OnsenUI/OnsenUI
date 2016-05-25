@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.7
+ * ons-carousel: Support ng-repeat in Angular1 bindings.
+ * ons-carousel: Fix [#1168](https://github.com/OnsenUI/OnsenUI/issues/1168).
+
 v2.0.0-rc.6
 ----
  * ons-splitter: 'load' methods return promises in Angular1 bindings.
