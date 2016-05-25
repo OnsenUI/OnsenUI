@@ -33,7 +33,7 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  * @tutorial vanilla/Reference/lazy-repeat
  * @seealso ons-list
  *   [en]The `<ons-list>` element is used to render a list.[/en]
- *   [ja][/ja]
+ *   [ja]`<ons-list>`要素はリストを描画するのに使われます。[/ja]
  * @guide UsingLazyRepeat
  *   [en]How to use Lazy Repeat[/en]
  *   [ja]レイジーリピートの使い方[/ja]
@@ -96,7 +96,11 @@ class LazyRepeatElement extends BaseElement {
    *
    *     To help rendering the element, the current index and a template is supplied as arguments. The template is the initial content of the `<ons-lazy-repeat>` element.
    *   [/en]
-   *   [ja][/ja]
+   *   [ja]
+   *     この関数は`HTMLElement`を返してください。
+   *     要素を生成しやすくするために、現在のアイテムのインデックスとテンプレートが引数に渡されます。
+   *     このテンプレートは、`<ons-lazy-repeat>`要素のコンテンツが渡されます。
+   *   [/ja]
    */
 
   /**
@@ -104,7 +108,7 @@ class LazyRepeatElement extends BaseElement {
    * @type {Function}
    * @description
    *   [en]Should return the number of items in the list.[/en]
-   *   [ja][/ja]
+   *   [ja]リスト内のアイテム数を返してください。[/ja]
    */
 
   /**
@@ -118,7 +122,12 @@ class LazyRepeatElement extends BaseElement {
    *
    *     The function is optional and if it isn't present the height of the first item will be automatically calculated and used for all other items.
    *   [/en]
-   *   [ja][/ja]
+   *   [ja]
+   *     アイテムの高さ(ピクセル)を返してください。アイテムのインデックス値は引数で渡されます。
+   *     この関数は、それぞれのアイムが違った高さを持つリストをレンダリングする際に重要です。
+   *     この関数はオプショナルです。もしこの関数が無い場合には、
+   *     最初のアイテムの高さが他のすべてのアイテムの高さとして利用されます。
+   *   [/ja]
    */
 
   /**
@@ -130,7 +139,11 @@ class LazyRepeatElement extends BaseElement {
    *
    *     The function is optional but may be important in order to avoid memory leaks.
    *   [/en]
-   *   [ja][/ja]
+   *   [ja]
+   *     この関数は、あるアイテムがDOMツリーから除かれた時に呼び出されます。
+   *     アイテムのインデックス値とDOM要素が引数として渡されます。
+   *     この関数はオプショナルですが、各アイテムの後処理が必要な場合にはメモリーリークを避けるために重要です。
+   *   [/ja]
    */
 
   set delegate(userDelegate) {
@@ -153,7 +166,7 @@ class LazyRepeatElement extends BaseElement {
    * @signature refresh()
    * @description
    *   [en]Refresh the list. Use this method when the data has changed.[/en]
-   *   [ja][/ja]
+   *   [ja]リストを更新します。もしデータが変わった場合にはこのメソッドを使ってください。[/ja]
    */
   refresh() {
     this._lazyRepeatProvider && this._lazyRepeatProvider.refresh();
