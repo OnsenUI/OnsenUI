@@ -36,8 +36,8 @@ ons-input:not([float]) .text-input__label--active {
 }
 
 ons-input[disabled] {
-  opacity: 0.5;
   pointer-events: none;
+  background-color: $gray-lv5;
 }
 
 ons-input input.text-input--material::-webkit-input-placeholder {

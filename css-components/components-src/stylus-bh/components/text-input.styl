@@ -19,15 +19,15 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-text-input-font-size = 15px
-var-text-input-height = 31px
-var-text-input-border-color = var-input-border-color
-var-text-highlight-color = $highlight-color // material
+var-text-input-font-size = pxToRem(30px)
+var-text-input-height = pxToRem(72px)
+var-text-input-border-color = $primary-lv1
+//var-text-highlight-color = $highlight-color // material
 
-var-material-text-input-font-size = pxToRem(30px)
-var-material-text-input-color = $material-text-input-text-color
-var-material-text-input-active-color = $material-text-input-active-color
-var-material-text-input-inactive-color = $material-text-input-inactive-color
+//var-material-text-input-font-size = pxToRem(30px)
+//var-material-text-input-color = $material-text-input-text-color
+//var-material-text-input-active-color = $material-text-input-active-color
+//var-material-text-input-inactive-color = $material-text-input-inactive-color
 
 /*! topdoc
   name: Text Input
@@ -47,19 +47,21 @@ input()
   reset-font()
 
 input--disabled()
-  disabled()
+  cursor default
+  pointer-events none
 
 transparent()
-  border none
+  //border none
   background-color transparent
+
 
 text-input()
   input()
   transparent()
+  border 1px solid $gray-lv6
   letter-spacing var-letter-spacing
   box-shadow var-box-shadow--text-input
-  color var-input-text-color
-  padding 0
+  padding 0 pxToRem(8px)
   margin 0
   width 100%
   font-size var-text-input-font-size
@@ -81,6 +83,13 @@ text-input--invalid()
 
 .text-input
   text-input()
+  &:hover
+    border-color $primary-lv1
+
+.bh-danger
+  & .text-input,
+  & .text-input:hover
+    border-color $danger-lv1
 
 .text-input::-webkit-input-placeholder
   color var-input-placeholder-color
