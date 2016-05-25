@@ -12,6 +12,7 @@ export * from './directives/ons-switch';
 export * from './directives/ons-range';
 export * from './directives/ons-input';
 export * from './directives/ons-pull-hook';
+export * from './directives/ons-lazy-repeat';
 
 
 export * from './ons/notification';
@@ -32,6 +33,7 @@ import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
 import {OnsPullHook} from './directives/ons-pull-hook';
+import {OnsLazyRepeat} from './directives/ons-lazy-repeat';
 
 export const ONS_DIRECTIVES = [
   OnsNavigator,
@@ -42,5 +44,6 @@ export const ONS_DIRECTIVES = [
   OnsSwitch,
   OnsRange,
   OnsInput,
-  OnsPullHook
+  OnsPullHook,
+  OnsLazyRepeat
 ];
