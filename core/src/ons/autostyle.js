@@ -18,7 +18,9 @@ limitations under the License.
 import onsPlatform from './platform';
 import util from './util';
 
-let autoStyleEnabled = true;
+//屏蔽onsen自动转换样式主题
+let autoStyleEnabled = false;
+// let autoStyleEnabled = true;
 
 // Modifiers
 const modifiersMap = {
