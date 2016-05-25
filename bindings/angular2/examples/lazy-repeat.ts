@@ -2,6 +2,8 @@ import {
   bootstrap,
   Component,
   ONS_DIRECTIVES,
+  OnsLazyRepeat,
+  ViewChild,
   OnInit
 } from '../src/angular2-onsenui';
 
@@ -20,9 +22,9 @@ import {
     <div class="page__content">
 
       <ons-list>
-        <ons-lazy-repeat id="my-list">
+        <ons-lazy-repeat [delegate]="self">
           <ons-list-item>
-            {item}
+            #{item}
           </ons-list-item>
         </ons-lazy-repeat>
       </ons-list>
@@ -30,26 +32,30 @@ import {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  self = this;
+
+  @ViewChild(OnsLazyRepeat) lazyRepeat;
+
   constructor() {
   }
 
-  ngOnInit() {
-    (<any>document.querySelector('#my-list')).delegate = {
-      createItemContent: function(i, template) {
-        const dom = template.cloneNode(true);
-        dom.innerHTML = dom.innerHTML.replace('{item}', i);
-        return dom;
-      },
+  createItemContent(i, template) {
+    const dom = template.cloneNode(true);
+    dom.innerHTML = dom.innerHTML.replace('{item}', i);
+    return dom;
+  }
 
-      countItems: function() {
-        return 10000000;
-      }
-    };
+  countItems() {
+    return 10000000;
+  }
+
+  destroyItem(index, item) {
+    console.log('Destroyed item with index: ' + index);
   }
 
   refresh() {
-    (<any>document.querySelector('#my-list')).refresh();
+    this.lazyRepeat.refresh();
   }
 }
 
