@@ -101,7 +101,7 @@
     "karma-mocha": "^0.2.1",
     "mkpath": "^1.0.0",
     "mocha": "^2.3.4",
-    "rollup-plugin-babel": "^2.3.8",
+    "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-npm": "^1.2.1",
     "run-sequence": "^1.1.5",
     "wcdoc": "0.1.13"

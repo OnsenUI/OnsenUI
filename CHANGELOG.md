@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.6
 ----
+ * ons-page: Change to fill page background element if there is only .page__content element in ons-page.
  * ons-splitter: 'load' methods return promises in Angular1 bindings.
  * ons-navigator: Fix 'popPage' with 'refresh' parameter.
  * ons-dialog: Make ons-dialog angular2 compatible.
