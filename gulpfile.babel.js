@@ -15,10 +15,23 @@ limitations under the License.
 
 */
 
-var CORDOVA_APP = false;
+import gulp from 'gulp';
+import path from'path';
+import gulpIf from 'gulp-if';
+import pkg from './package.json';
+import {merge} from 'event-stream';
+import runSequence from 'run-sequence';
+import dateformat from 'dateformat';
+import browserSync from 'browser-sync';
+import os from 'os';
+import fs from 'fs';
+import {argv} from 'yargs';
+import npm from 'rollup-plugin-npm';
+import babel from 'rollup-plugin-babel';
 
 ////////////////////////////////////////
 
+<<<<<<< HEAD:gulpfile.js
 var gulp = require('gulp');
 var path = require('path');
 var $ = require('gulp-load-plugins')();
@@ -48,11 +61,15 @@ var cssConfig = {
   bhComponentsFileName: 'bh-components'
 };
 
+=======
+const $ = require('gulp-load-plugins')();
+const CORDOVA_APP = false;
+>>>>>>> caa5c2ba4aeaa0b08c1847efb5d8f9cadc4a6df9:gulpfile.babel.js
 
 ////////////////////////////////////////
 // browser-sync
 ////////////////////////////////////////
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', () => {
   browserSync({
     server: {
       baseDir: __dirname,
@@ -71,9 +88,9 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function() {
+gulp.task('core', () => {
   return gulp.src(['core/src/setup.js'], {read: false})
-    .pipe($.plumber(function(error) {
+    .pipe($.plumber(error => {
       $.util.log(error.message);
       this.emit('end');
     }))
@@ -81,9 +98,9 @@ gulp.task('core', function() {
       sourceMap: 'inline',
       plugins: [
         {
-          resolveId: function(code, id) {
+          resolveId: (code, id) => {
             if (id && code.charAt(0) !== '.') {
-              var p = path.join(__dirname, 'core', 'src', code);
+              let p = path.join(__dirname, 'core', 'src', code);
 
               if (fs.existsSync(p)) {
                 p = path.join(p, 'index.js');
@@ -97,7 +114,10 @@ gulp.task('core', function() {
           }
         },
         npm(),
-        babel({presets: ['es2015-rollup']})
+        babel({
+          presets: ['es2015-rollup'],
+          babelrc: false
+        })
       ],
       format: 'umd',
       moduleName: 'ons'
@@ -109,28 +129,26 @@ gulp.task('core', function() {
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js'))
-    .on('end', function() {
-      browserSync.reload();
-    });
+    .on('end', () => browserSync.reload());
 });
 
 ////////////////////////////////////////
 // watch-core
 ////////////////////////////////////////
-gulp.task('watch-core', ['prepare', 'core'], function() {
+gulp.task('watch-core', ['prepare', 'core'], () => {
   return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
 });
 
 ////////////////////////////////////////
 // core-test
 ////////////////////////////////////////
-gulp.task('core-test', ['prepare', 'core'], function() {
+gulp.task('core-test', ['prepare', 'core'], () => {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
     }))
-    .on('error', function(err) {
+    .on('error', err => {
       $.util.log($.util.colors.red(err.message));
       throw err;
     });
@@ -139,13 +157,13 @@ gulp.task('core-test', ['prepare', 'core'], function() {
 ////////////////////////////////////////
 // watch-core-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', ['watch-core'], function() {
+gulp.task('watch-core-test', ['watch-core'], () => {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'watch'
     }))
-    .on('error', function(err) {
+    .on('error', err => {
       throw err;
     });
 });
@@ -153,7 +171,7 @@ gulp.task('watch-core-test', ['watch-core'], function() {
 ////////////////////////////////////////
 // html2js
 ////////////////////////////////////////
-gulp.task('html2js', function() {
+gulp.task('html2js', () => {
   return gulp.src('bindings/angular1/templates/*.tpl')
     .pipe($.html2js('angular.js', {
       adapter: 'angular',
@@ -169,7 +187,7 @@ gulp.task('html2js', function() {
 /////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
-gulp.task('eslint', function() {
+gulp.task('eslint', () => {
   return gulp.src(eslintTargets())
     .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
@@ -180,28 +198,28 @@ gulp.task('eslint', function() {
 /////////////////////////////////////////
 // watch-eslint
 ////////////////////////////////////////
-gulp.task('watch-eslint', ['eslint'], function() {
+gulp.task('watch-eslint', ['eslint'], () => {
   gulp.watch(eslintTargets(), ['eslint']);
 });
 
 function eslintTargets() {
   return [
-    'gulpfile.js',
-    'docs/packages/**/*.{js,es6}',
-    'core/src/*.{js,es6}',
-    'core/src/**/*.{js,es6}',
-    'bindings/angular1/js/*.{js,es6}',
-    'bindings/angular1/directives/*.{js,es6}',
-    'bindings/angular1/services/*.{js,es6}',
-    'bindings/angular1/elements/*.{js,es6}',
-    'bindings/angular1/views/*.{js,es6}'
+    'gulpfile.babel.js',
+    'docs/packages/**/*.js',
+    'core/src/*.js',
+    'core/src/**/*.js',
+    'bindings/angular1/js/*.js',
+    'bindings/angular1/directives/*.js',
+    'bindings/angular1/services/*.js',
+    'bindings/angular1/elements/*.js',
+    'bindings/angular1/views/*.js'
   ];
 }
 
 ////////////////////////////////////////
 // clean
 ////////////////////////////////////////
-gulp.task('clean', function() {
+gulp.task('clean', () => {
   return gulp.src([
     '.tmp',
     'build',
@@ -212,16 +230,16 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 // minify
 ////////////////////////////////////////
-gulp.task('minify-js', function() {
+gulp.task('minify-js', () => {
   return merge(
     gulp.src('build/js/{onsenui,angular-onsenui}.js')
       .pipe($.uglify({
         mangle: false,
-        preserveComments: function(node, comment) {
+        preserveComments: (node, comment) => {
           return comment.line === 1;
         }
       }))
-      .pipe($.rename(function(path) {
+      .pipe($.rename(path => {
         path.extname = '.min.js';
       }))
       .pipe(gulp.dest('build/js/'))
@@ -232,9 +250,9 @@ gulp.task('minify-js', function() {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], function() {
+gulp.task('prepare', ['html2js'], () =>  {
 
-  var onlyES6;
+  let onlyES6;
 
   return merge(
 
@@ -254,7 +272,10 @@ gulp.task('prepare', ['html2js'], function() {
         sourceMap: 'inline',
         plugins: [
           npm(),
-          babel({presets: ['es2015-rollup']})
+          babel({
+            presets: ['es2015-rollup'],
+            babelrc: false
+          })
         ]
       }))
       .pipe($.ngAnnotate({
@@ -318,7 +339,7 @@ gulp.task('prepare', ['html2js'], function() {
 ////////////////////////////////////////
 // prepare-css-components
 ////////////////////////////////////////
-gulp.task('prepare-css-components', ['prepare'], function() {
+gulp.task('prepare-css-components', ['prepare'], () => {
   return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
     .pipe(gulp.dest('css-components/www/patterns/lib/onsen'));
 });
@@ -326,8 +347,8 @@ gulp.task('prepare-css-components', ['prepare'], function() {
 ////////////////////////////////////////
 // compress-distribution-package
 ////////////////////////////////////////
-gulp.task('compress-distribution-package', function() {
-  var src = [
+gulp.task('compress-distribution-package', () => {
+  const src = [
     path.join(__dirname, 'build/**'),
     '!' + path.join(__dirname, 'build/docs/**'),
     '!' + path.join(__dirname, 'build/stylus/**')
@@ -341,7 +362,7 @@ gulp.task('compress-distribution-package', function() {
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', function(done) {
+gulp.task('build', done => {
   return runSequence(
     'clean',
     'core',
@@ -358,7 +379,7 @@ gulp.task('build', function(done) {
 // dist
 ////////////////////////////////////////
 
-gulp.task('soft-build', function(done) {
+gulp.task('soft-build', done => {
   return runSequence(
     'clean',
     'core',
@@ -369,7 +390,7 @@ gulp.task('soft-build', function(done) {
 });
 
 function distFiles() {
-  gulp.src([
+  return gulp.src([
     'build/**/*',
     '!build/docs/**/*',
     '!build/docs/',
@@ -393,10 +414,10 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], function() {
+gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], () => {
   gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
-  var watched = [
+  const watched = [
     'bindings/angular1/*/*',
     'core/css/*.css',
     'css-components/components-src/dist/*.css'
@@ -414,7 +435,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
   gulp.watch([
     'examples/*/*.{js,css,html}',
     'test/e2e/*/*.{js,css,html}'
-  ]).on('change', function(changedFile) {
+  ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
   });
@@ -424,7 +445,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], fu
 ////////////////////////////////////////
 // build-docs
 ////////////////////////////////////////
-gulp.task('build-docs', function() {
+gulp.task('build-docs', () => {
   return require('./docs/wcdoc')(path.join(__dirname, '/build/docs'));
 });
 
@@ -436,31 +457,25 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 ////////////////////////////////////////
 // webdriver-download
 ////////////////////////////////////////
-gulp.task('webdriver-download', function() {
-  var chromeDriverUrl,
-    platform = os.platform();
-
-  var destDir = path.join(__dirname, '.selenium');
+gulp.task('webdriver-download', () => {
+  const platform = os.platform();
+  const destDir = path.join(__dirname, '.selenium');
+  const chromeDriverUrl = (() => {
+    const filePath = platform === 'linux' ?
+      '/2.19/chromedriver_linux64.zip' :
+      `/2.14/chromedriver_${platform === 'darwin' ? 'mac' : 'win'}32.zip`;
+    return `http://chromedriver.storage.googleapis.com${filePath}`;
+  })();
 
   // Only download once.
   if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
     return gulp.src('');
   }
 
-  if (platform === 'linux') {
-    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.19/chromedriver_linux64.zip';
-  }
-  else if (platform === 'darwin') {
-    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.21/chromedriver_mac32.zip';
-  }
-  else {
-    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_win32.zip';
-  }
-
-  var selenium = $.download('https://selenium-release.storage.googleapis.com/2.51/selenium-server-standalone-2.51.0.jar')
+  const selenium = $.download('https://selenium-release.storage.googleapis.com/2.51/selenium-server-standalone-2.51.0.jar')
     .pipe(gulp.dest(destDir));
 
-  var chromedriver = $.download(chromeDriverUrl)
+  const chromedriver = $.download(chromeDriverUrl)
     .pipe($.unzip())
     .pipe($.chmod(755))
     .pipe(gulp.dest(destDir));
@@ -480,14 +495,14 @@ gulp.task('test', function(done) {
 // e2e-test
 ////////////////////////////////////////
 gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
-  var port = 8081;
+  const port = 8081;
 
   $.connect.server({
     root: __dirname,
     port: port
   });
 
-  var conf = {
+  const conf = {
     configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
@@ -496,9 +511,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     ]
   };
 
-  var specs = argv.specs ?
-    argv.specs.split(',').map(function(s) { return s.trim(); }) :
-    ['test/e2e/**/*js'];
+  const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['test/e2e/**/*js'];
 
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))
