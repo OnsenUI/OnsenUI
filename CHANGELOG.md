@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.7
+----
+ * ons-switch: Trigger `change` event only once.
+ * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
+ * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
+
 v2.0.0-rc.6
 ----
  * ons-splitter: 'load' methods return promises in Angular1 bindings.

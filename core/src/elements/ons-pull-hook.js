@@ -107,6 +107,8 @@ class PullHookElement extends BaseElement {
 
     this._currentTranslation = 0;
 
+    this._ensureScrollElement();
+
     this._setState(STATE_INITIAL, true);
     this._setStyle();
   }
@@ -127,6 +129,12 @@ class PullHookElement extends BaseElement {
     pageElement.appendChild(scrollElement);
 
     return scrollElement;
+  }
+
+  _ensureScrollElement() {
+    if (!this._scrollElement) {
+      this._scrollElement = this._createScrollElement();
+    }
   }
 
   _setStyle() {
@@ -430,7 +438,7 @@ class PullHookElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._scrollElement = this._createScrollElement();
+    this._ensureScrollElement();
 
     this._pageElement = this._scrollElement.parentElement;
 
