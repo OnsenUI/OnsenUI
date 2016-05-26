@@ -41,6 +41,7 @@ import './elements/ons-toolbar';
 import './elements/ons-range';
 import './elements/bh/bh-step';
 import './elements/bh/bh-input';
+import './elements/bh/bh-input-select';
 
 // fastclick
 window.addEventListener('load', () => {
