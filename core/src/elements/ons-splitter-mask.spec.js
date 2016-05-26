@@ -11,6 +11,7 @@ describe('OnsSplitterMaskElement', () => {
       <ons-splitter>
         <ons-splitter-side side="left">Item 1</ons-splitter-side>
         <ons-splitter-mask></ons-splitter-mask>
+        <ons-splitter-content></ons-splitter-content>
       </ons-splitter>
     `);
     mask = splitter.querySelector('ons-splitter-mask');

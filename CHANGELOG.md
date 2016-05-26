@@ -2,10 +2,37 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.7
+----
+ * ons-switch: Trigger `change` event only once.
+ * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
+ * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
+
+v2.0.0-rc.6
+----
+ * ons-splitter: 'load' methods return promises in Angular1 bindings.
+ * ons-navigator: Fix 'popPage' with 'refresh' parameter.
+ * ons-dialog: Make ons-dialog angular2 compatible.
+ * ons-speed-dial, ons-speed-dial-item: Removed `_compiled` attribute.
+ * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
+ * ons-carousel: Fix [#1423](https://github.com/OnsenUI/OnsenUI/issues/1423).
+ * core: Create unified `onDeviceBackButton` API for alert-dialog, dialog, modal, page, popover, splitter.
+
 v2.0.0-rc.5
 ----
  * css-components: Fix material list item paddings.
  * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
+ * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
+ * ons-carousel: Fix [#1404](https://github.com/OnsenUI/OnsenUI/issues/1404).
+ * ons-speed-dial: Add `isOpen()` method.
+ * ons-speed-dial: Emit `open` and `close` events.
+ * ons-speed-dial: Block clicks when hidden.
+ * ons-splitter: Correctly import dependency.
+ * css-components: Fix border of inline list.
+ * css-components: Refine style of list item title and subtitle.
+ * ons-toolbar: Fix [#1419](https://github.com/OnsenUI/OnsenUI/issues/1419).
+ * css-components: Refine default paddings of list items.
+ * ons-back-button: Add `onClick` property.
 
 v2.0.0-rc.4
 ----

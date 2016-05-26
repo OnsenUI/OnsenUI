@@ -18,10 +18,12 @@ limitations under the License.
 import orientation from 'ons/orientation';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 /**
  * @element ons-if
  * @category conditional
+ * @tutorial vanilla/Reference/if
  * @description
  *   [en]
  *     Conditionally display content depending on the platform, device orientation or both.
@@ -65,11 +67,16 @@ class ConditionalElement extends BaseElement {
    */
 
   createdCallback() {
-    if (platform._renderPlatform !== null) {
-      this._platformUpdate();
-    } else if (!this._isAllowedPlatform()){
-      this.innerHTML = '';
-    }
+    contentReady(this, () => {
+      if (platform._renderPlatform !== null) {
+        this._platformUpdate();
+      } else if (!this._isAllowedPlatform()) {
+        while (this.childNodes[0]) {
+          this.childNodes[0].remove();
+        }
+        this._platformUpdate();
+      }
+    });
 
     this._onOrientationChange();
   }

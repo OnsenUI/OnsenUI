@@ -56,6 +56,7 @@ const INPUT_ATTRIBUTES = [
  *   [/en]
  *   [ja][/ja]
  * @codepen xZQomM
+ * @tutorial vanilla/Reference/range
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]

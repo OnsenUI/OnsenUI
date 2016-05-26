@@ -33,6 +33,7 @@ import contentReady from 'ons/content-ready';
  *  [/en]
  *  [ja][/ja]
  * @codepen rOQOML
+ * @tutorial vanilla/Reference/splitter
  * @seealso ons-splitter-content
  *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]
@@ -103,32 +104,41 @@ class SplitterElement extends BaseElement {
    *   [ja][/ja]
    */
   get content() {
-    return util.findChild(this, 'ons-splitter-content') || this.appendChild(document.createElement('ons-splitter-content'));
+    return util.findChild(this, 'ons-splitter-content');
   }
 
   get mask() {
-    return util.findChild(this, 'ons-splitter-mask') || this.appendChild(document.createElement('ons-splitter-mask'));
+    return util.findChild(this, 'ons-splitter-mask');
   }
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back button handler.[/en]
-   *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  _onDeviceBackButton(handler) {
-    this._sides.some(s => s.isOpen ? s.close() : false) || handler.callParentHandler();
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
+  }
+
+  _onDeviceBackButton(event) {
+    this._sides.some(s => s.isOpen ? s.close() : false) || event.callParentHandler();
   }
 
   _onModeChange(e) {
     if (e.target.parentNode) {
-      this._layout();
+      contentReady(this, () => {
+        this._layout();
+      });
     }
   }
 
@@ -139,12 +149,22 @@ class SplitterElement extends BaseElement {
   }
 
   createdCallback() {
-    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._boundOnModeChange = this._onModeChange.bind(this);
+
+    contentReady(this, () => {
+      this._compile();
+      this._layout();
+    });
+  }
+
+  _compile() {
+    if (!this.mask) {
+      this.appendChild(document.createElement('ons-splitter-mask'));
+    }
   }
 
   attachedCallback() {
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
     this.addEventListener('modechange', this._boundOnModeChange, false);
 
     contentReady(this, () => {
@@ -182,3 +202,5 @@ window.OnsSplitterElement = document.registerElement('ons-splitter', {
 });
 
 animatorFactory.assign(window.OnsSplitterElement);
+
+export default OnsSplitterElement;

@@ -4,7 +4,7 @@ describe('OnsPopoverElement', () => {
   let popover, target;
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
-  beforeEach((done) => {
+  beforeEach(done => {
     popover = new OnsPopoverElement();
     target = ons._util.createElement('<div>Target</div>');
 
@@ -65,7 +65,7 @@ describe('OnsPopoverElement', () => {
     });
   });
 
-  describe('#_onDeviceBackButton()', () => {
+  describe('#onDeviceBackButton', () => {
     it('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.setAttribute('cancelable', '');
@@ -73,7 +73,7 @@ describe('OnsPopoverElement', () => {
       popover.show(target);
       expect(popoverDisplay()).to.equal('block');
 
-      popover._onDeviceBackButton({callParentHandler: () => {}});
+      popover.onDeviceBackButton._callback({callParentHandler: () => {}});
       expect(popoverDisplay()).to.equal('none');
     });
 
@@ -83,7 +83,7 @@ describe('OnsPopoverElement', () => {
       popover.show(target);
       expect(popoverDisplay()).to.equal('block');
 
-      popover._onDeviceBackButton({callParentHandler: () => {}});
+      popover.onDeviceBackButton._callback({callParentHandler: () => {}});
       expect(popoverDisplay()).to.equal('block');
     });
   });
@@ -258,7 +258,7 @@ describe('OnsPopoverElement', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
-      div1.innerHTML = '<ons-popover></ons-popover>';
+      div1.innerHTML = '<ons-popover>contents</ons-popover>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });

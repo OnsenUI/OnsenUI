@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Popover | Onsen UI</title>
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+    <script src="../../../../build/js/onsenui.js"></script>
+    <script src="../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
+
+    <script>
+      angular.module('myApp').controller('MyController', function($scope) {
+        ons.ready(function() {
+          ons.createPopover('popover.html').then(function(popover) {
+            $scope.popover = popover;
+          });
+        });
+        $scope.show = function(e) {
+          $scope.popover.show(e);
+        }
+      });
+    </script>
+
+  </head>
+
+  <body ng-controller="MyController">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button modifier="outline" id="navigation" ng-click="show('#navigation')">
+            <i class="ion-navicon" style="font-size:32px; vertical-align: -6px"></i>
+          </ons-toolbar-button>
+        </div>
+
+        <div class="center">
+          Popover demo!
+        </div>
+
+        <div class="right">
+          <ons-toolbar-button modifier="outline" id="top-right" ng-click="show('#top-right')">Button</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br />
+        <br />
+        <ons-button id="button" ng-click="show('#button')">Click me!</ons-button>
+      </div>
+
+      <div class="tab-bar">
+        <label ng-click="show('#stop')" class="tab-bar__item">
+          <input type="radio" name="tab-bar-b" checked="checked">
+          <button id="stop" class="tab-bar__button">
+            <i class="tab-bar__icon ion-stop"></i>
+          </button>
+        </label>
+
+        <label ng-click="show('#record')" class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button id="record" class="tab-bar__button">
+            <i class="tab-bar__icon ion-record"></i>
+          </button>
+        </label>
+
+        <label ng-click="show('#star')" class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button id="star" class="tab-bar__button">
+            <i class="tab-bar__icon ion-star"></i>
+          </button>
+        </label>
+
+        <label ng-click="show('#cloud')" class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button id="cloud" class="tab-bar__button">
+            <i class="tab-bar__icon ion-ios-cloud-outline"></i>
+          </button>
+        </label>
+
+        <label ng-click="show('#pie')" class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button id="pie" class="tab-bar__button">
+            <i class="tab-bar__icon ion-ios-pie"></i>
+          </button>
+        </label>
+      </div>
+    </ons-page>
+
+    <script type="text/ons-template" id="popover.html">
+      <ons-popover direction="up down" cancelable>
+        <div style="text-align: center; opacity: 0.5;">
+          <p>This is a popover!</p>
+          <p><small>Click the background to remove the popover.</small></p>
+        </div>
+      </ons-popover>
+    </script>
+
+  </body>
+</html>

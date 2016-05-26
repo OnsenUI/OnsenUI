@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Tabbar Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+
+  <ons-tabbar var="tabbar">
+    <ons-tabbar-item
+      label="Home"
+      page="page.html"
+      active="true"></ons-tabbar-item>
+    <ons-tabbar-item
+      label="Comments"
+      page="page.html"></ons-tabbar-item>
+    <ons-tabbar-item
+      label="Settings"
+      page="page.html"></ons-tabbar-item>
+  </ons-tabbar>
+
+  <script type="text/ons-template" id="page.html">
+    <ons-toolbar>
+      <div class="center">Page</div>
+    </ons-toolbar>
+  </script>
+
+</body>
+</html>

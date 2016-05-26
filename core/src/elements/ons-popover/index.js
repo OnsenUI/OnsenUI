@@ -61,6 +61,7 @@ const directions = Object.keys(positions);
  *  [/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
  * @codepen ZYYRKo
+ * @tutorial vanilla/Reference/popover
  * @example
  * <ons-button onclick="showPopover(this)">
  *   Click me!
@@ -191,23 +192,25 @@ class PopoverElement extends BaseElement {
    */
 
   get _mask() {
-    return this.children[0];
+    return util.findChild(this, '.popover-mask');
   }
 
   get _popover() {
-    return this.children[1];
+    return util.findChild(this, '.popover__container');
   }
 
   get _content() {
-    return this._popover.children[0];
+    return util.findChild(this._popover, '.popover__content');
   }
 
   get _arrow() {
-    return this._popover.children[1];
+    return util.findChild(this._popover, '.popover__arrow');
   }
 
   createdCallback() {
-    contentReady(this, () => this._compile());
+    contentReady(this, () => {
+      this._compile();
+    });
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
@@ -216,14 +219,6 @@ class PopoverElement extends BaseElement {
     this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
-
-  _onDeviceBackButton(event) {
-    if (this.cancelable) {
-      this._cancel();
-    } else {
-      event.callParentHandler();
-    }
-  }
 
   _positionPopover(target) {
     const {_radius: radius, _content: el, _margin: margin} = this;
@@ -310,14 +305,27 @@ class PopoverElement extends BaseElement {
 
     this.classList.add('popover');
 
-    const template = templateSource.cloneNode(true);
-    const content = template.querySelector('.popover__content');
+    if (this._popover && this._content) {
 
-    while (this.firstChild) {
-      content.appendChild(this.firstChild);
+      if (!this._mask) {
+        this.insertBefore(util.create('popover-mask'), this.firstChild);
+      }
+
+      if (!this._arrow) {
+        this._popover.appendChild(util.create('.popover__arrow'));
+      }
+
+    } else {
+
+      const template = templateSource.cloneNode(true);
+      const content = template.querySelector('.popover__content');
+
+      while (this.childNodes[0]) {
+        content.appendChild(this.childNodes[0]);
+      }
+
+      this.appendChild(template);
     }
-
-    this.appendChild(template);
 
     if (this.hasAttribute('style')) {
       this._popover.setAttribute('style', this.getAttribute('style'));
@@ -441,24 +449,37 @@ class PopoverElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
-   *   [ja]バックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
+  }
+
+  _resetBackButtonHandler() { // do we need this twice?
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
+  }
+
   attachedCallback() {
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._resetBackButtonHandler();
 
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
       this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
 
       this._mask.addEventListener('click', this._boundCancel, false);
+
+      this._resetBackButtonHandler();
 
       this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
       this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
@@ -468,19 +489,17 @@ class PopoverElement extends BaseElement {
   }
 
   detachedCallback() {
-    if (this._mask) {
+    contentReady(this, () => {
       this._mask.removeEventListener('click', this._boundCancel, false);
-    }
 
-    this._backButtonHandler.destroy();
-    this._backButtonHandler = null;
+      this._backButtonHandler.destroy();
+      this._backButtonHandler = null;
 
-    if (this._popover) {
       this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
       this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
-    }
 
-    window.removeEventListener('resize', this._boundOnChange, false);
+      window.removeEventListener('resize', this._boundOnChange, false);
+    });
   }
 
   attributeChangedCallback(name, last, current) {

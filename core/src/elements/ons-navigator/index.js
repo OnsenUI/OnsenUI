@@ -53,6 +53,7 @@ const rewritables = {
  *   [/en]
  *   [ja][/ja]
  * @codepen yrhtv
+ * @tutorial vanilla/Reference/navigator
  * @guide PageNavigation
  *   [en]Guide for page navigation[/en]
  *   [ja]ページナビゲーションの概要[/ja]
@@ -202,15 +203,13 @@ class NavigatorElement extends BaseElement {
    */
 
   createdCallback() {
-    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-
     this._isRunning = false;
 
     this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this.hasAttribute('page')) {
@@ -233,8 +232,8 @@ class NavigatorElement extends BaseElement {
   }
 
   detachedCallback() {
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
   }
 
   attributeChangedCallback(name, last, current) {
@@ -324,13 +323,11 @@ class NavigatorElement extends BaseElement {
       enterPage.style.display = 'block';
 
       const callback = () => {
-        setImmediate(() => enterPage._show());
-        leavePage._hide();
-
         pages.pop();
         update(pages, this).then(() => {
           this._isRunning = false;
 
+          enterPage._show();
           this._emitEvent('postpop', {leavePage, enterPage});
 
           if (typeof options.callback === 'function') {
@@ -341,6 +338,7 @@ class NavigatorElement extends BaseElement {
         });
       };
 
+      leavePage._hide();
       this._animator(options).pop({enterPage, leavePage, callback});
     }).catch(() => this._isRunning = false);
   }
@@ -418,6 +416,11 @@ class NavigatorElement extends BaseElement {
 
       var enterPage = this.pages[pageLength - 1];
       var leavePage = this.pages[pageLength - 2];
+
+      if (enterPage.nodeName !== 'ONS-PAGE') {
+        throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
+      }
+
       enterPage.updateBackButton(pageLength - 1);
 
       enterPage.data = options.data;
@@ -432,6 +435,7 @@ class NavigatorElement extends BaseElement {
             leavePage.style.display = 'none';
           }
 
+          enterPage._show();
           this._emitEvent('postpush', {leavePage, enterPage});
 
           if (typeof options.callback === 'function') {
@@ -447,17 +451,18 @@ class NavigatorElement extends BaseElement {
           enterPage.style.display = 'block';
           if (leavePage) {
             leavePage._hide();
-            setImmediate(() => enterPage._show());
             animator.push({enterPage, leavePage, callback});
           } else {
-            setImmediate(() => enterPage._show());
             callback();
           }
         };
 
         options._linked ? push() : rewritables.link(this, enterPage, options, push);
       });
-    }).catch(() => this._isRunning = false);
+    }).catch((error) => {
+      this._isRunning = false;
+      throw error;
+    });
   }
 
   /**
@@ -678,6 +683,25 @@ class NavigatorElement extends BaseElement {
     CustomElements.upgrade(pageElement);
 
     return pageElement;
+  }
+
+  /**
+   * @property onDeviceBackButton
+   * @type {Object}
+   * @description
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
+   */
+  get onDeviceBackButton() {
+    return this._backButtonHandler;
+  }
+
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**

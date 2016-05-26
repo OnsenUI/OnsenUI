@@ -20,7 +20,7 @@ import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -44,6 +44,7 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *     A navigation bar can be added to the top of the page using the `<ons-toolbar>` element.
  *   [/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ * @tutorial vanilla/Reference/page
  * @guide ManagingMultiplePages
  *   [en]Managing multiple pages[/en]
  *   [ja]複数のページを管理する[/ja]
@@ -253,7 +254,7 @@ class PageElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
-    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   _canAnimateToolbar() {

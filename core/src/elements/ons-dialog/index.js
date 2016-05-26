@@ -22,7 +22,7 @@ import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
-import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -30,15 +30,6 @@ const scheme = {
   '.dialog-container': 'dialog-container--*',
   '.dialog-mask': 'dialog-mask--*'
 };
-
-const templateSource = util.createElement(`
-  <div>
-    <div class="dialog-mask"></div>
-    <div class="dialog">
-      <div class="dialog-container"></div>
-    </div>
-  </div>
-`);
 
 /**
  * @element ons-dialog
@@ -58,6 +49,7 @@ const templateSource = util.createElement(`
  *   [en]Display a Material Design dialog.[/en]
  *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @codepen zxxaGa
+ * @tutorial vanilla/Reference/dialog
  * @guide UsingDialog
  *   [en]Learn how to use the dialog component.[/en]
  *   [ja]ダイアログコンポーネントの使い方[/ja]
@@ -199,19 +191,30 @@ class DialogElement extends BaseElement {
 
     this.style.display = 'none';
 
-    if (this._dialog) {
-      return;
+    /* Expected result:
+     *   <ons-dialog>
+     *     <div class="dialog-mask"></div>
+     *     <div class="dialog">
+     *       <div class="dialog-container">...</div>
+     *     </div>
+     *   </ons-dialog>
+     */
+
+    if (!this._dialog) {
+      const dialog = util.create('.dialog');
+      const container = util.create('.dialog-container');
+
+      dialog.appendChild(container);
+
+      while (this.firstChild) {
+        container.appendChild(this.firstChild);
+      }
+
+      this.appendChild(dialog);
     }
 
-    const template = templateSource.cloneNode(true);
-    const dialog = template.children[1];
-
-    while (this.firstChild) {
-      dialog.children[0].appendChild(this.firstChild);
-    }
-
-    while (template.firstChild) {
-      this.appendChild(template.firstChild);
+    if (!this._mask) {
+      this.insertBefore(util.create('.dialog-mask'), this.firstChild);
     }
 
     this._dialog.style.zIndex = 20001;
@@ -224,22 +227,21 @@ class DialogElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
-   *   [ja]バックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  _onDeviceBackButton(event) {
-    if (this.cancelable) {
-      this._cancel();
-    } else {
-      event.callParentHandler();
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   _cancel() {
@@ -361,9 +363,8 @@ class DialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
-
   attachedCallback() {
-    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
       this._mask.addEventListener('click', this._boundCancel, false);

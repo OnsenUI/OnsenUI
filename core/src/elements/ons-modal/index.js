@@ -22,6 +22,7 @@ import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import DoorLock from 'ons/doorlock';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'modal--*',
@@ -80,9 +81,9 @@ class ModalElement extends BaseElement {
    */
 
   createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
+    contentReady(this, () => {
       this._compile();
-    }
+    });
 
     this._doorLock = new DoorLock();
     this._animator = options => animatorFactory.newAnimator(this, options);
@@ -106,29 +107,23 @@ class ModalElement extends BaseElement {
     }
 
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
-    this._onDeviceBackButton = handler;
-  }
-
-  _onDeviceBackButton() {
-    // Do nothing and stop device-backbutton handler chain.
-    return;
   }
 
   _compile() {
     this.style.display = 'none';
     this.classList.add('modal');
 
-    const wrapper = util.create('.modal__content');
+    if (!util.findChild(this, '.modal__content')) {
+      const content = util.create('.modal__content');
 
-    while (this.firstChild) {
-      wrapper.appendChild(this.firstChild);
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
+
+      this.appendChild(content);
     }
 
-    this.appendChild(wrapper);
-
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   detachedCallback() {
@@ -138,10 +133,8 @@ class ModalElement extends BaseElement {
   }
 
   attachedCallback() {
-    setImmediate(() => {
-      this._ensureNodePosition();
-      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-    });
+    setImmediate(this._ensureNodePosition.bind(this));
+    this.onDeviceBackButton = () => undefined;
   }
 
   _ensureNodePosition() {
