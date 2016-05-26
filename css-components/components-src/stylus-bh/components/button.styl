@@ -27,10 +27,10 @@ var-button-quiet-color = $highlight-color
 
 var-button-cta-background-color = $second-highlight-color
 var-button-cta-color = white
-var-button-large-padding = 0 0
-var-button-padding = 4px 10px
+var-button-large-padding = 0px 12px
+var-button-padding = 0px pxToRem(80)
 var-button-line-height = pxToRem(80)
-var-button-large-line-height = 36px
+var-button-large-line-height = pxToRem(96)
 var-button-active-opacity = 0.2
 var-button-border-radius = 2px
 
@@ -207,7 +207,6 @@ button--active()
 .button--cta[disabled]
   button--disabled()
 
-
 /*! topdoc
   name: Large Button
   class: button--large
@@ -273,7 +272,6 @@ button--active()
 
 .button--large--quiet:focus
   outline 0
-
 
 /*! topdoc
   name: Large Call To Action Button
@@ -366,7 +364,6 @@ button--material()
     <button class="button button--material--flat">BUTTON</button>
     <button class="button button--material--flat" disabled>DISABLED</button>
 */
-
 
 .button--material--flat
   button--material()
