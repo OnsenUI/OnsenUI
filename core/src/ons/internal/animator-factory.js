@@ -18,8 +18,21 @@ limitations under the License.
 import util from '../util';
 import internal from '../internal';
 import platform from '../platform';
+import BaseAnimator from '../base-animator';
 
 const platformSuffix = () => platform.isAndroid() ? '-md' : '-ios';
+
+const newBaseClass = methods => {
+  class Base extends BaseAnimator {}
+  methods.forEach(method => {
+    Base.prototype[method] = function (options = {}) {
+      if (typeof options.callback === 'function') {
+        options.callback();
+      }
+    }
+  });
+  return Base;
+}
 
 export default class AnimatorFactory {
 
@@ -30,9 +43,17 @@ export default class AnimatorFactory {
    * @param {Object} options.methods
    */
   constructor(options) {
-    this.animators = options.animators;
     this.methods = options.methods;
-    this.base = options.base;
+    this.base = options.base || newBaseClass(this.methods);
+    this.animators = {} //options.animators;
+    util.each(options.animators, (name, Animator) => {
+      if (typeof Animator === 'string') {
+        this.animators[name] = Animator;
+      } else {
+        this.addAnimator(name, Animator);
+      }
+    })
+    this.animators.none = this.animators.none || this.base;
   }
 
   getAnimator(animation, options = {}) {
@@ -68,19 +89,34 @@ export default class AnimatorFactory {
   }
 
   addAnimator(name, Animator) {
-    if (typeof Animator !== 'function') {
-      Animator = Class.extend(Animator);
+    if (typeof Animator === 'object') {
+      const config = Animator;
+      const self = this;
+      Animator = class CustomAnimator extends BaseAnimator {};
+      util.each(config, (key, value) => {
+        if (this.methods.indexOf(key) === -1) {
+          return (Animator.prototype[key] = value);
+        }
+        Animator.prototype[key] = function (options) {
+          options = util.extend({}, self.defaults, config.defaults, options);
+          if (typeof config[key] === 'function') {
+            return config[key].call(this, options);
+          }
+          return this.animate(options, config[key]);
+        };
+      });
     }
-    if (typeof Animator === 'function') {
-      // let animator = new Animator();
 
+    if (typeof Animator === 'function') {
       this.getAnimator.call({
         animators: util.extend({}, this.animators, {[name]: Animator}),
-        methods: this.methods
+        methods: this.methods,
+        getAnimator: this.getAnimator
       }, name);
 
       this.animators[name] = Animator;
     }
+
   }
 
   assign(object) {

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import BaseAnimator from 'ons/base-animator';
 import util from 'ons/util';
 import {union, fade, translate, animate, acceleration} from 'ons/animations';
 
@@ -29,12 +29,12 @@ import {union, fade, translate, animate, acceleration} from 'ons/animations';
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
-export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSSlideNavigatorTransitionAnimator extends BaseAnimator {
 
   constructor(options = {}) {
-    super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)'}, options));
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)', duration: 0.4}, options));
 
-    this.backgroundMask = util.createElement(`
+    this.mask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
         background-color: black; opacity: 0; z-index: 2"></div>
     `);
@@ -62,7 +62,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       util.each(page, (key, value) => elements[name + '.' + key] = value);
     });
 
-    return util.extend(elements, {mask: this.backgroundMask});
+    return util.extend(elements, {mask: this.mask});
   }
 
   /**
@@ -71,16 +71,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    * @param {Function} callback
    */
   push({enterPage, leavePage, callback}) {
-    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
-    // const callback = () => { this.backgroundMask.remove(); cb && cb(); };
+    enterPage.parentNode.insertBefore(this.mask, enterPage);
 
     const mask = {
-      restore: true,
       animation: union(acceleration, animate({opacity: [0, 0.1]})),
-      callback: () => {
-        this.backgroundMask.remove();
-        callback && callback();
-      }
+      after: () => this.mask.remove(),
+      callback
     };
 
     if ([enterPage, leavePage].every(page => page && page._canAnimateToolbar())) {
@@ -135,15 +131,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    * @param {Function} callback
    */
   pop({enterPage, leavePage, callback}) {
-    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
+    leavePage.parentNode.insertBefore(this.mask, leavePage);
 
     const mask = {
-      restore: true,
       animation: union(acceleration, animate({opacity: [0.1, 0]})),
-      callback: () => {
-        this.backgroundMask.remove();
-        callback && callback();
-      }
+      after: () => this.mask.remove(),
+      callback
     };
 
     if ([enterPage, leavePage].every(page => page._canAnimateToolbar())) {

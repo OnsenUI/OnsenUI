@@ -105,14 +105,17 @@ const widthToPx = (width, parent) => {
 };
 
 class CollapseMode {
-  get _animator() {
-    return this._element._animator({element: this._element});
-  }
 
   constructor(element) {
     this._active = false;
     this._state = CLOSED_STATE;
     this._element = element;
+
+    const animator = this._element._animator({element: this._element});
+    this._animator = {
+      translate: distance => animator.translate({element: this._element, distance}),
+      open: () => animator.open({element: this._element})
+    };
   }
 
   isOpen() {
@@ -416,10 +419,10 @@ class SplitterSideElement extends BaseElement {
 
   createdCallback() {
     this._doorLock = new DoorLock();
+    this._animator = options => animatorFactory.newAnimator(this, options);
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._animator = options => animatorFactory.newAnimator(this, options);
     this._watchedAttributes = ['width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'open-threshold', 'page'];
   }
 

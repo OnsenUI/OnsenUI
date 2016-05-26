@@ -20,58 +20,33 @@ import BaseAnimator from 'ons/base-animator';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import {union, fade, acceleration, translate} from 'ons/animations';
 
-export class TabbarAnimator extends BaseAnimator {
-
-  constructor(options = {}) {
-    super(util.extend({duration: 0.4}, options));
-  }
-
-  /**
-   * @param {Element} enterPage ons-page element
-   * @param {Element} leavePage ons-page element
-   * @param {Number} enterPageIndex
-   * @param {Number} leavePageIndex
-   * @param {Function} done
-   */
-  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
-    callback && callback();
-  }
-}
-
-
-export class TabbarFadeAnimator extends TabbarAnimator {
-
-  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
-    this._animateAll({oldPage, newPage}, {
+const TabbarFadeAnimator = {
+  switchTab: function ({newPage, oldPage, callback}) {
+    this.animate({oldPage, newPage}, {
       oldPage: {animation: union(fade.out, acceleration)},
       newPage: {animation: union(fade.in, acceleration), restore: true, callback}
     });
   }
-}
+};
 
-export class TabbarSlideAnimator extends TabbarAnimator {
-
-  constructor(options = {}) {
-    super(util.extend({timing: 'ease-in', duration: 0.15}, options));
-  }
-
-  switchTab({newPage, oldPage, newIndex, oldIndex, callback}) {
+const TabbarSlideAnimator = {
+  defaults: {timing: 'ease-in', duration: 0.15},
+  switchTab: function ({newPage, oldPage, newIndex, oldIndex, callback}) {
     const signs = newIndex > oldIndex ? '- ' : ' -';
 
-    this._animateAll({oldPage, newPage}, {
+    this.animate({oldPage, newPage}, {
       oldPage: {animation: translate({to: signs[0] + '100%, 0'})},
       newPage: {animation: translate({from: signs[1] + '100%, 0'}), restore: true, callback}
     });
   }
-}
+};
 
 export default new AnimatorFactory({
-  base: TabbarAnimator,
+  defaults: {duration: 0.4},
   animators: {
     'default': 'none',
     'fade': TabbarFadeAnimator,
-    'slide': TabbarSlideAnimator,
-    'none': TabbarAnimator
+    'slide': TabbarSlideAnimator
   },
   methods: ['switchTab']
 });

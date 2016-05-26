@@ -16,44 +16,14 @@ limitations under the License.
 */
 
 import util from 'ons/util';
-import BaseAnimator from 'ons/base-animator';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import {fade} from 'ons/animations';
 
-export class ModalAnimator extends BaseAnimator {
-  show({element, callback}) {
-    callback && callback();
-  }
-
-  hide({element, callback}) {
-    callback && callback();
-  }
-}
-
-/**
- * Fade animator for dialog.
- */
-export class FadeModalAnimator extends ModalAnimator {
-
-  constructor(options) {
-    super(util.extend({duration: 0.3}, options));
-  }
-
-  show({element, callback}) {
-    this._animate(modal, {animation: fade.in, callback}).play();
-  }
-
-  hide({element, callback}) {
-    this._animate(modal, {animation: fade.out, callback}).play();
-  }
-}
-
 export default new AnimatorFactory({
-  base: ModalAnimator,
+  defaults: {duration: 0.3},
   animators: {
     'default': 'none',
-    'fade': FadeModalAnimator,
-    'none': ModalAnimator
+    'fade': {show: fade.in, hide: fade.out}
   },
   methods: ['show', 'hide']
 });

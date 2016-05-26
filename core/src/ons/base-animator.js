@@ -16,11 +16,13 @@ limitations under the License.
 */
 import util from 'ons/util';
 
+const canBeAnimated = e => Array.isArray(e) || e instanceof HTMLElement;
+
 export default class BaseAnimator {
 
   constructor(options = {}) {
-    this.options = util.extend({timing: 'linear', duration: 0.2, delay: 0}, ...arguments);
-    util.extend(this, this.options);
+    this.options = util.extend({timing: 'linear', duration: 0.2, delay: 0}, this.defaults, ...arguments);
+    // util.extend(this, this.options);
   }
 
   _animate(element, options) {
@@ -75,8 +77,9 @@ export default class BaseAnimator {
       elements = options.elements || options.element || options;
       // options = util.filter(options, ['from', 'to', 'after', 'duration', 'delay', 'timing', 'animation', 'callback']);
     }
-    if (Array.isArray(elements)) {
-      return this._animate(elements, animations).play();
+
+    if (canBeAnimated(elements) && (animations.animation || animations.from || animations.to)) {
+      return this._animate(elements, util.extend({}, options, animations)).play();
     }
 
     util.each(animations, (key, animation) => {

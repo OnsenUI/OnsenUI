@@ -19,7 +19,6 @@ import util from 'ons/util';
 import BaseAnimator from 'ons/base-animator';
 import AnimatorFactory from 'ons/internal/animator-factory';
 
-
 class SplitterAnimator extends BaseAnimator {
 
   constructor(options = {}) {
@@ -41,15 +40,15 @@ class SplitterAnimator extends BaseAnimator {
     }).play();
   }
 
-  open({callback} = {}) {
-    this._animateAll(this, {
+  open({callback}) {
+    this.animate(this, {
       mask: {from: {display: 'block'}, to: {opacity: 1}, timing: 'linear'},
       side: {to: {transform: `translate3d(${this.sign}100%, 0, 0)`}, callback},
     });
   }
 
-  close({callback} = {}) {
-    this._animateAll(this, {
+  close({callback}) {
+    this.animate(this, {
       mask: {to: {opacity: 0}, timing: 'linear', after: {display: 'none'}},
       side: {to: {transform: 'translate3d(0, 0, 0)'}, callback}
     });

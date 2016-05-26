@@ -15,79 +15,47 @@ limitations under the License.
 
 */
 import util from 'ons/util';
-import BaseAnimator from 'ons/base-animator';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import {union, fade, translate, scale} from 'ons/animations';
+import {union, fade, translate, scale, reverse} from 'ons/animations';
 
-export class AlertDialogAnimator extends BaseAnimator {
-
-  constructor(options = {}) {
-    super(util.extend({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options));
-  }
-
-  show({element, callback}) {
-    callback && callback();
-  }
-
-  hide({element, callback}) {
-    callback && callback();
-  }
-}
 
 /**
  * Android style animator for alert dialog.
  */
-export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
-  show({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.in,
-      _dialog: {
-        animation: union(fade.in, translate('-50%'), scale({from: 0.9})),
-        restore: true,
-        callback: callback
-      }
-    });
-  }
-
-  hide({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.out,
-      _dialog: {
-        animation: union(fade.out, translate('-50%'), scale({to: 0.9})),
-        restore: true,
-        callback: callback
-      }
-    });
+const AndroidAlertDialogAnimator = {
+  show: {
+    _mask: fade.in,
+    _dialog: {
+      animation: union(fade.in, translate('-50%'), scale({from: 0.9})),
+      restore: true,
+      callback: true
+    }
   }
 }
+AndroidAlertDialogAnimator.hide = reverse(AndroidAlertDialogAnimator.show);
 
 /**
  * iOS style animator for alert dialog.
  */
-export class IOSAlertDialogAnimator extends AlertDialogAnimator {
-  show({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.in,
-      _dialog: {
-        animation: union(fade.in, translate('-50%'), scale({from: 1.3})),
-        restore: true,
-        callback: callback
-      }
-    });
-  }
+const IOSAlertDialogAnimator = {
+  show: {
+    _mask: fade.in,
+    _dialog: {
+      animation: union(fade.in, translate('-50%'), scale({from: 1.3})),
+      restore: true,
+      callback: true
+    }
+  },
 
-  hide({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.out,
-      _dialog: {animation: fade.out, restore: true, callback}
-    });
+  hide: {
+    _mask: fade.out,
+    _dialog: {animation: fade.out, restore: true, callback: true}
   }
 }
 
 export default new AnimatorFactory({
-  base: AlertDialogAnimator,
+  defaults: {timing: 'cubic-bezier(.1, .7, .4, 1)'},
   animators: {
-    'none': AlertDialogAnimator,
     'default': 'fade',
     'fade-md': AndroidAlertDialogAnimator,
     'fade-ios': IOSAlertDialogAnimator

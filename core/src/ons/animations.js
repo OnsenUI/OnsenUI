@@ -78,6 +78,22 @@ export const union = (...animations) => ({
   to: merge(animations.map(e => e.to))
 });
 
+const _reverse = obj => {
+  if (obj.animation) {
+    return util.extend({}, obj, {animation: _reverse(obj.animation)});
+  }
+  const {from, to} = obj;
+  return util.extend({}, obj, from && {to: from}, to && {from: to});
+};
+
+export const reverse = obj => {
+  if (obj.animation || obj.from || obj.to) {
+    return _reverse(obj);
+  }
+  const result = {};
+  util.each(obj, (key, value) => result[key] = _reverse(value));
+  return result;
+};
 
 
 // export default const animations = {fade, translate, scale, acceleration, union};

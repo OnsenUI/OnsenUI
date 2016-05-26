@@ -19,56 +19,25 @@ import BaseAnimator from 'ons/base-animator';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import {fade, union, scale} from 'ons/animations';
 
-class PopoverAnimator extends BaseAnimator {
+const animation = (mask, popover = mask) => ({
+  _mask: mask,
+  _popover: {animation: popover, restore: true, callback: true}
+});
 
-  constructor(options = {}) {
-    super(util.extend({timing: 'cubic-bezier(.1, .7, .4, 1)'}, options));
-  }
+const MDFadePopoverAnimator = {
+  show: animation(fade.in),
+  hide: animation(fade.out)
+};
 
-  show({element, callback}) {
-    callback();
-  }
-
-  hide({element, callback}) {
-    callback();
-  }
-}
-
-
-class MDFadePopoverAnimator extends PopoverAnimator {
-  show({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.in,
-      _popover: {animation: fade.in, restore: true, callback}
-    });
-  }
-
-  hide({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.out,
-      _popover: {animation: fade.out, restore: true, callback}
-    });
-  }
-}
-
-class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
-  show({element, callback}) {
-    this._animateAll(element, {
-      _mask: fade.in,
-      _popover: {
-        animation: union(scale({from: 1.3, to: 1}), fade.in),
-        restore: true,
-        callback
-      }
-    });
-  }
-}
+const IOSFadePopoverAnimator = {
+  show: animation(fade.in, union(scale({from: 1.3}), fade.in)),
+  hide: animation(fade.out)
+};
 
 export default new AnimatorFactory({
-  base: PopoverAnimator,
+  defaults: {timing: 'cubic-bezier(.1, .7, .4, 1)'},
   animators: {
     'default': 'fade',
-    'none': PopoverAnimator,
     'fade-ios': IOSFadePopoverAnimator,
     'fade-md': MDFadePopoverAnimator
   },
