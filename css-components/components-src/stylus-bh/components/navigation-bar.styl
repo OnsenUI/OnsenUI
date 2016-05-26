@@ -33,6 +33,8 @@ var-navigation-bar-material-height = 56px
 var-material-navigation-bar-background-color = $material-toolbar-background-color
 var-material-navigation-bar-color = $material-toolbar-text-color
 
+var-bottom-navigation-bar-height = pxToRem(98)
+
 /*! topdoc
   name: Navigation Bar
   class: navigation-bar
@@ -257,7 +259,7 @@ navigation-bar__item()
 .bottom-bar
   navigation-bar()
   display block
-  height var-navigation-bar-height
+  height var-bottom-navigation-bar-height
   padding-left var-navigation-bar-padding
   padding-right var-navigation-bar-padding
   background var-navigation-bar-background-color
@@ -323,7 +325,7 @@ navigation-bar__item()
   justify-content space-between
   height var-navigation-bar-material-height
   border-bottom 0
-  box-shadow 0 1px 5px rgba(0,0,0,0.3)
+  box-shadow 0 1px 5px rgba(0, 0, 0, 0.3)
   padding 0
   background-color var-material-navigation-bar-background-color
   background-size 0
@@ -366,7 +368,6 @@ navigation-bar--material-font()
 
 .navigation-bar--material__left:empty, .navigation-bar--material__right:empty
   min-width 16px
-
 
 /*! topdoc
   name: Material Navigation Bar with Icons
