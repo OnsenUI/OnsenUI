@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.7
+ * ons-navigator: `data` object for `popPage`.
+
 v2.0.0-rc.6
 ----
  * ons-splitter: 'load' methods return promises in Angular1 bindings.
