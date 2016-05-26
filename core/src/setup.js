@@ -40,6 +40,7 @@ import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
 import './elements/ons-range';
 import './elements/bh/bh-step';
+import './elements/bh/bh-input';
 
 // fastclick
 window.addEventListener('load', () => {

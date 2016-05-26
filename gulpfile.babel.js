@@ -518,6 +518,7 @@ gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 
   //监听文件变化,刷新浏览器
   gulp.watch([
     'examples/**/*.{js,css,html}',
+    'examples/bh/**/*.{js,css,html}',
     'test/e2e/**/*.{js,css,html}',
     'build/css/bh.css',
     'build/js/bh.js'
@@ -529,7 +530,7 @@ gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 
 
 gulp.task('watch-develop-js', ['core'], function() {
   //监听js文件,并编译
-  return gulp.watch(['core/src/*.js', 'core/src/**/*.js'], ['core']);
+  return gulp.watch(['core/src/*.js', 'core/src/**/*.js', 'core/src/bh/**/*.js'], ['core']);
 });
 
 gulp.task('watch-develop-style', ['style'], function() {
