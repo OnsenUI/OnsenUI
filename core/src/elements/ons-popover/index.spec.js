@@ -65,7 +65,7 @@ describe('OnsPopoverElement', () => {
     });
   });
 
-  describe('#_onDeviceBackButton()', () => {
+  describe('#onDeviceBackButton', () => {
     it('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.setAttribute('cancelable', '');
@@ -73,7 +73,7 @@ describe('OnsPopoverElement', () => {
       popover.show(target);
       expect(popoverDisplay()).to.equal('block');
 
-      popover._onDeviceBackButton({callParentHandler: () => {}});
+      popover.onDeviceBackButton._callback({callParentHandler: () => {}});
       expect(popoverDisplay()).to.equal('none');
     });
 
@@ -83,7 +83,7 @@ describe('OnsPopoverElement', () => {
       popover.show(target);
       expect(popoverDisplay()).to.equal('block');
 
-      popover._onDeviceBackButton({callParentHandler: () => {}});
+      popover.onDeviceBackButton._callback({callParentHandler: () => {}});
       expect(popoverDisplay()).to.equal('block');
     });
   });

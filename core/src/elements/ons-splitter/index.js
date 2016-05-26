@@ -114,18 +114,25 @@ class SplitterElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back button handler.[/en]
-   *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  _onDeviceBackButton(handler) {
-    this._sides.some(s => s.isOpen ? s.close() : false) || handler.callParentHandler();
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
+  }
+
+  _onDeviceBackButton(event) {
+    this._sides.some(s => s.isOpen ? s.close() : false) || event.callParentHandler();
   }
 
   _onModeChange(e) {
@@ -143,7 +150,6 @@ class SplitterElement extends BaseElement {
   }
 
   createdCallback() {
-    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
     this._boundOnModeChange = this._onModeChange.bind(this);
 
     contentReady(this, () => {
@@ -159,7 +165,7 @@ class SplitterElement extends BaseElement {
   }
 
   attachedCallback() {
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
     this.addEventListener('modechange', this._boundOnModeChange, false);
   }
 
