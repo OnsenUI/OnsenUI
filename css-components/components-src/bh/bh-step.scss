@@ -2,6 +2,7 @@ $step-icon-width: 32px;
 $step-icon-height: $step-icon-width;
 
 bh-stepping{
+  font-size: pxToRem(24px);
   display: block;
   &:after{
     content: "";
