@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.7
 ----
  * ons-switch: Trigger `change` event only once.
+ * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
 
 v2.0.0-rc.6
 ----
