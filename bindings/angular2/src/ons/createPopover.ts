@@ -4,12 +4,10 @@ import {
   Directive,
   ElementRef,
   Type,
-  Compiler,
+  ComponentResolver,
   provide,
   NgZone,
-  AppViewManager,
   Renderer,
-  ResolvedProvider,
   Input,
   Injectable,
   DynamicComponentLoader,
@@ -18,7 +16,7 @@ import {
   RenderComponentType,
   ViewEncapsulation,
   ComponentRef
-} from 'angular2/core';
+} from '@angular/core';
 
 const gen = (() => {
   let i = 0;
@@ -31,14 +29,12 @@ const gen = (() => {
 export class PopoverFactory {
   constructor(
     private _dcl: DynamicComponentLoader,
-    private _compiler: Compiler,
     private _rootRenderer: RootRenderer,
-    private _viewManager: AppViewManager,
     private _injector: Injector
   ) {
   }
 
-  createPopover(componentType: Type, params: Object = {}): Promise<ComponentRef> {
+  createPopover(componentType: Type, params: Object = {}): Promise<ComponentRef<any>> {
     const id = this._createBackDrop();
     const dispose = () => {
       const backdrop: any = document.querySelector('#' + id);

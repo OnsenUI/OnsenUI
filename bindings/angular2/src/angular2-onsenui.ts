@@ -1,8 +1,9 @@
 import './setup';
-import * as browser from 'angular2/platform/browser'
-import {Type} from 'angular2/core';
+import * as browser from '@angular/platform-browser-dynamic'
+import {Type} from '@angular/core';
 
-export * from 'angular2/core';
+export * from '@angular/core';
+export * from '@angular/compiler';
 export * from './directives/ons-navigator';
 export * from './directives/ons-carousel';
 export * from './directives/ons-tabbar';

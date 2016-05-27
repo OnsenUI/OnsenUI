@@ -4,12 +4,9 @@ import {
   Directive,
   ElementRef,
   Type,
-  Compiler,
   provide,
   NgZone,
-  AppViewManager,
   Renderer,
-  ResolvedProvider,
   Input,
   Injectable,
   DynamicComponentLoader,
@@ -18,7 +15,7 @@ import {
   RenderComponentType,
   ViewEncapsulation,
   ComponentRef
-} from 'angular2/core';
+} from '@angular/core';
 
 const gen = (() => {
   let i = 0;
@@ -31,14 +28,12 @@ const gen = (() => {
 export class AlertDialogFactory {
   constructor(
     private _dcl: DynamicComponentLoader,
-    private _compiler: Compiler,
     private _rootRenderer: RootRenderer,
-    private _viewManager: AppViewManager,
     private _injector: Injector
   ) {
   }
 
-  createAlertDialog(componentType: Type, params: Object = {}): Promise<ComponentRef> {
+  createAlertDialog(componentType: Type, params: Object = {}): Promise<ComponentRef<any>> {
     const id = this._createBackDrop();
     const dispose = () => {
       const backdrop: any = document.querySelector('#' + id);

@@ -2,17 +2,18 @@ import {
   Component,
   DynamicComponentLoader,
   Injector,
+  ReflectiveInjector,
   Directive,
   ElementRef,
   Type,
-  Compiler,
+  ComponentResolver,
   provide,
   NgZone,
-  AppViewManager,
   Renderer,
-  ResolvedProvider,
-  Input
-} from 'angular2/core';
+  Input,
+  ViewContainerRef,
+  ResolvedReflectiveProvider
+} from '@angular/core';
 
 interface NavigatorElement {
   pushPage(page: string): Promise<any>;
@@ -32,7 +33,7 @@ export class PageParams {
 }
 
 export class NavigatorPage {
-  constructor(public elementRef: ElementRef, public component: Type, public type: Function, public dispose: Function, public params: PageParams) {
+  constructor(public elementRef: ElementRef, public destroy: Function, public params: PageParams) {
   }
 }
 
@@ -44,15 +45,20 @@ export class NavigatorPage {
 })
 export class OnsNavigator {
   private _navigator: NavigatorElement;
-  private _providers: ResolvedProvider[];
   private _pages: NavigatorPage[];
+  private _providers: ResolvedReflectiveProvider[];
 
-  constructor(private _elementRef: ElementRef, private _compiler: Compiler, private _viewManager: AppViewManager) {
+  constructor(
+    private _elementRef: ElementRef,
+    private _componentResolver: ComponentResolver,
+    private _loader: DynamicComponentLoader,
+    private _viewContainer: ViewContainerRef,
+    private _injector: Injector) {
     this._navigator = _elementRef.nativeElement;
-    this._providers = Injector.resolve([
+    this._pages = [];
+    this._providers = ReflectiveInjector.resolve([
       provide(OnsNavigator, {useValue: this})
     ]);
-    this._pages = [];
   }
 
   /**
@@ -86,26 +92,18 @@ export class OnsNavigator {
   }
 
   private _loadPageComponent(type: Type, params: Object, done: Function): void {
-    this._compiler.compileInHost(type).then(hostProtoViewRef => {
-      const location = this._elementRef;
-      const pageParams = new PageParams(params);
-      const providers = this._providers.concat(Injector.resolve([
-        provide(PageParams, {useValue: pageParams})
-      ]));
-      const viewContainer = this._viewManager.getViewContainer(location);
-      const hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, providers);
-      const elementRef = this._viewManager.getHostElement(hostViewRef);
-      const component = this._viewManager.getComponent(elementRef);
+    const pageParams = new PageParams(params);
+    const providers = this._providers.concat(ReflectiveInjector.resolve([
+      provide(PageParams, {useValue: pageParams})
+    ]));
 
-      const dispose = () => {
-        const index = viewContainer.indexOf(hostViewRef);
-        if (!hostViewRef.destroyed && index !== -1) {
-          viewContainer.remove(index);
-        }
-      };
+    this._loader.loadNextToLocation(type, this._viewContainer, providers).then(component => {
+      const elementRef = component.location;
+      const destroy = () => component.destroy();
 
-      done(new NavigatorPage(elementRef, component, type, dispose, pageParams));
+      done(new NavigatorPage(elementRef, destroy, pageParams));
     });
+
   }
 
   /**
@@ -120,7 +118,7 @@ export class OnsNavigator {
     return new Promise((resolve, reject) => {
       // TODO implement animation
       const page: NavigatorPage = this._pages.pop();
-      page.dispose();
+      page.destroy();
 
       resolve();
     });
@@ -131,7 +129,7 @@ export class OnsNavigator {
     return Promise.resolve();
   }
 
-  destoryComponent(index: number): Promise<any> {
+  destroyComponent(index: number): Promise<any> {
     // TODO implement
     return Promise.resolve();
   }

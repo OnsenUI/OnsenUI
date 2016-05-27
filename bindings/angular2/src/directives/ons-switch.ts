@@ -10,7 +10,7 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChange
-} from 'angular2/core';
+} from '@angular/core';
 
 @Directive({
   selector: 'ons-switch'
@@ -20,7 +20,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   private _boundOnChange: Function;
 
   @Input('value') _value: boolean;
-  @Output('valueChange') _valueChange: EventEmitter<boolean> = new EventEmitter();
+  @Output('valueChange') _valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);

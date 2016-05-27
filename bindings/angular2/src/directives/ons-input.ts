@@ -10,7 +10,7 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChange
-} from 'angular2/core';
+} from '@angular/core';
 
 @Directive({
   selector: 'ons-input'
@@ -20,7 +20,7 @@ export class OnsInput implements OnChanges, OnDestroy {
   private _boundOnChange: Function;
 
   @Input('value') _value: string;
-  @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter();
+  @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);

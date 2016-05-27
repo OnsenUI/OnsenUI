@@ -5,14 +5,11 @@ import {
   Directive,
   ElementRef,
   Type,
-  Compiler,
   provide,
   NgZone,
-  AppViewManager,
   Renderer,
-  ResolvedProvider,
   Input
-} from 'angular2/core';
+} from '@angular/core';
 
 @Directive({
   selector: 'ons-alert-dialog'

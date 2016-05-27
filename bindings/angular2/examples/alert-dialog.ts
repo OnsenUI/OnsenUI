@@ -57,7 +57,7 @@ class MyAlertDialogComponent implements AfterViewInit {
   `
 })
 export class AppComponent implements AfterViewInit {
-  private _alert: ComponentRef;
+  private _alert: ComponentRef<MyAlertDialogComponent>;
 
   constructor(private adf: AlertDialogFactory) {
   }

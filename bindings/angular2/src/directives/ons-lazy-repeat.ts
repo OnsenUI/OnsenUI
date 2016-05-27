@@ -6,7 +6,7 @@ import {
   Output,
   OnDestroy,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
 @Directive({
   selector: 'ons-lazy-repeat'
