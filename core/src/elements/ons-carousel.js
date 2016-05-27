@@ -331,7 +331,9 @@ class CarouselElement extends BaseElement {
   }
 
   _onResize() {
-    this.refresh();
+    const i = this._scroll / this._currentElementSize;
+    delete this._currentElementSize;
+    this.setActiveIndex(i);
   }
 
   _onDirectionChange() {

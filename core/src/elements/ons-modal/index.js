@@ -121,12 +121,6 @@ class ModalElement extends BaseElement {
     }
 
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
-    this._onDeviceBackButton = handler;
-  }
-
-  _onDeviceBackButton() {
-    // Do nothing and stop device-backbutton handler chain.
-    return;
   }
 
   _compile() {
@@ -157,7 +151,7 @@ class ModalElement extends BaseElement {
 
   attachedCallback() {
     setImmediate(this._ensureNodePosition.bind(this));
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this.onDeviceBackButton = () => undefined;
   }
 
   _ensureNodePosition() {

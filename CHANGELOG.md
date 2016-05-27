@@ -2,11 +2,23 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.7
+----
+ * ons-switch: Trigger `change` event only once.
+ * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
+ * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
+ * ons-navigator: Add `onDeviceBackButton` property.
+
 v2.0.0-rc.6
 ----
  * ons-page: Change to fill page background element if there is only .page__content element in ons-page.
  * ons-splitter: 'load' methods return promises in Angular1 bindings.
  * ons-navigator: Fix 'popPage' with 'refresh' parameter.
+ * ons-dialog: Make ons-dialog angular2 compatible.
+ * ons-speed-dial, ons-speed-dial-item: Removed `_compiled` attribute.
+ * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
+ * ons-carousel: Fix [#1423](https://github.com/OnsenUI/OnsenUI/issues/1423).
+ * core: Create unified `onDeviceBackButton` API for alert-dialog, dialog, modal, page, popover, splitter.
 
 v2.0.0-rc.5
 ----

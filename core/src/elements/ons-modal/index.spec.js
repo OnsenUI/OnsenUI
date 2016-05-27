@@ -108,15 +108,14 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#_onDeviceBackButton()', () => {
-    it('returns nothing by default', () => {
-      expect(element._onDeviceBackButton()).not.to.be.ok;
-    });
-  });
 
   describe('#onDeviceBackButton', () => {
     it('gets the callback', () => {
       expect(element.onDeviceBackButton).to.be.ok;
+    });
+
+    it('returns nothing by default', () => {
+      expect(element.onDeviceBackButton._callback()).not.to.be.ok;
     });
 
     it('overwrites the callback', () => {

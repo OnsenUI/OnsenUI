@@ -4144,7 +4144,7 @@ ons-range[disabled] .range {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   display: block;
-  margin: 8px 10px 8px 0px;
+  margin: 0;
 }
 /* topdoc
   name: List Item with Icon

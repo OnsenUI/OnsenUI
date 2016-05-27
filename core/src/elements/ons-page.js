@@ -20,7 +20,7 @@ import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -256,7 +256,7 @@ class PageElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
-    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**
