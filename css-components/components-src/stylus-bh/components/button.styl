@@ -19,20 +19,29 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
+var-button-width = pxToRem(286)
+var-button-height = pxToRem(80)
+var-button-font-size = pxToRem(34)
 var-button-background-color = $highlight-color
 var-button-color = white
 var-button-cta-background-color = $second-highlight-color
 var-border--button-color = rgba(0, 0, 0, 0)
 var-button-quiet-color = $highlight-color
 
+var-button-lang-width = pxToRem(592)
+
+var-button-circle-width = pxToRem(88)
+
+var-button-response-padding = 0 pxToRem(40)
+
+
 var-button-cta-background-color = $second-highlight-color
 var-button-cta-color = white
-var-button-large-padding = 0px 12px
-var-button-padding = 0px pxToRem(80)
 var-button-line-height = pxToRem(80)
 var-button-large-line-height = pxToRem(96)
+var-button-large-height = pxToRem(96)
 var-button-active-opacity = 0.2
-var-button-border-radius = 2px
+var-button-border-radius = pxToRem(6)
 
 var-material-button-background-color = $material-button-background-color
 var-material-button-color = $material-button-text-color
@@ -65,10 +74,10 @@ button()
   reset-font()
   reset-cursor()
   ellipsis()
-  height auto
+  font-size var-button-font-size
+  height var-button-height
+  width var-button-width
   text-decoration none
-  padding var-button-padding
-  font-size var-font-size
   line-height var-button-line-height
   letter-spacing var-letter-spacing
   color var-button-color
@@ -77,6 +86,7 @@ button()
   border 0px solid currentColor
   border-radius var-button-border-radius
   transition none
+  text-align center
 
 button--focus()
   outline 0
@@ -152,6 +162,36 @@ button--active()
     <button class="button--quiet" disabled>Button</button>
 */
 
+// 长条按钮 (非全屏)
+.button--long
+  width var-button-lang-width
+
+// 半屏按钮
+.button--half
+  width 50%
+  border-radius 0
+  border none
+
+// 白底按钮(无边框, 通常与半屏按钮一起使用)
+.button--white
+  background #fff
+  color var-button-background-color
+
+// 圆形按钮
+.button--circle
+  width var-button-circle-width
+  height var-button-circle-width
+  border-radius 50%
+  line-height var-button-circle-width
+  .iconfont
+    font-size pxToRem(48)
+    line-height var-button-circle-width + 0.4  // 解决搜索图标 看起来没有垂直居中的问题
+
+// 内容自适应按钮
+.button--response
+  width auto
+  padding var-button-response-padding
+
 .button--quiet
   button()
   button--quiet()
@@ -185,27 +225,27 @@ button--active()
     <button class="button--cta" disabled>Button</button>
 */
 
-.button--cta
-  button()
-  border none
-  background-color var-button-cta-background-color
-  color var-button-cta-color
-
-.button--cta:hover
-  button--hover()
-
-.button--cta:focus
-  button--focus()
-
-.button--cta:active
-  color var-button-cat-color
-  background-color var-button-cta-background-color
-  transition none
-  opacity var-button-active-opacity
-
-.button--cta:disabled,
-.button--cta[disabled]
-  button--disabled()
+//.button--cta
+//  button()
+//  border none
+//  background-color var-button-cta-background-color
+//  color var-button-cta-color
+//
+//.button--cta:hover
+//  button--hover()
+//
+//.button--cta:focus
+//  button--focus()
+//
+//.button--cta:active
+//  color var-button-cat-color
+//  background-color var-button-cta-background-color
+//  transition none
+//  opacity var-button-active-opacity
+//
+//.button--cta:disabled,
+//.button--cta[disabled]
+//  button--disabled()
 
 /*! topdoc
   name: Large Button
@@ -216,13 +256,13 @@ button--active()
 */
 
 .button--large
-  font-size var-font-size--large
   font-weight var-font-weight--large
   line-height var-button-large-line-height
-  padding var-button-large-padding
+  height var-button-large-height
   display block
   width 100%
   text-align center
+  border-radius 0
 
 .button--large:active
   button--active()
@@ -250,7 +290,6 @@ button--active()
   font-size var-font-size--large
   font-weight var-font-weight--large
   line-height var-button-large-line-height
-  padding var-button-large-padding
   display block
   width 100%
   button--quiet()
@@ -288,7 +327,6 @@ button--active()
   font-size var-font-size--large
   font-weight var-font-weight--large
   line-height var-button-large-line-height
-  padding var-button-large-padding
   width 100%
   text-align center
   display block
@@ -321,37 +359,37 @@ button--active()
     <button class="button button--material" disabled>DISABLED</button>
 */
 
-button--material()
-  button()
-  shadow-1()
-  min-height 36px
-  line-height 36px
-  padding 0px 16px
-  transition box-shadow 0.2s ease
-  text-align center
-  font-size 14px
-  transform: translate3d(0, 0, 0);
-  text-transform uppercase
-  background-color var-material-button-background-color
-  color var-material-button-color
-  material-font()
-  font-weight 500
-
-.button--material
-  button--material()
-
-.button--material:active
-  shadow-3()
-  background-color var-material-button-background-color
-  opacity 1
-
-.button--material:focus
-  button--focus()
-
-.button--material:disabled,
-.button--material[disabled]
-  opacity 0.5
-  shadow-0()
+//button--material()
+//  button()
+//  shadow-1()
+//  min-height 36px
+//  line-height 36px
+//  padding 0px 16px
+//  transition box-shadow 0.2s ease
+//  text-align center
+//  font-size 14px
+//  transform: translate3d(0, 0, 0);
+//  text-transform uppercase
+//  background-color var-material-button-background-color
+//  color var-material-button-color
+//  material-font()
+//  font-weight 500
+//
+//.button--material
+//  button--material()
+//
+//.button--material:active
+//  shadow-3()
+//  background-color var-material-button-background-color
+//  opacity 1
+//
+//.button--material:focus
+//  button--focus()
+//
+//.button--material:disabled,
+//.button--material[disabled]
+//  opacity 0.5
+//  shadow-0()
 
 /*! topdoc
   name: Material Flat Button
@@ -365,27 +403,27 @@ button--material()
     <button class="button button--material--flat" disabled>DISABLED</button>
 */
 
-.button--material--flat
-  button--material()
-  shadow-0()
-  background-color transparent
-  color var-material-button-background-color
-
-button--material--active()
-  shadow-0()
-  background-color transparent
-  color var-material-button-background-color
-  outline 0
-  opacity 1
-  border none
-
-.button--material--flat:active
-  button--material--active()
-
-.button--material--flat:focus
-  button--material--active()
-
-.button--material--flat:disabled,
-.button--material--flat[disabled]
-  opacity 0.5
-  shadow-0()
+//.button--material--flat
+//  button--material()
+//  shadow-0()
+//  background-color transparent
+//  color var-material-button-background-color
+//
+//button--material--active()
+//  shadow-0()
+//  background-color transparent
+//  color var-material-button-background-color
+//  outline 0
+//  opacity 1
+//  border none
+//
+//.button--material--flat:active
+//  button--material--active()
+//
+//.button--material--flat:focus
+//  button--material--active()
+//
+//.button--material--flat:disabled,
+//.button--material--flat[disabled]
+//  opacity 0.5
+//  shadow-0()

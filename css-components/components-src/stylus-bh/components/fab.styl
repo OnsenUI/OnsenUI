@@ -1,8 +1,8 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-fab-width = 56px
-var-fab-height = 56px
+var-fab-width = pxToRem(88)
+var-fab-height = pxToRem(88)
 
 var-fab-mini-width = 40px
 var-fab-mini-height = 40px
@@ -60,6 +60,9 @@ fab--active()
 
 .fab
   fab()
+  .iconfont
+    font-size pxToRem(48)
+    line-height var-fab-height + 0.4
 
 .fab:hover
   fab--hover()

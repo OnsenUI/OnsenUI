@@ -191,6 +191,7 @@ class FabElement extends BaseElement {
     this.style.webkitTransform = 'scale(0)';
   }
 
+  //noinspection JSAnnotator
   /**
    * @property disabled
    * @type {Boolean}
