@@ -12,7 +12,9 @@ import contentReady from 'ons/content-ready';
 const space = {
     //该组件的根样式名
     rootClassName: 'bh-stepping',
-    value: 1
+    value: 1,
+    //缓存标签对象
+    rootObj: null
 };
 
 //继承标签开发所需的类
@@ -39,42 +41,23 @@ class BhSteppingElement extends BaseElement {
 
     //步进加1
     _add(){
-        const num = this.currentStep;
-        this.setStep(num + 1);
+        const num = space.rootObj.currentStep;
+        space.rootObj.setStep(num + 1);
     }
 
     //步进减一
     _down(){
-        let num = this.currentStep;
+        let num = space.rootObj.currentStep;
         num--;
         //最小值是1
         if(num < 1){
             num = 1;
         }
-        this.setStep(num);
-    }
-
-    //点击加减按钮的处理
-    _stepAction(event){
-        const target = event.target;
-
-        if(util.hasClass(target, 'bh-right') || util.findParent(target, 'bh-right')){
-            this._add();
-        }else if(util.hasClass(target, 'bh-left') || util.findParent(target, 'bh-left')){
-            this._down();
-        }
+        space.rootObj.setStep(num);
     }
 
     _iconActiveHandle(event){
-        let target = event.target;
-        if(util.hasClass(target, space.rootClassName+'-icon')){
-            target.classList.toggle('bh-active');
-        }else{
-            target = util.findParent(target, space.rootClassName+'-icon');
-            if(target){
-                target.classList.toggle('bh-active');
-            }
-        }
+        this.classList.toggle('bh-active');
     }
 
     //组件加载完毕的回调,相当于该组件的入口方法
@@ -84,6 +67,7 @@ class BhSteppingElement extends BaseElement {
 
     //初始化方法
     _compile() {
+        space.rootObj = this;
         autoStyle.prepare(this);
         //添加样式
         this.classList.add(space.rootClassName);
@@ -94,17 +78,23 @@ class BhSteppingElement extends BaseElement {
         }
 
         const stepHtml = `
-            <div class="${space.rootClassName}-icon bh-left"><i class="iconfont icon-add"></i></div>
+            <div class="${space.rootClassName}-icon bh-left"><i class="iconfont icon-remove"></i></div>
             <input class="${space.rootClassName}-input" value="${space.value}" type="number" />
-            <div class="${space.rootClassName}-icon bh-right"><i class="iconfont icon-remove"></i></div>
+            <div class="${space.rootClassName}-icon bh-right"><i class="iconfont icon-add"></i></div>
         `;
 
         this.innerHTML = stepHtml;
 
         //监听该组件的事件
-        this.addEventListener('click', this._stepAction, false);
-        this.addEventListener('touchstart', this._iconActiveHandle, false);
-        this.addEventListener('touchend', this._iconActiveHandle, false);
+        const leftIcon = util.findChild(this, '.bh-left');
+        const rightIcon = util.findChild(this, '.bh-right');
+        leftIcon.addEventListener('click', this._down, false);
+        leftIcon.addEventListener('touchstart', this._iconActiveHandle, false);
+        leftIcon.addEventListener('touchend', this._iconActiveHandle, false);
+
+        rightIcon.addEventListener('click', this._add, false);
+        rightIcon.addEventListener('touchstart', this._iconActiveHandle, false);
+        rightIcon.addEventListener('touchend', this._iconActiveHandle, false);
     }
 
 }

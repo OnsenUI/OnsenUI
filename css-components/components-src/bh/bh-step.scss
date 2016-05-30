@@ -1,8 +1,7 @@
-$step-icon-width: 32px;
+$step-icon-width: 44px;
 $step-icon-height: $step-icon-width;
 
 bh-stepping{
-  font-size: pxToRem(24px);
   display: block;
   &:after{
     content: "";
@@ -13,10 +12,8 @@ bh-stepping{
 
 .bh-stepping-icon{
   position: relative;
-  cursor: pointer;
   width: pxToRem($step-icon-width);
   height: pxToRem($step-icon-width);
-  line-height: pxToRem($step-icon-width);
   background-color: $gray-lv4;
   text-align: center;
 
@@ -28,11 +25,17 @@ bh-stepping{
   &.bh-active{
     background-color: $primary-lv1;
   }
+  & i{
+    position: absolute;
+    top: pxToRem(10px);
+    left: pxToRem(10px);
+    font-size: pxToRem(24px);
+  }
 }
 
 .bh-stepping-input{
-  font-size: pxToRem(24px);
-  width: pxToRem(68px);
+  font-size: pxToRem(30px);
+  width: pxToRem(96px);
   height: pxToRem($step-icon-width);
   text-align: center;
   border: none;
