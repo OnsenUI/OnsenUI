@@ -16,16 +16,20 @@ limitations under the License.
 */
 
 import gulp from 'gulp';
-import path from'path';
+import path from 'path';
 import gulpIf from 'gulp-if';
 import pkg from './package.json';
-import {merge} from 'event-stream';
+import {
+  merge
+} from 'event-stream';
 import runSequence from 'run-sequence';
 import dateformat from 'dateformat';
 import browserSync from 'browser-sync';
 import os from 'os';
 import fs from 'fs';
-import {argv} from 'yargs';
+import {
+  argv
+} from 'yargs';
 import npm from 'rollup-plugin-npm';
 import babel from 'rollup-plugin-babel';
 
@@ -73,23 +77,23 @@ gulp.task('browser-sync', () => {
 // core
 ////////////////////////////////////////
 gulp.task('core', () => {
-  return gulp.src(['core/src/setup.js'], {read: false})
+  return gulp.src(['core/src/setup.js'], {
+      read: false
+    })
     .pipe($.plumber(error => {
       $.util.log(error.message);
       this.emit('end');
     }))
     .pipe($.rollup({
       sourceMap: 'inline',
-      plugins: [
-        {
+      plugins: [{
           resolveId: (code, id) => {
             if (id && code.charAt(0) !== '.') {
               let p = path.join(__dirname, 'core', 'src', code);
 
               if (fs.existsSync(p)) {
                 p = path.join(p, 'index.js');
-              }
-              else {
+              } else {
                 p = p + '.js';
               }
 
@@ -110,7 +114,9 @@ gulp.task('core', () => {
     .pipe($.sourcemaps.init())
     .pipe($.concat('bh.js'))
     // .pipe($.concat('onsenui.js'))
-    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {
+      pkg: pkg
+    }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js'))
     .on('end', () => browserSync.reload());
@@ -174,7 +180,9 @@ gulp.task('html2js', () => {
 gulp.task('eslint', () => {
   return gulp.src(eslintTargets())
     .pipe($.cached('eslint'))
-    .pipe($.eslint({useEslintrc: true}))
+    .pipe($.eslint({
+      useEslintrc: true
+    }))
     .pipe($.remember('eslint'))
     .pipe($.eslint.format());
 });
@@ -208,7 +216,9 @@ gulp.task('clean', () => {
     '.tmp',
     'build',
     '.selenium/'
-  ], {read: false}).pipe($.clean());
+  ], {
+    read: false
+  }).pipe($.clean());
 });
 
 ////////////////////////////////////////
@@ -217,24 +227,24 @@ gulp.task('clean', () => {
 gulp.task('minify-js', () => {
   return merge(
     gulp.src('build/js/{onsenui,angular-onsenui}.js')
-      .pipe($.uglify({
-        mangle: false,
-        preserveComments: (node, comment) => {
-          return comment.line === 1;
-        }
-      }))
-      .pipe($.rename(path => {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
+    .pipe($.uglify({
+      mangle: false,
+      preserveComments: (node, comment) => {
+        return comment.line === 1;
+      }
+    }))
+    .pipe($.rename(path => {
+      path.extname = '.min.js';
+    }))
+    .pipe(gulp.dest('build/js/'))
+    .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
   );
 });
 
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], () =>  {
+gulp.task('prepare', ['html2js'], () => {
 
   let onlyES6;
 
@@ -251,40 +261,42 @@ gulp.task('prepare', ['html2js'], () =>  {
       'bindings/angular1/services/*.js',
       'bindings/angular1/js/*.js'
     ])
-      .pipe($.plumber())
-      .pipe($.rollup({
-        sourceMap: 'inline',
-        plugins: [
-          npm(),
-          babel({
-            presets: ['es2015-rollup'],
-            babelrc: false
-          })
-        ]
-      }))
-      .pipe($.ngAnnotate({
-        add: true,
-        single_quotes: true // eslint-disable-line camelcase
-      }))
-      .pipe($.sourcemaps.init())
-      .pipe($.concat('angular-onsenui.js'))
-      .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
+    .pipe($.plumber())
+    .pipe($.rollup({
+      sourceMap: 'inline',
+      plugins: [
+        npm(),
+        babel({
+          presets: ['es2015-rollup'],
+          babelrc: false
+        })
+      ]
+    }))
+    .pipe($.ngAnnotate({
+      add: true,
+      single_quotes: true // eslint-disable-line camelcase
+    }))
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('angular-onsenui.js'))
+    .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {
+      pkg: pkg
+    }))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('build/js/'))
+    .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
 
     // onsen-css-components
     gulp.src([
       'css-components/components-src/dist/*.css',
     ])
-      .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
+    .pipe(gulp.dest('build/css/'))
+    .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // stylus files
     gulp.src([
       'css-components/components-src/stylus-bh/**/*'
     ])
-      .pipe(gulp.dest('build/stylus/')),
+    .pipe(gulp.dest('build/stylus/')),
 
 
     // onsenui.css
@@ -292,31 +304,33 @@ gulp.task('prepare', ['html2js'], () =>  {
       'core/css/common.css',
       'core/css/*.css'
     ])
-      .pipe($.concat('onsenui.css'))
-      .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
+    .pipe($.concat('onsenui.css'))
+    .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
+    .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {
+      pkg: pkg
+    }))
+    .pipe(gulp.dest('build/css/'))
+    .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // angular.js copy
     gulp.src('bindings/angular1/lib/angular/*.*')
-      .pipe(gulp.dest('build/js/angular/')),
+    .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome fle copy
     gulp.src('core/css/font_awesome/**/*')
-      .pipe(gulp.dest('build/css/font_awesome/')),
+    .pipe(gulp.dest('build/css/font_awesome/')),
 
     // ionicons file copy
     gulp.src('core/css/ionicons/**/*')
-      .pipe(gulp.dest('build/css/ionicons/')),
+    .pipe(gulp.dest('build/css/ionicons/')),
 
     // material icons file copy
     gulp.src('core/css/material-design-iconic-font/**/*')
-      .pipe(gulp.dest('build/css/material-design-iconic-font/')),
+    .pipe(gulp.dest('build/css/material-design-iconic-font/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
-      .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
+    .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
   );
 });
 
@@ -375,20 +389,20 @@ gulp.task('soft-build', done => {
 
 function distFiles() {
   return gulp.src([
-    'build/**/*',
-    '!build/docs/**/*',
-    '!build/docs/',
-    '!build/js/angular/**/*',
-    '!build/js/angular/',
-    '!build/onsenui.zip',
-    'bower.json',
-    'package.json',
-    '.npmignore',
-    'README.md',
-    'CHANGELOG.md',
-    'LICENSE'
-  ])
-  .pipe(gulp.dest('OnsenUI-dist/'));
+      'build/**/*',
+      '!build/docs/**/*',
+      '!build/docs/',
+      '!build/js/angular/**/*',
+      '!build/js/angular/',
+      '!build/onsenui.zip',
+      'bower.json',
+      'package.json',
+      '.npmignore',
+      'README.md',
+      'CHANGELOG.md',
+      'LICENSE'
+    ])
+    .pipe(gulp.dest('OnsenUI-dist/'));
 }
 
 gulp.task('dist', ['soft-build'], distFiles);
@@ -421,7 +435,10 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
     'test/e2e/*/*.{js,css,html}'
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
-      .pipe(browserSync.reload({stream: true, once: true}));
+      .pipe(browserSync.reload({
+        stream: true,
+        once: true
+      }));
   });
 });
 
@@ -513,9 +530,9 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
 // develop
 //开发模式
 ////////////////////////////////////////
-gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 'browser-sync'], function() {
+gulp.task('develop', ['watch-eslint', 'watch-develop-js', 'watch-develop-style', 'browser-sync'], function() {
   // for livereload
-  //监听文件变化,刷新浏览器
+  // 监听文件变化,刷新浏览器
   gulp.watch([
     'examples/**/*.{js,css,html}',
     'examples/bh/**/*.{js,css,html}',
@@ -524,7 +541,10 @@ gulp.task('develop', ['watch-eslint','watch-develop-js', 'watch-develop-style', 
     'build/js/bh.js'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
-        .pipe(browserSync.reload({stream: true, once: true}));
+      .pipe(browserSync.reload({
+        stream: true,
+        once: true
+      }));
   });
 });
 
@@ -536,82 +556,85 @@ gulp.task('watch-develop-js', ['core'], function() {
 gulp.task('watch-develop-style', ['style'], function() {
   //监听样式文件并编译
   return gulp.watch(
-      [
-        'css-components/components-src/stylus-bh/**/*.styl',
-        'css-components/components-src/bh/**/*.scss',
-        'core/style/**/*.scss',
-        'core/style/**/*.styl'
-      ],
-      ['style']);
+    [
+      'css-components/components-src/stylus-bh/**/*.styl',
+      'css-components/components-src/bh/**/*.scss',
+      'core/style/**/*.scss',
+      'core/style/**/*.styl'
+    ], ['style']);
 });
 
 //复制字体文件
 gulp.task('copy-icon', function() {
   return merge(
-      // font-awesome fle copy
-      gulp.src('core/css/font_awesome/**/*')
-          .pipe(gulp.dest('build/css/font_awesome/')),
+    // font-awesome fle copy
+    gulp.src('core/css/font_awesome/**/*')
+    .pipe(gulp.dest('build/css/font_awesome/')),
 
-      // ionicons file copy
-      gulp.src('core/css/ionicons/**/*')
-          .pipe(gulp.dest('build/css/ionicons/')),
+    // ionicons file copy
+    gulp.src('core/css/ionicons/**/*')
+    .pipe(gulp.dest('build/css/ionicons/')),
 
-      // material icons file copy
-      gulp.src('core/css/material-design-iconic-font/**/*')
-          .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+    // material icons file copy
+    gulp.src('core/css/material-design-iconic-font/**/*')
+    .pipe(gulp.dest('build/css/material-design-iconic-font/'))
   );
 });
 
 //编译样式
 gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-components-style'], function() {
   return gulp.src([
-    cssConfig.writePath+cssConfig.onsenFileName+'.css',
-    cssConfig.writePath+cssConfig.onsenComponentsFileName+'.css',
-    cssConfig.writePath+cssConfig.bhComponentsFileName+'.css'
-  ])
-      .pipe($.concat('bh.css'))
-      .pipe(autoprefixer({
-        browsers: cssConfig.prefixerScheme
-      }))
-      .pipe(gulp.dest(cssConfig.writePath))
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(minifyCSS())
-      .pipe(gulp.dest(cssConfig.writePath));
+      cssConfig.writePath + cssConfig.onsenFileName + '.css',
+      cssConfig.writePath + cssConfig.onsenComponentsFileName + '.css',
+      cssConfig.writePath + cssConfig.bhComponentsFileName + '.css'
+    ])
+    .pipe($.concat('bh.css'))
+    .pipe(autoprefixer({
+      browsers: cssConfig.prefixerScheme
+    }))
+    .pipe(gulp.dest(cssConfig.writePath))
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(cssConfig.writePath));
 });
 
 ////////////////////////////////////////
 // 编译onsenui基础样式
 ////////////////////////////////////////
-gulp.task('onsen-common-style', function () {
+gulp.task('onsen-common-style', function() {
   return gulp.src([
-    './core/style/skins/default/*.scss',
-    './core/style/variable/*.scss',
-    './core/style/utils/*.scss',
-    './core/style/mixins/*.scss',
-    './core/style/ons/common.scss',
-    './core/style/ons/*.scss'
-  ])
-      .pipe($.concat(cssConfig.onsenFileName+'.scss'))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest(cssConfig.writePath))
+      './core/style/skins/default/*.scss',
+      './core/style/variable/*.scss',
+      './core/style/utils/*.scss',
+      './core/style/mixins/*.scss',
+      './core/style/ons/common.scss',
+      './core/style/ons/*.scss'
+    ])
+    .pipe($.concat(cssConfig.onsenFileName + '.scss'))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(cssConfig.writePath))
 });
 
 ////////////////////////////////////////
 // 编译onsenui组件样式
 ////////////////////////////////////////
-gulp.task('onsen-components-style', function () {
+gulp.task('onsen-components-style', function() {
   return gulp.src([
-    './core/style/skins/default/*.styl',
-    './core/style/variable/*.styl',
-    './core/style/utils/*.styl',
-    './css-components/components-src/stylus-bh/bh-default-theme.styl',
-    './css-components/components-src/stylus-bh/components/util.styl',
-    './css-components/components-src/stylus-bh/components/global.styl',
-    './css-components/components-src/stylus-bh/components/*.styl'
-  ])
-      .pipe(concat(cssConfig.onsenComponentsFileName+ '.styl'))
-      .pipe(stylus({error: true}))
-      .pipe(gulp.dest(cssConfig.writePath))
+      './core/style/skins/default/*.styl',
+      './core/style/variable/*.styl',
+      './core/style/utils/*.styl',
+      './css-components/components-src/stylus-bh/bh-default-theme.styl',
+      './css-components/components-src/stylus-bh/components/util.styl',
+      './css-components/components-src/stylus-bh/components/global.styl',
+      './css-components/components-src/stylus-bh/components/*.styl'
+    ])
+    .pipe(concat(cssConfig.onsenComponentsFileName + '.styl'))
+    .pipe(stylus({
+      error: true
+    }))
+    .pipe(gulp.dest(cssConfig.writePath))
 });
 
 ////////////////////////////////////////
@@ -619,14 +642,14 @@ gulp.task('onsen-components-style', function () {
 ////////////////////////////////////////
 gulp.task('bh-components-style', function() {
   return gulp.src([
-    './core/style/skins/default/*.scss',
-    './core/style/variable/*.scss',
-    './core/style/utils/*.scss',
-    './core/style/mixins/*.scss',
-    './core/style/*.scss',
-    './css-components/components-src/bh/**/*.scss'
-  ])
-      .pipe(concat(cssConfig.bhComponentsFileName+'.scss'))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest(cssConfig.writePath))
+      './core/style/skins/default/*.scss',
+      './core/style/variable/*.scss',
+      './core/style/utils/*.scss',
+      './core/style/mixins/*.scss',
+      './core/style/*.scss',
+      './css-components/components-src/bh/**/*.scss'
+    ])
+    .pipe(concat(cssConfig.bhComponentsFileName + '.scss'))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(cssConfig.writePath))
 });

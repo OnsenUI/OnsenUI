@@ -41,24 +41,25 @@ import './elements/ons-toolbar';
 import './elements/ons-range';
 import './elements/bh/bh-step';
 import './elements/bh/bh-input';
+import './elements/bh/bh-search';
 
 // fastclick
 window.addEventListener('load', () => {
-    ons.fastClick = FastClick.attach(document.body);
+	ons.fastClick = FastClick.attach(document.body);
 }, false);
 
 // ons._defaultDeviceBackButtonHandler
 window.addEventListener('DOMContentLoaded', () => {
-  ons._deviceBackButtonDispatcher.enable();
-  ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
-    navigator.app.exitApp();
-  });
-  document.body._gestureDetector = new ons.GestureDetector(document.body);
+	ons._deviceBackButtonDispatcher.enable();
+	ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
+		navigator.app.exitApp();
+	});
+	document.body._gestureDetector = new ons.GestureDetector(document.body);
 }, false);
 
 // setup loading placeholder
 ons.ready(function() {
-  ons._setupLoadingPlaceHolders();
+	ons._setupLoadingPlaceHolders();
 });
 
 // viewport.js
