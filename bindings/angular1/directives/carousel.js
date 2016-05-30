@@ -152,7 +152,7 @@
         CustomElements.upgrade(element[0]);
         return function(scope, element, attrs) {
           CustomElements.upgrade(element[0]);
-          if (scope.$last){
+          if (scope.$last) {
             element[0].parentElement._setup();
             element[0].parentElement._setupInitialIndex();
             element[0].parentElement._saveLastState();
