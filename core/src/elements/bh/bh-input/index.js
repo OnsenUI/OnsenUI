@@ -18,8 +18,9 @@ const space = {
 //继承标签开发所需的类
 class BhInputElement extends BaseElement {
 
-    _setAttr(event){
-        util.findParent(this, 'bh-input').setAttribute('value', this.value);
+    //提供给外部获取值的方法
+    value(){
+        return util.findChild(this, 'input').value;
     }
 
     //组件加载完毕的回调,相当于该组件的入口方法
@@ -43,9 +44,6 @@ class BhInputElement extends BaseElement {
         `;
 
         this.innerHTML = stepHtml;
-
-        //监听输入框变化,设置bh-input标签的value
-        this.querySelector('input').addEventListener('change', this._setAttr, false);
     }
 
 }
