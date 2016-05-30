@@ -22,12 +22,13 @@ var-progress-bar-background-color = $material-progress-bar-background-color
 
 .progress-bar
   position relative
-  height 4px
+  height pxToRem(13)
   display block
   width 100%
   background-color var-progress-bar-background-color
   background-clip padding-box
   margin 0
+  border-radius pxToRem(6)
   overflow hidden
 
 .progress-bar--determinate > .progress-bar__primary
@@ -37,6 +38,7 @@ var-progress-bar-background-color = $material-progress-bar-background-color
   top 0
   bottom 0
   transition width .3s linear
+  border-radius pxToRem(6)
   z-index 100
     
 .progress-bar--determinate > .progress-bar__secondary
@@ -52,6 +54,7 @@ var-progress-bar-background-color = $material-progress-bar-background-color
   bottom 0
   will-change left, right
   animation progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite
+  border-radius pxToRem(6)
 
 .progress-bar--indeterminate:after
   content ''
