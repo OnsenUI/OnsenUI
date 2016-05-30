@@ -6,7 +6,7 @@ $bh-input-font-size: 30px;
 bh-input{
   display: block;
   position: relative;
-  font-size: $bh-input-font-size;
+  font-size: pxToRem($bh-input-font-size);
 }
 
 .bh-input{
@@ -14,7 +14,7 @@ bh-input{
   height: pxToRem($bh-input-height);
   border: 1px solid $gray-lv6;
   padding: 0 pxToRem($bh-input-padding-h) 0 pxToRem($bh-input-label-width + $bh-input-padding-h);
-  font-size: $bh-input-font-size;
+  font-size: pxToRem($bh-input-font-size);
   &:focus{
     border-color: $primary-lv1;
   }

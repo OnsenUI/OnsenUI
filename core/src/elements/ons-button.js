@@ -108,6 +108,7 @@ class ButtonElement extends BaseElement {
     }
   }
 
+  //noinspection JSAnnotator
   /**
    * @property disabled
    * @type {Boolean}

@@ -1,0 +1,27 @@
+$bh-input-select-height: 72px;
+$bh-input-select-font-size: 30px;
+$bh-input-select-padding-h: 24px;
+$bh-input-select-padding-v: 16px;
+
+bh-input-select{
+  display: block;
+  position: relative;
+  height: pxToRem($bh-input-select-height);
+  border: 1px solid $gray-lv6;
+  font-size: pxToRem($bh-input-select-font-size);
+  padding: pxToRem($bh-input-select-padding-v) pxToRem($bh-input-select-padding-h);
+}
+
+.bh-input-select-label{
+  float: left;
+}
+
+.bh-input-select-caption{
+  color: $gray-lv3;
+  float: right;
+  & i{
+    float: right;
+    margin-left: pxToRem(12px);
+    font-size: pxToRem(36px);
+  }
+}
