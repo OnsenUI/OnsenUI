@@ -181,11 +181,11 @@ describe('OnsAlertDialogElement', () => {
     });
   });
 
-  describe('#_onDeviceBackButton()', () => {
+  describe('#onDeviceBackButton', () => {
     it('cancels if dialog is cancelable', () => {
       const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
-      dialog._onDeviceBackButton();
+      dialog.onDeviceBackButton._callback();
       expect(spy).to.have.been.called.once;
     });
 
@@ -193,7 +193,7 @@ describe('OnsAlertDialogElement', () => {
       const event = {};
       const spy = chai.spy.on(event, 'callParentHandler');
 
-      dialog._onDeviceBackButton(event);
+      dialog.onDeviceBackButton._callback(event);
       expect(spy).to.have.been.called.once;
     });
   });

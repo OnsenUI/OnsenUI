@@ -227,7 +227,6 @@ class SwitchElement extends BaseElement {
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
-      util.triggerElementEvent(this.checkbox, 'change');
     }
   }
 

@@ -225,15 +225,13 @@ class NavigatorElement extends BaseElement {
    */
 
   createdCallback() {
-    this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-
     this._isRunning = false;
 
     this._updateAnimatorFactory();
   }
 
   attachedCallback() {
-    this._deviceBackButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
+    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this.hasAttribute('page')) {
@@ -265,8 +263,8 @@ class NavigatorElement extends BaseElement {
   }
 
   detachedCallback() {
-    this._deviceBackButtonHandler.destroy();
-    this._deviceBackButtonHandler = null;
+    this._backButtonHandler.destroy();
+    this._backButtonHandler = null;
   }
 
   attributeChangedCallback(name, last, current) {
@@ -749,6 +747,25 @@ class NavigatorElement extends BaseElement {
     CustomElements.upgrade(pageElement);
 
     return pageElement;
+  }
+
+  /**
+   * @property onDeviceBackButton
+   * @type {Object}
+   * @description
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
+   */
+  get onDeviceBackButton() {
+    return this._backButtonHandler;
+  }
+
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**
