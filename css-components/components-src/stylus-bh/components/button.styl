@@ -68,7 +68,11 @@ button--quiet()
   reset-quiet()
 
 button--disabled()
-  disabled()
+  //disabled()
+  cursor not-allowed
+  background #ccc
+  color #fff
+  border none
 
 button--hover()
   transition none
@@ -208,6 +212,22 @@ button--active()
   background var-button-primary-color
   &:active
     background darken(var-button-primary-color, 30%)
+
+
+.button--success
+  background var-button-success-color
+  &:active
+    background darken(var-button-success-color, 30%)
+
+.button--warning
+  background var-button-warning-color
+  &:active
+    background darken(var-button-warning-color, 30%)
+
+.button--danger
+  background var-button-danger-color
+  &:active
+    background darken(var-button-danger-color, 30%)
 
 
 

@@ -30,8 +30,8 @@ var-material-tab-bar-highlight-color = $material-tabbar-highlight-color
 
 var-tab-bar-active-border-top = none
 var-tab-bar-focus-border-top = none
-var-tab-bar-height = 49px
-var-tab-bar-button-line-height = 49px
+var-tab-bar-height = pxToRem(98)
+var-tab-bar-button-line-height = pxToRem(98)
 var-tab-bar-button-border = none
 var-tab-bar-active-box-shadow = none
 var-tab-bar-button-focus-box-shadow = none
@@ -115,7 +115,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   reset-font()
   display table
   table-layout fixed
-  position absolute
+  position fixed
   bottom 0px
   left 0px
   right 0px
@@ -162,18 +162,20 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
     border-top none
 
 .tab-bar__icon
-  font-size 24px
+  font-size pxToRem(60)
   padding 0
-  margin 0
   line-height 26px
   display block
   height 28px
+  margin pxToRem(6) 0
+  .iconfont
+    font-size pxToRem(60)
 
 .tab-bar__label
   reset-font()
 
 .tab-bar__icon + .tab-bar__label
-  font-size 10px
+  //font-size 10px
   line-height 1
   margin 0
   font-weight var-font-weight
