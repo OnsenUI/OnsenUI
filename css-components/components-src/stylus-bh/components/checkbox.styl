@@ -20,27 +20,23 @@
 
 // internal variables
 var-background-color-checked--checkbox = $highlight-color // background color active
-var-checkbox-border-color = $highlight-color // boder color
-var-checkbox-border-color-active = $highlight-color // boder color active
+var-checkbox-border-color = $gray-lv5 // boder color
+var-checkbox-border-color-active = $primary-lv1 // boder color active
 var-checkmark-color = #fff // indicator color
 
-var-checkmark-foot-height = 6px
+var-checkmark-foot-height = pxToRem(9px)
 var-checkbox-border = 1px solid var-checkbox-border-color
 var-background-color--before--checkbox = var-background-color-checked--checkbox
 var-checkmark-border = 3px solid var-checkmark-color
-var-checkmark-tail-width = 12px
+var-checkmark-tail-width = pxToRem(16px)
 var-checkmark-border-width = 2px
-var-checkmark-top = 6px
-var-checkmark-left = 5px
-var-checkbox-size = 24px
+var-checkmark-top = pxToRem(7px)
+var-checkmark-left = pxToRem(6px)
+var-checkbox-size = pxToRem(32px)
 var-border--checkmark--noborder = 3px solid var-checkbox-border-color
-var-checkbox-border-radius = 16px
+var-checkbox-border-radius = 9999px
 var-checkmark-border-radius = 0px
 
-var-material-checkbox-size = 18px
-var-material-checkbox-active-color = $material-checkbox-active-color
-var-material-checkbox-inactive-color = $material-checkbox-inactive-color
-var-material-checkbox-checkmark-color = $material-checkbox-checkmark-color
 
 /*! topdoc
   name: Checkbox
@@ -71,8 +67,8 @@ var-material-checkbox-checkmark-color = $material-checkbox-checkmark-color
 checkbox()
   reset-box-model()
   inline-block()
-  reset-cursor()
-  reset-font()
+  //reset-cursor()
+  //reset-font()
   hide-input-parent()
 
 checkbox__label()
@@ -90,29 +86,37 @@ checkbox--before()
 checkbox--after()
   checkbox--before()
 
+.radio-button,
 .checkbox
   checkbox__label()
   line-height var-checkbox-size
 
-.checkbox__checkmark
+.checkbox__checkmark,
+.radio-button__checkmark
   checkbox()
+  width var-checkbox-size
   height var-checkbox-size
   pointer-events none
 
+.radio-button__input,
 .checkbox__input
   hide-input()
 
-.checkbox__input:checked
+.checkbox__input:checked,
+.radio-button__input:checked
   background var-background-color-checked--checkbox
 
-.checkbox__input:checked + .checkbox__checkmark:before
+.checkbox__input:checked + .checkbox__checkmark:before,
+.radio-button__input:checked + .radio-button__checkmark:before
   background var-background-color--before--checkbox
-  border var-checkbox-border
+  border-color var-background-color--before--checkbox
 
-.checkbox__input:checked + .checkbox__checkmark:after
+.checkbox__input:checked + .checkbox__checkmark:after,
+.radio-button__input:checked + .radio-button__checkmark:after
   opacity 1
 
-.checkbox__checkmark:before
+.checkbox__checkmark:before,
+.radio-button__checkmark:before
   checkbox--before()
   reset-box-model()
   width var-checkbox-size
@@ -123,13 +127,9 @@ checkbox--after()
   box-shadow var-box-shadow
   left 0
 
-.checkbox__checkmark
-  checkbox()
-  width var-checkbox-size
-  height var-checkbox-size
-
 // checkmark's line
-.checkbox__checkmark:after
+.checkbox__checkmark:after,
+.radio-button__checkmark:after
   checkbox--after()
   top var-checkmark-top
   left var-checkmark-left
@@ -145,12 +145,15 @@ checkbox--after()
   opacity 0
 
 .checkbox__input:focus + .checkbox__checkmark:before
+.radio-button__input:focus + .radio-button__checkmark:before
   box-shadow var-box-shadow--cta
 
-.checkbox__input:disabled + .checkbox__checkmark
+.checkbox__input:disabled + .checkbox__checkmark,
+.radio-button__input:disabled + .radio-button__checkmark
   checkbox--disabled()
 
-.checkbox__input:disabled:active + .checkbox__checkmark:before
+.checkbox__input:disabled:active + .checkbox__checkmark:before,
+.radio-button__input:disabled:active + .radio-button__checkmark:before
   background transparent
   box-shadow var-box-shadow
 
@@ -247,81 +250,3 @@ checkbox--after()
   background transparent
   box-shadow var-box-shadow
   border none
-
-/*! topdoc
-  name: Material Checkbox
-  use: Checkbox
-  modifiers:
-    :focus: Focus state
-    :disabled: Disabled state
-  markup:
-    <label class="checkbox checkbox--material">
-      <input type="checkbox" class="checkbox__input checkbox--material__input">
-      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-      OFF
-    </label>
-    <label class="checkbox checkbox--material">
-      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
-      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-      ON
-    </label>
-    <label class="checkbox checkbox--material">
-      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
-      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-      ON
-    </label>
-    <label class="checkbox checkbox--material">
-      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
-      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-      Disabled
-    </label>
-*/
-
-.checkbox--material
-  line-height var-material-checkbox-size
-  material-font()
-
-.checkbox--material__checkmark
-  width var-material-checkbox-size
-  height var-material-checkbox-size
-
-.checkbox--material__checkmark:before
-  border 2px solid var-material-checkbox-inactive-color
-
-.checkbox--material__input:checked + .checkbox--material__checkmark:before
-  background-color var-material-checkbox-active-color
-  border none
-
-.checkbox--material__input + .checkbox--material__checkmark:after
-  border-color var-material-checkbox-checkmark-color
-  transition transform 0.3s ease
-  width 10px
-  height 5px
-  top 4px
-  left 3px
-  transform scale(0) rotate(-45deg)
-
-.checkbox--material__input:checked + .checkbox--material__checkmark:after
-  top 4px
-  left 3px
-  transform scale(1) rotate(-45deg)
-
-.checkbox--material__input:disabled + .checkbox--material__checkmark
-  opacity 1
-
-.checkbox--material__input:disabled + .checkbox--material__checkmark:before
-  border-color #afafaf
-
-.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before
-  background-color #afafaf
-
-.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:after
-  border-color #ffffff
-
-.checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before
-  background-color #afafaf
-
-.checkbox--material__checkmark:before
-  border-radius 2px
-  width var-material-checkbox-size
-  height var-material-checkbox-size
