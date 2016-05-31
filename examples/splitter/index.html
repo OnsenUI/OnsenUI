@@ -1,78 +1,94 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Splitter | Onsen UI</title>
-  <link rel="stylesheet" href="../../build/css/onsenui.css">
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+    <meta charset="utf-8">
+    <title>Splitter | Onsen UI</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../../core/utils/computeRootSize.js"></script>
+    <link rel="stylesheet" href="../../build/css/bh.css">
+    <link rel="stylesheet" href="http://res.wisedu.com/fe_components/iconfont/iconfont.css">
 
-  <script src="../../build/js/onsenui.js"></script>
+    <script src="../../build/js/bh.js"></script>
 
-  <style>
-    ons-splitter-side[side="left"] {
-      border-right: 1px solid #ddd;
-    }
+    <style>
+        ons-splitter-side[side="left"] {
+            border-right: 1px solid #ddd;
+        }
 
-    ons-splitter-side[side="right"] {
-      border-left: 1px solid #ddd;
-    }
-  </style>
+        ons-splitter-side[side="right"] {
+            border-left: 1px solid #ddd;
+        }
+    </style>
 
-  <script>
-    function toggle(side) {
-      var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
+    <script>
+        function toggle(side) {
+            var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
 
-      side.toggle();
-    }
-  </script>
+            side.toggle();
+        }
+    </script>
 
 </head>
 
 <body>
 
-  <ons-splitter>
-    <ons-splitter-side side="left" width="200px" collapse swipeable>
-      <ons-page>
-        <ons-toolbar>
-          <div class="center">content</div>
-        </ons-toolbar>
-        <p>1234</p>
+<ons-splitter>
+    <ons-splitter-side side="left" collapse swipeable>
+        <ons-page>
+            <!--<ons-toolbar>-->
+            <!--<div class="center">content</div>-->
+            <!--</ons-toolbar>-->
+            <!--<p>1234</p>-->
+            <ons-list>
+                <ons-list-item>11222</ons-list-item>
+                <ons-list-item modifier="chevron">11222</ons-list-item>
+                <ons-list-item>11222</ons-list-item>
+                <ons-list-item modifier="chevron">11222</ons-list-item>
+                <ons-list modifier="subList">
+                    <ons-list-item>334444</ons-list-item>
+                    <ons-list-item>334444</ons-list-item>
+                    <ons-list-item>334444</ons-list-item>
+                    <ons-list-item>334444</ons-list-item>
+                </ons-list>
+                <ons-list-item>11222</ons-list-item>
+            </ons-list>
 
-      </ons-page>
+        </ons-page>
     </ons-splitter-side>
 
     <ons-splitter-content>
-      <ons-page>
-        <ons-toolbar>
-          <div class="center">ons-splitter-content</div>
-        </ons-toolbar>
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">ons-splitter-content</div>
+            </ons-toolbar>
 
-        <p style="padding: 10px 20px;">
-          <ons-button onclick="toggle('left')">toggle left menu</ons-button>
-        </p>
+            <p style="padding: 10px 20px;">
+                <ons-button onclick="toggle('left')">toggle left menu</ons-button>
+            </p>
 
-        <p style="padding: 10px 20px;">
-          <ons-button onclick="toggle('right')">toggle right menu</ons-button>
-        </p>
+            <p style="padding: 10px 20px;">
+                <ons-button onclick="toggle('right')">toggle right menu</ons-button>
+            </p>
 
-      </ons-page>
+        </ons-page>
     </ons-splitter-content>
 
     <ons-splitter-side side="right" width="300px" collapse swipeable threhold-ratio-should-open="0.4">
-      <ons-page>
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button onclick="toggle('right')">Close</ons-toolbar-button>
-          </div>
-          <div class="center">ons-splitter-side</div>
-        </ons-toolbar>
-        <ons-page-content>
-          qweqwewqeqwe
-        </ons-page-content>
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="toggle('right')">Close</ons-toolbar-button>
+                </div>
+                <div class="center">ons-splitter-side</div>
+            </ons-toolbar>
+            <ons-page-content>
+                qweqwewqeqwe
+            </ons-page-content>
 
-      </ons-page>
+        </ons-page>
     </ons-splitter-side>
-  </ons-splitter>
+</ons-splitter>
 
 </body>
 </html>
