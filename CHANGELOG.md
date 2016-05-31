@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.8
+----
+
 v2.0.0-rc.7
 ----
  * ons-carousel: Support ng-repeat in Angular1 bindings.
@@ -10,6 +13,7 @@ v2.0.0-rc.7
  * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
  * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
  * ons-navigator: Add `onDeviceBackButton` property.
+ * ons-fab: Show button by default.
 
 v2.0.0-rc.6
 ----

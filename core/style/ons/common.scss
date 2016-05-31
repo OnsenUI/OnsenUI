@@ -178,6 +178,7 @@ ons-splitter-content {
 ons-splitter-side {
   right: auto;
   z-index: 1;
+  width: pxToRem(556);
 }
 
 ons-splitter-side[side="right"] {
