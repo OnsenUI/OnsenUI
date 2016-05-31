@@ -25,10 +25,10 @@ h6{
   @include font-h(22px, 32px);
 }
 
-.bh-caption-font{
+.bh-font-caption{
   color: $gray-lv3;
-  font-size: pxToRem(26px);
-  line-height: pxToRem(38px);
+  font-size: pxToRem(22px);
+  line-height: pxToRem(30px);
 }
 
 /**
@@ -61,6 +61,8 @@ h6{
 @include set-color($gray-lv5, gray, 5);
 @include set-color($gray-lv6, gray, 6);
 @include set-color($gray-lv7, gray, 7);
+
+
 
 //字符截断
 .bh-str-cut{
@@ -95,6 +97,30 @@ h6{
   float: left !important;
 }
 
+//margin相关
+.bh-m-clear{
+  margin: 0 !important;
+}
+.bh-ml-clear{
+  margin-left: 0 !important;
+}
+.bh-mr-clear{
+  margin-right: 0 !important;
+}
+.bh-mt-clear{
+  margin-top: 0 !important;
+}
+.bh-mb-clear{
+  margin-bottom: 0 !important;
+}
+.bh-mh-clear{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.bh-mv-clear{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
 @include make-padding-margin(margin, m, 4, pxToRem(4px));
 @include make-padding-margin(margin, m, 8, pxToRem(8px));
@@ -102,6 +128,30 @@ h6{
 @include make-padding-margin(margin, m, 24, pxToRem(24px));
 @include make-padding-margin(margin, m, 32, pxToRem(32px));
 
+//padding相关
+.bh-p-clear{
+  padding: 0 !important;
+}
+.bh-pl-clear{
+  padding-left: 0 !important;
+}
+.bh-pr-clear{
+  padding-right: 0 !important;
+}
+.bh-pt-clear{
+  padding-top: 0 !important;
+}
+.bh-pb-clear{
+  padding-bottom: 0 !important;
+}
+.bh-ph-clear{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.bh-pv-clear{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 @include make-padding-margin(padding, p, 4, pxToRem(4px));
 @include make-padding-margin(padding, p, 8, pxToRem(8px));
 @include make-padding-margin(padding, p, 16, pxToRem(16px));

@@ -115,13 +115,25 @@ list__item()
   min-height var-list-item-min-height
   font-size var-list-header-font-size
 
+ons-list-item
+  position relative
+  &:after
+    content ""
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $gray-lv3
+
 .list__item__left
   box-sizing border-box
   display flex
   padding pxToRem(12px) pxToRem(12px) pxToRem(12px) 0
   order 0
-  align-items center
+  align-items flex-start
   align-self stretch
+  //retina-list-item-border()
   min-height var-list-item-min-height
 
 .list__item__left:empty
@@ -139,10 +151,10 @@ list__item()
   order 1
   margin-right auto
   min-height var-list-item-min-height
-  align-items center
+  align-items flex-start
   align-self stretch
   margin-left 0
-  retina-list-item-border()
+  //retina-list-item-border()
   padding pxToRem(12px) pxToRem(6px) pxToRem(12px) 0
   //line-height 1.2em
   //min-height var-list-item-min-height
@@ -151,12 +163,11 @@ list__item()
   box-sizing border-box
   display flex
   margin-left auto
-  padding 12px 12px 12px 0
+  padding pxToRem(12px) pxToRem(24px) pxToRem(12px) 0
   order 2
-  align-items center
+  align-items flex-start
   align-self stretch
-  retina-list-item-border()
-  line-height 1.2em
+  //retina-list-item-border()
   min-height var-list-item-min-height
 
 .list__header
@@ -174,8 +185,8 @@ list__item()
   border-top var-list-border
 
 .list
-  list()
-  border-bottom var-list-border-bottom
+  display block
+  -webkit-overflow-scrolling touch
   overflow hidden
 
 // sublist
@@ -197,11 +208,12 @@ list__item()
 .list__item
   list__item()
   padding var-list-item-padding
-  margin var-list-item-margin
+  //margin var-list-item-margin
   color var-list-item-color
   background-color var-list-background-color
   &:active
     background $gray-lv3
+
 
 .list__item:first-child
   box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
@@ -588,6 +600,7 @@ list__item()
 */
 
 .list__item__title
+  font-size pxToRem(30px)
   flex-basis 100%
   align-self flex-end
   order 0
@@ -595,6 +608,14 @@ list__item()
 .list__item__subtitle
   opacity 0.75
   font-size var-font-size--mini
+  order 1
+  flex-basis 100%
+  align-self flex-start
+
+.list__item__describe
+  font-size pxToRem(24px)
+  line-height pxToRem(38px)
+  color $gray-lv3
   order 1
   flex-basis 100%
   align-self flex-start
