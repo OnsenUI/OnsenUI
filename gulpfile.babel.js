@@ -539,7 +539,8 @@ gulp.task('develop', ['watch-eslint', 'watch-develop-js', 'watch-develop-style',
     'examples/bh/**/*.{js,css,html}',
     'test/e2e/**/*.{js,css,html}',
     'build/css/bh.css',
-    'build/js/bh.js'
+    'build/js/bh.js',
+    'scenes/**/*.html'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({

@@ -1,3 +1,66 @@
+/**
+标题字
+*/
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+ @include font-h(34px, 40px);
+}
+h2{
+  @include font-h(32px, 40px);
+}
+h3{
+  @include font-h(28px, 38px);
+}
+h4{
+  @include font-h(26px, 36px);
+}
+h5{
+  @include font-h(24px, 34px);
+}
+h6{
+  @include font-h(22px, 32px);
+}
+
+.bh-caption-font{
+  color: $gray-lv3;
+  font-size: pxToRem(26px);
+  line-height: pxToRem(38px);
+}
+
+/**
+颜色
+*/
+@include set-color($theme-lv1, theme, 1);
+@include set-color($theme-lv2, theme, 2);
+@include set-color($theme-lv3, theme, 3);
+
+@include set-color($primary-lv1, primary, 1);
+@include set-color($primary-lv2, primary, 2);
+@include set-color($primary-lv3, primary, 3);
+
+@include set-color($success-lv1, success, 1);
+@include set-color($success-lv2, success, 2);
+@include set-color($success-lv3, success, 3);
+
+@include set-color($warning-lv1, warning, 1);
+@include set-color($warning-lv2, warning, 2);
+@include set-color($warning-lv3, warning, 3);
+
+@include set-color($danger-lv1, danger, 1);
+@include set-color($danger-lv2, danger, 2);
+@include set-color($danger-lv3, danger, 3);
+
+@include set-color($gray-lv1, gray, 1);
+@include set-color($gray-lv2, gray, 2);
+@include set-color($gray-lv3, gray, 3);
+@include set-color($gray-lv4, gray, 4);
+@include set-color($gray-lv5, gray, 5);
+@include set-color($gray-lv6, gray, 6);
+@include set-color($gray-lv7, gray, 7);
 
 //字符截断
 .bh-str-cut{

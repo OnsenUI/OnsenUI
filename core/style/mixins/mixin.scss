@@ -1,33 +1,66 @@
+/**
+设置字体和行高
+*/
+@mixin font-h($fontSize, $lineHeight){
+  font-size: pxToRem($fontSize);
+  line-height: pxToRem($lineHeight);
+  font-weight: normal;
+}
+
+/**
+设置padding或margin值
+*/
 @mixin padding-margin-all($type, $pixel){
   #{$type}: $pixel !important;
 }
 
+/**
+设置水平方向的padding或margin值
+*/
 @mixin padding-margin-horizontal($type, $pixel){
   #{$type}-left: $pixel !important;
   #{$type}-right: $pixel !important;
 }
 
+/**
+设置垂直方向的padding或margin值
+*/
 @mixin padding-margin-vertical($type, $pixel){
   #{$type}-top: $pixel !important;
   #{$type}-bottom: $pixel !important;
 }
 
+/**
+设置padding-top或margin-top值
+*/
 @mixin padding-margin-top($type, $pixel){
   #{$type}-top: $pixel !important;
 }
 
+/**
+设置padding-right或margin-right值
+*/
 @mixin padding-margin-right($type, $pixel){
   #{$type}-right: $pixel !important;
 }
 
+/**
+设置padding-bottom或margin-bottom值
+*/
 @mixin padding-margin-bottom($type, $pixel){
   #{$type}-bottom: $pixel !important;
 }
 
+/**
+设置padding-left或margin-left值
+*/
 @mixin padding-margin-left($type, $pixel){
   #{$type}-left: $pixel !important;
 }
 
+/**
+设置padding或margin各种值
+*/
 @mixin make-padding-margin($type, $typeShot, $step, $pixel){
   .bh-#{$typeShot}-#{$step} {
     @include padding-margin-all($type, $pixel);
@@ -52,3 +85,38 @@
   }
 }
 
+/**
+设置字体颜色
+*/
+@mixin set-font-color($color, $type, $lv){
+  .bh-color-#{$type}-lv#{$lv} {
+    color: $color !important;
+  }
+}
+
+/**
+设置背景颜色
+*/
+@mixin set-bg-color($color, $type, $lv){
+  .bh-bgColor-#{$type}-lv#{$lv} {
+    background-color: $color !important;
+  }
+}
+
+/**
+设置边框颜色
+*/
+@mixin set-border-color($color, $type, $lv){
+  .bh-bColor-#{$type}-lv#{$lv} {
+    border-color: $color !important;
+  }
+}
+
+/**
+设置字体,背景,边框颜色
+*/
+@mixin set-color($color, $type, $lv){
+  @include set-font-color($color, $type, $lv);
+  @include set-bg-color($color, $type, $lv);
+  @include set-border-color($color, $type, $lv);
+}
