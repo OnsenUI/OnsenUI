@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.8
+----
+
 v2.0.0-rc.7
 ----
  * ons-carousel: Support ng-repeat in Angular1 bindings.
