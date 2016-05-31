@@ -475,3 +475,8 @@ util.trim = (str) => {
 };
 
 export default util;
+
+
+util.next = (element) => {
+
+};
