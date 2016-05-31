@@ -77,7 +77,8 @@ checkbox__label()
   reset-font()
 
 checkbox--disabled()
-  disabled()
+  cursor default
+  pointer-events none
 
 checkbox--before()
   content ''
@@ -148,14 +149,26 @@ checkbox--after()
 .radio-button__input:focus + .radio-button__checkmark:before
   box-shadow var-box-shadow--cta
 
+ons-input[disabled]
+  &.checkbox,
+  &.radio-button
+    background-color transparent
+
+  & .checkbox__checkmark:before,
+  & .radio-button__checkmark:before,
+  & .checkbox__input:checked + .checkbox__checkmark:before,
+  & .radio-button__input:checked + .radio-button__checkmark:before
+    background-color $gray-lv4
+    border-color $gray-lv4
+
 .checkbox__input:disabled + .checkbox__checkmark,
 .radio-button__input:disabled + .radio-button__checkmark
   checkbox--disabled()
 
-.checkbox__input:disabled:active + .checkbox__checkmark:before,
-.radio-button__input:disabled:active + .radio-button__checkmark:before
-  background transparent
-  box-shadow var-box-shadow
+//.checkbox__input:disabled:active + .checkbox__checkmark:before,
+//.radio-button__input:disabled:active + .radio-button__checkmark:before
+  //background transparent
+  //box-shadow var-box-shadow
 
 /*! topdoc
   name: No border Checkbox
