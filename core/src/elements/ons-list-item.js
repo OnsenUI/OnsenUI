@@ -246,7 +246,7 @@ class ListItemElement extends BaseElement {
                 this.removeAttribute('expand');
                 next.removeAttribute('expand');
             } else {
-                this.setAttribute('expand', ''); 
+                this.setAttribute('expand', '');
                 next.setAttribute('expand', '');
             }
         }

@@ -185,7 +185,7 @@ class IconElement extends BaseElement {
         // } else {
         // }
 
-        iconName = iconName.replace(/icon\-/g, "");
+        iconName = iconName.replace(/icon\-/g, '');
 
         classList.push('iconfont');
         classList.push('icon-' + iconName);

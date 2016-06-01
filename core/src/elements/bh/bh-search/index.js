@@ -37,8 +37,9 @@ class BhSearchElement extends BaseElement {
             input.focus();
         }
     }
+
     _showClose() {
-        let value = this.value;
+        const value = this.value;
         const cancel = this.parentNode.querySelector('.icon-cancel');
         if (value != '') {
             cancel.style.display = 'inline-block';
@@ -49,17 +50,11 @@ class BhSearchElement extends BaseElement {
 
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
-            contentReady(this, () => this._compile());
-        }
-        //初始化方法
+        contentReady(this, () => this._compile());
+    }
+
+    //初始化方法
     _compile() {
-        //const initValue = this.getAttribute('value');
-        //if (initValue) {
-        // space.value = initValue;
-        //}
-
-        // const label = this.getAttribute('label');
-
         const contentHtml = `
             <div class="${space.rootClassName}-wrap">
                 <div class="${space.rootClassName}-box">

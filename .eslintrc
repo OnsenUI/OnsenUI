@@ -10,7 +10,7 @@
   },
   "rules": {
     "strict": "off",
-    "prefer-const": "warn",
+//    "prefer-const": "warn",
     "block-scoped-var": "off",
     "camelcase": "error",
     "no-console": ["warn",
