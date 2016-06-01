@@ -644,14 +644,14 @@ gulp.task('bh-components-style', function() {
 // 编译bh场景样式
 ////////////////////////////////////////
 gulp.task('bh-scenes-style', function() {
-    return gulp.src([
-        './core/style/skins/default/*.scss',
-        './core/style/variable/*.scss',
-        './core/style/utils/*.scss',
-        './core/style/mixins/*.scss',
-        './scenes/**/*.scss'
+  return gulp.src([
+      './core/style/skins/default/*.scss',
+      './core/style/variable/*.scss',
+      './core/style/utils/*.scss',
+      './core/style/mixins/*.scss',
+      './scenes/**/*.scss'
     ])
-        .pipe(concat(cssConfig.bhScenesFileName + '.scss'))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(cssConfig.writePath))
+    .pipe(concat(cssConfig.bhScenesFileName + '.scss'))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(cssConfig.writePath))
 });

@@ -18,16 +18,35 @@ const space = {
 //继承标签开发所需的类
 class BhSearchElement extends BaseElement {
 
-    // _setAttr(event) {
-    //util.findParent(this, 'bh-input').setAttribute('value', this.value);
-    //}
+    _clearValue() {
+        const input = this.previousSibling.parentNode.querySelector('.bh-search-input');
+        const clas = this.getAttribute('class');
+        if (input.value != '') {
+
+            if (clas == 'iconfont iconfont-search-cancel') {
+                this.style.display = 'none';
+            } else {
+                this.previousSibling.parentNode.querySelector('.iconfont-search-cancel').style.display = 'none';
+            }
+            input.value = '';
+            input.focus();
+        }
+    }
+    _showClose() {
+        let value = this.value;
+        const cancel = this.parentNode.querySelector('.iconfont-search-cancel');
+        if (value != '') {
+            cancel.style.display = 'inline-block';
+        } else {
+            cancel.style.display = 'none';
+        }
+    }
 
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
-        contentReady(this, () => this._compile());
-    }
-
-    //初始化方法
+            contentReady(this, () => this._compile());
+        }
+        //初始化方法
     _compile() {
         //const initValue = this.getAttribute('value');
         //if (initValue) {
@@ -36,22 +55,25 @@ class BhSearchElement extends BaseElement {
 
         // const label = this.getAttribute('label');
 
-
-        const stepHtml = `
+        const contentHtml = `
             <div class="${space.rootClassName}-wrap">
                 <div class="${space.rootClassName}-box">
-                    <i class="iconfont">&#xe895;</i>
-                    <input class="${space.rootClassName}-input" value="${space.value}" type="text" />
-                    <i class="iconfont">&#xe67a;</i>
+                    <i class="iconfont iconfont-search">&#xe895;</i>
+                    <input class="${space.rootClassName}-input" id="124" value="${space.value}" type="text" />
+                    <i class = "iconfont iconfont-search-cancel">&#xe67a;</i>
                 </div>
-                <a href="javascript:;" class="${space.rootClassName}-cancel">取消</a>
+                <a href="javascript:;" class="bh-search-cancel">取消</a>
             </div>
         `;
 
-        this.innerHTML = stepHtml;
+        this.innerHTML = contentHtml;
 
-        //监听输入框变化,设置bh-input标签的value
-        //this.querySelector('input').addEventListener('change', this._setAttr, false);
+        const cancel = this.querySelector('.bh-search-cancel');
+        const close = this.querySelector('.iconfont-search-cancel');
+        const Input = this.querySelector('.bh-search-input');
+        cancel.addEventListener('click', this._clearValue, false);
+        close.addEventListener('click', this._clearValue, false);
+        Input.addEventListener('keyup', this._showClose, false);
     }
 
 }

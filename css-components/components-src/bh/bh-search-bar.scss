@@ -1,0 +1,17 @@
+.bh-search-bar{
+	width:100%;
+	border-radius:8px;
+	background-color:$gray-lv7;
+	height:pxToRem(61px);
+	line-height:pxToRem(61px);
+	text-align:center;
+	& .iconfont-search{
+		font-size:pxToRem(24px);
+		color:$gray-lv3;
+		cursor:pointer;
+
+	}
+	& span{
+		font-size:pxToRem(24px)
+	}
+}
