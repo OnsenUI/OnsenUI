@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Carousel</title>
+    <script src="../../core/utils/computeRootSize.js"></script>
+
+    <link rel="stylesheet" href="../../build/css/bh.css">
+    <link rel="stylesheet" href="http://res.wisedu.com/fe_components/iconfont/iconfont.css">
+
+    <script src="../../build/js/bh.js"></script>
+
+    <style>
+        ons-carousel-item {
+            display: table;
+            text-align: center;
+        }
+        .item-label {
+            display: table-cell;
+            vertical-align: middle;
+            color: white;
+            line-height: 1;
+            font-size: 48px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<ons-page>
+    <ons-carousel swipeable overscrollable auto-scroll image auto-scroll-ratio="0.2">
+        <ons-carousel-item style="background-color: gray;">
+            <div class="item-label">GRAY</div>
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: #085078;">
+            <div class="item-label">BLUE</div>
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: #373B44;">
+            <div class="item-label">DARK</div>
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: #D38312;">
+            <div class="item-label">ORANGE</div>
+        </ons-carousel-item>
+    </ons-carousel>
+</ons-page>
+
+</body>
+</html>

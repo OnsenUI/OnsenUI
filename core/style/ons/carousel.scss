@@ -41,3 +41,7 @@ ons-carousel[disabled] {
   pointer-events: none;
   opacity: 0.75;
 }
+
+ons-carousel[image] {
+  height: pxToRem(320px);
+}

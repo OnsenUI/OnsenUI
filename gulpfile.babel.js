@@ -49,7 +49,8 @@ var cssConfig = {
   writePath: 'build/css/',
   onsenFileName: 'onsenui',
   onsenComponentsFileName: 'onsen-css-components',
-  bhComponentsFileName: 'bh-components'
+  bhComponentsFileName: 'bh-components',
+  bhScenesFileName: 'bh-scenes'
 };
 
 
@@ -538,7 +539,8 @@ gulp.task('develop', ['watch-eslint', 'watch-develop-js', 'watch-develop-style',
     'examples/bh/**/*.{js,css,html}',
     'test/e2e/**/*.{js,css,html}',
     'build/css/bh.css',
-    'build/js/bh.js'
+    'build/js/bh.js',
+    'scenes/**/*.html'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({
@@ -560,29 +562,13 @@ gulp.task('watch-develop-style', ['style'], function() {
       'css-components/components-src/stylus-bh/**/*.styl',
       'css-components/components-src/bh/**/*.scss',
       'core/style/**/*.scss',
-      'core/style/**/*.styl'
+      'core/style/**/*.styl',
+      'scenes/**/*.scss'
     ], ['style']);
 });
 
-//复制字体文件
-gulp.task('copy-icon', function() {
-  return merge(
-    // font-awesome fle copy
-    gulp.src('core/css/font_awesome/**/*')
-    .pipe(gulp.dest('build/css/font_awesome/')),
-
-    // ionicons file copy
-    gulp.src('core/css/ionicons/**/*')
-    .pipe(gulp.dest('build/css/ionicons/')),
-
-    // material icons file copy
-    gulp.src('core/css/material-design-iconic-font/**/*')
-    .pipe(gulp.dest('build/css/material-design-iconic-font/'))
-  );
-});
-
 //编译样式
-gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-components-style'], function() {
+gulp.task('style', ['onsen-common-style', 'onsen-components-style', 'bh-components-style', 'bh-scenes-style'], function() {
   return gulp.src([
       cssConfig.writePath + cssConfig.onsenFileName + '.css',
       cssConfig.writePath + cssConfig.onsenComponentsFileName + '.css',
@@ -650,6 +636,22 @@ gulp.task('bh-components-style', function() {
       './css-components/components-src/bh/**/*.scss'
     ])
     .pipe(concat(cssConfig.bhComponentsFileName + '.scss'))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(cssConfig.writePath))
+});
+
+////////////////////////////////////////
+// 编译bh场景样式
+////////////////////////////////////////
+gulp.task('bh-scenes-style', function() {
+  return gulp.src([
+      './core/style/skins/default/*.scss',
+      './core/style/variable/*.scss',
+      './core/style/utils/*.scss',
+      './core/style/mixins/*.scss',
+      './scenes/**/*.scss'
+    ])
+    .pipe(concat(cssConfig.bhScenesFileName + '.scss'))
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(cssConfig.writePath))
 });

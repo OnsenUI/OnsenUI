@@ -44,6 +44,7 @@ import './elements/bh/bh-input';
 import './elements/bh/bh-search';
 import './elements/bh/bh-search-bar';
 import './elements/bh/bh-input-select';
+import './elements/bh/bh-carousel-btns';
 
 // fastclick
 window.addEventListener('load', () => {

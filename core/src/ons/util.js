@@ -465,4 +465,18 @@ util.hasClass = (target, className) => {
   return flag;
 };
 
+/**
+ * 去掉字符串两侧的空格
+ * @param str
+ * @returns {*}
+ */
+util.trim = (str) => {
+  return str.replace(/(^\s*)|(\s*$)/g, '');
+};
+
 export default util;
+
+
+util.next = (element) => {
+
+};

@@ -25,22 +25,21 @@ var-list-item-color = $text-color
 var-list-item-active-background-color = $list-tap-active-background-color
 var-list-item-separator-color = $border-color
 
-var-list-header-font-size = 12px
+var-list-header-font-size = pxToRem(30)
 var-list-border = 1px solid var-list-item-separator-color
 
-var-list-item-min-height = 44px
+var-list-item-min-height = pxToRem(88)
 var-list-item-margin = 1px 0 -1px 0
-var-list-item-padding = 0 0 0 14px
-var-list-header-padding = 20px 0 0 15px
-var-list-header-min-height = 24px
+var-list-item-padding = 0 0 0 pxToRem(24px)
+
+var-list-header-padding = pxToRem(10px) pxToRem(24px)
+var-list-header-min-height = pxToRem(48)
 var-list-header-font-weight = var-font-weight--large
+var-list-header-font-size = pxToRem(30)
 var-list-header-text-shadow = none
 
 var-list-border-top = 1px solid var-list-item-separator-color
 var-list-border-bottom = 1px solid var-list-item-separator-color
-
-var-material-list-item-min-height = 48px
-var-material-list-item-padding = 0 0 0 16px
 
 /*! topdoc
   name: List
@@ -95,12 +94,12 @@ list()
   -webkit-overflow-scrolling touch
 
 list__header()
-  margin 0
-  padding 0
+  //margin 0
+  //padding 0
   list-style none
-  text-align left
+  //text-align left
   display block
-  box-sizing border-box
+  //box-sizing border-box
 
 list__item()
   margin 0
@@ -113,15 +112,28 @@ list__item()
   flex-direction row
   justify-content flex-start
   align-items center
+  min-height var-list-item-min-height
+  font-size var-list-header-font-size
+
+ons-list-item
+  position relative
+  &:after
+    content ""
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $gray-lv3
 
 .list__item__left
   box-sizing border-box
   display flex
-  padding 12px 14px 12px 0
+  padding pxToRem(12px) pxToRem(12px) pxToRem(12px) 0
   order 0
-  align-items center
+  align-items flex-start
   align-self stretch
-  line-height 1.2em
+  //retina-list-item-border()
   min-height var-list-item-min-height
 
 .list__item__left:empty
@@ -138,56 +150,70 @@ list__item()
   flex-direction row
   order 1
   margin-right auto
-  align-items center
+  min-height var-list-item-min-height
+  align-items flex-start
   align-self stretch
   margin-left 0
-  retina-list-item-border()
-  padding 12px 6px 12px 0
-  line-height 1.2em
-  min-height var-list-item-min-height
+  //retina-list-item-border()
+  padding pxToRem(12px) pxToRem(6px) pxToRem(12px) 0
+  //line-height 1.2em
+  //min-height var-list-item-min-height
 
 .list__item__right
   box-sizing border-box
   display flex
   margin-left auto
-  padding 12px 12px 12px 0
+  padding pxToRem(12px) pxToRem(24px) pxToRem(12px) 0
   order 2
-  align-items center
+  align-items flex-start
   align-self stretch
-  retina-list-item-border()
-  line-height 1.2em
+  //retina-list-item-border()
   min-height var-list-item-min-height
 
 .list__header
   list__header()
   padding var-list-header-padding
   font-size var-list-header-font-size
-  font-weight var-list-header-font-weight
-  color var-list-header-color
-  text-shadow var-list-header-text-shadow
-  border-top none
-  border-bottom var-list-border
-  box-shadow 0px 1px 0px 0px var-list-background-color;
-  min-height var-list-header-min-height
-  line-height @min-height
-  margin-top -1px
+  color $gray-lv3
+  min-height pxToRem(var-list-header-min-height)
   text-transform uppercase
   position relative
+  //特殊色,不在换肤之列
+  background-color: #F8F8F8
 
 .list__header:not(:first-of-type)
   border-top var-list-border
 
 .list
-  list()
-  border-bottom var-list-border-bottom
+  display block
+  -webkit-overflow-scrolling touch
   overflow hidden
+
+// sublist
+.list--subList
+  //transform scale(1)
+  height 0
+  overflow hidden
+
+  &[expand]
+    height auto
+
+  .list__item
+    background $gray-lv7
+    font-size pxToRem(24)
+    .list__item__center
+      background-image none
+
 
 .list__item
   list__item()
   padding var-list-item-padding
-  margin var-list-item-margin
+  //margin var-list-item-margin
   color var-list-item-color
   background-color var-list-background-color
+  &:active
+    background $gray-lv3
+
 
 .list__item:first-child
   box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
@@ -371,18 +397,19 @@ list__item()
   color var-list-item-separator-color
   order 3
   align-self stretch
-  font-size 28px
-  font-family FontAwesome
+  font-size pxToRem(56)
+  font-family "iconfont"
   font-style normal
   font-weight normal
-  content "\f105"
+  content "\e79e"
   margin-left auto
-  width 18px
+  //width pxToRem(18px)
   text-align right
   border-bottom var-list-border
   retina-list-item-border()
-  width 10px
-  padding-right 8px
+  padding-right pxToRem(8px)
+  padding-top pxToRem(4px)
+  transition transform 0.2s
 
 
 /*! topdoc
@@ -573,6 +600,7 @@ list__item()
 */
 
 .list__item__title
+  font-size pxToRem(30px)
   flex-basis 100%
   align-self flex-end
   order 0
@@ -580,6 +608,14 @@ list__item()
 .list__item__subtitle
   opacity 0.75
   font-size var-font-size--mini
+  order 1
+  flex-basis 100%
+  align-self flex-start
+
+.list__item__describe
+  font-size pxToRem(24px)
+  line-height pxToRem(38px)
+  color $gray-lv3
   order 1
   flex-basis 100%
   align-self flex-start
@@ -661,208 +697,6 @@ list__item()
   font-size 22px
   padding 0 6px
 
-/*! topdoc
-  name: Material List
-  use: List Item with Subtitle
-  class: list--material
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Orange</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
-        </div>
-      </li>
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Pear</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Funny-shaped fruit.</div>
-        </div>
-      </li>
-    </ul>
-*/
-
-.list--material
-  material-font()
-  border 0
-
-.list__item--material
-  border 0
-  padding var-material-list-item-padding
-  line-height normal
-
-.list__item--material__subtitle
-  margin-top 4px
-
-.list__item--material:first-child
-  box-shadow none
-
-.list__item--material__left
-  padding 14px 0
-  min-width 56px
-  line-height 1
-  min-height var-material-list-item-min-height
-
-.list__item--material__left:empty
-
-.list__item--material__center
-  padding 14px 6px 14px 0
-  border-color #eee
-  retina-list-item-border(#eee)
-  min-height var-material-list-item-min-height
-
-.list__item--material__right
-  padding 14px 16px 14px 0px
-  line-height 1
-  border-color #eee
-  retina-list-item-border(#eee)
-  min-height var-material-list-item-min-height
-
-.list__item--material.list__item--longdivider
-  border-bottom 1px solid #eee
-  retina-list-item-border(#eee)
-
-/*! topdoc
-  name: Material List with Header
-  use: Material List
-  class: list__header--material
-  markup:
-    <ul class="list list--material">
-      <li class="list__header list__header--material">
-        Fruits
-      </li>
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Orange</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
-        </div>
-      </li>
-    </ul>
-*/
-
-.list__header--material
-  background var-list-background-color
-  border none
-  font-size 14px
-  text-transform none
-  margin -1px 0 0 0
-  color #6c6c6c
-  font-weight 500
-  padding 8px 16px
-
-.list__header--material:not(:first-of-type)
-  border-top 1px solid #eee
-  padding-top 16px
-
-/*! topdoc
-  name: Material List with Checkboxes
-  use: Material List, Material Checkbox
-  class: list__header--material
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox3" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Notifications</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
-        </label>
-      </li>
-
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-        </div>
-
-        <label for="checkbox4" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Sound</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
-        </label>
-      </li>
-
-    </ul>
-*/
-
-/*! topdoc
-  name: Material List with Thumbnails
-  use: Material List, List Item with Thumbnail
-  class: list__item--material__thumbnail
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/42/41" alt="Cute kitten">
-        </div>
-
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Lily</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Very friendly cat</div>
-        </div>
-      </li>
-
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
-        </div>
-
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Molly</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Loves tuna!</div>
-        </div>
-      </li>
-
-    </ul>
-*/
-
-.list__item--material__thumbnail
-  width 40px
-  height 40px
-  border-radius 100%
-
-/*! topdoc
-  name: Material List with Icons
-  use: Material List, Material List with Thumbnails
-  class: list__item--material__icon
-  markup:
-    <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
-        </div>
-
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Alice</div>
-        </div>
-
-        <div class="list__item__right list__item--material__right">
-          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
-        </div>
-      </li>
-
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
-        </div>
-
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Bob</div>
-        </div>
-
-        <div class="list__item__right list__item--material__right">
-          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
-        </div>
-      </li>
-    </ul>
-*/
-
-.list__item--material__icon
-  font-size 20px
-  padding 0 4px
+.list__item[expand]:before
+  transform rotate(90deg)
+  background-image none

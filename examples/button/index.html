@@ -23,23 +23,34 @@
     <ons-button modifier="outline">outline</ons-button>
     <ons-button modifier="default">Default</ons-button>
     <ons-button modifier="primary">Primary</ons-button>
+    <ons-button modifier="success">Success</ons-button>
+    <ons-button modifier="warning">Warning</ons-button>
+    <ons-button modifier="danger">Danger</ons-button>
     <ons-button modifier="long">Long</ons-button>
     <ons-button modifier="long outline">Long--outline</ons-button>
 
-   <div style="font-size: 0;margin: 24px 0;">
-     <ons-button modifier="white half">half</ons-button>
-     <ons-button modifier="half">half</ons-button>
+   <div style="font-size: 0;margin: 24px 0;" class="button-group">
+     <ons-button modifier="danger">half</ons-button>
+     <ons-button modifier="primary">half</ons-button>
+     <ons-button modifier="success">half</ons-button>
 
    </div>
 
     <ons-button modifier="circle">
-      <i class="iconfont icon-search"></i>
+        <ons-icon icon="search"></ons-icon>
     </ons-button>
 
     <ons-button modifier="response">response</ons-button>
-    <ons-button modifier="light">light</ons-button>
-    <ons-button modifier="quiet">quiet</ons-button>
-    <ons-button modifier="cta">cta</ons-button>
+
+      <p>------------------</p>
+
+    <ons-button modifier="tag active" >tag</ons-button>
+    <ons-button modifier="tag">tag</ons-button>
+    <ons-button modifier="tag">tag</ons-button>
+    <ons-button modifier="tag" disabled="true">tag</ons-button>
+    <!--<ons-button modifier="light">light</ons-button>-->
+    <!--<ons-button modifier="quiet">quiet</ons-button>-->
+    <!--<ons-button modifier="cta">cta</ons-button>-->
     <p></p>
     <ons-button modifier="large quiet">large--quiet</ons-button>
     <p></p>
@@ -49,6 +60,7 @@
 
     <!-- Disabled -->
     <p></p><br><br>
+      <ons-button modifier="success" disabled="true">Success</ons-button>
     <ons-button modifier="light" disabled="true">light</ons-button>
     <ons-button modifier="outline" disabled="true">outline</ons-button>
     <ons-button modifier="quiet" disabled="true">quiet</ons-button>

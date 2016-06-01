@@ -40,7 +40,6 @@ var-button-success-color = $success-lv1
 var-button-warning-color = $warning-lv1
 var-button-danger-color = $danger-lv1
 
-
 var-button-cta-background-color = $second-highlight-color
 var-button-cta-color = white
 var-button-line-height = pxToRem(80)
@@ -68,7 +67,11 @@ button--quiet()
   reset-quiet()
 
 button--disabled()
-  disabled()
+  //disabled()
+  cursor not-allowed
+  background #ccc
+  color #fff
+  border none
 
 button--hover()
   transition none
@@ -113,10 +116,6 @@ button--active()
 .button:focus
   button--focus()
 
-.button:disabled,
-.button[disabled]
-  button--disabled()
-
 /*! topdoc
   name: Outline Button
   class: button--outline
@@ -131,14 +130,15 @@ button--active()
   color var-button-background-color
 
 .button--outline:active
-  background-color alpha(var-button-background-color, var-alpha-lighten)
+  background-color transparent
   border 1px solid var-button-background-color
   color var-button-background-color
   opacity 1
 
-.button--outline:hover
-  border 1px solid var-button-background-color
-  transition 0
+//
+//.button--outline:hover
+//  border 1px solid var-button-background-color
+//  transition 0
 
 /*! topdoc
   name: Light Button
@@ -171,11 +171,16 @@ button--active()
 .button--long
   width var-button-lang-width
 
-// 半屏按钮
-.button--half
-  width 50%
-  border-radius 0
-  border none
+// 底部悬浮按钮组
+.button-group
+  font-size 0
+  display table
+  table-layout fixed
+  width 100%
+  .button
+    display table-cell
+    border-radius 0
+    width auto
 
 // 白底按钮(无边框, 通常与半屏按钮一起使用)
 .button--white
@@ -190,13 +195,14 @@ button--active()
   line-height var-button-circle-width
   .iconfont
     font-size pxToRem(48)
-    line-height var-button-circle-width + 0.4  // 解决搜索图标 看起来没有垂直居中的问题
+    line-height var-button-circle-width + 0.4
+
+// 解决搜索图标 看起来没有垂直居中的问题
 
 // 内容自适应按钮
 .button--response
   width auto
   padding var-button-response-padding
-
 
 .button--default
   background #fff
@@ -209,6 +215,38 @@ button--active()
   &:active
     background darken(var-button-primary-color, 30%)
 
+.button--success
+  background var-button-success-color
+  &:active
+    background darken(var-button-success-color, 30%)
+
+.button--warning
+  background var-button-warning-color
+  &:active
+    background darken(var-button-warning-color, 30%)
+
+.button--danger
+  background var-button-danger-color
+  &:active
+    background darken(var-button-danger-color, 30%)
+
+
+// tag
+.button--tag
+  width auto
+  min-width pxToRem(88)
+  height pxToRem(48)
+  line-height pxToRem(48)
+  font-size pxToRem(24)
+  background $gray-lv7
+  color $gray-lv1
+  &.button--active
+    color $brand-white
+    background $primary-lv1
+  &:disabled,
+  &[disabled]
+    color $brand-white
+    background $gray-lv4
 
 
 //.button--quiet
@@ -446,3 +484,8 @@ button--active()
 //.button--material--flat[disabled]
 //  opacity 0.5
 //  shadow-0()
+
+// disable 样式写在最后 以覆盖其他按钮 active 的样式
+.button:disabled,
+.button[disabled]
+  button--disabled()

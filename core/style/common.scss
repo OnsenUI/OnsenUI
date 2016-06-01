@@ -1,3 +1,68 @@
+/**
+标题字
+*/
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+ @include font-h(34px, 40px);
+}
+h2{
+  @include font-h(32px, 40px);
+}
+h3{
+  @include font-h(28px, 38px);
+}
+h4{
+  @include font-h(26px, 36px);
+}
+h5{
+  @include font-h(24px, 34px);
+}
+h6{
+  @include font-h(22px, 32px);
+}
+
+.bh-font-caption{
+  color: $gray-lv3;
+  font-size: pxToRem(22px);
+  line-height: pxToRem(30px);
+}
+
+/**
+颜色
+*/
+@include set-color($theme-lv1, theme, 1);
+@include set-color($theme-lv2, theme, 2);
+@include set-color($theme-lv3, theme, 3);
+
+@include set-color($primary-lv1, primary, 1);
+@include set-color($primary-lv2, primary, 2);
+@include set-color($primary-lv3, primary, 3);
+
+@include set-color($success-lv1, success, 1);
+@include set-color($success-lv2, success, 2);
+@include set-color($success-lv3, success, 3);
+
+@include set-color($warning-lv1, warning, 1);
+@include set-color($warning-lv2, warning, 2);
+@include set-color($warning-lv3, warning, 3);
+
+@include set-color($danger-lv1, danger, 1);
+@include set-color($danger-lv2, danger, 2);
+@include set-color($danger-lv3, danger, 3);
+
+@include set-color($gray-lv1, gray, 1);
+@include set-color($gray-lv2, gray, 2);
+@include set-color($gray-lv3, gray, 3);
+@include set-color($gray-lv4, gray, 4);
+@include set-color($gray-lv5, gray, 5);
+@include set-color($gray-lv6, gray, 6);
+@include set-color($gray-lv7, gray, 7);
+
+
 
 //字符截断
 .bh-str-cut{
@@ -32,6 +97,30 @@
   float: left !important;
 }
 
+//margin相关
+.bh-m-clear{
+  margin: 0 !important;
+}
+.bh-ml-clear{
+  margin-left: 0 !important;
+}
+.bh-mr-clear{
+  margin-right: 0 !important;
+}
+.bh-mt-clear{
+  margin-top: 0 !important;
+}
+.bh-mb-clear{
+  margin-bottom: 0 !important;
+}
+.bh-mh-clear{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.bh-mv-clear{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
 @include make-padding-margin(margin, m, 4, pxToRem(4px));
 @include make-padding-margin(margin, m, 8, pxToRem(8px));
@@ -39,6 +128,30 @@
 @include make-padding-margin(margin, m, 24, pxToRem(24px));
 @include make-padding-margin(margin, m, 32, pxToRem(32px));
 
+//padding相关
+.bh-p-clear{
+  padding: 0 !important;
+}
+.bh-pl-clear{
+  padding-left: 0 !important;
+}
+.bh-pr-clear{
+  padding-right: 0 !important;
+}
+.bh-pt-clear{
+  padding-top: 0 !important;
+}
+.bh-pb-clear{
+  padding-bottom: 0 !important;
+}
+.bh-ph-clear{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.bh-pv-clear{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 @include make-padding-margin(padding, p, 4, pxToRem(4px));
 @include make-padding-margin(padding, p, 8, pxToRem(8px));
 @include make-padding-margin(padding, p, 16, pxToRem(16px));

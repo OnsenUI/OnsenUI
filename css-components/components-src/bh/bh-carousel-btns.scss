@@ -1,0 +1,33 @@
+$bh-carousel-btns-item-width-height: 8px;
+
+bh-carousel-btns{
+  position: absolute;
+  width: 100%;
+
+  &[center]{
+    text-align: center;
+  }
+  &[right]{
+    text-align: right;
+  }
+  &[bottom]{
+    bottom: 0;
+  }
+}
+
+.bh-carousel-btns-item{
+  display: inline-block;
+  width: pxToRem($bh-carousel-btns-item-width-height);
+  height: pxToRem($bh-carousel-btns-item-width-height);
+  border-top-left-radius: 999px; /* 左上角 */
+  border-top-right-radius: 999px; /* 右上角 */
+  border-bottom-right-radius: 999px; /* 右下角 */
+  border-bottom-left-radius: 999px; /* 左下角 */
+  border-radius: 999px;
+  background-color: $gray-lv5;
+  background-clip: padding-box;
+
+  &.bh-active{
+    background-color: $primary-lv1;
+  }
+}
