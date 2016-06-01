@@ -2,11 +2,11 @@
 	width:100%;
 	border-radius:8px;
 	background-color:$gray-lv7;
-	height:pxToRem(61px);
-	line-height:pxToRem(61px);
+	height:pxToRem(60px);
+	line-height:pxToRem(60px);
 	text-align:center;
-	& .iconfont-search{
-		font-size:pxToRem(24px);
+	& .icon-search{
+		font-size:pxToRem(26px);
 		color:$gray-lv3;
 		cursor:pointer;
 

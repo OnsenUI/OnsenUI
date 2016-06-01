@@ -18,15 +18,20 @@ const space = {
 //继承标签开发所需的类
 class BhSearchElement extends BaseElement {
 
+    value() {
+        return this.querySelector('.bh-search-input').value;
+    }
+
     _clearValue() {
-        const input = this.previousSibling.parentNode.querySelector('.bh-search-input');
+        const parentObj = util.findParent(this, 'bh-search');
+        const input = parentObj.querySelector('.bh-search-input');
         const clas = this.getAttribute('class');
         if (input.value != '') {
 
-            if (clas == 'iconfont iconfont-search-cancel') {
+            if (clas == 'iconfont icon-cancel') {
                 this.style.display = 'none';
             } else {
-                this.previousSibling.parentNode.querySelector('.iconfont-search-cancel').style.display = 'none';
+                this.previousSibling.parentNode.querySelector('.icon-cancel').style.display = 'none';
             }
             input.value = '';
             input.focus();
@@ -34,7 +39,7 @@ class BhSearchElement extends BaseElement {
     }
     _showClose() {
         let value = this.value;
-        const cancel = this.parentNode.querySelector('.iconfont-search-cancel');
+        const cancel = this.parentNode.querySelector('.icon-cancel');
         if (value != '') {
             cancel.style.display = 'inline-block';
         } else {
@@ -58,9 +63,9 @@ class BhSearchElement extends BaseElement {
         const contentHtml = `
             <div class="${space.rootClassName}-wrap">
                 <div class="${space.rootClassName}-box">
-                    <i class="iconfont iconfont-search">&#xe895;</i>
-                    <input class="${space.rootClassName}-input" id="124" value="${space.value}" type="text" />
-                    <i class = "iconfont iconfont-search-cancel">&#xe67a;</i>
+                    <i class ="iconfont icon-search"></i>
+                    <input class="${space.rootClassName}-input" value="${space.value}" type="text" />
+                    <i class = "iconfont icon-cancel"></i>
                 </div>
                 <a href="javascript:;" class="bh-search-cancel">取消</a>
             </div>
@@ -69,7 +74,7 @@ class BhSearchElement extends BaseElement {
         this.innerHTML = contentHtml;
 
         const cancel = this.querySelector('.bh-search-cancel');
-        const close = this.querySelector('.iconfont-search-cancel');
+        const close = this.querySelector('.icon-cancel');
         const Input = this.querySelector('.bh-search-input');
         cancel.addEventListener('click', this._clearValue, false);
         close.addEventListener('click', this._clearValue, false);

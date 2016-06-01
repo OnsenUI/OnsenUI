@@ -11,8 +11,7 @@ import contentReady from 'ons/content-ready';
 
 const space = {
     //该组件的根样式名
-    rootClassName: 'bh-search-bar',
-    value: 'Text'
+    rootClassName: 'bh-search-bar'
 };
 
 //继承标签开发所需的类
@@ -24,10 +23,11 @@ class BhSearchBarElement extends BaseElement {
         }
         //初始化方法
     _compile() {
+        const value = this.getAttribute('text');
         const contentHtml = `
             <div class="${space.rootClassName}">
-                <i class="iconfont iconfont-search">&#xe895;</i>
-                <span>${space.value}</span>
+                <i class="iconfont icon-search"></i>
+                <span>` + value + `</span>
             </div>
         `;
 

@@ -1,9 +1,12 @@
 .bh-search-wrap{
+	padding:0 pxToRem(26px) 0 pxToRem(16px);
 	& .bh-search-cancel{
 		color:$primary-lv1;
 		font-size:pxToRem(24px);
-		margin-left:pxToRem(20px);
+		margin: pxToRem(20px) 0 0 pxToRem(20px);
 		text-decoration:none;
+		display:inline-block;
+		vertical-align:middle;
 	}
 }
 
@@ -12,7 +15,7 @@
 	background:$gray-lv7;
 	border-radius:8px;
 	width:calc(100% - 75px);
-	height:pxToRem(61px);
+	height:pxToRem(60px);
 	padding:0 pxToRem(15px);
 	& .bh-search-input{
 		border:none;
@@ -21,17 +24,19 @@
 		font-size:pxToRem(24px);
 		padding:0 pxToRem(10px);
 		line-height:pxToRem(28px);
-		font-weight:normal;
+		margin-top:pxToRem(16px);
+		vertical-align:middle;
 	}
 	& .iconfont{
 		display:inline-block;
-		margin-top:pxToRem(18px);
+		vertical-align:middle;
+		margin-top:pxToRem(16px);
 	}
-	& .iconfont-search{
-		font-size:pxToRem(24px);
+	& .icon-search{
+		font-size:pxToRem(26px);
 		color:$gray-lv3;
 	}
-	& .iconfont-search-cancel{
+	& .icon-cancel{
 		display:none;
 		font-size:pxToRem(24px);
 		color:$gray-lv3;
