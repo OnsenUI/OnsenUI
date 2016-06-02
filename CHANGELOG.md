@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.8
+----
+* core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845) (again).
+
 v2.0.0-rc.7
 ----
  * ons-carousel: Support ng-repeat in Angular1 bindings.

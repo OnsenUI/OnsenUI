@@ -100,7 +100,13 @@ class FabElement extends BaseElement {
 
     this._updatePosition();
 
-    this.show();
+    this.hide();
+  }
+
+  attachedCallback() {
+    if (!util.findParent(this, 'ons-page')) {
+      this.show();
+    }
   }
 
   attributeChangedCallback(name, last, current) {
