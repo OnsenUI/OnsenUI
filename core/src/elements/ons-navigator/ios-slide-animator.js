@@ -15,24 +15,26 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import BaseAnimator from 'ons/base-animator';
 import util from 'ons/util';
+import {union, fade, translate, animate, acceleration} from 'ons/animations';
+
+// const find = (el, selectors) => {
+//   if (Array.isArray(selectors)) {
+//     return selectors.map(e => find(el, e)).filter(e => e);
+//   }
+//   return el.querySelector(selectors);
+// };
 
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
-export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSSlideNavigatorTransitionAnimator extends BaseAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.4,
-      timing: 'cubic-bezier(.1, .7, .1, 1)',
-      delay: 0
-    }, options || {});
+  constructor(options = {}) {
+    super(util.extend({timing: 'cubic-bezier(.1, .7, .1, 1)', duration: 0.4}, options));
 
-    super(options);
-
-    this.backgroundMask = util.createElement(`
+    this.mask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
         background-color: black; opacity: 0; z-index: 2"></div>
     `);
@@ -40,56 +42,27 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
   _decompose(page) {
     CustomElements.upgrade(page);
-    const toolbar = page._getToolbarElement();
-    CustomElements.upgrade(toolbar);
-    const left = toolbar._getToolbarLeftItemsElement();
-    const right = toolbar._getToolbarRightItemsElement();
-
-    const excludeBackButtonLabel = function(elements) {
-      const result = [];
-
-      for (let i = 0; i < elements.length; i++) {
-        if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-          const iconElement = elements[i].querySelector('.back-button__icon');
-          if (iconElement) {
-            result.push(iconElement);
-          }
-        } else {
-          result.push(elements[i]);
-        }
-      }
-
-      return result;
-    };
-
-    const other = []
-      .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
-      .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
-
-    const pageLabels = [
-      toolbar._getToolbarCenterItemsElement(),
-      toolbar._getToolbarBackButtonLabelElement()
-    ];
-
+    const toolbar = page._toolbar;
+    // const sides = find(toolbar, ['.left', '.right']).map(e => e.children.length ? [].slice.call(e.children) : [e]);
+    // const other = [].concat.apply([], sides).map(e =>
+    //   util.match(e, 'ons-back-button') ? find(e, '.back-button__icon') : e
+    // );
     return {
-      pageLabels: pageLabels,
-      other: other,
-      content: page._getContentElement(),
-      background: page._getBackgroundElement(),
+      main: [page._content, page._background, page._bottomToolbar],
       toolbar: toolbar,
-      bottomToolbar: page._getBottomToolbarElement()
+      labels: util.arrayFrom(toolbar.querySelectorAll('.center, .back-button__label')),
+      // other: other
     };
   }
 
-  _shouldAnimateToolbar(enterPage, leavePage) {
-    const bothPageHasToolbar =
-      enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
+  _elements(enterPage, leavePage) {
+    const elements = {enter: this._decompose(enterPage), leave: this._decompose(leavePage)};
 
-    var noMaterialToolbar =
-      !enterPage._getToolbarElement().classList.contains('navigation-bar--material') &&
-      !leavePage._getToolbarElement().classList.contains('navigation-bar--material');
+    util.each(elements, (name, page) => {
+      util.each(page, (key, value) => elements[name + '.' + key] = value);
+    });
 
-    return bothPageHasToolbar && noMaterialToolbar;
+    return util.extend(elements, {mask: this.mask});
   }
 
   /**
@@ -97,434 +70,123 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    * @param {Object} leavePage
    * @param {Function} callback
    */
-  push(enterPage, leavePage, callback) {
-    this.backgroundMask.remove();
-    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
+  push({enterPage, leavePage, callback}) {
+    enterPage.parentNode.insertBefore(this.mask, enterPage);
 
-    const enterPageDecomposition = this._decompose(enterPage);
-    const leavePageDecomposition = this._decompose(leavePage);
+    const mask = {
+      animation: union(acceleration, animate({opacity: [0, 0.1]})),
+      after: () => this.mask.remove(),
+      callback
+    };
 
-    const delta = (() => {
-      const rect = leavePage.getBoundingClientRect();
-      return Math.round(((rect.right - rect.left) / 2) * 0.6);
-    })();
+    if ([enterPage, leavePage].every(page => page && page._canAnimateToolbar())) {
+      const delta = Math.round(leavePage.getBoundingClientRect().width * 0.3);
 
-    const maskClear = animit(this.backgroundMask)
-      .saveStyle()
-      .queue({
-        opacity: 0,
-        transform: 'translate3d(0, 0, 0)'
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 0.1
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue((done) => {
-        this.backgroundMask.remove();
-        done();
+      this._animateAll(this._elements(enterPage, leavePage), {
+        mask: mask,
+        'enter.main': {
+          restore: 1, animation: translate({from: '100%, 0'})
+        },
+        'enter.labels': {
+          restore: 1, animation: translate({from: delta + 'px, 0'})
+        },
+        'enter.toolbar': {
+          restore: 1, animation: fade.in
+        },
+        // 'enter.labels': {
+        //   restore: 1, animation: union(fade.in, translate({from: delta + 'px, 0'}))
+        // },
+        // 'enter.other': {
+        //   restore: 1, animation: fade.in
+        // },
+        'leave.main': {
+          restore: 1, animation: translate({to: '-25%, 0'})
+        },
+        // 'leave.labels': {
+        //   restore: 1, animation: union(fade.out, translate({to: (-delta) + 'px, 0'}))
+        // },
+        // 'leave.other': {
+        //   restore: 1, animation: fade.out
+        // }
+        'leave.labels': {
+          restore: 1, animation: translate({to: (-delta) + 'px, 0'})
+        },
+        'leave.toolbar': {
+          restore: 1, animation: fade.out
+        }
       });
 
-    const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
-
-    if (shouldAnimateToolbar) {
-      animit.runAll(
-
-        maskClear,
-
-        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)',
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(enterPageDecomposition.pageLabels)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(' + delta + 'px, 0, 0)',
-              opacity: 0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(enterPageDecomposition.other)
-          .saveStyle()
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {opacity: 1},
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)',
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle()
-          .queue(function(done) {
-            callback();
-            done();
-          }),
-
-        animit(leavePageDecomposition.pageLabels)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(-' + delta + 'px, 0, 0)',
-              opacity: 0,
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(leavePageDecomposition.other)
-          .saveStyle()
-          .queue({
-            css: {opacity: 1},
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {opacity: 0},
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle()
-
-      );
-
     } else {
-
-      animit.runAll(
-
-        maskClear,
-
-        animit(enterPage)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)',
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(leavePage)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle()
-          .queue(function(done) {
-            callback();
-            done();
-          })
-      );
-
+      this._animateAll({mask, enterPage, leavePage}, {
+        mask: mask,
+        enterPage: {restore: 1, animation: translate({from: '100%, 0'})},
+        leavePage: {restore: 1, animation: translate({to: '-25%, 0'})}
+      });
     }
   }
 
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
-   * @param {Function} done
+   * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
-    this.backgroundMask.remove();
-    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
+  pop({enterPage, leavePage, callback}) {
+    leavePage.parentNode.insertBefore(this.mask, leavePage);
 
-    const enterPageDecomposition = this._decompose(enterPage);
-    const leavePageDecomposition = this._decompose(leavePage);
+    const mask = {
+      animation: union(acceleration, animate({opacity: [0.1, 0]})),
+      after: () => this.mask.remove(),
+      callback
+    };
 
-    const delta = (function() {
-      const rect = leavePage.getBoundingClientRect();
-      return Math.round(((rect.right - rect.left) / 2) * 0.6);
-    })();
+    if ([enterPage, leavePage].every(page => page._canAnimateToolbar())) {
+      const delta = Math.round(leavePage.getBoundingClientRect().width * 0.3);
 
-    const maskClear = animit(this.backgroundMask)
-      .saveStyle()
-      .queue({
-        opacity: 0.1,
-        transform: 'translate3d(0, 0, 0)'
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue((done) => {
-        done();
+      this._animateAll(this._elements(enterPage, leavePage), {
+        mask: mask,
+        'enter.main': {
+          restore: 1, animation: union(translate({from: '-25%, 0'}), animate({opacity: [0.5, 1]}))
+        },
+        'enter.labels': {
+          restore: 1, animation: translate({from: (-delta) + 'px, 0'})
+        },
+        // 'enter.toolbar': fade.in,
+        // 'enter.labels': {
+        //   restore: 1, animation: union(fade.in, translate({from: (-delta) + 'px, 0'}))
+        // },
+        // 'enter.other': {
+        //   restore: 1, animation: fade.in
+        // },
+        // 'enter.toolbar': {
+        //   restore: 1, animation: union(acceleration, animate({opacity: [1, 1]}))
+        // },
+        'leave.main': {
+          animation: translate({to: '100%, 0'})
+        },
+        'leave.labels': {
+          animation: translate({to: delta + 'px, 0'})
+        },
+        'leave.toolbar': fade.out
+        // 'leave.labels': {
+        //   animation: union(fade.out, translate({to: delta + 'px, 0'}))
+        // },
+        // 'leave.other': {
+        //   animation: union(acceleration, fade.out)
+        // },
+        // 'leave.toolbar': {
+        //   from: {
+        //     background: 'none',
+        //     backgroundColor: 'rgba(0, 0, 0, 0)',
+        //     borderColor: 'rgba(0, 0, 0, 0)'
+        //   }
+        // }
       });
-
-    const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
-
-    if (shouldAnimateToolbar) {
-      animit.runAll(
-
-        maskClear,
-
-        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(enterPageDecomposition.pageLabels)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(-' + delta + 'px, 0, 0)',
-              opacity: 0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(enterPageDecomposition.toolbar)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(enterPageDecomposition.other)
-          .saveStyle()
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {opacity: 1},
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .wait(0)
-          .queue(function(finish) {
-            this.backgroundMask.remove();
-            done();
-            finish();
-          }.bind(this)),
-
-        animit(leavePageDecomposition.other)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 0,
-            },
-            duration: this.duration,
-            timing: this.timing
-          }),
-
-        animit(leavePageDecomposition.toolbar)
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          }),
-
-        animit(leavePageDecomposition.pageLabels)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(' + delta + 'px, 0, 0)',
-              opacity: 0,
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-      );
     } else {
-      animit.runAll(
-
-        maskClear,
-
-        animit(enterPage)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
-
-        animit(leavePage)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .queue(function(finish) {
-            this.backgroundMask.remove();
-            done();
-            finish();
-          }.bind(this))
-      );
+      this._animateAll({mask, enterPage, leavePage}, {
+        mask: mask,
+        enterPage: {restore: 1, animation: union(translate({from: '-25%, 0'}),  animate({opacity: [0.9, 1]}))},
+        leavePage: {animation: translate({to: '100%, 0'})}
+      });
     }
   }
 }

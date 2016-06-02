@@ -69,7 +69,7 @@ limitations under the License.
       /**
        * @param {Function} callback
        */
-      closeClose: function(callback) {
+      closeMenu: function(callback) {
       },
 
       /**

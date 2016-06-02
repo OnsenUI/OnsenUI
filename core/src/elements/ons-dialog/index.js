@@ -18,8 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator} from './animator';
+import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
@@ -30,13 +29,6 @@ const scheme = {
   '.dialog': 'dialog--*',
   '.dialog-container': 'dialog-container--*',
   '.dialog-mask': 'dialog-mask--*'
-};
-
-const _animatorDict = {
-  'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'slide': SlideDialogAnimator,
-  'none': DialogAnimator
 };
 
 /**
@@ -191,16 +183,7 @@ class DialogElement extends BaseElement {
     this._doorLock = new DoorLock();
     this._boundCancel = this._cancel.bind(this);
 
-    this._updateAnimatorFactory();
-  }
-
-  _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
-      animators: _animatorDict,
-      baseClass: DialogAnimator,
-      baseClassName: 'DialogAnimator',
-      defaultAnimation: this.getAttribute('animation')
-    });
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
   _compile() {
@@ -218,11 +201,8 @@ class DialogElement extends BaseElement {
      */
 
     if (!this._dialog) {
-      const dialog = document.createElement('div');
-      dialog.classList.add('dialog');
-
-      const container = document.createElement('div');
-      dialog.classList.add('dialog-container');
+      const dialog = util.create('.dialog');
+      const container = util.create('.dialog-container');
 
       dialog.appendChild(container);
 
@@ -234,9 +214,7 @@ class DialogElement extends BaseElement {
     }
 
     if (!this._mask) {
-      const mask = document.createElement('div');
-      mask.classList.add('dialog-mask');
-      this.insertBefore(mask, this.firstChild);
+      this.insertBefore(util.create('.dialog-mask'), this.firstChild);
     }
 
     this._dialog.style.zIndex = 20001;
@@ -299,50 +277,15 @@ class DialogElement extends BaseElement {
    * @return {Promise} Resolves to the displayed element.
    */
   show(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'preshow', {
-      dialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryShow = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
+    return util.executeAction(this, 'show', options, {
+      events: true,
+      eventData: {dialog: this},
+      before: () => {
         this.style.display = 'block';
         this._mask.style.opacity = '1';
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.show(this, () => {
-              this._visible = true;
-              unlock();
-
-              util.triggerElementEvent(this, 'postshow', {dialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryShow()));
-      });
-    } else {
-      return Promise.reject('Canceled in preshow event.');
-    }
+      },
+      after: () => this._visible = true
+    });
   }
 
   /**
@@ -368,48 +311,14 @@ class DialogElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'prehide', {
-      dialog: this,
-      cancel: function() {
-        cancel = true;
+    return util.executeAction(this, 'hide', options, {
+      events: true,
+      eventData: {dialog: this},
+      after: () => {
+        this.style.display = 'none';
+        this._visible = false;
       }
     });
-
-    if (!cancel) {
-      const tryHide = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.hide(this, () => {
-              this.style.display = 'none';
-              this._visible = false;
-              unlock();
-
-              util.triggerElementEvent(this, 'posthide', {dialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryHide()));
-      });
-    } else {
-      return Promise.reject('Canceled in prehide event.');
-    }
   }
 
   /**
@@ -473,9 +382,6 @@ class DialogElement extends BaseElement {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
-    else if (name === 'animation') {
-      this._updateAnimatorFactory();
-    }
   }
 }
 
@@ -483,15 +389,4 @@ const OnsDialogElement = window.OnsDialogElement = document.registerElement('ons
   prototype: DialogElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {DialogAnimator} Animator
- */
-OnsDialogElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof DialogAnimator)) {
-    throw new Error('"Animator" param must inherit OnsDialogElement.DialogAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-OnsDialogElement.DialogAnimator = DialogAnimator;
+animatorFactory.assign(OnsDialogElement);

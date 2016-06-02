@@ -254,20 +254,6 @@ describe('OnsPopoverElement', () => {
     expect(popover._popover.style.background).to.equal('blue');
   });
 
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a PopoverAnimator', () => {
-      expect(() => window.OnsPopoverElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.OnsPopoverElement.PopoverAnimator {
-      }
-
-      window.OnsPopoverElement.registerAnimator('hoge', MyAnimator);
-    });
-  });
-
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');

@@ -17,101 +17,113 @@ limitations under the License.
 
 import util from '../util';
 import internal from '../internal';
+import platform from '../platform';
+import BaseAnimator from '../base-animator';
+
+const platformSuffix = () => platform.isAndroid() ? '-md' : '-ios';
+
+const newBaseClass = methods => {
+  class Base extends BaseAnimator {}
+  methods.forEach(method => {
+    Base.prototype[method] = function (options = {}) {
+      if (typeof options.callback === 'function') {
+        options.callback();
+      }
+    }
+  });
+  return Base;
+}
 
 export default class AnimatorFactory {
 
   /**
-   * @param {Object} opts
-   * @param {Object} opts.animators The dictionary for animator classes
-   * @param {Function} opts.baseClass The base class of animators
-   * @param {String} [opts.baseClassName] The name of the base class of animators
-   * @param {String} [opts.defaultAnimation] The default animation name
-   * @param {Object} [opts.defaultAnimationOptions] The default animation options
+   * @param {Object} element
+   * @param {Object} options
+   * @param {Object} options.animators The dictionary for animator classes
+   * @param {Object} options.methods
    */
-  constructor(opts) {
-    this._animators = opts.animators;
-    this._baseClass = opts.baseClass;
-    this._baseClassName = opts.baseClassName || opts.baseClass.name;
-    this._animation = opts.defaultAnimation || 'default';
-    this._animationOptions = opts.defaultAnimationOptions || {};
-
-    if (!this._animators[this._animation]) {
-      throw new Error('No such animation: ' + this._animation);
-    }
+  constructor(options) {
+    this.methods = options.methods;
+    this.base = options.base || newBaseClass(this.methods);
+    this.animators = {} //options.animators;
+    util.each(options.animators, (name, Animator) => {
+      if (typeof Animator === 'string') {
+        this.animators[name] = Animator;
+      } else {
+        this.addAnimator(name, Animator);
+      }
+    })
+    this.animators.none = this.animators.none || this.base;
   }
 
-  /**
-   * @param {String} jsonString
-   * @return {Object/null}
-   */
-  static parseAnimationOptionsString(jsonString) {
-    try {
-      if (typeof jsonString === 'string') {
-        const result = util.animationOptionsParse(jsonString);
-        if (typeof result === 'object' && result !== null) {
-          return result;
-        } else {
-          console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+  getAnimator(animation, options = {}) {
+    while (typeof animation === 'function') {
+      animation = new animation(options); // eslint-disable-line new-cap
+    }
+    if (typeof animation === 'string') {
+      if (this.animators[animation]) {
+        return this.getAnimator(this.animators[animation], options);
+      }
+      return this.getAnimator(this.animators[animation + platformSuffix()], options);
+    }
+    if (!animation) {
+      throw new Error('animation not found');
+    }
+    if (this.methods.every(e => typeof animation[e] === 'function')) {
+      return animation;
+    }
+    throw new Error(`"animator" is missing some of these methods: ${JSON.stringify(this.methods)}.`);
+  }
+
+  getAnimatorOptions(element, options) {
+    return util.extend(
+      util.getAnimationOptions(element, options),
+      internal.config.animationsDisabled ? {duration: 0, delay: 0} : {}
+    );
+  }
+
+  newAnimator(element, options = {}) {
+    options = util.extend({element}, options, this.getAnimatorOptions(element, options));
+    delete options.animationOptions;
+    return this.getAnimator(options.animation || element.getAttribute('animation') || 'default', options);
+  }
+
+  addAnimator(name, Animator) {
+    if (typeof Animator === 'object') {
+      const config = Animator;
+      const self = this;
+      Animator = class CustomAnimator extends BaseAnimator {};
+      util.each(config, (key, value) => {
+        if (this.methods.indexOf(key) === -1) {
+          return (Animator.prototype[key] = value);
         }
-      }
-      return {};
-    } catch (e) {
-      console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
-      return {};
+        Animator.prototype[key] = function (options) {
+          options = util.extend({}, self.defaults, config.defaults, options);
+          if (typeof config[key] === 'function') {
+            return config[key].call(this, options);
+          }
+          return this.animate(options, config[key]);
+        };
+      });
     }
+
+    if (typeof Animator === 'function') {
+      this.getAnimator.call({
+        animators: util.extend({}, this.animators, {[name]: Animator}),
+        methods: this.methods,
+        getAnimator: this.getAnimator
+      }, name);
+
+      this.animators[name] = Animator;
+    }
+
   }
 
-  /**
-   * @param {Object} options
-   */
-  setAnimationOptions(options) {
-    this._animationOptions = options;
-  }
-
-  /**
-   * @param {Object} options
-   * @param {String} [options.animation] The animation name
-   * @param {Object} [options.animationOptions] The animation options
-   * @param {Object} defaultAnimator The default animator instance
-   * @return {Object} An animator instance
-   */
-  newAnimator(options = {}, defaultAnimator) {
-
-    let animator = null;
-
-    if (options.animation instanceof this._baseClass) {
-      return options.animation;
-    }
-
-    let Animator = null;
-
-    if (typeof options.animation === 'string') {
-      Animator = this._animators[options.animation];
-    }
-
-    if (!Animator && defaultAnimator) {
-      animator = defaultAnimator;
-    } else {
-      Animator = Animator || this._animators[this._animation];
-
-      const animationOpts = util.extend(
-        {},
-        this._animationOptions,
-        options.animationOptions || {},
-        internal.config.animationsDisabled ? {duration: 0, delay: 0} : {}
-      );
-
-      animator = new Animator(animationOpts);
-
-      if (typeof animator === 'function') {
-        animator = new animator(animationOpts); // eslint-disable-line new-cap
-      }
-    }
-
-    if (!(animator instanceof this._baseClass)) {
-      throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
-    }
-
-    return animator;
+  assign(object) {
+    util.extend(object, {
+      addAnimator: (...args) => this.addAnimator(...args),
+      baseAnimator: this.base
+    });
   }
 }
+

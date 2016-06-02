@@ -18,8 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import animators from './animator';
+import animatorFactory from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -34,12 +33,6 @@ const scheme = {
   '.popover__arrow': 'popover__arrow--*'
 };
 
-const _animatorDict = {
-  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
-  'none': animators.PopoverAnimator,
-  'fade-ios': animators.IOSFadePopoverAnimator,
-  'fade-md': animators.MDFadePopoverAnimator
-};
 
 const templateSource = util.createFragment(`
   <div class="popover-mask"></div>
@@ -217,23 +210,15 @@ class PopoverElement extends BaseElement {
   createdCallback() {
     contentReady(this, () => {
       this._compile();
-      this._initAnimatorFactory();
     });
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
     this._boundCancel = this._cancel.bind(this);
+
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
-  _initAnimatorFactory() {
-    const factory = new AnimatorFactory({
-      animators: _animatorDict,
-      baseClass: animators.PopoverAnimator,
-      baseClassName: 'PopoverAnimator',
-      defaultAnimation: this.getAttribute('animation') || 'default'
-    });
-    this._animator = (options) => factory.newAnimator(options);
-  }
 
   _positionPopover(target) {
     const {_radius: radius, _content: el, _margin: margin} = this;
@@ -296,6 +281,7 @@ class PopoverElement extends BaseElement {
   }
 
   _clearStyles() {
+    this.style.display = 'none';
     ['top', 'bottom', 'left', 'right'].forEach(e => {
       this._arrow.style[e] = this._content.style[e] = this.style[e] = '';
       this._popover.classList.remove(`popover--${e}`);
@@ -319,20 +305,14 @@ class PopoverElement extends BaseElement {
 
     this.classList.add('popover');
 
-    const hasDefaultContainer = this._popover && this._content;
-
-    if (hasDefaultContainer) {
+    if (this._popover && this._content) {
 
       if (!this._mask) {
-        const mask = document.createElement('div');
-        mask.classList.add('popover-mask');
-        this.insertBefore(mask, this.firstChild);
+        this.insertBefore(util.create('popover-mask'), this.firstChild);
       }
 
       if (!this._arrow) {
-        const arrow = document.createElement('div');
-        arrow.classList.add('popover__arrow');
-        this._popover.appendChild(arrow);
+        this._popover.appendChild(util.create('.popover__arrow'));
       }
 
     } else {
@@ -359,54 +339,6 @@ class PopoverElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  _prepareAnimationOptions(options) {
-    if (options.animation && !(options.animation in _animatorDict)) {
-      throw new Error(`Animator ${options.animation} is not registered.`);
-    }
-
-    options.animationOptions = util.extend(
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
-      options.animationOptions || {}
-    );
-  }
-
-  _executeAction(actions, options = {}) {
-    const callback = options.callback;
-    const {action, before, after} = actions;
-
-    this._prepareAnimationOptions(options);
-
-    let canceled = false;
-    util.triggerElementEvent(this, `pre${action}`, { // synchronous
-      popover: this,
-      cancel: () => canceled = true
-    });
-
-    if (canceled) {
-      return Promise.reject(`Canceled in pre${action} event.`);
-    }
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => {
-        const unlock = this._doorLock.lock();
-
-        before && before();
-
-        contentReady(this, () => {
-          this._animator(options)[action](this, () => {
-            after && after();
-
-            unlock();
-
-            util.triggerElementEvent(this, `post${action}`, {popover: this});
-
-            callback && callback();
-            resolve(this);
-          });
-        });
-      });
-    });
-  }
 
   /**
    * @method show
@@ -443,14 +375,15 @@ class PopoverElement extends BaseElement {
      throw new Error('Invalid target');
     }
 
-    return this._executeAction({
-      action: 'show',
+    return util.executeAction(this, 'show', options, {
+      events: true,
+      eventData: {popover: this},
       before: () => {
         this.style.display = 'block';
         this._currentTarget = target;
         this._positionPopover(target);
       }
-    }, options);
+    });
   }
 
   /**
@@ -476,13 +409,11 @@ class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   hide(options = {}) {
-    return this._executeAction({
-      action: 'hide',
-      after: () => {
-        this.style.display = 'none';
-        this._clearStyles();
-      }
-    }, options);
+    return util.executeAction(this, 'hide', options, {
+      events: true,
+      eventData: {popover: this},
+      after: () => this._clearStyles()
+    });
   }
 
   /**
@@ -578,9 +509,6 @@ class PopoverElement extends BaseElement {
     if (name === 'direction') {
       return this._boundOnChange();
     }
-    if (name === 'animation') {
-      this._initAnimatorFactory();
-    }
   }
 
 
@@ -599,16 +527,4 @@ window.OnsPopoverElement = document.registerElement('ons-popover', {
   prototype: PopoverElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {PopoverAnimator} Animator
- */
-window.OnsPopoverElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof animators.PopoverAnimator)) {
-    throw new Error('"Animator" param must inherit PopoverAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsPopoverElement.PopoverAnimator = animators.PopoverAnimator;
-
+animatorFactory.assign(window.OnsPopoverElement);

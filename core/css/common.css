@@ -129,6 +129,10 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   top: 49px;
 }
 
+.page__extra {
+  z-index: 10001;
+}
+
 .page-with-bottom-toolbar > .page__content {
   bottom: 44px;
 }

@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import animationOptionsParse from './animation-options-parser';
+import contentReady from './content-ready';
 
 const util = {};
 
@@ -59,6 +60,24 @@ util.findChild = (element, query) => {
 /**
  * @param {Element} element
  * @param {String/Function} query dot class name or node name or matcher function.
+ * @return {Array}
+ */
+util.findChildNodes = (element, query) => {
+  const match = util.prepareQuery(query);
+  const result = [];
+
+  for (let i = 0; i < element.childNodes.length; i++) {
+    const node = element.childNodes[i];
+    if (match(node)) {
+      result.push(node);
+    }
+  }
+  return result;
+};
+
+/**
+ * @param {Element} element
+ * @param {String/Function} query dot class name or node name or matcher function.
  * @return {HTMLElement/null}
  */
 util.findParent = (element, query) => {
@@ -94,15 +113,7 @@ util.isAttached = (element) => {
  * @param {Element} element
  * @return {boolean}
  */
-util.hasAnyComponentAsParent = (element) => {
-  while (element && document.documentElement !== element) {
-    element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-      return true;
-    }
-  }
-  return false;
-};
+util.isAPageManager = e => e.nodeName.match(/ons-(navigator|tabbar|sliding-menu|split(ter|-view))/i);
 
 /**
  * @param {Element} element
@@ -188,6 +199,21 @@ util.extend = (dst, ...args) => {
   return dst;
 };
 
+
+/*
+ * @param {...Object} src Source object(s).
+ * @returns {Object} each property of which is the union of that specific property of the source objects.
+ */
+util.merge = (...args) => {
+  const result = {};
+  args.forEach(src => {
+    util.each(src, (key, value) => {
+      result[key] = util.extend(result[key] || {}, value);
+    });
+  });
+  return result;
+};
+
 /**
  * @param {Object} arrayLike
  * @return {Array}
@@ -240,14 +266,119 @@ util.triggerElementEvent = (target, eventName, detail = {}) => {
     detail: detail
   });
 
-  Object.keys(detail).forEach(key => {
-    event[key] = detail[key];
-  });
+  util.extend(event, detail); // do we really want this?
 
   target.dispatchEvent(event);
 
   return event;
 };
+
+
+/**
+ * @param {String}
+ * @return {Object}
+ */
+util.animationOptionsParse = optionsString => {
+  if (optionsString) {
+    try {
+      return animationOptionsParse(optionsString);
+    } catch (e) {
+      console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
+    }
+  }
+  return {};
+};
+
+/**
+ * @param {HTMLElement}
+ * @return {Object}
+ */
+util.getAnimationOptions = (...args) => {
+  args = args.map(e => {
+    if (e instanceof HTMLElement) {
+      return util.animationOptionsParse(e.getAttribute('animation-options'));
+    }
+    return e && e.animationOptions;
+  });
+  args.unshift({});
+  return util.extend.apply(null, args);
+};
+
+const easyLock = {
+  lock: x => x,
+  waitUnlock: x => x(),
+  isLocked: x => false
+};
+
+/**
+ * @param {Element} element
+ * @param {String} action
+ * @param {Object} options
+ * @param {Object} [actionInfo]
+ * @param {Function} [actionInfo.before]
+ * @param {Function} [actionInfo.after]
+ * @param {Boolean}  [actionInfo.events]
+ * @param {Object}   [actionInfo.eventData]
+ * @param {Boolean}  [actionInfo.unlocked]
+ * @param {Any}      [actionInfo.resolveTo]
+ * @return {Promise}
+ */
+util.executeAction = (element, action, options, actionInfo = {}) => {
+  const {before, after, events, eventData, unlocked, rejectIfLocked} = actionInfo;
+  const resolveTo = actionInfo.hasOwnProperty('resolveTo') ? actionInfo.resolveTo : element;
+  const callback = options.callback;
+  const lock = unlocked ? easyLock : element._doorLock || easyLock;
+
+  options = util.extend({}, options, util.getAnimationOptions(element, options), {element});
+
+  if (events && util.emitEvent(element, `pre${action}`, eventData)) {
+    return Promise.reject(`Canceled in pre${action} event.`);
+  }
+  if (rejectIfLocked && lock.isLocked()) {
+    return Promise.reject('Element is locked.');
+  }
+
+  return new Promise(resolve => {
+    lock.waitUnlock(() => {
+      const unlock = lock.lock();
+      const animator = element._animator(options);
+      options.callback = () => {
+        after && after();
+        unlock && unlock();
+
+        events && util.emitEvent(element, `post${action}`, eventData);
+
+        callback && callback();
+        resolve(resolveTo);
+      };
+
+      before && before();
+
+      contentReady(element, () => animator[action](options));
+    });
+  });
+};
+
+/**
+ * @param {Element} element
+ * @param {String} eventName
+ * @param {Object} [eventData]
+ * @return {Boolean} canceled
+ */
+util.emitEvent = (element, eventName, eventData = {}) => {
+  if (eventName.slice(0, 3) !== 'pre') {
+    util.triggerElementEvent(element, eventName, eventData);
+    return false;
+  }
+  let canceled = false;
+
+  util.triggerElementEvent(element, eventName, util.extend({
+    cancel: () => canceled = true
+  }, eventData));
+
+  return canceled;
+};
+
 
 /**
  * @param {Element} target
@@ -432,11 +563,6 @@ util.updateRipple = (target) => {
   }
 };
 
-/**
- * @param {String}
- * @return {Object}
- */
-util.animationOptionsParse = animationOptionsParse;
 
 /**
  * @param {*} value

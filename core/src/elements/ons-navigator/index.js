@@ -17,32 +17,10 @@ limitations under the License.
 
 import util from 'ons/util';
 import internal from 'ons/internal';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import NavigatorTransitionAnimator from './animator';
-import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
-import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
-import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
-import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
-import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
-import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
-import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
+import animatorFactory from './animators';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-
-const _animatorDict = {
-  'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': () => platform.isAndroid() ? MDSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : IOSLiftNavigatorTransitionAnimator,
-  'fade': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSFadeNavigatorTransitionAnimator,
-  'slide-ios': IOSSlideNavigatorTransitionAnimator,
-  'slide-md': MDSlideNavigatorTransitionAnimator,
-  'lift-ios': IOSLiftNavigatorTransitionAnimator,
-  'lift-md': MDLiftNavigatorTransitionAnimator,
-  'fade-ios': IOSFadeNavigatorTransitionAnimator,
-  'fade-md': MDFadeNavigatorTransitionAnimator,
-  'none': NoneNavigatorTransitionAnimator
-};
 
 const rewritables = {
   /**
@@ -227,7 +205,7 @@ class NavigatorElement extends BaseElement {
   createdCallback() {
     this._isRunning = false;
 
-    this._updateAnimatorFactory();
+    this._animator = options => animatorFactory.newAnimator(this, options);
   }
 
   attachedCallback() {
@@ -253,24 +231,12 @@ class NavigatorElement extends BaseElement {
     });
   }
 
-  _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
-      animators: _animatorDict,
-      baseClass: NavigatorTransitionAnimator,
-      baseClassName: 'NavigatorTransitionAnimator',
-      defaultAnimation: this.getAttribute('animation')
-    });
-  }
-
   detachedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'animation') {
-      this._updateAnimatorFactory();
-    }
   }
 
   /**
@@ -303,32 +269,29 @@ class NavigatorElement extends BaseElement {
    *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
    */
   popPage(options = {}) {
-    const popUpdate = () => new Promise((resolve) => {
-      this.pages[this.pages.length - 1]._destroy();
+    const popUpdate = () => new Promise(resolve => {
+      this.topPage._destroy();
       resolve();
     });
-    options = this._prepareOptions(options);
+    options = this._prepareOptions(options, null, this.topPage.pushedOptions);
 
     if (!options.refresh) {
       return this._popPage(options, popUpdate);
     }
-    const index = this.pages.length - 2;
+    const oldPage = this.pages[this.pages.length - 2];
+    const {name, data, pushedOptions} = oldPage;
 
-    if (!this.pages[index].name) {
-      throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
+    if (!oldPage || !name) {
+      throw new Error('Failed to find page' + (oldPage ? ' name.' : '.'));
     }
 
     return new Promise(resolve => {
-      internal.getPageHTMLAsync(this.pages[index].name).then(templateHTML => {
-        const element = util.extend(this._createPageElement(templateHTML), {
-          name: this.pages[index].name,
-          data: this.pages[index].data,
-          pushedOptions: this.pages[index].pushedOptions
-        });
+      this._getPage({page: name}, templateHTML => {
+        const element = util.extend(this._createPageElement(templateHTML), {name, data, pushedOptions});
 
-        rewritables.link(this, element, this.pages[index].options, element => {
-          this.insertBefore(element, this.pages[index] ? this.pages[index] : null);
-          this.pages[index + 1]._destroy();
+        rewritables.link(this, element, pushedOptions, element => {
+          this.insertBefore(element, oldPage);
+          oldPage._destroy();
           resolve();
         });
       });
@@ -344,7 +307,7 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('ons-navigator\'s page stack is empty.');
     }
 
-    if (this._emitPrePopEvent()) {
+    if (this._emitEvent('prepop', {currentPage: this.topPage})) {
       return Promise.reject('Canceled in prepop event.');
     }
 
@@ -359,16 +322,13 @@ class NavigatorElement extends BaseElement {
       var enterPage = this.pages[l - 2];
       enterPage.style.display = 'block';
 
-      options.animation = leavePage.pushedOptions.animation || options.animation;
-      options.animationOptions = util.extend({}, leavePage.pushedOptions.animationOptions, options.animationOptions || {});
-
       const callback = () => {
         pages.pop();
         update(pages, this).then(() => {
           this._isRunning = false;
 
           enterPage._show();
-          util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
+          this._emitEvent('postpop', {leavePage, enterPage});
 
           if (typeof options.callback === 'function') {
             options.callback();
@@ -379,8 +339,7 @@ class NavigatorElement extends BaseElement {
       };
 
       leavePage._hide();
-      const animator = this._animatorFactory.newAnimator(options);
-      animator.pop(this.pages[l - 2], this.pages[l - 1], callback);
+      this._animator(options).pop({enterPage, leavePage, callback});
     }).catch(() => this._isRunning = false);
   }
 
@@ -430,10 +389,7 @@ class NavigatorElement extends BaseElement {
       resolve();
     });
 
-    if (options.pageHTML) {
-      return this._pushPage(options, () => run(options.pageHTML));
-    }
-    return this._pushPage(options, () => internal.getPageHTMLAsync(options.page).then(run));
+    return this._pushPage(options, () => this._getPage(options, run));
   }
 
   _pushPage(options = {}, update = () => Promise.resolve(), pages = [], page = {}) {
@@ -441,23 +397,24 @@ class NavigatorElement extends BaseElement {
       return Promise.reject('pushPage is already running.');
     }
 
-    if (this._emitPrePushEvent()) {
+    if (this._emitEvent('prepush', {currentPage: this.topPage})) {
       return Promise.reject('Canceled in prepush event.');
     }
 
     this._isRunning = true;
 
-    const animationOptions = AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
-    options = util.extend({}, this.options || {}, {animationOptions}, options);
+    if (!options.__prepared) {
+      options = this._prepareOptions(options);
+    }
 
-    const animator = this._animatorFactory.newAnimator(options);
+    const animator = this._animator(options);
 
     pages.push(page);
 
     return update(pages, this).then(() => {
       const pageLength = this.pages.length;
 
-      var enterPage  = this.pages[pageLength - 1];
+      var enterPage = this.pages[pageLength - 1];
       var leavePage = this.pages[pageLength - 2];
 
       if (enterPage.nodeName !== 'ONS-PAGE') {
@@ -471,7 +428,7 @@ class NavigatorElement extends BaseElement {
       enterPage.pushedOptions = options;
 
       return new Promise(resolve => {
-        var done = () => {
+        var callback = () => {
           this._isRunning = false;
 
           if (leavePage) {
@@ -479,7 +436,7 @@ class NavigatorElement extends BaseElement {
           }
 
           enterPage._show();
-          util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
+          this._emitEvent('postpush', {leavePage, enterPage});
 
           if (typeof options.callback === 'function') {
             options.callback();
@@ -494,9 +451,9 @@ class NavigatorElement extends BaseElement {
           enterPage.style.display = 'block';
           if (leavePage) {
             leavePage._hide();
-            animator.push(enterPage, leavePage, done);
+            animator.push({enterPage, leavePage, callback});
           } else {
-            done();
+            callback();
           }
         };
 
@@ -554,18 +511,14 @@ class NavigatorElement extends BaseElement {
       return this.pushPage(options);
     }
 
-    const run = templateHTML => {
+    return this._getPage(options, templateHTML => {
       const element = util.extend(this._createPageElement(templateHTML), {
         name: options.page,
         data: options.data,
         pushedOptions: options
       });
 
-      options.animationOptions = util.extend(
-        {},
-        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
-        options.animationOptions || {}
-      );
+      options.animationOptions = util.getAnimationOptions(this, options);
 
       return new Promise(resolve => {
         element.style.display = 'none';
@@ -579,13 +532,7 @@ class NavigatorElement extends BaseElement {
           }, 1000 / 60);
         });
       });
-    };
-
-    if (options.pageHTML) {
-      return run(options.pageHTML);
-    } else {
-      return internal.getPageHTMLAsync(options.page).then(run);
-    }
+    });
   }
 
   /**
@@ -657,7 +604,7 @@ class NavigatorElement extends BaseElement {
     if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
     }
-    if (this._emitPrePushEvent()) {
+    if (this._emitEvent('prepush', {currentPage: this.topPage})) {
       return Promise.reject('Canceled in prepush event.');
     }
 
@@ -671,7 +618,11 @@ class NavigatorElement extends BaseElement {
     return this._pushPage(options);
   }
 
-  _prepareOptions(options = {}, page) {
+  _getPage({page, pageHTML}, callback) {
+    return pageHTML ? callback(pageHTML) : internal.getPageHTMLAsync(page).then(callback);
+  }
+
+  _prepareOptions(options = {}, page, defaults = {}) {
     if (typeof page === 'object' && page !== null) {
       options = page;
       page = options.page;
@@ -679,9 +630,14 @@ class NavigatorElement extends BaseElement {
     if (typeof options != 'object') {
       throw new Error('options must be an object. You supplied ' + options);
     }
-    page = page || options.page;
 
-    return util.extend({}, this.options || {}, options, {page});
+    const prop = this.options || {};
+    return util.extend({}, prop, defaults, options, {
+      __prepared: true,
+      page: page || options.page || defaults.page,
+      animation: options.animation || defaults.animation || this.getAttribute('animation') || prop.animation,
+      animationOptions: util.getAnimationOptions(prop, this, defaults, options)
+    });
   }
 
   _updateLastPageBackButton() {
@@ -713,28 +669,8 @@ class NavigatorElement extends BaseElement {
     return index;
   }
 
-  _emitPreEvent(name, data = {}) {
-    let isCanceled = false;
-
-    util.triggerElementEvent(this, 'pre' + name, util.extend({
-      navigator: this,
-      currentPage: this.pages[this.pages.length - 1],
-      cancel: () => isCanceled = true
-    }, data));
-
-    return isCanceled;
-  }
-
-  _emitPrePushEvent() {
-    return this._emitPreEvent('push');
-  }
-
-  _emitPrePopEvent() {
-    const l = this.pages.length;
-    return this._emitPreEvent('pop', {
-      leavePage: this.pages[l - 1],
-      enterPage: this.pages[l - 2]
-    });
+  _emitEvent(name, data = {}) {
+    return util.emitEvent(this, name, util.extend({navigator: this}, data));
   }
 
   _createPageElement(templateHTML) {
@@ -875,18 +811,7 @@ window.OnsNavigatorElement = document.registerElement('ons-navigator', {
   prototype: NavigatorElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsNavigatorElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-    throw new Error('"Animator" param must inherit OnsNavigatorElement.NavigatorTransitionAnimator');
-  }
-
-  _animatorDict[name] = Animator;
-};
+animatorFactory.assign(OnsNavigatorElement);
 
 window.OnsNavigatorElement.rewritables = rewritables;
-window.OnsNavigatorElement.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
 

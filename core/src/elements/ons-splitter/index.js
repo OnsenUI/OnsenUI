@@ -17,8 +17,7 @@ limitations under the License.
 
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import SplitterAnimator from './animator';
+import animatorFactory from './animator';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
@@ -167,6 +166,13 @@ class SplitterElement extends BaseElement {
   attachedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
     this.addEventListener('modechange', this._boundOnModeChange, false);
+
+    contentReady(this, () => {
+      this._layout();
+      if (!util.findParent(this, util.isAPageManager)) {
+        this._show();
+      }
+    });
   }
 
   detachedCallback() {
@@ -195,18 +201,6 @@ window.OnsSplitterElement = document.registerElement('ons-splitter', {
   prototype: SplitterElement.prototype
 });
 
-window.OnsSplitterElement._animatorDict = {
-  default: SplitterAnimator,
-  overlay: SplitterAnimator
-};
-
-window.OnsSplitterElement.registerAnimator = function(name, Animator) {
-  if (!(Animator instanceof SplitterAnimator)) {
-    throw new Error('Animator parameter must be an instance of SplitterAnimator.');
-  }
-  window.OnsSplitterElement._animatorDict[name] = Animator;
-};
-
-window.OnsSplitterElement.SplitterAnimator = SplitterAnimator;
+animatorFactory.assign(window.OnsSplitterElement);
 
 export default OnsSplitterElement;

@@ -144,7 +144,6 @@ class PageElement extends BaseElement {
       }
 
       this._isShown = false;
-      this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
       this.pushedOptions = {};
@@ -161,7 +160,7 @@ class PageElement extends BaseElement {
         }
       }
 
-      if (!util.hasAnyComponentAsParent(this)) {
+      if (!util.findParent(this, util.isAPageManager)) {
         setImmediate(() => this._show());
       }
 
@@ -194,12 +193,12 @@ class PageElement extends BaseElement {
   _tryToFillStatusBar(){
     internal.autoStatusBarFill(() => {
       const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'));
-      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageControlChild()));
+      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageManagerChild()));
     });
   }
 
-  _hasAPageControlChild() {
-    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+  _hasAPageManagerChild() {
+    return util.findChild(this._content, util.isAPageManager);
   }
 
   /**
@@ -211,7 +210,7 @@ class PageElement extends BaseElement {
   set onInfiniteScroll(value) {
     if (value === null) {
       this._onInfiniteScroll = null;
-      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      this._content.removeEventListener('scroll', this._boundOnScroll);
       return;
     }
     if (!(value instanceof Function)) {
@@ -220,7 +219,7 @@ class PageElement extends BaseElement {
     if (!this._onInfiniteScroll) {
       this._infiniteScrollLimit = 0.9;
       this._boundOnScroll = this._onScroll.bind(this);
-      this._contentElement.addEventListener('scroll', this._boundOnScroll);
+      this._content.addEventListener('scroll', this._boundOnScroll);
     }
     this._onInfiniteScroll = value;
   }
@@ -230,7 +229,7 @@ class PageElement extends BaseElement {
   }
 
   _onScroll() {
-    const c = this._contentElement,
+    const c = this._content,
       overLimit = (c.scrollTop + c.clientHeight) / c.scrollHeight >= this._infiniteScrollLimit;
 
     if (this._onInfiniteScroll && !this._loadingContent && overLimit) {
@@ -238,7 +237,6 @@ class PageElement extends BaseElement {
       this._onInfiniteScroll(() => this._loadingContent = false);
     }
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -259,73 +257,30 @@ class PageElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getContentElement() {
-    const result = util.findChild(this, '.page__content');
-    if (result) {
-      return result;
-    }
-    throw Error('fail to get ".page__content" element.');
-  }
-
-  /**
-   * @return {Boolean}
-   */
   _canAnimateToolbar() {
-    if (util.findChild(this, 'ons-toolbar')) {
-      return true;
-    }
-    return !!util.findChild(this._contentElement, el => {
-      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
-    });
+    return !!util.findChild(this, e => util.match(e, 'ons-toolbar') && !e.hasAttribute('inline') && !util.hasModifier(e, 'material'));
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getBackgroundElement() {
-    const result = util.findChild(this, '.page__background');
-    if (result) {
-      return result;
-    }
-    throw Error('fail to get ".page__background" element.');
+  get _background() {
+    return util.findChild(this, '.page__background');
   }
 
-  /**
-   * @return {HTMLElement}
-   */
-  _getBottomToolbarElement() {
-    return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
+  get _content() {
+    return util.findChild(this, '.page__content');
   }
 
-
-  /**
-   * @return {HTMLElement}
-   */
-  _getToolbarElement() {
-    return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+  get _toolbar() {
+    return util.findChild(this, 'ons-toolbar');
   }
 
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerToolbar(element) {
-    this.insertBefore(element, this.children[0]);
+  get _extra() {
+    return util.findChild(this, '.page__extra') || this.appendChild(util.create('.page__extra'));
   }
 
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerBottomToolbar(element) {
-    this.classList.add('page-with-bottom-toolbar');
-    this.appendChild(element);
+  get _bottomToolbar() {
+    return util.findChild(this, 'ons-bottom-toolbar');
   }
+
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
@@ -347,35 +302,29 @@ class PageElement extends BaseElement {
     }
   }
 
+  _shouldBeDirectChild(e) {
+    return (e.nodeName === 1 && e.className.match(/\bpage__/)) || (e.nodeName.match(/ons-(bottom-)?toolbar/i) && !e.hasAttribute('inline'));
+  }
+
   _compile() {
     autoStyle.prepare(this);
 
-    if (!util.findChild(this, '.page__background') || !util.findChild(this, '.page__content')) {
-
+    if (!this._content) {
       const background = util.create('.page__background');
       const content = util.create('.page__content');
 
-      while (this.firstChild) {
-        content.appendChild(this.firstChild);
-      }
+      util.findChildNodes(this, e => !this._shouldBeDirectChild(e)).forEach(e => content.appendChild(e));
 
-      this.appendChild(background);
-      this.appendChild(content);
+      const toolbar = this._toolbar;
+      const location = toolbar ? toolbar.nextSibling : (this.childNodes[0] || null);
+
+      this.insertBefore(content, location);
+      this.insertBefore(this._background || background, content);
     }
 
     ModifierUtil.initModifier(this, scheme);
 
     this.setAttribute('_compiled', '');
-  }
-
-  _registerExtraElement(element) {
-    let extra = util.findChild(this, '.page__extra');
-    if (!extra) {
-      extra = util.create('.page__extra', {zIndex: 10001});
-      this.appendChild(extra);
-    }
-
-    extra.appendChild(element);
   }
 
   _show() {
@@ -386,7 +335,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'show');
       }
 
-      util.propagateAction(this._contentElement, '_show');
+      util.propagateAction(this._content, '_show');
     }
   }
 
@@ -398,7 +347,7 @@ class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'hide');
       }
 
-      util.propagateAction(this._contentElement, '_hide');
+      util.propagateAction(this._content, '_hide');
     }
   }
 
@@ -413,7 +362,7 @@ class PageElement extends BaseElement {
       this.onDeviceBackButton.destroy();
     }
 
-    util.propagateAction(this._contentElement, '_destroy');
+    util.propagateAction(this._content, '_destroy');
 
     this.remove();
   }

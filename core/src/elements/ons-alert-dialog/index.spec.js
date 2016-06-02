@@ -51,18 +51,6 @@ describe('OnsAlertDialogElement', () => {
     expect(title.classList.contains('alert-dialog-title--hoge')).not.to.be.true;
   });
 
-  describe('#_titleElement', () => {
-    it('is an HTML element', () => {
-      expect(dialog._titleElement).to.be.an.instanceof(HTMLElement);
-    });
-  });
-
-  describe('#_contentElement', () => {
-    it('is an HTML element', () => {
-      expect(dialog._contentElement).to.be.an.instanceof(HTMLElement);
-    });
-  });
-
   describe('#_dialog', () => {
     it('is an HTML element', () => {
       expect(dialog._dialog).to.be.an.instanceof(HTMLElement);
@@ -212,18 +200,6 @@ describe('OnsAlertDialogElement', () => {
       expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
       expect(dialog.visible).to.be.true;
-    });
-  });
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a DialogAnimator', () => {
-      expect(() => window.OnsAlertDialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.OnsAlertDialogElement.AlertDialogAnimator {
-      }
-      window.OnsAlertDialogElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

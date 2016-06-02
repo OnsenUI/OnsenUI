@@ -40,7 +40,8 @@
     it('should not crash (issue #570)', function() {
       var pushPage = element(by.id('push-page')),
         popPage = element(by.id('pop-page')),
-        hideDialog = element(by.id('hide-dialog'));
+        hideDialog = element(by.id('hide-dialog')),
+        mask = element(by.css('ons-navigator > div'));
 
       browser.wait(EC.visibilityOf(pushPage));
       pushPage.click();
@@ -52,8 +53,9 @@
       browser.wait(EC.invisibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).not.toBeTruthy();
 
-
       browser.wait(EC.visibilityOf(popPage));
+      browser.wait(EC.stalenessOf(mask));
+      browser.wait(EC.elementToBeClickable(popPage));
       popPage.click();
       browser.wait(EC.stalenessOf(popPage));
       expect(popPage.isPresent()).not.toBeTruthy();

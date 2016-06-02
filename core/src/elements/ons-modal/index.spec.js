@@ -108,7 +108,6 @@ describe('OnsModalElement', () => {
     });
   });
 
-
   describe('#onDeviceBackButton', () => {
     it('gets the callback', () => {
       expect(element.onDeviceBackButton).to.be.ok;
@@ -127,19 +126,12 @@ describe('OnsModalElement', () => {
   });
 
   describe('#_ensureNodePosition()', () => {
-    it('does not register extra element when has no parent ons-page', () => {
-      const spy = chai.spy.on(element, '_registerExtraElement');
-      expect(element._ensureNodePosition()).not.to.be.ok;
-      expect(spy).to.not.have.been.called();
-    });
-
     it('registers extra element when has parent ons-page', () => {
       const element = new OnsModalElement();
       const parent = new OnsPageElement();
-      const spy = chai.spy.on(parent, '_registerExtraElement');
-      parent._registerExtraElement(element);
+      parent.appendChild(element);
       element._ensureNodePosition();
-      expect(spy).to.have.been.called.twice;
+      expect(element.parentNode.className).to.equal('page__extra');
     });
   });
 
@@ -148,19 +140,6 @@ describe('OnsModalElement', () => {
       const spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
-    });
-  });
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a ModalAnimator', () => {
-      expect(() => window.OnsModalElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.OnsModalElement.ModalAnimator {
-      }
-
-      window.OnsModalElement.registerAnimator('hoge', MyAnimator);
     });
   });
 });

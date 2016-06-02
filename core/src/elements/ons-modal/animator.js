@@ -15,36 +15,16 @@ limitations under the License.
 
 */
 
-export default class ModalAnimator {
+import util from 'ons/util';
+import AnimatorFactory from 'ons/internal/animator-factory';
+import {fade} from 'ons/animations';
 
-  /**
-   * @param {Object} options
-   * @param {String} options.timing
-   * @param {Number} options.duration
-   * @param {Number} options.delay
-   */
-  constructor(options = {}) {
-    this.delay = 0;
-    this.duration = 0.2;
+export default new AnimatorFactory({
+  defaults: {duration: 0.3},
+  animators: {
+    'default': 'none',
+    'fade': {show: fade.in, hide: fade.out}
+  },
+  methods: ['show', 'hide']
+});
 
-    this.timing = options.timing || this.timing;
-    this.duration = options.duration !== undefined ? options.duration : this.duration;
-    this.delay = options.delay !== undefined ? options.delay : this.delay;
-  }
-
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  show(modal, callback) {
-    callback();
-  }
-
-  /**
-   * @param {HTMLElement} modal
-   * @param {Function} callback
-   */
-  hide(modal, callback) {
-    callback();
-  }
-}
