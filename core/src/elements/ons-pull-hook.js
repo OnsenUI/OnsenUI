@@ -132,7 +132,7 @@ class PullHookElement extends BaseElement {
   }
 
   _ensureScrollElement() {
-    if (!this._scrollElement) {
+    if (this.parentElement && !this._scrollElement) {
       this._scrollElement = this._createScrollElement();
     }
   }

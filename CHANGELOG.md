@@ -2,8 +2,18 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.10
+----
+
+v2.0.0-rc.9
+----
+ * ons-popover: Fix iOS glitch.
+ * ons-fab: Fix issue where element was not shown correctly in React.
+
 v2.0.0-rc.8
 ----
+ * core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
+ * ons-pull-hook: Add React compatibility.
 
 v2.0.0-rc.7
 ----

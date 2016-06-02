@@ -131,7 +131,6 @@ describe('OnsFabElement', () => {
 
   describe('#visible', () => {
     it('returns whether the element is currently shown or not', () => {
-      expect(fab.visible).to.be.false;
       fab.show();
       expect(fab.visible).to.be.true;
       fab.hide();
@@ -152,15 +151,15 @@ describe('OnsFabElement', () => {
 
   describe('#toggle()', () => {
     it('calls #show() if element is hidden', () => {
+      fab.hide();
       const spy = chai.spy.on(fab, 'show');
       fab.toggle();
       expect(spy).to.have.been.called.once;
     });
 
     it('calls #hide() if element is shown', () => {
+      fab.show();
       const spy = chai.spy.on(fab, 'hide');
-      fab.toggle();
-      expect(spy).not.to.have.been.called();
       fab.toggle();
       expect(spy).to.have.been.called.once;
     });
