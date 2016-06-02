@@ -99,14 +99,6 @@ class FabElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this._updatePosition();
-
-    this.hide();
-  }
-
-  attachedCallback() {
-    if (!util.findParent(this, 'ons-page')) {
-      this.show();
-    }
   }
 
   attributeChangedCallback(name, last, current) {
