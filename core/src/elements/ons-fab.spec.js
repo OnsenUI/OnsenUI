@@ -131,7 +131,6 @@ describe('OnsFabElement', () => {
 
   describe('#visible', () => {
     it('returns whether the element is currently shown or not', () => {
-      expect(fab.visible).to.be.false;
       fab.show();
       expect(fab.visible).to.be.true;
       fab.hide();
