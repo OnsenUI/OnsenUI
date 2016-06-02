@@ -57,7 +57,7 @@ export class LazyRepeatDelegate {
    */
   loadItemElement(index, parent, done) {
     if (this._userDelegate.loadItemElement instanceof Function) {
-      this._userDelegate.loadItemElement(index, parent, done);
+      this._userDelegate.loadItemElement(index, parent, element => done({element}));
     } else {
       const element = this._userDelegate.createItemContent(index, this._templateElement);
       if (!(element instanceof Element)) {
@@ -166,7 +166,7 @@ export class LazyRepeatProvider {
   }
 
   _checkItemHeight(callback) {
-    this._delegate.loadItemElement(0, this._wrapperElement, element => {
+    this._delegate.loadItemElement(0, this._wrapperElement, ({element}) => {
       if (this._unknownItemHeight) {
         this._itemHeight = element.offsetHeight;
         this._wrapperElement.removeChild(element);
