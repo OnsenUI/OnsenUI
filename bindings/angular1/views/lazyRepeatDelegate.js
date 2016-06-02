@@ -21,11 +21,6 @@ limitations under the License.
   angular.module('onsen').factory('AngularLazyRepeatDelegate', function($compile) {
 
     const directiveAttributes = ['ons-lazy-repeat', 'ons:lazy:repeat', 'ons_lazy_repeat', 'data-ons-lazy-repeat', 'x-ons-lazy-repeat'];
-    const scheme = {
-      configureItemScope: {type: 'function', safeCall: true},
-      destroyItemScope: {type: 'function', safeCall: true}
-    };
-
     class AngularLazyRepeatDelegate extends ons._internal.LazyRepeatDelegate {
       /**
        * @param {Object} userDelegate
@@ -41,11 +36,15 @@ limitations under the License.
       }
 
       configureItemScope(item, scope){
-        return this._validated('configureItemScope', scheme)(item, scope);
+        if (this._userDelegate.configureItemScope instanceof Function) {
+          this._userDelegate.configureItemScope(item, scope);
+        }
       }
 
       destroyItemScope(item, element){
-        return this._validated('destroyItemScope', scheme)(item, element);
+        if (this._userDelegate.destroyItemScope instanceof Function) {
+          this._userDelegate.destroyItemScope(item, element);
+        }
       }
 
       _usingBinding() {
@@ -60,8 +59,14 @@ limitations under the License.
         throw new Error('`lazy-repeat` delegate object is vague.');
       }
 
+      loadItemElement(index, parent, done) {
+        this._prepareItemElement(index, ({element, scope}) => {
+          parent.appendChild(element);
+          done({element, scope});
+        });
+      }
 
-      prepareItem(index, done) {
+      _prepareItemElement(index, done) {
         const scope = this._parentScope.$new();
         this._addSpecialProperties(index, scope);
 

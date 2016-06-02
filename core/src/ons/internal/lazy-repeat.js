@@ -51,7 +51,8 @@ export class LazyRepeatDelegate {
   }
 
   /**
-   * @param {Number}
+   * @param {Number} index
+   * @param {Element} parent
    * @param {Function} done A function that take item object as parameter.
    */
   loadItemElement(index, parent, done) {
@@ -63,7 +64,7 @@ export class LazyRepeatDelegate {
         throw Error('createItemContent() must return an instance of Element.');
       }
       parent.appendChild(element);
-      done(element);
+      done({element});
     }
   }
 
@@ -233,15 +234,15 @@ export class LazyRepeatProvider {
       return;
     }
 
-    this._delegate.loadItemElement(index, this._wrapperElement, (element) => {
-      util.extend(element.style, {
+    this._delegate.loadItemElement(index, this._wrapperElement, item => {
+      util.extend(item.element.style, {
         position: 'absolute',
         top: top + 'px',
         left: 0,
         right: 0
       });
 
-      this._renderedItems[index] = {element};
+      this._renderedItems[index] = item;
     });
   }
 
