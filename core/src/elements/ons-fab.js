@@ -99,6 +99,8 @@ class FabElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this._updatePosition();
+
+    this.show();
   }
 
   attributeChangedCallback(name, last, current) {
