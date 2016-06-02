@@ -25,7 +25,7 @@ var-tab-bar-button-color = $tabbar-text-color // Text color
 var-tab-bar-active-color = $tabbar-highlight-text-color // Text color active
 var-material-tab-bar-background-color = $material-tabbar-background-color
 var-material-tab-bar-text-color = $material-tabbar-text-color
-var-material-tab-bar-current-color = $material-tabbar-highlight-text-color
+var-material-tab-bar-current-color = $primary-lv1
 var-material-tab-bar-highlight-color = $material-tabbar-highlight-color
 
 var-tab-bar-active-border-top = none
@@ -173,6 +173,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 .tab-bar__label
   reset-font()
+  font-size pxToRem(28)
 
 .tab-bar__icon + .tab-bar__label
   //font-size 10px
@@ -181,7 +182,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   font-weight var-font-weight
 
 .tab-bar__label:first-child
-  font-size 16px
+  //font-size 16px
   line-height var-tab-bar-button-line-height
   margin 0
   padding 0
@@ -283,7 +284,18 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   bottom auto
   border-top none
   border-bottom var-tab-bar-border-top
+  background $gray-lv6
+  //color $gray-lv1
+  height pxToRem(60)
   retina-tabbar-border(var-tab-bar-border-color, bottom)
+  .tab-bar__label
+    line-height pxToRem(60)
+  .tab-bar__button
+    height pxToRem(60)
+    color $gray-lv1
+
+  :checked + .tab-bar__button
+    color $primary-lv1
 
 .tab-bar--top__content
   top var-tab-bar-height
@@ -476,3 +488,29 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 .tab-bar--material__icon + .tab-bar--material__label
   font-size 10px
+
+
+.tab-bar--scroll
+  overflow-x auto
+  display block
+  .tab-bar__item
+    display inline-block
+    vertical-align middle
+    padding 0 12px
+
+.tab-bar--simple
+  background transparent
+  margin 0 auto
+  width pxToRem(592)
+  height pxToRem(48)
+  border $primary-lv1 solid 1px
+  border-radius pxToRem(6)
+
+  .tab-bar__button
+    color $primary-lv1
+
+  :checked + .tab-bar__button
+    color $brand-white
+    background $primary-lv1
+
+
