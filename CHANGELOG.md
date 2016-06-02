@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.9
 ----
  * ons-popover: Fix iOS glitch.
+ * ons-fab: Fix issue where element was not shown correctly in React.
 
 v2.0.0-rc.8
 ----
