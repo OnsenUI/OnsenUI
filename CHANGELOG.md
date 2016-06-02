@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.9
 ----
+ * ons-popover: Fix iOS glitch.
 
 v2.0.0-rc.8
 ----
