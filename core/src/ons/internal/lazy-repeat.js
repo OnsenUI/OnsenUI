@@ -103,6 +103,7 @@ export class LazyRepeatDelegate {
 
       return height;
     }
+
     return 0;
   }
 
@@ -166,13 +167,38 @@ export class LazyRepeatProvider {
   }
 
   _checkItemHeight(callback) {
-    this._delegate.loadItemElement(0, this._wrapperElement, ({element}) => {
-      if (this._unknownItemHeight) {
-        this._itemHeight = element.offsetHeight;
-        this._wrapperElement.removeChild(element);
+    this._delegate.loadItemElement(0, this._wrapperElement, item => {
+      if (!this._unknownItemHeight) {
+        throw Error('Invalid state');
+      }
+
+      const done = () => {
+        this._wrapperElement.removeChild(item.element);
         delete this._unknownItemHeight;
         callback();
+      };
+
+      this._itemHeight = item.element.offsetHeight;
+
+      if (this._itemHeight > 0) {
+        done();
+        return;
       }
+
+      // retry to measure offset height
+      // dirty fix for angular2 directive
+      const lastVisibility = this._wrapperElement.style.visibility;
+      this._wrapperElement.style.visibility = 'hidden';
+      item.element.style.visibility = 'hidden';
+
+      setImmediate(() => {
+        this._itemHeight = item.element.offsetHeight;
+        if (this._itemHeight == 0) {
+          throw Error('Invalid state: this._itemHeight must be greater than zero.');
+        }
+        this._wrapperElement.style.visibility = lastVisibility;
+        done();
+      });
     });
   }
 

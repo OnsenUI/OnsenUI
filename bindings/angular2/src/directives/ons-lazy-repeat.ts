@@ -5,28 +5,73 @@ import {
   Input,
   Output,
   OnDestroy,
-  OnInit
+  OnInit,
+  TemplateRef,
+  ViewContainerRef,
+  DoCheck,
+  IterableDiffer,
+  ChangeDetectorRef
 } from '@angular/core';
 
-@Directive({
-  selector: 'ons-lazy-repeat'
-})
-export class OnsLazyRepeat implements OnDestroy {
-  private _element: any;
+class ItemContext {
+  constructor(public $implicit: any, public index: number, public count: number) {
+  }
+}
 
-  constructor(private _elementRef: ElementRef) {
-    this._element = _elementRef.nativeElement;
+@Directive({
+  selector: '[onsLazyRepeat]'
+})
+export class OnsLazyRepeat implements OnDestroy, OnInit { //, DoCheck {
+  private _element: any;
+  private _provider: any;
+  private _onsLazyRepeatOf: any;
+
+  constructor(
+    private _elementRef: ElementRef,
+    private _templateRef: TemplateRef<ItemContext>,
+    private _viewContainer: ViewContainerRef) {
   }
 
-  @Input() set delegate(delegate) {
-    this._element.delegate = delegate;
+  ngOnInit() {
+  }
+
+  @Input() set onsLazyRepeatOf(value: any) {
+    this._onsLazyRepeatOf = value;
+
+    this._provider = new (<any>ons)._internal.LazyRepeatProvider(
+      this._elementRef.nativeElement.parentElement,
+      new (<any>ons)._internal.LazyRepeatDelegate({
+        loadItemElement: (index, parent, done) => {
+          this._loadItemTemplate(index, parent, done);
+        },
+        countItems: () => {
+          return this._onsLazyRepeatOf.length;
+        }
+      })
+    );
+  }
+
+  _loadItemTemplate(index, parent, done) {
+    const context = new ItemContext(this._onsLazyRepeatOf[index], index, this._onsLazyRepeatOf.length);
+    const view = this._viewContainer.createEmbeddedView(this._templateRef, context);
+    // dirty fix on createEmbeddedView() does not insert DOM element randomly.
+    parent.appendChild(view.rootNodes[0]); 
+
+    done(view.rootNodes[0]);
   }
 
   refresh() {
-    this._element.refresh();
+    if (this._provider) {
+      this._viewContainer.clear();
+      this._provider.refresh();
+    }
   }
 
   ngOnDestroy() {
-    this._element.delegate = null;
+    if (this._provider) {
+      this._provider.destroy();
+    }
+    this._viewContainer.clear();
+    this._provider = null;
   }
 }

@@ -15,46 +15,40 @@ import {
     <ons-toolbar>
       <div class="left"></div>
       <div class="center">Lazy Repeat</div>
-      <div class="right"><ons-toolbar-button (click)="refresh()">Refresh</ons-toolbar-button></div>
+      <div class="right"><ons-toolbar-button (click)="add()">Add</ons-toolbar-button></div>
     </ons-toolbar>
 
     <div class="page__background"></div>
     <div class="page__content">
-
       <ons-list>
-        <ons-lazy-repeat [delegate]="self">
-          <ons-list-item>
-            #{item}
-          </ons-list-item>
-        </ons-lazy-repeat>
+        <ons-list-item *onsLazyRepeat="let item of items; let i = index">
+          <div class="center">
+            #{{i}} msg: {{item.msg}}
+          </div>
+        </ons-list-item>
       </ons-list>
     </div>
   </ons-page>
   `
 })
 export class AppComponent {
-  self = this;
+  public items: any[];
 
   @ViewChild(OnsLazyRepeat) lazyRepeat;
 
   constructor() {
+    this.items = [];
+    for (let i = 0; i < 1000; i++) {
+      this.items.push({
+        msg: 'Hello!'
+      });
+    }
   }
 
-  createItemContent(i, template) {
-    const dom = template.cloneNode(true);
-    dom.innerHTML = dom.innerHTML.replace('{item}', i);
-    return dom;
-  }
-
-  countItems() {
-    return 10000000;
-  }
-
-  destroyItem(index, item) {
-    console.log('Destroyed item with index: ' + index);
-  }
-
-  refresh() {
+  add() {
+    this.items.unshift({
+      msg: 'Bonjour!'
+    });
     this.lazyRepeat.refresh();
   }
 }

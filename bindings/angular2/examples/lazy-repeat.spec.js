@@ -5,7 +5,7 @@ describe('lazy-repeat.html', () => {
     browser.get('/bindings/angular2/examples/lazy-repeat.html');
   });
 
-  it('should have ons-lazy-repeat elements', () => {
-    expect($('ons-lazy-repeat').isPresent()).toBeTruthy();
+  it('should have ons-list elements', () => {
+    expect($('ons-list').isPresent()).toBeTruthy();
   });
 });
