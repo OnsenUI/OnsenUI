@@ -14,6 +14,7 @@ export * from './directives/ons-range';
 export * from './directives/ons-input';
 export * from './directives/ons-pull-hook';
 export * from './directives/ons-lazy-repeat';
+export * from './directives/ons-splitter';
 
 
 export * from './ons/notification';
@@ -35,6 +36,7 @@ import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
 import {OnsPullHook} from './directives/ons-pull-hook';
 import {OnsLazyRepeat} from './directives/ons-lazy-repeat';
+import {OnsSplitterSide, OnsSplitterContent} from './directives/ons-splitter';
 
 export const ONS_DIRECTIVES = [
   OnsNavigator,
@@ -46,5 +48,7 @@ export const ONS_DIRECTIVES = [
   OnsRange,
   OnsInput,
   OnsPullHook,
-  OnsLazyRepeat
+  OnsLazyRepeat,
+  OnsSplitterSide,
+  OnsSplitterContent
 ];
