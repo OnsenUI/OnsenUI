@@ -449,7 +449,7 @@ class SplitterSideElement extends BaseElement {
       defaultAnimation: this.getAttribute('animation')
     });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._watchedAttributes = ['animation', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
+    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
   }
 
   attachedCallback() {
@@ -545,8 +545,7 @@ class SplitterSideElement extends BaseElement {
     this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
   }
 
-  _updateWidth(width = this.getAttribute('width')) {
-    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
+  _updateWidth() {
     this.style.width = this._width;
   }
 
