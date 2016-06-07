@@ -4,6 +4,7 @@
 
 //引入标签开发需要的一些公共类
 import util from 'ons/util';
+import platform from 'ons/platform';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
@@ -98,7 +99,7 @@ class BhSelectRollElement extends BaseElement {
     }
 
     _getUlTransform(rotateX){
-        return `perspective(1000px) rotateY(0deg) rotateX(${rotateX}deg)`;
+        return `perspective(500rem) rotateY(0deg) rotateX(${rotateX}deg)`;
     }
 
     //组件加载完毕的回调,相当于该组件的入口方法
@@ -134,10 +135,16 @@ class BhSelectRollElement extends BaseElement {
             listHtml += `<li class="${itemClass}" ${selectAttrsStr} style="${itemStyle.replace('@rotateXNum', -(i * space.rotateXstep))}">${selectDatas[i].innerHTML}</li>`;
         }
 
+        const mobileOs = platform.getMobileOS();
+        let iosUltransformOrigin = '';
+        if(mobileOs === 'ios'){
+            iosUltransformOrigin = 'transform-origin: center center 7rem;';
+        }
+
         const contentHtml = `
             <div class="${space.rootClassName}-body">
                 <div class="${space.rootClassName}-box"></div>
-                <ul class="bh-select-roll-list" style="transform: ${this._getUlTransform(0)}">${listHtml}</ul>
+                <ul class="bh-select-roll-list" style="${iosUltransformOrigin} transform: ${this._getUlTransform(0)}">${listHtml}</ul>
             </div>
         `;
 
