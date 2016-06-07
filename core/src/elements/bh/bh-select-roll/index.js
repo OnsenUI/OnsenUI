@@ -41,7 +41,6 @@ class BhSelectRollElement extends BaseElement {
         const newTransform = ulTransform.replace(/rotateX\(.+deg\)/, `rotateX(${newRotateXNum}deg)`);
         const index = Math.round(newRotateXNum / space.rotateXstep);
 
-        // window.console.log(index)
         if(index >= 0 && index < space.dataCount){
             space.activeIndex = index;
         }else{
@@ -78,7 +77,6 @@ class BhSelectRollElement extends BaseElement {
     }
 
     _touchEndHandle(event){
-        // window.console.log(space.activeIndex)
         space.touchStartData = {};
         this._resetItemActive('show');
         const ulObj = this.querySelector('ul');
@@ -112,9 +110,6 @@ class BhSelectRollElement extends BaseElement {
     _compile() {
         const selectDatas = this.querySelectorAll('option');
         const selectDataLen = selectDatas.length;
-        if(selectDataLen === 0){
-            return;
-        }
 
         space.dataCount = selectDataLen;
         let listHtml = '';
@@ -128,7 +123,15 @@ class BhSelectRollElement extends BaseElement {
                     itemClass = 'bh-active bh-visible';
                 }
             }
-            listHtml += `<li class="${itemClass}" style="${itemStyle.replace('@rotateXNum', -(i * space.rotateXstep))}">${selectDatas[i].innerHTML}</li>`;
+            const selectItem = selectDatas[i];
+            const selectAttrs = selectItem.attributes;
+            const selectAttrsLen = selectAttrs.length;
+            let selectAttrsStr = '';
+            for(let k=0; k<selectAttrsLen; k++){
+                const selectAttrItem = selectAttrs[k];
+                selectAttrsStr += selectAttrItem.name + '="' + selectAttrItem.value + '" ';
+            }
+            listHtml += `<li class="${itemClass}" ${selectAttrsStr} style="${itemStyle.replace('@rotateXNum', -(i * space.rotateXstep))}">${selectDatas[i].innerHTML}</li>`;
         }
 
         const contentHtml = `

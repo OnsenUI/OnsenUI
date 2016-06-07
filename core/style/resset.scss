@@ -26,11 +26,11 @@ article, aside, footer, header, menu, nav, section{
   font-size: 100%;
   font-weight: normal;
   vertical-align: baseline;
-  background: transparent;
 }
 
 body{
   font-family: $font-family;
+  background-color: $body-bg-color;
 }
 
 article, aside, footer, header, nav, section {
