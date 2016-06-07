@@ -154,7 +154,7 @@ class SplitterElement extends BaseElement {
 
     contentReady(this, () => {
       this._compile();
-      this._layout();
+      setImmediate( () => this._layout());
     });
   }
 
