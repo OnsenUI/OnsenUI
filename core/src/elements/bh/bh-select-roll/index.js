@@ -18,26 +18,12 @@ const space = {
     activeIndex: 0
 };
 
-const data = [
-    '浮动',
-    '发的',
-    '让我',
-    '浩特',
-    '后台',
-    '计划',
-    '联合国',
-    '特务',
-    '换肤',
-    '问过',
-    '月儿',
-    '愉快',
-    '聊天',
-    '评价',
-    '确认'
-];
-
 //继承标签开发所需的类
 class BhSelectRollElement extends BaseElement {
+    value(){
+        return this.querySelector('.bh-active').innerText;
+    }
+    
     _touchStartHandle(event){
         space.touchStartData.timeStamp = event.timeStamp;
         space.touchStartData.pageY = event.touches[0].pageY;
@@ -96,7 +82,11 @@ class BhSelectRollElement extends BaseElement {
         space.touchStartData = {};
         this._resetItemActive('show');
         const ulObj = this.querySelector('ul');
-        ulObj.style.transform = `perspective(1000px) rotateY(0deg) rotateX(${space.activeIndex * space.rotateXstep}deg)`;
+        ulObj.style.transform = this._getUlTransform(space.activeIndex * space.rotateXstep);
+
+        util.triggerElementEvent(this, 'change', {
+            value: this.value()
+        });
     }
 
     _resetItemActive(type){
@@ -109,6 +99,10 @@ class BhSelectRollElement extends BaseElement {
         }
     }
 
+    _getUlTransform(rotateX){
+        return `perspective(1000px) rotateY(0deg) rotateX(${rotateX}deg)`;
+    }
+
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
         contentReady(this, () => this._compile());
@@ -116,11 +110,16 @@ class BhSelectRollElement extends BaseElement {
 
     //初始化方法
     _compile() {
-        const dataLen = data.length;
-        space.dataCount = dataLen;
+        const selectDatas = this.querySelectorAll('option');
+        const selectDataLen = selectDatas.length;
+        if(selectDataLen === 0){
+            return;
+        }
+
+        space.dataCount = selectDataLen;
         let listHtml = '';
         const itemStyle = `transform-origin: center center -7rem; transform: translateZ(7rem) rotateX(@rotateXNumdeg);`;
-        for(let i=0; i<dataLen; i++){
+        for(let i=0; i<selectDataLen; i++){
             let itemClass = '';
             if(i < 4){
                 if(i !== 0){
@@ -129,13 +128,13 @@ class BhSelectRollElement extends BaseElement {
                     itemClass = 'bh-active bh-visible';
                 }
             }
-            listHtml += `<li class="${itemClass}" style="${itemStyle.replace('@rotateXNum', -(i * space.rotateXstep))}">${data[i]}</li>`;
+            listHtml += `<li class="${itemClass}" style="${itemStyle.replace('@rotateXNum', -(i * space.rotateXstep))}">${selectDatas[i].innerHTML}</li>`;
         }
 
         const contentHtml = `
             <div class="${space.rootClassName}-body">
                 <div class="${space.rootClassName}-box"></div>
-                <ul class="bh-select-roll-list" style="transform:perspective(1000px) rotateY(0deg) rotateX(0deg);">${listHtml}</ul>
+                <ul class="bh-select-roll-list" style="transform: ${this._getUlTransform(0)}">${listHtml}</ul>
             </div>
         `;
 

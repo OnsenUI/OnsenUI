@@ -16,7 +16,29 @@
 
 <body>
   <ons-page>
-    <bh-select-roll></bh-select-roll>
+    <bh-select-roll>
+      <option id="abc">浮动</option>
+      <option>发的</option>
+      <option>让我</option>
+      <option>浩特</option>
+      <option>后台</option>
+      <option>计划</option>
+      <option>联合国</option>
+      <option>特务</option>
+      <option>换肤</option>
+      <option>问过</option>
+      <option>月儿</option>
+      <option>愉快</option>
+      <option>聊天</option>
+      <option>评价</option>
+      <option>确认</option>
+    </bh-select-roll>
   </ons-page>
+
+<script>
+  document.querySelector('bh-select-roll').addEventListener('change', function (data) {
+    window.console.log(data);
+  }, false);
+</script>
 </body>
 </html>
