@@ -1,0 +1,67 @@
+$bh-select-roll-item-height: pxToRem(60px);
+
+bh-select-roll{
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+}
+
+.bh-select-roll-body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, #fff 20%, #fff 80%, transparent 95%, transparent);
+}
+
+.bh-select-roll-box,
+.bh-select-roll-list{
+  height: $bh-select-roll-item-height;
+  line-height: $bh-select-roll-item-height;
+  margin-top: $bh-select-roll-item-height / 2;
+}
+
+.bh-select-roll-box{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 2;
+  border-top: 1px solid $gray-lv3;
+  border-bottom: 1px solid $gray-lv3;
+}
+
+.bh-select-roll-list{
+  z-index: 1;
+  transform-style: preserve-3d;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+
+  & li{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    backface-visibility: hidden;
+    overflow: hidden;
+    font-size: pxToRem(32px);
+    color: $gray-lv3;
+    padding: 0 pxToRem(8px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: default;
+    visibility: hidden;
+
+    &.bh-active{
+      color: $gray-lv1;
+      visibility: visible;
+    }
+    &.bh-visible{
+      visibility: visible;
+    }
+  }
+}

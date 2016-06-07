@@ -474,6 +474,25 @@ util.trim = (str) => {
   return str.replace(/(^\s*)|(\s*$)/g, '');
 };
 
+/**
+ * 获取该元素所在的位置index
+ * @param elementObj
+ * @returns {number}
+ */
+util.getElementIndex = (elementObj) => {
+  const parentObj = elementObj.parentNode;
+  const childrens = parentObj.childNodes;
+  const childrensLen = childrens.length;
+  let index = 0;
+  for(let i=0; i<childrensLen; i++){
+    if(elementObj === childrens[i]){
+      index = i;
+      break;
+    }
+  }
+  return index;
+};
+
 export default util;
 
 

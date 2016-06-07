@@ -1,0 +1,47 @@
+
+
+bh-linkage-select{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.bh-linkage-select-block{
+  display: inline-block;
+  max-height: pxToRem(300px);
+  overflow: auto;
+}
+
+.bh-linkage-select-list{
+  position: relative;
+  margin: 50% 0;
+}
+
+.bh-linkage-select-item {
+  text-align: center;
+  font-size: pxToRem(40px);
+}
+
+.bh-linkage-select-split-line{
+  position: absolute;
+  z-index: -1;
+  top: -174px;
+  left: 0;
+  height: pxToRem(56px);
+  width: 100%;
+  border-top: 1px solid $gray-lv3;
+  border-bottom: 1px solid $gray-lv3;
+}
+
+//@mixin bh-linkage-select-item-3d-animate($num, $rotateX, $scale){
+//  .bh-linkage-select-item-3dDown-#{$num}{
+//    transform: rotateX(#{$rotateX}deg) scale($scale);
+//  }
+//  .bh-linkage-select-item-3dUp-#{$num}{
+//    transform: rotateX(-#{$rotateX}deg) scale($scale);
+//  }
+//}
+//
+//@for $i from 1 to 5 {
+//  @include bh-linkage-select-item-3d-animate($i, 25 * $i, 1 - (0.1 * $i));
+//}
