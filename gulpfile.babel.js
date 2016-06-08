@@ -633,6 +633,7 @@ gulp.task('bh-components-style', function () {
         './core/style/variable/*.scss',
         './core/style/utils/*.scss',
         './core/style/mixins/*.scss',
+        './core/style/reset.scss',
         './core/style/*.scss',
         './css-components/components-src/bh/**/*.scss'
     ])
