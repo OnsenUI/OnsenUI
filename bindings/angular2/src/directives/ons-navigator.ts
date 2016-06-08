@@ -1,6 +1,5 @@
 import {
   Component,
-  DynamicComponentLoader,
   Injector,
   ReflectiveInjector,
   Directive,
@@ -8,12 +7,14 @@ import {
   Type,
   ComponentResolver,
   provide,
-  NgZone,
   Renderer,
   Input,
   ViewContainerRef,
-  ResolvedReflectiveProvider
+  ResolvedReflectiveProvider,
+  ViewChildren,
+  QueryList
 } from '@angular/core';
+import {OnsPage} from './ons-page';
 
 interface NavigatorElement {
   pushPage(page: string): Promise<any>;
@@ -27,7 +28,7 @@ export class PageParams {
     return this._data[key];
   }
 
-  get data() {
+  get data(): Object {
     return this._data;
   }
 }
@@ -41,33 +42,30 @@ export class NavigatorPage {
  * @element ons-navigator
  */
 @Directive({
-  selector: 'ons-navigator > ons-page'
+  selector: 'ons-navigator'
 })
 export class OnsNavigator {
   private _navigator: NavigatorElement;
   private _pages: NavigatorPage[];
-  private _providers: ResolvedReflectiveProvider[];
+
+  @ViewChildren(OnsPage) pages:QueryList<OnsPage>;
 
   constructor(
     private _elementRef: ElementRef,
-    private _componentResolver: ComponentResolver,
-    private _loader: DynamicComponentLoader,
+    private _resolver: ComponentResolver,
     private _viewContainer: ViewContainerRef,
     private _injector: Injector) {
     this._navigator = _elementRef.nativeElement;
     this._pages = [];
-    this._providers = ReflectiveInjector.resolve([
-      provide(OnsNavigator, {useValue: this})
-    ]);
   }
 
   /**
    * @method pushComponent
-   * @signature pushComponent(type: Type, params: Map = {})
+   * @signature pushComponent(type: Type, params: Object = {})
    * @param {Type} type
    *   [en][/en]
    *   [ja]navigatorに挿入するコンポーネントのクラスを指定します。[/ja]
-   * @param {Map} [params]
+   * @param {Object} [params]
    *   [en][/en]
    *   [ja]
    *     新しく生成するページへのパラメータを指定します。
@@ -93,17 +91,22 @@ export class OnsNavigator {
 
   private _loadPageComponent(type: Type, params: Object, done: Function): void {
     const pageParams = new PageParams(params);
-    const providers = this._providers.concat(ReflectiveInjector.resolve([
-      provide(PageParams, {useValue: pageParams})
-    ]));
+    const injector = ReflectiveInjector.resolveAndCreate([
+      provide(PageParams, {useValue: pageParams}),
+      provide(OnsNavigator, {useValue: this})
+    ], this._injector);
 
-    this._loader.loadNextToLocation(type, this._viewContainer, providers).then(component => {
-      const elementRef = component.location;
-      const destroy = () => component.destroy();
+    this._resolver.resolveComponent(type).then(factory => {
+      const componentRef = this._viewContainer.createComponent(factory, 0, injector);
+      const elementRef = componentRef.location;
+      const destroy = () => componentRef.destroy();
+
+      // dirty fix to insert in correct position
+      this._elementRef.nativeElement.appendChild(elementRef.nativeElement);
+      //this._elementRef.nativeElement.style.display = 'none';
 
       done(new NavigatorPage(elementRef, destroy, pageParams));
     });
-
   }
 
   /**
@@ -122,16 +125,6 @@ export class OnsNavigator {
 
       resolve();
     });
-  }
-
-  insertComponent(type: Type, index: number): Promise<any> {
-    // TODO implement
-    return Promise.resolve();
-  }
-
-  destroyComponent(index: number): Promise<any> {
-    // TODO implement
-    return Promise.resolve();
   }
 }
 

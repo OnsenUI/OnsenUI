@@ -2,8 +2,9 @@ import {
   bootstrap,
   Component,
   ViewChild,
-  OnsNavigator,
-  PageParams
+  ONS_DIRECTIVES,
+  PageParams,
+  OnsNavigator
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -38,7 +39,7 @@ export class PageComponent {
 
 @Component({
   selector: 'app',
-  directives: [OnsNavigator],
+  directives: [ONS_DIRECTIVES],
   template: `
   <ons-navigator>
     <ons-page>
