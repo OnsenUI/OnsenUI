@@ -2,12 +2,31 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.10
+----
+ * ons-navigator: Fix [#1440](https://github.com/OnsenUI/OnsenUI/issues/1440).
+ * ons-toolbar, ons-speed-dial: Fix [#1441](https://github.com/OnsenUI/OnsenUI/issues/1441).
+ * ons-splitter-side: Fix `_width` property.
+
+v2.0.0-rc.9
+----
+ * ons-popover: Fix iOS glitch.
+ * ons-fab: Fix issue where element was not shown correctly in React.
+
+v2.0.0-rc.8
+----
+ * core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
+ * ons-pull-hook: Add React compatibility.
+
 v2.0.0-rc.7
 ----
+ * ons-carousel: Support ng-repeat in Angular1 bindings.
+ * ons-carousel: Fix [#1168](https://github.com/OnsenUI/OnsenUI/issues/1168).
  * ons-switch: Trigger `change` event only once.
  * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
  * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
  * ons-navigator: Add `onDeviceBackButton` property.
+ * ons-fab: Show button by default.
 
 v2.0.0-rc.6
 ----

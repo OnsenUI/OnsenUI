@@ -97,7 +97,7 @@ class FabElement extends BaseElement {
 
     this._updatePosition();
 
-    this.hide();
+    this.show();
   }
 
   attributeChangedCallback(name, last, current) {

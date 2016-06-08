@@ -546,9 +546,17 @@ class SplitterSideElement extends BaseElement {
     this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
   }
 
-  _updateWidth(width = this.getAttribute('width')) {
-    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
+  _updateWidth() {
     this.style.width = this._width;
+  }
+
+  get _width() {
+    const width = this.getAttribute('width');
+    return /^\d+(px|%)$/.test(width) ? width : '80%';
+  }
+
+  set _width(value) {
+    this.setAttribute('width', value);
   }
 
   _updateSide(side = this.getAttribute('side')) {

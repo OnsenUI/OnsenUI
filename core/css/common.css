@@ -44,7 +44,7 @@ ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
 
-ons-fab {
+ons-fab, ons-speed-dial {
   z-index: 3;
 }
 
