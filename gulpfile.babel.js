@@ -655,4 +655,9 @@ gulp.task('bh-scenes-style', function () {
         .pipe(concat(cssConfig.bhScenesFileName + '.scss'))
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(cssConfig.writePath))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(cssConfig.writePath))
 });
