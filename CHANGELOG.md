@@ -7,6 +7,7 @@ v2.0.0-rc.10
  * ons-navigator: Fix [#1440](https://github.com/OnsenUI/OnsenUI/issues/1440).
  * ons-toolbar, ons-speed-dial: Fix [#1441](https://github.com/OnsenUI/OnsenUI/issues/1441).
  * ons-splitter-side: Fix `_width` property.
+ * ons-pull-hook: Fix [1444](https://github.com/OnsenUI/OnsenUI/issues/1444).
 
 v2.0.0-rc.9
 ----
