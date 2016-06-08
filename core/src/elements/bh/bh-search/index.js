@@ -18,8 +18,12 @@ const space = {
 //继承标签开发所需的类
 class BhSearchElement extends BaseElement {
 
-    value() {
-        return this.querySelector('.bh-search-input').value;
+    value(text) {
+        if(typeof text === 'undefined'){
+            return this.querySelector('.bh-search-input').value;
+        }else{
+            this.querySelector('.bh-search-input').value = text + '';
+        }
     }
 
     _clearValue() {

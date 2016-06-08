@@ -22,7 +22,8 @@
 
 <script>
   document.querySelector('bh-search').addEventListener('cancel', function () {
-    alert('执行取消事件');
+    this.value('金智教育');
+    alert('执行取消事件,并将值重设');
   }, false);
 </script>
 </body>
