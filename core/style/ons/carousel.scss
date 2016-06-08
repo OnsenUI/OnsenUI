@@ -44,4 +44,10 @@ ons-carousel[disabled] {
 
 ons-carousel[image] {
   height: pxToRem(320px);
+  & ons-carousel-item{
+    & img{
+      width: inherit;
+      height: inherit;
+    }
+  }
 }

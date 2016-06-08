@@ -36,6 +36,10 @@ class BhSearchElement extends BaseElement {
             input.value = '';
             input.focus();
         }
+
+        if(util.hasClass('bh-search-cancel')){
+            util.triggerElementEvent(this, 'cancel');
+        }
     }
 
     _showClose() {

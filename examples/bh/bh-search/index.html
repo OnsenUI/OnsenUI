@@ -19,5 +19,11 @@
     <bh-search>
     </bh-search>
   </ons-page>
+
+<script>
+  document.querySelector('bh-search').addEventListener('cancel', function () {
+    alert('执行取消事件');
+  }, false);
+</script>
 </body>
 </html>
