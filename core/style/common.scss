@@ -157,3 +157,25 @@ h6{
 @include make-padding-margin(padding, p, 16, pxToRem(16px));
 @include make-padding-margin(padding, p, 24, pxToRem(24px));
 @include make-padding-margin(padding, p, 32, pxToRem(32px));
+
+
+
+//其他公共样式
+.bh-text-left{
+  text-align: left;
+}
+.bh-text-center{
+  text-align: center;
+}
+.bh-text-right{
+  text-align: right;
+}
+
+.bh-overflowHide-relative{
+  position: relative;
+  overflow: hidden;
+}
+.bh-overflowHide-absolute{
+  position: absolute;
+  overflow: hidden;
+}
