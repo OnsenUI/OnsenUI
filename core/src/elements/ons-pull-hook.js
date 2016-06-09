@@ -372,7 +372,7 @@ class PullHookElement extends BaseElement {
     }
 
     const done = () => {
-      if (scroll === 0) {
+      if (scroll === 0 && !this._isContentFixed()) {
         this._getScrollableElement().removeAttribute('style');
       }
 
