@@ -224,6 +224,10 @@ class NavigatorElement extends BaseElement {
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
 
+  get animatorFactory() {
+    return this._animatorFactory;
+  }
+
   createdCallback() {
     this._isRunning = false;
 
