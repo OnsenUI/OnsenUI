@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.11
+----
+ * ons-input: Fix `value` property bug for radio and checkbox.
+
 v2.0.0-rc.10
 ----
  * ons-navigator: Fix [#1440](https://github.com/OnsenUI/OnsenUI/issues/1440).
