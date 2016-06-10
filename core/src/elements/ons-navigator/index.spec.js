@@ -37,7 +37,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'animatorFactory\' property', () => {
-    expect(nav.animatorFactory).to.be.ok();
+    expect(nav.animatorFactory).to.be.ok;
   });
 
   describe('#pages', () => {
