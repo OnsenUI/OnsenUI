@@ -29,7 +29,7 @@ export class PageComponent {
   }
 
   push() {
-    this._navigator.pushComponent(PageComponent, {random: Math.random()});
+    this._navigator.pushComponent(PageComponent, {animation: 'slide'}, {random: Math.random()});
   }
 
   pop() {
@@ -62,7 +62,7 @@ export class AppComponent {
   constructor() { }
 
   push() {
-    this._navigator.pushComponent(PageComponent, {key: 'value'});
+    this._navigator.pushComponent(PageComponent, {animation: 'none'}, {key: 'value'});
   }
 }
 

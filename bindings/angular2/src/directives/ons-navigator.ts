@@ -124,6 +124,10 @@ export class OnsNavigator implements OnInit, OnDestroy {
    * @param {Type} type
    *   [en][/en]
    *   [ja]navigatorに挿入するコンポーネントのクラスを指定します。[/ja]
+   * @param {Object} [options]
+   *   [en][/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animation]
    * @param {Object} [params]
    *   [en][/en]
    *   [ja]
@@ -138,9 +142,9 @@ export class OnsNavigator implements OnInit, OnDestroy {
    *   [en][/en]
    *   [ja][/ja]
    */
-  pushComponent(type: Type, params: Object = {}): Promise<any> {
+  pushComponent(type: Type, options: Object = {}, params: Object = {}): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._loadPageComponent(type, params, navigatorPage => {
+      this._loadPageComponent(type, options, params, navigatorPage => {
         this._pages.push(navigatorPage);
 
         const enterPageElement = this._navigator.children[this._navigator.children.length - 1];
@@ -150,7 +154,7 @@ export class OnsNavigator implements OnInit, OnDestroy {
     });
   }
 
-  private _loadPageComponent(type: Type, params: Object, done: Function): void {
+  private _loadPageComponent(type: Type, options: Object, params: Object, done: Function): void {
     const pageParams = new PageParams(params);
     const injector = ReflectiveInjector.resolveAndCreate([
       provide(PageParams, {useValue: pageParams}),
@@ -167,20 +171,25 @@ export class OnsNavigator implements OnInit, OnDestroy {
       // dirty fix to insert in correct position
       this._elementRef.nativeElement.appendChild(pageElement);
 
-      done(new NavigatorPage(elementRef, destroy, this._createAnimator(), pageParams));
+      done(new NavigatorPage(elementRef, destroy, this._createAnimator(options), pageParams));
     });
   }
 
   /**
    * @method popComponent
    * @signature popComponent()
+   * @param {Object} [options]
+   *   [en][/en]
+   *   [ja][/ja]
+   * @param {Object} [options.animation]
    * @return {Promise}
    * @description
    *   [en][/en]
    *   [ja][/ja]
    */
-  popComponent(): Promise<any> {
+  popComponent(options: Object = {}): Promise<any> {
     if (this._pages.length <= 1) {
+      // do nothing
       return;
     }
 
@@ -189,12 +198,20 @@ export class OnsNavigator implements OnInit, OnDestroy {
 
       const enterPageElement = this._navigator.children[this._navigator.children.length - 2];
       const leavePageElement = this._navigator.children[this._navigator.children.length - 1];
-      page.animator.pop(enterPageElement, leavePageElement, () => {
+      getAnimator(page).pop(enterPageElement, leavePageElement, () => {
         page.destroy();
         leavePageElement.remove();
         resolve();
       });
     });
+
+    function getAnimator(page: NavigatorPage) {
+      if (typeof (<any>options).animation === 'string') {
+        return this._navigator.animatorFactory.newAnimator(options);
+      } else {
+        return page.animator;
+      }
+    }
   }
 }
 
