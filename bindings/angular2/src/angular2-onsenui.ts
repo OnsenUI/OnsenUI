@@ -1,4 +1,3 @@
-import './setup';
 import * as browser from '@angular/platform-browser-dynamic'
 import {Type} from '@angular/core';
 
