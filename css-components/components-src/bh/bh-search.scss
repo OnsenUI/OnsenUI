@@ -1,3 +1,4 @@
+
 .bh-search-wrap{
 	padding:0 pxToRem(26px) 0 pxToRem(16px);
 	& .bh-search-cancel{
@@ -13,14 +14,14 @@
 .bh-search-box{
 	display:inline-block;
 	background:$gray-lv7;
-	border-radius:8px;
-	width:calc(100% - 75px);
+	border-radius: pxToRem(8px);
+	width:calc(100% - #{pxToRem(76px)});
 	height:pxToRem(60px);
 	padding:0 pxToRem(15px);
 	& .bh-search-input{
 		border:none;
 		background:none;
-		width:calc(100% - 65px);
+		width:calc(100% - #{pxToRem(64px)});
 		font-size:pxToRem(24px);
 		padding:0 pxToRem(10px);
 		line-height:pxToRem(28px);

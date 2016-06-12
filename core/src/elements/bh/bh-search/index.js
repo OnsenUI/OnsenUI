@@ -23,6 +23,7 @@ class BhSearchElement extends BaseElement {
             return this.querySelector('.bh-search-input').value;
         }else{
             this.querySelector('.bh-search-input').value = text + '';
+            this._showClose();
         }
     }
 
@@ -41,7 +42,7 @@ class BhSearchElement extends BaseElement {
             input.focus();
         }
 
-        if(util.hasClass('bh-search-cancel')){
+        if(util.hasClass(this, 'bh-search-cancel')){
             util.triggerElementEvent(this, 'cancel');
         }
     }
