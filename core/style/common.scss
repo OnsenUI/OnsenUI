@@ -62,6 +62,10 @@ h6{
 @include set-color($gray-lv6, gray, 6);
 @include set-color($gray-lv7, gray, 7);
 
+.bh-base-bg-color{
+  background-color: $body-bg-color;
+}
+
 
 
 //字符截断
