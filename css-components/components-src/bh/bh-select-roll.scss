@@ -18,7 +18,7 @@ bh-select-roll{
 .bh-select-roll-list{
   height: $bh-select-roll-item-height;
   line-height: $bh-select-roll-item-height;
-  margin-top: $bh-select-roll-item-height / 2;
+  margin-top: -$bh-select-roll-item-height / 2;
 }
 
 .bh-select-roll-box{
