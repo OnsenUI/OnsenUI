@@ -170,6 +170,19 @@ ons-list-item
   //retina-list-item-border()
   min-height var-list-item-min-height
 
+//放在ons-list-item标签上,使下面的所有item都垂直居中
+.list__all__item__middle
+  & .list__item__left,
+  & .list__item__center,
+  & .list__item__right
+    align-self center
+    align-items center
+
+//单个节点的垂直居中
+.list__item__middle
+  align-self center
+  align-items center
+
 .list__header
   list__header()
   padding var-list-header-padding
