@@ -19,11 +19,20 @@ class BhSearchBarElement extends BaseElement {
 
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
-            contentReady(this, () => this._compile());
+        contentReady(this, () => this._compile());
+    }
+
+    //监听属性变化处理
+    attributeChangedCallback(name, last, current) {
+        //text 变化时的处理
+        if(name === 'text'){
+            this.querySelector('span').innerHTML = current;
         }
-        //初始化方法
+    }
+
+    //初始化方法
     _compile() {
-        const value = this.getAttribute('text');
+        const value = this.getAttribute('text') || '';
         const contentHtml = `
             <div class="${space.rootClassName}">
                 <i class="iconfont icon-search"></i>
