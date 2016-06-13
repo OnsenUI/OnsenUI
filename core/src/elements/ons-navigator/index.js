@@ -426,7 +426,11 @@ class NavigatorElement extends BaseElement {
   pushPage(page, options = {}) {
     options = this._prepareOptions(options, page);
     const run = templateHTML => new Promise(resolve => {
-      this.appendChild(this._createPageElement(templateHTML));
+      let element = util.extend(this._createPageElement(templateHTML), {
+        name: options.page,
+        data: options.data
+      });
+      this.appendChild(element);
       resolve();
     });
 
@@ -466,9 +470,9 @@ class NavigatorElement extends BaseElement {
 
       enterPage.updateBackButton(pageLength - 1);
 
-      enterPage.data = options.data;
-      enterPage.name = options.page;
       enterPage.pushedOptions = options;
+      enterPage.data = enterPage.data || options.data;
+      enterPage.name = enterPage.name || options.page;
 
       return new Promise(resolve => {
         var done = () => {
