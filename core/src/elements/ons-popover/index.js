@@ -550,9 +550,6 @@ class PopoverElement extends BaseElement {
 
       this._resetBackButtonHandler();
 
-      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
-      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
-
       window.addEventListener('resize', this._boundOnChange, false);
     });
   }
@@ -563,9 +560,6 @@ class PopoverElement extends BaseElement {
 
       this._backButtonHandler.destroy();
       this._backButtonHandler = null;
-
-      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
       window.removeEventListener('resize', this._boundOnChange, false);
     });
