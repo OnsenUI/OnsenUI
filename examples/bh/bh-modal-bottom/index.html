@@ -18,19 +18,12 @@
   <ons-page>
     <ons-button onclick="openModal();">打开底部弹框</ons-button>
     <ons-button onclick="closeModal();">关闭底部弹框</ons-button>
-    <!--<bh-modal-bottom id="modal" bottom="20px" cover close-icon>-->
-      <!--<div>这是一个底部弹框</div>-->
-    <!--</bh-modal-bottom>-->
   </ons-page>
 
 <script>
   function openModal() {
-//    document.querySelector('#modal').show({
-//      callback: function () {
-//      }
-//    });
     BH.bhModalBottom.show({
-      content: '<div>abc</div>',
+      content: '<div>打开底部弹框</div>',
       cover: true,
       closeIcon: true,
       close: function () {

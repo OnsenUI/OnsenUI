@@ -44,9 +44,9 @@ class BhModalBottom {
             rootObj.remove();
         }, space.animateTime);
 
-        if(typeof options.callback !='undefined' && options.callback instanceof Function){
+        if(typeof options.close !='undefined' && options.close instanceof Function){
             //执行的回调
-            options.callback();
+            options.close();
         }
     }
 
@@ -92,7 +92,7 @@ class BhModalBottom {
             //监听关闭按钮事件
             closeIcon.addEventListener('click', function () {
                 //执行关闭回调
-                self.hide({'callback': options.close});
+                self.hide({'close': options.close});
             }, false);
         }
 
