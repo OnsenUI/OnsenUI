@@ -109,7 +109,7 @@ class BhSelectRollElement extends BaseElement {
 
     //初始化方法
     _compile() {
-        if(this.querySelector('.'+space.rootClassName+'body')){
+        if(this.querySelector('.'+space.rootClassName+'-body')){
             return;
         }
         const modalBottomContentObj = util.findParent(this, '.bh-modal-bottom-content');
