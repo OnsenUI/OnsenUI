@@ -76,3 +76,33 @@ $bh-animate-time: 0.45s;
 .bh-animate-out-bottom {
   animation-name: bh-animate-out-bottom;
 }
+
+//渐隐
+@keyframes bh-animate-fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.bh-animate-fadeOut {
+  animation-name: bh-animate-fadeOut;
+}
+
+//渐现
+@keyframes bh-animate-fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.bh-animate-fadeIn {
+  animation-name: bh-animate-fadeIn;
+}

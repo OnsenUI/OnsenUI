@@ -109,9 +109,9 @@ class BhSelectRollElement extends BaseElement {
 
     //初始化方法
     _compile() {
-        const modalBottomObj = util.findParent(this, 'bh-modal-bottom');
-        if(modalBottomObj){
-            modalBottomObj.style.height = '17rem';
+        const modalBottomContentObj = util.findParent(this, '.bh-modal-bottom-content');
+        if(modalBottomContentObj){
+            modalBottomContentObj.style.height = '17rem';
         }
         const selectDatas = this.querySelectorAll('option');
         const selectDataLen = selectDatas.length;

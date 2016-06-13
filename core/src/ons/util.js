@@ -493,6 +493,18 @@ util.getElementIndex = (elementObj) => {
   return index;
 };
 
+/**
+ * px或纯数字转换成rem单位
+ * @param num
+ * @returns {*}
+ */
+util.pxToRem = (num) => {
+  if(!/rem$/.test(num)){
+    num = (num/20) + 'rem';
+  }
+  return num;
+};
+
 export default util;
 
 
