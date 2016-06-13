@@ -76,6 +76,9 @@ class BhModalBottomElement extends BaseElement {
 
     //初始化方法
     _compile() {
+        if(this.querySelector('.'+space.rootClassName+'-content')){
+            return;
+        }
         const content = util.create('.'+space.rootClassName+'-content');
 
         let isHaveClose = false;
