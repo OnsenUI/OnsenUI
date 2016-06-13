@@ -12,6 +12,7 @@ bh-modal-bottom,
     font-size: pxToRem(20px);
     top: pxToRem(8px);
     right: pxToRem(8px);
+    z-index: $z-index-lv12;
   }
 }
 
