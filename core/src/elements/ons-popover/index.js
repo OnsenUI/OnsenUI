@@ -544,7 +544,7 @@ class PopoverElement extends BaseElement {
 
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
-      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
+      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-top-left-radius'));
 
       this._mask.addEventListener('click', this._boundCancel, false);
 
