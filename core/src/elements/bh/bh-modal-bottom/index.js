@@ -1,9 +1,13 @@
 /*
- 底部弹框组件
+ 步进组件
  */
 
 //引入标签开发需要的一些公共类
 import util from 'ons/util';
+import autoStyle from 'ons/autostyle';
+import ModifierUtil from 'ons/internal/modifier-util';
+import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const space = {
     //该组件的根样式名
@@ -11,116 +15,98 @@ const space = {
     animateTime: 450
 };
 
-//继承组件开发所需的类
-class BhModalBottom {
-    //初始化并显示弹框
+//继承标签开发所需的类
+class BhModalBottomElement extends BaseElement {
+
     show(options = {}){
-        const defaultOptions = {
-            cover: true, //是否显示遮罩层,默认true显示, false不显示
-            closeIcon: true //是否显示关闭按钮, 默认true显示, false不显示
-        };
-        //合并参数
-        options = util.extend({}, defaultOptions, options);
-        //初始化处理
-        this._compile(options);
+        options = util.extend(
+            options || {}
+        );
+
+        this.classList.remove('bh-animate-out-bottom');
+        this.classList.add('bh-animate-into-bottom');
+        this.style.display = 'block';
+
+        if(typeof options.callback !='undefined' && options.callback instanceof Function){
+            //执行的回调
+            options.callback();
+        }
     }
     hide(options = {}){
         options = util.extend(
             options || {}
         );
 
-        const rootObj = document.querySelector('.'+space.rootClassName);
-        const contentObj = util.findChild(rootObj, '.'+space.rootClassName+'-content');
-        const coverObj = util.findChild(rootObj, '.'+space.rootClassName+'-cover');
+        const root = util.findParent(this, 'bh-modal-bottom');
+        const content = util.findChild(root, '.'+space.rootClassName+'-content');
+        const cover = util.findChild(root, '.'+space.rootClassName+'-cover');
 
-        if(coverObj){
-            coverObj.classList.remove('bh-animate-fadeIn');
-            coverObj.classList.add('bh-animate-out-fadeOut');
+        if(cover){
+            cover.classList.remove('bh-animate-fadeIn');
+            cover.classList.add('bh-animate-out-fadeOut');
         }
-        contentObj.classList.remove('bh-animate-into-bottom');
-        contentObj.classList.add('bh-animate-out-bottom');
+
+        content.classList.remove('bh-animate-into-bottom');
+        content.classList.add('bh-animate-out-bottom');
 
         setTimeout(function () {
-            rootObj.remove();
+            root.style.display = 'none';
         }, space.animateTime);
-
-        if(typeof options.close !='undefined' && options.close instanceof Function){
+        if(typeof options.callback !='undefined' && options.callback instanceof Function){
             //执行的回调
-            options.close();
+            options.callback();
         }
     }
 
+    //组件加载完毕的回调,相当于该组件的入口方法
+    createdCallback() {
+        contentReady(this, () => this._compile());
+    }
+
     //初始化方法
-    _compile(options) {
-        const self = this;
-        //创建根节点
-        const rootObj = util.create('.'+space.rootClassName);
-        //对根节点设置上下左右值,默认使用rem单位,否则会将px或数字转换成rem
-        const offset = options.offset;
-        if(offset){
-            if(offset.top){
-                rootObj.style.top = util.pxToRem(offset.top);
-            }
-            if(offset.bottom){
-                rootObj.style.bottom = util.pxToRem(offset.bottom);
-            }
-            if(offset.left){
-                rootObj.style.left = util.pxToRem(offset.left);
-            }
-            if(offset.right){
-                rootObj.style.right = util.pxToRem(offset.right);
-            }
-        }
+    _compile() {
+        const content = util.create('.'+space.rootClassName+'-content');
 
-        //创建内容块
-        const contentObj = util.create('.'+space.rootClassName+'-content');
-        //添加动画类
-        contentObj.classList.add('bh-animated');
-        contentObj.classList.add('bh-animate-into-bottom');
-
-        //插入内容
-        const content = options.content;
-        contentObj.innerHTML = content;
-
-        //判断显示关闭按钮
-        if(options.closeIcon){
-            const closeIcon = util.create('i');
+        let isHaveClose = false;
+        let closeIcon = null;
+        if(this.hasAttribute('close-icon')){
+            closeIcon = util.create('i');
             closeIcon.classList.add('iconfont');
             closeIcon.classList.add('icon-close');
-            contentObj.appendChild(closeIcon);
-
-            //监听关闭按钮事件
-            closeIcon.addEventListener('click', function () {
-                //执行关闭回调
-                self.hide({'close': options.close});
-            }, false);
+            content.appendChild(closeIcon);
+            isHaveClose = true;
         }
 
-        //判断显示遮罩层
-        if(options.cover){
+        while (this.firstChild) {
+            content.appendChild(this.firstChild);
+        }
+
+        if(this.hasAttribute('cover')){
             const cover = util.create('.'+space.rootClassName+'-cover');
             //给遮罩层添加动画
             cover.classList.add('bh-animated');
             cover.classList.add('bh-animate-fadeIn');
-            rootObj.appendChild(cover);
+            this.appendChild(cover);
         }
 
-        //将创建的节点加入页面
-        rootObj.appendChild(contentObj);
-        document.querySelector('body').appendChild(rootObj);
+        this.appendChild(content);
 
-        //初始化并显示完成后,执行回调
-        if(typeof options.ready !='undefined' && options.ready instanceof Function){
-            //执行的回调
-            setTimeout(function () {
-                options.ready();
-            }, space.animateTime);
+        this.style.display = 'none';
+        content.classList.add('bh-animated');
+        content.classList.add('bh-animate-into-bottom');
+
+        let bottom = this.getAttribute('bottom');
+        if(bottom){
+            this.style.bottom = util.pxToRem(bottom);
+        }
+
+        if(isHaveClose){
+            closeIcon.addEventListener('click', this.hide, false);
         }
     }
 }
 
-//注册组件
-(function (BH, undefined) {
-    BH.bhModalBottom = BhModalBottom.prototype;
-})(window.BH = window.BH || {});
-
+//注册该标签(用于浏览器不支持自定义标签的处理)
+window.BhModalBottomElement = document.registerElement('bh-modal-bottom', {
+    prototype: BhModalBottomElement.prototype
+});

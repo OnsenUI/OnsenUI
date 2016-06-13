@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>bh input</title>
+
+    <script src="../../../core/utils/computeRootSize.js"></script>
+
+    <link rel="stylesheet" href="../../../build/css/bh.css">
+    <link rel="stylesheet" href="http://res.wisedu.com/fe_components/mobile/iconfont/iconfont.css">
+
+    <script src="../../../build/js/bh.js"></script>
+</head>
+
+<body>
+<ons-page>
+    <ons-button onclick="openModal();">打开底部弹框</ons-button>
+    <ons-button onclick="closeModal();">关闭底部弹框</ons-button>
+</ons-page>
+
+<script>
+    function openModal() {
+        BH.bhModalBottom.show({
+            content: '<div>打开底部弹框</div>',
+            cover: true,
+            closeIcon: true,
+            close: function () {
+//        alert('close')
+            },
+            ready: function () {
+//        alert('open')
+            }
+        });
+    }
+
+    function closeModal() {
+        BH.bhModalBottom.hide();
+    }
+</script>
+</body>
+</html>
