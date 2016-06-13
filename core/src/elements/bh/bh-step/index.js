@@ -46,7 +46,7 @@ class BhSteppingElement extends BaseElement {
         space.rootObj.setStep(num);
         util.triggerElementEvent(util.findParent(this, space.rootClassName), 'change', {
             value: num,
-            type: 'add'
+            flag: 'add'
         });
     }
 
@@ -61,7 +61,7 @@ class BhSteppingElement extends BaseElement {
         space.rootObj.setStep(num);
         util.triggerElementEvent(util.findParent(this, space.rootClassName), 'change', {
             value: num,
-            type: 'down'
+            flag: 'down'
         });
     }
 
