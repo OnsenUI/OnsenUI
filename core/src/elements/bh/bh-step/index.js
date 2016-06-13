@@ -41,8 +41,13 @@ class BhSteppingElement extends BaseElement {
 
     //步进加1
     _add(){
-        const num = space.rootObj.currentStep;
-        space.rootObj.setStep(num + 1);
+        let num = space.rootObj.currentStep;
+        num++;
+        space.rootObj.setStep(num);
+        util.triggerElementEvent(this, 'change', {
+            value: num,
+            type: 'add'
+        });
     }
 
     //步进减一
@@ -54,6 +59,10 @@ class BhSteppingElement extends BaseElement {
             num = 1;
         }
         space.rootObj.setStep(num);
+        util.triggerElementEvent(this, 'change', {
+            value: num,
+            type: 'down'
+        });
     }
 
     _iconActiveHandle(event){
@@ -63,6 +72,14 @@ class BhSteppingElement extends BaseElement {
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
         contentReady(this, () => this._compile());
+    }
+
+    //监听属性变化处理
+    attributeChangedCallback(name, last, current) {
+        //text 变化时的处理
+        if(name === 'value'){
+            this.querySelector('input').value = current;
+        }
     }
 
     //初始化方法
