@@ -23,8 +23,16 @@ class BhModalBottomElement extends BaseElement {
             options || {}
         );
 
-        this.classList.remove('bh-animate-out-bottom');
-        this.classList.add('bh-animate-into-bottom');
+        const content = this.querySelector('.'+space.rootClassName+'-content');
+        const cover = util.findChild(this, '.'+space.rootClassName+'-cover');
+
+        if(cover){
+            cover.classList.remove('bh-animate-fadeIn');
+            cover.classList.add('bh-animate-out-fadeOut');
+        }
+
+        content.classList.remove('bh-animate-out-bottom');
+        content.classList.add('bh-animate-into-bottom');
         this.style.display = 'block';
 
         if(typeof options.callback !='undefined' && options.callback instanceof Function){
@@ -58,6 +66,9 @@ class BhModalBottomElement extends BaseElement {
         }
     }
 
+    clickAllHandle(){
+    }
+
     //组件加载完毕的回调,相当于该组件的入口方法
     createdCallback() {
         contentReady(this, () => this._compile());
@@ -85,7 +96,6 @@ class BhModalBottomElement extends BaseElement {
             const cover = util.create('.'+space.rootClassName+'-cover');
             //给遮罩层添加动画
             cover.classList.add('bh-animated');
-            cover.classList.add('bh-animate-fadeIn');
             this.appendChild(cover);
         }
 
@@ -93,7 +103,6 @@ class BhModalBottomElement extends BaseElement {
 
         this.style.display = 'none';
         content.classList.add('bh-animated');
-        content.classList.add('bh-animate-into-bottom');
 
         let bottom = this.getAttribute('bottom');
         if(bottom){
@@ -103,6 +112,8 @@ class BhModalBottomElement extends BaseElement {
         if(isHaveClose){
             closeIcon.addEventListener('click', this.hide, false);
         }
+
+        this.addEventListener('click', this.clickAllHandle, false);
     }
 }
 
