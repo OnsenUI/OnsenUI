@@ -76,7 +76,13 @@ class BhModalBottomElement extends BaseElement {
 
     //初始化方法
     _compile() {
-        if(this.querySelector('.'+space.rootClassName+'-content')){
+        const selectContent = this.querySelector('.'+space.rootClassName+'-content');
+        if(selectContent){
+            const selectCloseIcon = util.findChild(selectContent, '.icon-close');
+            if(selectCloseIcon){
+                selectCloseIcon.removeEventListener('click', this.hide, false);
+                selectCloseIcon.addEventListener('click', this.hide, false);
+            }
             return;
         }
         const content = util.create('.'+space.rootClassName+'-content');

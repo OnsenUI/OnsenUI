@@ -110,6 +110,14 @@ class BhSelectRollElement extends BaseElement {
     //初始化方法
     _compile() {
         if(this.querySelector('.'+space.rootClassName+'-body')){
+            this.removeEventListener('touchstart', this._touchStartHandle, false);
+            this.addEventListener('touchstart', this._touchStartHandle, false);
+
+            this.removeEventListener('touchmove', this._touchMoveHandle, false);
+            this.addEventListener('touchmove', this._touchMoveHandle, false);
+            
+            this.removeEventListener('touchend', this._touchEndHandle, false);
+            this.addEventListener('touchend', this._touchEndHandle, false);
             return;
         }
         const modalBottomContentObj = util.findParent(this, '.bh-modal-bottom-content');
