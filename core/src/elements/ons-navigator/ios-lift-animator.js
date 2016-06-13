@@ -48,7 +48,7 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     const maskClear = animit(this.backgroundMask)
-      .wait(0.6)
+      .wait(this.delay + this.duration)
       .queue(done => {
         this.backgroundMask.remove();
         done();
@@ -113,7 +113,7 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
     animit.runAll(
 
       animit(this.backgroundMask)
-        .wait(0.4)
+        .wait(this.delay + this.duration)
         .queue(done => {
           this.backgroundMask.remove();
           done();
