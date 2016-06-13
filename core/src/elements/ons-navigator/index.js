@@ -426,7 +426,7 @@ class NavigatorElement extends BaseElement {
   pushPage(page, options = {}) {
     options = this._prepareOptions(options, page);
     const run = templateHTML => new Promise(resolve => {
-      let element = util.extend(this._createPageElement(templateHTML), {
+      const element = util.extend(this._createPageElement(templateHTML), {
         name: options.page,
         data: options.data
       });
