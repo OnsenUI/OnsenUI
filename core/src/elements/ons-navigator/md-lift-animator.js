@@ -48,7 +48,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     const maskClear = animit(this.backgroundMask)
-      .wait(0.6)
+      .wait(this.delay + this.duration)
       .queue(done => {
         this.backgroundMask.remove();
         done();
@@ -87,7 +87,6 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
           },
           duration: 0
         })
-        .wait(0)
         .queue({
           css: {
             opacity: 0.4
@@ -111,7 +110,7 @@ export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransiti
     animit.runAll(
 
       animit(this.backgroundMask)
-        .wait(0.4)
+        .wait(this.delay + this.duration)
         .queue(done => {
           this.backgroundMask.remove();
           done();
