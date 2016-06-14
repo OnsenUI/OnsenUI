@@ -82,8 +82,8 @@ class CollapseDetection {
 
   activate() {
     if (this._orientation) {
-      ons.orientation.on('change', this._boundOnChange);
-      this._onChange({isPortrait: ons.orientation.isPortrait()});
+      orientation.on('change', this._boundOnChange);
+      this._onChange({isPortrait: orientation.isPortrait()});
     } else {
       this._queryResult = window.matchMedia(this._target);
       this._queryResult.addListener(this._boundOnChange);
@@ -93,7 +93,7 @@ class CollapseDetection {
 
   disable() {
     if (this._orientation) {
-      ons.orientation.off('change', this._boundOnChange);
+      orientation.off('change', this._boundOnChange);
     } else if (this._queryResult) {
       this._queryResult.removeListener(this._boundOnChange);
       this._queryResult = null;
