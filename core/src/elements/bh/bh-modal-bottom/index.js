@@ -45,7 +45,10 @@ class BhModalBottomElement extends BaseElement {
             options || {}
         );
 
-        const root = util.findParent(this, 'bh-modal-bottom');
+        let root = this;
+        if(this.localName !== space.rootClassName){
+            root = util.findParent(this, space.rootClassName);
+        }
         const content = util.findChild(root, '.'+space.rootClassName+'-content');
         const cover = util.findChild(root, '.'+space.rootClassName+'-cover');
 
