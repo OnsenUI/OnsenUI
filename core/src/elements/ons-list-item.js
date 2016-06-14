@@ -241,7 +241,7 @@ class ListItemElement extends BaseElement {
     _onClick(event) {
         let target = this.getAttribute('target');
         let next = this.nextElementSibling;
-        if (next.nodeName == 'ONS-LIST' && util.hasClass('list--subList')) {
+        if (next && next.nodeName == 'ONS-LIST' && util.hasClass('list--subList')) {
             if (this.hasAttribute('expand')) {
                 this.removeAttribute('expand');
                 next.removeAttribute('expand');
