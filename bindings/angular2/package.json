@@ -9,6 +9,7 @@
     "start": "gulp serve",
     "test": "gulp test"
   },
+  "main": "src/angular2-onsenui.ts",
   "licenses": [
     {
       "type": "Apache-2.0",
