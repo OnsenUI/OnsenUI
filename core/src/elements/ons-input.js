@@ -273,7 +273,7 @@ class InputElement extends BaseElement {
     if (this.value === '') {
       this._helper.classList.remove('text-input__label--active');
     }
-    else {
+    else if (['checkbox', 'radio'].indexOf(this.getAttribute('type')) === -1){
       this._helper.classList.add('text-input__label--active');
     }
   }

@@ -221,66 +221,6 @@ list__item()
   box-shadow none
 
 /*! topdoc
-  name: List item without divider
-  class: list__item--nodivider
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
-      </li>
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
-      </li>
-    </ul>
- */
-.list__item--nodivider__center
-  border none
-  background-image none
-
-.list__item--nodivider__right
-  border none
-  background-image none
-
-.list__item--nodivider.list__item--chevron:before
-  border none
-  background-image none
-
-/*! topdoc
-  name: List item with long divider
-  class: list__item--longdivider
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
-      </li>
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
-      </li>
-    </ul>
- */
-.list__item--longdivider
-  border-bottom var-list-border
-  retina-list-item-border()
-
-.list__item--longdivider:last-of-type
-  border none
-  background-image none
-
-.list__item--longdivider__center
-  border none
-  background-image none
-
-.list__item--longdivider__right
-  border none
-  background-image none
-
-.list__item--longdivider.list__item--chevron:before
-  border none
-  background-image none
-
-/*! topdoc
   name: Category List Header
   class: list__header
   use: List
@@ -866,3 +806,63 @@ list__item()
 .list__item--material__icon
   font-size 20px
   padding 0 4px
+
+/*! topdoc
+  name: List item without divider
+  class: list__item--nodivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--nodivider__center
+  border none
+  background-image none
+
+.list__item--nodivider__right
+  border none
+  background-image none
+
+.list__item--nodivider.list__item--chevron:before
+  border none
+  background-image none
+
+/*! topdoc
+  name: List item with long divider
+  class: list__item--longdivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--longdivider
+  border-bottom var-list-border
+  retina-list-item-border()
+
+.list__item--longdivider:last-of-type
+  border none
+  background-image none
+
+.list__item--longdivider__center
+  border none
+  background-image none
+
+.list__item--longdivider__right
+  border none
+  background-image none
+
+.list__item--longdivider.list__item--chevron:before
+  border none
+  background-image none

@@ -2,11 +2,24 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.11
+----
+ * ons-input: Fix `value` property bug for radio and checkbox.
+ * ons-navigator: Fix [#1449](https://github.com/OnsenUI/OnsenUI/issues/1449).
+ * ons-popover: Fix [#1450](https://github.com/OnsenUI/OnsenUI/issues/1450).
+ * ons-navigator: Fix [#1389](https://github.com/OnsenUI/OnsenUI/issues/1389).
+ * ons-popover: Fix [#1388](https://github.com/OnsenUI/OnsenUI/issues/1388).
+ * ons-navigator: Fix [#1430](https://github.com/OnsenUI/OnsenUI/issues/1430).
+ * ons-splitter-side: Use imported `orientation` object instead of global.
+ * ons-navigator: Fix [#1453](https://github.com/OnsenUI/OnsenUI/issues/1453).
+
 v2.0.0-rc.10
 ----
  * ons-navigator: Fix [#1440](https://github.com/OnsenUI/OnsenUI/issues/1440).
  * ons-toolbar, ons-speed-dial: Fix [#1441](https://github.com/OnsenUI/OnsenUI/issues/1441).
  * ons-splitter-side: Fix `_width` property.
+ * css-components: Fixed list divider modifiers for MD.
+ * ons-pull-hook: Fix [#1444](https://github.com/OnsenUI/OnsenUI/issues/1444).
 
 v2.0.0-rc.9
 ----
