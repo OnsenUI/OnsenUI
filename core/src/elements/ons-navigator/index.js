@@ -430,6 +430,7 @@ class NavigatorElement extends BaseElement {
         name: options.page,
         data: options.data
       });
+      element.style.display = 'none';
       this.appendChild(element);
       resolve();
     });
@@ -669,7 +670,7 @@ class NavigatorElement extends BaseElement {
       page: page.name,
       _linked: true
     });
-    page.style.display = 'block';
+    page.style.display = 'none';
     page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
     return this._pushPage(options);
