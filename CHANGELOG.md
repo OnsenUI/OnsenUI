@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.11
 ----
+ * core: Added binding for Angular2.
  * ons-input: Fix `value` property bug for radio and checkbox.
  * ons-navigator: Fix [#1449](https://github.com/OnsenUI/OnsenUI/issues/1449).
  * ons-popover: Fix [#1450](https://github.com/OnsenUI/OnsenUI/issues/1450).
@@ -168,7 +169,6 @@ v2.0.0-beta.8
  * ons-navigator: Fixed flickering in Lift animation for iOS.
  * ons-page: Does not remove 'style' attribute anymore.
  * ons.notification: Fixed an issue in iOS related to CustomElements.
- * core: Added ons._elementReady() and changed all elements to use elementReady().
  * ons.ready: Waits for `WebComponentsReady` event instead of `DOMContentLoaded`.
  * ons-icon: Fixed a bug in old Android versions.
  * ons-page: Add onInfiniteScroll functionality [#1165](https://github.com/OnsenUI/OnsenUI/issues/1165).
