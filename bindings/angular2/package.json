@@ -58,7 +58,7 @@
     "selenium-server-standalone-jar": "^2.53.0",
     "source-map-loader": "^0.1.5",
     "typescript": "~1.8.9",
-    "typings": "^1.0.4",
+    "typings": "^1.2.0",
     "webdriver-manager": "^10.0.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1",
