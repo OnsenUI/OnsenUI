@@ -24,3 +24,13 @@ To run a single test or a group of tests use the `--specs` parameter and provide
 $ gulp e2e-test --specs ./examples/button.spec.js
 ```
 
+## How to build transpiled files to publish
+
+```bash
+$ cd bindings/angular2
+$ npm install
+$ npm run build
+```
+
+Then transpiled files are generated in "dist" directory.
+
