@@ -5,6 +5,8 @@
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
     "typings-install": "typings install",
+    "build": "tsc && tsc -d",
+    "prepublish": "npm run build",
     "postinstall": "npm run typings-install",
     "start": "gulp serve",
     "test": "gulp test"

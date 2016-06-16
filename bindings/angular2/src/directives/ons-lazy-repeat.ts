@@ -13,7 +13,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-class ItemContext {
+export class ItemContext {
   constructor(public $implicit: any, public index: number, public count: number) {
   }
 }
@@ -21,7 +21,7 @@ class ItemContext {
 @Directive({
   selector: '[onsLazyRepeat]'
 })
-export class OnsLazyRepeat implements OnDestroy, OnInit { //, DoCheck {
+export class OnsLazyRepeat implements OnDestroy, OnInit {
   private _element: any;
   private _provider: any;
   private _onsLazyRepeatOf: any;

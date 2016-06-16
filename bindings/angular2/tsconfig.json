@@ -14,7 +14,9 @@
   "exclude": [
     "typings/main.d.ts",
     "typings/main",
-    "node_modules"
+    "node_modules",
+    "dist",
+    "examples"
   ],
   "compileOnSave": false,
   "buildOnSave": false

@@ -1,5 +1,5 @@
 import * as browser from '@angular/platform-browser-dynamic'
-import {Type} from '@angular/core';
+import {Type, ComponentRef} from '@angular/core';
 
 export * from '@angular/core';
 export * from '@angular/compiler';
@@ -22,7 +22,7 @@ export * from './ons/platform';
 export * from './ons/createAlertDialog';
 export * from './ons/createPopover';
 
-export function bootstrap(type: Type, providers: Array<any> = []) {
+export function bootstrap(type: Type, providers: Array<any> = []): Promise<ComponentRef<any>> {
   return browser.bootstrap(type, providers);
 };
 

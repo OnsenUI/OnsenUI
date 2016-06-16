@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 
-class BasePageLoaderDirectiveImpl implements OnInit, OnDestroy {
+export class BasePageLoaderDirectiveImpl implements OnInit, OnDestroy {
   public pageComponentType: Type;
   private _pageComponent: ComponentRef<any>;
 
