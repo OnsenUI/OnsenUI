@@ -1,0 +1,717 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-list-background-color = $list-background-color
+var-list-header-color = $text-color
+var-list-item-color = $text-color
+var-list-item-active-background-color = $list-tap-active-background-color
+var-list-item-separator-color = $border-color
+
+var-list-header-font-size = pxToRem(30)
+var-list-border = 1px solid var-list-item-separator-color
+
+var-list-item-min-height = pxToRem(88)
+var-list-item-margin = 1px 0 -1px 0
+var-list-item-padding = 0 0 0 pxToRem(24px)
+
+var-list-header-padding = pxToRem(10px) pxToRem(24px)
+var-list-header-min-height = pxToRem(48)
+var-list-header-font-weight = var-font-weight--large
+var-list-header-font-size = pxToRem(30)
+var-list-header-text-shadow = none
+
+var-list-border-top = 1px solid var-list-item-separator-color
+var-list-border-bottom = 1px solid var-list-item-separator-color
+
+/*! topdoc
+  name: List
+  class: list
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">Dog</div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Cat</div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Hamster</div>
+      </li>
+    </ul>
+*/
+
+retina-list-item-border(color = var-list-item-separator-color)
+  border-bottom none
+  background-size 100% 1px
+  background-repeat no-repeat
+  background-position bottom
+  background-image linear-gradient(0deg, color, color 100%)
+
+  +retina-query()
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%)
+
+retina-list-border(color = var-list-item-separator-color)
+  +retina-query()
+    border none
+    background-size 100% 1px, 100% 1px
+    background-repeat no-repeat
+    background-position bottom, top
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%), linear-gradient(180deg, color, color 50%, transparent 50%)
+
+retina-list-header-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+
+list()
+  reset-base()
+  reset-cursor()
+  reset-font()
+  reset-list()
+  overflow auto
+  display block
+  -webkit-overflow-scrolling touch
+
+list__header()
+  //margin 0
+  //padding 0
+  list-style none
+  //text-align left
+  display block
+  //box-sizing border-box
+
+list__item()
+  margin 0
+  padding 0
+  width 100%
+  position relative
+  list-style none
+  box-sizing border-box
+  display flex
+  flex-direction row
+  justify-content flex-start
+  align-items center
+  min-height var-list-item-min-height
+  font-size var-list-header-font-size
+
+ons-list-item
+  position relative
+  &:after
+    content ""
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $gray-lv3
+
+.list__item__left
+  box-sizing border-box
+  display flex
+  padding pxToRem(12px) pxToRem(12px) pxToRem(12px) 0
+  order 0
+  align-items flex-start
+  align-self stretch
+  //retina-list-item-border()
+  min-height var-list-item-min-height
+
+.list__item__left:empty
+  width 0
+  min-width 0
+  padding 0
+  margin 0
+
+.list__item__center
+  box-sizing border-box
+  display flex
+  flex-grow 1
+  flex-wrap wrap
+  flex-direction row
+  order 1
+  margin-right auto
+  min-height var-list-item-min-height
+  align-items flex-start
+  align-self stretch
+  margin-left 0
+  //retina-list-item-border()
+  padding pxToRem(12px) pxToRem(6px) pxToRem(12px) 0
+  //line-height 1.2em
+  //min-height var-list-item-min-height
+
+.list__item__right
+  box-sizing border-box
+  display flex
+  margin-left auto
+  padding pxToRem(12px) pxToRem(24px) pxToRem(12px) 0
+  order 2
+  align-items flex-start
+  align-self stretch
+  //retina-list-item-border()
+  min-height var-list-item-min-height
+
+//放在ons-list-item标签上,使下面的所有item都垂直居中
+.list__item--all-middle
+  & .list__item__left,
+  & .list__item__center,
+  & .list__item__right,
+  & .list__item__title
+    align-self center
+    align-items center
+
+//单个节点的垂直居中
+.list__item__middle
+  align-self center
+  align-items center
+
+.list__header
+  list__header()
+  padding var-list-header-padding
+  font-size var-list-header-font-size
+  color $gray-lv3
+  min-height pxToRem(var-list-header-min-height)
+  text-transform uppercase
+  position relative
+  //特殊色,不在换肤之列
+  background-color: #F8F8F8
+
+.list__header:not(:first-of-type)
+  border-top var-list-border
+
+.list
+  display block
+  -webkit-overflow-scrolling touch
+  overflow hidden
+
+// sublist
+.list--subList
+  //transform scale(1)
+  height 0
+  overflow hidden
+
+  &[expand]
+    height auto
+
+  .list__item
+    background $gray-lv7
+    font-size pxToRem(24)
+    .list__item__center
+      background-image none
+
+
+.list__item
+  list__item()
+  padding var-list-item-padding
+  //margin var-list-item-margin
+  color var-list-item-color
+  background-color var-list-background-color
+  &:active
+    background $gray-lv3
+
+
+.list__item:first-child
+  box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
+  margin-top 0
+
+.list__item_active:active
+  background-color var-list-item-active-background-color
+  transition none
+
+/*! topdoc
+  name: Noborder List
+  class: list--noborder
+  use: List
+  markup:
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list--noborder
+  border-top none
+  border-bottom none
+  background-image none
+
+.list--noborder .list__item:first-child
+  box-shadow none
+
+/*! topdoc
+  name: List item without divider
+  class: list__item--nodivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--nodivider__center
+  border none
+  background-image none
+
+.list__item--nodivider__right
+  border none
+  background-image none
+
+.list__item--nodivider.list__item--chevron:before
+  border none
+  background-image none
+
+/*! topdoc
+  name: List item with long divider
+  class: list__item--longdivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--longdivider
+  border-bottom var-list-border
+  retina-list-item-border()
+
+.list__item--longdivider:last-of-type
+  border none
+  background-image none
+
+.list__item--longdivider__center
+  border none
+  background-image none
+
+.list__item--longdivider__right
+  border none
+  background-image none
+
+.list__item--longdivider.list__item--chevron:before
+  border none
+  background-image none
+
+/*! topdoc
+  name: Category List Header
+  class: list__header
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+/*! topdoc
+  name: Tappable List
+  class: list__item--tappable
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <div class="list__item__center">Tappable Item</div>
+      </li>
+    </ul>
+ */
+
+.list__item--tappable:active
+  background-color var-list-item-active-background-color
+
+/*! topdoc
+  name: Switch in List Item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">
+          Label
+        </div>
+        <div class="list__item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        <div class="list__item__center">Item A</div>
+      </li>
+      <li class="list__item list__item--chevron">
+        <div class="list__item__center">Item B</div>
+      </li>
+    </ul>
+ */
+
+.list__item--chevron
+  transition background-color 0.2s linear
+  overflow hidden
+.list__item--chevron:hover
+  transition none
+
+.list__item--chevron:before
+  display flex
+  align-items center
+  color var-list-item-separator-color
+  order 3
+  align-self stretch
+  font-size pxToRem(56)
+  font-family "iconfont"
+  font-style normal
+  font-weight normal
+  content "\e79e"
+  margin-left auto
+  //width pxToRem(18px)
+  text-align right
+  //border-bottom var-list-border
+  //retina-list-item-border()
+  padding-right pxToRem(8px)
+  padding-top pxToRem(4px)
+  transition transform 0.2s
+  background-image none
+
+
+/*! topdoc
+  name: Inset List
+  use: List, List Item with Chevron, Tappable List
+  markup:
+    <ul class="list list--inset">
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
+        <div class="list__item__center">List Item with Chevron</div>
+      </li>
+      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
+        <div class="list__item__center">List Item with Chevron</div>
+      </li>
+    </ul>
+ */
+
+.list--inset
+  margin-left 8px
+  margin-right 8px
+  border 1px solid var-list-item-separator-color
+  border-radius 4px
+  background-image none
+
+.list--inset > .list__item:first-child
+  box-shadow none
+
+/*! topdoc
+  name: Radio Button in List Item
+  modifiers:
+  use: Radio Button, List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="r1" class="radio-button__input" name="r" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="r1" class="list__item__center">
+          Radio Button
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="radio-button">
+            <input type="radio" id="r2" class="radio-button__input" name="r">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="r2" class="list__item__center">
+          Radio Button
+        </label>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Checkbox in List Item
+  use: Checkbox, List, Tappable List, Switch in List Item
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox1" class="list__item__center">
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox2" class="list__item__center">
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: No border Checkbox in List Item
+  use: Checkbox in List Item, No border Checkbox
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s1" type="checkbox" class="checkbox__input checkbox--noborder__input">
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s1" class="list__item__center">
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <div class="list__item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s2" type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s2" class="list__item__center">
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Text Input in List Item
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          <input type="text" class="text-input" placeholder="Name">
+        </div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">
+          <input type="text" class="text-input" placeholder="Email">
+        </div>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
+        </div>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Right Label in List Item
+  use: List, Switch in List Item
+  class: list__right-label
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          Title
+        </div>
+        <div class="list__item__right">
+          <div class="list__item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__label
+  font-size var-font-size--mini
+  padding 0 4px
+  opacity 0.6
+
+/*! topdoc
+  name: List Item with Subtitle
+  use: List, Switch in List Item
+  class: list__item__subtitle
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__center">
+          <div class="list__item__title">
+            Title
+          </div>
+          <div class="list__item__subtitle">
+            Subtitle
+          </div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__title
+  font-size pxToRem(30px)
+  flex-basis 100%
+  align-self flex-end
+  order 0
+
+.list__item__subtitle
+  opacity 0.75
+  font-size var-font-size--mini
+  order 1
+  flex-basis 100%
+  align-self flex-start
+
+.list__item__describe
+  font-size pxToRem(24px)
+  line-height pxToRem(38px)
+  color $gray-lv3
+  order 1
+  flex-basis 100%
+  align-self flex-start
+
+/*! topdoc
+  name: List Item with Thumbnail
+  use: List, List Item with Subtitle
+  class: list__item__thumbnail
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Lily</div>
+          <div class="list__item__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Molly</div>
+          <div class="list__item__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__thumbnail
+  width 40px
+  height 40px
+  border-radius 6px
+  display block
+  margin 0
+
+/*! topdoc
+  name: List Item with Icon
+  use: List, List Item with Thumbnail
+  class: list__item__icon
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Alice</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+
+      <li class="list__item">
+        <div class="list__item__left">
+          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list__item__center">
+          <div class="list__item__title">Bob</div>
+        </div>
+
+        <div class="list__item__right">
+          <i class="ion-ios-information list__item__icon"></i>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list__item__icon
+  font-size 22px
+  padding 0 6px
+
+.list__item[expand]:before
+  transform rotate(90deg)
+  background-image none

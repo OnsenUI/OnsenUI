@@ -1,0 +1,37 @@
+bh-modal-bottom,
+.bh-modal-bottom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $z-index-lv12;
+
+  & .icon-close{
+    position: absolute;
+    font-size: pxToRem(20px);
+    top: pxToRem(8px);
+    right: pxToRem(8px);
+    z-index: $z-index-lv12;
+  }
+}
+
+.bh-modal-bottom-content{
+  position: absolute;
+  width: 100%;
+  max-height: 80%;
+  background-color: $brand-white;
+  bottom: 0;
+  left: 0;
+  z-index: $z-index-lv1;
+  padding: pxToRem(24px) pxToRem(16px);
+}
+
+.bh-modal-bottom-cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $gray-lv7;
+}

@@ -1,0 +1,109 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+.ons-icon {
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ons-icon--ion {
+  line-height: 0.75em;
+  vertical-align: -25%;
+}
+
+ons-icon[spin] {
+  -webkit-animation: ons-icon-spin 2s infinite linear;
+  -moz-animation: ons-icon-spin 2s infinite linear;
+  animation: ons-icon-spin 2s infinite linear;
+}
+
+@-moz-keyframes ons-icon-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.ons-icon[rotate="90"] {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.ons-icon[rotate="180"] {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.ons-icon[rotate="270"] {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+ons-icon[fixed-width] {
+  width: 1.28571429em;
+  text-align: center;
+}
+
+.ons-icon--lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+.ons-icon--2x {
+  font-size: 2em;
+}
+
+.ons-icon--3x {
+  font-size: 3em;
+}
+
+.ons-icon--4x {
+  font-size: 4em;
+}
+
+.ons-icon--5x {
+  font-size: 5em;
+}

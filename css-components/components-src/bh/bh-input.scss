@@ -1,0 +1,30 @@
+$bh-input-padding-h: 24px;
+$bh-input-label-width: 160px;
+$bh-input-height: 72px;
+$bh-input-font-size: 30px;
+
+bh-input{
+  display: block;
+  position: relative;
+  font-size: pxToRem($bh-input-font-size);
+}
+
+.bh-input{
+  width: 100%;
+  height: pxToRem($bh-input-height);
+  border: 1px solid $gray-lv6;
+  padding: 0 pxToRem($bh-input-padding-h) 0 pxToRem($bh-input-label-width + $bh-input-padding-h);
+  font-size: pxToRem($bh-input-font-size);
+  &:focus{
+    border-color: $primary-lv1;
+  }
+}
+
+.bh-input-label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: pxToRem(16px) pxToRem(24px);
+  width: pxToRem($bh-input-label-width);
+  height: pxToRem($bh-input-height);
+}

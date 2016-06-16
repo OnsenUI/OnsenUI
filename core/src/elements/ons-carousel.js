@@ -323,6 +323,27 @@ class CarouselElement extends BaseElement {
     this._boundOnResize = this._onResize.bind(this);
 
     this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
+
+    this._setup();
+    //添加轮播的点
+    this._addImageBtns();
+    this._setupInitialIndex();
+
+    this._saveLastState();
+  }
+
+  _addImageBtns() {
+    //当标签上有image属性时,则是图片轮播
+    if(this.hasAttribute('image')){
+      const children = this._getCarouselItemElements();
+      const btns = util.create('bh-carousel-btns');
+      //设置图片总数
+      btns.setAttribute('count', children.length);
+      //设置位置
+      btns.setAttribute('center', true);
+      btns.setAttribute('bottom', true);
+      this.appendChild(btns);
+    }
   }
 
   _onResize() {
@@ -656,6 +677,11 @@ class CarouselElement extends BaseElement {
       }
     } else {
       this._startMomentumScroll();
+      //轮播切换时,切换高亮的点
+      if(this.hasAttribute('image')){
+        const i = this._scroll / this._currentElementSize;
+        util.findChild(this, 'bh-carousel-btns').setActiveIndex(i);
+      }
     }
     this._lastDragEvent = null;
 

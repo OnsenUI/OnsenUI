@@ -1,70 +1,117 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Tabbar | Onsen UI</title>
-    <link rel="stylesheet" href="../../build/css/onsenui.css">
-    <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../../core/utils/computeRootSize.js"></script>
+    <link rel="stylesheet" href="../../build/css/bh.css">
+    <link rel="stylesheet" href="http://res.wisedu.com/fe_components/mobile/iconfont/iconfont.css">
 
-    <script src="../../build/js/onsenui.js"></script>
+    <script src="../../build/js/bh.js"></script>
 
     <script>
-      document.addEventListener('init', function(event) {
-        console.log('init');
-      });
-      document.addEventListener('show', function(event) {
-        console.log('show');
-      });
-      document.addEventListener('hide', function(event) {
-        console.log('hide');
-      });
-      document.addEventListener('destroy', function(event) {
-        console.log('destroy');
-      });
+        document.addEventListener('init', function (event) {
+            console.log('init');
+        });
+        document.addEventListener('show', function (event) {
+            console.log('show');
+        });
+        document.addEventListener('hide', function (event) {
+            console.log('hide');
+        });
+        document.addEventListener('destroy', function (event) {
+            console.log('destroy');
+        });
 
     </script>
 
-  </head>
+</head>
 
-  <body>
-    <ons-page>
-      <ons-toolbar>
-        <div class="center">Tabbar</div>
-      </ons-toolbar>
+<body>
+<ons-page>
+    <ons-toolbar>
+    <div class="center">Tabbar</div>
+    </ons-toolbar>
 
-      <ons-tabbar position="auto">
+    <!--<ons-tabbar position="bottom" modifier="scroll">-->
+        <!--<ons-tab page="page1.html" active-->
+                 <!--icon="search"-->
+                 <!--label="Home">-->
+        <!--</ons-tab>-->
+        <!--<ons-tab-->
+                <!--icon="close"-->
+                <!--label="Comments"-->
+                <!--page="page2.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--icon="cloud"-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+    <!--</ons-tabbar>-->
+    <ons-tabbar position="top" modifier="simple">
         <ons-tab page="page1.html" active
-          icon="ion-home"
-          label="Home">
+
+                 label="Home">
         </ons-tab>
         <ons-tab
-          icon="ion-chatbox-working"
-          label="Comments"
-          page="page2.html"></ons-tab>
+                label="Comments"
+                page="page2.html"></ons-tab>
         <ons-tab
-          icon="ion-ios-cog"
-          label="Settings"
-          page="page3.html"></ons-tab>
-      </ons-tabbar>
-    </ons-page>
+                label="Settings"
+                page="page3.html"></ons-tab>
+    </ons-tabbar>
+    <!--<ons-tabbar position="top" modifier="scroll">-->
+        <!--<ons-tab page="page1.html" active-->
 
-    <ons-template id="page1.html">
-      <ons-page>
+                 <!--label="Home">-->
+        <!--</ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Comments"-->
+                <!--page="page2.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+        <!--<ons-tab-->
+                <!--label="Settings"-->
+                <!--page="page3.html"></ons-tab>-->
+    <!--</ons-tabbar>-->
+</ons-page>
+<ons-template id="page1.html">
+    <ons-page>
         <h2>Page1</h2>
-      </ons-page>
-    </ons-template>
+    </ons-page>
+</ons-template>
 
-    <ons-template id="page2.html">
-      <ons-page>
+<ons-template id="page2.html">
+    <ons-page>
         <h2>Page2</h2>
-      </ons-page>
-    </ons-template>
+    </ons-page>
+</ons-template>
 
-    <ons-template id="page3.html">
-      <ons-page>
+<ons-template id="page3.html">
+    <ons-page>
         <h2>Page3</h2>
-      </ons-page>
-    </ons-template>
+    </ons-page>
+</ons-template>
 
-  </body>
+</body>
 </html>

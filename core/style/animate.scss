@@ -1,0 +1,108 @@
+$bh-animate-time: 0.45s;
+
+.bh-animated {
+  animation-duration: $bh-animate-time;
+  animation-fill-mode: both;
+}
+
+//放大缩小动画
+.bh-animate-scale{
+  transform: scale(0);
+
+  &.bh-active{
+    transform: scale(1);
+  }
+}
+
+//起始点右上角
+.bh-animate-origin-TR{
+  transform-origin: top right;
+}
+//起始点左上角
+.bh-animate-origin-TL{
+  transform-origin: top left;
+}
+//起始点右下角
+.bh-animate-origin-BR{
+  transform-origin: bottom right;
+}
+//起始点左下角
+.bh-animate-origin-BL{
+  transform-origin: bottom left;
+}
+
+//从下方进入
+@keyframes bh-animate-into-bottom {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.bh-animate-into-bottom {
+  animation-name: bh-animate-into-bottom;
+}
+
+//从下方消失
+@keyframes bh-animate-out-bottom {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  50%{
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.bh-animate-out-bottom {
+  animation-name: bh-animate-out-bottom;
+}
+
+//渐隐
+@keyframes bh-animate-fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.bh-animate-fadeOut {
+  animation-name: bh-animate-fadeOut;
+}
+
+//渐现
+@keyframes bh-animate-fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.bh-animate-fadeIn {
+  animation-name: bh-animate-fadeIn;
+}

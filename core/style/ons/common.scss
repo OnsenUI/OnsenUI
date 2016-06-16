@@ -1,0 +1,211 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+/* custom elements */
+ons-page, ons-navigator,
+ons-split-view, ons-sliding-menu, ons-tabbar,
+ons-gesture-detector {
+  display: block;
+}
+
+ons-navigator,
+ons-tabbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+ons-tab {
+  transform: translate3d(0, 0, 0);
+}
+
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
+  z-index: 2;
+}
+
+ons-fab {
+  z-index: 3;
+}
+
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
+input, textarea {
+  -webkit-user-select: auto;
+}
+
+ons-toolbar:not([inline]), ons-bottom-toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+ons-toolbar:not([inline]) {
+  top: 0;
+}
+ons-bottom-toolbar {
+  bottom: 0;
+}
+
+//.page, .page__content {
+//  background-color: transparent !important;
+//  background: transparent !important;
+//}
+
+.page__content {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 0;
+  -ms-touch-action: pan-y;
+}
+
+.navigation-bar + .page__background + .page__content {
+  /*margin-top: -1px;*/
+  top: 44px;
+}
+
+.navigation-bar--material + .page__background + .page__content {
+  top: 56px;
+}
+
+.page[status-bar-fill] > .page__content {
+  top: 20px;
+}
+
+.page[status-bar-fill] > .navigation-bar {
+  padding-top: 20px;
+  box-sizing: content-box;
+}
+
+.page[status-bar-fill] > .navigation-bar + .page__background + .page__content {
+  top: 64px;
+}
+
+.page[status-bar-fill] > .navigation-bar--material + .page__background + .page__content {
+  top: 76px;
+}
+
+ons-tabbar[status-bar-fill] > .tab-bar--top__content {
+  top: 71px;
+}
+
+ons-tabbar[status-bar-fill] > .tab-bar--top {
+  padding-top: 22px;
+}
+
+ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
+  top: 0px;
+}
+
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top {
+  top: 0px;
+}
+
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top__content {
+  top: 49px;
+}
+
+.page-with-bottom-toolbar > .page__content {
+  bottom: 44px;
+}
+
+ons-dialog[disabled] > .dialog,
+ons-alert-dialog[disabled],
+ons-popover[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+ons-list-item[disabled] {
+   pointer-events: none;
+}
+
+ons-pull-hook {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  z-index: 20002;
+}
+
+ons-splitter {
+  overflow: hidden;
+}
+
+ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+ons-splitter-mask {
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: none;
+  opacity: 0;
+}
+
+ons-splitter-content {
+  z-index: 1;
+}
+
+ons-splitter-side {
+  right: auto;
+  z-index: 1;
+  width: pxToRem(556px);
+}
+
+ons-splitter-side[side="right"] {
+  right: 0;
+  left: auto;
+}
+
+ons-splitter-side[mode="collapse"] {
+  z-index: 3;
+  left: auto;
+  right: 100%;
+}
+
+ons-splitter-side[side="right"][mode="collapse"] {
+  right: auto;
+  left: 100%;
+}
+
+ons-toolbar-button > ons-icon[icon*="ion-"] {
+  font-size: 26px;
+}
+
+ons-range {
+  display: inline-block;
+}
+
+ons-range > input {
+  min-width: 50px;
+  width: 100%;
+}

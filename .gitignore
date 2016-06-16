@@ -4,6 +4,7 @@ node_modules
 dist
 .DS_Store
 .idea
+.idea/*
 .selenium
 /core/test/coverage
 /core/test/test-results.xml

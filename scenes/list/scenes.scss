@@ -1,0 +1,35 @@
+$bh-s-list-item-img-right-width: pxToRem(140px);
+
+//时间轴左侧的图片
+.bh-s-list-item-img{
+  width: pxToRem(72px);
+  height: pxToRem(72px);
+}
+
+/**
+带图片列表样式 start
+*/
+//带图片列表的右侧图片样式
+.bh-s-list-item-img-right{
+  width: $bh-s-list-item-img-right-width;
+  height: pxToRem(108px);
+}
+
+.bh-s-list-item-title{
+  font-size: pxToRem(30px);
+}
+.bh-s-list-item-container{
+  position: relative;
+  width: 100%;
+  padding-right: pxToRem(24px);
+}
+.bh-s-list-item-left{
+  float: left;
+  width: calc(100% - #{$bh-s-list-item-img-right-width});
+}
+.bh-s-list-item-right{
+  float: right;
+}
+/**
+带图片列表样式 end
+*/

@@ -447,4 +447,67 @@ util.isInteger = (value) => {
     Math.floor(value) === value;
 };
 
+/**
+ * 判断该元素是否存在该样式类
+ * @param target 要判断的元素
+ * @param className 要判断的样式类
+ * @returns {boolean}
+ */
+util.hasClass = (target, className) => {
+  let flag = false;
+  if(target){
+    const targetClass = target.className;
+    const re = new RegExp('^'+className+'$|^'+className+' | '+className+' | '+className+'$');
+    if(re.test(targetClass)){
+      flag = true;
+    }
+  }
+  return flag;
+};
+
+/**
+ * 去掉字符串两侧的空格
+ * @param str
+ * @returns {*}
+ */
+util.trim = (str) => {
+  return str.replace(/(^\s*)|(\s*$)/g, '');
+};
+
+/**
+ * 获取该元素所在的位置index
+ * @param elementObj
+ * @returns {number}
+ */
+util.getElementIndex = (elementObj) => {
+  const parentObj = elementObj.parentNode;
+  const childrens = parentObj.childNodes;
+  const childrensLen = childrens.length;
+  let index = 0;
+  for(let i=0; i<childrensLen; i++){
+    if(elementObj === childrens[i]){
+      index = i;
+      break;
+    }
+  }
+  return index;
+};
+
+/**
+ * px或纯数字转换成rem单位
+ * @param num
+ * @returns {*}
+ */
+util.pxToRem = (num) => {
+  if(!/rem$/.test(num)){
+    num = (num/20) + 'rem';
+  }
+  return num;
+};
+
 export default util;
+
+
+util.next = (element) => {
+
+};

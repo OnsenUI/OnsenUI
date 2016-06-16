@@ -1,0 +1,280 @@
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-range-track-background-color = $border-color
+var-range-track-background-color-active = $highlight-color
+var-range-thumb-background-color = #fff
+var-range-thumb-border-color = $border-color
+
+var-range-border-radius := 3px
+var-range-thumb-border := 1px solid var-range-thumb-border-color
+var-range-border := none
+var-range-track-height := 2px
+var-range-thumb-width  := var-thumb-size
+
+var-material-range-track-color = $material-range-track-color
+var-material-range-thumb-color = $material-range-thumb-color
+
+/*! topdoc
+  name: Range
+  class: range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+  showcase:
+    <div class="navigation-bar">
+        <div class="navigation-bar__item center full">
+            <h1 class="navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="90">
+    </div>
+*/
+range()
+  reset-input()
+  -webkit-appearance none
+
+range__thumb()
+  cursor pointer
+  position relative
+  height var-range-thumb-width
+  width var-range-thumb-width
+  background-color var-range-thumb-background-color
+  border var-range-thumb-border
+  border-radius var-round-border
+  box-shadow none
+  margin 0
+  padding 0
+
+ons-range
+  &:before
+    content ''
+    display block
+    position relative
+    top 17px
+    height var-range-track-height
+    margin-bottom -(var-range-track-height)
+    background-color var-range-track-background-color
+
+  .range
+    position relative
+    background transparent
+
+    &::-moz-range-track
+      background transparent
+
+  &[disabled]
+    disabled()
+
+    .range
+      opacity 1
+
+.range
+  range()
+  border var-range-border
+  height var-range-track-height
+  border-radius var-range-border-radius
+  background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
+  background-position left center
+  background-size 100% 2px
+  background-repeat no-repeat
+  overflow hidden
+  height 32px
+
+.range::-moz-range-track
+  position relative
+  border none
+  background-color var-range-track-background-color
+  height var-range-track-height
+  border-radius var-round-border
+  box-shadow none
+  top 0
+  margin 0
+  padding 0
+
+.range::-ms-track
+  position relative
+  border none
+  background-color var-range-track-background-color
+  height 0
+  border-radius var-round-border
+
+.range::-webkit-slider-thumb
+  range__thumb()
+  -webkit-appearance none
+  top 0
+
+.range::-moz-range-thumb
+  range__thumb()
+
+.range::-ms-thumb
+  range__thumb()
+  top 0
+
+.range::-ms-fill-lower
+  height 2px
+  background-color var-range-track-background-color-active
+
+.range::-ms-tooltip
+  display none
+
+.range:disabled
+  disabled()
+
+.range__left
+  position relative
+  top 17px
+  height 2px
+  width 0
+  background-color var-range-track-background-color-active
+  pointer-events none
+
+[disabled] > .range__left
+.range--material:disabled + .range__left
+  visibility hidden
+
+/*! topdoc
+  name: Material Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+
+var-material-range-track-height = 2px
+var-material-range-thumb-width  = 12px
+var-material-range-thumb-radius = var-material-range-thumb-width / 2
+var-material-range-thumb-vertical-margin = 24px
+var-material-range-thumb-horizontal-margin = 2px
+
+.range--material
+  background-image linear-gradient(var-material-range-track-color, var-material-range-track-color)
+  background-position center
+  background-size 100% 2px
+  overflow visible
+
+.range--material::-webkit-slider-thumb
+  top 1px
+  border none
+  height var-material-range-thumb-width + var-material-range-thumb-vertical-margin
+  width var-material-range-thumb-width + var-material-range-thumb-horizontal-margin
+  border-radius 0
+  background-color transparent
+  background-image radial-gradient(circle var-material-range-thumb-radius at var-material-range-thumb-radius + var-material-range-thumb-horizontal-margin / 2, var-material-range-thumb-color 0%, var-material-range-thumb-color var-material-range-thumb-radius, transparent var-material-range-thumb-radius + 1);
+  margin-top -1px
+
+.range--material::-moz-range-thumb
+  top 1px
+  border 3px solid var-material-range-track-color
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
+
+.range--material::-moz-range-track
+  background-color var-material-range-track-color
+
+.range--material::-ms-thumb
+  margin-top 1px
+  border none
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%;
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
+
+.range--material:focus::-moz-range-thumb
+  border-color var-material-range-thumb-color
+  background-color var-material-range-thumb-color
+
+range--material--thumb--before()
+  display none
+
+.range--material::-moz-range-thumb:before
+  range--material--thumb--before()
+
+.range--material::-webkit-slider-thumb:before
+  range--material--thumb--before()
+
+.range--material::-ms-fill-lower
+  background-color var-material-range-thumb-color
+
+range--material--thumb--after()
+  content ''
+  display block
+  border 0px
+  border-radius 100%
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  background-color var-material-range-thumb-color
+  opacity 0.2
+  transition transform 0.1s linear
+
+.range--material::-moz-range-thumb:after
+  margin-top -3px
+  margin-left -3px
+  range--material--thumb--after()
+
+.range--material::-webkit-slider-thumb:after
+  margin-top -3px
+  margin-left -3px
+  range--material--thumb--after()
+  display inline-block
+  margin-left (var-material-range-thumb-horizontal-margin / 2)
+  margin-top (var-material-range-thumb-vertical-margin / 2)
+
+.range--material::-ms-fill-upper
+  margin-top: -6px;
+  margin-left: -6px;
+  range--material--thumb--after()
+
+.range--material:active::-webkit-slider-thumb:after
+  transform scale(2.5)
+
+.range--material:active::-moz-range-thumb:after
+  transform scale(2.5)
+
+.range--material:active::-ms-fill-upper
+  transform scale(2.5)
+
+.range--material__left
+  background-color var-material-range-thumb-color
+
