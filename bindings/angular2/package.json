@@ -11,6 +11,7 @@
     "test": "gulp test"
   },
   "main": "dist/src/angular2-onsenui.js",
+  "typings": "dist/src/angular2-onsenui.d.ts",
   "licenses": [
     {
       "type": "Apache-2.0",
