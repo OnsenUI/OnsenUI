@@ -9,4 +9,3 @@ src/*.js.map
 build
 dist
 npm-debug.log
-typings

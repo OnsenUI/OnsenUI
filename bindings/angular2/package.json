@@ -7,7 +7,6 @@
     "typings-install": "typings install",
     "build": "tsc && tsc -d",
     "prepublish": "npm run build",
-    "postinstall": "npm run typings-install",
     "start": "gulp serve",
     "test": "gulp test"
   },
@@ -45,7 +44,6 @@
     "core-js": "^2.4.0",
     "reflect-metadata": "^0.1.3",
     "rxjs": "5.0.0-beta.6",
-    "typings": "^1.2.0",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
@@ -63,6 +61,7 @@
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.8.4",
+    "typings": "^1.2.0",
     "yargs": "^4.7.1"
   },
   "babel": {
