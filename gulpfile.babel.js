@@ -297,6 +297,10 @@ gulp.task('prepare', ['html2js'], () =>  {
     gulp.src('core/css/material-design-iconic-font/**/*')
       .pipe(gulp.dest('build/css/material-design-iconic-font/')),
 
+    // type definitions copy
+    gulp.src('core/src/onsenui.d.ts')
+      .pipe(gulp.dest('build/js/')),
+
     // auto prepare
     gulp.src('cordova-app/www/index.html')
       .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
