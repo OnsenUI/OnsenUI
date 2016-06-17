@@ -53,7 +53,7 @@
  *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]
  */
 
-(function() {
+(function(){
   'use strict';
 
   angular.module('onsen').directive('onsInput', function($parse) {
@@ -86,51 +86,30 @@
           scope.$parent.$evalAsync();
         };
 
-        ons._contentReady(element[0], function() {
-
-          ATTRS.forEach(function(attr) {
-            var kebabCase = attr.replace(/[A-Z]/g, function(letter, pos) {
-              return (pos ? '-' : '') + letter.toLowerCase();
-            });
-
-            if (attrs.hasOwnProperty(attr)) {
-              el._input.setAttribute(kebabCase, attrs[attr]);
+        if (attrs.ngModel) {
+          scope.$watch(attrs.ngModel, (value) => {
+            if (el._isTextInput && typeof value !== 'undefined') {
+              el.value = value;
+            }
+            else if (el.type === 'radio') {
+              el.checked = value === el.value;
+            }
+            else {
+              el.checked = value;
             }
           });
 
-          $compile(el._input)(scope);
+          el._isTextInput
+            ? element.on('input', onInput)
+            : element.on('change', onInput);
+        }
 
-          if (el._isTextInput && attrs.ngModel) {
-            scope.$watch(attrs.ngModel, function(value) {
-              el._updateLabelClass();
-            });
-          }
+        scope.$on('$destroy', () => {
+          el._isTextInput
+            ? element.off('input', onInput)
+            : element.off('change', onInput);
 
-          if (attrs.ngModel) {
-            scope.$watch(attrs.ngModel, (value) => {
-              if (el._isTextInput) {
-                el.value = value;
-              }
-              else if (el.type === 'radio') {
-                el.checked = value === el.value;
-              }
-              else {
-                el.checked = value;
-              }
-            });
-
-            el._isTextInput
-              ? element.on('input', onInput)
-              : element.on('change', onInput);
-          }
-
-          scope.$on('$destroy', function() {
-            el._isTextInput
-              ? element.off('input', onInput)
-              : element.off('change', onInput);
-
-            scope = element = attrs = el = null;
-          });
+          scope = element = attrs = el = null;
         });
       }
     };
