@@ -21,7 +21,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
 import OnsTabbarElement from './ons-tabbar';
-import contentReady from '/ons/content-ready';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '': 'tab-bar--*__item',

@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.12
+----
+ * core: Added type definitions.
+
 v2.0.0-rc.11
 ----
  * core: Added binding for Angular2.

@@ -26,7 +26,7 @@ import browserSync from 'browser-sync';
 import os from 'os';
 import fs from 'fs';
 import {argv} from 'yargs';
-import npm from 'rollup-plugin-npm';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 
 ////////////////////////////////////////
@@ -56,7 +56,7 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', () => {
+gulp.task('core', function() {
   return gulp.src(['core/src/setup.js'], {read: false})
     .pipe($.plumber(error => {
       $.util.log(error.message);
@@ -81,7 +81,7 @@ gulp.task('core', () => {
             }
           }
         },
-        npm(),
+        nodeResolve(),
         babel({
           presets: ['es2015-rollup'],
           babelrc: false
@@ -238,7 +238,7 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe($.rollup({
         sourceMap: 'inline',
         plugins: [
-          npm(),
+          nodeResolve(),
           babel({
             presets: ['es2015-rollup'],
             babelrc: false
@@ -296,6 +296,10 @@ gulp.task('prepare', ['html2js'], () =>  {
     // material icons file copy
     gulp.src('core/css/material-design-iconic-font/**/*')
       .pipe(gulp.dest('build/css/material-design-iconic-font/')),
+
+    // type definitions copy
+    gulp.src('core/src/onsenui.d.ts')
+      .pipe(gulp.dest('build/js/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
