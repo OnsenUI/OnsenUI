@@ -18,64 +18,65 @@ limitations under the License.
 import util from '../util';
 import platform from '../platform';
 
-/* eslint-disable key-spacing */
-const scheme = {
-  createItemContent:   {type: 'function', returns: Element},
-  countItems:          {type: 'function', returns: 'number'},
-  calculateItemHeight: {type: 'function', returns: 'number'},
-  updateItemContent:   {type: 'function', safeCall: true},
-  destroy:             {type: 'function', safeCall: true},
-  destroyItem:         {type: 'function', safeCall: true},
-  _render:             {type: 'function', safeCall: true}
-};
-/* eslint-enable key-spacing */
-
 export class LazyRepeatDelegate {
 
   constructor(userDelegate, templateElement = null) {
-    this._userDelegate = util.validated('delegate', userDelegate, 'object');
-    this._templateElement = util.validated('templateElement', templateElement, [Element, 'null']);
+    if (typeof userDelegate !== 'object' || userDelegate === null) {
+      throw Error('"delegate" parameter must be an object.');
+    }
+    this._userDelegate = userDelegate;
+
+    if (!(templateElement instanceof Element) && templateElement !== null) {
+      throw Error('"templateElement" parameter must be an instance of Element or null.');
+    }
+    this._templateElement = templateElement;
   }
 
   get itemHeight() {
     return this._userDelegate.itemHeight;
   }
 
-  _validated(key, _scheme = scheme) {
-    return util.validated(key, null, util.extend({}, _scheme[key], {
-      dynamicCall: {object: this._userDelegate, key}
-    }));
-  }
-
   /**
    * @return {Boolean}
    */
   hasRenderFunction() {
-    return this._userDelegate._render !== undefined;
+    return this._userDelegate._render instanceof Function;
   }
 
   /**
    * @return {void}
    */
   _render(items, height) {
-    this._validated('_render')(items, height);
+    this._userDelegate._render(items, height);
   }
 
   /**
-   * @param {Number}
+   * @param {Number} index
+   * @param {Element} parent
    * @param {Function} done A function that take item object as parameter.
    */
-  prepareItem(index, done) {
-    return done({
-      element: this._validated('createItemContent')(index, this._templateElement)
-    });
+  loadItemElement(index, parent, done) {
+    if (this._userDelegate.loadItemElement instanceof Function) {
+      this._userDelegate.loadItemElement(index, parent, element => done({element}));
+    } else {
+      const element = this._userDelegate.createItemContent(index, this._templateElement);
+      if (!(element instanceof Element)) {
+        throw Error('createItemContent() must return an instance of Element.');
+      }
+      parent.appendChild(element);
+      done({element});
+    }
   }
 
   /**
    * @return {Number}
    */
   countItems() {
-    return this._validated('countItems')();
+    const count = this._userDelegate.countItems();
+    if (typeof count !== 'number') {
+      throw Error('countItems() must return a number.');
+    }
+    return count;
   }
 
   /**
@@ -84,14 +85,26 @@ export class LazyRepeatDelegate {
    * @param {Element} item.element
    */
   updateItem(index, item) {
-    return this._validated('updateItemContent')(index, item);
+    if (this._userDelegate.updateItemContent instanceof Function) {
+      this._userDelegate.updateItemContent(index, item);
+    }
   }
 
   /**
    * @return {Number}
    */
   calculateItemHeight(index) {
-    return this._validated('calculateItemHeight')(index);
+    if (this._userDelegate.calculateItemHeight instanceof Function) {
+      const height = this._userDelegate.calculateItemHeight(index);
+
+      if (typeof height !== 'number') {
+        throw Error('calculateItemHeight() must return a number.');
+      }
+
+      return height;
+    }
+
+    return 0;
   }
 
   /**
@@ -99,14 +112,19 @@ export class LazyRepeatDelegate {
    * @param {Object} item
    */
   destroyItem(index, item) {
-    return this._validated('destroyItem')(index, item);
+    if (this._userDelegate.destroyItem instanceof Function) {
+      this._userDelegate.destroyItem(index, item);
+    }
   }
 
   /**
    * @return {void}
    */
   destroy() {
-    this._validated('destroy')();
+    if (this._userDelegate.destroy instanceof Function) {
+      this._userDelegate.destroy();
+    }
+
     this._userDelegate = this._templateElement = null;
   }
 }
@@ -121,8 +139,12 @@ export class LazyRepeatProvider {
    * @param {LazyRepeatDelegate} delegate
    */
   constructor(wrapperElement, delegate) {
+    if (!(delegate instanceof LazyRepeatDelegate)) {
+      throw Error('"delegate" parameter must be an instance of LazyRepeatDelegate.');
+    }
+
     this._wrapperElement = wrapperElement;
-    this._delegate = util.validated('delegate', delegate, LazyRepeatDelegate);
+    this._delegate = delegate;
 
     if (wrapperElement.tagName.toLowerCase() === 'ons-list') {
       wrapperElement.classList.add('lazy-list');
@@ -137,12 +159,7 @@ export class LazyRepeatProvider {
     this._topPositions = [];
     this._renderedItems = {};
 
-    try {
-      this._delegate.itemHeight || this._delegate.calculateItemHeight(0);
-    } catch (e) {
-      if (!/must be (a|an instance of) function/.test('' + e)) {
-        throw e;
-      }
+    if (!this._delegate.itemHeight && !this._delegate.calculateItemHeight(0)) {
       this._unknownItemHeight = true;
     }
     this._addEventListeners();
@@ -150,14 +167,38 @@ export class LazyRepeatProvider {
   }
 
   _checkItemHeight(callback) {
-    this._delegate.prepareItem(0, ({element}) => {
-      if (this._unknownItemHeight) {
-        this._wrapperElement.appendChild(element);
-        this._itemHeight = element.offsetHeight;
-        this._wrapperElement.removeChild(element);
+    this._delegate.loadItemElement(0, this._wrapperElement, item => {
+      if (!this._unknownItemHeight) {
+        throw Error('Invalid state');
+      }
+
+      const done = () => {
+        this._wrapperElement.removeChild(item.element);
         delete this._unknownItemHeight;
         callback();
+      };
+
+      this._itemHeight = item.element.offsetHeight;
+
+      if (this._itemHeight > 0) {
+        done();
+        return;
       }
+
+      // retry to measure offset height
+      // dirty fix for angular2 directive
+      const lastVisibility = this._wrapperElement.style.visibility;
+      this._wrapperElement.style.visibility = 'hidden';
+      item.element.style.visibility = 'hidden';
+
+      setImmediate(() => {
+        this._itemHeight = item.element.offsetHeight;
+        if (this._itemHeight == 0) {
+          throw Error('Invalid state: this._itemHeight must be greater than zero.');
+        }
+        this._wrapperElement.style.visibility = lastVisibility;
+        done();
+      });
     });
   }
 
@@ -219,7 +260,7 @@ export class LazyRepeatProvider {
       return;
     }
 
-    this._delegate.prepareItem(index, (item) => {
+    this._delegate.loadItemElement(index, this._wrapperElement, item => {
       util.extend(item.element.style, {
         position: 'absolute',
         top: top + 'px',
@@ -227,7 +268,6 @@ export class LazyRepeatProvider {
         right: 0
       });
 
-      this._wrapperElement.appendChild(item.element);
       this._renderedItems[index] = item;
     });
   }

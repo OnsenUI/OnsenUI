@@ -11,7 +11,7 @@ describe('OnsPopoverElement', () => {
     document.body.appendChild(target);
     document.body.appendChild(popover);
 
-    setImmediate(done);
+    ons._contentReady(popover, done);
   });
 
   afterEach(() => {

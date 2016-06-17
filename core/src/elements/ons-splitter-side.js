@@ -442,6 +442,7 @@ class SplitterSideElement extends BaseElement {
   createdCallback() {
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
+
     this._animatorFactory = new AnimatorFactory({
       animators: OnsSplitterElement._animatorDict,
       baseClass: SplitterAnimator,

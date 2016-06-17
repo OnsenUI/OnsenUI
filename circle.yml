@@ -7,6 +7,12 @@ dependencies:
     - npm install
     - npm install -g coveralls gulp
     - cd css-components; npm install; gulp build
+    - cd bindings/angular2; npm install
+    - curl -L -o google-chrome.deb https://s3.amazonaws.com/circle-downloads/google-chrome-stable_current_amd64_47.0.2526.73-1.deb
+    - sudo dpkg -i google-chrome.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - rm google-chrome.deb
+
 deployment:
   tasks:
     branch: master
@@ -14,6 +20,7 @@ deployment:
       - ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 $CIRCLE_ARTIFACTS
 test:
   post:
+    - cd bindings/angular2; npm test
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex "./core/test/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - cat ./core/test/coverage/*/lcov.info | coveralls || true # Ignore if this fails.

@@ -350,17 +350,21 @@ class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (!util.findChild(this, '.page__background') || !util.findChild(this, '.page__content')) {
-
-      const background = util.create('.page__background');
+    if (!util.findChild(this, '.page__content')) {
       const content = util.create('.page__content');
 
-      while (this.firstChild) {
-        content.appendChild(this.firstChild);
-      }
+      util.arrayFrom(this.childNodes).forEach(node => {
+        if (!node.classList || !node.classList.contains('page__background')) {
+          content.appendChild(node);
+        }
+      });
 
-      this.appendChild(background);
       this.appendChild(content);
+    }
+
+    if (!util.findChild(this, '.page__background')) {
+      const background = util.create('.page__background');
+      this.insertBefore(background, util.findChild(this, '.page__content'));
     }
 
     ModifierUtil.initModifier(this, scheme);

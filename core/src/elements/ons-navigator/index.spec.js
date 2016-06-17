@@ -32,8 +32,12 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'page\' attribute', () => {
-      const content = nav.topPage._getContentElement();
-      expect(content.innerHTML).to.equal('hoge');
+    const content = nav.topPage._getContentElement();
+    expect(content.innerHTML).to.equal('hoge');
+  });
+
+  it('provides \'animatorFactory\' property', () => {
+    expect(nav.animatorFactory).to.be.ok;
   });
 
   describe('#pages', () => {

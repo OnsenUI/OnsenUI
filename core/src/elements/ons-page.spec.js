@@ -20,6 +20,13 @@ describe('OnsPageElement', () => {
     expect(element.classList.contains('page')).to.be.true;
   });
 
+  it('should create background element automatically', () => {
+    const page = ons._util.createElement(`<ons-page>
+      <div class="page__content">...</div>
+    </ons-page>`);
+    expect(page.querySelector('.page__background')).to.be.ok;
+  });
+
   describe('#attachedCallback()', () => {
     it('fires \'init\' event', () => {
       var initPromise = new Promise(function(resolve, reject) {

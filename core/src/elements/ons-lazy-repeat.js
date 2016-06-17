@@ -66,10 +66,6 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  */
 class LazyRepeatElement extends BaseElement {
 
-  createdCallback() {
-    this.style.display = 'none';
-  }
-
   attachedCallback() {
     util.updateParentPosition(this);
 
