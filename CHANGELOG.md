@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.12
 ----
  * core: Added type definitions.
+ * ons-switch: Fix [#1464](https://github.com/OnsenUI/OnsenUI/issues/1464).
 
 v2.0.0-rc.11
 ----
