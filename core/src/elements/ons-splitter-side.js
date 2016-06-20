@@ -160,6 +160,7 @@ class CollapseMode {
     const direction = event.gesture.interimDirection;
     const shouldOpen = el._side !== direction && distance > width * el._threshold;
     this.executeAction(shouldOpen ? 'open' : 'close');
+    this._ignoreDrag = true;
   }
 
   layout() {
