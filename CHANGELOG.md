@@ -2,6 +2,9 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.13
+----
+
 v2.0.0-rc.12
 ----
  * core: Added type definitions.
