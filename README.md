@@ -1,8 +1,8 @@
 # Onsen UI 
 
-[![Join us on Gitter](https://img.shields.io/gitter/room/OnsenUI/OnsenUI.svg)](https://gitter.im/OnsenUI/OnsenUI)
-[![StackOverflow](http://img.shields.io/badge/stackoverflow-onsen--ui-FF412D.svg )]( http://stackoverflow.com/questions/tagged/onsen-ui)
-[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](https://github.com/borisyankov/DefinitelyTyped/tree/master/onsenui)
+[![Join us on Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
+[![Forum](http://img.shields.io/badge/stackoverflow-onsen--ui-FF412D.svg )](https://community.onsen.io/)
+[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/onsenui.d.ts)
 [![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=shield)](https://circleci.com/gh/OnsenUI/OnsenUI) 
 [![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
 [![npm version](https://badge.fury.io/js/onsenui.svg)](https://badge.fury.io/js/onsenui)
