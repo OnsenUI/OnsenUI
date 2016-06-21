@@ -582,7 +582,7 @@ class PopoverElement extends BaseElement {
     if (this.cancelable) {
       this.hide({
         callback: () => {
-          util.triggerElementEvent(this, 'cancel');
+          util.triggerElementEvent(this, 'dialog-cancel');
         }
       });
     }

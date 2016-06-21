@@ -92,9 +92,9 @@ describe('OnsDialogElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    it('emits a \'cancel\' event', () => {
+    it('emits a \'dialog-cancel\' event', () => {
       const promise = new Promise((resolve) => {
-        dialog.addEventListener('cancel', resolve);
+        dialog.addEventListener('dialog-cancel', resolve);
       });
 
       dialog.setAttribute('cancelable', '');
