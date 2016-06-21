@@ -17,7 +17,7 @@ import {
  * @directive OnsRange
  * @selector ons-range
  * @description
- *    [en]Angular 2 directive for <ons-range> component.[/en]
+ *    [en]Angular 2 directive for `<ons-range>` component.[/en]
  */
 @Directive({
   selector: 'ons-range'

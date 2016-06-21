@@ -50,7 +50,7 @@ export class BasePageLoaderDirectiveImpl implements OnInit, OnDestroy {
  * @directive OnsSplitterSide
  * @selector ons-splitter-side
  * @description
- *    [en]Angular 2 directive for <ons-splitter-side> component.[/en]
+ *    [en]Angular 2 directive for `<ons-splitter-side>` component.[/en]
  */
 @Directive({
   selector: 'ons-splitter-side'
@@ -77,7 +77,7 @@ export class OnsSplitterSide extends BasePageLoaderDirectiveImpl {
  * @directive OnsSplitterContent
  * @selector ons-splitter-content
  * @description
- *    [en]Angular 2 directive for <ons-splitter-content> component.[/en]
+ *    [en]Angular 2 directive for `<ons-splitter-content>` component.[/en]
  */
 @Directive({
   selector: 'ons-splitter-content'

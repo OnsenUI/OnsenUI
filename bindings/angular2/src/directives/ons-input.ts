@@ -17,7 +17,7 @@ import {
  * @directive OnsInput
  * @selector ons-input
  * @description
- *    [en]Angular 2 directive for <ons-input> component.[/en]
+ *    [en]Angular 2 directive for `<ons-input>` component.[/en]
  */
 @Directive({
   selector: 'ons-input'

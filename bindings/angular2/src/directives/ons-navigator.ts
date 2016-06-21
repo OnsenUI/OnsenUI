@@ -45,7 +45,7 @@ export class NavigatorPage {
  * @directive OnsNavigator
  * @selector ons-navigator
  * @description
- *    [en]Angular 2 directive for <ons-navigator> component.[/en]
+ *    [en]Angular 2 directive for `<ons-navigator>` component.[/en]
  */
 @Directive({
   selector: 'ons-navigator'

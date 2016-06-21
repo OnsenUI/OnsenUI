@@ -18,7 +18,7 @@ interface CarouselElement {}
  * @directive OnsCarousel
  * @selector ons-carousel
  * @description
- *    [en]Angular 2 directive for <ons-carousel> component.[/en]
+ *    [en]Angular 2 directive for `<ons-carousel>` component.[/en]
  */
 @Directive({
   selector: 'ons-carousel'

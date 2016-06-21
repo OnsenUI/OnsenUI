@@ -13,7 +13,7 @@ import {
  * @directive OnsPullHook
  * @selector ons-pull-hook
  * @description
- *    [en]Angular 2 directive for <ons-pull-hook> component.[/en]
+ *    [en]Angular 2 directive for `<ons-pull-hook>` component.[/en]
  */
 @Directive({
   selector: 'ons-pull-hook'

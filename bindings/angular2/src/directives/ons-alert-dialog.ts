@@ -16,7 +16,7 @@ import {
  * @directive OnsAlertDialog
  * @selector ons-alert-dialog
  * @description
- *    [en]Angular 2 directive for <ons-alert-dialog> component.[/en]
+ *    [en]Angular 2 directive for `<ons-alert-dialog>` component.[/en]
  */
 @Directive({
   selector: 'ons-alert-dialog'

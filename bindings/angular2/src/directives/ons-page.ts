@@ -11,7 +11,7 @@ import {
  * @directive OnsPage
  * @selector ons-page
  * @description
- *    [en]Angular 2 directive for <ons-page> component.[/en]
+ *    [en]Angular 2 directive for `<ons-page>` component.[/en]
  */
 @Directive({
   selector: 'ons-page'

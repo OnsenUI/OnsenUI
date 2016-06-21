@@ -23,7 +23,7 @@ export class ItemContext {
  * @directive OnsLazyRepeat
  * @selector ons-lazy-repeat
  * @description
- *    [en]Angular 2 directive for <ons-lazy-repeat> component.[/en]
+ *    [en]Angular 2 directive for `<ons-lazy-repeat>` component.[/en]
  */
 @Directive({
   selector: '[onsLazyRepeat]'
