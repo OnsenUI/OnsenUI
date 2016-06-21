@@ -7,6 +7,8 @@
  * @param {Array} params.events
  * @param {Array} params.properties
  * @param {Array} params.elements
+ * @param {Array} params.inputs
+ * @param {Array} params.outputs
  */
 function renderElement(params) {
   var main = params.main;
@@ -16,6 +18,8 @@ function renderElement(params) {
   var events = params.events;
   var properties = params.properties;
   var elements = params.elements;
+  var inputs = params.inputs;
+  var outputs = params.outputs;
 
   return {
     name: main.name,
@@ -35,7 +39,9 @@ function renderElement(params) {
     events: events.map(renderEvent),
     properties: properties.map(renderProperty),
     methods: methods.map(renderMethod),
-    elements: elements.map(renderExtraElement)
+    elements: elements.map(renderExtraElement),
+    inputs: inputs.map(renderInput),
+    outputs: outputs.map(renderOutput),
   };
 }
 
@@ -48,15 +54,16 @@ function renderExtraElement(element) {
     description: element.description || '',
     deprecated: element.isDeprecated,
     extensionOf: element.extensionOf,
+    directive: tagdict.get('directive') || undefined,
+    selector: tagdict.get('selector') || undefined,
     note: tagdict.get('note') || undefined,
     tutorial: tagdict.get('tutorial') || undefined,
     examples: tagdict.getMany('example'),
     seealsos: tagdict.getMany('seealso').map(renderNamedDescription),
     guides: tagdict.getMany('guide').map(renderNamedDescription),
-    codepens: tagdict.getMany('codepen').map(renderCodepen),
+    codepens: tagdict.getMany('codepen').map(renderCodepen)
   };
 }
-
 
 /**
  * @param {Object} params
@@ -174,6 +181,34 @@ function renderMethod(method) {
     signature: method.tagdict.get('signature', method.name + '()'),
     description: method.description || '',
     deprecated: method.isDeprecated,
+  };
+}
+
+/**
+ * @param {InputDoc} input
+ * @return {Object}
+ */
+function renderInput(input) {
+  return {
+    name: input.name,
+    description: input.description || '',
+    type: input.type || '',
+    deprecated: input.isDeprecated,
+    extensionOf: input.extensionOf,
+  };
+}
+
+/**
+ * @param {OutputDoc} output
+ * @return {Object}
+ */
+function renderOutput(output) {
+  return {
+    name: output.name,
+    description: output.description || '',
+    type: output.type || '',
+    deprecated: output.isDeprecated,
+    extensionOf: output.extensionOf,
   };
 }
 

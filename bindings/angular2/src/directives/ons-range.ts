@@ -12,6 +12,13 @@ import {
   SimpleChange
 } from '@angular/core';
 
+/**
+ * @element ons-range
+ * @directive OnsRange
+ * @selector ons-range
+ * @description
+ *    [en]Angular 2 directive for <ons-range> component.[/en]
+ */
 @Directive({
   selector: 'ons-range'
 })
@@ -19,7 +26,18 @@ export class OnsRange implements OnChanges, OnDestroy {
   private _element: any;
   private _boundOnChange: Function;
 
+  /**
+   * @input value
+   * @type {string}
+   * @desc [en]Input value.[/en]
+   */
   @Input('value') _value: string;
+
+  /**
+   * @output valueChange
+   * @type {string}
+   * @desc [en]Triggers when the value is changed.[/en]
+   */
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _elementRef: ElementRef) {

@@ -12,6 +12,13 @@ import {
   SimpleChange
 } from '@angular/core';
 
+/**
+ * @element ons-switch
+ * @directive OnsSwitch
+ * @selector ons-switch
+ * @description
+ *    [en]Angular 2 directive for <ons-switch> component.[/en]
+ */
 @Directive({
   selector: 'ons-switch'
 })
@@ -19,7 +26,18 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   private _element: any;
   private _boundOnChange: Function;
 
+  /**
+   * @input page
+   * @type {Type}
+   * @desc [en]Page content.[/en]
+   */
   @Input('value') _value: boolean;
+
+  /**
+   * @output valueChange
+   * @type {string}
+   * @desc [en]Triggers when the value is changed.[/en]
+   */
   @Output('valueChange') _valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private _elementRef: ElementRef) {

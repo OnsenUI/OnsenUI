@@ -16,6 +16,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
+
 import {OnsPage} from './ons-page';
 
 export class PageParams {
@@ -39,9 +40,12 @@ export class NavigatorPage {
   }
 }
 
-
 /**
  * @element ons-navigator
+ * @directive OnsNavigator
+ * @selector ons-navigator
+ * @description
+ *    [en]Angular 2 directive for <ons-navigator> component.[/en]
  */
 @Directive({
   selector: 'ons-navigator'
@@ -50,6 +54,11 @@ export class OnsNavigator implements OnInit, OnDestroy {
   private _navigator: any;
   private _pages: NavigatorPage[];
 
+  /**
+   * @input page
+   * @type {Type}
+   * @desc [en]Type of the page component.[/en]
+   */
   @Input('page') pageComponentType: Type;
 
   constructor(
@@ -122,24 +131,24 @@ export class OnsNavigator implements OnInit, OnDestroy {
    * @method pushComponent
    * @signature pushComponent(type: Type, params: Object = {})
    * @param {Type} type
-   *   [en][/en]
+   *   [en]Specify component class to push to the navigator.[/en]
    *   [ja]navigatorに挿入するコンポーネントのクラスを指定します。[/ja]
    * @param {Object} [options]
-   *   [en][/en]
+   *   [en]Optional parameters.[/en]
    *   [ja][/ja]
    * @param {Object} [options.animation]
    * @param {Object} [params]
-   *   [en][/en]
+   *   [en]Specify parameter to the new template.[/en]
    *   [ja]
    *     新しく生成するページへのパラメータを指定します。
    *     navigatorに挿入されたコンポーネントが初期化される際に、
    *     このパラメータをコンストラクタから受け取ることができます。
    *   [/ja]
    * @return {Promise}
-   *   [en][/en]
+   *   [en]Resolves when the component is generated and animation is done.[/en]
    *   [ja]コンポーネントが生成され、遷移アニメーションが終わった時に解決されます。[/ja]
    * @description
-   *   [en][/en]
+   *   [en]Pushes a new page to the page stack.[/en]
    *   [ja][/ja]
    */
   pushComponent(type: Type, options: Object = {}, params: Object = {}): Promise<any> {

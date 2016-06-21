@@ -6,6 +6,13 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
+/**
+ * @element ons-page
+ * @directive OnsPage
+ * @selector ons-page
+ * @description
+ *    [en]Angular 2 directive for <ons-page> component.[/en]
+ */
 @Directive({
   selector: 'ons-page'
 })
