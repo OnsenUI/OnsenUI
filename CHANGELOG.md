@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.13
 ----
+ * ons-dialog: Fix Chrome issue with invalid event name.
 
 v2.0.0-rc.12
 ----
