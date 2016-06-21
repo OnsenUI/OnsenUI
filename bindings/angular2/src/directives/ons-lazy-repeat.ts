@@ -18,6 +18,13 @@ export class ItemContext {
   }
 }
 
+/**
+ * @element ons-lazy-repeat
+ * @directive OnsLazyRepeat
+ * @selector ons-lazy-repeat
+ * @description
+ *    [en]Angular 2 directive for <ons-lazy-repeat> component.[/en]
+ */
 @Directive({
   selector: '[onsLazyRepeat]'
 })
@@ -35,6 +42,11 @@ export class OnsLazyRepeat implements OnDestroy, OnInit {
   ngOnInit() {
   }
 
+  /**
+   * @input value
+   * @type {string}
+   * @desc [en]Input value.[/en]
+   */
   @Input() set onsLazyRepeatOf(value: any) {
     this._onsLazyRepeatOf = value;
 
@@ -60,6 +72,11 @@ export class OnsLazyRepeat implements OnDestroy, OnInit {
     done(view.rootNodes[0]);
   }
 
+  /**
+   * @method refresh
+   * @signature refresh()
+   * @return Promise<any>
+   */
   refresh() {
     if (this._provider) {
       this._viewContainer.clear();

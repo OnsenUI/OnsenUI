@@ -1,0 +1,26 @@
+{
+  "id": "/output",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": ["string", "null"],
+      "required": false
+    },
+    "deprecated": {
+      "type": "boolean",
+      "required": true
+    },
+    "extensionOf": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

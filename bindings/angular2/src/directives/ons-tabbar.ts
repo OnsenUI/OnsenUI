@@ -13,6 +13,13 @@ import {
 
 interface TabbarElement {}
 
+/**
+ * @element ons-tabbar
+ * @directive OnsTabbar
+ * @selector ons-tabbar
+ * @description
+ *    [en]Angular 2 directive for <ons-tabbar> component.[/en]
+ */
 @Directive({
   selector: 'ons-tabbar'
 })
@@ -28,6 +35,13 @@ export class OnsTabbar {
   }
 }
 
+/**
+ * @element ons-tab
+ * @directive OnsTab
+ * @selector ons-tab
+ * @description
+ *    [en]Angular 2 directive for <ons-tab> component.[/en]
+ */
 @Directive({
   selector: 'ons-tab'
 })

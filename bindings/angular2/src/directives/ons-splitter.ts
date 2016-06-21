@@ -45,10 +45,23 @@ export class BasePageLoaderDirectiveImpl implements OnInit, OnDestroy {
   }
 }
 
+/**
+ * @element ons-splitter-side
+ * @directive OnsSplitterSide
+ * @selector ons-splitter-side
+ * @description
+ *    [en]Angular 2 directive for <ons-splitter-side> component.[/en]
+ */
 @Directive({
   selector: 'ons-splitter-side'
 })
 export class OnsSplitterSide extends BasePageLoaderDirectiveImpl {
+
+  /**
+   * @input page
+   * @type {Type}
+   * @desc [en]Page content.[/en]
+   */
   @Input('page') pageComponentType: Type;
 
   constructor(
@@ -59,11 +72,22 @@ export class OnsSplitterSide extends BasePageLoaderDirectiveImpl {
   }
 }
 
-
+/**
+ * @element ons-splitter-content
+ * @directive OnsSplitterContent
+ * @selector ons-splitter-content
+ * @description
+ *    [en]Angular 2 directive for <ons-splitter-content> component.[/en]
+ */
 @Directive({
   selector: 'ons-splitter-content'
 })
 export class OnsSplitterContent extends BasePageLoaderDirectiveImpl {
+  /**
+   * @input page
+   * @type {Type}
+   * @desc [en]Page content.[/en]
+   */
   @Input('page') pageComponentType: Type;
 
   constructor(

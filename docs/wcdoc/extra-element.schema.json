@@ -58,6 +58,14 @@
     "description": {
       "type": "string",
       "required": true
+    },
+    "selector": {
+      "type": "string",
+      "required": false
+    },
+    "directive": {
+      "type": "string",
+      "required": false
     }
   }
 }

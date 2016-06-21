@@ -11,6 +11,13 @@ import {
   Input
 } from '@angular/core';
 
+/**
+ * @element ons-popover
+ * @directive OnsPopover
+ * @selector ons-popover
+ * @description
+ *    [en]Angular 2 directive for <ons-popover> component.[/en]
+ */
 @Directive({
   selector: 'ons-popover'
 })
