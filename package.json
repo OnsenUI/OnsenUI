@@ -104,6 +104,6 @@
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-node-resolve": "^1.7.0",
     "run-sequence": "^1.2.1",
-    "wcdoc": "0.1.14"
+    "wcdoc": "^0.1.14"
   }
 }
