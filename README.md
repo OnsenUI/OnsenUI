@@ -1,4 +1,4 @@
-# Onsen UI 
+# Onsen UI - HTML5 Hybrid Mobile App Framework
 
 [![Join us on Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
 [![Forum](https://img.shields.io/badge/forum-onsen--ui-FF412D.svg )](https://community.onsen.io/)
@@ -30,9 +30,9 @@ Onsen UI is:
 
 Onsen UI is tested with the following browsers and mobile OS.
 
- * Android 4.0.2+
- * iOS7+
- * Windows Phone 8.1+
+ * Android 4.1+
+ * iOS8+
+ * Windows Phone 10+
  * Google Chrome
  * Safari
 
@@ -54,6 +54,13 @@ For Visual Studio developers we provide directly provide [Onsen UI extension](ht
 ## Getting Started Using Monaca
 
 [Monaca](https://monaca.io/) is a set of tools that makes hybrid mobile app development with PhoneGap/Cordova simple and easy: debugging suite, push notifications, remote build, back-end, encryption, version control and more. See the [Onsen UI Getting Started Page](http://onsen.io/getting_started/) for more information.
+
+```
+$ [sudo] npm -g install monaca
+$ monaca create helloworld # And choose the starter template
+$ monaca preview # Preview on the browser
+$ monaca debug # Preview on the real device
+```
 
 ## Download Onsen UI
 
