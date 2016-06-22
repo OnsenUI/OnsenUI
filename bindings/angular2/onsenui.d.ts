@@ -827,17 +827,17 @@ interface onsStatic {
     /**
      * @description Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt
      */
-    notification: onsNotification;
+    notification;
 
     /**
      * @description Utility methods for orientation detection
      */
-    orientation: onsOrientation;
+    orientation;
 
     /**
      * @description Utility methods to detect current platform
      */
-    platform: onsPlatform;
+    platform;
 
     _elementReady: elementReady;
 }

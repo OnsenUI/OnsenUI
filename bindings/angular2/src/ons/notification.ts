@@ -1,2 +1,1 @@
-
-export const onsNotification: onsNotification = ons.notification;
+export const onsNotification = ons.notification;
