@@ -38,7 +38,7 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 ## Demo
 
-[Click here](https://frankdiox.github.io/frame-auto-style/example.html) to see Onsen UI in action! Check our [tutorial] for more examples.
+[Click here](https://frankdiox.github.io/frame-auto-style/example.html) to see Onsen UI in action! Check our [tutorial](http://tutorial.onsen.io/) for more examples.
 
 ## What's Included
 
@@ -158,22 +158,6 @@ In order to run both the unit tests and the end-to-end tests use the following c
 ```bash
 $ gulp test
 ```
-
-## Developing your app
-
-Our [Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the [`project-templates`](https://github.com/OnsenUI/project-templates) repository. You will see the instruction on how to run the project there.
-
-## Documentation
-
-See the current [Onsen UI docs](http://onsen.io/guide/overview.html).
-
-## Developing Onsen UI
-
-Run gulp task to develop Onsen UI itself with livereload.
-
-    gulp serve
-
-Access [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html) and your code changes will be reloaded.
 
 ## How to contribute
 
