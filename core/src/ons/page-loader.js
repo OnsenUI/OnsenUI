@@ -29,16 +29,12 @@ function loadPage(page, parent, done) {
   });
 }
 
-class PageLoader {
-  constructor() {
-    this._loader = loadPage;
-  }
-
+export class PageLoader {
   /**
-   * @param {Function} fn Returns an object that has "element" property and "unload" function.
+   * @param {Function} [fn] Returns an object that has "element" property and "unload" function.
    */
-  setInternalLoader(fn) {
-    this._loader = fn;
+  constructor(fn) {
+    this._loader = fn instanceof Function ? fn : loadPage;
   }
 
   /**
@@ -61,6 +57,4 @@ class PageLoader {
   }
 }
 
-const pageLoader = new PageLoader();
-
-export default pageLoader;
+export const defaultPageLoader = new PageLoader();

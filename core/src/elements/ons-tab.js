@@ -22,7 +22,7 @@ import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
 import OnsTabbarElement from './ons-tabbar';
 import contentReady from 'ons/content-ready';
-import pageLoader from 'ons/page-loader';
+import {PageLoader, defaultPageLoader} from 'ons/page-loader';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -141,6 +141,9 @@ class TabElement extends BaseElement {
    */
 
   createdCallback() {
+    this._pageLoader = defaultPageLoader;
+    this._page = this.hasAttribute('page') ? this.getAttribute('page') : null;
+
     if (this.hasAttribute('label') || this.hasAttribute('icon')) {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
@@ -154,6 +157,13 @@ class TabElement extends BaseElement {
     }
 
     this._boundOnClick = this._onClick.bind(this);
+  }
+
+  set pageLoader(loader) {
+    if (!(loader instanceof PageLoader)) {
+      throw Error('First parameter must be an instance of PageLoader.');
+    }
+    this._pageLoader = loader;
   }
 
   _compile() {
@@ -294,7 +304,7 @@ class TabElement extends BaseElement {
    */
   _loadPageElement(parent, callback, link) {
     if (!this.page) {
-      pageLoader.load(this.getAttribute('page'), parent, page => {
+      this._pageLoader.load(this._pageTarget, parent, page => {
         link(page.element, element => {
           page.element = element;
           this.page = page;
