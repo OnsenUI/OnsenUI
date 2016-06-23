@@ -22,6 +22,7 @@ import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
 import OnsTabbarElement from './ons-tabbar';
 import contentReady from 'ons/content-ready';
+import pageLoader from 'ons/page-loader';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -287,24 +288,22 @@ class TabElement extends BaseElement {
   }
 
   /**
+   * @param {Element} parent
    * @param {Function} callback
    * @param {Function} link
    */
-  _loadPageElement(callback, link) {
-    if (!this.pageElement) {
-      this._createPageElement(this.getAttribute('page'), (element) => {
-        link(element, element => {
-          this.pageElement = element;
-          callback(element);
+  _loadPageElement(parent, callback, link) {
+    if (!this.page) {
+      pageLoader.load(this.getAttribute('page'), parent, page => {
+        link(page.element, element => {
+          page.element = element;
+          this.page = page;
+          callback(page.element);
         });
       });
     } else {
-      callback(this.pageElement);
+      callback(this.page.element);
     }
-  }
-
-  set pageElement(el) {
-    this._pageElement = el;
   }
 
   get pageElement() {
@@ -319,16 +318,6 @@ class TabElement extends BaseElement {
   }
 
   /**
-   * @param {String} page
-   * @param {Function} callback
-   */
-  _createPageElement(page, callback) {
-    internal.getPageHTMLAsync(page).then(html => {
-      callback(util.createElement(html.trim()));
-    });
-  }
-
-  /**
    * @return {Boolean}
    */
   isActive() {
@@ -337,6 +326,10 @@ class TabElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+    if (this.page) {
+      page.unload();
+      page.element = null;
+    }
   }
 
   attachedCallback() {
@@ -357,19 +350,21 @@ class TabElement extends BaseElement {
           setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
       } else {
+        /*
         OnsTabbarElement.rewritables.ready(tabbar, () => {
           setImmediate(() => {
+            // TODO: 書き直す
             if (this.hasAttribute('page')) {
               this._createPageElement(this.getAttribute('page'), pageElement => {
                 OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-                  this.pageElement = pageElement;
-                  this.pageElement.style.display = 'none';
+                  this._pageElement = pageElement;
+                  this._pageElement.style.display = 'none';
                   tabbar._contentElement.appendChild(this.pageElement);
                 });
               });
             }
           });
-        });
+        });*/
       }
 
       this.addEventListener('click', this._boundOnClick, false);

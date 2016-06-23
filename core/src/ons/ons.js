@@ -28,6 +28,7 @@ import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import contentReady from './content-ready';
+import pageLoader from './page-loader';
 
 /**
  * @object ons
