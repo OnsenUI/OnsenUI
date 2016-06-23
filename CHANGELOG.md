@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.14
+----
+ * core: Update TypeScript definitions.
+
 v2.0.0-rc.13
 ----
  * ons-dialog: Fix Chrome issue with invalid event name.

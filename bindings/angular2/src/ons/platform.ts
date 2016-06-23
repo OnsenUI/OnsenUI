@@ -1,2 +1,2 @@
 
-export const onsPlatform: onsPlatform = ons.platform;
+export const onsPlatform = ons.platform;

@@ -3,78 +3,6 @@
 // Definitions by: Fran Dios <https://github.com/frankdiox/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/es6-promise/es6-promise.d.ts
-interface Thenable<T> {
-  then<U>(onFulfilled?: (value: T) => U | Thenable<U>, onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
-  then<U>(onFulfilled?: (value: T) => U | Thenable<U>, onRejected?: (error: any) => void): Thenable<U>;
-  catch<U>(onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
-}
-
-declare class Promise<T> implements Thenable<T> {
-  /**
-   * If you call resolve in the body of the callback passed to the constructor,
-   * your promise is fulfilled with result object passed to resolve.
-   * If you call reject your promise is rejected with the object passed to reject.
-   * For consistency and debugging (eg stack traces), obj should be an instanceof Error.
-   * Any errors thrown in the constructor callback will be implicitly passed to reject().
-   */
-  constructor(callback: (resolve : (value?: T | Thenable<T>) => void, reject: (error?: any) => void) => void);
-
-  /**
-   * onFulfilled is called when/if "promise" resolves. onRejected is called when/if "promise" rejects.
-   * Both are optional, if either/both are omitted the next onFulfilled/onRejected in the chain is called.
-   * Both callbacks have a single parameter , the fulfillment value or rejection reason.
-   * "then" returns a new promise equivalent to the value you return from onFulfilled/onRejected after being passed through Promise.resolve.
-   * If an error is thrown in the callback, the returned promise rejects with that error.
-   *
-   * @param onFulfilled called when/if "promise" resolves
-   * @param onRejected called when/if "promise" rejects
-   */
-  then<U>(onFulfilled?: (value: T) => U | Thenable<U>, onRejected?: (error: any) => U | Thenable<U>): Promise<U>;
-  then<U>(onFulfilled?: (value: T) => U | Thenable<U>, onRejected?: (error: any) => void): Promise<U>;
-
-  /**
-   * Sugar for promise.then(undefined, onRejected)
-   *
-   * @param onRejected called when/if "promise" rejects
-   */
-  catch<U>(onRejected?: (error: any) => U | Thenable<U>): Promise<U>;
-}
-
-declare namespace Promise {
-  /**
-   * Make a new promise from the thenable.
-   * A thenable is promise-like in as far as it has a "then" method.
-   */
-  function resolve<T>(value?: T | Thenable<T>): Promise<T>;
-
-  /**
-   * Make a promise that rejects to obj. For consistency and debugging (eg stack traces), obj should be an instanceof Error
-   */
-  function reject(error: any): Promise<any>;
-  function reject<T>(error: T): Promise<T>;
-
-  /**
-   * Make a promise that fulfills when every item in the array fulfills, and rejects if (and when) any item rejects.
-   * the array passed to all can be a mixture of promise-like objects and other objects.
-   * The fulfillment value is an array (in order) of fulfillment values. The rejection value is the first rejection value.
-   */
-  function all<T>(promises: (T | Thenable<T>)[]): Promise<T[]>;
-
-  /**
-   * Make a Promise that fulfills when any item fulfills, and rejects if any item rejects.
-   */
-  function race<T>(promises: (T | Thenable<T>)[]): Promise<T>;
-}
-
-declare module 'es6-promise' {
-  var foo: typeof Promise; // Temp variable to reference Promise in local context
-  namespace rsvp {
-    export var Promise: typeof foo;
-  }
-  export = rsvp;
-}
-
 
 // Some useful types
 interface stringArray {
@@ -89,7 +17,7 @@ interface objectArray {
 /**
  * @description Should be used as root component of each page. The content inside page component is scrollable
  */
-interface OnsPageElement {
+export interface OnsPageElement {
   /**
    * @description Function to be executed when scrolling to the bottom of the page. The function receives a done callback as an argument that must be called when it's finished.
    */
@@ -112,7 +40,7 @@ interface CarouselOptions{
 /**
  * @description Carousel component
  */
-interface OnsCarouselElement {
+export interface OnsCarouselElement {
   /**
   * @description Specify the index of the `<ons-carousel-item>` to show.
   * @return Resolves to the carousel element.
@@ -181,7 +109,7 @@ interface OnsCarouselElement {
  * @description Component that adds "pull-to-refresh" to an <ons-page> element
  */
  //later should be updated
-interface OnsPullHookElement {
+export interface OnsPullHookElement {
   /**
   * @description The height of the pull hook in pixels. The default value is `64px`.
   */
@@ -221,7 +149,7 @@ interface dialogOptions {
  * @modifier android Display an Android style alert dialog
  * @description Alert dialog that is displayed on top of the current screen
  */
-interface OnsAlertDialogElement {
+export interface OnsAlertDialogElement {
   /**
    * @param {Object} [options] Parameter object
    * @param {String} [options.animation] Animation name. Available animations are "fade", "slide" and "none"
@@ -249,7 +177,7 @@ interface OnsAlertDialogElement {
 /**
  * @description Dialog that is displayed on top of current screen
  */
-interface OnsDialogElement {
+export interface OnsDialogElement {
   /**
    * @return {Object} Device back button handler
    * @description Retrieve the back button handler for overriding the default behavior
@@ -286,7 +214,7 @@ interface OnsDialogElement {
 /**
  * @description Switch component
  */
-interface OnsSwitchElement {
+export interface OnsSwitchElement {
   /**
    * @description If true the switch will be set to on.
    */
@@ -318,7 +246,7 @@ interface ModalOptions {
  *   Modal component that masks current screen
  *   Underlying components are not subject to any events while the modal component is shown
  */
-interface OnsModalElement{
+export interface OnsModalElement{
   /**
    * @return Device back button handler
    * @param {String} [options.animation] Animation name. Available animations are `"none"` and `"fade"`.
@@ -394,7 +322,7 @@ interface ReplacePageOptions {
 /**
  * @description A component that provides page stack management and navigation. This component does not have a visible content
  */
-interface OnsNavigatorElement {
+export interface OnsNavigatorElement {
   /**
    * @param {Object} [options] Parameter object
    * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
@@ -475,7 +403,7 @@ interface tabbarOptions {
 /**
  * @description A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs
  */
-interface OnsTabbarElement {
+export interface OnsTabbarElement {
   /**
    * @param {String} url Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>
    * @return Resolves to the new page element.
@@ -510,7 +438,7 @@ interface popoverOptions {
  * @modifier android Display an Android style popover
  * @description A component that displays a popover next to an element
  */
-interface OnsPopoverElement {
+export interface OnsPopoverElement {
   /**
    * @param {String|Event|HTMLElement} target Target element. Can be either a CSS selector, an event object or a DOM element
    * @param {Object} [options] Parameter object
@@ -548,7 +476,7 @@ interface SplitterSideOptions {
   callback?: Function;
 }
 
-interface OnsSplitterSideElement {
+export interface OnsSplitterSideElement {
   /**
    * @description Page element loaded in the splitter side.
    */
@@ -611,7 +539,7 @@ interface LazyRepeatOptions {
   configureItemScope?: number;
 }
 
-interface OnsLazyRepeatElement {
+export interface OnsLazyRepeatElement {
   /**
    * @description Refresh the list. Use this method when the data has changed.
    */
@@ -623,14 +551,14 @@ interface OnsLazyRepeatElement {
 }
 
 
-interface OnsButtonElement {
+export interface OnsButtonElement {
   /**
    * @description A boolean value that specifies if the button is disabled or not.
    */
   disabled: boolean;
 }
 
-interface OnsFabElement {
+export interface OnsFabElement {
   /**
    * @description Show the floating action button.
    */
@@ -653,7 +581,7 @@ interface OnsFabElement {
   visible: boolean;
 }
 
-interface OnsInputElement {
+export interface OnsInputElement {
   /**
    * @description The current value of the input.
    */
@@ -668,7 +596,7 @@ interface OnsInputElement {
   disabled: boolean;
 }
 
-interface OnsRangeElement {
+export interface OnsRangeElement {
   /**
    * @description A boolean value that specifies whether the input is disabled or not.
    */
@@ -679,7 +607,7 @@ interface OnsRangeElement {
   value: string;
 }
 
-interface OnsRippleElement {
+export interface OnsRippleElement {
   /**
    * @description A boolean value that specifies whether the input is disabled or not.
    */
@@ -694,7 +622,7 @@ interface SplitterContentOptions {
   callback?: Function;
 }
 
-interface OnsSplitterContentElement{
+export interface OnsSplitterContentElement{
   /**
    * @description Page element loaded in the splitter content.
    */
@@ -706,7 +634,7 @@ interface OnsSplitterContentElement{
   load(page: string, options?: SplitterContentOptions): Promise<HTMLElement>;
 }
 
-interface OnsSplitterElement {
+export interface OnsSplitterElement {
   /**
    * @description Left `<ons-splitter-side>` element.
    */
@@ -744,14 +672,14 @@ interface BackButtonOptions {
   refresh?: boolean;
 }
 
-interface OnsBackButtonElement {
+export interface OnsBackButtonElement {
   /**
    * @Options Options object.
    */
   options?: BackButtonOptions;
 }
 
-interface OnsProgressBarElement {
+export interface OnsProgressBarElement {
   /**
    * @description Current progress. Should be a value between 0 and 100.
    */
@@ -766,7 +694,7 @@ interface OnsProgressBarElement {
   indeterminate: boolean;
 }
 
-interface OnsProgressCircularElement {
+export interface OnsProgressCircularElement {
   /**
    * @description Current progress. Should be a value between 0 and 100.
    */
@@ -779,6 +707,45 @@ interface OnsProgressCircularElement {
    * @description If this property is `true`, an infinite looping animation will be shown.
    */
   indeterminate: boolean;
+}
+
+export interface OnsSpeedDialElement{
+  /**
+   * @description Show the speed dial.
+   */
+  show(): void;
+  /**
+   * @description Hide the speed dial.
+   */
+  hide(): void;
+  /**
+   * @description Show the speed dial items.
+   */
+  showItems(): void;
+  /**
+   * @description Hide the speed dial items.
+   */
+  hideItems(): void;
+  /**
+   * @description Toggle visibility.
+   */
+  toggle(): void;
+  /**
+   * @description Toggle item visibility.
+   */
+  toggleItems(): void;
+  /**
+   * @description Whether the element is disabled or not.
+   */
+  disabled: boolean;
+  /**
+   * @description Whether the element is inline or not.
+   */
+  inline: boolean;
+  /**
+   * @description Whether the element is visible or not.
+   */
+  visible: boolean;
 }
 
 //# Onsen Objects
@@ -790,7 +757,7 @@ interface onsOptions {
 /**
  * @description A global object that's used in Onsen UI. This object can be reached from the AngularJS scope
  */
-interface onsStatic {
+export interface onsStatic {
   /**
    * @return {Boolean} Will be true if Onsen UI is initialized
    * @description Returns true if Onsen UI is initialized
@@ -872,7 +839,8 @@ interface onsStatic {
   platform: onsPlatform;
 
 }
-declare var ons: onsStatic;
+
+export declare var ons: onsStatic;
 
 interface alertOptions {
   message?: string;
@@ -888,7 +856,7 @@ interface alertOptions {
   id?: string;
 }
 
-interface onsNotification {
+export interface onsNotification {
   /**
    * @param {Object} options Parameter object
    * @param {String} [options.message] Alert message
@@ -946,46 +914,7 @@ interface onsNotification {
   prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
 }
 
-interface OnsSpeedDialElement{
-  /**
-   * @description Show the speed dial.
-   */
-  show(): void;
-  /**
-   * @description Hide the speed dial.
-   */
-  hide(): void;
-  /**
-   * @description Show the speed dial items.
-   */
-  showItems(): void;
-  /**
-   * @description Hide the speed dial items.
-   */
-  hideItems(): void;
-  /**
-   * @description Toggle visibility.
-   */
-  toggle(): void;
-  /**
-   * @description Toggle item visibility.
-   */
-  toggleItems(): void;
-  /**
-   * @description Whether the element is disabled or not.
-   */
-  disabled: boolean;
-  /**
-   * @description Whether the element is inline or not.
-   */
-  inline: boolean;
-  /**
-   * @description Whether the element is visible or not.
-   */
-  visible: boolean;
-}
-
-interface onsOrientation {
+export interface onsOrientation {
   /**
    * @description Add an event listener.
    */
@@ -1010,7 +939,7 @@ interface onsOrientation {
   isLandscape(): boolean;
 }
 
-interface onsPlatform {
+export interface onsPlatform {
   /**
    * @param  {string} platform Name of the platform. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
    * @description Sets the platform used to render the elements. Useful for testing.
