@@ -1,17 +1,16 @@
 import {
   Component,
-  DynamicComponentLoader,
+  ComponentRef,
+  ViewContainerRef,
+  ComponentResolver,
   Injector,
   Directive,
   ElementRef,
   Type,
-  provide,
-  NgZone,
-  Renderer,
-  Input
+  Input,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-
-interface TabbarElement {}
 
 /**
  * @element ons-tabbar
@@ -24,7 +23,7 @@ interface TabbarElement {}
   selector: 'ons-tabbar'
 })
 export class OnsTabbar {
-  private _tabbar: TabbarElement;
+  private _tabbar: any;
 
   constructor(private _elementRef: ElementRef) {
     this._tabbar = _elementRef.nativeElement;
@@ -45,14 +44,31 @@ export class OnsTabbar {
 @Directive({
   selector: 'ons-tab'
 })
-export class OnsTab {
-  private _tab: TabbarElement;
+export class OnsTab implements OnInit, OnDestroy {
+  private _pageComponent: ComponentRef<any> = null;
+  private _pageComponentType: Type = null;
 
-  constructor(private _elementRef: ElementRef) {
-    this._tab = _elementRef.nativeElement;
+  constructor(private _elementRef: ElementRef,
+    private _viewContainer: ViewContainerRef,
+    private _resolver: ComponentResolver) {
+  }
+
+  @Input('page') set page(pageComponentType: Type) {
+    this._pageComponentType = pageComponentType;
+  }
+
+  ngOnInit() {
+
+  }
+
+  ngOnDestroy() {
+    if (this._pageComponent) {
+      this._pageComponent.destroy();
+    }
   }
 
   get element(): any {
-    return this._tab;
+    return this._elementRef.nativeElement;
   }
 }
+

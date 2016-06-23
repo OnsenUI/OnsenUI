@@ -3,6 +3,7 @@ import {
   Component,
   ViewChild,
   PageParams,
+  ONS_DIRECTIVES,
   OnsTabbar,
   OnsTab
 } from '../src/angular2-onsenui';
@@ -30,19 +31,26 @@ export class PageComponent {
 
 @Component({
   selector: 'app',
-  directives: [OnsTabbar, OnsTab],
+  directives: [ONS_DIRECTIVES],
   template: `
   <ons-tabbar>
-    <ons-tab label="Page1" icon="ion-home"></ons-tab>
-    <ons-tab label="Page2" icon="ion-help"></ons-tab>
-    <ons-tab label="Page3" icon="ion-stop"></ons-tab>
+    <div class="tab-bar__content"></div>
+    <div class="tab-bar">
+      <ons-tab label="Page1" icon="ion-home" (page)="home"></ons-tab>
+      <ons-tab label="Page2" icon="ion-help"></ons-tab>
+      <ons-tab label="Page3" icon="ion-stop"></ons-tab>
+    </div>
   </ons-tabbar>
   `
 })
 export class AppComponent {
   @ViewChild(OnsTabbar) _tabbar: OnsTabbar; 
 
+  home = PageComponent
+
   constructor() { }
 }
 
 bootstrap(AppComponent);
+
+
