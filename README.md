@@ -9,22 +9,21 @@
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
-**We just released the RC of Onsen UI 2. The new version includes Material Design, React Components and much more. Check out all the new features [here](https://onsen.io/2/)!**
+**We just released the RC of Onsen UI 2. The new version includes Material Design, React components, Angular 2 components and much more. Check out all the new features [here](https://onsen.io/2/)!**
 
 Onsen UI is:
 
 * **Open source**, free and open for all. It's designed and implemented to deliver unprecedented user interface and user experience for your mobile and hybrid apps. Onsen UI is built on top of Web Components so applications can be built using **HTML tags** web developers already know and love.
 
-* **Framework agnostic**. This means that it can be used with whatever front-end framework you prefer. However, it also provides a binding library for [**Angular 1 & 2**](https://angularjs.org/) which makes it easy to integrate our custom tags in these frameworks. [**React Components** for Onsen UI](https://onsen.io/react) are also available and they play really well with React tooling such as react-hot-loader, react-redux or mobx-react.
+* **Framework agnostic**. This means that it can be used with whatever front-end framework you prefer. However, it also provides a binding library for [**Angular 1 & 2**](https://angularjs.org/) which makes it easy to integrate our custom tags with these frameworks. [**React Components** for Onsen UI](https://onsen.io/react) are also available and they play really well with React tooling such as [React Hot Loader](https://github.com/gaearon/react-hot-loader), [Redux](https://github.com/reactjs/redux) or [MobX](https://github.com/mobxjs/mobx).
 
-* Completely integrated with Monaca kit, a complete set of tools that makes PhoneGap/Cordova development super simple. **Monaca CLI** provides **Onsen UI templates, device debugger, remote building** and any service you might need directly from your terminal. We also have [GUI and cloud alternatives](https://monaca.io/) to CLI.
+* Completely integrated with Monaca kit, a complete set of tools that makes PhoneGap/Cordova development super simple. **Monaca CLI** provides **Onsen UI templates, device debugger, remote building** and any service you might need directly from your terminal. We also have [GUI and cloud alternatives](https://monaca.io/) if you prefer that over CLI.
 
 * Beautifully made with **flat (iOS) and Material Design (Android)** flavors. It automatically styles your app depending on the platform and gives you control to customize it. Check out our [*Automatic Styling*](https://onsen.io/blog/auto-style-app-onsen/) in action. It also includes [Onsen CSS Components](http://components2.onsen.io/), a free resource of UI templates with "**theme roller**" functionality. Developers can pick and choose, grab the code they need, and they're off and running. And they can create their own templates and submit to Onsen UI to be included with other templates available.
 
 * [**Fully documented**](https://onsen.io/v2/docs/js.html). And if you want even more, we provide an [**Interactive Tutorial**](http://tutorial.onsen.io) where you can try and modify examples, export your code online and even generate Cordova projects.
 
 * Community based. Check out our [**blog**](https://onsen.io/blog/), [**forum**](https://community.onsen.io/) and [**chat**](https://gitter.im/OnsenUI/OnsenUI) to get the latest updates and directly contact the dev team. We are always very active answering questions so you don't get stuck with your apps.
-
 
 ## Browser Support
 
@@ -45,6 +44,8 @@ Onsen UI is tested with the following browsers and mobile OS.
 * [Material Design](http://www.google.co.jp/design/spec/material-design/introduction.html): For Native-like Android UI
 * [Web Components](http://webcomponents.org/): for Custom Elements
 * [AngularJS module](https://angularjs.org/): bindings are backwards compatible with Onsen UI 1
+* [Angular 2 components](https://angular.io/): components for Angular 2
+* [React components](https://facebook.github.io/react/): components for React
 
 ## Getting Started Using Templates
 
@@ -58,6 +59,7 @@ For Visual Studio developers we provide directly provide [Onsen UI extension](ht
 ```
 $ [sudo] npm -g install monaca
 $ monaca create helloworld # And choose the starter template
+$ cd helloworld # Switch to the directory
 $ monaca preview # Preview on the browser
 $ monaca debug # Preview on the real device
 ```
@@ -77,6 +79,8 @@ For React:
 ```bash
 $ npm install react-onsenui
 ```
+
+For an example that uses React, Redux and Webpack you can check out our [Weather app sample](https://github.com/argelius/react-onsenui-redux-weather). Try the [demo here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
 
 For Angular2:
 
