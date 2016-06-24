@@ -96,43 +96,18 @@ Please use this with caution. However, we are very grateful if people try it out
 
 ## How to manually build this project
 
-* Clone this repository
-
-```bash
-$ git clone https://github.com/OnsenUI/OnsenUI.git
-```
-
-* Open the terminal from OnsenUI directory
-
-```bash
-$ cd OnsenUI
-```
-
-* Install dependencies using [npm](http://nodejs.org/download/)
+Clone this repository and run the following commands to build the project:
 
 ```bash
 $ npm install
-```
-
-* Install gulp (globally)
-
-```bash
-$ [sudo] npm install -g gulp
-```
-
-* Type gulp to start building
-
-```bash
 $ gulp build
 ```
 
-The files will be built and copied into **build** and **examples/lib/onsen/** folder.
+The files will be built and copied into **build** folder.
 
 ## Running Examples
 
 ```bash
-$ npm install
-$ [sudo] npm install -g gulp
 $ gulp serve
 ```
 
