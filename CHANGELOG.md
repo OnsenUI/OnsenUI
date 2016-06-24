@@ -2,9 +2,12 @@
 CHANGELOG
 ====
 
-v2.0.0-rc.14
+v2.0.0-rc.15
 ----
  * ons-navigator: Improved iOS slide animation. Fix [#1457](https://github.com/OnsenUI/OnsenUI/issues/1457).
+
+v2.0.0-rc.14
+----
  * core: Update TypeScript definitions.
 
 v2.0.0-rc.13
