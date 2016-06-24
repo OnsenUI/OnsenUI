@@ -159,11 +159,23 @@ class TabElement extends BaseElement {
     this._boundOnClick = this._onClick.bind(this);
   }
 
+  set page(page) {
+    this._page = page;
+  }
+
+  get page() {
+    return this._page;
+  }
+
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
       throw Error('First parameter must be an instance of PageLoader.');
     }
     this._pageLoader = loader;
+  }
+
+  get pageLoader() {
+    return this._pageLoader;
   }
 
   _compile() {
@@ -425,6 +437,11 @@ class TabElement extends BaseElement {
       case 'icon':
       case 'label':
         contentReady(this, () => this._updateDefaultTemplate());
+        break;
+      case 'page':
+        if (typeof current === 'string') {
+          this._page = current;
+        }
         break;
     }
   }

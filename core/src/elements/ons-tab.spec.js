@@ -22,6 +22,26 @@ describe('OnsTabElement', () => {
     expect(element._hasDefaultTemplate).to.be.true;
   });
 
+  it('has "page" property', () => {
+    element.page = 'foobar';
+    expect(element.page).to.be.equal('foobar');
+
+    element.page = {foo: 'bar'};
+    expect(element.page.foo).to.be.equal('bar');
+
+    element.setAttribute('page', 'hoge');
+    expect(element.page).to.be.equal('hoge');
+  });
+
+  it('has "pageLoader" property', () => {
+    const pageLoader = new ons._PageLoader();
+    element.pageLoader = pageLoader;
+    expect(element.pageLoader).to.be.equal(pageLoader);
+    expect(() => {
+      element.pageLoader = 'foobar';
+    }).toThrow();
+  });
+
   describe('modifier attribute', () => {
     it('modifies the classList of the tab', () => {
       const parent = ons._util.createElement(`
