@@ -12,13 +12,13 @@ After you've made a pull request we will review it. If everything is fine and we
 
 ## Source code structure
 
-The following is an overview of how the source code is structures to give contributors an idea of where to look when making changes.
+The following is an overview of how the source code is structured to give contributors an idea of where to look when making changes.
 
 Please don't make changes directly to generated files like `onsenui.js` and `onsenui.css`!
 
 ### Components
 
-Onsen UI elements are made on top of WebComponents. The soure code is located in [core/src/](https://github.com/OnsenUI/OnsenUI/tree/master/core/src). This directory contains every single element in Onsen UI core and also internal functionality.
+Onsen UI elements are made on top of Web Components. The source code is located in [core/src/](https://github.com/OnsenUI/OnsenUI/tree/master/core/src). This directory contains every single element in Onsen UI core and also internal functionality.
 
 ### Bindings
 
