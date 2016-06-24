@@ -204,11 +204,11 @@ describe('OnsTabElement', () => {
       `);
 
       const myFunction = (value) => {
-        expect(value).to.equal(element._pageElement);
+        expect(value).to.equal(element._loadedPage.element);
         done();
       };
-      element._pageElement = true;
-      element._loadPageElement(myFunction);
+      element._loadedPage = {element: true};
+      element._loadPageElement(document.createElement('div'), myFunction);
     });
   });
 

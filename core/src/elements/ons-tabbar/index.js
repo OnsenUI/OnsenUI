@@ -312,7 +312,8 @@ class TabbarElement extends BaseElement {
    */
   loadPage(page, options = {}) {
     return new Promise(resolve => {
-      OnsTabElement.prototype._createPageElement(page, pageElement => {
+      const tab = this._tabbarElement.children[0] || new OnsTabElement();
+      tab._loadPage(page, this._contentElement, pageElement => {
         resolve(this._loadPageDOMAsync(pageElement, options));
       });
     });

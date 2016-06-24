@@ -294,7 +294,7 @@ class TabElement extends BaseElement {
    * @return {Boolean}
    */
   isLoaded() {
-    return false;
+    return !!this._loadedPage;
   }
 
   /**
@@ -303,22 +303,28 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(parent, callback, link) {
-    if (!this.page) {
-      this._pageLoader.load(this._pageTarget, parent, page => {
+    if (!this._loadedPage) {
+      this._pageLoader.load(this._page, parent, page => {
         link(page.element, element => {
           page.element = element;
-          this.page = page;
+          this._loadedPage = page;
           callback(page.element);
         });
       });
     } else {
-      callback(this.page.element);
+      callback(this._loadedPage.element);
     }
   }
 
+  _loadPage(page, parent, callback) {
+    this._pageLoader.load(page, parent, page => {
+      callback(page.element);
+    });
+  }
+
   get pageElement() {
-    if (typeof this._pageElement !== 'undefined') {
-      return this._pageElement;
+    if (this._loadedPage) {
+      return this._loadedPage.element;
     }
 
     const tabbar = this._findTabbarElement();
@@ -336,9 +342,9 @@ class TabElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
-    if (this.page) {
-      page.unload();
-      page.element = null;
+    if (this._loadedPage) {
+      this._loadedPage.unload();
+      this._loadedPage = null;
     }
   }
 

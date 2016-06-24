@@ -28,7 +28,7 @@ import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import contentReady from './content-ready';
-import pageLoader from './page-loader';
+import {defaultPageLoader, PageLoader} from './page-loader';
 
 /**
  * @object ons
@@ -52,6 +52,8 @@ ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
 ons._contentReady = contentReady;
+ons._defaultPageLoader = defaultPageLoader;
+ons.PageLoader = PageLoader;
 
 ons._readyLock = new DoorLock();
 
