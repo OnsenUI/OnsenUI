@@ -18,10 +18,11 @@ Please don't make changes directly to generated files like `onsenui.js` and `ons
 
 ### Components
 
-Components will generally have one "view" file and one "directive" file.
+Onsen UI elements are made on top of WebComponents. The soure code is located in [core/src/](https://github.com/OnsenUI/OnsenUI/tree/master/core/src). This directory contains every single element in Onsen UI core and also internal functionality.
 
-* View files are located in [/framework/views/](https://github.com/OnsenUI/OnsenUI/tree/master/framework/views). The view file contains the logic of the component. This is often the place to look when making additions or fixes to a component.
-* Directive files are found in the [/framework/directives/](https://github.com/OnsenUI/OnsenUI/tree/master/framework/directives) directory. These files define the AngularJS directives.
+### Bindings
+
+We wrap Onsen UI core with extra libraries to make it work better with some specific frameworks. The source code of these libraries is located in [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings), with the exception of [React Components](https://github.com/OnsenUI/react-onsenui).
 
 ### Style sheets
 
