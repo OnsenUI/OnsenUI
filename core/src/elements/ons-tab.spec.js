@@ -34,12 +34,12 @@ describe('OnsTabElement', () => {
   });
 
   it('has "pageLoader" property', () => {
-    const pageLoader = new ons._PageLoader();
+    const pageLoader = new ons.PageLoader();
     element.pageLoader = pageLoader;
     expect(element.pageLoader).to.be.equal(pageLoader);
     expect(() => {
       element.pageLoader = 'foobar';
-    }).toThrow();
+    }).to.throw(Error);
   });
 
   describe('modifier attribute', () => {
