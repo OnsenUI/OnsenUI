@@ -7,6 +7,7 @@ v2.0.0-rc.15
  * ons-navigator: Improved iOS slide animation. Fix [#1457](https://github.com/OnsenUI/OnsenUI/issues/1457).
  * ons.platform: Fix [#1482](https://github.com/OnsenUI/OnsenUI/issues/1482).
  * ons-modal: Support showing on init.
+ * ons-speed-dial: Add bindings for AngularJS.
 
 v2.0.0-rc.14
 ----
