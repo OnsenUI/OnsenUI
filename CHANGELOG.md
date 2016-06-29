@@ -9,6 +9,7 @@ v2.0.0-rc.15
  * ons-modal: Support showing on init.
  * ons-speed-dial: Add bindings for AngularJS 1.x.
  * ons-fab: Add bindings for AngularJS 1.x.
+ * ons-pull-hook: Fix flickering on iOS.
 
 v2.0.0-rc.14
 ----
