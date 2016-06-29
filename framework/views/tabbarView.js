@@ -284,6 +284,8 @@ limitations under the License.
        * @param {Object} [options.callback]
        */
       loadPage: function(page, options) {
+        options = options || {};
+        options._removeElement = true;
         return this._loadPage(page, options);
       },
 
