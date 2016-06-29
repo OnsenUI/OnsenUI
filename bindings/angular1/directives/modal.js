@@ -27,29 +27,31 @@
       scope: false,
       transclude: false,
 
-      link: {
-        pre: function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
-          var modal = new ModalView(scope, element, attrs);
-          $onsen.addModifierMethodsForCustomElements(modal, element);
+      compile: (element, attrs) => {
+        CustomElements.upgrade(element[0]);
 
-          $onsen.declareVarAttribute(attrs, modal);
-          element.data('ons-modal', modal);
+        return {
+          pre: function(scope, element, attrs) {
+            var modal = new ModalView(scope, element, attrs);
+            $onsen.addModifierMethodsForCustomElements(modal, element);
 
-          element[0]._ensureNodePosition();
+            $onsen.declareVarAttribute(attrs, modal);
+            element.data('ons-modal', modal);
 
-          scope.$on('$destroy', function() {
-            $onsen.removeModifierMethods(modal);
-            element.data('ons-modal', undefined);
-            modal = element = scope = attrs = null;
-          });
-        },
+            element[0]._ensureNodePosition();
 
-        post: function(scope, element) {
-          $onsen.fireComponentEvent(element[0], 'init');
-        }
+            scope.$on('$destroy', function() {
+              $onsen.removeModifierMethods(modal);
+              element.data('ons-modal', undefined);
+              modal = element = scope = attrs = null;
+            });
+          },
+
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
       }
     };
   });
-
 })();

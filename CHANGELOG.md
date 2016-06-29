@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.16
+----
+ * ons-modal: Fix [#1433](https://github.com/OnsenUI/OnsenUI/issues/1433).
+
 v2.0.0-rc.15
 ----
  * ons-navigator: Improved iOS slide animation. Fix [#1457](https://github.com/OnsenUI/OnsenUI/issues/1457).
