@@ -2,7 +2,7 @@
 module.exports = {
   name: 'lang',
   process: function(str) {
-    var lang = require('dgeni-packages/node_modules/nunjucks/src/globals').lang;
+    var lang = require('nunjucks/src/globals').lang;
 
     if (typeof str !== 'string') {
       return str;
