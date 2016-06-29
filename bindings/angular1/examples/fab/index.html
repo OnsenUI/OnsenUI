@@ -21,38 +21,11 @@
       <div class="center">Floating Action Button</div>
     </ons-toolbar>
 
-    <section style="text-align:center;">
-      <p></p>
-      <ons-fab>
-        <ons-icon
-          icon="md-car">
-        </ons-icon>
-      </ons-fab>
+    <ons-button modifier="material" style="margin: 10px" ng-click="fab.toggle()">Toggle fab</ons-button>
 
-      <ons-fab disabled>
-        <ons-icon icon="md-car"></ons-icon>
-      </ons-fab>
-
-      <ons-fab ripple>-</ons-fab>
-
-      <ons-fab modifier="mini">
-        <ons-icon icon="md-car"></ons-icon>
-      </ons-fab>
-
-      <ons-fab position="center bottom">
-        <ons-icon icon="md-car"></ons-icon>
-      </ons-fab>
-
-      <ons-fab position="right bottom">
-        <ons-icon icon="md-car"></ons-icon>
-      </ons-fab>
-
-      <ons-fab position="left bottom">
-        <ons-icon icon="md-car"></ons-icon>
-      </ons-fab>
-
-    </section>
-
+    <ons-fab var="fab" position="right bottom">
+      <ons-icon icon="md-car"></ons-icon>
+    </ons-fab>
   </ons-page>
 </body>
 </html>
