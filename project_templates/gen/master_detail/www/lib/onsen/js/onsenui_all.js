@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.16 - 2016-06-29 */
+/*! onsenui - v1.3.17 - 2016-06-29 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -42175,6 +42175,8 @@ limitations under the License.
        * @param {Object} [options.callback]
        */
       loadPage: function(page, options) {
+        options = options || {};
+        options._removeElement = true;
         return this._loadPage(page, options);
       },
 
