@@ -101,10 +101,12 @@ limitations under the License.
         // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
         // there will be no inertial scroll when scrolling down. Allowing default scrolling will
         // kill all 'touchmove' events.
-        var el = this._pageElement[0];
-        el.scrollTop = this._startScroll - event.gesture.deltaY;
-        if (el.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-          event.gesture.preventDefault();
+        if ($onsen.isAndroid()) {
+          var el = this._pageElement[0];
+          el.scrollTop = this._startScroll - event.gesture.deltaY;
+          if (el.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+            event.gesture.preventDefault();
+          }
         }
 
         if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
