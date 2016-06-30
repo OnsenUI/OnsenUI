@@ -87,12 +87,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   _calculateDelta(element, decomposition) {
     let title, label;
 
-    const rect = element.getBoundingClientRect();
+    const pageRect = element.getBoundingClientRect();
     if (decomposition.backButtonLabel.classList.contains('back-button__label')) {
-      const labelWidth = Math.round(decomposition.backButtonLabel.getBoundingClientRect().width);
-      title = Math.round(((rect.right - rect.left) / 2) - (labelWidth / 2) - 32);
+      const labelRect = decomposition.backButtonLabel.getBoundingClientRect();
+      title = Math.round((pageRect.width / 2) - (labelRect.width / 2) - labelRect.left);
     } else {
-      title = Math.round(((rect.right - rect.left) / 2) * 0.6);
+      title = Math.round((pageRect.width / 2) * 0.6);
     }
 
     if (decomposition.backButtonIcon.classList.contains('back-button__icon')) {

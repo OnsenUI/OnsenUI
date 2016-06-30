@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.0-rc.16
 ----
  * ons-modal: Fix [#1433](https://github.com/OnsenUI/OnsenUI/issues/1433).
+ * ons-navigator: Improved iOS slide animation (again).
 
 v2.0.0-rc.15
 ----
