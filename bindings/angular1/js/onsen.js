@@ -53,15 +53,17 @@ limitations under the License.
 
   function initAngularModule() {
     module.value('$onsGlobal', ons);
-    module.run(function($compile, $rootScope, $onsen, $q) {
+    module.run(function($compile, $rootScope, $onsen, $q, $http, $templateCache) {
       ons._onsenService = $onsen;
-      ons._qService = $q;
 
       $rootScope.ons = window.ons;
       $rootScope.console = window.console;
       $rootScope.alert = window.alert;
 
       ons.$compile = $compile;
+      ons._internal.q = $q;
+      ons._internal.http = $http;
+      ons._internal.templateCache = $templateCache;
     });
   }
 

@@ -78,7 +78,7 @@ internal.autoStatusBarFill = action => {
 
 internal.shouldFillStatusBar = () => internal.isEnabledAutoStatusBarFill() && platform.isWebView() && platform.isIOS7above();
 
-internal.templateStore = {
+internal.templateCache = {
   _storage: {},
 
   /**
@@ -86,21 +86,21 @@ internal.templateStore = {
    * @return {String/null} template
    */
   get(key) {
-    return internal.templateStore._storage[key] || null;
+    return internal.templateCache._storage[key] || null;
   },
 
   /**
    * @param {String} key
    * @param {String} template
    */
-  set(key, template) {
-    internal.templateStore._storage[key] = template;
+  put(key, template) {
+    internal.templateCache._storage[key] = template;
   }
 };
 
 window.document.addEventListener('_templateloaded', function(e) {
   if (e.target.nodeName.toLowerCase() === 'ons-template') {
-    internal.templateStore.set(e.templateId, e.template);
+    internal.templateCache.put(e.templateId, e.template);
   }
 }, false);
 
@@ -112,42 +112,47 @@ window.document.addEventListener('DOMContentLoaded', function() {
   function register(query) {
     const templates = window.document.querySelectorAll(query);
     for (let i = 0; i < templates.length; i++) {
-      internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
+      internal.templateCache.put(templates[i].getAttribute('id'), templates[i].textContent);
     }
   }
 }, false);
+
+internal.http = ({url, method, data = null}) => {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.onload = function(response) {
+      const data = xhr.responseText;
+      if (xhr.status >= 400 && xhr.status < 600) {
+        reject(data);
+      } else {
+        resolve({data});
+      }
+    };
+    xhr.onerror = function() {
+      throw new Error(`The page is not found: ${url}`);
+    };
+    xhr.send(data);
+  });
+};
+
+internal.q = f => new Promise(f);
 
 /**
  * @param {String} page
  * @return {Promise}
  */
 internal.getTemplateHTMLAsync = function(page) {
-  return new Promise((resolve, reject) => {
-    setImmediate(() => {
-      const cache = internal.templateStore.get(page);
+  var cache = internal.templateCache.get(page);
 
-      if (cache) {
-        const html = typeof cache === 'string' ? cache : cache[1];
-        resolve(html);
-      } else {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', page, true);
-        xhr.onload = function(response) {
-          const html = xhr.responseText;
-          if (xhr.status >= 400 && xhr.status < 600) {
-            reject(html);
-          }
-          else {
-            resolve(html);
-          }
-        };
-        xhr.onerror = function() {
-          throw new Error(`The page is not found: ${page}`);
-        };
-        xhr.send(null);
-      }
+  if (cache) {
+    return internal.q((resolve, reject) => {
+      setImmediate(() => {
+        resolve(typeof cache === 'string' ? cache : cache[1]);
+      });
     });
-  });
+  }
+  return internal.http({url: page, method: 'GET'}).then(res => res.data);
 };
 
 /**
