@@ -638,8 +638,10 @@ class CarouselElement extends BaseElement {
   }
 
   _onDragEnd(event) {
+    if (!this._lastDragEvent) {
+      return;
+    }
     this._currentElementSize = undefined;
-
     this._scroll = this._scroll - this._getScrollDelta(event);
 
     // if (!this._isWrongDirection(this._lastDragDirection) && this._getScrollDelta(event) !== 0) {
