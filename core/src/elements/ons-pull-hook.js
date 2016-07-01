@@ -407,11 +407,17 @@ class PullHookElement extends BaseElement {
     return scrollHeight > pageHeight ? -(scrollHeight - pageHeight) : 0;
   }
 
+  _disableDragLock() { // e2e tests need it
+    this._dragLockDisabled = true;
+    this._destroyEventListeners();
+    this._createEventListeners();
+  }
+
   _createEventListeners() {
     this._gestureDetector = new GestureDetector(this._pageElement, {
       dragMinDistance: 1,
       dragDistanceCorrection: false,
-      dragLockToAxis: true
+      dragLockToAxis: !this._dragLockDisabled
     });
 
     // Bind listeners
