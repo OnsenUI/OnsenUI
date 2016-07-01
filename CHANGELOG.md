@@ -2,6 +2,21 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.16
+----
+ * ons-modal: Fix [#1433](https://github.com/OnsenUI/OnsenUI/issues/1433).
+ * ons-navigator: Improved iOS slide animation (again).
+ * ons-icon: Fix [#1352](https://github.com/OnsenUI/OnsenUI/issues/1352).
+
+v2.0.0-rc.15
+----
+ * ons-navigator: Improved iOS slide animation. Fix [#1457](https://github.com/OnsenUI/OnsenUI/issues/1457).
+ * ons.platform: Fix [#1482](https://github.com/OnsenUI/OnsenUI/issues/1482).
+ * ons-modal: Support showing on init.
+ * ons-speed-dial: Add bindings for AngularJS 1.x.
+ * ons-fab: Add bindings for AngularJS 1.x.
+ * ons-pull-hook: Fix flickering on iOS.
+
 v2.0.0-rc.14
 ----
  * core: Update TypeScript definitions.
@@ -345,6 +360,14 @@ v2.0.0-beta
  * core: Add support for Browserify.
  * ons.platform: uses cordova-plugin-device if installed.
  * ons-back-button: automatically hides if navigator has only 1 page.
+
+v1.3.17
+----
+* ons-tabbar: Remove previous page when using `loadPage()`.
+
+v1.3.16
+----
+* ons-pull-hook: Fix flickering in iOS.
 
 v1.3.14
 ----

@@ -157,6 +157,13 @@ class ToolbarElement extends BaseElement {
     return this.querySelector('ons-back-button .back-button__label') || internal.nullElement;
   }
 
+  /**
+   * @return {HTMLElement}
+   */
+  _getToolbarBackButtonIconElement() {
+    return this.querySelector('ons-back-button .back-button__icon') || internal.nullElement;
+  }
+
   _compile() {
     autoStyle.prepare(this);
     this.classList.add('navigation-bar');

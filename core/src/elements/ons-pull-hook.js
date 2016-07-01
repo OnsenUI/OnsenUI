@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 
@@ -170,10 +171,12 @@ class PullHookElement extends BaseElement {
     // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
     // there will be no inertial scroll when scrolling down. Allowing default scrolling will
     // kill all 'touchmove' events.
-    const element = this._pageElement;
-    element.scrollTop = this._startScroll - event.gesture.deltaY;
-    if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-      event.gesture.preventDefault();
+    if (platform.isAndroid()) {
+      const element = this._pageElement;
+      element.scrollTop = this._startScroll - event.gesture.deltaY;
+      if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+        event.gesture.preventDefault();
+      }
     }
 
     if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {

@@ -75,7 +75,7 @@ class Platform {
   isIOS() {
     if (this._renderPlatform) {
       return this._renderPlatform === 'ios';
-    } else if (typeof device === 'object') {
+    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -93,7 +93,7 @@ class Platform {
   isAndroid() {
     if (this._renderPlatform) {
       return this._renderPlatform === 'android';
-    } else if (typeof device === 'object') {
+    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Android/i.test(device.platform);
     } else {
       return /Android/i.test(navigator.userAgent);
@@ -130,7 +130,7 @@ class Platform {
   isWP() {
     if (this._renderPlatform) {
       return this._renderPlatform === 'wp';
-    } else if (typeof device === 'object') {
+    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
       return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
@@ -179,7 +179,7 @@ class Platform {
   isBlackBerry() {
     if (this._renderPlatform) {
       return this._renderPlatform === 'blackberry';
-    } else if (typeof device === 'object') {
+    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /BlackBerry/i.test(device.platform);
     } else {
       return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
@@ -291,7 +291,7 @@ class Platform {
    * @return {Boolean}
    */
   isIOS7above() {
-    if (typeof device === 'object') {
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
     } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
