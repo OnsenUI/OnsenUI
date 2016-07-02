@@ -15,7 +15,7 @@ import {
       <div class="center">Page</div>
     </ons-toolbar>
     <div class="page__background"></div>
-    <div class="page__content">
+    <div class="page__content" id="initial-page">
       <div style="text-align: center; margin: 10px">
         <p>Home</p>
 
@@ -42,7 +42,7 @@ export class HomeComponent {
       <div class="center">Page</div>
     </ons-toolbar>
     <div class="page__background"></div>
-    <div class="page__content">
+    <div class="page__content" class="normal-page">
       <div style="text-align: center; margin: 10px">
         <p>Page</p>
       </div>
