@@ -303,13 +303,6 @@ class TabElement extends BaseElement {
   }
 
   /**
-   * @return {Boolean}
-   */
-  isLoaded() {
-    return !!this._loadedPage;
-  }
-
-  /**
    * @param {Element} parent
    * @param {Function} callback
    * @param {Function} link
@@ -317,9 +310,9 @@ class TabElement extends BaseElement {
   _loadPageElement(parent, callback, link) {
     if (!this._loadedPage) {
       this._pageLoader.load(this._page, parent, page => {
+        this._loadedPage = page;
         link(page.element, element => {
           page.element = element;
-          this._loadedPage = page;
           callback(page.element);
         });
       });
@@ -378,21 +371,17 @@ class TabElement extends BaseElement {
           setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
       } else {
-        /*
-        OnsTabbarElement.rewritables.ready(tabbar, () => {
-          setImmediate(() => {
-            // TODO: 書き直す
-            if (this.hasAttribute('page')) {
-              this._createPageElement(this.getAttribute('page'), pageElement => {
-                OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-                  this._pageElement = pageElement;
-                  this._pageElement.style.display = 'none';
-                  tabbar._contentElement.appendChild(this.pageElement);
-                });
-              });
-            }
-          });
-        });*/
+        const onReady = () => {
+          if (this._page) {
+            this._loadPageElement(tabbar._contentElement, pageElement => {
+              pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(pageElement);
+            }, (pageElement, done) => {
+              OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
+            });
+          }
+        };
+        OnsTabbarElement.rewritables.ready(tabbar, onReady);
       }
 
       this.addEventListener('click', this._boundOnClick, false);

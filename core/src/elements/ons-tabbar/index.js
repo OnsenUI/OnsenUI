@@ -489,7 +489,7 @@ class TabbarElement extends BaseElement {
 
     selectedTab.setActive();
 
-    const needLoad = !selectedTab.isLoaded() && !options.keepPage;
+    const needLoad = !options.keepPage;
 
     util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
       if (tab != selectedTab) {
@@ -532,19 +532,23 @@ class TabbarElement extends BaseElement {
 
       params.animationOptions = options.animationOptions || {};
 
-
       const link = (element, callback) => {
         rewritables.link(this, element, options, callback);
       };
 
       return new Promise(resolve => {
         selectedTab._loadPageElement(this._contentElement, pageElement => {
+          pageElement.style.display = 'block';
           resolve(this._loadPersistentPageDOM(pageElement, params));
         }, link);
       });
+    } else {
+      return new Promise(resolve => {
+        this._contentElement.appendChild(selectedTab.pageElement);
+        selectedTab.pageElement.style.display = 'block';
+        resolve(this._loadPersistentPageDOM(selectedTab.pageElement, params));
+      });
     }
-
-    return Promise.resolve(previousPageElement);
   }
 
   /**
