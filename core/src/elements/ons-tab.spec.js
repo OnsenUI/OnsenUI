@@ -29,8 +29,10 @@ describe('OnsTabElement', () => {
     element.page = {foo: 'bar'};
     expect(element.page.foo).to.be.equal('bar');
 
+    element.page = null;
     element.setAttribute('page', 'hoge');
-    expect(element.page).to.be.equal('hoge');
+    expect(element.page).to.be.equal(null);
+    expect(element.getAttribute('page')).to.be.equal('hoge');
   });
 
   it('has "pageLoader" property', () => {
