@@ -17,6 +17,7 @@ limitations under the License.
 import util from 'ons/util';
 import internal from 'ons/internal';
 
+// Default implementation for global PageLoader.
 function loadPage(page, parent, done) {
   internal.getPageHTMLAsync(page).then(html => {
     const element = util.createElement(html.trim());
@@ -35,6 +36,20 @@ export class PageLoader {
    */
   constructor(fn) {
     this._loader = fn instanceof Function ? fn : loadPage;
+  }
+
+  /**
+   * Set internal loader implementation.
+   */
+  set internalLoader(fn) {
+    if (!(fn instanceof Function)) {
+      throw Error('First parameter must be an instance of Function');
+    }
+    this._loader = fn;
+  }
+
+  get internalLoader() {
+    return this._loader;
   }
 
   /**
