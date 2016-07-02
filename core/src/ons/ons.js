@@ -52,7 +52,7 @@ ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
 ons._contentReady = contentReady;
-ons._defaultPageLoader = defaultPageLoader;
+ons.defaultPageLoader = defaultPageLoader;
 ons.PageLoader = PageLoader;
 
 ons._readyLock = new DoorLock();
