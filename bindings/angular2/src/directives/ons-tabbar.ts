@@ -23,15 +23,6 @@ import {
   selector: 'ons-tabbar'
 })
 export class OnsTabbar {
-  private _tabbar: any;
-
-  constructor(private _elementRef: ElementRef) {
-    this._tabbar = _elementRef.nativeElement;
-  }
-
-  get element(): any {
-    return this._tabbar;
-  }
 }
 
 /**
@@ -46,29 +37,42 @@ export class OnsTabbar {
 })
 export class OnsTab implements OnInit, OnDestroy {
   private _pageComponent: ComponentRef<any> = null;
-  private _pageComponentType: Type = null;
 
   constructor(private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
     private _resolver: ComponentResolver) {
+
+    // set up ons-tab's page loader
+    this._elementRef.nativeElement.pageLoader = new (<any>ons).PageLoader((page, parent, done) => {
+      this._resolver.resolveComponent(page).then(factory => {
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0);
+
+        if (this._pageComponent) {
+          this._pageComponent.destroy();
+        }
+        this._pageComponent = pageComponentRef;
+
+        const pageElement = pageComponentRef.location.nativeElement;
+        parent.appendChild(pageElement); // dirty fix to insert in correct position
+
+        done({
+          element: pageElement,
+          unload: () => {
+            pageComponentRef.destroy();
+          }
+        });
+      });
+    });
   }
 
   @Input('page') set page(pageComponentType: Type) {
-    this._pageComponentType = pageComponentType;
-  }
-
-  ngOnInit() {
-
+    this._elementRef.nativeElement.page = pageComponentType;
   }
 
   ngOnDestroy() {
     if (this._pageComponent) {
       this._pageComponent.destroy();
     }
-  }
-
-  get element(): any {
-    return this._elementRef.nativeElement;
   }
 }
 
