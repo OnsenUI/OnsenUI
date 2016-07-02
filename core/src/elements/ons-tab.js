@@ -142,7 +142,7 @@ class TabElement extends BaseElement {
 
   createdCallback() {
     this._pageLoader = defaultPageLoader;
-    this._page = this.hasAttribute('page') ? this.getAttribute('page') : null;
+    this._page = null;
 
     if (this.hasAttribute('label') || this.hasAttribute('icon')) {
       if (!this.hasAttribute('_compiled')) {
@@ -157,6 +157,10 @@ class TabElement extends BaseElement {
     }
 
     this._boundOnClick = this._onClick.bind(this);
+  }
+
+  _getPageTarget() {
+    return this.page || this.getAttribute('page');
   }
 
   set page(page) {
@@ -309,7 +313,7 @@ class TabElement extends BaseElement {
    */
   _loadPageElement(parent, callback, link) {
     if (!this._loadedPage) {
-      this._pageLoader.load(this._page, parent, page => {
+      this._pageLoader.load(this._getPageTarget(), parent, page => {
         this._loadedPage = page;
         link(page.element, element => {
           page.element = element;
@@ -372,7 +376,7 @@ class TabElement extends BaseElement {
         });
       } else {
         const onReady = () => {
-          if (this._page) {
+          if (this._getPageTarget()) {
             this._loadPageElement(tabbar._contentElement, pageElement => {
               pageElement.style.display = 'none';
               tabbar._contentElement.appendChild(pageElement);
@@ -426,11 +430,6 @@ class TabElement extends BaseElement {
       case 'icon':
       case 'label':
         contentReady(this, () => this._updateDefaultTemplate());
-        break;
-      case 'page':
-        if (typeof current === 'string') {
-          this._page = current;
-        }
         break;
     }
   }
