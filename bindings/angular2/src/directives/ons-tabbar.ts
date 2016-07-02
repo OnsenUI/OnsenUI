@@ -8,7 +8,6 @@ import {
   ElementRef,
   Type,
   Input,
-  OnInit,
   OnDestroy
 } from '@angular/core';
 
@@ -35,7 +34,7 @@ export class OnsTabbar {
 @Directive({
   selector: 'ons-tab'
 })
-export class OnsTab implements OnInit, OnDestroy {
+export class OnsTab implements OnDestroy {
   private _pageComponent: ComponentRef<any> = null;
 
   constructor(private _elementRef: ElementRef,
