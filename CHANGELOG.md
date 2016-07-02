@@ -4,6 +4,8 @@ CHANGELOG
 
 v2.0.0-rc.16
 ----
+ * ons-tabbar, ons-tab: Added "page" and "pageLoader" property. Changed to use page-loader instead of ons._internal.getPageHTMLAsync().
+ * core: Added ons.defaultPageLoader and ons.PageLoader.
  * ons-modal: Fix [#1433](https://github.com/OnsenUI/OnsenUI/issues/1433).
  * ons-navigator: Improved iOS slide animation (again).
  * ons-icon: Fix [#1352](https://github.com/OnsenUI/OnsenUI/issues/1352).
