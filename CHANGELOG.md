@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.16
 ----
+ * ons-page: Changed to accept ".content" and ".background" elements as child contents.
  * ons-modal: Fix [#1433](https://github.com/OnsenUI/OnsenUI/issues/1433).
  * ons-navigator: Improved iOS slide animation (again).
  * ons-icon: Fix [#1352](https://github.com/OnsenUI/OnsenUI/issues/1352).
