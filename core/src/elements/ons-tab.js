@@ -431,6 +431,11 @@ class TabElement extends BaseElement {
       case 'label':
         contentReady(this, () => this._updateDefaultTemplate());
         break;
+      case 'page':
+        if (typeof current === 'string') {
+          this._page = current;
+        }
+        break;
     }
   }
 }
