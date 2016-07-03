@@ -20,6 +20,22 @@ describe('OnsPageElement', () => {
     expect(element.classList.contains('page')).to.be.true;
   });
 
+  it('should fill class name automatically on content wrapper element', () => {
+    const page = ons._util.createElement(`<ons-page>
+      <div class="content">...</div>
+    </ons-page>`);
+
+    expect(page.querySelector('.page__content').textContent).to.be.equal('...');
+  });
+
+  it('should fill class name automatically on background element', () => {
+    const page = ons._util.createElement(`<ons-page>
+      <div class="background" id="test">...</div>
+    </ons-page>`);
+
+    expect(page.querySelector('.page__background').id).to.be.equal('test');
+  });
+
   it('should create background element automatically', () => {
     const page = ons._util.createElement(`<ons-page>
       <div class="page__content">...</div>

@@ -184,7 +184,7 @@ class PageElement extends BaseElement {
   }
 
   get name() {
-   return this.getAttribute('name');
+    return this.getAttribute('name');
   }
 
   get backButton() {
@@ -349,6 +349,14 @@ class PageElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
+
+    if (util.findChild(this, '.content')) {
+      util.findChild(this, '.content').classList.add('page__content');
+    }
+
+    if (util.findChild(this, '.background')) {
+      util.findChild(this, '.background').classList.add('page__background');
+    }
 
     if (!util.findChild(this, '.page__content')) {
       const content = util.create('.page__content');
