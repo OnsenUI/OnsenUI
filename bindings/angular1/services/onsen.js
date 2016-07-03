@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
+  module.factory('$onsen', function($rootScope, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
     var ModifierUtil = $onsGlobal._internal.ModifierUtil;
@@ -170,42 +170,13 @@ limitations under the License.
          * @param {String} page
          * @return {Promise}
          */
-        getPageHTMLAsync: function(page) {
-          var cache = $templateCache.get(page);
-
-          if (cache) {
-            var deferred = $q.defer();
-
-            var html = typeof cache === 'string' ? cache : cache[1];
-            deferred.resolve(this.normalizePageHTML(html));
-
-            return deferred.promise;
-
-          } else {
-            return $http({
-              url: page,
-              method: 'GET'
-            }).then(function(response) {
-              var html = response.data;
-
-              return this.normalizePageHTML(html);
-            }.bind(this));
-          }
-        },
+        getPageHTMLAsync: $onsGlobal._internal.getPageHTMLAsync,
 
         /**
          * @param {String} html
          * @return {String}
          */
-        normalizePageHTML: function(html) {
-          html = ('' + html).trim();
-
-          if (!html.match(/^<ons-page/)) {
-            html = '<ons-page _muted>' + html + '</ons-page>';
-          }
-
-          return html;
-        },
+        normalizePageHTML: $onsGlobal._internal.normalizePageHTML,
 
         /**
          * Create modifier templater function. The modifier templater generate css classes bound modifier name.
