@@ -13,6 +13,8 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
+declare var ons: any;
+
 export class ItemContext {
   constructor(public $implicit: any, public index: number, public count: number) {
   }
