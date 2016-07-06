@@ -9,6 +9,7 @@ v2.0.0-rc.16
  * ons-navigator: Improved iOS slide animation (again).
  * ons-icon: Fix [#1352](https://github.com/OnsenUI/OnsenUI/issues/1352).
  * ons-pull-hook, ons-carousel: Fix [#1004](https://github.com/OnsenUI/OnsenUI/issues/1004).
+ * ons-fab: Fix [#1496](https://github.com/OnsenUI/OnsenUI/issues/1496).
 
 v2.0.0-rc.15
 ----
