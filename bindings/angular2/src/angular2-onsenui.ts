@@ -1,3 +1,5 @@
+/// <reference path="../../../core/onsenui.d.ts" />
+
 import * as browser from '@angular/platform-browser-dynamic'
 import {Type, ComponentRef} from '@angular/core';
 
