@@ -13,6 +13,7 @@ v2.0.0-rc.16
  * ons-pull-hook, ons-carousel: Fix [#1004](https://github.com/OnsenUI/OnsenUI/issues/1004).
  * ons-fab: Fix [#1496](https://github.com/OnsenUI/OnsenUI/issues/1496).
  * ons-list-item: Fix [#1499](https://github.com/OnsenUI/OnsenUI/issues/1499)
+ * ons-tabbar: Fix [#1501](https://github.com/OnsenUI/OnsenUI/issues/1501)
 
 v2.0.0-rc.15
 ----

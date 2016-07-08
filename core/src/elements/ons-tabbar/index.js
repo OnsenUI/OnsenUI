@@ -229,6 +229,10 @@ class TabbarElement extends BaseElement {
     });
   }
 
+  attachedCallback() {
+    contentReady(this, () => this._updatePosition());
+  }
+
   get _contentElement() {
     return util.findChild(this, '.tab-bar__content');
   }
@@ -246,7 +250,6 @@ class TabbarElement extends BaseElement {
       bar.classList.add('ons-tab-bar__footer');
       bar.classList.add('ons-tabbar-inner');
 
-      this._updatePosition();
     } else {
 
       const content = util.create('.ons-tab-bar__content.tab-bar__content');
@@ -258,8 +261,6 @@ class TabbarElement extends BaseElement {
 
       this.appendChild(content);
       this.appendChild(tabbar);
-
-      this._updatePosition();
     }
   }
 
@@ -616,8 +617,6 @@ class TabbarElement extends BaseElement {
   }
 
   detachedCallback() { }
-
-  attachedCallback() { }
 
   _show() {
     const currentPageElement = this._getCurrentPageElement();
