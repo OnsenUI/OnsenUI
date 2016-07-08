@@ -134,7 +134,6 @@ class ListItemElement extends BaseElement {
   }
 
   _compile() {
-    autoStyle.prepare(this);
     this.classList.add('list__item');
 
     let left, center, right;
@@ -180,6 +179,8 @@ class ListItemElement extends BaseElement {
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
+
+    autoStyle.prepare(this);
   }
 
   attributeChangedCallback(name, last, current) {

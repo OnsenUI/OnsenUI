@@ -163,11 +163,6 @@ class PullHookElement extends BaseElement {
       return;
     }
 
-    // Ignore when dragging left and right.
-    if (event.gesture.direction === 'left' || event.gesture.direction === 'right') {
-      return;
-    }
-
     // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
     // there will be no inertial scroll when scrolling down. Allowing default scrolling will
     // kill all 'touchmove' events.
@@ -178,6 +173,7 @@ class PullHookElement extends BaseElement {
         event.gesture.preventDefault();
       }
     }
+
 
     if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
       this._transitionDragLength = event.gesture.deltaY;
@@ -411,14 +407,21 @@ class PullHookElement extends BaseElement {
     return scrollHeight > pageHeight ? -(scrollHeight - pageHeight) : 0;
   }
 
+  _disableDragLock() { // e2e tests need it
+    this._dragLockDisabled = true;
+    this._destroyEventListeners();
+    this._createEventListeners();
+  }
+
   _createEventListeners() {
     this._gestureDetector = new GestureDetector(this._pageElement, {
       dragMinDistance: 1,
-      dragDistanceCorrection: false
+      dragDistanceCorrection: false,
+      dragLockToAxis: !this._dragLockDisabled
     });
 
     // Bind listeners
-    this._gestureDetector.on('drag', this._boundOnDrag);
+    this._gestureDetector.on('dragup dragdown', this._boundOnDrag);
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
@@ -427,7 +430,7 @@ class PullHookElement extends BaseElement {
 
   _destroyEventListeners() {
     if (this._gestureDetector) {
-      this._gestureDetector.off('drag', this._boundOnDrag);
+      this._gestureDetector.off('dragup dragdown', this._boundOnDrag);
       this._gestureDetector.off('dragstart', this._boundOnDragStart);
       this._gestureDetector.off('dragend', this._boundOnDragEnd);
 

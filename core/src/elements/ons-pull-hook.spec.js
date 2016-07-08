@@ -84,18 +84,6 @@ describe('OnsPullHookElement', () => {
       expect(spy).not.to.have.been.called();
     });
 
-    it('does nothing if direction is horizontal', () => {
-      const spy = chai.spy.on(pullHook, '_translateTo');
-
-      pullHook._onDrag({
-        gesture: {
-          direction: 'left'
-        }
-      });
-
-      expect(spy).not.to.have.been.called();
-    });
-
     it('translates the element', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 

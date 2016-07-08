@@ -56,6 +56,8 @@ limitations under the License.
       'disabled', 'visible'
     ]);
 
+    MicroEvent.mixin(FabView);
+
     return FabView;
   });
 })();
