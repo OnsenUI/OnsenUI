@@ -15,8 +15,6 @@ limitations under the License.
 
 */
 
-'use strict';
-
 const generateId = (function() {
   let i = 0;
   return function() {
@@ -30,7 +28,7 @@ const generateId = (function() {
  * @param {Object} [options]
  * @param {Function} [options.log]
  */
-class DoorLock {
+export default class DoorLock {
 
   constructor(options = {}) {
     this._lockList = [];
@@ -96,5 +94,3 @@ class DoorLock {
     return this._lockList.length > 0;
   }
 }
-
-export default DoorLock;

@@ -709,7 +709,12 @@ export interface OnsProgressCircularElement {
   indeterminate: boolean;
 }
 
-export interface OnsSpeedDialElement{
+export interface PageLoader {
+  load(page: any, parent: Element, done: Function): void;
+  internalLoader: Function;
+}
+
+export interface OnsSpeedDialElement {
   /**
    * @description Show the speed dial.
    */
@@ -838,6 +843,15 @@ export interface onsStatic {
    */
   platform: onsPlatform;
 
+  /**
+   * @description Default page loader that load page template
+   */
+  defaultPageLoader: PageLoader;
+
+  /**
+   * @description PageLoader class constructor
+   */
+  PageLoader: typeof PageLoader;
 }
 
 export declare var ons: onsStatic;

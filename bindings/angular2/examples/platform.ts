@@ -38,9 +38,8 @@ import {
   `
 })
 export class AppComponent {
-  public platform: onsPlatform;
+  public platform = onsPlatform;
   constructor() { 
-    this.platform = onsPlatform;
   }
 }
 

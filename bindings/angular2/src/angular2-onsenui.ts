@@ -28,7 +28,7 @@ export function bootstrap(type: Type, providers: Array<any> = []): Promise<Compo
 
 import {OnsNavigator} from './directives/ons-navigator';
 import {OnsCarousel} from './directives/ons-carousel';
-import {OnsTabbar} from './directives/ons-tabbar';
+import {OnsTabbar, OnsTab} from './directives/ons-tabbar';
 import {OnsAlertDialog} from './directives/ons-alert-dialog';
 import {OnsPopover} from './directives/ons-popover';
 import {OnsSwitch} from './directives/ons-switch';
@@ -43,6 +43,7 @@ export const ONS_DIRECTIVES = [
   OnsNavigator,
   OnsCarousel,
   OnsTabbar,
+  OnsTab,
   OnsAlertDialog,
   OnsPopover,
   OnsSwitch,

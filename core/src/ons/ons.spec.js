@@ -18,6 +18,14 @@ describe('ons', () => {
     template = null;
   });
 
+  it('should have defaultPageLoader property', () => {
+    expect(!!ons.defaultPageLoader).to.be.true;
+  });
+
+  it('should have PageLoader property', () => {
+    expect(!!ons.PageLoader).to.be.true;
+  });
+
   describe('#disableAutoStatusBarFill()', () => {
     it('sets autoStatusBarFill to false', () => {
       const tmp = ons.isReady;

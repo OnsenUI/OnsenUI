@@ -22,6 +22,7 @@ import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
 import OnsTabbarElement from './ons-tabbar';
 import contentReady from 'ons/content-ready';
+import {PageLoader, defaultPageLoader} from 'ons/page-loader';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -140,6 +141,9 @@ class TabElement extends BaseElement {
    */
 
   createdCallback() {
+    this._pageLoader = defaultPageLoader;
+    this._page = null;
+
     if (this.hasAttribute('label') || this.hasAttribute('icon')) {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
@@ -153,6 +157,29 @@ class TabElement extends BaseElement {
     }
 
     this._boundOnClick = this._onClick.bind(this);
+  }
+
+  _getPageTarget() {
+    return this.page || this.getAttribute('page');
+  }
+
+  set page(page) {
+    this._page = page;
+  }
+
+  get page() {
+    return this._page;
+  }
+
+  set pageLoader(loader) {
+    if (!(loader instanceof PageLoader)) {
+      throw Error('First parameter must be an instance of PageLoader.');
+    }
+    this._pageLoader = loader;
+  }
+
+  get pageLoader() {
+    return this._pageLoader;
   }
 
   _compile() {
@@ -280,52 +307,39 @@ class TabElement extends BaseElement {
   }
 
   /**
-   * @return {Boolean}
-   */
-  isLoaded() {
-    return false;
-  }
-
-  /**
+   * @param {Element} parent
    * @param {Function} callback
    * @param {Function} link
    */
-  _loadPageElement(callback, link) {
-    if (!this.pageElement) {
-      this._createPageElement(this.getAttribute('page'), (element) => {
-        link(element, element => {
-          this.pageElement = element;
-          callback(element);
+  _loadPageElement(parent, callback, link) {
+    if (!this._loadedPage) {
+      this._pageLoader.load(this._getPageTarget(), parent, page => {
+        this._loadedPage = page;
+        link(page.element, element => {
+          page.element = element;
+          callback(page.element);
         });
       });
     } else {
-      callback(this.pageElement);
+      callback(this._loadedPage.element);
     }
   }
 
-  set pageElement(el) {
-    this._pageElement = el;
+  _loadPage(page, parent, callback) {
+    this._pageLoader.load(page, parent, page => {
+      callback(page.element);
+    });
   }
 
   get pageElement() {
-    if (typeof this._pageElement !== 'undefined') {
-      return this._pageElement;
+    if (this._loadedPage) {
+      return this._loadedPage.element;
     }
 
     const tabbar = this._findTabbarElement();
     const index = this._findTabIndex();
 
     return tabbar._contentElement.children[index];
-  }
-
-  /**
-   * @param {String} page
-   * @param {Function} callback
-   */
-  _createPageElement(page, callback) {
-    internal.getPageHTMLAsync(page).then(html => {
-      callback(util.createElement(html.trim()));
-    });
   }
 
   /**
@@ -337,6 +351,10 @@ class TabElement extends BaseElement {
 
   detachedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+    if (this._loadedPage) {
+      this._loadedPage.unload();
+      this._loadedPage = null;
+    }
   }
 
   attachedCallback() {
@@ -357,19 +375,17 @@ class TabElement extends BaseElement {
           setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
       } else {
-        OnsTabbarElement.rewritables.ready(tabbar, () => {
-          setImmediate(() => {
-            if (this.hasAttribute('page')) {
-              this._createPageElement(this.getAttribute('page'), pageElement => {
-                OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, pageElement => {
-                  this.pageElement = pageElement;
-                  this.pageElement.style.display = 'none';
-                  tabbar._contentElement.appendChild(this.pageElement);
-                });
-              });
-            }
-          });
-        });
+        const onReady = () => {
+          if (this._getPageTarget()) {
+            this._loadPageElement(tabbar._contentElement, pageElement => {
+              pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(pageElement);
+            }, (pageElement, done) => {
+              OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
+            });
+          }
+        };
+        OnsTabbarElement.rewritables.ready(tabbar, onReady);
       }
 
       this.addEventListener('click', this._boundOnClick, false);
@@ -414,6 +430,11 @@ class TabElement extends BaseElement {
       case 'icon':
       case 'label':
         contentReady(this, () => this._updateDefaultTemplate());
+        break;
+      case 'page':
+        if (typeof current === 'string') {
+          this._page = current;
+        }
         break;
     }
   }

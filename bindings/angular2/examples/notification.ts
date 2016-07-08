@@ -38,7 +38,7 @@ export class AppComponent {
       cancelable: true,
       callback: i => {
         if (i == -1) {
-          ons.notification.alert({message: 'You canceled it!'});
+          onsNotification.alert({message: 'You canceled it!'});
         }
       }
     });
@@ -49,9 +49,9 @@ export class AppComponent {
       message: 'What is the meaning of Life, the Universe and Everything?',
       callback: answer => {
         if (answer === '42') {
-          ons.notification.alert({message: 'That\'s the correct answer!'});
+          onsNotification.alert({message: 'That\'s the correct answer!'});
         } else {
-          ons.notification.alert({message: 'Incorrect! Please try again!'});
+          onsNotification.alert({message: 'Incorrect! Please try again!'});
         }
       }
     });
