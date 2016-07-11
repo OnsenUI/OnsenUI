@@ -1,3 +1,3 @@
-declare var ons: any;
+import {platform} from 'onsenui';
 
-export const onsPlatform = ons.platform;
+export const onsPlatform = platform;

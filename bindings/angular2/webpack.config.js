@@ -62,6 +62,10 @@ var defaultConfig = {
     ]
   },
 
+  externals: {
+    onsenui: 'ons'
+  },
+
   resolve: {
     root: [path.join(__dirname, 'src')],
     extensions: ['', '.ts', '.js']

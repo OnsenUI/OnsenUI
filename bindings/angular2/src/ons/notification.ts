@@ -1,3 +1,3 @@
-declare var ons: any;
+import {notification} from 'onsenui';
 
-export const onsNotification = ons.notification;
+export const onsNotification = notification;
