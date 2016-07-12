@@ -361,7 +361,6 @@ class NavigatorElement extends BaseElement {
     return new Promise(resolve => {
       var leavePage = this.pages[l - 1];
       var enterPage = this.pages[l - 2];
-      enterPage.style.display = 'block';
 
       options.animation = leavePage.pushedOptions.animation || options.animation;
       options.animationOptions = util.extend({}, leavePage.pushedOptions.animationOptions, options.animationOptions || {});
@@ -434,7 +433,7 @@ class NavigatorElement extends BaseElement {
         name: options.page,
         data: options.data
       });
-      element.style.display = 'none';
+      element.style.visibility = 'hidden';
       this.appendChild(element);
       resolve();
     });
@@ -483,10 +482,6 @@ class NavigatorElement extends BaseElement {
         var done = () => {
           this._isRunning = false;
 
-          if (leavePage) {
-            leavePage.style.display = 'none';
-          }
-
           enterPage._show();
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
@@ -497,10 +492,8 @@ class NavigatorElement extends BaseElement {
           resolve(enterPage);
         };
 
-        enterPage.style.display = 'none';
-
         var push = () =>  {
-          enterPage.style.display = 'block';
+          enterPage.style.visibility = '';
           if (leavePage) {
             leavePage._hide();
             animator.push(enterPage, leavePage, done);
@@ -577,7 +570,6 @@ class NavigatorElement extends BaseElement {
       );
 
       return new Promise(resolve => {
-        element.style.display = 'none';
         this.insertBefore(element, this.pages[index]);
         this.topPage.updateBackButton(true);
 
@@ -674,7 +666,6 @@ class NavigatorElement extends BaseElement {
       page: page.name,
       _linked: true
     });
-    page.style.display = 'none';
     page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
     return this._pushPage(options);
