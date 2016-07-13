@@ -457,16 +457,14 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .saveStyle()
           .queue({
             css: {
-              transform: 'translate3d(-' + delta.label + 'px, 0, 0)',
-              opacity: 0
+              transform: 'translate3d(-' + delta.label + 'px, 0, 0)'
             },
             duration: 0
           })
           .wait(this.delay)
           .queue({
             css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
+              transform: 'translate3d(0, 0, 0)'
             },
             duration: this.duration,
             timing: this.timing
@@ -517,7 +515,38 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             finish();
           }.bind(this)),
 
-        animit(leavePageDecomposition.other.concat(leavePageDecomposition.backButtonIcon))
+        animit(leavePageDecomposition.toolbar)
+          .queue({
+            css: {
+              opacity: 1
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              opacity: 0
+            },
+            duration: this.duration,
+            timing: this.timing
+          }),
+
+        animit(leavePageDecomposition.toolbarCenter)
+          .queue({
+            css: {
+              transform: 'translate3d(0, 0, 0)'
+            },
+            duration: 0
+          })
+          .wait(this.delay)
+          .queue({
+            css: {
+              transform: 'translate3d(125%, 0, 0)'
+            },
+            duration: this.duration,
+            timing: this.timing
+          }),
+
+        animit(leavePageDecomposition.backButtonLabel)
           .queue({
             css: {
               transform: 'translate3d(0, 0, 0)',
@@ -528,54 +557,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .wait(this.delay)
           .queue({
             css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 0,
-            },
-            duration: this.duration,
-            timing: this.timing
-          }),
-
-        animit(leavePageDecomposition.toolbar)
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          }),
-
-        animit(leavePageDecomposition.toolbarCenter)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(125%, 0, 0)',
-              opacity: 0,
-            },
-            duration: this.duration,
-            timing: this.timing
-          }),
-
-        animit(leavePageDecomposition.backButtonLabel)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
               transform: 'translate3d(' + delta.title + 'px, 0, 0)',
-              opacity: 0,
+              opacity: 0
             },
             duration: this.duration,
             timing: this.timing
