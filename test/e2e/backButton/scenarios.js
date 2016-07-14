@@ -28,11 +28,9 @@
 
       element(by.css('ons-button')).click();
       browser.wait(EC.visibilityOf(page2));
-      browser.wait(EC.invisibilityOf(page1));
 
       // Check that page2 was created and that it's displayed.
       expect((page2).isDisplayed()).toBeTruthy();
-      expect((page1).isDisplayed()).not.toBeTruthy();
       expect((page1).isPresent()).toBeTruthy();
 
       element(by.css('ons-back-button')).click();

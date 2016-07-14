@@ -26,11 +26,9 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         // Check that page2 was created and that it's displayed.
         expect((page2).isDisplayed()).toBeTruthy();
-        expect((page1).isDisplayed()).not.toBeTruthy();
         expect((page1).isPresent()).toBeTruthy();
 
         element(by.id('btn2')).click();
@@ -56,7 +54,6 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         element(by.id('btn3')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -87,7 +84,6 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         element(by.id('btn6-reset')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -102,7 +98,6 @@
         var page2 = element(by.id('page2'));
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         element(by.id('btn-insert1')).click();
         browser.wait(protractor.until.elementLocated(by.id('background_1'), 500));
@@ -113,9 +108,7 @@
         var page3 = element(by.id('background_1'));
         var page4 = element(by.id('background_2'));
 
-        expect(element(by.id('page1')).isDisplayed()).toBe(false);
         expect(element(by.id('page2')).isDisplayed()).toBe(true);
-        expect(element(by.id('background_1')).isDisplayed()).toBe(false);
         expect(element(by.id('background_2')).isDisplayed()).toBe(false);
 
         // pop
@@ -143,7 +136,6 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         element(by.id('btn4-device-backbutton')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -164,11 +156,9 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         // Check that page2 was created and that it's displayed.
         expect((page2).isDisplayed()).toBeTruthy();
-        expect((page1).isDisplayed()).not.toBeTruthy();
         expect((page1).isPresent()).toBeTruthy();
 
         element(by.id('btn5')).click();
@@ -197,7 +187,6 @@
       element(by.id('btn1')).click();
 
       browser.wait(EC.visibilityOf(page2));
-      browser.wait(EC.invisibilityOf(page1));
 
       browser.wait(EC.visibilityOf(element(by.id('btn2'))));
       element(by.id('btn2')).click();
