@@ -73,3 +73,13 @@ export class PageLoader {
 }
 
 export const defaultPageLoader = new PageLoader();
+
+export const instantPageLoader = new PageLoader(function(page, parent, done) {
+  const element = util.createElement(page.trim());
+  parent.appendChild(element);
+
+  done({
+    element: element,
+    unload: () => element.remove()
+  });
+});
