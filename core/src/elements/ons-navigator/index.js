@@ -798,7 +798,9 @@ class NavigatorElement extends BaseElement {
    *   [ja][/ja]
    */
   get pages() {
-    return this.children;
+    return util
+      .arrayFrom(this.children)
+      .filter(n => n.tagName === 'ONS-PAGE');
   }
 
   /**
