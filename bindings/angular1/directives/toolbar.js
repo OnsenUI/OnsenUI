@@ -30,7 +30,6 @@
             if (element[0].nodeName === 'ons-toolbar') {
               CustomElements.upgrade(element[0]);
               GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
-              element[0]._ensureNodePosition();
             }
           },
           post: function(scope, element, attrs) {
