@@ -364,7 +364,7 @@ class PageElement extends BaseElement {
   }
 
   _elementShouldBeMoved(el) {
-    if (el.className.match(/\bpage__/)) {
+    if (el.classList.contains('page__background')) {
       return false;
     }
     const tagName = el.tagName.toLowerCase();

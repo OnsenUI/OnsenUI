@@ -215,10 +215,10 @@ describe('OnsPageElement', () => {
 
   describe('#_elementShouldBeMoved()', () => {
 
-    it('ignores .page__xxx elements', () => {
+    it('ignores .page__background', () => {
       const el = selector => ons._util.create(selector);
-      expect(element._elementShouldBeMoved(el('.page__test'))).to.be.false;
-      expect(element._elementShouldBeMoved(el('.page__doge'))).to.be.false;
+      expect(element._elementShouldBeMoved(el('.page__background'))).to.be.false;
+      expect(element._elementShouldBeMoved(el('.page__doge'))).to.be.true;
       expect(element._elementShouldBeMoved(el('.doge__doge'))).to.be.true;
     });
 
