@@ -792,13 +792,15 @@ class NavigatorElement extends BaseElement {
   /**
    * @property pages
    * @readonly
-   * @type {HTMLCollection}
+   * @type {Array}
    * @description
-   *   [en]Navigator's page stack.[/en]
+   *   [en]Copy of the navigator's page stack.[/en]
    *   [ja][/ja]
    */
   get pages() {
-    return this.children;
+    return util
+      .arrayFrom(this.children)
+      .filter(n => n.tagName === 'ONS-PAGE');
   }
 
   /**
