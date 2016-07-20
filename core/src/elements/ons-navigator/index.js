@@ -241,7 +241,7 @@ class NavigatorElement extends BaseElement {
    * @type {PageLoader}
    * @description
    *   [en][/en]
-   *   [ja][/ja]
+   *   [ja]PageLoaderインスタンスを格納しています。[/ja]
    */
   get pageLoader() {
     return this._pageLoader;
@@ -263,7 +263,7 @@ class NavigatorElement extends BaseElement {
    * @type {*}
    * @description
    *   [en][/en]
-   *   [ja][/ja]
+   *   [ja]初期化時に読み込むページを指定します。`page`属性で指定した値よりも`page`プロパティに指定した値を優先します。[/ja]
    */
   get page() {
     return this._page;
