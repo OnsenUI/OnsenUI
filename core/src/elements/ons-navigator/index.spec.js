@@ -618,53 +618,46 @@ describe('OnsNavigatorElement', () => {
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);
-      nav2 = ons._util.createElement(` <ons-navigator page='backPage'></ons-navigator> `);
-      nav2.options = {cancelIfRunning: false};
+      nav2 = ons._util.createElement(`<ons-navigator></ons-navigator>`);
       document.body.appendChild(nav2);
 
-      setImmediate(() => {
-        done();
-      });
+      nav2.pushPage('backPage').then(() => done());
     });
 
     it('should not display on first page', () => {
+      const backBtn = nav2.topPage.backButton;
+      expect(backBtn.style.display).to.equal('none');
+    });
+
+    it('should display button after push', () => {
+      return nav2.pushPage('backPage').then(() => {
         const backBtn = nav2.topPage.backButton;
-        expect(backBtn.style.display).to.equal('none');
+        expect(backBtn.style.display).to.equal('inline-block');
+      });
     });
 
-    it('should display button after push', (done) => {
-        nav2.pushPage('backPage').then(() => {
-          const backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
-          done();
+    it('should display button after insert and hide after pop', () => {
+      return nav2.insertPage(0, 'backPage').then(() => {
+        var backBtn = nav2.topPage.backButton;
+        expect(backBtn.style.display).to.equal('inline-block');
+
+        return nav2.popPage().then(() => {
+          backBtn = nav2.topPage.backButton;
+          expect(backBtn.style.display).to.equal('none');
         });
+      });
     });
 
-    it('should display button after insert and hide after pop', (done) => {
-        nav2.insertPage(0, 'backPage').then(() => {
-          var backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
+    it('should display button after insert and hide after reset', () => {
+      return nav2.pushPage('backPage2').then(() => {
+        var backBtn = nav2.topPage.backButton;
+        expect(backBtn.style.display).to.equal('inline-block');
 
-          nav2.popPage().then(() => {
-            backBtn = nav2.topPage.backButton;
-            expect(backBtn.style.display).to.equal('none');
-            done();
-          });
+        return nav2.resetToPage('backPage').then(() => {
+          backBtn = nav2.topPage.backButton;
+          expect(backBtn.style.display).to.equal('none');
         });
-    });
-
-
-    it('should display button after insert and hide after reset', (done) => {
-        nav2.pushPage('backPage2').then(() => {
-          var backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
-
-          nav2.resetToPage('backPage').then(() => {
-            backBtn = nav2.topPage.backButton;
-            expect(backBtn.style.display).to.equal('none');
-            done();
-          });
-        });
+      });
     });
 
     afterEach(() => {

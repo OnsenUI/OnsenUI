@@ -487,7 +487,7 @@ class NavigatorElement extends BaseElement {
             leavePage.style.display = 'none';
           }
 
-          enterPage._show();
+          setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
           if (typeof options.callback === 'function') {
