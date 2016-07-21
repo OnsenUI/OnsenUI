@@ -630,7 +630,7 @@ class NavigatorElement extends BaseElement {
     const loader = typeof options.pageHTML === 'string' ? instantPageLoader : this._pageLoader;
 
     return new Promise(resolve => {
-      loader.load(page, this, ({element, unload}) => {
+      loader.load(page, this, {}, ({element, unload}) => {
         this._verifyPageElement(element);
         element = util.extend(element, {
           name: options.page,
