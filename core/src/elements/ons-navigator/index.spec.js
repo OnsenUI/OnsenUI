@@ -437,23 +437,20 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
     });
 
-    it('replaces the current page with a new one', (done) => {
-      nav.pushPage('info', {
-        callback: () => {
+    it('replaces the current page with a new one', () => {
+      return nav.pushPage('info')
+        .then(() => {
           expect(nav.pages.length).to.equal(2);
           const content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('info');
 
-          nav.replacePage('fuga', {
-            callback: () => {
+          return nav.replacePage('fuga')
+            .then(() => {
               expect(nav.pages.length).to.equal(2);
               const content = nav.topPage._getContentElement();
               expect(content.innerHTML).to.equal('fuga');
-              done();
-            }
-          });
-        }
-      });
+            });
+        });
     });
 
     it('returns a promise that resolves to the new top page', (done) => {

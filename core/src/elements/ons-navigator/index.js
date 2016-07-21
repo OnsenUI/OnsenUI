@@ -528,18 +528,15 @@ class NavigatorElement extends BaseElement {
    *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
    */
   replacePage(page, options = {}) {
-    options = this._prepareOptions(options, page);
-    const callback = options.callback;
+    return this.pushPage(page, options)
+      .then(resolvedValue => {
+        if (this.pages.length > 1) {
+          this.pages[this.pages.length - 2]._destroy();
+        }
+        this._updateLastPageBackButton();
 
-    options.callback = () => {
-      if (this.pages.length > 1) {
-        this.pages[this.pages.length - 2]._destroy();
-      }
-      this._updateLastPageBackButton();
-      callback && callback();
-    };
-
-    return this.pushPage(options);
+        return Promise.resolve(resolvedValue);
+      });
   }
 
   /**
