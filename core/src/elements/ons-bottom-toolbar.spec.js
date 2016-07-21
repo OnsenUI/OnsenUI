@@ -26,7 +26,7 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  it('ensures it\'s page\'s class', () => {
+  it('ensures its page\'s class', () => {
     var element = new OnsBottomToolbarElement(),
       page = new OnsPageElement();
 
