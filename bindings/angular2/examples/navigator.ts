@@ -11,6 +11,7 @@ import {
   selector: 'ons-page',
   template: `
     <ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
       <div class="center">Page2</div>
     </ons-toolbar>
     <div class="page__background"></div>
@@ -62,7 +63,7 @@ export class AppComponent {
   constructor() { }
 
   push() {
-    this._navigator.element.pushPage(PageComponent, {animation: 'none'});
+    this._navigator.element.pushPage(PageComponent);
   }
 }
 
