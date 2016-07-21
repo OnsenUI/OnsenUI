@@ -138,7 +138,6 @@ class InputElement extends BaseElement {
 
     this._boundOnInput = this._onInput.bind(this);
     this._boundOnFocusin = this._onFocusin.bind(this);
-    this._boundOnFocusout = this._onFocusout.bind(this);
     this._boundDelegateEvent = this._delegateEvent.bind(this);
   }
 
@@ -185,7 +184,6 @@ class InputElement extends BaseElement {
         this._input.parentElement.classList.add('text-input__container');
 
         this._updateLabel();
-        this._updateLabelColor();
         this._updateBoundAttributes();
         this._updateLabelClass();
         break;
@@ -230,7 +228,6 @@ class InputElement extends BaseElement {
     contentReady(this, () => {
       this._input.removeEventListener('input', this._boundOnInput);
       this._input.removeEventListener('focusin', this._boundOnFocusin);
-      this._input.removeEventListener('focusout', this._boundOnFocusout);
       this._input.removeEventListener('focus', this._boundDelegateEvent);
       this._input.removeEventListener('blur', this._boundDelegateEvent);
     });
@@ -260,21 +257,12 @@ class InputElement extends BaseElement {
     });
   }
 
-  _updateLabelColor() {
-    if (this.value.length > 0 && this._input === document.activeElement) {
-      this._helper.style.color = '';
-    }
-    else {
-      this._helper.style.color = 'rgba(0, 0, 0, 0.5)';
-    }
-  }
-
   _updateLabelClass() {
     if (this.value === '') {
-      this._helper.classList.remove('text-input__label--active');
+      this._helper.classList.remove('text-input--material__label--active');
     }
     else if (['checkbox', 'radio'].indexOf(this.getAttribute('type')) === -1){
-      this._helper.classList.add('text-input__label--active');
+      this._helper.classList.add('text-input--material__label--active');
     }
   }
 
@@ -289,16 +277,10 @@ class InputElement extends BaseElement {
 
   _onInput(event) {
     this._updateLabelClass();
-    this._updateLabelColor();
   }
 
   _onFocusin(event) {
     this._updateLabelClass();
-    this._updateLabelColor();
-  }
-
-  _onFocusout(event) {
-    this._updateLabelColor();
   }
 
   get _input() {
