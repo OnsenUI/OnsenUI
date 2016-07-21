@@ -29,11 +29,11 @@ export class PageComponent {
   }
 
   push() {
-    this._navigator.pushComponent(PageComponent, {animation: 'slide'}, {random: Math.random()});
+    this._navigator.element.pushPage(PageComponent, {animation: 'slide'});
   }
 
   pop() {
-    this._navigator.popComponent();
+    this._navigator.element.popPage();
   }
 }
 
@@ -49,7 +49,7 @@ export class PageComponent {
       <div class="page__background"></div>
       <div class="page__content" no-status-bar-fill>
         <div style="text-align: center; margin: 10px">
-          <ons-button (click)="push()">push</ons-button>
+          <ons-button (click)="push(navi)">push</ons-button>
         </div>
       </div>
     </ons-page>
@@ -62,7 +62,7 @@ export class AppComponent {
   constructor() { }
 
   push() {
-    this._navigator.pushComponent(PageComponent, {animation: 'none'}, {key: 'value'});
+    this._navigator.element.pushPage(PageComponent, {animation: 'none'});
   }
 }
 
