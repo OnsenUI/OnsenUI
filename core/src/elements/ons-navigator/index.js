@@ -365,7 +365,7 @@ class NavigatorElement extends BaseElement {
     }
 
     return new Promise(resolve => {
-      this._pageLoader.load(oldPage.name, this, ({element, unload}) => {
+      this._pageLoader.load(oldPage.name, this, oldPage.pushedOptions.data, ({element, unload}) => {
         element = util.extend(element, {
           name: oldPage.name,
           data: oldPage.data,
@@ -490,7 +490,7 @@ class NavigatorElement extends BaseElement {
 
     if (options.pageHTML) {
       return this._pushPage(options, () => new Promise(resolve => {
-        instantPageLoader.load(options.pageHTML, this, ({element, unload}) => {
+        instantPageLoader.load(options.pageHTML, this, options.data, ({element, unload}) => {
           prepare(element, unload);
           resolve();
         });
@@ -498,7 +498,7 @@ class NavigatorElement extends BaseElement {
     }
 
     return this._pushPage(options, () => new Promise(resolve => {
-      this._pageLoader.load(page, this, ({element, unload}) => {
+      this._pageLoader.load(page, this, options.data, ({element, unload}) => {
         prepare(element, unload);
         resolve();
       });

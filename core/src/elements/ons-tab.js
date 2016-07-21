@@ -313,7 +313,7 @@ class TabElement extends BaseElement {
    */
   _loadPageElement(parent, callback, link) {
     if (!this._loadedPage) {
-      this._pageLoader.load(this._getPageTarget(), parent, page => {
+      this._pageLoader.load(this._getPageTarget(), parent, {}, page => {
         this._loadedPage = page;
         link(page.element, element => {
           page.element = element;
@@ -326,7 +326,7 @@ class TabElement extends BaseElement {
   }
 
   _loadPage(page, parent, callback) {
-    this._pageLoader.load(page, parent, page => {
+    this._pageLoader.load(page, parent, {}, page => {
       callback(page.element);
     });
   }

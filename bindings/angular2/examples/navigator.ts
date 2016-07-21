@@ -63,7 +63,7 @@ export class AppComponent {
   constructor() { }
 
   push() {
-    this._navigator.element.pushPage(PageComponent);
+    this._navigator.element.pushPage(PageComponent, {data: {hoge: "fuga"}});
   }
 }
 

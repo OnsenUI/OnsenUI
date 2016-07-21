@@ -75,8 +75,8 @@ export class OnsNavigator implements OnInit, OnDestroy {
   }
 
   _createPageLoader() {
-    return new ons.PageLoader((page: any, parent: Element, done: Function) => {
-      const pageParams = new PageParams({});
+    return new ons.PageLoader((page: any, parent: Element, params: Object, done: Function) => {
+      const pageParams = new PageParams(params || {});
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: pageParams}),
         provide(OnsNavigator, {useValue: this})
