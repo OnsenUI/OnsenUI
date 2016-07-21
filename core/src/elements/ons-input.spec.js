@@ -64,22 +64,7 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('#_updateLabelColor()', () => {
-    it('sets the text color', () => {
-      element.value = 'abc';
-      element._input.focus();
-      element._updateLabelColor();
-      expect(element._helper.style.color).to.equal('');
-    });
-  });
-
   describe('#_onInput()', () => {
-    it('calls the #_updateLabelColor()', () => {
-      const spy = chai.spy.on(element, '_updateLabelColor');
-      element._onInput();
-      expect(spy).to.have.been.called.once;
-    });
-
     it('is called when the value changes', () => {
       const spy = chai.spy.on(element, '_onInput');
       element.value = 'abc';
@@ -89,17 +74,9 @@ describe('OnsInputElement', () => {
   });
 
   describe('#_onFocusin()', () => {
-    it('calls #_updateLabelColor()', () => {
-      const spy = chai.spy.on(element, '_updateLabelColor');
+    it('calls #_updateLabelClass()', () => {
+      const spy = chai.spy.on(element, '_updateLabelClass');
       element._onFocusin();
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
-  describe('#_onFocusout()', () => {
-    it('calls #_updateLabelColor()', () => {
-      const spy = chai.spy.on(element, '_updateLabelColor');
-      element._onFocusout();
       expect(spy).to.have.been.called.once;
     });
   });
