@@ -130,7 +130,7 @@ describe('OnsPageElement', () => {
   describe('#_canAnimateToolbar()', () => {
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;
-      element._registerToolbar(new OnsToolbarElement());
+      element.insertBefore(new OnsToolbarElement(), element.children[0]);
       expect(element._canAnimateToolbar()).to.be.true;
     });
 
@@ -138,47 +138,6 @@ describe('OnsPageElement', () => {
       expect(element._canAnimateToolbar()).to.be.false;
       element.lastChild.appendChild(new OnsToolbarElement());
       expect(element._canAnimateToolbar()).to.be.true;
-    });
-  });
-
-  describe('#_getToolbarElement()', () => {
-    it('returns the toolbar element', () => {
-      element._registerToolbar(new OnsToolbarElement());
-      expect(element._getToolbarElement()).to.be.ok;
-    });
-  });
-
-  describe('#_registerToolbar()', () => {
-    it('inserts toolbar as a child', () => {
-      var spy = chai.spy.on(element, 'insertBefore');
-      var toolbarElement = new OnsToolbarElement();
-      element._registerToolbar(toolbarElement);
-      expect(spy).to.have.been.called.with(toolbarElement, element.children[0]);
-    });
-
-    it('inserts toolbar as a child after status-bar-fill', () => {
-      var fill = document.createElement('div');
-      fill.classList.add('page__status-bar-fill');
-      element.insertBefore(fill, element.firstChild);
-      var toolbarElement = new OnsToolbarElement();
-      var spy = chai.spy.on(element, 'insertBefore');
-      element._registerToolbar(toolbarElement);
-      expect(spy).to.have.been.called.with(toolbarElement, element.children[1]);
-    });
-  });
-
-  describe('#_getBottomToolbarElement()', () => {
-    it('inserts bottomToolbar as a child', () => {
-      element._registerBottomToolbar(new OnsBottomToolbarElement());
-      expect(element._getBottomToolbarElement()).to.be.ok;
-    });
-  });
-
-  describe('#registerExtraElement()', () => {
-    it('attaches a new child to the page', () => {
-      expect(element.lastChild.className).to.equal('page__content');
-      element._registerExtraElement(document.createElement('div'));
-      expect(element.lastChild.className).to.equal('page__extra');
     });
   });
 
@@ -242,6 +201,39 @@ describe('OnsPageElement', () => {
       div1.innerHTML = '<ons-page></ons-page>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+
+    it('adds elements in correct order', () => {
+      const div = document.createElement('div');
+      div.innerHTML = '<ons-page><span>test</span><ons-toolbar></ons-toolbar></ons-page>';
+      const elements = div.children[0].children;
+      expect(elements[0].tagName.toLowerCase()).to.equal('ons-toolbar');
+      expect(elements[1].className).to.equal('page__background');
+      expect(elements[2].className).to.equal('page__content');
+    });
+  });
+
+  describe('#_elementShouldBeMoved()', () => {
+
+    it('ignores .page__background', () => {
+      const el = selector => ons._util.create(selector);
+      expect(element._elementShouldBeMoved(el('.page__background'))).to.be.false;
+      expect(element._elementShouldBeMoved(el('.page__doge'))).to.be.true;
+      expect(element._elementShouldBeMoved(el('.doge__doge'))).to.be.true;
+    });
+
+    it('handles fabs accordingly', () => {
+      const toolbar = document.createElement('ons-fab');
+      expect(element._elementShouldBeMoved(toolbar)).to.be.true;
+      toolbar.setAttribute('position', 'top right');
+      expect(element._elementShouldBeMoved(toolbar)).to.be.false;
+    });
+
+    it('moves inline elements', () => {
+      const toolbar = document.createElement('ons-toolbar');
+      expect(element._elementShouldBeMoved(toolbar)).to.be.false;
+      toolbar.setAttribute('inline', '');
+      expect(element._elementShouldBeMoved(toolbar)).to.be.true;
     });
   });
 

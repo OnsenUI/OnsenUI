@@ -125,6 +125,7 @@ class ModalElement extends BaseElement {
 
   _compile() {
     this.style.display = 'none';
+    this.style.zIndex = 10001;
     this.classList.add('modal');
 
     if (!util.findChild(this, '.modal__content')) {
@@ -150,30 +151,7 @@ class ModalElement extends BaseElement {
   }
 
   attachedCallback() {
-    setImmediate(this._ensureNodePosition.bind(this));
     this.onDeviceBackButton = () => undefined;
-  }
-
-  _ensureNodePosition() {
-    if (!this.parentNode || this.hasAttribute('inline')) {
-      return;
-    }
-
-    if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
-      var page = this;
-      for (;;) {
-        page = page.parentNode;
-
-        if (!page) {
-          return;
-        }
-
-        if (page.nodeName.toLowerCase() === 'ons-page') {
-          break;
-        }
-      }
-      page._registerExtraElement(this);
-    }
   }
 
   /**
