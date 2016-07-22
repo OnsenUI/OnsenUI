@@ -14,8 +14,7 @@ import {
       <div class="left"><ons-back-button>Back</ons-back-button></div>
       <div class="center">Page2</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content" no-status-bar-fill>
+    <div class="content">
       <div style="text-align: center; margin: 10px">
         <ons-button (click)="push()">push</ons-button>
         <ons-button (click)="pop()">pop</ons-button>
@@ -30,7 +29,7 @@ export class PageComponent {
   }
 
   push() {
-    this._navigator.element.pushPage(PageComponent, {animation: 'slide'});
+    this._navigator.element.pushPage(PageComponent, {animation: 'slide', data: {aaa: 'bbb'}});
   }
 
   pop() {
@@ -39,32 +38,37 @@ export class PageComponent {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'ons-page',
   directives: [ONS_DIRECTIVES],
   template: `
-  <ons-navigator>
-    <ons-page>
-      <ons-toolbar>
-        <div class="center">Page</div>
-      </ons-toolbar>
-      <div class="page__background"></div>
-      <div class="page__content" no-status-bar-fill>
-        <div style="text-align: center; margin: 10px">
-          <ons-button (click)="push(navi)">push</ons-button>
-        </div>
+    <ons-toolbar>
+      <div class="center">Page</div>
+    </ons-toolbar>
+    <div class="content">
+      <div style="text-align: center; margin: 10px">
+        <ons-button (click)="push(navi)">push</ons-button>
       </div>
-    </ons-page>
-  </ons-navigator>
+    </div>
   `
 })
-export class AppComponent {
-  @ViewChild(OnsNavigator) private _navigator: OnsNavigator;
-
-  constructor() { }
+class DefaultPageComponent {
+  constructor(private _navigator: OnsNavigator) {
+  }
 
   push() {
     this._navigator.element.pushPage(PageComponent, {data: {hoge: "fuga"}});
   }
+}
+
+@Component({
+  selector: 'app',
+  directives: [ONS_DIRECTIVES],
+  template: `
+  <ons-navigator [page]="page"></ons-navigator>
+  `
+})
+export class AppComponent {
+  page = DefaultPageComponent
 }
 
 bootstrap(AppComponent);
