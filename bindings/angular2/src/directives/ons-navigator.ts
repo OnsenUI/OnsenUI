@@ -52,7 +52,9 @@ export class NavigatorPage {
 @Directive({
   selector: 'ons-navigator'
 })
-export class OnsNavigator implements OnInit, OnDestroy {
+export class OnsNavigator implements OnDestroy {
+  private _lastPageLoader: Function;
+
   /**
    * @input page
    * @type {Type}
@@ -71,7 +73,8 @@ export class OnsNavigator implements OnInit, OnDestroy {
     private _resolver: ComponentResolver,
     private _viewContainer: ViewContainerRef,
     private _injector: Injector) {
-      this.element.pageLoader = this._createPageLoader();
+    this._lastPageLoader = this.element.pageLoader;
+    this.element.pageLoader = this._createPageLoader();
   }
 
   _createPageLoader() {
@@ -96,10 +99,8 @@ export class OnsNavigator implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-  }
-
   ngOnDestroy() {
+    this.element.pageLoader = this._lastPageLoader;
   }
 }
 
