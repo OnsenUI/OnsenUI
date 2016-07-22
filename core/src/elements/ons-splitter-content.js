@@ -15,31 +15,6 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-
-const rewritables = {
-  /**
-   * @param {Element} element
-   * @param {Function} callback
-   */
-  ready(element, callback) {
-    setImmediate(callback);
-  },
-
-  /**
-   * @param {Element} element
-   * @param {HTMLFragment} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(element, target, options, callback) {
-    callback(target);
-  }
-};
-
 /**
  * @element ons-splitter-content
  * @category splitter
@@ -69,37 +44,7 @@ const rewritables = {
  *   </ons-splitter-side>
  * </ons-splitter>
  */
-class SplitterContentElement extends BaseElement {
-
-  /**
-   * @attribute page
-   * @type {String}
-   * @description
-   *   [en]
-   *     The url of the content page. If this attribute is used the content will be loaded from a `<ons-template>` tag or a remote file.
-   *
-   *     It is also possible to put `<ons-page>` element as a child of the element.
-   *   [/en]
-   *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
-   */
-  createdCallback() {
-    this._page = null;
-  }
-
-  attachedCallback() {
-    if (!util.match(this.parentNode, 'ons-splitter')) {
-      throw new Error(`"ons-splitter-content" must have "ons-splitter" as parentNode.`);
-    }
-    this.attributeChangedCallback('page', null, this.getAttribute('page'));
-  }
-
-  detachedCallback() {}
-
-  attributeChangedCallback(name, last, current) {
-    if (name === 'page' && current !== null) {
-      rewritables.ready(this, () => this.load(current));
-    }
-  }
+class SplitterContentElement extends OnsNavigatorElement {
 
   /**
    * @property page
@@ -110,7 +55,7 @@ class SplitterContentElement extends BaseElement {
    *   [ja][/ja]
    */
   get page() {
-    return this._page;
+    return this.topPage;
   }
 
   /**
@@ -129,39 +74,10 @@ class SplitterContentElement extends BaseElement {
    *   [ja][/ja]
    */
   load(page, options = {}) {
-    this._page = page;
-    const callback = options.callback;
-
-    return internal.getPageHTMLAsync(page).then(html => new Promise(resolve => {
-      rewritables.link(this, util.createFragment(html), options, fragment => {
-        this._hide();
-        this.innerHTML = '';
-
-        this.appendChild(fragment);
-
-        this._show();
-        callback && callback();
-        resolve(this.firstChild);
-      });
-    }));
-  }
-
-  _show() {
-    util.propagateAction(this, '_show');
-  }
-
-  _hide() {
-    util.propagateAction(this, '_hide');
-  }
-
-  _destroy() {
-    util.propagateAction(this, '_destroy');
-    this.remove();
+    return this.resetToPage(page, options);
   }
 }
 
 window.OnsSplitterContentElement = document.registerElement('ons-splitter-content', {
   prototype: SplitterContentElement.prototype
 });
-
-window.OnsSplitterContentElement.rewritables = rewritables;
