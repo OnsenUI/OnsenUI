@@ -17,9 +17,7 @@ describe('OnsNavigatorElement', () => {
     nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
 
-    setImmediate(() => {
-      done();
-    });
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -34,6 +32,17 @@ describe('OnsNavigatorElement', () => {
   it('provides \'page\' attribute', () => {
     const content = nav.topPage._getContentElement();
     expect(content.innerHTML).to.equal('hoge');
+  });
+
+  it('provides \'page\' property', () => {
+    nav.page = 'hoge';
+    expect(nav.page).to.equal('hoge');
+  });
+
+  it('provides \'pageLoader\' property', () => {
+    expect(nav.pageLoader).to.be.ok;
+    nav.pageLoader = new ons.PageLoader();
+    expect(nav.pageLoader).to.be.ok;
   });
 
   it('provides \'animatorFactory\' property', () => {
@@ -65,7 +74,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
-      nav.pushPage({
+      nav.pushPage(null, {
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -385,7 +394,7 @@ describe('OnsNavigatorElement', () => {
     it('inserts a new page on a given index using `options.pageHTML`', (done) => {
       nav.pushPage('info', {
         callback: () => {
-          nav.insertPage(0, {pageHTML: '<ons-page>fuga</ons-page>'});
+          nav.insertPage(0, null, {pageHTML: '<ons-page>fuga</ons-page>'});
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
@@ -622,9 +631,7 @@ describe('OnsNavigatorElement', () => {
       nav2.options = {cancelIfRunning: false};
       document.body.appendChild(nav2);
 
-      setImmediate(() => {
-        done();
-      });
+      setImmediate(done);
     });
 
     it('should not display on first page', () => {

@@ -44,7 +44,7 @@ export class OnsTab implements OnDestroy {
     private _resolver: ComponentResolver) {
 
     // set up ons-tab's page loader
-    this._elementRef.nativeElement.pageLoader = new ons.PageLoader((page, parent, done) => {
+    this._elementRef.nativeElement.pageLoader = new ons.PageLoader((page, parent, params, done) => {
       this._resolver.resolveComponent(page).then(factory => {
         const pageComponentRef = this._viewContainer.createComponent(factory, 0);
 
