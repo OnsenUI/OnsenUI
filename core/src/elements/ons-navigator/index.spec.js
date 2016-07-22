@@ -17,9 +17,7 @@ describe('OnsNavigatorElement', () => {
     nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
 
-    setImmediate(() => {
-      done();
-    });
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -633,9 +631,7 @@ describe('OnsNavigatorElement', () => {
       nav2.options = {cancelIfRunning: false};
       document.body.appendChild(nav2);
 
-      setImmediate(() => {
-        done();
-      });
+      setImmediate(done);
     });
 
     it('should not display on first page', () => {

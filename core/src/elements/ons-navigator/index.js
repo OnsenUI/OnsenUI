@@ -277,25 +277,30 @@ class NavigatorElement extends BaseElement {
   attachedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
-    contentReady(this, () => {
-      rewritables.ready(this, () => {
-        if (this.pages.length === 0 && this._getPageTarget()) {
-          this.pushPage(this._getPageTarget(), {animation: 'none'});
-        } else {
-          for (var i = 0; i < this.pages.length; i++) {
-            if (this.pages[i].nodeName !== 'ONS-PAGE') {
-              throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
-            }
-          }
 
-          if (this.topPage) {
-            setTimeout(() => {
-              this.topPage._show();
-              this._updateLastPageBackButton();
-            }, 0);
+    rewritables.ready(this, () => {
+      if (this.pages.length === 0 && this._getPageTarget()) {
+        this.pushPage(this._getPageTarget(), {animation: 'none'});
+      } if (this.pages.length > 0) {
+        for (var i = 0; i < this.pages.length; i++) {
+          if (this.pages[i].nodeName !== 'ONS-PAGE') {
+            throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
           }
         }
-      });
+
+        if (this.topPage) {
+          setImmediate(() => {
+            this.topPage._show();
+            this._updateLastPageBackButton();
+          });
+        }
+      } else {
+        contentReady(this, () => {
+          if (this.pages.length === 0 && this._getPageTarget()) {
+            this.pushPage(this._getPageTarget(), {animation: 'none'});
+          }
+        });
+      }
     });
   }
 
