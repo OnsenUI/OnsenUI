@@ -308,25 +308,6 @@ class PageElement extends BaseElement {
     return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
 
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerToolbar(element) {
-    this.insertBefore(element, this.children[0]);
-  }
-
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerBottomToolbar(element) {
-    this.classList.add('page-with-bottom-toolbar');
-    this.appendChild(element);
-  }
-
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -362,12 +343,14 @@ class PageElement extends BaseElement {
       const content = util.create('.page__content');
 
       util.arrayFrom(this.childNodes).forEach(node => {
-        if (!node.classList || !node.classList.contains('page__background')) {
+        if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
           content.appendChild(node);
         }
       });
 
-      this.appendChild(content);
+      const prevNode = util.findChild(this, '.page__background') || util.findChild(this, 'ons-toolbar');
+
+      this.insertBefore(content, prevNode && prevNode.nextSibling);
     }
 
     if (!util.findChild(this, '.page__background')) {
@@ -380,14 +363,16 @@ class PageElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _registerExtraElement(element) {
-    let extra = util.findChild(this, '.page__extra');
-    if (!extra) {
-      extra = util.create('.page__extra', {zIndex: 10001});
-      this.appendChild(extra);
+  _elementShouldBeMoved(el) {
+    if (el.classList.contains('page__background')) {
+      return false;
     }
-
-    extra.appendChild(element);
+    const tagName = el.tagName.toLowerCase();
+    if (tagName === 'ons-fab') {
+      return !el.hasAttribute('position');
+    }
+    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial'];
+    return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
   _show() {
@@ -426,6 +411,10 @@ class PageElement extends BaseElement {
     }
 
     util.propagateAction(this._contentElement, '_destroy');
+
+    if (this.unload instanceof Function) {
+      this.unload();
+    }
 
     this.remove();
   }

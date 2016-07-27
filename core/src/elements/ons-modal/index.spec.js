@@ -126,23 +126,6 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#_ensureNodePosition()', () => {
-    it('does not register extra element when has no parent ons-page', () => {
-      const spy = chai.spy.on(element, '_registerExtraElement');
-      expect(element._ensureNodePosition()).not.to.be.ok;
-      expect(spy).to.not.have.been.called();
-    });
-
-    it('registers extra element when has parent ons-page', () => {
-      const element = new OnsModalElement();
-      const parent = new OnsPageElement();
-      const spy = chai.spy.on(parent, '_registerExtraElement');
-      parent._registerExtraElement(element);
-      element._ensureNodePosition();
-      expect(spy).to.have.been.called.twice;
-    });
-  });
-
   describe('#attributeChangedCallback()', () => {
     it('triggers \'onModifierChanged()\' method', () => {
       const spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');

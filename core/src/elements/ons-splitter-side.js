@@ -246,7 +246,7 @@ class CollapseMode {
  *  [en]
  *    The `<ons-splitter-side>` element is used as a child element of `<ons-splitter>`.
  *
- *    It will be displayed on either the left or right side of the `<ons-splitte-content>` element.
+ *    It will be displayed on either the left or right side of the `<ons-splitter-content>` element.
  *
  *    It supports two modes: collapsed and split. When it's in collapsed mode it will be hidden from view and can be displayed when the user swipes the screen or taps a button. In split mode the element is always shown. It can be configured to automatically switch between the two modes depending on the screen size.
  *  [/en]
