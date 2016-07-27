@@ -373,7 +373,8 @@ class NavigatorElement extends BaseElement {
     }
 
     return new Promise(resolve => {
-      this._pageLoader.load(oldPage.name, this, oldPage.pushedOptions.data, ({element, unload}) => {
+      const options = {page: oldPage.name, parent: this, params: oldPage.pushedOptions.data};
+      this._pageLoader.load(options, ({element, unload}) => {
         element = util.extend(element, {
           name: oldPage.name,
           data: oldPage.data,
@@ -498,7 +499,7 @@ class NavigatorElement extends BaseElement {
 
     if (options.pageHTML) {
       return this._pushPage(options, () => new Promise(resolve => {
-        instantPageLoader.load(options.pageHTML, this, options.data, ({element, unload}) => {
+        instantPageLoader.load({page: options.pageHTML, parent: this, params: options.data}, ({element, unload}) => {
           prepare(element, unload);
           resolve();
         });
@@ -506,7 +507,7 @@ class NavigatorElement extends BaseElement {
     }
 
     return this._pushPage(options, () => new Promise(resolve => {
-      this._pageLoader.load(page, this, options.data, ({element, unload}) => {
+      this._pageLoader.load({page, parent: this, params: options.data}, ({element, unload}) => {
         prepare(element, unload);
         resolve();
       });
@@ -638,7 +639,7 @@ class NavigatorElement extends BaseElement {
     const loader = typeof options.pageHTML === 'string' ? instantPageLoader : this._pageLoader;
 
     return new Promise(resolve => {
-      loader.load(page, this, {}, ({element, unload}) => {
+      loader.load({page, parent: this}, ({element, unload}) => {
         this._verifyPageElement(element);
         element = util.extend(element, {
           name: options.page,
