@@ -8,26 +8,19 @@ import {
   selector: 'app',
   directives: [ONS_DIRECTIVES],
   template: `
-  <ons-page class="page">
+  <ons-page>
     <ons-toolbar>
       <div class="center">Pull Hook</div>
     </ons-toolbar>
 
-    <div class="page__background"></div>
-    <div class="page__content">
-
+    <div class="content">
       <div class="scroll">
-        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState(pullHook)" [onAction]="onAction" #pullHook>
+        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
           {{message}}
         </ons-pull-hook>
 
         <ons-list>
-          <ons-list-item>Item 1</ons-list-item>
-          <ons-list-item>Item 2</ons-list-item>
-          <ons-list-item>Item 3</ons-list-item>
-          <ons-list-item>Item 4</ons-list-item>
-          <ons-list-item>Item 5</ons-list-item>
-          <ons-list-item>Item 6</ons-list-item>
+          <ons-list-item *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
         </ons-list>
       </div>
     </div>
@@ -38,17 +31,20 @@ export class AppComponent {
 
   message: string = 'Pull down to refresh';
 
+  items: number[] = [1, 2, 3, 4, 5];
+
   constructor() {
   }
 
-  onAction(done: Function) {
-    setTimeout(() => { 
-      done();
+  onAction($event) {
+    setTimeout(() => {
+      $event.done();
+      this.items.push(0);
     }, 1000);
   }
 
-  onChangeState(pullHook) {
-    switch (pullHook.state) {
+  onChangeState($event) {
+    switch ($event.state) {
       case 'initial':
         this.message = 'Pull down to refresh';
         break;

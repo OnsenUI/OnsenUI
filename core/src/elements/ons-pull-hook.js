@@ -448,11 +448,13 @@ class PullHookElement extends BaseElement {
 
     this._pageElement = this._scrollElement.parentElement;
 
-    if (!this._pageElement.classList.contains('page__content')) {
-      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
-    }
-
     this._createEventListeners();
+
+    setImmediate(() => {
+      if (!this._pageElement.classList.contains('page__content')) {
+        throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+      }
+    });
   }
 
   detachedCallback() {

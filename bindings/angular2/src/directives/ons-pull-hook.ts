@@ -5,7 +5,7 @@ import {
   Input,
   Output,
   OnDestroy,
-  OnInit
+  EventEmitter
 } from '@angular/core';
 
 /**
@@ -18,22 +18,23 @@ import {
 @Directive({
   selector: 'ons-pull-hook'
 })
-export class OnsPullHook implements OnDestroy, OnInit {
+export class OnsPullHook implements OnDestroy {
   private _element: any;
 
   /**
-   * @input onAction
-   * @type {Function}
+   * @output action
    * @desc [en]Action to trigger.[/en]
    */
-  @Input() onAction: Function;
+  @Output('action') action = new EventEmitter();
+
+  /**
+   * @output changestate
+   * @desc [en][/en]
+   */
 
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
-  }
-
-  ngOnInit() {
-    this._element.onAction = this.onAction;
+    this._element.onAction = done => this.action.emit({done});
   }
 
   ngOnDestroy() {
