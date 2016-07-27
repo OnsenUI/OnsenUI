@@ -16,6 +16,9 @@ v2.0.0-rc.16
  * ons-list-item: Fix [#1499](https://github.com/OnsenUI/OnsenUI/issues/1499)
  * ons-tabbar: Fix [#1501](https://github.com/OnsenUI/OnsenUI/issues/1501)
  * ons-navigator: Fix [#1512](https://github.com/OnsenUI/OnsenUI/issues/1512). This changes `pages` property from an `HTMLCollection` to an `Array`.
+ * ons-page, ons-toolbar, ons-bottom-toolbar, ons-modal, ons-speed-dial: Improved location logic
+ * ons-fab: Now stays outside of `.page__content` when it has a `position` attribute.
+ * ons-modal: Fix [#1511](https://github.com/OnsenUI/OnsenUI/issues/1511).
 
 v2.0.0-rc.15
 ----

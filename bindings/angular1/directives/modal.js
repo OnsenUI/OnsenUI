@@ -38,8 +38,6 @@
             $onsen.declareVarAttribute(attrs, modal);
             element.data('ons-modal', modal);
 
-            element[0]._ensureNodePosition();
-
             scope.$on('$destroy', function() {
               $onsen.removeModifierMethods(modal);
               element.data('ons-modal', undefined);

@@ -26,14 +26,14 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  it('ensures it\'s location in the page', () => {
+  it('ensures its page\'s class', () => {
     var element = new OnsBottomToolbarElement(),
       page = new OnsPageElement();
 
     document.body.appendChild(page);
     page.appendChild(element);
 
-    expect(element.parentNode).to.equal(page);
+    expect(page.classList.contains('page-with-bottom-toolbar')).to.be.true;
 
     document.body.removeChild(page);
   });

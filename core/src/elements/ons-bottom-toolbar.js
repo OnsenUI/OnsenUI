@@ -53,21 +53,11 @@ class BottomToolbarElement extends BaseElement {
     this.classList.add('bottom-bar');
 
     ModifierUtil.initModifier(this, scheme);
-
-    this._tryToEnsureNodePosition();
-    setImmediate(() => this._tryToEnsureNodePosition());
   }
 
   attachedCallback() {
-    this._tryToEnsureNodePosition();
-    setImmediate(() => this._tryToEnsureNodePosition());
-  }
-
-  _tryToEnsureNodePosition() {
-    const page = util.findParent(this, 'ons-page');
-
-    if (page && page !== this.parentNode) {
-      page._registerBottomToolbar(this);
+    if (util.match(this.parentNode, 'ons-page')) {
+      this.parentNode.classList.add('page-with-bottom-toolbar');
     }
   }
 
