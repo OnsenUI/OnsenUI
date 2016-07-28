@@ -25,6 +25,7 @@ import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
+import {defaultPageLoader, PageLoader} from 'ons/page-loader';
 import OnsSplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
@@ -441,6 +442,8 @@ class SplitterSideElement extends BaseElement {
    */
 
   createdCallback() {
+    this._page = null;
+    this._pageLoader = defaultPageLoader;
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
 
@@ -451,7 +454,19 @@ class SplitterSideElement extends BaseElement {
       defaultAnimation: this.getAttribute('animation')
     });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
+    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
+
+    contentReady(this, () => {
+      this._watchedAttributes.forEach(e => this._update(e));
+
+      rewritables.ready(this, () => {
+        const page = this._getPageTarget();
+
+        if (page) {
+          this.load(page);
+        }
+      });
+    });
   }
 
   attachedCallback() {
@@ -464,10 +479,10 @@ class SplitterSideElement extends BaseElement {
     if (!this.hasAttribute('side')) {
       this.setAttribute('side', 'left');
     }
+  }
 
-    contentReady(this, () => {
-      this._watchedAttributes.forEach(e => this._update(e));
-    });
+  _getPageTarget() {
+    return this._page || this.getAttribute('page');
   }
 
   detachedCallback() {
@@ -525,12 +540,6 @@ class SplitterSideElement extends BaseElement {
     }
   }
 
-  _updatePage(page = this.getAttribute('page')) {
-    if (page !== null) {
-      rewritables.ready(this, () => this.load(page));
-    }
-  }
-
   _updateOpenThreshold(threshold = this.getAttribute('open-threshold')) {
     this._threshold = Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
   }
@@ -575,14 +584,37 @@ class SplitterSideElement extends BaseElement {
 
   /**
    * @property page
-   * @readonly
-   * @type {HTMLElement}
+   * @type {*}
    * @description
-   *   [en]Page element loaded in the splitter side.[/en]
-   *   [ja][/ja]
+   *   [en]Page location to load in the splitter side.[/en]
+   *   [ja]この要素内に表示するページを指定します。[/ja]
    */
   get page() {
     return this._page;
+  }
+
+  /**
+   * @param {*} page
+   */
+  set page(page) {
+    this._page = page;
+  }
+
+  /**
+   * @property pageLoader
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+  get pageLoader() {
+    return this._pageLoader;
+  }
+
+  set pageLoader(loader) {
+    if (!(loader instanceof PageLoader)) {
+      throw Error('First parameter must be an instance of PageLoader.');
+    }
+    this._pageLoader = loader;
   }
 
   /**
@@ -681,20 +713,24 @@ class SplitterSideElement extends BaseElement {
    */
   load(page, options = {}) {
     this._page = page;
-    const callback = options.callback;
+    const callback = options.callback || (() => {});
 
-    return internal.getPageHTMLAsync(page).then(html => new Promise(resolve => {
-      rewritables.link(this, util.createFragment(html), options, fragment => {
-        this._hide();
+    return new Promise(resolve => {
+      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+        rewritables.link(this, element, options, fragment => {
+          this._hide();
+          while (this.firstChild) {
+            this.firstChild.remove();
+          }
 
-        this.innerHTML = '';
-        this.appendChild(fragment);
+          this.appendChild(fragment);
+          this._show();
+          callback();
 
-        this._show();
-        callback && callback();
-        resolve(this.firstChild);
+          resolve(this.firstChild);
+        });
       });
-    }));
+    });
   }
 
   _show() {

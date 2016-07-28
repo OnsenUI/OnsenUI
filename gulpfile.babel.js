@@ -58,7 +58,7 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 gulp.task('core', function() {
   return gulp.src(['core/src/setup.js'], {read: false})
-    .pipe($.plumber(error => {
+    .pipe($.plumber(function(error) {
       $.util.log(error.message);
       this.emit('end');
     }))

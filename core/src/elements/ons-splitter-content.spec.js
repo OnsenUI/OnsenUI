@@ -32,6 +32,17 @@ describe('ons-splitter-content', () => {
     expect(content._destroy instanceof Function).to.be.ok;
   });
 
+  it('provide page property', () => {
+    content.page = 'hoge';
+    expect(content.page).to.be.equal('hoge');
+  });
+
+  it('provide pageLoader property', () => {
+    expect(content.pageLoader instanceof ons.PageLoader).to.be.ok;
+    content.pageLoader = new ons.PageLoader();
+    expect(content.pageLoader instanceof ons.PageLoader).to.be.ok;
+  });
+
   describe('child elements', ()=> {
     it('should pass though child nodes', () => {
       expect(content.innerHTML).to.be.equal('content');
