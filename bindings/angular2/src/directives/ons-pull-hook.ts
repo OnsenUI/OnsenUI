@@ -14,6 +14,7 @@ import {
  * @selector ons-pull-hook
  * @description
  *    [en]Angular 2 directive for `<ons-pull-hook>` component.[/en]
+ *    [ja]`<ons-pull-hook>`要素のためのAngular2ディレクティブです。[/ja]
  */
 @Directive({
   selector: 'ons-pull-hook'
@@ -23,13 +24,21 @@ export class OnsPullHook implements OnDestroy {
 
   /**
    * @output action
-   * @desc [en]Action to trigger.[/en]
+   * @param {Object} $event
+   * @param {Function} $event.done
+   * @desc
+   *   [en]Action to trigger.[/en]
+   *   [ja][/ja]
    */
   @Output('action') action = new EventEmitter();
 
   /**
    * @output changestate
-   * @desc [en][/en]
+   * @param {Object} $event
+   * @param {String} $event.state
+   * @desc 
+   *   [en][/en]
+   *   [ja][/ja]
    */
 
   constructor(private _elementRef: ElementRef) {
