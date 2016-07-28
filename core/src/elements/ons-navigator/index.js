@@ -557,7 +557,7 @@ class NavigatorElement extends BaseElement {
             leavePage.style.display = 'none';
           }
 
-          enterPage._show();
+          setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
           if (typeof options.callback === 'function') {
@@ -598,20 +598,15 @@ class NavigatorElement extends BaseElement {
    *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
    */
   replacePage(page, options = {}) {
-    ({page, options} = this._preparePageAndOptions(page, options));
-    const callback = options.callback;
+    return this.pushPage(page, options)
+      .then(resolvedValue => {
+        if (this.pages.length > 1) {
+          this.pages[this.pages.length - 2]._destroy();
+        }
+        this._updateLastPageBackButton();
 
-    options.callback = () => {
-      if (this.pages.length > 1) {
-        this.pages[this.pages.length - 2]._destroy();
-      }
-      this._updateLastPageBackButton();
-      if (callback instanceof Function) {
-        callback();
-      }
-    };
-
-    return this.pushPage(page, options);
+        return Promise.resolve(resolvedValue);
+      });
   }
 
   /**

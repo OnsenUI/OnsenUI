@@ -37,9 +37,15 @@ limitations under the License.
         ons._util.updateParentPosition(element[0]);
 
         var userDelegate = this._scope.$eval(this._attrs.onsLazyRepeat);
+
+
         var internalDelegate = new AngularLazyRepeatDelegate(userDelegate, element[0], element.scope());
 
         this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
+
+        // Expose refresh method to user.
+        userDelegate.refresh = this._provider.refresh.bind(this._provider);
+
         element.remove();
 
         // Render when number of items change.
