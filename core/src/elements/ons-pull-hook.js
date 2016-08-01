@@ -116,7 +116,6 @@ class PullHookElement extends BaseElement {
     this._currentTranslation = 0;
 
     this._setState(STATE_INITIAL, true);
-    this._setStyle();
   }
 
   _setStyle() {
@@ -357,7 +356,10 @@ class PullHookElement extends BaseElement {
     const done = () => {
       if (scroll === 0) {
         const el = this._getScrollableElement();
-        removeTransform(el);
+
+        if (el) {
+          removeTransform(el);
+        }
       }
 
       if (options.callback) {
@@ -383,13 +385,6 @@ class PullHookElement extends BaseElement {
         })
         .play(done);
     }
-  }
-
-  _getMinimumScroll() {
-    const scrollHeight = this._scrollElement.getBoundingClientRect().height;
-    const pageHeight = this._pageElement.getBoundingClientRect().height;
-
-    return scrollHeight > pageHeight ? -(scrollHeight - pageHeight) : 0;
   }
 
   _disableDragLock() { // e2e tests need it
@@ -423,13 +418,12 @@ class PullHookElement extends BaseElement {
       this._gestureDetector = null;
     }
 
-    if (this._scrollElement && this._scrollElement.parentElement) {
-      this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
-    }
+    this._pageElement.removeEventListener('scroll', this._boundOnScroll, false);
   }
 
   attachedCallback() {
     this._createEventListeners();
+    this._setStyle();
   }
 
   detachedCallback() {

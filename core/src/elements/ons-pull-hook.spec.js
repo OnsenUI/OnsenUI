@@ -21,12 +21,16 @@ describe('OnsPullHookElement', () => {
 
     page = ons._util.createElement(`
       <ons-page>
-        <ons-pull-hook>
-          Pull to refresh
-        </ons-pull-hook>
-        <ons-list>
-          ${items.join('')}
-        </ons-list>
+        <div class="background">
+        </div>
+        <div class="content">
+          <ons-pull-hook>
+            Pull to refresh
+          </ons-pull-hook>
+          <ons-list>
+            ${items.join('')}
+          </ons-list>
+        </div>
       </ons-page>
     `);
 
@@ -51,13 +55,6 @@ describe('OnsPullHookElement', () => {
     page = pullHook = null;
   });
 
-  describe('#_createScrollElement()', () => {
-    it('creates a scroll element', () => {
-      const scrollElement = pullHook._createScrollElement();
-      expect(scrollElement.classList.contains('scroll')).to.be.true;
-    });
-  });
-
   describe('#_onScroll()', () => {
     it('resets the scroll if negative', () => {
       // This test only works on browsers that support negative scroll.
@@ -74,7 +71,7 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#_onDrag()', () => {
+/*  describe('#_onDrag()', () => {
     it('does nothing if disabled', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
@@ -124,7 +121,7 @@ describe('OnsPullHookElement', () => {
 
       expect(spy).to.have.been.called.once;
     });
-  });
+  });*/
 
   describe('#_onDragStart()', () => {
     it('does nothing if the pull hook is disabled', () => {
@@ -267,22 +264,6 @@ describe('OnsPullHookElement', () => {
 
     it('returns another element if content is not fixed', () => {
       expect(pullHook._getScrollableElement()).not.to.equal(pullHook);
-    });
-  });
-
-  describe('#_getMinimumScroll()', () => {
-    it('returns an integer', () => {
-      expect(pullHook._getMinimumScroll()).to.be.a('number');
-    });
-  });
-
-  describe('#_compile()', () => {
-    it('does not compile twice', () => {
-      const div1 = document.createElement('div');
-      const div2 = document.createElement('div');
-      div1.innerHTML = '<ons-page><ons-pull-hook></ons-pull-hook></ons-page>';
-      div2.innerHTML = div1.innerHTML;
-      expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
 });
