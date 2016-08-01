@@ -145,9 +145,8 @@ ons-list-item[disabled] {
 }
 
 ons-pull-hook {
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: relative;
+  display: block;
   margin: auto;
   text-align: center;
   z-index: 20002;
