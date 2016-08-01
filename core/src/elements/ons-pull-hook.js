@@ -121,8 +121,8 @@ class PullHookElement extends BaseElement {
   _setStyle() {
     const height = this.height;
 
-    this.style.height = height + 'px';
-    this.style.lineHeight = height + 'px';
+    this.style.height = `${height}px`;
+    this.style.lineHeight = `${height}px`;
     this._pageElement.style.marginTop = `-${height}px`;
   }
 
