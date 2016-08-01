@@ -12,9 +12,9 @@
       expect(elements.count()).toBe(3);
 
       browser.actions()
-        .mouseMove(element(by.css('.page__content')), {x: 10, y: 10})
+        .mouseMove(element(by.css('.page__content')), {x: 10, y: 100})
         .mouseDown()
-        .mouseMove({x: 10, y: 200})
+        .mouseMove({x: 10, y: 250})
         .mouseUp()
         .perform();
 
@@ -32,9 +32,9 @@
 
       var page = element(by.css('.page__content'));
       browser.actions()
-        .mouseMove(page, {x: 10, y: 10})
+        .mouseMove(page, {x: 10, y: 100})
         .mouseDown()
-        .mouseMove({x: 10, y: 200})
+        .mouseMove({x: 10, y: 250})
         .perform();
 
       browser.wait(EC.textToBePresentInElement(state, 'preaction'));
