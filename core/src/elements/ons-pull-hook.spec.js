@@ -71,7 +71,7 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-/*  describe('#_onDrag()', () => {
+  describe('#_onDrag()', () => {
     it('does nothing if disabled', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
@@ -121,7 +121,7 @@ describe('OnsPullHookElement', () => {
 
       expect(spy).to.have.been.called.once;
     });
-  });*/
+  });
 
   describe('#_onDragStart()', () => {
     it('does nothing if the pull hook is disabled', () => {
