@@ -356,10 +356,7 @@ class PullHookElement extends BaseElement {
     const done = () => {
       if (scroll === 0) {
         const el = this._getScrollableElement();
-
-        if (el) {
-          removeTransform(el);
-        }
+        removeTransform(el);
       }
 
       if (options.callback) {
