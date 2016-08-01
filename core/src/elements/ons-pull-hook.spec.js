@@ -50,8 +50,13 @@ describe('OnsPullHookElement', () => {
   });
 
   afterEach(() => {
-    page.remove();
-    pullHook.remove();
+    if (page) {
+      page.remove();
+    }
+
+    if (pullHook) {
+      pullHook.remove();
+    }
     page = pullHook = null;
   });
 
