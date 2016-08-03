@@ -15,21 +15,18 @@ import {
 
     <div class="page__background"></div>
     <div class="page__content">
+      <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState(pullHook)" [onAction]="onAction" #pullHook>
+        {{message}}
+      </ons-pull-hook>
 
-      <div class="scroll">
-        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState(pullHook)" [onAction]="onAction" #pullHook>
-          {{message}}
-        </ons-pull-hook>
-
-        <ons-list>
-          <ons-list-item>Item 1</ons-list-item>
-          <ons-list-item>Item 2</ons-list-item>
-          <ons-list-item>Item 3</ons-list-item>
-          <ons-list-item>Item 4</ons-list-item>
-          <ons-list-item>Item 5</ons-list-item>
-          <ons-list-item>Item 6</ons-list-item>
-        </ons-list>
-      </div>
+      <ons-list>
+        <ons-list-item>Item 1</ons-list-item>
+        <ons-list-item>Item 2</ons-list-item>
+        <ons-list-item>Item 3</ons-list-item>
+        <ons-list-item>Item 4</ons-list-item>
+        <ons-list-item>Item 5</ons-list-item>
+        <ons-list-item>Item 6</ons-list-item>
+      </ons-list>
     </div>
   </ons-page>
   `
