@@ -24,6 +24,13 @@ const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
 
+const removeTransform = (el) => {
+  el.style.transform = '';
+  el.style.WebkitTransform = '';
+  el.style.transition = '';
+  el.style.WebkitTransition = '';
+};
+
 /**
  * @element ons-pull-hook
  * @category pull-hook
@@ -106,44 +113,16 @@ class PullHookElement extends BaseElement {
     this._boundOnDragEnd = this._onDragEnd.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
 
-    this._currentTranslation = 0;
-
-    this._ensureScrollElement();
-
     this._setState(STATE_INITIAL, true);
-    this._setStyle();
-  }
-
-  _createScrollElement() {
-    if (this.parentElement.classList.contains('scroll')) {
-      return this.parentElement;
-    }
-
-    const scrollElement = util.createElement('<div class="scroll"><div>');
-
-    const pageElement = this.parentElement;
-
-    scrollElement.appendChild(this);
-    while (pageElement.firstChild) {
-      scrollElement.appendChild(pageElement.firstChild);
-    }
-    pageElement.appendChild(scrollElement);
-
-    return scrollElement;
-  }
-
-  _ensureScrollElement() {
-    if (this.parentElement && !this._scrollElement) {
-      this._scrollElement = this._createScrollElement();
-    }
   }
 
   _setStyle() {
     const height = this.height;
 
-    this.style.top = '-' + height + 'px';
-    this.style.height = height + 'px';
-    this.style.lineHeight = height + 'px';
+    this.style.height = `${height}px`;
+    this.style.lineHeight = `${height}px`;
+    this.style.marginTop = '-1px';
+    this._pageElement.style.marginTop = `-${height}px`;
   }
 
   _onScroll(event) {
@@ -155,7 +134,7 @@ class PullHookElement extends BaseElement {
   }
 
   _generateTranslationTransform(scroll) {
-    return 'translate3d(0px, ' + scroll + 'px, 0px)';
+    return `translate3d(0px, ${scroll}px, 0px)`;
   }
 
   _onDrag(event) {
@@ -173,7 +152,6 @@ class PullHookElement extends BaseElement {
         event.gesture.preventDefault();
       }
     }
-
 
     if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
       this._transitionDragLength = event.gesture.deltaY;
@@ -356,7 +334,7 @@ class PullHookElement extends BaseElement {
     if (this._isContentFixed()) {
       return this;
     } else {
-      return this._scrollElement;
+      return this._pageElement;
     }
   }
 
@@ -371,8 +349,9 @@ class PullHookElement extends BaseElement {
     }
 
     const done = () => {
-      if (scroll === 0 && !this._isContentFixed()) {
-        this._getScrollableElement().removeAttribute('style');
+      if (scroll === 0) {
+        const el = this._getScrollableElement();
+        removeTransform(el);
       }
 
       if (options.callback) {
@@ -400,13 +379,6 @@ class PullHookElement extends BaseElement {
     }
   }
 
-  _getMinimumScroll() {
-    const scrollHeight = this._scrollElement.getBoundingClientRect().height;
-    const pageHeight = this._pageElement.getBoundingClientRect().height;
-
-    return scrollHeight > pageHeight ? -(scrollHeight - pageHeight) : 0;
-  }
-
   _disableDragLock() { // e2e tests need it
     this._dragLockDisabled = true;
     this._destroyEventListeners();
@@ -425,7 +397,7 @@ class PullHookElement extends BaseElement {
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
-    this._scrollElement.parentElement.addEventListener('scroll', this._boundOnScroll, false);
+    this._pageElement.addEventListener('scroll', this._boundOnScroll, false);
   }
 
   _destroyEventListeners() {
@@ -438,28 +410,27 @@ class PullHookElement extends BaseElement {
       this._gestureDetector = null;
     }
 
-    if (this._scrollElement && this._scrollElement.parentElement) {
-      this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
-    }
+    this._pageElement.removeEventListener('scroll', this._boundOnScroll, false);
   }
 
   attachedCallback() {
-    this._ensureScrollElement();
-
-    this._pageElement = this._scrollElement.parentElement;
-
-    if (!this._pageElement.classList.contains('page__content')) {
-      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
-    }
+    this._currentTranslation = 0;
+    this._pageElement = this.parentNode;
 
     this._createEventListeners();
+    this._setStyle();
   }
 
   detachedCallback() {
+    this._pageElement.style.marginTop = '';
+
     this._destroyEventListeners();
   }
 
   attributeChangedCallback(name, last, current) {
+    if (name === 'height') {
+      this._setStyle();
+    }
   }
 }
 
