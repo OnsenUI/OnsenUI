@@ -113,8 +113,6 @@ class PullHookElement extends BaseElement {
     this._boundOnDragEnd = this._onDragEnd.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
 
-    this._currentTranslation = 0;
-
     this._setState(STATE_INITIAL, true);
   }
 
@@ -266,10 +264,6 @@ class PullHookElement extends BaseElement {
     return th > 0 && th >= this.height;
   }
 
-  get _pageElement() {
-    return this.parentNode;
-  }
-
   _setState(state, noEvent) {
     const lastState = this._getState();
 
@@ -419,6 +413,9 @@ class PullHookElement extends BaseElement {
   }
 
   attachedCallback() {
+    this._currentTranslation = 0;
+    this._pageElement = this.parentNode;
+
     this._createEventListeners();
     this._setStyle();
   }
