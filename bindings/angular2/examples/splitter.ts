@@ -46,6 +46,9 @@ class SidePageComponent {
 
     <ons-splitter-content [page]="contentPage">
     </ons-splitter-content>
+
+    <ons-splitter-side [page]="sidePage" side="right" collapse swipeable width="200px" style="border-right: 1px solid #ccc">
+    </ons-splitter-side>
   </ons-splitter>
   `
 })

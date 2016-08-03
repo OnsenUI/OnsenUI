@@ -457,8 +457,6 @@ class SplitterSideElement extends BaseElement {
     this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
 
     contentReady(this, () => {
-      this._watchedAttributes.forEach(e => this._update(e));
-
       rewritables.ready(this, () => {
         const page = this._getPageTarget();
 
@@ -475,6 +473,10 @@ class SplitterSideElement extends BaseElement {
     }
 
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
+
+    contentReady(this, () => {
+      this._watchedAttributes.forEach(e => this._update(e));
+    });
 
     if (!this.hasAttribute('side')) {
       this.setAttribute('side', 'left');
