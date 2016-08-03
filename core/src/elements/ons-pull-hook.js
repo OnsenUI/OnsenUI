@@ -121,6 +121,7 @@ class PullHookElement extends BaseElement {
 
     this.style.height = `${height}px`;
     this.style.lineHeight = `${height}px`;
+    this.style.marginTop = '-1px';
     this._pageElement.style.marginTop = `-${height}px`;
   }
 
@@ -421,6 +422,8 @@ class PullHookElement extends BaseElement {
   }
 
   detachedCallback() {
+    this._pageElement.style.marginTop = '';
+
     this._destroyEventListeners();
   }
 
