@@ -5,7 +5,7 @@ import {
   Input,
   Output,
   OnDestroy,
-  OnInit
+  EventEmitter
 } from '@angular/core';
 
 /**
@@ -14,26 +14,36 @@ import {
  * @selector ons-pull-hook
  * @description
  *    [en]Angular 2 directive for `<ons-pull-hook>` component.[/en]
+ *    [ja]`<ons-pull-hook>`要素のためのAngular2ディレクティブです。[/ja]
  */
 @Directive({
   selector: 'ons-pull-hook'
 })
-export class OnsPullHook implements OnDestroy, OnInit {
+export class OnsPullHook implements OnDestroy {
   private _element: any;
 
   /**
-   * @input onAction
-   * @type {Function}
-   * @desc [en]Action to trigger.[/en]
+   * @output action
+   * @param {Object} $event
+   * @param {Function} $event.done
+   * @desc
+   *   [en]Action to trigger.[/en]
+   *   [ja]`ons-pull-hook`要素のアクションが必要なときに呼び出されます。[/ja]
    */
-  @Input() onAction: Function;
+  @Output('action') action = new EventEmitter();
+
+  /**
+   * @output changestate
+   * @param {Object} $event
+   * @param {String} $event.state
+   * @desc 
+   *   [en][/en]
+   *   [ja]`ons-pull-hook`要素の状態が変わった時に呼び出されます。[/ja]
+   */
 
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
-  }
-
-  ngOnInit() {
-    this._element.onAction = this.onAction;
+    this._element.onAction = done => this.action.emit({done});
   }
 
   ngOnDestroy() {
