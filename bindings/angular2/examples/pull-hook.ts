@@ -14,15 +14,13 @@ import {
     </ons-toolbar>
 
     <div class="content">
-      <div class="scroll">
-        <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
-          {{message}}
-        </ons-pull-hook>
+      <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
+        {{message}}
+      </ons-pull-hook>
 
-        <ons-list>
-          <ons-list-item *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
-        </ons-list>
-      </div>
+      <ons-list>
+        <ons-list-item *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
+      </ons-list>
     </div>
   </ons-page>
   `
