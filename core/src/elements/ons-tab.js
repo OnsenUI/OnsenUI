@@ -312,7 +312,11 @@ class TabElement extends BaseElement {
    * @param {Function} link
    */
   _loadPageElement(parent, callback, link) {
-    if (!this._loadedPage) {
+    if (!this._loadedPage && !this._getPageTarget()) {
+      const pages = this._findTabbarElement().pages;
+      const index = this._findTabIndex();
+      callback(pages[index]);
+    } else if (!this._loadedPage) {
       this._pageLoader.load({page: this._getPageTarget(), parent}, page => {
         this._loadedPage = page;
         link(page.element, element => {
