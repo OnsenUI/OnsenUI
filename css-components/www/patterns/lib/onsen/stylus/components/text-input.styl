@@ -191,7 +191,20 @@ text-input-underbar-disabled()
   -webkit-transform translate3d(0, 0, 0) // prevent ios flicker
 
 .text-input--material__label
+  color var-material-text-input-inactive-color
+  position absolute
+  left 0px
+  top 2px
+  font-size 16px
+  font-weight 400
+  font-family 'Roboto', 'Noto', sans-serif
+  pointer-events none
+
+.text-input--material__label--active
   color var-material-text-input-active-color
+  transform translate(0, -75%) scale(0.75)
+  transform-origin left top
+  transition transform 0.1s ease-in, color 0.1s ease-in
 
 .text-input--material:focus
   background-image linear-gradient(var-material-text-input-active-color, var-material-text-input-active-color), linear-gradient(to top, transparent 1px, var-material-text-input-inactive-color 1px)
