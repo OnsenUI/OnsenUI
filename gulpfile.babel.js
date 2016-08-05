@@ -127,7 +127,7 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], () => {
 gulp.task('core-dts-test', () => {
   return gulp.src('core/src/onsenui-test.ts', {read: false})
     .pipe($.shell('tsc -v'))
-    .pipe($.shell('tsc "<%= file.path %>"'));
+    .pipe($.shell('tsc "<%= file.path %>" --target es6'));
 });
 
 ////////////////////////////////////////
