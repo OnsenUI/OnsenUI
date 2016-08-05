@@ -608,40 +608,40 @@ interface OnsNavigatorElement {
    */
   popPage(options?: navigatorOptions): Promise<HTMLElement>;
   /**
-   * @param {String} pageUrl Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
+   * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
    * @param {Object} [options] Parameter object
    * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
    * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
    * @return Promise which resolves to the pushed page.
    * @description Pushes the specified pageUrl into the page stack.
    */
-  pushPage(pageUrl: string, options?: PushPageOptions): Promise<HTMLElement>;
+  pushPage(page: any, options?: PushPageOptions): Promise<HTMLElement>;
   /**
    * @return Promise which resolves to the inserted page
    * @description Replaces the current page with the specified one. Extends pushPage parameters.
    */
-  replacePage(pageUrl: string, options?: ReplacePageOptions): Promise<HTMLElement>;
+  replacePage(page: any, options?: ReplacePageOptions): Promise<HTMLElement>;
   /**
    * @param {Number} index The index where it should be inserted
-   * @param {String} pageUrl Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
+   * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
    * @param {Object} [options] Parameter object
    * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
-   * @description Insert the specified pageUrl into the page stack with specified index
+   * @description Insert the specified page into the page stack with specified index
    */
-  insertPage(index: number, pageUrl: string, options?: navigatorOptions): Promise<HTMLElement>;
+  insertPage(index: number, page: any, options?: navigatorOptions): Promise<HTMLElement>;
   /**
-   * @param {String} pageUrl Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
+   * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
    * @param {Object} [options] Parameter object
    * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
    * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
    * @description Clears page stack and adds the specified pageUrl to the page stack
    */
-  resetToPage(pageUrl: string, options?: navigatorOptions): Promise<HTMLElement>;
+  resetToPage(page: any, options?: navigatorOptions): Promise<HTMLElement>;
   /**
    * @param {String} || {Number}
    * @description Page URL or index of an existing page in navigator's stack.
    */
-  bringPageTop({item: String,item: Number}, options?: Object): Promise<HTMLElement>;
+  bringPageTop({item: string,item: number}, options?: Object): Promise<HTMLElement>;
 
   /**
    * @return {HTMLElement}
@@ -683,7 +683,7 @@ interface tabbarOptions {
  */
 interface OnsTabbarElement {
   /**
-   * @param {String} url Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>
+   * @param {*} url Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>
    * @return Resolves to the new page element.
    * @description Displays a new page without changing the active index
    */
@@ -787,7 +787,7 @@ interface OnsSplitterSideElement {
   toggle(options?: SplitterSideOptions): Promise<HTMLElement | boolean>;
   /**
    * @description Show the page specified in pageUrl in the right section
-   * @param {String} page Page URL. Can be either an HTML document or an <ons-template>.
+   * @param {*} page Page URL. Can be either an HTML document or an <ons-template>.
    * @param {Object} [option]
    * @return Resolves to the new page element
    */
@@ -900,14 +900,17 @@ interface SplitterContentOptions {
   callback?: Function;
 }
 
-interface OnsSplitterContentElement{
+interface OnsSplitterContentElement {
   /**
    * @description Page element loaded in the splitter content.
    */
   page: string;
+
   /**
    * @description Show the page specified in pageUrl in the right section. Returns: Resolves to the new page element
-   * @return {Function}
+   * @param {*} page
+   * @param {Object} [options]
+   * @return {Promise}
    */
   load(page: any, options?: SplitterContentOptions): Promise<HTMLElement>;
 }

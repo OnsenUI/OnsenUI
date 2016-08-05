@@ -139,10 +139,15 @@ function onsNavigator(navigator: OnsNavigatorElement): void {
   pushOptions.options.animation = 'left';
 
   navigator.pushPage('myPage.html', pushOptions);
+  navigator.pushPage({}, pushOptions);
+  navigator.pushPage(null, pushOptions);
   navigator.insertPage(2, 'myPage2.html');
+  navigator.insertPage(2, {});
   navigator.popPage();
   navigator.resetToPage('myPage.html');
+  navigator.resetToPage({});
   navigator.replacePage('myPage.html');
+  navigator.replacePage(null);
 
   navigator.options.animationOptions = 'lift';
   navigator.pushPage('', pushOptions.options.animationOptions);
@@ -202,6 +207,7 @@ function SplitterContent(splitterContent: OnsSplitterContentElement): void {
     callback: Function
   }
   splitterContent.load('myPage.html', options);
+  splitterContent.load({}, options);
   splitterContent.page;
 }
 
@@ -271,6 +277,7 @@ function onsSplitterContent(splitterContent: OnsSplitterContentElement): void {
     callback: function myFunction() {}
   };
   splitterContent.load('myPage.html', options);
+  splitterContent.load({}, options);
 }
 
 function onsSplitter(splitter: OnsSplitterElement): void {
