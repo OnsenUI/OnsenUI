@@ -3,17 +3,9 @@
 // Definitions by: Fran Dios <https://github.com/frankdiox/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-// Some useful types
-interface stringArray {
-  [index: number]: string;
-}
-
-interface objectArray {
-  [index: number]: any;
-}
-
-interface PageLoader {
-  // TODO
+// module declaration
+declare module 'onsenui' { 
+  export = ons;
 }
 
 interface onsOptions {
@@ -24,7 +16,7 @@ interface alertOptions {
   message?: string;
   messageHTML?: string;
   buttonLabel?: string;
-  buttonLabels?: stringArray;
+  buttonLabels?: [string];
   primaryButtonIndex?: number;
   cancelable?: boolean;
   animation?: string;
@@ -294,11 +286,10 @@ declare namespace ons {
   /**
    * @description PageLoader class constructor
    */
-  var PageLoader: PageLoader;
-}
-
-declare module 'onsenui' { 
-  export = ons;
+  class PageLoader {
+    internalLoader: Function;
+    load(options: {page: any, parent: Element, params?: Object}, done: Function);
+  }
 }
 
 /**
@@ -696,7 +687,7 @@ interface OnsTabbarElement {
    * @return Resolves to the new page element.
    * @description Displays a new page without changing the active index
    */
-  loadPage(url: string, options?: tabbarOptions): Promise<HTMLElement>;
+  loadPage(page: any, options?: tabbarOptions): Promise<HTMLElement>;
   /**
    * @param {Number} index Tab index
    * @param {Object} [options] Parameter object
@@ -800,7 +791,7 @@ interface OnsSplitterSideElement {
    * @param {Object} [option]
    * @return Resolves to the new page element
    */
-  load(page: string, options?: SplitterSideOptions): Promise<HTMLElement>;
+  load(page: any, options?: SplitterSideOptions): Promise<HTMLElement>;
 }
 
 interface LazyRepeatOptions {
@@ -918,7 +909,7 @@ interface OnsSplitterContentElement{
    * @description Show the page specified in pageUrl in the right section. Returns: Resolves to the new page element
    * @return {Function}
    */
-  load(page: string, options?: SplitterContentOptions): Promise<HTMLElement>;
+  load(page: any, options?: SplitterContentOptions): Promise<HTMLElement>;
 }
 
 interface OnsSplitterElement {
