@@ -23,6 +23,7 @@ v2.0.0-rc.16
  * ons-lazy-repeat: Expose `refresh()` method to user through delegate object.
  * ons-pull-hook: Remove DOM mutations to make it easier to integrate with frameworks and libs.
  * ons-tab: Fix [#1528](https://github.com/OnsenUI/OnsenUI/issues/1528).
+ * ons-navigator: `data` object for `popPage`.
 
 v2.0.0-rc.15
 ----

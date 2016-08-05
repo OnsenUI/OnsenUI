@@ -346,6 +346,9 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @param {Object} [options.data]
+   *   [en]Custom data that will be stored in the new page element.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
@@ -423,6 +426,10 @@ class NavigatorElement extends BaseElement {
         options.animationOptions || {}
       );
 
+      if (options.data) {
+        enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
+      }
+
       const callback = () => {
         pages.pop();
         update(pages, this).then(() => {
@@ -474,7 +481,7 @@ class NavigatorElement extends BaseElement {
    * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
-   * @param {Any} [options.data]
+   * @param {Object} [options.data]
    *   [en]Custom data that will be stored in the new page element.[/en]
    *   [ja][/ja]
    * @return {Promise}
@@ -544,8 +551,8 @@ class NavigatorElement extends BaseElement {
 
       enterPage.updateBackButton(pageLength - 1);
 
-      enterPage.pushedOptions = options;
-      enterPage.data = enterPage.data || options.data;
+      enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
+      enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
       enterPage.name = enterPage.name || options.page;
       enterPage.unload = enterPage.unload || options.unload;
 
