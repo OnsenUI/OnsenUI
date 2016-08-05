@@ -409,20 +409,6 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#_compile()', () => {
-    [true, false].forEach(isTop => {
-      it('fills status bar - ' + isTop, (done) => {
-        const tmp = ons._internal.autoStatusBarFill;
-        ons._internal.autoStatusBarFill = action => action();
-        const element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
-        ons._internal.autoStatusBarFill = tmp;
-
-        setTimeout(() => {
-          expect(element.hasAttribute('status-bar-fill')).to.equal(isTop);
-          done();
-        }, 200);
-      });
-    });
-
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
@@ -434,6 +420,23 @@ describe('OnsTabbarElement', () => {
       `;
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
+
+  describe('#_updatePosition()', () => {
+    [true, false].forEach(isTop => {
+      it('fills status bar - ' + isTop, (done) => {
+        const tmp = ons._internal.autoStatusBarFill;
+        ons._internal.autoStatusBarFill = action => action();
+        const element = ons._util.createElement(`<ons-tabbar position="${isTop ?  'top' : 'bottom'}"> </ons-tabbar>`);
+        element._updatePosition();
+        ons._internal.autoStatusBarFill = tmp;
+
+        setTimeout(() => {
+          expect(element.hasAttribute('status-bar-fill')).to.equal(isTop);
+          done();
+        }, 200);
+      });
     });
   });
 

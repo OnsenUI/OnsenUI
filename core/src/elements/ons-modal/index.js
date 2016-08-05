@@ -121,16 +121,11 @@ class ModalElement extends BaseElement {
     }
 
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
-    this._onDeviceBackButton = handler;
-  }
-
-  _onDeviceBackButton() {
-    // Do nothing and stop device-backbutton handler chain.
-    return;
   }
 
   _compile() {
     this.style.display = 'none';
+    this.style.zIndex = 10001;
     this.classList.add('modal');
 
     if (!util.findChild(this, '.modal__content')) {
@@ -156,30 +151,7 @@ class ModalElement extends BaseElement {
   }
 
   attachedCallback() {
-    setImmediate(this._ensureNodePosition.bind(this));
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-  }
-
-  _ensureNodePosition() {
-    if (!this.parentNode || this.hasAttribute('inline')) {
-      return;
-    }
-
-    if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
-      var page = this;
-      for (;;) {
-        page = page.parentNode;
-
-        if (!page) {
-          return;
-        }
-
-        if (page.nodeName.toLowerCase() === 'ons-page') {
-          break;
-        }
-      }
-      page._registerExtraElement(this);
-    }
+    this.onDeviceBackButton = () => undefined;
   }
 
   /**
@@ -225,13 +197,15 @@ class ModalElement extends BaseElement {
       const unlock = this._doorLock.lock();
       const animator = this._animatorFactory.newAnimator(options);
 
-      this.style.display = 'table';
       return new Promise(resolve => {
-        animator.show(this, () => {
-          unlock();
+        contentReady(this, () => {
+          this.style.display = 'table';
+          animator.show(this, () => {
+            unlock();
 
-          callback();
-          resolve(this);
+            callback();
+            resolve(this);
+          });
         });
       });
     };
@@ -297,12 +271,14 @@ class ModalElement extends BaseElement {
       const animator = this._animatorFactory.newAnimator(options);
 
       return new Promise(resolve => {
-        animator.hide(this, () => {
-          this.style.display = 'none';
-          unlock();
+        contentReady(this, () => {
+          animator.hide(this, () => {
+            this.style.display = 'none';
+            unlock();
 
-          callback();
-          resolve(this);
+            callback();
+            resolve(this);
+          });
         });
       });
     };

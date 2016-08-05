@@ -15,44 +15,17 @@ limitations under the License.
 
 */
 
-ons.notification.alert = function(message, options = {}) {
-  typeof message === 'string' ? (options.message = message) : (options = message);
+['alert', 'confirm', 'prompt'].forEach(name => {
+  ons.notification[name] = (message, options = {}) => {
+    typeof message === 'string' ? (options.message = message) : (options = message);
 
-  var originalCompile = options.compile || function(element) {
-    return element;
+    const compile = options.compile;
+
+    options.compile = element => {
+      const $element = angular.element(compile ? compile(element) : element);
+      return ons.$compile($element)($element.injector().get('$rootScope'));
+    };
+
+    return ons.notification[`_${name}Original`](options);
   };
-
-  options.compile = function(element) {
-    ons.compile(originalCompile(element));
-  };
-
-  return ons.notification._alertOriginal(options);
-};
-
-ons.notification.confirm = function(message, options = {}) {
-  typeof message === 'string' ? (options.message = message) : (options = message);
-
-  var originalCompile = options.compile || function(element) {
-    return element;
-  };
-
-  options.compile = function(element) {
-    ons.compile(originalCompile(element));
-  };
-
-  return ons.notification._confirmOriginal(options);
-};
-
-ons.notification.prompt = function(message, options = {}) {
-  typeof message === 'string' ? (options.message = message) : (options = message);
-
-  var originalCompile = options.compile || function(element) {
-    return element;
-  };
-
-  options.compile = function(element) {
-    ons.compile(originalCompile(element));
-  };
-
-  return ons.notification._promptOriginal(options);
-};
+});

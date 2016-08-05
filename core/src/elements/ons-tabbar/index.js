@@ -67,7 +67,7 @@ const rewritables = {
 };
 
 const generateId = (() => {
-  var i = 0;
+  let i = 0;
   return () => 'ons-tabbar-gen-' + (i++);
 })();
 
@@ -203,18 +203,18 @@ class TabbarElement extends BaseElement {
     this._tabbarId = generateId();
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
+      this._compile();
+
+      const content = this._contentElement;
+      for (let i = 0; i < content.children.length; i++) {
+        content.children[i].style.display = 'none';
       }
 
-      for (var i = 0; i < this.firstChild.children.length; i++) {
-        this.firstChild.children[i].style.display = 'none';
-      }
+      const activeIndex = this.getAttribute('activeIndex');
 
-      var activeIndex = this.getAttribute('activeIndex');
-
-      if (activeIndex && this.children[1].children.length > activeIndex) {
-        this.children[1].children[activeIndex].setAttribute('active', 'true');
+      const tabbar = this._tabbarElement;
+      if (activeIndex && tabbar.children.length > activeIndex) {
+        tabbar.children[activeIndex].setAttribute('active', 'true');
       }
 
       autoStyle.prepare(this);
@@ -227,36 +227,50 @@ class TabbarElement extends BaseElement {
         defaultAnimation: this.getAttribute('animation')
       });
     });
+  }
 
+  attachedCallback() {
+    contentReady(this, () => this._updatePosition());
   }
 
   get _contentElement() {
     return util.findChild(this, '.tab-bar__content');
   }
 
+  get _tabbarElement() {
+    return util.findChild(this, '.tab-bar');
+  }
+
   _compile() {
-    var content = util.create('.ons-tab-bar__content.tab-bar__content');
-    var tabbar = util.create('.tab-bar.ons-tab-bar__footer.ons-tabbar-inner');
+    if (this._contentElement && this._tabbarElement) {
+      const content = util.findChild(this, '.tab-bar__content');
+      const bar = util.findChild(this, '.tab-bar');
 
-    while (this.firstChild) {
-      tabbar.appendChild(this.firstChild);
+      content.classList.add('ons-tab-bar__content');
+      bar.classList.add('ons-tab-bar__footer');
+      bar.classList.add('ons-tabbar-inner');
+
+    } else {
+
+      const content = util.create('.ons-tab-bar__content.tab-bar__content');
+      const tabbar = util.create('.tab-bar.ons-tab-bar__footer.ons-tabbar-inner');
+
+      while (this.firstChild) {
+        tabbar.appendChild(this.firstChild);
+      }
+
+      this.appendChild(content);
+      this.appendChild(tabbar);
     }
-
-    this.appendChild(content);
-    this.appendChild(tabbar);
-
-    this._updatePosition();
-
-    this.setAttribute('_compiled', '');
   }
 
   _updatePosition(position = this.getAttribute('position')) {
-    var top = this._top = position === 'top' || (position === 'auto' && platform.isAndroid());
-    var action = top ? util.addModifier : util.removeModifier;
+    const top = this._top = position === 'top' || (position === 'auto' && platform.isAndroid());
+    const action = top ? util.addModifier : util.removeModifier;
 
     action(this, 'top');
 
-    var page = util.findParent(this, 'ons-page');
+    const page = util.findParent(this, 'ons-page');
     if (page) {
       this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
 
@@ -299,7 +313,8 @@ class TabbarElement extends BaseElement {
    */
   loadPage(page, options = {}) {
     return new Promise(resolve => {
-      OnsTabElement.prototype._createPageElement(page, pageElement => {
+      const tab = this._tabbarElement.children[0] || new OnsTabElement();
+      tab._loadPage(page, this._contentElement, pageElement => {
         resolve(this._loadPageDOMAsync(pageElement, options));
       });
     });
@@ -342,8 +357,8 @@ class TabbarElement extends BaseElement {
    * @return {Element/null}
    */
   _getCurrentPageElement() {
-    var pages = this._contentElement.children;
-    var page = null;
+    const pages = this._contentElement.children;
+    let page = null;
     for (var i = 0; i < pages.length; i++) {
       if (pages[i].style.display !== 'none') {
         page = pages[i];
@@ -373,9 +388,9 @@ class TabbarElement extends BaseElement {
    * @return {Promise} Resolves to the new page element.
    */
   _switchPage(element, options) {
-    var oldPageElement = this._oldPageElement || internal.nullElement;
+    const oldPageElement = this._oldPageElement || internal.nullElement;
     this._oldPageElement = element;
-    var animator = this._animatorFactory.newAnimator(options);
+    const animator = this._animatorFactory.newAnimator(options);
 
     return new Promise(resolve => {
       if (oldPageElement !== internal.nullElement) {
@@ -438,7 +453,7 @@ class TabbarElement extends BaseElement {
       options.animation = this.getAttribute('animation');
     }
 
-    var previousTab = this._getActiveTabElement(),
+    const previousTab = this._getActiveTabElement(),
       selectedTab = this._getTabElement(index),
       previousTabIndex = this.getActiveTabIndex(),
       selectedTabIndex = index,
@@ -457,7 +472,7 @@ class TabbarElement extends BaseElement {
       return Promise.resolve(previousPageElement);
     }
 
-    var canceled = false;
+    let canceled = false;
 
     util.triggerElementEvent(this, 'prechange', {
       index: selectedTabIndex,
@@ -475,7 +490,7 @@ class TabbarElement extends BaseElement {
 
     selectedTab.setActive();
 
-    var needLoad = !selectedTab.isLoaded() && !options.keepPage;
+    const needLoad = !options.keepPage;
 
     util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
       if (tab != selectedTab) {
@@ -491,13 +506,13 @@ class TabbarElement extends BaseElement {
     });
 
     if (needLoad) {
-      var removeElement = false;
+      let removeElement = false;
 
       if ((!previousTab && previousPageElement) || (previousTab && previousTab._pageElement !== previousPageElement)) {
         removeElement = true;
       }
 
-      var params = {
+      const params = {
         callback: () => {
           util.triggerElementEvent(this, 'postchange', {
             index: selectedTabIndex,
@@ -518,19 +533,23 @@ class TabbarElement extends BaseElement {
 
       params.animationOptions = options.animationOptions || {};
 
-
       const link = (element, callback) => {
         rewritables.link(this, element, options, callback);
       };
 
       return new Promise(resolve => {
-        selectedTab._loadPageElement(pageElement => {
+        selectedTab._loadPageElement(this._contentElement, pageElement => {
+          pageElement.style.display = 'block';
           resolve(this._loadPersistentPageDOM(pageElement, params));
         }, link);
       });
+    } else {
+      return new Promise(resolve => {
+        this._contentElement.appendChild(selectedTab.pageElement);
+        selectedTab.pageElement.style.display = 'block';
+        resolve(this._loadPersistentPageDOM(selectedTab.pageElement, params));
+      });
     }
-
-    return Promise.resolve(previousPageElement);
   }
 
   /**
@@ -572,7 +591,7 @@ class TabbarElement extends BaseElement {
    *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
    */
   getActiveTabIndex() {
-    var tabs = this._getTabbarElement().children;
+    const tabs = this._getTabbarElement().children;
 
     for (var i = 0; i < tabs.length; i++) {
       if (tabs[i] instanceof window.OnsTabElement && tabs[i].isActive && tabs[i].isActive()) {
@@ -598,8 +617,6 @@ class TabbarElement extends BaseElement {
   }
 
   detachedCallback() { }
-
-  attachedCallback() { }
 
   _show() {
     const currentPageElement = this._getCurrentPageElement();

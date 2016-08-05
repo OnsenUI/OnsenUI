@@ -1,0 +1,82 @@
+{
+  "name": "angular2-onsenui",
+  "version": "0.1.0-beta.8",
+  "private": false,
+  "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
+  "scripts": {
+    "typings-install": "typings install",
+    "build-dist": "rm -rf dist/* && tsc && tsc -d",
+    "prepublish": "npm run build-dist",
+    "start": "gulp serve",
+    "test": "gulp test"
+  },
+  "main": "dist/src/angular2-onsenui.js",
+  "typings": "dist/src/angular2-onsenui.d.ts",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "repository": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "keywords": [
+    "phonegap",
+    "cordova",
+    "components",
+    "angular2",
+    "hybrid",
+    "app",
+    "ui",
+    "mobile",
+    "onsen",
+    "onsenui"
+  ],
+  "homepage": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "peerDependencies": {
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/compiler": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/platform-browser": "^2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "core-js": "^2.4.0",
+    "rxjs": "^5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "@angular/router-deprecated": "2.0.0-rc.1",
+    "@angular/upgrade": "2.0.0-rc.1",
+    "core-js": "^2.4.0",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12",
+    "awesome-typescript-loader": "~0.16.2",
+    "chromedriver": "^2.21.2",
+    "es6-promise": "3.0.2",
+    "es6-shim": "0.35.0",
+    "gulp-shell": "^0.5.2",
+    "open": "0.0.5",
+    "protractor": "^3.3.0",
+    "selenium-server-standalone-jar": "^2.53.0",
+    "source-map-loader": "^0.1.5",
+    "typescript": "~1.8.9",
+    "webdriver-manager": "^10.0.1",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "^0.8.4",
+    "typings": "^1.2.0",
+    "yargs": "^4.7.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

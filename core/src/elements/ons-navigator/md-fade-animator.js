@@ -27,7 +27,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
     options = util.extend({
       timing: 'ease-out',
       duration: '0.25',
-      delay: '0.20'
+      delay: '0'
     }, options || {});
 
     super(options);

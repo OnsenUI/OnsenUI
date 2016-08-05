@@ -235,14 +235,6 @@ class PopoverElement extends BaseElement {
     this._animator = (options) => factory.newAnimator(options);
   }
 
-  _onDeviceBackButton(event) {
-    if (this.cancelable) {
-      this._cancel();
-    } else {
-      event.callParentHandler();
-    }
-  }
-
   _positionPopover(target) {
     const {_radius: radius, _content: el, _margin: margin} = this;
     const pos = target.getBoundingClientRect();
@@ -526,29 +518,37 @@ class PopoverElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
-   *   [ja]バックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+    }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
+  }
+
+  _resetBackButtonHandler() { // do we need this twice?
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
+  }
+
   attachedCallback() {
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this._resetBackButtonHandler();
 
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
-      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-radius'));
+      this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-top-left-radius'));
 
       this._mask.addEventListener('click', this._boundCancel, false);
 
-      this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
-
-      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
-      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
+      this._resetBackButtonHandler();
 
       window.addEventListener('resize', this._boundOnChange, false);
     });
@@ -560,9 +560,6 @@ class PopoverElement extends BaseElement {
 
       this._backButtonHandler.destroy();
       this._backButtonHandler = null;
-
-      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
-      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
       window.removeEventListener('resize', this._boundOnChange, false);
     });
@@ -585,7 +582,7 @@ class PopoverElement extends BaseElement {
     if (this.cancelable) {
       this.hide({
         callback: () => {
-          util.triggerElementEvent(this, 'cancel');
+          util.triggerElementEvent(this, 'dialog-cancel');
         }
       });
     }

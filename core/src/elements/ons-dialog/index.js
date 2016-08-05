@@ -23,7 +23,7 @@ import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAni
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import DoorLock from 'ons/doorlock';
-import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -249,22 +249,21 @@ class DialogElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
-   *   [ja]バックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-  _onDeviceBackButton(event) {
-    if (this.cancelable) {
-      this._cancel();
-    } else {
-      event.callParentHandler();
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   _cancel() {
@@ -273,7 +272,7 @@ class DialogElement extends BaseElement {
       this.hide({
         callback: () => {
           this._running = false;
-          util.triggerElementEvent(this, 'cancel');
+          util.triggerElementEvent(this, 'dialog-cancel');
         }
       });
     }
@@ -455,9 +454,8 @@ class DialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
-
   attachedCallback() {
-    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
       this._mask.addEventListener('click', this._boundCancel, false);

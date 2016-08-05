@@ -17,9 +17,7 @@ describe('OnsNavigatorElement', () => {
     nav.options = {cancelIfRunning: false};
     document.body.appendChild(nav);
 
-    setImmediate(() => {
-      done();
-    });
+    setImmediate(done);
   });
 
   afterEach(() => {
@@ -32,8 +30,23 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('provides \'page\' attribute', () => {
-      const content = nav.topPage._getContentElement();
-      expect(content.innerHTML).to.equal('hoge');
+    const content = nav.topPage._getContentElement();
+    expect(content.innerHTML).to.equal('hoge');
+  });
+
+  it('provides \'page\' property', () => {
+    nav.page = 'hoge';
+    expect(nav.page).to.equal('hoge');
+  });
+
+  it('provides \'pageLoader\' property', () => {
+    expect(nav.pageLoader).to.be.ok;
+    nav.pageLoader = new ons.PageLoader();
+    expect(nav.pageLoader).to.be.ok;
+  });
+
+  it('provides \'animatorFactory\' property', () => {
+    expect(nav.animatorFactory).to.be.ok;
   });
 
   describe('#pages', () => {
@@ -61,7 +74,7 @@ describe('OnsNavigatorElement', () => {
     });
 
     it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
-      nav.pushPage({
+      nav.pushPage(null, {
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -381,7 +394,7 @@ describe('OnsNavigatorElement', () => {
     it('inserts a new page on a given index using `options.pageHTML`', (done) => {
       nav.pushPage('info', {
         callback: () => {
-          nav.insertPage(0, {pageHTML: '<ons-page>fuga</ons-page>'});
+          nav.insertPage(0, null, {pageHTML: '<ons-page>fuga</ons-page>'});
           setImmediate(() => {
             expect(nav.pages.length).to.equal(3);
 
@@ -433,23 +446,20 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
     });
 
-    it('replaces the current page with a new one', (done) => {
-      nav.pushPage('info', {
-        callback: () => {
+    it('replaces the current page with a new one', () => {
+      return nav.pushPage('info')
+        .then(() => {
           expect(nav.pages.length).to.equal(2);
           const content = nav.topPage._getContentElement();
           expect(content.innerHTML).to.equal('info');
 
-          nav.replacePage('fuga', {
-            callback: () => {
+          return nav.replacePage('fuga')
+            .then(() => {
               expect(nav.pages.length).to.equal(2);
               const content = nav.topPage._getContentElement();
               expect(content.innerHTML).to.equal('fuga');
-              done();
-            }
-          });
-        }
-      });
+            });
+        });
     });
 
     it('returns a promise that resolves to the new top page', (done) => {
@@ -614,53 +624,46 @@ describe('OnsNavigatorElement', () => {
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);
-      nav2 = ons._util.createElement(` <ons-navigator page='backPage'></ons-navigator> `);
-      nav2.options = {cancelIfRunning: false};
+      nav2 = ons._util.createElement(`<ons-navigator></ons-navigator>`);
       document.body.appendChild(nav2);
 
-      setImmediate(() => {
-        done();
-      });
+      nav2.pushPage('backPage').then(() => done());
     });
 
     it('should not display on first page', () => {
+      const backBtn = nav2.topPage.backButton;
+      expect(backBtn.style.display).to.equal('none');
+    });
+
+    it('should display button after push', () => {
+      return nav2.pushPage('backPage').then(() => {
         const backBtn = nav2.topPage.backButton;
-        expect(backBtn.style.display).to.equal('none');
+        expect(backBtn.style.display).to.equal('inline-block');
+      });
     });
 
-    it('should display button after push', (done) => {
-        nav2.pushPage('backPage').then(() => {
-          const backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
-          done();
+    it('should display button after insert and hide after pop', () => {
+      return nav2.insertPage(0, 'backPage').then(() => {
+        var backBtn = nav2.topPage.backButton;
+        expect(backBtn.style.display).to.equal('inline-block');
+
+        return nav2.popPage().then(() => {
+          backBtn = nav2.topPage.backButton;
+          expect(backBtn.style.display).to.equal('none');
         });
+      });
     });
 
-    it('should display button after insert and hide after pop', (done) => {
-        nav2.insertPage(0, 'backPage').then(() => {
-          var backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
+    it('should display button after insert and hide after reset', () => {
+      return nav2.pushPage('backPage2').then(() => {
+        var backBtn = nav2.topPage.backButton;
+        expect(backBtn.style.display).to.equal('inline-block');
 
-          nav2.popPage().then(() => {
-            backBtn = nav2.topPage.backButton;
-            expect(backBtn.style.display).to.equal('none');
-            done();
-          });
+        return nav2.resetToPage('backPage').then(() => {
+          backBtn = nav2.topPage.backButton;
+          expect(backBtn.style.display).to.equal('none');
         });
-    });
-
-
-    it('should display button after insert and hide after reset', (done) => {
-        nav2.pushPage('backPage2').then(() => {
-          var backBtn = nav2.topPage.backButton;
-          expect(backBtn.style.display).to.equal('inline-block');
-
-          nav2.resetToPage('backPage').then(() => {
-            backBtn = nav2.topPage.backButton;
-            expect(backBtn.style.display).to.equal('none');
-            done();
-          });
-        });
+      });
     });
 
     afterEach(() => {

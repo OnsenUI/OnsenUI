@@ -13,6 +13,10 @@
       ons.bootstrap()
       .controller('TestController', function($scope, $timeout) {
         $scope.items = [0, 1, 2];
+        $scope.init = function() {
+          $scope.state = 'initial';
+          document.querySelector('ons-pull-hook')._disableDragLock();
+        };
         $scope.load = function($done) {
           $timeout(function() {
             $scope.items.push($scope.items.length);
@@ -24,7 +28,7 @@
   </head>
   <body>
     <ons-page ng-controller="TestController">
-      <ons-pull-hook ng-init="state = 'initial'" ons-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
+      <ons-pull-hook ng-init="init()" ons-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
         <span id="current-state">{{ state }}</span>
       </ons-pull-hook>
       <ons-list>

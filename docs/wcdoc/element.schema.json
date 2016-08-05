@@ -90,6 +90,16 @@
       "items": {"$ref": "/method"},
       "required": true
     },
+    "inputs": {
+      "type": "array",
+      "items": {"$ref": "/input"},
+      "required": true
+    },
+    "outputs": {
+      "type": "array",
+      "items": {"$ref": "/output"},
+      "required": true
+    },
     "description": {
       "type": "string",
       "required": true

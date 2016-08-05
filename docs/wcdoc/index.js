@@ -51,16 +51,14 @@ function createElementIndex(fileIndex) {
       if (!index.hasOwnProperty(element.name)) {
         index[element.name] = [];
       }
-
       index[element.name].push(docdict);
     }
   });
 
+
   var elementIndex = {};
   Object.keys(index).forEach(function(elementName) {
-    
     var docdict = mergeDocdict(index[elementName]);
-
     var element = docdict.element.find(function(element) {
       return !element.extensionOf;
     }) || docdict.element[0];
@@ -73,7 +71,9 @@ function createElementIndex(fileIndex) {
       attributes: docdict.attribute || [],
       methods: docdict.method || [],
       events: docdict.event || [],
-      properties: docdict.property || []
+      properties: docdict.property || [],
+      inputs: docdict.input || [],
+      outputs: docdict.output || [],
     });
   });
 
@@ -185,6 +185,7 @@ function collect(params) {
     src: params.src,
     basePath: __dirname + '/../../'
   }).then(function(result) {
+
     var fileIndex = createFileIndex(result);
     var elementIndex = createElementIndex(fileIndex);
     var objectIndex = createObjectIndex(fileIndex);
@@ -211,6 +212,7 @@ module.exports = function(out) {
       './core/src/ons/**/*.js',
       './bindings/angular1/directives/*.js',
       './bindings/angular1/js/*.js',
+      './bindings/angular2/src/directives/*.ts',
       '!**/*.spec.js'
     ]
   }).then(function(result) {

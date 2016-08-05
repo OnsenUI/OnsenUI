@@ -20,7 +20,7 @@ import internal from 'ons/internal';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import DeviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -184,7 +184,7 @@ class PageElement extends BaseElement {
   }
 
   get name() {
-   return this.getAttribute('name');
+    return this.getAttribute('name');
   }
 
   get backButton() {
@@ -256,7 +256,7 @@ class PageElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
-    this._backButtonHandler = DeviceBackButtonDispatcher.createHandler(this, callback);
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   /**
@@ -308,25 +308,6 @@ class PageElement extends BaseElement {
     return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
 
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerToolbar(element) {
-    this.insertBefore(element, this.children[0]);
-  }
-
-  /**
-   * Register toolbar element to this page.
-   *
-   * @param {HTMLElement} element
-   */
-  _registerBottomToolbar(element) {
-    this.classList.add('page-with-bottom-toolbar');
-    this.appendChild(element);
-  }
-
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -350,17 +331,31 @@ class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (!util.findChild(this, '.page__background') || !util.findChild(this, '.page__content')) {
+    if (util.findChild(this, '.content')) {
+      util.findChild(this, '.content').classList.add('page__content');
+    }
 
-      const background = util.create('.page__background');
+    if (util.findChild(this, '.background')) {
+      util.findChild(this, '.background').classList.add('page__background');
+    }
+
+    if (!util.findChild(this, '.page__content')) {
       const content = util.create('.page__content');
 
-      while (this.firstChild) {
-        content.appendChild(this.firstChild);
-      }
+      util.arrayFrom(this.childNodes).forEach(node => {
+        if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
+          content.appendChild(node);
+        }
+      });
 
-      this.appendChild(background);
-      this.appendChild(content);
+      const prevNode = util.findChild(this, '.page__background') || util.findChild(this, 'ons-toolbar');
+
+      this.insertBefore(content, prevNode && prevNode.nextSibling);
+    }
+
+    if (!util.findChild(this, '.page__background')) {
+      const background = util.create('.page__background');
+      this.insertBefore(background, util.findChild(this, '.page__content'));
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -368,14 +363,16 @@ class PageElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  _registerExtraElement(element) {
-    let extra = util.findChild(this, '.page__extra');
-    if (!extra) {
-      extra = util.create('.page__extra', {zIndex: 10001});
-      this.appendChild(extra);
+  _elementShouldBeMoved(el) {
+    if (el.classList.contains('page__background')) {
+      return false;
     }
-
-    extra.appendChild(element);
+    const tagName = el.tagName.toLowerCase();
+    if (tagName === 'ons-fab') {
+      return !el.hasAttribute('position');
+    }
+    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial'];
+    return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
   _show() {
@@ -414,6 +411,10 @@ class PageElement extends BaseElement {
     }
 
     util.propagateAction(this._contentElement, '_destroy');
+
+    if (this.unload instanceof Function) {
+      this.unload();
+    }
 
     this.remove();
   }

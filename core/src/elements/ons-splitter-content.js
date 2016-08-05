@@ -19,6 +19,8 @@ import util from 'ons/util';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import {PageLoader, defaultPageLoader} from 'ons/page-loader';
+import contentReady from 'ons/content-ready';
 
 const rewritables = {
   /**
@@ -84,33 +86,66 @@ class SplitterContentElement extends BaseElement {
    */
   createdCallback() {
     this._page = null;
+    this._pageLoader = defaultPageLoader;
+
+    contentReady(this, () => {
+      const page = this._getPageTarget();
+
+      if (page) {
+        this.load(page);
+      }
+    });
   }
 
   attachedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
       throw new Error(`"ons-splitter-content" must have "ons-splitter" as parentNode.`);
     }
-    this.attributeChangedCallback('page', null, this.getAttribute('page'));
+  }
+
+  _getPageTarget() {
+    return this._page || this.getAttribute('page');
   }
 
   detachedCallback() {}
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'page' && current !== null) {
-      rewritables.ready(this, () => this.load(current));
-    }
   }
 
   /**
    * @property page
-   * @readonly
    * @type {HTMLElement}
    * @description
-   *   [en]Page element loaded in the splitter content.[/en]
-   *   [ja][/ja]
+   *   [en]The page to load in the splitter content.[/en]
+   *   [ja]この要素内に表示するページを指定します。[/ja]
    */
   get page() {
     return this._page;
+  }
+
+  /**
+   * @param {*} page
+   */
+  set page(page) {
+    this._page = page;
+  }
+
+  /**
+   * @property pageLoader
+   * @type {Function}
+   * @description
+   *   [en]Page element loaded in the splitter content.[/en]
+   *   [ja]この要素内に表示するページを指定します。[/ja]
+   */
+  get pageLoader() {
+    return this._pageLoader;
+  }
+
+  set pageLoader(loader) {
+    if (!(loader instanceof PageLoader)) {
+      throw Error('First parameter must be an instance of PageLoader');
+    }
+    this._pageLoader = loader;
   }
 
   /**
@@ -126,24 +161,28 @@ class SplitterContentElement extends BaseElement {
    *   [ja]指定したURLをメインページを読み込みます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the new `<ons-page>` element[/en]
-   *   [ja][/ja]
+   *   [ja]`<ons-page>`要素を解決するPromiseオブジェクトを返します。[/ja]
    */
   load(page, options = {}) {
     this._page = page;
-    const callback = options.callback;
+    const callback = options.callback || function() {};
 
-    return internal.getPageHTMLAsync(page).then(html => new Promise(resolve => {
-      rewritables.link(this, util.createFragment(html), options, fragment => {
-        this._hide();
-        this.innerHTML = '';
+    return new Promise(resolve => {
+      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+        rewritables.link(this, element, options, fragment => {
+          this._hide();
+          while (this.firstChild) {
+            this.firstChild.remove();
+          }
 
-        this.appendChild(fragment);
+          this.appendChild(fragment);
+          this._show();
+          callback();
 
-        this._show();
-        callback && callback();
-        resolve(this.firstChild);
+          resolve(this.firstChild);
+        });
       });
-    }));
+    });
   }
 
   _show() {

@@ -271,7 +271,7 @@ describe('OnsCarouselElement', () => {
   });
 
   describe('#_onDragEnd()', () => {
-    let ev;
+    let ev, last;
 
     beforeEach(() => {
       ev = new CustomEvent('drag');
@@ -281,12 +281,20 @@ describe('OnsCarouselElement', () => {
         velocityX: -10,
         preventDefault: () => {}
       };
+      last = new CustomEvent('drag');
+      last.gesture = {
+        direction: 'left',
+        deltaX: -2,
+        velocityX: -2,
+        preventDefault: () => {}
+      };
     });
 
     it('should work if carousel is swipeable', () => {
       carousel.swipeable = true;
+      carousel._lastDragEvent = last;
       carousel._onDragEnd(ev);
-      expect(carousel._scroll).to.not.equal(0);
+      expect(carousel._lastDragEvent).not.to.be.ok;
     });
 
     it('should call \'_scrollToKillOverScroll\' if overscrolled', () => {
@@ -297,6 +305,7 @@ describe('OnsCarouselElement', () => {
       ev.gesture.velocityX = 10;
 
       const spy = chai.spy.on(carousel, '_scrollToKillOverScroll');
+      carousel._lastDragEvent = last;
       carousel._onDragEnd(ev);
       expect(spy).to.be.called.once;
     });

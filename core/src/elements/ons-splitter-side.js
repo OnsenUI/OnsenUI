@@ -25,6 +25,7 @@ import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
+import {defaultPageLoader, PageLoader} from 'ons/page-loader';
 import OnsSplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
@@ -82,8 +83,8 @@ class CollapseDetection {
 
   activate() {
     if (this._orientation) {
-      ons.orientation.on('change', this._boundOnChange);
-      this._onChange({isPortrait: ons.orientation.isPortrait()});
+      orientation.on('change', this._boundOnChange);
+      this._onChange({isPortrait: orientation.isPortrait()});
     } else {
       this._queryResult = window.matchMedia(this._target);
       this._queryResult.addListener(this._boundOnChange);
@@ -93,7 +94,7 @@ class CollapseDetection {
 
   disable() {
     if (this._orientation) {
-      ons.orientation.off('change', this._boundOnChange);
+      orientation.off('change', this._boundOnChange);
     } else if (this._queryResult) {
       this._queryResult.removeListener(this._boundOnChange);
       this._queryResult = null;
@@ -160,6 +161,7 @@ class CollapseMode {
     const direction = event.gesture.interimDirection;
     const shouldOpen = el._side !== direction && distance > width * el._threshold;
     this.executeAction(shouldOpen ? 'open' : 'close');
+    this._ignoreDrag = true;
   }
 
   layout() {
@@ -245,7 +247,7 @@ class CollapseMode {
  *  [en]
  *    The `<ons-splitter-side>` element is used as a child element of `<ons-splitter>`.
  *
- *    It will be displayed on either the left or right side of the `<ons-splitte-content>` element.
+ *    It will be displayed on either the left or right side of the `<ons-splitter-content>` element.
  *
  *    It supports two modes: collapsed and split. When it's in collapsed mode it will be hidden from view and can be displayed when the user swipes the screen or taps a button. In split mode the element is always shown. It can be configured to automatically switch between the two modes depending on the screen size.
  *  [/en]
@@ -440,8 +442,11 @@ class SplitterSideElement extends BaseElement {
    */
 
   createdCallback() {
+    this._page = null;
+    this._pageLoader = defaultPageLoader;
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
+
     this._animatorFactory = new AnimatorFactory({
       animators: OnsSplitterElement._animatorDict,
       baseClass: SplitterAnimator,
@@ -449,7 +454,17 @@ class SplitterSideElement extends BaseElement {
       defaultAnimation: this.getAttribute('animation')
     });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold', 'page'];
+    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
+
+    contentReady(this, () => {
+      rewritables.ready(this, () => {
+        const page = this._getPageTarget();
+
+        if (page) {
+          this.load(page);
+        }
+      });
+    });
   }
 
   attachedCallback() {
@@ -459,13 +474,17 @@ class SplitterSideElement extends BaseElement {
 
     this._gestureDetector = new GestureDetector(this.parentElement, {dragMinDistance: 1});
 
-    if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'left');
-    }
-
     contentReady(this, () => {
       this._watchedAttributes.forEach(e => this._update(e));
     });
+
+    if (!this.hasAttribute('side')) {
+      this.setAttribute('side', 'left');
+    }
+  }
+
+  _getPageTarget() {
+    return this._page || this.getAttribute('page');
   }
 
   detachedCallback() {
@@ -523,12 +542,6 @@ class SplitterSideElement extends BaseElement {
     }
   }
 
-  _updatePage(page = this.getAttribute('page')) {
-    if (page !== null) {
-      rewritables.ready(this, () => this.load(page));
-    }
-  }
-
   _updateOpenThreshold(threshold = this.getAttribute('open-threshold')) {
     this._threshold = Math.max(0, Math.min(1, parseFloat(threshold) || 0.3));
   }
@@ -545,9 +558,17 @@ class SplitterSideElement extends BaseElement {
     this._swipeTargetWidth = Math.max(0, parseInt(value) || 0);
   }
 
-  _updateWidth(width = this.getAttribute('width')) {
-    this._width = /^\d+(px|%)$/.test(width) ? width : '80%';
+  _updateWidth() {
     this.style.width = this._width;
+  }
+
+  get _width() {
+    const width = this.getAttribute('width');
+    return /^\d+(px|%)$/.test(width) ? width : '80%';
+  }
+
+  set _width(value) {
+    this.setAttribute('width', value);
   }
 
   _updateSide(side = this.getAttribute('side')) {
@@ -565,14 +586,37 @@ class SplitterSideElement extends BaseElement {
 
   /**
    * @property page
-   * @readonly
-   * @type {HTMLElement}
+   * @type {*}
    * @description
-   *   [en]Page element loaded in the splitter side.[/en]
-   *   [ja][/ja]
+   *   [en]Page location to load in the splitter side.[/en]
+   *   [ja]この要素内に表示するページを指定します。[/ja]
    */
   get page() {
     return this._page;
+  }
+
+  /**
+   * @param {*} page
+   */
+  set page(page) {
+    this._page = page;
+  }
+
+  /**
+   * @property pageLoader
+   * @description
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+  get pageLoader() {
+    return this._pageLoader;
+  }
+
+  set pageLoader(loader) {
+    if (!(loader instanceof PageLoader)) {
+      throw Error('First parameter must be an instance of PageLoader.');
+    }
+    this._pageLoader = loader;
   }
 
   /**
@@ -671,20 +715,24 @@ class SplitterSideElement extends BaseElement {
    */
   load(page, options = {}) {
     this._page = page;
-    const callback = options.callback;
+    const callback = options.callback || (() => {});
 
-    return internal.getPageHTMLAsync(page).then(html => new Promise(resolve => {
-      rewritables.link(this, util.createFragment(html), options, fragment => {
-        this._hide();
+    return new Promise(resolve => {
+      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+        rewritables.link(this, element, options, fragment => {
+          this._hide();
+          while (this.firstChild) {
+            this.firstChild.remove();
+          }
 
-        this.innerHTML = '';
-        this.appendChild(fragment);
+          this.appendChild(fragment);
+          this._show();
+          callback();
 
-        this._show();
-        callback && callback();
-        resolve(this.firstChild);
+          resolve(this.firstChild);
+        });
       });
-    }));
+    });
   }
 
   _show() {

@@ -96,7 +96,6 @@ class BackButtonElement extends BaseElement {
       while (this.childNodes[0]) {
         label.appendChild(this.childNodes[0]);
       }
-
       this.appendChild(label);
     }
 

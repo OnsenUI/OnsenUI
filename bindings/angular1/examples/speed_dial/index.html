@@ -23,45 +23,14 @@
       <div class="center">Speed Dial</div>
     </ons-toolbar>
 
-    <section style="text-align:center;">
-      <p></p>
-
-      <ons-speed-dial position="left bottom" direction="right">
-        <ons-fab>
-          <ons-icon icon="md-car"></ons-icon>
-        </ons-fab>
-        <ons-speed-dial-item>C</ons-speed-dial-item>
-        <ons-speed-dial-item>B</ons-speed-dial-item>
-        <ons-speed-dial-item>A</ons-speed-dial-item>
-      </ons-speed-dial>
-
-      <ons-speed-dial position="top right" style="top: 100px;" direction="left">
-        <ons-fab>
-          <ons-icon icon="md-car"></ons-icon>
-        </ons-fab>
-        <ons-speed-dial-item>C</ons-speed-dial-item>
-        <ons-speed-dial-item>B</ons-speed-dial-item>
-        <ons-speed-dial-item>A</ons-speed-dial-item>
-      </ons-speed-dial>
-
-      <ons-speed-dial position="top left" style="top: 100px;" direction="down">
-        <ons-fab>
-          <ons-icon icon="md-car"></ons-icon>
-        </ons-fab>
-        <ons-speed-dial-item>C</ons-speed-dial-item>
-        <ons-speed-dial-item>B</ons-speed-dial-item>
-        <ons-speed-dial-item>A</ons-speed-dial-item>
-      </ons-speed-dial>
-
-      <ons-speed-dial position="bottom right" direction="up">
-        <ons-fab>
-          <ons-icon icon="md-car"></ons-icon>
-        </ons-fab>
-        <ons-speed-dial-item>C</ons-speed-dial-item>
-        <ons-speed-dial-item>B</ons-speed-dial-item>
-        <ons-speed-dial-item>A</ons-speed-dial-item>
-      </ons-speed-dial>
-    </section>
+    <ons-speed-dial var="speedDial" ons-open="console.log('open')" ons-close="console.log('close')" position="bottom right" direction="up">
+      <ons-fab>
+        <ons-icon icon="md-car"></ons-icon>
+      </ons-fab>
+      <ons-speed-dial-item ng-click="speedDial.hideItems()">C</ons-speed-dial-item>
+      <ons-speed-dial-item ng-click="speedDial.hideItems()">B</ons-speed-dial-item>
+      <ons-speed-dial-item ng-click="speedDial.hideItems()">A</ons-speed-dial-item>
+    </ons-speed-dial>
   </ons-page>
 </body>
 </html>

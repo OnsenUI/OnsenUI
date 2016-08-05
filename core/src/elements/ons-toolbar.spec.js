@@ -79,14 +79,6 @@ describe('OnsToolbarElement', () => {
   });
   */
 
-  describe('#attachedCallbad()', () => {
-    it('does not register extra element when has no parent ons-page', () => {
-      var spy = chai.spy.on(element, '_registerToolbar');
-      document.body.appendChild(element);
-      expect(spy).to.not.have.been.called();
-    });
-  });
-
   describe('#_compile()', () => {
     it('removes non-element children', () => {
       const element = ons._util.createElement('<ons-toolbar>Test1<div class="center">Test2</div></ons-toolbar>');

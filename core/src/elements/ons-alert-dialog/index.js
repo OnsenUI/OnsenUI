@@ -468,23 +468,21 @@ class AlertDialogElement extends BaseElement {
 
   /**
    * @property onDeviceBackButton
-   * @readonly
    * @type {Object}
    * @description
-   *   [en]Retrieve the back-button handler.[/en]
-   *   [ja]バックボタンハンドラを取得します。[/ja]
+   *   [en]Back-button handler.[/en]
+   *   [ja]バックボタンハンドラ。[/ja]
    */
   get onDeviceBackButton() {
     return this._backButtonHandler;
   }
 
-
-  _onDeviceBackButton(event) {
-    if (this.cancelable) {
-      this._cancel();
-    } else {
-      event.callParentHandler();
+  set onDeviceBackButton(callback) {
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
     }
+
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
   _cancel() {
@@ -493,14 +491,14 @@ class AlertDialogElement extends BaseElement {
       this.hide({
         callback: () => {
           this._running = false;
-          util.triggerElementEvent(this, 'cancel');
+          util.triggerElementEvent(this, 'dialog-cancel');
         }
       });
     }
   }
 
   attachedCallback() {
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
       this._mask.addEventListener('click', this._boundCancel, false);

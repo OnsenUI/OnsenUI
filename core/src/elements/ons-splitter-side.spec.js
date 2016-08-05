@@ -31,6 +31,17 @@ describe('OnsSplitterSideElement', () => {
     expect(left._destroy instanceof Function).to.be.ok;
   });
 
+  it('provide page property', () => {
+    left.page = 'hoge';
+    expect(left.page).to.be.equal('hoge');
+  });
+
+  it('provide pageLoader property', () => {
+    expect(left.pageLoader instanceof ons.PageLoader).to.be.ok;
+    left.pageLoader = new ons.PageLoader();
+    expect(left.pageLoader instanceof ons.PageLoader).to.be.ok;
+  });
+
   describe('#load()', () => {
     let template;
 

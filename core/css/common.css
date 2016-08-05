@@ -44,7 +44,7 @@ ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
 
-ons-fab {
+ons-fab, ons-speed-dial {
   z-index: 3;
 }
 
@@ -145,9 +145,8 @@ ons-list-item[disabled] {
 }
 
 ons-pull-hook {
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: relative;
+  display: block;
   margin: auto;
   text-align: center;
   z-index: 20002;
@@ -198,6 +197,15 @@ ons-splitter-side[mode="collapse"] {
 ons-splitter-side[side="right"][mode="collapse"] {
   right: auto;
   left: 100%;
+}
+
+ons-splitter-side[mode="split"] ~ ons-splitter-mask {
+  display: none !important;
+}
+
+ons-splitter-side[mode="split"] {
+  transform: none !important;
+  transition: none !important;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {

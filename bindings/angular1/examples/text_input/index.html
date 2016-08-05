@@ -25,7 +25,12 @@
 
     <section style="padding: 8px">
       <p>
-        <ons-input placeholder="Type here" float></ons-input>
+        <ons-input ng-model="input" placeholder="Type here" float></ons-input>
+        <input ng-model="input" placeholder="Type here">
+      </p>
+
+      <p>
+        {{ input }}
       </p>
 
       <br>

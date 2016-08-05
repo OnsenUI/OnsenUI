@@ -56,9 +56,8 @@ class BottomToolbarElement extends BaseElement {
   }
 
   attachedCallback() {
-    const page = util.findParent(this, 'ons-page');
-    if (this.parentNode != page) {
-      page._registerBottomToolbar(this);
+    if (util.match(this.parentNode, 'ons-page')) {
+      this.parentNode.classList.add('page-with-bottom-toolbar');
     }
   }
 

@@ -370,8 +370,8 @@ input:disabled + .switch__toggle {
   box-shadow: 0px 0px 0px 14px rgba(0,0,0,0.12);
 }
 .switch.switch--material.switch--active input:checked + .switch__toggle .switch__handle:before {
-  -webkit-box-shadow: 0px 0px 0px 14px rgba(0,150,136,0.2);
-  box-shadow: 0px 0px 0px 14px rgba(0,150,136,0.2);
+  -webkit-box-shadow: 0px 0px 0px 14px 1;
+  box-shadow: 0px 0px 0px 14px 1;
 }
 .switch.switch--material .switch__touch {
   position: absolute;
@@ -727,8 +727,6 @@ ons-range[disabled] .range {
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
-  overflow: visible;
-  overflow-x: hidden;
   border-bottom: none;
   -webkit-background-size: 100% 1px;
   background-size: 100% 1px;
@@ -1221,7 +1219,7 @@ ons-range[disabled] .range {
   color: #8962ed;
 }
 .button--outline:active {
-  background-color: rgba(137,98,237,0.2);
+  background-color: 1;
   border: 1px solid #8962ed;
   color: #8962ed;
   opacity: 1;
@@ -1404,7 +1402,7 @@ ons-range[disabled] .range {
   outline: 0;
 }
 .button--cta:active {
-  color: var-button-cat-color;
+  color: #fff;
   background-color: #574bdb;
   -webkit-transition: none;
   -moz-transition: none;
@@ -1951,7 +1949,7 @@ ons-range[disabled] .range {
 }
 .button-bar__button:active,
 :active + .button-bar__button {
-  background-color: rgba(172,98,237,0.2);
+  background-color: 1;
   border: 0px solid #ac62ed;
   border-top: 1px solid #ac62ed;
   border-bottom: 1px solid #ac62ed;
@@ -2690,12 +2688,12 @@ ons-range[disabled] .range {
   display: inline-block;
   height: 100%;
   vertical-align: top;
-  margin-left: 12px;
 }
 .back-button__icon {
   display: inline-block;
   height: 100%;
   vertical-align: top;
+  margin-right: 6px;
 }
 .back-button__icon:before {
   font-family: 'Ionicons';
@@ -3688,82 +3686,6 @@ ons-range[disabled] .range {
   box-shadow: none;
 }
 /* topdoc
-  name: List item without divider
-  class: list__item--nodivider
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
-      </li>
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
-      </li>
-    </ul>
- */
-.list__item--nodivider__center {
-  border: none;
-  background-image: none;
-}
-.list__item--nodivider__right {
-  border: none;
-  background-image: none;
-}
-.list__item--nodivider.list__item--chevron:before {
-  border: none;
-  background-image: none;
-}
-/* topdoc
-  name: List item with long divider
-  class: list__item--longdivider
-  use: List
-  markup:
-    <ul class="list">
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
-      </li>
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
-      </li>
-    </ul>
- */
-.list__item--longdivider {
-  border-bottom: 1px solid #ddd;
-  border-bottom: none;
-  -webkit-background-size: 100% 1px;
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 100%);
-  background-image: -moz-linear-gradient(90deg, #ddd, #ddd 100%);
-  background-image: -o-linear-gradient(90deg, #ddd, #ddd 100%);
-  background-image: linear-gradient(0deg, #ddd, #ddd 100%);
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__item--longdivider {
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
-  }
-}
-.list__item--longdivider:last-of-type {
-  border: none;
-  background-image: none;
-}
-.list__item--longdivider__center {
-  border: none;
-  background-image: none;
-}
-.list__item--longdivider__right {
-  border: none;
-  background-image: none;
-}
-.list__item--longdivider.list__item--chevron:before {
-  border: none;
-  background-image: none;
-}
-/* topdoc
   name: Category List Header
   class: list__header
   use: List
@@ -4438,6 +4360,82 @@ ons-range[disabled] .range {
   padding: 0 4px;
 }
 /* topdoc
+  name: List item without divider
+  class: list__item--nodivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--nodivider">
+        <div class="list__item__center list__item--nodivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--nodivider__center {
+  border: none;
+  background-image: none;
+}
+.list__item--nodivider__right {
+  border: none;
+  background-image: none;
+}
+.list__item--nodivider.list__item--chevron:before {
+  border: none;
+  background-image: none;
+}
+/* topdoc
+  name: List item with long divider
+  class: list__item--longdivider
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+      <li class="list__item list__item--longdivider">
+        <div class="list__item__center list__item--longdivider__center">Item</div>
+      </li>
+    </ul>
+ */
+.list__item--longdivider {
+  border-bottom: 1px solid #ddd;
+  border-bottom: none;
+  -webkit-background-size: 100% 1px;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 100%);
+  background-image: -moz-linear-gradient(90deg, #ddd, #ddd 100%);
+  background-image: -o-linear-gradient(90deg, #ddd, #ddd 100%);
+  background-image: linear-gradient(0deg, #ddd, #ddd 100%);
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--longdivider {
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.list__item--longdivider:last-of-type {
+  border: none;
+  background-image: none;
+}
+.list__item--longdivider__center {
+  border: none;
+  background-image: none;
+}
+.list__item--longdivider__right {
+  border: none;
+  background-image: none;
+}
+.list__item--longdivider.list__item--chevron:before {
+  border: none;
+  background-image: none;
+}
+/* topdoc
   name: Search Input
   class: search-input
   modifiers:
@@ -4803,6 +4801,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   0% {
     background-size: 0% 2px, 100% 2px;
   }
+
   100% {
     background-size: 100% 2px, 100% 2px;
   }
@@ -4812,6 +4811,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     -webkit-background-size: 0% 2px, 100% 2px;
     background-size: 0% 2px, 100% 2px;
   }
+
   100% {
     -webkit-background-size: 100% 2px, 100% 2px;
     background-size: 100% 2px, 100% 2px;
@@ -4821,6 +4821,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   0% {
     background-size: 0% 2px, 100% 2px;
   }
+
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-ms-keyframes material-text-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+
   100% {
     background-size: 100% 2px, 100% 2px;
   }
@@ -4830,6 +4840,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     -webkit-background-size: 0% 2px, 100% 2px;
     background-size: 0% 2px, 100% 2px;
   }
+
   100% {
     -webkit-background-size: 100% 2px, 100% 2px;
     background-size: 100% 2px, 100% 2px;
@@ -5474,6 +5485,10 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 .popover__content {
   -webkit-box-sizing: border-box;
@@ -5638,6 +5653,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   display: inline-block;
   max-height: 100%;
   overflow: auto;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
 /*border-bottom 4px solid transparent*/
 }
 .popover__content--material {
@@ -5807,10 +5827,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -35%;
     right: 100%;
   }
+
   60% {
     left: 100%;
     right: -90%;
   }
+
   100% {
     left: 100%;
     right: -90%;
@@ -5821,10 +5843,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -35%;
     right: 100%;
   }
+
   60% {
     left: 100%;
     right: -90%;
   }
+
   100% {
     left: 100%;
     right: -90%;
@@ -5835,10 +5859,28 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -35%;
     right: 100%;
   }
+
   60% {
     left: 100%;
     right: -90%;
   }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-ms-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
   100% {
     left: 100%;
     right: -90%;
@@ -5849,10 +5891,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -35%;
     right: 100%;
   }
+
   60% {
     left: 100%;
     right: -90%;
   }
+
   100% {
     left: 100%;
     right: -90%;
@@ -5863,10 +5907,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -200%;
     right: 100%;
   }
+
   60% {
     left: 107%;
     right: -8%;
   }
+
   100% {
     left: 107%;
     right: -8%;
@@ -5877,10 +5923,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -200%;
     right: 100%;
   }
+
   60% {
     left: 107%;
     right: -8%;
   }
+
   100% {
     left: 107%;
     right: -8%;
@@ -5891,10 +5939,28 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -200%;
     right: 100%;
   }
+
   60% {
     left: 107%;
     right: -8%;
   }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@-ms-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
   100% {
     left: 107%;
     right: -8%;
@@ -5905,10 +5971,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     left: -200%;
     right: 100%;
   }
+
   60% {
     left: 107%;
     right: -8%;
   }
+
   100% {
     left: 107%;
     right: -8%;
@@ -5991,6 +6059,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     transform: rotate(360deg);
   }
 }
+@-ms-keyframes progress__rotate {
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 @keyframes progress__rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -6004,10 +6078,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: 0%;
   }
+
   50% {
     stroke-dasharray: 201%, 50.322%;
     stroke-dashoffset: -100%;
   }
+
   100% {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
@@ -6018,10 +6094,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: 0%;
   }
+
   50% {
     stroke-dasharray: 201%, 50.322%;
     stroke-dashoffset: -100%;
   }
+
   100% {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
@@ -6032,10 +6110,28 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: 0%;
   }
+
   50% {
     stroke-dasharray: 201%, 50.322%;
     stroke-dashoffset: -100%;
   }
+
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@-ms-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+
   100% {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
@@ -6046,10 +6142,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: 0%;
   }
+
   50% {
     stroke-dasharray: 201%, 50.322%;
     stroke-dashoffset: -100%;
   }
+
   100% {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
@@ -6141,7 +6239,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 }
 .fab:disabled,
 .fab[disabled] {
-  background-color: rgba(0,0,0,0.5);
+  background-color: 1;
   -webkit-box-shadow: none;
   box-shadow: none;
   opacity: 0.3;

@@ -108,15 +108,14 @@ describe('OnsModalElement', () => {
     });
   });
 
-  describe('#_onDeviceBackButton()', () => {
-    it('returns nothing by default', () => {
-      expect(element._onDeviceBackButton()).not.to.be.ok;
-    });
-  });
 
   describe('#onDeviceBackButton', () => {
     it('gets the callback', () => {
       expect(element.onDeviceBackButton).to.be.ok;
+    });
+
+    it('returns nothing by default', () => {
+      expect(element.onDeviceBackButton._callback()).not.to.be.ok;
     });
 
     it('overwrites the callback', () => {
@@ -124,23 +123,6 @@ describe('OnsModalElement', () => {
       element.onDeviceBackButton = () => { return; };
       expect(spy).to.have.been.called.once;
       expect(element._backButtonHandler).to.be.ok;
-    });
-  });
-
-  describe('#_ensureNodePosition()', () => {
-    it('does not register extra element when has no parent ons-page', () => {
-      const spy = chai.spy.on(element, '_registerExtraElement');
-      expect(element._ensureNodePosition()).not.to.be.ok;
-      expect(spy).to.not.have.been.called();
-    });
-
-    it('registers extra element when has parent ons-page', () => {
-      const element = new OnsModalElement();
-      const parent = new OnsPageElement();
-      const spy = chai.spy.on(parent, '_registerExtraElement');
-      parent._registerExtraElement(element);
-      element._ensureNodePosition();
-      expect(spy).to.have.been.called.twice;
     });
   });
 

@@ -16,12 +16,20 @@ limitations under the License.
 */
 
 import util from 'ons/util';
+import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import GestureDetector from 'ons/gesture-detector';
 
 const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
+
+const removeTransform = (el) => {
+  el.style.transform = '';
+  el.style.WebkitTransform = '';
+  el.style.transition = '';
+  el.style.WebkitTransition = '';
+};
 
 /**
  * @element ons-pull-hook
@@ -105,36 +113,16 @@ class PullHookElement extends BaseElement {
     this._boundOnDragEnd = this._onDragEnd.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
 
-    this._currentTranslation = 0;
-
     this._setState(STATE_INITIAL, true);
-    this._setStyle();
-  }
-
-  _createScrollElement() {
-    if (this.parentElement.classList.contains('scroll')) {
-      return this.parentElement;
-    }
-
-    const scrollElement = util.createElement('<div class="scroll"><div>');
-
-    const pageElement = this.parentElement;
-
-    scrollElement.appendChild(this);
-    while (pageElement.firstChild) {
-      scrollElement.appendChild(pageElement.firstChild);
-    }
-    pageElement.appendChild(scrollElement);
-
-    return scrollElement;
   }
 
   _setStyle() {
     const height = this.height;
 
-    this.style.top = '-' + height + 'px';
-    this.style.height = height + 'px';
-    this.style.lineHeight = height + 'px';
+    this.style.height = `${height}px`;
+    this.style.lineHeight = `${height}px`;
+    this.style.marginTop = '-1px';
+    this._pageElement.style.marginTop = `-${height}px`;
   }
 
   _onScroll(event) {
@@ -146,7 +134,7 @@ class PullHookElement extends BaseElement {
   }
 
   _generateTranslationTransform(scroll) {
-    return 'translate3d(0px, ' + scroll + 'px, 0px)';
+    return `translate3d(0px, ${scroll}px, 0px)`;
   }
 
   _onDrag(event) {
@@ -154,18 +142,15 @@ class PullHookElement extends BaseElement {
       return;
     }
 
-    // Ignore when dragging left and right.
-    if (event.gesture.direction === 'left' || event.gesture.direction === 'right') {
-      return;
-    }
-
     // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
     // there will be no inertial scroll when scrolling down. Allowing default scrolling will
     // kill all 'touchmove' events.
-    const element = this._pageElement;
-    element.scrollTop = this._startScroll - event.gesture.deltaY;
-    if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-      event.gesture.preventDefault();
+    if (platform.isAndroid()) {
+      const element = this._pageElement;
+      element.scrollTop = this._startScroll - event.gesture.deltaY;
+      if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+        event.gesture.preventDefault();
+      }
     }
 
     if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
@@ -349,7 +334,7 @@ class PullHookElement extends BaseElement {
     if (this._isContentFixed()) {
       return this;
     } else {
-      return this._scrollElement;
+      return this._pageElement;
     }
   }
 
@@ -365,7 +350,8 @@ class PullHookElement extends BaseElement {
 
     const done = () => {
       if (scroll === 0) {
-        this._getScrollableElement().removeAttribute('style');
+        const el = this._getScrollableElement();
+        removeTransform(el);
       }
 
       if (options.callback) {
@@ -393,30 +379,30 @@ class PullHookElement extends BaseElement {
     }
   }
 
-  _getMinimumScroll() {
-    const scrollHeight = this._scrollElement.getBoundingClientRect().height;
-    const pageHeight = this._pageElement.getBoundingClientRect().height;
-
-    return scrollHeight > pageHeight ? -(scrollHeight - pageHeight) : 0;
+  _disableDragLock() { // e2e tests need it
+    this._dragLockDisabled = true;
+    this._destroyEventListeners();
+    this._createEventListeners();
   }
 
   _createEventListeners() {
     this._gestureDetector = new GestureDetector(this._pageElement, {
       dragMinDistance: 1,
-      dragDistanceCorrection: false
+      dragDistanceCorrection: false,
+      dragLockToAxis: !this._dragLockDisabled
     });
 
     // Bind listeners
-    this._gestureDetector.on('drag', this._boundOnDrag);
+    this._gestureDetector.on('dragup dragdown', this._boundOnDrag);
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
-    this._scrollElement.parentElement.addEventListener('scroll', this._boundOnScroll, false);
+    this._pageElement.addEventListener('scroll', this._boundOnScroll, false);
   }
 
   _destroyEventListeners() {
     if (this._gestureDetector) {
-      this._gestureDetector.off('drag', this._boundOnDrag);
+      this._gestureDetector.off('dragup dragdown', this._boundOnDrag);
       this._gestureDetector.off('dragstart', this._boundOnDragStart);
       this._gestureDetector.off('dragend', this._boundOnDragEnd);
 
@@ -424,28 +410,27 @@ class PullHookElement extends BaseElement {
       this._gestureDetector = null;
     }
 
-    if (this._scrollElement && this._scrollElement.parentElement) {
-      this._scrollElement.parentElement.removeEventListener('scroll', this._boundOnScroll, false);
-    }
+    this._pageElement.removeEventListener('scroll', this._boundOnScroll, false);
   }
 
   attachedCallback() {
-    this._scrollElement = this._createScrollElement();
-
-    this._pageElement = this._scrollElement.parentElement;
-
-    if (!this._pageElement.classList.contains('page__content')) {
-      throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
-    }
+    this._currentTranslation = 0;
+    this._pageElement = this.parentNode;
 
     this._createEventListeners();
+    this._setStyle();
   }
 
   detachedCallback() {
+    this._pageElement.style.marginTop = '';
+
     this._destroyEventListeners();
   }
 
   attributeChangedCallback(name, last, current) {
+    if (name === 'height') {
+      this._setStyle();
+    }
   }
 }
 

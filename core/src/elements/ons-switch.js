@@ -227,7 +227,6 @@ class SwitchElement extends BaseElement {
   click() {
     if (!this.disabled) {
       this.checked = !this.checked;
-      util.triggerElementEvent(this.checkbox, 'change');
     }
   }
 
@@ -248,6 +247,9 @@ class SwitchElement extends BaseElement {
       this.classList.remove('switch--active');
       return;
     }
+
+    e.stopPropagation();
+
     this.classList.add('switch--active');
     this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
 
