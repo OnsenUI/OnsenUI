@@ -148,6 +148,8 @@ function onsNavigator(navigator: OnsNavigatorElement): void {
   navigator.resetToPage({});
   navigator.replacePage('myPage.html');
   navigator.replacePage(null);
+  navigator.bringPageTop('myPage.html');
+  navigator.bringPageTop('myPage.html', {});
 
   navigator.options.animationOptions = 'lift';
   navigator.pushPage('', pushOptions.options.animationOptions);

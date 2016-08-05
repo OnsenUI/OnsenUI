@@ -638,10 +638,11 @@ interface OnsNavigatorElement {
    */
   resetToPage(page: any, options?: navigatorOptions): Promise<HTMLElement>;
   /**
-   * @param {String} || {Number}
+   * @param {any} item
+   * @param {Object} [options]
    * @description Page URL or index of an existing page in navigator's stack.
    */
-  bringPageTop({item: string,item: number}, options?: Object): Promise<HTMLElement>;
+  bringPageTop(item: any, options?: Object): Promise<HTMLElement>;
 
   /**
    * @return {HTMLElement}
