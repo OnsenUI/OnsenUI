@@ -109,7 +109,7 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 ////////////////////////////////////////
 // core-test
 ////////////////////////////////////////
-gulp.task('core-test', ['prepare', 'core'], () => {
+gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], () => {
   return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
@@ -119,6 +119,15 @@ gulp.task('core-test', ['prepare', 'core'], () => {
       $.util.log($.util.colors.red(err.message));
       throw err;
     });
+});
+
+////////////////////////////////////////
+// core-dts-test
+////////////////////////////////////////
+gulp.task('core-dts-test', () => {
+  return gulp.src('core/src/onsenui-test.ts', {read: false})
+    .pipe($.shell('tsc -v'))
+    .pipe($.shell('tsc "<%= file.path %>"'));
 });
 
 ////////////////////////////////////////
