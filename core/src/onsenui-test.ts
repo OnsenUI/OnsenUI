@@ -139,10 +139,17 @@ function onsNavigator(navigator: OnsNavigatorElement): void {
   pushOptions.options.animation = 'left';
 
   navigator.pushPage('myPage.html', pushOptions);
+  navigator.pushPage({}, pushOptions);
+  navigator.pushPage(null, pushOptions);
   navigator.insertPage(2, 'myPage2.html');
+  navigator.insertPage(2, {});
   navigator.popPage();
   navigator.resetToPage('myPage.html');
+  navigator.resetToPage({});
   navigator.replacePage('myPage.html');
+  navigator.replacePage(null);
+  navigator.bringPageTop('myPage.html');
+  navigator.bringPageTop('myPage.html', {});
 
   navigator.options.animationOptions = 'lift';
   navigator.pushPage('', pushOptions.options.animationOptions);
@@ -202,101 +209,110 @@ function SplitterContent(splitterContent: OnsSplitterContentElement): void {
     callback: Function
   }
   splitterContent.load('myPage.html', options);
+  splitterContent.load({}, options);
   splitterContent.page;
 }
 
 function onsSplitterSide(splitterSide: OnsSplitterSideElement): void {
-    splitterSide.page;
-    splitterSide.mode;
-    splitterSide.isOpen;
+  splitterSide.page;
+  splitterSide.mode;
+  splitterSide.isOpen;
 
-    var options: SplitterSideOptions = {
-        callback: function myFunction() {}
-    };
+  var options: SplitterSideOptions = {
+    callback: function myFunction() {}
+  };
 
-    splitterSide.open(options);
-    splitterSide.close(options);
-    splitterSide.toggle(options);
-    splitterSide.load('string', options);
+  splitterSide.open(options);
+  splitterSide.close(options);
+  splitterSide.toggle(options);
+  splitterSide.load('string', options);
 
 }
 
 function onsLazyRepeat(lazyRepeat: OnsLazyRepeatElement): void {
-    lazyRepeat.refresh();
-    var content: HTMLElement = document.getElementById('#my-content');
-    var delegate: LazyRepeatOptions = {
-        createItemContent: content,
-        countItems: 0,
-        calculateItemHeight: 0,
-        destroyItem: 'string',
-        configureItemScope: 0
-    };
+  lazyRepeat.refresh();
+  var content: HTMLElement = document.getElementById('#my-content');
+  var delegate: LazyRepeatOptions = {
+    createItemContent: content,
+    countItems: 0,
+    calculateItemHeight: 0,
+    destroyItem: 'string',
+    configureItemScope: 0
+  };
 
-    lazyRepeat.delegate.calculateItemHeight;
-    lazyRepeat.delegate.configureItemScope;
-    lazyRepeat.delegate.countItems;
-    lazyRepeat.delegate.createItemContent;
-    lazyRepeat.delegate.destroyItem;
+  lazyRepeat.delegate.calculateItemHeight;
+  lazyRepeat.delegate.configureItemScope;
+  lazyRepeat.delegate.countItems;
+  lazyRepeat.delegate.createItemContent;
+  lazyRepeat.delegate.destroyItem;
 }
 
 function OnsButton(button: OnsButtonElement): void {
-    button.disabled;
+  button.disabled;
 }
 
 function FabElement(fab: OnsFabElement): void {
-    fab.hide();
-    fab.show();
-    fab.toggle();
-    fab.disabled;
-    fab.visible;
+  fab.hide();
+  fab.show();
+  fab.toggle();
+  fab.disabled;
+  fab.visible;
 }
 
 function onsInput(input: OnsInputElement): void {
-    input.value;
-    input.checked;
-    input.disabled;
+  input.value;
+  input.checked;
+  input.disabled;
 }
 
 function onsRange(range: OnsRangeElement): void {
-    range.disabled;
-    range.value;
+  range.disabled;
+  range.value;
 }
 
 function onsRipple(ripple: OnsRippleElement): void {
-    ripple.disabled;
+  ripple.disabled;
 }
 
 function onsSplitterContent(splitterContent: OnsSplitterContentElement): void {
-    var options: SplitterContentOptions = {
-        callback: function myFunction() {}
-    };
-    splitterContent.load('myPage.html', options);
+  var options: SplitterContentOptions = {
+    callback: function myFunction() {}
+  };
+  splitterContent.load('myPage.html', options);
+  splitterContent.load({}, options);
 }
 
 function onsSplitter(splitter: OnsSplitterElement): void {
-    splitter.left;
-    splitter.right;
-    splitter.content;
-    splitter.onDeviceBackButton;
+  splitter.left;
+  splitter.right;
+  splitter.content;
+  splitter.onDeviceBackButton;
 }
 
 function onsBackButton(backButton: OnsBackButtonElement): void {
-    var options: BackButtonOptions = {
-        animation: 'string',
-        animationOptions: 'string',
-        callback: function myFunction() {},
-        refresh: true
-    };
+  var options: BackButtonOptions = {
+    animation: 'string',
+    animationOptions: 'string',
+    callback: function myFunction() {},
+    refresh: true
+  };
 }
 
 function onsProgressBar(progressBar: OnsProgressBarElement): void {
-    progressBar.value;
-    progressBar.secondaryValue;
-    progressBar.indeterminate;
+  progressBar.value;
+  progressBar.secondaryValue;
+  progressBar.indeterminate;
 }
 
 function onsProgressCircular(progressCircular: OnsProgressCircularElement): void {
-    progressCircular.value;
-    progressCircular.secondaryValue;
-    progressCircular.indeterminate;
+  progressCircular.value;
+  progressCircular.secondaryValue;
+  progressCircular.indeterminate;
+}
+
+function onsPageLoader(): void {
+  const loader: ons.PageLoader = new ons.PageLoader();
+
+  loader.load({page: 'foobar.html', parent: document.createElement('div')}, function({unload, element}) {});
+  loader.internalLoader = function() {};
 }

@@ -8,4 +8,5 @@ dist
 /core/test/coverage
 /core/test/test-results.xml
 /core/test/TESTS-*.xml
+/core/src/onsenui-test.js
 /build/*
