@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.17
+----
+ * core: Update Typescript definitions.
+
 v2.0.0-rc.16
 ----
  * ons-splitter-side, ons-splitter-content: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
