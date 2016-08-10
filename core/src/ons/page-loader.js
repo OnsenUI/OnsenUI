@@ -84,3 +84,17 @@ export const instantPageLoader = new PageLoader(function({page, parent, params =
     unload: () => element.remove()
   });
 });
+
+export const replaceContentPageLoader = new PageLoader(function({page, parent, params = {}}, done) {
+  internal.getPageHTMLAsync(page).then(html => {
+    const element = util.createElement(html.trim());
+    util.propagateAction(parent, '_destroy');
+    parent.innerHTML = '';
+    parent.appendChild(element);
+
+    done({
+      element: element,
+      unload: () => element.remove()
+    });
+  });
+});
