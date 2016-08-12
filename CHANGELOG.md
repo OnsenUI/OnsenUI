@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.18
+----
+ * ons-splitter: Fix [#1537](https://github.com/OnsenUI/OnsenUI/issues/1537).
+
 v2.0.0-rc.17
 ----
  * core: Update Typescript definitions.
