@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.18
+----
+ * angular1: Use the `$templateCache` service.
+
 v2.0.0-rc.17
 ----
  * core: Update Typescript definitions.
