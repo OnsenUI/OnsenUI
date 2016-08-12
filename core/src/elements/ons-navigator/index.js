@@ -431,7 +431,6 @@ class NavigatorElement extends BaseElement {
       }
 
       const callback = () => {
-        pages.pop();
         update().then(() => {
           this._isRunning = false;
 
