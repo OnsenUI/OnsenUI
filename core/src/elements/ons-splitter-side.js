@@ -25,7 +25,7 @@ import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
-import { PageLoader, replaceContentPageLoader} from 'ons/page-loader';
+import { PageLoader, defaultPageLoader} from 'ons/page-loader';
 import OnsSplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
@@ -443,7 +443,7 @@ class SplitterSideElement extends BaseElement {
 
   createdCallback() {
     this._page = null;
-    this._pageLoader = replaceContentPageLoader;
+    this._pageLoader = defaultPageLoader;
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
 
@@ -718,7 +718,7 @@ class SplitterSideElement extends BaseElement {
     const callback = options.callback || (() => {});
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+      this._pageLoader.load({page, parent: this, replace: true}, ({element, unload}) => {
         rewritables.link(this, element, options, fragment => {
           setImmediate(() => this._show());
           callback();

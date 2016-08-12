@@ -19,7 +19,7 @@ import util from 'ons/util';
 import internal from 'ons/internal';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
-import {PageLoader, replaceContentPageLoader} from 'ons/page-loader';
+import {PageLoader, defaultPageLoader} from 'ons/page-loader';
 import contentReady from 'ons/content-ready';
 
 const rewritables = {
@@ -86,7 +86,7 @@ class SplitterContentElement extends BaseElement {
    */
   createdCallback() {
     this._page = null;
-    this._pageLoader = replaceContentPageLoader;
+    this._pageLoader = defaultPageLoader;
 
     contentReady(this, () => {
       const page = this._getPageTarget();
@@ -168,7 +168,7 @@ class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+      this._pageLoader.load({page, parent: this, replace: true}, ({element, unload}) => {
         rewritables.link(this, element, options, fragment => {
           setImmediate(() => this._show());
           callback();
