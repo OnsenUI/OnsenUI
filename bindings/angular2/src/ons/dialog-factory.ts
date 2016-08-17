@@ -11,7 +11,7 @@ import {
 import {PageParams} from '../directives/ons-navigator';
 
 @Injectable()
-export class AlertDialogFactory {
+export class DialogFactory {
 
   constructor(
     private _injector: Injector,
@@ -20,7 +20,7 @@ export class AlertDialogFactory {
   ) {
   }
 
-  createAlertDialog(componentType: Type, params: Object = {}): Promise<any> {
+  createDialog(componentType: Type, params: Object = {}): Promise<any> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: new PageParams(params)})
@@ -29,9 +29,9 @@ export class AlertDialogFactory {
       const rootViewContainerRef = this._appRef['_rootComponents'][0]['_hostElement'].vcRef; // TODO: fix this dirty hack
       const componentRef = rootViewContainerRef.createComponent(factory, 0, injector);
       const element = componentRef.location.nativeElement.children[0];
-      const alertDialogElement = element.tagName === 'ONS-ALERT-DIALOG' ? element : element.querySelector('ons-alert-dialog');
+      const dialogElement = element.tagName === 'ONS-DIALOG' ? element : element.querySelector('ons-dialog');
 
-      return alertDialogElement;
+      return dialogElement;
     });
   }
 }
