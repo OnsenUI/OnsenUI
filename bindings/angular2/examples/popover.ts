@@ -12,10 +12,10 @@ import {
   selector: 'div',
   directives: [ONS_DIRECTIVES],
   template: `
-    <ons-popover direction="up down" cancelable #popover>
-      <div style="text-align: center; opacity: 0.5;">
+    <ons-popover direction="up down" cancelable #popover (prehide)="onPreHide($event)">
+      <div style="text-align: center; opacity: 0.7;">
         <p>{{message}}</p>
-        <p style="text-align: center"><ons-button (click)="popover.hide()" modifier="light">Hide</ons-button></p>
+        <p><ons-button (click)="popover.hide()" modifier="light">Hide</ons-button></p>
       </div>
     </ons-popover>
   `
@@ -32,6 +32,10 @@ class MyPopoverComponent implements OnInit {
 
   ngOnInit() {
     console.log('popover:', this._popover.nativeElement);
+  }
+
+  onPreHide(event) {
+    // event.cancel(); // cancel hiding popover
   }
 }
 
