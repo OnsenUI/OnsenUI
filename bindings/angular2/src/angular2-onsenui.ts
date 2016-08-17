@@ -19,7 +19,7 @@ export * from './directives/ons-page';
 
 export * from './ons/notification';
 export * from './ons/platform';
-export * from './ons/createAlertDialog';
+export * from './ons/alert-dialog-factory';
 export * from './ons/popover-factory';
 
 export function bootstrap(type: Type, providers: Array<any> = []): Promise<ComponentRef<any>> {

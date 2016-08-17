@@ -5,71 +5,69 @@ import {
   AlertDialogFactory,
   OnsAlertDialog,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  ONS_DIRECTIVES,
+  PageParams
 } from '../src/angular2-onsenui';
 
 @Component({
   selector: 'div',
-  directives: [OnsAlertDialog],
+  directives: [ONS_DIRECTIVES],
   template: `
-    <ons-alert-dialog cancelable (cancel)="hide()">
+    <ons-alert-dialog cancelable #alert>
       <div class="alert-dialog-title">Warning!</div>
       <div class="alert-dialog-content">
-        This is just an example!
+        {{message}}
       </div>
       <div class="alert-dialog-footer">
-        <button class="alert-dialog-button" (click)="hide()">OK</button>
+        <button class="alert-dialog-button" (click)="alert.hide()">OK</button>
       </div>
     </ons-alert-dialog>
   `
 })
-class MyAlertDialogComponent implements AfterViewInit {
+class MyAlertDialogComponent {
+  message = '';
 
-  @ViewChild(OnsAlertDialog) private _alert: OnsAlertDialog;
-
-  constructor() {
-  }
-
-  ngAfterViewInit() {
-    this._alert.show();
-  }
-
-  hide() {
-    this._alert.hide();
+  constructor(params: PageParams) {
+    this.message = <string>params.at('message');
   }
 }
 
 @Component({
   selector: 'app',
   providers: [AlertDialogFactory],
+  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page class="page">
     <ons-toolbar>
       <div class="center">Alert Dialog</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="content">
       <div style="text-align: center; margin: 10px">
-        <ons-button (click)="showAlertDialog()">create Alert Dialog</ons-button>
+        <ons-button (click)="showAlertDialog()">show</ons-button>
       </div>
     </div>
   </ons-page>
   `
 })
 export class AppComponent implements AfterViewInit {
-  private _alert: ComponentRef<MyAlertDialogComponent>;
+  private _alert: any;
 
-  constructor(private adf: AlertDialogFactory) {
+  constructor(private _adf: AlertDialogFactory) {
   }
 
   ngAfterViewInit() {
+    this._adf.createAlertDialog(MyAlertDialogComponent, {message: 'This is just an example.'}).then(alertDialog => {
+      this._alert = alertDialog;
+    });
   }
 
   showAlertDialog() {
-    this.adf.createAlertDialog(MyAlertDialogComponent).then(componentRef => {
-      this._alert = componentRef;
-    });
+    if (this._alert) {
+      this._alert.show();
+    }
   }
 }
 
 bootstrap(AppComponent);
+
