@@ -3,7 +3,6 @@ import {
   Component,
   ComponentRef,
   AlertDialogFactory,
-  OnsAlertDialog,
   ViewChild,
   ONS_DIRECTIVES,
   PageParams,
