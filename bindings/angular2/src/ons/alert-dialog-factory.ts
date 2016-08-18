@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
-interface AlertDialogRef {
+export interface AlertDialogRef {
   alertDialog: any;
   destroy: Function;
 }

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
-interface ModalRef {
+export interface ModalRef {
   modal: any;
   destroy: Function;
 }
