@@ -10,6 +10,11 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
+interface ModalRef {
+  modal: any;
+  destroy: Function;
+}
+
 @Injectable()
 export class ModalFactory {
 
@@ -20,7 +25,7 @@ export class ModalFactory {
   ) {
   }
 
-  createModal(componentType: Type, params: Object = {}): Promise<any> {
+  createModal(componentType: Type, params: Object = {}): Promise<ModalRef> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: new PageParams(params)})

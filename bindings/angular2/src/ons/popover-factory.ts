@@ -12,6 +12,11 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
+interface PopoverRef {
+  popover: any;
+  destroy: Function;
+}
+
 @Injectable()
 export class PopoverFactory {
 
@@ -22,7 +27,7 @@ export class PopoverFactory {
   ) {
   }
 
-  createPopover(componentType: Type, params: Object = {}): Promise<any> {
+  createPopover(componentType: Type, params: Object = {}): Promise<PopoverRef> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: new PageParams(params)})

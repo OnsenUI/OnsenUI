@@ -10,6 +10,11 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
+interface AlertDialogRef {
+  alertDialog: any;
+  destroy: Function;
+}
+
 @Injectable()
 export class AlertDialogFactory {
 
@@ -20,7 +25,7 @@ export class AlertDialogFactory {
   ) {
   }
 
-  createAlertDialog(componentType: Type, params: Object = {}): Promise<any> {
+  createAlertDialog(componentType: Type, params: Object = {}): Promise<AlertDialogRef> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: new PageParams(params)})

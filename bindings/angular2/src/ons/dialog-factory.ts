@@ -10,6 +10,11 @@ import {
 } from '@angular/core';
 import {PageParams} from '../directives/ons-navigator';
 
+interface DialogRef {
+  dialog: any;
+  destroy: Function;
+}
+
 @Injectable()
 export class DialogFactory {
 
@@ -20,7 +25,7 @@ export class DialogFactory {
   ) {
   }
 
-  createDialog(componentType: Type, params: Object = {}): Promise<any> {
+  createDialog(componentType: Type, params: Object = {}): Promise<DialogRef> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
         provide(PageParams, {useValue: new PageParams(params)})
