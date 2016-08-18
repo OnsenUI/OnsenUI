@@ -33,7 +33,7 @@ export class PopoverFactory {
       const element = componentRef.location.nativeElement.children[0];
       const popoverElement = element.tagName === 'ONS-POPOVER' ? element : element.querySelector('ons-popover');
 
-      return popoverElement;
+      return {popover: popoverElement, destroy: () => componentRef.destroy()};
     });
   }
 }

@@ -31,7 +31,7 @@ export class DialogFactory {
       const element = componentRef.location.nativeElement.children[0];
       const dialogElement = element.tagName === 'ONS-DIALOG' ? element : element.querySelector('ons-dialog');
 
-      return dialogElement;
+      return {dialog: dialogElement, destroy: () => componentRef.destroy()};
     });
   }
 }

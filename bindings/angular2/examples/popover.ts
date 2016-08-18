@@ -5,6 +5,7 @@ import {
   PopoverFactory,
   ViewChild,
   OnInit,
+  OnDestroy,
   PageParams
 } from '../src/angular2-onsenui';
 
@@ -56,10 +57,11 @@ class MyPopoverComponent implements OnInit {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit {
-  _popover: any;
+export class AppComponent implements OnInit, OnDestroy {
+  private _popover: any;
+  private _destroyPopover: Function;
 
-  constructor(private popoverFactory: PopoverFactory) { }
+  constructor(private _popoverFactory: PopoverFactory) { }
 
   show(button) {
     if (this._popover) {
@@ -68,9 +70,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.popoverFactory.createPopover(MyPopoverComponent, {msg: 'This is popover.'}).then(popover => {
-      this._popover = popover;
-    });
+    this._popoverFactory
+      .createPopover(MyPopoverComponent, {msg: 'This is popover.'})
+      .then(({popover, destroy}) => {
+        this._popover = popover;
+        this._destroyPopover = destroy;
+      });
+  }
+
+  ngOnDestroy() {
+    this._destroyPopover();
   }
 }
 

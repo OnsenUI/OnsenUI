@@ -4,7 +4,9 @@ import {
   ModalFactory,
   AfterViewInit,
   ONS_DIRECTIVES,
-  PageParams
+  PageParams,
+  OnInit,
+  OnDestroy
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -43,19 +45,30 @@ class MyModalComponent {
   </ons-page>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   private _modal: any;
+  private _destroyModal: Function;
 
   constructor(private _modalFactory: ModalFactory) {
-    this._modalFactory.createModal(MyModalComponent, {message: 'This is just an example.'}).then(modal => {
-      this._modal = modal;
-    });
+  }
+
+  ngOnInit() {
+    this._modalFactory
+      .createModal(MyModalComponent, {message: 'This is just an example.'})
+      .then(({modal, destroy}) => {
+        this._modal = modal;
+        this._destroyModal = destroy;
+      });
   }
 
   show() {
     if (this._modal) {
       this._modal.show();
     }
+  }
+
+  ngOnDestroy() {
+    this._destroyModal();
   }
 }
 

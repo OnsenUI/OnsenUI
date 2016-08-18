@@ -31,7 +31,7 @@ export class ModalFactory {
       const element = componentRef.location.nativeElement.children[0];
       const modalElement = element.tagName === 'ONS-MODAL' ? element : element.querySelector('ons-modal');
 
-      return modalElement;
+      return {modal: modalElement, destroy: () => componentRef.destroy()};
     });
   }
 }

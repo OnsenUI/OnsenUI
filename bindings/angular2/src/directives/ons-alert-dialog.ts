@@ -29,33 +29,6 @@ export class OnsAlertDialog {
   }
 
   /**
-   * @method show
-   * @signature show()
-   * @return Promise<any>
-   */
-  show() {
-    return this._onsAlertDialog.show();
-  }
-
-  /**
-   * @method hide
-   * @signature hide()
-   * @return Promise<any>
-   */
-  hide() {
-    return this._onsAlertDialog.hide();
-  }
-
-  /**
-   * @method destroy
-   * @signature destroy()
-   * @return Promise<any>
-   */
-  destroy() {
-    return this._onsAlertDialog.destroy();
-  }
-
-  /**
    * @return {Element}
    */
   get element(): any {

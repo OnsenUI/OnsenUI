@@ -31,7 +31,7 @@ export class AlertDialogFactory {
       const element = componentRef.location.nativeElement.children[0];
       const alertDialogElement = element.tagName === 'ONS-ALERT-DIALOG' ? element : element.querySelector('ons-alert-dialog');
 
-      return alertDialogElement;
+      return {alertDialog: alertDialogElement, destroy: () => componentRef.destroy()};
     });
   }
 }

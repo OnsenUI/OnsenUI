@@ -4,6 +4,8 @@ import {
   DialogFactory,
   AfterViewInit,
   ONS_DIRECTIVES,
+  OnInit,
+  OnDestroy,
   PageParams
 } from '../src/angular2-onsenui';
 
@@ -58,19 +60,30 @@ class MyDialogComponent {
   </ons-page>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   private _dialog: any;
+  private _destroyDialog: Function;
 
   constructor(private _dialogFactory: DialogFactory) {
-    this._dialogFactory.createDialog(MyDialogComponent, {message: 'This is just an example.'}).then(dialog => {
-      this._dialog = dialog;
-    });
+  }
+
+  ngOnInit() {
+    this._dialogFactory
+      .createDialog(MyDialogComponent, {message: 'This is just an example.'})
+      .then(({dialog, destroy}) => {
+        this._dialog = dialog;
+        this._destroyDialog = destroy;
+      });
   }
 
   show() {
     if (this._dialog) {
       this._dialog.show();
     }
+  }
+
+  ngOnDestroy() {
+    this._destroyDialog();
   }
 }
 

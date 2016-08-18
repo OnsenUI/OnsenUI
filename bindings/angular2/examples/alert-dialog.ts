@@ -5,9 +5,10 @@ import {
   AlertDialogFactory,
   OnsAlertDialog,
   ViewChild,
-  AfterViewInit,
   ONS_DIRECTIVES,
-  PageParams
+  PageParams,
+  OnInit,
+  OnDestroy
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -50,22 +51,30 @@ class MyAlertDialogComponent {
   </ons-page>
   `
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy {
   private _alert: any;
+  private _destroyAlert: Function;
 
   constructor(private _adf: AlertDialogFactory) {
   }
 
-  ngAfterViewInit() {
-    this._adf.createAlertDialog(MyAlertDialogComponent, {message: 'This is just an example.'}).then(alertDialog => {
-      this._alert = alertDialog;
-    });
+  ngOnInit() {
+    this._adf
+      .createAlertDialog(MyAlertDialogComponent, {message: 'This is just an example.'})
+      .then(({alertDialog, destroy}) => {
+        this._alert = alertDialog;
+        this._destroyAlert = destroy;
+      });
   }
 
   showAlertDialog() {
     if (this._alert) {
       this._alert.show();
     }
+  }
+
+  ngOnDestroy() {
+    this._destroyAlert();
   }
 }
 
