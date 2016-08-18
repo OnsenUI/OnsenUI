@@ -4,7 +4,7 @@ import {
   ModalFactory,
   AfterViewInit,
   ONS_DIRECTIVES,
-  PageParams,
+  Params,
   OnInit,
   OnDestroy
 } from '../src/angular2-onsenui';
@@ -22,7 +22,7 @@ import {
 class MyModalComponent {
   message = '';
 
-  constructor(params: PageParams) {
+  constructor(params: Params) {
     this.message = <string>params.at('message');
   }
 }

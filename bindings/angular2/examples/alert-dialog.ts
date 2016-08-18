@@ -5,7 +5,7 @@ import {
   AlertDialogFactory,
   ViewChild,
   ONS_DIRECTIVES,
-  PageParams,
+  Params,
   OnInit,
   OnDestroy
 } from '../src/angular2-onsenui';
@@ -28,7 +28,7 @@ import {
 class MyAlertDialogComponent {
   message = '';
 
-  constructor(params: PageParams) {
+  constructor(params: Params) {
     this.message = <string>params.at('message');
   }
 }

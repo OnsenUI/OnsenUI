@@ -6,7 +6,7 @@ import {
   ONS_DIRECTIVES,
   OnInit,
   OnDestroy,
-  PageParams
+  Params
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -37,7 +37,7 @@ import {
 class MyDialogComponent {
   message = '';
 
-  constructor(params: PageParams) {
+  constructor(params: Params) {
     this.message = <string>params.at('message');
   }
 }

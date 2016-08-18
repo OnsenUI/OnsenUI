@@ -6,7 +6,7 @@ import {
   ViewChild,
   OnInit,
   OnDestroy,
-  PageParams
+  Params
 } from '../src/angular2-onsenui';
 
 @Component({
@@ -27,7 +27,7 @@ class MyPopoverComponent implements OnInit {
 
   message = '';
 
-  constructor(params: PageParams) {
+  constructor(params: Params) {
     this.message = <string>params.at('msg');
   }
 

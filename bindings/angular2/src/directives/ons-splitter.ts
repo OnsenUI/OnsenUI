@@ -12,7 +12,7 @@ import {
   ComponentResolver,
   provide
 } from '@angular/core';
-import {PageParams} from './ons-navigator';
+import {Params} from '../ons/params';
 
 declare const ons: any;
 
@@ -55,7 +55,7 @@ export class OnsSplitterSide {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(PageParams, {useValue: new PageParams(params || {})}),
+        provide(Params, {useValue: new Params(params || {})}),
         provide(OnsSplitterSide, {useValue: this})
       ], this._injector);
 
@@ -112,7 +112,7 @@ export class OnsSplitterContent {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(PageParams, {useValue: new PageParams(params || {})}),
+        provide(Params, {useValue: new Params(params || {})}),
         provide(OnsSplitterContent, {useValue: this})
       ], this._injector);
 

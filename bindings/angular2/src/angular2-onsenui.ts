@@ -21,6 +21,7 @@ export * from './ons/alert-dialog-factory';
 export * from './ons/popover-factory';
 export * from './ons/dialog-factory';
 export * from './ons/modal-factory';
+export * from './ons/params';
 
 export function bootstrap(type: Type, providers: Array<any> = []): Promise<ComponentRef<any>> {
   return browser.bootstrap(type, providers);

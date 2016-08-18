@@ -8,7 +8,7 @@ import {
   ComponentRef,
   ReflectiveInjector
 } from '@angular/core';
-import {PageParams} from '../directives/ons-navigator';
+import {Params} from './params';
 
 export interface AlertDialogRef {
   alertDialog: any;
@@ -28,7 +28,7 @@ export class AlertDialogFactory {
   createAlertDialog(componentType: Type, params: Object = {}): Promise<AlertDialogRef> {
     return this._resolver.resolveComponent(componentType).then(factory => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(PageParams, {useValue: new PageParams(params)})
+        provide(Params, {useValue: new Params(params)})
       ], this._injector);
 
       const rootViewContainerRef = this._appRef['_rootComponents'][0]['_hostElement'].vcRef; // TODO: fix this dirty hack
