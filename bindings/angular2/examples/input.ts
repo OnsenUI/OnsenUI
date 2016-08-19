@@ -15,7 +15,7 @@ import {
     <div class="page__background"></div>
     <div class="page__content">
       <div style="padding: 10px">
-        <div><ons-input placeholder="Type here" [(value)]="target"></ons-input></div>
+        <div><ons-input placeholder="Type here" [(value)]="target" (input)="target = $event.target.value"></ons-input></div>
 
         <p>Text: {{target}}</p>
       </div>
