@@ -1,31 +1,42 @@
 import {
   bootstrap,
   Component,
+  ONS_DIRECTIVES,
   PopoverFactory,
-  OnsPopover,
-  ViewChild
+  ViewChild,
+  OnInit,
+  OnDestroy,
+  Params
 } from '../src/angular2-onsenui';
 
 @Component({
   selector: 'div',
-  directives: [OnsPopover],
+  directives: [ONS_DIRECTIVES],
   template: `
-    <ons-popover direction="up down" cancelable>
-      <div class="popover__container"><div class="popover__content">
-        <div style="text-align: center; opacity: 0.5;">
-          <p>This is a popover!</p>
-          <p><small>Click the background to remove the popover.</small></p>
-        </div>
-      </div></div>
+    <ons-popover direction="up down" cancelable #popover (prehide)="onPreHide($event)">
+      <div style="text-align: center; opacity: 0.7;">
+        <p>{{message}}</p>
+        <p><ons-button (click)="popover.hide()" modifier="light">Hide</ons-button></p>
+      </div>
     </ons-popover>
   `
 })
-class MyPopoverComponent {
+class MyPopoverComponent implements OnInit {
 
-  // TODO: fix undefined
-  @ViewChild(OnsPopover) private _popover: OnsPopover;
+  @ViewChild('popover') _popover: any;
 
-  constructor() {
+  message = '';
+
+  constructor(params: Params) {
+    this.message = <string>params.at('msg');
+  }
+
+  ngOnInit() {
+    console.log('popover:', this._popover.nativeElement);
+  }
+
+  onPreHide(event) {
+    // event.cancel(); // cancel hiding popover
   }
 }
 
@@ -40,17 +51,35 @@ class MyPopoverComponent {
     <div class="page__background"></div>
     <div class="page__content">
       <div style="text-align: center; margin: 10px">
-        <ons-button (click)="createPopover()">create Popover</ons-button>
+        <ons-button (click)="show(button)" #button>show Popover</ons-button>
       </div>
     </div>
   </ons-page>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private _popover: any;
+  private _destroyPopover: Function;
+
   constructor(private _popoverFactory: PopoverFactory) { }
 
-  createPopover() {
-    this._popoverFactory.createPopover(MyPopoverComponent);
+  show(button) {
+    if (this._popover) {
+      this._popover.show(button);
+    }
+  }
+
+  ngOnInit() {
+    this._popoverFactory
+      .createPopover(MyPopoverComponent, {msg: 'This is popover.'})
+      .then(({popover, destroy}) => {
+        this._popover = popover;
+        this._destroyPopover = destroy;
+      });
+  }
+
+  ngOnDestroy() {
+    this._destroyPopover();
   }
 }
 
