@@ -15,7 +15,8 @@ import {
     <div class="page__background"></div>
     <div class="page__content">
       <div style="text-align: center; margin: 10px">
-        <ons-range [(value)]="value"></ons-range><br>
+        <!-- (input) is needed for immediate change detection on dragging range component. -->
+        <ons-range [(value)]="value" (input)="value = $event.target.value"></ons-range><br>
         <ons-range modifier="material" [(value)]="value"></ons-range><br>
         {{value}}
       </div>
