@@ -831,8 +831,6 @@ class NavigatorElement extends BaseElement {
     if (element.nodeName.toLowerCase() !== 'ons-page') {
       throw new Error('You must supply an "ons-page" element to "ons-navigator".');
     }
-
-    CustomElements.upgrade(element);
   }
 
   /**

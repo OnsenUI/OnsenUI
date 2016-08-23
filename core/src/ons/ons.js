@@ -252,7 +252,6 @@ ons._createPopoverOriginal = function(page, options = {}) {
     const div = ons._util.createElement('<div>' + html + '</div>');
 
     const popover = div.querySelector('ons-popover');
-    CustomElements.upgrade(popover);
     document.body.appendChild(popover);
 
     if (options.link instanceof Function) {
@@ -301,7 +300,6 @@ ons._createDialogOriginal = function(page, options = {}) {
     const div = ons._util.createElement('<div>' + html + '</div>');
 
     const dialog = div.querySelector('ons-dialog');
-    CustomElements.upgrade(dialog);
     document.body.appendChild(dialog);
 
     if (options.link instanceof Function) {
@@ -347,7 +345,6 @@ ons._createAlertDialogOriginal = function(page, options = {}) {
     const div = ons._util.createElement('<div>' + html + '</div>');
 
     const alertDialog = div.querySelector('ons-alert-dialog');
-    CustomElements.upgrade(alertDialog);
     document.body.appendChild(alertDialog);
 
     if (options.link instanceof Function) {
@@ -444,7 +441,7 @@ ons._resolveLoadingPlaceholder = function(element, page, link) {
 
 function waitDeviceReady() {
   const unlockDeviceReady = ons._readyLock.lock();
-  window.addEventListener('WebComponentsReady', () => {
+  window.addEventListener('DOMContentLoaded', () => {
     if (ons.isWebView()) {
       window.document.addEventListener('deviceready', unlockDeviceReady, false);
     } else {

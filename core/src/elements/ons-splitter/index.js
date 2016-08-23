@@ -66,7 +66,6 @@ class SplitterElement extends BaseElement {
     const element = util.findChild(this, e => {
       return util.match(e, 'ons-splitter-side') && e.getAttribute('side') === side;
     });
-    element && CustomElements.upgrade(element);
     return element;
   }
 
