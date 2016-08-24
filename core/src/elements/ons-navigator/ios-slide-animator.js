@@ -17,6 +17,7 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from 'ons/util';
+import contentReady from 'ons/content-ready';
 
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
@@ -111,7 +112,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     this.backgroundMask.remove();
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
-    const enterPageDecomposition = this._decompose(enterPage);
+    let enterPageDecomposition;
+    contentReady(enterPage, () => {
+      enterPageDecomposition = this._decompose(enterPage);
+    });
     const leavePageDecomposition = this._decompose(leavePage);
 
     const delta = this._calculateDelta(leavePage, enterPageDecomposition);
