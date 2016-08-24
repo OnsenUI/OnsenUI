@@ -12,7 +12,6 @@ import {
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
   template: `
     <ons-modal #modal>
       <p>{{message}}</p>
@@ -73,8 +72,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, MyModalComponent],
   bootstrap: [AppComponent],
+  entryComponents: [MyModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }
