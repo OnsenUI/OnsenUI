@@ -4,6 +4,8 @@ CHANGELOG
 
 v2.0.0-rc.18
 ----
+ * angular1: Use the `$templateCache` service.
+ * ons-splitter: Fix [#1537](https://github.com/OnsenUI/OnsenUI/issues/1537).
  * ons-navigator: Provides animators and allows to extend them.
 
 v2.0.0-rc.17
@@ -12,6 +14,9 @@ v2.0.0-rc.17
 
 v2.0.0-rc.16
 ----
+ * angular2-binding: Removed `OnsPage`, `OnsAlertDialog` and `OnsPopover` directives.
+ * angular2-binding: Renamed `PageParams` to `Params`.
+ * angular2-binding: Added Angular2 API for `ons-alert-dialog`, `ons-popover`, `ons-dialog` and `ons-modal` components.
  * ons-splitter-side, ons-splitter-content: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
  * ons-navigator: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
  * ons-tabbar, ons-tab: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
