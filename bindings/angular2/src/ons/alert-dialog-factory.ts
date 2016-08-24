@@ -24,7 +24,7 @@ export class AlertDialogFactory {
   ) {
   }
 
-  createAlertDialog(componentType: any, params: Object = {}): Promise<AlertDialogRef> {
+  createAlertDialog(componentType: any, params: Object = {}): Promise<AlertDialogRef> { // TODO: fix "any"
     return new Promise(resolve => {
       setImmediate(() => {
         const factory = this._resolver.resolveComponentFactory(componentType);

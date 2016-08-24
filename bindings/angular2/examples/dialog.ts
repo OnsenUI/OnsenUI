@@ -12,7 +12,6 @@ import {
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
   template: `
     <ons-dialog animation="default" cancelable #dialog>
       <div class="dialog-mask"></div>
@@ -88,8 +87,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, MyDialogComponent],
   bootstrap: [AppComponent],
+  entryComponents: [MyDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }
