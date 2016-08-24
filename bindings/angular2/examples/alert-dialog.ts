@@ -4,7 +4,7 @@ import {
   AlertDialogFactory,
   ViewChild,
   Params,
-  OnInit,
+  AfterViewInit,
   OnDestroy,
   OnsenModule,
   NgModule,
@@ -13,7 +13,6 @@ import {
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
   template: `
     <ons-alert-dialog cancelable #alert>
       <div class="alert-dialog-title">Warning!</div>
@@ -49,14 +48,14 @@ class MyAlertDialogComponent {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements AfterViewInit, OnDestroy {
   private _alert: any;
   private _destroyAlert: Function;
 
   constructor(private _adf: AlertDialogFactory) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this._adf
       .createAlertDialog(MyAlertDialogComponent, {message: 'This is just an example.'})
       .then(({alertDialog, destroy}) => {
@@ -78,8 +77,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, MyAlertDialogComponent],
   bootstrap: [AppComponent],
+  entryComponents: [MyAlertDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }
