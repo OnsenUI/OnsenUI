@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.18
+----
+ * ons-navigator: Provides animators and allows to extend them.
+
 v2.0.0-rc.17
 ----
  * core: Update Typescript definitions.
