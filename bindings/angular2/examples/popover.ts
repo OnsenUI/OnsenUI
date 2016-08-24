@@ -12,7 +12,6 @@ import {
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
   template: `
     <ons-popover direction="up down" cancelable #popover (prehide)="onPreHide($event)">
       <div style="text-align: center; opacity: 0.7;">
@@ -85,8 +84,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, MyPopoverComponent],
   bootstrap: [AppComponent],
+  entryComponents: [MyPopoverComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }
