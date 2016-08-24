@@ -1,8 +1,11 @@
 import {
-  bootstrap,
   Component,
-  onsNotification
+  onsNotification,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -12,8 +15,8 @@ import {
       <div class="center">OnsNotification Example</div>
     </ons-toolbar>
 
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <div style="margin: 10px; text-align: center;">
 
         <ons-button (click)="alert()" id="alert-button">alert()</ons-button>
@@ -58,4 +61,12 @@ export class AppComponent {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

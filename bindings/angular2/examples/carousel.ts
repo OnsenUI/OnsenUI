@@ -1,9 +1,12 @@
 import {
-  bootstrap,
   Component,
   ViewChild,
-  OnsCarousel
+  OnsCarousel,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -16,8 +19,8 @@ import {
       <div class="right"><ons-toolbar-button (click)="myCarousel.next()">Next</ons-toolbar-button></div>
     </ons-toolbar>
 
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
 
       <ons-carousel #myCarousel swipeable overscrollable auto-scroll fullscreen auto-scroll-ratio="0.4" animation-options="{duration: 0.1}">
         <ons-carousel-item style="background-color: #009">
@@ -47,4 +50,12 @@ export class AppComponent {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

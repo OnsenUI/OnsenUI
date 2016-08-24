@@ -1,17 +1,18 @@
 import {
-  bootstrap,
   Component,
   ModalFactory,
   AfterViewInit,
-  ONS_DIRECTIVES,
   Params,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'div',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-modal #modal>
       <p>{{message}}</p>
@@ -29,8 +30,6 @@ class MyModalComponent {
 
 @Component({
   selector: 'app',
-  providers: [ModalFactory],
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -72,4 +71,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);
