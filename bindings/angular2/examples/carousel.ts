@@ -10,7 +10,6 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
-  directives: [OnsCarousel],
   template: `
   <ons-page>
     <ons-toolbar>
