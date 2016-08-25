@@ -37,7 +37,7 @@ import {PopoverFactory} from './ons/popover-factory';
 import {DialogFactory} from './ons/dialog-factory';
 import {ModalFactory} from './ons/modal-factory';
 
-export const ONS_DIRECTIVES = [
+const directives = [
   OnsNavigator,
   OnsCarousel,
   OnsTabbar,
@@ -53,19 +53,8 @@ export const ONS_DIRECTIVES = [
 
 @NgModule({
   imports: [BrowserModule, CommonModule],
-  declarations: [
-    OnsNavigator,
-    OnsCarousel,
-    OnsTabbar,
-    OnsTab,
-    OnsSwitch,
-    OnsRange,
-    OnsInput,
-    OnsPullHook,
-    OnsLazyRepeat,
-    OnsSplitterSide,
-    OnsSplitterContent
-  ],
+  declarations: [directives],
+  exports: [directives],
   providers: [
     AlertDialogFactory,
     PopoverFactory,

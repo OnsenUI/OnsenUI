@@ -2,14 +2,15 @@ import {
   Component,
   OnsSwitch,
   OnsenModule,
+  Directive,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app',
-  directives: [OnsSwitch],
   template: `
   <ons-page>
     <ons-toolbar>
@@ -35,7 +36,7 @@ export class AppComponent {
 }
 
 @NgModule({
-  imports: [OnsenModule],
+  imports: [OnsenModule, FormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
