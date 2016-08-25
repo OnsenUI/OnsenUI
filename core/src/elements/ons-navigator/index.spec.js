@@ -29,6 +29,10 @@ describe('OnsNavigatorElement', () => {
     expect(window.OnsNavigatorElement).to.be.ok;
   });
 
+  it('provides \'animators\' object', () => {
+    expect(window.OnsNavigatorElement.animators).to.be.an('object');
+  });
+
   it('provides \'page\' attribute', () => {
     const content = nav.topPage._getContentElement();
     expect(content.innerHTML).to.equal('hoge');
@@ -605,6 +609,42 @@ describe('OnsNavigatorElement', () => {
 
       window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
     });
+  });
+
+  describe('Extended Animator', () => {
+    it('can be registered', () => {
+      const MyAnimator = window.OnsNavigatorElement.animators['fade-ios'].extend();
+
+      window.OnsNavigatorElement.registerAnimator('fuga', MyAnimator);
+    });
+
+    it('overwrites specified properties', () => {
+      const deferred = {};
+      deferred.promise = new Promise((resolve) => {
+        deferred.resolve = resolve
+      });
+
+      const customAnimatorClass = window.OnsNavigatorElement.animators['fade-ios'].extend({
+        duration: 0,
+        push: function(enterPage, leavePage, callback) {
+          deferred.resolve();
+          callback();
+        }
+      });
+
+      const customAnimatorInstance = new customAnimatorClass();
+      const originalAnimatorInstance = new window.OnsNavigatorElement.animators['fade-ios']();
+
+      expect(customAnimatorInstance.pop).to.equal(originalAnimatorInstance.pop);
+      expect(customAnimatorInstance.push).to.not.equal(originalAnimatorInstance.push);
+      expect(customAnimatorInstance.duration).to.not.equal(originalAnimatorInstance.duration);
+
+      window.OnsNavigatorElement.registerAnimator('customAnimator', customAnimatorClass);
+      return nav.pushPage('fuga', {animation: 'customAnimator'})
+        .then(() => {
+          return expect(deferred.promise).to.eventually.be.fulfilled;
+        });
+    })
   });
 
   describe('#_compile()', () => {

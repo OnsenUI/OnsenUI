@@ -957,24 +957,24 @@ class NavigatorElement extends BaseElement {
     this.remove();
   }
 
+  /**
+   * @param {String} name
+   * @param {Function} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
+      throw new Error('"Animator" param must inherit OnsNavigatorElement.NavigatorTransitionAnimator');
+    }
+
+    _animatorDict[name] = Animator;
+  }
 }
 
 window.OnsNavigatorElement = document.registerElement('ons-navigator', {
   prototype: NavigatorElement.prototype
 });
 
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsNavigatorElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-    throw new Error('"Animator" param must inherit OnsNavigatorElement.NavigatorTransitionAnimator');
-  }
-
-  _animatorDict[name] = Animator;
-};
-
 window.OnsNavigatorElement.rewritables = rewritables;
 window.OnsNavigatorElement.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
+window.OnsNavigatorElement.animators = _animatorDict;
 
