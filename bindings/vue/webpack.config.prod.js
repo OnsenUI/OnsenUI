@@ -15,7 +15,12 @@ module.exports = {
   },
   externals: [
     {
-      onsenui: 'ons'
+      onsenui: {
+        root: 'ons',
+        commonjs: 'onsenui',
+        commonjs2: 'onsenui',
+        amd: 'onsenui'
+      }
     }
   ],
   resolveLoader: {

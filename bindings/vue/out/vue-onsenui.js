@@ -1,11 +1,11 @@
-/*! vue-onsenui v0.1.0 - Thu Aug 25 2016 15:52:04 GMT+0900 (JST) */
+/*! vue-onsenui v0.1.0 - Thu Aug 25 2016 16:36:10 GMT+0900 (JST) */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("ons"));
+		module.exports = factory(require("onsenui"));
 	else if(typeof define === 'function' && define.amd)
-		define("VueOnsen", ["ons"], factory);
+		define("VueOnsen", ["onsenui"], factory);
 	else if(typeof exports === 'object')
-		exports["VueOnsen"] = factory(require("ons"));
+		exports["VueOnsen"] = factory(require("onsenui"));
 	else
 		root["VueOnsen"] = factory(root["ons"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_85__) {
