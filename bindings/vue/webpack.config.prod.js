@@ -1,5 +1,8 @@
 var path = require('path')
+var fs = require('fs');
 var webpack = require('webpack')
+
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
 
 module.exports = {
   entry: './src',
@@ -39,5 +42,8 @@ module.exports = {
       }
     ]
   },
-  devtool: '#source-map'
+  devtool: '#source-map',
+  plugins: [
+    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
+  ]
 }

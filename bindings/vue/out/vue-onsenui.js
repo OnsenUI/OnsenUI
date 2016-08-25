@@ -1,3 +1,4 @@
+/*! vue-onsenui v0.1.0 - Thu Aug 25 2016 15:52:04 GMT+0900 (JST) */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("ons"));
