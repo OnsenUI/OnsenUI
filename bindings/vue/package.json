@@ -5,8 +5,9 @@
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.prod.js"
   },
+  "main": "dist/vue-onsenui.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/OnsenUI/OnsenUI"
