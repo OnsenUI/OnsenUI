@@ -7,7 +7,7 @@ module.exports = {
     library: 'VueOnsen',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './out'),
     filename: 'vue-onsenui.js'
   },
   externals: [
@@ -38,5 +38,6 @@ module.exports = {
         loader: 'vue-html'
       }
     ]
-  }
+  },
+  devtool: '#source-map'
 }
