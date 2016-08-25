@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.18
+----
+ * ons-navigator: Fixed a bug that caused missing .page__content on Safari.
+
 v2.0.0-rc.17
 ----
  * core: Update Typescript definitions.
