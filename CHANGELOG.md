@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.0-rc.18
 ----
+ * ons-navigator: Fixed a bug that caused missing .page__content on Safari.
  * angular1: Use the `$templateCache` service.
  * ons-splitter: Fix [#1537](https://github.com/OnsenUI/OnsenUI/issues/1537).
  * ons-navigator: Provides animators and allows to extend them.
