@@ -28,15 +28,6 @@ module.exports = {
   resolveLoader: {
     root: path.join(__dirname, 'node_modules')
   },
-  module: {
-    loaders: [
-      // .ts files for TypeScript
-      {
-        test: /\.ts$/,
-        loader: 'awesome-typescript-loader'
-      }
-    ]
-  },
   devtool: '#source-map',
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
