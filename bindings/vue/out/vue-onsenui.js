@@ -1,4 +1,4 @@
-/*! vue-onsenui v0.1.0 - Thu Aug 25 2016 16:36:10 GMT+0900 (JST) */
+/*! vue-onsenui v0.1.1 - Thu Aug 25 2016 16:37:13 GMT+0900 (JST) */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("onsenui"));

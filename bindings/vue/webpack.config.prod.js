@@ -10,7 +10,7 @@ module.exports = {
     library: 'VueOnsen',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: path.resolve(__dirname, './out'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'vue-onsenui.js'
   },
   externals: [
