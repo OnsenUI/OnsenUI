@@ -5,7 +5,7 @@
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
     "typings-install": "typings install",
-    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js",
+    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js",
     "prepublish": "npm run build-dist",
     "start": "gulp serve",
     "test": "gulp test"
@@ -63,6 +63,7 @@
     "source-map-loader": "^0.1.5",
     "typescript": "~1.8.9",
     "typings": "^1.2.0",
+    "uglify-js": "^2.7.3",
     "webdriver-manager": "^10.0.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1",
