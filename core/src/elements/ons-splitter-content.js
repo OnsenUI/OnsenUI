@@ -168,15 +168,9 @@ class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this}, ({element, unload}) => {
+      this._pageLoader.load({page, parent: this, replace: true}, ({element, unload}) => {
         rewritables.link(this, element, options, fragment => {
-          this._hide();
-          while (this.firstChild) {
-            this.firstChild.remove();
-          }
-
-          this.appendChild(fragment);
-          this._show();
+          setImmediate(() => this._show());
           callback();
 
           resolve(this.firstChild);

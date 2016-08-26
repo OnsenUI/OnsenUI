@@ -32,6 +32,7 @@ limitations under the License.
   initOnsenFacade();
   waitOnsenUILoad();
   initAngularModule();
+  initTemplateCache();
 
   function waitOnsenUILoad() {
     var unlockOnsenUI = ons._readyLock.lock();
@@ -62,6 +63,22 @@ limitations under the License.
       $rootScope.alert = window.alert;
 
       ons.$compile = $compile;
+    });
+  }
+
+  function initTemplateCache() {
+    module.run(function($templateCache) {
+      const tmp = ons._internal.getTemplateHTMLAsync;
+
+      ons._internal.getTemplateHTMLAsync = (page) => {
+        const cache = $templateCache.get(page);
+
+        if (cache) {
+          return Promise.resolve(cache);
+        } else {
+          return tmp(page);
+        }
+      };
     });
   }
 

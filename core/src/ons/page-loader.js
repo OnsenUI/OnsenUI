@@ -18,8 +18,13 @@ import util from 'ons/util';
 import internal from 'ons/internal';
 
 // Default implementation for global PageLoader.
-function loadPage({page, parent, params = {}}, done) {
+function loadPage({page, parent, params = {}, replace}, done) {
   internal.getPageHTMLAsync(page).then(html => {
+    if (replace) {
+      util.propagateAction(parent, '_destroy');
+      parent.innerHTML = '';
+    }
+
     const element = util.createElement(html.trim());
     parent.appendChild(element);
 
@@ -56,10 +61,11 @@ export class PageLoader {
    * @param {any} options.page
    * @param {Element} options.parent A location to load page.
    * @param {Object} [options.params] Extra parameters for ons-page.
+   * @param {Boolean} [options.replace] Remove the previous content.
    * @param {Function} done Take an object that has "element" property and "unload" function.
    */
-  load({page, parent, params = {}}, done) {
-    this._loader({page, parent, params}, result => {
+  load({page, parent, params = {}, replace}, done) {
+    this._loader({page, parent, params, replace}, result => {
       if (!(result.element instanceof Element)) {
         throw Error('target.element must be an instance of Element.');
       }
@@ -75,7 +81,12 @@ export class PageLoader {
 
 export const defaultPageLoader = new PageLoader();
 
-export const instantPageLoader = new PageLoader(function({page, parent, params = {}}, done) {
+export const instantPageLoader = new PageLoader(function({page, parent, params = {}, replace}, done) {
+  if (replace) {
+    util.propagateAction(parent, '_destroy');
+    parent.innerHTML = '';
+  }
+
   const element = util.createElement(page.trim());
   parent.appendChild(element);
 

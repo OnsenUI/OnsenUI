@@ -16,29 +16,16 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-
-import {OnsPage} from './ons-page';
+import {Params} from '../ons/params';
 
 declare const ons: any;
-
-export class PageParams {
-  constructor(private _data = {}) {}
-
-  at(key: string): any {
-    return this._data[key];
-  }
-
-  get data(): Object {
-    return this._data;
-  }
-}
 
 export class NavigatorPage {
   constructor(
     public elementRef: ElementRef = null,
     public destroy: Function = function() {},
     public animator: any = null,
-    public params: PageParams = new PageParams()) {
+    public params: Params = new Params()) {
   }
 }
 
@@ -79,9 +66,9 @@ export class OnsNavigator implements OnDestroy {
 
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
-      const pageParams = new PageParams(params || {});
+      const pageParams = new Params(params || {});
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(PageParams, {useValue: pageParams}),
+        provide(Params, {useValue: pageParams}),
         provide(OnsNavigator, {useValue: this})
       ], this._injector);
 
