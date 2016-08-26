@@ -173,11 +173,9 @@
       scope: true,
 
       compile: function(element) {
-        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs, controller) {
-            CustomElements.upgrade(element[0]);
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);

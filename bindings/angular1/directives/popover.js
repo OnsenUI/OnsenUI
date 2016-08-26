@@ -109,10 +109,8 @@
       replace: false,
       scope: true,
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
-            CustomElements.upgrade(element[0]);
 
             var popover = new PopoverView(scope, element, attrs);
 

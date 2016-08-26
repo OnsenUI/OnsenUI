@@ -157,7 +157,6 @@
 
       link: function(scope, element, attrs, controller) {
 
-        CustomElements.upgrade(element[0]);
 
         scope.$watch(attrs.hideTabs, function(hide) {
           if (typeof hide === 'string') {

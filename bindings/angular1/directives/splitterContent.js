@@ -29,10 +29,8 @@
       restrict: 'E',
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
 
           var view = new SplitterContent(scope, element, attrs);
 

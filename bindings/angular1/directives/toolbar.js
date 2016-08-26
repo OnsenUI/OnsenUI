@@ -23,12 +23,10 @@
       transclude: false,
 
       compile: function(element) {
-        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
             // TODO: Remove this dirty fix!
             if (element[0].nodeName === 'ons-toolbar') {
-              CustomElements.upgrade(element[0]);
               GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
             }
           },

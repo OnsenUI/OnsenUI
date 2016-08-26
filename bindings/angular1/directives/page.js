@@ -124,10 +124,8 @@
       scope: true,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
-            CustomElements.upgrade(element[0]);
             var page = new PageView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, page);

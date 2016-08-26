@@ -8,7 +8,6 @@
       scope: false,
 
       link: function(scope, element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         const onInput = () => {
           const set = $parse(attrs.ngModel).assign;

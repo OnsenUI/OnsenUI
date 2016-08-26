@@ -63,7 +63,6 @@
       scope: false,
 
       link: function(scope, element, attrs) {
-        CustomElements.upgrade(element[0]);
         let el = element[0];
 
         const onInput = () => {

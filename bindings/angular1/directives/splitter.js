@@ -71,10 +71,8 @@
       scope: true,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
 
           var splitter = new Splitter(scope, element, attrs);
 
