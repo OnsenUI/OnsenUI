@@ -419,7 +419,7 @@ class NavigatorElement extends BaseElement {
       var enterPage = this.pages[length - 2];
       enterPage.style.display = 'block';
 
-      options.animation = leavePage.pushedOptions.animation || options.animation;
+      options.animation = options.animation || leavePage.pushedOptions.animation;
       options.animationOptions = util.extend(
         {},
         leavePage.pushedOptions.animationOptions,
