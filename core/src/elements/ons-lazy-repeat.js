@@ -64,9 +64,9 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  *   </ons-lazy-repeat>
  * </ons-list>
  */
-class LazyRepeatElement extends BaseElement {
+export default class LazyRepeatElement extends BaseElement {
 
-  attachedCallback() {
+  connectedCallback() {
     util.updateParentPosition(this);
 
     // not very good idea and also not documented
@@ -170,7 +170,7 @@ class LazyRepeatElement extends BaseElement {
 
   attributeChangedCallback(name, last, current) {}
 
-  detachedCallback() {
+  disconnectedCallback() {
     if (this._lazyRepeatProvider) {
       this._lazyRepeatProvider.destroy();
       this._lazyRepeatProvider = null;
@@ -179,6 +179,4 @@ class LazyRepeatElement extends BaseElement {
 
 }
 
-window.OnsLazyRepeatElement = document.registerElement('ons-lazy-repeat', {
-  prototype: LazyRepeatElement.prototype
-});
+customElements.define('ons-lazy-repeat', LazyRepeatElement);

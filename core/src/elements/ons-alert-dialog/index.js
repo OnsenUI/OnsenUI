@@ -186,16 +186,18 @@ export default class AlertDialogElement extends BaseElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
-  constructor() {
-    super();
+  constructor(self) {
+    self = super(self);
 
-    contentReady(this, () => this._compile());
+    contentReady(self, () => self._compile());
 
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
+    self._visible = false;
+    self._doorLock = new DoorLock();
+    self._boundCancel = self._cancel.bind(self);
 
-    this._updateAnimatorFactory()
+    self._updateAnimatorFactory()
+
+    return self;
   }
 
   /**
@@ -536,6 +538,10 @@ export default class AlertDialogElement extends BaseElement {
       throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
     }
     _animatorDict[name] = Animator;
+  }
+
+  static get AlertDialogAnimator() {
+    return AlertDialogAnimator;
   }
 }
 

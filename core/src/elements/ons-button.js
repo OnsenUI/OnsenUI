@@ -69,7 +69,7 @@ const scheme = {'': 'button--*'};
  * </ons-button>
  */
 
-class ButtonElement extends BaseElement {
+export default class ButtonElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -92,10 +92,19 @@ class ButtonElement extends BaseElement {
    *   [en]Specify if button should be disabled.[/en]
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+
+  constructor(self) {
+    self = super(self);
+
+    if (!self.hasAttribute('_compiled')) {
+      self._compile();
     }
+
+    return self;
+  }
+
+  static get observerAttributes() {
+    return ['modifier', 'ripple'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -140,6 +149,4 @@ class ButtonElement extends BaseElement {
   }
 }
 
-window.OnsButtonElement = document.registerElement('ons-button', {
-  prototype: ButtonElement.prototype
-});
+customElements.define('ons-button', ButtonElement);

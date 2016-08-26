@@ -16,7 +16,7 @@ limitations under the License.
 */
 import util from 'ons/util';
 
-class PopoverAnimator {
+export class PopoverAnimator {
 
   /**
    * @param {Object} options
@@ -86,7 +86,7 @@ const fade = {
   }
 };
 
-class MDFadePopoverAnimator extends PopoverAnimator {
+export class MDFadePopoverAnimator extends PopoverAnimator {
   show(popover, callback) {
     this._animateAll(popover, {
       _mask: fade.in,
@@ -102,7 +102,7 @@ class MDFadePopoverAnimator extends PopoverAnimator {
   }
 }
 
-class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
+export class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
   show(popover, callback) {
     this._animateAll(popover, {
       _mask: fade.in,
@@ -121,5 +121,3 @@ class IOSFadePopoverAnimator extends MDFadePopoverAnimator {
     });
   }
 }
-
-export default {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator};

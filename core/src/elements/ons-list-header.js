@@ -47,7 +47,7 @@ const scheme = {'': 'list__header--*'};
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
-class ListHeaderElement extends BaseElement {
+export default class ListHeaderElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -56,10 +56,15 @@ class ListHeaderElement extends BaseElement {
    *   [en]The appearance of the list header.[/en]
    *   [ja]ヘッダーの表現を指定します。[/ja]
    */
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+
+  constructor(self) {
+    self = super(self);
+
+    if (!self.hasAttribute('_compiled')) {
+      self._compile();
     }
+
+    return self;
   }
 
   _compile() {
@@ -71,6 +76,10 @@ class ListHeaderElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -78,6 +87,4 @@ class ListHeaderElement extends BaseElement {
   }
 }
 
-window.OnsListHeaderElement = document.registerElement('ons-list-header', {
-  prototype: ListHeaderElement.prototype
-});
+customElements.define('ons-list-header', ListHeaderElement);

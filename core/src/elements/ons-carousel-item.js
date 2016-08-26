@@ -43,11 +43,19 @@ const scheme = {'': 'carousel-item--*'};
  *   </ons-carousel-item>
  * </ons-carousel>
  */
-class CarouselItemElement extends BaseElement {
+export default class CarouselItemElement extends BaseElement {
 
-  createdCallback() {
-    this.style.width = '100%';
-    ModifierUtil.initModifier(this, scheme);
+  constructor(self) {
+    self = super(self);
+
+    self.style.width = '100%';
+    ModifierUtil.initModifier(self, scheme);
+
+    return self;
+  }
+
+  static get observedAttributes() {
+    return ['modifier']
   }
 
   attributeChangedCallback(name, last, current) {
@@ -57,6 +65,4 @@ class CarouselItemElement extends BaseElement {
   }
 }
 
-window.OnsCarouselItemElement = document.registerElement('ons-carousel-item', {
-  prototype: CarouselItemElement.prototype
-});
+customElements.define('ons-carousel-item', CarouselItemElement);

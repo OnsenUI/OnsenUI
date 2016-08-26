@@ -52,7 +52,7 @@ const scheme = {'': 'list--*'};
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
-class ListElement extends BaseElement {
+export default class ListElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -62,10 +62,14 @@ class ListElement extends BaseElement {
    *   [ja]リストの表現を指定します。[/ja]
    */
 
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+  constructor(self) {
+    self = super(self);
+
+    if (!self.hasAttribute('_compiled')) {
+      self._compile();
     }
+
+    return self;
   }
 
   _compile() {
@@ -77,6 +81,10 @@ class ListElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -84,6 +92,4 @@ class ListElement extends BaseElement {
   }
 }
 
-window.OnsListElement = document.registerElement('ons-list', {
-  prototype: ListElement.prototype
-});
+customElements.define('ons-list', ListElement);

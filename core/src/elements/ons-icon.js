@@ -46,7 +46,7 @@ import BaseElement from 'ons/base-element';
  *   Car
  * </ons-button>
  */
-class IconElement extends BaseElement {
+export default class IconElement extends BaseElement {
 
   /**
    * @attribute icon
@@ -122,10 +122,14 @@ class IconElement extends BaseElement {
    *   [ja]アイコンを回転するかどうかを指定します。[/ja]
    */
 
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+  constructor(self) {
+    self = super(self);
+    self._compile();
+    return self;
+  }
+
+  static get observerAttributes() {
+    return ['icon', 'size', 'modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -137,7 +141,6 @@ class IconElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
     this._update();
-    this.setAttribute('_compiled', '');
   }
 
   _update() {
@@ -202,6 +205,4 @@ class IconElement extends BaseElement {
   }
 }
 
-window.OnsIconElement = document.registerElement('ons-icon', {
-  prototype: IconElement.prototype
-});
+customElements.define('ons-icon', IconElement);

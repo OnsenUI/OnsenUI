@@ -158,7 +158,7 @@ const HorizontalModeTrait = {
  *   </ons-carousel-item>
  * </ons-carousel>
  */
-class CarouselElement extends BaseElement {
+export default class CarouselElement extends BaseElement {
 
   /**
    * @event postchange
@@ -312,17 +312,21 @@ class CarouselElement extends BaseElement {
    *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
-  createdCallback() {
-    this._doorLock = new DoorLock();
-    this._scroll = 0;
-    this._offset = 0;
-    this._lastActiveIndex = 0;
+  constructor(self) {
+    self = super(self);
 
-    this._boundOnDrag = this._onDrag.bind(this);
-    this._boundOnDragEnd = this._onDragEnd.bind(this);
-    this._boundOnResize = this._onResize.bind(this);
+    self._doorLock = new DoorLock();
+    self._scroll = 0;
+    self._offset = 0;
+    self._lastActiveIndex = 0;
 
-    this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
+    self._boundOnDrag = self._onDrag.bind(self);
+    self._boundOnDragEnd = self._onDragEnd.bind(self);
+    self._boundOnResize = self._onResize.bind(self);
+
+    self._mixin(self._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
+
+    return self;
   }
 
   _onResize() {
@@ -957,7 +961,7 @@ class CarouselElement extends BaseElement {
     );
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this._prepareEventListeners();
 
     this._setup();
@@ -969,6 +973,10 @@ class CarouselElement extends BaseElement {
     if (this.offsetHeight === 0) {
       setImmediate(() => this.refresh());
     }
+  }
+
+  static get observedAttributes() {
+    return ['swipeable', 'auto-refresh', 'direction'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -984,7 +992,7 @@ class CarouselElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._removeEventListeners();
   }
 
@@ -1094,6 +1102,4 @@ class CarouselElement extends BaseElement {
   }
 }
 
-window.OnsCarouselElement = document.registerElement('ons-carousel', {
-  prototype: CarouselElement.prototype
-});
+customElements.define('ons-carousel', CarouselElement);

@@ -76,7 +76,7 @@ const _animatorDict = {
  *   document.getElementById('dialog').show();
  * </script>
  */
-class DialogElement extends BaseElement {
+export default class DialogElement extends BaseElement {
 
   /**
    * @event preshow
@@ -184,14 +184,18 @@ class DialogElement extends BaseElement {
     return util.findChild(this, '.dialog');
   }
 
-  createdCallback() {
-    contentReady(this, () => this._compile());
+  constructor(self) {
+    self = super(self);
 
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
+    contentReady(self, () => self._compile());
 
-    this._updateAnimatorFactory();
+    self._visible = false;
+    self._doorLock = new DoorLock();
+    self._boundCancel = self._cancel.bind(self);
+
+    self._updateAnimatorFactory();
+
+    return self;
   }
 
   _updateAnimatorFactory() {
@@ -454,7 +458,7 @@ class DialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
@@ -462,11 +466,15 @@ class DialogElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'animation'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -477,21 +485,21 @@ class DialogElement extends BaseElement {
       this._updateAnimatorFactory();
     }
   }
+
+  /**
+   * @param {String} name
+   * @param {DialogAnimator} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof DialogAnimator)) {
+      throw new Error('"Animator" param must inherit OnsDialogElement.DialogAnimator');
+    }
+    _animatorDict[name] = Animator;
+  }
+
+  static get DialogAnimator() {
+    return DialogAnimator;
+  }
 }
 
-const OnsDialogElement = window.OnsDialogElement = document.registerElement('ons-dialog', {
-  prototype: DialogElement.prototype
-});
-
-/**
- * @param {String} name
- * @param {DialogAnimator} Animator
- */
-OnsDialogElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof DialogAnimator)) {
-    throw new Error('"Animator" param must inherit OnsDialogElement.DialogAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-OnsDialogElement.DialogAnimator = DialogAnimator;
+customElements.define('ons-dialog', DialogElement);

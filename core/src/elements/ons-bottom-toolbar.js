@@ -40,7 +40,7 @@ const scheme = {'': 'bottom-bar--*'};
  *   Content
  * </ons-bottom-toolbar>
  */
-class BottomToolbarElement extends BaseElement {
+export default class BottomToolbarElement extends BaseElement {
   /**
    * @attribute modifier
    * @type {String}
@@ -49,16 +49,23 @@ class BottomToolbarElement extends BaseElement {
    *   [ja]ツールバーの見た目の表現を指定します。[/ja]
    */
 
-  createdCallback() {
-    this.classList.add('bottom-bar');
+  constructor(self) {
+    self = super(self);
 
-    ModifierUtil.initModifier(this, scheme);
+    self.classList.add('bottom-bar');
+    ModifierUtil.initModifier(self, scheme);
+
+    return self;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     if (util.match(this.parentNode, 'ons-page')) {
       this.parentNode.classList.add('page-with-bottom-toolbar');
     }
+  }
+
+  static get observedAttributes() {
+    return ['modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -69,6 +76,4 @@ class BottomToolbarElement extends BaseElement {
 
 }
 
-window.OnsBottomToolbarElement = document.registerElement('ons-bottom-toolbar', {
-  prototype: BottomToolbarElement.prototype
-});
+customElements.define('ons-bottom-toolbar', BottomToolbarElement);

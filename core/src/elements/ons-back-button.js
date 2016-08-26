@@ -65,7 +65,7 @@ var scheme = {
  * </ons-toolbar>
  */
 
-class BackButtonElement extends BaseElement {
+export default class BackButtonElement extends BaseElement {
   /**
    * @attribute modifier
    * @type {String}
@@ -74,13 +74,17 @@ class BackButtonElement extends BaseElement {
    *  [ja]バックボタンの見た目を指定します。[/ja]
    */
 
-  createdCallback() {
-    contentReady(this, () => {
-      this._compile();
+  constructor(self) {
+    self = super(self);
+
+    contentReady(self, () => {
+      self._compile();
     });
 
-    this._options = {};
-    this._boundOnClick = this._onClick.bind(this);
+    self._options = {};
+    self._boundOnClick = self._onClick.bind(self);
+
+    return self;
   }
 
   _compile() {
@@ -174,8 +178,12 @@ class BackButtonElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
+  }
+
+  static get observedAttributes() {
+    return ['modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -184,7 +192,7 @@ class BackButtonElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
@@ -197,6 +205,4 @@ class BackButtonElement extends BaseElement {
   }
 }
 
-window.OnsBackButtonElement = document.registerElement('ons-back-button', {
-  prototype: BackButtonElement.prototype
-});
+customElements.define('ons-back-button', BackButtonElement);

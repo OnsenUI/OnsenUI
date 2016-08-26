@@ -53,12 +53,20 @@ import BaseElement from 'ons/base-element';
  *   [en]The width of the column. Valid values are css width values ("10%", "50px").[/en]
  *   [ja]カラムの横幅を指定する。パーセントもしくはピクセルで指定します（10%や50px）。[/ja]
  */
-class ColumnElement extends BaseElement {
+export default class ColElement extends BaseElement {
 
-  createdCallback() {
-    if (this.getAttribute('width')) {
-      this._updateWidth();
+  constructor(self) {
+    self = super(self);
+
+    if (self.getAttribute('width')) {
+      self._updateWidth();
     }
+
+    return self;
+  }
+
+  static get observedAttrbutes() {
+    return ['width'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -84,6 +92,4 @@ class ColumnElement extends BaseElement {
   }
 }
 
-window.OnsColElement = document.registerElement('ons-col', {
-  prototype: ColumnElement.prototype
-});
+customElements.define('ons-col', ColElement);
