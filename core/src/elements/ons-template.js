@@ -49,7 +49,7 @@ import BaseElement from 'ons/base-element';
  * <ons-navigator page="foobar.html">
  * </ons-navigator>
  */
-class TemplateElement extends BaseElement {
+export default class TemplateElement extends BaseElement {
 
   /**
    * @property template
@@ -58,15 +58,20 @@ class TemplateElement extends BaseElement {
    *  [en]Template content. This property can not be used with AngularJS bindings.[/en]
    *  [ja][/ja]
    */
-  createdCallback() {
-    this.template = this.innerHTML;
 
-    while (this.firstChild) {
-      this.removeChild(this.firstChild);
+  constructor(self) {
+    self = super(self);
+
+    self.template = self.innerHTML;
+
+    while (self.firstChild) {
+      self.removeChild(self.firstChild);
     }
+
+    return self;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
     event.template = this.template;
     event.templateId = this.getAttribute('id');
@@ -75,6 +80,4 @@ class TemplateElement extends BaseElement {
   }
 }
 
-window.OnsTemplateElement = document.registerElement('ons-template', {
-  prototype: TemplateElement.prototype
-});
+customElements.define('ons-template', TemplateElement);

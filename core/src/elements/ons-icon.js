@@ -128,7 +128,7 @@ export default class IconElement extends BaseElement {
     return self;
   }
 
-  static get observerAttributes() {
+  static get observedAttributes() {
     return ['icon', 'size', 'modifier'];
   }
 

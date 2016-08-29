@@ -85,7 +85,7 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *   loadMore().then(done);
  * };
  */
-class PageElement extends BaseElement {
+export default class PageElement extends BaseElement {
 
   /**
    * @event init
@@ -135,23 +135,27 @@ class PageElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  createdCallback() {
-    this.classList.add('page');
+  constructor(self) {
+    self = super(self);
 
-    contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
+    self.classList.add('page');
+
+    contentReady(self, () => {
+      if (!self.hasAttribute('_compiled')) {
+        self._compile();
       }
 
-      this._isShown = false;
-      this._contentElement = this._getContentElement();
-      this._isMuted = this.hasAttribute('_muted');
-      this._skipInit = this.hasAttribute('_skipinit');
-      this.pushedOptions = {};
+      self._isShown = false;
+      self._contentElement = self._getContentElement();
+      self._isMuted = self.hasAttribute('_muted');
+      self._skipInit = self.hasAttribute('_skipinit');
+      self.pushedOptions = {};
     });
+
+    return self;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     contentReady(this, () => {
       if (!this._isMuted) {
         if (this._skipInit) {
@@ -308,6 +312,10 @@ class PageElement extends BaseElement {
     return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
 
+  static get observedAttributes() {
+    return ['modifier', '_muted', '_skipinit', 'on-infinite-scroll'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -428,6 +436,4 @@ class PageElement extends BaseElement {
    */
 }
 
-window.OnsPageElement = document.registerElement('ons-page', {
-  prototype: PageElement.prototype
-});
+customElements.define('ons-page', PageElement);

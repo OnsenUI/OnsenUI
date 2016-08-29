@@ -65,7 +65,7 @@ export default class ColElement extends BaseElement {
     return self;
   }
 
-  static get observedAttrbutes() {
+  static get observedAttributes() {
     return ['width'];
   }
 

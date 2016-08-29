@@ -103,7 +103,7 @@ export default class ButtonElement extends BaseElement {
     return self;
   }
 
-  static get observerAttributes() {
+  static get observedAttributes() {
     return ['modifier', 'ripple'];
   }
 

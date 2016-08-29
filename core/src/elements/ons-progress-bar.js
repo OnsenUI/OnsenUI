@@ -55,7 +55,7 @@ const template = util.createElement(`
  *  indeterminate>
  * </ons-progress-bar>
  */
-class ProgressBarElement extends BaseElement {
+export default class ProgressBarElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -88,10 +88,18 @@ class ProgressBarElement extends BaseElement {
    *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
    */
 
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+  constructor(self) {
+    self = super(self);
+
+    if (!self.hasAttribute('_compiled')) {
+      self._compile();
     }
+
+    return self;
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'value', 'secondary-value', 'indeterminate'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -195,6 +203,4 @@ class ProgressBarElement extends BaseElement {
   }
 }
 
-window.OnsProgressBarElement = document.registerElement('ons-progress-bar', {
-  prototype: ProgressBarElement.prototype
-});
+customElements.define('ons-progress-bar', ProgressBarElement);

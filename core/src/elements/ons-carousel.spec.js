@@ -20,7 +20,7 @@ describe('OnsCarouselElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsCarouselElement).to.be.ok;
+    expect(window.ons.CarouselElement).to.be.ok;
   });
 
   describe('#_updateSwipeable()', () => {
@@ -318,7 +318,7 @@ describe('OnsCarouselElement', () => {
       expect(rv.length).to.equal(3);
 
       for (let i = 0; i < rv.length; i++) {
-        expect(rv[i]).to.be.an.instanceof(OnsCarouselItemElement);
+        expect(rv[i]).to.be.an.instanceof(ons.CarouselItemElement);
       }
     });
 

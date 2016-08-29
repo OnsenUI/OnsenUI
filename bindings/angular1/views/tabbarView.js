@@ -75,7 +75,7 @@ limitations under the License.
     MicroEvent.mixin(TabbarView);
 
     TabbarView.registerAnimator = function(name, Animator) {
-      return window.OnsTabbarElement.registerAnimator(name, Animator);
+      return window.ons.TabbarElement.registerAnimator(name, Animator);
     };
 
     return TabbarView;

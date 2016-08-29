@@ -2,7 +2,7 @@
 
 describe('OnsBackButtonElement', () => {
   it('exists', () => {
-    expect(window.OnsBackButtonElement).to.be.ok;
+    expect(window.ons.BackButtonElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -48,7 +48,7 @@ describe('OnsBackButtonElement', () => {
         </div>
       `);
 
-      nav = new OnsNavigatorElement();
+      nav = new ons.NavigatorElement();
       nav._options = {cancelIfRunning: false};
       document.body.appendChild(div);
       document.body.appendChild(nav);

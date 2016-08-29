@@ -62,7 +62,7 @@ const scheme = {'': 'toolbar-button--*'};
  *   </div>
  * </ons-toolbar>
  */
-class ToolbarButtonElement extends BaseElement {
+export default class ToolbarButtonElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -79,10 +79,14 @@ class ToolbarButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定してください。[/ja]
    */
 
-  createdCallback() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
+  constructor(self) {
+    self = super(self);
+
+    if (!self.hasAttribute('_compiled')) {
+      self._compile();
     }
+
+    return self;
   }
 
   /**
@@ -110,6 +114,10 @@ class ToolbarButtonElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -117,7 +125,4 @@ class ToolbarButtonElement extends BaseElement {
   }
 }
 
-window.OnsToolbarButton = document.registerElement('ons-toolbar-button', {
-  prototype: ToolbarButtonElement.prototype
-});
-
+customElements.define('ons-toolbar-button', ToolbarButtonElement);

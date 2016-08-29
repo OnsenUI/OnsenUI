@@ -20,7 +20,7 @@ import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
 import internal from 'ons/internal';
-import OnsTabbarElement from './ons-tabbar';
+import TabbarElement from './ons-tabbar';
 import contentReady from 'ons/content-ready';
 import {PageLoader, defaultPageLoader} from 'ons/page-loader';
 
@@ -92,7 +92,7 @@ const defaultInnerTemplateSource = util.createElement(`
  * </ons-template>
 
  */
-class TabElement extends BaseElement {
+export default class TabElement extends BaseElement {
 
   /**
    * @attribute page
@@ -140,23 +140,27 @@ class TabElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  createdCallback() {
-    this._pageLoader = defaultPageLoader;
-    this._page = null;
+  constructor(self) {
+    self = super(self);
 
-    if (this.hasAttribute('label') || this.hasAttribute('icon')) {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
+    self._pageLoader = defaultPageLoader;
+    self._page = null;
+
+    if (self.hasAttribute('label') || self.hasAttribute('icon')) {
+      if (!self.hasAttribute('_compiled')) {
+        self._compile();
       }
     } else {
-      contentReady(this, () => {
-        if (!this.hasAttribute('_compiled')) {
-          this._compile();
+      contentReady(self, () => {
+        if (!self.hasAttribute('_compiled')) {
+          self._compile();
         }
       });
     }
 
-    this._boundOnClick = this._onClick.bind(this);
+    self._boundOnClick = self._onClick.bind(self);
+
+    return self;
   }
 
   _getPageTarget() {
@@ -353,7 +357,7 @@ class TabElement extends BaseElement {
     return this.classList.contains('active');
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
       this._loadedPage.unload();
@@ -361,7 +365,7 @@ class TabElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     contentReady(this, () => {
       this._ensureElementPosition();
 
@@ -375,7 +379,7 @@ class TabElement extends BaseElement {
       if (this.hasAttribute('active')) {
         const tabIndex = this._findTabIndex();
 
-        OnsTabbarElement.rewritables.ready(tabbar, () => {
+        TabbarElement.rewritables.ready(tabbar, () => {
           setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
         });
       } else {
@@ -385,11 +389,11 @@ class TabElement extends BaseElement {
               pageElement.style.display = 'none';
               tabbar._contentElement.appendChild(pageElement);
             }, (pageElement, done) => {
-              OnsTabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
+              TabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
             });
           }
         };
-        OnsTabbarElement.rewritables.ready(tabbar, onReady);
+        TabbarElement.rewritables.ready(tabbar, onReady);
       }
 
       this.addEventListener('click', this._boundOnClick, false);
@@ -423,6 +427,10 @@ class TabElement extends BaseElement {
     }
   }
 
+  static get observedAttributes() {
+    return ['modifier', 'ripple', 'icon', 'label', 'page'];
+  }
+
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'modifier':
@@ -444,10 +452,4 @@ class TabElement extends BaseElement {
   }
 }
 
-window.OnsTabElement = document.registerElement('ons-tab', {
-  prototype: TabElement.prototype
-});
-
-document.registerElement('ons-tabbar-item', {
-  prototype: Object.create(TabElement.prototype)
-});
+customElements.define('ons-tab', TabElement);

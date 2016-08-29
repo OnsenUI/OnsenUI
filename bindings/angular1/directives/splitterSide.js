@@ -49,11 +49,11 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsSplitterSideElement.rewritables.ready;
-  window.OnsSplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
+  var lastReady = window.ons.SplitterSideElement.rewritables.ready;
+  window.ons.SplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
 
-  var lastLink = window.OnsSplitterSideElement.rewritables.link;
-  window.OnsSplitterSideElement.rewritables.link = function(element, target, options, callback) {
+  var lastLink = window.ons.SplitterSideElement.rewritables.link;
+  window.ons.SplitterSideElement.rewritables.link = function(element, target, options, callback) {
     var view = angular.element(element).data('ons-splitter-side');
     lastLink(element, target, options, function(target) {
       view._link(target, callback);

@@ -70,17 +70,21 @@ const INPUT_ATTRIBUTES = [
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
  */
-class RangeElement extends BaseElement {
+export default class RangeElement extends BaseElement {
 
-  createdCallback() {
-    contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
+  constructor(self) {
+    self = super(self);
+
+    contentReady(self, () => {
+      if (!self.hasAttribute('_compiled')) {
+        self._compile();
       }
 
-      this._updateBoundAttributes();
-      this._onChange();
+      self._updateBoundAttributes();
+      self._onChange();
     });
+
+    return self;
   }
 
   _compile() {
@@ -110,6 +114,10 @@ class RangeElement extends BaseElement {
     return (this.value - min) / (max - min);
   }
 
+  static get observedAttributes() {
+    return ['modifier', ...INPUT_ATTRIBUTES];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -125,11 +133,11 @@ class RangeElement extends BaseElement {
     }
  }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('input', this._onChange);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('input', this._onChange);
   }
 
@@ -186,6 +194,4 @@ class RangeElement extends BaseElement {
   }
 }
 
-window.OnsRangeElement = document.registerElement('ons-range', {
-  prototype: RangeElement.prototype
-});
+customElements.define('ons-range', RangeElement);

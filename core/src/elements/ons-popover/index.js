@@ -608,7 +608,7 @@ export default class PopoverElement extends BaseElement {
   }
 
   static get PopoverAnimator() {
-    return PopoverElement;
+    return PopoverAnimator;
   }
 }
 

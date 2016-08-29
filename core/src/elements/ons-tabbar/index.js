@@ -23,6 +23,7 @@ import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
 import BaseElement from 'ons/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
+import TabElement from '../ons-tab';
 import contentReady from 'ons/content-ready';
 
 const scheme = {
@@ -119,7 +120,7 @@ const generateId = (() => {
  *   ...
  * </ons-template>
  */
-class TabbarElement extends BaseElement {
+export default class TabbarElement extends BaseElement {
 
   /**
    * @event prechange
@@ -199,37 +200,41 @@ class TabbarElement extends BaseElement {
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
-  createdCallback() {
-    this._tabbarId = generateId();
+  constructor(self) {
+    self = super(self);
 
-    contentReady(this, () => {
-      this._compile();
+    self._tabbarId = generateId();
 
-      const content = this._contentElement;
+    contentReady(self, () => {
+      self._compile();
+
+      const content = self._contentElement;
       for (let i = 0; i < content.children.length; i++) {
         content.children[i].style.display = 'none';
       }
 
-      const activeIndex = this.getAttribute('activeIndex');
+      const activeIndex = self.getAttribute('activeIndex');
 
-      const tabbar = this._tabbarElement;
+      const tabbar = self._tabbarElement;
       if (activeIndex && tabbar.children.length > activeIndex) {
         tabbar.children[activeIndex].setAttribute('active', 'true');
       }
 
-      autoStyle.prepare(this);
-      ModifierUtil.initModifier(this, scheme);
+      autoStyle.prepare(self);
+      ModifierUtil.initModifier(self, scheme);
 
-      this._animatorFactory = new AnimatorFactory({
+      self._animatorFactory = new AnimatorFactory({
         animators: _animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
-        defaultAnimation: this.getAttribute('animation')
+        defaultAnimation: self.getAttribute('animation')
       });
     });
+
+    return self;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     contentReady(this, () => this._updatePosition());
   }
 
@@ -313,7 +318,7 @@ class TabbarElement extends BaseElement {
    */
   loadPage(page, options = {}) {
     return new Promise(resolve => {
-      const tab = this._tabbarElement.children[0] || new OnsTabElement();
+      const tab = this._tabbarElement.children[0] || new TabElement();
       tab._loadPage(page, this._contentElement, pageElement => {
         resolve(this._loadPageDOMAsync(pageElement, options));
       });
@@ -594,7 +599,7 @@ class TabbarElement extends BaseElement {
     const tabs = this._getTabbarElement().children;
 
     for (var i = 0; i < tabs.length; i++) {
-      if (tabs[i] instanceof window.OnsTabElement && tabs[i].isActive && tabs[i].isActive()) {
+      if (tabs[i] instanceof TabElement && tabs[i].isActive && tabs[i].isActive()) {
         return i;
       }
     }
@@ -616,7 +621,7 @@ class TabbarElement extends BaseElement {
     return this._getTabbarElement().children[index];
   }
 
-  detachedCallback() { }
+  disconnectedCallback() { }
 
   _show() {
     const currentPageElement = this._getCurrentPageElement();
@@ -640,29 +645,34 @@ class TabbarElement extends BaseElement {
     this.remove();
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
+
+  static get rewritables() {
+    return rewritables;
+  }
+
+  static get TabbarAnimator() {
+    return TabbarAnimator;
+  }
+
+  /**
+   * @param {String} name
+   * @param {Function} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof TabbarAnimator)) {
+      throw new Error('"Animator" param must inherit TabbarElement.TabbarAnimator');
+    }
+    _animatorDict[name] = Animator;
+  }
 }
 
-window.OnsTabbarElement = document.registerElement('ons-tabbar', {
-  prototype: TabbarElement.prototype
-});
-
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsTabbarElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof TabbarAnimator)) {
-    throw new Error('"Animator" param must inherit OnsTabbarElement.TabbarAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsTabbarElement.rewritables = rewritables;
-window.OnsTabbarElement.TabbarAnimator = TabbarAnimator;
-
-export default OnsTabbarElement;
+customElements.define('ons-tabbar', TabbarElement);

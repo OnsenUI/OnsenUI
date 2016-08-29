@@ -2,7 +2,7 @@
 
 describe('OnsPullHookElement', () => {
   it('exists', () => {
-    expect(window.OnsPullHookElement).to.be.ok;
+    expect(window.ons.PullHookElement).to.be.ok;
   });
 
   let page, pullHook, event;

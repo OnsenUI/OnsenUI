@@ -2,7 +2,7 @@
 
 describe('OnsRowElement', () => {
   it('should exist', () => {
-    expect(window.OnsRowElement).to.be.ok;
+    expect(window.ons.RowElement).to.be.ok;
   });
 
   describe('#_compile()', () => {

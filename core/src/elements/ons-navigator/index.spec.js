@@ -26,7 +26,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsNavigatorElement).to.be.ok;
+    expect(window.ons.NavigatorElement).to.be.ok;
   });
 
   it('provides \'page\' attribute', () => {
@@ -596,14 +596,14 @@ describe('OnsNavigatorElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a NavigatorAnimator', () => {
-      expect(() => window.OnsNavigatorElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.NavigatorElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsNavigatorElement.NavigatorTransitionAnimator {
+      class MyAnimator extends window.ons.NavigatorElement.NavigatorTransitionAnimator {
       }
 
-      window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
+      window.ons.NavigatorElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

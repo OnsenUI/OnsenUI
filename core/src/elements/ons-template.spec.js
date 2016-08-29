@@ -2,11 +2,11 @@
 
 describe('ons-template', () => {
   it('provides \'OnsTemplateElement\' global variable', () => {
-    expect(window.OnsTemplateElement).to.be.ok;
+    expect(window.ons.TemplateElement).to.be.ok;
   });
 
   it('doesn\'t have any children', () => {
-    var element = new OnsTemplateElement();
+    var element = new ons.TemplateElement();
     expect(element.hasChildNodes()).not.to.be.true;
   });
 

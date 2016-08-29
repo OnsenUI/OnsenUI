@@ -967,9 +967,9 @@ export default class NavigatorElement extends BaseElement {
    * @param {String} name
    * @param {Function} Animator
    */
-  static registerAnimator() {
+  static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-      throw new Error('"Animator" param must inherit OnsNavigatorElement.NavigatorTransitionAnimator');
+      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorTransitionAnimator');
     }
 
     _animatorDict[name] = Animator;

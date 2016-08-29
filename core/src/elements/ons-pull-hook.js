@@ -59,7 +59,7 @@ const removeTransform = (el) => {
  *   };
  * </script>
  */
-class PullHookElement extends BaseElement {
+export default class PullHookElement extends BaseElement {
 
   /**
    * @event changestate
@@ -107,13 +107,17 @@ class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
-  createdCallback() {
-    this._boundOnDrag = this._onDrag.bind(this);
-    this._boundOnDragStart = this._onDragStart.bind(this);
-    this._boundOnDragEnd = this._onDragEnd.bind(this);
-    this._boundOnScroll = this._onScroll.bind(this);
+  constructor(self) {
+    self = super(self);
 
-    this._setState(STATE_INITIAL, true);
+    self._boundOnDrag = self._onDrag.bind(self);
+    self._boundOnDragStart = self._onDragStart.bind(self);
+    self._boundOnDragEnd = self._onDragEnd.bind(self);
+    self._boundOnScroll = self._onScroll.bind(self);
+
+    self._setState(STATE_INITIAL, true);
+
+    return self;
   }
 
   _setStyle() {
@@ -413,7 +417,7 @@ class PullHookElement extends BaseElement {
     this._pageElement.removeEventListener('scroll', this._boundOnScroll, false);
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this._currentTranslation = 0;
     this._pageElement = this.parentNode;
 
@@ -421,10 +425,14 @@ class PullHookElement extends BaseElement {
     this._setStyle();
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._pageElement.style.marginTop = '';
 
     this._destroyEventListeners();
+  }
+
+  static get observedAttributes() {
+    return ['height'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -432,12 +440,18 @@ class PullHookElement extends BaseElement {
       this._setStyle();
     }
   }
+
+  static get STATE_INITIAL() {
+    return STATE_INITIAL;
+  }
+
+  static get STATE_PREACTION() {
+    return STATE_PREACTION;
+  }
+
+  static get STATE_ACTION() {
+    return STATE_ACTION;
+  }
 }
 
-window.OnsPullHookElement = document.registerElement('ons-pull-hook', {
-  prototype: PullHookElement.prototype
-});
-
-window.OnsPullHookElement.STATE_ACTION = STATE_ACTION;
-window.OnsPullHookElement.STATE_INITIAL = STATE_INITIAL;
-window.OnsPullHookElement.STATE_PREACTION = STATE_PREACTION;
+customElements.define('ons-pull-hook', PullHookElement);

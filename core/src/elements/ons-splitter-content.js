@@ -71,7 +71,7 @@ const rewritables = {
  *   </ons-splitter-side>
  * </ons-splitter>
  */
-class SplitterContentElement extends BaseElement {
+export default class SplitterContentElement extends BaseElement {
 
   /**
    * @attribute page
@@ -84,20 +84,25 @@ class SplitterContentElement extends BaseElement {
    *   [/en]
    *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
    */
-  createdCallback() {
-    this._page = null;
-    this._pageLoader = defaultPageLoader;
 
-    contentReady(this, () => {
-      const page = this._getPageTarget();
+  constructor(self) {
+    self = super(self);
+
+    self._page = null;
+    self._pageLoader = defaultPageLoader;
+
+    contentReady(self, () => {
+      const page = self._getPageTarget();
 
       if (page) {
-        this.load(page);
+        self.load(page);
       }
     });
+
+    return self;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
       throw new Error(`"ons-splitter-content" must have "ons-splitter" as parentNode.`);
     }
@@ -107,7 +112,11 @@ class SplitterContentElement extends BaseElement {
     return this._page || this.getAttribute('page');
   }
 
-  detachedCallback() {}
+  disconnectedCallback() {}
+
+  static get observedAttributes() {
+    return [];
+  }
 
   attributeChangedCallback(name, last, current) {
   }
@@ -191,10 +200,10 @@ class SplitterContentElement extends BaseElement {
     util.propagateAction(this, '_destroy');
     this.remove();
   }
+
+  static get rewritables() {
+    return rewritables;
+  }
 }
 
-window.OnsSplitterContentElement = document.registerElement('ons-splitter-content', {
-  prototype: SplitterContentElement.prototype
-});
-
-window.OnsSplitterContentElement.rewritables = rewritables;
+customElements.define('ons-splitter-content', SplitterContentElement);

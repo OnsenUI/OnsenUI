@@ -41,7 +41,7 @@ describe('OnsLazyRepeatElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsLazyRepeatElement).to.be.ok;
+    expect(window.ons.LazyRepeatElement).to.be.ok;
   });
 
   describe('#refresh', () => {

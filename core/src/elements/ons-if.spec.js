@@ -1,12 +1,12 @@
 'use strict';
 
 describe('ons-if', () => {
-  it('provides \'OnsConditionalElement\' global variable', () => {
-    expect(window.OnsConditionalElement).to.be.ok;
+  it('provides \'OnsIfElement\' global variable', () => {
+    expect(window.ons.IfElement).to.be.ok;
   });
 
   it('doesn\'t have any children', () => {
-    var element = new OnsConditionalElement();
+    var element = new ons.IfElement();
     expect(element.hasChildNodes()).not.to.be.true;
   });
 
