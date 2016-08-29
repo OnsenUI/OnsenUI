@@ -1,21 +1,25 @@
 import {
-  bootstrap,
   Component,
-  OnsRange
+  OnsRange,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
-  directives: [OnsRange],
   template: `
   <ons-page>
     <ons-toolbar>
       <div class="center">Range Example</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <div style="text-align: center; margin: 10px">
-        <ons-range [(value)]="value"></ons-range><br>
+        <!-- (input) is needed for immediate change detection on dragging range component.
+        -->
+        <ons-range [(value)]="value" (input)="value = $event.target.value"></ons-range><br>
         <ons-range modifier="material" [(value)]="value"></ons-range><br>
         {{value}}
       </div>
@@ -28,4 +32,12 @@ export class AppComponent {
   constructor() { }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

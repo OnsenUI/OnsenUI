@@ -9,7 +9,7 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
-  SimpleChange
+  SimpleChanges
 } from '@angular/core';
 
 /**
@@ -31,7 +31,9 @@ export class OnsSwitch implements OnChanges, OnDestroy {
    * @type {Type}
    * @desc [en]Page content.[/en]
    */
-  @Input('value') _value: boolean;
+  @Input('value') set value(target: boolean) {
+    this._element.checked = !!target;
+  }
 
   /**
    * @output valueChange
@@ -50,8 +52,8 @@ export class OnsSwitch implements OnChanges, OnDestroy {
     this._valueChange.emit(this._element.checked);
   }
 
-  ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
-    const value = !!changeRecord['_value'].currentValue;
+  ngOnChanges(changeRecord: SimpleChanges) {
+    const value = !!(<any>changeRecord).value.currentValue;
     this._element.checked = value;
   }
 

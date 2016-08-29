@@ -1,18 +1,18 @@
 import {
-  bootstrap,
   Component,
   ComponentRef,
   AlertDialogFactory,
   ViewChild,
-  ONS_DIRECTIVES,
   Params,
-  OnInit,
-  OnDestroy
+  AfterViewInit,
+  OnDestroy,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-alert-dialog cancelable #alert>
       <div class="alert-dialog-title">Warning!</div>
@@ -35,8 +35,6 @@ class MyAlertDialogComponent {
 
 @Component({
   selector: 'app',
-  providers: [AlertDialogFactory],
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -50,14 +48,14 @@ class MyAlertDialogComponent {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements AfterViewInit, OnDestroy {
   private _alert: any;
   private _destroyAlert: Function;
 
   constructor(private _adf: AlertDialogFactory) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this._adf
       .createAlertDialog(MyAlertDialogComponent, {message: 'This is just an example.'})
       .then(({alertDialog, destroy}) => {
@@ -77,5 +75,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent, MyAlertDialogComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [MyAlertDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
 
+platformBrowserDynamic().bootstrapModule(AppModule);

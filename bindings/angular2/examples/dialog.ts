@@ -1,17 +1,17 @@
 import {
-  bootstrap,
   Component,
   DialogFactory,
   AfterViewInit,
-  ONS_DIRECTIVES,
   OnInit,
   OnDestroy,
-  Params
+  Params,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-dialog animation="default" cancelable #dialog>
       <div class="dialog-mask"></div>
@@ -44,8 +44,6 @@ class MyDialogComponent {
 
 @Component({
   selector: 'app',
-  providers: [DialogFactory],
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -87,4 +85,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent, MyDialogComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [MyDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

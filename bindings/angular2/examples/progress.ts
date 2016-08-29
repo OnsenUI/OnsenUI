@@ -1,7 +1,10 @@
 import {
-  bootstrap,
-  Component
+  Component,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -10,8 +13,8 @@ import {
     <ons-toolbar>
       <div class="center">Progress</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <ons-progress-bar value="10"></ons-progress-bar>
 
       <div style="margin: 20px auto; width: 320px;">
@@ -35,4 +38,12 @@ import {
 export class AppComponent{
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);
