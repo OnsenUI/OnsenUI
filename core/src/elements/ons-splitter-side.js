@@ -502,9 +502,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (this._watchedAttributes.indexOf(name) !== -1) {
-      this._update(name, current);
-    }
+    this._update(name, current);
   }
 
   _update(name, value) {
