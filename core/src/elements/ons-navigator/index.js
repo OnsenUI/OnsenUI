@@ -427,7 +427,7 @@ export default class NavigatorElement extends BaseElement {
       var enterPage = this.pages[length - 2];
       enterPage.style.display = 'block';
 
-      options.animation = leavePage.pushedOptions.animation || options.animation;
+      options.animation = options.animation || leavePage.pushedOptions.animation;
       options.animationOptions = util.extend(
         {},
         leavePage.pushedOptions.animationOptions,
@@ -973,6 +973,10 @@ export default class NavigatorElement extends BaseElement {
     }
 
     _animatorDict[name] = Animator;
+  }
+
+  static get animators() {
+    return _animatorDict;
   }
 
   static get NavigatorTransitionAnimator() {

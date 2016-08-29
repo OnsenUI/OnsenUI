@@ -1,7 +1,10 @@
 import {
-  bootstrap,
-  Component
+  Component,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -10,8 +13,8 @@ import {
     <ons-toolbar>
       <div class="center">Bottom Toolbar</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
     </div>
     <ons-bottom-toolbar>
       <div style="float: right; padding-top: 12px;"><ons-toolbar-button>Right Button</ons-toolbar-button></div>
@@ -23,4 +26,12 @@ import {
 export class AppComponent{
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

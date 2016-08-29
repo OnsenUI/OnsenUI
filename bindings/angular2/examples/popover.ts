@@ -1,17 +1,17 @@
 import {
-  bootstrap,
   Component,
-  ONS_DIRECTIVES,
   PopoverFactory,
   ViewChild,
   OnInit,
   OnDestroy,
-  Params
+  Params,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'div',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-popover direction="up down" cancelable #popover (prehide)="onPreHide($event)">
       <div style="text-align: center; opacity: 0.7;">
@@ -42,14 +42,13 @@ class MyPopoverComponent implements OnInit {
 
 @Component({
   selector: 'app',
-  providers: [PopoverFactory],
   template: `
   <ons-page class="page">
     <ons-toolbar>
       <div class="center">Popover</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <div style="text-align: center; margin: 10px">
         <ons-button (click)="show(button)" #button>show Popover</ons-button>
       </div>
@@ -83,5 +82,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent, MyPopoverComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [MyPopoverComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
 
+platformBrowserDynamic().bootstrapModule(AppModule);

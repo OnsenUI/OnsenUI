@@ -1,11 +1,13 @@
 import {
-  bootstrap,
   Component,
   ViewChild,
-  ONS_DIRECTIVES,
-  PageParams,
-  OnsNavigator
+  Params,
+  OnsNavigator,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'ons-page',
@@ -24,7 +26,7 @@ import {
   `
 })
 export class PageComponent {
-  constructor(private _navigator: OnsNavigator, private _params: PageParams) {
+  constructor(private _navigator: OnsNavigator, private _params: Params) {
     console.log('parameters:', _params.data);
   }
 
@@ -39,7 +41,6 @@ export class PageComponent {
 
 @Component({
   selector: 'ons-page',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-toolbar>
       <div class="center">Page</div>
@@ -62,7 +63,6 @@ class DefaultPageComponent {
 
 @Component({
   selector: 'app',
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-navigator [page]="page"></ons-navigator>
   `
@@ -71,4 +71,12 @@ export class AppComponent {
   page = DefaultPageComponent
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

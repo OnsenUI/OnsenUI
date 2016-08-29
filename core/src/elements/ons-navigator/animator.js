@@ -44,5 +44,18 @@ export default class NavigatorTransitionAnimator {
   pop(enterPage, leavePage, callback) {
     callback();
   }
+
+  static extend(properties = {}) {
+
+    const extendedAnimator = this;
+    const newAnimator = function() {
+      extendedAnimator.apply(this, arguments);
+      util.extend(this, properties);
+    };
+
+    newAnimator.prototype = this.prototype;
+
+    return newAnimator;
+  }
 }
 
