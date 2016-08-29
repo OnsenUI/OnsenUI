@@ -6,6 +6,7 @@ v2.0.0-rc.18
 ----
  * angular1: Use the `$templateCache` service.
  * ons-splitter: Fix [#1537](https://github.com/OnsenUI/OnsenUI/issues/1537).
+ * core: Update to Custom Elements v1.
 
 v2.0.0-rc.17
 ----
