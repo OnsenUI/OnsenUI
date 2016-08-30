@@ -93,14 +93,10 @@ export default class ButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    if (!self.hasAttribute('_compiled')) {
-      self._compile();
+  init() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
     }
-
-    return self;
   }
 
   static get observedAttributes() {

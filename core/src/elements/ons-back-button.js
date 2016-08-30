@@ -74,17 +74,13 @@ export default class BackButtonElement extends BaseElement {
    *  [ja]バックボタンの見た目を指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
+  init() {
+    contentReady(this, () => {
+      this._compile();
     });
 
-    self._options = {};
-    self._boundOnClick = self._onClick.bind(self);
-
-    return self;
+    this._options = {};
+    this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {

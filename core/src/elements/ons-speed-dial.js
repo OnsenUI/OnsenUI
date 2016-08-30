@@ -104,18 +104,14 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]無効化する場合に指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
+  init() {
+    contentReady(this, () => {
+      this._compile();
     });
 
-    self._shown = true;
-    self._itemShown = false;
-    self._boundOnClick = self._onClick.bind(self);
-
-    return self;
+    this._shown = true;
+    this._itemShown = false;
+    this._boundOnClick = this._onClick.bind(this);
   }
 
   _compile() {

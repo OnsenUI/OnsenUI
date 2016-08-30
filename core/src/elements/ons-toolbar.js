@@ -96,16 +96,12 @@ export default class ToolbarElement extends BaseElement {
    *   [ja]ツールバーの表現を指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      if (!self.hasAttribute('_compiled')) {
-        self._compile();
+  init() {
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
       }
     });
-
-    return self;
   }
 
   static get observedAttributes() {

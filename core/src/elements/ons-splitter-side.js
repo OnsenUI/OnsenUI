@@ -441,34 +441,30 @@ export default class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._page = null;
+    this._pageLoader = defaultPageLoader;
+    this._collapseMode = new CollapseMode(this);
+    this._collapseDetection = new CollapseDetection(this);
 
-    self._page = null;
-    self._pageLoader = defaultPageLoader;
-    self._collapseMode = new CollapseMode(self);
-    self._collapseDetection = new CollapseDetection(self);
-
-    self._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory({
       animators: SplitterElement.animators,
       baseClass: SplitterAnimator,
       baseClassName: 'SplitterAnimator',
-      defaultAnimation: self.getAttribute('animation')
+      defaultAnimation: this.getAttribute('animation')
     });
-    self._boundHandleGesture = (e) => self._collapseMode.handleGesture(e);
-    self._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
+    this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
+    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
 
-    contentReady(self, () => {
-      rewritables.ready(self, () => {
-        const page = self._getPageTarget();
+    contentReady(this, () => {
+      rewritables.ready(this, () => {
+        const page = this._getPageTarget();
 
         if (page) {
-          self.load(page);
+          this.load(page);
         }
       });
     });
-
-    return self;
   }
 
   connectedCallback() {

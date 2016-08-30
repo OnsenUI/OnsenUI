@@ -33,11 +33,8 @@ import GestureDetector from 'ons/gesture-detector';
  * </ons-gesture-detector>
  */
 export default class GestureDetectorElement extends BaseElement {
-  constructor(self) {
-    self = super(self);
-    self._gestureDetector = new GestureDetector(self);
-
-    return self;
+  init() {
+    this._gestureDetector = new GestureDetector(this);
   }
 }
 

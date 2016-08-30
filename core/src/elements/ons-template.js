@@ -59,16 +59,12 @@ export default class TemplateElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this.template = this.innerHTML;
 
-    self.template = self.innerHTML;
-
-    while (self.firstChild) {
-      self.removeChild(self.firstChild);
+    while (this.firstChild) {
+      this.removeChild(this.firstChild);
     }
-
-    return self;
   }
 
   connectedCallback() {

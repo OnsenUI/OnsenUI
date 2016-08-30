@@ -184,18 +184,14 @@ export default class DialogElement extends BaseElement {
     return util.findChild(this, '.dialog');
   }
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    contentReady(this, () => this._compile());
 
-    contentReady(self, () => self._compile());
+    this._visible = false;
+    this._doorLock = new DoorLock();
+    this._boundCancel = this._cancel.bind(this);
 
-    self._visible = false;
-    self._doorLock = new DoorLock();
-    self._boundCancel = self._cancel.bind(self);
-
-    self._updateAnimatorFactory();
-
-    return self;
+    this._updateAnimatorFactory();
   }
 
   _updateAnimatorFactory() {

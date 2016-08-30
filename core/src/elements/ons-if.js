@@ -66,23 +66,19 @@ export default class IfElement extends BaseElement {
    *  [ja]portraitもしくはlandscapeを指定します[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
+  init() {
+    contentReady(this, () => {
       if (platform._renderPlatform !== null) {
-        self._platformUpdate();
-      } else if (!self._isAllowedPlatform()) {
-        while (self.childNodes[0]) {
-          self.childNodes[0].remove();
+        this._platformUpdate();
+      } else if (!this._isAllowedPlatform()) {
+        while (this.childNodes[0]) {
+          this.childNodes[0].remove();
         }
-        self._platformUpdate();
+        this._platformUpdate();
       }
     });
 
-    self._onOrientationChange();
-
-    return self;
+    this._onOrientationChange();
   }
 
   connectedCallback() {

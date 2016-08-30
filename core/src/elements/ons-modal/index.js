@@ -88,25 +88,20 @@ export default class ModalElement extends BaseElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
+  init() {
+    contentReady(this, () => {
+      this._compile();
     });
 
-    self._doorLock = new DoorLock();
+    this._doorLock = new DoorLock();
 
-    self._animatorFactory = new AnimatorFactory({
+    this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
       baseClass: ModalAnimator,
       baseClassName: 'ModalAnimator',
-      defaultAnimation: self.getAttribute('animation')
+      defaultAnimation: this.getAttribute('animation')
     });
-
-    return self;
   }
-
 
   /**
    * @property onDeviceBackButton

@@ -140,27 +140,23 @@ export default class TabElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._pageLoader = defaultPageLoader;
+    this._page = null;
 
-    self._pageLoader = defaultPageLoader;
-    self._page = null;
-
-    if (self.hasAttribute('label') || self.hasAttribute('icon')) {
-      if (!self.hasAttribute('_compiled')) {
-        self._compile();
+    if (this.hasAttribute('label') || this.hasAttribute('icon')) {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
       }
     } else {
-      contentReady(self, () => {
-        if (!self.hasAttribute('_compiled')) {
-          self._compile();
+      contentReady(this, () => {
+        if (!this.hasAttribute('_compiled')) {
+          this._compile();
         }
       });
     }
 
-    self._boundOnClick = self._onClick.bind(self);
-
-    return self;
+    this._boundOnClick = this._onClick.bind(this);
   }
 
   _getPageTarget() {

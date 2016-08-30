@@ -20,10 +20,8 @@ import util from 'ons/util';
 
 export default class SplitterMaskElement extends BaseElement {
 
-  constructor(self) {
-    self = super(self);
+  init() {
     this._boundOnClick = this._onClick.bind(this);
-    return self;
   }
 
   _onClick(event) {

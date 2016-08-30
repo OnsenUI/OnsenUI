@@ -130,19 +130,15 @@ export default class InputElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
-      self.attributeChangedCallback('checked', null, self.getAttribute('checked'));
+  init() {
+    contentReady(this, () => {
+      this._compile();
+      this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
     });
 
-    self._boundOnInput = self._onInput.bind(self);
-    self._boundOnFocusin = self._onFocusin.bind(self);
-    self._boundDelegateEvent = self._delegateEvent.bind(self);
-
-    return self;
+    this._boundOnInput = this._onInput.bind(this);
+    this._boundOnFocusin = this._onFocusin.bind(this);
+    this._boundDelegateEvent = this._delegateEvent.bind(this);
   }
 
   _compile() {

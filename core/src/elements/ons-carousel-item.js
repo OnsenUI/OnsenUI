@@ -45,13 +45,9 @@ const scheme = {'': 'carousel-item--*'};
  */
 export default class CarouselItemElement extends BaseElement {
 
-  constructor(self) {
-    self = super(self);
-
-    self.style.width = '100%';
-    ModifierUtil.initModifier(self, scheme);
-
-    return self;
+  init() {
+    this.style.width = '100%';
+    ModifierUtil.initModifier(this, scheme);
   }
 
   static get observedAttributes() {

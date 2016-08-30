@@ -214,19 +214,15 @@ export default class PopoverElement extends BaseElement {
     return util.findChild(this._popover, '.popover__arrow');
   }
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
-      self._initAnimatorFactory();
+  init() {
+    contentReady(this, () => {
+      this._compile();
+      this._initAnimatorFactory();
     });
 
-    self._doorLock = new DoorLock();
-    self._boundOnChange = self._onChange.bind(self);
-    self._boundCancel = self._cancel.bind(self);
-
-    return self;
+    this._doorLock = new DoorLock();
+    this._boundOnChange = this._onChange.bind(this);
+    this._boundCancel = this._cancel.bind(this);
   }
 
   _initAnimatorFactory() {

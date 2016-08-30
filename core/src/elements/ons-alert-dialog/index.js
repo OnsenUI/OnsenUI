@@ -186,18 +186,14 @@ export default class AlertDialogElement extends BaseElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    contentReady(this, () => this._compile());
 
-    contentReady(self, () => self._compile());
+    this._visible = false;
+    this._doorLock = new DoorLock();
+    this._boundCancel = this._cancel.bind(this);
 
-    self._visible = false;
-    self._doorLock = new DoorLock();
-    self._boundCancel = self._cancel.bind(self);
-
-    self._updateAnimatorFactory()
-
-    return self;
+    this._updateAnimatorFactory()
   }
 
   /**

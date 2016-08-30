@@ -135,24 +135,20 @@ export default class PageElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this.classList.add('page');
 
-    self.classList.add('page');
-
-    contentReady(self, () => {
-      if (!self.hasAttribute('_compiled')) {
-        self._compile();
+    contentReady(this, () => {
+      if (!this.hasAttribute('_compiled')) {
+        this._compile();
       }
 
-      self._isShown = false;
-      self._contentElement = self._getContentElement();
-      self._isMuted = self.hasAttribute('_muted');
-      self._skipInit = self.hasAttribute('_skipinit');
-      self.pushedOptions = {};
+      this._isShown = false;
+      this._contentElement = this._getContentElement();
+      this._isMuted = this.hasAttribute('_muted');
+      this._skipInit = this.hasAttribute('_skipinit');
+      this.pushedOptions = {};
     });
-
-    return self;
   }
 
   connectedCallback() {

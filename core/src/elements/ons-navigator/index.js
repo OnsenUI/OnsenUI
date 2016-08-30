@@ -230,15 +230,11 @@ export default class NavigatorElement extends BaseElement {
     return this._animatorFactory;
   }
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._isRunning = false;
+    this._pageLoader = defaultPageLoader;
 
-    self._isRunning = false;
-    self._pageLoader = defaultPageLoader;
-
-    self._updateAnimatorFactory();
-
-    return self;
+    this._updateAnimatorFactory();
   }
 
   /**

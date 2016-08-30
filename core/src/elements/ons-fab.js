@@ -68,14 +68,10 @@ export default class FabElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    contentReady(self, () => {
-      self._compile();
+  init() {
+    contentReady(this, () => {
+      this._compile();
     });
-
-    return self;
   }
 
   _compile() {

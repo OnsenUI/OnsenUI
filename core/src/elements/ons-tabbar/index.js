@@ -200,38 +200,34 @@ export default class TabbarElement extends BaseElement {
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._tabbarId = generateId();
 
-    self._tabbarId = generateId();
+    contentReady(this, () => {
+      this._compile();
 
-    contentReady(self, () => {
-      self._compile();
-
-      const content = self._contentElement;
+      const content = this._contentElement;
       for (let i = 0; i < content.children.length; i++) {
         content.children[i].style.display = 'none';
       }
 
-      const activeIndex = self.getAttribute('activeIndex');
+      const activeIndex = this.getAttribute('activeIndex');
 
-      const tabbar = self._tabbarElement;
+      const tabbar = this._tabbarElement;
       if (activeIndex && tabbar.children.length > activeIndex) {
         tabbar.children[activeIndex].setAttribute('active', 'true');
       }
 
-      autoStyle.prepare(self);
-      ModifierUtil.initModifier(self, scheme);
+      autoStyle.prepare(this);
+      ModifierUtil.initModifier(this, scheme);
 
-      self._animatorFactory = new AnimatorFactory({
+      this._animatorFactory = new AnimatorFactory({
         animators: _animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
-        defaultAnimation: self.getAttribute('animation')
+        defaultAnimation: this.getAttribute('animation')
       });
     });
-
-    return self;
   }
 
   connectedCallback() {

@@ -107,17 +107,13 @@ export default class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._boundOnDrag = this._onDrag.bind(this);
+    this._boundOnDragStart = this._onDragStart.bind(this);
+    this._boundOnDragEnd = this._onDragEnd.bind(this);
+    this._boundOnScroll = this._onScroll.bind(this);
 
-    self._boundOnDrag = self._onDrag.bind(self);
-    self._boundOnDragStart = self._onDragStart.bind(self);
-    self._boundOnDragEnd = self._onDragEnd.bind(self);
-    self._boundOnScroll = self._onScroll.bind(self);
-
-    self._setState(STATE_INITIAL, true);
-
-    return self;
+    this._setState(STATE_INITIAL, true);
   }
 
   _setStyle() {

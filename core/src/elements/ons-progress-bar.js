@@ -88,14 +88,10 @@ export default class ProgressBarElement extends BaseElement {
    *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    if (!self.hasAttribute('_compiled')) {
-      self._compile();
+  init() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
     }
-
-    return self;
   }
 
   static get observedAttributes() {

@@ -55,14 +55,10 @@ import BaseElement from 'ons/base-element';
  */
 export default class ColElement extends BaseElement {
 
-  constructor(self) {
-    self = super(self);
-
-    if (self.getAttribute('width')) {
-      self._updateWidth();
+  init() {
+    if (this.getAttribute('width')) {
+      this._updateWidth();
     }
-
-    return self;
   }
 
   static get observedAttributes() {

@@ -57,14 +57,10 @@ export default class ListHeaderElement extends BaseElement {
    *   [ja]ヘッダーの表現を指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    if (!self.hasAttribute('_compiled')) {
-      self._compile();
+  init() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
     }
-
-    return self;
   }
 
   _compile() {

@@ -168,21 +168,17 @@ export default class SwitchElement extends BaseElement {
     return this._checkbox;
   }
 
-  constructor(self) {
-    self = super(self);
-
-    if (!self.hasAttribute('_compiled')) {
-      self._compile();
+  init() {
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
     }
 
-    self._checkbox = self.querySelector('.switch__input');
-    self._handle = self.querySelector('.switch__handle');
+    this._checkbox = this.querySelector('.switch__input');
+    this._handle = this.querySelector('.switch__handle');
 
     ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
-      self.attributeChangedCallback(e, null, self.getAttribute(e));
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
-
-    return self;
   }
 
   _compile() {

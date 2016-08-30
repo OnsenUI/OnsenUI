@@ -64,24 +64,20 @@ export default class RippleElement extends BaseElement {
    *   [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    self.classList.add('ripple');
-    if (!self.hasAttribute('_compiled')) {
-      self._compile();
+  init() {
+    this.classList.add('ripple');
+    if (!this.hasAttribute('_compiled')) {
+      this._compile();
     } else {
-      self._background = self.getElementsByClassName('ripple__background')[0];
-      self._wave = self.getElementsByClassName('ripple__wave')[0];
+      this._background = this.getElementsByClassName('ripple__background')[0];
+      this._wave = this.getElementsByClassName('ripple__wave')[0];
     }
 
-    self._animator = new Animator();
+    this._animator = new Animator();
 
     ['color', 'center', 'start-radius', 'background'].forEach(e => {
-      self.attributeChangedCallback(e, null, self.getAttribute(e));
+      this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
-
-    return self;
   }
 
   _compile() {

@@ -153,17 +153,13 @@ export default class SplitterElement extends BaseElement {
     });
   }
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._boundOnModeChange = this._onModeChange.bind(this);
 
-    self._boundOnModeChange = self._onModeChange.bind(self);
-
-    contentReady(self, () => {
-      self._compile();
-      self._layout();
+    contentReady(this, () => {
+      this._compile();
+      this._layout();
     });
-
-    return self;
   }
 
   _compile() {

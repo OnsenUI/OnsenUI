@@ -312,21 +312,17 @@ export default class CarouselElement extends BaseElement {
    *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._doorLock = new DoorLock();
+    this._scroll = 0;
+    this._offset = 0;
+    this._lastActiveIndex = 0;
 
-    self._doorLock = new DoorLock();
-    self._scroll = 0;
-    self._offset = 0;
-    self._lastActiveIndex = 0;
+    this._boundOnDrag = this._onDrag.bind(this);
+    this._boundOnDragEnd = this._onDragEnd.bind(this);
+    this._boundOnResize = this._onResize.bind(this);
 
-    self._boundOnDrag = self._onDrag.bind(self);
-    self._boundOnDragEnd = self._onDragEnd.bind(self);
-    self._boundOnResize = self._onResize.bind(self);
-
-    self._mixin(self._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
-
-    return self;
+    this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
   }
 
   _onResize() {

@@ -49,13 +49,9 @@ export default class BottomToolbarElement extends BaseElement {
    *   [ja]ツールバーの見た目の表現を指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
-
-    self.classList.add('bottom-bar');
-    ModifierUtil.initModifier(self, scheme);
-
-    return self;
+  init() {
+    this.classList.add('bottom-bar');
+    ModifierUtil.initModifier(this, scheme);
   }
 
   connectedCallback() {

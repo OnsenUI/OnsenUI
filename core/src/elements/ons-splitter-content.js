@@ -85,21 +85,17 @@ export default class SplitterContentElement extends BaseElement {
    *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
    */
 
-  constructor(self) {
-    self = super(self);
+  init() {
+    this._page = null;
+    this._pageLoader = defaultPageLoader;
 
-    self._page = null;
-    self._pageLoader = defaultPageLoader;
-
-    contentReady(self, () => {
-      const page = self._getPageTarget();
+    contentReady(this, () => {
+      const page = this._getPageTarget();
 
       if (page) {
-        self.load(page);
+        this.load(page);
       }
     });
-
-    return self;
   }
 
   connectedCallback() {
