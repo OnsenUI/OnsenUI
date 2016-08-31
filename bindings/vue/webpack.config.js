@@ -13,7 +13,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue-onsenui': path.join(__dirname, 'src', 'vue-onsenui'),
+      'vue-onsenui': path.join(__dirname, 'src'),
       'onsenui': path.join(__dirname, '..', '..', 'build', 'js', 'onsenui')
     }
   },

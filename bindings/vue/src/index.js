@@ -17,12 +17,12 @@ const registerComponents = (Vue, components) => {
 	});
 };
 
-const install = (Vue, {components = {}}) => {
+const install = (Vue, params = {}) => {
 	/**
 	 * Register components used in Tabbar,
 	 * Navigator and Splitter.
 	 */
-	registerComponents(Vue, components);
+	registerComponents(Vue, params.components || {});
 
 	/**
 	 * Push a page to parent Navigator.
