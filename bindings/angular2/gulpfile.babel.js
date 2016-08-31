@@ -19,13 +19,13 @@ gulp.task('serve', done => {
   });
 });
 
-gulp.task('serve-codepen-template', () => {
+gulp.task('serve-umd-template', () => {
   const server = new StaticServer({
     rootPath: '.',
     port: 8967
   });
   server.start(() => {
-    open(`http://0.0.0.0:${server.port}/codepen-template/index.html`);
+    open(`http://0.0.0.0:${server.port}/umd-template/index.html`);
   });
 });
   

@@ -15,7 +15,7 @@
     "typings/main.d.ts",
     "typings/main",
     "node_modules",
-    "codepen-template",
+    "umd-template",
     "dist",
     "examples"
   ],
