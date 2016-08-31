@@ -23,7 +23,9 @@ module.exports = {
         amd: 'onsenui'
       }
     },
-    nodeExternals()
+    nodeExternals({
+      whitelist: ['process']
+    })
   ],
   resolveLoader: {
     root: path.join(__dirname, 'node_modules')
