@@ -19,7 +19,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import AnimatorFactory from 'ons/internal/animator-factory';
-import animators from './animator';
+import {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator} from './animator';
 import platform from 'ons/platform';
 import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
@@ -35,10 +35,10 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? animators.MDFadePopoverAnimator : animators.IOSFadePopoverAnimator,
-  'none': animators.PopoverAnimator,
-  'fade-ios': animators.IOSFadePopoverAnimator,
-  'fade-md': animators.MDFadePopoverAnimator
+  'default': () => platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator,
+  'none': PopoverAnimator,
+  'fade-ios': IOSFadePopoverAnimator,
+  'fade-md': MDFadePopoverAnimator
 };
 
 const templateSource = util.createFragment(`
@@ -85,7 +85,7 @@ const directions = Object.keys(positions);
  *   };
  * </script>
  */
-class PopoverElement extends BaseElement {
+export default class PopoverElement extends BaseElement {
 
   /**
    * @event preshow
@@ -214,7 +214,7 @@ class PopoverElement extends BaseElement {
     return util.findChild(this._popover, '.popover__arrow');
   }
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
       this._initAnimatorFactory();
@@ -228,7 +228,7 @@ class PopoverElement extends BaseElement {
   _initAnimatorFactory() {
     const factory = new AnimatorFactory({
       animators: _animatorDict,
-      baseClass: animators.PopoverAnimator,
+      baseClass: PopoverAnimator,
       baseClassName: 'PopoverAnimator',
       defaultAnimation: this.getAttribute('animation') || 'default'
     });
@@ -539,7 +539,7 @@ class PopoverElement extends BaseElement {
     this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this._resetBackButtonHandler();
 
     contentReady(this, () => {
@@ -554,7 +554,7 @@ class PopoverElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     contentReady(this, () => {
       this._mask.removeEventListener('click', this._boundCancel, false);
 
@@ -563,6 +563,10 @@ class PopoverElement extends BaseElement {
 
       window.removeEventListener('resize', this._boundOnChange, false);
     });
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'direction', 'animation'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -587,22 +591,21 @@ class PopoverElement extends BaseElement {
       });
     }
   }
+
+  /**
+   * @param {String} name
+   * @param {PopoverAnimator} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof PopoverAnimator)) {
+      throw new Error('"Animator" param must inherit PopoverAnimator');
+    }
+    _animatorDict[name] = Animator;
+  }
+
+  static get PopoverAnimator() {
+    return PopoverAnimator;
+  }
 }
 
-window.OnsPopoverElement = document.registerElement('ons-popover', {
-  prototype: PopoverElement.prototype
-});
-
-/**
- * @param {String} name
- * @param {PopoverAnimator} Animator
- */
-window.OnsPopoverElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof animators.PopoverAnimator)) {
-    throw new Error('"Animator" param must inherit PopoverAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsPopoverElement.PopoverAnimator = animators.PopoverAnimator;
-
+customElements.define('ons-popover', PopoverElement);

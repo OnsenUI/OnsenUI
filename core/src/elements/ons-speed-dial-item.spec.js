@@ -4,7 +4,7 @@ describe('OnsSpeedDialItemElement', () => {
   let item;
 
   beforeEach(() => {
-    item = new OnsSpeedDialItemElement();
+    item = new ons.SpeedDialItemElement();
     document.body.appendChild(item);
   });
 
@@ -13,7 +13,7 @@ describe('OnsSpeedDialItemElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsSpeedDialItemElement).to.be.ok;
+    expect(window.ons.SpeedDialItemElement).to.be.ok;
   });
 
   it('provides modifier attribute', () => {

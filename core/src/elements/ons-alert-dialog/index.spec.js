@@ -26,7 +26,7 @@ describe('OnsAlertDialogElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsAlertDialogElement).to.be.ok;
+    expect(window.ons.AlertDialogElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -217,13 +217,13 @@ describe('OnsAlertDialogElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {
-      expect(() => window.OnsAlertDialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.AlertDialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsAlertDialogElement.AlertDialogAnimator {
+      class MyAnimator extends window.ons.AlertDialogElement.AlertDialogAnimator {
       }
-      window.OnsAlertDialogElement.registerAnimator('hoge', MyAnimator);
+      window.ons.AlertDialogElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

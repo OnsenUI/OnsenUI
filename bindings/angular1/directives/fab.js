@@ -24,10 +24,8 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
           var fab = new FabView(scope, element, attrs);
 
           element.data('ons-fab', fab);

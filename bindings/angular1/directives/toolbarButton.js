@@ -20,7 +20,6 @@
       scope: false,
       link: {
         pre: function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
           var toolbarButton = new GenericView(scope, element, attrs);
           element.data('ons-toolbar-button', toolbarButton);
           $onsen.declareVarAttribute(attrs, toolbarButton);

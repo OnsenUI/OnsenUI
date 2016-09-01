@@ -19,7 +19,7 @@ describe('OnsDialogElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsDialogElement).to.be.ok;
+    expect(window.ons.DialogElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -227,14 +227,14 @@ describe('OnsDialogElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {
-      expect(() => window.OnsDialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.DialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsDialogElement.DialogAnimator {
+      class MyAnimator extends window.ons.DialogElement.DialogAnimator {
       }
 
-      window.OnsDialogElement.registerAnimator('hoge', MyAnimator);
+      window.ons.DialogElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

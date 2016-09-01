@@ -23,7 +23,7 @@ describe('OnsSpeedDialElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsSpeedDialElement).to.be.ok;
+    expect(window.ons.SpeedDialElement).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
@@ -46,7 +46,7 @@ describe('OnsSpeedDialElement', () => {
       expect(speedDial.items.length).to.equal(3);
 
       for (let i = 0; i < speedDial.items.length; i++) {
-        expect(speedDial.items[i]).to.be.an.instanceof(OnsSpeedDialItemElement);
+        expect(speedDial.items[i]).to.be.an.instanceof(window.ons.SpeedDialItemElement);
       }
     });
   });
@@ -91,7 +91,7 @@ describe('OnsSpeedDialElement', () => {
 
   describe('#_updateDirection()', () => {
     it('is called when element is created', () => {
-      const spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection');
+      const spy = chai.spy.on(window.ons.SpeedDialElement.prototype, '_updateDirection');
       const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="up"><ons-fab></ons-fab></ons-speed-dial>
         `);
@@ -100,7 +100,7 @@ describe('OnsSpeedDialElement', () => {
     });
 
     it('is called with the value of the direction attribute', () => {
-      const spy = chai.spy.on(OnsSpeedDialElement.prototype, '_updateDirection');
+      const spy = chai.spy.on(window.ons.SpeedDialElement.prototype, '_updateDirection');
       const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="down"><ons-fab></ons-fab></ons-speed-dial>
         `);

@@ -106,7 +106,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      const event = new CustomEvent('cancel');
+      const event = new CustomEvent('dialog-cancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(-1);
     });
@@ -178,7 +178,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      const event = new CustomEvent('cancel');
+      const event = new CustomEvent('dialog-cancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(null);
     });

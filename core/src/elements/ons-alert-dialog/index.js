@@ -86,7 +86,7 @@ const _animatorDict = {
  *   document.getElementById('alert-dialog').show();
  * </script>
  */
-class AlertDialogElement extends BaseElement {
+export default class AlertDialogElement extends BaseElement {
 
   /**
    * @event preshow
@@ -186,6 +186,16 @@ class AlertDialogElement extends BaseElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
+  init() {
+    contentReady(this, () => this._compile());
+
+    this._visible = false;
+    this._doorLock = new DoorLock();
+    this._boundCancel = this._cancel.bind(this);
+
+    this._updateAnimatorFactory()
+  }
+
   /**
    * @return {Element}
    */
@@ -213,16 +223,6 @@ class AlertDialogElement extends BaseElement {
    */
   get _contentElement() {
     return util.findChild(this._dialog.children[0], '.alert-dialog-content');
-  }
-
-  createdCallback() {
-    contentReady(this, () => this._compile());
-
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
-
-    this._updateAnimatorFactory();
   }
 
   _updateAnimatorFactory() {
@@ -497,7 +497,7 @@ class AlertDialogElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
@@ -505,11 +505,15 @@ class AlertDialogElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
 
     this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'animation'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -520,21 +524,21 @@ class AlertDialogElement extends BaseElement {
       this._updateAnimatorFactory();
     }
   }
+
+  /**
+   * @param {String} name
+   * @param {DialogAnimator} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof AlertDialogAnimator)) {
+      throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
+    }
+    _animatorDict[name] = Animator;
+  }
+
+  static get AlertDialogAnimator() {
+    return AlertDialogAnimator;
+  }
 }
 
-const OnsAlertDialogElement = window.OnsAlertDialogElement = document.registerElement('ons-alert-dialog', {
-  prototype: AlertDialogElement.prototype
-});
-
-/**
- * @param {String} name
- * @param {DialogAnimator} Animator
- */
-OnsAlertDialogElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof AlertDialogAnimator)) {
-    throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-OnsAlertDialogElement.AlertDialogAnimator = AlertDialogAnimator;
+customElements.define('ons-alert-dialog', AlertDialogElement);

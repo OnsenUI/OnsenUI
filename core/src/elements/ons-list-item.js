@@ -93,7 +93,7 @@ const scheme = {
  *   </div>
  * </ons-list-item>
  */
-class ListItemElement extends BaseElement {
+export default class ListItemElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -127,7 +127,7 @@ class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
     });
@@ -183,6 +183,10 @@ class ListItemElement extends BaseElement {
     autoStyle.prepare(this);
   }
 
+  static get observedAttributes() {
+    return ['modifier', 'ripple'];
+  }
+
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'modifier':
@@ -193,7 +197,7 @@ class ListItemElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('drag', this._onDrag);
     this.addEventListener('touchstart', this._onTouch);
     this.addEventListener('mousedown', this._onTouch);
@@ -209,7 +213,7 @@ class ListItemElement extends BaseElement {
     this.tapped = false;
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('drag', this._onDrag);
     this.removeEventListener('touchstart', this._onTouch);
     this.removeEventListener('mousedown', this._onTouch);
@@ -282,6 +286,4 @@ class ListItemElement extends BaseElement {
   }
 }
 
-window.OnsListItemElement = document.registerElement('ons-list-item', {
-  prototype: ListItemElement.prototype
-});
+customElements.define('ons-list-item', ListItemElement);

@@ -5,7 +5,7 @@ describe('OnsPopoverElement', () => {
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
   beforeEach(done => {
-    popover = new OnsPopoverElement();
+    popover = new ons.PopoverElement();
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);
@@ -21,7 +21,7 @@ describe('OnsPopoverElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsPopoverElement).to.be.ok;
+    expect(window.ons.PopoverElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -257,14 +257,14 @@ describe('OnsPopoverElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a PopoverAnimator', () => {
-      expect(() => window.OnsPopoverElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.PopoverElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsPopoverElement.PopoverAnimator {
+      class MyAnimator extends window.ons.PopoverElement.PopoverAnimator {
       }
 
-      window.OnsPopoverElement.registerAnimator('hoge', MyAnimator);
+      window.ons.PopoverElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

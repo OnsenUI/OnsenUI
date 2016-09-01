@@ -57,7 +57,7 @@ limitations under the License.
     });
 
     ModalView.registerAnimator = function(name, Animator) {
-      return window.OnsModalElement.registerAnimator(name, Animator);
+      return window.ons.ModalElement.registerAnimator(name, Animator);
     };
 
     MicroEvent.mixin(ModalView);

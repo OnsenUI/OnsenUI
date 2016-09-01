@@ -121,10 +121,8 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
           var carousel = new CarouselView(scope, element, attrs);
 
           element.data('ons-carousel', carousel);
@@ -149,9 +147,7 @@
     return {
       restrict: 'E',
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
           if (scope.$last) {
             element[0].parentElement._setup();
             element[0].parentElement._setupInitialIndex();

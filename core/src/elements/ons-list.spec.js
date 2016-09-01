@@ -2,16 +2,16 @@
 
 describe('ons-list', () => {
   it('provides \'OnsListElement\' global variable', () => {
-    expect(window.OnsListElement).to.be.ok;
+    expect(window.ons.ListElement).to.be.ok;
   });
 
   it('classList contains \'list\' by default', () => {
-    var element = new OnsListElement();
+    var element = new ons.ListElement();
     expect(element.classList.contains('list')).to.be.true;
   });
 
   it('provides modifier attribute', () => {
-    var element = new OnsListElement();
+    var element = new ons.ListElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list--hoge')).to.be.true;
 

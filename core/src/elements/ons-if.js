@@ -47,7 +47,7 @@ import contentReady from 'ons/content-ready';
  *   </ons-if>
  * </ons-page>
  */
-class ConditionalElement extends BaseElement {
+export default class IfElement extends BaseElement {
 
   /**
    * @attribute platform
@@ -66,7 +66,7 @@ class ConditionalElement extends BaseElement {
    *  [ja]portraitもしくはlandscapeを指定します[/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       if (platform._renderPlatform !== null) {
         this._platformUpdate();
@@ -81,8 +81,12 @@ class ConditionalElement extends BaseElement {
     this._onOrientationChange();
   }
 
-  attachedCallback() {
+  connectedCallback() {
     orientation.on('change', this._onOrientationChange.bind(this));
+  }
+
+  static get observedAttributes() {
+    return ['orientation'];
   }
 
   attributeChangedCallback(name) {
@@ -91,7 +95,7 @@ class ConditionalElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     orientation.off('change', this._onOrientationChange);
   }
 
@@ -113,6 +117,4 @@ class ConditionalElement extends BaseElement {
   }
 }
 
-window.OnsConditionalElement = document.registerElement('ons-if', {
-  prototype: ConditionalElement.prototype
-});
+customElements.define('ons-if', IfElement);

@@ -18,9 +18,9 @@ limitations under the License.
 import BaseElement from 'ons/base-element';
 import util from 'ons/util';
 
-class SplitterMaskElement extends BaseElement {
+export default class SplitterMaskElement extends BaseElement {
 
-  createdCallback() {
+  init() {
     this._boundOnClick = this._onClick.bind(this);
   }
 
@@ -31,18 +31,20 @@ class SplitterMaskElement extends BaseElement {
     event.stopPropagation();
   }
 
+  static get observedAttributes() {
+    return [];
+  }
+
   attributeChangedCallback(name, last, current) {
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('click', this._boundOnClick);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick);
   }
 }
 
-window.OnsSplitterMaskElement = document.registerElement('ons-splitter-mask', {
-  prototype: SplitterMaskElement.prototype
-});
+customElements.define('ons-splitter-mask', SplitterMaskElement);

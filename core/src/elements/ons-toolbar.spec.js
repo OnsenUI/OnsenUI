@@ -13,7 +13,7 @@ describe('OnsToolbarElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsToolbarElement).to.be.ok;
+    expect(window.ons.ToolbarElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {

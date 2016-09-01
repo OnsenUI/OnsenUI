@@ -28,7 +28,6 @@
       transclude: false,
 
       compile: (element, attrs) => {
-        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs) {

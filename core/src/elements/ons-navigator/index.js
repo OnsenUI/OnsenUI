@@ -126,7 +126,7 @@ const rewritables = {
  *   </ons-page>
  * </ons-template>
  */
-class NavigatorElement extends BaseElement {
+export default class NavigatorElement extends BaseElement {
 
   /**
    * @attribute page
@@ -230,7 +230,7 @@ class NavigatorElement extends BaseElement {
     return this._animatorFactory;
   }
 
-  createdCallback() {
+  init() {
     this._isRunning = false;
     this._pageLoader = defaultPageLoader;
 
@@ -274,7 +274,7 @@ class NavigatorElement extends BaseElement {
     this._page = page;
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
 
@@ -313,9 +313,13 @@ class NavigatorElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
+  }
+
+  static get observedAttributes() {
+    return ['animation'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -831,8 +835,6 @@ class NavigatorElement extends BaseElement {
     if (element.nodeName.toLowerCase() !== 'ons-page') {
       throw new Error('You must supply an "ons-page" element to "ons-navigator".');
     }
-
-    CustomElements.upgrade(element);
   }
 
   /**
@@ -963,18 +965,23 @@ class NavigatorElement extends BaseElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-      throw new Error('"Animator" param must inherit OnsNavigatorElement.NavigatorTransitionAnimator');
+      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorTransitionAnimator');
     }
 
     _animatorDict[name] = Animator;
   }
+
+  static get animators() {
+    return _animatorDict;
+  }
+
+  static get NavigatorTransitionAnimator() {
+    return NavigatorTransitionAnimator;
+  }
+
+  static get rewritables() {
+    return rewritables;
+  }
 }
 
-window.OnsNavigatorElement = document.registerElement('ons-navigator', {
-  prototype: NavigatorElement.prototype
-});
-
-window.OnsNavigatorElement.rewritables = rewritables;
-window.OnsNavigatorElement.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
-window.OnsNavigatorElement.animators = _animatorDict;
-
+customElements.define('ons-navigator', NavigatorElement);

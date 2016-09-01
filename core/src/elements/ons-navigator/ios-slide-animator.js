@@ -40,9 +40,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   }
 
   _decompose(page) {
-    CustomElements.upgrade(page);
     const toolbar = page._getToolbarElement();
-    CustomElements.upgrade(toolbar);
     const left = toolbar._getToolbarLeftItemsElement();
     const right = toolbar._getToolbarRightItemsElement();
 

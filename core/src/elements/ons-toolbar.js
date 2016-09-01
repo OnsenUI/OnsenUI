@@ -79,7 +79,7 @@ const scheme = {
  * </ons-page>
  */
 
-class ToolbarElement extends BaseElement {
+export default class ToolbarElement extends BaseElement {
 
   /**
    * @attribute inline
@@ -96,7 +96,7 @@ class ToolbarElement extends BaseElement {
    *   [ja]ツールバーの表現を指定します。[/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       if (!this.hasAttribute('_compiled')) {
         this._compile();
@@ -104,13 +104,14 @@ class ToolbarElement extends BaseElement {
     });
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
-  }
-
-  attachedCallback() {
   }
 
   /**
@@ -188,7 +189,4 @@ class ToolbarElement extends BaseElement {
   }
 }
 
-window.OnsToolbarElement = document.registerElement('ons-toolbar', {
-  prototype: ToolbarElement.prototype
-});
-
+customElements.define('ons-toolbar', ToolbarElement);

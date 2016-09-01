@@ -61,7 +61,7 @@ limitations under the License.
     });
 
     DialogView.registerAnimator = function(name, Animator) {
-      return window.OnsDialogElement.registerAnimator(name, Animator);
+      return window.ons.DialogElement.registerAnimator(name, Animator);
     };
 
     MicroEvent.mixin(DialogView);

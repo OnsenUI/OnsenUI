@@ -86,7 +86,7 @@ const INPUT_ATTRIBUTES = [
  * <ons-input placeholder="Username" float></ons-input>
  * <ons-input type="checkbox" checked></ons-input>
  */
-class InputElement extends BaseElement {
+export default class InputElement extends BaseElement {
 
   /**
    * @attribute placeholder
@@ -130,7 +130,7 @@ class InputElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
@@ -196,6 +196,10 @@ class InputElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
+  static get observedAttributes() {
+    return ['modifier', 'placeholder', 'input-id', 'checked', ...INPUT_ATTRIBUTES];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
@@ -211,7 +215,7 @@ class InputElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     contentReady(this, () => {
       if (this._input.type !== 'checkbox' && this._input.type !== 'radio') {
         this._input.addEventListener('input', this._boundOnInput);
@@ -224,7 +228,7 @@ class InputElement extends BaseElement {
     });
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     contentReady(this, () => {
       this._input.removeEventListener('input', this._boundOnInput);
       this._input.removeEventListener('focusin', this._boundOnFocusin);
@@ -356,6 +360,4 @@ class InputElement extends BaseElement {
   }
 }
 
-window.OnsInputElement = document.registerElement('ons-input', {
-  prototype: InputElement.prototype
-});
+customElements.define('ons-input', InputElement);

@@ -112,11 +112,9 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs) {
-            CustomElements.upgrade(element[0]);
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);

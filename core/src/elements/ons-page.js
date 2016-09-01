@@ -85,7 +85,7 @@ const nullToolbarElement = document.createElement('ons-toolbar');
  *   loadMore().then(done);
  * };
  */
-class PageElement extends BaseElement {
+export default class PageElement extends BaseElement {
 
   /**
    * @event init
@@ -135,7 +135,7 @@ class PageElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  createdCallback() {
+  init() {
     this.classList.add('page');
 
     contentReady(this, () => {
@@ -151,7 +151,7 @@ class PageElement extends BaseElement {
     });
   }
 
-  attachedCallback() {
+  connectedCallback() {
     contentReady(this, () => {
       if (!this._isMuted) {
         if (this._skipInit) {
@@ -308,6 +308,10 @@ class PageElement extends BaseElement {
     return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
 
+  static get observedAttributes() {
+    return ['modifier', '_muted', '_skipinit', 'on-infinite-scroll'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -428,6 +432,4 @@ class PageElement extends BaseElement {
    */
 }
 
-window.OnsPageElement = document.registerElement('ons-page', {
-  prototype: PageElement.prototype
-});
+customElements.define('ons-page', PageElement);

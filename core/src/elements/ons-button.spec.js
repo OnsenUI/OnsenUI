@@ -2,11 +2,11 @@
 
 describe('ons-button', () => {
   it('provides \'OnsButtonElement\' global variable', () => {
-    expect(window.OnsButtonElement).to.be.ok;
+    expect(window.ons.ButtonElement).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
-    var element = new OnsButtonElement();
+    var element = new ons.ButtonElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;
 

@@ -47,7 +47,7 @@ const scheme = {
  *   <ons-speed-dial-item>C</ons-speed-dial-item>
  * </ons-speed-dial>
  */
-class SpeedDialElement extends BaseElement {
+export default class SpeedDialElement extends BaseElement {
 
   /**
    * @event open
@@ -104,7 +104,7 @@ class SpeedDialElement extends BaseElement {
    *   [ja]無効化する場合に指定します。[/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
     });
@@ -131,6 +131,10 @@ class SpeedDialElement extends BaseElement {
     this._updatePosition();
   }
 
+  static get observedAttributes() {
+    return ['modifier', 'ripple', 'direction', 'position'];
+  }
+
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'modifier':
@@ -148,11 +152,11 @@ class SpeedDialElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
@@ -427,6 +431,4 @@ class SpeedDialElement extends BaseElement {
   }
 }
 
-window.OnsSpeedDialElement = document.registerElement('ons-speed-dial', {
-  prototype: SpeedDialElement.prototype
-});
+customElements.define('ons-speed-dial', SpeedDialElement);
