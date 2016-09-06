@@ -2,7 +2,7 @@
 div#customizer-panel {
   position: absolute;
   top: 84px;
-  .DockItem("left", 0);
+  left: 0px;
   bottom: 0px;
   width: 330px;
   box-sizing: border-box;
@@ -29,7 +29,7 @@ div#customizer-panel {
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.07);
     margin: -8px -12px;
     box-sizing: border-box;
-    .PaddingLeftOrRight("padding-left", 12px);
+    padding-left: 12px;
 
     > h2 {
       color: white;
@@ -41,10 +41,10 @@ div#customizer-panel {
 
   > section {
     position: absolute;
-    .DockItem("left", 0);
+    left: 0px;
     top: 50px;
     bottom: 0px;
-    .DockItem("right", 0);
+    right: 0px;
     padding: 8px 12px;
     overflow: auto;
     background-clip: border-box;
@@ -54,7 +54,7 @@ div#customizer-panel {
     > h3 {
       font-size: 15px;
       color: #999;
-      .SwapMargin(18px, 0, 8px, 0);
+      margin: 18px 0 8px 0;
       font-size: 14px;
       color: #fff;
       text-shadow: 0px 1px 0px black;
@@ -101,8 +101,8 @@ div#customizer-panel {
       padding: 0;
 
       > li {
-        .SwapMargin(0, 0, 0, 12px);
-        .SwapPadding(0, 20px, 0, 0);
+        margin: 0 0 0 12px;
+        padding: 0 20px 0 0;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         list-style: none;
@@ -137,7 +137,7 @@ div#customizer-panel {
 
         > div.color-picker-container {
           user-select: none;
-          .FloatItem("right");
+          float: right;
           height: 23px;
           width: 23px;
           margin-top: 11px;
@@ -176,7 +176,7 @@ div#customizer-panel {
         margin: 0;
         padding: 0;
         display: table-cell;
-        .BorderLeftOrRight("border-left", 1px, rgba(0, 0, 0, 0.4), solid);
+        border-left: 1px solid rgba(0, 0, 0, 0.4);
         box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
         list-style: none;
         flex-grow: 1;
@@ -189,11 +189,11 @@ div#customizer-panel {
 
         &:first-child {
           border-width: 0px;
-          .BorderRadius(3px, 0, 0, 3px);
+          border-radius: 3px 0px 0px 3px;
         }
 
         &:last-child {
-          .BorderRadius(0, 3px, 3px, 0);
+          border-radius: 0px 3px 3px 0px;
         }
 
         &.current {
@@ -226,7 +226,7 @@ div#customizer-panel {
 
           > div {
             display: block;
-            .FloatItem("left");
+            float: left;
             line-height: 7px;
             width: 7px;
             height: 7px;

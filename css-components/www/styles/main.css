@@ -1,10 +1,4 @@
-﻿@charset "UTF-8";
-html {
-  direction: ltr;
-}
-body {
-  direction: ltr;
-}
+@charset "UTF-8";
 html,
 body {
   height: 100%;
@@ -27,13 +21,13 @@ button {
 }
 #loading {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   top: 0px;
   bottom: 0px;
   z-index: 200;
   background-color: #333;
-  background: linear-gradient(to bottom, #111 0%, #222 100%);
+  background: linear-gradient(to bottom, #111111 0%, #222222 100%);
   transition: 0.1s linear opacity;
   opacity: 1;
 }
@@ -47,6 +41,7 @@ button {
   top: 50%;
   height: 28px;
   width: 100%;
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 #loading #loading-message img {
@@ -126,6 +121,9 @@ a,
 a:link {
   text-decoration: underline;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 a,
@@ -222,8 +220,8 @@ div#content-container {
   position: absolute;
   min-width: 1200px;
   top: 0px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
 }
 .tooltip {
@@ -237,6 +235,7 @@ div#content-container {
   padding: 0 8px;
   background-color: #222;
   border-radius: 3px;
+  -webkit-transform: translate(-50%, 5px);
   transform: translate(-50%, 5px);
   z-index: 200;
 }
@@ -248,15 +247,16 @@ div#content-container {
   top: -4px;
   left: 50%;
   background-color: #222;
+  -webkit-transform: translateX(-4px) rotate(-135deg);
   transform: translateX(-4px) rotate(-135deg);
 }
 .inspector-mask {
   position: absolute;
   background-color: transparent;
   top: 0px;
-  left: 0;
+  left: 0px;
   bottom: 0px;
-  right: 0;
+  right: 0px;
   z-index: 90;
   overflow: hidden;
 }
@@ -285,7 +285,7 @@ div#content-container {
 }
 .inspector-mask .inspector-highlight > div.label.inner {
   bottom: 0px;
-  right: 0;
+  right: 0px;
 }
 .inspector-mask .inspector-highlight > div.label.above {
   top: -20px;
@@ -299,11 +299,11 @@ div#content-container {
 div#content-container > header {
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   height: 84px;
   background-color: white;
-  padding: 0 40px 0 40px;
+  padding: 0px 40px 0 40px;
   box-sizing: border-box;
   min-width: 1200px;
 }
@@ -357,7 +357,7 @@ div#content-container > header .gnav > li a:hover {
 div#content-container > header > div:nth-child(2) {
   position: absolute;
   display: inline-block;
-  right: 0;
+  right: 0px;
   top: 0px;
   height: 82px;
   text-align: right;
@@ -368,7 +368,7 @@ div#content-container > header > div:nth-child(2) {
 div#customizer-panel {
   position: absolute;
   top: 84px;
-  left: 0;
+  left: 0px;
   bottom: 0px;
   width: 330px;
   box-sizing: border-box;
@@ -403,10 +403,10 @@ div#customizer-panel > header > h2 {
 }
 div#customizer-panel > section {
   position: absolute;
-  left: 0;
+  left: 0px;
   top: 50px;
   bottom: 0px;
-  right: 0;
+  right: 0px;
   padding: 8px 12px;
   overflow: auto;
   background-clip: border-box;
@@ -480,6 +480,9 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li:hover > span.color-picker-label {
   opacity: 1;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
   user-select: text;
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > span.color-picker-label {
@@ -489,6 +492,9 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
   opacity: 0;
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > div.color-picker-container {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   float: right;
   height: 23px;
@@ -518,15 +524,19 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   margin: 0;
   display: table;
   table-layout: fixed;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li {
   margin: 0;
   padding: 0;
   display: table-cell;
-  border-left: 1px rgba(0, 0, 0, 0.4) solid;
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
   list-style: none;
+  -webkit-flex-grow: 1;
   flex-grow: 1;
   box-sizing: border-box;
   line-height: 32px;
@@ -537,14 +547,10 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li:first-child {
   border-width: 0px;
-  -webkit-border-radius: 3px 0 0 3px;
-  -moz-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
+  border-radius: 3px 0px 0px 3px;
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li:last-child {
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
+  border-radius: 0px 3px 3px 0px;
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li.current {
   background-color: rgba(0, 0, 0, 0.3);
@@ -584,8 +590,8 @@ div#main-panel {
   top: 84px;
   left: 329px;
   bottom: 0px;
-  right: 0;
-  border-left: 1px #222 solid;
+  right: 0px;
+  border-left: 1px solid #222;
 }
 div#main-panel > ul#main-panel-tabbar {
   margin: 0;
@@ -594,7 +600,7 @@ div#main-panel > ul#main-panel-tabbar {
   box-sizing: border-box;
   font-size: 0px;
   background-color: #474849;
-  border-right: 1px rgba(0, 0, 0, 0.2) solid;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
@@ -608,6 +614,9 @@ div#main-panel > ul#main-panel-tabbar > li {
   line-height: 48px;
   border-bottom: 4px solid transparent;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   font-size: 19px;
   color: #ccc;
@@ -630,12 +639,12 @@ div#main-panel > ul#main-panel-tabbar > li:active {
 div#main-panel > #main-panel-view {
   position: absolute;
   top: 50px;
-  right: 0;
+  right: 0px;
   bottom: 0px;
-  left: 0;
+  left: 0px;
   background-color: #343536;
   box-sizing: border-box;
-  border-right: 1px rgba(0, 0, 0, 0.2) solid;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 div#main-panel > footer {
   position: absolute;
@@ -660,7 +669,7 @@ div#main-panel > footer > a:hover {
 div#overview-inspecter-container {
   position: absolute;
   top: -50px;
-  right: 0;
+  right: 0px;
   width: 200px;
   text-align: right;
   line-height: 50px;
@@ -677,8 +686,8 @@ div#overview-container {
   padding: 40px 10px 0px 10px;
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   box-sizing: border-box;
 }
@@ -707,14 +716,15 @@ div#overview-container > ul#overview > li > div.pattern {
 }
 div#overview-container > ul#overview > li > div.pattern > div.pattern-mask {
   position: absolute;
-  left: 0;
+  left: 0px;
   top: 0px;
-  right: 0;
+  right: 0px;
   bottom: 0px;
   background-color: #343536;
   z-index: 9;
 }
 div#overview-container > ul#overview > li > div.pattern > div.inspector-mask.inspecting {
+  -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
 }
 div#overview-container > ul#overview > li > div.pattern > iframe {
@@ -723,12 +733,15 @@ div#overview-container > ul#overview > li > div.pattern > iframe {
   width: 320px;
   height: 568px;
   overflow: hidden;
+  transition: -webkit-transform 0.2s ease-in;
   transition: transform 0.2s ease-in;
 }
 div#overview-container > ul#overview > li > div.pattern > iframe.inspecting {
   z-index: 8;
   cursor: pointer;
+  transition: -webkit-transform 0.2s ease-out;
   transition: transform 0.2s ease-out;
+  -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
 }
 div#components-container {
@@ -736,8 +749,8 @@ div#components-container {
   padding: 40px 10px 0px 10px;
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   box-sizing: border-box;
 }
@@ -784,6 +797,7 @@ div#components-container > ul#components > li h3 > label > input[type=checkbox]:
   border-top: none;
   border-right: none;
   border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 div#components-container > ul#components > li > h3 {
@@ -813,8 +827,8 @@ div#components-container > ul#components > li > div.component-preview > div.comp
   position: absolute;
   z-index: 2;
   top: 0px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
 }
 div#components-container > ul#components > li > div.component-preview > iframe {
@@ -826,8 +840,8 @@ div.inspector-background-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   z-index: 99;
 }
@@ -863,6 +877,7 @@ div.dialog-container {
   top: 50%;
   left: 50%;
   width: 500px;
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 100;
 }
@@ -881,10 +896,12 @@ div.dialog-container > div.popup-dialog {
 div.dialog-container > div.popup-dialog.ng-hide-remove {
   opacity: 0;
   transition: 0.1s ease-in all;
+  -webkit-transform: scale(0.9);
   transform: scale(0.9);
   display: block !important;
 }
 div.dialog-container > div.popup-dialog.ng-hide-remove-active {
+  -webkit-transform: scale(1);
   transform: scale(1);
   opacity: 1;
 }
@@ -976,18 +993,19 @@ div.html-dialog-container {
   bottom: 60px;
   width: 1200px;
   max-height: 900px;
+  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 div.html-dialog-container > div.html-dialog {
   position: absolute;
   top: 0px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
 }
 div.html-dialog-container > div.html-dialog > div.css-container {
   position: absolute;
-  border-left: 1px #ddd solid;
+  border-left: 1px solid #ddd;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   width: 35%;
@@ -1008,14 +1026,14 @@ div.html-dialog-container > div.html-dialog > div.html-container {
   position: absolute;
   top: 50px;
   width: 65%;
-  left: 0;
+  left: 0px;
   bottom: 50px;
 }
 div.html-dialog-container > div.html-dialog > div.html-container .CodeMirror {
   position: absolute;
   top: 0px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
   height: auto;
 }
@@ -1036,6 +1054,7 @@ div.component-dialog-container {
   bottom: 60px;
   width: 1200px;
   max-height: 900px;
+  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 div.component-dialog-container.uninitialized {
@@ -1047,8 +1066,8 @@ div.component-dialog-container.uninitialized > div {
 div.component-dialog-container > div.component-dialog {
   position: absolute;
   top: 0px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
 }
 div.component-dialog-container > div.component-dialog > footer {
@@ -1061,8 +1080,8 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   position: absolute;
   top: 50px;
   bottom: 50px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
@@ -1070,7 +1089,7 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container {
   position: absolute;
   top: 0px;
-  left: 0;
+  left: 0px;
   width: 320px;
   height: 150px;
 }
@@ -1083,9 +1102,9 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   overflow: hidden;
   position: absolute;
   top: 0px;
-  right: 0;
+  right: 0px;
   bottom: 0px;
-  left: 0;
+  left: 0px;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container > div.preview > iframe {
   width: 320px;
@@ -1095,16 +1114,16 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   box-sizing: border-box;
   height: 150px;
   position: absolute;
-  border-left: 1px #DDD solid;
+  border-left: 1px solid #DDD;
   top: 0px;
   left: 320px;
-  right: 0;
+  right: 0px;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.html-container .CodeMirror {
   position: absolute;
   top: 36px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
   height: auto;
 }
@@ -1112,16 +1131,16 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   border-top: 1px solid #ddd;
   position: absolute;
   top: 150px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
   box-sizing: border-box;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.css-container .CodeMirror {
   position: absolute;
   top: 36px;
-  right: 0;
-  left: 0;
+  right: 0px;
+  left: 0px;
   bottom: 0px;
   height: auto;
 }
@@ -1145,8 +1164,8 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
 div.color-picker-popup-mask {
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   background-color: transparent;
   z-index: 99;
@@ -1162,7 +1181,9 @@ div.color-picker-popup {
   z-index: 100;
   text-align: right;
   opacity: 1;
+  -webkit-transform: translateY(0px);
   transform: translateY(0px);
+  transition: -webkit-transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
@@ -1180,7 +1201,8 @@ div.color-picker-popup.flipped:after {
   right: 14px;
   background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  border-left: 1px rgba(0, 0, 0, 0.15) solid;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
 div.color-picker-popup:after {
@@ -1192,7 +1214,8 @@ div.color-picker-popup:after {
   right: 14px;
   background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  border-left: 1px rgba(0, 0, 0, 0.15) solid;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 div.color-picker-popup > img.close {
@@ -1217,20 +1240,22 @@ div.color-picker-popup > input[type=text]:focus {
 }
 div.color-picker-popup.ng-hide-remove {
   opacity: 0;
+  -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   transition: 0.05s linear all;
   display: block !important;
 }
 div.color-picker-popup.ng-hide-remove-active {
   opacity: 1;
+  -webkit-transform: translateY(0px);
   transform: translateY(0px);
 }
 div.popup-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   z-index: 90;
 }
@@ -1259,38 +1284,47 @@ div.popup-container {
   z-index: 90;
 }
 div.popup-container.right-top-position {
+  -webkit-transform: translateY(-100%) translateX(-26px) translateY(-8px);
   transform: translateY(-100%) translateX(-26px) translateY(-8px);
 }
 div.popup-container.right-top-position > div.popup:after {
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   bottom: -7px;
   left: 20px;
 }
 div.popup-container.right-bottom-position {
+  -webkit-transform: translateX(-26px) translateY(8px);
   transform: translateX(-26px) translateY(8px);
 }
 div.popup-container.right-bottom-position > div.popup:after {
+  -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
   top: -7px;
   left: 20px;
 }
 div.popup-container.left-top-position {
+  -webkit-transform: translateY(-100%) translateX(26px) translateY(-8px);
   transform: translateY(-100%) translateX(26px) translateY(-8px);
 }
 div.popup-container.left-top-position > div.popup:after {
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   bottom: -7px;
   right: 20px;
 }
 div.popup-container.left-bottom-position {
+  -webkit-transform: translateX(26px) translateY(8px);
   transform: translateX(26px) translateY(8px);
 }
 div.popup-container.left-bottom-position > div.popup:after {
+  -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
   top: -7px;
   right: 20px;
 }
 div.popup-container.newsletter-popup-container {
+  -webkit-transform: translateY(-8px) translateX(26px);
   transform: translateY(-8px) translateX(26px);
   z-index: 22;
   right: 64px;
@@ -1312,6 +1346,7 @@ div.popup-container.newsletter-popup-container > div.popup > div.message {
   height: 120px;
   padding-left: 230px;
   background: url(../images/team.png) left bottom no-repeat;
+  margin-left: 0px;
 }
 div.popup-container.newsletter-popup-container > div.popup > div.subscribe-form {
   background-color: #eee;
@@ -1329,6 +1364,7 @@ div.popup-container.newsletter-popup-container > div.popup > div.subscribe-form 
 }
 div.popup-container.newsletter-popup-container > div.popup:after {
   z-index: 22;
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   bottom: -7px;
   right: 20px;
@@ -1349,10 +1385,8 @@ div.popup-container > div.popup {
 div.popup-container > div.popup:after {
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  border-left: 1px rgba(0, 0, 0, 0.2) solid;
-  -webkit-border-radius: 0 0 0 0;
-  -moz-border-radius: 0 0 0 0;
-  border-radius: 0 0 0 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 0px 0px;
   content: '';
   position: absolute;
   width: 12px;
@@ -1362,10 +1396,12 @@ div.popup-container > div.popup:after {
 div.popup-container > div.popup.ng-hide-remove {
   opacity: 0;
   transition: 0.2s ease-in all;
+  -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   display: block !important;
 }
 div.popup-container > div.popup.ng-hide-remove-active {
+  -webkit-transform: translateY(0px);
   transform: translateY(0px);
   opacity: 1;
 }
@@ -1417,12 +1453,14 @@ div.popup-container > div.popup > footer .right-button {
   background-image: url(../images/mask.svg);
 }
 .guide-mask.right-position {
+  -webkit-transform: translateX(3000px) translateY(-3000px);
   transform: translateX(3000px) translateY(-3000px);
-  right: 0;
+  right: 0px;
 }
 .guide-mask.left-position {
+  -webkit-transform: translateX(-3000px) translateY(-3000px);
   transform: translateX(-3000px) translateY(-3000px);
-  right: 0;
+  right: 0px;
 }
 .guide-mask.uninitialized {
   display: none;

@@ -22,8 +22,8 @@ input, button {
 
 #loading {
   position: absolute;
-  .DockItem("left", 0);
-  .DockItem("right", 0);
+  left: 0px;
+  right: 0px;
   top: 0px;
   bottom: 0px;
   z-index: 200;
@@ -38,7 +38,7 @@ input, button {
     font-weight: 200;
     color: white;
     position: absolute;
-    .DockItem("left", 50%);
+    left: 50%;
     top: 50%;
     height: 28px;
     width: 100%;
@@ -186,7 +186,7 @@ input[type=text].site, input[type=email].site {
   height: 20px;
   line-height: 20px;
   display: inline-block;
-  .SwapMargin(2px, 0, 5px, 0);
+  margin: 2px 0 5px 0;
   appearance: none;
   font-weight: 200;
 
@@ -212,8 +212,8 @@ div#content-container {
   position: absolute;
   min-width: 1200px;
   top: 0px;
-  .DockItem("right", 0);
-  .DockItem("left", 0);
+  right: 0px;
+  left: 0px;
   bottom: 0px;
 }
 
@@ -239,7 +239,7 @@ div#content-container {
     height: 8px;
     position: absolute;
     top: -4px;
-    .DockItem("left", 50%);
+    left: 50%;
     background-color: #222;
     transform: translateX(-4px) rotate(-135deg);
   }
@@ -250,9 +250,9 @@ div#content-container {
   position: absolute;
   background-color: transparent;
   top: 0px;
-  .DockItem("left", 0);
+  left: 0px;
   bottom: 0px;
-  .DockItem("right", 0);
+  right: 0px;
   z-index: 90;
   overflow: hidden;
 
@@ -270,7 +270,7 @@ div#content-container {
       display: inline-block;
       font-size: 12px;
       width: auto;
-      .DockItem("left", -1px);
+      left: -1px;
       height: 20px;
       color: white;
       background-color: #ff1a33;
@@ -281,7 +281,7 @@ div#content-container {
 
       &.inner {
         bottom: 0px;
-        .DockItem("right", 0);
+        right: 0px;
       }
 
       &.above {

@@ -1,11 +1,11 @@
 
 div#components-container {
   overflow: auto;
-  .SwapPadding(40px, 10px, 0px, 10px);
+  padding: 40px 10px 0px 10px;
   position: absolute;
   top: 0px;
-  .DockItem("left", 0);
-  .DockItem("right", 0);
+  left: 0px;
+  right: 0px;
   bottom: 0px;
   box-sizing: border-box;
 
@@ -16,7 +16,7 @@ div#components-container {
     font-size: 0px;
 
     > li {
-      .SwapMargin(0, 8px, 34px, 8px);
+      margin: 0 8px 34px 8px;
       padding: 0;
       list-style: none;
       display: inline-block;
@@ -37,20 +37,20 @@ div#components-container {
         vertical-align: middle;
         position: relative;
         display: inline-block;
-        .MarginLeftOrRight("margin-right", 6px);
+        margin-right: 6px;
 
         &:checked:after {
           content: '';
           position: absolute;
           top: 0px;
-          .DockItem("left", 1px);
+          left: 1px;
           opacity: 1;
           width: 10px;
           height: 4px;
           background: transparent;
           border: 2px solid #fff;
           border-top: none;
-          .BorderRight(none);
+          border-right: none;
           border-radius: 0px;
           transform: rotate(-45deg);
         }
@@ -88,8 +88,8 @@ div#components-container {
           position: absolute;
           z-index: 2;
           top: 0px;
-          .DockItem("right", 0);
-          .DockItem("left", 0);
+          right: 0px;
+          left: 0px;
           bottom: 0px;
         }
 

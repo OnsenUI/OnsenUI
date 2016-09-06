@@ -2,19 +2,19 @@
 div#main-panel {
   position: absolute;
   top: 84px;
-  .DockItem("left", 329px);
+  left: 329px;
   bottom: 0px;
-  .DockItem("right", 0);
-  .BorderLeftOrRight("border-left", 1px, #222, solid);
+  right: 0px;
+  border-left: 1px solid #222;
 
   > ul#main-panel-tabbar {
     margin: 0;
-    .SwapPadding(0, 0, 0, 23px);
+    padding: 0 0 0 23px;
     height: 50px;
     box-sizing: border-box;
     font-size: 0px;
     background-color: #474849;
-    .BorderLeftOrRight("border-right", 1px, rgba(0, 0, 0, 0.2), solid);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     border-top: 1px solid rgba(0, 0, 0, 0.3);
 
@@ -54,18 +54,18 @@ div#main-panel {
   > #main-panel-view {
     position: absolute;
     top: 50px;
-    .DockItem("right", 0);
+    right: 0px;
     bottom: 0px;
-    .DockItem("left", 0);
+    left: 0px;
     background-color: #343536;
     box-sizing: border-box;
-    .BorderLeftOrRight("border-right", 1px, rgba(0, 0, 0, 0.2), solid);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   > footer {
     position: absolute;
     bottom: 0px;
-    .DockItem("right", 20px);
+    right: 20px;
     height: 30px;
     box-sizing: border-box;
     border-top: 2px solid rgba(255, 255, 255, 1);
