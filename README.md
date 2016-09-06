@@ -16,7 +16,7 @@ The core library is written in pure Javascript and is framework agnostic which m
 * [React](https://onsen.io/react)
 * [Angular2](https://onsen.io/angular2)
 * [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/index.html)
-* [Vue.js (WIP)](https://github.com/argelius/vue-onsenui)
+* [Vue.js (WIP)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
 
 Onsen UI provides styles for both iOS flat design and Android's Material Design. The components will be automatically styled based on the platform which makes it possible to support both iOS and Android with the same source code.
 
