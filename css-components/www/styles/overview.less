@@ -2,11 +2,11 @@
 div#overview-inspecter-container {
   position: absolute;
   top: -50px;
-  right: 0px;
+  .DockItem("right", 0);
   width: 200px;
-  text-align: right;
+  .TextAlignTo("right");
   line-height: 50px;
-  padding-right: 10px;
+  .PaddingLeftOrRight("padding-right", 10px);
   > a { font-size: 16px; }
 
   img {
@@ -16,11 +16,11 @@ div#overview-inspecter-container {
 
 div#overview-container {
   overflow: auto;
-  padding: 40px 10px 0px 10px;
+  .SwapPadding(40px, 10px, 0px, 10px);
   position: absolute;
   top: 0px;
-  left: 0px;
-  right: 0px;
+  .DockItem("left", 0);
+  .DockItem("right", 0);
   bottom: 0px;
   box-sizing: border-box;
 
@@ -30,7 +30,7 @@ div#overview-container {
     width: auto;
     font-size: 0px;
     > li {
-      margin: 0 8px 34px 8px;
+      .SwapMargin(0, 8px, 34px, 8px);
       padding: 0;
       list-style: none;
       display: inline-block;
@@ -50,9 +50,9 @@ div#overview-container {
 
         > div.pattern-mask {
           position: absolute;
-          left: 0px;
+          .DockItem("left", 0);
           top: 0px;
-          right: 0px;
+          .DockItem("right", 0);
           bottom: 0px;
           background-color: #343536;
           z-index: 9;

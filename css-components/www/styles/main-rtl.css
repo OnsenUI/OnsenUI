@@ -1,9 +1,9 @@
 ﻿@charset "UTF-8";
 html {
-  direction: ltr;
+  direction: rtl;
 }
 body {
-  direction: ltr;
+  direction: rtl;
 }
 html,
 body {
@@ -27,8 +27,8 @@ button {
 }
 #loading {
   position: absolute;
-  left: 0;
   right: 0;
+  left: 0;
   top: 0px;
   bottom: 0px;
   z-index: 200;
@@ -43,7 +43,7 @@ button {
   font-weight: 200;
   color: white;
   position: absolute;
-  left: 50%;
+  right: 50%;
   top: 50%;
   height: 28px;
   width: 100%;
@@ -222,8 +222,8 @@ div#content-container {
   position: absolute;
   min-width: 1200px;
   top: 0px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
 }
 .tooltip {
@@ -246,7 +246,7 @@ div#content-container {
   height: 8px;
   position: absolute;
   top: -4px;
-  left: 50%;
+  right: 50%;
   background-color: #222;
   transform: translateX(-4px) rotate(-135deg);
 }
@@ -254,9 +254,9 @@ div#content-container {
   position: absolute;
   background-color: transparent;
   top: 0px;
-  left: 0;
-  bottom: 0px;
   right: 0;
+  bottom: 0px;
+  left: 0;
   z-index: 90;
   overflow: hidden;
 }
@@ -274,7 +274,7 @@ div#content-container {
   display: inline-block;
   font-size: 12px;
   width: auto;
-  left: -1px;
+  right: -1px;
   height: 20px;
   color: white;
   background-color: #ff1a33;
@@ -285,7 +285,7 @@ div#content-container {
 }
 .inspector-mask .inspector-highlight > div.label.inner {
   bottom: 0px;
-  right: 0;
+  left: 0;
 }
 .inspector-mask .inspector-highlight > div.label.above {
   top: -20px;
@@ -299,8 +299,8 @@ div#content-container {
 div#content-container > header {
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   height: 84px;
   background-color: white;
   padding: 0 40px 0 40px;
@@ -314,7 +314,7 @@ div#content-container > header > div:first-child > h1 {
 div#content-container > header .gnav {
   position: absolute;
   top: 0;
-  right: 12px;
+  left: 12px;
   height: 84px;
   line-height: 84px;
   margin: 0;
@@ -357,18 +357,18 @@ div#content-container > header .gnav > li a:hover {
 div#content-container > header > div:nth-child(2) {
   position: absolute;
   display: inline-block;
-  right: 0;
+  left: 0;
   top: 0px;
   height: 82px;
-  text-align: right;
+  text-align: left;
   line-height: 82px;
-  padding-right: 16px;
+  padding-left: 16px;
   width: 600px;
 }
 div#customizer-panel {
   position: absolute;
   top: 84px;
-  left: 0;
+  right: 0;
   bottom: 0px;
   width: 330px;
   box-sizing: border-box;
@@ -394,7 +394,7 @@ div#customizer-panel > header {
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.07);
   margin: -8px -12px;
   box-sizing: border-box;
-  padding-left: 12px;
+  padding-right: 12px;
 }
 div#customizer-panel > header > h2 {
   color: white;
@@ -403,10 +403,10 @@ div#customizer-panel > header > h2 {
 }
 div#customizer-panel > section {
   position: absolute;
-  left: 0;
+  right: 0;
   top: 50px;
   bottom: 0px;
-  right: 0;
+  left: 0;
   padding: 8px 12px;
   overflow: auto;
   background-clip: border-box;
@@ -460,8 +460,8 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
   padding: 0;
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li {
-  margin: 0 0 0 12px;
-  padding: 0 20px 0 0;
+  margin: 0 12px 0 0;
+  padding: 0 0 0 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   list-style: none;
@@ -490,7 +490,7 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > div.color-picker-container {
   user-select: none;
-  float: right;
+  float: left;
   height: 23px;
   width: 23px;
   margin-top: 11px;
@@ -524,7 +524,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   margin: 0;
   padding: 0;
   display: table-cell;
-  border-left: 1px rgba(0, 0, 0, 0.4) solid;
+  border-right: 1px rgba(0, 0, 0, 0.4) solid;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
   list-style: none;
   flex-grow: 1;
@@ -537,14 +537,14 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li:first-child {
   border-width: 0px;
-  -webkit-border-radius: 3px 0 0 3px;
-  -moz-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
+  -webkit-border-radius: 3px 3px 0 0;
+  -moz-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li:last-child {
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li.current {
   background-color: rgba(0, 0, 0, 0.3);
@@ -573,7 +573,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 }
 div#customizer-panel > section > div.customizer-section > ul.color-scheme-switcher > li > .color-scheme-icon > div {
   display: block;
-  float: left;
+  float: right;
   line-height: 7px;
   width: 7px;
   height: 7px;
@@ -582,19 +582,19 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 div#main-panel {
   position: absolute;
   top: 84px;
-  left: 329px;
+  right: 329px;
   bottom: 0px;
-  right: 0;
-  border-left: 1px #222 solid;
+  left: 0;
+  border-right: 1px #222 solid;
 }
 div#main-panel > ul#main-panel-tabbar {
   margin: 0;
-  padding: 0 0 0 23px;
+  padding: 0 23px 0 0;
   height: 50px;
   box-sizing: border-box;
   font-size: 0px;
   background-color: #474849;
-  border-right: 1px rgba(0, 0, 0, 0.2) solid;
+  border-left: 1px rgba(0, 0, 0, 0.2) solid;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
@@ -630,17 +630,17 @@ div#main-panel > ul#main-panel-tabbar > li:active {
 div#main-panel > #main-panel-view {
   position: absolute;
   top: 50px;
-  right: 0;
-  bottom: 0px;
   left: 0;
+  bottom: 0px;
+  right: 0;
   background-color: #343536;
   box-sizing: border-box;
-  border-right: 1px rgba(0, 0, 0, 0.2) solid;
+  border-left: 1px rgba(0, 0, 0, 0.2) solid;
 }
 div#main-panel > footer {
   position: absolute;
   bottom: 0px;
-  right: 20px;
+  left: 20px;
   height: 30px;
   box-sizing: border-box;
   border-top: 2px solid #ffffff;
@@ -660,11 +660,11 @@ div#main-panel > footer > a:hover {
 div#overview-inspecter-container {
   position: absolute;
   top: -50px;
-  right: 0;
+  left: 0;
   width: 200px;
-  text-align: right;
+  text-align: left;
   line-height: 50px;
-  padding-right: 10px;
+  padding-left: 10px;
 }
 div#overview-inspecter-container > a {
   font-size: 16px;
@@ -677,8 +677,8 @@ div#overview-container {
   padding: 40px 10px 0px 10px;
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0px;
   box-sizing: border-box;
 }
@@ -707,9 +707,9 @@ div#overview-container > ul#overview > li > div.pattern {
 }
 div#overview-container > ul#overview > li > div.pattern > div.pattern-mask {
   position: absolute;
-  left: 0;
-  top: 0px;
   right: 0;
+  top: 0px;
+  left: 0;
   bottom: 0px;
   background-color: #343536;
   z-index: 9;
@@ -736,8 +736,8 @@ div#components-container {
   padding: 40px 10px 0px 10px;
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0px;
   box-sizing: border-box;
 }
@@ -769,20 +769,20 @@ div#components-container > ul#components > li h3 > label > input[type=checkbox] 
   vertical-align: middle;
   position: relative;
   display: inline-block;
-  margin-right: 6px;
+  margin-left: 6px;
 }
 div#components-container > ul#components > li h3 > label > input[type=checkbox]:checked:after {
   content: '';
   position: absolute;
   top: 0px;
-  left: 1px;
+  right: 1px;
   opacity: 1;
   width: 10px;
   height: 4px;
   background: transparent;
   border: 2px solid #fff;
   border-top: none;
-  border-right: none;
+  border-left: none;
   border-radius: 0px;
   transform: rotate(-45deg);
 }
@@ -813,8 +813,8 @@ div#components-container > ul#components > li > div.component-preview > div.comp
   position: absolute;
   z-index: 2;
   top: 0px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
 }
 div#components-container > ul#components > li > div.component-preview > iframe {
@@ -826,8 +826,8 @@ div.inspector-background-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0px;
   z-index: 99;
 }
@@ -861,7 +861,7 @@ div.inspector-background-mask {
 div.dialog-container {
   position: absolute;
   top: 50%;
-  left: 50%;
+  right: 50%;
   width: 500px;
   transform: translate(-50%, -50%);
   z-index: 100;
@@ -889,9 +889,9 @@ div.dialog-container > div.popup-dialog.ng-hide-remove-active {
   opacity: 1;
 }
 div.dialog-container > div.popup-dialog > img.close {
-  float: right;
+  float: left;
   cursor: pointer;
-  margin: -3px -3px 0 0;
+  margin: -3px 0 0 -3px;
 }
 div.dialog-container > div.popup-dialog > img.close:focus {
   outline: 0;
@@ -902,8 +902,8 @@ div.dialog-container > div.popup-dialog > img.close:active {
   opacity: 0.6;
 }
 div.dialog-container > div.popup-dialog div.side-image-container {
-  float: left;
-  margin: 10px 20px 20px 10px;
+  float: right;
+  margin: 10px 10px 20px 20px;
 }
 div.dialog-container > div.popup-dialog > h2 {
   font-size: 20px;
@@ -921,7 +921,7 @@ div.dialog-container > div.popup-dialog > footer button {
   font-size: 18px;
 }
 div.dialog-container > div.popup-dialog > footer .right-button {
-  float: right;
+  float: left;
 }
 div.welcome-dialog-container {
   min-height: 480px;
@@ -929,7 +929,7 @@ div.welcome-dialog-container {
 }
 div.welcome-dialog-container > div.welcome-dialog > div.welcome-text {
   background: url(../images/onsenui-welcome.png) left center no-repeat;
-  padding-left: 90px;
+  padding-right: 90px;
 }
 div.welcome-dialog-container > div.welcome-dialog > div.welcome-text strong {
   font-weight: 500;
@@ -939,10 +939,10 @@ div.welcome-dialog-container > div.welcome-dialog footer {
   margin: 20px 0 0 0;
 }
 div.welcome-dialog-container > div.welcome-dialog footer .right-button {
-  float: right;
+  float: left;
 }
 div.welcome-dialog-container > div.welcome-dialog footer .site-button:not(.right-button) {
-  float: left;
+  float: right;
 }
 div.thankyou-dialog-container {
   width: 600px;
@@ -981,17 +981,17 @@ div.html-dialog-container {
 div.html-dialog-container > div.html-dialog {
   position: absolute;
   top: 0px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
 }
 div.html-dialog-container > div.html-dialog > div.css-container {
   position: absolute;
-  border-left: 1px #ddd solid;
+  border-right: 1px #ddd solid;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   width: 35%;
-  right: 0;
+  left: 0;
   top: 50px;
   bottom: 50px;
 }
@@ -1008,14 +1008,14 @@ div.html-dialog-container > div.html-dialog > div.html-container {
   position: absolute;
   top: 50px;
   width: 65%;
-  left: 0;
+  right: 0;
   bottom: 50px;
 }
 div.html-dialog-container > div.html-dialog > div.html-container .CodeMirror {
   position: absolute;
   top: 0px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
   height: auto;
 }
@@ -1023,8 +1023,8 @@ div.html-dialog-container > div.html-dialog footer {
   position: absolute;
   bottom: 0px;
   height: 50px;
-  left: 20px;
   right: 20px;
+  left: 20px;
   line-height: 50px;
   margin: 0;
   padding: 0;
@@ -1047,8 +1047,8 @@ div.component-dialog-container.uninitialized > div {
 div.component-dialog-container > div.component-dialog {
   position: absolute;
   top: 0px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
 }
 div.component-dialog-container > div.component-dialog > footer {
@@ -1061,8 +1061,8 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   position: absolute;
   top: 50px;
   bottom: 50px;
-  left: 0;
   right: 0;
+  left: 0;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
@@ -1070,12 +1070,12 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container {
   position: absolute;
   top: 0px;
-  left: 0;
+  right: 0;
   width: 320px;
   height: 150px;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container > h3 {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container > div.preview {
   height: 100%;
@@ -1083,9 +1083,9 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   overflow: hidden;
   position: absolute;
   top: 0px;
-  right: 0;
-  bottom: 0px;
   left: 0;
+  bottom: 0px;
+  right: 0;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container > div.preview > iframe {
   width: 320px;
@@ -1095,16 +1095,16 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   box-sizing: border-box;
   height: 150px;
   position: absolute;
-  border-left: 1px #DDD solid;
+  border-right: 1px #DDD solid;
   top: 0px;
-  left: 320px;
-  right: 0;
+  right: 320px;
+  left: 0;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.html-container .CodeMirror {
   position: absolute;
   top: 36px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
   height: auto;
 }
@@ -1112,16 +1112,16 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   border-top: 1px solid #ddd;
   position: absolute;
   top: 150px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
   box-sizing: border-box;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.css-container .CodeMirror {
   position: absolute;
   top: 36px;
-  right: 0;
   left: 0;
+  right: 0;
   bottom: 0px;
   height: auto;
 }
@@ -1129,12 +1129,12 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   font-size: 18px;
   font-weight: 200;
   display: inline-block;
-  margin: 8px 0px 4px 16px;
+  margin: 8px 16px 4px 0px;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content .copy {
   font-size: 16px;
-  float: right;
-  margin: 8px 8px 0 0;
+  float: left;
+  margin: 8px 0 0 8px;
   color: #ff1a33;
   font-weight: 200;
   text-decoration: none;
@@ -1145,8 +1145,8 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
 div.color-picker-popup-mask {
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0px;
   background-color: transparent;
   z-index: 99;
@@ -1158,9 +1158,9 @@ div.color-picker-popup {
   padding: 12px;
   position: absolute;
   top: 0px;
-  left: 300px;
+  right: 300px;
   z-index: 100;
-  text-align: right;
+  text-align: left;
   opacity: 1;
   transform: translateY(0px);
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -1169,18 +1169,18 @@ div.color-picker-popup {
   background-color: white;
   background-clip: padding-box;
   border-radius: 6px;
-  margin: 10px 0 0 -200px;
+  margin: 10px -200px 0 0;
 }
 div.color-picker-popup.flipped {
-  margin: -225px 0 0 -200px;
+  margin: -225px -200px 0 0;
 }
 div.color-picker-popup.flipped:after {
   bottom: -7px;
   top: auto;
-  right: 14px;
+  left: 14px;
   background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  border-left: 1px rgba(0, 0, 0, 0.15) solid;
+  border-right: 1px rgba(0, 0, 0, 0.15) solid;
   transform: rotate(-135deg);
 }
 div.color-picker-popup:after {
@@ -1189,15 +1189,15 @@ div.color-picker-popup:after {
   height: 12px;
   position: absolute;
   top: -7px;
-  right: 14px;
+  left: 14px;
   background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  border-left: 1px rgba(0, 0, 0, 0.15) solid;
+  border-right: 1px rgba(0, 0, 0, 0.15) solid;
   transform: rotate(45deg);
 }
 div.color-picker-popup > img.close {
   cursor: pointer;
-  float: left;
+  float: right;
 }
 div.color-picker-popup > img.close:active {
   opacity: 0.6;
@@ -1229,8 +1229,8 @@ div.popup-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0px;
   z-index: 90;
 }
@@ -1264,7 +1264,7 @@ div.popup-container.right-top-position {
 div.popup-container.right-top-position > div.popup:after {
   transform: rotate(-45deg);
   bottom: -7px;
-  left: 20px;
+  right: 20px;
 }
 div.popup-container.right-bottom-position {
   transform: translateX(-26px) translateY(8px);
@@ -1272,7 +1272,7 @@ div.popup-container.right-bottom-position {
 div.popup-container.right-bottom-position > div.popup:after {
   transform: rotate(135deg);
   top: -7px;
-  left: 20px;
+  right: 20px;
 }
 div.popup-container.left-top-position {
   transform: translateY(-100%) translateX(26px) translateY(-8px);
@@ -1280,7 +1280,7 @@ div.popup-container.left-top-position {
 div.popup-container.left-top-position > div.popup:after {
   transform: rotate(-45deg);
   bottom: -7px;
-  right: 20px;
+  left: 20px;
 }
 div.popup-container.left-bottom-position {
   transform: translateX(26px) translateY(8px);
@@ -1288,12 +1288,12 @@ div.popup-container.left-bottom-position {
 div.popup-container.left-bottom-position > div.popup:after {
   transform: rotate(135deg);
   top: -7px;
-  right: 20px;
+  left: 20px;
 }
 div.popup-container.newsletter-popup-container {
   transform: translateY(-8px) translateX(26px);
   z-index: 22;
-  right: 64px;
+  left: 64px;
   width: 600px;
   bottom: 50px;
 }
@@ -1310,7 +1310,7 @@ div.popup-container.newsletter-popup-container > div.popup > h2 {
 div.popup-container.newsletter-popup-container > div.popup > div.message {
   margin-top: 10px;
   height: 120px;
-  padding-left: 230px;
+  padding-right: 230px;
   background: url(../images/team.png) left bottom no-repeat;
 }
 div.popup-container.newsletter-popup-container > div.popup > div.subscribe-form {
@@ -1331,7 +1331,7 @@ div.popup-container.newsletter-popup-container > div.popup:after {
   z-index: 22;
   transform: rotate(-45deg);
   bottom: -7px;
-  right: 20px;
+  left: 20px;
 }
 div.popup-container > div.popup {
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -1349,7 +1349,7 @@ div.popup-container > div.popup {
 div.popup-container > div.popup:after {
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  border-left: 1px rgba(0, 0, 0, 0.2) solid;
+  border-right: 1px rgba(0, 0, 0, 0.2) solid;
   -webkit-border-radius: 0 0 0 0;
   -moz-border-radius: 0 0 0 0;
   border-radius: 0 0 0 0;
@@ -1370,9 +1370,9 @@ div.popup-container > div.popup.ng-hide-remove-active {
   opacity: 1;
 }
 div.popup-container > div.popup > img.close {
-  float: right;
+  float: left;
   cursor: pointer;
-  margin: -3px -3px 0 0;
+  margin: -3px 0 0 -3px;
 }
 div.popup-container > div.popup > img.close:focus {
   outline: 0;
@@ -1403,10 +1403,10 @@ div.popup-container > div.popup > footer button {
   height: 38px;
   padding: 0 18px;
   font-size: 18px;
-  float: right;
+  float: left;
 }
 div.popup-container > div.popup > footer .right-button {
-  float: right;
+  float: left;
 }
 .guide-mask {
   position: absolute;
@@ -1418,11 +1418,11 @@ div.popup-container > div.popup > footer .right-button {
 }
 .guide-mask.right-position {
   transform: translateX(3000px) translateY(-3000px);
-  right: 0;
+  left: 0;
 }
 .guide-mask.left-position {
   transform: translateX(-3000px) translateY(-3000px);
-  right: 0;
+  left: 0;
 }
 .guide-mask.uninitialized {
   display: none;

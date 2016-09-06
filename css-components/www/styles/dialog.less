@@ -3,8 +3,8 @@ div.popup-dialog-mask, div.inspector-background-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0px;
-  right: 0px;
+  .DockItem("left", 0);
+  .DockItem("right", 0);
   bottom: 0px;
   z-index: 99;
 
@@ -44,7 +44,7 @@ div.inspector-background-mask {
 div.dialog-container {
   position: absolute;
   top: 50%;
-  left: 50%;
+  .DockItem("left", 50%);
   width: 500px;
   transform: translate(-50%, -50%);
   z-index: 100;
@@ -76,9 +76,9 @@ div.dialog-container {
     }
 
     > img.close {
-      float: right;
+      .FloatItem("right");
       cursor: pointer;
-      margin: -3px -3px 0 0;
+      .SwapMargin(-3px, -3px, 0, 0);
       &:focus {
         outline: 0;
         margin: 0;
@@ -90,8 +90,8 @@ div.dialog-container {
     }
 
     div.side-image-container {
-      float: left;
-      margin: 10px 20px 20px 10px;
+      .FloatItem("left");
+      .SwapMargin(10px, 20px, 20px, 10px);
     }
 
     > h2 {
@@ -114,7 +114,7 @@ div.dialog-container {
         font-size: 18px;
       }
       .right-button {
-        float: right;
+        .FloatItem("right");
       }
     }
   }
@@ -127,7 +127,7 @@ div.welcome-dialog-container {
   > div.welcome-dialog {
     > div.welcome-text {
       background: url(../images/onsenui-welcome.png) left center no-repeat;
-      padding-left: 90px;
+      .PaddingLeftOrRight("padding-left", 90px);
 
       strong {
         font-weight: 500;
@@ -135,12 +135,12 @@ div.welcome-dialog-container {
     }
     footer {
       height: 38px;
-      margin: 20px 0 0 0;
+      .SwapMargin(20px, 0, 0, 0);
       .right-button {
-        float: right;
+        .FloatItem("right");
       }
       .site-button:not(.right-button) {
-        float: left;
+        .FloatItem("left");
       }
     }
   }
@@ -155,8 +155,8 @@ div.thankyou-dialog-container {
     font-size: 14px;
     color: #bbb;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0 20px 0;
-    margin: 0 0 20px 0;
+    .SwapPadding(10px, 0, 20px, 0);
+    .SwapMargin(0, 0, 20px, 0);
 
     > p {
       font-size: 14px;
@@ -186,17 +186,17 @@ div.html-dialog-container {
   > div.html-dialog {
     position: absolute;
     top: 0px;
-    right: 0px;
-    left: 0px;
+    .DockItem("right", 0);
+    .DockItem("left", 0);
     bottom: 0px;
 
     > div.css-container {
       position: absolute;
-      border-left: 1px solid #ddd;
+      .BorderLeftOrRight("border-left", 1px, #ddd, solid);
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       width: 35%;
-      right: 0;
+      .DockItem("right", 0);
       top: 50px;
       bottom: 50px;
 
@@ -216,14 +216,14 @@ div.html-dialog-container {
       position: absolute;
       top: 50px;
       width: 65%;
-      left: 0px;
+      .DockItem("left", 0);
       bottom: 50px;
 
       .CodeMirror {
         position: absolute;
         top: 0px;
-        right: 0px;
-        left: 0px;
+        .DockItem("right", 0);
+        .DockItem("left", 0);
         bottom: 0px;
         height: auto;
       }
@@ -233,8 +233,8 @@ div.html-dialog-container {
       position: absolute;
       bottom: 0px;
       height: 50px;
-      left: 20px;
-      right: 20px;
+      .DockItem("left", 20px);
+      .DockItem("right", 20px);
       line-height: 50px;
       margin: 0;
       padding: 0;
@@ -261,8 +261,8 @@ div.component-dialog-container {
   > div.component-dialog {
     position: absolute;
     top: 0px;
-    right: 0px;
-    left: 0px;
+    .DockItem("right", 0);
+    .DockItem("left", 0);
     bottom: 0px;
 
     > footer {
@@ -277,8 +277,8 @@ div.component-dialog-container {
       position: absolute;
       top: 50px;
       bottom: 50px;
-      left: 0px;
-      right: 0px;
+      .DockItem("left", 0);
+      .DockItem("right", 0);
 
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
@@ -287,12 +287,12 @@ div.component-dialog-container {
       > div.preview-container {
         position: absolute;
         top: 0px;
-        left: 0px;
+        .DockItem("left", 0);
         width: 320px;
         height: 150px;
 
         > h3 {
-          margin-left: 10px;
+          .MarginLeftOrRight("margin-left", 10px);
         }
 
         > div.preview {
@@ -301,9 +301,9 @@ div.component-dialog-container {
           overflow: hidden;
           position: absolute;
           top: 0px;
-          right: 0px;
+          .DockItem("right", 0);
           bottom: 0px;
-          left: 0px;
+          .DockItem("left", 0);
 
           > iframe {
             width: 320px;
@@ -316,16 +316,16 @@ div.component-dialog-container {
         box-sizing: border-box;
         height: 150px;
         position: absolute;
-        border-left: 1px solid #DDD;
+        .BorderLeftOrRight("border-left", 1px, #DDD, solid);
         top: 0px;
-        left: 320px;
-        right: 0px;
+        .DockItem("left", 320px);
+        .DockItem("right", 0);
 
         .CodeMirror {
           position: absolute;
           top: 36px;
-          right: 0px;
-          left: 0px;
+          .DockItem("right", 0);
+          .DockItem("left", 0);
           bottom: 0px;
           height: auto;
         }
@@ -335,16 +335,16 @@ div.component-dialog-container {
         border-top: 1px solid #ddd;
         position: absolute;
         top: 150px;
-        right: 0px;
-        left: 0px;
+        .DockItem("right", 0);
+        .DockItem("left", 0);
         bottom: 0px;
         box-sizing: border-box;
 
         .CodeMirror {
           position: absolute;
           top: 36px;
-          right: 0px;
-          left: 0px;
+          .DockItem("right", 0);
+          .DockItem("left", 0);
           bottom: 0px;
           height: auto;
         }
@@ -354,13 +354,13 @@ div.component-dialog-container {
         font-size: 18px;
         font-weight: 200;
         display: inline-block;
-        margin: 8px 0px 4px 16px;
+        .SwapMargin(8px, 0px, 4px, 16px);
       }
 
       .copy {
         font-size: 16px;
-        float: right;
-        margin: 8px 8px 0 0;
+        .FloatItem("right");
+        .SwapMargin(8px, 8px, 0, 0);
         color: #ff1a33;
         font-weight: 200;
         text-decoration: none;
@@ -377,8 +377,8 @@ div.component-dialog-container {
 div.color-picker-popup-mask {
   position: absolute;
   top: 0px;
-  left: 0px;
-  right: 0px;
+  .DockItem("left", 0);
+  .DockItem("right", 0);
   bottom: 0px;
   background-color: transparent;
   z-index: 99;
@@ -391,9 +391,9 @@ div.color-picker-popup {
   padding: 12px;
   position: absolute;
   top: 0px;
-  left: 300px;
+  .DockItem("left", 300px);
   z-index: 100;
-  text-align: right;
+  .TextAlignTo("right");
   opacity: 1;
   transform: translateY(0px);
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -402,18 +402,18 @@ div.color-picker-popup {
   background-color: white;
   background-clip: padding-box;
   border-radius: 6px;
-  margin: 10px 0 0 -200px;
+  .SwapMargin(10px, 0, 0, -200px);
 
   &.flipped {
-    margin: -225px 0 0 -200px;
+    .SwapMargin(-225px, 0, 0, -200px);
 
     &:after {
       bottom: -7px;
       top: auto;
-      right: 14px;
+      .DockItem("right", 14px);
       background-color: white;
       border-top: 1px solid rgba(0, 0, 0, 0.15);
-      border-left: 1px solid rgba(0, 0, 0, 0.15);
+      .BorderLeftOrRight("border-left", 1px, rgba(0, 0, 0, 0.15), solid);
       transform: rotate(-135deg);
     }
   }
@@ -424,16 +424,16 @@ div.color-picker-popup {
     height: 12px;
     position: absolute;
     top: -7px;
-    right: 14px;
+    .DockItem("right", 14px);
     background-color: white;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    .BorderLeftOrRight("border-left", 1px, rgba(0, 0, 0, 0.15), solid);
     transform: rotate(45deg);
   }
 
   > img.close {
     cursor: pointer;
-    float: left;
+    .FloatItem("left");
     &:active {
       opacity: 0.6;
     }
@@ -446,7 +446,7 @@ div.color-picker-popup {
     height: 26px;
     line-height: 26px;
     display: inline-block;
-    margin: 2px 0 5px 0;
+    .SwapMargin(2px, 0, 5px, 0);
     width: 160px;
 
     &:focus {
@@ -473,8 +473,8 @@ div.popup-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
-  left: 0px;
-  right: 0px;
+  .DockItem("left", 0);
+  .DockItem("right", 0);
   bottom: 0px;
   z-index: 90;
 
@@ -518,7 +518,7 @@ div.popup-container {
     > div.popup:after {
       transform: rotate(-45deg);
       bottom: -7px;
-      left: 20px;
+      .DockItem("left", 20px);
     }
   }
 
@@ -527,7 +527,7 @@ div.popup-container {
     > div.popup:after {
       transform: rotate(135deg);
       top: -7px;
-      left: 20px;
+      .DockItem("left", 20px);
     }
   }
 
@@ -536,7 +536,7 @@ div.popup-container {
     > div.popup:after {
       transform: rotate(-45deg);
       bottom: -7px;
-      right: 20px;
+      .DockItem("right", 20px);
     }
   }
 
@@ -545,14 +545,14 @@ div.popup-container {
     > div.popup:after {
       transform: rotate(135deg);
       top: -7px;
-      right: 20px;
+      .DockItem("right", 20px);
     }
   }
 
   &.newsletter-popup-container {
     transform: translateY(-8px) translateX(26px);
     z-index: 22;
-    right: 64px;
+    .DockItem("right", 64px);
     width: 600px;
     bottom: 50px;
 
@@ -571,13 +571,13 @@ div.popup-container {
       > div.message {
         margin-top: 10px;
         height: 120px;
-        padding-left: 230px;
+        .PaddingLeftOrRight("padding-left", 230px);
         background: url(../images/team.png) left bottom no-repeat;
-        margin-left: 0px;
+        .MarginLeftOrRight("margin-left ", 0);
       }
       > div.subscribe-form {
         background-color: #eee;
-        margin: 0 0 12px 0;
+        .SwapMargin(0, 0, 12px, 0);
         padding: 12px;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
@@ -595,7 +595,7 @@ div.popup-container {
       z-index: 22;
       transform: rotate(-45deg);
       bottom: -7px;
-      right: 20px;
+      .DockItem("right", 20px);
     }
 
   }
@@ -605,7 +605,7 @@ div.popup-container {
     box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
     height: 100%;
     box-sizing: border-box;
-    padding: 14px 12px 8px 12px;
+    .SwapPadding(14px, 12px, 8px, 12px);
     background-clip: padding-box;
     background-color: white;
     color: #666;
@@ -617,8 +617,8 @@ div.popup-container {
     &:after {
       background-clip: padding-box;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-      border-left: 1px solid rgba(0, 0, 0, 0.2);
-      border-radius: 0px 0px 0px 0px;
+      .BorderLeftOrRight("border-left", 1px, rgba(0, 0, 0, 0.2), solid);
+      .BorderRadius(0, 0, 0, 0);
       content: '';
       position: absolute;
       width: 12px;
@@ -641,9 +641,9 @@ div.popup-container {
     }
 
     > img.close {
-      float: right;
+      .FloatItem("right");
       cursor: pointer;
-      margin: -3px -3px 0 0;
+      .SwapMargin(-3px, -3px, 0, 0);
       &:focus {
         outline: 0;
         margin: 0;
@@ -679,11 +679,11 @@ div.popup-container {
         height: 38px;
         padding: 0 18px;
         font-size: 18px;
-        float: right;
+        .FloatItem("right");
       }
       min-height: 38px;
       .right-button {
-        float: right;
+        .FloatItem("right");
       }
     }
   }
@@ -699,12 +699,12 @@ div.popup-container {
 
   &.right-position {
     transform: translateX(3000px) translateY(-3000px);
-    right: 0px;
+    .DockItem("right", 0);
   }
 
   &.left-position {
     transform: translateX(-3000px) translateY(-3000px);
-    right: 0px;
+    .DockItem("right", 0);
   }
 
   &.uninitialized {

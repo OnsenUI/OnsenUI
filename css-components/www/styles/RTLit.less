@@ -1,0 +1,255 @@
+﻿
+html {
+    direction: @direction;
+}
+
+body{
+    direction: @direction;
+}
+
+.FloatItem(@value) when (@value = "left") and (@direction = @ltr){
+    float: left;
+}
+
+.FloatItem(@value) when (@value = "right") and (@direction = @ltr){
+    float: right;
+}
+
+.FloatItem(@value) when (@value = "left") and (@direction = @rtl){
+    float: right;
+}
+
+.FloatItem(@value) when (@value = "right") and (@direction = @rtl){
+    float: left;
+}
+
+.FloatItem(@value) when (@value = "none"){
+    float: none;
+}
+
+.TextAlignTo(@value) when (@value = "left") and (@direction = @ltr){
+    text-align: left;
+}
+
+.TextAlignTo(@value) when (@value = "right") and (@direction = @ltr){
+    text-align: right;
+}
+
+.TextAlignTo(@value) when (@value = "left") and (@direction = @rtl){
+    text-align: right;
+}
+
+.TextAlignTo(@value) when (@value = "right") and (@direction = @rtl){
+    text-align: left;
+}
+
+.DockItem(@location, @value) when (@location = "left") and (@direction = @ltr){
+    left: @value;
+}
+
+.DockItem(@location, @value) when (@location = "right") and (@direction = @ltr){
+    right: @value;
+}
+
+.DockItem(@location, @value) when (@location = "left") and (@direction = @rtl){
+    right: @value;
+}
+
+.DockItem(@location, @value) when (@location = "right") and (@direction = @rtl){
+    left: @value;
+}
+
+.SwapMargin(@topMargin, @rightMargin, @bottomMargin, @leftMargin) when (@direction = @ltr){
+    margin: @topMargin @rightMargin @bottomMargin @leftMargin;
+}
+
+.SwapMargin(@topMargin, @rightMargin, @bottomMargin, @leftMargin) when (@direction = @rtl){
+    margin: @topMargin @leftMargin @bottomMargin @rightMargin;
+}
+
+.MarginLeftOrRight(@command, @value) when (@command = "margin-left") and (@direction = @ltr){
+    margin-left: @value;
+}
+
+.MarginLeftOrRight(@command, @value) when (@command = "margin-right") and (@direction = @ltr){
+    margin-right: @value;
+}
+
+.MarginLeftOrRight(@command, @value) when (@command = "margin-left") and (@direction = @rtl){
+    margin-right: @value;
+}
+
+.MarginLeftOrRight(@command, @value) when (@command = "margin-right") and (@direction = @rtl){
+    margin-left: @value;
+}
+
+.SwapPadding(@topPadding, @rightPadding, @bottomPadding, @leftPadding) when (@direction = @ltr){
+    padding: @topPadding @rightPadding @bottomPadding @leftPadding;
+}
+
+.SwapPadding(@topPadding, @rightPadding, @bottomPadding, @leftPadding) when (@direction = @rtl){
+    padding: @topPadding @leftPadding @bottomPadding @rightPadding;
+}
+
+.PaddingLeftOrRight(@command, @value) when (@command = "padding-left") and (@direction = @ltr){
+    padding-left: @value;
+}
+
+.PaddingLeftOrRight(@command, @value) when (@command = "padding-right") and (@direction = @ltr){
+    padding-right: @value;
+}
+
+.PaddingLeftOrRight(@command, @value) when (@command = "padding-left") and (@direction = @rtl){
+    padding-right: @value;
+}
+
+.PaddingLeftOrRight(@command, @value) when (@command = "padding-right") and (@direction = @rtl){
+    padding-left: @value;
+}
+
+.BorderLeftOrRight(@command, @borderSize, @borderColor, @bordertype) when (@command = "border-left") and (@direction = @ltr){
+    border-left: @borderSize @borderColor @bordertype;
+}
+
+.BorderLeftOrRight(@command, @borderSize, @borderColor, @bordertype) when (@command = "border-right") and (@direction = @ltr){
+    border-right: @borderSize @borderColor @bordertype;
+}
+
+.BorderLeftOrRight(@command, @borderSize, @borderColor, @bordertype) when (@command = "border-left") and (@direction = @rtl){
+    border-right: @borderSize @borderColor @bordertype;
+}
+
+.BorderLeftOrRight(@command, @borderSize, @borderColor, @bordertype) when (@command = "border-right") and (@direction = @rtl){
+    border-left: @borderSize @borderColor @bordertype;
+}
+
+.BorderLeftOrRightColor(@command, @value) when (@command = "border-left-color") and (@direction = @ltr) {
+    border-left-color: @value;
+}
+
+.BorderLeftOrRightColor(@command, @value) when (@command = "border-left-color") and (@direction = @rtl) {
+    border-right-color: @value;
+}
+
+.BorderLeftOrRightColor(@command, @value) when (@command = "border-right-color") and (@direction = @ltr) {
+    border-right-color: @value;
+}
+
+.BorderLeftOrRightColor(@command, @value) when (@command = "border-right-color") and (@direction = @rtl) {
+    border-left-color: @value;
+}
+
+.BorderLeftOrRightWidth(@command, @value) when (@command = "border-left-width") and (@direction = @ltr) {
+    border-left-width: @value;
+}
+
+.BorderLeftOrRightWidth(@command, @value) when (@command = "border-left-width") and (@direction = @rtl) {
+    border-right-width: @value;
+}
+
+.BorderLeftOrRightWidth(@command, @value) when (@command = "border-right-width") and (@direction = @ltr) {
+    border-right-width: @value;
+}
+
+.BorderLeftOrRightWidth(@command, @value) when (@command = "border-right-width") and (@direction = @rtl) {
+    border-left-width: @value;
+}
+
+.BorderTopLeftOrRightRadius(@command, @value) when (@command = "border-top-left-radius") and (@direction = @ltr) {
+    border-top-left-radius: @value;
+}
+
+.BorderTopLeftOrRightRadius(@command, @value) when (@command = "border-top-left-radius") and (@direction = @rtl) {
+    border-top-right-radius: @value;
+}
+
+.BorderTopLeftOrRightRadius(@command, @value) when (@command = "border-top-right-radius") and (@direction = @ltr) {
+    border-top-right-radius: @value;
+}
+
+.BorderTopLeftOrRightRadius(@command, @value) when (@command = "border-top-right-radius") and (@direction = @rtl) {
+    border-top-left-radius: @value;
+}
+
+.BorderBottomLeftOrRightRadius(@command, @value) when (@command = "border-bottom-left-radius") and (@direction = @ltr) {
+    border-bottom-left-radius: @value;
+}
+
+.BorderBottomLeftOrRightRadius(@command, @value) when (@command = "border-bottom-left-radius") and (@direction = @rtl) {
+    border-bottom-right-radius: @value;
+}
+
+.BorderBottomLeftOrRightRadius(@command, @value) when (@command = "border-bottom-right-radius") and (@direction = @ltr) {
+    border-bottom-right-radius: @value;
+}
+
+.BorderBottomLeftOrRightRadius(@command, @value) when (@command = "border-bottom-right-radius") and (@direction = @rtl) {
+    border-bottom-left-radius: @value;
+}
+
+.Border-width(@top, @right, @bottom, @left) when (@direction = @ltr) {
+    border-width: @top @right @bottom @left; 
+}
+
+.Border-width(@top, @right, @bottom, @left) when (@direction = @rtl) {
+    border-width: @top @left @bottom @right; 
+}
+
+.BorderLeft(@value) when (@direction = @ltr) {
+    border-left: @value;
+}
+
+.BorderLeft(@value) when (@direction = @rtl) {
+    border-right: @value;
+}
+
+.BorderRight(@value) when (@direction = @ltr) {
+    border-right: @value;
+}
+
+.BorderRight(@value) when (@direction = @rtl) {
+    border-left: @value;
+}
+
+.BorderLeftWidth(@value) when (@direction = @ltr) {
+    border-left-width: @value;
+}
+
+.BorderLeftWidth(@value) when (@direction = @rtl) {
+    border-right-width: @value;
+}
+
+.BorderRightWidth(@value) when (@direction = @ltr) {
+    border-right-width: @value;
+}
+
+.BorderRightWidth(@value) when (@direction = @rtl) {
+    border-left-width: @value;
+}
+
+.BorderLeftColor(@value) when (@direction = @ltr) {
+    border-left-color: @value;
+}
+
+.BorderLeftColor(@value) when (@direction = @rtl) {
+    border-right-color: @value;
+}
+
+.BorderRightColor(@value) when (@direction = @ltr) {
+    border-right-color: @value;
+}
+
+.BorderRightColor(@value) when (@direction = @rtl) {
+    border-left-color: @value;
+}
+.BorderRadius(@topRadius, @rightRadius, @bottomRadius, @leftRadius) when (@direction = @ltr){
+    -webkit-border-radius: @topRadius @rightRadius @bottomRadius @leftRadius;
+    -moz-border-radius: @topRadius @rightRadius @bottomRadius @leftRadius;
+    border-radius: @topRadius @rightRadius @bottomRadius @leftRadius;
+}
+
+.BorderRadius(@topRadius, @rightRadius, @bottomRadius, @leftRadius) when (@direction = @rtl){
+    -webkit-border-radius: @topRadius @leftRadius @bottomRadius @rightRadius;
+    -moz-border-radius: @topRadius @leftRadius @bottomRadius @rightRadius;
+    border-radius: @topRadius @leftRadius @bottomRadius @rightRadius;
+}
