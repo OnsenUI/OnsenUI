@@ -26,7 +26,11 @@ describe('OnsNavigatorElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsNavigatorElement).to.be.ok;
+    expect(window.ons.NavigatorElement).to.be.ok;
+  });
+
+  it('provides \'animators\' object', () => {
+    expect(window.ons.NavigatorElement.animators).to.be.an('object');
   });
 
   it('provides \'page\' attribute', () => {
@@ -596,15 +600,52 @@ describe('OnsNavigatorElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a NavigatorAnimator', () => {
-      expect(() => window.OnsNavigatorElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.NavigatorElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsNavigatorElement.NavigatorTransitionAnimator {
+      class MyAnimator extends window.ons.NavigatorElement.NavigatorTransitionAnimator {
       }
 
-      window.OnsNavigatorElement.registerAnimator('hoge', MyAnimator);
+      window.ons.NavigatorElement.registerAnimator('hoge', MyAnimator);
     });
+  });
+
+  describe('Extended Animator', () => {
+    it('can be registered', () => {
+      const MyAnimator = window.ons.NavigatorElement.animators['fade-ios'].extend();
+
+      window.ons.NavigatorElement.registerAnimator('fuga', MyAnimator);
+    });
+
+    it('overwrites specified properties', () => {
+      const deferred = {};
+      deferred.promise = new Promise((resolve) => {
+        deferred.resolve = resolve
+      });
+
+      const CustomAnimatorClass = window.ons.NavigatorElement.animators['fade-ios'].extend({
+        duration: 0,
+        push: function(enterPage, leavePage, callback) {
+          deferred.resolve();
+          callback();
+        }
+      });
+
+      const customAnimatorInstance = new CustomAnimatorClass();
+      const Animator = window.ons.NavigatorElement.animators['fade-ios'];
+      const originalAnimatorInstance = new Animator();
+
+      expect(customAnimatorInstance.pop).to.equal(originalAnimatorInstance.pop);
+      expect(customAnimatorInstance.push).to.not.equal(originalAnimatorInstance.push);
+      expect(customAnimatorInstance.duration).to.not.equal(originalAnimatorInstance.duration);
+
+      window.ons.NavigatorElement.registerAnimator('customAnimator', CustomAnimatorClass);
+      return nav.pushPage('fuga', {animation: 'customAnimator'})
+        .then(() => {
+          return expect(deferred.promise).to.eventually.be.fulfilled;
+        });
+    })
   });
 
   describe('#_compile()', () => {

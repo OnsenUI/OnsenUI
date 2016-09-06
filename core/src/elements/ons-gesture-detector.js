@@ -32,12 +32,10 @@ import GestureDetector from 'ons/gesture-detector';
  *   ...
  * </ons-gesture-detector>
  */
-class GestureDetectorElement extends BaseElement {
-  createdCallback() {
+export default class GestureDetectorElement extends BaseElement {
+  init() {
     this._gestureDetector = new GestureDetector(this);
   }
 }
 
-window.OnsGestureDetectorElement = document.registerElement('ons-gesture-detector', {
-  prototype: GestureDetectorElement.prototype
-});
+customElements.define('ons-gesture-detector', GestureDetectorElement);

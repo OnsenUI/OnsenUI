@@ -14,7 +14,7 @@ describe('OnsTabElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsTabElement).to.be.ok;
+    expect(window.ons.TabElement).to.be.ok;
   });
 
   it('has a default template', () => {

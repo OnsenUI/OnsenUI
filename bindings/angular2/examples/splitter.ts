@@ -1,18 +1,18 @@
 import {
-  bootstrap,
-  ONS_DIRECTIVES,
-  Component
+  Component,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'ons-page',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-toolbar>
       <div class="center">Content Page</div> 
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="content">
       contents
     </div>
   `
@@ -22,13 +22,12 @@ class ContentPageComponent {
 
 @Component({
   selector: 'ons-page',
-  directives: [ONS_DIRECTIVES],
   template: `
     <ons-toolbar>
       <div class="center">Left Page</div> 
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       Left
     </div>
   `
@@ -38,7 +37,6 @@ class SidePageComponent {
 
 @Component({
   selector: 'app',
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-splitter>
     <ons-splitter-side [page]="sidePage" side="left" width="200px" style="border-right: 1px solid #ccc">
@@ -57,4 +55,12 @@ export class AppComponent {
   contentPage = ContentPageComponent;
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

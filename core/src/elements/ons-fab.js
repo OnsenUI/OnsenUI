@@ -36,7 +36,7 @@ const scheme = {
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]
  */
-class FabElement extends BaseElement {
+export default class FabElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -68,7 +68,7 @@ class FabElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
     });
@@ -98,6 +98,10 @@ class FabElement extends BaseElement {
     this._updatePosition();
 
     this.show();
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'ripple', 'position'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -227,6 +231,4 @@ class FabElement extends BaseElement {
   }
 }
 
-window.OnsFabElement = document.registerElement('ons-fab', {
-  prototype: FabElement.prototype
-});
+customElements.define('ons-fab', FabElement);

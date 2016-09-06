@@ -12,7 +12,6 @@
       restrict: 'E',
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         if (attrs.icon.indexOf('{{') !== -1) {
           attrs.$observe('icon', () => {

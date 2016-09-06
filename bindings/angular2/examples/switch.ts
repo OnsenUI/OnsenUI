@@ -1,15 +1,23 @@
-import {bootstrap, Component, OnsSwitch} from '../src/angular2-onsenui';
+import {
+  Component,
+  OnsSwitch,
+  OnsenModule,
+  Directive,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
+} from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app',
-  directives: [OnsSwitch],
   template: `
   <ons-page>
     <ons-toolbar>
       <div class="center">Switch Example</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <div style="text-align: center; margin: 10px;">
         <label><input type="checkbox" [(ngModel)]="target"> {{target ? 'On' : 'Off'}}</label>
         <br>
@@ -27,4 +35,12 @@ export class AppComponent {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule, FormsModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

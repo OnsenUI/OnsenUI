@@ -23,6 +23,11 @@ import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
+const _animatorDict = {
+  default: SplitterAnimator,
+  overlay: SplitterAnimator
+};
+
 /**
  * @element ons-splitter
  * @category splitter
@@ -60,13 +65,12 @@ import contentReady from 'ons/content-ready';
  *   splitter.left.open();
  * </script>
  */
-class SplitterElement extends BaseElement {
+export default class SplitterElement extends BaseElement {
 
   _getSide(side) {
     const element = util.findChild(this, e => {
       return util.match(e, 'ons-splitter-side') && e.getAttribute('side') === side;
     });
-    element && CustomElements.upgrade(element);
     return element;
   }
 
@@ -149,7 +153,7 @@ class SplitterElement extends BaseElement {
     });
   }
 
-  createdCallback() {
+  init() {
     this._boundOnModeChange = this._onModeChange.bind(this);
 
     contentReady(this, () => {
@@ -164,12 +168,12 @@ class SplitterElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
     this.addEventListener('modechange', this._boundOnModeChange, false);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
     this.removeEventListener('modechange', this._boundOnModeChange, false);
@@ -189,24 +193,21 @@ class SplitterElement extends BaseElement {
     util.propagateAction(this, '_destroy');
     this.remove();
   }
+
+  static registerAnimator(name, Animator) {
+    if (!(Animator instanceof SplitterAnimator)) {
+      throw new Error('Animator parameter must be an instance of SplitterAnimator.');
+    }
+    _animatorDict[name] = Animator;
+  }
+
+  static get SplitterAnimator() {
+    return SplitterAnimator;
+  }
+
+  static get animators() {
+    return _animatorDict;
+  }
 }
 
-window.OnsSplitterElement = document.registerElement('ons-splitter', {
-  prototype: SplitterElement.prototype
-});
-
-window.OnsSplitterElement._animatorDict = {
-  default: SplitterAnimator,
-  overlay: SplitterAnimator
-};
-
-window.OnsSplitterElement.registerAnimator = function(name, Animator) {
-  if (!(Animator instanceof SplitterAnimator)) {
-    throw new Error('Animator parameter must be an instance of SplitterAnimator.');
-  }
-  window.OnsSplitterElement._animatorDict[name] = Animator;
-};
-
-window.OnsSplitterElement.SplitterAnimator = SplitterAnimator;
-
-export default OnsSplitterElement;
+customElements.define('ons-splitter', SplitterElement);

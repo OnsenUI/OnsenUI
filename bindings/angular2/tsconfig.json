@@ -15,6 +15,7 @@
     "typings/main.d.ts",
     "typings/main",
     "node_modules",
+    "umd-template",
     "dist",
     "examples"
   ],

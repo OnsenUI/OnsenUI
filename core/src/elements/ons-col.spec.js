@@ -2,7 +2,7 @@
 
 describe('OnsColElement', () => {
   it('should exist', () => {
-    expect(window.OnsColElement).to.be.ok;
+    expect(window.ons.ColElement).to.be.ok;
   });
 
   describe('#createdCallback()', () => {
@@ -27,7 +27,7 @@ describe('OnsColElement', () => {
 
   describe('#attributeChangedCallback()', () => {
     it('provides \'width\' attribute', () => {
-      var element = new OnsColElement();
+      var element = new ons.ColElement();
       element.setAttribute('width', '100px');
 
       expect(element.style.webkitBoxFlex).to.equal('0');

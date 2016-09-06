@@ -3,7 +3,7 @@
 describe('OnsRippleElement', () => {
   let container, ripple, wave, background;
 
-  const spyOn = chai.spy.on.bind(chai.spy, OnsRippleElement.prototype);
+  const spyOn = chai.spy.on.bind(chai.spy, ons.RippleElement.prototype);
 
   beforeEach(() => {
     container = ons._util.createElement(`
@@ -26,13 +26,13 @@ describe('OnsRippleElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsRippleElement).to.be.ok;
+    expect(window.ons.RippleElement).to.be.ok;
   });
 
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
       const spy = spyOn('_compile'),
-        _ = new OnsRippleElement();
+        _ = new ons.RippleElement();
 
       expect(spy).to.have.been.called.once;
     });
@@ -51,11 +51,11 @@ describe('OnsRippleElement', () => {
     });
 
     it('creates a "wave" element', () => {
-      expect((new OnsRippleElement())._wave).to.be.an.instanceof(HTMLElement);
+      expect((new ons.RippleElement())._wave).to.be.an.instanceof(HTMLElement);
     });
 
     it('creates a "background" element', () => {
-      expect((new OnsRippleElement())._background).to.be.an.instanceof(HTMLElement);
+      expect((new ons.RippleElement())._background).to.be.an.instanceof(HTMLElement);
     });
   });
 
@@ -64,7 +64,7 @@ describe('OnsRippleElement', () => {
 
     it('is called when an element is created', () => {
       const spy = spyOn('attributeChangedCallback'),
-        _ = new OnsRippleElement();
+        _ = new ons.RippleElement();
 
       expect(spy).to.have.been.called.exactly(attributes.length);
     });
@@ -142,7 +142,7 @@ describe('OnsRippleElement', () => {
       whenUsing: (whenUsing, ...rest) => {
         it(`calls ${calling}`, () => {
           const spy = spyOn(calling),
-            ripple = new OnsRippleElement();
+            ripple = new ons.RippleElement();
 
 
           ripple[whenUsing].apply(ripple, rest);

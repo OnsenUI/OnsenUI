@@ -1,57 +1,66 @@
-import * as browser from '@angular/platform-browser-dynamic'
-import {Type, ComponentRef} from '@angular/core';
-
 export * from '@angular/core';
 export * from '@angular/compiler';
 export * from './directives/ons-navigator';
 export * from './directives/ons-carousel';
 export * from './directives/ons-tabbar';
-export * from './directives/ons-alert-dialog';
-export * from './directives/ons-popover';
 export * from './directives/ons-switch';
 export * from './directives/ons-range';
 export * from './directives/ons-input';
 export * from './directives/ons-pull-hook';
 export * from './directives/ons-lazy-repeat';
 export * from './directives/ons-splitter';
-export * from './directives/ons-page';
-
 
 export * from './ons/notification';
 export * from './ons/platform';
-export * from './ons/createAlertDialog';
-export * from './ons/createPopover';
+export * from './ons/alert-dialog-factory';
+export * from './ons/popover-factory';
+export * from './ons/dialog-factory';
+export * from './ons/modal-factory';
+export * from './ons/params';
 
-export function bootstrap(type: Type, providers: Array<any> = []): Promise<ComponentRef<any>> {
-  return browser.bootstrap(type, providers);
-};
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
 
 import {OnsNavigator} from './directives/ons-navigator';
 import {OnsCarousel} from './directives/ons-carousel';
 import {OnsTabbar, OnsTab} from './directives/ons-tabbar';
-import {OnsAlertDialog} from './directives/ons-alert-dialog';
-import {OnsPopover} from './directives/ons-popover';
 import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
 import {OnsPullHook} from './directives/ons-pull-hook';
 import {OnsLazyRepeat} from './directives/ons-lazy-repeat';
-import {OnsPage} from './directives/ons-page';
 import {OnsSplitterSide, OnsSplitterContent} from './directives/ons-splitter';
 
-export const ONS_DIRECTIVES = [
+import {AlertDialogFactory} from './ons/alert-dialog-factory';
+import {PopoverFactory} from './ons/popover-factory';
+import {DialogFactory} from './ons/dialog-factory';
+import {ModalFactory} from './ons/modal-factory';
+
+const directives = [
   OnsNavigator,
   OnsCarousel,
   OnsTabbar,
   OnsTab,
-  OnsAlertDialog,
-  OnsPopover,
   OnsSwitch,
   OnsRange,
   OnsInput,
   OnsPullHook,
   OnsLazyRepeat,
   OnsSplitterSide,
-  OnsSplitterContent,
-  OnsPage
+  OnsSplitterContent
 ];
+
+@NgModule({
+  imports: [BrowserModule, CommonModule],
+  declarations: [directives],
+  exports: [directives],
+  providers: [
+    AlertDialogFactory,
+    PopoverFactory,
+    DialogFactory,
+    ModalFactory
+  ]
+})
+export class OnsenModule { }
+

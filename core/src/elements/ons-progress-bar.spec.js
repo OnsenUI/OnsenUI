@@ -8,7 +8,7 @@ describe('OnsProgressBarElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsProgressBarElement).to.be.ok;
+    expect(window.ons.ProgressBarElement).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
@@ -62,7 +62,7 @@ describe('OnsProgressBarElement', () => {
 
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
-      const spy = chai.spy.on(OnsProgressBarElement.prototype, '_compile');
+      const spy = chai.spy.on(window.ons.ProgressBarElement.prototype, '_compile');
       ons._util.createElement('<ons-progress-bar></ons-progress-bar>');
 
       expect(spy).to.have.been.called.once;

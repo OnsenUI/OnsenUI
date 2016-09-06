@@ -13,11 +13,11 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsSplitterContentElement.rewritables.ready;
-  window.OnsSplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
+  var lastReady = window.ons.SplitterContentElement.rewritables.ready;
+  window.ons.SplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
-  var lastLink = window.OnsSplitterContentElement.rewritables.link;
-  window.OnsSplitterContentElement.rewritables.link = function(element, target, options, callback) {
+  var lastLink = window.ons.SplitterContentElement.rewritables.link;
+  window.ons.SplitterContentElement.rewritables.link = function(element, target, options, callback) {
     var view = angular.element(element).data('ons-splitter-content');
     lastLink(element, target, options, function(target) {
       view._link(target, callback);
@@ -29,10 +29,8 @@
       restrict: 'E',
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
 
           var view = new SplitterContent(scope, element, attrs);
 

@@ -2,12 +2,12 @@
 
 describe('OnsIconElement', () => {
   it('should exist', () => {
-    expect(window.OnsIconElement).to.be.ok;
+    expect(window.ons.IconElement).to.be.ok;
   });
 
   describe('icon attribute', () => {
     it('provides \'icon\' attribute', () => {
-      var element = new OnsIconElement();
+      var element = new ons.IconElement();
       element.setAttribute('icon', 'ion-navicon');
       expect(element.classList.contains('ion-navicon')).to.be.true;
 
@@ -29,13 +29,13 @@ describe('OnsIconElement', () => {
     });
 
     it('supports a second icon depending on modifiers', () => {
-      var element = new OnsIconElement();
+      var element = new ons.IconElement();
       element.setAttribute('icon', 'ion-navicon, material:md-face');
       expect(element.classList.contains('ion-navicon')).to.be.true;
       expect(element.classList.contains('zmdi-face')).not.to.be.true;
 
       ons.platform.select('android');
-      element = new OnsIconElement();
+      element = new ons.IconElement();
       element.setAttribute('icon', 'ion-navicon, material:md-face');
       expect(element.classList.contains('ion-navicon')).not.to.be.true;
       expect(element.classList.contains('zmdi-face')).to.be.true;
@@ -45,7 +45,7 @@ describe('OnsIconElement', () => {
 
   describe('size attribute', () => {
     it('provides \'size\' attribute', () => {
-      var element = new OnsIconElement();
+      var element = new ons.IconElement();
       element.setAttribute('size', '10px');
       expect(element.style.fontSize).to.equal('10px');
 
@@ -68,12 +68,12 @@ describe('OnsIconElement', () => {
     });
 
     it('supports a second size depending on modifiers', () => {
-      var element = new OnsIconElement();
+      var element = new ons.IconElement();
       element.setAttribute('size', '20px, material:30px');
       expect(element.style.fontSize).to.equal('20px');
 
       ons.platform.select('android');
-      element = new OnsIconElement();
+      element = new ons.IconElement();
       element.setAttribute('size', '20px, material:30px');
       expect(element.style.fontSize).to.equal('30px');
       ons.platform.select('');

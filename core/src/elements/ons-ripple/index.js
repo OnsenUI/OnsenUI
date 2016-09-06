@@ -39,7 +39,7 @@ import Animator from './animator-css';
  *
  * <ons-button ripple>Click me!</ons-button>
  */
-class RippleElement extends BaseElement {
+export default class RippleElement extends BaseElement {
 
   /**
    * @attribute color
@@ -64,7 +64,7 @@ class RippleElement extends BaseElement {
    *   [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]
    */
 
-  createdCallback() {
+  init() {
     this.classList.add('ripple');
     if (!this.hasAttribute('_compiled')) {
       this._compile();
@@ -181,7 +181,7 @@ class RippleElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this._parentNode = this.parentNode;
     this._boundOnTap = this._onTap.bind(this);
     this._boundOnHold = this._onHold.bind(this);
@@ -197,10 +197,14 @@ class RippleElement extends BaseElement {
     }
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._parentNode.removeEventListener('tap', this._boundOnTap);
     this._parentNode.removeEventListener('hold', this._boundOnHold);
     this._parentNode.removeEventListener('dragstart', this._boundOnDragStart);
+  }
+
+  static get observedAttributes() {
+    return ['start-radius', 'color', 'background', 'center'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -245,6 +249,4 @@ class RippleElement extends BaseElement {
   }
 }
 
-window.OnsRippleElement = document.registerElement('ons-ripple', {
-  prototype: RippleElement.prototype
-});
+customElements.define('ons-ripple', RippleElement);

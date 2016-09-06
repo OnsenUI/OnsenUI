@@ -152,11 +152,11 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsNavigatorElement.rewritables.ready;
-  window.OnsNavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
+  var lastReady = window.ons.NavigatorElement.rewritables.ready;
+  window.ons.NavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
 
-  var lastLink = window.OnsNavigatorElement.rewritables.link;
-  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
+  var lastLink = window.ons.NavigatorElement.rewritables.link;
+  window.ons.NavigatorElement.rewritables.link = function(navigatorElement, target, options, callback) {
     var view = angular.element(navigatorElement).data('ons-navigator');
     view._compileAndLink(target, function(target) {
       lastLink(navigatorElement, target, options, callback);
@@ -173,11 +173,9 @@
       scope: true,
 
       compile: function(element) {
-        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs, controller) {
-            CustomElements.upgrade(element[0]);
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);

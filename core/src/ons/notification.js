@@ -71,8 +71,6 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-footer"></div>
   </ons-alert-dialog>`);
 
-  CustomElements.upgrade(dialogElement);
-
   if (id) {
     dialogElement.setAttribute('id', id);
   }
@@ -182,7 +180,7 @@ notification._createAlertDialog = function(title, message,
 
   if (cancelable) {
     dialogElement.cancelable = true;
-    dialogElement.addEventListener('cancel', function() {
+    dialogElement.addEventListener('dialog-cancel', function() {
       if (promptDialog) {
         callback(null);
         result.reject(null);
@@ -198,12 +196,14 @@ notification._createAlertDialog = function(title, message,
     }, false);
   }
 
-  dialogElement.show({
-    callback: function() {
-      if (inputElement && promptDialog && autofocus) {
-        inputElement.focus();
+  setImmediate(() => {
+    dialogElement.show({
+      callback: function() {
+        if (inputElement && promptDialog && autofocus) {
+          inputElement.focus();
+        }
       }
-    }
+    });
   });
 
   messageElement = footerElement = null;

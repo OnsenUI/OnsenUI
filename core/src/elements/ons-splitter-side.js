@@ -26,7 +26,7 @@ import GestureDetector from 'ons/gesture-detector';
 import DoorLock from 'ons/doorlock';
 import contentReady from 'ons/content-ready';
 import { PageLoader, defaultPageLoader} from 'ons/page-loader';
-import OnsSplitterElement from './ons-splitter';
+import SplitterElement from './ons-splitter';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -271,7 +271,7 @@ class CollapseMode {
  *   </ons-splitter-side>
  * </ons-splitter>
  */
-class SplitterSideElement extends BaseElement {
+export default class SplitterSideElement extends BaseElement {
 
   /**
    * @event modechange
@@ -441,14 +441,14 @@ class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
-  createdCallback() {
+  init() {
     this._page = null;
     this._pageLoader = defaultPageLoader;
     this._collapseMode = new CollapseMode(this);
     this._collapseDetection = new CollapseDetection(this);
 
     this._animatorFactory = new AnimatorFactory({
-      animators: OnsSplitterElement._animatorDict,
+      animators: SplitterElement.animators,
       baseClass: SplitterAnimator,
       baseClassName: 'SplitterAnimator',
       defaultAnimation: this.getAttribute('animation')
@@ -467,7 +467,7 @@ class SplitterSideElement extends BaseElement {
     });
   }
 
-  attachedCallback() {
+  connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
       throw new Error('Parent must be an ons-splitter element.');
     }
@@ -487,16 +487,18 @@ class SplitterSideElement extends BaseElement {
     return this._page || this.getAttribute('page');
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._collapseDetection.disable();
     this._gestureDetector.dispose();
     this._gestureDetector = null;
   }
 
+  static get observedAttributes() {
+    return this._watchedAttributes;
+  }
+
   attributeChangedCallback(name, last, current) {
-    if (this._watchedAttributes.indexOf(name) !== -1) {
-      this._update(name, current);
-    }
+    this._update(name, current);
   }
 
   _update(name, value) {
@@ -741,10 +743,10 @@ class SplitterSideElement extends BaseElement {
     util.propagateAction(this, '_destroy');
     this.remove();
   }
+
+  static get rewritables() {
+    return rewritables;
+  }
 }
 
-window.OnsSplitterSideElement = document.registerElement('ons-splitter-side', {
-  prototype: SplitterSideElement.prototype
-});
-
-window.OnsSplitterSideElement.rewritables = rewritables;
+customElements.define('ons-splitter-side', SplitterSideElement);

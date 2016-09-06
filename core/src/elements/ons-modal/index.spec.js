@@ -19,7 +19,7 @@ describe('OnsModalElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsModalElement).to.be.ok;
+    expect(window.ons.ModalElement).to.be.ok;
   });
 
   it('is not displayed by default', () => {
@@ -136,14 +136,14 @@ describe('OnsModalElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a ModalAnimator', () => {
-      expect(() => window.OnsModalElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.ModalElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsModalElement.ModalAnimator {
+      class MyAnimator extends window.ons.ModalElement.ModalAnimator {
       }
 
-      window.OnsModalElement.registerAnimator('hoge', MyAnimator);
+      window.ons.ModalElement.registerAnimator('hoge', MyAnimator);
     });
   });
 });

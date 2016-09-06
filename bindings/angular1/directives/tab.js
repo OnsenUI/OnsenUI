@@ -9,7 +9,6 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        CustomElements.upgrade(element[0]);
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

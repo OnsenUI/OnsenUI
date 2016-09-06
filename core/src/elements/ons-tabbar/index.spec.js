@@ -6,7 +6,7 @@ describe('OnsTabbarElement', () => {
   beforeEach(done => {
     template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
     template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>');
-    element = new OnsTabbarElement();
+    element = new ons.TabbarElement();
     document.body.appendChild(template);
     document.body.appendChild(template2);
     ons._contentReady(element, done);
@@ -20,7 +20,7 @@ describe('OnsTabbarElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.OnsTabbarElement).to.be.ok;
+    expect(window.ons.TabbarElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -149,13 +149,13 @@ describe('OnsTabbarElement', () => {
 
   describe('#_getCurrentPageElement()', () => {
     it('accepts only \'ons-page\' as current page element', () => {
-      const page = new OnsPageElement();
+      const page = new ons.PageElement();
       element._contentElement.appendChild(page);
       expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
       expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
       element._contentElement.removeChild(element._contentElement.querySelector('ons-page'));
-      const button = new OnsButtonElement();
+      const button = new ons.ButtonElement();
       element._contentElement.appendChild(button);
       expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
     });
@@ -442,14 +442,14 @@ describe('OnsTabbarElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a TabbarAnimator', () => {
-      expect(() => window.OnsTabbarElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.TabbarElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.OnsTabbarElement.TabbarAnimator {
+      class MyAnimator extends window.ons.TabbarElement.TabbarAnimator {
       }
 
-      window.OnsTabbarElement.registerAnimator('hoge', MyAnimator);
+      window.ons.TabbarElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

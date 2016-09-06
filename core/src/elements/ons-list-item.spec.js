@@ -10,7 +10,7 @@ describe('OnsListItemElement', () => {
   });
 
   it('exists', () => {
-    expect(window.OnsListItemElement).to.be.ok;
+    expect(window.ons.ListItemElement).to.be.ok;
   });
 
   it('classList contains \'list__item\' by default', () => {

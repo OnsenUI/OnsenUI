@@ -1,12 +1,14 @@
 import {
-  bootstrap,
   Component,
-  ONS_DIRECTIVES
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
 
 @Component({
   selector: 'app',
-  directives: [ONS_DIRECTIVES],
   template: `
   <ons-page>
     <ons-toolbar>
@@ -56,4 +58,12 @@ export class AppComponent {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule, BrowserModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

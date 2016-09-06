@@ -45,7 +45,7 @@ const scheme = {
  *   <ons-speed-dial-item>C</ons-speed-dial-item>
  * </ons-speed-dial>
  */
-class SpeedDialItemElement extends BaseElement {
+export default class SpeedDialItemElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -55,10 +55,13 @@ class SpeedDialItemElement extends BaseElement {
    *   [ja]このコンポーネントの表現を指定します。[/ja]
    */
 
-  createdCallback() {
+  init() {
     this._compile();
-
     this._boundOnClick = this._onClick.bind(this);
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'ripple'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -71,11 +74,11 @@ class SpeedDialItemElement extends BaseElement {
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
   }
 
@@ -100,6 +103,4 @@ class SpeedDialItemElement extends BaseElement {
   }
 }
 
-window.OnsSpeedDialItemElement = document.registerElement('ons-speed-dial-item', {
-  prototype: SpeedDialItemElement.prototype
-});
+customElements.define('ons-speed-dial-item', SpeedDialItemElement);

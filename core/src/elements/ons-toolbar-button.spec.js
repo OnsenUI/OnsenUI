@@ -2,11 +2,11 @@
 
 describe('ons-toolbar-button', () => {
   it('provides \'OnsToolbarButton\' global variable', () => {
-    expect(window.OnsToolbarButton).to.be.ok;
+    expect(window.ons.ToolbarButtonElement).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
-    var element = new OnsToolbarButton();
+    var element = new ons.ToolbarButtonElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('toolbar-button--hoge')).to.be.true;
 
@@ -33,7 +33,7 @@ describe('ons-toolbar-button', () => {
 
   describe('#disabled', () => {
     it('changes the "disabled" attribute', () => {
-      var element = new OnsToolbarButton();
+      var element = new ons.ToolbarButtonElement();
 
       expect(element.hasAttribute('disabled')).to.be.false;
       element.disabled = true;

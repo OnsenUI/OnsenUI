@@ -4,6 +4,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import childProcess from 'child_process';
 import open from 'open';
 import yargs from 'yargs';
+import StaticServer from 'static-server';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
@@ -15,6 +16,16 @@ gulp.task('serve', done => {
   createDevServer().listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/bindings/angular2/examples/button.html');
     done();
+  });
+});
+
+gulp.task('serve-umd-template', () => {
+  const server = new StaticServer({
+    rootPath: '.',
+    port: 8967
+  });
+  server.start(() => {
+    open(`http://0.0.0.0:${server.port}/umd-template/index.html`);
   });
 });
   

@@ -69,7 +69,7 @@ const locations = {
  * <ons-switch modifier="material"></ons-switch>
  */
 
-class SwitchElement extends BaseElement {
+export default class SwitchElement extends BaseElement {
 
   /**
    * @event change
@@ -168,7 +168,7 @@ class SwitchElement extends BaseElement {
     return this._checkbox;
   }
 
-  createdCallback() {
+  init() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
@@ -191,7 +191,7 @@ class SwitchElement extends BaseElement {
     this.setAttribute('_compiled', '');
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     this._checkbox.removeEventListener('change', this._onChange);
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
@@ -200,7 +200,7 @@ class SwitchElement extends BaseElement {
     this._gestureDetector.dispose();
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this._checkbox.addEventListener('change', this._onChange);
     this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
     this.addEventListener('dragstart', this._onDragStart);
@@ -275,6 +275,10 @@ class SwitchElement extends BaseElement {
     this.classList.remove('switch--active');
   }
 
+  static get observedAttributes() {
+    return ['modifier', 'input-id', 'checked', 'disabled'];
+  }
+
   attributeChangedCallback(name, last, current) {
     switch(name) {
       case 'modifier':
@@ -295,6 +299,4 @@ class SwitchElement extends BaseElement {
   }
 }
 
-window.OnsSwitchElement = document.registerElement('ons-switch', {
-  prototype: SwitchElement.prototype
-});
+customElements.define('ons-switch', SwitchElement);

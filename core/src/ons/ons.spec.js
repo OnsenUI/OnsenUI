@@ -107,7 +107,7 @@ describe('ons', () => {
 
     it('returns a valid popover element', (done) => {
       ons.createPopover('page.html').then((element) => {
-        expect(element).to.be.instanceof(OnsPopoverElement);
+        expect(element).to.be.instanceof(window.ons.PopoverElement);
         element.remove();
         done();
       });
@@ -132,7 +132,7 @@ describe('ons', () => {
 
     it('returns a valid dialog element', (done) => {
       ons.createDialog('page.html').then((element) => {
-        expect(element).to.be.instanceof(OnsDialogElement);
+        expect(element).to.be.instanceof(window.ons.DialogElement);
         element.remove();
         done();
       });
@@ -157,7 +157,7 @@ describe('ons', () => {
 
     it('returns a valid alertDialog element', (done) => {
       ons.createAlertDialog('page.html').then((element) => {
-        expect(element).to.be.instanceof(OnsAlertDialogElement);
+        expect(element).to.be.instanceof(window.ons.AlertDialogElement);
         element.remove();
         done();
       });

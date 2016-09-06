@@ -1,11 +1,11 @@
 import {
-  bootstrap,
   Component,
-  PopoverFactory,
-  OnsPopover,
-  ViewChild
+  ViewChild,
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
-
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -14,8 +14,8 @@ import {
     <ons-toolbar>
       <div class="center">List</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
       <ons-list>
         <ons-list-header>
           Normal List Items
@@ -46,5 +46,12 @@ import {
 export class AppComponent {
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
 
+platformBrowserDynamic().bootstrapModule(AppModule);

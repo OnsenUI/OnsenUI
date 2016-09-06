@@ -1,9 +1,11 @@
 import {
-  bootstrap,
   Component,
   ElementRef,
-  Renderer
+  OnsenModule,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app',
@@ -12,8 +14,8 @@ import {
     <ons-toolbar>
       <div class="center">Gesture Detector</div>
     </ons-toolbar>
-    <div class="page__background"></div>
-    <div class="page__content">
+    <div class="background"></div>
+    <div class="content">
 
       <ons-gesture-detector style="height: 300px; margin: 50px;">
         <div style="border: 1px solid #ccc; background-color: #f9f9f9; width: 100%; height: 300px; line-height: 300px; text-align: center; color: #999;">
@@ -46,4 +48,12 @@ export class AppComponent {
   }
 }
 
-bootstrap(AppComponent);
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

@@ -84,10 +84,8 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
-          CustomElements.upgrade(element[0]);
           var speedDial = new SpeedDialView(scope, element, attrs);
 
           element.data('ons-speed-dial', speedDial);

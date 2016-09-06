@@ -69,7 +69,7 @@ const _animatorDict = {
  *   modal.show();
  * </script>
  */
-class ModalElement extends BaseElement {
+export default class ModalElement extends BaseElement {
 
   /**
    * @attribute animation
@@ -88,7 +88,7 @@ class ModalElement extends BaseElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
-  createdCallback() {
+  init() {
     contentReady(this, () => {
       this._compile();
     });
@@ -102,7 +102,6 @@ class ModalElement extends BaseElement {
       defaultAnimation: this.getAttribute('animation')
     });
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -144,13 +143,13 @@ class ModalElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  detachedCallback() {
+  disconnectedCallback() {
     if (this._backButtonHandler) {
       this._backButtonHandler.destroy();
     }
   }
 
-  attachedCallback() {
+  connectedCallback() {
     this.onDeviceBackButton = () => undefined;
   }
 
@@ -288,27 +287,30 @@ class ModalElement extends BaseElement {
     });
   }
 
+  static get observedAttributes() {
+    return ['modifier'];
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }
+
+  /**
+   * @param {String} name
+   * @param {Function} Animator
+   */
+  static registerAnimator(name, Animator) {
+    if (!(Animator.prototype instanceof ModalAnimator)) {
+      throw new Error('"Animator" param must inherit OnsModalElement.ModalAnimator');
+    }
+    _animatorDict[name] = Animator;
+  }
+
+  static get ModalAnimator() {
+    return ModalAnimator;
+  }
 }
 
-window.OnsModalElement = document.registerElement('ons-modal', {
-  prototype: ModalElement.prototype
-});
-
-/**
- * @param {String} name
- * @param {Function} Animator
- */
-window.OnsModalElement.registerAnimator = function(name, Animator) {
-  if (!(Animator.prototype instanceof ModalAnimator)) {
-    throw new Error('"Animator" param must inherit OnsModalElement.ModalAnimator');
-  }
-  _animatorDict[name] = Animator;
-};
-
-window.OnsModalElement.ModalAnimator = ModalAnimator;
-
+customElements.define('ons-modal', ModalElement);

@@ -52,7 +52,7 @@ const template = util.createElement(`
  *  indeterminate>
  * </ons-progress-circular>
  */
-class ProgressCircularElement extends BaseElement {
+export default class ProgressCircularElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -85,10 +85,14 @@ class ProgressCircularElement extends BaseElement {
    *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
    */
 
-  createdCallback() {
+  init() {
     if (!this.hasAttribute('_compiled')) {
       this._compile();
     }
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'value', 'secondary-value', 'indeterminate'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -198,6 +202,4 @@ class ProgressCircularElement extends BaseElement {
   }
 }
 
-window.OnsProgressCircularElement = document.registerElement('ons-progress-circular', {
-  prototype: ProgressCircularElement.prototype
-});
+customElements.define('ons-progress-circular', ProgressCircularElement);
