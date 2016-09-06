@@ -44,15 +44,15 @@ var-popover-margin-material = 4px
 .popover
   position absolute
   top var-popover-margin
-  right var-popover-margin
+  DockItem(right, var-popover-margin)
   bottom var-popover-margin
-  left var-popover-margin
+  DockItem(left, var-popover-margin)
   z-index 20000
   display none
 
 .popover-mask
-  left 0
-  right 0
+  DockItem(left, 0)
+  DockItem(right, 0)
   top 0
   bottom 0
   background-color rgba(0, 0, 0, 0.1)
@@ -94,7 +94,7 @@ var-popover-margin-material = 4px
   transform-origin 50% 50% 0
   background-color transparent
   background-image linear-gradient(45deg, var-popover-background-color, var-popover-background-color 50%, transparent 50%)
-  border-radius 0 0 0 var-popover-arrow-radius
+  BorderRadius(0, 0, 0, var-popover-arrow-radius)
   margin (-(var-popover-arrow-size / 2))px
 
 .popover--bottom .popover__arrow
@@ -107,11 +107,11 @@ var-popover-margin-material = 4px
 
 .popover--left .popover__arrow
   transform rotate(45deg)
-  left 1px
+  DockItem(left, 1px)
 
 .popover--right .popover__arrow
   transform rotate(225deg)
-  right 1px
+  DockItem(right, 1px)
 
 /*! topdoc
   name: Popover(down)
@@ -154,9 +154,9 @@ var-popover-margin-material = 4px
 
 .popover--material
   top var-popover-margin-material
-  right var-popover-margin-material
+  DockItem(right, var-popover-margin-material)
   bottom var-popover-margin-material
-  left var-popover-margin-material
+  DockItem(left, var-popover-margin-material)
 
 .popover-mask--material
   background-color transparent

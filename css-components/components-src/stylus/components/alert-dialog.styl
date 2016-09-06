@@ -63,7 +63,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   reset-font()
   position absolute
   top 50%
-  left 50%
+  DockItem(left, 50%)
   transform translate(-50%, -50%)
   width 270px
   margin auto auto
@@ -82,13 +82,13 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   reset-font()
   font-size var-font-size--large
   font-weight var-font-weight--large
-  padding 0px 8px 0px 8px
+  SwapPadding(0px, 8px, 0px, 8px)
   text-align center
   color var-alert-dialog-text-color
 
 .alert-dialog-content
   reset-box-model()
-  padding 4px 12px 8px 12px
+  SwapPadding(4px, 12px, 8px, 12px)
   font-size var-font-size--mini
   min-height 36px
   text-align center
@@ -146,17 +146,17 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   flex 1
   display block
   width 100%
-  border-left 1px solid var-alert-dialog-separator-color
+  BorderLeftOrRight("border-left", 1px, var-alert-dialog-separator-color, solid)
   +retina-query()
     border-top none
-    border-left none
+    BorderLeft(none)
     background-size 100% 1px, 1px 100%
     background-repeat no-repeat
     background-position top, left
     background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
 
 .alert-dialog-button--one:first-child
-  border-left none 
+  BorderLeft(none)
   +retina-query()
     border-top none
     background-size 100% 1px
@@ -170,8 +170,8 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   reset-cursor()
   position absolute
   top 0
-  right 0
-  left 0
+  DockItem(right, 0)
+  DockItem(left, 0)
   bottom 0
   background-color rgba(0, 0, 0, 0.2)
 
@@ -269,7 +269,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 
 .alert-dialog-title--material
   material-font()
-  text-align left
+  TextAlignTo(left)
   font-size 20px
   font-weight 500
   padding 0 24px
@@ -277,18 +277,18 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 
 .alert-dialog-content--material
   material-font()
-  text-align left
+  TextAlignTo(left)
   font-size 16px
   font-weight 400
   line-height 20px
   padding 0 24px
-  margin 24px 0 10px 0
+  SwapMargin(24px, 0, 10px, 0)
   min-height 0
   color var-material-alert-dialog-content-color
 
 .alert-dialog-footer--material
   display inline-block
-  padding 0px 8px 0px 24px
+  SwapPadding(0px, 8px, 0px, 24px)
   box-sizing border-box
 
 .alert-dialog-button--material
@@ -297,7 +297,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   display inline-block
   width auto
   min-width 70px
-  float right
+  FloatItem(right)
   background none
   border-top none
   font-size 14px

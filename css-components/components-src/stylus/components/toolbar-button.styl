@@ -81,8 +81,8 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
   @extend .toolbar-button
   border var-toolbar-button-border
   margin auto 8px
-  padding-left 6px
-  padding-right 6px
+  PaddingLeftOrRight("padding-left", 6px)
+  PaddingLeftOrRight("padding-right", 6px)
 
 .toolbar-button--outline:hover
   @extend .toolbar-button:hover
@@ -117,11 +117,11 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
   vertical-align initial
 
 .toolbar-button--material:first-of-type {
-  margin-left 4px
+  MarginLeftOrRight("margin-left", 4px)
 }
 
 .toolbar-button--material:last-of-type {
-  margin-right 4px
+  MarginLeftOrRight("margin-right", 4px)
 }
 
 .toolbar-button--material:active
@@ -131,7 +131,7 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
 .back-button
   height 44px
   line-height 44px
-  padding-left 8px
+  PaddingLeftOrRight("padding-left", 8px)
   color var-toolbar-button-color
   background-color var-toolbar-button-background-color
 
@@ -147,7 +147,7 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
   display inline-block
   height 100%
   vertical-align top
-  margin-right 6px
+  MarginLeftOrRight("margin-right", 6px)
 
 .back-button__icon:before
   font-family 'Ionicons'
@@ -160,7 +160,7 @@ var-material-toolbar-button-active-color = $material-toolbar-button-active-color
   display inline-block
   padding 0 12px
   height 100%
-  margin 0 0 0 4px
+  SwapMargin(0, 0, 0, 4px)
   border none
   border-radius 0
   vertical-align initial

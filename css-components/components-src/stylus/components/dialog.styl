@@ -40,13 +40,13 @@ var-material-dialog-background-color = $material-dialog-background-color
   reset-font()
   position absolute
   top 50%
-  left 50%
+  DockItem(left, 50%)
   transform translate(-50%, -50%)
   margin auto auto
   overflow hidden
   min-width 270px
   min-height 100px
-  text-align left
+  TextAlignTo(left)
 
 .dialog-container
   height inherit
@@ -61,8 +61,8 @@ var-material-dialog-background-color = $material-dialog-background-color
   reset-cursor()
   position absolute
   top 0
-  right 0
-  left 0
+  DockItem(right, 0)
+  DockItem(left, 0)
   bottom 0
   background-color rgba(0, 0, 0, 0.2)
 
@@ -80,7 +80,7 @@ var-material-dialog-background-color = $material-dialog-background-color
 
 .dialog--material
   material-font()
-  text-align left
+  TextAlignTo(left)
   shadow-5()
 
 .dialog-container--material

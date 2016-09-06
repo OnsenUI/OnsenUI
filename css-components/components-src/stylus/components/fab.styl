@@ -88,45 +88,45 @@ fab--active()
 .fab--top__right
   top 20px
   bottom auto
-  right 20px
-  left auto
+  DockItem(right, 20px)
+  DockItem(left, auto)
   position fixed
 
 .fab--bottom__right
   top auto
   bottom 20px
-  right 20px
-  left auto
+  DockItem(right, 20px)
+  DockItem(left, auto)
   position fixed
 
 .fab--top__left
   top 20px
   bottom auto
-  right auto
-  left 20px
+  DockItem(right, auto)
+  DockItem(left, 20px)
   position fixed
 
 .fab--bottom__left
   top auto
   bottom 20px
-  right auto
-  left 20px
+  DockItem(right, auto)
+  DockItem(left, 20px)
   position fixed
 
 .fab--top__center
   top 20px
   bottom auto
-  margin-left -28px
-  left 50%
-  right auto
+  MarginLeftOrRight("margin-left", -28px)
+  DockItem(left, 50%)
+  DockItem(right, auto)
   position fixed
 
 .fab--bottom__center
   top auto
   bottom 20px
-  margin-left -28px
-  left 50%
-  right auto
+  MarginLeftOrRight("margin-left", -28px)
+  DockItem(left, 50%)
+  DockItem(right, auto)
   position fixed
 
 /*! topdoc

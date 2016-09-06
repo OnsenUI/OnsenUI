@@ -70,8 +70,8 @@ navigation-bar__item()
   navigation-bar()
   display block
   height var-navigation-bar-height
-  padding-left var-navigation-bar-padding
-  padding-right var-navigation-bar-padding
+  PaddingLeftOrRight("padding-left", var-navigation-bar-padding)
+  PaddingLeftOrRight("padding-right", var-navigation-bar-padding)
   background var-navigation-bar-background-color
   color var-navigation-bar-color
   box-shadow var-navigation-bar-box-shadow
@@ -90,20 +90,20 @@ navigation-bar__item()
   overflow visible
   display block
   vertical-align middle
-  float left
+  FloatItem(left)
 
 .navigation-bar__left
   @extend .navigation-bar__item
   max-width 50%
   width 27%
-  text-align left
+  TextAlignTo(left)
   line-height var-navigation-bar-height
 
 .navigation-bar__right
   @extend .navigation-bar__item
   max-width 50%
   width 27%
-  text-align right
+  TextAlignTo(right)
   line-height var-navigation-bar-height
 
 .navigation-bar__center
@@ -256,8 +256,8 @@ navigation-bar__item()
   navigation-bar()
   display block
   height var-navigation-bar-height
-  padding-left var-navigation-bar-padding
-  padding-right var-navigation-bar-padding
+  PaddingLeftOrRight("padding-left", var-navigation-bar-padding)
+  PaddingLeftOrRight("padding-right", var-navigation-bar-padding)
   background var-navigation-bar-background-color
   color var-navigation-bar-color
   box-shadow var-navigation-bar-box-shadow
@@ -266,8 +266,8 @@ navigation-bar__item()
   border-top var-navigation-bar-separator
   position absolute
   bottom 0px
-  right 0px
-  left 0px
+  DockItem(right, 0)
+  DockItem(left, 0)
   retina-navigation-bar-border(top, var-navigation-bar-separator-color)
 
 .bottom-bar__line-height
@@ -352,15 +352,15 @@ navigation-bar--material-font()
   flex-grow 1
   overflow hidden
   text-overflow ellipsis
-  text-align left
+  TextAlignTo(left)
   float initial
   line-height var-navigation-bar-material-height
 
 .navigation-bar--material__center:first-child
-  margin-left 16px
+  MarginLeftOrRight("margin-left", 16px)
 
 .navigation-bar--material__center:last-child
-  margin-right 16px
+  MarginLeftOrRight("margin-right", 16px)
 
 .navigation-bar--material__left:empty, .navigation-bar--material__right:empty
   min-width 16px

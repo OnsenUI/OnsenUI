@@ -250,20 +250,20 @@ range--material--thumb--after()
 
 .range--material::-moz-range-thumb:after
   margin-top -3px
-  margin-left -3px
+  MarginLeftOrRight("margin-left", -3px)
   range--material--thumb--after()
 
 .range--material::-webkit-slider-thumb:after
   margin-top -3px
-  margin-left -3px
+  MarginLeftOrRight("margin-left", -3px)
   range--material--thumb--after()
   display inline-block
-  margin-left (var-material-range-thumb-horizontal-margin / 2)
+  MarginLeftOrRight("margin-left", (var-material-range-thumb-horizontal-margin / 2))
   margin-top (var-material-range-thumb-vertical-margin / 2)
 
 .range--material::-ms-fill-upper
   margin-top: -6px;
-  margin-left: -6px;
+  MarginLeftOrRight("margin-left", -6px);
   range--material--thumb--after()
 
 .range--material:active::-webkit-slider-thumb:after

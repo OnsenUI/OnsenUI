@@ -117,8 +117,8 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   table-layout fixed
   position absolute
   bottom 0px
-  left 0px
-  right 0px
+  DockItem(left, 0)
+  DockItem(right, 0)
   white-space nowrap
   margin 0
   padding 0
@@ -205,8 +205,8 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 .tab-bar__content
   position absolute
   top 0
-  left 0
-  right 0
+  DockItem(left, 0)
+  DockItem(right, 0)
   bottom var-tab-bar-height
   z-index 0
 
@@ -276,8 +276,8 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 .tab-bar--top
   position relative
   top 0px
-  left 0px
-  right 0px
+  DockItem(left, 0)
+  DockItem(right, 0)
   bottom auto
   border-top none
   border-bottom var-tab-bar-border-top
@@ -285,8 +285,8 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 .tab-bar--top__content
   top var-tab-bar-height
-  left 0
-  right 0
+  DockItem(left, 0)
+  DockItem(right, 0)
   bottom 0
   z-index 0
 

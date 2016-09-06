@@ -76,7 +76,7 @@ radio-button--after()
   position absolute
   border-radius 100%
   top 50%
-  left 50%
+  DockItem(left, 50%)
   transform translate(-50%, -50%)
 
 radio-button--disabled()
@@ -101,7 +101,7 @@ radio-button--disabled()
   radio-button__label()
   hide-input-parent()
   line-height var-radio-button-size
-  text-align left
+  TextAlignTo(left)
 
 .radio-button__checkmark:before
   radio-button--before()
@@ -110,7 +110,7 @@ radio-button--disabled()
   background transparent
   border none
   border-radius var-checkbox-border-radius
-  left 0
+  DockItem(left, 0)
 
 .radio-button__checkmark
   radio-button()
@@ -126,7 +126,7 @@ radio-button--disabled()
 .radio-button__checkmark:after
   radio-button--after()
   top var-checkmark-top
-  left var-checkmark-left
+  DockItem(left, var-checkmark-left)
   opacity 0
   width var-checkmark-tail-width
   height var-checkmark-foot-height
@@ -134,7 +134,7 @@ radio-button--disabled()
   border var-radio-button-border
   border-width var-checkmark-border-width
   border-top none
-  border-right none
+  BorderRight(none)
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
 
@@ -190,7 +190,7 @@ radio-button--disabled()
 .radio-button--material__checkmark:after
   transition background 0.2s ease, transform 0.2s ease
   top (var-material-radio-button-size / 4)
-  left (var-material-radio-button-size / 4)
+  DockItem(left, (var-material-radio-button-size / 4))
   width (var-material-radio-button-size / 2)
   height (var-material-radio-button-size / 2)
   border none
