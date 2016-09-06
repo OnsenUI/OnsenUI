@@ -1,4 +1,6 @@
-# Onsen UI - HTML5 Hybrid Mobile App Framework
+# Onsen UI - Cross-platform HTML5 Mobile App Framework
+
+Onsen UI is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.
 
 [![Join us on Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
 [![Forum](https://img.shields.io/badge/forum-onsen--ui-FF412D.svg )](https://community.onsen.io/)
@@ -7,11 +9,52 @@
 [![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
 [![npm version](https://badge.fury.io/js/onsenui.svg)](https://badge.fury.io/js/onsenui)
 
-The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
+![Onsen UI Todo App](https://cloud.githubusercontent.com/assets/6549462/17845137/8224b696-687a-11e6-8f7b-95b7e8f20f2d.gif)
 
-**We just released the RC of Onsen UI 2. The new version includes Material Design, React components, Angular 2 components and much more. Check out all the new features [here](https://onsen.io/2/)!**
+The core library is written in pure Javascript and is framework agnostic which means you can use it with your favorite frameworks such as:
 
-Onsen UI is:
+* [React](https://onsen.io/react)
+* [Angular2](https://onsen.io/angular2)
+* [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/index.html)
+* [Vue.js (WIP)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+
+Onsen UI provides styles for both iOS flat design and Android's Material Design. The components will be automatically styled based on the platform which makes it possible to support both iOS and Android with the same source code.
+
+## Getting started
+
+We have several resources to help you get started creating hybrid apps with Onsen UI:
+
+* [The official docs](https://onsen.io/v2/docs/js.html) provide [reference for the core library](https://onsen.io/v2/docs/js.html) as well as the [React](https://onsen.io/v2/docs/guide/react/index.html), [Angular2](https://onsen.io/v2/docs/guide/angular2/) and [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/) components.
+* We have an [interactive Onsen UI tutorial](https://onsen.io/tutorial/) where you can learn how to use the library and play around with the components.
+* There are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly. 
+
+## Support
+
+If you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
+
+## Examples with source code
+
+There are lots of sample applications written using Onsen UI. Here are some examples to give you an idea of what kind of apps you can create:
+
+### [Real time React Chat App with OnsenUI and Horizon!](http://tutorials.pluralsight.com/html-css/real-time-chat-app-with-onsenui-and-horizon)
+
+![Real time chat app](https://cloud.githubusercontent.com/assets/6549462/17846103/8acd4b8a-6881-11e6-86b8-1337183e3d09.png)
+
+[Download source code](https://github.com/philolo1/Horizon-Chat-MobX-OnsenUI)
+
+### [Weather application using React, Redux and Webpack](https://onsen.io/blog/cordova-hybrid-app-with-react-redux-webpack/)
+
+![Weather application](https://cloud.githubusercontent.com/assets/6549462/17846106/8b0ceb96-6881-11e6-8da0-14ff78047647.png)
+
+[Download source code](https://onsen.io/blog/cordova-hybrid-app-with-react-redux-webpack/)
+
+### [Todo application in pure Javascript](https://onsen.io/blog/auto-style-app-onsen/)
+
+![Todo application](https://cloud.githubusercontent.com/assets/6549462/17846105/8aedd1fc-6881-11e6-9c26-44289b0451f9.png)
+
+[Download source code](https://github.com/frankdiox/OnsenUI-Todo-App)
+
+## What is Onsen UI?
 
 * **Open source**, free and open for all. It's designed and implemented to deliver unprecedented user interface and user experience for your mobile and hybrid apps. Onsen UI is built on top of Web Components so applications can be built using **HTML tags** web developers already know and love.
 
@@ -34,10 +77,6 @@ Onsen UI is tested with the following browsers and mobile OS.
  * Windows Phone 10+
  * Google Chrome
  * Safari
-
-## Demo
-
-[Click here](https://frankdiox.github.io/frame-auto-style/example.html) to see Onsen UI in action! Check our [tutorial](http://tutorial.onsen.io/) for more examples.
 
 ## What's Included
 
@@ -66,33 +105,23 @@ $ monaca debug # Preview on the real device
 
 ## Download Onsen UI
 
-The distribution repository is located [here](https://github.com/OnsenUI/OnsenUI-dist). React Components for Onsen UI are distributed separately in [this other repo](https://github.com/OnsenUI/react-onsenui).
-
 Onsen UI is available with npm, bower or jspm. Example:
 
 ```bash
-$ npm install onsenui
+npm install onsenui
 ```
 
 For React:
 
 ```bash
-$ npm install react-onsenui
+npm install react-onsenui
 ```
-
-For an example that uses React, Redux and Webpack you can check out our [Weather app sample](https://github.com/argelius/react-onsenui-redux-weather). Try the [demo here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
 
 For Angular2:
 
 ```bash
 $ npm install angular2-onsenui
 ```
-
-## Download the latest build
-
-A new build is generated every time the code changes. It can be downloaded on [this page](http://onsen.io/download.html#latest-build).
-
-Please use this with caution. However, we are very grateful if people try it out so we can find bugs and things to improve before the sharp releases.
 
 ## How to manually build this project
 
@@ -148,13 +177,3 @@ $ gulp test
 ## How to contribute
 
 Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md). See the full list of contributors [here](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).
-
-## Getting support
-
-If anything about Onsen UI is unclear, please ask a question on our [community forum](https://community.onsen.io/) or <a href="http://stackoverflow.com" target="_blank">Stackoverflow</a> and tag it "onsen-ui".
-
-You can also join our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI) if you want to talk directly to the dev team.
-
-If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
-
-[Onsen UI](https://onsen.io/) - [Monaca](http://monaca.io/)
