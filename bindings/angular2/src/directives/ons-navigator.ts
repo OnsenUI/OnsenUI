@@ -5,7 +5,7 @@ import {
   Directive,
   ElementRef,
   Type,
-  ComponentResolver,
+  ComponentFactoryResolver,
   provide,
   Renderer,
   Input,
@@ -57,7 +57,7 @@ export class OnsNavigator implements OnDestroy {
 
   constructor(
     private _elementRef: ElementRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _viewContainer: ViewContainerRef,
     private _injector: Injector) {
     this._lastPageLoader = this.element.pageLoader;
@@ -72,16 +72,15 @@ export class OnsNavigator implements OnDestroy {
         provide(OnsNavigator, {useValue: this})
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-        const pageElement = pageComponentRef.location.nativeElement;
+      const factory = this._resolver.resolveComponentFactory(page);
+      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+      const pageElement = pageComponentRef.location.nativeElement;
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+      this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done({
-          element: pageElement,
-          unload: () => pageComponentRef.destroy()
-        });
+      done({
+        element: pageElement,
+        unload: () => pageComponentRef.destroy()
       });
     });
   }

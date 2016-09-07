@@ -9,7 +9,7 @@ import {
   ReflectiveInjector,
   OnInit,
   ViewContainerRef,
-  ComponentResolver,
+  ComponentFactoryResolver,
   provide
 } from '@angular/core';
 import {Params} from '../ons/params';
@@ -43,7 +43,7 @@ export class OnsSplitterSide {
   constructor(
     private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _injector: Injector) {
     this.element.pageLoader = this._createPageLoader();
   }
@@ -59,7 +59,7 @@ export class OnsSplitterSide {
         provide(OnsSplitterSide, {useValue: this})
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
+        const factory = this._resolver.resolveComponentFactory(page);
         const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
         const pageElement = pageComponentRef.location.nativeElement;
 
@@ -69,7 +69,6 @@ export class OnsSplitterSide {
           element: pageElement,
           unload: () => pageComponentRef.destroy()
         });
-      });
     });
   }
 }
@@ -100,7 +99,7 @@ export class OnsSplitterContent {
   constructor(
     private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _injector: Injector) {
     this.element.pageLoader = this._createPageLoader();
   }
@@ -116,16 +115,15 @@ export class OnsSplitterContent {
         provide(OnsSplitterContent, {useValue: this})
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-        const pageElement = pageComponentRef.location.nativeElement;
+      const factory = this._resolver.resolveComponentFactory(page);
+      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+      const pageElement = pageComponentRef.location.nativeElement;
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+      this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done({
-          element: pageElement,
-          unload: () => pageComponentRef.destroy()
-        });
+      done({
+        element: pageElement,
+        unload: () => pageComponentRef.destroy()
       });
     });
   }
