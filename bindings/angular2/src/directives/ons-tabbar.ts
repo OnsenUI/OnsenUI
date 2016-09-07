@@ -65,7 +65,7 @@ export class OnsTab implements OnDestroy {
     });
   }
 
-  @Input('page') set page(pageComponentType: Type) {
+  @Input('page') set page(pageComponentType: Type<any>) {
     this._elementRef.nativeElement.page = pageComponentType;
   }
 

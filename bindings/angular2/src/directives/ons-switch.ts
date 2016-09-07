@@ -3,7 +3,6 @@ import {
   Injector,
   Directive,
   ElementRef,
-  provide,
   Input,
   Output,
   EventEmitter,

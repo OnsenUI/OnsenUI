@@ -6,7 +6,6 @@ import {
   ElementRef,
   Type,
   ComponentFactoryResolver,
-  provide,
   Renderer,
   Input,
   ViewContainerRef,
@@ -47,7 +46,7 @@ export class OnsNavigator implements OnDestroy {
    * @type {Type}
    * @desc [en]Type of the page component.[/en]
    */
-  @Input('page') set pageComponentType(page: Type) {
+  @Input('page') set pageComponentType(page: Type<any>) {
     this._elementRef.nativeElement.page = page;
   }
 
@@ -68,8 +67,8 @@ export class OnsNavigator implements OnDestroy {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const pageParams = new Params(params || {});
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: pageParams}),
-        provide(OnsNavigator, {useValue: this})
+        {provide: Params, useValue: pageParams},
+        {provide: OnsNavigator, useValue: this}
       ], this._injector);
 
       const factory = this._resolver.resolveComponentFactory(page);

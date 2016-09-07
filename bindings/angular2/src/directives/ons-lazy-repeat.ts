@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  provide,
   Input,
   Output,
   OnDestroy,

@@ -9,8 +9,7 @@ import {
   ReflectiveInjector,
   OnInit,
   ViewContainerRef,
-  ComponentFactoryResolver,
-  provide
+  ComponentFactoryResolver
 } from '@angular/core';
 import {Params} from '../ons/params';
 
@@ -36,7 +35,7 @@ export class OnsSplitterSide {
    *   [en]Page content.[/en]
    *   [ja]表示するページのコンポーネントを指定します。[/en]
    */
-  @Input('page') set page(page: Type) {
+  @Input('page') set page(page: Type<any>) {
     this.element.page = page;
   }
 
@@ -55,8 +54,8 @@ export class OnsSplitterSide {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: new Params(params || {})}),
-        provide(OnsSplitterSide, {useValue: this})
+        {provide: Params, useValue: new Params(params || {})},
+        {provide: OnsSplitterSide, useValue: this}
       ], this._injector);
 
         const factory = this._resolver.resolveComponentFactory(page);
@@ -92,7 +91,7 @@ export class OnsSplitterContent {
    *   [en]Page content.[/en]
    *   [ja]表示するページのコンポーネントを指定します。[/en]
    */
-  @Input('page') set page(page: Type) {
+  @Input('page') set page(page: Type<any>) {
     this.element.page = page;
   }
 
@@ -111,8 +110,8 @@ export class OnsSplitterContent {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: new Params(params || {})}),
-        provide(OnsSplitterContent, {useValue: this})
+        {provide: Params, useValue: new Params(params || {})},
+        {provide: OnsSplitterContent, useValue: this}
       ], this._injector);
 
       const factory = this._resolver.resolveComponentFactory(page);
