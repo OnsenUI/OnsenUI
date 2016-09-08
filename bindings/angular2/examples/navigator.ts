@@ -46,6 +46,7 @@ export class PageComponent {
       <div class="center">Page</div>
     </ons-toolbar>
     <div class="content">
+      <div id="message">{{msg}}</div>
       <div style="text-align: center; margin: 10px">
         <ons-button (click)="push(navi)">push</ons-button>
       </div>
@@ -53,6 +54,8 @@ export class PageComponent {
   `
 })
 class DefaultPageComponent {
+  msg = 'Click to push:'
+
   constructor(private _navigator: OnsNavigator) {
   }
 
@@ -73,7 +76,8 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, DefaultPageComponent, PageComponent],
+  entryComponents: [DefaultPageComponent, PageComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

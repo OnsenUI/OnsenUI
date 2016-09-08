@@ -5,8 +5,7 @@ import {
   Directive,
   ElementRef,
   Type,
-  ComponentResolver,
-  provide,
+  ComponentFactoryResolver,
   Renderer,
   Input,
   ViewContainerRef,
@@ -47,7 +46,7 @@ export class OnsNavigator implements OnDestroy {
    * @type {Type}
    * @desc [en]Type of the page component.[/en]
    */
-  @Input('page') set pageComponentType(page: Type) {
+  @Input('page') set pageComponentType(page: Type<any>) {
     this._elementRef.nativeElement.page = page;
   }
 
@@ -57,7 +56,7 @@ export class OnsNavigator implements OnDestroy {
 
   constructor(
     private _elementRef: ElementRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _viewContainer: ViewContainerRef,
     private _injector: Injector) {
     this._lastPageLoader = this.element.pageLoader;
@@ -68,20 +67,19 @@ export class OnsNavigator implements OnDestroy {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const pageParams = new Params(params || {});
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: pageParams}),
-        provide(OnsNavigator, {useValue: this})
+        {provide: Params, useValue: pageParams},
+        {provide: OnsNavigator, useValue: this}
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-        const pageElement = pageComponentRef.location.nativeElement;
+      const factory = this._resolver.resolveComponentFactory(page);
+      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+      const pageElement = pageComponentRef.location.nativeElement;
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+      this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done({
-          element: pageElement,
-          unload: () => pageComponentRef.destroy()
-        });
+      done({
+        element: pageElement,
+        unload: () => pageComponentRef.destroy()
       });
     });
   }

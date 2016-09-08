@@ -1,7 +1,6 @@
 import {
   Injector,
   ComponentFactoryResolver,
-  provide,
   Injectable,
   ApplicationRef,
   ComponentRef,
@@ -29,7 +28,7 @@ export class DialogFactory {
       setImmediate(() => {
         const factory = this._resolver.resolveComponentFactory(componentType);
         const injector = ReflectiveInjector.resolveAndCreate([
-          provide(Params, {useValue: new Params(params)})
+          {provide: Params, useValue: new Params(params)}
         ], this._injector);
 
         const rootViewContainerRef = this._appRef['_rootComponents'][0]['_hostElement'].vcRef; // TODO: fix this dirty hack

@@ -9,8 +9,7 @@ import {
   ReflectiveInjector,
   OnInit,
   ViewContainerRef,
-  ComponentResolver,
-  provide
+  ComponentFactoryResolver
 } from '@angular/core';
 import {Params} from '../ons/params';
 
@@ -36,14 +35,14 @@ export class OnsSplitterSide {
    *   [en]Page content.[/en]
    *   [ja]表示するページのコンポーネントを指定します。[/en]
    */
-  @Input('page') set page(page: Type) {
+  @Input('page') set page(page: Type<any>) {
     this.element.page = page;
   }
 
   constructor(
     private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _injector: Injector) {
     this.element.pageLoader = this._createPageLoader();
   }
@@ -55,11 +54,11 @@ export class OnsSplitterSide {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: new Params(params || {})}),
-        provide(OnsSplitterSide, {useValue: this})
+        {provide: Params, useValue: new Params(params || {})},
+        {provide: OnsSplitterSide, useValue: this}
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
+        const factory = this._resolver.resolveComponentFactory(page);
         const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
         const pageElement = pageComponentRef.location.nativeElement;
 
@@ -69,7 +68,6 @@ export class OnsSplitterSide {
           element: pageElement,
           unload: () => pageComponentRef.destroy()
         });
-      });
     });
   }
 }
@@ -93,14 +91,14 @@ export class OnsSplitterContent {
    *   [en]Page content.[/en]
    *   [ja]表示するページのコンポーネントを指定します。[/en]
    */
-  @Input('page') set page(page: Type) {
+  @Input('page') set page(page: Type<any>) {
     this.element.page = page;
   }
 
   constructor(
     private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
-    private _resolver: ComponentResolver,
+    private _resolver: ComponentFactoryResolver,
     private _injector: Injector) {
     this.element.pageLoader = this._createPageLoader();
   }
@@ -112,20 +110,19 @@ export class OnsSplitterContent {
   _createPageLoader() {
     return new ons.PageLoader(({page, parent, params}, done: Function) => {
       const injector = ReflectiveInjector.resolveAndCreate([
-        provide(Params, {useValue: new Params(params || {})}),
-        provide(OnsSplitterContent, {useValue: this})
+        {provide: Params, useValue: new Params(params || {})},
+        {provide: OnsSplitterContent, useValue: this}
       ], this._injector);
 
-      this._resolver.resolveComponent(page).then(factory => {
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-        const pageElement = pageComponentRef.location.nativeElement;
+      const factory = this._resolver.resolveComponentFactory(page);
+      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+      const pageElement = pageComponentRef.location.nativeElement;
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+      this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done({
-          element: pageElement,
-          unload: () => pageComponentRef.destroy()
-        });
+      done({
+        element: pageElement,
+        unload: () => pageComponentRef.destroy()
       });
     });
   }

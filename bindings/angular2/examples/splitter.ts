@@ -57,8 +57,9 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, SidePageComponent, ContentPageComponent],
   bootstrap: [AppComponent],
+  entryComponents: [SidePageComponent, ContentPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }

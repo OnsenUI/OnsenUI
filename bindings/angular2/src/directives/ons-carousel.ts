@@ -1,11 +1,9 @@
 import {
   Component,
-  DynamicComponentLoader,
   Injector,
   Directive,
   ElementRef,
   Type,
-  provide,
   NgZone,
   Renderer,
   Input
