@@ -1,7 +1,6 @@
 import {
   Component,
   ViewChild,
-  OnsTabbar,
   OnsTab,
   OnsenModule,
   NgModule,
@@ -67,8 +66,6 @@ export class PageComponent {
   `
 })
 export class AppComponent {
-  @ViewChild(OnsTabbar) _tabbar: OnsTabbar; 
-
   home = HomeComponent
   page = PageComponent
 
