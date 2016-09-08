@@ -16,7 +16,10 @@ import {
  * @directive OnsInput
  * @selector ons-input
  * @description
- *    [en]Angular 2 directive for `<ons-input>` component.[/en]
+ *   [en]Angular 2 directive for `<ons-input>` component.[/en]
+ *   [ja]`<ons-input>`要素のAngular 2ディレクティブです。[/ja]
+ * @example
+ *   <ons-input [(value)]="value"></ons-input>
  */
 @Directive({
   selector: 'ons-input'
@@ -28,14 +31,18 @@ export class OnsInput implements OnChanges, OnDestroy {
   /**
    * @input value
    * @type {string}
-   * @desc [en]Input value.[/en]
+   * @desc 
+   *   [en]Input value.[/en]
+   *   [ja]内部の`input`要素に対する入力値を設定します。[/ja]
    */
   @Input('value') _value: string;
 
   /**
    * @output valueChange
    * @type {string}
-   * @desc [en]Triggers when the value is changed.[/en]
+   * @desc 
+   *   [en]Triggers when the value is changed.[/en]
+   *   [ja]内部の`input`要素の値が変更された時に発火します。[/ja]
    */
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 

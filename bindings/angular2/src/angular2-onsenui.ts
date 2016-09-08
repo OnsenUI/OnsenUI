@@ -22,7 +22,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {OnsNavigator} from './directives/ons-navigator';
-import {OnsTabbar, OnsTab} from './directives/ons-tabbar';
+import {OnsTab} from './directives/ons-tabbar';
 import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
@@ -37,7 +37,6 @@ import {ModalFactory} from './ons/modal-factory';
 
 const directives = [
   OnsNavigator,
-  OnsTabbar,
   OnsTab,
   OnsSwitch,
   OnsRange,

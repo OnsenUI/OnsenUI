@@ -16,7 +16,13 @@ import {
  * @directive OnsRange
  * @selector ons-range
  * @description
- *    [en]Angular 2 directive for `<ons-range>` component.[/en]
+ *   [en]Angular 2 directive for `<ons-range>` component.[/en]
+ *   [ja]`<ons-range>`要素のAngular 2ディレクティブです。[/en]
+ * @example
+ *   <ons-range [(value)]="foo"></ons-range><br>
+ *
+ *   <!-- Add (input) to change immediately on dragging range component -->
+ *   <ons-range [(value)]="bar" (input)="bar = $event.target.value"></ons-range>
  */
 @Directive({
   selector: 'ons-range'
@@ -28,14 +34,18 @@ export class OnsRange implements OnChanges, OnDestroy {
   /**
    * @input value
    * @type {string}
-   * @desc [en]Input value.[/en]
+   * @desc 
+   *   [en]Input value.[/en]
+   *   [ja]`ons-range`要素に対する入力値を指定します。[/ja]
    */
   @Input('value') _value: string;
 
   /**
    * @output valueChange
    * @type {string}
-   * @desc [en]Triggers when the value is changed.[/en]
+   * @desc 
+   *   [en]Triggers when the value is changed.[/en]
+   *   [ja]値が変更された時に発火します。[/ja]
    */
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 

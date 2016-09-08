@@ -16,7 +16,10 @@ import {
  * @directive OnsSwitch
  * @selector ons-switch
  * @description
- *    [en]Angular 2 directive for `<ons-switch>` component.[/en]
+ *   [en]Angular 2 directive for `<ons-switch>` component.[/en]
+ *   [ja]`<ons-switch>`要素のAngular 2ディレクティブです。[/ja]
+ * @example
+ *   <ons-switch [(value)]="target"></ons-switch>
  */
 @Directive({
   selector: 'ons-switch'
@@ -26,9 +29,11 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   private _boundOnChange: Function;
 
   /**
-   * @input page
-   * @type {Type}
-   * @desc [en]Page content.[/en]
+   * @input value
+   * @type {boolean}
+   * @desc 
+   *   [en][/en]
+   *   [ja]`ons-switch`コンポーネントに設定する値を指定します。[/ja]
    */
   @Input('value') set value(target: boolean) {
     this._element.checked = !!target;
@@ -37,7 +42,9 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   /**
    * @output valueChange
    * @type {string}
-   * @desc [en]Triggers when the value is changed.[/en]
+   * @desc 
+   *   [en]Triggers when the value is changed.[/en]
+   *   [ja]値が変更された時に発火します。[/ja]
    */
   @Output('valueChange') _valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
