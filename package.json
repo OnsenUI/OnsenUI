@@ -105,6 +105,6 @@
     "rollup-plugin-node-resolve": "^1.7.0",
     "run-sequence": "^1.2.1",
     "typescript": "^1.8.10",
-    "wcdoc": "^0.1.14"
+    "wcdoc": "^0.1.16"
   }
 }
