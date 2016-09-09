@@ -75,7 +75,7 @@ export class OnsPullHook implements OnDestroy {
    * @output changestate
    * @param {Object} $event
    * @param {String} $event.state
-   * @desc 
+   * @desc
    *   [en][/en]
    *   [ja]`ons-pull-hook`要素の状態が変わった時に呼び出されます。[/ja]
    */

@@ -34,8 +34,8 @@ export class OnsRange implements OnChanges, OnDestroy {
   /**
    * @input value
    * @type {string}
-   * @desc 
-   *   [en]Input value.[/en]
+   * @desc
+   *   [en]Input value of the `<ons-range>` element..[/en]
    *   [ja]`ons-range`要素に対する入力値を指定します。[/ja]
    */
   @Input('value') _value: string;
@@ -43,7 +43,7 @@ export class OnsRange implements OnChanges, OnDestroy {
   /**
    * @output valueChange
    * @type {string}
-   * @desc 
+   * @desc
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]値が変更された時に発火します。[/ja]
    */

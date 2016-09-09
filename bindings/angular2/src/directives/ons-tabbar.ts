@@ -18,8 +18,8 @@ declare var ons: any;
  * @directive OnsTab
  * @selector ons-tab
  * @description
- *   [en]Angular 2 directive for <ons-tab> component.[/en]
- *   [ja]<ons-tab>要素のためのディレクティブです。[/ja]
+ *   [en]Angular 2 directive for `<ons-tab>` component.[/en]
+ *   [ja]`<ons-tab>`要素のためのディレクティブです。[/ja]
  * @example
  *   @Component({
  *     selector: 'ons-page',
@@ -59,8 +59,8 @@ export class OnsTab implements OnDestroy {
   /**
    * @input page
    * @type {Type<any>}
-   * @desc 
-   *   [en]Type of the page component.[/en]
+   * @desc
+   *   [en]Specify the page component that is displayed when the tab is active.[/en]
    *   [ja]読み込むページコンポーネントを指定します。[/ja]
    */
   @Input('page') set page(pageComponentType: Type<any>) {

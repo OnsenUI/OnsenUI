@@ -66,7 +66,7 @@ export class OnsNavigator implements OnDestroy {
   /**
    * @input page
    * @type {Type<any>}
-   * @desc 
+   * @desc
    *   [en]Type of the page component.[/en]
    *   [ja]ページコンポーネントのクラスを指定します。[/ja]
    */

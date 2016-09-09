@@ -31,8 +31,8 @@ export class OnsInput implements OnChanges, OnDestroy {
   /**
    * @input value
    * @type {string}
-   * @desc 
-   *   [en]Input value.[/en]
+   * @desc
+   *   [en]Input value for the internal `<input>` element.[/en]
    *   [ja]内部の`input`要素に対する入力値を設定します。[/ja]
    */
   @Input('value') _value: string;
@@ -40,7 +40,7 @@ export class OnsInput implements OnChanges, OnDestroy {
   /**
    * @output valueChange
    * @type {string}
-   * @desc 
+   * @desc
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]内部の`input`要素の値が変更された時に発火します。[/ja]
    */

@@ -116,7 +116,7 @@ export class OnsSplitterContent {
    * @input page
    * @type {Type<any>}
    * @desc
-   *   [en]Page content.[/en]
+   *   [en]Specify the page component.[/en]
    *   [ja]表示するページコンポーネントのクラスを指定します。[/en]
    */
   @Input('page') set page(page: Type<any>) {

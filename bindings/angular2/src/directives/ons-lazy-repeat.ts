@@ -44,8 +44,8 @@ export class OnsLazyRepeat implements OnDestroy {
 
   /**
    * @input onsLazyRepeat
-   * @desc 
-   *   [en][/en]
+   * @desc
+   *   [en]Render infinite lists with "let of" syntax in Angular 2.[/en]
    *   [ja]let of式を指定します。[/ja]
    * @example
    *  <ons-list>
@@ -82,8 +82,8 @@ export class OnsLazyRepeat implements OnDestroy {
   /**
    * @method refresh
    * @signature refresh()
-   * @desc 
-   *   [en][/en]
+   * @desc
+   *   [en]Rerender all items in the list.[/en]
    *   [ja]`ons-lazy-repeat`内部に読み込まれている要素を一旦全て読み込み直します。[/ja]
    */
   refresh() {

@@ -31,8 +31,8 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   /**
    * @input value
    * @type {boolean}
-   * @desc 
-   *   [en][/en]
+   * @desc
+   *   [en]Specify the value of the `<ons-switch>` component.[/en]
    *   [ja]`ons-switch`コンポーネントに設定する値を指定します。[/ja]
    */
   @Input('value') set value(target: boolean) {
@@ -42,7 +42,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   /**
    * @output valueChange
    * @type {string}
-   * @desc 
+   * @desc
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]値が変更された時に発火します。[/ja]
    */
