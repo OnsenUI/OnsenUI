@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.19
+----
+ * core: Replace Promise polyfill to avoid Webpack warning.
+
 v2.0.0-rc.18
 ----
  * ons-navigator: Fixed a bug that caused missing .page__content on Safari.
