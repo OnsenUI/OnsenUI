@@ -20,8 +20,36 @@ declare const ons: any;
  * @directive OnsSplitterSide
  * @selector ons-splitter-side
  * @description
- *    [ja]`<ons-splitter-side>`要素のためのAngular2ディレクティブです。[/ja]
- *    [en]Angular 2 directive for `<ons-splitter-side>` component.[/en]
+ *   [ja]`<ons-splitter-side>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular 2 directive for `<ons-splitter-side>` component.[/en]
+ * @example
+ *   @Component({
+ *     selector: 'ons-page',
+ *     template: `
+ *       <ons-toolbar>
+ *         <div class="center">Left Page</div> 
+ *       </ons-toolbar>
+ *       <div class="background"></div>
+ *       <div class="content">
+ *         Left
+ *       </div>
+ *     `
+ *   })
+ *   class SidePageComponent { }
+ *
+ *   @Component({
+ *     selector: 'app',
+ *     template: `
+ *     <ons-splitter>
+ *       <ons-splitter-side [page]="sidePage" side="left" width="200px">
+ *       </ons-splitter-side>
+ *       <ons-splitter-content>...</ons-splitter-content>
+ *     </ons-splitter>
+ *     `
+ *   })
+ *   export class AppComponent {
+ *     sidePage = SidePageComponent;
+ *   }
  */
 @Directive({
   selector: 'ons-splitter-side'
@@ -30,10 +58,10 @@ export class OnsSplitterSide {
 
   /**
    * @input page
-   * @type {Type}
+   * @type {Type<any>}
    * @desc
    *   [en]Page content.[/en]
-   *   [ja]表示するページのコンポーネントを指定します。[/en]
+   *   [ja]表示するページコンポーネントのクラスを指定します。[/en]
    */
   @Input('page') set page(page: Type<any>) {
     this.element.page = page;
@@ -86,10 +114,10 @@ export class OnsSplitterSide {
 export class OnsSplitterContent {
   /**
    * @input page
-   * @type {Type}
+   * @type {Type<any>}
    * @desc
-   *   [en]Page content.[/en]
-   *   [ja]表示するページのコンポーネントを指定します。[/en]
+   *   [en]Specify the page component.[/en]
+   *   [ja]表示するページコンポーネントのクラスを指定します。[/en]
    */
   @Input('page') set page(page: Type<any>) {
     this.element.page = page;

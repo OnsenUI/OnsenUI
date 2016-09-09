@@ -1,7 +1,6 @@
 export * from '@angular/core';
 export * from '@angular/compiler';
 export * from './directives/ons-navigator';
-export * from './directives/ons-carousel';
 export * from './directives/ons-tabbar';
 export * from './directives/ons-switch';
 export * from './directives/ons-range';
@@ -23,8 +22,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {OnsNavigator} from './directives/ons-navigator';
-import {OnsCarousel} from './directives/ons-carousel';
-import {OnsTabbar, OnsTab} from './directives/ons-tabbar';
+import {OnsTab} from './directives/ons-tabbar';
 import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
 import {OnsInput} from './directives/ons-input';
@@ -39,8 +37,6 @@ import {ModalFactory} from './ons/modal-factory';
 
 const directives = [
   OnsNavigator,
-  OnsCarousel,
-  OnsTabbar,
   OnsTab,
   OnsSwitch,
   OnsRange,

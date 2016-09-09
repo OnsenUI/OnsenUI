@@ -1,7 +1,6 @@
 import {
   Component,
   ViewChild,
-  OnsCarousel,
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
@@ -41,11 +40,11 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   `
 })
 export class AppComponent {
-  @ViewChild(OnsCarousel) _carousel: OnsCarousel;
+  @ViewChild('myCarousel') _carousel: any;
   constructor() { }
 
   doSomething() {
-    this._carousel.element.next();
+    this._carousel.next();
   }
 }
 

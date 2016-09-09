@@ -14,30 +14,58 @@ import {
 declare var ons: any;
 
 /**
- * @element ons-tabbar
- * @directive OnsTabbar
- * @selector ons-tabbar
- * @description
- *    [en]Angular 2 directive for <ons-tabbar> component.[/en]
- */
-@Directive({
-  selector: 'ons-tabbar'
-})
-export class OnsTabbar {
-}
-
-/**
  * @element ons-tab
  * @directive OnsTab
  * @selector ons-tab
  * @description
- *    [en]Angular 2 directive for <ons-tab> component.[/en]
+ *   [en]Angular 2 directive for `<ons-tab>` component.[/en]
+ *   [ja]`<ons-tab>`要素のためのディレクティブです。[/ja]
+ * @example
+ *   @Component({
+ *     selector: 'ons-page',
+ *     template: `
+ *       <ons-toolbar>
+ *         <div class="center">Page</div>
+ *       </ons-toolbar>
+ *       <div class="content">...</div>
+ *     `
+ *   })
+ *   class PageComponent {
+ *   }
+ *
+ *   @Component({
+ *     selector: 'app',
+ *     template: `
+ *     <ons-tabbar>
+ *       <div class="tab-bar__content"></div>
+ *       <div class="tab-bar">
+ *         <ons-tab label="Page1" icon="ion-home" [page]="page" active></ons-tab>
+ *         <ons-tab label="Page2" icon="ion-help" [page]="page"></ons-tab>
+ *         <ons-tab label="Page3" icon="ion-stop" [page]="page"></ons-tab>
+ *       </div>
+ *     </ons-tabbar>
+ *     `
+ *   })
+ *   export class AppComponent {
+ *     page = PageComponent
+ *   }
  */
 @Directive({
   selector: 'ons-tab'
 })
 export class OnsTab implements OnDestroy {
   private _pageComponent: ComponentRef<any> = null;
+
+  /**
+   * @input page
+   * @type {Type<any>}
+   * @desc
+   *   [en]Specify the page component that is displayed when the tab is active.[/en]
+   *   [ja]読み込むページコンポーネントを指定します。[/ja]
+   */
+  @Input('page') set page(pageComponentType: Type<any>) {
+    this._elementRef.nativeElement.page = pageComponentType;
+  }
 
   constructor(private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
@@ -63,10 +91,6 @@ export class OnsTab implements OnDestroy {
         }
       });
     });
-  }
-
-  @Input('page') set page(pageComponentType: Type<any>) {
-    this._elementRef.nativeElement.page = pageComponentType;
   }
 
   ngOnDestroy() {

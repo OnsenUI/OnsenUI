@@ -33,7 +33,29 @@ export class NavigatorPage {
  * @directive OnsNavigator
  * @selector ons-navigator
  * @description
- *    [en]Angular 2 directive for `<ons-navigator>` component.[/en]
+ *   [en]Angular 2 directive for `<ons-navigator>` component.[/en]
+ *   [ja]`<ons-navigator>`要素のAngular 2ディレクティブです。[/ja]
+ * @example
+ *   @Component({
+ *     selector: 'ons-page',
+ *     template: `
+ *       <ons-toolbar>
+ *         <div class="center">Page</div>
+ *       </ons-toolbar>
+ *       <div class="content">...</div>
+ *     `
+ *   })
+ *   class DefaultPageComponent { }
+ *
+ *   @Component({
+ *     selector: 'navigator-app',
+ *     template: `
+ *     <ons-navigator [page]="page"></ons-navigator>
+ *     `
+ *   })
+ *   export class AppComponent {
+ *     page = DefaultPageComponent
+ *   }
  */
 @Directive({
   selector: 'ons-navigator'
@@ -43,8 +65,10 @@ export class OnsNavigator implements OnDestroy {
 
   /**
    * @input page
-   * @type {Type}
-   * @desc [en]Type of the page component.[/en]
+   * @type {Type<any>}
+   * @desc
+   *   [en]Type of the page component.[/en]
+   *   [ja]ページコンポーネントのクラスを指定します。[/ja]
    */
   @Input('page') set pageComponentType(page: Type<any>) {
     this._elementRef.nativeElement.page = page;
