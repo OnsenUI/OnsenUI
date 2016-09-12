@@ -34,6 +34,9 @@ const CLOSED_STATE = 'closed';
 const OPEN_STATE = 'open';
 const CHANGING_STATE = 'changing';
 
+const WATCHED_ATTRIBUTES = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
+
+
 const rewritables = {
   /**
    * @param {Element} splitterSideElement
@@ -454,8 +457,7 @@ export default class SplitterSideElement extends BaseElement {
       defaultAnimation: this.getAttribute('animation')
     });
     this._boundHandleGesture = (e) => this._collapseMode.handleGesture(e);
-    this._watchedAttributes = ['animation', 'width', 'side', 'collapse', 'swipeable', 'swipe-target-width', 'animation-options', 'open-threshold'];
-
+    this._watchedAttributes = WATCHED_ATTRIBUTES;
     contentReady(this, () => {
       rewritables.ready(this, () => {
         const page = this._getPageTarget();
@@ -494,7 +496,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return this._watchedAttributes;
+    return WATCHED_ATTRIBUTES;
   }
 
   attributeChangedCallback(name, last, current) {
