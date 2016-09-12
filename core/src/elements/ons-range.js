@@ -102,6 +102,11 @@ export default class RangeElement extends BaseElement {
     this._left.style.width = (100 * this._ratio) + '%';
   }
 
+  _onDragstart(e) {
+    e.stopPropagation();
+    e.gesture.stopPropagation();
+  }
+
   get _ratio() {
     // Returns the current ratio.
     const min = this._input.min === '' ? 0 : parseInt(this._input.min);
@@ -130,10 +135,12 @@ export default class RangeElement extends BaseElement {
   }
 
   connectedCallback() {
+    this.addEventListener('dragstart', this._onDragstart);
     this.addEventListener('input', this._onChange);
   }
 
   disconnectedCallback() {
+    this.removeEventListener('dragstart', this._onDragstart);
     this.removeEventListener('input', this._onChange);
   }
 
