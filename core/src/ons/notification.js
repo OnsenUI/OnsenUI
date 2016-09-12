@@ -63,13 +63,13 @@ notification._createAlertDialog = function(title, message,
 
   const titleElementHTML = typeof title === 'string' ? '<div class="alert-dialog-title"></div>' : '';
 
+  let dialogElement = document.createElement('ons-alert-dialog');
 
-  let dialogElement = util.createElement(`
-  <ons-alert-dialog>
+  dialogElement.innerHTML = `
     ${titleElementHTML}
     <div class="alert-dialog-content"></div>
     <div class="alert-dialog-footer"></div>
-  </ons-alert-dialog>`);
+  `;
 
   if (id) {
     dialogElement.setAttribute('id', id);
