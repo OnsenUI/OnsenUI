@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.20
+----
+ * ons-splitter-side: Fix attribute watchers.
+
 v2.0.0-rc.19
 ----
  * core: Replace Promise polyfill to avoid Webpack warning.
