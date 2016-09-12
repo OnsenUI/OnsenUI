@@ -34,7 +34,6 @@ const scheme = {
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
-  'fade': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };
@@ -285,8 +284,8 @@ export default class DialogElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
-   *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+   *   [en]Animation name. Available animations are `"none"` and `"slide"`.[/en]
+   *   [ja]アニメーション名を指定します。"none", "slide"のいずれかを指定します。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
@@ -352,8 +351,8 @@ export default class DialogElement extends BaseElement {
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
    * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
-   *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+   *   [en]Animation name. Available animations are `"none"` and `"slide"`.[/en]
+   *   [ja]アニメーション名を指定します。"none", "slide"のいずれかを指定できます。[/ja]
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/ja]
