@@ -127,7 +127,7 @@ export default class RangeElement extends BaseElement {
         }
       });
     }
- }
+  }
 
   connectedCallback() {
     this.addEventListener('input', this._onChange);
