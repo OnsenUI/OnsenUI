@@ -72,7 +72,7 @@ There are lots of sample applications written using Onsen UI. Here are some exam
 
 Onsen UI is tested with the following browsers and mobile OS.
 
- * Android 4.1+
+ * Android 4.4+
  * iOS8+
  * Windows Phone 10+
  * Google Chrome
