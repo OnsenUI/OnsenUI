@@ -245,7 +245,7 @@ class CollapseMode {
 
 /**
  * @element ons-splitter-side
- * @category splitter
+ * @category menu
  * @description
  *  [en]
  *    The `<ons-splitter-side>` element is used as a child element of `<ons-splitter>`.
