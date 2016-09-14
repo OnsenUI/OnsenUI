@@ -65,11 +65,11 @@ notification._createAlertDialog = function(title, message,
 
   let dialogElement = document.createElement('ons-alert-dialog');
 
-  dialogElement.innerHTML = `
+  innerHTML(dialogElement, `
     ${titleElementHTML}
     <div class="alert-dialog-content"></div>
     <div class="alert-dialog-footer"></div>
-  `;
+  `);
 
   if (id) {
     dialogElement.setAttribute('id', id);
@@ -97,7 +97,7 @@ notification._createAlertDialog = function(title, message,
   dialogElement.setAttribute('animation', animation);
 
   if (messageIsHTML) {
-    messageElement.innerHTML = message;
+    innerHTML(messageElement, message);
   } else {
     messageElement.textContent = message;
   }
