@@ -24,7 +24,7 @@ const scheme = {'': 'toolbar-button--*'};
 
 /**
  * @element ons-toolbar-button
- * @category toolbar
+ * @category page
  * @modifier material
  *   [en]Material Design toolbar button.[/en]
  *   [ja][/ja]

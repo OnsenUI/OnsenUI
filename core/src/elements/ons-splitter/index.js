@@ -30,7 +30,7 @@ const _animatorDict = {
 
 /**
  * @element ons-splitter
- * @category splitter
+ * @category menu
  * @description
  *  [en]
  *    A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.

@@ -31,7 +31,7 @@ const scheme = {
 
 /**
  * @element ons-toolbar
- * @category toolbar
+ * @category page
  * @modifier material
  *   [en]Material Design toolbar.[/en]
  *   [ja][/ja]

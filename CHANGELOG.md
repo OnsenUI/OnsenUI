@@ -6,6 +6,8 @@ v2.0.0-rc.20
 ----
  * ons-splitter-side: Fix attribute watchers.
  * ons-range: Fix [#1554](https://github.com/OnsenUI/OnsenUI/issues/1554).
+ * ons-page: Fixed dependency problem between ons-page and ons-toolbar.
+ * ons-ripple: Fix timing issue on older Android WebViews.
 
 v2.0.0-rc.19
 ----

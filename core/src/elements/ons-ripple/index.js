@@ -22,7 +22,7 @@ import Animator from './animator-css';
 
 /**
  * @element ons-ripple
- * @category ripple
+ * @category visual
  * @description
  *   [en]
  *     Adds a Material Design "ripple" effect to an element. The ripple effect will spread from the position where the user taps.
@@ -198,9 +198,10 @@ export default class RippleElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._parentNode.removeEventListener('tap', this._boundOnTap);
-    this._parentNode.removeEventListener('hold', this._boundOnHold);
-    this._parentNode.removeEventListener('dragstart', this._boundOnDragStart);
+    const pn = this._parentNode || this.parentNode;
+    pn.removeEventListener('tap', this._boundOnTap);
+    pn.removeEventListener('hold', this._boundOnHold);
+    pn.removeEventListener('dragstart', this._boundOnDragStart);
   }
 
   static get observedAttributes() {

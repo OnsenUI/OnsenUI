@@ -44,7 +44,7 @@ const INPUT_ATTRIBUTES = [
 
 /**
  * @element ons-range
- * @category range
+ * @category form
  * @modifier material
  *   [en]Material Design slider[/en]
  *   [ja][/ja]

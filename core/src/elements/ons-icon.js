@@ -21,7 +21,7 @@ import BaseElement from 'ons/base-element';
 
 /**
  * @element ons-icon
- * @category icon
+ * @category visual
  * @description
  *   [en]
  *     Displays an icon. The following icon suites are available:

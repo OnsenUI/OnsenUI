@@ -22,7 +22,7 @@ const scheme = {
 
 /**
  * @element ons-speed-dial-item
- * @category speed-dial
+ * @category control
  * @description
  *   [en]
  *     This component displays the child elements of the Material Design Speed dial component.

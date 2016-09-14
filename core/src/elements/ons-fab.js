@@ -23,7 +23,7 @@ const scheme = {
 
 /**
  * @element ons-fab
- * @category fab
+ * @category form
  * @description
  *   [en]
  *     The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
