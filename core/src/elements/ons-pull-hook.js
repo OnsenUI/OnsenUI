@@ -33,7 +33,7 @@ const removeTransform = (el) => {
 
 /**
  * @element ons-pull-hook
- * @category pull-hook
+ * @category control
  * @description
  *   [en]
  *     Component that adds **Pull to refresh** functionality to an `<ons-page>` element.

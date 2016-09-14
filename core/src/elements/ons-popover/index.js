@@ -59,7 +59,7 @@ const positions = {
 const directions = Object.keys(positions);
 /**
  * @element ons-popover
- * @category popover
+ * @category dialog
  * @description
  *  [en]
  *    A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.

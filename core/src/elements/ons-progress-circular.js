@@ -34,7 +34,7 @@ const template = util.createElement(`
 
 /**
  * @element ons-progress-circular
- * @category progress
+ * @category visual
  * @description
  *   [en]
  *     This component displays a circular progress indicator. It can either be used to show how much of a task has been completed or to show a looping animation to indicate that an operation is currently running.
