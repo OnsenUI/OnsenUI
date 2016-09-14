@@ -23,13 +23,15 @@ import BaseElement from 'ons/base-element';
 import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
 import contentReady from 'ons/content-ready';
 
+import 'elements/ons-toolbar'; // ensures that 'ons-toolbar' element is registered
+
 const scheme = {
   '': 'page--*',
   '.page__content': 'page--*__content',
   '.page__background': 'page--*__background'
 };
 
-const nullToolbarElement = document.createElement('ons-toolbar');
+const nullToolbarElement = document.createElement('ons-toolbar'); // requires that 'ons-toolbar' element is registered
 
 /**
  * @element ons-page
