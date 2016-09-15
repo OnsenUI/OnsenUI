@@ -32,6 +32,7 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @tutorial vanilla/Reference/fab
+ * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]

@@ -145,9 +145,6 @@ const HorizontalModeTrait = {
  * @seealso ons-carousel-item
  *   [en]`<ons-carousel-item>` component[/en]
  *   [ja]ons-carousel-itemコンポーネント[/ja]
- * @guide UsingCarousel
- *   [en]Learn how to use the carousel component.[/en]
- *   [ja]carouselコンポーネントの使い方[/ja]
  * @example
  * <ons-carousel style="width: 100%; height: 200px">
  *   <ons-carousel-item>

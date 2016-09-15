@@ -76,12 +76,10 @@ const INPUT_ATTRIBUTES = [
  * @seealso ons-switch
  *   [en]The `<ons-switch>` element is used to display a draggable toggle switch.[/en]
  *   [ja][/ja]
- * @guide UsingFormComponents
+ * @guide adding-page-content
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
- * @guide EventHandling
- *   [en]Event handling descriptions[/en]
- *   [ja]イベント処理の使い方[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-input placeholder="Username" float></ons-input>
  * <ons-input type="checkbox" checked></ons-input>

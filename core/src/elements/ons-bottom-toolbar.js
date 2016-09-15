@@ -32,9 +32,6 @@ const scheme = {'': 'bottom-bar--*'};
  *   [en]Make the toolbar transparent.[/en]
  *   [ja]ツールバーの背景を透明にして表示します。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
- * @guide Addingatoolbar
- *   [en]Adding a toolbar[/en]
- *   [ja]ツールバーの追加[/ja]
  * @example
  * <ons-bottom-toolbar>
  *   Content

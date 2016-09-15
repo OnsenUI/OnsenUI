@@ -27,7 +27,7 @@ import BaseElement from 'ons/base-element';
  *     These templates can be loaded as pages in `<ons-navigator>`, `<ons-tabbar>` and `<ons-splitter>`. They can also be used to generate dialogs.
  *   [/en]
  *   [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。この要素でHTMLを宣言すると、id属性に指定した名前をpageのURLとしてons-navigatorなどのコンポーネントから参照できます。[/ja]
- * @guide DefiningMultiplePagesinSingleHTML
+ * @guide templates
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-navigator

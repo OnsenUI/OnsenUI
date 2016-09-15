@@ -74,7 +74,7 @@ const scheme = {
  * @seealso ons-list-header
  *   [en]ons-list-header component[/en]
  *   [ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList
+ * @guide lists
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt

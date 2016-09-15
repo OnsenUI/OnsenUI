@@ -24,7 +24,7 @@ import BaseElement from 'ons/base-element';
  *   [en]Represents a row in the grid system. Use with `<ons-col>` to layout components.[/en]
  *   [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @codepen GgujC {wide}
- * @guide Layouting
+ * @guide layouting
  *   [en]Layouting guide[/en]
  *   [ja]レイアウト調整[/ja]
  * @seealso ons-col

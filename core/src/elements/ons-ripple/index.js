@@ -32,11 +32,15 @@ import Animator from './animator-css';
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
  * @tutorial vanilla/Reference/ripple
+ * @guide cross-platform-styling
+ *  [en]Cross platform styling[/en]
+ *  [ja]Cross platform styling[/ja]
  * @example
  * <div class="my-div">
  *  <ons-ripple></ons-ripple>
  * </div>
  *
+ * @example
  * <ons-button ripple>Click me!</ons-button>
  */
 export default class RippleElement extends BaseElement {

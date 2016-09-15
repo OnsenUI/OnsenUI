@@ -57,15 +57,19 @@ const _animatorDict = {
  *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @codepen zxxaGa
  * @tutorial vanilla/Reference/dialog
- * @guide UsingDialog
- *   [en]Learn how to use the dialog component.[/en]
- *   [ja]ダイアログコンポーネントの使い方[/ja]
+ * @guide dialogs
+ *   [en]Dialog components[/en]
+ *   [ja]Dialog components[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-alert-dialog
  *   [en]`<ons-alert-dialog>` component[/en]
  *   [ja]ons-alert-dialogコンポーネント[/ja]
  * @seealso ons-popover
  *   [en]`<ons-popover>` component[/en]
  *   [ja]ons-popoverコンポーネント[/ja]
+ * @seealso ons-modal
+ *   [en]`<ons-modal>` component[/en]
+ *   [ja]ons-modalコンポーネント[/ja]
  * @example
  * <ons-dialog id="dialog">
  *   <p>This is a dialog!</p>
