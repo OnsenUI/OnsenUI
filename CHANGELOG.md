@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v2.0.0-rc.19
+v2.0.0
 ----
  * ons-splitter-side: Fix attribute watchers.
  * ons-range: Fix [#1554](https://github.com/OnsenUI/OnsenUI/issues/1554).
