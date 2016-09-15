@@ -60,9 +60,9 @@ const _animatorDict = {
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja][/ja]
- * @guide UsingAlert
- *   [en]Learn how to use the alert dialog.[/en]
- *   [ja]アラートダイアログの使い方の解説。[/ja]
+ * @guide dialogs
+ *   [en]Dialog components[/en]
+ *   [ja]Dialog components[/ja]
  * @seealso ons-dialog
  *   [en]ons-dialog component[/en]
  *   [ja]ons-dialogコンポーネント[/ja]

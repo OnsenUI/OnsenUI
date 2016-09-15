@@ -43,9 +43,6 @@ const removeTransform = (el) => {
  *   [ja][/ja]
  * @codepen WbJogM
  * @tutorial vanilla/Reference/pull-hook
- * @guide UsingPullHook
- *   [en]How to use Pull Hook[/en]
- *   [ja]プルフックを使う[/ja]
  * @example
  * <ons-page>
  *   <ons-pull-hook>

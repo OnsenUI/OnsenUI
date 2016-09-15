@@ -45,7 +45,7 @@ const _animatorDict = {
  *   [en]
  *     Dialog that is displayed on top of current screen. As opposed to the `<ons-alert-dialog>` element, this component can contain any kind of content.
  *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `<ons.createDialog(template)` utility function and the `<ons-template>` tag.
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<ons-template>` tag.
  *
  *     The dialog is useful for displaying menus, additional information or to ask the user to make a decision.
  *
@@ -57,15 +57,19 @@ const _animatorDict = {
  *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @codepen zxxaGa
  * @tutorial vanilla/Reference/dialog
- * @guide UsingDialog
- *   [en]Learn how to use the dialog component.[/en]
- *   [ja]ダイアログコンポーネントの使い方[/ja]
+ * @guide dialogs
+ *   [en]Dialog components[/en]
+ *   [ja]Dialog components[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-alert-dialog
  *   [en]`<ons-alert-dialog>` component[/en]
  *   [ja]ons-alert-dialogコンポーネント[/ja]
  * @seealso ons-popover
  *   [en]`<ons-popover>` component[/en]
  *   [ja]ons-popoverコンポーネント[/ja]
+ * @seealso ons-modal
+ *   [en]`<ons-modal>` component[/en]
+ *   [ja]ons-modalコンポーネント[/ja]
  * @example
  * <ons-dialog id="dialog">
  *   <p>This is a dialog!</p>

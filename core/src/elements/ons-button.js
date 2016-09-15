@@ -62,7 +62,8 @@ const scheme = {'': 'button--*'};
  * @codepen hLayx
  * @tutorial vanilla/Reference/button
  * @guide Button [en]Guide for `<ons-button>`[/en][ja]<ons-button>の使い方[/ja]
- * @guide OverridingCSSstyles [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
  * <ons-button modifier="large--cta">
  *   Tap Me

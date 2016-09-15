@@ -57,12 +57,10 @@ const locations = {
  *   [ja][/ja]
  * @codepen LpXZQQ
  * @tutorial vanilla/Reference/switch
- * @guide UsingFormComponents
+ * @guide adding-page-content
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
- * @guide EventHandling
- *   [en]Event handling descriptions[/en]
- *   [ja]イベント処理の使い方[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-switch checked></ons-switch>
  * <ons-switch disabled></ons-switch>

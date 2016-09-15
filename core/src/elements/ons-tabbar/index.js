@@ -80,16 +80,10 @@ const generateId = (() => {
  *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
  * @tutorial vanilla/Reference/tabbar
- * @guide UsingTabBar
- *   [en]Using tab bar[/en]
- *   [ja]タブバーを使う[/ja]
- * @guide EventHandling
- *   [en]Event handling descriptions[/en]
- *   [ja]イベント処理の使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript
- *   [en]Using navigator from JavaScript[/en]
- *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide DefiningMultiplePagesinSingleHTML
+ * @guide multiple-page-navigation
+ *  [en]Managing multiple pages.[/en]
+ *  [ja]Managing multiple pages[/ja]
+ * @guide templates
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-tab

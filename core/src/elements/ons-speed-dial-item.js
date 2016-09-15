@@ -35,6 +35,9 @@ const scheme = {
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component.[/en]
  *   [ja]ons-speed-dialコンポーネント[/ja]
+ * @seealso ons-fab
+ *   [en]ons-fab component[/en]
+ *   [ja]ons-fabコンポーネント[/ja]
  * @example
  * <ons-speed-dial position="left bottom">
  *   <ons-fab>

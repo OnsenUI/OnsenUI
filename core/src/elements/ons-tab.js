@@ -54,10 +54,10 @@ const defaultInnerTemplateSource = util.createElement(`
  *   [/ja]
  * @codepen pGuDL
  * @tutorial vanilla/Reference/tabbar
- * @guide UsingTabBar
- *   [en]Using tab bar[/en]
- *   [ja]タブバーを使う[/ja]
- * @guide DefiningMultiplePagesinSingleHTML
+ * @guide multiple-page-navigation
+ *   [en]Managing multiple pages.[/en]
+ *   [ja]Managing multiple pages[/ja]]
+ * @guide templates
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-tabbar

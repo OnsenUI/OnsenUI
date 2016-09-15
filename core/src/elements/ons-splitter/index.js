@@ -40,15 +40,15 @@ const _animatorDict = {
  *  [ja][/ja]
  * @codepen rOQOML
  * @tutorial vanilla/Reference/splitter
+ * @guide multiple-page-navigation
+ *  [en]Managing multiple pages.[/en]
+ *  [ja]Managing multiple pages[/ja]
  * @seealso ons-splitter-content
  *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]
  * @seealso ons-splitter-side
  *  [en]The `<ons-splitter-side>` component contains the menu.[/en]
  *  [ja]ons-splitter-sideコンポーネント[/ja]
- * @guide CallingComponentAPIsfromJavaScript
- *   [en]Using components from JavaScript[/en]
- *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
  * <ons-splitter id="splitter">
  *   <ons-splitter-content>

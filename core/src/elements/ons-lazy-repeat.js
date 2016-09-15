@@ -34,9 +34,9 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
  * @seealso ons-list
  *   [en]The `<ons-list>` element is used to render a list.[/en]
  *   [ja]`<ons-list>`要素はリストを描画するのに使われます。[/ja]
- * @guide UsingLazyRepeat
- *   [en]How to use Lazy Repeat[/en]
- *   [ja]レイジーリピートの使い方[/ja]
+ * @guide infinite-scroll
+ *   [en]Loading more items on infinite scroll[/en]
+ *   [ja]Loading more items on infinite scroll[/ja]
  * @example
  * <script>
  *   window.addEventListener('load', function() {

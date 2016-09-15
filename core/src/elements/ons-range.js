@@ -57,12 +57,7 @@ const INPUT_ATTRIBUTES = [
  *   [ja][/ja]
  * @codepen xZQomM
  * @tutorial vanilla/Reference/range
- * @guide UsingFormComponents
- *   [en]Using form components[/en]
- *   [ja]フォームを使う[/ja]
- * @guide EventHandling
- *   [en]Event handling descriptions[/en]
- *   [ja]イベント処理の使い方[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-input
  *   [en]The `<ons-input>` component is used to display text inputs, radio buttons and checkboxes.[/en]
  *   [ja][/ja]
