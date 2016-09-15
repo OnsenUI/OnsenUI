@@ -42,6 +42,9 @@ const template = util.createElement(`
  *   [ja][/ja]
  * @codepen EVzMjR
  * @tutorial vanilla/Reference/progress
+ * @seealso ons-progress-bar
+ *   [en]The `<ons-progress-bar>` component displays a bar progress indicator.[/en]
+ *   [ja][/ja]
  * @example
  * <ons-progress-circular
  *  value="55"

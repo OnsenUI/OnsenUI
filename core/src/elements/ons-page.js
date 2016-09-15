@@ -47,21 +47,16 @@ const nullToolbarElement = document.createElement('ons-toolbar'); // requires th
  *   [/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @tutorial vanilla/Reference/page
- * @guide ManagingMultiplePages
- *   [en]Managing multiple pages[/en]
- *   [ja]複数のページを管理する[/ja]
- * @guide Pagelifecycle
- *   [en]Page life cycle events[/en]
- *   [ja]ページライフサイクルイベント[/ja]
- * @guide HandlingBackButton
- *   [en]Handling back button[/en]
- *   [ja]バックボタンに対応する[/ja]
- * @guide OverridingCSSstyles
- *   [en]Overriding CSS styles[/en]
- *   [ja]CSSスタイルのオーバーライド[/ja]
- * @guide DefiningMultiplePagesinSingleHTML
+ * @guide creating-a-page
+ *   [en]Setting up a page in its `init` event[/en]
+ *   [ja]Setting up a page in its `init` event[/ja]
+ * @guide templates
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @guide multiple-page-navigation
+ *   [en]Managing multiple pages[/en]
+ *   [ja]複数のページを管理する[/ja]
+ * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-toolbar
  *   [en]Use the `<ons-toolbar>` element to add a navigation bar to the top of the page.[/en]
  *   [ja][/ja]
@@ -81,11 +76,26 @@ const nullToolbarElement = document.createElement('ons-toolbar'); // requires th
  *
  *   <p>Page content</p>
  * </ons-page>
+ * 
+ * @example
+ * <script>
+ *   myApp.handler = function(done) {
+ *     loadMore().then(done);
+ *   }
+ * </script>
  *
- * // Infinite Scroll handler
- * page.onInfiniteScroll = function(done) {
- *   loadMore().then(done);
- * };
+ * <ons-page on-infinite-scroll="myApp.handler">
+ *   <ons-toolbar>
+ *     <div class="center">List</div>
+ *   </ons-toolbar>
+ *
+ *   <ons-list>
+ *     <ons-list-item>#1</ons-list-item>
+ *     <ons-list-item>#2</ons-list-item>
+ *     <ons-list-item>#3</ons-list-item>
+ *     ...
+ *   </ons-list>
+ * </ons-page>
  */
 export default class PageElement extends BaseElement {
 

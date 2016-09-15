@@ -31,9 +31,7 @@ import contentReady from 'ons/content-ready';
  *     Sometimes it is useful to conditionally hide or show certain components based on platform. When running on iOS the `<ons-if>` element can be used to hide the `<ons-fab>` element.
  *   [/en]
  *   [ja][/ja]
- * @guide UtilityAPIs
- *   [en]Other utility APIs[/en]
- *   [ja]他のユーティリティAPI[/ja]
+ * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
  * <ons-page>
  *   <ons-if orientation="landscape">

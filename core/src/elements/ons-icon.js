@@ -33,7 +33,7 @@ import BaseElement from 'ons/base-element';
  *   [ja][/ja]
  * @codepen xAhvg
  * @tutorial vanilla/Reference/icon
- * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
+ * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
  * <ons-icon
  *   icon="md-car"

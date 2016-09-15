@@ -34,7 +34,7 @@ const scheme = {'': 'list__header--*'};
  * @seealso ons-list-item
  *   [en]The `<ons-list-item>` component[/en]
  *   [ja]ons-list-itemコンポーネント[/ja]
- * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ * @guide lists [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  * @tutorial vanilla/Reference/list
  * @modifier material

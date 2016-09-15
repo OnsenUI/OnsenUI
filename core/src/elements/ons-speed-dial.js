@@ -37,6 +37,9 @@ const scheme = {
  * @seealso ons-speed-dial-item
  *   [en]The `<ons-speed-dial-item>` represents a menu item.[/en]
  *   [ja]ons-speed-dial-itemコンポーネント[/ja]
+ * @seealso ons-fab
+ *   [en]ons-fab component[/en]
+ *   [ja]ons-fabコンポーネント[/ja]
  * @example
  * <ons-speed-dial position="left bottom">
  *   <ons-fab>

@@ -48,12 +48,6 @@ var scheme = {
  * @seealso ons-navigator
  *   [en]ons-navigator component[/en]
  *   [ja]ons-navigatorコンポーネント[/ja]
- * @guide Addingatoolbar
- *   [en]Adding a toolbar[/en]
- *   [ja]ツールバーの追加[/ja]
- * @guide Returningfromapage
- *   [en]Returning from a page[/en]
- *   [ja]一つ前のページに戻る[/ja]
  * @example
  * <ons-toolbar>
  *   <div class="left">
