@@ -12,7 +12,8 @@
     document.addEventListener('init', function(event) {
       console.log('init');
       if (event.target.id === 'page1') {
-        event.target.querySelector('ons-toolbar div.center').innerHTML = event.target.data ? event.target.data.title : 'Custom Page';
+        var title = event.target.data && event.target.data.title ? event.target.data.title : 'Custom Page';
+        event.target.querySelector('ons-toolbar div.center').textContent = title;
       }
     });
     document.addEventListener('show', function(event) {
