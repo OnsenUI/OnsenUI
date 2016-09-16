@@ -38,6 +38,9 @@ const scheme = {
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
+ * @modifier noshadow
+ *   [en]Toolbar without shadow[/en]
+ *   [ja]どうしよう[/ja]
  * @description
  *   [en]
  *     Toolbar component that can be used with navigation.
