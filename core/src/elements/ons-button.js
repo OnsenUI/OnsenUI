@@ -95,9 +95,7 @@ export default class ButtonElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
   }
 
   static get observedAttributes() {
@@ -137,8 +135,6 @@ export default class ButtonElement extends BaseElement {
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   _updateRipple() {
