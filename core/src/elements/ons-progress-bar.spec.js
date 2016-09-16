@@ -3,8 +3,9 @@
 describe('OnsProgressBarElement', () => {
   let progress;
 
-  beforeEach(() => {
+  beforeEach(done => {
     progress = ons._util.createElement('<ons-progress-bar></ons-progress-bar>');
+    ons.contentReady(progress, done);
   });
 
   it('exists', () => {
