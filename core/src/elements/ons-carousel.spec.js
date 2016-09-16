@@ -6,9 +6,9 @@ describe('OnsCarouselElement', () => {
   beforeEach(() => {
     carousel = ons._util.createElement(`
       <ons-carousel>
-      <ons-carousel-item>Item 1</ons-carousel-item>
-      <ons-carousel-item>Item 2</ons-carousel-item>
-      <ons-carousel-item>Item 3</ons-carousel-item>
+        <ons-carousel-item>Item 1</ons-carousel-item>
+        <ons-carousel-item>Item 2</ons-carousel-item>
+        <ons-carousel-item>Item 3</ons-carousel-item>
       </ons-carosel>
     `);
     document.body.appendChild(carousel);

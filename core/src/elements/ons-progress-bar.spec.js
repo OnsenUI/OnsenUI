@@ -5,7 +5,7 @@ describe('OnsProgressBarElement', () => {
 
   beforeEach(done => {
     progress = ons._util.createElement('<ons-progress-bar></ons-progress-bar>');
-    ons.contentReady(progress, done);
+    ons._contentReady(progress, done);
   });
 
   it('exists', () => {
@@ -64,7 +64,7 @@ describe('OnsProgressBarElement', () => {
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
       const spy = chai.spy.on(window.ons.ProgressBarElement.prototype, '_compile');
-      ons._util.createElement('<ons-progress-bar></ons-progress-bar>');
+      ons._util.createElement('<ons-progress-bar> </ons-progress-bar>');
 
       expect(spy).to.have.been.called.once;
     });
@@ -72,7 +72,7 @@ describe('OnsProgressBarElement', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
-      div1.innerHTML = '<ons-progress-bar></ons-progress-bar>';
+      div1.innerHTML = '<ons-progress-bar> </ons-progress-bar>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
