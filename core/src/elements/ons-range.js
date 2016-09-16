@@ -69,10 +69,7 @@ export default class RangeElement extends BaseElement {
 
   init() {
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
-
+      this._compile();
       this._updateBoundAttributes();
       this._onChange();
     });
@@ -89,8 +86,6 @@ export default class RangeElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   _onChange() {
