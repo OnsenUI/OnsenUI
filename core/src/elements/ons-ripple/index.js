@@ -19,6 +19,7 @@ import util from 'ons/util';
 import internal from 'ons/internal';
 import BaseElement from 'ons/base-element';
 import Animator from './animator-css';
+import contentReady from 'ons/content-ready';
 
 /**
  * @element ons-ripple
@@ -69,13 +70,7 @@ export default class RippleElement extends BaseElement {
    */
 
   init() {
-    this.classList.add('ripple');
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    } else {
-      this._background = this.getElementsByClassName('ripple__background')[0];
-      this._wave = this.getElementsByClassName('ripple__wave')[0];
-    }
+    contentReady(this, () => this._compile());
 
     this._animator = new Animator();
 
@@ -85,12 +80,18 @@ export default class RippleElement extends BaseElement {
   }
 
   _compile() {
-    ['_wave', '_background'].forEach(e => {
-      this[e] = document.createElement('div');
-      this[e].classList.add('ripple_' + e);
-      this.appendChild(this[e]);
-    });
-    this.setAttribute('_compiled', '');
+    this.classList.add('ripple');
+
+    this._wave = this.getElementsByClassName('ripple__wave')[0];
+    this._background = this.getElementsByClassName('ripple__background')[0];
+
+    if (!(this._background && this._wave)) {
+      this._wave = util.create('.ripple__wave');
+      this._background = util.create('.ripple__background');
+
+      this.appendChild(this._wave);
+      this.appendChild(this._background);
+    }
   }
 
   _calculateCoords(e) {
@@ -217,20 +218,26 @@ export default class RippleElement extends BaseElement {
       this._minR = Math.max(0, parseFloat(current) || 0);
     }
     if (name === 'color' && current) {
-      this._wave.style.background = current;
-      if (!this.hasAttribute('background')) {
-        this._background.style.background = current;
-      }
+      contentReady(this, () => {
+        this._wave.style.background = current;
+        if (!this.hasAttribute('background')) {
+          this._background.style.background = current;
+        }
+      });
     }
     if (name === 'background' && (current || last)) {
       if (current === 'none') {
-        this._background.setAttribute('disabled', 'disabled');
-        this._background.style.background = 'transparent';
+        contentReady(this, () => {
+          this._background.setAttribute('disabled', 'disabled');
+          this._background.style.background = 'transparent';
+        });
       } else {
-        if (this._background.hasAttribute('disabled')) {
-          this._background.removeAttribute('disabled');
-        }
-        this._background.style.background = current;
+        contentReady(this, () => {
+          if (this._background.hasAttribute('disabled')) {
+            this._background.removeAttribute('disabled');
+          }
+          this._background.style.background = current;
+        });
       }
     }
     if (name === 'center') {
