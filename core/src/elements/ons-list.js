@@ -69,18 +69,13 @@ export default class ListElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
   }
 
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add('list');
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   static get observedAttributes() {
