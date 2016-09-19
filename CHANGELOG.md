@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.1
+----
+ * angular1: Fix [#1588](https://github.com/OnsenUI/OnsenUI/issues/1588).
+
 v2.0.0
 ----
  * ons-splitter-side: Fix attribute watchers.
