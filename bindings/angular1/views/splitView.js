@@ -104,7 +104,10 @@ limitations under the License.
 
         this._currentPage = pageContent;
         this._currentPageScope = pageScope;
-        this._currentPage[0]._show();
+
+        setImmediate(() => {
+          this._currentPage[0]._show();
+        });
       },
 
       /**
