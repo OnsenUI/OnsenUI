@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import contentReady from 'ons/content-ready';
 
 /**
  * @object ons.notification
@@ -70,6 +71,8 @@ notification._createAlertDialog = function(title, message,
     <div class="alert-dialog-content"></div>
     <div class="alert-dialog-footer"></div>
   `);
+
+  contentReady(dialogElement);
 
   if (id) {
     dialogElement.setAttribute('id', id);
