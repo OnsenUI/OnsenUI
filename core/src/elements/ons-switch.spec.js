@@ -3,10 +3,9 @@
 describe('OnsSwitchElement', () => {
   let element;
 
-  beforeEach(done => {
+  beforeEach(() => {
     element = new ons.SwitchElement();
     document.body.appendChild(element);
-    ons._contentReady(element, done);
   });
 
   afterEach(() => {
@@ -195,14 +194,11 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', done => {
+    it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = document.createElement('ons-switch');
-      ons._contentReady(e, () => {
-        expect(e.getAttribute('modifier')).to.equal('material');
-        ons.platform.select('');
-        done();
-      });
+      expect(e.getAttribute('modifier')).to.equal('material');
+      ons.platform.select('');
     });
   });
 });
