@@ -76,7 +76,7 @@ const nullToolbarElement = document.createElement('ons-toolbar'); // requires th
  *
  *   <p>Page content</p>
  * </ons-page>
- * 
+ *
  * @example
  * <script>
  *   myApp.handler = function(done) {
