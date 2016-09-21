@@ -219,7 +219,7 @@ export default class SwitchElement extends BaseElement {
   }
 
   _onChange(event) {
-    util.toggleAttribute(this, 'checked', event.target.checked);
+    util.toggleAttribute(this, 'checked', this.checkbox.checked);
   }
 
   _onClick(ev) {
