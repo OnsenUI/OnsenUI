@@ -136,7 +136,6 @@ export default class SwitchElement extends BaseElement {
 
     if (this._checked !== this._checkbox.checked) {
       this._checkbox.click();
-      this._checkbox.checked = this._checked;
     }
   }
 
@@ -173,6 +172,8 @@ export default class SwitchElement extends BaseElement {
     this._checked = false;
     this._disabled = false;
 
+    this._boundOnChange = this._onChange.bind(this);
+
     this._compile();
 
     ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
@@ -199,7 +200,7 @@ export default class SwitchElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._checkbox.removeEventListener('change', this._onChange);
+    this._checkbox.removeEventListener('change', this._boundOnChange);
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
@@ -208,7 +209,7 @@ export default class SwitchElement extends BaseElement {
   }
 
   connectedCallback() {
-    this._checkbox.addEventListener('change', this._onChange);
+    this._checkbox.addEventListener('change', this._boundOnChange);
     this.addEventListener('dragstart', this._onDragStart);
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
@@ -217,12 +218,8 @@ export default class SwitchElement extends BaseElement {
     this._boundOnRelease = this._onRelease.bind(this);
   }
 
-  _onChange() {
-    if (this._checked) {
-      this.parentNode.setAttribute('checked', '');
-    } else {
-      this.parentNode.removeAttribute('checked');
-    }
+  _onChange(event) {
+    util.toggleAttribute(this, 'checked', event.target.checked);
   }
 
   _onClick(ev) {
@@ -234,6 +231,12 @@ export default class SwitchElement extends BaseElement {
   click() {
     if (!this._disabled) {
       this.checked = !this.checked;
+
+      util.triggerElementEvent(this, 'change', {
+        value: this.checked,
+        switch: this,
+        isInteractive: true
+      });
     }
   }
 

@@ -32,10 +32,6 @@ limitations under the License.
         this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
         this._scope = scope;
 
-        this._checkbox.on('change', () => {
-          this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
-        });
-
         this._prepareNgModel(element, scope, attrs);
 
         this._scope.$on('$destroy', () => {
@@ -52,7 +48,7 @@ limitations under the License.
             this.checked = !!value;
           });
 
-          this._checkbox.on('change', e => {
+          this._element.on('change', e => {
             set(scope.$parent, this.checked);
 
             if (attrs.ngChange) {
