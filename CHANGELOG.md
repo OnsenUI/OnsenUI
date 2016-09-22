@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.1
 ----
  * angular1: Fix [#1588](https://github.com/OnsenUI/OnsenUI/issues/1588).
+ * ons.notification: Fix [#1595](https://github.com/OnsenUI/OnsenUI/issues/1595).
 
 v2.0.0
 ----
