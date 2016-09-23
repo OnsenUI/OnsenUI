@@ -41,7 +41,7 @@ function consumeQueue(element) {
   callbacks.forEach(callback => callback());
 }
 
-export default function contentReady(element, fn) {
+export default function contentReady(element, fn = () => {}) {
   addCallback(element, fn);
 
   if (isContentReady(element)) {

@@ -380,7 +380,10 @@ limitations under the License.
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
-        this._currentPageElement[0]._show();
+
+        setImmediate(() => {
+          this._currentPageElement[0]._show();
+        });
       },
 
       /**
