@@ -165,7 +165,6 @@ describe('OnsTabElement', () => {
 
       expect(element.children[1].nodeName).to.equal('BUTTON');
       expect(element.children[1].classList.contains('tab-bar__button')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar-inner')).to.be.true;
     });
   });
 

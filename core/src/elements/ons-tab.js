@@ -31,7 +31,7 @@ const scheme = {
 const templateSource = util.createElement(`
   <div>
     <input type="radio" style="display: none">
-    <button class="tab-bar__button tab-bar-inner"></button>
+    <button class="tab-bar__button"></button>
   </div>
 `);
 const defaultInnerTemplateSource = util.createElement(`
