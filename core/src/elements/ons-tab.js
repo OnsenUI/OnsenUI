@@ -145,14 +145,10 @@ export default class TabElement extends BaseElement {
     this._page = null;
 
     if (this.hasAttribute('label') || this.hasAttribute('icon')) {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
     } else {
       contentReady(this, () => {
-        if (!this.hasAttribute('_compiled')) {
-          this._compile();
-        }
+        this._compile();
       });
     }
 
@@ -182,42 +178,54 @@ export default class TabElement extends BaseElement {
     return this._pageLoader;
   }
 
+  _templateLoaded() {
+    if (this.children.length == 0) {
+      return false;
+    }
+
+    const hasInput = this.children[0].getAttribute('type') === 'radio';
+    const hasButton = util.findChild(this, '.tab-bar__button');
+
+    return hasInput && hasButton;
+  }
+
   _compile() {
     autoStyle.prepare(this);
 
-    const fragment = document.createDocumentFragment();
-    let hasChildren = false;
-
-    while (this.childNodes[0]) {
-      const node = this.childNodes[0];
-      this.removeChild(node);
-      fragment.appendChild(node);
-
-      if (node.nodeType == Node.ELEMENT_NODE) {
-        hasChildren = true;
-      }
-    }
-
-    const template = templateSource.cloneNode(true);
-    while (template.children[0]) {
-      this.appendChild(template.children[0]);
-    }
     this.classList.add('tab-bar__item');
 
-    const button = util.findChild(this, '.tab-bar__button');
+    if (!this._templateLoaded()) {
+      const fragment = document.createDocumentFragment();
+      let hasChildren = false;
 
-    if (hasChildren) {
-      button.appendChild(fragment);
-      this._hasDefaultTemplate = false;
-    } else {
-      this._hasDefaultTemplate = true;
-      this._updateDefaultTemplate();
+      while (this.childNodes[0]) {
+        const node = this.childNodes[0];
+        this.removeChild(node);
+        fragment.appendChild(node);
+
+        if (node.nodeType == Node.ELEMENT_NODE) {
+          hasChildren = true;
+        }
+      }
+
+      const template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
+
+      const button = util.findChild(this, '.tab-bar__button');
+
+      if (hasChildren) {
+        button.appendChild(fragment);
+        this._hasDefaultTemplate = false;
+      } else {
+        this._hasDefaultTemplate = true;
+        this._updateDefaultTemplate();
+      }
     }
 
     ModifierUtil.initModifier(this, scheme);
     this._updateRipple();
-
-    this.setAttribute('_compiled', '');
   }
 
   _updateRipple() {
