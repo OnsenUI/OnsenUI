@@ -13,6 +13,10 @@ export interface ModalRef {
   destroy: Function;
 }
 
+/**
+ * @object ModalFactory
+ * @codepen xELBpb
+ */
 @Injectable()
 export class ModalFactory {
 

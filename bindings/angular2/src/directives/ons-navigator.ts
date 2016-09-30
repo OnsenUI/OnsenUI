@@ -32,6 +32,7 @@ export class NavigatorPage {
  * @element ons-navigator
  * @directive OnsNavigator
  * @selector ons-navigator
+ * @codpen KgvAvx
  * @description
  *   [en]Angular 2 directive for `<ons-navigator>` component.[/en]
  *   [ja]`<ons-navigator>`要素のAngular 2ディレクティブです。[/ja]

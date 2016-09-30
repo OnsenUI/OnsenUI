@@ -15,6 +15,10 @@ export interface PopoverRef {
   destroy: Function;
 }
 
+/**
+ * @object PopoverFactory
+ * @codepen dpzQKO
+ */
 @Injectable()
 export class PopoverFactory {
 
