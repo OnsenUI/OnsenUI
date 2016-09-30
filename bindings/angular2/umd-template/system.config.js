@@ -28,9 +28,38 @@ System.config({
       format: 'esm'
     }
   },
+  meta: {
+    'inline': {
+      loader: 'inline-loader'
+    }
+  },
   transpiler: 'typescript',
   typescriptOptions: {
     'emitDecoratorMetadata': true
   }
 });
 
+System.amdDefine('inline-loader', [], function() {
+  return {
+    fetch: function() {
+      return new Promise(function(resolve, reject) {
+        if (document.readyState === "complete") {
+          load();
+        } else {
+          window.onload = load;
+        }
+
+        function load() {
+          const target = document.querySelector('script[type="text/typescript"]');
+
+          if (target) {
+            resolve(target.textContent);
+          } else {
+            reject('Error: inline-loader fail.');
+          }
+        }
+      });
+    }
+  };
+
+});
