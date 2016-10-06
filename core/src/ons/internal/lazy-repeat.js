@@ -150,7 +150,7 @@ export class LazyRepeatProvider {
       wrapperElement.classList.add('lazy-list');
     }
 
-    this._pageContent = util.findParent(wrapperElement, '.page__content');
+    this._pageContent = this._findPageContentElement(wrapperElement);
 
     if (!this._pageContent) {
       throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an element.');
@@ -164,6 +164,24 @@ export class LazyRepeatProvider {
     }
     this._addEventListeners();
     this._onChange();
+  }
+
+  _findPageContentElement(wrapperElement) {
+    const pageContent = util.findParent(wrapperElement, '.page__content');
+
+    if (pageContent) {
+      return pageContent;
+    }
+
+    const page = util.findParent(wrapperElement, 'ons-page');
+    if (page) {
+      const content = util.findChild(page, '.content');
+      if (content) {
+        return content;
+      }
+    }
+
+    return null;
   }
 
   _checkItemHeight(callback) {
