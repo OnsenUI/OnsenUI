@@ -420,8 +420,8 @@
         }
 
         return function(scope, element, attrs) {
-          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__menu ons-sliding-menu-inner'));
-          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
+          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__menu'));
+          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main'));
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
 

@@ -40,8 +40,6 @@
         element.css('display', 'none');
 
         return function(scope, element, attrs) {
-          element.addClass('ons-if-orientation-inner');
-
           attrs.$observe('onsIfOrientation', update);
           $onsGlobal.orientation.on('change', update);
 

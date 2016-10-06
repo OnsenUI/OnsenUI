@@ -100,7 +100,6 @@ describe('OnsTabbarElement', () => {
 
     expect(element.children[1].classList.contains('tab-bar')).to.be.true;
     expect(element.children[1].classList.contains('ons-tab-bar__footer')).to.be.true;
-    expect(element.children[1].classList.contains('ons-tabbar-inner')).to.be.true;
   });
 
   describe('#getTabbarId()', () => {
