@@ -15,6 +15,7 @@ import {
  * @element ons-switch
  * @directive OnsSwitch
  * @selector ons-switch
+ * @codepen RGkqaG
  * @description
  *   [en]Angular 2 directive for `<ons-switch>` component.[/en]
  *   [ja]`<ons-switch>`要素のAngular 2ディレクティブです。[/ja]

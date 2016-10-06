@@ -15,6 +15,7 @@ import {
  * @element ons-range
  * @directive OnsRange
  * @selector ons-range
+ * @codepen pEAYbk
  * @description
  *   [en]Angular 2 directive for `<ons-range>` component.[/en]
  *   [ja]`<ons-range>`要素のAngular 2ディレクティブです。[/en]
