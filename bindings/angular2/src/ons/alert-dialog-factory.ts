@@ -13,6 +13,10 @@ export interface AlertDialogRef {
   destroy: Function;
 }
 
+/**
+ * @object AlertDialogFactory
+ * @codepen ORjAzd
+ */
 @Injectable()
 export class AlertDialogFactory {
 

@@ -243,12 +243,10 @@ export default class TabbarElement extends BaseElement {
 
       content.classList.add('ons-tab-bar__content');
       bar.classList.add('ons-tab-bar__footer');
-      bar.classList.add('ons-tabbar-inner');
-
     } else {
 
       const content = util.create('.ons-tab-bar__content.tab-bar__content');
-      const tabbar = util.create('.tab-bar.ons-tab-bar__footer.ons-tabbar-inner');
+      const tabbar = util.create('.tab-bar.ons-tab-bar__footer');
 
       while (this.firstChild) {
         tabbar.appendChild(this.firstChild);
