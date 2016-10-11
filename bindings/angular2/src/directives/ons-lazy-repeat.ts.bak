@@ -17,6 +17,7 @@ export class ItemContext {
 /**
  * @element ons-lazy-repeat
  * @directive OnsLazyRepeat
+ * @codepen ALompw
  * @selector [ons-lazy-repeat]
  * @description
  *   [en]Angular 2 directive for `<ons-lazy-repeat>` component.[/en]

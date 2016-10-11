@@ -15,7 +15,6 @@ export interface DialogRef {
 
 /**
  * @object DialogFactory
- * @codepen ALoYVp
  */
 @Injectable()
 export class DialogFactory {
