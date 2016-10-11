@@ -79,13 +79,6 @@ export class OnsLazyRepeat implements OnDestroy {
     done(view.rootNodes[0]);
   }
 
-  /**
-   * @method refresh
-   * @signature refresh()
-   * @desc
-   *   [en]Rerender all items in the list.[/en]
-   *   [ja]`ons-lazy-repeat`内部に読み込まれている要素を一旦全て読み込み直します。[/ja]
-   */
   refresh() {
     if (this._provider) {
       this._viewContainer.clear();
