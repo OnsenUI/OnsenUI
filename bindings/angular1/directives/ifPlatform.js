@@ -37,7 +37,6 @@
       scope: false,
 
       compile: function(element) {
-        element.addClass('ons-if-platform-inner');
         element.css('display', 'none');
 
         var platform = getPlatformString();

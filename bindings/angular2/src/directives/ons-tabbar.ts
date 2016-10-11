@@ -17,6 +17,7 @@ declare var ons: any;
  * @element ons-tab
  * @directive OnsTab
  * @selector ons-tab
+ * @codepen BLdGyR
  * @description
  *   [en]Angular 2 directive for `<ons-tab>` component.[/en]
  *   [ja]`<ons-tab>`要素のためのディレクティブです。[/ja]

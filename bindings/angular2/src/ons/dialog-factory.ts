@@ -13,6 +13,10 @@ export interface DialogRef {
   destroy: Function;
 }
 
+/**
+ * @object DialogFactory
+ * @codepen ALoYVp
+ */
 @Injectable()
 export class DialogFactory {
 

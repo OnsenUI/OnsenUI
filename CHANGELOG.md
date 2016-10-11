@@ -6,6 +6,7 @@ v2.0.1
 ----
  * angular1: Fix [#1588](https://github.com/OnsenUI/OnsenUI/issues/1588).
  * ons.notification: Fix [#1595](https://github.com/OnsenUI/OnsenUI/issues/1595).
+ * ons-lazy-repeat: Fix [#1613](https://github.com/OnsenUI/OnsenUI/issues/1613).
 
 v2.0.0
 ----
