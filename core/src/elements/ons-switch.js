@@ -114,8 +114,8 @@ export default class SwitchElement extends BaseElement {
    * @attribute input-id
    * @type {String}
    * @description
-   *  [en]Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
-   *  [ja][/ja]
+   *   [en]Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
+   *   [ja][/ja]
    */
 
   /**
@@ -127,14 +127,15 @@ export default class SwitchElement extends BaseElement {
    */
 
   get checked() {
-    return this._checkbox.checked;
+    return this._checked;
   }
 
   set checked(value) {
-    if (!!value !== this._checkbox.checked) {
+    this._checked = !!value;
+    util.toggleAttribute(this, 'checked', this._checked);
+
+    if (this._checked !== this._checkbox.checked) {
       this._checkbox.click();
-      this._checkbox.checked = !!value;
-      return util.toggleAttribute(this, 'checked', this.checked);
     }
   }
 
@@ -146,12 +147,13 @@ export default class SwitchElement extends BaseElement {
    *   [ja]無効化されている場合に`true`。[/ja]
    */
   get disabled() {
-    return this._checkbox.disabled;
+    return this._disabled;
   }
 
   set disabled(value) {
-    this._checkbox.disabled = value;
-    return util.toggleAttribute(this, 'disabled', this.disabled);
+    this._disabled = !!value;
+    util.toggleAttribute(this, 'disabled', this._disabled);
+    this._checkbox.disabled = this._disabled;
   }
 
   /**
@@ -167,12 +169,12 @@ export default class SwitchElement extends BaseElement {
   }
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._checked = false;
+    this._disabled = false;
 
-    this._checkbox = this.querySelector('.switch__input');
-    this._handle = this.querySelector('.switch__handle');
+    this._boundOnChange = this._onChange.bind(this);
+
+    this._compile();
 
     ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
@@ -184,13 +186,21 @@ export default class SwitchElement extends BaseElement {
 
     this.classList.add('switch');
 
-    this.appendChild(template.cloneNode(true));
+    if (!(util.findChild(this, '.switch__input') && util.findChild(this, '.switch__toggle'))) {
+      this.appendChild(template.cloneNode(true));
+    }
 
-    this.setAttribute('_compiled', '');
+    ModifierUtil.initModifier(this, scheme);
+
+    this._checkbox = this.querySelector('.switch__input');
+    this._handle = this.querySelector('.switch__handle');
+
+    this._checkbox.checked = this._checked;
+    this._checkbox.disbled = this._disabled;
   }
 
   disconnectedCallback() {
-    this._checkbox.removeEventListener('change', this._onChange);
+    this._checkbox.removeEventListener('change', this._boundOnChange);
     this.removeEventListener('dragstart', this._onDragStart);
     this.removeEventListener('hold', this._onHold);
     this.removeEventListener('tap', this.click);
@@ -199,21 +209,17 @@ export default class SwitchElement extends BaseElement {
   }
 
   connectedCallback() {
-    this._checkbox.addEventListener('change', this._onChange);
-    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+    this._checkbox.addEventListener('change', this._boundOnChange);
     this.addEventListener('dragstart', this._onDragStart);
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
-    this._boundOnRelease = this._onRelease.bind(this);
     this.addEventListener('click', this._onClick);
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+    this._boundOnRelease = this._onRelease.bind(this);
   }
 
-  _onChange() {
-    if (this.checked) {
-      this.parentNode.setAttribute('checked', '');
-    } else {
-      this.parentNode.removeAttribute('checked');
-    }
+  _onChange(event) {
+    util.toggleAttribute(this, 'checked', this.checkbox.checked);
   }
 
   _onClick(ev) {
@@ -223,8 +229,14 @@ export default class SwitchElement extends BaseElement {
   }
 
   click() {
-    if (!this.disabled) {
+    if (!this._disabled) {
       this.checked = !this.checked;
+
+      util.triggerElementEvent(this, 'change', {
+        value: this.checked,
+        switch: this,
+        isInteractive: true
+      });
     }
   }
 
@@ -288,10 +300,13 @@ export default class SwitchElement extends BaseElement {
         this._checkbox.id = current;
         break;
       case 'checked':
+        this._checked = current !== null;
         this._checkbox.checked = current !== null;
         util.toggleAttribute(this._checkbox, name, current !== null);
         break;
       case 'disabled':
+        this._disabled = current !== null;
+        this._checkbox.disabled = current !== null;
         util.toggleAttribute(this._checkbox, name, current !== null);
     }
   }

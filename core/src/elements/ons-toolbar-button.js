@@ -80,9 +80,7 @@ export default class ToolbarButtonElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
   }
 
   /**
@@ -106,8 +104,6 @@ export default class ToolbarButtonElement extends BaseElement {
     this.classList.add('toolbar-button');
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   static get observedAttributes() {

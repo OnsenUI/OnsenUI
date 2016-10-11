@@ -5,7 +5,7 @@ describe('OnsRippleElement', () => {
 
   const spyOn = chai.spy.on.bind(chai.spy, ons.RippleElement.prototype);
 
-  beforeEach(() => {
+  beforeEach(done => {
     container = ons._util.createElement(`
       <button>
         <ons-ripple></ons-ripple>
@@ -16,8 +16,12 @@ describe('OnsRippleElement', () => {
 
     ripple = container.querySelector('ons-ripple');
     ripple.removeAttribute('disabled');
-    wave = ripple._wave;
-    background = ripple._background;
+
+    ons._contentReady(ripple, () => {
+      wave = ripple._wave;
+      background = ripple._background;
+      done();
+    });
   });
 
   afterEach(() => {
@@ -30,32 +34,30 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('is called when an element is created', () => {
+    it('is called when an element is created', done => {
       const spy = spyOn('_compile'),
         _ = new ons.RippleElement();
 
-      expect(spy).to.have.been.called.once;
+      ons._contentReady(_, () => {
+        expect(spy).to.have.been.called.once;
+        done();
+      });
     });
 
-    it('is not called when an element is copied', () => {
-      const spy = spyOn('_compile'),
-        div1 = document.createElement('div'),
-        div2 = document.createElement('div');
-
-      div1.innerHTML = '<ons-ripple></ons-ripple>';
-      div2.innerHTML = div1.innerHTML;
-
-      expect(spy).to.have.been.called.once;
-      expect(div1.innerHTML).to.equal(div2.innerHTML);
-      expect(div1.isEqualNode(div2)).to.be.true;
+    it('creates a "wave" element', done => {
+      const ripple = new ons.RippleElement();
+      ons._contentReady(ripple, () => {
+        expect(ripple._wave).to.be.an.instanceof(HTMLElement);
+        done();
+      });
     });
 
-    it('creates a "wave" element', () => {
-      expect((new ons.RippleElement())._wave).to.be.an.instanceof(HTMLElement);
-    });
-
-    it('creates a "background" element', () => {
-      expect((new ons.RippleElement())._background).to.be.an.instanceof(HTMLElement);
+    it('creates a "background" element', done => {
+      const ripple = new ons.RippleElement();
+      ons._contentReady(ripple, () => {
+        expect(ripple._background).to.be.an.instanceof(HTMLElement);
+        done();
+      });
     });
   });
 
@@ -140,13 +142,15 @@ describe('OnsRippleElement', () => {
   const itCalls = calling => {
     return {
       whenUsing: (whenUsing, ...rest) => {
-        it(`calls ${calling}`, () => {
+        it(`calls ${calling}`, done => {
           const spy = spyOn(calling),
             ripple = new ons.RippleElement();
 
-
-          ripple[whenUsing].apply(ripple, rest);
-          expect(spy).to.have.been.called.once;
+          ons._contentReady(ripple, () => {
+            ripple[whenUsing].apply(ripple, rest);
+            expect(spy).to.have.been.called.once;
+            done();
+          });
         });
       }
     };

@@ -18,6 +18,7 @@ limitations under the License.
 import util from 'ons/util';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 
 const scheme = {
   '.progress-circular': 'progress-circular--*',
@@ -89,9 +90,7 @@ export default class ProgressCircularElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    contentReady(this, () => this._compile());
   }
 
   static get observedAttributes() {
@@ -110,23 +109,31 @@ export default class ProgressCircularElement extends BaseElement {
 
   _updateDeterminate() {
     if (this.hasAttribute('indeterminate')) {
-      this._template.classList.add(`progress-circular--indeterminate`);
-      this._template.classList.remove(`progress-circular--determinate`);
+      contentReady(this, () => {
+        this._template.classList.add(`progress-circular--indeterminate`);
+        this._template.classList.remove(`progress-circular--determinate`);
+      });
     }
     else {
-      this._template.classList.add(`progress-circular--determinate`);
-      this._template.classList.remove(`progress-circular--indeterminate`);
+      contentReady(this, () => {
+        this._template.classList.add(`progress-circular--determinate`);
+        this._template.classList.remove(`progress-circular--indeterminate`);
+      });
     }
   }
 
   _updateValue() {
     if (this.hasAttribute('value')) {
-      const per = Math.ceil(this.getAttribute('value') * 251.32 * 0.01);
-      this._primary.style['stroke-dasharray'] = per + '%, 251.32%';
+      contentReady(this, () => {
+        const per = Math.ceil(this.getAttribute('value') * 251.32 * 0.01);
+        this._primary.style['stroke-dasharray'] = per + '%, 251.32%';
+      });
     }
     if (this.hasAttribute('secondary-value')) {
-      const per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
-      this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
+      contentReady(this, () => {
+        const per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
+        this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
+      });
     }
   }
 
@@ -189,10 +196,14 @@ export default class ProgressCircularElement extends BaseElement {
   }
 
   _compile() {
-    this._template = template.cloneNode(true);
+    if (this._isCompiled()) {
+      this._template = util.findChild(this, '.progress-circular');
+    } else {
+      this._template = template.cloneNode(true);
+    }
 
-    this._primary = this._template.childNodes[3];
-    this._secondary = this._template.childNodes[1];
+    this._primary = util.findChild(this._template, '.progress-circular__primary');
+    this._secondary = util.findChild(this._template, '.progress-circular__secondary');
 
     this._updateDeterminate();
     this._updateValue();
@@ -200,8 +211,24 @@ export default class ProgressCircularElement extends BaseElement {
     this.appendChild(this._template);
 
     ModifierUtil.initModifier(this, scheme);
+  }
 
-    this.setAttribute('_compiled', '');
+  _isCompiled() {
+    if (!util.findChild(this, '.progress-circular')) {
+      return false;
+    }
+
+    const svg = util.findChild(this, '.progress-circular');
+
+    if (!util.findChild(svg, '.progress-circular__secondary')) {
+      return false;
+    }
+
+    if (!util.findChild(svg, '.progress-circular__primary')) {
+      return false;
+    }
+
+    return true;
   }
 }
 
