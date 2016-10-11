@@ -35,7 +35,7 @@ const scheme = {'': 'toolbar-button--*'};
  *   [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
  *   [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
  * @codepen aHmGL
- * @tutorial vanilla/Reference/button
+ * @tutorial vanilla/Reference/page
  * @guide adding-a-toolbar
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
