@@ -21,6 +21,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+if ('customElements' in window) {
+  window.customElements.define = undefined;
+}
+
 (function(window){'use strict';
 
   // DO NOT USE THIS FILE DIRECTLY, IT WON'T WORK
