@@ -8,10 +8,6 @@ import StaticServer from 'static-server';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
-gulp.task('build', shell.task(`
-  webpack ${FLAGS}
-`));
-
 gulp.task('serve', done => {
   createDevServer().listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/bindings/angular2/examples/button.html');
