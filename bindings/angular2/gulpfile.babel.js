@@ -47,7 +47,7 @@ gulp.task('e2e-test', done => {
 });
 
 function createDevServer(options = {}) {
-  const config = require('./webpack.config.js');
+  const config = require('./webpack-dev.config.js');
   const serverConfig = Object.assign(options, {
     publicPath: config.output.publicPath,
     stats: {colors: true}
