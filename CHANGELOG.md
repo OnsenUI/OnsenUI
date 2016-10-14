@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.2
+----
+ * angular1: Fix [#1609](https://github.com/OnsenUI/OnsenUI/issues/1609)
+
 v2.0.1
 ----
  * angular1: Fix [#1588](https://github.com/OnsenUI/OnsenUI/issues/1588).
