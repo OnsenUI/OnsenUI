@@ -19,7 +19,6 @@ declare const ons: any;
  * @element ons-splitter-side
  * @directive OnsSplitterSide
  * @selector ons-splitter-side
- * @codepen yaoGry
  * @description
  *   [ja]`<ons-splitter-side>`要素のAngular 2ディレクティブです。[/ja]
  *   [en]Angular 2 directive for `<ons-splitter-side>` component.[/en]

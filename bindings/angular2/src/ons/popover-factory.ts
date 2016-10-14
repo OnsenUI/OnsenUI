@@ -17,7 +17,6 @@ export interface PopoverRef {
 
 /**
  * @object PopoverFactory
- * @codepen dpzQKO
  */
 @Injectable()
 export class PopoverFactory {

@@ -15,7 +15,6 @@ export interface AlertDialogRef {
 
 /**
  * @object AlertDialogFactory
- * @codepen ORjAzd
  */
 @Injectable()
 export class AlertDialogFactory {

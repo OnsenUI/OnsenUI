@@ -76,7 +76,7 @@ const nullToolbarElement = document.createElement('ons-toolbar'); // requires th
  *
  *   <p>Page content</p>
  * </ons-page>
- * 
+ *
  * @example
  * <script>
  *   myApp.handler = function(done) {
@@ -151,9 +151,7 @@ export default class PageElement extends BaseElement {
     this.classList.add('page');
 
     contentReady(this, () => {
-      if (!this.hasAttribute('_compiled')) {
-        this._compile();
-      }
+      this._compile();
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
@@ -375,8 +373,6 @@ export default class PageElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   _elementShouldBeMoved(el) {

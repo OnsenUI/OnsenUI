@@ -3,8 +3,9 @@
 describe('OnsProgressCircularElement', () => {
   let progress;
 
-  beforeEach(() => {
+  beforeEach(done => {
     progress = ons._util.createElement('<ons-progress-circular></ons-progress-circular>');
+    ons._contentReady(progress, done);
   });
 
   it('exists', () => {
@@ -63,7 +64,7 @@ describe('OnsProgressCircularElement', () => {
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
       const spy = chai.spy.on(window.ons.ProgressCircularElement.prototype, '_compile');
-      ons._util.createElement('<ons-progress-circular></ons-progress-circular>');
+      ons._util.createElement('<ons-progress-circular> </ons-progress-circular>');
 
       expect(spy).to.have.been.called.once;
     });

@@ -65,7 +65,7 @@ const directions = Object.keys(positions);
  *    A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.
  *
  *    To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createPopover(template)` utility function and the `<ons-template>` tag.
- * 
+ *
  *    Another common way to use the popover is to display a menu when a button on the screen is tapped. For Material Design, popover looks exactly as a dropdown menu.
  *  [/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]

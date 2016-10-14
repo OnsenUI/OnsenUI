@@ -15,7 +15,6 @@ import {
  * @element ons-input
  * @directive OnsInput
  * @selector ons-input
- * @codepen VKzqyX
  * @description
  *   [en]Angular 2 directive for `<ons-input>` component.[/en]
  *   [ja]`<ons-input>`要素のAngular 2ディレクティブです。[/ja]

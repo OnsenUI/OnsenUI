@@ -15,7 +15,6 @@ export interface ModalRef {
 
 /**
  * @object ModalFactory
- * @codepen xELBpb
  */
 @Injectable()
 export class ModalFactory {

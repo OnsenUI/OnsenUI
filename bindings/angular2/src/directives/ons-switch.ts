@@ -8,6 +8,7 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
+  AfterViewInit,
   SimpleChanges
 } from '@angular/core';
 
@@ -15,7 +16,6 @@ import {
  * @element ons-switch
  * @directive OnsSwitch
  * @selector ons-switch
- * @codepen RGkqaG
  * @description
  *   [en]Angular 2 directive for `<ons-switch>` component.[/en]
  *   [ja]`<ons-switch>`要素のAngular 2ディレクティブです。[/ja]
@@ -25,7 +25,7 @@ import {
 @Directive({
   selector: 'ons-switch'
 })
-export class OnsSwitch implements OnChanges, OnDestroy {
+export class OnsSwitch implements AfterViewInit, OnChanges, OnDestroy {
   private _element: any;
   private _boundOnChange: Function;
 
@@ -52,6 +52,9 @@ export class OnsSwitch implements OnChanges, OnDestroy {
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
+  }
+
+  ngAfterViewInit() {
     this._element.checkbox.addEventListener('change', this._boundOnChange);
   }
 

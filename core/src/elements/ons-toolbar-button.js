@@ -35,7 +35,7 @@ const scheme = {'': 'toolbar-button--*'};
  *   [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
  *   [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
  * @codepen aHmGL
- * @tutorial vanilla/Reference/button
+ * @tutorial vanilla/Reference/page
  * @guide adding-a-toolbar
  *   [en]Adding a toolbar[/en]
  *   [ja]ツールバーの追加[/ja]
@@ -80,9 +80,7 @@ export default class ToolbarButtonElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
   }
 
   /**
@@ -106,8 +104,6 @@ export default class ToolbarButtonElement extends BaseElement {
     this.classList.add('toolbar-button');
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   static get observedAttributes() {

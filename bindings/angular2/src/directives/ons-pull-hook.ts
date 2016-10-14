@@ -11,7 +11,6 @@ import {
  * @element ons-pull-hook
  * @directive OnsPullHook
  * @selector ons-pull-hook
- * @codepen qaXQYb
  * @description
  *   [en]Angular 2 directive for `<ons-pull-hook>` component.[/en]
  *   [ja]`<ons-pull-hook>`要素のためのAngular2ディレクティブです。[/ja]

@@ -58,18 +58,13 @@ export default class ListHeaderElement extends BaseElement {
    */
 
   init() {
-    if (!this.hasAttribute('_compiled')) {
-      this._compile();
-    }
+    this._compile();
   }
 
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add('list__header');
     ModifierUtil.initModifier(this, scheme);
-
-    this.setAttribute('_compiled', '');
   }
 
   static get observedAttributes() {
