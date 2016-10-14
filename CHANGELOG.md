@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.2
 ----
  * switch: Fix regression where `change` event was not being triggered in some cases.
+ * angular1: Fix [#1609](https://github.com/OnsenUI/OnsenUI/issues/1609)
 
 v2.0.1
 ----

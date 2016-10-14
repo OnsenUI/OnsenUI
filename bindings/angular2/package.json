@@ -62,7 +62,7 @@
     "selenium-server-standalone-jar": "^2.53.0",
     "source-map-loader": "^0.1.5",
     "static-server": "^2.0.3",
-    "typescript": "~1.8.9",
+    "typescript": "^2.0.3",
     "typings": "^1.2.0",
     "uglify-js": "^2.7.3",
     "webdriver-manager": "^10.0.1",

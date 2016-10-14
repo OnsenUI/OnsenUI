@@ -261,6 +261,7 @@ limitations under the License.
       options.link = function(element) {
         if (options.parentScope) {
           ons.$compile(angular.element(element))(options.parentScope.$new());
+          options.parentScope.$evalAsync();
         } else {
           ons.compile(element);
         }
@@ -296,6 +297,7 @@ limitations under the License.
       options.link = function(element) {
         if (options.parentScope) {
           ons.$compile(angular.element(element))(options.parentScope.$new());
+          options.parentScope.$evalAsync();
         } else {
           ons.compile(element);
         }
@@ -331,6 +333,7 @@ limitations under the License.
       options.link = function(element) {
         if (options.parentScope) {
           ons.$compile(angular.element(element))(options.parentScope.$new());
+          options.parentScope.$evalAsync();
         } else {
           ons.compile(element);
         }

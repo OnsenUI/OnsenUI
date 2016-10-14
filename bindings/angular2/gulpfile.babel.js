@@ -8,10 +8,6 @@ import StaticServer from 'static-server';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
-gulp.task('build', shell.task(`
-  webpack ${FLAGS}
-`));
-
 gulp.task('serve', done => {
   createDevServer().listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/bindings/angular2/examples/button.html');
@@ -47,7 +43,7 @@ gulp.task('e2e-test', done => {
 });
 
 function createDevServer(options = {}) {
-  const config = require('./webpack.config.js');
+  const config = require('./webpack-dev.config.js');
   const serverConfig = Object.assign(options, {
     publicPath: config.output.publicPath,
     stats: {colors: true}
