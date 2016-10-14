@@ -6,8 +6,9 @@
   "scripts": {
     "typings-install": "typings install",
     "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js",
-    "prepublish": "npm run build-dist",
+    "prepublish": "npm run build-dist && npm run ngc",
     "start": "gulp serve",
+    "ngc": "ngc -p tsconfig.json",
     "test": "gulp test"
   },
   "main": "dist/src/angular2-onsenui.js",
@@ -42,7 +43,10 @@
     "rxjs": "^5.0.0-beta.12",
     "zone.js": "^0.6.21"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@angular/compiler-cli": "^2.1.0",
+    "rxjs": "^5.0.0-rc.1"
+  },
   "devDependencies": {
     "@angular/common": "^2.0.0",
     "@angular/compiler": "^2.0.0",
@@ -58,7 +62,7 @@
     "gulp-shell": "^0.5.2",
     "open": "0.0.5",
     "protractor": "^3.3.0",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "^5.0.0-rc1",
     "selenium-server-standalone-jar": "^2.53.0",
     "source-map-loader": "^0.1.5",
     "static-server": "^2.0.3",
