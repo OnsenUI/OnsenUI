@@ -271,11 +271,11 @@ export default class SwitchElement extends BaseElement {
   _onRelease(e) {
     const l = this._locations;
     const position = this._getPosition(e);
-    const tmp = this.checked;
+    const previousValue = this.checked;
 
     this.checked = position >= (l[0] + l[1]) / 2;
 
-    if (this.checked !== tmp) {
+    if (this.checked !== previousValue) {
       util.triggerElementEvent(this, 'change', {
         value: this.checked,
         switch: this,
