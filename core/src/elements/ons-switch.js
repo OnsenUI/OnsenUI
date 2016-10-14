@@ -133,10 +133,6 @@ export default class SwitchElement extends BaseElement {
   set checked(value) {
     this._checked = !!value;
     util.toggleAttribute(this, 'checked', this._checked);
-
-    if (this._checked !== this._checkbox.checked) {
-      this._checkbox.click();
-    }
   }
 
   /**
@@ -275,8 +271,17 @@ export default class SwitchElement extends BaseElement {
   _onRelease(e) {
     const l = this._locations;
     const position = this._getPosition(e);
+    const previousValue = this.checked;
 
     this.checked = position >= (l[0] + l[1]) / 2;
+
+    if (this.checked !== previousValue) {
+      util.triggerElementEvent(this, 'change', {
+        value: this.checked,
+        switch: this,
+        isInteractive: true
+      });
+    }
 
     this.removeEventListener('drag', this._onDrag);
     document.removeEventListener('release', this._boundOnRelease);

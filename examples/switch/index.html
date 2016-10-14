@@ -19,7 +19,7 @@
 
   <script>
     document.addEventListener('change', function(event) {
-      if (event.target.id === 's5') {
+      if (event.target.id === 's5-switch') {
         document.querySelector('#s5-value').innerHTML = event.target.checked;
       }
     });
@@ -53,7 +53,7 @@
       </ons-list-item>
       <ons-list-item>
         <label for="s5" class="center">Switch state: <span id="s5-value">false</span></label>
-        <div class="right"><ons-switch input-id="s5"></ons-switch></div>
+        <div class="right"><ons-switch input-id="s5" id="s5-switch"></ons-switch></div>
       </ons-list-item>
     </ons-list>
   </ons-page>
