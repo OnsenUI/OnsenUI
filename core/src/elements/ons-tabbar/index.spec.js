@@ -314,24 +314,6 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#setActiveTab()', () => {
-    it('loads any tab as persistent', (done) => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge"></ons-tab>
-        </ons-tabbar>
-      `);
-      document.body.appendChild(element);
-
-      var spy = chai.spy.on(element, '_loadPersistentPageDOM');
-      element.setActiveTab(0);
-
-      setImmediate(() => {
-        expect(spy).to.have.been.called.once;
-        element.remove();
-        done();
-      });
-    });
-
     it('rejects the promise if index does not exist', () => {
       return expect(element.setActiveTab(0)).to.eventually.be.rejected;
     });
@@ -371,24 +353,6 @@ describe('OnsTabbarElement', () => {
           done();
         }, 'animation': 'none'});
       });
-    });
-
-    it('keeps the page when option \'keepPage\' is true', (done) => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
-          <ons-tab label="fuga" page="fuga"></ons-tab>
-        </ons-tabbar>
-      `);
-
-      var spy = chai.spy.on(element, '_switchPage');
-
-      element.addEventListener('postchange', (event) => {
-        expect(spy).not.to.have.been.called();
-        done();
-      });
-
-      element.setActiveTab(1, {'keepPage': true});
     });
 
     it('returns a promise that resolves to the new page', () => {
