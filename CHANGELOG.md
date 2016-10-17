@@ -9,6 +9,7 @@ v2.0.2
  * ons-toolbar: transparent modifier supports MD.
  * ons-toolbar-button: Style refactor.
  * ons-navigator: Fix show-init event order.
+ * ons-tab: Add `badge` attribute to display notification on tab.
 
 v2.0.1
 ----
