@@ -138,7 +138,7 @@ export default class TabElement extends BaseElement {
    * @attribute badge
    * @type {String}
    * @description
-   *   [en]A content for the badge of the tab item.[/en]
+   *   [en]Display a notification badge on top of the tab.[/en]
    *   [ja]バッジに表示する内容を指定します。[/ja]
    */
 
