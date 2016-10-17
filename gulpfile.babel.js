@@ -83,7 +83,7 @@ gulp.task('core', function() {
         },
         nodeResolve(),
         babel({
-          presets: ['es2015-rollup'],
+          presets: ['es2015-rollup', 'stage-2'],
           babelrc: false
         })
       ],

@@ -380,25 +380,23 @@ export default class TabElement extends BaseElement {
         this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
       }
 
-      if (this.hasAttribute('active')) {
-        const tabIndex = this._findTabIndex();
+      const onReady = () => {
+        if (this._getPageTarget() && !this.hasLoaded) {
+          this.hasLoaded = true;
+          this._loadPageElement(tabbar._contentElement, pageElement => {
+            pageElement.style.display = 'none';
+            tabbar._contentElement.appendChild(pageElement);
 
-        TabbarElement.rewritables.ready(tabbar, () => {
-          setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
-        });
-      } else {
-        const onReady = () => {
-          if (this._getPageTarget()) {
-            this._loadPageElement(tabbar._contentElement, pageElement => {
-              pageElement.style.display = 'none';
-              tabbar._contentElement.appendChild(pageElement);
-            }, (pageElement, done) => {
-              TabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
-            });
-          }
-        };
-        TabbarElement.rewritables.ready(tabbar, onReady);
-      }
+            if (this.hasAttribute('active')) {
+              tabbar.setActiveTab(this._findTabIndex());
+            }
+          }, (pageElement, done) => {
+            TabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
+          });
+        }
+      };
+
+      TabbarElement.rewritables.ready(tabbar, onReady);
 
       this.addEventListener('click', this._boundOnClick, false);
     });
