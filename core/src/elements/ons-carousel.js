@@ -543,7 +543,7 @@ export default class CarouselElement extends BaseElement {
     const elementSize = this._getElementSize();
     const carouselItemSize = this._getCarouselItemSize();
 
-    return this.autoScroll && elementSize === carouselItemSize;
+    return this.autoScroll && Math.abs(elementSize - carouselItemSize) < 0.5;
   }
 
   /**
