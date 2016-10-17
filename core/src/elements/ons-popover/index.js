@@ -550,6 +550,12 @@ export default class PopoverElement extends BaseElement {
 
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+
+      // Fix for iframes
+      if (!this._margin) {
+        this._margin = 6;
+      }
+
       this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-top-left-radius'));
 
       this._mask.addEventListener('click', this._boundCancel, false);
