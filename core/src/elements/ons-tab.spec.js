@@ -153,6 +153,32 @@ describe('OnsTabElement', () => {
     });
   });
 
+  describe('badge attribute', () => {
+    it('sets badge for the tab', done => {
+      const tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
+
+      tabbar.appendChild(element);
+      document.body.appendChild(tabbar);
+      setImmediate(() => {
+        expect(document.getElementsByClassName('tab-bar__badge')[0]).not.to.be.ok;
+
+        element.setAttribute('badge', '99+');
+        expect(document.getElementsByClassName('tab-bar__badge')[0]).to.be.ok;
+        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).to.equal('99+');
+
+        element.setAttribute('badge', '98');
+        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).to.equal('98');
+        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).not.to.equal('99+');
+
+        document.body.removeChild(tabbar);
+        done();
+      });
+    });
+  });
+
   describe('children', () => {
     it('are, by default, two', () => {
       expect(element.children[0]).to.be.ok;
