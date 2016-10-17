@@ -25,13 +25,30 @@
         });
       });
 
+      angular.module('myApp')
+        .controller('MyController', function($scope, $timeout) {
+          $scope.comments = 13;
+
+          var randomTime = function() {
+            return parseInt(3000 * Math.random()) + 500;
+          };
+
+          var increaseComments = function() {
+            $scope.comments += 1;
+            $timeout(increaseComments, randomTime());
+          };
+
+          $timeout(increaseComments, randomTime());
+
+        });
+
     </script>
 
   </head>
 
   <body>
 
-    <ons-tabbar var="tabbar">
+    <ons-tabbar ng-controller="MyController" var="tabbar">
       <ons-tab page="page1.html" active="true">
         <div ons-tab-active>
           HOME
@@ -42,7 +59,9 @@
       </ons-tab>
       <ons-tab
         icon="ion-chatbox-working"
+        ng-click="comments = 0"
         label="Comments"
+        ng-attr-badge="{{ comments ? comments : null }}"
         page="page2.html"></ons-tab>
       <ons-tab
         icon="ion-ios-cog"
