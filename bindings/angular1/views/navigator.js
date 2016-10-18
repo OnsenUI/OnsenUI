@@ -57,9 +57,9 @@ limitations under the License.
         this._previousPageScope = null;
 
         this._boundOnPrepop = this._onPrepop.bind(this);
-        this._boundOnPostpop = this._onPostpop.bind(this);
+        this._boundOnPageDestroy = this._onPageDestroy.bind(this);
         this._element.on('prepop', this._boundOnPrepop);
-        this._element.on('postpop', this._boundOnPostpop);
+        this._element.on('destroy', this._boundOnPageDestroy);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -87,11 +87,15 @@ limitations under the License.
       _onPrepop: function(event) {
         var pages = event.detail.navigator.pages;
         angular.element(pages[pages.length - 2]).data('_scope').$evalAsync();
-        this._previousPageScope = angular.element(pages[pages.length - 1]).data('_scope');
       },
 
-      _onPostpop: function(event) {
-        this._previousPageScope.$destroy();
+      _onPageDestroy: function(event) {
+        const page = event.target;
+
+        if (this._element[0] === page.parentNode) {
+          const scope = angular.element(page).data('_scope');
+          scope.$destroy();
+        }
       },
 
       _compileAndLink: function(pageElement, callback) {
@@ -109,7 +113,7 @@ limitations under the License.
         this._clearDerivingEvents();
         this._clearDerivingMethods();
         this._element.off('prepop', this._boundOnPrepop);
-        this._element.off('postpop', this._boundOnPostpop);
+        this._element.off('destroy', this._boundOnPageDestroy);
         this._element = this._scope = this._attrs = null;
       },
 
