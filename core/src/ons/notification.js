@@ -240,9 +240,15 @@ notification._alertOriginal = function(message, options) {
  * @param {String | Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
+ * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is `0`.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is `false`. If the dialog is cancelable it can be closed by clicking the background or pressing the Android back button.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
  * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ *   [en]Animation name. Available animations are `none` and `fade`. Default is `fade`.[/en]
+ *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade"のいずれかを指定できます。[/ja]
  * @param {String} [options.id]
  *   [en]The `<ons-alert-dialog>` element's ID.[/en]
  *   [ja]ons-alert-dialog要素のID。[/ja]
@@ -302,49 +308,15 @@ notification._confirmOriginal = function(message, options) {
  *   [ja][/ja]
  * @param {Object} options
  *   [en]Parameter object.[/en]
- * @param {String} [options.message]
- *   [en]Confirmation question.[/en]
- *   [ja]確認ダイアログに表示するメッセージを指定します。[/ja]
- * @param {String} [options.messageHTML]
- *   [en]Dialog content in HTML.[/en]
- *   [ja]確認ダイアログに表示するHTMLを指定します。[/ja]
  * @param {Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is `["Cancel", "OK"]`.[/en]
  *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
  *   [en]Index of primary button. Default is `1`.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
- * @param {Boolean} [options.cancelable]
- *   [en]Whether the dialog is cancelable or not. Default is `false`. If the dialog is cancelable it can be closed by clicking the background or pressing the Android back button.[/en]
- *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
- * @param {String} [options.id]
- *   [en]The `<ons-alert-dialog>` element's ID.[/en]
- *   [ja]ons-alert-dialog要素のID。[/ja]
- * @param {String} [options.class]
- *   [en]The `<ons-alert-dialog>` element's class.[/en]
- *   [ja]ons-alert-dialog要素のclass。[/ja]
- * @param {String} [options.title]
- *   [en]Dialog title. Default is `"Confirm"`.[/en]
- *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
- * @param {String} [options.modifier]
- *   [en]Modifier for the dialog.[/en]
- *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
- * @param {Function} [options.callback]
- *   [en]
- *     Function that executes after the dialog has been closed.
- *     Argument for the function is the index of the button that was pressed or `-1` if the dialog was canceled.
- *   [/en]
- *   [ja]
- *     ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。
- *     この関数の引数として、押されたボタンのインデックス値が渡されます。
- *     もしダイアログがキャンセルされた場合には-1が渡されます。
- *   [/ja]
  * @description
  *   [en]
- *     Display a dialog to ask the user for confirmation.
+ *     Display a dialog to ask the user for confirmation. Extends `alert()` parameters.
  *     The default button labels are `"Cancel"` and `"OK"` but they can be customized.
  *
  *     It can be called in the following ways:
@@ -388,33 +360,12 @@ notification._promptOriginal = function(message, options) {
  * @param {Object} options
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクトです。[/ja]
- * @param {String} [options.message]
- *   [en]Prompt question.[/en]
- *   [ja]ダイアログに表示するメッセージを指定します。[/ja]
- * @param {String} [options.messageHTML]
- *   [en]Dialog content in HTML.[/en]
- *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
  * @param {String | Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
- *   [en]Index of primary button. Default is `1`.[/en]
- *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
- * @param {Boolean} [options.cancelable]
- *   [en]Whether the dialog is cancelable or not. Default is false. When the dialog is cancelable it will be closed if the user taps the background or presses the Android back button.[/en]
- *   [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
- * @param {String} [options.id]
- *   [en]The `<ons-alert-dialog>` element's ID.[/en]
- *   [ja]ons-alert-dialog要素のID。[/ja]
- * @param {String} [options.class]
- *   [en]The `<ons-alert-dialog>` element's class.[/en]
- *   [ja]ons-alert-dialog要素のclass。[/ja]
- * @param {String} [options.title]
- *   [en]Dialog title. Default is `"Alert"`.[/en]
- *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
+ *   [en]Index of primary button. Default is `0`.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
  * @param {String} [options.placeholder]
  *   [en]Placeholder for the text input.[/en]
  *   [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]
@@ -427,24 +378,12 @@ notification._promptOriginal = function(message, options) {
  * @param {Boolean} [options.autofocus]
  *   [en]Autofocus the input element. Default is `true`.[/en]
  *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]
- * @param {String} [options.modifier]
- *   [en]Modifier for the dialog.[/en]
- *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
- * @param {Function} [options.callback]
- *   [en]
- *     Function that executes after the dialog has been closed.
- *     Argument for the function is the value of the input field or `null` if the dialog was canceled.
- *   [/en]
- *   [ja]
- *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
- *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
- *   [/ja]
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is `true`.[/en]
  *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
  * @description
  *   [en]
- *     Display a dialog with a prompt to ask the user a question.
+ *     Display a dialog with a prompt to ask the user a question. Extends `alert()` parameters.
  *
  *     It can be called in the following ways:
  *
