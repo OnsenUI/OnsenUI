@@ -75,8 +75,8 @@ notification._createAlertDialog = options => {
     buttons += `
       <button class="
         alert-dialog-button
-        ${index == options.primaryButtonIndex && ' alert-dialog-button--primal'}
-        ${options.buttonLabels.length <= 2 && ' alert-dialog-button--one'}
+        ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
+        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--one' : ''}
       ">
         ${label}
       </button>
@@ -96,8 +96,10 @@ notification._createAlertDialog = options => {
           ${options.message || options.messageHTML}
           ${inputString}
         </div>
-        <div class="alert-dialog-footer
-          ${options.buttonLabels.length <= 1 && ' alert-dialog-footer--one'}">
+        <div class="
+          alert-dialog-footer
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-footer--one' : ''}
+        ">
           ${buttons}
         </div>
       </div>
@@ -201,6 +203,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   return util.extend({
       compile: param => param,
       callback: param => param,
+      buttonLabels: ['OK'],
       primaryButtonIndex: 0,
       animation: 'default',
       cancelable: false
@@ -211,8 +214,6 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
 
 notification._alertOriginal = function(message, options) {
   options = _normalizeArguments(message, options, {
-    buttonLabels: ['OK'],
-    animation: 'default',
     title: 'Alert'
   });
 
@@ -338,7 +339,6 @@ notification.confirm = notification._confirmOriginal;
 
 notification._promptOriginal = function(message, options) {
   options = _normalizeArguments(message, options, {
-    buttonLabels: ['OK'],
     title: 'Alert',
     isPrompt: true,
     autofocus: true,
