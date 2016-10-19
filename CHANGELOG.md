@@ -11,6 +11,7 @@ v2.0.2
  * ons-navigator: Fix show-init event order.
  * ons-tab: Add `badge` attribute to display notification on tab.
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
+ * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
 
 v2.0.1
 ----
