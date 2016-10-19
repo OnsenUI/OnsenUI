@@ -122,6 +122,7 @@
             $onsen.addModifierMethodsForCustomElements(alertDialog, element);
 
             element.data('ons-alert-dialog', alertDialog);
+            element.data('_scope', scope);
 
             scope.$on('$destroy', function() {
               alertDialog._events = undefined;

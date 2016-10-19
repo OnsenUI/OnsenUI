@@ -22,10 +22,16 @@ limitations under the License.
     typeof message === 'string' ? (options.message = message) : (options = message);
 
     const compile = options.compile;
+    let $element;
 
     options.compile = element => {
-      const $element = angular.element(compile ? compile(element) : element);
+      $element = angular.element(compile ? compile(element) : element);
       return ons.$compile($element)($element.injector().get('$rootScope'));
+    };
+
+    options.destroy = () => {
+      $element.data('_scope').$destroy();
+      $element = null;
     };
 
     return originalNotification(options);

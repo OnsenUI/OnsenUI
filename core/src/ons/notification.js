@@ -85,13 +85,17 @@ notification._createAlertDialog = options => {
 
   // Dialog Element
   let el = {};
-  const cleanup = () => {
+  const _destroyDialog = () => {
     if (el.dialog.onDialogCancel) {
       el.dialog.removeEventListener('dialog-cancel', el.dialog.onDialogCancel);
     }
 
     Object.keys(el).forEach(key => delete el[key]);
     el = null;
+
+    if (options.destroy instanceof Function) {
+      options.destroy();
+    }
   };
 
   el.dialog = document.createElement('ons-alert-dialog');
@@ -134,7 +138,7 @@ notification._createAlertDialog = options => {
         el.dialog.hide()
           .then(() => {
             const resolveValue = el.input.value;
-            cleanup();
+            _destroyDialog();
             options.callback(resolveValue);
             deferred.resolve(resolveValue);
           });
@@ -150,7 +154,7 @@ notification._createAlertDialog = options => {
         .then(() => {
           const resolveValue = options.isPrompt ? el.input.value : index;
           el.dialog.remove();
-          cleanup();
+          _destroyDialog();
           options.callback(resolveValue);
           deferred.resolve(resolveValue);
         });
@@ -158,7 +162,6 @@ notification._createAlertDialog = options => {
 
     el.footer.appendChild(buttonElement);
   });
-  el.footer = null;
 
   // Cancel events
   if (options.cancelable) {
@@ -166,7 +169,7 @@ notification._createAlertDialog = options => {
     el.dialog.onDialogCancel = () => {
       setImmediate(() => {
         el.dialog.remove();
-        cleanup();
+        _destroyDialog();
       });
       const resolveValue = options.isPrompt ? null : -1;
       options.callback(resolveValue);
@@ -180,11 +183,11 @@ notification._createAlertDialog = options => {
   options.compile(el.dialog);
   setImmediate(() => {
     el.dialog.show()
-    .then(() => {
-      if (el.input && options.isPrompt && options.autofocus) {
-        el.input.focus();
-      }
-    });
+      .then(() => {
+        if (el.input && options.isPrompt && options.autofocus) {
+          el.input.focus();
+        }
+      });
   });
 
   return deferred.promise;
