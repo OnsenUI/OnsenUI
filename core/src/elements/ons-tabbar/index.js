@@ -284,6 +284,7 @@ export default class TabbarElement extends BaseElement {
 
   /**
    * @method loadPage
+   * @deprecated
    * @signature loadPage(url, [options])
    * @param {String} url
    *   [en]Page URL. Can be either an HTML document or an `<ons-template>` id.[/en]
@@ -305,6 +306,8 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   loadPage(page, options = {}) {
+    console.warn('The loadPage method has been deprecated and will be removed in the next minor version.');
+
     return new Promise(resolve => {
       const tab = this._tabbarElement.children[0] || new TabElement();
       tab._loadPage(page, this._contentElement, pageElement => {
