@@ -8,3 +8,4 @@ src/*.js
 src/*.js.map
 dist
 npm-debug.log
+src/angular2-onsenui.ngfactory.ts

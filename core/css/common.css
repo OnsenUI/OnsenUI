@@ -27,7 +27,9 @@ ons-gesture-detector {
 }
 
 ons-navigator,
-ons-tabbar {
+ons-tabbar,
+ons-dialog,
+ons-alert-dialog {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,7 +42,7 @@ ons-tab {
   transform: translate3d(0, 0, 0);
 }
 
-ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog {
   z-index: 2;
 }
 
