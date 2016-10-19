@@ -210,16 +210,6 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
     }, defaults, options);
 };
 
-// Wrappers
-
-notification._alertOriginal = function(message, options) {
-  options = _normalizeArguments(message, options, {
-    title: 'Alert'
-  });
-
-  return notification._createAlertDialog(options);
-};
-
 /**
  * @method alert
  * @signature alert(message [, options] | options)
@@ -286,13 +276,9 @@ notification._alertOriginal = function(message, options) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.alert = notification._alertOriginal;
-
-notification._confirmOriginal = function(message, options) {
+notification.alert = (message, options) => {
   options = _normalizeArguments(message, options, {
-    buttonLabels: ['Cancel', 'OK'],
-    primaryButtonIndex: 1,
-    title: 'Confirm'
+    title: 'Alert'
   });
 
   return notification._createAlertDialog(options);
@@ -335,14 +321,11 @@ notification._confirmOriginal = function(message, options) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.confirm = notification._confirmOriginal;
-
-notification._promptOriginal = function(message, options) {
+notification.confirm = (message, options) => {
   options = _normalizeArguments(message, options, {
-    title: 'Alert',
-    isPrompt: true,
-    autofocus: true,
-    submitOnEnter: true
+    buttonLabels: ['Cancel', 'OK'],
+    primaryButtonIndex: 1,
+    title: 'Confirm'
   });
 
   return notification._createAlertDialog(options);
@@ -399,6 +382,15 @@ notification._promptOriginal = function(message, options) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.prompt = notification._promptOriginal;
+notification.prompt = (message, options) => {
+  options = _normalizeArguments(message, options, {
+    title: 'Alert',
+    isPrompt: true,
+    autofocus: true,
+    submitOnEnter: true
+  });
+
+  return notification._createAlertDialog(options);
+};
 
 export default notification;

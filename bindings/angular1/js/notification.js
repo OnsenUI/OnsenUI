@@ -16,6 +16,8 @@ limitations under the License.
 */
 
 ['alert', 'confirm', 'prompt'].forEach(name => {
+  const originalNotification = ons.notification[name];
+
   ons.notification[name] = (message, options = {}) => {
     typeof message === 'string' ? (options.message = message) : (options = message);
 
@@ -26,6 +28,6 @@ limitations under the License.
       return ons.$compile($element)($element.injector().get('$rootScope'));
     };
 
-    return ons.notification[`_${name}Original`](options);
+    return originalNotification(options);
   };
 });
