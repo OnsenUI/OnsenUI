@@ -36,7 +36,8 @@ const scheme = {
   '.alert-dialog-footer--one': 'alert-dialog-footer--one--*',
   '.alert-dialog-button--one': 'alert-dialog-button--one--*',
   '.alert-dialog-button--primal': 'alert-dialog-button--primal--*',
-  '.alert-dialog-mask': 'alert-dialog-mask--*'
+  '.alert-dialog-mask': 'alert-dialog-mask--*',
+  '.text-input': 'text-input--*'
 };
 
 const _animatorDict = {

@@ -16,16 +16,24 @@ limitations under the License.
 */
 
 ['alert', 'confirm', 'prompt'].forEach(name => {
+  const originalNotification = ons.notification[name];
+
   ons.notification[name] = (message, options = {}) => {
     typeof message === 'string' ? (options.message = message) : (options = message);
 
     const compile = options.compile;
+    let $element;
 
     options.compile = element => {
-      const $element = angular.element(compile ? compile(element) : element);
+      $element = angular.element(compile ? compile(element) : element);
       return ons.$compile($element)($element.injector().get('$rootScope'));
     };
 
-    return ons.notification[`_${name}Original`](options);
+    options.destroy = () => {
+      $element.data('_scope').$destroy();
+      $element = null;
+    };
+
+    return originalNotification(options);
   };
 });

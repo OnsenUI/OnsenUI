@@ -21,7 +21,6 @@ import contentReady from 'ons/content-ready';
 /**
  * @object ons.notification
  * @category dialog
- * @codepen Qwwxyp
  * @tutorial vanilla/Reference/dialog
  * @description
  *   [en]
@@ -55,198 +54,166 @@ import contentReady from 'ons/content-ready';
  */
 const notification = {};
 
-notification._createAlertDialog = function(title, message,
-  buttonLabels, primaryButtonIndex, modifier, animation, id, callback,
-  messageIsHTML, cancelable, promptDialog, autofocus, placeholder,
-  defaultValue, submitOnEnter, compile) {
-
-  compile = compile || function(object) { return object; };
-
-  const titleElementHTML = typeof title === 'string' ? '<div class="alert-dialog-title"></div>' : '';
-
-  let dialogElement = document.createElement('ons-alert-dialog');
-
-  innerHTML(dialogElement, `
-    ${titleElementHTML}
-    <div class="alert-dialog-content"></div>
-    <div class="alert-dialog-footer"></div>
-  `);
-
-  contentReady(dialogElement);
-
-  if (id) {
-    dialogElement.setAttribute('id', id);
+notification._createAlertDialog = options => {
+  // Prompt input string
+  let inputString = '';
+  if (options.isPrompt) {
+    inputString = `
+      <input
+        class="text-input text-input--underbar"
+        type="${options.inputType || 'text'}"
+        placeholder="${options.placeholder || ''}"
+        value="${options.defaultValue || ''}"
+        style="width: 100%; margin-top: 10px;"
+      />
+    `;
   }
 
-  let titleElement = dialogElement.querySelector('.alert-dialog-title');
-  let messageElement = dialogElement.querySelector('.alert-dialog-content');
-  let footerElement = dialogElement.querySelector('.alert-dialog-footer');
-  let inputElement;
-  const result = {};
-
-  result.promise = new Promise((resolve, reject) => {
-    result.resolve = resolve;
-    result.reject = reject;
+  // Buttons string
+  let buttons = '';
+  options.buttonLabels.forEach((label, index) => {
+    buttons += `
+      <button class="
+        alert-dialog-button
+        ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
+        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--one' : ''}
+      ">
+        ${label}
+      </button>
+    `;
   });
 
-  modifier = modifier || dialogElement.getAttribute('modifier');
-
-  if (typeof title === 'string') {
-    titleElement.textContent = title;
-  }
-
-  titleElement = null;
-
-  dialogElement.setAttribute('animation', animation);
-
-  if (messageIsHTML) {
-    innerHTML(messageElement, message);
-  } else {
-    messageElement.textContent = message;
-  }
-
-  if (promptDialog) {
-    inputElement = util.createElement('<input class="text-input text-input--underbar" type="text"></input>');
-
-    if (modifier) {
-      inputElement.classList.add(`text-input--${modifier}`);
+  // Dialog Element
+  let el = {};
+  const _destroyDialog = () => {
+    if (el.dialog.onDialogCancel) {
+      el.dialog.removeEventListener('dialog-cancel', el.dialog.onDialogCancel);
     }
 
-    inputElement.setAttribute('placeholder', placeholder);
-    inputElement.value = defaultValue;
-    inputElement.style.width = '100%';
-    inputElement.style.marginTop = '10px';
+    Object.keys(el).forEach(key => delete el[key]);
+    el = null;
 
-    messageElement.appendChild(inputElement);
+    if (options.destroy instanceof Function) {
+      options.destroy();
+    }
+  };
 
-    if (submitOnEnter) {
-      inputElement.addEventListener('keypress', function(event) {
-        if (event.keyCode === 13) {
-          dialogElement.hide({
-            callback: function() {
-              callback(inputElement.value);
-              result.resolve(inputElement.value);
-              dialogElement.remove();
-              dialogElement = null;
-            }
+  el.dialog = document.createElement('ons-alert-dialog');
+  innerHTML(el.dialog, `
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">
+          ${options.title || ''}
+        </div>
+        <div class="alert-dialog-content">
+          ${options.message || options.messageHTML}
+          ${inputString}
+        </div>
+        <div class="
+          alert-dialog-footer
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-footer--one' : ''}
+        ">
+          ${buttons}
+        </div>
+      </div>
+    </div>
+  `);
+  contentReady(el.dialog);
+
+  // Set attributes
+  ['id', 'class', 'animation']
+    .forEach(a => options.hasOwnProperty(a) && el.dialog.setAttribute(a, options[a]));
+  if (options.modifier) {
+    util.addModifier(el.dialog, options.modifier);
+  }
+
+  const deferred = util.defer();
+
+  // Prompt events
+  if (options.isPrompt && options.submitOnEnter) {
+    el.input = el.dialog.querySelector('.text-input');
+    el.input.onkeypress = event => {
+      if (event.keyCode === 13) {
+        el.dialog.hide()
+          .then(() => {
+            const resolveValue = el.input.value;
+            _destroyDialog();
+            options.callback(resolveValue);
+            deferred.resolve(resolveValue);
           });
-        }
-      }, false);
-    }
+      }
+    };
   }
 
-  document.body.appendChild(dialogElement);
-
-  compile(dialogElement);
-
-  if (buttonLabels.length <= 2) {
-    footerElement.classList.add('alert-dialog-footer--one');
-  }
-
-  const createButton = function(i) {
-    let buttonElement = util.createElement('<button class="alert-dialog-button"></button>');
-    buttonElement.appendChild(document.createTextNode(buttonLabels[i]));
-
-    if (i == primaryButtonIndex) {
-      buttonElement.classList.add('alert-dialog-button--primal');
-    }
-
-    if (buttonLabels.length <= 2) {
-      buttonElement.classList.add('alert-dialog-button--one');
-    }
-
-    const onClick = function() {
-      buttonElement.removeEventListener('click', onClick, false);
-
-      dialogElement.hide({
-        callback: function() {
-          if (promptDialog) {
-            callback(inputElement.value);
-            result.resolve(inputElement.value);
-          } else {
-            callback(i);
-            result.resolve(i);
-          }
-          dialogElement.remove();
-          dialogElement = inputElement = buttonElement = null;
-        }
-      });
+  // Button events
+  el.footer = el.dialog.querySelector('.alert-dialog-footer');
+  util.arrayFrom(el.dialog.querySelectorAll('.alert-dialog-button')).forEach((buttonElement, index) => {
+    buttonElement.onclick = () => {
+      el.dialog.hide()
+        .then(() => {
+          const resolveValue = options.isPrompt ? el.input.value : index;
+          el.dialog.remove();
+          _destroyDialog();
+          options.callback(resolveValue);
+          deferred.resolve(resolveValue);
+        });
     };
 
-    buttonElement.addEventListener('click', onClick, false);
-    footerElement.appendChild(buttonElement);
-  };
-
-  for (var i = 0; i < buttonLabels.length; i++) {
-    createButton(i);
-  }
-
-  if (cancelable) {
-    dialogElement.cancelable = true;
-    dialogElement.addEventListener('dialog-cancel', function() {
-      if (promptDialog) {
-        callback(null);
-        result.reject(null);
-      } else {
-        callback(-1);
-        result.reject(-1);
-      }
-      setTimeout(function() {
-        dialogElement.remove();
-        dialogElement = null;
-        inputElement = null;
-      });
-    }, false);
-  }
-
-  setImmediate(() => {
-    dialogElement.show({
-      callback: function() {
-        if (inputElement && promptDialog && autofocus) {
-          inputElement.focus();
-        }
-      }
-    });
+    el.footer.appendChild(buttonElement);
   });
 
-  messageElement = footerElement = null;
-
-  if (modifier) {
-    dialogElement.setAttribute('modifier', '');
-    dialogElement.setAttribute('modifier', modifier);
+  // Cancel events
+  if (options.cancelable) {
+    el.dialog.cancelable = true;
+    el.dialog.onDialogCancel = () => {
+      setImmediate(() => {
+        el.dialog.remove();
+        _destroyDialog();
+      });
+      const resolveValue = options.isPrompt ? null : -1;
+      options.callback(resolveValue);
+      deferred.reject(resolveValue);
+    };
+    el.dialog.addEventListener('dialog-cancel', el.dialog.onDialogCancel, false);
   }
 
-  return result.promise;
+  // Show dialog
+  document.body.appendChild(el.dialog);
+  options.compile(el.dialog);
+  setImmediate(() => {
+    el.dialog.show()
+      .then(() => {
+        if (el.input && options.isPrompt && options.autofocus) {
+          el.input.focus();
+        }
+      });
+  });
+
+  return deferred.promise;
 };
 
-notification._alertOriginal = function(message, options = {}) {
+const _normalizeArguments = (message, options = {}, defaults = {}) => {
   typeof message === 'string' ? (options.message = message) : (options = message);
-
-  var defaults = {
-    buttonLabel: 'OK',
-    animation: 'default',
-    title: 'Alert',
-    callback: function() {}
-  };
-
-  options = util.extend({}, defaults, options);
   if (!options.message && !options.messageHTML) {
     throw new Error('Alert dialog must contain a message.');
   }
 
-  return notification._createAlertDialog(
-    options.title,
-    options.message || options.messageHTML,
-    [options.buttonLabel],
-    0,
-    options.modifier,
-    options.animation,
-    options.id,
-    options.callback,
-    !options.message ? true : false,
-    false, false, false, '', '', false,
-    options.compile
-  );
+  if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
+    options.buttonLabels = options.buttonLabels || options.buttonLabel;
+    if (!Array.isArray(options.buttonLabels)) {
+      options.buttonLabels = [options.buttonLabels || '']
+    }
+  }
+
+  return util.extend({
+      compile: param => param,
+      callback: param => param,
+      buttonLabels: ['OK'],
+      primaryButtonIndex: 0,
+      animation: 'default',
+      cancelable: false
+    }, defaults, options);
 };
 
 /**
@@ -267,15 +234,24 @@ notification._alertOriginal = function(message, options = {}) {
  * @param {String} [options.messageHTML]
  *   [en]Alert message in HTML.[/en]
  *   [ja]アラートダイアログに表示するHTMLを指定します。[/ja]
- * @param {String} [options.buttonLabel]
- *   [en]Label for confirmation button. Default is `"OK"`.[/en]
+ * @param {String | Array} [options.buttonLabels]
+ *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
+ * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is `0`.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is `false`. If the dialog is cancelable it can be closed by clicking the background or pressing the Android back button.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
  * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ *   [en]Animation name. Available animations are `none` and `fade`. Default is `fade`.[/en]
+ *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade"のいずれかを指定できます。[/ja]
  * @param {String} [options.id]
  *   [en]The `<ons-alert-dialog>` element's ID.[/en]
  *   [ja]ons-alert-dialog要素のID。[/ja]
+ * @param {String} [options.class]
+ *   [en]The `<ons-alert-dialog>` element's class.[/en]
+ *   [ja]ons-alert-dialog要素のclass。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is `"Alert"`.[/en]
  *   [ja]アラートダイアログの上部に表示するタイトルを指定します。"Alert"がデフォルトです。[/ja]
@@ -306,40 +282,12 @@ notification._alertOriginal = function(message, options = {}) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.alert = notification._alertOriginal;
+notification.alert = (message, options) => {
+  options = _normalizeArguments(message, options, {
+    title: 'Alert'
+  });
 
-notification._confirmOriginal = function(message, options = {}) {
-  typeof message === 'string' ? (options.message = message) : (options = message);
-
-  var defaults = {
-    buttonLabels: ['Cancel', 'OK'],
-    primaryButtonIndex: 1,
-    animation: 'default',
-    title: 'Confirm',
-    callback: function() {},
-    cancelable: false
-  };
-
-  options = util.extend({}, defaults, options);
-
-  if (!options.message && !options.messageHTML) {
-    throw new Error('Confirm dialog must contain a message.');
-  }
-
-  return notification._createAlertDialog(
-    options.title,
-    options.message || options.messageHTML,
-    options.buttonLabels,
-    options.primaryButtonIndex,
-    options.modifier,
-    options.animation,
-    options.id,
-    options.callback,
-    !options.message ? true : false,
-    options.cancelable,
-    false, false, '', '', false,
-    options.compile
-  );
+  return notification._createAlertDialog(options);
 };
 
 /**
@@ -353,46 +301,15 @@ notification._confirmOriginal = function(message, options = {}) {
  *   [ja][/ja]
  * @param {Object} options
  *   [en]Parameter object.[/en]
- * @param {String} [options.message]
- *   [en]Confirmation question.[/en]
- *   [ja]確認ダイアログに表示するメッセージを指定します。[/ja]
- * @param {String} [options.messageHTML]
- *   [en]Dialog content in HTML.[/en]
- *   [ja]確認ダイアログに表示するHTMLを指定します。[/ja]
  * @param {Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is `["Cancel", "OK"]`.[/en]
  *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
  *   [en]Index of primary button. Default is `1`.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
- * @param {Boolean} [options.cancelable]
- *   [en]Whether the dialog is cancelable or not. Default is `false`. If the dialog is cancelable it can be closed by clicking the background or pressing the Android back button.[/en]
- *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
- * @param {String} [options.id]
- *   [en]The `<ons-alert-dialog>` element's ID.[/en]
- *   [ja]ons-alert-dialog要素のID。[/ja]
- * @param {String} [options.title]
- *   [en]Dialog title. Default is `"Confirm"`.[/en]
- *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
- * @param {String} [options.modifier]
- *   [en]Modifier for the dialog.[/en]
- *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
- * @param {Function} [options.callback]
- *   [en]
- *     Function that executes after the dialog has been closed.
- *     Argument for the function is the index of the button that was pressed or `-1` if the dialog was canceled.
- *   [/en]
- *   [ja]
- *     ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。
- *     この関数の引数として、押されたボタンのインデックス値が渡されます。
- *     もしダイアログがキャンセルされた場合には-1が渡されます。
- *   [/ja]
  * @description
  *   [en]
- *     Display a dialog to ask the user for confirmation.
+ *     Display a dialog to ask the user for confirmation. Extends `alert()` parameters.
  *     The default button labels are `"Cancel"` and `"OK"` but they can be customized.
  *
  *     It can be called in the following ways:
@@ -410,46 +327,14 @@ notification._confirmOriginal = function(message, options = {}) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.confirm = notification._confirmOriginal;
+notification.confirm = (message, options) => {
+  options = _normalizeArguments(message, options, {
+    buttonLabels: ['Cancel', 'OK'],
+    primaryButtonIndex: 1,
+    title: 'Confirm'
+  });
 
-notification._promptOriginal = function(message, options = {}) {
-  typeof message === 'string' ? (options.message = message) : (options = message);
-
-  var defaults = {
-    buttonLabel: 'OK',
-    animation: 'default',
-    title: 'Alert',
-    defaultValue: '',
-    placeholder: '',
-    callback: function() {},
-    cancelable: false,
-    autofocus: true,
-    submitOnEnter: true
-  };
-
-  options = util.extend({}, defaults, options);
-  if (!options.message && !options.messageHTML) {
-    throw new Error('Prompt dialog must contain a message.');
-  }
-
-  return notification._createAlertDialog(
-    options.title,
-    options.message || options.messageHTML,
-    [options.buttonLabel],
-    0,
-    options.modifier,
-    options.animation,
-    options.id,
-    options.callback,
-    !options.message ? true : false,
-    options.cancelable,
-    true,
-    options.autofocus,
-    options.placeholder,
-    options.defaultValue,
-    options.submitOnEnter,
-    options.compile
-  );
+  return notification._createAlertDialog(options);
 };
 
 /**
@@ -464,57 +349,30 @@ notification._promptOriginal = function(message, options = {}) {
  * @param {Object} options
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクトです。[/ja]
- * @param {String} [options.message]
- *   [en]Prompt question.[/en]
- *   [ja]ダイアログに表示するメッセージを指定します。[/ja]
- * @param {String} [options.messageHTML]
- *   [en]Dialog content in HTML.[/en]
- *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
- * @param {String} [options.buttonLabel]
- *   [en]Label for confirmation button. Default is `"OK"`.[/en]
+ * @param {String | Array} [options.buttonLabels]
+ *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
- *   [en]Index of primary button. Default is `1`.[/en]
- *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
- * @param {Boolean} [options.cancelable]
- *   [en]Whether the dialog is cancelable or not. Default is false. When the dialog is cancelable it will be closed if the user taps the background or presses the Android back button.[/en]
- *   [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are `"none"`, `"fade"` and `"slide"`.[/en]
- *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
- * @param {String} [options.id]
- *   [en]The `<ons-alert-dialog>` element's ID.[/en]
- *   [ja]ons-alert-dialog要素のID。[/ja]
- * @param {String} [options.title]
- *   [en]Dialog title. Default is `"Alert"`.[/en]
- *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
+ *   [en]Index of primary button. Default is `0`.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
  * @param {String} [options.placeholder]
  *   [en]Placeholder for the text input.[/en]
  *   [ja]テキスト欄のプレースホルダに表示するテキストを指定します。[/ja]
  * @param {String} [options.defaultValue]
  *   [en]Default value for the text input.[/en]
  *   [ja]テキスト欄のデフォルトの値を指定します。[/ja]
+ * @param {String} [options.inputType]
+ *   [en]Type of the input element (`password`, `date`...). Default is `text`.[/en]
+ *   [ja][/ja]
  * @param {Boolean} [options.autofocus]
  *   [en]Autofocus the input element. Default is `true`.[/en]
  *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]
- * @param {String} [options.modifier]
- *   [en]Modifier for the dialog.[/en]
- *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
- * @param {Function} [options.callback]
- *   [en]
- *     Function that executes after the dialog has been closed.
- *     Argument for the function is the value of the input field or `null` if the dialog was canceled.
- *   [/en]
- *   [ja]
- *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
- *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
- *   [/ja]
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is `true`.[/en]
  *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]
  * @description
  *   [en]
- *     Display a dialog with a prompt to ask the user a question.
+ *     Display a dialog with a prompt to ask the user a question. Extends `alert()` parameters.
  *
  *     It can be called in the following ways:
  *
@@ -530,6 +388,15 @@ notification._promptOriginal = function(message, options = {}) {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.prompt = notification._promptOriginal;
+notification.prompt = (message, options) => {
+  options = _normalizeArguments(message, options, {
+    title: 'Alert',
+    isPrompt: true,
+    autofocus: true,
+    submitOnEnter: true
+  });
+
+  return notification._createAlertDialog(options);
+};
 
 export default notification;
