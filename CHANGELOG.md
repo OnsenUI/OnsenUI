@@ -11,6 +11,7 @@ v2.0.2
  * ons-navigator: Fix show-init event order.
  * ons-tab: Add `badge` attribute to display notification on tab.
  * ons.notification: Added `options.inputType` and `options.class`.
+ * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
 
 v2.0.1
 ----
