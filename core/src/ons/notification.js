@@ -84,8 +84,18 @@ notification._createAlertDialog = options => {
   });
 
   // Dialog Element
-  let dialogElement = document.createElement('ons-alert-dialog');
-  innerHTML(dialogElement, `
+  let el = {};
+  const cleanup = () => {
+    if (el.dialog.onDialogCancel) {
+      el.dialog.removeEventListener('dialog-cancel', el.dialog.onDialogCancel);
+    }
+
+    Object.keys(el).forEach(key => delete el[key]);
+    el = null;
+  };
+
+  el.dialog = document.createElement('ons-alert-dialog');
+  innerHTML(el.dialog, `
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-container">
@@ -105,75 +115,74 @@ notification._createAlertDialog = options => {
       </div>
     </div>
   `);
-  contentReady(dialogElement);
+  contentReady(el.dialog);
 
   // Set attributes
   ['id', 'class', 'animation']
-    .forEach(a => options.hasOwnProperty(a) && dialogElement.setAttribute(a, options[a]));
+    .forEach(a => options.hasOwnProperty(a) && el.dialog.setAttribute(a, options[a]));
   if (options.modifier) {
-    util.addModifier(dialogElement, options.modifier);
+    util.addModifier(el.dialog, options.modifier);
   }
 
   const deferred = util.defer();
 
   // Prompt events
-  let inputElement;
   if (options.isPrompt && options.submitOnEnter) {
-    inputElement = dialogElement.querySelector('.text-input');
-    inputElement.addEventListener('keypress', event => {
+    el.input = el.dialog.querySelector('.text-input');
+    el.input.onkeypress = event => {
       if (event.keyCode === 13) {
-        dialogElement.hide()
+        el.dialog.hide()
           .then(() => {
-            const resolveValue = inputElement.value;
-            dialogElement.remove();
-            dialogElement = inputElement = null;
+            const resolveValue = el.input.value;
+            cleanup();
             options.callback(resolveValue);
             deferred.resolve(resolveValue);
           });
       }
-    }, false);
+    };
   }
 
   // Button events
-  let footerElement = dialogElement.querySelector('.alert-dialog-footer');
-  util.arrayFrom(dialogElement.querySelectorAll('.alert-dialog-button')).forEach((buttonElement, index) => {
+  el.footer = el.dialog.querySelector('.alert-dialog-footer');
+  util.arrayFrom(el.dialog.querySelectorAll('.alert-dialog-button')).forEach((buttonElement, index) => {
     buttonElement.onclick = () => {
-      dialogElement.hide()
+      el.dialog.hide()
         .then(() => {
-          const resolveValue = options.isPrompt ? inputElement.value : index;
-          dialogElement.remove();
-          dialogElement = inputElement = buttonElement = null;
+          const resolveValue = options.isPrompt ? el.input.value : index;
+          el.dialog.remove();
+          cleanup();
           options.callback(resolveValue);
           deferred.resolve(resolveValue);
         });
     };
 
-    footerElement.appendChild(buttonElement);
+    el.footer.appendChild(buttonElement);
   });
-  footerElement = null;
+  el.footer = null;
 
   // Cancel events
   if (options.cancelable) {
-    dialogElement.cancelable = true;
-    dialogElement.addEventListener('dialog-cancel', () => {
+    el.dialog.cancelable = true;
+    el.dialog.onDialogCancel = () => {
       setImmediate(() => {
-        dialogElement.remove();
-        dialogElement = inputElement = null;
+        el.dialog.remove();
+        cleanup();
       });
       const resolveValue = options.isPrompt ? null : -1;
       options.callback(resolveValue);
       deferred.reject(resolveValue);
-    }, false);
+    };
+    el.dialog.addEventListener('dialog-cancel', el.dialog.onDialogCancel, false);
   }
 
   // Show dialog
-  document.body.appendChild(dialogElement);
-  options.compile(dialogElement);
+  document.body.appendChild(el.dialog);
+  options.compile(el.dialog);
   setImmediate(() => {
-    dialogElement.show()
+    el.dialog.show()
     .then(() => {
-      if (inputElement && options.isPrompt && options.autofocus) {
-        inputElement.focus();
+      if (el.input && options.isPrompt && options.autofocus) {
+        el.input.focus();
       }
     });
   });
