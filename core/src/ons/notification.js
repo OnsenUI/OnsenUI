@@ -114,31 +114,24 @@ notification._createAlertDialog = options => {
     util.addModifier(dialogElement, options.modifier);
   }
 
-  const deferred = {};
-  deferred.promise = new Promise((resolve, reject) => {
-    deferred.resolve = resolve;
-    deferred.reject = reject;
-  });
+  const deferred = util.defer();
 
   // Prompt events
   let inputElement;
-  if (options.isPrompt) {
+  if (options.isPrompt && options.submitOnEnter) {
     inputElement = dialogElement.querySelector('.text-input');
-
-    if (options.submitOnEnter) {
-      inputElement.addEventListener('keypress', event => {
-        if (event.keyCode === 13) {
-          dialogElement.hide()
-            .then(() => {
-              const resolveValue = inputElement.value;
-              dialogElement.remove();
-              dialogElement = inputElement = null;
-              options.callback(resolveValue);
-              deferred.resolve(resolveValue);
-            });
-        }
-      }, false);
-    }
+    inputElement.addEventListener('keypress', event => {
+      if (event.keyCode === 13) {
+        dialogElement.hide()
+          .then(() => {
+            const resolveValue = inputElement.value;
+            dialogElement.remove();
+            dialogElement = inputElement = null;
+            options.callback(resolveValue);
+            deferred.resolve(resolveValue);
+          });
+      }
+    }, false);
   }
 
   // Button events
@@ -157,6 +150,7 @@ notification._createAlertDialog = options => {
 
     footerElement.appendChild(buttonElement);
   });
+  footerElement = null;
 
   // Cancel events
   if (options.cancelable) {
@@ -183,7 +177,7 @@ notification._createAlertDialog = options => {
       }
     });
   });
-  footerElement = null;
+
   return deferred.promise;
 };
 
