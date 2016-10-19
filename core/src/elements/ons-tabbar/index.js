@@ -284,6 +284,7 @@ export default class TabbarElement extends BaseElement {
 
   /**
    * @method loadPage
+   * @deprecated
    * @signature loadPage(url, [options])
    * @param {String} url
    *   [en]Page URL. Can be either an HTML document or an `<ons-template>` id.[/en]
@@ -305,6 +306,8 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   loadPage(page, options = {}) {
+    console.warn('The loadPage method has been deprecated and will be removed in the next minor version.');
+
     return new Promise(resolve => {
       const tab = this._tabbarElement.children[0] || new TabElement();
       tab._loadPage(page, this._contentElement, pageElement => {
@@ -483,81 +486,37 @@ export default class TabbarElement extends BaseElement {
 
     selectedTab.setActive();
 
-    const needLoad = !options.keepPage;
+    const params = {
+      ...options,
+      previousTabIndex: previousTabIndex,
+      selectedTabIndex: selectedTabIndex
+    };
 
-    util.arrayFrom(this._getTabbarElement().children).forEach((tab) => {
-      if (tab != selectedTab) {
-        tab.setInactive();
-      } else {
-        if (!needLoad) {
-          util.triggerElementEvent(this, 'postchange', {
-            index: selectedTabIndex,
-            tabItem: selectedTab
-          });
-        }
-      }
-    });
-
-    if (needLoad) {
-      let removeElement = false;
-
-      if ((!previousTab && previousPageElement) || (previousTab && previousTab._pageElement !== previousPageElement)) {
-        removeElement = true;
-      }
-
-      const params = {
-        callback: () => {
-          util.triggerElementEvent(this, 'postchange', {
-            index: selectedTabIndex,
-            tabItem: selectedTab
-          });
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        },
-        previousTabIndex: previousTabIndex,
-        selectedTabIndex: selectedTabIndex
-      };
-
-      if (options.animation) {
-        params.animation = options.animation;
-      }
-
-      params.animationOptions = options.animationOptions || {};
-
-      const link = (element, callback) => {
-        rewritables.link(this, element, options, callback);
-      };
-
-      return new Promise(resolve => {
-        selectedTab._loadPageElement(this._contentElement, pageElement => {
-          pageElement.style.display = 'block';
-          resolve(this._loadPersistentPageDOM(pageElement, params));
-        }, link);
-      });
+    if (previousTab) {
+      previousTab.setInactive();
     } else {
-      return new Promise(resolve => {
-        this._contentElement.appendChild(selectedTab.pageElement);
-        selectedTab.pageElement.style.display = 'block';
-        resolve(this._loadPersistentPageDOM(selectedTab.pageElement, params));
-      });
-    }
-  }
-
-  /**
-   * @param {Element} element
-   * @param {Object} options
-   * @param {Object} options.animation
-   */
-  _loadPersistentPageDOM(element, options = {}) {
-
-    if (!util.isAttached(element)) {
-      this._contentElement.appendChild(element);
+      params.animation = 'none';
     }
 
-    element.removeAttribute('style');
-    return this._switchPage(element, options);
+    const link = (element, callback) => {
+      rewritables.link(this, element, options, callback);
+    };
+
+    return new Promise(resolve => {
+      selectedTab._loadPageElement(this._contentElement, pageElement => {
+        pageElement.removeAttribute('style');
+
+        this._switchPage(pageElement, params)
+            .then((page) => {
+              util.triggerElementEvent(this, 'postchange', {
+                index: selectedTabIndex,
+                tabItem: selectedTab
+              });
+
+              return resolve(page);
+            });
+      }, link);
+    });
   }
 
   /**
