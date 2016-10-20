@@ -15,6 +15,7 @@ v2.0.2
  * ons.notification: Fixed memory leak.
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
+ * angular1: Fix minor memory leak in Navigator.
 
 v2.0.1
 ----
