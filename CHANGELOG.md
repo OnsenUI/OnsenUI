@@ -16,6 +16,7 @@ v2.0.2
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
  * angular1: Fix minor memory leak in Navigator.
+ * ons-splitter: Fix [#1605](https://github.com/OnsenUI/OnsenUI/issues/1605).
 
 v2.0.1
 ----
