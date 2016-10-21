@@ -380,15 +380,14 @@ export default class NavigatorElement extends BaseElement {
 
     return new Promise(resolve => {
       const options = {page: oldPage.name, parent: this, params: oldPage.pushedOptions.data};
-      this._pageLoader.load(options, ({element, unload}) => {
-        element = util.extend(element, {
+      this._pageLoader.load(options, pageElement => {
+        pageElement = util.extend(pageElement, {
           name: oldPage.name,
           data: oldPage.data,
-          pushedOptions: oldPage.pushedOptions,
-          unload
+          pushedOptions: oldPage.pushedOptions
         });
 
-        rewritables.link(this, element, oldPage.options, element => {
+        rewritables.link(this, pageElement, oldPage.options, element => {
           this.insertBefore(element, oldPage ? oldPage : null);
           oldPage._destroy();
           resolve();
@@ -496,28 +495,27 @@ export default class NavigatorElement extends BaseElement {
   pushPage(page, options = {}) {
     ({page, options} = this._preparePageAndOptions(page, options));
 
-    const prepare = (element, unload) => {
-      this._verifyPageElement(element);
-      element = util.extend(element, {
+    const prepare = pageElement => {
+      this._verifyPageElement(pageElement);
+      pageElement = util.extend(pageElement, {
         name: options.page,
-        data: options.data,
-        unload
+        data: options.data
       });
-      element.style.display = 'none';
+      pageElement.style.display = 'none';
     };
 
     if (options.pageHTML) {
       return this._pushPage(options, () => new Promise(resolve => {
-        instantPageLoader.load({page: options.pageHTML, parent: this, params: options.data}, ({element, unload}) => {
-          prepare(element, unload);
+        instantPageLoader.load({page: options.pageHTML, parent: this, params: options.data}, pageElement => {
+          prepare(pageElement);
           resolve();
         });
       }));
     }
 
     return this._pushPage(options, () => new Promise(resolve => {
-      this._pageLoader.load({page, parent: this, params: options.data}, ({element, unload}) => {
-        prepare(element, unload);
+      this._pageLoader.load({page, parent: this, params: options.data}, pageElement => {
+        prepare(pageElement);
         resolve();
       });
     }));
@@ -641,13 +639,12 @@ export default class NavigatorElement extends BaseElement {
     const loader = typeof options.pageHTML === 'string' ? instantPageLoader : this._pageLoader;
 
     return new Promise(resolve => {
-      loader.load({page, parent: this}, ({element, unload}) => {
-        this._verifyPageElement(element);
-        element = util.extend(element, {
+      loader.load({page, parent: this}, pageElement => {
+        this._verifyPageElement(pageElement);
+        pageElement = util.extend(pageElement, {
           name: options.page,
           data: options.data,
-          pushedOptions: options,
-          unload
+          pushedOptions: options
         });
 
         options.animationOptions = util.extend(
@@ -656,11 +653,11 @@ export default class NavigatorElement extends BaseElement {
           options.animationOptions || {}
         );
 
-        element.style.display = 'none';
-        this.insertBefore(element, this.pages[index]);
+        pageElement.style.display = 'none';
+        this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
-        rewritables.link(this, element, options, element => {
+        rewritables.link(this, pageElement, options, element => {
           setTimeout(() => {
             element = null;
             resolve(this.pages[index]);

@@ -176,12 +176,12 @@ export default class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this, replace: true}, ({element, unload}) => {
-        rewritables.link(this, element, options, fragment => {
+      this._pageLoader.load({page, parent: this, replace: true}, pageElement => {
+        rewritables.link(this, pageElement, options, fragment => {
           setImmediate(() => this._show());
-          callback();
 
-          resolve(this.firstChild);
+          callback(pageElement);
+          resolve(pageElement);
         });
       });
     });

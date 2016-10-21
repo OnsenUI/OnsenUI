@@ -351,27 +351,26 @@ export default class TabElement extends BaseElement {
       const index = this._findTabIndex();
       callback(pages[index]);
     } else if (!this._loadedPage) {
-      this._pageLoader.load({page: this._getPageTarget(), parent}, page => {
-        this._loadedPage = page;
-        link(page.element, element => {
-          page.element = element;
-          callback(page.element);
+      this._pageLoader.load({page: this._getPageTarget(), parent}, pageElement => {
+        link(pageElement, element => {
+          this._loadedPage = element;
+          callback(element);
         });
       });
     } else {
-      callback(this._loadedPage.element);
+      callback(this._loadedPage);
     }
   }
 
   _loadPage(page, parent, callback) {
-    this._pageLoader.load({page, parent}, page => {
-      callback(page.element);
+    this._pageLoader.load({page, parent}, pageElement => {
+      callback(pageElement);
     });
   }
 
   get pageElement() {
     if (this._loadedPage) {
-      return this._loadedPage.element;
+      return this._loadedPage;
     }
 
     const tabbar = this._findTabbarElement();
@@ -390,7 +389,7 @@ export default class TabElement extends BaseElement {
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
-      this._loadedPage.unload();
+      this._loadedPage._destroy();
       this._loadedPage = null;
     }
   }

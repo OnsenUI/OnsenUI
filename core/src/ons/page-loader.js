@@ -74,8 +74,9 @@ export class PageLoader {
         throw Error('target.unload must be an instance of Function.');
       }
 
-      done(result);
-    }, params);
+      result.element.unload = result.unload;
+      done(result.element);
+    });
   }
 }
 
