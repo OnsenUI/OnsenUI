@@ -93,7 +93,7 @@ limitations under the License.
         const page = event.target;
 
         if (this._element[0] === page.parentNode) {
-          const scope = angular.element(page).data('_scope').$parent;
+          const scope = angular.element(page).data('_scope');
           scope.$destroy();
         }
       },
