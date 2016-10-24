@@ -846,30 +846,6 @@ ons-range[disabled] .range {
     </div>
 */
 /* topdoc
-  name: Transparent Navigation Bar
-  class: navigation-bar--transparent
-  use: Toolbar Button, Navigation Bar
-  markup:
-    <div class="navigation-bar navigation-bar--transparent">
-      <div class="navigation-bar__left">
-        <span class="toolbar-button--quiet">
-          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
-        </span>
-      </div>
-      <div class="navigation-bar__center">
-        Navigation Bar
-      </div>
-      <div class="navigation-bar__right">
-        <span class="toolbar-button--quiet">Label</span>
-      </div>
-    </div>
-*/
-.navigation-bar--transparent {
-  background-color: transparent;
-  background-image: none;
-  border: none;
-}
-/* topdoc
   name: Navigation Bar with Outline Button
   use: Toolbar Button, Navigation Bar
   markup:
@@ -1120,6 +1096,32 @@ ons-range[disabled] .range {
       </div>
     </div>
 */
+/* topdoc
+  name: Transparent Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-image: none;
+  border-bottom: none;
+}
 /* topdoc
   name: Button
   class: button
@@ -2194,6 +2196,16 @@ ons-range[disabled] .range {
   font-weight: 400;
   font-size: 17px;
 }
+.tab-bar__badge.notification {
+  position: absolute;
+  top: 5px;
+  z-index: 10;
+  font-size: 12px;
+  height: 16px;
+  line-height: 16px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
 .tab-bar__icon + .tab-bar__label {
   font-size: 10px;
   line-height: 1;
@@ -2667,7 +2679,7 @@ ons-range[disabled] .range {
 }
 .toolbar-button--material:active {
   opacity: 1;
-  background-color: #26a69a;
+  background-color: rgba(255,255,255,0.15);
 }
 .back-button {
   height: 44px;
@@ -2719,7 +2731,7 @@ ons-range[disabled] .range {
 }
 .back-button--material:active {
   opacity: 1;
-  background-color: #26a69a;
+  background-color: rgba(255,255,255,0.15);
 }
 /* topdoc
   name: Checkbox
