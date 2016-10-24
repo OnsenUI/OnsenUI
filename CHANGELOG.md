@@ -17,6 +17,7 @@ v2.0.2
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
  * angular1: Fix minor memory leak in Navigator.
  * ons-splitter: Fix [#1605](https://github.com/OnsenUI/OnsenUI/issues/1605).
+ * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
 
 v2.0.1
 ----
