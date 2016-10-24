@@ -399,6 +399,12 @@
 		targetElement = this.getTargetElementFromEventTarget(event.target);
 		touch = event.targetTouches[0];
 
+		// Ignore touches on contenteditable elements to prevent conflict with text selection.
+		// (For details: https://github.com/ftlabs/fastclick/pull/211 )
+		if (targetElement.isContentEditable) {
+			return true;
+		}
+
 		if (deviceIsIOS) {
 
 			// Only trusted events will deselect text on iOS (issue #49)
