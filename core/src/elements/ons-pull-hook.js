@@ -139,10 +139,10 @@ export default class PullHookElement extends BaseElement {
       return;
     }
 
-    // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
+    // Hack to make it work on Android 4.4 WebView and iOS Safari/UIWebView. Scrolls manually near the top of the page so
     // there will be no inertial scroll when scrolling down. Allowing default scrolling will
     // kill all 'touchmove' events.
-    if (platform.isAndroid()) {
+    {
       const element = this._pageElement;
       element.scrollTop = this._startScroll - event.gesture.deltaY;
       if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
