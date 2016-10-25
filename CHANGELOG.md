@@ -15,8 +15,10 @@ v2.0.2
  * ons.notification: Fixed memory leak.
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
+ * ons-tabbar, ons-tab: Fix [#1584](https://github.com/OnsenUI/OnsenUI/issues/1584), [#1629](https://github.com/OnsenUI/OnsenUI/issues/1629).
  * angular1: Fix minor memory leak in Navigator.
  * ons-splitter: Fix [#1605](https://github.com/OnsenUI/OnsenUI/issues/1605).
+ * core: Fix [#1646](https://github.com/OnsenUI/OnsenUI/issues/1646).
 
 v2.0.1
 ----
@@ -24,6 +26,7 @@ v2.0.1
  * ons.notification: Fix [#1595](https://github.com/OnsenUI/OnsenUI/issues/1595).
  * ons-lazy-repeat: Fix [#1613](https://github.com/OnsenUI/OnsenUI/issues/1613).
  * core: Removed all `_compiled` attributes.
+ * core: Disabled native Custom Elements v1 implementations.
 
 v2.0.0
 ----
