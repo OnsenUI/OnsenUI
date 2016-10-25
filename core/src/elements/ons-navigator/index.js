@@ -287,10 +287,10 @@ export default class NavigatorElement extends BaseElement {
 
         if (this.topPage) {
           contentReady(this.topPage, () =>
-            setImmediate(() => {
+            setTimeout(() => {
               this.topPage._show();
               this._updateLastPageBackButton();
-            })
+            }, 0)
           );
         }
       } else {
