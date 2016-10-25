@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.3
+----
+ * ons-page: Fixed [#1649](https://github.com/OnsenUI/OnsenUI/issues/1649).
+
 v2.0.2
 ----
  * ons-switch: Fix regression where `change` event was not being triggered in some cases.
