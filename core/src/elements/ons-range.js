@@ -176,7 +176,9 @@ export default class RangeElement extends BaseElement {
    *   [ja][/ja]
    */
   get value() {
-    return this._input.value;
+    return this._input === null
+      ? this.getAttribute('value')
+      : this._input.value;
   }
 
   set value(val) {
