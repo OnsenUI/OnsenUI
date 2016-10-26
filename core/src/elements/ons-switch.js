@@ -19,6 +19,7 @@ import util from 'ons/util';
 import autoStyle from 'ons/autostyle';
 import ModifierUtil from 'ons/internal/modifier-util';
 import BaseElement from 'ons/base-element';
+import contentReady from 'ons/content-ready';
 import GestureDetector from 'ons/gesture-detector';
 
 const scheme = {
@@ -170,10 +171,11 @@ export default class SwitchElement extends BaseElement {
 
     this._boundOnChange = this._onChange.bind(this);
 
-    this._compile();
-
-    ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
-      this.attributeChangedCallback(e, null, this.getAttribute(e));
+    contentReady(this, () => {
+      this._compile();
+      ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
+        this.attributeChangedCallback(e, null, this.getAttribute(e));
+      });
     });
   }
 
@@ -196,22 +198,26 @@ export default class SwitchElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._checkbox.removeEventListener('change', this._boundOnChange);
-    this.removeEventListener('dragstart', this._onDragStart);
-    this.removeEventListener('hold', this._onHold);
-    this.removeEventListener('tap', this.click);
-    this.removeEventListener('click', this._onClick);
-    this._gestureDetector.dispose();
+    contentReady(this, () => {
+      this._checkbox.removeEventListener('change', this._boundOnChange);
+      this.removeEventListener('dragstart', this._onDragStart);
+      this.removeEventListener('hold', this._onHold);
+      this.removeEventListener('tap', this.click);
+      this.removeEventListener('click', this._onClick);
+      this._gestureDetector.dispose();
+    });
   }
 
   connectedCallback() {
-    this._checkbox.addEventListener('change', this._boundOnChange);
-    this.addEventListener('dragstart', this._onDragStart);
-    this.addEventListener('hold', this._onHold);
-    this.addEventListener('tap', this.click);
-    this.addEventListener('click', this._onClick);
-    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
-    this._boundOnRelease = this._onRelease.bind(this);
+    contentReady(this, () => {
+      this._checkbox.addEventListener('change', this._boundOnChange);
+      this.addEventListener('dragstart', this._onDragStart);
+      this.addEventListener('hold', this._onHold);
+      this.addEventListener('tap', this.click);
+      this.addEventListener('click', this._onClick);
+      this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+      this._boundOnRelease = this._onRelease.bind(this);
+    });
   }
 
   _onChange(event) {
@@ -295,25 +301,27 @@ export default class SwitchElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    switch(name) {
-      case 'modifier':
-        this._isMaterial = (current || '').indexOf('material') !== -1;
-        this._locations = locations[this._isMaterial ? 'material' : 'ios'];
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case 'input-id':
-        this._checkbox.id = current;
-        break;
-      case 'checked':
-        this._checked = current !== null;
-        this._checkbox.checked = current !== null;
-        util.toggleAttribute(this._checkbox, name, current !== null);
-        break;
-      case 'disabled':
-        this._disabled = current !== null;
-        this._checkbox.disabled = current !== null;
-        util.toggleAttribute(this._checkbox, name, current !== null);
-    }
+    contentReady(this, () => {
+      switch(name) {
+        case 'modifier':
+          this._isMaterial = (current || '').indexOf('material') !== -1;
+          this._locations = locations[this._isMaterial ? 'material' : 'ios'];
+          ModifierUtil.onModifierChanged(last, current, this, scheme);
+          break;
+        case 'input-id':
+          this._checkbox.id = current;
+          break;
+        case 'checked':
+          this._checked = current !== null;
+          this._checkbox.checked = current !== null;
+          util.toggleAttribute(this._checkbox, name, current !== null);
+          break;
+        case 'disabled':
+          this._disabled = current !== null;
+          this._checkbox.disabled = current !== null;
+          util.toggleAttribute(this._checkbox, name, current !== null);
+      }
+    });
   }
 }
 
