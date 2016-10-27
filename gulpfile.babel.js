@@ -15,8 +15,11 @@ limitations under the License.
 
 */
 
+import 'babel-polyfill';
+
 import gulp from 'gulp';
 import path from'path';
+import glob from 'glob';
 import gulpIf from 'gulp-if';
 import pkg from './package.json';
 import {merge} from 'event-stream';
@@ -28,6 +31,7 @@ import fs from 'fs';
 import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import karma from 'karma';
 
 ////////////////////////////////////////
 
@@ -119,6 +123,75 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], () => {
       $.util.log($.util.colors.red(err.message));
       throw err;
     });
+});
+
+gulp.task('core-test-separately', ['prepare', 'core', 'core-dts-test'], (done) => {
+  // Usage:
+  //    # run all unit tests
+  //    gulp core core-test-separately
+  //
+  //    # run only specified unit tests
+  //    gulp core core-test-separately --target core/src/elements/ons-navigator/index.spec.js
+
+  (async () => {
+    let listOfSpecFiles;
+    if ($.util.env.target) { // if --target option is specified
+      listOfSpecFiles = [ path.join(__dirname, $.util.env.target) ];
+    } else {
+      listOfSpecFiles = glob.sync(path.join(__dirname, 'core/src/**/*.spec.js'));
+    }
+    
+    // Separately launch Karma server for each spec file
+    try {
+      for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
+        $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
+
+        // Pass parameters to Karma config file via process.env
+        process.env.SPEC_FILES_SPECIFIED = true;
+        process.env.SPEC_FILES = listOfSpecFiles[i];
+
+        // Launch Karma server and wait until it exits
+        await (async () => {
+          return new Promise((resolve, reject) => {
+            new karma.Server(
+              {
+                configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+                singleRun: true, // overrides the corresponding option in config file
+                autoWatch: false // same as above
+              },
+              (exitCode) => {
+                const exitMessage = `Karma server has exited with ${exitCode}`;
+                
+                switch (exitCode) {
+                  case 0: // success
+                    $.util.log($.util.colors.green(exitMessage));
+                    $.util.log($.util.colors.green('Passed unit tests successfully.'));
+                    resolve();
+                    break;
+                  default: // error
+                    $.util.log($.util.colors.red(exitMessage));
+                    $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+                    resolve();
+                }
+              }
+            ).start();
+          });
+        })();
+
+        // Wait for 500 ms before next iteration to avoid crashes
+        await (async () => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => { resolve(); }, 500 );
+          });
+        })();
+      }
+    } finally {
+      process.env.SPEC_FILES_SPECIFIED = undefined;
+      process.env.SPEC_FILES = undefined;
+    }
+
+    done();
+  })();
 });
 
 ////////////////////////////////////////
