@@ -100,6 +100,7 @@
     "karma-coverage": "^1.0.0",
     "karma-junit-reporter": "^1.0.0",
     "karma-mocha": "^1.0.1",
+    "karma-safari-launcher": "^1.0.0",
     "mkpath": "^1.0.0",
     "mocha": "^2.5.3",
     "rollup": "^0.26.7",
