@@ -28,6 +28,7 @@ import fs from 'fs';
 import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import karma from 'karma';
 
 ////////////////////////////////////////
 
@@ -109,16 +110,29 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 ////////////////////////////////////////
 // core-test
 ////////////////////////////////////////
-gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], () => {
-  return gulp.src([])
-    .pipe($.karma({
-      configFile: 'core/test/karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', err => {
-      $.util.log($.util.colors.red(err.message));
-      throw err;
-    });
+gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
+  new karma.Server(
+    {
+      configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+      singleRun: true, // overrides the corresponding option in config file
+      autoWatch: false // same as above
+    },
+    (exitCode) => {
+      const exitMessage = `Karma server has exited with ${exitCode}`;
+      
+      switch (exitCode) {
+        case 0: // success
+          $.util.log($.util.colors.green(exitMessage));
+          $.util.log($.util.colors.green('Passed unit tests successfully.'));
+          done();
+          break;
+        default: // error
+          $.util.log($.util.colors.red(exitMessage));
+          $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+          throw new Error('core-test has failed');
+      }
+    }
+  ).start();
 });
 
 ////////////////////////////////////////
@@ -136,15 +150,26 @@ gulp.task('core-dts-test', () => {
 ////////////////////////////////////////
 // watch-core-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', ['watch-core'], () => {
-  return gulp.src([])
-    .pipe($.karma({
-      configFile: 'core/test/karma.conf.js',
-      action: 'watch'
-    }))
-    .on('error', err => {
-      throw err;
-    });
+gulp.task('watch-core-test', ['watch-core'], (done) => {
+  new karma.Server(
+    {
+      configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+      singleRun: false, // overrides the corresponding option in config file
+      autoWatch: true // same as above
+    },
+    (exitCode) => {
+      const exitMessage = `Karma server has exited with ${exitCode}`;
+      
+      switch (exitCode) {
+        case 0: // success
+          $.util.log($.util.colors.green(exitMessage));
+          break;
+        default: // error
+          $.util.log($.util.colors.red(exitMessage));
+      }
+      done();
+    }
+  ).start();
 });
 
 ////////////////////////////////////////
