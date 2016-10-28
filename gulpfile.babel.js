@@ -468,9 +468,9 @@ gulp.task('webdriver-download', () => {
   const platform = os.platform();
   const destDir = path.join(__dirname, '.selenium');
   const chromeDriverUrl = (() => {
-    const filePath = platform === 'linux' ?
-      '/2.24/chromedriver_linux64.zip' :
-      `/2.24/chromedriver_${platform === 'darwin' ? 'mac' : 'win'}32.zip`;
+    const filePath = platform === 'win32' ?
+      '/2.25/chromedriver_win32.zip' :
+      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
     return `http://chromedriver.storage.googleapis.com${filePath}`;
   })();
 
