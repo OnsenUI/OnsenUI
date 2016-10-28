@@ -103,6 +103,11 @@ limitations under the License.
         var pageScope = this._createPageScope();
         link(pageScope);
 
+        /**
+         * Overwrite page scope.
+         */
+        angular.element(pageElement).data('_scope', pageScope);
+
         pageScope.$evalAsync(function() {
           callback(pageElement);
         });

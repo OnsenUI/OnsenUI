@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.1 - 2016-10-14 */
+/*! onsenui - v2.0.3 - 2016-10-26 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -28,7 +28,9 @@ ons-gesture-detector {
 }
 
 ons-navigator,
-ons-tabbar {
+ons-tabbar,
+ons-dialog,
+ons-alert-dialog {
   position: absolute;
   top: 0;
   left: 0;
@@ -42,7 +44,7 @@ ons-tab {
           transform: translate3d(0, 0, 0);
 }
 
-ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog {
   z-index: 2;
 }
 
@@ -356,7 +358,7 @@ limitations under the License.
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ons-icon--ion {
+:not(ons-toolbar-button) > .ons-icon--ion {
   line-height: 0.75em;
   vertical-align: -25%;
 }

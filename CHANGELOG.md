@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+v2.0.4
+----
+ * angular1: Fix issue in event removal.
+
+v2.0.3
+----
+ * ons-page: Fixed [#1649](https://github.com/OnsenUI/OnsenUI/issues/1649).
+
 v2.0.2
 ----
  * ons-switch: Fix regression where `change` event was not being triggered in some cases.
@@ -12,12 +20,15 @@ v2.0.2
  * ons-tab: Add `badge` attribute to display notification on tab.
  * ons.notification: Added `options.inputType` and `options.class`.
  * ons.notification: Fix [#1638](https://github.com/OnsenUI/OnsenUI/issues/1638).
+ * angular2-binding: Added Angular 2 AOT support.
  * ons.notification: Fixed memory leak.
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
+ * ons-tabbar, ons-tab: Fix [#1584](https://github.com/OnsenUI/OnsenUI/issues/1584), [#1629](https://github.com/OnsenUI/OnsenUI/issues/1629).
  * angular1: Fix minor memory leak in Navigator.
  * ons-splitter: Fix [#1605](https://github.com/OnsenUI/OnsenUI/issues/1605).
  * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
+ * core: Fix [#1646](https://github.com/OnsenUI/OnsenUI/issues/1646).
 
 v2.0.1
 ----
@@ -25,6 +36,7 @@ v2.0.1
  * ons.notification: Fix [#1595](https://github.com/OnsenUI/OnsenUI/issues/1595).
  * ons-lazy-repeat: Fix [#1613](https://github.com/OnsenUI/OnsenUI/issues/1613).
  * core: Removed all `_compiled` attributes.
+ * core: Disabled native Custom Elements v1 implementations.
 
 v2.0.0
 ----
