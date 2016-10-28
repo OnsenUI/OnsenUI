@@ -153,7 +153,7 @@ gulp.task('core-test-separately', ['prepare', 'core', 'core-dts-test'], (done) =
     } else {
       listOfSpecFiles = glob.sync(path.join(__dirname, 'core/src/**/*.spec.js'));
     }
-    
+
     // Separately launch Karma server for each spec file
     try {
       for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
@@ -174,7 +174,7 @@ gulp.task('core-test-separately', ['prepare', 'core', 'core-dts-test'], (done) =
               },
               (exitCode) => {
                 const exitMessage = `Karma server has exited with ${exitCode}`;
-                
+
                 switch (exitCode) {
                   case 0: // success
                     $.util.log($.util.colors.green(exitMessage));
