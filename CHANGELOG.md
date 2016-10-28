@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.4
+----
+ * angular1: Fix issue in event removal.
+
 v2.0.3
 ----
  * ons-page: Fixed [#1649](https://github.com/OnsenUI/OnsenUI/issues/1649).
