@@ -204,7 +204,9 @@ export default class SwitchElement extends BaseElement {
       this.removeEventListener('hold', this._onHold);
       this.removeEventListener('tap', this.click);
       this.removeEventListener('click', this._onClick);
-      this._gestureDetector.dispose();
+      if (this._gestureDetector) {
+        this._gestureDetector.dispose();
+      }
     });
   }
 
