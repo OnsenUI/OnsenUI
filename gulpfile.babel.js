@@ -119,7 +119,7 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
     },
     (exitCode) => {
       const exitMessage = `Karma server has exited with ${exitCode}`;
-      
+
       switch (exitCode) {
         case 0: // success
           $.util.log($.util.colors.green(exitMessage));
@@ -159,7 +159,7 @@ gulp.task('watch-core-test', ['watch-core'], (done) => {
     },
     (exitCode) => {
       const exitMessage = `Karma server has exited with ${exitCode}`;
-      
+
       switch (exitCode) {
         case 0: // success
           $.util.log($.util.colors.green(exitMessage));
