@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
+import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
 
 const scheme = {
   '': 'speed-dial__item--*',

@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import internal from 'ons/internal';
+import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
-import contentReady from 'ons/content-ready';
-import {PageLoader, defaultPageLoader} from 'ons/page-loader';
+import contentReady from '../ons/content-ready';
+import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 
 const scheme = {
   '': 'tab-bar--*__item',

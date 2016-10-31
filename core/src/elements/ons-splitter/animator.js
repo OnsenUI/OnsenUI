@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import contentReady from 'ons/content-ready';
+import util from '../../ons/util';
+import contentReady from '../../ons/content-ready';
 
 export default class SplitterAnimator {
 
