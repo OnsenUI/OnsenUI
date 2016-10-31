@@ -138,6 +138,10 @@ export default class SplitterContentElement extends BaseElement {
     this._page = page;
   }
 
+  get _content() {
+    return this.children[0];
+  }
+
   /**
    * @property pageLoader
    * @type {Function}
@@ -176,7 +180,9 @@ export default class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this, replace: true}, pageElement => {
+      this._content && this._pageLoader.unload(this._content);
+
+      this._pageLoader.load({page, parent: this}, pageElement => {
         rewritables.link(this, pageElement, options, fragment => {
           setImmediate(() => this._show());
 
@@ -188,15 +194,15 @@ export default class SplitterContentElement extends BaseElement {
   }
 
   _show() {
-    util.propagateAction(this, '_show');
+    this._content._show();
   }
 
   _hide() {
-    util.propagateAction(this, '_hide');
+    this._content._hide();
   }
 
   _destroy() {
-    util.propagateAction(this, '_destroy');
+    this._pageLoader.unload(this._content);
     this.remove();
   }
 

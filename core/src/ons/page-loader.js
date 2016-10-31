@@ -18,29 +18,30 @@ import util from 'ons/util';
 import internal from 'ons/internal';
 
 // Default implementation for global PageLoader.
-function loadPage({page, parent, params = {}, replace}, done) {
+function loadPage({page, parent, params = {}}, done) {
   internal.getPageHTMLAsync(page).then(html => {
-    if (replace) {
-      util.propagateAction(parent, '_destroy');
-      parent.innerHTML = '';
-    }
+    const pageElement = util.createElement(html.trim());
+    parent.appendChild(pageElement);
 
-    const element = util.createElement(html.trim());
-    parent.appendChild(element);
-
-    done({
-      element: element,
-      unload: () => element.remove()
-    });
+    done(pageElement);
   });
+}
+
+function unloadPage(element) {
+  if (element._destroy instanceof Function) {
+    element._destroy();
+  } else {
+    element.remove();
+  }
 }
 
 export class PageLoader {
   /**
    * @param {Function} [fn] Returns an object that has "element" property and "unload" function.
    */
-  constructor(fn) {
-    this._loader = fn instanceof Function ? fn : loadPage;
+  constructor(loader, unloader) {
+    this._loader = loader instanceof Function ? loader : loadPage;
+    this._unloader = unloader instanceof Function ? unloader : unloadPage;
   }
 
   /**
@@ -61,38 +62,35 @@ export class PageLoader {
    * @param {any} options.page
    * @param {Element} options.parent A location to load page.
    * @param {Object} [options.params] Extra parameters for ons-page.
-   * @param {Boolean} [options.replace] Remove the previous content.
    * @param {Function} done Take an object that has "element" property and "unload" function.
    */
-  load({page, parent, params = {}, replace}, done) {
-    this._loader({page, parent, params, replace}, result => {
-      if (!(result.element instanceof Element)) {
-        throw Error('target.element must be an instance of Element.');
+  load({page, parent, params = {}}, done) {
+    this._loader({page, parent, params}, pageElement => {
+      if (!(pageElement instanceof Element)) {
+        throw Error('pageElement must be an instance of Element.');
       }
 
-      if (!(result.unload instanceof Function)) {
-        throw Error('target.unload must be an instance of Function.');
-      }
-
-      result.element.unload = result.unload;
-      done(result.element);
+      done(pageElement);
     });
+  }
+
+  unload(pageElement) {
+    if (!(pageElement instanceof Element)) {
+      throw Error('pageElement must be an instance of Element.');
+    }
+
+    this._unloader(pageElement);
   }
 }
 
 export const defaultPageLoader = new PageLoader();
 
-export const instantPageLoader = new PageLoader(function({page, parent, params = {}, replace}, done) {
-  if (replace) {
-    util.propagateAction(parent, '_destroy');
-    parent.innerHTML = '';
-  }
+export const instantPageLoader = new PageLoader(
+  function({page, parent, params = {}}, done) {
+    const element = util.createElement(page.trim());
+    parent.appendChild(element);
 
-  const element = util.createElement(page.trim());
-  parent.appendChild(element);
-
-  done({
-    element: element,
-    unload: () => element.remove()
-  });
-});
+    done(element);
+  },
+  unloadPage
+);

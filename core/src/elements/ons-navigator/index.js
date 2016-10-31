@@ -363,7 +363,7 @@ export default class NavigatorElement extends BaseElement {
     ({options} = this._preparePageAndOptions(null, options));
 
     const popUpdate = () => new Promise((resolve) => {
-      this.pages[this.pages.length - 1]._destroy();
+      this._pageLoader.unload(this.pages[this.pages.length - 1]);
       resolve();
     });
 
@@ -389,7 +389,7 @@ export default class NavigatorElement extends BaseElement {
 
         rewritables.link(this, pageElement, oldPage.options, element => {
           this.insertBefore(element, oldPage ? oldPage : null);
-          oldPage._destroy();
+          this._pageLoader.unload(oldPage);
           resolve();
         });
       });
@@ -606,7 +606,7 @@ export default class NavigatorElement extends BaseElement {
     return this.pushPage(page, options)
       .then(resolvedValue => {
         if (this.pages.length > 1) {
-          this.pages[this.pages.length - 2]._destroy();
+          this._pageLoader.unload(this.pages[this.pages.length - 2]);
         }
         this._updateLastPageBackButton();
 
@@ -688,7 +688,7 @@ export default class NavigatorElement extends BaseElement {
 
     options.callback = () => {
       while (this.pages.length > 1) {
-        this.pages[0]._destroy();
+        this._pageLoader.unload(this.pages[0]);
       }
 
       this.pages[0].updateBackButton(false);
@@ -949,7 +949,7 @@ export default class NavigatorElement extends BaseElement {
 
   _destroy() {
     for (let i = this.pages.length - 1; i >= 0; i--) {
-      this.pages[i]._destroy();
+      this._pageLoader.unload(this.pages[i]);
     }
 
     this.remove();

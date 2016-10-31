@@ -585,9 +585,9 @@ export default class TabbarElement extends BaseElement {
   }
 
   _destroy() {
-    const pages = this._contentElement.children;
-    for (let i = pages.length - 1; i >= 0; i--) {
-      pages[i]._destroy();
+    const tabs = this._getTabbarElement().children;
+    for (let i = tabs.length - 1; i >= 0; i--) {
+      tabs[i].remove();
     }
     this.remove();
   }

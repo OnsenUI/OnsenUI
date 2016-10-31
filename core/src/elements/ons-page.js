@@ -424,10 +424,6 @@ export default class PageElement extends BaseElement {
 
     util.propagateAction(this._contentElement, '_destroy');
 
-    if (this.unload instanceof Function) {
-      this.unload();
-    }
-
     this.remove();
   }
 

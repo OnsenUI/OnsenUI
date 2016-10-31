@@ -389,7 +389,7 @@ export default class TabElement extends BaseElement {
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
-      this._loadedPage._destroy();
+      this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
     }
   }
