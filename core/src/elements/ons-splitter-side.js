@@ -492,6 +492,10 @@ export default class SplitterSideElement extends BaseElement {
     return this._page || this.getAttribute('page');
   }
 
+  get side() {
+    return this.getAttribute('side') === 'right' ? 'right' : 'left';
+  }
+
   disconnectedCallback() {
     this._collapseDetection.disable();
     this._gestureDetector.dispose();

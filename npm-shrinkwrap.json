@@ -5920,9 +5920,9 @@
       "resolved": "https://registry.npmjs.org/void-elements/-/void-elements-2.0.1.tgz"
     },
     "wcdoc": {
-      "version": "0.1.16",
-      "from": "wcdoc@>=0.1.16 <0.2.0",
-      "resolved": "https://registry.npmjs.org/wcdoc/-/wcdoc-0.1.16.tgz",
+      "version": "0.1.18",
+      "from": "wcdoc@>=0.1.18 <0.2.0",
+      "resolved": "https://registry.npmjs.org/wcdoc/-/wcdoc-0.1.18.tgz",
       "dependencies": {
         "glob": {
           "version": "6.0.4",

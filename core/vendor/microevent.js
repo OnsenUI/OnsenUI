@@ -29,7 +29,16 @@ MicroEvent.prototype  = {
   off  : function(event, fct){
     this._events = this._events || {};
     if( event in this._events === false  )  return;
-    this._events[event].splice(this._events[event].indexOf(fct), 1);
+
+    this._events[event] = this._events[event]
+      .filter(function(_fct) {
+        if (fct) {
+           return fct !== _fct;
+        }
+        else {
+          return false;
+        }
+      });
   },
   emit : function(event /* , args... */){
     this._events = this._events || {};
