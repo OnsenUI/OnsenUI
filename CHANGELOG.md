@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.4
 ----
  * angular1: Fix issue in event removal.
+ * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
 
 v2.0.3
 ----
@@ -27,7 +28,6 @@ v2.0.2
  * ons-tabbar, ons-tab: Fix [#1584](https://github.com/OnsenUI/OnsenUI/issues/1584), [#1629](https://github.com/OnsenUI/OnsenUI/issues/1629).
  * angular1: Fix minor memory leak in Navigator.
  * ons-splitter: Fix [#1605](https://github.com/OnsenUI/OnsenUI/issues/1605).
- * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
  * core: Fix [#1646](https://github.com/OnsenUI/OnsenUI/issues/1646).
 
 v2.0.1
