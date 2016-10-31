@@ -29,6 +29,9 @@ import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import karma from 'karma';
+import rollup from 'rollup-stream';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 
 ////////////////////////////////////////
 
@@ -58,13 +61,9 @@ gulp.task('browser-sync', () => {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  return gulp.src(['core/src/setup.js'], {read: false})
-    .pipe($.plumber(function(error) {
-      $.util.log(error.message);
-      this.emit('end');
-    }))
-    .pipe($.rollup({
+  return rollup({
       sourceMap: 'inline',
+      entry: './core/src/setup.js',
       plugins: [
         nodeResolve(),
         babel({
@@ -74,9 +73,11 @@ gulp.task('core', function() {
       ],
       format: 'umd',
       moduleName: 'ons'
-    }))
+    })
+    .pipe(source('setup.js', './core/src'))
+    .pipe(buffer())
     .pipe($.addSrc.prepend('core/vendor/*.js'))
-    .pipe($.sourcemaps.init())
+    .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
@@ -256,21 +257,12 @@ gulp.task('prepare', ['html2js'], () =>  {
       'bindings/angular1/js/*.js'
     ])
       .pipe($.plumber())
-      .pipe($.rollup({
-        sourceMap: 'inline',
-        plugins: [
-          nodeResolve(),
-          babel({
-            presets: ['es2015-rollup'],
-            babelrc: false
-          })
-        ]
-      }))
       .pipe($.ngAnnotate({
         add: true,
         single_quotes: true // eslint-disable-line camelcase
       }))
       .pipe($.sourcemaps.init())
+      .pipe($.babel())
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe($.sourcemaps.write())
