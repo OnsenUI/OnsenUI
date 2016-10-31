@@ -479,7 +479,7 @@ gulp.task('webdriver-download', () => {
     return gulp.src('');
   }
 
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/2.51/selenium-server-standalone-2.51.0.jar')
+  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
     .pipe(gulp.dest(destDir));
 
   const chromedriver = $.download(chromeDriverUrl)
@@ -513,7 +513,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.51.0.jar'),
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
       '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
     ]
   };
