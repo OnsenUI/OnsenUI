@@ -29,16 +29,6 @@ const rewritables = {
    */
   ready(element, callback) {
     setImmediate(callback);
-  },
-
-  /**
-   * @param {Element} element
-   * @param {HTMLFragment} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(element, target, options, callback) {
-    callback(target);
   }
 };
 
@@ -180,15 +170,18 @@ export default class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._content && this._pageLoader.unload(this._content);
+      let oldContent = this._content || null;
 
       this._pageLoader.load({page, parent: this}, pageElement => {
-        rewritables.link(this, pageElement, options, fragment => {
-          setImmediate(() => this._show());
+        if (oldContent) {
+          this._pageLoader.unload(oldContent);
+          oldContent = null;
+        }
 
-          callback(pageElement);
-          resolve(pageElement);
-        });
+        setImmediate(() => this._show());
+
+        callback(pageElement);
+        resolve(pageElement);
       });
     });
   }

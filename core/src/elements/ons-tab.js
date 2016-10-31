@@ -343,19 +343,16 @@ export default class TabElement extends BaseElement {
   /**
    * @param {Element} parent
    * @param {Function} callback
-   * @param {Function} link
    */
-  _loadPageElement(parent, callback, link) {
+  _loadPageElement(parent, callback) {
     if (!this._loadedPage && !this._getPageTarget()) {
       const pages = this._findTabbarElement().pages;
       const index = this._findTabIndex();
       callback(pages[index]);
     } else if (!this._loadedPage) {
       this._pageLoader.load({page: this._getPageTarget(), parent}, pageElement => {
-        link(pageElement, element => {
-          this._loadedPage = element;
-          callback(element);
-        });
+        this._loadedPage = pageElement;
+        callback(pageElement);
       });
     } else {
       callback(this._loadedPage);
@@ -415,8 +412,6 @@ export default class TabElement extends BaseElement {
             if (this.hasAttribute('active')) {
               tabbar.setActiveTab(this._findTabIndex());
             }
-          }, (pageElement, done) => {
-            TabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
           });
         }
       };

@@ -53,16 +53,6 @@ const rewritables = {
    */
   ready(navigatorElement, callback) {
     callback();
-  },
-
-  /**
-   * @param {Element} navigatorElement
-   * @param {Element} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(navigatorElement, target, options, callback) {
-    callback(target);
   }
 };
 
@@ -387,11 +377,9 @@ export default class NavigatorElement extends BaseElement {
           pushedOptions: oldPage.pushedOptions
         });
 
-        rewritables.link(this, pageElement, oldPage.options, element => {
-          this.insertBefore(element, oldPage ? oldPage : null);
-          this._pageLoader.unload(oldPage);
-          resolve();
-        });
+        this.insertBefore(pageElement, oldPage ? oldPage : null);
+        this._pageLoader.unload(oldPage);
+        resolve();
       });
 
     }).then(() => this._popPage(options, popUpdate));
@@ -555,7 +543,7 @@ export default class NavigatorElement extends BaseElement {
       enterPage.unload = enterPage.unload || options.unload;
 
       return new Promise(resolve => {
-        var done = () => {
+        const done = () => {
           this._isRunning = false;
 
           if (leavePage) {
@@ -572,19 +560,13 @@ export default class NavigatorElement extends BaseElement {
           resolve(enterPage);
         };
 
-        enterPage.style.display = 'none';
-
-        var push = () =>  {
-          enterPage.style.display = 'block';
-          if (leavePage) {
-            leavePage._hide();
-            animator.push(enterPage, leavePage, done);
-          } else {
-            done();
-          }
-        };
-
-        options._linked ? push() : rewritables.link(this, enterPage, options, push);
+        enterPage.style.display = 'block';
+        if (leavePage) {
+          leavePage._hide();
+          animator.push(enterPage, leavePage, done);
+        } else {
+          done();
+        }
       });
     }).catch((error) => {
       this._isRunning = false;
@@ -657,12 +639,10 @@ export default class NavigatorElement extends BaseElement {
         this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
-        rewritables.link(this, pageElement, options, element => {
-          setTimeout(() => {
-            element = null;
-            resolve(this.pages[index]);
-          }, 1000 / 60);
-        });
+        setTimeout(() => {
+          pageElement = null;
+          resolve(this.pages[index]);
+        }, 1000 / 60);
       });
     });
   }
@@ -741,8 +721,7 @@ export default class NavigatorElement extends BaseElement {
     }
 
     util.extend(options, {
-      page: page.name,
-      _linked: true
+      page: page.name
     });
     page.style.display = 'none';
     page.setAttribute('_skipinit', '');

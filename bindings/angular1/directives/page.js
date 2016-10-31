@@ -137,7 +137,6 @@
             element.data('_scope', scope);
 
             $onsen.cleaner.onDestroy(scope, function() {
-              console.log('destroying page')
               page._events = undefined;
               $onsen.removeModifierMethods(page);
               element.data('ons-page', undefined);
