@@ -173,7 +173,12 @@ export default class PullHookElement extends BaseElement {
       this._setState(STATE_INITIAL);
     }
 
-    event.stopPropagation();
+    // By stopping propagation only of `dragup` and `dragdown`,
+    // allowing ancestor elements to detect `dragleft` and `dragright`.
+    // If we comment out the following `if` block, `ons-splitter` with `ons-pull-hook` will be broken.
+    if (event.gesture.direction === 'up' || event.gesture.direction === 'down') {
+        event.stopPropagation();
+    }
     this._translateTo(scroll);
   }
 
@@ -390,7 +395,12 @@ export default class PullHookElement extends BaseElement {
     });
 
     // Bind listeners
-    this._gestureDetector.on('dragup dragdown', this._boundOnDrag);
+    //
+    // Note:
+    // If we swipe up/down a screen too fast,
+    // the gesture detector occasionally dispatches a `dragleft` or `dragright`,
+    // so we need to have the pull hook listen to `dragleft` and `dragright` as well as `dragup` and `dragdown`.
+    this._gestureDetector.on('dragup dragdown dragleft dragright', this._boundOnDrag);
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
@@ -399,7 +409,7 @@ export default class PullHookElement extends BaseElement {
 
   _destroyEventListeners() {
     if (this._gestureDetector) {
-      this._gestureDetector.off('dragup dragdown', this._boundOnDrag);
+      this._gestureDetector.off('dragup dragdown dragleft dragright', this._boundOnDrag);
       this._gestureDetector.off('dragstart', this._boundOnDragStart);
       this._gestureDetector.off('dragend', this._boundOnDragEnd);
 
