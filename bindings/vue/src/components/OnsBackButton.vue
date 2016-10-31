@@ -15,11 +15,13 @@
       }
     },
 
-    ready() {
+    mounted: function () {
       /**
        * Override default click behavior.
        */
-      this.$el.onClick = noop;
+       this.$nextTick(function() {
+           this.$el.onClick = noop;
+       });
     }
   };
 </script>

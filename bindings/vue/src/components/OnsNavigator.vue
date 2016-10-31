@@ -23,10 +23,12 @@
 
     props: ['initialComponent'],
 
-    ready() {
-      if (this.initialComponent) {
-        this.pages = [this.initialComponent];
-      }
+    mounted : function () {
+      this.$nextTick(function() {
+        if (this.initialComponent) {
+          this.pages = [this.initialComponent];
+        }
+      })
     },
 
     methods: {
