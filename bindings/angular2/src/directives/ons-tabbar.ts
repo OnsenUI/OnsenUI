@@ -72,25 +72,27 @@ export class OnsTab implements OnDestroy {
     private _resolver: ComponentFactoryResolver) {
 
     // set up ons-tab's page loader
-    this._elementRef.nativeElement.pageLoader = new ons.PageLoader(({page, parent}, done: Function) => {
-      const factory = this._resolver.resolveComponentFactory(page);
-      const pageComponentRef = this._viewContainer.createComponent(factory, 0);
+    this._elementRef.nativeElement.pageLoader = new ons.PageLoader(
+      ({page, parent}, done: Function) => {
+        const factory = this._resolver.resolveComponentFactory(page);
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0);
 
-      if (this._pageComponent) {
-        this._pageComponent.destroy();
-      }
-      this._pageComponent = pageComponentRef;
-
-      const pageElement = pageComponentRef.location.nativeElement;
-      parent.appendChild(pageElement); // dirty fix to insert in correct position
-
-      done({
-        element: pageElement,
-        unload: () => {
-          pageComponentRef.destroy();
+        if (this._pageComponent) {
+          this._pageComponent.destroy();
         }
-      });
-    });
+        this._pageComponent = pageComponentRef;
+
+        const pageElement = pageComponentRef.location.nativeElement;
+        parent.appendChild(pageElement); // dirty fix to insert in correct position
+
+        done(pageElement);
+      },
+      () => {
+        if (this.hasOwnProperty('_pageComponent')) {
+          this._pageComponent.destroy();
+        }
+      }
+    );
   }
 
   ngOnDestroy() {

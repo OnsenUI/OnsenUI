@@ -89,24 +89,32 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
-    return new ons.PageLoader(({page, parent, params}, done: Function) => {
-      const pageParams = new Params(params || {});
-      const injector = ReflectiveInjector.resolveAndCreate([
-        {provide: Params, useValue: pageParams},
-        {provide: OnsNavigator, useValue: this}
-      ], this._injector);
+    return new ons.PageLoader(
+      ({page, parent, params}, done: Function) => {
+        const pageParams = new Params(params || {});
+        const injector = ReflectiveInjector.resolveAndCreate([
+          {provide: Params, useValue: pageParams},
+          {provide: OnsNavigator, useValue: this}
+        ], this._injector);
 
-      const factory = this._resolver.resolveComponentFactory(page);
-      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-      const pageElement = pageComponentRef.location.nativeElement;
+        const factory = this._resolver.resolveComponentFactory(page);
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+        const pageElement = pageComponentRef.location.nativeElement;
+        console.log(pageElement.data)
+        pageElement.pageComponentRef = pageComponentRef;
 
-      this.element.appendChild(pageElement); // dirty fix to insert in correct position
+        this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-      done({
-        element: pageElement,
-        unload: () => pageComponentRef.destroy()
-      });
-    });
+        done(pageElement);
+      },
+      element => {
+        if (element.hasOwnProperty('pageComponentRef')) {
+          let pageComponentRef = element.pageComponentRef;
+          delete element.pageComponentRef;
+          pageComponentRef.destroy();
+        }
+      }
+    );
   }
 
   ngOnDestroy() {
