@@ -1,4 +1,3 @@
-
 const EC = protractor.ExpectedConditions;
 
 describe('dialog.html', () => {
