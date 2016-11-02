@@ -21,7 +21,6 @@ describe('dialog.html', () => {
   it('should hide the ons-dialog element when button is clicked', () => {
     $('#open').click();
     browser.wait(EC.visibilityOf($('#close')), 5000);
-
     $('#close').click();
     browser.wait(EC.invisibilityOf($('ons-dialog')), 5000);
     expect($('ons-dialog').isDisplayed()).toBeFalsy();

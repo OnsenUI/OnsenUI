@@ -13,7 +13,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   template: `
-    <ons-dialog animation="default" cancelable #dialog>
+    <ons-dialog animation="none" cancelable #dialog>
       <div class="dialog-mask"></div>
       <div class="dialog">
         <div class="dialog-container" style="height: 200px;">
