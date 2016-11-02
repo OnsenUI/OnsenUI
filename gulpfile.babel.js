@@ -66,22 +66,6 @@ gulp.task('core', function() {
     .pipe($.rollup({
       sourceMap: 'inline',
       plugins: [
-        {
-          resolveId: (code, id) => {
-            if (id && code.charAt(0) !== '.') {
-              let p = path.join(__dirname, 'core', 'src', code);
-
-              if (fs.existsSync(p)) {
-                p = path.join(p, 'index.js');
-              }
-              else {
-                p = p + '.js';
-              }
-
-              return p;
-            }
-          }
-        },
         nodeResolve(),
         babel({
           presets: ['es2015-rollup', 'stage-2'],

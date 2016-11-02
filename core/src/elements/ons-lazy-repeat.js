@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import BaseElement from 'ons/base-element';
-import util from 'ons/util';
-import {LazyRepeatDelegate, LazyRepeatProvider} from 'ons/internal/lazy-repeat';
+import BaseElement from '../ons/base-element';
+import util from '../ons/util';
+import {LazyRepeatDelegate, LazyRepeatProvider} from '../ons/internal/lazy-repeat';
 
 /**
  * @element ons-lazy-repeat

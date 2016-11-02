@@ -15,12 +15,12 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import {PageLoader, defaultPageLoader} from 'ons/page-loader';
-import contentReady from 'ons/content-ready';
+import util from '../ons/util';
+import internal from '../ons/internal';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import {PageLoader, defaultPageLoader} from '../ons/page-loader';
+import contentReady from '../ons/content-ready';
 
 const rewritables = {
   /**

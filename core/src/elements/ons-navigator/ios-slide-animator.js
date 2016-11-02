@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 import NavigatorTransitionAnimator from './animator';
-import util from 'ons/util';
-import contentReady from 'ons/content-ready';
+import util from '../../ons/util';
+import contentReady from '../../ons/content-ready';
 
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
