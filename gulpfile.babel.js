@@ -477,7 +477,11 @@ gulp.task('test', function(done) {
 ////////////////////////////////////////
 // e2e-test
 ////////////////////////////////////////
-gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
+gulp.task('e2e-test', ['e2e-test-protractor', 'e2e-test-webdriverio'], function(done) {
+  done();
+});
+
+gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
   const port = 8081;
 
   $.connect.server({
@@ -505,4 +509,8 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     .on('end', function() {
       $.connect.serverClose();
     });
+});
+
+gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
+  done();
 });
