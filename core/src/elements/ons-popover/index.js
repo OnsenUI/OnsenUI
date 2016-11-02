@@ -445,6 +445,11 @@ export default class PopoverElement extends BaseElement {
     } else if (target instanceof Event) {
       target = target.target;
     }
+
+    if (typeof target === 'undefined') {
+      throw new Error('A target argument must be defined for the popover.');
+    }
+
     if (!(target instanceof HTMLElement)) {
      throw new Error('Invalid target');
     }

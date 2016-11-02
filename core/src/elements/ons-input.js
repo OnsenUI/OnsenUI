@@ -307,14 +307,10 @@ export default class InputElement extends BaseElement {
   }
 
   set value(val) {
-    this.setAttribute('value', val);
-
     contentReady(this, () => {
       this._input.value = val;
       this._onInput();
     });
-
-    return val;
   }
 
   /**
