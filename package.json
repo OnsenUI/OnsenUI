@@ -103,6 +103,7 @@
     "karma-safari-launcher": "^1.0.0",
     "mkpath": "^1.0.0",
     "mocha": "^2.5.3",
+    "protractor": "^4.0.10",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
