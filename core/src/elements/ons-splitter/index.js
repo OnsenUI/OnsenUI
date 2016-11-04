@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
+import util from '../../ons/util';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
 import SplitterAnimator from './animator';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import contentReady from 'ons/content-ready';
+import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import contentReady from '../../ons/content-ready';
 
 const _animatorDict = {
   default: SplitterAnimator,

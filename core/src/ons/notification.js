@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
-import contentReady from 'ons/content-ready';
+import contentReady from './content-ready';
 
 /**
  * @object ons.notification

@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import internal from 'ons/internal';
+import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
-import contentReady from 'ons/content-ready';
-import {PageLoader, defaultPageLoader} from 'ons/page-loader';
+import contentReady from '../ons/content-ready';
+import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 
 const scheme = {
   '': 'tab-bar--*__item',
@@ -350,9 +350,19 @@ export default class TabElement extends BaseElement {
       const pages = this._findTabbarElement().pages;
       const index = this._findTabIndex();
       callback(pages[index]);
+    } else if (this._loadingPage) {
+      this._loadingPage.then((page) => {
+        callback(page.element);
+      });
     } else if (!this._loadedPage) {
+      const deferred = util.defer();
+      this._loadingPage = deferred.promise;
+
       this._pageLoader.load({page: this._getPageTarget(), parent}, page => {
         this._loadedPage = page;
+        deferred.resolve(page);
+        delete this._loadingPage;
+
         link(page.element, element => {
           page.element = element;
           callback(page.element);

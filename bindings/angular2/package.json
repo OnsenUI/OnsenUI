@@ -19,7 +19,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "repository": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
   "keywords": [
     "phonegap",
     "cordova",
@@ -32,7 +32,7 @@
     "onsen",
     "onsenui"
   ],
-  "homepage": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
     "@angular/common": "^2.0.0",
     "@angular/compiler": "^2.0.0",

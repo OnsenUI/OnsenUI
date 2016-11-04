@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import contentReady from 'ons/content-ready';
+import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import contentReady from '../ons/content-ready';
 
 const scheme = {
   '.text-input': 'text-input--*',
@@ -307,14 +307,10 @@ export default class InputElement extends BaseElement {
   }
 
   set value(val) {
-    this.setAttribute('value', val);
-
     contentReady(this, () => {
       this._input.value = val;
       this._onInput();
     });
-
-    return val;
   }
 
   /**
