@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.0.5
+----
+ * ons-switch: Fix `disbled` to `disabled`.
+
 v2.0.4
 ----
  * angular1: Fix issue in event removal.
