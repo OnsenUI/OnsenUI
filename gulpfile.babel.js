@@ -477,8 +477,10 @@ gulp.task('test', function(done) {
 ////////////////////////////////////////
 // e2e-test
 ////////////////////////////////////////
-gulp.task('e2e-test', ['e2e-test-protractor', 'e2e-test-webdriverio'], function(done) {
-  done();
+gulp.task('e2e-test', function(done) {
+  // `runSequence` causes dependency tasks to be run many times.
+  // To prevent this issue, we have to use gulp 4.x and an appropriate gulpfile which follows 4.x format.
+  runSequence('e2e-test-protractor', 'e2e-test-webdriverio', done);
 });
 
 gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
