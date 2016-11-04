@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import platform from 'ons/platform';
-import BaseElement from 'ons/base-element';
-import GestureDetector from 'ons/gesture-detector';
+import util from '../ons/util';
+import platform from '../ons/platform';
+import BaseElement from '../ons/base-element';
+import GestureDetector from '../ons/gesture-detector';
 
 const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';

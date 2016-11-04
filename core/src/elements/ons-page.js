@@ -15,15 +15,15 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import contentReady from 'ons/content-ready';
+import util from '../ons/util';
+import internal from '../ons/internal';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import deviceBackButtonDispatcher from '../ons/device-back-button-dispatcher';
+import contentReady from '../ons/content-ready';
 
-import 'elements/ons-toolbar'; // ensures that 'ons-toolbar' element is registered
+import './ons-toolbar'; // ensures that 'ons-toolbar' element is registered
 
 const scheme = {
   '': 'page--*',

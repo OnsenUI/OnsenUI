@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import internal from 'ons/internal';
+import internal from '../../ons/internal';
 
 /**
  * @class AnimatorCSS - implementation of Animator class using css transitions

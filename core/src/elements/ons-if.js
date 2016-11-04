@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import orientation from 'ons/orientation';
-import platform from 'ons/platform';
-import BaseElement from 'ons/base-element';
-import contentReady from 'ons/content-ready';
+import orientation from '../ons/orientation';
+import platform from '../ons/platform';
+import BaseElement from '../ons/base-element';
+import contentReady from '../ons/content-ready';
 
 /**
  * @element ons-if

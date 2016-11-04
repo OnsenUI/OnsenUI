@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import platform from 'ons/platform';
-import internal from 'ons/internal';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
-import BaseElement from 'ons/base-element';
+import util from '../../ons/util';
+import platform from '../../ons/platform';
+import internal from '../../ons/internal';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
+import BaseElement from '../../ons/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
 import TabElement from '../ons-tab';
-import contentReady from 'ons/content-ready';
+import contentReady from '../../ons/content-ready';
 
 const scheme = {
   '.tab-bar__content': 'tab-bar--*__content',

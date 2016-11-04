@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import AnimatorFactory from 'ons/internal/animator-factory';
+import util from '../../ons/util';
+import internal from '../../ons/internal';
+import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
 import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
@@ -26,11 +26,11 @@ import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
 import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
 import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
-import platform from 'ons/platform';
-import contentReady from 'ons/content-ready';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import {PageLoader, defaultPageLoader, instantPageLoader} from 'ons/page-loader';
+import platform from '../../ons/platform';
+import contentReady from '../../ons/content-ready';
+import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
