@@ -194,7 +194,7 @@ export default class SwitchElement extends BaseElement {
     this._handle = this.querySelector('.switch__handle');
 
     this._checkbox.checked = this._checked;
-    this._checkbox.disbled = this._disabled;
+    this._checkbox.disabled = this._disabled;
   }
 
   disconnectedCallback() {
