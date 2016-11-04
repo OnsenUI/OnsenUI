@@ -4,6 +4,7 @@ import {
   ReflectiveInjector,
   Directive,
   ElementRef,
+  ComponentRef,
   Type,
   ComponentFactoryResolver,
   Renderer,
@@ -89,7 +90,7 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
-    const componentRefMap = new WeakMap();
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {

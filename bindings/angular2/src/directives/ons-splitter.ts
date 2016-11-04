@@ -80,7 +80,7 @@ export class OnsSplitterSide {
   }
 
   _createPageLoader() {
-    const componentRefMap = new WeakMap();
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
@@ -144,7 +144,7 @@ export class OnsSplitterContent {
   }
 
   _createPageLoader() {
-    const componentRefMap = new WeakMap();
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
