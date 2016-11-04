@@ -7,6 +7,7 @@ v2.0.4
  * angular1: Fix issue in event removal.
  * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
  * ons-tab: Fixed [#1593](https://github.com/OnsenUI/OnsenUI/issues/1593).
+ * core: Use [yarn](https://yarnpkg.com/) for dependency management.
 
 v2.0.3
 ----
