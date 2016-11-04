@@ -272,7 +272,11 @@ export default class TabElement extends BaseElement {
     const badge = this.getAttribute('badge');
 
     if (typeof icon === 'string') {
-      getIconElement().setAttribute('icon', icon);
+      const iconElement = getIconElement();
+      const last = iconElement.getAttribute('icon');
+      iconElement.setAttribute('icon', icon);
+      // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
+      getIconElement().attributeChangedCallback('icon', last, icon);
     } else {
       const wrapper = button.querySelector('.tab-bar__icon');
       if (wrapper) {
