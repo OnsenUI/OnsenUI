@@ -489,12 +489,14 @@ export default class AlertDialogElement extends BaseElement {
   _cancel() {
     if (this.cancelable && !this._running) {
       this._running = true;
-      this.hide({
-        callback: () => {
-          this._running = false;
-          util.triggerElementEvent(this, 'dialog-cancel');
-        }
-      });
+      this.hide()
+        .then(
+          () => {
+            this._running = false;
+            util.triggerElementEvent(this, 'dialog-cancel');
+          },
+          () => this._running = false
+        );
     }
   }
 

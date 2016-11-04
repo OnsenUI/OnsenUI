@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.4
 ----
  * angular1: Fix issue in event removal.
+ * ons-pull-hook: Fixed bug where ons-pull-hook does not work when we swipe up/down a screen too fast.
 
 v2.0.3
 ----
