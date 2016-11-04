@@ -89,6 +89,8 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
+    const componentRefMap = new WeakMap();
+
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
         const pageParams = new Params(params || {});
@@ -100,18 +102,16 @@ export class OnsNavigator implements OnDestroy {
         const factory = this._resolver.resolveComponentFactory(page);
         const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
         const pageElement = pageComponentRef.location.nativeElement;
-        console.log(pageElement.data)
-        pageElement.pageComponentRef = pageComponentRef;
+        componentRefMap.set(pageElement, pageComponentRef);
 
         this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
         done(pageElement);
       },
       element => {
-        if (element.hasOwnProperty('pageComponentRef')) {
-          let pageComponentRef = element.pageComponentRef;
-          delete element.pageComponentRef;
-          pageComponentRef.destroy();
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
         }
       }
     );

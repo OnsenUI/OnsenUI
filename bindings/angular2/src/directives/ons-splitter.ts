@@ -80,7 +80,7 @@ export class OnsSplitterSide {
   }
 
   _createPageLoader() {
-    let pageComponentRef;
+    const componentRefMap = new WeakMap();
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
@@ -90,19 +90,18 @@ export class OnsSplitterSide {
         ], this._injector);
 
           const factory = this._resolver.resolveComponentFactory(page);
-          pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+          const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
           const pageElement = pageComponentRef.location.nativeElement;
-          pageElement.pageComponentRef = pageComponentRef;
+          componentRefMap.set(pageElement, pageComponentRef);
 
           this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
           done(pageElement);
       },
       element => {
-        if (element.hasOwnProperty('pageComponentRef')) {
-          let pageComponentRef = element.pageComponentRef;
-          delete element.pageComponentRef;
-          pageComponentRef.destroy();
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
         }
       }
     );
@@ -145,7 +144,7 @@ export class OnsSplitterContent {
   }
 
   _createPageLoader() {
-    let pageComponentRef;
+    const componentRefMap = new WeakMap();
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
@@ -155,19 +154,18 @@ export class OnsSplitterContent {
         ], this._injector);
 
         const factory = this._resolver.resolveComponentFactory(page);
-        pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
         const pageElement = pageComponentRef.location.nativeElement;
-        pageElement.pageComponentRef = pageComponentRef;
+        componentRefMap.set(pageElement, pageComponentRef);
 
         this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
         done(pageElement);
       },
       element => {
-        if (element.hasOwnProperty('pageComponentRef')) {
-          let pageComponentRef = element.pageComponentRef;
-          delete element.pageComponentRef;
-          pageComponentRef.destroy();
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
         }
       }
     );
