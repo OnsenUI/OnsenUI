@@ -141,10 +141,10 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
 gulp.task('core-test-separately', ['prepare', 'core', 'core-dts-test'], (done) => {
   // Usage:
   //    # run all unit tests
-  //    gulp core core-test-separately
+  //    gulp core-test-separately
   //
   //    # run only specified unit tests
-  //    gulp core core-test-separately --target core/src/elements/ons-navigator/index.spec.js
+  //    gulp core-test-separately --target core/src/elements/ons-navigator/index.spec.js
 
   (async () => {
     let listOfSpecFiles;
