@@ -343,45 +343,41 @@ export default class TabElement extends BaseElement {
   /**
    * @param {Element} parent
    * @param {Function} callback
-   * @param {Function} link
    */
-  _loadPageElement(parent, callback, link) {
+  _loadPageElement(parent, callback) {
     if (!this._loadedPage && !this._getPageTarget()) {
       const pages = this._findTabbarElement().pages;
       const index = this._findTabIndex();
       callback(pages[index]);
     } else if (this._loadingPage) {
-      this._loadingPage.then((page) => {
-        callback(page.element);
+      this._loadingPage.then(pageElement => {
+        callback(pageElement);
       });
     } else if (!this._loadedPage) {
       const deferred = util.defer();
       this._loadingPage = deferred.promise;
 
-      this._pageLoader.load({page: this._getPageTarget(), parent}, page => {
-        this._loadedPage = page;
-        deferred.resolve(page);
+      this._pageLoader.load({page: this._getPageTarget(), parent}, pageElement => {
+        this._loadedPage = pageElement;
+        deferred.resolve(pageElement);
         delete this._loadingPage;
 
-        link(page.element, element => {
-          page.element = element;
-          callback(page.element);
-        });
+        callback(pageElement);
       });
     } else {
-      callback(this._loadedPage.element);
+      callback(this._loadedPage);
     }
   }
 
   _loadPage(page, parent, callback) {
-    this._pageLoader.load({page, parent}, page => {
-      callback(page.element);
+    this._pageLoader.load({page, parent}, pageElement => {
+      callback(pageElement);
     });
   }
 
   get pageElement() {
     if (this._loadedPage) {
-      return this._loadedPage.element;
+      return this._loadedPage;
     }
 
     const tabbar = this._findTabbarElement();
@@ -400,7 +396,7 @@ export default class TabElement extends BaseElement {
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
-      this._loadedPage.unload();
+      this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
     }
   }
@@ -426,8 +422,6 @@ export default class TabElement extends BaseElement {
             if (this.hasAttribute('active')) {
               tabbar.setActiveTab(this._findTabIndex());
             }
-          }, (pageElement, done) => {
-            TabbarElement.rewritables.link(tabbar, pageElement, {}, element => done(element));
           });
         }
       };

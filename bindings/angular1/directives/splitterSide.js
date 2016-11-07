@@ -52,14 +52,6 @@
   var lastReady = window.ons.SplitterSideElement.rewritables.ready;
   window.ons.SplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
 
-  var lastLink = window.ons.SplitterSideElement.rewritables.link;
-  window.ons.SplitterSideElement.rewritables.link = function(element, target, options, callback) {
-    var view = angular.element(element).data('ons-splitter-side');
-    lastLink(element, target, options, function(target) {
-      view._link(target, callback);
-    });
-  };
-
   angular.module('onsen').directive('onsSplitterSide', function($compile, SplitterSide, $onsen) {
     return {
       restrict: 'E',
@@ -74,6 +66,8 @@
           $onsen.registerEventHandlers(view, 'destroy');
 
           element.data('ons-splitter-side', view);
+
+          element[0].pageLoader = $onsen.createPageLoader(view);
 
           scope.$on('$destroy', function() {
             view._events = undefined;

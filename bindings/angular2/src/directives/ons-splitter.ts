@@ -80,23 +80,31 @@ export class OnsSplitterSide {
   }
 
   _createPageLoader() {
-    return new ons.PageLoader(({page, parent, params}, done: Function) => {
-      const injector = ReflectiveInjector.resolveAndCreate([
-        {provide: Params, useValue: new Params(params || {})},
-        {provide: OnsSplitterSide, useValue: this}
-      ], this._injector);
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
-        const factory = this._resolver.resolveComponentFactory(page);
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-        const pageElement = pageComponentRef.location.nativeElement;
+    return new ons.PageLoader(
+      ({page, parent, params}, done: Function) => {
+        const injector = ReflectiveInjector.resolveAndCreate([
+          {provide: Params, useValue: new Params(params || {})},
+          {provide: OnsSplitterSide, useValue: this}
+        ], this._injector);
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+          const factory = this._resolver.resolveComponentFactory(page);
+          const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+          const pageElement = pageComponentRef.location.nativeElement;
+          componentRefMap.set(pageElement, pageComponentRef);
 
-        done({
-          element: pageElement,
-          unload: () => pageComponentRef.destroy()
-        });
-    });
+          this.element.appendChild(pageElement); // dirty fix to insert in correct position
+
+          done(pageElement);
+      },
+      element => {
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
+        }
+      }
+    );
   }
 }
 
@@ -136,22 +144,30 @@ export class OnsSplitterContent {
   }
 
   _createPageLoader() {
-    return new ons.PageLoader(({page, parent, params}, done: Function) => {
-      const injector = ReflectiveInjector.resolveAndCreate([
-        {provide: Params, useValue: new Params(params || {})},
-        {provide: OnsSplitterContent, useValue: this}
-      ], this._injector);
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
-      const factory = this._resolver.resolveComponentFactory(page);
-      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-      const pageElement = pageComponentRef.location.nativeElement;
+    return new ons.PageLoader(
+      ({page, parent, params}, done: Function) => {
+        const injector = ReflectiveInjector.resolveAndCreate([
+          {provide: Params, useValue: new Params(params || {})},
+          {provide: OnsSplitterContent, useValue: this}
+        ], this._injector);
 
-      this.element.appendChild(pageElement); // dirty fix to insert in correct position
+        const factory = this._resolver.resolveComponentFactory(page);
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+        const pageElement = pageComponentRef.location.nativeElement;
+        componentRefMap.set(pageElement, pageComponentRef);
 
-      done({
-        element: pageElement,
-        unload: () => pageComponentRef.destroy()
-      });
-    });
+        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+
+        done(pageElement);
+      },
+      element => {
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
+        }
+      }
+    );
   }
 }
