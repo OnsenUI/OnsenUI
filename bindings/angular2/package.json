@@ -41,7 +41,7 @@
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
     "core-js": "^2.4.0",
-    "rxjs": "^5.0.0-rc.1",
+    "rxjs": ">5.0.0-beta",
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "gulp-shell": "^0.5.2",
     "open": "0.0.5",
     "protractor": "^3.3.0",
-    "rxjs": "^5.0.0-rc.1",
+    "rxjs": ">5.0.0-beta",
     "selenium-server-standalone-jar": "^2.53.0",
     "source-map-loader": "^0.1.5",
     "static-server": "^2.0.3",
