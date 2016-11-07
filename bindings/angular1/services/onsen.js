@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $compile, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
     var ModifierUtil = $onsGlobal._internal.ModifierUtil;
@@ -130,6 +130,52 @@ limitations under the License.
          * @param {Function} action
          */
         autoStatusBarFill: $onsGlobal.autoStatusBarFill,
+
+        /**
+         * @param {Object} directive
+         * @param {HTMLElement} pageElement
+         * @param {Function} callback
+         */
+        compileAndLink: function(view, pageElement, callback) {
+          var link = $compile(pageElement);
+          var pageScope = view._scope.$new();
+
+          link(pageScope);
+
+          /**
+           * Overwrite page scope.
+           */
+          angular.element(pageElement).data('_scope', pageScope);
+
+          pageScope.$evalAsync(function() {
+            callback(pageElement);
+          });
+        },
+
+        /**
+         * @param {Object} view
+         * @return {Object} pageLoader
+         */
+        createPageLoader: function(view) {
+          return new window.ons.PageLoader(
+            ({page, parent}, done) => {
+              window.ons._internal.getPageHTMLAsync(page).then(html => {
+                this.compileAndLink(
+                  view,
+                  window.ons._util.createElement(html.trim()),
+                  element => {
+                    parent.appendChild(element);
+                    done(element);
+                  }
+                );
+              });
+            },
+            element => {
+              angular.element(element).data('_scope').$destroy();
+              element.remove();
+            }
+          );
+        },
 
         /**
          * @param {Object} params

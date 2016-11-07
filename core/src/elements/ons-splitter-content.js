@@ -29,16 +29,6 @@ const rewritables = {
    */
   ready(element, callback) {
     setImmediate(callback);
-  },
-
-  /**
-   * @param {Element} element
-   * @param {HTMLFragment} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(element, target, options, callback) {
-    callback(target);
   }
 };
 
@@ -138,6 +128,10 @@ export default class SplitterContentElement extends BaseElement {
     this._page = page;
   }
 
+  get _content() {
+    return this.children[0];
+  }
+
   /**
    * @property pageLoader
    * @type {Function}
@@ -176,27 +170,32 @@ export default class SplitterContentElement extends BaseElement {
     const callback = options.callback || function() {};
 
     return new Promise(resolve => {
-      this._pageLoader.load({page, parent: this, replace: true}, ({element, unload}) => {
-        rewritables.link(this, element, options, fragment => {
-          setImmediate(() => this._show());
-          callback();
+      let oldContent = this._content || null;
 
-          resolve(this.firstChild);
-        });
+      this._pageLoader.load({page, parent: this}, pageElement => {
+        if (oldContent) {
+          this._pageLoader.unload(oldContent);
+          oldContent = null;
+        }
+
+        setImmediate(() => this._show());
+
+        callback(pageElement);
+        resolve(pageElement);
       });
     });
   }
 
   _show() {
-    util.propagateAction(this, '_show');
+    this._content._show();
   }
 
   _hide() {
-    util.propagateAction(this, '_hide');
+    this._content._hide();
   }
 
   _destroy() {
-    util.propagateAction(this, '_destroy');
+    this._pageLoader.unload(this._content);
     this.remove();
   }
 
