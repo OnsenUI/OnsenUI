@@ -46,6 +46,15 @@
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
  *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
+
+/**
+ * @attribute ons-modechange
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "modechange" event is fired.[/en]
+ *  [ja]"modechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
 (function() {
   'use strict';
 
@@ -63,7 +72,7 @@
           var view = new SplitterSide(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, view);
-          $onsen.registerEventHandlers(view, 'destroy');
+          $onsen.registerEventHandlers(view, 'destroy preopen preclose postopen postclose modechange');
 
           element.data('ons-splitter-side', view);
 

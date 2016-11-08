@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.5
 ----
  * ons-switch: Fix `disbled` to `disabled`.
+ * angular1: Fix [#1677](https://github.com/OnsenUI/OnsenUI/issues/1677).
 
 v2.0.4
 ----
