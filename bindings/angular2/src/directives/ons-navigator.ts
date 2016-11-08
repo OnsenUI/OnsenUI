@@ -4,6 +4,7 @@ import {
   ReflectiveInjector,
   Directive,
   ElementRef,
+  ComponentRef,
   Type,
   ComponentFactoryResolver,
   Renderer,
@@ -89,24 +90,32 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
-    return new ons.PageLoader(({page, parent, params}, done: Function) => {
-      const pageParams = new Params(params || {});
-      const injector = ReflectiveInjector.resolveAndCreate([
-        {provide: Params, useValue: pageParams},
-        {provide: OnsNavigator, useValue: this}
-      ], this._injector);
+    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
-      const factory = this._resolver.resolveComponentFactory(page);
-      const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
-      const pageElement = pageComponentRef.location.nativeElement;
+    return new ons.PageLoader(
+      ({page, parent, params}, done: Function) => {
+        const pageParams = new Params(params || {});
+        const injector = ReflectiveInjector.resolveAndCreate([
+          {provide: Params, useValue: pageParams},
+          {provide: OnsNavigator, useValue: this}
+        ], this._injector);
 
-      this.element.appendChild(pageElement); // dirty fix to insert in correct position
+        const factory = this._resolver.resolveComponentFactory(page);
+        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+        const pageElement = pageComponentRef.location.nativeElement;
+        componentRefMap.set(pageElement, pageComponentRef);
 
-      done({
-        element: pageElement,
-        unload: () => pageComponentRef.destroy()
-      });
-    });
+        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+
+        done(pageElement);
+      },
+      element => {
+        if (componentRefMap.has(element)) {
+          componentRefMap.get(element).destroy();
+          componentRefMap.delete(element);
+        }
+      }
+    );
   }
 
   ngOnDestroy() {

@@ -16,14 +16,6 @@
   var lastReady = window.ons.SplitterContentElement.rewritables.ready;
   window.ons.SplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
-  var lastLink = window.ons.SplitterContentElement.rewritables.link;
-  window.ons.SplitterContentElement.rewritables.link = function(element, target, options, callback) {
-    var view = angular.element(element).data('ons-splitter-content');
-    lastLink(element, target, options, function(target) {
-      view._link(target, callback);
-    });
-  };
-
   angular.module('onsen').directive('onsSplitterContent', function($compile, SplitterContent, $onsen) {
     return {
       restrict: 'E',
@@ -38,6 +30,8 @@
           $onsen.registerEventHandlers(view, 'destroy');
 
           element.data('ons-splitter-content', view);
+
+          element[0].pageLoader = $onsen.createPageLoader(view);
 
           scope.$on('$destroy', function() {
             view._events = undefined;

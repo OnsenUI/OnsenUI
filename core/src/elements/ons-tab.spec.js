@@ -249,10 +249,10 @@ describe('OnsTabElement', () => {
       `);
 
       const myFunction = (value) => {
-        expect(value).to.equal(element._loadedPage.element);
+        expect(value).to.equal(element._loadedPage);
         done();
       };
-      element._loadedPage = {element: true};
+      element._loadedPage = true;
       element._loadPageElement(document.createElement('div'), myFunction);
     });
   });

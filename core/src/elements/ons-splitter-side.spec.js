@@ -57,7 +57,7 @@ describe('OnsSplitterSideElement', () => {
 
     it('returns a promise that resolves to the new page element', () => {
       return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(page => {
-        expect(page).to.equal(left.firstChild);
+        expect(page).to.equal(left.children[0]);
         expect(left.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge');
       });
     });
