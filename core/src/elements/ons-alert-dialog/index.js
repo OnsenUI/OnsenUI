@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
+import util from '../../ons/util';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
 import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
-import platform from 'ons/platform';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import DoorLock from 'ons/doorlock';
-import contentReady from 'ons/content-ready';
+import platform from '../../ons/platform';
+import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import DoorLock from '../../ons/doorlock';
+import contentReady from '../../ons/content-ready';
 
 const scheme = {
   '.alert-dialog': 'alert-dialog--*',
@@ -489,12 +489,14 @@ export default class AlertDialogElement extends BaseElement {
   _cancel() {
     if (this.cancelable && !this._running) {
       this._running = true;
-      this.hide({
-        callback: () => {
-          this._running = false;
-          util.triggerElementEvent(this, 'dialog-cancel');
-        }
-      });
+      this.hide()
+        .then(
+          () => {
+            this._running = false;
+            util.triggerElementEvent(this, 'dialog-cancel');
+          },
+          () => this._running = false
+        );
     }
   }
 

@@ -19,7 +19,7 @@ import {FormsModule} from '@angular/forms';
     <div class="background"></div>
     <div class="content">
       <div style="text-align: center; margin: 10px;">
-        <label><input type="checkbox" [(ngModel)]="target"> {{target ? 'On' : 'Off'}}</label>
+        <label><input id="checkbox" type="checkbox" [(ngModel)]="target"> {{target ? 'On' : 'Off'}}</label>
         <br>
         <br>
         <ons-switch [(value)]="target"></ons-switch>

@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import AnimatorFactory from 'ons/internal/animator-factory';
+import util from '../../ons/util';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
 import {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator} from './animator';
-import platform from 'ons/platform';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import DoorLock from 'ons/doorlock';
-import contentReady from 'ons/content-ready';
+import platform from '../../ons/platform';
+import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import DoorLock from '../../ons/doorlock';
+import contentReady from '../../ons/content-ready';
 
 const scheme = {
   '.popover': 'popover--*',

@@ -32,6 +32,9 @@ import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import karma from 'karma';
+import rollup from 'rollup-stream';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 
 ////////////////////////////////////////
 
@@ -61,30 +64,10 @@ gulp.task('browser-sync', () => {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  return gulp.src(['core/src/setup.js'], {read: false})
-    .pipe($.plumber(function(error) {
-      $.util.log(error.message);
-      this.emit('end');
-    }))
-    .pipe($.rollup({
+  return rollup({
       sourceMap: 'inline',
+      entry: './core/src/setup.js',
       plugins: [
-        {
-          resolveId: (code, id) => {
-            if (id && code.charAt(0) !== '.') {
-              let p = path.join(__dirname, 'core', 'src', code);
-
-              if (fs.existsSync(p)) {
-                p = path.join(p, 'index.js');
-              }
-              else {
-                p = p + '.js';
-              }
-
-              return p;
-            }
-          }
-        },
         nodeResolve(),
         babel({
           presets: ['es2015-rollup', 'stage-2'],
@@ -93,9 +76,11 @@ gulp.task('core', function() {
       ],
       format: 'umd',
       moduleName: 'ons'
-    }))
+    })
+    .pipe(source('setup.js', './core/src'))
+    .pipe(buffer())
     .pipe($.addSrc.prepend('core/vendor/*.js'))
-    .pipe($.sourcemaps.init())
+    .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
@@ -344,21 +329,12 @@ gulp.task('prepare', ['html2js'], () =>  {
       'bindings/angular1/js/*.js'
     ])
       .pipe($.plumber())
-      .pipe($.rollup({
-        sourceMap: 'inline',
-        plugins: [
-          nodeResolve(),
-          babel({
-            presets: ['es2015-rollup'],
-            babelrc: false
-          })
-        ]
-      }))
       .pipe($.ngAnnotate({
         add: true,
         single_quotes: true // eslint-disable-line camelcase
       }))
       .pipe($.sourcemaps.init())
+      .pipe($.babel())
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe($.sourcemaps.write())
@@ -540,9 +516,9 @@ gulp.task('webdriver-download', () => {
   const platform = os.platform();
   const destDir = path.join(__dirname, '.selenium');
   const chromeDriverUrl = (() => {
-    const filePath = platform === 'linux' ?
-      '/2.24/chromedriver_linux64.zip' :
-      `/2.24/chromedriver_${platform === 'darwin' ? 'mac' : 'win'}32.zip`;
+    const filePath = platform === 'win32' ?
+      '/2.25/chromedriver_win32.zip' :
+      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
     return `http://chromedriver.storage.googleapis.com${filePath}`;
   })();
 
@@ -551,7 +527,7 @@ gulp.task('webdriver-download', () => {
     return gulp.src('');
   }
 
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/2.51/selenium-server-standalone-2.51.0.jar')
+  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
     .pipe(gulp.dest(destDir));
 
   const chromedriver = $.download(chromeDriverUrl)
@@ -585,7 +561,7 @@ gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
     configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-2.51.0.jar'),
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
       '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
     ]
   };

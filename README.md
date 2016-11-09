@@ -128,11 +128,11 @@ $ npm install angular2-onsenui
 Clone this repository and run the following commands to build the project:
 
 ```bash
-$ npm install
+$ yarn
 $ gulp build
 ```
 
-The files will be built and copied into **build** folder.
+This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already. The files will be built and copied into **build** folder.
 
 ## Running Examples
 
@@ -149,14 +149,12 @@ Onsen UI has unit tests for the Web Components as well as end-to-end testing of 
 Use the following commands to run the unit tests:
 
 ```bash
-$ npm install
 $ gulp core-test
 ```
 
 or these commands for the protractor tests:
 
 ```bash
-$ npm install
 $ gulp e2e-test
 ```
 

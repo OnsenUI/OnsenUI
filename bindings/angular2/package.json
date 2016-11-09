@@ -1,6 +1,6 @@
 {
   "name": "angular2-onsenui",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
@@ -19,7 +19,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "repository": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
   "keywords": [
     "phonegap",
     "cordova",
@@ -32,26 +32,26 @@
     "onsen",
     "onsenui"
   ],
-  "homepage": "https://github.com/OnsenUI/OnsenUI/tree/angular2-binding/bindings/angular2",
+  "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/compiler-cli": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/common": "^2.1.2",
+    "@angular/compiler": "^2.1.2",
+    "@angular/compiler-cli": "^2.1.2",
+    "@angular/core": "^2.1.2",
+    "@angular/platform-browser": "^2.1.2",
+    "@angular/platform-browser-dynamic": "^2.1.2",
     "core-js": "^2.4.0",
-    "rxjs": "^5.0.0-rc.1",
+    "rxjs": ">=5.0.0-beta",
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/compiler-cli": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/forms": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/common": "^2.1.2",
+    "@angular/compiler": "^2.1.2",
+    "@angular/compiler-cli": "^2.1.2",
+    "@angular/core": "^2.1.2",
+    "@angular/forms": "^2.1.2",
+    "@angular/platform-browser": "^2.1.2",
+    "@angular/platform-browser-dynamic": "^2.1.2",
     "awesome-typescript-loader": "^2.2.4",
     "chromedriver": "^2.21.2",
     "core-js": "^2.4.0",
@@ -60,7 +60,7 @@
     "gulp-shell": "^0.5.2",
     "open": "0.0.5",
     "protractor": "^3.3.0",
-    "rxjs": "^5.0.0-rc.1",
+    "rxjs": ">=5.0.0-beta",
     "selenium-server-standalone-jar": "^2.53.0",
     "source-map-loader": "^0.1.5",
     "static-server": "^2.0.3",

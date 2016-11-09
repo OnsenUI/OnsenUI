@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import internal from 'ons/internal';
+import internal from '../../ons/internal';
 
 
 var raf = (window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame)

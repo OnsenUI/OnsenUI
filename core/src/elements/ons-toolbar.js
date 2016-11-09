@@ -15,12 +15,12 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import autoStyle from 'ons/autostyle';
-import ModifierUtil from 'ons/internal/modifier-util';
-import BaseElement from 'ons/base-element';
-import contentReady from 'ons/content-ready';
+import util from '../ons/util';
+import internal from '../ons/internal';
+import autoStyle from '../ons/autostyle';
+import ModifierUtil from '../ons/internal/modifier-util';
+import BaseElement from '../ons/base-element';
+import contentReady from '../ons/content-ready';
 
 const scheme = {
   '': 'navigation-bar--*',

@@ -15,11 +15,11 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import BaseElement from 'ons/base-element';
+import util from '../../ons/util';
+import internal from '../../ons/internal';
+import BaseElement from '../../ons/base-element';
 import Animator from './animator-css';
-import contentReady from 'ons/content-ready';
+import contentReady from '../../ons/content-ready';
 
 /**
  * @element ons-ripple

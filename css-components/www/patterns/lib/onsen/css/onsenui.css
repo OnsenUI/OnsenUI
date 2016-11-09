@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.3 - 2016-10-26 */
+/*! onsenui - v2.0.4 - 2016-11-04 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -284,24 +284,21 @@ ons-row[vertical-align="top"], ons-row[align="top"] {
   -webkit-box-align: start;
   box-align: start;
   -moz-align-items: flex-start;
-  -ms-grid-row-align: flex-start;
-      align-items: flex-start;
+  align-items: flex-start;
 }
 
 ons-row[vertical-align="bottom"], ons-row[align="bottom"] {
   -webkit-box-align: end;
   box-align: end;
   -moz-align-items: flex-end;
-  -ms-grid-row-align: flex-end;
-      align-items: flex-end;
+  align-items: flex-end;
 }
 
 ons-row[vertical-align="center"], ons-row[align="center"] {
   -webkit-box-align: center;
   box-align: center;
   -moz-align-items: center;
-  -ms-grid-row-align: center;
-      align-items: center;
+  align-items: center;
   text-align: inherit;
 }
 
@@ -319,10 +316,12 @@ ons-col {
 }
 
 ons-col[vertical-align="top"], ons-col[align="top"] {
+  -webkit-align-self: flex-start;
   align-self: flex-start;
 }
 
 ons-col[vertical-align="bottom"], ons-col[align="bottom"] {
+  -webkit-align-self: flex-end;
   align-self: flex-end; }
 
 ons-col[vertical-align="center"], ons-col[align="center"] {

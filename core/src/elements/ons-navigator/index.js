@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import internal from 'ons/internal';
-import AnimatorFactory from 'ons/internal/animator-factory';
+import util from '../../ons/util';
+import internal from '../../ons/internal';
+import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
 import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
@@ -26,11 +26,11 @@ import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
 import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
 import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
-import platform from 'ons/platform';
-import contentReady from 'ons/content-ready';
-import BaseElement from 'ons/base-element';
-import deviceBackButtonDispatcher from 'ons/device-back-button-dispatcher';
-import {PageLoader, defaultPageLoader, instantPageLoader} from 'ons/page-loader';
+import platform from '../../ons/platform';
+import contentReady from '../../ons/content-ready';
+import BaseElement from '../../ons/base-element';
+import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
@@ -53,16 +53,6 @@ const rewritables = {
    */
   ready(navigatorElement, callback) {
     callback();
-  },
-
-  /**
-   * @param {Element} navigatorElement
-   * @param {Element} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(navigatorElement, target, options, callback) {
-    callback(target);
   }
 };
 
@@ -363,7 +353,7 @@ export default class NavigatorElement extends BaseElement {
     ({options} = this._preparePageAndOptions(null, options));
 
     const popUpdate = () => new Promise((resolve) => {
-      this.pages[this.pages.length - 1]._destroy();
+      this._pageLoader.unload(this.pages[this.pages.length - 1]);
       resolve();
     });
 
@@ -380,19 +370,16 @@ export default class NavigatorElement extends BaseElement {
 
     return new Promise(resolve => {
       const options = {page: oldPage.name, parent: this, params: oldPage.pushedOptions.data};
-      this._pageLoader.load(options, ({element, unload}) => {
-        element = util.extend(element, {
+      this._pageLoader.load(options, pageElement => {
+        pageElement = util.extend(pageElement, {
           name: oldPage.name,
           data: oldPage.data,
-          pushedOptions: oldPage.pushedOptions,
-          unload
+          pushedOptions: oldPage.pushedOptions
         });
 
-        rewritables.link(this, element, oldPage.options, element => {
-          this.insertBefore(element, oldPage ? oldPage : null);
-          oldPage._destroy();
-          resolve();
-        });
+        this.insertBefore(pageElement, oldPage ? oldPage : null);
+        this._pageLoader.unload(oldPage);
+        resolve();
       });
 
     }).then(() => this._popPage(options, popUpdate));
@@ -496,28 +483,27 @@ export default class NavigatorElement extends BaseElement {
   pushPage(page, options = {}) {
     ({page, options} = this._preparePageAndOptions(page, options));
 
-    const prepare = (element, unload) => {
-      this._verifyPageElement(element);
-      element = util.extend(element, {
+    const prepare = pageElement => {
+      this._verifyPageElement(pageElement);
+      pageElement = util.extend(pageElement, {
         name: options.page,
-        data: options.data,
-        unload
+        data: options.data
       });
-      element.style.display = 'none';
+      pageElement.style.display = 'none';
     };
 
     if (options.pageHTML) {
       return this._pushPage(options, () => new Promise(resolve => {
-        instantPageLoader.load({page: options.pageHTML, parent: this, params: options.data}, ({element, unload}) => {
-          prepare(element, unload);
+        instantPageLoader.load({page: options.pageHTML, parent: this, params: options.data}, pageElement => {
+          prepare(pageElement);
           resolve();
         });
       }));
     }
 
     return this._pushPage(options, () => new Promise(resolve => {
-      this._pageLoader.load({page, parent: this, params: options.data}, ({element, unload}) => {
-        prepare(element, unload);
+      this._pageLoader.load({page, parent: this, params: options.data}, pageElement => {
+        prepare(pageElement);
         resolve();
       });
     }));
@@ -557,7 +543,7 @@ export default class NavigatorElement extends BaseElement {
       enterPage.unload = enterPage.unload || options.unload;
 
       return new Promise(resolve => {
-        var done = () => {
+        const done = () => {
           this._isRunning = false;
 
           if (leavePage) {
@@ -574,19 +560,13 @@ export default class NavigatorElement extends BaseElement {
           resolve(enterPage);
         };
 
-        enterPage.style.display = 'none';
-
-        var push = () =>  {
-          enterPage.style.display = 'block';
-          if (leavePage) {
-            leavePage._hide();
-            animator.push(enterPage, leavePage, done);
-          } else {
-            done();
-          }
-        };
-
-        options._linked ? push() : rewritables.link(this, enterPage, options, push);
+        enterPage.style.display = 'block';
+        if (leavePage) {
+          leavePage._hide();
+          animator.push(enterPage, leavePage, done);
+        } else {
+          done();
+        }
       });
     }).catch((error) => {
       this._isRunning = false;
@@ -608,7 +588,7 @@ export default class NavigatorElement extends BaseElement {
     return this.pushPage(page, options)
       .then(resolvedValue => {
         if (this.pages.length > 1) {
-          this.pages[this.pages.length - 2]._destroy();
+          this._pageLoader.unload(this.pages[this.pages.length - 2]);
         }
         this._updateLastPageBackButton();
 
@@ -641,13 +621,12 @@ export default class NavigatorElement extends BaseElement {
     const loader = typeof options.pageHTML === 'string' ? instantPageLoader : this._pageLoader;
 
     return new Promise(resolve => {
-      loader.load({page, parent: this}, ({element, unload}) => {
-        this._verifyPageElement(element);
-        element = util.extend(element, {
+      loader.load({page, parent: this}, pageElement => {
+        this._verifyPageElement(pageElement);
+        pageElement = util.extend(pageElement, {
           name: options.page,
           data: options.data,
-          pushedOptions: options,
-          unload
+          pushedOptions: options
         });
 
         options.animationOptions = util.extend(
@@ -656,16 +635,14 @@ export default class NavigatorElement extends BaseElement {
           options.animationOptions || {}
         );
 
-        element.style.display = 'none';
-        this.insertBefore(element, this.pages[index]);
+        pageElement.style.display = 'none';
+        this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
-        rewritables.link(this, element, options, element => {
-          setTimeout(() => {
-            element = null;
-            resolve(this.pages[index]);
-          }, 1000 / 60);
-        });
+        setTimeout(() => {
+          pageElement = null;
+          resolve(this.pages[index]);
+        }, 1000 / 60);
       });
     });
   }
@@ -691,7 +668,7 @@ export default class NavigatorElement extends BaseElement {
 
     options.callback = () => {
       while (this.pages.length > 1) {
-        this.pages[0]._destroy();
+        this._pageLoader.unload(this.pages[0]);
       }
 
       this.pages[0].updateBackButton(false);
@@ -744,8 +721,7 @@ export default class NavigatorElement extends BaseElement {
     }
 
     util.extend(options, {
-      page: page.name,
-      _linked: true
+      page: page.name
     });
     page.style.display = 'none';
     page.setAttribute('_skipinit', '');
@@ -952,7 +928,7 @@ export default class NavigatorElement extends BaseElement {
 
   _destroy() {
     for (let i = this.pages.length - 1; i >= 0; i--) {
-      this.pages[i]._destroy();
+      this._pageLoader.unload(this.pages[i]);
     }
 
     this.remove();

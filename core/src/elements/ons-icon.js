@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from 'ons/util';
-import autoStyle from 'ons/autostyle';
-import BaseElement from 'ons/base-element';
+import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
+import BaseElement from '../ons/base-element';
 
 /**
  * @element ons-icon

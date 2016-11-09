@@ -27,13 +27,8 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'open', 'close', 'toggle'
+          'open', 'close', 'toggle', 'load'
         ]);
-
-        this.load = (...args) => {
-          this._pageScope && this._pageScope.$destroy();
-          return this._element[0].load(...args);
-        };
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
           'modechange', 'preopen', 'preclose', 'postopen', 'postclose'
@@ -42,21 +37,13 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
-      _link: function(fragment, done) {
-        var link = $compile(fragment);
-        this._pageScope = this._scope.$new();
-        link(this._pageScope);
-
-        this._pageScope.$evalAsync(() => done(fragment));
-      },
-
       _destroy: function() {
         this.emit('destroy');
 
         this._clearDerivingMethods();
         this._clearDerivingEvents();
 
-        this._element = this._scope = this._attrs = this.load = this._pageScope = null;
+        this._element = this._scope = this._attrs = null;
       }
     });
 
