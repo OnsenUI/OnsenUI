@@ -4,6 +4,7 @@ examples/*.js.map
 !examples/*.spec.js
 src/**/*.js
 src/**/*.js.map
+src/**/*.ngfactory.ts
 src/*.js
 src/*.js.map
 dist
