@@ -21,7 +21,7 @@ import {BrowserModule} from '@angular/platform-browser';
       </ons-pull-hook>
 
       <ons-list>
-        <ons-list-item *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
+        <ons-list-item id="item-{{ i }}" *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
       </ons-list>
     </div>
   </ons-page>
