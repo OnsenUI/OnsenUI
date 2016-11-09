@@ -43,8 +43,14 @@ gulp.task('e2e-test', ['cp-dts'], done => {
 });
 
 gulp.task('cp-dts', () => {
+  const fs = require('fs');
+  const cp = require('cp');
   const base = __dirname;
-  require('cp').sync(base + '/../../core/src/onsenui.d.ts', base + '/dist/onsenui.d.ts');
+
+  if (!fs.existsSync(base + '/dist')) {
+    fs.mkdirSync(base + '/dist');
+  }
+  cp.sync(base + '/../../core/src/onsenui.d.ts', base + '/dist/onsenui.d.ts');
 });
 
 function createDevServer(options = {}) {
