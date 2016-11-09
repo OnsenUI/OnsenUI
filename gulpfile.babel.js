@@ -133,7 +133,6 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
         $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
 
         // Pass parameters to Karma config file via `global`
-        global.SPEC_FILES_SPECIFIED = true;
         global.SPEC_FILES = listOfSpecFiles[i];
 
         // Launch Karma server and wait until it exits
@@ -176,7 +175,6 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
         })();
       }
     } finally {
-      global.SPEC_FILES_SPECIFIED = undefined;
       global.SPEC_FILES = undefined;
     }
 
