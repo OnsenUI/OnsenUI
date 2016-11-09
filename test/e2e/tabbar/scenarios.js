@@ -104,7 +104,7 @@
     it('should work', function() {
       var EC = protractor.ExpectedConditions;
 
-      browser.get('/test/e2e/tabbar/issue-1672.html');
+      browser.get('/test/e2e/tabbar/issue-1654.html');
 
       element(by.css('#button')).click();
       browser.wait(EC.presenceOf(element(by.css('ons-icon'))));
