@@ -11,8 +11,6 @@ import {
   OnDestroy
 } from '@angular/core';
 
-declare var ons: any;
-
 /**
  * @element ons-tab
  * @directive OnsTab
@@ -72,7 +70,7 @@ export class OnsTab implements OnDestroy {
     private _resolver: ComponentFactoryResolver) {
 
     // set up ons-tab's page loader
-    this._elementRef.nativeElement.pageLoader = new ons.PageLoader(
+    this._elementRef.nativeElement.pageLoader = new (<any>ons.PageLoader)( // FIXME
       ({page, parent}, done: Function) => {
         const factory = this._resolver.resolveComponentFactory(page);
         const pageComponentRef = this._viewContainer.createComponent(factory, 0);

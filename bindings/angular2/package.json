@@ -5,10 +5,9 @@
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
     "typings-install": "typings install",
-    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js",
-    "prepublish": "npm run build-dist && npm run ngc",
+    "build-dist": "rm -rf dist/* && gulp cp-dts && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js && ngc -p tsconfig.json",
+    "prepublish": "npm run build-dist",
     "start": "gulp serve",
-    "ngc": "ngc -p tsconfig.json",
     "test": "gulp test"
   },
   "main": "dist/src/angular2-onsenui.js",
@@ -55,6 +54,7 @@
     "awesome-typescript-loader": "^2.2.4",
     "chromedriver": "^2.21.2",
     "core-js": "^2.4.0",
+    "cp": "^0.2.0",
     "es6-promise": "3.0.2",
     "es6-shim": "0.35.0",
     "gulp-shell": "^0.5.2",

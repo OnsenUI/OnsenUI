@@ -1,3 +1,5 @@
+/// <reference path="../dist/onsenui.d.ts" />
+
 export * from '@angular/core';
 export * from '@angular/compiler';
 export * from './directives/ons-navigator';
