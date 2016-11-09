@@ -16,7 +16,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     <ons-popover direction="up down" cancelable #popover (prehide)="onPreHide($event)">
       <div style="text-align: center; opacity: 0.7;">
         <p>{{message}}</p>
-        <p><ons-button (click)="popover.hide()" modifier="light">Hide</ons-button></p>
+        <p><ons-button id="hide" (click)="popover.hide()" modifier="light">Hide</ons-button></p>
       </div>
     </ons-popover>
   `
@@ -50,7 +50,7 @@ class MyPopoverComponent implements OnInit {
     <div class="background"></div>
     <div class="content">
       <div style="text-align: center; margin: 10px">
-        <ons-button (click)="show(button)" #button>show Popover</ons-button>
+        <ons-button id="show" (click)="show(button)" #button>show Popover</ons-button>
       </div>
     </div>
   </ons-page>
