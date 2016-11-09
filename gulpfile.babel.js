@@ -129,12 +129,12 @@ gulp.task('core-test-separately', ['prepare', 'core', 'core-dts-test'], (done) =
   //    gulp core-test-separately
   //
   //    # run only specified unit tests
-  //    gulp core-test-separately --target core/src/elements/ons-navigator/index.spec.js
+  //    gulp core-test-separately --specs core/src/elements/ons-navigator/index.spec.js
 
   (async () => {
     let listOfSpecFiles;
-    if ($.util.env.target) { // if --target option is specified
-      listOfSpecFiles = [ path.join(__dirname, $.util.env.target) ];
+    if ($.util.env.specs) { // if --specs option is specified
+      listOfSpecFiles = [ path.join(__dirname, $.util.env.specs) ];
     } else {
       listOfSpecFiles = glob.sync(path.join(__dirname, 'core/src/**/*.spec.js'));
     }
