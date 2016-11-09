@@ -17,6 +17,7 @@ limitations under the License.
 
 .ons-icon {
   display: inline-block;
+  line-height: inherit;
   font-style: normal;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
