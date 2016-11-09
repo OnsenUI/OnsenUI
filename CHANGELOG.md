@@ -6,6 +6,7 @@ v2.0.5
 ----
  * ons-switch: Fix `disbled` to `disabled`.
  * angular1: Fix [#1677](https://github.com/OnsenUI/OnsenUI/issues/1677).
+ * ons-tabbar: Fix [#1654](https://github.com/OnsenUI/OnsenUI/issues/1654).
 
 v2.0.4
 ----
