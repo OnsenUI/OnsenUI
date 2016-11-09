@@ -100,7 +100,7 @@
     });
   });
 
-  describe('tabbar/issue-1672.html', function() {
+  describe('tabbar/issue-1654.html', function() {
     it('should work', function() {
       var EC = protractor.ExpectedConditions;
 
