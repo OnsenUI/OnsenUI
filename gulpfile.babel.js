@@ -132,9 +132,9 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
         $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
 
-        // Pass parameters to Karma config file via process.env
-        process.env.SPEC_FILES_SPECIFIED = true;
-        process.env.SPEC_FILES = listOfSpecFiles[i];
+        // Pass parameters to Karma config file via `global`
+        global.SPEC_FILES_SPECIFIED = true;
+        global.SPEC_FILES = listOfSpecFiles[i];
 
         // Launch Karma server and wait until it exits
         await (async () => {
@@ -176,8 +176,8 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
         })();
       }
     } finally {
-      process.env.SPEC_FILES_SPECIFIED = undefined;
-      process.env.SPEC_FILES = undefined;
+      global.SPEC_FILES_SPECIFIED = undefined;
+      global.SPEC_FILES = undefined;
     }
 
     done();

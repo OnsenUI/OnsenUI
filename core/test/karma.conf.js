@@ -16,7 +16,7 @@ module.exports = function(config) {
     files: [
       '../../build/js/onsenui.js',
       '../../core/test/setup.js',
-      (process.env.SPEC_FILES_SPECIFIED ? process.env.SPEC_FILES : '../../core/src/**/*.spec.js'),
+      (global.SPEC_FILES_SPECIFIED ? global.SPEC_FILES : '../../core/src/**/*.spec.js'),
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
     ],
