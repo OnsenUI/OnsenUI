@@ -8,7 +8,7 @@ import StaticServer from 'static-server';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
-gulp.task('serve', done => {
+gulp.task('serve', ['cp-dts'], done => {
   createDevServer().listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/bindings/angular2/examples/button.html');
     done();
@@ -27,7 +27,7 @@ gulp.task('serve-umd-template', () => {
   
 gulp.task('test', ['e2e-test']);
 
-gulp.task('e2e-test', done => {
+gulp.task('e2e-test', ['cp-dts'], done => {
   const server = createDevServer({quiet: true});
 
   server.listen(9090, '0.0.0.0', () => {
@@ -40,6 +40,17 @@ gulp.task('e2e-test', done => {
       done();
     });
   });
+});
+
+gulp.task('cp-dts', () => {
+  const fs = require('fs');
+  const cp = require('cp');
+  const base = __dirname;
+
+  if (!fs.existsSync(base + '/dist')) {
+    fs.mkdirSync(base + '/dist');
+  }
+  cp.sync(base + '/../../core/src/onsenui.d.ts', base + '/dist/onsenui.d.ts');
 });
 
 function createDevServer(options = {}) {
