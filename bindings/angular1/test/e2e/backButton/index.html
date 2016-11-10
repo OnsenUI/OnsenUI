@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+    <ons-navigator title="Navigator" var="myNavigator">
+      <ons-page id="page1">
+        <div style="text-align: center;">
+          <p>Page 1</p>
+          <br>
+          <ons-button id="btn" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
+        </div>
+      </ons-page>
+    </ons-navigator>
+
+    <ons-template id="page2.html">
+      <ons-page id="page2">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button>Back</ons-back-button>
+          </div>
+        </ons-toolbar>
+        <div style="text-align: center;">
+          <p>Page 2</p>
+
+          <p><ons-button ng-click="ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent()">fireBackButtonEvent</ons-button></p>
+        </div>
+      </ons-page>
+    </ons-template>
+  </body>
+</html>

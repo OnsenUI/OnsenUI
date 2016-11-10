@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = ons.bootstrap();
+
+      $(document).on('pageinit', '#first-page', function() {
+        page.setDeviceBackButtonHandler(function() {
+          alert("OK: setDeviceBackButtonHandler");
+        });
+      });
+
+      app.controller('AppController', function($scope, DeviceBackButtonHandler) {
+        $scope.fire = function() {
+          DeviceBackButtonHandler.fireDeviceBackButtonEvent();
+        };
+        $scope.onDeviceBackButton = function($event) {
+          if ($event.callParentHandler) {
+            alert('OK: ng-device-backbutton');
+          } else {
+            alert('NG: ng-device-backbutton')
+          }
+        }
+      });
+
+      function onDeviceBackButton(event) {
+        if (event.callParentHandler) {
+          alert('OK: on-device-backbutton');
+        } else {
+          alert('NG: on-device-backbutton');
+        }
+      }
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body ng-controller="AppController">
+
+    <ons-navigator>
+      <ons-page id="first-page" var="page"
+        ng-device-backbutton="onDeviceBackButton($event)"
+        on-device-backbutton="onDeviceBackButton($event)">
+        <ons-toolbar>
+          <div class="center">Title</div>
+        </ons-toolbar>
+
+        <p style="text-align: center">
+          <ons-button modifier="light" ng-click="fire()">Fire</ons-button>
+        </p>
+      </ons-page>
+    </ons-navigator>
+
+  </body>
+</html>

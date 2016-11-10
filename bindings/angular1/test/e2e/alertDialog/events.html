@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.data = {
+          visible: false
+        };
+
+        ons.ready(function() {
+          ons.createAlertDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
+            $scope.dialog = dialog;
+          });
+        });
+
+        $scope.show = function() {
+          $scope.dialog.show();
+        };
+      });
+    </script>
+  </head>
+  <body ng-controller="TestController">
+    <ons-page>
+      <ons-button id="show-alert-dialog" ng-click="show()">Show dialog</ons-button>
+      <p ng-show="data.visible" id="alert-dialog-visible">Alert dialog is visible.</p>
+    </ons-page>
+
+    <ons-template id="dialog.html">
+      <ons-alert-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false">
+        <div class="alert-dialog-title"><strong style="color: #ff3333">Critical Alert!</strong></div>
+        <div class="alert-dialog-content">
+          An error has occurred!
+        </div>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button" ng-click="dialog.hide();">OK</button>
+        </div>
+      </ons-alert-dialog>
+    </ons-template>
+  </body>
+</html>

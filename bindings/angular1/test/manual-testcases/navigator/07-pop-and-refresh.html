@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+	<script>
+		ons.bootstrap();
+	</script>
+
+</head>
+<body>
+
+	<ons-navigator var="nav" page="p1.html"></ons-navigator>
+	<ons-template id="p2.html">
+		<ons-page>
+			<div style="text-align: center">
+				<p>Write some text here and push page:</p>
+				<input type="text" />
+				<p><ons-button ng-click="nav.pushPage('p3.html')">push</ons-button></p>
+			</div>
+		</ons-page>
+	</ons-template>	<ons-template id="p3.html">
+		<ons-page>
+			<div style="text-align: center">
+				<p>Write some text here and push page:</p>
+				<input type="text" />
+				<p><ons-button ng-click="nav.pushPage('p4.html')">push</ons-button></p>
+			</div>
+		</ons-page>
+	</ons-template>	<ons-template id="p4.html">
+		<ons-page>
+			<div style="text-align: center">
+				<p><ons-button ng-click="nav.popPage({'refresh': true});nav.popPage({'refresh': true});nav.popPage({'refresh': true});">Refresh popPage</ons-button></p>
+				<p><ons-button ng-click="nav.popPage(); nav.popPage(); nav.popPage()">Normal popPage</ons-button></p>
+			</div>
+		</ons-page>
+	</ons-template>
+	<ons-template id="p1.html">
+		<ons-page>
+			<div style="text-align: center">
+				<p>Write some text here and push page:</p>
+				<input type="text" />
+				<p><ons-button ng-click="nav.pushPage('p2.html')">push</ons-button></p>
+			</div>
+		</ons-page>
+	</ons-template>
+
+</body>
+</html>

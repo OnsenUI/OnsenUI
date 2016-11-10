@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.data = {
+          timesShown: 0
+        };
+
+        ons.ready(function() {
+          ons.createPopover('popover.html').then(function(popover) {
+            $scope.popover = popover;
+          });
+        });
+
+        $scope.show = function($event) {
+          $scope.popover.show($event);
+        };
+      });
+    </script>
+  </head>
+  <body ng-controller="TestController">
+    <ons-page>
+      <ons-button id="show-popover" ng-click="show($event)">Show popover</ons-button>
+
+      <p>Shown <span id="times-shown">{{ data.timesShown }}</span> times.</p>
+    </ons-page>
+
+    <ons-template id="popover.html">
+      <ons-popover ons-preshow="data.timesShown = data.timesShown + 1">
+        Hi, I'm a popover!
+
+        <ons-button ng-click="popover.hide()" id="hide-popover">Close</ons-button>
+      </ons-popover>
+    </ons-template>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        ons.createDialog('dialog.html').then(function(dialog) {
+          dialog.show();
+
+          var el = document.querySelector('.dialog'),
+            mask = document.querySelector('.dialog-mask');;
+
+          if (!el) {
+            alert('NG 1');  
+          } else {
+            alert('OK 1');
+          }
+
+          if (el.innerHTML.indexOf('Hello') < 0) {
+            alert('NG 2');
+          } else {
+            alert('OK 2');
+          }
+
+          dialog.destroy();
+          if (document.querySelector('.dialog')) {
+            alert('NG 3');  
+          } else {
+            alert('OK 3');
+          }
+
+        });
+      }); 
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Dialog test</div>
+      </ons-toolbar>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="dialog.html">
+      <ons-dialog cancelable>
+        Hello
+      </ons-dialog>
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap()
+      .controller('TestController', function($scope, $timeout) {
+        $scope.items = [0, 1, 2];
+        $scope.init = function() {
+          $scope.state = 'initial';
+          document.querySelector('ons-pull-hook')._disableDragLock();
+        };
+        $scope.load = function($done) {
+          $timeout(function() {
+            $scope.items.push($scope.items.length);
+            $done();
+          }, 400);
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="TestController">
+      <ons-pull-hook ng-init="init()" ons-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
+        <span id="current-state">{{ state }}</span>
+      </ons-pull-hook>
+      <ons-list>
+        <ons-list-item ng-repeat="item in items">{{ item }}</ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
+</html>
