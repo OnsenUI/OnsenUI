@@ -13,7 +13,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
   template: `
-    <ons-dialog animation="default" cancelable #dialog>
+    <ons-dialog animation="none" cancelable #dialog>
       <div class="dialog-mask"></div>
       <div class="dialog">
         <div class="dialog-container" style="height: 200px;">
@@ -25,7 +25,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
               <div style="text-align: center">
                 <p>{{message}}</p>
                 <br>
-                <ons-button (click)="dialog.hide()">Close</ons-button>
+                <ons-button id="close" (click)="dialog.hide()">Close</ons-button>
               </div>
             </div>
           </ons-page>
@@ -52,7 +52,7 @@ class MyDialogComponent {
     <div class="content">
       <div style="text-align: center;">
         <br>
-        <ons-button (click)="show()">Open</ons-button>
+        <ons-button id="open" (click)="show()">Open</ons-button>
       </div>
     </div>
   </ons-page>

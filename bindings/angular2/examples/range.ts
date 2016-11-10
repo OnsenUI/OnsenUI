@@ -19,9 +19,11 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
       <div style="text-align: center; margin: 10px">
         <!-- (input) is needed for immediate change detection on dragging range component.
         -->
-        <ons-range [(value)]="value" (input)="value = $event.target.value"></ons-range><br>
+        <ons-range id="range" [(value)]="value" (input)="value = $event.target.value"></ons-range><br>
         <ons-range modifier="material" [(value)]="value"></ons-range><br>
-        {{value}}
+        <span id="value">
+          {{ value }}
+        </span>
       </div>
     </div>
   </ons-page>
