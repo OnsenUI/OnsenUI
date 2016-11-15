@@ -7,11 +7,19 @@ Guidelines:
 CHANGELOG
 ====
 
-1.0.0-rc.3 (Work In Progress)
+<!--
+
+1.0.0-rc.4 (Work In Progress)
+----
+
+-->
+
+1.0.0-rc.3 (2016-11-15)
 ----
 
 ### Features
  * Updated angular.
+ * Changed to include `onsenui.d.ts` and removed unneeded `declare var ons: any;`.
 
 ### Bug Fixes
  * Fix `peerDependencies` to suppress `UNMET PEER DEPENDENCY` on `rxjs`.
