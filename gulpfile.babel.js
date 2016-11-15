@@ -15,8 +15,11 @@ limitations under the License.
 
 */
 
+import 'babel-polyfill';
+
 import gulp from 'gulp';
 import path from'path';
+import glob from 'glob';
 import gulpIf from 'gulp-if';
 import pkg from './package.json';
 import {merge} from 'event-stream';
@@ -95,29 +98,88 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 ////////////////////////////////////////
 // core-test
 ////////////////////////////////////////
-gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
-  new karma.Server(
-    {
-      configFile: path.join(__dirname, 'core/test/karma.conf.js'),
-      singleRun: true, // overrides the corresponding option in config file
-      autoWatch: false // same as above
-    },
-    (exitCode) => {
-      const exitMessage = `Karma server has exited with ${exitCode}`;
 
-      switch (exitCode) {
-        case 0: // success
-          $.util.log($.util.colors.green(exitMessage));
-          $.util.log($.util.colors.green('Passed unit tests successfully.'));
-          done();
-          break;
-        default: // error
-          $.util.log($.util.colors.red(exitMessage));
-          $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-          throw new Error('core-test has failed');
-      }
+gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
+  // Usage:
+  //    # run all unit tests in just one Karma server
+  //    gulp core-test
+  //
+  //    # run only specified unit tests in just one Karma server
+  //    gulp core-test --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp core-test --specs "core/src/**/index.spec.js"
+  //    gulp core-test --specs "core/src/**/*.spec.js"
+  //
+  //    # run all unit tests separately
+  //    gulp core-test --separately
+  //
+  //    # run only specified unit tests separately
+  //    gulp core-test --separately --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp core-test --separately --specs "core/src/**/index.spec.js"
+  //    gulp core-test --separately --specs "core/src/**/*.spec.js"
+
+  (async () => {
+    const specs = argv.specs || 'core/src/**/*.spec.js'; // commas cannot be used
+
+    let listOfSpecFiles;
+    if (argv.separately) { // resolve glob pattern
+      listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
+    } else { // do not resolve glob pattern
+      listOfSpecFiles = new Array( path.join(__dirname, specs) );
     }
-  ).start();
+
+    // Separately launch Karma server for each spec file
+    try {
+      for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
+        $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
+
+        // Pass parameters to Karma config file via `global`
+        global.SPEC_FILES = listOfSpecFiles[i];
+
+        // Launch Karma server and wait until it exits
+        await (async () => {
+          return new Promise((resolve, reject) => {
+            new karma.Server(
+              {
+                configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+                singleRun: true, // overrides the corresponding option in config file
+                autoWatch: false // same as above
+              },
+              (exitCode) => {
+                const exitMessage = `Karma server has exited with ${exitCode}`;
+
+                switch (exitCode) {
+                  case 0: // success
+                    $.util.log($.util.colors.green(exitMessage));
+                    $.util.log($.util.colors.green('Passed unit tests successfully.'));
+                    resolve();
+                    break;
+                  default: // error
+                    $.util.log($.util.colors.red(exitMessage));
+                    $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+                    if (argv.separately) { // in --separate mode, ignore errors
+                      resolve();
+                    } else { // not in --separate mode, kill task on errors
+                      done('core-test has failed');
+                    }
+                }
+              }
+            ).start();
+          });
+        })();
+
+        // Wait for 500 ms before next iteration to avoid crashes
+        await (async () => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => { resolve(); }, 500 );
+          });
+        })();
+      }
+    } finally {
+      global.SPEC_FILES = undefined;
+    }
+
+    done();
+  })();
 });
 
 ////////////////////////////////////////
