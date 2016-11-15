@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <ons-button ng-click="popover.show('#button')" id="button">
+        Popover (ease in)
+      </ons-button>
+      <ons-button ng-click="popover.show('#button', {animationOptions: {duration: 1, delay: 1, timing: 'ease-out'}})" id="button">
+        Popover (ease out)
+      </ons-button>
+      <ons-popover cancelable var="popover" animation-options="{duration: 1, delay: 1, timing: 'ease-in'}">
+        popover
+      </ons-popover>
+    </div>
+  </body>
+</html>

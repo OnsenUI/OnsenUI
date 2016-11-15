@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        // ...
+      });
+
+      $(document).on('pageinit', '#first-page', function() {
+        alert('#first-page pageinit');
+      });
+
+      $(document).on('pageinit', '#second-page', function() {
+        alert('#second-page pageinit');
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-page id="first-page">
+        <ons-toolbar>
+          <div class="center">#first-page</div>
+        </ons-toolbar>
+
+        <h1>Test for pageinit event.</h1>
+
+        <ons-list>
+          <ons-list-item modifier="chevron" ng-click="navi.pushPage('second.html')">
+            second-page
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="second.html">
+      <ons-page id="second-page">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">#second-page</div>
+        </ons-toolbar>
+      </ons-page>
+    </script>
+
+  </body>
+</html>

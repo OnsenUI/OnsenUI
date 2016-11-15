@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        navi.on('prepush', function(event) {
+          console.log('prepush:', event);
+          if (!confirm('push?')) {
+            event.cancel();
+          } 
+        });
+
+        navi.on('prepop', function(event) {
+          console.log('prepop:', event);
+          if (!confirm('pop?')) {
+            event.cancel();
+          } 
+        });
+
+        navi.on('postpush', function(event) {
+          console.log('postpush:', event);
+        });
+
+        navi.on('postpop', function(event) {
+          console.log('postpop:', event);
+        });
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <p>
+        Event Tests: 'prepop', 'postpop', 'prepush', 'postpush'
+      </p>
+
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html')">
+          push(default)
+        </ons-list-item>
+      </ons-list>
+
+    </ons-navigator>
+
+    <script type="text/ons-template" id="page.html">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Page</div>
+      </ons-toolbar>
+    </script>
+   
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="my-app">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      var module = angular.module('my-app', ['onsen']);
+      
+      module.controller('AppController', function($scope) {
+        if (!$scope.navi) {
+          console.log('OK: $scope.navi is undefined in AppController');
+        }
+      });
+
+      module.controller('PageController', function($scope) {
+        ons.ready(function() {
+          $scope.navi.on('prepop', function() {
+            alert('prepop');
+          });
+
+          $scope.navi.on('postpop', function() {
+            alert('postpop');
+          });
+
+          $scope.navi.on('prepush', function() {
+            alert('prepush');
+          });
+
+          $scope.navi.on('postpush', function() {
+            alert('postpush');
+          });
+        });
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body ng-controller="AppController">
+
+    <ons-navigator var="navi">
+      <ons-page ng-controller="PageController">
+        <ons-toolbar>
+          <div class="center">Navigator</div>
+        </ons-toolbar>
+
+        <p>
+          Event Tests: 'prepop', 'postpop', 'prepush', 'postpush' with Angular.js controller.
+        </p>
+
+        <ons-list>
+          <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html')">
+            push(default)
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="page.html">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Page</div>
+      </ons-toolbar>
+    </script>
+   
+  </body>
+</html>

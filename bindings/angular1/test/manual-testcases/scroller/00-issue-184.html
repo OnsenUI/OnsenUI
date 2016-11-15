@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = ons.bootstrap();
+
+      app.controller('PageController', function($scope) {
+        $scope.alertFoo = function() {
+          if ($scope.foo === 'foo') {
+            alert('OK');
+          } else {
+            alert('NG');
+          }
+        };
+
+        setTimeout(function() {
+          $scope.alertFoo();
+        }, 1000);
+      });
+
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-page ng-controller="PageController">
+      <ons-toolbar>
+        <div class="center">Scroller test</div>
+      </ons-toolbar>
+
+      <ons-scroller style="height: 100px">
+        <p ng-init="foo = 'foo';" style="text-align: center">
+          <br>
+          Text
+        </p>
+      </ons-scroller>
+    </ons-page>
+
+  </body>
+</html>

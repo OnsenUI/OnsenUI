@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('MainController', function($scope, $timeout) {
+        $scope.data = {
+          num: 0
+        };
+
+        $scope.ons.createDialog('dialog1.html').then(function(dialog) {
+          $scope.dialog1 = dialog;
+          dialog.show();
+        });
+
+        $scope.ons.createDialog('dialog2.html').then(function(dialog) {
+          $scope.dialog2 = dialog;
+          dialog.show();
+        });
+
+        $timeout(function() {
+          if ($scope.data.num === 3) {
+            alert('OK');
+          }
+          else {
+            alert('NG');
+          }
+        }, 500);
+      })
+
+      .controller('DialogOneController', function($scope, $timeout) {
+        $scope.data.num += 1;
+      })
+
+      .controller('DialogTwoController', function($scope, $timeout) {
+        $scope.data.num += 2;
+      });
+    </script>
+
+  </head>
+  <body ng-controller="MainController">
+
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Dialog test</div>
+      </ons-toolbar>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="dialog1.html">
+      <ons-dialog cancelable>
+        <ons-page ng-controller="DialogOneController">
+          <p>Dialog 1</p>
+        </ons-page>
+      </ons-dialog>
+    </script>
+
+    <script type="text/ons-template" id="dialog2.html">
+      <ons-dialog cancelable>
+        <ons-page ng-controller="DialogTwoController">
+          <p>Dialog 2</p>
+        </ons-page>
+      </ons-dialog>
+    </script>
+
+
+
+  </body>
+</html>

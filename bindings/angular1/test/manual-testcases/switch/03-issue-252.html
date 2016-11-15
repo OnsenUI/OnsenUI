@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>
+    <script>
+      var app = angular.module('myApp', ['onsen']);
+
+      app.controller('MyCtrl', function($scope) {
+        $scope.person = {
+          isSick: false
+        }
+      });
+
+      ons.ready(function() {
+        $("#switch").children().click();
+
+        if ($("#checkbox").prop("checked")) {
+          alert("OK 1");
+        } else {
+          alert("NG 1");
+        }
+
+        $("#checkbox").click();
+
+        if (mySwitch.checked) {
+          alert("NG 2");
+        } else {
+          alert("OK 2");
+        }
+      });
+
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-page ng-controller="MyCtrl">
+      <ons-toolbar>
+        <div class="center">Switch Test</div>
+      </ons-toolbar>
+
+      <br>
+      <div style="text-align: center">
+        Sick? <ons-switch id="switch" var="mySwitch" ng-model="person.isSick"></ons-switch>
+        <input id="checkbox" type="checkbox" ng-model="person.isSick"></input>
+        <p>The person is {{ person.isSick ? 'sick' : 'well' }}</p>
+      </div>
+    </ons-page>
+
+  </body>
+</html>

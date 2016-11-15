@@ -144,7 +144,7 @@ $ gulp serve
 
 ## Running the test suite
 
-Onsen UI has unit tests for the Web Components as well as end-to-end testing of the AngularJS directives using Protractor.
+Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
 
 Use the following commands to run the unit tests:
 
@@ -152,9 +152,16 @@ Use the following commands to run the unit tests:
 $ gulp core-test
 ```
 
-or these commands for the protractor tests:
+or these commands for end-to-end testing of the binding libraries:
 
 ```bash
+$ cd bindings/angular1
+$ gulp e2e-test
+```
+
+```bash
+$ cd bindings/angular2
+$ npm install
 $ gulp e2e-test
 ```
 
@@ -163,6 +170,7 @@ It will take some time the because it will download a stand-alone Selenium Serve
 To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
 
 ```bash
+$ cd bindings/angular1
 $ gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
 ```
 

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        var msg = 'Hello there';
+
+        ons.notification.confirm({
+          message: msg,
+          callback: function(idx) {
+            if (idx === 0) {
+              alert("OK 2");  
+            } else {
+              alert("NG 2");
+            }
+          }
+        });
+
+        var text = document.querySelector('.alert-dialog-content').innerHTML;
+
+        if (text === msg) {
+          alert("OK 1");  
+        } else {
+          alert("NG 1");
+        }
+        document.querySelector('.alert-dialog-button').click();
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Confirm test</div>
+      </ons-toolbar>
+    </ons-navigator>
+
+  </body>
+</html>
