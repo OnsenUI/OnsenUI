@@ -29,7 +29,6 @@ v2.0.2
  * ons-tab: Add `badge` attribute to display notification on tab.
  * ons.notification: Added `options.inputType` and `options.class`.
  * ons.notification: Fix [#1638](https://github.com/OnsenUI/OnsenUI/issues/1638).
- * angular2-binding: Added Angular 2 AOT support.
  * ons.notification: Fixed memory leak.
  * angular1: Fix [#1620](https://github.com/OnsenUI/OnsenUI/issues/1620).
  * ons-icon: Fix [#1636](https://github.com/OnsenUI/OnsenUI/issues/1636).
@@ -68,9 +67,6 @@ v2.0.0-rc.17
 
 v2.0.0-rc.16
 ----
- * angular2-binding: Removed `OnsPage`, `OnsAlertDialog` and `OnsPopover` directives.
- * angular2-binding: Renamed `PageParams` to `Params`.
- * angular2-binding: Added Angular2 API for `ons-alert-dialog`, `ons-popover`, `ons-dialog` and `ons-modal` components.
  * ons-splitter-side, ons-splitter-content: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
  * ons-navigator: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
  * ons-tabbar, ons-tab: Added "page" and "pageLoader" property. Changed to use page-loader instead of `ons._internal.getPageHTMLAsync()`.
