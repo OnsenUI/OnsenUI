@@ -199,6 +199,7 @@ export default class ModalElement extends BaseElement {
           animator.show(this, () => {
             unlock();
 
+            util.propagateAction(this, '_show');
             callback();
             resolve(this);
           });
@@ -272,6 +273,7 @@ export default class ModalElement extends BaseElement {
             this.style.display = 'none';
             unlock();
 
+            util.propagateAction(this, '_hide');
             callback();
             resolve(this);
           });
