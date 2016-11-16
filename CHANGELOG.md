@@ -9,6 +9,7 @@ v2.0.5
  * ons-tabbar: Fix [#1654](https://github.com/OnsenUI/OnsenUI/issues/1654).
  * ons-input: Fix `float` attribute style.
  * ons-input: Added `transparent` modifier for Material Design.
+ * ons-modal: Pages inside modal throw show and hide events.
 
 v2.0.4
 ----
