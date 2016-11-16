@@ -1,21 +1,21 @@
 # Onsen UI binding for Angular2
 
+All the following commands must be executed in `bindings/angular2` directory.  
+Also, **you need to build the core before building this binding.**
+
 ## How to manually build this project
 
-Note: **You need to build the core (in the project root directory) before building this binding.**
-
 ```bash
-$ cd bindings/angular2
 $ yarn
 ```
+
+This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already.
 
 ## Running Examples
 
 ```bash
 $ gulp serve
 ```
-
-This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already.
 
 * Then navigate your browser to [http://0.0.0.0:3030/bindings/angular2/examples/button.html](http://0.0.0.0:3000/bindings/angular2/examples/button.html)
 
