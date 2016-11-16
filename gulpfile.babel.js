@@ -96,26 +96,26 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 });
 
 ////////////////////////////////////////
-// core-test
+// unit-test
 ////////////////////////////////////////
 
-gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
+gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   // Usage:
   //    # run all unit tests in just one Karma server
-  //    gulp core-test
+  //    gulp unit-test
   //
   //    # run only specified unit tests in just one Karma server
-  //    gulp core-test --specs core/src/elements/ons-navigator/index.spec.js
-  //    gulp core-test --specs "core/src/**/index.spec.js"
-  //    gulp core-test --specs "core/src/**/*.spec.js"
+  //    gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp unit-test --specs "core/src/**/index.spec.js"
+  //    gulp unit-test --specs "core/src/**/*.spec.js"
   //
   //    # run all unit tests separately
-  //    gulp core-test --separately
+  //    gulp unit-test --separately
   //
   //    # run only specified unit tests separately
-  //    gulp core-test --separately --specs core/src/elements/ons-navigator/index.spec.js
-  //    gulp core-test --separately --specs "core/src/**/index.spec.js"
-  //    gulp core-test --separately --specs "core/src/**/*.spec.js"
+  //    gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp unit-test --separately --specs "core/src/**/index.spec.js"
+  //    gulp unit-test --separately --specs "core/src/**/*.spec.js"
 
   (async () => {
     const specs = argv.specs || 'core/src/**/*.spec.js'; // commas cannot be used
@@ -159,7 +159,7 @@ gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
                     if (argv.separately) { // in --separate mode, ignore errors
                       resolve();
                     } else { // not in --separate mode, kill task on errors
-                      done('core-test has failed');
+                      done('unit-test has failed');
                     }
                 }
               }
@@ -195,9 +195,9 @@ gulp.task('core-dts-test', () => {
 });
 
 ////////////////////////////////////////
-// watch-core-test
+// watch-unit-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', ['watch-core'], (done) => {
+gulp.task('watch-unit-test', ['watch-core'], (done) => {
   new karma.Server(
     {
       configFile: path.join(__dirname, 'core/test/karma.conf.js'),
@@ -498,5 +498,5 @@ gulp.task('build-docs', () => {
 // test
 ////////////////////////////////////////
 gulp.task('test', function(done) {
-  return runSequence('core-test', done);
+  return runSequence('unit-test', done);
 });
