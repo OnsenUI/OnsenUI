@@ -188,6 +188,7 @@ text-input-underbar-disabled()
   padding-bottom 2px
   border-radius 0
   height 24px
+  vertical-align middle
   -webkit-transform translate3d(0, 0, 0) // prevent ios flicker
 
 .text-input--material__label
@@ -234,3 +235,48 @@ text-input--material-placeholder()
     background-size 0% 2px, 100% 2px
   100%
     background-size 100% 2px, 100% 2px
+
+/*! topdoc
+  name: Transparent Text Input
+  class: text-input--transparent
+  markup:
+    <input type="text" class="text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
+*/
+
+.text-input--transparent
+  border none
+  background-color transparent
+  background-image none
+  padding-left 0
+  padding-right 0
+
+.text-input--transparent:focus
+  background-image none
+
+.text-input--transparent:disabled
+  border none
+  background-color transparent
+
+
+text-input-transparent-disabled()
+  border none
+  background-color transparent
+
+.text-input--transparent:disabled::-webkit-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-moz-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled::-ms-input-placeholder
+  text-input-transparent-disabled()
+
+.text-input--transparent:disabled:-ms-input-placeholder
+  text-input-transparent-disabled()
+
+
+.text-input--transparent:invalid
+  border none
+  background-color transparent
