@@ -96,9 +96,20 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 });
 
 ////////////////////////////////////////
+// core-dts-test
+////////////////////////////////////////
+gulp.task('core-dts-test', () => {
+  return gulp.src('core/src/onsenui-test.ts', {read: false})
+    .pipe($.shell('tsc "<%= file.path %>" --target es6'))
+    .on('error', err => {
+      $.util.log($.util.colors.red(err.message));
+      throw err;
+    });
+});
+
+////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-
 gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   // Usage:
   //    # run all unit tests in just one Karma server
@@ -180,18 +191,6 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
 
     done();
   })();
-});
-
-////////////////////////////////////////
-// core-dts-test
-////////////////////////////////////////
-gulp.task('core-dts-test', () => {
-  return gulp.src('core/src/onsenui-test.ts', {read: false})
-    .pipe($.shell('tsc "<%= file.path %>" --target es6'))
-    .on('error', err => {
-      $.util.log($.util.colors.red(err.message));
-      throw err;
-    });
 });
 
 ////////////////////////////////////////
