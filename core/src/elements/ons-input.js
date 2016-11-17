@@ -59,6 +59,9 @@ const INPUT_ATTRIBUTES = [
  * @modifier underbar
  *  [en]Displays a horizontal line underneath a text input.[/en]
  *  [ja][/ja]
+ * @modifier transparent
+ *  [en]Displays a transparent input. Works for Material Design.[/en]
+ *  [ja][/ja]
  * @description
  *  [en]
  *    An input element. The `type` attribute can be used to change the input type. All text input types as well as `checkbox` and `radio` are supported.
