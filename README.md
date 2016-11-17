@@ -149,7 +149,7 @@ Onsen UI has unit tests for the Web Components as well as end-to-end testing of 
 Use the following commands to run the unit tests:
 
 ```bash
-$ gulp core-test
+$ gulp unit-test
 ```
 
 or these commands for end-to-end testing of the binding libraries:
