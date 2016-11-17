@@ -138,7 +138,7 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       listOfSpecFiles = new Array( path.join(__dirname, specs) );
     }
 
-    // Separately launch Karma server for each spec file
+    // Separately launch Karma server for each set of spec files
     try {
       for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
         $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
