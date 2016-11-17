@@ -167,9 +167,9 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
                   default: // error
                     $.util.log($.util.colors.red(exitMessage));
                     $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-                    if (argv.separately) { // in --separate mode, ignore errors
+                    if (argv.separately) { // in --separately mode, ignore errors
                       resolve();
-                    } else { // not in --separate mode, kill task on errors
+                    } else { // not in --separately mode, kill task on errors
                       done('unit-test has failed');
                     }
                 }
