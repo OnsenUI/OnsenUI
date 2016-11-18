@@ -139,7 +139,9 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       listOfSpecFiles = new Array( path.join(__dirname, specs) );
     }
 
-    // Separately launch Karma server for each set of spec files
+    let testsPassed = true; // error flag
+
+    // Separately launch Karma server for each browser and each set of spec files
     try {
       for (let j = 0 ; j < browsers.length ; j++) {
         $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
@@ -169,17 +171,13 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
                     case 0: // success
                       $.util.log($.util.colors.green(exitMessage));
                       $.util.log($.util.colors.green('Passed unit tests successfully.'));
-                      resolve();
                       break;
                     default: // error
                       $.util.log($.util.colors.red(exitMessage));
                       $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-                      if (argv.separately) { // in --separately mode, ignore errors
-                        resolve();
-                      } else { // not in --separately mode, kill task on errors
-                        done('unit-test has failed');
-                      }
+                      testsPassed = false;
                   }
+                  resolve();
                 }
               ).start();
             });
@@ -198,7 +196,13 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       global.SPEC_FILES = undefined;
     }
 
-    done();
+    if (testsPassed) {
+      $.util.log($.util.colors.green('Passed unit tests on all browsers!'));
+      done();
+    } else {
+      $.util.log($.util.colors.red('Failed to pass unit tests on some browsers.'));
+      done('unit-test has failed');
+    }
   })();
 });
 
