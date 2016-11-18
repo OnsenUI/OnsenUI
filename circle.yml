@@ -3,7 +3,7 @@ machine:
     version: 6.2.0
 dependencies:
   override:
-    - npm install -g yarn@0.16.1
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
     - yarn
     - yarn global add coveralls gulp
     - cd css-components; yarn; gulp build
