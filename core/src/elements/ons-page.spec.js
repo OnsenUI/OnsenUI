@@ -273,7 +273,7 @@ describe('OnsPageElement', () => {
         i++;
         done();
       };
-      content.scrollTop = 0.95 * maxScroll;
+      setImmediate(() => content.scrollTop = 0.95 * maxScroll);
       setTimeout(() => {
         expect(i).to.equal(1);
         done();
@@ -285,7 +285,7 @@ describe('OnsPageElement', () => {
         i++;
         setTimeout(done, 200);
       };
-      content.scrollTop = 0.95 * maxScroll;
+      setImmediate(() => content.scrollTop = 0.95 * maxScroll);
       setTimeout(element._boundOnScroll, 50);
       setTimeout(element._boundOnScroll, 150);
       setTimeout(element._boundOnScroll, 250);
