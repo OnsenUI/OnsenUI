@@ -16,7 +16,7 @@ module.exports = function(config) {
     files: [
       '../../build/js/onsenui.js',
       '../../core/test/setup.js',
-      global.SPEC_FILES || '../../core/src/**/*.spec.js',
+      global.KARMA_SPEC_FILES || '../../core/src/**/*.spec.js',
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
     ],
@@ -83,7 +83,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [
-      global.BROWSERS || 'local_chrome',
+      global.KARMA_BROWSERS || 'local_chrome',
     ],
 
 

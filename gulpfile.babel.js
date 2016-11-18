@@ -147,13 +147,13 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
         $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
 
         // Pass parameters to Karma config file via `global`
-        global.BROWSERS = browsers[j];
+        global.KARMA_BROWSERS = browsers[j];
 
         for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
           $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
 
           // Pass parameters to Karma config file via `global`
-          global.SPEC_FILES = listOfSpecFiles[i];
+          global.KARMA_SPEC_FILES = listOfSpecFiles[i];
 
           // Launch Karma server and wait until it exits
           await (async () => {
@@ -192,8 +192,8 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
         }
       }
     } finally {
-      global.BROWSERS = undefined;
-      global.SPEC_FILES = undefined;
+      global.KARMA_BROWSERS = undefined;
+      global.KARMA_SPEC_FILES = undefined;
     }
 
     if (testsPassed) {
