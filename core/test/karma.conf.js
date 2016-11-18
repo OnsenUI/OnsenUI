@@ -71,17 +71,17 @@ module.exports = function(config) {
 
     // define browser launchers which can be used in the `browsers` property.
     customLaunchers: {
-      local_chrome: { // alias for `Chrome`
       ////////////////////////////////////////
       // Desktop - Chrome
       ////////////////////////////////////////
+      local_chrome: { // alias for `Chrome` (defined by `karma-chrome-launcher`)
         base: 'Chrome',
       },
-      local_safari: { // alias for `Safari`
 
       ////////////////////////////////////////
       // Desktop - Safari
       ////////////////////////////////////////
+      local_safari: { // alias for `Safari` (defined by `karma-safari-launcher`)
         base: 'Safari',
       },
 

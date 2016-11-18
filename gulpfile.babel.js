@@ -127,9 +127,14 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   //    gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
   //    gulp unit-test --separately --specs "core/src/**/index.spec.js"
   //    gulp unit-test --separately --specs "core/src/**/*.spec.js"
+  //
+  //    # run unit tests in a particular browser
+  //    gulp unit-test --browsers local_chrome # default
+  //    gulp unit-test --browsers local_chrome,local_safari # you can use commas
+  //    gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
 
   (async () => {
-    const specs = argv.specs || 'core/src/**/*.spec.js'; // commas cannot be used
+    const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
     const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome'];
 
     let listOfSpecFiles;
