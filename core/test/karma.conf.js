@@ -72,11 +72,127 @@ module.exports = function(config) {
     // define browser launchers which can be used in the `browsers` property.
     customLaunchers: {
       local_chrome: { // alias for `Chrome`
+      ////////////////////////////////////////
+      // Desktop - Chrome
+      ////////////////////////////////////////
         base: 'Chrome',
       },
       local_safari: { // alias for `Safari`
+
+      ////////////////////////////////////////
+      // Desktop - Safari
+      ////////////////////////////////////////
         base: 'Safari',
       },
+
+      ////////////////////////////////////////
+      // Mobile - Android Chrome
+      ////////////////////////////////////////
+
+      ////////////////////////////////////////
+      // Mobile - Android WebView
+      ////////////////////////////////////////
+
+      ////////////////////////////////////////
+      // Mobile - Android CrossWalk WebView
+      ////////////////////////////////////////
+
+      ////////////////////////////////////////
+      // Mobile - iOS Safari (iOS 8.1 - iOS 10.0)
+      ////////////////////////////////////////
+      // To use a browser launcher which has `base: 'SauceLabs'`,
+      // set process.env.SAUCE_USERNAME and process.env.SAUCE_ACCESS_KEY.
+      // For more information, see https://github.com/karma-runner/karma-sauce-launcher
+      remote_iphone_5_simulator_ios_8_1_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '8.1',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_8_2_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '8.2',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_8_3_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '8.3',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_8_4_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '8.4',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_9_0_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '9.0',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_9_1_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '9.1',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_9_2_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '9.2',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_9_3_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '9.3',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+      remote_iphone_5_simulator_ios_10_0_safari: {
+        base: 'SauceLabs',
+        appiumVersion: '1.6.0',
+        deviceName: 'iPhone 5 Simulator',
+        platformName: 'iOS',
+        platformVersion: '10.0',
+        deviceOrientation: 'portrait',
+        browserName: 'Safari',
+      },
+
+      ////////////////////////////////////////
+      // Mobile - iOS UIWebView
+      ////////////////////////////////////////
+
+      ////////////////////////////////////////
+      // Mobile - iOS WKWebView
+      ////////////////////////////////////////
+
     },
 
 
@@ -91,6 +207,8 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
 
-    autoWatchBatchDelay: 500
+    autoWatchBatchDelay: 500,
+
+    captureTimeout: 15 * 60 * 1000 // Sauce Labs sometimes requires a long time, so default value (60000) is not enough
   });
 };
