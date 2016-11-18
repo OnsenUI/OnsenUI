@@ -71,19 +71,19 @@ module.exports = function(config) {
 
     // define browser launchers which can be used in the `browsers` property.
     customLaunchers: {
-        local_chrome: { // alias for `Chrome`
-            base: 'Chrome',
-        },
-        local_safari: { // alias for `Safari`
-            base: 'Safari',
-        },
+      local_chrome: { // alias for `Chrome`
+        base: 'Chrome',
+      },
+      local_safari: { // alias for `Safari`
+        base: 'Safari',
+      },
     },
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [
-      global.KARMA_BROWSERS || 'local_chrome',
+      global.KARMA_BROWSER || 'local_chrome',
     ],
 
 
