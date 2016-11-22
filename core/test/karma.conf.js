@@ -88,6 +88,21 @@ module.exports = function(config) {
       local_safari: { // alias for `Safari` (defined by `karma-safari-launcher`)
         base: 'Safari',
       },
+      // To use a browser launcher which has `base: 'SauceLabs'`,
+      // set process.env.SAUCE_USERNAME and process.env.SAUCE_ACCESS_KEY.
+      // For more information, see https://github.com/karma-runner/karma-sauce-launcher
+      remote_macos_elcapitan_safari_9: {
+        base: 'SauceLabs',
+        platform: 'OS X 10.11',
+        browserName: 'Safari',
+        version: '9.0',
+      },
+      remote_macos_elcapitan_safari_10: {
+        base: 'SauceLabs',
+        platform: 'OS X 10.11',
+        browserName: 'Safari',
+        version: '10.0',
+      },
 
       ////////////////////////////////////////
       // Mobile - Android Chrome
