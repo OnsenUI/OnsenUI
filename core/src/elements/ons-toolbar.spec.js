@@ -16,6 +16,7 @@ describe('OnsToolbarElement', () => {
     expect(window.ons.ToolbarElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('navigation-bar--hoge')).to.be.true;
@@ -46,18 +47,21 @@ describe('OnsToolbarElement', () => {
     expect(element.children[2].classList.contains('navigation-bar--piyo__right')).not.to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('has \'left\' class value in its first child', () => {
     expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
     expect(element.children[0].classList.contains('navigation-bar__center')).not.to.be.true;
     expect(element.children[0].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('has \'center\' class value in its second child', () => {
     expect(element.children[1].classList.contains('navigation-bar__left')).not.to.be.true;
     expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
     expect(element.children[1].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('has \'right\' class value in its third child', () => {
     expect(element.children[2].classList.contains('navigation-bar__left')).not.to.be.true;
     expect(element.children[2].classList.contains('navigation-bar__center')).not.to.be.true;
@@ -80,11 +84,13 @@ describe('OnsToolbarElement', () => {
   */
 
   describe('#_compile()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('removes non-element children', () => {
       const element = ons._util.createElement('<ons-toolbar>Test1<div class="center">Test2</div></ons-toolbar>');
       expect(element.childNodes[0].nodeValue).not.to.equal('Test1');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sorts its children depending on their class', () => {
       const element = ons._util.createElement('<ons-toolbar><div class="center">Test2</div><div class="right">Test3</div><div class="left">Test1</div></ons-toolbar>');
       expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
@@ -102,6 +108,7 @@ describe('OnsToolbarElement', () => {
   });
 
   describe('autoStyling', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');

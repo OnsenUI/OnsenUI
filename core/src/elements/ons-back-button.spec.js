@@ -5,6 +5,7 @@ describe('OnsBackButtonElement', () => {
     expect(window.ons.BackButtonElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides \'modifier\' attribute', () => {
     const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
 
@@ -22,6 +23,7 @@ describe('OnsBackButtonElement', () => {
     expect(element.classList.contains('back-button--fuga')).to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('has two children', () => {
     const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
     document.body.appendChild(element);
@@ -31,6 +33,7 @@ describe('OnsBackButtonElement', () => {
     expect(element.children[2]).not.to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   describe('#_onClick()', () => {
     let div, nav;
 
@@ -99,6 +102,7 @@ describe('OnsBackButtonElement', () => {
     });
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android', () => {
       ons.platform.select('android');

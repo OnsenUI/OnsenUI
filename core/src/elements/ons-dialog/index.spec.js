@@ -22,6 +22,7 @@ describe('OnsDialogElement', () => {
     expect(window.ons.DialogElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides \'modifier\' attribute', () => {
     const element = dialog.querySelector('.dialog');
 
@@ -40,12 +41,14 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#_mask', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is an HTML element', () => {
       expect(dialog._mask).to.be.an.instanceof(HTMLElement);
     });
   });
 
   describe('#_dialog', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is an HTML element', () => {
       expect(dialog._dialog).to.be.an.instanceof(HTMLElement);
     });
@@ -62,12 +65,14 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns the back button handler', () => {
       expect(dialog.onDeviceBackButton).to.be.an('object');
     });
   });
 
   describe('#onDeviceBackButton', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('cancels if dialog is cancelable', () => {
       const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
@@ -75,6 +80,7 @@ describe('OnsDialogElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('calls parent handler if dialog is not cancelable', () => {
       const event = {};
       const spy = chai.spy.on(event, 'callParentHandler');
@@ -121,6 +127,7 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#show()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('shows the dialog', () => {
       expect(dialog.style.display).to.equal('none');
       dialog.show();
@@ -137,6 +144,7 @@ describe('OnsDialogElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('emits \'postshow\' event', () => {
       const promise = new Promise((resolve) => {
         dialog.addEventListener('postshow', resolve);
@@ -147,6 +155,7 @@ describe('OnsDialogElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('can be cancelled', () => {
       dialog.addEventListener('preshow', (event) => {
         event.detail.cancel();
@@ -156,6 +165,7 @@ describe('OnsDialogElement', () => {
       expect(dialog.style.display).to.equal('none');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns a promise that resolves to the displayed element', () => {
       return expect(dialog.show()).to.eventually.be.fulfilled.then(
         element => {
@@ -171,6 +181,7 @@ describe('OnsDialogElement', () => {
       dialog.show({animation: 'none'});
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('hides the dialog', () => {
       expect(dialog.style.display).to.equal('block');
       dialog.hide({animation: 'none'});
@@ -206,6 +217,7 @@ describe('OnsDialogElement', () => {
       expect(dialog.style.display).to.equal('block');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns a promise that resolves to the hidden element', () => {
       return expect(dialog.hide()).to.eventually.be.fulfilled.then(
         element => {
@@ -217,6 +229,7 @@ describe('OnsDialogElement', () => {
   });
 
   describe('#visible', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns whether the dialog is visible or not', () => {
       expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
@@ -239,6 +252,7 @@ describe('OnsDialogElement', () => {
   });
 
   describe('autoStyling', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-dialog>contents</ons-dialog>');

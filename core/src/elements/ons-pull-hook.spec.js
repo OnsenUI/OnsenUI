@@ -1,5 +1,6 @@
 'use strict';
 
+if (['local_chrome'].indexOf(window.browser) != -1)
 describe('OnsPullHookElement', () => {
   it('exists', () => {
     expect(window.ons.PullHookElement).to.be.ok;

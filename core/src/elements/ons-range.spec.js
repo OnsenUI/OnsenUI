@@ -22,6 +22,7 @@ describe('OnsRangeElement', () => {
     expect(element._input.classList.contains('range')).to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides \'modifier\' attribute', () => {
     const input = element.querySelector('input');
 

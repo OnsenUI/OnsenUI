@@ -20,6 +20,7 @@ describe('OnsPageElement', () => {
     expect(element.classList.contains('page')).to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('should fill class name automatically on content wrapper element', () => {
     const page = ons._util.createElement(`<ons-page>
       <div class="content">...</div>
@@ -28,6 +29,7 @@ describe('OnsPageElement', () => {
     expect(page.querySelector('.page__content').textContent).to.be.equal('...');
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('should fill class name automatically on background element', () => {
     const page = ons._util.createElement(`<ons-page>
       <div class="background" id="test">...</div>
@@ -36,6 +38,7 @@ describe('OnsPageElement', () => {
     expect(page.querySelector('.page__background').id).to.be.equal('test');
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('should create background element automatically', () => {
     const page = ons._util.createElement(`<ons-page>
       <div class="page__content">...</div>
@@ -53,6 +56,7 @@ describe('OnsPageElement', () => {
       return expect(initPromise).to.eventually.be.fulfilled;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('consumes _skipinit attribute if present', () => {
       element.setAttribute('_skipinit', '');
       expect(element.hasAttribute('_skipinit')).to.be.true;
@@ -62,6 +66,7 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_tryToFillStatusBar()', (done) => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('fills status bar', () => {
       var tmp = ons._internal.autoStatusBarFill;
       ons._internal.autoStatusBarFill = action => action();
@@ -72,6 +77,7 @@ describe('OnsPageElement', () => {
   });
 
   describe('#detachedCallback', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('fires \'destroy\' event', () => {
       var spy = chai.spy();
       document.addEventListener('destroy', spy);
@@ -100,6 +106,7 @@ describe('OnsPageElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is correctly deleted', () => {
       element.onDeviceBackButton = () => { return; };
       expect(element._backButtonHandler).to.be.ok;
@@ -110,10 +117,12 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_getBackgroundElement()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('gets page__background', () => {
       expect(() => element._getBackgroundElement()).not.to.throw(Error);
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('throws page__background error', () => {
       element.removeChild(element.getElementsByClassName('page__background')[0]);
       expect(() => element._getBackgroundElement()).to.throw(Error);
@@ -121,6 +130,7 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_getContentElement()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('throws page__content error', () => {
       element.removeChild(element.getElementsByClassName('page__content')[0]);
       expect(() => element._getContentElement()).to.throw(Error);
@@ -128,12 +138,14 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_canAnimateToolbar()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;
       element.insertBefore(new ons.ToolbarElement(), element.children[0]);
       expect(element._canAnimateToolbar()).to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('works with toolbar in page__content', () => {
       expect(element._canAnimateToolbar()).to.be.false;
       element.lastChild.appendChild(new ons.ToolbarElement());
@@ -148,6 +160,7 @@ describe('OnsPageElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sets _onInfiniteScroll', () => {
       let i = 0;
       window._testApp = {
@@ -162,6 +175,7 @@ describe('OnsPageElement', () => {
       expect(i).to.equal(84);
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('infiniteScroll doesn\'t throw error until it\'s called', () => {
       const app = {a: () => 42};
       element.attributeChangedCallback('on-infinite-scroll', '', '_testApp.a');
@@ -184,6 +198,7 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_hide()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('fires \'hide\' event', () => {
       var spy = chai.spy();
       document.addEventListener('hide', spy);
@@ -203,6 +218,7 @@ describe('OnsPageElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds elements in correct order', () => {
       const div = document.createElement('div');
       div.innerHTML = '<ons-page><span>test</span><ons-toolbar></ons-toolbar></ons-page>';
@@ -238,6 +254,7 @@ describe('OnsPageElement', () => {
   });
 
   describe('autoStyling', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-page>content</ons-page>');
@@ -246,6 +263,7 @@ describe('OnsPageElement', () => {
     });
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   describe('infiniteScroll', () => {
     var content, page, i, maxScroll;
     beforeEach(() => {

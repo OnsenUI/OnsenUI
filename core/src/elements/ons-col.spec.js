@@ -26,6 +26,7 @@ describe('OnsColElement', () => {
   });
 
   describe('#attributeChangedCallback()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('provides \'width\' attribute', () => {
       var element = new ons.ColElement();
       element.setAttribute('width', '100px');

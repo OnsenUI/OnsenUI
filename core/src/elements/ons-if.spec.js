@@ -10,6 +10,7 @@ describe('ons-if', () => {
     expect(element.hasChildNodes()).not.to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('filters depending on \'platform\' attribute', () => {
     ons.platform.select('android');
     let element = ons._util.createElement('<ons-if platform="android">Content</ons-if>');
@@ -19,6 +20,7 @@ describe('ons-if', () => {
     expect(element.hasChildNodes()).not.to.be.true;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('filters depending on \'orientation\' attribute', (done) => {
     const originalIsPortrait = ons.orientation._isPortrait;
     let isPortrait = true;

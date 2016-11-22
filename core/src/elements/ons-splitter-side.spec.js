@@ -55,6 +55,7 @@ describe('OnsSplitterSideElement', () => {
       template = null;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns a promise that resolves to the new page element', () => {
       return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(page => {
         expect(page).to.equal(left.children[0]);
@@ -64,6 +65,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#open()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('should open ons-splitter-side', () => {
       return expect(right.open()).to.eventually.be.fulfilled.then(element => {
         expect(element).to.equal(right);
@@ -73,6 +75,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#close()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('should close ons-splitter-side', () => {
       return right.open().then(() => {
         return expect(right.close()).to.eventually.be.fulfilled.then(element => {
@@ -84,6 +87,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#isOpen', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('should return boolean', (done) => {
       expect(right.isOpen).to.be.false;
       expect(left.isOpen).to.be.false;
@@ -95,6 +99,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#toggle()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('toggle open or close state', (done) => {
       expect(right.isOpen).to.be.false;
       right.toggle({callback: () => {

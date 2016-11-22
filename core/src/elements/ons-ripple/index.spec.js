@@ -71,16 +71,19 @@ describe('OnsRippleElement', () => {
       expect(spy).to.have.been.called.exactly(attributes.length);
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sets the color of the wave based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(wave.style.background).to.equal('black');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sets the color of the background based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(background.style.background).to.equal('black');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sets the color of the background based on the "background" attribute', () => {
       ripple.setAttribute('color', 'black');
       ripple.setAttribute('background', 'rgb(0, 255, 255)');
@@ -89,11 +92,13 @@ describe('OnsRippleElement', () => {
       expect(background.style.background).to.equal('rgb(0, 255, 255)');
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('disables background if the "background" attribute is "none"', () => {
       ripple.setAttribute('background', 'none');
       expect(background.hasAttribute('disabled')).to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('makes sure the background is enabled if "background != none"', () => {
       background.setAttribute('disabled', 'disabled');
       ripple.setAttribute('background', 'rgb(0, 123, 5)');
@@ -128,6 +133,7 @@ describe('OnsRippleElement', () => {
       expect(coords.r).to.equal(500);
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('cares about it\'s center', () => {
       ons._util.extend(ripple.style, style);
       ripple.setAttribute('center', 'true');
@@ -185,6 +191,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onHold()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('sets _holding', () => {
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);
@@ -195,6 +202,7 @@ describe('OnsRippleElement', () => {
   describe('#_onDragStart()', () => {
     itCalls('_rippleAnimation').whenUsing('_onDragStart', e);
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('calls _onRelease', () => {
       const spy = spyOn('_onRelease');
 
@@ -205,6 +213,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onRelease()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('unsets _holding', () => {
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;

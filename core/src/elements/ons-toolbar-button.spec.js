@@ -5,6 +5,7 @@ describe('ons-toolbar-button', () => {
     expect(window.ons.ToolbarButtonElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides modifier attribute', () => {
     var element = new ons.ToolbarButtonElement();
     element.setAttribute('modifier', 'hoge');

@@ -124,6 +124,7 @@ describe('ons.platform', () => {
   });
 
   describe('#isChrome()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns true if platform is Chrome', () => {
       expect(ons.platform.isChrome()).to.be.true;
     });

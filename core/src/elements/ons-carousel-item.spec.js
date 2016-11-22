@@ -5,6 +5,7 @@ describe('OnsCarouselItemElement', () => {
     expect(window.ons.CarouselItemElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides \'modifier\' attribute', () => {
     var carouselItem = new ons.CarouselItemElement();
 

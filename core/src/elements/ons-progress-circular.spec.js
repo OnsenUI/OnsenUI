@@ -12,6 +12,7 @@ describe('OnsProgressCircularElement', () => {
     expect(window.ons.ProgressCircularElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('provides modifier attribute', () => {
     var template = progress._template,
       primary = progress._primary,
@@ -35,6 +36,7 @@ describe('OnsProgressCircularElement', () => {
   });
 
   describe('#_updateDeterminate()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is called when the "indeterminate" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateDeterminate');
 
@@ -46,6 +48,7 @@ describe('OnsProgressCircularElement', () => {
   });
 
   describe('#_updateValue()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is called when the "value" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateValue');
 
@@ -53,6 +56,7 @@ describe('OnsProgressCircularElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is called when the "secondary-value" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateValue');
 
@@ -62,6 +66,7 @@ describe('OnsProgressCircularElement', () => {
   });
 
   describe('#_compile()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('is called when an element is created', () => {
       const spy = chai.spy.on(window.ons.ProgressCircularElement.prototype, '_compile');
       ons._util.createElement('<ons-progress-circular> </ons-progress-circular>');

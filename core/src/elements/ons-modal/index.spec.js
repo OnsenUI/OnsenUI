@@ -22,15 +22,18 @@ describe('OnsModalElement', () => {
     expect(window.ons.ModalElement).to.be.ok;
   });
 
+  if (['local_chrome'].indexOf(window.browser) != -1)
   it('is not displayed by default', () => {
     expect(element.style.display).to.equal('none');
   });
 
   describe('#_compile()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds a class \'modal\' by default', () => {
       expect(element.classList.contains('modal')).to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('adds a \'modal__content\' by default', () => {
       const wrapper = document.createElement('div');
       element.appendChild(wrapper);
@@ -47,6 +50,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#show()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('displays the modal', () => {
       expect(element.style.display).to.equal('none');
       element.show();
@@ -87,6 +91,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#toggle()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('alternates the modal displaying state', () => {
       expect(element.style.display).to.equal('none');
       element.toggle();
@@ -99,6 +104,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#visible', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns whether the modal is shown', () => {
       expect(element.style.display).to.equal('none');
       expect(element.visible).to.be.false;
@@ -110,14 +116,17 @@ describe('OnsModalElement', () => {
 
 
   describe('#onDeviceBackButton', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('gets the callback', () => {
       expect(element.onDeviceBackButton).to.be.ok;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns nothing by default', () => {
       expect(element.onDeviceBackButton._callback()).not.to.be.ok;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('overwrites the callback', () => {
       const spy = chai.spy.on(element._backButtonHandler, 'destroy');
       element.onDeviceBackButton = () => { return; };

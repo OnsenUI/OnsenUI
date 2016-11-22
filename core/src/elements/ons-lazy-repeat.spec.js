@@ -1,5 +1,6 @@
 'use strict';
 
+if (['local_chrome'].indexOf(window.browser) != -1)
 describe('OnsLazyRepeatElement', () => {
   let element;
   let lazyRepeat;

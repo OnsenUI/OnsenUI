@@ -50,6 +50,7 @@ describe('ons-splitter-content', () => {
   });
 
   describe('#load()', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('returns a promise that resolves to the new page element', () => {
       return expect(content.load('hoge.html')).to.eventually.be.fulfilled.then(
         page => {

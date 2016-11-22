@@ -6,6 +6,7 @@ describe('OnsIconElement', () => {
   });
 
   describe('icon attribute', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('provides \'icon\' attribute', () => {
       var element = new ons.IconElement();
       element.setAttribute('icon', 'ion-navicon');
@@ -28,6 +29,7 @@ describe('OnsIconElement', () => {
       expect(element.classList.contains('zmdi')).not.to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('supports a second icon depending on modifiers', () => {
       var element = new ons.IconElement();
       element.setAttribute('icon', 'ion-navicon, material:md-face');
@@ -44,6 +46,7 @@ describe('OnsIconElement', () => {
   });
 
   describe('size attribute', () => {
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('provides \'size\' attribute', () => {
       var element = new ons.IconElement();
       element.setAttribute('size', '10px');
@@ -67,6 +70,7 @@ describe('OnsIconElement', () => {
       expect(element.classList.contains('fa-5x')).not.to.be.true;
     });
 
+    if (['local_chrome'].indexOf(window.browser) != -1)
     it('supports a second size depending on modifiers', () => {
       var element = new ons.IconElement();
       element.setAttribute('size', '20px, material:30px');
