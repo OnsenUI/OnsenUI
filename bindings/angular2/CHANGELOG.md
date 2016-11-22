@@ -12,6 +12,9 @@ CHANGELOG
 1.0.0-rc.4 (Work In Progress)
 ----
 
+### Bug fixes
+ * Force change detection when pushing pages to correctly refresh view.
+
 -->
 
 1.0.0-rc.3 (2016-11-15)
