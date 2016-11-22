@@ -228,6 +228,8 @@ module.exports = function(config) {
 
     autoWatchBatchDelay: 500,
 
-    captureTimeout: 15 * 60 * 1000 // Sauce Labs sometimes requires a long time, so default value (60000) is not enough
+    captureTimeout: 15 * 60 * 1000, // Sauce Labs sometimes requires a long time, so default value (60000) is not enough
+
+    browserNoActivityTimeout: 60 * 1000, // same as above, default value (10000) is not enough
   });
 };
