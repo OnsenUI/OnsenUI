@@ -127,9 +127,15 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   //    gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
   //    gulp unit-test --separately --specs "core/src/**/index.spec.js"
   //    gulp unit-test --separately --specs "core/src/**/*.spec.js"
+  //
+  //    # run unit tests in a particular browser
+  //    gulp unit-test --browsers local_chrome # default
+  //    gulp unit-test --browsers local_chrome,local_safari # you can use commas
+  //    gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
 
   (async () => {
-    const specs = argv.specs || 'core/src/**/*.spec.js'; // commas cannot be used
+    const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
+    const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome'];
 
     let listOfSpecFiles;
     if (argv.separately) { // resolve glob pattern
@@ -138,58 +144,70 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       listOfSpecFiles = new Array( path.join(__dirname, specs) );
     }
 
-    // Separately launch Karma server for each set of spec files
+    let testsPassed = true; // error flag
+
+    // Separately launch Karma server for each browser and each set of spec files
     try {
-      for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
-        $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
+      for (let j = 0 ; j < browsers.length ; j++) {
+        $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
 
         // Pass parameters to Karma config file via `global`
-        global.SPEC_FILES = listOfSpecFiles[i];
+        global.KARMA_BROWSER = browsers[j];
 
-        // Launch Karma server and wait until it exits
-        await (async () => {
-          return new Promise((resolve, reject) => {
-            new karma.Server(
-              {
-                configFile: path.join(__dirname, 'core/test/karma.conf.js'),
-                singleRun: true, // overrides the corresponding option in config file
-                autoWatch: false // same as above
-              },
-              (exitCode) => {
-                const exitMessage = `Karma server has exited with ${exitCode}`;
+        for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
+          $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
 
-                switch (exitCode) {
-                  case 0: // success
-                    $.util.log($.util.colors.green(exitMessage));
-                    $.util.log($.util.colors.green('Passed unit tests successfully.'));
-                    resolve();
-                    break;
-                  default: // error
-                    $.util.log($.util.colors.red(exitMessage));
-                    $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-                    if (argv.separately) { // in --separately mode, ignore errors
-                      resolve();
-                    } else { // not in --separately mode, kill task on errors
-                      done('unit-test has failed');
-                    }
+          // Pass parameters to Karma config file via `global`
+          global.KARMA_SPEC_FILES = listOfSpecFiles[i];
+
+          // Launch Karma server and wait until it exits
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              new karma.Server(
+                {
+                  configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+                  singleRun: true, // overrides the corresponding option in config file
+                  autoWatch: false // same as above
+                },
+                (exitCode) => {
+                  const exitMessage = `Karma server has exited with ${exitCode}`;
+
+                  switch (exitCode) {
+                    case 0: // success
+                      $.util.log($.util.colors.green(exitMessage));
+                      $.util.log($.util.colors.green('Passed unit tests successfully.'));
+                      break;
+                    default: // error
+                      $.util.log($.util.colors.red(exitMessage));
+                      $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+                      testsPassed = false;
+                  }
+                  resolve();
                 }
-              }
-            ).start();
-          });
-        })();
+              ).start();
+            });
+          })();
 
-        // Wait for 500 ms before next iteration to avoid crashes
-        await (async () => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => { resolve(); }, 500 );
-          });
-        })();
+          // Wait for 500 ms before next iteration to avoid crashes
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => { resolve(); }, 500 );
+            });
+          })();
+        }
       }
     } finally {
-      global.SPEC_FILES = undefined;
+      global.KARMA_BROWSER = undefined;
+      global.KARMA_SPEC_FILES = undefined;
     }
 
-    done();
+    if (testsPassed) {
+      $.util.log($.util.colors.green('Passed unit tests on all browsers!'));
+      done();
+    } else {
+      $.util.log($.util.colors.red('Failed to pass unit tests on some browsers.'));
+      done('unit-test has failed');
+    }
   })();
 });
 
