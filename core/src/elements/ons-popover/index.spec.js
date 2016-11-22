@@ -250,8 +250,14 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'style\' attribute', () => {
-    const popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
-    expect(popover._popover.style.background).to.equal('blue');
+    it ('works', (done) => {
+      const popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
+
+      setImmediate(() => {
+        expect(popover._popover.style.background).to.equal('blue');
+        done();
+      });
+    });
   });
 
 
