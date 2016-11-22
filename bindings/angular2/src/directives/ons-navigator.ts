@@ -107,6 +107,11 @@ export class OnsNavigator implements OnDestroy {
 
         this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
+        /**
+         * Force change detection to refresh view.
+         */
+        pageComponentRef.changeDetectorRef.detectChanges();
+
         done(pageElement);
       },
       element => {
