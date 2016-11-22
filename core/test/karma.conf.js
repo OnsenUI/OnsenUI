@@ -54,6 +54,8 @@ module.exports = function(config) {
       type: 'lcov'
     },
 
+    failOnEmptyTestSuite: false,
+
     // web server port
     port: 9876,
 
