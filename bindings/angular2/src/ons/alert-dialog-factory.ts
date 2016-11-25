@@ -4,7 +4,8 @@ import {
   Injectable,
   ApplicationRef,
   ComponentRef,
-  ReflectiveInjector
+  ReflectiveInjector,
+  Type
 } from '@angular/core';
 import {Params} from './params';
 
@@ -26,7 +27,7 @@ export class AlertDialogFactory {
   ) {
   }
 
-  createAlertDialog(componentType: any, params: Object = {}): Promise<AlertDialogRef> { // TODO: fix "any"
+  createAlertDialog(componentType: Type<any>, params: Object = {}): Promise<AlertDialogRef> {
     return new Promise(resolve => {
       setImmediate(() => {
         const factory = this._resolver.resolveComponentFactory(componentType);
@@ -34,10 +35,31 @@ export class AlertDialogFactory {
           {provide: Params, useValue: new Params(params)}
         ], this._injector);
 
-        const rootViewContainerRef = this._appRef['_rootComponents'][0]['_hostElement'].vcRef; // TODO: fix this dirty hack
-        const componentRef = rootViewContainerRef.createComponent(factory, 0, injector);
-        const element = componentRef.location.nativeElement.children[0];
+        const componentRef = factory.create(injector);
+        const rootElement = componentRef.location.nativeElement;
+
+        const rootContainer = this._appRef['_rootComponents'][0].location.nativeElement;
+        rootContainer.appendChild(rootElement);
+        if (this._appRef['registerChangeDetector']) {
+          this._appRef['registerChangeDetector'](componentRef.changeDetectorRef);
+        }
+
+        componentRef.onDestroy(() => {
+          if (this._appRef['unregisterChangeDetector']) {
+            this._appRef['unregisterChangeDetector'](componentRef.changeDetectorRef);
+          }
+
+          if (rootElement.parentNode) {
+            rootElement.parentNode.removeChild(rootElement);
+          }
+        });
+
+        const element = rootElement.children[0];
         const alertDialogElement = element.tagName === 'ONS-ALERT-DIALOG' ? element : element.querySelector('ons-alert-dialog');
+
+        if (!alertDialogElement) {
+          throw Error('<ons-alert-dialog> element is not found in component\'s template.');
+        }
 
         resolve({alertDialog: alertDialogElement, destroy: () => componentRef.destroy()});
       });
