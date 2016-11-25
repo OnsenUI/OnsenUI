@@ -6,9 +6,11 @@ import {
   ApplicationRef,
   ComponentRef,
   ViewContainerRef,
-  ReflectiveInjector
+  ReflectiveInjector,
+  Type
 } from '@angular/core';
 import {Params} from './params';
+import {ComponentLoader} from './component-loader';
 
 export interface PopoverRef {
   popover: any;
@@ -24,7 +26,8 @@ export class PopoverFactory {
   constructor(
     private _injector: Injector,
     private _resolver: ComponentFactoryResolver,
-    private _appRef: ApplicationRef
+    private _appRef: ApplicationRef,
+    private _componentLoader: ComponentLoader
   ) {
   }
 
@@ -35,11 +38,17 @@ export class PopoverFactory {
         const injector = ReflectiveInjector.resolveAndCreate([
           {provide: Params, useValue: new Params(params)}
         ], this._injector);
+        const componentRef = factory.create(injector);
+        const rootElement = componentRef.location.nativeElement;
 
-        const rootViewContainerRef = this._appRef['_rootComponents'][0]['_hostElement'].vcRef; // TODO: fix this dirty hack
-        const componentRef = rootViewContainerRef.createComponent(factory, 0, injector);
-        const element = componentRef.location.nativeElement.children[0];
+        this._componentLoader.load(componentRef);
+
+        const element = rootElement.children[0];
         const popoverElement = element.tagName === 'ONS-POPOVER' ? element : element.querySelector('ons-popover');
+
+        if (!popoverElement) {
+          throw Error('<ons-popover> element is not found in component\'s template.');
+        }
 
         resolve({popover: popoverElement, destroy: () => componentRef.destroy()});
       });
