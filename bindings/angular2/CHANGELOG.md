@@ -12,23 +12,23 @@ CHANGELOG
 1.0.0-rc.4 (Work In Progress)
 ----
 
- * Updated Angular to 2.2.0.
+ * Updated Angular to 2.2.1.
 
 ### PEER-DEPENDENCY UPDATES
  * **@angular/common**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/compiler**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/compiler-cli**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/core**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/forms**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/platform-browser**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
  * **@angular/platform-browser-dynamic**:
-    * `^2.0.0` ----> `^2.2.0`
+    * `^2.0.0` ----> `^2.2.1`
 
 -->
 
