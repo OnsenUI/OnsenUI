@@ -29,6 +29,8 @@ CHANGELOG
     * `^2.0.0` ----> `^2.2.1`
  * **@angular/platform-browser-dynamic**:
     * `^2.0.0` ----> `^2.2.1`
+### Bug Fixes
+ * Navigator params should accept any type.
 
 -->
 
