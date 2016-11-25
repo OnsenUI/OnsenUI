@@ -12,6 +12,9 @@ CHANGELOG
 1.0.0-rc.4 (Work In Progress)
 ----
 
+### Bug Fixes
+ * Navigator params should accept any type.
+
 -->
 
 1.0.0-rc.3 (2016-11-15)
