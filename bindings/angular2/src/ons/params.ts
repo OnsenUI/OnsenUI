@@ -6,7 +6,7 @@ export class Params {
     return this._data[key];
   }
 
-  get data(): Object {
+  get data(): any {
     return this._data;
   }
 }
