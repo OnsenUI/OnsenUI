@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import animit from '../../ons/animit.js';
+
 export class DialogAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {

@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import contentReady from '../../ons/content-ready';
+import animit from '../../ons/animit.js';
 
 export default class SplitterAnimator {
 

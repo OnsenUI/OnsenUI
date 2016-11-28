@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import animit from './animit.js'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
 import notification from './notification';
@@ -40,6 +41,7 @@ import {defaultPageLoader, PageLoader} from './page-loader';
 const ons = {};
 
 ons._util = util;
+ons.animit = animit;
 ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
 ons._internal = internal;
 ons.GestureDetector = GestureDetector;
