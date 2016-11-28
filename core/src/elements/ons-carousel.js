@@ -19,6 +19,7 @@ import util from '../ons/util';
 import BaseElement from '../ons/base-element';
 import GestureDetector from '../ons/gesture-detector';
 import DoorLock from '../ons/doorlock';
+import animit from '../ons/animit.js';
 
 const VerticalModeTrait = {
 

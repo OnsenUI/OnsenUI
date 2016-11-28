@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import animit from '../../ons/animit.js';
 export class AlertDialogAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {

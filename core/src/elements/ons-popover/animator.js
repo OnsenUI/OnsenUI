@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 import util from '../../ons/util';
+import animit from '../../ons/animit.js';
 
 export class PopoverAnimator {
 

@@ -17,6 +17,7 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from '../../ons/util';
+import animit from '../../ons/animit.js';
 
 /**
  * Fade-in screen transition.

@@ -90,8 +90,8 @@ limitations under the License.
           var mainPageTransform = this._generateAbovePageTransform(max);
           var menuPageStyle = this._generateBehindPageStyle(max);
 
-          animit(this._mainPage[0]).queue({transform: mainPageTransform}).play();
-          animit(this._menuPage[0]).queue(menuPageStyle).play();
+          ons.animit(this._mainPage[0]).queue({transform: mainPageTransform}).play();
+          ons.animit(this._menuPage[0]).queue(menuPageStyle).play();
         }
       },
 
@@ -121,7 +121,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue({
               transform: aboveTransform
@@ -135,7 +135,7 @@ limitations under the License.
             })
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(behindStyle, {
               duration: duration,
@@ -159,7 +159,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue({
               transform: aboveTransform
@@ -177,7 +177,7 @@ limitations under the License.
             }.bind(this))
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(behindStyle, {
               duration: duration,
@@ -203,11 +203,11 @@ limitations under the License.
         var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
         var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
 
-        animit(this._mainPage[0])
+        ons.animit(this._mainPage[0])
           .queue({transform: aboveTransform})
           .play();
 
-        animit(this._menuPage[0])
+        ons.animit(this._menuPage[0])
           .queue(behindStyle)
           .play();
       },
