@@ -498,6 +498,10 @@ export default class DialogElement extends BaseElement {
     _animatorDict[name] = Animator;
   }
 
+  static get animators() {
+    return _animatorDict;
+  }
+
   static get DialogAnimator() {
     return DialogAnimator;
   }

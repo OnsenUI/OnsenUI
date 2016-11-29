@@ -24,14 +24,8 @@ import animit from '../../ons/animit.js';
  */
 export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.4,
-      timing: 'cubic-bezier(.1, .7, .1, 1)',
-      delay: 0.05
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'cubic-bezier(.1, .7, .1, 1)', delay = 0.05, duration = 0.4} = {}) {
+    super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;

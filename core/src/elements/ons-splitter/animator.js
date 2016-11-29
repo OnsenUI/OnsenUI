@@ -18,23 +18,18 @@ limitations under the License.
 import util from '../../ons/util';
 import contentReady from '../../ons/content-ready';
 import animit from '../../ons/animit.js';
+import BaseAnimator from '../../ons/base-animator';
 
-export default class SplitterAnimator {
+export default class SplitterAnimator extends BaseAnimator {
 
-  constructor(options = {}) {
-    this._options = {
-      timing: 'cubic-bezier(.1, .7, .1, 1)',
-      duration: '0.3',
-      delay: '0'
-    };
-    this.updateOptions(options);
+  constructor({timing = 'cubic-bezier(.1, .7, .1, 1)', duration = 0.3, delay = 0} = {}) {
+    super({ timing, duration, delay });
   }
 
   updateOptions(options = {}) {
-    util.extend(this._options, options);
-    this._timing = this._options.timing;
-    this._duration = this._options.duration;
-    this._delay = this._options.delay;
+    util.extend(this, {
+      timing: this.timing, duration: this.duration, delay: this.delay
+    }, options);
   }
 
   /**
@@ -72,12 +67,12 @@ export default class SplitterAnimator {
   open(done) {
     animit.runAll(
       animit(this._side)
-        .wait(this._delay)
+        .wait(this.delay)
         .queue({
           transform: `translate3d(${this.minus}100%, 0px, 0px)`
         }, {
-          duration: this._duration,
-          timing: this._timing
+          duration: this.duration,
+          timing: this.timing
         })
         .queue(callback => {
           callback();
@@ -85,14 +80,14 @@ export default class SplitterAnimator {
         }),
 
       animit(this._mask)
-        .wait(this._delay)
+        .wait(this.delay)
         .queue({
           display: 'block'
         })
         .queue({
           opacity: '1'
         }, {
-          duration: this._duration,
+          duration: this.duration,
           timing: 'linear',
         })
     );
@@ -105,12 +100,12 @@ export default class SplitterAnimator {
 
     animit.runAll(
       animit(this._side)
-        .wait(this._delay)
+        .wait(this.delay)
         .queue({
           transform: 'translate3d(0px, 0px, 0px)'
         }, {
-          duration: this._duration,
-          timing: this._timing
+          duration: this.duration,
+          timing: this.timing
         })
         .queue(callback => {
           this._side.style.webkitTransition = '';
@@ -119,11 +114,11 @@ export default class SplitterAnimator {
         }),
 
       animit(this._mask)
-        .wait(this._delay)
+        .wait(this.delay)
         .queue({
           opacity: '0'
         }, {
-          duration: this._duration,
+          duration: this.duration,
           timing: 'linear',
         })
         .queue({

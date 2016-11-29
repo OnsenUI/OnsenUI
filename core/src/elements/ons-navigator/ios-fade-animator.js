@@ -24,16 +24,9 @@ import animit from '../../ons/animit.js';
  */
 export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      timing: 'linear',
-      duration: '0.4',
-      delay: '0'
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'linear', delay = 0, duration = 0.4} = {}) {
+    super({ timing, delay, duration });
   }
-
 
   /**
    * @param {Object} enterPage

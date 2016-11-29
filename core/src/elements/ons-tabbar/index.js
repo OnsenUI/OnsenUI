@@ -595,6 +595,10 @@ export default class TabbarElement extends BaseElement {
     }
     _animatorDict[name] = Animator;
   }
+
+  static get animators() {
+    return _animatorDict;
+  }
 }
 
 customElements.define('ons-tabbar', TabbarElement);

@@ -24,16 +24,9 @@ import animit from '../../ons/animit.js';
  */
 export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      timing: 'ease-out',
-      duration: '0.25',
-      delay: '0'
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'ease-out', delay = 0, duration = 0.25} = {}) {
+    super({ timing, delay, duration });
   }
-
 
   /**
    * @param {Object} enterPage
