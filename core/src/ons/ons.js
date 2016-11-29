@@ -30,6 +30,7 @@ import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import contentReady from './content-ready';
 import {defaultPageLoader, PageLoader} from './page-loader';
+import BaseAnimator from './base-animator';
 
 /**
  * @object ons
@@ -56,6 +57,7 @@ ons._DoorLock = DoorLock;
 ons._contentReady = contentReady;
 ons.defaultPageLoader = defaultPageLoader;
 ons.PageLoader = PageLoader;
+ons._BaseAnimator = BaseAnimator;
 
 ons._readyLock = new DoorLock();
 
