@@ -12,8 +12,7 @@ describe('OnsFabElement', () => {
     expect(window.ons.FabElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     fab.setAttribute('modifier', 'hoge');
     expect(fab.classList.contains('fab--hoge')).to.be.true;
 
@@ -45,8 +44,7 @@ describe('OnsFabElement', () => {
   });
 
   describe('#_updatePosition()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when the "position" attribute changes', () => {
+    onlyChrome(it)('is called when the "position" attribute changes', () => {
       const spy = chai.spy.on(fab, '_updatePosition');
 
       fab.setAttribute('position', 'top left');
@@ -55,8 +53,7 @@ describe('OnsFabElement', () => {
       expect(spy).to.have.been.called.twice;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds the correct class', () => {
+    onlyChrome(it)('adds the correct class', () => {
       fab.setAttribute('position', 'top right');
       expect(fab.classList.contains('fab--top__right')).to.be.true;
 
@@ -179,8 +176,7 @@ describe('OnsFabElement', () => {
   });
 
   describe('autoStyling', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds \'material\' effects on Android', () => {
+    onlyChrome(it)('adds \'material\' effects on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-fab> </ons-fab>');
       expect(e.hasAttribute('ripple')).to.be.true;

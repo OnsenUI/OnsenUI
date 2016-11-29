@@ -24,8 +24,7 @@ describe('OnsPopoverElement', () => {
     expect(window.ons.PopoverElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     const container = popover.querySelector('.popover__container');
     const content = popover.querySelector('.popover__content');
 
@@ -67,8 +66,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should hide the popover if it is cancelable', () => {
+    onlyChrome(it)('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.setAttribute('cancelable', '');
 
@@ -146,8 +144,7 @@ describe('OnsPopoverElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the displayed element', () => {
+    onlyChrome(it)('returns a promise that resolves to the displayed element', () => {
       return expect(popover.show(target)).to.eventually.be.fulfilled.then(element => {
         expect(element).to.equal(popover);
         expect(popoverDisplay()).to.equal('block');
@@ -214,8 +211,7 @@ describe('OnsPopoverElement', () => {
       expect(popoverDisplay()).to.equal('block');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should hide the popover if it is cancelable', () => {
+    onlyChrome(it)('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.show(target);
       popover.setAttribute('cancelable', '');
@@ -289,8 +285,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('autoStyling', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds \'material\' modifier on Android', () => {
+    onlyChrome(it)('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
       expect(e.getAttribute('modifier')).to.equal('material');

@@ -1,8 +1,6 @@
 'use strict';
 
-// beforeEach and afterEach are broken on particular browsers
-if (['local_chrome'].indexOf(window.browser) != -1)
-describe('OnsTabElement', () => {
+onlyChrome(describe)('OnsTabElement', () => {
   let element;
 
   beforeEach(done => {
@@ -45,8 +43,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('modifier attribute', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('modifies the classList of the tab', () => {
+    onlyChrome(it)('modifies the classList of the tab', () => {
       const parent = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -103,8 +100,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('icon attribute', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('sets icon name for the tab', done => {
+    onlyChrome(it)('sets icon name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -132,8 +128,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('label attribute', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('sets label name for the tab', done => {
+    onlyChrome(it)('sets label name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -159,8 +154,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('badge attribute', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('sets badge for the tab', done => {
+    onlyChrome(it)('sets badge for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -264,8 +258,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('#setActive()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('will set the tab as active', done => {
+    onlyChrome(it)('will set the tab as active', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>

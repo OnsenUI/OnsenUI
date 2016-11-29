@@ -55,8 +55,7 @@ describe('OnsSplitterSideElement', () => {
       template = null;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the new page element', () => {
+    onlyChrome(it)('returns a promise that resolves to the new page element', () => {
       return expect(left.load('hoge.html')).to.eventually.be.fulfilled.then(page => {
         expect(page).to.equal(left.children[0]);
         expect(left.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge');
@@ -65,8 +64,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#open()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should open ons-splitter-side', () => {
+    onlyChrome(it)('should open ons-splitter-side', () => {
       return expect(right.open()).to.eventually.be.fulfilled.then(element => {
         expect(element).to.equal(right);
         return expect(left.open()).to.eventually.be.fulfilled.then(element => expect(element).not.to.be.ok);
@@ -75,8 +73,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#close()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should close ons-splitter-side', () => {
+    onlyChrome(it)('should close ons-splitter-side', () => {
       return right.open().then(() => {
         return expect(right.close()).to.eventually.be.fulfilled.then(element => {
           expect(element).to.equal(right);
@@ -87,8 +84,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#isOpen', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should return boolean', (done) => {
+    onlyChrome(it)('should return boolean', (done) => {
       expect(right.isOpen).to.be.false;
       expect(left.isOpen).to.be.false;
       right.open({callback: () => {
@@ -99,8 +95,7 @@ describe('OnsSplitterSideElement', () => {
   });
 
   describe('#toggle()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('toggle open or close state', (done) => {
+    onlyChrome(it)('toggle open or close state', (done) => {
       expect(right.isOpen).to.be.false;
       right.toggle({callback: () => {
         expect(right.isOpen).to.be.true;

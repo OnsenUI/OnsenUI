@@ -71,9 +71,7 @@ describe('LazyRepeatDelegate', () => {
   });
 });
 
-// beforeEach is broken on particular browsers
-if (['local_chrome'].indexOf(window.browser) != -1)
-describe('LazyRepeatProvider', () => {
+onlyChrome(describe)('LazyRepeatProvider', () => {
   let delegate, template, page, wrapper, provider;
 
   beforeEach(() => {

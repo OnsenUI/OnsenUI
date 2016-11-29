@@ -31,8 +31,7 @@ describe('OnsSwitchElement', () => {
   });
 
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('switch--hoge')).to.be.true;
 
@@ -52,16 +51,14 @@ describe('OnsSwitchElement', () => {
       expect(element.checked).to.be.a('boolean');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds the \'checked\' attribute when set to true', () => {
+    onlyChrome(it)('adds the \'checked\' attribute when set to true', () => {
       element.removeAttribute('checked');
       element.checked = true;
       expect(element.hasAttribute('checked')).to.be.true;
       expect(element._checkbox.hasAttribute('checked')).to.be.true;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes the \'checked\' attribute when set to false', () => {
+    onlyChrome(it)('removes the \'checked\' attribute when set to false', () => {
       element.setAttribute('checked', '');
       expect(element.checked).to.be.true;
       element.checked = false;
@@ -84,8 +81,7 @@ describe('OnsSwitchElement', () => {
       expect(element.hasAttribute('disabled')).to.be.true;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes the \'disabled\' attribute when set to false', () => {
+    onlyChrome(it)('removes the \'disabled\' attribute when set to false', () => {
       element.setAttribute('disabled', '');
       expect(element.disabled).to.be.true;
       element.disabled = false;
@@ -107,16 +103,14 @@ describe('OnsSwitchElement', () => {
       expect(element.hasAttribute('checked')).to.be.true;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes the \'checked\' attribute when set to false', () => {
+    onlyChrome(it)('removes the \'checked\' attribute when set to false', () => {
       element.setAttribute('checked', '');
       expect(element.checked).to.be.true;
       element.checked = false;
       expect(element.hasAttribute('checked')).to.be.false;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('changes the \'checked\' property of it\'s checkbox', () => {
+    onlyChrome(it)('changes the \'checked\' property of it\'s checkbox', () => {
       element.checked = true;
       expect(element._checkbox.checked).to.be.true;
       element.checked = false;
@@ -136,8 +130,7 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('#_onChange()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds the \'checked\' attribute', () => {
+    onlyChrome(it)('adds the \'checked\' attribute', () => {
       element.checked = true;
       element._onChange();
       expect(element.hasAttribute('checked')).to.be.true;
@@ -151,15 +144,13 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('#click()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('changes the value of the checkbox', () => {
+    onlyChrome(it)('changes the value of the checkbox', () => {
       expect(element._checkbox.checked).to.be.false;
       element.click();
       expect(element._checkbox.checked).to.be.true;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('cares if it\'s disabled', () => {
+    onlyChrome(it)('cares if it\'s disabled', () => {
       element.disabled = true;
       expect(element._checkbox.checked).to.be.false;
       element.click();
@@ -171,8 +162,7 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('#attributeChangedCallback()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('toggles material design', () => {
+    onlyChrome(it)('toggles material design', () => {
       element._isMaterial = false;
       element.setAttribute('modifier', 'material');
       expect(element._isMaterial).to.be.true;
@@ -180,8 +170,7 @@ describe('OnsSwitchElement', () => {
       expect(element._isMaterial).to.be.false;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('checks the checkbox', () => {
+    onlyChrome(it)('checks the checkbox', () => {
       element.setAttribute('checked', '');
       expect(element._checkbox.checked).to.be.true;
       expect(element._checkbox.hasAttribute('checked')).to.be.true;
@@ -190,8 +179,7 @@ describe('OnsSwitchElement', () => {
       expect(element._checkbox.hasAttribute('checked')).to.be.false;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('disables the checkbox', () => {
+    onlyChrome(it)('disables the checkbox', () => {
       element.setAttribute('disabled', '');
       expect(element._checkbox.disabled).to.be.true;
       expect(element._checkbox.hasAttribute('disabled')).to.be.true;
@@ -200,8 +188,7 @@ describe('OnsSwitchElement', () => {
       expect(element._checkbox.hasAttribute('disabled')).to.be.false;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('changes the inner input ID', () => {
+    onlyChrome(it)('changes the inner input ID', () => {
       element.setAttribute('input-id', 'myID');
       expect(element._checkbox.id).to.equal('myID');
     });

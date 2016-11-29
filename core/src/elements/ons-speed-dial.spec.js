@@ -26,8 +26,7 @@ describe('OnsSpeedDialElement', () => {
     expect(window.ons.SpeedDialElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     speedDial.setAttribute('modifier', 'hoge');
     expect(speedDial.classList.contains('speed-dial--hoge')).to.be.true;
 
@@ -91,8 +90,7 @@ describe('OnsSpeedDialElement', () => {
   });
 
   describe('#_updateDirection()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when element is created', () => {
+    onlyChrome(it)('is called when element is created', () => {
       const spy = chai.spy.on(window.ons.SpeedDialElement.prototype, '_updateDirection');
       const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="up"><ons-fab></ons-fab></ons-speed-dial>
@@ -101,8 +99,7 @@ describe('OnsSpeedDialElement', () => {
       expect(spy).to.have.been.called.with('up');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called with the value of the direction attribute', () => {
+    onlyChrome(it)('is called with the value of the direction attribute', () => {
       const spy = chai.spy.on(window.ons.SpeedDialElement.prototype, '_updateDirection');
       const speedDial = ons._util.createElement(`
           <ons-speed-dial direction="down"><ons-fab></ons-fab></ons-speed-dial>
@@ -111,8 +108,7 @@ describe('OnsSpeedDialElement', () => {
       expect(spy).to.have.been.called.with('down');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when direction changes', () => {
+    onlyChrome(it)('is called when direction changes', () => {
       const spy = chai.spy.on(speedDial, '_updateDirection');
 
       speedDial.setAttribute('direction', 'left');
@@ -132,8 +128,7 @@ describe('OnsSpeedDialElement', () => {
   });
 
   describe('#_updatePosition()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when the "position" attribute changes', () => {
+    onlyChrome(it)('is called when the "position" attribute changes', () => {
       const spy = chai.spy.on(speedDial, '_updatePosition');
 
       speedDial.setAttribute('position', 'top left');
@@ -142,8 +137,7 @@ describe('OnsSpeedDialElement', () => {
       expect(spy).to.have.been.called.twice;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds the correct class', () => {
+    onlyChrome(it)('adds the correct class', () => {
       speedDial.setAttribute('position', 'top right');
       expect(speedDial.classList.contains('fab--top__right')).to.be.true;
 
@@ -248,8 +242,7 @@ describe('OnsSpeedDialElement', () => {
   });
 
   describe('#set disabled()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('disables it\'s direct fab element', () => {
+    onlyChrome(it)('disables it\'s direct fab element', () => {
       speedDial.disabled = true;
       expect(ons._util.findChild(speedDial, '.fab').disabled).to.be.true;
     });

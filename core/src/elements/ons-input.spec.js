@@ -21,8 +21,7 @@ describe('OnsInputElement', () => {
     expect(window.ons.InputElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element._input.classList.contains('text-input--hoge')).to.be.true;
     expect(element._helper.classList.contains('text-input--hoge__label')).to.be.true;
@@ -37,31 +36,27 @@ describe('OnsInputElement', () => {
   });
 
   describe('#_updateLabel()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when the placeholder attribute changes', () => {
+    onlyChrome(it)('is called when the placeholder attribute changes', () => {
       const spy = chai.spy.on(element, '_updateLabel');
 
       element.setAttribute('placeholder', 'Password');
       expect(spy).to.have.been.called.once;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes the label text if there is no placeholder attribute', () => {
+    onlyChrome(it)('removes the label text if there is no placeholder attribute', () => {
       element.removeAttribute('placeholder');
       expect(element._helper.innerText).to.equal('');
     });
   });
 
   describe('#_updateBoundAttributes()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is called when one of the bound attribute changes', () => {
+    onlyChrome(it)('is called when one of the bound attribute changes', () => {
       const spy = chai.spy.on(element, '_updateBoundAttributes');
       element.setAttribute('value', 'abc');
       expect(spy).to.have.been.called.once;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes attributes from the input element', () => {
+    onlyChrome(it)('removes attributes from the input element', () => {
       element.setAttribute('value', 'abc');
       expect(element._input.getAttribute('value')).to.equal('abc');
       element.removeAttribute('value');
@@ -118,8 +113,7 @@ describe('OnsInputElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('provides \'content-left\' attribute', () => {
+    onlyChrome(it)('provides \'content-left\' attribute', () => {
       let element = ons._util.createElement('<ons-input>content</ons-input>');
       expect(element.firstChild.lastChild.className).to.equal('input-label');
       element = ons._util.createElement('<ons-input content-left>content</ons-input>');
@@ -128,8 +122,7 @@ describe('OnsInputElement', () => {
   });
 
   describe('#type attribute', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('creates checkbox', (done) => {
+    onlyChrome(it)('creates checkbox', (done) => {
       const element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
 
       setImmediate(() => {

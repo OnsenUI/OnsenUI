@@ -24,8 +24,7 @@ describe('OnsCarouselElement', () => {
   });
 
   describe('#_updateSwipeable()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('attaches and removes listeners', () => {
+    onlyChrome(it)('attaches and removes listeners', () => {
       const spyOn = chai.spy.on(carousel._gestureDetector, 'on'),
         spyOff = chai.spy.on(carousel._gestureDetector, 'off');
 
@@ -38,8 +37,7 @@ describe('OnsCarouselElement', () => {
   });
 
   describe('#_updateAutoRefresh()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('starts and stops observing', () => {
+    onlyChrome(it)('starts and stops observing', () => {
       const spyOn = chai.spy.on(carousel._mutationObserver, 'observe'),
         spyOff = chai.spy.on(carousel._mutationObserver, 'disconnect');
 
@@ -79,8 +77,7 @@ describe('OnsCarouselElement', () => {
   });
 
   describe('#_onDirectionChange()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is fired when the \'direction\' attribute is changed', () => {
+    onlyChrome(it)('is fired when the \'direction\' attribute is changed', () => {
       const spy = chai.spy.on(carousel, '_onDirectionChange');
       carousel.setAttribute('direction', 'vertical');
       carousel.setAttribute('direction', 'horizontal');
@@ -170,8 +167,7 @@ describe('OnsCarouselElement', () => {
       expect(carousel.getActiveIndex()).to.equal(2);
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should fire \'postchange\' event', () => {
+    onlyChrome(it)('should fire \'postchange\' event', () => {
       const promise = new Promise((resolve) =>
         carousel.addEventListener('postchange', resolve)
       );
@@ -180,8 +176,7 @@ describe('OnsCarouselElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the element', () => {
+    onlyChrome(it)('returns a promise that resolves to the element', () => {
       return expect(carousel.setActiveIndex(1)).to.be.eventually.fulfilled.then(element => {
         expect(element).to.equal(carousel);
         expect(element.getActiveIndex()).to.equal(1);

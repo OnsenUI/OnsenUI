@@ -29,8 +29,7 @@ describe('OnsAlertDialogElement', () => {
     expect(window.ons.AlertDialogElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     const element = dialog.querySelector('.alert-dialog');
     const content = dialog.querySelector('.alert-dialog-content');
     const title = dialog.querySelector('.alert-dialog-title');
@@ -53,22 +52,19 @@ describe('OnsAlertDialogElement', () => {
   });
 
   describe('#_titleElement', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is an HTML element', () => {
+    onlyChrome(it)('is an HTML element', () => {
       expect(dialog._titleElement).to.be.an.instanceof(HTMLElement);
     });
   });
 
   describe('#_contentElement', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is an HTML element', () => {
+    onlyChrome(it)('is an HTML element', () => {
       expect(dialog._contentElement).to.be.an.instanceof(HTMLElement);
     });
   });
 
   describe('#_dialog', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is an HTML element', () => {
+    onlyChrome(it)('is an HTML element', () => {
       expect(dialog._dialog).to.be.an.instanceof(HTMLElement);
     });
   });
@@ -90,8 +86,7 @@ describe('OnsAlertDialogElement', () => {
   });
 
   describe('#show()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('shows the dialog', () => {
+    onlyChrome(it)('shows the dialog', () => {
       expect(dialog.style.display).to.equal('none');
       dialog.show();
       expect(dialog.style.display).to.equal('block');
@@ -107,8 +102,7 @@ describe('OnsAlertDialogElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('emits \'postshow\' event', () => {
+    onlyChrome(it)('emits \'postshow\' event', () => {
       const promise = new Promise((resolve) => {
         dialog.addEventListener('postshow', resolve);
       });
@@ -118,8 +112,7 @@ describe('OnsAlertDialogElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('can be cancelled', () => {
+    onlyChrome(it)('can be cancelled', () => {
       dialog.addEventListener('preshow', (event) => {
         event.detail.cancel();
       });
@@ -128,8 +121,7 @@ describe('OnsAlertDialogElement', () => {
       expect(dialog.style.display).to.equal('none');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the displayed element', () => {
+    onlyChrome(it)('returns a promise that resolves to the displayed element', () => {
       return expect(dialog.show()).to.eventually.be.fulfilled.then(
         element => {
           expect(element).to.equal(dialog);
@@ -144,8 +136,7 @@ describe('OnsAlertDialogElement', () => {
       dialog.show({animation: 'none'});
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('hides the dialog', () => {
+    onlyChrome(it)('hides the dialog', () => {
       expect(dialog.style.display).to.equal('block');
       dialog.hide({animation: 'none'});
       expect(dialog.style.display).to.equal('none');
@@ -180,8 +171,7 @@ describe('OnsAlertDialogElement', () => {
       expect(dialog.style.display).to.equal('block');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the hidden element', () => {
+    onlyChrome(it)('returns a promise that resolves to the hidden element', () => {
       return expect(dialog.hide()).to.eventually.be.fulfilled.then(
         element => {
           expect(element).to.equal(dialog);
@@ -192,16 +182,14 @@ describe('OnsAlertDialogElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('cancels if dialog is cancelable', () => {
+    onlyChrome(it)('cancels if dialog is cancelable', () => {
       const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
       dialog.onDeviceBackButton._callback();
       expect(spy).to.have.been.called.once;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('calls parent handler if dialog is not cancelable', () => {
+    onlyChrome(it)('calls parent handler if dialog is not cancelable', () => {
       const event = {};
       const spy = chai.spy.on(event, 'callParentHandler');
 
@@ -220,8 +208,7 @@ describe('OnsAlertDialogElement', () => {
   });
 
   describe('#visible', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns whether the dialog is visible or not', () => {
+    onlyChrome(it)('returns whether the dialog is visible or not', () => {
       expect(dialog.visible).to.be.false;
       dialog.show({animation: 'none'});
       expect(dialog.visible).to.be.true;
@@ -252,8 +239,7 @@ describe('OnsAlertDialogElement', () => {
 });
 
   describe('autoStyling', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds \'material\' modifier on Android', () => {
+    onlyChrome(it)('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-alert-dialog>contents</ons-alert-dialog>');
       expect(e.getAttribute('modifier')).to.equal('material');

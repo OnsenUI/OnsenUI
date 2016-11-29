@@ -33,8 +33,7 @@ describe('OnsNavigatorElement', () => {
     expect(window.ons.NavigatorElement.animators).to.be.an('object');
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides \'page\' attribute', () => {
+  onlyChrome(it)('provides \'page\' attribute', () => {
     const content = nav.topPage._getContentElement();
     expect(content.innerHTML).to.equal('hoge');
   });
@@ -55,22 +54,19 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#pages', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('provides \'pages\' property', () => {
+    onlyChrome(it)('provides \'pages\' property', () => {
         const pages = nav.pages;
         expect(pages[0]).to.be.an.instanceof(Element);
         expect(pages[0].name).to.be.an('string');
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should have one page after initialization', () => {
+    onlyChrome(it)('should have one page after initialization', () => {
        expect(nav.pages.length).to.equal(1);
     });
   });
 
   describe('#pushPage()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds a new page to the top of the page stack', (done) => {
+    onlyChrome(it)('adds a new page to the top of the page stack', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -81,8 +77,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
+    onlyChrome(it)('adds a new page to the top of the page stack using options.pageHTML', (done) => {
       nav.pushPage(null, {
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
@@ -148,8 +143,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('removes the top page from the stack', (done) => {
+    onlyChrome(it)('removes the top page from the stack', (done) => {
       nav.pushPage('fuga', {
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -167,8 +161,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('is canceled if already performing another popPage', (done) => {
+    onlyChrome(it)('is canceled if already performing another popPage', (done) => {
       var calls = [false, false];
       var finished = (num) => {
         calls[num] = true;
@@ -192,8 +185,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('can refresh the previous page', (done) => {
+    onlyChrome(it)('can refresh the previous page', (done) => {
       nav.pushPage('info', {
         callback: () => {
           var content = nav.topPage._getContentElement();
@@ -215,8 +207,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('throws error when refreshing pages directly inside the navigator', (done) => {
+    onlyChrome(it)('throws error when refreshing pages directly inside the navigator', (done) => {
       nav.innerHTML = '<ons-page> Test </ons-page>';
 
       return nav.pushPage('hoge').then(() => {
@@ -228,8 +219,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('emits \'prepop\' event', () => {
+    onlyChrome(it)('emits \'prepop\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('prepop', (event) => { resolve(event); });
       });
@@ -241,8 +231,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should be possible to cancel the \'prepop\' event', (done) => {
+    onlyChrome(it)('should be possible to cancel the \'prepop\' event', (done) => {
       nav.addEventListener('prepop', (event) => {
         event.detail.cancel();
       });
@@ -259,8 +248,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('emits \'postpop\' event', () => {
+    onlyChrome(it)('emits \'postpop\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('postpop', (event) => { resolve(event); });
       });
@@ -272,8 +260,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('emits \'show\' event', (done) => {
+    onlyChrome(it)('emits \'show\' event', (done) => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => { resolve(event); });
       });
@@ -287,8 +274,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the new top page', () => {
+    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.popPage()).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.topPage)
@@ -306,16 +292,14 @@ describe('OnsNavigatorElement', () => {
       done();
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('does nothing when the page is already on top', (done) => {
+    onlyChrome(it)('does nothing when the page is already on top', (done) => {
       const spy = chai.spy.on(nav, '_pushPage');
       nav.bringPageTop('hoge');
       expect(spy).not.to.have.been.called();
       done();
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('brings the given pageUrl to the top', (done) => {
+    onlyChrome(it)('brings the given pageUrl to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
       expect(nav.topPage.name).to.equal('hoge');
       nav.bringPageTop('fuga', {
@@ -334,8 +318,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('brings the given page index to the top', (done) => {
+    onlyChrome(it)('brings the given page index to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
       expect(nav.topPage.name).to.equal('hoge');
       nav.bringPageTop('fuga', {
@@ -367,8 +350,7 @@ describe('OnsNavigatorElement', () => {
     });
 
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('should be possible to cancel the \'prepush\' event', (done) => {
+    onlyChrome(it)('should be possible to cancel the \'prepush\' event', (done) => {
       expect(nav.pages.length).to.equal(1);
 
       nav.bringPageTop('info', {callback: () => {
@@ -385,8 +367,7 @@ describe('OnsNavigatorElement', () => {
       }});
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the new top page', () => {
+    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('info').then(() => {
         return nav.pushPage('fuga').then(() => {
           return expect(nav.bringPageTop('info')).to.eventually.be.fulfilled.then(
@@ -398,8 +379,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#insertPage()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('inserts a new page on a given index', (done) => {
+    onlyChrome(it)('inserts a new page on a given index', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(0, 'fuga');
@@ -415,8 +395,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('inserts a new page on a given index using `options.pageHTML`', (done) => {
+    onlyChrome(it)('inserts a new page on a given index using `options.pageHTML`', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(0, null, {pageHTML: '<ons-page>fuga</ons-page>'});
@@ -442,8 +421,7 @@ describe('OnsNavigatorElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('normalizes the index', (done) => {
+    onlyChrome(it)('normalizes the index', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(-2, 'fuga').then( () => {
@@ -458,8 +436,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the inserted page', () => {
+    onlyChrome(it)('returns a promise that resolves to the inserted page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.insertPage(0, 'fuga')).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.pages[0])
@@ -473,8 +450,7 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('replaces the current page with a new one', () => {
+    onlyChrome(it)('replaces the current page with a new one', () => {
       return nav.pushPage('info')
         .then(() => {
           expect(nav.pages.length).to.equal(2);
@@ -490,8 +466,7 @@ describe('OnsNavigatorElement', () => {
         });
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the new top page', (done) => {
+    onlyChrome(it)('returns a promise that resolves to the new top page', (done) => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.replacePage('fuga')).to.eventually.be.fulfilled.then(
           page => {
@@ -508,8 +483,7 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.resetToPage('hoge', 'string')).to.throw(Error);
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('replaces all the page stack with only a new page', (done) => {
+    onlyChrome(it)('replaces all the page stack with only a new page', (done) => {
       nav.pushPage('fuga', {callback: () => {
         nav.resetToPage('hoge', {
           callback: () => {
@@ -522,8 +496,7 @@ describe('OnsNavigatorElement', () => {
       }});
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns a promise that resolves to the new top page', () => {
+    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.resetToPage('fuga')).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.topPage)
@@ -533,8 +506,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#topPage', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('returns the current page', () => {
+    onlyChrome(it)('returns the current page', () => {
       const page = nav.topPage;
 
       expect(page).to.be.an.instanceof(Element);
@@ -548,8 +520,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#_destroy()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('destroys all the pages', () => {
+    onlyChrome(it)('destroys all the pages', () => {
       expect(nav.pages.length).to.equal(1);
       nav._destroy();
       expect(nav.pages.length).to.equal(0);
@@ -566,8 +537,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#_onDeviceBackButton()', () => {
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('pops a page if there are more than one', (done) => {
+    onlyChrome(it)('pops a page if there are more than one', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
           var spy = chai.spy.on(nav, 'popPage');
@@ -588,8 +558,7 @@ describe('OnsNavigatorElement', () => {
 
   describe('propagate API', () => {
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('fires \'show\' event', () => {
+    onlyChrome(it)('fires \'show\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => resolve());
       });
@@ -604,8 +573,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('fires \'hide\' event', () => {
+    onlyChrome(it)('fires \'hide\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('hide', () => resolve());
       });
@@ -617,8 +585,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('fires \'destroy\' event', () => {
+    onlyChrome(it)('fires \'destroy\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('destroy', () => resolve());
       });
@@ -651,8 +618,7 @@ describe('OnsNavigatorElement', () => {
       window.ons.NavigatorElement.registerAnimator('fuga', MyAnimator);
     });
 
-    if (['local_chrome'].indexOf(window.browser) != -1)
-    it('overwrites specified properties', () => {
+    onlyChrome(it)('overwrites specified properties', () => {
       const deferred = {};
       deferred.promise = new Promise((resolve) => {
         deferred.resolve = resolve
@@ -692,8 +658,7 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  describe('#backButton', () => {
+  onlyChrome(describe)('#backButton', () => {
     beforeEach((done) => {
       const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-back-button>Back</ons-back-button><ons-page>hoge</ons-page></ons-template>`)
       const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-back-button>Back</ons-back-button><ons-page>hoge2</ons-page></ons-template>`);

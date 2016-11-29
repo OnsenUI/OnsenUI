@@ -5,8 +5,7 @@ describe('ons-button', () => {
     expect(window.ons.ButtonElement).to.be.ok;
   });
 
-  if (['local_chrome'].indexOf(window.browser) != -1)
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     var element = new ons.ButtonElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;
