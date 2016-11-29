@@ -15,9 +15,10 @@ limitations under the License.
 
 */
 import util from '../../ons/util';
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
+import BaseAnimator from '../../ons/base-animator';
 
-export class PopoverAnimator {
+export class PopoverAnimator extends BaseAnimator {
 
   /**
    * @param {Object} options
@@ -25,12 +26,8 @@ export class PopoverAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options = {}) {
-    this.options = util.extend({
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2,
-      delay: 0
-    }, options);
+  constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.2} = {}) {
+    super({ timing, delay, duration });
   }
 
   show(popover, callback) {

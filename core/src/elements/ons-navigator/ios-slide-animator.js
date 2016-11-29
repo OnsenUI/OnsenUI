@@ -17,7 +17,7 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from '../../ons/util';
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
 
 /**
@@ -25,14 +25,8 @@ import contentReady from '../../ons/content-ready';
  */
 export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.4,
-      timing: 'ease',
-      delay: 0
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'ease', delay = 0, duration = 0.4} = {}) {
+    super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;

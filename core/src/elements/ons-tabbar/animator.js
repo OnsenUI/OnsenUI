@@ -14,9 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-import animit from '../../ons/animit.js';
+import util from '../../ons/util';
+import animit from '../../ons/animit';
+import BaseAnimator from '../../ons/base-animator'
 
-export class TabbarAnimator {
+export class TabbarAnimator extends BaseAnimator {
 
   /**
    * @param {Object} options
@@ -24,10 +26,8 @@ export class TabbarAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options = {}) {
-    this.timing = options.timing || 'linear';
-    this.duration = options.duration !== undefined ? options.duration : '0.4';
-    this.delay = options.delay !== undefined ? options.delay : '0';
+  constructor({timing = 'linear', delay = 0.4, duration = 0} = {}) {
+    super({ timing, delay, duration });
   }
 
   /**
@@ -50,15 +50,6 @@ export class TabbarNoneAnimator extends TabbarAnimator {
 }
 
 export class TabbarFadeAnimator extends TabbarAnimator {
-
-  constructor(options) {
-    options.timing = options.timing !== undefined ? options.timing : 'linear';
-    options.duration = options.duration !== undefined ? options.duration : '0.4';
-    options.delay = options.delay !== undefined ? options.delay : '0';
-
-    super(options);
-  }
-
   apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
     animit.runAll(
       animit(enterPage)
@@ -99,13 +90,8 @@ export class TabbarFadeAnimator extends TabbarAnimator {
 }
 
 export class TabbarSlideAnimator extends TabbarAnimator {
-
-  constructor(options) {
-    options.timing = options.timing !== undefined ? options.timing : 'ease-in';
-    options.duration = options.duration !== undefined ? options.duration : '0.15';
-    options.delay = options.delay !== undefined ? options.delay : '0';
-
-    super(options);
+  constructor({timing = 'ease-in', delay = 0.15, duration = 0} = {}) {
+    super({ timing, delay, duration });
   }
 
   /**

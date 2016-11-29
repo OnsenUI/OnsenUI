@@ -17,23 +17,16 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from '../../ons/util';
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 
 /**
  * Fade-in + Lift screen transition.
  */
 export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      timing: 'ease-out',
-      duration: '0.25',
-      delay: '0'
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'ease-out', delay = 0, duration = 0.25} = {}) {
+    super({ timing, delay, duration });
   }
-
 
   /**
    * @param {Object} enterPage

@@ -307,6 +307,10 @@ export default class ModalElement extends BaseElement {
     _animatorDict[name] = Animator;
   }
 
+  static get animators() {
+    return _animatorDict;
+  }
+
   static get ModalAnimator() {
     return ModalAnimator;
   }

@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit.js';
-export class AlertDialogAnimator {
+import animit from '../../ons/animit';
+import BaseAnimator from '../../ons/base-animator';
+
+export class AlertDialogAnimator extends BaseAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {
-    this.timing = timing;
-    this.delay = delay;
-    this.duration = duration;
+    super({ timing, delay, duration });
   }
 
   /**
