@@ -11,6 +11,7 @@ v2.0.5
  * ons-input: Added `transparent` modifier for Material Design.
  * ons-modal: Pages inside modal throw show and hide events.
  * ons-page: Fixed infinite scroll for iOS.
+ * core: All animators are extendable.
 
 v2.0.4
 ----
