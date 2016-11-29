@@ -7,15 +7,30 @@ Guidelines:
 CHANGELOG
 ====
 
-<!--
-
 1.0.0-rc.4 (Work In Progress)
 ----
+
+### Features
+ * Updated Angular to 2.2.1.
 
 ### Bug Fixes
  * Navigator params should accept any type.
 
--->
+### PEER-DEPENDENCY UPDATES
+ * **@angular/common**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/compiler**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/compiler-cli**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/core**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/forms**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/platform-browser**:
+    * `^2.1.2` ----> `^2.2.1`
+ * **@angular/platform-browser-dynamic**:
+    * `^2.1.2` ----> `^2.2.1`
 
 1.0.0-rc.3 (2016-11-15)
 ----
