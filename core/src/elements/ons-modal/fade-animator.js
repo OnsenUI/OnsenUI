@@ -16,7 +16,7 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 import ModalAnimator from './animator';
 
 /**

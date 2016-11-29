@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 import BaseAnimator from '../../ons/base-animator'
 
 export class DialogAnimator extends BaseAnimator {

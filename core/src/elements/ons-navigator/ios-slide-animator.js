@@ -17,7 +17,7 @@ limitations under the License.
 
 import NavigatorTransitionAnimator from './animator';
 import util from '../../ons/util';
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
 
 /**

@@ -17,7 +17,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import NavigatorTransitionAnimator from './animator';
-import animit from '../../ons/animit.js';
+import animit from '../../ons/animit';
 
 /**
  * Slide animator for navigator transition.

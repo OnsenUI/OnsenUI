@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
-import animit from './animit.js'
+import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
 import notification from './notification';
