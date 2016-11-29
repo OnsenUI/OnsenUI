@@ -16,7 +16,6 @@ module.exports = function(config) {
     files: [
       '../../build/js/onsenui.js',
       '../../core/test/setup.js',
-      '../../core/test/define-browser-variable.js',
       `../../core/test/browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
       global.KARMA_SPEC_FILES || '../../core/src/**/*.spec.js',
       '../../build/css/onsenui.css',
