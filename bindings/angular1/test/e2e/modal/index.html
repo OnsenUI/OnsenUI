@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+    <ons-page>
+      <ons-button ng-click="modal.show()">Show modal</ons-button>
+
+      <ons-modal var="modal">
+        <p>Hi! I'm a modal.</p>
+      </ons-modal>
+    </ons-page>
+  </body>
+</html>

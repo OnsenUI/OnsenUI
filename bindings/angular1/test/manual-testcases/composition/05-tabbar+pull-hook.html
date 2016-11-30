@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap()
+
+      .controller('DemoController', function($scope, $timeout) {
+        $scope.items = [];
+
+        for (var i = 100; i > 0; i--) {
+          $scope.items.push(i);
+        }
+
+        $scope.load = function($done) {
+          $timeout(function() {
+            $scope.items.unshift($scope.items.length + 1);
+            $done();
+          }, 2000);
+        };
+      });
+    </script>
+  </head>
+  <body>
+      <ons-tabbar>
+          <ons-tab page="main.html" label="Main" icon="square" active="true" no-reload></ons-tab>
+          <ons-tab page="bla.html" label="Bla" icon="square"></ons-tab>
+      </ons-tabbar>
+
+      <ons-template id="main.html">
+        <ons-page ng-controller="DemoController">
+          <ons-pull-hook ng-action="load($done)" var="loader">
+              <span ng-switch="loader.getCurrentState()">
+                <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+              <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+              <span ng-switch-when="action"><ons-icon size="35px" spin="true"  icon="ion-load-d"></ons-icon> Loading data...</span>
+              </span>
+          </ons-pull-hook>
+          
+          <ons-toolbar>
+            <div class="center">Pull to refresh</div>
+            <div class="right">
+              <ons-toolbar-button ng-click="reset()">Reset</ons-toolbar-button>
+            </div>
+          </ons-toolbar>
+
+          <ons-list>
+              <ons-list-item ng-show="items.length === 0">
+                  <div class="info">
+                      Pull down to fetch items
+                  </div>
+              </ons-list-item>
+              <ons-list-item class="item" ng-repeat="item in items">
+                Item #{{item}}
+              </ons-list-item>
+          </ons-list>
+       </ons-page>
+     </ons-template>
+    
+     <ons-template id="bla.html">
+       <ons-page>
+         <p>Switching to this page should not cause an error!</p> 
+       </ons-page>
+     </ons-template>
+  </body>
+</html>

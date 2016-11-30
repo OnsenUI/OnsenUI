@@ -45,25 +45,6 @@ const rewritables = {
    */
   ready(tabbarElement, callback) {
     callback();
-  },
-
-  /**
-   * @param {Element} tabbarElement
-   * @param {Element} target
-   * @param {Object} options
-   * @param {Function} callback
-   */
-  link(tabbarElement, target, options, callback) {
-    callback(target);
-  },
-
-  /**
-   * @param {Element} tabbarElement
-   * @param {Element} target
-   * @param {Function} callback
-   */
-  unlink(tabbarElement, target, callback) {
-    callback(target);
   }
 };
 
@@ -325,20 +306,18 @@ export default class TabbarElement extends BaseElement {
    */
   _loadPageDOMAsync(pageElement, options = {}) {
     return new Promise(resolve => {
-      rewritables.link(this, pageElement, options, pageElement => {
-        this._contentElement.appendChild(pageElement);
+      this._contentElement.appendChild(pageElement);
 
-        if (this.getActiveTabIndex() !== -1) {
-          resolve(this._switchPage(pageElement, options));
-        } else {
-          if (options.callback instanceof Function) {
-              options.callback();
-          }
-
-          this._oldPageElement = pageElement;
-          resolve(pageElement);
+      if (this.getActiveTabIndex() !== -1) {
+        resolve(this._switchPage(pageElement, options));
+      } else {
+        if (options.callback instanceof Function) {
+            options.callback();
         }
-      });
+
+        this._oldPageElement = pageElement;
+        resolve(pageElement);
+      }
     });
   }
 
@@ -498,24 +477,20 @@ export default class TabbarElement extends BaseElement {
       params.animation = 'none';
     }
 
-    const link = (element, callback) => {
-      rewritables.link(this, element, options, callback);
-    };
-
     return new Promise(resolve => {
       selectedTab._loadPageElement(this._contentElement, pageElement => {
         pageElement.removeAttribute('style');
 
         this._switchPage(pageElement, params)
-            .then((page) => {
-              util.triggerElementEvent(this, 'postchange', {
-                index: selectedTabIndex,
-                tabItem: selectedTab
-              });
-
-              return resolve(page);
+          .then(page => {
+            util.triggerElementEvent(this, 'postchange', {
+              index: selectedTabIndex,
+              tabItem: selectedTab
             });
-      }, link);
+
+            return resolve(page);
+          });
+      });
     });
   }
 
@@ -585,9 +560,9 @@ export default class TabbarElement extends BaseElement {
   }
 
   _destroy() {
-    const pages = this._contentElement.children;
-    for (let i = pages.length - 1; i >= 0; i--) {
-      pages[i]._destroy();
+    const tabs = this._getTabbarElement().children;
+    for (let i = tabs.length - 1; i >= 0; i--) {
+      tabs[i].remove();
     }
     this.remove();
   }
@@ -619,6 +594,10 @@ export default class TabbarElement extends BaseElement {
       throw new Error('"Animator" param must inherit TabbarElement.TabbarAnimator');
     }
     _animatorDict[name] = Animator;
+  }
+
+  static get animators() {
+    return _animatorDict;
   }
 }
 

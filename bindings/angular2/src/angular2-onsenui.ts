@@ -1,3 +1,5 @@
+/// <reference path="../dist/onsenui.d.ts" />
+
 export * from '@angular/core';
 export * from '@angular/compiler';
 export * from './directives/ons-navigator';
@@ -34,6 +36,7 @@ import {AlertDialogFactory} from './ons/alert-dialog-factory';
 import {PopoverFactory} from './ons/popover-factory';
 import {DialogFactory} from './ons/dialog-factory';
 import {ModalFactory} from './ons/modal-factory';
+import {ComponentLoader} from './ons/component-loader';
 
 const directives = [
   OnsNavigator,
@@ -55,7 +58,8 @@ const directives = [
     AlertDialogFactory,
     PopoverFactory,
     DialogFactory,
-    ModalFactory
+    ModalFactory,
+    ComponentLoader
   ]
 })
 export class OnsenModule { }

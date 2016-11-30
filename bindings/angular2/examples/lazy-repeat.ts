@@ -22,7 +22,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     <div class="background"></div>
     <div class="content">
       <ons-list>
-        <ons-list-item *onsLazyRepeat="let item of items; let i = index">
+        <ons-list-item id="item-{{ i }}" *onsLazyRepeat="let item of items; let i = index">
           <div class="center">
             #{{i}} msg: {{item.msg}}
           </div>

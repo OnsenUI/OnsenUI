@@ -15,7 +15,9 @@ limitations under the License.
 
 */
 
-export default class ModalAnimator {
+import BaseAnimator from '../../ons/base-animator';
+
+export default class ModalAnimator extends BaseAnimator {
 
   /**
    * @param {Object} options
@@ -23,13 +25,8 @@ export default class ModalAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor(options = {}) {
-    this.delay = 0;
-    this.duration = 0.2;
-
-    this.timing = options.timing || this.timing;
-    this.duration = options.duration !== undefined ? options.duration : this.duration;
-    this.delay = options.delay !== undefined ? options.delay : this.delay;
+  constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {
+    super({ timing, delay, duration });
   }
 
   /**

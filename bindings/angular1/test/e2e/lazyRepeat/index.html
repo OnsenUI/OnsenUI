@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.items = [];
+
+        for (var i = 1; i <= 1000; i++) {
+          $scope.items.push(i);
+        }
+
+        $scope.Delegate = {
+          configureItemScope: function(index, scope) {
+            scope.number = $scope.items[index];
+          },
+          calculateItemHeight: function() {
+            return 45;
+          },
+          countItems: function() {
+            return $scope.items.length;
+          }
+        };
+
+        $scope.nbrOfTimesClicked = 0;
+        $scope.click = function($event) {
+          $scope.nbrOfTimesClicked++;
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="TestController">
+      <ons-toolbar>
+        <div class="center">You clicked <span id="times-clicked">{{ nbrOfTimesClicked }}</span> times.</div>
+      </ons-toolbar>
+      <ons-list>
+        <ons-list-item modifier="tappable" ons-lazy-repeat="Delegate">
+          <div ng-click="click($event)" id="item-{{number}}">
+            <span id="item-{{number}}-text">Item #{{number}}</span>
+            <ons-button id="remove-{{ number }}" ng-click="items.splice($index, 1)">Remove</ons-button>
+          </div>
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
+</html>

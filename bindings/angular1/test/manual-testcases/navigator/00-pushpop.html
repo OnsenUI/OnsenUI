@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        console.log('loaded');
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <p>Transition Animations</p>
+
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html')">
+          push(default)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html', {animation: 'slide'})">
+          push(slide)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html', {animation: 'lift'})">
+          push(lift)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html', {animation: 'fade'})">
+          push(fade)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navi.pushPage('page.html', {animation: 'none'})">
+          push(none)
+        </ons-list-item>
+      </ons-list>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="page.html">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+
+      </ons-toolbar>
+
+      <p>Transition Animations</p>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage()">
+        pop(default)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'slide'})">
+        pop(slide)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'lift'})">
+        pop(lift)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'fade'})">
+        pop(fade)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'none'})">
+        pop(none)
+      </ons-list-item>
+    </script>
+
+  </body>
+</html>

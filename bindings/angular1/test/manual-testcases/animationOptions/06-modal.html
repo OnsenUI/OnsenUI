@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+      ons.ready(function() {
+        modal.show({
+          callback: function() {
+            modal.hide({animationOptions: {duration: 1}});
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page>
+      <ons-modal var="modal" animation="fade" animation-options="{duration: 3}">
+        Should take 3 seconds to show and 1 second to hide.
+      </ons-modal>
+    </ons-page>
+  </body>
+</html>

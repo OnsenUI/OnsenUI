@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = ons.bootstrap();
+
+      app.controller('MyCtrl', function($scope, $timeout) {
+        $scope.items = [];
+
+        for (var i = 1; i < 1000; i++) {
+          $scope.items.unshift('Item #' + i);
+        }
+
+        $scope.MyDelegate = {
+          countItems: function() {
+            return $scope.items.length;
+          },
+          calculateItemHeight: function() {
+            return 45;
+          },
+          configureItemScope: function(index, scope) {
+            scope.item = $scope.items[index];
+          }
+        };
+
+        $scope.load = function($done) {
+          $timeout(function() {
+            $scope.items.unshift('Item #' + ($scope.items.length + 1));
+            $done();
+          }, 1000);
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="MyCtrl">
+      <ons-toolbar>
+        <div class="center">Pull hook + lazy repeat</div>
+      </ons-toolbar>
+
+      <ons-pull-hook ng-action="load($done)">
+        Loading...
+      </ons-pull-hook>
+
+      <ons-list>
+        <ons-list-item ons-lazy-repeat="MyDelegate">
+          {{ item }}
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
+</html>

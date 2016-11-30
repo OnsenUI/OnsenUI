@@ -15,7 +15,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   template: `
     <ons-modal #modal>
       <p>{{message}}</p>
-      <p><span (click)="modal.hide()" style="text-decoration: underline; cursor: pointer;">Click</span> to hide this modal.</p>
+      <p><span id="hide" (click)="modal.hide()" style="text-decoration: underline; cursor: pointer;">Click</span> to hide this modal.</p>
     </ons-modal>
   `
 })
@@ -37,7 +37,7 @@ class MyModalComponent {
     <div class="content">
       <div style="text-align: center;">
         <br>
-        <ons-button (click)="show()">show</ons-button>
+        <ons-button id="show" (click)="show()">show</ons-button>
       </div>
     </div>
   </ons-page>

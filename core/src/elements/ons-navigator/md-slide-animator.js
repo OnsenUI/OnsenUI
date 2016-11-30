@@ -17,20 +17,15 @@ limitations under the License.
 
 import util from '../../ons/util';
 import NavigatorTransitionAnimator from './animator';
+import animit from '../../ons/animit';
 
 /**
  * Slide animator for navigator transition.
  */
 export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor(options) {
-    options = util.extend({
-      duration: 0.3,
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      delay: 0
-    }, options || {});
-
-    super(options);
+  constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.3} = {}) {
+    super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%; z-index: 2;

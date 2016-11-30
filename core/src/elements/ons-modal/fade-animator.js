@@ -16,6 +16,7 @@ limitations under the License.
 
 */
 
+import animit from '../../ons/animit';
 import ModalAnimator from './animator';
 
 /**
@@ -23,12 +24,8 @@ import ModalAnimator from './animator';
  */
 export default class FadeModalAnimator extends ModalAnimator {
 
-  constructor(options) {
-    options.timing = options.timing || 'linear';
-    options.duration = options.duration || '0.3';
-    options.delay = options.delay || 0;
-
-    super(options);
+  constructor({timing = 'linear', delay = 0, duration = 0.3} = {}) {
+    super({ timing, delay, duration });
   }
 
   /**

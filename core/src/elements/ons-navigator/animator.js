@@ -16,8 +16,9 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
+import BaseAnimator from '../../ons/base-animator'
 
-export default class NavigatorTransitionAnimator {
+export default class NavigatorTransitionAnimator extends BaseAnimator {
 
   /**
    * @param {Object} options
@@ -32,9 +33,7 @@ export default class NavigatorTransitionAnimator {
       delay: '0'
     }, options || {});
 
-    this.timing = options.timing;
-    this.duration = options.duration;
-    this.delay = options.delay;
+    super(options);
   }
 
   push(enterPage, leavePage, callback) {
@@ -43,19 +42,6 @@ export default class NavigatorTransitionAnimator {
 
   pop(enterPage, leavePage, callback) {
     callback();
-  }
-
-  static extend(properties = {}) {
-
-    const extendedAnimator = this;
-    const newAnimator = function() {
-      extendedAnimator.apply(this, arguments);
-      util.extend(this, properties);
-    };
-
-    newAnimator.prototype = this.prototype;
-
-    return newAnimator;
   }
 }
 

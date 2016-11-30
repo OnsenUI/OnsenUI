@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      angular.module('myApp', ['onsen'])
+        .controller('DemoController', function($scope) {
+          $scope.checkClick = function() {
+            $scope.data = true;
+          };
+          $scope.data = false;
+        });
+    </script>
+  </head>
+  <body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Buttons</div>
+      </ons-toolbar>
+
+      <div style="text-align: center" class="content-padded" ng-controller="DemoController">
+        <ons-button id="btn" ng-click="checkClick()">Click</ons-button>
+        <input ng-model="data">
+      </div>
+    </ons-page>
+  </body>
+</html>

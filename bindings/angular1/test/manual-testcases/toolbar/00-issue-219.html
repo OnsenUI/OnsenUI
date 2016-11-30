@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+<link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+<script src="../../../../../build/js/onsenui.js"></script>
+<script src="../../../../../build/js/angular/angular.js"></script>
+<script src="../../../../../build/js/angular-onsenui.js"></script>
+<script>
+angular.module('myApp', ['onsen.directives'])
+  .controller('TestController', function($scope) {
+
+        
+});
+</script>
+
+<style>
+
+</style>
+</head>
+<body>
+<ons-page ng-controller="TestController">
+<ons-toolbar>
+<div class="left">
+  <ons-toolbar-button>
+    No outline
+  </ons-toolbar-button>
+
+  <ons-toolbar-button modifier="outline"> 
+    With outline
+  </ons-toolbar-button>
+</div>
+</ons-toolbar>
+</ons-page>
+</body>
+
+</body>
+</html>
+
+

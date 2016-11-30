@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('CarouselController', function($scope) {
+          $scope.currentIndex = 0;
+
+          $scope.changed = function($event) {
+            $scope.currentIndex = $event.activeIndex;
+          };
+      });
+    </script>
+
+    <style>
+      .carousel-cover {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: initial;
+        height: initial;
+        color: white;
+        transform: translate(-50%, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button id="prev" ng-click="carousel.prev()">Previous</ons-toolbar-button>
+      </div>
+      <div class="right">
+        <ons-toolbar-button id="next" ng-click="carousel.next()">Next</ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+    <ons-carousel ng-controller="CarouselController" ons-postchange="changed($event)" fullscreen var="carousel" swipeable overscrollable auto-scroll>
+      <ons-carousel-item id="first-item" style="background-color: red;"></ons-carousel-item>
+      <ons-carousel-item id="second-item" style="background-color: blue;"></ons-carousel-item>
+      <div class="carousel-cover">The current index is: <span id="current-index">{{ currentIndex }}</span></div>
+    </ons-carousel>
+  </body>
+</html>

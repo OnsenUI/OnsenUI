@@ -1,5 +1,3 @@
-declare var ons: any;
-
 /**
  * @object onsNotification
  */

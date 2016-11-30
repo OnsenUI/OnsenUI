@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="app" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      angular.module('app', ['onsen'])
+
+      .controller('CarouselController', function($scope) {
+        $scope.items = [1,2,3,4]; 
+
+        $scope.add = function() {
+          $scope.items.push($scope.items.length + 1);
+        };
+        
+        $scope.remove = function() {
+          $scope.items.pop();
+        };
+      });
+    </script>
+
+  </head>
+  <body>
+
+    <ons-page ng-controller="CarouselController">
+
+      <ons-toolbar>
+        <div class="center">Carousel test</div>
+        <div class="right">
+          <ons-toolbar-button ng-click="add()">Add</ons-toolbar-button>
+          <ons-toolbar-button ng-click="remove()">Remove</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <ons-carousel auto-refresh overscrollable auto-scroll fullscreen swipeable var="carousel">
+        <ons-carousel-item ng-repeat="item in items" style="background-color: gray;">
+          {{ item }}
+        </ons-carousel-item>
+      </ons-carousel>
+
+    </ons-page>
+
+  </body>
+</html>

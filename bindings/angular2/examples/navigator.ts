@@ -19,7 +19,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     <div class="content">
       <div style="text-align: center; margin: 10px">
         <ons-button (click)="push()">push</ons-button>
-        <ons-button (click)="pop()">pop</ons-button>
+        <ons-button id="pop" (click)="pop()">pop</ons-button>
         <p>page2</p>
       </div>
     </div>
@@ -48,7 +48,7 @@ export class PageComponent {
     <div class="content">
       <div id="message">{{msg}}</div>
       <div style="text-align: center; margin: 10px">
-        <ons-button (click)="push(navi)">push</ons-button>
+        <ons-button id="push" (click)="push(navi)">push</ons-button>
       </div>
     </div>
   `
@@ -67,7 +67,7 @@ class DefaultPageComponent {
 @Component({
   selector: 'app',
   template: `
-  <ons-navigator [page]="page"></ons-navigator>
+  <ons-navigator animation="none" [page]="page"></ons-navigator>
   `
 })
 export class AppComponent {

@@ -12,7 +12,7 @@ ons-input .text-input__label:not(.text-input--material__label) {
   display: none;
 }
 
-ons-input:not([float]) .text-input__label--active {
+ons-input:not([float]) .text-input--material__label--active {
   display: none;
 }
 

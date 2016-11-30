@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap()
+
+      var times = 0;
+
+      var cb = function() {
+        times += 1;
+      };
+
+      document.addEventListener('ons-carousel:init', function(e) {
+        var c = e.component;
+
+        c.next({
+          callback: function() {
+            c.prev({
+              callback: cb
+            });
+          }
+        });
+
+        setTimeout(function() {
+          if (times !== 1) {
+            alert('NG');
+          }
+          else {
+            alert('OK');
+          }
+        }, 1000);
+      });
+    </script>
+
+  </head>
+  <body>
+
+    <ons-page>
+
+      <ons-toolbar>
+        <div class="center">Carousel test</div>
+      </ons-toolbar>
+
+      <ons-carousel overscrollable auto-scroll fullscreen var="carousel">
+        <ons-carousel-item style="background-color: gray;">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: #085078;">
+        </ons-carousel-item>
+      </ons-carousel>
+
+    </ons-page>
+
+  </body>
+</html>
