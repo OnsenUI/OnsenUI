@@ -71,7 +71,7 @@ describe('LazyRepeatDelegate', () => {
   });
 });
 
-describe('LazyRepeatProvider', () => {
+onlyChrome(describe)('LazyRepeatProvider', () => {
   let delegate, template, page, wrapper, provider;
 
   beforeEach(() => {

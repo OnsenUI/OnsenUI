@@ -16,6 +16,7 @@ module.exports = function(config) {
     files: [
       '../../build/js/onsenui.js',
       '../../core/test/setup.js',
+      `../../core/test/browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
       global.KARMA_SPEC_FILES || '../../core/src/**/*.spec.js',
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
@@ -52,6 +53,8 @@ module.exports = function(config) {
       type: 'lcov'
     },
 
+    failOnEmptyTestSuite: false,
+
     // web server port
     port: 9876,
 
@@ -83,6 +86,21 @@ module.exports = function(config) {
       ////////////////////////////////////////
       local_safari: { // alias for `Safari` (defined by `karma-safari-launcher`)
         base: 'Safari',
+      },
+      // To use a browser launcher which has `base: 'SauceLabs'`,
+      // set process.env.SAUCE_USERNAME and process.env.SAUCE_ACCESS_KEY.
+      // For more information, see https://github.com/karma-runner/karma-sauce-launcher
+      remote_macos_elcapitan_safari_9: {
+        base: 'SauceLabs',
+        platform: 'OS X 10.11',
+        browserName: 'Safari',
+        version: '9.0',
+      },
+      remote_macos_elcapitan_safari_10: {
+        base: 'SauceLabs',
+        platform: 'OS X 10.11',
+        browserName: 'Safari',
+        version: '10.0',
       },
 
       ////////////////////////////////////////
@@ -209,6 +227,8 @@ module.exports = function(config) {
 
     autoWatchBatchDelay: 500,
 
-    captureTimeout: 15 * 60 * 1000 // Sauce Labs sometimes requires a long time, so default value (60000) is not enough
+    captureTimeout: 15 * 60 * 1000, // Sauce Labs sometimes requires a long time, so default value (60000) is not enough
+
+    browserNoActivityTimeout: 60 * 1000, // same as above, default value (10000) is not enough
   });
 };

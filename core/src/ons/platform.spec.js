@@ -124,7 +124,7 @@ describe('ons.platform', () => {
   });
 
   describe('#isChrome()', () => {
-    it('returns true if platform is Chrome', () => {
+    onlyChrome(it)('returns true if platform is Chrome', () => {
       expect(ons.platform.isChrome()).to.be.true;
     });
 

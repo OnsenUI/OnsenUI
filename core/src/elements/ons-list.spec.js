@@ -10,7 +10,7 @@ describe('ons-list', () => {
     expect(element.classList.contains('list')).to.be.true;
   });
 
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     var element = new ons.ListElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list--hoge')).to.be.true;

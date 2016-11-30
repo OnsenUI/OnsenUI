@@ -5,7 +5,7 @@ describe('OnsCarouselItemElement', () => {
     expect(window.ons.CarouselItemElement).to.be.ok;
   });
 
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     var carouselItem = new ons.CarouselItemElement();
 
     carouselItem.setAttribute('modifier', 'hoge');
