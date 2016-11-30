@@ -166,7 +166,7 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
             return new Promise((resolve, reject) => {
               new karma.Server(
                 {
-                  configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+                  configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
                   singleRun: true, // overrides the corresponding option in config file
                   autoWatch: false // same as above
                 },
@@ -218,7 +218,7 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
 gulp.task('watch-unit-test', ['watch-core'], (done) => {
   new karma.Server(
     {
-      configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+      configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
       singleRun: false, // overrides the corresponding option in config file
       autoWatch: true // same as above
     },
