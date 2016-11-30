@@ -520,6 +520,40 @@ gulp.task('test', function(done) {
 });
 
 ////////////////////////////////////////
+// webdriver-update
+////////////////////////////////////////
+gulp.task('webdriver-update', $.protractor.webdriver_update);
+
+////////////////////////////////////////
+// webdriver-download
+////////////////////////////////////////
+gulp.task('webdriver-download', () => {
+  const platform = os.platform();
+  const destDir = path.join(__dirname, '.selenium');
+  const chromeDriverUrl = (() => {
+    const filePath = platform === 'win32' ?
+      '/2.25/chromedriver_win32.zip' :
+      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
+    return `http://chromedriver.storage.googleapis.com${filePath}`;
+  })();
+
+  // Only download once.
+  if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
+    return gulp.src('');
+  }
+
+  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
+    .pipe(gulp.dest(destDir));
+
+  const chromedriver = $.download(chromeDriverUrl)
+    .pipe($.unzip())
+    .pipe($.chmod(755))
+    .pipe(gulp.dest(destDir));
+
+  return merge(selenium, chromedriver);
+});
+
+////////////////////////////////////////
 // e2e-test
 ////////////////////////////////////////
 gulp.task('e2e-test', function(done) {
@@ -537,7 +571,7 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
   });
 
   const conf = {
-    configFile: './test/e2e/protractor.conf.js',
+    configFile: './core/test/e2e-protractor/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
       '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
@@ -545,7 +579,7 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
     ]
   };
 
-  const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['test/e2e/**/*js'];
+  const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['core/test/e2e-protractor/**/*.js'];
 
   return gulp.src(specs)
     .pipe($.protractor.protractor(conf))
