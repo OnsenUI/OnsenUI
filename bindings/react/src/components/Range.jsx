@@ -1,0 +1,92 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const EVENT_TYPES = ['change', 'input'];
+
+/**
+ * @original ons-range
+ * @category form
+ * @tutorial react/Reference/range
+ * @description
+ * [en]
+ *   Range input component.
+ * [/en]
+ * [jp][/jp]
+ * @example
+ * <Range modifier="material"
+ *   value={this.state.value}
+ *   onChange={(event) => this.setState({value: parseInt(event.target.value)})}
+ *   />
+ */
+class Range extends SimpleWrapper {
+
+  componentDidMount() {
+    super.componentDidMount();
+    var node = ReactDOM.findDOMNode(this);
+
+    EVENT_TYPES.forEach((eventType) => {
+      node.addEventListener(eventType, this.props.onChange);
+    });
+  }
+
+  componentWillUnmount() {
+    var node = ReactDOM.findDOMNode(this);
+
+    EVENT_TYPES.forEach((eventType) => {
+      node.removeEventListener(eventType, this.props.onChange);
+    });
+  }
+
+  componentWillReceiveProps(props) {
+    const node = ReactDOM.findDOMNode(this);
+    node.value = props.value;
+  }
+
+  _getDomNodeName() {
+    return 'ons-range';
+  }
+}
+
+Range.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @required false
+   * @description
+   *  [en]The appearance of the progress indicator.[/en]
+   *  [jp] [/jp]
+   */
+  modifier: React.PropTypes.string,
+
+  /**
+   * @name onChange
+   * @type function
+   * @description
+   *  [en] Called when the value of the input changes.[/en]
+   *  [jp][/jp]
+   */
+  onChange: React.PropTypes.func,
+
+  /**
+   * @name value
+   * @type number
+   * @description
+   *  [en]
+   *  Current value of the element.
+   *  [/en]
+   *  [jp] [/jp]
+   */
+  value: React.PropTypes.number,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @description
+   *  [en] If true, the element is disabled. [/en]
+   *  [jp] [/jp]
+   */
+  disabled: React.PropTypes.bool
+};
+
+export default Range;

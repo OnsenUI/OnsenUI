@@ -1,0 +1,7 @@
+../src/components/SimpleWrapper.jsx
+../src/components/Popover.jsx
+../src/components/Navigator.jsx
+../src/components/AlertDialog.jsx
+../src/components/BaseDialog.jsx
+../src/components/Dialog.jsx
+../src/components/BasicComponent.jsx
