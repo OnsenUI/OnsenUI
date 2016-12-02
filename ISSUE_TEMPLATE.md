@@ -1,11 +1,10 @@
 <!--
 Github issues should be used only for bugs and feature requests.
-For questions please visit https://stackoverflow.com/tags/onsen-ui or https://community.onsen.io.
+For questions please visit https://community.onsen.io or https://stackoverflow.com/tags/onsen-ui.
 For bugs please use the following template.
 -->
 
-__Environment__
-<!-- Please choose your environment. -->
+__Environment__ <!-- Please choose your environment. -->
 
 ```
 [Core]
@@ -55,6 +54,5 @@ If possible provide a working example where the issue is reproduced.
 For this, go to http://tutorial.onsen.io/ ,
 select a framework and a template and modify or replace it.
 This will use the latest Onsen UI version released.
-After you finish,
-click 'Export to Codepen' button,save it and link it here.
+After you finish, click 'Export to Codepen' button, save it and link it here.
 -->
