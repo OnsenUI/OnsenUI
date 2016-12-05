@@ -12,6 +12,7 @@ CHANGELOG
 
 ### Features
  * Updated Angular to 2.2.1.
+ * Changed OnsenModule to re-export BrowserModule.
 
 ### Bug Fixes
  * Navigator params should accept any type.
