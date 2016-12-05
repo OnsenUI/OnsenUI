@@ -51,6 +51,7 @@
     "@angular/forms": "2.2.1",
     "@angular/platform-browser": "2.2.1",
     "@angular/platform-browser-dynamic": "2.2.1",
+    "onsenui": "^2.0.5",
     "awesome-typescript-loader": "^2.2.4",
     "chromedriver": "^2.21.2",
     "core-js": "^2.4.0",
