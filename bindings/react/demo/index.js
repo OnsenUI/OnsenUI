@@ -35,6 +35,7 @@ import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
 import BottomToolbarExample from './examples/BottomToolbar';
+import RouterNavigatorExample from './examples/RouterNavigator';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -132,6 +133,10 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
+      },
+      {
+        title: 'Stateless Navigator',
+        component: RouterNavigatorExample
       }
     ];
   }
