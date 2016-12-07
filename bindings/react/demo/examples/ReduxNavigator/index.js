@@ -8,7 +8,7 @@ import {postPush, postPop} from './actions';
 
 import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from '../../../src/index.js';
 
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 store.subscribe(state => console.log('state', store.getState()));
 
