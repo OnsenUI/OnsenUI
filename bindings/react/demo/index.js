@@ -36,6 +36,7 @@ import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
 import BottomToolbarExample from './examples/BottomToolbar';
 import RouterNavigatorExample from './examples/RouterNavigator';
+import ReduxNavigatorExample from './examples/ReduxNavigator';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -137,6 +138,10 @@ class Examples extends React.Component {
       {
         title: 'Stateless Navigator',
         component: RouterNavigatorExample
+      },
+      {
+        title: 'Redux Navigator',
+        component: ReduxNavigatorExample
       }
     ];
   }
