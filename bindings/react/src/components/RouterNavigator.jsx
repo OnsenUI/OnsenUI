@@ -13,7 +13,14 @@ import Util from './Util.js';
 class RouterNavigator extends BasicComponent {
   constructor(props) {
     super(props);
+    this.cancelUpdate = false;
     this.pages = [];
+  }
+
+  update(cb) {
+    if (!this.cancelUpdate) {
+      this.forceUpdate(cb);
+    }
   }
 
   /**
@@ -37,14 +44,14 @@ class RouterNavigator extends BasicComponent {
     const update = () => {
       return new Promise(resolve => {
         this.pages.push(this.props.renderPage(routes[routes.length - 1]));
-        this.forceUpdate(resolve);
+        this.update(resolve);
       });
     };
 
     return this.refs.navi._pushPage(options, update)
       .then(() => {
         this.pages = routes.map(route => this.props.renderPage(route));
-        this.forceUpdate();
+        this.update();
       });
   }
 
@@ -69,7 +76,7 @@ class RouterNavigator extends BasicComponent {
     const update = () => {
       return new Promise(resolve => {
         this.pages.push(this.props.renderPage(route));
-        this.forceUpdate(resolve);
+        this.update(resolve);
       });
     };
 
@@ -98,14 +105,14 @@ class RouterNavigator extends BasicComponent {
     const update = () => {
       return new Promise(resolve => {
         this.pages.push(this.props.renderPage(route));
-        this.forceUpdate(resolve);
+        this.update(resolve);
       });
     };
 
     return this.refs.navi._pushPage(options, update)
       .then(() => {
         this.pages.splice(this.pages.length - 2, 1);
-        this.forceUpdate();
+        this.update();
       });
   }
 
@@ -127,7 +134,7 @@ class RouterNavigator extends BasicComponent {
     const update = () => {
       return new Promise(resolve => {
         this.pages.pop();
-        this.forceUpdate(resolve);
+        this.update(resolve);
       });
     };
 
@@ -136,6 +143,8 @@ class RouterNavigator extends BasicComponent {
 
   componentDidMount() {
     const node = this.refs.navi;
+
+    this.cancelUpdate = false;
 
     node.addEventListener('prepush', this.props.onPrePush);
     node.addEventListener('postpush', this.props.onPostPush);
@@ -152,7 +161,7 @@ class RouterNavigator extends BasicComponent {
       (route) => this.props.renderPage(route, this)
     );
 
-    this.forceUpdate();
+    this.update();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -194,6 +203,7 @@ class RouterNavigator extends BasicComponent {
     node.removeEventListener('postpush', this.props.onPostPush);
     node.removeEventListener('prepop', this.props.onPrePop);
     node.removeEventListener('postpop', this.props.onPostPop);
+    this.cancelUpdate = true;
   }
 
   render() {

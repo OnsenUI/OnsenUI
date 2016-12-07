@@ -90,7 +90,10 @@ export default class extends Component {
     let routeConfig = this.state.routeConfig;
 
     routeConfig = RouterUtil.pop({
-      routeConfig
+      routeConfig,
+      options: {
+        animationOptions: {duration: 2}
+      }
     });
 
     this.setState({routeConfig});
