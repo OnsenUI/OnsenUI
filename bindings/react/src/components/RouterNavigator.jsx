@@ -160,10 +160,10 @@ class RouterNavigator extends BasicComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    let processStack = nextProps.routeConfig.processStack;
+    const processStack = nextProps.routeConfig.processStack;
 
     if (processStack.length > 0) {
-      let {type, route, options} = processStack[0];
+      const {type, route, options} = processStack[0];
 
       switch (type) {
         case 'push':

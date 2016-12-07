@@ -16,7 +16,7 @@ export default {
   },
 
   replace: ({routeConfig, route, options, key}) => {
-    let config = {...routeConfig};
+    const config = {...routeConfig};
 
     // do not push keys twice
     if (key == null ||
@@ -33,7 +33,7 @@ export default {
   },
 
   reset: ({routeConfig, route, options, key}) => {
-    let config = {...routeConfig};
+    const config = {...routeConfig};
 
     // do not push keys twice
     if (key == null ||
@@ -50,7 +50,7 @@ export default {
   },
 
   push: ({routeConfig, route, options, key}) => {
-    let config = {...routeConfig};
+    const config = {...routeConfig};
 
     // do not push keys twice
     if (key == null ||
@@ -67,7 +67,7 @@ export default {
   },
 
   pop: ({routeConfig, options, key}) => {
-    let config = {...routeConfig};
+    const config = {...routeConfig};
 
     /**
      * Safegaurd to ensure that not
@@ -94,7 +94,9 @@ export default {
 
   postPush: (routeConfig) => {
     const config = {...routeConfig};
-    let {route, type} = routeConfig.processStack.shift();
+    const next = routeConfig.processStack.shift();
+    const type = next.type;
+    let route = next.route;
 
     if (type === 'push') {
       if (route !== null) {
