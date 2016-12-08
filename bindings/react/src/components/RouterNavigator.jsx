@@ -171,6 +171,14 @@ class RouterNavigator extends BasicComponent {
   componentWillReceiveProps(nextProps) {
     const processStack = [...nextProps.routeConfig.processStack];
 
+    /**
+     * Fix for Redux Timetravel.
+     */
+    if (this.props.routeConfig.processStack.length < nextProps.routeConfig.processStack.length
+      && this.props.routeConfig.routeStack.length > nextProps.routeConfig.routeStack.length) {
+      return;
+    }
+
     if (processStack.length > 0) {
       const {type, route, options} = processStack[0];
 
