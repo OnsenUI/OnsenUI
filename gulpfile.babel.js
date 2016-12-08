@@ -114,27 +114,27 @@ gulp.task('core-dts-test', () => {
 ////////////////////////////////////////
 gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   // Usage:
-  //    # run all unit tests in just one Karma server
-  //    gulp unit-test
+  //     # run all unit tests in just one Karma server
+  //     gulp unit-test
   //
-  //    # run only specified unit tests in just one Karma server
-  //    gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
-  //    gulp unit-test --specs "core/src/**/index.spec.js"
-  //    gulp unit-test --specs "core/src/**/*.spec.js"
+  //     # run only specified unit tests in just one Karma server
+  //     gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
+  //     gulp unit-test --specs "core/src/**/index.spec.js"
+  //     gulp unit-test --specs "core/src/**/*.spec.js"
   //
-  //    # run all unit tests separately
-  //    gulp unit-test --separately
+  //     # run all unit tests separately
+  //     gulp unit-test --separately
   //
-  //    # run only specified unit tests separately
-  //    gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
-  //    gulp unit-test --separately --specs "core/src/**/index.spec.js"
-  //    gulp unit-test --separately --specs "core/src/**/*.spec.js"
+  //     # run only specified unit tests separately
+  //     gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
+  //     gulp unit-test --separately --specs "core/src/**/index.spec.js"
+  //     gulp unit-test --separately --specs "core/src/**/*.spec.js"
   //
-  //    # run unit tests in a particular browser
-  //    gulp unit-test --browsers local_chrome
-  //    gulp unit-test --browsers local_chrome,local_safari # you can use commas
-  //    gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
-  //    gulp unit-test --browsers local_chrome,remote_macos_elcapitan_safari_10 # default
+  //     # run unit tests in a particular browser
+  //     gulp unit-test --browsers local_chrome
+  //     gulp unit-test --browsers local_chrome,local_safari # you can use commas
+  //     gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
+  //     gulp unit-test --browsers local_chrome,remote_macos_elcapitan_safari_10 # default
 
   (async () => {
     const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
