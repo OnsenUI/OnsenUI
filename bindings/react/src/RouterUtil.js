@@ -10,114 +10,162 @@
 export default {
   init: (routes) => {
     return {
-      routeStack: routes,
+      routeStack: [...routes],
       processStack: []
     };
   },
 
   replace: ({routeConfig, route, options, key}) => {
     const config = {...routeConfig};
+    const routeStack = [...config.routeStack];
+    let processStack = [...config.processStack];
 
-    // do not push keys twice
-    if (key == null ||
-      config.processStack.filter((el) => el.key === key).length === 0) {
-      config.processStack.push({
+    if (key == null || processStack.filter((el) => el.key === key).length === 0) {
+      const process = {
         type: 'replace',
         route,
         options,
         key
-      });
+      };
+      processStack = [
+        ...processStack,
+        process
+      ];
     }
 
-    return config;
+    return {
+      routeStack,
+      processStack
+    };
   },
 
   reset: ({routeConfig, route, options, key}) => {
     const config = {...routeConfig};
+    const routeStack = [...config.routeStack];
+    let processStack = [...config.processStack];
 
-    // do not push keys twice
-    if (key == null ||
-      config.processStack.filter((el) => el.key === key).length === 0) {
-      config.processStack.push({
+    if (key == null || processStack.filter((el) => el.key === key).length === 0) {
+      const process = {
         type: 'reset',
         route,
         options,
         key
-      });
+      };
+
+      processStack = [
+        ...processStack,
+        process
+      ];
     }
 
-    return config;
+    return {
+      routeStack,
+      processStack
+    };
   },
 
   push: ({routeConfig, route, options, key}) => {
     const config = {...routeConfig};
+    const routeStack = [...config.routeStack];
+    let processStack = [...config.processStack];
 
-    // do not push keys twice
-    if (key == null ||
-      config.processStack.filter((el) => el.key === key).length === 0) {
-      config.processStack.push({
+    if (key == null || config.processStack.filter((el) => el.key === key).length === 0) {
+
+      const process = {
         type: 'push',
         route,
         options,
         key
-      });
+      };
+
+      processStack = [
+        ...processStack,
+        process
+      ];
     }
 
-    return config;
+    return {
+      routeStack,
+      processStack
+    };
   },
 
   pop: ({routeConfig, options, key}) => {
     const config = {...routeConfig};
+    const routeStack = [...config.routeStack];
+    let processStack = [...config.processStack];
 
     /**
      * Safegaurd to ensure that not
      * too many pages are popped from
      * the stack.
      */
-    const pops = config.processStack
+    const pops = processStack
       .filter(x => x.type === 'pop')
       .length;
 
-    if (pops + 1 >= config.routeStack.length) {
+    if (pops + 1 >= routeStack.length) {
       console.warn('Page stack is already empty');
       return config;
     }
 
-    config.processStack.push({
+    const process = {
       type: 'pop',
       key,
       options
-    });
+    };
 
-    return config;
+    processStack = [
+      ...processStack,
+      process
+    ];
+
+    return {
+      routeStack,
+      processStack
+    };
   },
 
   postPush: (routeConfig) => {
     const config = {...routeConfig};
-    const next = routeConfig.processStack.shift();
+    let routeStack = [...config.routeStack];
+    const processStack = [...config.processStack];
+
+    const next = processStack.shift();
     const type = next.type;
     let route = next.route;
 
     if (type === 'push') {
       if (route !== null) {
-        config.routeStack.push(route);
+        routeStack = [
+          ...routeStack,
+          route
+        ];
       }
     } else if (type === 'reset') {
       if (!Array.isArray(route)) route = [route];
-      config.routeStack = route;
+      routeStack = route;
     } else if (type === 'replace') {
-      config.routeStack.pop();
-      config.routeStack.push(route);
+      routeStack.pop();
+      routeStack.push(route);
     }
 
-    return config;
+    return {
+      routeStack,
+      processStack
+    };
   },
 
   postPop: (routeConfig) => {
     const config = {...routeConfig};
-    config.processStack.shift();
-    config.routeStack.pop();
+    let routeStack = [...config.routeStack];
+    let processStack = [...config.processStack];
+    routeStack = routeStack.slice(0, routeStack.length - 1);
+    processStack = processStack.slice(1);
 
-    return config;
+    return {
+      routeStack,
+      processStack
+    };
   }
 };

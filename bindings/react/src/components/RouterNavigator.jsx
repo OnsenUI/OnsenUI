@@ -14,12 +14,12 @@ class RouterNavigator extends BasicComponent {
   constructor(props) {
     super(props);
     this.cancelUpdate = false;
-    this.pages = [];
+    this.page = null;
   }
 
   update(cb) {
     if (!this.cancelUpdate) {
-      this.forceUpdate(cb);
+      this.setState({}, cb);
     }
   }
 
@@ -75,12 +75,16 @@ class RouterNavigator extends BasicComponent {
 
     const update = () => {
       return new Promise(resolve => {
-        this.pages.push(this.props.renderPage(route));
+        this.page = this.props.renderPage(route);
         this.update(resolve);
       });
     };
 
-    return this.refs.navi._pushPage(options, update);
+    return this.refs.navi._pushPage(options, update)
+      .then(() => {
+        this.page = null;
+        this.update();
+      });
   }
 
   isRunning() {
@@ -164,12 +168,8 @@ class RouterNavigator extends BasicComponent {
     this.update();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
-
   componentWillReceiveProps(nextProps) {
-    const processStack = nextProps.routeConfig.processStack;
+    const processStack = [...nextProps.routeConfig.processStack];
 
     if (processStack.length > 0) {
       const {type, route, options} = processStack[0];
@@ -212,7 +212,8 @@ class RouterNavigator extends BasicComponent {
 
     return (
       <ons-navigator {...others} ref='navi'>
-        {this.pages}
+        {this.props.routeConfig.routeStack.map(route => this.props.renderPage(route))}
+        {this.page}
       </ons-navigator>
     );
   }
