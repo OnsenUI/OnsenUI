@@ -33,6 +33,7 @@ import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import karma from 'karma';
+import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import rollup from 'rollup-stream';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
@@ -602,8 +603,6 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
   // Structure of this E2E testing environment:
   //     this gulpfile
   //      ↓ <launch>
-  //     wdio (= utility command for WebdriverIO)
-  //      ↓ <launch>
   //     WebdriverIO
   //      ↓ <access>
   //     standalone Selenium Server (<- launched by this gulpfile)
@@ -636,12 +635,33 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
 
   // launch WebdriverIO (via `wdio` command)
   $.util.log($.util.colors.blue(`Launching WebdriverIO...`));
-  const wdio = spawn('./node_modules/.bin/wdio', ['core/test/e2e-webdriverio/wdio.conf.js'],
-    {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
-  )
-  .on('exit', (code, signal) => {
-    $.connect.serverClose(); // kill local HTTP servers
-    standaloneSeleniumServer.kill(); // kill standalone Selenium server
-    done();
-  });
+  const wdio = new WebdriverIOLauncher('core/test/e2e-webdriverio/wdio.conf.js', {});
+  wdio.run()
+  .then(
+    function (exitCode) {
+      const exitMessage = `WebdriverIO has exited with ${exitCode}`;
+
+      switch (exitCode) {
+        case 0: // success
+          $.util.log($.util.colors.green(exitMessage));
+          $.util.log($.util.colors.green('Passed E2E tests successfully.'));
+          break;
+        default: // error
+          $.util.log($.util.colors.red(exitMessage));
+          $.util.log($.util.colors.red('Failed to pass some E2E tests. (Otherwise, the E2E testing itself is broken)'));
+      }
+
+      $.connect.serverClose(); // kill local HTTP servers
+      standaloneSeleniumServer.kill(); // kill standalone Selenium server
+      done();
+    },
+    function (error) {
+      $.util.log($.util.colors.red('Failed to launch WebdriverIO.'));
+      console.error(error.stacktrace);
+
+      $.connect.serverClose(); // kill local HTTP servers
+      standaloneSeleniumServer.kill(); // kill standalone Selenium server
+      done();
+    }
+  );
 });
