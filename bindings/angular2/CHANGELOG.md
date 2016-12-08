@@ -12,6 +12,7 @@ CHANGELOG
 
 ### Features
  * Updated Angular to 2.2.1.
+ * Changed OnsenModule to re-export BrowserModule.
 
 ### Bug Fixes
  * Navigator params should accept any type.
@@ -65,6 +66,10 @@ CHANGELOG
 
 ### Features
  * Added Angular 2 AOT support.
+ * Replaced TypeScript 1.x d.ts files with 2.x d.ts files.
+ * Droped TypeScript 1.x support.
+ * Use WeakMap in pageLoader. (`OnsNavigator`, `OnsSplitter`, `OnsTabbar`)
+ * Remove AfterViewInit. (`OnsSwitch`)
  * Updated umd-template for angular@2.0.0.
 
 ### PEER-DEPENDENCY UPDATES

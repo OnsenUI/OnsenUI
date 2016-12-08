@@ -12,6 +12,8 @@ v2.0.5
  * ons-modal: Pages inside modal throw show and hide events.
  * ons-page: Fixed infinite scroll for iOS.
  * core: All animators are extendable.
+ * angular1: $event in event handlers is not empty anymore.
+ * core: Remove Windows Phone 10+ support temporarily.
 
 v2.0.4
 ----

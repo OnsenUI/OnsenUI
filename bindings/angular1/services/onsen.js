@@ -100,7 +100,8 @@ limitations under the License.
 
           eventNames.forEach(function(eventName) {
             var listener = function(event) {
-              view.emit(eventName, map(Object.create(event.detail)));
+              map(event.detail || {});
+              view.emit(eventName, event);
             };
             listeners.push(listener);
             element.addEventListener(eventName, listener, false);
@@ -421,7 +422,7 @@ limitations under the License.
           var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
           component.on(eventName, function(event) {
-            $onsen.fireComponentEvent(component._element[0], eventName, event);
+            $onsen.fireComponentEvent(component._element[0], eventName, event.detail);
 
             var handler = component._attrs['ons' + capitalizedEventName];
             if (handler) {

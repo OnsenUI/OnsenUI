@@ -53,7 +53,10 @@ const directives = [
 @NgModule({
   imports: [BrowserModule, CommonModule],
   declarations: [directives],
-  exports: [directives],
+  exports: [
+    directives,
+    BrowserModule
+  ],
   providers: [
     AlertDialogFactory,
     PopoverFactory,
