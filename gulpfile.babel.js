@@ -600,6 +600,19 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
 });
 
 gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
+  // Usage:
+  //     # run all WebdriverIO E2E tests
+  //     gulp e2e-test-webdriverio
+  //
+  //     # run only specified WebdriverIO E2E tests
+  //     gulp e2e-test-webdriverio --specs core/test/e2e-webdriverio/dummy/index.spec.js
+  //     gulp e2e-test-webdriverio --specs "core/test/**/index.spec.js"
+  //     gulp e2e-test-webdriverio --specs "core/test/**/*.spec.js"
+  //
+  //     # run WebdriverIO E2E tests in a particular browser (possible values are defined in standalone Selenium Server)
+  //     gulp e2e-test-webdriverio --browsers chrome # default
+  //     gulp e2e-test-webdriverio --browsers chrome,safari # you can use commas
+
   // Structure of this E2E testing environment:
   //     this gulpfile
   //      ↓ <launch>
@@ -633,35 +646,66 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
     {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
   );
 
-  // launch WebdriverIO
-  $.util.log($.util.colors.blue(`Launching WebdriverIO...`));
-  const wdio = new WebdriverIOLauncher('core/test/e2e-webdriverio/wdio.conf.js', {});
-  wdio.run()
-  .then(
-    function (exitCode) {
-      const exitMessage = `WebdriverIO has exited with ${exitCode}`;
+  (async () => {
+    const specs = argv.specs || 'core/test/e2e-webdriverio/**/*.js'; // you cannot use commas for --specs
+    const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['chrome'];
 
-      switch (exitCode) {
-        case 0: // success
-          $.util.log($.util.colors.green(exitMessage));
-          $.util.log($.util.colors.green('Passed E2E tests successfully.'));
-          break;
-        default: // error
-          $.util.log($.util.colors.red(exitMessage));
-          $.util.log($.util.colors.red('Failed to pass some E2E tests. (Otherwise, the E2E testing itself is broken)'));
+    let testsPassed = true; // error flag
+
+    // Separately launch WebdriverIO for each browser
+    try {
+      for (let j = 0 ; j < browsers.length ; j++) {
+        $.util.log($.util.colors.blue(`Start E2E testing on ${browsers[j]}...`));
+
+        // Pass parameters to WebdriverIO config file via `global`
+        global.WDIO_BROWSER = browsers[j];
+        global.WDIO_SPEC_FILES = specs;
+
+        // Launch WebdriverIO and wait until it exits
+        await (async () => {
+          return new Promise((resolve, reject) => {
+            $.util.log($.util.colors.blue(`Launching WebdriverIO for ${browsers[j]}...`));
+            $.util.log($.util.colors.blue(specs));
+            const wdio = new WebdriverIOLauncher('core/test/e2e-webdriverio/wdio.conf.js');
+            wdio.run()
+            .then(
+              function (exitCode) {
+                const exitMessage = `WebdriverIO has exited with ${exitCode}`;
+
+                switch (exitCode) {
+                  case 0: // success
+                    $.util.log($.util.colors.green(exitMessage));
+                    $.util.log($.util.colors.green('Passed E2E tests successfully.'));
+                    break;
+                  default: // error
+                    $.util.log($.util.colors.red(exitMessage));
+                    $.util.log($.util.colors.red('Failed to pass some E2E tests. (Otherwise, the E2E testing itself is broken)'));
+                    testsPassed = false;
+                }
+                resolve();
+              },
+              function (error) {
+                $.util.log($.util.colors.red('Failed to launch WebdriverIO.'));
+                console.error(error.stacktrace);
+                resolve();
+              }
+            );
+          });
+        })();
       }
-
+    } finally {
+      global.WDIO_BROWSER = undefined;
+      
       $.connect.serverClose(); // kill local HTTP servers
       standaloneSeleniumServer.kill(); // kill standalone Selenium server
-      done();
-    },
-    function (error) {
-      $.util.log($.util.colors.red('Failed to launch WebdriverIO.'));
-      console.error(error.stacktrace);
-
-      $.connect.serverClose(); // kill local HTTP servers
-      standaloneSeleniumServer.kill(); // kill standalone Selenium server
-      done();
     }
-  );
+
+    if (testsPassed) {
+      $.util.log($.util.colors.green('Passed E2E tests on all browsers!'));
+      done();
+    } else {
+      $.util.log($.util.colors.red('Failed to pass E2E tests on some browsers.'));
+      done('e2e-test-webdriverio has failed');
+    }
+  })();
 });
