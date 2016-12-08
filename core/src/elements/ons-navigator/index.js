@@ -546,10 +546,6 @@ export default class NavigatorElement extends BaseElement {
         const done = () => {
           this._isRunning = false;
 
-          if (leavePage) {
-            leavePage.style.display = 'none';
-          }
-
           setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
