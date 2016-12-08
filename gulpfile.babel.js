@@ -27,6 +27,7 @@ import runSequence from 'run-sequence';
 import dateformat from 'dateformat';
 import browserSync from 'browser-sync';
 import os from 'os';
+import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -598,5 +599,49 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
 });
 
 gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
-  done();
+  // Structure of this E2E testing environment:
+  //     this gulpfile
+  //      ↓ <launch>
+  //     wdio (= utility command for WebdriverIO)
+  //      ↓ <launch>
+  //     WebdriverIO
+  //      ↓ <access>
+  //     standalone Selenium Server (<- launched by this gulpfile)
+  //      ↓ <access>
+  //     SafariDriver
+  //      ↓ <access>
+  //     Safari
+  //      ↓ <access>
+  //     local HTTP server (<- launched by this gulpfile)
+
+  const port = 8081;
+
+  // launch local HTTP server for E2E testing
+  $.util.log($.util.colors.blue(`Launching local HTTP server for E2E testing...`));
+  $.connect.server({
+    root: __dirname,
+    port: port
+  });
+
+  // launch standalone Selenium Server
+  $.util.log($.util.colors.blue(`Launching standalone Selenium Server...`));
+  const standaloneSeleniumServer = spawn('java',
+    [
+      '-Dwebdriver.chrome.driver=.selenium/chromedriver',
+      '-jar',
+      '.selenium/selenium-server-standalone-3.0.1.jar'
+    ],
+    {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
+  );
+
+  // launch WebdriverIO (via `wdio` command)
+  $.util.log($.util.colors.blue(`Launching WebdriverIO...`));
+  const wdio = spawn('./node_modules/.bin/wdio', ['core/test/e2e-webdriverio/wdio.conf.js'],
+    {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
+  )
+  .on('exit', (code, signal) => {
+    $.connect.serverClose(); // kill local HTTP servers
+    standaloneSeleniumServer.kill(); // kill standalone Selenium server
+    done();
+  });
 });
