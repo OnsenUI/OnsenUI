@@ -633,7 +633,7 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
     {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
   );
 
-  // launch WebdriverIO (via `wdio` command)
+  // launch WebdriverIO
   $.util.log($.util.colors.blue(`Launching WebdriverIO...`));
   const wdio = new WebdriverIOLauncher('core/test/e2e-webdriverio/wdio.conf.js', {});
   wdio.run()
