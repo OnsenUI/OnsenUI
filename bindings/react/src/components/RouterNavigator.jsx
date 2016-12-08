@@ -174,8 +174,8 @@ class RouterNavigator extends BasicComponent {
     /**
      * Fix for Redux Timetravel.
      */
-    if (this.props.routeConfig.processStack.length < nextProps.routeConfig.processStack.length
-      && this.props.routeConfig.routeStack.length > nextProps.routeConfig.routeStack.length) {
+    if (this.props.routeConfig.processStack.length < nextProps.routeConfig.processStack.length &&
+      this.props.routeConfig.routeStack.length > nextProps.routeConfig.routeStack.length) {
       return;
     }
 

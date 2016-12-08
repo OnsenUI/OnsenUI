@@ -70,7 +70,6 @@ export default {
     let processStack = [...config.processStack];
 
     if (key == null || config.processStack.filter((el) => el.key === key).length === 0) {
-
       const process = {
         type: 'push',
         route,
