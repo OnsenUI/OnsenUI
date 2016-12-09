@@ -619,9 +619,9 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
   //     WebdriverIO
   //      ↓ <access>
   //     standalone Selenium Server (<- launched by this gulpfile)
-  //      ↓ <access>
+  //      ↓ <launch + access>
   //     SafariDriver
-  //      ↓ <access>
+  //      ↓ <launch + access>
   //     Safari
   //      ↓ <access>
   //     local HTTP server (<- launched by this gulpfile)
