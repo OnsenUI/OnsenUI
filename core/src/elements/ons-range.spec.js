@@ -22,7 +22,7 @@ describe('OnsRangeElement', () => {
     expect(element._input.classList.contains('range')).to.be.true;
   });
 
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     const input = element.querySelector('input');
 
     element.setAttribute('modifier', 'hoge');

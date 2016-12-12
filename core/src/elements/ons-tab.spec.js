@@ -1,6 +1,6 @@
 'use strict';
 
-describe('OnsTabElement', () => {
+onlyChrome(describe)('OnsTabElement', () => {
   let element;
 
   beforeEach(done => {
@@ -43,7 +43,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('modifier attribute', () => {
-    it('modifies the classList of the tab', () => {
+    onlyChrome(it)('modifies the classList of the tab', () => {
       const parent = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -100,7 +100,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('icon attribute', () => {
-    it('sets icon name for the tab', done => {
+    onlyChrome(it)('sets icon name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -128,7 +128,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('label attribute', () => {
-    it('sets label name for the tab', done => {
+    onlyChrome(it)('sets label name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -154,7 +154,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('badge attribute', () => {
-    it('sets badge for the tab', done => {
+    onlyChrome(it)('sets badge for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -249,16 +249,16 @@ describe('OnsTabElement', () => {
       `);
 
       const myFunction = (value) => {
-        expect(value).to.equal(element._loadedPage.element);
+        expect(value).to.equal(element._loadedPage);
         done();
       };
-      element._loadedPage = {element: true};
+      element._loadedPage = true;
       element._loadPageElement(document.createElement('div'), myFunction);
     });
   });
 
   describe('#setActive()', () => {
-    it('will set the tab as active', done => {
+    onlyChrome(it)('will set the tab as active', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>

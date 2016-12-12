@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.data = {
+          visible: false
+        };
+
+        $scope.person = {
+          name: 'Andreas'
+        };
+
+        ons.ready(function() {
+          ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
+            $scope.dialog = dialog;
+          });
+        });
+
+        $scope.show = function() {
+          $scope.$evalAsync();
+
+          $scope.dialog.show();
+        };
+      });
+
+      document.addEventListener('ons-dialog:preshow', function(event) {
+        document.getElementById('event-triggered').innerHTML = 'Event triggered!';
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="TestController">
+      <ons-button id="open-dialog" ng-show="!data.visible" ng-click="show()">Show dialog</ons-button>
+      <p id="name">Hello there, {{ person.name }}!</p>
+
+
+      <p id="event-triggered"></p>
+    </ons-page>
+
+    <ons-template id="dialog.html">
+      <ons-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false" cancelable>
+        <p>What's your name?</p>
+        <input ng-model="person.name">
+        <ons-button id="close-dialog" ng-click="dialog.hide()">Close</ons-button>
+      </ons-dialog>
+    </ons-template>
+  </body>
+</html>

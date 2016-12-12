@@ -1,0 +1,105 @@
+import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
+
+/**
+ * @original ons-list
+ * @category list
+ * @tutorial react/Reference/list
+ * @description
+ *   [en]
+ *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
+ * [jp][/jp]
+ * @example
+  <List
+    dataSource={['Row 1', 'Row 2']}
+    renderHeader={this.renderHeader}
+    renderRow={(row, idx) => (
+      <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
+      {row}
+  <Button modifier="quiet" onClick={this.remove.bind(this, idx)}>Remove</Button>
+  </ListItem>
+  )}
+  renderFooter={this.renderFooter}
+  />
+ */
+class List extends BasicComponent {
+  render() {
+    var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
+
+    return (
+      <ons-list {...this.props} ref='list'>
+        {this.props.renderHeader()}
+        {pages}
+        {this.props.children}
+        {this.props.renderFooter()}
+      </ons-list>
+    );
+  }
+}
+
+List.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  modifier: React.PropTypes.string,
+
+   /**
+   * @name dataSource
+   * @type string
+   * @description
+   *  [en]
+   *    Source of the list data. Should be an array.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  dataSource: React.PropTypes.array,
+
+   /**
+   * @name renderRow
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for every element in
+   *  in the dataSource.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderRow: React.PropTypes.func,
+
+   /**
+   * @name renderHeader
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for the header
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderHeader: React.PropTypes.func,
+
+   /**
+   * @name renderFooter
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for the footer
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderFooter: React.PropTypes.func
+};
+
+List.defaultProps = {
+  dataSource: [],
+  renderRow: () => null,
+  renderHeader: () => null,
+  renderFooter: () => null
+};
+
+export default List;

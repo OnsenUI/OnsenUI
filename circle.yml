@@ -8,6 +8,7 @@ dependencies:
     - yarn global add coveralls gulp
     - cd css-components; yarn; gulp build
     - cd bindings/angular2; yarn
+    - cd bindings/react; yarn
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     - sudo apt-get update
@@ -20,7 +21,10 @@ deployment:
       - ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 $CIRCLE_ARTIFACTS
 test:
   post:
+    - cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
     - cd bindings/angular2; npm test
+    - cd bindings/react; npm test
+    - cd bindings/react; npm run build
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex "./core/test/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - cat ./core/test/coverage/*/lcov.info | coveralls || true # Ignore if this fails.

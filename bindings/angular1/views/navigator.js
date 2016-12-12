@@ -57,9 +57,7 @@ limitations under the License.
         this._previousPageScope = null;
 
         this._boundOnPrepop = this._onPrepop.bind(this);
-        this._boundOnPageDestroy = this._onPageDestroy.bind(this);
         this._element.on('prepop', this._boundOnPrepop);
-        this._element.on('destroy', this._boundOnPageDestroy);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -89,41 +87,12 @@ limitations under the License.
         angular.element(pages[pages.length - 2]).data('_scope').$evalAsync();
       },
 
-      _onPageDestroy: function(event) {
-        const page = event.target;
-
-        if (this._element[0] === page.parentNode) {
-          const scope = angular.element(page).data('_scope');
-          scope.$destroy();
-        }
-      },
-
-      _compileAndLink: function(pageElement, callback) {
-        var link = $compile(pageElement);
-        var pageScope = this._createPageScope();
-        link(pageScope);
-
-        /**
-         * Overwrite page scope.
-         */
-        angular.element(pageElement).data('_scope', pageScope);
-
-        pageScope.$evalAsync(function() {
-          callback(pageElement);
-        });
-      },
-
       _destroy: function() {
         this.emit('destroy');
         this._clearDerivingEvents();
         this._clearDerivingMethods();
         this._element.off('prepop', this._boundOnPrepop);
-        this._element.off('destroy', this._boundOnPageDestroy);
         this._element = this._scope = this._attrs = null;
-      },
-
-      _createPageScope: function() {
-         return this._scope.$new();
       }
     });
 

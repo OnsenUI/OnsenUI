@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(['navi', 'page'], function() {
+        alert('navi, page variables is loaded');
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-page var="page">
+        <ons-toolbar>
+          <div class="center">Onsen UI</div>
+        </ons-toolbar>
+
+        <h1>Test for ons.ready([variablesNames], callback)</h1>
+      </ons-page>
+    </ons-navigator>
+
+  </body>
+</html>

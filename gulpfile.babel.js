@@ -15,8 +15,11 @@ limitations under the License.
 
 */
 
+import 'babel-polyfill';
+
 import gulp from 'gulp';
 import path from'path';
+import glob from 'glob';
 import gulpIf from 'gulp-if';
 import pkg from './package.json';
 import {merge} from 'event-stream';
@@ -93,34 +96,6 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 });
 
 ////////////////////////////////////////
-// core-test
-////////////////////////////////////////
-gulp.task('core-test', ['prepare', 'core', 'core-dts-test'], (done) => {
-  new karma.Server(
-    {
-      configFile: path.join(__dirname, 'core/test/karma.conf.js'),
-      singleRun: true, // overrides the corresponding option in config file
-      autoWatch: false // same as above
-    },
-    (exitCode) => {
-      const exitMessage = `Karma server has exited with ${exitCode}`;
-
-      switch (exitCode) {
-        case 0: // success
-          $.util.log($.util.colors.green(exitMessage));
-          $.util.log($.util.colors.green('Passed unit tests successfully.'));
-          done();
-          break;
-        default: // error
-          $.util.log($.util.colors.red(exitMessage));
-          $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-          throw new Error('core-test has failed');
-      }
-    }
-  ).start();
-});
-
-////////////////////////////////////////
 // core-dts-test
 ////////////////////////////////////////
 gulp.task('core-dts-test', () => {
@@ -133,9 +108,114 @@ gulp.task('core-dts-test', () => {
 });
 
 ////////////////////////////////////////
-// watch-core-test
+// unit-test
 ////////////////////////////////////////
-gulp.task('watch-core-test', ['watch-core'], (done) => {
+gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
+  // Usage:
+  //    # run all unit tests in just one Karma server
+  //    gulp unit-test
+  //
+  //    # run only specified unit tests in just one Karma server
+  //    gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp unit-test --specs "core/src/**/index.spec.js"
+  //    gulp unit-test --specs "core/src/**/*.spec.js"
+  //
+  //    # run all unit tests separately
+  //    gulp unit-test --separately
+  //
+  //    # run only specified unit tests separately
+  //    gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
+  //    gulp unit-test --separately --specs "core/src/**/index.spec.js"
+  //    gulp unit-test --separately --specs "core/src/**/*.spec.js"
+  //
+  //    # run unit tests in a particular browser
+  //    gulp unit-test --browsers local_chrome
+  //    gulp unit-test --browsers local_chrome,local_safari # you can use commas
+  //    gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
+  //    gulp unit-test --browsers local_chrome,remote_macos_elcapitan_safari_10 # default
+
+  (async () => {
+    const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
+    const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome', 'remote_macos_elcapitan_safari_10'];
+
+    let listOfSpecFiles;
+    if (argv.separately) { // resolve glob pattern
+      listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
+    } else { // do not resolve glob pattern
+      listOfSpecFiles = new Array( path.join(__dirname, specs) );
+    }
+
+    let testsPassed = true; // error flag
+
+    // Separately launch Karma server for each browser and each set of spec files
+    try {
+      for (let j = 0 ; j < browsers.length ; j++) {
+        $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
+
+        // Pass parameters to Karma config file via `global`
+        global.KARMA_BROWSER = browsers[j];
+
+        for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
+          $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
+
+          // Pass parameters to Karma config file via `global`
+          global.KARMA_SPEC_FILES = listOfSpecFiles[i];
+
+          // Launch Karma server and wait until it exits
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              new karma.Server(
+                {
+                  configFile: path.join(__dirname, 'core/test/karma.conf.js'),
+                  singleRun: true, // overrides the corresponding option in config file
+                  autoWatch: false // same as above
+                },
+                (exitCode) => {
+                  const exitMessage = `Karma server has exited with ${exitCode}`;
+
+                  switch (exitCode) {
+                    case 0: // success
+                      $.util.log($.util.colors.green(exitMessage));
+                      $.util.log($.util.colors.green('Passed unit tests successfully.'));
+                      break;
+                    default: // error
+                      $.util.log($.util.colors.red(exitMessage));
+                      $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+                      testsPassed = false;
+                  }
+                  resolve();
+                }
+              ).start();
+            });
+          })();
+
+          // Wait for 500 ms before next iteration to avoid crashes
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => { resolve(); }, 500 );
+            });
+          })();
+        }
+      }
+    } finally {
+      global.KARMA_BROWSER = undefined;
+      global.KARMA_SPEC_FILES = undefined;
+    }
+
+    if (testsPassed) {
+      $.util.log($.util.colors.green('Passed unit tests on all browsers!'));
+      done();
+    } else {
+      $.util.log($.util.colors.red('Failed to pass unit tests on some browsers.'));
+      done('unit-test has failed');
+    }
+  })();
+});
+
+////////////////////////////////////////
+// watch-unit-test
+////////////////////////////////////////
+gulp.task('watch-unit-test', ['watch-core'], (done) => {
   new karma.Server(
     {
       configFile: path.join(__dirname, 'core/test/karma.conf.js'),
@@ -334,8 +414,13 @@ gulp.task('prepare-css-components', ['prepare'], () => {
 gulp.task('compress-distribution-package', () => {
   const src = [
     path.join(__dirname, 'build/**'),
+    path.join(__dirname, 'LICENSE'),
+    path.join(__dirname, 'CHANGELOG.md'),
+    path.join(__dirname, 'bindings/*/dist/**'),
     '!' + path.join(__dirname, 'build/docs/**'),
-    '!' + path.join(__dirname, 'build/stylus/**')
+    '!' + path.join(__dirname, 'build/docs'),
+    '!' + path.join(__dirname, 'build/js/angular/**'),
+    '!' + path.join(__dirname, 'build/js/angular')
   ];
 
   return gulp.src(src)
@@ -418,7 +503,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
   // for livereload
   gulp.watch([
     'examples/*/*.{js,css,html}',
-    'test/e2e/*/*.{js,css,html}'
+    'bindings/angular1/test/e2e/*/*.{js,css,html}'
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
@@ -433,76 +518,8 @@ gulp.task('build-docs', () => {
 });
 
 ////////////////////////////////////////
-// webdriver-update
-////////////////////////////////////////
-gulp.task('webdriver-update', $.protractor.webdriver_update);
-
-////////////////////////////////////////
-// webdriver-download
-////////////////////////////////////////
-gulp.task('webdriver-download', () => {
-  const platform = os.platform();
-  const destDir = path.join(__dirname, '.selenium');
-  const chromeDriverUrl = (() => {
-    const filePath = platform === 'win32' ?
-      '/2.25/chromedriver_win32.zip' :
-      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
-    return `http://chromedriver.storage.googleapis.com${filePath}`;
-  })();
-
-  // Only download once.
-  if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
-    return gulp.src('');
-  }
-
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
-    .pipe(gulp.dest(destDir));
-
-  const chromedriver = $.download(chromeDriverUrl)
-    .pipe($.unzip())
-    .pipe($.chmod(755))
-    .pipe(gulp.dest(destDir));
-
-  return merge(selenium, chromedriver);
-});
-
-
-////////////////////////////////////////
 // test
 ////////////////////////////////////////
 gulp.task('test', function(done) {
-  return runSequence('core-test', 'e2e-test', done);
-});
-
-////////////////////////////////////////
-// e2e-test
-////////////////////////////////////////
-gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
-  const port = 8081;
-
-  $.connect.server({
-    root: __dirname,
-    port: port
-  });
-
-  const conf = {
-    configFile: './test/e2e/protractor.conf.js',
-    args: [
-      '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
-      '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
-    ]
-  };
-
-  const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['test/e2e/**/*js'];
-
-  return gulp.src(specs)
-    .pipe($.protractor.protractor(conf))
-    .on('error', function(e) {
-      console.error(e);
-      $.connect.serverClose();
-    })
-    .on('end', function() {
-      $.connect.serverClose();
-    });
+  return runSequence('unit-test', done);
 });

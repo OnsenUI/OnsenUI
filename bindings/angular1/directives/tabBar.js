@@ -133,20 +133,6 @@
   var lastReady = window.ons.TabbarElement.rewritables.ready;
   window.ons.TabbarElement.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
 
-  var lastLink = window.ons.TabbarElement.rewritables.link;
-  window.ons.TabbarElement.rewritables.link = function(tabbarElement, target, options, callback) {
-    var view = angular.element(tabbarElement).data('ons-tabbar');
-    view._compileAndLink(target, function(target) {
-      lastLink(tabbarElement, target, options, callback);
-    });
-  };
-
-  var lastUnlink = window.ons.TabbarElement.rewritables.unlink;
-  window.ons.TabbarElement.rewritables.unlink = function(tabbarElement, target, callback) {
-    angular.element(target).data('_scope').$destroy();
-    lastUnlink(tabbarElement, target, callback);
-  };
-
   angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
 
     return {

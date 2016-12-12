@@ -1,6 +1,6 @@
 'use strict';
 
-describe('OnsLazyRepeatElement', () => {
+onlyChrome(describe)('OnsLazyRepeatElement', () => {
   let element;
   let lazyRepeat;
 

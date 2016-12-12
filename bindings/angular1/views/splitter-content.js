@@ -26,18 +26,8 @@ limitations under the License.
         this._scope = scope;
         this._attrs = attrs;
 
-        this.load = (...args) => {
-          this._pageScope && this._pageScope.$destroy();
-          return this._element[0].load(...args);
-        };
+        this.load = this._element[0].load;
         scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _link: function(fragment, done) {
-        this._pageScope = this._scope.$new();
-        $compile(fragment)(this._pageScope);
-
-        this._pageScope.$evalAsync(() => done(fragment));
       },
 
       _destroy: function() {

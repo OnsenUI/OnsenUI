@@ -5,7 +5,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 
 @Component({
   selector: 'app',
@@ -21,7 +20,7 @@ import {BrowserModule} from '@angular/platform-browser';
       </ons-pull-hook>
 
       <ons-list>
-        <ons-list-item *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
+        <ons-list-item id="item-{{ i }}" *ngFor="let item of items; let i = index">Item {{i}}</ons-list-item>
       </ons-list>
     </div>
   </ons-page>
@@ -59,7 +58,7 @@ export class AppComponent {
 }
 
 @NgModule({
-  imports: [OnsenModule, BrowserModule],
+  imports: [OnsenModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

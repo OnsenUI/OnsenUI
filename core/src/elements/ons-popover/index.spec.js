@@ -24,7 +24,7 @@ describe('OnsPopoverElement', () => {
     expect(window.ons.PopoverElement).to.be.ok;
   });
 
-  it('provides \'modifier\' attribute', () => {
+  onlyChrome(it)('provides \'modifier\' attribute', () => {
     const container = popover.querySelector('.popover__container');
     const content = popover.querySelector('.popover__content');
 
@@ -66,7 +66,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
-    it('should hide the popover if it is cancelable', () => {
+    onlyChrome(it)('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.setAttribute('cancelable', '');
 
@@ -144,7 +144,7 @@ describe('OnsPopoverElement', () => {
       });
     });
 
-    it('returns a promise that resolves to the displayed element', () => {
+    onlyChrome(it)('returns a promise that resolves to the displayed element', () => {
       return expect(popover.show(target)).to.eventually.be.fulfilled.then(element => {
         expect(element).to.equal(popover);
         expect(popoverDisplay()).to.equal('block');
@@ -211,7 +211,7 @@ describe('OnsPopoverElement', () => {
       expect(popoverDisplay()).to.equal('block');
     });
 
-    it('should hide the popover if it is cancelable', () => {
+    onlyChrome(it)('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.show(target);
       popover.setAttribute('cancelable', '');
@@ -250,8 +250,14 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('\'style\' attribute', () => {
-    const popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
-    expect(popover._popover.style.background).to.equal('blue');
+    it ('works', (done) => {
+      const popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
+
+      setImmediate(() => {
+        expect(popover._popover.style.background).to.equal('blue');
+        done();
+      });
+    });
   });
 
 
@@ -279,7 +285,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    onlyChrome(it)('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
       expect(e.getAttribute('modifier')).to.equal('material');

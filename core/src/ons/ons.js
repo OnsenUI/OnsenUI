@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
 import notification from './notification';
@@ -29,6 +30,7 @@ import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import contentReady from './content-ready';
 import {defaultPageLoader, PageLoader} from './page-loader';
+import BaseAnimator from './base-animator';
 
 /**
  * @object ons
@@ -40,6 +42,7 @@ import {defaultPageLoader, PageLoader} from './page-loader';
 const ons = {};
 
 ons._util = util;
+ons.animit = animit;
 ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
 ons._internal = internal;
 ons.GestureDetector = GestureDetector;
@@ -54,6 +57,7 @@ ons._DoorLock = DoorLock;
 ons._contentReady = contentReady;
 ons.defaultPageLoader = defaultPageLoader;
 ons.PageLoader = PageLoader;
+ons._BaseAnimator = BaseAnimator;
 
 ons._readyLock = new DoorLock();
 

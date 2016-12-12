@@ -1,6 +1,6 @@
 'use strict';
 
-describe('OnsPullHookElement', () => {
+onlyChrome(describe)('OnsPullHookElement', () => {
   it('exists', () => {
     expect(window.ons.PullHookElement).to.be.ok;
   });

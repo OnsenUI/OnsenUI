@@ -74,7 +74,6 @@ Onsen UI is tested with the following browsers and mobile OS.
 
  * Android 4.4+ (and Android 4.0+ with Crosswalk engine)
  * iOS8+
- * Windows Phone 10+
  * Google Chrome
  * Safari
 
@@ -144,17 +143,24 @@ $ gulp serve
 
 ## Running the test suite
 
-Onsen UI has unit tests for the Web Components as well as end-to-end testing of the AngularJS directives using Protractor.
+Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
 
 Use the following commands to run the unit tests:
 
 ```bash
-$ gulp core-test
+$ gulp unit-test
 ```
 
-or these commands for the protractor tests:
+or these commands for end-to-end testing of the binding libraries:
 
 ```bash
+$ cd bindings/angular1
+$ gulp e2e-test
+```
+
+```bash
+$ cd bindings/angular2
+$ npm install
 $ gulp e2e-test
 ```
 
@@ -163,6 +169,7 @@ It will take some time the because it will download a stand-alone Selenium Serve
 To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
 
 ```bash
+$ cd bindings/angular1
 $ gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
 ```
 
@@ -175,3 +182,31 @@ $ gulp test
 ## How to contribute
 
 Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md). See the full list of contributors [here](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).
+
+## Release procedure
+
+Before releasing a new version, verify that the tests are passing and that there are no outstanding breaking issues. For major release with fundamental changes all components must be tested on all supported platforms.
+
+The first step is to add increase the version number in `package.json` and commit it. After that a new tag must be added:
+
+```
+git tag -a 2.3.4
+```
+
+This tag is important for building the documentation on the website.
+
+The next step is to run the release script:
+
+```
+cd scripts
+node dist-release.js
+```
+
+This will build Onsen UI and put the files in the `OnsenUI-dist` directory.
+
+The last step is to release the package on NPM. From the root of the repository do the following:
+
+```
+cd OnsenUI-dist;
+npm publish
+```

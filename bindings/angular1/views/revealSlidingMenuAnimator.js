@@ -81,7 +81,7 @@ limitations under the License.
         element.prepend(this._blackMask);
 
         // Dirty fix for broken rendering bug on android 4.x.
-        animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
+        ons.animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
       },
 
       /**
@@ -99,8 +99,8 @@ limitations under the License.
           var aboveTransform = this._generateAbovePageTransform(max);
           var behindStyle = this._generateBehindPageStyle(max);
 
-          animit(this._mainPage[0]).queue({transform: aboveTransform}).play();
-          animit(this._menuPage[0]).queue(behindStyle).play();
+          ons.animit(this._mainPage[0]).queue({transform: aboveTransform}).play();
+          ons.animit(this._menuPage[0]).queue(behindStyle).play();
         }
       },
 
@@ -144,7 +144,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue({
               transform: aboveTransform
@@ -158,7 +158,7 @@ limitations under the License.
             })
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(behindStyle, {
               duration: duration,
@@ -184,7 +184,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue({
               transform: aboveTransform
@@ -202,7 +202,7 @@ limitations under the License.
             }.bind(this))
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(behindStyle, {
               duration: duration,
@@ -230,11 +230,11 @@ limitations under the License.
         var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
         delete behindStyle.opacity;
 
-        animit(this._mainPage[0])
+        ons.animit(this._mainPage[0])
           .queue({transform: aboveTransform})
           .play();
 
-        animit(this._menuPage[0])
+        ons.animit(this._menuPage[0])
           .queue(behindStyle)
           .play();
       },

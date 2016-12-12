@@ -230,7 +230,7 @@ export default class PageElement extends BaseElement {
     if (!this._onInfiniteScroll) {
       this._infiniteScrollLimit = 0.9;
       this._boundOnScroll = this._onScroll.bind(this);
-      this._contentElement.addEventListener('scroll', this._boundOnScroll);
+      setImmediate(() => this._contentElement.addEventListener('scroll', this._boundOnScroll));
     }
     this._onInfiniteScroll = value;
   }
@@ -423,10 +423,6 @@ export default class PageElement extends BaseElement {
     }
 
     util.propagateAction(this._contentElement, '_destroy');
-
-    if (this.unload instanceof Function) {
-      this.unload();
-    }
 
     this.remove();
   }

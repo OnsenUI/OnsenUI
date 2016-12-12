@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.label = 'My label';
+
+        $scope.toggleTabs = function() {
+          $scope.hideTabs = !$scope.hideTabs;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <ons-tabbar hide-tabs="hideTabs" ng-controller="TestController" ng-init="reactive = 0" ons-reactive="reactive = reactive + 1">
+      <ons-tab id="tab1" label="{{ label }}" page="page1.html" active="true">
+      </ons-tab>
+      <ons-tab id="tab2" label="Page 2" page="page2.html">
+      </ons-tab>
+      <ons-tab id="tab3" label="Page 3" page="page3.html" persistent>
+      </ons-tab>
+    </ons-tabbar>
+
+    <ons-template id="page1.html">
+      <ons-page>
+        <div id="page1" style="text-align: center;">
+          <p>Page 1</p>
+          <p>This tab has been reactivated <span id="times-reactivated">{{ reactive }}</span> times.</p>
+          <p><ons-button id="toggle-tabbar" ng-click="toggleTabs()">Toggle tabs</ons-button></p>
+        </div>
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="page2.html">
+      <ons-page>
+        <div id="page2">
+          <p style="text-align: center;">
+            Page 2
+            <input id="page2-input" type="text">
+          </p>
+        </div>
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="page3.html">
+      <ons-page>
+        <div id="page3">
+          <p style="text-align: center;">
+            Page 3
+            <input id="page3-input" type="text">
+          </p>
+        </div>
+      </ons-page>
+    </ons-template>
+  </body>
+</html>

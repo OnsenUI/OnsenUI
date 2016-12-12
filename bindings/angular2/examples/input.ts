@@ -16,9 +16,33 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     <div class="background"></div>
     <div class="content">
       <div style="padding: 10px">
-        <div><ons-input placeholder="Type here" [(value)]="target" (input)="target = $event.target.value"></ons-input></div>
+        <p>
+          <ons-input id="text" placeholder="Type here" [(value)]="target" (input)="target = $event.target.value"></ons-input>
+          <input id="native-text" placeholder="Type here" [(value)]="target" (input)="target = $event.target.value">
+        </p>
 
-        <p>Text: {{target}}</p>
+        <p id="target">
+          {{target}}
+        </p>
+
+        <p>
+          <ons-input
+            id="checkbox"
+            type="checkbox"
+            [(checked)]="checked"
+            (change)="checked = $event.target.checked"
+          ></ons-input>
+          <input
+            id="native-checkbox"
+            type="checkbox"
+            [(checked)]="checked"
+            (change)="checked = $event.target.checked"
+          >
+        </p>
+
+        <p id="checked">
+          {{ checked }}
+        </p>
       </div>
     </div>
   </ons-page>
@@ -26,6 +50,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 export class AppComponent{
   target: string = '';
+  checked: boolean = false;
 }
 
 @NgModule({

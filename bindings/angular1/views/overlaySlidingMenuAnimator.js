@@ -107,7 +107,7 @@ limitations under the License.
         if (options.isOpened) {
           var max = this._menuPage[0].clientWidth;
           var menuStyle = this._generateMenuPageStyle(max);
-          animit(this._menuPage[0]).queue(menuStyle).play();
+          ons.animit(this._menuPage[0]).queue(menuStyle).play();
         }
       },
 
@@ -142,7 +142,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue(mainPageStyle, {
               duration: duration,
@@ -154,7 +154,7 @@ limitations under the License.
             })
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(menuStyle, {
               duration: duration,
@@ -180,7 +180,7 @@ limitations under the License.
 
         setTimeout(function() {
 
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .wait(delay)
             .queue(mainPageStyle, {
               duration: duration,
@@ -193,7 +193,7 @@ limitations under the License.
             }.bind(this))
             .play();
 
-          animit(this._menuPage[0])
+          ons.animit(this._menuPage[0])
             .wait(delay)
             .queue(menuPageStyle, {
               duration: duration,
@@ -218,12 +218,12 @@ limitations under the License.
         var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
         delete mainPageStyle.opacity;
 
-        animit(this._menuPage[0])
+        ons.animit(this._menuPage[0])
           .queue(menuPageStyle)
           .play();
 
         if (Object.keys(mainPageStyle).length > 0) {
-          animit(this._mainPage[0])
+          ons.animit(this._mainPage[0])
             .queue(mainPageStyle)
             .play();
         }

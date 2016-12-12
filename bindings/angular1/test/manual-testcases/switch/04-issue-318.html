@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = angular.module('myApp', ['onsen']);
+
+      app.controller('MyCtrl', function($scope) {
+        $scope.state = true;
+
+        setImmediate(function() {
+          var state = $('#state').find('input[type="checkbox"]').prop('checked');;
+
+          if (state !== true) {
+            alert('NG');
+          } else {
+            alert('OK');
+          }
+        });
+      });
+
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-page ng-controller="MyCtrl">
+      <ons-toolbar>
+        <div class="center">Switch Test</div>
+      </ons-toolbar>
+
+      <br>
+      <div style="text-align: center">
+        <ons-switch ng-model="state" id="state"></ons-switch>
+        {{ state }}
+      </div>
+    </ons-page>
+
+  </body>
+</html>

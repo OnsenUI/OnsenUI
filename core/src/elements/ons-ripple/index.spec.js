@@ -71,17 +71,17 @@ describe('OnsRippleElement', () => {
       expect(spy).to.have.been.called.exactly(attributes.length);
     });
 
-    it('sets the color of the wave based on the "color" attribute', () => {
+    onlyChrome(it)('sets the color of the wave based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(wave.style.background).to.equal('black');
     });
 
-    it('sets the color of the background based on the "color" attribute', () => {
+    onlyChrome(it)('sets the color of the background based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(background.style.background).to.equal('black');
     });
 
-    it('sets the color of the background based on the "background" attribute', () => {
+    onlyChrome(it)('sets the color of the background based on the "background" attribute', () => {
       ripple.setAttribute('color', 'black');
       ripple.setAttribute('background', 'rgb(0, 255, 255)');
       expect(background.style.background).to.equal('rgb(0, 255, 255)');
@@ -89,12 +89,12 @@ describe('OnsRippleElement', () => {
       expect(background.style.background).to.equal('rgb(0, 255, 255)');
     });
 
-    it('disables background if the "background" attribute is "none"', () => {
+    onlyChrome(it)('disables background if the "background" attribute is "none"', () => {
       ripple.setAttribute('background', 'none');
       expect(background.hasAttribute('disabled')).to.be.true;
     });
 
-    it('makes sure the background is enabled if "background != none"', () => {
+    onlyChrome(it)('makes sure the background is enabled if "background != none"', () => {
       background.setAttribute('disabled', 'disabled');
       ripple.setAttribute('background', 'rgb(0, 123, 5)');
       expect(background.hasAttribute('disabled')).to.be.false;
@@ -128,7 +128,7 @@ describe('OnsRippleElement', () => {
       expect(coords.r).to.equal(500);
     });
 
-    it('cares about it\'s center', () => {
+    onlyChrome(it)('cares about it\'s center', () => {
       ons._util.extend(ripple.style, style);
       ripple.setAttribute('center', 'true');
       const coords = ripple._calculateCoords({clientY: 0, clientX: 0});
@@ -185,7 +185,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onHold()', () => {
-    it('sets _holding', () => {
+    onlyChrome(it)('sets _holding', () => {
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
@@ -195,7 +195,7 @@ describe('OnsRippleElement', () => {
   describe('#_onDragStart()', () => {
     itCalls('_rippleAnimation').whenUsing('_onDragStart', e);
 
-    it('calls _onRelease', () => {
+    onlyChrome(it)('calls _onRelease', () => {
       const spy = spyOn('_onRelease');
 
       ripple._onHold(e);
@@ -205,7 +205,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onRelease()', () => {
-    it('unsets _holding', () => {
+    onlyChrome(it)('unsets _holding', () => {
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
       ripple._onRelease(e);

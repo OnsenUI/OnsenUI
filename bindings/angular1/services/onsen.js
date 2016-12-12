@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $compile, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
     var ModifierUtil = $onsGlobal._internal.ModifierUtil;
@@ -100,7 +100,8 @@ limitations under the License.
 
           eventNames.forEach(function(eventName) {
             var listener = function(event) {
-              view.emit(eventName, map(Object.create(event.detail)));
+              map(event.detail || {});
+              view.emit(eventName, event);
             };
             listeners.push(listener);
             element.addEventListener(eventName, listener, false);
@@ -130,6 +131,52 @@ limitations under the License.
          * @param {Function} action
          */
         autoStatusBarFill: $onsGlobal.autoStatusBarFill,
+
+        /**
+         * @param {Object} directive
+         * @param {HTMLElement} pageElement
+         * @param {Function} callback
+         */
+        compileAndLink: function(view, pageElement, callback) {
+          var link = $compile(pageElement);
+          var pageScope = view._scope.$new();
+
+          link(pageScope);
+
+          /**
+           * Overwrite page scope.
+           */
+          angular.element(pageElement).data('_scope', pageScope);
+
+          pageScope.$evalAsync(function() {
+            callback(pageElement);
+          });
+        },
+
+        /**
+         * @param {Object} view
+         * @return {Object} pageLoader
+         */
+        createPageLoader: function(view) {
+          return new window.ons.PageLoader(
+            ({page, parent}, done) => {
+              window.ons._internal.getPageHTMLAsync(page).then(html => {
+                this.compileAndLink(
+                  view,
+                  window.ons._util.createElement(html.trim()),
+                  element => {
+                    parent.appendChild(element);
+                    done(element);
+                  }
+                );
+              });
+            },
+            element => {
+              angular.element(element).data('_scope').$destroy();
+              element.remove();
+            }
+          );
+        },
 
         /**
          * @param {Object} params
@@ -375,7 +422,7 @@ limitations under the License.
           var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
           component.on(eventName, function(event) {
-            $onsen.fireComponentEvent(component._element[0], eventName, event);
+            $onsen.fireComponentEvent(component._element[0], eventName, event && event.detail);
 
             var handler = component._attrs['ons' + capitalizedEventName];
             if (handler) {

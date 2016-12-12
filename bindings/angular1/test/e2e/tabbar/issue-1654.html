@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.label = 'My label';
+
+        $scope.toggleTabs = function() {
+          $scope.hideTabs = !$scope.hideTabs;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <ons-navigator id="navi">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">first</div>
+        </ons-toolbar>
+        <div class="content">
+          <ons-button id="button" onclick="document.querySelector('#navi').pushPage('page.html')">push</ons-button>
+        </div>
+      </ons-page>
+    </ons-navigator>
+
+    <script type="text/template" id="page.html">
+      <ons-page>
+        <ons-tabbar>
+          <ons-tab label="page" icon="fa-envelope, material:md-email" page="tab.html" active></ons-tab>
+        </ons-tabbar>
+      </ons-page>
+    </script>
+
+    <script type="text/template" id="tab.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">tabpage</div>
+        </ons-toolbar>
+        <div class="content">
+        </div>
+      </ons-page>
+    </script>
+  </body>
+</html>

@@ -50,10 +50,10 @@ describe('ons-splitter-content', () => {
   });
 
   describe('#load()', () => {
-    it('returns a promise that resolves to the new page element', () => {
+    onlyChrome(it)('returns a promise that resolves to the new page element', () => {
       return expect(content.load('hoge.html')).to.eventually.be.fulfilled.then(
         page => {
-          expect(page).to.equal(content.firstChild);
+          expect(page).to.equal(content.children[0]);
           expect(content.getElementsByClassName('page__content')[0].innerHTML).to.equal('hoge content');
         }
       );

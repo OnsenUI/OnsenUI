@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        mySwitch.once('change', function(event) {
+          alert(!event.isInteractive && event.value ? 'OK 1' : 'NG 1');
+
+          mySwitch.once('change', function(event) {
+            alert(!event.isInteractive && !event.value ? 'OK 2' : 'NG 2');
+
+            mySwitch.once('change', function(event) {
+              alert(event.isInteractive && event.value ? 'OK 3' : 'NG 3');
+            });
+          });
+        });
+        mySwitch.checked = true;
+        mySwitch.checked = false;
+        mySwitch.checked = false;
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Switch Test</div>
+      </ons-toolbar>
+
+      <br>
+      <div style="text-align: center">
+        <ons-switch var="mySwitch"></ons-switch>
+      </div>
+    </ons-page>
+
+  </body>
+</html>

@@ -19,7 +19,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
       <ons-speed-dial position="right bottom" direction="up">
         <ons-fab><ons-icon icon="md-car"></ons-icon></ons-fab>
-        <ons-speed-dial-item>A</ons-speed-dial-item>
+        <ons-speed-dial-item id="item">A</ons-speed-dial-item>
         <ons-speed-dial-item>B</ons-speed-dial-item>
         <ons-speed-dial-item>C</ons-speed-dial-item>
       </ons-speed-dial>

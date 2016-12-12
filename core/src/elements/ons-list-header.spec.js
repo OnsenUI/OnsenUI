@@ -10,7 +10,7 @@ describe('ons-list-header', () => {
     expect(element.classList.contains('list__header')).to.be.true;
   });
 
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     var element = new ons.ListHeaderElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list__header--hoge')).to.be.true;

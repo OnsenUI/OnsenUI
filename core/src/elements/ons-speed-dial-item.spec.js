@@ -16,7 +16,7 @@ describe('OnsSpeedDialItemElement', () => {
     expect(window.ons.SpeedDialItemElement).to.be.ok;
   });
 
-  it('provides modifier attribute', () => {
+  onlyChrome(it)('provides modifier attribute', () => {
     item.setAttribute('modifier', 'hoge');
     expect(item.classList.contains('speed-dial__item--hoge')).to.be.true;
 

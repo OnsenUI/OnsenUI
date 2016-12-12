@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = angular.module('myApp', ['onsen']);
+
+      app.controller('MyCtrl', function($scope, $timeout) {
+        $scope.counter = 0;
+
+        $scope.inc = function() {
+          $scope.counter++;
+        };
+        
+        $timeout(function() {
+          if ($scope.counter !== 4) {
+            alert("NG");
+          }
+          else {
+            alert("OK");
+          }
+        }, 200);
+      });
+
+      ons.ready(function() {
+        $("ons-switch").children().click().click().click().click();
+      });
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-page ng-controller="MyCtrl">
+      <ons-toolbar>
+        <div class="center">Switch Test</div>
+      </ons-toolbar>
+
+      <br>
+      <div style="text-align: center">
+        <ons-switch ng-model="switch" ng-change="inc()"></ons-switch>
+        <p>Switch is {{ switch ? 'on' : 'off' }} and has been changed {{counter}} times!</p>
+      </div>
+    </ons-page>
+
+  </body>
+</html>
