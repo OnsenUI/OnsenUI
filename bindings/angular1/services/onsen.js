@@ -422,7 +422,7 @@ limitations under the License.
           var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
           component.on(eventName, function(event) {
-            $onsen.fireComponentEvent(component._element[0], eventName, event.detail);
+            $onsen.fireComponentEvent(component._element[0], eventName, event && event.detail);
 
             var handler = component._attrs['ons' + capitalizedEventName];
             if (handler) {

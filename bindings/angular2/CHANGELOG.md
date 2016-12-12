@@ -66,6 +66,10 @@ CHANGELOG
 
 ### Features
  * Added Angular 2 AOT support.
+ * Replaced TypeScript 1.x d.ts files with 2.x d.ts files.
+ * Dropped TypeScript 1.x support.
+ * Use WeakMap in pageLoader. (`OnsNavigator`, `OnsSplitter`, `OnsTabbar`)
+ * Remove AfterViewInit. (`OnsSwitch`)
  * Updated umd-template for angular@2.0.0.
 
 ### PEER-DEPENDENCY UPDATES
