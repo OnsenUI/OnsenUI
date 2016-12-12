@@ -407,7 +407,6 @@ export default class NavigatorElement extends BaseElement {
     return new Promise(resolve => {
       var leavePage = this.pages[length - 1];
       var enterPage = this.pages[length - 2];
-      enterPage.style.display = 'block';
 
       options.animation = options.animation || leavePage.pushedOptions.animation;
       options.animationOptions = util.extend(
@@ -489,7 +488,7 @@ export default class NavigatorElement extends BaseElement {
         name: options.page,
         data: options.data
       });
-      pageElement.style.display = 'none';
+      pageElement.style.visibility = 'hidden';
     };
 
     if (options.pageHTML) {
@@ -556,7 +555,7 @@ export default class NavigatorElement extends BaseElement {
           resolve(enterPage);
         };
 
-        enterPage.style.display = 'block';
+        enterPage.style.visibility = '';
         if (leavePage) {
           leavePage._hide();
           animator.push(enterPage, leavePage, done);
@@ -631,7 +630,6 @@ export default class NavigatorElement extends BaseElement {
           options.animationOptions || {}
         );
 
-        pageElement.style.display = 'none';
         this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
@@ -719,7 +717,7 @@ export default class NavigatorElement extends BaseElement {
     util.extend(options, {
       page: page.name
     });
-    page.style.display = 'none';
+    page.style.visibility = 'hidden';
     page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
     return this._pushPage(options);

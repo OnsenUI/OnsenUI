@@ -14,6 +14,7 @@ v2.0.5
  * core: All animators are extendable.
  * angular1: $event in event handlers is not empty anymore.
  * core: Remove Windows Phone 10+ support temporarily.
+ * ons-carousel: initial-index works when the carousel is inside ons-navigator.
 
 v2.0.4
 ----
