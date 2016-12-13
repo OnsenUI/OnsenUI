@@ -22,6 +22,7 @@ import ProgressCircular from './components/ProgressCircular.jsx';
 import PullHook from './components/PullHook.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
+import RouterNavigator from './components/RouterNavigator.jsx';
 import Row from './components/Row.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
@@ -35,6 +36,8 @@ import TabInactive from './components/TabInactive.jsx';
 import Tabbar from './components/Tabbar.jsx';
 import Toolbar from './components/Toolbar.jsx';
 import ToolbarButton from './components/ToolbarButton.jsx';
+
+import RouterUtil from './RouterUtil';
 
 export {
   AlertDialog,
@@ -61,6 +64,8 @@ export {
   PullHook,
   Range,
   Ripple,
+  RouterNavigator,
+  RouterUtil,
   Row,
   SpeedDial,
   SpeedDialItem,

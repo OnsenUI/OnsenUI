@@ -146,7 +146,8 @@ onlyChrome(describe)('LazyRepeatProvider', () => {
 
       const pageContent = page.querySelector('.page__content');
       pageContent.scrollTop = 10000;
-
+      provider._render();
+      pageContent.scrollTop = 10000;
       provider._render();
       expect(provider._renderedItems.hasOwnProperty(0)).to.be.false;
     });

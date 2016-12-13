@@ -182,3 +182,31 @@ $ gulp test
 ## How to contribute
 
 Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md). See the full list of contributors [here](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).
+
+## Release procedure
+
+Before releasing a new version, verify that the tests are passing and that there are no outstanding breaking issues. For major release with fundamental changes all components must be tested on all supported platforms.
+
+The first step is to add increase the version number in `package.json` and commit it. After that a new tag must be added:
+
+```
+git tag -a 2.3.4
+```
+
+This tag is important for building the documentation on the website.
+
+The next step is to run the release script:
+
+```
+cd scripts
+node dist-release.js
+```
+
+This will build Onsen UI and put the files in the `OnsenUI-dist` directory.
+
+The last step is to release the package on NPM. From the root of the repository do the following:
+
+```
+cd OnsenUI-dist;
+npm publish
+```
