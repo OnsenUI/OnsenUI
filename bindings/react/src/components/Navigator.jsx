@@ -201,6 +201,10 @@ class Navigator extends BasicComponent {
   }
 
   _prePop(event) {
+    if (event.target !== this.refs.navi) {
+      return;
+    }
+
     event.routes = {
       poppingRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
       routes: this.routesBeforePop
@@ -210,6 +214,10 @@ class Navigator extends BasicComponent {
   }
 
   _postPop(event) {
+    if (event.target !== this.refs.navi) {
+      return;
+    }
+
     event.routes = {
       poppedRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
       routes: this.routesBeforePop.slice(0, this.routesBeforePop.length - 1)
@@ -219,6 +227,10 @@ class Navigator extends BasicComponent {
   }
 
   _prePush(event) {
+    if (event.target !== this.refs.navi) {
+      return;
+    }
+
     event.routes = {
       pushingRoute: this.routes[this.routes.length - 1],
       routes: this.routes.slice(0, this.routes.length - 1)
@@ -228,6 +240,10 @@ class Navigator extends BasicComponent {
   }
 
   _postPush(event) {
+    if (event.target !== this.refs.navi) {
+      return;
+    }
+
     event.routes = {
       pushedRoute: this.routes[this.routes.length - 1],
       routes: this.routes
