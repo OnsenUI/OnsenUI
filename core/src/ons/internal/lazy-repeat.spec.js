@@ -28,15 +28,15 @@ describe('LazyRepeatDelegate', () => {
     const done = () => 42;
 
     it('throws an error when there is no function to call', () => {
-      expect(() => delegate.loadItemElement(0, document.createElement('div'), done)).to.throw(Error);
+      expect(() => delegate.loadItemElement(0, done)).to.throw(Error);
     });
 
     it('works when defined later', () => {
-      expect(() => delegate.loadItemElement(0, document.createElement('div'), done)).to.throw(Error);
+      expect(() => delegate.loadItemElement(0, done)).to.throw(Error);
       userDelegate.createItemContent = () => document.createElement('div');
-      expect(() => delegate.loadItemElement(0, document.createElement('div'), done)).to.not.throw(Error);
+      expect(() => delegate.loadItemElement(0, done)).to.not.throw(Error);
       userDelegate.createItemContent = null;
-      expect(() => delegate.loadItemElement(0, document.createElement('div'), done)).to.throw(Error);
+      expect(() => delegate.loadItemElement(0, done)).to.throw(Error);
     });
   });
 
@@ -126,23 +126,9 @@ onlyChrome(describe)('LazyRepeatProvider', () => {
 
   describe('#_getItemHeight()', () => {
     it('returns the item height', () => {
-      expect(provider._getItemHeight(0)).to.equal(44);
-      expect(provider._getItemHeight(99)).to.equal(44);
-    });
-  });
-
-  describe('#_checkItemHeight()', () => {
-    it('sets _itemHeight', (done) => {
-      provider._unknownItemHeight = true;
-      provider._checkItemHeight(() => {
-        try {
-          expect(provider._unknownItemHeight).to.not.be.ok;
-          expect(provider._itemHeight).to.be.ok;
-          done();
-        } catch (e) {
-          done(e);
-        }
-      });
+      const itemsIndex = Object.keys(provider._renderedItems);
+      expect(provider._getItemHeight(+(itemsIndex[0]))).to.equal(44);
+      expect(provider._getItemHeight(+(itemsIndex[itemsIndex.length - 1]))).to.equal(44);
     });
   });
 
