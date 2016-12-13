@@ -145,6 +145,9 @@ export class LazyRepeatProvider {
 
     this._wrapperElement = wrapperElement;
     this._delegate = delegate;
+    if (!this._wrapperElement.children[0]) {
+      this._wrapperElement.appendChild(document.createElement('span'));
+    }
     this._paddingElement = wrapperElement.children[0];
     this._paddingElement.style.display = 'block';
     this._paddingElement.style.height = 0;
@@ -161,7 +164,7 @@ export class LazyRepeatProvider {
 
     this.lastScrollTop = this._pageContent.scrollTop;
 
-    this._topPositions = [];
+    this._topPositions = [0];
     this._renderedItems = {};
 
     this._addEventListeners();
@@ -283,7 +286,7 @@ export class LazyRepeatProvider {
       }
 
       this._renderedItems[index] = item;
-      this._topPositions[index] = index === 0 ? 0 : this._topPositions[index - 1] + item.element.offsetHeight;
+      this._topPositions[index + 1] = this._topPositions[index] + item.element.offsetHeight;
     });
   }
 
