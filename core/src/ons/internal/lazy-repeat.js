@@ -168,6 +168,14 @@ export class LazyRepeatProvider {
     this._onChange();
   }
 
+  get padding() {
+    return parseInt(this._paddingElement.style.height, 10);
+  }
+
+  set padding(newValue) {
+    this._paddingElement.style.height = newValue + 'px';
+  }
+
   _findPageContentElement(wrapperElement) {
     const pageContent = util.findParent(wrapperElement, '.page__content');
 
@@ -202,7 +210,7 @@ export class LazyRepeatProvider {
     const lastItemIndex = Math.max(0, ...Object.keys(this._renderedItems));
     const firstItemIndex = Math.min(...Object.keys(this._renderedItems));
     this._wrapperElement.style.height = this._topPositions[lastItemIndex] + 'px';
-    this._paddingElement.style.height = this._topPositions[firstItemIndex];
+    this.padding = this._topPositions[firstItemIndex];
     this._removeAllElements();
     this._render({forceScrollDown: true, forceStartIndex: firstItemIndex});
     this._wrapperElement.style.height = 'inherit';
@@ -265,11 +273,11 @@ export class LazyRepeatProvider {
     }
 
     this._delegate.loadItemElement(index, item => {
+      //
       if (isScrollUp) {
         this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[1])
         const itemHeight = item.element.offsetHeight;
-        const paddingElement = this._wrapperElement.children[0];
-        paddingElement.style.height = topPosition + 'px';
+        this.padding = topPosition;
       } else {
         this._wrapperElement.appendChild(item.element);
       }
@@ -287,7 +295,7 @@ export class LazyRepeatProvider {
     const itemHeight = item.element.offsetHeight;
     this._delegate.destroyItem(index, item);
     if (!isScrollUp) {
-      this._paddingElement.style.height = parseInt(this._paddingElement.style.height, 10) + itemHeight + 'px';
+      this.padding = this.padding + itemHeight;
     }
 
     if (item.element.parentElement) {
