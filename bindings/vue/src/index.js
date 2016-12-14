@@ -19,10 +19,9 @@ const registerComponents = (Vue, components) => {
 
 const install = (Vue, params = {}) => {
 	/**
-	 * Register components used in Tabbar,
-	 * Navigator and Splitter.
+	 * Register components.
 	 */
-	registerComponents(Vue, params.components || {});
+	registerComponents(Vue, {});
 
 	/**
 	 * Push a page to parent Navigator.
