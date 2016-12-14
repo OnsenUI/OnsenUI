@@ -26,6 +26,7 @@ CHANGELOG
  * Obsolete the plugin option `components`.
    * It should not be able to select which components will be registered.
  * Make `install` register all the components of vue-onsenui.
+ * Rename the component names from `ons-*` to `v-ons-*` due to the spec of Vue.js 2.
 
 1.0.0 (2016-09-15)
 ----

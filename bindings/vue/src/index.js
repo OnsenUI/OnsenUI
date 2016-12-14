@@ -1,10 +1,10 @@
 import {
-  OnsNavigator,
-  OnsBackButton,
-  OnsTabbar,
-  OnsSwitch,
-  OnsPullHook,
-  OnsSplitterSide
+  VOnsNavigator,
+  VOnsBackButton,
+  VOnsTabbar,
+  VOnsSwitch,
+  VOnsPullHook,
+  VOnsSplitterSide
 } from './components';
 
 import ons from 'onsenui';
@@ -22,12 +22,12 @@ const install = (Vue, params = {}) => {
 	 * Register components.
 	 */
 	registerComponents(Vue, {
-		OnsNavigator,
-		OnsBackButton,
-		OnsTabbar,
-		OnsSwitch,
-		OnsPullHook,
-		OnsSplitterSide
+		VOnsNavigator,
+		VOnsBackButton,
+		VOnsTabbar,
+		VOnsSwitch,
+		VOnsPullHook,
+		VOnsSplitterSide
 	});
 
 	/**
