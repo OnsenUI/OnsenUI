@@ -17,6 +17,9 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
+const defaultCheckboxClass = 'checkbox';
+const defaultRadioButtonClass = 'radio-button';
+
 const scheme = {
   '.text-input': 'text-input--*',
   '.text-input__label': 'text-input--*__label',
@@ -166,14 +169,14 @@ export default class InputElement extends BaseElement {
 
     switch (this.getAttribute('type')) {
       case 'checkbox':
-        this.classList.add('checkbox');
+        this.classList.add(defaultCheckboxClass);
         this._input.classList.add('checkbox__input');
         this._helper.classList.add('checkbox__checkmark');
         this._updateBoundAttributes();
         break;
 
       case 'radio':
-        this.classList.add('radio-button');
+        this.classList.add(defaultRadioButtonClass);
         this._input.classList.add('radio-button__input');
         this._helper.classList.add('radio-button__checkmark');
         this._updateBoundAttributes();
@@ -198,7 +201,7 @@ export default class InputElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'placeholder', 'input-id', 'checked', ...INPUT_ATTRIBUTES];
+    return ['class', 'modifier', 'placeholder', 'input-id', 'checked', ...INPUT_ATTRIBUTES];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -206,12 +209,24 @@ export default class InputElement extends BaseElement {
       return contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
     } else if (name === 'placeholder') {
       return contentReady(this, () => this._updateLabel());
-    } if (name === 'input-id') {
+    } else if (name === 'input-id') {
       contentReady(this, () => this._input.id = current);
-    } if (name === 'checked') {
+    } else if (name === 'checked') {
       this.checked = current !== null;
-    }
-    else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
+    } else if (name === 'class') {
+      switch (this.getAttribute('type')) {
+        case 'checkbox':
+          if (!this.classList.contains(defaultCheckboxClass)) {
+            this.className = defaultCheckboxClass + ' ' + current;
+          }
+          break;
+        case 'radio':
+          if (!this.classList.contains(defaultRadioButtonClass)) {
+            this.className = defaultRadioButtonClass + ' ' + current;
+          }
+          break;
+      }
+    } else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       return contentReady(this, () => this._updateBoundAttributes());
     }
   }

@@ -21,6 +21,7 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
+const defaultClassName = 'list__item';
 const scheme = {
   '.list__item': 'list__item--*',
   '.list__item__left': 'list__item--*__left',
@@ -134,7 +135,7 @@ export default class ListItemElement extends BaseElement {
   }
 
   _compile() {
-    this.classList.add('list__item');
+    this.classList.add(defaultClassName);
 
     let left, center, right;
 
@@ -184,16 +185,22 @@ export default class ListItemElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple'];
+    return ['modifier', 'class', 'ripple'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
       case 'ripple':
         this._updateRipple();
+        break;
     }
   }
 

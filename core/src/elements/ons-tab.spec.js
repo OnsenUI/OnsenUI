@@ -42,6 +42,16 @@ onlyChrome(describe)('OnsTabElement', () => {
     }).to.throw(Error);
   });
 
+  describe('class attribute', () => {
+    it('should contain "tabbar__item" class name automatically', () => {
+      const element = ons._util.createElement(`<ons-tab> </ons-tab>`);
+      expect(element.classList.contains('tabbar__item')).to.be.true;
+      element.className = 'foo';
+      expect(element.classList.contains('tabbar__item')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
   describe('modifier attribute', () => {
     onlyChrome(it)('modifies the classList of the tab', () => {
       const parent = ons._util.createElement(`

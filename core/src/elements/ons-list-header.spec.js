@@ -6,12 +6,15 @@ describe('ons-list-header', () => {
   });
 
   it('classList contains \'list__header\' by default', () => {
-    var element = new ons.ListHeaderElement();
+    const element = new ons.ListHeaderElement();
     expect(element.classList.contains('list__header')).to.be.true;
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('list__header')).to.be.true;
+    expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides modifier attribute', () => {
-    var element = new ons.ListHeaderElement();
+    const element = new ons.ListHeaderElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list__header--hoge')).to.be.true;
 

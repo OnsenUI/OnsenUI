@@ -27,6 +27,17 @@ describe('OnsFabElement', () => {
     expect(fab.classList.contains('fab--fuga')).to.be.true;
   });
 
+  describe('"class" attribute', () => {
+    it('should contain "fab" token automatically', () => {
+      const element = new ons.FabElement();
+      element.textContent = ' ';
+      expect(element.classList.contains('fab')).to.be.true;
+      element.setAttribute('class', 'foo');
+      expect(element.classList.contains('fab')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
   describe('#_show()', () => {
     it('calls show()', () => {
       const spy = chai.spy.on(fab, 'show');

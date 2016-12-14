@@ -6,8 +6,11 @@ describe('ons-bottom-toolbar', () => {
   });
 
   it('classList contains \'bottom-bar\' by default', () => {
-    var element = new ons.BottomToolbarElement();
+    const element = new ons.BottomToolbarElement();
     expect(element.classList.contains('bottom-bar')).to.be.true;
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('bottom-bar')).to.be.true;
+    expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides \'modifier\' attribute', () => {

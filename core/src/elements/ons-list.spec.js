@@ -6,12 +6,15 @@ describe('ons-list', () => {
   });
 
   it('classList contains \'list\' by default', () => {
-    var element = new ons.ListElement();
+    const element = new ons.ListElement();
     expect(element.classList.contains('list')).to.be.true;
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('list')).to.be.true;
+    expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides modifier attribute', () => {
-    var element = new ons.ListElement();
+    const element = new ons.ListElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list--hoge')).to.be.true;
 
