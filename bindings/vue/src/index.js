@@ -21,7 +21,14 @@ const install = (Vue, params = {}) => {
 	/**
 	 * Register components.
 	 */
-	registerComponents(Vue, {});
+	registerComponents(Vue, {
+		OnsNavigator,
+		OnsBackButton,
+		OnsTabbar,
+		OnsSwitch,
+		OnsPullHook,
+		OnsSplitterSide
+	});
 
 	/**
 	 * Push a page to parent Navigator.
