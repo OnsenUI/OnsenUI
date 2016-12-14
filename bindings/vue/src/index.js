@@ -1,4 +1,4 @@
-export {
+import {
   OnsNavigator,
   OnsBackButton,
   OnsTabbar,

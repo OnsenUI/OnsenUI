@@ -19,10 +19,10 @@ CHANGELOG
 
 ### PEER-DEPENDENCY UPDATES
  * 
+-->
 
 ### BREAKING CHANGES
- * 
--->
+ * Stop exposing Vue.js component options objects.
 
 1.0.0 (2016-09-15)
 ----
