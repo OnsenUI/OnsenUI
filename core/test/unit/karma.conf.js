@@ -14,17 +14,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../build/js/onsenui.js',
-      '../../core/test/setup.js',
-      `../../core/test/browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
-      global.KARMA_SPEC_FILES || '../../core/src/**/*.spec.js',
-      '../../build/css/onsenui.css',
-      '../../build/css/onsen-css-components.css'
+      '../../../build/js/onsenui.js',
+      'setup.js',
+      `browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
+      global.KARMA_SPEC_FILES || '../../../core/src/**/*.spec.js',
+      '../../../build/css/onsenui.css',
+      '../../../build/css/onsen-css-components.css'
     ],
 
     preprocessors: {
-      '../../core/test/setup.js': ['babel'],
-      '../../core/src/**/*.spec.js': ['babel']
+      'setup.js': ['babel'],
+      '../../../core/src/**/*.spec.js': ['babel']
     },
 
     babelPreprocessor: {
