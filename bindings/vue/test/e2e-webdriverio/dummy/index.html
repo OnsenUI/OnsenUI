@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css">
+  <script src="../../../../../build/js/onsenui.js"></script>
+  <script src="../../../../../bindings/vue/node_modules/vue/dist/vue.js"></script>
+  <script src="/dist/vue-onsenui.js"></script>
+  <script>
+    ons.ready(function() {
+      new Vue({
+        el: '#foo',
+        data: {
+            message: 'Hello'
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+    <div id="foo">
+        {{message}}
+    </div>
+</body>
+</html>

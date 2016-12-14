@@ -1,6 +1,6 @@
 {
   "name": "vue-onsenui",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.0.dev",
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
@@ -36,8 +36,8 @@
   ],
   "homepage": "https://onsen.io/",
   "peerDependencies": {
-    "vue": "^2.0.1",
-    "onsenui": "^2.0.0-rc.17"
+    "onsenui": "^2.0.0-rc.17",
+    "vue": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -50,6 +50,10 @@
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "gulp-chmod": "^2.0.0",
+    "gulp-download": "^0.0.1",
+    "gulp-unzip": "^0.2.0",
+    "gulp-util": "^3.0.7",
     "json-loader": "^0.5.4",
     "rollup": "^0.34.10",
     "rollup-plugin-babel": "^2.6.1",
@@ -57,6 +61,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-vue": "^2.0.1",
+    "static-server": "^2.0.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "vue": "^2.0.1",
@@ -64,6 +69,8 @@
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
+    "wdio-jasmine-framework": "^0.2.17",
+    "webdriverio": "^4.5.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.12.0"
   }
