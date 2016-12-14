@@ -18,6 +18,15 @@ describe('OnsSwitchElement', () => {
     expect(window.ons.SwitchElement).to.be.ok;
   });
 
+  describe('class attribute', () => {
+    it('should contains \'switch\' class name automatically', () => {
+      const element = new ons.SwitchElement();
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('switch')).to.be.ok;
+      expect(element.classList.contains('foobar')).to.be.ok;
+    });
+  });
+
   it('classList contains \'switch\' by default', () => {
     expect(element.classList.contains('switch')).to.be.true;
   });

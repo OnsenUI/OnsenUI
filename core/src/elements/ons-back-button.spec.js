@@ -5,6 +5,15 @@ describe('OnsBackButtonElement', () => {
     expect(window.ons.BackButtonElement).to.be.ok;
   });
 
+  describe('class attribute', () => {
+    it('should contain "back-button" class name automatically', () => {
+      const element = new ons.BackButtonElement();
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('back-button')).to.be.ok;
+      expect(element.classList.contains('foobar')).to.be.ok;
+    });
+  });
+
   onlyChrome(it)('provides \'modifier\' attribute', () => {
     const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
 

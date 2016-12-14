@@ -20,6 +20,8 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
+const defaultClassName = 'toolbar-button';
+
 const scheme = {'': 'toolbar-button--*'};
 
 /**
@@ -101,18 +103,25 @@ export default class ToolbarButtonElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('toolbar-button');
+    this.classList.add(defaultClassName);
 
     ModifierUtil.initModifier(this, scheme);
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'class':
+        if (this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
     }
   }
 }

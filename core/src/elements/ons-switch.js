@@ -22,6 +22,8 @@ import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 import GestureDetector from '../ons/gesture-detector';
 
+const defaultClassName = 'switch';
+
 const scheme = {
   '': 'switch--*',
   '.switch__input': 'switch--*__input',
@@ -182,7 +184,7 @@ export default class SwitchElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('switch');
+    this.classList.add(defaultClassName);
 
     if (!(util.findChild(this, '.switch__input') && util.findChild(this, '.switch__toggle'))) {
       this.appendChild(template.cloneNode(true));
@@ -299,25 +301,34 @@ export default class SwitchElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'input-id', 'checked', 'disabled'];
+    return ['modifier', 'input-id', 'checked', 'disabled', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
     contentReady(this, () => {
       switch(name) {
+        case 'class':
+          if (!this.classList.contains(defaultClassName)) {
+            this.className = defaultClassName + ' ' + current;
+          }
+          break;
+
         case 'modifier':
           this._isMaterial = (current || '').indexOf('material') !== -1;
           this._locations = locations[this._isMaterial ? 'material' : 'ios'];
           ModifierUtil.onModifierChanged(last, current, this, scheme);
           break;
+
         case 'input-id':
           this._checkbox.id = current;
           break;
+
         case 'checked':
           this._checked = current !== null;
           this._checkbox.checked = current !== null;
           util.toggleAttribute(this._checkbox, name, current !== null);
           break;
+
         case 'disabled':
           this._disabled = current !== null;
           this._checkbox.disabled = current !== null;

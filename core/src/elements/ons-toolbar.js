@@ -22,6 +22,8 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
+const defaultClassName = 'navigation-bar';
+
 const scheme = {
   '': 'navigation-bar--*',
   '.navigation-bar__left': 'navigation-bar--*__left',
@@ -40,7 +42,7 @@ const scheme = {
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
  * @modifier noshadow
  *   [en]Toolbar without shadow[/en]
- *   [ja]どうしよう[/ja]
+ *   [ja]ツールバーに影を付けずに表示します。[/ja]
  * @description
  *   [en]
  *     Toolbar component that can be used with navigation.
@@ -106,12 +108,19 @@ export default class ToolbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
     }
   }
 
@@ -152,7 +161,7 @@ export default class ToolbarElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-    this.classList.add('navigation-bar');
+    this.classList.add(defaultClassName);
     this._ensureToolbarItemElements();
     ModifierUtil.initModifier(this, scheme);
   }
