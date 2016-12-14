@@ -21,7 +21,7 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
-var scheme = {
+const scheme = {
   '': 'back-button--*',
   '.back-button__icon': 'back-button--*__icon',
   '.back-button__label': 'back-button--*__label'

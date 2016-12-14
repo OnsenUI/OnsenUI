@@ -26,6 +26,15 @@ describe('OnsModalElement', () => {
     expect(element.style.display).to.equal('none');
   });
 
+  describe('class attribute', () => {
+    it('should contains "modal" class name automatically', () => {
+      const element = new ons.ModalElement();
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('modal')).to.be.true;
+      expect(element.classList.contains('foobar')).to.be.true;
+    });
+  });
+
   describe('#_compile()', () => {
     onlyChrome(it)('adds a class \'modal\' by default', () => {
       expect(element.classList.contains('modal')).to.be.true;
