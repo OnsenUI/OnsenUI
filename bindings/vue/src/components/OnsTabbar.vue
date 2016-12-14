@@ -26,7 +26,7 @@
           type="radio"
           :checked="$index === index"
           @change="onChange($event, $index)"
-          v-bind:name="tab-bar-{{ key }}">
+          v-bind:name="'tab-bar-' + key">
         <button
             class="tab-bar__button"
             :class="{
