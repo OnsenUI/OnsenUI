@@ -1,9 +1,9 @@
 <template>
   <ons-switch
-    v-bind:checked="checked"
-    v-bind:disabled="disabled"
-    v-bind:input-id="inputId"
-    v-bind:modifier="modifier">
+    :checked="checked"
+    :disabled="disabled"
+    :input-id="inputId"
+    :modifier="modifier">
   </ons-switch>
 </template>
 
