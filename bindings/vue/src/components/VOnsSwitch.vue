@@ -1,11 +1,19 @@
 <template>
-  <ons-switch v-bind:checked="checked"></ons-switch>
+  <ons-switch
+    v-bind:checked="checked"
+    v-bind:disabled="disabled"
+    v-bind:input-id="inputId"
+    v-bind:modifier="modifier">
+  </ons-switch>
 </template>
 
 <script>
   export default {
     props: {
-      checked: { model: Boolean }
+      checked: { model: Boolean },
+      disabled: { model: Boolean },
+      inputId: { model: String },
+      modifier: { model: String },
     },
 
     methods: {
