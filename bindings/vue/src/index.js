@@ -10,39 +10,39 @@ import {
 import ons from 'onsenui';
 
 const registerComponents = (Vue, components) => {
-	Object.keys(components).forEach((key) => {
-		const value = components[key];
-		key = Vue.util.hyphenate(key);
-		Vue.component(key, value);
-	});
+  Object.keys(components).forEach((key) => {
+    const value = components[key];
+    key = Vue.util.hyphenate(key);
+    Vue.component(key, value);
+  });
 };
 
 const install = (Vue, params = {}) => {
-	/**
-	 * Register components.
-	 */
-	registerComponents(Vue, {
-		VOnsNavigator,
-		VOnsBackButton,
-		VOnsTabbar,
-		VOnsSwitch,
-		VOnsPullHook,
-		VOnsSplitterSide
-	});
+  /**
+   * Register components.
+   */
+  registerComponents(Vue, {
+    VOnsNavigator,
+    VOnsBackButton,
+    VOnsTabbar,
+    VOnsSwitch,
+    VOnsPullHook,
+    VOnsSplitterSide
+  });
 
-	/**
-	 * Push a page to parent Navigator.
-	 */
-	Vue.prototype.$push = function(options) {
-		this.$dispatch('push', options);
-	};
+  /**
+   * Push a page to parent Navigator.
+   */
+  Vue.prototype.$push = function(options) {
+    this.$dispatch('push', options);
+  };
 
-	/**
-	 * Pop a page from the parent Navigator.
-	 */
-	Vue.prototype.$pop = function(options) {
-		this.$dispatch('pop', options);
-	}
+  /**
+   * Pop a page from the parent Navigator.
+   */
+  Vue.prototype.$pop = function(options) {
+    this.$dispatch('pop', options);
+  }
 
   /**
    * Expose notification methods.
