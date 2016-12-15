@@ -21,6 +21,29 @@ describe('OnsInputElement', () => {
     expect(window.ons.InputElement).to.be.ok;
   });
 
+  onlyChrome(describe)('"class" attribute', () => {
+    it('should contain default class token automatically', () => {
+      {
+        const element = ons._util.createElement(`
+          <ons-input type="radio"> </ons-input>
+        `);
+        expect(element.classList.contains('radio-button')).to.be.true;
+        element.setAttribute('class', 'foo');
+        expect(element.classList.contains('radio-button')).to.be.true;
+        expect(element.classList.contains('foo')).to.be.true;
+      }
+      {
+        const element = ons._util.createElement(`
+          <ons-input type="checkbox"> </ons-input>
+        `);
+        expect(element.classList.contains('checkbox')).to.be.true;
+        element.setAttribute('class', 'foo');
+        expect(element.classList.contains('checkbox')).to.be.true;
+        expect(element.classList.contains('foo')).to.be.true;
+      }
+    });
+  });
+
   onlyChrome(it)('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element._input.classList.contains('text-input--hoge')).to.be.true;

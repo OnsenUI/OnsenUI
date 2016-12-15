@@ -17,6 +17,8 @@ import BaseElement from '../ons/base-element';
 import util from '../ons/util';
 import contentReady from '../ons/content-ready';
 
+const defaultClassName = 'fab';
+
 const scheme = {
   '': 'fab--*'
 };
@@ -78,7 +80,7 @@ export default class FabElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('fab');
+    this.classList.add(defaultClassName);
 
     if (!util.findChild(this, '.fab__icon')) {
       const content = document.createElement('span');
@@ -102,11 +104,16 @@ export default class FabElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple', 'position'];
+    return ['modifier', 'ripple', 'position', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
@@ -115,6 +122,7 @@ export default class FabElement extends BaseElement {
         break;
       case 'position':
         this._updatePosition();
+        break;
     }
   }
 

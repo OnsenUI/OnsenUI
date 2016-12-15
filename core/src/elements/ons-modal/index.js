@@ -31,6 +31,8 @@ const scheme = {
   'modal__content': 'modal--*__content'
 };
 
+const defaultClassName = 'modal';
+
 const _animatorDict = {
   'default': ModalAnimator,
   'fade': FadeModalAnimator,
@@ -122,7 +124,7 @@ export default class ModalElement extends BaseElement {
   _compile() {
     this.style.display = 'none';
     this.style.zIndex = 10001;
-    this.classList.add('modal');
+    this.classList.add(defaultClassName);
 
     if (!util.findChild(this, '.modal__content')) {
       const content = document.createElement('div');
@@ -287,11 +289,15 @@ export default class ModalElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
+    if (name === 'class') {
+      if (!this.classList.contains(defaultClassName)) {
+        this.className = defaultClassName + ' ' + current;
+      }
+    } else if (name === 'modifier') {
       return ModifierUtil.onModifierChanged(last, current, this, scheme);
     }
   }

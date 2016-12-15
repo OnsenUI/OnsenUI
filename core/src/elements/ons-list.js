@@ -20,6 +20,7 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
+const defaultClassName = 'list';
 const scheme = {'': 'list--*'};
 
 /**
@@ -74,17 +75,24 @@ export default class ListElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-    this.classList.add('list');
+    this.classList.add(defaultClassName);
     ModifierUtil.initModifier(this, scheme);
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
     }
   }
 }
