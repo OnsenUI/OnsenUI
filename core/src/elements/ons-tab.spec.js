@@ -43,11 +43,10 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('class attribute', () => {
-    it('should contain "tabbar__item" class name automatically', () => {
-      const element = ons._util.createElement(`<ons-tab> </ons-tab>`);
-      expect(element.classList.contains('tabbar__item')).to.be.true;
+    it('should contain "tab-bar__item" class token automatically', () => {
+      expect(element.classList.contains('tab-bar__item')).to.be.true;
       element.className = 'foo';
-      expect(element.classList.contains('tabbar__item')).to.be.true;
+      expect(element.classList.contains('tab-bar__item')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
     });
   });

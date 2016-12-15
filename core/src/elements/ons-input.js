@@ -205,29 +205,37 @@ export default class InputElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
-    } else if (name === 'placeholder') {
-      return contentReady(this, () => this._updateLabel());
-    } else if (name === 'input-id') {
-      contentReady(this, () => this._input.id = current);
-    } else if (name === 'checked') {
-      this.checked = current !== null;
-    } else if (name === 'class') {
-      switch (this.getAttribute('type')) {
-        case 'checkbox':
-          if (!this.classList.contains(defaultCheckboxClass)) {
-            this.className = defaultCheckboxClass + ' ' + current;
-          }
-          break;
-        case 'radio':
-          if (!this.classList.contains(defaultRadioButtonClass)) {
-            this.className = defaultRadioButtonClass + ' ' + current;
-          }
-          break;
-      }
-    } else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
-      return contentReady(this, () => this._updateBoundAttributes());
+    switch (name) {
+      case 'modifier':
+        contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
+        break;
+      case 'placeholder':
+        return contentReady(this, () => this._updateLabel());
+        break;
+      case 'input-id':
+        contentReady(this, () => this._input.id = current);
+        break;
+      case 'checked':
+        this.checked = current !== null;
+        break;
+      case 'class':
+        switch (this.getAttribute('type')) {
+          case 'checkbox':
+            if (!this.classList.contains(defaultCheckboxClass)) {
+              this.className = defaultCheckboxClass + ' ' + current;
+            }
+            break;
+          case 'radio':
+            if (!this.classList.contains(defaultRadioButtonClass)) {
+              this.className = defaultRadioButtonClass + ' ' + current;
+            }
+            break;
+        }
+        break;
+    }
+
+    if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
+      contentReady(this, () => this._updateBoundAttributes());
     }
   }
 

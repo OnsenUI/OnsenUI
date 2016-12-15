@@ -115,7 +115,7 @@ export default class ToolbarButtonElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (this.classList.contains(defaultClassName)) {
+        if (!this.classList.contains(defaultClassName)) {
           this.className = defaultClassName + ' ' + current;
         }
         break;

@@ -18,6 +18,9 @@ describe('OnsPageElement', () => {
 
   it('has page class', () => {
     expect(element.classList.contains('page')).to.be.true;
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('page')).to.be.true;
+    expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('should fill class name automatically on content wrapper element', () => {

@@ -19,8 +19,8 @@ describe('OnsSwitchElement', () => {
   });
 
   describe('class attribute', () => {
-    it('should contains \'switch\' class name automatically', () => {
-      const element = new ons.SwitchElement();
+    it('should contains "switch" class token automatically', () => {
+      expect(element.classList.contains('switch')).to.be.ok;
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('switch')).to.be.ok;
       expect(element.classList.contains('foobar')).to.be.ok;

@@ -29,12 +29,10 @@ describe('OnsFabElement', () => {
 
   describe('"class" attribute', () => {
     it('should contain "fab" token automatically', () => {
-      const element = new ons.FabElement();
-      element.textContent = ' ';
-      expect(element.classList.contains('fab')).to.be.true;
-      element.setAttribute('class', 'foo');
-      expect(element.classList.contains('fab')).to.be.true;
-      expect(element.classList.contains('foo')).to.be.true;
+      expect(fab.classList.contains('fab')).to.be.true;
+      fab.setAttribute('class', 'foo');
+      expect(fab.classList.contains('fab')).to.be.true;
+      expect(fab.classList.contains('foo')).to.be.true;
     });
   });
 
