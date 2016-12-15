@@ -5,7 +5,7 @@ describe('ons-list', () => {
     expect(window.ons.ListElement).to.be.ok;
   });
 
-  it('classList contains \'list\' by default', () => {
+  onlyChrome(it)('classList contains \'list\' by default', () => {
     const element = new ons.ListElement();
     expect(element.classList.contains('list')).to.be.true;
     element.setAttribute('class', 'foo');

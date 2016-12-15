@@ -13,7 +13,7 @@ describe('OnsListItemElement', () => {
     expect(window.ons.ListItemElement).to.be.ok;
   });
 
-  it('classList contains \'list__item\' by default', () => {
+  onlyChrome(it)('classList contains \'list__item\' by default', () => {
     const element = ons._util.createElement('<ons-list-item>content</ons-list-item>');
     expect(element.classList.contains('list__item')).to.be.true;
     element.setAttribute('class', 'foo');

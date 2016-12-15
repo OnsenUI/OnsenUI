@@ -5,7 +5,7 @@ describe('ons-bottom-toolbar', () => {
     expect(window.ons.BottomToolbarElement).to.be.ok;
   });
 
-  it('classList contains \'bottom-bar\' by default', () => {
+  onlyChrome(it)('classList contains \'bottom-bar\' by default', () => {
     const element = new ons.BottomToolbarElement();
     expect(element.classList.contains('bottom-bar')).to.be.true;
     element.setAttribute('class', 'foo');

@@ -21,7 +21,7 @@ describe('ons-toolbar-button', () => {
     expect(element.classList.contains('toolbar-button--fuga')).to.be.true;
   });
 
-  describe('"class" attribute', () => {
+  onlyChrome(describe)('"class" attribute', () => {
     it('should contain "toolbar-button" class name automatically', () => {
       const element = document.createElement('ons-toolbar-button');
       element.textContent = '';

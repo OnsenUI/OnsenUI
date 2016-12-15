@@ -5,7 +5,7 @@ describe('OnsBackButtonElement', () => {
     expect(window.ons.BackButtonElement).to.be.ok;
   });
 
-  describe('class attribute', () => {
+  onlyChrome(describe)('class attribute', () => {
     it('should contain "back-button" class name automatically', () => {
       const element = new ons.BackButtonElement();
       element.setAttribute('class', 'foobar');

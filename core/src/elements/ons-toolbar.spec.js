@@ -16,7 +16,7 @@ describe('OnsToolbarElement', () => {
     expect(window.ons.ToolbarElement).to.be.ok;
   });
 
-  describe('"class" attribute', () => {
+  onlyChrome(describe)('"class" attribute', () => {
     it('should contain "navigation-bar" class name automatically', () => {
       const element = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');
       expect(element.classList.contains('navigation-bar')).to.be.true;

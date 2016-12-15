@@ -21,7 +21,7 @@ describe('OnsInputElement', () => {
     expect(window.ons.InputElement).to.be.ok;
   });
 
-  describe('"class" attribute', () => {
+  onlyChrome(describe)('"class" attribute', () => {
     it('should contain default class token automatically', () => {
       {
         const element = ons._util.createElement(`

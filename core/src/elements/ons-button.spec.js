@@ -5,7 +5,7 @@ describe('ons-button', () => {
     expect(window.ons.ButtonElement).to.be.ok;
   });
 
-  describe('class attribute', () => {
+  onlyChrome(describe)('class attribute', () => {
     it('should contains "button" class name automatically', () => {
       const element = new ons.ButtonElement();
       element.setAttribute('class', 'foobar');

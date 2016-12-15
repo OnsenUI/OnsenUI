@@ -33,7 +33,7 @@ describe('OnsRippleElement', () => {
     expect(window.ons.RippleElement).to.be.ok;
   });
 
-  describe('class attribute', () => {
+  onlyChrome(describe)('class attribute', () => {
     it('should contain "ripple" class name automatically', () => {
       const element = new ons.RippleElement();
       element.setAttribute('class', 'foobar');

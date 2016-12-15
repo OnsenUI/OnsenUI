@@ -27,7 +27,7 @@ describe('OnsFabElement', () => {
     expect(fab.classList.contains('fab--fuga')).to.be.true;
   });
 
-  describe('"class" attribute', () => {
+  onlyChrome(describe)('"class" attribute', () => {
     it('should contain "fab" token automatically', () => {
       expect(fab.classList.contains('fab')).to.be.true;
       fab.setAttribute('class', 'foo');

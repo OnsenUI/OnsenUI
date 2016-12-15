@@ -16,7 +16,7 @@ describe('OnsPageElement', () => {
     expect(window.ons.PageElement).to.be.ok;
   });
 
-  it('has page class', () => {
+  onlyChrome(it)('has page class', () => {
     expect(element.classList.contains('page')).to.be.true;
     element.setAttribute('class', 'foo');
     expect(element.classList.contains('page')).to.be.true;

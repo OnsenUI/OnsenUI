@@ -41,7 +41,7 @@ describe('OnsSpeedDialElement', () => {
     expect(speedDial.classList.contains('speed-dial--fuga')).to.be.true;
   });
 
-  describe('"class" attribute', () => {
+  onlyChrome(describe)('"class" attribute', () => {
     it('should contain default class name automatically', () => {
       const element = ons._util.createElement(`
         <ons-speed-dial>

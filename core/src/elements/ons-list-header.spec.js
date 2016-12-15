@@ -5,7 +5,7 @@ describe('ons-list-header', () => {
     expect(window.ons.ListHeaderElement).to.be.ok;
   });
 
-  it('classList contains \'list__header\' by default', () => {
+  onlyChrome(it)('classList contains \'list__header\' by default', () => {
     const element = new ons.ListHeaderElement();
     expect(element.classList.contains('list__header')).to.be.true;
     element.setAttribute('class', 'foo');

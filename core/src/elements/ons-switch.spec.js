@@ -18,7 +18,7 @@ describe('OnsSwitchElement', () => {
     expect(window.ons.SwitchElement).to.be.ok;
   });
 
-  describe('class attribute', () => {
+  onlyChrome(describe)('class attribute', () => {
     it('should contains "switch" class token automatically', () => {
       expect(element.classList.contains('switch')).to.be.ok;
       element.setAttribute('class', 'foobar');

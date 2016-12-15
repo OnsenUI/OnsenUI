@@ -26,7 +26,7 @@ describe('OnsModalElement', () => {
     expect(element.style.display).to.equal('none');
   });
 
-  describe('class attribute', () => {
+  onlyChrome(describe)('class attribute', () => {
     it('should contains "modal" class name automatically', () => {
       const element = new ons.ModalElement();
       element.setAttribute('class', 'foobar');
