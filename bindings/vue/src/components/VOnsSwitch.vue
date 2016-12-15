@@ -10,10 +10,10 @@
 <script>
   export default {
     props: {
-      checked: { model: Boolean },
-      disabled: { model: Boolean },
-      inputId: { model: String },
-      modifier: { model: String },
+      checked:  { type: Boolean },
+      disabled: { type: Boolean },
+      inputId:  { type: String },
+      modifier: { type: String },
     },
 
     methods: {
