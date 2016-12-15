@@ -23,14 +23,6 @@
 
     props: ['initialComponent'],
 
-    mounted : function () {
-      this.$nextTick(function() {
-        if (this.initialComponent) {
-          this.pages = [this.initialComponent];
-        }
-      })
-    },
-
     methods: {
       push({component, ...options}) {
         if (this.isRunning) {
@@ -61,6 +53,45 @@
           .catch(noop)
           .then(() => this.isRunning = false);
       }
-    }
+    },
+
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    // created() {
+    // },
+
+    // beforeMount() {
+    // },
+
+    mounted() {
+      this.$nextTick(function() {
+        if (this.initialComponent) {
+          this.pages = [this.initialComponent];
+        }
+      })
+    },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    // beforeDestroy() {
+    // },
+
+    // destroyed() {
+    // },
   };
 </script>

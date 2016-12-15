@@ -6,7 +6,20 @@
 
 <script>
   export default {
-    mounted : function() {
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    // created() {
+    // },
+
+    // beforeMount() {
+    // },
+
+    mounted() {
       this.$nextTick(function() {
         const el = this.$el;
 
@@ -18,6 +31,24 @@
           this.$emit('changestate', {state});
         });
       })
-    }
+    },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    // beforeDestroy() {
+    // },
+
+    // destroyed() {
+    // },
   };
 </script>

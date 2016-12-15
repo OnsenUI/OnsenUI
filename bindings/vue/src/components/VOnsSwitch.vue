@@ -4,24 +4,50 @@
 
 <script>
   export default {
-    mounted() {
-      this.$el.addEventListener('change', this.onChange);
-    },
-
-    beforeDestroy() {
-      this.$el.removeEventListener('change', this.onChange);
-    },
-
     props: {
-      checked: {
-        model: Boolean
-      }
+      checked: { model: Boolean }
     },
 
     methods: {
       onChange(ev) {
         this.$emit('change', ev);
       }
-    }
+    },
+
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    // created() {
+    // },
+
+    // beforeMount() {
+    // },
+
+    mounted() {
+      this.$el.addEventListener('change', this.onChange);
+    },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    beforeDestroy() {
+      this.$el.removeEventListener('change', this.onChange);
+    },
+
+    // destroyed() {
+    // },
   };
 </script>

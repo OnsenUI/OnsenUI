@@ -75,15 +75,46 @@
       };
     },
 
-    created() {
-      this.key = generateKey();
-    },
-
     methods: {
       onChange(event, index) {
         event.stopPropagation();
         this.$emit('tab-change', {index});
       }
-    }
+    },
+
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    created() {
+      this.key = generateKey();
+    },
+
+    // beforeMount() {
+    // },
+
+    // mounted() {
+    // },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    // beforeDestroy() {
+    // },
+
+    // destroyed() {
+    // },
   };
 </script>
