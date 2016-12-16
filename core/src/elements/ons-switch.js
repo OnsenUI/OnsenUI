@@ -225,7 +225,8 @@ export default class SwitchElement extends BaseElement {
   }
 
   _onChange(event) {
-    util.toggleAttribute(this, 'checked', this.checkbox.checked);
+    event.stopPropagation();
+    this.click();
   }
 
   _onClick(ev) {
