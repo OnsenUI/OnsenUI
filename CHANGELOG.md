@@ -4,6 +4,7 @@ CHANGELOG
 
 v2.0.5
 ----
+ * core: Changed all elements to have default className token always. Fixed [#1711](https://github.com/OnsenUI/OnsenUI/issues/1711).
  * ons-switch: Fix `disbled` to `disabled`.
  * angular1: Fix [#1677](https://github.com/OnsenUI/OnsenUI/issues/1677).
  * ons-tabbar: Fix [#1654](https://github.com/OnsenUI/OnsenUI/issues/1654).
