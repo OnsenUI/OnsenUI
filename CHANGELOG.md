@@ -17,6 +17,7 @@ v2.0.5
  * core: Remove Windows Phone 10+ support temporarily.
  * ons-carousel: initial-index works when the carousel is inside ons-navigator.
  * ons-switch: Always triggers custom events and stops propagation from inner element events.
+ * ons-tab: Throws verbose error if cannot create pageElement.
 
 v2.0.4
 ----
