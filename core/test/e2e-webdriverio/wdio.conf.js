@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        global.WDIO_SPEC_FILES || 'core/test/e2e-webdriverio/**/*.js'
+        global.WDIO_SPEC_FILES || 'core/test/e2e-webdriverio/**/*.spec.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -123,7 +123,7 @@ exports.config = {
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'jasmine',
+    framework: 'mocha',
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'

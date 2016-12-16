@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Button Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+
+  <script>
+    function test1() {
+      alert("test1");
+      document.getElementById('input_file').click();
+    }
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Issue 1743</div>
+    </ons-toolbar>
+    <div class="content">
+      <input type="file" id="input_file"><br>
+      <br>
+      <span id="target" onclick="test1();">test1</span>
+    </div>
+  </ons-page>
+</body>
+</html>
