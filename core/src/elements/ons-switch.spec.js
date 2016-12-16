@@ -140,13 +140,14 @@ describe('OnsSwitchElement', () => {
 
   describe('#_onChange()', () => {
     onlyChrome(it)('adds the \'checked\' attribute', () => {
-      element.checked = true;
+      expect(element.hasAttribute('checked')).to.be.false;
       element._onChange();
       expect(element.hasAttribute('checked')).to.be.true;
     });
 
     it('removes the \'checked\' attribute', () => {
-      element.checked = false;
+      element.checked = true;
+      expect(element.hasAttribute('checked')).to.be.true;
       element._onChange();
       expect(element.hasAttribute('checked')).to.be.false;
     });

@@ -356,6 +356,9 @@ export default class TabElement extends BaseElement {
     if (!this._loadedPage && !this._getPageTarget()) {
       const pages = this._findTabbarElement().pages;
       const index = this._findTabIndex();
+      if (!pages[index]) {
+        throw Error('Page was not provided to <ons-tab> index ' + index);
+      }
       callback(pages[index]);
     } else if (this._loadingPage) {
       this._loadingPage.then(pageElement => {

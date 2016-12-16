@@ -26,8 +26,8 @@ export class TabbarAnimator extends BaseAnimator {
    * @param {Number} options.duration
    * @param {Number} options.delay
    */
-  constructor({timing = 'linear', delay = 0.4, duration = 0} = {}) {
-    super({ timing, delay, duration });
+  constructor({timing = 'linear', duration = 0.4, delay = 0} = {}) {
+    super({ timing, duration, delay });
   }
 
   /**
@@ -90,8 +90,8 @@ export class TabbarFadeAnimator extends TabbarAnimator {
 }
 
 export class TabbarSlideAnimator extends TabbarAnimator {
-  constructor({timing = 'ease-in', delay = 0.15, duration = 0} = {}) {
-    super({ timing, delay, duration });
+  constructor({timing = 'ease-in', duration = 0.15, delay = 0} = {}) {
+    super({ timing, duration, delay });
   }
 
   /**
