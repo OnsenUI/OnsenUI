@@ -225,7 +225,9 @@ export default class SwitchElement extends BaseElement {
   }
 
   _onChange(event) {
-    event.stopPropagation();
+    if (event && event.stopPropagation) {
+      event.stopPropagation();
+    }
     this.click();
   }
 
