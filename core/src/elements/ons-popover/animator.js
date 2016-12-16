@@ -50,10 +50,10 @@ export class PopoverAnimator extends BaseAnimator {
     if (restore) {
       animation = animation.saveStyle();
     }
-    animation = animation.queue(from).wait(options.delay).queue({
+    animation = animation.queue(from).wait(this.delay).queue({
       css: to,
-      duration: options.duration,
-      timing: options.timing
+      duration: this.duration,
+      timing: this.timing
     });
     if (restore) {
       animation = animation.restoreStyle();
