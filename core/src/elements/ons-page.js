@@ -158,7 +158,6 @@ export default class PageElement extends BaseElement {
       this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
-      this.pushedOptions = {};
     });
   }
 
