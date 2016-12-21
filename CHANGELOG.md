@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+v2.0.6
+----
+
+ * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
+
 v2.0.5
 ----
  * core: Changed all elements to have default className token always. Fixed [#1711](https://github.com/OnsenUI/OnsenUI/issues/1711).
