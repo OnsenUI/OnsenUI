@@ -369,12 +369,16 @@ export default class NavigatorElement extends BaseElement {
     }
 
     return new Promise(resolve => {
-      const options = {page: oldPage.name, parent: this, params: oldPage.pushedOptions.data};
+      const options = {
+        page: oldPage.name,
+        parent: this,
+        params: oldPage.pushedOptions ? oldPage.pushedOptions.data : {}
+      };
       this._pageLoader.load(options, pageElement => {
         pageElement = util.extend(pageElement, {
           name: oldPage.name,
           data: oldPage.data,
-          pushedOptions: oldPage.pushedOptions
+          pushedOptions: oldPage.pushedOptions || {}
         });
 
         this.insertBefore(pageElement, oldPage ? oldPage : null);
@@ -405,13 +409,13 @@ export default class NavigatorElement extends BaseElement {
     this.pages[length - 2].updateBackButton((length - 2) > 0);
 
     return new Promise(resolve => {
-      var leavePage = this.pages[length - 1];
-      var enterPage = this.pages[length - 2];
+      const leavePage = this.pages[length - 1];
+      const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || leavePage.pushedOptions.animation;
+      options.animation = options.animation || leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined;
       options.animationOptions = util.extend(
         {},
-        leavePage.pushedOptions.animationOptions,
+        leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
         options.animationOptions || {}
       );
 
@@ -527,8 +531,8 @@ export default class NavigatorElement extends BaseElement {
     return update().then(() => {
       const pageLength = this.pages.length;
 
-      var enterPage  = this.pages[pageLength - 1];
-      var leavePage = this.pages[pageLength - 2];
+      const enterPage  = this.pages[pageLength - 1];
+      const leavePage = this.pages[pageLength - 2];
 
       if (enterPage.nodeName !== 'ONS-PAGE') {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
@@ -538,6 +542,7 @@ export default class NavigatorElement extends BaseElement {
 
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
+
       enterPage.name = enterPage.name || options.page;
       enterPage.unload = enterPage.unload || options.unload;
 
