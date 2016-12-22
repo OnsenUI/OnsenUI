@@ -7,7 +7,7 @@ Guidelines:
 CHANGELOG
 ====
 
-2.0.0-beta.0 (Work In Progress)
+2.0.0-alpha.0 (Work In Progress)
 ----
 
 <!--
