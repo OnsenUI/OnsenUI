@@ -23,11 +23,6 @@
       fixedJump = Array(10).join('<br>');
     }
 
-    function setup() {
-      fixedJump = '';
-      document.querySelector('#my-list').setup();
-    }
-
     function refresh(i) {
       document.querySelector('#my-list').refresh(i);
     }
@@ -59,7 +54,7 @@
       <div class="left"><ons-toolbar-button onclick="refresh()">Refresh</ons-toolbar-button></div>
       <div class="center">Lazy Repeat</div>
       <div class="right">
-        <ons-toolbar-button onclick="setup()">Setup</ons-toolbar-button>
+        <ons-toolbar-button onclick="test()">TestItem5</ons-toolbar-button>
       </div>
     </ons-toolbar>
 
