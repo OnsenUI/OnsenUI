@@ -244,12 +244,19 @@ export class LazyRepeatProvider {
   _getItemHeight(i) {
     if (this._renderedItems.hasOwnProperty(i)) {
       // height property is 0 for Angular 2
-      return this._renderedItems[i].height || this._renderedItems[i].element.offsetHeight;
+      if (this._renderedItems[i].height === 0) {
+        this._renderedItems[i].height = this._renderedItems[i].element.offsetHeight;
+      }
+      return this._renderedItems[i].height;
     }
     if (this._topPositions[i + 1] && this._topPositions[i]) {
       return this._topPositions[i + 1] - this._topPositions[i];
     }
     return this.staticItemHeight || this._delegate.calculateItemHeight(i);
+  }
+
+  _calculateRenderedHeight() {
+    return Object.keys(this._renderedItems).reduce((a, b) => a + this._getItemHeight(+(b)), 0)
   }
 
   _onChange() {
@@ -259,7 +266,7 @@ export class LazyRepeatProvider {
   refresh() {
     const lastItemIndex = Math.max(0, ...Object.keys(this._renderedItems));
     const firstItemIndex = Math.min(...Object.keys(this._renderedItems));
-    this._wrapperElement.style.height = this._topPositions[lastItemIndex] + 'px';
+    this._wrapperElement.style.height = this._topPositions[firstItemIndex] + this._calculateRenderedHeight() + 'px';
     this.padding = this._topPositions[firstItemIndex];
     this._removeAllElements();
     this._render({forceScrollDown: true, forceFirstIndex: firstItemIndex, forceLastIndex: lastItemIndex});
@@ -330,6 +337,7 @@ export class LazyRepeatProvider {
       if (isScrollUp) {
         this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[this._insertIndex])
         this.padding = this._topPositions[index];
+        item.height = this._topPositions[index + 1] - this._topPositions[index];
       } else {
         this._wrapperElement.appendChild(item.element);
         item.height = item.element.offsetHeight;
