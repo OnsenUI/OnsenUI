@@ -13,13 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// NOTE: You can't use @extend that break component independent and topdoc parsing.
-
-// internal variables
-var-dialog-background-color = $dialog-background-color
-
-var-material-dialog-background-color = $material-dialog-background-color
-
 /*! topdoc
   name: Dialog
   class: dialog
@@ -33,38 +26,42 @@ var-material-dialog-background-color = $material-dialog-background-color
       </div>
     </div>
 */
-.dialog
-  reset-box-model()
-  reset-base()
-  reset-cursor()
-  reset-font()
-  position absolute
-  top 50%
-  left 50%
-  transform translate(-50%, -50%)
-  margin auto auto
-  overflow hidden
-  min-width 270px
-  min-height 100px
-  text-align left
 
-.dialog-container
-  height inherit
-  min-height inherit
-  overflow hidden
-  border-radius 4px
-  background-color var-dialog-background-color
-  -webkit-mask-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")
+.dialog {
+  .reset-box-model();
+  .reset-base();
+  .reset-cursor();
+  .reset-font();
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+}
 
-.dialog-mask
-  reset-base()
-  reset-cursor()
-  position absolute
-  top 0
-  right 0
-  left 0
-  bottom 0
-  background-color rgba(0, 0, 0, 0.2)
+.dialog-container {
+  height: inherit;
+  min-height: inherit;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: @dialog-background-color;
+  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+}
+
+.dialog-mask {
+  .reset-base();
+  .reset-cursor();
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 /*! topdoc
   name: Material Dialog
@@ -78,14 +75,17 @@ var-material-dialog-background-color = $material-dialog-background-color
     </div>
 */
 
-.dialog--material
-  material-font()
-  text-align left
-  shadow-5()
+.dialog--material {
+  .material-font();
+  text-align: left;
+  .material-shadow-5();
+}
 
-.dialog-container--material
-  border-radius 2px
-  background-color var-material-dialog-background-color
+.dialog-container--material {
+  border-radius: 2px;
+  background-color: @material-dialog-background-color;
+}
 
-.dialog-mask--material
-  background-color rgba(0, 0, 0, 0.3)
+.dialog-mask--material {
+  background-color: rgba(0, 0, 0, 0.3);
+}
