@@ -24,18 +24,15 @@
             return;
           }
 
-          console.log("Created item #" + index);
           itemScope.item = {
             title: 'Item #' + (index + 1),
-            desc: 'Bla bla bla bla...',
-            rand: Math.random()
+            desc: 'Bla bla bla bla...'
           };
         },
         countItems : function() {
-          return 10000000;
+          return 10000;
         },
         destroyItemScope: function(index, scope) {
-          console.log("Destroyed item #" + index);
         }
       };
     });
@@ -54,7 +51,6 @@
     <ons-list>
       <ons-list-item modifier="chevron" ons-lazy-repeat="MyDelegate">
         <div class="left">
-          <img ng-src="http://lorempixel.com/40/40/?{{item.rand}}" class="list__item__thumbnail">
         </div>
         <div class="center">
           <div class="list__item__title">{{ item.title }}</div>
