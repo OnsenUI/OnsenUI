@@ -54,24 +54,19 @@ class LazyList extends BasicComponent {
       calculateItemHeight: function(index) {
         return props.calculateItemHeight(index);
       },
-      _render: function(items, newHeight) {
-        var createElement = function({index: index, top: top}) {
+      // _render: function(items, newHeight) {
+      _render: function(start, limit, updateTop) {
+        var createElement = function(index) {
           return props.renderRow(index);
         };
 
-        var el = items.map(createElement);
-        self.setState({children: el, height: newHeight},
-                      () => {
-                        var list = this.refs.list;
-                        // ignore i=0 <lazy repat
-                        for (var i = 1; i < list.children.length; i++) {
-                          list.children[i].style.position = 'absolute';
-                          list.children[i].style.top = items[i - 1].top + 'px';
-                          list.children[i].style.left = '0px';
-                          list.children[i].style.right = '0px';
-                        }
-                      });
-      }.bind(this),
+        const el = [];
+        for (let i = start; i < limit; i++) {
+          el.push(createElement(i));
+        }
+
+        self.setState({children: el}, updateTop);
+      },
       countItems: function() {
         return props.length;
       }
