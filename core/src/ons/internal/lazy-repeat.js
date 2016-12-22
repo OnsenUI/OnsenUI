@@ -46,8 +46,8 @@ export class LazyRepeatDelegate {
   /**
    * @return {void}
    */
-  _render(items, height) {
-    this._userDelegate._render(items, height);
+  _render() {
+    this._userDelegate._render.apply(this._userDelegate, arguments);
   }
 
   /**
@@ -57,7 +57,7 @@ export class LazyRepeatDelegate {
    */
   loadItemElement(index, done) {
     if (this._userDelegate.loadItemElement instanceof Function) {
-      this._userDelegate.loadItemElement(index, element => done({element}));
+      this._userDelegate.loadItemElement(index, done);
     } else {
       const element = this._userDelegate.createItemContent(index, this._templateElement);
       if (!(element instanceof Element)) {
@@ -145,12 +145,7 @@ export class LazyRepeatProvider {
 
     this._wrapperElement = wrapperElement;
     this._delegate = delegate;
-    if (!this._wrapperElement.children[0]) {
-      this._wrapperElement.appendChild(document.createElement('span'));
-    }
-    this._paddingElement = wrapperElement.children[0];
-    this._paddingElement.style.display = 'block';
-    this._paddingElement.style.height = 0;
+    this._insertIndex = (this._wrapperElement.children[0] && this._wrapperElement.children[0].tagName === 'ONS-LAZY-REPEAT') ? 1 : 0;
 
     if (wrapperElement.tagName.toLowerCase() === 'ons-list') {
       wrapperElement.classList.add('lazy-list');
@@ -163,20 +158,24 @@ export class LazyRepeatProvider {
     }
 
     this.lastScrollTop = this._pageContent.scrollTop;
-
+    this.padding = 0;
     this._topPositions = [0];
     this._renderedItems = {};
+
+    if (!this._delegate.itemHeight && !this._delegate.calculateItemHeight(0)) {
+      this._unknownItemHeight = true;
+    }
 
     this._addEventListeners();
     this._onChange();
   }
 
   get padding() {
-    return parseInt(this._paddingElement.style.height, 10);
+    return parseInt(this._wrapperElement.style.paddingTop, 10);
   }
 
   set padding(newValue) {
-    this._paddingElement.style.height = newValue + 'px';
+    this._wrapperElement.style.paddingTop = newValue + 'px';
   }
 
   _findPageContentElement(wrapperElement) {
@@ -197,12 +196,60 @@ export class LazyRepeatProvider {
     return null;
   }
 
+  _checkItemHeight(callback) {
+    this._delegate.loadItemElement(0, item => {
+      if (!this._unknownItemHeight) {
+        throw Error('Invalid state');
+      }
+
+      this._wrapperElement.appendChild(item.element);
+
+      const done = () => {
+        this._wrapperElement.removeChild(item.element);
+        delete this._unknownItemHeight;
+        callback();
+      };
+
+      this._itemHeight = item.element.offsetHeight;
+
+      if (this._itemHeight > 0) {
+        done();
+        return;
+      }
+
+      // retry to measure offset height
+      // dirty fix for angular2 directive
+      const lastVisibility = this._wrapperElement.style.visibility;
+      this._wrapperElement.style.visibility = 'hidden';
+      item.element.style.visibility = 'hidden';
+
+      setImmediate(() => {
+        this._itemHeight = item.element.offsetHeight;
+        if (this._itemHeight == 0) {
+          throw Error('Invalid state: this._itemHeight must be greater than zero.');
+        }
+        this._wrapperElement.style.visibility = lastVisibility;
+        done();
+      });
+    });
+  }
+
+  get staticItemHeight() {
+    return this._delegate.itemHeight || this._itemHeight;
+  }
   _countItems() {
     return this._delegate.countItems();
   }
 
   _getItemHeight(i) {
-    return this._topPositions[i + 1] - this._topPositions[i];
+    if (this._renderedItems.hasOwnProperty(i)) {
+      // height property is 0 for Angular 2
+      return this._renderedItems[i].height || this._renderedItems[i].element.offsetHeight;
+    }
+    if (this._topPositions[i + 1] && this._topPositions[i]) {
+      return this._topPositions[i + 1] - this._topPositions[i];
+    }
+    return this.staticItemHeight || this._delegate.calculateItemHeight(i);
   }
 
   _onChange() {
@@ -215,11 +262,15 @@ export class LazyRepeatProvider {
     this._wrapperElement.style.height = this._topPositions[lastItemIndex] + 'px';
     this.padding = this._topPositions[firstItemIndex];
     this._removeAllElements();
-    this._render({forceScrollDown: true, forceStartIndex: firstItemIndex});
+    this._render({forceScrollDown: true, forceFirstIndex: firstItemIndex, forceLastIndex: lastItemIndex});
     this._wrapperElement.style.height = 'inherit';
   }
 
-  _render({forceScrollDown = false, forceStartIndex} = {}) {
+  _render({forceScrollDown = false, forceFirstIndex, forceLastIndex} = {}) {
+    if (this._unknownItemHeight) {
+      return this._checkItemHeight(this._render.bind(this, arguments[0]));
+    }
+
     const isScrollUp = !forceScrollDown && this.lastScrollTop > this._pageContent.scrollTop;
     this.lastScrollTop = this._pageContent.scrollTop;
     const keep = {};
@@ -228,35 +279,35 @@ export class LazyRepeatProvider {
     const limit = 4 * window.innerHeight - offset;
     const count = this._countItems();
 
-    if (isScrollUp) {
-      const items = [];
-      for (let i = Math.max(0, this._calculateStartIndex(offset) - 30); i < count && this._topPositions[i] < limit; i++) {
-        items.push({index: i, topPosition: this._topPositions[i]});
+    const items = [];
+    const start = forceFirstIndex || Math.max(0, this._calculateStartIndex(offset) - 30);
+    let i = start;
+
+    for(let top = this._topPositions[i]; i < count && top < limit; i++) {
+      if (i >= this._topPositions.length) { // perf optimization
+        this._topPositions.length += 100;
       }
 
-      // if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
-      //   this._delegate._render(items, this._listHeight);
-      //   return null;
-      // }
+      this._topPositions[i] = top;
+      top += this._getItemHeight(i);
+    }
 
-      for (let i = items.length - 1; i >= 0; i--) {
-        this._renderElement(items[i], isScrollUp);
-        keep[items[i].index] = true;
+    if (this._delegate.hasRenderFunction && this._delegate.hasRenderFunction()) {
+      return this._delegate._render(start, i, () => {
+        this.padding = this._topPositions[start];
+      });
+    }
+
+    if (isScrollUp) {
+      for (let j = i - 1; j >= start; j--) {
+        keep[j] = true;
+        this._renderElement(j, isScrollUp);
       }
     } else {
-      let i = (forceStartIndex || Math.max(0, ...Object.keys(this._renderedItems)));
-
-      for(i; i < count; i++) {
-        if (i >= this._topPositions.length) { // perf optimization
-          this._topPositions.length += 100;
-        }
-        this._renderElement({index: i}, isScrollUp);
-        if (this._topPositions[i] > limit) { break; }
-      }
-
-      let j = Math.max(0, this._calculateStartIndex(offset) - 30);
-      for (j; j <= i; j++) {
+      const lastIndex = forceLastIndex || Math.max(i - 1, ...Object.keys(this._renderedItems));
+      for (let j = start; j <= lastIndex; j++) {
         keep[j] = true;
+        this._renderElement(j, isScrollUp);
       }
     }
 
@@ -268,7 +319,7 @@ export class LazyRepeatProvider {
    * @param {Number} item.index
    * @param {Number} item.topPosition
    */
-  _renderElement({index, topPosition}, isScrollUp) {
+  _renderElement(index, isScrollUp) {
     const item = this._renderedItems[index];
     if (item) {
       this._delegate.updateItem(index, item); // update if it exists
@@ -276,17 +327,16 @@ export class LazyRepeatProvider {
     }
 
     this._delegate.loadItemElement(index, item => {
-      //
       if (isScrollUp) {
-        this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[1])
-        const itemHeight = item.element.offsetHeight;
-        this.padding = topPosition;
+        this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[this._insertIndex])
+        this.padding = this._topPositions[index];
       } else {
         this._wrapperElement.appendChild(item.element);
+        item.height = item.element.offsetHeight;
+        this._topPositions[index + 1] = this._topPositions[index] + item.height;
       }
 
       this._renderedItems[index] = item;
-      this._topPositions[index + 1] = this._topPositions[index] + item.element.offsetHeight;
     });
   }
 
@@ -294,10 +344,15 @@ export class LazyRepeatProvider {
    * @param {Number} index
    */
   _removeElement(index, isScrollUp = true) {
+    index = +(index);
     const item = this._renderedItems[index];
     const itemHeight = item.element.offsetHeight;
     this._delegate.destroyItem(index, item);
-    if (!isScrollUp) {
+
+    if (isScrollUp) {
+      this._topPositions[index + 1] = undefined;
+    } else {
+      this._topPositions[index + 1] = this._topPositions[index] + itemHeight;
       this.padding = this.padding + itemHeight;
     }
 

@@ -156,13 +156,13 @@ onlyChrome(describe)('LazyRepeatProvider', () => {
   describe('#_renderElement()', () => {
     it('calls \'updateItem()\' if it is already rendered', () => {
       const spy = chai.spy.on(delegate, 'updateItem');
-      provider._renderElement({index: 0, top: 0});
+      provider._renderElement(0);
       expect(spy).to.have.been.called.once;
     });
 
     it('calls \'loadItemElement()\' if it is not already rendered', () => {
       const spy = chai.spy.on(delegate, 'loadItemElement');
-      provider._renderElement({index: 1000, top: 0});
+      provider._renderElement(1000);
       expect(spy).to.have.been.called.once;
     });
   });
