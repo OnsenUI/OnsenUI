@@ -6,12 +6,14 @@ const runSequence = require('run-sequence');
 const $ = require('gulp-load-plugins')();
 
 ////////////////////////////////////////
-// css
+// build
 ////////////////////////////////////////
-gulp.task('css', function() {
+gulp.task('build', function() {
   return gulp.src('src/onsen-css-components.less')
     .pipe($.plumber())
     .pipe($.less())
     .pipe($.autoprefixer('last 1 version'))
     .pipe(gulp.dest('build/'));
 });
+
+
