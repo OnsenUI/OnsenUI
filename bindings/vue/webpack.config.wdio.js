@@ -1,18 +1,30 @@
-var path = require('path')
-var fs = require('fs');
-var webpack = require('webpack')
-
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
+var path = require('path');
+var glob = require('glob');
 
 module.exports = {
-  entry: './src',
+  entry: (function(){
+    var entry = {};
+
+    // Register entry file for vue-onsenui.js
+    entry['dist/vue-onsenui'] = ['./src/index.js'];
+
+    // Register entry file for JS files in test/e2e-webdriverio
+    glob.sync('test/e2e-webdriverio/*/**/*.js').forEach(function(target) {
+      // Ignore spec files and generated files
+      if (/(.+)\.spec.js$/.test(target)) { return; }
+      if (/(.+)\.bundle.js$/.test(target)) { return; }
+
+      // Equivalent to:
+      //   entry['test/e2e-webdriverio/*/**/*.bundle.js'] = ['./test/e2e-webdriverio/*/**/*.js'];
+      entry[target.replace(/(.+)\.js$/, '$1.bundle')] = ['./' + target];
+    });
+
+    return entry;
+  })(),
   output: {
-    library: 'VueOnsen',
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'vue-onsenui.js'
+    path: __dirname,
+    publicPath: '/bindings/vue/',
+    filename: '[name].js',
   },
   externals: [
     {
@@ -49,12 +61,8 @@ module.exports = {
     ]
   },
   devServer: {
+    contentBase: '../..',
     historyApiFallback: true,
-    noInfo: true,
-    contentBase: '../..'
+    watchOptions: { aggregateTimeout: 300, poll: 1000 },
   },
-  devtool: '#eval-source-map',
-  plugins: [
-    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
-  ]
 }
