@@ -70,6 +70,7 @@
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
     "wdio-jasmine-framework": "^0.2.17",
+    "wdio-spec-reporter": "0.0.5",
     "webdriverio": "^4.5.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.12.0"
