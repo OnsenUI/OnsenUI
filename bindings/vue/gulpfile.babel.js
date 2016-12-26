@@ -128,7 +128,7 @@ function createDevServer(options = {}) {
 }
 
 async function runWebdriverIO(standaloneSeleniumServer) {
-    const specs = argv.specs || 'test/e2e-webdriverio/**/*.js'; // you cannot use commas for --specs
+    const specs = argv.specs || 'test/e2e-webdriverio/*/**/*.spec.js'; // you cannot use commas for --specs
     const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['chrome'];
 
     let testsPassed = true; // error flag

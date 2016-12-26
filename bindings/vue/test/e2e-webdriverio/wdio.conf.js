@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        global.WDIO_SPEC_FILES || 'test/e2e-webdriverio/**/*.js'
+        global.WDIO_SPEC_FILES || 'test/e2e-webdriverio/*/**/*.spec.js'
     ],
     // Patterns to exclude.
     exclude: [
