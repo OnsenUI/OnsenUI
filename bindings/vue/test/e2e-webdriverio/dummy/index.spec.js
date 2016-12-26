@@ -3,7 +3,7 @@ describe('dummy', function() {
     browser.url('/bindings/vue/test/e2e-webdriverio/dummy/index.html');
   });
 
-  it('should be that true is true', function() {
+  it('passes this test', function() {
     expect(true).toBeTruthy();
   });
 });
