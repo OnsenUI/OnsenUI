@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import gulp from 'gulp';
 import path from'path';
 import {merge} from 'event-stream';
+import runSequence from 'run-sequence';
 import shell from 'gulp-shell';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'open';
