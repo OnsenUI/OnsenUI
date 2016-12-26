@@ -17,10 +17,10 @@ module.exports = {
   externals: [
     {
       onsenui: {
-        root: 'ons',
-        commonjs: 'onsenui',
-        commonjs2: 'onsenui',
-        amd: 'onsenui'
+        'var': 'ons',
+        'commonjs': 'onsenui',
+        'amd': 'onsenui',
+        'umd': 'onsenui',
       }
     }
   ],
