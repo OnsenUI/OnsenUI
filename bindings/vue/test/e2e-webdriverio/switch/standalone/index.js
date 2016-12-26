@@ -23,7 +23,7 @@ ons.ready(function(){
           <v-ons-switch id="disabled-prop-true" :disabled="true"></v-ons-switch> :disabled="true"<br>
 
           <h3>input-id</h3>
-          <label for="foo">Label: </label><v-ons-switch id="modifier-prop-material" input-id="foo"></v-ons-switch> input-id="foo"<br>
+          <label for="foo">Label: </label><v-ons-switch id="input-id-prop-foo" input-id="foo"></v-ons-switch> input-id="foo"<br>
 
           <h3>modifier</h3>
           <v-ons-switch id="modifier-prop-material" modifier="material"></v-ons-switch> modifier="material"<br>
