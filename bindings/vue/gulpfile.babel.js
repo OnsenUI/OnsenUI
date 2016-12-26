@@ -133,7 +133,6 @@ async function runWebdriverIO(standaloneSeleniumServer) {
 
     let testsPassed = true; // error flag
 
-      console.log(browsers);
     // Separately launch WebdriverIO for each browser
     try {
       for (let j = 0 ; j < browsers.length ; j++) {
