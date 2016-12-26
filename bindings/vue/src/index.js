@@ -1,18 +1,10 @@
-import {
-  VOnsNavigator,
-  VOnsBackButton,
-  VOnsTabbar,
-  VOnsRange,
-  VOnsSwitch,
-  VOnsPullHook,
-  VOnsSplitterSide
-} from './components';
+import * as components from './components';
 
 import ons from 'onsenui';
 
-const registerComponents = (Vue, components) => {
-  Object.keys(components).forEach((key) => {
-    const value = components[key];
+const registerComponents = (Vue, comps) => {
+  Object.keys(comps).forEach((key) => {
+    const value = comps[key];
     key = Vue.util.hyphenate(key);
     Vue.component(key, value);
   });
@@ -20,17 +12,9 @@ const registerComponents = (Vue, components) => {
 
 const install = (Vue, params = {}) => {
   /**
-   * Register components.
+   * Register components of vue-onsenui.
    */
-  registerComponents(Vue, {
-    VOnsNavigator,
-    VOnsBackButton,
-    VOnsTabbar,
-    VOnsRange,
-    VOnsSwitch,
-    VOnsPullHook,
-    VOnsSplitterSide
-  });
+  registerComponents(Vue, components);
 
   /**
    * Push a page to parent Navigator.
