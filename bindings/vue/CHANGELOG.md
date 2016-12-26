@@ -14,6 +14,7 @@ CHANGELOG
  * Make `v-ons-switch` component compatible with Vue.js 2.x.
  * Add `v-ons-range` component.
  * Add `v-ons-button` component.
+ * Apply a global mixin to prevent direct use of ons-* elements.
 
 <!--
 ### Bug Fixes
