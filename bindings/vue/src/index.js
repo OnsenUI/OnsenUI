@@ -2,6 +2,7 @@ import {
   VOnsNavigator,
   VOnsBackButton,
   VOnsTabbar,
+  VOnsRange,
   VOnsSwitch,
   VOnsPullHook,
   VOnsSplitterSide
@@ -25,6 +26,7 @@ const install = (Vue, params = {}) => {
     VOnsNavigator,
     VOnsBackButton,
     VOnsTabbar,
+    VOnsRange,
     VOnsSwitch,
     VOnsPullHook,
     VOnsSplitterSide
