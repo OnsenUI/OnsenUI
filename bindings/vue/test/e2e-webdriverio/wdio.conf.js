@@ -128,7 +128,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    reporters: ['spec'],
+    reporters: ['spec'], // indents disappear on webdriverio@4.5.0 + wdio-jasmine-framework@0.2.17 + wdio-spec-reporter@0.0.5
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
