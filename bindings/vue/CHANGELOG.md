@@ -10,10 +10,10 @@ CHANGELOG
 2.0.0-alpha.0 (Work In Progress)
 ----
 
-<!--
 ### Features
- * 
+ * Make `v-ons-switch` component compatible with Vue.js 2.x.
 
+<!--
 ### Bug Fixes
  * 
 
