@@ -2,7 +2,7 @@ describe('v-ons-switch', function() {
   describe('(standalone)', function() {
     beforeEach(function() {
       browser.url('/bindings/vue/test/e2e-webdriverio/switch/standalone/index.html');
-      browser.waitForExist('#is-mounted'); // wait until vue instance is mounted
+      browser.waitForExist('#is-mounted'); // wait until Vue instance is mounted
     });
 
     it('is mounted by Vue instance', function() {
