@@ -13,6 +13,7 @@ CHANGELOG
 ### Features
  * Make `v-ons-switch` component compatible with Vue.js 2.x.
  * Add `v-ons-range` component.
+ * Add `v-ons-button` component.
 
 <!--
 ### Bug Fixes
