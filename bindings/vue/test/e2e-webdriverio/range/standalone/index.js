@@ -25,8 +25,5 @@ ons.ready(function(){
           <v-ons-range id="modifier-prop-material" modifier="material"></v-ons-range> modifier="material"<br>
         </div>
       `,
-      data: {
-          message: '',
-      },
   });
 });
