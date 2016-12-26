@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.prod.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "gulp test"
   },
   "main": "dist/vue-onsenui.js",
   "repository": {
