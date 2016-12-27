@@ -15,6 +15,7 @@ CHANGELOG
  * Add `v-ons-range` component.
  * Add `v-ons-button` component.
  * Add `v-ons-icon` component.
+ * Add `v-ons-input` component.
  * Apply a global mixin to prevent direct use of ons-* elements.
 
 <!--
