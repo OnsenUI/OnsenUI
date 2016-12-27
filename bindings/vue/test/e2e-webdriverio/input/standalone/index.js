@@ -146,7 +146,7 @@ ons.ready(function(){
         <h2>Events</h2>
 
         <h3>click</h3>
-        <v-ons-input type="button" value="push me" @click="alert('clicked')"></v-ons-input><br>
+        <v-ons-input type="button" value="push me" @click="onClick()"></v-ons-input><br>
 
         <h2>Two-way data binding</h2>
         <v-ons-input type="hidden" v-model="hiddenValue"></v-ons-input> {{hiddenValue}}<br>
@@ -199,6 +199,11 @@ ons.ready(function(){
       imageValue: null,
       resetValue: null,
       buttonValue: null,
+    },
+    methods: {
+      onClick() {
+        alert('clicked');
+      }
     }
   });
 });
