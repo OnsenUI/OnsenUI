@@ -1,20 +1,11 @@
 <template>
-  <ons-button
-    :disabled="disabled"
-    :ripple="ripple"
-    :modifier="modifier">
+  <ons-button>
     <slot></slot>
   </ons-button>
 </template>
 
 <script>
   export default {
-    props: {
-      disabled: { type: Boolean },
-      ripple:   { type: Boolean },
-      modifier: { type: String },
-    },
-
     //--------------------------------
     // lifecycle hooks
     //--------------------------------

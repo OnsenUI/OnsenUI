@@ -1,21 +1,9 @@
 <template>
-  <ons-switch
-    :checked="checked"
-    :disabled="disabled"
-    :input-id="inputId"
-    :modifier="modifier">
-  </ons-switch>
+  <ons-switch></ons-switch>
 </template>
 
 <script>
   export default {
-    props: {
-      checked:  { type: Boolean },
-      disabled: { type: Boolean },
-      inputId:  { type: String },
-      modifier: { type: String },
-    },
-
     methods: {
       onChange(ev) {
         this.$emit('change', ev);
