@@ -5,18 +5,27 @@
 </template>
 
 <script>
+  import ons from 'onsenui';
+
+  import {createComputedPropertiesFor, createMethodsFor} from '../common/optionsObjectHelper.js';
+
   export default {
-    methods: {
-      onPostChange(ev) {
-        this.$emit('postchange', ev);
-      },
-      onRefresh(ev) {
-        this.$emit('refresh', ev);
-      },
-      onOverScroll(ev) {
-        this.$emit('overscroll', ev);
+    computed: createComputedPropertiesFor(ons.CarouselElement),
+
+    methods: Object.assign(
+      createMethodsFor(ons.CarouselElement),
+      {
+        onPostChange(ev) {
+          this.$emit('postchange', ev);
+        },
+        onRefresh(ev) {
+          this.$emit('refresh', ev);
+        },
+        onOverScroll(ev) {
+          this.$emit('overscroll', ev);
+        }
       }
-    },
+    ),
 
     //--------------------------------
     // lifecycle hooks
