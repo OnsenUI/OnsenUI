@@ -98,7 +98,6 @@ export class OnsNavigator implements OnDestroy {
         ], this._injector);
 
         const factory = this._resolver.resolveComponentFactory(page);
-        const selector = 'ons-navigator';
         const pageComponentRef = factory.create(injector, null);
         this._viewContainer.insert(pageComponentRef.hostView);
         const pageElement = pageComponentRef.location.nativeElement;
