@@ -220,6 +220,7 @@ export default class NavigatorElement extends BaseElement {
   init() {
     this._isRunning = false;
     this._pageLoader = defaultPageLoader;
+    this._pageMap = new WeakMap();
 
     this._updateAnimatorFactory();
   }
@@ -359,24 +360,33 @@ export default class NavigatorElement extends BaseElement {
 
     if (!options.refresh) {
       return this._popPage(options, popUpdate);
+    } else {
+      return this._popPageAndRefresh(options, popUpdate);
     }
+  }
+
+  _popPageAndRefresh(options, popUpdate) {
 
     const index = this.pages.length - 2;
     const oldPage = this.pages[index];
 
-    if (!oldPage.name) {
+    if (!this._pageMap.has(oldPage)) {
       throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
     }
 
+    const page = this._pageMap.get(oldPage);
+
     return new Promise(resolve => {
       const options = {
-        page: oldPage.name,
+        page: page,
         parent: this,
         params: oldPage.pushedOptions ? oldPage.pushedOptions.data : {}
       };
+
       this._pageLoader.load(options, pageElement => {
+        this._pageMap.set(pageElement, page);
+
         pageElement = util.extend(pageElement, {
-          name: oldPage.name,
           data: oldPage.data,
           pushedOptions: oldPage.pushedOptions || {}
         });
@@ -387,6 +397,7 @@ export default class NavigatorElement extends BaseElement {
       });
 
     }).then(() => this._popPage(options, popUpdate));
+
   }
 
   _popPage(options, update = () => Promise.resolve()) {
@@ -488,8 +499,8 @@ export default class NavigatorElement extends BaseElement {
 
     const prepare = pageElement => {
       this._verifyPageElement(pageElement);
+      this._pageMap.set(pageElement, page);
       pageElement = util.extend(pageElement, {
-        name: options.page,
         data: options.data
       });
       pageElement.style.visibility = 'hidden';
@@ -542,11 +553,6 @@ export default class NavigatorElement extends BaseElement {
 
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
-
-      const pageName = enterPage.name || options.page;
-      if (typeof pageName === 'string') {
-        enterPage.name = pageName;
-      }
       enterPage.unload = enterPage.unload || options.unload;
 
       return new Promise(resolve => {
@@ -626,8 +632,8 @@ export default class NavigatorElement extends BaseElement {
     return new Promise(resolve => {
       loader.load({page, parent: this}, pageElement => {
         this._verifyPageElement(pageElement);
+        this._pageMap.set(pageElement, page);
         pageElement = util.extend(pageElement, {
-          name: options.page,
           data: options.data,
           pushedOptions: options
         });
