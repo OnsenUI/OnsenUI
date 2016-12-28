@@ -543,7 +543,10 @@ export default class NavigatorElement extends BaseElement {
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
 
-      enterPage.name = enterPage.name || options.page;
+      const pageName = enterPage.name || options.page;
+      if (typeof pageName === 'string') {
+        enterPage.name = pageName;
+      }
       enterPage.unload = enterPage.unload || options.unload;
 
       return new Promise(resolve => {

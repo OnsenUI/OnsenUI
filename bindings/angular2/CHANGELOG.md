@@ -15,6 +15,7 @@ CHANGELOG
  * Changed OnsenModule to re-export BrowserModule.
 
 ### Bug Fixes
+ * Fixed [#1730](https://github.com/OnsenUI/OnsenUI/issues/1730).
  * Navigator params should accept any type.
 
 ### PEER-DEPENDENCY UPDATES
