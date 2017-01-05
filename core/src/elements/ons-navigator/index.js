@@ -728,9 +728,6 @@ export default class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    util.extend(options, {
-      page: page.name
-    });
     page.style.visibility = 'hidden';
     page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
@@ -773,7 +770,11 @@ export default class NavigatorElement extends BaseElement {
   _lastIndexOfPage(pageName) {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
-      if (this.pages[index].name === pageName) {
+      if (!this._pageMap.has(this.pages[index])) {
+        throw Error('This is bug.');
+      }
+
+      if (pageName === this._pageMap.get(this.pages[index])) {
         break;
       }
     }
@@ -860,9 +861,8 @@ export default class NavigatorElement extends BaseElement {
    *   [ja][/ja]
    */
   get pages() {
-    return util
-      .arrayFrom(this.children)
-      .filter(n => n.tagName === 'ONS-PAGE');
+    return util.arrayFrom(this.children)
+      .filter(element => element.tagName === 'ONS-PAGE');
   }
 
   /**
