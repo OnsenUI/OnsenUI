@@ -5,7 +5,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/angular2-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 
 @Component({
   selector: 'app',
@@ -59,7 +58,7 @@ export class AppComponent {
 }
 
 @NgModule({
-  imports: [OnsenModule, BrowserModule],
+  imports: [OnsenModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

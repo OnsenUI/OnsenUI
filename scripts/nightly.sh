@@ -29,4 +29,10 @@ pushd $DIR/../
 gulp build
 popd
 
-mv $DIR/../build/onsenui.zip $DESTINATION_DIR/onsenui-$BUILD_VERSION.$BUILD_NUMBER_$DATE+$COMMIT_HASH.zip
+mv $DIR/../build/onsenui.zip $DESTINATION_DIR/onsenui.zip
+mv $DIR/../build $DESTINATION_DIR/onsenui
+mkdir $DESTINATION_DIR/react-onsenui
+mv $DIR/../bindings/react/dist $DESTINATION_DIR/react-onsenui
+mkdir $DESTINATION_DIR/angular2-onsenui
+mv $DIR/../bindings/angular2/dist $DESTINATION_DIR/angular2-onsenui
+

@@ -5,6 +5,7 @@ examples/*.js.map
 src/**/*.js
 src/**/*.js.map
 src/**/*.ngfactory.ts
+src/**/*.ngsummary.json
 src/*.js
 src/*.js.map
 dist

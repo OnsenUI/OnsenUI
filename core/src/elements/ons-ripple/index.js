@@ -21,6 +21,8 @@ import BaseElement from '../../ons/base-element';
 import Animator from './animator-css';
 import contentReady from '../../ons/content-ready';
 
+const defaultClassName = 'ripple';
+
 /**
  * @element ons-ripple
  * @category visual
@@ -80,7 +82,7 @@ export default class RippleElement extends BaseElement {
   }
 
   _compile() {
-    this.classList.add('ripple');
+    this.classList.add(defaultClassName);
 
     this._wave = this.getElementsByClassName('ripple__wave')[0];
     this._background = this.getElementsByClassName('ripple__background')[0];
@@ -210,38 +212,57 @@ export default class RippleElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['start-radius', 'color', 'background', 'center'];
+    return ['start-radius', 'color', 'background', 'center', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'start-radius') {
-      this._minR = Math.max(0, parseFloat(current) || 0);
-    }
-    if (name === 'color' && current) {
-      contentReady(this, () => {
-        this._wave.style.background = current;
-        if (!this.hasAttribute('background')) {
-          this._background.style.background = current;
+    switch (name) {
+
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
         }
-      });
-    }
-    if (name === 'background' && (current || last)) {
-      if (current === 'none') {
-        contentReady(this, () => {
-          this._background.setAttribute('disabled', 'disabled');
-          this._background.style.background = 'transparent';
-        });
-      } else {
-        contentReady(this, () => {
-          if (this._background.hasAttribute('disabled')) {
-            this._background.removeAttribute('disabled');
+        break;
+
+      case 'start-radius':
+        this._minR = Math.max(0, parseFloat(current) || 0);
+        break;
+
+      case 'color':
+        if (current) {
+          contentReady(this, () => {
+            this._wave.style.background = current;
+            if (!this.hasAttribute('background')) {
+              this._background.style.background = current;
+            }
+          });
+        }
+        break;
+
+      case 'background':
+        if (current || last) {
+          if (current === 'none') {
+            contentReady(this, () => {
+              this._background.setAttribute('disabled', 'disabled');
+              this._background.style.background = 'transparent';
+            });
+          } else {
+            contentReady(this, () => {
+              if (this._background.hasAttribute('disabled')) {
+                this._background.removeAttribute('disabled');
+              }
+              this._background.style.background = current;
+            });
           }
-          this._background.style.background = current;
-        });
-      }
-    }
-    if (name === 'center') {
-      this._center = current != null && current != 'false';
+        }
+        break;
+
+      case 'center':
+        if (name === 'center') {
+          this._center = current != null && current != 'false';
+        }
+        break;
+
     }
   }
 

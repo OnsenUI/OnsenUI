@@ -16,6 +16,16 @@ describe('OnsToolbarElement', () => {
     expect(window.ons.ToolbarElement).to.be.ok;
   });
 
+  onlyChrome(describe)('"class" attribute', () => {
+    it('should contain "navigation-bar" class name automatically', () => {
+      const element = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');
+      expect(element.classList.contains('navigation-bar')).to.be.true;
+      element.className = 'foo';
+      expect(element.classList.contains('navigation-bar')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
   onlyChrome(it)('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('navigation-bar--hoge')).to.be.true;

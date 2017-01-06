@@ -5,8 +5,8 @@ dist
 .DS_Store
 .idea
 .selenium
-/core/test/coverage
-/core/test/test-results.xml
-/core/test/TESTS-*.xml
+/core/test/unit/coverage
+/core/test/unit/test-results.xml
+/core/test/unit/TESTS-*.xml
 /core/src/onsenui-test.js
 /build/*

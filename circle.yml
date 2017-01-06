@@ -26,5 +26,5 @@ test:
     - cd bindings/react; npm test
     - cd bindings/react; npm run build
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - find . -type f -regex "./core/test/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-    - cat ./core/test/coverage/*/lcov.info | coveralls || true # Ignore if this fails.
+    - find . -type f -regex "./core/test/unit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.

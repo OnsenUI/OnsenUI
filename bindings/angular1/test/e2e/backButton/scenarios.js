@@ -28,14 +28,19 @@
 
       element(by.css('ons-button')).click();
       browser.wait(EC.visibilityOf(page2));
-      browser.wait(EC.invisibilityOf(page1));
 
       // Check that page2 was created and that it's displayed.
       expect((page2).isDisplayed()).toBeTruthy();
-      expect((page1).isDisplayed()).not.toBeTruthy();
+      var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+      expect(lastElement.equals(page2)).toBeTruthy();
       expect((page1).isPresent()).toBeTruthy();
 
-      element(by.css('ons-back-button')).click();
+      var backButton =  element(by.css('ons-back-button'));
+      browser.wait(EC.elementToBeClickable(backButton));
+      browser.sleep(500); // Wait for the animation
+
+      backButton.click();
+
       browser.wait(EC.stalenessOf(page2));
 
       // Check that page2 was destroyed.

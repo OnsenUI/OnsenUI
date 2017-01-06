@@ -1,7 +1,6 @@
 /// <reference path="../dist/onsenui.d.ts" />
 
 export * from '@angular/core';
-export * from '@angular/compiler';
 export * from './directives/ons-navigator';
 export * from './directives/ons-tabbar';
 export * from './directives/ons-switch';
@@ -53,7 +52,10 @@ const directives = [
 @NgModule({
   imports: [BrowserModule, CommonModule],
   declarations: [directives],
-  exports: [directives],
+  exports: [
+    directives,
+    BrowserModule
+  ],
   providers: [
     AlertDialogFactory,
     PopoverFactory,

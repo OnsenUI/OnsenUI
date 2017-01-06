@@ -7,14 +7,9 @@ import {
   ComponentRef,
   Type,
   ComponentFactoryResolver,
-  Renderer,
   Input,
   ViewContainerRef,
-  ResolvedReflectiveProvider,
-  ViewChildren,
-  QueryList,
-  OnDestroy,
-  OnInit
+  OnDestroy
 } from '@angular/core';
 import {Params} from '../ons/params';
 
@@ -73,7 +68,9 @@ export class OnsNavigator implements OnDestroy {
    *   [ja]ページコンポーネントのクラスを指定します。[/ja]
    */
   @Input('page') set pageComponentType(page: Type<any>) {
-    this._elementRef.nativeElement.page = page;
+    if (this.element.pages.length == 0) {
+      this.element.pushPage(page);
+    }
   }
 
   get element(): any {
@@ -101,7 +98,9 @@ export class OnsNavigator implements OnDestroy {
         ], this._injector);
 
         const factory = this._resolver.resolveComponentFactory(page);
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
+        const selector = 'ons-navigator';
+        const pageComponentRef = factory.create(injector, null);
+        this._viewContainer.insert(pageComponentRef.hostView);
         const pageElement = pageComponentRef.location.nativeElement;
         componentRefMap.set(pageElement, pageComponentRef);
 
