@@ -41,10 +41,10 @@
     "@angular/platform-browser-dynamic": "^2.4.1",
     "core-js": "^2.4.0",
     "rxjs": "^5.0.1",
+    "onsenui": "^2.0.5",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
-    "onsenui": "^2.0.5",
     "@angular/common": "^2.4.1",
     "@angular/compiler": "^2.4.1",
     "@angular/compiler-cli": "^2.4.1",
