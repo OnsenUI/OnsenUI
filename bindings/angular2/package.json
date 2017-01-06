@@ -44,6 +44,7 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
+    "onsenui": "^2.0.5",
     "@angular/common": "^2.4.1",
     "@angular/compiler": "^2.4.1",
     "@angular/compiler-cli": "^2.4.1",
