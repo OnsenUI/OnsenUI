@@ -242,16 +242,19 @@ export class LazyRepeatProvider {
   }
 
   _getItemHeight(i) {
+    // Item is rendered
     if (this._renderedItems.hasOwnProperty(i)) {
-      // height property is 0 for Angular 2
-      if (this._renderedItems[i].height === 0) {
+      if (!this._renderedItems[i].hasOwnProperty('height')) {
         this._renderedItems[i].height = this._renderedItems[i].element.offsetHeight;
       }
       return this._renderedItems[i].height;
     }
+
+    // Item is not rendered, scroll up
     if (this._topPositions[i + 1] && this._topPositions[i]) {
       return this._topPositions[i + 1] - this._topPositions[i];
     }
+    // Item is not rendered, scroll down
     return this.staticItemHeight || this._delegate.calculateItemHeight(i);
   }
 
@@ -348,8 +351,6 @@ export class LazyRepeatProvider {
         item.height = this._topPositions[index + 1] - this._topPositions[index];
       } else {
         this._wrapperElement.appendChild(item.element);
-        item.height = item.element.offsetHeight;
-        this._topPositions[index + 1] = this._topPositions[index] + item.height;
       }
 
       this._renderedItems[index] = item;
@@ -362,14 +363,12 @@ export class LazyRepeatProvider {
   _removeElement(index, isScrollUp = true) {
     index = +(index);
     const item = this._renderedItems[index];
-    const itemHeight = item.element.offsetHeight;
     this._delegate.destroyItem(index, item);
 
     if (isScrollUp) {
       this._topPositions[index + 1] = undefined;
     } else {
-      this._topPositions[index + 1] = this._topPositions[index] + itemHeight;
-      this.padding = this.padding + itemHeight;
+      this.padding = this.padding + this._getItemHeight(index);
     }
 
     if (item.element.parentElement) {
