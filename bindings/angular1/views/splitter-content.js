@@ -26,7 +26,7 @@ limitations under the License.
         this._scope = scope;
         this._attrs = attrs;
 
-        this.load = this._element[0].load;
+        this.load = this._element[0].load.bind(this._element[0]);
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
