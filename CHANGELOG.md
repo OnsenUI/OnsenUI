@@ -6,6 +6,7 @@ v2.0.6
 ----
 
  * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
+ * angular1: Fix `load` method of `ons-splitter-content`.
 
 v2.0.5
 ----
