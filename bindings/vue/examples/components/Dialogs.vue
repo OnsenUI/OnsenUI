@@ -1,9 +1,5 @@
 <template>
   <ons-page>
-    <ons-toolbar>
-      <div class="center">Dialogs</div>
-    </ons-toolbar>
-
     <ons-list>
       <ons-list-header>Notifications</ons-list-header>
       <ons-list-item

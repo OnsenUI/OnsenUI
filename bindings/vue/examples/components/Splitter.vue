@@ -25,7 +25,6 @@
         <ons-page>
           <ons-toolbar>
             <div class="left">
-              <ons-back-button @click="$pop()" label='Home'></ons-back-button>
             </div>
             <div class="center">Side menu</div>
           </ons-toolbar>
@@ -90,7 +89,6 @@
 
 <script>
   import {
-    OnsBackButton,
     OnsSplitterSide,
     OnsSwitch
   } from 'vue-onsenui';
@@ -100,14 +98,13 @@
       {
         side: 'left',
         width: '200px',
-        collapse: true,
+        collapse: '',
         swipeable: true,
         open: false
       }
     ),
 
     components: {
-      OnsBackButton,
       OnsSplitterSide,
       OnsSwitch
     }

@@ -1,54 +1,61 @@
 <template>
   <ons-page>
-    <ons-tabbar
-      :index="index"
-      :tabs="tabs"
-      @tab-change="onChange"
-    ></ons-tabbar>
+    <v-ons-tabbar @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
+      <v-ons-tab :page="tabs[0].component" :icon="tabs[0].icon" :label="tabs[0].label"></v-ons-tab>
+      <v-ons-tab :page="tabs[1].component" active icon="fa-cogs" label="Settings"></v-ons-tab>
+    </v-ons-tabbar>
   </ons-page>
 </template>
 
 <script>
-  import {
-    OnsTabbar
-  } from 'vue-onsenui';
+  let Home = {
+    template: `
+      <ons-page>
+        Home page
+        <ons-button @click="setTab(1)">getTabbar().setActiveTab(1)</ons-button>
+      </ons-page>
+    `,
+    methods: {
+      setTab: function(i) {
+        this.getTabbar().setActiveTab(i);
+      }
+    }
+  };
+
+  let Settings = {
+    template: `
+      <ons-page>
+        Settings Page
+        <ons-button @click="setTab(0)">$parent.setActiveTab(0)</ons-button>
+      </ons-page>
+    `,
+    methods: {
+      setTab: function(i) {
+        this.$parent.setActiveTab(i);
+      }
+    }
+  };
 
 	export default {
-    data() {
+    data: function() {
       return {
-        index: 0,
+        test: 'testing',
         tabs: [
           {
-            component: 'home',
+            component: Home,
             label: 'Home',
             icon: 'ion-ios-home-outline'
           },
           {
-            component: 'dialogs',
-            label: 'Dialogs',
-            icon: 'ion-ios-albums-outline'
-          },
-          {
-            component: 'forms',
-            label: 'Forms',
-            icon: 'ion-edit'
-          },
-          {
-            component: 'animations',
-            label: 'Animations',
-            icon: 'ion-film-marker'
+            component: Settings
           }
-        ],
+        ]
       };
     },
 
-    components: {
-      OnsTabbar
-    },
-
     methods: {
-      onChange({index}) {
-        this.index = index;
+      log: function(msg) {
+        console.log(msg, this.test)
       }
     }
 	};

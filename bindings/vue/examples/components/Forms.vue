@@ -1,11 +1,5 @@
 <template>
   <ons-page>
-    <ons-toolbar>
-      <div class="center">
-        Forms
-      </div>
-    </ons-toolbar>
-
     <ons-list>
       <ons-list-header>Test input</ons-list-header>
       <ons-list-item>
@@ -60,13 +54,13 @@
         <label class="left">
           <ons-input
             type="radio"
-            input-id="radio-{{ $index }}"
+            :input-id="'radio-' + $index"
             :checked="vegetables[$index] == selectedVegetable"
             @change="onVegetableChange($index)"
           >
           </ons-input>
         </label>
-        <label for="radio-{{ $index }}" class="center">
+        <label :for="'radio-' + $index" class="center">
           {{ vegetable }}
         </label>
       </ons-list-item>
@@ -83,11 +77,11 @@
         <label class="left">
           <ons-input
             type="checkbox"
-            input-id="checkbox-{{ $index }}"
+            :input-id="'checkbox-' + $index"
           >
           </ons-input>
         </label>
-        <label class="center" for="checkbox-{{ $index }}">
+        <label class="center" :for="'checkbox-' + $index">
           {{ color }}
         </label>
       </ons-list-item>
