@@ -12,12 +12,12 @@ import {argv} from 'yargs';
 const $ = require('gulp-load-plugins')();
 
 ////////////////////////////////////////
-// webdriver-update
+// webdriver-update (overrides parent definition)
 ////////////////////////////////////////
 gulp.task('webdriver-update', $.protractor.webdriver_update);
 
 ////////////////////////////////////////
-// webdriver-download
+// webdriver-download (overrides parent definition)
 ////////////////////////////////////////
 gulp.task('webdriver-download', () => {
   const platform = os.platform();
@@ -46,7 +46,7 @@ gulp.task('webdriver-download', () => {
 });
 
 ////////////////////////////////////////
-// e2e-test
+// e2e-test (overrides parent definition)
 ////////////////////////////////////////
 gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   const port = 8081;

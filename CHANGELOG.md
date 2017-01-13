@@ -2,8 +2,16 @@
 CHANGELOG
 ====
 
+v2.0.6
+----
+
+ * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
+ * ons-navigator: Fixed [#1726](https://github.com/OnsenUI/OnsenUI/issues/1726).
+ * angular1: Fix `load` method of `ons-splitter-content`.
+
 v2.0.5
 ----
+ * core: Changed all elements to have default className token always. Fixed [#1711](https://github.com/OnsenUI/OnsenUI/issues/1711).
  * ons-switch: Fix `disbled` to `disabled`.
  * angular1: Fix [#1677](https://github.com/OnsenUI/OnsenUI/issues/1677).
  * ons-tabbar: Fix [#1654](https://github.com/OnsenUI/OnsenUI/issues/1654).
@@ -14,6 +22,10 @@ v2.0.5
  * core: All animators are extendable.
  * angular1: $event in event handlers is not empty anymore.
  * core: Remove Windows Phone 10+ support temporarily.
+ * ons-carousel: initial-index works when the carousel is inside ons-navigator.
+ * ons-switch: Always triggers custom events and stops propagation from inner element events.
+ * ons-tab: Throws verbose error if cannot create pageElement.
+ * ons-dialog: Fix broken dialog animation on iOS 9.x and 10.x caused by `dialog-container` class.
 
 v2.0.4
 ----

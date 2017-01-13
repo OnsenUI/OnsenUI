@@ -25,6 +25,7 @@ import contentReady from '../ons/content-ready';
 
 import './ons-toolbar'; // ensures that 'ons-toolbar' element is registered
 
+const defaultClassName = 'page';
 const scheme = {
   '': 'page--*',
   '.page__content': 'page--*__content',
@@ -148,7 +149,7 @@ export default class PageElement extends BaseElement {
    */
 
   init() {
-    this.classList.add('page');
+    this.classList.add(defaultClassName);
 
     contentReady(this, () => {
       this._compile();
@@ -157,7 +158,6 @@ export default class PageElement extends BaseElement {
       this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
-      this.pushedOptions = {};
     });
   }
 
@@ -319,26 +319,36 @@ export default class PageElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', '_muted', '_skipinit', 'on-infinite-scroll'];
+    return ['modifier', '_muted', '_skipinit', 'on-infinite-scroll', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    } else if (name === '_muted') {
-      this._isMuted = this.hasAttribute('_muted');
-    } else if (name === '_skipinit') {
-      this._skipInit = this.hasAttribute('_skipinit');
-    } else if (name === 'on-infinite-scroll') {
-      if (current === null) {
-        this.onInfiniteScroll = null;
-      } else {
-        this.onInfiniteScroll = (done) => {
-          const f = util.findFromPath(current);
-          this.onInfiniteScroll = f;
-          f(done);
-        };
-      }
+    switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case '_muted':
+        this._isMuted = this.hasAttribute('_muted');
+        break;
+      case '_skipinit':
+        this._skipInit = this.hasAttribute('_skipinit');
+        break;
+      case 'on-infinite-scroll':
+        if (current === null) {
+          this.onInfiniteScroll = null;
+        } else {
+          this.onInfiniteScroll = (done) => {
+            const f = util.findFromPath(current);
+            this.onInfiniteScroll = f;
+            f(done);
+          };
+        }
+        break;
     }
   }
 

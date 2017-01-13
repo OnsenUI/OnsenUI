@@ -11,20 +11,22 @@
     });
 
     it('should push and pop the page', function() {
-      var pushPage = element(by.id('push-page')),
-        popPage = element(by.id('pop-page'));
+      var page1 = element(by.id('page1')),
+        page2 = element(by.id('page2'));
 
-      pushPage.click();
-      browser.wait(EC.visibilityOf(popPage));
-      browser.wait(EC.invisibilityOf(pushPage));
-      expect(popPage.isDisplayed()).toBeTruthy();
-      expect(pushPage.isDisplayed()).not.toBeTruthy();
+      element(by.id('push-page')).click();
+      browser.wait(EC.visibilityOf(page2));
+      expect((page2).isDisplayed()).toBeTruthy();
+      var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+      expect(lastElement.equals(page2)).toBeTruthy();
+      expect((page1).isPresent()).toBeTruthy();
 
-      popPage.click();
-      browser.wait(EC.visibilityOf(pushPage));
-      browser.wait(EC.stalenessOf(popPage));
-      expect(popPage.isPresent()).not.toBeTruthy();
-      expect(pushPage.isDisplayed()).toBeTruthy();
+      browser.sleep(500); // Wait for the animation
+
+      element(by.id('pop-page')).click();
+      browser.wait(EC.stalenessOf(page2));
+      expect(page2.isPresent()).not.toBeTruthy();
+      expect(page1.isDisplayed()).toBeTruthy();
     });
   });
 
@@ -38,12 +40,12 @@
     });
 
     it('should not crash (issue #570)', function() {
-      var pushPage = element(by.id('push-page')),
-        popPage = element(by.id('pop-page')),
+      var page1 = element(by.id('page1')),
+        page2 = element(by.id('page2')),
         hideDialog = element(by.id('hide-dialog'));
 
-      browser.wait(EC.visibilityOf(pushPage));
-      pushPage.click();
+      browser.wait(EC.visibilityOf(page1));
+      element(by.id('push-page')).click();
 
       browser.wait(EC.visibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).toBeTruthy();
@@ -53,13 +55,15 @@
       expect(hideDialog.isDisplayed()).not.toBeTruthy();
 
 
-      browser.wait(EC.visibilityOf(popPage));
-      popPage.click();
-      browser.wait(EC.stalenessOf(popPage));
-      expect(popPage.isPresent()).not.toBeTruthy();
+      browser.wait(EC.visibilityOf(page2));
+      browser.sleep(500); // Wait for the animation
 
-      browser.wait(EC.visibilityOf(pushPage));
-      pushPage.click();
+      element(by.id('pop-page')).click();
+      browser.wait(EC.stalenessOf(page2));
+      expect(page2.isPresent()).not.toBeTruthy();
+
+      browser.wait(EC.visibilityOf(page1));
+      element(by.id('push-page')).click();
 
       browser.wait(EC.visibilityOf(hideDialog));
       expect(hideDialog.isDisplayed()).toBeTruthy();

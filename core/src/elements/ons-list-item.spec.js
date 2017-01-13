@@ -13,8 +13,12 @@ describe('OnsListItemElement', () => {
     expect(window.ons.ListItemElement).to.be.ok;
   });
 
-  it('classList contains \'list__item\' by default', () => {
-    expect(listItem.classList.contains('list__item')).to.be.true;
+  onlyChrome(it)('classList contains \'list__item\' by default', () => {
+    const element = ons._util.createElement('<ons-list-item>content</ons-list-item>');
+    expect(element.classList.contains('list__item')).to.be.true;
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('list__item')).to.be.true;
+    expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides modifier attribute', () => {

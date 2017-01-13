@@ -26,14 +26,18 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
 
         // Check that page2 was created and that it's displayed.
         expect((page2).isDisplayed()).toBeTruthy();
-        expect((page1).isDisplayed()).not.toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
         expect((page1).isPresent()).toBeTruthy();
 
-        element(by.id('btn2')).click();
+        var button =  element(by.id('btn2'));
+        browser.wait(EC.elementToBeClickable(button));
+        browser.sleep(500); // Wait for the animation
+        button.click();
+
         browser.wait(EC.stalenessOf(page2));
 
         // Check that page2 was destroyed.
@@ -56,8 +60,12 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
+        expect((page2).isDisplayed()).toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
+        expect((page1).isPresent()).toBeTruthy();
 
+        browser.sleep(500); // Wait for the animation
         element(by.id('btn3')).click();
         browser.wait(EC.stalenessOf(page2));
 
@@ -87,7 +95,12 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
+        expect((page2).isDisplayed()).toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
+        expect((page1).isPresent()).toBeTruthy();
+
+        browser.sleep(500); // Wait for the animation
 
         element(by.id('btn6-reset')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -102,7 +115,12 @@
         var page2 = element(by.id('page2'));
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
+        expect((page2).isDisplayed()).toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
+        expect((page1).isPresent()).toBeTruthy();
+
+        browser.sleep(500); // Wait for the animation
 
         element(by.id('btn-insert1')).click();
         browser.wait(protractor.until.elementLocated(by.id('background_1'), 500));
@@ -113,26 +131,12 @@
         var page3 = element(by.id('background_1'));
         var page4 = element(by.id('background_2'));
 
-        expect(element(by.id('page1')).isDisplayed()).toBe(false);
-        expect(element(by.id('page2')).isDisplayed()).toBe(true);
-        expect(element(by.id('background_1')).isDisplayed()).toBe(false);
-        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
-
-        // pop
-        element(by.id('btn2')).click();
-        browser.wait(EC.stalenessOf(page2));
-        expect(element(by.id('page1')).isDisplayed()).toBe(false);
-        expect(element(by.id('background_1')).isDisplayed()).toBe(true);
-        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
-
-        element(by.id('background_1_btn')).click();
-        browser.wait(EC.stalenessOf(page3));
-        expect(element(by.id('page1')).isDisplayed()).toBe(true);
-        expect(element(by.id('background_2')).isDisplayed()).toBe(false);
-
-        element(by.id('btn1-pop')).click();
-        browser.wait(EC.stalenessOf(page1));
-        expect(element(by.id('background_2')).isDisplayed()).toBe(true);
+        // Instead of checking visibility (all of them are visible), we need to check the DOM order. The last page will be visible.
+        var elements = element.all(by.xpath('//ons-navigator/ons-page'));
+        expect(elements.get(0).equals(page4)).toBeTruthy();
+        expect(elements.get(1).equals(page1)).toBeTruthy();
+        expect(elements.get(2).equals(page3)).toBeTruthy();
+        expect(elements.get(3).equals(page2)).toBeTruthy();
       });
     });
 
@@ -143,7 +147,12 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
+        expect((page2).isDisplayed()).toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
+        expect((page1).isPresent()).toBeTruthy();
+
+        browser.sleep(500); // Wait for the animation
 
         element(by.id('btn4-device-backbutton')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -164,12 +173,12 @@
 
         element(by.id('btn1')).click();
         browser.wait(EC.visibilityOf(page2));
-        browser.wait(EC.invisibilityOf(page1));
-
-        // Check that page2 was created and that it's displayed.
         expect((page2).isDisplayed()).toBeTruthy();
-        expect((page1).isDisplayed()).not.toBeTruthy();
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
         expect((page1).isPresent()).toBeTruthy();
+
+        browser.sleep(500); // Wait for the animation
 
         element(by.id('btn5')).click();
         browser.wait(EC.stalenessOf(page2));
@@ -197,7 +206,12 @@
       element(by.id('btn1')).click();
 
       browser.wait(EC.visibilityOf(page2));
-      browser.wait(EC.invisibilityOf(page1));
+      expect((page2).isDisplayed()).toBeTruthy();
+      var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+      expect(lastElement.equals(page2)).toBeTruthy();
+      expect((page1).isPresent()).toBeTruthy();
+
+      browser.sleep(500); // Wait for the animation
 
       browser.wait(EC.visibilityOf(element(by.id('btn2'))));
       element(by.id('btn2')).click();

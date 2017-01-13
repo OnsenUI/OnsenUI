@@ -41,6 +41,21 @@ describe('OnsSpeedDialElement', () => {
     expect(speedDial.classList.contains('speed-dial--fuga')).to.be.true;
   });
 
+  onlyChrome(describe)('"class" attribute', () => {
+    it('should contain default class name automatically', () => {
+      const element = ons._util.createElement(`
+        <ons-speed-dial>
+          <ons-fab>A</ons-fab>
+          <ons-speed-dial-item>Item 1</ons-speed-dial-item>
+        </ons-speed-dial>
+      `);
+      expect(element.classList.contains('speed-dial')).to.be.true;
+      element.setAttribute('class', 'foo');
+      expect(element.classList.contains('speed-dial')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
   describe('#items', () => {
     it('should be a list of OnsSpeedDialItemElement', () => {
       expect(speedDial.items.length).to.equal(3);

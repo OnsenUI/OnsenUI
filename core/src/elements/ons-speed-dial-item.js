@@ -16,6 +16,8 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
+const defaultClassName = 'fab fab--mini speed-dial__item';
+
 const scheme = {
   '': 'speed-dial__item--*',
 };
@@ -64,16 +66,27 @@ export default class SpeedDialItemElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple'];
+    return ['modifier', 'ripple', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        this._updateClassName(current);
+        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
       case 'ripple':
         this._updateRipple();
+    }
+  }
+
+  _updateClassName(className) {
+    if (!defaultClassName.split(/\s+/).every(token => {
+      return this.classList.contains(token);
+    })) {
+      this.className = defaultClassName + ' ' + className;
     }
   }
 
@@ -96,9 +109,9 @@ export default class SpeedDialItemElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('fab');
-    this.classList.add('fab--mini');
-    this.classList.add('speed-dial__item');
+    defaultClassName.split(/\s+/).forEach(token => {
+      this.classList.add(token);
+    });
 
     this._updateRipple();
 

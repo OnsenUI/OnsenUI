@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.1.0
+----
+* router-navigator: Add stateless Navigator
+
 v1.0.1
 ----
 * list: Support static lists.

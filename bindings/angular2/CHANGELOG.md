@@ -11,27 +11,29 @@ CHANGELOG
 ----
 
 ### Features
- * Updated Angular to 2.2.1.
+ * Updated Angular to 2.4.1.
+ * `angular2-onsenui` package no longer re-export `@angular/compile`.
  * Changed OnsenModule to re-export BrowserModule.
 
 ### Bug Fixes
+ * Fixed [#1730](https://github.com/OnsenUI/OnsenUI/issues/1730).
  * Navigator params should accept any type.
 
 ### PEER-DEPENDENCY UPDATES
  * **@angular/common**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/compiler**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/compiler-cli**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/core**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/forms**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/platform-browser**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
  * **@angular/platform-browser-dynamic**:
-    * `^2.1.2` ----> `^2.2.1`
+    * `^2.1.2` ----> `^2.4.1`
 
 1.0.0-rc.3 (2016-11-15)
 ----

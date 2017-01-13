@@ -18,6 +18,7 @@ import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 import styler from '../lib/styler';
 
+const defaultClassName = 'speed-dial';
 const scheme = {
   '': 'speed-dial--*',
 };
@@ -118,28 +119,31 @@ export default class SpeedDialElement extends BaseElement {
   }
 
   _compile() {
-    if (!this.classList.contains('speed__dial')) {
-      this.classList.add('speed__dial');
-      autoStyle.prepare(this);
-      this._updateRipple();
-      ModifierUtil.initModifier(this, scheme);
+    this.classList.add(defaultClassName);
+    autoStyle.prepare(this);
+    this._updateRipple();
+    ModifierUtil.initModifier(this, scheme);
 
-      if (this.hasAttribute('direction')) {
-        this._updateDirection(this.getAttribute('direction'));
-      } else {
-        this._updateDirection('up');
-      }
+    if (this.hasAttribute('direction')) {
+      this._updateDirection(this.getAttribute('direction'));
+    } else {
+      this._updateDirection('up');
     }
 
     this._updatePosition();
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple', 'direction', 'position'];
+    return ['class', 'modifier', 'ripple', 'direction', 'position'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;

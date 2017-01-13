@@ -33,6 +33,15 @@ describe('OnsRippleElement', () => {
     expect(window.ons.RippleElement).to.be.ok;
   });
 
+  onlyChrome(describe)('class attribute', () => {
+    it('should contain "ripple" class name automatically', () => {
+      const element = new ons.RippleElement();
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('ripple')).to.be.ok;
+      expect(element.classList.contains('foobar')).to.be.ok;
+    });
+  });
+
   describe('#_compile()', () => {
     it('is called when an element is created', done => {
       const spy = spyOn('_compile'),
