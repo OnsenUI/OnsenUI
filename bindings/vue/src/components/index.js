@@ -5,3 +5,5 @@ export { default as VOnsIcon } from './VOnsIcon.vue';
 export { default as VOnsInput } from './VOnsInput.vue';
 export { default as VOnsRange } from './VOnsRange.vue';
 export { default as VOnsSwitch } from './VOnsSwitch.vue';
+export { default as VOnsTabbar } from './VOnsTabbar.vue';
+export { default as VOnsTab } from './VOnsTab.vue';
