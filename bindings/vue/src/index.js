@@ -19,7 +19,7 @@ const install = (Vue, params = {}) => {
   /**
    * Apply a mixin globally to prevent ons-* elements
    * from being included directly in Vue instance templates.
-   * 
+   *
    * Note: This affects every Vue instance.
    */
   Vue.mixin({
@@ -40,20 +40,6 @@ const install = (Vue, params = {}) => {
       }
     }
   });
-
-  /**
-   * Push a page to parent Navigator.
-   */
-  Vue.prototype.$push = function(options) {
-    this.$dispatch('push', options);
-  };
-
-  /**
-   * Pop a page from the parent Navigator.
-   */
-  Vue.prototype.$pop = function(options) {
-    this.$dispatch('pop', options);
-  }
 
   /**
    * Expose notification methods.
