@@ -50,7 +50,7 @@ class LazyList extends BasicComponent {
   update(props) {
     var self = this;
 
-    this.refs.lazyRepeat.delegate = {
+    this._lazyRepeat.delegate = {
       calculateItemHeight: function(index) {
         return props.calculateItemHeight(index);
       },
@@ -62,7 +62,7 @@ class LazyList extends BasicComponent {
         var el = items.map(createElement);
         self.setState({children: el, height: newHeight},
                       () => {
-                        var list = this.refs.list;
+                        var list = this._list;
                         // ignore i=0 <lazy repat
                         for (var i = 1; i < list.children.length; i++) {
                           list.children[i].style.position = 'absolute';
@@ -93,10 +93,10 @@ class LazyList extends BasicComponent {
 
   render() {
     return (
-      <ons-list {...this.props} ref='list'
+      <ons-list {...this.props} ref={(list) => { this._list = list; }}
         class='list' style={{position: 'relative', height: this.state.height}}
         >
-        <ons-lazy-repeat ref='lazyRepeat' />
+        <ons-lazy-repeat ref={(lazyRepeat) => { this._lazyRepeat = lazyRepeat; }} />
         {this.state.children}
        </ons-list>
     );
