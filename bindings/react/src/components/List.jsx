@@ -27,7 +27,7 @@ class List extends BasicComponent {
     var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
 
     return (
-      <ons-list {...this.props} ref='list'>
+      <ons-list {...this.props} ref={(list) => { this._list = list; }}>
         {this.props.renderHeader()}
         {pages}
         {this.props.children}

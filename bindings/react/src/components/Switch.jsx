@@ -18,11 +18,11 @@ class Switch extends BasicComponent {
 
   componentDidMount() {
     super.componentDidMount();
-    this.refs.switch.addEventListener('change', this.props.onChange);
+    this._switch.addEventListener('change', this.props.onChange);
   }
 
   componentWillUnmount() {
-    this.refs.switch.removeEventListener('change', this.props.onChange);
+    this._switch.removeEventListener('change', this.props.onChange);
   }
 
   render() {
@@ -34,7 +34,7 @@ class Switch extends BasicComponent {
       other['input-id'] = inputId;
     }
     return (
-      <ons-switch ref='switch' checked={checked ? '' : null} {...other} />
+      <ons-switch ref={(switchElement) => { this._switch = switchElement; }} checked={checked ? '' : null} {...other} />
     );
   }
 }
