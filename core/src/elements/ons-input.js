@@ -127,13 +127,6 @@ export default class InputElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  /**
-   * @attribute content-left
-   * @description
-   *  [en]The HTML content of `<ons-input>` is placed before the actual input as a label. Omit this to display it after the input.[/en]
-   *  [ja][/ja]
-   */
-
   init() {
     contentReady(this, () => {
       this._compile();
