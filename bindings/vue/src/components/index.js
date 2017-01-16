@@ -7,3 +7,4 @@ export { default as VOnsRange } from './VOnsRange.vue';
 export { default as VOnsSwitch } from './VOnsSwitch.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
+export { default as VOnsNavigator } from './VOnsNavigator.vue';
