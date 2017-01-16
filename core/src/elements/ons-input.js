@@ -378,6 +378,10 @@ export default class InputElement extends BaseElement {
   get type() {
     return this.getAttribute('type');
   }
+
+  static get events() {
+    return ['change', 'input', 'focus', 'focusin', 'focusout', 'blur'];
+  }
 }
 
 customElements.define('ons-input', InputElement);
