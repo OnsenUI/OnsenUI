@@ -1,5 +1,3 @@
-import ons from 'onsenui';
-
 /**
  * Properties reserved by Custom Elements v1 and Onsen UI Core.
  */
@@ -11,6 +9,10 @@ const _reservedProperties = [
   /^disconnectedCallback$/,
   /^attributeChangedCallback$/,
   /^adoptedCallback$/,
+];
+
+const _blackListedProperties = [
+  'page',
 ];
 
 /**
@@ -40,7 +42,7 @@ const _scanNonReservedProperties = (targetClass, callback) => {
 
   Object.keys(propertyDescriptors).forEach(
     (propertyName) => {
-      if (!_isReserved(propertyName)) { // ignore reserved properties
+      if (!_isReserved(propertyName) && !_blackListedProperties.includes(propertyName)) { // ignore reserved  and black listed properties
         callback(propertyName, propertyDescriptors[propertyName]);
       }
     }
@@ -80,35 +82,4 @@ const createMethodsFor = (targetClass) => {
   return methods;
 };
 
-const _getClassFrom = tagName => {
-  let className = tagName.toLowerCase().slice(4);
-  className = className.charAt(0).toUpperCase() + className.slice(1) + 'Element';
-  return ons[className]
-};
-
-const deriveEvents = {
-  mounted() {
-    _getClassFrom(this.$el.tagName).events.forEach(key => {
-      this.$el.addEventListener(key, this.$emit.bind(this, key));
-    });
-  },
-  beforeDestroy() {
-    _getClassFrom(this.$el.tagName).events.forEach(key => {
-      this.$el.removeEventListener(key, this.$emit.bind(this, key));
-    });
-  }
-};
-
-const deriveMethods = {
-  beforeCreate() {
-    this.$options.methods = Object.assign({}, createMethodsFor(_getClassFrom(this.$options._componentTag.slice(2))), this.$options.methods);
-  }
-};
-
-const deriveProperties = {
-  beforeCreate() {
-    this.$options.computed = Object.assign({}, createComputedPropertiesFor(_getClassFrom(this.$options._componentTag.slice(2))), this.$options.computed);
-  }
-};
-
-export {createComputedPropertiesFor, createMethodsFor, deriveEvents, deriveMethods, deriveProperties};
+export {createComputedPropertiesFor, createMethodsFor };

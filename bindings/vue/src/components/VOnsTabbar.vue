@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../common/optionsObjectHelper.js';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins.js';
 
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties]

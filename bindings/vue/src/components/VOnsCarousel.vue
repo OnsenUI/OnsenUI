@@ -7,7 +7,7 @@
 <script>
   import ons from 'onsenui';
 
-  import {createComputedPropertiesFor, createMethodsFor} from '../common/optionsObjectHelper.js';
+  import {createComputedPropertiesFor, createMethodsFor} from '../internal/optionsObjectHelper.js';
 
   export default {
     computed: createComputedPropertiesFor(ons.CarouselElement),
