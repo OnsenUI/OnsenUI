@@ -962,6 +962,10 @@ export default class NavigatorElement extends BaseElement {
     return NavigatorTransitionAnimator;
   }
 
+  static get events() {
+    return ['prepush', 'postpush', 'prepop', 'postpop'];
+  }
+
   static get rewritables() {
     return rewritables;
   }
