@@ -8,6 +8,7 @@ Onsen UI is a library of UI components to help you create beautiful hybrid and m
 [![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=shield)](https://circleci.com/gh/OnsenUI/OnsenUI) 
 [![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
 [![npm version](https://badge.fury.io/js/onsenui.svg)](https://badge.fury.io/js/onsenui)
+[![CDNJS](https://img.shields.io/cdnjs/v/onsen.svg)](https://cdnjs.com/libraries/onsen)
 
 ![Onsen UI Todo App](https://cloud.githubusercontent.com/assets/6549462/17845137/8224b696-687a-11e6-8f7b-95b7e8f20f2d.gif)
 
