@@ -7,7 +7,7 @@ Guidelines:
 CHANGELOG
 ====
 
-1.0.0-rc.4 (Work In Progress)
+1.0.0-rc.4
 ----
 
 ### Features
@@ -34,6 +34,8 @@ CHANGELOG
     * `^2.1.2` ----> `^2.4.1`
  * **@angular/platform-browser-dynamic**:
     * `^2.1.2` ----> `^2.4.1`
+ * **rxjs**:
+    * `>=5.0.0-beta` ----> `^5.0.1`
 
 1.0.0-rc.3 (2016-11-15)
 ----
