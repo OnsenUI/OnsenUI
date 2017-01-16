@@ -1,56 +1,25 @@
 <template>
   <ons-input>
-    <slot></slot>
   </ons-input>
 </template>
-<!-- slot is required for `content-left` attribute -->
 
 <script>
+  import { deriveEvents, deriveProperties } from '../internal/mixins.js';
+
   export default {
-    methods: {
-      // Enable v-model directive on this component by relaying input event
-      onInput(ev) {
-        // Note:
-        // v-model directive works differently for Vue components.
-        // For more details, see: https://vuejs.org/v2/guide/components.html
-        this.$emit('input', ev.target.value);
-      }
-    },
-
-    //--------------------------------
-    // lifecycle hooks
-    //--------------------------------
-
-    // beforeCreate() {
-    // },
-
-    // created() {
-    // },
-
-    // beforeMount() {
-    // },
-
+    mixins: [deriveEvents, deriveProperties],
     mounted() {
-      this.$el.addEventListener('input', this.onInput);
-    },
-
-    // beforeUpdate() {
-    // },
-
-    // updated() {
-    // },
-
-    // activated() {
-    // },
-
-    // deactivated() {
-    // },
-
-    beforeDestroy() {
-      this.$el.removeEventListener('input', this.onInput);
-    },
-
-    // destroyed() {
-    // },
+      // Overwrite original 'input' or 'change' handlers for v-model support
+      if (['checkbox', 'radio'].includes(this.type)) {
+        // TODO v-model does not work
+        this.$el.removeEventListener('change', this._onChange);
+        this._onChange = event => this.$emit('change', event.target.checked);
+        this.$el.addEventListener('change', this._onChange);
+      } else {
+        this.$el.removeEventListener('input', this._onInput);
+        this._onInput = event => this.$emit('input', event.target.value);
+        this.$el.addEventListener('input', this._onInput);
+      }
+    }
   };
 </script>
