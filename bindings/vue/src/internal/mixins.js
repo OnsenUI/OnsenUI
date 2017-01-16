@@ -8,15 +8,23 @@ const _getClassFrom = tagName => {
   return ons[className]
 };
 
+const _eventToHandler = name => '_on' + name.charAt(0).toUpperCase() + name.slice(1);
+
 const deriveEvents = {
+  beforeCreate() {
+    this.$options.methods = Object.assign({}, _getClassFrom(this.$options._componentTag.slice(2)).events.reduce((result, key) => {
+      result[_eventToHandler(key)] = event => this.$emit(key, event);
+      return result;
+    }, {}));
+  },
   mounted() {
     _getClassFrom(this.$el.tagName).events.forEach(key => {
-      this.$el.addEventListener(key, this.$emit.bind(this, key));
+      this.$el.addEventListener(key, this[_eventToHandler(key)]);
     });
   },
   beforeDestroy() {
     _getClassFrom(this.$el.tagName).events.forEach(key => {
-      this.$el.removeEventListener(key, this.$emit.bind(this, key));
+      this.$el.removeEventListener(key, this[_eventToHandler(key)]);
     });
   }
 };
