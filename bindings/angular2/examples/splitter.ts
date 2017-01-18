@@ -28,38 +28,56 @@ class ContentPageComponent {
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
-      Left
+      {{msg}}
     </div>
   `
 })
-class SidePageComponent {
+class LeftPageComponent {
+  msg = 'Left'
+}
+
+@Component({
+  selector: 'ons-page',
+  template: `
+    <ons-toolbar>
+      <div class="center">Right Page</div> 
+    </ons-toolbar>
+    <div class="background"></div>
+    <div class="content">
+      {{msg}}
+    </div>
+  `
+})
+class RightPageComponent {
+  msg = 'Right'
 }
 
 @Component({
   selector: 'app',
   template: `
   <ons-splitter>
-    <ons-splitter-side [page]="sidePage" side="left" width="200px" style="border-right: 1px solid #ccc">
+    <ons-splitter-side [page]="leftPage" side="left" width="200px" style="border-right: 1px solid #ccc">
     </ons-splitter-side>
 
     <ons-splitter-content [page]="contentPage">
     </ons-splitter-content>
 
-    <ons-splitter-side [page]="sidePage" side="right" collapse swipeable width="200px" style="border-right: 1px solid #ccc">
+    <ons-splitter-side [page]="rightPage" side="right" collapse swipeable width="200px" style="border-left: 1px solid #ccc">
     </ons-splitter-side>
   </ons-splitter>
   `
 })
 export class AppComponent {
-  sidePage = SidePageComponent;
+  leftPage = LeftPageComponent;
+  rightPage = RightPageComponent;
   contentPage = ContentPageComponent;
 }
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, SidePageComponent, ContentPageComponent],
+  declarations: [AppComponent, LeftPageComponent, RightPageComponent, ContentPageComponent],
   bootstrap: [AppComponent],
-  entryComponents: [SidePageComponent, ContentPageComponent],
+  entryComponents: [LeftPageComponent, RightPageComponent, ContentPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 class AppModule { }
