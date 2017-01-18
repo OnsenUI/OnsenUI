@@ -59,7 +59,7 @@ const createComputedPropertiesFor = (targetClass) => {
       // register a computed property
       // which relay set/get operations to its corresponding property of DOM element
       computed[propertyName] = {
-        get() { return this.$el[propertyName].__vue__ || this.$el[propertyName]; },
+        get() { return (this.$el[propertyName] && this.$el[propertyName].__vue__) || this.$el[propertyName]; },
         set(newValue) { this.$el[propertyName] = newValue; }
       };
     }
