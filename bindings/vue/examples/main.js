@@ -30,7 +30,7 @@ const vm = new Vue({
   el: '#app',
   components: { ...examples },
   template: `
-    <v-ons-page>
+    <ons-page>
       <ons-toolbar>
         <div class="left"><ons-back-button @click="backToList" v-show="currentView !== mainList">Main List</ons-back-button></div>
         <div class="center">{{ title }}</div>
@@ -41,7 +41,7 @@ const vm = new Vue({
           <div :is="currentView" :examples="examples" :changeExample="changeExample"></div>
         </keep-alive>
       </div>
-    </v-ons-page>
+    </ons-page>
   `,
 
   data: {

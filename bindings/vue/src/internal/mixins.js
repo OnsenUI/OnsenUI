@@ -13,20 +13,22 @@ const _eventToHandler = name => '_on' + name.charAt(0).toUpperCase() + name.slic
 
 const deriveEvents = {
   beforeCreate() {
-    this.$options.methods = Object.assign({}, _getClassFrom(this.$options._componentTag.slice(2)).events.reduce((result, key) => {
+    this._boundEvents = _getClassFrom(this.$options._componentTag.slice(2)).events || ['click'];
+    this.$options.methods = Object.assign({}, this._boundEvents.reduce((result, key) => {
       result[_eventToHandler(key)] = event => this.$emit(key, event);
       return result;
     }, {}));
   },
   mounted() {
-    _getClassFrom(this.$el.tagName).events.forEach(key => {
+    this._boundEvents.forEach(key => {
       this.$el.addEventListener(key, this[_eventToHandler(key)]);
     });
   },
   beforeDestroy() {
-    _getClassFrom(this.$el.tagName).events.forEach(key => {
+    this._boundEvents.forEach(key => {
       this.$el.removeEventListener(key, this[_eventToHandler(key)]);
     });
+    this._boundEvents = null;
   }
 };
 

@@ -1,13 +1,12 @@
 <template>
-  <ons-carousel>
+  <div :is="$options._componentTag.slice(2)">
     <slot></slot>
-  </ons-carousel>
+  </div>
 </template>
 
 <script>
   import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins.js';
-
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties]
+    mixins: [ deriveEvents, deriveMethods, deriveProperties ]
   };
 </script>

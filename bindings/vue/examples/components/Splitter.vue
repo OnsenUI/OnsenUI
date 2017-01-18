@@ -31,14 +31,14 @@
   let splitterSide = {
     template: `
       <v-ons-page>
-        <ons-list>
-          <ons-list-item
+        <v-ons-list>
+          <v-ons-list-item
             v-for="item in [1, 2, 3, 4]"
             @click="splitter.side.close()"
             tappable>
             Menu item {{ item }}
-          </ons-list-item>
-        </ons-list>
+          </v-ons-list-item>
+        </v-ons-list>
       </v-ons-page>
     `,
     methods: {
@@ -49,18 +49,18 @@
   let splitterContent = {
     template: `
      <v-ons-page :jiooo="whatever">
-      <ons-toolbar>
+      <v-ons-toolbar>
         <div class="left">
-          <ons-toolbar-button @click="splitter.side.toggle()"><v-ons-icon icon="md-menu"></v-ons-icon></ons-toolbar-button>
+          <v-ons-toolbar-button @click="splitter.side.toggle()"><v-ons-icon icon="md-menu"></v-ons-icon></v-ons-toolbar-button>
         </div>
         <div class="center">Side menu</div>
-      </ons-toolbar>
+      </v-ons-toolbar>
       <p style="text-align: center">
         Swipe right to open menu!
       </p>
 
-      <ons-list>
-        <ons-list-item>
+      <v-ons-list>
+        <v-ons-list-item>
           <div class="center">
             Side
           </div>
@@ -70,20 +70,20 @@
               <option>right</option>
             </select>
           </div>
-        </ons-list-item>
-        <ons-list-item>
+        </v-ons-list-item>
+        <v-ons-list-item>
           <div class="center">
             Swipeable
           </div>
           <div class="right">
-            <ons-switch
+            <v-ons-switch
               :checked="sideState.swipeable"
               @change="sideState.swipeable = $event.target.checked"
             >
-            </ons-switch>
+            </v-ons-switch>
           </div>
-        </ons-list-item>
-        <ons-list-item>
+        </v-ons-list-item>
+        <v-ons-list-item>
           <div class="center">
             Collapse
           </div>
@@ -94,28 +94,28 @@
               <option>landscape</option>
             </select>
           </div>
-        </ons-list-item>
-        <ons-list-item>
+        </v-ons-list-item>
+        <v-ons-list-item>
           <div class="left">
-            <ons-button @click="update">Update</ons-button>
+            <v-ons-button @click="update">Update</v-ons-button>
           </div>
           <div class="center">
             Whatever
           </div>
           <div class="right">
-            <ons-switch
+            <v-ons-switch
               :checked="sideState.open"
               @change="sideState.open = $event.target.checked"
             >
-            </ons-switch>
+            </v-ons-switch>
           </div>
-        </ons-list-item>
-        <ons-list-item>
+        </v-ons-list-item>
+        <v-ons-list-item>
           <div class="center">
             {{whatever}}; {{sideState}}
           </div>
-        </ons-list-item>
-      </ons-list>
+        </v-ons-list-item>
+      </v-ons-list>
     </v-ons-page>
     `,
     methods: {

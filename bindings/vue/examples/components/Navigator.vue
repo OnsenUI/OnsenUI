@@ -9,10 +9,10 @@
   let page2 = {
     template: `
       <v-ons-page>
-        <ons-toolbar>
+        <v-ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
           <div class="center">Page 2</div>
-        </ons-toolbar>
+        </v-ons-toolbar>
         Page 2
       </v-ons-page>
     `
@@ -21,9 +21,9 @@
   let page1 = {
     template: `
       <v-ons-page>
-        <ons-toolbar>
+        <v-ons-toolbar>
           <div class="center">Page 1</div>
-        </ons-toolbar>
+        </v-ons-toolbar>
         Page 1
         <ons-button @click="push">Push</ons-button>
       </v-ons-page>
