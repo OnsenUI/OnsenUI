@@ -16,22 +16,20 @@
 *
 */
 
-// NOTE: You can't use @extend that break component independent and topdoc parsing.
-
 // internal variables
-var-navigation-bar-background-color = $toolbar-background-color
-var-navigation-bar-separator-color = $toolbar-border-color
-var-navigation-bar-color = $toolbar-text-color
+@navigation-bar-background-color: @toolbar-background-color;
+@navigation-bar-separator-color: @toolbar-border-color;
+@navigation-bar-color: @toolbar-text-color;
 
-var-navigation-bar-height = 44px
-var-navigation-bar-box-shadow = none
-var-navigation-bar-padding = 0
-var-navigation-bar-separator = 1px solid var-navigation-bar-separator-color
+@navigation-bar-height: 44px;
+@navigation-bar-box-shadow: none;
+@navigation-bar-padding: 0;
+@navigation-bar-separator: 1px solid @navigation-bar-separator-color;
 
-var-navigation-bar-material-height = 56px
+@navigation-bar-material-height: 56px;
 
-var-material-navigation-bar-background-color = $material-toolbar-background-color
-var-material-navigation-bar-color = $material-toolbar-text-color
+@material-navigation-bar-background-color: @material-toolbar-background-color;
+@material-navigation-bar-color: @material-toolbar-text-color;
 
 /*! topdoc
   name: Navigation Bar
@@ -42,90 +40,111 @@ var-material-navigation-bar-color = $material-toolbar-text-color
     </div>
 */
 
-retina-navigation-bar-border(position = bottom, color = #ddd)
-  border-{position} none
-  background-size 100% 1px
-  background-repeat no-repeat
-  background-position position
+.retina-navigation-bar-border(@position; @color: #ddd) when (@position = top) {
+  border-top: none; // if position == 'top'
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: @position;
+  background-image: linear-gradient(180deg, color, color 100%); // if position == 'top'
 
-  background-image linear-gradient(0deg, color, color 100%) if position == 'bottom'
-  background-image linear-gradient(180deg, color, color 100%) if position == 'top'
+  .retina-query({
+    background-image: linear-gradient(180deg, color, color 50%, transparent 50%); // if position == 'top'
+  });
+}
 
-  +retina-query()
-    background-image linear-gradient(0deg, color, color 50%, transparent 50%) if position == 'bottom'
-    background-image linear-gradient(180deg, color, color 50%, transparent 50%) if position == 'top'
+.retina-navigation-bar-border(@position; @color: #ddd) when (@position = bottom) {
+  border-bottom: none; // if position == 'bottom'
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: @position;
+  background-image: linear-gradient(0deg, color, color 100%); // if position == 'bottom'
 
-navigation-bar()
-  reset-font()
-  reset-container()
-  reset-base()
-  reset-cursor()
-  z-index 2
+  .retina-query({
+    background-image: linear-gradient(0deg, color, color 50%, transparent 50%); // if position == 'bottom'
+  });
+}
 
-navigation-bar__item()
-  reset-box-model()
-  reset-base()
+.navigation-bar() {
+  .reset-font();
+  .reset-container();
+  .reset-base();
+  .reset-cursor();
+  z-index: 2;
+}
 
-.navigation-bar
-  navigation-bar()
-  display block
-  height var-navigation-bar-height
-  padding-left var-navigation-bar-padding
-  padding-right var-navigation-bar-padding
-  background var-navigation-bar-background-color
-  color var-navigation-bar-color
-  box-shadow var-navigation-bar-box-shadow
-  font-weight var-font-weight
-  width 100%
-  white-space nowrap
-  retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
+.navigation-bar__item() {
+  .reset-box-model();
+  .reset-base();
+}
 
-.navigation-bar__bg
-  background var-navigation-bar-background-color
+.navigation-bar {
+  .navigation-bar();
+  display: block;
+  height: @navigation-bar-height;
+  padding-left: @navigation-bar-padding;
+  padding-right: @navigation-bar-padding;
+  background: @navigation-bar-background-color;
+  color: @navigation-bar-color;
+  box-shadow: @navigation-bar-box-shadow;
+  font-weight: @font-weight;
+  width: 100%;
+  white-space: nowrap;
+  .retina-navigation-bar-border(bottom, @navigation-bar-separator-color);
+}
 
-.navigation-bar__item
-  navigation-bar__item()
-  height var-navigation-bar-height
-  vertical-align top
-  overflow visible
-  display block
-  vertical-align middle
-  float left
+.navigation-bar__bg {
+  background: @navigation-bar-background-color;
+}
 
-.navigation-bar__left
-  @extend .navigation-bar__item
-  max-width 50%
-  width 27%
-  text-align left
-  line-height var-navigation-bar-height
+.navigation-bar__item {
+  .navigation-bar__item();
+  height: @navigation-bar-height;
+  vertical-align: top;
+  overflow: visible;
+  display: block;
+  vertical-align: middle;
+  float: left;
+}
 
-.navigation-bar__right
-  @extend .navigation-bar__item
-  max-width 50%
-  width 27%
-  text-align right
-  line-height var-navigation-bar-height
+.navigation-bar__left {
+  &:extend(.navigation-bar__item);
+  max-width: 50%;
+  width: 27%;
+  text-align: left;
+  line-height: @navigation-bar-height;
+}
 
-.navigation-bar__center
-  @extend .navigation-bar__item
-  width 46%
-  text-align center
-  line-height var-navigation-bar-height
-  font-size var-font-size--large
-  font-weight var-font-weight--large
-  color var-navigation-bar-color
+.navigation-bar__right {
+  &:extend(.navigation-bar__item);
+  max-width: 50%;
+  width: 27%;
+  text-align: right;
+  line-height: @navigation-bar-height;
+}
 
-.navigation-bar__title
-  line-height var-navigation-bar-height
-  font-size var-font-size--large
-  font-weight var-font-weight--large
-  color var-navigation-bar-color
-  margin 0
-  padding 0
-  overflow visible
+.navigation-bar__center {
+  &:extend(.navigation-bar__item);
+  width: 46%;
+  text-align: center;
+  line-height: @navigation-bar-height;
+  font-size: @font-size--large;
+  font-weight: @font-weight--large;
+  color: @navigation-bar-color;
+}
 
-.navigation-bar__center:first-child:last-child
-  width 100%
+.navigation-bar__title {
+  line-height: @navigation-bar-height;
+  font-size: @font-size--large;
+  font-weight: @font-weight--large;
+  color: @navigation-bar-color;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.navigation-bar__center:first-child:last-child {
+  width: 100%;
+}
 
 /*! topdoc
   name: Navigation Bar Item
@@ -201,33 +220,36 @@ navigation-bar__item()
       <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
 */
-.bottom-bar
-  navigation-bar()
-  display block
-  height var-navigation-bar-height
-  padding-left var-navigation-bar-padding
-  padding-right var-navigation-bar-padding
-  background var-navigation-bar-background-color
-  color var-navigation-bar-color
-  box-shadow var-navigation-bar-box-shadow
-  font-weight var-font-weight
-  border-bottom none
-  border-top var-navigation-bar-separator
-  position absolute
-  bottom 0px
-  right 0px
-  left 0px
-  retina-navigation-bar-border(top, var-navigation-bar-separator-color)
+.bottom-bar {
+  .navigation-bar();
+  display: block;
+  height: @navigation-bar-height;
+  padding-left: @navigation-bar-padding;
+  padding-right: @navigation-bar-padding;
+  background: @navigation-bar-background-color;
+  color: @navigation-bar-color;
+  box-shadow: @navigation-bar-box-shadow;
+  font-weight: @font-weight;
+  border-bottom: none;
+  border-top: @navigation-bar-separator;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  .retina-navigation-bar-border(top, @navigation-bar-separator-color);
+}
 
-.bottom-bar__line-height
-  line-height var-navigation-bar-height
-  padding-bottom 0
-  padding-top 0
+.bottom-bar__line-height {
+  line-height: @navigation-bar-height;
+  padding-bottom: 0;
+  padding-top: 0;
+}
 
-.bottom-bar--transparent
-  background-color transparent
-  background-image none
-  border none
+.bottom-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
 
 /*! topdoc
   name: Navigation Bar with Segment
@@ -264,16 +286,17 @@ navigation-bar__item()
     </div>
 */
 
-.navigation-bar--material
-  display flex
-  flex-wrap nowrap
-  justify-content space-between
-  height var-navigation-bar-material-height
-  border-bottom 0
-  box-shadow 0 1px 5px rgba(0,0,0,0.3)
-  padding 0
-  background-color var-material-navigation-bar-background-color
-  background-size 0
+.navigation-bar--material {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: @navigation-bar-material-height;
+  border-bottom: 0;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  padding: 0;
+  background-color: @material-navigation-bar-background-color;
+  background-size: 0;
+}
 
 /*! topdoc
   name: No Shadow Navigation Bar
@@ -295,44 +318,51 @@ navigation-bar__item()
     </div>
 */
 
-.navigation-bar--noshadow
-  box-shadow none
-  background-image none
-  border-bottom none
+.navigation-bar--noshadow {
+  box-shadow: none;
+  background-image: none;
+  border-bottom: none;
+}
 
-navigation-bar--material-font()
-  material-font()
-  font-size 20px
-  font-weight 500
-  color var-material-navigation-bar-color
+.navigation-bar--material-font() {
+  .material-font();
+  font-size: 20px;
+  font-weight: 500;
+  color: @material-navigation-bar-color;
+}
 
-.navigation-bar--material__left, .navigation-bar--material__right
-  navigation-bar--material-font()
-  height var-navigation-bar-material-height
-  min-width 72px
-  width auto
-  float initial
-  line-height var-navigation-bar-material-height
+.navigation-bar--material__left, .navigation-bar--material__right {
+  .navigation-bar--material-font();
+  height: @navigation-bar-material-height;
+  min-width: 72px;
+  width: auto;
+  float: initial;
+  line-height: @navigation-bar-material-height;
+}
 
-.navigation-bar--material__center
-  navigation-bar--material-font()
-  height var-navigation-bar-material-height
-  width auto
-  flex-grow 1
-  overflow hidden
-  text-overflow ellipsis
-  text-align left
-  float initial
-  line-height var-navigation-bar-material-height
+.navigation-bar--material__center {
+  .navigation-bar--material-font();
+  height: @navigation-bar-material-height;
+  width: auto;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  float: initial;
+  line-height: @navigation-bar-material-height;
+}
 
-.navigation-bar--material__center:first-child
-  margin-left 16px
+.navigation-bar--material__center:first-child {
+  margin-left: 16px;
+}
 
-.navigation-bar--material__center:last-child
-  margin-right 16px
+.navigation-bar--material__center:last-child {
+  margin-right: 16px;
+}
 
-.navigation-bar--material__left:empty, .navigation-bar--material__right:empty
-  min-width 16px
+.navigation-bar--material__left:empty, .navigation-bar--material__right:empty {
+  min-width: 16px;
+}
 
 
 /*! topdoc
@@ -384,8 +414,9 @@ navigation-bar--material-font()
     </div>
 */
 
-.navigation-bar--transparent
-  background-color transparent
-  box-shadow none
-  background-image none
-  border-bottom none
+.navigation-bar--transparent {
+  background-color: transparent;
+  box-shadow: none;
+  background-image: none;
+  border-bottom: none;
+}
