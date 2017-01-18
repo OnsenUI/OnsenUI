@@ -17,7 +17,13 @@ import Util from './Util.js';
           onPostChange={() => console.log('onPostChange')}
           onOverscroll={() => console.log('onOverscroll')}
           onRefresh={() => console.log('onRefresh')}
-          ref='carousel' swipeable overscrollable autoScroll fullscreen autoScrollRatio={0.2}>
+          ref={(carousel) => { this.carousel = carousel; }}
+          swipeable
+          overscrollable
+          autoScroll
+          fullscreen
+          autoScrollRatio={0.2}
+      >
           <CarouselItem style={{backgroundColor: 'gray'}}>
             <div className='item-label'>GRAY</div>
           </CarouselItem>
