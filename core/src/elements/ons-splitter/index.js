@@ -106,7 +106,7 @@ export default class SplitterElement extends BaseElement {
    *   [ja][/ja]
    */
   get side() {
-    return this._getSide('left');
+    return util.findChild(this, 'ons-splitter-side');
   }
 
   get _sides() {
