@@ -437,6 +437,10 @@ export default class PageElement extends BaseElement {
     this.remove();
   }
 
+  static get events() {
+    return ['init', 'show', 'hide', 'destroy'];
+  }
+
   /**
    * @property data
    * @type {*}
