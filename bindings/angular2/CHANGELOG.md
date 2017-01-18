@@ -7,7 +7,7 @@ Guidelines:
 CHANGELOG
 ====
 
-(dev)
+1.0.0-rc.5
 ----
 
  * Fixed [#1725](https://github.com/OnsenUI/OnsenUI/issues/1725).
