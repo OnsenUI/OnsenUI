@@ -2,10 +2,11 @@ import Vue from 'vue';
 import ons from 'onsenui';
 import { createMethodsFor, createComputedPropertiesFor } from './optionsObjectHelper.js';
 
+const _hyphenate = string => string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+const _camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 const _getClassFrom = tagName => {
-  let className = tagName.toLowerCase().slice(4);
-  className = className.charAt(0).toUpperCase() + className.slice(1) + 'Element';
-  return ons[className]
+  const className = _camelize(tagName.slice(3)) + 'Element';
+  return ons[className];
 };
 
 const _eventToHandler = name => '_on' + name.charAt(0).toUpperCase() + name.slice(1);
@@ -52,6 +53,27 @@ const _getParentVM = element => {
   return parent.__vue__;
 };
 
+const _inheritProps = {
+  beforeCreate() {
+    if (!this.$options.hasOwnProperty('props')) {
+      return;
+    }
+
+    const parentVnode = this.$options.parent.$options._parentVnode;
+    const parentProps = Object.assign({}, parentVnode.data.attrs, parentVnode.componentOptions.propsData);
+    this.$options.propsData = Object.assign(
+      Object.keys(this.$options.props).reduce((result, key) => {
+        const hyphenKey = _hyphenate(key);
+        result[key] = {};
+        if (parentProps.hasOwnProperty(hyphenKey)) {
+          result[key] = parentProps[hyphenKey];
+        }
+        return result;
+      }, {}),
+      this.$options.propsData || {});
+  }
+};
+
 const VuePageLoader = {
   props: {
     page: {
@@ -68,8 +90,13 @@ const VuePageLoader = {
           page.$parent = page.$parent || _getParentVM(parent);
         } else {
           page = new Vue(Object.assign(
-            { parent: _getParentVM(parent) },
-            page
+            {
+              parent: _getParentVM(parent)
+            },
+            page,
+            {
+              mixins: (page.mixins || []).concat([_inheritProps])
+            }
           ));
         }
 
