@@ -30,7 +30,7 @@
     `,
     methods: {
       push: function() {
-        this.getNavigator().pushPage(page2)
+        this.navigator.pushPage(page2)
       }
     },
   };

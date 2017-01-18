@@ -12,12 +12,12 @@
     template: `
       <ons-page>
         Home page
-        <ons-button @click="setTab(1)">getTabbar().setActiveTab(1)</ons-button>
+        <ons-button @click="setTab(1)">tabbar.setActiveTab(1)</ons-button>
       </ons-page>
     `,
     methods: {
       setTab: function(i) {
-        this.getTabbar().setActiveTab(i);
+        this.tabbar.setActiveTab(i);
       }
     }
   };

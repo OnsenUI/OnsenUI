@@ -28,15 +28,19 @@ const install = (Vue, params = {}) => {
         if (query.startsWith('v-')) {
           query = name.slice(2);
         }
-        return ons._util.findParent(this.$el, query).__vue__;
-      },
-      getTabbar() {
+        const component = ons._util.findParent(this.$el, query);
+        return component && component.__vue__ || null;
+      }
+    },
+
+    computed: {
+      tabbar() {
         return this.getComponent('ons-tabbar');
       },
-      getNavigator() {
+      navigator() {
         return this.getComponent('ons-navigator');
       },
-      getSplitter() {
+      splitter() {
         return this.getComponent('ons-splitter');
       }
     },
