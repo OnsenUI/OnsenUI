@@ -756,6 +756,10 @@ export default class SplitterSideElement extends BaseElement {
     this.remove();
   }
 
+  static get events() {
+    return ['preopen', 'postopen', 'preclose', 'postclose', 'modechange'];
+  }
+
   static get rewritables() {
     return rewritables;
   }
