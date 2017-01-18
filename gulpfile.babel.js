@@ -695,7 +695,7 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
       }
     } finally {
       global.WDIO_BROWSER = undefined;
-      
+
       $.connect.serverClose(); // kill local HTTP servers
       standaloneSeleniumServer.kill(); // kill standalone Selenium server
     }

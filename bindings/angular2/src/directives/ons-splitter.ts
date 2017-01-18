@@ -9,7 +9,8 @@ import {
   ReflectiveInjector,
   OnInit,
   ViewContainerRef,
-  ComponentFactoryResolver
+  ComponentFactoryResolver,
+  NgZone
 } from '@angular/core';
 import {Params} from '../ons/params';
 
@@ -71,7 +72,8 @@ export class OnsSplitterSide {
     private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
     private _resolver: ComponentFactoryResolver,
-    private _injector: Injector) {
+    private _injector: Injector,
+    private _zone: NgZone) {
     this.element.pageLoader = this._createPageLoader();
   }
 
@@ -84,10 +86,11 @@ export class OnsSplitterSide {
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
-        const injector = ReflectiveInjector.resolveAndCreate([
-          {provide: Params, useValue: new Params(params || {})},
-          {provide: OnsSplitterSide, useValue: this}
-        ], this._injector);
+        this._zone.run(() => {
+          const injector = ReflectiveInjector.resolveAndCreate([
+            {provide: Params, useValue: new Params(params || {})},
+            {provide: OnsSplitterSide, useValue: this}
+          ], this._injector);
 
           const factory = this._resolver.resolveComponentFactory(page);
           const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
@@ -97,6 +100,7 @@ export class OnsSplitterSide {
           this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
           done(pageElement);
+        });
       },
       element => {
         if (componentRefMap.has(element)) {

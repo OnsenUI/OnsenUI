@@ -8,7 +8,8 @@ import {
   ElementRef,
   Type,
   Input,
-  OnDestroy
+  OnDestroy,
+  NgZone
 } from '@angular/core';
 
 /**
@@ -67,27 +68,35 @@ export class OnsTab implements OnDestroy {
 
   constructor(private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
-    private _resolver: ComponentFactoryResolver) {
-
+    private _resolver: ComponentFactoryResolver,
+    private _zone: NgZone) {
     // set up ons-tab's page loader
-    this._elementRef.nativeElement.pageLoader = new (<any>ons.PageLoader)( // FIXME
+    this._elementRef.nativeElement.pageLoader = this._createPageLoader();
+  }
+
+  _createPageLoader() {
+    const PageLoader = <any>ons.PageLoader;
+    return new PageLoader(
       ({page, parent}, done: Function) => {
-        const factory = this._resolver.resolveComponentFactory(page);
-        const pageComponentRef = this._viewContainer.createComponent(factory, 0);
+        this._zone.run(() => {
+          const factory = this._resolver.resolveComponentFactory(page);
+          const pageComponentRef = this._viewContainer.createComponent(factory, 0);
 
-        if (this._pageComponent) {
-          this._pageComponent.destroy();
-        }
-        this._pageComponent = pageComponentRef;
+          if (this._pageComponent) {
+            this._pageComponent.destroy();
+          }
+          this._pageComponent = pageComponentRef;
 
-        const pageElement = pageComponentRef.location.nativeElement;
-        parent.appendChild(pageElement); // dirty fix to insert in correct position
+          const pageElement = pageComponentRef.location.nativeElement;
+          parent.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done(pageElement);
+          done(pageElement);
+        });
       },
       () => {
         if (this.hasOwnProperty('_pageComponent')) {
           this._pageComponent.destroy();
+          this._pageComponent = null;
         }
       }
     );
@@ -96,6 +105,7 @@ export class OnsTab implements OnDestroy {
   ngOnDestroy() {
     if (this._pageComponent) {
       this._pageComponent.destroy();
+      this._pageComponent = null;
     }
   }
 }

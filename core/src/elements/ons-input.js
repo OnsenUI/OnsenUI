@@ -210,7 +210,7 @@ export default class InputElement extends BaseElement {
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;
       case 'placeholder':
-        return contentReady(this, () => this._updateLabel());
+        contentReady(this, () => this._updateLabel());
         break;
       case 'input-id':
         contentReady(this, () => this._input.id = current);
