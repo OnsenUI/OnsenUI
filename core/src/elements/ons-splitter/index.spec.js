@@ -64,7 +64,7 @@ describe('OnsSplitterElement', () => {
   });
 
   describe('children elements', () => {
-    ['left', 'right', 'content', 'mask'].forEach(name => {
+    ['left', 'right', 'side', 'content', 'mask'].forEach(name => {
       it(`has a #${name} element`, () => {
         expect(splitter.left).to.be.an.instanceof(HTMLElement);
       });
