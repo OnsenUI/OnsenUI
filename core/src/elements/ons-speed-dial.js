@@ -436,6 +436,10 @@ export default class SpeedDialElement extends BaseElement {
       this.showItems();
     }
   }
+
+  static get events() {
+    return ['open', 'close'];
+  }
 }
 
 customElements.define('ons-speed-dial', SpeedDialElement);
