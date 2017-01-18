@@ -9,7 +9,8 @@ import {
   ComponentFactoryResolver,
   Input,
   ViewContainerRef,
-  OnDestroy
+  OnDestroy,
+  NgZone
 } from '@angular/core';
 import {Params} from '../ons/params';
 
@@ -68,9 +69,7 @@ export class OnsNavigator implements OnDestroy {
    *   [ja]ページコンポーネントのクラスを指定します。[/ja]
    */
   @Input('page') set pageComponentType(page: Type<any>) {
-    if (this.element.pages.length == 0) {
-      this.element.pushPage(page);
-    }
+    this.element.page = page;
   }
 
   get element(): any {
@@ -81,7 +80,8 @@ export class OnsNavigator implements OnDestroy {
     private _elementRef: ElementRef,
     private _resolver: ComponentFactoryResolver,
     private _viewContainer: ViewContainerRef,
-    private _injector: Injector) {
+    private _injector: Injector,
+    private _zone: NgZone) {
     this._lastPageLoader = this.element.pageLoader;
     this.element.pageLoader = this._createPageLoader();
   }
@@ -91,22 +91,24 @@ export class OnsNavigator implements OnDestroy {
 
     return new ons.PageLoader(
       ({page, parent, params}, done: Function) => {
-        const pageParams = new Params(params || {});
-        const injector = ReflectiveInjector.resolveAndCreate([
-          {provide: Params, useValue: pageParams},
-          {provide: OnsNavigator, useValue: this}
-        ], this._injector);
+        this._zone.run(() => {
+          const pageParams = new Params(params || {});
+          const injector = ReflectiveInjector.resolveAndCreate([
+            {provide: Params, useValue: pageParams},
+            {provide: OnsNavigator, useValue: this}
+          ], this._injector);
 
-        const factory = this._resolver.resolveComponentFactory(page);
-        const selector = 'ons-navigator';
-        const pageComponentRef = factory.create(injector, null);
-        this._viewContainer.insert(pageComponentRef.hostView);
-        const pageElement = pageComponentRef.location.nativeElement;
-        componentRefMap.set(pageElement, pageComponentRef);
+          const factory = this._resolver.resolveComponentFactory(page);
+          const selector = 'ons-navigator';
+          const pageComponentRef = factory.create(injector, null);
+          this._viewContainer.insert(pageComponentRef.hostView);
+          const pageElement = pageComponentRef.location.nativeElement;
+          componentRefMap.set(pageElement, pageComponentRef);
 
-        this.element.appendChild(pageElement); // dirty fix to insert in correct position
+          this.element.appendChild(pageElement); // dirty fix to insert in correct position
 
-        done(pageElement);
+          done(pageElement);
+        });
       },
       element => {
         if (componentRefMap.has(element)) {

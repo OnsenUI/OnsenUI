@@ -7,7 +7,8 @@ import {
   ComponentRef,
   ViewContainerRef,
   ReflectiveInjector,
-  Type
+  Type,
+  NgZone
 } from '@angular/core';
 import {Params} from './params';
 import {ComponentLoader} from './component-loader';
@@ -27,30 +28,33 @@ export class PopoverFactory {
     private _injector: Injector,
     private _resolver: ComponentFactoryResolver,
     private _appRef: ApplicationRef,
-    private _componentLoader: ComponentLoader
+    private _componentLoader: ComponentLoader,
+    private _zone: NgZone
   ) {
   }
 
   createPopover(componentType: any, params: Object = {}): Promise<PopoverRef> { // TODO: fix "any"
     return new Promise(resolve => {
       setImmediate(() => {
-        const factory = this._resolver.resolveComponentFactory(componentType);
-        const injector = ReflectiveInjector.resolveAndCreate([
-          {provide: Params, useValue: new Params(params)}
-        ], this._injector);
-        const componentRef = factory.create(injector);
-        const rootElement = componentRef.location.nativeElement;
+        this._zone.run(() => {
+          const factory = this._resolver.resolveComponentFactory(componentType);
+          const injector = ReflectiveInjector.resolveAndCreate([
+            {provide: Params, useValue: new Params(params)}
+          ], this._injector);
+          const componentRef = factory.create(injector);
+          const rootElement = componentRef.location.nativeElement;
 
-        this._componentLoader.load(componentRef);
+          this._componentLoader.load(componentRef);
 
-        const element = rootElement.children[0];
-        const popoverElement = element.tagName === 'ONS-POPOVER' ? element : element.querySelector('ons-popover');
+          const element = rootElement.children[0];
+          const popoverElement = element.tagName === 'ONS-POPOVER' ? element : element.querySelector('ons-popover');
 
-        if (!popoverElement) {
-          throw Error('<ons-popover> element is not found in component\'s template.');
-        }
+          if (!popoverElement) {
+            throw Error('<ons-popover> element is not found in component\'s template.');
+          }
 
-        resolve({popover: popoverElement, destroy: () => componentRef.destroy()});
+          resolve({popover: popoverElement, destroy: () => componentRef.destroy()});
+        });
       });
     });
   }
