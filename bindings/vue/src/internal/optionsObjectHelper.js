@@ -13,6 +13,7 @@ const _reservedProperties = [
 
 const _blackListedProperties = [
   'page',
+  'pageLoader',
 ];
 
 /**
@@ -58,7 +59,7 @@ const createComputedPropertiesFor = (targetClass) => {
       // register a computed property
       // which relay set/get operations to its corresponding property of DOM element
       computed[propertyName] = {
-        get() { return this.$el[propertyName]; },
+        get() { return this.$el[propertyName].__vue__ || this.$el[propertyName]; },
         set(newValue) { this.$el[propertyName] = newValue; }
       };
     }
