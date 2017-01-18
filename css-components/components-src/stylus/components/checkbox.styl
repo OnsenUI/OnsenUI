@@ -121,7 +121,7 @@ checkbox--after()
   border var-checkbox-border
   border-radius var-checkbox-border-radius
   box-shadow var-box-shadow
-  left 0
+  DockItem(left, 0)
 
 .checkbox__checkmark
   checkbox()
@@ -132,14 +132,14 @@ checkbox--after()
 .checkbox__checkmark:after
   checkbox--after()
   top var-checkmark-top
-  left var-checkmark-left
+  DockItem(left, var-checkmark-left)
   width var-checkmark-tail-width
   height var-checkmark-foot-height
   background transparent
   border var-checkmark-border
   border-width var-checkmark-border-width
   border-top none
-  border-right none
+  BorderRight(none)
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
   opacity 0
@@ -210,7 +210,7 @@ checkbox--after()
   background transparent
   border none
   border-radius var-checkbox-border-radius
-  left 0
+  DockItem(left, 0)
 
 .checkbox--noborder__checkmark
   inline-block()
@@ -224,7 +224,7 @@ checkbox--after()
   content ''
   position absolute
   top var-checkmark-top
-  left var-checkmark-left
+  DockItem(left, var-checkmark-left)
   opacity 0
   width var-checkmark-tail-width
   height var-checkmark-foot-height
@@ -232,7 +232,7 @@ checkbox--after()
   border var-border--checkmark--noborder
   border-width var-checkmark-border-width
   border-top none
-  border-right none
+  BorderRight(none)
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
 
@@ -298,12 +298,12 @@ checkbox--after()
   width 10px
   height 5px
   top 4px
-  left 3px
+  DockItem(left, 3px)
   transform scale(0) rotate(-45deg)
 
 .checkbox--material__input:checked + .checkbox--material__checkmark:after
   top 4px
-  left 3px
+  DockItem(left, 3px)
   transform scale(1) rotate(-45deg)
 
 .checkbox--material__input:disabled + .checkbox--material__checkmark

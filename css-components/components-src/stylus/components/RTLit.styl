@@ -1,0 +1,186 @@
+html {
+    direction $direction
+
+body {
+    direction: $direction
+
+FloatItem($value, $important = false)
+	importantString = $important ? !important : unquote("")
+    if $value == "left" and $direction == $ltr
+        float: left importantString
+    if $value == "right" and $direction == $ltr
+        float: right importantString
+    if $value == "left" and $direction == $rtl
+        float: right importantString
+    if $value == "right" and $direction == $rtl
+        float: left importantString
+    if $value == "none"
+        float: none importantString
+
+TextAlignTo($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $value == "left" and $direction == $ltr
+        text-align: left importantString
+    if $value == "right" and $direction == $ltr
+        text-align: right importantString
+    if $value == "left" and $direction == $rtl
+        text-align: right importantString
+    if $value == "right" and $direction == $rtl
+        text-align: left importantString
+    
+DockItem($location, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $location == "left" and $direction == $ltr
+        left: $value importantString
+    if $location == "right" and $direction == $ltr
+        right: $value importantString
+    if $location == "left" and $direction == $rtl
+        right: $value importantString
+    if $location == "right" and $direction == $rtl
+        left: $value importantString
+
+SwapMargin($topMargin, $rightMargin, $bottomMargin, $leftMargin)
+    if $direction = $ltr
+        margin: $topMargin $rightMargin $bottomMargin $leftMargin
+    if $direction = $rtl
+        margin: $topMargin $leftMargin $bottomMargin $rightMargin
+    
+MarginLeftOrRight($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "margin-left" and $direction == $ltr
+        margin-left: $value importantString
+    if $command == "margin-right" and $direction == $ltr
+        margin-right: $value importantString
+    if $command == "margin-left" and $direction == $rtl
+        margin-right: $value importantString
+    if $command == "margin-right" and $direction == $rtl
+        margin-left: $value importantString
+
+SwapPadding($topPadding, $rightPadding, $bottomPadding, $leftPadding)
+    if $direction == $ltr
+        padding: $topPadding $rightPadding $bottomPadding $leftPadding
+    if $direction == $rtl
+        padding: $topPadding $leftPadding $bottomPadding $rightPadding
+    
+PaddingLeftOrRight($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "padding-left" and $direction == $ltr
+        padding-left: $value importantString
+    if $command == "padding-right" and $direction == $ltr
+        padding-right: $value importantString
+    if $command == "padding-left" and $direction == $rtl
+        padding-right: $value importantString
+    if $command == "padding-right" and $direction == $rtl
+        padding-left: $value importantString
+
+BorderLeftOrRight($command, $borderSize, $borderColor, $bordertype)
+    if $command == "border-left" and $direction == $ltr
+        border-left: $borderSize $borderColor $bordertype
+    if $command == "border-right" and $direction == $ltr
+        border-right: $borderSize $borderColor $bordertype
+    if $command == "border-left" and $direction == $rtl
+        border-right: $borderSize $borderColor $bordertype
+    if $command == "border-right" and $direction == $rtl
+        border-left: $borderSize $borderColor $bordertype
+    
+BorderLeftOrRightColor($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "border-left-color" and $direction == $ltr
+        border-left-color: $value importantString
+    if $command == "border-left-color" and $direction == $rtl
+        border-right-color: $value importantString
+    if $command == "border-right-color" and $direction == $ltr
+        border-right-color: $value importantString
+    if $command == "border-right-color" and $direction == $rtl
+        border-left-color: $value importantString
+
+BorderLeftOrRightWidth($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "border-left-width" and $direction == $ltr
+        border-left-width: $value importantString
+    if $command == "border-left-width" and $direction == $rtl
+        border-right-width: $value importantString
+    if $command == "border-right-width" and $direction == $ltr
+        border-right-width: $value importantString
+    if $command == "border-right-width" and $direction == $rtl
+        border-left-width: $value importantString
+    
+BorderTopLeftOrRightRadius($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "border-top-left-radius" and $direction == $ltr
+        border-top-left-radius: $value importantString
+    if $command == "border-top-left-radius" and $direction == $rtl
+        border-top-right-radius: $value importantString
+    if $command == "border-top-right-radius" and $direction == $ltr
+        border-top-right-radius: $value importantString
+    if $command == "border-top-right-radius" and $direction == $rtl
+        border-top-left-radius: $value importantString
+
+BorderBottomLeftOrRightRadius($command, $value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $command == "border-bottom-left-radius" and $direction == $ltr
+        border-bottom-left-radius: $value importantString
+    if $command == "border-bottom-left-radius" and $direction == $rtl
+        border-bottom-right-radius: $value importantString
+    if $command == "border-bottom-right-radius" and $direction == $ltr
+        border-bottom-right-radius: $value importantString
+    if $command == "border-bottom-right-radius" and $direction == $rtl
+        border-bottom-left-radius: $value importantString
+    
+Border-width($top, $right, $bottom, $left)
+    if $direction == $ltr
+        border-width: $top $right $bottom $left
+    if $direction == $rtl
+        border-width: $top $left $bottom $right
+    
+BorderLeft($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-left: $value importantString
+    if $direction == $rtl
+        border-right: $value importantString
+    
+BorderRight($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-right: $value importantString
+    if $direction == $rtl
+        border-left: $value importantString
+    
+BorderLeftWidth($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-left-width: $value importantString
+    if $direction == $rtl
+        border-right-width: $value importantString
+
+BorderRightWidth($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-right-width: $value importantString
+    if $direction == $rtl
+        border-left-width: $value importantString
+
+BorderLeftColor($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-left-color: $value importantString
+    if $direction == $rtl
+        border-right-color: $value importantString
+    
+BorderRightColor($value, $important = false)
+    importantString = $important ? !important : unquote("")
+    if $direction == $ltr
+        border-right-color: $value importantString
+    if $direction == $rtl
+        border-left-color: $value importantString
+    
+BorderRadius($topRadius, $rightRadius, $bottomRadius, $leftRadius)
+    if $direction == $ltr
+        -webkit-border-radius: $topRadius $rightRadius $bottomRadius $leftRadius
+        -moz-border-radius: $topRadius $rightRadius $bottomRadius $leftRadius
+        border-radius: $topRadius $rightRadius $bottomRadius $leftRadius
+    if $direction == $rtl
+        -webkit-border-radius: $topRadius $leftRadius $bottomRadius $rightRadius
+        -moz-border-radius: $topRadius $leftRadius $bottomRadius $rightRadius
+        border-radius: $topRadius $leftRadius $bottomRadius $rightRadius

@@ -78,15 +78,15 @@ button-bar__item()
   hide-input()
 
 .button-bar__item:first-child > .button-bar__button
-  border-left 1px solid var-button-bar-color
-  border-right 1px solid var-button-bar-color
-  border-top-left-radius var-border-radius
-  border-bottom-left-radius var-border-radius
+  BorderLeftOrRight("border-left", 1px, var-button-bar-color, solid)
+  BorderLeftOrRight("border-right", 1px, var-button-bar-color, solid)
+  BorderTopLeftOrRightRadius("border-top-left-radius", var-border-radius)
+  BorderBottomLeftOrRightRadius("border-bottom-left-radius", var-border-radius)
 
 .button-bar__item:last-child > .button-bar__button
-  border-right 1px solid var-button-bar-color
-  border-top-right-radius var-border-radius
-  border-bottom-right-radius var-border-radius
+  BorderLeftOrRight("border-right", 1px, var-button-bar-color, solid)
+  BorderTopLeftOrRightRadius("border-top-right-radius", var-border-radius)
+  BorderBottomLeftOrRightRadius("border-bottom-right-radius", var-border-radius)
 
 .button-bar__button
   reset-font()
@@ -96,7 +96,7 @@ button-bar__item()
   border var-button-bar-border
   border-top var-button-bar-border-top
   border-bottom var-button-bar-border-bottom
-  border-right 1px solid var-button-bar-color
+  BorderLeftOrRight("border-right", 1px, var-button-bar-color, solid)
   font-weight var-font-weight
   padding 0 8px
   height 27px
@@ -112,7 +112,7 @@ button-bar__item()
   border var-button-bar-border
   border-top var-button-bar-border-top
   border-bottom var-button-bar-border-bottom
-  border-right 1px solid var-button-bar-color
+  BorderLeftOrRight("border-right", 1px, var-button-bar-color, solid)
   height 27px
   line-height 27px
   font-size 13px

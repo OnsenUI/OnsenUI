@@ -59,7 +59,7 @@ search-input--disabled()
   background-color var-search-input-background-color
   box-shadow var-box-shadow--text-input
   color var-search-input-color
-  padding 4px 0 0 28px
+  SwapPadding(4px, 0, 0, 28px)
   border-radius var-search-input-border-radius
   background-image var-search-input-background-image
   background-position 8px center
@@ -77,7 +77,7 @@ search-input--disabled()
 
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-decoration
-  margin-right var-search-decoration-margin-right
+  MarginLeftOrRight("margin-left", var-search-decoration-margin-right)
 
 .search-input::-webkit-input-placeholder
   color var-input-placeholder-color
