@@ -8,3 +8,6 @@ export { default as VOnsSwitch } from './VOnsSwitch.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
+export { default as VOnsSplitter } from './VOnsSplitter.vue';
+export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
+export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
