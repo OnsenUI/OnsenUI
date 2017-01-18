@@ -456,6 +456,10 @@ export default class PullHookElement extends BaseElement {
   static get STATE_ACTION() {
     return STATE_ACTION;
   }
+
+  static get events() {
+    return ['changestate']
+  }
 }
 
 customElements.define('ons-pull-hook', PullHookElement);
