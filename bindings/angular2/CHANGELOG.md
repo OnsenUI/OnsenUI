@@ -7,6 +7,12 @@ Guidelines:
 CHANGELOG
 ====
 
+(dev)
+----
+
+ * Fixed [#1725](https://github.com/OnsenUI/OnsenUI/issues/1725).
+ * Changed to use NgZone manually when components is created dynamically.
+
 1.0.0-rc.4
 ----
 
