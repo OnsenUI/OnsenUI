@@ -1,3 +1,4 @@
+export { default as VOnsPage } from './VOnsPage.vue';
 export { default as VOnsButton } from './VOnsButton.vue';
 export { default as VOnsCarousel } from './VOnsCarousel.vue';
 export { default as VOnsCarouselItem } from './VOnsCarouselItem.vue';

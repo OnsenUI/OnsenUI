@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <ons-fab
       @click="$notification.alert('Button clicked!')"
       position="bottom right"
@@ -8,7 +8,7 @@
       <ons-icon icon="md-account-add"></ons-icon>
     </ons-fab>
 
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>

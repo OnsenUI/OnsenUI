@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <ons-pull-hook
       @action="onAction"
       @changestate="onChangestate">
@@ -23,7 +23,7 @@
       </ons-list-item>
     </ons-list>
 
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>

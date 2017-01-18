@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <ons-list>
       <ons-list-header>Test input</ons-list-header>
       <ons-list-item>
@@ -87,7 +87,7 @@
         </label>
       </ons-list-item>
     </ons-list>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>

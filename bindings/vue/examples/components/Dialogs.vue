@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <ons-list>
       <ons-list-header>Notifications</ons-list-header>
       <ons-list-item
@@ -28,7 +28,7 @@
       </ons-list-item>
     </ons-list>
 
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>

@@ -1,19 +1,19 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <v-ons-tabbar @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
       <v-ons-tab :page="tabs[0].component" :icon="tabs[0].icon" :label="tabs[0].label"></v-ons-tab>
       <v-ons-tab :page="tabs[1].component" active icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
   let Home = {
     template: `
-      <ons-page>
+      <v-ons-page>
         Home page
         <ons-button @click="setTab(1)">tabbar.setActiveTab(1)</ons-button>
-      </ons-page>
+      </v-ons-page>
     `,
     methods: {
       setTab: function(i) {
@@ -24,10 +24,10 @@
 
   let Settings = {
     template: `
-      <ons-page>
+      <v-ons-page>
         Settings Page
         <ons-button @click="setTab(0)">$parent.setActiveTab(0)</ons-button>
-      </ons-page>
+      </v-ons-page>
     `,
     methods: {
       setTab: function(i) {

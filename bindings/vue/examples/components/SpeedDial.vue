@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <ons-speed-dial position="bottom right">
       <ons-fab>
         <ons-icon icon="md-share"></ons-icon>
@@ -21,7 +21,7 @@
       </ons-speed-dial-item>
     </ons-speed-dial>
 
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>

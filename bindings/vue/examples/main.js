@@ -14,13 +14,13 @@ Vue.use(VueOnsen, {
 const mainList = {
   template: `
   <div>
-    <ons-page>
+    <v-ons-page>
       <ons-list>
         <ons-list-item v-for="(example, key) in examples" @click="changeExample(key)" modifier="chevron">
           <div class="center">{{ key }}</div>
         </ons-list-item>
       </ons-list>
-    </ons-page>
+    </v-ons-page>
   </div>
   `,
   props: ['examples', 'changeExample']
@@ -30,7 +30,7 @@ const vm = new Vue({
   el: '#app',
   components: { ...examples },
   template: `
-    <ons-page>
+    <v-ons-page>
       <ons-toolbar>
         <div class="left"><ons-back-button @click="backToList" v-show="currentView !== mainList">Main List</ons-back-button></div>
         <div class="center">{{ title }}</div>
@@ -41,7 +41,7 @@ const vm = new Vue({
           <div :is="currentView" :examples="examples" :changeExample="changeExample"></div>
         </keep-alive>
       </div>
-    </ons-page>
+    </v-ons-page>
   `,
 
   data: {

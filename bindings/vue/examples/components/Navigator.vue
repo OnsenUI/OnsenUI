@@ -1,32 +1,32 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <v-ons-navigator :page="page1" @prepush="log('prepush!!')" @postpush="log('postpush!!')" @prepop="log('prepop!!')" @postpop="log('postpop!!')">
     </v-ons-navigator>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
   let page2 = {
     template: `
-      <ons-page>
+      <v-ons-page>
         <ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
           <div class="center">Page 2</div>
         </ons-toolbar>
         Page 2
-      </ons-page>
+      </v-ons-page>
     `
   };
 
   let page1 = {
     template: `
-      <ons-page>
+      <v-ons-page>
         <ons-toolbar>
           <div class="center">Page 1</div>
         </ons-toolbar>
         Page 1
         <ons-button @click="push">Push</ons-button>
-      </ons-page>
+      </v-ons-page>
     `,
     methods: {
       push: function() {

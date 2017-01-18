@@ -1,5 +1,5 @@
 <template>
-  <ons-page>
+  <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
         :page="splitterSide"
@@ -22,7 +22,7 @@
         >
       </v-ons-splitter-content>
     </v-ons-splitter>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
@@ -30,7 +30,7 @@
 
   let splitterSide = {
     template: `
-      <ons-page>
+      <v-ons-page>
         <ons-list>
           <ons-list-item
             v-for="item in [1, 2, 3, 4]"
@@ -39,7 +39,7 @@
             Menu item {{ item }}
           </ons-list-item>
         </ons-list>
-      </ons-page>
+      </v-ons-page>
     `,
     methods: {
       log
@@ -48,7 +48,7 @@
 
   let splitterContent = {
     template: `
-     <ons-page :jiooo="whatever">
+     <v-ons-page :jiooo="whatever">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button @click="splitter.side.toggle()"><v-ons-icon icon="md-menu"></v-ons-icon></ons-toolbar-button>
@@ -116,7 +116,7 @@
           </div>
         </ons-list-item>
       </ons-list>
-    </ons-page>
+    </v-ons-page>
     `,
     methods: {
       log
