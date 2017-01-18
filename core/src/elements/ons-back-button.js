@@ -21,7 +21,9 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
-var scheme = {
+const defaultClassName = 'back-button';
+
+const scheme = {
   '': 'back-button--*',
   '.back-button__icon': 'back-button--*__icon',
   '.back-button__label': 'back-button--*__label'
@@ -80,7 +82,7 @@ export default class BackButtonElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('back-button');
+    this.classList.add(defaultClassName);
 
     if (!util.findChild(this, '.back-button__label')) {
       const label = util.create('span.back-button__label');
@@ -173,12 +175,20 @@ export default class BackButtonElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
     }
   }
 

@@ -20,6 +20,7 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
+const defaultClassName = 'bottom-bar';
 const scheme = {'': 'bottom-bar--*'};
 
 /**
@@ -47,7 +48,7 @@ export default class BottomToolbarElement extends BaseElement {
    */
 
   init() {
-    this.classList.add('bottom-bar');
+    this.classList.add(defaultClassName);
     ModifierUtil.initModifier(this, scheme);
   }
 
@@ -58,12 +59,19 @@ export default class BottomToolbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      ModifierUtil.onModifierChanged(last, current, this, scheme);
+    switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
     }
   }
 

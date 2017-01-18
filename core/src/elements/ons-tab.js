@@ -24,16 +24,20 @@ import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
 import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 
+const defaultClassName = 'tab-bar__item';
+
 const scheme = {
   '': 'tab-bar--*__item',
   '.tab-bar__button': 'tab-bar--*__button'
 };
+
 const templateSource = util.createElement(`
   <div>
     <input type="radio" style="display: none">
     <button class="tab-bar__button"></button>
   </div>
 `);
+
 const defaultInnerTemplateSource = util.createElement(`
   <div>
     <div class="tab-bar__icon">
@@ -201,7 +205,7 @@ export default class TabElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('tab-bar__item');
+    this.classList.add(defaultClassName);
 
     if (!this._templateLoaded()) {
       const fragment = document.createDocumentFragment();
@@ -352,6 +356,9 @@ export default class TabElement extends BaseElement {
     if (!this._loadedPage && !this._getPageTarget()) {
       const pages = this._findTabbarElement().pages;
       const index = this._findTabIndex();
+      if (!pages[index]) {
+        throw Error('Page was not provided to <ons-tab> index ' + index);
+      }
       callback(pages[index]);
     } else if (this._loadingPage) {
       this._loadingPage.then(pageElement => {
@@ -464,11 +471,16 @@ export default class TabElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple', 'icon', 'label', 'page', 'badge'];
+    return ['modifier', 'ripple', 'icon', 'label', 'page', 'badge', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
       case 'modifier':
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;

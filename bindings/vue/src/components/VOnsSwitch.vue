@@ -3,47 +3,9 @@
 </template>
 
 <script>
+  import { deriveEvents, deriveProperties } from '../internal/mixins.js';
+
   export default {
-    methods: {
-      onChange(ev) {
-        this.$emit('change', ev);
-      }
-    },
-
-    //--------------------------------
-    // lifecycle hooks
-    //--------------------------------
-
-    // beforeCreate() {
-    // },
-
-    // created() {
-    // },
-
-    // beforeMount() {
-    // },
-
-    mounted() {
-      this.$el.addEventListener('change', this.onChange);
-    },
-
-    // beforeUpdate() {
-    // },
-
-    // updated() {
-    // },
-
-    // activated() {
-    // },
-
-    // deactivated() {
-    // },
-
-    beforeDestroy() {
-      this.$el.removeEventListener('change', this.onChange);
-    },
-
-    // destroyed() {
-    // },
+    mixins: [deriveEvents, deriveProperties]
   };
 </script>

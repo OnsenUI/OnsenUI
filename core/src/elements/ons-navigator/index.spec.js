@@ -57,7 +57,6 @@ describe('OnsNavigatorElement', () => {
     onlyChrome(it)('provides \'pages\' property', () => {
         const pages = nav.pages;
         expect(pages[0]).to.be.an.instanceof(Element);
-        expect(pages[0].name).to.be.an('string');
     });
 
     onlyChrome(it)('should have one page after initialization', () => {
@@ -301,16 +300,16 @@ describe('OnsNavigatorElement', () => {
 
     onlyChrome(it)('brings the given pageUrl to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
-      expect(nav.topPage.name).to.equal('hoge');
+      expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
       nav.bringPageTop('fuga', {
         callback: () => {
           expect(nav.pages.length).to.equal(2);
-          expect(nav.topPage.name).to.equal('fuga');
+          expect(nav._pageMap.get(nav.topPage)).to.equal('fuga');
           nav.bringPageTop('hoge', {
             callback: () => {
               expect(nav.pages.length).to.equal(2);
-              expect(nav.topPage.name).to.equal('hoge');
-              expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+              expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
+              expect(nav._pageMap.get(nav.pages[nav.pages.length - 2])).to.equal('fuga');
               done();
             }
           });
@@ -320,16 +319,16 @@ describe('OnsNavigatorElement', () => {
 
     onlyChrome(it)('brings the given page index to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
-      expect(nav.topPage.name).to.equal('hoge');
+      expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
       nav.bringPageTop('fuga', {
         callback: () => {
           expect(nav.pages.length).to.equal(2);
-          expect(nav.topPage.name).to.equal('fuga');
+          expect(nav._pageMap.get(nav.topPage)).to.equal('fuga');
           nav.bringPageTop(0, {
             callback: () => {
               expect(nav.pages.length).to.equal(2);
-              expect(nav.topPage.name).to.equal('hoge');
-              expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+              expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
+              expect(nav._pageMap.get(nav.pages[nav.pages.length - 2])).to.equal('fuga');
               done();
             }
           });
@@ -510,7 +509,7 @@ describe('OnsNavigatorElement', () => {
       const page = nav.topPage;
 
       expect(page).to.be.an.instanceof(Element);
-      expect(page.name).to.be.an('string');
+      expect(nav._pageMap.get(page)).to.be.an('string');
     });
 
     it('throws error if page stack is empty', () => {

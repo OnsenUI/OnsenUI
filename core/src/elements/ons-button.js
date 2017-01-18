@@ -22,6 +22,8 @@ import BaseElement from '../ons/base-element';
 
 const scheme = {'': 'button--*'};
 
+const defaultClassName = 'button';
+
 /**
  * @element ons-button
  * @category form
@@ -99,11 +101,16 @@ export default class ButtonElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'ripple'];
+    return ['modifier', 'ripple', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
+      case 'class':
+        if (!this.classList.contains(defaultClassName)) {
+          this.className = defaultClassName + ' ' + current;
+        }
+        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
@@ -130,7 +137,7 @@ export default class ButtonElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    this.classList.add('button');
+    this.classList.add(defaultClassName);
 
     this._updateRipple();
 

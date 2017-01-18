@@ -21,6 +21,18 @@ describe('ons-toolbar-button', () => {
     expect(element.classList.contains('toolbar-button--fuga')).to.be.true;
   });
 
+  onlyChrome(describe)('"class" attribute', () => {
+    it('should contain "toolbar-button" class name automatically', () => {
+      const element = document.createElement('ons-toolbar-button');
+      element.textContent = '';
+      expect(element.classList.contains('toolbar-button')).to.be.true;
+      element.className = 'foo';
+      expect(element.classList.contains('toolbar-button')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
+
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');

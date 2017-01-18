@@ -19,10 +19,28 @@ const install = (Vue, params = {}) => {
   /**
    * Apply a mixin globally to prevent ons-* elements
    * from being included directly in Vue instance templates.
-   * 
+   *
    * Note: This affects every Vue instance.
    */
   Vue.mixin({
+    methods: {
+      getComponent(query) {
+        if (query.startsWith('v-')) {
+          query = name.slice(2);
+        }
+        return ons._util.findParent(this.$el, query).__vue__;
+      },
+      getTabbar() {
+        return this.getComponent('ons-tabbar');
+      },
+      getNavigator() {
+        return this.getComponent('ons-navigator');
+      },
+      getSplitter() {
+        return this.getComponent('ons-splitter');
+      }
+    },
+
     beforeMount() {
       // When this beforeMount hook is called, this.$el has not yet replaced by Vue.
       // So we can detect whether or not any custom elements exist in the template of the Vue instance.
@@ -40,20 +58,6 @@ const install = (Vue, params = {}) => {
       }
     }
   });
-
-  /**
-   * Push a page to parent Navigator.
-   */
-  Vue.prototype.$push = function(options) {
-    this.$dispatch('push', options);
-  };
-
-  /**
-   * Pop a page from the parent Navigator.
-   */
-  Vue.prototype.$pop = function(options) {
-    this.$dispatch('pop', options);
-  }
 
   /**
    * Expose notification methods.

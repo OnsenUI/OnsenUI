@@ -11,6 +11,10 @@ const _reservedProperties = [
   /^adoptedCallback$/,
 ];
 
+const _blackListedProperties = [
+  'page',
+];
+
 /**
  * Check if or not the property is reserved.
  */
@@ -38,7 +42,7 @@ const _scanNonReservedProperties = (targetClass, callback) => {
 
   Object.keys(propertyDescriptors).forEach(
     (propertyName) => {
-      if (!_isReserved(propertyName)) { // ignore reserved properties
+      if (!_isReserved(propertyName) && !_blackListedProperties.includes(propertyName)) { // ignore reserved  and black listed properties
         callback(propertyName, propertyDescriptors[propertyName]);
       }
     }
@@ -46,7 +50,7 @@ const _scanNonReservedProperties = (targetClass, callback) => {
 };
 
 const createComputedPropertiesFor = (targetClass) => {
-  let computed = {};
+  const computed = {};
 
   _scanNonReservedProperties(targetClass, (propertyName, propertyDescriptor) => {
     if (!_isMethod(propertyDescriptor)) {
@@ -64,7 +68,7 @@ const createComputedPropertiesFor = (targetClass) => {
 };
 
 const createMethodsFor = (targetClass) => {
-  let methods = {};
+  const methods = {};
 
   _scanNonReservedProperties(targetClass, (propertyName, propertyDescriptor) => {
     if (_isMethod(propertyDescriptor)) {
@@ -78,4 +82,4 @@ const createMethodsFor = (targetClass) => {
   return methods;
 };
 
-export {createComputedPropertiesFor, createMethodsFor};
+export {createComputedPropertiesFor, createMethodsFor };

@@ -29,13 +29,15 @@
     </ons-navigator>
 
     <ons-template id="main.html">
-      <ons-toolbar>
-        <div class="center">Main page</div>
-      </ons-toolbar>
+      <ons-page id="page1">
+        <ons-toolbar>
+          <div class="center">Main page</div>
+        </ons-toolbar>
 
-      <p style="text-align: center;">
-        <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
-      </p>
+        <p style="text-align: center;">
+          <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
+        </p>
+      </ons-page>
     </ons-template>
 
     <ons-template id="menu.html">
@@ -46,14 +48,16 @@
     </ons-template>
 
     <ons-template id="page2.html">
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Back</ons-back-button></div>
-        <div class="center">Page 2</div>
-      </ons-toolbar>
+      <ons-page id="page2">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">Page 2</div>
+        </ons-toolbar>
 
-      <p style="text-align: center;">
-        <ons-button id="pop-page" ng-click="navi.popPage()">Return to page 1</ons-button>
-      </p>
+        <p style="text-align: center;">
+          <ons-button id="pop-page" ng-click="navi.popPage()">Return to page 1</ons-button>
+        </p>
+      </ons-page>
     </ons-template>
   </body>
 </html>
