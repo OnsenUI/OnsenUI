@@ -1,4 +1,5 @@
 export { default as VOnsInput } from './VOnsInput.vue';
+export { default as VOnsPullHook } from './VOnsPullHook.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
