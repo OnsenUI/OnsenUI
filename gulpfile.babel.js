@@ -353,16 +353,16 @@ gulp.task('prepare', ['html2js'], () =>  {
 
     // onsen-css-components
     gulp.src([
-      'css-components/components-src/dist/*.css',
+      'css-components/build/*.css',
     ])
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
-    // stylus files
+    // less files
     gulp.src([
-      'css-components/components-src/stylus/**/*'
+      'css-components/src/**/*'
     ])
-      .pipe(gulp.dest('build/stylus/')),
+      .pipe(gulp.dest('build/less/')),
 
 
     // onsenui.css
@@ -403,14 +403,6 @@ gulp.task('prepare', ['html2js'], () =>  {
 });
 
 ////////////////////////////////////////
-// prepare-css-components
-////////////////////////////////////////
-gulp.task('prepare-css-components', ['prepare'], () => {
-  return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
-    .pipe(gulp.dest('css-components/www/patterns/lib/onsen'));
-});
-
-////////////////////////////////////////
 // compress-distribution-package
 ////////////////////////////////////////
 gulp.task('compress-distribution-package', () => {
@@ -440,7 +432,6 @@ gulp.task('build', done => {
     'prepare',
     'minify-js',
     'build-docs',
-    'prepare-css-components',
     'compress-distribution-package',
     done
   );
@@ -491,7 +482,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
   const watched = [
     'bindings/angular1/*/*',
     'core/css/*.css',
-    'css-components/components-src/dist/*.css'
+    'css-components/src/build/*.css'
   ];
 
   if (CORDOVA_APP) {
