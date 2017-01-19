@@ -13,6 +13,7 @@ const extend = component => Object.assign({name: 'v-ons-' + component}, VGeneric
 export const VOnsPage = extend('page');
 export const VOnsToolbar = extend('toolbar');
 export const VOnsToolbarButton = extend('toolbar-button');
+export const VOnsBackButton = extend('back-button');
 export const VOnsButton = extend('button');
 export const VOnsCarousel = extend('carousel');
 export const VOnsCarouselItem = extend('carousel-item');
@@ -26,4 +27,7 @@ export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsList = extend('speed-list');
 export const VOnsListItem = extend('speed-list-item');
 export const VOnsListHeader = extend('speed-list-header');
+export const VOnsRipple = extend('ripple');
+export const VOnsRow = extend('row');
+export const VOnsCol = extend('col');
 

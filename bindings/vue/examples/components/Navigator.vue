@@ -10,7 +10,7 @@
     template: `
       <v-ons-page>
         <v-ons-toolbar>
-        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="left"><v-ons-back-button>Back</v-ons-back-button></div>
           <div class="center">Page 2</div>
         </v-ons-toolbar>
         Page 2
