@@ -531,6 +531,10 @@ export default class AlertDialogElement extends BaseElement {
     }
   }
 
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
+  }
+
   /**
    * @param {String} name
    * @param {DialogAnimator} Animator
