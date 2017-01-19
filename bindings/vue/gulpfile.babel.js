@@ -19,8 +19,8 @@ const $ = require('gulp-load-plugins')();
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
 gulp.task('serve', done => {
-  createDevServer().listen('3030', '0.0.0.0', () => {
-    open('http://0.0.0.0:3030/bindings/vue/test/e2e-webdriverio/dummy/index.html');
+  createDevServer('./webpack.config.js').listen('3030', '0.0.0.0', () => {
+    open('http://0.0.0.0:3030/index.html');
     done();
   });
 });
@@ -92,7 +92,7 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download'], function(done){
 
   $.util.log($.util.colors.blue(`Launching local HTTP server for E2E testing...`));
 
-  const server = createDevServer({quiet: true});
+  const server = createDevServer('./webpack.config.wdio.js', {quiet: true});
   server.listen(port, '0.0.0.0', () => {
     // launch standalone Selenium Server
     $.util.log($.util.colors.blue(`Launching standalone Selenium Server...`));
@@ -117,8 +117,8 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download'], function(done){
   });
 });
 
-function createDevServer(options = {}) {
-  const config = require('./webpack.config.wdio.js');
+function createDevServer(configFile, options = {}) {
+  const config = require(configFile);
   const serverConfig = Object.assign(options, {
     publicPath: config.output.publicPath,
     stats: {colors: true}
