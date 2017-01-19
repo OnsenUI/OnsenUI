@@ -16,31 +16,24 @@
 *
 */
 
-// NOTE: You can't use @extend that break component independent and topdoc parsing.
-
 // internal variables
-var-list-background-color = $list-background-color
-var-list-header-color = $text-color
-var-list-item-color = $text-color
-var-list-item-active-background-color = $list-tap-active-background-color
-var-list-item-separator-color = $border-color
-
-var-list-header-font-size = 12px
-var-list-border = 1px solid var-list-item-separator-color
-
-var-list-item-min-height = 44px
-var-list-item-margin = 1px 0 -1px 0
-var-list-item-padding = 0 0 0 14px
-var-list-header-padding = 20px 0 0 15px
-var-list-header-min-height = 24px
-var-list-header-font-weight = var-font-weight--large
-var-list-header-text-shadow = none
-
-var-list-border-top = 1px solid var-list-item-separator-color
-var-list-border-bottom = 1px solid var-list-item-separator-color
-
-var-material-list-item-min-height = 48px
-var-material-list-item-padding = 0 0 0 16px
+@list-header-color: @text-color;
+@list-item-color: @text-color;
+@list-item-active-background-color: @list-tap-active-background-color;
+@list-item-separator-color: @border-color;
+@list-header-font-size: 12px;
+@list-border: 1px solid @list-item-separator-color;
+@list-item-min-height: 44px;
+@list-item-margin: 1px 0 -1px 0;
+@list-item-padding: 0 0 0 14px;
+@list-header-padding: 20px 0 0 15px;
+@list-header-min-height: 24px;
+@list-header-font-weight: @font-weight--large;
+@list-header-text-shadow: none;
+@list-border-top: 1px solid @list-item-separator-color;
+@list-border-bottom: 1px solid @list-item-separator-color;
+@material-list-item-min-height: 48px;
+@material-list-item-padding: 0 0 0 16px;
 
 /*! topdoc
   name: List
@@ -59,143 +52,162 @@ var-material-list-item-padding = 0 0 0 16px
     </ul>
 */
 
-retina-list-item-border(color = var-list-item-separator-color)
-  border-bottom none
-  background-size 100% 1px
-  background-repeat no-repeat
-  background-position bottom
-  background-image linear-gradient(0deg, color, color 100%)
+.retina-list-item-border(@color: @list-item-separator-color) {
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, color, color 100%);
 
-  +retina-query()
-    background-image linear-gradient(0deg, color, color 50%, transparent 50%)
+  .retina-query({
+    background-image: linear-gradient(0deg, color, color 50%, transparent 50%);
+  });
+}
 
-retina-list-border(color = var-list-item-separator-color)
-  +retina-query()
-    border none
-    background-size 100% 1px, 100% 1px
-    background-repeat no-repeat
-    background-position bottom, top
-    background-image linear-gradient(0deg, color, color 50%, transparent 50%), linear-gradient(180deg, color, color 50%, transparent 50%)
+.retina-list-border(@color: @list-item-separator-color) {
+  .retina-query({
+    border: none;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: linear-gradient(0deg, color, color 50%, transparent 50%), linear-gradient(180deg, color, color 50%, transparent 50%);
+  });
+}
 
-retina-list-header-border(color = var-tab-bar-border-color)
-  +retina-query()
-    border-top none
-    background-size 100% 1px
-    background-repeat no-repeat
-    background-position top
-    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+.retina-list-header-border(@color: @tab-bar-border-color) {
+  .retina-query({
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(180deg, color, color 50%, transparent 50%);
+  });
+}
 
-list()
-  reset-base()
-  reset-cursor()
-  reset-font()
-  reset-list()
-  overflow auto
-  display block
-  -webkit-overflow-scrolling touch
+.list() {
+  .reset-base();
+  .reset-cursor();
+  .reset-font();
+  .reset-list();
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+}
 
-list__header()
-  margin 0
-  padding 0
-  list-style none
-  text-align left
-  display block
-  box-sizing border-box
+.list__header() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  box-sizing: border-box;
+}
 
-list__item()
-  margin 0
-  padding 0
-  width 100%
-  position relative
-  list-style none
-  box-sizing border-box
-  display flex
-  flex-direction row
-  justify-content flex-start
-  align-items center
+.list__item() {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
 
-.list__item__left
-  box-sizing border-box
-  display flex
-  padding 12px 14px 12px 0
-  order 0
-  align-items center
-  align-self stretch
-  line-height 1.2em
-  min-height var-list-item-min-height
+.list__item__left {
+  box-sizing: border-box;
+  display: flex;
+  padding: 12px 14px 12px 0;
+  order: 0;
+  align-items: center;
+  align-self: stretch;
+  line-height: 1.2em;
+  min-height: @list-item-min-height;
+}
 
-.list__item__left:empty
-  width 0
-  min-width 0
-  padding 0
-  margin 0
+.list__item__left:empty {
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
 
-.list__item__center
-  box-sizing border-box
-  display flex
-  flex-grow 1
-  flex-wrap wrap
-  flex-direction row
-  order 1
-  margin-right auto
-  align-items center
-  align-self stretch
-  margin-left 0
-  retina-list-item-border()
-  padding 12px 6px 12px 0
-  line-height 1.2em
-  min-height var-list-item-min-height
+.list__item__center {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  order: 1;
+  margin-right: auto;
+  align-items: center;
+  align-self: stretch;
+  margin-left: 0;
+  .retina-list-item-border();
+  padding: 12px 6px 12px 0;
+  line-height: 1.2em;
+  min-height: @list-item-min-height;
+}
 
-.list__item__right
-  box-sizing border-box
-  display flex
-  margin-left auto
-  padding 12px 12px 12px 0
-  order 2
-  align-items center
-  align-self stretch
-  retina-list-item-border()
-  line-height 1.2em
-  min-height var-list-item-min-height
+.list__item__right {
+  box-sizing: border-box;
+  display: flex;
+  margin-left: auto;
+  padding: 12px 12px 12px 0;
+  order: 2;
+  align-items: center;
+  align-self: stretch;
+  .retina-list-item-border();
+  line-height: 1.2em;
+  min-height: @list-item-min-height;
+}
 
-.list__header
-  list__header()
-  padding var-list-header-padding
-  font-size var-list-header-font-size
-  font-weight var-list-header-font-weight
-  color var-list-header-color
-  text-shadow var-list-header-text-shadow
-  border-top none
-  border-bottom var-list-border
-  box-shadow 0px 1px 0px 0px var-list-background-color;
-  min-height var-list-header-min-height
-  line-height @min-height
-  margin-top -1px
-  text-transform uppercase
-  position relative
+.list__header {
+  .list__header();
+  padding: @list-header-padding;
+  font-size: @list-header-font-size;
+  font-weight: @list-header-font-weight;
+  color: @list-header-color;
+  text-shadow: @list-header-text-shadow;
+  border-top: none;
+  border-bottom: @list-border;
+  box-shadow: 0 1px 0 0 @list-background-color;
+  min-height: @list-header-min-height;
+  line-height: @list-header-min-height;
+  margin-top: -1px;
+  text-transform: uppercase;
+  position: relative;
+}
 
-.list__header:not(:first-of-type)
-  border-top var-list-border
+.list__header:not(:first-of-type) {
+  border-top: @list-border;
+}
 
-.list
-  list()
-  border-bottom var-list-border-bottom
-  overflow hidden
+.list {
+  .list();
+  border-bottom: @list-border-bottom;
+  overflow: hidden;
+}
 
-.list__item
-  list__item()
-  padding var-list-item-padding
-  margin var-list-item-margin
-  color var-list-item-color
-  background-color var-list-background-color
+.list__item {
+  .list__item();
+  padding: @list-item-padding;
+  margin: @list-item-margin;
+  color: @list-item-color;
+  background-color: @list-background-color;
+}
 
-.list__item:first-child
-  box-shadow inset 0px 1px 0px 0px var-list-item-separator-color
-  margin-top 0
+.list__item:first-child {
+  box-shadow: inset 0px 1px 0px 0px @list-item-separator-color;
+  margin-top: 0;
+}
 
-.list__item_active:active
-  background-color var-list-item-active-background-color
-  transition none
+.list__item_active:active {
+  background-color: @list-item-active-background-color;
+  transition: none;
+}
 
 /*! topdoc
   name: Noborder List
@@ -212,13 +224,15 @@ list__item()
     </ul>
  */
 
-.list--noborder
-  border-top none
-  border-bottom none
-  background-image none
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+  background-image: none;
+}
 
-.list--noborder .list__item:first-child
-  box-shadow none
+.list--noborder .list__item:first-child { // FIXME
+  box-shadow: none;
+}
 
 /*! topdoc
   name: Category List Header
@@ -247,8 +261,9 @@ list__item()
     </ul>
  */
 
-.list__item--tappable:active
-  background-color var-list-item-active-background-color
+.list__item--tappable:active {
+  background-color: @list-item-active-background-color;
+}
 
 /*! topdoc
   name: Switch in List Item
@@ -299,30 +314,34 @@ list__item()
     </ul>
  */
 
-.list__item--chevron
-  transition background-color 0.2s linear
-  overflow hidden
-.list__item--chevron:hover
-  transition none
+.list__item--chevron {
+  transition: background-color 0.2s linear;
+  overflow: hidden;
+}
 
-.list__item--chevron:before
-  display flex
-  align-items center
-  color var-list-item-separator-color
-  order 3
-  align-self stretch
-  font-size 28px
-  font-family FontAwesome
-  font-style normal
-  font-weight normal
-  content "\f105"
-  margin-left auto
-  width 18px
-  text-align right
-  border-bottom var-list-border
-  retina-list-item-border()
-  width 10px
-  padding-right 8px
+.list__item--chevron:hover {
+  transition: none;
+}
+
+.list__item--chevron:before {
+  display: flex;
+  align-items: center;
+  color: @list-item-separator-color;
+  order: 3;
+  align-self: stretch;
+  font-size: 28px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  content: "\f105";
+  margin-left: auto;
+  width: 18px;
+  text-align: right;
+  border-bottom: @list-border;
+  .retina-list-item-border();
+  width: 10px;
+  padding-right: 8px;
+}
 
 
 /*! topdoc
@@ -339,15 +358,17 @@ list__item()
     </ul>
  */
 
-.list--inset
-  margin-left 8px
-  margin-right 8px
-  border 1px solid var-list-item-separator-color
-  border-radius 4px
-  background-image none
+.list--inset {
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 1px solid @list-item-separator-color;
+  border-radius: 4px;
+  background-image: none;
+}
 
-.list--inset > .list__item:first-child
-  box-shadow none
+.list--inset > .list__item:first-child { // FIXME
+  box-shadow: none;
+}
 
 /*! topdoc
   name: Radio Button in List Item
@@ -488,10 +509,11 @@ list__item()
     </ul>
 */
 
-.list__item__label
-  font-size var-font-size--mini
-  padding 0 4px
-  opacity 0.6
+.list__item__label {
+  font-size: @font-size--mini;
+  padding: 0 4px;
+  opacity: 0.6;
+}
 
 /*! topdoc
   name: List Item with Subtitle
@@ -512,17 +534,19 @@ list__item()
     </ul>
 */
 
-.list__item__title
-  flex-basis 100%
-  align-self flex-end
-  order 0
+.list__item__title {
+  flex-basis: 100%;
+  align-self: flex-end;
+  order: 0;
+}
 
-.list__item__subtitle
-  opacity 0.75
-  font-size var-font-size--mini
-  order 1
-  flex-basis 100%
-  align-self flex-start
+.list__item__subtitle {
+  opacity: 0.75;
+  font-size: @font-size--mini;
+  order: 1;
+  flex-basis: 100%;
+  align-self: flex-start;
+}
 
 /*! topdoc
   name: List Item with Thumbnail
@@ -554,12 +578,13 @@ list__item()
     </ul>
 */
 
-.list__item__thumbnail
-  width 40px
-  height 40px
-  border-radius 6px
-  display block
-  margin 0
+.list__item__thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: block;
+  margin: 0;
+}
 
 /*! topdoc
   name: List Item with Icon
@@ -597,9 +622,10 @@ list__item()
     </ul>
 */
 
-.list__item__icon
-  font-size 22px
-  padding 0 6px
+.list__item__icon {
+  font-size: 22px;
+  padding: 0 6px;
+}
 
 /*! topdoc
   name: Material List
@@ -622,45 +648,52 @@ list__item()
     </ul>
 */
 
-.list--material
-  material-font()
-  border 0
+.list--material {
+  .material-font();
+  border: 0;
+}
 
-.list__item--material
-  border 0
-  padding var-material-list-item-padding
-  line-height normal
+.list__item--material {
+  border: 0;
+  padding: @material-list-item-padding;
+  line-height: normal;
+}
 
-.list__item--material__subtitle
-  margin-top 4px
+.list__item--material__subtitle {
+  margin-top: 4px;
+}
 
-.list__item--material:first-child
-  box-shadow none
+.list__item--material:first-child {
+  box-shadow: none;
+}
 
-.list__item--material__left
-  padding 14px 0
-  min-width 56px
-  line-height 1
-  min-height var-material-list-item-min-height
+.list__item--material__left {
+  padding: 14px 0;
+  min-width: 56px;
+  line-height: 1;
+  min-height: @material-list-item-min-height;
+}
 
-.list__item--material__left:empty
+.list__item--material__left:empty,
+.list__item--material__center {
+  padding: 14px 6px 14px 0;
+  border-color: #eee;
+  .retina-list-item-border(#eee);
+  min-height: @material-list-item-min-height;
+}
 
-.list__item--material__center
-  padding 14px 6px 14px 0
-  border-color #eee
-  retina-list-item-border(#eee)
-  min-height var-material-list-item-min-height
+.list__item--material__right {
+  padding: 14px 16px 14px 0px;
+  line-height: 1;
+  border-color: #eee;
+  .retina-list-item-border(#eee);
+  min-height: @material-list-item-min-height;
+}
 
-.list__item--material__right
-  padding 14px 16px 14px 0px
-  line-height 1
-  border-color #eee
-  retina-list-item-border(#eee)
-  min-height var-material-list-item-min-height
-
-.list__item--material.list__item--longdivider
-  border-bottom 1px solid #eee
-  retina-list-item-border(#eee)
+.list__item--material.list__item--longdivider {
+  border-bottom: 1px solid #eee;
+  .retina-list-item-border(#eee);
+}
 
 /*! topdoc
   name: Material List with Header
@@ -680,19 +713,21 @@ list__item()
     </ul>
 */
 
-.list__header--material
-  background var-list-background-color
-  border none
-  font-size 14px
-  text-transform none
-  margin -1px 0 0 0
-  color #6c6c6c
-  font-weight 500
-  padding 8px 16px
+.list__header--material {
+  background: @list-background-color;
+  border: none;
+  font-size: 14px;
+  text-transform: none;
+  margin: -1px 0 0 0;
+  color: #6c6c6c;
+  font-weight: 500;
+  padding: 8px 16px;
+}
 
-.list__header--material:not(:first-of-type)
-  border-top 1px solid #eee
-  padding-top 16px
+.list__header--material:not(:first-of-type) {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
 
 /*! topdoc
   name: Material List with Checkboxes
@@ -762,10 +797,11 @@ list__item()
     </ul>
 */
 
-.list__item--material__thumbnail
-  width 40px
-  height 40px
-  border-radius 100%
+.list__item--material__thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
 
 /*! topdoc
   name: Material List with Icons
@@ -803,9 +839,10 @@ list__item()
     </ul>
 */
 
-.list__item--material__icon
-  font-size 20px
-  padding 0 4px
+.list__item--material__icon {
+  font-size: 20px;
+  padding: 0 4px;
+}
 
 /*! topdoc
   name: List item without divider
@@ -821,17 +858,20 @@ list__item()
       </li>
     </ul>
  */
-.list__item--nodivider__center
-  border none
-  background-image none
+.list__item--nodivider__center {
+  border: none;
+  background-image: none;
+}
 
-.list__item--nodivider__right
-  border none
-  background-image none
+.list__item--nodivider__right {
+  border: none;
+  background-image: none;
+}
 
-.list__item--nodivider.list__item--chevron:before
-  border none
-  background-image none
+.list__item--nodivider.list__item--chevron:before { //FIXME
+  border: none;
+  background-image: none;
+}
 
 /*! topdoc
   name: List item with long divider
@@ -847,22 +887,27 @@ list__item()
       </li>
     </ul>
  */
-.list__item--longdivider
-  border-bottom var-list-border
-  retina-list-item-border()
+.list__item--longdivider {
+  border-bottom: @list-border;
+  .retina-list-item-border();
+}
 
-.list__item--longdivider:last-of-type
-  border none
-  background-image none
+.list__item--longdivider:last-of-type {
+  border: none;
+  background-image: none;
+}
 
-.list__item--longdivider__center
-  border none
-  background-image none
+.list__item--longdivider__center {
+  border: none;
+  background-image: none;
+}
 
-.list__item--longdivider__right
-  border none
-  background-image none
+.list__item--longdivider__right {
+  border: none;
+  background-image: none;
+}
 
-.list__item--longdivider.list__item--chevron:before
-  border none
-  background-image none
+.list__item--longdivider.list__item--chevron:before { // FIXME
+  border: none;
+  background-image: none;
+}
