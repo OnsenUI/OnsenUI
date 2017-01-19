@@ -9,9 +9,9 @@ export { default as VOnsSplitter } from './VOnsSplitter.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
 
-import Vue from 'vue';
 import VGeneric from './VGeneric.vue';
 const extend = component => Object.assign({name: 'v-ons-' + component}, VGeneric);
+
 export const VOnsPage = extend('page');
 export const VOnsToolbar = extend('toolbar');
 export const VOnsToolbarButton = extend('toolbar-button');

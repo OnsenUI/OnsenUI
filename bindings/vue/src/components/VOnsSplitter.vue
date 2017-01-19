@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { deriveProperties } from '../internal/mixins.js';
+  import { deriveProperties } from '../internal/mixins/derive';
 
   export default {
     mixins: [deriveProperties]

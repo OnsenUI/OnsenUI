@@ -5,7 +5,8 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties, VuePageLoader } from '../internal/mixins.js';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
+  import { VuePageLoader } from '../internal/mixins/pageLoader';
 
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties, VuePageLoader]

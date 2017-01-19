@@ -4,7 +4,7 @@
 </template>
 
 <script>
-  import { VuePageLoader } from '../internal/mixins.js';
+  import { VuePageLoader } from '../internal/mixins/pageLoader';
 
   export default {
     mixins: [VuePageLoader],

@@ -4,19 +4,21 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveProperties } from '../internal/mixins.js';
+  import { deriveEvents, deriveProperties } from '../internal/mixins/derive';
 
   export default {
-    mixins: [deriveEvents, deriveProperties],
     mounted() {
-      // Overwrite original 'input' or 'change' handlers for v-model support
-      if (['checkbox', 'radio'].includes(this.type)) {
-        // TODO v-model does not work
-        this.$el.removeEventListener('change', this._onChange);
-        this._onChange = event => this.$emit('change', event.target.checked);
+      this.$el.removeEventListener('change', this._onChange);
+      this.$el.removeEventListener('input', this._onInput);
+
+      if (['checkbox', 'radio'].includes(this.$el.type)) {
+        this._onChange = event => {
+          this.$emit('input', event.target.value);
+          // This is updating all the inputs
+        };
         this.$el.addEventListener('change', this._onChange);
+
       } else {
-        this.$el.removeEventListener('input', this._onInput);
         this._onInput = event => this.$emit('input', event.target.value);
         this.$el.addEventListener('input', this._onInput);
       }
