@@ -487,6 +487,10 @@ export default class DialogElement extends BaseElement {
     }
   }
 
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
+  }
+
   /**
    * @param {String} name
    * @param {DialogAnimator} Animator
