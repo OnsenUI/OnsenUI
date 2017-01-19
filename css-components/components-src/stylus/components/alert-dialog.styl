@@ -126,8 +126,8 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 
 .alert-dialog-button--primal
   font-weight var-font-weight--large
-  
-.alert-dialog-footer--one
+
+.alert-dialog-footer--rowfooter
   white-space nowrap
   display -webkit-box
   display -webkit-flex
@@ -137,7 +137,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   display flex
   flex-wrap wrap
 
-.alert-dialog-button--one
+.alert-dialog-button--rowfooter
   -webkit-box-flex 1
   -webkit-flex 1
   -moz-box-flex 1
@@ -155,8 +155,8 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
     background-position top, left
     background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
 
-.alert-dialog-button--one:first-child
-  border-left none 
+.alert-dialog-button--rowfooter:first-child
+  border-left none
   +retina-query()
     border-top none
     background-size 100% 1px
@@ -228,10 +228,10 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
           Hello World!
         </div>
 
-        <div class="alert-dialog-footer alert-dialog-footer--one">
-          <button class="alert-dialog-button alert-dialog-button--one">Left</button>
-          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
-          <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        <div class="alert-dialog-footer alert-dialog-footer--rowfooter">
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Left</button>
+          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--rowfooter">Center</button>
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Right</button>
         </div>
       </div>
     </div>
@@ -310,8 +310,8 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 .alert-dialog-button--material:active
   background-color initial
 
-.alert-dialog-button--one--material,
-.alert-dialog-button--one--material:first-child
+.alert-dialog-button--rowfooter--material,
+.alert-dialog-button--rowfooter--material:first-child
   border 0
   +retina-query()
     background none
