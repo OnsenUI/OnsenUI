@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Select input | Onsen UI</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    function editSelects(event) {
+      document.getElementById('choose-sel').removeAttribute('modifier');
+      if (event.target.value == 'material' || event.target.value == 'underbar') {
+        document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Select input</div>
+    </ons-toolbar>
+
+    <div style="padding: 2%">
+      <h3>Choose which select input you want to see:</h3>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="basic">Basic</option>
+        <option value="material">Material</option>
+        <option value="underbar">Underbar</option>
+      </ons-select>
+
+      <ons-list modifier="inset" style="margin-top: 2%">
+        <ons-list-header>Attributes you can add to the <b>ons-select</b> tag:</ons-list-header>
+        <ons-list-item modifier="nodivider">autofocus</ons-list-item>
+        <ons-list-item modifier="nodivider">disabled</ons-list-item>
+        <ons-list-item modifier="nodivider">form</ons-list-item>
+        <ons-list-item modifier="nodivider">multiple</ons-list-item>
+        <ons-list-item modifier="nodivider">name</ons-list-item>
+        <ons-list-item modifier="nodivider">required</ons-list-item>
+        <ons-list-item modifier="nodivider">size</ons-list-item>
+      </ons-list>
+      <ons-list modifier="inset" style="margin-top: 1%">
+        <ons-list-header>Properties you can change dinamically:</ons-list-header>
+        <ons-list-item modifier="nodivider">disabled</ons-list-item>
+        <ons-list-item modifier="nodivider">length</ons-list-item>
+        <ons-list-item modifier="nodivider">multiple</ons-list-item>
+        <ons-list-item modifier="nodivider">name</ons-list-item>
+        <ons-list-item modifier="nodivider">options</ons-list-item>
+        <ons-list-item modifier="nodivider">selectedIndex</ons-list-item>
+        <ons-list-item modifier="nodivider">size</ons-list-item>
+        <ons-list-item modifier="nodivider">value</ons-list-item>
+      </ons-list>
+      <ons-list modifier="inset" style="margin-top: 1%; margin-bottom: 1%">
+        <ons-list-header>Methods you can use:</ons-list-header>
+        <ons-list-item modifier="nodivider">add(option[, index])</ons-list-item>
+        <ons-list-item modifier="nodivider">remove(index)</ons-list-item>
+      </ons-list>
+    </div>
+  </ons-page>
+
+</body>
+
+</html>
