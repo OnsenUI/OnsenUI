@@ -1,5 +1,10 @@
 <template>
   <v-ons-page>
+    <v-ons-toolbar>
+      <div class="center">
+        <v-ons-toolbar-button ref="myToolbarButton">Test</v-ons-toolbar-button>
+      </div>
+    </v-ons-toolbar>
     <v-ons-list>
       <v-ons-list-header>Notifications</v-ons-list-header>
       <v-ons-list-item
@@ -31,12 +36,12 @@
       <v-ons-list-header>Components</v-ons-list-header>
       <v-ons-list-item
         tappable
-        @click="shown = true"
+        @click="dialogShown = true"
       >
         <div class="center">
           Simple Dialog
         </div>
-        <div class="right">V-Model: {{shown}}</div>
+        <div class="right">V-Model: {{dialogShown}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
@@ -57,6 +62,32 @@
         </div>
       </v-ons-list-item>
 
+      <v-ons-list-item
+        tappable
+        @click="$refs.myModal.show()"
+      >
+        <div class="center">
+          Modal
+        </div>
+      </v-ons-list-item>
+
+      <v-ons-list-item
+        tappable
+        @click="$refs.myPopover.show('ons-toolbar-button')"
+      >
+        <div class="center">
+          Popover (CSS selector - method)
+        </div>
+      </v-ons-list-item>
+
+      <v-ons-list-item
+        tappable
+        @click="log('hey'); popoverShown = true"
+      >
+        <div class="center">
+          Popover ($ref - prop)
+        </div>
+      </v-ons-list-item>
     </v-ons-list>
 
     <v-ons-dialog ref="myDialog" cancelable
@@ -64,10 +95,10 @@
       @postshow="log('postshow!!')"
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
-      v-model="shown"
+      v-model="dialogShown"
     >
      Dead simple dialog
-     <button @click="shown = !shown">toggle</button>
+     <button @click="dialogShown = !dialogShown">toggle</button>
     </v-ons-dialog>
 
     <v-ons-alert-dialog ref="myAlertDialog1" cancelable modifier="rowfooter">
@@ -83,6 +114,22 @@
       Lorem ipsum
     </v-ons-alert-dialog>
 
+    <v-ons-modal ref="myModal">
+      <p>This is a modal</p>
+      <p><ons-button @click="log($refs.myModal); $refs.myModal.hide()">Close</ons-button></p>
+    </v-ons-modal>
+
+    <v-ons-popover ref="myPopover" cancelable
+      @preshow="log('preshow!!')"
+      @postshow="log('postshow!!')"
+      @prehide="log('prehide!!')"
+      @posthide="log('posthide!!')"
+      :shown="popoverShown"
+      :target="$refs.myToolbarButton"
+      :cancelable="true"
+    >
+    </v-ons-popover>
+
   </v-ons-page>
 </template>
 
@@ -90,7 +137,8 @@
 	export default {
     data: function() {
       return {
-        shown: false
+        dialogShown: false,
+        popoverShown: false
       }
     },
     methods: {

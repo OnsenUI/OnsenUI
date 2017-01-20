@@ -1,6 +1,7 @@
 export { default as VOnsInput } from './VOnsInput.vue';
 export { default as VOnsPullHook } from './VOnsPullHook.vue';
 export { default as VOnsDialog } from './VOnsDialog.vue';
+export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
@@ -22,7 +23,6 @@ export const VOnsButton = extend('button');
 export const VOnsCarousel = extend('carousel');
 export const VOnsCarouselItem = extend('carousel-item');
 export const VOnsIcon = extend('icon');
-//export const VOnsRange = extend('range');
 export const VOnsSwitch = extend('switch');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsFab = extend('fab');
@@ -34,4 +34,5 @@ export const VOnsListHeader = extend('speed-list-header');
 export const VOnsRipple = extend('ripple');
 export const VOnsRow = extend('row');
 export const VOnsCol = extend('col');
+export const VOnsModal = extend('modal');
 
