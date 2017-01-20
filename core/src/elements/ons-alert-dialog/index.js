@@ -242,6 +242,7 @@ export default class AlertDialogElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.style.display = 'none';
+    this.style.zIndex = 10001;
 
     /**
      * Expected result after compile:
