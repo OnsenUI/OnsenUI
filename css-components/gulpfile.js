@@ -13,7 +13,7 @@ gulp.task('build', () => {
   return gulp.src('src/onsen-css-components.less')
     .pipe($.plumber())
     .pipe($.less())
-    .pipe($.autoprefixer('last 1 version'))
+    .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
     .pipe(gulp.dest('build/'));
 });
 
