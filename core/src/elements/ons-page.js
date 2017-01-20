@@ -393,7 +393,7 @@ export default class PageElement extends BaseElement {
     if (tagName === 'ons-fab') {
       return !el.hasAttribute('position');
     }
-    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog'];
+    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover'];
     return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
