@@ -618,6 +618,10 @@ export default class PopoverElement extends BaseElement {
     }
   }
 
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
+  }
+
   /**
    * @param {String} name
    * @param {PopoverAnimator} Animator
