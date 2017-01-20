@@ -26,7 +26,7 @@ gulp.task('build', () => {
 gulp.task('generate-preview', ['build'], () => {
   const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
   const css = fs.readFileSync(__dirname + '/build/onsen-css-components.css', 'utf-8');
-  const components = ancss.parse(css, {detect: line => line.match(/topdoc/)});
+  const components = ancss.parse(css, {detect: line => line.match(/^!/)});
   fs.writeFileSync(__dirname + '/build/preview.html', eco.render(template, {components}), 'utf-8');
 });
 

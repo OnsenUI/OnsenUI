@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// NOTE: You can't use @extend that break component independent and topdoc parsing.
+// NOTE: You can't use @extend that break component independent and parsing.
 
 // internal variables
 @range-track-background-color: @border-color;
@@ -33,14 +33,14 @@ limitations under the License.
 @material-range-thumb-vertical-margin: 24px;
 @material-range-thumb-horizontal-margin: 2px;
 
-/*! topdoc
+/*!
   name: Range
   class: range
   modifiers:
     :active: Active state
     :disabled: Disabled state
     :focus: Focused
-  markup:
+  markup: |
     <input type="range" class="range">
     <input type="range" class="range" disabled>
   showcase:
@@ -188,14 +188,14 @@ ons-range { // FIXME
   visibility: hidden;
 }
 
-/*! topdoc
+/*!
   name: Material Range
   use: Range
   modifiers:
     :active: Active state
     :disabled: Disabled state
     :focus: Focused
-  markup:
+  markup: |
     <input type="range" class="range range--material">
     <input type="range" class="range range--material" disabled>
 */

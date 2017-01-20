@@ -35,10 +35,10 @@
 @material-list-item-min-height: 48px;
 @material-list-item-padding: 0 0 0 16px;
 
-/*! topdoc
+/*!
   name: List
   class: list
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">Dog</div>
@@ -209,11 +209,11 @@
   transition: none;
 }
 
-/*! topdoc
+/*!
   name: Noborder List
   class: list--noborder
   use: List
-  markup:
+  markup: |
     <ul class="list list--noborder">
       <li class="list__item">
         <div class="list__item__center">Item</div>
@@ -234,11 +234,11 @@
   box-shadow: none;
 }
 
-/*! topdoc
+/*!
   name: Category List Header
   class: list__header
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__header">
         Header
@@ -249,11 +249,11 @@
     </ul>
  */
 
-/*! topdoc
+/*!
   name: Tappable List
   class: list__item--tappable
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
         <div class="list__item__center">Tappable Item</div>
@@ -265,10 +265,10 @@
   background-color: @list-item-active-background-color;
 }
 
-/*! topdoc
+/*!
   name: Switch in List Item
   use: Switch, List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
@@ -299,11 +299,11 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: List Item with Chevron
   class: list__item--chevron
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--chevron">
         <div class="list__item__center">Item A</div>
@@ -344,10 +344,10 @@
 }
 
 
-/*! topdoc
+/*!
   name: Inset List
   use: List, List Item with Chevron, Tappable List
-  markup:
+  markup: |
     <ul class="list list--inset">
       <li class="list__item list--inset__item list__item--chevron list__item--tappable">
         <div class="list__item__center">List Item with Chevron</div>
@@ -370,11 +370,11 @@
   box-shadow: none;
 }
 
-/*! topdoc
+/*!
   name: Radio Button in List Item
   modifiers:
   use: Radio Button, List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
@@ -401,10 +401,10 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: Checkbox in List Item
   use: Checkbox, List, Tappable List, Switch in List Item
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
@@ -431,10 +431,10 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: No border Checkbox in List Item
   use: Checkbox in List Item, No border Checkbox
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
         <div class="list__item__left">
@@ -461,10 +461,10 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: Text Input in List Item
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
@@ -479,10 +479,10 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: Textarea in List Item
   use: List, Textarea Transparent
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
@@ -492,11 +492,11 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: Right Label in List Item
   use: List, Switch in List Item
   class: list__right-label
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
@@ -515,11 +515,11 @@
   opacity: 0.6;
 }
 
-/*! topdoc
+/*!
   name: List Item with Subtitle
   use: List, Switch in List Item
   class: list__item__subtitle
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__center">
@@ -548,11 +548,11 @@
   align-self: flex-start;
 }
 
-/*! topdoc
+/*!
   name: List Item with Thumbnail
   use: List, List Item with Subtitle
   class: list__item__thumbnail
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__left">
@@ -586,11 +586,11 @@
   margin: 0;
 }
 
-/*! topdoc
+/*!
   name: List Item with Icon
   use: List, List Item with Thumbnail
   class: list__item__icon
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item">
         <div class="list__item__left">
@@ -627,11 +627,11 @@
   padding: 0 6px;
 }
 
-/*! topdoc
+/*!
   name: Material List
   use: List Item with Subtitle
   class: list--material
-  markup:
+  markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
         <div class="list__item__center list__item--material__center">
@@ -695,11 +695,11 @@
   .retina-list-item-border(#eee);
 }
 
-/*! topdoc
+/*!
   name: Material List with Header
   use: Material List
   class: list__header--material
-  markup:
+  markup: |
     <ul class="list list--material">
       <li class="list__header list__header--material">
         Fruits
@@ -729,11 +729,11 @@
   padding-top: 16px;
 }
 
-/*! topdoc
+/*!
   name: Material List with Checkboxes
   use: Material List, Material Checkbox
   class: list__header--material
-  markup:
+  markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
         <div class="list__item__left list__item--material__left">
@@ -766,11 +766,11 @@
     </ul>
 */
 
-/*! topdoc
+/*!
   name: Material List with Thumbnails
   use: Material List, List Item with Thumbnail
   class: list__item--material__thumbnail
-  markup:
+  markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
         <div class="list__item__left list__item--material__left">
@@ -803,11 +803,11 @@
   border-radius: 100%;
 }
 
-/*! topdoc
+/*!
   name: Material List with Icons
   use: Material List, Material List with Thumbnails
   class: list__item--material__icon
-  markup:
+  markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
         <div class="list__item__left list__item--material__left">
@@ -844,11 +844,11 @@
   padding: 0 4px;
 }
 
-/*! topdoc
+/*!
   name: List item without divider
   class: list__item--nodivider
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--nodivider">
         <div class="list__item__center list__item--nodivider__center">Item</div>
@@ -873,11 +873,11 @@
   background-image: none;
 }
 
-/*! topdoc
+/*!
   name: List item with long divider
   class: list__item--longdivider
   use: List
-  markup:
+  markup: |
     <ul class="list">
       <li class="list__item list__item--longdivider">
         <div class="list__item__center list__item--longdivider__center">Item</div>

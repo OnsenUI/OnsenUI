@@ -26,12 +26,13 @@
       }
 
       .component-preview__markup {
-        background-color: #999;
-        color: white;
+        border-left: 4px solid #ccc;
+        background-color: #fff;
+        color: #888;
         font-size: 14px;
         line-height: 1.4;
         font-family: Consolas, monospace;
-        padding: 8px;
+        padding: 2px 8px;
       }
 
       .component-preview__example {
