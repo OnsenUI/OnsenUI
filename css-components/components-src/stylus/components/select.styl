@@ -30,12 +30,11 @@ var-material-select-input-active-color = $material-select-input-active-color
 var-material-select-input-inactive-color = $material-select-input-inactive-color
 
 /*! topdoc
-  name: Select Input
+  name: Select input
   class: select-input
   modifiers:
-    :disabled: Disabled state
-    :focus: Focused
-    :invalid: Hover state
+    :underbar: display an bar under the select input
+    :material: material design select input
   markup:
     <select class="select-input">
       <option>Option 1</option>
@@ -48,23 +47,18 @@ switch()
   reset-input()
   reset-font()
 
-switch--disabled()
+input--disabled()
   disabled()
 
 select-input()
   input()
   transparent()
   position relative
-  letter-spacing var-letter-spacing
-  box-shadow var-box-shadow--select-input
-  color var-input-text-color
-  padding 0
-  margin 0
-  width 100%
+  max-width 50%
   font-size var-select-input-font-size
   height var-select-input-height
-  font-weight var-font-weight
-  box-sizing border-box
+  border-color var-select-input-border-color
+  color var-text-highlight-color
 
 select-input--disabled()
   input--disabled()
@@ -114,57 +108,11 @@ select-input--invalid()
 .select-input:invalid
   select-input--invalid()
 
-/*! topdoc
-  name: Underbar Select Input
-  class: select-input--underbar
-  markup:
-    <select class="select-input select-input--underbar">
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
-    </select>
-*/
-
-.select-input--underbar
-  select-input()
-  border none
-  background-color transparent
-  border-bottom 1px solid var-select-input-border-color
-  border-radius 0px
-
-.select-input--underbar:disabled
-  select-input--disabled()
-  border none
-  background-color transparent
-  border-bottom 1px solid var-select-input-border-color
-
-select-input-underbar-disabled()
-  webkit-input-placeholder()
-  border none
-  background-color transparent
-
-.select-input--underbar:disabled::-webkit-input-placeholder
-  select-input-underbar-disabled()
-
-.select-input--underbar:disabled::-moz-placeholder
-  select-input-underbar-disabled()
-
-.select-input--underbar:disabled::-ms-input-placeholder
-  select-input-underbar-disabled()
-
-.select-input--underbar:disabled:-ms-input-placeholder
-  select-input-underbar-disabled()
-
-
-.select-input--underbar:invalid
-  select-input--invalid()
-  border none
-  background-color transparent
-  border-bottom 1px solid var-input-invalid-border-color
-
+.select-input[multiple]
+  height 62px
 
 /*! topdoc
-  name: Material Select Input
+  name: Material select input
   class: select-input--material
   markup:
     <select class="select-input select-input--material">
@@ -235,3 +183,50 @@ select-input--material-placeholder()
     background-size 0% 2px, 100% 2px
   100%
     background-size 100% 2px, 100% 2px
+
+/*! topdoc
+  name: Underbar select input
+  class: select-input--underbar
+  markup:
+    <select class="select-input select-input--underbar">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--underbar
+  select-input()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-select-input-border-color
+  border-radius 0px
+
+.select-input--underbar:disabled
+  select-input--disabled()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-select-input-border-color
+
+select-input-underbar-disabled()
+  webkit-input-placeholder()
+  border none
+  background-color transparent
+
+.select-input--underbar:disabled::-webkit-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled::-moz-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled::-ms-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled:-ms-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:invalid
+  select-input--invalid()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-input-invalid-border-color
