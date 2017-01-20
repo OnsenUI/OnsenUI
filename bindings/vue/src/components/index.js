@@ -8,6 +8,8 @@ export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitter } from './VOnsSplitter.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
+export { default as VOnsRange } from './VOnsRange.vue';
+export { default as VOnsProgressBar } from './VOnsProgressBar.vue';
 
 import VGeneric from './VGeneric.vue';
 const extend = component => Object.assign({name: 'v-ons-' + component}, VGeneric);
@@ -20,7 +22,7 @@ export const VOnsButton = extend('button');
 export const VOnsCarousel = extend('carousel');
 export const VOnsCarouselItem = extend('carousel-item');
 export const VOnsIcon = extend('icon');
-export const VOnsRange = extend('range');
+//export const VOnsRange = extend('range');
 export const VOnsSwitch = extend('switch');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsFab = extend('fab');

@@ -7,6 +7,8 @@ import SpeedDial from './SpeedDial.vue';
 import Dialogs from './Dialogs.vue';
 import Carousel from './Carousel.vue';
 import Forms from './Forms.vue';
+import Range from './Range.vue';
+import ProgressBar from './ProgressBar.vue';
 
 export {
   Tabbar,
@@ -17,5 +19,7 @@ export {
   SpeedDial,
   Dialogs,
   Carousel,
-  Forms
+  Forms,
+  Range,
+  ProgressBar
 };
