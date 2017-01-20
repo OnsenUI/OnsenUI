@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Onsen CSS Components</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./onsen-css-components.css">
+    <style>
+      body {
+        margin: 20px;
+      }
+
+      * {
+        user-select: auto;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .component-preview {
+
+      }
+
+      .component-preview__title {
+        font-size: 14px;
+      }
+
+      .component-preview__markup {
+        background-color: #999;
+        color: white;
+        font-size: 14px;
+        line-height: 1.4;
+        font-family: Consolas, monospace;
+        padding: 8px;
+      }
+
+      .component-preview__example {
+        width: 320px;
+        height: 200px;
+        text-align: center;
+        position: relative;
+        z-index: 0;
+      }
+
+      /* dirty fix */
+      .popover-mask {
+        position: absolute;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <h1>Onsen CSS Components</h1>
+
+    <% for component in @components: %>
+    <div class="component-preview">
+      <h2 class="component-preview__title" id="<%= component.annotation.name %>"><%= component.annotation.name %> <a href="#<%= component.annotation.name %>">#</a></h2>
+
+      <div class="page component-preview__example">
+        <%- component.annotation.markup %>
+      </div>
+
+      <pre class="component-preview__markup"><%= component.annotation.markup %></pre>
+    </div>
+    <% end %>
+
+  </body>
+</html>
