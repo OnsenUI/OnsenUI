@@ -39,8 +39,16 @@
     },
 
     beforeMount() {
-      if (!this.$slots.hasOwnProperty('footer')) return;
-      this.$slots.footer.forEach(el => el.data && (el.data.staticClass = (el.data.staticClass || '') + ' alert-dialog-button'));
+      this._addButtonClasses = () => {
+        if (!this.$slots.hasOwnProperty('footer')) return;
+        this.$slots.footer.forEach(el => el.data && (el.data.staticClass = (el.data.staticClass || '') + ' alert-dialog-button'));
+      };
+
+      this._addButtonClasses();
+    },
+
+    beforeUpdate() {
+      this._addButtonClasses();
     }
   };
 </script>
