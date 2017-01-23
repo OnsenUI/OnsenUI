@@ -95,7 +95,8 @@
       @postshow="log('postshow!!')"
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
-      v-model="dialogShown"
+      @mask="dialogShown = false; log('canceled!!'); "
+      :shown="dialogShown"
     >
      Dead simple dialog
      <button @click="dialogShown = !dialogShown">toggle</button>
