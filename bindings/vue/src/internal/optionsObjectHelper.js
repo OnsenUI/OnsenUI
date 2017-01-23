@@ -14,6 +14,8 @@ const _reservedProperties = [
 const _blackListedProperties = [
   'page',
   'pageLoader',
+  'visible',
+  'onDeviceBackButton'
 ];
 
 /**
