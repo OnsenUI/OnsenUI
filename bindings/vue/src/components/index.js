@@ -1,6 +1,5 @@
 export { default as VOnsInput } from './VOnsInput.vue';
 export { default as VOnsPullHook } from './VOnsPullHook.vue';
-export { default as VOnsDialog } from './VOnsDialog.vue';
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
@@ -11,8 +10,10 @@ export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
 export { default as VOnsRange } from './VOnsRange.vue';
 
+// Generic components
 import VGeneric from './VGeneric.vue';
-const extend = component => Object.assign({name: 'v-ons-' + component}, VGeneric);
+
+const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
 export const VOnsPage = extend('page');
 export const VOnsToolbar = extend('toolbar');
@@ -33,6 +34,13 @@ export const VOnsListHeader = extend('speed-list-header');
 export const VOnsRipple = extend('ripple');
 export const VOnsRow = extend('row');
 export const VOnsCol = extend('col');
-export const VOnsModal = extend('modal');
 export const VOnsProgressBar = extend('progress-bar');
+export const VOnsSplitterMask = extend('splitter-mask');
+
+
+// Generic Dialogs
+import { defaultAPI as dialogAPI } from '../internal/mixins/dialogs';
+
+export const VOnsDialog = extend('dialog', [dialogAPI]);
+export const VOnsModal = extend('modal', [dialogAPI]);
 

@@ -5,32 +5,38 @@
 </template>
 
 <script>
+  import { defaultAPI } from '../internal/mixins/dialogs';
   import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties],
+    mixins: [defaultAPI, deriveEvents, deriveMethods, deriveProperties],
 
     props: {
-      shown: {
-        type: Boolean
-      },
-      target: { }
+      target: {
+        validator: function(value) {
+          if (value._isVue || typeof value === 'string' || value instanceof Event || value instanceof HTMLElement) {
+            return true;
+          }
+          return false;
+        }
+      }
     },
 
     computed: {
-      targetSelector: function() {
+      normalizedTarget: function() {
         if (this.target && this.target._isVue) {
           return this.target.$el;
         }
         return this.target;
-      }
-    },
-
-    watch: {
-      shown: function() {
-        if (this.shown !== this.visible) {
-          this[this.shown ? 'show' : 'hide'].call(this, this.targetSelector);
+      },
+      normalizedOptions: function() {
+        if (this.target) {
+          return {
+            target: this.normalizedTarget,
+            ...this.options
+          };
         }
+        return this.options;
       }
     }
   };

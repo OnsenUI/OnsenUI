@@ -36,99 +36,111 @@
       <v-ons-list-header>Components</v-ons-list-header>
       <v-ons-list-item
         tappable
-        @click="dialogShown = true"
+        @click="dialogVisible = true"
       >
         <div class="center">
           Simple Dialog
         </div>
-        <div class="right">V-Model: {{dialogShown}}</div>
+        <div class="right">Model: {{dialogVisible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
         tappable
-        @click="$refs.myAlertDialog1.show()"
+        @click="alertDialog1Visible = true"
       >
         <div class="center">
           Alert Dialog (slots)
         </div>
+        <div class="right">Model: {{alertDialog1Visible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
         tappable
-        @click="$refs.myAlertDialog2.show()"
+        @click="alertDialog2Visible = true"
       >
         <div class="center">
           Alert Dialog (props)
         </div>
+        <div class="right">Model: {{alertDialog2Visible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
         tappable
-        @click="$refs.myModal.show()"
+        @click="modalVisible = true"
       >
         <div class="center">
           Modal
         </div>
+        <div class="right">Model: {{modalVisible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
         tappable
-        @click="$refs.myPopover.show('ons-toolbar-button')"
-      >
-        <div class="center">
-          Popover (CSS selector - method)
-        </div>
-      </v-ons-list-item>
-
-      <v-ons-list-item
-        tappable
-        @click="log('hey'); popoverShown = true"
+        @click="popoverVisible = true"
       >
         <div class="center">
           Popover ($ref - prop)
         </div>
+        <div class="right">Model: {{popoverVisible}}</div>
       </v-ons-list-item>
     </v-ons-list>
 
-    <v-ons-dialog ref="myDialog" cancelable
+    <v-ons-dialog
+      :on-device-back-button="() => {}"
       @preshow="log('preshow!!')"
       @postshow="log('postshow!!')"
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
-      @mask="dialogShown = false; log('canceled!!'); "
-      :shown="dialogShown"
+      @mask="dialogVisible = false; log('canceled!!'); "
+      :visible="dialogVisible"
     >
-     Dead simple dialog
-     <button @click="dialogShown = !dialogShown">toggle</button>
+      Lorem ipsum
+      <button @click="dialogVisible = !dialogVisible">toggle</button>
     </v-ons-dialog>
 
-    <v-ons-alert-dialog ref="myAlertDialog1" cancelable modifier="rowfooter">
+    <v-ons-alert-dialog
+      modifier="rowfooter"
+      @mask="alertDialog1Visible = false; log('canceled!!'); "
+      :visible="alertDialog1Visible"
+    >
       <span slot="title">Title slots</span>
       Lorem ipsum
+      <button @click="alertDialog1Visible= !alertDialog1Visible">toggle</button>
       <template slot="footer">
-        <button class="test zxc" other="asd" @click="$refs.myAlertDialog1.hide()">Ok</button>
-        <button @click="$refs.myAlertDialog1.hide()">Cancel</button>
+        <button @click="alertDialog1Visible = false">Ok</button>
+        <button @click="alertDialog1Visible = false">Cancel</button>
       </template>
     </v-ons-alert-dialog>
 
-    <v-ons-alert-dialog ref="myAlertDialog2" cancelable :title="'Title props'" :footer="{Ok: () => $refs.myAlertDialog2.hide(), Cancel: () => $refs.myAlertDialog2.hide()}" modifier="rowfooter">
+    <v-ons-alert-dialog
+      modifier="rowfooter"
+      :title="'Title props'"
+      :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
+      @mask="alertDialog2Visible = false; log('canceled!!'); "
+      :visible="alertDialog2Visible"
+    >
       Lorem ipsum
+      <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
     </v-ons-alert-dialog>
 
-    <v-ons-modal ref="myModal">
+    <v-ons-modal
+      :visible="modalVisible"
+    >
       <p>This is a modal</p>
-      <p><ons-button @click="log($refs.myModal); $refs.myModal.hide()">Close</ons-button></p>
+      <p><ons-button @click="modalVisible = false">Close</ons-button></p>
     </v-ons-modal>
 
-    <v-ons-popover ref="myPopover" cancelable
+    <v-ons-popover cancelable
       @preshow="log('preshow!!')"
       @postshow="log('postshow!!')"
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
-      :shown="popoverShown"
       :target="$refs.myToolbarButton"
-      :cancelable="true"
+      @mask="popoverVisible = false; log('canceled!!'); "
+      :visible="popoverVisible"
     >
+      Lorem ipsum
+      <button @click="popoverVisible = !popoverVisible">toggle</button>
     </v-ons-popover>
 
   </v-ons-page>
@@ -138,8 +150,11 @@
 	export default {
     data: function() {
       return {
-        dialogShown: false,
-        popoverShown: false
+        dialogVisible: false,
+        alertDialog1Visible: false,
+        alertDialog2Visible: false,
+        popoverVisible: false,
+        modalVisible: false
       }
     },
     methods: {
