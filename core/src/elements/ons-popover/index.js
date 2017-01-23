@@ -230,7 +230,7 @@ export default class PopoverElement extends BaseElement {
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
-    this._boundCancel = this._cancel.bind(this);
+    this._boundCancel = () => this._cancel();
   }
 
   _initAnimatorFactory() {

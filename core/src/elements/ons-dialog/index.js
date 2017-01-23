@@ -192,7 +192,7 @@ export default class DialogElement extends BaseElement {
 
     this._visible = false;
     this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
+    this._boundCancel = () => this._cancel();
 
     this._updateAnimatorFactory();
   }
