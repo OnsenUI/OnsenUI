@@ -5,10 +5,14 @@ import { createMethodsFor, createComputedPropertiesFor } from '../optionsObjectH
 const deriveEvents = {
   beforeCreate() {
     this._boundEvents = getClassFromTag(this.$options._componentTag.slice(2)).events || ['click'];
-    this.$options.methods = Object.assign({}, this._boundEvents.reduce((result, key) => {
-      result[eventToHandler(key)] = event => this.$emit(key, event);
-      return result;
-    }, {}));
+    this.$options.methods = Object.assign(
+      {},
+      this._boundEvents.reduce((result, key) => {
+        result[eventToHandler(key)] = event => this.$emit(key, event);
+        return result;
+      }, {}),
+      this.$options.methods
+    );
   },
   mounted() {
     this._boundEvents.forEach(key => {
@@ -25,13 +29,21 @@ const deriveEvents = {
 
 const deriveMethods = {
   beforeCreate() {
-    this.$options.methods = Object.assign({}, createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))), this.$options.methods);
+    this.$options.methods = Object.assign(
+      {},
+      createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))),
+      this.$options.methods
+    );
   }
 };
 
 const deriveProperties = {
   beforeCreate() {
-    this.$options.computed = Object.assign({}, createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2))), this.$options.computed);
+    this.$options.computed = Object.assign(
+      {},
+      createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2))),
+      this.$options.computed
+    );
   }
 };
 
