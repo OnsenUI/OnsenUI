@@ -326,7 +326,6 @@ export default class PopoverElement extends BaseElement {
     }
 
     this.classList.add(defaultClassName);
-    this.style.zIndex = 10001;
 
     const hasDefaultContainer = this._popover && this._content;
 
