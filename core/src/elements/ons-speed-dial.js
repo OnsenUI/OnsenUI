@@ -177,21 +177,24 @@ export default class SpeedDialElement extends BaseElement {
   _onClick(e) {
     if (this.onClick) {
       this.onClick.apply(this);
+      return Promise.resolve();
     } else if (!this.disabled && this.visible) {
-      this.toggleItems();
+      return this.toggleItems();
     }
   }
 
   _show() {
     if (!this.inline) {
-      this.show();
+      return this.show();
     }
+    return Promise.resolve();
   }
 
   _hide() {
     if (!this.inline) {
-      this.hide();
+      return this.hide();
     }
+    return Promise.resolve();
   }
 
   _updateRipple() {
@@ -289,6 +292,7 @@ export default class SpeedDialElement extends BaseElement {
    */
   show() {
     this._fab.show();
+    return Promise.resolve();
   }
 
   /**
@@ -433,7 +437,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの表示非表示を切り替えます。[/ja]
    */
   toggle() {
-    this.visible ? this.hide() : this.show();
+    return this.visible ? this.hide() : this.show();
   }
 
   /**
@@ -444,11 +448,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]
    */
   toggleItems() {
-    if (this.isOpen()) {
-      this.hideItems();
-    } else {
-      this.showItems();
-    }
+    return this.isOpen() ? this.hideItems() : this.showItems();
   }
 
   static get events() {

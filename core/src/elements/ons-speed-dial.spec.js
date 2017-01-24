@@ -69,8 +69,8 @@ describe('OnsSpeedDialElement', () => {
   describe('#_onClick()', () => {
     it('should call #toggleItems()', () => {
       const spy = chai.spy.on(speedDial, 'toggleItems');
-      speedDial._onClick();
-      expect(spy).to.have.been.called.once;
+      return speedDial._onClick()
+      .then(() => expect(spy).to.have.been.called.once);
     });
   });
 
@@ -78,14 +78,14 @@ describe('OnsSpeedDialElement', () => {
     it('does nothing if element is inline', () => {
       const spy = chai.spy.on(speedDial, 'show');
       speedDial.setAttribute('inline', '');
-      speedDial._show();
-      expect(spy).to.not.have.been.called();
+      return speedDial._show()
+      .then(() => expect(spy).to.not.have.been.called());
     });
 
     it('calls show() if element is not inline', () => {
       const spy = chai.spy.on(speedDial, 'show');
-      speedDial._show();
-      expect(spy).to.have.been.called.once;
+      return speedDial._show()
+      .then(() => expect(spy).to.have.been.called.once);
     });
   });
 
@@ -93,8 +93,8 @@ describe('OnsSpeedDialElement', () => {
     it('does nothing if element is inline', () => {
       const spy = chai.spy.on(speedDial, 'hide');
       speedDial.setAttribute('inline', '');
-      speedDial._hide();
-      expect(spy).to.not.have.been.called();
+      return speedDial._hide()
+      .then(() => expect(spy).to.not.have.been.called());
     });
 
     it('calls hide() if element is not inline', () => {
@@ -213,53 +213,53 @@ describe('OnsSpeedDialElement', () => {
   describe('#show()', () => {
     it('calls #show() on the child OnsFabElement', () => {
       const spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'show');
-      speedDial.show();
-      expect(spy).to.have.been.called.once;
+      return speedDial.show()
+      .then(() => expect(spy).to.have.been.called.once);
     });
   });
 
   describe('#hide()', () => {
     it('calls #hideItems()', () => {
       const spy = chai.spy.on(speedDial, 'hideItems');
-      speedDial.hide();
-      expect(spy).to.have.been.called.once;
+      return speedDial.hide()
+      .then(() => expect(spy).to.have.been.called.once);
     });
 
-    it('eventually calls #hide() on the child OnsFabElement', (done) => {
+    it('eventually calls #hide() on the child OnsFabElement', () => {
       const spy = chai.spy.on(speedDial.querySelector('ons-fab'), 'hide');
-      speedDial.hide();
-      setTimeout(() => {
-        expect(spy).to.have.been.called.once;
-        done();
-      }, 200);
+      return speedDial.hide()
+      .then(() => expect(spy).to.have.been.called.once);
     });
   });
 
   describe('#showItems()', () => {
     it('sets scale transform to 1 for all items', () => {
-      speedDial.showItems();
-
-      for (let i = 0; i < speedDial.items; i++) {
-        expect(speedDial.items[i].style.transform).to.equal('scale(1)');
-      }
+      return speedDial.showItems()
+      .then(() => {
+        for (let i = 0; i < speedDial.items; i++) {
+          expect(speedDial.items[i].style.transform).to.equal('scale(1)');
+        }
+      })
     });
   });
 
   describe('#hideItems()', () => {
     it('sets scale transform to 0 for all items', () => {
-      speedDial.showItems();
-      speedDial.hideItems();
-
-      for (let i = 0; i < speedDial.items; i++) {
-        expect(speedDial.items[i].style.transform).to.equal('scale(0)');
-      }
+      return speedDial.showItems()
+      .then(() => speedDial.hideItems())
+      .then(() => {
+        for (let i = 0; i < speedDial.items; i++) {
+          expect(speedDial.items[i].style.transform).to.equal('scale(0)');
+        }
+      });
     });
   });
 
   describe('#set disabled()', () => {
-    onlyChrome(it)('disables it\'s direct fab element', () => {
+    onlyChrome(it)('disables it\'s direct fab element', (done) => {
       speedDial.disabled = true;
       expect(ons._util.findChild(speedDial, '.fab').disabled).to.be.true;
+      setTimeout(done, 200); // disabled property performs async stuff
     });
   });
 
@@ -280,39 +280,40 @@ describe('OnsSpeedDialElement', () => {
     it('calls #show() if element is hidden', () => {
       const spy = chai.spy.on(speedDial, 'show');
       return speedDial.hide().then(() => {
-        speedDial.toggle();
-        expect(spy).to.have.been.called.once;
+        return speedDial.toggle().then(() => {
+          expect(spy).to.have.been.called.once;
+        });
       });
     });
 
     it('calls #hide() if element is shown', () => {
       const spy = chai.spy.on(speedDial, 'hide');
-      speedDial.toggle();
-      expect(spy).to.have.been.called.once;
+      return speedDial.toggle().then(() => expect(spy).to.have.been.called.once);
     });
   });
 
   describe('#toggleItems()', () => {
     it('calls #showItems() if items are hidden', () => {
       const spy = chai.spy.on(speedDial, 'showItems');
-      speedDial.toggleItems();
-      expect(spy).to.have.been.called.once;
+      return speedDial.toggleItems().then(() => expect(spy).to.have.been.called.once);
     });
 
     it('calls #hideItems() if items are shown', () => {
       const spy = chai.spy.on(speedDial, 'hideItems');
-      speedDial.showItems();
-      speedDial.toggleItems();
-      expect(spy).to.have.been.called.once;
+      return speedDial.showItems()
+      .then(() => speedDial.toggleItems())
+      .then(() => expect(spy).to.have.been.called.once);
     });
   });
 
   describe('#isOpen()', () => {
     it('returns whether the menu is open or not.', () => {
-      speedDial.showItems();
-      expect(speedDial.isOpen()).to.be.true;
-      speedDial.hideItems();
-      expect(speedDial.isOpen()).to.be.false;
+      return speedDial.showItems()
+      .then(() => {
+        expect(speedDial.isOpen()).to.be.true;
+        return speedDial.hideItems();
+      })
+      .then(() => expect(speedDial.isOpen()).to.be.false);
     });
   });
 
