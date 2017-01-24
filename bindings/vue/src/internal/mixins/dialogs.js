@@ -8,9 +8,6 @@ const defaultAPI = {
     },
     visible: {
       type: Boolean
-    },
-    onDeviceBackButton: {
-      type: Function
     }
   },
 
@@ -19,9 +16,6 @@ const defaultAPI = {
       if (this.visible !== this.$el.visible) {
         this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
       }
-    },
-    onDeviceBackButton: function() {
-      this.$el.onDeviceBackButton = this.onDeviceBackButton;
     }
   },
 

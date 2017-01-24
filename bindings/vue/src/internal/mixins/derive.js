@@ -14,11 +14,13 @@ const deriveEvents = {
       this.$options.methods
     );
   },
+
   mounted() {
     this._boundEvents.forEach(key => {
       this.$el.addEventListener(key, this[eventToHandler(key)]);
     });
   },
+
   beforeDestroy() {
     this._boundEvents.forEach(key => {
       this.$el.removeEventListener(key, this[eventToHandler(key)]);
@@ -39,11 +41,32 @@ const deriveMethods = {
 
 const deriveProperties = {
   beforeCreate() {
+    this._propertyHandlers = [];
+    let derivedProperties = createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2)));
+
+    derivedProperties = Object.keys(derivedProperties).reduce((result, propertyName) => {
+      if (/^on[A-Z]/.test(propertyName)) {
+        this._propertyHandlers.push(propertyName);
+      } else {
+        result[propertyName] = derivedProperties[propertyName];
+      }
+      return result;
+    }, {});
+
     this.$options.computed = Object.assign(
       {},
-      createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2))),
+      derivedProperties,
       this.$options.computed
     );
+  },
+
+  mounted() {
+    this._propertyHandlers.forEach(propertyName => {
+      this.$el[propertyName] = (...args) => {
+        const name = propertyName.slice(2);
+        this.$emit(name.charAt(0).toLowerCase() + name.slice(1), ...args);
+      };
+    });
   }
 };
 
