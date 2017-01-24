@@ -214,6 +214,16 @@ export default class PullHookElement extends BaseElement {
    *   [en]This will be called in the `action` state if it exists. The function will be given a `done` callback as it's first argument.[/en]
    *   [ja][/ja]
    */
+  get onAction() {
+    return this._onAction;
+  }
+
+  set onAction(value) {
+    if (!(value instanceof Function)) {
+      throw new Error('Action must be a function.');
+    }
+    this._onAction = value;
+  }
 
   _finish() {
     this._setState(STATE_ACTION);
