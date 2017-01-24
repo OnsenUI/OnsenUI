@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  import { defaultAPI } from '../internal/mixins/dialogs';
+  import { dialogsAPI } from '../internal/mixins/dialogs';
   import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
 
   export default {
-    mixins: [defaultAPI, deriveEvents, deriveMethods, deriveProperties],
+    mixins: [dialogsAPI, deriveEvents, deriveMethods, deriveProperties],
 
     props: {
       target: {

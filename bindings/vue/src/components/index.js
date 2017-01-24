@@ -39,8 +39,8 @@ export const VOnsPullHook = extend('pull-hook');
 
 
 // Generic Dialogs
-import { defaultAPI as dialogAPI } from '../internal/mixins/dialogs';
+import { dialogsAPI } from '../internal/mixins/dialogs';
 
-export const VOnsDialog = extend('dialog', [dialogAPI]);
-export const VOnsModal = extend('modal', [dialogAPI]);
+export const VOnsDialog = extend('dialog', [dialogsAPI]);
+export const VOnsModal = extend('modal', [dialogsAPI]);
 

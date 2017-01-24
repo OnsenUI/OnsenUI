@@ -1,4 +1,4 @@
-const defaultAPI = {
+const dialogsAPI = {
   props: {
     options: {
       type: Object,
@@ -30,5 +30,5 @@ const defaultAPI = {
   }
 };
 
-export { defaultAPI };
+export { dialogsAPI };
 
