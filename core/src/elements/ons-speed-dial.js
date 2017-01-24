@@ -326,9 +326,10 @@ export default class SpeedDialElement extends BaseElement {
         });
       }
       totalDelay += 50;
+
+      this._itemShown = true;
+      util.triggerElementEvent(this, 'open');
     }
-    this._itemShown = true;
-    util.triggerElementEvent(this, 'open');
 
     const deferred = util.defer();
     setTimeout(deferred.resolve, totalDelay);
@@ -355,9 +356,10 @@ export default class SpeedDialElement extends BaseElement {
         });
       }
       totalDelay += 50;
+
+      this._itemShown = false;
+      util.triggerElementEvent(this, 'close');
     }
-    this._itemShown = false;
-    util.triggerElementEvent(this, 'close');
 
     const deferred = util.defer();
     setTimeout(deferred.resolve, totalDelay);
