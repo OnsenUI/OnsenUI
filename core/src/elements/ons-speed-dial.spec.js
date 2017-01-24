@@ -266,21 +266,23 @@ describe('OnsSpeedDialElement', () => {
   describe('#visible', () => {
     it('returns whether the element is currently shown or not', () => {
       expect(speedDial.visible).to.be.true;
-      speedDial.hide();
-      expect(speedDial.visible).to.be.false;
-      speedDial.show();
-      expect(speedDial.visible).to.be.true;
-      speedDial.style.display = 'none';
-      expect(speedDial.visible).to.be.false;
+      return speedDial.hide().then(() => {
+        expect(speedDial.visible).to.be.false;
+        speedDial.show();
+        expect(speedDial.visible).to.be.true;
+        speedDial.style.display = 'none';
+        expect(speedDial.visible).to.be.false;
+      });
     });
   });
 
   describe('#toggle()', () => {
     it('calls #show() if element is hidden', () => {
       const spy = chai.spy.on(speedDial, 'show');
-      speedDial.hide();
-      speedDial.toggle();
-      expect(spy).to.have.been.called.once;
+      return speedDial.hide().then(() => {
+        speedDial.toggle();
+        expect(spy).to.have.been.called.once;
+      });
     });
 
     it('calls #hide() if element is shown', () => {
