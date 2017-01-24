@@ -175,7 +175,9 @@ export default class SpeedDialElement extends BaseElement {
   }
 
   _onClick(e) {
-    if (!this.disabled && this.visible) {
+    if (this.onClick) {
+      this.onClick.apply(this);
+    } else if (!this.disabled && this.visible) {
       this.toggleItems();
     }
   }
