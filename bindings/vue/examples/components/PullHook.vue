@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-pull-hook
       @action="onAction"
-      v-model="state"
+      @changestate="state = $event.state"
     >
       <span v-show="state === 'initial'">
         Pull to refresh
@@ -37,11 +37,6 @@
     },
 
     methods: {
-      onChangestate(event) {
-        console.log('changestate', event)
-        this.state = event.state;
-      },
-
       onAction(done) {
         setTimeout(() => {
           this.items = [...this.items, this.items.length + 1];

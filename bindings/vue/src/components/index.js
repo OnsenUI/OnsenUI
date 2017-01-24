@@ -1,5 +1,4 @@
 export { default as VOnsInput } from './VOnsInput.vue';
-export { default as VOnsPullHook } from './VOnsPullHook.vue';
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
@@ -36,6 +35,7 @@ export const VOnsRow = extend('row');
 export const VOnsCol = extend('col');
 export const VOnsProgressBar = extend('progress-bar');
 export const VOnsSplitterMask = extend('splitter-mask');
+export const VOnsPullHook = extend('pull-hook');
 
 
 // Generic Dialogs
