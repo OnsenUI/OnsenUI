@@ -1,4 +1,3 @@
-export { default as VOnsInput } from './VOnsInput.vue';
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
@@ -23,6 +22,7 @@ export const VOnsToolbarButton = extend('toolbar-button');
 export const VOnsButton = extend('button');
 export const VOnsIcon = extend('icon');
 export const VOnsSwitch = extend('switch');
+export const VOnsInput = extend('input');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsList = extend('list');
