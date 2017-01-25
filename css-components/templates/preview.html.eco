@@ -3,26 +3,51 @@
   <head>
     <title>Onsen CSS Components</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./onsen-css-components.css">
+    <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">
+    <link rel="stylesheet" href="./onsen-css-components.css" />
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
+    <link ref="stylesheet" href="https://unpkg.com/onsenui/css/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
     <style>
       body {
-        margin: 20px;
-      }
-
-      * {
-        user-select: auto;
+        margin: 0;
+        padding: 0;
+        position: static;
+        background-color: white;
       }
 
       h1 {
-        font-size: 20px;
+        font-size: 15px;
+        font-weight: 400;
+        font-family: Helvetica;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        height: 42px;
+        line-height: 42px;
+        padding: 0;
+        margin: 0 0 10px 0;
+      }
+
+      .components {
+        display: flex;
+        flex-wrap: wrap;
       }
 
       .component-preview {
-
+        display: inline-block;
+        width: 350px;
+        box-sizing: border-box;
+        margin: 0 10px 20px 10px;
       }
 
       .component-preview__title {
+        font-family: Helvetica;
         font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        line-height: 1.4;
+        margin: 8px 0;
       }
 
       .component-preview__markup {
@@ -33,14 +58,20 @@
         line-height: 1.4;
         font-family: Consolas, monospace;
         padding: 2px 8px;
+        max-width: 100%;
+        overflow-x: auto;
+        display: none;
       }
 
       .component-preview__example {
-        width: 320px;
         height: 200px;
         text-align: center;
         position: relative;
         z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
       }
 
       /* dirty fix */
@@ -50,21 +81,23 @@
 
     </style>
   </head>
-  <body>
+  <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
 
-    <h1>Onsen CSS Components</h1>
+    <h1>CSS Components for Onsen UI</h1>
 
-    <% for component in @components: %>
-    <div class="component-preview">
-      <h2 class="component-preview__title" id="<%= component.annotation.name %>"><%= component.annotation.name %> <a href="#<%= component.annotation.name %>">#</a></h2>
+    <div class="components">
+      <% for component in @components: %>
+      <div class="component-preview">
+        <h2 class="component-preview__title" id="<%= component.annotation.name %>"><%= component.annotation.name %></h2>
 
-      <div class="page component-preview__example">
-        <%- component.annotation.markup %>
+        <div class="page component-preview__example">
+          <div style="width: 100%;"><%- component.annotation.markup %></div>
+        </div>
+
+        <pre class="component-preview__markup"><%= component.annotation.markup %></pre>
       </div>
-
-      <pre class="component-preview__markup"><%= component.annotation.markup %></pre>
+      <% end %>
     </div>
-    <% end %>
 
   </body>
 </html>
