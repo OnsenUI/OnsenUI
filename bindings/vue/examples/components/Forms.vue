@@ -7,7 +7,7 @@
           <v-ons-input
             placeholder="Input name"
             float
-            v-model="name"
+            v-ons-model="name"
           >
           </v-ons-input>
         </div>
@@ -23,7 +23,7 @@
       </ons-list-header>
       <ons-list-item>
         <label class="center" for="switch1">
-          Switch asdasd ({{ switchOn ? 'on' : 'off' }})
+          Switch ({{ switchOn ? 'on' : 'off' }})
         </label>
         <div class="right">
           <v-ons-switch
@@ -34,12 +34,13 @@
         </div>
       </ons-list-item>
       <ons-list-item>
-        <div class="center">
-          Disabled switch
-        </div>
+        <label class="center" for="switch2">
+          {{ switchOn ? 'Switch' : 'Disabled switch' }}
+        </label>
         <div class="right">
           <v-ons-switch
             :disabled="!switchOn"
+            input-id="switch2"
           >
           </v-ons-switch>
         </div>
@@ -55,7 +56,7 @@
             type="radio"
             :input-id="'radio-' + $index"
             :value="vegetable"
-            v-model="selectedVegetable"
+            v-ons-model="selectedVegetable"
           >
           </v-ons-input>
         </label>
@@ -78,7 +79,7 @@
             type="checkbox"
             :input-id="'checkbox-' + $index"
             :value="color"
-            v-model="checkedColors"
+            v-ons-model="checkedColors"
           >
           </v-ons-input>
         </label>
@@ -95,7 +96,7 @@
             <ons-icon icon="md-volume-down"></ons-icon>
           </ons-col>
           <ons-col>
-            <v-ons-range @input="onInput($event)" v-model.number="volume" style="width: 100%;"></v-ons-range>
+            <v-ons-range @input="onInput($event)" v-ons-model="volume" style="width: 100%;"></v-ons-range>
           </ons-col>
           <ons-col width="40px" style="text-align: center; line-height: 31px;">
             <ons-icon icon="md-volume-up"></ons-icon>

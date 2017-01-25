@@ -13,8 +13,7 @@
 
       if (['checkbox', 'radio'].includes(this.$el.type)) {
         this._onChange = event => {
-          this.$emit('input', event.target.value);
-          // This is updating all the inputs
+          this.$emit('change', event);
         };
         this.$el.addEventListener('change', this._onChange);
 
