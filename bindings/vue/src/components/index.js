@@ -1,12 +1,11 @@
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
+export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitter } from './VOnsSplitter.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
-export { default as VOnsRange } from './VOnsRange.vue';
-export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
@@ -23,6 +22,7 @@ export const VOnsButton = extend('button');
 export const VOnsIcon = extend('icon');
 export const VOnsSwitch = extend('switch');
 export const VOnsInput = extend('input');
+export const VOnsRange = extend('range');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsList = extend('list');
@@ -35,10 +35,10 @@ export const VOnsProgressBar = extend('progress-bar');
 export const VOnsSplitterMask = extend('splitter-mask');
 export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
-export const VOnsCarousel= extend('carousel', [hasOptions]);
+export const VOnsTab = extend('tab', [VueTabLoader]);
 export const VOnsFab = extend('fab', [fabAPI]);
-export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 export const VOnsDialog = extend('dialog', [dialogAPI]);
 export const VOnsModal = extend('modal', [dialogAPI]);
-export const VOnsTab = extend('tab', [VueTabLoader]);
+export const VOnsCarousel= extend('carousel', [hasOptions]);
+export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 
