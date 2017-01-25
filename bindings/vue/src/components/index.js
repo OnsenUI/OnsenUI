@@ -2,7 +2,6 @@ export { default as VOnsInput } from './VOnsInput.vue';
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
-export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitter } from './VOnsSplitter.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
@@ -12,6 +11,7 @@ export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
+import { VueTabLoader } from '../internal/mixins/pageLoader';
 import { dialogAPI, fabAPI } from '../internal/mixins/api';
 import { clickable, hasOptions } from '../internal/mixins/common';
 
@@ -40,4 +40,5 @@ export const VOnsFab = extend('fab', [fabAPI]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 export const VOnsDialog = extend('dialog', [dialogAPI]);
 export const VOnsModal = extend('modal', [dialogAPI]);
+export const VOnsTab = extend('tab', [VueTabLoader]);
 

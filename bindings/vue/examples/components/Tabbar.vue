@@ -1,14 +1,19 @@
 <template>
   <v-ons-page>
     <v-ons-tabbar @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
-      <v-ons-tab :page="tabs[0].component" :icon="tabs[0].icon" :label="tabs[0].label"></v-ons-tab>
-      <v-ons-tab :page="tabs[1].component" active icon="fa-cogs" label="Settings"></v-ons-tab>
+      <template slot="pages">
+        <home></home>
+        <settings></settings>
+      </template>
+
+      <v-ons-tab :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
+      <v-ons-tab active icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
 </template>
 
 <script>
-  let Home = {
+  let home = {
     template: `
       <v-ons-page>
         Home page
@@ -22,7 +27,7 @@
     }
   };
 
-  let Settings = {
+  let settings = {
     template: `
       <v-ons-page>
         Settings Page
@@ -40,17 +45,14 @@
     data: function() {
       return {
         test: 'testing',
-        tabs: [
-          {
-            component: Home,
-            label: 'Home',
-            icon: 'ion-ios-home-outline'
-          },
-          {
-            component: Settings
-          }
-        ]
+        tab1Label: 'Home',
+        tab1Icon: 'ion-ios-home-outline'
       };
+    },
+
+    components: {
+      home,
+      settings
     },
 
     methods: {

@@ -1,6 +1,11 @@
 <template>
   <ons-tabbar>
-    <slot></slot>
+    <div class="tab-bar__content" ref="contentElement">
+      <slot name="pages"></slot>
+    </div>
+    <div class="tab-bar" ref="tabbarElement">
+      <slot></slot>
+    </div>
   </ons-tabbar>
 </template>
 
@@ -11,3 +16,4 @@
     mixins: [deriveEvents, deriveMethods, deriveProperties]
   };
 </script>
+

@@ -76,4 +76,17 @@ const VuePageLoader = {
   }
 };
 
-export { VuePageLoader };
+const VueTabLoader = {
+  mixins: [VuePageLoader],
+
+  mounted() {
+    if (this.page === undefined) {
+      const refs = this.$parent.$refs;
+      if (refs && refs.contentElement && refs.contentElement) {
+        this.$el.page = refs.contentElement.children[this.$el._findTabIndex()].__vue__;
+      }
+    }
+  }
+};
+
+export { VuePageLoader, VueTabLoader };
