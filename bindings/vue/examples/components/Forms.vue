@@ -117,7 +117,7 @@
         vegetables: ['Tomato', 'Cabbage', 'Cucumber'],
         selectedVegetable: 'Cabbage',
         colors: ['Red', 'Blue', 'Yellow', 'Green'],
-        checkedColors: [],
+        checkedColors: ['Blue', 'Yellow'],
         volume: 25
       };
     },
