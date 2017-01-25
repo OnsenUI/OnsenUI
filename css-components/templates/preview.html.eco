@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">
     <link rel="stylesheet" href="./onsen-css-components.css" />
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
-    <link ref="stylesheet" href="https://unpkg.com/onsenui/css/font_awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
       body {
         margin: 0;
@@ -38,7 +39,7 @@
         display: inline-block;
         width: 350px;
         box-sizing: border-box;
-        margin: 0 10px 20px 10px;
+        margin: 10px 10px 20px 10px;
       }
 
       .component-preview__title {
@@ -157,7 +158,6 @@
           }
         });
       }
-
     </script>
 
   </body>
