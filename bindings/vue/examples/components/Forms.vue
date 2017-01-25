@@ -23,11 +23,11 @@
       </ons-list-header>
       <ons-list-item>
         <label class="center" for="switch1">
-          Switch ({{ switchOn ? 'on' : 'off' }})
+          Switch asdasd ({{ switchOn ? 'on' : 'off' }})
         </label>
         <div class="right">
           <v-ons-switch
-            v-model="switchOn"
+            v-ons-model="switchOn"
             input-id="switch1"
           >
           </v-ons-switch>
