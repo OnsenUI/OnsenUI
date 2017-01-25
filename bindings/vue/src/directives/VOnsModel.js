@@ -24,6 +24,8 @@ export default {
             break;
           case 'checkbox':
             console.log("checkbox");
+            console.log("value", el.value);
+            console.log(el, binding, vnode);
             break;
           default:
             el.value = binding.value;
@@ -36,10 +38,13 @@ export default {
         break;
         
       case 'ons-range':
-        console.log("range");
+        el.value = binding.value;
+        vnode.child.$on('input', event => {
+          if (vnode.context.hasOwnProperty(binding.expression)) {
+            vnode.context[binding.expression] = event.target.value;
+          }
+        });
         break;
-
-      default:
     }
   },
 
@@ -63,12 +68,6 @@ export default {
             break;
         }
         break;
-        
-      case 'ons-range':
-        console.log("update range");
-        break;
-
-      default:
     }
   }
 };

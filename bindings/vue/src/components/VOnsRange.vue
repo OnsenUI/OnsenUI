@@ -12,7 +12,7 @@
 
     mounted() {
       this._onInput = (event) => {
-        this.$emit('input', event.srcElement.value);
+        this.$emit('input', event);
       };
       this.$el.addEventListener('input', this._onInput);
     },

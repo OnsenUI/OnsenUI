@@ -102,7 +102,7 @@
             <ons-icon icon="md-volume-up"></ons-icon>
           </ons-col>
         </ons-row>
-        Volume: {{ volume }} <span id="loud-alert" style="display: none">(careful, that's loud)</span>
+        Volume: {{ volume }} <span id="loud-alert" style="display: none">&nbsp;(careful, that's loud)</span>
       </ons-list-item>
     </ons-list>
   </v-ons-page>
@@ -118,17 +118,14 @@
         selectedVegetable: 'Cabbage',
         colors: ['Red', 'Blue', 'Yellow', 'Green'],
         checkedColors: [],
-        volume: 50
+        volume: 25
       };
     },
 
     methods: {
-      log: function(event) {
-        console.log('qweqwe', event);
-      },
-      onInput(volume) {
+      onInput(event) {
         const elem = document.getElementById("loud-alert");
-        if (volume > 80) {
+        if (event.target.value > 80) {
           elem.style.display = "inline-block";
         }
         else {
