@@ -26,13 +26,11 @@ limitations under the License.
   name: Popover
   class: popover
   markup: |
-    <div class="popover">
-      <div class="popover-mask"></div>
-      <div class="popover popover--bottom" style="bottom:20px;left:50px;">
-        <div class="popover__arrow"></div>
-        <div class="popover__content">
-          <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
-        </div>
+    <div class="popover-mask"></div>
+    <div class="popover popover--bottom" style="display:block;bottom:20px;left:50px;">
+      <div class="popover__arrow"></div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.6;margin-top:40px">Content</div>
       </div>
     </div>
 */
@@ -125,7 +123,7 @@ limitations under the License.
   use: Popover
   markup: |
     <div class="popover-mask"></div>
-    <div class="popover popover--top" style="top:20px;left:50px;">
+    <div class="popover popover--top" style="display:block;top:20px;left:50px;">
       <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
@@ -138,7 +136,7 @@ limitations under the License.
   use: Popover
   markup: |
     <div class="popover-mask"></div>
-    <div class="popover popover--right" style="top:20px;right:20px;">
+    <div class="popover popover--right" style="display:block;top:20px;right:20px;">
       <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
@@ -151,7 +149,7 @@ limitations under the License.
   use: Popover
   markup: |
     <div class="popover-mask"></div>
-    <div class="popover popover--left" style="top:20px;left:20px;">
+    <div class="popover popover--left" style="display:block;top:20px;left:20px;">
       <div class="popover__arrow"></div>
       <div class="popover__content">
         <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
