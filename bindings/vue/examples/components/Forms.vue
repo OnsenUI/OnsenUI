@@ -56,7 +56,7 @@
             type="radio"
             :input-id="'radio-' + $index"
             :value="vegetable"
-            v-ons-model="selectedVegetable"
+            v-ons-model=" selectedVegetable"
           >
           </v-ons-input>
         </label>
@@ -96,7 +96,7 @@
             <ons-icon icon="md-volume-down"></ons-icon>
           </ons-col>
           <ons-col>
-            <v-ons-range @input="onInput($event)" v-ons-model="volume" style="width: 100%;"></v-ons-range>
+            <v-ons-range @input="onInput($event)" v-ons-model.number="volume" style="width: 100%;"></v-ons-range>
           </ons-col>
           <ons-col width="40px" style="text-align: center; line-height: 31px;">
             <ons-icon icon="md-volume-up"></ons-icon>
