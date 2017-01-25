@@ -18,7 +18,7 @@
         this.$el.addEventListener('change', this._onChange);
 
       } else {
-        this._onInput = event => this.$emit('input', event.target.value);
+        this._onInput = event => this.$emit('input', event);
         this.$el.addEventListener('input', this._onInput);
       }
     }

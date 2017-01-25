@@ -26,14 +26,8 @@ export default {
             console.log("checkbox");
             break;
           default:
-            //regular text input
-            console.log("text");
-            console.log("value", el.value);
-            console.log(el, binding, vnode);
-            if (el.value === binding.value) {
-              el.checked = true;
-            }
-            vnode.child.$on('change', event => {
+            el.value = binding.value;
+            vnode.child.$on('input', event => {
               if (vnode.context.hasOwnProperty(binding.expression)) {
                 vnode.context[binding.expression] = event.target.value;
               }
