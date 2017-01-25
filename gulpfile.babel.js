@@ -513,7 +513,7 @@ gulp.task('build-docs', () => {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', function(done) {
+gulp.task('test', ['prepare'], function(done) {
   return runSequence('unit-test', done);
 });
 
