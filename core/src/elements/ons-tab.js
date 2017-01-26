@@ -320,9 +320,13 @@ export default class TabElement extends BaseElement {
   }
 
   _onClick() {
-    const tabbar = this._findTabbarElement();
-    if (tabbar) {
-      tabbar.setActiveTab(this._findTabIndex());
+    if (this.onClick instanceof Function) {
+      this.onClick();
+    } else {
+      const tabbar = this._findTabbarElement();
+      if (tabbar) {
+        tabbar.setActiveTab(this._findTabIndex());
+      }
     }
   }
 
