@@ -353,16 +353,15 @@ gulp.task('prepare', ['html2js'], () =>  {
 
     // onsen-css-components
     gulp.src([
-      'css-components/build/*.css',
+      'build/css/**/*',
     ])
-      .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // less files
     gulp.src([
-      'css-components/src/**/*'
+      'css-components/**/*'
     ])
-      .pipe(gulp.dest('build/less/')),
+      .pipe(gulp.dest('build/css-components-src/')),
 
 
     // onsenui.css
@@ -481,8 +480,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
 
   const watched = [
     'bindings/angular1/*/*',
-    'core/css/*.css',
-    'css-components/src/build/*.css'
+    'core/css/*.css'
   ];
 
   if (CORDOVA_APP) {
