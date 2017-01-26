@@ -51,5 +51,13 @@ const hasOptions = {
   }
 };
 
-export { visibilityToggle, clickable, hasOptions };
+const destroyable = {
+  beforeDestroy() {
+    if (this.$el._destroy instanceof Function) {
+      this.$el._destroy();
+    }
+  }
+};
+
+export { visibilityToggle, clickable, hasOptions, destroyable };
 

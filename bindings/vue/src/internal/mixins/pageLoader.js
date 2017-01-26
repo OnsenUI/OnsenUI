@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { PageLoader } from 'onsenui';
+import { destroyable } from './common';
 import { hyphenate } from '../util';
 
 const _getParentVM = element => {
@@ -35,6 +36,8 @@ const _inheritProps = {
 };
 
 const VuePageLoader = {
+  mixins: [destroyable],
+
   props: {
     page: {
       type: Object
@@ -42,7 +45,7 @@ const VuePageLoader = {
   },
 
   mounted() {
-    this.$el.page = this.page;
+    this.$el.page = this.page || this.$el.page;
 
     this.$el.pageLoader = new PageLoader(
       ({page, parent}, done) => {

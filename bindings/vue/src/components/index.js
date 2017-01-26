@@ -11,11 +11,10 @@ export { default as VOnsSplitterContent } from './VOnsSplitterContent.vue';
 import VGeneric from './VGeneric.vue';
 import { VueTabLoader } from '../internal/mixins/pageLoader';
 import { dialogAPI, fabAPI } from '../internal/mixins/api';
-import { clickable, hasOptions } from '../internal/mixins/common';
+import { clickable, hasOptions, destroyable } from '../internal/mixins/common';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
-export const VOnsPage = extend('page');
 export const VOnsToolbar = extend('toolbar');
 export const VOnsToolbarButton = extend('toolbar-button');
 export const VOnsButton = extend('button');
@@ -36,6 +35,7 @@ export const VOnsProgressCircular = extend('progress-circular');
 export const VOnsSplitterMask = extend('splitter-mask');
 export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
+export const VOnsPage = extend('page', [destroyable]);
 export const VOnsTab = extend('tab', [VueTabLoader, clickable]);
 export const VOnsFab = extend('fab', [fabAPI]);
 export const VOnsDialog = extend('dialog', [dialogAPI]);
