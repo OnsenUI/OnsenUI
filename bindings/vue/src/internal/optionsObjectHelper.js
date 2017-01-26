@@ -15,6 +15,7 @@ const _blackListedProperties = [
   'page',
   'pageLoader',
   'visible',
+  'options',
 ];
 
 /**
