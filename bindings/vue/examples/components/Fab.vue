@@ -22,7 +22,7 @@
       @open="log('open!!')"
       @close="log('close!!')"
     >
-      <v-ons-fab>
+      <v-ons-fab :visible="speedDialVisible">
         <v-ons-icon icon="md-share"></v-ons-icon>
       </v-ons-fab>
       <v-ons-speed-dial-item

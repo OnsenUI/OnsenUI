@@ -1,7 +1,8 @@
 const visibilityToggle = {
   props: {
     visible: {
-      type: Boolean
+      type: Boolean,
+      default: undefined // Avoid casting to false
     }
   },
 
