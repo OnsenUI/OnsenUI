@@ -49,6 +49,10 @@ const VuePageLoader = {
 
     this.$el.pageLoader = new PageLoader(
       ({page, parent}, done) => {
+        if (!page) {
+          throw new Error(`PageLoader: Expected a VOnsPage Component but got "${page}" for "${parent.tagName.toLowerCase()}"`);
+        }
+
         if (page.hasOwnProperty('_isVue')) {
           page.$parent = page.$parent || _getParentVM(parent);
         } else {
