@@ -1,15 +1,10 @@
-import OnsNavigator from './OnsNavigator.vue';
-import OnsBackButton from './OnsBackButton.vue';
-import OnsTabbar from './OnsTabbar.vue';
-import OnsSwitch from './OnsSwitch.vue';
-import OnsPullHook from './OnsPullHook.vue';
-import OnsSplitterSide from './OnsSplitterSide.vue';
-
-export {
-  OnsNavigator,
-  OnsBackButton,
-  OnsTabbar,
-  OnsSwitch,
-  OnsPullHook,
-  OnsSplitterSide
-};
+export { default as VOnsButton } from './VOnsButton.vue';
+export { default as VOnsCarousel } from './VOnsCarousel.vue';
+export { default as VOnsCarouselItem } from './VOnsCarouselItem.vue';
+export { default as VOnsIcon } from './VOnsIcon.vue';
+export { default as VOnsInput } from './VOnsInput.vue';
+export { default as VOnsRange } from './VOnsRange.vue';
+export { default as VOnsSwitch } from './VOnsSwitch.vue';
+export { default as VOnsTabbar } from './VOnsTabbar.vue';
+export { default as VOnsTab } from './VOnsTab.vue';
+export { default as VOnsNavigator } from './VOnsNavigator.vue';

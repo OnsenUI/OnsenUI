@@ -585,6 +585,10 @@ export default class TabbarElement extends BaseElement {
     return TabbarAnimator;
   }
 
+  static get events() {
+    return ['prechange', 'postchange', 'reactive'];
+  }
+
   /**
    * @param {String} name
    * @param {Function} Animator

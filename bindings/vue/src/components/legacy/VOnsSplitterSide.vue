@@ -54,20 +54,6 @@
       }
     },
 
-    mounted() {
-      this.$el.addEventListener('preopen', this.onPreopen);
-      this.$el.addEventListener('postopen', this.onPostopen);
-      this.$el.addEventListener('preclose', this.onPreclose);
-      this.$el.addEventListener('postclose', this.onPostclose);
-    },
-
-    beforeDestroy() {
-      this.$el.removeEventListener('preopen', this.onPreopen);
-      this.$el.removeEventListener('postopen', this.onPostopen);
-      this.$el.removeEventListener('preclose', this.onPreclose);
-      this.$el.removeEventListener('postclose', this.onPostclose);
-    },
-
     methods: {
       onPreopen(ev) {
         this.$emit('preopen', ev);
@@ -84,6 +70,48 @@
       onPostclose(ev) {
         this.$emit('postclose', ev);
       }
-    }
+    },
+
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    // created() {
+    // },
+
+    // beforeMount() {
+    // },
+
+    mounted() {
+      this.$el.addEventListener('preopen', this.onPreopen);
+      this.$el.addEventListener('postopen', this.onPostopen);
+      this.$el.addEventListener('preclose', this.onPreclose);
+      this.$el.addEventListener('postclose', this.onPostclose);
+    },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    beforeDestroy() {
+      this.$el.removeEventListener('preopen', this.onPreopen);
+      this.$el.removeEventListener('postopen', this.onPostopen);
+      this.$el.removeEventListener('preclose', this.onPreclose);
+      this.$el.removeEventListener('postclose', this.onPostclose);
+    },
+
+    // destroyed() {
+    // },
   };
 </script>

@@ -307,6 +307,10 @@ export default class SwitchElement extends BaseElement {
     return ['modifier', 'input-id', 'checked', 'disabled', 'class'];
   }
 
+  static get events() {
+    return ['change'];
+  }
+
   attributeChangedCallback(name, last, current) {
     contentReady(this, () => {
       switch(name) {

@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import util from '../util.js';
+
 export default class ModifierUtil {
   /**
    * @param {String} last
@@ -68,10 +70,9 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static applyDiffToElement(diff, element, scheme) {
-    const matches = (e, s) => (e.matches || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector).call(e, s);
     for (const selector in scheme) {
       if (scheme.hasOwnProperty(selector)) {
-        const targetElements = !selector || matches(element, selector) ? [element] : element.querySelectorAll(selector);
+        const targetElements = !selector || util.match(element, selector) ? [element] : element.querySelectorAll(selector);
         for (let i = 0; i < targetElements.length; i++) {
           ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
         }

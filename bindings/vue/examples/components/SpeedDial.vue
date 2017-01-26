@@ -1,14 +1,5 @@
 <template>
   <ons-page>
-    <ons-toolbar>
-      <div class="center">
-        Speed dial
-      </div>
-      <div class="left">
-        <ons-back-button label="Home" @click="$pop()"></ons-back-button>
-      </div>
-    </ons-toolbar>
-
     <ons-speed-dial position="bottom right">
       <ons-fab>
         <ons-icon icon="md-share"></ons-icon>
@@ -34,13 +25,6 @@
 </template>
 
 <script>
-  import {
-    OnsBackButton
-  } from 'vue-onsenui';
-
 	export default {
-    components: {
-      OnsBackButton
-    }
 	};
 </script>
