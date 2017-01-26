@@ -128,6 +128,10 @@ $ npm install angular2-onsenui
 Clone this repository and run the following commands to build the project:
 
 ```bash
+$ cd css-components
+$ yarn
+$ gulp build
+$ cd ..
 $ yarn
 $ gulp build
 ```
