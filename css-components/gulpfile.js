@@ -12,7 +12,12 @@ const ancss = require('ancss');
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', () => {
+gulp.task('build', ['generate-preview']);
+
+////////////////////////////////////////
+// less
+////////////////////////////////////////
+gulp.task('less', () => {
   return gulp.src('src/onsen-css-components.less')
     .pipe($.plumber())
     .pipe($.less())
@@ -23,7 +28,7 @@ gulp.task('build', () => {
 ////////////////////////////////////////
 // generate-preview
 ////////////////////////////////////////
-gulp.task('generate-preview', ['build'], () => {
+gulp.task('generate-preview', ['less'], () => {
   const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
   const css = fs.readFileSync(__dirname + '/build/onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^!/)});
@@ -33,8 +38,8 @@ gulp.task('generate-preview', ['build'], () => {
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['generate-preview'], done => {
-  gulp.watch(['src/**/*.less', 'templates/preview.html.eco'], ['generate-preview']);
+gulp.task('serve', ['build'], done => {
+  gulp.watch(['src/**/*.less', 'templates/preview.html.eco'], ['build']);
   gulp.watch('build/preview.html').on('change', browserSync.reload);
 
   browserSync.init({
