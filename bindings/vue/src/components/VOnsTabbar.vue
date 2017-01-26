@@ -11,9 +11,10 @@
 
 <script>
   import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
+  import { hasOptions } from '../internal/mixins/common';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties]
+    mixins: [deriveEvents, deriveMethods, deriveProperties, hasOptions]
   };
 </script>
 

@@ -1,13 +1,18 @@
 <template>
   <v-ons-page>
-    <v-ons-tabbar @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
+    <v-ons-toolbar>
+      <div class="left"><ons-toolbar-button @click="tabbarIndex--">Index--</ons-toolbar-button></div>
+      <div class="center">Tabbar Index: {{tabbarIndex}}</div>
+      <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
+    </v-ons-toolbar>
+    <v-ons-tabbar v-ons-index="tabbarIndex" @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
       <template slot="pages">
         <home></home>
         <settings></settings>
       </template>
 
       <v-ons-tab :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
-      <v-ons-tab active icon="fa-cogs" label="Settings"></v-ons-tab>
+      <v-ons-tab icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
 </template>
@@ -46,7 +51,8 @@
       return {
         test: 'testing',
         tab1Label: 'Home',
-        tab1Icon: 'ion-ios-home-outline'
+        tab1Icon: 'ion-ios-home-outline',
+        tabbarIndex: 0
       };
     },
 
