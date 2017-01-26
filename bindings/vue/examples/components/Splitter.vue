@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
-        :page="splitterSide"
+        :isOpen="splitterOpen"
         :side="state.side"
         :collapse="state.collapse"
         :swipeable="state.swipeable"
@@ -13,13 +13,15 @@
         @postclose="log('postclose!!')"
         @modechange="log('modechange!!')"
       >
+        <page-side></page-side>
       </v-ons-splitter-side>
       <v-ons-splitter-content
-        :page="splitterContent"
         :side-state="state"
         :whatever="'testing'"
         :update="update"
+        :goToPageContent2="goToPageContent2"
         >
+        <div :is="currentContent" :side-state="state" :update="update" :whatever="'testing'" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
       </v-ons-splitter-content>
     </v-ons-splitter>
   </v-ons-page>
@@ -28,7 +30,7 @@
 <script>
   const log = (...args) => console.log(...args);
 
-  let splitterSide = {
+  let pageSide = {
     template: `
       <v-ons-page>
         <v-ons-list>
@@ -46,7 +48,7 @@
     }
   };
 
-  let splitterContent = {
+  let pageContent = {
     template: `
      <v-ons-page :jiooo="whatever">
       <v-ons-toolbar>
@@ -97,7 +99,7 @@
         </v-ons-list-item>
         <v-ons-list-item>
           <div class="left">
-            <v-ons-button @click="update">Update</v-ons-button>
+            <v-ons-button @click="update(true)">Update</v-ons-button>
           </div>
           <div class="center">
             Whatever
@@ -105,7 +107,7 @@
           <div class="right">
             <v-ons-switch
               :checked="sideState.open"
-              @change="sideState.open = $event.target.checked"
+              @change="update($event.target.checked)"
             >
             </v-ons-switch>
           </div>
@@ -115,20 +117,46 @@
             {{whatever}}; {{sideState}}
           </div>
         </v-ons-list-item>
+        <v-ons-list-item modifier="chevron" tappable @click="goToPageContent2">
+          <div class="center">
+            Go to pageContent2 by changing splitter children
+          </div>
+        </v-ons-list-item>
       </v-ons-list>
     </v-ons-page>
     `,
     methods: {
       log
     },
-    props: ['whatever', 'sideState', 'update']
+    props: ['whatever', 'sideState', 'update', 'goToPageContent2']
   };
+
+  let pageContent2 = {
+    template: `
+      <v-ons-page>
+        <v-ons-toolbar>
+          <div class="center">Another Page</div>
+        </v-ons-toolbar>
+        <p>After going back to the first page, the original VNode will be replaced with a normal VOnsPage due to the 'load' method. I.e. it cannot show this page anymore without refreshing.</p>
+        <br>
+        <v-ons-button @click="splitter.content.load(pageContent)">splitter.content.load(pageContent)</v-ons-button>
+      </v-ons-page>
+    `,
+    methods: {
+      log: function() {
+        console.log(...arguments);
+      }
+    },
+    props: ['pageContent']
+  };
+
 
 	export default {
     data: () => (
       {
-        splitterContent,
-        splitterSide,
+        splitterOpen: false,
+        currentContent: 'pageContent',
+        pageContent,
         state: {
           side: 'left',
           width: '200px',
@@ -139,9 +167,20 @@
       }
     ),
 
+    components: {
+      pageContent,
+      pageContent2,
+      pageSide
+    },
+
     methods: {
-      update: function() {
-        this.state.open = true;
+      update: function(value) {
+        this.splitterOpen = '';
+        setTimeout(() => this.splitterOpen = value, 100)
+        this.state.open = value;
+      },
+      goToPageContent2: function() {
+        this.currentContent = 'pageContent2';
       },
       log
     }
