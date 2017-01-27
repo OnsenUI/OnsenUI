@@ -1,9 +1,10 @@
 const _addHandler = (binding, vnode, eventName) => {
-  vnode.child.$on('post' + eventName, event => {
-    if (vnode.context.hasOwnProperty(binding.expression)) {
-      vnode.context[binding.expression] = eventName === 'open';
-    }
-  });
+  const modelKey = binding.expression.trim();
+  if (vnode.context.hasOwnProperty(modelKey)) {
+    vnode.child.$on('post' + eventName, event => {
+      vnode.context[modelKey] = eventName === 'open';
+    });
+  }
 };
 const _updateState = (el, binding, vnode) => {
   if (binding.value !== el.isOpen) {
@@ -11,10 +12,11 @@ const _updateState = (el, binding, vnode) => {
   }
 };
 
+// VOnsOpen directive
 export default {
   bind(el, binding, vnode) {
-    const tag = el.tagName.slice(4).toLowerCase();
-    if (tag !== 'splitter-side') {
+    const tag = el.tagName.toLowerCase();
+    if (tag !== 'ons-splitter-side') {
       throw new Error('"v-ons-open" directive cannot be used with "' + tag + '" element.');
     }
 

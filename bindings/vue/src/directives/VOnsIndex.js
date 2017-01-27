@@ -9,21 +9,22 @@ const _setInitialIndex = (el, value) => {
   }
 };
 
+// VOnsIndex directive
 export default {
   bind(el, binding, vnode) {
-    const tag = el.tagName.slice(4).toLowerCase();
-    _isTabbar = tag === 'tabbar';
-    if (!['tabbar', 'carousel'].includes(tag)) {
+    const tag = el.tagName.toLowerCase();
+    _isTabbar = tag === 'ons-tabbar';
+    if (!['ons-tabbar', 'ons-carousel'].includes(tag)) {
       throw new Error('"v-ons-index" directive cannot be used with "' + tag + '" element.');
     }
 
     _setInitialIndex(el, binding.value);
 
-    vnode.child.$on('postchange', event => {
-      if (vnode.context.hasOwnProperty(binding.expression)) {
+    if (vnode.context.hasOwnProperty(binding.expression)) {
+      vnode.child.$on('postchange', event => {
         vnode.context[binding.expression] = _getIndex(event);
-      }
-    });
+      });
+    }
   },
 
   update(el, binding, vnode) {
