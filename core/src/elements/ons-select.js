@@ -52,11 +52,12 @@ const INPUT_ATTRIBUTES = [
  *     Select component. If you want to place a select on a page, use `<ons-select>`.
  *
  *     The component will automatically display as a Material Design select on Android.
+ * 
+ *     Most attributes that can be used for a normal `<select>` element can also be used on the `<ons-select>` element.
  *   [/en]
  *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、コンポーネントを使用します。[/ja]
  * @codepen hLayx
  * @tutorial vanilla/Reference/select
- * @guide Select [en]Guide for `<ons-select>`[/en][ja]<ons-select>の使い方[/ja]
  * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
@@ -70,16 +71,62 @@ const INPUT_ATTRIBUTES = [
 export default class SelectElement extends BaseElement {
 
   /**
+   * @attribute autofocus
+   * @type {Boolean}
+   * @default false
+   * @description
+   *  [en]Element automatically gains focus on page load.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @attribute disabled
+   * @type {Boolean}
+   * @default false
+   * @description
+   *   [en]Specify if select input should be disabled.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
+
+  /**
+   * @attribute form
+   * @type {String}
+   * @description
+   *   [en]Associate a select element to an existing form on the page, even if not nested.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
+
+  /**
    * @attribute multiple
+   * @type {Boolean}
+   * @default false
    * @description
    *  [en]If this attribute is defined, multiple options can be selected at once.[/en]
    *  [ja][/ja]
    */
 
   /**
-   * @attribute disabled
+   * @attribute name
+   * @type {String}
    * @description
-   *   [en]Specify if select input should be disabled.[/en]
+   *   [en]Name the select element, useful for instance if it is part of a form.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
+
+  /**
+   * @attribute required
+   * @type {Boolean}
+   * @description
+   *   [en]Make the select input required for submitting the form it is part of.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
+
+  /**
+   * @attribute size
+   * @type {Number}
+   * @default 1
+   * @description
+   *   [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them.[/en]
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
@@ -125,6 +172,33 @@ export default class SelectElement extends BaseElement {
     return this.querySelector('select');
   }
 
+  /**
+   * @property length
+   * @description
+   *   [en]Number of options in the select box.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property options
+   * @description
+   *   [en]Several options for handling the select DOM object.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property selectedIndex
+   * @description
+   *   [en]Index of the currently selected option.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property value
+   * @description
+   *   [en]Value of the currently selected option.[/en]
+   *   [ja][/ja]
+   */
   _compile() {
     autoStyle.prepare(this);
 
