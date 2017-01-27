@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
-        :isOpen="splitterOpen"
+        v-ons-open="splitterOpen"
         :side="state.side"
         :collapse="state.collapse"
         :swipeable="state.swipeable"
@@ -13,15 +13,15 @@
         @postclose="log('postclose!!')"
         @modechange="log('modechange!!')"
       >
-        <page-side></page-side>
+        <page-side :toggle-menu="toggleMenu"></page-side>
       </v-ons-splitter-side>
       <v-ons-splitter-content
+        :is-open="splitterOpen"
         :side-state="state"
-        :whatever="'testing'"
-        :update="update"
+        :toggle-menu="toggleMenu"
         :goToPageContent2="goToPageContent2"
         >
-        <div :is="currentContent" :side-state="state" :update="update" :whatever="'testing'" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
+        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
       </v-ons-splitter-content>
     </v-ons-splitter>
   </v-ons-page>
@@ -36,13 +36,14 @@
         <v-ons-list>
           <v-ons-list-item
             v-for="item in [1, 2, 3, 4]"
-            @click="splitter.side.close()"
+            @click="toggleMenu"
             tappable>
             Menu item {{ item }}
           </v-ons-list-item>
         </v-ons-list>
       </v-ons-page>
     `,
+    props: ['isOpen', 'toggleMenu'],
     methods: {
       log
     }
@@ -50,10 +51,10 @@
 
   let pageContent = {
     template: `
-     <v-ons-page :jiooo="whatever">
+     <v-ons-page>
       <v-ons-toolbar>
         <div class="left">
-          <v-ons-toolbar-button @click="splitter.side.toggle()"><v-ons-icon icon="md-menu"></v-ons-icon></v-ons-toolbar-button>
+          <v-ons-toolbar-button @click="toggleMenu()"><v-ons-icon icon="md-menu"></v-ons-icon></v-ons-toolbar-button>
         </div>
         <div class="center">Side menu</div>
       </v-ons-toolbar>
@@ -98,23 +99,8 @@
           </div>
         </v-ons-list-item>
         <v-ons-list-item>
-          <div class="left">
-            <v-ons-button @click="update(true)">Update</v-ons-button>
-          </div>
           <div class="center">
-            Whatever
-          </div>
-          <div class="right">
-            <v-ons-switch
-              :checked="sideState.open"
-              @change="update($event.target.checked)"
-            >
-            </v-ons-switch>
-          </div>
-        </v-ons-list-item>
-        <v-ons-list-item>
-          <div class="center">
-            {{whatever}}; {{sideState}}
+           State: {{sideState}} ; Is Open: {{isOpen}}
           </div>
         </v-ons-list-item>
         <v-ons-list-item modifier="chevron" tappable @click="goToPageContent2">
@@ -128,7 +114,7 @@
     methods: {
       log
     },
-    props: ['whatever', 'sideState', 'update', 'goToPageContent2']
+    props: ['isOpen', 'toggleMenu', 'sideState', 'goToPageContent2']
   };
 
   let pageContent2 = {
@@ -161,8 +147,7 @@
           side: 'left',
           width: '200px',
           collapse: '',
-          swipeable: true,
-          open: false
+          swipeable: true
         }
       }
     ),
@@ -174,10 +159,8 @@
     },
 
     methods: {
-      update: function(value) {
-        this.splitterOpen = '';
-        setTimeout(() => this.splitterOpen = value, 100)
-        this.state.open = value;
+      toggleMenu: function() {
+        this.splitterOpen = !this.splitterOpen;
       },
       goToPageContent2: function() {
         this.currentContent = 'pageContent2';

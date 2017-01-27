@@ -3,7 +3,6 @@ export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
-export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
@@ -41,5 +40,6 @@ export const VOnsModal = extend('modal', [dialogAPI]);
 export const VOnsTab = extend('tab', [VueTabLoader, clickable]);
 export const VOnsSplitter = extend('splitter', [destroyable]);
 export const VOnsSplitterContent = extend('splitter-content', [VuePageLoader, destroyable]);
+export const VOnsSplitterSide = extend('splitter-side', [VuePageLoader, destroyable]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 
