@@ -1,7 +1,9 @@
 <template>
   <v-ons-page>
     <ons-list>
-      <ons-list-header>Test input</ons-list-header>
+      <ons-list-header>
+        Test input - <button @click="modify('input')">Modify JS</button>
+      </ons-list-header>
       <ons-list-item>
         <div class="center">
           <v-ons-input
@@ -19,7 +21,7 @@
       </ons-list-item>
 
       <ons-list-header>
-        Switches
+        Switches - <button @click="modify('switch')">Modify JS</button>
       </ons-list-header>
       <ons-list-item>
         <label class="center" for="switch1">
@@ -35,7 +37,7 @@
       </ons-list-item>
       <ons-list-item>
         <label class="center" for="switch2">
-          {{ switchOn ? 'Switch' : 'Disabled switch' }}
+          {{ switchOn ? 'Enabled switch' : 'Disabled switch' }}
         </label>
         <div class="right">
           <v-ons-switch
@@ -46,7 +48,9 @@
         </div>
       </ons-list-item>
 
-      <ons-list-header>Radio buttons</ons-list-header>
+      <ons-list-header>
+        Radio buttons - <button @click="modify('radio')">Modify JS</button>
+      </ons-list-header>
       <ons-list-item
         v-for="(vegetable, $index) in vegetables"
         tappable
@@ -70,7 +74,9 @@
         </div>
       </ons-list-item>
 
-      <ons-list-header>Checkboxes - {{checkedColors}}</ons-list-header>
+      <ons-list-header>
+        Checkboxes - {{checkedColors}} - <button @click="modify('checkbox')">Modify JS</button>
+      </ons-list-header>
       <ons-list-item
         v-for="(color, $index) in colors"
       >
@@ -88,7 +94,9 @@
         </label>
       </ons-list-item>
 
-      <ons-list-header>Range</ons-list-header>
+      <ons-list-header>
+        Range - <button @click="modify('range')">Modify JS</button>
+      </ons-list-header>
       <ons-list-item>
         Adjust the volume:
         <ons-row>
@@ -96,13 +104,13 @@
             <ons-icon icon="md-volume-down"></ons-icon>
           </ons-col>
           <ons-col>
-            <v-ons-range @input="onInput($event)" v-ons-model.number="volume" style="width: 100%;"></v-ons-range>
+            <v-ons-range v-ons-model.number="volume" style="width: 100%;"></v-ons-range>
           </ons-col>
           <ons-col width="40px" style="text-align: center; line-height: 31px;">
             <ons-icon icon="md-volume-up"></ons-icon>
           </ons-col>
         </ons-row>
-        Volume: {{ volume }} <span id="loud-alert" style="display: none">&nbsp;(careful, that's loud)</span>
+        Volume: {{ volume }} <span v-show="volume > 80">&nbsp;(careful, that's loud)</span>
       </ons-list-item>
     </ons-list>
   </v-ons-page>
@@ -123,13 +131,23 @@
     },
 
     methods: {
-      onInput(event) {
-        const elem = document.getElementById("loud-alert");
-        if (event.target.value > 80) {
-          elem.style.display = "inline-block";
-        }
-        else {
-          elem.style.display = "none";
+      modify: function(type) {
+        switch (type) {
+          case 'input':
+            this.name += ' Rambo';
+            break;
+          case 'switch':
+            this.switchOn = !this.switchOn;
+            break;
+          case 'radio':
+            this.selectedVegetable = 'Tomato';
+            break;
+          case 'checkbox':
+            this.checkedColors = ['Blue', 'Red'];
+            break;
+          case 'range':
+            this.volume = (this.volume + 20) % 100;
+            break;
         }
       }
     }
