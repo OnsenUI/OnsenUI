@@ -1,124 +1,102 @@
+const _formatOutput = (modifiers = {}, output) => {
+  if (Object.hasOwnProperty.call(modifiers, 'number')) {
+    return Number(output);
+  }
+  if (Object.hasOwnProperty.call(modifiers, 'trim')) {
+    return output.trim();
+  }
+  return output;
+};
+const _bindOn = (eventName, modelKey, vnode, handler) => {
+  if (vnode.context.hasOwnProperty(modelKey)) {
+    vnode.child.$on(eventName, handler);
+  }
+};
+const _bindSimpleInputOn = (eventName, modelKey, vnode, propName) => {
+  _bindOn(eventName, modelKey, vnode, event => {
+    vnode.context[modelKey] = event.target[propName];
+  });
+};
+const _bindModifierInputOn = (eventName, modelKey, vnode, modifiers) => {
+  _bindOn(eventName, modelKey, vnode, event => {
+    vnode.context[modelKey] = _formatOutput(modifiers, event.target.value);
+  });
+};
+const _bindArrayInputOn = (eventName, modelKey, vnode) => {
+  _bindOn(eventName, modelKey, vnode, event => {
+    if (vnode.context[modelKey].includes(event.target.value)) {
+      !event.target.checked && vnode.context[modelKey].splice(vnode.context[modelKey].indexOf(event.target.value), 1);
+    } else {
+      event.target.checked && vnode.context[modelKey].push(event.target.value);
+    }
+  });
+};
+
+// VOnsModel directive
 export default {
   bind(el, binding, vnode) {
-    let modelKey = binding.expression.trim();
-    let formatOutput = function(modifiers, output) {
-      if (Object.keys(modifiers).length === 0) {
-        return output;
-      }
-      if (modifiers.hasOwnProperty('number')) {
-        output = Number(output);
-      }
-      if (modifiers.hasOwnProperty('trim')) {
-        output = output.trim();
-      }
-      return output;
-    }
+    const modelKey = binding.expression.trim();
+    const tag = el.tagName.toLowerCase();
 
-    switch (vnode.elm.localName) {
-
+    switch (tag) {
       case 'ons-switch':
         el.checked = binding.value;
-        vnode.child.$on('change', event => {
-          if (vnode.context.hasOwnProperty(modelKey)) {
-            vnode.context[modelKey] = event.target.checked;
-          }
-        });
+        _bindSimpleInputOn('change', modelKey, vnode, 'checked');
+        break;
+
+      case 'ons-range':
+        el.value = binding.value;
+        _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', modelKey, vnode, binding.modifiers);
         break;
 
       case 'ons-input':
         switch (el.type) {
-
           case 'radio':
-            if (el.value === binding.value) {
-              el.checked = true;
-            }
-            vnode.child.$on('change', event => {
-              if (vnode.context.hasOwnProperty(modelKey)) {
-                vnode.context[modelKey] = event.target.value;
-              }
-            });
+            el.checked = el.value === binding.value;
+            _bindSimpleInputOn('change', modelKey, vnode, 'value');
             break;
 
           case 'checkbox':
-            if (binding.value.includes(el.value)) {
-              el.checked = true;
-            }
-            vnode.child.$on('change', event => {
-              if (vnode.context.hasOwnProperty(modelKey)) {
-                if (vnode.context[modelKey].includes(event.target.value)) {
-                  vnode.context[modelKey].splice(vnode.context[modelKey].indexOf(event.target.value), 1);
-                }
-                else {
-                  vnode.context[modelKey].push(event.target.value);
-                }
-              }
-            });
+            el.checked = binding.value.includes(el.value);
+            _bindArrayInputOn('change', modelKey, vnode);
             break;
 
           default:
             el.value = binding.value;
-            if (Object.keys(binding.modifiers).length > 0 && binding.modifiers.hasOwnProperty('lazy')) {
-              vnode.child.$on('change', event => {
-                if (vnode.context.hasOwnProperty(modelKey)) {
-                  vnode.context[modelKey] = formatOutput(binding.modifiers, event.target.value);
-                }
-              });
-            }
-            else {
-              vnode.child.$on('input', event => {
-                if (vnode.context.hasOwnProperty(modelKey)) {
-                  vnode.context[modelKey] = formatOutput(binding.modifiers, event.target.value);
-                }
-              });
-            }
+            _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', modelKey, vnode, binding.modifiers);
         }
         break;
-        
-      case 'ons-range':
-        el.value = binding.value;
-        if (Object.keys(binding.modifiers).length > 0 && binding.modifiers.hasOwnProperty('lazy')) {
-          vnode.child.$on('change', event => {
-            if (vnode.context.hasOwnProperty(modelKey)) {
-              vnode.context[modelKey] = formatOutput(binding.modifiers, event.target.value);
-            }
-          });
-        }
-        else {
-          vnode.child.$on('input', event => {
-            if (vnode.context.hasOwnProperty(modelKey)) {
-              vnode.context[modelKey] = formatOutput(binding.modifiers, event.target.value);
-            }
-          });
-        }
-        break;
+
+      default:
+        throw new Error('"v-ons-model" directive cannot be used with "' + tag + '" element.');
     }
   },
 
   update(el, binding, vnode) {
-    let modelKey = binding.expression.trim();
+    const modelKey = binding.expression.trim();
+    const tag = el.tagName.toLowerCase();
 
-    switch (vnode.elm.localName) {
-
+    switch (tag) {
       case 'ons-switch':
-        if (binding.value !== el.checked) {
-          el.checked = binding.value;
-        }
+        el.checked = binding.value;
+        break;
+
+      case 'ons-range':
+        el.value = binding.value;
         break;
 
       case 'ons-input':
         switch (el.type) {
-
           case 'radio':
-            if (vnode.context.hasOwnProperty(modelKey) && vnode.context[modelKey] !== el.value) {
-              el.checked = false;
-            }
+            el.checked = vnode.context[modelKey] === el.value;
             break;
 
           case 'checkbox':
-            if (vnode.context.hasOwnProperty(modelKey) && !vnode.context[modelKey].includes(el.value)) {
-              el.checked = false;
-            }
+            el.checked = (vnode.context[modelKey] || []).includes(el.value);
             break;
+
+          default:
+            el.value = binding.value;
         }
         break;
     }
