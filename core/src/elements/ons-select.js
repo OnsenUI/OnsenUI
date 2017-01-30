@@ -52,7 +52,7 @@ const INPUT_ATTRIBUTES = [
  *     Select component. If you want to place a select on a page, use `<ons-select>`.
  *
  *     The component will automatically display as a Material Design select on Android.
- * 
+ *
  *     Most attributes that can be used for a normal `<select>` element can also be used on the `<ons-select>` element.
  *   [/en]
  *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、コンポーネントを使用します。[/ja]

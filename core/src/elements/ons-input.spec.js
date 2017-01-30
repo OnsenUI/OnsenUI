@@ -23,24 +23,21 @@ describe('OnsInputElement', () => {
 
   onlyChrome(describe)('"class" attribute', () => {
     it('should contain default class token automatically', () => {
-      {
-        const element = ons._util.createElement(`
-          <ons-input type="radio"> </ons-input>
-        `);
-        expect(element.classList.contains('radio-button')).to.be.true;
-        element.setAttribute('class', 'foo');
-        expect(element.classList.contains('radio-button')).to.be.true;
-        expect(element.classList.contains('foo')).to.be.true;
-      }
-      {
-        const element = ons._util.createElement(`
-          <ons-input type="checkbox"> </ons-input>
-        `);
-        expect(element.classList.contains('checkbox')).to.be.true;
-        element.setAttribute('class', 'foo');
-        expect(element.classList.contains('checkbox')).to.be.true;
-        expect(element.classList.contains('foo')).to.be.true;
-      }
+      const element = ons._util.createElement(`
+        <ons-input type="radio"> </ons-input>
+      `);
+      expect(element.classList.contains('radio-button')).to.be.true;
+      element.setAttribute('class', 'foo');
+      expect(element.classList.contains('radio-button')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+
+      const element2 = ons._util.createElement(`
+        <ons-input type="checkbox"> </ons-input>
+      `);
+      expect(element2.classList.contains('checkbox')).to.be.true;
+      element2.setAttribute('class', 'foo');
+      expect(element2.classList.contains('checkbox')).to.be.true;
+      expect(element2.classList.contains('foo')).to.be.true;
     });
   });
 

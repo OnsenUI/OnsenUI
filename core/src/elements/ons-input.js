@@ -214,7 +214,6 @@ export default class InputElement extends BaseElement {
         break;
       case 'placeholder':
         return contentReady(this, () => this._updateLabel());
-        break;
       case 'input-id':
         contentReady(this, () => this._input.id = current);
         break;
