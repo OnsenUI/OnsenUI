@@ -423,7 +423,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined;
+      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
       options.animationOptions = util.extend(
         {},
         leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
@@ -543,7 +543,7 @@ export default class NavigatorElement extends BaseElement {
       const pageLength = this.pages.length;
 
       const enterPage  = this.pages[pageLength - 1];
-      const leavePage = this.pages[pageLength - 2];
+      const leavePage = options.leavePage || this.pages[pageLength - 2];
 
       if (enterPage.nodeName !== 'ONS-PAGE') {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
