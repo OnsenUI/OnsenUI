@@ -34,6 +34,7 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Function} callback
    */
   push(enterPage, leavePage, callback) {
+    const unblock = super.block(enterPage);
 
     animit.runAll(
 
@@ -56,7 +57,8 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
           timing: this.timing
         })
         .restoreStyle()
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         })
@@ -70,6 +72,8 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
    * @param {Function} done
    */
   pop(enterPage, leavePage, callback) {
+    const unblock = super.block(enterPage);
+
     animit.runAll(
 
       animit(leavePage)
@@ -87,7 +91,8 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
           duration: this.duration,
           timing: this.timing
         })
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         }),
