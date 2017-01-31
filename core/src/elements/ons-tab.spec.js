@@ -18,7 +18,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   it('has a default template', () => {
-    expect(element.classList.contains('tab-bar__item')).to.be.true;
+    expect(element.classList.contains('tabbar__item')).to.be.true;
     expect(element._hasDefaultTemplate).to.be.true;
   });
 
@@ -43,10 +43,10 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('class attribute', () => {
-    it('should contain "tab-bar__item" class token automatically', () => {
-      expect(element.classList.contains('tab-bar__item')).to.be.true;
+    it('should contain "tabbar__item" class token automatically', () => {
+      expect(element.classList.contains('tabbar__item')).to.be.true;
       element.className = 'foo';
-      expect(element.classList.contains('tab-bar__item')).to.be.true;
+      expect(element.classList.contains('tabbar__item')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
     });
   });
@@ -63,24 +63,24 @@ onlyChrome(describe)('OnsTabElement', () => {
 
       element.setAttribute('modifier', 'hoge');
 
-      expect(element.classList.contains('tab-bar--hoge__item')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--hoge__button')).to.be.true;
+      expect(element.classList.contains('tabbar--hoge__item')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar--hoge__button')).to.be.true;
 
       element.setAttribute('modifier', ' foo bar');
-      expect(element.classList.contains('tab-bar--foo__item')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--foo__button')).to.be.true;
-      expect(element.classList.contains('tab-bar--bar__item')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--bar__button')).to.be.true;
-      expect(element.classList.contains('tab-bar--hoge__item')).not.to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--hoge__button')).not.to.be.true;
+      expect(element.classList.contains('tabbar--foo__item')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar--foo__button')).to.be.true;
+      expect(element.classList.contains('tabbar--bar__item')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar--bar__button')).to.be.true;
+      expect(element.classList.contains('tabbar--hoge__item')).not.to.be.true;
+      expect(element.children[1].classList.contains('tabbar--hoge__button')).not.to.be.true;
 
-      element.classList.add('tab-bar--piyo__item');
-      element.children[1].classList.add('tab-bar--piyo__button');
+      element.classList.add('tabbar--piyo__item');
+      element.children[1].classList.add('tabbar--piyo__button');
       element.setAttribute('modifier', 'fuga');
-      expect(element.classList.contains('tab-bar--piyo__item')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--piyo__button')).to.be.true;
-      expect(element.classList.contains('tab-bar--fuga__item')).to.be.true;
-      expect(element.children[1].classList.contains('tab-bar--fuga__button')).to.be.true;
+      expect(element.classList.contains('tabbar--piyo__item')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar--piyo__button')).to.be.true;
+      expect(element.classList.contains('tabbar--fuga__item')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar--fuga__button')).to.be.true;
 
       document.body.removeChild(parent);
     });
@@ -146,15 +146,15 @@ onlyChrome(describe)('OnsTabElement', () => {
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
       setImmediate(() => {
-        expect(document.getElementsByClassName('tab-bar__label')[0]).not.to.be.ok;
+        expect(document.getElementsByClassName('tabbar__label')[0]).not.to.be.ok;
 
         element.setAttribute('label', 'text');
-        expect(document.getElementsByClassName('tab-bar__label')[0]).to.be.ok;
-        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('text');
+        expect(document.getElementsByClassName('tabbar__label')[0]).to.be.ok;
+        expect(document.getElementsByClassName('tabbar__label')[0].innerHTML).to.equal('text');
 
         element.setAttribute('label', 'new text');
-        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('new text');
-        expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).not.to.equal('text');
+        expect(document.getElementsByClassName('tabbar__label')[0].innerHTML).to.equal('new text');
+        expect(document.getElementsByClassName('tabbar__label')[0].innerHTML).not.to.equal('text');
 
         document.body.removeChild(tabbar);
         done();
@@ -172,15 +172,15 @@ onlyChrome(describe)('OnsTabElement', () => {
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
       setImmediate(() => {
-        expect(document.getElementsByClassName('tab-bar__badge')[0]).not.to.be.ok;
+        expect(document.getElementsByClassName('tabbar__badge')[0]).not.to.be.ok;
 
         element.setAttribute('badge', '99+');
-        expect(document.getElementsByClassName('tab-bar__badge')[0]).to.be.ok;
-        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).to.equal('99+');
+        expect(document.getElementsByClassName('tabbar__badge')[0]).to.be.ok;
+        expect(document.getElementsByClassName('tabbar__badge')[0].innerHTML).to.equal('99+');
 
         element.setAttribute('badge', '98');
-        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).to.equal('98');
-        expect(document.getElementsByClassName('tab-bar__badge')[0].innerHTML).not.to.equal('99+');
+        expect(document.getElementsByClassName('tabbar__badge')[0].innerHTML).to.equal('98');
+        expect(document.getElementsByClassName('tabbar__badge')[0].innerHTML).not.to.equal('99+');
 
         document.body.removeChild(tabbar);
         done();
@@ -199,7 +199,7 @@ onlyChrome(describe)('OnsTabElement', () => {
       expect(element.children[0].style.display).to.equal('none');
 
       expect(element.children[1].nodeName).to.equal('BUTTON');
-      expect(element.children[1].classList.contains('tab-bar__button')).to.be.true;
+      expect(element.children[1].classList.contains('tabbar__button')).to.be.true;
     });
   });
 
