@@ -13,14 +13,6 @@
     mixins: [deriveEvents, deriveMethods, deriveProperties, VuePageLoader, destroyable, hasOptions],
 
     methods: {
-      prepare(pageElement) {
-        pageElement.style.visibility = 'hidden';
-        return Promise.resolve();
-      },
-      unload(pageElement) {
-        this.$el.pageLoader.unload(pageElement);
-        return Promise.resolve();
-      },
       isReady() {
         if (this.hasOwnProperty('_ready') && this._ready instanceof Promise) {
           return this._ready;
@@ -33,8 +25,12 @@
         }
       },
       _reattachPage(pageElement, position = null) {
-        pageElement.setAttribute('_muted', '');
         this.$el.insertBefore(pageElement, position);
+        pageElement._isShown = true;
+      },
+      _redetachPage(pageElement) {
+        pageElement._destroy();
+        return Promise.resolve();
       },
       _animate({ lastLength, currentLength, lastTopPage, currentTopPage}) {
 
@@ -52,7 +48,7 @@
             .then(() => {
               this._setPagesVisibility(lastLength, currentLength, '');
               if (isReattached) {
-                this.unload(lastTopPage);
+                this._redetachPage(lastTopPage);
               }
             });
         }
@@ -60,13 +56,13 @@
         // Pop
         if (currentLength < lastLength) {
           this._reattachPage(lastTopPage, null);
-          return this.$el._popPage(this.options, () => this.unload(lastTopPage));
+          return this.$el._popPage(this.options, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
         this._reattachPage(lastTopPage, currentTopPage);
-        return this.$el._pushPage(this.options, () => this.prepare(currentTopPage)).then(() => {
-          this.unload(lastTopPage);
+        return this.$el._pushPage(this.options).then(() => {
+          this._redetachPage(lastTopPage);
         });
       }
     },

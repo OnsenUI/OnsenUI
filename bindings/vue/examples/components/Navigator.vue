@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-navigator @prepush="log('prepush!!')" @postpush="log('postpush!!')" @prepop="log('prepop!!')" @postpop="log('postpop!!')"
+    <v-ons-navigator @prepush="log('prepush')" @postpush="log('postpush')" @prepop="log('prepop')" @postpop="log('postpop')" @init.native="log('init')" @destroy.native="log('destroy')" @show.native="log('show')" @hide.native="log('hide')"
       :options="{animation: 'slide'}"
     >
       <div v-for="page in pageStack" :is="page" :page-stack="pageStack"></div>
@@ -48,7 +48,7 @@
 
   const page2 = {
     template: `
-      <v-ons-page p2 @init="log('init!!')" @destroy="log('destroy!!')" @show="log('show!!')" @hide="log('hide!!')">
+      <v-ons-page p2>
         <my-toolbar :pop="pop">Page 2</my-toolbar>
         Page 2
         <ons-button @click="push">Push 3 pages</ons-button>
