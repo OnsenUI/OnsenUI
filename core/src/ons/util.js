@@ -299,9 +299,9 @@ util.updateParentPosition = (el) => {
   }
 };
 
-util.toggleAttribute = (element, name, enable) => {
-  if (enable) {
-    element.setAttribute(name, '');
+util.toggleAttribute = (element, name, value) => {
+  if (value) {
+    element.setAttribute(name, value);
   } else {
     element.removeAttribute(name);
   }

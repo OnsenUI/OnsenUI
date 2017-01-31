@@ -34,6 +34,7 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Function} callback
    */
   push(enterPage, leavePage, callback) {
+    const unblock = super.block(enterPage);
 
     animit.runAll(
 
@@ -56,7 +57,8 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
           timing: this.timing
         })
         .restoreStyle()
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         }),
@@ -90,6 +92,8 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
    * @param {Function} done
    */
   pop(enterPage, leavePage, callback) {
+    const unblock = super.block(enterPage);
+
     animit.runAll(
 
       animit([leavePage._getContentElement(), leavePage._getBackgroundElement()])
@@ -109,7 +113,8 @@ export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransit
           duration: this.duration,
           timing: this.timing
         })
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         }),

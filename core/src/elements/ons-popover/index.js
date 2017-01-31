@@ -230,7 +230,7 @@ export default class PopoverElement extends BaseElement {
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
-    this._boundCancel = this._cancel.bind(this);
+    this._boundCancel = () => this._cancel();
   }
 
   _initAnimatorFactory() {
@@ -420,7 +420,7 @@ export default class PopoverElement extends BaseElement {
    * @method show
    * @signature show(target, [options])
    * @param {String|Event|HTMLElement} target
-   *   [en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]
+   *   [en]Target element. Can be either a CSS selector, an event object or a DOM element. It can be also provided as 'options.target' instead. [/en]
    *   [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
@@ -442,6 +442,12 @@ export default class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   show(target, options = {}) {
+    // Accepts options.target
+    if (target && typeof target === 'object' && !(target instanceof Event) && !(target instanceof HTMLElement)) {
+      options = target;
+      target = options.target;
+    }
+
     if (typeof target === 'string') {
       target = document.querySelector(target);
     } else if (target instanceof Event) {
@@ -616,6 +622,10 @@ export default class PopoverElement extends BaseElement {
         }
       });
     }
+  }
+
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
   }
 
   /**

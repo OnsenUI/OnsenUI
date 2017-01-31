@@ -1,8 +1,9 @@
 <template>
-  <ons-page>
-    <ons-pull-hook
+  <v-ons-page>
+    <v-ons-pull-hook
       @action="onAction"
-      @changestate="onChangestate">
+      @changestate="state = $event.state"
+    >
       <span v-show="state === 'initial'">
         Pull to refresh
       </span>
@@ -14,23 +15,19 @@
       <span v-show="state === 'action'">
         Loading...
       </span>
-    </ons-pull-hook>
+    </v-ons-pull-hook>
 
-    <ons-list>
-      <ons-list-item
+    <v-ons-list>
+      <v-ons-list-item
         v-for="item in items">
         {{item}}
-      </ons-list-item>
-    </ons-list>
+      </v-ons-list-item>
+    </v-ons-list>
 
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
-  import {
-    OnsPullHook
-  } from 'vue-onsenui';
-
 	export default {
     data() {
       return {
@@ -40,21 +37,12 @@
     },
 
     methods: {
-      onChangestate({state}) {
-        this.state = state;
-      },
-
       onAction(done) {
         setTimeout(() => {
           this.items = [...this.items, this.items.length + 1];
-
           done();
-        }, 1000);
+        }, 400);
       }
-    },
-
-    components: {
-      OnsPullHook
     }
 	};
 </script>

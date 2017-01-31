@@ -76,7 +76,7 @@ notification._createAlertDialog = options => {
       <button class="
         alert-dialog-button
         ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
-        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--one' : ''}
+        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
       ">
         ${label}
       </button>
@@ -112,7 +112,7 @@ notification._createAlertDialog = options => {
         </div>
         <div class="
           alert-dialog-footer
-          ${options.buttonLabels.length <= 2 ? ' alert-dialog-footer--one' : ''}
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-footer--rowfooter' : ''}
         ">
           ${buttons}
         </div>

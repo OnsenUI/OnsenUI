@@ -16,8 +16,8 @@
         });
       });
       app.show = function(e) {
-        app.popover.show(e);
-      }
+        app.popover.show({target: e});
+      };
     </script>
 
   </head>
@@ -36,14 +36,15 @@
         </div>
 
         <div class="right">
-          <ons-toolbar-button modifier="outline" id="top-right" onclick="app.show('#top-right')">Button</ons-toolbar-button>
+          <ons-toolbar-button modifier="outline" id="top-right" onclick="app.show(event)">Button</ons-toolbar-button>
         </div>
       </ons-toolbar>
 
       <div style="text-align: center">
         <br />
         <br />
-        <ons-button id="button" onclick="app.show('#button')">Click me!</ons-button>
+        <!-- 'buttonTest' is a global variable created from the ID -->
+        <ons-button id="buttonTest" onclick="app.show(buttonTest)">Click me!</ons-button>
       </div>
 
       <div class="tab-bar">

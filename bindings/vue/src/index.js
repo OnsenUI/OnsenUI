@@ -1,12 +1,13 @@
 import * as components from './components';
+import * as directives from './directives';
 
 import ons from 'onsenui';
 
-const registerComponents = (Vue, comps) => {
-  Object.keys(comps).forEach((key) => {
-    const value = comps[key];
+const register = (Vue, type, items) => {
+  Object.keys(items).forEach((key) => {
+    const value = items[key];
     key = Vue.util.hyphenate(key);
-    Vue.component(key, value);
+    Vue[type](key, value);
   });
 };
 
@@ -14,7 +15,12 @@ const install = (Vue, params = {}) => {
   /**
    * Register components of vue-onsenui.
    */
-  registerComponents(Vue, components);
+  register(Vue, 'component', components);
+
+  /**
+   * Register directives of vue-onsenui.
+   */
+  register(Vue, 'directive', directives);
 
   /**
    * Apply a mixin globally to prevent ons-* elements
@@ -28,15 +34,19 @@ const install = (Vue, params = {}) => {
         if (query.startsWith('v-')) {
           query = name.slice(2);
         }
-        return ons._util.findParent(this.$el, query).__vue__;
-      },
-      getTabbar() {
+        const component = ons._util.findParent(this.$el, query);
+        return component && component.__vue__ || null;
+      }
+    },
+
+    computed: {
+      tabbar() {
         return this.getComponent('ons-tabbar');
       },
-      getNavigator() {
+      navigator() {
         return this.getComponent('ons-navigator');
       },
-      getSplitter() {
+      splitter() {
         return this.getComponent('ons-splitter');
       }
     },

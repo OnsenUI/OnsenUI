@@ -43,6 +43,8 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
     this.backgroundMask.remove();
     leavePage.parentElement.insertBefore(this.backgroundMask, leavePage.nextSibling);
 
+    const unblock = super.block(enterPage);
+
     animit.runAll(
 
       animit(this.backgroundMask)
@@ -100,7 +102,8 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
         })
         .restoreStyle()
         .wait(0.2)
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         })
@@ -110,11 +113,13 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
-   * @param {Function} done
+   * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
+  pop(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
+
+    const unblock = super.block(enterPage);
 
     animit.runAll(
 
@@ -173,9 +178,10 @@ export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransit
           timing: this.timing
         })
         .wait(0.2)
-        .queue(function(finish) {
+        .queue(done => {
+          unblock();
+          callback();
           done();
-          finish();
         })
     );
   }

@@ -1,33 +1,44 @@
 <template>
-  <ons-page>
-    <v-ons-tabbar @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
-      <v-ons-tab :page="tabs[0].component" :icon="tabs[0].icon" :label="tabs[0].label"></v-ons-tab>
-      <v-ons-tab :page="tabs[1].component" active icon="fa-cogs" label="Settings"></v-ons-tab>
+  <v-ons-page>
+    <v-ons-toolbar>
+      <div class="left"><ons-toolbar-button @click="tabbarIndex--">Index--</ons-toolbar-button></div>
+      <div class="center">Tabbar Index: {{tabbarIndex}} -- Tabbar Visible: <input type="checkbox" v-model="tabbarVisibility" /></div>
+      <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
+    </v-ons-toolbar>
+
+    <v-ons-tabbar ref="myTabbar" v-ons-index="tabbarIndex" :visible="tabbarVisibility" @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
+      <template slot="pages">
+        <home></home>
+        <settings></settings>
+      </template>
+
+      <v-ons-tab :on-click="() => { log('from onClick'); $refs.myTabbar.setActiveTab(0); }" :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
+      <v-ons-tab icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
-  let Home = {
+  let home = {
     template: `
-      <ons-page>
+      <v-ons-page>
         Home page
-        <ons-button @click="setTab(1)">getTabbar().setActiveTab(1)</ons-button>
-      </ons-page>
+        <ons-button @click="setTab(1)">tabbar.setActiveTab(1)</ons-button>
+      </v-ons-page>
     `,
     methods: {
       setTab: function(i) {
-        this.getTabbar().setActiveTab(i);
+        this.tabbar.setActiveTab(i);
       }
     }
   };
 
-  let Settings = {
+  let settings = {
     template: `
-      <ons-page>
+      <v-ons-page>
         Settings Page
         <ons-button @click="setTab(0)">$parent.setActiveTab(0)</ons-button>
-      </ons-page>
+      </v-ons-page>
     `,
     methods: {
       setTab: function(i) {
@@ -40,17 +51,16 @@
     data: function() {
       return {
         test: 'testing',
-        tabs: [
-          {
-            component: Home,
-            label: 'Home',
-            icon: 'ion-ios-home-outline'
-          },
-          {
-            component: Settings
-          }
-        ]
+        tab1Label: 'Home',
+        tab1Icon: 'ion-ios-home-outline',
+        tabbarIndex: 0,
+        tabbarVisibility: true
       };
+    },
+
+    components: {
+      home,
+      settings
     },
 
     methods: {

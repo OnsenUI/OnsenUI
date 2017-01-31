@@ -1,112 +1,171 @@
 <template>
-  <ons-page>
-    <ons-splitter>
-      <ons-splitter-side
-        :side="side"
-        :collapse="collapse"
-        :swipeable="swipeable"
-        :width="width"
-        :open="open"
-        @preopen="open = true"
-        @postclose="open = false"
+  <v-ons-page>
+    <v-ons-splitter>
+      <v-ons-splitter-side
+        v-ons-open="splitterOpen"
+        :side="state.side"
+        :collapse="state.collapse"
+        :swipeable="state.swipeable"
+        :width="state.width"
+        @preopen="log('preopen!!')"
+        @postopen="log('postopen!!')"
+        @preclose="log('preclose!!')"
+        @postclose="log('postclose!!')"
+        @modechange="log('modechange!!')"
       >
-        <ons-page>
-          <ons-list>
-            <ons-list-item
-              v-for="item in [1, 2, 3, 4]"
-              @click="open = false"
-              tappable>
-              Menu item {{ item }}
-            </ons-list-item>
-          </ons-list>
-        </ons-page>
-      </ons-splitter-side>
-      <ons-splitter-content>
-        <ons-page>
-          <ons-toolbar>
-            <div class="left">
-            </div>
-            <div class="center">Side menu</div>
-          </ons-toolbar>
-          <p style="text-align: center">
-            Swipe right to open menu!
-          </p>
-
-          <ons-list>
-            <ons-list-item>
-              <div class="center">
-                Side
-              </div>
-              <div class="right">
-                <select v-model="side">
-                  <option>left</option>
-                  <option>right</option>
-                </select>
-              </div>
-            </ons-list-item>
-            <ons-list-item>
-              <div class="center">
-                Swipeable
-              </div>
-              <div class="right">
-                <ons-switch
-                  :checked="swipeable"
-                  @change="swipeable = $event.target.checked"
-                >
-                </ons-switch>
-              </div>
-            </ons-list-item>
-            <ons-list-item>
-              <div class="center">
-                Collapse
-              </div>
-              <div class="right">
-                <ons-switch
-                  :checked="collapse"
-                  @change="collapse = $event.target.checked"
-                >
-                </ons-switch>
-              </div>
-            </ons-list-item>
-            <ons-list-item>
-              <div class="center">
-                Open
-              </div>
-              <div class="right">
-                <ons-switch
-                  :checked="open"
-                  @change="open = $event.target.checked"
-                >
-                </ons-switch>
-              </div>
-            </ons-list-item>
-          </ons-list>
-        </ons-page>
-      </ons-splitter-content>
-    </ons-splitter>
-  </ons-page>
+        <page-side :toggle-menu="toggleMenu"></page-side>
+      </v-ons-splitter-side>
+      <v-ons-splitter-content
+        :is-open="splitterOpen"
+        :side-state="state"
+        :toggle-menu="toggleMenu"
+        :goToPageContent2="goToPageContent2"
+        >
+        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
+      </v-ons-splitter-content>
+    </v-ons-splitter>
+  </v-ons-page>
 </template>
 
 <script>
-  import {
-    OnsSplitterSide,
-    OnsSwitch
-  } from 'vue-onsenui';
+  const log = (...args) => console.log(...args);
+
+  let pageSide = {
+    template: `
+      <v-ons-page>
+        <v-ons-list>
+          <v-ons-list-item
+            v-for="item in [1, 2, 3, 4]"
+            @click="toggleMenu"
+            tappable>
+            Menu item {{ item }}
+          </v-ons-list-item>
+        </v-ons-list>
+      </v-ons-page>
+    `,
+    props: ['isOpen', 'toggleMenu'],
+    methods: {
+      log
+    }
+  };
+
+  let pageContent = {
+    template: `
+     <v-ons-page>
+      <v-ons-toolbar>
+        <div class="left">
+          <v-ons-toolbar-button @click="toggleMenu()"><v-ons-icon icon="md-menu"></v-ons-icon></v-ons-toolbar-button>
+        </div>
+        <div class="center">Side menu</div>
+      </v-ons-toolbar>
+      <p style="text-align: center">
+        Swipe right to open menu!
+      </p>
+
+      <v-ons-list>
+        <v-ons-list-item>
+          <div class="center">
+            Side
+          </div>
+          <div class="right">
+            <select v-model="sideState.side">
+              <option>left</option>
+              <option>right</option>
+            </select>
+          </div>
+        </v-ons-list-item>
+        <v-ons-list-item>
+          <div class="center">
+            Swipeable
+          </div>
+          <div class="right">
+            <v-ons-switch
+              :checked="sideState.swipeable"
+              @change="sideState.swipeable = $event.target.checked"
+            >
+            </v-ons-switch>
+          </div>
+        </v-ons-list-item>
+        <v-ons-list-item>
+          <div class="center">
+            Collapse
+          </div>
+          <div class="right">
+            <select v-model="sideState.collapse">
+              <option></option>
+              <option>portrait</option>
+              <option>landscape</option>
+            </select>
+          </div>
+        </v-ons-list-item>
+        <v-ons-list-item>
+          <div class="center">
+           State: {{sideState}} ; Is Open: {{isOpen}}
+          </div>
+        </v-ons-list-item>
+        <v-ons-list-item modifier="chevron" tappable @click="goToPageContent2">
+          <div class="center">
+            Go to pageContent2 by changing splitter children
+          </div>
+        </v-ons-list-item>
+      </v-ons-list>
+    </v-ons-page>
+    `,
+    methods: {
+      log
+    },
+    props: ['isOpen', 'toggleMenu', 'sideState', 'goToPageContent2']
+  };
+
+  let pageContent2 = {
+    template: `
+      <v-ons-page>
+        <v-ons-toolbar>
+          <div class="center">Another Page</div>
+        </v-ons-toolbar>
+        <p>After going back to the first page, the original VNode will be replaced with a normal VOnsPage due to the 'load' method. I.e. it cannot show this page anymore without refreshing.</p>
+        <br>
+        <v-ons-button @click="splitter.content.load(pageContent)">splitter.content.load(pageContent)</v-ons-button>
+      </v-ons-page>
+    `,
+    methods: {
+      log: function() {
+        console.log(...arguments);
+      }
+    },
+    props: ['pageContent']
+  };
+
 
 	export default {
     data: () => (
       {
-        side: 'left',
-        width: '200px',
-        collapse: '',
-        swipeable: true,
-        open: false
+        splitterOpen: false,
+        currentContent: 'pageContent',
+        pageContent,
+        state: {
+          side: 'left',
+          width: '200px',
+          collapse: '',
+          swipeable: true
+        }
       }
     ),
 
     components: {
-      OnsSplitterSide,
-      OnsSwitch
+      pageContent,
+      pageContent2,
+      pageSide
+    },
+
+    methods: {
+      toggleMenu: function() {
+        this.splitterOpen = !this.splitterOpen;
+      },
+      goToPageContent2: function() {
+        this.currentContent = 'pageContent2';
+      },
+      log
     }
 	};
 </script>

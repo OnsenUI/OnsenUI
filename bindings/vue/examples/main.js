@@ -14,13 +14,13 @@ Vue.use(VueOnsen, {
 const mainList = {
   template: `
   <div>
-    <ons-page>
+    <v-ons-page>
       <ons-list>
         <ons-list-item v-for="(example, key) in examples" @click="changeExample(key)" modifier="chevron">
           <div class="center">{{ key }}</div>
         </ons-list-item>
       </ons-list>
-    </ons-page>
+    </v-ons-page>
   </div>
   `,
   props: ['examples', 'changeExample']
