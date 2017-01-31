@@ -82,6 +82,9 @@ const INPUT_ATTRIBUTES = [
  * @seealso ons-switch
  *   [en]The `<ons-switch>` element is used to display a draggable toggle switch.[/en]
  *   [ja][/ja]
+ * @seealso ons-select
+ *   [en]The `<ons-select>` element is used to display a select box.[/en]
+ *   [ja][/ja]
  * @guide adding-page-content
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -204,7 +207,6 @@ export default class InputElement extends BaseElement {
         break;
       case 'placeholder':
         return contentReady(this, () => this._updateLabel());
-        break;
       case 'input-id':
         contentReady(this, () => this._input.id = current);
         break;

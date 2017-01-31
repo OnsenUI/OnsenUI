@@ -42,8 +42,6 @@ describe('OnsSpeedDialItemElement', () => {
       expect(element.classList.contains('fab')).to.be.true;
       expect(element.classList.contains('fab--mini')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
-      
-      
     });
   });
 

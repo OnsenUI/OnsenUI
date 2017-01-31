@@ -24,6 +24,7 @@ import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
 import RouterNavigator from './components/RouterNavigator.jsx';
 import Row from './components/Row.jsx';
+import Select from './components/Select.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
@@ -67,6 +68,7 @@ export {
   RouterNavigator,
   RouterUtil,
   Row,
+  Select,
   SpeedDial,
   SpeedDialItem,
   Splitter,
