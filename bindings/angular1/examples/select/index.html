@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Select Input | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap()
+      .controller('PageController', function($scope) {
+        //$scope.modifiers = ['basic', 'material', 'underbar'];
+        $scope.selectedModifier = 'material';
+        $scope.editSelects = function() {
+          console.log("editSelects", document.getElementById('choose-sel'));
+          document.getElementById('choose-sel').removeAttribute('modifier');
+          if (event.target.value == 'material' || event.target.value == 'underbar') {
+            document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
+          }
+        }
+      });
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="PageController">
+    <ons-toolbar><div class="center">Select Input</div></ons-toolbar>
+
+    <p>Choose which select input you want to see:<p>
+
+    <ons-select ng-model="selectedModifier" id="choose-sel" ng-change="editSelects()">
+      <option value="basic">Basic</option>
+      <option value="material">Material</option>
+      <option value="underbar">Underbar</option>
+    </ons-select>
+
+    <p>The selected modifier is <strong>{{ selectedModifier }}</strong>.</p>
+  </ons-page>
+</body>
+</html>
