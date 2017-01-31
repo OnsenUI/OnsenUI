@@ -111,11 +111,11 @@ ons-bottom-toolbar {
   top: 76px;
 }
 
-ons-tabbar[status-bar-fill] > .tab-bar--top__content {
+ons-tabbar[status-bar-fill] > .tabbar--top__content {
   top: 71px;
 }
 
-ons-tabbar[status-bar-fill] > .tab-bar--top {
+ons-tabbar[status-bar-fill] > .tabbar--top {
   padding-top: 22px;
 }
 
@@ -123,11 +123,11 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   top: 0px;
 }
 
-.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top {
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top {
   top: 0px;
 }
 
-.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tab-bar--top__content {
+.navigation-bar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top__content {
   top: 49px;
 }
 
