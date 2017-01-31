@@ -1,4 +1,5 @@
 export { default as Tabbar } from './Tabbar.vue';
+export { default as TabbarKeepAlive } from './TabbarKeepAlive.vue';
 export { default as Navigator } from './Navigator.vue';
 export { default as NavigatorMethods } from './NavigatorMethods.vue';
 export { default as PullHook } from './PullHook.vue';

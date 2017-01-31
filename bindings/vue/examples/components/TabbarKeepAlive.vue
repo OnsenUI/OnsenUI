@@ -6,14 +6,15 @@
       <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-tabbar v-ons-index="tabbarIndex" :visible="tabbarVisibility" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')" @show.native="log('show')" @hide.native="log('hide')" @destroy.native="log('destroy')">
+    <v-ons-tabbar :visible="tabbarVisibility" v-ons-index="tabbarIndex" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')">
       <template slot="pages">
-        <home></home>
-        <settings></settings>
+        <keep-alive>
+          <div :is="currentPage"></div>
+        </keep-alive>
       </template>
 
-      <v-ons-tab :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
-      <v-ons-tab icon="fa-cogs" label="Settings"></v-ons-tab>
+      <v-ons-tab :active="currentPage === 'home'" :on-click="() => { currentPage = 'home'; tabbarIndex = 0; }" :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
+      <v-ons-tab :active="currentPage === 'settings'" :on-click="() => { currentPage = 'settings'; tabbarIndex = 1; }" icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
 </template>
@@ -23,7 +24,6 @@
     template: `
       <v-ons-page>
         Home page
-        <ons-button @click="setTab(1)">tabbar.setActiveTab(1)</ons-button>
       </v-ons-page>
     `,
     methods: {
@@ -37,7 +37,6 @@
     template: `
       <v-ons-page>
         Settings Page
-        <ons-button @click="setTab(0)">$parent.setActiveTab(0)</ons-button>
       </v-ons-page>
     `,
     methods: {
@@ -54,7 +53,8 @@
         tab1Label: 'Home',
         tab1Icon: 'ion-ios-home-outline',
         tabbarIndex: 0,
-        tabbarVisibility: true
+        tabbarVisibility: true,
+        currentPage: 'home'
       };
     },
 
