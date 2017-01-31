@@ -150,6 +150,7 @@ export default class PageElement extends BaseElement {
 
   init() {
     this.classList.add(defaultClassName);
+    this._initialized = false;
 
     contentReady(this, () => {
       this._compile();
@@ -162,6 +163,12 @@ export default class PageElement extends BaseElement {
   }
 
   connectedCallback() {
+    if (this._initialized) {
+      return;
+    }
+
+    this._initialized = true;
+
     contentReady(this, () => {
       if (!this._isMuted) {
         if (this._skipInit) {

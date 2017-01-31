@@ -15,7 +15,7 @@ describe('OnsRangeElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.SwitchElement).to.be.ok;
+    expect(window.ons.RangeElement).to.be.ok;
   });
 
   it('classList contains \'range\' by default', () => {
@@ -28,7 +28,7 @@ describe('OnsRangeElement', () => {
     element.setAttribute('modifier', 'hoge');
     expect(input.classList.contains('range--hoge')).to.be.true;
 
-    element.setAttribute('modifier', ' foo bar');
+    element.setAttribute('modifier', 'foo bar');
     expect(input.classList.contains('range--foo')).to.be.true;
     expect(input.classList.contains('range--bar')).to.be.true;
     expect(input.classList.contains('range--hoge')).not.to.be.true;

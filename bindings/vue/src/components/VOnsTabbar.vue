@@ -1,9 +1,9 @@
 <template>
   <ons-tabbar>
-    <div class="tab-bar__content" ref="contentElement">
+    <div class="tab-bar__content">
       <slot name="pages"></slot>
     </div>
-    <div class="tab-bar" ref="tabbarElement">
+    <div class="tab-bar">
       <slot></slot>
     </div>
   </ons-tabbar>

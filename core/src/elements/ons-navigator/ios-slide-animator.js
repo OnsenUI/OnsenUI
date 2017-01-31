@@ -32,6 +32,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       <div style="position: absolute; width: 100%; height: 100%;
         background-color: black; opacity: 0; z-index: 2"></div>
     `);
+
   }
 
   _decompose(page) {
@@ -104,6 +105,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
+
+    const unblock = super.block(enterPage);
 
     contentReady(enterPage, () => {
       const enterPageDecomposition = this._decompose(enterPage);
@@ -255,7 +258,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
               timing: this.timing
             })
             .restoreStyle()
-            .queue(function(done) {
+            .queue(done => {
+              unblock();
               callback();
               done();
             }),
@@ -357,7 +361,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
               timing: this.timing
             })
             .restoreStyle()
-            .queue(function(done) {
+            .queue(done => {
+              unblock();
               callback();
               done();
             })
@@ -370,11 +375,13 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   /**
    * @param {Object} enterPage
    * @param {Object} leavePage
-   * @param {Function} done
+   * @param {Function} callback
    */
-  pop(enterPage, leavePage, done) {
+  pop(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
+
+    const unblock = super.block(enterPage);
 
     const enterPageDecomposition = this._decompose(enterPage);
     const leavePageDecomposition = this._decompose(leavePage);
@@ -505,11 +512,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: this.timing
           })
           .wait(0)
-          .queue(function(finish) {
+          .queue(done => {
             this.backgroundMask.remove();
+            unblock();
+            callback();
             done();
-            finish();
-          }.bind(this)),
+          }),
 
         animit(leavePageDecomposition.toolbar)
           .queue({
@@ -600,11 +608,12 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             duration: this.duration,
             timing: this.timing
           })
-          .queue(function(finish) {
+          .queue(done => {
             this.backgroundMask.remove();
+            unblock();
+            callback();
             done();
-            finish();
-          }.bind(this))
+          })
       );
     }
   }

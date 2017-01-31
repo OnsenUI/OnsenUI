@@ -48,7 +48,7 @@ const VuePageLoader = {
     this.$el.page = this.page || this.$el.page;
 
     this.$el.pageLoader = new PageLoader(
-      ({page, parent}, done) => {
+      ({page, parent, params = {}}, done) => {
         if (!page) {
           throw new Error(`PageLoader: Expected a VOnsPage Component but got "${page}" for "${parent.tagName.toLowerCase()}"`);
         }
@@ -56,15 +56,12 @@ const VuePageLoader = {
         if (page.hasOwnProperty('_isVue')) {
           page.$parent = page.$parent || _getParentVM(parent);
         } else {
-          page = new Vue(Object.assign(
-            {
-              parent: _getParentVM(parent)
-            },
-            page,
-            {
-              mixins: (page.mixins || []).concat([_inheritProps])
-            }
-          ));
+          page = new Vue({
+            parent: _getParentVM(parent),
+            ...page,
+            mixins: [...(page.mixins || []), _inheritProps],
+            computed: { ...(page.computed || {}), data: () => params }
+          });
         }
 
         page.$mount();
@@ -77,7 +74,7 @@ const VuePageLoader = {
         } else {
           pageElement.remove();
         }
-        pageElement.__vue__.$destroy();
+        pageElement.__vue__ && pageElement.__vue__.$destroy();
       }
     );
   }
@@ -88,9 +85,10 @@ const VueTabLoader = {
 
   mounted() {
     if (this.page === undefined) {
-      const refs = this.$parent.$refs;
-      if (refs && refs.contentElement && refs.contentElement) {
-        this.$el.page = refs.contentElement.children[this.$el._findTabIndex()].__vue__;
+      const contentElement = this.$parent.$el._contentElement;
+      const tabIndex = this.$el._findTabIndex();
+      if (contentElement && contentElement.children.length - 1 >= tabIndex) {
+        this.$el.page = contentElement.children[tabIndex].__vue__;
       }
     }
   }

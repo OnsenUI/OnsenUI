@@ -40,6 +40,6 @@ export const VOnsModal = extend('modal', [dialogAPI]);
 export const VOnsTab = extend('tab', [VueTabLoader, clickable]);
 export const VOnsSplitter = extend('splitter', [destroyable]);
 export const VOnsSplitterContent = extend('splitter-content', [VuePageLoader, destroyable]);
-export const VOnsSplitterSide = extend('splitter-side', [VuePageLoader, destroyable]);
+export const VOnsSplitterSide = extend('splitter-side', [VuePageLoader, destroyable, hasOptions]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 
