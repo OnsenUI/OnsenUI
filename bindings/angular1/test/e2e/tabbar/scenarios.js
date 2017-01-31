@@ -90,7 +90,7 @@
     });
 
     it('should be possible to hide tabs', function() {
-      var tabBar = element(by.css('.tab-bar'));
+      var tabBar = element(by.css('.tabbar'));
 
       expect(tabBar.isDisplayed()).toBeTruthy();
       element(by.id('toggle-tabbar')).click();
