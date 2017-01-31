@@ -36,8 +36,8 @@ import {
  *     selector: 'app',
  *     template: `
  *     <ons-tabbar>
- *       <div class="tab-bar__content"></div>
- *       <div class="tab-bar">
+ *       <div class="tabbar__content"></div>
+ *       <div class="tabbar">
  *         <ons-tab label="Page1" icon="ion-home" [page]="page" active></ons-tab>
  *         <ons-tab label="Page2" icon="ion-help" [page]="page"></ons-tab>
  *         <ons-tab label="Page3" icon="ion-stop" [page]="page"></ons-tab>
