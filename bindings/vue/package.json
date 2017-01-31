@@ -12,7 +12,6 @@
   "main": "dist/vue-onsenui.js",
   "files": [
     "dist/vue-onsenui.js",
-    "dist/vue-onsenui.map.js",
     "src"
   ],
   "repository": {
