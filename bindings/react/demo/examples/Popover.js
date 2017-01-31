@@ -36,19 +36,19 @@ export default class extends React.Component {
       <Page
         renderToolbar={() => <MyToolbar title='Popover' />}
         >
-      <div className='navigation-bar'>
-        <div className='navigation-bar__left'>
-          <span ref='navigation' onClick={() => this.showClick(this.refs.navigation)} className='toolbar-button--outline navigation-bar__line-height'>
+      <div className='toolbar'>
+        <div className='toolbar__left'>
+          <span ref='navigation' onClick={() => this.showClick(this.refs.navigation)} className='toolbar-button--outline toolbar__line-height'>
             <i className='ion-navicon' style={{fontSize: 32, verticalAlign: -6}}></i>
           </span>
         </div>
 
-        <div className='navigation-bar__center'>
+        <div className='toolbar__center'>
           Popover demo!
         </div>
 
-        <div className='navigation-bar__right'>
-          <span ref='topRight' onClick={() => this.showClick(this.refs.topRight)} className='toolbar-button--outline navigation-bar__line-height'>Button</span>
+        <div className='toolbar__right'>
+          <span ref='topRight' onClick={() => this.showClick(this.refs.topRight)} className='toolbar-button--outline toolbar__line-height'>Button</span>
         </div>
       </div>
 
