@@ -219,6 +219,7 @@ export default class NavigatorElement extends BaseElement {
 
   init() {
     this._isRunning = false;
+    this._connectedOnce = false;
     this._pageLoader = defaultPageLoader;
     this._pageMap = new WeakMap();
 
@@ -263,8 +264,12 @@ export default class NavigatorElement extends BaseElement {
   }
 
   connectedCallback() {
-    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
+    if (this._connectedOnce) {
+      return;
+    }
+    this._connectedOnce = true;
 
+    this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this._getPageTarget()) {

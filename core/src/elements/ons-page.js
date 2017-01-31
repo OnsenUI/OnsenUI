@@ -155,6 +155,7 @@ export default class PageElement extends BaseElement {
       this._compile();
 
       this._isShown = false;
+      this._connectedOnce = false;
       this._contentElement = this._getContentElement();
       this._isMuted = this.hasAttribute('_muted');
       this._skipInit = this.hasAttribute('_skipinit');
@@ -162,6 +163,11 @@ export default class PageElement extends BaseElement {
   }
 
   connectedCallback() {
+    if (this._connectedOnce) {
+      return;
+    }
+    this._connectedOnce = true;
+
     contentReady(this, () => {
       if (!this._isMuted) {
         if (this._skipInit) {
