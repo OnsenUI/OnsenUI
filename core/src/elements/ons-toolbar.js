@@ -22,13 +22,13 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
-const defaultClassName = 'navigation-bar';
+const defaultClassName = 'toolbar';
 
 const scheme = {
-  '': 'navigation-bar--*',
-  '.navigation-bar__left': 'navigation-bar--*__left',
-  '.navigation-bar__center': 'navigation-bar--*__center',
-  '.navigation-bar__right': 'navigation-bar--*__right'
+  '': 'toolbar--*',
+  '.toolbar__left': 'toolbar--*__left',
+  '.toolbar__center': 'toolbar--*__center',
+  '.toolbar__right': 'toolbar--*__right'
 };
 
 /**
@@ -175,7 +175,7 @@ export default class ToolbarElement extends BaseElement {
     }
 
     const center = this._ensureToolbarElement('center');
-    center.classList.add('navigation-bar__title');
+    center.classList.add('toolbar__title');
 
     if (this.children.length !== 1 || !this.children[0].classList.contains('center')) {
       const left = this._ensureToolbarElement('left');
@@ -190,14 +190,14 @@ export default class ToolbarElement extends BaseElement {
   }
 
   _ensureToolbarElement(name) {
-    if (util.findChild(this, '.navigation-bar__' + name)) {
-      const element = util.findChild(this, '.navigation-bar__' + name);
+    if (util.findChild(this, '.toolbar__' + name)) {
+      const element = util.findChild(this, '.toolbar__' + name);
       element.classList.add(name);
       return element;
     }
 
     const element = util.findChild(this, '.' + name) || util.create('.' + name);
-    element.classList.add('navigation-bar__' + name);
+    element.classList.add('toolbar__' + name);
 
     return element;
   }
