@@ -85,9 +85,10 @@ const VueTabLoader = {
 
   mounted() {
     if (this.page === undefined) {
-      const refs = this.$parent.$refs;
-      if (refs && refs.contentElement && refs.contentElement) {
-        this.$el.page = refs.contentElement.children[this.$el._findTabIndex()].__vue__;
+      const contentElement = this.$parent.$el._contentElement;
+      const tabIndex = this.$el._findTabIndex();
+      if (contentElement && contentElement.children.length - 1 >= tabIndex) {
+        this.$el.page = contentElement.children[tabIndex].__vue__;
       }
     }
   }

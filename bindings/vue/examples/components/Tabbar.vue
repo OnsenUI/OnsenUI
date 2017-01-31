@@ -6,13 +6,13 @@
       <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-tabbar v-ons-index="tabbarIndex" :visible="tabbarVisibility" @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
+    <v-ons-tabbar ref="myTabbar" v-ons-index="tabbarIndex" :visible="tabbarVisibility" @reactive="log('reactive!!')" @postchange="log('postchange!!')" @prechange="log('prechange!!')">
       <template slot="pages">
         <home></home>
         <settings></settings>
       </template>
 
-      <v-ons-tab :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
+      <v-ons-tab :on-click="() => { log('from onClick'); $refs.myTabbar.setActiveTab(0); }" :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
       <v-ons-tab icon="fa-cogs" label="Settings"></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
