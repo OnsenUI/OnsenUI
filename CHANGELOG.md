@@ -5,6 +5,7 @@ CHANGELOG
 v2.0.6
 ----
 
+ * css-components: Renamed ".tab-bar" to ".tabbar".
  * css-components: Dropped all stylus and rebuild css-components with less.
  * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
  * ons-navigator: Fixed [#1726](https://github.com/OnsenUI/OnsenUI/issues/1726).
