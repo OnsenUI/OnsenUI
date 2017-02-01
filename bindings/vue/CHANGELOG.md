@@ -1,9 +1,3 @@
-<!--
-Guidelines:
- * Release dates should be in UTC.
-    * They can be retrieved from `npm info <package-name>`.
--->
-
 CHANGELOG
 ====
 
