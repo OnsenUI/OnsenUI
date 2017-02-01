@@ -157,6 +157,14 @@ export default class SelectElement extends BaseElement {
     }
   }
 
+  get _select() {
+    return this.querySelector('select');
+  }
+
+  static get events() {
+    return ['change'];
+  }
+
   _updateBoundAttributes() {
     INPUT_ATTRIBUTES.forEach((attr) => {
       if (this.hasAttribute(attr)) {
@@ -166,10 +174,6 @@ export default class SelectElement extends BaseElement {
         this._select.removeAttribute(attr);
       }
     });
-  }
-
-  get _select() {
-    return this.querySelector('select');
   }
 
   /**

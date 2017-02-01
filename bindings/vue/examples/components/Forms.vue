@@ -49,6 +49,22 @@
       </ons-list-item>
 
       <ons-list-header>
+        Select box - <button @click="modify('select')">Modify JS</button>
+      </ons-list-header>
+      <ons-list-item>
+        <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects(rowId, $event)">
+          <option v-for="modifier in modifiers" v-bind:value="modifier.value">
+            {{ modifier.text }}
+          </option>
+        </v-ons-select>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">
+          Modifier {{ selectedModifier }} looks great!
+        </div>
+      </ons-list-item>
+
+      <ons-list-header>
         Radio buttons - <button @click="modify('radio')">Modify JS</button>
       </ons-list-header>
       <ons-list-item
@@ -121,6 +137,12 @@
     data() {
       return {
         name: 'Andreas',
+        modifiers: [
+          { text: 'Basic', value: 'basic' },
+          { text: 'Material', value: 'material' },
+          { text: 'Underbar', value: 'underbar' }
+        ],
+        selectedModifier: 'material',
         switchOn: true,
         vegetables: ['Tomato', 'Cabbage', 'Cucumber'],
         selectedVegetable: 'Cabbage',
@@ -148,6 +170,14 @@
           case 'range':
             this.volume = (this.volume + 20) % 100;
             break;
+        }
+      },
+
+      editSelects: function(rowId, event) {
+        console.log('editSelects', event);
+        document.getElementById('choose-sel').removeAttribute('modifier');
+        if (event.target.value == 'material' || event.target.value == 'underbar') {
+          document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
         }
       }
     }
