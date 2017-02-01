@@ -52,9 +52,7 @@ Vue.use(VueOnsen);
 <script src="onsenui.js"></script>
 <script src="vue-onsenui.js"></script>
 
-<script>
-  Vue.use(VueOnsen);
-</script>
+<!-- Vue.use(VueOnsen) is called automatically if window.Vue is defined -->
 ```
 
 ## Examples - Running the development server
