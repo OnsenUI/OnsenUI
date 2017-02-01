@@ -7,31 +7,10 @@ Guidelines:
 CHANGELOG
 ====
 
-2.0.0-alpha.0 (Work In Progress)
+2.0.0-alpha.0
 ----
 
-### Features
- * Make `v-ons-switch` component compatible with Vue.js 2.x.
- * Add `v-ons-range` component.
- * Add `v-ons-button` component.
- * Add `v-ons-icon` component.
- * Add `v-ons-input` component.
- * Apply a global mixin to prevent direct use of ons-* elements.
-
-<!--
-### Bug Fixes
- * 
-
-### PEER-DEPENDENCY UPDATES
- * 
--->
-
-### BREAKING CHANGES
- * Stop exposing Vue.js component options objects.
- * Obsolete the plugin option `components`.
-   * It should not be able to select which components will be registered.
- * Make `install` register all the components of vue-onsenui.
- * Rename the component names from `ons-*` to `v-ons-*` due to the spec of Vue.js 2.
+Initial release of v2 bindings. Apps made with v1 are not compatible.
 
 1.0.0 (2016-09-15)
 ----
