@@ -39,6 +39,11 @@ export default {
     const tag = el.tagName.toLowerCase();
 
     switch (tag) {
+      case 'ons-select':
+        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', 'selected');
+        _bindSimpleInputOn('change', modelKey, vnode, 'value');
+        break;
+
       case 'ons-switch':
         el.checked = binding.value;
         _bindSimpleInputOn('change', modelKey, vnode, 'checked');
@@ -77,6 +82,10 @@ export default {
     const tag = el.tagName.toLowerCase();
 
     switch (tag) {
+      case 'ons-select':
+        el.querySelectorAll('option').forEach(function (option) { option.value == binding.value ? option.setAttribute('selected', 'selected') : option.removeAttribute('selected') });
+        break;
+
       case 'ons-switch':
         el.checked = binding.value;
         break;

@@ -20,6 +20,7 @@ export const VOnsIcon = extend('icon');
 export const VOnsSwitch = extend('switch');
 export const VOnsInput = extend('input');
 export const VOnsRange = extend('range');
+export const VOnsSelect = extend('select');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsList = extend('list');
