@@ -20,7 +20,7 @@ Also, bugs and things to improve surely exist in this version, so please feel fr
 #### Package Manager (yarn, npm)
 
 ```
-yarn install onsenui vue-onsenui --save
+yarn add onsenui vue-onsenui --save
 ```
 
 #### Direct download
