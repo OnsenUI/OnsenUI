@@ -47,7 +47,7 @@ module.exports = {
       }
     ]
   },
-  devtool: '#source-map',
+  devtool: '#inline-source-map',
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
   ]
