@@ -32,8 +32,8 @@ Get `onsenui.js`, `onsenui.css` and `onsenui-css-components.css` from the [lates
 #### ES6 imports and Webpack (with CSS imports)
 
 ```javascript
-import 'path/to/onsenui.css';
-import 'path/to/onsen-css-components.css';
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
 import Vue from 'vue';
 import 'onsenui';
