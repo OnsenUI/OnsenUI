@@ -214,26 +214,26 @@ export default class SelectElement extends BaseElement {
 
     ModifierUtil.initModifier(this, scheme);
 
-    const self = this;
-    ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value'].forEach(function (key, index, arr) {
-      self.__defineGetter__(key, function () {
-        return self._select[key];
+    for (const key of ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value']) {
+      this.__defineGetter__(key, () => {
+        return this._select[key];
       });
-      self.__defineSetter__(key, function (value) {
-        self._select[key] = value;
+      this.__defineSetter__(key, (value) => {
+        this._select[key] = value;
       });
-    });
-    this.__defineGetter__('form', function () {
-      return self._select['form'];
-    })
-    this.__defineGetter__('type', function () {
-      return self._select['type'];
-    })
-    this.add = function (option, index = null) {
-      self._select.add(option, index);
     }
-    this.remove = function (index) {
-      self._select.remove(index);
+    this.__defineGetter__('form', () => {
+      return this._select['form'];
+    });
+    this.__defineGetter__('type', () => {
+      return this._select['type'];
+    });
+
+    this.add = (option, index = null) => {
+      this._select.add(option, index);
+    }
+    this.remove = (index) => {
+      this._select.remove(index);
     }
   }
 }
