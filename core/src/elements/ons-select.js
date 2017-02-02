@@ -55,7 +55,7 @@ const INPUT_ATTRIBUTES = [
  *
  *     Most attributes that can be used for a normal `<select>` element can also be used on the `<ons-select>` element.
  *   [/en]
- *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、コンポーネントを使用します。[/ja]
+ *   [ja]セレクトボックスを表示するコンポーネントです。`select` 要素に使用できる属性の多くが `ons-select` 要素でも利用できます。[/ja]
  * @codepen hLayx
  * @tutorial vanilla/Reference/select
  * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
@@ -76,7 +76,7 @@ export default class SelectElement extends BaseElement {
    * @default false
    * @description
    *  [en]Element automatically gains focus on page load.[/en]
-   *  [ja][/ja]
+   *  [ja]ページロード時にこのセレクトボックスにフォーカスが移るようにします。[/ja]
    */
 
   /**
@@ -85,7 +85,7 @@ export default class SelectElement extends BaseElement {
    * @default false
    * @description
    *   [en]Specify if select input should be disabled.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *   [ja]このセレクトボックスを無効化する場合に指定します。[/ja]
    */
 
   /**
@@ -93,7 +93,7 @@ export default class SelectElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]Associate a select element to an existing form on the page, even if not nested.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *   [ja]このセレクトボックスを、指定した `form` 要素に紐付けます。セレクトボックスを `form` 要素の外側に配置する際に使用します。[/ja]
    */
 
   /**
@@ -102,7 +102,7 @@ export default class SelectElement extends BaseElement {
    * @default false
    * @description
    *  [en]If this attribute is defined, multiple options can be selected at once.[/en]
-   *  [ja][/ja]
+   *  [ja]選択肢の複数選択を有効にします。[/ja]
    */
 
   /**
@@ -110,7 +110,7 @@ export default class SelectElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]Name the select element, useful for instance if it is part of a form.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *   [ja]このセレクトボックスの名前を指定します。通常 `form` 要素と共に使用します。[/ja]
    */
 
   /**
@@ -118,7 +118,7 @@ export default class SelectElement extends BaseElement {
    * @type {Boolean}
    * @description
    *   [en]Make the select input required for submitting the form it is part of.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *   [ja]このセレクトボックスを入力必須にする場合に指定します。通常 `form` 要素と共に使用します。[/ja]
    */
 
   /**
@@ -127,7 +127,7 @@ export default class SelectElement extends BaseElement {
    * @default 1
    * @description
    *   [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *   [ja]一度に表示する選択肢の個数を指定します。選択肢がこの属性で指定した個数よりも多い場合、スクロールが有効になります。[/ja]
    */
 
   init() {
@@ -180,28 +180,28 @@ export default class SelectElement extends BaseElement {
    * @property length
    * @description
    *   [en]Number of options in the select box.[/en]
-   *   [ja][/ja]
+   *   [ja]このセレクトボックスに含まれる選択肢の個数を返します。 `select` 要素[/ja]
    */
 
   /**
    * @property options
    * @description
    *   [en]Several options for handling the select DOM object.[/en]
-   *   [ja][/ja]
+   *   [ja]このセレクトボックスに含まれる `option` 要素の配列を返します。[/ja]
    */
 
   /**
    * @property selectedIndex
    * @description
    *   [en]Index of the currently selected option.[/en]
-   *   [ja][/ja]
+   *   [ja]現在選択されている選択肢のインデックスを返します。[/ja]
    */
 
   /**
    * @property value
    * @description
    *   [en]Value of the currently selected option.[/en]
-   *   [ja][/ja]
+   *   [ja]現在選択されている選択肢の値を返します。[/ja]
    */
   _compile() {
     autoStyle.prepare(this);
