@@ -31,11 +31,11 @@ export class PageComponent {
   }
 
   push() {
-    this._navigator.element.pushPage(PageComponent, {animation: 'slide', data: {aaa: 'bbb'}});
+    this._navigator.nativeElement.pushPage(PageComponent, {animation: 'slide', data: {aaa: 'bbb'}});
   }
 
   pop() {
-    this._navigator.element.popPage();
+    this._navigator.nativeElement.popPage();
   }
 }
 
@@ -60,7 +60,7 @@ class DefaultPageComponent {
   }
 
   push() {
-    this._navigator.element.pushPage(PageComponent, {data: {hoge: "fuga"}});
+    this._navigator.nativeElement.pushPage(PageComponent, {data: {hoge: "fuga"}});
   }
 }
 
