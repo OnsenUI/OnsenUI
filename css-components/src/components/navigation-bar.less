@@ -32,8 +32,9 @@
 @material-navigation-bar-color: @material-toolbar-text-color;
 
 /*!
-  name: Navigation Bar
-  class: navigation-bar
+  name: Toolbar
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar">
       <div class="navigation-bar__center">Navigation Bar</div>
@@ -147,8 +148,9 @@
 }
 
 /*!
-  name: Navigation Bar Item
-  use: Toolbar Button, Navigation Bar
+  name: Toolbar Item
+  category: Toolbar
+  elements: ons-toolbar ons-toolbar-button
   markup: |
     <div class="navigation-bar">
       <div class="navigation-bar__left">
@@ -168,8 +170,9 @@
 */
 
 /*!
-  name: Navigation Bar with Outline Button
-  use: Toolbar Button, Navigation Bar
+  name: Toolbar with Outline Button
+  category: Toolbar
+  elements: ons-toolbar ons-toolbar-button
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
@@ -190,8 +193,9 @@
 */
 
 /*!
-  name: Navigation Bar with Outline Button
-  use: Toolbar Button, Navigation Bar
+  name: Toolbar with Outline Button
+  category: Toolbar
+  elements: ons-toolbar ons-toolbar-button
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
@@ -213,8 +217,8 @@
 
 /*!
   name: Bottom Bar
-  class: bottom-bar
-  use: Navigation Bar
+  category: Toolbar
+  elements: ons-bottom-toolbar
   markup: |
     <div class="bottom-bar">
       <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
@@ -252,10 +256,9 @@
 }
 
 /*!
-  name: Navigation Bar with Segment
-  class: navigation-bar
-  hint: .navigation-bar .button-bar
-  use: Segment, Navigation Bar
+  name: Toolbar with Segment
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar">
       <div class="navigation-bar__center">
@@ -275,9 +278,9 @@
 */
 
 /*!
-  name: Material Navigation Bar
-  class: navigation-bar--material
-  use: Toolbar Button, Navigation Bar
+  name: Material Toolbar
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar navigation-bar--material">
       <div class="navigation-bar__center navigation-bar--material__center">
@@ -299,9 +302,9 @@
 }
 
 /*!
-  name: No Shadow Navigation Bar
-  class: navigation-bar--noshadow
-  use: Toolbar Button, Navigation Bar
+  name: No Shadow Toolbar
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar navigation-bar--noshadow">
       <div class="navigation-bar__left">
@@ -366,10 +369,9 @@
 
 
 /*!
-  name: Material Navigation Bar with Icons
-  class: navigation-bar--material
-  use: Toolbar Button, Material Navigation Bar
-  hint: .navigation-bar--material
+  name: Material Toolbar with Icons
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar navigation-bar--material">
       <div class="navigation-bar__left navigation-bar--material__left">
@@ -395,9 +397,9 @@
 */
 
 /*!
-  name: Transparent Navigation Bar
-  class: navigation-bar--transparent
-  use: Toolbar Button, Navigation Bar
+  name: Transparent Toolbar
+  category: Toolbar
+  elements: ons-toolbar
   markup: |
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">

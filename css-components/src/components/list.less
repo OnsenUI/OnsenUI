@@ -37,7 +37,8 @@
 
 /*!
   name: List
-  class: list
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -211,8 +212,8 @@
 
 /*!
   name: Noborder List
-  class: list--noborder
-  use: List
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list list--noborder">
       <li class="list__item">
@@ -236,8 +237,8 @@
 
 /*!
   name: Category List Header
-  class: list__header
-  use: List
+  category: List
+  elements: ons-list ons-list-header ons-list-item
   markup: |
     <ul class="list">
       <li class="list__header">
@@ -251,8 +252,8 @@
 
 /*!
   name: Tappable List
-  class: list__item--tappable
-  use: List
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -267,7 +268,8 @@
 
 /*!
   name: Switch in List Item
-  use: Switch, List
+  category: List
+  elements: ons-list ons-list-item ons-switch
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -301,8 +303,8 @@
 
 /*!
   name: List Item with Chevron
-  class: list__item--chevron
-  use: List
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item list__item--chevron">
@@ -346,7 +348,8 @@
 
 /*!
   name: Inset List
-  use: List, List Item with Chevron, Tappable List
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list list--inset">
       <li class="list__item list--inset__item list__item--chevron list__item--tappable">
@@ -372,8 +375,8 @@
 
 /*!
   name: Radio Button in List Item
-  modifiers:
-  use: Radio Button, List
+  category: List
+  elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -403,7 +406,8 @@
 
 /*!
   name: Checkbox in List Item
-  use: Checkbox, List, Tappable List, Switch in List Item
+  category: List
+  elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -433,7 +437,8 @@
 
 /*!
   name: No border Checkbox in List Item
-  use: Checkbox in List Item, No border Checkbox
+  category: List
+  elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -463,7 +468,8 @@
 
 /*!
   name: Text Input in List Item
-  use: List
+  category: List
+  elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -481,7 +487,8 @@
 
 /*!
   name: Textarea in List Item
-  use: List, Textarea Transparent
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -494,8 +501,8 @@
 
 /*!
   name: Right Label in List Item
-  use: List, Switch in List Item
-  class: list__right-label
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -517,8 +524,8 @@
 
 /*!
   name: List Item with Subtitle
-  use: List, Switch in List Item
-  class: list__item__subtitle
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -550,8 +557,8 @@
 
 /*!
   name: List Item with Thumbnail
-  use: List, List Item with Subtitle
-  class: list__item__thumbnail
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -588,8 +595,8 @@
 
 /*!
   name: List Item with Icon
-  use: List, List Item with Thumbnail
-  class: list__item__icon
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list">
       <li class="list__item">
@@ -629,8 +636,8 @@
 
 /*!
   name: Material List
-  use: List Item with Subtitle
-  class: list--material
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
@@ -697,8 +704,8 @@
 
 /*!
   name: Material List with Header
-  use: Material List
-  class: list__header--material
+  category: List
+  elements: ons-list ons-list-item
   markup: |
     <ul class="list list--material">
       <li class="list__header list__header--material">
@@ -731,8 +738,8 @@
 
 /*!
   name: Material List with Checkboxes
-  use: Material List, Material Checkbox
-  class: list__header--material
+  category: List
+  elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
@@ -768,8 +775,7 @@
 
 /*!
   name: Material List with Thumbnails
-  use: Material List, List Item with Thumbnail
-  class: list__item--material__thumbnail
+  category: List
   markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
@@ -805,8 +811,7 @@
 
 /*!
   name: Material List with Icons
-  use: Material List, Material List with Thumbnails
-  class: list__item--material__icon
+  category: List
   markup: |
     <ul class="list list--material">
       <li class="list__item list__item--material">
@@ -846,8 +851,7 @@
 
 /*!
   name: List item without divider
-  class: list__item--nodivider
-  use: List
+  category: List
   markup: |
     <ul class="list">
       <li class="list__item list__item--nodivider">
@@ -875,8 +879,7 @@
 
 /*!
   name: List item with long divider
-  class: list__item--longdivider
-  use: List
+  category: List
   markup: |
     <ul class="list">
       <li class="list__item list__item--longdivider">

@@ -35,36 +35,11 @@ limitations under the License.
 
 /*!
   name: Range
-  class: range
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :focus: Focused
+  category: Range
+  elements: ons-range
   markup: |
     <input type="range" class="range">
     <input type="range" class="range" disabled>
-  showcase:
-    <div class="navigation-bar">
-        <div class="navigation-bar__item center full">
-            <h1 class="navigation-bar__title">Range</h1>
-        </div>
-    </div>
-
-    <div style="padding:8px">
-      <input type="range" class="range" style="width:100%" value="0">
-    </div>
-
-    <div style="padding:8px">
-      <input type="range" class="range" style="width:100%" value="30">
-    </div>
-
-    <div style="padding:8px">
-      <input type="range" class="range" style="width:100%" value="60">
-    </div>
-
-    <div style="padding:8px">
-      <input type="range" class="range" style="width:100%" value="90">
-    </div>
 */
 .range() {
   .reset-input();
@@ -191,11 +166,8 @@ ons-range { // FIXME
 
 /*!
   name: Material Range
-  use: Range
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :focus: Focused
+  category: Range
+  elements: ons-range
   markup: |
     <input type="range" class="range range--material">
     <input type="range" class="range range--material" disabled>

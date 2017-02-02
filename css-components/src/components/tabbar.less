@@ -35,11 +35,9 @@
 @tab-bar-border-top: 1px solid @tab-bar-border-color;
 
 /*!
-  name: Icon Tab Bar
-  class: tab-bar
-  use: Tab Bar
-  modifiers:
-    :disabled: Disabled state
+  name: Icon Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
@@ -70,10 +68,9 @@
 */
 
 /*!
-  name: Tab Bar
-  class: tab-bar
-  modifiers:
-    :disabled: Disabled state
+  name: Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar">
       <label class="tab-bar__item">
@@ -243,12 +240,9 @@
 }
 
 /*!
-  name: Icon Only Tab Bar
-  use: Tab Bar
-  class: tab-bar
-  hint: .tab-bar .fa
-  modifiers:
-    :disabled: Disabled state
+  name: Icon Only Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
@@ -277,9 +271,9 @@
 */
 
 /*!
-  name: Top Tab Bar
-  class: tab-bar--top
-  use: Tab Bar
+  name: Top Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar tab-bar--top">
       <label class="tab-bar__item">
@@ -325,9 +319,9 @@
 }
 
 /*!
-  name: Bordered Top Tab Bar
-  class: tab-bar--top-border
-  use: Top Tab Bar
+  name: Bordered Top Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar tab-bar--top tab-bar--top-border">
       <label class="tab-bar__item tab-bar--top-border__item">
@@ -354,9 +348,9 @@
 */
 
 /*!
-  name: Material Tab Bar
-  class: tab-bar--material
-  use: Top Tab Bar
+  name: Material Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar tab-bar--top tab-bar--material">
       <label class="tab-bar__item tab-bar--material__item">
@@ -441,27 +435,27 @@
 }
 
 /*!
-  name: Material Tab Bar (Icon only)
-  class: tab-bar--material__icon
-  use:  Material Tab Bar
+  name: Material Tabbar (Icon only)
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar tab-bar--top tab-bar--material">
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <input type="radio" name="tab-bar-material-b" checked="checked">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
         </button>
       </label>
 
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
+        <input type="radio" name="tab-bar-material-b">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
         </button>
       </label>
 
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
+        <input type="radio" name="tab-bar-material-b">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account"></i>
         </button>
@@ -475,13 +469,13 @@
 }
 
 /*!
-  name: Material Tab Bar (Icon and Label)
-  class: tab-bar--material__label
-  use:  Material Tab Bar
+  name: Material Tabbar (Icon and Label)
+  category: Tabbar
+  elements: ons-tabbar ons-tab
   markup: |
     <div class="tab-bar tab-bar--top tab-bar--material">
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <input type="radio" name="tab-bar-material-c" checked="checked">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
           <div class="tab-bar__label tab-bar--material__label">Call</div>
@@ -489,7 +483,7 @@
       </label>
 
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
+        <input type="radio" name="tab-bar-material-c">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
           <div class="tab-bar__label tab-bar--material__label">Favorites</div>
@@ -497,7 +491,7 @@
       </label>
 
       <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
+        <input type="radio" name="tab-bar-material-c">
         <button class="tab-bar__button tab-bar--material__button">
           <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-delete"></i>
           <div class="tab-bar__label tab-bar--material__label">Delete</div>
