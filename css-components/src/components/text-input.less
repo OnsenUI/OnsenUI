@@ -242,3 +242,48 @@
     background-size: 100% 2px, 100% 2px;
   }
 }
+
+/*!
+  name: Transparent Text Input
+  category: Text Input
+  elements: ons-input
+  markup: |
+    <input type="text" class="text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
+*/
+
+.text-input--transparent {
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.text-input--transparent:focus {
+  background-image: none;
+}
+
+.text-input--transparent:disabled {
+  border: none;
+  background-color: transparent;
+}
+
+.text-input-transparent-disabled() {
+  border: none;
+  background-color: transparent;
+}
+
+.text-input--transparent:disabled::-webkit-input-placeholder,
+.text-input--transparent:disabled::-moz-placeholder,
+.text-input--transparent:disabled::-ms-input-placeholder,
+.text-input--transparent:disabled:-ms-input-placeholder {
+  .text-input-transparent-disabled();
+}
+
+.text-input--transparent:invalid {
+  border: none;
+  background-color: transparent;
+}
+
