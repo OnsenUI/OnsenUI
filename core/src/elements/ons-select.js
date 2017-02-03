@@ -127,7 +127,7 @@ export default class SelectElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]ID given to the inner select, useful for dynamic manipulation.[/en]
-   *   [ja][/ja]
+   *   [ja]このセレクトボックスが内部に持つ select 要素に与える ID を指定します。セレクトボックスの内容を動的に変更する必要がある場合に使用します。[/ja]
    */
 
   /**
