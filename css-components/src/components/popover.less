@@ -23,27 +23,84 @@ limitations under the License.
 @popover-margin-material: 4px;
 
 /*!
-  name: Popover
+  name: Popover(bottom)
   category: Popover
   elements: ons-popover
   markup: |
     <div class="popover-mask"></div>
-    <div class="popover popover--bottom" style="display:block;bottom:20px;left:50px;">
-      <div class="popover__arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.6;margin-top:40px">Content</div>
+    <div class="popover popover--bottom" style="bottom: 20px; left: 50px;">
+      <div class="popover__arrow popover--bottom__arrow" style="margin-left: 20px;"></div>
+      <div class="popover__content popover--bottom__content">
+        <div style="text-align:center;opacity:0.8;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*!
+  name: Popover(top)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--top" style="top: 20px; left: 50px;">
+      <div class="popover__arrow popover--top__arrow" style="margin-left: 20px;"></div>
+      <div class="popover__content popover--top__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*!
+  name: Popover(left)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--right" style="top: 20px; right: 20px;">
+      <div class="popover__arrow popover--right__arrow" style="margin-top: 20px;"></div>
+      <div class="popover__content popover--right__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*!
+  name: Popover(right)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--left" style="top: 20px;left: 20px;">
+      <div class="popover__arrow popover--left__arrow" style="margin-top: 20px;"></div>
+      <div class="popover__content popover--left__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
       </div>
     </div>
 */
 
 .popover {
   position: absolute;
-  top: @popover-margin;
-  right: @popover-margin;
-  bottom: @popover-margin;
-  left: @popover-margin;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
   z-index: 20000;
-  display: none;
+}
+
+.popover--bottom {
+  bottom: 0px;
+}
+
+.popover--top {
+  top: 0px;
+}
+
+.popover--left {
+  left: 0px;
+}
+
+.popover--right {
+  right: 0px;
 }
 
 .popover-mask {
@@ -51,15 +108,8 @@ limitations under the License.
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
-}
-
-.popover__container {
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0); // iOS / Safari bugfix
 }
 
 .popover__content {
@@ -67,7 +117,6 @@ limitations under the License.
   .reset-base();
   .reset-cursor();
   .reset-font();
-  position: absolute;
   display: block;
   width: 220px;
   overflow: auto;
@@ -79,13 +128,20 @@ limitations under the License.
   pointer-events: auto;
 }
 
-.popover__content > * {// FIXME!!
-  overflow: hidden;
+.popover--top__content {
+
 }
 
-.popover__content .page,
-.popover__content .page__content { // FIXME
-  position: static;
+.popover--bottom__content {
+
+}
+
+.popover--left__content {
+
+}
+
+.popover--right__content {
+
 }
 
 .popover__arrow {
@@ -99,67 +155,25 @@ limitations under the License.
   margin: (-(@popover-arrow-size / 2))px;
 }
 
-.popover--bottom .popover__arrow { // FIXME
+.popover--bottom__arrow {
   transform: rotate(-45deg);
-  bottom: 1px;
+  bottom: -6px;
 }
 
-.popover--top .popover__arrow { // FIXME
+.popover--top__arrow {
   transform: rotate(135deg);
-  top: 1px;
+  top: -6px;
 }
 
-.popover--left .popover__arrow { // FIXME
+.popover--left__arrow {
   transform: rotate(45deg);
-  left: 1px;
+  left: -6px;
 }
 
-.popover--right .popover__arrow { // FIXME
+.popover--right__arrow {
   transform: rotate(225deg);
-  right: 1px;
+  right: -6px;
 }
-
-/*!
-  name: Popover(down)
-  category: Popover
-  elements: ons-popover
-  markup: |
-    <div class="popover-mask"></div>
-    <div class="popover popover--top" style="display:block;top:20px;left:50px;">
-      <div class="popover__arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
-      </div>
-    </div>
-*/
-
-/*!
-  name: Popover(left)
-  category: Popover
-  elements: ons-popover
-  markup: |
-    <div class="popover-mask"></div>
-    <div class="popover popover--right" style="display:block;top:20px;right:20px;">
-      <div class="popover__arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
-      </div>
-    </div>
-*/
-
-/*!
-  name: Popover(right)
-  category: Popover
-  elements: ons-popover
-  markup: |
-    <div class="popover-mask"></div>
-    <div class="popover popover--left" style="display:block;top:20px;left:20px;">
-      <div class="popover__arrow"></div>
-      <div class="popover__content">
-        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
-      </div>
-    </div>
-*/
 
 .popover--material {
   top: @popover-margin-material;
@@ -172,26 +186,13 @@ limitations under the License.
   background-color: transparent;
 }
 
-.popover__container--material {
-  .reset-box-model();
-  .reset-base();
-  .reset-cursor();
-  .reset-font();
-  // position absolute // FIXME
-  display: inline-block;
-  max-height: 100%;
-  overflow: auto;
-  transform: none;
-  /*border-bottom 4px solid transparent*/ // FIXME
-}
-
-.popover__content--material {
+.popover--material__content {
   background-color: @popover-background-color-material;
   border-radius: @popover-radius-material;
   color: @popover-text-color;
   .material-shadow-1();
 }
 
-.popover__arrow--material {
+.popover--material__arrow {
   display: none;
 }
