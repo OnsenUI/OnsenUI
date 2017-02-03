@@ -52,40 +52,40 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input {
   .search-input();
   box-sizing: border-box;
-  height: var-search-input-height;
-  font-size: var-search-input-font-size;
-  border: var-search-input-border;
-  background-color: var-search-input-background-color;
-  box-shadow: var-box-shadow--text-input;
-  color: var-search-input-color;
+  height: @search-input-height;
+  font-size: @search-input-font-size;
+  border: @search-input-border;
+  background-color: @search-input-background-color;
+  box-shadow: @box-shadow--text-input;
+  color: @search-input-color;
   padding: 4px 0 0 28px;
-  border-radius: var-search-input-border-radius;
-  background-image: var-search-input-background-image;
+  border-radius: @search-input-border-radius;
+  background-image: @search-input-background-image;
   background-position: 8px center;
   background-repeat: no-repeat;
-  background-size: var-font-size;
-  font-weight: var-font-weight;
+  background-size: @font-size;
+  font-weight: @font-weight;
   display: block;
   width: 100%;
 }
 
 .search-input:focus {
-  background-color: var-search-input-background-color;
-  color: var-search-input-color;
-  border: var-search-input-border;
-  box-shadow: var-box-shadow--text-input;
+  background-color: @search-input-background-color;
+  color: @search-input-color;
+  border: @search-input-border;
+  box-shadow: @box-shadow--text-input;
 }
 
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-decoration {
-  margin-right: var-search-decoration-margin-right;
+  margin-right: @search-decoration-margin-right;
 }
 
 .search-input::-webkit-input-placeholder,
 .search-input::-moz-placeholder,
 .search-input::-ms-input-placeholder,
 .search-input:-ms-input-placeholder {
-  color: var-input-placeholder-color;
+  color: @input-placeholder-color;
 }
 
 .search-input:disabled {
