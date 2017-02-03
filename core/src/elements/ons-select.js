@@ -35,6 +35,7 @@ const INPUT_ATTRIBUTES = [
   'multiple',
   'name',
   'required',
+  'select-id',
   'size'
 ];
 
@@ -49,7 +50,7 @@ const INPUT_ATTRIBUTES = [
  *  [ja][/ja]
  * @description
  *   [en]
- *     Select component. If you want to place a select on a page, use `<ons-select>`.
+ *     Select component. If you want to place a select with an ID of `my-id` on a page, use `<ons-select select-id="my-id">`.
  *
  *     The component will automatically display as a Material Design select on Android.
  *
@@ -119,6 +120,15 @@ export default class SelectElement extends BaseElement {
    * @description
    *   [en]Make the select input required for submitting the form it is part of.[/en]
    *   [ja]このセレクトボックスを入力必須にする場合に指定します。通常 `form` 要素と共に使用します。[/ja]
+   */
+
+  /**
+   * @attribute select-id
+   * @type {String}
+   * @required
+   * @description
+   *   [en]ID given to the inner select, crucial for dynamic manipulation.[/en]
+   *   [ja][/ja]
    */
 
   /**
@@ -204,11 +214,16 @@ export default class SelectElement extends BaseElement {
    *   [ja]現在選択されている選択肢の値を返します。[/ja]
    */
   _compile() {
+    if (!this.hasAttribute('select-id')) {
+      throw Error("'ons-select' component requires 'select-id' attribute");
+    }
+
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
     const sel = document.createElement('select');
     sel.classList.add('select-input');
+    sel.id = this.getAttribute('select-id');
     util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
     this.appendChild(sel);
 

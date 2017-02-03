@@ -10,6 +10,20 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+      const modifiers = [
+        { value: 'basic', label: 'Basic' },
+        { value: 'material', label: 'Material' },
+        { value: 'underbar', label: 'Underbar' }
+      ];
+      let sel = document.getElementById('modifier-sel');
+      for (let modifier of modifiers) {
+        let option = document.createElement('option');
+        option.value = modifier.value;
+        option.innerText = modifier.label;
+        sel.appendChild(option);
+      }
+    });
     function editSelects(event) {
       document.getElementById('choose-sel').removeAttribute('modifier');
       if (event.target.value == 'material' || event.target.value == 'underbar') {
@@ -27,14 +41,11 @@
 
     <div style="padding: 2%">
       <h3>Choose which select input you want to see:</h3>
-      <ons-select id="choose-sel" onchange="editSelects(event)">
-        <option value="basic">Basic</option>
-        <option value="material">Material</option>
-        <option value="underbar">Underbar</option>
+      <ons-select id="choose-sel" select-id="modifier-sel" onchange="editSelects(event)">
       </ons-select>
 
       <ons-list modifier="inset" style="margin-top: 2%">
-        <ons-list-header>Attributes you can add to the <b>ons-select</b> tag:</ons-list-header>
+        <ons-list-header>Other attributes you can add to the <b>ons-select</b> tag:</ons-list-header>
         <ons-list-item modifier="nodivider">autofocus</ons-list-item>
         <ons-list-item modifier="nodivider">disabled</ons-list-item>
         <ons-list-item modifier="nodivider">form</ons-list-item>
