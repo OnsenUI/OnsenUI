@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v2.1.1
+----
+ * ons-template: Show warning when ons-template is nested.
+
 v2.1.0
 ----
 

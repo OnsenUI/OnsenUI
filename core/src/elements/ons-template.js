@@ -62,6 +62,11 @@ export default class TemplateElement extends BaseElement {
   init() {
     this.template = this.innerHTML;
 
+    // Show warning when ons-template is nested
+    if (this.querySelector('ons-template') != null) {
+      console.warn(`ons-template cannot be nested (id: ${this.getAttribute('id')}): ${this.template}`);
+    }
+
     while (this.firstChild) {
       this.removeChild(this.firstChild);
     }
