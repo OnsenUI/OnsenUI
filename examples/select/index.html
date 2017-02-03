@@ -10,25 +10,17 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-      const modifiers = [
-        { value: 'basic', label: 'Basic' },
-        { value: 'material', label: 'Material' },
-        { value: 'underbar', label: 'Underbar' }
-      ];
-      let sel = document.getElementById('modifier-sel');
-      for (let modifier of modifiers) {
-        let option = document.createElement('option');
-        option.value = modifier.value;
-        option.innerText = modifier.label;
-        sel.appendChild(option);
-      }
-    });
     function editSelects(event) {
       document.getElementById('choose-sel').removeAttribute('modifier');
       if (event.target.value == 'material' || event.target.value == 'underbar') {
         document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
       }
+    }
+    function addOption(event) {
+      const option = document.createElement('option');
+      let text = document.getElementById('optionLabel').value;
+      option.innerText = text;
+      document.getElementById('dynamic-sel').appendChild(option);
     }
   </script>
 </head>
@@ -40,9 +32,18 @@
     </ons-toolbar>
 
     <div style="padding: 2%">
-      <h3>Choose which select input you want to see:</h3>
-      <ons-select id="choose-sel" select-id="modifier-sel" onchange="editSelects(event)">
+      <h3>Choose a type of select with different modifiers:</h3>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="basic">Basic</option>
+        <option value="material">Material</option>
+        <option value="underbar">Underbar</option>
       </ons-select>
+
+      <h3>Add options dynamically:</h3>
+      <ons-select select-id="dynamic-sel">
+      </ons-select>
+      <ons-input id="optionLabel" modifier="underbar"></ons-input>
+      <ons-button onclick="addOption()">Add option</ons-button>
 
       <ons-list modifier="inset" style="margin-top: 2%">
         <ons-list-header>Other attributes you can add to the <b>ons-select</b> tag:</ons-list-header>

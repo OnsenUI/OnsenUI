@@ -125,9 +125,8 @@ export default class SelectElement extends BaseElement {
   /**
    * @attribute select-id
    * @type {String}
-   * @required
    * @description
-   *   [en]ID given to the inner select, crucial for dynamic manipulation.[/en]
+   *   [en]ID given to the inner select, useful for dynamic manipulation.[/en]
    *   [ja][/ja]
    */
 
@@ -214,16 +213,14 @@ export default class SelectElement extends BaseElement {
    *   [ja]現在選択されている選択肢の値を返します。[/ja]
    */
   _compile() {
-    if (!this.hasAttribute('select-id')) {
-      throw Error("'ons-select' component requires 'select-id' attribute");
-    }
-
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
     const sel = document.createElement('select');
     sel.classList.add('select-input');
-    sel.id = this.getAttribute('select-id');
+    if (this.hasAttribute('select-id')) {
+      sel.id = this.getAttribute('select-id');
+    }
     util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
     this.appendChild(sel);
 
