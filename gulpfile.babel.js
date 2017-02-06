@@ -255,6 +255,17 @@ gulp.task('html2js', () => {
     .pipe(gulp.dest('bindings/angular1/directives/'));
 });
 
+////////////////////////////////////////
+// build-css-components
+////////////////////////////////////////
+gulp.task('build-css-components', () => {
+  return gulp.src('css-components/gulpfile.js')
+  .pipe($.chug({
+    read: false,
+    tasks: ['build']
+  }));
+});
+
 /////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
@@ -431,6 +442,7 @@ gulp.task('build', done => {
   return runSequence(
     'clean',
     'core',
+    'build-css-components',
     'prepare',
     'minify-js',
     'build-docs',
@@ -447,6 +459,7 @@ gulp.task('soft-build', done => {
   return runSequence(
     'clean',
     'core',
+    'build-css-components',
     'prepare',
     'minify-js',
     done
@@ -496,6 +509,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
 
   // for livereload
   gulp.watch([
+    'build/css/onsen-css-components.css',
     'examples/*/*.{js,css,html}',
     'bindings/angular1/test/e2e/*/*.{js,css,html}'
   ]).on('change', changedFile => {
