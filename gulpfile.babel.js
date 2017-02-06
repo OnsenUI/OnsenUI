@@ -359,7 +359,10 @@ gulp.task('prepare', ['html2js'], () =>  {
 
     // less files
     gulp.src([
-      'css-components/**/*'
+      'css-components/**/*',
+      '!css-components/node_modules/',
+      '!css-components/node_modules/**/*',
+      '!css-components/npm-debug.log'
     ])
       .pipe(gulp.dest('build/css-components-src/')),
 
