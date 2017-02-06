@@ -3,20 +3,17 @@
  * @element ons-select
  */
 
-(function(){
+(function () {
   'use strict';
 
-  angular.module('onsen').directive('onsSelect', function($parse) {
+  angular.module('onsen')
+  .directive('onsSelect', function ($parse, $onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
       scope: false,
 
-      link: function(scope, element, attrs) {
-        console.log('scope', scope);
-        console.log('element', element);
-        console.log('attrs', attrs);
-
+      link: function (scope, element, attrs) {
         const onInput = () => {
           const set = $parse(attrs.ngModel).assign;
 
@@ -39,7 +36,10 @@
           element.off('input', onInput);
           scope = element = attrs = null;
         });
+
+        GenericView.register(scope, element, attrs, { viewKey: 'ons-select' });
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
-  });
+  })
 })();
