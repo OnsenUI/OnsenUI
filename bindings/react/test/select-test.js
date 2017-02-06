@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Select} from '../dist/select-onsenui.js';
+import {Select} from '../dist/react-onsenui.js';
 import TestUtils from 'react-dom/lib/ReactTestUtils';
 import rendersToComponent from './testUtil.js';
 
