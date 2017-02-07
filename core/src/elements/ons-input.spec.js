@@ -132,13 +132,6 @@ describe('OnsInputElement', () => {
         done();
       });
     });
-
-    onlyChrome(it)('provides \'content-left\' attribute', () => {
-      let element = ons._util.createElement('<ons-input>content</ons-input>');
-      expect(element.firstChild.lastChild.className).to.equal('input-label');
-      element = ons._util.createElement('<ons-input content-left>content</ons-input>');
-      expect(element.firstChild.firstChild.className).to.equal('input-label');
-    });
   });
 
   describe('#type attribute', () => {

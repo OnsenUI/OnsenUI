@@ -187,11 +187,15 @@ export default class SplitterContentElement extends BaseElement {
   }
 
   _show() {
-    this._content._show();
+    if (this._content) {
+      this._content._show();
+    }
   }
 
   _hide() {
-    this._content._hide();
+    if (this._content) {
+      this._content._hide();
+    }
   }
 
   _destroy() {

@@ -1094,6 +1094,10 @@ export default class CarouselElement extends BaseElement {
   set centered(value) {
     return util.toggleAttribute(this, 'centered', value);
   }
+
+  static get events() {
+    return ['postchange', 'refresh', 'overscroll'];
+  }
 }
 
 customElements.define('ons-carousel', CarouselElement);

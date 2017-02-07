@@ -219,7 +219,9 @@ export default class NavigatorElement extends BaseElement {
 
   init() {
     this._isRunning = false;
+    this._initialized = false;
     this._pageLoader = defaultPageLoader;
+    this._pageMap = new WeakMap();
 
     this._updateAnimatorFactory();
   }
@@ -264,6 +266,11 @@ export default class NavigatorElement extends BaseElement {
   connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
+    if (this._initialized) {
+      return;
+    }
+
+    this._initialized = true;
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this._getPageTarget()) {
@@ -359,24 +366,33 @@ export default class NavigatorElement extends BaseElement {
 
     if (!options.refresh) {
       return this._popPage(options, popUpdate);
+    } else {
+      return this._popPageAndRefresh(options, popUpdate);
     }
+  }
+
+  _popPageAndRefresh(options, popUpdate) {
 
     const index = this.pages.length - 2;
     const oldPage = this.pages[index];
 
-    if (!oldPage.name) {
+    if (!this._pageMap.has(oldPage)) {
       throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
     }
 
+    const page = this._pageMap.get(oldPage);
+
     return new Promise(resolve => {
       const options = {
-        page: oldPage.name,
+        page: page,
         parent: this,
         params: oldPage.pushedOptions ? oldPage.pushedOptions.data : {}
       };
+
       this._pageLoader.load(options, pageElement => {
+        this._pageMap.set(pageElement, page);
+
         pageElement = util.extend(pageElement, {
-          name: oldPage.name,
           data: oldPage.data,
           pushedOptions: oldPage.pushedOptions || {}
         });
@@ -387,6 +403,7 @@ export default class NavigatorElement extends BaseElement {
       });
 
     }).then(() => this._popPage(options, popUpdate));
+
   }
 
   _popPage(options, update = () => Promise.resolve()) {
@@ -412,7 +429,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined;
+      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
       options.animationOptions = util.extend(
         {},
         leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
@@ -488,8 +505,8 @@ export default class NavigatorElement extends BaseElement {
 
     const prepare = pageElement => {
       this._verifyPageElement(pageElement);
+      this._pageMap.set(pageElement, page);
       pageElement = util.extend(pageElement, {
-        name: options.page,
         data: options.data
       });
       pageElement.style.visibility = 'hidden';
@@ -532,7 +549,7 @@ export default class NavigatorElement extends BaseElement {
       const pageLength = this.pages.length;
 
       const enterPage  = this.pages[pageLength - 1];
-      const leavePage = this.pages[pageLength - 2];
+      const leavePage = options.leavePage || this.pages[pageLength - 2];
 
       if (enterPage.nodeName !== 'ONS-PAGE') {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
@@ -542,11 +559,6 @@ export default class NavigatorElement extends BaseElement {
 
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
-
-      const pageName = enterPage.name || options.page;
-      if (typeof pageName === 'string') {
-        enterPage.name = pageName;
-      }
       enterPage.unload = enterPage.unload || options.unload;
 
       return new Promise(resolve => {
@@ -626,8 +638,8 @@ export default class NavigatorElement extends BaseElement {
     return new Promise(resolve => {
       loader.load({page, parent: this}, pageElement => {
         this._verifyPageElement(pageElement);
+        this._pageMap.set(pageElement, page);
         pageElement = util.extend(pageElement, {
-          name: options.page,
           data: options.data,
           pushedOptions: options
         });
@@ -722,9 +734,6 @@ export default class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
-    util.extend(options, {
-      page: page.name
-    });
     page.style.visibility = 'hidden';
     page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
@@ -767,7 +776,11 @@ export default class NavigatorElement extends BaseElement {
   _lastIndexOfPage(pageName) {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
-      if (this.pages[index].name === pageName) {
+      if (!this._pageMap.has(this.pages[index])) {
+        throw Error('This is bug.');
+      }
+
+      if (pageName === this._pageMap.get(this.pages[index])) {
         break;
       }
     }
@@ -854,9 +867,8 @@ export default class NavigatorElement extends BaseElement {
    *   [ja][/ja]
    */
   get pages() {
-    return util
-      .arrayFrom(this.children)
-      .filter(n => n.tagName === 'ONS-PAGE');
+    return util.arrayFrom(this.children)
+      .filter(element => element.tagName === 'ONS-PAGE');
   }
 
   /**
@@ -954,6 +966,10 @@ export default class NavigatorElement extends BaseElement {
 
   static get NavigatorTransitionAnimator() {
     return NavigatorTransitionAnimator;
+  }
+
+  static get events() {
+    return ['prepush', 'postpush', 'prepop', 'postpop'];
   }
 
   static get rewritables() {

@@ -43,5 +43,13 @@ export default class NavigatorTransitionAnimator extends BaseAnimator {
   pop(enterPage, leavePage, callback) {
     callback();
   }
+
+  block(page) {
+    const blocker = util.createElement(`
+      <div style="position: absolute; background-color: transparent; width: 100%; height: 100%; z-index: 100000"></div>
+    `);
+    page.parentNode.appendChild(blocker);
+    return () => blocker.remove();
+  }
 }
 

@@ -7,7 +7,12 @@ Guidelines:
 CHANGELOG
 ====
 
-1.0.0-rc.4 (Work In Progress)
+(dev)
+----
+
+ * Added `nativeElement` getter function to access DOM element on all directives.
+
+1.0.0-rc.4
 ----
 
 ### Features
@@ -34,6 +39,8 @@ CHANGELOG
     * `^2.1.2` ----> `^2.4.1`
  * **@angular/platform-browser-dynamic**:
     * `^2.1.2` ----> `^2.4.1`
+ * **rxjs**:
+    * `>=5.0.0-beta` ----> `^5.0.1`
 
 1.0.0-rc.3 (2016-11-15)
 ----

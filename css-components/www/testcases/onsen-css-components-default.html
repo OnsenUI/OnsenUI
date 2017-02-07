@@ -101,6 +101,10 @@
               <li><a href="#text-input">Text Input</a></li>
               <li><a href="#underbar-text-input">Underbar Text Input</a></li>
               <li><a href="#material-input">Material Input</a></li>
+              <li><a href="#transparent-text-input">Transparent Text Input</a></li>
+              <li><a href="#select-input">Select input</a></li>
+              <li><a href="#material-select-input">Material select input</a></li>
+              <li><a href="#underbar-select-input">Underbar select input</a></li>
               <li><a href="#textarea">Textarea</a></li>
               <li><a href="#textarea-transparent">Textarea Transparent</a></li>
               <li><a href="#dialog">Dialog</a></li>
@@ -1296,6 +1300,74 @@
               </section>
             </footer>
           </article>
+          <article id="transparent-text-input" class="component">
+            <header>
+              <h2>Transparent Text Input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><input type="text" class="text-input--transparent" placeholder="text" value=""><br><input type="text" class="text-input--transparent" placeholder="text" value="" disabled></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;text&quot; class=&quot;text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="select-input" class="component">
+            <header>
+              <h2>Select input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><select class="select-input">  <option>Option 1</option>  <option>Option 2</option>  <option>Option 3</option></select></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;select class=&quot;select-input&quot;&gt;  &lt;option&gt;Option 1&lt;/option&gt;  &lt;option&gt;Option 2&lt;/option&gt;  &lt;option&gt;Option 3&lt;/option&gt;&lt;/select&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-select-input" class="component">
+            <header>
+              <h2>Material select input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><select class="select-input select-input--material">  <option>Option 1</option>  <option>Option 2</option>  <option>Option 3</option></select></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;select class=&quot;select-input select-input--material&quot;&gt;  &lt;option&gt;Option 1&lt;/option&gt;  &lt;option&gt;Option 2&lt;/option&gt;  &lt;option&gt;Option 3&lt;/option&gt;&lt;/select&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="underbar-select-input" class="component">
+            <header>
+              <h2>Underbar select input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><select class="select-input select-input--underbar">  <option>Option 1</option>  <option>Option 2</option>  <option>Option 3</option></select></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;select class=&quot;select-input select-input--underbar&quot;&gt;  &lt;option&gt;Option 1&lt;/option&gt;  &lt;option&gt;Option 2&lt;/option&gt;  &lt;option&gt;Option 3&lt;/option&gt;&lt;/select&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="textarea" class="component">
             <header>
               <h2>Textarea</h2>
@@ -1421,13 +1493,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="alert-dialog-mask"></div><div class="alert-dialog">  <div class="alert-dialog-container">    <div class="alert-dialog-title">Alert</div>    <div class="alert-dialog-content">      Hello World!    </div>    <div class="alert-dialog-footer alert-dialog-footer--one">      <button class="alert-dialog-button alert-dialog-button--one">Left</button>      <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>      <button class="alert-dialog-button alert-dialog-button--one">Right</button>    </div>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="alert-dialog-mask"></div><div class="alert-dialog">  <div class="alert-dialog-container">    <div class="alert-dialog-title">Alert</div>    <div class="alert-dialog-content">      Hello World!    </div>    <div class="alert-dialog-footer alert-dialog-footer--rowfooter">      <button class="alert-dialog-button alert-dialog-button--rowfooter">Left</button>      <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--rowfooter">Center</button>      <button class="alert-dialog-button alert-dialog-button--rowfooter">Right</button>    </div>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;alert-dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-container&quot;&gt;    &lt;div class=&quot;alert-dialog-title&quot;&gt;Alert&lt;/div&gt;    &lt;div class=&quot;alert-dialog-content&quot;&gt;      Hello World!    &lt;/div&gt;    &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Left&lt;/button&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Center&lt;/button&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Right&lt;/button&gt;    &lt;/div&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;alert-dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-container&quot;&gt;    &lt;div class=&quot;alert-dialog-title&quot;&gt;Alert&lt;/div&gt;    &lt;div class=&quot;alert-dialog-content&quot;&gt;      Hello World!    &lt;/div&gt;    &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--rowfooter&quot;&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--rowfooter&quot;&gt;Left&lt;/button&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--rowfooter&quot;&gt;Center&lt;/button&gt;      &lt;button class=&quot;alert-dialog-button alert-dialog-button--rowfooter&quot;&gt;Right&lt;/button&gt;    &lt;/div&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>

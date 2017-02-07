@@ -28,16 +28,11 @@ util.prepareQuery = (query) => {
 };
 
 /**
- * @param {Element} element
- * @param {String/Function} query dot class name or node name.
+ * @param {Element} e
+ * @param {String/Function} s CSS Selector.
  * @return {Boolean}
  */
-util.match = (element, query) => {
-  if (query[0] === '.') {
-    return element.classList.contains(query.slice(1));
-  }
-  return element.nodeName.toLowerCase() === query;
-};
+util.match = (e, s) => (e.matches || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector).call(e, s);
 
 /**
  * @param {Element} element

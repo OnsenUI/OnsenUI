@@ -26,7 +26,7 @@
           type="radio"
           :checked="$index === index"
           @change="onChange($event, $index)"
-          name="tab-bar-{{ key }}">
+          :name="'tab-bar-' + key">
         <button
             class="tab-bar__button"
             :class="{
@@ -75,15 +75,46 @@
       };
     },
 
-    created() {
-      this.key = generateKey();
-    },
-
     methods: {
       onChange(event, index) {
         event.stopPropagation();
         this.$emit('tab-change', {index});
       }
-    }
+    },
+
+    //--------------------------------
+    // lifecycle hooks
+    //--------------------------------
+
+    // beforeCreate() {
+    // },
+
+    created() {
+      this.key = generateKey();
+    },
+
+    // beforeMount() {
+    // },
+
+    // mounted() {
+    // },
+
+    // beforeUpdate() {
+    // },
+
+    // updated() {
+    // },
+
+    // activated() {
+    // },
+
+    // deactivated() {
+    // },
+
+    // beforeDestroy() {
+    // },
+
+    // destroyed() {
+    // },
   };
 </script>

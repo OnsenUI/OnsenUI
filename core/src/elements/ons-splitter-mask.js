@@ -25,7 +25,9 @@ export default class SplitterMaskElement extends BaseElement {
   }
 
   _onClick(event) {
-    if (util.match(this.parentNode, 'ons-splitter')) {
+    if (this.onClick instanceof Function) {
+      this.onClick();
+    } else if (util.match(this.parentNode, 'ons-splitter')) {
       this.parentNode._sides.forEach(side => side.close('left').catch(() => {}));
     }
     event.stopPropagation();
