@@ -216,13 +216,22 @@ export default class SelectElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
-    const sel = document.createElement('select');
-    sel.classList.add('select-input');
-    if (this.hasAttribute('select-id')) {
-      sel.id = this.getAttribute('select-id');
+    if (this.firstElementChild && this.firstElementChild.tagName.toLowerCase() == 'select') {
+      const sel = this.firstElementChild;
+      if (this.hasAttribute('select-id')) {
+        this.removeAttribute('select-id');
+      }
+      sel.classList.add('select-input');
     }
-    util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
-    this.appendChild(sel);
+    else {
+      const sel = document.createElement('select');
+      if (this.hasAttribute('select-id')) {
+        sel.id = this.getAttribute('select-id');
+      }
+      util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
+      sel.classList.add('select-input');
+      this.appendChild(sel);
+    }
 
     ModifierUtil.initModifier(this, scheme);
 
