@@ -2,11 +2,34 @@
 CHANGELOG
 ====
 
-v2.0.6
+v2.1.1
 ----
 
- * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
  * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
+
+v2.1.0
+----
+
+ * core: Add new component `ons-select`.
+ * core: All component classes exposes event list with static getter `events`.
+ * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
+ * ons-navigator: Fixed [#1726](https://github.com/OnsenUI/OnsenUI/issues/1726).
+ * ons-navigator: Animations block the interaction.
+ * ons-navigator: Fix ternary operator error on `options.leavePage`.
+ * ons-splitter: Add `side` property.
+ * ons-splitter: Check content before hide/destroy.
+ * ons-tab: Default click behavior can be overwritten by setting `onClick` property.
+ * ons-tabbar: Add `show` method, `hide` method and `visible` property.
+ * ons-dialog, ons-alert-dialog, ons-popover: User created dialogs are not moved inside page content.
+ * ons-popover: `show` supports `options.target`.
+ * ons-speed-dial: `show`, `hide`, `showItems`, `hideItems`, `toggle` and `toggleItems` now return Promise.
+ * ons-fab: Execute `this.show()` and some statements before `contentReady`.
+ * angular1: Fix `load` method of `ons-splitter-content`.
+
+### BREAKING CHANGES
+
+ * ons-input: Deprecate `content-left` attribute.
+ * css-components: Rename undocumented modifier `one` to `rowfooter`.
 
 v2.0.5
 ----
