@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+v2.1.1
+----
+
+ * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
+
 v2.1.0
 ----
 
