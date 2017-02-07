@@ -6,6 +6,7 @@ v2.0.6
 ----
 
  * ons-navigator, ons-page: Fixed the issue that pushed options is always empty on Angular2-binding and macOS Safari.
+ * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
 
 v2.0.5
 ----
