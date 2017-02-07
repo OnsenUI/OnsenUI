@@ -15,7 +15,6 @@
       .controller('PageController', function($scope) {
         $scope.selectedModifier = 'basic';
         $scope.editSelects = function() {
-          console.log("editSelects", document.getElementById('choose-sel'));
           document.getElementById('choose-sel').removeAttribute('modifier');
           if (event.target.value == 'material' || event.target.value == 'underbar') {
             document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
