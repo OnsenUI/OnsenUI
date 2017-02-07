@@ -35,7 +35,6 @@ const INPUT_ATTRIBUTES = [
   'multiple',
   'name',
   'required',
-  'select-id',
   'size'
 ];
 
@@ -216,20 +215,13 @@ export default class SelectElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
-    if (this.firstElementChild && this.firstElementChild.tagName.toLowerCase() == 'select') {
-      const sel = this.firstElementChild;
-      if (this.hasAttribute('select-id')) {
-        this.removeAttribute('select-id');
-      }
-      sel.classList.add('select-input');
+    const sel = this._select || document.createElement('select');
+    if (!sel.id && this.hasAttribute('select-id')) {
+      sel.id = this.getAttribute('select-id');
     }
-    else {
-      const sel = document.createElement('select');
-      if (this.hasAttribute('select-id')) {
-        sel.id = this.getAttribute('select-id');
-      }
+    sel.classList.add('select-input');
+    if (!this._select) {
       util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
-      sel.classList.add('select-input');
       this.appendChild(sel);
     }
 
