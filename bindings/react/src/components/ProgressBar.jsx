@@ -63,7 +63,7 @@ ProgressBar.propTypes = {
   secondaryValue: React.PropTypes.number,
 
   /**
-   * @name intermediate
+   * @name indeterminate
    * @type bool
    * @description
    *  [en] If this property is set, an infinite looping animation will be shown. [/en]
