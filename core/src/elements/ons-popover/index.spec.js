@@ -222,10 +222,12 @@ describe('OnsPopoverElement', () => {
     };
 
     Object.keys(classes).forEach(key => {
-      it(`can have the value '${key}'`, () => {
+      it(`can have the value '${key}'`, (done) => {
         popover.setAttribute('direction', key);
-        popover.show(target, {animation: 'none'});
-        expect(popover._popover.classList.contains(classes[key])).to.be.true;
+        popover.show(target, {animation: 'none'}).then(() => {
+          expect(popover._popover.classList.contains(classes[key])).to.be.true;
+          done();
+        });
       });
     });
 
