@@ -223,9 +223,8 @@ export default class PopoverElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
       this._initAnimatorFactory();
+      this.style.display = 'none';
     });
-
-    this.style.display = 'none';
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
@@ -316,7 +315,6 @@ export default class PopoverElement extends BaseElement {
     autoStyle.prepare(this);
 
     if (this._popover && this._mask) {
-      this.style.display = 'none';
       return;
     }
 
@@ -360,8 +358,6 @@ export default class PopoverElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
-
-    this.style.display = 'none';
   }
 
   _prepareAnimationOptions(options) {
