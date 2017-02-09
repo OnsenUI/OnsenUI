@@ -31,17 +31,17 @@
   name: Search Input
   category: Search Input
   markup: |
-    <input type="search" value="" placeholder="Search" class="search-input">
+    <input type="search" value="" placeholder="Search" class="search-input" style="width: 200px;">
 */
 
 .search-input() {
   .reset-input();
   .reset-font();
-  -webkit-appearance: none;
+  -webkit-appearance: textfield;
 }
 
-input[type="search"].search-input::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: textfield;
   display: none;
 }
 
@@ -58,15 +58,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: @search-input-background-color;
   box-shadow: @box-shadow--text-input;
   color: @search-input-color;
-  padding: 4px 0 0 28px;
+  line-height: 1.3; 
+  padding: 0 0 0 28px;
+  margin: 0;
   border-radius: @search-input-border-radius;
   background-image: @search-input-background-image;
   background-position: 8px center;
   background-repeat: no-repeat;
-  background-size: @font-size;
+  background-size: 16px;
   font-weight: @font-weight;
-  display: block;
-  width: 100%;
+  display: inline-block;
+  text-indent: 0;
 }
 
 .search-input:focus {
@@ -76,16 +78,25 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-shadow: @box-shadow--text-input;
 }
 
-.search-input::-webkit-search-cancel-button,
-.search-input::-webkit-search-decoration {
-  margin-right: @search-decoration-margin-right;
+.search-input::-webkit-search-cancel-button {
+  display: none;
 }
 
+.search-input::-webkit-search-decoration {
+  display: none;
+}
+
+.search-input::placeholder
 .search-input::-webkit-input-placeholder,
 .search-input::-moz-placeholder,
 .search-input::-ms-input-placeholder,
 .search-input:-ms-input-placeholder {
   color: @input-placeholder-color;
+  font-size: @search-input-font-size;
+  text-indent: 0;
+}
+
+.search-input:placeholder-shown {
 }
 
 .search-input:disabled {
