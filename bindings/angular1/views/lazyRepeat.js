@@ -34,10 +34,7 @@ limitations under the License.
         this._attrs = attrs;
         this._linker = linker;
 
-        ons._util.updateParentPosition(element[0]);
-
         var userDelegate = this._scope.$eval(this._attrs.onsLazyRepeat);
-
 
         var internalDelegate = new AngularLazyRepeatDelegate(userDelegate, element[0], element.scope());
 

@@ -295,15 +295,6 @@ util.removeModifier = (target, modifierName) => {
   return modifiers.length !== newModifiers.length;
 };
 
-util.updateParentPosition = (el) => {
-  if (!el._parentUpdated && el.parentElement) {
-    if (window.getComputedStyle(el.parentElement).getPropertyValue('position') === 'static') {
-      el.parentElement.style.position = 'relative';
-    }
-    el._parentUpdated = true;
-  }
-};
-
 util.toggleAttribute = (element, name, enable) => {
   if (enable) {
     element.setAttribute(name, '');
