@@ -391,10 +391,9 @@ export class LazyRepeatProvider {
   _calculateStartIndex(current) {
     const firstItemIndex = this._firstItemRendered();
     const lastItemIndex = this._lastItemRendered();
-    if (this._topPositions[lastItemIndex] - this._topPositions[firstItemIndex] === 0) {
-      // Fix for Angular 2 - only needed for the first render
-      this._recalculateTopPositions(firstItemIndex, lastItemIndex);
-    }
+
+    // Fix for Safari scroll and Angular 2
+    this._recalculateTopPositions(firstItemIndex, lastItemIndex);
 
     let start = 0;
     let end = this._countItems() - 1;
