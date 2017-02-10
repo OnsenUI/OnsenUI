@@ -17,13 +17,12 @@
 */
 
 // internal variables
-@button-bar-color: @buttonbar-color;
-@button-bar-active-color: @buttonbar-active-text-color;
+@button-bar-active-color: @button-bar-active-text-color;
 @button-bar-margin: 0;
 @button-bar-border-top: 1px solid @button-bar-color;
 @button-bar-border-bottom: 1px solid @button-bar-color;
 @button-bar-border: 0px solid @button-bar-color;
-@button-bar-active-background-color: alpha(@button-bar-color, @alpha-lighten);
+@button-bar-active-background-color: lighten(@button-bar-color, @alpha-lighten);
 
 /*!
   name: Button Bar

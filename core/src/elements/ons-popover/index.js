@@ -29,12 +29,9 @@ import contentReady from '../../ons/content-ready';
 const scheme = {
   '.popover': 'popover--*',
   '.popover-mask': 'popover-mask--*',
-  '.popover__container': 'popover__container--*',
-  '.popover__content': 'popover__content--*',
-  '.popover__arrow': 'popover__arrow--*'
+  '.popover__content': 'popover--*__content',
+  '.popover__arrow': 'popover--*__arrow'
 };
-
-const defaultClassName = 'popover';
 
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator,
@@ -45,7 +42,7 @@ const _animatorDict = {
 
 const templateSource = util.createFragment(`
   <div class="popover-mask"></div>
-  <div class="popover__container">
+  <div class="popover">
     <div class="popover__content"></div>
     <div class="popover__arrow"></div>
   </div>
@@ -211,7 +208,7 @@ export default class PopoverElement extends BaseElement {
   }
 
   get _popover() {
-    return util.findChild(this, '.popover__container');
+    return util.findChild(this, '.popover');
   }
 
   get _content() {
@@ -226,6 +223,7 @@ export default class PopoverElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
       this._initAnimatorFactory();
+      this.style.display = 'none';
     });
 
     this._doorLock = new DoorLock();
@@ -244,54 +242,49 @@ export default class PopoverElement extends BaseElement {
   }
 
   _positionPopover(target) {
-    const {_radius: radius, _content: el, _margin: margin} = this;
-    const pos = target.getBoundingClientRect();
+    const {_radius: radius, _content: contentElement, _margin: margin} = this;
+    const targetRect = target.getBoundingClientRect();
     const isMD = util.hasModifier(this, 'material');
     const cover = isMD && this.hasAttribute('cover-target');
 
-    const distance = {
-      top: pos.top - margin,
-      left: pos.left - margin,
-      right: window.innerWidth - pos.right - margin,
-      bottom: window.innerHeight - pos.bottom - margin
+    const targetDistance = {
+      top: targetRect.top - margin,
+      left: targetRect.left - margin,
+      right: window.innerWidth - targetRect.right - margin,
+      bottom: window.innerHeight - targetRect.bottom - margin
     };
 
-    const {vertical, primary, secondary} = this._calculateDirections(distance);
-    this._popover.classList.add('popover--' + primary);
+    const targetCenterDistanceFrom = {
+      top: targetRect.top + Math.round(targetRect.height / 2),
+      bottom: window.innerHeight - targetRect.bottom + Math.round(targetRect.height / 2),
+      left: targetRect.left + Math.round(targetRect.width / 2),
+      right: window.innerWidth - targetRect.right + Math.round(targetRect.width / 2)
+    };
 
-    const offset = cover ? 0 : (vertical ? pos.height : pos.width) + (isMD ? 0 : 14);
-    this.style[primary] = Math.max(0, distance[primary] + offset) + margin + 'px';
-    el.style[primary] = 0;
+    const {vertical, primary: primaryDirection, secondary} = this._calculateDirections(targetDistance);
+    ModifierUtil.addModifier(this, primaryDirection);
 
-    const l = vertical ? 'width' : 'height';
-    const sizes = (style => ({
-      width: parseInt(style.getPropertyValue('width')),
-      height: parseInt(style.getPropertyValue('height'))
-    }))(window.getComputedStyle(el));
+    const sizeName = vertical ? 'width' : 'height';
+    // Get .popover__content size
+    const contentSize = (style => ({
+      width: parseInt(style.getPropertyValue('width'), 10),
+      height: parseInt(style.getPropertyValue('height'), 10)
+    }))(window.getComputedStyle(contentElement));
 
-    el.style[secondary] = Math.max(0, distance[secondary] - (sizes[l] - pos[l]) / 2) + 'px';
-    this._arrow.style[secondary] = Math.max(radius, distance[secondary] + pos[l] / 2) + 'px';
+    // Setting .popover position.
+    const offset = cover ? 0 : (vertical ? targetRect.height : targetRect.width) + (isMD ? 0 : 14);
+    this._popover.style[primaryDirection] = Math.max(margin, targetDistance[primaryDirection] + offset + margin) + 'px';
+    const secondaryOffset = Math.max(margin, margin + targetDistance[secondary] - (contentSize[sizeName] - targetRect[sizeName]) / 2);
+    this._popover.style[secondary] = secondaryOffset + 'px';
 
-    this._setTransformOrigin(distance, sizes, pos, primary);
-
-    // Prevent animit from restoring the style.
-    el.removeAttribute('data-animit-orig-style');
-  }
-
-  _setTransformOrigin(distance, sizes, pos, primary) {
-    const calc = (a, o, l) => primary === a ? sizes[l] / 2 : distance[a] + (primary === o ? -sizes[l] : sizes[l] - pos[l]) / 2;
-    const [x, y] = [calc('left', 'right', 'width') + 'px', calc('top', 'bottom', 'height') + 'px'];
-    util.extend(this._popover.style, {
-      transformOrigin: x + ' ' + y,
-      webkitTransformOriginX: x,
-      webkitTransformOriginY: y
-    });
+    // Setting .popover__arrow position.
+    this._arrow.style[secondary] = Math.max(radius, (targetCenterDistanceFrom[secondary] - secondaryOffset)) + 'px';
   }
 
   _calculateDirections(distance) {
     const options = (this.getAttribute('direction') || 'up down left right').split(/\s+/).map(e => positions[e]);
     const primary = options.sort((a, b) => distance[a] - distance[b])[0];
-    const vertical = ['top', 'bottom'].indexOf(primary) !== -1;
+    const vertical = 'top' == primary || 'bottom' == primary;
     let secondary;
 
     if (vertical) {
@@ -305,8 +298,8 @@ export default class PopoverElement extends BaseElement {
 
   _clearStyles() {
     ['top', 'bottom', 'left', 'right'].forEach(e => {
-      this._arrow.style[e] = this._content.style[e] = this.style[e] = '';
-      this._popover.classList.remove(`popover--${e}`);
+      this._arrow.style[e] = this._content.style[e] = this._popover.style[e] = '';
+      ModifierUtil.removeModifier(this, e);
     });
   }
 
@@ -321,11 +314,9 @@ export default class PopoverElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (this.classList.contains('popover')) {
+    if (this._popover && this._mask) {
       return;
     }
-
-    this.classList.add(defaultClassName);
 
     const hasDefaultContainer = this._popover && this._content;
 
@@ -355,11 +346,13 @@ export default class PopoverElement extends BaseElement {
       this.appendChild(template);
     }
 
+    // FIXME!
     if (this.hasAttribute('style')) {
       this._popover.setAttribute('style', this.getAttribute('style'));
       this.removeAttribute('style');
     }
 
+    // FIXME!
     if (this.hasAttribute('mask-color')) {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
@@ -585,16 +578,11 @@ export default class PopoverElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'direction', 'animation', 'class'];
+    return ['modifier', 'direction', 'animation'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
-      case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
-        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;

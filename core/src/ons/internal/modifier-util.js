@@ -49,6 +49,8 @@ export default class ModifierUtil {
 
   /**
    * @param {Object} diff
+   * @param {Array} diff.removed
+   * @param {Array} diff.added
    * @param {Object} classList
    * @param {String} template
    */
@@ -64,6 +66,8 @@ export default class ModifierUtil {
 
   /**
    * @param {Object} diff
+   * @param {Array} diff.removed
+   * @param {Array} diff.added
    * @param {HTMLElement} element
    * @param {Object} scheme
    */
@@ -111,5 +115,34 @@ export default class ModifierUtil {
     }
 
     return modifier.trim().split(/ +/).filter(token => token !== '');
+  }
+
+  /**
+   * Add modifier token to an element.
+   */
+  static addModifier(element, modifierToken) {
+    if (!element.hasAttribute('modifier')) {
+      element.setAttribute('modifier', modifierToken);
+    } else {
+      const tokens = ModifierUtil.split(element.getAttribute('modifier'));
+      if (tokens.indexOf(modifierToken) == -1) {
+        tokens.push(modifierToken);
+        element.setAttribute('modifier', tokens.join(' '));
+      }
+    }
+  }
+
+  /**
+   * Remove modifier token from an element.
+   */
+  static removeModifier(element, modifierToken) {
+    if (element.hasAttribute('modifier')) {
+      const tokens = ModifierUtil.split(element.getAttribute('modifier'));
+      const index = tokens.indexOf(modifierToken);
+      if (index !== -1) {
+        tokens.splice(index, 1);
+        element.setAttribute('modifier', tokens.join(' '));
+      }
+    }
   }
 }
