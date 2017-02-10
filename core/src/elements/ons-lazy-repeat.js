@@ -67,8 +67,6 @@ import {LazyRepeatDelegate, LazyRepeatProvider} from '../ons/internal/lazy-repea
 export default class LazyRepeatElement extends BaseElement {
 
   connectedCallback() {
-    util.updateParentPosition(this);
-
     // not very good idea and also not documented
     if (this.hasAttribute('delegate')) {
       this.delegate = window[this.getAttribute('delegate')];

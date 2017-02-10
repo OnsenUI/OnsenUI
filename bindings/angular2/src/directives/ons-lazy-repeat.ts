@@ -58,8 +58,8 @@ export class OnsLazyRepeat implements OnDestroy {
     this._provider = new (<any>ons)._internal.LazyRepeatProvider(
       this._elementRef.nativeElement.parentElement,
       new (<any>ons)._internal.LazyRepeatDelegate({
-        loadItemElement: (index, parent, done) => {
-          this._loadItemTemplate(index, parent, done);
+        loadItemElement: (index, done) => {
+          this._loadItemTemplate(index, done);
         },
         countItems: () => {
           return this._onsLazyRepeatOf.length;
@@ -68,13 +68,12 @@ export class OnsLazyRepeat implements OnDestroy {
     );
   }
 
-  _loadItemTemplate(index, parent, done) {
+  _loadItemTemplate(index, done) {
     const context = new ItemContext(this._onsLazyRepeatOf[index], index, this._onsLazyRepeatOf.length);
     const view = this._viewContainer.createEmbeddedView(this._templateRef, context);
     // dirty fix on createEmbeddedView() does not insert DOM element randomly.
-    parent.appendChild(view.rootNodes[0]); 
 
-    done(view.rootNodes[0]);
+    done({element: view.rootNodes[0]});
   }
 
   refresh() {

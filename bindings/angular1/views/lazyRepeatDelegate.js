@@ -59,9 +59,8 @@ limitations under the License.
         throw new Error('`lazy-repeat` delegate object is vague.');
       }
 
-      loadItemElement(index, parent, done) {
+      loadItemElement(index, done) {
         this._prepareItemElement(index, ({element, scope}) => {
-          parent.appendChild(element);
           done({element, scope});
         });
       }
