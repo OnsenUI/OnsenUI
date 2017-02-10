@@ -31,18 +31,13 @@
   category: Text Input
   elements: ons-input
   markup: |
-    <input type="text" class="text-input" placeholder="text" value="">
-    <br>
-    <input type="text" class="text-input" placeholder="text" value="" disabled>
+    <div><input type="text" class="text-input" placeholder="text" value=""></div>
+    <div><input type="text" class="text-input" placeholder="text" value="" disabled></div>
 */
 
 .input() {
   .reset-input();
   .reset-font();
-}
-
-.input--disabled() {
-  .disabled();
 }
 
 .transparent() {
@@ -58,7 +53,7 @@
   color: @input-text-color;
   padding: 0;
   margin: 0;
-  width: 100%;
+  width: auto;
   font-size: @text-input-font-size;
   height: @text-input-height;
   font-weight: @font-weight;
@@ -66,7 +61,7 @@
 }
 
 .text-input--disabled() {
-  .input--disabled();
+  .disabled();
   .transparent();
 }
 
@@ -95,18 +90,9 @@
   .text-input--disabled();
 }
 
-.text-input:disabled::-webkit-input-placeholder {
-  .webkit-input-placeholder();
-}
-
-.text-input:disabled::-moz-placeholder {
-  .webkit-input-placeholder();
-}
-
-.text-input:disabled::-ms-input-placeholder {
-  .webkit-input-placeholder();
-}
-
+.text-input:disabled::-webkit-input-placeholder,
+.text-input:disabled::-moz-placeholder,
+.text-input:disabled::-ms-input-placeholder,
 .text-input:disabled:-ms-input-placeholder {
   .webkit-input-placeholder();
 }
@@ -124,9 +110,8 @@
   category: Text Input
   elements: ons-input
   markup: |
-    <input type="text" class="text-input--underbar" placeholder="text" value="">
-    <br>
-    <input type="text" class="text-input--underbar" placeholder="text" value="" disabled>
+    <div><input type="text" class="text-input text-input--underbar" placeholder="text" value=""></div>
+    <div><input type="text" class="text-input text-input--underbar" placeholder="text" value="" disabled></div>
 */
 
 .text-input--underbar {
@@ -170,9 +155,9 @@
   elements: ons-input
   markup: |
     <span>
-      <input class="text-input--material" placeholder="Username" type="text" required>
-      <br /><br />
-      <input class="text-input--material" placeholder="Password" type="password" required>
+      <div><input class="text-input text-input--material" placeholder="Username" type="text" required></div>
+      <br />
+      <div><input class="text-input text-input--material" placeholder="Password" type="password" required></div>
     </span>
 */
 
@@ -248,8 +233,8 @@
   category: Text Input
   elements: ons-input
   markup: |
-    <input type="text" class="text-input text-input--transparent" placeholder="text" value="">
-    <input type="text" class="text-input text-input--transparent" placeholder="text" value="" disabled>
+    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value=""></div>
+    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value="" disabled></div>
 */
 
 .text-input--transparent {
