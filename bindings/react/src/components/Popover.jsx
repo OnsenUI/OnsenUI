@@ -14,12 +14,17 @@ import ReactDOM from 'react-dom';
  * [jp][/jp]
  * @example
  * <Page>
- *  <Button ref='btn'
-  *  onClick={() => this.setState({target: this.refs.btn, isOpen: true})}/>
+ *  <Button
+ *    ref={(btn) => { this.btn = btn; }}
+ *    onClick={() =>
+ *      this.setState({target: this.btn, isOpen: true})
+ *    }
+ *  />
     <Popover
       isOpen={this.state.isOpen}
       onCancel={() => this.setState({isOpen: false})}
-      getTarget={() => this.state.target} >
+      getTarget={() => this.state.target}
+    >
       <div style={{textAlign: 'center', opacity: 0.5}}>
         <p>This is a popover!</p>
           <p><small>Click the background to remove the popover.</small></p>

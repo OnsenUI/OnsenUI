@@ -18,6 +18,15 @@ describe('OnsSwitchElement', () => {
     expect(window.ons.SwitchElement).to.be.ok;
   });
 
+  onlyChrome(describe)('class attribute', () => {
+    it('should contains "switch" class token automatically', () => {
+      expect(element.classList.contains('switch')).to.be.ok;
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('switch')).to.be.ok;
+      expect(element.classList.contains('foobar')).to.be.ok;
+    });
+  });
+
   it('classList contains \'switch\' by default', () => {
     expect(element.classList.contains('switch')).to.be.true;
   });
@@ -131,13 +140,14 @@ describe('OnsSwitchElement', () => {
 
   describe('#_onChange()', () => {
     onlyChrome(it)('adds the \'checked\' attribute', () => {
-      element.checked = true;
+      expect(element.hasAttribute('checked')).to.be.false;
       element._onChange();
       expect(element.hasAttribute('checked')).to.be.true;
     });
 
     it('removes the \'checked\' attribute', () => {
-      element.checked = false;
+      element.checked = true;
+      expect(element.hasAttribute('checked')).to.be.true;
       element._onChange();
       expect(element.hasAttribute('checked')).to.be.false;
     });

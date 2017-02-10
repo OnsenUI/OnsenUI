@@ -2,54 +2,28 @@
   "name": "",
   "version": "0.0.0",
   "dependencies": {
-    "archiver": "~0.8.1",
+    "ancss": "^0.1.5",
     "autoprefixer": "~1.1.20140410",
-    "body-parser": "~1.0.0",
-    "clean-css": "^2.1.8",
-    "color-parser": "~0.1.0",
-    "cookie-parser": "~1.0.1",
-    "debug": "~0.7.4",
-    "express": "~4.0.0",
-    "morgan": "~1.0.0",
-    "q": "~1.0.1",
-    "rimraf": "^2.2.8",
-    "static-favicon": "~1.0.0",
-    "stylus": "^0.51.1"
+    "browser-sync": "^2.18.6",
+    "eco": "^1.1.0-rc-3",
+    "rimraf": "^2.2.8"
   },
   "private": true,
   "devDependencies": {
-    "jshint-stylish": "^0.4.0",
-    "gulp-concat": "^2.2.0",
-    "run-sequence": "^0.3.6",
     "event-stream": "^3.1.2",
-    "gulp-util": "^2.2.14",
-    "gulp-header": "^1.0.2",
     "gulp": "^3.6.0",
-    "gulp-livereload": "^1.3.1",
     "gulp-autoprefixer": "0.0.7",
-    "gulp-jshint": "^1.5.3",
-    "gulp-connect": "^2.0.5",
     "gulp-less": "^1.2.3",
+    "gulp-load-plugins": "^0.5.0",
+    "gulp-order": "^1.0.6",
     "gulp-plumber": "^0.6.1",
-    "connect-livereload": "^0.4.0",
-    "gulp-html2js": "^0.1.0",
-    "gulp-useref": "^0.4.2",
-    "gulp-minify-css": "^0.3.1",
-    "gulp-filter": "^0.4.1",
-    "gulp-uglify": "^0.2.1",
-    "gulp-ngmin": "^0.2.0",
-    "gulp-clean": "^0.2.4",
-    "gulp-stylus": "^1.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-shell": "^0.2.4",
-    "topdoc": "^0.4.0",
-    "gulp-order": "^1.0.6",
-    "gulp-load-plugins": "^0.5.0"
+    "gulp-stylus": "^1.0.0",
+    "gulp-util": "^2.2.14",
+    "run-sequence": "^0.3.6"
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "start": "node ./bin/www"
   }
 }

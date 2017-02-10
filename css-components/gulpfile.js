@@ -1,191 +1,62 @@
-
-var gulp = require('gulp');
-var pkg = require('./package.json');
-var appServer = require('./server/app');
-var merge = require('event-stream').merge;
-var gutil = require('gulp-util');
-var runSequence = require('run-sequence');
-var $ = require('gulp-load-plugins')();
-var schemeWriter = require('./server/schemeWriter');
-
-
-////////////////////////////////////////
-// css
-////////////////////////////////////////
-gulp.task('css', function() {
-  return gulp.src('www/styles/main.less')
-    .pipe($.plumber())
-    .pipe($.less())
-    .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('www/styles/'));
-});
-
-////////////////////////////////////////
-// html2js
-////////////////////////////////////////
-gulp.task('html2js', function() {
-  return gulp.src('www/views/*.html')
-    .pipe($.html2js({
-      outputModuleName: 'template',
-      base: 'www',
-      useStrict: true
-    }))
-    .pipe($.concat('template.generated.js'))
-    .pipe(gulp.dest('www/scripts/'));
-});
+const gulp = require('gulp');
+const pkg = require('./package.json');
+const merge = require('event-stream').merge;
+const gutil = require('gulp-util');
+const runSequence = require('run-sequence');
+const browserSync = require('browser-sync');
+const $ = require('gulp-load-plugins')();
+const eco = require('eco');
+const fs = require('fs');
+const ancss = require('ancss');
+const prefix = __dirname + '/../build/css/';
 
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', function(done) {
-  runSequence(['html2js', 'css'], 'build-css-topdoc', 'jshint', done);
+gulp.task('build', ['generate-preview', 'assets']);
+
+////////////////////////////////////////
+// less
+////////////////////////////////////////
+gulp.task('less', () => {
+  return gulp.src('src/onsen-css-components.less')
+    .pipe($.plumber())
+    .pipe($.less())
+    .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
+    .pipe(gulp.dest(prefix));
 });
 
 ////////////////////////////////////////
-// clean
+// generate-preview
 ////////////////////////////////////////
-gulp.task('clean', function (cb) {
-  require('rimraf')('www.prod/**/*', cb);
+gulp.task('generate-preview', ['less'], () => {
+  const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
+  const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
+  const components = ancss.parse(css, {detect: line => line.match(/^!/)});
+  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components}), 'utf-8');
 });
 
 ////////////////////////////////////////
-// build-minified
+// assets
 ////////////////////////////////////////
-gulp.task('build-minified', ['html2js', 'css', 'clean'],function(done) {
-  var jsFilter = $.filter('www/**/*.js');
-  var cssFilter = $.filter('www/**/*.css');
-
-  // copy files
-  gulp.src(['www/**/*', 'www/*'], {base: 'www'})
-    .pipe(gulp.dest('www.prod/'))
-    .on('end', function() {
-
-      // generate minified files
-      merge(
-        gulp.src('www/index.html')
-          .pipe($.useref.assets())
-          .pipe(jsFilter)
-          .pipe($.ngmin())
-          .pipe($.uglify())
-          .pipe(jsFilter.restore())
-          .pipe(cssFilter)
-          .pipe($.minifyCss())
-          .pipe(cssFilter.restore())
-          .pipe($.useref.restore())
-          .pipe($.useref())
-          .pipe(gulp.dest('www.prod')),
-        gulp.src('www/bower_components/jquery-minicolors/jquery.minicolors.png')
-          .pipe(gulp.dest('www.prod/styles'))
-      ).on('end', done);
-
-    });
-});
-
-////////////////////////////////////////
-// jshint
-////////////////////////////////////////
-gulp.task('jshint', function() {
-  return gulp.src([
-      './www/scripts/**/*.js',
-      '!./www/scripts/**/*.generated.js'
-    ])
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'));
+gulp.task('assets', () => {
+  return gulp.src('src/img/*.*')
+    .pipe(gulp.dest(prefix + 'img/'));
 });
 
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'build', 'app-server'], function() {
-  gulp.watch(['www/styles/*.less'], ['css']);
+gulp.task('serve', ['build'], done => {
+  gulp.watch(['src/**/*.less', 'templates/preview.html.eco'], ['build']);
+  gulp.watch(prefix + 'preview.html').on('change', browserSync.reload);
+  gulp.watch('src/img/*', ['assets']);
 
-  gulp.watch(['www/views/*.html'], ['html2js']);
-
-  gulp.watch(['components-src/stylus/**/*'], ['build-css-topdoc']);
-
-  gulp.watch(['www/theme.js'], ['build-css-components']);
-
-  var livereload = require('gulp-livereload')();
-
-  // for livereload
-  gulp.watch([
-    'www/styles/*.css',
-    'www/images/*',
-    'www/views/*',
-    'www/*',
-    'www/testcases/*'
-  ], {
-    debounceDelay: 400
-  }, function(file) {
-    livereload.changed(file.path);
-  });
-
-  // for jshint
-  gulp.watch(['www/scripts/**/*.js', '!./www/scripts/**/*.generated.js'], function(changedFile) {
-    gulp.src(changedFile.path)
-      .pipe($.jshint())
-      .pipe($.jshint.reporter('default'));
+  browserSync.init({
+    server: {
+      baseDir: prefix
+    },
+    startPath: '/preview.html'
   });
 });
 
-////////////////////////////////////////
-// serve-minified
-////////////////////////////////////////
-gulp.task('serve-minified', function() {
-  process.env['NODE_ENV'] = '';
-  runSequence('build-minified', function() {
-    appServer([], function(app) {
-      app.set('env', 'production');
-    }).listen(9002);
-  });
-});
-
-////////////////////////////////////////
-// app-server
-////////////////////////////////////////
-gulp.task('app-server', function() {
-  var middleware = require('connect-livereload')({port: 35729});
-  appServer([middleware], function(app) {
-    app.set('env', 'development');
-  }).listen(9002);
-});
-
-////////////////////////////////////////
-// build-css-components
-////////////////////////////////////////
-gulp.task('build-css-components', ['build-schemes'], function(done) {
-  gulp.src('components-src/stylus/*-theme.styl')
-    .pipe($.stylus({errors: true}))
-    .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
-    .pipe($.rename(function(path) {
-      path.dirname = '.';
-      path.basename = 'onsen-css-components-' + path.basename;
-    }))
-    .pipe(gulp.dest('./components-src/dist/'))
-    .pipe(gulp.dest('./www/'))
-    .on('end', function() {
-      // Copy as default theme
-      gulp.src('components-src/dist/onsen-css-components-blue-basic-theme.css')
-        .pipe($.rename('onsen-css-components.css'))
-        .pipe(gulp.dest('./components-src/dist/'))
-        .pipe($.rename('onsen-css-components-default.css'))
-        .pipe(gulp.dest('./components-src/dist/'))
-        .pipe(gulp.dest('./www/'))
-        .on('end', done);
-    });
-});
-
-////////////////////////////////////////
-// build-css-topdoc
-////////////////////////////////////////
-gulp.task('build-css-topdoc', ['build-css-components'], $.shell.task([
-  '"./node_modules/.bin/topdoc" --source "./components-src/dist" --destination "./www/testcases" --template "./components-src/testcases-topdoc-template"'
-]));
-
-////////////////////////////////////////
-// build-schemes
-////////////////////////////////////////
-gulp.task('build-schemes', function(done) {
-  schemeWriter.write();
-  setTimeout(done, 40);
-});

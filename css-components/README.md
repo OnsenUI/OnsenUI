@@ -1,32 +1,21 @@
 # Onsen CSS Components
 
-![screenshot](./misc/screenshot.png)
+Onsen CSS Components is CSS components for Cordova Apps.
 
-Onsen CSS Components is CSS Generator for Mobile Apps.
+## How to Build
 
-[Onsen CSS Components]:http://components.onsen.io/
+```
+$ yarn install
+$ gulp build
+```
 
-## How to run
+## How to Customize Components
 
-* Clone
+Execute the following command. When this command is executed, a preview of the CSS components is displayed in the browser.
 
-        git clone https://github.com/OnsenUI/onsen-css-components
+```
+$ gulp serve
+```
 
-* Open the terminal from onsen-css-components directory
-
-        cd onsen-css-components
-
-* Install dependencies using npm
-
-        npm install
-
-* Install gulp.js (globally)
-
-        [sudo] npm install -g gulp
-
-* Type 'gulp serve' to start running
-
-        gulp serve
-
-* Then navigate your browser to [http://localhost:9002/](http://localhost:9002/)
+If you edit the less file under the `src` directory, the less file is automatically built into the CSS and the browser is reloaded. The built CSS file is located in `../build/css/onsen-css-components.css`.
 

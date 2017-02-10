@@ -36,7 +36,7 @@ class Tabbar extends BasicComponent {
 
   componentDidMount() {
     super.componentDidMount();
-    const node = this.refs.tabbar;
+    const node = this._tabbar;
     node.addEventListener('prechange', this.props.onPreChange);
     node.addEventListener('postchange', this.props.onPostChange);
     node.addEventListener('reactive', this.props.onReactive);
@@ -47,7 +47,7 @@ class Tabbar extends BasicComponent {
   }
 
   componentWillUnmount() {
-    const node = this.refs.tabbar;
+    const node = this._tabbar;
     node.removeEventListener('prechange', this.props.onPreChange);
     node.removeEventListener('postchange', this.props.onPostChange);
     node.removeEventListener('reactive', this.props.onReactive);
@@ -56,7 +56,7 @@ class Tabbar extends BasicComponent {
   componentDidUpdate(prevProps) {
     super.componentDidUpdate(prevProps);
     if (prevProps.index !== this.props.index) {
-      this.refs.tabbar.setActiveTab(this.props.index);
+      this._tabbar.setActiveTab(this.props.index);
     }
   }
 
@@ -78,7 +78,7 @@ class Tabbar extends BasicComponent {
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return (
-      <ons-tabbar {...this.props} ref='tabbar'>
+      <ons-tabbar {...this.props} ref={(tabbar) => { this._tabbar = tabbar; }}>
         <div className={'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '')}>
           {this.tabPages}
         </div>

@@ -255,6 +255,17 @@ gulp.task('html2js', () => {
     .pipe(gulp.dest('bindings/angular1/directives/'));
 });
 
+////////////////////////////////////////
+// build-css-components
+////////////////////////////////////////
+gulp.task('build-css-components', () => {
+  return gulp.src('css-components/gulpfile.js')
+  .pipe($.chug({
+    read: false,
+    tasks: ['build']
+  }));
+});
+
 /////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
@@ -353,16 +364,18 @@ gulp.task('prepare', ['html2js'], () =>  {
 
     // onsen-css-components
     gulp.src([
-      'css-components/components-src/dist/*.css',
+      'build/css/**/*',
     ])
-      .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
-    // stylus files
+    // less files
     gulp.src([
-      'css-components/components-src/stylus/**/*'
+      'css-components/**/*',
+      '!css-components/node_modules/',
+      '!css-components/node_modules/**/*',
+      '!css-components/npm-debug.log'
     ])
-      .pipe(gulp.dest('build/stylus/')),
+      .pipe(gulp.dest('build/css-components-src/')),
 
 
     // onsenui.css
@@ -403,14 +416,6 @@ gulp.task('prepare', ['html2js'], () =>  {
 });
 
 ////////////////////////////////////////
-// prepare-css-components
-////////////////////////////////////////
-gulp.task('prepare-css-components', ['prepare'], () => {
-  return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
-    .pipe(gulp.dest('css-components/www/patterns/lib/onsen'));
-});
-
-////////////////////////////////////////
 // compress-distribution-package
 ////////////////////////////////////////
 gulp.task('compress-distribution-package', () => {
@@ -437,10 +442,10 @@ gulp.task('build', done => {
   return runSequence(
     'clean',
     'core',
+    'build-css-components',
     'prepare',
     'minify-js',
     'build-docs',
-    'prepare-css-components',
     'compress-distribution-package',
     done
   );
@@ -454,6 +459,7 @@ gulp.task('soft-build', done => {
   return runSequence(
     'clean',
     'core',
+    'build-css-components',
     'prepare',
     'minify-js',
     done
@@ -490,8 +496,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
 
   const watched = [
     'bindings/angular1/*/*',
-    'core/css/*.css',
-    'css-components/components-src/dist/*.css'
+    'core/css/*.css'
   ];
 
   if (CORDOVA_APP) {
@@ -504,6 +509,7 @@ gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], ()
 
   // for livereload
   gulp.watch([
+    'build/css/onsen-css-components.css',
     'examples/*/*.{js,css,html}',
     'bindings/angular1/test/e2e/*/*.{js,css,html}'
   ]).on('change', changedFile => {
@@ -522,7 +528,7 @@ gulp.task('build-docs', () => {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', function(done) {
+gulp.task('test', ['prepare'], function(done) {
   return runSequence('unit-test', done);
 });
 
@@ -695,7 +701,7 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(do
       }
     } finally {
       global.WDIO_BROWSER = undefined;
-      
+
       $.connect.serverClose(); // kill local HTTP servers
       standaloneSeleniumServer.kill(); // kill standalone Selenium server
     }

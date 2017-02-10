@@ -31,6 +31,20 @@ describe('OnsSpeedDialItemElement', () => {
     expect(item.classList.contains('speed-dial__item--fuga')).to.be.true;
   });
 
+  onlyChrome(describe)('"class" attribute', () => {
+    it('should contain default class names automatically', () => {
+      const element = new ons.SpeedDialItemElement();
+      expect(element.classList.contains('speed-dial__item')).to.be.true;
+      expect(element.classList.contains('fab')).to.be.true;
+      expect(element.classList.contains('fab--mini')).to.be.true;
+      element.setAttribute('class', 'foo');
+      expect(element.classList.contains('speed-dial__item')).to.be.true;
+      expect(element.classList.contains('fab')).to.be.true;
+      expect(element.classList.contains('fab--mini')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+    });
+  });
+
   describe('#_onClick()', () => {
     it('should stop propagation', () => {
       const e = {

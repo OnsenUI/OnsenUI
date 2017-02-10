@@ -86,7 +86,7 @@ class Navigator extends BasicComponent {
         return new Promise((resolve) => this.forceUpdate(resolve));
       };
 
-      this.refs.navi._pushPage(options, update).then(() => {
+      this._navi._pushPage(options, update).then(() => {
         this.routes = routes;
 
         var renderPage = (route) => {
@@ -126,7 +126,7 @@ class Navigator extends BasicComponent {
       };
 
       this.routes.push(route);
-      this.refs.navi
+      this._navi
         ._pushPage(
           options,
           update
@@ -141,7 +141,7 @@ class Navigator extends BasicComponent {
   }
 
   isRunning() {
-    return this.refs.navi._isRunning;
+    return this._navi._isRunning;
   }
 
   /*
@@ -166,7 +166,7 @@ class Navigator extends BasicComponent {
       const pos = this.pages.length - 2;
       this.pages.splice(pos, 1);
       this.routes.splice(pos, 1);
-      this.refs.navi.topPage.updateBackButton(this.pages.length > 1);
+      this._navi.topPage.updateBackButton(this.pages.length > 1);
       this.forceUpdate();
     });
   }
@@ -197,11 +197,11 @@ class Navigator extends BasicComponent {
       });
     };
 
-    return this.refs.navi._popPage(options, update);
+    return this._navi._popPage(options, update);
   }
 
   _prePop(event) {
-    if (event.target !== this.refs.navi) {
+    if (event.target !== this._navi) {
       return;
     }
 
@@ -214,7 +214,7 @@ class Navigator extends BasicComponent {
   }
 
   _postPop(event) {
-    if (event.target !== this.refs.navi) {
+    if (event.target !== this._navi) {
       return;
     }
 
@@ -227,7 +227,7 @@ class Navigator extends BasicComponent {
   }
 
   _prePush(event) {
-    if (event.target !== this.refs.navi) {
+    if (event.target !== this._navi) {
       return;
     }
 
@@ -240,7 +240,7 @@ class Navigator extends BasicComponent {
   }
 
   _postPush(event) {
-    if (event.target !== this.refs.navi) {
+    if (event.target !== this._navi) {
       return;
     }
 
@@ -253,7 +253,7 @@ class Navigator extends BasicComponent {
   }
 
   componentDidMount() {
-    const node = this.refs.navi;
+    const node = this._navi;
     node.popPage = this.popPage.bind(this);
 
     node.addEventListener('prepush', this._prePush);
@@ -280,7 +280,7 @@ class Navigator extends BasicComponent {
   }
 
   componentWillUnmount() {
-    const node = this.refs.navi;
+    const node = this._navi;
     node.removeEventListener('prepush', this.props.onPrePush);
     node.removeEventListener('postpush', this.props.onPostPush);
     node.removeEventListener('prepop', this.props.onPrePop);
@@ -293,7 +293,7 @@ class Navigator extends BasicComponent {
     const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
 
     return (
-      <ons-navigator {...others} ref='navi'>
+      <ons-navigator {...others} ref={(navi) => { this._navi = navi; }}>
         {pages}
       </ons-navigator>
     );

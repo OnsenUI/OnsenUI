@@ -20,7 +20,7 @@
             mask = document.querySelector('.popover-mask');;
 
             if (!el) {
-              alert('NG 1');  
+              alert('NG 1');
               } else {
               alert('OK 1');
             }
@@ -31,16 +31,16 @@
               alert('OK 2');
             }
 
-            popover.destroy();
+            popover._destroy();
             if (document.querySelector('.popover')) {
-              alert('NG 3');  
+              alert('NG 3');
               } else {
               alert('OK 3');
             }
           }, 500);
 
         });
-      }); 
+      });
     </script>
 
     <style>

@@ -1,0 +1,287 @@
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// NOTE: You can't use @extend that break component independent and parsing.
+
+// internal variables
+@range-track-background-color: @border-color;
+@range-track-background-color-active: @highlight-color;
+@range-thumb-background-color: #fff;
+@range-thumb-border-color: @border-color;
+
+@range-border-radius: 3px;
+@range-thumb-border: 1px solid @range-thumb-border-color;
+@range-border: none;
+@range-track-height: 2px;
+@range-thumb-width: @thumb-size;
+
+@material-range-track-height: 2px;
+@material-range-thumb-width: 12px;
+@material-range-thumb-radius: @material-range-thumb-width / 2;
+@material-range-thumb-vertical-margin: 24px;
+@material-range-thumb-horizontal-margin: 2px;
+
+/*!
+  name: Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+*/
+.range() {
+  .reset-input();
+  -webkit-appearance: none;
+}
+
+.range__thumb() {
+  cursor: pointer;
+  position: relative;
+  height: @range-thumb-width;
+  width: @range-thumb-width;
+  background-color: @range-thumb-background-color;
+  border: @range-thumb-border;
+  // TODO: Add shadow
+  //box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: @round-border;
+  margin: 0;
+  padding: 0;
+}
+
+ons-range { // FIXME
+  &:before {
+    content: '';
+    display: block;
+    position: relative;
+    top: 17px;
+    height: @range-track-height;
+    margin-bottom: -(@range-track-height);
+    background-color: @range-track-background-color;
+  }
+
+  .range {
+    position: relative;
+    background: transparent;
+
+    &::-moz-range-track {
+      background: transparent;
+    }
+  }
+
+  &[disabled] {
+    .disabled();
+
+    .range {
+      opacity: 1;
+    }
+  }
+}
+
+.range {
+  .range();
+  border: @range-border;
+  height: @range-track-height;
+  border-radius: @range-border-radius;
+  background-image: linear-gradient(@range-track-background-color, @range-track-background-color);
+  background-position: left center;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  height: 32px;
+}
+
+.range::-moz-range-track {
+  position: relative;
+  border: none;
+  background-color: @range-track-background-color;
+  height: @range-track-height;
+  border-radius: @round-border;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.range::-ms-track {
+  position: relative;
+  border: none;
+  background-color: @range-track-background-color;
+  height: 0;
+  border-radius: @round-border;
+}
+
+.range::-webkit-slider-thumb {
+  .range__thumb();
+  -webkit-appearance: none;
+  top: 0;
+}
+
+.range::-moz-range-thumb {
+  .range__thumb();
+}
+
+.range::-ms-thumb {
+  .range__thumb();
+  top: 0;
+}
+
+.range::-ms-fill-lower {
+  height: 2px;
+  background-color: @range-track-background-color-active;
+}
+
+.range::-ms-tooltip {
+  display: none;
+}
+
+.range:disabled {
+  .disabled();
+}
+
+.range__left {
+  position: relative;
+  top: 17px;
+  height: 2px;
+  width: 0;
+  background-color: @range-track-background-color-active;
+  pointer-events: none;
+}
+
+[disabled] > .range__left,
+.range--material:disabled + .range__left {
+  visibility: hidden;
+}
+
+/*!
+  name: Material Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+
+.range--material {
+  background-image: linear-gradient(@material-range-track-color, @material-range-track-color);
+  background-position: center;
+  background-size: 100% 2px;
+  overflow: visible;
+}
+
+.range--material::-webkit-slider-thumb {
+  top: 1px;
+  border: none;
+  height: @material-range-thumb-width + @material-range-thumb-vertical-margin;
+  width: @material-range-thumb-width + @material-range-thumb-horizontal-margin;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: radial-gradient(circle @material-range-thumb-radius at @material-range-thumb-radius + @material-range-thumb-horizontal-margin / 2, @material-range-thumb-color 0%, @material-range-thumb-color @material-range-thumb-radius, transparent @material-range-thumb-radius + 1);
+  margin-top: -1px;
+}
+
+.range--material::-moz-range-thumb {
+  top: 1px;
+  border: 3px solid @material-range-track-color;
+  height: @material-range-thumb-width;
+  width: @material-range-thumb-width;
+  border-radius: 100%;
+  border-color: @material-range-thumb-color;
+  background-color: @material-range-thumb-color;
+}
+
+.range--material::-moz-range-track {
+  background-color: @material-range-track-color;
+}
+
+.range--material::-ms-thumb {
+  margin-top: 1px;
+  border: none;
+  height: @material-range-thumb-width;
+  width: @material-range-thumb-width;
+  border-radius: 100%;
+  border-color: @material-range-thumb-color;
+  background-color: @material-range-thumb-color;
+}
+
+.range--material:focus::-moz-range-thumb {
+  border-color: @material-range-thumb-color;
+  background-color: @material-range-thumb-color;
+}
+
+.range--material--thumb--before() {
+  display: none;
+}
+
+.range--material::-moz-range-thumb:before {
+  .range--material--thumb--before();
+}
+
+.range--material::-webkit-slider-thumb:before {
+  .range--material--thumb--before();
+}
+
+.range--material::-ms-fill-lower {
+  background-color: @material-range-thumb-color;
+}
+
+.range--material--thumb--after() {
+  content: '';
+  display: block;
+  border: 0px;
+  border-radius: 100%;
+  height: @material-range-thumb-width;
+  width: @material-range-thumb-width;
+  background-color: @material-range-thumb-color;
+  opacity: 0.2;
+  transition: transform 0.1s linear;
+}
+
+.range--material::-moz-range-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  .range--material--thumb--after();
+}
+
+.range--material::-webkit-slider-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  .range--material--thumb--after();
+  display: inline-block;
+  margin-left: (@material-range-thumb-horizontal-margin / 2);
+  margin-top: (@material-range-thumb-vertical-margin / 2);
+}
+
+.range--material::-ms-fill-upper {
+  margin-top: -6px;
+  margin-left: -6px;
+  .range--material--thumb--after();
+}
+
+.range--material:active::-webkit-slider-thumb:after {
+  transform: scale(2.5);
+}
+
+.range--material:active::-moz-range-thumb:after {
+  transform: scale(2.5);
+}
+
+.range--material:active::-ms-fill-upper {
+  transform: scale(2.5)
+}
+
+.range--material__left {
+  background-color: @material-range-thumb-color;
+}
+

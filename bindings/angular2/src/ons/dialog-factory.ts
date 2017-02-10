@@ -5,7 +5,8 @@ import {
   ApplicationRef,
   ComponentRef,
   ReflectiveInjector,
-  Type
+  Type,
+  NgZone
 } from '@angular/core';
 import {Params} from './params';
 import {ComponentLoader} from './component-loader';
@@ -25,30 +26,33 @@ export class DialogFactory {
     private _injector: Injector,
     private _resolver: ComponentFactoryResolver,
     private _appRef: ApplicationRef,
-    private _componentLoader: ComponentLoader
+    private _componentLoader: ComponentLoader,
+    private _zone: NgZone
   ) {
   }
 
   createDialog(componentType: Type<any>, params: Object = {}): Promise<DialogRef> { // TODO: fix "any"
     return new Promise(resolve => {
       setImmediate(() => {
-        const factory = this._resolver.resolveComponentFactory(componentType);
-        const injector = ReflectiveInjector.resolveAndCreate([
-          {provide: Params, useValue: new Params(params)}
-        ], this._injector);
-        const componentRef = factory.create(injector);
-        const rootElement = componentRef.location.nativeElement;
+        this._zone.run(() => {
+          const factory = this._resolver.resolveComponentFactory(componentType);
+          const injector = ReflectiveInjector.resolveAndCreate([
+            {provide: Params, useValue: new Params(params)}
+          ], this._injector);
+          const componentRef = factory.create(injector);
+          const rootElement = componentRef.location.nativeElement;
 
-        this._componentLoader.load(componentRef);
+          this._componentLoader.load(componentRef);
 
-        const element = rootElement.children[0];
-        const dialogElement = element.tagName === 'ONS-DIALOG' ? element : element.querySelector('ons-dialog');
+          const element = rootElement.children[0];
+          const dialogElement = element.tagName === 'ONS-DIALOG' ? element : element.querySelector('ons-dialog');
 
-        if (!dialogElement) {
-          throw Error('<ons-dialog> element is not found in component\'s template.');
-        }
+          if (!dialogElement) {
+            throw Error('<ons-dialog> element is not found in component\'s template.');
+          }
 
-        resolve({dialog: dialogElement, destroy: () => componentRef.destroy()});
+          resolve({dialog: dialogElement, destroy: () => componentRef.destroy()});
+        });
       });
     });
   }

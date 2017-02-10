@@ -48,7 +48,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this.refs.navi._pushPage(options, update)
+    return this._navi._pushPage(options, update)
       .then(() => {
         this.pages = routes.map(route => this.props.renderPage(route));
         this.update();
@@ -80,7 +80,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this.refs.navi._pushPage(options, update)
+    return this._navi._pushPage(options, update)
       .then(() => {
         this.page = null;
         this.update();
@@ -88,7 +88,7 @@ class RouterNavigator extends BasicComponent {
   }
 
   isRunning() {
-    return this.refs.navi._isRunning;
+    return this._navi._isRunning;
   }
 
   /*
@@ -113,7 +113,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this.refs.navi._pushPage(options, update)
+    return this._navi._pushPage(options, update)
       .then(() => {
         this.pages.splice(this.pages.length - 2, 1);
         this.update();
@@ -142,11 +142,11 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this.refs.navi._popPage(options, update);
+    return this._navi._popPage(options, update);
   }
 
   componentDidMount() {
-    const node = this.refs.navi;
+    const node = this._navi;
 
     this.cancelUpdate = false;
 
@@ -206,7 +206,7 @@ class RouterNavigator extends BasicComponent {
   }
 
   componentWillUnmount() {
-    const node = this.refs.navi;
+    const node = this._navi;
     node.removeEventListener('prepush', this.props.onPrePush);
     node.removeEventListener('postpush', this.props.onPostPush);
     node.removeEventListener('prepop', this.props.onPrePop);
@@ -219,7 +219,7 @@ class RouterNavigator extends BasicComponent {
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return (
-      <ons-navigator {...others} ref='navi'>
+      <ons-navigator {...others} ref={(navi) => { this._navi = navi; }}>
         {this.props.routeConfig.routeStack.map(route => this.props.renderPage(route))}
         {this.page}
       </ons-navigator>

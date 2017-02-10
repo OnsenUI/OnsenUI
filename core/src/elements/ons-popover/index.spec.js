@@ -25,32 +25,25 @@ describe('OnsPopoverElement', () => {
   });
 
   onlyChrome(it)('provides \'modifier\' attribute', () => {
-    const container = popover.querySelector('.popover__container');
     const content = popover.querySelector('.popover__content');
+    const innerPopover = popover.querySelector('.popover');
 
     popover.setAttribute('modifier', 'hoge');
-    expect(popover.classList.contains('popover--hoge')).to.be.true;
-    expect(container.classList.contains('popover__container--hoge')).to.be.true;
-    expect(content.classList.contains('popover__content--hoge')).to.be.true;
+    expect(innerPopover.classList.contains('popover--hoge')).to.be.true;
+    expect(content.classList.contains('popover--hoge__content')).to.be.true;
 
-    popover.setAttribute('modifier', ' foo bar');
-    expect(popover.classList.contains('popover--foo')).to.be.true;
-    expect(popover.classList.contains('popover--bar')).to.be.true;
-    expect(popover.classList.contains('popover--hoge')).not.to.be.true;
-    expect(container.classList.contains('popover__container--foo')).to.be.true;
-    expect(container.classList.contains('popover__container--bar')).to.be.true;
-    expect(container.classList.contains('popover__container--hoge')).not.to.be.true;
-    expect(content.classList.contains('popover__content--foo')).to.be.true;
-    expect(content.classList.contains('popover__content--bar')).to.be.true;
-    expect(content.classList.contains('popover__content--hoge')).not.to.be.true;
+    popover.setAttribute('modifier', 'foo bar');
+    expect(innerPopover.classList.contains('popover--foo')).to.be.true;
+    expect(innerPopover.classList.contains('popover--bar')).to.be.true;
+    expect(innerPopover.classList.contains('popover--hoge')).not.to.be.true;
+    expect(content.classList.contains('popover--foo__content')).to.be.true;
+    expect(content.classList.contains('popover--bar__content')).to.be.true;
+    expect(content.classList.contains('popover--hoge__content')).not.to.be.true;
 
-    popover.classList.add('popover--piyo');
-    container.classList.add('popover__container--piyo');
+    innerPopover.classList.add('popover--piyo');
     popover.setAttribute('modifier', 'fuga');
-    expect(popover.classList.contains('popover--piyo')).to.be.true;
-    expect(popover.classList.contains('popover--fuga')).to.be.true;
-    expect(container.classList.contains('popover__container--piyo')).to.be.true;
-    expect(container.classList.contains('popover__container--fuga')).to.be.true;
+    expect(innerPopover.classList.contains('popover--piyo')).to.be.true;
+    expect(innerPopover.classList.contains('popover--fuga')).to.be.true;
   });
 
   it('should be hidden by default', () => {
@@ -229,10 +222,12 @@ describe('OnsPopoverElement', () => {
     };
 
     Object.keys(classes).forEach(key => {
-      it(`can have the value '${key}'`, () => {
+      it(`can have the value '${key}'`, (done) => {
         popover.setAttribute('direction', key);
-        popover.show(target, {animation: 'none'});
-        expect(popover._popover.classList.contains(classes[key])).to.be.true;
+        popover.show(target, {animation: 'none'}).then(() => {
+          expect(popover._popover.classList.contains(classes[key])).to.be.true;
+          done();
+        });
       });
     });
 

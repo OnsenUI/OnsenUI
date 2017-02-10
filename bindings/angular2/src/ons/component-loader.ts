@@ -20,11 +20,12 @@ export class ComponentLoader {
 
       componentRef.onDestroy(() => {
         this.appRef['detachView'](componentRef.hostView);
+
+        if (rootElement.parentNode) {
+          rootElement.parentNode.removeChild(rootElement);
+        }
       });
     } else {
-      const rootContainer = this.appRef['_rootComponents'][0].location.nativeElement;
-      rootContainer.appendChild(rootElement);
-
       if (this.appRef['registerChangeDetector']) {
         this.appRef['registerChangeDetector'](componentRef.changeDetectorRef);
       }
@@ -39,6 +40,9 @@ export class ComponentLoader {
         }
       });
     }
+
+    const rootContainer = this.appRef['_rootComponents'][0].location.nativeElement;
+    rootContainer.appendChild(rootElement);
   }
 }
 
