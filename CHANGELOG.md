@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ * ons-popover: Changed internal DOM structure.
+
 v2.0.6
 ----
 
