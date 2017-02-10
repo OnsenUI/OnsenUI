@@ -33,8 +33,6 @@ const scheme = {
   '.popover__arrow': 'popover--*__arrow'
 };
 
-const defaultClassName = 'popover';
-
 const _animatorDict = {
   'default': () => platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator,
   'none': PopoverAnimator,
@@ -225,9 +223,8 @@ export default class PopoverElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
       this._initAnimatorFactory();
+      this.style.display = 'none';
     });
-
-    this.style.display = 'none';
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
@@ -581,16 +578,11 @@ export default class PopoverElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'direction', 'animation', 'class'];
+    return ['modifier', 'direction', 'animation'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
-      case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
-        break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
