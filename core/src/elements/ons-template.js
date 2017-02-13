@@ -62,9 +62,9 @@ export default class TemplateElement extends BaseElement {
   init() {
     this.template = this.innerHTML;
 
-    // Show warning when ons-template is nested
-    if (this.querySelector('ons-template') != null) {
-      console.warn(`ons-template cannot be nested (id: ${this.getAttribute('id')}): ${this.template}`);
+    // Show warning when the ons-template is not located just under document.body
+    if (!/body/i.test(this.parentNode.tagName)) { // if the parent is not document.body
+      console.warn(`ons-template (id = ${this.getAttribute('id')}) must be located just under document.body${ this.parentNode.outerHTML ? `:\n\n${this.parentNode.outerHTML}` : '.' }`);
     }
 
     while (this.firstChild) {

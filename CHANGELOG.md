@@ -4,7 +4,7 @@ CHANGELOG
 
 v2.1.1
 ----
- * ons-template: Show warning when ons-template is nested.
+ * ons-template: Show warning when ons-template is not located just under document.body.
 
 v2.1.0
 ----
