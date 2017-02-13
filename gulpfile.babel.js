@@ -135,6 +135,9 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   //     gulp unit-test --browsers local_chrome,local_safari # you can use commas
   //     gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
   //     gulp unit-test --browsers local_chrome,remote_macos_elcapitan_safari_10 # default
+  //
+  //     # run unit tests without Onsen UI warnings
+  //     gulp unit-test --disable-warnings
 
   (async () => {
     const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
@@ -145,6 +148,11 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
     } else { // do not resolve glob pattern
       listOfSpecFiles = new Array( path.join(__dirname, specs) );
+    }
+
+    // if --disable-warnings is specified, suppress warnings from Onsen UI
+    if (argv['disable-warnings']) {
+      global.KARMA_DISABLE_WARNINGS = true;
     }
 
     let testsPassed = true; // error flag
