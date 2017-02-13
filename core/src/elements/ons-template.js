@@ -69,9 +69,11 @@ export default class TemplateElement extends BaseElement {
   }
 
   connectedCallback() {
-    // Show warning when the ons-template is not located just under document.body
-    if (!/body/i.test(this.parentNode.tagName)) { // if the parent is not document.body
-      util.warn(`ons-template (id = ${this.getAttribute('id')}) must be located just under document.body${ this.parentNode.outerHTML ? `:\n\n${this.parentNode.outerHTML}` : '.' }`);
+    if (this.parentNode) { // Note: this.parentNode is not set in some CE0/CE1 polyfills.
+      // Show warning when the ons-template is not located just under document.body
+      if (!/body/i.test(this.parentNode.tagName)) { // if the parent is not document.body
+        util.warn(`ons-template (id = ${this.getAttribute('id')}) must be located just under document.body${ this.parentNode.outerHTML ? `:\n\n${this.parentNode.outerHTML}` : '.' }`);
+      }
     }
 
     var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
