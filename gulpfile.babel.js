@@ -112,7 +112,7 @@ gulp.task('core-dts-test', () => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test', ['watch-core', 'core-dts-test'], (done) => {
+gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   // Usage:
   //     # run all unit tests in just one Karma server
   //     gulp unit-test
