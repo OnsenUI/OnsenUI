@@ -1,3 +1,4 @@
+/* Private */
 const _formatOutput = (modifiers = {}, output) => {
   if (Object.hasOwnProperty.call(modifiers, 'number')) {
     return Number(output);
@@ -31,7 +32,24 @@ const _bindArrayInputOn = (eventName, modelKey, vnode) => {
     }
   });
 };
+const _bindCheckbox = (el, binding, vnode, modelKey) => {
+  if (binding.value instanceof Array) {
+    el.checked = binding.value.includes(el.value);
+    _bindArrayInputOn('change', modelKey, vnode);
+  } else {
+    el.checked = !!binding.value;
+    _bindSimpleInputOn('change', modelKey, vnode, 'checked');
+  }
+};
+const _updateCheckbox = (el, binding, vnode, modelKey) => {
+  if (binding.value instanceof Array) {
+    el.checked = (vnode.context[modelKey] || []).includes(el.value);
+  } else {
+    el.checked = !!binding.value;
+  }
+};
 
+/* Public */
 // VOnsModel directive
 export default {
   bind(el, binding, vnode) {
@@ -45,8 +63,7 @@ export default {
         break;
 
       case 'ons-switch':
-        el.checked = binding.value;
-        _bindSimpleInputOn('change', modelKey, vnode, 'checked');
+        _bindCheckbox(el, binding, vnode, modelKey);
         break;
 
       case 'ons-range':
@@ -62,8 +79,7 @@ export default {
             break;
 
           case 'checkbox':
-            el.checked = binding.value.includes(el.value);
-            _bindArrayInputOn('change', modelKey, vnode);
+            _bindCheckbox(el, binding, vnode, modelKey);
             break;
 
           default:
@@ -87,7 +103,7 @@ export default {
         break;
 
       case 'ons-switch':
-        el.checked = binding.value;
+        _updateCheckbox(el, binding, vnode, modelKey);
         break;
 
       case 'ons-range':
@@ -101,7 +117,7 @@ export default {
             break;
 
           case 'checkbox':
-            el.checked = (vnode.context[modelKey] || []).includes(el.value);
+            _updateCheckbox(el, binding, vnode, modelKey);
             break;
 
           default:
