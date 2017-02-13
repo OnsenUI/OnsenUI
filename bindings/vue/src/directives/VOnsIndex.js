@@ -11,7 +11,8 @@ const _setInitialIndex = (el, value) => {
 // VOnsIndex directive
 export default {
   bind(el, binding, vnode) {
-    if (!['ons-tabbar', 'ons-carousel'].includes(el.tagName.toLowerCase())) {
+    const tag = el.tagName.toLowerCase();
+    if (!['ons-tabbar', 'ons-carousel'].includes(tag)) {
       throw new Error('"v-ons-index" directive cannot be used with "' + tag + '" element.');
     }
 
