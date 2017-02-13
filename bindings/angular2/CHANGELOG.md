@@ -7,6 +7,11 @@ Guidelines:
 CHANGELOG
 ====
 
+(dev)
+----
+
+ * Added `nativeElement` getter function to access DOM element on all directives.
+
 1.0.0-rc.4
 ----
 

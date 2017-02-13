@@ -49,7 +49,7 @@ const INPUT_ATTRIBUTES = [
  *  [ja][/ja]
  * @description
  *   [en]
- *     Select component. If you want to place a select on a page, use `<ons-select>`.
+ *     Select component. If you want to place a select with an ID of `my-id` on a page, use `<ons-select select-id="my-id">`.
  *
  *     The component will automatically display as a Material Design select on Android.
  *
@@ -119,6 +119,14 @@ export default class SelectElement extends BaseElement {
    * @description
    *   [en]Make the select input required for submitting the form it is part of.[/en]
    *   [ja]このセレクトボックスを入力必須にする場合に指定します。通常 `form` 要素と共に使用します。[/ja]
+   */
+
+  /**
+   * @attribute select-id
+   * @type {String}
+   * @description
+   *   [en]ID given to the inner select, useful for dynamic manipulation.[/en]
+   *   [ja]このセレクトボックスが内部に持つ select 要素に与える ID を指定します。セレクトボックスの内容を動的に変更する必要がある場合に使用します。[/ja]
    */
 
   /**
@@ -207,10 +215,15 @@ export default class SelectElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
-    const sel = document.createElement('select');
+    const sel = this._select || document.createElement('select');
+    if (!sel.id && this.hasAttribute('select-id')) {
+      sel.id = this.getAttribute('select-id');
+    }
     sel.classList.add('select-input');
-    util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
-    this.appendChild(sel);
+    if (!this._select) {
+      util.arrayFrom(this.childNodes).forEach(element => sel.appendChild(element));
+      this.appendChild(sel);
+    }
 
     ModifierUtil.initModifier(this, scheme);
 

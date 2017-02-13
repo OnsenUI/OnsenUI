@@ -28,7 +28,7 @@
       <v-ons-speed-dial-item
         @click="$notification.confirm('Share on Twitter?')"
       >
-        <v-ons-icon icon="md-twitter"></ons-icon>
+        <v-ons-icon icon="md-twitter"></v-ons-icon>
       </v-ons-speed-dial-item>
       <v-ons-speed-dial-item
         @click="$notification.confirm('Share on Facebook?')"

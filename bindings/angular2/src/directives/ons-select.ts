@@ -12,19 +12,23 @@ import {
 } from '@angular/core';
 
 /**
- * @element ons-input
- * @directive OnsInput
- * @selector ons-input
+ * @element ons-select
+ * @directive OnsSelect
+ * @selector ons-select
  * @description
- *   [en]Angular 2 directive for `<ons-input>` component.[/en]
- *   [ja]`<ons-input>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular 2 directive for `<ons-select>` component.[/en]
+ *   [ja]`<ons-select>`要素のAngular 2ディレクティブです。[/en]
  * @example
- *   <ons-input [(value)]="value"></ons-input>
+ *   <ons-select>
+ *    <option value="basic">Basic</option>
+ *    <option value="material">Material</option>
+ *    <option value="underbar">Underbar</option>
+ *   </ons-select><br>
  */
 @Directive({
-  selector: 'ons-input'
+  selector: 'ons-select'
 })
-export class OnsInput implements OnChanges, OnDestroy {
+export class OnsSelect implements OnChanges, OnDestroy {
   private _element: any;
   private _boundOnChange: Function;
 
@@ -32,8 +36,8 @@ export class OnsInput implements OnChanges, OnDestroy {
    * @input value
    * @type {string}
    * @desc
-   *   [en]Input value for the internal `<input>` element.[/en]
-   *   [ja]内部の`input`要素に対する入力値を設定します。[/ja]
+   *   [en]Input value of the `<ons-select>` element..[/en]
+   *   [ja]`ons-select`要素に対する入力値を指定します。[/ja]
    */
   @Input('value') _value: string;
 
@@ -42,7 +46,7 @@ export class OnsInput implements OnChanges, OnDestroy {
    * @type {string}
    * @desc
    *   [en]Triggers when the value is changed.[/en]
-   *   [ja]内部の`input`要素の値が変更された時に発火します。[/ja]
+   *   [ja]値が変更された時に発火します。[/ja]
    */
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
@@ -50,7 +54,7 @@ export class OnsInput implements OnChanges, OnDestroy {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
-    this._element.addEventListener('input', this._boundOnChange);
+    this._element.addEventListener('change', this._boundOnChange);
   }
 
   _onChange(event) {
@@ -63,10 +67,6 @@ export class OnsInput implements OnChanges, OnDestroy {
   }
 
   get element(): any {
-    return this._element;
-  }
-
-  get nativeElement(): any {
     return this._element;
   }
 

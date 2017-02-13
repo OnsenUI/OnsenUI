@@ -6,6 +6,9 @@ v2.1.1
 ----
  * ons-template: Show warning when ons-template is not located just under document.body.
 
+ * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
+ * ons-select: Fix width of the inner element.
+
 v2.1.0
 ----
 

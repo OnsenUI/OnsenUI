@@ -79,6 +79,10 @@ export class OnsSplitterSide {
     return this._elementRef.nativeElement;
   }
 
+  get nativeElement() {
+    return this._elementRef.nativeElement;
+  }
+
   _createPageLoader() {
     const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
@@ -140,6 +144,10 @@ export class OnsSplitterContent {
   }
 
   get element() {
+    return this._elementRef.nativeElement;
+  }
+
+  get nativeElement() {
     return this._elementRef.nativeElement;
   }
 
