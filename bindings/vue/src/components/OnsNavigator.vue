@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator v-el:navigator>
+  <ons-navigator ref="navigator">
     <div
       v-for="page in pages"
       track-by="$index"
@@ -23,10 +23,12 @@
 
     props: ['initialComponent'],
 
-    ready() {
-      if (this.initialComponent) {
-        this.pages = [this.initialComponent];
-      }
+    mounted : function () {
+      this.$nextTick(function() {
+        if (this.initialComponent) {
+          this.pages = [this.initialComponent];
+        }
+      })
     },
 
     methods: {
@@ -37,7 +39,7 @@
 
         this.pages = [...this.pages, component];
         this.isRunning = true;
-        this.$els.navigator
+        this.$refs.navigator
           ._pushPage(options)
           .catch(noop)
           .then(() => this.isRunning = false);
@@ -54,7 +56,7 @@
         };
 
         this.isRunning = true;
-        this.$els.navigator
+        this.$refs.navigator
           ._popPage(options, removePage)
           .catch(noop)
           .then(() => this.isRunning = false);

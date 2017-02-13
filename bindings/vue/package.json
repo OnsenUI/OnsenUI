@@ -36,7 +36,7 @@
   ],
   "homepage": "https://onsen.io/",
   "peerDependencies": {
-    "vue": "^1.0.0",
+    "vue": "^2.0.1",
     "onsenui": "^2.0.0-rc.17"
   },
   "devDependencies": {
@@ -59,10 +59,10 @@
     "rollup-plugin-vue": "^2.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "vue": "^1.0.0",
-    "vue-hot-reload-api": "^1.2.0",
-    "vue-html-loader": "^1.0.0",
-    "vue-loader": "^8.5.2",
+    "vue": "^2.0.1",
+    "vue-hot-reload-api": "^2.0.0",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.12.0"
