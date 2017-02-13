@@ -319,11 +319,16 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
+ * @param {Element} hasRipple
  */
-util.updateRipple = (target) => {
+util.updateRipple = (target, hasRipple) => {
+  if (hasRipple === undefined) {
+    hasRipple = target.hasAttribute('ripple');
+  }
+
   const rippleElement = util.findChild(target, 'ons-ripple');
 
-  if (target.hasAttribute('ripple')) {
+  if (hasRipple) {
     if (!rippleElement) {
       target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
     }

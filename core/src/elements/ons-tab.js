@@ -240,7 +240,7 @@ export default class TabElement extends BaseElement {
   }
 
   _updateRipple() {
-    // util.updateRipple(this.querySelector('.tab-bar__button'), this);
+    util.updateRipple(this.querySelector('.tab-bar__button'), this.hasAttribute('ripple'));
   }
 
   _updateDefaultTemplate() {
@@ -480,7 +480,7 @@ export default class TabElement extends BaseElement {
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;
       case 'ripple':
-        contentReady(this, () => this._updateRipple());
+        this._templateLoaded() && contentReady(this, () => this._updateRipple());
         break;
       case 'icon':
       case 'label':
