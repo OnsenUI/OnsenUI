@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import { dialogAPI } from '../internal/mixins/api';
-  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
+  import { dialogAPI } from '../mixins/api';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins/derive';
 
   export default {
     mixins: [dialogAPI, deriveEvents, deriveMethods, deriveProperties],

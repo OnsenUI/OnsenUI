@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
-  import { fabAPI } from '../internal/mixins/api';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins/derive';
+  import { fabAPI } from '../mixins/api';
 
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties, fabAPI],

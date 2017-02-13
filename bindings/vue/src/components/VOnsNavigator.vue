@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
-  import { VuePageLoader } from '../internal/mixins/pageLoader';
-  import { destroyable, hasOptions } from '../internal/mixins/common';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins/derive';
+  import { VuePageLoader } from '../mixins/pageLoader';
+  import { destroyable, hasOptions } from '../mixins/common';
 
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties, VuePageLoader, destroyable, hasOptions],

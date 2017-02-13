@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
-  import { hasOptions, visibilityToggle } from '../internal/mixins/common';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins/derive';
+  import { hasOptions, visibilityToggle } from '../mixins/common';
 
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties, hasOptions, visibilityToggle]

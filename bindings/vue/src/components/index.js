@@ -7,9 +7,9 @@ export { default as VOnsNavigator } from './VOnsNavigator.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
-import { dialogAPI, fabAPI } from '../internal/mixins/api';
-import { VuePageLoader } from '../internal/mixins/pageLoader';
-import { clickable, hasOptions, destroyable } from '../internal/mixins/common';
+import { dialogAPI, fabAPI } from '../mixins/api';
+import { VuePageLoader } from '../mixins/pageLoader';
+import { clickable, hasOptions, destroyable } from '../mixins/common';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 

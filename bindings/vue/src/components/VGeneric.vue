@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../internal/mixins/derive';
+  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins/derive';
   export default {
     mixins: [deriveEvents, deriveMethods, deriveProperties]
   };

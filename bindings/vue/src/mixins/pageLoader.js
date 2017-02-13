@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PageLoader } from 'onsenui';
 import { destroyable } from './common';
-import { hyphenate } from '../util';
+import { hyphenate } from '../internal/util';
 
 const _getParentVM = element => {
   let parent = element;
