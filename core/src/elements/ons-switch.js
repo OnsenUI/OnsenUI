@@ -175,7 +175,7 @@ export default class SwitchElement extends BaseElement {
 
     contentReady(this, () => {
       this._compile();
-      ['checked', 'disabled', 'modifier', 'name', 'input-id'].forEach(e => {
+      ['checked', 'disabled', 'modifier', 'name', 'value', 'input-id'].forEach(e => {
         this.attributeChangedCallback(e, null, this.getAttribute(e));
       });
     });
@@ -304,11 +304,30 @@ export default class SwitchElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'input-id', 'checked', 'disabled', 'class'];
+    return ['modifier', 'input-id', 'checked', 'value', 'disabled', 'class'];
   }
 
   static get events() {
     return ['change'];
+  }
+
+  /**
+   * @property value
+   * @type {String}
+   * @description
+   *   [en]The current value of the input.[/en]
+   *   [ja][/ja]
+   */
+  get value() {
+    return !this.hasOwnProperty('_checkbox')
+      ? this.getAttribute('value')
+      : this._checkbox.value;
+  }
+
+  set value(val) {
+    contentReady(this, () => {
+      this._checkbox.value = val;
+    });
   }
 
   attributeChangedCallback(name, last, current) {
@@ -340,6 +359,14 @@ export default class SwitchElement extends BaseElement {
           this._disabled = current !== null;
           this._checkbox.disabled = current !== null;
           util.toggleAttribute(this._checkbox, name, current !== null);
+          break;
+
+        default:
+          if (current !== null) {
+            this._checkbox.setAttribute(name, current);
+          } else {
+            this._checkbox.removeAttribute(name);
+          }
       }
     });
   }
