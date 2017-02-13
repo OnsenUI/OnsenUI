@@ -1,6 +1,11 @@
 CHANGELOG
 ====
 
+2.0.0-alpha.1
+----
+* VOnsInput: Checkbox supports Boolean type in VOnsModel.
+* VOnsSelect: Supports Array type in VOnsModel.
+
 2.0.0-alpha.0
 ----
 
