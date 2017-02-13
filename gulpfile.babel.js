@@ -112,7 +112,7 @@ gulp.task('core-dts-test', () => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
+gulp.task('unit-test', ['watch-core', 'core-dts-test'], (done) => {
   // Usage:
   //     # run all unit tests in just one Karma server
   //     gulp unit-test
@@ -138,6 +138,9 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
   //
   //     # run unit tests without Onsen UI warnings
   //     gulp unit-test --disable-warnings
+  //
+  //     # watch unit tests
+  //     gulp unit-test --watch
 
   (async () => {
     const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
@@ -177,8 +180,8 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
               new karma.Server(
                 {
                   configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
-                  singleRun: true, // overrides the corresponding option in config file
-                  autoWatch: false // same as above
+                  singleRun: argv.watch ? false : true, // overrides the corresponding option in config file
+                  autoWatch: argv.watch ? true : false // same as above
                 },
                 (exitCode) => {
                   const exitMessage = `Karma server has exited with ${exitCode}`;
@@ -220,31 +223,6 @@ gulp.task('unit-test', ['prepare', 'core', 'core-dts-test'], (done) => {
       done('unit-test has failed');
     }
   })();
-});
-
-////////////////////////////////////////
-// watch-unit-test
-////////////////////////////////////////
-gulp.task('watch-unit-test', ['watch-core'], (done) => {
-  new karma.Server(
-    {
-      configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
-      singleRun: false, // overrides the corresponding option in config file
-      autoWatch: true // same as above
-    },
-    (exitCode) => {
-      const exitMessage = `Karma server has exited with ${exitCode}`;
-
-      switch (exitCode) {
-        case 0: // success
-          $.util.log($.util.colors.green(exitMessage));
-          break;
-        default: // error
-          $.util.log($.util.colors.red(exitMessage));
-      }
-      done();
-    }
-  ).start();
 });
 
 ////////////////////////////////////////
