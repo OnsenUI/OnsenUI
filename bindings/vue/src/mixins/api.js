@@ -1,7 +1,7 @@
-import { visibilityToggle, clickable, hasOptions } from './common';
+import { hidable, clickable, hasOptions } from './common';
 
 const dialogAPI = {
-  mixins: [visibilityToggle, hasOptions],
+  mixins: [hidable, hasOptions],
 
   mounted() {
     this.$el._cancel = () => {
@@ -11,7 +11,7 @@ const dialogAPI = {
 };
 
 const fabAPI = {
-  mixins: [clickable, visibilityToggle]
+  mixins: [clickable, hidable]
 };
 
 export { dialogAPI, fabAPI };

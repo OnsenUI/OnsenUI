@@ -1,4 +1,13 @@
-const visibilityToggle = {
+/* Private */
+const _toggleVisibility = function() {
+  if (this.visible !== this.$el.visible) {
+    this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
+  }
+};
+
+/* Public */
+// Components that can be shown or hidden
+const hidable = {
   props: {
     visible: {
       type: Boolean,
@@ -7,22 +16,21 @@ const visibilityToggle = {
   },
 
   watch: {
-    visible: function() {
-      if (this.visible !== this.$el.visible) {
-        this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
-      }
+    visible() {
+      _toggleVisibility.call(this);
     }
   },
 
   mounted() {
-    this.$nextTick(() => { // FAB takes 1 cycle in showing
-      if (typeof this.visible === 'boolean' && this.visible !== this.$el.visible) {
-        this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
+    this.$nextTick(() => { // FAB takes 1 extra cycle
+      if (typeof this.visible === 'boolean') {
+        _toggleVisibility.call(this);
       }
     });
   }
 };
 
+// Components which can have click behavior overriden
 const clickable = {
   props: {
     onClick: {
@@ -31,7 +39,7 @@ const clickable = {
   },
 
   watch: {
-    onClick: function() {
+    onClick() {
       this.$el.onClick = this.onClick;
     }
   },
@@ -41,17 +49,7 @@ const clickable = {
   }
 };
 
-const hasOptions = {
-  props: {
-    options: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    }
-  }
-};
-
+// Components that contain pages
 const destroyable = {
   beforeDestroy() {
     if (this.$el._destroy instanceof Function) {
@@ -60,5 +58,17 @@ const destroyable = {
   }
 };
 
-export { visibilityToggle, clickable, hasOptions, destroyable };
+// Components with 'options' property
+const hasOptions = {
+  props: {
+    options: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  }
+};
+
+export { hidable, clickable, destroyable, hasOptions};
 
