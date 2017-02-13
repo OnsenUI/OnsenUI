@@ -20,7 +20,7 @@
     }
   ],
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test --disable-warnings"
   },
   "repository": {
     "type": "git",
