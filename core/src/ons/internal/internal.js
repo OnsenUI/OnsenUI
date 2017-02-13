@@ -22,7 +22,8 @@ const internal = {};
 
 internal.config = {
   autoStatusBarFill: true,
-  animationsDisabled: false
+  animationsDisabled: false,
+  warningsDisabled: false
 };
 
 internal.nullElement = window.document.createElement('div');
