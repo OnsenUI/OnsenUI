@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import internal from './internal';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -362,6 +363,17 @@ util.defer = () => {
     deferred.reject = reject;
   });
   return deferred;
+};
+
+/**
+ * Show warnings when they are enabled.
+ *
+ * @param {*} arguments to console.warn
+ */
+util.warn = (...args) => {
+  if (!internal.config.warningsDisabled) {
+    console.warn(...args);
+  }
 };
 
 export default util;

@@ -17,10 +17,11 @@ module.exports = function(config) {
       '../../../build/js/onsenui.js',
       'setup.js',
       `browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
+      global.KARMA_DISABLE_WARNINGS ? 'disable-warnings.js' : null,
       global.KARMA_SPEC_FILES || '../../../core/src/**/*.spec.js',
       '../../../build/css/onsenui.css',
       '../../../build/css/onsen-css-components.css'
-    ],
+    ].filter(v => v != null),
 
     preprocessors: {
       'setup.js': ['babel'],
