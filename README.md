@@ -204,7 +204,7 @@ The next step is to run the release script:
 
 ```
 cd scripts
-node dist-release.js
+sh dist-release.sh
 ```
 
 This will build Onsen UI and put the files in the `OnsenUI-dist` directory.

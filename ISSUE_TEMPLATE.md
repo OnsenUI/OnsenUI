@@ -8,7 +8,7 @@ __Environment__ <!-- Please choose your environment. -->
 
 ```
 [Core]
-    Onsen UI 2.0.4
+    Onsen UI 2.1.0
 
 [Framework]
     None
@@ -16,14 +16,14 @@ __Environment__ <!-- Please choose your environment. -->
     Angular 2.2.4
     React 15.4.1
     Vue.js 1.0.28
-    Vue.js 2.1.4
+    Vue.js 2.1.10
 
 [Framework binding]
     None
-    angular-onsenui 2.0.4
-    angular2-onsenui 1.0.0-rc.3
-    react-onsenui 1.0.4
-    vue-onsenui 1.0.0
+    angular-onsenui 2.1.0
+    angular2-onsenui 1.0.0-rc.5
+    react-onsenui 1.1.0
+    vue-onsenui 2.0.0-alpha.0
 
 [Additional libraries]
     None

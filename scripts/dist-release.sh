@@ -18,7 +18,7 @@ fi
 (cd $distrepo && git rm -r * --cached --ignore-unmatch 1>/dev/null && rm -rf *)
 
 echo "* $(tput setaf 3)Building css-components$(tput setaf 7)..."
-(cd css-components && npm install && node_modules/.bin/gulp build)
+(cd css-components && yarn install && node_modules/.bin/gulp build)
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
 echo "* $(tput setaf 3)Preparing OnsenUI$(tput setaf 7)..."
@@ -26,7 +26,7 @@ if [ "$1" == "no-build" ]
 then
 	node_modules/.bin/gulp dist-no-build
 else
-	npm install --loglevel error
+	yarn install
 	node_modules/.bin/gulp dist
 fi
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"

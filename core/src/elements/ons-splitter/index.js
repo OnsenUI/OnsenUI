@@ -97,6 +97,18 @@ export default class SplitterElement extends BaseElement {
     return this._getSide('right');
   }
 
+  /**
+   * @property side
+   * @readonly
+   * @type {HTMLElement}
+   * @description
+   *   [en]First `<ons-splitter-side>` element regardless the actual side.[/en]
+   *   [ja][/ja]
+   */
+  get side() {
+    return util.findChild(this, 'ons-splitter-side');
+  }
+
   get _sides() {
     return [this.left, this.right].filter(e => e);
   }

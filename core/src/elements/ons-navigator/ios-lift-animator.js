@@ -42,6 +42,8 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
     this.backgroundMask.remove();
     leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
+    const unblock = super.block(enterPage);
+
     const maskClear = animit(this.backgroundMask)
       .wait(this.delay + this.duration)
       .queue(done => {
@@ -70,7 +72,8 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
           timing: this.timing
         })
         .restoreStyle()
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         }),
@@ -105,6 +108,8 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
     this.backgroundMask.remove();
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
+    const unblock = super.block(enterPage);
+
     animit.runAll(
 
       animit(this.backgroundMask)
@@ -131,7 +136,8 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
           duration: this.duration,
           timing: this.timing
         })
-        .queue(function(done) {
+        .queue(done => {
+          unblock();
           callback();
           done();
         }),

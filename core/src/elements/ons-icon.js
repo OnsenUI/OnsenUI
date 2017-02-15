@@ -139,6 +139,7 @@ export default class IconElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
     this._update();
+    setImmediate(() => this._update()); // Fix for bindings
   }
 
   _update() {

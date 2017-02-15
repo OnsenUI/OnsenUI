@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import internal from './internal';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -28,16 +29,11 @@ util.prepareQuery = (query) => {
 };
 
 /**
- * @param {Element} element
- * @param {String/Function} query dot class name or node name.
+ * @param {Element} e
+ * @param {String/Function} s CSS Selector.
  * @return {Boolean}
  */
-util.match = (element, query) => {
-  if (query[0] === '.') {
-    return element.classList.contains(query.slice(1));
-  }
-  return element.nodeName.toLowerCase() === query;
-};
+util.match = (e, s) => (e.matches || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector).call(e, s);
 
 /**
  * @param {Element} element
@@ -295,9 +291,19 @@ util.removeModifier = (target, modifierName) => {
   return modifiers.length !== newModifiers.length;
 };
 
-util.toggleAttribute = (element, name, enable) => {
-  if (enable) {
-    element.setAttribute(name, '');
+// TODO: FIX
+util.updateParentPosition = (el) => {
+  if (!el._parentUpdated && el.parentElement) {
+    if (window.getComputedStyle(el.parentElement).getPropertyValue('position') === 'static') {
+      el.parentElement.style.position = 'relative';
+    }
+    el._parentUpdated = true;
+  }
+};
+
+util.toggleAttribute = (element, name, value) => {
+  if (value) {
+    element.setAttribute(name, value);
   } else {
     element.removeAttribute(name);
   }
@@ -315,11 +321,16 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
+ * @param {Element} hasRipple
  */
-util.updateRipple = (target) => {
+util.updateRipple = (target, hasRipple) => {
+  if (hasRipple === undefined) {
+    hasRipple = target.hasAttribute('ripple');
+  }
+
   const rippleElement = util.findChild(target, 'ons-ripple');
 
-  if (target.hasAttribute('ripple')) {
+  if (hasRipple) {
     if (!rippleElement) {
       target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
     }
@@ -353,6 +364,17 @@ util.defer = () => {
     deferred.reject = reject;
   });
   return deferred;
+};
+
+/**
+ * Show warnings when they are enabled.
+ *
+ * @param {*} arguments to console.warn
+ */
+util.warn = (...args) => {
+  if (!internal.config.warningsDisabled) {
+    console.warn(...args);
+  }
 };
 
 export default util;

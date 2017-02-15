@@ -51,7 +51,7 @@ platforms.android = element => {
   // Effects
   if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
     && !element.hasAttribute('ripple')
-    && !util.findChild(element, 'ons-ripple')) {
+    && !element.querySelector('ons-ripple')) {
 
     if (element.tagName.toLowerCase() === 'ons-list-item') {
       if (element.hasAttribute('tappable')) {

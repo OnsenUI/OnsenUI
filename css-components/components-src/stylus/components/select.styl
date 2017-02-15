@@ -1,0 +1,231 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-select-input-font-size = 15px
+var-select-input-height = 31px
+var-select-input-border-color = var-input-border-color
+var-text-highlight-color = $highlight-color // material
+
+var-material-select-input-font-size = 16px
+var-material-select-input-color = $material-select-input-text-color
+var-material-select-input-active-color = $material-select-input-active-color
+var-material-select-input-inactive-color = $material-select-input-inactive-color
+
+/*! topdoc
+  name: Select input
+  class: select-input
+  modifiers:
+    :underbar: display an bar under the select input
+    :material: material design select input
+  markup:
+    <select class="select-input">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+switch()
+  reset-input()
+  reset-font()
+
+input--disabled()
+  disabled()
+
+select-input()
+  input()
+  transparent()
+  position relative
+  font-size var-select-input-font-size
+  height var-select-input-height
+  border-color var-select-input-border-color
+  color var-text-highlight-color
+
+select-input--disabled()
+  input--disabled()
+  transparent()
+
+webkit-input-placeholder()
+  transparent()
+  color var-input-placeholder-color
+
+select-input--invalid()
+  transparent()
+  color var-input-invalid-text-color
+
+.select-input
+  select-input()
+
+.select-input::-webkit-input-placeholder
+  color var-input-placeholder-color
+
+.select-input::-moz-placeholder
+  color var-input-placeholder-color
+
+.select-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.select-input:-ms-input-placeholder
+  color var-input-placeholder-color
+
+.select-input:disabled
+  select-input--disabled()
+
+.select-input:disabled::-webkit-input-placeholder
+  webkit-input-placeholder()
+
+.select-input:disabled::-moz-placeholder
+  webkit-input-placeholder()
+
+.select-input:disabled::-ms-input-placeholder
+  webkit-input-placeholder()
+
+.select-input:disabled:-ms-input-placeholder
+  webkit-input-placeholder()
+
+.select-input::-ms-clear
+  display none
+
+.select-input:invalid
+  select-input--invalid()
+
+.select-input[multiple]
+  height 62px
+
+/*! topdoc
+  name: Material select input
+  class: select-input--material
+  markup:
+    <select class="select-input select-input--material">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--material
+  input()
+  material-font()
+  color var-material-select-input-color
+  background-image linear-gradient(to top, transparent 1px, var-material-select-input-inactive-color 1px)
+  background-size 100% 2px
+  background-repeat no-repeat
+  background-position center bottom
+  background-color transparent
+  font-size var-material-select-input-font-size
+  font-weight 400
+  border none
+  padding-bottom 2px
+  border-radius 0
+  height 24px
+  -webkit-transform translate3d(0, 0, 0) // prevent ios flicker
+
+.select-input--material__label
+  color var-material-select-input-inactive-color
+  position absolute
+  left 0px
+  top 2px
+  font-size 16px
+  font-weight 400
+  font-family 'Roboto', 'Noto', sans-serif
+  pointer-events none
+
+.select-input--material__label--active
+  color var-material-select-input-active-color
+  transform translate(0, -75%) scale(0.75)
+  transform-origin left top
+  transition transform 0.1s ease-in, color 0.1s ease-in
+
+.select-input--material:focus
+  background-image linear-gradient(var-material-select-input-active-color, var-material-select-input-active-color), linear-gradient(to top, transparent 1px, var-material-select-input-inactive-color 1px)
+  animation material-select-input-animate 0.3s forwards
+
+select-input--material-placeholder()
+  color var-material-select-input-inactive-color
+  line-height 20px
+
+.select-input--material::-webkit-input-placeholder
+  select-input--material-placeholder()
+
+.select-input--material::-moz-placeholder
+  select-input--material-placeholder()
+
+.select-input--material::-ms-input-placeholder
+  select-input--material-placeholder()
+
+.select-input--material:-ms-input-placeholder
+  select-input--material-placeholder()
+
+.select-input--material::-ms-clear
+  display none
+
+@keyframes material-select-input-animate
+  0%
+    background-size 0% 2px, 100% 2px
+  100%
+    background-size 100% 2px, 100% 2px
+
+/*! topdoc
+  name: Underbar select input
+  class: select-input--underbar
+  markup:
+    <select class="select-input select-input--underbar">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--underbar
+  select-input()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-select-input-border-color
+  border-radius 0px
+
+.select-input--underbar:disabled
+  select-input--disabled()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-select-input-border-color
+
+select-input-underbar-disabled()
+  webkit-input-placeholder()
+  border none
+  background-color transparent
+
+.select-input--underbar:disabled::-webkit-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled::-moz-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled::-ms-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:disabled:-ms-input-placeholder
+  select-input-underbar-disabled()
+
+.select-input--underbar:invalid
+  select-input--invalid()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-input-invalid-border-color

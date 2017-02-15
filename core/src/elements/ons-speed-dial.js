@@ -113,7 +113,6 @@ export default class SpeedDialElement extends BaseElement {
       this._compile();
     });
 
-    this._shown = true;
     this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
   }
@@ -171,29 +170,36 @@ export default class SpeedDialElement extends BaseElement {
     return util.arrayFrom(this.querySelectorAll('ons-speed-dial-item'));
   }
 
+  get _fab() {
+    return util.findChild(this, 'ons-fab');
+  }
+
   _onClick(e) {
-    if (!this.disabled && this._shown) {
-      this.toggleItems();
+    if (this.onClick) {
+      this.onClick.apply(this);
+      return Promise.resolve();
+    } else if (!this.disabled && this.visible) {
+      return this.toggleItems();
     }
   }
 
   _show() {
     if (!this.inline) {
-      this.show();
+      return this.show();
     }
+    return Promise.resolve();
   }
 
   _hide() {
     if (!this.inline) {
-      this.hide();
+      return this.hide();
     }
+    return Promise.resolve();
   }
 
   _updateRipple() {
-    const fab = util.findChild(this, 'ons-fab');
-
-    if (fab) {
-      this.hasAttribute('ripple') ? fab.setAttribute('ripple', '') : fab.removeAttribute('ripple');
+    if (this._fab) {
+      this.hasAttribute('ripple') ? this._fab.setAttribute('ripple', '') : this._fab.removeAttribute('ripple');
     }
   }
 
@@ -284,9 +290,9 @@ export default class SpeedDialElement extends BaseElement {
    *   [en]Show the speed dial.[/en]
    *   [ja]Speed dialを表示します。[/ja]
    */
-  show(options = {}) {
-    this.querySelector('ons-fab').show();
-    this._shown = true;
+  show() {
+    this._fab.show();
+    return Promise.resolve();
   }
 
   /**
@@ -296,12 +302,8 @@ export default class SpeedDialElement extends BaseElement {
    *   [en]Hide the speed dial.[/en]
    *   [ja]Speed dialを非表示にします。[/ja]
    */
-  hide(options = {}) {
-    this.hideItems();
-    setTimeout(()=>{
-      this.querySelector('ons-fab').hide();
-    }, 200);
-    this._shown = false;
+  hide() {
+    return this.hideItems().then(()=> this._fab.hide());
   }
 
   /**
@@ -312,25 +314,32 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を表示します。[/ja]
    */
   showItems() {
-
     if (this.hasAttribute('direction')) {
       this._updateDirection(this.getAttribute('direction'));
     } else {
       this._updateDirection('up');
     }
 
+    let totalDelay = 0;
     if (!this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
+        const delay = 25 * i;
+        totalDelay += delay;
         styler(children[i], {
           transform: 'scale(1)',
-          transitionDelay: 25 * i + 'ms'
+          transitionDelay: delay + 'ms'
         });
       }
-    }
-    this._itemShown = true;
+      totalDelay += 50;
 
-    util.triggerElementEvent(this, 'open');
+      this._itemShown = true;
+      util.triggerElementEvent(this, 'open');
+    }
+
+    const deferred = util.defer();
+    setTimeout(deferred.resolve, totalDelay);
+    return deferred.promise;
   }
 
   /**
@@ -341,17 +350,26 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を非表示にします。[/ja]
    */
   hideItems() {
+    let totalDelay = 0;
     if (this._itemShown) {
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
+        const delay = 25 * (children.length - i);
+        totalDelay += delay;
         styler(children[i], {
           transform: 'scale(0)',
-          transitionDelay: 25 * (children.length - i) + 'ms'
+          transitionDelay: delay + 'ms'
         });
       }
+      totalDelay += 50;
+
+      this._itemShown = false;
+      util.triggerElementEvent(this, 'close');
     }
-    this._itemShown = false;
-    util.triggerElementEvent(this, 'close');
+
+    const deferred = util.defer();
+    setTimeout(deferred.resolve, totalDelay);
+    return deferred.promise;
   }
 
   /**
@@ -397,7 +415,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
-    return this._shown && this.style.display !== 'none';
+    return this._fab.visible && this.style.display !== 'none';
   }
 
   /**
@@ -419,7 +437,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの表示非表示を切り替えます。[/ja]
    */
   toggle() {
-    this.visible ? this.hide() : this.show();
+    return this.visible ? this.hide() : this.show();
   }
 
   /**
@@ -430,11 +448,11 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]
    */
   toggleItems() {
-    if (this.isOpen()) {
-      this.hideItems();
-    } else {
-      this.showItems();
-    }
+    return this.isOpen() ? this.hideItems() : this.showItems();
+  }
+
+  static get events() {
+    return ['open', 'close'];
   }
 }
 

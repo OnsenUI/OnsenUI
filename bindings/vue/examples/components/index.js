@@ -1,25 +1,11 @@
-import App from './App.vue';
-import Home from './Home.vue';
-import Tabbar from './Tabbar.vue';
-import PullHook from './PullHook.vue';
-import Splitter from './Splitter.vue';
-import Fab from './Fab.vue';
-import SpeedDial from './SpeedDial.vue';
-import Dialogs from './Dialogs.vue';
-import Forms from './Forms.vue';
-import Animations from './Animations.vue';
-import AnimationsChild from './AnimationsChild.vue';
+export { default as Tabbar } from './Tabbar.vue';
+export { default as TabbarKeepAlive } from './TabbarKeepAlive.vue';
+export { default as Navigator } from './Navigator.vue';
+export { default as NavigatorMethods } from './NavigatorMethods.vue';
+export { default as PullHook } from './PullHook.vue';
+export { default as Splitter } from './Splitter.vue';
+export { default as Fab } from './Fab.vue';
+export { default as Dialogs } from './Dialogs.vue';
+export { default as Carousel } from './Carousel.vue';
+export { default as Forms } from './Forms.vue';
 
-export {
-  App,
-  Home,
-  Tabbar,
-  PullHook,
-  Splitter,
-  Fab,
-  SpeedDial,
-  Dialogs,
-  Forms,
-  Animations,
-  AnimationsChild
-};

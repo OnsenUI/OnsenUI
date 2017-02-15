@@ -150,6 +150,7 @@ export default class PageElement extends BaseElement {
 
   init() {
     this.classList.add(defaultClassName);
+    this._initialized = false;
 
     contentReady(this, () => {
       this._compile();
@@ -162,6 +163,12 @@ export default class PageElement extends BaseElement {
   }
 
   connectedCallback() {
+    if (this._initialized) {
+      return;
+    }
+
+    this._initialized = true;
+
     contentReady(this, () => {
       if (!this._isMuted) {
         if (this._skipInit) {
@@ -393,7 +400,7 @@ export default class PageElement extends BaseElement {
     if (tagName === 'ons-fab') {
       return !el.hasAttribute('position');
     }
-    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial'];
+    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover'];
     return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
@@ -435,6 +442,10 @@ export default class PageElement extends BaseElement {
     util.propagateAction(this._contentElement, '_destroy');
 
     this.remove();
+  }
+
+  static get events() {
+    return ['init', 'show', 'hide', 'destroy'];
   }
 
   /**
