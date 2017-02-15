@@ -18,21 +18,22 @@
       }
 
       h1 {
-        font-size: 15px;
-        font-weight: 400;
+        font-size: 16px;
+        font-weight: 500;
         font-family: Helvetica;
         text-align: center;
         width: 100%;
-        border-bottom: 1px solid #ccc;
-        height: 42px;
-        line-height: 42px;
+        height: 64px;
+        line-height: 64px;
         padding: 0;
-        margin: 0 0 10px 0;
+        margin: 0 0 20px 0;
       }
 
       .components {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 50vh;
       }
 
       .component-preview {
@@ -40,6 +41,17 @@
         width: 350px;
         box-sizing: border-box;
         margin: 10px 10px 20px 10px;
+      }
+
+      .component-preview__link,
+      .component-preview__link:link,
+      .component-preview__link:visited {
+        color: #333;
+        text-decoration: none;
+      }
+
+      .component-preview__link:hover {
+        text-decoration: underline;
       }
 
       .component-preview__title {
@@ -108,11 +120,6 @@
         box-sizing: border-box;
       }
 
-      /* dirty fix */
-      .popover-mask {
-        position: absolute;
-      }
-
     </style>
   </head>
   <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
@@ -123,7 +130,9 @@
       <% for component in @components: %>
       <div class="component-preview">
         <button class="component-preview__toggle">HTML</button>
-        <h2 class="component-preview__title" id="<%= component.annotation.name %>"><%= component.annotation.name %></h2>
+        <h2 class="component-preview__title" id="<%= component.annotation.name.toLowerCase().replace(/ /g, '_') %>">
+          <a href="#<%= component.annotation.name.toLowerCase().replace(/ /g, '_') %>" class="component-preview__link"><%= component.annotation.name %></a>
+        </h2>
 
         <div class="page component-preview__example">
           <div style="width: 100%;"><%- component.annotation.markup %></div>
