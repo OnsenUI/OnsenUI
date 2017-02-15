@@ -124,23 +124,13 @@ limitations under the License.
   font-weight: @font-weight--large;
 }
   
-.alert-dialog-footer--one {
+.alert-dialog-footer--rowfooter {
   white-space: nowrap;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -moz-flex;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
 }
 
-.alert-dialog-button--one {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -moz-box-flex: 1;
-  -moz-flex: 1;
-  -ms-flex: 1;
+.alert-dialog-button--rowfooter {
   flex: 1;
   display: block;
   width: 100%;
@@ -155,7 +145,7 @@ limitations under the License.
   });
 }
 
-.alert-dialog-button--one:first-child {
+.alert-dialog-button--rowfooter:first-child {
   border-left: none;
   .retina-query({
     border-top: none;
@@ -230,10 +220,10 @@ limitations under the License.
           Hello World!
         </div>
 
-        <div class="alert-dialog-footer alert-dialog-footer--one">
-          <button class="alert-dialog-button alert-dialog-button--one">Left</button>
-          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
-          <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+        <div class="alert-dialog-footer alert-dialog-footer--rowfooter">
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Left</button>
+          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--rowfooter">Center</button>
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Right</button>
         </div>
       </div>
     </div>
@@ -320,8 +310,8 @@ limitations under the License.
   background-color: initial;
 }
 
-.alert-dialog-button--one--material,
-.alert-dialog-button--one--material:first-child {
+.alert-dialog-button--rowfooter--material,
+.alert-dialog-button--rowfooter--material:first-child {
   border: 0;
   .retina-query({
     background: none;

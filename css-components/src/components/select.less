@@ -1,0 +1,216 @@
+/**
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+// internal variables
+@select-input-font-size: 15px;
+@select-input-height: 31px;
+@select-input-border-color: @input-border-color;
+@text-highlight-color: @highlight-color; // material
+
+@material-select-input-font-size: 16px;
+@material-select-input-color: @material-text-input-text-color;
+@material-select-input-active-color: @material-text-input-active-color;
+@material-select-input-inactive-color: @material-text-input-inactive-color;
+
+/*!
+  name: Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input() {
+  .input();
+  .transparent();
+  position: relative;
+  font-size: @select-input-font-size;
+  height: @select-input-height;
+  border-color: @select-input-border-color;
+  color: @text-highlight-color;
+}
+
+.select-input--disabled() {
+  .disabled();
+  .transparent();
+}
+
+.webkit-input-placeholder() {
+  .transparent();
+  color: @input-placeholder-color;
+}
+
+.select-input--invalid() {
+  .transparent();
+  color: @input-invalid-text-color;
+}
+
+.select-input {
+  .select-input();
+}
+
+.select-input::-webkit-input-placeholder,
+.select-input::-moz-placeholder,
+.select-input::-ms-input-placeholder,
+.select-input:-ms-input-placeholder {
+  color: @input-placeholder-color;
+}
+
+.select-input:disabled {
+  .select-input--disabled();
+}
+
+.select-input:disabled::-webkit-input-placeholder,
+.select-input:disabled::-moz-placeholder,
+.select-input:disabled::-ms-input-placeholder,
+.select-input:disabled:-ms-input-placeholder {
+  .webkit-input-placeholder();
+}
+
+.select-input::-ms-clear {
+  display: none;
+}
+
+.select-input:invalid {
+  .select-input--invalid();
+}
+
+.select-input[multiple] {
+  height: 62px;
+}
+
+/*!
+  name: Material Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--material">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--material {
+  .input();
+  .material-font();
+  color: @material-select-input-color;
+  background-image: linear-gradient(to top, transparent 1px, @material-select-input-inactive-color 1px);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: transparent;
+  font-size: @material-select-input-font-size;
+  font-weight: 400;
+  border: none;
+  padding-bottom: 2px;
+  border-radius: 0;
+  height: 24px;
+  transform: translate3d(0, 0, 0); // prevent ios flicker
+}
+
+.select-input--material__label {
+  .material-font();
+  color: @material-select-input-inactive-color;
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.select-input--material__label--active {
+  color: @material-select-input-active-color;
+  transform: translate(0, -75%) scale(0.75);
+  transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+.select-input--material:focus {
+  background-image: linear-gradient(@material-select-input-active-color, @material-select-input-active-color), linear-gradient(to top, transparent 1px, @material-select-input-inactive-color 1px);
+  animation: material-select-input-animate 0.3s forwards;
+}
+
+.select-input--material-placeholder() {
+  color: @material-select-input-inactive-color;
+  line-height: 20px;
+}
+
+.select-input--material::-webkit-input-placeholder,
+.select-input--material::-moz-placeholder,
+.select-input--material::-ms-input-placeholder,
+.select-input--material:-ms-input-placeholder {
+  .select-input--material-placeholder();
+}
+
+.select-input--material::-ms-clear {
+  display: none;
+}
+
+@keyframes material-select-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+
+/*!
+  name: Underbar Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--underbar">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--underbar {
+  .select-input();
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid @select-input-border-color;
+  border-radius: 0px;
+}
+
+.select-input--underbar:disabled {
+  .select-input--disabled();
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid @select-input-border-color;
+}
+
+.select-input--underbar:disabled::-webkit-input-placeholder,
+.select-input--underbar:disabled::-moz-placeholder,
+.select-input--underbar:disabled::-ms-input-placeholder,
+.select-input--underbar:disabled:-ms-input-placeholder {
+  .webkit-input-placeholder();
+  border: none;
+  background-color: transparent;
+}
+
+.select-input--underbar:invalid {
+  .select-input--invalid();
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid @input-invalid-border-color;
+}
+
