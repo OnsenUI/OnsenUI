@@ -3,10 +3,8 @@ CHANGELOG
 ====
 
 dev
-v2.1.1
 ----
  * ons-template: Show warning when ons-template is not located just under document.body.
-
  * css-components: Fixed broken popover components.
  * ons-popover: Changed internal DOM structure.
  * css-components: Dropped all stylus and rebuild css-components with less.
