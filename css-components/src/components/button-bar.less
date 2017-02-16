@@ -18,7 +18,6 @@
 
 // internal variables
 @button-bar-active-color: @button-bar-active-text-color;
-@button-bar-margin: 0;
 @button-bar-border-top: 1px solid @button-bar-color;
 @button-bar-border-bottom: 1px solid @button-bar-color;
 @button-bar-border: 0px solid @button-bar-color;
@@ -28,7 +27,7 @@
   name: Button Bar
   category: Segment
   markup: |
-    <div class="button-bar" style="width:280px;margin:0 auto;">
+    <div class="button-bar" style="width:280px;">
       <div class="button-bar__item">
         <button class="button-bar__button">One</button>
       </div>
@@ -43,70 +42,67 @@
 
 .button-bar() {
   .reset-font();
-  display: table;
-  table-layout: fixed;
-  white-space: nowrap;
+  display: inline-flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: nowrap;
   margin: 0;
   padding: 0;
+  border: none;
 }
 
 .button-bar__item() {
   .reset-font();
-  display: table-cell;
-  width: auto;
   border-radius: 0;
-  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .button-bar {
   .button-bar();
-  position: relative;
-  margin: @button-bar-margin;
-  border: none;
 }
 
 .button-bar__item {
   .button-bar__item();
   .hide-input-parent();
-  padding: 0;
-  position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .button-bar__item > input { // FIXME
   .hide-input();
 }
 
-.button-bar__item:first-child > .button-bar__button { // FIXME
-  border-left: 1px solid @button-bar-color;
-  border-right: 1px solid @button-bar-color;
-  border-top-left-radius: @border-radius;
-  border-bottom-left-radius: @border-radius;
-}
-
-.button-bar__item:last-child > .button-bar__button { // FIXME
-  border-right: 1px solid @button-bar-color;
-  border-top-right-radius: @border-radius;
-  border-bottom-right-radius: @border-radius;
-}
-
 .button-bar__button {
   .reset-font();
-  border-radius: inherit;
+  border-radius: 0;
   background-color: transparent;
   color: @button-bar-color;
-  border: @button-bar-border;
-  border-top: @button-bar-border-top;
-  border-bottom: @button-bar-border-bottom;
-  border-right: 1px solid @button-bar-color;
+  border: 1px solid @button-bar-color;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 0px;
   font-weight: @font-weight;
-  padding: 0 8px;
+  padding: 0;
+  font-size: 13px;
   height: 27px;
   line-height: 27px;
-  font-size: 13px;
   width: 100%;
   transition: background-color 0.2s linear, color 0.2s linear;
   box-sizing: border-box;
+  border-radius: 0;
+}
+
+.button-bar__item:first-child > .button-bar__button {
+  border-left-width: 1px;
+  border-radius: @border-radius 0 0 @border-radius;
+}
+
+.button-bar__item:last-child > .button-bar__button {
+  border-right-width: 1px;
+  border-radius: 0 @border-radius @border-radius 0;
 }
 
 .button-bar__button:active,
@@ -116,14 +112,11 @@
   border-top: @button-bar-border-top;
   border-bottom: @button-bar-border-bottom;
   border-right: 1px solid @button-bar-color;
-  height: 27px;
-  line-height: 27px;
   font-size: 13px;
   width: 100%;
   transition: none;
 }
 
-.button-bar__item.active > .button-bar__button, // FIXME
 :checked + .button-bar__button {
   background-color: @button-bar-color;
   color: @button-bar-active-color;

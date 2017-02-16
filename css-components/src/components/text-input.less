@@ -62,7 +62,9 @@
 
 .text-input--disabled() {
   .disabled();
-  .transparent();
+}
+
+.text-input--focus() {
 }
 
 .webkit-input-placeholder() {
@@ -79,15 +81,15 @@
   .text-input();
 }
 
+.text-input:disabled {
+  .text-input--disabled();
+}
+
 .text-input::-webkit-input-placeholder,
 .text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder,
 .text-input:-ms-input-placeholder {
   color: @input-placeholder-color;
-}
-
-.text-input:disabled {
-  .text-input--disabled();
 }
 
 .text-input:disabled::-webkit-input-placeholder,
@@ -238,22 +240,11 @@
 */
 
 .text-input--transparent {
-  &:extend(.text-input);
-}
-
-.text-input--transparent:focus {
-  &:extend(.text-input:focus);
+  .text-input();
 }
 
 .text-input--transparent:disabled {
-  &:extend(.text-input:disabled);
-}
-
-.text-input--transparent:disabled::-webkit-input-placeholder,
-.text-input--transparent:disabled::-moz-placeholder,
-.text-input--transparent:disabled::-ms-input-placeholder,
-.text-input--transparent:disabled:-ms-input-placeholder {
-  &:extend(.text-input:disabled);
+  .text-input--disabled();
 }
 
 .text-input--transparent:invalid {
