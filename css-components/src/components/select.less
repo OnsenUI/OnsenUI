@@ -19,12 +19,12 @@ limitations under the License.
 @select-input-font-size: 15px;
 @select-input-height: 31px;
 @select-input-border-color: @input-border-color;
-@text-highlight-color: @highlight-color; // material
+@text-highlight-color: @highlight-color;
 
 @material-select-input-font-size: 16px;
-@material-select-input-color: @material-text-input-text-color;
-@material-select-input-active-color: @material-text-input-active-color;
-@material-select-input-inactive-color: @material-text-input-inactive-color;
+@material-select-input-color: rgba(0, 0, 0, 1);
+@material-select-input-active-color: rgba(0, 0, 0, 0.15);
+@material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
 
 /*!
   name: Select Input
@@ -118,11 +118,11 @@ limitations under the License.
   background-color: transparent;
   font-size: @material-select-input-font-size;
   font-weight: 400;
-  border: none;
   padding-bottom: 2px;
   border-radius: 0;
   height: 24px;
   transform: translate3d(0, 0, 0); // prevent ios flicker
+  border: none;
 }
 
 .select-input--material__label {
@@ -145,6 +145,7 @@ limitations under the License.
 .select-input--material:focus {
   background-image: linear-gradient(@material-select-input-active-color, @material-select-input-active-color), linear-gradient(to top, transparent 1px, @material-select-input-inactive-color 1px);
   animation: material-select-input-animate 0.3s forwards;
+  border-radius: 0;
 }
 
 .select-input--material-placeholder() {
