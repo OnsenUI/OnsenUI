@@ -49,7 +49,7 @@ const bindEvents = () => {
 };
 
 const noPluginError = () => {
-  console.warn('ons-keyboard: Cordova Keyboard plugin is not present.');
+  util.warn('ons-keyboard: Cordova Keyboard plugin is not present.');
 };
 
 document.addEventListener('deviceready', () => {

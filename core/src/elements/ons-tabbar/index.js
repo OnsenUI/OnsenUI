@@ -287,7 +287,7 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   loadPage(page, options = {}) {
-    console.warn('The loadPage method has been deprecated and will be removed in the next minor version.');
+    util.warn('The loadPage method has been deprecated and will be removed in the next minor version.');
 
     return new Promise(resolve => {
       const tab = this._tabbarElement.children[0] || new TabElement();
@@ -507,6 +507,26 @@ export default class TabbarElement extends BaseElement {
     this._getTabbarElement().style.display = visible ? '' : 'none';
   }
 
+  show() {
+    this.setTabbarVisibility(true);
+  }
+
+  hide() {
+    this.setTabbarVisibility(false);
+  }
+
+  /**
+   * @property visible
+   * @readonly
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the tabbar is visible or not.[/en]
+   *   [ja]タブバーが見える場合に`true`。[/ja]
+   */
+  get visible() {
+    return this._getTabbarElement().style.display !== 'none';
+  }
+
   /**
    * @method getActiveTabIndex
    * @signature getActiveTabIndex()
@@ -583,6 +603,10 @@ export default class TabbarElement extends BaseElement {
 
   static get TabbarAnimator() {
     return TabbarAnimator;
+  }
+
+  static get events() {
+    return ['prechange', 'postchange', 'reactive'];
   }
 
   /**

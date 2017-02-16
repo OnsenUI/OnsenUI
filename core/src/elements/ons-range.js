@@ -187,6 +187,10 @@ export default class RangeElement extends BaseElement {
       this._onChange();
     });
   }
+
+  static get events() {
+    return ['input', 'change'];
+  }
 }
 
 customElements.define('ons-range', RangeElement);

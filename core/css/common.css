@@ -214,11 +214,15 @@ ons-toolbar-button > ons-icon[icon*="ion-"] {
   font-size: 26px;
 }
 
-ons-range {
+ons-range, ons-select {
   display: inline-block;
 }
 
 ons-range > input {
   min-width: 50px;
+  width: 100%;
+}
+
+ons-select > select {
   width: 100%;
 }

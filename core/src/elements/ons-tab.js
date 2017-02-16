@@ -196,10 +196,10 @@ export default class TabElement extends BaseElement {
       return false;
     }
 
-    const hasInput = this.children[0].getAttribute('type') === 'radio';
-    const hasButton = util.findChild(this, '.tab-bar__button');
+    const hasInput = this._input.getAttribute('type') === 'radio';
+    const hasButton = this._button;
 
-    return hasInput && hasButton;
+    return !!(hasInput && hasButton);
   }
 
   _compile() {
@@ -226,10 +226,8 @@ export default class TabElement extends BaseElement {
         this.appendChild(template.children[0]);
       }
 
-      const button = util.findChild(this, '.tab-bar__button');
-
       if (hasChildren) {
-        button.appendChild(fragment);
+        this._button.appendChild(fragment);
         this._hasDefaultTemplate = false;
       } else {
         this._hasDefaultTemplate = true;
@@ -242,7 +240,7 @@ export default class TabElement extends BaseElement {
   }
 
   _updateRipple() {
-    // util.updateRipple(this.querySelector('.tab-bar__button'), this);
+    util.updateRipple(this.querySelector('.tab-bar__button'), this.hasAttribute('ripple'));
   }
 
   _updateDefaultTemplate() {
@@ -250,9 +248,9 @@ export default class TabElement extends BaseElement {
       return;
     }
 
-    const button = util.findChild(this, '.tab-bar__button');
+    const button = this._button;
     const template = defaultInnerTemplateSource.cloneNode(true);
-    if (button.children.length == 0) {
+    if (button.children.length === 0) {
       while (template.children[0]) {
         button.appendChild(template.children[0]);
       }
@@ -270,65 +268,63 @@ export default class TabElement extends BaseElement {
       button.appendChild(template.querySelector('.tab-bar__badge'));
     }
 
-    const self = this;
     const icon = this.getAttribute('icon');
     const label = this.getAttribute('label');
     const badge = this.getAttribute('badge');
 
-    if (typeof icon === 'string') {
-      const iconElement = getIconElement();
-      const last = iconElement.getAttribute('icon');
-      iconElement.setAttribute('icon', icon);
-      // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
-      getIconElement().attributeChangedCallback('icon', last, icon);
-    } else {
-      const wrapper = button.querySelector('.tab-bar__icon');
-      if (wrapper) {
-        wrapper.remove();
+    const iconElement = button.querySelector('.tab-bar__icon').children[0];
+    const labelElement = button.querySelector('.tab-bar__label');
+    const badgeElement = button.querySelector('.tab-bar__badge');
+
+    if (iconElement) {
+      if (typeof icon === 'string') {
+        const last = iconElement.getAttribute('icon');
+        iconElement.setAttribute('icon', icon);
+        // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
+        iconElement.attributeChangedCallback('icon', last, icon);
+      } else {
+        iconElement.parentElement.remove();
       }
     }
 
-    if (typeof label === 'string') {
-      getLabelElement().textContent = label;
-    } else {
-      const label = getLabelElement();
-      if (label) {
-        label.remove();
+    if (labelElement) {
+      if (typeof label === 'string') {
+        labelElement.textContent = label;
+      } else {
+        labelElement.remove();
       }
     }
 
-    if (typeof badge === 'string') {
-      getBadgeElement().textContent = badge;
-    } else {
-      const badge = getBadgeElement();
-      if (badge) {
-        badge.remove();
+    if (badgeElement) {
+      if (typeof badge === 'string') {
+        badgeElement.textContent = badge;
+      } else {
+        badgeElement.remove();
       }
-    }
-
-    function getLabelElement() {
-      return self.querySelector('.tab-bar__label');
-    }
-
-    function getIconElement() {
-      return self.querySelector('ons-icon');
-    }
-
-    function getBadgeElement() {
-      return self.querySelector('.tab-bar__badge');
     }
   }
 
+  get _input() {
+    return this.children[0];
+  }
+
+  get _button() {
+    return util.findChild(this, '.tab-bar__button');
+  }
+
   _onClick() {
-    const tabbar = this._findTabbarElement();
-    if (tabbar) {
-      tabbar.setActiveTab(this._findTabIndex());
+    if (this.onClick instanceof Function) {
+      this.onClick();
+    } else {
+      const tabbar = this._findTabbarElement();
+      if (tabbar) {
+        tabbar.setActiveTab(this._findTabIndex());
+      }
     }
   }
 
   setActive() {
-    const radio = util.findChild(this, 'input');
-    radio.checked = true;
+    this._input.checked = true;
     this.classList.add('active');
 
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
@@ -338,8 +334,7 @@ export default class TabElement extends BaseElement {
   }
 
   setInactive() {
-    const radio = util.findChild(this, 'input');
-    radio.checked = false;
+    this._input.checked = false;
     this.classList.remove('active');
 
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
@@ -485,7 +480,7 @@ export default class TabElement extends BaseElement {
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;
       case 'ripple':
-        contentReady(this, () => this._updateRipple());
+        this._templateLoaded() && contentReady(this, () => this._updateRipple());
         break;
       case 'icon':
       case 'label':

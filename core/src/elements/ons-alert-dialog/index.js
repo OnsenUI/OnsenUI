@@ -33,8 +33,8 @@ const scheme = {
   '.alert-dialog-content': 'alert-dialog-content--*',
   '.alert-dialog-footer': 'alert-dialog-footer--*',
   '.alert-dialog-button': 'alert-dialog-button--*',
-  '.alert-dialog-footer--one': 'alert-dialog-footer--one--*',
-  '.alert-dialog-button--one': 'alert-dialog-button--one--*',
+  '.alert-dialog-footer--rowfooter': 'alert-dialog-footer--rowfooter--*',
+  '.alert-dialog-button--rowfooter': 'alert-dialog-button--rowfooter--*',
   '.alert-dialog-button--primal': 'alert-dialog-button--primal--*',
   '.alert-dialog-mask': 'alert-dialog-mask--*',
   '.text-input': 'text-input--*'
@@ -60,6 +60,9 @@ const _animatorDict = {
  * @tutorial vanilla/Reference/dialog
  * @modifier material
  *   [en]Material Design style[/en]
+ *   [ja][/ja]
+ * @modifier rowfooter
+ *   [en]Horizontally aligns the footer buttons.[/en]
  *   [ja][/ja]
  * @guide dialogs
  *   [en]Dialog components[/en]
@@ -192,7 +195,7 @@ export default class AlertDialogElement extends BaseElement {
 
     this._visible = false;
     this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
+    this._boundCancel = () => this._cancel();
 
     this._updateAnimatorFactory()
   }
@@ -239,6 +242,7 @@ export default class AlertDialogElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.style.display = 'none';
+    this.style.zIndex = 10001;
 
     /**
      * Expected result after compile:
@@ -526,6 +530,10 @@ export default class AlertDialogElement extends BaseElement {
     else if (name === 'animation') {
       this._updateAnimatorFactory();
     }
+  }
+
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
   }
 
   /**

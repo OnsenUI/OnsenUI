@@ -1,14 +1,19 @@
 {
   "name": "vue-onsenui",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.0",
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --inline --hot --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.prod.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "gulp test"
   },
   "main": "dist/vue-onsenui.js",
+  "files": [
+    "dist/vue-onsenui.js",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/OnsenUI/OnsenUI"
@@ -36,8 +41,8 @@
   ],
   "homepage": "https://onsen.io/",
   "peerDependencies": {
-    "vue": "^1.0.0",
-    "onsenui": "^2.0.0-rc.17"
+    "onsenui": "^2.1.0",
+    "vue": "^2.1.10"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -50,6 +55,10 @@
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "gulp-chmod": "^2.0.0",
+    "gulp-download": "^0.0.1",
+    "gulp-unzip": "^0.2.0",
+    "gulp-util": "^3.0.7",
     "json-loader": "^0.5.4",
     "rollup": "^0.34.10",
     "rollup-plugin-babel": "^2.6.1",
@@ -57,14 +66,22 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-vue": "^2.0.1",
+    "run-sequence": "^1.2.2",
+    "static-server": "^2.0.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "vue": "^1.0.0",
-    "vue-hot-reload-api": "^1.2.0",
-    "vue-html-loader": "^1.0.0",
-    "vue-loader": "^8.5.2",
+    "vue": "^2.1.10",
+    "vue-hot-reload-api": "^2.0.0",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
+    "wdio-jasmine-framework": "^0.2.17",
+    "wdio-spec-reporter": "0.0.5",
+    "webdriverio": "^4.5.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.12.0"
+  },
+  "dependencies": {
+    "vue-template-compiler": "2.1.10"
   }
 }

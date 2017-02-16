@@ -76,6 +76,10 @@ export class OnsNavigator implements OnDestroy {
     return this._elementRef.nativeElement;
   }
 
+  get nativeElement(): any {
+    return this._elementRef.nativeElement;
+  }
+
   constructor(
     private _elementRef: ElementRef,
     private _resolver: ComponentFactoryResolver,

@@ -192,7 +192,7 @@ export default class DialogElement extends BaseElement {
 
     this._visible = false;
     this._doorLock = new DoorLock();
-    this._boundCancel = this._cancel.bind(this);
+    this._boundCancel = () => this._cancel();
 
     this._updateAnimatorFactory();
   }
@@ -210,6 +210,7 @@ export default class DialogElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.style.display = 'none';
+    this.style.zIndex = 10001;
 
     /* Expected result:
      *   <ons-dialog>
@@ -485,6 +486,10 @@ export default class DialogElement extends BaseElement {
     else if (name === 'animation') {
       this._updateAnimatorFactory();
     }
+  }
+
+  static get events() {
+    return ['preshow', 'postshow', 'prehide', 'posthide'];
   }
 
   /**

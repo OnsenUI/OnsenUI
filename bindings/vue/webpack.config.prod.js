@@ -21,6 +21,14 @@ module.exports = {
         commonjs2: 'onsenui',
         amd: 'onsenui'
       }
+    },
+    {
+      vue: {
+        root: 'Vue',
+        commonjs: 'vue',
+        commonjs2: 'vue',
+        amd: 'vue'
+      }
     }
   ],
   resolveLoader: {
@@ -47,7 +55,7 @@ module.exports = {
       }
     ]
   },
-  devtool: '#source-map',
+  devtool: '#inline-source-map',
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
   ]

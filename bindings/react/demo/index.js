@@ -32,6 +32,7 @@ import ModalExample from './examples/Modal';
 import SwitchExample from './examples/Switch';
 import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
+import SelectExample from './examples/Select';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
 import BottomToolbarExample from './examples/BottomToolbar';
@@ -73,8 +74,12 @@ class Examples extends React.Component {
         component: SwitchExample
       },
       {
-        title: 'RangeExample',
+        title: 'Range',
         component: RangeExample
+      },
+      {
+        title: 'Select',
+        component: SelectExample
       },
       {
         title: 'ProgressBar',

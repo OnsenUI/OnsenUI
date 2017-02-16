@@ -82,6 +82,9 @@ const INPUT_ATTRIBUTES = [
  * @seealso ons-switch
  *   [en]The `<ons-switch>` element is used to display a draggable toggle switch.[/en]
  *   [ja][/ja]
+ * @seealso ons-select
+ *   [en]The `<ons-select>` element is used to display a select box.[/en]
+ *   [ja][/ja]
  * @guide adding-page-content
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -124,13 +127,6 @@ export default class InputElement extends BaseElement {
    * @type {String}
    * @description
    *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements.[/en]
-   *  [ja][/ja]
-   */
-
-  /**
-   * @attribute content-left
-   * @description
-   *  [en]The HTML content of `<ons-input>` is placed before the actual input as a label. Omit this to display it after the input.[/en]
    *  [ja][/ja]
    */
 
@@ -377,6 +373,10 @@ export default class InputElement extends BaseElement {
 
   get type() {
     return this.getAttribute('type');
+  }
+
+  static get events() {
+    return ['change', 'input', 'focus', 'focusin', 'focusout', 'blur'];
   }
 }
 

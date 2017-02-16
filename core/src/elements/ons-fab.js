@@ -72,6 +72,11 @@ export default class FabElement extends BaseElement {
    */
 
   init() {
+    // The following statements can be executed before contentReady
+    // since these do not access the children
+    this.show();
+    this.classList.add(defaultClassName);
+
     contentReady(this, () => {
       this._compile();
     });
@@ -79,8 +84,6 @@ export default class FabElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-
-    this.classList.add(defaultClassName);
 
     if (!util.findChild(this, '.fab__icon')) {
       const content = document.createElement('span');
@@ -99,8 +102,6 @@ export default class FabElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this._updatePosition();
-
-    this.show();
   }
 
   static get observedAttributes() {

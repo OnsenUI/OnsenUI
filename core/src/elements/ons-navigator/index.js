@@ -219,6 +219,7 @@ export default class NavigatorElement extends BaseElement {
 
   init() {
     this._isRunning = false;
+    this._initialized = false;
     this._pageLoader = defaultPageLoader;
     this._pageMap = new WeakMap();
 
@@ -265,6 +266,11 @@ export default class NavigatorElement extends BaseElement {
   connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
+    if (this._initialized) {
+      return;
+    }
+
+    this._initialized = true;
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this._getPageTarget()) {
@@ -423,7 +429,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined;
+      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
       options.animationOptions = util.extend(
         {},
         leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
@@ -543,7 +549,7 @@ export default class NavigatorElement extends BaseElement {
       const pageLength = this.pages.length;
 
       const enterPage  = this.pages[pageLength - 1];
-      const leavePage = this.pages[pageLength - 2];
+      const leavePage = options.leavePage || this.pages[pageLength - 2];
 
       if (enterPage.nodeName !== 'ONS-PAGE') {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
@@ -960,6 +966,10 @@ export default class NavigatorElement extends BaseElement {
 
   static get NavigatorTransitionAnimator() {
     return NavigatorTransitionAnimator;
+  }
+
+  static get events() {
+    return ['prepush', 'postpush', 'prepop', 'postpop'];
   }
 
   static get rewritables() {

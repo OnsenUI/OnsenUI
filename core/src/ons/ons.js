@@ -196,6 +196,14 @@ ons.enableAnimations = () => {
   ons._internal.config.animationsDisabled = false;
 };
 
+ons._disableWarnings = () => {
+  ons._internal.config.warningsDisabled = true;
+};
+
+ons._enableWarnings = () => {
+  ons._internal.config.warningsDisabled = false;
+};
+
 /**
  * @method disableAutoStyling
  * @signature disableAutoStyling()

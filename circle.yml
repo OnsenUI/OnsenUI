@@ -19,6 +19,7 @@ dependencies:
     - cd css-components; yarn install; gulp build
     - cd bindings/angular2; yarn install
     - cd bindings/react; yarn install
+    - cd bindings/vue; yarn install
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     - sudo apt-get update
@@ -35,6 +36,7 @@ test:
     - cd bindings/angular2; npm test
     - cd bindings/react; npm test
     - cd bindings/react; npm run build
+    - cd bindings/vue; npm test
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex "./core/test/unit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.

@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -20,7 +20,7 @@
     }
   ],
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test --disable-warnings"
   },
   "repository": {
     "type": "git",

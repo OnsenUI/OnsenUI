@@ -69,6 +69,10 @@ export class OnsRange implements OnChanges, OnDestroy {
     return this._element;
   }
 
+  get nativeElement(): any {
+    return this._element;
+  }
+
   ngOnDestroy() {
     this._element.removeEventListener('change', this._boundOnChange);
 
