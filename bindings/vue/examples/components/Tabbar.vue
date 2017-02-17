@@ -13,7 +13,7 @@
     OnsTabbar
   } from 'vue-onsenui';
 
-	export default {
+  export default {
     data() {
       return {
         index: 0,
@@ -51,7 +51,7 @@
         this.index = index;
       }
     }
-	};
+  };
 </script>
 
 <style>

@@ -95,7 +95,7 @@
     OnsSwitch
   } from 'vue-onsenui';
 
-	export default {
+  export default {
     data: () => (
       {
         side: 'left',
@@ -111,5 +111,5 @@
       OnsSplitterSide,
       OnsSwitch
     }
-	};
+  };
 </script>

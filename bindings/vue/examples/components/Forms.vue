@@ -96,7 +96,7 @@
 </template>
 
 <script>
-	export default {
+  export default {
     data() {
       return {
         name: 'Andreas',
@@ -116,5 +116,5 @@
         this.name = event.target.value;
       }
     }
-	};
+  };
 </script>

@@ -41,7 +41,7 @@
     OnsPullHook
   } from 'vue-onsenui';
 
-	export default {
+  export default {
     data() {
       return {
         state: 'initial',
@@ -67,5 +67,5 @@
       OnsBackButton,
       OnsPullHook
     }
-	};
+  };
 </script>

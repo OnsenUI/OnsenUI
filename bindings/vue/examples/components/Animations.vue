@@ -24,11 +24,11 @@
 </template>
 
 <script>
-	export default {
+  export default {
     data() {
       return {
         animations: ['none', 'fade', 'slide', 'lift']
       };
     }
-	};
+  };
 </script>

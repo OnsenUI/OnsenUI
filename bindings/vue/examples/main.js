@@ -20,7 +20,7 @@ import {
 } from './components';
 
 Vue.use(VueOnsen, {
-	components: {
+  components: {
     Tabbar,
     Home,
     PullHook,

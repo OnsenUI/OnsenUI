@@ -4,11 +4,11 @@
 </template>
 
 <script>
-	import {OnsNavigator} from 'vue-onsenui';
+  import {OnsNavigator} from 'vue-onsenui';
 
-	export default {
-		components: {OnsNavigator}
-	};
+  export default {
+    components: {OnsNavigator}
+  };
 </script>
 
 <style>

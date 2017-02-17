@@ -25,9 +25,9 @@
     OnsBackButton
   } from 'vue-onsenui';
 
-	export default {
+  export default {
     components: {
       OnsBackButton
     }
-	};
+  };
 </script>

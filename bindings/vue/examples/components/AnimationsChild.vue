@@ -17,7 +17,7 @@
 </template>
 
 <script>
-	export default {
+  export default {
     data() {
       return {
         counter: 5
@@ -38,5 +38,5 @@
     beforeDestroy() {
       clearInterval(this.interval);
     }
-	};
+  };
 </script>
