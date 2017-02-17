@@ -166,7 +166,7 @@ SplitterSide.propTypes = {
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
    *  [jp] [/jp]
    */
-  swipeTargetWidth: React.PropTypes.number,
+  swipeTargetWidth: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
 
   /**
    * @name width
