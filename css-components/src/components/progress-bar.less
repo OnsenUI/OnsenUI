@@ -9,14 +9,16 @@
   category: Progress Bar
   elements: ons-progress-bar
   markup: |
-    <div class="progress-bar progress-bar--indeterminate">
-      <div class="progress-bar__primary"></div>
-      <div class="progress-bar__secondary"></div>
+    <div class="progress-bar">
+      <div class="progress-bar__primary" style="width: 30%"></div>
     </div>
     <br />
-    <div class="progress-bar progress-bar--determinate">
+    <div class="progress-bar">
       <div class="progress-bar__primary" style="width:20%"></div>
       <div class="progress-bar__secondary" style="width:76%"></div>
+    </div>
+    <br />
+    <div class="progress-bar progress-bar--indeterminate">
     </div>
 */
 
@@ -31,9 +33,8 @@
   overflow: hidden;
 }
 
-// FIXME
-.progress-bar--determinate > .progress-bar__primary, 
-.progress-bar--determinate > .progress-bar__secondary {
+.progress-bar__primary, 
+.progress-bar__secondary {
   position: absolute;
   background-color: @progress-bar-color;
   top: 0;
@@ -42,8 +43,7 @@
   z-index: 100;
 }
     
-// FIXME
-.progress-bar--determinate > .progress-bar__secondary {
+.progress-bar__secondary {
   background-color: @progress-bar-secondary-color;
   z-index: 0;
 }
@@ -55,7 +55,6 @@
   top: 0;
   left: 0;
   bottom: 0;
-  will-change: left, right; // ?
   animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 

@@ -22,8 +22,8 @@ import contentReady from '../ons/content-ready';
 
 const scheme = {
   '.progress-bar': 'progress-bar--*',
-  '.progress-bar__primary': 'progress-bar__primary--*',
-  '.progress-bar__secondary': 'progress-bar__secondary--*'
+  '.progress-bar__primary': 'progress-bar--*__primary',
+  '.progress-bar__secondary': 'progress-bar--*__secondary'
 };
 
 const template = util.createElement(`
@@ -147,12 +147,10 @@ export default class ProgressBarElement extends BaseElement {
     if (this.hasAttribute('indeterminate')) {
       contentReady(this, () => {
         this._template.classList.add(`progress-bar--indeterminate`);
-        this._template.classList.remove(`progress-bar--determinate`);
       });
     }
     else {
       contentReady(this, () => {
-        this._template.classList.add(`progress-bar--determinate`);
         this._template.classList.remove(`progress-bar--indeterminate`);
       });
     }
