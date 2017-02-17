@@ -22,8 +22,8 @@ import contentReady from '../ons/content-ready';
 
 const scheme = {
   '.progress-circular': 'progress-circular--*',
-  '.progress-circular__primary': 'progress-circular__primary--*',
-  '.progress-circular__secondary': 'progress-circular__secondary--*'
+  '.progress-circular__primary': 'progress-circular--*__primary',
+  '.progress-circular__secondary': 'progress-circular--*__secondary'
 };
 
 const template = util.createElement(`
@@ -111,12 +111,10 @@ export default class ProgressCircularElement extends BaseElement {
     if (this.hasAttribute('indeterminate')) {
       contentReady(this, () => {
         this._template.classList.add(`progress-circular--indeterminate`);
-        this._template.classList.remove(`progress-circular--determinate`);
       });
     }
     else {
       contentReady(this, () => {
-        this._template.classList.add(`progress-circular--determinate`);
         this._template.classList.remove(`progress-circular--indeterminate`);
       });
     }

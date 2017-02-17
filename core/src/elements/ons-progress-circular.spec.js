@@ -19,19 +19,19 @@ describe('OnsProgressCircularElement', () => {
 
     progress.setAttribute('modifier', 'hoge');
     expect(template.classList.contains('progress-circular--hoge')).to.be.true;
-    expect(primary.classList.contains('progress-circular__primary--hoge')).to.be.true;
-    expect(secondary.classList.contains('progress-circular__secondary--hoge')).to.be.true;
+    expect(primary.classList.contains('progress-circular--hoge__primary')).to.be.true;
+    expect(secondary.classList.contains('progress-circular--hoge__secondary')).to.be.true;
 
     progress.setAttribute('modifier', ' foo circular');
     expect(template.classList.contains('progress-circular--foo')).to.be.true;
     expect(template.classList.contains('progress-circular--circular')).to.be.true;
     expect(template.classList.contains('progress-circular--hoge')).not.to.be.true;
-    expect(primary.classList.contains('progress-circular__primary--foo')).to.be.true;
-    expect(primary.classList.contains('progress-circular__primary--circular')).to.be.true;
-    expect(primary.classList.contains('progress-circular__primary--hoge')).not.to.be.true;
-    expect(secondary.classList.contains('progress-circular__secondary--foo')).to.be.true;
-    expect(secondary.classList.contains('progress-circular__secondary--circular')).to.be.true;
-    expect(secondary.classList.contains('progress-circular__secondary--hoge')).not.to.be.true;
+    expect(primary.classList.contains('progress-circular--foo__primary')).to.be.true;
+    expect(primary.classList.contains('progress-circular--circular__primary')).to.be.true;
+    expect(primary.classList.contains('progress-circular--hoge__primary')).not.to.be.true;
+    expect(secondary.classList.contains('progress-circular--foo__secondary')).to.be.true;
+    expect(secondary.classList.contains('progress-circular--circular__secondary')).to.be.true;
+    expect(secondary.classList.contains('progress-circular--hoge__secondary')).not.to.be.true;
   });
 
   describe('#_updateDeterminate()', () => {
