@@ -24,6 +24,26 @@
 @button-bar-active-background-color: lighten(@button-bar-color, @alpha-lighten);
 
 /*!
+  name: Segment
+  category: Segment
+  markup: |
+    <div class="button-bar" style="width:280px; margin:0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" class="button-bar__input" name="segment-a" checked>
+        <button class="button-bar__button">One</button>
+      </div>
+      <div class="button-bar__item">
+        <input type="radio" class="button-bar__input" name="segment-a">
+        <button class="button-bar__button">Two</button>
+      </div>
+      <div class="button-bar__item">
+        <input type="radio" class="button-bar__input" name="segment-a">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+*/
+
+/*!
   name: Button Bar
   category: Segment
   markup: |
@@ -70,7 +90,7 @@
   box-sizing: border-box;
 }
 
-.button-bar__item > input { // FIXME
+.button-bar__input { // FIXME
   .hide-input();
 }
 
@@ -134,23 +154,3 @@
 .button-bar__button:focus {
   outline: 0;
 }
-
-/*!
-  name: Segment
-  category: Segment
-  markup: |
-    <div class="button-bar" style="width:280px;margin:0 auto;">
-      <div class="button-bar__item">
-        <input type="radio" name="segment-a" checked>
-        <button class="button-bar__button">One</button>
-      </div>
-      <div class="button-bar__item">
-        <input type="radio" name="segment-a">
-        <button class="button-bar__button">Two</button>
-      </div>
-      <div class="button-bar__item">
-        <input type="radio" name="segment-a">
-        <button class="button-bar__button">Three</button>
-      </div>
-    </div>
-*/
