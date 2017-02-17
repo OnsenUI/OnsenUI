@@ -110,12 +110,12 @@ export default class ProgressCircularElement extends BaseElement {
   _updateDeterminate() {
     if (this.hasAttribute('indeterminate')) {
       contentReady(this, () => {
-        this._template.classList.add(`progress-circular--indeterminate`);
+        ModifierUtil.addModifier(this, 'indeterminate');
       });
     }
     else {
       contentReady(this, () => {
-        this._template.classList.remove(`progress-circular--indeterminate`);
+        ModifierUtil.removeModifier(this, 'indeterminate');
       });
     }
   }
