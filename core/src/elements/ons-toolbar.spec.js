@@ -17,61 +17,61 @@ describe('OnsToolbarElement', () => {
   });
 
   onlyChrome(describe)('"class" attribute', () => {
-    it('should contain "navigation-bar" class name automatically', () => {
+    it('should contain "toolbar" class name automatically', () => {
       const element = ons._util.createElement('<ons-toolbar>content</ons-toolbar>');
-      expect(element.classList.contains('navigation-bar')).to.be.true;
+      expect(element.classList.contains('toolbar')).to.be.true;
       element.className = 'foo';
-      expect(element.classList.contains('navigation-bar')).to.be.true;
+      expect(element.classList.contains('toolbar')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
     });
   });
 
   onlyChrome(it)('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
-    expect(element.classList.contains('navigation-bar--hoge')).to.be.true;
+    expect(element.classList.contains('toolbar--hoge')).to.be.true;
 
     element.setAttribute('modifier', ' foo bar');
-    expect(element.classList.contains('navigation-bar--foo')).to.be.true;
-    expect(element.classList.contains('navigation-bar--bar')).to.be.true;
-    expect(element.classList.contains('navigation-bar--hoge')).not.to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar--foo__left')).to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar--foo__center')).to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar--foo__right')).to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar--bar__left')).to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar--bar__center')).to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar--bar__right')).to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar--hoge__left')).not.to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar--hoge__center')).not.to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar--hoge__right')).not.to.be.true;
+    expect(element.classList.contains('toolbar--foo')).to.be.true;
+    expect(element.classList.contains('toolbar--bar')).to.be.true;
+    expect(element.classList.contains('toolbar--hoge')).not.to.be.true;
+    expect(element.children[0].classList.contains('toolbar--foo__left')).to.be.true;
+    expect(element.children[1].classList.contains('toolbar--foo__center')).to.be.true;
+    expect(element.children[2].classList.contains('toolbar--foo__right')).to.be.true;
+    expect(element.children[0].classList.contains('toolbar--bar__left')).to.be.true;
+    expect(element.children[1].classList.contains('toolbar--bar__center')).to.be.true;
+    expect(element.children[2].classList.contains('toolbar--bar__right')).to.be.true;
+    expect(element.children[0].classList.contains('toolbar--hoge__left')).not.to.be.true;
+    expect(element.children[1].classList.contains('toolbar--hoge__center')).not.to.be.true;
+    expect(element.children[2].classList.contains('toolbar--hoge__right')).not.to.be.true;
 
-    element.classList.add('navigation-bar--piyo');
+    element.classList.add('toolbar--piyo');
     element.setAttribute('modifier', 'fuga');
-    expect(element.classList.contains('navigation-bar--piyo')).to.be.true;
-    expect(element.classList.contains('navigation-bar--fuga')).to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar--fuga__left')).to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar--piyo__left')).not.to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar--fuga__center')).to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar--piyo__center')).not.to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar--fuga__right')).to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar--piyo__right')).not.to.be.true;
+    expect(element.classList.contains('toolbar--piyo')).to.be.true;
+    expect(element.classList.contains('toolbar--fuga')).to.be.true;
+    expect(element.children[0].classList.contains('toolbar--fuga__left')).to.be.true;
+    expect(element.children[0].classList.contains('toolbar--piyo__left')).not.to.be.true;
+    expect(element.children[1].classList.contains('toolbar--fuga__center')).to.be.true;
+    expect(element.children[1].classList.contains('toolbar--piyo__center')).not.to.be.true;
+    expect(element.children[2].classList.contains('toolbar--fuga__right')).to.be.true;
+    expect(element.children[2].classList.contains('toolbar--piyo__right')).not.to.be.true;
   });
 
   onlyChrome(it)('has \'left\' class value in its first child', () => {
-    expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar__center')).not.to.be.true;
-    expect(element.children[0].classList.contains('navigation-bar__right')).not.to.be.true;
+    expect(element.children[0].classList.contains('toolbar__left')).to.be.true;
+    expect(element.children[0].classList.contains('toolbar__center')).not.to.be.true;
+    expect(element.children[0].classList.contains('toolbar__right')).not.to.be.true;
   });
 
   onlyChrome(it)('has \'center\' class value in its second child', () => {
-    expect(element.children[1].classList.contains('navigation-bar__left')).not.to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
-    expect(element.children[1].classList.contains('navigation-bar__right')).not.to.be.true;
+    expect(element.children[1].classList.contains('toolbar__left')).not.to.be.true;
+    expect(element.children[1].classList.contains('toolbar__center')).to.be.true;
+    expect(element.children[1].classList.contains('toolbar__right')).not.to.be.true;
   });
 
   onlyChrome(it)('has \'right\' class value in its third child', () => {
-    expect(element.children[2].classList.contains('navigation-bar__left')).not.to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar__center')).not.to.be.true;
-    expect(element.children[2].classList.contains('navigation-bar__right')).to.be.true;
+    expect(element.children[2].classList.contains('toolbar__left')).not.to.be.true;
+    expect(element.children[2].classList.contains('toolbar__center')).not.to.be.true;
+    expect(element.children[2].classList.contains('toolbar__right')).to.be.true;
   });
 
   /* Temporary commented due to behavior investigation
@@ -97,9 +97,9 @@ describe('OnsToolbarElement', () => {
 
     onlyChrome(it)('sorts its children depending on their class', () => {
       const element = ons._util.createElement('<ons-toolbar><div class="center">Test2</div><div class="right">Test3</div><div class="left">Test1</div></ons-toolbar>');
-      expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
-      expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
-      expect(element.children[2].classList.contains('navigation-bar__right')).to.be.true;
+      expect(element.children[0].classList.contains('toolbar__left')).to.be.true;
+      expect(element.children[1].classList.contains('toolbar__center')).to.be.true;
+      expect(element.children[2].classList.contains('toolbar__right')).to.be.true;
     });
 
     it('does not compile twice', () => {

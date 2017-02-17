@@ -11,6 +11,7 @@ dev
  * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
  * ons-select: Fix width of the inner element.
  * ons-switch: Supports 'value' attribute.
+ * css-components: Renamed ".navigation-bar" to ".toolbar".
 
 v2.1.0
 ----
