@@ -58,39 +58,39 @@ export default class extends React.Component {
         <Button ref='button' onClick={() => this.showClick(this.refs.button)}>Click me!</Button>
       </div>
 
-      <div className='tab-bar'>
-        <label onClick={() => this.showClick(this.refs.stop)} className='tab-bar__item'>
-          <input type='radio' name='tab-bar-b' defaultChecked='checked' />
-          <button ref='stop' className='tab-bar__button'>
-            <i className='tab-bar__icon ion-stop'></i>
+      <div className='tabbar'>
+        <label onClick={() => this.showClick(this.refs.stop)} className='tabbar__item'>
+          <input type='radio' name='tabbar-b' defaultChecked='checked' />
+          <button ref='stop' className='tabbar__button'>
+            <i className='tabbar__icon ion-stop'></i>
           </button>
         </label>
 
-        <label onClick={() => this.showClick(this.refs.record)} className='tab-bar__item'>
-          <input type='radio' name='tab-bar-b' />
-          <button ref='record' className='tab-bar__button'>
-            <i className='tab-bar__icon ion-record'></i>
+        <label onClick={() => this.showClick(this.refs.record)} className='tabbar__item'>
+          <input type='radio' name='tabbar-b' />
+          <button ref='record' className='tabbar__button'>
+            <i className='tabbar__icon ion-record'></i>
           </button>
         </label>
 
-        <label onClick={() => this.showClick(this.refs.star)} className='tab-bar__item'>
-          <input type='radio' name='tab-bar-b' />
-          <button ref='star' className='tab-bar__button'>
-            <i className='tab-bar__icon ion-star'></i>
+        <label onClick={() => this.showClick(this.refs.star)} className='tabbar__item'>
+          <input type='radio' name='tabbar-b' />
+          <button ref='star' className='tabbar__button'>
+            <i className='tabbar__icon ion-star'></i>
           </button>
         </label>
 
-        <label onClick={() => this.showClick(this.refs.cloud)} className='tab-bar__item'>
-          <input type='radio' name='tab-bar-b' />
-          <button ref='cloud' className='tab-bar__button'>
-            <i className='tab-bar__icon ion-ios-cloud-outline'></i>
+        <label onClick={() => this.showClick(this.refs.cloud)} className='tabbar__item'>
+          <input type='radio' name='tabbar-b' />
+          <button ref='cloud' className='tabbar__button'>
+            <i className='tabbar__icon ion-ios-cloud-outline'></i>
           </button>
         </label>
 
-        <label onClick={() => this.showClick(this.refs.pie)} className='tab-bar__item'>
-          <input type='radio' name='tab-bar-b' />
-          <button ref='pie' className='tab-bar__button'>
-            <i className='tab-bar__icon ion-ios-pie'></i>
+        <label onClick={() => this.showClick(this.refs.pie)} className='tabbar__item'>
+          <input type='radio' name='tabbar-b' />
+          <button ref='pie' className='tabbar__button'>
+            <i className='tabbar__icon ion-ios-pie'></i>
           </button>
         </label>
       </div>

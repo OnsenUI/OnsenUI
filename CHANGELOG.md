@@ -12,6 +12,7 @@ dev
  * ons-select: Fix width of the inner element.
  * ons-switch: Supports 'value' attribute.
  * css-components: Renamed ".navigation-bar" to ".toolbar".
+ * css-components: Renamed ".tab-bar" to ".tabbar".
 
 v2.1.0
 ----
