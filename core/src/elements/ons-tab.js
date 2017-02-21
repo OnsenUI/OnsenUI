@@ -22,7 +22,7 @@ import BaseElement from '../ons/base-element';
 import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
-import {PageLoader, defaultPageLoader} from '../ons/page-loader';
+import { PageLoader, defaultPageLoader } from '../ons/page-loader';
 
 const defaultClassName = 'tab-bar__item';
 
@@ -327,6 +327,12 @@ export default class TabElement extends BaseElement {
     this._input.checked = true;
     this.classList.add('active');
 
+    if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
+      const icon = this.getAttribute('active-icon');
+      const iconElement = this._button.querySelector('.tab-bar__icon').children[0];
+      iconElement.setAttribute('icon', icon);
+    }
+
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'none');
     util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
@@ -336,6 +342,12 @@ export default class TabElement extends BaseElement {
   setInactive() {
     this._input.checked = false;
     this.classList.remove('active');
+
+    if (this.hasAttribute('icon')) {
+      const icon = this.getAttribute('icon');
+      const iconElement = this._button.querySelector('.tab-bar__icon').children[0];
+      iconElement.setAttribute('icon', icon);
+    }
 
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
       .forEach(element => element.style.display = 'inherit');
@@ -363,7 +375,7 @@ export default class TabElement extends BaseElement {
       const deferred = util.defer();
       this._loadingPage = deferred.promise;
 
-      this._pageLoader.load({page: this._getPageTarget(), parent}, pageElement => {
+      this._pageLoader.load({ page: this._getPageTarget(), parent }, pageElement => {
         this._loadedPage = pageElement;
         deferred.resolve(pageElement);
         delete this._loadingPage;
@@ -376,7 +388,7 @@ export default class TabElement extends BaseElement {
   }
 
   _loadPage(page, parent, callback) {
-    this._pageLoader.load({page, parent}, pageElement => {
+    this._pageLoader.load({ page, parent }, pageElement => {
       callback(pageElement);
     });
   }
