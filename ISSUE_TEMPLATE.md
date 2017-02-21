@@ -5,7 +5,7 @@ The issue list of this repo is **exclusively** for bug reports and feature reque
 
 - Read the docs: https://onsen.io/docs/guide/js/
 - Ask in the Gitter chat room: https://gitter.im/OnsenUI/OnsenUI
-- Ask on the forums: http://community.onsen.io/
+- Ask on the forums: https://community.onsen.io/
 - Look for/ask questions on stack overflow: https://stackoverflow.com/questions/tagged/onsen-ui
 
 Reporting a bug?
@@ -17,7 +17,7 @@ Reporting a bug?
 1. Go to https://tutorial.onsen.io/
 2. Select a framework and a template
 3. Modify the template until the issue is visible
-4. Hit "Report this issue" button to open Github issue page. You need to be logged in on Github.
+4. Hit "Report an issue" button to open Github issue page. You need to be logged in on Github.
 
 This uses the latest release of Onsen UI. In case the issue is not reproducible in desktop browsers, just follow the previous steps and also modify the platform version at the end (you can also open the mentioned site on a device).
 
