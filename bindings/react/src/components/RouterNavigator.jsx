@@ -227,7 +227,7 @@ class RouterNavigator extends BasicComponent {
   }
 }
 
-Navigator.propTypes = {
+RouterNavigator.propTypes = {
   /**
    * @name renderPage
    * @type function
