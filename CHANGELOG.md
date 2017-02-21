@@ -11,6 +11,8 @@ dev
  * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
  * ons-select: Fix width of the inner element.
  * ons-switch: Supports 'value' attribute.
+ * angular1: `number input` retains number type variable with `ngModel`.
+ * ons-tab: Supports 'active-icon' attribute.
 
 v2.1.0
 ----
