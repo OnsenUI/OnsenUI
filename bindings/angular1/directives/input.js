@@ -69,7 +69,7 @@
           const set = $parse(attrs.ngModel).assign;
 
           if (el._isTextInput) {
-            set(scope, el.value);
+            el.type === 'number' ? set(scope, Number(el.value)) : set(scope, el.value);
           }
           else if (el.type === 'radio' && el.checked) {
             set(scope, el.value);
