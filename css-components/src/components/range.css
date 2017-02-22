@@ -1,0 +1,274 @@
+
+:root {
+  --range-track-background-color: var(--border-color);
+  --range-track-background-color-active: var(--highlight-color);
+  --range-thumb-background-color: #fff;
+  --range-thumb-border-color: var(--border-color);
+
+  --range-border-radius: 3px;
+  --range-thumb-border: 1px solid var(--range-thumb-border-color);
+  --range-border: none;
+  --range-track-height: 2px;
+  --range-thumb-width: var(--thumb-size);
+
+  --material-range-track-height: 2px;
+  --material-range-thumb-width: 12px;
+  --material-range-thumb-radius: calc(var(--material-range-thumb-width) / 2);
+  --material-range-thumb-vertical-margin: 24px;
+  --material-range-thumb-horizontal-margin: 2px;
+
+  --range: {
+    @apply(--reset-input);
+    -webkit-appearance: none;
+  }
+
+  --range__thumb: {
+    cursor: pointer;
+    position: relative;
+    height: var(--range-thumb-width);
+    width: var(--range-thumb-width);
+    background-color: var(--range-thumb-background-color);
+    border: var(--range-thumb-border);
+    /* TODO: Add shadow */
+    /*box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0, 0, 0, 0.25); */
+    border-radius: var(--round-border);
+    margin: 0;
+    padding: 0;
+  }
+
+  --range--material--thumb--before: {
+    display: none;
+  }
+
+  --range--material--thumb--after: {
+    content: '';
+    display: block;
+    border: 0px;
+    border-radius: 100%;
+    height: var(--material-range-thumb-width);
+    width: var(--material-range-thumb-width);
+    background-color: var(--material-range-thumb-color);
+    opacity: 0.2;
+    transition: transform 0.1s linear;
+  }
+}
+
+/*!
+  name: Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+*/
+ons-range:before {
+  content: '';
+  display: block;
+  position: relative;
+  top: 17px;
+  height: var(--range-track-height);
+  margin-bottom: calc(0 - var(--range-track-height));
+  background-color: var(--range-track-background-color);
+}
+
+/* FIXME */
+ons-range .range {
+  position: relative;
+  background: transparent;
+}
+
+/* FIXME */
+ons-range .range::-moz-range-track {
+  background: transparent;
+}
+
+/* FIXME */
+ons-range[disabled] {
+  @apply(--disabled);
+}
+
+/* FIXME */
+ons-range[disabled] .range {
+  opacity: 1;
+}
+
+.range {
+  @apply(--range);
+  border: var(--range-border);
+  height: var(--range-track-height);
+  border-radius: var(--range-border-radius);
+  background-image: linear-gradient(var(--range-track-background-color), var(--range-track-background-color));
+  background-position: left center;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  height: 32px;
+}
+
+.range::-moz-range-track {
+  position: relative;
+  border: none;
+  background-color: var(--range-track-background-color);
+  height: var(--range-track-height);
+  border-radius: var(--round-border);
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.range::-ms-track {
+  position: relative;
+  border: none;
+  background-color: var(--range-track-background-color);
+  height: 0;
+  border-radius: var(--round-border);
+}
+
+.range::-webkit-slider-thumb {
+  @apply(--range__thumb);
+  -webkit-appearance: none;
+  top: 0;
+}
+
+.range::-moz-range-thumb {
+  @apply(--range__thumb);
+}
+
+.range::-ms-thumb {
+  @apply(--range__thumb);
+  top: 0;
+}
+
+.range::-ms-fill-lower {
+  height: 2px;
+  background-color: var(--range-track-background-color-active);
+}
+
+.range::-ms-tooltip {
+  display: none;
+}
+
+.range:disabled {
+  @apply(--disabled);
+}
+
+.range__left {
+  position: relative;
+  top: 17px;
+  height: 2px;
+  width: 0;
+  background-color: var(--range-track-background-color-active);
+  pointer-events: none;
+}
+
+[disabled] > .range__left,
+.range--material:disabled + .range__left {
+  visibility: hidden;
+}
+
+/*!
+  name: Material Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+
+.range--material {
+  background-image: linear-gradient(var(--material-range-track-color), var(--material-range-track-color));
+  background-position: center;
+  background-size: 100% 2px;
+  overflow: visible;
+}
+
+.range--material::-webkit-slider-thumb {
+  top: 1px;
+  border: none;
+  height: calc(var(--material-range-thumb-width) + var(--material-range-thumb-vertical-margin));
+  width: calc(var(--material-range-thumb-width) + var(--material-range-thumb-horizontal-margin));
+  border-radius: 0;
+  background-color: transparent;
+  background-image: radial-gradient(circle var(--material-range-thumb-radius) at calc(var(--material-range-thumb-radius) + var(--material-range-thumb-horizontal-margin) / 2), var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) var(--material-range-thumb-radius), transparent calc(var(--material-range-thumb-radius) + 1));
+  margin-top: -1px;
+}
+
+.range--material::-moz-range-thumb {
+  top: 1px;
+  border: 3px solid var(--material-range-track-color);
+  height: var(--material-range-thumb-width);
+  width: var(--material-range-thumb-width);
+  border-radius: 100%;
+  border-color: var(--material-range-thumb-color);
+  background-color: var(--material-range-thumb-color);
+}
+
+.range--material::-moz-range-track {
+  background-color: var(--material-range-track-color);
+}
+
+.range--material::-ms-thumb {
+  margin-top: 1px;
+  border: none;
+  height: var(--material-range-thumb-width);
+  width: var(--material-range-thumb-width);
+  border-radius: 100%;
+  border-color: var(--material-range-thumb-color);
+  background-color: var(--material-range-thumb-color);
+}
+
+.range--material:focus::-moz-range-thumb {
+  border-color: var(--material-range-thumb-color);
+  background-color: var(--material-range-thumb-color);
+}
+
+.range--material::-moz-range-thumb:before {
+  @apply(--range--material--thumb--before);
+}
+
+.range--material::-webkit-slider-thumb:before {
+  @apply(--range--material--thumb--before);
+}
+
+.range--material::-ms-fill-lower {
+  background-color: var(--material-range-thumb-color);
+}
+
+.range--material::-moz-range-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  @apply(--range--material--thumb--after);
+}
+
+.range--material::-webkit-slider-thumb:after {
+  margin-top: -3px;
+  margin-left: -3px;
+  @apply(--range--material--thumb--after);
+  display: inline-block;
+  margin-left: calc(var(--material-range-thumb-horizontal-margin) / 2);
+  margin-top: calc(var(--material-range-thumb-vertical-margin) / 2);
+}
+
+.range--material::-ms-fill-upper {
+  margin-top: -6px;
+  margin-left: -6px;
+  @apply(--range--material--thumb--after);
+}
+
+.range--material:active::-webkit-slider-thumb:after {
+  transform: scale(2.5);
+}
+
+.range--material:active::-moz-range-thumb:after {
+  transform: scale(2.5);
+}
+
+.range--material:active::-ms-fill-upper {
+  transform: scale(2.5);
+}
+
+.range--material__left {
+  background-color: var(--material-range-thumb-color);
+}
+

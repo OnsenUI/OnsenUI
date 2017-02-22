@@ -1,0 +1,67 @@
+
+:root {
+  --page-background-color: var(--background-color);
+  --page-material-background-color: var(--material-background-color);
+}
+
+.page {
+  @apply(--reset-font);
+  background-color: var(--page-background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: visible;
+  overflow-y: hidden;
+  font-size: var(--font-size);
+  color: var(--text-color);
+  -ms-overflow-style: none;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+.page__content {
+  background-color: var(--page-background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+.page__background {
+  background-color: var(--page-background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+.page--material {
+  @apply(--material-font);
+}
+
+.page--material__content {
+  @apply(--material-font);
+  font-weight: 400;
+}
+
+// FIXME
+.page--material__content h1,
+.page--material__content h2,
+.page--material__content h3,
+.page--material__content h4,
+.page--material__content h5 {
+  @apply(--material-font);
+  font-weight: 400;
+}
+
+.page--material__background {
+  background-color: var(--page-material-background-color);
+}
