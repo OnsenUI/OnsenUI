@@ -24,27 +24,27 @@ import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
 import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 
-const defaultClassName = 'tab-bar__item';
+const defaultClassName = 'tabbar__item';
 
 const scheme = {
-  '': 'tab-bar--*__item',
-  '.tab-bar__button': 'tab-bar--*__button'
+  '': 'tabbar--*__item',
+  '.tabbar__button': 'tabbar--*__button'
 };
 
 const templateSource = util.createElement(`
   <div>
     <input type="radio" style="display: none">
-    <button class="tab-bar__button"></button>
+    <button class="tabbar__button"></button>
   </div>
 `);
 
 const defaultInnerTemplateSource = util.createElement(`
   <div>
-    <div class="tab-bar__icon">
+    <div class="tabbar__icon">
       <ons-icon icon="ion-cloud"></ons-icon>
     </div>
-    <div class="tab-bar__label">label</div>
-    <div class="tab-bar__badge notification">1</div>
+    <div class="tabbar__label">label</div>
+    <div class="tabbar__badge notification">1</div>
   </div>
 `);
 
@@ -256,16 +256,16 @@ export default class TabElement extends BaseElement {
       }
     }
 
-    if (!button.querySelector('.tab-bar__icon')) {
-      button.insertBefore(template.querySelector('.tab-bar__icon'), button.firstChild);
+    if (!button.querySelector('.tabbar__icon')) {
+      button.insertBefore(template.querySelector('.tabbar__icon'), button.firstChild);
     }
 
-    if (!button.querySelector('.tab-bar__label')) {
-      button.appendChild(template.querySelector('.tab-bar__label'));
+    if (!button.querySelector('.tabbar__label')) {
+      button.appendChild(template.querySelector('.tabbar__label'));
     }
 
-    if (!button.querySelector('.tab-bar__badge')) {
-      button.appendChild(template.querySelector('.tab-bar__badge'));
+    if (!button.querySelector('.tabbar__badge')) {
+      button.appendChild(template.querySelector('.tabbar__badge'));
     }
 
     const icon = this.getAttribute('icon');

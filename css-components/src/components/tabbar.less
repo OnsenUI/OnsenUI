@@ -17,22 +17,17 @@
 */
 
 // internal variables
-@tab-bar-background-color: @tabbar-background-color; // Background color
-@tab-bar-border-color: @tabbar-border-color; // Separator
-@tab-bar-button-color: @tabbar-text-color; // Text color
-@tab-bar-active-color: @tabbar-highlight-text-color; // Text color active
-@material-tab-bar-background-color: @material-tabbar-background-color;
-@material-tab-bar-text-color: @material-tabbar-text-color;
-@material-tab-bar-current-color: @material-tabbar-highlight-text-color;
-@material-tab-bar-highlight-color: @material-tabbar-highlight-color;
-@tab-bar-active-border-top: none;
-@tab-bar-focus-border-top: none;
-@tab-bar-height: 49px;
-@tab-bar-button-line-height: 49px;
-@tab-bar-button-border: none;
-@tab-bar-active-box-shadow: none;
-@tab-bar-button-focus-box-shadow: none;
-@tab-bar-border-top: 1px solid @tab-bar-border-color;
+@tabbar-button-color: @tabbar-text-color; // Text color
+@tabbar-active-color: @tabbar-highlight-text-color; // Text color active
+@material-tabbar-current-color: @material-tabbar-highlight-text-color;
+@tabbar-active-border-top: none;
+@tabbar-focus-border-top: none;
+@tabbar-height: 49px;
+@tabbar-button-line-height: 49px;
+@tabbar-button-border: none;
+@tabbar-active-box-shadow: none;
+@tabbar-button-focus-box-shadow: none;
+@tabbar-border-top: 1px solid @tabbar-border-color;
 
 /*!
   name: Icon Tabbar
@@ -40,28 +35,28 @@
   elements: ons-tabbar ons-tab
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
-    <div class="tab-bar">
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a" checked="checked">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-stop"></i>
-          <div class="tab-bar__label">One</div>
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-stop"></i>
+          <div class="tabbar__label">One</div>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-record"></i>
-          <div class="tab-bar__label">Two</div>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
+          <div class="tabbar__label">Two</div>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-star"></i>
-          <div class="tab-bar__label">Three</div>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-star"></i>
+          <div class="tabbar__label">Three</div>
         </button>
       </label>
     </div>
@@ -72,31 +67,31 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar">
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c" checked="checked">
-        <button class="tab-bar__button">
-          <div class="tab-bar__label">One</div>
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c" checked="checked">
+        <button class="tabbar__button">
+          <div class="tabbar__label">One</div>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c">
-        <button class="tab-bar__button">
-          <div class="tab-bar__label">Two</div>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c">
+        <button class="tabbar__button">
+          <div class="tabbar__label">Two</div>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c">
-        <button class="tab-bar__button">
-          <div class="tab-bar__label">Three</div>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c">
+        <button class="tabbar__button">
+          <div class="tabbar__label">Three</div>
         </button>
       </label>
     </div>
 */
 
-.retina-tabbar-border(@color: @tab-bar-border-color, @border-position) when (@border-position = top) {
+.retina-tabbar-border(@color: @tabbar-border-color, @border-position) when (@border-position = top) {
   .retina-query({
     border-top: none;
     background-size: 100% 1px;
@@ -106,7 +101,7 @@
   });
 }
 
-.retina-tabbar-border(@color: @tab-bar-border-color, @border-position) when (@border-position = bottom) {
+.retina-tabbar-border(@color: @tabbar-border-color, @border-position) when (@border-position = bottom) {
   .retina-query({
     border-bottom: none;
     background-size: 100% 1px;
@@ -116,7 +111,7 @@
   });
 }
 
-.tab-bar {
+.tabbar {
   .reset-font();
   display: table;
   table-layout: fixed;
@@ -127,14 +122,14 @@
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  height: @tab-bar-height;
-  background-color: @tab-bar-background-color;
-  border-top: @tab-bar-border-top;
+  height: @tabbar-height;
+  background-color: @tabbar-background-color;
+  border-top: @tabbar-border-top;
   width: 100%;
-  .retina-tabbar-border(@tab-bar-border-color, top);
+  .retina-tabbar-border(@tabbar-border-color, top);
 }
 
-.tab-bar__item {
+.tabbar__item {
   .reset-font();
   .hide-input-parent();
   display: table-cell;
@@ -142,11 +137,11 @@
   border-radius: 0;
 }
 
-.tab-bar__item > input {
+.tabbar__item > input {
   .hide-input();
 }
 
-.tab-bar__button {
+.tabbar__button {
   .inline-block();
   .reset-font();
   .reset-box-model();
@@ -155,23 +150,23 @@
   .ellipsis();
   text-decoration: none;
   padding: 0;
-  height: @tab-bar-button-line-height;
+  height: @tabbar-button-line-height;
   letter-spacing: @letter-spacing;
-  color: @tab-bar-button-color;
+  color: @tabbar-button-color;
   text-shadow: @text-shadow;
   vertical-align: top;
   background-color: transparent;
   box-shadow: @box-shadow;
-  border-top: @tab-bar-button-border;
+  border-top: @tabbar-button-border;
   width: 100%;
   font-weight: @font-weight;
-  line-height: @tab-bar-button-line-height;
+  line-height: @tabbar-button-line-height;
   .retina-query({
     border-top: none;
   });
 }
 
-.tab-bar__icon {
+.tabbar__icon {
   font-size: 24px;
   padding: 0;
   margin: 0;
@@ -180,11 +175,11 @@
   height: 28px;
 }
 
-.tab-bar__label {
+.tabbar__label {
   .reset-font();
 }
 
-.tab-bar__badge.notification { // FIXME
+.tabbar__badge.notification { // FIXME
   position: absolute;
   top: 5px;
   z-index: 10;
@@ -194,48 +189,48 @@
   border-radius: 8px;
 }
 
-.tab-bar__icon + .tab-bar__label {
+.tabbar__icon + .tabbar__label {
   font-size: 10px;
   line-height: 1;
   margin: 0;
   font-weight: @font-weight;
 }
 
-.tab-bar__label:first-child {
+.tabbar__label:first-child {
   font-size: 16px;
-  line-height: @tab-bar-button-line-height;
+  line-height: @tabbar-button-line-height;
   margin: 0;
   padding: 0;
 }
 
-.tab-bar__button {
-  color: @tab-bar-button-color;
+.tabbar__button {
+  color: @tabbar-button-color;
 }
 
-:checked + .tab-bar__button {
-  color: @tab-bar-active-color;
+:checked + .tabbar__button {
+  color: @tabbar-active-color;
   background-color: transparent;
-  box-shadow: @tab-bar-active-box-shadow;
-  border-top: @tab-bar-active-border-top;
+  box-shadow: @tabbar-active-box-shadow;
+  border-top: @tabbar-active-border-top;
 }
 
-.tab-bar__button:disabled {
+.tabbar__button:disabled {
   .disabled();
 }
 
-.tab-bar__button:focus {
+.tabbar__button:focus {
   z-index: 1;
-  border-top: @tab-bar-focus-border-top;
-  box-shadow: @tab-bar-button-focus-box-shadow;
+  border-top: @tabbar-focus-border-top;
+  box-shadow: @tabbar-button-focus-box-shadow;
   outline: 0;
 }
 
-.tab-bar__content {
+.tabbar__content {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: @tab-bar-height;
+  bottom: @tabbar-height;
   z-index: 0;
 }
 
@@ -245,25 +240,25 @@
   elements: ons-tabbar ons-tab
   markup: |
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
-    <div class="tab-bar">
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-b" checked="checked">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-stop"></i>
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-stop"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-record"></i>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-star"></i>
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-star"></i>
         </button>
       </label>
 
@@ -275,43 +270,43 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar tab-bar--top">
-      <label class="tab-bar__item">
-        <input type="radio" name="top-tab-bar-a" checked="checked">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-stop"></i>
+    <div class="tabbar tabbar--top">
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-stop"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="top-tab-bar-a">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-record"></i>
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item">
-        <input type="radio" name="top-tab-bar-a">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-star"></i>
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-star"></i>
         </button>
       </label>
     </div>
 */
 
-.tab-bar--top {
+.tabbar--top {
   position: relative;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: auto;
   border-top: none;
-  border-bottom: @tab-bar-border-top;
-  .retina-tabbar-border(@tab-bar-border-color, bottom);
+  border-bottom: @tabbar-border-top;
+  .retina-tabbar-border(@tabbar-border-color, bottom);
 }
 
-.tab-bar--top__content {
-  top: @tab-bar-height;
+.tabbar--top__content {
+  top: @tabbar-height;
   left: 0;
   right: 0;
   bottom: 0;
@@ -323,24 +318,24 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar tab-bar--top tab-bar--top-border">
-      <label class="tab-bar__item tab-bar--top-border__item">
-        <input type="radio" name="top-tab-bar-b" checked="checked">
-        <button class="tab-bar__button tab-bar--top-border__button">
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b" checked="checked">
+        <button class="tabbar__button tabbar--top-border__button">
           Home
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--top-border__item">
-        <input type="radio" name="top-tab-bar-b">
-        <button class="tab-bar__button tab-bar--top-border__button">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
           Comments
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--top-border__item">
-        <input type="radio" name="top-tab-bar-b">
-        <button class="tab-bar__button tab-bar--top-border__button">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
           Activity
         </button>
       </label>
@@ -352,31 +347,31 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar tab-bar--top tab-bar--material">
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a" checked="checked">
-        <button class="tab-bar__button tab-bar--material__button">
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
           Music
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
-        <button class="tab-bar__button tab-bar--material__button">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
           Movies
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
-        <button class="tab-bar__button tab-bar--material__button">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
           Books
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-a">
-        <button class="tab-bar__button tab-bar--material__button">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
           Games
         </button>
       </label>
@@ -384,32 +379,32 @@
     </div>
 */
 
-.tab-bar--top-border__button {
+.tabbar--top-border__button {
   background-color: transparent;
   border-bottom: 4px solid transparent;
 }
 
-:checked + .tab-bar--top-border__button {
+:checked + .tabbar--top-border__button {
   background-color: transparent;
-  border-bottom: 4px solid @tab-bar-active-color;
+  border-bottom: 4px solid @tabbar-active-color;
 }
 
-.tab-bar--material {
-  background-color: @material-tab-bar-background-color;
+.tabbar--material {
+  background-color: @material-tabbar-background-color;
   border-bottom-width: 0px;
   box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
 }
 
-.tab-bar--material__button {
+.tabbar--material__button {
   background-color: transparent;
-  color: @material-tab-bar-text-color;
+  color: @material-tabbar-text-color;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
   .material-font();
 }
 
-.tab-bar--material__button:after {
+.tabbar--material__button:after {
   content: '';
   display: block;
   width: 0;
@@ -417,21 +412,21 @@
   bottom: 0;
   position: absolute;
   margin-top: -2px;
-  background-color: @material-tab-bar-current-color;
+  background-color: @material-tabbar-current-color;
 }
 
-:checked + .tab-bar--material__button:after {
+:checked + .tabbar--material__button:after {
   width: 100%;
   transition: width 0.2s ease-in-out;
 }
 
-:checked + .tab-bar--material__button {
+:checked + .tabbar--material__button {
   background-color: transparent;
-  color: @material-tab-bar-current-color;
+  color: @material-tabbar-current-color;
 }
 
-.tab-bar--material__item:not([ripple]):active {
-  background-color: @material-tab-bar-highlight-color;
+.tabbar--material__item:not([ripple]):active {
+  background-color: @material-tabbar-highlight-color;
 }
 
 /*!
@@ -439,32 +434,33 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar tab-bar--top tab-bar--material">
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-b" checked="checked">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-b">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-b">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-pin-account"></i>
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
         </button>
       </label>
     </div>
 */
 
-.tab-bar--material__icon {
+.tabbar--material__icon {
   font-size: 22px !important;
+  line-height: 36px;
 }
 
 /*!
@@ -472,44 +468,44 @@
   category: Tabbar
   elements: ons-tabbar ons-tab
   markup: |
-    <div class="tab-bar tab-bar--top tab-bar--material">
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-c" checked="checked">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-phone"></i>
-          <div class="tab-bar__label tab-bar--material__label">Call</div>
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+          <div class="tabbar__label tabbar--material__label">Call</div>
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-c">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-favorite"></i>
-          <div class="tab-bar__label tab-bar--material__label">Favorites</div>
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+          <div class="tabbar__label tabbar--material__label">Favorites</div>
         </button>
       </label>
 
-      <label class="tab-bar__item tab-bar--material__item">
-        <input type="radio" name="tab-bar-material-c">
-        <button class="tab-bar__button tab-bar--material__button">
-          <i class="tab-bar__icon tab-bar--material__icon zmdi zmdi-delete"></i>
-          <div class="tab-bar__label tab-bar--material__label">Delete</div>
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-delete"></i>
+          <div class="tabbar__label tabbar--material__label">Delete</div>
         </button>
       </label>
     </div>
 */
 
-.tab-bar--material__label {
+.tabbar--material__label {
   .material-font();
 }
 
-.tab-bar--material__label:first-child {
+.tabbar--material__label:first-child {
   .material-font();
   letter-spacing: 0.015em;
   font-weight: 500;
   font-size: 14px;
 }
 
-.tab-bar--material__icon + .tab-bar--material__label {
+.tabbar--material__icon + .tabbar--material__label {
   font-size: 10px;
 }

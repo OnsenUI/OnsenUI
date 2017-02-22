@@ -27,8 +27,8 @@ import TabElement from '../ons-tab';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
-  '.tab-bar__content': 'tab-bar--*__content',
-  '.tab-bar': 'tab-bar--*'
+  '.tabbar__content': 'tabbar--*__content',
+  '.tabbar': 'tabbar--*'
 };
 
 const _animatorDict = {
@@ -210,24 +210,24 @@ export default class TabbarElement extends BaseElement {
   }
 
   get _contentElement() {
-    return util.findChild(this, '.tab-bar__content');
+    return util.findChild(this, '.tabbar__content');
   }
 
   get _tabbarElement() {
-    return util.findChild(this, '.tab-bar');
+    return util.findChild(this, '.tabbar');
   }
 
   _compile() {
     if (this._contentElement && this._tabbarElement) {
-      const content = util.findChild(this, '.tab-bar__content');
-      const bar = util.findChild(this, '.tab-bar');
+      const content = util.findChild(this, '.tabbar__content');
+      const bar = util.findChild(this, '.tabbar');
 
-      content.classList.add('ons-tab-bar__content');
-      bar.classList.add('ons-tab-bar__footer');
+      content.classList.add('ons-tabbar__content');
+      bar.classList.add('ons-tabbar__footer');
     } else {
 
-      const content = util.create('.ons-tab-bar__content.tab-bar__content');
-      const tabbar = util.create('.tab-bar.ons-tab-bar__footer');
+      const content = util.create('.ons-tabbar__content.tabbar__content');
+      const tabbar = util.create('.tabbar.ons-tabbar__footer');
 
       while (this.firstChild) {
         tabbar.appendChild(this.firstChild);
@@ -260,7 +260,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _getTabbarElement() {
-    return util.findChild(this, '.tab-bar');
+    return util.findChild(this, '.tabbar');
   }
 
   /**

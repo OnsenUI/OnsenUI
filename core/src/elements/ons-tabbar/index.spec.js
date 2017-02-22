@@ -27,24 +27,24 @@ describe('OnsTabbarElement', () => {
     document.body.appendChild(element);
     element.setAttribute('modifier', 'hoge');
 
-    expect(element.children[0].classList.contains('tab-bar--hoge__content')).to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--hoge')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar--hoge__content')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar--hoge')).to.be.true;
 
     element.setAttribute('modifier', ' foo bar');
-    expect(element.children[0].classList.contains('tab-bar--foo__content')).to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--foo')).to.be.true;
-    expect(element.children[0].classList.contains('tab-bar--bar__content')).to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--bar')).to.be.true;
-    expect(element.children[0].classList.contains('tab-bar--hoge__content')).not.to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--hoge')).not.to.be.true;
+    expect(element.children[0].classList.contains('tabbar--foo__content')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar--foo')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar--bar__content')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar--bar')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar--hoge__content')).not.to.be.true;
+    expect(element.children[1].classList.contains('tabbar--hoge')).not.to.be.true;
 
-    element.children[0].classList.add('tab-bar--piyo');
-    element.children[1].classList.add('tab-bar--piyo');
+    element.children[0].classList.add('tabbar--piyo');
+    element.children[1].classList.add('tabbar--piyo');
     element.setAttribute('modifier', 'fuga');
-    expect(element.children[0].classList.contains('tab-bar--piyo')).to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--piyo')).to.be.true;
-    expect(element.children[0].classList.contains('tab-bar--fuga__content')).to.be.true;
-    expect(element.children[1].classList.contains('tab-bar--fuga')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar--piyo')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar--piyo')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar--fuga__content')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar--fuga')).to.be.true;
   });
 
   onlyChrome(it)('has \'position\' attribute', function(done) {
@@ -77,13 +77,13 @@ describe('OnsTabbarElement', () => {
       expect(bottomElement._top).not.to.be.true;
       expect(autoAndroidElement._top).to.be.true;
 
-      expect(topElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
-      expect(bottomElement.children[0].classList.contains('tab-bar--top__content')).not.to.be.true;
-      expect(autoAndroidElement.children[0].classList.contains('tab-bar--top__content')).to.be.true;
+      expect(topElement.children[0].classList.contains('tabbar--top__content')).to.be.true;
+      expect(bottomElement.children[0].classList.contains('tabbar--top__content')).not.to.be.true;
+      expect(autoAndroidElement.children[0].classList.contains('tabbar--top__content')).to.be.true;
 
-      expect(topElement.children[1].classList.contains('tab-bar--top')).to.be.true;
-      expect(bottomElement.children[1].classList.contains('tab-bar--top')).not.to.be.true;
-      expect(autoAndroidElement.children[1].classList.contains('tab-bar--top')).to.be.true;
+      expect(topElement.children[1].classList.contains('tabbar--top')).to.be.true;
+      expect(bottomElement.children[1].classList.contains('tabbar--top')).not.to.be.true;
+      expect(autoAndroidElement.children[1].classList.contains('tabbar--top')).to.be.true;
 
       div.remove();
       done();
@@ -95,11 +95,11 @@ describe('OnsTabbarElement', () => {
     expect(element.children[1]).to.be.ok;
     expect(element.children[2]).not.to.be.ok;
 
-    expect(element.children[0].classList.contains('ons-tab-bar__content')).to.be.true;
-    expect(element.children[0].classList.contains('tab-bar__content')).to.be.true;
+    expect(element.children[0].classList.contains('ons-tabbar__content')).to.be.true;
+    expect(element.children[0].classList.contains('tabbar__content')).to.be.true;
 
-    expect(element.children[1].classList.contains('tab-bar')).to.be.true;
-    expect(element.children[1].classList.contains('ons-tab-bar__footer')).to.be.true;
+    expect(element.children[1].classList.contains('tabbar')).to.be.true;
+    expect(element.children[1].classList.contains('ons-tabbar__footer')).to.be.true;
   });
 
   describe('#getTabbarId()', () => {
