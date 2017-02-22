@@ -72,7 +72,7 @@ gulp.task('core', function() {
       plugins: [
         nodeResolve(),
         babel({
-          presets: ['es2015-rollup', 'stage-2'],
+          presets: ['es2015-rollup', 'es2016', 'es2017', 'stage-3'],
           babelrc: false
         })
       ],
