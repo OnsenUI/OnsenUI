@@ -26,7 +26,7 @@ onlyChrome(describe)('OnsTabElement', () => {
     element.page = 'foobar';
     expect(element.page).to.be.equal('foobar');
 
-    element.page = {foo: 'bar'};
+    element.page = { foo: 'bar' };
     expect(element.page.foo).to.be.equal('bar');
 
     element.setAttribute('page', 'hoge');
@@ -136,6 +136,34 @@ onlyChrome(describe)('OnsTabElement', () => {
     });
   });
 
+  describe('active-icon attribute', () => {
+    onlyChrome(it)('sets active-icon name for the tab', done => {
+      const tabbar = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab id="tab1" page="page1" icon="ion-home" active-icon="ion-edit"></ons-tab>
+        </ons-tabbar>
+      `);
+
+      const template1 = ons._util.createElement(`
+        <ons-template id="page1"><ons-page></ons-page></ons-template>
+      `);
+
+      document.body.appendChild(tabbar);
+      document.body.appendChild(template1);
+
+      setImmediate(() => {
+        tabbar.setActiveTab(0).then(() => {
+          expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
+          expect(tabbar.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-home');
+
+          document.body.removeChild(tabbar);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('label attribute', () => {
     onlyChrome(it)('sets label name for the tab', done => {
       const tabbar = ons._util.createElement(`
@@ -222,7 +250,7 @@ onlyChrome(describe)('OnsTabElement', () => {
       expect(element._hasDefaultTemplate).to.be.true;
     });
 
-  it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
+    it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
