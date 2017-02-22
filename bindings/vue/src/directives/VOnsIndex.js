@@ -12,7 +12,7 @@ const _setInitialIndex = (el, value) => {
 export default {
   bind(el, binding, vnode) {
     const tag = el.tagName.toLowerCase();
-    if (!['ons-tabbar', 'ons-carousel'].includes(tag)) {
+    if (['ons-tabbar', 'ons-carousel'].indexOf(tag) === -1) {
       throw new Error('"v-ons-index" directive cannot be used with "' + tag + '" element.');
     }
 

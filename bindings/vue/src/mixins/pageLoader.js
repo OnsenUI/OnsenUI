@@ -21,9 +21,13 @@ const _inheritProps = {
     }
 
     const parentVnode = this.$options.parent.$options._parentVnode;
-    const parentProps = Object.assign({}, parentVnode.data.attrs, parentVnode.componentOptions.propsData);
-    this.$options.propsData = Object.assign(
-      Object.keys(this.$options.props).reduce((result, key) => {
+    const parentProps = {
+      ...parentVnode.data.attrs,
+      ...parentVnode.componentOptions.propsData
+    };
+
+    this.$options.propsData = {
+      ...Object.keys(this.$options.props).reduce((result, key) => {
         const hyphenKey = hyphenate(key);
         result[key] = {};
         if (parentProps.hasOwnProperty(hyphenKey)) {
@@ -31,7 +35,8 @@ const _inheritProps = {
         }
         return result;
       }, {}),
-      this.$options.propsData || {});
+      ...(this.$options.propsData || {})
+    };
   }
 };
 

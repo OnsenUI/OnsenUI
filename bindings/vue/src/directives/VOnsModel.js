@@ -25,7 +25,7 @@ const _bindModifierInputOn = (eventName, modelKey, vnode, modifiers) => {
 };
 const _bindArrayInputOn = (eventName, modelKey, vnode) => {
   _bindOn(eventName, modelKey, vnode, event => {
-    if (vnode.context[modelKey].includes(event.target.value)) {
+    if (vnode.context[modelKey].indexOf(event.target.value) >= 0) {
       !event.target.checked && vnode.context[modelKey].splice(vnode.context[modelKey].indexOf(event.target.value), 1);
     } else {
       event.target.checked && vnode.context[modelKey].push(event.target.value);
@@ -34,7 +34,7 @@ const _bindArrayInputOn = (eventName, modelKey, vnode) => {
 };
 const _bindCheckbox = (el, binding, vnode, modelKey) => {
   if (binding.value instanceof Array) {
-    el.checked = binding.value.includes(el.value);
+    el.checked = binding.value.indexOf(el.value) >= 0;
     _bindArrayInputOn('change', modelKey, vnode);
   } else {
     el.checked = !!binding.value;
@@ -43,7 +43,7 @@ const _bindCheckbox = (el, binding, vnode, modelKey) => {
 };
 const _updateCheckbox = (el, binding, vnode, modelKey) => {
   if (binding.value instanceof Array) {
-    el.checked = (vnode.context[modelKey] || []).includes(el.value);
+    el.checked = (vnode.context[modelKey] || []).indexOf(el.value) >= 0;
   } else {
     el.checked = !!binding.value;
   }

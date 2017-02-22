@@ -45,7 +45,7 @@ const _scanNonReservedProperties = (targetClass, callback) => {
 
   Object.keys(propertyDescriptors).forEach(
     (propertyName) => {
-      if (!_isReserved(propertyName) && !_blackListedProperties.includes(propertyName)) { // ignore reserved  and black listed properties
+      if (!_isReserved(propertyName) && _blackListedProperties.indexOf(propertyName) === -1) { // ignore reserved  and black listed properties
         callback(propertyName, propertyDescriptors[propertyName]);
       }
     }
