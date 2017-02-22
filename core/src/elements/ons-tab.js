@@ -240,7 +240,7 @@ export default class TabElement extends BaseElement {
   }
 
   _updateRipple() {
-    util.updateRipple(this.querySelector('.tab-bar__button'), this.hasAttribute('ripple'));
+    util.updateRipple(this.querySelector('.tabbar__button'), this.hasAttribute('ripple'));
   }
 
   _updateDefaultTemplate() {
@@ -272,9 +272,9 @@ export default class TabElement extends BaseElement {
     const label = this.getAttribute('label');
     const badge = this.getAttribute('badge');
 
-    const iconElement = button.querySelector('.tab-bar__icon').children[0];
-    const labelElement = button.querySelector('.tab-bar__label');
-    const badgeElement = button.querySelector('.tab-bar__badge');
+    const iconElement = button.querySelector('.tabbar__icon').children[0];
+    const labelElement = button.querySelector('.tabbar__label');
+    const badgeElement = button.querySelector('.tabbar__badge');
 
     if (iconElement) {
       if (typeof icon === 'string') {
@@ -309,7 +309,7 @@ export default class TabElement extends BaseElement {
   }
 
   get _button() {
-    return util.findChild(this, '.tab-bar__button');
+    return util.findChild(this, '.tabbar__button');
   }
 
   _onClick() {
