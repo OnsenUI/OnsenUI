@@ -152,12 +152,13 @@ onlyChrome(describe)('OnsTabElement', () => {
       document.body.appendChild(template1);
 
       setImmediate(() => {
+        expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
+
         tabbar.setActiveTab(0).then(() => {
           expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
-          expect(tabbar.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-home');
 
           document.body.removeChild(tabbar);
-
+          
           done();
         });
       });
