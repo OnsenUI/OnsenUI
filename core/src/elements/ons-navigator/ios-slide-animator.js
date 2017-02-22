@@ -73,8 +73,8 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
 
     var noMaterialToolbar =
-      !enterPage._getToolbarElement().classList.contains('navigation-bar--material') &&
-      !leavePage._getToolbarElement().classList.contains('navigation-bar--material');
+      !enterPage._getToolbarElement().classList.contains('toolbar--material') &&
+      !leavePage._getToolbarElement().classList.contains('toolbar--material');
 
     return bothPageHasToolbar && noMaterialToolbar;
   }

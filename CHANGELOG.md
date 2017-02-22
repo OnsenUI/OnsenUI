@@ -7,8 +7,8 @@ dev
  * ons-template: Show warning when ons-template is not located just under document.body.
  * css-components: Fixed broken popover components.
  * ons-popover: Changed internal DOM structure.
-
  * css-components: Renamed ".tab-bar" to ".tabbar".
+ * css-components: Renamed ".navigation-bar" to ".toolbar".
  * css-components: Dropped all stylus and rebuild css-components with less.
  * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
  * ons-select: Fix width of the inner element.
