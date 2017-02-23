@@ -20,7 +20,7 @@ describe('ons._autoStyle', () => {
 
   describe('mapModifier', () => {
     it('returns the correct modifier only if autoStyle is active', () => {
-      let e = document.createElement('ons-button');
+      const e = document.createElement('ons-button');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
       ons.platform.select('android');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material--flat');
