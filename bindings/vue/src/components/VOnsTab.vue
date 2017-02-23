@@ -4,9 +4,7 @@
 </template>
 
 <script>
-  import { deriveMethods } from '../mixins/derive';
-  import { VueTabLoader } from '../mixins/pageLoader';
-  import { clickable } from '../mixins/common';
+  import { VueTabLoader, clickable, deriveMethods } from '../mixins';
 
   export default {
     mixins: [deriveMethods, VueTabLoader, clickable],

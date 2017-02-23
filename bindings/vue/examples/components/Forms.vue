@@ -136,6 +136,7 @@
 	export default {
     data() {
       return {
+        modifier: 'quiet',
         name: 'Andreas',
         modifiers: [
           { text: 'Basic', value: 'basic' },
@@ -169,6 +170,9 @@
             break;
           case 'range':
             this.volume = (this.volume + 20) % 100;
+            break;
+          case 'select':
+            this.selectedModifier = 'underbar';
             break;
         }
       },

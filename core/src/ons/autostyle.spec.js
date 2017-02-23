@@ -26,6 +26,7 @@ describe('ons._autoStyle', () => {
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material--flat');
       e.setAttribute('disable-auto-styling', '');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
+      ons.platform.select('');
     });
   });
 });

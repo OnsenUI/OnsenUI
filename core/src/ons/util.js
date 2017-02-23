@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import internal from './internal';
+import autoStyle from './autostyle';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -260,9 +261,15 @@ util.hasModifier = (target, modifierName) => {
 /**
  * @param {Element} target
  * @param {String} modifierName
+ * @param {Object} options.autoStyle Maps the modifierName to the corresponding styled modifier.
+ * @param {Object} options.forceAutoStyle Ignores platform limitation.
  * @return {Boolean} Whether it was added or not.
  */
-util.addModifier = (target, modifierName) => {
+util.addModifier = (target, modifierName, options = {}) => {
+  if (options.autoStyle) {
+    modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
+  }
+
   if (util.hasModifier(target, modifierName)) {
     return false;
   }
@@ -276,11 +283,17 @@ util.addModifier = (target, modifierName) => {
 /**
  * @param {Element} target
  * @param {String} modifierName
+ * @param {Object} options.autoStyle Maps the modifierName to the corresponding styled modifier.
+ * @param {Object} options.forceAutoStyle Ignores platform limitation.
  * @return {Boolean} Whether it was found or not.
  */
-util.removeModifier = (target, modifierName) => {
+util.removeModifier = (target, modifierName, options = {}) => {
   if (!target.getAttribute('modifier')) {
     return false;
+  }
+
+  if (options.autoStyle) {
+    modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
   }
 
   const modifiers = target.getAttribute('modifier').split(/\s+/);

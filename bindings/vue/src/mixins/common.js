@@ -1,3 +1,5 @@
+import { _util as util } from 'onsenui';
+
 /* Private */
 const _toggleVisibility = function() {
   if (this.visible !== this.$el.visible) {
@@ -70,5 +72,36 @@ const hasOptions = {
   }
 };
 
-export { hidable, clickable, destroyable, hasOptions};
+// Components with 'modifier' attribute
+const modifier = {
+  props: {
+    modifier: {
+      type: String,
+      default: ''
+    }
+  },
+
+  methods: {
+    _updateModifier() {
+      if (this.hasOwnProperty('_previousModifier')) {
+        this._previousModifier.split(/\s+/).forEach(modifier => util.removeModifier(this.$el, modifier, { autoStyle: true }));
+      }
+      this.modifier.trim().split(/\s+/).forEach(modifier => util.addModifier(this.$el, modifier, { autoStyle: true }));
+      this._previousModifier = this.modifier;
+    }
+  },
+
+  watch: {
+    modifier() {
+      this._updateModifier();
+    }
+  },
+
+  mounted() {
+    this.modifier && this._updateModifier();
+  }
+};
+
+
+export { hidable, clickable, destroyable, hasOptions, modifier };
 
