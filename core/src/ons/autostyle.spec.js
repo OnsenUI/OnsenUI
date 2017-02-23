@@ -17,4 +17,15 @@ describe('ons._autoStyle', () => {
     expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material--flat');
     ons.platform.select('');
   });
+
+  describe('mapModifier', () => {
+    it('returns the correct modifier only if autoStyle is active', () => {
+      let e = document.createElement('ons-button');
+      expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
+      ons.platform.select('android');
+      expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material--flat');
+      e.setAttribute('disable-auto-styling', '');
+      expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
+    });
+  });
 });

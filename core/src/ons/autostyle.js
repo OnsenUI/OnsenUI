@@ -102,9 +102,21 @@ const prepareAutoStyle = (element, force) => {
   }
 };
 
+const mapModifier = (modifier, element, force) => {
+  if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
+    const mobileOS = onsPlatform.getMobileOS();
+    if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
+      return modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
+    }
+  }
+
+  return modifier;
+};
+
 export default {
   isEnabled: () => autoStyleEnabled,
   enable: () => autoStyleEnabled = true,
   disable: () => autoStyleEnabled = false,
-  prepare: prepareAutoStyle
+  prepare: prepareAutoStyle,
+  mapModifier
 };
