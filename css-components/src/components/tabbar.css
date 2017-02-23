@@ -1,33 +1,37 @@
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
 
-// internal variables
-@tabbar-button-color: @tabbar-text-color; // Text color
-@tabbar-active-color: @tabbar-highlight-text-color; // Text color active
-@material-tabbar-current-color: @material-tabbar-highlight-text-color;
-@tabbar-active-border-top: none;
-@tabbar-focus-border-top: none;
-@tabbar-height: 49px;
-@tabbar-button-line-height: 49px;
-@tabbar-button-border: none;
-@tabbar-active-box-shadow: none;
-@tabbar-button-focus-box-shadow: none;
-@tabbar-border-top: 1px solid @tabbar-border-color;
+:root {
+  --tabbar-button-color: var(--tabbar-text-color); /* Text color */
+  --tabbar-active-color: var(--tabbar-highlight-text-color); /* Text color active */
+  --material-tabbar-current-color: var(--material-tabbar-highlight-text-color);
+  --tabbar-active-border-top: none;
+  --tabbar-focus-border-top: none;
+  --tabbar-height: 49px;
+  --tabbar-button-line-height: 49px;
+  --tabbar-button-border: none;
+  --tabbar-active-box-shadow: none;
+  --tabbar-button-focus-box-shadow: none;
+  --tabbar-border-top: 1px solid var(--tabbar-border-color);
+
+  --retina-tabbar-top-border: {
+    @media (--retina-query) {
+      border-top: none;
+      background-size: 100% 1px;
+      background-repeat: no-repeat;
+      background-position: top;
+      background-image: linear-gradient(180deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+    }
+  }
+
+  --retina-tabbar-bottom-border: {
+    @media (--retina-query) {
+      border-bottom: none;
+      background-size: 100% 1px;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-image: linear-gradient(0deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+    }
+  }
+}
 
 /*!
   name: Icon Tabbar
@@ -91,28 +95,9 @@
     </div>
 */
 
-.retina-tabbar-border(@color: @tabbar-border-color, @border-position) when (@border-position = top) {
-  .retina-query({
-    border-top: none;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: linear-gradient(180deg, @color, @color 50%, transparent 50%);
-  });
-}
-
-.retina-tabbar-border(@color: @tabbar-border-color, @border-position) when (@border-position = bottom) {
-  .retina-query({
-    border-bottom: none;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-image: linear-gradient(0deg, @color, @color 50%, transparent 50%);
-  });
-}
 
 .tabbar {
-  .reset-font();
+  @apply(--reset-font);
   display: table;
   table-layout: fixed;
   position: absolute;
@@ -122,48 +107,48 @@
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  height: @tabbar-height;
-  background-color: @tabbar-background-color;
-  border-top: @tabbar-border-top;
+  height: var(--tabbar-height);
+  background-color: var(--tabbar-background-color);
+  border-top: var(--tabbar-border-top);
   width: 100%;
-  .retina-tabbar-border(@tabbar-border-color, top);
+  @apply(--retina-tabbar-top-border);
 }
 
 .tabbar__item {
-  .reset-font();
-  .hide-input-parent();
+  @apply(--reset-font);
+  @apply(--hide-input-parent);
   display: table-cell;
   width: auto;
   border-radius: 0;
 }
 
 .tabbar__item > input {
-  .hide-input();
+  @apply(--hide-input);
 }
 
 .tabbar__button {
-  .inline-block();
-  .reset-font();
-  .reset-box-model();
-  .reset-base();
-  .reset-cursor();
-  .ellipsis();
+  @apply(--inline-block);
+  @apply(--reset-font);
+  @apply(--reset-box-model);
+  @apply(--reset-base);
+  @apply(--reset-cursor);
+  @apply(--ellipsis);
   text-decoration: none;
   padding: 0;
-  height: @tabbar-button-line-height;
-  letter-spacing: @letter-spacing;
-  color: @tabbar-button-color;
-  text-shadow: @text-shadow;
+  height: var(--tabbar-button-line-height);
+  letter-spacing: var(--letter-spacing);
+  color: var(--tabbar-button-color);
+  text-shadow: var(--text-shadow);
   vertical-align: top;
   background-color: transparent;
-  box-shadow: @box-shadow;
-  border-top: @tabbar-button-border;
+  box-shadow: var(--box-shadow);
+  border-top: var(--tabbar-button-border);
   width: 100%;
-  font-weight: @font-weight;
-  line-height: @tabbar-button-line-height;
-  .retina-query({
+  font-weight: var(--font-weight);
+  line-height: var(--tabbar-button-line-height);
+  @media (--retina-query) {
     border-top: none;
-  });
+  }
 }
 
 .tabbar__icon {
@@ -176,10 +161,10 @@
 }
 
 .tabbar__label {
-  .reset-font();
+  @apply(--reset-font);
 }
 
-.tabbar__badge.notification { // FIXME
+.tabbar__badge.notification { /* FIXME */
   position: absolute;
   top: 5px;
   z-index: 10;
@@ -193,35 +178,35 @@
   font-size: 10px;
   line-height: 1;
   margin: 0;
-  font-weight: @font-weight;
+  font-weight: var(--font-weight);
 }
 
 .tabbar__label:first-child {
   font-size: 16px;
-  line-height: @tabbar-button-line-height;
+  line-height: var(--tabbar-button-line-height);
   margin: 0;
   padding: 0;
 }
 
 .tabbar__button {
-  color: @tabbar-button-color;
+  color: var(--tabbar-button-color);
 }
 
 :checked + .tabbar__button {
-  color: @tabbar-active-color;
+  color: var(--tabbar-active-color);
   background-color: transparent;
-  box-shadow: @tabbar-active-box-shadow;
-  border-top: @tabbar-active-border-top;
+  box-shadow: var(--tabbar-active-box-shadow);
+  border-top: var(--tabbar-active-border-top);
 }
 
 .tabbar__button:disabled {
-  .disabled();
+  @apply(--disabled);
 }
 
 .tabbar__button:focus {
   z-index: 1;
-  border-top: @tabbar-focus-border-top;
-  box-shadow: @tabbar-button-focus-box-shadow;
+  border-top: var(--tabbar-focus-border-top);
+  box-shadow: var(--tabbar-button-focus-box-shadow);
   outline: 0;
 }
 
@@ -230,7 +215,7 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: @tabbar-height;
+  bottom: var(--tabbar-height);
   z-index: 0;
 }
 
@@ -301,12 +286,12 @@
   right: 0px;
   bottom: auto;
   border-top: none;
-  border-bottom: @tabbar-border-top;
-  .retina-tabbar-border(@tabbar-border-color, bottom);
+  border-bottom: var(--tabbar-border-top);
+  @apply(--retina-tabbar-bottom-border);
 }
 
 .tabbar--top__content {
-  top: @tabbar-height;
+  top: var(--tabbar-height);
   left: 0;
   right: 0;
   bottom: 0;
@@ -386,22 +371,22 @@
 
 :checked + .tabbar--top-border__button {
   background-color: transparent;
-  border-bottom: 4px solid @tabbar-active-color;
+  border-bottom: 4px solid var(--tabbar-active-color);
 }
 
 .tabbar--material {
-  background-color: @material-tabbar-background-color;
+  background-color: var(--material-tabbar-background-color);
   border-bottom-width: 0px;
   box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
 }
 
 .tabbar--material__button {
   background-color: transparent;
-  color: @material-tabbar-text-color;
+  color: var(--material-tabbar-text-color);
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
-  .material-font();
+  @apply(--material-font);
 }
 
 .tabbar--material__button:after {
@@ -412,7 +397,7 @@
   bottom: 0;
   position: absolute;
   margin-top: -2px;
-  background-color: @material-tabbar-current-color;
+  background-color: var(--material-tabbar-current-color);
 }
 
 :checked + .tabbar--material__button:after {
@@ -422,11 +407,11 @@
 
 :checked + .tabbar--material__button {
   background-color: transparent;
-  color: @material-tabbar-current-color;
+  color: var(--material-tabbar-current-color);
 }
 
 .tabbar--material__item:not([ripple]):active {
-  background-color: @material-tabbar-highlight-color;
+  background-color: var(--material-tabbar-highlight-color);
 }
 
 /*!
@@ -496,11 +481,11 @@
 */
 
 .tabbar--material__label {
-  .material-font();
+  @apply(--material-font);
 }
 
 .tabbar--material__label:first-child {
-  .material-font();
+  @apply(--material-font);
   letter-spacing: 0.015em;
   font-weight: 500;
   font-size: 14px;

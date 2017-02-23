@@ -1,27 +1,29 @@
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
+:root {
+  --button-bar-active-color: var(--button-bar-active-text-color);
+  --button-bar-border-top: 1px solid var(--button-bar-color);
+  --button-bar-border-bottom: 1px solid var(--button-bar-color);
+  --button-bar-border: 0px solid var(--button-bar-color);
+  --button-bar-active-background-color: color(var(--button-bar-color) tint(var(--alpha-lighten)));
 
-// internal variables
-@button-bar-active-color: @button-bar-active-text-color;
-@button-bar-border-top: 1px solid @button-bar-color;
-@button-bar-border-bottom: 1px solid @button-bar-color;
-@button-bar-border: 0px solid @button-bar-color;
-@button-bar-active-background-color: lighten(@button-bar-color, @alpha-lighten);
+  --button-bar: {
+    @apply(--reset-font);
+    display: inline-flex;
+    align-items: stretch;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  --button-bar__item: {
+    @apply(--reset-font);
+    border-radius: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
 
 /*!
   name: Button Bar
@@ -40,51 +42,32 @@
     </div>
 */
 
-.button-bar() {
-  .reset-font();
-  display: inline-flex;
-  align-items: stretch;
-  align-content: stretch;
-  flex-wrap: nowrap;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-.button-bar__item() {
-  .reset-font();
-  border-radius: 0;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 .button-bar {
-  .button-bar();
+  @apply(--button-bar);
 }
 
 .button-bar__item {
-  .button-bar__item();
-  .hide-input-parent();
+  @apply(--button-bar__item);
+  @apply(--hide-input-parent);
   overflow: hidden;
   box-sizing: border-box;
 }
 
-.button-bar__item > input { // FIXME
-  .hide-input();
+.button-bar__item > input { /* FIXME */
+  @apply(--hide-input);
 }
 
 .button-bar__button {
-  .reset-font();
+  @apply(--reset-font);
   border-radius: 0;
   background-color: transparent;
-  color: @button-bar-color;
-  border: 1px solid @button-bar-color;
+  color: var(--button-bar-color);
+  border: 1px solid var(--button-bar-color);
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
   border-left-width: 0px;
-  font-weight: @font-weight;
+  font-weight: var(--font-weight);
   padding: 0;
   font-size: 13px;
   height: 27px;
@@ -97,34 +80,34 @@
 
 .button-bar__item:first-child > .button-bar__button {
   border-left-width: 1px;
-  border-radius: @border-radius 0 0 @border-radius;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
 .button-bar__item:last-child > .button-bar__button {
   border-right-width: 1px;
-  border-radius: 0 @border-radius @border-radius 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .button-bar__button:active,
 :active + .button-bar__button {
-  background-color: @button-bar-active-background-color;
-  border: @button-bar-border;
-  border-top: @button-bar-border-top;
-  border-bottom: @button-bar-border-bottom;
-  border-right: 1px solid @button-bar-color;
+  background-color: var(--button-bar-active-background-color);
+  border: var(--button-bar-border);
+  border-top: var(--button-bar-border-top);
+  border-bottom: var(--button-bar-border-bottom);
+  border-right: 1px solid var(--button-bar-color);
   font-size: 13px;
   width: 100%;
   transition: none;
 }
 
 :checked + .button-bar__button {
-  background-color: @button-bar-color;
-  color: @button-bar-active-color;
+  background-color: var(--button-bar-color);
+  color: var(--button-bar-active-color);
   transition: none;
 }
 
 .button-bar__button:disabled {
-  .disabled();
+  @apply(--disabled);
 }
 
 .button-bar__button:hover {

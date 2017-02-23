@@ -7,7 +7,7 @@
   --input-placeholder-color: var(--sub-text-color);
   --input-invalid-border-color: var(--border-color);
   --input-invalid-text-color: var(--text-color);
-  --alpha-lighten: 30%;
+  --alpha-lighten: 70%;
 
   /* Font */
   --font-size: 17px;

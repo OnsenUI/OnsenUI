@@ -1,0 +1,159 @@
+
+:root {
+  --fab-width: 56px;
+  --fab-height: 56px;
+  --fab-mini-width: 40px;
+  --fab-mini-height: 40px;
+
+  --fab--disabled: {
+    background-color: alpha(black, 0.5);
+    @apply(--material-shadow-0);
+    @apply(--disabled);
+  }
+
+  --fab: {
+    @apply(--inline-block);
+    @apply(--reset-box-model);
+    @apply(--reset-base);
+    @apply(--reset-font);
+    @apply(--reset-cursor);
+    @apply(--material-font);
+    width: var(--fab-width);
+    height: var(--fab-height);
+    text-decoration: none;
+    font-size: 25px;
+    line-height: var(--fab-height);
+    letter-spacing: var(--letter-spacing);
+    color: var(--fab-text-color);
+    vertical-align: middle;
+    text-align: center;
+    background-color: var(--fab-background-color);
+    border: 0px solid currentColor;
+    border-radius: 50%;
+    overflow: hidden;
+    @apply(--material-shadow-2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  --fab--focus: {
+    outline: 0;
+  }
+
+  --fab--active: {
+    @apply(--material-shadow-4);
+    background-color: var(--fab-background-color);
+    transition: all 0.2s ease;
+  }
+}
+
+/*!
+  name: Fab
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
+*/
+
+.fab {
+  @apply(--fab);
+}
+
+.fab:active {
+  @apply(--fab--active);
+}
+
+.fab:focus {
+  @apply(--fab--focus);
+}
+
+.fab__icon {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: block;
+  border-radius: 100%;
+  padding: 0;
+  z-index: 100;
+  line-height: var(--fab-height);
+}
+
+.fab:disabled,
+.fab[disabled] {
+  @apply(--fab--disabled);
+}
+
+.fab--top__right {
+  top: 20px;
+  bottom: auto;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+
+.fab--bottom__right {
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+
+.fab--top__left {
+  top: 20px;
+  bottom: auto;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+
+.fab--bottom__left {
+  top: auto;
+  bottom: 20px;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+
+.fab--top__center {
+  top: 20px;
+  bottom: auto;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+
+.fab--bottom__center {
+  top: auto;
+  bottom: 20px;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+
+/*!
+  name: Fab Mini
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
+*/
+
+.fab--mini {
+  width: var(--fab-mini-width);
+  height: var(--fab-mini-height);
+  line-height: var(--fab-mini-height);
+}
+
+.fab--mini .fab__icon { /* FIXME */
+  line-height: var(--fab-mini-height);
+}
+
+.speed-dial__item {
+  position: absolute;
+  transform: scale(0);
+}
