@@ -5,14 +5,13 @@ import { createMethodsFor, createComputedPropertiesFor } from '../internal/optio
 const deriveEvents = {
   beforeCreate() {
     this._boundEvents = getClassFromTag(this.$options._componentTag.slice(2)).events || ['click'];
-    this.$options.methods = Object.assign(
-      {},
-      this._boundEvents.reduce((result, key) => {
+    this.$options.methods = {
+      ...this._boundEvents.reduce((result, key) => {
         result[eventToHandler(key)] = event => this.$emit(key, event);
         return result;
       }, {}),
-      this.$options.methods
-    );
+      ...this.$options.methods
+    };
   },
 
   mounted() {
@@ -31,11 +30,10 @@ const deriveEvents = {
 
 const deriveMethods = {
   beforeCreate() {
-    this.$options.methods = Object.assign(
-      {},
-      createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))),
-      this.$options.methods
-    );
+    this.$options.methods = {
+      ...createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))),
+      ...this.$options.methods
+    };
   }
 };
 
@@ -53,11 +51,10 @@ const deriveProperties = {
       return result;
     }, {});
 
-    this.$options.computed = Object.assign(
-      {},
-      derivedProperties,
-      this.$options.computed
-    );
+    this.$options.computed = {
+      ...derivedProperties,
+      ...this.$options.computed
+    };
   },
 
   mounted() {

@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015", "es2017", "stage-2"],
+  "presets": ["latest", "stage-3"],
   "plugins": ["transform-runtime"],
   "comments": false
 }

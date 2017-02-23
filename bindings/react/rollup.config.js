@@ -11,7 +11,7 @@ export default {
   dest: 'dist/react-onsenui.js',
   plugins: [
     babel({
-      presets: ['es2015-rollup', 'react', 'stage-2'],
+      presets: ['es2015-rollup', 'es2016', 'es2017', 'react', 'stage-3'],
       babelrc: false
     }),
     nodeResolve(),
@@ -20,12 +20,6 @@ export default {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    babel({
-      externalHelpers: true,
-      presets: ['es2015-rollup'],
-      plugins: ['transform-react-jsx', 'transform-object-rest-spread'],
-      babelrc: false
     })
   ],
   external: [
