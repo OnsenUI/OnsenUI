@@ -158,7 +158,7 @@ onlyChrome(describe)('OnsTabElement', () => {
           expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
 
           document.body.removeChild(tabbar);
-          
+
           done();
         });
       });
