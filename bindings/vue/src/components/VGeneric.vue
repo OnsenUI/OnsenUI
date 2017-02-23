@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import { deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { modifier, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties]
+    mixins: [modifier, deriveEvents, deriveMethods, deriveProperties]
   };
 </script>
