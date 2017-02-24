@@ -230,7 +230,7 @@ class DeviceBackButtonDispatcher {
     return createTree(document.body);
 
     function createTree(element) {
-      return {
+      const tree = {
         element: element,
         children: Array.prototype.concat.apply([], arrayOf(element.children).map(function(childElement) {
 
@@ -251,6 +251,16 @@ class DeviceBackButtonDispatcher {
           return [result];
         }))
       };
+
+      if (!HandlerRepository.has(tree.element)) {
+        for (const subTree of tree.children) {
+          if (HandlerRepository.has(subTree.element)) {
+            return subTree;
+          }
+        }
+      }
+
+      return tree;
     }
 
     function arrayOf(target) {

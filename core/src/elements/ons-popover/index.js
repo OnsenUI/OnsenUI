@@ -544,7 +544,7 @@ export default class PopoverElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
+    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this._popover, callback);
   }
 
   _resetBackButtonHandler() { // do we need this twice?
