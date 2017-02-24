@@ -23,28 +23,16 @@
     template: `
       <v-ons-page>
         Home page
-        <ons-button @click="setTab(1)">tabbar.setActiveTab(1)</ons-button>
       </v-ons-page>
-    `,
-    methods: {
-      setTab: function(i) {
-        this.tabbar.setActiveTab(i);
-      }
-    }
+    `
   };
 
   let settings = {
     template: `
       <v-ons-page>
         Settings Page
-        <ons-button @click="setTab(0)">$parent.setActiveTab(0)</ons-button>
       </v-ons-page>
-    `,
-    methods: {
-      setTab: function(i) {
-        this.$parent.setActiveTab(i);
-      }
-    }
+    `
   };
 
 	export default {

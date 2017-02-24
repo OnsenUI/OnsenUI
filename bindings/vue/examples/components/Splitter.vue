@@ -19,9 +19,8 @@
         :is-open="splitterOpen"
         :side-state="state"
         :toggle-menu="toggleMenu"
-        :goToPageContent2="goToPageContent2"
-        >
-        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
+      >
+        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu"></div>
       </v-ons-splitter-content>
     </v-ons-splitter>
   </v-ons-page>
@@ -103,18 +102,13 @@
            State: {{sideState}} ; Is Open: {{isOpen}}
           </div>
         </v-ons-list-item>
-        <v-ons-list-item modifier="chevron" tappable @click="goToPageContent2">
-          <div class="center">
-            Go to pageContent2 by changing splitter children
-          </div>
-        </v-ons-list-item>
       </v-ons-list>
     </v-ons-page>
     `,
     methods: {
       log
     },
-    props: ['isOpen', 'toggleMenu', 'sideState', 'goToPageContent2']
+    props: ['isOpen', 'toggleMenu', 'sideState']
   };
 
   let pageContent2 = {
@@ -161,9 +155,6 @@
     methods: {
       toggleMenu: function() {
         this.splitterOpen = !this.splitterOpen;
-      },
-      goToPageContent2: function() {
-        this.currentContent = 'pageContent2';
       },
       log
     }

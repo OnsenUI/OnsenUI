@@ -28,6 +28,7 @@ const deriveEvents = {
   }
 };
 
+// Deprecated
 const deriveMethods = {
   beforeCreate() {
     this.$options.methods = {
@@ -67,4 +68,4 @@ const deriveProperties = {
   }
 };
 
-export { deriveEvents, deriveMethods, deriveProperties };
+export { deriveEvents, deriveProperties };

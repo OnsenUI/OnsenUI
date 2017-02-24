@@ -4,10 +4,10 @@
 </template>
 
 <script>
-  import { VueTabLoader, clickable, deriveMethods } from '../mixins';
+  import { VueTabLoader, clickable } from '../mixins';
 
   export default {
-    mixins: [deriveMethods, VueTabLoader, clickable],
+    mixins: [VueTabLoader, clickable],
 
     props: {
       active: {

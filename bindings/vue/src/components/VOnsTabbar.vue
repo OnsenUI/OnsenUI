@@ -10,10 +10,10 @@
 </template>
 
 <script>
-  import { hasOptions, hidable, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { hasOptions, hidable, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties, hasOptions, hidable]
+    mixins: [deriveEvents, deriveProperties, hasOptions, hidable]
   };
 </script>
 

@@ -15,10 +15,10 @@
 </template>
 
 <script>
-  import { dialogAPI, modifier, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { dialogAPI, modifier, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [dialogAPI, modifier, deriveEvents, deriveMethods, deriveProperties],
+    mixins: [dialogAPI, modifier, deriveEvents, deriveProperties],
 
     props: {
       title: {

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, VuePageLoader, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { destroyable, hasOptions, VuePageLoader, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties, VuePageLoader, destroyable, hasOptions],
+    mixins: [deriveEvents, deriveProperties, VuePageLoader, destroyable, hasOptions],
 
     methods: {
       isReady() {
