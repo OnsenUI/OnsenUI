@@ -1,17 +1,17 @@
 <template>
   <v-ons-page>
-    <v-ons-splitter>
+    <v-ons-splitter @mask="log('mask')">
       <v-ons-splitter-side
-        v-ons-open="splitterOpen"
+        :open="splitterOpen"
+        :swipeable="shouldOpen => splitterOpen = shouldOpen"
         :side="state.side"
         :collapse="state.collapse"
-        :swipeable="state.swipeable"
         :width="state.width"
-        @preopen="log('preopen!!')"
-        @postopen="log('postopen!!')"
-        @preclose="log('preclose!!')"
-        @postclose="log('postclose!!')"
-        @modechange="log('modechange!!')"
+        @preopen="log('preopen')"
+        @postopen="log('postopen')"
+        @preclose="log('preclose')"
+        @postclose="log('postclose')"
+        @modechange="log('modechange')"
       >
         <page-side :toggle-menu="toggleMenu"></page-side>
       </v-ons-splitter-side>

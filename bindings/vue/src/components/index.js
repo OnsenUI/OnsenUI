@@ -4,6 +4,8 @@ export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
+export { default as VOnsSplitter} from './VOnsSplitter.vue';
+export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
@@ -31,7 +33,6 @@ export const VOnsRow = extend('row');
 export const VOnsCol = extend('col');
 export const VOnsProgressBar = extend('progress-bar');
 export const VOnsProgressCircular = extend('progress-circular');
-export const VOnsSplitterMask = extend('splitter-mask');
 export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
 export const VOnsCarousel= extend('carousel', [hasOptions]);
@@ -39,8 +40,7 @@ export const VOnsPage = extend('page', [destroyable]);
 export const VOnsFab = extend('fab', [fabAPI]);
 export const VOnsDialog = extend('dialog', [dialogAPI]);
 export const VOnsModal = extend('modal', [dialogAPI]);
-export const VOnsSplitter = extend('splitter', [destroyable]);
+export const VOnsSplitterMask = extend('splitter-mask', [clickable]);
 export const VOnsSplitterContent = extend('splitter-content', [VuePageLoader, destroyable]);
-export const VOnsSplitterSide = extend('splitter-side', [VuePageLoader, destroyable, hasOptions]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 
