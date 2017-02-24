@@ -1,0 +1,88 @@
+:root {
+  --search-icon: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nNDFweCcgaGVpZ2h0PSc0MHB4JyB2aWV3Qm94PScwIDAgNDEgNDAnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM6c2tldGNoPSdodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMnPjx0aXRsZT5TbGljZSAxPC90aXRsZT48ZGVzY3JpcHRpb24+Q3JlYXRlZCB3aXRoIFNrZXRjaCAoaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoKTwvZGVzY3JpcHRpb24+PGRlZnM+PC9kZWZzPjxnIGlkPSdQYWdlIDEnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnPjxnIGlkPSdzZWFyY2gnIGZpbGw9JyNDNkM4QzgnPjxwYXRoIGQ9J00wLjUwNCwxNi4zMzggQzAuNTA0LDI1LjA4NSA3LjYzNSwzMi4xNjUgMTYuNDQ0LDMyLjE2NSBDMjUuMjQsMzIuMTY1IDMyLjM4MiwyNS4wODUgMzIuMzgyLDE2LjMzOCBDMzIuMzgyLDcuNTkxIDI1LjI0LDAuNSAxNi40NDQsMC41IEM3LjYzNSwwLjUgMC41MDQsNy41OTEgMC41MDQsMTYuMzM4IEwwLjUwNCwxNi4zMzggWiBNNS41NTUsMTYuMzM4IEM1LjU1NSwxMC4zNTkgMTAuNDIzLDUuNTIxIDE2LjQ0NSw1LjUyMSBDMjIuNDU1LDUuNTIxIDI3LjMzMywxMC4zNiAyNy4zMzMsMTYuMzM4IEMyNy4zMzMsMjIuMzE3IDIyLjQ1NSwyNy4xNTYgMTYuNDQ1LDI3LjE1NiBDMTAuNDIzLDI3LjE1NiA1LjU1NSwyMi4zMTYgNS41NTUsMTYuMzM4IEw1LjU1NSwxNi4zMzggWiBNMjcuNjY2LDMwLjg2MSBMMzQuNTIxLDM4LjY3IEMzNS42MjUsMzkuNzcyIDM2LjMzOCwzOS43ODEgMzcuNDYsMzguNjcgTDM5LjY2MSwzNi40ODkgQzQwLjc0MywzNS40MDggNDAuODExLDM0LjcxMSAzOS42NjEsMzMuNTY4IEwzMS43NjUsMjYuNzkzIEwyNy42NjYsMzAuODYxIEwyNy42NjYsMzAuODYxIFogTTI3LjY2NiwzMC44NjEnIGlkPSdTaGFwZSc+PC9wYXRoPjwvZz48L2c+PC9zdmc+");
+  --search-input-background-image: var(--search-icon);
+  --search-input-background-color: var(--input-bg-color);
+  --search-input-color: var(--input-text-color);
+  --search-input-border: 1px solid var(--input-border-color);
+  --search-decoration-margin-right: 0px;
+  --search-input-border-radius: 4px;
+  --search-input-height: 31px;
+  --search-input-font-size: 15px;
+
+  --search-input: {
+    @apply(--reset-input);
+    @apply(--reset-font);
+    -webkit-appearance: textfield;
+  }
+
+  --search-input--disabled: {
+    @apply(--disabled);
+  }
+}
+
+/*!
+  name: Search Input
+  category: Search Input
+  markup: |
+    <input type="search" value="" placeholder="Search" class="search-input" style="width: 200px;">
+*/
+
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: textfield;
+  display: none;
+}
+
+.search-input {
+  @apply(--search-input);
+  box-sizing: border-box;
+  height: var(--search-input-height);
+  font-size: var(--search-input-font-size);
+  border: var(--search-input-border);
+  background-color: var(--search-input-background-color);
+  box-shadow: var(--box-shadow--text-input);
+  color: var(--search-input-color);
+  line-height: 1.3; 
+  padding: 0 0 0 28px;
+  margin: 0;
+  border-radius: var(--search-input-border-radius);
+  background-image: var(--search-input-background-image);
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  font-weight: var(--font-weight);
+  display: inline-block;
+  text-indent: 0;
+}
+
+.search-input:focus {
+  background-color: var(--search-input-background-color);
+  color: var(--search-input-color);
+  border: var(--search-input-border);
+  box-shadow: var(--box-shadow--text-input);
+}
+
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-input::-webkit-search-decoration {
+  display: none;
+}
+
+.search-input::placeholder
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder,
+.search-input:-ms-input-placeholder {
+  color: var(--input-placeholder-color);
+  font-size: var(--search-input-font-size);
+  text-indent: 0;
+}
+
+.search-input:placeholder-shown {
+}
+
+.search-input:disabled {
+  @apply(--search-input--disabled);
+}
+

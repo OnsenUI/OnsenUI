@@ -1,8 +1,9 @@
 
-// internal variables
-@progress-bar-color: @material-progress-bar-primary-color;
-@progress-bar-secondary-color: @material-progress-bar-secondary-color;
-@progress-bar-background-color: @material-progress-bar-background-color;
+:root {
+  --progress-bar-color: var(--material-progress-bar-primary-color);
+  --progress-bar-secondary-color: var(--material-progress-bar-secondary-color);
+  --progress-bar-background-color: var(--material-progress-bar-background-color);
+}
 
 /*!
   name: Progress Bar
@@ -25,48 +26,48 @@
   height: 4px;
   display: block;
   width: 100%;
-  background-color: @progress-bar-background-color;
+  background-color: var(--progress-bar-background-color);
   background-clip: padding-box;
   margin: 0;
   overflow: hidden;
 }
 
-// FIXME
+/* FIXME */
 .progress-bar--determinate > .progress-bar__primary, 
 .progress-bar--determinate > .progress-bar__secondary {
   position: absolute;
-  background-color: @progress-bar-color;
+  background-color: var(--progress-bar-color);
   top: 0;
   bottom: 0;
   transition: width .3s linear;
   z-index: 100;
 }
     
-// FIXME
+/* FIXME */
 .progress-bar--determinate > .progress-bar__secondary {
-  background-color: @progress-bar-secondary-color;
+  background-color: var(--progress-bar-secondary-color);
   z-index: 0;
 }
 
 .progress-bar--indeterminate:before {
   content: '';
   position: absolute;
-  background-color: @progress-bar-color;
+  background-color: var(--progress-bar-color);
   top: 0;
   left: 0;
   bottom: 0;
-  will-change: left, right; // ?
+  will-change: left, right;
   animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 
 .progress-bar--indeterminate:after {
   content: '';
   position: absolute;
-  background-color: @progress-bar-color;
+  background-color: var(--progress-bar-color);
   top: 0;
   left: 0;
   bottom: 0;
-  will-change: left, right; // ?
+  will-change: left, right;
   animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   animation-delay: 1.15s;
 }
@@ -100,3 +101,4 @@
     right: -8%;
   }
 }
+

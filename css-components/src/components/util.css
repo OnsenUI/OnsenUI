@@ -1,0 +1,168 @@
+
+:root {
+  --reset-font: {
+    font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+  }
+
+  --reset-box-model: {
+    box-sizing: border-box;
+    background-clip: padding-box;
+  }
+
+  --reset-base: {
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    line-height: normal;
+  }
+
+  --reset-list: {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: left;
+  }
+
+  --reset-quiet: {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  --reset-input: {
+    @apply(--reset-base);
+    @apply(--reset-box-model);
+    vertical-align: top;
+    outline: none;
+    line-height: 1;
+  }
+
+  --hide-input: {
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0.001;
+    z-index: 1;
+    vertical-align: top;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  --hide-input-parent: {
+    position: relative;
+    overflow: hidden;
+  }
+
+  --reset-cursor: {
+    cursor: default;
+    user-select: none;
+  }
+
+  --reset-overflow: {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  --reset-container: {
+    @apply(--reset-box-model);
+    @apply(--reset-overflow);
+    word-spacing: 0;
+  }
+
+  --inline-block: {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  --ellipsis: {
+    text-overflow: ellipsis;
+    @apply(--reset-overflow);
+  }
+
+  --disabled: {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  --input: {
+    @apply(--reset-input);
+    @apply(--reset-font);
+  }
+
+  --transparent: {
+    border: none;
+    background-color: transparent;
+  }
+
+  --reset-ui: {
+    @apply(--reset-box-model);
+    @apply(--inline-block);
+    @apply(--reset-base);
+    @apply(--reset-cursor);
+    @apply(--ellipsis);
+  }
+
+  @custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi);
+
+  --material-font: {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  --material-shadow-0: {
+    box-shadow: none;
+  }
+
+  --material-shadow-1: {
+    box-shadow:
+      0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  }
+
+  --material-shadow-2: {
+    box-shadow:
+      0 4px 5px 0 rgba(0, 0, 0, 0.14),
+      0 1px 10px 0 rgba(0, 0, 0, 0.12),
+      0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  --material-shadow-3: {
+    box-shadow:
+      0 6px 10px 0 rgba(0, 0, 0, 0.14),
+      0 1px 18px 0 rgba(0, 0, 0, 0.12),
+      0 3px 5px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  --material-shadow-4: {
+    box-shadow:
+      0 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0 3px 14px 2px rgba(0, 0, 0, 0.12),
+      0 5px 5px -3px rgba(0, 0, 0, 0.4);
+  }
+
+  --material-shadow-5: {
+    box-shadow:
+      0 16px 24px 2px rgba(0, 0, 0, 0.14),
+      0 6px 30px 5px rgba(0, 0, 0, 0.12),
+      0 8px 10px -5px rgba(0, 0, 0, 0.4);
+  }
+}

@@ -1,33 +1,59 @@
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
 
-// internal variables
-@toolbar-separator-color: @toolbar-border-color;
-@toolbar-color: @toolbar-text-color;
+:root {
+  --toolbar-separator-color: var(--toolbar-border-color);
+  --toolbar-color: var(--toolbar-text-color);
 
-@toolbar-height: 44px;
-@toolbar-box-shadow: none;
-@toolbar-padding: 0;
-@toolbar-separator: 1px solid @toolbar-separator-color;
+  --toolbar-height: 44px;
+  --toolbar-box-shadow: none;
+  --toolbar-padding: 0;
+  --toolbar-separator: 1px solid var(--toolbar-separator-color);
+  --toolbar-material-height: 56px;
+  --material-toolbar-color: var(--material-toolbar-text-color);
 
-@toolbar-material-height: 56px;
+  --retina-toolbar-top-border: {
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(180deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 100%);
 
-@material-toolbar-color: @material-toolbar-text-color;
+    @media (--retina-query) {
+      background-image: linear-gradient(180deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 50%, transparent 50%);
+    }
+  }
+
+  --retina-toolbar-bottom-border: {
+    border-bottom: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 100%);
+
+    @media (--retina-query) {
+      background-image: linear-gradient(0deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 50%, transparent 50%);
+    }
+  }
+
+  --toolbar: {
+    @apply(--reset-font);
+    @apply(--reset-container);
+    @apply(--reset-base);
+    @apply(--reset-cursor);
+    z-index: 2;
+  }
+
+  --toolbar__item: {
+    @apply(--reset-box-model);
+    @apply(--reset-base);
+  }
+
+  --toolbar--material-font: {
+    @apply(--material-font);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--material-toolbar-color);
+  }
+}
 
 /*!
   name: Toolbar
@@ -39,65 +65,30 @@
     </div>
 */
 
-.retina-toolbar-border(@position; @color) when (@position = top) {
-  border-top: none; // if position == 'top'
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: @position;
-  background-image: linear-gradient(180deg, @color, @color 100%); // if position == 'top'
-
-  .retina-query({
-    background-image: linear-gradient(180deg, @color, @color 50%, transparent 50%); // if position == 'top'
-  });
-}
-
-.retina-toolbar-border(@position; @color) when (@position = bottom) {
-  border-bottom: none; // if position == 'bottom'
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: @position;
-  background-image: linear-gradient(0deg, @color, @color 100%); // if position == 'bottom'
-
-  .retina-query({
-    background-image: linear-gradient(0deg, @color, @color 50%, transparent 50%); // if position == 'bottom'
-  });
-}
-
-.toolbar() {
-  .reset-font();
-  .reset-container();
-  .reset-base();
-  .reset-cursor();
-  z-index: 2;
-}
-
-.toolbar__item() {
-  .reset-box-model();
-  .reset-base();
-}
-
 .toolbar {
-  .toolbar();
-  display: block;
-  height: @toolbar-height;
-  padding-left: @toolbar-padding;
-  padding-right: @toolbar-padding;
-  background: @toolbar-background-color;
-  color: @toolbar-color;
-  box-shadow: @toolbar-box-shadow;
-  font-weight: @font-weight;
+  @apply(--toolbar);
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  height: var(--toolbar-height);
+  padding-left: var(--toolbar-padding);
+  padding-right: var(--toolbar-padding);
+  background: var(--toolbar-background-color);
+  color: var(--toolbar-color);
+  box-shadow: var(--toolbar-box-shadow);
+  font-weight: var(--font-weight);
   width: 100%;
   white-space: nowrap;
-  .retina-toolbar-border(bottom, @toolbar-separator-color);
+  @apply(--retina-toolbar-bottom-border);
 }
 
 .toolbar__bg {
-  background: @toolbar-background-color;
+  background: var(--toolbar-background-color);
 }
 
 .toolbar__item {
-  .toolbar__item();
-  height: @toolbar-height;
+  @apply(--toolbar__item);
+  height: var(--toolbar-height);
   vertical-align: top;
   overflow: visible;
   display: block;
@@ -106,36 +97,36 @@
 }
 
 .toolbar__left {
-  &:extend(.toolbar__item);
+  @apply(--toolbar__item);
   max-width: 50%;
   width: 27%;
   text-align: left;
-  line-height: @toolbar-height;
+  line-height: var(--toolbar-height);
 }
 
 .toolbar__right {
-  &:extend(.toolbar__item);
+  @apply(--toolbar__item);
   max-width: 50%;
   width: 27%;
   text-align: right;
-  line-height: @toolbar-height;
+  line-height: var(--toolbar-height);
 }
 
 .toolbar__center {
-  &:extend(.toolbar__item);
+  @apply(--toolbar__item);
   width: 46%;
   text-align: center;
-  line-height: @toolbar-height;
-  font-size: @font-size--large;
-  font-weight: @font-weight--large;
-  color: @toolbar-color;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size--large);
+  font-weight: var(--font-weight--large);
+  color: var(--toolbar-color);
 }
 
 .toolbar__title {
-  line-height: @toolbar-height;
-  font-size: @font-size--large;
-  font-weight: @font-weight--large;
-  color: @toolbar-color;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size--large);
+  font-weight: var(--font-weight--large);
+  color: var(--toolbar-color);
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -152,7 +143,7 @@
   markup: |
     <div class="toolbar">
       <div class="toolbar__left">
-        <span class="toolbar-button--quiet">
+        <span class="toolbar-button">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -162,7 +153,7 @@
       </div>
 
       <div class="toolbar__right">
-        <span class="toolbar-button--quiet">Label</span>
+        <span class="toolbar-button">Label</span>
       </div>
     </div>
 */
@@ -175,7 +166,7 @@
     <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="toolbar">
       <div class="toolbar__left">
-        <span class="toolbar-button--outline">
+        <span class="toolbar-button toolbar-button--outline">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -185,7 +176,7 @@
       </div>
 
       <div class="toolbar__right">
-        <span class="toolbar-button--outline">Button</span>
+        <span class="toolbar-button toolbar-button--outline">Button</span>
       </div>
     </div>
 */
@@ -200,26 +191,26 @@
     </div>
 */
 .bottom-bar {
-  .toolbar();
+  @apply(--toolbar);
   display: block;
-  height: @toolbar-height;
-  padding-left: @toolbar-padding;
-  padding-right: @toolbar-padding;
-  background: @toolbar-background-color;
-  color: @toolbar-color;
-  box-shadow: @toolbar-box-shadow;
-  font-weight: @font-weight;
+  height: var(--toolbar-height);
+  padding-left: var(--toolbar-padding);
+  padding-right: var(--toolbar-padding);
+  background: var(--toolbar-background-color);
+  color: var(--toolbar-color);
+  box-shadow: var(--toolbar-box-shadow);
+  font-weight: var(--font-weight);
   border-bottom: none;
-  border-top: @toolbar-separator;
+  border-top: var(--toolbar-separator);
   position: absolute;
   bottom: 0px;
   right: 0px;
   left: 0px;
-  .retina-toolbar-border(top, @toolbar-separator-color);
+  @apply(--retina-toolbar-top-border);
 }
 
 .bottom-bar__line-height {
-  line-height: @toolbar-height;
+  line-height: var(--toolbar-height);
   padding-bottom: 0;
   padding-top: 0;
 }
@@ -268,11 +259,11 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  height: @toolbar-material-height;
+  height: var(--toolbar-material-height);
   border-bottom: 0;
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   padding: 0;
-  background-color: @material-toolbar-background-color;
+  background-color: var(--material-toolbar-background-color);
   background-size: 0;
 }
 
@@ -283,7 +274,7 @@
   markup: |
     <div class="toolbar toolbar--noshadow">
       <div class="toolbar__left">
-        <span class="toolbar-button--quiet">
+        <span class="toolbar-button">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -291,7 +282,7 @@
         Navigation Bar
       </div>
       <div class="toolbar__right">
-        <span class="toolbar-button--quiet">Label</span>
+        <span class="toolbar-button">Label</span>
       </div>
     </div>
 */
@@ -302,32 +293,25 @@
   border-bottom: none;
 }
 
-.toolbar--material-font() {
-  .material-font();
-  font-size: 20px;
-  font-weight: 500;
-  color: @material-toolbar-color;
-}
-
 .toolbar--material__left, .toolbar--material__right {
-  .toolbar--material-font();
-  height: @toolbar-material-height;
+  @apply(--toolbar--material-font);
+  height: var(--toolbar-material-height);
   min-width: 72px;
   width: auto;
   float: initial;
-  line-height: @toolbar-material-height;
+  line-height: var(--toolbar-material-height);
 }
 
 .toolbar--material__center {
-  .toolbar--material-font();
-  height: @toolbar-material-height;
+  @apply(--toolbar--material-font);
+  height: var(--toolbar-material-height);
   width: auto;
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
   float: initial;
-  line-height: @toolbar-material-height;
+  line-height: var(--toolbar-material-height);
 }
 
 .toolbar--material__center:first-child {
@@ -378,7 +362,7 @@
   markup: |
     <div class="toolbar toolbar--transparent">
       <div class="toolbar__left">
-        <span class="toolbar-button--quiet">
+        <span class="toolbar-button">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -386,7 +370,7 @@
         Navigation Bar
       </div>
       <div class="toolbar__right">
-        <span class="toolbar-button--quiet">Label</span>
+        <span class="toolbar-button">Label</span>
       </div>
     </div>
 */

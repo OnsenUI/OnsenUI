@@ -14,17 +14,17 @@
 */
 
 .progress-circular {
- animation: progress__rotate 2s linear infinite;
- height: 80px;
- position: relative;
- width: 80px;
+  animation: progress__rotate 2s linear infinite;
+  height: 80px;
+  position: relative;
+  width: 80px;
 }
 
 .progress-circular__primary {
-  stroke-dasharray: 1,200;
+  stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
   animation: progress__dash 1.5s ease-in-out infinite;
-  stroke: @material-progress-circle-primary-color;
+  stroke: var(--material-progress-circle-primary-color);
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -33,15 +33,15 @@
   animation: none;
 }
 
-// FIXME
+/* FIXME */
 .progress-circular--determinate > .progress-circular__primary {
   animation: none;
 }
 
-// FIXME
+/* FIXME */
 .progress-circular--determinate > .progress-circular__secondary {
   animation: none;
-  stroke: @material-progress-circle-secondary-color;
+  stroke: var(--material-progress-circle-secondary-color);
 }
 
 @keyframes progress__rotate {

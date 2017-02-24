@@ -1,11 +1,12 @@
 
-// internal variables
-@page-background-color: @background-color;
-@page-material-background-color: @material-background-color;
+:root {
+  --page-background-color: var(--background-color);
+  --page-material-background-color: var(--material-background-color);
+}
 
 .page {
-  .reset-font();
-  background-color: @page-background-color;
+  @apply(--reset-font);
+  background-color: var(--page-background-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -13,8 +14,8 @@
   bottom: 0;
   overflow-x: visible;
   overflow-y: hidden;
-  font-size: @font-size;
-  color: @text-color;
+  font-size: var(--font-size);
+  color: var(--text-color);
   -ms-overflow-style: none;
 }
 
@@ -23,7 +24,7 @@
 }
 
 .page__content {
-  background-color: @page-background-color;
+  background-color: var(--page-background-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -33,7 +34,7 @@
 }
 
 .page__background {
-  background-color: @page-background-color;
+  background-color: var(--page-background-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -43,11 +44,11 @@
 }
 
 .page--material {
-  .material-font();
+  @apply(--material-font);
 }
 
 .page--material__content {
-  .material-font();
+  @apply(--material-font);
   font-weight: 400;
 }
 
@@ -57,10 +58,10 @@
 .page--material__content h3,
 .page--material__content h4,
 .page--material__content h5 {
-  .material-font();
+  @apply(--material-font);
   font-weight: 400;
 }
 
 .page--material__background {
-  background-color: @page-material-background-color;
+  background-color: var(--page-material-background-color);
 }

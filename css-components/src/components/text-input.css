@@ -1,30 +1,54 @@
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
 
+:root {
+  --text-input-font-size: 15px;
+  --text-input-height: 31px;
+  --text-input-border-color: var(--input-border-color);
+  --material-text-input-font-size: 16px;
+  --material-text-input-color: var(--material-text-input-text-color);
 
-// internal variables
-@text-input-font-size: 15px;
-@text-input-height: 31px;
-@text-input-border-color: @input-border-color;
-@text-highlight-color: @highlight-color; // material
+  --text-input: {
+    @apply(--input);
+    @apply(--transparent);
+    letter-spacing: var(--letter-spacing);
+    box-shadow: var(--box-shadow--text-input);
+    color: var(--input-text-color);
+    padding: 0;
+    margin: 0;
+    width: auto;
+    font-size: var(--text-input-font-size);
+    height: var(--text-input-height);
+    font-weight: var(--font-weight);
+    box-sizing: border-box;
+  }
 
-@material-text-input-font-size: 16px;
-@material-text-input-color: @material-text-input-text-color;
+  --text-input--disabled: {
+    @apply(--disabled);
+  }
+
+  --text-input--focus: {
+  }
+
+  --webkit-input-placeholder: {
+    @apply(--transparent);
+    color: var(--input-placeholder-color);
+  }
+
+  --text-input--invalid: {
+    @apply(--transparent);
+    color: var(--input-invalid-text-color);
+  }
+
+  --text-input-underbar-disabled: {
+    @apply(--webkit-input-placeholder);
+    border: none;
+    background-color: transparent;
+  }
+
+  --text-input--material-placeholder: {
+    color: var(--material-text-input-inactive-color);
+    line-height: 20px;
+  }
+}
 
 /*!
   name: Text Input
@@ -35,68 +59,26 @@
     <div><input type="text" class="text-input" placeholder="text" value="" disabled></div>
 */
 
-.input() {
-  .reset-input();
-  .reset-font();
-}
-
-.transparent() {
-  border: none;
-  background-color: transparent;
-}
-
-.text-input() {
-  .input();
-  .transparent();
-  letter-spacing: @letter-spacing;
-  box-shadow: @box-shadow--text-input;
-  color: @input-text-color;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  font-size: @text-input-font-size;
-  height: @text-input-height;
-  font-weight: @font-weight;
-  box-sizing: border-box;
-}
-
-.text-input--disabled() {
-  .disabled();
-}
-
-.text-input--focus() {
-}
-
-.webkit-input-placeholder() {
-  .transparent();
-  color: @input-placeholder-color;
-}
-
-.text-input--invalid() {
-  .transparent();
-  color: @input-invalid-text-color;
-}
-
 .text-input {
-  .text-input();
+  @apply(--text-input);
 }
 
 .text-input:disabled {
-  .text-input--disabled();
+  @apply(--text-input--disabled);
 }
 
 .text-input::-webkit-input-placeholder,
 .text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder,
 .text-input:-ms-input-placeholder {
-  color: @input-placeholder-color;
+  color: var(--input-placeholder-color);
 }
 
 .text-input:disabled::-webkit-input-placeholder,
 .text-input:disabled::-moz-placeholder,
 .text-input:disabled::-ms-input-placeholder,
 .text-input:disabled:-ms-input-placeholder {
-  .webkit-input-placeholder();
+  @apply(--webkit-input-placeholder);
 }
 
 .text-input::-ms-clear {
@@ -104,7 +86,7 @@
 }
 
 .text-input:invalid {
-  .text-input--invalid();
+  @apply(--text-input--invalid);
 }
 
 /*!
@@ -117,38 +99,32 @@
 */
 
 .text-input--underbar {
-  .text-input();
+  @apply(--text-input);
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid @text-input-border-color;
+  border-bottom: 1px solid var(--text-input-border-color);
   border-radius: 0px;
 }
 
 .text-input--underbar:disabled {
-  .text-input--disabled();
+  @apply(--text-input--disabled);
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid @text-input-border-color;
-}
-
-.text-input-underbar-disabled() {
-  .webkit-input-placeholder();
-  border: none;
-  background-color: transparent;
+  border-bottom: 1px solid var(--text-input-border-color);
 }
 
 .text-input--underbar:disabled::-webkit-input-placeholder,
 .text-input--underbar:disabled::-moz-placeholder,
 .text-input--underbar:disabled::-ms-input-placeholder,
 .text-input--underbar:disabled:-ms-input-placeholder {
-  .text-input-underbar-disabled();
+  @apply(--text-input-underbar-disabled);
 }
 
 .text-input--underbar:invalid {
-  .text-input--invalid();
+  @apply(--text-input--invalid);
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid @input-invalid-border-color;
+  border-bottom: 1px solid var(--input-invalid-border-color);
 }
 
 /*!
@@ -164,26 +140,26 @@
 */
 
 .text-input--material {
-  .input();
-  .material-font();
-  color: @material-text-input-color;
-  background-image: linear-gradient(to top, transparent 1px, @material-text-input-inactive-color 1px);
+  @apply(--input);
+  @apply(--material-font);
+  color: var(--material-text-input-color);
+  background-image: linear-gradient(to top, transparent 1px, var(--material-text-input-inactive-color) 1px);
   background-size: 100% 2px;
   background-repeat: no-repeat;
   background-position: center bottom;
   background-color: transparent;
-  font-size: @material-text-input-font-size;
+  font-size: var(--material-text-input-font-size);
   font-weight: 400;
   border: none;
   padding-bottom: 2px;
   border-radius: 0;
   height: 24px;
   vertical-align: middle;
-  -webkit-transform: translate3d(0, 0, 0); // FIXME: prevent ios flicker
+  -webkit-transform: translate3d(0, 0, 0); /* FIXME: prevent ios flicker */
 }
 
 .text-input--material__label {
-  color: @material-text-input-inactive-color;
+  color: var(--material-text-input-inactive-color);
   position: absolute;
   left: 0px;
   top: 2px;
@@ -194,27 +170,22 @@
 }
 
 .text-input--material__label--active {
-  color: @material-text-input-active-color;
+  color: var(--material-text-input-active-color);
   transform: translate(0, -75%) scale(0.75);
   transform-origin: left top;
   transition: transform 0.1s ease-in, color 0.1s ease-in;
 }
 
 .text-input--material:focus {
-  background-image: linear-gradient(@material-text-input-active-color, @material-text-input-active-color), linear-gradient(to top, transparent 1px, @material-text-input-inactive-color 1px);
+  background-image: linear-gradient(var(--material-text-input-active-color), var(--material-text-input-active-color)), linear-gradient(to top, transparent 1px, var(--material-text-input-inactive-color) 1px);
   animation: material-text-input-animate 0.3s forwards;
-}
-
-.text-input--material-placeholder() {
-  color: @material-text-input-inactive-color;
-  line-height: 20px;
 }
 
 .text-input--material::-webkit-input-placeholder,
 .text-input--material::-moz-placeholder,
 .text-input--material::-ms-input-placeholder,
 .text-input--material:-ms-input-placeholder {
-  .text-input--material-placeholder();
+  @apply(--text-input--material-placeholder);
 }
 
 .text-input--material::-ms-clear {
@@ -240,14 +211,10 @@
 */
 
 .text-input--transparent {
-  .text-input();
+  @apply(--text-input);
 }
 
 .text-input--transparent:disabled {
-  .text-input--disabled();
-}
-
-.text-input--transparent:invalid {
-  &:extend(.text-input:invalid);
+  @apply(--text-input--disabled);
 }
 
