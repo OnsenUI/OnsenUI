@@ -9,9 +9,11 @@ describe('OnsPopoverElement', () => {
     target = ons._util.createElement('<div>Target</div>');
 
     document.body.appendChild(target);
-    document.body.appendChild(popover);
 
-    ons._contentReady(popover, done);
+    ons._contentReady(popover, () => {
+      document.body.appendChild(popover);
+      done();
+    });
   });
 
   afterEach(() => {

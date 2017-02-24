@@ -15,6 +15,7 @@ dev
  * ons-switch: Supports 'value' attribute.
  * angular1: `number input` retains number type variable with `ngModel`.
  * ons-tab: Supports 'active-icon' attribute.
+ * ons-popover: Fixed behavior on device back button.
 
 v2.1.0
 ----
