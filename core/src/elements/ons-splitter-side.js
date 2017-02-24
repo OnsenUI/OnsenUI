@@ -110,6 +110,7 @@ class CollapseMode {
     this._state = CLOSED_STATE;
     this._element = element;
     this._lock = new DoorLock();
+    this._onSwipeEnd = shouldOpen => this.executeAction(shouldOpen ? 'open' : 'close');
   }
 
   isOpen() {
@@ -153,7 +154,7 @@ class CollapseMode {
     const {_distance: distance, _width: width, _element: el} = this;
     const direction = event.gesture.interimDirection;
     const shouldOpen = el._side !== direction && distance > width * el._threshold;
-    this.executeAction(shouldOpen ? 'open' : 'close');
+    this._onSwipeEnd(shouldOpen);
     this._ignoreDrag = true;
   }
 
@@ -461,6 +462,19 @@ export default class SplitterSideElement extends BaseElement {
       });
     });
   }
+
+  // This can override swiping behavior
+  get onSwipeEnd() {
+    return this._collapseMode._onSwipeEnd;
+  }
+
+  set onSwipeEnd(value) {
+    if (!(value instanceof Function)) {
+      throw new Error('SwipeEnd must be a function.');
+    }
+    this._collapseMode._onSwipeEnd = value;
+  }
+
 
   connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
