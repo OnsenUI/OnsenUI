@@ -11,7 +11,7 @@ List of code contributors (in no particular order):
 * [Rob Taylor](https://github.com/OnsenUI/OnsenUI/graphs/contributors)
 * [Andi Pavllo](https://github.com/andipavllo)
 * [Yang Li](https://github.com/idealhack)
-* [Fran Dios](https://github.com/frankdiox)
+* [Fran Dios](https://github.com/frandiox)
 * [Hiroshi Shikata](https://github.com/shika22)
 * [Marco Andreotti](https://github.com/marqu3z)
 * [Ataru Ohto](https://github.com/AtaruOhto)

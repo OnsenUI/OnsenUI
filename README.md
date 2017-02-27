@@ -53,7 +53,7 @@ There are lots of sample applications written using Onsen UI. Here are some exam
 
 ![Todo application](https://cloud.githubusercontent.com/assets/6549462/17846105/8aedd1fc-6881-11e6-9c26-44289b0451f9.png)
 
-[Download source code](https://github.com/frankdiox/OnsenUI-Todo-App)
+[Download source code](https://github.com/frandiox/OnsenUI-Todo-App)
 
 ## What is Onsen UI?
 
