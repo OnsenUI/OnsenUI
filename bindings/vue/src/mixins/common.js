@@ -102,6 +102,14 @@ const modifier = {
   }
 };
 
+// Provides itself to its descendants
+const selfProvider = {
+  provide() {
+    return {
+      [this.$options._componentTag.slice(6)]: this
+    }
+  }
+}
 
-export { hidable, clickable, destroyable, hasOptions, modifier };
+export { hidable, clickable, destroyable, hasOptions, modifier, selfProvider };
 

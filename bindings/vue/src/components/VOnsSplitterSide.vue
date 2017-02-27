@@ -10,6 +10,8 @@
   export default {
     mixins: [VuePageLoader, deriveEvents, deriveProperties],
 
+    inject: ['splitter'],
+
     props: {
       open: {
         type: Boolean,

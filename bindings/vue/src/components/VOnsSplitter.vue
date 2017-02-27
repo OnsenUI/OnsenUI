@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  import { deriveProperties } from '../mixins';
+  import { deriveProperties, selfProvider } from '../mixins';
 
   export default {
-    mixins: [deriveProperties]
+    mixins: [deriveProperties, selfProvider]
   };
 </script>

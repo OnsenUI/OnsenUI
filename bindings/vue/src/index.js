@@ -30,28 +30,6 @@ const install = (Vue, params = {}) => {
    * Note: This affects every Vue instance.
    */
   Vue.mixin({
-    methods: {
-      getComponent(query) {
-        if (query.startsWith('v-')) {
-          query = name.slice(2);
-        }
-        const component = ons._util.findParent(this.$el, query);
-        return component && component.__vue__ || null;
-      }
-    },
-
-    computed: {
-      tabbar() {
-        return this.getComponent('ons-tabbar');
-      },
-      navigator() {
-        return this.getComponent('ons-navigator');
-      },
-      splitter() {
-        return this.getComponent('ons-splitter');
-      }
-    },
-
     beforeMount() {
       // When this beforeMount hook is called, this.$el has not yet replaced by Vue.
       // So we can detect whether or not any custom elements exist in the template of the Vue instance.
