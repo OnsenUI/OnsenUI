@@ -67,6 +67,7 @@
       pop
     },
     components: { myToolbar },
+    inject: ['navigator'],
     props: ['pageStack'],
     mounted() {
     }
