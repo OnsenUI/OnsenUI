@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { dialogAPI, modifier, deriveEvents, deriveProperties } from '../mixins';
+  import { hidable, hasOptions, modifier, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [dialogAPI, modifier, deriveEvents, deriveProperties],
+    mixins: [hidable, hasOptions, modifier, deriveEvents, deriveProperties],
 
     props: {
       target: {

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { fabAPI, deriveEvents, deriveProperties } from '../mixins';
+  import { hidable, clickable, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveProperties, fabAPI],
+    mixins: [deriveEvents, deriveProperties, hidable, clickable],
 
     props: {
       open: {

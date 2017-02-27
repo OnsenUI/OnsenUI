@@ -91,7 +91,7 @@
       @postshow="log('postshow!!')"
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
-      @mask="dialogVisible = false; log('canceled!!'); "
+      @cancel="dialogVisible = false; log('canceled!!'); "
       :visible="dialogVisible"
     >
       Lorem ipsum
@@ -100,7 +100,7 @@
 
     <v-ons-alert-dialog
       modifier="rowfooter"
-      @mask="alertDialog1Visible = false; log('canceled!!'); "
+      @cancel="alertDialog1Visible = false; log('canceled!!'); "
       :visible="alertDialog1Visible"
     >
       <span slot="title">Title slots</span>
@@ -116,7 +116,7 @@
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      @mask="alertDialog2Visible = false; log('canceled!!'); "
+      @cancel="alertDialog2Visible = false; log('canceled!!'); "
       :visible="alertDialog2Visible"
     >
       Lorem ipsum
@@ -136,7 +136,7 @@
       @prehide="log('prehide!!')"
       @posthide="log('posthide!!')"
       :target="$refs.myToolbarButton"
-      @mask="popoverVisible = false; log('canceled!!'); "
+      @cancel="popoverVisible = false; log('canceled!!'); "
       :visible="popoverVisible"
     >
       Lorem ipsum

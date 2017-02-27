@@ -9,9 +9,7 @@ export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
-import { dialogAPI, fabAPI } from '../mixins';
-import { VuePageLoader } from '../mixins';
-import { clickable, hasOptions, destroyable } from '../mixins';
+import { clickable, hidable, hasOptions, destroyable } from '../mixins';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
@@ -37,9 +35,9 @@ export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
 export const VOnsCarousel= extend('carousel', [hasOptions]);
 export const VOnsPage = extend('page', [destroyable]);
-export const VOnsFab = extend('fab', [fabAPI]);
-export const VOnsDialog = extend('dialog', [dialogAPI]);
-export const VOnsModal = extend('modal', [dialogAPI]);
+export const VOnsFab = extend('fab', [hidable, clickable]);
+export const VOnsDialog = extend('dialog', [hidable, hasOptions]);
+export const VOnsModal = extend('modal', [hidable, hasOptions]);
 export const VOnsSplitterMask = extend('splitter-mask', [clickable]);
 export const VOnsSplitterContent = extend('splitter-content', [destroyable]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
