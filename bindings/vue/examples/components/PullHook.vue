@@ -19,7 +19,7 @@
 
     <v-ons-list>
       <v-ons-list-item
-        v-for="item in items">
+        v-for="item in items" :key="item">
         {{item}}
       </v-ons-list-item>
     </v-ons-list>

@@ -3,7 +3,7 @@
     <v-ons-navigator @prepush="log('prepush')" @postpush="log('postpush')" @prepop="log('prepop')" @postpop="log('postpop')" @init.native="log('init')" @destroy.native="log('destroy')" @show.native="log('show')" @hide.native="log('hide')"
       :options="{animation: 'slide'}"
     >
-      <div v-for="page in pageStack" :is="page" :page-stack="pageStack"></div>
+      <div v-for="page in pageStack" :key="page" :is="page" :page-stack="pageStack"></div>
     </v-ons-navigator>
   </v-ons-page>
 </template>
