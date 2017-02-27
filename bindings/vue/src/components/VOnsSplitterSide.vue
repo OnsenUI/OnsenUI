@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, VuePageLoader, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { destroyable, hasOptions, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [VuePageLoader, deriveEvents, deriveProperties],
+    mixins: [destroyable, hasOptions, deriveEvents, deriveProperties],
 
     inject: ['splitter'],
 
@@ -23,9 +23,15 @@
       }
     },
 
+    methods: {
+      _action() {
+        this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options);
+      }
+    },
+
     watch: {
       open() {
-        this.$el[this.open ? 'open' : 'close'].call(this.$el);
+        this._action();
       }
     },
 
@@ -35,7 +41,7 @@
           return this.swipeable(shouldOpen);
         }
         if (this.open !== this.$el.isOpen) {
-          this.$el[this.open ? 'open' : 'close'].call(this.$el);
+          this._action();
         }
       });
 
@@ -43,7 +49,7 @@
 
       this.$nextTick(() => {
         if (this.open !== this.$el.isOpen) {
-          this.$el[this.open ? 'open' : 'close'].call(this.$el);
+          this._action();
         }
       });
     }
