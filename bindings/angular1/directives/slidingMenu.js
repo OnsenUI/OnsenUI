@@ -408,6 +408,8 @@
       scope: true,
 
       compile: function(element, attrs) {
+        ons._util.warn('\'ons-sliding-menu\' component has been deprecated and will be removed in the next release. Please use \'ons-splitter\' instead.');
+
         var main = element[0].querySelector('.main'),
             menu = element[0].querySelector('.menu');
 
