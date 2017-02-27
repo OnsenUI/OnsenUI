@@ -35,6 +35,7 @@
         <v-ons-list>
           <v-ons-list-item
             v-for="item in [1, 2, 3, 4]"
+            :key="item"
             @click="toggleMenu"
             tappable>
             Menu item {{ item }}

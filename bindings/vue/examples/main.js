@@ -16,7 +16,7 @@ const mainList = {
   <div>
     <v-ons-page>
       <ons-list>
-        <ons-list-item v-for="(example, key) in examples" @click="changeExample(key)" modifier="chevron">
+        <ons-list-item v-for="(example, key) in examples" :key="key" @click="changeExample(key)" modifier="chevron">
           <div class="center">{{ key }}</div>
         </ons-list-item>
       </ons-list>

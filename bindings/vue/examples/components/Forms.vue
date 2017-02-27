@@ -9,7 +9,7 @@
           <v-ons-input
             placeholder="Input name"
             float
-            v-ons-model="name"
+            v-model="name"
           >
           </v-ons-input>
         </div>
@@ -53,7 +53,7 @@
       </ons-list-header>
       <ons-list-item>
         <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects(rowId, $event)">
-          <option v-for="modifier in modifiers" v-bind:value="modifier.value">
+          <option v-for="modifier in modifiers" :key="modifier" v-bind:value="modifier.value">
             {{ modifier.text }}
           </option>
         </v-ons-select>
@@ -69,6 +69,7 @@
       </ons-list-header>
       <ons-list-item
         v-for="(vegetable, $index) in vegetables"
+        :key="vegetable"
         tappable
       >
         <label class="left">
@@ -76,7 +77,7 @@
             type="radio"
             :input-id="'radio-' + $index"
             :value="vegetable"
-            v-ons-model=" selectedVegetable"
+            v-ons-model="selectedVegetable"
           >
           </v-ons-input>
         </label>
@@ -95,6 +96,7 @@
       </ons-list-header>
       <ons-list-item
         v-for="(color, $index) in colors"
+        :key="color"
       >
         <label class="left">
           <v-ons-input
