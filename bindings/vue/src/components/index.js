@@ -1,6 +1,7 @@
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
+export { default as VOnsCarousel } from './VOnsCarousel.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
@@ -33,7 +34,6 @@ export const VOnsProgressBar = extend('progress-bar');
 export const VOnsProgressCircular = extend('progress-circular');
 export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
-export const VOnsCarousel= extend('carousel', [hasOptions]);
 export const VOnsPage = extend('page', [destroyable]);
 export const VOnsFab = extend('fab', [hidable, clickable]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions]);
