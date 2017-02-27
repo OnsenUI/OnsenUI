@@ -547,13 +547,7 @@ export default class PopoverElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this._popover, callback);
   }
 
-  _resetBackButtonHandler() { // do we need this twice?
-    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
-  }
-
   connectedCallback() {
-    this._resetBackButtonHandler();
-
     contentReady(this, () => {
       this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
 
@@ -566,7 +560,7 @@ export default class PopoverElement extends BaseElement {
 
       this._mask.addEventListener('click', this._boundCancel, false);
 
-      this._resetBackButtonHandler();
+      this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
       window.addEventListener('resize', this._boundOnChange, false);
     });
