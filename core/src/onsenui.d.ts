@@ -1,6 +1,6 @@
 // Type definitions for Onsen UI 2
 // Project: https://onsen.io/
-// Definitions by: Fran Dios <https://github.com/frankdiox/>
+// Definitions by: Fran Dios <https://github.com/frandiox/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 // module declaration
