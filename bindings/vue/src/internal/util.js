@@ -1,6 +1,6 @@
 import ons from 'onsenui';
 
-export const hyphenate = string => string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+export const hyphenate = string => string.replace(/([a-zA-Z])([A-Z])/g, '$1-$2').toLowerCase();
 
 export const camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 

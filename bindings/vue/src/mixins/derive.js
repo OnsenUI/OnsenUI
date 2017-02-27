@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { hyphenate, getClassFromTag, eventToHandler } from '../internal/util';
+import { getClassFromTag, eventToHandler } from '../internal/util';
 import { createMethodsFor, createComputedPropertiesFor } from '../internal/optionsObjectHelper';
 
 const deriveEvents = {

@@ -1,12 +1,13 @@
 import * as components from './components';
 import * as directives from './directives';
+import { hyphenate } from './internal/util';
 
 import ons from 'onsenui';
 
 const register = (Vue, type, items) => {
   Object.keys(items).forEach((key) => {
     const value = items[key];
-    key = Vue.util.hyphenate(key);
+    key = hyphenate(key);
     Vue[type](key, value);
   });
 };
