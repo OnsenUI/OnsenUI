@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import util from '../ons/util';
+
 /**
  * Minimal utility library for manipulating element's style.
  */
