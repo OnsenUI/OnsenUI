@@ -11,6 +11,12 @@
         <div style="text-align: center; font-size: 30px; margin-top: 20px; color: #fff;">{{key}}</div>
       </v-ons-carousel-item>
     </v-ons-carousel>
+
+    <div :style="dots">
+      <span :index="dotIndex - 1" v-for="dotIndex in Object.keys(items).length" :key="dotIndex" style="cursor: pointer" @click="carouselIndex = dotIndex - 1">
+        {{ carouselIndex === dotIndex - 1 ? '\u25CF' : '\u25CB' }}
+      </span>
+    </div>
   </v-ons-page>
 </template>
 
@@ -23,6 +29,15 @@
           BLUE: '#085078',
           DARK: '#373B44',
           ORANGE: '#D38312'
+        },
+        dots: {
+          textAlign: 'center',
+          fontSize: '40px',
+          color: '#fff',
+          position: 'absolute',
+          bottom: '40px',
+          left: 0,
+          right: 0
         }
       }
     },
