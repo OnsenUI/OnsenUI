@@ -22,6 +22,10 @@
           this.$el.setActiveIndex(this.index, this.options);
         }
       }
+    },
+
+    mounted() {
+      this.$on('postchange', event => this.$emit('swipe', event.activeIndex));
     }
   };
 </script>
