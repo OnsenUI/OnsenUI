@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import util from './util';
+
 const softwareKeyboard = new MicroEvent();
 softwareKeyboard._visible = false;
 
