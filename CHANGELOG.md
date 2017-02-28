@@ -7,7 +7,7 @@ dev
  * css-components: Fixed broken popover components.
  * css-components: Renamed ".tab-bar" to ".tabbar".
  * css-components: Renamed ".navigation-bar" to ".toolbar".
- * css-components: Dropped all stylus and rebuild css-components with CSSNext.
+ * css-components: Dropped all stylus and rebuild css-components with cssnext.
  * angular1: `number input` retains number type variable with `ngModel`.
  * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
  * ons-template: Show warning when ons-template is not located just under document.body.
