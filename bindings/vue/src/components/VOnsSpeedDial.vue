@@ -5,31 +5,40 @@
 </template>
 
 <script>
-  import { hidable, clickable, deriveEvents, deriveProperties } from '../mixins';
+  import { hidable, deriveEvents, deriveProperties } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveProperties, hidable, clickable],
+    mixins: [deriveEvents, deriveProperties, hidable],
 
     props: {
       open: {
-        type: Boolean
+        type: Boolean,
+        default: undefined
+      }
+    },
+
+    methods: {
+      _action() {
+        if (this.open !== undefined && this.open !== this.$el.isOpen()) {
+          this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
+        }
       }
     },
 
     watch: {
       open: function() {
-        if (this.open !== this.$el.isOpen()) {
-          this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
-        }
+        this._action();
       }
     },
 
     mounted() {
-      this.$nextTick(() => {
-        if (this.open !== this.$el.isOpen()) {
-          this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
+      this.$on(['open', 'close'], event => {
+        if (this.open !== undefined && this.open !== this.$el.isOpen()) {
+          this.$emit('toggle', event.target.isOpen());
         }
       });
+
+      this._action();
     }
   };
 </script>

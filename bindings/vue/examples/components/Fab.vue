@@ -16,7 +16,7 @@
     <v-ons-speed-dial
       :visible="speedDialVisible"
       :open="speedDialOpen"
-      :onClick="() => speedDialOpen = !speedDialOpen"
+      @toggle="speedDialOpen = $event"
       position="bottom left"
       direction="up"
       @open="log('open!!')"
@@ -50,8 +50,8 @@
     data: function() {
       return {
         fabVisible: true,
-        speedDialVisible: false,
-        speedDialOpen: false
+        speedDialVisible: true,
+        speedDialOpen: true
       };
     },
     methods: {
