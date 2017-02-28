@@ -37,7 +37,7 @@ styler.css = function(element, styles) {
     } else if (styler._prefix(key) in element.style) {
       element.style[styler._prefix(key)] = styles[key];
     } else {
-      util.warn('No such style property: ' + key);
+      console.warn('No such style property: ' + key);
     }
   });
   return element;
