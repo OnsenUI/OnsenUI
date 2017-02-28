@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side :swipeable="!!swipeable">
+  <ons-splitter-side>
     <slot></slot>
   </ons-splitter-side>
 </template>
@@ -10,22 +10,18 @@
   export default {
     mixins: [destroyable, hasOptions, deriveEvents, deriveProperties],
 
-    inject: ['splitter'],
-
     props: {
       open: {
         type: Boolean,
-        required: true
-      },
-
-      swipeable: {
-        type: Function
+        default: undefined
       }
     },
 
     methods: {
       _action() {
-        this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options);
+        if (this.open !== undefined && this.open !== this.$el.isOpen) {
+          this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options).catch(() => {});
+        }
       }
     },
 
@@ -36,22 +32,13 @@
     },
 
     mounted() {
-      this.$on('swipeEnd', shouldOpen => {
-        if (this.open !== shouldOpen) {
-          return this.swipeable(shouldOpen);
-        }
-        if (this.open !== this.$el.isOpen) {
-          this._action();
+      this.$on(['postopen', 'postclose'], event => {
+        if (this.open !== undefined && this.open !== event.target.isOpen) {
+          this.$emit('swipe', event.target.isOpen)
         }
       });
 
-      this.splitter.$on('mask', () => this.swipeable && this.swipeable(false));
-
-      this.$nextTick(() => {
-        if (this.open !== this.$el.isOpen) {
-          this._action();
-        }
-      });
+      this._action();
     }
   };
 </script>

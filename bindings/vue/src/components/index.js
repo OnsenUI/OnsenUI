@@ -5,12 +5,11 @@ export { default as VOnsCarousel } from './VOnsCarousel.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
-export { default as VOnsSplitter} from './VOnsSplitter.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
-import { clickable, hidable, hasOptions, destroyable } from '../mixins';
+import { clickable, hidable, hasOptions, destroyable, deriveProperties, selfProvider } from '../mixins';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
@@ -34,11 +33,12 @@ export const VOnsProgressBar = extend('progress-bar');
 export const VOnsProgressCircular = extend('progress-circular');
 export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
+export const VOnsSplitterMask = extend('splitter-mask');
+export const VOnsSplitterContent = extend('splitter-content', [destroyable]);
+export const VOnsSplitter = extend('splitter', [deriveProperties, selfProvider]);
 export const VOnsPage = extend('page', [destroyable]);
 export const VOnsFab = extend('fab', [hidable, clickable]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions]);
 export const VOnsModal = extend('modal', [hidable, hasOptions]);
-export const VOnsSplitterMask = extend('splitter-mask', [clickable]);
-export const VOnsSplitterContent = extend('splitter-content', [destroyable]);
 export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 

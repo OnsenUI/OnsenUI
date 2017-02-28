@@ -1,12 +1,13 @@
 <template>
   <v-ons-page>
-    <v-ons-splitter @mask="log('mask')">
+    <v-ons-splitter>
       <v-ons-splitter-side
         :open="splitterOpen"
-        :swipeable="shouldOpen => splitterOpen = shouldOpen"
+        :swipeable="true"
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
+        @swipe="splitterOpen = $event; log('swipe')"
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"
