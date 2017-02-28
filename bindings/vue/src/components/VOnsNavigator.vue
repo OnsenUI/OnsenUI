@@ -1,14 +1,24 @@
 <template>
   <ons-navigator>
-    <slot></slot>
+    <slot>
+      <div v-for="page in pageStack" :key="page" :is="page"></div>
+    </slot>
   </ons-navigator>
 </template>
 
 <script>
-  import { destroyable, hasOptions, selfProvider, VuePageLoader, deriveEvents, deriveProperties } from '../mixins';
+  import { destroyable, hasOptions, selfProvider, deriveEvents, deriveProperties } from '../mixins';
+  import Vue from 'vue';
 
   export default {
-    mixins: [deriveEvents, deriveProperties, VuePageLoader, destroyable, hasOptions, selfProvider],
+    mixins: [deriveEvents, deriveProperties, destroyable, hasOptions, selfProvider],
+
+    props: {
+      pageStack: {
+        type: Array,
+        required: true
+      }
+    },
 
     methods: {
       isReady() {
@@ -65,26 +75,24 @@
       }
     },
 
-    beforeUpdate() {
-      this._lastLength = this.$children.length;
-      this._lastTopPage = this.$children[this.$children.length - 1];
-    },
+    watch: {
+      pageStack() {
+        const lastLength = this.$children.length;
+        let lastTopPage = this.$children[this.$children.length - 1].$el;
 
-    updated() {
-      const lastLength = this._lastLength;
-      const currentLength = this.$children.length;
-      const lastTopPage = this._lastTopPage.$el;
-      const currentTopPage = this.$children[currentLength - 1].$el;
+        this.$nextTick(() => {
+          const currentLength = this.$children.length;
+          let currentTopPage = this.$children[currentLength - 1].$el;
 
-      // TODO check performance and memory leaks
+          if (currentTopPage !== lastTopPage) {
+            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage});
+          } else if (currentLength !== lastLength) {
+            currentTopPage.updateBackButton(currentLength > 1);
+          }
 
-      if (currentTopPage !== lastTopPage) {
-        this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage});
-      } else if (currentLength !== lastLength) {
-        currentTopPage.updateBackButton(currentLength > 1);
+          lastTopPage = currentTopPage = null;
+        });
       }
-
-      this._lastTopPage = null;
     }
   };
 </script>

@@ -4,6 +4,7 @@ export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
 export { default as VOnsCarousel } from './VOnsCarousel.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
+export { default as VOnsBackButton } from './VOnsBackButton.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 
@@ -40,5 +41,4 @@ export const VOnsPage = extend('page', [destroyable]);
 export const VOnsFab = extend('fab', [hidable, clickable]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions]);
 export const VOnsModal = extend('modal', [hidable, hasOptions]);
-export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
 
