@@ -9,7 +9,7 @@
           <v-ons-input
             placeholder="Input name"
             float
-            v-model="name"
+            v-ons-model="name"
           >
           </v-ons-input>
         </div>
@@ -52,7 +52,7 @@
         Select box - <button @click="modify('select')">Modify JS</button>
       </ons-list-header>
       <ons-list-item>
-        <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects(rowId, $event)">
+        <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects">
           <option v-for="modifier in modifiers" :key="modifier" v-bind:value="modifier.value">
             {{ modifier.text }}
           </option>
@@ -156,7 +156,7 @@
     },
 
     methods: {
-      modify: function(type) {
+      modify(type) {
         switch (type) {
           case 'input':
             this.name += ' Rambo';
@@ -179,8 +179,7 @@
         }
       },
 
-      editSelects: function(rowId, event) {
-        console.log('editSelects', event);
+      editSelects(event) {
         document.getElementById('choose-sel').removeAttribute('modifier');
         if (event.target.value == 'material' || event.target.value == 'underbar') {
           document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
