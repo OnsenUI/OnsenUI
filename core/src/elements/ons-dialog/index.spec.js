@@ -69,7 +69,7 @@ describe('OnsDialogElement', () => {
 
   describe('#onDeviceBackButton', () => {
     onlyChrome(it)('cancels if dialog is cancelable', () => {
-      const spy = chai.spy.on(dialog, '_onCancel');
+      const spy = chai.spy.on(dialog, '_cancel');
       dialog.setAttribute('cancelable', '');
       dialog.onDeviceBackButton._callback();
       expect(spy).to.have.been.called.once;
@@ -84,11 +84,11 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#_onCancel()', () => {
+  describe('#_cancel()', () => {
     it('hides the dialog if it is cancelable', () => {
       const spy = chai.spy.on(dialog, 'hide');
       dialog.setAttribute('cancelable', '');
-      dialog._onCancel();
+      dialog._cancel();
       expect(spy).to.have.been.called.once;
     });
 
@@ -98,7 +98,7 @@ describe('OnsDialogElement', () => {
       });
 
       dialog.setAttribute('cancelable', '');
-      dialog._onCancel();
+      dialog._cancel();
 
       return expect(promise).to.eventually.be.fulfilled;
     });

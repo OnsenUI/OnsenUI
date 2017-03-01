@@ -195,7 +195,7 @@ export default class AlertDialogElement extends BaseElement {
 
     this._visible = false;
     this._doorLock = new DoorLock();
-    this._boundCancel = () => this.onCancel();
+    this._boundCancel = () => this._cancel();
 
     this._updateAnimatorFactory()
   }
@@ -490,18 +490,7 @@ export default class AlertDialogElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
-  get onCancel() {
-    return this._onCancel;
-  }
-
-  set onCancel(value) {
-    if (!(value instanceof Function)) {
-      throw new Error('Cancel must be a function.');
-    }
-    this._onCancel = value;
-  }
-
-  _onCancel() {
+  _cancel() {
     if (this.cancelable && !this._running) {
       this._running = true;
       this.hide()
@@ -516,7 +505,7 @@ export default class AlertDialogElement extends BaseElement {
   }
 
   connectedCallback() {
-    this.onDeviceBackButton = e => this.cancelable ? this.onCancel() : e.callParentHandler();
+    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
     contentReady(this, () => {
       this._mask.addEventListener('click', this._boundCancel, false);

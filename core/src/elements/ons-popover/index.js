@@ -228,7 +228,7 @@ export default class PopoverElement extends BaseElement {
 
     this._doorLock = new DoorLock();
     this._boundOnChange = this._onChange.bind(this);
-    this._boundCancel = () => this.onCancel();
+    this._boundCancel = () => this._cancel();
   }
 
   _initAnimatorFactory() {
@@ -560,7 +560,7 @@ export default class PopoverElement extends BaseElement {
 
       this._mask.addEventListener('click', this._boundCancel, false);
 
-      this.onDeviceBackButton = e => this.cancelable ? this.onCancel() : e.callParentHandler();
+      this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
 
       window.addEventListener('resize', this._boundOnChange, false);
     });
@@ -595,18 +595,8 @@ export default class PopoverElement extends BaseElement {
     }
   }
 
-  get onCancel() {
-    return this._onCancel;
-  }
 
-  set onCancel(value) {
-    if (!(value instanceof Function)) {
-      throw new Error('Cancel must be a function.');
-    }
-    this._onCancel = value;
-  }
-
-  _onCancel() {
+  _cancel() {
     if (this.cancelable) {
       this.hide({
         callback: () => {

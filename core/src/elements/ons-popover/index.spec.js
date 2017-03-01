@@ -197,10 +197,10 @@ describe('OnsPopoverElement', () => {
     });
   });
 
-  describe('#_onCancel()', () => {
+  describe('#_cancel()', () => {
     it('should hide the popover if it is not cancelable', () => {
       popover.show(target, {animation: 'none'});
-      popover._onCancel();
+      popover._cancel();
       expect(popoverDisplay()).to.equal('block');
     });
 
@@ -208,7 +208,7 @@ describe('OnsPopoverElement', () => {
       popover.setAttribute('animation', 'none');
       popover.show(target);
       popover.setAttribute('cancelable', '');
-      popover._onCancel();
+      popover._cancel();
       expect(popoverDisplay()).to.equal('none');
     });
   });
