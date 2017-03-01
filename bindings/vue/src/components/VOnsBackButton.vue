@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { hasOptions, deriveProperties } from '../mixins';
+  import { hasOptions } from '../mixins';
 
   export default {
-    mixins: [hasOptions, deriveProperties],
+    mixins: [hasOptions],
 
     inject: ['navigator'],
 
@@ -22,9 +22,9 @@
 
     mounted() {
       this.$el.onClick = () => {
-        const _id = setTimeout(() => this._action(), 0);
+        const id = setTimeout(() => this._action(), 0);
         this.$emit('click', {
-          preventDefault: () => clearTimeout(_id)
+          preventDefault: () => clearTimeout(id)
         });
       };
     }
