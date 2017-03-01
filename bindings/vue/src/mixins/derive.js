@@ -46,12 +46,26 @@ const deriveHandlers = {
   },
 
   mounted() {
+    const dbb = 'onDeviceBackButton';
     this._propertyHandlers.forEach(propertyName => {
-      if (!this.$el[propertyName]) {
-        this.$el[propertyName] = (...args) => {
-          const name = propertyName.slice(2);
-          this.$emit(name.charAt(0).toLowerCase() + name.slice(1), ...args);
+      const eventName = propertyName.slice(2).charAt(0).toLowerCase() + propertyName.slice(2).slice(1);
+
+      if (propertyName === dbb) {
+        // Call original handler or parent handler by default
+        const handler = (this.$el[dbb] && this.$el[dbb]._callback) || (e => e.callParentHandler());
+
+        this.$el[dbb] = event => {
+          const id = setTimeout(handler.bind(this.$el, event), 0);
+          const newEvent = {
+            ...event,
+            preventDefault: () => clearTimeout(id)
+          };
+          this.$emit(eventName, newEvent);
         };
+
+      } else if (!this.$el[propertyName]) {
+        // If there is no default value, emit event
+        this.$el[propertyName] = (...args) => this.$emit(eventName, ...args);
       }
     });
   }

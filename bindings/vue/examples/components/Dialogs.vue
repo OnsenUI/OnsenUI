@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @deviceBackButton.prevent="log('pageDBB', $event)">
     <v-ons-toolbar>
       <div class="center">
         <v-ons-toolbar-button ref="myToolbarButton">Test</v-ons-toolbar-button>
@@ -88,7 +88,7 @@
     <v-ons-dialog cancelable
       :visible="dialogVisible"
       @dialog-cancel="dialogVisible = false; log('canceled'); "
-      @deviceBackButton="log('device back button')"
+      @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
       @prehide="log('prehide')"
@@ -102,6 +102,7 @@
       modifier="rowfooter"
       :visible="alertDialog1Visible"
       @dialog-cancel="alertDialog1Visible = false; log('canceled'); "
+      @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
       Lorem ipsum
@@ -125,6 +126,7 @@
 
     <v-ons-modal
       :visible="modalVisible"
+      @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
       <p><ons-button @click="modalVisible = false">Close</ons-button></p>
@@ -134,6 +136,7 @@
       :target="$refs.myToolbarButton"
       :visible="popoverVisible"
       @dialog-cancel="popoverVisible = false; log('canceled'); "
+      @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
       @prehide="log('prehide')"

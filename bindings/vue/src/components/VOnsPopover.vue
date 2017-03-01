@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { hidable, hasOptions, modifier, deriveEvents } from '../mixins';
+  import { hidable, hasOptions, modifier, deriveEvents, deriveHandlers } from '../mixins';
 
   export default {
-    mixins: [hidable, hasOptions, modifier, deriveEvents],
+    mixins: [hidable, hasOptions, modifier, deriveEvents, deriveHandlers],
 
     props: {
       target: {

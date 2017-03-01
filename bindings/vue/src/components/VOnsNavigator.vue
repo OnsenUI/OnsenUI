@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, selfProvider, deriveEvents } from '../mixins';
+  import { destroyable, hasOptions, selfProvider, deriveEvents, deriveHandlers } from '../mixins';
   import Vue from 'vue';
 
   export default {
-    mixins: [deriveEvents, destroyable, hasOptions, selfProvider],
+    mixins: [destroyable, hasOptions, selfProvider, deriveEvents, deriveHandlers],
 
     props: {
       pageStack: {

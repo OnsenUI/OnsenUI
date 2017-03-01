@@ -36,9 +36,9 @@ export const VOnsCarouselItem = extend('carousel-item');
 export const VOnsSplitterMask = extend('splitter-mask');
 export const VOnsSplitterContent = extend('splitter-content', [destroyable]);
 export const VOnsPullHook = extend('pull-hook', [deriveHandlers]);
-export const VOnsSplitter = extend('splitter', [selfProvider]);
-export const VOnsPage = extend('page', [destroyable, deriveHandlers]);
+export const VOnsSplitter = extend('splitter', [selfProvider, deriveHandlers]);
 export const VOnsFab = extend('fab', [hidable, clickable]);
-export const VOnsDialog = extend('dialog', [hidable, hasOptions]);
-export const VOnsModal = extend('modal', [hidable, hasOptions]);
+export const VOnsPage = extend('page', [destroyable, deriveHandlers]);
+export const VOnsDialog = extend('dialog', [hidable, hasOptions, deriveHandlers]);
+export const VOnsModal = extend('modal', [hidable, hasOptions, deriveHandlers]);
 
