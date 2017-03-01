@@ -4,16 +4,25 @@ CHANGELOG
 
 dev
 ----
- * css-components: Fixed broken popover components.
- * ons-template: Show warning when ons-template is not located just under document.body.
- * ons-select: Fix width of the inner element.
+
+### New Features
+
  * ons-switch: Supports 'value' attribute.
- * ons-navigator: Added deprecate warning for `options.refresh`.
  * ons-tab: Supports 'active-icon' attribute.
- * ons-popover: Fixed behavior on device back button.
  * ons-lazy-repeat: Support for dynamic height.
  * angular1: Add `onsSelect` directive working with `ngModel`.
+
+### Bug Fixes
+
+ * css-components: Fixed broken popover components.
+ * ons-select: Fix width of the inner element.
+ * ons-popover: Fixed behavior on device back button.
  * angular1: `number input` retains number type variable with `ngModel`.
+
+### Misc
+
+ * ons-template: Show warning when ons-template is not located just under document.body.
+ * ons-navigator: Added deprecate warning for `options.refresh`.
  * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
 
 ### BREAKING CHANGES
