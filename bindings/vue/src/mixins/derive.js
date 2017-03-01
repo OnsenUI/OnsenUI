@@ -1,56 +1,36 @@
 import Vue from 'vue';
-import { getClassFromTag, eventToHandler } from '../internal/util';
-import { createMethodsFor, createComputedPropertiesFor } from '../internal/optionsObjectHelper';
+import { eventToHandler } from '../internal/util';
+import { createComputedPropertiesFor } from '../internal/optionsObjectHelper';
 
 const deriveEvents = {
-  beforeCreate() {
-    this._boundEvents = getClassFromTag(this.$options._componentTag.slice(2)).events || ['click'];
-    this.$options.methods = {
-      ...this._boundEvents.reduce((result, key) => {
-        result[eventToHandler(key)] = event => this.$emit(key, event);
-        return result;
-      }, {}),
-      ...this.$options.methods
-    };
-  },
-
   mounted() {
+    this._handlers = {};
+    this._boundEvents = this.$el.constructor.__proto__.events || ['click'];
+
     this._boundEvents.forEach(key => {
-      this.$el.addEventListener(key, this[eventToHandler(key)]);
+      this._handlers[eventToHandler(key)] = event => this.$emit(key, event);
+      this.$el.addEventListener(key, this._handlers[eventToHandler(key)]);
     });
   },
 
   beforeDestroy() {
     this._boundEvents.forEach(key => {
-      this.$el.removeEventListener(key, this[eventToHandler(key)]);
+      this.$el.removeEventListener(key, this._handlers[eventToHandler(key)]);
     });
-    this._boundEvents = null;
-  }
-};
-
-// Deprecated
-const deriveMethods = {
-  beforeCreate() {
-    this.$options.methods = {
-      ...createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))),
-      ...this.$options.methods
-    };
+    this._handlers = this._boundEvents = null;
   }
 };
 
 const deriveHandlers = {
-  beforeCreate() {
-    const derivedProperties = createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2)));
-
-    this._propertyHandlers = Object.keys(derivedProperties).filter(propertyName => /^on[A-Z]/.test(propertyName));
-  },
-
   mounted() {
     const dbb = 'onDeviceBackButton';
-    this._propertyHandlers.forEach(propertyName => {
-      const eventName = propertyName.slice(2).charAt(0).toLowerCase() + propertyName.slice(2).slice(1);
+    const nativeProps = createComputedPropertiesFor(this.$el.constructor.__proto__);
+    const propHandlers = Object.keys(nativeProps).filter(propName => /^on[A-Z]/.test(propName));
 
-      if (propertyName === dbb) {
+    propHandlers.forEach(propName => {
+      const eventName = propName.slice(2).charAt(0).toLowerCase() + propName.slice(2).slice(1);
+
+      if (propName === dbb) {
         // Call original handler or parent handler by default
         const handler = (this.$el[dbb] && this.$el[dbb]._callback) || (e => e.callParentHandler());
 
@@ -63,9 +43,9 @@ const deriveHandlers = {
           this.$emit(eventName, newEvent);
         };
 
-      } else if (!this.$el[propertyName]) {
+      } else if (!this.$el[propName]) {
         // If there is no default value, emit event
-        this.$el[propertyName] = (...args) => this.$emit(eventName, ...args);
+        this.$el[propName] = (...args) => this.$emit(eventName, ...args);
       }
     });
   }
