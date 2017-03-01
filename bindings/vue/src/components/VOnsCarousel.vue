@@ -1,5 +1,5 @@
 <template>
-  <ons-carousel :initial-index="index">
+  <ons-carousel :initial-index="index" @postchange="$emit('swipe', $event.activeIndex)">
     <slot></slot>
   </ons-carousel>
 </template>
@@ -22,10 +22,6 @@
           this.$el.setActiveIndex(this.index, this.options);
         }
       }
-    },
-
-    mounted() {
-      this.$on('postchange', event => this.$emit('swipe', event.activeIndex));
     }
   };
 </script>

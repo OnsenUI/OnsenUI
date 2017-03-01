@@ -12,23 +12,20 @@
 
     props: {
       target: {
-        validator: function(value) {
-          if (value._isVue || typeof value === 'string' || value instanceof Event || value instanceof HTMLElement) {
-            return true;
-          }
-          return false;
+        validator(value) {
+          return value._isVue || typeof value === 'string' || value instanceof Event || value instanceof HTMLElement;
         }
       }
     },
 
     computed: {
-      normalizedTarget: function() {
+      normalizedTarget() {
         if (this.target && this.target._isVue) {
           return this.target.$el;
         }
         return this.target;
       },
-      normalizedOptions: function() {
+      normalizedOptions() {
         if (this.target) {
           return {
             target: this.normalizedTarget,

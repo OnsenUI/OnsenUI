@@ -18,27 +18,24 @@
     },
 
     methods: {
-      _action() {
-        if (this.open !== undefined && this.open !== this.$el.isOpen) {
-          this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options).catch(() => {});
-        }
+      action() {
+        this._shouldUpdate() && this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options).catch(() => {});
+      },
+      _shouldUpdate() {
+        return this.open !== undefined && this.open !== this.$el.isOpen;
       }
     },
 
     watch: {
       open() {
-        this._action();
+        this.action();
       }
     },
 
     mounted() {
-      this.$on(['postopen', 'postclose'], event => {
-        if (this.open !== undefined && this.open !== event.target.isOpen) {
-          this.$emit('swipe', event.target.isOpen)
-        }
-      });
+      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('swipe', this.$el.isOpen));
 
-      this._action();
+      this.action();
     }
   };
 </script>

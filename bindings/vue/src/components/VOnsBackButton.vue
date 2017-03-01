@@ -1,5 +1,5 @@
 <template>
-  <ons-back-button>
+  <ons-back-button :on-click.prop="action">
     <slot></slot>
   </ons-back-button>
 </template>
@@ -12,16 +12,11 @@
 
     inject: ['navigator'],
 
-    mounted() {
-      this.$el.onClick = () => {
-        const id = setTimeout(() => {
-          this.navigator.pageStack.pop();
-        }, 0);
-
-        this.$emit('click', {
-          preventDefault: () => clearTimeout(id)
-        });
-      };
+    methods: {
+      action() {
+        const id = setTimeout(() => this.navigator.pageStack.pop(), 0);
+        this.$emit('click', { preventDefault: () => clearTimeout(id) });
+      }
     }
   };
 </script>

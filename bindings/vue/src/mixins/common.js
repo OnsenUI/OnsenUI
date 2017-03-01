@@ -93,4 +93,3 @@ const selfProvider = {
 }
 
 export { hidable, destroyable, hasOptions, modifier, selfProvider };
-

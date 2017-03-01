@@ -41,4 +41,3 @@ export const VOnsFab = extend('fab', [hidable]);
 export const VOnsPage = extend('page', [destroyable, deriveHandlers]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions, deriveHandlers]);
 export const VOnsModal = extend('modal', [hidable, hasOptions, deriveHandlers]);
-

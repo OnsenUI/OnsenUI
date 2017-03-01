@@ -26,14 +26,8 @@
       },
       footer: {
         type: Object,
-        validator: function(value) {
-          const buttons = Object.keys(value);
-          for (let i = 0; i < buttons.length; i++) {
-            if (!(value[buttons[i]] instanceof Function)) {
-              return false;
-            }
-          }
-          return true;
+        validator(value) {
+          return Object.keys(value).every(key => value[key] instanceof Function);
         }
       }
     }
