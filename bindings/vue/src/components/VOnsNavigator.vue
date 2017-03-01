@@ -8,7 +8,6 @@
 
 <script>
   import { destroyable, hasOptions, selfProvider, deriveEvents, deriveHandlers } from '../mixins';
-  import Vue from 'vue';
 
   export default {
     mixins: [destroyable, hasOptions, selfProvider, deriveEvents, deriveHandlers],
