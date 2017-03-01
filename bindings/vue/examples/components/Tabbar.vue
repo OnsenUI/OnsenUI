@@ -2,24 +2,17 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="left"><ons-toolbar-button @click="tabbarIndex--">Index--</ons-toolbar-button></div>
-      <div class="center">Tabbar Index: {{tabbarIndex}} -- Tabbar Visible: <input type="checkbox" v-model="tabbarVisibility" /></div>
+      <div class="center">Index: {{tabbarIndex}} -- Show: <input type="checkbox" v-model="tabbarVisibility" /></div>
       <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-tabbar :index="tabbarIndex" @change="tabbarIndex = $event" :visible="tabbarVisibility" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')" @show.native="log('show')" @hide.native="log('hide')" @destroy.native="log('destroy')">
-      <template slot="pages">
-        <home></home>
-        <settings></settings>
-      </template>
-
-      <v-ons-tab :icon="tab1Icon" :label="tab1Label"></v-ons-tab>
-      <v-ons-tab icon="fa-cogs" label="Settings"></v-ons-tab>
+    <v-ons-tabbar :tabs="tabs" :index="tabbarIndex" @change="tabbarIndex = $event" :visible="tabbarVisibility" position="auto" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')" @show.native="log('show')" @hide.native="log('hide')" @destroy.native="log('destroy')">
     </v-ons-tabbar>
   </v-ons-page>
 </template>
 
 <script>
-  let home = {
+  const home = {
     template: `
       <v-ons-page>
         Home page
@@ -27,10 +20,18 @@
     `
   };
 
-  let settings = {
+  const news = {
     template: `
       <v-ons-page>
-        Settings Page
+        News page
+      </v-ons-page>
+    `
+  };
+
+  const settings = {
+    template: `
+      <v-ons-page>
+        Settings page
       </v-ons-page>
     `
   };
@@ -38,16 +39,27 @@
 	export default {
     data: function() {
       return {
-        tab1Label: 'Home',
-        tab1Icon: 'ion-ios-home-outline',
         tabbarIndex: 0,
-        tabbarVisibility: true
+        tabbarVisibility: true,
+        tabs: [
+          {
+            label: 'Home',
+            icon: 'ion-ios-home-outline',
+            page: home
+          },
+          {
+            label: 'News',
+            icon: 'ion-ios-bell',
+            badge: 7,
+            page: news
+          },
+          {
+            label: 'Settings',
+            icon: 'fa-cogs',
+            page: settings
+          }
+        ]
       };
-    },
-
-    components: {
-      home,
-      settings
     },
 
     methods: {
