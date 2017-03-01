@@ -32,25 +32,6 @@ const hidable = {
   }
 };
 
-// Components which can have click behavior overriden
-const clickable = {
-  props: {
-    onClick: {
-      type: Function
-    }
-  },
-
-  watch: {
-    onClick() {
-      this.$el.onClick = this.onClick;
-    }
-  },
-
-  mounted() {
-    this.$el.onClick = this.onClick;
-  }
-};
-
 // Components that contain pages
 const destroyable = {
   beforeDestroy() {
@@ -111,5 +92,5 @@ const selfProvider = {
   }
 }
 
-export { hidable, clickable, destroyable, hasOptions, modifier, selfProvider };
+export { hidable, destroyable, hasOptions, modifier, selfProvider };
 
