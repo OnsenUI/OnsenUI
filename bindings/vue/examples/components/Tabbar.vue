@@ -6,7 +6,7 @@
       <div class="right"><ons-toolbar-button @click="tabbarIndex++">Index++</ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-tabbar v-ons-index="tabbarIndex" :visible="tabbarVisibility" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')" @show.native="log('show')" @hide.native="log('hide')" @destroy.native="log('destroy')">
+    <v-ons-tabbar :index="tabbarIndex" @change="tabbarIndex = $event" :visible="tabbarVisibility" @reactive="log('reactive')" @postchange="log('postchange')" @prechange="log('prechange')" @init.native="log('init')" @show.native="log('show')" @hide.native="log('hide')" @destroy.native="log('destroy')">
       <template slot="pages">
         <home></home>
         <settings></settings>
@@ -38,7 +38,6 @@
 	export default {
     data: function() {
       return {
-        test: 'testing',
         tab1Label: 'Home',
         tab1Icon: 'ion-ios-home-outline',
         tabbarIndex: 0,
@@ -52,8 +51,8 @@
     },
 
     methods: {
-      log: function(msg) {
-        console.log(msg, this.test)
+      log: function(...args) {
+        console.log(...args)
       }
     }
 	};

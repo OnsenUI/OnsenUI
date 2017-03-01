@@ -1,5 +1,5 @@
 <template>
-  <ons-tabbar>
+  <ons-tabbar :activeIndex="index">
     <div class="tabbar__content">
       <slot name="pages"></slot>
     </div>
@@ -13,7 +13,31 @@
   import { deriveEvents, hasOptions, hidable, selfProvider } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, hasOptions, hidable, selfProvider]
+    mixins: [deriveEvents, hasOptions, hidable, selfProvider],
+
+    props: {
+      index: {
+        type: Number
+      }
+    },
+
+    methods: {
+      _action() {
+        if (this.index !== this.$el.getActiveTabIndex()) {
+          this.$el.setActiveTab(this.index, this.options);
+        }
+      }
+    },
+
+    watch: {
+      index() {
+        this._action();
+      }
+    },
+
+    mounted() {
+      this.$on('postchange', event => this.$emit('change', event.index));
+    }
   };
 </script>
 
