@@ -17,25 +17,18 @@
       }
     },
 
-    methods: {
-      _action() {
-        this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
-      }
-    },
-
     watch: {
       active() {
-        if (this.active === true) {
-          this.$el.setActive();
-        } else {
-          this.$el.setInactive();
-        }
+        this.active ? this.$el.setActive() : this.$el.setInactive();
       }
     },
 
     mounted() {
       this.$el.onClick = () => {
-        const id = setTimeout(() => this._action(), 0);
+        const id = setTimeout(() => {
+          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
+        }, 0);
+
         this.$emit('click', {
           preventDefault: () => clearTimeout(id)
         });

@@ -21,17 +21,11 @@
       }
     },
 
-    methods: {
-      _action() {
+    watch: {
+      index() {
         if (this.index !== this.$el.getActiveTabIndex()) {
           this.$el.setActiveTab(this.index, this.options);
         }
-      }
-    },
-
-    watch: {
-      index() {
-        this._action();
       }
     },
 

@@ -12,17 +12,12 @@
 
     inject: ['navigator'],
 
-    methods: {
-      _action() {
-        if (this.navigator && this.navigator.pageStack) {
-          this.navigator.pageStack.pop();
-        }
-      }
-    },
-
     mounted() {
       this.$el.onClick = () => {
-        const id = setTimeout(() => this._action(), 0);
+        const id = setTimeout(() => {
+          this.navigator.pageStack.pop();
+        }, 0);
+
         this.$emit('click', {
           preventDefault: () => clearTimeout(id)
         });
