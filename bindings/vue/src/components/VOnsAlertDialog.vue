@@ -36,21 +36,6 @@
           return true;
         }
       }
-    },
-
-    methods: {
-      _addButtonClasses: function() {
-        if (!this.$slots.hasOwnProperty('footer')) return;
-        this.$slots.footer.forEach(el => el.data && (el.data.staticClass = (el.data.staticClass || '') + ' alert-dialog-button'));
-      }
-    },
-
-    beforeMount() {
-      this._addButtonClasses();
-    },
-
-    beforeUpdate() {
-      this._addButtonClasses();
     }
   };
 </script>
