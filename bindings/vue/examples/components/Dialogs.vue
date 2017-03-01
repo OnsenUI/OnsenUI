@@ -85,23 +85,23 @@
       </v-ons-list-item>
     </v-ons-list>
 
-    <v-ons-dialog
-      :on-device-back-button="() => {}"
-      @preshow="log('preshow!!')"
-      @postshow="log('postshow!!')"
-      @prehide="log('prehide!!')"
-      @posthide="log('posthide!!')"
-      @cancel="dialogVisible = false; log('canceled!!'); "
+    <v-ons-dialog cancelable
       :visible="dialogVisible"
+      @dialog-cancel="dialogVisible = false; log('canceled'); "
+      @deviceBackButton="log('device back button')"
+      @preshow="log('preshow')"
+      @postshow="log('postshow')"
+      @prehide="log('prehide')"
+      @posthide="log('posthide')"
     >
       Lorem ipsum
       <button @click="dialogVisible = !dialogVisible">toggle</button>
     </v-ons-dialog>
 
-    <v-ons-alert-dialog
+    <v-ons-alert-dialog cancelable
       modifier="rowfooter"
-      @cancel="alertDialog1Visible = false; log('canceled!!'); "
       :visible="alertDialog1Visible"
+      @dialog-cancel="alertDialog1Visible = false; log('canceled'); "
     >
       <span slot="title">Title slots</span>
       Lorem ipsum
@@ -112,12 +112,12 @@
       </template>
     </v-ons-alert-dialog>
 
-    <v-ons-alert-dialog
+    <v-ons-alert-dialog cancelable
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      @cancel="alertDialog2Visible = false; log('canceled!!'); "
       :visible="alertDialog2Visible"
+      @dialog-cancel="alertDialog2Visible = false; log('canceled'); "
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
@@ -131,13 +131,13 @@
     </v-ons-modal>
 
     <v-ons-popover cancelable
-      @preshow="log('preshow!!')"
-      @postshow="log('postshow!!')"
-      @prehide="log('prehide!!')"
-      @posthide="log('posthide!!')"
       :target="$refs.myToolbarButton"
-      @cancel="popoverVisible = false; log('canceled!!'); "
       :visible="popoverVisible"
+      @dialog-cancel="popoverVisible = false; log('canceled'); "
+      @preshow="log('preshow')"
+      @postshow="log('postshow')"
+      @prehide="log('prehide')"
+      @posthide="log('posthide')"
     >
       Lorem ipsum
       <button @click="popoverVisible = !popoverVisible">toggle</button>
