@@ -230,12 +230,12 @@
       <div class="toolbar__center">
         <div class="button-bar" style="width:200px;margin:7px 50px;">
           <div class="button-bar__item">
-            <input type="radio" name="navi-segment-a" checked>
+            <input type="radio" class="button-bar__input" name="navi-segment-a" checked>
             <div class="button-bar__button">One</div>
           </div>
 
           <div class="button-bar__item">
-            <input type="radio" name="navi-segment-a">
+            <input type="radio" class="button-bar__input" name="navi-segment-a">
             <div class="button-bar__button">Two</div>
           </div>
         </div>
