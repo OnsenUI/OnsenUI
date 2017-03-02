@@ -30,19 +30,13 @@ const install = (Vue, params = {}) => {
    * Note: This affects every Vue instance.
    */
   Vue.mixin({
-    beforeMount() {
-      // When this beforeMount hook is called, this.$el has not yet replaced by Vue.
-      // So we can detect whether or not any custom elements exist in the template of the Vue instance.
-      if (this.$el) { // if vm.$mount is called with no arguments, this.$el will be undefined
-        // count ons-* elements in this.$el
-        const countOfOnsElements = Array.prototype.slice.call(this.$el.querySelectorAll('*')).filter(
-          (element) => {
-            return /^ons-.+/i.test(element.tagName); // Note: in HTML document, Element#tagName returns a capitalized tag name
-          }
-        ).length;
+    beforeCreate() {
+      if (this.$options.template) {
+        const match = this.$options.template.match(/<(ons-[\w-]+)/im);
+        if (match) {
+          const componentName = this.$options._componentTag;
 
-        if (countOfOnsElements > 0) {
-          console.error(`[vue-onsenui] Vue templates must not contain ons-* elements directly.`);
+          ons._util.warn(`[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n`, `<${match[1]}> element found near index ${match.index}${componentName ? ' in component <' + componentName + '>' : ''}. Please use <v-${match[1]}> instead:\n\n${this.$options.template}`);
         }
       }
     }
