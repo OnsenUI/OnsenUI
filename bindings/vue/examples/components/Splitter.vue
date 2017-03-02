@@ -7,7 +7,7 @@
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
-        @swipe="splitterOpen = $event; log('swipe')"
+        @update="splitterOpen = $event"
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"
@@ -30,7 +30,7 @@
 <script>
   const log = (...args) => console.log(...args);
 
-  let pageSide = {
+  const pageSide = {
     template: `
       <v-ons-page>
         <v-ons-list>
@@ -50,7 +50,7 @@
     }
   };
 
-  let pageContent = {
+  const pageContent = {
     template: `
      <v-ons-page>
       <v-ons-toolbar>
@@ -113,7 +113,7 @@
     props: ['isOpen', 'toggleMenu', 'sideState']
   };
 
-  let pageContent2 = {
+  const pageContent2 = {
     template: `
       <v-ons-page>
         <v-ons-toolbar>
@@ -124,11 +124,7 @@
         <v-ons-button @click="splitter.content.load(pageContent)">splitter.content.load(pageContent)</v-ons-button>
       </v-ons-page>
     `,
-    methods: {
-      log: function() {
-        console.log(...arguments);
-      }
-    },
+    methods: { log },
     props: ['pageContent']
   };
 

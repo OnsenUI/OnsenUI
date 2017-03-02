@@ -33,7 +33,7 @@
     },
 
     mounted() {
-      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('swipe', this.$el.isOpen));
+      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen));
 
       this.action();
     }

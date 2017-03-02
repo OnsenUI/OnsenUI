@@ -1,5 +1,5 @@
 <template>
-  <ons-carousel :initial-index="index" @postchange="$emit('swipe', $event.activeIndex)">
+  <ons-carousel :initial-index="index" @postchange="$emit('update', $event.activeIndex)">
     <slot></slot>
   </ons-carousel>
 </template>
