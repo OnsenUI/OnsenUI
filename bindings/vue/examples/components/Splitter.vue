@@ -3,7 +3,7 @@
     <v-ons-splitter>
       <v-ons-splitter-side
         :open="splitterOpen"
-        :swipeable="true"
+        :swipeable="state.swipeable"
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
@@ -151,7 +151,7 @@
     },
 
     methods: {
-      toggleMenu: function() {
+      toggleMenu() {
         this.splitterOpen = !this.splitterOpen;
       },
       log

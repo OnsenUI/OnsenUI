@@ -151,7 +151,7 @@
 
 <script>
 	export default {
-    data: function() {
+    data() {
       return {
         dialogVisible: false,
         alertDialog1Visible: false,
@@ -161,7 +161,7 @@
       }
     },
     methods: {
-      log: function() {
+      log() {
         console.log(...arguments);
       }
     }

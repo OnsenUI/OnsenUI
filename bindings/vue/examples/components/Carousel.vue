@@ -22,7 +22,7 @@
 
 <script>
 	export default {
-    data: function() {
+    data() {
       return {
         carouselIndex: 1,
         items: {
@@ -43,7 +43,7 @@
     },
 
     methods: {
-      log: function(msg) {
+      log(msg) {
         console.log(msg);
       }
     }

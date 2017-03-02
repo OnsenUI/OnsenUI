@@ -33,11 +33,11 @@
     `,
     methods: {
       log,
-      replace: function() {
+      replace() {
         this.pageStack.pop();
         this.pageStack.push(page1);
       },
-      reset: function() {
+      reset() {
         this.pageStack.splice(1, this.pageStack.length - 1);
       }
     },
@@ -55,7 +55,7 @@
     `,
     methods: {
       log,
-      push: function() {
+      push() {
         this.pageStack.push(page3);
         this.pageStack.push(page3);
         this.pageStack.push(page3);
@@ -81,7 +81,7 @@
     `,
     methods: {
       log,
-      push: function() {
+      push() {
         this.pageStack.push(page2)
       }
     },
@@ -92,7 +92,7 @@
   };
 
 	export default {
-    data: function() {
+    data() {
       return {
         pageStack: [page1]
       };

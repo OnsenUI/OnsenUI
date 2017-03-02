@@ -35,7 +35,7 @@
   };
 
 	export default {
-    data: function() {
+    data() {
       return {
         tab1Label: 'Home',
         tab1Icon: 'ion-ios-home-outline',
@@ -50,8 +50,8 @@
     },
 
     methods: {
-      log: function(...args) {
-        console.log(...args)
+      log(...args) {
+        console.log(...args);
       }
     }
 	};

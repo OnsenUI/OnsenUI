@@ -19,8 +19,8 @@
       @toggle="speedDialOpen = $event"
       position="bottom left"
       direction="up"
-      @open="log('open!!')"
-      @close="log('close!!')"
+      @open="log('open')"
+      @close="log('close')"
     >
       <v-ons-fab :visible="speedDialVisible">
         <v-ons-icon icon="md-share"></v-ons-icon>
@@ -47,7 +47,7 @@
 
 <script>
 	export default {
-    data: function() {
+    data() {
       return {
         fabVisible: true,
         speedDialVisible: true,
@@ -55,7 +55,7 @@
       };
     },
     methods: {
-      log: function() {
+      log() {
         console.log(...arguments);
       }
     }

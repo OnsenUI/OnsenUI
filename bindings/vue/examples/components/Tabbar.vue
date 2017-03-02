@@ -37,7 +37,7 @@
   };
 
 	export default {
-    data: function() {
+    data() {
       return {
         tabbarIndex: 0,
         tabbarVisibility: true,
@@ -63,7 +63,7 @@
     },
 
     methods: {
-      log: function(...args) {
+      log(...args) {
         console.log(...args)
       }
     }
