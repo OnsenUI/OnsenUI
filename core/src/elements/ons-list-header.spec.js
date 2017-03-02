@@ -5,28 +5,28 @@ describe('ons-list-header', () => {
     expect(window.ons.ListHeaderElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'list__header\' by default', () => {
+  onlyChrome(it)('classList contains \'list-header\' by default', () => {
     const element = new ons.ListHeaderElement();
-    expect(element.classList.contains('list__header')).to.be.true;
+    expect(element.classList.contains('list-header')).to.be.true;
     element.setAttribute('class', 'foo');
-    expect(element.classList.contains('list__header')).to.be.true;
+    expect(element.classList.contains('list-header')).to.be.true;
     expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides modifier attribute', () => {
     const element = new ons.ListHeaderElement();
     element.setAttribute('modifier', 'hoge');
-    expect(element.classList.contains('list__header--hoge')).to.be.true;
+    expect(element.classList.contains('list-header--hoge')).to.be.true;
 
     element.setAttribute('modifier', ' foo bar');
-    expect(element.classList.contains('list__header--foo')).to.be.true;
-    expect(element.classList.contains('list__header--bar')).to.be.true;
-    expect(element.classList.contains('list__header--hoge')).not.to.be.true;
+    expect(element.classList.contains('list-header--foo')).to.be.true;
+    expect(element.classList.contains('list-header--bar')).to.be.true;
+    expect(element.classList.contains('list-header--hoge')).not.to.be.true;
 
-    element.classList.add('list__header--piyo');
+    element.classList.add('list-header--piyo');
     element.setAttribute('modifier', 'fuga');
-    expect(element.classList.contains('list__header--piyo')).to.be.true;
-    expect(element.classList.contains('list__header--fuga')).to.be.true;
+    expect(element.classList.contains('list-header--piyo')).to.be.true;
+    expect(element.classList.contains('list-header--fuga')).to.be.true;
   });
 
   describe('#_compile()', () => {

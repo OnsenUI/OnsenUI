@@ -21,17 +21,17 @@ import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 import contentReady from '../ons/content-ready';
 
-const defaultClassName = 'list__item';
+const defaultClassName = 'list-item';
 const scheme = {
-  '.list__item': 'list__item--*',
-  '.list__item__left': 'list__item--*__left',
-  '.list__item__center': 'list__item--*__center',
-  '.list__item__right': 'list__item--*__right',
-  '.list__item__label': 'list__item--*__label',
-  '.list__item__title': 'list__item--*__title',
-  '.list__item__subtitle': 'list__item--*__subtitle',
-  '.list__item__thumbnail': 'list__item--*__thumbnail',
-  '.list__item__icon': 'list__item--*__icon'
+  '.list-item': 'list-item--*',
+  '.list-item__left': 'list-item--*__left',
+  '.list-item__center': 'list-item--*__center',
+  '.list-item__right': 'list-item--*__right',
+  '.list-item__label': 'list-item--*__label',
+  '.list-item__title': 'list-item--*__title',
+  '.list-item__subtitle': 'list-item--*__subtitle',
+  '.list-item__thumbnail': 'list-item--*__thumbnail',
+  '.list-item__icon': 'list-item--*__icon'
 };
 
 /**
@@ -66,7 +66,7 @@ const scheme = {
  *     </ons-list-item>
  *     ```
  *
- *     There is also a number of classes (prefixed with `list__item__*`) that help when putting things like icons and thumbnails into the list items.
+ *     There is also a number of classes (prefixed with `list-item__*`) that help when putting things like icons and thumbnails into the list items.
  *   [/en]
  *   [ja][/ja]
  * @seealso ons-list
@@ -83,11 +83,11 @@ const scheme = {
  * @example
  * <ons-list-item>
  *   <div class="left">
- *     <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
+ *     <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
  *   </div>
  *   <div class="center">
- *     <div class="list__item__title">Title</div>
- *     <div class="list__item__subtitle">Subtitle</div>
+ *     <div class="list-item__title">Title</div>
+ *     <div class="list-item__subtitle">Subtitle</div>
  *   </div>
  *   <div class="right">
  *     <ons-switch></ons-switch>
@@ -143,14 +143,14 @@ export default class ListItemElement extends BaseElement {
       const el = this.children[i];
 
       if (el.classList.contains('left')) {
-        el.classList.add('list__item__left');
+        el.classList.add('list-item__left');
         left = el;
       }
       else if (el.classList.contains('center')) {
         center = el;
       }
       else if (el.classList.contains('right')) {
-        el.classList.add('list__item__right');
+        el.classList.add('list-item__right');
         right = el;
       }
     }
@@ -175,7 +175,7 @@ export default class ListItemElement extends BaseElement {
     }
 
     center.classList.add('center');
-    center.classList.add('list__item__center');
+    center.classList.add('list-item__center');
 
     this._updateRipple();
 

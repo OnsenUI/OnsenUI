@@ -7,8 +7,7 @@
   --list-border: 1px solid var(--list-item-separator-color);
   --list-item-min-height: 44px;
   --list-item-margin: 1px 0 -1px 0;
-  --list-item-padding: 0 0 0 14px;
-  --list-header-padding: 20px 0 0 15px;
+  --list-item-padding: 0 0 0 14px; --list-header-padding: 20px 0 0 15px;
   --list-header-min-height: 24px;
   --list-header-font-weight: var(--font-weight--large);
   --list-header-text-shadow: none;
@@ -28,7 +27,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  --list__header: {
+  --list-header: {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -37,7 +36,7 @@
     box-sizing: border-box;
   }
 
-  --list__item: {
+  --list-item: {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -93,19 +92,19 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">Dog</div>
+      <li class="list-item">
+        <div class="list-item__center">Dog</div>
       </li>
-      <li class="list__item">
-        <div class="list__item__center">Cat</div>
+      <li class="list-item">
+        <div class="list-item__center">Cat</div>
       </li>
-      <li class="list__item">
-        <div class="list__item__center">Hamster</div>
+      <li class="list-item">
+        <div class="list-item__center">Hamster</div>
       </li>
     </ul>
 */
 
-.list__item__left {
+.list-item__left {
   box-sizing: border-box;
   display: flex;
   padding: 12px 14px 12px 0;
@@ -116,14 +115,14 @@
   min-height: var(--list-item-min-height);
 }
 
-.list__item__left:empty {
+.list-item__left:empty {
   width: 0;
   min-width: 0;
   padding: 0;
   margin: 0;
 }
 
-.list__item__center {
+.list-item__center {
   box-sizing: border-box;
   display: flex;
   flex-grow: 1;
@@ -140,7 +139,7 @@
   min-height: var(--list-item-min-height);
 }
 
-.list__item__right {
+.list-item__right {
   box-sizing: border-box;
   display: flex;
   margin-left: auto;
@@ -153,8 +152,8 @@
   min-height: var(--list-item-min-height);
 }
 
-.list__header {
-  @apply(--list__header);
+.list-header {
+  @apply(--list-header);
   padding: var(--list-header-padding);
   font-size: var(--list-header-font-size);
   font-weight: var(--list-header-font-weight);
@@ -170,7 +169,7 @@
   position: relative;
 }
 
-.list__header:not(:first-of-type) {
+.list-header:not(:first-of-type) {
   border-top: var(--list-border);
 }
 
@@ -180,20 +179,20 @@
   overflow: hidden;
 }
 
-.list__item {
-  @apply(--list__item);
+.list-item {
+  @apply(--list-item);
   padding: var(--list-item-padding);
   margin: var(--list-item-margin);
   color: var(--list-item-color);
   background-color: var(--list-background-color);
 }
 
-.list__item:first-child {
+.list-item:first-child {
   box-shadow: inset 0px 1px 0px 0px var(--list-item-separator-color);
   margin-top: 0;
 }
 
-.list__item_active:active {
+.list-item_active:active {
   background-color: var(--list-item-active-background-color);
   transition: none;
 }
@@ -204,11 +203,11 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--noborder">
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
       </li>
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
       </li>
     </ul>
  */
@@ -219,7 +218,7 @@
   background-image: none;
 }
 
-.list--noborder .list__item:first-child { /* FIXME */
+.list--noborder .list-item:first-child { /* FIXME */
   box-shadow: none;
 }
 
@@ -229,11 +228,11 @@
   elements: ons-list ons-list-header ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__header">
+      <li class="list-header">
         Header
       </li>
-      <li class="list__item">
-        <div class="list__item__center">Item</div>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
       </li>
     </ul>
  */
@@ -244,13 +243,13 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item list__item--tappable">
-        <div class="list__item__center">Tappable Item</div>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
       </li>
     </ul>
  */
 
-.list__item--tappable:active {
+.list-item--tappable:active {
   background-color: var(--list-item-active-background-color);
 }
 
@@ -260,11 +259,11 @@
   elements: ons-list ons-list-item ons-switch
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           Label
         </div>
-        <div class="list__item__right">
+        <div class="list-item__right">
           <label class="switch">
             <input type="checkbox" class="switch__input" checked>
             <div class="switch__toggle">
@@ -273,11 +272,11 @@
           </label>
         </div>
       </li>
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           Label
         </div>
-        <div class="list__item__right">
+        <div class="list-item__right">
           <label class="switch">
             <input type="checkbox" class="switch__input">
             <div class="switch__toggle">
@@ -295,25 +294,25 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item list__item--chevron">
-        <div class="list__item__center">Item A</div>
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item A</div>
       </li>
-      <li class="list__item list__item--chevron">
-        <div class="list__item__center">Item B</div>
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item B</div>
       </li>
     </ul>
  */
 
-.list__item--chevron {
+.list-item--chevron {
   transition: background-color 0.2s linear;
   overflow: hidden;
 }
 
-.list__item--chevron:hover {
+.list-item--chevron:hover {
   transition: none;
 }
 
-.list__item--chevron:before {
+.list-item--chevron:before {
   display: flex;
   align-items: center;
   color: var(--list-item-separator-color);
@@ -340,11 +339,11 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--inset">
-      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
-        <div class="list__item__center">List Item with Chevron</div>
+      <li class="list-item list--inset__item list-item--chevron list-item--tappable">
+        <div class="list-item__center">List Item with Chevron</div>
       </li>
-      <li class="list__item list--inset__item list__item--chevron list__item--tappable">
-        <div class="list__item__center">List Item with Chevron</div>
+      <li class="list-item list--inset__item list-item--chevron list-item--tappable">
+        <div class="list-item__center">List Item with Chevron</div>
       </li>
     </ul>
  */
@@ -357,7 +356,7 @@
   background-image: none;
 }
 
-.list--inset > .list__item:first-child { /* FIXME */
+.list--inset > .list-item:first-child { /* FIXME */
   box-shadow: none;
 }
 
@@ -367,25 +366,25 @@
   elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="radio-button">
             <input type="radio" id="r1" class="radio-button__input" name="r" checked="checked">
             <div class="radio-button__checkmark"></div>
           </label>
         </div>
-        <label for="r1" class="list__item__center">
+        <label for="r1" class="list-item__center">
           Radio Button
         </label>
       </li>
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="radio-button">
             <input type="radio" id="r2" class="radio-button__input" name="r">
             <div class="radio-button__checkmark"></div>
           </label>
         </div>
-        <label for="r2" class="list__item__center">
+        <label for="r2" class="list-item__center">
           Radio Button
         </label>
       </li>
@@ -398,25 +397,25 @@
   elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="checkbox">
             <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
             <div class="checkbox__checkmark"></div>
           </label>
         </div>
-        <label for="checkbox1" class="list__item__center">
+        <label for="checkbox1" class="list-item__center">
           Checkbox
         </label>
       </li>
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="checkbox">
             <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
             <div class="checkbox__checkmark"></div>
           </label>
         </div>
-        <label for="checkbox2" class="list__item__center">
+        <label for="checkbox2" class="list-item__center">
           Checkbox
         </label>
       </li>
@@ -429,25 +428,25 @@
   elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="checkbox checkbox--noborder">
             <input id="s1" type="checkbox" class="checkbox__input checkbox--noborder__input">
             <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           </label>
         </div>
-        <label for="s1" class="list__item__center">
+        <label for="s1" class="list-item__center">
           Checkbox
         </label>
       </li>
-      <li class="list__item list__item--tappable">
-        <div class="list__item__left">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
           <label class="checkbox checkbox--noborder">
             <input id="s2" type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
             <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
           </label>
         </div>
-        <label for="s2" class="list__item__center">
+        <label for="s2" class="list-item__center">
           Checkbox
         </label>
       </li>
@@ -460,13 +459,13 @@
   elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           <input type="text" class="text-input" placeholder="Name">
         </div>
       </li>
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           <input type="text" class="text-input" placeholder="Email">
         </div>
       </li>
@@ -479,8 +478,8 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
         </div>
       </li>
@@ -493,18 +492,18 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
+      <li class="list-item">
+        <div class="list-item__center">
           Title
         </div>
-        <div class="list__item__right">
-          <div class="list__item__label">Label</div>
+        <div class="list-item__right">
+          <div class="list-item__label">Label</div>
         </div>
       </li>
     </ul>
 */
 
-.list__item__label {
+.list-item__label {
   font-size: var(--font-size--mini);
   padding: 0 4px;
   opacity: 0.6;
@@ -516,12 +515,12 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__center">
-          <div class="list__item__title">
+      <li class="list-item">
+        <div class="list-item__center">
+          <div class="list-item__title">
             Title
           </div>
-          <div class="list__item__subtitle">
+          <div class="list-item__subtitle">
             Subtitle
           </div>
         </div>
@@ -529,13 +528,13 @@
     </ul>
 */
 
-.list__item__title {
+.list-item__title {
   flex-basis: 100%;
   align-self: flex-end;
   order: 0;
 }
 
-.list__item__subtitle {
+.list-item__subtitle {
   opacity: 0.75;
   font-size: var(--font-size--mini);
   order: 1;
@@ -549,31 +548,31 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__left">
-          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
         </div>
 
-        <div class="list__item__center">
-          <div class="list__item__title">Lily</div>
-          <div class="list__item__subtitle">Very friendly cat</div>
+        <div class="list-item__center">
+          <div class="list-item__title">Lily</div>
+          <div class="list-item__subtitle">Very friendly cat</div>
         </div>
       </li>
 
-      <li class="list__item">
-        <div class="list__item__left">
-          <img class="list__item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
         </div>
 
-        <div class="list__item__center">
-          <div class="list__item__title">Molly</div>
-          <div class="list__item__subtitle">Loves tuna!</div>
+        <div class="list-item__center">
+          <div class="list-item__title">Molly</div>
+          <div class="list-item__subtitle">Loves tuna!</div>
         </div>
       </li>
     </ul>
 */
 
-.list__item__thumbnail {
+.list-item__thumbnail {
   width: 40px;
   height: 40px;
   border-radius: 6px;
@@ -587,37 +586,37 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list__item">
-        <div class="list__item__left">
-          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
-        <div class="list__item__center">
-          <div class="list__item__title">Alice</div>
+        <div class="list-item__center">
+          <div class="list-item__title">Alice</div>
         </div>
 
-        <div class="list__item__right">
-          <i class="ion-ios-information list__item__icon"></i>
+        <div class="list-item__right">
+          <i class="ion-ios-information list-item__icon"></i>
         </div>
       </li>
 
-      <li class="list__item">
-        <div class="list__item__left">
-          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
-        <div class="list__item__center">
-          <div class="list__item__title">Bob</div>
+        <div class="list-item__center">
+          <div class="list-item__title">Bob</div>
         </div>
 
-        <div class="list__item__right">
-          <i class="ion-ios-information list__item__icon"></i>
+        <div class="list-item__right">
+          <i class="ion-ios-information list-item__icon"></i>
         </div>
       </li>
     </ul>
 */
 
-.list__item__icon {
+.list-item__icon {
   font-size: 22px;
   padding: 0 6px;
 }
@@ -628,16 +627,16 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Orange</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Orange</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Sweet fruit that grows on trees.</div>
         </div>
       </li>
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Pear</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Funny-shaped fruit.</div>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Pear</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Funny-shaped fruit.</div>
         </div>
       </li>
     </ul>
@@ -648,36 +647,36 @@
   border: 0;
 }
 
-.list__item--material {
+.list-item--material {
   border: 0;
   padding: var(--material-list-item-padding);
   line-height: normal;
 }
 
-.list__item--material__subtitle {
+.list-item--material__subtitle {
   margin-top: 4px;
 }
 
-.list__item--material:first-child {
+.list-item--material:first-child {
   box-shadow: none;
 }
 
-.list__item--material__left {
+.list-item--material__left {
   padding: 14px 0;
   min-width: 56px;
   line-height: 1;
   min-height: var(--material-list-item-min-height);
 }
 
-.list__item--material__left:empty,
-.list__item--material__center {
+.list-item--material__left:empty,
+.list-item--material__center {
   padding: 14px 6px 14px 0;
   border-color: var(--material-list-item-separator-color);
   @apply(--retina-material-list-item-border);
   min-height: var(--material-list-item-min-height);
 }
 
-.list__item--material__right {
+.list-item--material__right {
   padding: 14px 16px 14px 0px;
   line-height: 1;
   border-color: var(--material-list-item-separator-color);
@@ -685,7 +684,7 @@
   min-height: var(--material-list-item-min-height);
 }
 
-.list__item--material.list__item--longdivider {
+.list-item--material.list-item--longdivider {
   border-bottom: 1px solid var(--material-list-item-separator-color);
   @apply(--retina-material-list-item-border);
 }
@@ -696,19 +695,19 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--material">
-      <li class="list__header list__header--material">
+      <li class="list-header list-header--material">
         Fruits
       </li>
-      <li class="list__item list__item--material">
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Orange</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Orange</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Sweet fruit that grows on trees.</div>
         </div>
       </li>
     </ul>
 */
 
-.list__header--material {
+.list-header--material {
   background: var(--list-background-color);
   border: none;
   font-size: 14px;
@@ -719,7 +718,7 @@
   padding: 8px 16px;
 }
 
-.list__header--material:not(:first-of-type) {
+.list-header--material:not(:first-of-type) {
   border-top: 1px solid var(--material-list-item-separator-color);
   padding-top: 16px;
 }
@@ -730,31 +729,31 @@
   elements: ons-list ons-list-item ons-input
   markup: |
     <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
           <label class="checkbox checkbox--material">
             <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox3" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Notifications</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Allow notifications</div>
+        <label for="checkbox3" class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Notifications</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Allow notifications</div>
         </label>
       </li>
 
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
           <label class="checkbox checkbox--material">
             <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
           </label>
         </div>
 
-        <label for="checkbox4" class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Sound</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Hangouts message</div>
+        <label for="checkbox4" class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Sound</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Hangouts message</div>
         </label>
       </li>
 
@@ -766,32 +765,32 @@
   category: List
   markup: |
     <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/42/41" alt="Cute kitten">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="http://placekitten.com/g/42/41" alt="Cute kitten">
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Lily</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Very friendly cat</div>
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
         </div>
       </li>
 
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="http://placekitten.com/g/40/40" alt="Cute kitten">
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Molly</div>
-          <div class="list__item__subtitle list__item--material__subtitle">Loves tuna!</div>
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
         </div>
       </li>
 
     </ul>
 */
 
-.list__item--material__thumbnail {
+.list-item--material__thumbnail {
   width: 40px;
   height: 40px;
   border-radius: 100%;
@@ -802,37 +801,37 @@
   category: List
   markup: |
     <ul class="list list--material">
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Alice</div>
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Alice</div>
         </div>
 
-        <div class="list__item__right list__item--material__right">
-          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        <div class="list-item__right list-item--material__right">
+          <i style="color:#4db6ac" class="list-item__icon list-item--material__icon zmdi zmdi-comment"></i>
         </div>
       </li>
 
-      <li class="list__item list__item--material">
-        <div class="list__item__left list__item--material__left">
-          <img class="list__item__thumbnail list__item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
-        <div class="list__item__center list__item--material__center">
-          <div class="list__item__title list__item--material__title">Bob</div>
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Bob</div>
         </div>
 
-        <div class="list__item__right list__item--material__right">
-          <i style="color:#4db6ac" class="list__item__icon list__item--material__icon zmdi zmdi-comment"></i>
+        <div class="list-item__right list-item--material__right">
+          <i style="color:#4db6ac" class="list-item__icon list-item--material__icon zmdi zmdi-comment"></i>
         </div>
       </li>
     </ul>
 */
 
-.list__item--material__icon {
+.list-item--material__icon {
   font-size: 20px;
   padding: 0 4px;
 }
@@ -842,25 +841,25 @@
   category: List
   markup: |
     <ul class="list">
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
+      <li class="list-item list-item--nodivider">
+        <div class="list-item__center list-item--nodivider__center">Item</div>
       </li>
-      <li class="list__item list__item--nodivider">
-        <div class="list__item__center list__item--nodivider__center">Item</div>
+      <li class="list-item list-item--nodivider">
+        <div class="list-item__center list-item--nodivider__center">Item</div>
       </li>
     </ul>
  */
-.list__item--nodivider__center {
+.list-item--nodivider__center {
   border: none;
   background-image: none;
 }
 
-.list__item--nodivider__right {
+.list-item--nodivider__right {
   border: none;
   background-image: none;
 }
 
-.list__item--nodivider.list__item--chevron:before { /* FIXME */
+.list-item--nodivider.list-item--chevron:before { /* FIXME */
   border: none;
   background-image: none;
 }
@@ -870,35 +869,35 @@
   category: List
   markup: |
     <ul class="list">
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
+      <li class="list-item list-item--longdivider">
+        <div class="list-item__center list-item--longdivider__center">Item</div>
       </li>
-      <li class="list__item list__item--longdivider">
-        <div class="list__item__center list__item--longdivider__center">Item</div>
+      <li class="list-item list-item--longdivider">
+        <div class="list-item__center list-item--longdivider__center">Item</div>
       </li>
     </ul>
  */
-.list__item--longdivider {
+.list-item--longdivider {
   border-bottom: var(--list-border);
   @apply(--retina-list-item-border);
 }
 
-.list__item--longdivider:last-of-type {
+.list-item--longdivider:last-of-type {
   border: none;
   background-image: none;
 }
 
-.list__item--longdivider__center {
+.list-item--longdivider__center {
   border: none;
   background-image: none;
 }
 
-.list__item--longdivider__right {
+.list-item--longdivider__right {
   border: none;
   background-image: none;
 }
 
-.list__item--longdivider.list__item--chevron:before { /* FIXME */
+.list-item--longdivider.list-item--chevron:before { /* FIXME */
   border: none;
   background-image: none;
 }

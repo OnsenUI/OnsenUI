@@ -13,27 +13,27 @@ describe('OnsListItemElement', () => {
     expect(window.ons.ListItemElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'list__item\' by default', () => {
+  onlyChrome(it)('classList contains \'list-item\' by default', () => {
     const element = ons._util.createElement('<ons-list-item>content</ons-list-item>');
-    expect(element.classList.contains('list__item')).to.be.true;
+    expect(element.classList.contains('list-item')).to.be.true;
     element.setAttribute('class', 'foo');
-    expect(element.classList.contains('list__item')).to.be.true;
+    expect(element.classList.contains('list-item')).to.be.true;
     expect(element.classList.contains('foo')).to.be.true;
   });
 
   onlyChrome(it)('provides modifier attribute', () => {
     listItem.setAttribute('modifier', 'hoge');
-    expect(listItem.classList.contains('list__item--hoge')).to.be.true;
+    expect(listItem.classList.contains('list-item--hoge')).to.be.true;
 
     listItem.setAttribute('modifier', ' foo bar');
-    expect(listItem.classList.contains('list__item--foo')).to.be.true;
-    expect(listItem.classList.contains('list__item--bar')).to.be.true;
-    expect(listItem.classList.contains('list__item--hoge')).not.to.be.true;
+    expect(listItem.classList.contains('list-item--foo')).to.be.true;
+    expect(listItem.classList.contains('list-item--bar')).to.be.true;
+    expect(listItem.classList.contains('list-item--hoge')).not.to.be.true;
 
-    listItem.classList.add('list__item--piyo');
+    listItem.classList.add('list-item--piyo');
     listItem.setAttribute('modifier', 'fuga');
-    expect(listItem.classList.contains('list__item--piyo')).to.be.true;
-    expect(listItem.classList.contains('list__item--fuga')).to.be.true;
+    expect(listItem.classList.contains('list-item--piyo')).to.be.true;
+    expect(listItem.classList.contains('list-item--fuga')).to.be.true;
   });
 
   describe('#_onDrag()', () => {
