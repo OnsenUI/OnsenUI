@@ -27,8 +27,8 @@
       <v-ons-page p3>
         <my-toolbar>Page 3</my-toolbar>
         Page 3
-        <ons-button @click="replace">Replace with first page</ons-button>
-        <ons-button @click="reset">Reset to first page</ons-button>
+        <v-ons-button @click="replace">Replace with first page</v-ons-button>
+        <v-ons-button @click="reset">Reset to first page</v-ons-button>
       </v-ons-page>
     `,
     methods: {
@@ -50,7 +50,7 @@
       <v-ons-page p2>
         <my-toolbar>Page 2</my-toolbar>
         Page 2
-        <ons-button @click="push">Push 3 pages</ons-button>
+        <v-ons-button @click="push">Push 3 pages</v-ons-button>
       </v-ons-page>
     `,
     methods: {
@@ -76,7 +76,7 @@
       <v-ons-page p1>
         <my-toolbar>Page 1</my-toolbar>
         Page 1
-        <ons-button @click="push">Push</ons-button>
+        <v-ons-button @click="push">Push</v-ons-button>
       </v-ons-page>
     `,
     methods: {
