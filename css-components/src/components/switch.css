@@ -6,6 +6,20 @@
   --switch-thumb-border-color-active: var(--switch-highlight-color);
   --switch-height: 32px;
   --switch-width: 51px;
+
+  --switch: {
+    @apply(--inline-block);
+    @apply(--reset-box-model);
+    @apply(--hide-input-parent);
+    min-width: 51px;
+  }
+
+  --switch__toggle: {
+    @apply(--inline-block);
+    @apply(--reset-box-model);
+    @apply(--reset-base);
+    @apply(--reset-cursor);
+  }
 }
 
 /*!
@@ -32,23 +46,6 @@
       </div>
     </label>
 */
-
-:root {
-  --switch: {
-    @apply(--inline-block);
-    @apply(--reset-box-model);
-    @apply(--hide-input-parent);
-    min-width: 51px;
-  }
-
-  --switch__toggle: {
-    @apply(--inline-block);
-    @apply(--reset-box-model);
-    @apply(--reset-base);
-    @apply(--reset-cursor);
-  }
-}
-
 
 .switch {
   @apply(--switch);
@@ -99,23 +96,21 @@
   box-shadow: 0 0 0 1px #E4E4E4, 0 3px 2px rgba(0, 0, 0, 0.25);
 }
 
-/* FIXME */
-.switch--active .switch__handle {
-  transition-duration: 0s;
+.switch--active__handle {
+  transition: none !important;
 }
 
-input:checked + .switch__toggle {
+:checked + .switch__toggle {
   box-shadow: inset 0 0 0 2px var(--switch-checked-background-color);
   background-color: var(--switch-checked-background-color);
 }
 
-/* FIXME */
-input:checked + .switch__toggle .switch__handle {
+:checked + .switch__toggle > .switch__handle {
   left: 21px;
   box-shadow: 0 3px 2px rgba(0,0,0,0.25);
 }
 
-input:disabled + .switch__toggle {
+:disabled + .switch__toggle {
   @apply(--disabled);
 }
 
@@ -162,22 +157,19 @@ input:disabled + .switch__toggle {
   min-width: 36px;
 }
 
-/* FIXME */
-.switch--material .switch__toggle {
+.switch--material__toggle {
   background-color: var(--material-switch-inactive-background-color);
   margin-top: 5px;
   height: 14px;
   box-shadow: none;
 }
 
-/* FIXME */
-.switch--material .switch__input {
+.switch--material__input {
   @apply(--hide-input);
   z-index: -1;
 }
 
-/* FIXME */
-.switch--material .switch__handle {
+.switch--material__handle {
   background-color: var(--material-switch-inactive-thumb-color);
   left: 0px;
   margin-top: -5px;
@@ -186,26 +178,22 @@ input:disabled + .switch__toggle {
   @apply(--material-shadow-2);
 }
 
-/* FIXME */
-.switch--material input:checked + .switch__toggle {
+:checked + .switch--material__toggle {
   background-color: var(--material-switch-active-background-color);
   box-shadow: none;
 }
 
-/* FIXME */
-.switch--material input:checked + .switch__toggle .switch__handle {
+:checked + .switch--material__toggle > .switch--material__handle {
   left: 16px;
   background-color: var(--material-switch-active-thumb-color);
   @apply(--material-shadow-1);
 }
 
-/* FIXME */
-.switch--material input:disabled + .switch__toggle {
+:disabled + .switch--material__toggle {
   @apply(--disabled);
 }
 
-/* FIXME */
-.switch--material .switch__handle:before {
+.switch--material__handle:before {
   background: transparent;
   content: '';
   display: block;
@@ -217,18 +205,15 @@ input:disabled + .switch__toggle {
   transition: box-shadow 0.1s linear;
 }
 
-/* FIXME */
-.switch--material.switch--active .switch__handle:before {
+.switch--material__toggle > .switch--active__handle:before {
   box-shadow: 0px 0px 0px 14px rgba(0, 0, 0, 0.12);
 }
 
-/* FIXME */
-.switch--material.switch--active input:checked + .switch__toggle .switch__handle:before {
+:checked + .switch--material__toggle > .switch--active__handle:before {
   box-shadow: 0px 0px 0px 14px alpha(var(--material-switch-active-thumb-color), 0.2);
 }
 
-/* FIXME */
-.switch--material .switch__touch {
+.switch--material__touch {
   position: absolute;
   top: -10px;
   bottom: -10px;
