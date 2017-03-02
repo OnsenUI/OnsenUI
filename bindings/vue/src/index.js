@@ -27,20 +27,23 @@ const install = (Vue, params = {}) => {
    * Apply a mixin globally to prevent ons-* elements
    * from being included directly in Vue instance templates.
    *
-   * Note: This affects every Vue instance.
+   * Note: This affects every Vue instance only when warns
+   * are allowed by Vue.
    */
-  Vue.mixin({
-    beforeCreate() {
-      if (this.$options.template) {
-        const match = this.$options.template.match(/<(ons-[\w-]+)/im);
-        if (match) {
-          const componentName = this.$options._componentTag;
+  if (!Vue.config.silent) {
+    Vue.mixin({
+      beforeCreate() {
+        if (this.$options.template) {
+          const match = this.$options.template.match(/<(ons-[\w-]+)/im);
 
-          ons._util.warn(`[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n`, `<${match[1]}> element found near index ${match.index}${componentName ? ' in component <' + componentName + '>' : ''}. Please use <v-${match[1]}> instead:\n\n${this.$options.template}`);
+          if (match) {
+            const componentName = this.$options._componentTag;
+            ons._util.warn(`[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n`, `<${match[1]}> element found near index ${match.index}${componentName ? ' in component <' + componentName + '>' : ''}. Please use <v-${match[1]}> instead:\n\n${this.$options.template}`);
+          }
         }
       }
-    }
-  });
+    });
+  }
 
   /**
    * Expose ons object.
