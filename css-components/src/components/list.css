@@ -6,48 +6,17 @@
   --list-header-font-size: 12px;
   --list-border: 1px solid var(--list-item-separator-color);
   --list-item-min-height: 44px;
-  --list-item-margin: 1px 0 -1px 0;
-  --list-item-padding: 0 0 0 14px; --list-header-padding: 20px 0 0 15px;
+  --list-item-margin: 0 0 -1px 0;
+  --list-item-padding: 0 0 0 14px;
+  --list-header-padding: 0 0 0 15px;
   --list-header-min-height: 24px;
   --list-header-font-weight: var(--font-weight--large);
-  --list-header-text-shadow: none;
   --list-border-top: 1px solid var(--list-item-separator-color);
   --list-border-bottom: 1px solid var(--list-item-separator-color);
   --material-list-item-min-height: 48px;
   --material-list-item-padding: 0 0 0 16px;
   --material-list-item-separator-color: #eee;
-
-  --list: {
-    @apply(--reset-base);
-    @apply(--reset-cursor);
-    @apply(--reset-font);
-    @apply(--reset-list);
-    overflow: auto;
-    display: block;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  --list-header: {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: left;
-    display: block;
-    box-sizing: border-box;
-  }
-
-  --list-item: {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: relative;
-    list-style: none;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
+  --inset-list-border: 1px solid var(--list-item-separator-color);
 
   --retina-list-item-border: {
     border-bottom: none;
@@ -104,6 +73,47 @@
     </ul>
 */
 
+.list {
+  @apply(--reset-base);
+  @apply(--reset-cursor);
+  @apply(--reset-font);
+  @apply(--reset-list);
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  background-image:
+    linear-gradient(var(--list-item-separator-color), var(--list-item-separator-color)),
+    linear-gradient(var(--list-item-separator-color), var(--list-item-separator-color));
+  background-size: 100% 1px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom, top;
+  border: none;
+  background-color: var(--list-background-color);
+
+  @media (--retina-query) {
+    background-image:
+      linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%),
+      linear-gradient(180deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: var(--list-item-padding);
+  margin: var(--list-item-margin);
+  color: var(--list-item-color);
+  transition: background-color 0.2s linear;
+}
+
 .list-item__left {
   box-sizing: border-box;
   display: flex;
@@ -153,48 +163,33 @@
 }
 
 .list-header {
-  @apply(--list-header);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  box-sizing: border-box;
   padding: var(--list-header-padding);
   font-size: var(--list-header-font-size);
   font-weight: var(--list-header-font-weight);
   color: var(--list-header-color);
-  text-shadow: var(--list-header-text-shadow);
-  border-top: none;
-  border-bottom: var(--list-border);
-  box-shadow: 0 1px 0 0 var(--list-background-color);
   min-height: var(--list-header-min-height);
-  line-height: var(--list-header-min-height);
-  margin-top: -1px;
+  line-height: calc(1px + var(--list-header-min-height));
   text-transform: uppercase;
   position: relative;
+
+  background-color: var(--list-header-background-color);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+  @media (--retina-query) {
+    background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  };
 }
 
 .list-header:not(:first-of-type) {
   border-top: var(--list-border);
-}
-
-.list {
-  @apply(--list);
-  border-bottom: var(--list-border-bottom);
-  overflow: hidden;
-}
-
-.list-item {
-  @apply(--list-item);
-  padding: var(--list-item-padding);
-  margin: var(--list-item-margin);
-  color: var(--list-item-color);
-  background-color: var(--list-background-color);
-}
-
-.list-item:first-child {
-  box-shadow: inset 0px 1px 0px 0px var(--list-item-separator-color);
-  margin-top: 0;
-}
-
-.list-item_active:active {
-  background-color: var(--list-item-active-background-color);
-  transition: none;
 }
 
 /*!
@@ -203,10 +198,10 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--noborder">
-      <li class="list-item">
+      <li class="list-item list-item--noborder">
         <div class="list-item__center">Item</div>
       </li>
-      <li class="list-item">
+      <li class="list-item list-item--noborder">
         <div class="list-item__center">Item</div>
       </li>
     </ul>
@@ -218,10 +213,6 @@
   background-image: none;
 }
 
-.list--noborder .list-item:first-child { /* FIXME */
-  box-shadow: none;
-}
-
 /*!
   name: Category List Header
   category: List
@@ -230,6 +221,12 @@
     <ul class="list">
       <li class="list-header">
         Header
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
       </li>
       <li class="list-item">
         <div class="list-item__center">Item</div>
@@ -246,10 +243,17 @@
       <li class="list-item list-item--tappable">
         <div class="list-item__center">Tappable Item</div>
       </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
+      </li>
     </ul>
  */
 
 .list-item--tappable:active {
+  transition: none;
   background-color: var(--list-item-active-background-color);
 }
 
@@ -304,7 +308,6 @@
  */
 
 .list-item--chevron {
-  transition: background-color 0.2s linear;
   overflow: hidden;
 }
 
@@ -349,15 +352,10 @@
  */
 
 .list--inset {
-  margin-left: 8px;
-  margin-right: 8px;
-  border: 1px solid var(--list-item-separator-color);
+  margin: 0 8px;
+  border: var(--inset-list-border);
   border-radius: 4px;
   background-image: none;
-}
-
-.list--inset > .list-item:first-child { /* FIXME */
-  box-shadow: none;
 }
 
 /*!
@@ -644,7 +642,7 @@
 
 .list--material {
   @apply(--material-font);
-  border: 0;
+  background-image: none;
 }
 
 .list-item--material {
@@ -855,11 +853,6 @@
 }
 
 .list-item--nodivider__right {
-  border: none;
-  background-image: none;
-}
-
-.list-item--nodivider.list-item--chevron:before { /* FIXME */
   border: none;
   background-image: none;
 }
