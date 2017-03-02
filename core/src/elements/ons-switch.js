@@ -256,20 +256,20 @@ export default class SwitchElement extends BaseElement {
 
   _onHold(e) {
     if (!this.disabled) {
-      this.classList.add('switch--active');
+      ModifierUtil.addModifier(this, 'active');
       document.addEventListener('release', this._boundOnRelease);
     }
   }
 
   _onDragStart(e) {
     if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
-      this.classList.remove('switch--active');
+      ModifierUtil.removeModifier(this, 'active');
       return;
     }
 
     e.stopPropagation();
 
-    this.classList.add('switch--active');
+    ModifierUtil.addModifier(this, 'active');
     this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
 
     this.addEventListener('drag', this._onDrag);
@@ -300,7 +300,7 @@ export default class SwitchElement extends BaseElement {
     document.removeEventListener('release', this._boundOnRelease);
 
     this._handle.style.left = '';
-    this.classList.remove('switch--active');
+    ModifierUtil.removeModifier(this, 'active');
   }
 
   static get observedAttributes() {
