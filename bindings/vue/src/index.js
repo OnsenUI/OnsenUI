@@ -37,8 +37,11 @@ const install = (Vue, params = {}) => {
           const match = this.$options.template.match(/<(ons-[\w-]+)/im);
 
           if (match) {
-            const componentName = this.$options._componentTag;
-            ons._util.warn(`[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n`, `<${match[1]}> element found near index ${match.index}${componentName ? ' in component <' + componentName + '>' : ''}. Please use <v-${match[1]}> instead:\n\n${this.$options.template}`);
+            const location = this.$options._componentTag ? ` in component <${this.$options._componentTag}>` : '';
+            ons._util.warn('[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n' +
+              `<${match[1]}> element found near index ${match.index}${location}. Please use <v-${match[1]}> instead:
+              ${this.$options.template}`
+            );
           }
         }
       }
