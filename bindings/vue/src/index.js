@@ -49,14 +49,26 @@ const install = (Vue, params = {}) => {
   });
 
   /**
-   * Expose notification methods.
+   * Expose ons object.
    */
-  Vue.prototype.$notification = ons.notification;
-
-  /**
-   * Expose platform methods.
-   */
-  Vue.prototype.$platform = ons.platform;
+  Vue.prototype.$ons = Object.keys(ons)
+    .filter(k => [
+      /^enable/,
+      /^disable/,
+      /^set/,
+      /animit/,
+      /Element$/,
+      /fastClick/,
+      /GestureDetector/,
+      /notification/,
+      /orientation/,
+      /platform/,
+      /ready/,
+    ].some(t => k.match(t)))
+    .reduce((r, k) => {
+      r[k] = ons[k];
+      return r;
+    }, { _ons: ons });
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

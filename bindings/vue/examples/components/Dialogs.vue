@@ -9,7 +9,7 @@
       <v-ons-list-header>Notifications</v-ons-list-header>
       <v-ons-list-item
         tappable
-        @click="$notification.alert('Hello, world!')"
+        @click="$ons.notification.alert('Hello, world!')"
       >
         <div class="center">
           Alert
@@ -17,7 +17,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="$notification.confirm('Do you like Onsen UI?')"
+        @click="$ons.notification.confirm('Do you like Onsen UI?')"
       >
         <div class="center">
           Confirmation
@@ -25,7 +25,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="$notification.prompt('What is your name?')"
+        @click="$ons.notification.prompt('What is your name?')"
       >
         <div class="center">
           Prompt
