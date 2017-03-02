@@ -5,10 +5,15 @@ import { createComputedPropertiesFor } from '../internal/optionsObjectHelper';
 const deriveEvents = {
   mounted() {
     this._handlers = {};
-    this._boundEvents = this.$el.constructor.__proto__.events || ['click'];
+    this._boundEvents = this.$el.constructor.__proto__.events || [];
 
     this._boundEvents.forEach(key => {
-      this._handlers[eventToHandler(key)] = event => this.$emit(key, event);
+      this._handlers[eventToHandler(key)] = event => {
+        // Filter events from different components with the same name
+        if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
+          this.$emit(key, event);
+        }
+      };
       this.$el.addEventListener(key, this._handlers[eventToHandler(key)]);
     });
   },

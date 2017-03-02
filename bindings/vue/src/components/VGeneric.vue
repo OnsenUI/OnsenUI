@@ -1,5 +1,5 @@
 <template>
-  <div :is="$options._componentTag.slice(2)">
+  <div :is="$options._componentTag.slice(2)" @click="$emit('click', $event)">
     <slot></slot>
   </div>
 </template>
