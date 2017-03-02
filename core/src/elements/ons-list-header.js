@@ -20,8 +20,8 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from '../ons/base-element';
 
-const defaultClassName = 'list__header';
-const scheme = {'': 'list__header--*'};
+const defaultClassName = 'list-header';
+const scheme = {'': 'list-header--*'};
 
 /**
  * @element ons-list-header
