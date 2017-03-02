@@ -85,6 +85,8 @@ export default class RangeElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+
+    this._updateDisabled();
   }
 
   _onChange() {
@@ -108,16 +110,26 @@ export default class RangeElement extends BaseElement {
     return ['class', 'modifier', ...INPUT_ATTRIBUTES];
   }
 
+  _updateDisabled() {
+    if (this.hasAttribute('disabled')) {
+      ModifierUtil.addModifier(this, 'disabled');
+    } else {
+      ModifierUtil.removeModifier(this, 'disabled');
+    }
+  }
+
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'class') {
+    } else if (name === 'class') {
       if (!this.classList.contains(defaultClassName)) {
         this.className = defaultClassName + ' ' + current;
       }
+    } else if (name === 'disabled') {
+      this._updateDisabled();
     }
-    else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
+
+    if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       contentReady(this, () => {
         this._updateBoundAttributes();
 

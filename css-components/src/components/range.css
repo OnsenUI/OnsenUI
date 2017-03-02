@@ -62,7 +62,7 @@
       <input type="range" class="range__input">
     </div>
 
-    <div class="range">
+    <div class="range range--disabled">
       <input type="range" class="range__input" disabled>
     </div>
 */
@@ -141,9 +141,11 @@
 }
 
 .range__input:disabled {
-  @apply(--disabled);
 }
 
+.range--disabled {
+  @apply(--disabled);
+}
 
 /*!
   name: Material Range
@@ -154,7 +156,7 @@
       <input type="range" class="range__input range--material__input">
     </div>
 
-    <div class="range range--material">
+    <div class="range range--material range--disabled">
       <input type="range" class="range__input range--material__input" disabled>
     </div>
 */
