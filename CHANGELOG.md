@@ -15,6 +15,8 @@ dev
  * angular1: Add `onsSelect` directive working with `ngModel`.
  * angular1: `number input` retains number type variable with `ngModel`.
  * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
+ * css-components: Refactored `range` components.
+ * ons-range: Changed internal DOM structure.
 
 ### BREAKING CHANGES
 

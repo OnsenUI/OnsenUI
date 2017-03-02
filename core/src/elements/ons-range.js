@@ -17,15 +17,12 @@ import BaseElement from '../ons/base-element';
 import util from '../ons/util';
 import contentReady from '../ons/content-ready';
 
-const scheme = {
-  '.range': 'range--*',
-  '.range__left': 'range--*__left'
-};
+const defaultClassName = 'range';
 
-const templateSource = util.createElement(`<div>
-  <div class="range__left"></div>
-  <input type="range" class="range">
-</div>`);
+const scheme = {
+  '': 'range--*',
+  '.range__input': 'range--*__input'
+};
 
 const INPUT_ATTRIBUTES = [
   'autofocus',
@@ -76,20 +73,22 @@ export default class RangeElement extends BaseElement {
   }
 
   _compile() {
+    this.classList.add(defaultClassName);
+
     autoStyle.prepare(this);
 
-    if (!(util.findChild(this, '.range__left') && util.findChild(this, 'input'))) {
-      const template = templateSource.cloneNode(true);
-      while (template.children[0]) {
-        this.appendChild(template.children[0]);
-      }
+    if (!util.findChild(this, '.range__input')) {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'range');
+      input.classList.add('range__input');
+      this.appendChild(input);
     }
 
     ModifierUtil.initModifier(this, scheme);
   }
 
   _onChange() {
-    this._left.style.width = (100 * this._ratio) + '%';
+    this._input.style.backgroundSize = (100 * this._ratio) + '% 2px';
   }
 
   _onDragstart(e) {
@@ -106,12 +105,17 @@ export default class RangeElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', ...INPUT_ATTRIBUTES];
+    return ['class', 'modifier', ...INPUT_ATTRIBUTES];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
       ModifierUtil.onModifierChanged(last, current, this, scheme);
+    }
+    else if (name === 'class') {
+      if (!this.classList.contains(defaultClassName)) {
+        this.className = defaultClassName + ' ' + current;
+      }
     }
     else if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
       contentReady(this, () => {
@@ -146,11 +150,7 @@ export default class RangeElement extends BaseElement {
   }
 
   get _input() {
-    return this.querySelector('input');
-  }
-
-  get _left() {
-    return this.querySelector('.range__left');
+    return this.querySelector('input.range__input');
   }
 
   /**
