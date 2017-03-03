@@ -1,7 +1,0 @@
-npm_modules
-examples
-src/**/*.js
-src/**/*.js.map
-src/*.js
-src/*.js.map
-npm-debug.log
