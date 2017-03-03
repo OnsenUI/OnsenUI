@@ -29,8 +29,10 @@ dev
 ### BREAKING CHANGES
 
  * css-components: Dropped all stylus and rebuild css-components with cssnext.
- * css-components: Renamed ".tab-bar" to ".tabbar".
- * css-components: Renamed ".navigation-bar" to ".toolbar".
+ * css-components: Renamed `.tab-bar` to `.tabbar`.
+ * css-components: Renamed `.navigation-bar` to `.toolbar`.
+ * css-components: Renamed `.list__item` to `.list-item`.
+ * css-components: Renamed `.list__header` to `.list-header`.
  * ons-tabbar: loadPage method has been deprecated.
  * ons-popover: Changed internal DOM structure.
  * ons-range: Changed internal DOM structure.
