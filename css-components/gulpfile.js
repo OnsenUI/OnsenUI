@@ -8,9 +8,10 @@ const $ = require('gulp-load-plugins')();
 const eco = require('eco');
 const fs = require('fs');
 const ancss = require('ancss');
-const prefix = __dirname + '/../build/css/';
 const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
+
+const prefix = __dirname + '/../build/css/';
 
 ////////////////////////////////////////
 // build
@@ -18,9 +19,20 @@ const cssnext = require('postcss-cssnext');
 gulp.task('build', ['generate-preview']);
 
 ////////////////////////////////////////
+// stylelint
+////////////////////////////////////////
+gulp.task('stylelint', () => {
+  return gulp.src('./src/**/*.css')
+    .pipe($.stylelint({
+      failAfterError: true,
+      reporters: [{formatter: 'string', console: true}]
+    }));
+});
+
+////////////////////////////////////////
 // cssnext
 ////////////////////////////////////////
-gulp.task('cssnext', () => {
+gulp.task('cssnext', ['stylelint'], () => {
   const plugins = [
     require('postcss-import'),
     cssnext({
