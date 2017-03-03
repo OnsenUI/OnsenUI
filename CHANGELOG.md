@@ -7,8 +7,8 @@ dev
 
 ### New Features
 
- * ons-switch: Supports 'value' attribute.
- * ons-tab: Supports 'active-icon' attribute.
+ * ons-switch: Supports `value` attribute.
+ * ons-tab: Supports `active-icon` attribute.
  * ons-lazy-repeat: Support for dynamic height.
  * angular1: Add `onsSelect` directive working with `ngModel`.
 
