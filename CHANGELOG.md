@@ -21,11 +21,10 @@ dev
 
 ### Misc
 
+ * css-components: Refactored `range` components.
  * ons-template: Show warning when ons-template is not located just under document.body.
  * ons-navigator: Added deprecate warning for `options.refresh`.
  * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
- * css-components: Refactored `range` components.
- * ons-range: Changed internal DOM structure.
 
 ### BREAKING CHANGES
 
@@ -34,6 +33,7 @@ dev
  * css-components: Renamed ".navigation-bar" to ".toolbar".
  * ons-tabbar: loadPage method has been deprecated.
  * ons-popover: Changed internal DOM structure.
+ * ons-range: Changed internal DOM structure.
 
 v2.1.0
 ----
