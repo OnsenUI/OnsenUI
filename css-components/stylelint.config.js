@@ -8,7 +8,7 @@ module.exports = {
     'color-no-invalid-hex': true,
 
     // Font
-    'font-family-name-quotes': 'always-where-required',
+    'font-family-name-quotes': 'always-unless-keyword',
     'font-family-no-duplicate-names': true,
     'font-weight-notation': 'numeric',
 
@@ -59,7 +59,7 @@ module.exports = {
     // Value list
     'value-list-comma-newline-after': null,
     'value-list-comma-newline-after': null,
-    'value-list-comma-space-after': 'always',
+    'value-list-comma-space-after': 'always-single-line',
     'value-list-comma-space-before': 'never',
     'value-list-max-empty-lines': 0,
 
@@ -68,7 +68,7 @@ module.exports = {
     'custom-property-pattern': null,
 
     // Shorthand property
-    'shorthand-property-no-redundant-values': true,
+    'shorthand-property-no-redundant-values': null,
 
     // Property
     'property-blacklist': null,
@@ -84,7 +84,7 @@ module.exports = {
     'declaration-bang-space-after': 'never',
     'declaration-bang-space-before': 'always',
     'declaration-colon-newline-after': null,
-    'declaration-colon-space-after': 'always',
+    'declaration-colon-space-after': 'always-single-line',
     'declaration-colon-space-before': 'never',
     'declaration-empty-line-before': null,
     'declaration-no-important': true,
@@ -129,13 +129,13 @@ module.exports = {
     'selector-descendant-combinator-no-non-space': true,
     'selector-id-pattern': null,
     'selector-max-compound-selectors': 3,
-    'selector-max-specificity': '0,1,1', // FIXME
+    'selector-max-specificity': '0,3,3', // FIXME
     'selector-nested-pattern': null,
-    'selector-no-attribute': true,
-    'selector-no-combinator': true,
+    'selector-no-attribute': null,
+    'selector-no-combinator': null, // FIXME
     'selector-no-id': true,
     'selector-no-qualifying-type': true,
-    'selector-no-type': true,
+    'selector-no-type': null,
     'selector-no-universal': true,
     'selector-no-vendor-prefix': true, // FIXME
     'selector-pseudo-class-blacklist': null,
@@ -151,7 +151,7 @@ module.exports = {
     'selector-max-empty-lines': 0,
 
     // Rule
-    'rule-empty-line-before': 'always',
+    'rule-empty-line-before': ['always', {except: ['after-single-line-comment', 'first-nested']}],
 
     // Media feature
     'media-feature-colon-space-after': 'always',
@@ -176,7 +176,7 @@ module.exports = {
 
     // At-rule
     'at-rule-blacklist': null,
-    'at-rule-empty-line-before': 'always',
+    'at-rule-empty-line-before': null,
     'at-rule-name-case': 'lower',
     'at-rule-name-newline-after': null,
     'at-rule-name-space-after': 'always',

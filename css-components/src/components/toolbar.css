@@ -89,11 +89,9 @@
 .toolbar__item {
   @apply(--toolbar__item);
   height: var(--toolbar-height);
-  vertical-align: top;
   overflow: visible;
   display: block;
   vertical-align: middle;
-  float: left;
 }
 
 .toolbar__left {
@@ -190,6 +188,7 @@
       <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
 */
+
 .bottom-bar {
   @apply(--toolbar);
   display: block;
@@ -203,9 +202,9 @@
   border-bottom: none;
   border-top: var(--toolbar-separator);
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
+  bottom: 0;
+  right: 0;
+  left: 0;
   @apply(--retina-toolbar-top-border);
 }
 
@@ -261,7 +260,7 @@
   justify-content: space-between;
   height: var(--toolbar-material-height);
   border-bottom: 0;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   padding: 0;
   background-color: var(--material-toolbar-background-color);
   background-size: 0;
@@ -298,7 +297,6 @@
   height: var(--toolbar-material-height);
   min-width: 72px;
   width: auto;
-  float: initial;
   line-height: var(--toolbar-material-height);
 }
 
@@ -310,7 +308,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
-  float: initial;
   line-height: var(--toolbar-material-height);
 }
 
@@ -325,7 +322,6 @@
 .toolbar--material__left:empty, .toolbar--material__right:empty {
   min-width: 16px;
 }
-
 
 /*!
   name: Material Toolbar with Icons

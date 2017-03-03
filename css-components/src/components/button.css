@@ -41,7 +41,7 @@
     color: var(--button-text-color);
     vertical-align: middle;
     background-color: var(--button-background-color);
-    border: 0px solid currentColor;
+    border: 0 solid currentColor;
     border-radius: var(--button-border-radius);
     transition: none;
   }
@@ -50,12 +50,28 @@
     outline: 0;
   }
 
-  --button--active {
+  --button--active: {
     background-color: var(--button-background-color);
     transition: none;
     opacity: var(--button-active-opacity);
   }
 
+  --button--material: {
+    @apply(--button);
+    @apply(--material-shadow-1);
+    @apply(--material-font);
+    min-height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+    font-size: 14px;
+    transform: translate3d(0, 0, 0);
+    text-transform: uppercase;
+    background-color: var(--material-button-background-color);
+    color: var(--material-button-text-color);
+    font-weight: 500;
+  }
 }
 
 /*!
@@ -122,6 +138,7 @@
     <button class="button button--light">Button</button>
     <button class="button button--light" disabled>Button</button>
 */
+
 .button--light {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.4);
@@ -210,7 +227,6 @@
   @apply(--button--disabled);
 }
 
-
 /*!
   name: Large Button
   category: Button
@@ -288,7 +304,6 @@
   outline: 0;
 }
 
-
 /*!
   name: Large Call To Action Button
   category: Button
@@ -339,25 +354,6 @@
     <button class="button button--material">BUTTON</button>
     <button class="button button--material" disabled>DISABLED</button>
 */
-
-:root {
-  --button--material: {
-    @apply(--button);
-    @apply(--material-shadow-1);
-    @apply(--material-font);
-    min-height: 36px;
-    line-height: 36px;
-    padding: 0px 16px;
-    transition: box-shadow 0.2s ease;
-    text-align: center;
-    font-size: 14px;
-    transform: translate3d(0, 0, 0);
-    text-transform: uppercase;
-    background-color: var(--material-button-background-color);
-    color: var(--material-button-text-color);
-    font-weight: 500;
-  }
-}
 
 .button--material {
   @apply(--button--material);

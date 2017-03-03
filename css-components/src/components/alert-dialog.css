@@ -7,7 +7,7 @@
       background-repeat: no-repeat;
       background-position: top;
       background-image: linear-gradient(180deg, var(--alert-dialog-separator-color), var(--alert-dialog-separator-color) 50%, transparent 50%);
-    };
+    }
   }
 }
 
@@ -31,6 +31,7 @@
       </div>
     </div>
 */
+
 .alert-dialog {
   @apply(--reset-box-model);
   @apply(--reset-base);
@@ -41,7 +42,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 270px;
-  margin: auto auto;
+  margin: auto;
   background-color: var(--alert-dialog-background-color);
   border-radius: 8px;
   overflow: visible;
@@ -59,14 +60,14 @@
   @apply(--reset-font);
   font-size: var(--font-size--large);
   font-weight: var(--font-weight--large);
-  padding: 0px 8px 0px 8px;
+  padding: 0 8px;
   text-align: center;
   color: var(--alert-dialog-text-color);
 }
 
 .alert-dialog-content {
   @apply(--reset-box-model);
-  padding: 4px 12px 8px 12px;
+  padding: 4px 12px 8px;
   font-size: var(--font-size--mini);
   min-height: 36px;
   text-align: center;
@@ -88,7 +89,7 @@
   vertical-align: middle;
   border: none;
   border-top: 1px solid var(--alert-dialog-separator-color);
-  font-size: calc(var(--font-size) - 1)px;
+  font-size: calc(var(--font-size) - 1px);
   padding: 0 8px;
   margin: 0;
   display: block;
@@ -109,7 +110,7 @@
 .alert-dialog-button--primal {
   font-weight: var(--font-weight--large);
 }
-  
+
 .alert-dialog-footer--rowfooter {
   white-space: nowrap;
   display: flex;
@@ -272,7 +273,7 @@
 
 .alert-dialog-footer--material {
   display: inline-block;
-  padding: 0px 8px 0px 24px;
+  padding: 0 8px 0 24px;
   box-sizing: border-box;
 }
 

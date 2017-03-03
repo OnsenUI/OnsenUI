@@ -95,15 +95,14 @@
     </div>
 */
 
-
 .tabbar {
   @apply(--reset-font);
   display: table;
   table-layout: fixed;
   position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   white-space: nowrap;
   margin: 0;
   padding: 0;
@@ -156,7 +155,7 @@
   padding: 0;
   margin: 0;
   line-height: 26px;
-  display: block !important;
+  display: block !important; /* stylelint-disable-line declaration-no-important */
   height: 28px;
 }
 
@@ -186,10 +185,6 @@
   line-height: var(--tabbar-button-line-height);
   margin: 0;
   padding: 0;
-}
-
-.tabbar__button {
-  color: var(--tabbar-button-color);
 }
 
 :checked + .tabbar__button {
@@ -281,9 +276,9 @@
 
 .tabbar--top {
   position: relative;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: auto;
   border-top: none;
   border-bottom: var(--tabbar-border-top);
@@ -376,8 +371,11 @@
 
 .tabbar--material {
   background-color: var(--material-tabbar-background-color);
-  border-bottom-width: 0px;
-  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
+  border-bottom-width: 0;
+  box-shadow:
+    0 4px 2px -2px rgba(0, 0, 0, 0.14),
+    0 3px 5px -2px rgba(0, 0, 0, 0.12),
+    0 5px 1px -4px rgba(0, 0, 0, 0.2);
 }
 
 .tabbar--material__button {
@@ -444,7 +442,7 @@
 */
 
 .tabbar--material__icon {
-  font-size: 22px !important;
+  font-size: 22px !important; /* stylelint-disable-line declaration-no-important */
   line-height: 36px;
 }
 

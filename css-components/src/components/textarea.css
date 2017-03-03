@@ -36,9 +36,7 @@
   @apply(--disabled);
 }
 
-.textarea::-webkit-input-placeholder,
-.textarea::-moz-placeholder,
-.textarea:-ms-input-placeholder {
+.textarea::placeholder {
   color: var(--input-placeholder-color);
 }
 
@@ -75,8 +73,6 @@
   @apply(--disabled);
 }
 
-.textarea--transparent::-webkit-input-placeholder,
-.textarea--transparent::-moz-placeholder,
-.textarea--transparent:-ms-input-placeholder {
+.textarea--transparent::placeholder {
   color: var(--input-placeholder-color);
 }

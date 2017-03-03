@@ -25,7 +25,7 @@
     @apply(--transparent);
   }
 
-  --webkit-input-placeholder: {
+  --input-placeholder: {
     @apply(--transparent);
     color: var(--input-placeholder-color);
   }
@@ -56,10 +56,11 @@
   @apply(--select-input);
 }
 
-.select-input::-webkit-input-placeholder,
-.select-input::-moz-placeholder,
-.select-input::-ms-input-placeholder,
-.select-input:-ms-input-placeholder {
+.select-input::-ms-clear {
+  display: none;
+}
+
+.select-input::placeholder {
   color: var(--input-placeholder-color);
 }
 
@@ -67,15 +68,8 @@
   @apply(--select-input--disabled);
 }
 
-.select-input:disabled::-webkit-input-placeholder,
-.select-input:disabled::-moz-placeholder,
-.select-input:disabled::-ms-input-placeholder,
-.select-input:disabled:-ms-input-placeholder {
-  @apply(--webkit-input-placeholder);
-}
-
-.select-input::-ms-clear {
-  display: none;
+.select-input:disabled::placeholder {
+  @apply(--input-placeholder);
 }
 
 .select-input:invalid {
@@ -119,7 +113,7 @@
   @apply(--material-font);
   color: var(--material-select-input-inactive-color);
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 2px;
   font-size: 16px;
   pointer-events: none;
@@ -138,21 +132,15 @@
   border-radius: 0;
 }
 
-.select-input--material::-webkit-input-placeholder,
-.select-input--material::-moz-placeholder,
-.select-input--material::-ms-input-placeholder,
-.select-input--material:-ms-input-placeholder {
+.select-input--material::placeholder {
   @apply(--select-input--material-placeholder);
-}
-
-.select-input--material::-ms-clear {
-  display: none;
 }
 
 @keyframes material-select-input-animate {
   0% {
     background-size: 0% 2px, 100% 2px;
   }
+
   100% {
     background-size: 100% 2px, 100% 2px;
   }
@@ -174,7 +162,7 @@
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--select-input-border-color);
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .select-input--underbar:disabled {
@@ -184,11 +172,8 @@
   border-bottom: 1px solid var(--select-input-border-color);
 }
 
-.select-input--underbar:disabled::-webkit-input-placeholder,
-.select-input--underbar:disabled::-moz-placeholder,
-.select-input--underbar:disabled::-ms-input-placeholder,
-.select-input--underbar:disabled:-ms-input-placeholder {
-  @apply(--webkit-input-placeholder);
+.select-input--underbar:disabled::placeholder {
+  @apply(--input-placeholder);
   border: none;
   background-color: transparent;
 }

@@ -22,7 +22,7 @@
   position: relative;
   width: 32px;
   transform: rotate(270deg);
-  animatino: none;
+  animation: none;
 }
 
 .progress-circular__primary,
@@ -65,12 +65,14 @@
 @keyframes progress__dash {
   0% {
     stroke-dasharray: 10%, 241.32%;
-    stroke-dashoffset: 0%;
+    stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 201%, 50.322%;
-    stroke-dashoffset: -100.0%;
+    stroke-dashoffset: -100%;
   }
+
   100% {
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
