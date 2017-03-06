@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import { eventToHandler } from '../internal/util';
-import { getHandlers } from '../internal/optionsObjectHelper';
 
 /* Private */
-const _dbb = 'onDeviceBackButton';
-const _getEventName = name => name.slice(2).charAt(0).toLowerCase() + name.slice(2).slice(1);
-const _setupDBB = component => {
-  // Call original handler or parent handler by default
-  const handler = (component.$el[_dbb] && component.$el[_dbb]._callback) || (e => e.callParentHandler());
+const _handlerToProp = name => name.slice(2).charAt(0).toLowerCase() + name.slice(2).slice(1);
 
-  component.$el[_dbb] = event => {
+const _setupDBB = component => {
+  const dbb = 'onDeviceBackButton';
+  // Call original handler or parent handler by default
+  const handler = (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
+
+  component.$el[dbb] = event => {
     const id = setTimeout(handler.bind(component.$el, event), 0);
-    component.$emit(_getEventName(_dbb), {
+    component.$emit(_handlerToProp(dbb), {
       ...event,
       preventDefault: () => clearTimeout(id)
     });
@@ -21,15 +21,10 @@ const _setupDBB = component => {
 };
 
 /* Public */
-const deriveHandlers = {
+// Device Back Button Handler
+const deriveDBB = {
   mounted() {
-    getHandlers(this.$el.constructor.__proto__).forEach(prop => {
-      if (prop === _dbb) {
-        _setupDBB(this);
-      } else if (!this.$el[prop]) {
-        this.$el[prop] = (...args) => this.$emit(_getEventName(prop), ...args);
-      }
-    });
+    _setupDBB(this);
   },
 
   // Core destroys deviceBackButton handlers on disconnectedCallback.
@@ -37,9 +32,34 @@ const deriveHandlers = {
   activated() {
     this._isDBBSetup === false && _setupDBB(this);
   },
+
   deactivated() {
     this._isDBBSetup === true && (this._isDBBSetup = false);
   }
+};
+
+// These handlers cannot throw events for performance reasons.
+const deriveHandler = handlerName => {
+  const propName = _handlerToProp(handlerName);
+
+  return {
+    props: {
+      [propName]: {
+        type: Function,
+        default: null
+      }
+    },
+
+    watch: {
+      [propName]() {
+        this.$el[handlerName] = this[propName];
+      }
+    },
+
+    mounted() {
+      this[propName] && (this.$el[handlerName] = this[propName]);
+    }
+  };
 };
 
 const deriveEvents = {
@@ -66,4 +86,4 @@ const deriveEvents = {
   }
 };
 
-export { deriveEvents, deriveHandlers };
+export { deriveDBB, deriveHandler, deriveEvents };

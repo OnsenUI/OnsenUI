@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-pull-hook
-      @action="onAction"
+      :action="onAction"
       @changestate="state = $event.state"
     >
       <span v-show="state === 'initial'">

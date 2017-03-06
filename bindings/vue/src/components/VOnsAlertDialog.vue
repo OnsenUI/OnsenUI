@@ -15,10 +15,10 @@
 </template>
 
 <script>
-  import { hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveHandlers } from '../mixins';
+  import { hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
-    mixins: [hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveHandlers],
+    mixins: [hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB],
 
     props: {
       title: {
