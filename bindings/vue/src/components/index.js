@@ -7,6 +7,7 @@ export { default as VOnsTabbar } from './VOnsTabbar.vue';
 export { default as VOnsBackButton } from './VOnsBackButton.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
+export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
