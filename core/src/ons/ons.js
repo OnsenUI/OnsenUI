@@ -110,6 +110,16 @@ ons.ready = callback => {
 };
 
 /**
+ * @method getDefaultDeviceBackButtonListener
+ * @signature getDefaultDeviceBackButtonListener()
+ * @description
+ *   [en]Returns default handler for device back button.[/en]
+ */
+ons.getDefaultDeviceBackButtonListener = function() {
+  return ons._defaultDeviceBackButtonHandler.getListener();
+};
+
+/**
  * @method setDefaultDeviceBackButtonListener
  * @signature setDefaultDeviceBackButtonListener(listener)
  * @param {Function} listener

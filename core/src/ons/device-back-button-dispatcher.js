@@ -178,6 +178,10 @@ class DeviceBackButtonDispatcher {
         this._callback = callback;
       },
 
+      getListener: function() {
+        return this._callback;
+      },
+
       enable: function() {
         HandlerRepository.set(element, this);
       },
