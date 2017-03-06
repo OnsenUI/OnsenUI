@@ -75,16 +75,18 @@ class BaseDialog extends React.Component {
     Util.convert(newProps, 'maskColor', {newName: 'mask-color'});
     Util.convert(newProps, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
-    var element = React.createElement(this._getDomNodeName(), newProps);
-    ReactDOM.render(element, this.node, this._update.bind(this, isShown));
-  }
+    var DomNodeName = this._getDomNodeName();
 
-  shouldComponentUpdate() {
-    return false;
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this,
+      <DomNodeName {...newProps} />,
+      this.node,
+      this._update.bind(this, isShown)
+    );
   }
 
   render() {
-    return React.DOM.noscript();
+    return null;
   }
 }
 
