@@ -40,7 +40,6 @@ class Page extends BasicComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    super.componentWillReceiveProps(nextProps);
     var node = ReactDOM.findDOMNode(this);
     node.onDeviceBackButton = nextProps.onDeviceBackButton;
   }
