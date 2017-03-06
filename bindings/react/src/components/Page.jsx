@@ -39,6 +39,12 @@ class Page extends BasicComponent {
     node.removeEventListener('hide', this.props.onHide);
   }
 
+  componentWillReceiveProps(nextProps) {
+    super.componentWillReceiveProps(nextProps);
+    var node = ReactDOM.findDOMNode(this);
+    node.onDeviceBackButton = nextProps.onDeviceBackButton;
+  }
+
   render() {
     const toolbar = this.props.renderToolbar(this);
     const bottomToolbar = this.props.renderBottomToolbar(this);
@@ -160,16 +166,29 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onHide: React.PropTypes.func
+  onHide: React.PropTypes.func,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button
+   *  [/en]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 const NOOP = () => null;
+const DEFAULT_ON_DEVICE_BACK = (event) => { event.callParentHandler(); };
 
 Page.defaultProps = {
   renderToolbar: NOOP,
   renderBottomToolbar: NOOP,
   renderModal: NOOP,
-  renderFixed: NOOP
+  renderFixed: NOOP,
+  onDeviceBackButton: DEFAULT_ON_DEVICE_BACK
 };
 
 export default Page;
