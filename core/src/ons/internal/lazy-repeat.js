@@ -205,6 +205,7 @@ export class LazyRepeatProvider {
       this._wrapperElement.appendChild(item.element);
 
       const done = () => {
+        this._delegate.destroyItem(0, item);
         this._wrapperElement.removeChild(item.element);
         delete this._unknownItemHeight;
         callback();
