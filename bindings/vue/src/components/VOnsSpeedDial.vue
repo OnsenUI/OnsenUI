@@ -33,7 +33,7 @@
     },
 
     mounted() {
-      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('toggle', this.$el.isOpen()));
+      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen()));
 
       this.action();
     }

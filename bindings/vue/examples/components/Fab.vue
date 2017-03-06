@@ -16,7 +16,7 @@
     <v-ons-speed-dial
       :visible="speedDialVisible"
       :open="speedDialOpen"
-      @toggle="speedDialOpen = $event"
+      @update="speedDialOpen = $event"
       position="bottom left"
       direction="up"
       @open="log('open')"

@@ -90,6 +90,13 @@ const selfProvider = {
       [this.$options._componentTag.slice(6)]: this
     }
   }
-}
+};
 
-export { hidable, destroyable, hasOptions, modifier, selfProvider };
+// Common event for Dialogs
+const dialogCancel = {
+  mounted() {
+    this.$on('dialog-cancel', () => this.$emit('update', false));
+  }
+};
+
+export { hidable, destroyable, hasOptions, modifier, selfProvider, dialogCancel };

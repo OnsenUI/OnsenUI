@@ -87,7 +87,7 @@
 
     <v-ons-dialog cancelable
       :visible="dialogVisible"
-      @dialog-cancel="dialogVisible = false; log('canceled'); "
+      @update="dialogVisible = $event"
       @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -101,7 +101,7 @@
     <v-ons-alert-dialog cancelable
       modifier="rowfooter"
       :visible="alertDialog1Visible"
-      @dialog-cancel="alertDialog1Visible = false; log('canceled'); "
+      @update="alertDialog1Visible = $event"
       @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
@@ -118,7 +118,7 @@
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
       :visible="alertDialog2Visible"
-      @dialog-cancel="alertDialog2Visible = false; log('canceled'); "
+      @update="alertDialog2Visible = $event"
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
@@ -135,7 +135,7 @@
     <v-ons-popover cancelable
       :target="$refs.myToolbarButton"
       :visible="popoverVisible"
-      @dialog-cancel="popoverVisible = false; log('canceled'); "
+      @update="popoverVisible = $event"
       @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
