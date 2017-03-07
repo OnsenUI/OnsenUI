@@ -4,7 +4,7 @@ import { eventToHandler, handlerToProp } from '../internal/util';
 const _setupDBB = component => {
   const dbb = 'onDeviceBackButton';
   // Call original handler or parent handler by default
-  const handler = (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
+  const handler = component[dbb] || (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
 
   component.$el[dbb] = event => {
     const id = setTimeout(handler.bind(component.$el, event), 0);

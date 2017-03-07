@@ -26,6 +26,13 @@
         }
         return Promise.resolve();
       },
+      onDeviceBackButton(event) {
+        if (this.pageStack.length > 1) {
+          this.pageStack.pop();
+        } else {
+          event.callParentHandler();
+        }
+      },
       _setPagesVisibility(start, end, visibility) {
         for (let i = start; i < end - 1; i++) {
           this.$children[i].$el.style.visibility = visibility;
