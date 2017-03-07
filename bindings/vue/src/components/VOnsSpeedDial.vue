@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial>
+  <ons-speed-dial :on-click.prop="action">
     <slot></slot>
   </ons-speed-dial>
 </template>
@@ -19,23 +19,31 @@
 
     methods: {
       action() {
-        this._shouldUpdate() && this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
+        let runDefault = true;
+        this.$emit('click', { preventDefault: () => runDefault = false });
+
+        if (runDefault) {
+          this.$el.toggleItems();
+        }
       },
       _shouldUpdate() {
         return this.open !== undefined && this.open !== this.$el.isOpen();
+      },
+      _updateToggle() {
+        this._shouldUpdate() && this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
       }
     },
 
     watch: {
       open() {
-        this.action();
+        this._updateToggle();
       }
     },
 
     mounted() {
       this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen()));
 
-      this.action();
+      this._updateToggle();
     }
   };
 </script>
