@@ -5,11 +5,7 @@
 </template>
 
 <script>
-  import { hasOptions } from '../mixins';
-
   export default {
-    mixins: [hasOptions],
-
     inject: ['navigator'],
 
     methods: {
