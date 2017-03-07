@@ -10,8 +10,12 @@
 
     methods: {
       action() {
-        const id = setTimeout(() => this.navigator.pageStack.pop(), 0);
-        this.$emit('click', { preventDefault: () => clearTimeout(id) });
+        let runDefault = true;
+        this.$emit('click', { preventDefault: () => runDefault = false });
+
+        if (runDefault) {
+          this.navigator.pageStack.pop();
+        }
       }
     }
   };

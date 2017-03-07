@@ -7,11 +7,14 @@ const _setupDBB = component => {
   const handler = component[dbb] || (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
 
   component.$el[dbb] = event => {
-    const id = setTimeout(handler.bind(component.$el, event), 0);
+    let runDefault = true;
+
     component.$emit(handlerToProp(dbb), {
       ...event,
-      preventDefault: () => clearTimeout(id)
+      preventDefault: () => runDefault = false
     });
+
+    runDefault && handler(event);
   };
 
   component._isDBBSetup = true;

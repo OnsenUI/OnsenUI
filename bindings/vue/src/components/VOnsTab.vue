@@ -16,11 +16,12 @@
 
     methods: {
       action() {
-        const id = setTimeout(() => {
-          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
-        }, 0);
+        let runDefault = true;
+        this.$emit('click', { preventDefault: () => runDefault = false });
 
-        this.$emit('click', { preventDefault: () => clearTimeout(id) });
+        if (runDefault) {
+          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
+        }
       }
     },
 
