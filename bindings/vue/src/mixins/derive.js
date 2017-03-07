@@ -1,9 +1,6 @@
-import Vue from 'vue';
-import { eventToHandler } from '../internal/util';
+import { eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
-const _handlerToProp = name => name.slice(2).charAt(0).toLowerCase() + name.slice(2).slice(1);
-
 const _setupDBB = component => {
   const dbb = 'onDeviceBackButton';
   // Call original handler or parent handler by default
@@ -11,7 +8,7 @@ const _setupDBB = component => {
 
   component.$el[dbb] = event => {
     const id = setTimeout(handler.bind(component.$el, event), 0);
-    component.$emit(_handlerToProp(dbb), {
+    component.$emit(handlerToProp(dbb), {
       ...event,
       preventDefault: () => clearTimeout(id)
     });
@@ -40,7 +37,7 @@ const deriveDBB = {
 
 // These handlers cannot throw events for performance reasons.
 const deriveHandler = handlerName => {
-  const propName = _handlerToProp(handlerName);
+  const propName = handlerToProp(handlerName);
 
   return {
     props: {
