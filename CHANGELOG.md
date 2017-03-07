@@ -17,6 +17,8 @@ dev
  * css-components: Fixed broken popover components.
  * ons-select: Fix width of the inner element.
  * ons-popover: Fixed behavior on device back button.
+ * ons-splitter: Checks if content exists before removing.
+ * ons-lazy-repeat: Clean first item scope.
  * angular1: `number input` retains number type variable with `ngModel`.
 
 ### Misc

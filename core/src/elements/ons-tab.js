@@ -430,11 +430,11 @@ export default class TabElement extends BaseElement {
           this._loadPageElement(tabbar._contentElement, pageElement => {
             pageElement.style.display = 'none';
             tabbar._contentElement.appendChild(pageElement);
-
-            if (this.hasAttribute('active')) {
-              tabbar.setActiveTab(this._findTabIndex());
-            }
           });
+        }
+
+        if (this.hasAttribute('active')) {
+          tabbar.setActiveTab(this._findTabIndex());
         }
       };
 

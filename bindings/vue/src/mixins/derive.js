@@ -1,70 +1,89 @@
-import Vue from 'vue';
-import { hyphenate, getClassFromTag, eventToHandler } from '../internal/util';
-import { createMethodsFor, createComputedPropertiesFor } from '../internal/optionsObjectHelper';
+import { eventToHandler, handlerToProp } from '../internal/util';
 
-const deriveEvents = {
-  beforeCreate() {
-    this._boundEvents = getClassFromTag(this.$options._componentTag.slice(2)).events || ['click'];
-    this.$options.methods = {
-      ...this._boundEvents.reduce((result, key) => {
-        result[eventToHandler(key)] = event => this.$emit(key, event);
-        return result;
-      }, {}),
-      ...this.$options.methods
-    };
+/* Private */
+const _setupDBB = component => {
+  const dbb = 'onDeviceBackButton';
+  // Call original handler or parent handler by default
+  const handler = component[dbb] || (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
+
+  component.$el[dbb] = event => {
+    let runDefault = true;
+
+    component.$emit(handlerToProp(dbb), {
+      ...event,
+      preventDefault: () => runDefault = false
+    });
+
+    runDefault && handler(event);
+  };
+
+  component._isDBBSetup = true;
+};
+
+/* Public */
+// Device Back Button Handler
+const deriveDBB = {
+  mounted() {
+    _setupDBB(this);
   },
 
+  // Core destroys deviceBackButton handlers on disconnectedCallback.
+  // This fixes the behavior for <keep-alive> component.
+  activated() {
+    this._isDBBSetup === false && _setupDBB(this);
+  },
+
+  deactivated() {
+    this._isDBBSetup === true && (this._isDBBSetup = false);
+  }
+};
+
+// These handlers cannot throw events for performance reasons.
+const deriveHandler = handlerName => {
+  const propName = handlerToProp(handlerName);
+
+  return {
+    props: {
+      [propName]: {
+        type: Function,
+        default: null
+      }
+    },
+
+    watch: {
+      [propName]() {
+        this.$el[handlerName] = this[propName];
+      }
+    },
+
+    mounted() {
+      this[propName] && (this.$el[handlerName] = this[propName]);
+    }
+  };
+};
+
+const deriveEvents = {
   mounted() {
+    this._handlers = {};
+    this._boundEvents = this.$el.constructor.__proto__.events || [];
+
     this._boundEvents.forEach(key => {
-      this.$el.addEventListener(key, this[eventToHandler(key)]);
+      this._handlers[eventToHandler(key)] = event => {
+        // Filter events from different components with the same name
+        if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
+          this.$emit(key, event);
+        }
+      };
+      this.$el.addEventListener(key, this._handlers[eventToHandler(key)]);
     });
   },
 
   beforeDestroy() {
     this._boundEvents.forEach(key => {
-      this.$el.removeEventListener(key, this[eventToHandler(key)]);
+      this.$el.removeEventListener(key, this._handlers[eventToHandler(key)]);
     });
-    this._boundEvents = null;
+    this._handlers = this._boundEvents = null;
   }
 };
 
-const deriveMethods = {
-  beforeCreate() {
-    this.$options.methods = {
-      ...createMethodsFor(getClassFromTag(this.$options._componentTag.slice(2))),
-      ...this.$options.methods
-    };
-  }
-};
-
-const deriveProperties = {
-  beforeCreate() {
-    this._propertyHandlers = [];
-    let derivedProperties = createComputedPropertiesFor(getClassFromTag(this.$options._componentTag.slice(2)));
-
-    derivedProperties = Object.keys(derivedProperties).reduce((result, propertyName) => {
-      if (/^on[A-Z]/.test(propertyName)) {
-        this._propertyHandlers.push(propertyName);
-      } else {
-        result[propertyName] = derivedProperties[propertyName];
-      }
-      return result;
-    }, {});
-
-    this.$options.computed = {
-      ...derivedProperties,
-      ...this.$options.computed
-    };
-  },
-
-  mounted() {
-    this._propertyHandlers.forEach(propertyName => {
-      this.$el[propertyName] = (...args) => {
-        const name = propertyName.slice(2);
-        this.$emit(name.charAt(0).toLowerCase() + name.slice(1), ...args);
-      };
-    });
-  }
-};
-
-export { deriveEvents, deriveMethods, deriveProperties };
+export { deriveDBB, deriveHandler, deriveEvents };

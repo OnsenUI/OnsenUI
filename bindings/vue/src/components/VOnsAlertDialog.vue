@@ -8,17 +8,17 @@
     </div>
     <div class="alert-dialog-footer">
       <slot name="footer">
-        <button v-for="(handler, key) in footer" class="alert-dialog-button" @click="handler">{{key}}</button>
+        <button v-for="(handler, key) in footer" :key="key" class="alert-dialog-button" @click="handler">{{key}}</button>
       </slot>
     </div>
   </ons-alert-dialog>
 </template>
 
 <script>
-  import { dialogAPI, modifier, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
-    mixins: [dialogAPI, modifier, deriveEvents, deriveMethods, deriveProperties],
+    mixins: [hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB],
 
     props: {
       title: {
@@ -26,31 +26,10 @@
       },
       footer: {
         type: Object,
-        validator: function(value) {
-          const buttons = Object.keys(value);
-          for (let i = 0; i < buttons.length; i++) {
-            if (!(value[buttons[i]] instanceof Function)) {
-              return false;
-            }
-          }
-          return true;
+        validator(value) {
+          return Object.keys(value).every(key => value[key] instanceof Function);
         }
       }
-    },
-
-    methods: {
-      _addButtonClasses: function() {
-        if (!this.$slots.hasOwnProperty('footer')) return;
-        this.$slots.footer.forEach(el => el.data && (el.data.staticClass = (el.data.staticClass || '') + ' alert-dialog-button'));
-      }
-    },
-
-    beforeMount() {
-      this._addButtonClasses();
-    },
-
-    beforeUpdate() {
-      this._addButtonClasses();
     }
   };
 </script>

@@ -1,19 +1,42 @@
 <template>
-  <ons-tabbar>
+  <ons-tabbar :activeIndex="index" @postchange="$emit('update', $event.index)">
     <div class="tabbar__content">
-      <slot name="pages"></slot>
+      <slot name="pages">
+        <component v-for="tab in tabs" :is="tab.page" :key="(tab.key || tab.page)"></component>
+      </slot>
     </div>
     <div class="tabbar">
-      <slot></slot>
+      <slot>
+        <v-ons-tab v-for="tab in tabs" v-bind="tab" :key="(tab.key || tab)"></v-ons-tab>
+      </slot>
     </div>
   </ons-tabbar>
 </template>
 
 <script>
-  import { hasOptions, hidable, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { deriveEvents, hasOptions, hidable, selfProvider } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties, hasOptions, hidable]
+    mixins: [deriveEvents, hasOptions, hidable, selfProvider],
+
+    props: {
+      index: {
+        type: Number
+      },
+      tabs: {
+        type: Array,
+        validator(value) {
+          return value.every(tab => ['icon', 'label', 'page'].some(prop => !!Object.getOwnPropertyDescriptor(tab, prop)));
+        }
+      }
+    },
+
+    watch: {
+      index() {
+        if (this.index !== this.$el.getActiveTabIndex()) {
+          this.$el.setActiveTab(this.index, this.options);
+        }
+      }
+    }
   };
 </script>
-

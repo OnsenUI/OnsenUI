@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @deviceBackButton.prevent="log('pageDBB', $event)">
     <v-ons-toolbar>
       <div class="center">
         <v-ons-toolbar-button ref="myToolbarButton">Test</v-ons-toolbar-button>
@@ -9,7 +9,7 @@
       <v-ons-list-header>Notifications</v-ons-list-header>
       <v-ons-list-item
         tappable
-        @click="$notification.alert('Hello, world!')"
+        @click="$ons.notification.alert('Hello, world!')"
       >
         <div class="center">
           Alert
@@ -17,7 +17,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="$notification.confirm('Do you like Onsen UI?')"
+        @click="$ons.notification.confirm('Do you like Onsen UI?')"
       >
         <div class="center">
           Confirmation
@@ -25,7 +25,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="$notification.prompt('What is your name?')"
+        @click="$ons.notification.prompt('What is your name?')"
       >
         <div class="center">
           Prompt
@@ -85,39 +85,40 @@
       </v-ons-list-item>
     </v-ons-list>
 
-    <v-ons-dialog
-      :on-device-back-button="() => {}"
-      @preshow="log('preshow!!')"
-      @postshow="log('postshow!!')"
-      @prehide="log('prehide!!')"
-      @posthide="log('posthide!!')"
-      @mask="dialogVisible = false; log('canceled!!'); "
+    <v-ons-dialog cancelable
       :visible="dialogVisible"
+      @update="dialogVisible = $event"
+      @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
+      @preshow="log('preshow')"
+      @postshow="log('postshow')"
+      @prehide="log('prehide')"
+      @posthide="log('posthide')"
     >
       Lorem ipsum
       <button @click="dialogVisible = !dialogVisible">toggle</button>
     </v-ons-dialog>
 
-    <v-ons-alert-dialog
+    <v-ons-alert-dialog cancelable
       modifier="rowfooter"
-      @mask="alertDialog1Visible = false; log('canceled!!'); "
       :visible="alertDialog1Visible"
+      @update="alertDialog1Visible = $event"
+      @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
       Lorem ipsum
       <button @click="alertDialog1Visible= !alertDialog1Visible">toggle</button>
       <template slot="footer">
-        <button @click="alertDialog1Visible = false">Ok</button>
-        <button @click="alertDialog1Visible = false">Cancel</button>
+        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Ok</button>
+        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Cancel</button>
       </template>
     </v-ons-alert-dialog>
 
-    <v-ons-alert-dialog
+    <v-ons-alert-dialog cancelable
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      @mask="alertDialog2Visible = false; log('canceled!!'); "
       :visible="alertDialog2Visible"
+      @update="alertDialog2Visible = $event"
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
@@ -125,19 +126,21 @@
 
     <v-ons-modal
       :visible="modalVisible"
+      @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
       <p><ons-button @click="modalVisible = false">Close</ons-button></p>
     </v-ons-modal>
 
     <v-ons-popover cancelable
-      @preshow="log('preshow!!')"
-      @postshow="log('postshow!!')"
-      @prehide="log('prehide!!')"
-      @posthide="log('posthide!!')"
       :target="$refs.myToolbarButton"
-      @mask="popoverVisible = false; log('canceled!!'); "
       :visible="popoverVisible"
+      @update="popoverVisible = $event"
+      @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
+      @preshow="log('preshow')"
+      @postshow="log('postshow')"
+      @prehide="log('prehide')"
+      @posthide="log('posthide')"
     >
       Lorem ipsum
       <button @click="popoverVisible = !popoverVisible">toggle</button>
@@ -148,7 +151,7 @@
 
 <script>
 	export default {
-    data: function() {
+    data() {
       return {
         dialogVisible: false,
         alertDialog1Visible: false,
@@ -158,7 +161,7 @@
       }
     },
     methods: {
-      log: function() {
+      log() {
         console.log(...arguments);
       }
     }

@@ -752,7 +752,9 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _destroy() {
-    this._pageLoader.unload(this._content);
+    if (this._content) {
+      this._pageLoader.unload(this._content);
+    }
     this.remove();
   }
 

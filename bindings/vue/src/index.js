@@ -1,12 +1,13 @@
 import * as components from './components';
 import * as directives from './directives';
+import { hyphenate } from './internal/util';
 
 import ons from 'onsenui';
 
 const register = (Vue, type, items) => {
   Object.keys(items).forEach((key) => {
     const value = items[key];
-    key = Vue.util.hyphenate(key);
+    key = hyphenate(key);
     Vue[type](key, value);
   });
 };
@@ -26,58 +27,48 @@ const install = (Vue, params = {}) => {
    * Apply a mixin globally to prevent ons-* elements
    * from being included directly in Vue instance templates.
    *
-   * Note: This affects every Vue instance.
+   * Note: This affects every Vue instance only when warns
+   * are allowed by Vue.
    */
-  Vue.mixin({
-    methods: {
-      getComponent(query) {
-        if (query.startsWith('v-')) {
-          query = name.slice(2);
-        }
-        const component = ons._util.findParent(this.$el, query);
-        return component && component.__vue__ || null;
-      }
-    },
+  if (!Vue.config.silent) {
+    Vue.mixin({
+      beforeCreate() {
+        if (this.$options.template) {
+          const match = this.$options.template.match(/<(ons-[\w-]+)/im);
 
-    computed: {
-      tabbar() {
-        return this.getComponent('ons-tabbar');
-      },
-      navigator() {
-        return this.getComponent('ons-navigator');
-      },
-      splitter() {
-        return this.getComponent('ons-splitter');
-      }
-    },
-
-    beforeMount() {
-      // When this beforeMount hook is called, this.$el has not yet replaced by Vue.
-      // So we can detect whether or not any custom elements exist in the template of the Vue instance.
-      if (this.$el) { // if vm.$mount is called with no arguments, this.$el will be undefined
-        // count ons-* elements in this.$el
-        const countOfOnsElements = Array.prototype.slice.call(this.$el.querySelectorAll('*')).filter(
-          (element) => {
-            return /^ons-.+/i.test(element.tagName); // Note: in HTML document, Element#tagName returns a capitalized tag name
+          if (match) {
+            const location = this.$options._componentTag ? ` in component <${this.$options._componentTag}>` : '';
+            ons._util.warn('[vue-onsenui] Vue templates must not contain <ons-*> elements directly.\n' +
+              `<${match[1]}> element found near index ${match.index}${location}. Please use <v-${match[1]}> instead:
+              ${this.$options.template}`
+            );
           }
-        ).length;
-
-        if (countOfOnsElements > 0) {
-          console.error(`[vue-onsenui] Vue templates must not contain ons-* elements directly.`);
         }
       }
-    }
-  });
+    });
+  }
 
   /**
-   * Expose notification methods.
+   * Expose ons object.
    */
-  Vue.prototype.$notification = ons.notification;
-
-  /**
-   * Expose platform methods.
-   */
-  Vue.prototype.$platform = ons.platform;
+  Vue.prototype.$ons = Object.keys(ons)
+    .filter(k => [
+      /^enable/,
+      /^disable/,
+      /^set/,
+      /animit/,
+      /Element$/,
+      /fastClick/,
+      /GestureDetector/,
+      /notification/,
+      /orientation/,
+      /platform/,
+      /ready/,
+    ].some(t => k.match(t)))
+    .reduce((r, k) => {
+      r[k] = ons[k];
+      return r;
+    }, { _ons: ons });
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

@@ -489,7 +489,7 @@ export default class DialogElement extends BaseElement {
   }
 
   static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide'];
+    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
   }
 
   /**
