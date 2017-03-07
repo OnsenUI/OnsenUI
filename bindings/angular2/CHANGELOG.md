@@ -7,6 +7,11 @@ Guidelines:
 CHANGELOG
 ====
 
+dev
+----
+
+* Fixed `ons-input` caret position when using two-way binding.
+
 1.0.0-rc.5
 ----
 
