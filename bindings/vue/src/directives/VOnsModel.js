@@ -93,6 +93,15 @@ export default {
     }
   },
 
+  /*
+   * Caution:
+   * This hook is called every time the view changes since
+   * the directive's value is updated in the event handlers.
+   *
+   * Also, only 1 instance of this directive exists. Therefore,
+   * it is called for every component whenever 1 single
+   * component using this directive is updated.
+   */
   update(el, binding, vnode) {
     const modelKey = binding.expression.trim();
     const tag = el.tagName.toLowerCase();
@@ -121,7 +130,7 @@ export default {
             break;
 
           default:
-            el.value = binding.value;
+            el.value !== binding.value && (el.value = binding.value);
         }
         break;
     }
