@@ -1,7 +1,7 @@
 <template>
-  <div :is="$options._componentTag.slice(2)" @click="$emit('click', $event)">
+  <component :is="$options._componentTag.slice(2)" @click="$emit('click', $event)">
     <slot></slot>
-  </div>
+  </component>
 </template>
 
 <script>

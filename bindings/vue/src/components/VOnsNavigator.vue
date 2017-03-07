@@ -1,7 +1,7 @@
 <template>
   <ons-navigator>
     <slot>
-      <div v-for="page in pageStack" :key="page" :is="page"></div>
+      <component v-for="page in pageStack" :key="page" :is="page"></component>
     </slot>
   </ons-navigator>
 </template>
