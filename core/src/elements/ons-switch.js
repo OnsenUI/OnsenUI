@@ -150,9 +150,11 @@ export default class SwitchElement extends BaseElement {
   }
 
   set disabled(value) {
-    this._disabled = !!value;
-    util.toggleAttribute(this, 'disabled', this._disabled);
-    this._checkbox.disabled = this._disabled;
+    contentReady(this, () => {
+      this._disabled = !!value;
+      util.toggleAttribute(this, 'disabled', this._disabled);
+      this._checkbox.disabled = this._disabled;
+    });
   }
 
   /**
