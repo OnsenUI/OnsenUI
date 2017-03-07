@@ -6,7 +6,10 @@ import ons from 'onsenui';
 const register = (Vue, type, items) => {
   Object.keys(items).forEach((key) => {
     const value = items[key];
-    key = Vue.util.hyphenate(key);
+    var hyphenate = function hyphenate(string) {
+	  		return string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+		};
+    key = hyphenate(key);
     Vue[type](key, value);
   });
 };
