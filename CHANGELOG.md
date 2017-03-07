@@ -4,18 +4,38 @@ CHANGELOG
 
 dev
 ----
- * ons-template: Show warning when ons-template is not located just under document.body.
+
+### New Features
+
+ * ons-switch: Supports `value` attribute.
+ * ons-tab: Supports `active-icon` attribute.
+ * ons-lazy-repeat: Support for dynamic height.
+ * angular1: Add `onsSelect` directive working with `ngModel`.
+
+### Bug Fixes
+
  * css-components: Fixed broken popover components.
- * ons-popover: Changed internal DOM structure.
- * css-components: Renamed ".tab-bar" to ".tabbar".
- * css-components: Renamed ".navigation-bar" to ".toolbar".
- * css-components: Dropped all stylus and rebuild css-components with CSSNext.
- * ons-select: All the bindings have a wrapper for ons-select and fixed some issues in the core.
  * ons-select: Fix width of the inner element.
- * ons-switch: Supports 'value' attribute.
- * angular1: `number input` retains number type variable with `ngModel`.
- * ons-tab: Supports 'active-icon' attribute.
  * ons-popover: Fixed behavior on device back button.
+ * angular1: `number input` retains number type variable with `ngModel`.
+
+### Misc
+
+ * css-components: Refactored `range` components.
+ * ons-template: Show warning when ons-template is not located just under document.body.
+ * ons-navigator: Added deprecate warning for `options.refresh`.
+ * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
+
+### BREAKING CHANGES
+
+ * css-components: Dropped all stylus and rebuild css-components with cssnext.
+ * css-components: Renamed `.tab-bar` to `.tabbar`.
+ * css-components: Renamed `.navigation-bar` to `.toolbar`.
+ * css-components: Renamed `.list__item` to `.list-item`.
+ * css-components: Renamed `.list__header` to `.list-header`.
+ * ons-tabbar: loadPage method has been deprecated.
+ * ons-popover: Changed internal DOM structure.
+ * ons-range: Changed internal DOM structure.
 
 v2.1.0
 ----

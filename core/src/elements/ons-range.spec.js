@@ -19,24 +19,29 @@ describe('OnsRangeElement', () => {
   });
 
   it('classList contains \'range\' by default', () => {
-    expect(element._input.classList.contains('range')).to.be.true;
+    expect(element.classList.contains('range')).to.be.true;
   });
 
   onlyChrome(it)('provides \'modifier\' attribute', () => {
     const input = element.querySelector('input');
 
     element.setAttribute('modifier', 'hoge');
-    expect(input.classList.contains('range--hoge')).to.be.true;
+    expect(input.classList.contains('range--hoge__input')).to.be.true;
+    expect(element.classList.contains('range--hoge')).to.be.true;
 
     element.setAttribute('modifier', 'foo bar');
-    expect(input.classList.contains('range--foo')).to.be.true;
-    expect(input.classList.contains('range--bar')).to.be.true;
-    expect(input.classList.contains('range--hoge')).not.to.be.true;
+    expect(input.classList.contains('range--foo__input')).to.be.true;
+    expect(input.classList.contains('range--bar__input')).to.be.true;
+    expect(input.classList.contains('range--hoge__input')).not.to.be.true;
+    expect(element.classList.contains('range--foo')).to.be.true;
+    expect(element.classList.contains('range--bar')).to.be.true;
+    expect(element.classList.contains('range--hoge')).not.to.be.true;
 
     input.classList.add('range--piyo');
     element.setAttribute('modifier', 'fuga');
     expect(input.classList.contains('range--piyo')).to.be.true;
-    expect(input.classList.contains('range--fuga')).to.be.true;
+    expect(input.classList.contains('range--fuga__input')).to.be.true;
+    expect(element.classList.contains('range--fuga')).to.be.true;
   });
 
   describe('#_compile()', () => {

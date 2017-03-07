@@ -149,7 +149,7 @@
   line-height: var(--fab-mini-height);
 }
 
-.fab--mini .fab__icon { /* FIXME */
+.fab--mini__icon {
   line-height: var(--fab-mini-height);
 }
 

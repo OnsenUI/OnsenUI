@@ -52,7 +52,6 @@ export class LazyRepeatDelegate {
 
   /**
    * @param {Number} index
-   * @param {Element} parent
    * @param {Function} done A function that take item object as parameter.
    */
   loadItemElement(index, done) {
@@ -334,9 +333,8 @@ export class LazyRepeatProvider {
   }
 
   /**
-   * @param {Object} item
-   * @param {Number} item.index
-   * @param {Number} item.topPosition
+   * @param {Number} index
+   * @param {Boolean} isScrollUp
    */
   _renderElement(index, isScrollUp) {
     const item = this._renderedItems[index];
@@ -360,6 +358,7 @@ export class LazyRepeatProvider {
 
   /**
    * @param {Number} index
+   * @param {Boolean} isScrollUp
    */
   _removeElement(index, isScrollUp = true) {
     index = +(index);

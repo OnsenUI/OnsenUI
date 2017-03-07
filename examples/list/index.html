@@ -16,34 +16,56 @@
       <div class="center">List</div>
     </ons-toolbar>
 
+    <br>
+
     <ons-list>
       <ons-list-header>Normal List</ons-list-header>
       <ons-list-item>One</ons-list-item>
       <ons-list-item>Two</ons-list-item>
       <ons-list-item>Three</ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>Tappable List</ons-list-header>
       <ons-list-item tappable>One</ons-list-item>
       <ons-list-item tappable>Two</ons-list-item>
       <ons-list-item tappable>Three</ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Chevron</ons-list-header>
-      <ons-list-item modifier="chevron">One</ons-list-item>
-      <ons-list-item modifier="chevron">Two</ons-list-item>
-      <ons-list-item modifier="chevron">Three</ons-list-item>
+      <ons-list-item modifier="chevron" tappable>One</ons-list-item>
+      <ons-list-item modifier="chevron" tappable>Two</ons-list-item>
+      <ons-list-item modifier="chevron" tappable>Three</ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>Long divider</ons-list-header>
       <ons-list-item modifier="longdivider">One</ons-list-item>
       <ons-list-item modifier="longdivider">Two</ons-list-item>
       <ons-list-item modifier="longdivider">Three</ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>No divider</ons-list-header>
       <ons-list-item modifier="nodivider">One</ons-list-item>
       <ons-list-item modifier="nodivider">Two</ons-list-item>
       <ons-list-item modifier="nodivider">Three</ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Switch</ons-list-header>
-      <ons-list-item>
+      <ons-list-item tappable>
         <label for="switch-1" class="center">
           Title
         </label>
@@ -51,8 +73,7 @@
           <ons-switch input-id="switch-1"></ons-switch>
         </label>
       </ons-list-item>
-
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <label for="switch-2" class="center">
           Title
         </label>
@@ -60,9 +81,13 @@
           <ons-switch input-id="switch-2"></ons-switch>
         </label>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Radio Buttons</ons-list-header>
-      <ons-list-item>
+      <ons-list-item tappable>
         <label class="left">
           <ons-input type="radio" input-id="radio-1" name="b"></ons-input>
         </label>
@@ -71,7 +96,7 @@
         </label>
       </ons-list-item>
 
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <label class="left">
           <ons-input type="radio" input-id="radio-2" name="b"></ons-input>
         </label>
@@ -79,9 +104,13 @@
           Radio button
         </label>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Checkboxes</ons-list-header>
-      <ons-list-item>
+      <ons-list-item tappable>
         <label class="left">
           <ons-input type="checkbox" input-id="checkbox-1"></ons-input>
         </label>
@@ -90,7 +119,7 @@
         </label>
       </ons-list-item>
 
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <label class="left">
           <ons-input type="checkbox" input-id="checkbox-2"></ons-input>
         </label>
@@ -98,79 +127,95 @@
           Checkbox
         </label>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Labels</ons-list-header>
       <ons-list-item>
         <div class="center">
           Title
         </div>
         <div class="right">
-          <div class="list__item__label">Label</div>
+          <div class="list-item__label">Label</div>
         </div>
       </ons-list-item>
 
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <div class="center">
           Title
         </div>
         <div class="right">
-          <div class="list__item__label">Label</div>
+          <div class="list-item__label">Label</div>
         </div>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Subtitles</ons-list-header>
 
       <ons-list-item>
         <div class="center">
-          <div class="list__item__title">Title</div>
-          <div class="list__item__subtitle">Subtitle</div>
+          <div class="list-item__title">Title</div>
+          <div class="list-item__subtitle">Subtitle</div>
         </div>
       </ons-list-item>
 
-      <ons-list-item>
+      <ons-list-item tappable>
         <label class="left">
           <ons-input type="checkbox" input-id="checkbox-3"></ons-input>
         </label>
         <label for="checkbox-3" class="center">
-          <div class="list__item__title">Title</div>
-          <div class="list__item__subtitle">Subtitle</div>
+          <div class="list-item__title">Title</div>
+          <div class="list-item__subtitle">Subtitle</div>
         </label>
       </ons-list-item>
 
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <label class="left">
           <ons-input type="checkbox" input-id="checkbox-4"></ons-input>
         </label>
         <label for="checkbox-4" class="center">
-          <div class="list__item__title">Title</div>
-          <div class="list__item__subtitle">Subtitle</div>
+          <div class="list-item__title">Title</div>
+          <div class="list-item__subtitle">Subtitle</div>
         </label>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with Thumbnails</ons-list-header>
 
       <ons-list-item>
         <div class="left">
-          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
         <div class="center">
-          <div class="list__item__title">Title</div>
-          <div class="list__item__subtitle">Subtitle</div>
+          <div class="list-item__title">Title</div>
+          <div class="list-item__subtitle">Subtitle</div>
         </div>
       </ons-list-item>
 
-      <ons-list-item modifier="chevron">
+      <ons-list-item modifier="chevron" tappable>
         <div class="left">
-          <img class="list__item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
         </div>
 
         <div class="center">
-          <div class="list__item__title">Title</div>
-          <div class="list__item__subtitle">Subtitle</div>
+          <div class="list-item__title">Title</div>
+          <div class="list-item__subtitle">Subtitle</div>
         </div>
       </ons-list-item>
+    </ons-list>
 
+    <br>
+
+    <ons-list>
       <ons-list-header>List with icons</ons-list-header>
 
       <ons-list-item>
@@ -178,7 +223,7 @@
           Title
         </div>
         <div class="right">
-          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+          <ons-icon class="list-item__icon" icon="ion-ios-information"></ons-icon>
         </div>
       </ons-list-item>
 
@@ -187,25 +232,27 @@
           Title
         </div>
         <div class="right">
-          <ons-icon class="list__item__icon" icon="ion-ios-information"></ons-icon>
+          <ons-icon class="list-item__icon" icon="ion-ios-information"></ons-icon>
         </div>
       </ons-list-item>
 
     </ons-list>
 
-    <br />
+    <br>
 
     <ons-list modifier="noborder">
-      <ons-list-item modifier="chevron">With chevron</ons-list-item>
+      <ons-list-item modifier="chevron" tappable>With chevron</ons-list-item>
       <ons-list-item>Without chevron</ons-list-item>
     </ons-list>
 
-    <br />
+    <br>
 
     <ons-list>
-      <ons-list-item modifier="chevron nodivider">With chevron</ons-list-item>
+      <ons-list-item modifier="chevron nodivider" tappable>With chevron</ons-list-item>
       <ons-list-item modifier="nodivider">Without chevron</ons-list-item>
     </ons-list>
+
+    <br>
   </ons-page>
 </body>
 </html>

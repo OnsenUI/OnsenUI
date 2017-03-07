@@ -2,7 +2,6 @@
   "name": "react-onsenui",
   "version": "1.1.0",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
-  "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
     "prepublish": "npm run build",
@@ -13,6 +12,23 @@
     "test": "karma start",
     "gen-docs": "node ./docgen.js"
   },
+  "main": "dist/react-onsenui.js",
+  "files": [
+    "yarn.lock",
+    "dist/react-onsenui.*",
+    "src",
+    "test",
+    "scripts",
+    "docs",
+    ".eslintrc.json",
+    "webpack.config.js",
+    "rollup.config.js",
+    "karma.conf.js",
+    "tests.webpack.js",
+    "docgen.js",
+    "circle.yml",
+    "index.html"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OnsenUI/OnsenUI.git"

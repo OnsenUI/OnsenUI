@@ -19,19 +19,19 @@ describe('OnsProgressBarElement', () => {
 
     progress.setAttribute('modifier', 'hoge');
     expect(template.classList.contains('progress-bar--hoge')).to.be.true;
-    expect(primary.classList.contains('progress-bar__primary--hoge')).to.be.true;
-    expect(secondary.classList.contains('progress-bar__secondary--hoge')).to.be.true;
+    expect(primary.classList.contains('progress-bar--hoge__primary')).to.be.true;
+    expect(secondary.classList.contains('progress-bar--hoge__secondary')).to.be.true;
 
     progress.setAttribute('modifier', ' foo bar');
     expect(template.classList.contains('progress-bar--foo')).to.be.true;
     expect(template.classList.contains('progress-bar--bar')).to.be.true;
     expect(template.classList.contains('progress-bar--hoge')).not.to.be.true;
-    expect(primary.classList.contains('progress-bar__primary--foo')).to.be.true;
-    expect(primary.classList.contains('progress-bar__primary--bar')).to.be.true;
-    expect(primary.classList.contains('progress-bar__primary--hoge')).not.to.be.true;
-    expect(secondary.classList.contains('progress-bar__secondary--foo')).to.be.true;
-    expect(secondary.classList.contains('progress-bar__secondary--bar')).to.be.true;
-    expect(secondary.classList.contains('progress-bar__secondary--hoge')).not.to.be.true;
+    expect(primary.classList.contains('progress-bar--foo__primary')).to.be.true;
+    expect(primary.classList.contains('progress-bar--bar__primary')).to.be.true;
+    expect(primary.classList.contains('progress-bar--hoge__primary')).not.to.be.true;
+    expect(secondary.classList.contains('progress-bar--foo__secondary')).to.be.true;
+    expect(secondary.classList.contains('progress-bar--bar__secondary')).to.be.true;
+    expect(secondary.classList.contains('progress-bar--hoge__secondary')).not.to.be.true;
   });
 
   describe('#_updateDeterminate()', () => {

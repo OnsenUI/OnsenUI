@@ -372,6 +372,7 @@ export default class NavigatorElement extends BaseElement {
   }
 
   _popPageAndRefresh(options, popUpdate) {
+    util.warn('\'refresh\' option for pushPage has been deprecated and will be removed in the next release.');
 
     const index = this.pages.length - 2;
     const oldPage = this.pages[index];

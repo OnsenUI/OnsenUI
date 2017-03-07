@@ -264,64 +264,6 @@ export default class TabbarElement extends BaseElement {
   }
 
   /**
-   * @method loadPage
-   * @deprecated
-   * @signature loadPage(url, [options])
-   * @param {String} url
-   *   [en]Page URL. Can be either an HTML document or an `<ons-template>` id.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したid属性の値を利用できます。[/ja]
-   * @description
-   *   [en]Displays a new page without changing the active index.[/en]
-   *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
-   * @param {Object} [options]
-   *   [en][/en]
-   *   [ja][/ja]
-   * @param {Object} [options.animation]
-   *   [en][/en]
-   *   [ja][/ja]
-   * @param {Object} [options.callback]
-   *   [en][/en]
-   *   [ja][/ja]
-   * @return {Promise}
-   *   [en]Resolves to the new page element.[/en]
-   *   [ja][/ja]
-   */
-  loadPage(page, options = {}) {
-    util.warn('The loadPage method has been deprecated and will be removed in the next minor version.');
-
-    return new Promise(resolve => {
-      const tab = this._tabbarElement.children[0] || new TabElement();
-      tab._loadPage(page, this._contentElement, pageElement => {
-        resolve(this._loadPageDOMAsync(pageElement, options));
-      });
-    });
-  }
-
-  /**
-   * @param {Element} pageElement
-   * @param {Object} [options]
-   * @param {Object} [options.animation]
-   * @param {Object} [options.callback]
-   * @return {Promise} Resolves to the new page element.
-   */
-  _loadPageDOMAsync(pageElement, options = {}) {
-    return new Promise(resolve => {
-      this._contentElement.appendChild(pageElement);
-
-      if (this.getActiveTabIndex() !== -1) {
-        resolve(this._switchPage(pageElement, options));
-      } else {
-        if (options.callback instanceof Function) {
-            options.callback();
-        }
-
-        this._oldPageElement = pageElement;
-        resolve(pageElement);
-      }
-    });
-  }
-
-  /**
    * @return {String}
    */
   getTabbarId() {

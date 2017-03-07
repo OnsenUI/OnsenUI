@@ -285,34 +285,6 @@ describe('OnsTabbarElement', () => {
     });
   });
 
-  describe('#loadPage()', () => {
-    onlyChrome(it)('loads a page', (done) => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge"></ons-tab>
-        </ons-tabbar>
-      `);
-      document.body.appendChild(element);
-
-      expect(element.innerHTML.indexOf('hogehoge')).to.be.below(0);
-      element.loadPage('hoge', {
-        callback: function() {
-          expect(element.innerHTML.indexOf('hogehoge')).not.to.be.below(0);
-          element.remove();
-          done();
-        }
-      });
-    });
-
-    onlyChrome(it)('returns a promise that resolves to the new page', () => {
-      expect(element.innerHTML.indexOf('fugafuga')).to.be.below(0);
-      return expect(element.loadPage('fuga')).to.eventually.be.fulfilled.then(page => {
-        expect(element.innerHTML.indexOf('fugafuga')).not.to.be.below(0);
-        expect(page).to.equal(element._getCurrentPageElement());
-      });
-    });
-  });
-
   describe('#setActiveTab()', () => {
     it('rejects the promise if index does not exist', () => {
       return expect(element.setActiveTab(0)).to.eventually.be.rejected;

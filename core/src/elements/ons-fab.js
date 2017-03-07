@@ -20,7 +20,8 @@ import contentReady from '../ons/content-ready';
 const defaultClassName = 'fab';
 
 const scheme = {
-  '': 'fab--*'
+  '': 'fab--*',
+  '.fab__icon': 'fab--*__icon'
 };
 
 /**

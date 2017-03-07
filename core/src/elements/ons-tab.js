@@ -387,12 +387,6 @@ export default class TabElement extends BaseElement {
     }
   }
 
-  _loadPage(page, parent, callback) {
-    this._pageLoader.load({ page, parent }, pageElement => {
-      callback(pageElement);
-    });
-  }
-
   get pageElement() {
     if (this._loadedPage) {
       return this._loadedPage;

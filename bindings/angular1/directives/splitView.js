@@ -348,6 +348,8 @@
       scope: true,
 
       compile: function(element, attrs) {
+        ons._util.warn('\'ons-split-view\' component has been deprecated and will be removed in the next release. Please use \'ons-splitter\' instead.');
+
         var mainPage = element[0].querySelector('.main-page'),
             secondaryPage = element[0].querySelector('.secondary-page');
 
