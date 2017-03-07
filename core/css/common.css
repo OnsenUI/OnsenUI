@@ -58,6 +58,7 @@ ons-fab, ons-speed-dial {
 
 input, textarea {
   -webkit-user-select: auto;
+  -moz-user-select: text;
 }
 
 ons-toolbar:not([inline]), ons-bottom-toolbar {

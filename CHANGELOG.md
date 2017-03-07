@@ -15,6 +15,7 @@ dev
 ### Bug Fixes
 
  * css-components: Fixed broken popover components.
+ * css-components: Fixed [#1653](https://github.com/OnsenUI/OnsenUI/issues/1653).
  * ons-select: Fix width of the inner element.
  * ons-popover: Fixed behavior on device back button.
  * ons-splitter: Checks if content exists before removing.
