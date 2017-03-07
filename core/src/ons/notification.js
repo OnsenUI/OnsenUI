@@ -137,10 +137,12 @@ notification._createAlertDialog = options => {
       if (event.keyCode === 13) {
         el.dialog.hide()
           .then(() => {
-            const resolveValue = el.input.value;
-            _destroyDialog();
-            options.callback(resolveValue);
-            deferred.resolve(resolveValue);
+            if (el) {
+              const resolveValue = el.input.value;
+              _destroyDialog();
+              options.callback(resolveValue);
+              deferred.resolve(resolveValue);
+            }
           });
       }
     };
@@ -150,14 +152,16 @@ notification._createAlertDialog = options => {
   el.footer = el.dialog.querySelector('.alert-dialog-footer');
   util.arrayFrom(el.dialog.querySelectorAll('.alert-dialog-button')).forEach((buttonElement, index) => {
     buttonElement.onclick = () => {
-      el.dialog.hide()
-        .then(() => {
-          const resolveValue = options.isPrompt ? el.input.value : index;
-          el.dialog.remove();
-          _destroyDialog();
-          options.callback(resolveValue);
-          deferred.resolve(resolveValue);
-        });
+        el.dialog.hide()
+          .then(() => {
+            if (el) {
+              const resolveValue = options.isPrompt ? el.input.value : index;
+              el.dialog.remove();
+              _destroyDialog();
+              options.callback(resolveValue);
+              deferred.resolve(resolveValue);
+            }
+          });
     };
 
     el.footer.appendChild(buttonElement);
