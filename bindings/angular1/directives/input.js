@@ -87,13 +87,13 @@
 
         if (attrs.ngModel) {
           scope.$watch(attrs.ngModel, (value) => {
-            if (el._isTextInput && typeof value !== 'undefined') {
-              el.value = value;
-            }
-            else if (el.type === 'radio') {
+            if (el._isTextInput) {
+              if (typeof value !== 'undefined' && value !== el.value) {
+                el.value = value;
+              }
+            } else if (el.type === 'radio') {
               el.checked = value === el.value;
-            }
-            else {
+            } else {
               el.checked = value;
             }
           });

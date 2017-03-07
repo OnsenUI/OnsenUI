@@ -20,6 +20,7 @@ dev
  * ons-splitter: Checks if content exists before removing.
  * ons-lazy-repeat: Clean first item scope.
  * angular1: `number input` retains number type variable with `ngModel`.
+ * angular1: Fixed [#1843](https://github.com/OnsenUI/OnsenUI/issues/1843).
 
 ### Misc
 
