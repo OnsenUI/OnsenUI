@@ -30,6 +30,7 @@ class Page extends BasicComponent {
     node.addEventListener('init', this.props.onInit);
     node.addEventListener('show', this.props.onShow);
     node.addEventListener('hide', this.props.onHide);
+    node.onDeviceBackButton = this.props.onDeviceBackButton;
   }
 
   componentWillUnmount() {
@@ -37,11 +38,6 @@ class Page extends BasicComponent {
     node.removeEventListener('init', this.props.onInit);
     node.removeEventListener('show', this.props.onShow);
     node.removeEventListener('hide', this.props.onHide);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    var node = ReactDOM.findDOMNode(this);
-    node.onDeviceBackButton = nextProps.onDeviceBackButton;
   }
 
   render() {
