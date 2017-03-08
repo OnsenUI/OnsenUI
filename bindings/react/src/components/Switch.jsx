@@ -16,13 +16,22 @@ import Util from './Util.js';
  */
 class Switch extends BasicComponent {
 
+  constructor(props) {
+    super(props);
+    this.boundOnChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    return this.props.onChange.call(null, event);
+  }
+
   componentDidMount() {
     super.componentDidMount();
-    this._switch.addEventListener('change', this.props.onChange);
+    this._switch.addEventListener('change', this.boundOnChange);
   }
 
   componentWillUnmount() {
-    this._switch.removeEventListener('change', this.props.onChange);
+    this._switch.removeEventListener('change', this.boundOnChange);
   }
 
   render() {
