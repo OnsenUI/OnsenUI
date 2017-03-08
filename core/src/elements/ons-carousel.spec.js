@@ -9,7 +9,7 @@ describe('OnsCarouselElement', () => {
         <ons-carousel-item>Item 1</ons-carousel-item>
         <ons-carousel-item>Item 2</ons-carousel-item>
         <ons-carousel-item>Item 3</ons-carousel-item>
-      </ons-carosel>
+      </ons-carousel>
     `);
     document.body.appendChild(carousel);
   });
