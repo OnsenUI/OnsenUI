@@ -605,19 +605,19 @@ gulp.task('e2e-test-webdriverio.prepare', function(done) {
       .map(file => path.resolve(dir, file));
   };
 
-  const walkDir = (dir, callback) => {
+  const walkDir = async (dir, callback) => {
     //console.log(`walkdDir: ${dir}`);
     const subDirs = getSubDirs(dir);
 
     // Corner case
     if (subDirs.length === 0) { // if no subdirectory exists
-      callback(dir);
+      await callback(dir);
       return;
     }
 
     // Recursion
     for (const subDir of subDirs) { // if any subdirectory exists
-      walkDir(subDir, callback);
+      await walkDir(subDir, callback);
     }
   };
 
@@ -629,7 +629,6 @@ gulp.task('e2e-test-webdriverio.prepare', function(done) {
   const generators = [];
   for (const generatorDir of getSubDirs(generatorsDir)) {
     try {
-      $.util.log($.util.colors.blue(generatorDir));
       generators.push({
         name: path.basename(generatorDir),
         run: require(generatorDir),
@@ -641,24 +640,38 @@ gulp.task('e2e-test-webdriverio.prepare', function(done) {
     }
   }
 
-  // Run all testcase generator
-  for (const generator of generators) {
-    // Process testcase generator input directories recursively
-    walkDir(
-      path.resolve(generatorInputsDir, generator.name), // root
-      (dir) => {
-        // Run testcase generator
-        generator.run(
-          // Source (testcase generator input dir)
-          dir,
-          // Destination (generated testcase dir)
-          path.resolve(generatedTestcasesDir, path.relative(generatorInputsDir, dir))
-        );
-      }
-    );
-  }
+  (async () => {
+    // Run all testcase generator
+    for (const generator of generators) {
+      const currentGeneratorInputsDir = path.resolve(generatorInputsDir, generator.name);
 
-  done();
+      $.util.log(`Running testcase generator ${$.util.colors.magenta(generator.name)}...`);
+      // Process testcase generator input directories recursively
+      await walkDir(
+        currentGeneratorInputsDir, // root
+        async (dir) => {
+          const testcasePath = path.relative(currentGeneratorInputsDir, dir);
+
+          $.util.log($.util.colors.blue(testcasePath));
+          // Run testcase generator
+          await generator.run(
+            // Source (testcase generator input dir)
+            dir,
+            // Destination (generated testcase dir)
+            path.resolve(generatedTestcasesDir, generator.name, testcasePath)
+          )
+          .then(() => {
+            $.util.log($.util.colors.green(`Testcase has been generated successfully!`));
+          })
+          .catch(e => {
+            $.util.log($.util.colors.red(`Failed to generate testcase.`));
+          });
+        }
+      );
+    }
+
+    done();
+  })();
 });
 
 gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare', 'e2e-test-webdriverio.prepare'], function(done){
