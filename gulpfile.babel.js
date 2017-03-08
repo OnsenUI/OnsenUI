@@ -597,7 +597,70 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
     });
 });
 
-gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
+gulp.task('e2e-test-webdriverio.prepare', function(done) {
+  const getSubDirs = (dir) => {
+    return fs
+      .readdirSync(dir)
+      .filter(file => fs.statSync(path.join(dir, file)).isDirectory())
+      .map(file => path.resolve(dir, file));
+  };
+
+  const walkDir = (dir, callback) => {
+    //console.log(`walkdDir: ${dir}`);
+    const subDirs = getSubDirs(dir);
+
+    // Corner case
+    if (subDirs.length === 0) { // if no subdirectory exists
+      callback(dir);
+      return;
+    }
+
+    // Recursion
+    for (const subDir of subDirs) { // if any subdirectory exists
+      walkDir(subDir, callback);
+    }
+  };
+
+  const generatorsDir = path.resolve(__dirname, `core/test/e2e-webdriverio/testcase-generator`);
+  const generatorInputsDir = path.resolve(__dirname, `core/test/e2e-webdriverio/testcase-generator-input`);
+  const generatedTestcasesDir = path.resolve(__dirname, `core/test/e2e-webdriverio/generated-testcase`);
+
+  // Get testcase generators
+  const generators = [];
+  for (const generatorDir of getSubDirs(generatorsDir)) {
+    try {
+      $.util.log($.util.colors.blue(generatorDir));
+      generators.push({
+        name: path.basename(generatorDir),
+        run: require(generatorDir),
+      }); // load testcase generator module
+    } catch (e) {
+      $.util.log($.util.colors.red(`${generatorDir} is not a Node.js module`));
+      continue;
+    }
+  }
+
+  // Run all testcase generator
+  for (const generator of generators) {
+    // Process testcase generator input directories recursively
+    walkDir(
+      path.resolve(generatorInputsDir, generator.name), // root
+      (dir) => {
+        // Run testcase generator
+        generator.run(
+          // Source (testcase generator input dir)
+          dir,
+          // Destination (generated testcase dir)
+          path.resolve(generatedTestcasesDir, path.relative(generatorInputsDir, dir))
+        );
+      }
+    );
+  }
+
+  done();
+});
+
+gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare', 'e2e-test-webdriverio.prepare'], function(done){
   // Usage:
   //     # run all WebdriverIO E2E tests
   //     gulp e2e-test-webdriverio
