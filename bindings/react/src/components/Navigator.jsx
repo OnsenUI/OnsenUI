@@ -261,6 +261,10 @@ class Navigator extends BasicComponent {
     node.addEventListener('prepop', this._prePop);
     node.addEventListener('postpop', this._postPop);
 
+    if (this.props.onDeviceBackButton instanceof Function) {
+      node.onDeviceBackButton = this.props.onDeviceBackButton;
+    }
+
     if (this.props.initialRoute && this.props.initialRouteStack) {
       throw new Error('In Navigator either initalRoute or initalRoutes can be set');
     }
@@ -392,7 +396,19 @@ Navigator.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object
+  animationOptions: React.PropTypes.object,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 const NOOP = () => null;

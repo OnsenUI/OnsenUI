@@ -34,7 +34,7 @@ class BaseDialog extends React.Component {
     this.node.addEventListener('prehide', this.props.onPreHide);
     this.node.addEventListener('posthide', this.props.onPostHide);
 
-    this.renderPortal(this.props, false);
+    this.renderPortal(this.props, false, this.props.onDeviceBackButton);
   }
 
   componentWillReceiveProps(newProps) {
@@ -52,7 +52,7 @@ class BaseDialog extends React.Component {
     document.body.removeChild(this.node);
   }
 
-  _update(isShown) {
+  _update(isShown, onDeviceBackButton) {
     if (this.props.isOpen) {
       if (!isShown) {
         this.show();
@@ -60,14 +60,19 @@ class BaseDialog extends React.Component {
     } else {
       this.hide();
     }
+
     this.updateClasses();
+
+    if (onDeviceBackButton instanceof Function) {
+      this.node.firstChild.onDeviceBackButton = onDeviceBackButton;
+    }
   }
 
   _getDomNodeName() {
     throw new Error('_getDomNodeName is not implemented');
   }
 
-  renderPortal(props, isShown) {
+  renderPortal(props, isShown, onDeviceBackButton = null) {
     var {...newProps} = props;
 
     Util.convert(newProps, 'isCancelable', {newName: 'cancelable'});
@@ -81,7 +86,7 @@ class BaseDialog extends React.Component {
       this,
       <DomNodeName {...newProps} />,
       this.node,
-      this._update.bind(this, isShown)
+      this._update.bind(this, isShown, onDeviceBackButton)
     );
   }
 
@@ -101,7 +106,8 @@ BaseDialog.propTypes = {
   onPreShow: React.PropTypes.func,
   onPostShow: React.PropTypes.func,
   onPreHide: React.PropTypes.func,
-  onPostHide: React.PropTypes.func
+  onPostHide: React.PropTypes.func,
+  onDeviceBackButton: React.PropTypes.func
 };
 
 BaseDialog.defaultProps = {
