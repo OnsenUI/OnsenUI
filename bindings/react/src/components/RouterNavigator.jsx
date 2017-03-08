@@ -145,6 +145,14 @@ class RouterNavigator extends BasicComponent {
     return this._navi._popPage(options, update);
   }
 
+  _onDeviceBackButton(event) {
+    if (this.props.routeConfig.routeStack.length > 1) {
+      this.popPage();
+    } else {
+      event.callParentHandler();
+    }
+  }
+
   componentDidMount() {
     const node = this._navi;
 
@@ -164,6 +172,8 @@ class RouterNavigator extends BasicComponent {
     this.pages = this.routeConfig.routeStack.map(
       (route) => this.props.renderPage(route, this)
     );
+
+    node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     this.update();
   }
@@ -319,7 +329,19 @@ RouterNavigator.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object
+  animationOptions: React.PropTypes.object,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 export default RouterNavigator;
