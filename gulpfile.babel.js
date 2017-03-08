@@ -636,6 +636,7 @@ gulp.task('e2e-test-webdriverio.prepare', function(done) {
       }); // load testcase generator module
     } catch (e) {
       $.util.log($.util.colors.red(`${generatorDir} is not a Node.js module`));
+      $.util.log($.util.colors.red(e.stack || e.toString())); // Error.prototype.stack is not a standard function
       continue;
     }
   }
