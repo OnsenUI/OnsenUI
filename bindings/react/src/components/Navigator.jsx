@@ -200,6 +200,14 @@ class Navigator extends BasicComponent {
     return this._navi._popPage(options, update);
   }
 
+  _onDeviceBackButton(event) {
+    if (this.pages.length > 1) {
+      this.popPage();
+    } else {
+      event.callParentHandler();
+    }
+  }
+
   _prePop(event) {
     if (event.target !== this._navi) {
       return;
@@ -261,9 +269,7 @@ class Navigator extends BasicComponent {
     node.addEventListener('prepop', this._prePop);
     node.addEventListener('postpop', this._postPop);
 
-    if (this.props.onDeviceBackButton instanceof Function) {
-      node.onDeviceBackButton = this.props.onDeviceBackButton;
-    }
+    node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     if (this.props.initialRoute && this.props.initialRouteStack) {
       throw new Error('In Navigator either initalRoute or initalRoutes can be set');
