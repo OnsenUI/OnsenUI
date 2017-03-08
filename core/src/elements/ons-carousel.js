@@ -620,7 +620,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (this._isWrongDirection(event.gesture.direction)) {
+    if (this._isWrongDirection(event.gesture.direction) || event.path[0].type === 'range') {
       return;
     }
 
