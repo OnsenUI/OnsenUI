@@ -166,7 +166,19 @@ AlertDialog.propTypes = {
    *  [en]Called just after the alert dialog is hidden.[/en]
    *  [jp][/jp]
    */
-  onPostHide: React.PropTypes.func
+  onPostHide: React.PropTypes.func,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 export default AlertDialog;

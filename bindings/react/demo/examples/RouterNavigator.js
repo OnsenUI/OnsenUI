@@ -13,29 +13,10 @@ const MyToolbar = ({title, onBackButton = null}) => (
   </Toolbar>
 );
 
-const MainPage = ({pushPage}) => {
+const ThirdPage = ({popPage}) => {
   return (
     <Page
-      renderToolbar={() => <MyToolbar title='Main page' />}
-    >
-      <div style={{
-        textAlign: 'center',
-        margin: 10
-      }}>
-        <Button
-          onClick={pushPage}
-        >
-          Push page
-        </Button>
-      </div>
-    </Page>
-  );
-};
-
-const SecondaryPage = ({popPage}) => {
-  return (
-    <Page
-      renderToolbar={() => <MyToolbar title='Second page' onBackButton={popPage} />}
+      renderToolbar={() => <MyToolbar title='Third page' onBackButton={popPage} />}
     >
       <div style={{
         textAlign: 'center',
@@ -51,6 +32,49 @@ const SecondaryPage = ({popPage}) => {
   );
 };
 
+const SecondPage = ({pushPage, popPage}) => {
+  return (
+    <Page
+      renderToolbar={() => <MyToolbar title='Second page' onBackButton={popPage} />}
+    >
+      <div style={{
+        textAlign: 'center',
+        margin: 10
+      }}>
+        <Button
+          onClick={() => pushPage(ThirdPage, 'third')}
+        >
+          Push page
+        </Button>
+        <Button
+          onClick={popPage}
+        >
+          Pop page
+        </Button>
+      </div>
+    </Page>
+  );
+};
+
+const MainPage = ({pushPage}) => {
+  return (
+    <Page
+      renderToolbar={() => <MyToolbar title='Main page' />}
+    >
+      <div style={{
+        textAlign: 'center',
+        margin: 10
+      }}>
+        <Button
+          onClick={() => pushPage(SecondPage, 'second')}
+        >
+          Push page
+        </Button>
+      </div>
+    </Page>
+  );
+};
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +83,7 @@ export default class extends Component {
         component: MainPage,
         props: {
           key: 'main',
-          pushPage: () => this.pushPage()
+          pushPage: (...args) => this.pushPage(...args)
         }
     }]);
 
@@ -67,12 +91,13 @@ export default class extends Component {
 
   }
 
-  pushPage() {
+  pushPage(page, key) {
     const route = {
-      component: SecondaryPage,
+      component: page,
       props: {
-        key: 'secondary',
-        popPage: () => this.popPage()
+        key: key,
+        popPage: () => this.popPage(),
+        pushPage: (...args) => this.pushPage(...args)
       }
     };
 
