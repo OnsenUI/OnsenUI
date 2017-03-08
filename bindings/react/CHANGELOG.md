@@ -2,11 +2,15 @@
 CHANGELOG
 ====
 
-v1.1.1
+dev
 ----
 * router-naigator: Fixed [#1822](https://github.com/OnsenUI/OnsenUI/pull/1822).
 * lazy-list: Support for dynamic heights.
 * select: Add Select component.
+* dialogs: Fixed [#1758](https://github.com/OnsenUI/OnsenUI/pull/1758).
+* components: Added onDeviceBackButton handler prop.
+* navigator: Fixed support for Device Back Button.
+* router-navigator: Fixed support for Device Back Button.
 
 v1.1.0
 ----
