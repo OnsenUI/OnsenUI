@@ -30,6 +30,7 @@ class Page extends BasicComponent {
     node.addEventListener('init', this.props.onInit);
     node.addEventListener('show', this.props.onShow);
     node.addEventListener('hide', this.props.onHide);
+    node.onDeviceBackButton = this.props.onDeviceBackButton;
   }
 
   componentWillUnmount() {
@@ -160,16 +161,29 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onHide: React.PropTypes.func
+  onHide: React.PropTypes.func,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button
+   *  [/en]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 const NOOP = () => null;
+const DEFAULT_ON_DEVICE_BACK = (event) => { event.callParentHandler(); };
 
 Page.defaultProps = {
   renderToolbar: NOOP,
   renderBottomToolbar: NOOP,
   renderModal: NOOP,
-  renderFixed: NOOP
+  renderFixed: NOOP,
+  onDeviceBackButton: DEFAULT_ON_DEVICE_BACK
 };
 
 export default Page;
