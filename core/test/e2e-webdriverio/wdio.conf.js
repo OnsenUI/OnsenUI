@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        global.WDIO_SPEC_FILES || 'core/test/e2e-webdriverio/**/*.js'
+        global.WDIO_SPEC_FILES
     ],
     // Patterns to exclude.
     exclude: [
@@ -58,7 +58,7 @@ exports.config = {
         // 5 instance gets started at a time.
         maxInstances: 1,
         //
-        browserName: global.WDIO_BROWSER || 'chrome'
+        browserName: global.WDIO_BROWSER
     }],
     //
     // ===================
