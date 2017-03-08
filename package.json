@@ -124,5 +124,9 @@
     "wcdoc": "^0.1.18",
     "wdio-jasmine-framework": "^0.2.16",
     "webdriverio": "^4.4.0"
+  },
+  "dependencies": {
+    "babel-loader": "^6.4.0",
+    "webpack": "^2.2.1"
   }
 }
