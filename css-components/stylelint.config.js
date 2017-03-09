@@ -1,4 +1,6 @@
 module.exports = {
+  defaultSeverity: 'warning',
+
   rules: {
     // Color
     'color-hex-case': 'lower',
@@ -123,21 +125,21 @@ module.exports = {
     'selector-attribute-operator-space-before': 'never',
     'selector-attribute-operator-whitelist': null,
     'selector-attribute-quotes': 'always',
-    'selector-class-pattern': null, // FIXME
+    'selector-class-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+(-[a-z0-9]+)*)?(__([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+(-[a-z0-9]+)*)?)*$', // MindBEMding style
     'selector-combinator-space-after': 'always',
     'selector-combinator-space-before': 'always',
     'selector-descendant-combinator-no-non-space': true,
     'selector-id-pattern': null,
     'selector-max-compound-selectors': 3,
-    'selector-max-specificity': '0,3,3', // FIXME
+    'selector-max-specificity': '0,3,1',
     'selector-nested-pattern': null,
     'selector-no-attribute': null,
-    'selector-no-combinator': null, // FIXME
+    'selector-no-combinator': null,
     'selector-no-id': true,
     'selector-no-qualifying-type': true,
     'selector-no-type': null,
     'selector-no-universal': true,
-    'selector-no-vendor-prefix': true, // FIXME
+    'selector-no-vendor-prefix': true,
     'selector-pseudo-class-blacklist': null,
     'selector-pseudo-class-case': 'lower',
     'selector-pseudo-class-no-unknown': true,
@@ -159,7 +161,7 @@ module.exports = {
     'media-feature-name-blacklist': null,
     'media-feature-name-case': 'lower',
     'media-feature-name-no-unknown': true,
-    'media-feature-name-no-vendor-prefix': null, // FIXME
+    'media-feature-name-no-vendor-prefix': null,
     'media-feature-name-whitelist': null,
     'media-feature-parentheses-space-inside': 'never',
     'media-feature-range-operator-space-after': 'always',
@@ -183,7 +185,6 @@ module.exports = {
     'at-rule-no-unknown': true,
     'at-rule-no-vendor-prefix': null,
     'at-rule-semicolon-newline-after': 'always',
-    //'at-rule-semicolon-space-before': 'never',
     'at-rule-whitelist': null,
 
     // Comment
@@ -197,7 +198,7 @@ module.exports = {
     'max-empty-lines': 1,
     'max-line-length': null,
     'max-nesting-depth': null,
-    'no-descending-specificity': true, // FIXME
+    'no-descending-specificity': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
     'no-eol-whitespace': true,
