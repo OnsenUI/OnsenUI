@@ -46,11 +46,11 @@ class SplitterSide extends BasicComponent {
         return this.props[name](event);
       }
     };
-    this.onOpen = this.callback.bind(this, 'onOpen');
-    this.onClose = this.callback.bind(this, 'onClose');
-    this.onPreOpen = this.callback.bind(this, 'onPreOpen');
-    this.onPreClose = this.callback.bind(this, 'onPreClose');
-    this.onModeChange = this.callback.bind(this, 'onModeChange');
+    this.onOpen = callback.bind(this, 'onOpen');
+    this.onClose = callback.bind(this, 'onClose');
+    this.onPreOpen = callback.bind(this, 'onPreOpen');
+    this.onPreClose = callback.bind(this, 'onPreClose');
+    this.onModeChange = callback.bind(this, 'onModeChange');
   }
 
   render() {

@@ -27,7 +27,7 @@ class Input extends BasicComponent {
 
     this.onChange = (event) => {
       if (this.props.onChange) {
-      return this.props.onChange(event);
+        return this.props.onChange(event);
       }
     };
   }
