@@ -376,7 +376,16 @@ gulp.task('prepare', ['html2js'], () =>  {
       'core/css/*.css'
     ])
       .pipe($.concat('onsenui.css'))
-      .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
+      .pipe($.autoprefixer({
+        browsers: [ // enable CSS properties which require prefixes
+          'Android >= 4.4',
+          'iOS >= 8.0',
+          'Chrome >= 30', // equivalent to Android 4.4 WebView
+          'Safari >= 9',
+        ],
+        add: true,
+        remove: false, // removing prefixes can cause a bug
+      }))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
