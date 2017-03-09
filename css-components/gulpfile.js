@@ -16,7 +16,7 @@ const prefix = __dirname + '/../build/css/';
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', ['generate-preview']);
+gulp.task('build', ['post-stylelint']);
 
 ////////////////////////////////////////
 // stylelint
@@ -24,7 +24,24 @@ gulp.task('build', ['generate-preview']);
 gulp.task('stylelint', () => {
   return gulp.src('./src/**/*.css')
     .pipe($.stylelint({
-      failAfterError: true,
+      failAfterError: false,
+      reporters: [{formatter: 'string', console: true}]
+    }));
+});
+
+////////////////////////////////////////
+// post-stylelint
+////////////////////////////////////////
+gulp.task('post-stylelint', ['generate-preview'], () => {
+  return gulp.src('../build/css/onsen-css-components.css')
+    .pipe($.stylelint({
+      config: {
+        defaultSeverity: 'warning',
+        rules: {
+          'declaration-block-no-duplicate-properties': true
+        }
+      },
+      failAfterError: false,
       reporters: [{formatter: 'string', console: true}]
     }));
 });
