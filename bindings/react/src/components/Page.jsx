@@ -24,12 +24,25 @@ import BasicComponent from './BasicComponent.jsx';
  */
 class Page extends BasicComponent {
 
+  constructor(...args) {
+    super(...args);
+
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onInit = callback.bind(this, 'onInit');
+    this.onShow = callback.bind(this, 'onShow');
+    this.onHide = callback.bind(this, 'onHide');
+  }
+
   componentDidMount() {
     super.componentDidMount();
     const node = ReactDOM.findDOMNode(this);
-    node.addEventListener('init', this.props.onInit);
-    node.addEventListener('show', this.props.onShow);
-    node.addEventListener('hide', this.props.onHide);
+    node.addEventListener('init', this.onInit);
+    node.addEventListener('show', this.onShow);
+    node.addEventListener('hide', this.onHide);
 
     if (this.props.onDeviceBackButton instanceof Function) {
       node.onDeviceBackButton = this.props.onDeviceBackButton;
@@ -38,9 +51,9 @@ class Page extends BasicComponent {
 
   componentWillUnmount() {
     const node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('init', this.props.onInit);
-    node.removeEventListener('show', this.props.onShow);
-    node.removeEventListener('hide', this.props.onHide);
+    node.removeEventListener('init', this.onInit);
+    node.removeEventListener('show', this.onShow);
+    node.removeEventListener('hide', this.onHide);
   }
 
   render() {

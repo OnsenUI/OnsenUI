@@ -22,12 +22,22 @@ const EVENT_TYPES = ['change', 'input'];
  *   placeholder='Username' />
  */
 class Input extends BasicComponent {
+  constructor(...args) {
+    super(...args);
+
+    this.onChange = (event) => {
+      if (this.props.onChange) {
+      return this.props.onChange(event);
+      }
+    };
+  }
+
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
 
     EVENT_TYPES.forEach((eventType) => {
-      node.addEventListener(eventType, this.props.onChange);
+      node.addEventListener(eventType, this.onChange);
     });
   }
 
@@ -35,7 +45,7 @@ class Input extends BasicComponent {
     var node = ReactDOM.findDOMNode(this);
 
     EVENT_TYPES.forEach((eventType) => {
-      node.removeEventListener(eventType, this.props.onChange);
+      node.removeEventListener(eventType, this.onChange);
     });
   }
 

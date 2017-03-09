@@ -3,6 +3,22 @@ import ReactDOM from 'react-dom';
 import Util from './Util.js';
 
 class BaseDialog extends React.Component {
+
+  constructor(...args) {
+    super(...args);
+
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onCancel = callback.bind(this, 'onCancel');
+    this.onPreShow = callback.bind(this, 'onPreShow');
+    this.onPostShow = callback.bind(this, 'onPostShow');
+    this.onPreHide = callback.bind(this, 'onPreHide');
+    this.onPostHide = callback.bind(this, 'onPostHide');
+  }
+
   show() {
     this.node.firstChild.show();
   }
@@ -28,11 +44,11 @@ class BaseDialog extends React.Component {
     this.node = document.createElement('div');
     document.body.appendChild(this.node);
 
-    this.node.addEventListener('dialog-cancel', this.props.onCancel);
-    this.node.addEventListener('preshow', this.props.onPreShow);
-    this.node.addEventListener('postshow', this.props.onPostShow);
-    this.node.addEventListener('prehide', this.props.onPreHide);
-    this.node.addEventListener('posthide', this.props.onPostHide);
+    this.node.addEventListener('dialog-cancel', this.onCancel);
+    this.node.addEventListener('preshow', this.onPreShow);
+    this.node.addEventListener('postshow', this.onPostShow);
+    this.node.addEventListener('prehide', this.onPreHide);
+    this.node.addEventListener('posthide', this.onPostHide);
 
     this.renderPortal(this.props, false, this.props.onDeviceBackButton);
   }
@@ -42,11 +58,11 @@ class BaseDialog extends React.Component {
   }
 
   componentWillUnmount() {
-    this.node.removeEventListener('cancel', this.props.onCancel);
-    this.node.removeEventListener('preshow', this.props.onPreShow);
-    this.node.removeEventListener('postshow', this.props.onPostShow);
-    this.node.removeEventListener('prehide', this.props.onPreHide);
-    this.node.removeEventListener('posthide', this.props.onPostHide);
+    this.node.removeEventListener('dialog-cancel', this.onCancel);
+    this.node.removeEventListener('preshow', this.onPreShow);
+    this.node.removeEventListener('postshow', this.onPostShow);
+    this.node.removeEventListener('prehide', this.onPreHide);
+    this.node.removeEventListener('posthide', this.onPostHide);
 
     ReactDOM.unmountComponentAtNode(this.node);
     document.body.removeChild(this.node);

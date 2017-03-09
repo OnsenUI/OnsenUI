@@ -38,16 +38,19 @@ import Util from './Util.js';
 
 class SplitterSide extends BasicComponent {
 
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
 
-    const callback = (name, event) => this.props[name](event);
-
-    this.boundOnOpen = this.callback.bind(this, 'onOpen');
-    this.boundOnClose = this.callback.bind(this, 'onClose');
-    this.boundOnPreOpen = this.callback.bind(this, 'onPreOpen');
-    this.boundOnPreClose = this.callback.bind(this, 'onPreClose');
-    this.boundOnModeChange = this.callback.bind(this, 'onModeChange');
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onOpen = this.callback.bind(this, 'onOpen');
+    this.onClose = this.callback.bind(this, 'onClose');
+    this.onPreOpen = this.callback.bind(this, 'onPreOpen');
+    this.onPreClose = this.callback.bind(this, 'onPreClose');
+    this.onModeChange = this.callback.bind(this, 'onModeChange');
   }
 
   render() {
@@ -90,19 +93,19 @@ class SplitterSide extends BasicComponent {
     this.node = ReactDOM.findDOMNode(this);
     this.componentWillReceiveProps(this.props);
 
-    this.node.addEventListener('postopen', this.boundOnOpen);
-    this.node.addEventListener('postclose', this.boundOnClose);
-    this.node.addEventListener('preopen', this.boundOnPreOpen);
-    this.node.addEventListener('preclose', this.boundOnPreClose);
-    this.node.addEventListener('modechange', this.boundOnModeChange);
+    this.node.addEventListener('postopen', this.onOpen);
+    this.node.addEventListener('postclose', this.onClose);
+    this.node.addEventListener('preopen', this.onPreOpen);
+    this.node.addEventListener('preclose', this.onPreClose);
+    this.node.addEventListener('modechange', this.onModeChange);
   }
 
   componentWillUnmount() {
-    this.node.removeEventListener('postopen', this.boundOnOpen);
-    this.node.removeEventListener('postclose', this.boundOnClose);
-    this.node.removeEventListener('preopen', this.boundOnPreOpen);
-    this.node.removeEventListener('preclose', this.boundOnPreClose);
-    this.node.removeEventListener('modechange', this.boundOnModeChange);
+    this.node.removeEventListener('postopen', this.onOpen);
+    this.node.removeEventListener('postclose', this.onClose);
+    this.node.removeEventListener('preopen', this.onPreOpen);
+    this.node.removeEventListener('preclose', this.onPreClose);
+    this.node.removeEventListener('modechange', this.onModeChange);
   }
 
   componentWillReceiveProps(newProps) {
