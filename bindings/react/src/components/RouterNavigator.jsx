@@ -11,10 +11,21 @@ import Util from './Util.js';
  * [jp] どうしよう[/jp]
  */
 class RouterNavigator extends BasicComponent {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
+
     this.cancelUpdate = false;
     this.page = null;
+
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onPrePush = callback.bind(this, 'onPrePush');
+    this.onPostPush = callback.bind(this, 'onPostPush');
+    this.onPrePop = callback.bind(this, 'onPrePop');
+    this.onPostPop = callback.bind(this, 'onPostPop');
   }
 
   update(cb) {
@@ -158,10 +169,10 @@ class RouterNavigator extends BasicComponent {
 
     this.cancelUpdate = false;
 
-    node.addEventListener('prepush', this.props.onPrePush);
-    node.addEventListener('postpush', this.props.onPostPush);
-    node.addEventListener('prepop', this.props.onPrePop);
-    node.addEventListener('postpop', this.props.onPostPop);
+    node.addEventListener('prepush', this.onPrePush);
+    node.addEventListener('postpush', this.onPostPush);
+    node.addEventListener('prepop', this.onPrePop);
+    node.addEventListener('postpop', this.onPostPop);
 
     if (!this.props.routeConfig) {
       throw new Error('In RouterNavigator the property routeConfig needs to be set');
@@ -217,10 +228,10 @@ class RouterNavigator extends BasicComponent {
 
   componentWillUnmount() {
     const node = this._navi;
-    node.removeEventListener('prepush', this.props.onPrePush);
-    node.removeEventListener('postpush', this.props.onPostPush);
-    node.removeEventListener('prepop', this.props.onPrePop);
-    node.removeEventListener('postpop', this.props.onPostPop);
+    node.removeEventListener('prepush', this.onPrePush);
+    node.removeEventListener('postpush', this.onPostPush);
+    node.removeEventListener('prepop', this.onPrePop);
+    node.removeEventListener('postpop', this.onPostPop);
     this.cancelUpdate = true;
   }
 

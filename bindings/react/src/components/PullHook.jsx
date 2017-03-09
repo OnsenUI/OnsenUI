@@ -34,16 +34,26 @@ import Util from './Util.js';
     );
  */
 class PullHook extends BasicComponent {
+  constructor(...args) {
+    super(...args);
+
+    this.onChange = (event) => {
+      if (this.props.onChange) {
+        return this.props.onChange(event);
+      }
+    };
+  }
+
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
-    node.addEventListener('changestate', this.props.onChange);
+    node.addEventListener('changestate', this.onChange);
     this._pullHook.onAction = this.props.onLoad;
   }
 
   componentWillUnmount() {
     var node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('changestate', this.props.onChange);
+    node.removeEventListener('changestate', this.onChange);
   }
 
   render() {

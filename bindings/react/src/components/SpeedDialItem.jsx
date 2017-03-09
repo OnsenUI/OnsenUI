@@ -21,6 +21,16 @@ import React from 'react';
    </SpeedDial>
  */
 class SpeedDialItem extends SimpleWrapper {
+  constructor(...args) {
+    super(...args);
+
+    this.onClick = event => {
+      if (this.props.onClick) {
+        return this.props.onClick(event);
+      }
+    };
+  }
+
   _getDomNodeName() {
     return 'ons-speed-dial-item';
   }
@@ -28,12 +38,12 @@ class SpeedDialItem extends SimpleWrapper {
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
-    node.addEventListener('click', this.props.onClick);
+    node.addEventListener('click', this.onClick);
   }
 
   componentWillUnmount() {
     var node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('click', this.props.onClick);
+    node.removeEventListener('click', this.onClick);
   }
 }
 

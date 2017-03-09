@@ -34,6 +34,19 @@ import Util from './Util.js';
 
  */
 class Carousel extends SimpleWrapper {
+  constructor(...args) {
+    super(...args);
+
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onChange = callback.bind(this, 'onPostChange');
+    this.onRefresh = callback.bind(this, 'onRefresh');
+    this.onOverscroll = callback.bind(this, 'onOverscroll');
+  }
+
   _getDomNodeName() {
     return 'ons-carousel';
   }
@@ -41,9 +54,16 @@ class Carousel extends SimpleWrapper {
   componentDidMount() {
     super.componentDidMount();
     const node = findDOMNode(this);
-    node.addEventListener('postchange', this.props.onPostChange);
-    node.addEventListener('refresh', this.props.onRefresh);
-    node.addEventListener('overscroll', this.props.onOverscroll);
+    node.addEventListener('postchange', this.onChange);
+    node.addEventListener('refresh', this.onRefresh);
+    node.addEventListener('overscroll', this.onOverscroll);
+  }
+
+  componentWillUnmount() {
+    const node = findDOMNode(this);
+    node.removeEventListener('postchange', this.onPostChange);
+    node.removeEventListener('refresh', this.onRefresh);
+    node.removeEventListener('overscroll', this.onOverscroll);
   }
 
   componentWillReceiveProps(props) {
@@ -60,13 +80,6 @@ class Carousel extends SimpleWrapper {
     if (this.props.children.length !== props.children.length) {
       node.refresh();
     }
-  }
-
-  componentWillUnmount() {
-    const node = findDOMNode(this);
-    node.removeEventListener('postchange', this.props.onPostChange);
-    node.removeEventListener('refresh', this.props.onRefresh);
-    node.removeEventListener('overscroll', this.props.onOverscroll);
   }
 
   render() {
