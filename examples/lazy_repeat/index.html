@@ -9,31 +9,15 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
-    var fixedJump = '';
-    var jump = (function() {
-      var memoize = [];
-      return function(i) {
-        if (memoize[i] === undefined) {
-          memoize[i] = Array(1 + Math.floor(Math.random() * 5)).join('<br>');
-        }
-        return memoize[i];
-      };
-    })();
-    var test = function() {
-      fixedJump = Array(10).join('<br>');
-    }
+    window.onload = setup;
 
-    function refresh(i) {
-      document.querySelector('#my-list').refresh(i);
-    }
+    function setup() {
 
-    window.onload = function() {
       document.querySelector('#my-list').delegate = {
         createItemContent: function(i, template) {
           var dom = template.cloneNode(true);
 
-          dom.innerHTML = dom.innerHTML.replace('{{item}}', i===5?i+fixedJump:(i + jump(i)));
-          dom.setAttribute('index', i);
+          dom.innerHTML = dom.innerHTML.replace('{{item}}', i);
 
           return dom;
         },
@@ -42,8 +26,11 @@
           return 10000000;
         }
       };
-    };
+    }
 
+    function refresh() {
+      document.querySelector('#my-list').refresh();
+    }
   </script>
 
 </head>
@@ -53,9 +40,6 @@
     <ons-toolbar>
       <div class="left"><ons-toolbar-button onclick="refresh()">Refresh</ons-toolbar-button></div>
       <div class="center">Lazy Repeat</div>
-      <div class="right">
-        <ons-toolbar-button onclick="test()">TestItem5</ons-toolbar-button>
-      </div>
     </ons-toolbar>
 
     <ons-list>
