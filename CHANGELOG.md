@@ -17,10 +17,12 @@ dev
  * css-components: Fixed broken popover components.
  * css-components: Fixed [#1653](https://github.com/OnsenUI/OnsenUI/issues/1653).
  * core: Fix `autoprefixer` settings for `onsenui.css`.
+ * core: Fixed [#1700](https://github.com/OnsenUI/OnsenUI/issues/1700).
  * ons-select: Fix width of the inner element.
  * ons-popover: Fixed behavior on device back button.
  * ons-splitter: Checks if content exists before removing.
  * ons-lazy-repeat: Clean first item scope.
+ * ons-progress-circular: Fixed [#1860](https://github.com/OnsenUI/OnsenUI/issues/1860).
  * ons.notification: Fixed [#1787](https://github.com/OnsenUI/OnsenUI/issues/1787).
  * ons-row: Fixed [#1858](https://github.com/OnsenUI/OnsenUI/issues/1858).
  * angular1: `number input` retains number type variable with `ngModel`.
