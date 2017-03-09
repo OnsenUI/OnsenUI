@@ -4,6 +4,7 @@ CHANGELOG
 
 dev
 ----
+* Fixed [#1768](https://github.com/OnsenUI/OnsenUI/pull/1768).
 * router-naigator: Fixed [#1822](https://github.com/OnsenUI/OnsenUI/pull/1822).
 * lazy-list: Support for dynamic heights.
 * select: Add Select component.
