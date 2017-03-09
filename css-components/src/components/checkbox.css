@@ -19,14 +19,18 @@
 
   --checkbox: {
     @apply(--reset-box-model);
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
     @apply(--reset-font);
     @apply(--hide-input-parent);
   }
 
   --checkbox__label: {
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
     @apply(--reset-font);
   }
@@ -175,7 +179,9 @@
 }
 
 .checkbox--noborder__checkmark {
-  @apply(--inline-block);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
   @apply(--reset-cursor);
   @apply(--reset-box-model);
   width: var(--checkbox-size);

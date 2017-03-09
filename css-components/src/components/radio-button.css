@@ -8,14 +8,18 @@
 
   --radio-button: {
     @apply(--reset-box-model);
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
     @apply(--reset-font);
     @apply(--hide-input-parent);
   }
 
   --radio-button__label: {
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
   }
 

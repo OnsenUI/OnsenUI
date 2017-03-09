@@ -126,7 +126,9 @@
 }
 
 .tabbar__button {
-  @apply(--inline-block);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
   @apply(--reset-font);
   @apply(--reset-box-model);
   @apply(--reset-base);

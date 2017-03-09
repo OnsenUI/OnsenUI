@@ -8,14 +8,17 @@
   --switch-width: 51px;
 
   --switch: {
-    @apply(--inline-block);
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-box-model);
     @apply(--hide-input-parent);
     min-width: 51px;
   }
 
   --switch__toggle: {
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-box-model);
     @apply(--reset-base);
     @apply(--reset-cursor);
@@ -61,7 +64,6 @@
 
 .switch__input {
   @apply(--hide-input);
-  z-index: -1;
 }
 
 /* switch toggle background */
@@ -166,7 +168,6 @@
 
 .switch--material__input {
   @apply(--hide-input);
-  z-index: -1;
 }
 
 .switch--material__handle {

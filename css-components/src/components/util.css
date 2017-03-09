@@ -37,8 +37,13 @@
   }
 
   --reset-input: {
-    @apply(--reset-base);
     @apply(--reset-box-model);
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
     vertical-align: top;
     outline: none;
     line-height: 1;
@@ -60,13 +65,11 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    -webkit-appearance: none;
     appearance: none;
   }
 
   --hide-input-parent: {
     position: relative;
-    overflow: hidden;
   }
 
   --reset-cursor: {
@@ -83,12 +86,6 @@
     @apply(--reset-box-model);
     @apply(--reset-overflow);
     word-spacing: 0;
-  }
-
-  --inline-block: {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
   }
 
   --ellipsis: {

@@ -12,7 +12,7 @@
   --search-input: {
     @apply(--reset-input);
     @apply(--reset-font);
-    -webkit-appearance: textfield;
+    appearance: textfield;
   }
 
   --search-input--disabled: {
@@ -50,7 +50,7 @@
 }
 
 .search-input::-webkit-search-cancel-button {
-  -webkit-appearance: textfield;
+  appearance: textfield;
   display: none;
 }
 

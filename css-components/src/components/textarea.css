@@ -28,7 +28,7 @@
   color: var(--textarea-color);
   letter-spacing: var(--letter-spacing);
   box-shadow: var(--textarea-box-shadow);
-  -webkit-appearance: none;
+  appearance: none;
   width: auto;
 }
 
@@ -65,7 +65,7 @@
   color: var(--textarea-color);
   letter-spacing: var(--letter-spacing);
   box-shadow: var(--textarea-box-shadow);
-  -webkit-appearance: none;
+  appearance: none;
   width: auto;
 }
 

@@ -18,7 +18,9 @@
 */
 
 .notification {
-  @apply(--inline-block);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
   @apply(--reset-box-model);
   @apply(--reset-base);
   @apply(--reset-font);
