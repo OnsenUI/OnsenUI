@@ -50,7 +50,7 @@
   }
 }
 
-/*!
+/*~
   name: Text Input
   category: Text Input
   elements: ons-input
@@ -83,7 +83,7 @@
   @apply(--text-input--invalid);
 }
 
-/*!
+/*~
   name: Underbar Text Input
   category: Text Input
   elements: ons-input
@@ -118,7 +118,7 @@
   border-bottom: 1px solid var(--input-invalid-border-color);
 }
 
-/*!
+/*~
   name: Material Input
   category: Text Input
   elements: ons-input
@@ -188,7 +188,7 @@
   }
 }
 
-/*!
+/*~
   name: Transparent Text Input
   category: Text Input
   elements: ons-input

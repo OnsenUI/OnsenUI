@@ -46,7 +46,7 @@
   }
 }
 
-/*!
+/*~
   name: Range
   category: Range
   elements: ons-range
@@ -139,7 +139,7 @@
   @apply(--disabled);
 }
 
-/*!
+/*~
   name: Material Range
   category: Range
   elements: ons-range

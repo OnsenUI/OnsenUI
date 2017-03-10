@@ -44,7 +44,7 @@
   }
 }
 
-/*!
+/*~
   name: Radio Button
   category: Radio Button
   elements: ons-input
@@ -137,7 +137,7 @@
   @apply(--radio-button--disabled);
 }
 
-/*!
+/*~
   name: Material Radio Button
   category: Radio Button
   elements: ons-input

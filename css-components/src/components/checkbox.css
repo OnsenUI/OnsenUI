@@ -49,7 +49,7 @@
   }
 }
 
-/*!
+/*~
   name: Checkbox
   category: Checkbox
   elements: ons-input
@@ -144,7 +144,7 @@
   box-shadow: var(--box-shadow);
 }
 
-/*!
+/*~
   name: No border Checkbox
   category: Checkbox
   elements: ons-input
@@ -242,7 +242,7 @@
   border: none;
 }
 
-/*!
+/*~
   name: Material Checkbox
   category: Checkbox
   elements: ons-input

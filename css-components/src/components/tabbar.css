@@ -33,7 +33,7 @@
   }
 }
 
-/*!
+/*~
   name: Icon Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -66,7 +66,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -215,7 +215,7 @@
   z-index: 0;
 }
 
-/*!
+/*~
   name: Icon Only Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -246,7 +246,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Top Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -294,7 +294,7 @@
   z-index: 0;
 }
 
-/*!
+/*~
   name: Bordered Top Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -323,7 +323,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Material Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -413,7 +413,7 @@
   background-color: var(--material-tabbar-highlight-color);
 }
 
-/*!
+/*~
   name: Material Tabbar (Icon only)
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -447,7 +447,7 @@
   line-height: 36px;
 }
 
-/*!
+/*~
   name: Material Tabbar (Icon and Label)
   category: Tabbar
   elements: ons-tabbar ons-tab

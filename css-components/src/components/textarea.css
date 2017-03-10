@@ -5,7 +5,7 @@
   --textarea-box-shadow: none;
 }
 
-/*!
+/*~
   name: Textarea
   category: Textarea
   markup: |
@@ -40,7 +40,7 @@
   color: var(--input-placeholder-color);
 }
 
-/*!
+/*~
   name: Textarea Transparent
   category: Textarea
   markup: |

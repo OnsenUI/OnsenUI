@@ -9,12 +9,13 @@
     "eco": "^1.1.0-rc-3",
     "event-stream": "^3.1.2",
     "gulp": "^3.6.0",
+    "gulp-cssmin": "^0.1.7",
     "gulp-less": "^1.2.3",
     "gulp-load-plugins": "^0.5.0",
     "gulp-order": "^1.0.6",
     "gulp-plumber": "^0.6.1",
     "gulp-postcss": "^6.3.0",
-    "gulp-rename": "^1.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-shell": "^0.2.4",
     "gulp-stylelint": "^3.9.0",
     "gulp-stylus": "^1.0.0",
@@ -24,9 +25,7 @@
     "postcss-import": "^9.1.0",
     "postcss-reporter": "^3.0.0",
     "rimraf": "^2.2.8",
-    "run-sequence": "^0.3.6",
-    "immutable-css": "^1.1.2",
-    "postcss-reporter": "^3.0.0"
+    "run-sequence": "^0.3.6"
   },
   "engines": {
     "node": ">=0.10.0"

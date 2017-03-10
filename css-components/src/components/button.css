@@ -77,7 +77,7 @@
   }
 }
 
-/*!
+/*~
   name: Button
   category: Button
   elements: ons-button
@@ -106,7 +106,7 @@
   @apply(--button--disabled);
 }
 
-/*!
+/*~
   name: Outline Button
   category: Button
   elements: ons-button
@@ -133,7 +133,7 @@
   transition: 0;
 }
 
-/*!
+/*~
   name: Light Button
   category: Button
   elements: ons-button
@@ -155,7 +155,7 @@
   opacity: 1;
 }
 
-/*!
+/*~
   name: Quiet Button
   category: Button
   elements: ons-button
@@ -194,7 +194,7 @@
   color: var(--button-quiet-color);
 }
 
-/*!
+/*~
   name: Call To Action Button
   category: Button
   elements: ons-button
@@ -230,7 +230,7 @@
   @apply(--button--disabled);
 }
 
-/*!
+/*
   name: Large Button
   category: Button
   elements: ons-button
@@ -266,7 +266,7 @@
   @apply(--button--focus);
 }
 
-/*!
+/*~
   name: Large Quiet Button
   category: Button
   elements: ons-button
@@ -307,7 +307,7 @@
   outline: 0;
 }
 
-/*!
+/*~
   name: Large Call To Action Button
   category: Button
   elements: ons-button
@@ -349,7 +349,7 @@
   @apply(--button--disabled);
 }
 
-/*!
+/*~
   name: Material Button
   category: Button
   elements: ons-button
@@ -378,7 +378,7 @@
   @apply(--material-shadow-0);
 }
 
-/*!
+/*~
   name: Material Flat Button
   category: Button
   elements: ons-button

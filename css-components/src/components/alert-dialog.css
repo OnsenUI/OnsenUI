@@ -11,7 +11,7 @@
   }
 }
 
-/*!
+/*~
   name: Alert Dialog
   category: Alert Dialog
   elements: ons-alert-dialog
@@ -156,7 +156,7 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/*!
+/*~
   name: Alert Dialog without Title
   category: Alert Dialog
   elements: ons-alert-dialog
@@ -175,7 +175,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Alert Dialog with Multiple Buttons
   category: Alert Dialog
   elements: ons-alert-dialog
@@ -195,7 +195,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Alert Dialog with Multiple Buttons 2
   category: Alert Dialog
   elements: ons-alert-dialog
@@ -218,7 +218,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Material Alert Dialog
   category: Alert Dialog
   elements: ons-alert-dialog

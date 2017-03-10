@@ -25,7 +25,7 @@
   }
 }
 
-/*!
+/*~
   name: Button Bar
   category: Segment
   markup: |
@@ -117,7 +117,7 @@
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
-/*!
+/*~
   name: Segment
   category: Segment
   markup: |

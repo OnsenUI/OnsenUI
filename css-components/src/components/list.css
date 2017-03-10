@@ -55,7 +55,7 @@
   }
 }
 
-/*!
+/*~
   name: List
   category: List
   elements: ons-list ons-list-item
@@ -185,7 +185,7 @@
   }
 }
 
-/*!
+/*~
   name: Noborder List
   category: List
   elements: ons-list ons-list-item
@@ -206,7 +206,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: Category List Header
   category: List
   elements: ons-list ons-list-header ons-list-item
@@ -227,7 +227,7 @@
     </ul>
  */
 
-/*!
+/*~
   name: Tappable List
   category: List
   elements: ons-list ons-list-item
@@ -250,7 +250,7 @@
   background-color: var(--list-item-active-background-color);
 }
 
-/*!
+/*~
   name: Switch in List Item
   category: List
   elements: ons-list ons-list-item ons-switch
@@ -285,7 +285,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: List Item with Chevron
   category: List
   elements: ons-list ons-list-item
@@ -323,7 +323,7 @@
   padding-right: 8px;
 }
 
-/*!
+/*~
   name: Inset List
   category: List
   elements: ons-list ons-list-item
@@ -345,7 +345,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: Radio Button in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -376,7 +376,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Checkbox in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -407,7 +407,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: No border Checkbox in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -438,7 +438,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Text Input in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -457,7 +457,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Textarea in List Item
   category: List
   elements: ons-list ons-list-item
@@ -471,7 +471,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Right Label in List Item
   category: List
   elements: ons-list ons-list-item
@@ -494,7 +494,7 @@
   opacity: 0.6;
 }
 
-/*!
+/*~
   name: List Item with Subtitle
   category: List
   elements: ons-list ons-list-item
@@ -527,7 +527,7 @@
   align-self: flex-start;
 }
 
-/*!
+/*~
   name: List Item with Thumbnail
   category: List
   elements: ons-list ons-list-item
@@ -565,7 +565,7 @@
   margin: 0;
 }
 
-/*!
+/*~
   name: List Item with Icon
   category: List
   elements: ons-list ons-list-item
@@ -608,7 +608,7 @@
   padding: 0 6px;
 }
 
-/*!
+/*~
   name: Material List
   category: List
   elements: ons-list ons-list-item
@@ -676,7 +676,7 @@
   @apply(--retina-material-list-item-border);
 }
 
-/*!
+/*~
   name: Material List with Header
   category: List
   elements: ons-list ons-list-item
@@ -710,7 +710,7 @@
   padding-top: 16px;
 }
 
-/*!
+/*~
   name: Material List with Checkboxes
   category: List
   elements: ons-list ons-list-item ons-input
@@ -747,7 +747,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Material List with Thumbnails
   category: List
   markup: |
@@ -783,7 +783,7 @@
   border-radius: 100%;
 }
 
-/*!
+/*~
   name: Material List with Icons
   category: List
   markup: |
@@ -825,7 +825,7 @@
   padding: 0 4px;
 }
 
-/*!
+/*~
   name: List item without divider
   category: List
   markup: |
@@ -846,7 +846,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: List item with long divider
   category: List
   markup: |

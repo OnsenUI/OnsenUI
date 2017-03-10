@@ -9,7 +9,7 @@
   --popover-margin-material: 4px;
 }
 
-/*!
+/*~
   name: Popover
   category: Popover
   elements: ons-popover
@@ -23,7 +23,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Popover(top)
   category: Popover
   elements: ons-popover
@@ -37,7 +37,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Popover(left)
   category: Popover
   elements: ons-popover
@@ -51,7 +51,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Popover(right)
   category: Popover
   elements: ons-popover
@@ -165,7 +165,7 @@
   margin-bottom: -18px;
 }
 
-/*!
+/*~
   name: Material Popover
   category: Popover
   elements: ons-popover

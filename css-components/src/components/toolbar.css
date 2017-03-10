@@ -55,7 +55,7 @@
   }
 }
 
-/*!
+/*~
   name: Toolbar
   category: Toolbar
   elements: ons-toolbar
@@ -134,7 +134,7 @@
   width: 100%;
 }
 
-/*!
+/*~
   name: Toolbar Item
   category: Toolbar
   elements: ons-toolbar ons-toolbar-button
@@ -156,7 +156,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Toolbar with Outline Button
   category: Toolbar
   elements: ons-toolbar ons-toolbar-button
@@ -179,7 +179,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Bottom Bar
   category: Toolbar
   elements: ons-bottom-toolbar
@@ -220,7 +220,7 @@
   border: none;
 }
 
-/*!
+/*~
   name: Toolbar with Segment
   category: Toolbar
   elements: ons-toolbar
@@ -242,7 +242,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Material Toolbar
   category: Toolbar
   elements: ons-toolbar
@@ -266,7 +266,7 @@
   background-size: 0;
 }
 
-/*!
+/*~
   name: No Shadow Toolbar
   category: Toolbar
   elements: ons-toolbar
@@ -323,7 +323,7 @@
   min-width: 16px;
 }
 
-/*!
+/*~
   name: Material Toolbar with Icons
   category: Toolbar
   elements: ons-toolbar
@@ -351,7 +351,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Transparent Toolbar
   category: Toolbar
   elements: ons-toolbar
