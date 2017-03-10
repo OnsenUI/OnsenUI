@@ -77,7 +77,8 @@
   @apply(--reset-base);
   @apply(--reset-cursor);
   @apply(--reset-font);
-  @apply(--reset-list);
+  list-style-type: none;
+  text-align: left;
   display: block;
   -webkit-overflow-scrolling: touch;
   overflow: hidden;

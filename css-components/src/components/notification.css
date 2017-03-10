@@ -21,12 +21,15 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
+  font: inherit;
+  border: none;
   @apply(--reset-box-model);
   @apply(--reset-base);
   @apply(--reset-font);
   @apply(--reset-cursor);
   @apply(--ellipsis);
   text-decoration: none;
+  margin: 0;
   padding: var(--notification-padding);
   width: var(--notification-width);
   height: var(--notification-height);

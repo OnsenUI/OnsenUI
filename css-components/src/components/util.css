@@ -23,19 +23,6 @@
     line-height: normal;
   }
 
-  --reset-list: {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    text-align: left;
-  }
-
-  --reset-quiet: {
-    background: transparent;
-    border: 1px solid transparent;
-    box-shadow: none;
-  }
-
   --reset-input: {
     @apply(--reset-box-model);
     padding: 0;
@@ -90,7 +77,8 @@
 
   --ellipsis: {
     text-overflow: ellipsis;
-    @apply(--reset-overflow);
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   --disabled: {
@@ -107,14 +95,6 @@
   --transparent: {
     border: none;
     background-color: transparent;
-  }
-
-  --reset-ui: {
-    @apply(--reset-box-model);
-    @apply(--inline-block);
-    @apply(--reset-base);
-    @apply(--reset-cursor);
-    @apply(--ellipsis);
   }
 
   @custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi);

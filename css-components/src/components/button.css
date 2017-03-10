@@ -14,7 +14,9 @@
   --button-border-radius: 3px;
 
   --button--quiet: {
-    @apply(--reset-quiet);
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
   }
 
   --button--disabled: {
@@ -28,7 +30,6 @@
   --button: {
     position: relative;
     display: inline-block;
-    vertical-align: top;
     @apply(--reset-box-model);
     @apply(--reset-base);
     @apply(--reset-font);
