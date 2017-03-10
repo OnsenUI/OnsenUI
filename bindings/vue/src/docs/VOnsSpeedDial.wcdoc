@@ -1,0 +1,45 @@
+/**
+ * @element ons-speed-dial
+ */
+
+/**
+ * @attribute visible
+ * @type {Boolean}
+ * @description
+ *   [en]Specify the visibility of the component.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute open
+ * @type {Boolean}
+ * @description
+ *   [en]If exists, the inner items will be shown accordingly. Must be modified on `update` event.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event update
+ * @description
+ *   [en]Fired right after user interaction. Useful to update `open` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Number} event
+ *   [en]New value for `open` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event click
+ * @description
+ *   [en]Normal click event. Useful to modify the component default action (toggle items).[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.preventDefault
+ *   [en]Avoids the default behavior.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.callParentHandler
+ *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
+ *   [ja]どうしょう[/ja]
+ */

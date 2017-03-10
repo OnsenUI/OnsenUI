@@ -1,0 +1,37 @@
+/**
+ * @element ons-lazy-repeat
+ */
+
+/**
+ * @attribute render-item
+ * @type {Function}
+ * @required true
+ * @description
+ *   [en]Item generator. This function gets an index as its first argument and must return an unmounted Vue component corresponding to a row in the list. The index should be used to get the necessary data for the new item.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute length
+ * @type {Number}
+ * @required true
+ * @description
+ *   [en]Total number of items.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute calculate-item-height
+ * @type {Function}
+ * @description
+ *   [en]This function gets an index as its first argument and should return the expected height of the item. This is useful to ease calculations and possibly achieve a better scrolling.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event refresh
+ * @description
+ *   [en]`VOnsLazyRepeat` listens for `refresh` events in the parent context in order to trigger a refresh when the items change. E.g. `$emit('refresh')`. It is also possible to call `$refs.lazyRepeat.refresh()` instead.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
