@@ -10,6 +10,8 @@ const fs = require('fs');
 const ancss = require('ancss');
 const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
+const immutableCss = require('immutable-css');
+const reporter = require('postcss-reporter');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -37,7 +39,9 @@ gulp.task('cssnext', ['stylelint'], () => {
     require('postcss-import'),
     cssnext({
       browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
-    })
+    }),
+    immutableCss(),
+    reporter({clearMessage: true, throwError: false})
   ];
   return gulp.src('src/onsen-css-components.css')
     .pipe($.plumber())
