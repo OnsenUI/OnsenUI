@@ -126,14 +126,13 @@
 }
 
 .tabbar__button {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
   @apply(--reset-font);
   @apply(--reset-box-model);
   @apply(--reset-base);
   @apply(--reset-cursor);
   @apply(--ellipsis);
+  position: relative;
+  display: inline-block;
   text-decoration: none;
   padding: 0;
   height: var(--tabbar-button-line-height);
