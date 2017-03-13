@@ -251,7 +251,7 @@ export default class DialogElement extends BaseElement {
       iosWorkaround.classList.add('dialog-ios-workaround');
       iosWorkaround.style.position = 'absolute';
       iosWorkaround.style.width = '1px';
-      iosWorkaround.style.height = '8192px';
+      iosWorkaround.style.height = '4096px';
       iosWorkaround.style.top = '-2048px';
       this._dialog.appendChild(iosWorkaround);
 
