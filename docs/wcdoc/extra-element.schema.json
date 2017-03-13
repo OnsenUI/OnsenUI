@@ -23,6 +23,9 @@
     "extensionOf": {
       "type": "string"
     },
+    "overwrite": {
+      "type": "string"
+    },
     "examples": {
       "type": "array",
       "items": {"type": "string"},
