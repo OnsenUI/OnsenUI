@@ -1,0 +1,27 @@
+/**
+ * @element ons-page
+ */
+
+/**
+ * @attribute infinite-scroll
+ * @type {Function}
+ * @description
+ *   [en]Called when the scroll is near the bottom. This function gets a `done` callback as its first argument. Useful for loading extra items in a list.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event deviceBackButton
+ * @description
+ *   [en]Fired on device back button. Default behavior is calling the parent handler.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.preventDefault
+ *   [en]Avoids the default behavior.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.callParentHandler
+ *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
+ *   [ja]どうしょう[/ja]
+ */

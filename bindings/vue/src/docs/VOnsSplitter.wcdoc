@@ -1,0 +1,19 @@
+/**
+ * @element ons-splitter
+ */
+
+/**
+ * @event deviceBackButton
+ * @description
+ *   [en]Fired on device back button. Default behavior is closing all the open `VOnsSplitterSide` components. Otherwise, calls parent handler.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.preventDefault
+ *   [en]Avoids the default behavior.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.callParentHandler
+ *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
+ *   [ja]どうしょう[/ja]
+ */

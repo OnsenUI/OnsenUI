@@ -213,6 +213,7 @@ module.exports = function(out) {
       './bindings/angular1/directives/*.js',
       './bindings/angular1/js/*.js',
       './bindings/angular2/src/directives/*.ts',
+      './bindings/vue/src/docs/*.wcdoc',
       '!**/*.spec.js'
     ]
   }).then(function(result) {
