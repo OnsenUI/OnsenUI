@@ -19,6 +19,11 @@ dev
 
  * Fixed `ons-input` caret position when using two-way binding.
 
+### PEER-DEPENDENCY UPDATES
+
+ * **onsenui**:
+    * `^2.0.5` ----> `2.2.x`
+
 1.0.0-rc.5
 ----
 
