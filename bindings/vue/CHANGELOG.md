@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+2.0.0-alpha.1
 ----
 
 ### New Features
