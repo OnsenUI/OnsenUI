@@ -151,7 +151,7 @@ export class AndroidDialogAnimator extends DialogAnimator {
  */
 export class IOSDialogAnimator extends DialogAnimator {
 
-  constructor({timing = 'ease-in-out', delay = 0, duration = 0.3} = {}) {
+  constructor({timing = 'ease-in-out', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});
 
     this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
