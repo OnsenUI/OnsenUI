@@ -22,6 +22,7 @@ dev
  * ons-dialog: Fix broken `default` and `slide` animation in iOS 9 and iOS 10.
  * ons-popover: Fixed behavior on device back button.
  * ons-splitter: Checks if content exists before removing.
+ * ons-carousel: Supports `animation` attribute.
  * ons-lazy-repeat: Clean first item scope.
  * ons-progress-circular: Fixed [#1860](https://github.com/OnsenUI/OnsenUI/issues/1860).
  * ons.notification: Fixed [#1787](https://github.com/OnsenUI/OnsenUI/issues/1787).
