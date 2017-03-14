@@ -241,24 +241,6 @@ export default class DialogElement extends BaseElement {
       this.insertBefore(mask, this.firstChild);
     }
 
-    // In iOS 9 and iOS 10,
-    // when translate3d animation starts from outside of viewport,
-    // the element warps to the destination.
-    // To prevent that, we have to put a vertically long element into `this._dialog` element.
-    if (platform.isIOS() && !util.findChild(this, '.dialog-ios-workaround')) {
-      // Vertically long element
-      const iosWorkaround = document.createElement('div');
-      iosWorkaround.classList.add('dialog-ios-workaround');
-      iosWorkaround.style.position = 'absolute';
-      iosWorkaround.style.width = '1px';
-      iosWorkaround.style.height = '8192px';
-      iosWorkaround.style.top = '-2048px';
-      this._dialog.appendChild(iosWorkaround);
-
-      // Expose the long element to outside of `this._dialog`
-      this._dialog.style['overflow'] = 'visible';
-    }
-
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 

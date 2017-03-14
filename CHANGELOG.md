@@ -19,7 +19,7 @@ dev
  * core: Fix `autoprefixer` settings for `onsenui.css`.
  * core: Fixed [#1700](https://github.com/OnsenUI/OnsenUI/issues/1700).
  * ons-select: Fix width of the inner element.
- * ons-dialog: Fix broken slide animation in iOS 9 and iOS 10.
+ * ons-dialog: Fix broken `default` animation in iOS 9 and iOS 10.
  * ons-popover: Fixed behavior on device back button.
  * ons-splitter: Checks if content exists before removing.
  * ons-lazy-repeat: Clean first item scope.

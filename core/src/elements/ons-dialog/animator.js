@@ -180,7 +180,7 @@ export class IOSDialogAnimator extends DialogAnimator {
         .saveStyle()
         .queue({
           css: {
-            transform: 'translate3d(-50%, 300%, 0)'
+            transform: `translate3d(-50%, ${document.body.clientHeight / 2.0 - 1}px, 0)`
           },
           duration: 0
         })
@@ -232,7 +232,7 @@ export class IOSDialogAnimator extends DialogAnimator {
         .wait(this.delay)
         .queue({
           css: {
-            transform: 'translate3d(-50%, 300%, 0)'
+            transform: `translate3d(-50%, ${document.body.clientHeight / 2.0 - 1}px, 0)`
           },
           duration: this.duration,
           timing: this.timing
