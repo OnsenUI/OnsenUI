@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+1.0.0-rc.6 (2017-03-14)
 ----
 
 ### New Features
@@ -18,7 +18,7 @@ dev
  * **onsenui**:
     * `^2.0.5` ----> `2.2.x`
 
-1.0.0-rc.5
+1.0.0-rc.5 (2017-01-18)
 ----
 
 ### Bug Fixes
@@ -26,7 +26,7 @@ dev
  * Fixed [#1725](https://github.com/OnsenUI/OnsenUI/issues/1725).
  * Changed to use NgZone manually when components is created dynamically.
 
-1.0.0-rc.4
+1.0.0-rc.4 (2017-01-13)
 ----
 
 ### New Features
