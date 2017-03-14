@@ -1,6 +1,6 @@
 {
   "name": "angular2-onsenui",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
@@ -65,7 +65,7 @@
     "@angular/platform-browser-dynamic": "^2.4.1",
     "core-js": "^2.4.0",
     "rxjs": "^5.0.1",
-    "onsenui": "^2.0.5",
+    "onsenui": "2.2.x",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
