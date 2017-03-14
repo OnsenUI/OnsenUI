@@ -10,17 +10,14 @@ CHANGELOG
 dev
 ----
 
-* Fixed `ons-input` caret position when using two-way binding.
+ * Fixed `ons-input` caret position when using two-way binding.
+ * Added `nativeElement` getter function to access DOM element on all directives.
 
 1.0.0-rc.5
 ----
 
  * Fixed [#1725](https://github.com/OnsenUI/OnsenUI/issues/1725).
  * Changed to use NgZone manually when components is created dynamically.
-(dev)
-----
-
- * Added `nativeElement` getter function to access DOM element on all directives.
 
 1.0.0-rc.4
 ----
