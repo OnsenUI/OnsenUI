@@ -153,6 +153,8 @@ export class IOSDialogAnimator extends DialogAnimator {
 
   constructor({timing = 'ease-in-out', delay = 0, duration = 0.3} = {}) {
     super({timing, delay, duration});
+
+    this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
   }
 
   /**
@@ -180,7 +182,7 @@ export class IOSDialogAnimator extends DialogAnimator {
         .saveStyle()
         .queue({
           css: {
-            transform: `translate3d(-50%, ${document.body.clientHeight / 2.0 - 1}px, 0)`
+            transform: `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)`
           },
           duration: 0
         })
@@ -232,7 +234,7 @@ export class IOSDialogAnimator extends DialogAnimator {
         .wait(this.delay)
         .queue({
           css: {
-            transform: `translate3d(-50%, ${document.body.clientHeight / 2.0 - 1}px, 0)`
+            transform: `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)`
           },
           duration: this.duration,
           timing: this.timing
