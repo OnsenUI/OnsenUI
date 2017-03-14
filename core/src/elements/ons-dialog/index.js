@@ -227,12 +227,10 @@ export default class DialogElement extends BaseElement {
 
       const container = document.createElement('div');
       container.classList.add('dialog-container');
-
-      dialog.appendChild(container);
-
       while (this.firstChild) {
         container.appendChild(this.firstChild);
       }
+      dialog.appendChild(container);
 
       this.appendChild(dialog);
     }
