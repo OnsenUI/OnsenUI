@@ -256,6 +256,8 @@ export class SlideDialogAnimator extends DialogAnimator {
 
   constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});
+
+    this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
   }
 
   /**
@@ -283,7 +285,8 @@ export class SlideDialogAnimator extends DialogAnimator {
         .saveStyle()
         .queue({
           css: {
-            transform: 'translate3D(-50%, -350%, 0)',
+            // FIXME: This should avoid Forced Synchronous Layout. Otherwise, fade animation of mask will be broken.
+            transform: `translate3d(-50%, ${- (this.bodyHeight / 2.0) + 1 - dialog._dialog.clientHeight}px, 0)`
           },
           duration: 0
         })
@@ -335,7 +338,8 @@ export class SlideDialogAnimator extends DialogAnimator {
         .wait(this.delay)
         .queue({
           css: {
-            transform: 'translate3D(-50%, -350%, 0)'
+            // FIXME: This should avoid Forced Synchronous Layout. Otherwise, fade animation of mask will be broken.
+            transform: `translate3d(-50%, ${- (this.bodyHeight / 2.0) + 1 - dialog._dialog.clientHeight}px, 0)`
           },
           duration: this.duration,
           timing: this.timing
