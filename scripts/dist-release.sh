@@ -17,8 +17,8 @@ fi
 
 (cd $distrepo && git rm -r * --cached --ignore-unmatch 1>/dev/null && rm -rf *)
 
-echo "* $(tput setaf 3)Building css-components$(tput setaf 7)..."
-(cd css-components && yarn install && node_modules/.bin/gulp build)
+echo "* $(tput setaf 3)Installing dependencies of css-components$(tput setaf 7)..."
+(cd css-components && yarn install)
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
 echo "* $(tput setaf 3)Preparing OnsenUI$(tput setaf 7)..."
