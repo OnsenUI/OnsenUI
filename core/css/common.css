@@ -202,10 +202,6 @@ ons-splitter-side[side="right"][mode="collapse"] {
   left: 100%;
 }
 
-ons-splitter-side[mode="split"] ~ ons-splitter-mask {
-  display: none !important;
-}
-
 ons-splitter-side[mode="split"] {
   transform: none !important;
   transition: none !important;

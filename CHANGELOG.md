@@ -8,6 +8,7 @@ dev
 
  ### Bug Fixes
  * ons-input: text selection in Firefox.
+ * ons-splitter: mask is hidden only if all splitter-sides are in split mode.
 
 v2.2.0
 ----
