@@ -44,8 +44,12 @@ util.match = (e, s) => (e.matches || e.webkitMatchesSelector || e.mozMatchesSele
 util.findChild = (element, query) => {
   const match = util.prepareQuery(query);
 
-  for (let i = 0; i < element.children.length; i++) {
-    const node = element.children[i];
+  // Caution: `element.children` is `undefined` in some environments if `element` is `svg`
+  for (let i = 0; i < element.childNodes.length; i++) {
+    const node = element.childNodes[i];
+    if (node.nodeType !== Node.ELEMENT_NODE) { // process only element nodes
+      continue;
+    }
     if (match(node)) {
       return node;
     }

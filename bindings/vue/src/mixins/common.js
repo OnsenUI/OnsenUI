@@ -32,25 +32,6 @@ const hidable = {
   }
 };
 
-// Components which can have click behavior overriden
-const clickable = {
-  props: {
-    onClick: {
-      type: Function
-    }
-  },
-
-  watch: {
-    onClick() {
-      this.$el.onClick = this.onClick;
-    }
-  },
-
-  mounted() {
-    this.$el.onClick = this.onClick;
-  }
-};
-
 // Components that contain pages
 const destroyable = {
   beforeDestroy() {
@@ -102,6 +83,20 @@ const modifier = {
   }
 };
 
+// Provides itself to its descendants
+const selfProvider = {
+  provide() {
+    return {
+      [this.$options._componentTag.slice(6)]: this
+    }
+  }
+};
 
-export { hidable, clickable, destroyable, hasOptions, modifier };
+// Common event for Dialogs
+const dialogCancel = {
+  mounted() {
+    this.$on('dialog-cancel', () => this.$emit('update', false));
+  }
+};
 
+export { hidable, destroyable, hasOptions, modifier, selfProvider, dialogCancel };

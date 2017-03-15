@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import SimpleWrapper from './SimpleWrapper.jsx';
 
 /**
@@ -38,6 +40,29 @@ class Splitter extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-splitter';
   }
+
+  componentDidMount() {
+    super.componentDidMount();
+    const node = ReactDOM.findDOMNode(this);
+
+    if (this.props.onDeviceBackButton instanceof Function) {
+      node.onDeviceBackButton = this.props.onDeviceBackButton;
+    }
+  }
 }
+
+Splitter.propTypes = {
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDeviceBackButton: React.PropTypes.func
+};
 
 export default Splitter;

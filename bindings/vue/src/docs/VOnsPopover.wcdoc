@@ -1,0 +1,45 @@
+/**
+ * @element ons-popover
+ */
+
+/**
+ * @attribute target
+ * @type {Ref|String|Event|HTMLElement}
+ * @description
+ *   [en]Target element. Can be either a Vue component reference, a CSS selector, an event object or a DOM element. It can also be provided as `options.target`.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute visible
+ * @type {Boolean}
+ * @description
+ *   [en]Specify the visibility of the component.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event update
+ * @description
+ *   [en]Fired right after user interaction. Useful to update `visible` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Number} event
+ *   [en]New value for `visible` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event deviceBackButton
+ * @description
+ *   [en]Fired on device back button. Default behavior is hiding the component if it is cancelable. Otherwise, calls parent handler.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.preventDefault
+ *   [en]Avoids the default behavior.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.callParentHandler
+ *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
+ *   [ja]どうしょう[/ja]
+ */

@@ -62,6 +62,14 @@ const INPUT_ATTRIBUTES = [
  * <ons-range value="20"></ons-range>
  * <ons-range modifier="material" value="10"></range>
  */
+
+/**
+ * @attribute disabled
+ * @description
+ *   [en]Whether the element is disabled or not.[/en]
+ *   [ja]無効化されている場合に`true`。[/ja]
+ */
+
 export default class RangeElement extends BaseElement {
 
   init() {

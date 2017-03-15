@@ -2,16 +2,17 @@
   <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
-        v-ons-open="splitterOpen"
+        :open="splitterOpen"
+        :swipeable="state.swipeable"
         :side="state.side"
         :collapse="state.collapse"
-        :swipeable="state.swipeable"
         :width="state.width"
-        @preopen="log('preopen!!')"
-        @postopen="log('postopen!!')"
-        @preclose="log('preclose!!')"
-        @postclose="log('postclose!!')"
-        @modechange="log('modechange!!')"
+        @update="splitterOpen = $event"
+        @preopen="log('preopen')"
+        @postopen="log('postopen')"
+        @preclose="log('preclose')"
+        @postclose="log('postclose')"
+        @modechange="log('modechange')"
       >
         <page-side :toggle-menu="toggleMenu"></page-side>
       </v-ons-splitter-side>
@@ -19,9 +20,8 @@
         :is-open="splitterOpen"
         :side-state="state"
         :toggle-menu="toggleMenu"
-        :goToPageContent2="goToPageContent2"
-        >
-        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu" :goToPageContent2="goToPageContent2" :pageContent="pageContent"></div>
+      >
+        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu"></div>
       </v-ons-splitter-content>
     </v-ons-splitter>
   </v-ons-page>
@@ -30,12 +30,13 @@
 <script>
   const log = (...args) => console.log(...args);
 
-  let pageSide = {
+  const pageSide = {
     template: `
       <v-ons-page>
         <v-ons-list>
           <v-ons-list-item
             v-for="item in [1, 2, 3, 4]"
+            :key="item"
             @click="toggleMenu"
             tappable>
             Menu item {{ item }}
@@ -49,7 +50,7 @@
     }
   };
 
-  let pageContent = {
+  const pageContent = {
     template: `
      <v-ons-page>
       <v-ons-toolbar>
@@ -103,21 +104,16 @@
            State: {{sideState}} ; Is Open: {{isOpen}}
           </div>
         </v-ons-list-item>
-        <v-ons-list-item modifier="chevron" tappable @click="goToPageContent2">
-          <div class="center">
-            Go to pageContent2 by changing splitter children
-          </div>
-        </v-ons-list-item>
       </v-ons-list>
     </v-ons-page>
     `,
     methods: {
       log
     },
-    props: ['isOpen', 'toggleMenu', 'sideState', 'goToPageContent2']
+    props: ['isOpen', 'toggleMenu', 'sideState']
   };
 
-  let pageContent2 = {
+  const pageContent2 = {
     template: `
       <v-ons-page>
         <v-ons-toolbar>
@@ -128,11 +124,7 @@
         <v-ons-button @click="splitter.content.load(pageContent)">splitter.content.load(pageContent)</v-ons-button>
       </v-ons-page>
     `,
-    methods: {
-      log: function() {
-        console.log(...arguments);
-      }
-    },
+    methods: { log },
     props: ['pageContent']
   };
 
@@ -159,11 +151,8 @@
     },
 
     methods: {
-      toggleMenu: function() {
+      toggleMenu() {
         this.splitterOpen = !this.splitterOpen;
-      },
-      goToPageContent2: function() {
-        this.currentContent = 'pageContent2';
       },
       log
     }

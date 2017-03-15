@@ -6,29 +6,44 @@
       <div class="right"><ons-toolbar-button @click="carouselIndex++">Next: Index++</ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-carousel v-ons-index="carouselIndex" fullscreen swipeable auto-scroll overscrollable @postchange="log('postchange!!')" @refresh="log('refresh!!')" @overscroll="log('overscroll!!')">
-      <v-ons-carousel-item v-for="(value, key) in items" :style="{backgroundColor: value}">
+    <v-ons-carousel fullscreen :index="carouselIndex" @update="carouselIndex = $event" swipeable auto-scroll overscrollable @postchange="log('postchange')" @refresh="log('refresh')" @overscroll="log('overscroll')">
+      <v-ons-carousel-item v-for="(value, key) in items" :key="key" :style="{backgroundColor: value}">
         <div style="text-align: center; font-size: 30px; margin-top: 20px; color: #fff;">{{key}}</div>
       </v-ons-carousel-item>
     </v-ons-carousel>
+
+    <div :style="dots">
+      <span :index="dotIndex - 1" v-for="dotIndex in Object.keys(items).length" :key="dotIndex" style="cursor: pointer" @click="carouselIndex = dotIndex - 1">
+        {{ carouselIndex === dotIndex - 1 ? '\u25CF' : '\u25CB' }}
+      </span>
+    </div>
   </v-ons-page>
 </template>
 
 <script>
 	export default {
-    data: function() {
+    data() {
       return {
         carouselIndex: 1,
         items: {
           BLUE: '#085078',
           DARK: '#373B44',
           ORANGE: '#D38312'
+        },
+        dots: {
+          textAlign: 'center',
+          fontSize: '40px',
+          color: '#fff',
+          position: 'absolute',
+          bottom: '40px',
+          left: 0,
+          right: 0
         }
       }
     },
 
     methods: {
-      log: function(msg) {
+      log(msg) {
         console.log(msg);
       }
     }

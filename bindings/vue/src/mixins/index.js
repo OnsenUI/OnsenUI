@@ -1,5 +1,2 @@
-export { deriveEvents, deriveMethods, deriveProperties } from './derive';
-export { VuePageLoader, VueTabLoader } from './pageLoader';
-export { dialogAPI, fabAPI } from './api';
-export { hidable, clickable, destroyable, hasOptions, modifier } from './common';
-
+export { deriveDBB, deriveHandler, deriveEvents } from './derive';
+export { hidable, destroyable, hasOptions, modifier, selfProvider, dialogCancel } from './common';

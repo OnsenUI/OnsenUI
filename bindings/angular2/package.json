@@ -1,6 +1,6 @@
 {
   "name": "angular2-onsenui",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "scripts": {
@@ -12,6 +12,30 @@
   },
   "main": "dist/src/angular2-onsenui.js",
   "typings": "dist/src/angular2-onsenui.d.ts",
+  "files": [
+    "yarn.lock",
+    "dist/onsenui.d.ts",
+    "dist/bundles/angular2-onsenui.umd.*",
+    "dist/bundles/angular2-onsenui.umd.min.*",
+    "dist/src/angular2-onsenui.*",
+    "dist/src/angular2-onsenui.ngfactory.*",
+    "dist/src/angular2-onsenui.metadata.json",
+    "dist/src/polyfills.*",
+    "dist/src/vendor.*",
+    "dist/src/directives",
+    "dist/src/ons",
+    "src/**/*.ts",
+    "src/**/*.ngfactory.ts",
+    "src/**/*.ngsummary.json",
+    "typings",
+    "umd-template",
+    "gulpfile.babel.js",
+    "webpack-dev.config.js",
+    "webpack-umd-bundle.config.js",
+    "tsconfig.json",
+    "typings.json",
+    "protractor-conf.js"
+  ],
   "licenses": [
     {
       "type": "Apache-2.0",
@@ -41,7 +65,7 @@
     "@angular/platform-browser-dynamic": "^2.4.1",
     "core-js": "^2.4.0",
     "rxjs": "^5.0.1",
-    "onsenui": "^2.0.5",
+    "onsenui": "2.2.x",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {

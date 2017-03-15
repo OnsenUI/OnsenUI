@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Gesture Detector | Onsen UI</title>
@@ -9,15 +10,18 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
-    var eventNames =
-      ('drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
-            'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate').split(' ');
+    ons.ready(function () {
 
-    eventNames.forEach(function(eventName) {
-      document.addEventListener(eventName, function(event) {
-        if (event.type !== 'release') {
-          event.target.innerHTML = event.type;
-        }
+      var eventNames =
+        ('drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
+          'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate').split(' ');
+
+      eventNames.forEach(function (eventName) {
+        document.getElementById('detect').addEventListener(eventName, function (event) {
+          if (event.type !== 'release') {
+            event.target.innerHTML = event.type;
+          }
+        });
       });
     });
   </script>
@@ -31,7 +35,7 @@
       <div class="center">Gesture Detector</div>
     </ons-toolbar>
 
-    <ons-gesture-detector style="height: 300px; margin: 50px 50px;">
+    <ons-gesture-detector id="detect" style="height: 300px; margin: 50px 50px;">
       <div id="hoge" style="border: 1px solid #ccc; background-color: #f9f9f9; width: 100%; height: 300px; line-height: 300px; text-align: center; color: #999;">
         ...
       </div>
@@ -41,4 +45,5 @@
   </ons-page>
 
 </body>
+
 </html>

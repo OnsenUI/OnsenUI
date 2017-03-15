@@ -1,35 +1,34 @@
 <template>
-  <ons-tab>
+  <ons-tab :active="active" :on-click.prop="action">
   </ons-tab>
 </template>
 
 <script>
-  import { VueTabLoader, clickable, deriveMethods } from '../mixins';
-
   export default {
-    mixins: [deriveMethods, VueTabLoader, clickable],
+    inject: ['tabbar'],
 
     props: {
+      page: { },
       active: {
         type: Boolean
       }
     },
 
-    watch: {
-      active() {
-        if (this.active === true) {
-          this.$el.setActive();
-        } else {
-          this.$el.setInactive();
+    methods: {
+      action() {
+        let runDefault = true;
+        this.$emit('click', { preventDefault: () => runDefault = false });
+
+        if (runDefault) {
+          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
         }
       }
     },
 
-    mounted() {
-      if (this.active === true) {
-        this.$el.setAttribute('active', '');
+    watch: {
+      active() {
+        this.active ? this.$el.setActive() : this.$el.setInactive();
       }
     }
   };
 </script>
-

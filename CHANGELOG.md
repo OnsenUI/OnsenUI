@@ -5,27 +5,56 @@ CHANGELOG
 dev
 ----
  * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
- * css-components: Fixed broken popover components.
- * ons-template: Show warning when ons-template is not located just under document.body.
- * ons-select: Fix width of the inner element.
- * ons-switch: Supports 'value' attribute.
- * ons-navigator: Added deprecate warning for `options.refresh`.
- * ons-tab: Supports 'active-icon' attribute.
- * ons-popover: Fixed behavior on device back button.
+
+ ### Bug Fixes
+ * ons-input: text selection in Firefox.
+
+v2.2.0
+----
+
+### New Features
+
+ * ons-switch: Supports `value` attribute.
+ * ons-tab: Supports `active-icon` attribute.
  * ons-lazy-repeat: Support for dynamic height.
  * angular1: Add `onsSelect` directive working with `ngModel`.
+
+### Bug Fixes
+
+ * css-components: Fixed broken popover components.
+ * css-components: Fixed [#1653](https://github.com/OnsenUI/OnsenUI/issues/1653).
+ * core: Fix `autoprefixer` settings for `onsenui.css`.
+ * core: Fixed [#1700](https://github.com/OnsenUI/OnsenUI/issues/1700).
+ * ons-select: Fix width of the inner element.
+ * ons-dialog: Fix broken `default` and `slide` animation in iOS 9 and iOS 10.
+ * ons-popover: Fixed behavior on device back button.
+ * ons-splitter: Checks if content exists before removing.
+ * ons-carousel: Supports `animation` attribute.
+ * ons-lazy-repeat: Clean first item scope.
+ * ons-progress-circular: Fixed [#1860](https://github.com/OnsenUI/OnsenUI/issues/1860).
+ * ons.notification: Fixed [#1787](https://github.com/OnsenUI/OnsenUI/issues/1787).
+ * ons-row: Fixed [#1858](https://github.com/OnsenUI/OnsenUI/issues/1858).
  * angular1: `number input` retains number type variable with `ngModel`.
- * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
+ * angular1: Fixed [#1843](https://github.com/OnsenUI/OnsenUI/issues/1843).
+ * angular1: Fixed [#1799](https://github.com/OnsenUI/OnsenUI/issues/1799).
+
+### Misc
+
  * css-components: Refactored `range` components.
- * ons-range: Changed internal DOM structure.
+ * ons-template: Show warning when ons-template is not located just under document.body.
+ * ons-navigator: Added deprecate warning for `options.refresh`.
+ * angular1: Added deprecate warnings to `ons-sliding-menu` and `ons-split-view`.
 
 ### BREAKING CHANGES
 
  * css-components: Dropped all stylus and rebuild css-components with cssnext.
- * css-components: Renamed ".tab-bar" to ".tabbar".
- * css-components: Renamed ".navigation-bar" to ".toolbar".
+ * css-components: Renamed `.tab-bar` to `.tabbar`.
+ * css-components: Renamed `.navigation-bar` to `.toolbar`.
+ * css-components: Renamed `.list__item` to `.list-item`.
+ * css-components: Renamed `.list__header` to `.list-header`.
  * ons-tabbar: loadPage method has been deprecated.
  * ons-popover: Changed internal DOM structure.
+ * ons-range: Changed internal DOM structure.
 
 v2.1.0
 ----

@@ -1,35 +1,49 @@
 <template>
-  <ons-speed-dial>
+  <ons-speed-dial :on-click.prop="action">
     <slot></slot>
   </ons-speed-dial>
 </template>
 
 <script>
-  import { fabAPI, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { hidable, deriveEvents } from '../mixins';
 
   export default {
-    mixins: [deriveEvents, deriveMethods, deriveProperties, fabAPI],
+    mixins: [deriveEvents, hidable],
 
     props: {
       open: {
-        type: Boolean
+        type: Boolean,
+        default: undefined
+      }
+    },
+
+    methods: {
+      action() {
+        let runDefault = true;
+        this.$emit('click', { preventDefault: () => runDefault = false });
+
+        if (runDefault) {
+          this.$el.toggleItems();
+        }
+      },
+      _shouldUpdate() {
+        return this.open !== undefined && this.open !== this.$el.isOpen();
+      },
+      _updateToggle() {
+        this._shouldUpdate() && this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
       }
     },
 
     watch: {
-      open: function() {
-        if (this.open !== this.$el.isOpen()) {
-          this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
-        }
+      open() {
+        this._updateToggle();
       }
     },
 
     mounted() {
-      this.$nextTick(() => {
-        if (this.open !== this.$el.isOpen()) {
-          this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
-        }
-      });
+      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen()));
+
+      this._updateToggle();
     }
   };
 </script>

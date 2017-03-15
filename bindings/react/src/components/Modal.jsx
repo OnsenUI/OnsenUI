@@ -38,6 +38,10 @@ class Modal extends BasicComponent {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
 
+    if (this.props.onDeviceBackButton instanceof Function) {
+      this.node.onDeviceBackButton = this.props.onDeviceBackButton;
+    }
+
     this._update(this.props, false);
   }
 
@@ -121,7 +125,19 @@ Modal.propTypes = {
    * @description
    *  [en]When `true` the modal will show itself.[/en]
    */
-  isOpen: React.PropTypes.bool
+  isOpen: React.PropTypes.bool,
+
+  /**
+   * @name onDeviceBackButton
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Custom handler for device back button.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDeviceBackButton: React.PropTypes.func
 };
 
 Modal.defaultProps = {

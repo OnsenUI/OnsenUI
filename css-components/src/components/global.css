@@ -51,6 +51,7 @@ body {
 
 input, textarea, select {
   user-select: auto;
+  -moz-user-select: text;
 }
 
 input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus {

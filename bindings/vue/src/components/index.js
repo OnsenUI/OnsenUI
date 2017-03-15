@@ -1,15 +1,17 @@
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
+export { default as VOnsCarousel } from './VOnsCarousel.vue';
 export { default as VOnsTab } from './VOnsTab.vue';
 export { default as VOnsTabbar } from './VOnsTabbar.vue';
+export { default as VOnsBackButton } from './VOnsBackButton.vue';
 export { default as VOnsNavigator } from './VOnsNavigator.vue';
+export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
+export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
-import { dialogAPI, fabAPI } from '../mixins';
-import { VuePageLoader } from '../mixins';
-import { clickable, hasOptions, destroyable } from '../mixins';
+import { hidable, hasOptions, dialogCancel, destroyable, deriveDBB, deriveHandler, selfProvider } from '../mixins';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
@@ -31,16 +33,12 @@ export const VOnsRow = extend('row');
 export const VOnsCol = extend('col');
 export const VOnsProgressBar = extend('progress-bar');
 export const VOnsProgressCircular = extend('progress-circular');
-export const VOnsSplitterMask = extend('splitter-mask');
-export const VOnsPullHook = extend('pull-hook');
 export const VOnsCarouselItem = extend('carousel-item');
-export const VOnsCarousel= extend('carousel', [hasOptions]);
-export const VOnsPage = extend('page', [destroyable]);
-export const VOnsFab = extend('fab', [fabAPI]);
-export const VOnsDialog = extend('dialog', [dialogAPI]);
-export const VOnsModal = extend('modal', [dialogAPI]);
-export const VOnsSplitter = extend('splitter', [destroyable]);
-export const VOnsSplitterContent = extend('splitter-content', [VuePageLoader, destroyable]);
-export const VOnsSplitterSide = extend('splitter-side', [VuePageLoader, destroyable, hasOptions]);
-export const VOnsBackButton = extend('back-button', [clickable, hasOptions]);
-
+export const VOnsSplitterMask = extend('splitter-mask');
+export const VOnsSplitterContent = extend('splitter-content', [destroyable]);
+export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction')]);
+export const VOnsSplitter = extend('splitter', [selfProvider, deriveDBB]);
+export const VOnsFab = extend('fab', [hidable]);
+export const VOnsPage = extend('page', [destroyable, deriveDBB, deriveHandler('onInfiniteScroll')]);
+export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB]);
+export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB]);

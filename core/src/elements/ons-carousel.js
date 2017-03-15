@@ -303,6 +303,14 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @attribute animation
+   * @type {String}
+   * @description
+   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation-options
    * @type {Expression}
    * @description
@@ -437,6 +445,7 @@ export default class CarouselElement extends BaseElement {
       throw new Error('options must be an object. You supplied ' + options);
     }
 
+    options.animation = options.animation || this.getAttribute('animation');
     options.animationOptions = util.extend(
       { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
       options.animationOptions || {},
@@ -620,7 +629,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (this._isWrongDirection(event.gesture.direction)) {
+    if (this._isWrongDirection(event.gesture.direction) || (event.target && event.target.tagName.toLowerCase() === 'input' && event.target.type === 'range')) {
       return;
     }
 
@@ -911,7 +920,7 @@ export default class CarouselElement extends BaseElement {
    *   [en]A function that will be executed after the animation has finished.[/en]
    *   [ja][/ja]
    * @param {String} [options.animation]
-   *   [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
+   *   [en]If this is set to `"none"`, the transitions will not be animated.[/en]
    *   [ja][/ja]
    * @param {Object} [options.animationOptions]
    *   [en]An object that can be used to specify the duration, delay and timing function of the animation.[/en]

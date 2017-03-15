@@ -1,12 +1,12 @@
 <template>
-  <div :is="$options._componentTag.slice(2)">
+  <component :is="$options._componentTag.slice(2)" @click="$emit('click', $event)">
     <slot></slot>
-  </div>
+  </component>
 </template>
 
 <script>
-  import { modifier, deriveEvents, deriveMethods, deriveProperties } from '../mixins';
+  import { modifier, deriveEvents } from '../mixins';
   export default {
-    mixins: [modifier, deriveEvents, deriveMethods, deriveProperties]
+    mixins: [modifier, deriveEvents]
   };
 </script>

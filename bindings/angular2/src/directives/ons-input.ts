@@ -59,7 +59,9 @@ export class OnsInput implements OnChanges, OnDestroy {
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
     const value = changeRecord['_value'].currentValue;
-    this._element.value = value;
+    if (this._element.value !== value) {
+      this._element.value = value;
+    }
   }
 
   get element(): any {

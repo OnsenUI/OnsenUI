@@ -34,12 +34,25 @@ import Util from './Util.js';
 
 class Tabbar extends BasicComponent {
 
+  constructor(...args) {
+    super(...args);
+
+    const callback = (name, event) => {
+      if (this.props[name]) {
+        return this.props[name](event);
+      }
+    };
+    this.onPreChange = callback.bind(this, 'onPreChange');
+    this.onPostChange = callback.bind(this, 'onPostChange');
+    this.onReactive = callback.bind(this, 'onReactive');
+  }
+
   componentDidMount() {
     super.componentDidMount();
     const node = this._tabbar;
-    node.addEventListener('prechange', this.props.onPreChange);
-    node.addEventListener('postchange', this.props.onPostChange);
-    node.addEventListener('reactive', this.props.onReactive);
+    node.addEventListener('prechange', this.onPreChange);
+    node.addEventListener('postchange', this.onPostChange);
+    node.addEventListener('reactive', this.onReactive);
 
     setTimeout(() => {
       node.setActiveTab(this.props.index);
@@ -48,9 +61,9 @@ class Tabbar extends BasicComponent {
 
   componentWillUnmount() {
     const node = this._tabbar;
-    node.removeEventListener('prechange', this.props.onPreChange);
-    node.removeEventListener('postchange', this.props.onPostChange);
-    node.removeEventListener('reactive', this.props.onReactive);
+    node.removeEventListener('prechange', this.onPreChange);
+    node.removeEventListener('postchange', this.onPostChange);
+    node.removeEventListener('reactive', this.onReactive);
   }
 
   componentDidUpdate(prevProps) {

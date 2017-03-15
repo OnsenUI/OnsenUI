@@ -227,12 +227,10 @@ export default class DialogElement extends BaseElement {
 
       const container = document.createElement('div');
       container.classList.add('dialog-container');
-
-      dialog.appendChild(container);
-
       while (this.firstChild) {
         container.appendChild(this.firstChild);
       }
+      dialog.appendChild(container);
 
       this.appendChild(dialog);
     }
@@ -489,7 +487,7 @@ export default class DialogElement extends BaseElement {
   }
 
   static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide'];
+    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
   }
 
   /**

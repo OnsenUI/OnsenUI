@@ -1,0 +1,53 @@
+/**
+ * @element ons-alert-dialog
+ */
+
+/**
+ * @attribute title
+ * @type {String}
+ * @description
+ *   [en]Represents the dialog title. It can be provided inside a `slot="title"` element instead.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute footer
+ * @type {Object}
+ * @description
+ *   [en]Object keys will be treated as button names and their corresponding values must be functions that are called on click. It can be provided inside a `slot="footer"` element instead.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @attribute visible
+ * @type {Boolean}
+ * @description
+ *   [en]Specify the visibility of the component.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event update
+ * @description
+ *   [en]Fired right after user interaction. Useful to update `visible` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Number} event
+ *   [en]New value for `visible` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event deviceBackButton
+ * @description
+ *   [en]Fired on device back button. Default behavior is hiding the component if it is cancelable. Otherwise, calls parent handler.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.preventDefault
+ *   [en]Avoids the default behavior.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Function} event.callParentHandler
+ *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
+ *   [ja]どうしょう[/ja]
+ */

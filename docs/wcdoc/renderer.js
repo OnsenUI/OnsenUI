@@ -54,6 +54,7 @@ function renderExtraElement(element) {
     description: element.description || '',
     deprecated: element.isDeprecated,
     extensionOf: element.extensionOf,
+    overwrite: tagdict.get('overwrite') || '',
     directive: tagdict.get('directive') || undefined,
     selector: tagdict.get('selector') || undefined,
     note: tagdict.get('note') || undefined,

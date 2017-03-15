@@ -1,0 +1,21 @@
+/**
+ * @element ons-splitter-side
+ */
+
+/**
+ * @attribute open
+ * @type {Boolean}
+ * @description
+ *   [en]If exists, the menu will be opened accordingly. Must be modified on `update` event.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
+ * @event update
+ * @description
+ *   [en]Fired right after user interaction. Useful to update `open` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ * @param {Number} event
+ *   [en]New value for `open` prop.[/en]
+ *   [ja]どうしょう[/ja]
+ */

@@ -1,48 +1,51 @@
-<!--
-Guidelines:
- * Release dates should be in UTC.
-    * They can be retrieved from `npm info angular2-onsenui`.
--->
-
 CHANGELOG
 ====
 
-1.0.0-rc.5
+1.0.0-rc.6 (2017-03-14)
 ----
+
+### New Features
+
+ * Added `OnsSelect` directive.
+ * Added `nativeElement` getter function to access DOM element on all directives.
+
+### Bug Fixes
+
+ * Fixed `ons-input` caret position when using two-way binding.
+
+### PEER-DEPENDENCY UPDATES
+
+ * **onsenui**:
+    * `^2.0.5` ----> `2.2.x`
+
+1.0.0-rc.5 (2017-01-18)
+----
+
+### Bug Fixes
 
  * Fixed [#1725](https://github.com/OnsenUI/OnsenUI/issues/1725).
  * Changed to use NgZone manually when components is created dynamically.
-(dev)
+
+1.0.0-rc.4 (2017-01-13)
 ----
 
- * Added `nativeElement` getter function to access DOM element on all directives.
+### New Features
 
-1.0.0-rc.4
-----
-
-### Features
- * Updated Angular to 2.4.1.
  * `angular2-onsenui` package no longer re-export `@angular/compile`.
  * Changed OnsenModule to re-export BrowserModule.
 
 ### Bug Fixes
+
  * Fixed [#1730](https://github.com/OnsenUI/OnsenUI/issues/1730).
  * Navigator params should accept any type.
 
+### Misc
+
+ * Updated Angular to 2.4.1.
+
 ### PEER-DEPENDENCY UPDATES
- * **@angular/common**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/compiler**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/compiler-cli**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/core**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/forms**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/platform-browser**:
-    * `^2.1.2` ----> `^2.4.1`
- * **@angular/platform-browser-dynamic**:
+
+ * **@angular/\***:
     * `^2.1.2` ----> `^2.4.1`
  * **rxjs**:
     * `>=5.0.0-beta` ----> `^5.0.1`
@@ -50,27 +53,21 @@ CHANGELOG
 1.0.0-rc.3 (2016-11-15)
 ----
 
-### Features
- * Updated angular.
+### New Features
+
  * Changed to include `onsenui.d.ts` and removed unneeded `declare var ons: any;`.
 
 ### Bug Fixes
+
  * Fix `peerDependencies` to suppress `UNMET PEER DEPENDENCY` on `rxjs`.
 
+### Misc
+
+ * Updated Angular.
+
 ### PEER-DEPENDENCY UPDATES
- * **@angular/common**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/compiler**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/compiler-cli**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/core**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/forms**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/platform-browser**:
-    * `^2.0.0` ----> `^2.1.2`
- * **@angular/platform-browser-dynamic**:
+
+ * **@angular/\***:
     * `^2.0.0` ----> `^2.1.2`
  * **rxjs**:
     * `^5.0.0-rc.1` ----> `>=5.0.0-beta`
@@ -78,13 +75,20 @@ CHANGELOG
 1.0.0-rc.2 (2016-11-04)
 ----
 
-### Features
+### New Features
+
  * Added Angular 2 AOT support.
- * Replaced TypeScript 1.x d.ts files with 2.x d.ts files.
- * Dropped TypeScript 1.x support.
+
+### Misc
+
  * Use WeakMap in pageLoader. (`OnsNavigator`, `OnsSplitter`, `OnsTabbar`)
  * Remove AfterViewInit. (`OnsSwitch`)
  * Updated umd-template for angular@2.0.0.
+
+### BREAKING CHANGES
+
+ * Replaced TypeScript 1.x d.ts files with 2.x d.ts files.
+ * Dropped TypeScript 1.x support.
 
 ### PEER-DEPENDENCY UPDATES
  * **@angular/compiler-cli**:
@@ -95,10 +99,12 @@ CHANGELOG
 1.0.0-rc.1 (2016-09-15)
 ----
 
-### Features
+### Misc
+
  * Updated to angular-2.0.0.
 
 ### PEER-DEPENDENCY UPDATES
+
  * **@angular/common**:
     * `^2.0.0-rc.6` ----> `^2.0.0`
  * **@angular/compiler**:
@@ -119,14 +125,22 @@ CHANGELOG
 1.0.0-rc.0 (2016-09-09)
 ----
 
-### Features
+### New Features
+
  * Added Angular2 API for `ons-alert-dialog`, `ons-popover`, `ons-dialog` and `ons-modal` components.
  * Changed component factories to provide "destroy" function to unload components.
- * Replaced deprecated ComponentResolver with ComponentFactoryResolver on some directives.
  * Changed to provide umd bundle and its minimized bundle.
+
+### Bug Fixes
+
+ * Replaced deprecated ComponentResolver with ComponentFactoryResolver on some directives.
+
+### Misc
+
  * Changed all examples to use NgModule.
 
 ### PEER-DEPENDENCY UPDATES
+
  * **@angular/common**:
     * `^2.0.0-rc.1` ----> `^2.0.0-rc.6`
  * **@angular/compiler**:
@@ -147,6 +161,7 @@ CHANGELOG
     * `^2.0.0-rc.1` ----> none
 
 ### BREAKING CHANGES
+
  * Removed `OnsPage`, `OnsCarousel`, `OnsAlertDialog` and `OnsPopover` directives.
  * Renamed `PageParams` to `Params`.
 

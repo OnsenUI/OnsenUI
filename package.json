@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -22,6 +22,14 @@
   "scripts": {
     "test": "gulp test --disable-warnings"
   },
+  "main": "js/onsenui.js",
+  "typings": "js/onsenui.d.ts",
+  "files": [
+    "bower.json",
+    "css",
+    "css-components-src",
+    "js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/OnsenUI/OnsenUI"
@@ -51,8 +59,6 @@
     "onsenui"
   ],
   "homepage": "https://onsen.io/",
-  "main": "js/onsenui.js",
-  "typings": "js/onsenui.d.ts",
   "devDependencies": {
     "babel-eslint": "^6.0.3",
     "babel-preset-es2015-rollup": "^3.0.0",
