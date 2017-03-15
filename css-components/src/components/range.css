@@ -70,7 +70,7 @@
   background-position: left center;
   background-size: 100% var(--range-track-height);
   background-repeat: no-repeat;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .range__input {
@@ -109,6 +109,7 @@
 
 .range__input::-webkit-slider-thumb {
   @apply(--range__thumb);
+  box-sizing: border-box;
   appearance: none;
   top: 0;
   z-index: 1;
@@ -133,10 +134,13 @@
 }
 
 .range__input:disabled {
+  opacity: 1;
+  pointer-events: none;
 }
 
 .range--disabled {
   @apply(--disabled);
+  pointer-events: none;
 }
 
 /*~
@@ -165,14 +169,13 @@
 }
 
 .range--material__input::-webkit-slider-thumb {
-  top: 1px;
+  box-sizing: border-box;
   border: none;
   height: calc(var(--material-range-thumb-width) + var(--material-range-thumb-vertical-margin));
   width: calc(var(--material-range-thumb-width) + var(--material-range-thumb-horizontal-margin));
   border-radius: 0;
   background-color: transparent;
-  background-image: radial-gradient(circle var(--material-range-thumb-radius) at calc(var(--material-range-thumb-radius) + var(--material-range-thumb-horizontal-margin) / 2), var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) var(--material-range-thumb-radius), transparent calc(var(--material-range-thumb-radius) + 1));
-  margin-top: -1px;
+  background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 1.2px));
 }
 
 .range--material__input::-moz-range-thumb {
