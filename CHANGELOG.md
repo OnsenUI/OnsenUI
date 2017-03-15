@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+ * ons-input: text selection in Firefox.
+
 v2.2.0
 ----
 
