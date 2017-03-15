@@ -4,6 +4,7 @@ CHANGELOG
 
 dev
 ----
+ * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
  * css-components: Fixed broken popover components.
  * ons-template: Show warning when ons-template is not located just under document.body.
  * ons-select: Fix width of the inner element.
