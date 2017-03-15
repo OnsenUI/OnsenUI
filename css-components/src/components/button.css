@@ -14,7 +14,9 @@
   --button-border-radius: 3px;
 
   --button--quiet: {
-    @apply(--reset-quiet);
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
   }
 
   --button--disabled: {
@@ -26,7 +28,8 @@
   }
 
   --button: {
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
     @apply(--reset-box-model);
     @apply(--reset-base);
     @apply(--reset-font);
@@ -41,7 +44,7 @@
     color: var(--button-text-color);
     vertical-align: middle;
     background-color: var(--button-background-color);
-    border: 0px solid currentColor;
+    border: 0 solid currentColor;
     border-radius: var(--button-border-radius);
     transition: none;
   }
@@ -50,15 +53,31 @@
     outline: 0;
   }
 
-  --button--active {
+  --button--active: {
     background-color: var(--button-background-color);
     transition: none;
     opacity: var(--button-active-opacity);
   }
 
+  --button--material: {
+    @apply(--button);
+    @apply(--material-shadow-1);
+    @apply(--material-font);
+    min-height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+    font-size: 14px;
+    transform: translate3d(0, 0, 0);
+    text-transform: uppercase;
+    background-color: var(--material-button-background-color);
+    color: var(--material-button-text-color);
+    font-weight: 500;
+  }
 }
 
-/*!
+/*~
   name: Button
   category: Button
   elements: ons-button
@@ -87,7 +106,7 @@
   @apply(--button--disabled);
 }
 
-/*!
+/*~
   name: Outline Button
   category: Button
   elements: ons-button
@@ -114,7 +133,7 @@
   transition: 0;
 }
 
-/*!
+/*~
   name: Light Button
   category: Button
   elements: ons-button
@@ -122,6 +141,7 @@
     <button class="button button--light">Button</button>
     <button class="button button--light" disabled>Button</button>
 */
+
 .button--light {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.4);
@@ -135,7 +155,7 @@
   opacity: 1;
 }
 
-/*!
+/*~
   name: Quiet Button
   category: Button
   elements: ons-button
@@ -174,7 +194,7 @@
   color: var(--button-quiet-color);
 }
 
-/*!
+/*~
   name: Call To Action Button
   category: Button
   elements: ons-button
@@ -210,8 +230,7 @@
   @apply(--button--disabled);
 }
 
-
-/*!
+/*
   name: Large Button
   category: Button
   elements: ons-button
@@ -247,7 +266,7 @@
   @apply(--button--focus);
 }
 
-/*!
+/*~
   name: Large Quiet Button
   category: Button
   elements: ons-button
@@ -288,8 +307,7 @@
   outline: 0;
 }
 
-
-/*!
+/*~
   name: Large Call To Action Button
   category: Button
   elements: ons-button
@@ -331,7 +349,7 @@
   @apply(--button--disabled);
 }
 
-/*!
+/*~
   name: Material Button
   category: Button
   elements: ons-button
@@ -339,25 +357,6 @@
     <button class="button button--material">BUTTON</button>
     <button class="button button--material" disabled>DISABLED</button>
 */
-
-:root {
-  --button--material: {
-    @apply(--button);
-    @apply(--material-shadow-1);
-    @apply(--material-font);
-    min-height: 36px;
-    line-height: 36px;
-    padding: 0px 16px;
-    transition: box-shadow 0.2s ease;
-    text-align: center;
-    font-size: 14px;
-    transform: translate3d(0, 0, 0);
-    text-transform: uppercase;
-    background-color: var(--material-button-background-color);
-    color: var(--material-button-text-color);
-    font-weight: 500;
-  }
-}
 
 .button--material {
   @apply(--button--material);
@@ -379,7 +378,7 @@
   @apply(--material-shadow-0);
 }
 
-/*!
+/*~
   name: Material Flat Button
   category: Button
   elements: ons-button

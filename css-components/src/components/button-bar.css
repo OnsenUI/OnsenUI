@@ -2,7 +2,7 @@
   --button-bar-active-color: var(--button-bar-active-text-color);
   --button-bar-border-top: 1px solid var(--button-bar-color);
   --button-bar-border-bottom: 1px solid var(--button-bar-color);
-  --button-bar-border: 0px solid var(--button-bar-color);
+  --button-bar-border: 0 solid var(--button-bar-color);
   --button-bar-active-background-color: color(var(--button-bar-color) tint(var(--alpha-lighten)));
 
   --button-bar: {
@@ -25,7 +25,7 @@
   }
 }
 
-/*!
+/*~
   name: Button Bar
   category: Segment
   markup: |
@@ -66,7 +66,7 @@
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
-  border-left-width: 0px;
+  border-left-width: 0;
   font-weight: var(--font-weight);
   padding: 0;
   font-size: 13px;
@@ -75,35 +75,6 @@
   width: 100%;
   transition: background-color 0.2s linear, color 0.2s linear;
   box-sizing: border-box;
-  border-radius: 0;
-}
-
-.button-bar__item:first-child > .button-bar__button {
-  border-left-width: 1px;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-
-.button-bar__item:last-child > .button-bar__button {
-  border-right-width: 1px;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-}
-
-.button-bar__button:active,
-:active + .button-bar__button {
-  background-color: var(--button-bar-active-background-color);
-  border: var(--button-bar-border);
-  border-top: var(--button-bar-border-top);
-  border-bottom: var(--button-bar-border-bottom);
-  border-right: 1px solid var(--button-bar-color);
-  font-size: 13px;
-  width: 100%;
-  transition: none;
-}
-
-:checked + .button-bar__button {
-  background-color: var(--button-bar-color);
-  color: var(--button-bar-active-color);
-  transition: none;
 }
 
 .button-bar__button:disabled {
@@ -118,7 +89,35 @@
   outline: 0;
 }
 
-/*!
+:checked + .button-bar__button {
+  background-color: var(--button-bar-color);
+  color: var(--button-bar-active-color);
+  transition: none;
+}
+
+.button-bar__button:active,
+:active + .button-bar__button {
+  background-color: var(--button-bar-active-background-color);
+  border: var(--button-bar-border);
+  border-top: var(--button-bar-border-top);
+  border-bottom: var(--button-bar-border-bottom);
+  border-right: 1px solid var(--button-bar-color);
+  font-size: 13px;
+  width: 100%;
+  transition: none;
+}
+
+.button-bar__item:first-child > .button-bar__button {
+  border-left-width: 1px;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.button-bar__item:last-child > .button-bar__button {
+  border-right-width: 1px;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/*~
   name: Segment
   category: Segment
   markup: |

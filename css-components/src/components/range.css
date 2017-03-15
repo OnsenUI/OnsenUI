@@ -6,7 +6,6 @@
   --range-thumb-border-color: var(--border-color);
 
   --range-thumb-border: 1px solid var(--range-thumb-border-color);
-  --range-border: none;
   --range-track-height: 2px;
   --range-thumb-width: var(--thumb-size);
 
@@ -15,12 +14,6 @@
   --material-range-thumb-radius: calc(var(--material-range-thumb-width) / 2);
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
-
-  --range: {
-    @apply(--reset-input);
-    appearance: none;
-    -webkit-appearance: none;
-  }
 
   --range__thumb: {
     cursor: pointer;
@@ -43,7 +36,7 @@
   --range--material--thumb--after: {
     content: '';
     display: block;
-    border: 0px;
+    border-width: 0;
     border-radius: 100%;
     height: var(--material-range-thumb-width);
     width: var(--material-range-thumb-width);
@@ -53,7 +46,7 @@
   }
 }
 
-/*!
+/*~
   name: Range
   category: Range
   elements: ons-range
@@ -81,8 +74,8 @@
 }
 
 .range__input {
-  @apply(--range);
-  border: var(--range-border);
+  @apply(--reset-input);
+  appearance: none;
   background-image: linear-gradient(var(--highlight-color), var(--highlight-color));
   background-position: left center;
   background-size: 0% var(--range-track-height);
@@ -116,8 +109,7 @@
 
 .range__input::-webkit-slider-thumb {
   @apply(--range__thumb);
-  position: relative;
-  -webkit-appearance: none;
+  appearance: none;
   top: 0;
   z-index: 1;
 }
@@ -147,7 +139,7 @@
   @apply(--disabled);
 }
 
-/*!
+/*~
   name: Material Range
   category: Range
   elements: ons-range
@@ -164,7 +156,6 @@
 .range--material {
   background-image: linear-gradient(var(--material-range-track-color), var(--material-range-track-color));
 }
-
 
 .range--material__input {
   background-image: linear-gradient(var(--material-range-thumb-color), var(--material-range-thumb-color));
@@ -208,6 +199,16 @@
   background-color: var(--material-range-thumb-color);
 }
 
+.range--material__input::-ms-fill-lower {
+  background-color: var(--material-range-thumb-color);
+}
+
+.range--material__input::-ms-fill-upper {
+  margin-top: -6px;
+  margin-left: -6px;
+  @apply(--range--material--thumb--after);
+}
+
 .range--material__input:focus::-moz-range-thumb {
   border-color: var(--material-range-thumb-color);
   background-color: var(--material-range-thumb-color);
@@ -221,10 +222,6 @@
   @apply(--range--material--thumb--before);
 }
 
-.range--material__input::-ms-fill-lower {
-  background-color: var(--material-range-thumb-color);
-}
-
 .range--material__input::-moz-range-thumb:after {
   margin-top: -3px;
   margin-left: -3px;
@@ -232,18 +229,10 @@
 }
 
 .range--material__input::-webkit-slider-thumb:after {
-  margin-top: -3px;
-  margin-left: -3px;
   @apply(--range--material--thumb--after);
   display: inline-block;
   margin-left: calc(var(--material-range-thumb-horizontal-margin) / 2);
   margin-top: calc(var(--material-range-thumb-vertical-margin) / 2);
-}
-
-.range--material__input::-ms-fill-upper {
-  margin-top: -6px;
-  margin-left: -6px;
-  @apply(--range--material--thumb--after);
 }
 
 .range--material__input:active::-webkit-slider-thumb:after {

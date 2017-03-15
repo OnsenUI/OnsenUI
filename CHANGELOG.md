@@ -4,6 +4,7 @@ CHANGELOG
 
 dev
 ----
+ * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
 
  ### Bug Fixes
  * ons-input: text selection in Firefox.
