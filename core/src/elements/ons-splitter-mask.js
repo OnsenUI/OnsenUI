@@ -24,10 +24,7 @@ export default class SplitterMaskElement extends BaseElement {
   init() {
     this._boundOnClick = this._onClick.bind(this);
     contentReady(this, () => {
-      console.log(this.parentNode._sides);
-      if (this.parentNode._sides.every(side => {
-        return side.mode === 'split';
-      })) {
+      if (this.parentNode._sides.every(side => side.mode === 'split')) {
         this.setAttribute('style', 'display: none !important');
       }
     });
