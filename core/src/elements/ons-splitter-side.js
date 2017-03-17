@@ -497,7 +497,9 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    this._update(name, current);
+    contentReady(this, () => {
+      this._update(name, current);
+    });
   }
 
   _update(name, value) {
