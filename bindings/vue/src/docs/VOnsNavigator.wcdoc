@@ -12,6 +12,14 @@
  */
 
 /**
+ * @attribute pop-page
+ * @type {Function}
+ * @description
+ *   [en]Defines how VOnsNavigator should pop a page on VOnsBackButton click or Device Back Button event. Defaults to `() => this.pageStack.pop()`. Useful when the pageStack is located in a store.[/en]
+ *   [ja]どうしょう[/ja]
+ */
+
+/**
  * @event deviceBackButton
  * @description
  *   [en]Fired on device back button. Default behavior is popping 1 page when `pageStack` contains more than 1. Otherwise, calls parent handler.[/en]

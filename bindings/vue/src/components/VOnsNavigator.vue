@@ -16,6 +16,12 @@
       pageStack: {
         type: Array,
         required: true
+      },
+      popPage: {
+        type: Function,
+        default() {
+          this.pageStack.pop();
+        }
       }
     },
 
@@ -28,7 +34,7 @@
       },
       onDeviceBackButton(event) {
         if (this.pageStack.length > 1) {
-          this.pageStack.pop();
+          this.popPage();
         } else {
           event.callParentHandler();
         }

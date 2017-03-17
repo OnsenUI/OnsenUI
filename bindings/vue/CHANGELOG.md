@@ -1,6 +1,10 @@
 CHANGELOG
 ====
 
+dev
+----
+* VOnsNavigator: Added `popPage` optional prop.
+
 2.0.0-alpha.1
 ----
 

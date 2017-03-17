@@ -13,8 +13,8 @@
         let runDefault = true;
         this.$emit('click', { preventDefault: () => runDefault = false });
 
-        if (runDefault) {
-          this.navigator.pageStack.pop();
+        if (runDefault && this.navigator.pageStack.length > 1) {
+          this.navigator.popPage();
         }
       }
     }
