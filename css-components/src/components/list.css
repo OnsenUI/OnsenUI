@@ -1,5 +1,6 @@
 :root {
   --list-header-color: var(--text-color);
+  --list-header-background-color: var(--background-color);
   --list-item-color: var(--text-color);
   --list-item-active-background-color: var(--list-tap-active-background-color);
   --list-item-separator-color: var(--border-color);
@@ -175,6 +176,7 @@
   line-height: calc(1px + var(--list-header-min-height));
   text-transform: uppercase;
   position: relative;
+  opacity: 0.75;
   background-color: var(--list-header-background-color);
   background-size: 100% 1px;
   background-repeat: no-repeat;
@@ -700,7 +702,6 @@
   font-size: 14px;
   text-transform: none;
   margin: -1px 0 0 0;
-  color: #6c6c6c;
   font-weight: 500;
   padding: 8px 16px;
 }
