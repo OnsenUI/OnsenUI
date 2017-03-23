@@ -246,11 +246,13 @@ export default class TabbarElement extends BaseElement {
 
     const page = util.findParent(this, 'ons-page');
     if (page) {
-      this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
+      contentReady(page, () => {
+        this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
 
-      if (util.match(page.firstChild, 'ons-toolbar')) {
-        action(page.firstChild, 'noshadow');
-      }
+        if (util.match(page.firstChild, 'ons-toolbar')) {
+          action(page.firstChild, 'noshadow');
+        }
+      });
     }
 
     internal.autoStatusBarFill(() => {
@@ -288,6 +290,10 @@ export default class TabbarElement extends BaseElement {
     }
 
     return page;
+  }
+
+  get topPage() {
+    return this._getCurrentPageElement();
   }
 
   get pages() {

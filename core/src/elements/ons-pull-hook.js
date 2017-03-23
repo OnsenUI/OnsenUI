@@ -112,6 +112,7 @@ export default class PullHookElement extends BaseElement {
     this._boundOnScroll = this._onScroll.bind(this);
 
     this._setState(STATE_INITIAL, true);
+    this._hide(); // Fix for transparent toolbar transitions
   }
 
   _setStyle() {
@@ -349,6 +350,14 @@ export default class PullHookElement extends BaseElement {
     } else {
       return this._pageElement;
     }
+  }
+
+  _show() {
+    this.style.visibility = '';
+  }
+
+  _hide() {
+    this.style.visibility = 'hidden';
   }
 
   /**
