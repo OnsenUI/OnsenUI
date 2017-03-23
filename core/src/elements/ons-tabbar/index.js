@@ -292,6 +292,10 @@ export default class TabbarElement extends BaseElement {
     return page;
   }
 
+  get topPage() {
+    return this._getCurrentPageElement();
+  }
+
   get pages() {
     return util.arrayFrom(this._contentElement.children);
   }

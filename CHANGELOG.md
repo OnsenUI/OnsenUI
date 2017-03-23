@@ -5,6 +5,7 @@ CHANGELOG
 dev
 ----
  * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
+ * ons-navigator: iOS Slide animation can now find toolbars that are not immediate children of the pages.
 
  ### Bug Fixes
  * ons-input: text selection in Firefox.
