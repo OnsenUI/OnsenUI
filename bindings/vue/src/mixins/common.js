@@ -34,9 +34,16 @@ const hidable = {
 
 // Components that contain pages
 const destroyable = {
+  inject: ['navigator'],
   beforeDestroy() {
     if (this.$el._destroy instanceof Function) {
-      this.$el._destroy();
+      // FIXME: Destroy after animations end
+      let duration = this.navigator
+        && this.navigator.options.animationOptions
+        && this.navigator.options.animationOptions.duration
+        || 0;
+
+      setTimeout(() => this.$el._destroy(), ++duration * 1000)
     }
   }
 };

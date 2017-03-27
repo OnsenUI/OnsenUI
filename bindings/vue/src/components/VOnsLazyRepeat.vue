@@ -62,11 +62,13 @@
     mounted() {
       this._setup();
       this.$vnode.context.$on('refresh', this.refresh);
+      this.$parent.$el._destroy = () => {
+        this.provider && this.provider.destroy();
+      };
     },
 
     beforeDestroy() {
       this.$vnode.context.$off('refresh', this.refresh);
-      this.provider && this.provider.destroy();
     }
   };
 </script>
