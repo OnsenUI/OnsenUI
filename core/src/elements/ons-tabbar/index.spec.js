@@ -308,7 +308,7 @@ describe('OnsTabbarElement', () => {
       expect(element.setActiveTab(0)).to.be.false;
     });
 
-    it('does not remove tabs', (done) => {
+    onlyChrome(it)('does not remove tabs', (done) => {
       const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>

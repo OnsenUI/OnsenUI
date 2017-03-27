@@ -318,7 +318,7 @@ describe('OnsSpeedDialElement', () => {
   });
 
   describe('#_compile()', () => {
-    it('does not compile twice', () => {
+    onlyChrome(it)('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
       div1.innerHTML = `

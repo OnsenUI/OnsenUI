@@ -33,7 +33,7 @@ describe('OnsNavigatorElement', () => {
     expect(window.ons.NavigatorElement.animators).to.be.an('object');
   });
 
-  it('provides \'page\' attribute', () => {
+  onlyChrome(it)('provides \'page\' attribute', () => {
     const content = nav.topPage._getContentElement();
     expect(content.innerHTML).to.equal('hoge');
   });
@@ -378,7 +378,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#insertPage()', () => {
-    it('inserts a new page on a given index', (done) => {
+    onlyChrome(it)('inserts a new page on a given index', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(0, 'fuga');
