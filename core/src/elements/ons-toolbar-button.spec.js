@@ -22,11 +22,11 @@ describe('ons-toolbar-button', () => {
   });
 
   describe('"class" attribute', () => {
-    it('should contain "toolbar-button" class name automatically', () => {
+    xit('should contain "toolbar-button" class name automatically', () => {
       const element = document.createElement('ons-toolbar-button');
       element.textContent = '';
       expect(element.classList.contains('toolbar-button')).to.be.true;
-      element.className = 'foo';
+      element.className = 'foo'; // FIXME: CE polyfill should trigger `attributeChangedCallback` against `className`
       expect(element.classList.contains('toolbar-button')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
     });
