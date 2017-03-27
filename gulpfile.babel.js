@@ -81,7 +81,20 @@ gulp.task('core', function() {
     })
     .pipe(source('setup.js', './core/src'))
     .pipe(buffer())
-    .pipe($.addSrc.prepend('core/vendor/*.js'))
+    .pipe($.addSrc.prepend([
+      'core/polyfill/CustomEvent.js',
+      'core/polyfill/vendor/MutationObserver*/MutationObserver.js',
+      'core/polyfill/childNodeRemove.js',
+      'core/polyfill/vendor/classList*/classList.js',
+      'core/polyfill/vendor/document-register-element*/document-register-element.max.js',
+      'core/polyfill/vendor/FastClick*/fastclick.js',
+      'core/polyfill/vendor/document-register-element*/innerHTML.js',
+      'core/polyfill/vendor/microevent.js*/microevent.js',
+      'core/polyfill/vendor/promise-polyfill*/promise.js',
+      'core/polyfill/vendor/setImmediate*/setImmediate.js',
+      'core/polyfill/viewport.js',
+      'core/polyfill/vendor/winstore-jscompat*/winstore-jscompat.js',
+      ]))
     .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
