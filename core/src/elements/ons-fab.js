@@ -75,7 +75,7 @@ export default class FabElement extends BaseElement {
   init() {
     // The following statements can be executed before contentReady
     // since these do not access the children
-    this.show();
+    this.hide();
     this.classList.add(defaultClassName);
 
     contentReady(this, () => {
@@ -103,6 +103,10 @@ export default class FabElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
 
     this._updatePosition();
+  }
+
+  connectedCallback() {
+    setImmediate(() => this.show());
   }
 
   static get observedAttributes() {
@@ -133,7 +137,7 @@ export default class FabElement extends BaseElement {
   }
 
   _hide() {
-    this.hide();
+    setImmediate(() => this.hide());
   }
 
   _updateRipple() {
