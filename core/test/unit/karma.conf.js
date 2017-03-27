@@ -20,7 +20,10 @@ module.exports = function(config) {
       global.KARMA_DISABLE_WARNINGS ? 'disable-warnings.js' : null,
       global.KARMA_SPEC_FILES || '../../../core/src/**/*.spec.js',
       '../../../build/css/onsenui.css',
-      '../../../build/css/onsen-css-components.css'
+      '../../../build/css/onsen-css-components.css',
+      {pattern: '../../../build/css/font_awesome/css/font-awesome.min.css', served: true, included: false},
+      {pattern: '../../../build/css/ionicons/css/ionicons.min.css', served: true, included: false},
+      {pattern: '../../../build/css/material-design-iconic-font/css/material-design-iconic-font.min.css', served: true, included: false},
     ].filter(v => v != null),
 
     preprocessors: {
