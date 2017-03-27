@@ -90,7 +90,7 @@ gulp.task('core', function() {
       'core/polyfills/microevent.js*/microevent.js',
       'core/polyfills/promise-polyfill*/promise.js',
       'core/polyfills/setImmediate*/setImmediate.js',
-      'core/polyfill/viewport.js',
+      'core/polyfills/viewport.js',
       'core/polyfills/winstore-jscompat*/winstore-jscompat.js',
       ]))
     .pipe($.sourcemaps.init({loadMaps: true}))
