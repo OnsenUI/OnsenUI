@@ -3,6 +3,7 @@ CHANGELOG
 
 dev
 ----
+* Autostyling: Fix for 'material' modifier.
 * VOnsNavigator: Added `popPage` optional prop.
 * VOnsTabbar: Fix update issue.
 * VOnsCarousel: Fix update issue.
