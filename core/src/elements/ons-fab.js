@@ -133,7 +133,7 @@ export default class FabElement extends BaseElement {
   }
 
   _hide() {
-    this.hide();
+    setImmediate(() => this.hide());
   }
 
   _updateRipple() {
