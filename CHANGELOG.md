@@ -12,8 +12,9 @@ dev
  * ons-navigator: iOS Slide animation can now find toolbars that are not immediate children of the pages.
  * ons-pull-hook: Its content is not visible anymore during toolbar transitions.
  * ons-fab: It is now initally hidden and shown only when its page container is pushed. This fixes page transitions.
- * ons-fab: Hide animation on popPage is now visible.
  * ons-fab: Covers the toolbar.
+ * ons-fab: Hide animation on popPage is now visible.
+ * ons-speed-dial: Hide items animation on popPage is now visible.
 
 v2.2.0
 ----
