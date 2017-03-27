@@ -99,7 +99,7 @@ notification._createAlertDialog = options => {
   };
 
   el.dialog = document.createElement('ons-alert-dialog');
-  innerHTML(el.dialog, `
+  el.dialog.innerHTML = `
     <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-container">
@@ -118,7 +118,7 @@ notification._createAlertDialog = options => {
         </div>
       </div>
     </div>
-  `);
+  `;
   contentReady(el.dialog);
 
   // Set attributes
