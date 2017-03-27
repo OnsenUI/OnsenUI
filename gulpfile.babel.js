@@ -82,18 +82,18 @@ gulp.task('core', function() {
     .pipe(source('setup.js', './core/src'))
     .pipe(buffer())
     .pipe($.addSrc.prepend([
-      'core/polyfill/CustomEvent.js',
-      'core/polyfill/vendor/MutationObserver*/MutationObserver.js',
-      'core/polyfill/childNodeRemove.js',
-      'core/polyfill/vendor/classList*/classList.js',
-      'core/polyfill/vendor/document-register-element*/document-register-element.max.js',
-      'core/polyfill/vendor/FastClick*/fastclick.js',
-      'core/polyfill/vendor/document-register-element*/innerHTML.js',
-      'core/polyfill/vendor/microevent.js*/microevent.js',
-      'core/polyfill/vendor/promise-polyfill*/promise.js',
-      'core/polyfill/vendor/setImmediate*/setImmediate.js',
+      'core/polyfills/CustomEvent.js',
+      'core/polyfills/MutationObserver*/MutationObserver.js',
+      'core/polyfills/childNodeRemove.js',
+      'core/polyfills/classList*/classList.js',
+      'core/polyfills/document-register-element*/document-register-element.max.js',
+      'core/polyfills/FastClick*/fastclick.js',
+      'core/polyfills/document-register-element*/innerHTML.js',
+      'core/polyfills/microevent.js*/microevent.js',
+      'core/polyfills/promise-polyfill*/promise.js',
+      'core/polyfills/setImmediate*/setImmediate.js',
       'core/polyfill/viewport.js',
-      'core/polyfill/vendor/winstore-jscompat*/winstore-jscompat.js',
+      'core/polyfills/winstore-jscompat*/winstore-jscompat.js',
       ]))
     .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
