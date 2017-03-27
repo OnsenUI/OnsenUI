@@ -5,7 +5,7 @@ describe('OnsBackButtonElement', () => {
     expect(window.ons.BackButtonElement).to.be.ok;
   });
 
-  onlyChrome(describe)('class attribute', () => {
+  describe('class attribute', () => {
     it('should contain "back-button" class name automatically', () => {
       const element = new ons.BackButtonElement();
       element.setAttribute('class', 'foobar');
@@ -14,7 +14,7 @@ describe('OnsBackButtonElement', () => {
     });
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
 
     element.setAttribute('modifier', 'hoge');
@@ -31,7 +31,7 @@ describe('OnsBackButtonElement', () => {
     expect(element.classList.contains('back-button--fuga')).to.be.true;
   });
 
-  onlyChrome(it)('has two children', () => {
+  it('has two children', () => {
     const element = ons._util.createElement('<ons-back-button>label</ons-back-button>');
     document.body.appendChild(element);
 
@@ -40,7 +40,7 @@ describe('OnsBackButtonElement', () => {
     expect(element.children[2]).not.to.be.ok;
   });
 
-  onlyChrome(describe)('#_onClick()', () => {
+  describe('#_onClick()', () => {
     let div, nav;
 
     beforeEach((done) => {
@@ -108,7 +108,7 @@ describe('OnsBackButtonElement', () => {
     });
   });
 
-  onlyChrome(describe)('autoStyling', () => {
+  describe('autoStyling', () => {
     it('adds \'material\' modifiers and effects on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-back-button>label</ons-back-button>');

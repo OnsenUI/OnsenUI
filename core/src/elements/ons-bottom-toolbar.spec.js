@@ -5,7 +5,7 @@ describe('ons-bottom-toolbar', () => {
     expect(window.ons.BottomToolbarElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'bottom-bar\' by default', () => {
+  it('classList contains \'bottom-bar\' by default', () => {
     const element = new ons.BottomToolbarElement();
     expect(element.classList.contains('bottom-bar')).to.be.true;
     element.setAttribute('class', 'foo');
@@ -13,7 +13,7 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('foo')).to.be.true;
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     var element = new ons.BottomToolbarElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('bottom-bar--hoge')).to.be.true;
@@ -29,7 +29,7 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  onlyChrome(it)('ensures its page\'s class', () => {
+  it('ensures its page\'s class', () => {
     var element = new ons.BottomToolbarElement(),
       page = new ons.PageElement();
 

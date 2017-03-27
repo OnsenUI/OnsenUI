@@ -5,7 +5,7 @@ describe('ons-button', () => {
     expect(window.ons.ButtonElement).to.be.ok;
   });
 
-  onlyChrome(describe)('class attribute', () => {
+  describe('class attribute', () => {
     it('should contains "button" class name automatically', () => {
       const element = new ons.ButtonElement();
       element.setAttribute('class', 'foobar');
@@ -14,7 +14,7 @@ describe('ons-button', () => {
     });
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     var element = new ons.ButtonElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;

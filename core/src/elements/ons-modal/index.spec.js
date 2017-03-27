@@ -22,11 +22,11 @@ describe('OnsModalElement', () => {
     expect(window.ons.ModalElement).to.be.ok;
   });
 
-  onlyChrome(it)('is not displayed by default', () => {
+  it('is not displayed by default', () => {
     expect(element.style.display).to.equal('none');
   });
 
-  onlyChrome(describe)('class attribute', () => {
+  describe('class attribute', () => {
     it('should contains "modal" class name automatically', () => {
       const element = new ons.ModalElement();
       element.setAttribute('class', 'foobar');
@@ -36,11 +36,11 @@ describe('OnsModalElement', () => {
   });
 
   describe('#_compile()', () => {
-    onlyChrome(it)('adds a class \'modal\' by default', () => {
+    it('adds a class \'modal\' by default', () => {
       expect(element.classList.contains('modal')).to.be.true;
     });
 
-    onlyChrome(it)('adds a \'modal__content\' by default', () => {
+    it('adds a \'modal__content\' by default', () => {
       const wrapper = document.createElement('div');
       element.appendChild(wrapper);
       expect(element.children[0].classList.contains('modal__content')).to.be.true;
@@ -56,7 +56,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#show()', () => {
-    onlyChrome(it)('displays the modal', () => {
+    it('displays the modal', () => {
       expect(element.style.display).to.equal('none');
       element.show();
       expect(element.style.display).to.equal('table');
@@ -96,7 +96,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#toggle()', () => {
-    onlyChrome(it)('alternates the modal displaying state', () => {
+    it('alternates the modal displaying state', () => {
       expect(element.style.display).to.equal('none');
       element.toggle();
       expect(element.style.display).to.equal('table');
@@ -108,7 +108,7 @@ describe('OnsModalElement', () => {
   });
 
   describe('#visible', () => {
-    onlyChrome(it)('returns whether the modal is shown', () => {
+    it('returns whether the modal is shown', () => {
       expect(element.style.display).to.equal('none');
       expect(element.visible).to.be.false;
       element.show();
@@ -119,15 +119,15 @@ describe('OnsModalElement', () => {
 
 
   describe('#onDeviceBackButton', () => {
-    onlyChrome(it)('gets the callback', () => {
+    it('gets the callback', () => {
       expect(element.onDeviceBackButton).to.be.ok;
     });
 
-    onlyChrome(it)('returns nothing by default', () => {
+    it('returns nothing by default', () => {
       expect(element.onDeviceBackButton._callback()).not.to.be.ok;
     });
 
-    onlyChrome(it)('overwrites the callback', () => {
+    it('overwrites the callback', () => {
       const spy = chai.spy.on(element._backButtonHandler, 'destroy');
       element.onDeviceBackButton = () => { return; };
       expect(spy).to.have.been.called.once;
