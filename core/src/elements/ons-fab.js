@@ -105,6 +105,10 @@ export default class FabElement extends BaseElement {
     this._updatePosition();
   }
 
+  connectedCallback() {
+    setImmediate(() => this.show());
+  }
+
   static get observedAttributes() {
     return ['modifier', 'ripple', 'position', 'class'];
   }
