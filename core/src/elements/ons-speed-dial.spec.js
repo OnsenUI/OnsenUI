@@ -16,6 +16,7 @@ describe('OnsSpeedDialElement', () => {
     `);
 
     document.body.appendChild(speedDial);
+    speedDial.show();
   });
 
   afterEach(() => {

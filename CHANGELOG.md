@@ -5,6 +5,7 @@ CHANGELOG
 dev
 ----
  * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
+ * ons-fab: It is now initally hidden and shown only when its page container is pushed. This fixes page transitions.
 
  ### Bug Fixes
  * ons-input: text selection in Firefox.
