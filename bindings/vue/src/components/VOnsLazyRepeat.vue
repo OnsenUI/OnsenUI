@@ -1,7 +1,10 @@
+<template>
+  <!-- This element is useless except for the destroy part -->
+  <ons-lazy-repeat></ons-lazy-repeat>
+</template>
+
 <script>
   export default {
-    render() { },
-
     props: {
       renderItem: {
         type: Function,
@@ -62,13 +65,18 @@
     mounted() {
       this._setup();
       this.$vnode.context.$on('refresh', this.refresh);
-      this.$parent.$el._destroy = () => {
-        this.provider && this.provider.destroy();
-      };
     },
 
     beforeDestroy() {
       this.$vnode.context.$off('refresh', this.refresh);
+
+      // This will destroy the provider once the rendered element
+      // is detached (detachedCallback). Therefore, animations
+      // have time to finish before elements start to disappear.
+      // It cannot be set earlier in order to prevent accidental
+      // destroys if this element is retached by something else.
+      this.$el._lazyRepeatProvider = this.provider;
+      this.provider = null;
     }
   };
 </script>
