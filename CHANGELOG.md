@@ -2,20 +2,24 @@
 CHANGELOG
 ====
 
-dev
+v2.2.1
 ----
- * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
 
- ### Bug Fixes
- * ons-input: text selection in Firefox.
- * ons-splitter: mask is hidden only if all splitter-sides are in split mode.
+### New Features
+
+ * css-components: Add minimized css-components file on `build/css/onsen-css-components.min.css`.
+
+### Bug Fixes
+
  * ons-navigator: iOS Slide animation can now find toolbars that are not immediate children of the pages.
+ * ons-splitter: mask is hidden only if all splitter-sides are in split mode.
+ * ons-tab: It shows the last visible page instead of the initial one when reattached.
  * ons-pull-hook: Its content is not visible anymore during toolbar transitions.
  * ons-fab: It is now initally hidden and shown only when its page container is pushed. This fixes page transitions.
  * ons-fab: Covers the toolbar.
  * ons-fab: Hide animation on popPage is now visible.
  * ons-speed-dial: Hide items animation on popPage is now visible.
- * ons-tab: It shows the last visible page instead of the initial one when reattached.
+ * ons-input: text selection in Firefox.
  * ons-icon: Fixed [#1890](https://github.com/OnsenUI/OnsenUI/issues/1890).
 
 v2.2.0
