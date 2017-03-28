@@ -5,7 +5,7 @@
   --textarea-box-shadow: none;
 }
 
-/*!
+/*~
   name: Textarea
   category: Textarea
   markup: |
@@ -28,7 +28,7 @@
   color: var(--textarea-color);
   letter-spacing: var(--letter-spacing);
   box-shadow: var(--textarea-box-shadow);
-  -webkit-appearance: none;
+  appearance: none;
   width: auto;
 }
 
@@ -36,13 +36,11 @@
   @apply(--disabled);
 }
 
-.textarea::-webkit-input-placeholder,
-.textarea::-moz-placeholder,
-.textarea:-ms-input-placeholder {
+.textarea::placeholder {
   color: var(--input-placeholder-color);
 }
 
-/*!
+/*~
   name: Textarea Transparent
   category: Textarea
   markup: |
@@ -67,7 +65,7 @@
   color: var(--textarea-color);
   letter-spacing: var(--letter-spacing);
   box-shadow: var(--textarea-box-shadow);
-  -webkit-appearance: none;
+  appearance: none;
   width: auto;
 }
 
@@ -75,8 +73,6 @@
   @apply(--disabled);
 }
 
-.textarea--transparent::-webkit-input-placeholder,
-.textarea--transparent::-moz-placeholder,
-.textarea--transparent:-ms-input-placeholder {
+.textarea--transparent::placeholder {
   color: var(--input-placeholder-color);
 }

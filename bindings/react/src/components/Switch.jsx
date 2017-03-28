@@ -79,7 +79,7 @@ Switch.propTypes = {
 
   /**
    * @name inputId
-   * @type bool
+   * @type string
    * @description
    *  [en] Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
    *  [jp] [/jp]

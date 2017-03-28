@@ -1,9 +1,9 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="left"><ons-toolbar-button @click="carouselIndex--">Prev: Index--</ons-toolbar-button></div>
+      <div class="left"><v-ons-toolbar-button @click="carouselIndex--">Prev: Index--</v-ons-toolbar-button></div>
       <div class="center">Index: {{carouselIndex}}</div>
-      <div class="right"><ons-toolbar-button @click="carouselIndex++">Next: Index++</ons-toolbar-button></div>
+      <div class="right"><v-ons-toolbar-button @click="carouselIndex++">Next: Index++</v-ons-toolbar-button></div>
     </v-ons-toolbar>
 
     <v-ons-carousel fullscreen :index="carouselIndex" @update="carouselIndex = $event" swipeable auto-scroll overscrollable @postchange="log('postchange')" @refresh="log('refresh')" @overscroll="log('overscroll')">

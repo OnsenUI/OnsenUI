@@ -47,7 +47,7 @@ ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialo
 }
 
 ons-fab, ons-speed-dial {
-  z-index: 3;
+  z-index: 10001;
 }
 
 * {
@@ -200,10 +200,6 @@ ons-splitter-side[mode="collapse"] {
 ons-splitter-side[side="right"][mode="collapse"] {
   right: auto;
   left: 100%;
-}
-
-ons-splitter-side[mode="split"] ~ ons-splitter-mask {
-  display: none !important;
 }
 
 ons-splitter-side[mode="split"] {

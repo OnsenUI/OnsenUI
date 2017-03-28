@@ -1,10 +1,10 @@
 <template>
   <v-ons-page>
-    <ons-list>
-      <ons-list-header>
+    <v-ons-list>
+      <v-ons-list-header>
         Test input - <button @click="modify('input')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item>
+      </v-ons-list-header>
+      <v-ons-list-item>
         <div class="center">
           <v-ons-input
             placeholder="Input name"
@@ -13,17 +13,17 @@
           >
           </v-ons-input>
         </div>
-      </ons-list-item>
-      <ons-list-item>
+      </v-ons-list-item>
+      <v-ons-list-item>
         <div class="center">
           Hello {{ name }}!
         </div>
-      </ons-list-item>
+      </v-ons-list-item>
 
-      <ons-list-header>
+      <v-ons-list-header>
         Switches - <button @click="modify('switch')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item>
+      </v-ons-list-header>
+      <v-ons-list-item>
         <label class="center" for="switch1">
           Switch ({{ switchOn ? 'on' : 'off' }})
         </label>
@@ -34,8 +34,8 @@
           >
           </v-ons-switch>
         </div>
-      </ons-list-item>
-      <ons-list-item>
+      </v-ons-list-item>
+      <v-ons-list-item>
         <label class="center" for="switch2">
           {{ switchOn ? 'Enabled switch' : 'Disabled switch' }}
         </label>
@@ -46,28 +46,28 @@
           >
           </v-ons-switch>
         </div>
-      </ons-list-item>
+      </v-ons-list-item>
 
-      <ons-list-header>
+      <v-ons-list-header>
         Select box - <button @click="modify('select')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item>
+      </v-ons-list-header>
+      <v-ons-list-item>
         <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects">
           <option v-for="modifier in modifiers" :key="modifier" v-bind:value="modifier.value">
             {{ modifier.text }}
           </option>
         </v-ons-select>
-      </ons-list-item>
-      <ons-list-item>
+      </v-ons-list-item>
+      <v-ons-list-item>
         <div class="center">
           Modifier {{ selectedModifier }} looks great!
         </div>
-      </ons-list-item>
+      </v-ons-list-item>
 
-      <ons-list-header>
+      <v-ons-list-header>
         Radio buttons - <button @click="modify('radio')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item
+      </v-ons-list-header>
+      <v-ons-list-item
         v-for="(vegetable, $index) in vegetables"
         :key="vegetable"
         tappable
@@ -84,17 +84,17 @@
         <label :for="'radio-' + $index" class="center">
           {{ vegetable }}
         </label>
-      </ons-list-item>
-      <ons-list-item>
+      </v-ons-list-item>
+      <v-ons-list-item>
         <div class="center">
           I love {{ selectedVegetable }}!
         </div>
-      </ons-list-item>
+      </v-ons-list-item>
 
-      <ons-list-header>
+      <v-ons-list-header>
         Checkboxes - {{checkedColors}} - <button @click="modify('checkbox')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item
+      </v-ons-list-header>
+      <v-ons-list-item
         v-for="(color, $index) in colors"
         :key="color"
       >
@@ -110,27 +110,27 @@
         <label class="center" :for="'checkbox-' + $index">
           {{ color }}
         </label>
-      </ons-list-item>
+      </v-ons-list-item>
 
-      <ons-list-header>
+      <v-ons-list-header>
         Range - <button @click="modify('range')">Modify JS</button>
-      </ons-list-header>
-      <ons-list-item>
+      </v-ons-list-header>
+      <v-ons-list-item>
         Adjust the volume:
-        <ons-row>
-          <ons-col width="40px" style="text-align: center; line-height: 31px;">
-            <ons-icon icon="md-volume-down"></ons-icon>
-          </ons-col>
-          <ons-col>
+        <v-ons-row>
+          <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <v-ons-icon icon="md-volume-down"></v-ons-icon>
+          </v-ons-col>
+          <v-ons-col>
             <v-ons-range v-ons-model.number="volume" style="width: 100%;"></v-ons-range>
-          </ons-col>
-          <ons-col width="40px" style="text-align: center; line-height: 31px;">
-            <ons-icon icon="md-volume-up"></ons-icon>
-          </ons-col>
-        </ons-row>
+          </v-ons-col>
+          <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <v-ons-icon icon="md-volume-up"></v-ons-icon>
+          </v-ons-col>
+        </v-ons-row>
         Volume: {{ volume }} <span v-show="volume > 80">&nbsp;(careful, that's loud)</span>
-      </ons-list-item>
-    </ons-list>
+      </v-ons-list-item>
+    </v-ons-list>
   </v-ons-page>
 </template>
 

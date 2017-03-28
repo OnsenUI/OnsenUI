@@ -27,7 +27,7 @@
 
     @media (--retina-query) {
       background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
-    };
+    }
   }
 
   --retina-material-list-item-border: {
@@ -39,7 +39,7 @@
 
     @media (--retina-query) {
       background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
-    };
+    }
   }
 
   --retina-list-border: {
@@ -55,7 +55,7 @@
   }
 }
 
-/*!
+/*~
   name: List
   category: List
   elements: ons-list ons-list-item
@@ -77,7 +77,8 @@
   @apply(--reset-base);
   @apply(--reset-cursor);
   @apply(--reset-font);
-  @apply(--reset-list);
+  list-style-type: none;
+  text-align: left;
   display: block;
   -webkit-overflow-scrolling: touch;
   overflow: hidden;
@@ -98,8 +99,6 @@
 }
 
 .list-item {
-  margin: 0;
-  padding: 0;
   width: 100%;
   position: relative;
   list-style: none;
@@ -164,7 +163,6 @@
 
 .list-header {
   margin: 0;
-  padding: 0;
   list-style: none;
   text-align: left;
   display: block;
@@ -177,7 +175,6 @@
   line-height: calc(1px + var(--list-header-min-height));
   text-transform: uppercase;
   position: relative;
-
   background-color: var(--list-header-background-color);
   background-size: 100% 1px;
   background-repeat: no-repeat;
@@ -185,10 +182,10 @@
   background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
   @media (--retina-query) {
     background-image: linear-gradient(180deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
-  };
+  }
 }
 
-/*!
+/*~
   name: Noborder List
   category: List
   elements: ons-list ons-list-item
@@ -209,7 +206,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: Category List Header
   category: List
   elements: ons-list ons-list-header ons-list-item
@@ -230,7 +227,7 @@
     </ul>
  */
 
-/*!
+/*~
   name: Tappable List
   category: List
   elements: ons-list ons-list-item
@@ -253,7 +250,7 @@
   background-color: var(--list-item-active-background-color);
 }
 
-/*!
+/*~
   name: Switch in List Item
   category: List
   elements: ons-list ons-list-item ons-switch
@@ -288,7 +285,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: List Item with Chevron
   category: List
   elements: ons-list ons-list-item
@@ -314,12 +311,11 @@
   order: 3;
   align-self: stretch;
   font-size: 28px;
-  font-family: FontAwesome;
+  font-family: 'FontAwesome';
   font-style: normal;
-  font-weight: normal;
-  content: "\f105";
+  font-weight: 200;
+  content: '\f105';
   margin-left: auto;
-  width: 18px;
   text-align: right;
   border-bottom: var(--list-border);
   @apply(--retina-list-item-border);
@@ -327,8 +323,7 @@
   padding-right: 8px;
 }
 
-
-/*!
+/*~
   name: Inset List
   category: List
   elements: ons-list ons-list-item
@@ -350,7 +345,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: Radio Button in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -381,7 +376,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Checkbox in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -412,7 +407,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: No border Checkbox in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -443,7 +438,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Text Input in List Item
   category: List
   elements: ons-list ons-list-item ons-input
@@ -462,7 +457,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Textarea in List Item
   category: List
   elements: ons-list ons-list-item
@@ -476,7 +471,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Right Label in List Item
   category: List
   elements: ons-list ons-list-item
@@ -499,7 +494,7 @@
   opacity: 0.6;
 }
 
-/*!
+/*~
   name: List Item with Subtitle
   category: List
   elements: ons-list ons-list-item
@@ -532,7 +527,7 @@
   align-self: flex-start;
 }
 
-/*!
+/*~
   name: List Item with Thumbnail
   category: List
   elements: ons-list ons-list-item
@@ -570,7 +565,7 @@
   margin: 0;
 }
 
-/*!
+/*~
   name: List Item with Icon
   category: List
   elements: ons-list ons-list-item
@@ -613,7 +608,7 @@
   padding: 0 6px;
 }
 
-/*!
+/*~
   name: Material List
   category: List
   elements: ons-list ons-list-item
@@ -669,7 +664,7 @@
 }
 
 .list-item--material__right {
-  padding: 14px 16px 14px 0px;
+  padding: 14px 16px 14px 0;
   line-height: 1;
   border-color: var(--material-list-item-separator-color);
   @apply(--retina-material-list-item-border);
@@ -681,7 +676,7 @@
   @apply(--retina-material-list-item-border);
 }
 
-/*!
+/*~
   name: Material List with Header
   category: List
   elements: ons-list ons-list-item
@@ -715,7 +710,7 @@
   padding-top: 16px;
 }
 
-/*!
+/*~
   name: Material List with Checkboxes
   category: List
   elements: ons-list ons-list-item ons-input
@@ -752,7 +747,7 @@
     </ul>
 */
 
-/*!
+/*~
   name: Material List with Thumbnails
   category: List
   markup: |
@@ -788,7 +783,7 @@
   border-radius: 100%;
 }
 
-/*!
+/*~
   name: Material List with Icons
   category: List
   markup: |
@@ -830,7 +825,7 @@
   padding: 0 4px;
 }
 
-/*!
+/*~
   name: List item without divider
   category: List
   markup: |
@@ -851,7 +846,7 @@
   background-image: none;
 }
 
-/*!
+/*~
   name: List item with long divider
   category: List
   markup: |
@@ -864,6 +859,7 @@
       </li>
     </ul>
  */
+
 .list-item--longdivider {
   border-bottom: var(--list-border);
   @apply(--retina-list-item-border);

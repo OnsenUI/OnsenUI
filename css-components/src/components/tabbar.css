@@ -33,7 +33,7 @@
   }
 }
 
-/*!
+/*~
   name: Icon Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -66,7 +66,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -95,15 +95,14 @@
     </div>
 */
 
-
 .tabbar {
   @apply(--reset-font);
   display: table;
   table-layout: fixed;
   position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   white-space: nowrap;
   margin: 0;
   padding: 0;
@@ -127,12 +126,13 @@
 }
 
 .tabbar__button {
-  @apply(--inline-block);
   @apply(--reset-font);
   @apply(--reset-box-model);
   @apply(--reset-base);
   @apply(--reset-cursor);
   @apply(--ellipsis);
+  position: relative;
+  display: inline-block;
   text-decoration: none;
   padding: 0;
   height: var(--tabbar-button-line-height);
@@ -156,7 +156,7 @@
   padding: 0;
   margin: 0;
   line-height: 26px;
-  display: block !important;
+  display: block !important; /* stylelint-disable-line declaration-no-important */
   height: 28px;
 }
 
@@ -188,10 +188,6 @@
   padding: 0;
 }
 
-.tabbar__button {
-  color: var(--tabbar-button-color);
-}
-
 :checked + .tabbar__button {
   color: var(--tabbar-active-color);
   background-color: transparent;
@@ -219,7 +215,7 @@
   z-index: 0;
 }
 
-/*!
+/*~
   name: Icon Only Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -250,7 +246,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Top Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -281,9 +277,9 @@
 
 .tabbar--top {
   position: relative;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: auto;
   border-top: none;
   border-bottom: var(--tabbar-border-top);
@@ -298,7 +294,7 @@
   z-index: 0;
 }
 
-/*!
+/*~
   name: Bordered Top Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -327,7 +323,7 @@
     </div>
 */
 
-/*!
+/*~
   name: Material Tabbar
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -376,8 +372,11 @@
 
 .tabbar--material {
   background-color: var(--material-tabbar-background-color);
-  border-bottom-width: 0px;
-  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.14), 0 3px 5px -2px rgba(0,0,0,0.12), 0 5px 1px -4px rgba(0,0,0,0.2);
+  border-bottom-width: 0;
+  box-shadow:
+    0 4px 2px -2px rgba(0, 0, 0, 0.14),
+    0 3px 5px -2px rgba(0, 0, 0, 0.12),
+    0 5px 1px -4px rgba(0, 0, 0, 0.2);
 }
 
 .tabbar--material__button {
@@ -414,7 +413,7 @@
   background-color: var(--material-tabbar-highlight-color);
 }
 
-/*!
+/*~
   name: Material Tabbar (Icon only)
   category: Tabbar
   elements: ons-tabbar ons-tab
@@ -444,11 +443,11 @@
 */
 
 .tabbar--material__icon {
-  font-size: 22px !important;
+  font-size: 22px !important; /* stylelint-disable-line declaration-no-important */
   line-height: 36px;
 }
 
-/*!
+/*~
   name: Material Tabbar (Icon and Label)
   category: Tabbar
   elements: ons-tabbar ons-tab

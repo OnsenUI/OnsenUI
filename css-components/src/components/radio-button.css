@@ -8,14 +8,18 @@
 
   --radio-button: {
     @apply(--reset-box-model);
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
     @apply(--reset-font);
     @apply(--hide-input-parent);
   }
 
   --radio-button__label: {
-    @apply(--inline-block);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
     @apply(--reset-cursor);
   }
 
@@ -40,7 +44,7 @@
   }
 }
 
-/*!
+/*~
   name: Radio Button
   category: Radio Button
   elements: ons-input
@@ -74,15 +78,6 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.radio-button__input:checked + .radio-button__checkmark:after {
-  opacity: 1;
-}
-
-.radio-button__input:checked + .radio-button__checkmark:before {
-  background: transparent;
-  border: none;
-}
-
 .radio-button {
   @apply(--radio-button__label);
   @apply(--hide-input-parent);
@@ -109,10 +104,6 @@
   pointer-events: none;
 }
 
-.radio-button__input:checked + .radio-button__checkmark {
-  background: var(--radio-button-background-active);
-}
-
 .radio-button__checkmark:after {
   @apply(--radio-button--after);
   top: var(--checkmark-top);
@@ -129,12 +120,24 @@
   transform: rotate(-45deg);
 }
 
-.radio-button__input:disabled + .radio-button__checkmark {
+:checked + .radio-button__checkmark {
+  background: var(--radio-button-background-active);
+}
+
+:checked + .radio-button__checkmark:after {
+  opacity: 1;
+}
+
+:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
+}
+
+:disabled + .radio-button__checkmark {
   @apply(--radio-button--disabled);
 }
 
-
-/*!
+/*~
   name: Material Radio Button
   category: Radio Button
   elements: ons-input
@@ -193,7 +196,7 @@
   transform: scale(0);
 }
 
-.radio-button--material__input:checked + .radio-button__checkmark:before {
+:checked + .radio-button--material__checkmark:before {
   background: transparent;
   border: 2px solid var(--material-radio-button-active-color);
 }
@@ -204,22 +207,22 @@
   transform: scale(0);
 }
 
-.radio-button--material__input:checked + .radio-button__checkmark:after {
+:checked + .radio-button--material__checkmark:after {
   opacity: 1;
   background: var(--material-radio-button-active-color);
   transform: scale(1);
 }
 
-.radio-button--material__input:disabled + .radio-button__checkmark {
+:disabled + .radio-button--material__checkmark {
   opacity: 1;
 }
 
-.radio-button--material__input:disabled + .radio-button__checkmark:after {
+:disabled + .radio-button--material__checkmark:after {
   background-color: #afafaf;
   border-color: #afafaf;
 }
 
-.radio-button--material__input:disabled + .radio-button__checkmark:before {
+:disabled + .radio-button--material__checkmark:before {
   border-color: #afafaf;
 }
 

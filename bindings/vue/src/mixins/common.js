@@ -64,10 +64,16 @@ const modifier = {
 
   methods: {
     _updateModifier() {
-      if (this.hasOwnProperty('_previousModifier')) {
-        this._previousModifier.split(/\s+/).forEach(modifier => util.removeModifier(this.$el, modifier, { autoStyle: true }));
-      }
-      this.modifier.trim().split(/\s+/).forEach(modifier => util.addModifier(this.$el, modifier, { autoStyle: true }));
+      const preset = this._md ? ['material'] : [];
+
+      // Remove
+      (this._previousModifier || '').split(/\s+/).concat(preset)
+        .forEach(m => util.removeModifier(this.$el, m, { autoStyle: true }));
+
+      // Add
+      this.modifier.trim().split(/\s+/).concat(preset)
+        .forEach(m => m && util.addModifier(this.$el, m, { autoStyle: true }));
+
       this._previousModifier = this.modifier;
     }
   },
@@ -79,7 +85,8 @@ const modifier = {
   },
 
   mounted() {
-    this.modifier && this._updateModifier();
+    this._md = /^material$/.test(this.$el.getAttribute('modifier'));
+    this._updateModifier();
   }
 };
 

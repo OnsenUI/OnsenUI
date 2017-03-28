@@ -1,23 +1,19 @@
 
 :root {
-  /* Global variables */
   --input-bg-color: var(--background-color);
   --input-border-color: var(--border-color);
   --input-text-color: var(--text-color);
   --input-placeholder-color: var(--sub-text-color);
   --input-invalid-border-color: var(--border-color);
   --input-invalid-text-color: var(--text-color);
+  --input-border: 1px solid var(--input-border-color);
   --alpha-lighten: 70%;
-
-  /* Font */
   --font-size: 17px;
   --font-weight: 400;
   --letter-spacing: 0;
   --font-size--mini: calc(var(--font-size) - 3px);
   --font-size--large: 17px;
   --font-weight--large: 500;
-
-  /* Input */
   --background-color--input: transparent;
   --box-shadow--text-input: none;
   --box-shadow--cta: none;
@@ -30,7 +26,6 @@
   --border-radius: 4px;
   --border-radius--large: 0;
   --border--invalid: 1px solid var(--input-invalid-border-color);
-  --input-border: 1px solid var(--input-border-color);
 }
 
 html {
@@ -49,17 +44,18 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-* {
+* { /* stylelint-disable-line selector-no-universal */
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 input, textarea, select {
   user-select: auto;
+  -moz-user-select: text;
 }
 
 input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus {
-  outline: none
+  outline: none;
 }
 
 h1 {

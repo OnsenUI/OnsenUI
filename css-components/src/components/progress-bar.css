@@ -5,7 +5,7 @@
   --progress-bar-background-color: var(--material-progress-bar-background-color);
 }
 
-/*!
+/*~
   name: Progress Bar
   category: Progress Bar
   elements: ons-progress-bar
@@ -34,7 +34,7 @@
   overflow: hidden;
 }
 
-.progress-bar__primary, 
+.progress-bar__primary,
 .progress-bar__secondary {
   position: absolute;
   background-color: var(--progress-bar-color);
@@ -77,10 +77,12 @@
     left: -35%;
     right: 100%;
   }
+
   60% {
     left: 100%;
     right: -90%;
   }
+
   100% {
     left: 100%;
     right: -90%;
@@ -92,10 +94,12 @@
     left: -200%;
     right: 100%;
   }
+
   60% {
     left: 107%;
     right: -8%;
   }
+
   100% {
     left: 107%;
     right: -8%;

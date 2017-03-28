@@ -16,6 +16,7 @@ describe('OnsSpeedDialElement', () => {
     `);
 
     document.body.appendChild(speedDial);
+    speedDial.show();
   });
 
   afterEach(() => {
@@ -99,8 +100,9 @@ describe('OnsSpeedDialElement', () => {
 
     it('calls hide() if element is not inline', () => {
       const spy = chai.spy.on(speedDial, 'hide');
-      speedDial._hide();
-      expect(spy).to.have.been.called.once;
+      return speedDial._hide().then(() => {
+        expect(spy).to.have.been.called.once;
+      });
     });
   });
 
