@@ -36,6 +36,8 @@ export default {
 
   methods: {
     _setup() {
+      this.provider && this.provider.destroy();
+
       const delegate = new this.$ons._ons._internal.LazyRepeatDelegate({
         calculateItemHeight: this.calculateItemHeight,
         createItemContent: i => this.renderItem(i).$mount().$el,
