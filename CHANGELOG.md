@@ -16,6 +16,7 @@ dev
  * ons-fab: Hide animation on popPage is now visible.
  * ons-speed-dial: Hide items animation on popPage is now visible.
  * ons-tab: It shows the last visible page instead of the initial one when reattached.
+ * ons-icon: Fixed [#1890](https://github.com/OnsenUI/OnsenUI/issues/1890).
 
 v2.2.0
 ----
