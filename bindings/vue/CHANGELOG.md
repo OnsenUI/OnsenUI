@@ -7,6 +7,8 @@ dev
 * VOnsNavigator: Added `popPage` optional prop.
 * VOnsTabbar: Fix update issue.
 * VOnsCarousel: Fix update issue.
+* VOnsLazyRepeat: Destroys previous provider.
+* Components destruction is delayed in order to support animations.
 
 2.0.0-alpha.1
 ----
