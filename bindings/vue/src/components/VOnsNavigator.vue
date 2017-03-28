@@ -7,10 +7,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
+  import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
-    mixins: [destroyable, hasOptions, selfProvider, deriveEvents, deriveDBB],
+    mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
 
     props: {
       pageStack: {
