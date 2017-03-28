@@ -36,22 +36,6 @@ describe('OnsFabElement', () => {
     });
   });
 
-  describe('#_show()', () => {
-    it('calls show()', () => {
-      const spy = chai.spy.on(fab, 'show');
-      fab._show();
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
-  describe('#_hide()', () => {
-    it('calls hide()', () => {
-      const spy = chai.spy.on(fab, 'hide');
-      fab._hide();
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
   describe('#_updatePosition()', () => {
     onlyChrome(it)('is called when the "position" attribute changes', () => {
       const spy = chai.spy.on(fab, '_updatePosition');

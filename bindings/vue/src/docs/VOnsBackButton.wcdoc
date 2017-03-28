@@ -13,7 +13,4 @@
  * @param {Function} event.preventDefault
  *   [en]Avoids the default behavior.[/en]
  *   [ja]どうしょう[/ja]
- * @param {Function} event.callParentHandler
- *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
- *   [ja]どうしょう[/ja]
  */

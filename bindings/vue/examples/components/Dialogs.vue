@@ -129,7 +129,7 @@
       @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
-      <p><ons-button @click="modalVisible = false">Close</ons-button></p>
+      <p><v-ons-button @click="modalVisible = false">Close</v-ons-button></p>
     </v-ons-modal>
 
     <v-ons-popover cancelable

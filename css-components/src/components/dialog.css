@@ -1,5 +1,5 @@
 
-/*!
+/*~
   name: Dialog
   category: Dialog
   elements: ons-dialog
@@ -36,7 +36,7 @@
   overflow: hidden;
   border-radius: 4px;
   background-color: var(--dialog-background-color);
-  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC');
 }
 
 .dialog-mask {
@@ -50,7 +50,7 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/*!
+/*~
   name: Material Dialog
   category: Dialog
   elements: ons-dialog

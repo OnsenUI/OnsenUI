@@ -17,11 +17,17 @@ limitations under the License.
 
 import BaseElement from '../ons/base-element';
 import util from '../ons/util';
+import contentReady from '../ons/content-ready';
 
 export default class SplitterMaskElement extends BaseElement {
 
   init() {
     this._boundOnClick = this._onClick.bind(this);
+    contentReady(this, () => {
+      if (this.parentNode._sides.every(side => side.mode === 'split')) {
+        this.setAttribute('style', 'display: none !important');
+      }
+    });
   }
 
   _onClick(event) {
