@@ -6,7 +6,9 @@ dev
 ----
  * css-components: Changed to build minimized css-components file on `build/css/onsen-css-componen.min.css`.
 
- ### Bug Fixes
+### Bug Fixes
+
+ * core: Fix bugs on Safari related to asynchronous calls by replacing Custom Elements v1 polyfill.
  * ons-input: text selection in Firefox.
  * ons-splitter: mask is hidden only if all splitter-sides are in split mode.
  * ons-navigator: iOS Slide animation can now find toolbars that are not immediate children of the pages.
