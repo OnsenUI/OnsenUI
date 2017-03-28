@@ -32,22 +32,6 @@ const hidable = {
   }
 };
 
-// Components that contain pages
-const destroyable = {
-  inject: ['navigator'],
-  beforeDestroy() {
-    if (this.$el._destroy instanceof Function) {
-      // FIXME: Destroy after animations end
-      let duration = this.navigator
-        && this.navigator.options.animationOptions
-        && this.navigator.options.animationOptions.duration
-        || 0;
-
-      setTimeout(() => this.$el._destroy(), ++duration * 1000)
-    }
-  }
-};
-
 // Components with 'options' property
 const hasOptions = {
   props: {
@@ -113,4 +97,4 @@ const dialogCancel = {
   }
 };
 
-export { hidable, destroyable, hasOptions, modifier, selfProvider, dialogCancel };
+export { hidable, hasOptions, modifier, selfProvider, dialogCancel };
