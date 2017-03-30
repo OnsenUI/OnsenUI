@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+2.0.0-beta.0
 ----
 * Autostyling: Fix for 'material' modifier.
 * VOnsNavigator: Added `popPage` optional prop.
