@@ -71,12 +71,11 @@
   appearance: none;
   display: block;
   width: 100%;
-
+  @apply(--ellipsis);
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
-
   @media (--retina-query) {
     background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
   }
@@ -126,12 +125,11 @@
   text-align: center;
   background-color: var(--action-sheet-button-background-color);
   line-height: 56px;
-
+  @apply(--ellipsis);
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
-
   @media (--retina-query) {
     background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
   }
