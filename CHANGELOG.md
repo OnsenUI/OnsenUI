@@ -7,6 +7,17 @@ v2.2.1
 
 ### New Features
 
+ * 
+
+### Bug Fixes
+
+ * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
+
+v2.2.1
+----
+
+### New Features
+
  * css-components: Add minimized css-components file on `build/css/onsen-css-components.min.css`.
 
 ### Bug Fixes
