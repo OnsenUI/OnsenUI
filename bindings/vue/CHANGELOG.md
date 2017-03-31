@@ -1,8 +1,18 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug fixes
+
+* VOnsNavigator: Options object is not modified anymore.
+
 2.0.0-beta.0
 ----
+
+### Bug fixes
+
 * Autostyling: Fix for 'material' modifier.
 * VOnsNavigator: Added `popPage` optional prop.
 * VOnsTabbar: Fix update issue.

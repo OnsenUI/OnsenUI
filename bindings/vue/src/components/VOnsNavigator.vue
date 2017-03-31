@@ -76,12 +76,12 @@
         // Pop
         if (currentLength < lastLength) {
           this._reattachPage(lastTopPage, null);
-          return this.$el._popPage(this.options, () => this._redetachPage(lastTopPage));
+          return this.$el._popPage({ ...this.options }, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
         this._reattachPage(lastTopPage, currentTopPage);
-        return this.$el._pushPage(this.options).then(() => {
+        return this.$el._pushPage({ ...this.options }).then(() => {
           this._redetachPage(lastTopPage);
         });
       }
