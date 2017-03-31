@@ -9,6 +9,7 @@ dev
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
+ * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
 
 v2.2.1
 ----
