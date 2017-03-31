@@ -1267,6 +1267,10 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+fs@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.2.tgz#e1f244ef3933c1b2a64bd4799136060d0f5914f8"
+
 fsevents@^1.0.0:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.0.17.tgz#8537f3f12272678765b4fd6528c0f1f66f8f4558"
@@ -2926,6 +2930,13 @@ postcss-attribute-case-insensitive@^1.0.1:
     postcss "^5.1.1"
     postcss-selector-parser "^2.2.0"
 
+postcss-base64:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/postcss-base64/-/postcss-base64-0.6.1.tgz#a129e28345d51444c3837eec6bafff9d54f4e512"
+  dependencies:
+    fs "0.0.2"
+    postcss "^5.0.12"
+
 postcss-calc@^5.0.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -3225,7 +3236,7 @@ postcss@^5.0.0, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^5.0.10:
+postcss@^5.0.10, postcss@^5.0.12:
   version "5.2.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.16.tgz#732b3100000f9ff8379a48a53839ed097376ad57"
   dependencies:

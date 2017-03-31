@@ -26,7 +26,7 @@ module.exports = {
     'function-name-case': 'lower',
     'function-parentheses-newline-inside': null,
     'function-parentheses-space-inside': 'never',
-    'function-url-data-uris': 'always',
+    'function-url-data-uris': null,
     'function-url-no-scheme-relative': null,
     'function-url-quotes': 'always',
     'function-url-scheme-whitelist': null,
