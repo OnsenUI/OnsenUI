@@ -76,6 +76,7 @@ v2.2.0
  * css-components: Renamed `.navigation-bar` to `.toolbar`.
  * css-components: Renamed `.list__item` to `.list-item`.
  * css-components: Renamed `.list__header` to `.list-header`.
+ * css-components: Changed `.button-bar__item > input` to `.button-bar__input`.
  * ons-tabbar: loadPage method has been deprecated.
  * ons-popover: Changed internal DOM structure.
  * ons-range: Changed internal DOM structure.
