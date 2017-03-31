@@ -2,15 +2,12 @@
 CHANGELOG
 ====
 
-v2.2.1
+dev
 ----
-
-### New Features
-
- * 
 
 ### Bug Fixes
 
+ * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
 
 v2.2.1
