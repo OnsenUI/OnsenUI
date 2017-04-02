@@ -1,6 +1,6 @@
 {
   "name": "vue-onsenui",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-beta.0",
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
@@ -11,8 +11,7 @@
   },
   "main": "dist/vue-onsenui.js",
   "files": [
-    "dist/vue-onsenui.js",
-    "src"
+    "dist/vue-onsenui.js"
   ],
   "repository": {
     "type": "git",
@@ -41,7 +40,7 @@
   ],
   "homepage": "https://onsen.io/",
   "peerDependencies": {
-    "onsenui": "^2.2.x",
+    "onsenui": "2.2.x",
     "vue": "^2.2.4"
   },
   "devDependencies": {

@@ -228,6 +228,35 @@ util.findFromPath = (path) => {
 };
 
 /**
+ * @param {HTMLElement} container - Page or page-container that implements 'topPage'
+ * @return {HTMLElement|null} - Visible page element or null if not found.
+ */
+util.getTopPage = container => container && (container.tagName.toLowerCase() === 'ons-page' ? container : container.topPage) || null;
+
+/**
+ * @param {HTMLElement} container - Element where the search begins
+ * @return {HTMLElement|null} - Page element that contains the visible toolbar or null.
+ */
+util.findToolbarPage = container => {
+  const page = util.getTopPage(container);
+
+  if (page) {
+    if (util.findChild(page, 'ons-toolbar')) {
+      return page;
+    }
+
+    for (let i = 0; i < page._contentElement.children.length; i++) {
+      const nextPage = util.getTopPage(page._contentElement.children[i]);
+      if (nextPage) {
+        return util.findToolbarPage(nextPage);
+      }
+    }
+  }
+
+  return null;
+};
+
+/**
  * @param {Element} element
  * @param {String} eventName
  * @param {Object} [detail]

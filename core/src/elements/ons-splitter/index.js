@@ -124,6 +124,10 @@ export default class SplitterElement extends BaseElement {
     return util.findChild(this, 'ons-splitter-content');
   }
 
+  get topPage() {
+    return this.content._content;
+  }
+
   get mask() {
     return util.findChild(this, 'ons-splitter-mask');
   }

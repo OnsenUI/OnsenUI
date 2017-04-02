@@ -191,10 +191,13 @@ export default class SpeedDialElement extends BaseElement {
   }
 
   _hide() {
-    if (!this.inline) {
-      return this.hide();
-    }
-    return Promise.resolve();
+    return new Promise(resolve => {
+      if (!this.inline) {
+        setImmediate(() => this.hide().then(resolve));
+      } else {
+        resolve();
+      }
+    })
   }
 
   _updateRipple() {

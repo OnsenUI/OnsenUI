@@ -412,7 +412,7 @@ export default class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'show');
       }
 
-      util.propagateAction(this._contentElement, '_show');
+      util.propagateAction(this, '_show');
     }
   }
 
@@ -424,7 +424,7 @@ export default class PageElement extends BaseElement {
         util.triggerElementEvent(this, 'hide');
       }
 
-      util.propagateAction(this._contentElement, '_hide');
+      util.propagateAction(this, '_hide');
     }
   }
 
@@ -439,7 +439,7 @@ export default class PageElement extends BaseElement {
       this.onDeviceBackButton.destroy();
     }
 
-    util.propagateAction(this._contentElement, '_destroy');
+    util.propagateAction(this, '_destroy');
 
     this.remove();
   }

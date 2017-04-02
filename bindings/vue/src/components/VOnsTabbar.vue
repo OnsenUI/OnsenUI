@@ -1,5 +1,5 @@
 <template>
-  <ons-tabbar :activeIndex="index" @postchange="$emit('update', $event.index)">
+  <ons-tabbar :activeIndex="index" @postchange.self="$emit('update', $event.index)">
     <div class="tabbar__content">
       <slot name="pages">
         <component v-for="tab in tabs" :is="tab.page" :key="(tab.key || tab.page)"></component>

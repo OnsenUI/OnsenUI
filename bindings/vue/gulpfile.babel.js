@@ -106,6 +106,9 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download'], function(done){
     );
 
     (async () => {
+      $.util.log($.util.colors.blue(`Waiting 5000 ms for standalone Selenium Server...`));
+      await (async () => new Promise(resolve => setTimeout(resolve, 5000)))();
+
       const exitCode = await runWebdriverIO(standaloneSeleniumServer);
       server.close();
       server.listeningApp.close();

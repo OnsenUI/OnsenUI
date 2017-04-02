@@ -172,7 +172,9 @@ limitations under the License.
               });
             },
             element => {
-              angular.element(element).data('_scope').$destroy();
+              if (angular.element(element).data('_scope')) {
+                angular.element(element).data('_scope').$destroy();
+              }
               element.remove();
             }
           );
