@@ -1,0 +1,239 @@
+
+:root {
+  --action-sheet-title-color: #8f8e94;
+  --action-sheet-button-separator-color: rgba(0, 0, 0, 0.1);
+  --action-sheet-button-color: var(--highlight-color);
+  --action-sheet-button-destructive-color: #fe3824;
+  --action-sheet-button-background-color: rgba(255, 255, 255, 0.9);
+  --action-sheet-button-active-background-color: #e9e9e9;
+  --action-sheet-cancel-button-background-color: #fff;
+  --action-sheet-mask-color: rgba(0, 0, 0, 0.1);
+
+  --material-action-sheet-text-color: #686868;
+  --material-action-sheet-mask-color: rgba(0, 0, 0, 0.2);
+}
+
+/*~
+  name: Action Sheet
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet">
+      <div class="action-sheet__items">
+        <div class="action-sheet__title">Title</div>
+        <button class="action-sheet__button">Label</button>
+        <button class="action-sheet__button">Cancel</button>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Action Sheet with Delete Label
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet">
+      <div class="action-sheet__items">
+        <button class="action-sheet__button">Label</button>
+        <button class="action-sheet__button action-sheet__button--destructive">Delete Label</button>
+        <button class="action-sheet__button">Cancel</button>
+      </div>
+    </div>
+*/
+
+.action-sheet {
+  @apply(--reset-font);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--action-sheet-mask-color);
+  z-index: 1;
+}
+
+.action-sheet__items {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 7px;
+  z-index: 2;
+}
+
+.action-sheet__button {
+  box-sizing: border-box;
+  height: 56px;
+  font-size: 20px;
+  text-align: center;
+  color: var(--action-sheet-button-color);
+  background-color: var(--action-sheet-button-background-color);
+  border-radius: 0;
+  line-height: 56px;
+  border: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
+
+  @media (--retina-query) {
+    background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
+  }
+}
+
+.action-sheet__button:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.action-sheet__button:active {
+  background-color: var(--action-sheet-button-active-background-color);
+  background-image: none;
+}
+
+.action-sheet__button:focus {
+  outline: none;
+}
+
+.action-sheet__button:nth-last-of-type(2) {
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background-image: none;
+}
+
+.action-sheet__button:last-of-type {
+  border-radius: 12px;
+  margin: 7px 0 0 0;
+  background-color: var(--action-sheet-cancel-button-background-color);
+  background-image: none;
+  font-weight: 600;
+}
+
+.action-sheet__button:last-of-type:active {
+  background-color: var(--action-sheet-button-active-background-color);
+}
+
+.action-sheet__button--destructive {
+  color: var(--action-sheet-button-destructive-color);
+}
+
+.action-sheet__title {
+  box-sizing: border-box;
+  height: 56px;
+  font-size: 13px;
+  color: var(--action-sheet-title-color);
+  text-align: center;
+  background-color: var(--action-sheet-button-background-color);
+  line-height: 56px;
+
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
+
+  @media (--retina-query) {
+    background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
+  }
+}
+
+.action-sheet__title:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/*~
+  name: Material Action Sheet
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet action-sheet--material">
+      <div class="action-sheet__items action-sheet--material__items">
+        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Material Action Sheet with Title
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet action-sheet--material">
+      <div class="action-sheet__items action-sheet--material__items">
+        <div class="action-sheet__title action-sheet--material__title">Title</div>
+        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
+      </div>
+    </div>
+*/
+
+.action-sheet--material {
+  background-color: var(--material-action-sheet-mask-color);
+}
+
+.action-sheet--material__items {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @apply(--material-shadow-5);
+}
+
+.action-sheet--material__title {
+  @apply(--material-font);
+  border-radius: 0;
+  background-image: none;
+  text-align: left;
+  height: 56px;
+  line-height: 56px;
+  font-size: 16px;
+  padding: 0 0 0 16px;
+  color: var(--material-action-sheet-text-color);
+  background-color: white;
+  font-weight: 400;
+}
+
+.action-sheet--material__title:first-child {
+  border-radius: 0;
+}
+
+.action-sheet--material__button {
+  @apply(--material-font);
+  border-radius: 0;
+  background-image: none;
+  height: 52px;
+  line-height: 52px;
+  text-align: left;
+  font-size: 16px;
+  padding: 0 0 0 16px;
+  color: var(--material-action-sheet-text-color);
+  font-weight: 400;
+  background-color: white;
+}
+
+.action-sheet--material__button:first-child {
+  border-radius: 0;
+}
+
+.action-sheet--material__button:nth-last-of-type(2) {
+  border-radius: 0;
+}
+
+.action-sheet--material__button:last-of-type {
+  margin: 0;
+  border-radius: 0;
+  font-weight: 400;
+  background-color: white;
+}
+
+.action-sheet--material__icon {
+  display: inline-block;
+  float: left;
+  height: 52px;
+  line-height: 52px;
+  margin-right: 32px;
+  font-size: 26px;
+  width: 0.8em;
+  text-align: center;
+}
+
