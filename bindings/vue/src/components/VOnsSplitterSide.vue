@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, deriveEvents } from '../mixins';
+  import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
-    mixins: [destroyable, hasOptions, deriveEvents],
+    mixins: [hasOptions, deriveEvents],
 
     props: {
       open: {

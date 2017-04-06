@@ -32,15 +32,6 @@ const hidable = {
   }
 };
 
-// Components that contain pages
-const destroyable = {
-  beforeDestroy() {
-    if (this.$el._destroy instanceof Function) {
-      this.$el._destroy();
-    }
-  }
-};
-
 // Components with 'options' property
 const hasOptions = {
   props: {
@@ -106,4 +97,4 @@ const dialogCancel = {
   }
 };
 
-export { hidable, destroyable, hasOptions, modifier, selfProvider, dialogCancel };
+export { hidable, hasOptions, modifier, selfProvider, dialogCancel };
