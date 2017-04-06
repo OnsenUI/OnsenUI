@@ -202,6 +202,10 @@ ons-splitter-side[side="right"][mode="collapse"] {
   left: 100%;
 }
 
+ons-splitter-side[mode="split"] {
+  z-index: 2;
+}
+
 ons-toolbar-button > ons-icon[icon*="ion-"] {
   font-size: 26px;
 }

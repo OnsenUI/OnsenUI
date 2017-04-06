@@ -351,8 +351,8 @@ export default class SplitterSideElement extends BaseElement {
    * @type {String}
    * @default  default
    * @description
-   *  [en]Specify the animation. Use one of `"overlay"`, and `"default"`.[/en]
-   *  [ja]アニメーションを指定します。"overlay", "default"のいずれかを指定できます。[/ja]
+   *  [en]Specify the animation. Use one of `overlay`, `push`, `reveal` or  `default`.[/en]
+   *  [ja]アニメーションを指定します。"overlay", "push", "reveal", "default"のいずれかを指定できます。[/ja]
    */
 
   /**

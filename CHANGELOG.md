@@ -5,6 +5,11 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+  * ons-splitter: Push animation.
+  * ons-splitter: Reveal animation.
+
 ### Bug Fixes
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
