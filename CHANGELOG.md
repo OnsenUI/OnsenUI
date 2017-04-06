@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
+
 ### Bug Fixes
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
