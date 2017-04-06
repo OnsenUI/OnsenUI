@@ -2,14 +2,16 @@
 CHANGELOG
 ====
 
-v2.2.2
+dev
 ----
 
 ### Bug Fixes
 
  * core: Fix bugs on Safari related to asynchronous calls by replacing Custom Elements v1 polyfill.
- * ons-input: text selection in Firefox.
- * ons-splitter: mask is hidden only if all splitter-sides are in split mode.
+
+v2.2.2
+----
+
 ### New Features
 
  * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
