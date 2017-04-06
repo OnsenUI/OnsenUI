@@ -9,6 +9,7 @@ dev
 
   * ons-splitter: Push animation.
   * ons-splitter: Reveal animation.
+ * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
 
 ### Bug Fixes
 
