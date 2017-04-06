@@ -9,25 +9,6 @@
   --material-segment-active-background-color: #c8c8c8;
   --material-segment-text-color: rgba(0, 0, 0, 0.38);
   --material-segment-active-text-color: #353535;
-
-  --segment: {
-    @apply(--reset-font);
-    display: inline-flex;
-    align-items: stretch;
-    align-content: stretch;
-    flex-wrap: nowrap;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-
-  --segment__item: {
-    @apply(--reset-font);
-    border-radius: 0;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
 }
 
 /*~
@@ -51,11 +32,22 @@
 */
 
 .segment {
-  @apply(--segment);
+  @apply(--reset-font);
+  display: inline-flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .segment__item {
-  @apply(--segment__item);
+  @apply(--reset-font);
+  border-radius: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   @apply(--hide-input-parent);
   overflow: hidden;
   box-sizing: border-box;
