@@ -19,13 +19,15 @@ import util from '../../ons/util';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import OverlaySplitterAnimator from './overlay-animator';
+import PushSplitterAnimator from './push-animator';
 import BaseElement from '../../ons/base-element';
 import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 import contentReady from '../../ons/content-ready';
 
 const _animatorDict = {
   default: OverlaySplitterAnimator,
-  overlay: OverlaySplitterAnimator
+  overlay: OverlaySplitterAnimator,
+  push: PushSplitterAnimator
 };
 
 /**
