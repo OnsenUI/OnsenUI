@@ -73,6 +73,7 @@ gulp.task('core', function() {
         nodeResolve(),
         babel({
           presets: ['es2015-rollup', 'es2016', 'es2017', 'stage-3'],
+          plugins: ['transform-object-set-prototype-of-to-assign'],
           babelrc: false
         })
       ],
