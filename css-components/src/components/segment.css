@@ -97,13 +97,6 @@
   outline: 0;
 }
 
-:checked + .segment__button {
-  background-color: var(--segment-color);
-  color: var(--segment-active-color);
-  transition: none;
-}
-
-.segment__button:active,
 :active + .segment__button {
   background-color: var(--segment-active-background-color);
   border: var(--segment-border);
@@ -112,6 +105,12 @@
   border-right: 1px solid var(--segment-color);
   font-size: 13px;
   width: 100%;
+  transition: none;
+}
+
+:checked + .segment__button {
+  background-color: var(--segment-color);
+  color: var(--segment-active-color);
   transition: none;
 }
 
