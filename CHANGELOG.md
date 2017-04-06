@@ -2,6 +2,21 @@
 CHANGELOG
 ====
 
+v2.2.2
+----
+
+### New Features
+
+ * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
+
+### Bug Fixes
+
+ * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
+ * core: Use `self` in `setImmediate` polyfill.
+ * core: Make `ons.platform.isSafari()` compatible with Safari 10.
+ * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
+ * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
+
 v2.2.1
 ----
 
@@ -65,6 +80,7 @@ v2.2.0
  * css-components: Renamed `.navigation-bar` to `.toolbar`.
  * css-components: Renamed `.list__item` to `.list-item`.
  * css-components: Renamed `.list__header` to `.list-header`.
+ * css-components: Changed `.button-bar__item > input` to `.button-bar__input`.
  * ons-tabbar: loadPage method has been deprecated.
  * ons-popover: Changed internal DOM structure.
  * ons-range: Changed internal DOM structure.

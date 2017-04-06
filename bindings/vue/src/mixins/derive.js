@@ -35,6 +35,10 @@ const deriveDBB = {
 
   deactivated() {
     this._isDBBSetup === true && (this._isDBBSetup = false);
+  },
+
+  destroyed() {
+    this.$el.onDeviceBackButton && this.$el.onDeviceBackButton.destroy();
   }
 };
 

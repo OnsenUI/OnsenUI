@@ -15,6 +15,10 @@
               viewKey: 'ons-back-button'
             });
 
+            if (attrs.ngClick) {
+              element[0].onClick = angular.noop;
+            }
+
             scope.$on('$destroy', function() {
               backButton._events = undefined;
               $onsen.removeModifierMethods(backButton);
