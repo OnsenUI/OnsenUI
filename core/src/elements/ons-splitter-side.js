@@ -167,12 +167,15 @@ class CollapseMode {
   enterMode() {
     if (!this._active) {
       this._active = true;
+      this._animator && this._animator.activate(this._element);
       this.layout();
     }
   }
 
   // exit collapse mode
   exitMode() {
+    this._animator && this._animator.deactivate();
+    this._state = CLOSED_STATE;
     this._active = false;
   }
 
@@ -577,6 +580,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
+    this._animator && this._animator.deactivate();
     this._animator = this._animatorFactory.newAnimator({animation});
     this._animator.activate(this);
   }

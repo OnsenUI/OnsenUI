@@ -10,6 +10,7 @@ dev
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
  * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
+ * ons-splitter: Overlay animation correctly hides mask when entering split mode if the menu was visible before.
 
 v2.2.1
 ----
