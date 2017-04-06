@@ -180,5 +180,7 @@
 :checked + .segment--material__button {
   background-color: var(--material-segment-active-background-color);
   color: var(--material-segment-active-text-color);
+  border-radius: 0;
+  border-width: 0;
 }
 
