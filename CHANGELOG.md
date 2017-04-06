@@ -12,6 +12,7 @@ dev
 ### Bug Fixes
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
+ * core: Use `self` in setImmediate polyfill.
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
  * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
 
