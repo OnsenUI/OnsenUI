@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v2.2.4
+----
+
+### Bug Fixes
+
+ * ons-switch: Fixed #1920.
+
 v2.2.3
 ----
 
