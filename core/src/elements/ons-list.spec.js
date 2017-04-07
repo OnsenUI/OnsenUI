@@ -5,7 +5,7 @@ describe('ons-list', () => {
     expect(window.ons.ListElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'list\' by default', () => {
+  it('classList contains \'list\' by default', () => {
     const element = new ons.ListElement();
     expect(element.classList.contains('list')).to.be.true;
     element.setAttribute('class', 'foo');
@@ -13,7 +13,7 @@ describe('ons-list', () => {
     expect(element.classList.contains('foo')).to.be.true;
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     const element = new ons.ListElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list--hoge')).to.be.true;
