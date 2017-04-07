@@ -330,6 +330,9 @@ export default class InputElement extends BaseElement {
 
   set value(val) {
     contentReady(this, () => {
+      if (val instanceof Date) {
+        val = val.toISOString().substring(0, 10);
+      }
       this._input.value = val;
       this._onInput();
     });
