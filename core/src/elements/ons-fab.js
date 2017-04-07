@@ -13,9 +13,8 @@ limitations under the License.
 
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElementV2 from '../ons/base-element-v2';
 import util from '../ons/util';
-import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'fab';
 
@@ -40,7 +39,7 @@ const scheme = {
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]
  */
-export default class FabElement extends BaseElement {
+export default class FabElement extends BaseElementV2 {
 
   /**
    * @attribute modifier
@@ -72,40 +71,56 @@ export default class FabElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  init() {
-    // The following statements can be executed before contentReady
-    // since these do not access the children
-    this.hide();
-    this.classList.add(defaultClassName);
-
-    contentReady(this, () => {
-      this._compile();
-    });
+  constructor() {
+    super();
   }
 
-  _compile() {
-    autoStyle.prepare(this);
+  _prepareBaseContent() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
 
-    if (!util.findChild(this, '.fab__icon')) {
-      const content = document.createElement('span');
-      content.classList.add('fab__icon');
+    // Prepare base child nodes
+    const content = document.createElement('span');
+    content.classList.add('fab__icon');
+    this.appendChild(content);
 
-      util.arrayFrom(this.childNodes).forEach(element => {
-        if (!element.tagName || element.tagName.toLowerCase() !== 'ons-ripple') {
-          content.appendChild(element);
+    // Prepare base attributes
+    this.classList.add(defaultClassName);
+    this.style.transform = 'scale(0)';
+    this.style.webkitTransform = 'scale(0)';
+
+    autoStyle.prepare(this); // depends on nothing
+    ModifierUtil.initModifier(this, scheme); // depends on autoStyle.prepare (since it changes `modifier` attribute)
+    this._updateRipple(); // depends on autoStyle.prepare (since it changes `ripple` attribute)
+    this._updatePosition(); // depends on nothing
+  }
+
+  _incrementalCompile(node) {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      util.findChild(this, 'span.fab__icon').appendChild(node); // append given node into the slot
+    } else {
+      // If the given node is not <span class="fab__icon">
+      if (!(node.tagName.match(/^span$/i) && node.classList.contains('fab__icon'))) {
+        util.findChild(this, 'span.fab__icon').appendChild(node); // append given node into the slot
+      } else {
+        // If the given node is <span class="fab__icon">
+        for (const element of Array.prototype.slice.call(node.childNodes)) { // append children of the given node into the slot
+          if (element.tagName.match(/^ons-ripple$/i)) { continue; } // ons-ripple is always ignored
+
+          util.findChild(this, 'span.fab__icon').appendChild(element);
         }
-      });
-      this.appendChild(content);
+      }
     }
 
-    this._updateRipple();
-
-    ModifierUtil.initModifier(this, scheme);
-
-    this._updatePosition();
+    autoStyle.prepare(this); // depends on nothing
+    ModifierUtil.initModifier(this, scheme); // depends on autoStyle.prepare (since it changes `modifier` attribute)
+    this._updateRipple(); // depends on autoStyle.prepare (since it changes `ripple` attribute)
   }
 
   connectedCallback() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     setImmediate(() => this.show());
   }
 
@@ -114,6 +129,8 @@ export default class FabElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     switch (name) {
       case 'class':
         if (!this.classList.contains(defaultClassName)) {
@@ -133,18 +150,26 @@ export default class FabElement extends BaseElement {
   }
 
   _show() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     this.show();
   }
 
   _hide() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     setImmediate(() => this.hide());
   }
 
   _updateRipple() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     util.updateRipple(this);
   }
 
   _updatePosition() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     const position = this.getAttribute('position');
     this.classList.remove(
       'fab--top__left',
@@ -191,6 +216,8 @@ export default class FabElement extends BaseElement {
    *  [ja][/ja]
    */
   show(options = {}) {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     this.style.transform = 'scale(1)';
     this.style.webkitTransform = 'scale(1)';
   }
@@ -203,6 +230,8 @@ export default class FabElement extends BaseElement {
    *  [ja][/ja]
    */
   hide(options = {}) {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     this.style.transform = 'scale(0)';
     this.style.webkitTransform = 'scale(0)';
   }
@@ -215,10 +244,14 @@ export default class FabElement extends BaseElement {
    *   [ja]無効化されている場合に`true`。[/ja]
    */
   set disabled(value) {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     return util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     return this.hasAttribute('disabled');
   }
 
@@ -231,6 +264,8 @@ export default class FabElement extends BaseElement {
    *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     return this.style.transform === 'scale(1)' && this.style.display !== 'none';
   }
 
@@ -242,6 +277,8 @@ export default class FabElement extends BaseElement {
    *   [ja][/ja]
    */
   toggle() {
+    if (!this._initialized && !this._initializing) { super._initialize(); }
+
     this.visible ? this.hide() : this.show();
   }
 }
