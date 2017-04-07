@@ -198,7 +198,7 @@ SplitterSide.propTypes = {
    * @type string
    * @required false
    * @description
-   *  [en]Specify the animation. Use one of `"overlay"`, and `"default"`.[/en]
+   *  [en]Specify the animation. Use one of `overlay`, `push`, `reveal`, or `default`.[/en]
    *  [jp] [/jp]
    */
   animation: React.PropTypes.string,
