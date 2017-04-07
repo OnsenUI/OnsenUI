@@ -12,7 +12,7 @@ describe('OnsProgressBarElement', () => {
     expect(window.ons.ProgressBarElement).to.be.ok;
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     var template = progress._template,
       primary = progress._primary,
       secondary = progress._secondary;
@@ -35,7 +35,7 @@ describe('OnsProgressBarElement', () => {
   });
 
   describe('#_updateDeterminate()', () => {
-    onlyChrome(it)('is called when the "indeterminate" attribute is changed', () => {
+    it('is called when the "indeterminate" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateDeterminate');
 
       progress.setAttribute('indeterminate', '');
@@ -46,14 +46,14 @@ describe('OnsProgressBarElement', () => {
   });
 
   describe('#_updateValue()', () => {
-    onlyChrome(it)('is called when the "value" attribute is changed', () => {
+    it('is called when the "value" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateValue');
 
       progress.setAttribute('value', '10');
       expect(spy).to.have.been.called.once;
     });
 
-    onlyChrome(it)('is called when the "secondary-value" attribute is changed', () => {
+    it('is called when the "secondary-value" attribute is changed', () => {
       const spy = chai.spy.on(progress, '_updateValue');
 
       progress.setAttribute('secondary-value', '10');
@@ -62,7 +62,7 @@ describe('OnsProgressBarElement', () => {
   });
 
   describe('#_compile()', () => {
-    onlyChrome(it)('is called when an element is created', () => {
+    it('is called when an element is created', () => {
       const spy = chai.spy.on(window.ons.ProgressBarElement.prototype, '_compile');
       ons._util.createElement('<ons-progress-bar> </ons-progress-bar>');
 

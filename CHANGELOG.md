@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v2.2.3
+----
+
+### Bug Fixes
+
+ * core: Improve overall stability of the core on iOS by replacing Custom Elements v1 polyfill.
+
 v2.2.2
 ----
 
@@ -36,6 +43,10 @@ v2.2.1
  * ons-speed-dial: Hide items animation on popPage is now visible.
  * ons-input: text selection in Firefox.
  * ons-icon: Fixed [#1890](https://github.com/OnsenUI/OnsenUI/issues/1890).
+
+### Misc
+
+ * css-components: Refactored some components.
 
 v2.2.0
 ----

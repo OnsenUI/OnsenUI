@@ -32,6 +32,7 @@ import fs from 'fs';
 import {argv} from 'yargs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import rollup from 'rollup-stream';
@@ -71,6 +72,34 @@ gulp.task('core', function() {
       entry: './core/src/setup.js',
       plugins: [
         nodeResolve(),
+        // Convert CommonJS modules to ES2015 modules.
+        // This plugin must be executed before rollup-plugin-babel.
+        commonjs({
+          // non-CommonJS modules will be ignored, but you can also
+          // specifically include/exclude files
+          include: 'node_modules/**',  // Default: undefined
+          exclude: undefined,  // Default: undefined
+
+          // search for files other than .js files (must already
+          // be transpiled by a previous plugin!)
+          extensions: [ '.js' ],  // Default: [ '.js' ]
+
+          // if true then uses of `global` won't be dealt with by this plugin
+          ignoreGlobal: false,  // Default: false
+
+          // if false then skip sourceMap generation for CommonJS modules
+          sourceMap: true,  // Default: true
+
+          // explicitly specify unresolvable named exports
+          // (see below for more details)
+          namedExports: undefined,  // Default: undefined
+
+          // sometimes you have to leave require statements
+          // unconverted. Pass an array containing the IDs
+          // or a `id => boolean` function. Only use this
+          // option if you know what you're doing!
+          ignore: undefined
+        }),
         babel({
           presets: ['es2015-rollup', 'es2016', 'es2017', 'stage-3'],
           babelrc: false
@@ -86,9 +115,7 @@ gulp.task('core', function() {
       'core/polyfills/MutationObserver*/MutationObserver.js',
       'core/polyfills/childNodeRemove.js',
       'core/polyfills/classList*/classList.js',
-      'core/polyfills/document-register-element*/document-register-element.max.js',
       'core/polyfills/FastClick*/fastclick.js',
-      'core/polyfills/document-register-element*/innerHTML.js',
       'core/polyfills/microevent.js*/microevent.js',
       'core/polyfills/promise-polyfill*/promise.js',
       'core/polyfills/setImmediate*/setImmediate.js',

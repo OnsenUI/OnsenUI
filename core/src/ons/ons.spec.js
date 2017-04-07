@@ -94,7 +94,7 @@ describe('ons', () => {
       expect(() => ons.createPopover(null)).to.throw(Error);
     });
 
-    onlyChrome(it)('calls the linking function', (done) => {
+    it('calls the linking function', (done) => {
       const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
@@ -105,7 +105,7 @@ describe('ons', () => {
       });
     });
 
-    onlyChrome(it)('returns a valid popover element', (done) => {
+    it('returns a valid popover element', (done) => {
       ons.createPopover('page.html').then((element) => {
         expect(element).to.be.instanceof(window.ons.PopoverElement);
         element.remove();
@@ -119,7 +119,7 @@ describe('ons', () => {
       expect(() => ons.createDialog(null)).to.throw(Error);
     });
 
-    onlyChrome(it)('calls the linking function', (done) => {
+    it('calls the linking function', (done) => {
       const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
@@ -130,7 +130,7 @@ describe('ons', () => {
       });
     });
 
-    onlyChrome(it)('returns a valid dialog element', (done) => {
+    it('returns a valid dialog element', (done) => {
       ons.createDialog('page.html').then((element) => {
         expect(element).to.be.instanceof(window.ons.DialogElement);
         element.remove();
@@ -144,7 +144,7 @@ describe('ons', () => {
       expect(() => ons.createAlertDialog(null)).to.throw(Error);
     });
 
-    onlyChrome(it)('calls the linking function', (done) => {
+    it('calls the linking function', (done) => {
       const options = {};
       options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
@@ -155,7 +155,7 @@ describe('ons', () => {
       });
     });
 
-    onlyChrome(it)('returns a valid alertDialog element', (done) => {
+    it('returns a valid alertDialog element', (done) => {
       ons.createAlertDialog('page.html').then((element) => {
         expect(element).to.be.instanceof(window.ons.AlertDialogElement);
         element.remove();
