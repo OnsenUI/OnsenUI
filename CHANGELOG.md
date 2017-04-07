@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-progress-circular: Fixed [#1921](https://github.com/OnsenUI/OnsenUI/issues/1921).
+
 v2.2.3
 ----
 
