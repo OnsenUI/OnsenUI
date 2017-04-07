@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v2.2.2
 ----
 
 ### New Features
@@ -14,9 +14,11 @@ dev
 ### Bug Fixes
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
- * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
+ * core: Use `self` in `setImmediate` polyfill.
+ * core: Make `ons.platform.isSafari()` compatible with Safari 10.
  * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
  * ons-splitter: Overlay animation correctly hides mask when entering split mode if the menu was visible before.
+ * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
 
 v2.2.1
 ----
