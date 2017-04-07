@@ -1,6 +1,6 @@
-<p style="text-align: center"><a href="https://onsen.io/" target="_blank"><img width="200"src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
+<p align="center"><a href="https://onsen.io/" target="_blank"><img width="200"src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
 
-<p style="text-align: center">
+<p align="center">
   <a href="https://gitter.im/OnsenUI/OnsenUI"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter Chat"></a>
   <a href="https://community.onsen.io/"><img src="https://img.shields.io/badge/forum-onsen--ui-FF412D.svg" alt="Forum"></a>
   <a href="https://github.com/OnsenUI/OnsenUI/blob/master/core/src/onsenui.d.ts"><img src="http://definitelytyped.org/badges/standard.svg" alt="TypeScript definitions"></a>
@@ -13,24 +13,24 @@
 
 ## Cross-platform HTML5 Mobile App Framework
 
-<p style="display:flex; justify-content:space-between; align-items:center; margin: 30px 0">
-  <span style="display:flex; flex-direction:column; justify-content:space-between; padding-right:30px">
-    <span><a href="https://onsen.io/" target="_blank"><strong>Onsen UI</strong></a> is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</span>
-    <span style="margin-top: 6px">It is <strong>open source</strong> and designed to deliver native look and feel. Apps are made out of simple HTML tags, thus providing a gentle learning curve.</span>
-    <span style="margin-top: 6px">Both <strong>iOS flat and Android's Material design</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>. </span>
-    <span style="margin-top: 6px">The core library is written in <strong>pure Javascript</strong> (on top of <a href="http://webcomponents.org/">Web Components</a>) and is <strong>framework agnostic</strong>, which means you can use it with your favorite framework and its tools.</span>
-  </span>
-  <img style="height: 400px" src="https://onsenui.github.io/art/showcase/showcase-onsenui.gif" alt="Onsen UI Todo App">
-</p>
+<p><a href="https://onsen.io/" target="_blank"><strong>Onsen UI</strong></a> is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
 
- Currently, we provide some extra binding packages in order to __tailor Onsen UI's API__ for specific frameworks:
+<p align="center"><img height="500" src="https://onsenui.github.io/art/showcase/showcase-onsenui.gif" alt="Onsen UI Todo App"></p>
 
-<span style="display:flex; justify-content:space-around">
-  <span><a href="https://onsen.io/react"><span style="background:url(https://onsen.io/images/common/icn_react_top.svg) center no-repeat; height:40px; display:block"></span><strong>React</strong></a></span>
-  <span><a href="https://onsen.io/angular2"><span style="background:url(https://onsen.io/images/common/icn_angular2_top.svg) center no-repeat; height:40px; display:block"></span><strong>Angular 2+</strong></a></span>
-  <span><a href="https://onsen.io/vue"><span style="background:url(https://onsen.io/images/common/icn_vuejs_top.svg) center no-repeat; height:40px; display:block"></span><strong>Vue</strong></a></span>
-  <span><a href="https://onsen.io/v2/docs/guide/angular1/index.html"><span style="background:url(https://onsen.io/images/common/icn_angular1_top.svg) center no-repeat; height:40px; display:block"></span><strong>AngularJS 1.x</strong></a></span>
-</span>
+It is <strong>open source</strong> and designed to deliver native look and feel. Apps are made out of simple HTML tags, thus providing a gentle learning curve.
+
+Both <strong>iOS flat and Android's Material design</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>.
+
+The core library is written in <strong>pure Javascript</strong> (on top of <a href="http://webcomponents.org/">Web Components</a>) and is <strong>framework agnostic</strong>, which means you can use it with your favorite framework and its tools. Currently, we provide some extra binding packages in order to __tailor Onsen UI's API__ for specific frameworks:
+
+<table>
+  <tbody><tr>
+    <td align="center" width="150"><a href="https://onsen.io/react"><img src="https://onsen.io/images/common/icn_react_top.svg" height="40"><br><strong>React</strong></a></td>
+    <td align="center" width="150"><a href="https://onsen.io/angular2"><img src="https://onsen.io/images/common/icn_angular2_top.svg" height="40"><br><strong>Angular 2+</strong></a><br></td>
+    <td align="center" width="150"><a href="https://onsen.io/vue"><img src="https://onsen.io/images/common/icn_vuejs_top.svg" height="40"><br><strong>Vue</strong></a><br></td>
+    <td align="center" width="150"><a href="https://onsen.io/v2/docs/guide/angular1/index.html"><img src="https://onsen.io/images/common/icn_angular1_top.svg" height="40"><br><strong>AngularJS 1.x</strong></a><br></td>
+  </tr></tbody>
+</table>
 
 Some other frameworks are supported by __community__ packages (i.e. not tested or implemented by the core team): [Aurelia](https://www.npmjs.com/package/aurelia-onsenui), [EmberJS](https://www.npmjs.com/package/ember-onsenui).
 
@@ -48,13 +48,13 @@ We have several resources to help you get started creating hybrid apps with Onse
 
 Because sometimes a UI framework may not be enough to make hybrid apps easily, Onsen UI comes with a __complete ecosystem__ of well integrated tools. Meet [__Monaca__](https://monaca.io/).
 
-<p style="text-align: center"><a href="https://monaca.io" target="_blank"><img width="300"src="https://onsenui.github.io/art/logos/monaca-logo-2.png"></a></p>
+<p align="center"><a href="https://monaca.io" target="_blank"><img width="300"src="https://onsenui.github.io/art/logos/monaca-logo-2.png"></a></p>
 
-Made by the same team, __Monaca Platform__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova-like templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides developing environments with everything already configured and ready to go:
+Made by the same team, __Monaca Platform__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova-like templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides multiple development environments with everything already configured and ready to go:
 
-<p style="display:flex; justify-content:space-around">
-  <a href="https://monaca.io/cloud.html"><strong>Cloud IDE</strong></a>
-  <a href="https://monaca.io/cli.html"><strong>Command Line Interface</strong></a>
+<p align="center">
+  <a href="https://monaca.io/cloud.html"><strong>Cloud IDE</strong></a> -
+  <a href="https://monaca.io/cli.html"><strong>Command Line Interface</strong></a> -
   <a href="https://monaca.io/localkit.html"><strong>Localkit GUI</strong></a>
 </p>
 
@@ -74,7 +74,7 @@ See the [Onsen UI Getting Started Page](http://onsen.io/getting_started/) for mo
 
 There are lots of sample applications written using Onsen UI. __[Here are some examples](https://onsen.io/samples) with source code and tutorials__ to give you an idea of what kind of apps you can create.
 
-<p style="display:flex; justify-content:space-around; align-items: center">
+<p align="center">
   <img src="https://onsen.io/images/samples/pokedex-pikachu.png">
   <img src="https://onsen.io/images/samples/react-redux-weather.png">
   <img src="https://onsen.io/images/samples/youtube.png">
