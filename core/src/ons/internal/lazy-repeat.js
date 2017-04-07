@@ -275,7 +275,7 @@ export class LazyRepeatProvider {
   }
 
   refresh() {
-    const lastItemIndex = this._lastItemRendered();
+    const lastItemIndex = Math.min(this._lastItemRendered(), this._countItems() - 1);
     const firstItemIndex = this._firstItemRendered();
     this._wrapperElement.style.height = this._topPositions[firstItemIndex] + this._calculateRenderedHeight() + 'px';
     this.padding = this._topPositions[firstItemIndex];

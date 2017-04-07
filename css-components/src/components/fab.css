@@ -2,6 +2,7 @@
 :root {
   --fab-width: 56px;
   --fab-height: 56px;
+  --fab-position: absolute;
   --fab-mini-width: 40px;
   --fab-mini-height: 40px;
 
@@ -90,7 +91,7 @@
   bottom: auto;
   right: 20px;
   left: auto;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 .fab--bottom__right {
@@ -98,7 +99,7 @@
   bottom: 20px;
   right: 20px;
   left: auto;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 .fab--top__left {
@@ -106,7 +107,7 @@
   bottom: auto;
   right: auto;
   left: 20px;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 .fab--bottom__left {
@@ -114,7 +115,7 @@
   bottom: 20px;
   right: auto;
   left: 20px;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 .fab--top__center {
@@ -123,7 +124,7 @@
   margin-left: -28px;
   left: 50%;
   right: auto;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 .fab--bottom__center {
@@ -132,7 +133,7 @@
   margin-left: -28px;
   left: 50%;
   right: auto;
-  position: fixed;
+  position: var(--fab-position);
 }
 
 /*~
