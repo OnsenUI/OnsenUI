@@ -227,15 +227,15 @@
   markup: |
     <div class="toolbar">
       <div class="toolbar__center">
-        <div class="button-bar" style="width:200px;margin:7px 50px;">
-          <div class="button-bar__item">
-            <input type="radio" class="button-bar__input" name="navi-segment-a" checked>
-            <div class="button-bar__button">One</div>
+        <div class="segment" style="width:200px;margin:7px 50px;">
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" checked>
+            <div class="segment__button">One</div>
           </div>
 
-          <div class="button-bar__item">
-            <input type="radio" class="button-bar__input" name="navi-segment-a">
-            <div class="button-bar__button">Two</div>
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a">
+            <div class="segment__button">Two</div>
           </div>
         </div>
       </div>
