@@ -166,10 +166,6 @@ In order to run both the unit tests and the end-to-end tests use the following c
 $ gulp test
 ```
 
-## How to contribute
-
-Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md). See the full list of contributors [here](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).
-
 ## Release procedure
 
 Before releasing a new version, verify that the tests are passing and that there are no outstanding breaking issues. For major release with fundamental changes all components must be tested on all supported platforms.
