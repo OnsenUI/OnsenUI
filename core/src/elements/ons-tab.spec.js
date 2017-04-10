@@ -1,6 +1,6 @@
 'use strict';
 
-onlyChrome(describe)('OnsTabElement', () => {
+describe('OnsTabElement', () => {
   let element;
 
   beforeEach(done => {
@@ -43,16 +43,16 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('class attribute', () => {
-    it('should contain "tabbar__item" class token automatically', () => {
+    xit('should contain "tabbar__item" class token automatically', () => {
       expect(element.classList.contains('tabbar__item')).to.be.true;
-      element.className = 'foo';
+      element.className = 'foo'; // FIXME: CE polyfill should trigger `attributeChangedCallback` against `className`
       expect(element.classList.contains('tabbar__item')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
     });
   });
 
   describe('modifier attribute', () => {
-    onlyChrome(it)('modifies the classList of the tab', () => {
+    it('modifies the classList of the tab', () => {
       const parent = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -109,7 +109,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('icon attribute', () => {
-    onlyChrome(it)('sets icon name for the tab', done => {
+    it('sets icon name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -137,7 +137,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('active-icon attribute', () => {
-    onlyChrome(it)('sets active-icon name for the tab', done => {
+    it('sets active-icon name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1" icon="ion-home" active-icon="ion-edit"></ons-tab>
@@ -166,7 +166,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('label attribute', () => {
-    onlyChrome(it)('sets label name for the tab', done => {
+    it('sets label name for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -192,7 +192,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('badge attribute', () => {
-    onlyChrome(it)('sets badge for the tab', done => {
+    it('sets badge for the tab', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
         </ons-tabbar>
@@ -296,7 +296,7 @@ onlyChrome(describe)('OnsTabElement', () => {
   });
 
   describe('#setActive()', () => {
-    onlyChrome(it)('will set the tab as active', done => {
+    it('will set the tab as active', done => {
       const tabbar = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>

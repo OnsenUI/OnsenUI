@@ -23,7 +23,7 @@ describe('OnsTabbarElement', () => {
     expect(window.ons.TabbarElement).to.be.ok;
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     document.body.appendChild(element);
     element.setAttribute('modifier', 'hoge');
 
@@ -47,7 +47,7 @@ describe('OnsTabbarElement', () => {
     expect(element.children[1].classList.contains('tabbar--fuga')).to.be.true;
   });
 
-  onlyChrome(it)('has \'position\' attribute', function(done) {
+  it('has \'position\' attribute', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
     ons.platform.select('android');
@@ -109,7 +109,7 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#setTabbarVisibility()', () => {
-    onlyChrome(it)('sets the element visible or invisible', () => {
+    it('sets the element visible or invisible', () => {
       var div = document.createElement('div');
       document.body.appendChild(div);
       div.innerHTML = `
@@ -161,7 +161,7 @@ describe('OnsTabbarElement', () => {
   });
 
   describe('#getActiveTabIndex()', () => {
-    onlyChrome(it)('has active tab property', function(done) {
+    it('has active tab property', function(done) {
       const div = document.createElement('div');
       document.body.appendChild(div);
       div.innerHTML = `
@@ -210,7 +210,7 @@ describe('OnsTabbarElement', () => {
       template = element = null;
     });
 
-    onlyChrome(it)('fires \'prechange\' event', () => {
+    it('fires \'prechange\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('prechange', resolve);
       });
@@ -218,7 +218,7 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'postchange\' event', () => {
+    it('fires \'postchange\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('postchange', resolve);
       });
@@ -226,7 +226,7 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'reactive\' event', () => {
+    it('fires \'reactive\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
       });
@@ -257,7 +257,7 @@ describe('OnsTabbarElement', () => {
       template = element = null;
     });
 
-    onlyChrome(it)('fires \'init\' event', () => {
+    it('fires \'init\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('init', resolve);
       });
@@ -265,7 +265,7 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'show\' event', () => {
+    it('fires \'show\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('show', resolve);
       });
@@ -273,7 +273,7 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'hide\' event', () => {
+    it('fires \'hide\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('hide', resolve);
       });
@@ -290,7 +290,7 @@ describe('OnsTabbarElement', () => {
       return expect(element.setActiveTab(0)).to.eventually.be.rejected;
     });
 
-    onlyChrome(it)('can be canceled', (done) => {
+    it('can be canceled', (done) => {
       const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge"></ons-tab>
@@ -327,7 +327,7 @@ describe('OnsTabbarElement', () => {
       });
     });
 
-    onlyChrome(it)('returns a promise that resolves to the new page', () => {
+    it('returns a promise that resolves to the new page', () => {
       const element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>

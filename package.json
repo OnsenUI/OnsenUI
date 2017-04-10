@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -60,6 +60,7 @@
   ],
   "homepage": "https://onsen.io/",
   "devDependencies": {
+    "@webcomponents/custom-elements": "webcomponents/custom-elements#1.0.0-rc.2",
     "babel-eslint": "^6.0.3",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-latest": "^6.22.0",
@@ -114,7 +115,7 @@
     "protractor": "^4.0.10",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-stream": "^1.14.0",
     "run-sequence": "^1.2.1",

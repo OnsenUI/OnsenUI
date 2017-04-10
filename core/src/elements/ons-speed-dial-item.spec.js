@@ -16,7 +16,7 @@ describe('OnsSpeedDialItemElement', () => {
     expect(window.ons.SpeedDialItemElement).to.be.ok;
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     item.setAttribute('modifier', 'hoge');
     expect(item.classList.contains('speed-dial__item--hoge')).to.be.true;
 
@@ -31,7 +31,7 @@ describe('OnsSpeedDialItemElement', () => {
     expect(item.classList.contains('speed-dial__item--fuga')).to.be.true;
   });
 
-  onlyChrome(describe)('"class" attribute', () => {
+  describe('"class" attribute', () => {
     it('should contain default class names automatically', () => {
       const element = new ons.SpeedDialItemElement();
       expect(element.classList.contains('speed-dial__item')).to.be.true;
