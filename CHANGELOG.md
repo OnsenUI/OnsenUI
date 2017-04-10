@@ -11,6 +11,7 @@ dev
  * ons-switch: Fixed [#1920](https://github.com/OnsenUI/OnsenUI/issues/1920).
  * ons-progress-circular: Fixed [#1921](https://github.com/OnsenUI/OnsenUI/issues/1921).
  * ons-splitter-content: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772) and [#1930](https://github.com/OnsenUI/OnsenUI/issues/1930).
+ * core: Fix broken parts of CE1 polyfill which caused a broken behavior of `vue-onsenui` ([#1925](https://github.com/OnsenUI/OnsenUI/issues/1925)).
 
 v2.2.3
 ----
