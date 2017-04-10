@@ -9,6 +9,13 @@ dev
 
  * ons-input: Added initial date value support. Fixed [#1603](https://github.com/OnsenUI/OnsenUI/issues/1603).
 
+v2.2.3
+----
+
+### Bug Fixes
+
+ * core: Improve overall stability of the core on iOS by replacing Custom Elements v1 polyfill.
+
 v2.2.2
 ----
 
