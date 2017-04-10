@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+
 v2.2.4
 ----
 
