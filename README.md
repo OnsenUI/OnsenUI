@@ -1,4 +1,4 @@
-<p align="center"><a href="https://onsen.io/" target="_blank"><img width="200"src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
+<p align="center"><a href="https://onsen.io/" target="_blank"><img width="220"src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
 
 <p align="center">
   <a href="https://gitter.im/OnsenUI/OnsenUI"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter Chat"></a>
@@ -11,9 +11,9 @@
   <a href="https://cdnjs.com/libraries/onsen"><img src="https://img.shields.io/cdnjs/v/onsen.svg" alt="CDNJS"></a>
 </p>
 
-## Cross-platform HTML5 Mobile App Framework
+# [Onsen UI](https://onsen.io/) - Cross-platform HTML5 Mobile App Framework
 
-<p><a href="https://onsen.io/" target="_blank"><strong>Onsen UI</strong></a> is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
+<p>Onsen UI is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
 
 <p align="center"><img height="500" src="https://onsenui.github.io/art/showcase/showcase-onsenui.gif" alt="Onsen UI Todo App"></p>
 
@@ -93,104 +93,19 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 * __Download the latest released version__
 
-Onsen UI is available with npm, bower or jspm. Example:
+We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
 
 ```bash
 npm install onsenui
 ```
 
-This downloads Onsen UI main library and AngularJS bindings. For other bingins, install also `react-onsenui`, `vue-onsenui` or `angular2-onsenui`.
+This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `angular2-onsenui`.
 
 * __Get the latest development build__
 
 Optionally, you can download the [latest development build here](https://circleci.com/api/v1/project/OnsenUI/OnsenUI/latest/artifacts/0/$CIRCLE_ARTIFACTS/onsenui.zip?branch=master&filter=successful). Be careful, usually everything there is already tested but it might be unstable sometimes.
 
-* __Manually build this project__
 
-Clone this repository and run the following commands to build the project:
+## Contribution
 
-```bash
-$ cd css-components
-$ yarn install
-$ gulp build
-$ cd ..
-$ yarn install
-$ gulp build
-```
-
-This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already. The files will be built and copied into **build** folder.
-
-Or serve the files for development and running examples:
-
-```bash
-$ gulp serve
-```
-
-* Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)
-
-## Running the test suite
-
-Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
-
-Use the following commands to run the unit tests:
-
-```bash
-$ gulp unit-test
-```
-
-or these commands for end-to-end testing of the binding libraries:
-
-```bash
-$ cd bindings/angular1
-$ gulp e2e-test
-```
-
-```bash
-$ cd bindings/angular2
-$ npm install
-$ gulp e2e-test
-```
-
-It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
-
-To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
-
-```bash
-$ cd bindings/angular1
-$ gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
-```
-
-In order to run both the unit tests and the end-to-end tests use the following command:
-
-```bash
-$ gulp test
-```
-
-## Release procedure
-
-Before releasing a new version, verify that the tests are passing and that there are no outstanding breaking issues. For major release with fundamental changes all components must be tested on all supported platforms.
-
-The first step is to add increase the version number in `package.json` and commit it. After that a new tag must be added:
-
-```
-git tag -a 2.3.4
-```
-
-This tag is important for building the documentation on the website.
-
-The next step is to run the release script:
-
-```
-cd scripts
-sh dist-release.sh
-```
-
-This will build Onsen UI and put the files in the `OnsenUI-dist` directory.
-
-The last step is to release the package on NPM. From the root of the repository do the following:
-
-```
-cd OnsenUI-dist;
-npm publish
-```
-
+Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
