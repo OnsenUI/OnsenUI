@@ -10,6 +10,7 @@ dev
  * ons-input: Added initial date value support. Fixed [#1603](https://github.com/OnsenUI/OnsenUI/issues/1603).
  * ons-switch: Fixed [#1920](https://github.com/OnsenUI/OnsenUI/issues/1920).
  * ons-progress-circular: Fixed [#1921](https://github.com/OnsenUI/OnsenUI/issues/1921).
+ * ons-splitter-content: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772) and [#1930](https://github.com/OnsenUI/OnsenUI/issues/1930).
 
 v2.2.3
 ----
