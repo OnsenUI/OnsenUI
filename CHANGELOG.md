@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * core: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772).
+
 v2.2.3
 ----
 
