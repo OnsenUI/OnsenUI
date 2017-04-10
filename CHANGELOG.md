@@ -7,7 +7,7 @@ dev
 
 ### Bug Fixes
 
- * core: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772).
+ * ons-splitter-content: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772) and [#1930](https://github.com/OnsenUI/OnsenUI/issues/1930).
 
 v2.2.3
 ----
