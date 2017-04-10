@@ -36,6 +36,10 @@ class Input extends BasicComponent {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
 
+    if (this.props.value !== undefined) {
+      node.value = this.props.value;
+    }
+
     EVENT_TYPES.forEach((eventType) => {
       node.addEventListener(eventType, this.onChange);
     });
@@ -111,7 +115,10 @@ Input.propTypes = {
    *  [en] Content of the input.[/en]
    *  [jp][/jp]
    */
-  value: React.PropTypes.string,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.instanceOf(Date)
+  ]),
 
   /**
    * @name checked
