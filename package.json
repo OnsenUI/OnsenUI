@@ -60,7 +60,7 @@
   ],
   "homepage": "https://onsen.io/",
   "devDependencies": {
-    "@webcomponents/custom-elements": "webcomponents/custom-elements#1.0.0-rc.2",
+    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-eslint": "^6.0.3",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-latest": "^6.22.0",

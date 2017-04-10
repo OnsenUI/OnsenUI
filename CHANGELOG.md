@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * core: Fix broken parts of CE1 polyfill which caused a broken behavior of `vue-onsenui` ([#1925](https://github.com/OnsenUI/OnsenUI/issues/1925)).
+
 v2.2.3
 ----
 
