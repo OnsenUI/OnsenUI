@@ -7,6 +7,7 @@ dev
 ### Bug fixes
 
 * VOnsNavigator: Options object is not modified anymore.
+* VOnsNavigator: Fix support for Vue router.
 
 2.0.0-beta.0
 ----
