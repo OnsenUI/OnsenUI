@@ -3,6 +3,7 @@ CHANGELOG
 ====
 
 dev
+v2.2.4
 ----
 
 ### Bug Fixes
@@ -12,6 +13,15 @@ dev
  * ons-progress-circular: Fixed [#1921](https://github.com/OnsenUI/OnsenUI/issues/1921).
  * ons-splitter-content: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772) and [#1930](https://github.com/OnsenUI/OnsenUI/issues/1930).
  * core: Fix broken parts of CE1 polyfill which caused a broken behavior of `vue-onsenui` ([#1925](https://github.com/OnsenUI/OnsenUI/issues/1925)).
+ * core: Fixed broken parts of CE1 polyfill which caused a broken behavior of `vue-onsenui` ([#1925](https://github.com/OnsenUI/OnsenUI/issues/1925)).
+ * ons-splitter-content: Fixed [#1772](https://github.com/OnsenUI/OnsenUI/issues/1772) and [#1930](https://github.com/OnsenUI/OnsenUI/issues/1930).
+ * ons-input: Added initial date value support. Fixed [#1603](https://github.com/OnsenUI/OnsenUI/issues/1603).
+ * ons-switch: Fixed [#1920](https://github.com/OnsenUI/OnsenUI/issues/1920).
+ * ons-progress-circular: Fixed [#1921](https://github.com/OnsenUI/OnsenUI/issues/1921).
+
+### Misc
+
+ * Removed `bower.json`.
 
 v2.2.3
 ----
