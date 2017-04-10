@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+dev
+----
+* input: Added initial date value support.
+
 v1.2.0
 ----
 * Fixed [#1768](https://github.com/OnsenUI/OnsenUI/pull/1768).
