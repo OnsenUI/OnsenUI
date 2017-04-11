@@ -236,6 +236,15 @@ limitations under the License.
       };
     };
 
+    const _linkDialog = (parentScope, element) => {
+      if (parentScope) {
+        ons.$compile(angular.element(element))(parentScope.$new());
+        parentScope.$evalAsync();
+      } else {
+        ons.compile(element);
+      }
+    };
+
     /**
      * @method createAlertDialog
      * @signature createAlertDialog(page, [options])
@@ -255,21 +264,10 @@ limitations under the License.
      *   [en]Create a alert dialog instance from a template.[/en]
      *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
      */
-    ons.createAlertDialog = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
-        return angular.element(alertDialog).data('ons-alert-dialog');
-      });
+    const createAlertDialogOriginal = ons.createAlertDialog;
+    ons.createAlertDialog = (page, options = {}) => {
+      return createAlertDialogOriginal(page, { ...options, link: _linkDialog.bind(null, options.parentScope) })
+        .then(alertDialog => angular.element(alertDialog).data('ons-alert-dialog'));
     };
 
     /**
@@ -291,21 +289,10 @@ limitations under the License.
      *   [en]Create a dialog instance from a template.[/en]
      *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
      */
-    ons.createDialog = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createDialogOriginal(page, options).then(function(dialog) {
-        return angular.element(dialog).data('ons-dialog');
-      });
+    const createDialogOriginal = ons.createDialog;
+    ons.createDialog = (page, options = {}) => {
+      return createDialogOriginal(page, { ...options, link: _linkDialog.bind(null, options.parentScope) })
+        .then(dialog => angular.element(dialog).data('ons-dialog'));
     };
 
     /**
@@ -327,21 +314,10 @@ limitations under the License.
      *   [en]Create a popover instance from a template.[/en]
      *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
      */
-    ons.createPopover = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createPopoverOriginal(page, options).then(function(popover) {
-        return angular.element(popover).data('ons-popover');
-      });
+    const createPopoverOriginal = ons.createPopover;
+    ons.createPopover = (page, options = {}) => {
+      return createPopoverOriginal(page, { ...options, link: _linkDialog.bind(null, options.parentScope) })
+        .then(popover => angular.element(popover).data('ons-popover'));
     };
 
     /**
