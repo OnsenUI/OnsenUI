@@ -7,6 +7,7 @@ dev
 
 ### Bug Fixes
 
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
 
 ~~v2.2.4~~ (unstable)
 ----
