@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Util from './Util.js';
 
@@ -112,18 +113,18 @@ class BaseDialog extends React.Component {
 }
 
 BaseDialog.propTypes = {
-  onCancel: React.PropTypes.func,
-  isOpen: React.PropTypes.bool.isRequired,
-  isCancelable: React.PropTypes.bool,
-  isDisabled: React.PropTypes.bool,
-  animation: React.PropTypes.string,
-  maskColor: React.PropTypes.string,
-  animationOptions: React.PropTypes.object,
-  onPreShow: React.PropTypes.func,
-  onPostShow: React.PropTypes.func,
-  onPreHide: React.PropTypes.func,
-  onPostHide: React.PropTypes.func,
-  onDeviceBackButton: React.PropTypes.func
+  onCancel: PropTypes.func,
+  isOpen: PropTypes.bool.isRequired,
+  isCancelable: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  animation: PropTypes.string,
+  maskColor: PropTypes.string,
+  animationOptions: PropTypes.object,
+  onPreShow: PropTypes.func,
+  onPostShow: PropTypes.func,
+  onPreHide: PropTypes.func,
+  onPostHide: PropTypes.func,
+  onDeviceBackButton: PropTypes.func
 };
 
 BaseDialog.defaultProps = {
