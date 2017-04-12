@@ -323,12 +323,11 @@ limitations under the License.
     /**
      * @param {String} page
      */
-    ons.resolveLoadingPlaceholder = function(page) {
-      return ons._resolveLoadingPlaceholderOriginal(page, function(element, done) {
+    const resolveLoadingPlaceHolderOriginal = ons.resolveLoadingPlaceHolder;
+    ons.resolveLoadingPlaceholder = page => {
+      return resolveLoadingPlaceholderOriginal(page, (element, done) => {
         ons.compile(element);
-        angular.element(element).scope().$evalAsync(function() {
-          setImmediate(done);
-        });
+        angular.element(element).scope().$evalAsync(() => setImmediate(done));
       });
     };
 

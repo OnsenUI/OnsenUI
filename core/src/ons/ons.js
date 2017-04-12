@@ -359,25 +359,6 @@ ons.createAlertDialog = (page, options = {}) => {
 };
 
 /**
- * @param {String} page
- * @param {Function} link
- */
-ons._resolveLoadingPlaceholderOriginal = function(page, link) {
-  const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
-
-  if (elements.length > 0) {
-    elements
-      .filter(element => !element.getAttribute('page'))
-      .forEach(element => {
-        element.setAttribute('ons-loading-placeholder', page);
-        ons._resolveLoadingPlaceholder(element, page, link);
-      });
-  } else {
-    throw new Error('No ons-loading-placeholder exists.');
-  }
-};
-
-/**
  * @method resolveLoadingPlaceholder
  * @signature resolveLoadingPlaceholder(page)
  * @param {String} page
@@ -387,7 +368,20 @@ ons._resolveLoadingPlaceholderOriginal = function(page, link) {
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
  *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
  */
-ons.resolveLoadingPlaceholder = ons._resolveLoadingPlaceholderOriginal;
+ons.resolveLoadingPlaceholder = (page, link) => {
+  const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+  if (elements.length === 0) {
+    throw new Error('No ons-loading-placeholder exists.');
+  }
+
+  elements
+    .filter(element => !element.getAttribute('page'))
+    .forEach(element => {
+      element.setAttribute('ons-loading-placeholder', page);
+      ons._resolveLoadingPlaceholder(element, page, link);
+    });
+};
+
 
 ons._setupLoadingPlaceHolders = function() {
   ons.ready(() => {
