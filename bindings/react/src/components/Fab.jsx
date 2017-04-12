@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * @original ons-fab
@@ -37,7 +36,7 @@ Fab.propTypes = {
    *  [en]The appearance of the button.[/en]
    *  [jp] [/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
   /**
    * @name ripple
@@ -46,7 +45,7 @@ Fab.propTypes = {
    *  [en]If true,  the button will have a ripple effect when tapped.[/en]
    *  [jp] [/jp]
    */
-  ripple: PropTypes.bool,
+  ripple: React.PropTypes.bool,
 
   /**
    * @name position
@@ -56,7 +55,7 @@ Fab.propTypes = {
    *  [en]The position of the button. Should be a string like `"bottom right"` or `"top left"`. If this attribute is not defined it will be displayed as an inline element.[/en]
    *  [jp] [/jp]
    */
-  position: PropTypes.string,
+  position: React.PropTypes.string,
 
   /**
    * @name disabled
@@ -65,7 +64,7 @@ Fab.propTypes = {
    *  [en] If true, the button will be disabled. [/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name onClick
@@ -74,7 +73,7 @@ Fab.propTypes = {
    *  [en] This function will be called ones the button is clicked. [/en]
    *  [jp] [/jp]
    */
-  onClick: PropTypes.func
+  onClick: React.PropTypes.func
 };
 
 export default Fab;

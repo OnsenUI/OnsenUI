@@ -1,7 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import ReactDOM from 'react-dom';
-
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * @original ons-speed-dial-item
@@ -57,7 +56,7 @@ SpeedDialItem.propTypes = {
    *  [en]The appearance of the button.[/en]
    *  [jp] [/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
   /**
    * @name onClick
@@ -66,7 +65,7 @@ SpeedDialItem.propTypes = {
    *  [en] This function will be called ones the button is clicked. [/en]
    *  [jp] [/jp]
    */
-  onClick: PropTypes.func
+  onClick: React.PropTypes.func
 };
 
 export default SpeedDialItem;

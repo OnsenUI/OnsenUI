@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
@@ -87,7 +86,7 @@ Input.propTypes = {
    *  [en]The appearance of the input.[/en]
    *  [jp] [/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
   /**
    * @name disabled
@@ -98,7 +97,7 @@ Input.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name onChange
@@ -107,7 +106,7 @@ Input.propTypes = {
    *  [en] Called when the text of the input changes.[/en]
    *  [jp][/jp]
    */
-  onChange: PropTypes.func,
+  onChange: React.PropTypes.func,
 
   /**
    * @name value
@@ -116,9 +115,9 @@ Input.propTypes = {
    *  [en] Content of the input.[/en]
    *  [jp][/jp]
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Date)
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.instanceOf(Date)
   ]),
 
   /**
@@ -128,7 +127,7 @@ Input.propTypes = {
    *  [en]Set to to true if the input is checked. Only used for radio buttons and checkboxes.[/en]
    *  [ja][/ja]
    */
-  checked: PropTypes.bool,
+  checked: React.PropTypes.bool,
 
   /**
    * @name placehoder
@@ -137,7 +136,7 @@ Input.propTypes = {
    *  [en] Placeholder text. In Material Design this placeholder will be a floating label. [/en]
    *  [jp][/jp]
    */
-  placeholder: PropTypes.string,
+  placeholder: React.PropTypes.string,
 
   /**
    * @name type
@@ -148,7 +147,7 @@ Input.propTypes = {
  [/en]
    *  [jp][/jp]
    */
-  type: PropTypes.string,
+  type: React.PropTypes.string,
 
   /**
    * @name inputId
@@ -157,7 +156,7 @@ Input.propTypes = {
    *  [en]  Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements [/en]
    *  [jp][/jp]
    */
-  inputId: PropTypes.string,
+  inputId: React.PropTypes.string,
 
   /**
    * @name float
@@ -166,7 +165,7 @@ Input.propTypes = {
    *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
    *  [jp][/jp]
    */
-  float: PropTypes.bool
+  float: React.PropTypes.bool
 };
 
 export default Input;

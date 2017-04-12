@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 
 /**
@@ -48,7 +47,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
    /**
    * @name dataSource
@@ -59,7 +58,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  dataSource: PropTypes.array,
+  dataSource: React.PropTypes.array,
 
    /**
    * @name renderRow
@@ -71,7 +70,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  renderRow: PropTypes.func,
+  renderRow: React.PropTypes.func,
 
    /**
    * @name renderHeader
@@ -82,7 +81,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  renderHeader: PropTypes.func,
+  renderHeader: React.PropTypes.func,
 
    /**
    * @name renderFooter
@@ -93,7 +92,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  renderFooter: PropTypes.func
+  renderFooter: React.PropTypes.func
 };
 
 List.defaultProps = {

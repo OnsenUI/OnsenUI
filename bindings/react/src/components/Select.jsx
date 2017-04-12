@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
@@ -84,7 +83,7 @@ Select.propTypes = {
    *  [en]The appearance of the select box.[/en]
    *  [jp] [/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
   /**
    * @name disabled
@@ -93,7 +92,7 @@ Select.propTypes = {
    *  [en]Specifies whether the select is disabled.[/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name onChange
@@ -102,7 +101,7 @@ Select.propTypes = {
    *  [en]Called when the value of the select changes.[/en]
    *  [jp][/jp]
    */
-  onChange: PropTypes.func,
+  onChange: React.PropTypes.func,
 
   /**
    * @name value
@@ -111,7 +110,7 @@ Select.propTypes = {
    *  [en]Current value of the element.[/en]
    *  [jp] [/jp]
    */
-  value: PropTypes.string,
+  value: React.PropTypes.string,
 
   /**
    * @name multiple
@@ -120,7 +119,7 @@ Select.propTypes = {
    *  [en]If this attribute is defined, multiple options can be selected at once.[/en]
    *  [ja][/ja]
    */
-  multiple: PropTypes.bool,
+  multiple: React.PropTypes.bool,
 
   /**
    * @name autofocus
@@ -129,7 +128,7 @@ Select.propTypes = {
    *  [en]Element automatically gains focus on page load.[/en]
    *  [jp][/jp]
    */
-  autofocus: PropTypes.bool,
+  autofocus: React.PropTypes.bool,
 
   /**
    * @name required
@@ -138,7 +137,7 @@ Select.propTypes = {
    *  [en]Make the select input required for submitting the form it is part of.[/en]
    *  [jp][/jp]
    */
-  required: PropTypes.bool,
+  required: React.PropTypes.bool,
 
   /**
    * @name form
@@ -147,7 +146,7 @@ Select.propTypes = {
    *  [en]Associate a select element to an existing form on the page, even if not nested.[/en]
    *  [jp][/jp]
    */
-  form: PropTypes.string,
+  form: React.PropTypes.string,
 
   /**
    * @name size
@@ -156,7 +155,7 @@ Select.propTypes = {
    *  [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them[/en]
    *  [jp][/jp]
    */
-  size: PropTypes.string
+  size: React.PropTypes.string
 };
 
 export default Select;

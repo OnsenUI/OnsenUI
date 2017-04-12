@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
 import Util from './Util.js';
 
@@ -112,7 +111,7 @@ Carousel.propTypes = {
    *  [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
    *  [jp] [/jp]
    */
-  direction: PropTypes.oneOf(['horizontal', 'vertical']),
+  direction: React.PropTypes.oneOf(['horizontal', 'vertical']),
 
   /**
    * @name fullscreen
@@ -121,7 +120,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel will cover the whole screen.[/en]
    *  [jp] [/jp]
    */
-  fullscreen: PropTypes.bool,
+  fullscreen: React.PropTypes.bool,
 
   /**
    * @name overscrollable
@@ -130,7 +129,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel will be scrollable over the edge. It will bounce back when released.[/en]
    *  [jp] [/jp]
    */
-  overscrollable: PropTypes.bool,
+  overscrollable: React.PropTypes.bool,
 
   /**
    * @name centered
@@ -139,7 +138,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel then the selected item will be in the center of the carousel instead of the beginning. Useful only when the items are smaller than the carousel.[/en]
    *  [jp] [/jp]
    */
-  centered: PropTypes.bool,
+  centered: React.PropTypes.bool,
 
   /**
    * @name itemWidth
@@ -148,7 +147,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
    *  [jp] [/jp]
    */
-  itemWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  itemWidth: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name itemHeight
@@ -157,7 +156,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
    *  [jp] [/jp]
    */
-  itemHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  itemHeight: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name autoScroll
@@ -166,7 +165,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel will be automatically scrolled to the closest item border when released.[/en]
    *  [jp] [/jp]
    */
-  autoScroll: PropTypes.bool,
+  autoScroll: React.PropTypes.bool,
 
   /**
    * @name autoScrollRatio
@@ -175,7 +174,7 @@ Carousel.propTypes = {
    *  [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[/en]
    *  [jp] [/jp]
    */
-  autoScrollRatio: PropTypes.number,
+  autoScrollRatio: React.PropTypes.number,
 
   /**
    * @name swipeable
@@ -184,7 +183,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel can be scrolled by drag or swipe.[/en]
    *  [jp] [/jp]
    */
-  swipeable: PropTypes.bool,
+  swipeable: React.PropTypes.bool,
 
   /**
    * @name disabled
@@ -193,7 +192,7 @@ Carousel.propTypes = {
    *  [en]If true, the carousel will be disabled.[/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name index
@@ -202,7 +201,7 @@ Carousel.propTypes = {
    *  [en]Specify the index of the ons-carousel-item to show. Default is 0.[/en]
    *  [jp] [/jp]
    */
-  index: PropTypes.number,
+  index: React.PropTypes.number,
 
   /**
    * @name autoRefresh
@@ -211,7 +210,7 @@ Carousel.propTypes = {
    *  [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
    *  [jp] [/jp]
    */
-  autoRefresh: PropTypes.bool,
+  autoRefresh: React.PropTypes.bool,
 
   /**
    * @name onPostChange
@@ -220,7 +219,7 @@ Carousel.propTypes = {
    *  [en]Called just after the current carousel item has changed.  [/en]
    *  [jp] [/jp]
    */
-  onPostChange: PropTypes.func,
+  onPostChange: React.PropTypes.func,
 
   /**
    * @name onRefresh
@@ -229,7 +228,7 @@ Carousel.propTypes = {
    *  [en]Called when the carousel has been refreshed. [/en]
    *  [jp] [/jp]
    */
-  onRefresh: PropTypes.func,
+  onRefresh: React.PropTypes.func,
 
   /**
    * @name onOverscroll
@@ -238,7 +237,7 @@ Carousel.propTypes = {
    *  [en]Called when the carousel has been overscrolled. [/en]
    *  [jp] [/jp]
    */
-  onOverscroll: PropTypes.func,
+  onOverscroll: React.PropTypes.func,
 
   /**
    * @name animationOptions
@@ -248,7 +247,7 @@ Carousel.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: PropTypes.object
+  animationOptions: React.PropTypes.object
 };
 
 export default Carousel;

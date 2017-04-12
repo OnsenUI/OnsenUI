@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * @original ons-ripple
@@ -31,7 +30,7 @@ Ripple.propTypes = {
    *  [en]Color of the ripple effect.[/en]
    *  [jp] [/jp]
    */
-  color: PropTypes.string,
+  color: React.PropTypes.string,
 
   /**
    * @name background
@@ -41,7 +40,7 @@ Ripple.propTypes = {
    *  [en]Color of the background.[/en]
    *  [jp] [/jp]
    */
-  background: PropTypes.string,
+  background: React.PropTypes.string,
 
   /**
    * @name disabled
@@ -52,7 +51,7 @@ Ripple.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool
+  disabled: React.PropTypes.bool
 };
 
 export default Ripple;
