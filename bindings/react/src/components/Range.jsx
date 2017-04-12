@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 const EVENT_TYPES = ['change', 'input'];
@@ -67,7 +67,7 @@ Range.propTypes = {
    *  [en]The appearance of the progress indicator.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name onChange
@@ -76,7 +76,7 @@ Range.propTypes = {
    *  [en] Called when the value of the input changes.[/en]
    *  [jp][/jp]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name value
@@ -87,7 +87,7 @@ Range.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  value: React.PropTypes.number,
+  value: PropTypes.number,
 
   /**
    * @name disabled
@@ -96,7 +96,7 @@ Range.propTypes = {
    *  [en] If true, the element is disabled. [/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.bool
+  disabled: PropTypes.bool
 };
 
 export default Range;

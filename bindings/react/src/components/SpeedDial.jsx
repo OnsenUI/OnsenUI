@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-speed-dial
@@ -36,7 +37,7 @@ SpeedDial.propTypes = {
    *  [en]The appearance of the speed dial.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name position
@@ -48,7 +49,7 @@ SpeedDial.propTypes = {
 [/en]
    *  [jp] [/jp]
    */
-  position: React.PropTypes.string,
+  position: PropTypes.string,
 
   /**
    * @name direction
@@ -57,7 +58,7 @@ SpeedDial.propTypes = {
    *  [en]Specify the direction the items are displayed. Possible values are "up", "down", "left" and "right".[/en]
    *  [jp] [/jp]
    */
-  direction: React.PropTypes.oneOf(['up', 'down', 'left', 'right']),
+  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
 
   /**
    * @name disabled
@@ -66,7 +67,7 @@ SpeedDial.propTypes = {
    *  [en]Specify if button should be disabled.[/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.bool
+  disabled: PropTypes.bool
 };
 
 export default SpeedDial;

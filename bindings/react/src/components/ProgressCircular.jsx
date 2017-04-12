@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -39,7 +40,7 @@ ProgressCircular.propTypes = {
    *  [en]The appearance of the progress indicator.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name value
@@ -50,7 +51,7 @@ ProgressCircular.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  value: React.PropTypes.number,
+  value: PropTypes.number,
 
   /**
    * @name secondaryValue
@@ -61,7 +62,7 @@ ProgressCircular.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  secondaryValue: React.PropTypes.number,
+  secondaryValue: PropTypes.number,
 
   /**
    * @name indeterminate
@@ -70,7 +71,7 @@ ProgressCircular.propTypes = {
    *  [en] If this property is set, an infinite looping animation will be shown. [/en]
    *  [jp] [/jp]
    */
-  indeterminate: React.PropTypes.bool
+  indeterminate: PropTypes.bool
 };
 
 export default ProgressCircular;

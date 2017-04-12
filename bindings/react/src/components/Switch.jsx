@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -57,7 +58,7 @@ Switch.propTypes = {
    *  [en] Called when the value of the switch changes (checked/unchecked) [/en]
    *  [jp] [/jp]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name checked
@@ -66,7 +67,7 @@ Switch.propTypes = {
    *  [en] Whether the switch is checked.[/en]
    *  [jp] [/jp]
    */
-  checked: React.PropTypes.bool,
+  checked: PropTypes.bool,
 
   /**
    * @name disabled
@@ -75,7 +76,7 @@ Switch.propTypes = {
    *  [en] If set, the switch is disabled.[/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name inputId
@@ -84,7 +85,7 @@ Switch.propTypes = {
    *  [en] Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
    *  [jp] [/jp]
    */
-  inputId: React.PropTypes.string
+  inputId: PropTypes.string
 };
 
 export default Switch;

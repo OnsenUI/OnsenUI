@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 /**
@@ -89,7 +90,7 @@ Page.propTypes = {
    *  Specify the style of the page content. Optional.
    *  [/en]
    */
-  contentStyle: React.PropTypes.object,
+  contentStyle: PropTypes.object,
 
   /**
    * @name modifier
@@ -100,7 +101,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name renderModal
@@ -110,7 +111,7 @@ Page.propTypes = {
    * @description
    *  [en] This function renders a modal that masks current screen.[/en]
    */
-  renderModal: React.PropTypes.func,
+  renderModal: PropTypes.func,
 
   /**
    * @name renderToolbar
@@ -121,7 +122,7 @@ Page.propTypes = {
    *  [en] This function renders the toolbar of the page.[/en]
    *  [jp] どうしよう[/jp]
    */
-  renderToolbar: React.PropTypes.func,
+  renderToolbar: PropTypes.func,
 
   /**
    * @name renderBottomToolbar
@@ -131,7 +132,7 @@ Page.propTypes = {
    *  [en] This function renders the bottom toolbar of the page.[/en]
    *  [jp] どうしよう[/jp]
    */
-  renderBottomToolbar: React.PropTypes.func,
+  renderBottomToolbar: PropTypes.func,
 
   /**
    * @name renderFixed
@@ -141,7 +142,7 @@ Page.propTypes = {
    *  [en] This function renders fixed content of the page. Can be used to render `Fab` or `SpeedDial` components as well as other components that don't scroll with the page.[/en]
    *  [jp] どうしよう[/jp]
    */
-  renderFixed: React.PropTypes.func,
+  renderFixed: PropTypes.func,
 
   /**
    * @name onInit
@@ -153,7 +154,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onInit: React.PropTypes.func,
+  onInit: PropTypes.func,
 
   /**
    * @name onShow
@@ -165,7 +166,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onShow: React.PropTypes.func,
+  onShow: PropTypes.func,
 
   /**
    * @name onHide
@@ -177,7 +178,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onHide: React.PropTypes.func,
+  onHide: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
@@ -189,7 +190,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 const NOOP = () => null;
