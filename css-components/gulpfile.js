@@ -47,6 +47,10 @@ gulp.task('cssmin', ['generate-preview'], () => {
 gulp.task('cssnext', ['stylelint'], () => {
   const plugins = [
     require('postcss-import'),
+    require('postcss-base64')({
+      extensions: ['.svg'],
+      root: __dirname + '/src'
+    }),
     cssnext({
       browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
     }),

@@ -1,3 +1,5 @@
+import './polyfills';
+
 import ons from './ons/ons';
 
 import TemplateElement from './elements/ons-template';

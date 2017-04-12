@@ -230,7 +230,7 @@ class Platform {
     if (this._renderPlatform) {
       return this._renderPlatform === 'safari';
     } else {
-      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
+      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
     }
   }
 

@@ -326,6 +326,7 @@ export default class TabElement extends BaseElement {
   setActive() {
     this._input.checked = true;
     this.classList.add('active');
+    this.setAttribute('active', '');
 
     if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
       const icon = this.getAttribute('active-icon');
@@ -342,6 +343,7 @@ export default class TabElement extends BaseElement {
   setInactive() {
     this._input.checked = false;
     this.classList.remove('active');
+    this.removeAttribute('active');
 
     if (this.hasAttribute('icon')) {
       const icon = this.getAttribute('icon');

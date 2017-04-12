@@ -1,9 +1,26 @@
 CHANGELOG
 ====
 
-dev
+2.0.0-beta.1
 ----
+
+### Bug fixes
+
+* VOnsNavigator: Options object is not modified anymore.
+* VOnsNavigator: Fix support for Vue router.
+* Events: Fixed deriving events from the core.
+
+2.0.0-beta.0
+----
+
+### Bug fixes
+
+* Autostyling: Fix for 'material' modifier.
 * VOnsNavigator: Added `popPage` optional prop.
+* VOnsTabbar: Fix update issue.
+* VOnsCarousel: Fix update issue.
+* VOnsLazyRepeat: Destroys previous provider.
+* Components destruction is delayed in order to support animations.
 
 2.0.0-alpha.1
 ----

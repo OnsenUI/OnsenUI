@@ -24,7 +24,7 @@ describe('OnsPopoverElement', () => {
     expect(window.ons.PopoverElement).to.be.ok;
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     const content = popover.querySelector('.popover__content');
     const innerPopover = popover.querySelector('.popover');
 
@@ -59,7 +59,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('#onDeviceBackButton', () => {
-    onlyChrome(it)('should hide the popover if it is cancelable', () => {
+    it('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.setAttribute('cancelable', '');
 
@@ -137,7 +137,7 @@ describe('OnsPopoverElement', () => {
       });
     });
 
-    onlyChrome(it)('returns a promise that resolves to the displayed element', () => {
+    it('returns a promise that resolves to the displayed element', () => {
       return expect(popover.show(target)).to.eventually.be.fulfilled.then(element => {
         expect(element).to.equal(popover);
         expect(popoverDisplay()).to.equal('block');
@@ -204,7 +204,7 @@ describe('OnsPopoverElement', () => {
       expect(popoverDisplay()).to.equal('block');
     });
 
-    onlyChrome(it)('should hide the popover if it is cancelable', () => {
+    it('should hide the popover if it is cancelable', () => {
       popover.setAttribute('animation', 'none');
       popover.show(target);
       popover.setAttribute('cancelable', '');
@@ -280,7 +280,7 @@ describe('OnsPopoverElement', () => {
   });
 
   describe('autoStyling', () => {
-    onlyChrome(it)('adds \'material\' modifier on Android', () => {
+    it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-popover>Content</ons-popover>');
       expect(e.getAttribute('modifier')).to.equal('material');

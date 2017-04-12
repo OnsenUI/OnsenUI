@@ -13,7 +13,7 @@ describe('OnsListItemElement', () => {
     expect(window.ons.ListItemElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'list-item\' by default', () => {
+  it('classList contains \'list-item\' by default', () => {
     const element = ons._util.createElement('<ons-list-item>content</ons-list-item>');
     expect(element.classList.contains('list-item')).to.be.true;
     element.setAttribute('class', 'foo');
@@ -21,7 +21,7 @@ describe('OnsListItemElement', () => {
     expect(element.classList.contains('foo')).to.be.true;
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     listItem.setAttribute('modifier', 'hoge');
     expect(listItem.classList.contains('list-item--hoge')).to.be.true;
 
@@ -103,7 +103,7 @@ describe('OnsListItemElement', () => {
   });
 
   describe('autoStyling', () => {
-    onlyChrome(it)('adds \'material\' modifiers and effects on Android if tappable', () => {
+    it('adds \'material\' modifiers and effects on Android if tappable', () => {
       ons.platform.select('android');
       const e = ons._util.createElement('<ons-list-item tappable>Content</ons-list-item>');
       expect(e.getAttribute('modifier')).to.equal('material');

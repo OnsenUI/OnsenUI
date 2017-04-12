@@ -33,7 +33,7 @@ describe('OnsRippleElement', () => {
     expect(window.ons.RippleElement).to.be.ok;
   });
 
-  onlyChrome(describe)('class attribute', () => {
+  describe('class attribute', () => {
     it('should contain "ripple" class name automatically', () => {
       const element = new ons.RippleElement();
       element.setAttribute('class', 'foobar');
@@ -80,17 +80,17 @@ describe('OnsRippleElement', () => {
       expect(spy).to.have.been.called.exactly(attributes.length);
     });
 
-    onlyChrome(it)('sets the color of the wave based on the "color" attribute', () => {
+    it('sets the color of the wave based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(wave.style.background).to.equal('black');
     });
 
-    onlyChrome(it)('sets the color of the background based on the "color" attribute', () => {
+    it('sets the color of the background based on the "color" attribute', () => {
       ripple.setAttribute('color', 'black');
       expect(background.style.background).to.equal('black');
     });
 
-    onlyChrome(it)('sets the color of the background based on the "background" attribute', () => {
+    it('sets the color of the background based on the "background" attribute', () => {
       ripple.setAttribute('color', 'black');
       ripple.setAttribute('background', 'rgb(0, 255, 255)');
       expect(background.style.background).to.equal('rgb(0, 255, 255)');
@@ -98,12 +98,12 @@ describe('OnsRippleElement', () => {
       expect(background.style.background).to.equal('rgb(0, 255, 255)');
     });
 
-    onlyChrome(it)('disables background if the "background" attribute is "none"', () => {
+    it('disables background if the "background" attribute is "none"', () => {
       ripple.setAttribute('background', 'none');
       expect(background.hasAttribute('disabled')).to.be.true;
     });
 
-    onlyChrome(it)('makes sure the background is enabled if "background != none"', () => {
+    it('makes sure the background is enabled if "background != none"', () => {
       background.setAttribute('disabled', 'disabled');
       ripple.setAttribute('background', 'rgb(0, 123, 5)');
       expect(background.hasAttribute('disabled')).to.be.false;
@@ -137,7 +137,7 @@ describe('OnsRippleElement', () => {
       expect(coords.r).to.equal(500);
     });
 
-    onlyChrome(it)('cares about it\'s center', () => {
+    it('cares about it\'s center', () => {
       ons._util.extend(ripple.style, style);
       ripple.setAttribute('center', 'true');
       const coords = ripple._calculateCoords({clientY: 0, clientX: 0});
@@ -194,7 +194,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onHold()', () => {
-    onlyChrome(it)('sets _holding', () => {
+    it('sets _holding', () => {
       expect(ripple._holding).to.not.be.ok;
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
@@ -204,7 +204,7 @@ describe('OnsRippleElement', () => {
   describe('#_onDragStart()', () => {
     itCalls('_rippleAnimation').whenUsing('_onDragStart', e);
 
-    onlyChrome(it)('calls _onRelease', () => {
+    it('calls _onRelease', () => {
       const spy = spyOn('_onRelease');
 
       ripple._onHold(e);
@@ -214,7 +214,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onRelease()', () => {
-    onlyChrome(it)('unsets _holding', () => {
+    it('unsets _holding', () => {
       ripple._onHold(e);
       expect(ripple._holding).to.be.ok;
       ripple._onRelease(e);

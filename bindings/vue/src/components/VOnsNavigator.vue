@@ -7,10 +7,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
+  import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
-    mixins: [destroyable, hasOptions, selfProvider, deriveEvents, deriveDBB],
+    mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
 
     props: {
       pageStack: {
@@ -76,25 +76,27 @@
         // Pop
         if (currentLength < lastLength) {
           this._reattachPage(lastTopPage, null);
-          return this.$el._popPage(this.options, () => this._redetachPage(lastTopPage));
+          return this.$el._popPage({ ...this.options }, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
         this._reattachPage(lastTopPage, currentTopPage);
-        return this.$el._pushPage(this.options).then(() => {
+        return this.$el._pushPage({ ...this.options }).then(() => {
           this._redetachPage(lastTopPage);
         });
       }
     },
 
     watch: {
-      pageStack() {
-        const lastLength = this.$children.length;
+      pageStack(after, before) {
+        const propWasMutated = after === before; // Can be mutated or replaced
+
+        const lastLength = propWasMutated ? this.$children.length : before.length;
         let lastTopPage = this.$children[this.$children.length - 1].$el;
 
         this.$nextTick(() => {
-          const currentLength = this.$children.length;
-          let currentTopPage = this.$children[currentLength - 1].$el;
+          const currentLength = propWasMutated ? this.$children.length : after.length;
+          let currentTopPage = this.$children[this.$children.length - 1].$el;
 
           if (currentTopPage !== lastTopPage) {
             this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage});
