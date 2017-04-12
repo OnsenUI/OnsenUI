@@ -162,7 +162,7 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
-    this.pushPage(route, options).then(() => {
+    return this.pushPage(route, options).then(() => {
       const pos = this.pages.length - 2;
       this.pages.splice(pos, 1);
       this.routes.splice(pos, 1);
