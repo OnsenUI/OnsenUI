@@ -8,7 +8,7 @@ dev
 ### Bug Fixes
 
 
-~~v2.2.4~~ (unstable)
+v2.2.4
 ----
 
 ### Bug Fixes
@@ -23,14 +23,14 @@ dev
 
  * Removed `bower.json`.
 
-~~v2.2.3~~ (unstable)
+v2.2.3
 ----
 
 ### Bug Fixes
 
  * core: Improve overall stability of the core on iOS by replacing Custom Elements v1 polyfill.
 
-v2.2.2 (stable)
+v2.2.2
 ----
 
 ### New Features
