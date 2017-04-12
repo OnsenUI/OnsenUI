@@ -28,20 +28,20 @@ v2.2.3
 
 ### Bug Fixes
 
- * core: Improve overall stability of the core on iOS by replacing Custom Elements v1 polyfill.
+ * core: Improve overall stability of the core on iOS by replacing Custom Elements v1 polyfill ([#1892](https://github.com/OnsenUI/OnsenUI/issues/1892)).
 
 v2.2.2
 ----
 
 ### New Features
 
- * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
+ * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided ([#1749](https://github.com/OnsenUI/OnsenUI/issues/1749)).
 
 ### Bug Fixes
 
  * css-components: Fixed [#1896](https://github.com/OnsenUI/OnsenUI/issues/1896).
- * core: Use `self` in `setImmediate` polyfill.
- * core: Make `ons.platform.isSafari()` compatible with Safari 10.
+ * core: Use `self` in `setImmediate` polyfill ([#1903](https://github.com/OnsenUI/OnsenUI/issues/1903)).
+ * core: Make `ons.platform.isSafari()` compatible with Safari 10 ([#1910](https://github.com/OnsenUI/OnsenUI/issues/1910)).
  * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
 
