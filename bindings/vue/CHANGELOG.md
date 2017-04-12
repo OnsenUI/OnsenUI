@@ -8,6 +8,7 @@ dev
 
 * VOnsNavigator: Options object is not modified anymore.
 * VOnsNavigator: Fix support for Vue router.
+* Events: Fixed deriving events from the core.
 
 2.0.0-beta.0
 ----
