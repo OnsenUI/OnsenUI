@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -42,7 +41,7 @@ Row.propTypes = {
   *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
   *   [ja][/ja]
   */
-  verticalAlign: PropTypes.oneOf(['top', 'bottom', 'center'])
+  verticalAlign: React.PropTypes.oneOf(['top', 'bottom', 'center'])
 
 };
 

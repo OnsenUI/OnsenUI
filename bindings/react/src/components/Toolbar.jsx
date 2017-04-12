@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * @original ons-toolbar
@@ -45,7 +44,7 @@ Toolbar.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  modifier: PropTypes.string
+  modifier: React.PropTypes.string
 };
 
 export default Toolbar;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 
@@ -88,7 +87,7 @@ Modal.propTypes = {
    *     Animation name. Available animations are `"fade"` and `"none"`.
    *   [/en]
    */
-  animation: PropTypes.oneOf(['none', 'fade']),
+  animation: React.PropTypes.oneOf(['none', 'fade']),
 
   /**
    * @name animationOptions
@@ -96,7 +95,7 @@ Modal.propTypes = {
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    */
-  animationOptions: PropTypes.object,
+  animationOptions: React.PropTypes.object,
 
   /**
    * @name onShow
@@ -107,7 +106,7 @@ Modal.propTypes = {
    *  Called Fired right after the modal is shown.
    *  [/en]
    */
-  onShow: PropTypes.func,
+  onShow: React.PropTypes.func,
 
   /**
    * @name onHide
@@ -118,7 +117,7 @@ Modal.propTypes = {
    *  Called after the modal is hidden.
    *  [/en]
    */
-  onHide: PropTypes.func,
+  onHide: React.PropTypes.func,
 
   /**
    * @name isOpen
@@ -126,7 +125,7 @@ Modal.propTypes = {
    * @description
    *  [en]When `true` the modal will show itself.[/en]
    */
-  isOpen: PropTypes.bool,
+  isOpen: React.PropTypes.bool,
 
   /**
    * @name onDeviceBackButton
@@ -138,7 +137,7 @@ Modal.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onDeviceBackButton: PropTypes.func
+  onDeviceBackButton: React.PropTypes.func
 };
 
 Modal.defaultProps = {

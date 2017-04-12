@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import PropTypes from 'prop-types';
 import SimpleWrapper from './SimpleWrapper.jsx';
 import Util from './Util.js';
 
@@ -55,7 +54,7 @@ ListItem.propTypes = {
    *  [en] The appearance of the list item.[/en]
    *  [jp] [/jp]
    */
-  modifier: PropTypes.string,
+  modifier: React.PropTypes.string,
 
   /**
    * @name tappable
@@ -66,7 +65,7 @@ ListItem.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  tappable: PropTypes.bool,
+  tappable: React.PropTypes.bool,
 
   /**
    * @name tapBackgroundColor
@@ -77,7 +76,7 @@ ListItem.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  tapBackgroundColor: PropTypes.string,
+  tapBackgroundColor: React.PropTypes.string,
 
   /**
    * @name lockOnDrag
@@ -86,7 +85,7 @@ ListItem.propTypes = {
    *  [en] Prevent vertical scrolling when the user drags horizontally. [/en]
    *  [jp] [/jp]
    */
-  lockOnDrag: PropTypes.bool
+  lockOnDrag: React.PropTypes.bool
 };
 
 export default ListItem;

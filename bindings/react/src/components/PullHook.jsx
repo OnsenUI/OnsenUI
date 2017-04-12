@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -81,7 +80,7 @@ PullHook.propTypes = {
    *  [en]Called when the pull hook inner state is changed. The state can be either "initial", "preaction" or "action"[/en]
    *  [jp] [/jp]
    */
-  onChange: PropTypes.func,
+  onChange: React.PropTypes.func,
 
   /**
    * @name onLoad
@@ -91,7 +90,7 @@ PullHook.propTypes = {
    *  [en]Called when the pull hook is in the  `action` state[/en]
    *  [jp] [/jp]
    */
-  onLoad: PropTypes.func,
+  onLoad: React.PropTypes.func,
 
   /**
    * @name disabled
@@ -100,7 +99,7 @@ PullHook.propTypes = {
    *  [en] When set to true, the pull hook will be disabled.[/en]
    *  [jp] [/jp]
    */
-  disabled: PropTypes.bool,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name height
@@ -109,7 +108,7 @@ PullHook.propTypes = {
    *  [en] The height of the pull hook in pixels. The default value is 64.[/en]
    *  [jp] [/jp]
    */
-  height: PropTypes.number,
+  height: React.PropTypes.number,
 
   /**
    * @name thresholdHeight
@@ -118,7 +117,7 @@ PullHook.propTypes = {
    *  [en] The threshold height of the pull hook in pixels. The default value is 96.[/en]
    *  [jp] [/jp]
    */
-  thresholdHeight: PropTypes.number,
+  thresholdHeight: React.PropTypes.number,
 
   /**
    * @name fixedContent
@@ -127,7 +126,7 @@ PullHook.propTypes = {
    *  [en] If set to true, the content of the page will not move when pulling.[/en]
    *  [jp] [/jp]
    */
-  fixedContent: PropTypes.bool
+  fixedContent: React.PropTypes.bool
 };
 
 export default PullHook;
