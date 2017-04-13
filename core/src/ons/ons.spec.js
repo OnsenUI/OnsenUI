@@ -89,79 +89,50 @@ describe('ons', () => {
     });
   });
 
-  describe('#createPopover()', () => {
+  describe('#createElement()', () => {
     it('throws error when no page is provided', () => {
-      expect(() => ons.createPopover(null)).to.throw(Error);
+      expect(() => ons.createElement(null)).to.throw(Error);
     });
 
-    it('calls the linking function', (done) => {
-      const options = {};
-      options.link = () => { return; };
-      var spy = chai.spy.on(options, 'link');
-      ons.createPopover('page.html', options).then((element) => {
+    it('returns a valid element from a path', () => {
+      return ons.createElement('page.html').then((element) => {
+        expect(element).to.be.instanceof(window.ons.PageElement);
+      });
+    });
+
+    it('returns a valid element from inline HTML without promise', () => {
+      expect(ons.createElement('<ons-page></ons-page>')).to.be.instanceof(window.ons.PageElement);
+    });
+
+    it('does not attach by default', () => {
+      return ons.createElement('page.html').then((element) => {
+        console.log('AAAAAAAAAAAAAAAA', element)
+        expect(element.parentElement).not.to.be.ok;
+      });
+    });
+
+    it('attaches when option.append is provided', () => {
+      return ons.createElement('page.html', { append: true }).then((element1) => {
+        expect(element1.parentElement).to.be.ok;
+        expect(element1.parentElement).to.equal(document.body);
+        return ons.createElement('page.html', { append: element1 }).then(element2 => {
+          expect(element2.parentElement).to.equal(element1);
+          element1.remove();
+        })
+      });
+    });
+
+    it('calls the linking function when appending', () => {
+      const options = {
+        link: () => {},
+        append: true
+      };
+      const spy = chai.spy.on(options, 'link');
+      return ons.createElement('page.html', options).then((element) => {
         expect(spy).to.have.been.called.once;
-        element.remove();
-        done();
       });
     });
 
-    it('returns a valid popover element', (done) => {
-      ons.createPopover('page.html').then((element) => {
-        expect(element).to.be.instanceof(window.ons.PopoverElement);
-        element.remove();
-        done();
-      });
-    });
-  });
-
-  describe('#createDialog()', () => {
-    it('throws error when no page is provided', () => {
-      expect(() => ons.createDialog(null)).to.throw(Error);
-    });
-
-    it('calls the linking function', (done) => {
-      const options = {};
-      options.link = () => { return; };
-      var spy = chai.spy.on(options, 'link');
-      ons.createDialog('page.html', options).then((element) => {
-        expect(spy).to.have.been.called.once;
-        element.remove();
-        done();
-      });
-    });
-
-    it('returns a valid dialog element', (done) => {
-      ons.createDialog('page.html').then((element) => {
-        expect(element).to.be.instanceof(window.ons.DialogElement);
-        element.remove();
-        done();
-      });
-    });
-  });
-
-  describe('#createAlertDialog()', () => {
-    it('throws error when no page is provided', () => {
-      expect(() => ons.createAlertDialog(null)).to.throw(Error);
-    });
-
-    it('calls the linking function', (done) => {
-      const options = {};
-      options.link = () => { return; };
-      var spy = chai.spy.on(options, 'link');
-      ons.createAlertDialog('page.html', options).then((element) => {
-        expect(spy).to.have.been.called.once;
-        element.remove();
-        done();
-      });
-    });
-
-    it('returns a valid alertDialog element', (done) => {
-      ons.createAlertDialog('page.html').then((element) => {
-        expect(element).to.be.instanceof(window.ons.AlertDialogElement);
-        element.remove();
-        done();
-      });
-    });
   });
 
   describe('#resolveLoadingPlaceholder()', () => {
