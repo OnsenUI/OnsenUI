@@ -1,22 +1,30 @@
 :root {
-  --list-header-color: var(--text-color);
   --list-item-color: var(--text-color);
   --list-item-active-background-color: var(--list-tap-active-background-color);
   --list-item-separator-color: var(--border-color);
-  --list-header-font-size: 12px;
   --list-border: 1px solid var(--list-item-separator-color);
   --list-item-min-height: 44px;
   --list-item-margin: 0 0 -1px 0;
   --list-item-padding: 0 0 0 14px;
+  --list-border-top: 1px solid var(--list-item-separator-color);
+  --list-border-bottom: 1px solid var(--list-item-separator-color);
+  --list-header-color: var(--text-color);
+  --list-header-font-size: 12px;
   --list-header-padding: 0 0 0 15px;
   --list-header-min-height: 24px;
   --list-header-font-weight: var(--font-weight--large);
-  --list-border-top: 1px solid var(--list-item-separator-color);
-  --list-border-bottom: 1px solid var(--list-item-separator-color);
   --material-list-item-min-height: 48px;
   --material-list-item-padding: 0 0 0 16px;
   --material-list-item-separator-color: #eee;
   --inset-list-border: 1px solid var(--list-item-separator-color);
+  --list-title-color: #6d6d72;
+  --list-title-font-size: 13px;
+  --list-title-font-weight: 500;
+  --list-title-line-height: 24px;
+  --material-list-title-color: #757575;
+  --material-list-title-font-size: 13px;
+  --material-list-title-font-weight: 500;
+  --material-list-title-line-height: 24px;
 
   --retina-list-item-border: {
     border-bottom: none;
@@ -883,4 +891,56 @@
 .list-item--longdivider.list-item--chevron:before { /* FIXME */
   border: none;
   background-image: none;
+}
+
+/*~
+  name: List title
+  category: List
+  markup: |
+    <div class="list-title">LIST TITLE</div>
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-title {
+  @apply(--reset-base);
+  @apply(--reset-cursor);
+  @apply(--reset-font);
+  color: var(--list-title-font-size);
+  text-align: left;
+  box-sizing: border-box;
+  padding: var(--list-item-padding);
+  font-size: var(--list-title-font-size);
+  font-weight: var(--list-title-font-weight);
+  line-height: var(--list-title-line-height);
+}
+
+/*~
+  name: Material List Title
+  category: List
+  markup: |
+    <h3 class="list-title list-title--material">LIST TITLE</h3>
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">Item</div>
+      </li>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-title--material {
+  @apply(--material-font);
+  color: var(--material-list-title-color);
+  font-size: var(--material-list-title-font-size);
+  padding: var(--material-list-item-padding);
+  font-weight: var(--material-list-title-font-weight);
+  line-height: var(--material-list-title-line-height);
 }

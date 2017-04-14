@@ -10,6 +10,8 @@
   --alpha-lighten: 70%;
   --font-size: 17px;
   --font-weight: 400;
+  --material-font-size: 17px;
+  --material-font-weight: 400;
   --letter-spacing: 0;
   --font-size--mini: calc(var(--font-size) - 3px);
   --font-size--large: 17px;
