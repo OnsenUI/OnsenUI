@@ -912,7 +912,7 @@
   @apply(--reset-base);
   @apply(--reset-cursor);
   @apply(--reset-font);
-  color: var(--list-title-font-size);
+  color: var(--list-title-color);
   text-align: left;
   box-sizing: border-box;
   padding: var(--list-item-padding);
