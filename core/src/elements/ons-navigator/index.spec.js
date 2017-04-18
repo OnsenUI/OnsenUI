@@ -659,8 +659,8 @@ describe('OnsNavigatorElement', () => {
 
   describe('#backButton', () => {
     beforeEach((done) => {
-      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-back-button>Back</ons-back-button><ons-page>hoge</ons-page></ons-template>`)
-      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-back-button>Back</ons-back-button><ons-page>hoge2</ons-page></ons-template>`);
+      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></ons-template>`)
+      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-page><ons-back-button>Back</ons-back-button>hoge2</ons-page></ons-template>`);
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);

@@ -39,15 +39,7 @@ internal.isEnabledAutoStatusBarFill = () => {
  * @param {String} html
  * @return {String}
  */
-internal.normalizePageHTML = html => {
-  html = ('' + html).trim();
-
-  if (!html.match(/^<ons-page/)) {
-    html = '<ons-page _muted>' + html + '</ons-page>';
-  }
-
-  return html;
-};
+internal.normalizePageHTML = html => ('' + html).trim();
 
 internal.waitDOMContentLoaded = callback => {
   if (window.document.readyState === 'loading' || window.document.readyState == 'uninitialized') {

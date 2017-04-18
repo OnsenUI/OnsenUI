@@ -48,19 +48,40 @@ describe('OnsPageElement', () => {
 
   describe('#attachedCallback()', () => {
     it('fires \'init\' event', () => {
-      var initPromise = new Promise(function(resolve, reject) {
-        document.addEventListener('init', resolve);
+      const initPromise = new Promise(function(resolve, reject) {
+        const resolveOnce = () => {
+          element.removeEventListener('init', resolveOnce);
+          resolve();
+        };
+
+        element.addEventListener('init', resolveOnce);
       });
       document.body.appendChild(element);
       expect(element.parentNode).to.be.ok;
       return expect(initPromise).to.eventually.be.fulfilled;
     });
 
-    it('consumes _skipinit attribute if present', () => {
-      element.setAttribute('_skipinit', '');
-      expect(element.hasAttribute('_skipinit')).to.be.true;
-      document.body.appendChild(element);
-      expect(element.hasAttribute('_skipinit')).to.be.false;
+    it('fires \'init\' event only once', (done) => {
+      const spy = chai.spy();
+
+      const page = ons._util.createElement(`<ons-page>
+        <div class="content">...</div>
+      </ons-page>`);
+      page.addEventListener('init', spy);
+
+      document.body.appendChild(page);
+      setImmediate(() => {
+        page.remove();
+        setImmediate(() => {
+          document.body.appendChild(page);
+          setImmediate(() => {
+            expect(spy).to.have.been.called.once;
+            page.removeEventListener('init', spy);
+            page.remove();
+            done();
+          });
+        });
+      });
     });
   });
 
@@ -77,11 +98,12 @@ describe('OnsPageElement', () => {
   describe('#detachedCallback', () => {
     it('fires \'destroy\' event', () => {
       var spy = chai.spy();
-      document.addEventListener('destroy', spy);
+      element.addEventListener('destroy', spy);
       document.body.appendChild(element);
       element._destroy();
       expect(element.parentNode).not.to.be.ok;
       expect(spy).to.have.been.called.once;
+      element.removeEventListener('destroy', spy);
     });
   });
 
@@ -177,11 +199,17 @@ describe('OnsPageElement', () => {
   });
 
   describe('#_show()', () => {
-    it('fires \'show\' event', () => {
-      var showPromise = new Promise(resolve => {
-        document.addEventListener('show', resolve);
+    it('fires \'show\' event when attached if page is standalone', () => {
+      const showPromise = new Promise(function(resolve, reject) {
+        const resolveOnce = () => {
+          element.removeEventListener('show', resolveOnce);
+          resolve();
+        };
+
+        element.addEventListener('show', resolveOnce);
       });
       document.body.appendChild(element);
+      expect(element.parentNode).to.be.ok;
       return expect(showPromise).to.eventually.be.fulfilled;
     });
   });
@@ -189,11 +217,12 @@ describe('OnsPageElement', () => {
   describe('#_hide()', () => {
     it('fires \'hide\' event', () => {
       var spy = chai.spy();
-      document.addEventListener('hide', spy);
+      element.addEventListener('hide', spy);
       document.body.appendChild(element);
       element._isShown = true;
       element._hide();
       expect(spy).to.have.been.called.once;
+      element.removeEventListener('hide', spy);
     });
   });
 
