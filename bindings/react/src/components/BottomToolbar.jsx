@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-bottom-toolbar
@@ -24,7 +24,7 @@ BottomToolbar.propTypes = {
    *  [en]Specify modifier name to specify custom styles. Optional.[/en]
    *  [jp][/jp]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default BottomToolbar;

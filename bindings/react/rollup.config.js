@@ -26,13 +26,15 @@ export default {
     'react',
     'react-dom/server',
     'react-dom',
-    'onsenui'
+    'onsenui',
+    'prop-types'
   ],
   globals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'react-dom/server': 'ReactDOMServer',
-    'onsenui': 'ons'
+    'onsenui': 'ons',
+    'prop-types': 'PropTypes'
   },
   format: 'umd',
   moduleName: 'Ons',
