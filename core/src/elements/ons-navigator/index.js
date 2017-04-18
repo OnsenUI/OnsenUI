@@ -736,7 +736,6 @@ export default class NavigatorElement extends BaseElement {
     }
 
     page.style.visibility = 'hidden';
-    page.setAttribute('_skipinit', '');
     page.parentNode.appendChild(page);
     return this._pushPage(options);
   }
