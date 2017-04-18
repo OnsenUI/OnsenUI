@@ -6,6 +6,7 @@ dev
 
 ### New Features
 
+* Dialogs: Implement 'portal' functionality.
 * VOnsModel: Supports dot notation 'container.value'.
 
 2.0.0-beta.1
