@@ -106,7 +106,6 @@ describe('ons', () => {
 
     it('does not attach by default', () => {
       return ons.createElement('page.html').then((element) => {
-        console.log('AAAAAAAAAAAAAAAA', element)
         expect(element.parentElement).not.to.be.ok;
       });
     });
@@ -124,15 +123,13 @@ describe('ons', () => {
 
     it('calls the linking function when appending', () => {
       const options = {
-        link: () => {},
+        link: chai.spy(),
         append: true
       };
-      const spy = chai.spy.on(options, 'link');
       return ons.createElement('page.html', options).then((element) => {
-        expect(spy).to.have.been.called.once;
+        expect(options.link).to.have.been.called.once;
       });
     });
-
   });
 
   describe('#resolveLoadingPlaceholder()', () => {
