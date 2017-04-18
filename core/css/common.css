@@ -203,8 +203,7 @@ ons-splitter-side[side="right"][mode="collapse"] {
 }
 
 ons-splitter-side[mode="split"] {
-  transform: none !important;
-  transition: none !important;
+  z-index: 2;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {
