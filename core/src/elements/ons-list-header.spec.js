@@ -5,7 +5,7 @@ describe('ons-list-header', () => {
     expect(window.ons.ListHeaderElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'list-header\' by default', () => {
+  it('classList contains \'list-header\' by default', () => {
     const element = new ons.ListHeaderElement();
     expect(element.classList.contains('list-header')).to.be.true;
     element.setAttribute('class', 'foo');
@@ -13,7 +13,7 @@ describe('ons-list-header', () => {
     expect(element.classList.contains('foo')).to.be.true;
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
+  it('provides modifier attribute', () => {
     const element = new ons.ListHeaderElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list-header--hoge')).to.be.true;

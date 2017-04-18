@@ -1,12 +1,22 @@
 CHANGELOG
 ====
 
-dev
+2.0.0-beta.2
+----
+
+### New Features
+
+* Dialogs: Implement 'portal' functionality.
+* VOnsModel: Supports dot notation 'container.value'.
+
+2.0.0-beta.1
 ----
 
 ### Bug fixes
 
 * VOnsNavigator: Options object is not modified anymore.
+* VOnsNavigator: Fix support for Vue router.
+* Events: Fixed deriving events from the core.
 
 2.0.0-beta.0
 ----

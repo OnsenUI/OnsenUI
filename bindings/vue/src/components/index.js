@@ -11,7 +11,7 @@ export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
-import { hidable, hasOptions, dialogCancel, deriveDBB, deriveHandler, selfProvider } from '../mixins';
+import { hidable, hasOptions, dialogCancel, deriveDBB, deriveHandler, selfProvider, portal } from '../mixins';
 
 const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
 
@@ -40,5 +40,5 @@ export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction')]);
 export const VOnsSplitter = extend('splitter', [selfProvider, deriveDBB]);
 export const VOnsFab = extend('fab', [hidable]);
 export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);
-export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB]);
-export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB]);
+export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
+export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB, portal]);

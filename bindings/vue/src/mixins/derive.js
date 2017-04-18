@@ -69,7 +69,7 @@ const deriveHandler = handlerName => {
 const deriveEvents = {
   mounted() {
     this._handlers = {};
-    this._boundEvents = this.$el.constructor.__proto__.events || [];
+    this._boundEvents = this.$el.constructor.events || [];
 
     this._boundEvents.forEach(key => {
       this._handlers[eventToHandler(key)] = event => {
