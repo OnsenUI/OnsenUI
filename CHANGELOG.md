@@ -5,6 +5,11 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * ons-splitter: Push animation.
+ * ons-splitter: Reveal animation.
+
 ### Bug Fixes
 
  * angular1: Page loader now throws `destroy` event when page is unloaded.
@@ -36,9 +41,6 @@ v2.2.2
 
 ### New Features
 
- * ons-splitter: Push animation.
- * ons-splitter: Reveal animation.
- * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided.
  * angular1: `ons-back-button` default behavior is now overriden if `ng-click` is provided ([#1749](https://github.com/OnsenUI/OnsenUI/issues/1749)).
 
 ### Bug Fixes
