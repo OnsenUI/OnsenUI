@@ -169,6 +169,7 @@
 
 .switch--material__input {
   @apply(--hide-input);
+  z-index: 0;
 }
 
 .switch--material__handle {

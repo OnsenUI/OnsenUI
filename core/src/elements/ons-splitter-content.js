@@ -83,11 +83,13 @@ export default class SplitterContentElement extends BaseElement {
     this._pageLoader = defaultPageLoader;
 
     contentReady(this, () => {
-      const page = this._getPageTarget();
+      rewritables.ready(this, () => {
+        const page = this._getPageTarget();
 
-      if (page) {
-        this.load(page);
-      }
+        if (page) {
+          this.load(page);
+        }
+      });
     });
   }
 

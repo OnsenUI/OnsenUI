@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -60,7 +60,7 @@
   ],
   "homepage": "https://onsen.io/",
   "devDependencies": {
-    "@webcomponents/custom-elements": "webcomponents/custom-elements#1.0.0-rc.2",
+    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-eslint": "^6.0.3",
     "babel-plugin-angularjs-annotate": "^0.7.0",
     "babel-preset-es2015-rollup": "^3.0.0",
