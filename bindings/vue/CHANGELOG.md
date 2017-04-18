@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* VOnsModel: Supports dot notation 'container.value'.
+
 2.0.0-beta.1
 ----
 
