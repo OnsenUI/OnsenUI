@@ -457,7 +457,9 @@ export default class CarouselElement extends BaseElement {
     const max = this._calculateMaxScroll();
 
     this._scroll = Math.max(0, Math.min(max, scroll));
+    console.log('this._scroll', this._scroll);
     return this._scrollTo(this._scroll, options).then(() => {
+      console.log('setActiveIndex');
       this._tryFirePostChangeEvent();
       return this;
     });
@@ -478,6 +480,12 @@ export default class CarouselElement extends BaseElement {
     const scroll = this._scroll - (this._offset || 0);
     const count = this.itemCount;
     const size = this._getCarouselItemSize();
+
+    console.log('this._scroll', this._scroll);
+    console.log('this._offset', this._offset);
+    console.log('scroll', scroll);
+    console.log('count', count);
+    console.log('size', size);
 
     if (scroll < 0) {
       return 0;
@@ -563,6 +571,10 @@ export default class CarouselElement extends BaseElement {
     return this.getAttribute('direction') === 'vertical';
   }
 
+  _show() {
+    window.addEventListener('resize', this._boundOnResize, true);
+  }
+
   _prepareEventListeners() {
     this._gestureDetector = new GestureDetector(this, {
       dragMinDistance: 1,
@@ -574,6 +586,10 @@ export default class CarouselElement extends BaseElement {
     this._updateAutoRefresh();
 
     window.addEventListener('resize', this._boundOnResize, true);
+  }
+
+  _hide() {
+    window.removeEventListener('resize', this._boundOnResize, true);
   }
 
   _removeEventListeners() {
@@ -610,6 +626,9 @@ export default class CarouselElement extends BaseElement {
 
   _tryFirePostChangeEvent() {
     const currentIndex = this.getActiveIndex();
+
+    console.log('currentIndex', currentIndex);
+    console.log('this._lastActiveIndex', this._lastActiveIndex);
 
     if (this._lastActiveIndex !== currentIndex) {
       const lastActiveIndex = this._lastActiveIndex;
@@ -996,6 +1015,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   disconnectedCallback() {
+    console.log('carousel disconnected');
     this._removeEventListeners();
   }
 

@@ -8,6 +8,7 @@ dev
 ### Bug Fixes
 
  * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952)..
 
 v2.2.4
 ----
