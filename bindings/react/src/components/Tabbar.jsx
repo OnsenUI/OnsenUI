@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -112,7 +113,7 @@ Tabbar.propTypes = {
    *  [en] The index of the tab to highlight.[/en]
    *  [jp] [/jp]
    */
-  index: React.PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 
   /**
    * @name renderTabs
@@ -121,7 +122,7 @@ Tabbar.propTypes = {
    *  [en] The index of the first tab to show.[/en]
    *  [jp] [/jp]
    */
-  renderTabs: React.PropTypes.func.isRequired,
+  renderTabs: PropTypes.func.isRequired,
 
   /**
    * @name position
@@ -130,7 +131,7 @@ Tabbar.propTypes = {
    *  [en] Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top). [/en]
    *  [jp] [/jp]
    */
-  position: React.PropTypes.string,
+  position: PropTypes.string,
 
   /**
    * @name animation
@@ -139,7 +140,7 @@ Tabbar.propTypes = {
    *  [en] Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
    *  [jp] [/jp]
    */
-  animation: React.PropTypes.oneOf(['none', 'slide', 'fade']),
+  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
 
   /**
    * @name animationOptions
@@ -149,7 +150,7 @@ Tabbar.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onPreChange
@@ -158,7 +159,7 @@ Tabbar.propTypes = {
    *  [en]Called just before the tab is changed.[/en]
    *  [jp] [/jp]
    */
-  onPreChange: React.PropTypes.func,
+  onPreChange: PropTypes.func,
 
   /**
    * @name onPostChange
@@ -167,7 +168,7 @@ Tabbar.propTypes = {
    *  [en]Called just after the tab is changed.[/en]
    *  [jp] [/jp]
    */
-  onPostChange: React.PropTypes.func,
+  onPostChange: PropTypes.func,
 
   /**
    * @name onReactive
@@ -176,7 +177,7 @@ Tabbar.propTypes = {
    *  [en]Called if the already open tab is tapped again.[/en]
    *  [jp] [/jp]
    */
-  onReactive: React.PropTypes.func
+  onReactive: PropTypes.func
 };
 
 Tabbar.defaultProps = {

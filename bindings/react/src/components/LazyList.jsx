@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 
 /**
@@ -107,7 +108,7 @@ LazyList.propTypes = {
    *  [en]The appearance of the lazy list.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name length
@@ -116,7 +117,7 @@ LazyList.propTypes = {
    *  [en]The length of the list.[/en]
    *  [jp] [/jp]
    */
-  length: React.PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
 
   /**
    * @name renderRow
@@ -125,7 +126,7 @@ LazyList.propTypes = {
    *  [en] A function given the index of the to display row, renders it.[/en]
    *  [jp] [/jp]
    */
-  renderRow: React.PropTypes.func.isRequired,
+  renderRow: PropTypes.func.isRequired,
 
   /**
    * @name calculateItemHeight
@@ -134,7 +135,7 @@ LazyList.propTypes = {
    *  [en] A function given the index of the to row, returns the height of it.[/en]
    *  [jp] [/jp]
    */
-  calculateItemHeight: React.PropTypes.func.isRequired
+  calculateItemHeight: PropTypes.func.isRequired
 };
 
 export default LazyList;
