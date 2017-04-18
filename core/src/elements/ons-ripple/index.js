@@ -17,7 +17,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import internal from '../../ons/internal';
-import BaseElement from '../../ons/base-element';
+import BaseElement from '../base/base-element';
 import Animator from './animator-css';
 import contentReady from '../../ons/content-ready';
 

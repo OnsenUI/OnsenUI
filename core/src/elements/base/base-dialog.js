@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
-import BaseElement from '../../ons/base-element';
+import BaseElement from './base-element';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import DoorLock from '../../ons/doorlock';

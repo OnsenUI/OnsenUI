@@ -20,7 +20,7 @@ import AnimatorFactory from '../ons/internal/animator-factory';
 import orientation from '../ons/orientation';
 import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import SplitterAnimator from './ons-splitter/animator';
 import GestureDetector from '../ons/gesture-detector';
 import DoorLock from '../ons/doorlock';

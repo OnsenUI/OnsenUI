@@ -21,7 +21,7 @@ import AnimatorFactory from '../../ons/internal/animator-factory';
 import OverlaySplitterAnimator from './overlay-animator';
 import PushSplitterAnimator from './push-animator';
 import RevealSplitterAnimator from './reveal-animator';
-import BaseElement from '../../ons/base-element';
+import BaseElement from '../base/base-element';
 import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 import contentReady from '../../ons/content-ready';
 

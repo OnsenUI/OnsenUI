@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 import DoorLock from '../ons/doorlock';
 import animit from '../ons/animit';
