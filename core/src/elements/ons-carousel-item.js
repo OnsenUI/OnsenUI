@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import ModifierUtil from '../ons/internal/modifier-util';
 const scheme = {'': 'carousel-item--*'};
 

@@ -19,11 +19,9 @@ import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import {DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator} from './animator';
+import { DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator } from './animator';
 import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
-import DoorLock from '../../ons/doorlock';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
@@ -79,7 +77,7 @@ const _animatorDict = {
  *   document.getElementById('dialog').show();
  * </script>
  */
-export default class DialogElement extends BaseElement {
+export default class DialogElement extends BaseDialogElement {
 
   /**
    * @event preshow
@@ -179,6 +177,15 @@ export default class DialogElement extends BaseElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
+  init() {
+    super.init();
+    contentReady(this, () => this._compile());
+  }
+
+  get _scheme() {
+    return scheme;
+  }
+
   get _mask() {
     return util.findChild(this, '.dialog-mask');
   }
@@ -187,18 +194,8 @@ export default class DialogElement extends BaseElement {
     return util.findChild(this, '.dialog');
   }
 
-  init() {
-    contentReady(this, () => this._compile());
-
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = () => this._cancel();
-
-    this._updateAnimatorFactory();
-  }
-
   _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
+    return new AnimatorFactory({
       animators: _animatorDict,
       baseClass: DialogAnimator,
       baseClassName: 'DialogAnimator',
@@ -246,7 +243,7 @@ export default class DialogElement extends BaseElement {
 
     this.setAttribute('status-bar-fill', '');
 
-    ModifierUtil.initModifier(this, scheme);
+    ModifierUtil.initModifier(this, this._scheme);
   }
 
   /**
@@ -256,31 +253,6 @@ export default class DialogElement extends BaseElement {
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get onDeviceBackButton() {
-    return this._backButtonHandler;
-  }
-
-  set onDeviceBackButton(callback) {
-    if (this._backButtonHandler) {
-      this._backButtonHandler.destroy();
-    }
-
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
-  }
-
-  _cancel() {
-    if (this.cancelable && !this._running) {
-      this._running = true;
-      this.hide()
-        .then(
-          () => {
-            this._running = false;
-            util.triggerElementEvent(this, 'dialog-cancel');
-          },
-          () => this._running = false
-        );
-    }
-  }
 
   /**
    * @method show
@@ -302,52 +274,6 @@ export default class DialogElement extends BaseElement {
    *  [ja]ダイアログを開きます。[/ja]
    * @return {Promise} Resolves to the displayed element.
    */
-  show(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'preshow', {
-      dialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryShow = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        this.style.display = 'block';
-        this._mask.style.opacity = '1';
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.show(this, () => {
-              this._visible = true;
-              unlock();
-
-              util.triggerElementEvent(this, 'postshow', {dialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryShow()));
-      });
-    } else {
-      return Promise.reject('Canceled in preshow event.');
-    }
-  }
 
   /**
    * @method hide
@@ -371,50 +297,6 @@ export default class DialogElement extends BaseElement {
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
-  hide(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'prehide', {
-      dialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryHide = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.hide(this, () => {
-              this.style.display = 'none';
-              this._visible = false;
-              unlock();
-
-              util.triggerElementEvent(this, 'posthide', {dialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryHide()));
-      });
-    } else {
-      return Promise.reject('Canceled in prehide event.');
-    }
-  }
 
   /**
    * @property visible
@@ -424,9 +306,6 @@ export default class DialogElement extends BaseElement {
    *   [en]Whether the dialog is visible or not.[/en]
    *   [ja]要素が見える場合に`true`。[/ja]
    */
-  get visible() {
-    return this._visible;
-  }
 
   /**
    * @property disabled
@@ -435,13 +314,6 @@ export default class DialogElement extends BaseElement {
    *   [en]Whether the dialog is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   /**
    * @property cancelable
@@ -450,45 +322,6 @@ export default class DialogElement extends BaseElement {
    *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
    */
-  set cancelable(value) {
-    return util.toggleAttribute(this, 'cancelable', value);
-  }
-
-  get cancelable() {
-    return this.hasAttribute('cancelable');
-  }
-
-  connectedCallback() {
-    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
-
-    contentReady(this, () => {
-      this._mask.addEventListener('click', this._boundCancel, false);
-    });
-  }
-
-  disconnectedCallback() {
-    this._backButtonHandler.destroy();
-    this._backButtonHandler = null;
-
-    this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'animation'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'animation') {
-      this._updateAnimatorFactory();
-    }
-  }
-
-  static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
-  }
 
   /**
    * @param {String} name

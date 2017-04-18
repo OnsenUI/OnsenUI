@@ -28,7 +28,7 @@ import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
 import NoneNavigatorTransitionAnimator from './none-animator';
 import platform from '../../ons/platform';
 import contentReady from '../../ons/content-ready';
-import BaseElement from '../../ons/base-element';
+import BaseElement from '../base/base-element';
 import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
 import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
