@@ -21,7 +21,7 @@ import internal from '../../ons/internal';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import BaseElement from '../../ons/base-element';
+import BaseElement from '../base/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
 import TabElement from '../ons-tab';
 import contentReady from '../../ons/content-ready';
