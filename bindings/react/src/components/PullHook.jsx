@@ -49,7 +49,7 @@ class PullHook extends BasicComponent {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.onChange);
-    this._pullHook.onAction = this.props.onLoad;
+    this._pullHook.onAction = this.props.onLoad || null;
   }
 
   componentWillUnmount() {
