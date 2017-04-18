@@ -40,10 +40,10 @@ describe('OnsFabElement', () => {
     it('is called when the "position" attribute changes', () => {
       const spy = chai.spy.on(fab, '_updatePosition');
 
-      fab.setAttribute('position', 'top left');
-      fab.setAttribute('position', 'bottom left');
+      fab.setAttribute('position', 'top left'); // causes _updatePosition twice (via initialization and incremental compile)
+      fab.setAttribute('position', 'bottom left'); // causes _updatePosition once (via incremental compile)
 
-      expect(spy).to.have.been.called.twice;
+      expect(spy).to.have.been.called.exactly(3);
     });
 
     it('adds the correct class', () => {
