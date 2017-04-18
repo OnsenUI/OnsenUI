@@ -4,8 +4,8 @@ describe('OnsTabbarElement', () => {
   let element, template, template2;
 
   beforeEach(done => {
-    template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
-    template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>');
+    template = ons._util.createElement('<ons-template id="hoge"><ons-page>hogehoge</ons-page></ons-template>');
+    template2 = ons._util.createElement('<ons-template id="fuga"><ons-page>fugafuga</ons-page></ons-template>');
     element = new ons.TabbarElement();
     document.body.appendChild(template);
     document.body.appendChild(template2);

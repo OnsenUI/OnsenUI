@@ -46,7 +46,7 @@ describe('OnsSplitterSideElement', () => {
     let template;
 
     beforeEach(() => {
-      template = ons._util.createElement(`<ons-template id="hoge.html">hoge</ons-template>`);
+      template = ons._util.createElement(`<ons-template id="hoge.html"><ons-page>hoge</ons-page></ons-template>`);
       document.body.appendChild(template);
     });
 
