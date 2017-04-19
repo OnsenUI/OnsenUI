@@ -22,6 +22,7 @@
   --list-title-font-size: 13px;
   --list-title-font-weight: 500;
   --list-title-line-height: 24px;
+  --list-title-padding: 0 0 0 16px;
   --material-list-title-color: #757575;
   --material-list-title-font-size: 14px;
   --material-list-title-font-weight: 500;
@@ -925,7 +926,8 @@
   color: var(--list-title-color);
   text-align: left;
   box-sizing: border-box;
-  padding: var(--list-item-padding);
+  padding: var(--list-title-padding);
+  margin: 0;
   font-size: var(--list-title-font-size);
   font-weight: var(--list-title-font-weight);
   line-height: var(--list-title-line-height);
@@ -950,8 +952,8 @@
   @apply(--material-font);
   color: var(--material-list-title-color);
   font-size: var(--material-list-title-font-size);
-  padding: 0;
-  margin: var(--material-list-title-padding);
+  margin: 0;
+  padding: var(--material-list-title-padding);
   font-weight: var(--material-list-title-font-weight);
   line-height: var(--material-list-title-line-height);
 }
