@@ -230,7 +230,7 @@ export default class NavigatorElement extends BaseElement {
    * @property pageLoader
    * @type {PageLoader}
    * @description
-   *   [en][/en]
+   *   [en]PageLoader instance. It can be overriden to change the way pages are loaded by this element. Useful for lib developers.[/en]
    *   [ja]PageLoaderインスタンスを格納しています。[/ja]
    */
   get pageLoader() {
@@ -252,7 +252,7 @@ export default class NavigatorElement extends BaseElement {
    * @property page
    * @type {*}
    * @description
-   *   [en][/en]
+   *   [en]Specify the page to be loaded during initialization. This value takes precedence over the `page` attribute. Useful for lib developers.[/en]
    *   [ja]初期化時に読み込むページを指定します。`page`属性で指定した値よりも`page`プロパティに指定した値を優先します。[/ja]
    */
   get page() {
