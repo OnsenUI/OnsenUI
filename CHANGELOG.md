@@ -14,6 +14,7 @@ dev
 
  * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
 
 v2.2.4
 ----
