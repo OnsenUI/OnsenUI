@@ -62,6 +62,7 @@
   "devDependencies": {
     "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-eslint": "^6.0.3",
+    "babel-plugin-angularjs-annotate": "^0.7.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
@@ -87,7 +88,6 @@
     "gulp-html2js": "^0.4.2",
     "gulp-if": "^2.0.0",
     "gulp-load-plugins": "^1.2.4",
-    "gulp-ng-annotate": "^2.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-protractor": "^2.4.0",
     "gulp-remember": "^0.3.0",

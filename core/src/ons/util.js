@@ -120,6 +120,11 @@ util.propagateAction = (element, action) => {
   }
 };
 
+/**
+ * @param {String} string - string to be camelized
+ * @return {String} Camelized string
+ */
+util.camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 
 /**
  * @param {String} selector - tag and class only

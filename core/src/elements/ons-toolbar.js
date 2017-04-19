@@ -19,7 +19,7 @@ import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'toolbar';

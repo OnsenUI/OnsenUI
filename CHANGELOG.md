@@ -5,12 +5,22 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * ons-splitter: Push animation.
+ * ons-splitter: Reveal animation.
+ * ons.createElement: Allows creating new elements from templates or inline HTML.
  * css-components: Added `list-title` components.
  * core: Added `ons-list-title` elements.
 
 ### Bug Fixes
 
  * angular1: Page loader now throws `destroy` event when page is unloaded.
+
+### BREAKING CHANGES
+
+* ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
+* ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
 
 v2.2.4
 ----
@@ -47,6 +57,7 @@ v2.2.2
  * core: Use `self` in `setImmediate` polyfill ([#1903](https://github.com/OnsenUI/OnsenUI/issues/1903)).
  * core: Make `ons.platform.isSafari()` compatible with Safari 10 ([#1910](https://github.com/OnsenUI/OnsenUI/issues/1910)).
  * ons-lazy-repeat: Fixed [#1899](https://github.com/OnsenUI/OnsenUI/issues/1899) and [#1871](https://github.com/OnsenUI/OnsenUI/issues/1871).
+ * ons-splitter: Overlay animation correctly hides mask when entering split mode if the menu was visible before.
  * angular1: Fixed [#1884](https://github.com/OnsenUI/OnsenUI/issues/1884).
 
 v2.2.1

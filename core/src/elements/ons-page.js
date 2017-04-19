@@ -19,7 +19,7 @@ import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import deviceBackButtonDispatcher from '../ons/device-back-button-dispatcher';
 import contentReady from '../ons/content-ready';
 
@@ -157,8 +157,6 @@ export default class PageElement extends BaseElement {
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
-      this._isMuted = this.hasAttribute('_muted');
-      this._skipInit = this.hasAttribute('_skipinit');
     });
   }
 
@@ -170,13 +168,7 @@ export default class PageElement extends BaseElement {
     this._initialized = true;
 
     contentReady(this, () => {
-      if (!this._isMuted) {
-        if (this._skipInit) {
-          this.removeAttribute('_skipinit');
-        } else {
-          setImmediate(() => util.triggerElementEvent(this, 'init'));
-        }
-      }
+      setImmediate(() => util.triggerElementEvent(this, 'init'));
 
       if (!util.hasAnyComponentAsParent(this)) {
         setImmediate(() => this._show());
@@ -326,7 +318,7 @@ export default class PageElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', '_muted', '_skipinit', 'on-infinite-scroll', 'class'];
+    return ['modifier', 'on-infinite-scroll', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -338,12 +330,6 @@ export default class PageElement extends BaseElement {
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case '_muted':
-        this._isMuted = this.hasAttribute('_muted');
-        break;
-      case '_skipinit':
-        this._skipInit = this.hasAttribute('_skipinit');
         break;
       case 'on-infinite-scroll':
         if (current === null) {
@@ -407,11 +393,7 @@ export default class PageElement extends BaseElement {
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
-
-      if (!this._isMuted) {
-        util.triggerElementEvent(this, 'show');
-      }
-
+      util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
     }
   }
@@ -419,11 +401,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
-
-      if (!this._isMuted) {
-        util.triggerElementEvent(this, 'hide');
-      }
-
+      util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
     }
   }
@@ -431,9 +409,7 @@ export default class PageElement extends BaseElement {
   _destroy() {
     this._hide();
 
-    if (!this._isMuted) {
-      util.triggerElementEvent(this, 'destroy');
-    }
+    util.triggerElementEvent(this, 'destroy');
 
     if (this.onDeviceBackButton) {
       this.onDeviceBackButton.destroy();

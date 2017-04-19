@@ -97,4 +97,23 @@ const dialogCancel = {
   }
 };
 
-export { hidable, hasOptions, modifier, selfProvider, dialogCancel };
+// Moves the element to a global position
+const portal = {
+  mounted() {
+    document.body.appendChild(this.$el);
+  },
+  updated() {
+    !this._isDestroyed && document.body.appendChild(this.$el);
+  },
+  activated() {
+    !this._isDestroyed && document.body.appendChild(this.$el);
+  },
+  deactivated() {
+    this.$el.remove();
+  },
+  beforeDestroy() {
+    this.$el.remove();
+  }
+};
+
+export { hidable, hasOptions, modifier, selfProvider, dialogCancel, portal };
