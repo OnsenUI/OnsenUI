@@ -138,10 +138,8 @@ limitations under the License.
          * @param {Function} callback
          */
         compileAndLink: function(view, pageElement, callback) {
-          var link = $compile(pageElement);
-          var pageScope = view._scope.$new();
-
-          link(pageScope);
+          const link = $compile(pageElement);
+          const pageScope = view._scope.$new();
 
           /**
            * Overwrite page scope.
@@ -149,7 +147,8 @@ limitations under the License.
           angular.element(pageElement).data('_scope', pageScope);
 
           pageScope.$evalAsync(function() {
-            callback(pageElement);
+            callback(pageElement); // Attach and prepare
+            link(pageScope); // Run the controller
           });
         },
 
@@ -164,10 +163,7 @@ limitations under the License.
                 this.compileAndLink(
                   view,
                   window.ons._util.createElement(html.trim()),
-                  element => {
-                    parent.appendChild(element);
-                    done(element);
-                  }
+                  element => done(parent.appendChild(element))
                 );
               });
             },
