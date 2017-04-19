@@ -5,6 +5,9 @@ CHANGELOG
 dev
 ----
 
+ * css-components: Added `list-title` components.
+ * core: Added `ons-list-title` elements.
+
 ### Bug Fixes
 
  * angular1: Page loader now throws `destroy` event when page is unloaded.
