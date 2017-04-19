@@ -7,7 +7,7 @@
 import './polyfill-switches';
 
 // Polyfill Custom Elements v1 with global namespace pollution
-import '@webcomponents/custom-elements';
+import '@webcomponents/custom-elements/src/custom-elements';
 
 // Polyfill `Object.setPrototypeOf` with global namespace pollution
 import 'core-js/fn/object/set-prototype-of';
