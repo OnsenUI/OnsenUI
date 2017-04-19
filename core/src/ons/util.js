@@ -246,13 +246,13 @@ util.findToolbarPage = container => {
   const page = util.getTopPage(container);
 
   if (page) {
-    if (util.findChild(page, 'ons-toolbar')) {
+    if (page._canAnimateToolbar()) {
       return page;
     }
 
     for (let i = 0; i < page._contentElement.children.length; i++) {
       const nextPage = util.getTopPage(page._contentElement.children[i]);
-      if (nextPage) {
+      if (nextPage && !/ons-tabbar/i.test(page._contentElement.children[i].tagName)) {
         return util.findToolbarPage(nextPage);
       }
     }
