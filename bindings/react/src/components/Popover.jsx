@@ -1,5 +1,5 @@
 import BaseDialog from './BaseDialog.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 /**
@@ -55,7 +55,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  getTarget: React.PropTypes.func.isRequired,
+  getTarget: PropTypes.func.isRequired,
     /**
    * @name onCancel
    * @type function
@@ -66,7 +66,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onCancel: React.PropTypes.func,
+  onCancel: PropTypes.func,
 
   /**
    * @name isOpen
@@ -78,7 +78,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isOpen: React.PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 
   /**
    * @name isCancelable
@@ -91,7 +91,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isCancelable: React.PropTypes.bool,
+  isCancelable: PropTypes.bool,
 
   /**
    * @name isDisabled
@@ -103,7 +103,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isDisabled: React.PropTypes.bool,
+  isDisabled: PropTypes.bool,
 
   /**
    * @name animation
@@ -115,7 +115,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name modifier
@@ -125,7 +125,7 @@ Popover.propTypes = {
    *  [en]The appearance of the dialog.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name maskColor
@@ -135,7 +135,7 @@ Popover.propTypes = {
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
    *  [jp] [/jp]
    */
-  maskColor: React.PropTypes.string,
+  maskColor: PropTypes.string,
 
   /**
    * @name animationOptions
@@ -145,7 +145,7 @@ Popover.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onPreShow
@@ -157,7 +157,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  onPreShow: React.PropTypes.func,
+  onPreShow: PropTypes.func,
 
   /**
    * @name onPostShow
@@ -169,7 +169,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  onPostShow: React.PropTypes.func,
+  onPostShow: PropTypes.func,
 
   /**
    * @name onPreHide
@@ -179,7 +179,7 @@ Popover.propTypes = {
    *  [en]Called just before the alert dialog is hidden.[/en]
    *  [jp][/jp]
    */
-  onPreHide: React.PropTypes.func,
+  onPreHide: PropTypes.func,
 
   /**
    * @name onPostHide
@@ -189,7 +189,7 @@ Popover.propTypes = {
    *  [en]Called just after the alert dialog is hidden.[/en]
    *  [jp][/jp]
    */
-  onPostHide: React.PropTypes.func,
+  onPostHide: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
@@ -201,7 +201,7 @@ Popover.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 export default Popover;

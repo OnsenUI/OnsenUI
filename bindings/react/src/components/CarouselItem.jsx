@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-carousel-item
@@ -35,7 +36,7 @@ CarouselItem.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default CarouselItem;

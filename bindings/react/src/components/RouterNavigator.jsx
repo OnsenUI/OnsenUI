@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -258,7 +259,7 @@ RouterNavigator.propTypes = {
    *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
    *  [jp] どうしよう[/jp]
    */
-  renderPage: React.PropTypes.func.isRequired,
+  renderPage: PropTypes.func.isRequired,
   /**
    * @name initialRouteStack
    * @type array
@@ -270,7 +271,7 @@ RouterNavigator.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  initialRouteStack: React.PropTypes.array,
+  initialRouteStack: PropTypes.array,
 
   /**
    * @name initialRoute
@@ -284,7 +285,7 @@ RouterNavigator.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  initialRoute: React.PropTypes.object,
+  initialRoute: PropTypes.object,
 
   /**
    * @name onPrePush
@@ -293,7 +294,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just before a page is pushed.[/en]
    */
-  onPrePush: React.PropTypes.func,
+  onPrePush: PropTypes.func,
 
   /**
    * @name onPostPush
@@ -302,7 +303,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just after a page is pushed.[/en]
    */
-  onPostPush: React.PropTypes.func,
+  onPostPush: PropTypes.func,
 
   /**
    * @name onPrePop
@@ -311,7 +312,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just before a page is popped.[/en]
    */
-  onPrePop: React.PropTypes.func,
+  onPrePop: PropTypes.func,
 
   /**
    * @name onPostPop
@@ -320,7 +321,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just after a page is popped.[/en]
    */
-  onPostPop: React.PropTypes.func,
+  onPostPop: PropTypes.func,
 
   /**
    * @property animation
@@ -331,7 +332,7 @@ RouterNavigator.propTypes = {
    *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
    *   [/en]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name animationOptions
@@ -340,7 +341,7 @@ RouterNavigator.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onDeviceBackButton
@@ -352,7 +353,7 @@ RouterNavigator.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 export default RouterNavigator;
