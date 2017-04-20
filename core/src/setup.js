@@ -4,6 +4,8 @@ import ons from './ons/ons';
 
 import TemplateElement from './elements/ons-template';
 import IfElement from './elements/ons-if';
+import ActionSheetElement from './elements/ons-action-sheet';
+import ActionSheetButtonElement from './elements/ons-action-sheet-button';
 import AlertDialogElement from './elements/ons-alert-dialog';
 import BackButtonElement from './elements/ons-back-button';
 import BottomToolbarElement from './elements/ons-bottom-toolbar';
@@ -45,6 +47,8 @@ import RangeElement from './elements/ons-range';
 
 ons.TemplateElement = TemplateElement;
 ons.IfElement = IfElement;
+ons.ActionSheetElement = ActionSheetElement;
+ons.ActionSheetButtonElement = ActionSheetButtonElement;
 ons.AlertDialogElement = AlertDialogElement;
 ons.BackButtonElement = BackButtonElement;
 ons.BottomToolbarElement = BottomToolbarElement;

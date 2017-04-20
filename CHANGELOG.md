@@ -10,6 +10,8 @@ dev
  * ons-splitter: Push animation.
  * ons-splitter: Reveal animation.
  * ons.createElement: Allows creating new elements from templates or inline HTML.
+ * ons-action-sheet: Added Action Sheet component.
+ * ons-action-sheet-button: Added Action Sheet Button component.
 
 ### Bug Fixes
 
