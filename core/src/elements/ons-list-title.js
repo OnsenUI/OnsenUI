@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import util from '../ons/util';
