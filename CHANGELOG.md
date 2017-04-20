@@ -15,6 +15,13 @@ dev
  * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+
+### BREAKING CHANGES
+
+* ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
+* ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
+
 
 v2.2.4
 ----
