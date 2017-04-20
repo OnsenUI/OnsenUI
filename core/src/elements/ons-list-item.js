@@ -54,9 +54,7 @@ const scheme = {
  *   [ja][/ja]
  * @description
  *   [en]
- *     Component that represents each item in the list. Must be put inside the `<ons-list>` component.
- *
- *     The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *     Component that represents each item in a list. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *
  *     ```
  *     <ons-list-item>
