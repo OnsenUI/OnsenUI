@@ -563,6 +563,10 @@ export default class CarouselElement extends BaseElement {
     return this.getAttribute('direction') === 'vertical';
   }
 
+  _show() {
+    window.addEventListener('resize', this._boundOnResize, true);
+  }
+
   _prepareEventListeners() {
     this._gestureDetector = new GestureDetector(this, {
       dragMinDistance: 1,
@@ -574,6 +578,10 @@ export default class CarouselElement extends BaseElement {
     this._updateAutoRefresh();
 
     window.addEventListener('resize', this._boundOnResize, true);
+  }
+
+  _hide() {
+    window.removeEventListener('resize', this._boundOnResize, true);
   }
 
   _removeEventListeners() {
