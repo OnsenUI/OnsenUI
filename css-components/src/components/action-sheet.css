@@ -17,12 +17,11 @@
   name: Action Sheet
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask"></div>
     <div class="action-sheet">
-      <div class="action-sheet__items">
-        <div class="action-sheet__title">Title</div>
-        <button class="action-sheet__button">Label</button>
-        <button class="action-sheet__button">Cancel</button>
-      </div>
+      <div class="action-sheet__title">Title</div>
+      <button class="action-sheet__button">Label</button>
+      <button class="action-sheet__button">Cancel</button>
     </div>
 */
 
@@ -30,27 +29,15 @@
   name: Action Sheet with Delete Label
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask"></div>
     <div class="action-sheet">
-      <div class="action-sheet__items">
-        <button class="action-sheet__button">Label</button>
-        <button class="action-sheet__button action-sheet__button--destructive">Delete Label</button>
-        <button class="action-sheet__button">Cancel</button>
-      </div>
+      <button class="action-sheet__button">Label</button>
+      <button class="action-sheet__button action-sheet__button--destructive">Delete Label</button>
+      <button class="action-sheet__button">Cancel</button>
     </div>
 */
 
 .action-sheet {
-  @apply(--reset-font);
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--action-sheet-mask-color);
-  z-index: 1;
-}
-
-.action-sheet__items {
   position: absolute;
   left: 9px;
   right: 9px;
@@ -140,16 +127,26 @@
   border-top-right-radius: 12px;
 }
 
+.action-sheet-mask {
+  @apply(--reset-font);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--action-sheet-mask-color);
+  z-index: 1;
+}
+
 /*~
   name: Material Action Sheet
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask action-sheet-mask--material">
     <div class="action-sheet action-sheet--material">
-      <div class="action-sheet__items action-sheet--material__items">
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
-      </div>
+      <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+      <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+      <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
     </div>
 */
 
@@ -157,20 +154,15 @@
   name: Material Action Sheet with Title
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask action-sheet-mask--material">
     <div class="action-sheet action-sheet--material">
-      <div class="action-sheet__items action-sheet--material__items">
-        <div class="action-sheet__title action-sheet--material__title">Title</div>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
-      </div>
+      <div class="action-sheet__title action-sheet--material__title">Title</div>
+      <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
+      <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
     </div>
 */
 
 .action-sheet--material {
-  background-color: var(--material-action-sheet-mask-color);
-}
-
-.action-sheet--material__items {
   left: 0;
   right: 0;
   bottom: 0;
@@ -235,3 +227,6 @@
   text-align: center;
 }
 
+.action-sheet-mask--material {
+  background-color: var(--material-action-sheet-mask-color);
+}
