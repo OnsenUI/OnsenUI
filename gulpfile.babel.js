@@ -382,12 +382,8 @@ gulp.task('prepare', ['html2js'], () =>  {
       'bindings/angular1/js/*.js'
     ])
       .pipe($.plumber())
-      .pipe($.ngAnnotate({
-        add: true,
-        single_quotes: true // eslint-disable-line camelcase
-      }))
       .pipe($.sourcemaps.init())
-      .pipe($.babel())
+      .pipe($.babel({ plugins: [['angularjs-annotate', { 'explicitOnly': false }]] }))
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe($.sourcemaps.write())

@@ -19,11 +19,9 @@ import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import {AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator} from './animator';
+import { AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator } from './animator';
 import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
-import DoorLock from '../../ons/doorlock';
+import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
@@ -90,7 +88,7 @@ const _animatorDict = {
  *   document.getElementById('alert-dialog').show();
  * </script>
  */
-export default class AlertDialogElement extends BaseElement {
+export default class AlertDialogElement extends BaseDialogElement {
 
   /**
    * @event preshow
@@ -191,13 +189,12 @@ export default class AlertDialogElement extends BaseElement {
    */
 
   init() {
+    super.init();
     contentReady(this, () => this._compile());
+  }
 
-    this._visible = false;
-    this._doorLock = new DoorLock();
-    this._boundCancel = () => this._cancel();
-
-    this._updateAnimatorFactory()
+  get _scheme() {
+    return scheme;
   }
 
   /**
@@ -230,7 +227,7 @@ export default class AlertDialogElement extends BaseElement {
   }
 
   _updateAnimatorFactory() {
-    this._animatorFactory = new AnimatorFactory({
+    return new AnimatorFactory({
       animators: _animatorDict,
       baseClass: AlertDialogAnimator,
       baseClassName: 'AlertDialogAnimator',
@@ -290,7 +287,7 @@ export default class AlertDialogElement extends BaseElement {
       this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
 
-    ModifierUtil.initModifier(this, scheme);
+    ModifierUtil.initModifier(this, this._scheme);
   }
 
   /**
@@ -300,13 +297,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   /**
    * @property cancelable
@@ -315,13 +305,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
    */
-  set cancelable(value) {
-    return util.toggleAttribute(this, 'cancelable', value);
-  }
-
-  get cancelable() {
-    return this.hasAttribute('cancelable');
-  }
 
   /**
    * @method show
@@ -345,52 +328,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]A `Promise` object that resolves to the displayed element.[/en]
    *   [ja][/ja]
    */
-  show(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'preshow', {
-      alertDialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryShow = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        this.style.display = 'block';
-        this._mask.style.opacity = '1';
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.show(this, () => {
-              this._visible = true;
-              unlock();
-
-              util.triggerElementEvent(this, 'postshow', {alertDialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryShow()));
-      });
-    } else {
-      return Promise.reject('Canceled in preshow event.');
-    }
-  }
 
   /**
    * @method hide
@@ -414,50 +351,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
-  hide(options = {}) {
-    let cancel = false;
-    const callback = options.callback || function() {};
-
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    util.triggerElementEvent(this, 'prehide', {
-      alertDialog: this,
-      cancel: function() {
-        cancel = true;
-      }
-    });
-
-    if (!cancel) {
-      const tryHide = () => {
-        const unlock = this._doorLock.lock();
-        const animator = this._animatorFactory.newAnimator(options);
-
-        return new Promise(resolve => {
-          contentReady(this, () => {
-            animator.hide(this, () => {
-              this.style.display = 'none';
-              this._visible = false;
-              unlock();
-
-              util.triggerElementEvent(this, 'posthide', {alertDialog: this});
-
-              callback();
-              resolve(this);
-            });
-          });
-        });
-      };
-
-      return new Promise(resolve => {
-        this._doorLock.waitUnlock(() => resolve(tryHide()));
-      });
-    } else {
-      return Promise.reject('Canceled in prehide event.');
-    }
-  }
 
   /**
    * @property visible
@@ -467,9 +360,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]Whether the dialog is visible or not.[/en]
    *   [ja]要素が見える場合に`true`。[/ja]
    */
-  get visible() {
-    return this._visible;
-  }
 
   /**
    * @property onDeviceBackButton
@@ -478,63 +368,6 @@ export default class AlertDialogElement extends BaseElement {
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get onDeviceBackButton() {
-    return this._backButtonHandler;
-  }
-
-  set onDeviceBackButton(callback) {
-    if (this._backButtonHandler) {
-      this._backButtonHandler.destroy();
-    }
-
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
-  }
-
-  _cancel() {
-    if (this.cancelable && !this._running) {
-      this._running = true;
-      this.hide()
-        .then(
-          () => {
-            this._running = false;
-            util.triggerElementEvent(this, 'dialog-cancel');
-          },
-          () => this._running = false
-        );
-    }
-  }
-
-  connectedCallback() {
-    this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
-
-    contentReady(this, () => {
-      this._mask.addEventListener('click', this._boundCancel, false);
-    });
-  }
-
-  disconnectedCallback() {
-    this._backButtonHandler.destroy();
-    this._backButtonHandler = null;
-
-    this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'animation'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
-    }
-    else if (name === 'animation') {
-      this._updateAnimatorFactory();
-    }
-  }
-
-  static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
-  }
 
   /**
    * @param {String} name

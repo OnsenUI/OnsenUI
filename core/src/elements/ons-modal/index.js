@@ -21,9 +21,7 @@ import AnimatorFactory from '../../ons/internal/animator-factory';
 import ModalAnimator from './animator';
 import FadeModalAnimator from './fade-animator';
 import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
-import DoorLock from '../../ons/doorlock';
+import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
@@ -68,7 +66,7 @@ const _animatorDict = {
  *   modal.show();
  * </script>
  */
-export default class ModalElement extends BaseElement {
+export default class ModalElement extends BaseDialogElement {
 
   /**
    * @attribute animation
@@ -88,13 +86,17 @@ export default class ModalElement extends BaseElement {
    */
 
   init() {
-    contentReady(this, () => {
-      this._compile();
-    });
+    super.init();
+    this._defaultDBB = () => undefined;
+    contentReady(this, () => this._compile());
+  }
 
-    this._doorLock = new DoorLock();
+  get _scheme() {
+    return scheme;
+  }
 
-    this._animatorFactory = new AnimatorFactory({
+  _updateAnimatorFactory() {
+    return new AnimatorFactory({
       animators: _animatorDict,
       baseClass: ModalAnimator,
       baseClassName: 'ModalAnimator',
@@ -109,17 +111,6 @@ export default class ModalElement extends BaseElement {
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get onDeviceBackButton() {
-    return this._backButtonHandler;
-  }
-
-  set onDeviceBackButton(handler) {
-    if (this._backButtonHandler) {
-      this._backButtonHandler.destroy();
-    }
-
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, handler);
-  }
 
   _compile() {
     this.style.display = 'none';
@@ -139,17 +130,11 @@ export default class ModalElement extends BaseElement {
       this.appendChild(content);
     }
 
-    ModifierUtil.initModifier(this, scheme);
+    ModifierUtil.initModifier(this, this._scheme);
   }
 
-  disconnectedCallback() {
-    if (this._backButtonHandler) {
-      this._backButtonHandler.destroy();
-    }
-  }
-
-  connectedCallback() {
-    this.onDeviceBackButton = () => undefined;
+  _toggleStyle(shouldShow) {
+    this.style.display = shouldShow ? 'table' : 'none';
   }
 
   /**
@@ -160,9 +145,6 @@ export default class ModalElement extends BaseElement {
    *   [en]Whether the element is visible or not.[/en]
    *   [ja]要素が見える場合に`true`。[/ja]
    */
-  get visible() {
-    return this.style.display !== 'none';
-  }
 
   /**
    * @method show
@@ -183,36 +165,6 @@ export default class ModalElement extends BaseElement {
    *   [en]Resolves to the displayed element[/en]
    *   [ja][/ja]
    */
-  show(options = {}) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const callback = options.callback || function() {};
-
-    const tryShow = () => {
-      const unlock = this._doorLock.lock();
-      const animator = this._animatorFactory.newAnimator(options);
-
-      return new Promise(resolve => {
-        contentReady(this, () => {
-          this.style.display = 'table';
-          animator.show(this, () => {
-            unlock();
-
-            util.propagateAction(this, '_show');
-            callback();
-            resolve(this);
-          });
-        });
-      });
-    };
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryShow()));
-    });
-  }
 
   /**
    * @method toggle
@@ -230,13 +182,6 @@ export default class ModalElement extends BaseElement {
    *   [en]Toggle modal visibility.[/en]
    *   [ja]モーダルの表示を切り替えます。[/ja]
    */
-  toggle() {
-    if (this.visible) {
-      return this.hide.apply(this, arguments);
-    } else {
-      return this.show.apply(this, arguments);
-    }
-  }
 
   /**
    * @method hide
@@ -257,39 +202,9 @@ export default class ModalElement extends BaseElement {
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
-  hide(options = {}) {
-    options.animationOptions = util.extend(
-      options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-    );
-
-    const callback = options.callback || function() {};
-
-    const tryHide = () => {
-      const unlock = this._doorLock.lock();
-      const animator = this._animatorFactory.newAnimator(options);
-
-      return new Promise(resolve => {
-        contentReady(this, () => {
-          animator.hide(this, () => {
-            this.style.display = 'none';
-            unlock();
-
-            util.propagateAction(this, '_hide');
-            callback();
-            resolve(this);
-          });
-        });
-      });
-    };
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => resolve(tryHide()));
-    });
-  }
 
   static get observedAttributes() {
-    return ['modifier', 'class'];
+    return [...super.observedAttributes, 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -297,8 +212,8 @@ export default class ModalElement extends BaseElement {
       if (!this.classList.contains(defaultClassName)) {
         this.className = defaultClassName + ' ' + current;
       }
-    } else if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    } else {
+      super.attributeChangedCallback(name, last, current);
     }
   }
 

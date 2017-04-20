@@ -18,7 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 import contentReady from '../ons/content-ready';
 

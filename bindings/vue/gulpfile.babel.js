@@ -186,9 +186,9 @@ async function runWebdriverIO(standaloneSeleniumServer) {
 
     if (testsPassed) {
       $.util.log($.util.colors.green('Passed E2E tests on all browsers!'));
-      Promise.resolve();
+      return 0;
     } else {
       $.util.log($.util.colors.red('Failed to pass E2E tests on some browsers.'));
-      Promise.reject('e2e-test-webdriverio has failed');
+      return 1;
     }
 }

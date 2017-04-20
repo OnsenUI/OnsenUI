@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-list-header
@@ -35,7 +36,7 @@ ListHeader.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default ListHeader;

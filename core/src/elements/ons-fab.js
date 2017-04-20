@@ -13,7 +13,7 @@ limitations under the License.
 
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import util from '../ons/util';
 import contentReady from '../ons/content-ready';
 

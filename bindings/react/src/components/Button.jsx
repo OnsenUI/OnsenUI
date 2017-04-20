@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-button
@@ -29,7 +29,7 @@ Button.propTypes = {
    *  [en]The appearance of the button.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name disabled
@@ -40,7 +40,7 @@ Button.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name ripple
@@ -51,7 +51,7 @@ Button.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  ripple: React.PropTypes.bool,
+  ripple: PropTypes.bool,
 
   /**
    * @name onClick
@@ -60,7 +60,7 @@ Button.propTypes = {
    *  [en] This function will be called ones the button is clicked. [/en]
    *  [jp] [/jp]
    */
-  onClick: React.PropTypes.func
+  onClick: PropTypes.func
 };
 
 export default Button;
