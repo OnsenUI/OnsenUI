@@ -66,8 +66,7 @@
     "core-js": "^2.4.0",
     "rxjs": "^5.0.1",
     "onsenui": "2.2.x",
-    "zone.js": "^0.7.2",
-    "typescript": "^2.0.3"
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "@angular/common": "^2.4.1",
