@@ -7,14 +7,15 @@ dev
 
 ### New Features
 
+ * css-components: Added `list-title` component.
+ * css-components: Added `action-sheet` component.
+ * core: Added `ons-list-title` element.
+ * core: Added `ons-action-sheet` element.
+ * core: Added `ons-action-sheet-button` element.
+ * core: Added new method `ons.actionSheet(...)` for creating inline `ons-action-sheet` elements.
+ * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML.
  * ons-splitter: Push animation.
  * ons-splitter: Reveal animation.
- * ons.createElement: Allows creating new elements from templates or inline HTML.
- * ons-action-sheet: Added Action Sheet component.
- * ons-action-sheet-button: Added Action Sheet Button component.
- * ons.actionSheet: Added new method to create an inline `ons-action-sheet` component.
- * css-components: Added `list-title` components.
- * core: Added `ons-list-title` elements.
 
 ### Bug Fixes
 
