@@ -52,7 +52,6 @@ ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
-ons.actionSheet = actionSheet;
 ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
@@ -293,8 +292,6 @@ ons.createElement = (template, options = {}) => {
   return template.charAt(0) === '<' ? create(template) : ons._internal.getPageHTMLAsync(template).then(create);
 };
 
-ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, options = {}) => ons.createElement(template, { append: true, ...options });
-
 /**
  * @method createPopover
  * @signature createPopover(page, [options])
@@ -314,7 +311,6 @@ ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, option
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
-
 /**
  * @method createDialog
  * @signature createDialog(page, [options])
@@ -331,7 +327,6 @@ ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, option
  *   [en]Create a dialog instance from a template.[/en]
  *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
-
 /**
  * @method createAlertDialog
  * @signature createAlertDialog(page, [options])
@@ -348,6 +343,46 @@ ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, option
  *   [en]Create a alert dialog instance from a template.[/en]
  *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
  */
+ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, options = {}) => ons.createElement(template, { append: true, ...options });
+
+/**
+ * @method actionSheet
+ * @signature actionSheet(options)
+ * @description
+ *   [en]Shows an instant Action Sheet and lets the user choose an action.[/en]
+ *   [ja][/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {array} [options.buttons]
+ *   [en]Represent each button of the action sheet following the specified order. Every item can be either a string label or an object containing `label`, `icon` and `modifier` properties.[/en]
+ *   [ja][/ja]
+ * @param {string} [options.title]
+ *   [en]Optional title for the action sheet.[/en]
+ *   [ja][/ja]
+ * @param {number} [options.destructive]
+ *   [en]Optional index of the "destructive" button (only for iOS). It can be specified in the button array as well.[/en]
+ *   [ja][/ja]
+ * @param {boolean} [options.cancelable]
+ *   [en]Whether the action sheet can be canceled by tapping on the background mask or not.[/en]
+ *   [ja][/ja]
+ * @param {string} [options.modifier]
+ *   [en]Modifier attribute of the action sheet. E.g. `'destructive'`.[/en]
+ *   [ja][/ja]
+ * @param {string} [options.maskColor]
+ *   [en]Optionally change the background mask color.[/en]
+ *   [ja][/ja]
+ * @param {id} [options.id]
+ *   [en]The element's id attribute.[/en]
+ *   [ja][/ja]
+ * @param {class} [options.class]
+ *   [en]The element's class attribute.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Will resolve when the action sheet is closed. The resolve value is either the index of the tapped button or -1 when canceled.[/en]
+ *   [ja][/ja]
+ */
+ons.actionSheet = actionSheet;
 
 /**
  * @method resolveLoadingPlaceholder

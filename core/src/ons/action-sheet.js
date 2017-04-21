@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from './util';
 
+// Validate parameters
 const checkOptions = options => {
   if (!Object.hasOwnProperty.call(options, 'buttons') || !(options.buttons instanceof Array)) {
     throw new Error('"options.buttons" must be an instance of Array.')
@@ -32,44 +33,7 @@ const checkOptions = options => {
   }
 };
 
-/**
- * @method actionSheet
- * @signature actionSheet(options)
- * @return {Promise}
- *   [en]Will resolve when the action sheet is closed. The resolve value is either the index of the tapped button or -1 when canceled.[/en]
- *   [ja][/ja]
- * @param {Object} [options]
- *   [en]Parameter object.[/en]
- *   [ja]オプションを指定するオブジェクト。[/ja]
- * @param {array} [options.buttons]
- *   [en]Represent each button of the action sheet following the specified order. Every item can be either a string label or an object containing `label`, `icon` and `modifier` properties.[/en]
- *   [ja][/ja]
- * @param {string} [options.title]
- *   [en]Optional title for the action sheet.[/en]
- *   [ja][/ja]
- * @param {number} [options.destructive]
- *   [en]Optional index of the "destructive" button (only for iOS). It can be specified in the button array as well.[/en]
- *   [ja][/ja]
- * @param {boolean} [options.cancelable]
- *   [en]Whether the action sheet can be canceled by tapping on the background mask or not.[/en]
- *   [ja][/ja]
- * @param {string} [options.modifier]
- *   [en]Modifier attribute of the action sheet. E.g. `'destructive'`.[/en]
- *   [ja][/ja]
- * @param {string} [options.maskColor]
- *   [en]Optionally change the background mask color.[/en]
- *   [ja][/ja]
- * @param {id} [options.id]
- *   [en]The element's id attribute.[/en]
- *   [ja][/ja]
- * @param {class} [options.class]
- *   [en]The element's class attribute.[/en]
- *   [ja][/ja]
- * @description
- *   [en]Shows an instant Action Sheet and lets the user choose an action.[/en]
- *   [ja][/ja]
- */
-
+// Action Sheet
 export default (options) => {
   checkOptions(options);
 
