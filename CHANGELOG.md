@@ -12,7 +12,6 @@ dev
  * ons.createElement: Allows creating new elements from templates or inline HTML.
  * css-components: Added `list-title` components.
  * core: Added `ons-list-title` elements.
- * ons-card: Added Card component.
 
 ### Bug Fixes
 
