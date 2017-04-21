@@ -283,10 +283,6 @@ export default class AlertDialogElement extends BaseDialogElement {
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
-    if (this.getAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
-    }
-
     ModifierUtil.initModifier(this, this._scheme);
   }
 
