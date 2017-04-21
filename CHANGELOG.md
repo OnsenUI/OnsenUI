@@ -13,6 +13,8 @@ dev
  * ons-action-sheet: Added Action Sheet component.
  * ons-action-sheet-button: Added Action Sheet Button component.
  * ons.actionSheet: Added new method to create an inline `ons-action-sheet` component.
+ * css-components: Added `list-title` components.
+ * core: Added `ons-list-title` elements.
 
 ### Bug Fixes
 
