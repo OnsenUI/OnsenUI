@@ -11,6 +11,19 @@ dev
 
 ### Bug Fixes
 
+ * ons-splitter: Push animation.
+ * ons-splitter: Reveal animation.
+ * ons.createElement: Allows creating new elements from templates or inline HTML.
+ * css-components: Added `list-title` components.
+ * core: Added `ons-list-title` elements.
+ * ons-card: Added Card component.
+
+### Bug Fixes
+
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+
 ### BREAKING CHANGES
 
 * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
