@@ -21,6 +21,7 @@
   border-radius: 8px;
   background-color: var(--card-background-color);
   box-sizing: border-box;
+  display: block;
   margin: 8px;
   padding: 16px;
   text-align: left;
