@@ -10,15 +10,16 @@ dev
  * ons-splitter: Push animation.
  * ons-splitter: Reveal animation.
  * ons.createElement: Allows creating new elements from templates or inline HTML.
- * ons-dialog: Fix mask-color attribute.
  * ons-action-sheet: Added Action Sheet component.
  * ons-action-sheet-button: Added Action Sheet Button component.
+ * ons.actionSheet: Added new method to create an inline `ons-action-sheet` component.
 
 ### Bug Fixes
 
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+ * ons-dialog: Fixed mask-color attribute.
 
 ### BREAKING CHANGES
 

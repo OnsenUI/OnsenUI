@@ -20,6 +20,7 @@ import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
 import notification from './notification';
+import actionSheet from './action-sheet';
 import internal from './internal';
 import orientation from './orientation';
 import softwareKeyboard from './software-keyboard';
@@ -51,6 +52,7 @@ ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
+ons.actionSheet = actionSheet;
 ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;

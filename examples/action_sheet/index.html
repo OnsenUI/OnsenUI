@@ -15,12 +15,26 @@
     ons.ready(function() {
       ons.createElement('action-sheet.html', { append: true })
         .then(function(sheet) {
-          app.show = function() {
-
-            sheet.show();
-          };
+          app.showFromTemplate = sheet.show.bind(sheet);
+          app.hideFromTemplate = sheet.hide.bind(sheet);
         });
     });
+
+    app.showFromObject = function() {
+      ons.actionSheet({
+        title: 'From object',
+        cancelable: true,
+        buttons: [
+          'Label 0',
+          'Label 1',
+          {
+            label: 'Label 2',
+            modifier: 'destructive'
+          },
+          'Label 3'
+        ]
+      }).then(function(index) { console.log('index: ', index)})
+    };
   </script>
 
 </head>
@@ -28,8 +42,9 @@
 <body>
   <ons-page>
     <ons-toolbar>
+      <div class="left"><ons-toolbar-button onclick="app.showFromTemplate()">Template</ons-toolbar-button></div>
       <div class="center">Action Sheet</div>
-      <div class="right"><ons-toolbar-button onclick="app.show()">Do</ons-toolbar-button></div>
+      <div class="right"><ons-toolbar-button onclick="app.showFromObject()">Object</ons-toolbar-button></div>
     </ons-toolbar>
 
     Content
@@ -37,11 +52,11 @@
   </ons-page>
 
   <ons-template id="action-sheet.html">
-    <ons-action-sheet id="sheet" cancelable title="Description">
-      <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
-      <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
-      <ons-action-sheet-button modifier="destructive" icon="md-square-o">Label</ons-action-sheet-button>
-      <ons-action-sheet-button icon="md-close">Cancel</ons-action-sheet-button>
+    <ons-action-sheet id="sheet" cancelable title="From template">
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()" modifier="destructive">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-close" onclick="app.hideFromTemplate()">Cancel</ons-action-sheet-button>
     </ons-action-sheet>
   </ons-template>
 </body>
