@@ -102,6 +102,8 @@
   --material-font: {
     font-family: 'Roboto', 'Noto', sans-serif;
     -webkit-font-smoothing: antialiased;
+    font-weight: var(--material-font-weight);
+    font-size: var(--material-font-size);
   }
 
   --material-shadow-0: {
