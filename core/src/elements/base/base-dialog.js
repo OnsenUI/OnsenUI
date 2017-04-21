@@ -153,9 +153,11 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   _updateMask() {
-    if (this._mask && this.getAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
-    }
+    contentReady(this, () => {
+      if (this._mask && this.getAttribute('mask-color')) {
+        this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      }
+    });
   }
 
   connectedCallback() {
