@@ -12,6 +12,7 @@ dev
 
 ### Bug Fixes
 
+ * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
 
 v2.2.4
