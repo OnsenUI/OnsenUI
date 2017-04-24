@@ -7,6 +7,7 @@ dev
 
 ### Bug Fixes
 
+ * core: Polyfill `Set` and `Map` in order to support old browsers ([#1967](https://github.com/OnsenUI/OnsenUI/issues/1967)).
 
 v2.2.4
 ----
