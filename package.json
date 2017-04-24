@@ -122,7 +122,7 @@
     "typescript": "^1.8.10",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "wcdoc": "^0.1.18",
+    "wcdoc": "OnsenUI/wcdoc#8cac2a5",
     "wdio-jasmine-framework": "^0.2.16",
     "webdriverio": "^4.4.0"
   }
