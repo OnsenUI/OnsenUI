@@ -146,7 +146,7 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
  */
 export class IOSActionSheetAnimator extends ActionSheetAnimator {
 
-  constructor({ timing = 'ease-in-out', delay = 0, duration = 0.4 } = {}) {
+  constructor({ timing = 'ease-in-out', delay = 0, duration = 0.3 } = {}) {
     super({timing, delay, duration});
 
     this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
@@ -175,16 +175,14 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .saveStyle()
       .queue({
         css: {
-          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`,
-          opacity: 0
+          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`
         },
         duration: 0
       })
       .wait(this.delay)
       .queue({
         css: {
-          transform: 'translate3d(0, 0, 0)',
-          opacity: 1.0
+          transform: 'translate3d(0, 0, 0)'
         },
         duration: this.duration,
         timing: this.timing
@@ -220,16 +218,14 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .saveStyle()
       .queue({
         css: {
-          transform: 'translate3d(0, 0, 0)',
-          opacity: 1.0
+          transform: 'translate3d(0, 0, 0)'
         },
         duration: 0
       })
       .wait(this.delay)
       .queue({
         css: {
-          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`,
-          opacity: 0
+          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`
         },
         duration: this.duration,
         timing: this.timing
