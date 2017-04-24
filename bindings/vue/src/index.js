@@ -56,6 +56,7 @@ const install = (Vue, params = {}) => {
       /^enable/,
       /^disable/,
       /^set/,
+      /actionSheet/,
       /animit/,
       /Element$/,
       /fastClick/,

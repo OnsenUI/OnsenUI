@@ -1,6 +1,15 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* VOnsActionSheet: New component.
+* VOnsActionSheetButton: New component.
+* $ons.actionSheet: Suppot shortcut method for VOnsActionSheet.
+
 2.0.0-beta.2
 ----
 
