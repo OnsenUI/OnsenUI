@@ -38,6 +38,8 @@
 */
 
 .action-sheet {
+  @apply(--reset-font);
+  cursor: default;
   position: absolute;
   left: 9px;
   right: 9px;
@@ -132,7 +134,6 @@
 }
 
 .action-sheet-mask {
-  @apply(--reset-font);
   position: absolute;
   left: 0;
   top: 0;
