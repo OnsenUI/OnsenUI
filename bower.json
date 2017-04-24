@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "homepage": "http://onsen.io",
+  "homepage": "https://onsen.io",
   "authors": [
     "Kruy Vanna <kruyvanna@gmail.com>",
     "Mitsunori KUBOTA <anatoo.jp@gmail.com>"
@@ -22,8 +22,5 @@
     "monaca"
   ],
   "dependencies": {},
-  "license": "Apache License, Version 2.0",
-  "ignore": [
-    ".npmignore"
-  ]
+  "license": "Apache License, Version 2.0"
 }
