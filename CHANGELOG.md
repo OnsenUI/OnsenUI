@@ -7,19 +7,18 @@ dev
 
 ### New Features
 
- * ons-splitter: Push animation.
- * ons-splitter: Reveal animation.
- * ons.createElement: Allows creating new elements from templates or inline HTML.
- * css-components: Added `list-title` components.
- * core: Added `ons-list-title` elements.
+ * css-components: Added `list-title` component ([#1960](https://github.com/OnsenUI/OnsenUI/issues/1960)).
+ * core: Added `ons-list-title` element.
+ * ons-splitter: Added `push` and `reveal` animations ([#1916](https://github.com/OnsenUI/OnsenUI/issues/1916)).
+ * ons.createElement: Allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
 
 ### Bug Fixes
 
- * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * core: Polyfill `Set` and `Map` in order to support old browsers ([#1967](https://github.com/OnsenUI/OnsenUI/issues/1967)).
- * angular1: Page loader now throws `destroy` event when page is unloaded.
- * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+ * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+ * angular1: Page loader now throws `destroy` event when page is unloaded ([#1934](https://github.com/OnsenUI/OnsenUI/issues/1934)).
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
 
 v2.2.4
 ----
