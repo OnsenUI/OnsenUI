@@ -459,7 +459,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'height') {
+    if (name === 'height' && this._pageElement) {
       this._setStyle();
     }
   }
