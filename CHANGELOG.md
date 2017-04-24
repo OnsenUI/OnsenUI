@@ -19,6 +19,7 @@ dev
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+ * ons-pull-hook: Fixed [#1970](https://github.com/OnsenUI/OnsenUI/issues/1970).
 
 ### BREAKING CHANGES
 
