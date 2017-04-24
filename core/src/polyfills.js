@@ -9,5 +9,7 @@ import './polyfill-switches';
 // Polyfill Custom Elements v1 with global namespace pollution
 import '@webcomponents/custom-elements';
 
-// Polyfill `Object.setPrototypeOf` with global namespace pollution
+// Polyfill ECMAScript standard features with global namespace pollution
 import 'core-js/fn/object/set-prototype-of';
+import 'core-js/fn/set';
+import 'core-js/fn/map';
