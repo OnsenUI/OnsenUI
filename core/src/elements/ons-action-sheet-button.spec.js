@@ -5,12 +5,15 @@ describe('ons-action-sheet-button', () => {
     expect(window.ons.ActionSheetButtonElement).to.be.ok;
   });
 
-  it('classList contains \'action-sheet-button\' by default', () => {
+  it('classList contains \'action-sheet-button\' by default', (done) => {
     const element = new ons.ActionSheetButtonElement();
-    expect(element.classList.contains('action-sheet-button')).to.be.true;
-    element.setAttribute('class', 'foo');
-    expect(element.classList.contains('action-sheet-button')).to.be.true;
-    expect(element.classList.contains('foo')).to.be.true;
+    setImmediate(() => {
+      expect(element.classList.contains('action-sheet-button')).to.be.true;
+      element.setAttribute('class', 'foo');
+      expect(element.classList.contains('action-sheet-button')).to.be.true;
+      expect(element.classList.contains('foo')).to.be.true;
+      done();
+    })
   });
 
   it('provides modifier attribute', () => {
@@ -45,11 +48,14 @@ describe('ons-action-sheet-button', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    it('adds \'material\' modifier on Android', (done) => {
       ons.platform.select('android');
       const e = document.createElement('ons-action-sheet-button');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      ons.platform.select('');
+      setImmediate(() => {
+        expect(e.getAttribute('modifier')).to.equal('material');
+        ons.platform.select('');
+        done();
+      })
     });
   });
 });

@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
+import contentReady from '../ons/content-ready';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 
@@ -78,7 +79,7 @@ export default class ActionSheetButtonElement extends BaseElement {
    */
 
   init() {
-    this._compile();
+    contentReady(this, () => this._compile());
   }
 
   get _icon() {
