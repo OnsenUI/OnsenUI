@@ -99,7 +99,11 @@ window.addEventListener('load', () => {
 window.addEventListener('DOMContentLoaded', () => {
   ons._deviceBackButtonDispatcher.enable();
   ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
-    navigator.app.exitApp();
+    if (Object.hasOwnProperty.call(navigator, 'app')) {
+      navigator.app.exitApp();
+    } else {
+      console.warn('Could not close the app. Is \'cordova.js\' included?\nError: \'window.navigator.app\' is undefined.');
+    }
   });
   document.body._gestureDetector = new ons.GestureDetector(document.body);
 }, false);
@@ -107,6 +111,15 @@ window.addEventListener('DOMContentLoaded', () => {
 // setup loading placeholder
 ons.ready(function() {
   ons._setupLoadingPlaceHolders();
+
+  // Simulate Device Back Button on ESC press
+  if (!ons.platform.isWebView()) {
+    document.body.addEventListener('keydown', function(event) {
+      if (event.keyCode === 27) {
+        ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent();
+      }
+    })
+  }
 });
 
 // viewport.js
