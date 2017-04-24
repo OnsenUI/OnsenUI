@@ -21,6 +21,10 @@ dev
  * angular1: Page loader now throws `destroy` event when page is unloaded ([#1934](https://github.com/OnsenUI/OnsenUI/issues/1934)).
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
 
+### Misc
+
+ * Restored `bower.json`.
+
 v2.2.4
 ----
 
