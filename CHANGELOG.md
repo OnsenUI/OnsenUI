@@ -27,6 +27,7 @@ v2.2.5
 
 ### Bug Fixes
 
+ * core: Polyfill `Set` and `Map` in order to support old browsers ([#1967](https://github.com/OnsenUI/OnsenUI/issues/1967)).
  * ons-navigator: Discard toolbars inside tabbars for ios-slide.
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
  * ons-pull-hook: Fixed [#1970](https://github.com/OnsenUI/OnsenUI/issues/1970).
