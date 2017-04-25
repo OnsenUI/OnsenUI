@@ -2,6 +2,7 @@ import AlertDialog from './components/AlertDialog.jsx';
 import BackButton from './components/BackButton.jsx';
 import BottomToolbar from './components/BottomToolbar.jsx';
 import Button from './components/Button.jsx';
+import Card from './components/Card.jsx';
 import Carousel from './components/Carousel.jsx';
 import CarouselItem from './components/CarouselItem.jsx';
 import Col from './components/Col.jsx';
@@ -45,6 +46,7 @@ export {
   BackButton,
   BottomToolbar,
   Button,
+  Card,
   Carousel,
   CarouselItem,
   Col,

@@ -16,6 +16,7 @@ import {
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';
+import CardExample from './examples/Card';
 import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
@@ -68,6 +69,10 @@ class Examples extends React.Component {
       {
         title: 'Carousel',
         component: CarouselExample
+      },
+      {
+        title: 'Card',
+        component: CardExample
       },
       {
         title: 'Switch',
