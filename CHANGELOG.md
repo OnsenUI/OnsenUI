@@ -11,6 +11,8 @@ dev
 
 ### Bug Fixes
 
+ * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
+
 ### BREAKING CHANGES
 
 * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
