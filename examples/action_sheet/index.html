@@ -31,7 +31,10 @@
             label: 'Label 2',
             modifier: 'destructive'
           },
-          'Label 3'
+          {
+            label: 'Cancel',
+            icon: 'md-close'
+          }
         ]
       }).then(function(index) { console.log('index: ', index)})
     };
@@ -42,12 +45,13 @@
 <body>
   <ons-page>
     <ons-toolbar>
-      <div class="left"><ons-toolbar-button onclick="app.showFromTemplate()">Template</ons-toolbar-button></div>
       <div class="center">Action Sheet</div>
-      <div class="right"><ons-toolbar-button onclick="app.showFromObject()">Object</ons-toolbar-button></div>
     </ons-toolbar>
 
-    Content
+    <p style="text-align: center">
+      <ons-button onclick="app.showFromTemplate()">Create from template</ons-button>
+      <ons-button onclick="app.showFromObject()">Create from object</ons-button>
+    </p>
 
   </ons-page>
 
