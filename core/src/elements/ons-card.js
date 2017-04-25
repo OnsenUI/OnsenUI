@@ -17,7 +17,7 @@ limitations under the License.
 
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 
 const defaultClassName = 'card';
 const scheme = {'': 'card--*'};
