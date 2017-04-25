@@ -1,10 +1,12 @@
 CHANGELOG
 ====
 
-dev
+2.0.0-beta.3
 ----
 
-* Dialogs: Keep focus with VOnsModel.
+### Bug fixes
+
+* Dialogs: Fix portal feature that made inputs lose focus in dialogs.
 
 2.0.0-beta.2
 ----
