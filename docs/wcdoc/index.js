@@ -183,7 +183,10 @@ function validateIndex(docIndex, schema) {
 function collect(params) {
   return wcdoc.run({
     src: params.src,
-    basePath: __dirname + '/../../'
+    basePath: __dirname + '/../../',
+    espreeConfig: {
+      ecmaVersion: 8
+    }
   }).then(function(result) {
 
     var fileIndex = createFileIndex(result);
