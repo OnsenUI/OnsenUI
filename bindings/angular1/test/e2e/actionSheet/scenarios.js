@@ -22,19 +22,19 @@
       it('should trigger events', function() {
         browser.get(path);
 
-        var actionSheet = element(by.css('ons-action-sheet'));
-        browser.wait(EC.presenceOf(actionSheet));
+        var actionSheetButton = element(by.id('hide-button'));
+        browser.wait(EC.presenceOf(actionSheetButton));
         var helpElement = element(by.id('action-sheet-visible'));
         browser.wait(EC.presenceOf(helpElement));
 
         expect(helpElement.isDisplayed()).not.toBeTruthy();
 
         element(by.css('ons-button#show-action-sheet')).click();
-        browser.wait(EC.visibilityOf(actionSheet));
+        browser.wait(EC.visibilityOf(actionSheetButton));
         expect(helpElement.isDisplayed()).toBeTruthy();
 
-        element(by.css('ons-action-sheet-button#hide-button')).click();
-        browser.wait(EC.invisibilityOf(actionSheet));
+        actionSheetButton.click();
+        browser.wait(EC.invisibilityOf(element(by.css('ons-action-sheet'))));
         expect(helpElement.isDisplayed()).not.toBeTruthy();
       });
     });
