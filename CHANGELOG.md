@@ -24,6 +24,7 @@ dev
 ### Misc
 
  * Restored `bower.json`.
+ * Refactored `ons-alert-dialog`, `ons-dialog`, `ons-modal` and `ons-popover` ([#1935](https://github.com/OnsenUI/OnsenUI/issues/1935)).
 
 v2.2.4
 ----
