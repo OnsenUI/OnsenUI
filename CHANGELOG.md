@@ -17,6 +17,7 @@ dev
  * core: A fake device back button event is now fired on ESC press.
  * ons-splitter: Push animation.
  * ons-splitter: Reveal animation.
+ * angular1: Added `ons-action-sheet` bindings.
 
 ### Bug Fixes
 
