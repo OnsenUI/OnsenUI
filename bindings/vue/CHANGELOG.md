@@ -1,6 +1,11 @@
 CHANGELOG
 ====
 
+dev
+----
+
+* Dialogs: Keep focus with VOnsModel.
+
 2.0.0-beta.2
 ----
 
