@@ -10,7 +10,6 @@ dev
  * css-components: Added `list-title` component ([#1960](https://github.com/OnsenUI/OnsenUI/issues/1960)).
  * core: Added `ons-list-title` element.
  * ons-splitter: Added `push` and `reveal` animations ([#1916](https://github.com/OnsenUI/OnsenUI/issues/1916)).
- * ons.createElement: Allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
 
 ### Bug Fixes
 
