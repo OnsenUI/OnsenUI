@@ -99,14 +99,21 @@ const dialogCancel = {
 
 // Moves the element to a global position
 const portal = {
+  methods: {
+    _teleport() {
+      if (!this._isDestroyed && (!this.$el.parentNode || this.$el.parentNode !== document.body)) {
+        document.body.appendChild(this.$el);
+      }
+    }
+  },
   mounted() {
-    document.body.appendChild(this.$el);
+    this._teleport();
   },
   updated() {
-    !this._isDestroyed && document.body.appendChild(this.$el);
+    this._teleport();
   },
   activated() {
-    !this._isDestroyed && document.body.appendChild(this.$el);
+    this._teleport();
   },
   deactivated() {
     this.$el.remove();

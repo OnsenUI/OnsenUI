@@ -100,4 +100,4 @@ export default class PushSplitterAnimator extends SplitterAnimator {
         })
     );
   }
-};
+}

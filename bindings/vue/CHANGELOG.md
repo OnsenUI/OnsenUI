@@ -9,6 +9,12 @@ dev
 * VOnsActionSheet: New component.
 * VOnsActionSheetButton: New component.
 * $ons.actionSheet: Suppot shortcut method for VOnsActionSheet.
+2.0.0-beta.3
+----
+
+### Bug fixes
+
+* Dialogs: Fix portal feature that made inputs lose focus in dialogs.
 
 2.0.0-beta.2
 ----
