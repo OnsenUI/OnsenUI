@@ -11,6 +11,7 @@ dev
 ### Bug Fixes
 
  * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
+ * ons-tabbar: Minor fix for situations where the '.page__content' is provided.
 
 ### BREAKING CHANGES
 
