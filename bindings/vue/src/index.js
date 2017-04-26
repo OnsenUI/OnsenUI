@@ -53,10 +53,10 @@ const install = (Vue, params = {}) => {
    */
   Vue.prototype.$ons = Object.keys(ons)
     .filter(k => [
-      /^enable/,
       /^disable/,
+      /^enable/,
+      /^open/,
       /^set/,
-      /actionSheet/,
       /animit/,
       /Element$/,
       /fastClick/,

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('ons.actionSheet', () => {
+describe('ons.openActionSheet', () => {
   it('exists', () => {
-    expect(ons.actionSheet).to.be.ok;
+    expect(ons.openActionSheet).to.be.ok;
   });
 
   describe('#actionSheet()', () => {
@@ -10,7 +10,7 @@ describe('ons.actionSheet', () => {
       resolvePromise;
 
     beforeEach(() => {
-      resolvePromise = ons.actionSheet({
+      resolvePromise = ons.openActionSheet({
         buttons: [
           'l1',
           {
@@ -34,11 +34,11 @@ describe('ons.actionSheet', () => {
     });
 
     it('requires buttons array', () => {
-      expect(() => ons.actionSheet()).to.throw(Error);
+      expect(() => ons.openActionSheet()).to.throw(Error);
     });
 
     it('requires a buttons array', () => {
-      expect(() => ons.actionSheet({buttons: []})).to.be.ok;
+      expect(() => ons.openActionSheet({buttons: []})).to.be.ok;
     });
 
     it('displays an action sheet', () => {
@@ -49,7 +49,7 @@ describe('ons.actionSheet', () => {
 
     it('accepts a \'title\' parameter', () => {
       const title = 'test';
-      ons.actionSheet({buttons: [], title, id: 'test'});
+      ons.openActionSheet({buttons: [], title, id: 'test'});
       const dialog = document.getElementById('test');
       expect(dialog.querySelector('.action-sheet-title').innerHTML).to.equal(title);
       dialog.remove();
@@ -80,7 +80,7 @@ describe('ons.actionSheet', () => {
     });
 
     it('creates icons for the buttons', () => {
-      ons.actionSheet({buttons: [{icon: 'test'}], id: 'test'});
+      ons.openActionSheet({buttons: [{icon: 'test'}], id: 'test'});
       const dialog = document.getElementById('test');
       expect(dialog.querySelector('.action-sheet-button > ons-icon')).to.be.ok;
       dialog.remove();
@@ -90,7 +90,7 @@ describe('ons.actionSheet', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      ons.actionSheet({buttons: [], id: 'test'});
+      ons.openActionSheet({buttons: [], id: 'test'});
       const dialog = document.getElementById('test');
       expect(dialog.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
@@ -99,7 +99,7 @@ describe('ons.actionSheet', () => {
 
     it('removes \'material\' modifier on iOS', () => {
       ons.platform.select('ios');
-      ons.actionSheet({buttons: [], id: 'test'});
+      ons.openActionSheet({buttons: [], id: 'test'});
       const dialog = document.getElementById('test');
       expect(dialog.getAttribute('modifier')).not.to.equal('material');
       ons.platform.select('');

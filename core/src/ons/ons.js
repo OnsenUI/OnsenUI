@@ -346,8 +346,8 @@ ons.createElement = (template, options = {}) => {
 ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, options = {}) => ons.createElement(template, { append: true, ...options });
 
 /**
- * @method actionSheet
- * @signature actionSheet(options)
+ * @method openActionSheet
+ * @signature openActionSheet(options)
  * @description
  *   [en]Shows an instant Action Sheet and lets the user choose an action.[/en]
  *   [ja][/ja]
@@ -382,7 +382,7 @@ ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, option
  *   [en]Will resolve when the action sheet is closed. The resolve value is either the index of the tapped button or -1 when canceled.[/en]
  *   [ja][/ja]
  */
-ons.actionSheet = actionSheet;
+ons.openActionSheet = actionSheet;
 
 /**
  * @method resolveLoadingPlaceholder

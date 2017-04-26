@@ -33,7 +33,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="$ons.actionSheet({buttons:['label1', 'label2', 'label3'], title: 'Lorem ipsum', cancelable: true, destructive: 1})"
+        @click="$ons.openActionSheet({buttons:['label1', 'label2', 'label3'], title: 'Lorem ipsum', cancelable: true, destructive: 1})"
       >
         <div class="center">
           Action Sheet
