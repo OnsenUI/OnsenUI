@@ -57,9 +57,9 @@ export default class SplitterAnimator extends BaseAnimator {
   }
 
   clearTransition() {
-    this._side.style.transform = this._side.style.transition = this._side.style.webkitTransition = '';
-    this._mask.style.transform = this._mask.style.transition = this._mask.style.webkitTransition = '';
-    this._content.style.transform = this._content.style.transition = this._content.style.webkitTransition = '';
+    this._side && (this._side.style.transform = this._side.style.transition = this._side.style.webkitTransition = '');
+    this._mask && (this._mask.style.transform = this._mask.style.transition = this._mask.style.webkitTransition = '');
+    this._content && (this._content.style.transform = this._content.style.transition = this._content.style.webkitTransition = '');
   }
 
   clearMask() {
