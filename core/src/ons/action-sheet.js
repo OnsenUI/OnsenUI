@@ -34,7 +34,7 @@ const checkOptions = options => {
 };
 
 // Action Sheet
-export default (options) => {
+export default (options = {}) => {
   checkOptions(options);
 
   // Main component
