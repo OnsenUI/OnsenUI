@@ -50,9 +50,12 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     sideElement.style.opacity = 0.9;
     sideElement.style.visibility = 'hidden';
 
-    sideElement.parentElement.style.backgroundColor = 'black'
-    contentReady(sideElement.parentElement, () => {
-      sideElement.parentElement.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
+    const splitter = sideElement.parentElement;
+    splitter.style.backgroundColor = 'black';
+    contentReady(splitter, () => {
+      if (splitter.content) {
+        splitter.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
+      }
     });
   }
 
@@ -62,7 +65,9 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     // Check if the other side needs the common styles
     if (!this._oppositeSide || this._oppositeSide.mode === 'split' || !this._oppositeSide.isOpen) {
       sideElement.parentElement.style.backgroundColor = '';
-      sideElement.parentElement.content.style.boxShadow = '';
+      if (sideElement.parentElement.content) {
+        sideElement.parentElement.content.style.boxShadow = '';
+      }
     }
   }
 
