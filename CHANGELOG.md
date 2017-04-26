@@ -2,6 +2,22 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * ons.createElement: Allows creating new elements from templates or inline HTML.
+
+### Bug Fixes
+
+ * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
+
+### BREAKING CHANGES
+
+* ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
+* ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
+
 v2.2.5
 ----
 
