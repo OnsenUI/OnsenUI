@@ -46,8 +46,11 @@ export class ActionSheetAnimator extends BaseAnimator {
  */
 export class MDActionSheetAnimator extends ActionSheetAnimator {
 
-  constructor({timing = 'ease', delay = 0, duration = 0.4} = {}) {
+  constructor({ timing = 'ease', delay = 0, duration = 0.4 } = {}) {
     super({timing, delay, duration});
+
+    this.maskTiming = 'linear';
+    this.maskDuration = 0.2;
   }
 
   /**
@@ -65,8 +68,8 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
         .queue({
           opacity: 1.0
         }, {
-          duration: this.duration,
-          timing: this.timing
+          duration: this.maskDuration,
+          timing: this.maskTiming
         }),
 
       animit(dialog._sheet)
@@ -110,8 +113,8 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
         .queue({
           opacity: 0
         }, {
-          duration: this.duration,
-          timing: this.timing
+          duration: this.maskDuration,
+          timing: this.maskTiming
         }),
 
       animit(dialog._sheet)
@@ -146,9 +149,11 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
  */
 export class IOSActionSheetAnimator extends ActionSheetAnimator {
 
-  constructor({ timing = 'ease-in-out', delay = 0, duration = 0.3 } = {}) {
+  constructor({ timing = 'ease', delay = 0, duration = 0.3 } = {}) {
     super({timing, delay, duration});
 
+    this.maskTiming = 'linear';
+    this.maskDuration = 0.2;
     this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
   }
 
@@ -167,8 +172,8 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .queue({
         opacity: 1.0
       }, {
-        duration: this.duration,
-        timing: this.timing
+        duration: this.maskDuration,
+        timing: this.maskTiming
       }),
 
       animit(dialog._sheet)
@@ -210,8 +215,8 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .queue({
         opacity: 0
       }, {
-        duration: this.duration,
-        timing: this.timing
+        duration: this.maskDuration,
+        timing: this.maskTiming
       }),
 
       animit(dialog._sheet)
