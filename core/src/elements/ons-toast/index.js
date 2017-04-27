@@ -149,7 +149,7 @@ export default class ToastElement extends BaseDialogElement {
         message = document.createElement('div');
         for (let i = toast.childNodes.length - 1; i >= 0; i--) {
           if (toast.childNodes[i] !== button) {
-            message.appendChild(toast.childNodes[i]);
+            message.insertBefore(toast.childNodes[i], message.firstChild);
           }
         }
       }
@@ -233,20 +233,6 @@ export default class ToastElement extends BaseDialogElement {
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
-
-  static get observedAttributes() {
-    return [...super.observedAttributes, 'class'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    if (name === 'class') {
-      if (!this.classList.contains(defaultClassName)) {
-        this.className = defaultClassName + ' ' + current;
-      }
-    } else {
-      super.attributeChangedCallback(name, last, current);
-    }
-  }
 
   /**
    * @param {String} name
