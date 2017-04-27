@@ -11,7 +11,7 @@
   <a href="https://cdnjs.com/libraries/onsen"><img src="https://img.shields.io/cdnjs/v/onsen.svg" alt="CDNJS"></a>
 </p>
 
-# [Onsen UI](https://onsen.io/) - Cross-Platform HTML5 Hybrid Mobile App Framework
+# [Onsen UI](https://onsen.io/) - Cross-Platform HTML5 Hybrid App Framework
 
 <p>Onsen UI is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
 
@@ -42,8 +42,8 @@ We have several resources to help you get started creating hybrid apps with Onse
 * __The official docs__: we provide guides and references for the [core library (vanilla JS or jQuery)](https://onsen.io/v2/docs/js.html) as well as the [Vue](https://onsen.io/v2/docs/guide/vue/index.html), [React](https://onsen.io/v2/docs/guide/react/index.html), [Angular2](https://onsen.io/v2/docs/guide/angular2/) and [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/) components.
 * __Components overview__: a [list of included CSS components](https://onsen.io/v2/docs/css.html) in both flat and Material Design. Note that these components are just pure and performant CSS without JavaScript behavior. Some extra details (such as dragging or ripple effect) are added by Onsen UI custom elements.
 * __Playground__: an [interactive Onsen UI tutorial](https://onsen.io/tutorial/) is also available where you can learn how to use the library and play around with the components.
-* __Blog__: There are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly.
-* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
+* __Blog__: there are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly.
+* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/) or [Gitter chat](https://gitter.im/OnsenUI/OnsenUI). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
 
 ## Onsen UI ecosystem
 
