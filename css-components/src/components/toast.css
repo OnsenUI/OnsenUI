@@ -52,6 +52,7 @@
   border: none;
   background-color: transparent;
   cursor: default;
+  text-transform: uppercase;
 }
 
 .toast__button:focus {
