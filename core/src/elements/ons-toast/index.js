@@ -21,6 +21,9 @@ import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import ToastAnimator from './animator';
 import FadeToastAnimator from './fade-animator';
+import AscendToastAnimator from './ascend-animator';
+import LiftToastAnimator from './lift-animator';
+import FallToastAnimator from './fall-animator';
 import platform from '../../ons/platform';
 import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
@@ -34,8 +37,11 @@ const scheme = {
 const defaultClassName = 'toast';
 
 const _animatorDict = {
-  'default': FadeToastAnimator,
+  'default': platform.isAndroid() ? AscendToastAnimator : LiftToastAnimator,
   'fade': FadeToastAnimator,
+  'ascend': AscendToastAnimator,
+  'lift': LiftToastAnimator,
+  'fall': FallToastAnimator,
   'none': ToastAnimator
 };
 
