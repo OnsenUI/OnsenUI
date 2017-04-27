@@ -17,7 +17,8 @@ export default class extends React.Component {
       <Page renderToolbar={() => <MyToolbar title='Card' />} >
         <div style={{margin: 50}}>
           <Card>
-            <p>Some content</p>
+            <div className="title">Card title</div>
+            <div className="content">Card content</div>
           </Card>
         </div>
       </Page>

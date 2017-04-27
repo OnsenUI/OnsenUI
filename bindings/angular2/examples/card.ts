@@ -13,12 +13,13 @@ declare var alert: Function;
   template: `
   <ons-page>
     <ons-toolbar>
-      <div class="center">Button Example</div>
+      <div class="center">Card Example</div>
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
       <ons-card>
-        <p>Some content</p>
+        <div class="title">Card title</div>
+        <div class="content">Card content</div>
       </ons-card>
     </div>
   </ons-page>

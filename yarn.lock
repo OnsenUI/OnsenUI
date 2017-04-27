@@ -1236,7 +1236,7 @@ babel-traverse@^6.24.1:
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@^6.0.19, babel-types@^6.18.0:
+babel-types@^6.0.19, babel-types@^6.10.2, babel-types@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.18.0.tgz#1f7d5a73474c59eb9151b2417bbff4e4fce7c3f8"
   dependencies:
@@ -1245,7 +1245,7 @@ babel-types@^6.0.19, babel-types@^6.18.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.10.2, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
+babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -1755,11 +1755,11 @@ commander@2.2.x:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.2.0.tgz#175ad4b9317f3ff615f201c1e57224f55a3e91df"
 
-commander@2.3.0:
+commander@2.3.0, commander@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.3.0.tgz#fd430e889832ec353b9acd1de217c11cb3eef873"
 
-commander@^2.2.0, commander@^2.8.1, commander@^2.9.0:
+commander@^2.8.1, commander@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
@@ -6516,19 +6516,6 @@ wcdoc@OnsenUI/wcdoc#8cac2a5:
     globby "^4.0.0"
     typescript "^1.8.10"
 
-wcdoc@^0.1.18:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/wcdoc/-/wcdoc-0.1.18.tgz#12374bc88eb2758bd8a41d12802426b37fd1ceb3"
-  dependencies:
-    async "^1.5.2"
-    babel-cli "^6.4.0"
-    babel-preset-es2015 "^6.3.13"
-    babel-register "^6.3.13"
-    espree "^3.3.2"
-    estraverse "^4.1.1"
-    globby "^4.0.0"
-    typescript "^1.8.10"
-
 wd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wd/-/wd-1.0.0.tgz#2e509105dee8c9ad20b06d085fd9baf2b5acaf86"
@@ -6795,4 +6782,3 @@ zip-stream@^1.0.0, zip-stream@^1.1.0:
     compress-commons "^1.1.0"
     lodash "^4.8.0"
     readable-stream "^2.0.0"
-

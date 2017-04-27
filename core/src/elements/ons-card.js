@@ -18,9 +18,14 @@ limitations under the License.
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
+import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'card';
-const scheme = {'': 'card--*'};
+const scheme = {
+  '.card': 'card--*',
+  '.card__title': 'card--*__title',
+  '.card__content': 'card--*__content',
+};
 
 /**
  * @element ons-card
@@ -29,7 +34,10 @@ const scheme = {'': 'card--*'};
  *   [en]A card with material design.[/en]
  *   [ja]リストの上下のボーダーが無いリストを表示します。[/ja]
  * @description
- *   [en]Component to create a card that displays some information.[/en]
+ *   [en]
+ *    Component to create a card that displays some information.
+ *
+ *    The card may be composed by divs with specially prepared classes `title` and/or `content`. You can also add your own content as you please.[/en]
  *   [ja][/ja]
  * @tutorial vanilla/Reference/card
  * @example
@@ -48,10 +56,27 @@ export default class CardElement extends BaseElement {
    */
 
   init() {
-    this._compile();
+    contentReady(this, () => {
+      this._compile();
+    });
   }
 
   _compile() {
+    let title, content;
+
+    for (let i = 0; i < this.children.length; i++) {
+      const el = this.children[i];
+
+      if (el.classList.contains('title')) {
+        el.classList.add('card__title');
+        title = el;
+      }
+      else if (el.classList.contains('content')) {
+        el.classList.add('card__content');
+        content = el;
+      }
+    }
+
     autoStyle.prepare(this);
     this.classList.add(defaultClassName);
     ModifierUtil.initModifier(this, scheme);
