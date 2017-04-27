@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Toast | Onsen UI</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    function toggle() {
+      document.querySelector('ons-toast').toggle();
+    };
+
+    function setAnimation(animation) {
+      document.querySelector('ons-toast').setAttribute('animation', animation);
+    }
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Toast</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" onclick="toggle()">Toggle Toast</ons-button>
+      <br><br><span style="color: grey">Animations:</span>
+      <ons-button modifier="outline" onclick="setAnimation('ascend')">Ascend</ons-button>
+      <ons-button modifier="outline" onclick="setAnimation('lift')">Lift</ons-button>
+      <ons-button modifier="outline" onclick="setAnimation('fall')">Fall</ons-button>
+      <ons-button modifier="outline" onclick="setAnimation('fade')">Fade</ons-button>
+    </p>
+    <ons-fab position="bottom left">-</ons-fab>
+    <ons-fab position="bottom right">+</ons-fab>
+  </ons-page>
+
+  <ons-toast>
+    This is an Onsen Toast!<button>Hoge</button>
+  </ons-toast>
+</body>
+</html>
