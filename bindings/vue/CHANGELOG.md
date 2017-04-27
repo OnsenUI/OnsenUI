@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug fixes
+
+* VOnsSelect: Fixed VOnsModel update.
+
 2.0.0-beta.3
 ----
 
