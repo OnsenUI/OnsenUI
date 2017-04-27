@@ -22,7 +22,7 @@ import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'card';
 const scheme = {
-  '.card': 'card--*',
+  '': 'card--*',
   '.card__title': 'card--*__title',
   '.card__content': 'card--*__content',
 };

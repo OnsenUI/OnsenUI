@@ -1,24 +1,24 @@
-'use strict';
-
-describe('ons-card', () => {
-  it('provides \'OnsCardElement\' global variable', () => {
+describe('OnsCardElement', () => {
+  it('exists', () => {
     expect(window.ons.CardElement).to.be.ok;
   });
 
-  onlyChrome(it)('classList contains \'card\' by default', () => {
-    const element = new ons.CardElement();
-    expect(element.classList.contains('card')).to.be.true;
-    element.setAttribute('class', 'foo');
-    expect(element.classList.contains('card')).to.be.true;
-    expect(element.classList.contains('foo')).to.be.true;
+  describe('class attribute', () => {
+    it('should contain "card" class name automatically', () => {
+      const element = new ons.CardElement();
+      element.setAttribute('class', 'foobar');
+      expect(element.classList.contains('card')).to.be.ok;
+      expect(element.classList.contains('foobar')).to.be.ok;
+    });
   });
 
-  onlyChrome(it)('provides modifier attribute', () => {
-    const element = new ons.CardElement();
+  it('provides \'modifier\' attribute', () => {
+    const element = ons._util.createElement('<ons-card>content</ons-card>');
+
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('card--hoge')).to.be.true;
 
-    element.setAttribute('modifier', ' foo bar');
+    element.setAttribute('modifier', 'foo bar');
     expect(element.classList.contains('card--foo')).to.be.true;
     expect(element.classList.contains('card--bar')).to.be.true;
     expect(element.classList.contains('card--hoge')).not.to.be.true;
@@ -46,7 +46,7 @@ describe('ons-card', () => {
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
-      const e = document.createElement('ons-card');
+      const e = ons._util.createElement('<ons-card>content</ons-card>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
     });
