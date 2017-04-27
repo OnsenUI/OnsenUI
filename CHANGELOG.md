@@ -13,6 +13,7 @@ dev
  * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
  * ons-tabbar: Minor fix for situations where the '.page__content' is provided.
  * ons-splitter: Fixed timing for initial animations in bindings.
+ * Device back button: Fixed possible crash in old platforms.
 
 ### BREAKING CHANGES
 
