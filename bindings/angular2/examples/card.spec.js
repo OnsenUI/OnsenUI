@@ -4,6 +4,10 @@ describe('card.html', () => {
   });
 
   it('should have ons-card elements', () => {
-    expect(element(by.css('ons-card')).getText()).toEqual('Some content');
+    console.log('\n\n\n\nCARD TEST\n\n\n\n');
+    expect($('ons-card').isPresent()).toBeTruthy();
+    expect($('div.title').isPresent()).toBeTruthy();
+    expect($('div.title').getText()).toEqual('Awesome card title');
+    expect($('div.content').isPresent()).toBeTruthy();
   });
 });
