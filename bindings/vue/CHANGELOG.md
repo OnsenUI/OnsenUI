@@ -8,10 +8,27 @@ dev
 
 * VOnsCard: New component.
 
+2.0.0-beta.4
+----
+
+### New Features
+
+* Vue 2.3.0: `sync` modifier is now supported for `index`, `visible` and `open` props. See breaking changes section.
+
+### Bug Fixes
+
+* VOnsSelect: Fixed VOnsModel update.
+
+### BREAKING CHANGES
+
+* Renamed `update` events: Dialogs, VOnsTabbar, VOnsCarousel, VOnsSpeedDial and VOnsSplitterSide used to throw an `update` event that was used to change `index`, `visible` or `open` props.
+    * This event has been renamed to match the prop name (`update:index`, `update:visible` and `update:open`), thus making it compatible with `sync` modifier.
+    * As a result, `:visible="isShown" @update="isShown = $event"` becomes => `:visible.sync="isShown"`.
+
 2.0.0-beta.3
 ----
 
-### Bug fixes
+### Bug Fixes
 
 * Dialogs: Fix portal feature that made inputs lose focus in dialogs.
 
@@ -26,7 +43,7 @@ dev
 2.0.0-beta.1
 ----
 
-### Bug fixes
+### Bug Fixes
 
 * VOnsNavigator: Options object is not modified anymore.
 * VOnsNavigator: Fix support for Vue router.
@@ -35,7 +52,7 @@ dev
 2.0.0-beta.0
 ----
 
-### Bug fixes
+### Bug Fixes
 
 * Autostyling: Fix for 'material' modifier.
 * VOnsNavigator: Added `popPage` optional prop.
@@ -62,7 +79,7 @@ dev
 * VOnsBackButton: It does not require props anymore. Implemented default behavior (pop 1 page) that can be avoided with `@click.prevent="..."`.
 * Device Back Button handlers extend the Core default behavior and can be overriden with `@deviceBackButton.prevent="..."`.
 
-### Bug fixes and perf
+### Bug Fixes and Perf
 
 * Modifiers are now correctly applied.
 * Removed incompatible function calls (`includes`).

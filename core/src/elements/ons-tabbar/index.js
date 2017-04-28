@@ -249,8 +249,8 @@ export default class TabbarElement extends BaseElement {
       contentReady(page, () => {
         this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
 
-        if (util.match(page.firstChild, 'ons-toolbar')) {
-          action(page.firstChild, 'noshadow');
+        if (page.children[0] && util.match(page.children[0], 'ons-toolbar')) {
+          action(page.children[0], 'noshadow');
         }
       });
     }
