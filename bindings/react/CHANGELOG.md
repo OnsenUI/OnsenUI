@@ -5,13 +5,14 @@ CHANGELOG
 dev
 ----
 * input: Added initial date value support.
+* card: Added new component.
 
 v1.2.0
 ----
 * Fixed [#1768](https://github.com/OnsenUI/OnsenUI/pull/1768).
 * router-navigator: Fixed [#1822](https://github.com/OnsenUI/OnsenUI/pull/1822).
 * lazy-list: Support for dynamic heights.
-* select: Add Select component.
+* select: Added new component.
 * dialogs: Fixed [#1758](https://github.com/OnsenUI/OnsenUI/pull/1758).
 * components: Added onDeviceBackButton handler prop.
 * navigator: Fixed support for Device Back Button.

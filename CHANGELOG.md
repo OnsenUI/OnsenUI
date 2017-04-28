@@ -9,12 +9,14 @@ dev
 
  * ons.createElement: Allows creating new elements from templates or inline HTML.
  * core: Added `ons-card` element.
+ * angular1: Added `ons-card` bindings.
 
 ### Bug Fixes
 
  * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
  * ons-tabbar: Minor fix for situations where the '.page__content' is provided.
  * ons-splitter: Fixed timing for initial animations in bindings.
+ * Device back button: Fixed possible crash in old platforms.
 
 ### BREAKING CHANGES
 

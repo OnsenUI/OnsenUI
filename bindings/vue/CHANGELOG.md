@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New features
+
+* VOnsCard: New component.
+
 2.0.0-beta.3
 ----
 
