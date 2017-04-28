@@ -1,6 +1,23 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* Sync: `sync` modifier (vue@2.3.0+) is now supported for `index`, `visible` and `open` props. See breaking changes section.
+
+### Bug fixes
+
+* VOnsSelect: Fixed VOnsModel update.
+
+### BREAKING CHANGES
+
+* Renamed `update` events: Dialogs, VOnsTabbar, VOnsCarousel, VOnsFab, VOnsSpeedDial and VOnsSplitterSide used to throw an `update` event that was used to change `index`, `visible` or `open` props.
+    * This event has been renamed to match the prop name (`update:index`, `update:visible` and `update:open`), thus making it compatible with `sync` modifier.
+    * As a result, `:visible="isShown" @update="isShown = $event"` becomes => `:visible.sync="isShown"`.
+
 2.0.0-beta.3
 ----
 
