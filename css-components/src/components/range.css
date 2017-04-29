@@ -163,7 +163,7 @@
 .range--material__input {
   background-image: linear-gradient(var(--material-range-thumb-color), var(--material-range-thumb-color));
   background-position: center left;
-  background-size: 20% 2px;
+  background-size: 0% 2px;
   overflow: visible;
 }
 
