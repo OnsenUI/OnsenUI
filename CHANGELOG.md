@@ -5,18 +5,12 @@ CHANGELOG
 dev
 ----
 
-### New Features
-
-
 ### Bug Fixes
 
+ * ons-splitter: Fixed timing for initial animations in bindings ([#1979](https://github.com/OnsenUI/OnsenUI/issues/1979), [#1985](https://github.com/OnsenUI/OnsenUI/issues/1985)).
+ * ons-tabbar: Minor fix for situations where the '.page__content' is provided ([#1978](https://github.com/OnsenUI/OnsenUI/issues/1978)).
  * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
- * ons-tabbar: Minor fix for situations where the '.page__content' is provided.
- * ons-splitter: Fixed timing for initial animations in bindings.
- * Device back button: Fixed possible crash in old platforms.
-
-### BREAKING CHANGES
-
+ * Device back button: Fixed possible crash in old platforms ([#1983](https://github.com/OnsenUI/OnsenUI/issues/1983)).
 
 v2.2.5
 ----
