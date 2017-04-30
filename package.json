@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -62,8 +62,8 @@
   "devDependencies": {
     "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-eslint": "^6.0.3",
+    "babel-preset-env": "^1.4.0",
     "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-latest": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
     "browser-sync": "^2.13.0",
     "chai": "^3.4.1",
