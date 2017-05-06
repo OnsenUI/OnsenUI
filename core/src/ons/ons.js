@@ -55,7 +55,9 @@ ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
 ons._contentReady = contentReady;
-ons.defaultPageLoader = defaultPageLoader;
+ons.defaultPageLoader = (pageLoader)=>{
+   return defaultPageLoader=pageLoader;
+};
 ons.PageLoader = PageLoader;
 ons._BaseAnimator = BaseAnimator;
 
