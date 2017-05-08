@@ -471,16 +471,16 @@ notification.toast = (message, options) => {
   _setAttributes(toast, options);
 
   const resolve = value => {
-    if (toast) {
-      toast
-        .hide()
-        .then(() => {
-          toast.remove();
-          toast = null;
-          options.callback(value);
-          deferred.resolve(value);
-        });
-    }
+    toast
+    .hide()
+    .then(() => {
+      if (toast) {
+        toast.remove();
+        toast = null;
+        options.callback(value);
+        deferred.resolve(value);
+      }
+    });
   };
 
   if (options.buttonLabels) {
