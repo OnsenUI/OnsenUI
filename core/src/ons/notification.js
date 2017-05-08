@@ -477,7 +477,7 @@ notification.toast = (message, options) => {
         .then(() => {
           toast.remove();
           toast = null;
-          options.callback && options.callback(value);
+          options.callback(value);
           deferred.resolve(value);
         });
     }
@@ -492,6 +492,7 @@ notification.toast = (message, options) => {
   }
 
   document.body.appendChild(toast);
+  options.compile(toast);
   setImmediate(() => toast.show());
 
   return deferred.promise;
