@@ -154,6 +154,6 @@ export default class AscendToastAnimator extends ToastAnimator {
 
   _findSiblingControlComponent(toast) {
     const query = e => /(ons-page|ons-navigator|ons-tabbar|ons-splitter)/i.test(e.tagName);
-    return util.findChild(toast.parentNode, query);
+    return util.findChild(toast.parentNode, query) || util.findChild(document.body.children[0], query);
   }
 }
