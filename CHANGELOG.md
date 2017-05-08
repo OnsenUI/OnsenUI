@@ -8,6 +8,45 @@ dev
 ### Bug Fixes
 
  * core: Fixed broken sourcemap of `onsenui.js` ([#1958](https://github.com/OnsenUI/OnsenUI/issues/1958)).
+ * ons-carousel: `refresh` event is now triggered when resized.
+ 
+### BREAKING CHANGES
+
+* ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
+* ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
+
+v2.2.6
+----
+
+### Bug Fixes
+
+ * ons-splitter: Fixed timing for initial animations in bindings ([#1979](https://github.com/OnsenUI/OnsenUI/issues/1979), [#1985](https://github.com/OnsenUI/OnsenUI/issues/1985)).
+ * ons-tabbar: Minor fix for situations where the '.page__content' is provided ([#1978](https://github.com/OnsenUI/OnsenUI/issues/1978)).
+ * ons-input: Fixed [#1974](https://github.com/OnsenUI/OnsenUI/issues/1974).
+ * Device back button: Fixed possible crash in old platforms ([#1983](https://github.com/OnsenUI/OnsenUI/issues/1983)).
+
+v2.2.5
+----
+
+### New Features
+
+ * css-components: Added `list-title` component ([#1960](https://github.com/OnsenUI/OnsenUI/issues/1960)).
+ * core: Added `ons-list-title` element.
+ * ons-splitter: Added `push` and `reveal` animations ([#1916](https://github.com/OnsenUI/OnsenUI/issues/1916)).
+
+### Bug Fixes
+
+ * core: Polyfill `Set` and `Map` in order to support old browsers ([#1967](https://github.com/OnsenUI/OnsenUI/issues/1967)).
+ * ons-navigator: Discard toolbars inside tabbars for ios-slide.
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+ * ons-pull-hook: Fixed [#1970](https://github.com/OnsenUI/OnsenUI/issues/1970).
+ * angular1: Page loader now throws `destroy` event when page is unloaded ([#1934](https://github.com/OnsenUI/OnsenUI/issues/1934)).
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+
+### Misc
+
+ * Restored `bower.json`.
+ * Refactored `ons-alert-dialog`, `ons-dialog`, `ons-modal` and `ons-popover` ([#1935](https://github.com/OnsenUI/OnsenUI/issues/1935)).
 
 v2.2.4
 ----

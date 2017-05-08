@@ -3,7 +3,7 @@
 describe('OnsCarouselElement', () => {
   let carousel;
 
-  beforeEach(() => {
+  beforeEach((done) => {
     carousel = ons._util.createElement(`
       <ons-carousel>
         <ons-carousel-item>Item 1</ons-carousel-item>
@@ -12,6 +12,7 @@ describe('OnsCarouselElement', () => {
       </ons-carousel>
     `);
     document.body.appendChild(carousel);
+    setImmediate(done); // wait for `refresh` event triggered by connectedCallback
   });
 
   afterEach(() => {
