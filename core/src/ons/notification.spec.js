@@ -211,6 +211,63 @@ describe('ons.notification', () => {
     });
   });
 
+  describe('#toast()', () => {
+    let dialog,
+      resolvePromise;
+
+    const callback = chai.spy();
+
+    beforeEach(() => {
+      resolvePromise = ons.notification.toast({message: 'hoge', buttonLabel: 'test', modifier: 'fuga', callback: callback});
+      dialog = document.body.querySelector('ons-toast');
+    });
+
+    afterEach(() => {
+      dialog.remove();
+      dialog = null;
+    });
+
+    it('requires a message', () => {
+      expect(() => ons.notification.toast()).to.throw(Error);
+    });
+
+    it('requires a message', () => {
+      expect(() => ons.notification.toast('test')).to.be.ok;
+    });
+
+    it('displays a toast', () => {
+      expect(dialog).to.be.ok;
+      expect(dialog.innerHTML.indexOf('hoge')).to.be.above(-1);
+    });
+
+    it('accepts a \'modifier\' parameter', () => {
+      expect(dialog.getAttribute('modifier').indexOf('fuga')).to.be.above(-1);
+    });
+
+    it('hides the toast when the button is clicked', () => {
+      const button = dialog.querySelector('button');
+      const event = new CustomEvent('click');
+      const spy = chai.spy.on(dialog, 'hide');
+      button.dispatchEvent(event);
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('resolves to the pressed button index', (done) => {
+      resolvePromise.then(index => {
+        expect(index).to.equal(0);
+        done();
+      });
+
+      dialog.querySelector('button').click();
+    });
+
+    it('accepts a \'timeout\' attribute and resolves', () => {
+      return ons.notification.toast({message: 'hoge', timeout: 10}).then(index => {
+        expect(index).to.equal(-1);
+      });
+    });
+  });
+
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
       ons.platform.select('android');
