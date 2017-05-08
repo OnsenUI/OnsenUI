@@ -11,6 +11,7 @@ dev
 
 ### Bug Fixes
 
+ * ons-carousel: `refresh` event is now triggered when resized.
  
 ### BREAKING CHANGES
 
