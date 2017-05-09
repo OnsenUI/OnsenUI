@@ -11,6 +11,7 @@ dev
 
 ### Bug Fixes
 
+ * css-components: Fixed color of range component in Firefox. Fixed [#1964](https://github.com/OnsenUI/OnsenUI/issues/1964).
  * ons-carousel: `refresh` event is now triggered when resized.
  
 ### BREAKING CHANGES
