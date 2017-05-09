@@ -18,7 +18,7 @@ describe('pull-hook.html', () => {
       .mouseUp()
       .perform();
 
-    browser.wait(EC.presenceOf($('#item-5')), 10000);
+    browser.wait(EC.presenceOf($('#item-5')), 5000);
     expect($('#item-5').isPresent()).toBeTruthy();
   });
 });
