@@ -71,7 +71,7 @@ class BaseDialog extends React.Component {
     };
 
     if (this.node.firstChild.visible === true) {
-      this.node.firstChild.hide().then(unmount)
+      this.node.firstChild.hide().then(unmount);
     } else {
       unmount();
     }
