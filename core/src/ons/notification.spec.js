@@ -218,7 +218,7 @@ describe('ons.notification', () => {
     const callback = chai.spy();
 
     beforeEach(() => {
-      resolvePromise = ons.notification.toast({message: 'hoge', buttonLabel: 'test', modifier: 'fuga', callback: callback});
+      resolvePromise = ons.notification.toast({message: 'hoge', buttonLabel: 'test', modifier: 'fuga', callback: callback, force: true});
       dialog = document.body.querySelector('ons-toast');
     });
 
@@ -228,11 +228,8 @@ describe('ons.notification', () => {
     });
 
     it('requires a message', () => {
-      expect(() => ons.notification.toast()).to.throw(Error);
-    });
-
-    it('requires a message', () => {
-      expect(() => ons.notification.toast('test')).to.be.ok;
+      expect(() => ons.notification.toast({force: true})).to.throw(Error);
+      expect(() => ons.notification.toast('test', {force: true})).to.be.ok;
     });
 
     it('displays a toast', () => {
@@ -262,7 +259,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'timeout\' attribute and resolves', () => {
-      return ons.notification.toast({message: 'hoge', timeout: 10}).then(index => {
+      return ons.notification.toast({message: 'hoge', timeout: 10, force: true}).then(index => {
         expect(index).to.equal(-1);
       });
     });
