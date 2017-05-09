@@ -7,13 +7,20 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      animation: 'default'
     };
   }
 
-  handleClick(shouldShow) {
+  handleShow(shouldShow) {
     this.setState({
       isOpen: shouldShow
+    });
+  }
+
+  handleAnimation(animation) {
+    this.setState({
+      animation: animation
     });
   }
 
@@ -33,17 +40,26 @@ export default class extends React.Component {
         >
 
         <p style={{textAlign: 'center', paddingTop: '10px'}}>
-          <Button onClick={this.handleClick.bind(this, true)}>Show toast</Button>
+          <Button modifier="light" onClick={this.handleShow.bind(this, true)}>Show toast</Button>
+        </p>
+
+        <p style={{textAlign: 'center', paddingTop: '10px'}}>
+          <span style={{color: 'grey'}}>Animation: </span>
+          <Button modifier="outline" onClick={this.handleAnimation.bind(this, 'none')}>None</Button>
+          <Button modifier="outline" onClick={this.handleAnimation.bind(this, 'ascend')}>Ascend</Button>
+          <Button modifier="outline" onClick={this.handleAnimation.bind(this, 'lift')}>Lift</Button>
+          <Button modifier="outline" onClick={this.handleAnimation.bind(this, 'fall')}>Fall</Button>
+          <Button modifier="outline" onClick={this.handleAnimation.bind(this, 'fade')}>Fade</Button>
         </p>
 
         <Fab position="bottom left">+</Fab>
         <Fab position="bottom right">-</Fab>
 
-        <Toast isOpen={this.state.isOpen} animation='default'>
+        <Toast isOpen={this.state.isOpen} animation={this.state.animation}>
           <div className="message">
             An error has occurred!
           </div>
-          <button onClick={this.handleClick.bind(this, false)}>
+          <button onClick={this.handleShow.bind(this, false)}>
             Dismiss
           </button>
         </Toast>
