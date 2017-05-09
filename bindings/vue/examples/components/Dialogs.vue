@@ -86,8 +86,7 @@
     </v-ons-list>
 
     <v-ons-dialog cancelable
-      :visible="dialogVisible"
-      @update="dialogVisible = $event"
+      :visible.sync="dialogVisible"
       @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -100,8 +99,7 @@
 
     <v-ons-alert-dialog cancelable
       modifier="rowfooter"
-      :visible="alertDialog1Visible"
-      @update="alertDialog1Visible = $event"
+      :visible.sync="alertDialog1Visible"
       @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
@@ -117,15 +115,14 @@
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      :visible="alertDialog2Visible"
-      @update="alertDialog2Visible = $event"
+      :visible.sync="alertDialog2Visible"
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
     </v-ons-alert-dialog>
 
     <v-ons-modal
-      :visible="modalVisible"
+      :visible.sync="modalVisible"
       @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
@@ -134,8 +131,7 @@
 
     <v-ons-popover cancelable
       :target="$refs.myToolbarButton"
-      :visible="popoverVisible"
-      @update="popoverVisible = $event"
+      :visible.sync="popoverVisible"
       @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"

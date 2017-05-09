@@ -6,7 +6,7 @@
       <div class="right"><v-ons-toolbar-button @click="carouselIndex++">Next: Index++</v-ons-toolbar-button></div>
     </v-ons-toolbar>
 
-    <v-ons-carousel fullscreen :index="carouselIndex" @update="carouselIndex = $event" swipeable auto-scroll overscrollable @postchange="log('postchange')" @refresh="log('refresh')" @overscroll="log('overscroll')">
+    <v-ons-carousel fullscreen :index.sync="carouselIndex" swipeable auto-scroll overscrollable @postchange="log('postchange')" @refresh="log('refresh')" @overscroll="log('overscroll')">
       <v-ons-carousel-item v-for="(value, key) in items" :key="key" :style="{backgroundColor: value}">
         <div style="text-align: center; font-size: 30px; margin-top: 20px; color: #fff;">{{key}}</div>
       </v-ons-carousel-item>
