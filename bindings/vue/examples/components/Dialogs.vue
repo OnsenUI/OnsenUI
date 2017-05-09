@@ -9,6 +9,14 @@
       <v-ons-list-header>Notifications</v-ons-list-header>
       <v-ons-list-item
         tappable
+        @click="$ons.notification.toast('Hello, world!', {timeout: 2000})"
+      >
+        <div class="center">
+          Toast
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item
+        tappable
         @click="$ons.notification.alert('Hello, world!')"
       >
         <div class="center">
@@ -42,6 +50,16 @@
           Simple Dialog
         </div>
         <div class="right">Model: {{dialogVisible}}</div>
+      </v-ons-list-item>
+
+      <v-ons-list-item
+        tappable
+        @click="toastVisible = true"
+      >
+        <div class="center">
+          Toast
+        </div>
+        <div class="right">Model: {{toastVisible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
@@ -97,6 +115,8 @@
       <button @click="dialogVisible = !dialogVisible">toggle</button>
     </v-ons-dialog>
 
+    <v-ons-toast :visible="toastVisible"><div class="message">Cha-La Head-Cha-La</div><button @click="toastVisible = false">Dismiss</button></v-ons-toast>
+
     <v-ons-alert-dialog cancelable
       modifier="rowfooter"
       :visible.sync="alertDialog1Visible"
@@ -150,6 +170,7 @@
     data() {
       return {
         dialogVisible: false,
+        toastVisible: false,
         alertDialog1Visible: false,
         alertDialog2Visible: false,
         popoverVisible: false,

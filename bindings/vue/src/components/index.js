@@ -41,4 +41,5 @@ export const VOnsSplitter = extend('splitter', [selfProvider, deriveDBB]);
 export const VOnsFab = extend('fab', [hidable]);
 export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
+export const VOnsToast = extend('toast', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB, portal]);
