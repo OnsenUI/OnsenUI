@@ -17,6 +17,7 @@ limitations under the License.
 
 import util from './util';
 import contentReady from './content-ready';
+import ToastQueue from './internal/toast-queue';
 
 const _setAttributes = (element, options) => {
   ['id', 'class', 'animation']
@@ -432,6 +433,12 @@ notification.prompt = (message, options) => {
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are `none`, `fade`, `ascend`, `lift` and `fall`. Default is `ascend` for Android and `lift` for iOS.[/en]
  *   [ja]トーストを表示する際のアニメーション名を指定します。"none", "fade", "ascend", "lift", "fall"のいずれかを指定できます。[/ja]
+ * @param {Number} [options.timeout]
+ *   [en]Number of miliseconds where the toast is visible before hiding automatically.[/en]
+ *   [ja][/ja]
+ * @param {Boolean} [options.force]
+ *   [en]If `true`, the toast skips the notification queue and is shown immediately. Defaults to `false`.[/en]
+ *   [ja][/ja]
  * @param {String} [options.id]
  *   [en]The `<ons-toast>` element's ID.[/en]
  *   [ja]ons-toast要素のID。[/ja]
@@ -458,8 +465,10 @@ notification.prompt = (message, options) => {
  *   [ja][/ja]
  */
 notification.toast = (message, options) => {
-  options = _normalizeArguments(message, options, {});
-  const deferred = util.defer();
+  options = _normalizeArguments(message, options, {
+    timeout: 0,
+    force: false
+  });
 
   let toast = util.createElement(`
     <ons-toast>
@@ -470,30 +479,38 @@ notification.toast = (message, options) => {
 
   _setAttributes(toast, options);
 
+  const deferred = util.defer();
   const resolve = value => {
-    toast
-    .hide()
-    .then(() => {
-      if (toast) {
-        toast.remove();
-        toast = null;
-        options.callback(value);
-        deferred.resolve(value);
-      }
-    });
+    if (toast) {
+      toast
+      .hide()
+      .then(() => {
+        if (toast) {
+          toast.remove();
+          toast = null;
+          options.callback(value);
+          deferred.resolve(value);
+        }
+      });
+    }
   };
 
   if (options.buttonLabels) {
     util.findChild(toast._toast, 'button').onclick = () => resolve(0);
   }
 
-  if (options.timeout) {
-    setTimeout(() => resolve(-1), options.timeout)
-  }
-
   document.body.appendChild(toast);
   options.compile(toast);
-  setImmediate(() => toast.show());
+
+  const show = () => {
+    toast.parentElement && toast.show(options).then(() => {
+      if (options.timeout) {
+        setTimeout(() => resolve(-1), options.timeout)
+      }
+    });
+  };
+
+  options.force ? show() : ToastQueue.add(show, deferred.promise);
 
   return deferred.promise;
 };
