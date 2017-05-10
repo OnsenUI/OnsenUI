@@ -7,6 +7,25 @@ dev
 
 ### New Features
 
+ * css-components: Added `list-title` component.
+ * css-components: Added `action-sheet` component.
+ * core: Added `ons-list-title` element.
+ * core: Added `ons-action-sheet` element.
+ * core: Added `ons-action-sheet-button` element.
+ * core: Added new method `ons.actionSheet(...)` for creating inline `ons-action-sheet` elements.
+ * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML.
+ * core: A fake device back button event is now fired on ESC press.
+ * ons-splitter: Push animation.
+ * ons-splitter: Reveal animation.
+ * angular1: Added `ons-action-sheet` bindings.
+
+### Bug Fixes
+
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
+ * ons-dialog: Fixed mask-color attribute.
+
  * ons.createElement: Allows creating new elements from templates or inline HTML.
 
 ### Bug Fixes
@@ -18,6 +37,7 @@ dev
 
 * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
 * ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
+* ons.notification: Canceled notifications do not reject the returned promise anymore. Instead, when canceled they resolve to `-1` for `alert` and `confirm`, or `null` for `prompt`.
 
 v2.2.6
 ----

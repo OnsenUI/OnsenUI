@@ -184,7 +184,7 @@ notification._createAlertDialog = options => {
       });
       const resolveValue = options.isPrompt ? null : -1;
       options.callback(resolveValue);
-      deferred.reject(resolveValue);
+      deferred.resolve(resolveValue);
     };
     el.dialog.addEventListener('dialog-cancel', el.dialog.onDialogCancel, false);
   }
@@ -231,7 +231,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
  * @method alert
  * @signature alert(message [, options] | options)
  * @return {Promise}
- *   [en]Will resolve when the dialog is closed.[/en]
+ *   [en]Will resolve to the index of the button that was pressed or `-1` when canceled.[/en]
  *   [ja][/ja]
  * @param {String} message
  *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
@@ -306,7 +306,7 @@ notification.alert = (message, options) => {
  * @method confirm
  * @signature confirm(message [, options] | options)
  * @return {Promise}
- *   [en]Will resolve to the index of the button that was pressed.[/en]
+ *   [en]Will resolve to the index of the button that was pressed or `-1` when canceled.[/en]
  *   [ja][/ja]
  * @param {String} message
  *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
@@ -356,7 +356,7 @@ notification.confirm = (message, options) => {
  *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
  *   [ja][/ja]
  * @return {Promise}
- *   [en]Will resolve to the input value when the dialog is closed.[/en]
+ *   [en]Will resolve to the input value when the dialog is closed or `null` when canceled.[/en]
  *   [ja][/ja]
  * @param {Object} options
  *   [en]Parameter object.[/en]

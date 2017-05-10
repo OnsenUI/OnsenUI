@@ -5,6 +5,7 @@ CHANGELOG
 dev
 ----
 * input: Added initial date value support.
+* action-sheet: Added new component.
 * toast: Implemented Toast component.
 
 v1.2.0

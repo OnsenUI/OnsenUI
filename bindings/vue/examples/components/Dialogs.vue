@@ -39,6 +39,14 @@
           Prompt
         </div>
       </v-ons-list-item>
+      <v-ons-list-item
+        tappable
+        @click="$ons.openActionSheet({buttons:['label1', 'label2', 'label3'], title: 'Lorem ipsum', cancelable: true, destructive: 1})"
+      >
+        <div class="center">
+          Action Sheet
+        </div>
+      </v-ons-list-item>
 
 
       <v-ons-list-header>Components</v-ons-list-header>
@@ -101,6 +109,16 @@
         </div>
         <div class="right">Model: {{popoverVisible}}</div>
       </v-ons-list-item>
+
+      <v-ons-list-item
+        tappable
+        @click="actionSheetVisible = true"
+      >
+        <div class="center">
+          Action Sheet
+        </div>
+        <div class="right">Model: {{actionSheetVisible}}</div>
+      </v-ons-list-item>
     </v-ons-list>
 
     <v-ons-dialog cancelable
@@ -162,6 +180,19 @@
       <button @click="popoverVisible = !popoverVisible">toggle</button>
     </v-ons-popover>
 
+    <v-ons-action-sheet
+      :visible="actionSheetVisible"
+      @update="actionSheetVisible = $event"
+      cancelable
+      title="Description"
+    >
+      <v-ons-action-sheet-button icon="md-square-o">Label 1</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o">Label 2</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o">Label 4</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o" modifier="destructive">Label 4</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o">Label 5</v-ons-action-sheet-button>
+    </v-ons-action-sheet>
+
   </v-ons-page>
 </template>
 
@@ -174,6 +205,7 @@
         alertDialog1Visible: false,
         alertDialog2Visible: false,
         popoverVisible: false,
+        actionSheetVisible: false,
         modalVisible: false
       }
     },
