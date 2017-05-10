@@ -44,3 +44,4 @@ export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScro
 export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsActionSheet = extend('action-sheet', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB, portal]);
+export const VOnsToast = extend('toast', [hidable, hasOptions, deriveDBB, portal]);

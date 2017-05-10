@@ -9,6 +9,14 @@
       <v-ons-list-header>Notifications</v-ons-list-header>
       <v-ons-list-item
         tappable
+        @click="$ons.notification.toast('Hello, world!', {timeout: 2000})"
+      >
+        <div class="center">
+          Toast
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item
+        tappable
         @click="$ons.notification.alert('Hello, world!')"
       >
         <div class="center">
@@ -50,6 +58,16 @@
           Simple Dialog
         </div>
         <div class="right">Model: {{dialogVisible}}</div>
+      </v-ons-list-item>
+
+      <v-ons-list-item
+        tappable
+        @click="toastVisible = true"
+      >
+        <div class="center">
+          Toast
+        </div>
+        <div class="right">Model: {{toastVisible}}</div>
       </v-ons-list-item>
 
       <v-ons-list-item
@@ -104,8 +122,7 @@
     </v-ons-list>
 
     <v-ons-dialog cancelable
-      :visible="dialogVisible"
-      @update="dialogVisible = $event"
+      :visible.sync="dialogVisible"
       @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -116,10 +133,11 @@
       <button @click="dialogVisible = !dialogVisible">toggle</button>
     </v-ons-dialog>
 
+    <v-ons-toast :visible="toastVisible"><div class="message">Cha-La Head-Cha-La</div><button @click="toastVisible = false">Dismiss</button></v-ons-toast>
+
     <v-ons-alert-dialog cancelable
       modifier="rowfooter"
-      :visible="alertDialog1Visible"
-      @update="alertDialog1Visible = $event"
+      :visible.sync="alertDialog1Visible"
       @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
@@ -135,15 +153,14 @@
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      :visible="alertDialog2Visible"
-      @update="alertDialog2Visible = $event"
+      :visible.sync="alertDialog2Visible"
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
     </v-ons-alert-dialog>
 
     <v-ons-modal
-      :visible="modalVisible"
+      :visible.sync="modalVisible"
       @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
@@ -152,8 +169,7 @@
 
     <v-ons-popover cancelable
       :target="$refs.myToolbarButton"
-      :visible="popoverVisible"
-      @update="popoverVisible = $event"
+      :visible.sync="popoverVisible"
       @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -185,6 +201,7 @@
     data() {
       return {
         dialogVisible: false,
+        toastVisible: false,
         alertDialog1Visible: false,
         alertDialog2Visible: false,
         popoverVisible: false,

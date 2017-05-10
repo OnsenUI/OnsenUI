@@ -17,6 +17,16 @@ limitations under the License.
 
 import util from './util';
 import contentReady from './content-ready';
+import ToastQueue from './internal/toast-queue';
+
+const _setAttributes = (element, options) => {
+  ['id', 'class', 'animation']
+    .forEach(a => options.hasOwnProperty(a) && element.setAttribute(a, options[a]));
+
+  if (options.modifier) {
+    util.addModifier(element, options.modifier);
+  }
+};
 
 /**
  * @object ons.notification
@@ -24,11 +34,12 @@ import contentReady from './content-ready';
  * @tutorial vanilla/Reference/dialog
  * @description
  *   [en]
- *     Utility methods to create different kinds of alert dialogs. There are three methods available:
+ *     Utility methods to create different kinds of notifications. There are three methods available:
  *
  *     * `ons.notification.alert()`
  *     * `ons.notification.confirm()`
  *     * `ons.notification.prompt()`
+ *     * `ons.notification.toast()`
  *
  *     It will automatically display a Material Design dialog on Android devices.
  *   [/en]
@@ -122,11 +133,7 @@ notification._createAlertDialog = options => {
   contentReady(el.dialog);
 
   // Set attributes
-  ['id', 'class', 'animation']
-    .forEach(a => options.hasOwnProperty(a) && el.dialog.setAttribute(a, options[a]));
-  if (options.modifier) {
-    util.addModifier(el.dialog, options.modifier);
-  }
+  _setAttributes(el.dialog, options);
 
   const deferred = util.defer();
 
@@ -198,9 +205,10 @@ notification._createAlertDialog = options => {
 };
 
 const _normalizeArguments = (message, options = {}, defaults = {}) => {
+  options = { ...options };
   typeof message === 'string' ? (options.message = message) : (options = message);
   if (!options.message && !options.messageHTML) {
-    throw new Error('Alert dialog must contain a message.');
+    throw new Error('Notifications must contain a message.');
   }
 
   if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
@@ -213,7 +221,6 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   return util.extend({
       compile: param => param,
       callback: param => param,
-      buttonLabels: ['OK'],
       primaryButtonIndex: 0,
       animation: 'default',
       cancelable: false
@@ -227,16 +234,16 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
  *   [en]Will resolve to the index of the button that was pressed or `-1` when canceled.[/en]
  *   [ja][/ja]
  * @param {String} message
- *   [en]Alert message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
+ *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
  *   [ja][/ja]
  * @param {Object} options
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクトです。[/ja]
  * @param {String} [options.message]
- *   [en]Alert message.[/en]
+ *   [en]Notification message.[/en]
  *   [ja]アラートダイアログに表示する文字列を指定します。[/ja]
  * @param {String} [options.messageHTML]
- *   [en]Alert message in HTML.[/en]
+ *   [en]Notification message in HTML.[/en]
  *   [ja]アラートダイアログに表示するHTMLを指定します。[/ja]
  * @param {String | Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is `"OK"`.[/en]
@@ -288,6 +295,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
  */
 notification.alert = (message, options) => {
   options = _normalizeArguments(message, options, {
+    buttonLabels: ['OK'],
     title: 'Alert'
   });
 
@@ -301,7 +309,7 @@ notification.alert = (message, options) => {
  *   [en]Will resolve to the index of the button that was pressed or `-1` when canceled.[/en]
  *   [ja][/ja]
  * @param {String} message
- *   [en]Alert message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
+ *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
  *   [ja][/ja]
  * @param {Object} options
  *   [en]Parameter object.[/en]
@@ -345,7 +353,7 @@ notification.confirm = (message, options) => {
  * @method prompt
  * @signature prompt(message [, options] | options)
  * @param {String} message
- *   [en]Alert message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
+ *   [en]Notification message. This argument is optional but if it's not defined either `options.message` or `options.messageHTML` must be defined instead.[/en]
  *   [ja][/ja]
  * @return {Promise}
  *   [en]Will resolve to the input value when the dialog is closed or `null` when canceled.[/en]
@@ -394,6 +402,7 @@ notification.confirm = (message, options) => {
  */
 notification.prompt = (message, options) => {
   options = _normalizeArguments(message, options, {
+    buttonLabels: ['OK'],
     title: 'Alert',
     isPrompt: true,
     autofocus: true,
@@ -401,6 +410,109 @@ notification.prompt = (message, options) => {
   });
 
   return notification._createAlertDialog(options);
+};
+
+/**
+ * @method toast
+ * @signature toast(message [, options] | options)
+ * @return {Promise}
+ *   [en]Will resolve when the toast is hidden.[/en]
+ *   [ja][/ja]
+ * @param {String} message
+ *   [en]Toast message. This argument is optional but if it's not defined then `options.message` must be defined instead.[/en]
+ *   [ja][/ja]
+ * @param {Object} options
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
+ * @param {String} [options.message]
+ *   [en]Notification message.[/en]
+ *   [ja]トーストに表示する文字列を指定します。[/ja]
+ * @param {String} [options.buttonLabel]
+ *   [en]Label for the button.[/en]
+ *   [ja]確認ボタンのラベルを指定します。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are `none`, `fade`, `ascend`, `lift` and `fall`. Default is `ascend` for Android and `lift` for iOS.[/en]
+ *   [ja]トーストを表示する際のアニメーション名を指定します。"none", "fade", "ascend", "lift", "fall"のいずれかを指定できます。[/ja]
+ * @param {Number} [options.timeout]
+ *   [en]Number of miliseconds where the toast is visible before hiding automatically.[/en]
+ *   [ja][/ja]
+ * @param {Boolean} [options.force]
+ *   [en]If `true`, the toast skips the notification queue and is shown immediately. Defaults to `false`.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.id]
+ *   [en]The `<ons-toast>` element's ID.[/en]
+ *   [ja]ons-toast要素のID。[/ja]
+ * @param {String} [options.class]
+ *   [en]The `<ons-toast>` element's class.[/en]
+ *   [ja]ons-toast要素のclass。[/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier for the element.[/en]
+ *   [ja]トーストのmodifier属性の値を指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function that executes after toast has been hidden.[/en]
+ *   [ja]トーストが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]
+ *     Display a simple notification toast with an optional button that can be used for simple actions.
+ *
+ *     It can be called in the following ways:
+ *
+ *     ```
+ *     ons.notification.toast(message, options);
+ *     ons.notification.toast(options);
+ *     ```
+ *   [/en]
+ *   [ja][/ja]
+ */
+notification.toast = (message, options) => {
+  options = _normalizeArguments(message, options, {
+    timeout: 0,
+    force: false
+  });
+
+  let toast = util.createElement(`
+    <ons-toast>
+      ${options.message}
+      ${options.buttonLabels ? `<button>${options.buttonLabels[0]}</button>` : ''}
+    </ons-toast>
+  `);
+
+  _setAttributes(toast, options);
+
+  const deferred = util.defer();
+  const resolve = value => {
+    if (toast) {
+      toast
+      .hide()
+      .then(() => {
+        if (toast) {
+          toast.remove();
+          toast = null;
+          options.callback(value);
+          deferred.resolve(value);
+        }
+      });
+    }
+  };
+
+  if (options.buttonLabels) {
+    util.findChild(toast._toast, 'button').onclick = () => resolve(0);
+  }
+
+  document.body.appendChild(toast);
+  options.compile(toast);
+
+  const show = () => {
+    toast.parentElement && toast.show(options).then(() => {
+      if (options.timeout) {
+        setTimeout(() => resolve(-1), options.timeout)
+      }
+    });
+  };
+
+  options.force ? show() : ToastQueue.add(show, deferred.promise);
+
+  return deferred.promise;
 };
 
 export default notification;

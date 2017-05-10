@@ -37,6 +37,7 @@ import Tab from './components/Tab.jsx';
 import TabActive from './components/TabActive.jsx';
 import TabInactive from './components/TabInactive.jsx';
 import Tabbar from './components/Tabbar.jsx';
+import Toast from './components/Toast.jsx';
 import Toolbar from './components/Toolbar.jsx';
 import ToolbarButton from './components/ToolbarButton.jsx';
 
@@ -83,6 +84,7 @@ export {
   TabActive,
   TabInactive,
   Tabbar,
+  Toast,
   Toolbar,
   ToolbarButton
 };

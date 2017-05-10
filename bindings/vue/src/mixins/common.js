@@ -2,8 +2,20 @@ import { _util as util } from 'onsenui';
 
 /* Private */
 const _toggleVisibility = function() {
-  if (this.visible !== this.$el.visible) {
+  if (typeof this.visible === 'boolean' && this.visible !== this.$el.visible) {
     this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
+  }
+};
+const _teleport = function() {
+  if (!this._isDestroyed && (!this.$el.parentNode || this.$el.parentNode !== document.body)) {
+    document.body.appendChild(this.$el);
+  }
+};
+const _unmount = function() {
+  if (this.$el.visible === true) {
+    this.$el.hide().then(() => this.$el.remove());
+  } else {
+    this.$el.remove();
   }
 };
 
@@ -24,11 +36,11 @@ const hidable = {
   },
 
   mounted() {
-    this.$nextTick(() => { // FAB takes 1 extra cycle
-      if (typeof this.visible === 'boolean') {
-        _toggleVisibility.call(this);
-      }
-    });
+    this.$nextTick(() => _toggleVisibility.call(this));
+  },
+
+  activated() {
+    this.$nextTick(() => _toggleVisibility.call(this));
   }
 };
 
@@ -93,33 +105,26 @@ const selfProvider = {
 // Common event for Dialogs
 const dialogCancel = {
   mounted() {
-    this.$on('dialog-cancel', () => this.$emit('update', false));
+    this.$on('dialog-cancel', () => this.$emit('update:visible', false));
   }
 };
 
 // Moves the element to a global position
 const portal = {
-  methods: {
-    _teleport() {
-      if (!this._isDestroyed && (!this.$el.parentNode || this.$el.parentNode !== document.body)) {
-        document.body.appendChild(this.$el);
-      }
-    }
-  },
   mounted() {
-    this._teleport();
+    _teleport.call(this);
   },
   updated() {
-    this._teleport();
+    _teleport.call(this);
   },
   activated() {
-    this._teleport();
+    _teleport.call(this);
   },
   deactivated() {
-    this.$el.remove();
+    _unmount.call(this);
   },
   beforeDestroy() {
-    this.$el.remove();
+    _unmount.call(this);
   }
 };
 

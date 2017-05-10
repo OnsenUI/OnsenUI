@@ -14,17 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-import internal from './internal';
-import AnimatorFactory from './animator-factory';
-import ModifierUtil from './modifier-util';
-import ToastQueue from './toast-queue';
-import {LazyRepeatProvider, LazyRepeatDelegate} from './lazy-repeat';
 
-internal.AnimatorFactory = AnimatorFactory;
-internal.ModifierUtil = ModifierUtil;
-internal.ToastQueue = ToastQueue;
-internal.LazyRepeatProvider = LazyRepeatProvider;
-internal.LazyRepeatDelegate = LazyRepeatDelegate;
+class ToastQueue {
+  constructor() {
+    this.queue = [];
+  }
 
-export default internal;
+  add(fn, promise) {
+    this.queue.push(fn);
 
+    if (this.queue.length === 1) {
+      setImmediate(this.queue[0]);
+    }
+
+    promise.then(() => {
+      this.queue.shift();
+
+      if (this.queue.length > 0) {
+        setTimeout(this.queue[0], 1000/30); // Apply some visual delay
+      }
+    });
+  }
+}
+
+export default new ToastQueue();

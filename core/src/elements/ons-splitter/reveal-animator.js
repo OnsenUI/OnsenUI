@@ -32,7 +32,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
 
   activate(sideElement) {
     super.activate(sideElement);
-    this.maxWidth = sideElement.offsetWidth;
+    this.maxWidth = this._getMaxWidth();
     if (sideElement.mode === 'collapse') {
       this._setStyles(sideElement);
     }
@@ -50,9 +50,12 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     sideElement.style.opacity = 0.9;
     sideElement.style.visibility = 'hidden';
 
-    sideElement.parentElement.style.backgroundColor = 'black'
-    contentReady(sideElement.parentElement, () => {
-      sideElement.parentElement.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
+    const splitter = sideElement.parentElement;
+    splitter.style.backgroundColor = 'black';
+    contentReady(splitter, () => {
+      if (splitter.content) {
+        splitter.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
+      }
     });
   }
 
@@ -62,7 +65,9 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     // Check if the other side needs the common styles
     if (!this._oppositeSide || this._oppositeSide.mode === 'split' || !this._oppositeSide.isOpen) {
       sideElement.parentElement.style.backgroundColor = '';
-      sideElement.parentElement.content.style.boxShadow = '';
+      if (sideElement.parentElement.content) {
+        sideElement.parentElement.content.style.boxShadow = '';
+      }
     }
   }
 
@@ -82,8 +87,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   }
 
   translate(distance) {
-    const max = this.maxWidth;
-    const menuStyle = this._generateBehindPageStyle(Math.min(distance, max));
+    this.maxWidth = this.maxWidth || this._getMaxWidth();
+    const menuStyle = this._generateBehindPageStyle(Math.min(distance, this.maxWidth));
     this._side.style.visibility = 'visible';
 
     if (!this._slidingElements) {
@@ -104,8 +109,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
    * @param {Function} done
    */
   open(done) {
-    const max = this.maxWidth;
-    const menuStyle = this._generateBehindPageStyle(max);
+    this.maxWidth = this.maxWidth || this._getMaxWidth();
+    const menuStyle = this._generateBehindPageStyle(this.maxWidth);
     this._slidingElements = this._getSlidingElements();
     this._side.style.visibility = 'visible';
 
@@ -113,7 +118,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
       animit(this._slidingElements)
         .wait(this.delay)
         .queue({
-          transform: `translate3d(${this.minus + max}px, 0px, 0px)`
+          transform: `translate3d(${this.minus + this.maxWidth}px, 0px, 0px)`
         }, {
           duration: this.duration,
           timing: this.timing
@@ -177,5 +182,9 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
           callback();
         }),
     );
+  }
+
+  _getMaxWidth() {
+    return this._side.offsetWidth;
   }
 }

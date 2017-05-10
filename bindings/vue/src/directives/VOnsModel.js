@@ -86,7 +86,7 @@ export default {
 
     switch (tag) {
       case 'ons-select':
-        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', 'selected');
+        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', '');
         _bindSimpleInputOn('change', modelKey, vnode, 'value');
         break;
 
@@ -136,7 +136,7 @@ export default {
 
     switch (tag) {
       case 'ons-select':
-        el.querySelectorAll('option').forEach(function (option) { option.value == binding.value ? option.setAttribute('selected', 'selected') : option.removeAttribute('selected') });
+        el.value = binding.value;
         break;
 
       case 'ons-switch':

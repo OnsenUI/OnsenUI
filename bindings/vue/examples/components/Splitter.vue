@@ -2,12 +2,11 @@
   <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
-        :open="splitterOpen"
+        :open.sync="splitterOpen"
         :swipeable="state.swipeable"
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
-        @update="splitterOpen = $event"
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"

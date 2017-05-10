@@ -11,15 +11,13 @@
   <a href="https://cdnjs.com/libraries/onsen"><img src="https://img.shields.io/cdnjs/v/onsen.svg" alt="CDNJS"></a>
 </p>
 
-# [Onsen UI](https://onsen.io/) - Cross-platform HTML5 Mobile App Framework
+# [Onsen UI](https://onsen.io/) - Cross-Platform HTML5 Hybrid App Framework
 
 <p>Onsen UI is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
 
 <p align="center"><img height="500" src="https://onsenui.github.io/art/showcase/showcase-onsenui.gif" alt="Onsen UI Todo App"></p>
 
 It is <strong>open source</strong> and designed to deliver native look and feel. Apps are made out of simple HTML tags, thus providing a gentle learning curve.
-
-Both <strong>iOS flat and Android's Material design</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>.
 
 The core library is written in <strong>pure Javascript</strong> (on top of <a href="http://webcomponents.org/">Web Components</a>) and is <strong>framework agnostic</strong>, which means you can use it with your favorite framework and its tools. Currently, we provide some extra binding packages in order to __tailor Onsen UI's API__ for specific frameworks:
 
@@ -34,23 +32,26 @@ The core library is written in <strong>pure Javascript</strong> (on top of <a hr
 
 Some other frameworks are supported by __community__ packages (i.e. not tested or implemented by the core team): [Aurelia](https://www.npmjs.com/package/aurelia-onsenui), [EmberJS](https://www.npmjs.com/package/ember-onsenui).
 
+Both <strong>iOS flat and Android's Material design</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>.
+
+
 ## Getting started
 
 We have several resources to help you get started creating hybrid apps with Onsen UI:
 
-* __The official docs__: we provide a reference for the [core library (vanilla JS or jQuery)](https://onsen.io/v2/docs/js.html) as well as the [Vue](https://onsen.io/v2/docs/guide/vue/index.html), [React](https://onsen.io/v2/docs/guide/react/index.html), [Angular2](https://onsen.io/v2/docs/guide/angular2/) and [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/) components.
+* __The official docs__: we provide guides and references for the [core library (vanilla JS or jQuery)](https://onsen.io/v2/docs/js.html) as well as the [Vue](https://onsen.io/v2/docs/guide/vue/index.html), [React](https://onsen.io/v2/docs/guide/react/index.html), [Angular2](https://onsen.io/v2/docs/guide/angular2/) and [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/) components.
 * __Components overview__: a [list of included CSS components](https://onsen.io/v2/docs/css.html) in both flat and Material Design. Note that these components are just pure and performant CSS without JavaScript behavior. Some extra details (such as dragging or ripple effect) are added by Onsen UI custom elements.
 * __Playground__: an [interactive Onsen UI tutorial](https://onsen.io/tutorial/) is also available where you can learn how to use the library and play around with the components.
-* __Blog__: There are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly.
-* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
+* __Blog__: there are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly.
+* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/) or [Gitter chat](https://gitter.im/OnsenUI/OnsenUI). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
 
 ## Onsen UI ecosystem
 
-Because sometimes a UI framework may not be enough to make hybrid apps easily, Onsen UI comes with a __complete ecosystem__ of well integrated tools. Meet [__Monaca__](https://monaca.io/).
+Because sometimes a UI framework may not be enough to make hybrid app development easily, Onsen UI comes with a __complete ecosystem__ of well integrated tools. Meet [__Monaca__](https://monaca.io/).
 
 <p align="center"><a href="https://monaca.io" target="_blank"><img width="300"src="https://onsenui.github.io/art/logos/monaca-logo-2.png"></a></p>
 
-Made by the same team, __Monaca Platform__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova-like templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides multiple development environments with everything already configured and ready to go:
+Developed by the same team, __Monaca Platform__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova-like templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides multiple development environments with everything already configured and ready to go:
 
 <p align="center">
   <a href="https://monaca.io/cloud.html"><strong>Cloud IDE</strong></a> -
@@ -108,4 +109,4 @@ Optionally, you can download the [latest development build here](https://circlec
 
 ## Contribution
 
-Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).

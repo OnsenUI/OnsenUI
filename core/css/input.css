@@ -3,7 +3,8 @@ ons-input {
   position: relative;
 }
 
-ons-input .text-input__container {
+ons-input .text-input__container,
+ons-input .text-input__container input {
   width: 100%;
   display: inline-block;
 }
