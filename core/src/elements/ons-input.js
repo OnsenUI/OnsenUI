@@ -384,7 +384,7 @@ export default class InputElement extends BaseElement {
   }
 
   get _isTextInput() {
-    return this.type !== 'radio' && this.type !== 'checkbox' && this.type !== 'search';
+    return this.type !== 'radio' && this.type !== 'checkbox';
   }
 
   get type() {
