@@ -147,7 +147,7 @@
   name: Material Action Sheet
   category: Action Sheet
   markup: |
-    <div class="action-sheet-mask action-sheet-mask--material">
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
       <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
       <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
@@ -159,7 +159,7 @@
   name: Material Action Sheet with Title
   category: Action Sheet
   markup: |
-    <div class="action-sheet-mask action-sheet-mask--material">
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
       <div class="action-sheet-title action-sheet-title--material">Title</div>
       <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>

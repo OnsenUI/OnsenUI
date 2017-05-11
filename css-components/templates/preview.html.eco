@@ -17,7 +17,7 @@
         background-color: white;
       }
 
-      h1 {
+      h1#title {
         font-size: 16px;
         font-weight: 500;
         font-family: Helvetica;
@@ -124,7 +124,7 @@
   </head>
   <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
 
-    <h1>CSS Components for Onsen UI</h1>
+    <h1 id="title">CSS Components for Onsen UI</h1>
 
     <div class="components">
       <% for component in @components: %>
