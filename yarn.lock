@@ -18,9 +18,9 @@
   version "2.53.33"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-2.53.33.tgz#64672bae3acedf9d9e6bcfa8bdb7c37497751c3d"
 
-"@webcomponents/custom-elements@OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1":
-  version "1.0.0-rc.3+mod.20170410.1"
-  resolved "https://codeload.github.com/OnsenUI/custom-elements/tar.gz/bf2f0a4aee940223cfa7eb18e29bd1da51edb90f"
+"@webcomponents/custom-elements@webcomponents/custom-elements#1.0.0-rc.2":
+  version "1.0.0-rc.2"
+  resolved "https://codeload.github.com/webcomponents/custom-elements/tar.gz/79445c1cad08655e55b14c52fa07368bcca2e780"
 
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
