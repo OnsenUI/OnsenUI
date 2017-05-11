@@ -65,6 +65,8 @@
     "babel-plugin-angularjs-annotate": "^0.7.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-3": "^6.22.0",
     "browser-sync": "^2.13.0",
     "chai": "^3.4.1",
