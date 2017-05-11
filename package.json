@@ -27,7 +27,13 @@
   "files": [
     "bower.json",
     "css",
-    "css-components-src",
+    "css-components-src/src",
+    "css-components-src/templates",
+    "css-components-src/gulpfile.js",
+    "css-components-src/package.json",
+    "css-components-src/README.md",
+    "css-components-src/styielint.config.js",
+    "css-components-src/yarn.lock",
     "js"
   ],
   "repository": {
