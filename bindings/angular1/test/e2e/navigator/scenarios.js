@@ -163,35 +163,6 @@
       });
     });
 
-    describe('pop and refresh page', function () {
-      it('should refresh previous page when a button is clicked', function () {
-        var page1 = element(by.id('page1'));
-        var page2 = element(by.id('page2'));
-        var status = element(by.id('status'));
-
-        expect(status.getText()).toBe('init');
-
-        element(by.id('btn1')).click();
-        browser.wait(EC.visibilityOf(page2));
-        expect((page2).isDisplayed()).toBeTruthy();
-        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
-        expect(lastElement.equals(page2)).toBeTruthy();
-        expect((page1).isPresent()).toBeTruthy();
-
-        browser.sleep(500); // Wait for the animation
-
-        element(by.id('btn5')).click();
-        browser.wait(EC.stalenessOf(page2));
-
-        // Check that page2 was destroyed.
-        expect((page1).isDisplayed()).toBeTruthy();
-        expect((page2).isPresent()).not.toBeTruthy();
-
-        // Check that page1 object is a new unmodified object.
-        expect(status.getText()).toBe('init');
-      });
-    });
-
     it('should emit events', function() {
       var pops = element(by.id('pops')),
         pushes = element(by.id('pushes'));
