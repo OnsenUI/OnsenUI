@@ -30,14 +30,10 @@ import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import webpackStream from 'webpack-stream';
+import webpack2 from 'webpack';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
-import rollup from 'rollup-stream';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
 
 ////////////////////////////////////////
 
@@ -67,49 +63,80 @@ gulp.task('browser-sync', () => {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  return rollup({
-      sourceMap: 'inline',
-      entry: './core/src/setup.js',
-      plugins: [
-        nodeResolve(),
-        // Convert CommonJS modules to ES2015 modules.
-        // This plugin must be executed before rollup-plugin-babel.
-        commonjs({
-          // non-CommonJS modules will be ignored, but you can also
-          // specifically include/exclude files
-          include: 'node_modules/**',  // Default: undefined
-          exclude: undefined,  // Default: undefined
+  return gulp.src('core/src/setup.js')
+    .pipe(webpackStream(
+      { // webpack2 config
+        output: {
+          // options related to how webpack emits results
 
-          // search for files other than .js files (must already
-          // be transpiled by a previous plugin!)
-          extensions: [ '.js' ],  // Default: [ '.js' ]
+          // path: path.resolve(__dirname), // string
+          // the target directory for all output files
+          // must be an absolute path (use the Node.js path module)
 
-          // if true then uses of `global` won't be dealt with by this plugin
-          ignoreGlobal: false,  // Default: false
+          filename: "onsenui-without-polyfills.js", // string
+          // the filename template for entry chunks
 
-          // if false then skip sourceMap generation for CommonJS modules
-          sourceMap: true,  // Default: true
+          // publicPath: "/assets/", // string
+          // the url to the output directory resolved relative to the HTML page
 
-          // explicitly specify unresolvable named exports
-          // (see below for more details)
-          namedExports: undefined,  // Default: undefined
+          library: "ons", // string,
+          // the name of the exported library
 
-          // sometimes you have to leave require statements
-          // unconverted. Pass an array containing the IDs
-          // or a `id => boolean` function. Only use this
-          // option if you know what you're doing!
-          ignore: undefined
-        }),
-        babel({
-          presets: ['es2015-rollup', 'es2016', 'es2017', 'stage-3'],
-          babelrc: false
-        })
-      ],
-      format: 'umd',
-      moduleName: 'ons'
-    })
-    .pipe(source('setup.js', './core/src'))
-    .pipe(buffer())
+          libraryTarget: "umd", // universal module definition
+          // the type of the exported library
+        },
+
+        module: {
+          // configuration regarding modules
+
+          rules: [
+            // rules for modules (configure loaders, parser options, etc.)
+
+            {
+              test: /\.js$/,
+              include: [
+                path.resolve(__dirname, "core/src"),
+                path.resolve(__dirname, "node_modules") // untranspiled ES modules must be transpiled
+              ],
+              exclude: [
+                // path.resolve(__dirname, "app/demo-files")
+              ],
+              // these are matching conditions, each accepting a regular expression or string
+              // test and include have the same behavior, both must be matched
+              // exclude must not be matched (takes preferrence over test and include)
+              // Best practices:
+              // - Use RegExp only in test and for filename matching
+              // - Use arrays of absolute paths in include and exclude
+              // - Try to avoid exclude and prefer include
+
+              loader: 'babel-loader',
+              // the loader which should be applied, it'll be resolved relative to the context
+              // -loader suffix is no longer optional in webpack2 for clarity reasons
+              // see webpack 1 upgrade guide
+
+              options: {
+                presets: ["env", "stage-3"],
+                plugins: ["add-module-exports"]
+              }
+              // options for the loader
+            }
+          ]
+        },
+
+        resolve: {
+          // options for resolving module requests
+          // (does not apply to resolving to loaders)
+
+          extensions: ['.js']
+          // extensions that are used
+        },
+
+        devtool: "cheap-module-inline-source-map", // enum
+        // enhance debugging by adding meta info for the browser devtools
+        // source-map most detailed at the expense of build speed.
+      },
+      webpack2
+    ))
     .pipe($.addSrc.prepend([
       'core/polyfills/CustomEvent.js',
       'core/polyfills/MutationObserver*/MutationObserver.js',

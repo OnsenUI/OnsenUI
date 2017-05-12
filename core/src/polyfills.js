@@ -12,4 +12,4 @@ import 'core-js/fn/set';
 import 'core-js/fn/map';
 
 // Polyfill Custom Elements v1 with global namespace pollution
-import '@webcomponents/custom-elements';
+import '@webcomponents/custom-elements/src/custom-elements';
