@@ -46,7 +46,7 @@ module.exports = {
       },
       { test: /\.js$|\.jsx$/,
         exclude: [/node_modules/, /onsenui\.js/],
-        loaders: ['babel?' + JSON.stringify({presets: ['stage-3', 'latest', 'react'], plugins: ['react-hot-loader/babel']})
+        loaders: ['babel?' + JSON.stringify({presets: ['env', 'stage-3', 'react'], plugins: ['react-hot-loader/babel']})
         ]
       }
     ]

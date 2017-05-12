@@ -362,11 +362,6 @@ export default class PopoverElement extends BaseDialogElement {
       this.removeAttribute('style');
     }
 
-    // FIXME!
-    if (this.hasAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
-    }
-
     ModifierUtil.initModifier(this, this._scheme);
   }
 

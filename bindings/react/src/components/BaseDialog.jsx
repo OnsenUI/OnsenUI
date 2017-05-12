@@ -65,8 +65,16 @@ class BaseDialog extends React.Component {
     this.node.removeEventListener('prehide', this.onPreHide);
     this.node.removeEventListener('posthide', this.onPostHide);
 
-    ReactDOM.unmountComponentAtNode(this.node);
-    document.body.removeChild(this.node);
+    const unmount = () => {
+      ReactDOM.unmountComponentAtNode(this.node);
+      document.body.removeChild(this.node);
+    };
+
+    if (this.node.firstChild.visible === true) {
+      this.node.firstChild.hide().then(unmount);
+    } else {
+      unmount();
+    }
   }
 
   _update(isShown, onDeviceBackButton) {

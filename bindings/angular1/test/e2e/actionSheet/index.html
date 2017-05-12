@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        ons.ready(function() {
+          ons.createElement('action-sheet.html', { append: true, parentScope: $scope });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="TestController">
+      <ons-button id="index-show" ng-click="actionSheet.show()">Show action sheet</ons-button>
+    </ons-page>
+
+    <ons-template id="action-sheet.html">
+      <ons-action-sheet var="actionSheet">
+        <ons-action-sheet-button>L1</ons-action-sheet-button>
+        <ons-action-sheet-button>L2</ons-action-sheet-button>
+        <ons-action-sheet-button>L3</ons-action-sheet-button>
+      </ons-action-sheet>
+    </ons-template>
+  </body>
+</html>

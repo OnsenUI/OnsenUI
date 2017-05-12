@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -27,7 +27,13 @@
   "files": [
     "bower.json",
     "css",
-    "css-components-src",
+    "css-components-src/src",
+    "css-components-src/templates",
+    "css-components-src/gulpfile.js",
+    "css-components-src/package.json",
+    "css-components-src/README.md",
+    "css-components-src/styielint.config.js",
+    "css-components-src/yarn.lock",
     "js"
   ],
   "repository": {
@@ -63,8 +69,10 @@
     "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-eslint": "^6.0.3",
     "babel-plugin-angularjs-annotate": "^0.7.0",
+    "babel-preset-env": "^1.4.0",
     "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-latest": "^6.22.0",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-3": "^6.22.0",
     "browser-sync": "^2.13.0",
     "chai": "^3.4.1",
@@ -122,7 +130,7 @@
     "typescript": "^1.8.10",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "wcdoc": "OnsenUI/wcdoc#8cac2a5",
+    "wcdoc": "0.1.19",
     "wdio-jasmine-framework": "^0.2.16",
     "webdriverio": "^4.4.0"
   }

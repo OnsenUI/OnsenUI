@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Toast | Onsen UI</title>
+
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyController', function($scope) {
+      $scope.animation = 'default';
+
+      $scope.setAnimation = function(animation) {
+        $scope.animation = animation;
+      };
+    });
+
+  </script>
+</head>
+
+<body ng-controller="MyController">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Toast</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" ng-click="toast.toggle()">Toggle Toast</ons-button>
+      <br><br><span style="color: grey">Animations:</span>
+      <ons-button modifier="outline" ng-click="setAnimation('none')">None</ons-button>
+      <ons-button modifier="outline" ng-click="setAnimation('ascend')">Ascend</ons-button>
+      <ons-button modifier="outline" ng-click="setAnimation('lift')">Lift</ons-button>
+      <ons-button modifier="outline" ng-click="setAnimation('fall')">Fall</ons-button>
+      <ons-button modifier="outline" ng-click="setAnimation('fade')">Fade</ons-button>
+    </p>
+    <ons-fab position="bottom left">-</ons-fab>
+    <ons-fab position="bottom right">+</ons-fab>
+  </ons-page>
+
+  <ons-toast var="toast" ng-attr-animation="{{animation}}">
+    This is an Onsen Toast!<button>Hoge</button>
+  </ons-toast>
+</body>
+</html>

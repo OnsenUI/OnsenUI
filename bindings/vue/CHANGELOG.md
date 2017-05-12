@@ -13,6 +13,9 @@ dev
 
 ### New Features
 
+* VOnsActionSheet: New component.
+* VOnsActionSheetButton: New component.
+* $ons.actionSheet: Suppot shortcut method for VOnsActionSheet.
 * Vue 2.3.0: `sync` modifier is now supported for `index`, `visible` and `open` props. See breaking changes section.
 
 ### Bug Fixes
