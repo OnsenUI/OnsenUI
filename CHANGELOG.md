@@ -18,6 +18,8 @@ dev
  * ons-splitter: Push animation.
  * ons-splitter: Reveal animation.
  * angular1: Added `ons-action-sheet` bindings.
+ * core: Added `ons-card` element.
+ * angular1: Added `ons-card` bindings.
 
 ### Bug Fixes
 
