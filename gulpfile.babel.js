@@ -115,7 +115,7 @@ gulp.task('core', function() {
               // see webpack 1 upgrade guide
 
               options: {
-                presets: ["latest", "stage-3"],
+                presets: ["env", "stage-3"],
                 plugins: ["add-module-exports"]
               }
               // options for the loader
