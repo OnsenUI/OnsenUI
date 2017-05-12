@@ -19,23 +19,17 @@ dev
  * angular1: Added `ons-action-sheet` bindings.
  * angular1: Added `ons-card` bindings.
  * ons-input: Added styling support for `type='search'`.
-
-### Bug Fixes
-
- * angular1: Page loader now throws `destroy` event when page is unloaded.
- * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
- * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
- * ons-dialog: Fixed mask-color attribute.
-
- * ons.createElement: Allows creating new elements from templates or inline HTML.
+ * ons.createElement: Allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
 
 ### Bug Fixes
 
  * css-components: Fixed color of range component in Firefox. Fixed [#1964](https://github.com/OnsenUI/OnsenUI/issues/1964).
-### Bug Fixes
-
  * core: Fixed broken sourcemap of `onsenui.js` ([#1958](https://github.com/OnsenUI/OnsenUI/issues/1958)).
+ * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
  * ons-carousel: `refresh` event is now triggered when resized.
+ * ons-dialog: Fixed mask-color attribute.
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
  
 ### BREAKING CHANGES
 
