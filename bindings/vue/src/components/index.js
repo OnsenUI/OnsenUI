@@ -28,6 +28,7 @@ export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsList = extend('list');
 export const VOnsListItem = extend('list-item');
+export const VOnsListTitle = extend('list-title');
 export const VOnsListHeader = extend('list-header');
 export const VOnsActionSheetButton = extend('action-sheet-button');
 export const VOnsRipple = extend('ripple');
