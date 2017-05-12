@@ -19,6 +19,7 @@ dev
  * angular1: Added `ons-action-sheet` bindings.
  * angular1: Added `ons-card` bindings.
  * ons-input: Added styling support for `type='search'`.
+ * angular1: Added `ons-list-title` bindings.
 
 ### Bug Fixes
 

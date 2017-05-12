@@ -16,6 +16,7 @@ import LazyList from './components/LazyList.jsx';
 import List from './components/List.jsx';
 import ListHeader from './components/ListHeader.jsx';
 import ListItem from './components/ListItem.jsx';
+import ListTitle from './components/ListTitle.jsx';
 import Navigator from './components/Navigator.jsx';
 import Modal from './components/Modal.jsx';
 import Page from './components/Page.jsx';
@@ -63,6 +64,7 @@ export {
   List,
   ListHeader,
   ListItem,
+  ListTitle,
   Navigator,
   Modal,
   Page,
