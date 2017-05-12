@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Card Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css" />
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Card</div>
+    </ons-toolbar>
+
+    <br>
+
+    <ons-card>
+      <div class="title right">Awesome card title</div>
+      <div class="content">
+        <ons-list>
+          <ons-list-header>Awesome card 1 info</ons-list-header>
+          <ons-list-item>Awesome card 1 info 1</ons-list-item>
+          <ons-list-item>Awesome card 1 info 2</ons-list-item>
+          <ons-list-header>Awesome card 2 info</ons-list-header>
+          <ons-list-item>Awesome card 2 info 1</ons-list-item>
+          <ons-list-item>Awesome card 2 info 2</ons-list-item>
+        </ons-list>
+        <div class="button-bar" style="margin-top: 1%;">
+          <ons-button>Action 1</ons-button>
+          <ons-button>Action 2</ons-button>
+          <ons-button>Action 3</ons-button>
+        </div>
+      </div>
+    </ons-card>
+
+  </ons-page>
+</body>
+
+</html>

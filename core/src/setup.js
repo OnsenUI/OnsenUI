@@ -46,6 +46,7 @@ import ToastElement from './elements/ons-toast';
 import ToolbarButtonElement from './elements/ons-toolbar-button';
 import ToolbarElement from './elements/ons-toolbar';
 import RangeElement from './elements/ons-range';
+import CardElement from './elements/ons-card';
 
 ons.TemplateElement = TemplateElement;
 ons.IfElement = IfElement;
@@ -91,6 +92,7 @@ ons.ToastElement = ToastElement;
 ons.ToolbarButtonElement = ToolbarButtonElement;
 ons.ToolbarElement = ToolbarElement;
 ons.RangeElement = RangeElement;
+ons.CardElement = CardElement;
 
 // fastclick
 window.addEventListener('load', () => {

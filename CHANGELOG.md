@@ -14,10 +14,10 @@ dev
  * core: Added `ons-action-sheet-button` element.
  * core: Added new method `ons.actionSheet(...)` for creating inline `ons-action-sheet` elements.
  * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML.
+ * core: Added `ons-card` element.
  * core: A fake device back button event is now fired on ESC press.
- * ons-splitter: Push animation.
- * ons-splitter: Reveal animation.
  * angular1: Added `ons-action-sheet` bindings.
+ * angular1: Added `ons-card` bindings.
  * ons-input: Added styling support for `type='search'`.
 
 ### Bug Fixes
