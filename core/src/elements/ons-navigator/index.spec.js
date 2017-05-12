@@ -54,18 +54,18 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#pages', () => {
-    onlyChrome(it)('provides \'pages\' property', () => {
+    it('provides \'pages\' property', () => {
         const pages = nav.pages;
         expect(pages[0]).to.be.an.instanceof(Element);
     });
 
-    onlyChrome(it)('should have one page after initialization', () => {
+    it('should have one page after initialization', () => {
        expect(nav.pages.length).to.equal(1);
     });
   });
 
   describe('#pushPage()', () => {
-    onlyChrome(it)('adds a new page to the top of the page stack', (done) => {
+    it('adds a new page to the top of the page stack', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -76,7 +76,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('adds a new page to the top of the page stack using options.pageHTML', (done) => {
+    it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
       nav.pushPage(null, {
         pageHTML: '<ons-page>hoge2</ons-page>',
         callback: () => {
@@ -142,7 +142,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('removes the top page from the stack', (done) => {
+    it('removes the top page from the stack', (done) => {
       nav.pushPage('fuga', {
         callback: () => {
           const content = nav.topPage._getContentElement();
@@ -160,7 +160,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('is canceled if already performing another popPage', (done) => {
+    it('is canceled if already performing another popPage', (done) => {
       var calls = [false, false];
       var finished = (num) => {
         calls[num] = true;
@@ -184,7 +184,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('can refresh the previous page', (done) => {
+    it('can refresh the previous page', (done) => {
       nav.pushPage('info', {
         callback: () => {
           var content = nav.topPage._getContentElement();
@@ -206,7 +206,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('throws error when refreshing pages directly inside the navigator', (done) => {
+    it('throws error when refreshing pages directly inside the navigator', (done) => {
       nav.innerHTML = '<ons-page> Test </ons-page>';
 
       return nav.pushPage('hoge').then(() => {
@@ -218,7 +218,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('emits \'prepop\' event', () => {
+    it('emits \'prepop\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('prepop', (event) => { resolve(event); });
       });
@@ -230,7 +230,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('should be possible to cancel the \'prepop\' event', (done) => {
+    it('should be possible to cancel the \'prepop\' event', (done) => {
       nav.addEventListener('prepop', (event) => {
         event.detail.cancel();
       });
@@ -247,7 +247,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('emits \'postpop\' event', () => {
+    it('emits \'postpop\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('postpop', (event) => { resolve(event); });
       });
@@ -259,7 +259,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('emits \'show\' event', (done) => {
+    it('emits \'show\' event', (done) => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => { resolve(event); });
       });
@@ -273,7 +273,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
+    it('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.popPage()).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.topPage)
@@ -291,14 +291,14 @@ describe('OnsNavigatorElement', () => {
       done();
     });
 
-    onlyChrome(it)('does nothing when the page is already on top', (done) => {
+    it('does nothing when the page is already on top', (done) => {
       const spy = chai.spy.on(nav, '_pushPage');
       nav.bringPageTop('hoge');
       expect(spy).not.to.have.been.called();
       done();
     });
 
-    onlyChrome(it)('brings the given pageUrl to the top', (done) => {
+    it('brings the given pageUrl to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
       expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
       nav.bringPageTop('fuga', {
@@ -317,7 +317,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('brings the given page index to the top', (done) => {
+    it('brings the given page index to the top', (done) => {
       expect(nav.pages.length).to.equal(1);
       expect(nav._pageMap.get(nav.topPage)).to.equal('hoge');
       nav.bringPageTop('fuga', {
@@ -349,7 +349,7 @@ describe('OnsNavigatorElement', () => {
     });
 
 
-    onlyChrome(it)('should be possible to cancel the \'prepush\' event', (done) => {
+    it('should be possible to cancel the \'prepush\' event', (done) => {
       expect(nav.pages.length).to.equal(1);
 
       nav.bringPageTop('info', {callback: () => {
@@ -366,7 +366,7 @@ describe('OnsNavigatorElement', () => {
       }});
     });
 
-    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
+    it('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('info').then(() => {
         return nav.pushPage('fuga').then(() => {
           return expect(nav.bringPageTop('info')).to.eventually.be.fulfilled.then(
@@ -394,7 +394,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('inserts a new page on a given index using `options.pageHTML`', (done) => {
+    it('inserts a new page on a given index using `options.pageHTML`', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(0, null, {pageHTML: '<ons-page>fuga</ons-page>'});
@@ -420,7 +420,7 @@ describe('OnsNavigatorElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    onlyChrome(it)('normalizes the index', (done) => {
+    it('normalizes the index', (done) => {
       nav.pushPage('info', {
         callback: () => {
           nav.insertPage(-2, 'fuga').then( () => {
@@ -435,7 +435,7 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    onlyChrome(it)('returns a promise that resolves to the inserted page', () => {
+    it('returns a promise that resolves to the inserted page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.insertPage(0, 'fuga')).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.pages[0])
@@ -449,7 +449,7 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
     });
 
-    onlyChrome(it)('replaces the current page with a new one', () => {
+    it('replaces the current page with a new one', () => {
       return nav.pushPage('info')
         .then(() => {
           expect(nav.pages.length).to.equal(2);
@@ -465,7 +465,7 @@ describe('OnsNavigatorElement', () => {
         });
     });
 
-    onlyChrome(it)('returns a promise that resolves to the new top page', (done) => {
+    it('returns a promise that resolves to the new top page', (done) => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.replacePage('fuga')).to.eventually.be.fulfilled.then(
           page => {
@@ -482,7 +482,7 @@ describe('OnsNavigatorElement', () => {
       expect(() => nav.resetToPage('hoge', 'string')).to.throw(Error);
     });
 
-    onlyChrome(it)('replaces all the page stack with only a new page', (done) => {
+    it('replaces all the page stack with only a new page', (done) => {
       nav.pushPage('fuga', {callback: () => {
         nav.resetToPage('hoge', {
           callback: () => {
@@ -495,7 +495,7 @@ describe('OnsNavigatorElement', () => {
       }});
     });
 
-    onlyChrome(it)('returns a promise that resolves to the new top page', () => {
+    it('returns a promise that resolves to the new top page', () => {
       return nav.pushPage('hoge').then(() => {
         return expect(nav.resetToPage('fuga')).to.eventually.be.fulfilled.then(
           page => expect(page).to.equal(nav.topPage)
@@ -505,7 +505,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#topPage', () => {
-    onlyChrome(it)('returns the current page', () => {
+    it('returns the current page', () => {
       const page = nav.topPage;
 
       expect(page).to.be.an.instanceof(Element);
@@ -519,7 +519,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#_destroy()', () => {
-    onlyChrome(it)('destroys all the pages', () => {
+    it('destroys all the pages', () => {
       expect(nav.pages.length).to.equal(1);
       nav._destroy();
       expect(nav.pages.length).to.equal(0);
@@ -536,7 +536,7 @@ describe('OnsNavigatorElement', () => {
   });
 
   describe('#_onDeviceBackButton()', () => {
-    onlyChrome(it)('pops a page if there are more than one', (done) => {
+    it('pops a page if there are more than one', (done) => {
       nav.pushPage('hoge', {
         callback: () => {
           var spy = chai.spy.on(nav, 'popPage');
@@ -557,7 +557,7 @@ describe('OnsNavigatorElement', () => {
 
   describe('propagate API', () => {
 
-    onlyChrome(it)('fires \'show\' event', () => {
+    it('fires \'show\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('show', (event) => resolve());
       });
@@ -572,7 +572,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'hide\' event', () => {
+    it('fires \'hide\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('hide', () => resolve());
       });
@@ -584,7 +584,7 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    onlyChrome(it)('fires \'destroy\' event', () => {
+    it('fires \'destroy\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('destroy', () => resolve());
       });
@@ -617,7 +617,7 @@ describe('OnsNavigatorElement', () => {
       window.ons.NavigatorElement.registerAnimator('fuga', MyAnimator);
     });
 
-    onlyChrome(it)('overwrites specified properties', () => {
+    it('overwrites specified properties', () => {
       const deferred = {};
       deferred.promise = new Promise((resolve) => {
         deferred.resolve = resolve
@@ -657,10 +657,10 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
-  onlyChrome(describe)('#backButton', () => {
+  describe('#backButton', () => {
     beforeEach((done) => {
-      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-back-button>Back</ons-back-button><ons-page>hoge</ons-page></ons-template>`)
-      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-back-button>Back</ons-back-button><ons-page>hoge2</ons-page></ons-template>`);
+      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></ons-template>`)
+      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-page><ons-back-button>Back</ons-back-button>hoge2</ons-page></ons-template>`);
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);

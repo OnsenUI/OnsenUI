@@ -14,7 +14,7 @@ limitations under the License.
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const defaultCheckboxClass = 'checkbox';
@@ -346,6 +346,9 @@ export default class InputElement extends BaseElement {
 
   set value(val) {
     contentReady(this, () => {
+      if (val instanceof Date) {
+        val = val.toISOString().substring(0, 10);
+      }
       this._input.value = val;
       this._onInput();
     });

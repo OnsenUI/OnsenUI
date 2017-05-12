@@ -19,11 +19,9 @@ import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import {PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator} from './animator';
+import { PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator } from './animator';
 import platform from '../../ons/platform';
-import BaseElement from '../../ons/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
-import DoorLock from '../../ons/doorlock';
+import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
@@ -90,7 +88,7 @@ const directions = Object.keys(positions);
  *   };
  * </script>
  */
-export default class PopoverElement extends BaseElement {
+export default class PopoverElement extends BaseDialogElement {
 
   /**
    * @event preshow
@@ -203,6 +201,20 @@ export default class PopoverElement extends BaseElement {
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
    */
 
+  init() {
+    super.init();
+    this._boundOnChange = this._onChange.bind(this);
+
+    contentReady(this, () => {
+      this._compile();
+      this.style.display = 'none';
+    });
+  }
+
+  get _scheme() {
+    return scheme;
+  }
+
   get _mask() {
     return util.findChild(this, '.popover-mask');
   }
@@ -219,26 +231,24 @@ export default class PopoverElement extends BaseElement {
     return util.findChild(this._popover, '.popover__arrow');
   }
 
-  init() {
-    contentReady(this, () => {
-      this._compile();
-      this._initAnimatorFactory();
-      this.style.display = 'none';
-    });
-
-    this._doorLock = new DoorLock();
-    this._boundOnChange = this._onChange.bind(this);
-    this._boundCancel = () => this._cancel();
-  }
-
-  _initAnimatorFactory() {
-    const factory = new AnimatorFactory({
+  _updateAnimatorFactory() {
+    return new AnimatorFactory({
       animators: _animatorDict,
       baseClass: PopoverAnimator,
       baseClassName: 'PopoverAnimator',
       defaultAnimation: this.getAttribute('animation') || 'default'
     });
-    this._animator = (options) => factory.newAnimator(options);
+  }
+
+  _toggleStyle(shouldShow, options = {}) {
+    if (shouldShow) {
+      this.style.display = 'block';
+      this._currentTarget = options.target;
+      this._positionPopover(options.target);
+    } else {
+      this.style.display = 'none';
+      this._clearStyles();
+    }
   }
 
   _positionPopover(target) {
@@ -352,61 +362,7 @@ export default class PopoverElement extends BaseElement {
       this.removeAttribute('style');
     }
 
-    // FIXME!
-    if (this.hasAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
-    }
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  _prepareAnimationOptions(options) {
-    if (options.animation && !(options.animation in _animatorDict)) {
-      throw new Error(`Animator ${options.animation} is not registered.`);
-    }
-
-    options.animationOptions = util.extend(
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
-      options.animationOptions || {}
-    );
-  }
-
-  _executeAction(actions, options = {}) {
-    const callback = options.callback;
-    const {action, before, after} = actions;
-
-    this._prepareAnimationOptions(options);
-
-    let canceled = false;
-    util.triggerElementEvent(this, `pre${action}`, { // synchronous
-      popover: this,
-      cancel: () => canceled = true
-    });
-
-    if (canceled) {
-      return Promise.reject(`Canceled in pre${action} event.`);
-    }
-
-    return new Promise(resolve => {
-      this._doorLock.waitUnlock(() => {
-        const unlock = this._doorLock.lock();
-
-        before && before();
-
-        contentReady(this, () => {
-          this._animator(options)[action](this, () => {
-            after && after();
-
-            unlock();
-
-            util.triggerElementEvent(this, `post${action}`, {popover: this});
-
-            callback && callback();
-            resolve(this);
-          });
-        });
-      });
-    });
+    ModifierUtil.initModifier(this, this._scheme);
   }
 
   /**
@@ -435,34 +391,28 @@ export default class PopoverElement extends BaseElement {
    *   [ja][/ja]
    */
   show(target, options = {}) {
-    // Accepts options.target
+    // Copy options and include options.target
     if (target && typeof target === 'object' && !(target instanceof Event) && !(target instanceof HTMLElement)) {
-      options = target;
-      target = options.target;
+      options = { ...target };
+    } else {
+      options = { ...options, target };
     }
 
-    if (typeof target === 'string') {
-      target = document.querySelector(target);
-    } else if (target instanceof Event) {
-      target = target.target;
+    if (typeof options.target === 'string') {
+      options.target = document.querySelector(options.target);
+    } else if (options.target instanceof Event) {
+      options.target = options.target.target;
     }
 
-    if (typeof target === 'undefined') {
-      throw new Error('A target argument must be defined for the popover.');
+    if (typeof options.target === 'undefined') {
+      throw new Error('A target or options.target argument must be defined for the popover.');
     }
 
-    if (!(target instanceof HTMLElement)) {
-     throw new Error('Invalid target');
+    if (!(options.target instanceof HTMLElement)) {
+     throw new Error('Invalid target for popover.');
     }
 
-    return this._executeAction({
-      action: 'show',
-      before: () => {
-        this.style.display = 'block';
-        this._currentTarget = target;
-        this._positionPopover(target);
-      }
-    }, options);
+    return super.show(options);
   }
 
   /**
@@ -487,15 +437,6 @@ export default class PopoverElement extends BaseElement {
    *   [en]Resolves to the hidden element[/en]
    *   [ja][/ja]
    */
-  hide(options = {}) {
-    return this._executeAction({
-      action: 'hide',
-      after: () => {
-        this.style.display = 'none';
-        this._clearStyles();
-      }
-    }, options);
-  }
 
   /**
    * @property visible
@@ -505,9 +446,6 @@ export default class PopoverElement extends BaseElement {
    *   [en]Whether the element is visible or not.[/en]
    *   [ja]要素が見える場合に`true`。[/ja]
    */
-  get visible() {
-    return window.getComputedStyle(this).getPropertyValue('display') !== 'none';
-  }
 
   /**
    * @property cancelable
@@ -520,13 +458,6 @@ export default class PopoverElement extends BaseElement {
    *   [/en]
    *   [ja][/ja]
    */
-  set cancelable(value) {
-    return util.toggleAttribute(this, 'cancelable', value);
-  }
-
-  get cancelable() {
-    return this.hasAttribute('cancelable');
-  }
 
   /**
    * @property onDeviceBackButton
@@ -535,79 +466,34 @@ export default class PopoverElement extends BaseElement {
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
    */
-  get onDeviceBackButton() {
-    return this._backButtonHandler;
-  }
-
-  set onDeviceBackButton(callback) {
-    if (this._backButtonHandler) {
-      this._backButtonHandler.destroy();
-    }
-
-    this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this._popover, callback);
-  }
 
   connectedCallback() {
+    super.connectedCallback();
+
+    window.addEventListener('resize', this._boundOnChange, false);
+    this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
+    this._margin = this._margin || 6; // Fix for iframes
+
     contentReady(this, () => {
-      this._margin = this._margin || parseInt(window.getComputedStyle(this).getPropertyValue('top'));
-
-      // Fix for iframes
-      if (!this._margin) {
-        this._margin = 6;
-      }
-
       this._radius = parseInt(window.getComputedStyle(this._content).getPropertyValue('border-top-left-radius'));
-
-      this._mask.addEventListener('click', this._boundCancel, false);
-
-      this.onDeviceBackButton = e => this.cancelable ? this._cancel() : e.callParentHandler();
-
-      window.addEventListener('resize', this._boundOnChange, false);
     });
   }
 
   disconnectedCallback() {
-    contentReady(this, () => {
-      this._mask.removeEventListener('click', this._boundCancel, false);
-
-      this._backButtonHandler.destroy();
-      this._backButtonHandler = null;
-
-      window.removeEventListener('resize', this._boundOnChange, false);
-    });
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this._boundOnChange, false);
   }
 
   static get observedAttributes() {
-    return ['modifier', 'direction', 'animation'];
+    return [...super.observedAttributes, 'direction'];
   }
 
   attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case 'direction':
-        this._boundOnChange();
-        break;
-      case 'animation':
-        this._initAnimatorFactory();
-        break;
+    if (name === 'direction') {
+      this._boundOnChange();
+    } else {
+      super.attributeChangedCallback(name, last, current);
     }
-  }
-
-
-  _cancel() {
-    if (this.cancelable) {
-      this.hide({
-        callback: () => {
-          util.triggerElementEvent(this, 'dialog-cancel');
-        }
-      });
-    }
-  }
-
-  static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
   }
 
   /**

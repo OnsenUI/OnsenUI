@@ -22,7 +22,7 @@ describe('OnsSelectElement', () => {
     expect(element._select.classList.contains('select-input')).to.be.true;
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     const select = element.querySelector('select');
 
     element.setAttribute('modifier', 'material');

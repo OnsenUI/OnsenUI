@@ -35,6 +35,10 @@ const deriveDBB = {
 
   deactivated() {
     this._isDBBSetup === true && (this._isDBBSetup = false);
+  },
+
+  destroyed() {
+    this.$el.onDeviceBackButton && this.$el.onDeviceBackButton.destroy();
   }
 };
 
@@ -65,7 +69,7 @@ const deriveHandler = handlerName => {
 const deriveEvents = {
   mounted() {
     this._handlers = {};
-    this._boundEvents = this.$el.constructor.__proto__.events || [];
+    this._boundEvents = this.$el.constructor.events || [];
 
     this._boundEvents.forEach(key => {
       this._handlers[eventToHandler(key)] = event => {

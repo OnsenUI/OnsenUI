@@ -17,7 +17,7 @@ limitations under the License.
 
 import util from '../ons/util';
 import platform from '../ons/platform';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 import animit from '../ons/animit';
 
@@ -112,6 +112,7 @@ export default class PullHookElement extends BaseElement {
     this._boundOnScroll = this._onScroll.bind(this);
 
     this._setState(STATE_INITIAL, true);
+    this._hide(); // Fix for transparent toolbar transitions
   }
 
   _setStyle() {
@@ -351,6 +352,14 @@ export default class PullHookElement extends BaseElement {
     }
   }
 
+  _show() {
+    this.style.visibility = '';
+  }
+
+  _hide() {
+    this.style.visibility = 'hidden';
+  }
+
   /**
    * @param {Number} scroll
    * @param {Object} options
@@ -450,7 +459,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'height') {
+    if (name === 'height' && this._pageElement) {
       this._setStyle();
     }
   }

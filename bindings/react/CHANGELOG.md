@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+dev
+----
+* input: Added initial date value support.
+* action-sheet: Added new component.
+* toast: Implemented Toast component.
+
 v1.2.0
 ----
 * Fixed [#1768](https://github.com/OnsenUI/OnsenUI/pull/1768).

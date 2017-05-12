@@ -14,7 +14,7 @@ limitations under the License.
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 import styler from '../lib/styler';
 
@@ -191,10 +191,13 @@ export default class SpeedDialElement extends BaseElement {
   }
 
   _hide() {
-    if (!this.inline) {
-      return this.hide();
-    }
-    return Promise.resolve();
+    return new Promise(resolve => {
+      if (!this.inline) {
+        setImmediate(() => this.hide().then(resolve));
+      } else {
+        resolve();
+      }
+    })
   }
 
   _updateRipple() {

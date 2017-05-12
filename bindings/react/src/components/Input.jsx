@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
@@ -35,6 +36,10 @@ class Input extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
+
+    if (this.props.value !== undefined) {
+      node.value = this.props.value;
+    }
 
     EVENT_TYPES.forEach((eventType) => {
       node.addEventListener(eventType, this.onChange);
@@ -82,7 +87,7 @@ Input.propTypes = {
    *  [en]The appearance of the input.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name disabled
@@ -93,7 +98,7 @@ Input.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name onChange
@@ -102,7 +107,7 @@ Input.propTypes = {
    *  [en] Called when the text of the input changes.[/en]
    *  [jp][/jp]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name value
@@ -111,7 +116,10 @@ Input.propTypes = {
    *  [en] Content of the input.[/en]
    *  [jp][/jp]
    */
-  value: React.PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date)
+  ]),
 
   /**
    * @name checked
@@ -120,7 +128,7 @@ Input.propTypes = {
    *  [en]Set to to true if the input is checked. Only used for radio buttons and checkboxes.[/en]
    *  [ja][/ja]
    */
-  checked: React.PropTypes.bool,
+  checked: PropTypes.bool,
 
   /**
    * @name placehoder
@@ -129,7 +137,7 @@ Input.propTypes = {
    *  [en] Placeholder text. In Material Design this placeholder will be a floating label. [/en]
    *  [jp][/jp]
    */
-  placeholder: React.PropTypes.string,
+  placeholder: PropTypes.string,
 
   /**
    * @name type
@@ -140,7 +148,7 @@ Input.propTypes = {
  [/en]
    *  [jp][/jp]
    */
-  type: React.PropTypes.string,
+  type: PropTypes.string,
 
   /**
    * @name inputId
@@ -149,7 +157,7 @@ Input.propTypes = {
    *  [en]  Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements [/en]
    *  [jp][/jp]
    */
-  inputId: React.PropTypes.string,
+  inputId: PropTypes.string,
 
   /**
    * @name float
@@ -158,7 +166,7 @@ Input.propTypes = {
    *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
    *  [jp][/jp]
    */
-  float: React.PropTypes.bool
+  float: PropTypes.bool
 };
 
 export default Input;

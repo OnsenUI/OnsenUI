@@ -18,7 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
@@ -326,6 +326,7 @@ export default class TabElement extends BaseElement {
   setActive() {
     this._input.checked = true;
     this.classList.add('active');
+    this.setAttribute('active', '');
 
     if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
       const icon = this.getAttribute('active-icon');
@@ -342,6 +343,7 @@ export default class TabElement extends BaseElement {
   setInactive() {
     this._input.checked = false;
     this.classList.remove('active');
+    this.removeAttribute('active');
 
     if (this.hasAttribute('icon')) {
       const icon = this.getAttribute('icon');

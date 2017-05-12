@@ -41,7 +41,7 @@
     },
 
     mounted() {
-      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen()));
+      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen()));
 
       this._updateToggle();
     }

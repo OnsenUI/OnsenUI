@@ -109,8 +109,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const unblock = super.block(enterPage);
 
     contentReady(enterPage, () => {
-      const enterPageDecomposition = this._decompose(enterPage);
-      const leavePageDecomposition = this._decompose(leavePage);
+      const enterPageTarget = util.findToolbarPage(enterPage) || enterPage;
+      const leavePageTarget = util.findToolbarPage(leavePage) || leavePage;
+      const enterPageDecomposition = this._decompose(enterPageTarget);
+      const leavePageDecomposition = this._decompose(leavePageTarget);
 
       const delta = this._calculateDelta(leavePage, enterPageDecomposition);
 
@@ -133,7 +135,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           done();
         });
 
-      const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
+      const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
       if (shouldAnimateToolbar) {
         // TODO: Remove this fix
@@ -383,8 +385,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     const unblock = super.block(enterPage);
 
-    const enterPageDecomposition = this._decompose(enterPage);
-    const leavePageDecomposition = this._decompose(leavePage);
+    const enterPageTarget = util.findToolbarPage(enterPage) || enterPage;
+    const leavePageTarget = util.findToolbarPage(leavePage) || leavePage;
+    const enterPageDecomposition = this._decompose(enterPageTarget);
+    const leavePageDecomposition = this._decompose(leavePageTarget);
 
     const delta = this._calculateDelta(leavePage, leavePageDecomposition);
 
@@ -406,7 +410,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
         done();
       });
 
-    const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
+    const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
     if (shouldAnimateToolbar) {
       const enterPageToolbarHeight = enterPageDecomposition.toolbar.getBoundingClientRect().height + 'px';

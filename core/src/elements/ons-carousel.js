@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 import DoorLock from '../ons/doorlock';
 import animit from '../ons/animit';
@@ -335,6 +335,8 @@ export default class CarouselElement extends BaseElement {
     const i = this._scroll / this._currentElementSize;
     delete this._currentElementSize;
     this.setActiveIndex(i);
+
+    this.refresh();
   }
 
   _onDirectionChange() {
@@ -563,6 +565,10 @@ export default class CarouselElement extends BaseElement {
     return this.getAttribute('direction') === 'vertical';
   }
 
+  _show() {
+    window.addEventListener('resize', this._boundOnResize, true);
+  }
+
   _prepareEventListeners() {
     this._gestureDetector = new GestureDetector(this, {
       dragMinDistance: 1,
@@ -574,6 +580,10 @@ export default class CarouselElement extends BaseElement {
     this._updateAutoRefresh();
 
     window.addEventListener('resize', this._boundOnResize, true);
+  }
+
+  _hide() {
+    window.removeEventListener('resize', this._boundOnResize, true);
   }
 
   _removeEventListeners() {

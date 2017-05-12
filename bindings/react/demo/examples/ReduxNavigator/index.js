@@ -49,7 +49,7 @@ export default class extends Component {
         <div className='left'>
           <BackButton />
         </div>
-        <div className='center'>Stateless Navigator</div>
+        <div className='center'>Redux Navigator</div>
       </Toolbar>
     );
   }

@@ -53,10 +53,6 @@
   box-sizing: border-box;
 }
 
-.button-bar__input {
-  @apply(--hide-input);
-}
-
 .button-bar__button {
   @apply(--reset-font);
   border-radius: 0;
@@ -117,22 +113,3 @@
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
-/*~
-  name: Segment
-  category: Segment
-  markup: |
-    <div class="button-bar" style="width:280px;margin:0 auto;">
-      <div class="button-bar__item">
-        <input type="radio" class="button-bar__input" name="segment-a" checked>
-        <button class="button-bar__button">One</button>
-      </div>
-      <div class="button-bar__item">
-        <input type="radio" class="button-bar__input" name="segment-a">
-        <button class="button-bar__button">Two</button>
-      </div>
-      <div class="button-bar__item">
-        <input type="radio" class="button-bar__input" name="segment-a">
-        <button class="button-bar__button">Three</button>
-      </div>
-    </div>
-*/

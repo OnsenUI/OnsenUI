@@ -39,7 +39,7 @@ class FirstPage extends React.Component {
   }
   render() {
     return (<Page>
-      <Toolbar>
+      <Toolbar inline>
         <div className='center'>Name</div>
       </Toolbar>
       <br />

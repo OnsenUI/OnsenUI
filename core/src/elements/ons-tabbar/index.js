@@ -21,7 +21,7 @@ import internal from '../../ons/internal';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import BaseElement from '../../ons/base-element';
+import BaseElement from '../base/base-element';
 import {TabbarAnimator, TabbarFadeAnimator, TabbarNoneAnimator, TabbarSlideAnimator} from './animator';
 import TabElement from '../ons-tab';
 import contentReady from '../../ons/content-ready';
@@ -246,11 +246,13 @@ export default class TabbarElement extends BaseElement {
 
     const page = util.findParent(this, 'ons-page');
     if (page) {
-      this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
+      contentReady(page, () => {
+        this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
 
-      if (util.match(page.firstChild, 'ons-toolbar')) {
-        action(page.firstChild, 'noshadow');
-      }
+        if (page.children[0] && util.match(page.children[0], 'ons-toolbar')) {
+          action(page.children[0], 'noshadow');
+        }
+      });
     }
 
     internal.autoStatusBarFill(() => {
@@ -288,6 +290,10 @@ export default class TabbarElement extends BaseElement {
     }
 
     return page;
+  }
+
+  get topPage() {
+    return this._getCurrentPageElement();
   }
 
   get pages() {

@@ -15,22 +15,26 @@ limitations under the License.
 
 */
 
-function getElementClass() {
-  if (typeof HTMLElement !== 'function') { // case of Safari
-    const BaseElement = () => {};
-    BaseElement.prototype = document.createElement('div');
-    return BaseElement;
-  } else {
-    return HTMLElement;
+class ToastQueue {
+  constructor() {
+    this.queue = [];
+  }
+
+  add(fn, promise) {
+    this.queue.push(fn);
+
+    if (this.queue.length === 1) {
+      setImmediate(this.queue[0]);
+    }
+
+    promise.then(() => {
+      this.queue.shift();
+
+      if (this.queue.length > 0) {
+        setTimeout(this.queue[0], 1000/30); // Apply some visual delay
+      }
+    });
   }
 }
 
-export default class BaseElement extends getElementClass() {
-  constructor(self) {
-    self = super(self);
-    self.init();
-    return self;
-  }
-
-  init() { }
-}
+export default new ToastQueue();

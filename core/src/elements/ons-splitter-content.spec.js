@@ -2,7 +2,7 @@
 
 describe('ons-splitter-content', () => {
 
-  document.body.appendChild(ons._util.createElement(`<ons-template id="hoge.html">hoge content</ons-template>`));
+  document.body.appendChild(ons._util.createElement(`<ons-template id="hoge.html"><ons-page>hoge content</ons-page></ons-template>`));
 
   let splitter, content;
   beforeEach(() => {
@@ -50,7 +50,7 @@ describe('ons-splitter-content', () => {
   });
 
   describe('#load()', () => {
-    onlyChrome(it)('returns a promise that resolves to the new page element', () => {
+    it('returns a promise that resolves to the new page element', () => {
       return expect(content.load('hoge.html')).to.eventually.be.fulfilled.then(
         page => {
           expect(page).to.equal(content.children[0]);
@@ -64,10 +64,9 @@ describe('ons-splitter-content', () => {
     it('should return current page url', () => {
       expect(content.page).to.be.equal(null);
 
-      content.load('hoge.html', {callback: () => {
+      content.load('hoge.html').then(() => {
         expect(content.page).to.be.equal('hoge.html');
-        expect(content.innerHTML).to.be.equal('hoge content');
-      }});
+      });
     });
   });
 

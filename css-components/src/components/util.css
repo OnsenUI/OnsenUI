@@ -5,7 +5,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: var(--font-weight);
-    font-size: var(--font-size);
   }
 
   --reset-box-model: {
@@ -102,6 +101,7 @@
   --material-font: {
     font-family: 'Roboto', 'Noto', sans-serif;
     -webkit-font-smoothing: antialiased;
+    font-weight: var(--material-font-weight);
   }
 
   --material-shadow-0: {

@@ -21,7 +21,7 @@ describe('OnsInputElement', () => {
     expect(window.ons.InputElement).to.be.ok;
   });
 
-  onlyChrome(describe)('"class" attribute', () => {
+  describe('"class" attribute', () => {
     it('should contain default class token automatically on radio input', () => {
       const element = ons._util.createElement(`
         <ons-input type="radio"> </ons-input>
@@ -43,7 +43,7 @@ describe('OnsInputElement', () => {
     });
   });
 
-  onlyChrome(it)('provides \'modifier\' attribute', () => {
+  it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element._input.classList.contains('text-input--hoge')).to.be.true;
     expect(element._helper.classList.contains('text-input--hoge__label')).to.be.true;
@@ -58,27 +58,27 @@ describe('OnsInputElement', () => {
   });
 
   describe('#_updateLabel()', () => {
-    onlyChrome(it)('is called when the placeholder attribute changes', () => {
+    it('is called when the placeholder attribute changes', () => {
       const spy = chai.spy.on(element, '_updateLabel');
 
       element.setAttribute('placeholder', 'Password');
       expect(spy).to.have.been.called.once;
     });
 
-    onlyChrome(it)('removes the label text if there is no placeholder attribute', () => {
+    it('removes the label text if there is no placeholder attribute', () => {
       element.removeAttribute('placeholder');
       expect(element._helper.innerText).to.equal('');
     });
   });
 
   describe('#_updateBoundAttributes()', () => {
-    onlyChrome(it)('is called when one of the bound attribute changes', () => {
+    it('is called when one of the bound attribute changes', () => {
       const spy = chai.spy.on(element, '_updateBoundAttributes');
       element.setAttribute('value', 'abc');
       expect(spy).to.have.been.called.once;
     });
 
-    onlyChrome(it)('removes attributes from the input element', () => {
+    it('removes attributes from the input element', () => {
       element.setAttribute('value', 'abc');
       expect(element._input.getAttribute('value')).to.equal('abc');
       element.removeAttribute('value');
@@ -137,7 +137,7 @@ describe('OnsInputElement', () => {
   });
 
   describe('#type attribute', () => {
-    onlyChrome(it)('creates checkbox', (done) => {
+    it('creates checkbox', (done) => {
       const element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
 
       setImmediate(() => {

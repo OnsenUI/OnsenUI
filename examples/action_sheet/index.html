@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dialog | Onsen UI</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <style>body { overflow: hidden }</style>
+  <script>
+    var app = {};
+
+    ons.ready(function() {
+      ons.createElement('action-sheet.html', { append: true })
+        .then(function(sheet) {
+          app.showFromTemplate = sheet.show.bind(sheet);
+          app.hideFromTemplate = sheet.hide.bind(sheet);
+        });
+    });
+
+    app.showFromObject = function() {
+      ons.openActionSheet({
+        title: 'From object',
+        cancelable: true,
+        buttons: [
+          'Label 0',
+          'Label 1',
+          {
+            label: 'Label 2',
+            modifier: 'destructive'
+          },
+          {
+            label: 'Cancel',
+            icon: 'md-close'
+          }
+        ]
+      }).then(function(index) { console.log('index: ', index)})
+    };
+  </script>
+
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Action Sheet</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button onclick="app.showFromTemplate()">Create from template</ons-button>
+      <ons-button onclick="app.showFromObject()">Create from object</ons-button>
+    </p>
+
+  </ons-page>
+
+  <ons-template id="action-sheet.html">
+    <ons-action-sheet id="sheet" cancelable title="From template">
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()" modifier="destructive">Label</ons-action-sheet-button>
+      <ons-action-sheet-button icon="md-close" onclick="app.hideFromTemplate()">Cancel</ons-action-sheet-button>
+    </ons-action-sheet>
+  </ons-template>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Alert dialog | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      ons.createElement('action-sheet.html', { append: true, parentScope: $scope }).then(function(element) {
+        console.log('Action Sheet created');
+        // $scope.element = element; // 'var' attribute already creates $scope.actionSheet
+      });
+
+      $scope.fromTemplate = function() {
+        $scope.actionSheet.show();
+      };
+
+      $scope.close = function(event) {
+        if($scope.actionSheet && $scope.actionSheet.visible) {
+          console.log('Clicked: ', event.currentTarget);
+          $scope.actionSheet.hide();
+        }
+      };
+
+      $scope.fromObject = function() {
+        ons.openActionSheet({
+          buttons: [
+            'Label1',
+            'Label2',
+            'Label3',
+            {
+              label: 'Cancel',
+              icon: 'md-close'
+            }
+          ],
+          title: 'Description from object',
+          cancelable: true,
+          destructive: 2
+        }).then(function(index) {
+          console.log('Index: ', index);
+        });
+      };
+    });
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="MyCtrl">
+    <ons-toolbar>
+      <div class="center">Action Sheet</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button ng-click="fromTemplate()">Create from template</ons-button>
+      <ons-button ng-click="fromObject()">Create from object</ons-button>
+    </p>
+  </ons-page>
+
+  <ons-template id="action-sheet.html">
+    <ons-action-sheet var="actionSheet" title="Description from template" cancelable>
+      <ons-action-sheet-button ng-click="close($event)">Label1</ons-action-sheet-button>
+      <ons-action-sheet-button ng-click="close($event)">Label2</ons-action-sheet-button>
+      <ons-action-sheet-button ng-click="close($event)">Label3</ons-action-sheet-button>
+      <ons-action-sheet-button ng-click="close($event)" icon="md-close">Cancel</ons-action-sheet-button>
+    </ons-action-sheet>
+  </ons-template>
+
+</body>
+</html>

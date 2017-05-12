@@ -20,6 +20,7 @@ import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
 import notification from './notification';
+import actionSheet from './action-sheet';
 import internal from './internal';
 import orientation from './orientation';
 import softwareKeyboard from './software-keyboard';
@@ -248,30 +249,47 @@ ons.forcePlatformStyling = newPlatform => {
 };
 
 /**
- * @param {String} page
+ * @method createElement
+ * @signature createElement(template, options)
+ * @param {String} template
+ *   [en]Either an HTML file path, an `<ons-template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
+ *   [ja][/ja]
  * @param {Object} [options]
- * @param {Function} [options.link]
- * @return {Promise}
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Boolean|HTMLElement} [options.append]
+ *   [en]Whether or not the element should be automatically appended to the DOM.  Defaults to `false`. If `true` value is given, `document.body` will be used as the target.[/en]
+ *   [ja][/ja]
+ * @param {HTMLElement} [options.insertBefore]
+ *   [en]Reference node that becomes the next sibling of the new node (`options.append` element).[/en]
+ *   [ja][/ja]
+ * @return {HTMLElement|Promise}
+ *   [en]If the provided template was an inline HTML string, it returns the new element. Otherwise, it returns a promise that resolves to the new element.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Create a new element from a template. Both inline HTML and external files are supported although the return value differs.[/en]
+ *   [ja][/ja]
  */
-ons._createPopoverOriginal = function(page, options = {}) {
+ons.createElement = (template, options = {}) => {
+  template = template.trim();
 
-  if (!page) {
-    throw new Error('Page url must be defined.');
-  }
+  const create = html => {
+    const element = ons._util.createElement(html);
+    element.remove();
 
-  return ons._internal.getPageHTMLAsync(page).then(html => {
-    html = html.match(/<ons-popover/gi) ? `<div>${html}</div>` : `<ons-popover>${html}</ons-popover>`;
-    const div = ons._util.createElement('<div>' + html + '</div>');
+    if (options.append) {
+      const target = options.append instanceof HTMLElement ? options.append : document.body;
+      target.insertBefore(element, options.insertBefore || null);
 
-    const popover = div.querySelector('ons-popover');
-    document.body.appendChild(popover);
-
-    if (options.link instanceof Function) {
-      options.link(popover);
+      if (options.link instanceof Function) {
+        options.link(element);
+      }
     }
 
-    return popover;
-  });
+    return element;
+  };
+
+  return template.charAt(0) === '<' ? create(template) : ons._internal.getPageHTMLAsync(template).then(create);
 };
 
 /**
@@ -293,35 +311,6 @@ ons._createPopoverOriginal = function(page, options = {}) {
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
-ons.createPopover = ons._createPopoverOriginal;
-
-/**
- * @param {String} page
- * @param {Object} [options]
- * @param {Function} [options.link]
- * @return {Promise}
- */
-ons._createDialogOriginal = function(page, options = {}) {
-
-  if (!page) {
-    throw new Error('Page url must be defined.');
-  }
-
-  return ons._internal.getPageHTMLAsync(page).then(html => {
-    html = html.match(/<ons-dialog/gi) ? `<div>${html}</div>` : `<ons-dialog>${html}</ons-dialog>`;
-    const div = ons._util.createElement('<div>' + html + '</div>');
-
-    const dialog = div.querySelector('ons-dialog');
-    document.body.appendChild(dialog);
-
-    if (options.link instanceof Function) {
-      options.link(dialog);
-    }
-
-    return dialog;
-  });
-};
-
 /**
  * @method createDialog
  * @signature createDialog(page, [options])
@@ -338,35 +327,6 @@ ons._createDialogOriginal = function(page, options = {}) {
  *   [en]Create a dialog instance from a template.[/en]
  *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
-ons.createDialog = ons._createDialogOriginal;
-
-/**
- * @param {String} page
- * @param {Object} [options]
- * @param {Function} [options.link]
- * @return {Promise}
- */
-ons._createAlertDialogOriginal = function(page, options = {}) {
-
-  if (!page) {
-    throw new Error('Page url must be defined.');
-  }
-
-  return ons._internal.getPageHTMLAsync(page).then(html => {
-    html = html.match(/<ons-alert-dialog/gi) ? `<div>${html}</div>` : `<ons-alert-dialog>${html}</ons-alert-dialog>`;
-    const div = ons._util.createElement('<div>' + html + '</div>');
-
-    const alertDialog = div.querySelector('ons-alert-dialog');
-    document.body.appendChild(alertDialog);
-
-    if (options.link instanceof Function) {
-      options.link(alertDialog);
-    }
-
-    return alertDialog;
-  });
-};
-
 /**
  * @method createAlertDialog
  * @signature createAlertDialog(page, [options])
@@ -383,26 +343,46 @@ ons._createAlertDialogOriginal = function(page, options = {}) {
  *   [en]Create a alert dialog instance from a template.[/en]
  *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
  */
-ons.createAlertDialog = ons._createAlertDialogOriginal;
+ons.createPopover = ons.createDialog = ons.createAlertDialog = (template, options = {}) => ons.createElement(template, { append: true, ...options });
 
 /**
- * @param {String} page
- * @param {Function} link
+ * @method openActionSheet
+ * @signature openActionSheet(options)
+ * @description
+ *   [en]Shows an instant Action Sheet and lets the user choose an action.[/en]
+ *   [ja][/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Array} [options.buttons]
+ *   [en]Represent each button of the action sheet following the specified order. Every item can be either a string label or an object containing `label`, `icon` and `modifier` properties.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.title]
+ *   [en]Optional title for the action sheet.[/en]
+ *   [ja][/ja]
+ * @param {Number} [options.destructive]
+ *   [en]Optional index of the "destructive" button (only for iOS). It can be specified in the button array as well.[/en]
+ *   [ja][/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the action sheet can be canceled by tapping on the background mask or not.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier attribute of the action sheet. E.g. `'destructive'`.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.maskColor]
+ *   [en]Optionally change the background mask color.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.id]
+ *   [en]The element's id attribute.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.class]
+ *   [en]The element's class attribute.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Will resolve when the action sheet is closed. The resolve value is either the index of the tapped button or -1 when canceled.[/en]
+ *   [ja][/ja]
  */
-ons._resolveLoadingPlaceholderOriginal = function(page, link) {
-  const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
-
-  if (elements.length > 0) {
-    elements
-      .filter(element => !element.getAttribute('page'))
-      .forEach(element => {
-        element.setAttribute('ons-loading-placeholder', page);
-        ons._resolveLoadingPlaceholder(element, page, link);
-      });
-  } else {
-    throw new Error('No ons-loading-placeholder exists.');
-  }
-};
+ons.openActionSheet = actionSheet;
 
 /**
  * @method resolveLoadingPlaceholder
@@ -414,7 +394,20 @@ ons._resolveLoadingPlaceholderOriginal = function(page, link) {
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
  *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
  */
-ons.resolveLoadingPlaceholder = ons._resolveLoadingPlaceholderOriginal;
+ons.resolveLoadingPlaceholder = (page, link) => {
+  const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+  if (elements.length === 0) {
+    throw new Error('No ons-loading-placeholder exists.');
+  }
+
+  elements
+    .filter(element => !element.getAttribute('page'))
+    .forEach(element => {
+      element.setAttribute('ons-loading-placeholder', page);
+      ons._resolveLoadingPlaceholder(element, page, link);
+    });
+};
+
 
 ons._setupLoadingPlaceHolders = function() {
   ons.ready(() => {

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { destroyable, hasOptions, deriveEvents } from '../mixins';
+  import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
-    mixins: [destroyable, hasOptions, deriveEvents],
+    mixins: [hasOptions, deriveEvents],
 
     props: {
       open: {
@@ -33,7 +33,7 @@
     },
 
     mounted() {
-      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('update', this.$el.isOpen));
+      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen));
 
       this.action();
     }

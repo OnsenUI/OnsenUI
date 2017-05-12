@@ -19,6 +19,8 @@ import ListExample from './examples/List';
 import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
+import ActionSheetExample from './examples/ActionSheet';
+import ToastExample from './examples/Toast';
 import SplitterExample from './examples/Splitter';
 import InputExample from './examples/Input';
 import IconExample from './examples/Icon';
@@ -135,6 +137,14 @@ class Examples extends React.Component {
       {
         title: 'Alert dialog',
         component: AlertDialogExample
+      },
+      {
+        title: 'Action sheet',
+        component: ActionSheetExample
+      },
+      {
+        title: 'Toast',
+        component: ToastExample
       },
       {
         title: 'Input',

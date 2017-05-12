@@ -24,7 +24,7 @@ limitations under the License.
   -moz-osx-font-smoothing: grayscale;
 }
 
-:not(ons-toolbar-button) > .ons-icon--ion {
+:not(ons-toolbar-button):not(ons-action-sheet-button) > .ons-icon--ion {
   line-height: 0.75em;
   vertical-align: -25%;
 }

@@ -18,7 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import {PageLoader, defaultPageLoader} from '../ons/page-loader';
 import contentReady from '../ons/content-ready';
 
@@ -83,11 +83,13 @@ export default class SplitterContentElement extends BaseElement {
     this._pageLoader = defaultPageLoader;
 
     contentReady(this, () => {
-      const page = this._getPageTarget();
+      rewritables.ready(this, () => {
+        const page = this._getPageTarget();
 
-      if (page) {
-        this.load(page);
-      }
+        if (page) {
+          this.load(page);
+        }
+      });
     });
   }
 

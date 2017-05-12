@@ -18,7 +18,7 @@ limitations under the License.
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'list-item';
@@ -54,9 +54,7 @@ const scheme = {
  *   [ja][/ja]
  * @description
  *   [en]
- *     Component that represents each item in the list. Must be put inside the `<ons-list>` component.
- *
- *     The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *     Component that represents each item in a list. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *
  *     ```
  *     <ons-list-item>

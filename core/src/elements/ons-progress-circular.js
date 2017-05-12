@@ -17,7 +17,7 @@ limitations under the License.
 
 import util from '../ons/util';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from '../ons/base-element';
+import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const scheme = {
@@ -130,7 +130,12 @@ export default class ProgressCircularElement extends BaseElement {
     if (this.hasAttribute('secondary-value')) {
       contentReady(this, () => {
         const per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
+        this._secondary.style.display = null;
         this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
+      });
+    } else {
+      contentReady(this, () => {
+        this._secondary.style.display = 'none';
       });
     }
   }

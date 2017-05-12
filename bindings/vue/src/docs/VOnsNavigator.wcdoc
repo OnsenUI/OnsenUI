@@ -20,6 +20,14 @@
  */
 
 /**
+ * @attribute options.callback
+ * @type {Function}
+ * @description
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
  * @event deviceBackButton
  * @description
  *   [en]Fired on device back button. Default behavior is popping 1 page when `pageStack` contains more than 1. Otherwise, calls parent handler.[/en]

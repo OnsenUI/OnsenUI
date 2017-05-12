@@ -1,5 +1,6 @@
 import BaseDialog from './BaseDialog.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-dialog
@@ -36,7 +37,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onCancel: React.PropTypes.func,
+  onCancel: PropTypes.func,
 
   /**
    * @name isOpen
@@ -48,7 +49,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isOpen: React.PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 
   /**
    * @name isCancelable
@@ -61,7 +62,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isCancelable: React.PropTypes.bool,
+  isCancelable: PropTypes.bool,
 
   /**
    * @name isDisabled
@@ -73,7 +74,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  isDisabled: React.PropTypes.bool,
+  isDisabled: PropTypes.bool,
 
   /**
    * @name animation
@@ -85,7 +86,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name modifier
@@ -95,7 +96,7 @@ Dialog.propTypes = {
    *  [en]The appearance of the dialog.[/en]
    *  [jp] [/jp]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name maskColor
@@ -105,7 +106,7 @@ Dialog.propTypes = {
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
    *  [jp] [/jp]
    */
-  maskColor: React.PropTypes.string,
+  maskColor: PropTypes.string,
 
   /**
    * @name animationOptions
@@ -115,7 +116,7 @@ Dialog.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [jp] [/jp]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onPreShow
@@ -127,7 +128,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  onPreShow: React.PropTypes.func,
+  onPreShow: PropTypes.func,
 
   /**
    * @name onPostShow
@@ -139,7 +140,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp][/jp]
    */
-  onPostShow: React.PropTypes.func,
+  onPostShow: PropTypes.func,
 
   /**
    * @name onPreHide
@@ -149,7 +150,7 @@ Dialog.propTypes = {
    *  [en]Called just before the alert dialog is hidden.[/en]
    *  [jp][/jp]
    */
-  onPreHide: React.PropTypes.func,
+  onPreHide: PropTypes.func,
 
   /**
    * @name onPostHide
@@ -159,7 +160,7 @@ Dialog.propTypes = {
    *  [en]Called just after the alert dialog is hidden.[/en]
    *  [jp][/jp]
    */
-  onPostHide: React.PropTypes.func,
+  onPostHide: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
@@ -171,7 +172,7 @@ Dialog.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 export default Dialog;

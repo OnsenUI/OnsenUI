@@ -1,4 +1,23 @@
 /* Private */
+
+const _getModel = (modelPath, context, newValue) => {
+  const path = modelPath.trim().split('.');
+  const lastKey = path.pop();
+
+  let key, model = context;
+  while (key = path.shift()) { // eslint-disable-line no-cond-assign
+    model = model[key];
+  }
+
+  if (newValue !== undefined && model[lastKey] !== newValue) {
+    model[lastKey] = newValue; // Setter
+  }
+
+  return model[lastKey]; // Getter
+};
+
+const _setModel = _getModel;
+
 const _formatOutput = (modifiers = {}, output) => {
   if (Object.hasOwnProperty.call(modifiers, 'number')) {
     return Number(output);
@@ -8,30 +27,36 @@ const _formatOutput = (modifiers = {}, output) => {
   }
   return output;
 };
+
 const _bindOn = (eventName, modelKey, vnode, handler) => {
-  if (vnode.context.hasOwnProperty(modelKey)) {
+  if (vnode.context.hasOwnProperty(modelKey.split('.')[0])) {
     vnode.child.$on(eventName, handler);
   }
 };
+
 const _bindSimpleInputOn = (eventName, modelKey, vnode, propName) => {
   _bindOn(eventName, modelKey, vnode, event => {
-    vnode.context[modelKey] = event.target[propName];
+    _setModel(modelKey, vnode.context, event.target[propName]);
   });
 };
+
 const _bindModifierInputOn = (eventName, modelKey, vnode, modifiers) => {
   _bindOn(eventName, modelKey, vnode, event => {
-    vnode.context[modelKey] = _formatOutput(modifiers, event.target.value);
+    _setModel(modelKey, vnode.context, _formatOutput(modifiers, event.target.value));
   });
 };
+
 const _bindArrayInputOn = (eventName, modelKey, vnode) => {
   _bindOn(eventName, modelKey, vnode, event => {
-    if (vnode.context[modelKey].indexOf(event.target.value) >= 0) {
-      !event.target.checked && vnode.context[modelKey].splice(vnode.context[modelKey].indexOf(event.target.value), 1);
+    const modelValue = _getModel(modelKey, vnode.context);
+    if (modelValue.indexOf(event.target.value) >= 0) {
+      !event.target.checked && modelValue.splice(modelValue.indexOf(event.target.value), 1);
     } else {
-      event.target.checked && vnode.context[modelKey].push(event.target.value);
+      event.target.checked && modelValue.push(event.target.value);
     }
   });
 };
+
 const _bindCheckbox = (el, binding, vnode, modelKey) => {
   if (binding.value instanceof Array) {
     el.checked = binding.value.indexOf(el.value) >= 0;
@@ -41,15 +66,18 @@ const _bindCheckbox = (el, binding, vnode, modelKey) => {
     _bindSimpleInputOn('change', modelKey, vnode, 'checked');
   }
 };
+
 const _updateCheckbox = (el, binding, vnode, modelKey) => {
   if (binding.value instanceof Array) {
-    el.checked = (vnode.context[modelKey] || []).indexOf(el.value) >= 0;
+    el.checked = (_getModel(modelKey, vnode.context) || []).indexOf(el.value) >= 0;
   } else {
     el.checked = !!binding.value;
   }
 };
 
+
 /* Public */
+
 // VOnsModel directive
 export default {
   bind(el, binding, vnode) {
@@ -58,7 +86,7 @@ export default {
 
     switch (tag) {
       case 'ons-select':
-        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', 'selected');
+        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', '');
         _bindSimpleInputOn('change', modelKey, vnode, 'value');
         break;
 
@@ -108,7 +136,7 @@ export default {
 
     switch (tag) {
       case 'ons-select':
-        el.querySelectorAll('option').forEach(function (option) { option.value == binding.value ? option.setAttribute('selected', 'selected') : option.removeAttribute('selected') });
+        el.value = binding.value;
         break;
 
       case 'ons-switch':
@@ -122,7 +150,7 @@ export default {
       case 'ons-input':
         switch (el.type) {
           case 'radio':
-            el.checked = vnode.context[modelKey] === el.value;
+            el.checked = _getModel(modelKey, vnode.context) === el.value;
             break;
 
           case 'checkbox':

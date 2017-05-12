@@ -120,6 +120,11 @@ util.propagateAction = (element, action) => {
   }
 };
 
+/**
+ * @param {String} string - string to be camelized
+ * @return {String} Camelized string
+ */
+util.camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 
 /**
  * @param {String} selector - tag and class only
@@ -145,7 +150,7 @@ util.create = (selector = '', style = {}) => {
  */
 util.createElement = (html) => {
   const wrapper = document.createElement('div');
-  innerHTML(wrapper, html);
+  wrapper.innerHTML = html;
 
   if (wrapper.children.length > 1) {
     throw new Error('"html" must be one wrapper element.');
@@ -160,7 +165,7 @@ util.createElement = (html) => {
  */
 util.createFragment = (html) => {
   const wrapper = document.createElement('div');
-  innerHTML(wrapper, html);
+  wrapper.innerHTML = html;
   const fragment = document.createDocumentFragment();
 
   while (wrapper.firstChild) {
@@ -225,6 +230,35 @@ util.findFromPath = (path) => {
     el = el[key];
   }
   return el;
+};
+
+/**
+ * @param {HTMLElement} container - Page or page-container that implements 'topPage'
+ * @return {HTMLElement|null} - Visible page element or null if not found.
+ */
+util.getTopPage = container => container && (container.tagName.toLowerCase() === 'ons-page' ? container : container.topPage) || null;
+
+/**
+ * @param {HTMLElement} container - Element where the search begins
+ * @return {HTMLElement|null} - Page element that contains the visible toolbar or null.
+ */
+util.findToolbarPage = container => {
+  const page = util.getTopPage(container);
+
+  if (page) {
+    if (page._canAnimateToolbar()) {
+      return page;
+    }
+
+    for (let i = 0; i < page._contentElement.children.length; i++) {
+      const nextPage = util.getTopPage(page._contentElement.children[i]);
+      if (nextPage && !/ons-tabbar/i.test(page._contentElement.children[i].tagName)) {
+        return util.findToolbarPage(nextPage);
+      }
+    }
+  }
+
+  return null;
 };
 
 /**

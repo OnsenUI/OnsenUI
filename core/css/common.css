@@ -15,9 +15,9 @@ limitations under the License.
 
  */
 
-@import url("font_awesome/css/font-awesome.min.css");
 @import url("ionicons/css/ionicons.min.css");
 @import url("material-design-iconic-font/css/material-design-iconic-font.min.css");
+@import url("font_awesome/css/font-awesome.min.css");
 
 /* custom elements */
 ons-page, ons-navigator,
@@ -28,7 +28,9 @@ ons-gesture-detector {
 
 ons-navigator,
 ons-tabbar,
+ons-action-sheet,
 ons-dialog,
+ons-toast,
 ons-alert-dialog {
   position: absolute;
   top: 0;
@@ -38,16 +40,24 @@ ons-alert-dialog {
   overflow: hidden;
 }
 
+ons-toast {
+  pointer-events: none;
+}
+
+ons-toast .toast {
+  pointer-events: auto;
+}
+
 ons-tab {
   transform: translate3d(0, 0, 0);
 }
 
-ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog {
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog, ons-action-sheet, ons-toast {
   z-index: 2;
 }
 
 ons-fab, ons-speed-dial {
-  z-index: 3;
+  z-index: 10001;
 }
 
 * {
@@ -136,7 +146,8 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   bottom: 44px;
 }
 
-ons-dialog[disabled] > .dialog,
+ons-action-sheet[disabled],
+ons-dialog[disabled],
 ons-alert-dialog[disabled],
 ons-popover[disabled] {
   pointer-events: none;
@@ -203,8 +214,7 @@ ons-splitter-side[side="right"][mode="collapse"] {
 }
 
 ons-splitter-side[mode="split"] {
-  transform: none !important;
-  transition: none !important;
+  z-index: 2;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {
