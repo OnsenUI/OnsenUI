@@ -184,40 +184,6 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
-    it('can refresh the previous page', (done) => {
-      nav.pushPage('info', {
-        callback: () => {
-          var content = nav.topPage._getContentElement();
-          content.innerHTML = 'piyo';
-
-          nav.pushPage('fuga', {
-            callback: () => {
-              nav.popPage({
-                refresh: true,
-                callback: () => {
-                  var content = nav.topPage._getContentElement();
-                  expect(content.innerHTML).to.equal('info');
-                  done();
-                }
-              });
-            }
-          });
-        }
-      });
-    });
-
-    it('throws error when refreshing pages directly inside the navigator', (done) => {
-      nav.innerHTML = '<ons-page> Test </ons-page>';
-
-      return nav.pushPage('hoge').then(() => {
-        try {
-          nav.popPage({ refresh: true });
-        } catch(err) {
-          done();
-        }
-      });
-    });
-
     it('emits \'prepop\' event', () => {
       const promise = new Promise((resolve) => {
         nav.addEventListener('prepop', (event) => { resolve(event); });
