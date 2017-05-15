@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import {Button, Page, Icon} from '../../src/index.js';
+import {Button, Page, Icon} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

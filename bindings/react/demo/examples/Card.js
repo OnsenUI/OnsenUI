@@ -7,7 +7,7 @@ import {
   ListHeader,
   ListItem,
   Button
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

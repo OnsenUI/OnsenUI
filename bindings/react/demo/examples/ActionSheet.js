@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Page, Toolbar, Button, BackButton, ActionSheet, ActionSheetButton} from '../../src/index.js';
+import {Page, Toolbar, Button, BackButton, ActionSheet, ActionSheetButton} from 'react-onsenui';
 
 export default class extends React.Component {
   constructor(props) {

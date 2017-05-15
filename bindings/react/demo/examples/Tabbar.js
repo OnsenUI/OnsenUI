@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Tabbar, Tab, Page, Button} from '../../src/index.js';
+import {Tabbar, Tab, Page, Button} from 'react-onsenui';
 import MyToolbar from './MyToolbar';
 
 class TabPage extends React.Component {

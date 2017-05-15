@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MyToolbar from './MyToolbar';
-import ons from '../../../../build/js/onsenui.js';
+import ons from 'onsenui';
 
 import {
   Page,
@@ -10,7 +10,7 @@ import {
   ListItem,
   LazyList,
   Toolbar
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 export default class extends React.Component {
 
