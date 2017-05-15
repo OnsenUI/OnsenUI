@@ -35,6 +35,7 @@ dev
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
  * ons-carousel: `refresh` event is now triggered when resized.
  * ons-dialog: Fixed mask-color attribute.
+ * ons-splitter: Fixed animation attribute issue.
 
 ### BREAKING CHANGES
 
@@ -43,7 +44,7 @@ dev
 * ons.notification: Canceled notifications do not reject the returned promise anymore. Instead, when canceled they resolve to `-1` for `alert` and `confirm`, or `null` for `prompt`.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
- 
+
 ### BREAKING CHANGES
 
  * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be specified instead.
