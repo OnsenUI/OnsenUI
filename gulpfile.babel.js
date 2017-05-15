@@ -138,16 +138,10 @@ gulp.task('core', function() {
       webpack2
     ))
     .pipe($.addSrc.prepend([
-      'core/polyfills/CustomEvent.js',
-      'core/polyfills/MutationObserver*/MutationObserver.js',
-      'core/polyfills/childNodeRemove.js',
-      'core/polyfills/classList*/classList.js',
       'core/polyfills/FastClick*/fastclick.js',
       'core/polyfills/microevent.js*/microevent.js',
-      'core/polyfills/promise-polyfill*/promise.js',
       'core/polyfills/setImmediate*/setImmediate.js',
       'core/polyfills/viewport.js',
-      'core/polyfills/winstore-jscompat*/winstore-jscompat.js',
       ]))
     .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
