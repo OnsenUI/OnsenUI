@@ -8,6 +8,7 @@ dev
 * action-sheet: Added new component.
 * toast: Implemented Toast component.
 * card: Added new component.
+* list-title: Added new component.
 
 v1.2.0
 ----

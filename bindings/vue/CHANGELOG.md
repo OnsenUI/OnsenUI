@@ -7,6 +7,7 @@ dev
 ### New features
 
 * VOnsCard: New component.
+* VOnsListTitle: New component.
 
 2.0.0-beta.4
 ----
