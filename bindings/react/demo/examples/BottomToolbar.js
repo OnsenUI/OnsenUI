@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Page, Button, BottomToolbar} from '../../src/index.js';
+import {Page, Button, BottomToolbar} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

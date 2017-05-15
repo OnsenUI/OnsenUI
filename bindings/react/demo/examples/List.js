@@ -11,7 +11,7 @@ import {
   ToolbarButton,
   BackButton,
   Button
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 export default class extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Page, Ripple, Icon} from '../../src/index.js';
+import {Button, Page, Ripple, Icon} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

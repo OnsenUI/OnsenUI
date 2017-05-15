@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Toolbar, BackButton} from '../../../src/index.js';
+import {Toolbar, BackButton} from 'react-onsenui';
 
 const MyToolbar = ({title, onBackButton = null}) => (
   <Toolbar>

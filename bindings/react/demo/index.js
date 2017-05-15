@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import '../../../build/js/onsenui.js';
+import 'onsenui';
 
 import '../../../build/css/onsenui.css';
 import '../../../build/css/onsen-css-components.css';
@@ -12,7 +12,7 @@ import {
   Toolbar,
   List,
   ListItem
-} from '../src/index.js';
+} from 'react-onsenui';
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';

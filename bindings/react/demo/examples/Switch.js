@@ -7,7 +7,7 @@ import {
   BackButton,
   Input,
   Switch
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

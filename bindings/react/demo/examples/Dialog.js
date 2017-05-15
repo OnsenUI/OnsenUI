@@ -7,11 +7,11 @@ import {
   Dialog,
   Navigator,
   Input
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 
-import ons from '../../../../build/js/onsenui.js';
+import ons from 'onsenui';
 
 class MyPage2 extends React.Component {
   render() {
