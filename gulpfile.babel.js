@@ -73,7 +73,7 @@ gulp.task('core', function() {
           // the target directory for all output files
           // must be an absolute path (use the Node.js path module)
 
-          filename: "onsenui-without-polyfills.js", // string
+          filename: "temp.js", // string
           // the filename template for entry chunks
 
           // publicPath: "/assets/", // string
