@@ -36,6 +36,17 @@ dev
  * ons-carousel: `refresh` event is now triggered when resized.
  * ons-dialog: Fixed mask-color attribute.
  * ons-splitter: Fixed animation attribute issue.
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
+ 
+### Misc
+
+ * core: Removed polyfill for `Element.prototype.remove`.
+ * core: Removed polyfill for `Element.prototype.classList`.
+ * core: Removed polyfill for `Promise`.
+ * core: Removed polyfill for `CustomEvent`.
+ * core: Removed polyfill for `MutationObserver`.
+ * core: Removed [JavaScript Dynamic Content shim for Windows 8 Store apps](https://github.com/Microsoft/winstore-jscompat).
 
 ### BREAKING CHANGES
 
