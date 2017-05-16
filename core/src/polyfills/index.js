@@ -15,10 +15,10 @@ import 'core-js/fn/map';
 import '@webcomponents/custom-elements/src/custom-elements';
 
 // Polyfill MutationObserver with global namespace pollution
-import './polyfills/MutationObserver@0.7.22/MutationObserver.js';
+import './MutationObserver@0.7.22/MutationObserver.js';
 
 // Load non-standard libraries with global namespace pollution
-import './polyfills/FastClick@1.0.6+mod/fastclick.js';
-import './polyfills/microevent.js@47cbc14+mod/microevent.js';
-import './polyfills/setImmediate@1.0.2+mod/setImmediate.js';
-import './polyfills/viewport.js';
+import './FastClick@1.0.6+mod/fastclick.js';
+import './microevent.js@47cbc14+mod/microevent.js';
+import './setImmediate@1.0.2+mod/setImmediate.js';
+import './viewport.js';
