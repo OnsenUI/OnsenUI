@@ -9,6 +9,7 @@ dev
 * toast: Implemented Toast component.
 * card: Added new component.
 * list-title: Added new component.
+* Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0
 ----
