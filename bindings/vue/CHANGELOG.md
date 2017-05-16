@@ -7,16 +7,18 @@ dev
 ### New features
 
 * VOnsCard: New component.
+* VOnsToast: New component.
 * VOnsListTitle: New component.
+* VOnsActionSheet: New component.
+* VOnsActionSheetButton: New component.
+* $ons.openActionSheet: Suppot shortcut method for VOnsActionSheet.
+* $ons.notification.toast: Suppot shortcut method for VOnsToast.
 
 2.0.0-beta.4
 ----
 
 ### New Features
 
-* VOnsActionSheet: New component.
-* VOnsActionSheetButton: New component.
-* $ons.actionSheet: Suppot shortcut method for VOnsActionSheet.
 * Vue 2.3.0: `sync` modifier is now supported for `index`, `visible` and `open` props. See breaking changes section.
 
 ### Bug Fixes
