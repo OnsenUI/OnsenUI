@@ -17,8 +17,5 @@ import '@webcomponents/custom-elements/src/custom-elements';
 // Polyfill MutationObserver with global namespace pollution
 import './MutationObserver@0.7.22/MutationObserver.js';
 
-// Load non-standard libraries with global namespace pollution
-import './FastClick@1.0.6+mod/fastclick.js';
-import './microevent.js@47cbc14+mod/microevent.js';
+// Polyfill setImmediate with global namespace pollution
 import './setImmediate@1.0.2+mod/setImmediate.js';
-import './viewport.js';

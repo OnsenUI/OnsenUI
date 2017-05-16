@@ -1,4 +1,5 @@
 import './polyfills';
+import './vendor';
 
 import ons from './ons/ons';
 
