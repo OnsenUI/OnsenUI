@@ -138,6 +138,7 @@ gulp.task('core', function() {
       webpack2
     ))
     .pipe($.addSrc.prepend([
+      'core/polyfills/MutationObserver*/MutationObserver.js',
       'core/polyfills/FastClick*/fastclick.js',
       'core/polyfills/microevent.js*/microevent.js',
       'core/polyfills/setImmediate*/setImmediate.js',
