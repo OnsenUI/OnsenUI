@@ -556,7 +556,6 @@ function distFiles() {
     '!build/onsenui.zip',
     'bower.json',
     'package.json',
-    '.npmignore',
     'README.md',
     'CHANGELOG.md',
     'LICENSE'
