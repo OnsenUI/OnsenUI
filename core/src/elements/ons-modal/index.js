@@ -57,6 +57,7 @@ const _animatorDict = {
  *   [en]The `<ons-dialog>` component can be used to create a modal dialog.[/en]
  *   [ja][/ja]
  * @codepen devIg
+ * @tutorial vanilla/reference/modal
  * @example
  * <ons-modal id="modal">
  *   Modal content
