@@ -30,8 +30,7 @@ import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
-import webpackStream from 'webpack-stream';
-import webpack2 from 'webpack';
+import webpack from 'webpack';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 
@@ -62,27 +61,31 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function() {
-  return gulp.src('core/src/setup.js')
-    .pipe(webpackStream(
+gulp.task('core', function(done) {
+  try {
+    webpack(
       { // webpack2 config
+        entry: './core/src/setup.js', // string | object | array
+        // Here the application starts executing
+        // and webpack starts bundling
+
         output: {
           // options related to how webpack emits results
 
-          // path: path.resolve(__dirname), // string
+          path: path.resolve(__dirname, 'build/js'), // string
           // the target directory for all output files
           // must be an absolute path (use the Node.js path module)
 
-          filename: "temp.js", // string
+          filename: 'onsenui.js', // string
           // the filename template for entry chunks
 
-          // publicPath: "/assets/", // string
+          // publicPath: '/assets/', // string
           // the url to the output directory resolved relative to the HTML page
 
-          library: "ons", // string,
+          library: 'ons', // string,
           // the name of the exported library
 
-          libraryTarget: "umd", // universal module definition
+          libraryTarget: 'umd', // universal module definition
           // the type of the exported library
         },
 
@@ -95,11 +98,11 @@ gulp.task('core', function() {
             {
               test: /\.js$/,
               include: [
-                path.resolve(__dirname, "core/src"),
-                path.resolve(__dirname, "node_modules") // untranspiled ES modules must be transpiled
+                path.resolve(__dirname, 'core/src'),
+                path.resolve(__dirname, 'node_modules') // untranspiled ES modules must be transpiled
               ],
               exclude: [
-                // path.resolve(__dirname, "app/demo-files")
+                // path.resolve(__dirname, 'app/demo-files')
               ],
               // these are matching conditions, each accepting a regular expression or string
               // test and include have the same behavior, both must be matched
@@ -115,8 +118,8 @@ gulp.task('core', function() {
               // see webpack 1 upgrade guide
 
               options: {
-                presets: ["env", "stage-3"],
-                plugins: ["add-module-exports"]
+                presets: ['env', 'stage-3'],
+                plugins: ['add-module-exports']
               }
               // options for the loader
             }
@@ -131,25 +134,43 @@ gulp.task('core', function() {
           // extensions that are used
         },
 
-        devtool: "cheap-module-inline-source-map", // enum
+        devtool: 'cheap-module-inline-source-map', // enum
         // enhance debugging by adding meta info for the browser devtools
-        // source-map most detailed at the expense of build speed.
+        // source-map most detailed at the expense of build speed.,
+
+        plugins: [
+          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`)
+        ]
       },
-      webpack2
-    ))
-    .pipe($.addSrc.prepend([
-      'core/polyfills/MutationObserver*/MutationObserver.js',
-      'core/polyfills/FastClick*/fastclick.js',
-      'core/polyfills/microevent.js*/microevent.js',
-      'core/polyfills/setImmediate*/setImmediate.js',
-      'core/polyfills/viewport.js',
-      ]))
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe($.concat('onsenui.js'))
-    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('build/js'))
-    .on('end', () => browserSync.reload());
+      (err, stats) => { // called when bundling is done
+        if (err) { // if fatal error occurs
+          done(err);
+          return;
+        }
+
+        const jsonStats = stats.toJson();
+        if (jsonStats.errors.length > 0) {
+            console.log('\n' + $.util.colors.red('Errors from webpack:'));
+          for (const error of jsonStats.errors) {
+            console.log('\n' + $.util.colors.red(error));
+          }
+          done(new Error('webpack failed'));
+          return;
+        }
+        if (jsonStats.warnings.length > 0) {
+          console.log('\n' + $.util.colors.red('Warnings from webpack:'));
+          for (const warning of jsonStats.warnings) {
+            console.log('\n' + $.util.colors.yellow(warning));
+          }
+        }
+
+        browserSync.reload();
+        done();
+      }
+    );
+  } catch (e) {
+    done(e);
+  }
 });
 
 ////////////////////////////////////////
