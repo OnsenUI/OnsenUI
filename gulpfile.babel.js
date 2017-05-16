@@ -137,13 +137,6 @@ gulp.task('core', function() {
       },
       webpack2
     ))
-    .pipe($.addSrc.prepend([
-      'core/polyfills/MutationObserver*/MutationObserver.js',
-      'core/polyfills/FastClick*/fastclick.js',
-      'core/polyfills/microevent.js*/microevent.js',
-      'core/polyfills/setImmediate*/setImmediate.js',
-      'core/polyfills/viewport.js',
-      ]))
     .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.concat('onsenui.js'))
     .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
