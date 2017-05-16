@@ -43,7 +43,6 @@ dev
  * core: Removed polyfill for `Element.prototype.classList`.
  * core: Removed polyfill for `Promise`.
  * core: Removed polyfill for `CustomEvent`.
- * core: Removed polyfill for `MutationObserver`.
  * core: Removed [JavaScript Dynamic Content shim for Windows 8 Store apps](https://github.com/Microsoft/winstore-jscompat).
 
 ### BREAKING CHANGES
