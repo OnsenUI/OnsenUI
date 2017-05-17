@@ -253,7 +253,8 @@ class DeviceBackButtonDispatcher {
       };
 
       if (!HandlerRepository.has(tree.element)) {
-        for (const subTree of tree.children) {
+        for (let i = 0; i < tree.children.length; i++){
+          const subTree = tree.children[i];
           if (HandlerRepository.has(subTree.element)) {
             return subTree;
           }

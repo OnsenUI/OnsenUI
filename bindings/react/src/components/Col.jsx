@@ -10,7 +10,7 @@ import Util from './Util.js';
  * [en]
  * Represents a column in the grid system. Use with `<ons-row>` to layout components.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * <Row>
  *   <Col width={50}>
   *   <ons-icon icon="fa-twitter"></ons-icon>

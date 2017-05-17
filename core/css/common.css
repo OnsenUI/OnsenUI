@@ -28,7 +28,9 @@ ons-gesture-detector {
 
 ons-navigator,
 ons-tabbar,
+ons-action-sheet,
 ons-dialog,
+ons-toast,
 ons-alert-dialog {
   position: absolute;
   top: 0;
@@ -38,11 +40,19 @@ ons-alert-dialog {
   overflow: hidden;
 }
 
+ons-toast {
+  pointer-events: none;
+}
+
+ons-toast .toast {
+  pointer-events: auto;
+}
+
 ons-tab {
   transform: translate3d(0, 0, 0);
 }
 
-ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog {
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog, ons-action-sheet, ons-toast {
   z-index: 2;
 }
 
@@ -136,7 +146,8 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   bottom: 44px;
 }
 
-ons-dialog[disabled] > .dialog,
+ons-action-sheet[disabled],
+ons-dialog[disabled],
 ons-alert-dialog[disabled],
 ons-popover[disabled] {
   pointer-events: none;

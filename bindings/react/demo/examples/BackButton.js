@@ -1,12 +1,12 @@
 import React from 'react';
 
-import ons from '../../../../build/js/onsenui.js'
+import ons from 'onsenui'
 
 import {
   Page,
   Toolbar,
   BackButton,
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 export default class extends React.Component {
   constructor(props) {

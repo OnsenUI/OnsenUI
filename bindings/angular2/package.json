@@ -64,8 +64,8 @@
     "@angular/platform-browser": "^2.4.1",
     "@angular/platform-browser-dynamic": "^2.4.1",
     "core-js": "^2.4.0",
-    "rxjs": "^5.0.1",
     "onsenui": "2.2.x",
+    "rxjs": "^5.0.1",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
@@ -77,7 +77,7 @@
     "@angular/platform-browser": "^2.4.1",
     "@angular/platform-browser-dynamic": "^2.4.1",
     "awesome-typescript-loader": "^2.2.4",
-    "chromedriver": "^2.21.2",
+    "chromedriver": "^2.29.0",
     "core-js": "^2.4.1",
     "cp": "^0.2.0",
     "es6-promise": "3.0.2",

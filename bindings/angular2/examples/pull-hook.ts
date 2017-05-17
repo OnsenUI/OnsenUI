@@ -37,8 +37,8 @@ export class AppComponent {
 
   onAction($event) {
     setTimeout(() => {
-      $event.done();
       this.items.push(0);
+      $event.done(); // Run change detector
     }, 1000);
   }
 

@@ -5,7 +5,7 @@ import {
   Page,
   Button,
   Popover
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 export default class extends React.Component {
 

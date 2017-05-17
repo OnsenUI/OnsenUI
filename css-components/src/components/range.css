@@ -70,6 +70,7 @@
   background-position: left center;
   background-size: 100% var(--range-track-height);
   background-repeat: no-repeat;
+  background-color: transparent;
   overflow: visible;
 }
 
@@ -90,9 +91,7 @@
 .range__input::-moz-range-track {
   position: relative;
   border: none;
-  background-color: var(--range-track-background-color);
-  height: var(--range-track-height);
-  border-radius: var(--round-border);
+  background: none;
   box-shadow: none;
   top: 0;
   margin: 0;
@@ -178,18 +177,19 @@
   background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 1.2px));
 }
 
-.range--material__input::-moz-range-thumb {
-  top: 1px;
-  border: 3px solid var(--material-range-track-color);
-  height: var(--material-range-thumb-width);
-  width: var(--material-range-thumb-width);
-  border-radius: 100%;
-  border-color: var(--material-range-thumb-color);
-  background-color: var(--material-range-thumb-color);
+.range--material__input::-moz-range-thumb,
+.range--material__input:focus::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  height: calc(var(--material-range-thumb-width) + var(--material-range-thumb-vertical-margin));
+  width: calc(var(--material-range-thumb-width) + var(--material-range-thumb-horizontal-margin));
+  border-radius: 0;
+  background-color: transparent;
+  background-image: -moz-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 1.2px));
 }
 
 .range--material__input::-moz-range-track {
-  background-color: var(--material-range-track-color);
+  background: none;
 }
 
 .range--material__input::-ms-thumb {
@@ -210,11 +210,6 @@
   margin-top: -6px;
   margin-left: -6px;
   @apply(--range--material--thumb--after);
-}
-
-.range--material__input:focus::-moz-range-thumb {
-  border-color: var(--material-range-thumb-color);
-  background-color: var(--material-range-thumb-color);
 }
 
 .range--material__input::-moz-range-thumb:before {

@@ -9,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/navigator
  * @description
  * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  * @example
   <Navigator
     renderPage={(route, navigator) =>
@@ -47,13 +47,13 @@ class Navigator extends BasicComponent {
    * @signature resetPage(route, options = {})
    * @param {Object} route
    *   [en] The route that the page should be reset to.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en]Resets the current page[/en]
-   *   [ja]どうしよう[/ja]
+   *   [ja][/ja]
    */
   resetPage(route, options = {}) {
     return this.resetPageStack([route], options);
@@ -64,13 +64,13 @@ class Navigator extends BasicComponent {
    * @signature resetPageStack(route, options = {})
    * @param {Array} routes
    *   [en] The routes that the navigator should be reset to.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Resets the navigator to the current page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   resetPageStack(routes, options = {}) {
     if (this.isRunning()) {
@@ -105,13 +105,13 @@ class Navigator extends BasicComponent {
    * @signature pushPage(route, options = {})
    * @param {Object} route
    *   [en] The route that the navigator should push to.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
-   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Pushes a page to the page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   pushPage(route, options = {}) {
     if (this.isRunning()) {
@@ -150,7 +150,7 @@ class Navigator extends BasicComponent {
    * @signature replacePage(route, [options])
    * @param {Object} route
    *   [en] The route that the navigator should replace the top page with.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the new page.[/en]
    *   [ja]新しいページを解決するPromiseを返します。[/ja]
@@ -177,10 +177,10 @@ class Navigator extends BasicComponent {
    * @signature popPage(options = {})
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
-   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Pops a page out of the page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   popPage(options = {}) {
     if (this.isRunning()) {
@@ -319,7 +319,7 @@ Navigator.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function takes the current route object as a parameter and  creates returns a React component.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   renderPage: PropTypes.func.isRequired,
   /**
@@ -331,7 +331,7 @@ Navigator.propTypes = {
    *  [en] This array contains the initial routes from the Navigator,
    *  which will be used to render the initial pages in the `renderPage` method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   initialRouteStack: PropTypes.array,
 
@@ -345,7 +345,7 @@ Navigator.propTypes = {
    *  which will be used to render the initial pages in the
    *  renderPage method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   initialRoute: PropTypes.object,
 
@@ -401,7 +401,7 @@ Navigator.propTypes = {
    * @type object
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -413,7 +413,7 @@ Navigator.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

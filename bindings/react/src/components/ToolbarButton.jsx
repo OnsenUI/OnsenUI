@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  *
  *
  *   [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Page
      renderToolbar = { () =>
@@ -40,7 +40,7 @@ ToolbarButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -51,7 +51,7 @@ ToolbarButton.propTypes = {
    *  [en]
    *  Indicates whether the button is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

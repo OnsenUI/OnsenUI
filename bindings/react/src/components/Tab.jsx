@@ -7,7 +7,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  * @description
  * [en] Represents a tab inside tab bar.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Tap>
  *   Home

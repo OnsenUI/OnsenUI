@@ -169,7 +169,9 @@ export default class SplitterElement extends BaseElement {
 
   _layout() {
     this._sides.forEach(side => {
-      this.content.style[side.side] = side.mode === 'split' ? side._width : 0;
+      if (this.content) {
+        this.content.style[side.side] = side.mode === 'split' ? side._width : 0;
+      }
     });
   }
 

@@ -4,7 +4,7 @@ import {
   Page,
   ProgressBar,
   ProgressCircular
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

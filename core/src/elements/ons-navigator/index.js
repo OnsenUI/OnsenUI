@@ -341,8 +341,8 @@ export default class NavigatorElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @param {Boolean} [options.refresh]
-   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
-   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   *   [en]This option has been removed in Onsen UI 2.3.0. The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+   *   [ja]このオプションは Onsen UI 2.3.0 で削除されました。popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
    * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -364,47 +364,7 @@ export default class NavigatorElement extends BaseElement {
       resolve();
     });
 
-    if (!options.refresh) {
-      return this._popPage(options, popUpdate);
-    } else {
-      return this._popPageAndRefresh(options, popUpdate);
-    }
-  }
-
-  _popPageAndRefresh(options, popUpdate) {
-    util.warn('\'refresh\' option for pushPage has been deprecated and will be removed in the next release.');
-
-    const index = this.pages.length - 2;
-    const oldPage = this.pages[index];
-
-    if (!this._pageMap.has(oldPage)) {
-      throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-    }
-
-    const page = this._pageMap.get(oldPage);
-
-    return new Promise(resolve => {
-      const options = {
-        page: page,
-        parent: this,
-        params: oldPage.pushedOptions ? oldPage.pushedOptions.data : {}
-      };
-
-      this._pageLoader.load(options, pageElement => {
-        this._pageMap.set(pageElement, page);
-
-        pageElement = util.extend(pageElement, {
-          data: oldPage.data,
-          pushedOptions: oldPage.pushedOptions || {}
-        });
-
-        this.insertBefore(pageElement, oldPage ? oldPage : null);
-        this._pageLoader.unload(oldPage);
-        resolve();
-      });
-
-    }).then(() => this._popPage(options, popUpdate));
-
+    return this._popPage(options, popUpdate);
   }
 
   _popPage(options, update = () => Promise.resolve()) {
@@ -663,6 +623,40 @@ export default class NavigatorElement extends BaseElement {
   }
 
   /**
+   * @method removePage
+   * @signature removePage(index, [options])
+   * @param {Number} index
+   *   [en]The index where it should be removed.[/en]
+   *   [ja]スタックから削除するページのインデックスを指定します。[/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the revealed page.[/en]
+   *   [ja]削除によって表示されたページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Remove the specified page at a position in the stack defined by the `index` argument. Extends `popPage()` parameters.[/en]
+   *   [ja]指定したインデックスにあるページを削除します。[/ja]
+   */
+  removePage(index, options = {}) {
+    index = this._normalizeIndex(index);
+
+    if (index < this.pages.length - 1) {
+      return new Promise(resolve => {
+        const leavePage = this.pages[index];
+        const enterPage = this.topPage;
+
+        this._pageMap.delete(leavePage);
+        this._pageLoader.unload(leavePage);
+        if (this.pages.length === 1) { // edge case
+          this.topPage.updateBackButton(false);
+        }
+
+        resolve(enterPage);
+      });
+    } else {
+      return this.popPage(options);
+    }
+  }
+
+  /**
    * @method resetToPage
    * @signature resetToPage(page, [options])
    * @return {Promise}
@@ -911,8 +905,8 @@ export default class NavigatorElement extends BaseElement {
    * @default  false
    * @type {Boolean}
    * @description
-   *   [en]If this parameter is `true`, the previous page will be refreshed (destroyed and created again) before `popPage()` action.[/en]
-   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
+   *   [en]This option has been removed in Onsen UI 2.3.0. If this parameter is `true`, the previous page will be refreshed (destroyed and created again) before `popPage()` action.[/en]
+   *   [ja]このオプションは Onsen UI 2.3.0 で削除されました。popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
    */
   get options() {
     return this._options;

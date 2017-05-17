@@ -6,11 +6,12 @@ import {
   List,
   ListItem,
   ListHeader,
+  ListTitle,
   Toolbar,
   ToolbarButton,
   BackButton,
   Button
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 export default class extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ export default class extends React.Component {
   render() {
     return (
       <Page renderToolbar={() => <MyToolbar title='List' />} >
+        <ListTitle>List Title</ListTitle>
         <List
           dataSource={this.state.data}
           renderHeader={() => <ListHeader style={{fontSize: 15}} className="testClass"> Header Text </ListHeader> }

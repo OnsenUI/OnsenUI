@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * [en]
  *   Adds a Material Design "ripple" effect to an element.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
    <div className='myList'>
      <Ripple color='red' />
@@ -29,7 +29,7 @@ Ripple.propTypes = {
    * @required false
    * @description
    *  [en]Color of the ripple effect.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   color: PropTypes.string,
 
@@ -39,7 +39,7 @@ Ripple.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   background: PropTypes.string,
 
@@ -50,7 +50,7 @@ Ripple.propTypes = {
    *  [en]
    *  Specifies whether the button is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

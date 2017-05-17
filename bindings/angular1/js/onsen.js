@@ -25,7 +25,7 @@ limitations under the License.
 (function(ons){
   'use strict';
 
-  var module = angular.module('onsen', ['templates-main']);
+  var module = angular.module('onsen', []);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.

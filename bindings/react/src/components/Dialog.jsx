@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @description
  * [en]  Dialog that is displayed on top of current screen. As opposed to the AlertDialog element, this component can contain any kind of content.  The dialog is useful for displaying menus, additional information or to ask the user to make a decision.  It will automatically be displayed as Material Design when running on an Android device.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
    <Dialog onCancel={this.onCancel}
      isOpen={this.props.isOpen}
@@ -35,7 +35,7 @@ Dialog.propTypes = {
    *  [en]
    *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   onCancel: PropTypes.func,
 
@@ -47,7 +47,7 @@ Dialog.propTypes = {
    *  [en]
    *  Indicates whether the dialog is open and shown.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   isOpen: PropTypes.bool.isRequired,
 
@@ -60,7 +60,7 @@ Dialog.propTypes = {
    *  Specifies whether the dialog is cancelable or not.
    *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   isCancelable: PropTypes.bool,
 
@@ -72,7 +72,7 @@ Dialog.propTypes = {
    *  [en]
    *  Specifies whether the dialog is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   isDisabled: PropTypes.bool,
 
@@ -84,7 +84,7 @@ Dialog.propTypes = {
    *  [en]
    *  The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -94,7 +94,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the dialog.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -104,7 +104,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   maskColor: PropTypes.string,
 
@@ -114,7 +114,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -126,7 +126,7 @@ Dialog.propTypes = {
    *  [en]
    *  Called just before the alert dialog is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreShow: PropTypes.func,
 
@@ -138,7 +138,7 @@ Dialog.propTypes = {
    *  [en]
    *  Called just after the alert dialog is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostShow: PropTypes.func,
 
@@ -148,7 +148,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]Called just before the alert dialog is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreHide: PropTypes.func,
 
@@ -158,7 +158,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]Called just after the alert dialog is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostHide: PropTypes.func,
 
@@ -170,7 +170,7 @@ Dialog.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

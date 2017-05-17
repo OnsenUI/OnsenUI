@@ -14,7 +14,7 @@ const EVENT_TYPES = ['change', 'input'];
  * [en]
  *   Select input component.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Select modifier="material"
  *   value={this.state.value}
@@ -82,7 +82,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]The appearance of the select box.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -91,7 +91,7 @@ Select.propTypes = {
    * @type bool
    * @description
    *  [en]Specifies whether the select is disabled.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -100,7 +100,7 @@ Select.propTypes = {
    * @type function
    * @description
    *  [en]Called when the value of the select changes.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onChange: PropTypes.func,
 
@@ -109,7 +109,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]Current value of the element.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   value: PropTypes.string,
 
@@ -127,7 +127,7 @@ Select.propTypes = {
    * @type boolean
    * @description
    *  [en]Element automatically gains focus on page load.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   autofocus: PropTypes.bool,
 
@@ -136,7 +136,7 @@ Select.propTypes = {
    * @type boolean
    * @description
    *  [en]Make the select input required for submitting the form it is part of.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   required: PropTypes.bool,
 
@@ -145,7 +145,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]Associate a select element to an existing form on the page, even if not nested.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   form: PropTypes.string,
 
@@ -154,7 +154,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   size: PropTypes.string
 };

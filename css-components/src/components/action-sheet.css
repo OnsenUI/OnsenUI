@@ -17,12 +17,11 @@
   name: Action Sheet
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask"></div>
     <div class="action-sheet">
-      <div class="action-sheet__items">
-        <div class="action-sheet__title">Title</div>
-        <button class="action-sheet__button">Label</button>
-        <button class="action-sheet__button">Cancel</button>
-      </div>
+      <div class="action-sheet-title">Title</div>
+      <button class="action-sheet-button">Label</button>
+      <button class="action-sheet-button">Cancel</button>
     </div>
 */
 
@@ -30,27 +29,17 @@
   name: Action Sheet with Delete Label
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask"></div>
     <div class="action-sheet">
-      <div class="action-sheet__items">
-        <button class="action-sheet__button">Label</button>
-        <button class="action-sheet__button action-sheet__button--destructive">Delete Label</button>
-        <button class="action-sheet__button">Cancel</button>
-      </div>
+      <button class="action-sheet-button">Label</button>
+      <button class="action-sheet-button action-sheet-button--destructive">Delete Label</button>
+      <button class="action-sheet-button">Cancel</button>
     </div>
 */
 
 .action-sheet {
   @apply(--reset-font);
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--action-sheet-mask-color);
-  z-index: 1;
-}
-
-.action-sheet__items {
+  cursor: default;
   position: absolute;
   left: 9px;
   right: 9px;
@@ -58,7 +47,7 @@
   z-index: 2;
 }
 
-.action-sheet__button {
+.action-sheet-button {
   box-sizing: border-box;
   height: 56px;
   font-size: 20px;
@@ -81,27 +70,27 @@
   }
 }
 
-.action-sheet__button:first-child {
+.action-sheet-button:first-child {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
 
-.action-sheet__button:active {
+.action-sheet-button:active {
   background-color: var(--action-sheet-button-active-background-color);
   background-image: none;
 }
 
-.action-sheet__button:focus {
+.action-sheet-button:focus {
   outline: none;
 }
 
-.action-sheet__button:nth-last-of-type(2) {
+.action-sheet-button:nth-last-of-type(2) {
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
   background-image: none;
 }
 
-.action-sheet__button:last-of-type {
+.action-sheet-button:last-of-type {
   border-radius: 12px;
   margin: 7px 0 0 0;
   background-color: var(--action-sheet-cancel-button-background-color);
@@ -109,15 +98,15 @@
   font-weight: 600;
 }
 
-.action-sheet__button:last-of-type:active {
+.action-sheet-button:last-of-type:active {
   background-color: var(--action-sheet-button-active-background-color);
 }
 
-.action-sheet__button--destructive {
+.action-sheet-button--destructive {
   color: var(--action-sheet-button-destructive-color);
 }
 
-.action-sheet__title {
+.action-sheet-title {
   box-sizing: border-box;
   height: 56px;
   font-size: 13px;
@@ -135,21 +124,34 @@
   }
 }
 
-.action-sheet__title:first-child {
+.action-sheet-title:first-child {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+
+.action-sheet-icon {
+  display: none;
+}
+
+.action-sheet-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--action-sheet-mask-color);
+  z-index: 1;
 }
 
 /*~
   name: Material Action Sheet
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
-      <div class="action-sheet__items action-sheet--material__items">
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
-      </div>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-close action-sheet-icon--material"></i>Cancel</button>
     </div>
 */
 
@@ -157,27 +159,22 @@
   name: Material Action Sheet with Title
   category: Action Sheet
   markup: |
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
-      <div class="action-sheet__items action-sheet--material__items">
-        <div class="action-sheet__title action-sheet--material__title">Title</div>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-checkbox-blank action-sheet--material__icon"></i>Label</button>
-        <button class="action-sheet__button action-sheet--material__button"><i class="ion-android-close action-sheet--material__icon"></i>Cancel</button>
-      </div>
+      <div class="action-sheet-title action-sheet-title--material">Title</div>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-close action-sheet-icon--material"></i>Cancel</button>
     </div>
 */
 
 .action-sheet--material {
-  background-color: var(--material-action-sheet-mask-color);
-}
-
-.action-sheet--material__items {
   left: 0;
   right: 0;
   bottom: 0;
   @apply(--material-shadow-5);
 }
 
-.action-sheet--material__title {
+.action-sheet-title--material {
   @apply(--material-font);
   border-radius: 0;
   background-image: none;
@@ -191,11 +188,11 @@
   font-weight: 400;
 }
 
-.action-sheet--material__title:first-child {
+.action-sheet-title--material:first-child {
   border-radius: 0;
 }
 
-.action-sheet--material__button {
+.action-sheet-button--material {
   @apply(--material-font);
   border-radius: 0;
   background-image: none;
@@ -209,22 +206,22 @@
   background-color: white;
 }
 
-.action-sheet--material__button:first-child {
+.action-sheet-button--material:first-child {
   border-radius: 0;
 }
 
-.action-sheet--material__button:nth-last-of-type(2) {
+.action-sheet-button--material:nth-last-of-type(2) {
   border-radius: 0;
 }
 
-.action-sheet--material__button:last-of-type {
+.action-sheet-button--material:last-of-type {
   margin: 0;
   border-radius: 0;
   font-weight: 400;
   background-color: white;
 }
 
-.action-sheet--material__icon {
+.action-sheet-icon--material {
   display: inline-block;
   float: left;
   height: 52px;
@@ -235,3 +232,6 @@
   text-align: center;
 }
 
+.action-sheet-mask--material {
+  background-color: var(--material-action-sheet-mask-color);
+}

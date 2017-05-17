@@ -12,7 +12,7 @@ const EVENT_TYPES = ['change', 'input'];
  * [en]
  *   Range input component.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Range modifier="material"
  *   value={this.state.value}
@@ -65,7 +65,7 @@ Range.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the progress indicator.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -74,7 +74,7 @@ Range.propTypes = {
    * @type function
    * @description
    *  [en] Called when the value of the input changes.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onChange: PropTypes.func,
 
@@ -85,7 +85,7 @@ Range.propTypes = {
    *  [en]
    *  Current value of the element.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   value: PropTypes.number,
 
@@ -94,7 +94,7 @@ Range.propTypes = {
    * @type bool
    * @description
    *  [en] If true, the element is disabled. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };
