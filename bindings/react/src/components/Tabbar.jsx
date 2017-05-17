@@ -111,7 +111,7 @@ Tabbar.propTypes = {
    * @required
    * @description
    *  [en] The index of the tab to highlight.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   index: PropTypes.number.isRequired,
 
@@ -120,7 +120,7 @@ Tabbar.propTypes = {
    * @type function
    * @description
    *  [en] The index of the first tab to show.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   renderTabs: PropTypes.func.isRequired,
 
@@ -129,7 +129,7 @@ Tabbar.propTypes = {
    * @type string
    * @description
    *  [en] Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top). [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   position: PropTypes.string,
 
@@ -138,7 +138,7 @@ Tabbar.propTypes = {
    * @type string
    * @description
    *  [en] Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animation: PropTypes.oneOf(['none', 'slide', 'fade']),
 
@@ -148,7 +148,7 @@ Tabbar.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -157,7 +157,7 @@ Tabbar.propTypes = {
    * @type function
    * @description
    *  [en]Called just before the tab is changed.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onPreChange: PropTypes.func,
 
@@ -166,7 +166,7 @@ Tabbar.propTypes = {
    * @type function
    * @description
    *  [en]Called just after the tab is changed.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onPostChange: PropTypes.func,
 
@@ -175,7 +175,7 @@ Tabbar.propTypes = {
    * @type function
    * @description
    *  [en]Called if the already open tab is tapped again.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onReactive: PropTypes.func
 };

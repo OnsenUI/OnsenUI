@@ -64,7 +64,7 @@ Icon.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the icon.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -73,7 +73,7 @@ Icon.propTypes = {
    * @type 'object or string'
    * @description
    *  [en] can be either a string or an object. If it is an string, it is set to an specific icon like 'ions-navicon'. If it is an object, it represents a dictionary of the icons depending on the modifier e.g.   `{{default: 'ion-navicon', material: 'md-menu'}}` [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   icon: PropTypes.oneOfType([
     PropTypes.string,
@@ -85,7 +85,7 @@ Icon.propTypes = {
    * @type 'object or number'
    * @description
    *  [en] can be either a number or an object. If it is an number, it  specifies the icon size with a number in pixels. If it is an object, it represents a dictionary of the icon sizes depending on the modifier e.g.   `{{default: 20, material: 18}}` [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   size: PropTypes.oneOfType([
     PropTypes.number,
@@ -97,7 +97,7 @@ Icon.propTypes = {
    * @type number
    * @description
    *  [en] Number of degrees to rotate the icon. Valid values are 90, 180 and 270. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   rotate: PropTypes.oneOf([0, 90, 180, 270]),
 
@@ -106,7 +106,7 @@ Icon.propTypes = {
    * @type bool
    * @description
    * [en] When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   fixedWidth: PropTypes.bool,
 
@@ -115,7 +115,7 @@ Icon.propTypes = {
    * @type bool
    * @description
    * [en] Specify whether the icon should be spinning. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   spin: PropTypes.bool
 

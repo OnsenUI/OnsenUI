@@ -22,7 +22,7 @@ ActionSheetButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the action sheet button.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -31,7 +31,7 @@ ActionSheetButton.propTypes = {
    * @type string
    * @description
    *  [en]Creates an `Icon` component with this string. Only visible on Android.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };

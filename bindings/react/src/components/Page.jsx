@@ -14,7 +14,7 @@ import BasicComponent from './BasicComponent.jsx';
  *
  *   A page toolbar can be added with the `renderToolbar` prop.
  * [/en]
- * [ja] どうしよう[/ja]
+ * [ja][/ja]
  * @example
   <Page
     renderFixed={() => <Fab></Fab>}
@@ -99,7 +99,7 @@ Page.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -120,7 +120,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the toolbar of the page.[/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderToolbar: PropTypes.func,
 
@@ -130,7 +130,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the bottom toolbar of the page.[/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderBottomToolbar: PropTypes.func,
 
@@ -140,7 +140,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders fixed content of the page. Can be used to render `Fab` or `SpeedDial` components as well as other components that don't scroll with the page.[/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderFixed: PropTypes.func,
 
@@ -152,7 +152,7 @@ Page.propTypes = {
    *  [en]
    *  	Fired right after the page is attached.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onInit: PropTypes.func,
 
@@ -164,7 +164,7 @@ Page.propTypes = {
    *  [en]
    *  Called Fired right after the page is shown.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onShow: PropTypes.func,
 
@@ -176,7 +176,7 @@ Page.propTypes = {
    *  [en]
    *  Called after the page is hidden.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onHide: PropTypes.func,
 
@@ -188,7 +188,7 @@ Page.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

@@ -40,7 +40,7 @@ ToolbarButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -51,7 +51,7 @@ ToolbarButton.propTypes = {
    *  [en]
    *  Indicates whether the button is disabled.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

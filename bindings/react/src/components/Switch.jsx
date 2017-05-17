@@ -56,7 +56,7 @@ Switch.propTypes = {
    * @type function
    * @description
    *  [en] Called when the value of the switch changes (checked/unchecked) [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onChange: PropTypes.func,
 
@@ -65,7 +65,7 @@ Switch.propTypes = {
    * @type bool
    * @description
    *  [en] Whether the switch is checked.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   checked: PropTypes.bool,
 
@@ -74,7 +74,7 @@ Switch.propTypes = {
    * @type bool
    * @description
    *  [en] If set, the switch is disabled.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -83,7 +83,7 @@ Switch.propTypes = {
    * @type string
    * @description
    *  [en] Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   inputId: PropTypes.string
 };

@@ -136,7 +136,7 @@ Modal.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

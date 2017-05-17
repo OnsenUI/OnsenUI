@@ -106,7 +106,7 @@ LazyList.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the lazy list.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -115,7 +115,7 @@ LazyList.propTypes = {
    * @type number
    * @description
    *  [en]The length of the list.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   length: PropTypes.number.isRequired,
 
@@ -124,7 +124,7 @@ LazyList.propTypes = {
    * @type function
    * @description
    *  [en] A function given the index of the to display row, renders it.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   renderRow: PropTypes.func.isRequired,
 
@@ -133,7 +133,7 @@ LazyList.propTypes = {
    * @type function
    * @description
    *  [en] A function given the index of the to row, returns the height of it.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   calculateItemHeight: PropTypes.func.isRequired
 };

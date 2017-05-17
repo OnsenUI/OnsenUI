@@ -28,7 +28,7 @@ Toast.propTypes = {
    *  [en]
    *  Indicates whether the toast open and shown.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   isOpen: PropTypes.bool.isRequired,
 
@@ -38,7 +38,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Animation name. Available animations are `"default"`, `"ascend"` (Android), `"lift"` (iOS), `"fall"`, `"fade"` or `"none"`.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -48,7 +48,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the toast.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -58,7 +58,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -114,7 +114,7 @@ Toast.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

@@ -35,7 +35,7 @@ SpeedDial.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the speed dial.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -47,7 +47,7 @@ SpeedDial.propTypes = {
    *     I.e. to display it in the top right corner specify "right top".
    *     Choose from "right", "left", "top" and "bottom".
 [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   position: PropTypes.string,
 
@@ -56,7 +56,7 @@ SpeedDial.propTypes = {
    * @type string
    * @description
    *  [en]Specify the direction the items are displayed. Possible values are "up", "down", "left" and "right".[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
 
@@ -65,7 +65,7 @@ SpeedDial.propTypes = {
    * @type string
    * @description
    *  [en]Specify if button should be disabled.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

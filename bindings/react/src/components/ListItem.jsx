@@ -53,7 +53,7 @@ ListItem.propTypes = {
    * @required false
    * @description
    *  [en] The appearance of the list item.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -64,7 +64,7 @@ ListItem.propTypes = {
    *  [en]
    *  Specifies whether the list item is tappable.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   tappable: PropTypes.bool,
 
@@ -75,7 +75,7 @@ ListItem.propTypes = {
    *  [en]
    *  Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   tapBackgroundColor: PropTypes.string,
 
@@ -84,7 +84,7 @@ ListItem.propTypes = {
    * @type bool
    * @description
    *  [en] Prevent vertical scrolling when the user drags horizontally. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   lockOnDrag: PropTypes.bool
 };

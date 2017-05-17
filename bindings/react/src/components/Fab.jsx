@@ -35,7 +35,7 @@ Fab.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -44,7 +44,7 @@ Fab.propTypes = {
    * @type bool
    * @description
    *  [en]If true,  the button will have a ripple effect when tapped.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   ripple: PropTypes.bool,
 
@@ -54,7 +54,7 @@ Fab.propTypes = {
    * @required false
    * @description
    *  [en]The position of the button. Should be a string like `"bottom right"` or `"top left"`. If this attribute is not defined it will be displayed as an inline element.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   position: PropTypes.string,
 
@@ -63,7 +63,7 @@ Fab.propTypes = {
    * @type bool
    * @description
    *  [en] If true, the button will be disabled. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -72,7 +72,7 @@ Fab.propTypes = {
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };

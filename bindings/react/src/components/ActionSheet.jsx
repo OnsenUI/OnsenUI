@@ -28,7 +28,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onCancel: PropTypes.func,
 
@@ -40,7 +40,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Indicates whether the dialog is open and shown.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   isOpen: PropTypes.bool.isRequired,
 
@@ -53,7 +53,7 @@ ActionSheet.propTypes = {
    *  Specifies whether the dialog is cancelable or not.
    *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   isCancelable: PropTypes.bool,
 
@@ -65,7 +65,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Specifies whether the dialog is disabled.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   isDisabled: PropTypes.bool,
 
@@ -77,7 +77,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -87,7 +87,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the dialog.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -97,7 +97,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   maskColor: PropTypes.string,
 
@@ -107,7 +107,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -163,7 +163,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

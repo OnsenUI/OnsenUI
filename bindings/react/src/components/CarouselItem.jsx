@@ -34,7 +34,7 @@ CarouselItem.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string
 };

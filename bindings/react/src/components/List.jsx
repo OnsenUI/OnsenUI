@@ -46,7 +46,7 @@ List.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -57,7 +57,7 @@ List.propTypes = {
    *  [en]
    *    Source of the list data. Should be an array.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   dataSource: PropTypes.array,
 
@@ -69,7 +69,7 @@ List.propTypes = {
    *  Function to specify the rendering function for every element in
    *  in the dataSource.
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderRow: PropTypes.func,
 
@@ -80,7 +80,7 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the header
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderHeader: PropTypes.func,
 
@@ -91,7 +91,7 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the footer
    *  [/en]
-   *  [ja] どうしよう[/ja]
+   *  [ja][/ja]
    */
   renderFooter: PropTypes.func
 };

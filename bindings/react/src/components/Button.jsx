@@ -27,7 +27,7 @@ Button.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -38,7 +38,7 @@ Button.propTypes = {
    *  [en]
    *  Specifies whether the button is disabled.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -49,7 +49,7 @@ Button.propTypes = {
    *  [en]
    *  Specifies whether the button has a ripple effect.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   ripple: PropTypes.bool,
 
@@ -58,7 +58,7 @@ Button.propTypes = {
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };

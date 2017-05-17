@@ -65,7 +65,7 @@ Range.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the progress indicator.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -85,7 +85,7 @@ Range.propTypes = {
    *  [en]
    *  Current value of the element.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   value: PropTypes.number,
 
@@ -94,7 +94,7 @@ Range.propTypes = {
    * @type bool
    * @description
    *  [en] If true, the element is disabled. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

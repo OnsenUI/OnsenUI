@@ -82,7 +82,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]The appearance of the select box.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -91,7 +91,7 @@ Select.propTypes = {
    * @type bool
    * @description
    *  [en]Specifies whether the select is disabled.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -109,7 +109,7 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]Current value of the element.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   value: PropTypes.string,
 

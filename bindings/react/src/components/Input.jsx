@@ -85,7 +85,7 @@ Input.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the input.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -96,7 +96,7 @@ Input.propTypes = {
    *  [en]
    *  Specifies whether the input is disabled.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 

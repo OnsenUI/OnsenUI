@@ -29,7 +29,7 @@ Ripple.propTypes = {
    * @required false
    * @description
    *  [en]Color of the ripple effect.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   color: PropTypes.string,
 
@@ -39,7 +39,7 @@ Ripple.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   background: PropTypes.string,
 
@@ -50,7 +50,7 @@ Ripple.propTypes = {
    *  [en]
    *  Specifies whether the button is disabled.
    *  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool
 };

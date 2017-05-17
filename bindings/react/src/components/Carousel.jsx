@@ -110,7 +110,7 @@ Carousel.propTypes = {
    * @required false
    * @description
    *  [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   direction: PropTypes.oneOf(['horizontal', 'vertical']),
 
@@ -119,7 +119,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel will cover the whole screen.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   fullscreen: PropTypes.bool,
 
@@ -128,7 +128,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel will be scrollable over the edge. It will bounce back when released.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   overscrollable: PropTypes.bool,
 
@@ -137,7 +137,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel then the selected item will be in the center of the carousel instead of the beginning. Useful only when the items are smaller than the carousel.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   centered: PropTypes.bool,
 
@@ -146,7 +146,7 @@ Carousel.propTypes = {
    * @type number
    * @description
    *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   itemWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -155,7 +155,7 @@ Carousel.propTypes = {
    * @type number
    * @description
    *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   itemHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -164,7 +164,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel will be automatically scrolled to the closest item border when released.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   autoScroll: PropTypes.bool,
 
@@ -173,7 +173,7 @@ Carousel.propTypes = {
    * @type number
    * @description
    *  [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   autoScrollRatio: PropTypes.number,
 
@@ -182,7 +182,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel can be scrolled by drag or swipe.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   swipeable: PropTypes.bool,
 
@@ -191,7 +191,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]If true, the carousel will be disabled.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   disabled: PropTypes.bool,
 
@@ -200,7 +200,7 @@ Carousel.propTypes = {
    * @type number
    * @description
    *  [en]Specify the index of the ons-carousel-item to show. Default is 0.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   index: PropTypes.number,
 
@@ -209,7 +209,7 @@ Carousel.propTypes = {
    * @type bool
    * @description
    *  [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   autoRefresh: PropTypes.bool,
 
@@ -218,7 +218,7 @@ Carousel.propTypes = {
    * @type function
    * @description
    *  [en]Called just after the current carousel item has changed.  [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onPostChange: PropTypes.func,
 
@@ -227,7 +227,7 @@ Carousel.propTypes = {
    * @type function
    * @description
    *  [en]Called when the carousel has been refreshed. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onRefresh: PropTypes.func,
 
@@ -236,7 +236,7 @@ Carousel.propTypes = {
    * @type function
    * @description
    *  [en]Called when the carousel has been overscrolled. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onOverscroll: PropTypes.func,
 
@@ -246,7 +246,7 @@ Carousel.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object
 };

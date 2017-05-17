@@ -55,7 +55,7 @@ SpeedDialItem.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -64,7 +64,7 @@ SpeedDialItem.propTypes = {
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [ja] [/ja]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };
