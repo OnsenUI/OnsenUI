@@ -16,6 +16,7 @@ dev
  * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
  * core: Added `ons-card` element.
  * core: A fake device back button event is now fired on ESC press.
+ * ons-navigator: Added `removePage` method.
  * angular1: Added `ons-action-sheet` bindings.
  * angular1: Added `ons-card` bindings.
  * angular1: Added `ons-list-title` bindings.
