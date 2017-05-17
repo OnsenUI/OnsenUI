@@ -469,6 +469,10 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
+    // ES Modules (raw ES source codes)
+    gulp.src('core/src/**/*')
+      .pipe(gulp.dest('build/core-src/')),
+
     // angular.js copy
     gulp.src('bindings/angular1/lib/angular/*.*')
       .pipe(gulp.dest('build/js/angular/')),
