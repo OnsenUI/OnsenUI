@@ -6,7 +6,8 @@ import {
   List,
   ListHeader,
   ListItem,
-  Button
+  Button,
+  Icon
 } from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
@@ -21,21 +22,21 @@ export default class extends React.Component {
       <Page renderToolbar={() => <MyToolbar title='Card' />} >
         <div style={{margin: 50}}>
           <Card>
-            <div className="title right">Awesome card title</div>
+            <img src={"https://monaca.io/img/logos/download_image_onsenui_01.png"} alt="Onsen UI" style={{width: '100%'}} />
+            <div className="title">
+              Awesome framework
+            </div>
             <div className="content">
-              <List>
-                <ListHeader>Awesome card 1 info</ListHeader>
-                <ListItem>Awesome card 1 info 1</ListItem>
-                <ListItem>Awesome card 1 info 2</ListItem>
-                <ListHeader>Awesome card 2 info</ListHeader>
-                <ListItem>Awesome card 2 info 1</ListItem>
-                <ListItem>Awesome card 2 info 2</ListItem>
-              </List>
-              <div className="button-bar" style={{marginTop: '1%'}}>
-                <Button>Action 1</Button>
-                <Button>Action 2</Button>
-                <Button>Action 3</Button>
+              <div>
+                <Button><Icon icon="ion-thumbsup"></Icon></Button>
+                <Button><Icon icon="ion-share"></Icon></Button>
               </div>
+              <List>
+                <ListHeader>Bindings</ListHeader>
+                <ListItem>Vue</ListItem>
+                <ListItem>Angular</ListItem>
+                <ListItem>React</ListItem>
+              </List>
             </div>
           </Card>
         </div>
