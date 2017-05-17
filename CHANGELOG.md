@@ -22,6 +22,7 @@ dev
  * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
  * core: Added `ons-card` element.
  * core: A fake device back button event is now fired on ESC press.
+ * ons-navigator: Added `removePage` method.
  * ons-input: Added styling support for `type='search'`.
  * angular1: Added `ons-action-sheet` bindings.
  * angular1: Added `ons-toast` bindings.
@@ -47,6 +48,7 @@ dev
 
 ### BREAKING CHANGES
 
+ * ons-navigator: Removed `options.refresh`.
  * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be manually specified instead.
  * ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
  * ons.notification: Canceled notifications do not reject the returned promise anymore. Instead, when canceled they resolve to `-1` for `alert` and `confirm`, or `null` for `prompt`.
