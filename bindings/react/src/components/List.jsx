@@ -9,7 +9,7 @@ import BasicComponent from './BasicComponent.jsx';
  * @description
  *   [en]
  *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <List
     dataSource={['Row 1', 'Row 2']}
@@ -46,7 +46,7 @@ List.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   modifier: PropTypes.string,
 
@@ -57,7 +57,7 @@ List.propTypes = {
    *  [en]
    *    Source of the list data. Should be an array.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   dataSource: PropTypes.array,
 
@@ -69,7 +69,7 @@ List.propTypes = {
    *  Function to specify the rendering function for every element in
    *  in the dataSource.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderRow: PropTypes.func,
 
@@ -80,7 +80,7 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the header
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderHeader: PropTypes.func,
 
@@ -91,7 +91,7 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the footer
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderFooter: PropTypes.func
 };

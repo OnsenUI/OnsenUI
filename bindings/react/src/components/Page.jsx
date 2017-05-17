@@ -14,7 +14,7 @@ import BasicComponent from './BasicComponent.jsx';
  *
  *   A page toolbar can be added with the `renderToolbar` prop.
  * [/en]
- * [jp] どうしよう[/jp]
+ * [ja] どうしよう[/ja]
  * @example
   <Page
     renderFixed={() => <Fab></Fab>}
@@ -99,7 +99,7 @@ Page.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   modifier: PropTypes.string,
 
@@ -120,7 +120,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the toolbar of the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderToolbar: PropTypes.func,
 
@@ -130,7 +130,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the bottom toolbar of the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderBottomToolbar: PropTypes.func,
 
@@ -140,7 +140,7 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders fixed content of the page. Can be used to render `Fab` or `SpeedDial` components as well as other components that don't scroll with the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderFixed: PropTypes.func,
 
@@ -152,7 +152,7 @@ Page.propTypes = {
    *  [en]
    *  	Fired right after the page is attached.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onInit: PropTypes.func,
 
@@ -164,7 +164,7 @@ Page.propTypes = {
    *  [en]
    *  Called Fired right after the page is shown.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onShow: PropTypes.func,
 
@@ -176,7 +176,7 @@ Page.propTypes = {
    *  [en]
    *  Called after the page is hidden.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onHide: PropTypes.func,
 
@@ -188,7 +188,7 @@ Page.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

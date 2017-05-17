@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
  *  The action sheet is useful for displaying a list of options and asking the user to make a decision. An ActionSheetButton component is provided for this purpose, although it can contain any type of content.
  *  It will automatically be displayed as Material Design (bottom sheet) when running on an Android device.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  */
 class ActionSheet extends BaseDialog {
   _getDomNodeName() {
@@ -28,7 +28,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onCancel: PropTypes.func,
 
@@ -40,7 +40,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Indicates whether the dialog is open and shown.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   isOpen: PropTypes.bool.isRequired,
 
@@ -53,7 +53,7 @@ ActionSheet.propTypes = {
    *  Specifies whether the dialog is cancelable or not.
    *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   isCancelable: PropTypes.bool,
 
@@ -65,7 +65,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Specifies whether the dialog is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   isDisabled: PropTypes.bool,
 
@@ -77,7 +77,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   animation: PropTypes.string,
 
@@ -87,7 +87,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the dialog.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -97,7 +97,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   maskColor: PropTypes.string,
 
@@ -107,7 +107,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -119,7 +119,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Called just before the action sheet is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreShow: PropTypes.func,
 
@@ -131,7 +131,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Called just after the action sheet is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostShow: PropTypes.func,
 
@@ -141,7 +141,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Called just before the action sheet is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreHide: PropTypes.func,
 
@@ -151,7 +151,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]Called just after the action sheet is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostHide: PropTypes.func,
 
@@ -163,7 +163,7 @@ ActionSheet.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

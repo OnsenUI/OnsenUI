@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * @tutorial react/Reference/page
  * @description
  * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
- * [jp] どうしよう[/jp]
+ * [ja] どうしよう[/ja]
  * @example
  *
 <Page renderToolbar={() =>
@@ -43,7 +43,7 @@ Toolbar.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   modifier: PropTypes.string
 };

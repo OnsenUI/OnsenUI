@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * [en] Element that displays a Material Design Speed Dialog component. It is useful when there are more than one primary action that can be performed in a page.
  *  The Speed dial looks like a `Fab` element but will expand a menu when tapped.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <SpeedDial disabled={false} direction='right' onClick={() => console.log('test1')} position='left bottom'>
      <Fab>
@@ -35,7 +35,7 @@ SpeedDial.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the speed dial.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -47,7 +47,7 @@ SpeedDial.propTypes = {
    *     I.e. to display it in the top right corner specify "right top".
    *     Choose from "right", "left", "top" and "bottom".
 [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   position: PropTypes.string,
 
@@ -56,7 +56,7 @@ SpeedDial.propTypes = {
    * @type string
    * @description
    *  [en]Specify the direction the items are displayed. Possible values are "up", "down", "left" and "right".[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
 
@@ -65,7 +65,7 @@ SpeedDial.propTypes = {
    * @type string
    * @description
    *  [en]Specify if button should be disabled.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   disabled: PropTypes.bool
 };

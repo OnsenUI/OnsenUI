@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * [en] The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
  *     It can be displayed either as an inline element or in one of the corners. Normally it will be positioned in the lower right corner of the screen.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <SpeedDial disabled={false} direction='right' onClick={() => console.log('test1')} position='left bottom'>
      <Fab>
@@ -35,7 +35,7 @@ Fab.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -44,7 +44,7 @@ Fab.propTypes = {
    * @type bool
    * @description
    *  [en]If true,  the button will have a ripple effect when tapped.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   ripple: PropTypes.bool,
 
@@ -54,7 +54,7 @@ Fab.propTypes = {
    * @required false
    * @description
    *  [en]The position of the button. Should be a string like `"bottom right"` or `"top left"`. If this attribute is not defined it will be displayed as an inline element.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   position: PropTypes.string,
 
@@ -63,7 +63,7 @@ Fab.propTypes = {
    * @type bool
    * @description
    *  [en] If true, the button will be disabled. [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   disabled: PropTypes.bool,
 
@@ -72,7 +72,7 @@ Fab.propTypes = {
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onClick: PropTypes.func
 };

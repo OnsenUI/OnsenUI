@@ -9,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/progress
  * @description
  * [en] The component is used to display a linear progress bar. It can either display a progress bar that shows the user how much of a task has been completed. In the case where the percentage is not known it can be used to display an animated progress bar so the user can see that an operation is in progress.  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  *<ProgressBar value={55} secondaryValue={87} />
  *<ProgressBar indeterminate />
@@ -37,7 +37,7 @@ ProgressBar.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the progress indicator.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -48,7 +48,7 @@ ProgressBar.propTypes = {
    *  [en]
    *  Current progress. Should be a value between 0 and 100.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   value: PropTypes.number,
 
@@ -59,7 +59,7 @@ ProgressBar.propTypes = {
    *  [en]
    *  Current secondary progress. Should be a value between 0 and 100.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   secondaryValue: PropTypes.number,
 
@@ -68,7 +68,7 @@ ProgressBar.propTypes = {
    * @type bool
    * @description
    *  [en] If this property is set, an infinite looping animation will be shown. [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   indeterminate: PropTypes.bool
 };

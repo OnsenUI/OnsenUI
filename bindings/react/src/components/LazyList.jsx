@@ -11,7 +11,7 @@ import BasicComponent from './BasicComponent.jsx';
  *     It does that by "lazily" loading elements into the DOM when they come into view and
  *     removing items from the DOM when they are not visible.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  *
   renderRow(index) {
@@ -106,7 +106,7 @@ LazyList.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the lazy list.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -115,7 +115,7 @@ LazyList.propTypes = {
    * @type number
    * @description
    *  [en]The length of the list.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   length: PropTypes.number.isRequired,
 
@@ -124,7 +124,7 @@ LazyList.propTypes = {
    * @type function
    * @description
    *  [en] A function given the index of the to display row, renders it.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   renderRow: PropTypes.func.isRequired,
 
@@ -133,7 +133,7 @@ LazyList.propTypes = {
    * @type function
    * @description
    *  [en] A function given the index of the to row, returns the height of it.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   calculateItemHeight: PropTypes.func.isRequired
 };

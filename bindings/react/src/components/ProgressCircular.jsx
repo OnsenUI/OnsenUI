@@ -10,7 +10,7 @@ import Util from './Util.js';
  * @description
  * [en] This component displays a circular progress indicator. It can either be used to show how much of a task has been completed or to show a looping animation to indicate that an operation is currently running.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  *<ProgressCircular value={55} secondaryValue={87} />
  *<ProgressCircular indeterminate />
@@ -38,7 +38,7 @@ ProgressCircular.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the progress indicator.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   modifier: PropTypes.string,
 
@@ -49,7 +49,7 @@ ProgressCircular.propTypes = {
    *  [en]
    *  Current progress. Should be a value between 0 and 100.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   value: PropTypes.number,
 
@@ -60,7 +60,7 @@ ProgressCircular.propTypes = {
    *  [en]
    *  Current secondary progress. Should be a value between 0 and 100.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   secondaryValue: PropTypes.number,
 
@@ -69,7 +69,7 @@ ProgressCircular.propTypes = {
    * @type bool
    * @description
    *  [en] If this property is set, an infinite looping animation will be shown. [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   indeterminate: PropTypes.bool
 };

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @description
  * [en] Header element for list items. Must be put inside ons-list component.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
    <List
      dataSource={this.state.data}
@@ -34,7 +34,7 @@ ListHeader.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string
 };

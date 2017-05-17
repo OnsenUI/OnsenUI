@@ -11,7 +11,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  *
  *    It can be configured to automatically expand into a column layout on large screens and collapse the menu on smaller screens. When the menu is collapsed the user can open it by swiping.
  [/en]
- * [jp] どうしよう[/jp]
+ * [ja] どうしよう[/ja]
  * @example
   <Splitter>
     <SplitterSide
@@ -60,7 +60,7 @@ Splitter.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

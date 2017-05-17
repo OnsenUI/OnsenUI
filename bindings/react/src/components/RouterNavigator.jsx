@@ -9,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/navigator
  * @description
  * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
- * [jp] どうしよう[/jp]
+ * [ja] どうしよう[/ja]
  */
 class RouterNavigator extends BasicComponent {
   constructor(...args) {
@@ -257,7 +257,7 @@ RouterNavigator.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   renderPage: PropTypes.func.isRequired,
   /**
@@ -269,7 +269,7 @@ RouterNavigator.propTypes = {
    *  [en] This array contains the initial routes from the navigator,
    *  which will be used to render the initial pages in the renderPage method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   initialRouteStack: PropTypes.array,
 
@@ -283,7 +283,7 @@ RouterNavigator.propTypes = {
    *  which will be used to render the initial pages in the
    *  renderPage method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   initialRoute: PropTypes.object,
 
@@ -339,7 +339,7 @@ RouterNavigator.propTypes = {
    * @type object
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -351,7 +351,7 @@ RouterNavigator.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

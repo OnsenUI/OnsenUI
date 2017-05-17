@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @description
  * [en] Carousel item component. Used as a child of the `<ons-carousel>` element.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
 *  <Carousel swipeable overscrollable autoScroll fullscreen >
      <CarouselItem style={{backgroundColor: 'gray'}}>
@@ -34,7 +34,7 @@ CarouselItem.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja] どうしよう[/ja]
    */
   modifier: PropTypes.string
 };

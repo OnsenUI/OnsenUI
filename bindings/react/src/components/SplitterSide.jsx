@@ -12,7 +12,7 @@ import Util from './Util.js';
  * [en]  The SplitterContent  element is used as a child element of Splitter.
  *    It contains the main content of the page while SplitterSide contains the list.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <Splitter>
     <SplitterSide
@@ -127,7 +127,7 @@ SplitterSide.propTypes = {
    *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.
    *     If the value is not defined, the view always be in `"collapse"` mode.
 [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   collapse: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
@@ -136,7 +136,7 @@ SplitterSide.propTypes = {
    * @type bool
    * @description
    *  [en]Ennable swipe interaction on collapse mode.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   isSwipeable: PropTypes.bool,
 
@@ -145,7 +145,7 @@ SplitterSide.propTypes = {
    * @type bool
    * @description
    *  [en]Specifies whether the menu is open.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   isOpen: PropTypes.bool,
 
@@ -154,7 +154,7 @@ SplitterSide.propTypes = {
    * @type function
    * @description
    *  [en]Called after the menu is opened.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onOpen: PropTypes.func,
 
@@ -163,7 +163,7 @@ SplitterSide.propTypes = {
    * @type function
    * @description
    *  [en]Called after the menu is closed.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onClose: PropTypes.func,
 
@@ -172,7 +172,7 @@ SplitterSide.propTypes = {
    * @type string
    * @description
    *  [en]Specify which side of the screen the SplitterSide element is located. Possible values are `"left"` and `"right"`.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   side: PropTypes.oneOf(['left', 'right']),
 
@@ -181,7 +181,7 @@ SplitterSide.propTypes = {
    * @type number
    * @description
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   swipeTargetWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
@@ -190,7 +190,7 @@ SplitterSide.propTypes = {
    * @type  number
    * @description
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
@@ -200,7 +200,7 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation. Use one of `overlay`, `push`, `reveal`, or `default`.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   animation: PropTypes.string,
 
@@ -210,7 +210,7 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -220,7 +220,7 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en] Specify how much the menu needs to be swiped before opening. A value between `0` and `1`.  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   openThreshold: PropTypes.number,
 
@@ -230,7 +230,7 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en] Current mode. Possible values are `"collapse"` or `"split"`. This attribute is read only.  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   mode: PropTypes.oneOf(['collapse', 'split']),
 
@@ -239,7 +239,7 @@ SplitterSide.propTypes = {
    * @type string
    * @description
    *  [en] Called before the menu opens.  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onPreOpen: PropTypes.func,
 
@@ -248,7 +248,7 @@ SplitterSide.propTypes = {
    * @type string
    * @description
    *  [en] Called before the menu closes.  [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onPreClose: PropTypes.func,
 
@@ -257,7 +257,7 @@ SplitterSide.propTypes = {
    * @type string
    * @description
    *  [en] Called after the component's mode changes. [/en]
-   *  [jp] [/jp]
+   *  [ja] [/ja]
    */
   onModeChange: PropTypes.func
 };
