@@ -140,6 +140,29 @@
       });
     });
 
+    describe('page remove', function () {
+      it('should remove in background', function () {
+        var page1 = element(by.id('page1'));
+        var page2 = element(by.id('page2'));
+
+        element(by.id('btn1')).click();
+        browser.wait(EC.visibilityOf(page2));
+        expect((page2).isDisplayed()).toBeTruthy();
+
+        var lastElement = element.all(by.xpath('//ons-navigator/ons-page')).last();
+        expect(lastElement.equals(page2)).toBeTruthy();
+        expect((page1).isPresent()).toBeTruthy();
+
+        browser.sleep(500); // Wait for the animation
+
+        element(by.id('btn-remove')).click();
+        browser.wait(EC.stalenessOf(page1));
+
+        var elements = element.all(by.xpath('//ons-navigator/ons-page'));
+        expect(elements.get(0).equals(page2)).toBeTruthy();
+      });
+    });
+
     describe('backbutton handler', function () {
       it('should work on \'backbutton\' event', function() {
         var page1 = element(by.id('page1'));
