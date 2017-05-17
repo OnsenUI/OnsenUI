@@ -73,6 +73,7 @@ limitations under the License.
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
           'insertPage',
+          'removePage',
           'pushPage',
           'bringPageTop',
           'popPage',
