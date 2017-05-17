@@ -410,6 +410,60 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
+  describe('#removePage()', () => {
+    it('removes the page on a given index', (done) => {
+      nav.pushPage('info', {
+        callback: () => {
+          expect(nav.pages.length).to.equal(2); // ['hoge', 'info']
+          
+          nav.removePage(0).then(() => {
+            expect(nav.pages.length).to.equal(1); // ['info']
+
+            const content = nav.pages[0]._getContentElement();
+            expect(content.innerHTML).to.equal('info');
+
+            done();
+          });
+        }
+      });
+    });
+
+    it('only accepts object options', (done) => {
+      nav.pushPage('info', {
+        callback: () => {
+          nav.removePage(0).then(() => {
+            expect(() => nav.removePage(0, 'string')).to.throw(Error);
+
+            done();
+          });
+        }
+      });
+    });
+
+    it('redirects to pushPage if the removal is at the top', () => {
+      var spy = chai.spy.on(nav, 'popPage');
+      nav.removePage(0, {});
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('normalizes the index', (done) => {
+      nav.pushPage('info', {
+        callback: () => {
+          expect(nav.pages.length).to.equal(2); // ['hoge', 'info']
+
+          nav.removePage(-2).then(() => {
+            expect(nav.pages.length).to.equal(1); // ['info']
+
+            const content = nav.pages[0]._getContentElement();
+            expect(content.innerHTML).to.equal('info');
+
+            done();
+          });
+        }
+      });
+    });
+  });
+
   describe('#replacePage()', () => {
     it('only accepts object options', () => {
       expect(() => nav.replacePage('hoge', 'string')).to.throw(Error);
