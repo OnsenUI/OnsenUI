@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
  *
  *  This component does not block user input, allowing the app to continue its flow. Furthermore, it can be automatically hidden after a timeout.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  */
 class Toast extends BaseDialog {
   _getDomNodeName() {
@@ -28,7 +28,7 @@ Toast.propTypes = {
    *  [en]
    *  Indicates whether the toast open and shown.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   isOpen: PropTypes.bool.isRequired,
 
@@ -38,7 +38,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Animation name. Available animations are `"default"`, `"ascend"` (Android), `"lift"` (iOS), `"fall"`, `"fade"` or `"none"`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -48,7 +48,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the toast.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -58,7 +58,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
 
@@ -70,7 +70,7 @@ Toast.propTypes = {
    *  [en]
    *  Called just before the toast is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreShow: PropTypes.func,
 
@@ -82,7 +82,7 @@ Toast.propTypes = {
    *  [en]
    *  Called just after the toast is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostShow: PropTypes.func,
 
@@ -92,7 +92,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Called just before the toast is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPreHide: PropTypes.func,
 
@@ -102,7 +102,7 @@ Toast.propTypes = {
    * @required false
    * @description
    *  [en]Called just after the toast is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   onPostHide: PropTypes.func,
 
@@ -114,7 +114,7 @@ Toast.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

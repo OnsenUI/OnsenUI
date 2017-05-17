@@ -7,7 +7,7 @@ import React from 'react';
  * @tutorial react/Reference/visual
  * @description
  * [en]Card component that can be used to display content.[/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  * @example
  *
 <Card>
@@ -28,7 +28,7 @@ Card.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   modifier: React.PropTypes.string
 };

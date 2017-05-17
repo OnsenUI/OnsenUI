@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * @category page
  * @description
  * [en]Toolbar component that is positioned at the bottom of the page.[/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <BottomToolbar modifier="material"> Content </BottomToolbar>
  */
@@ -22,7 +22,7 @@ BottomToolbar.propTypes = {
    * @type string
    * @description
    *  [en]Specify modifier name to specify custom styles. Optional.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string
 };

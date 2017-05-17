@@ -15,10 +15,10 @@ import BasicComponent from './BasicComponent.jsx';
  *   This component can be used to block user input while some operation is
  *   running or to show some information to the user.
  * [/en]
- * [jp]
+ * [ja]
  *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
  *   モーダルが表示されている間はイベント通知が行われません
- * [/jp]
+ * [/ja]
  * @example
   <Page
     renderModal={() => (
@@ -136,7 +136,7 @@ Modal.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
 };

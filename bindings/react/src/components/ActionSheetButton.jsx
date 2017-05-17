@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  * @tutorial react/Reference/action-sheet
  * @description
  * [en]Component that represent each button of the action sheet.[/en]
- * [jp][/jp]
+ * [ja][/ja]
  */
 class ActionSheetButton extends SimpleWrapper {
   _getDomNodeName() {
@@ -22,7 +22,7 @@ ActionSheetButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the action sheet button.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -31,7 +31,7 @@ ActionSheetButton.propTypes = {
    * @type string
    * @description
    *  [en]Creates an `Icon` component with this string. Only visible on Android.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };

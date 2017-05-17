@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @description
  * [en] Title element for lists. Usually comes before ons-list component.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <ListTitle>List Title</ListTitle>
    <List
@@ -35,7 +35,7 @@ ListTitle.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string
 };

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @tutorial react/Reference/speed-dial
  * @description
  * [en] This component displays the child elements of the Material Design Speed dial component. [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <SpeedDial disabled={false} direction='right' onClick={() => console.log('test1')} position='left bottom'>
      <Fab>
@@ -55,7 +55,7 @@ SpeedDialItem.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
@@ -64,7 +64,7 @@ SpeedDialItem.propTypes = {
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
   onClick: PropTypes.func
 };
