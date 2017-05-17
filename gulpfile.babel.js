@@ -140,7 +140,13 @@ gulp.task('core', function(done) {
 
         plugins: [
           new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`)
-        ]
+        ],
+
+        node: {
+            process: false,
+            setImmediate: false,
+            timers: false,
+        }
       },
       (err, stats) => { // called when bundling is done
         if (err) { // if fatal error occurs
