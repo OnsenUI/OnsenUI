@@ -31,8 +31,10 @@ import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
 import webpack from 'webpack';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
+import chalk from 'chalk';
 
 ////////////////////////////////////////
 
@@ -139,7 +141,14 @@ gulp.task('core', function(done) {
         // source-map most detailed at the expense of build speed.,
 
         plugins: [
-          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`)
+          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`),
+          new ProgressBarPlugin({
+            format: [':bar', chalk.green(':percent'), ':msg'].join(' '),
+            complete: chalk.bgGreen(' '),
+            incomplete: chalk.bgWhite(' '),
+            width: 40,
+            total: 100
+          })
         ],
 
         node: {
