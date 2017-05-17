@@ -69,7 +69,7 @@
     "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^6.0.3",
-    "babel-loader": "^6.4.1",
+    "babel-loader": "^7",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-angularjs-annotate": "^0.7.0",
     "babel-preset-env": "^1.4.0",
