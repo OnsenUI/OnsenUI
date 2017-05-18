@@ -7,13 +7,11 @@ dev
 
 ### New Features
 
- * css-components: Added `list-title` component.
  * css-components: Added `action-sheet` component.
  * css-components: Added `toast` component.
  * css-components: Added `card` component.
- * core: Added `ons-list-title` element.
- * core: Added `ons-action-sheet` element.
- * core: Added `ons-action-sheet-button` element.
+ * css-components: Added `segment` component.
+ * core: Added `ons-action-sheet` and `ons-action-sheet-button` elements.
  * core: Added `ons-toast` element.
  * core: Added `ons-card` element.
  * core: Added new method `ons.openActionSheet(...)` for creating inline `ons-action-sheet` elements.
@@ -34,8 +32,9 @@ dev
  * core: Fixed broken sourcemap of `onsenui.js` ([#1958](https://github.com/OnsenUI/OnsenUI/issues/1958)).
  * ons-carousel: Fixed [#1952](https://github.com/OnsenUI/OnsenUI/issues/1952).
  * ons-carousel: `refresh` event is now triggered when resized.
- * ons-dialog: Fixed mask-color attribute.
- * ons-splitter: Fixed animation attribute issue.
+ * ons-dialog: Fixed `disabled` attribute.
+ * ons-dialog: Fixed `mask-color` attribute.
+ * ons-splitter: Fixed `animation` attribute issue.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
  
