@@ -23,6 +23,7 @@
     "test": "gulp test --disable-warnings"
   },
   "main": "js/onsenui.js",
+  "module": "core-src/setup.js",
   "typings": "js/onsenui.d.ts",
   "files": [
     "bower.json",
@@ -34,7 +35,8 @@
     "css-components-src/README.md",
     "css-components-src/styielint.config.js",
     "css-components-src/yarn.lock",
-    "js"
+    "js",
+    "core-src"
   ],
   "repository": {
     "type": "git",
@@ -66,7 +68,6 @@
   ],
   "homepage": "https://onsen.io/",
   "devDependencies": {
-    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^6.0.3",
     "babel-loader": "^7",
@@ -130,5 +131,9 @@
     "wdio-jasmine-framework": "^0.2.16",
     "webdriverio": "^4.4.0",
     "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
+    "core-js": "2.4.1"
   }
 }
