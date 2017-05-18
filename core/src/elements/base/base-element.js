@@ -28,8 +28,5 @@ function getElementClass() {
 export default class BaseElement extends getElementClass() {
   constructor() {
     super();
-    this._init();
   }
-
-  _init() { }
 }

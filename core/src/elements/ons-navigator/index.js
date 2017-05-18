@@ -217,7 +217,9 @@ export default class NavigatorElement extends BaseElement {
     return this._animatorFactory;
   }
 
-  _init() {
+  constructor() {
+    super();
+
     this._isRunning = false;
     this._initialized = false;
     this._pageLoader = defaultPageLoader;

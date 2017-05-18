@@ -126,7 +126,9 @@ export default class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
     });

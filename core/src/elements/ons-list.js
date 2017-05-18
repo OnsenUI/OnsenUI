@@ -68,7 +68,9 @@ export default class ListElement extends BaseElement {
    *   [ja]リストの表現を指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this._compile();
   }
 

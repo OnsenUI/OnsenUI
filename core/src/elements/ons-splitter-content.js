@@ -78,7 +78,9 @@ export default class SplitterContentElement extends BaseElement {
    *   [ja]ons-splitter-content要素に表示するページのURLを指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this._page = null;
     this._pageLoader = defaultPageLoader;
 

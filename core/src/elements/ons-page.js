@@ -148,7 +148,9 @@ export default class PageElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this.classList.add(defaultClassName);
     this._initialized = false;
 

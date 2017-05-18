@@ -37,7 +37,9 @@ export default class BaseDialogElement extends BaseElement {
     this.style.display = shouldShow ? 'block' : 'none';
   }
 
-  _init() {
+  constructor() {
+    super();
+
     this._visible = false;
     this._doorLock = new DoorLock();
     this._boundCancel = () => this._cancel();

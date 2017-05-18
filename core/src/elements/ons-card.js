@@ -55,7 +55,9 @@ export default class CardElement extends BaseElement {
    *   [ja]リストの表現を指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
     });

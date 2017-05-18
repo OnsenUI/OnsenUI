@@ -60,7 +60,9 @@ export default class SpeedDialItemElement extends BaseElement {
    *   [ja]このコンポーネントの表現を指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this._compile();
     this._boundOnClick = this._onClick.bind(this);
   }
