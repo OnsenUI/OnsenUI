@@ -95,7 +95,7 @@ export default class ButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  init() {
+  _init() {
     this._compile();
   }
 

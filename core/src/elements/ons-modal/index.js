@@ -86,8 +86,8 @@ export default class ModalElement extends BaseDialogElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
-  init() {
-    super.init();
+  _init() {
+    super._init();
     this._defaultDBB = () => undefined;
     contentReady(this, () => this._compile());
   }

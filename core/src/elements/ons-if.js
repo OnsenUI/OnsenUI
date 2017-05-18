@@ -64,7 +64,7 @@ export default class IfElement extends BaseElement {
    *  [ja]portraitもしくはlandscapeを指定します[/ja]
    */
 
-  init() {
+  _init() {
     contentReady(this, () => {
       if (platform._renderPlatform !== null) {
         this._platformUpdate();

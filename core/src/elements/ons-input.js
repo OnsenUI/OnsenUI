@@ -132,7 +132,7 @@ export default class InputElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  init() {
+  _init() {
     contentReady(this, () => {
       this._compile();
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));

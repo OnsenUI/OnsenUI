@@ -201,8 +201,8 @@ export default class PopoverElement extends BaseDialogElement {
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
    */
 
-  init() {
-    super.init();
+  _init() {
+    super._init();
     this._boundOnChange = this._onChange.bind(this);
 
     contentReady(this, () => {

@@ -45,7 +45,7 @@ const scheme = {'': 'carousel-item--*'};
  */
 export default class CarouselItemElement extends BaseElement {
 
-  init() {
+  _init() {
     this.style.width = '100%';
     ModifierUtil.initModifier(this, scheme);
   }

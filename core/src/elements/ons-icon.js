@@ -122,7 +122,7 @@ export default class IconElement extends BaseElement {
    *   [ja]アイコンを回転するかどうかを指定します。[/ja]
    */
 
-  init() {
+  _init() {
     this._compile();
   }
 
