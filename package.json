@@ -33,7 +33,7 @@
     "css-components-src/gulpfile.js",
     "css-components-src/package.json",
     "css-components-src/README.md",
-    "css-components-src/styielint.config.js",
+    "css-components-src/stylelint.config.js",
     "css-components-src/yarn.lock",
     "js",
     "core-src"
