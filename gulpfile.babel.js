@@ -378,13 +378,12 @@ function eslintTargets() {
   return [
     'gulpfile.babel.js',
     'docs/packages/**/*.js',
-    'core/src/*.js',
     'core/src/**/*.js',
-    'bindings/angular1/js/*.js',
-    'bindings/angular1/directives/*.js',
-    'bindings/angular1/services/*.js',
-    'bindings/angular1/elements/*.js',
-    'bindings/angular1/views/*.js'
+    'bindings/angular1/js/**/*.js',
+    'bindings/angular1/directives/**/*.js',
+    'bindings/angular1/services/**/*.js',
+    'bindings/angular1/elements/**/*.js',
+    'bindings/angular1/views/**/*.js'
   ];
 }
 
