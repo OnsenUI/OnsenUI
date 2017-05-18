@@ -16,11 +16,9 @@ dev
  * core: Added `ons-action-sheet-button` element.
  * core: Added `ons-toast` element.
  * core: Added `ons-card` element.
- * core: Added new method `ons.actionSheet(...)` for creating inline `ons-action-sheet` elements.
+ * core: Added new method `ons.openActionSheet(...)` for creating inline `ons-action-sheet` elements.
  * core: Added new method `ons.notification.toast(...)` for creating inline and queued `ons-toast` elements.
  * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML.
- * core: Added new method `ons.createElement(...)` that allows creating new elements from templates or inline HTML ([#1941](https://github.com/OnsenUI/OnsenUI/issues/1941)).
- * core: Added `ons-card` element.
  * core: `onsenui` is now available as ES Modules.
  * core: A fake device back button event is now fired on ESC press.
  * ons-navigator: Added `removePage` method.
@@ -38,6 +36,8 @@ dev
  * ons-carousel: `refresh` event is now triggered when resized.
  * ons-dialog: Fixed mask-color attribute.
  * ons-splitter: Fixed animation attribute issue.
+ * angular1: Page loader now throws `destroy` event when page is unloaded.
+ * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
  
 ### Misc
 
@@ -49,13 +49,11 @@ dev
 
 ### BREAKING CHANGES
 
- * ons-navigator: Removed `options.refresh`.
- * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be manually specified instead.
+ * ons-navigator: Removed `options.refresh`. `prepop` event and `removePage` can be used instead.
  * ons-template, external files: `ons-page` tag is not added automatically anymore as a wrapper of the target template. It must be manually specified.
+ * ons.createDialog, ons.createPopover, ons.createAlertDialog: Tags like `<ons-dialog>`, `<ons-alert-dialog>` or `<ons-popover>` are not added automatically anymore to the target template, they must be manually specified instead.
  * ons.notification: Canceled notifications do not reject the returned promise anymore. Instead, when canceled they resolve to `-1` for `alert` and `confirm`, or `null` for `prompt`.
  * angular1: Removed `onsSlidingMenu` and `onsSplitView` directives.
- * angular1: Page loader now throws `destroy` event when page is unloaded.
- * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
 
 v2.2.6
 ----
