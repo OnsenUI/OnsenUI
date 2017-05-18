@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+/* eslint-disable no-console */
+
 import 'babel-polyfill';
 
 import gulp from 'gulp';
