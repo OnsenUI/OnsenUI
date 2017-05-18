@@ -379,6 +379,8 @@ function eslintTargets() {
     'gulpfile.babel.js',
     'docs/packages/**/*.js',
     'core/src/**/*.js',
+    '!core/src/polyfills/**/*.js',
+    '!core/src/vendor/**/*.js',
     'bindings/angular1/js/**/*.js',
     'bindings/angular1/directives/**/*.js',
     'bindings/angular1/services/**/*.js',
