@@ -415,7 +415,7 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage('info', {
         callback: () => {
           expect(nav.pages.length).to.equal(2); // ['hoge', 'info']
-          
+
           nav.removePage(0).then(() => {
             expect(nav.pages.length).to.equal(1); // ['info']
 
