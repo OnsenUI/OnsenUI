@@ -153,7 +153,9 @@ export default class TabElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this._pageLoader = defaultPageLoader;
     this._page = null;
 

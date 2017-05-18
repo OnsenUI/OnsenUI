@@ -89,7 +89,9 @@ export default class ProgressBarElement extends BaseElement {
    *   [ja]この属性が設定された場合、ループするアニメーションが表示されます。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => this._compile());
   }
 

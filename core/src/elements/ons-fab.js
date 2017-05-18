@@ -72,7 +72,9 @@ export default class FabElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     // The following statements can be executed before contentReady
     // since these do not access the children
     this.hide();

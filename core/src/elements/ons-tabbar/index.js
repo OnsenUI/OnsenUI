@@ -175,7 +175,9 @@ export default class TabbarElement extends BaseElement {
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this._tabbarId = generateId();
 
     contentReady(this, () => {

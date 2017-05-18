@@ -60,7 +60,9 @@ export default class TemplateElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     this.template = this.innerHTML;
 
     while (this.firstChild) {

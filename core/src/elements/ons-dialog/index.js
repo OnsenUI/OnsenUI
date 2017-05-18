@@ -177,8 +177,9 @@ export default class DialogElement extends BaseDialogElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
-  _init() {
-    super._init();
+  constructor() {
+    super();
+
     contentReady(this, () => this._compile());
   }
 

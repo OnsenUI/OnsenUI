@@ -72,7 +72,9 @@ const INPUT_ATTRIBUTES = [
 
 export default class RangeElement extends BaseElement {
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
       this._updateBoundAttributes();

@@ -78,7 +78,9 @@ export default class ActionSheetButtonElement extends BaseElement {
    *   [ja][/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => this._compile());
   }
 

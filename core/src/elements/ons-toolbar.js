@@ -101,7 +101,9 @@ export default class ToolbarElement extends BaseElement {
    *   [ja]ツールバーの表現を指定します。[/ja]
    */
 
-  _init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
     });
