@@ -63,7 +63,7 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function(done) {
+gulp.task('core', ['eslint'], function(done) {
   try {
     webpack(
       { // webpack2 config
