@@ -81,7 +81,7 @@ export default class ToolbarButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定してください。[/ja]
    */
 
-  init() {
+  _init() {
     this._compile();
   }
 

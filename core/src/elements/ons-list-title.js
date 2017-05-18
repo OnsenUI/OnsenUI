@@ -41,7 +41,7 @@ const scheme = {'': 'list-title--*'};
 
 export default class ListTitleElement extends BaseElement {
 
-  init() {
+  _init() {
     this._compile();
   }
 

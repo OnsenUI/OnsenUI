@@ -138,7 +138,7 @@ export default class SelectElement extends BaseElement {
    *   [ja]一度に表示する選択肢の個数を指定します。選択肢がこの属性で指定した個数よりも多い場合、スクロールが有効になります。[/ja]
    */
 
-  init() {
+  _init() {
     contentReady(this, () => {
       this._compile();
     });

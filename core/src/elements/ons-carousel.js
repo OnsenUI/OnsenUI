@@ -318,7 +318,7 @@ export default class CarouselElement extends BaseElement {
    *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
-  init() {
+  _init() {
     this._doorLock = new DoorLock();
     this._scroll = 0;
     this._offset = 0;

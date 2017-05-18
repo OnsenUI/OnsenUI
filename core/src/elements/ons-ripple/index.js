@@ -71,7 +71,7 @@ export default class RippleElement extends BaseElement {
    *   [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]
    */
 
-  init() {
+  _init() {
     contentReady(this, () => this._compile());
 
     this._animator = new Animator();

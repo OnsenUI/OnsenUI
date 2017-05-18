@@ -47,7 +47,7 @@ export default class BottomToolbarElement extends BaseElement {
    *   [ja]ツールバーの見た目の表現を指定します。[/ja]
    */
 
-  init() {
+  _init() {
     this.classList.add(defaultClassName);
     ModifierUtil.initModifier(this, scheme);
   }
