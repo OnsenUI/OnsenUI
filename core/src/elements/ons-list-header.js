@@ -58,7 +58,9 @@ export default class ListHeaderElement extends BaseElement {
    *   [ja]ヘッダーの表現を指定します。[/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     this._compile();
   }
 

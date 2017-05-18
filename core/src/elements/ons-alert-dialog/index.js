@@ -188,8 +188,9 @@ export default class AlertDialogElement extends BaseDialogElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
-  init() {
-    super.init();
+  constructor() {
+    super();
+
     contentReady(this, () => this._compile());
   }
 
@@ -282,10 +283,6 @@ export default class AlertDialogElement extends BaseDialogElement {
 
     this._dialog.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
-
-    if (this.getAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
-    }
 
     ModifierUtil.initModifier(this, this._scheme);
   }

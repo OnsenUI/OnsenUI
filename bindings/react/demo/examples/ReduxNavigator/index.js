@@ -6,7 +6,7 @@ import {Provider, connect} from 'react-redux';
 import reducer from './reducer';
 import {postPush, postPop} from './actions';
 
-import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from '../../../src/index.js';
+import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from 'react-onsenui';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -49,7 +49,7 @@ export default class extends Component {
         <div className='left'>
           <BackButton />
         </div>
-        <div className='center'>Stateless Navigator</div>
+        <div className='center'>Redux Navigator</div>
       </Toolbar>
     );
   }

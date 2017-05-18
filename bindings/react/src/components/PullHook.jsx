@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -11,7 +12,7 @@ import Util from './Util.js';
  * [en]  Component that adds **Pull to refresh** functionality to an `<ons-page>` element.
  *     It can be used to perform a task when the user pulls down at the top of the page. A common usage is to refresh the data displayed in a page.
  [/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  * @example
 
     return (
@@ -48,7 +49,7 @@ class PullHook extends BasicComponent {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.onChange);
-    this._pullHook.onAction = this.props.onLoad;
+    this._pullHook.onAction = this.props.onLoad || null;
   }
 
   componentWillUnmount() {
@@ -78,9 +79,9 @@ PullHook.propTypes = {
    * @required false
    * @description
    *  [en]Called when the pull hook inner state is changed. The state can be either "initial", "preaction" or "action"[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name onLoad
@@ -88,45 +89,45 @@ PullHook.propTypes = {
    * @required false
    * @description
    *  [en]Called when the pull hook is in the  `action` state[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onLoad: React.PropTypes.func,
+  onLoad: PropTypes.func,
 
   /**
    * @name disabled
    * @type bool
    * @description
    *  [en] When set to true, the pull hook will be disabled.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name height
    * @type number
    * @description
    *  [en] The height of the pull hook in pixels. The default value is 64.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  height: React.PropTypes.number,
+  height: PropTypes.number,
 
   /**
    * @name thresholdHeight
    * @type number
    * @description
    *  [en] The threshold height of the pull hook in pixels. The default value is 96.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  thresholdHeight: React.PropTypes.number,
+  thresholdHeight: PropTypes.number,
 
   /**
    * @name fixedContent
    * @type number
    * @description
    *  [en] If set to true, the content of the page will not move when pulling.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  fixedContent: React.PropTypes.bool
+  fixedContent: PropTypes.bool
 };
 
 export default PullHook;

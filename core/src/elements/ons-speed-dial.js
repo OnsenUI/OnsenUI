@@ -108,7 +108,9 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]無効化する場合に指定します。[/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
     });

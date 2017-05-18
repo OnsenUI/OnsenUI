@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 
@@ -14,10 +15,10 @@ import BasicComponent from './BasicComponent.jsx';
  *   This component can be used to block user input while some operation is
  *   running or to show some information to the user.
  * [/en]
- * [jp]
+ * [ja]
  *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
  *   モーダルが表示されている間はイベント通知が行われません
- * [/jp]
+ * [/ja]
  * @example
   <Page
     renderModal={() => (
@@ -87,7 +88,7 @@ Modal.propTypes = {
    *     Animation name. Available animations are `"fade"` and `"none"`.
    *   [/en]
    */
-  animation: React.PropTypes.oneOf(['none', 'fade']),
+  animation: PropTypes.oneOf(['none', 'fade']),
 
   /**
    * @name animationOptions
@@ -95,7 +96,7 @@ Modal.propTypes = {
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onShow
@@ -106,7 +107,7 @@ Modal.propTypes = {
    *  Called Fired right after the modal is shown.
    *  [/en]
    */
-  onShow: React.PropTypes.func,
+  onShow: PropTypes.func,
 
   /**
    * @name onHide
@@ -117,7 +118,7 @@ Modal.propTypes = {
    *  Called after the modal is hidden.
    *  [/en]
    */
-  onHide: React.PropTypes.func,
+  onHide: PropTypes.func,
 
   /**
    * @name isOpen
@@ -125,7 +126,7 @@ Modal.propTypes = {
    * @description
    *  [en]When `true` the modal will show itself.[/en]
    */
-  isOpen: React.PropTypes.bool,
+  isOpen: PropTypes.bool,
 
   /**
    * @name onDeviceBackButton
@@ -135,9 +136,9 @@ Modal.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 Modal.defaultProps = {

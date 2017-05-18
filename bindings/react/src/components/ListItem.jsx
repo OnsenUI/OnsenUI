@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import PropTypes from 'prop-types';
 import SimpleWrapper from './SimpleWrapper.jsx';
 import Util from './Util.js';
 
@@ -11,7 +12,7 @@ import Util from './Util.js';
  *   [en]
  *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *   [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
    <ListItem>
  *   <div className="left">Left</div>
@@ -52,9 +53,9 @@ ListItem.propTypes = {
    * @required false
    * @description
    *  [en] The appearance of the list item.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name tappable
@@ -63,9 +64,9 @@ ListItem.propTypes = {
    *  [en]
    *  Specifies whether the list item is tappable.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  tappable: React.PropTypes.bool,
+  tappable: PropTypes.bool,
 
   /**
    * @name tapBackgroundColor
@@ -74,18 +75,18 @@ ListItem.propTypes = {
    *  [en]
    *  Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  tapBackgroundColor: React.PropTypes.string,
+  tapBackgroundColor: PropTypes.string,
 
   /**
    * @name lockOnDrag
    * @type bool
    * @description
    *  [en] Prevent vertical scrolling when the user drags horizontally. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  lockOnDrag: React.PropTypes.bool
+  lockOnDrag: PropTypes.bool
 };
 
 export default ListItem;

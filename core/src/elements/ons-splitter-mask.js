@@ -21,7 +21,9 @@ import contentReady from '../ons/content-ready';
 
 export default class SplitterMaskElement extends BaseElement {
 
-  init() {
+  constructor() {
+    super();
+
     this._boundOnClick = this._onClick.bind(this);
     contentReady(this, () => {
       if (this.parentNode._sides.every(side => side.mode === 'split')) {

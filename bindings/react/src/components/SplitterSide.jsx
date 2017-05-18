@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
@@ -11,7 +12,7 @@ import Util from './Util.js';
  * [en]  The SplitterContent  element is used as a child element of Splitter.
  *    It contains the main content of the page while SplitterSide contains the list.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <Splitter>
     <SplitterSide
@@ -126,72 +127,72 @@ SplitterSide.propTypes = {
    *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.
    *     If the value is not defined, the view always be in `"collapse"` mode.
 [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  collapse: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
+  collapse: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * @name isSwipeable
    * @type bool
    * @description
    *  [en]Ennable swipe interaction on collapse mode.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  isSwipeable: React.PropTypes.bool,
+  isSwipeable: PropTypes.bool,
 
   /**
    * @name isOpen
    * @type bool
    * @description
    *  [en]Specifies whether the menu is open.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  isOpen: React.PropTypes.bool,
+  isOpen: PropTypes.bool,
 
   /**
    * @name onOpen
    * @type function
    * @description
    *  [en]Called after the menu is opened.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onOpen: React.PropTypes.func,
+  onOpen: PropTypes.func,
 
   /**
    * @name onClose
    * @type function
    * @description
    *  [en]Called after the menu is closed.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onClose: React.PropTypes.func,
+  onClose: PropTypes.func,
 
   /**
    * @name side
    * @type string
    * @description
    *  [en]Specify which side of the screen the SplitterSide element is located. Possible values are `"left"` and `"right"`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  side: React.PropTypes.oneOf(['left', 'right']),
+  side: PropTypes.oneOf(['left', 'right']),
 
   /**
    * @name swipeTargetWidth
    * @type number
    * @description
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  swipeTargetWidth: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+  swipeTargetWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * @name width
    * @type  number
    * @description
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * @name animation
@@ -199,9 +200,9 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation. Use one of `overlay`, `push`, `reveal`, or `default`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name animationOptions
@@ -209,9 +210,9 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name openThreshold
@@ -219,9 +220,9 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en] Specify how much the menu needs to be swiped before opening. A value between `0` and `1`.  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  openThreshold: React.PropTypes.number,
+  openThreshold: PropTypes.number,
 
   /**
    * @name mode
@@ -229,36 +230,36 @@ SplitterSide.propTypes = {
    * @required false
    * @description
    *  [en] Current mode. Possible values are `"collapse"` or `"split"`. This attribute is read only.  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  mode: React.PropTypes.oneOf(['collapse', 'split']),
+  mode: PropTypes.oneOf(['collapse', 'split']),
 
   /**
    * @name onPreOpen
    * @type string
    * @description
    *  [en] Called before the menu opens.  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onPreOpen: React.PropTypes.func,
+  onPreOpen: PropTypes.func,
 
   /**
    * @name onPreClose
    * @type string
    * @description
    *  [en] Called before the menu closes.  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onPreClose: React.PropTypes.func,
+  onPreClose: PropTypes.func,
 
   /**
    * @name onModeChange
    * @type string
    * @description
    *  [en] Called after the component's mode changes. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onModeChange: React.PropTypes.func
+  onModeChange: PropTypes.func
 };
 
 export default SplitterSide;

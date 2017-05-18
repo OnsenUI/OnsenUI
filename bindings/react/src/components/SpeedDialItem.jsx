@@ -1,6 +1,7 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import ReactDOM from 'react-dom';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-speed-dial-item
@@ -8,7 +9,7 @@ import React from 'react';
  * @tutorial react/Reference/speed-dial
  * @description
  * [en] This component displays the child elements of the Material Design Speed dial component. [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <SpeedDial disabled={false} direction='right' onClick={() => console.log('test1')} position='left bottom'>
      <Fab>
@@ -54,18 +55,18 @@ SpeedDialItem.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name onClick
    * @type function
    * @description
    *  [en] This function will be called ones the button is clicked. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onClick: React.PropTypes.func
+  onClick: PropTypes.func
 };
 
 export default SpeedDialItem;

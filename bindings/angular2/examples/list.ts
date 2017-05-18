@@ -16,6 +16,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
+      <ons-list-title>List Title</ons-list-title>
       <ons-list>
         <ons-list-header>
           Normal List Items

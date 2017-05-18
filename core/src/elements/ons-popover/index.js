@@ -201,8 +201,9 @@ export default class PopoverElement extends BaseDialogElement {
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
    */
 
-  init() {
-    super.init();
+  constructor() {
+    super();
+
     this._boundOnChange = this._onChange.bind(this);
 
     contentReady(this, () => {
@@ -360,11 +361,6 @@ export default class PopoverElement extends BaseDialogElement {
     if (this.hasAttribute('style')) {
       this._popover.setAttribute('style', this.getAttribute('style'));
       this.removeAttribute('style');
-    }
-
-    // FIXME!
-    if (this.hasAttribute('mask-color')) {
-      this._mask.style.backgroundColor = this.getAttribute('mask-color');
     }
 
     ModifierUtil.initModifier(this, this._scheme);

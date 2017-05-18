@@ -7,7 +7,7 @@ import {
   Toolbar,
   ToolbarButton,
   Icon
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 const MyToolbar = ({ title = '', leftButton }) => (
   <Toolbar>

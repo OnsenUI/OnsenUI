@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Page,
   Select
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

@@ -19,7 +19,7 @@
  */
 
 /**
- * @event update
+ * @event update:visible
  * @description
  *   [en]Fired right after user interaction. Useful to update `visible` prop.[/en]
  *   [ja]どうしょう[/ja]

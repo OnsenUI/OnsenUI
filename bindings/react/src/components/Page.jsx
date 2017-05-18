@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 /**
@@ -13,7 +14,7 @@ import BasicComponent from './BasicComponent.jsx';
  *
  *   A page toolbar can be added with the `renderToolbar` prop.
  * [/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  * @example
   <Page
     renderFixed={() => <Fab></Fab>}
@@ -89,7 +90,7 @@ Page.propTypes = {
    *  Specify the style of the page content. Optional.
    *  [/en]
    */
-  contentStyle: React.PropTypes.object,
+  contentStyle: PropTypes.object,
 
   /**
    * @name modifier
@@ -98,9 +99,9 @@ Page.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name renderModal
@@ -110,7 +111,7 @@ Page.propTypes = {
    * @description
    *  [en] This function renders a modal that masks current screen.[/en]
    */
-  renderModal: React.PropTypes.func,
+  renderModal: PropTypes.func,
 
   /**
    * @name renderToolbar
@@ -119,9 +120,9 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the toolbar of the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderToolbar: React.PropTypes.func,
+  renderToolbar: PropTypes.func,
 
   /**
    * @name renderBottomToolbar
@@ -129,9 +130,9 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders the bottom toolbar of the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderBottomToolbar: React.PropTypes.func,
+  renderBottomToolbar: PropTypes.func,
 
   /**
    * @name renderFixed
@@ -139,9 +140,9 @@ Page.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function renders fixed content of the page. Can be used to render `Fab` or `SpeedDial` components as well as other components that don't scroll with the page.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderFixed: React.PropTypes.func,
+  renderFixed: PropTypes.func,
 
   /**
    * @name onInit
@@ -151,9 +152,9 @@ Page.propTypes = {
    *  [en]
    *  	Fired right after the page is attached.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onInit: React.PropTypes.func,
+  onInit: PropTypes.func,
 
   /**
    * @name onShow
@@ -163,9 +164,9 @@ Page.propTypes = {
    *  [en]
    *  Called Fired right after the page is shown.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onShow: React.PropTypes.func,
+  onShow: PropTypes.func,
 
   /**
    * @name onHide
@@ -175,9 +176,9 @@ Page.propTypes = {
    *  [en]
    *  Called after the page is hidden.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onHide: React.PropTypes.func,
+  onHide: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
@@ -187,9 +188,9 @@ Page.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 const NOOP = () => null;

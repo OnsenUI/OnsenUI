@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -8,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/tabbar
  * @description
  * [en] Component to display a tabbar on either the top or the bottom of a page.
- * To define the tabs and the content the property renderTabs need to be implemented, that returns an array of tabs and their content. See the example for specifics. [/en]* [jp][/jp]
+ * To define the tabs and the content the property renderTabs need to be implemented, that returns an array of tabs and their content. See the example for specifics. [/en]* [ja][/ja]
  * @example
 
   <Page>
@@ -110,36 +111,36 @@ Tabbar.propTypes = {
    * @required
    * @description
    *  [en] The index of the tab to highlight.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  index: React.PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 
   /**
    * @name renderTabs
    * @type function
    * @description
    *  [en] The index of the first tab to show.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  renderTabs: React.PropTypes.func.isRequired,
+  renderTabs: PropTypes.func.isRequired,
 
   /**
    * @name position
    * @type string
    * @description
    *  [en] Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top). [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  position: React.PropTypes.string,
+  position: PropTypes.string,
 
   /**
    * @name animation
    * @type string
    * @description
    *  [en] Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animation: React.PropTypes.oneOf(['none', 'slide', 'fade']),
+  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
 
   /**
    * @name animationOptions
@@ -147,36 +148,36 @@ Tabbar.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onPreChange
    * @type function
    * @description
    *  [en]Called just before the tab is changed.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onPreChange: React.PropTypes.func,
+  onPreChange: PropTypes.func,
 
   /**
    * @name onPostChange
    * @type function
    * @description
    *  [en]Called just after the tab is changed.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onPostChange: React.PropTypes.func,
+  onPostChange: PropTypes.func,
 
   /**
    * @name onReactive
    * @type function
    * @description
    *  [en]Called if the already open tab is tapped again.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onReactive: React.PropTypes.func
+  onReactive: PropTypes.func
 };
 
 Tabbar.defaultProps = {

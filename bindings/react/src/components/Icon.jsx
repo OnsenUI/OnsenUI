@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -13,7 +14,7 @@ import Util from './Util.js';
  *   *  [Ionicons](http://ionicons.com/)
  *   *  [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <Icon
     size={{default: 32, material: 40}}
@@ -63,20 +64,20 @@ Icon.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the icon.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name icon
    * @type 'object or string'
    * @description
    *  [en] can be either a string or an object. If it is an string, it is set to an specific icon like 'ions-navicon'. If it is an object, it represents a dictionary of the icons depending on the modifier e.g.   `{{default: 'ion-navicon', material: 'md-menu'}}` [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  icon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.objectOf(React.PropTypes.string)
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.objectOf(PropTypes.string)
   ]),
 
   /**
@@ -84,11 +85,11 @@ Icon.propTypes = {
    * @type 'object or number'
    * @description
    *  [en] can be either a number or an object. If it is an number, it  specifies the icon size with a number in pixels. If it is an object, it represents a dictionary of the icon sizes depending on the modifier e.g.   `{{default: 20, material: 18}}` [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  size: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.objectOf(React.PropTypes.number)
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.objectOf(PropTypes.number)
   ]),
 
   /**
@@ -96,27 +97,27 @@ Icon.propTypes = {
    * @type number
    * @description
    *  [en] Number of degrees to rotate the icon. Valid values are 90, 180 and 270. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  rotate: React.PropTypes.oneOf([0, 90, 180, 270]),
+  rotate: PropTypes.oneOf([0, 90, 180, 270]),
 
   /**
    * @name fixedWidth
    * @type bool
    * @description
    * [en] When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  fixedWidth: React.PropTypes.bool,
+  fixedWidth: PropTypes.bool,
 
   /**
    * @name spin
    * @type bool
    * @description
    * [en] Specify whether the icon should be spinning. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  spin: React.PropTypes.bool
+  spin: PropTypes.bool
 
 };
 

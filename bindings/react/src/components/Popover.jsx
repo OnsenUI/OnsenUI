@@ -1,5 +1,5 @@
 import BaseDialog from './BaseDialog.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 /**
@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
  *     A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.
  *    Another common way to use the popover is to display a menu when a button on the screen is tapped.
  *   [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Page>
  *  <Button
@@ -53,9 +53,9 @@ Popover.propTypes = {
    *  [en]
    *  This function should return react component or a domnode that the popover is showing on.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  getTarget: React.PropTypes.func.isRequired,
+  getTarget: PropTypes.func.isRequired,
     /**
    * @name onCancel
    * @type function
@@ -64,9 +64,9 @@ Popover.propTypes = {
    *  [en]
    *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onCancel: React.PropTypes.func,
+  onCancel: PropTypes.func,
 
   /**
    * @name isOpen
@@ -76,9 +76,9 @@ Popover.propTypes = {
    *  [en]
    *  Indicates whether the dialog is open and shown.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  isOpen: React.PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 
   /**
    * @name isCancelable
@@ -89,9 +89,9 @@ Popover.propTypes = {
    *  Specifies whether the dialog is cancelable or not.
    *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  isCancelable: React.PropTypes.bool,
+  isCancelable: PropTypes.bool,
 
   /**
    * @name isDisabled
@@ -101,9 +101,9 @@ Popover.propTypes = {
    *  [en]
    *  Specifies whether the dialog is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  isDisabled: React.PropTypes.bool,
+  isDisabled: PropTypes.bool,
 
   /**
    * @name animation
@@ -113,9 +113,9 @@ Popover.propTypes = {
    *  [en]
    *  The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name modifier
@@ -123,9 +123,9 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the dialog.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name maskColor
@@ -133,9 +133,9 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)"[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  maskColor: React.PropTypes.string,
+  maskColor: PropTypes.string,
 
   /**
    * @name animationOptions
@@ -143,9 +143,9 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onPreShow
@@ -155,9 +155,9 @@ Popover.propTypes = {
    *  [en]
    *  Called just before the alert dialog is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onPreShow: React.PropTypes.func,
+  onPreShow: PropTypes.func,
 
   /**
    * @name onPostShow
@@ -167,9 +167,9 @@ Popover.propTypes = {
    *  [en]
    *  Called just after the alert dialog is displayed.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onPostShow: React.PropTypes.func,
+  onPostShow: PropTypes.func,
 
   /**
    * @name onPreHide
@@ -177,9 +177,9 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]Called just before the alert dialog is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onPreHide: React.PropTypes.func,
+  onPreHide: PropTypes.func,
 
   /**
    * @name onPostHide
@@ -187,9 +187,9 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]Called just after the alert dialog is hidden.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onPostHide: React.PropTypes.func,
+  onPostHide: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
@@ -199,9 +199,9 @@ Popover.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 export default Popover;

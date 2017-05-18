@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -8,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/navigator
  * @description
  * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  */
 class RouterNavigator extends BasicComponent {
   constructor(...args) {
@@ -39,13 +40,13 @@ class RouterNavigator extends BasicComponent {
    * @signature resetPageStack(route, options = {})
    * @param {Array} [routes]
    *   [en] The routes that the navigator should be reset to.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Resets the navigator to the current page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   resetPageStack(routes, options = {}) {
     if (this.isRunning()) {
@@ -71,13 +72,13 @@ class RouterNavigator extends BasicComponent {
    * @signature pushPage(route, options = {})
    * @param {Array} [routes]
    *   [en] The routes that the navigator should push to.[/en]
-   *   [ja] どうしよう [/ja]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
-   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Pushes a page to the page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   pushPage(route, options = {}) {
     if (this.isRunning()) {
@@ -136,10 +137,10 @@ class RouterNavigator extends BasicComponent {
    * @signature popPage(route, options = {})
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
-   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
    *   [en] Pops a page out of the page stack[/en]
-   *   [ja] どうしよう[/ja]
+   *   [ja][/ja]
    */
   popPage(options = {}) {
     if (this.isRunning()) {
@@ -256,9 +257,9 @@ RouterNavigator.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderPage: React.PropTypes.func.isRequired,
+  renderPage: PropTypes.func.isRequired,
   /**
    * @name initialRouteStack
    * @type array
@@ -268,9 +269,9 @@ RouterNavigator.propTypes = {
    *  [en] This array contains the initial routes from the navigator,
    *  which will be used to render the initial pages in the renderPage method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  initialRouteStack: React.PropTypes.array,
+  initialRouteStack: PropTypes.array,
 
   /**
    * @name initialRoute
@@ -282,9 +283,9 @@ RouterNavigator.propTypes = {
    *  which will be used to render the initial pages in the
    *  renderPage method.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  initialRoute: React.PropTypes.object,
+  initialRoute: PropTypes.object,
 
   /**
    * @name onPrePush
@@ -293,7 +294,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just before a page is pushed.[/en]
    */
-  onPrePush: React.PropTypes.func,
+  onPrePush: PropTypes.func,
 
   /**
    * @name onPostPush
@@ -302,7 +303,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just after a page is pushed.[/en]
    */
-  onPostPush: React.PropTypes.func,
+  onPostPush: PropTypes.func,
 
   /**
    * @name onPrePop
@@ -311,7 +312,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just before a page is popped.[/en]
    */
-  onPrePop: React.PropTypes.func,
+  onPrePop: PropTypes.func,
 
   /**
    * @name onPostPop
@@ -320,7 +321,7 @@ RouterNavigator.propTypes = {
    * @description
    *  [en]Called just after a page is popped.[/en]
    */
-  onPostPop: React.PropTypes.func,
+  onPostPop: PropTypes.func,
 
   /**
    * @property animation
@@ -331,16 +332,16 @@ RouterNavigator.propTypes = {
    *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
    *   [/en]
    */
-  animation: React.PropTypes.string,
+  animation: PropTypes.string,
 
   /**
    * @name animationOptions
    * @type object
    * @description
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  animationOptions: React.PropTypes.object,
+  animationOptions: PropTypes.object,
 
   /**
    * @name onDeviceBackButton
@@ -350,9 +351,9 @@ RouterNavigator.propTypes = {
    *  [en]
    *  Custom handler for device back button.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  onDeviceBackButton: React.PropTypes.func
+  onDeviceBackButton: PropTypes.func
 };
 
 export default RouterNavigator;

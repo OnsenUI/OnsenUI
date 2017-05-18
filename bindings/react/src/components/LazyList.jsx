@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 
 /**
@@ -10,7 +11,7 @@ import BasicComponent from './BasicComponent.jsx';
  *     It does that by "lazily" loading elements into the DOM when they come into view and
  *     removing items from the DOM when they are not visible.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  *
   renderRow(index) {
@@ -105,36 +106,36 @@ LazyList.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the lazy list.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name length
    * @type number
    * @description
    *  [en]The length of the list.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  length: React.PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
 
   /**
    * @name renderRow
    * @type function
    * @description
    *  [en] A function given the index of the to display row, renders it.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  renderRow: React.PropTypes.func.isRequired,
+  renderRow: PropTypes.func.isRequired,
 
   /**
    * @name calculateItemHeight
    * @type function
    * @description
    *  [en] A function given the index of the to row, returns the height of it.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  calculateItemHeight: React.PropTypes.func.isRequired
+  calculateItemHeight: PropTypes.func.isRequired
 };
 
 export default LazyList;

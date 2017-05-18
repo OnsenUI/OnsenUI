@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
@@ -13,7 +14,7 @@ const EVENT_TYPES = ['change', 'input'];
  * [en]
  *   Select input component.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Select modifier="material"
  *   value={this.state.value}
@@ -81,36 +82,36 @@ Select.propTypes = {
    * @type string
    * @description
    *  [en]The appearance of the select box.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name disabled
    * @type bool
    * @description
    *  [en]Specifies whether the select is disabled.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name onChange
    * @type function
    * @description
    *  [en]Called when the value of the select changes.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name value
    * @type string
    * @description
    *  [en]Current value of the element.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  value: React.PropTypes.string,
+  value: PropTypes.string,
 
   /**
    * @name multiple
@@ -119,43 +120,43 @@ Select.propTypes = {
    *  [en]If this attribute is defined, multiple options can be selected at once.[/en]
    *  [ja][/ja]
    */
-  multiple: React.PropTypes.bool,
+  multiple: PropTypes.bool,
 
   /**
    * @name autofocus
    * @type boolean
    * @description
    *  [en]Element automatically gains focus on page load.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  autofocus: React.PropTypes.bool,
+  autofocus: PropTypes.bool,
 
   /**
    * @name required
    * @type boolean
    * @description
    *  [en]Make the select input required for submitting the form it is part of.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 
   /**
    * @name form
    * @type string
    * @description
    *  [en]Associate a select element to an existing form on the page, even if not nested.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  form: React.PropTypes.string,
+  form: PropTypes.string,
 
   /**
    * @name size
    * @type string
    * @description
    *  [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  size: React.PropTypes.string
+  size: PropTypes.string
 };
 
 export default Select;

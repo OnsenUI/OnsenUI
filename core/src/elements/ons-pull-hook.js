@@ -105,7 +105,9 @@ export default class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     this._boundOnDrag = this._onDrag.bind(this);
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnDragEnd = this._onDragEnd.bind(this);

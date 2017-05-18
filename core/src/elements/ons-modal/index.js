@@ -57,6 +57,7 @@ const _animatorDict = {
  *   [en]The `<ons-dialog>` component can be used to create a modal dialog.[/en]
  *   [ja][/ja]
  * @codepen devIg
+ * @tutorial vanilla/reference/modal
  * @example
  * <ons-modal id="modal">
  *   Modal content
@@ -85,8 +86,9 @@ export default class ModalElement extends BaseDialogElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
-  init() {
-    super.init();
+  constructor() {
+    super();
+
     this._defaultDBB = () => undefined;
     contentReady(this, () => this._compile());
   }

@@ -8,7 +8,7 @@ import {
   Toolbar,
   List,
   ListItem
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar.js';
 

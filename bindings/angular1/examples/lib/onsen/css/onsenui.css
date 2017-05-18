@@ -1329,20 +1329,6 @@ limitations under the License.
 
 */
 
-.onsen_sliding-menu-black-mask {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  background-color: black;
-}
-
-.sliding-menu {
-    overflow: hidden;
-}
-
 .transition {
     -webkit-transition-duration: 400ms;
     -moz-transition-duration: 400ms;
@@ -1432,11 +1418,6 @@ limitations under the License.
 
 .main {
     overflow: hidden;
-}
-
-.onsen_split-view__shadow {
-	-webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
-	box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /*

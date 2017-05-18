@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-toolbar
@@ -7,7 +8,7 @@ import React from 'react';
  * @tutorial react/Reference/page
  * @description
  * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
- * [jp] どうしよう[/jp]
+ * [ja][/ja]
  * @example
  *
 <Page renderToolbar={() =>
@@ -42,9 +43,9 @@ Toolbar.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default Toolbar;

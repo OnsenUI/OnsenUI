@@ -19,6 +19,7 @@ import contentReady from '../ons/content-ready';
 
 const defaultCheckboxClass = 'checkbox';
 const defaultRadioButtonClass = 'radio-button';
+const defaultSearchInputClass = 'search-input';
 
 const scheme = {
   '.text-input': 'text-input--*',
@@ -28,7 +29,8 @@ const scheme = {
   '.radio-button__checkmark': 'radio-button--*__checkmark',
   '.checkbox': 'checkbox--*',
   '.checkbox__input': 'checkbox--*__input',
-  '.checkbox__checkmark': 'checkbox--*__checkmark'
+  '.checkbox__checkmark': 'checkbox--*__checkmark',
+  '.search-input': 'search-input--*'
 };
 
 const INPUT_ATTRIBUTES = [
@@ -130,7 +132,9 @@ export default class InputElement extends BaseElement {
    *  [ja][/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     contentReady(this, () => {
       this._compile();
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
@@ -148,45 +152,55 @@ export default class InputElement extends BaseElement {
       return;
     }
 
-    const helper = document.createElement('span');
-    helper.classList.add('_helper');
+    if (this.getAttribute('type') === 'search') {
+      const search = this._input || document.createElement('input');
+      search.classList.add(defaultSearchInputClass);
+      if (!this._input) {
+        this.appendChild(search);
+      }
+      this._updateBoundAttributes();
+    }
+    else {
+      const helper = document.createElement('span');
+      helper.classList.add('_helper');
 
-    const container = document.createElement('label');
-    container.appendChild(document.createElement('input'));
-    container.appendChild(helper);
+      const container = document.createElement('label');
+      container.appendChild(document.createElement('input'));
+      container.appendChild(helper);
 
-    const label = document.createElement('span');
-    label.classList.add('input-label');
+      const label = document.createElement('span');
+      label.classList.add('input-label');
 
-    util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
-    this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
+      util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
+      this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
 
-    this.appendChild(container);
+      this.appendChild(container);
 
-    switch (this.getAttribute('type')) {
-      case 'checkbox':
-        this.classList.add(defaultCheckboxClass);
-        this._input.classList.add('checkbox__input');
-        this._helper.classList.add('checkbox__checkmark');
-        this._updateBoundAttributes();
-        break;
+      switch (this.getAttribute('type')) {
+        case 'checkbox':
+          this.classList.add(defaultCheckboxClass);
+          this._input.classList.add('checkbox__input');
+          this._helper.classList.add('checkbox__checkmark');
+          this._updateBoundAttributes();
+          break;
 
-      case 'radio':
-        this.classList.add(defaultRadioButtonClass);
-        this._input.classList.add('radio-button__input');
-        this._helper.classList.add('radio-button__checkmark');
-        this._updateBoundAttributes();
-        break;
+        case 'radio':
+          this.classList.add(defaultRadioButtonClass);
+          this._input.classList.add('radio-button__input');
+          this._helper.classList.add('radio-button__checkmark');
+          this._updateBoundAttributes();
+          break;
 
-      default:
-        this._input.classList.add('text-input');
-        this._helper.classList.add('text-input__label');
-        this._input.parentElement.classList.add('text-input__container');
+        default:
+          this._input.classList.add('text-input');
+          this._helper.classList.add('text-input__label');
+          this._input.parentElement.classList.add('text-input__container');
 
-        this._updateLabel();
-        this._updateBoundAttributes();
-        this._updateLabelClass();
-        break;
+          this._updateLabel();
+          this._updateBoundAttributes();
+          this._updateLabelClass();
+          break;
+      }
     }
 
     if (this.hasAttribute('input-id')) {
@@ -258,11 +272,13 @@ export default class InputElement extends BaseElement {
   }
 
   _setLabel(value) {
-    if (typeof this._helper.textContent !== 'undefined') {
-      this._helper.textContent = value;
-    }
-    else {
-      this._helper.innerText = value;
+    if (this.getAttribute('type') !== 'search') {
+      if (typeof this._helper.textContent !== 'undefined') {
+        this._helper.textContent = value;
+      }
+      else {
+        this._helper.innerText = value;
+      }
     }
   }
 
@@ -282,11 +298,13 @@ export default class InputElement extends BaseElement {
   }
 
   _updateLabelClass() {
-    if (this.value === '') {
-      this._helper.classList.remove('text-input--material__label--active');
-    }
-    else if (['checkbox', 'radio'].indexOf(this.getAttribute('type')) === -1){
-      this._helper.classList.add('text-input--material__label--active');
+    if (this.getAttribute('type') !== 'search') {
+      if (this.value === '') {
+        this._helper.classList.remove('text-input--material__label--active');
+      }
+      else if (['checkbox', 'radio'].indexOf(this.getAttribute('type')) === -1){
+        this._helper.classList.add('text-input--material__label--active');
+      }
     }
   }
 

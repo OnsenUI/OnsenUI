@@ -5,7 +5,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        GenericView.register(scope, element, attrs, {viewKey: 'ons-listHeader'});
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-list-header'});
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

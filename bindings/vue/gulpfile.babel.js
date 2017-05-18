@@ -106,6 +106,9 @@ gulp.task('e2e-test-webdriverio', ['webdriver-download'], function(done){
     );
 
     (async () => {
+      $.util.log($.util.colors.blue(`Waiting 5000 ms for standalone Selenium Server...`));
+      await (async () => new Promise(resolve => setTimeout(resolve, 5000)))();
+
       const exitCode = await runWebdriverIO(standaloneSeleniumServer);
       server.close();
       server.listeningApp.close();
@@ -183,9 +186,9 @@ async function runWebdriverIO(standaloneSeleniumServer) {
 
     if (testsPassed) {
       $.util.log($.util.colors.green('Passed E2E tests on all browsers!'));
-      Promise.resolve();
+      return 0;
     } else {
       $.util.log($.util.colors.red('Failed to pass E2E tests on some browsers.'));
-      Promise.reject('e2e-test-webdriverio has failed');
+      return 1;
     }
 }

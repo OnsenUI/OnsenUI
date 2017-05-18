@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 /**
@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
  *
  *   The default behavior can be overridden using the `onClick` prop.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Toolbar modifier={this.props.modifier} >
       <div className="left"><BackButton modifier={this.props.modifier}>Back</BackButton></div>
@@ -50,18 +50,18 @@ BackButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the back button.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name onClick
    * @type function
    * @description
    *  [en]This function will be called ones the button is clicked. It overrides the default behavior of the back button.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onClick: React.PropTypes.func
+  onClick: PropTypes.func
 };
 
 export default BackButton;

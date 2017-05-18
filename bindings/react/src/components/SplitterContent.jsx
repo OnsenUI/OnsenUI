@@ -7,7 +7,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  * [en]  The SplitterContent  element is used as a child element of Splitter.
  *    It contains the main content of the page while SplitterSide contains the list.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <Splitter>
     <SplitterSide

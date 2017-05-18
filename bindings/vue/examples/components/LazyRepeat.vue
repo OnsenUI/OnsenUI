@@ -3,6 +3,7 @@
     <v-ons-toolbar>
       <div class="right"><v-ons-toolbar-button @click="$emit('refresh')">Refresh</v-ons-toolbar-button></div>
     </v-ons-toolbar>
+    <v-ons-list-title>List Title</v-ons-list-title>
     <v-ons-list>
       <v-ons-lazy-repeat :render-item="renderItem" :length="1000">
       </v-ons-lazy-repeat>

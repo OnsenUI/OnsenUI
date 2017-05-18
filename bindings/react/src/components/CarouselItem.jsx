@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-carousel-item
@@ -8,7 +9,7 @@ import React from 'react';
  * @description
  * [en] Carousel item component. Used as a child of the `<ons-carousel>` element.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
 *  <Carousel swipeable overscrollable autoScroll fullscreen >
      <CarouselItem style={{backgroundColor: 'gray'}}>
@@ -33,9 +34,9 @@ CarouselItem.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default CarouselItem;

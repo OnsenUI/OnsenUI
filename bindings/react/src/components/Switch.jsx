@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 
@@ -10,7 +11,7 @@ import Util from './Util.js';
  * [en]   Switch component. The switch can be toggled both by dragging and tapping.
  *     Will automatically displays a Material Design switch on Android devices.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Switch checked={this.state.checked} onChange={this.onChange} />
  */
@@ -55,36 +56,36 @@ Switch.propTypes = {
    * @type function
    * @description
    *  [en] Called when the value of the switch changes (checked/unchecked) [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name checked
    * @type bool
    * @description
    *  [en] Whether the switch is checked.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  checked: React.PropTypes.bool,
+  checked: PropTypes.bool,
 
   /**
    * @name disabled
    * @type bool
    * @description
    *  [en] If set, the switch is disabled.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * @name inputId
    * @type string
    * @description
    *  [en] Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  inputId: React.PropTypes.string
+  inputId: PropTypes.string
 };
 
 export default Switch;

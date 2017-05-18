@@ -17,10 +17,12 @@ limitations under the License.
 import internal from './internal';
 import AnimatorFactory from './animator-factory';
 import ModifierUtil from './modifier-util';
+import ToastQueue from './toast-queue';
 import {LazyRepeatProvider, LazyRepeatDelegate} from './lazy-repeat';
 
 internal.AnimatorFactory = AnimatorFactory;
 internal.ModifierUtil = ModifierUtil;
+internal.ToastQueue = ToastQueue;
 internal.LazyRepeatProvider = LazyRepeatProvider;
 internal.LazyRepeatDelegate = LazyRepeatDelegate;
 

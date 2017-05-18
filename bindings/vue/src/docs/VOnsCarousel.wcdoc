@@ -6,12 +6,12 @@
  * @attribute index
  * @type {Number}
  * @description
- *   [en]If exists, specifies the current active index. It is also used as the initial index. Must be modified on `update` event.[/en]
+ *   [en]If exists, specifies the current active index. It is also used as the initial index. Must be modified on `update:index` event.[/en]
  *   [ja]どうしょう[/ja]
  */
 
 /**
- * @event update
+ * @event update:index
  * @description
  *   [en]Fired right after user interaction. Useful to update `index` prop.[/en]
  *   [ja]どうしょう[/ja]

@@ -6,7 +6,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  * @tutorial react/Reference/tabbar
  * @description
  * [en] Tab element for showing shown when the tab is inactive [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Tab>
  *   <TabActive>

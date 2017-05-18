@@ -7,11 +7,11 @@ import {
   Dialog,
   Navigator,
   Input
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 
-import ons from '../../../../build/js/onsenui.js';
+import ons from 'onsenui';
 
 class MyPage2 extends React.Component {
   render() {
@@ -39,7 +39,7 @@ class FirstPage extends React.Component {
   }
   render() {
     return (<Page>
-      <Toolbar>
+      <Toolbar inline>
         <div className='center'>Name</div>
       </Toolbar>
       <br />

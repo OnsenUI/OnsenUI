@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 
 /**
@@ -8,7 +9,7 @@ import BasicComponent from './BasicComponent.jsx';
  * @description
  *   [en]
  *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
   <List
     dataSource={['Row 1', 'Row 2']}
@@ -45,9 +46,9 @@ List.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
    /**
    * @name dataSource
@@ -56,9 +57,9 @@ List.propTypes = {
    *  [en]
    *    Source of the list data. Should be an array.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  dataSource: React.PropTypes.array,
+  dataSource: PropTypes.array,
 
    /**
    * @name renderRow
@@ -68,9 +69,9 @@ List.propTypes = {
    *  Function to specify the rendering function for every element in
    *  in the dataSource.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderRow: React.PropTypes.func,
+  renderRow: PropTypes.func,
 
    /**
    * @name renderHeader
@@ -79,9 +80,9 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the header
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderHeader: React.PropTypes.func,
+  renderHeader: PropTypes.func,
 
    /**
    * @name renderFooter
@@ -90,9 +91,9 @@ List.propTypes = {
    *  [en]
    *  Function to specify the rendering function for the footer
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [ja][/ja]
    */
-  renderFooter: React.PropTypes.func
+  renderFooter: PropTypes.func
 };
 
 List.defaultProps = {

@@ -51,7 +51,9 @@ import GestureDetector from '../ons/gesture-detector';
  * </script>
  */
 export default class GestureDetectorElement extends BaseElement {
-  init() {
+  constructor() {
+    super();
+
     this._gestureDetector = new GestureDetector(this);
   }
 }

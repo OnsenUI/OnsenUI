@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-['alert', 'confirm', 'prompt'].forEach(name => {
+Object.keys(ons.notification).filter(name => !/^_/.test(name)).forEach(name => {
   const originalNotification = ons.notification[name];
 
   ons.notification[name] = (message, options = {}) => {

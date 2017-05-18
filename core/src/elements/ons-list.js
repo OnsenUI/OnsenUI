@@ -15,7 +15,6 @@ limitations under the License.
 
 */
 
-import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
@@ -69,7 +68,9 @@ export default class ListElement extends BaseElement {
    *   [ja]リストの表現を指定します。[/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     this._compile();
   }
 

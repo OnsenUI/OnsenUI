@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-list-header
@@ -8,7 +9,7 @@ import React from 'react';
  * @description
  * [en] Header element for list items. Must be put inside ons-list component.
  [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
    <List
      dataSource={this.state.data}
@@ -33,9 +34,9 @@ ListHeader.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default ListHeader;

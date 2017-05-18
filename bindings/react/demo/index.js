@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import '../../../build/js/onsenui.js';
+import 'onsenui';
 
 import '../../../build/css/onsenui.css';
 import '../../../build/css/onsen-css-components.css';
@@ -12,13 +12,16 @@ import {
   Toolbar,
   List,
   ListItem
-} from '../src/index.js';
+} from 'react-onsenui';
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';
+import CardExample from './examples/Card';
 import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
+import ActionSheetExample from './examples/ActionSheet';
+import ToastExample from './examples/Toast';
 import SplitterExample from './examples/Splitter';
 import InputExample from './examples/Input';
 import IconExample from './examples/Icon';
@@ -68,6 +71,10 @@ class Examples extends React.Component {
       {
         title: 'Carousel',
         component: CarouselExample
+      },
+      {
+        title: 'Card',
+        component: CardExample
       },
       {
         title: 'Switch',
@@ -135,6 +142,14 @@ class Examples extends React.Component {
       {
         title: 'Alert dialog',
         component: AlertDialogExample
+      },
+      {
+        title: 'Action sheet',
+        component: ActionSheetExample
+      },
+      {
+        title: 'Toast',
+        component: ToastExample
       },
       {
         title: 'Input',

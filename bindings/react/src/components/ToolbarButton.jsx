@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-toolbar-button
@@ -11,7 +12,7 @@ import React from 'react';
  *
  *
  *   [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Page
      renderToolbar = { () =>
@@ -39,9 +40,9 @@ ToolbarButton.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the button.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name disabled
@@ -50,9 +51,9 @@ ToolbarButton.propTypes = {
    *  [en]
    *  Indicates whether the button is disabled.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  disabled: React.PropTypes.bool
+  disabled: PropTypes.bool
 };
 
 export default ToolbarButton;

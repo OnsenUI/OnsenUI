@@ -169,7 +169,9 @@ export default class SwitchElement extends BaseElement {
     return this._checkbox;
   }
 
-  init() {
+  constructor() {
+    super();
+
     this._checked = false;
     this._disabled = false;
 

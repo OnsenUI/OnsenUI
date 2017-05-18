@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from '../../src/index.js';
+import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from 'react-onsenui';
 
 const MyToolbar = ({title, onBackButton = null}) => (
   <Toolbar>

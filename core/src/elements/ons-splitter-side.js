@@ -440,7 +440,9 @@ export default class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
-  init() {
+  constructor() {
+    super();
+
     this._page = null;
     this._pageLoader = defaultPageLoader;
     this._collapseMode = new CollapseMode(this);

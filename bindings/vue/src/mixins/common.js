@@ -2,8 +2,20 @@ import { _util as util } from 'onsenui';
 
 /* Private */
 const _toggleVisibility = function() {
-  if (this.visible !== this.$el.visible) {
+  if (typeof this.visible === 'boolean' && this.visible !== this.$el.visible) {
     this.$el[this.visible ? 'show' : 'hide'].call(this.$el, this.normalizedOptions || this.options);
+  }
+};
+const _teleport = function() {
+  if (!this._isDestroyed && (!this.$el.parentNode || this.$el.parentNode !== document.body)) {
+    document.body.appendChild(this.$el);
+  }
+};
+const _unmount = function() {
+  if (this.$el.visible === true) {
+    this.$el.hide().then(() => this.$el.remove());
+  } else {
+    this.$el.remove();
   }
 };
 
@@ -24,11 +36,11 @@ const hidable = {
   },
 
   mounted() {
-    this.$nextTick(() => { // FAB takes 1 extra cycle
-      if (typeof this.visible === 'boolean') {
-        _toggleVisibility.call(this);
-      }
-    });
+    this.$nextTick(() => _toggleVisibility.call(this));
+  },
+
+  activated() {
+    this.$nextTick(() => _toggleVisibility.call(this));
   }
 };
 
@@ -93,8 +105,27 @@ const selfProvider = {
 // Common event for Dialogs
 const dialogCancel = {
   mounted() {
-    this.$on('dialog-cancel', () => this.$emit('update', false));
+    this.$on('dialog-cancel', () => this.$emit('update:visible', false));
   }
 };
 
-export { hidable, hasOptions, modifier, selfProvider, dialogCancel };
+// Moves the element to a global position
+const portal = {
+  mounted() {
+    _teleport.call(this);
+  },
+  updated() {
+    _teleport.call(this);
+  },
+  activated() {
+    _teleport.call(this);
+  },
+  deactivated() {
+    _unmount.call(this);
+  },
+  beforeDestroy() {
+    _unmount.call(this);
+  }
+};
+
+export { hidable, hasOptions, modifier, selfProvider, dialogCancel, portal };

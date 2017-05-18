@@ -6,7 +6,7 @@ import {
   ToolbarButton,
   BackButton,
   Input
-} from '../../src/index.js';
+} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 

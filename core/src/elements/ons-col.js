@@ -55,7 +55,9 @@ import BaseElement from './base/base-element';
  */
 export default class ColElement extends BaseElement {
 
-  init() {
+  constructor() {
+    super();
+
     if (this.getAttribute('width')) {
       this._updateWidth();
     }

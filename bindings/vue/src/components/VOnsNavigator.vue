@@ -88,13 +88,15 @@
     },
 
     watch: {
-      pageStack() {
-        const lastLength = this.$children.length;
+      pageStack(after, before) {
+        const propWasMutated = after === before; // Can be mutated or replaced
+
+        const lastLength = propWasMutated ? this.$children.length : before.length;
         let lastTopPage = this.$children[this.$children.length - 1].$el;
 
         this.$nextTick(() => {
-          const currentLength = this.$children.length;
-          let currentTopPage = this.$children[currentLength - 1].$el;
+          const currentLength = propWasMutated ? this.$children.length : after.length;
+          let currentTopPage = this.$children[this.$children.length - 1].$el;
 
           if (currentTopPage !== lastTopPage) {
             this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage});

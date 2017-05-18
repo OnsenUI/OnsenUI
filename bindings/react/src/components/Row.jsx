@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Util from './Util.js';
 
 /**
@@ -9,7 +10,7 @@ import Util from './Util.js';
  * [en]
  * Represents a row in the grid system. Use with `Col` to layout components.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * <Row>
  *   <Col width={50}>
   *   <ons-icon icon="fa-twitter"></ons-icon>
@@ -41,7 +42,7 @@ Row.propTypes = {
   *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
   *   [ja][/ja]
   */
-  verticalAlign: React.PropTypes.oneOf(['top', 'bottom', 'center'])
+  verticalAlign: PropTypes.oneOf(['top', 'bottom', 'center'])
 
 };
 

@@ -25,7 +25,7 @@ limitations under the License.
 (function(ons){
   'use strict';
 
-  var module = angular.module('onsen', ['templates-main']);
+  var module = angular.module('onsen', []);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
@@ -237,6 +237,48 @@ limitations under the License.
     };
 
     /**
+     * @method createElement
+     * @signature createElement(template, [options])
+     * @param {String} template
+     *   [en]Either an HTML file path, an `<ons-template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
+     *   [ja][/ja]
+     * @param {Object} [options]
+     *   [en]Parameter object.[/en]
+     *   [ja]オプションを指定するオブジェクト。[/ja]
+     * @param {Boolean|HTMLElement} [options.append]
+     *   [en]Whether or not the element should be automatically appended to the DOM.  Defaults to `false`. If `true` value is given, `document.body` will be used as the target.[/en]
+     *   [ja][/ja]
+     * @param {HTMLElement} [options.insertBefore]
+     *   [en]Reference node that becomes the next sibling of the new node (`options.append` element).[/en]
+     *   [ja][/ja]
+     * @param {Object} [options.parentScope]
+     *   [en]Parent scope of the element. Used to bind models and access scope methods from the element. Requires append option.[/en]
+     *   [ja][/ja]
+     * @return {HTMLElement|Promise}
+     *   [en]If the provided template was an inline HTML string, it returns the new element. Otherwise, it returns a promise that resolves to the new element.[/en]
+     *   [ja][/ja]
+     * @description
+     *   [en]Create a new element from a template. Both inline HTML and external files are supported although the return value differs. If the element is appended it will also be compiled by AngularJS (otherwise, `ons.compile` should be manually used).[/en]
+     *   [ja][/ja]
+     */
+    const createElementOriginal = ons.createElement;
+    ons.createElement = (template, options = {}) => {
+      const link = element => {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+          options.parentScope.$evalAsync();
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      const getScope = e => angular.element(e).data(e.tagName.toLowerCase()) || e;
+      const result = createElementOriginal(template, { append: !!options.parentScope, link, ...options });
+
+      return result instanceof Promise ? result.then(getScope) : getScope(result);
+    };
+
+    /**
      * @method createAlertDialog
      * @signature createAlertDialog(page, [options])
      * @param {String} page
@@ -252,25 +294,9 @@ limitations under the License.
      *   [en]Promise object that resolves to the alert dialog component object.[/en]
      *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
      * @description
-     *   [en]Create a alert dialog instance from a template.[/en]
+     *   [en]Create a alert dialog instance from a template. This method will be deprecated in favor of `ons.createElement`.[/en]
      *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
      */
-    ons.createAlertDialog = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
-        return angular.element(alertDialog).data('ons-alert-dialog');
-      });
-    };
 
     /**
      * @method createDialog
@@ -288,25 +314,9 @@ limitations under the License.
      *   [en]Promise object that resolves to the dialog component object.[/en]
      *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
      * @description
-     *   [en]Create a dialog instance from a template.[/en]
+     *   [en]Create a dialog instance from a template. This method will be deprecated in favor of `ons.createElement`.[/en]
      *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
      */
-    ons.createDialog = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createDialogOriginal(page, options).then(function(dialog) {
-        return angular.element(dialog).data('ons-dialog');
-      });
-    };
 
     /**
      * @method createPopover
@@ -324,35 +334,18 @@ limitations under the License.
      *   [en]Promise object that resolves to the popover component object.[/en]
      *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
      * @description
-     *   [en]Create a popover instance from a template.[/en]
+     *   [en]Create a popover instance from a template. This method will be deprecated in favor of `ons.createElement`.[/en]
      *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
      */
-    ons.createPopover = function(page, options) {
-      options = options || {};
-
-      options.link = function(element) {
-        if (options.parentScope) {
-          ons.$compile(angular.element(element))(options.parentScope.$new());
-          options.parentScope.$evalAsync();
-        } else {
-          ons.compile(element);
-        }
-      };
-
-      return ons._createPopoverOriginal(page, options).then(function(popover) {
-        return angular.element(popover).data('ons-popover');
-      });
-    };
 
     /**
      * @param {String} page
      */
-    ons.resolveLoadingPlaceholder = function(page) {
-      return ons._resolveLoadingPlaceholderOriginal(page, function(element, done) {
+    const resolveLoadingPlaceHolderOriginal = ons.resolveLoadingPlaceHolder;
+    ons.resolveLoadingPlaceholder = page => {
+      return resolveLoadingPlaceholderOriginal(page, (element, done) => {
         ons.compile(element);
-        angular.element(element).scope().$evalAsync(function() {
-          setImmediate(done);
-        });
+        angular.element(element).scope().$evalAsync(() => setImmediate(done));
       });
     };
 

@@ -1,0 +1,104 @@
+
+:root {
+  --card-background-color: white;
+  --card-text-line-height: 1.4;
+  --card-text-font-size: 14px;
+  --card-text-color: #030303;
+  --material-card-background-color: white;
+  --material-card-text-line-height: 1.4;
+  --material-card-text-font-size: 14px;
+  --material-card-text-color: rgba(0, 0, 0, 0.54);
+}
+
+/*~
+  name: Card
+  category: Card
+  markup: |
+    <div style="background-color: #eee; height: 200px; padding: 1px 0 0 0;">
+      <div class="card">
+        <div class="card__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      </div>
+    </div>
+*/
+
+.card {
+  @apply(--reset-font);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  background-color: var(--card-background-color);
+  box-sizing: border-box;
+  display: block;
+  margin: 8px;
+  padding: 16px;
+  text-align: left;
+}
+
+.card__content {
+  margin: 0;
+  font-size: var(--card-text-font-size);
+  line-height: var(--card-text-line-height);
+  color: var(--card-text-color);
+}
+
+/*~
+  name: Card with Title
+  category: Card
+  markup: |
+    <div style="background-color: #eee; height: 200px; padding: 1px 0 0 0;">
+      <div class="card">
+        <h2 class="card__title">Card Title</h2>
+        <div class="card__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      </div>
+    </div>
+*/
+.card__title {
+  @apply(--reset-font);
+  font-weight: 400;
+  font-size: 20px;
+  margin: 4px 0 8px 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+/*~
+  name: Material Card
+  category: Card
+  markup: |
+    <div style="background-color: #eee; height: 200px; padding: 1px 0 0 0;">
+      <div class="card card--material">
+        <div class="card__content card--material__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      </div>
+    </div>
+*/
+
+.card--material {
+  background-color: var(--material-card-background-color);
+  border-radius: 2px;
+  @apply(--material-shadow-1);
+  @apply(--material-font);
+}
+
+.card--material__content {
+  font-size: var(--material-card-text-font-size);
+  line-height: var(--material-card-text-line-height);
+  color: var(--material-card-text-color);
+}
+
+/*~
+  name: Material Card with Title
+  category: Card
+  markup: |
+    <div style="background-color: #eee; height: 200px; padding: 1px 0 0 0;">
+      <div class="card card--material">
+        <div class="card__title card--material__title">Card Title</div>
+        <div class="card__content card--material__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      </div>
+    </div>
+*/
+
+.card--material__title {
+  @apply(--material-font);
+  font-size: 24px;
+  margin: 8px 0 12px 0;
+}

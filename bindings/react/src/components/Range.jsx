@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 const EVENT_TYPES = ['change', 'input'];
@@ -12,7 +12,7 @@ const EVENT_TYPES = ['change', 'input'];
  * [en]
  *   Range input component.
  * [/en]
- * [jp][/jp]
+ * [ja][/ja]
  * @example
  * <Range modifier="material"
  *   value={this.state.value}
@@ -65,18 +65,18 @@ Range.propTypes = {
    * @required false
    * @description
    *  [en]The appearance of the progress indicator.[/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  modifier: React.PropTypes.string,
+  modifier: PropTypes.string,
 
   /**
    * @name onChange
    * @type function
    * @description
    *  [en] Called when the value of the input changes.[/en]
-   *  [jp][/jp]
+   *  [ja][/ja]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * @name value
@@ -85,18 +85,18 @@ Range.propTypes = {
    *  [en]
    *  Current value of the element.
    *  [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  value: React.PropTypes.number,
+  value: PropTypes.number,
 
   /**
    * @name disabled
    * @type bool
    * @description
    *  [en] If true, the element is disabled. [/en]
-   *  [jp] [/jp]
+   *  [ja][/ja]
    */
-  disabled: React.PropTypes.bool
+  disabled: PropTypes.bool
 };
 
 export default Range;

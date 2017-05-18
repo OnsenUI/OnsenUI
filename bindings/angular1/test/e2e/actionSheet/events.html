@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../../../build/js/onsenui.js"></script>
+    <script src="../../../../../build/js/angular/angular.js"></script>
+    <script src="../../../../../build/js/angular-onsenui.js"></script>
+
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.data = {
+          visible: false
+        };
+
+        ons.ready(function() {
+          ons.createElement('action-sheet.html', { append: true, parentScope: $scope });
+        });
+      });
+    </script>
+  </head>
+  <body ng-controller="TestController">
+    <ons-page>
+      <ons-button id="show-action-sheet" ng-click="actionSheet.show()">Show action sheet</ons-button>
+      <p ng-show="data.visible" id="action-sheet-visible">Action sheet is visible.</p>
+    </ons-page>
+
+    <ons-template id="action-sheet.html">
+      <ons-action-sheet var="actionSheet" ons-preshow="data.visible = true" ons-posthide="data.visible = false">
+        <ons-action-sheet-button>L1</ons-action-sheet-button>
+        <ons-action-sheet-button>L2</ons-action-sheet-button>
+        <ons-action-sheet-button id="hide-button" ng-click="actionSheet.hide();">L3</ons-action-sheet-button>
+      </ons-action-sheet>
+    </ons-template>
+  </body>
+</html>

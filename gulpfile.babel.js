@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+/* eslint-disable no-console */
+
 import 'babel-polyfill';
 
 import gulp from 'gulp';
@@ -30,14 +32,11 @@ import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import webpack from 'webpack';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
-import rollup from 'rollup-stream';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
+import chalk from 'chalk';
 
 ////////////////////////////////////////
 
@@ -66,68 +65,129 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', function() {
-  return rollup({
-      sourceMap: 'inline',
-      entry: './core/src/setup.js',
-      plugins: [
-        nodeResolve(),
-        // Convert CommonJS modules to ES2015 modules.
-        // This plugin must be executed before rollup-plugin-babel.
-        commonjs({
-          // non-CommonJS modules will be ignored, but you can also
-          // specifically include/exclude files
-          include: 'node_modules/**',  // Default: undefined
-          exclude: undefined,  // Default: undefined
+gulp.task('core', ['eslint'], function(done) {
+  try {
+    webpack(
+      { // webpack2 config
+        entry: './core/src/setup.js', // string | object | array
+        // Here the application starts executing
+        // and webpack starts bundling
 
-          // search for files other than .js files (must already
-          // be transpiled by a previous plugin!)
-          extensions: [ '.js' ],  // Default: [ '.js' ]
+        output: {
+          // options related to how webpack emits results
 
-          // if true then uses of `global` won't be dealt with by this plugin
-          ignoreGlobal: false,  // Default: false
+          path: path.resolve(__dirname, 'build/js'), // string
+          // the target directory for all output files
+          // must be an absolute path (use the Node.js path module)
 
-          // if false then skip sourceMap generation for CommonJS modules
-          sourceMap: true,  // Default: true
+          filename: 'onsenui.js', // string
+          // the filename template for entry chunks
 
-          // explicitly specify unresolvable named exports
-          // (see below for more details)
-          namedExports: undefined,  // Default: undefined
+          // publicPath: '/assets/', // string
+          // the url to the output directory resolved relative to the HTML page
 
-          // sometimes you have to leave require statements
-          // unconverted. Pass an array containing the IDs
-          // or a `id => boolean` function. Only use this
-          // option if you know what you're doing!
-          ignore: undefined
-        }),
-        babel({
-          presets: ['es2015-rollup', 'es2016', 'es2017', 'stage-3'],
-          babelrc: false
-        })
-      ],
-      format: 'umd',
-      moduleName: 'ons'
-    })
-    .pipe(source('setup.js', './core/src'))
-    .pipe(buffer())
-    .pipe($.addSrc.prepend([
-      'core/polyfills/CustomEvent.js',
-      'core/polyfills/MutationObserver*/MutationObserver.js',
-      'core/polyfills/childNodeRemove.js',
-      'core/polyfills/classList*/classList.js',
-      'core/polyfills/FastClick*/fastclick.js',
-      'core/polyfills/microevent.js*/microevent.js',
-      'core/polyfills/promise-polyfill*/promise.js',
-      'core/polyfills/setImmediate*/setImmediate.js',
-      'core/polyfills/viewport.js',
-      'core/polyfills/winstore-jscompat*/winstore-jscompat.js',
-      ]))
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe($.concat('onsenui.js'))
-    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('build/js'))
-    .on('end', () => browserSync.reload());
+          library: 'ons', // string,
+          // the name of the exported library
+
+          libraryTarget: 'umd', // universal module definition
+          // the type of the exported library
+        },
+
+        module: {
+          // configuration regarding modules
+
+          rules: [
+            // rules for modules (configure loaders, parser options, etc.)
+
+            {
+              test: /\.js$/,
+              include: [
+                path.resolve(__dirname, 'core/src'),
+                path.resolve(__dirname, 'node_modules') // untranspiled ES modules must be transpiled
+              ],
+              exclude: [
+                // path.resolve(__dirname, 'app/demo-files')
+              ],
+              // these are matching conditions, each accepting a regular expression or string
+              // test and include have the same behavior, both must be matched
+              // exclude must not be matched (takes preferrence over test and include)
+              // Best practices:
+              // - Use RegExp only in test and for filename matching
+              // - Use arrays of absolute paths in include and exclude
+              // - Try to avoid exclude and prefer include
+
+              loader: 'babel-loader',
+              // the loader which should be applied, it'll be resolved relative to the context
+              // -loader suffix is no longer optional in webpack2 for clarity reasons
+              // see webpack 1 upgrade guide
+
+              options: {
+                presets: ['env', 'stage-3'],
+                plugins: ['add-module-exports']
+              }
+              // options for the loader
+            }
+          ]
+        },
+
+        resolve: {
+          // options for resolving module requests
+          // (does not apply to resolving to loaders)
+
+          extensions: ['.js']
+          // extensions that are used
+        },
+
+        devtool: 'cheap-module-inline-source-map', // enum
+        // enhance debugging by adding meta info for the browser devtools
+        // source-map most detailed at the expense of build speed.,
+
+        plugins: [
+          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`),
+          new ProgressBarPlugin({
+            format: [':bar', chalk.green(':percent'), ':msg'].join(' '),
+            complete: chalk.bgGreen(' '),
+            incomplete: chalk.bgWhite(' '),
+            width: 40,
+            total: 100
+          })
+        ],
+
+        node: {
+            process: false,
+            setImmediate: false,
+            timers: false,
+        }
+      },
+      (err, stats) => { // called when bundling is done
+        if (err) { // if fatal error occurs
+          done(err);
+          return;
+        }
+
+        const jsonStats = stats.toJson();
+        if (jsonStats.errors.length > 0) {
+            console.log('\n' + $.util.colors.red('Errors from webpack:'));
+          for (const error of jsonStats.errors) {
+            console.log('\n' + $.util.colors.red(error));
+          }
+          done(new Error('webpack failed'));
+          return;
+        }
+        if (jsonStats.warnings.length > 0) {
+          console.log('\n' + $.util.colors.red('Warnings from webpack:'));
+          for (const warning of jsonStats.warnings) {
+            console.log('\n' + $.util.colors.yellow(warning));
+          }
+        }
+
+        browserSync.reload();
+        done();
+      }
+    );
+  } catch (e) {
+    done(e);
+  }
 });
 
 ////////////////////////////////////////
@@ -320,13 +380,14 @@ function eslintTargets() {
   return [
     'gulpfile.babel.js',
     'docs/packages/**/*.js',
-    'core/src/*.js',
     'core/src/**/*.js',
-    'bindings/angular1/js/*.js',
-    'bindings/angular1/directives/*.js',
-    'bindings/angular1/services/*.js',
-    'bindings/angular1/elements/*.js',
-    'bindings/angular1/views/*.js'
+    '!core/src/polyfills/**/*.js',
+    '!core/src/vendor/**/*.js',
+    'bindings/angular1/js/**/*.js',
+    'bindings/angular1/directives/**/*.js',
+    'bindings/angular1/services/**/*.js',
+    'bindings/angular1/elements/**/*.js',
+    'bindings/angular1/views/**/*.js'
   ];
 }
 
@@ -382,12 +443,8 @@ gulp.task('prepare', ['html2js'], () =>  {
       'bindings/angular1/js/*.js'
     ])
       .pipe($.plumber())
-      .pipe($.ngAnnotate({
-        add: true,
-        single_quotes: true // eslint-disable-line camelcase
-      }))
       .pipe($.sourcemaps.init())
-      .pipe($.babel())
+      .pipe($.babel({ plugins: [['angularjs-annotate', { 'explicitOnly': false }]] }))
       .pipe($.concat('angular-onsenui.js'))
       .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe($.sourcemaps.write())
@@ -429,6 +486,10 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
+
+    // ES Modules (raw ES source codes)
+    gulp.src('core/src/**/*')
+      .pipe(gulp.dest('build/core-src/')),
 
     // angular.js copy
     gulp.src('bindings/angular1/lib/angular/*.*')
@@ -517,7 +578,6 @@ function distFiles() {
     '!build/onsenui.zip',
     'bower.json',
     'package.json',
-    '.npmignore',
     'README.md',
     'CHANGELOG.md',
     'LICENSE'

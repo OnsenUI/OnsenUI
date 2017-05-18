@@ -37,7 +37,9 @@ export default class BaseDialogElement extends BaseElement {
     this.style.display = shouldShow ? 'block' : 'none';
   }
 
-  init() {
+  constructor() {
+    super();
+
     this._visible = false;
     this._doorLock = new DoorLock();
     this._boundCancel = () => this._cancel();
@@ -152,6 +154,14 @@ export default class BaseDialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
+  _updateMask() {
+    contentReady(this, () => {
+      if (this._mask && this.getAttribute('mask-color')) {
+        this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      }
+    });
+  }
+
   connectedCallback() {
     this.onDeviceBackButton = this._defaultDBB.bind(this);
 
@@ -168,14 +178,20 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'animation'];
+    return ['modifier', 'animation', 'mask-color'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'modifier') {
-      ModifierUtil.onModifierChanged(last, current, this, this._scheme);
-    } else if (name === 'animation') {
-      this._animatorFactory = this._updateAnimatorFactory();
+    switch (name) {
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, this._scheme);
+        break;
+      case 'animation':
+        this._animatorFactory = this._updateAnimatorFactory();
+        break;
+      case 'mask-color':
+        this._updateMask();
+        break;
     }
   }
 

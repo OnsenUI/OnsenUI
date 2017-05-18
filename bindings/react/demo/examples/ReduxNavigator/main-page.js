@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 
-import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from '../../../src/index.js';
+import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from 'react-onsenui';
 
 import {pushPage} from './actions';
 import MyToolbar from './my-toolbar';

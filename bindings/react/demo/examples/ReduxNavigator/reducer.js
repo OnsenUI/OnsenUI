@@ -1,4 +1,4 @@
-import {RouterUtil} from '../../../src/index.js';
+import {RouterUtil} from 'react-onsenui';
 
 import MainPage from './main-page';
 import SecondaryPage from './secondary-page';
