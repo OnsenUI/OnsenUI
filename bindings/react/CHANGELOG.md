@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v1.3.0
 ----
 
 ### New Features
@@ -19,7 +19,7 @@ dev
 
 ### Misc
 
-* Added `onsenui` into `peerDependencies`.
+* Added `onsenui@~2.3.0` into `peerDependencies`.
 * Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0
