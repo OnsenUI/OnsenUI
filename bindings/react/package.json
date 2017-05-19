@@ -89,6 +89,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
+    "onsenui": "~2.3.0",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
   }

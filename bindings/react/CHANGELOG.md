@@ -10,6 +10,7 @@ dev
 * list-title: Added new component.
 * input: Added initial date value support.
 * Build `react-onsenui.js` with webpack 2 instead of Rollup.
+* Added `onsenui` into `peerDependencies`.
 
 v1.2.0
 ----
