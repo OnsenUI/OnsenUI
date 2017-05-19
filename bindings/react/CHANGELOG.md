@@ -4,11 +4,11 @@ CHANGELOG
 
 dev
 ----
-* input: Added initial date value support.
 * action-sheet: Added new component.
-* toast: Implemented Toast component.
+* toast: Added new component.
 * card: Added new component.
 * list-title: Added new component.
+* input: Added initial date value support.
 * Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0
