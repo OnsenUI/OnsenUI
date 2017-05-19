@@ -15,20 +15,8 @@
   "main": "dist/react-onsenui.js",
   "module": "src/index.js",
   "files": [
-    "yarn.lock",
     "dist/react-onsenui.*",
-    "src",
-    "test",
-    "scripts",
-    "docs",
-    ".eslintrc.json",
-    "webpack.prod.config.js",
-    "webpack.dev.config.js",
-    "karma.conf.js",
-    "tests.webpack.js",
-    "docgen.js",
-    "circle.yml",
-    "index.html"
+    "src"
   ],
   "repository": {
     "type": "git",
