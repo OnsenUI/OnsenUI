@@ -2,6 +2,19 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+
+### Bug Fixes
+
+
+### Misc
+
+ * core: Excluded test cases from `onsenui` package.
+
 v2.3.0
 ----
 
