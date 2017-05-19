@@ -2,13 +2,24 @@
 CHANGELOG
 ====
 
-dev
+v1.3.0
 ----
-* input: Added initial date value support.
+
+### New Features
+
 * action-sheet: Added new component.
-* toast: Implemented Toast component.
+* toast: Added new component.
 * card: Added new component.
 * list-title: Added new component.
+* `react-onsenui` is now available as ES Modules.
+
+### Bug Fixes
+
+* input: Added initial date value support.
+
+### Misc
+
+* Added `onsenui@~2.3.0` into `peerDependencies`.
 * Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0
