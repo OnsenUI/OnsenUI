@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.0.0-beta.6
+----
+
+### Bug Fixes
+
+* Updated `onsenui` in `peerDependencies` to `~2.3.0`.
+
 2.0.0-beta.5
 ----
 
