@@ -4,7 +4,7 @@ distrepo='OnsenUI-dist'
 
 cd ..
 
-if [ ! -d $distrepo ]
+if [[ ! ( -d $distrepo && -d $distrepo/.git ) ]]
 then
 	echo "* $(tput setaf 3)Cloning OnsenUI/$distrepo$(tput setaf 7)..."
 	git clone https://github.com/OnsenUI/$distrepo.git
