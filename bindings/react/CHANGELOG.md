@@ -4,13 +4,22 @@ CHANGELOG
 
 dev
 ----
+
+### New Features
+
 * action-sheet: Added new component.
 * toast: Added new component.
 * card: Added new component.
 * list-title: Added new component.
+
+### Bug Fixes
+
 * input: Added initial date value support.
-* Build `react-onsenui.js` with webpack 2 instead of Rollup.
+
+### Misc
+
 * Added `onsenui` into `peerDependencies`.
+* Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0
 ----
