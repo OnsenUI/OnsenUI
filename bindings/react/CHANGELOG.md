@@ -11,6 +11,7 @@ dev
 * toast: Added new component.
 * card: Added new component.
 * list-title: Added new component.
+* `react-onsenui` is now available as ES Modules.
 
 ### Bug Fixes
 
