@@ -488,7 +488,11 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // ES Modules (raw ES source codes)
-    gulp.src('core/src/**/*')
+    gulp.src([
+      'core/src/**/*',
+      '!core/src/onsenui-test.*',
+      '!core/src/**/*.spec.js',
+    ])
       .pipe(gulp.dest('build/core-src/')),
 
     // angular.js copy
