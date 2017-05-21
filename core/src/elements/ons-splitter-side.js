@@ -544,7 +544,12 @@ export default class SplitterSideElement extends BaseElement {
       this._collapseMode[mode === COLLAPSE_MODE ? 'enterMode' : 'exitMode']();
       this.setAttribute('mode', mode);
 
-      util.triggerElementEvent(this, 'modechange', {side: this, mode: mode});
+      for (let i = 0; i < this.parentElement.children.length; i++) {
+        if (this.parentElement.children[i].tagName.toLowerCase() === 'ons-splitter-content') {
+          util.triggerElementEvent(this, 'modechange', {side: this, mode: mode});
+          break;
+        }
+      }
     }
   }
 
