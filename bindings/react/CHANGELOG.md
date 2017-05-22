@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v1.3.1
+----
+
+### Bug Fixes
+
+* card: Use `PropTypes` in `prop-types` instead of `React.PropTypes`.
+
 v1.3.0
 ----
 
