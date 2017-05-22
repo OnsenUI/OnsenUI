@@ -23,7 +23,6 @@
     "test": "gulp test --disable-warnings"
   },
   "main": "js/onsenui.js",
-  "module": "core-src/setup.js",
   "typings": "js/onsenui.d.ts",
   "files": [
     "bower.json",
