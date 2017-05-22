@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v2.3.1
+----
+
+### Misc
+
+ * Remove `module` property from `package.json` temporarily.
+
 v2.3.0
 ----
 
