@@ -10,11 +10,13 @@ dev
 
 ### Bug Fixes
 
+* ons-splitter: Fixed 'reveal' animation glitch.
 
 ### Misc
 
  * Remove `module` property from `package.json` temporarily.
  * core: Excluded test cases from `onsenui` package.
+
 v2.3.1
 ----
 
@@ -57,7 +59,7 @@ v2.3.0
  * ons-splitter: Fixed `animation` attribute issue.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
- 
+
 ### Misc
 
  * core: Removed polyfill for `Element.prototype.remove`.
