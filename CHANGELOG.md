@@ -5,16 +5,9 @@ CHANGELOG
 dev
 ----
 
-### New Features
-
-
-### Bug Fixes
-
-
 ### Misc
 
  * Remove `module` property from `package.json` temporarily.
- * core: Excluded test cases from `onsenui` package.
 
 v2.3.0
 ----
