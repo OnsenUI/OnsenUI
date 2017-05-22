@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v2.3.1
 ----
 
 ### Misc
