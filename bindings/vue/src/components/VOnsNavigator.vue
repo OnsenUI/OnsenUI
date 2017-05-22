@@ -44,21 +44,22 @@
           this.$children[i].$el.style.visibility = visibility;
         }
       },
-      _reattachPage(pageElement, position = null) {
+      _reattachPage(pageElement, position = null, scrollTop = 0) {
         this.$el.insertBefore(pageElement, position);
+        pageElement.scrollTop = scrollTop;
         pageElement._isShown = true;
       },
       _redetachPage(pageElement) {
         pageElement._destroy();
         return Promise.resolve();
       },
-      _animate({ lastLength, currentLength, lastTopPage, currentTopPage}) {
+      _animate({ lastLength, currentLength, lastTopPage, currentTopPage, lastScrollTop }) {
 
         // Push
         if (currentLength > lastLength) {
           let isReattached = false;
           if (lastTopPage.parentElement !== this.$el) {
-            this._reattachPage(lastTopPage, this.$el.children[lastLength - 1]);
+            this._reattachPage(lastTopPage, this.$el.children[lastLength - 1], lastScrollTop);
             isReattached = true;
             lastLength--;
           }
@@ -75,12 +76,12 @@
 
         // Pop
         if (currentLength < lastLength) {
-          this._reattachPage(lastTopPage, null);
+          this._reattachPage(lastTopPage, null, lastScrollTop);
           return this.$el._popPage({ ...this.options }, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
-        this._reattachPage(lastTopPage, currentTopPage);
+        this._reattachPage(lastTopPage, currentTopPage, lastScrollTop);
         return this.$el._pushPage({ ...this.options }).then(() => {
           this._redetachPage(lastTopPage);
         });
@@ -93,13 +94,14 @@
 
         const lastLength = propWasMutated ? this.$children.length : before.length;
         let lastTopPage = this.$children[this.$children.length - 1].$el;
+        const lastScrollTop = lastTopPage && lastTopPage.scrollTop || 0;
 
         this.$nextTick(() => {
           const currentLength = propWasMutated ? this.$children.length : after.length;
           let currentTopPage = this.$children[this.$children.length - 1].$el;
 
           if (currentTopPage !== lastTopPage) {
-            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage});
+            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, lastScrollTop });
           } else if (currentLength !== lastLength) {
             currentTopPage.updateBackButton(currentLength > 1);
           }
