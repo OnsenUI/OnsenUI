@@ -25,11 +25,11 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <label class="center" for="switch1">
-          Switch ({{ switchOn ? 'on' : 'off' }})
+          Switch ({{ switchOn.a.b ? 'on' : 'off' }})
         </label>
         <div class="right">
           <v-ons-switch
-            v-ons-model="switchOn"
+            v-ons-model="switchOn.a.b"
             input-id="switch1"
           >
           </v-ons-switch>
@@ -37,11 +37,11 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <label class="center" for="switch2">
-          {{ switchOn ? 'Enabled switch' : 'Disabled switch' }}
+          {{ switchOn.a.b ? 'Enabled switch' : 'Disabled switch' }}
         </label>
         <div class="right">
           <v-ons-switch
-            :disabled="!switchOn"
+            :disabled="!switchOn.a.b"
             input-id="switch2"
           >
           </v-ons-switch>
@@ -131,6 +131,16 @@
         Volume: {{ volume }} <span v-show="volume > 80">&nbsp;(careful, that's loud)</span>
       </v-ons-list-item>
     </v-ons-list>
+
+    <br><br>
+    <v-ons-list-title>Object Literal: {{ vForItems }}</v-ons-list-title>
+    <v-ons-list>
+      <v-ons-list-item v-for="(item, index) in vForItems" :key="item">
+        <div class="left"><v-ons-input type="checkbox" v-ons-model="{ container: item, key: 'checked' }"></v-ons-input></div>
+        <div class="center">Index: #{{ index }}</div>
+        <div class="right">{{ item.checked }}</div>
+      </v-ons-list-item>
+    </v-ons-list>
   </v-ons-page>
 </template>
 
@@ -146,11 +156,12 @@
           { text: 'Underbar', value: 'underbar' }
         ],
         selectedModifier: 'material',
-        switchOn: true,
+        switchOn: {a:{b:true}},
         vegetables: ['Tomato', 'Cabbage', 'Cucumber'],
         selectedVegetable: 'Cabbage',
         colors: ['Red', 'Blue', 'Yellow', 'Green'],
         checkedColors: ['Blue', 'Yellow'],
+        vForItems: [{checked: true}, {checked: false}, {checked: true}],
         volume: 25
       };
     },
@@ -162,7 +173,7 @@
             this.name += ' Rambo';
             break;
           case 'switch':
-            this.switchOn = !this.switchOn;
+            this.switchOn.a.b = !this.switchOn.a.b;
             break;
           case 'radio':
             this.selectedVegetable = 'Tomato';
