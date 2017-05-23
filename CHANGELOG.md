@@ -11,6 +11,7 @@ dev
 ### Bug Fixes
 
 * ons-splitter: Fixed 'reveal' animation glitch.
+* ons-action-sheet: Fixed glitch when hiding on iOS.
 
 ### Misc
 

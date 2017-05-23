@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v1.3.3
+----
+
+### Bug Fixes
+
+ * Updated `prop-types` to fix [facebook/prop-types#38](https://github.com/facebook/prop-types/issues/38).
+
 v1.3.2
 ----
 
