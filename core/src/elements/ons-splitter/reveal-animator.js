@@ -39,7 +39,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   }
 
   deactivate() {
-    this._unsetStyles(this._side);
+    this._side && this._unsetStyles(this._side);
     super.deactivate();
   }
 
@@ -47,11 +47,12 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     sideElement.style.left = sideElement.side === 'right' ? 'auto' : 0;
     sideElement.style.right = sideElement.side === 'right'  ? 0 : 'auto';
     sideElement.style.zIndex = 0;
+    sideElement.style.backgroundColor = 'black';
+    sideElement.style.transform = this._generateBehindPageStyle(0).container.transform;
 
     const splitter = sideElement.parentElement;
     contentReady(splitter, () => {
       if (splitter.content) {
-        splitter.content.style.zIndex = 2;
         splitter.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
       }
     });
@@ -64,9 +65,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     }
 
     // Check if the other side needs the common styles
-    if (!this._oppositeSide || this._oppositeSide.mode === 'split' || !this._oppositeSide.isOpen) {
+    if (!this._oppositeSide || this._oppositeSide.mode === 'split') {
       if (sideElement.parentElement.content) {
-        sideElement.parentElement.content.style.zIndex = '';
         sideElement.parentElement.content.style.boxShadow = '';
       }
     }
@@ -94,7 +94,6 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   translate(distance) {
     this.maxWidth = this.maxWidth || this._getMaxWidth();
     const menuStyle = this._generateBehindPageStyle(Math.min(distance, this.maxWidth));
-    this._side.style.backgroundColor = 'black';
     this._side.style.zIndex = 1;
 
     if (!this._slidingElements) {
@@ -197,9 +196,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
         })
         .queue(callback => {
           this._slidingElements = null;
-          this._side._content.style.opacity = this._side.style.backgroundColor = '';
           this._side.style.zIndex = 0;
-          super.clearTransition();
+          this._side._content.style.opacity = '';
           done && done();
           callback();
         }),

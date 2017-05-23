@@ -182,19 +182,19 @@ ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
 }
 
 ons-splitter-mask {
-  z-index: 2;
+  z-index: 4;
   background-color: rgba(0, 0, 0, 0.1);
   display: none;
   opacity: 0;
 }
 
 ons-splitter-content {
-  z-index: 1;
+  z-index: 2;
 }
 
 ons-splitter-side {
   right: auto;
-  z-index: 1;
+  z-index: 2;
 }
 
 ons-splitter-side[side="right"] {
@@ -203,7 +203,7 @@ ons-splitter-side[side="right"] {
 }
 
 ons-splitter-side[mode="collapse"] {
-  z-index: 3;
+  z-index: 5;
   left: auto;
   right: 100%;
 }
@@ -214,7 +214,7 @@ ons-splitter-side[side="right"][mode="collapse"] {
 }
 
 ons-splitter-side[mode="split"] {
-  z-index: 2;
+  z-index: 3;
 }
 
 ons-toolbar-button > ons-icon[icon*="ion-"] {
