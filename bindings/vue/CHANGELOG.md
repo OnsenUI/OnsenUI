@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.0.0-beta.7
+----
+
+### New Features
+
+* VOnsModel: Supports object literal syntax `v-ons-model="{ container: myArray, key: myIndex }"`. This is useful inside `v-for` loops.
+
 2.0.0-beta.6
 ----
 
