@@ -47,18 +47,18 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     sideElement.style.left = sideElement.side === 'right' ? 'auto' : 0;
     sideElement.style.right = sideElement.side === 'right'  ? 0 : 'auto';
     sideElement.style.zIndex = 0;
-    sideElement.style.visibility = 'hidden';
 
     const splitter = sideElement.parentElement;
     contentReady(splitter, () => {
       if (splitter.content) {
+        splitter.content.style.zIndex = 2;
         splitter.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
       }
     });
   }
 
   _unsetStyles(sideElement) {
-    sideElement.style.left = sideElement.style.right = sideElement.style.zIndex = sideElement.style.visibility = sideElement.style.backgroundColor = '';
+    sideElement.style.left = sideElement.style.right = sideElement.style.zIndex = sideElement.style.backgroundColor = '';
     if (sideElement._content) {
       sideElement._content.style.opacity = '';
     }
@@ -66,6 +66,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     // Check if the other side needs the common styles
     if (!this._oppositeSide || this._oppositeSide.mode === 'split' || !this._oppositeSide.isOpen) {
       if (sideElement.parentElement.content) {
+        sideElement.parentElement.content.style.zIndex = '';
         sideElement.parentElement.content.style.boxShadow = '';
       }
     }
@@ -94,7 +95,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     this.maxWidth = this.maxWidth || this._getMaxWidth();
     const menuStyle = this._generateBehindPageStyle(Math.min(distance, this.maxWidth));
     this._side.style.backgroundColor = 'black';
-    this._side.style.visibility = 'visible';
+    this._side.style.zIndex = 1;
 
     if (!this._slidingElements) {
       this._slidingElements = this._getSlidingElements();
@@ -119,7 +120,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     this.maxWidth = this.maxWidth || this._getMaxWidth();
     const menuStyle = this._generateBehindPageStyle(this.maxWidth);
     this._slidingElements = this._getSlidingElements();
-    this._side.style.visibility = 'visible';
+    this._side.style.zIndex = 1;
 
     animit.runAll(
       animit(this._slidingElements)
@@ -164,7 +165,6 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   close(done) {
     const menuStyle = this._generateBehindPageStyle(0);
     this._slidingElements = this._getSlidingElements();
-    this._side.style.visibility = 'visible';
 
     animit.runAll(
       animit(this._slidingElements)
@@ -198,7 +198,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
         .queue(callback => {
           this._slidingElements = null;
           this._side._content.style.opacity = this._side.style.backgroundColor = '';
-          this._side.style.visibility = 'hidden';
+          this._side.style.zIndex = 0;
           super.clearTransition();
           done && done();
           callback();
