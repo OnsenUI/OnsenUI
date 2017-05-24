@@ -495,6 +495,12 @@ gulp.task('prepare', ['html2js'], () =>  {
     ])
       .pipe(gulp.dest('build/core-src/')),
 
+    // package.json (for the bindings which uses `build` directory)
+    gulp.src([
+      'package.json',
+    ])
+      .pipe(gulp.dest('build/')),
+
     // angular.js copy
     gulp.src('bindings/angular1/lib/angular/*.*')
       .pipe(gulp.dest('build/js/angular/')),
@@ -580,6 +586,7 @@ function distFiles() {
     '!build/js/angular/**/*',
     '!build/js/angular/',
     '!build/onsenui.zip',
+    '!build/package.json',
     'bower.json',
     'package.json',
     'README.md',
