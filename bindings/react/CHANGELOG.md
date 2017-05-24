@@ -2,6 +2,27 @@
 CHANGELOG
 ====
 
+v1.3.3
+----
+
+### Bug Fixes
+
+ * Updated `prop-types` to fix [facebook/prop-types#38](https://github.com/facebook/prop-types/issues/38).
+
+v1.3.2
+----
+
+### Misc
+
+ * Remove `module` property from `package.json` temporarily.
+
+v1.3.1
+----
+
+### Bug Fixes
+
+* card: Use `PropTypes` in `prop-types` instead of `React.PropTypes`.
+
 v1.3.0
 ----
 

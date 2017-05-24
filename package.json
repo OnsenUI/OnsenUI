@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -23,7 +23,6 @@
     "test": "gulp test --disable-warnings"
   },
   "main": "js/onsenui.js",
-  "module": "core-src/setup.js",
   "typings": "js/onsenui.d.ts",
   "files": [
     "bower.json",

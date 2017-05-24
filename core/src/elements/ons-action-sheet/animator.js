@@ -230,7 +230,7 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .wait(this.delay)
       .queue({
         css: {
-          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`
+          transform: `translate3d(0, 100%, 0)`
         },
         duration: this.duration,
         timing: this.timing

@@ -1,5 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @original ons-card
@@ -30,7 +30,7 @@ Card.propTypes = {
    *  [/en]
    *  [ja][/ja]
    */
-  modifier: React.PropTypes.string
+  modifier: PropTypes.string
 };
 
 export default Card;
