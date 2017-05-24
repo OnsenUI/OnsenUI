@@ -50,7 +50,7 @@
   name: Select Input
   category: Select Input
   markup: |
-    <select class="select-input" multiple>
+    <select class="select-input">
       <option>Option 1</option>
       <option>Option 2</option>
       <option>Option 3</option>
