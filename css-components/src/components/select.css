@@ -1,11 +1,11 @@
 
 :root {
-  --select-input-font-size: 15px;
-  --select-input-height: 31px;
+  --select-input-font-size: var(--font-size);
+  --select-input-height: 32px;
+  --select-input-color: #000;
   --select-input-border-color: var(--input-border-color);
-  --text-highlight-color: var(--highlight-color);
 
-  --material-select-input-font-size: 16px;
+  --material-select-input-font-size: 15px;
   --material-select-input-color: rgba(0, 0, 0, 1);
   --material-select-input-active-color: rgba(0, 0, 0, 0.15);
   --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
@@ -16,8 +16,13 @@
     position: relative;
     font-size: var(--select-input-font-size);
     height: var(--select-input-height);
+    line-height: var(--select-input-height);
     border-color: var(--select-input-border-color);
-    color: var(--text-highlight-color);
+    color: var(--select-input-color);
+    appearance: none;
+    display: inline-block;
+    border-radius: 0;
+    border: none;
   }
 
   --select-input--disabled: {
@@ -45,7 +50,15 @@
   name: Select Input
   category: Select Input
   markup: |
-    <select class="select-input">
+    <select class="select-input" multiple>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input" disabled>
       <option>Option 1</option>
       <option>Option 2</option>
       <option>Option 3</option>
@@ -54,6 +67,12 @@
 
 .select-input {
   @apply(--select-input);
+  padding: 0 20px 0 0;
+  background-color: transparent;
+  background-image: url('img/select-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  border-bottom: none;
 }
 
 .select-input::-ms-clear {
@@ -77,7 +96,7 @@
 }
 
 .select-input[multiple] {
-  height: 62px;
+  height: calc(var(--select-input-height) * 2);
 }
 
 /*~
@@ -89,24 +108,27 @@
       <option>Option 2</option>
       <option>Option 3</option>
     </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--material" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
 */
 
 .select-input--material {
-  @apply(--input);
   @apply(--material-font);
   color: var(--material-select-input-color);
-  background-image: linear-gradient(to top, transparent 1px, var(--material-select-input-inactive-color) 1px);
-  background-size: 100% 2px;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-color: transparent;
   font-size: var(--material-select-input-font-size);
-  font-weight: 400;
-  padding-bottom: 2px;
-  border-radius: 0;
-  height: 24px;
-  transform: translate3d(0, 0, 0); /* prevent ios flicker */
+  background-image: url('img/select-arrow.svg'), linear-gradient(to top, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.12) 50%);
+  background-size: auto, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: right center, left bottom;
   border: none;
+  font-weight: 400;
+  transform: translate3d(0, 0, 0); /* prevent ios flicker */
 }
 
 .select-input--material__label {
@@ -124,12 +146,6 @@
   transform: translate(0, -75%) scale(0.75);
   transform-origin: left top;
   transition: transform 0.1s ease-in, color 0.1s ease-in;
-}
-
-.select-input--material:focus {
-  background-image: linear-gradient(var(--material-select-input-active-color), var(--material-select-input-active-color)), linear-gradient(to top, transparent 1px, var(--material-select-input-inactive-color) 1px);
-  animation: material-select-input-animate 0.3s forwards;
-  border-radius: 0;
 }
 
 .select-input--material::placeholder {
@@ -155,14 +171,19 @@
       <option>Option 2</option>
       <option>Option 3</option>
     </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--underbar" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
 */
 
 .select-input--underbar {
-  @apply(--select-input);
   border: none;
-  background-color: transparent;
   border-bottom: 1px solid var(--select-input-border-color);
-  border-radius: 0;
 }
 
 .select-input--underbar:disabled {
