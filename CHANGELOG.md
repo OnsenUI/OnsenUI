@@ -12,6 +12,7 @@ dev
 
 * ons-splitter: Fixed 'reveal' animation glitch.
 * ons-action-sheet: Fixed glitch when hiding on iOS.
+* ons-select: Fixed [#2017](https://github.com/OnsenUI/OnsenUI/issues/2017).
 
 ### Misc
 
