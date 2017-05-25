@@ -7,6 +7,7 @@ dev
 
 ### New Features
 
+* css-components: Added "--material" modifier on "notification" CSS components.
 
 ### Bug Fixes
 
