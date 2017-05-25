@@ -20,7 +20,8 @@
     }
   ],
   "scripts": {
-    "test": "gulp test --disable-warnings"
+    "test": "gulp test --disable-warnings",
+    "test:no-build": "gulp test --disable-warnings --no-build"
   },
   "main": "js/onsenui.js",
   "typings": "js/onsenui.d.ts",
