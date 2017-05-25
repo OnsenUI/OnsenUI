@@ -1,6 +1,21 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+
+### Bug Fixes
+
+
+### Misc
+
+ * Removed `onsenui.d.ts`. Please use the type definition file in `onsenui` package instead.
+
+### PEER-DEPENDENCY UPDATES
+
 1.0.0-rc.6 (2017-03-14)
 ----
 
