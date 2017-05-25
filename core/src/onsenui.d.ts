@@ -997,7 +997,7 @@ interface PageLoader {
   internalLoader: Function;
 }
 
-interface OnsSpeedDialElement extends HTMLElement extends HTMLElement {
+interface OnsSpeedDialElement extends HTMLElement {
   /**
    * @description Show the speed dial.
    */
