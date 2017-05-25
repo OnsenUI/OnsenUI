@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "test": "gulp test --disable-warnings",
-    "test:no-build": "gulp test --disable-warnings --no-build"
+    "test:skip-build": "gulp test --disable-warnings --skip-build"
   },
   "main": "js/onsenui.js",
   "typings": "js/onsenui.d.ts",

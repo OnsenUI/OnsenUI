@@ -328,7 +328,7 @@ gulp.task('core-dts-test', ['core'], (done) => {
 ////////////////////////////////////////
 gulp.task('unit-test',
   [].concat(
-    argv['no-build'] ? [] : (argv.watch ? ['watch-core'] : ['prepare', 'core']),
+    argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['prepare', 'core']),
     ['core-dts-test']
   ),
   (done) => {

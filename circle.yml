@@ -32,7 +32,7 @@ deployment:
       - ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 $CIRCLE_ARTIFACTS
 test:
   override:
-    - npm run test:no-build
+    - npm run test:skip-build
   post:
     - cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
     - cd bindings/angular2; npm test
