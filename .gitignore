@@ -9,5 +9,5 @@ dist
 /core/test/unit/coverage
 /core/test/unit/test-results.xml
 /core/test/unit/TESTS-*.xml
-/core/src/onsenui-test.js
+/core/src/core-dts-test.js
 /build/*

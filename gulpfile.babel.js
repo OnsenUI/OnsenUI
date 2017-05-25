@@ -201,7 +201,7 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 // core-dts-test
 ////////////////////////////////////////
 gulp.task('core-dts-test', () => {
-  return gulp.src('core/src/onsenui-test.ts', {read: false})
+  return gulp.src('core/src/core-dts-test.ts', {read: false})
     .pipe($.shell('tsc "<%= file.path %>" --target es6'))
     .on('error', err => {
       $.util.log($.util.colors.red(err.message));
@@ -490,7 +490,7 @@ gulp.task('prepare', ['html2js'], () =>  {
     // ES Modules (raw ES source codes)
     gulp.src([
       'core/src/**/*',
-      '!core/src/onsenui-test.*',
+      '!core/src/core-dts-test.*',
       '!core/src/**/*.spec.js',
     ])
       .pipe(gulp.dest('build/core-src/')),
