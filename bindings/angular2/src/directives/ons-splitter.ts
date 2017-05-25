@@ -12,9 +12,9 @@ import {
   ComponentFactoryResolver,
   NgZone
 } from '@angular/core';
-import {Params} from '../ons/params';
+import * as ons from 'onsenui';
 
-declare const ons: any;
+import {Params} from '../ons/params';
 
 /**
  * @element ons-splitter-side

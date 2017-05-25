@@ -11,6 +11,7 @@ import {
   OnDestroy,
   NgZone
 } from '@angular/core';
+import * as ons from 'onsenui';
 
 /**
  * @element ons-tab

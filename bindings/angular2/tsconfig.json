@@ -9,7 +9,11 @@
     "removeComments": false,
     "noImplicitAny": false,
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "onsenui": ["../../build"]
+    }
   },
   "exclude": [
     "typings/main.d.ts",

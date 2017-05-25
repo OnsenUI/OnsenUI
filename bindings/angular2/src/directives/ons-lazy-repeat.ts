@@ -7,6 +7,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
+import * as ons from 'onsenui';
+
 export class ItemContext {
   constructor(public $implicit: any, public index: number, public count: number) {
   }

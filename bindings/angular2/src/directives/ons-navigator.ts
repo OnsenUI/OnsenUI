@@ -12,9 +12,9 @@ import {
   OnDestroy,
   NgZone
 } from '@angular/core';
-import {Params} from '../ons/params';
+import * as ons from 'onsenui';
 
-declare const ons: any;
+import {Params} from '../ons/params';
 
 export class NavigatorPage {
   constructor(

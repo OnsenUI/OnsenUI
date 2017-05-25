@@ -19,9 +19,19 @@ var webpackConfig = {
     return result;
   })(),
 
+  externals: {
+    'onsenui': {
+      'root': 'ons',
+      'commonjs': 'onsenui',
+      'commonjs2': 'onsenui',
+      'amd': 'onsenui',
+    },
+  },
+
   output: {
     path: __dirname + '/dist',
-    publicPath: '/bundles/'
+    publicPath: '/bundles/',
+    libraryTarget: 'umd',
   },
 
   module: {
