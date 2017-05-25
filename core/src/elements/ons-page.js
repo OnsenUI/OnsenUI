@@ -270,6 +270,14 @@ export default class PageElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
+  get scrollTop() {
+    return this._contentElement.scrollTop;
+  }
+
+  set scrollTop(newValue) {
+    this._contentElement.scrollTop = newValue;
+  }
+
   /**
    * @return {HTMLElement}
    */
@@ -310,7 +318,6 @@ export default class PageElement extends BaseElement {
   _getBottomToolbarElement() {
     return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
   }
-
 
   /**
    * @return {HTMLElement}
