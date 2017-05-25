@@ -41,7 +41,7 @@ const scheme = {
  *   [en]Make the list item change appearance when it's tapped. On iOS it is better to use the "tappable" and "tap-background-color" attribute for better behavior when scrolling.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
- *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped. The chevron is not displayed in Material Design.[/en]
+ *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
  *   [ja][/ja]
  * @modifier longdivider
  *   [en]Displays a long horizontal divider between items.[/en]
