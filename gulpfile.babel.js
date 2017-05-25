@@ -200,7 +200,7 @@ gulp.task('watch-core', ['prepare', 'core'], () => {
 ////////////////////////////////////////
 // core-dts-test
 ////////////////////////////////////////
-gulp.task('core-dts-test', ['core'], (done) => {
+gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
   // Usage:
   //     # validate the d.ts file for the core
   //     gulp core-dts-test
