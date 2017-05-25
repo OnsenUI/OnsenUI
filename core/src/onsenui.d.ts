@@ -287,6 +287,7 @@ declare namespace ons {
    * @description PageLoader class constructor
    */
   class PageLoader {
+    constructor(...args: any[]);
     internalLoader: Function;
     load(options: {page: any, parent: Element, params?: Object}, done: Function): void;
   }
