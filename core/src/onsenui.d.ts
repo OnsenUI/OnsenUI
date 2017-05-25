@@ -296,7 +296,7 @@ declare namespace ons {
 /**
  * @description Should be used as root component of each page. The content inside page component is scrollable
  */
-interface OnsPageElement {
+interface OnsPageElement extends HTMLElement {
   /**
    * @description Function to be executed when scrolling to the bottom of the page. The function receives a done callback as an argument that must be called when it's finished.
    */
@@ -319,7 +319,7 @@ interface CarouselOptions{
 /**
  * @description Carousel component
  */
-interface OnsCarouselElement {
+interface OnsCarouselElement extends HTMLElement {
   /**
   * @description Specify the index of the `<ons-carousel-item>` to show.
   * @return Resolves to the carousel element.
@@ -388,7 +388,7 @@ interface OnsCarouselElement {
  * @description Component that adds "pull-to-refresh" to an <ons-page> element
  */
  //later should be updated
-interface OnsPullHookElement {
+interface OnsPullHookElement extends HTMLElement {
   /**
   * @description The height of the pull hook in pixels. The default value is `64px`.
   */
@@ -428,7 +428,7 @@ interface dialogOptions {
  * @modifier android Display an Android style alert dialog
  * @description Alert dialog that is displayed on top of the current screen
  */
-interface OnsAlertDialogElement {
+interface OnsAlertDialogElement extends HTMLElement {
   /**
    * @param {Object} [options] Parameter object
    * @param {String} [options.animation] Animation name. Available animations are "fade", "slide" and "none"
@@ -456,7 +456,7 @@ interface OnsAlertDialogElement {
 /**
  * @description Dialog that is displayed on top of current screen
  */
-interface OnsDialogElement {
+interface OnsDialogElement extends HTMLElement {
   /**
    * @return {Object} Device back button handler
    * @description Retrieve the back button handler for overriding the default behavior
@@ -493,7 +493,7 @@ interface OnsDialogElement {
 /**
  * @description Switch component
  */
-interface OnsSwitchElement {
+interface OnsSwitchElement extends HTMLElement {
   /**
    * @description If true the switch will be set to on.
    */
@@ -601,7 +601,7 @@ interface ReplacePageOptions {
 /**
  * @description A component that provides page stack management and navigation. This component does not have a visible content
  */
-interface OnsNavigatorElement {
+interface OnsNavigatorElement extends HTMLElement {
   /**
    * @param {Object} [options] Parameter object
    * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
@@ -683,7 +683,7 @@ interface tabbarOptions {
 /**
  * @description A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs
  */
-interface OnsTabbarElement {
+interface OnsTabbarElement extends HTMLElement {
   /**
    * @param {*} url Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>
    * @return Resolves to the new page element.
@@ -718,7 +718,7 @@ interface popoverOptions {
  * @modifier android Display an Android style popover
  * @description A component that displays a popover next to an element
  */
-interface OnsPopoverElement {
+interface OnsPopoverElement extends HTMLElement {
   /**
    * @param {String|Event|HTMLElement} target Target element. Can be either a CSS selector, an event object or a DOM element
    * @param {Object} [options] Parameter object
@@ -756,7 +756,7 @@ interface SplitterSideOptions {
   callback?: Function;
 }
 
-interface OnsSplitterSideElement {
+interface OnsSplitterSideElement extends HTMLElement {
   /**
    * @description Page element loaded in the splitter side.
    */
@@ -819,7 +819,7 @@ interface LazyRepeatOptions {
   configureItemScope?: number;
 }
 
-interface OnsLazyRepeatElement {
+interface OnsLazyRepeatElement extends HTMLElement {
   /**
    * @description Refresh the list. Use this method when the data has changed.
    */
@@ -831,14 +831,14 @@ interface OnsLazyRepeatElement {
 }
 
 
-interface OnsButtonElement {
+interface OnsButtonElement extends HTMLElement {
   /**
    * @description A boolean value that specifies if the button is disabled or not.
    */
   disabled: boolean;
 }
 
-interface OnsFabElement {
+interface OnsFabElement extends HTMLElement {
   /**
    * @description Show the floating action button.
    */
@@ -861,7 +861,7 @@ interface OnsFabElement {
   visible: boolean;
 }
 
-interface OnsInputElement {
+interface OnsInputElement extends HTMLElement {
   /**
    * @description The current value of the input.
    */
@@ -876,7 +876,7 @@ interface OnsInputElement {
   disabled: boolean;
 }
 
-interface OnsRangeElement {
+interface OnsRangeElement extends HTMLElement {
   /**
    * @description A boolean value that specifies whether the input is disabled or not.
    */
@@ -887,7 +887,7 @@ interface OnsRangeElement {
   value: string;
 }
 
-interface OnsRippleElement {
+interface OnsRippleElement extends HTMLElement {
   /**
    * @description A boolean value that specifies whether the input is disabled or not.
    */
@@ -902,7 +902,7 @@ interface SplitterContentOptions {
   callback?: Function;
 }
 
-interface OnsSplitterContentElement {
+interface OnsSplitterContentElement extends HTMLElement {
   /**
    * @description Page element loaded in the splitter content.
    */
@@ -917,7 +917,7 @@ interface OnsSplitterContentElement {
   load(page: any, options?: SplitterContentOptions): Promise<HTMLElement>;
 }
 
-interface OnsSplitterElement {
+interface OnsSplitterElement extends HTMLElement {
   /**
    * @description Left `<ons-splitter-side>` element.
    */
@@ -955,14 +955,14 @@ interface BackButtonOptions {
   refresh?: boolean;
 }
 
-interface OnsBackButtonElement {
+interface OnsBackButtonElement extends HTMLElement {
   /**
    * @Options Options object.
    */
   options?: BackButtonOptions;
 }
 
-interface OnsProgressBarElement {
+interface OnsProgressBarElement extends HTMLElement {
   /**
    * @description Current progress. Should be a value between 0 and 100.
    */
@@ -977,7 +977,7 @@ interface OnsProgressBarElement {
   indeterminate: boolean;
 }
 
-interface OnsProgressCircularElement {
+interface OnsProgressCircularElement extends HTMLElement {
   /**
    * @description Current progress. Should be a value between 0 and 100.
    */
@@ -997,7 +997,7 @@ interface PageLoader {
   internalLoader: Function;
 }
 
-interface OnsSpeedDialElement {
+interface OnsSpeedDialElement extends HTMLElement extends HTMLElement {
   /**
    * @description Show the speed dial.
    */
