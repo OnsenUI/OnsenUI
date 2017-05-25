@@ -48,7 +48,7 @@ export default class SplitterAnimator extends BaseAnimator {
 
   deactivate() {
     this.clearTransition();
-    this.clearMask();
+    this._mask && this.clearMask();
     this._content = this._side = this._oppositeSide = this._mask = null;
   }
 

@@ -10,12 +10,13 @@ dev
 
 ### Bug Fixes
 
+* ons-splitter: Fixed 'reveal' animation glitch.
 * ons-action-sheet: Fixed glitch when hiding on iOS.
 
 ### Misc
 
  * core: Excluded test cases from `onsenui` package.
- 
+
 v2.3.1
 ----
 
