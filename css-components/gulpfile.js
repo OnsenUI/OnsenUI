@@ -38,6 +38,7 @@ gulp.task('cssmin', ['generate-preview'], () => {
   return gulp.src(prefix + 'onsen-css-components.css')
     .pipe($.cssmin())
     .pipe($.rename({suffix: '.min'}))
+    .pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix));
 });
 
@@ -60,6 +61,7 @@ gulp.task('cssnext', ['stylelint'], () => {
   return gulp.src('src/onsen-css-components.css')
     .pipe($.plumber())
     .pipe($.postcss(plugins))
+    .pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix));
 });
 
