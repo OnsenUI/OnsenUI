@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v1.3.4
 ----
 
 ### Bug Fixes
