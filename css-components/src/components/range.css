@@ -68,7 +68,6 @@
   background-size: 100% var(--range-track-height);
   background-repeat: no-repeat;
   background-color: transparent;
-  overflow: visible;
 }
 
 .range__input {
@@ -78,7 +77,6 @@
   background-position: left center;
   background-size: 0% var(--range-track-height);
   background-repeat: no-repeat;
-  overflow-x: visible;
   height: calc(var(--range-thumb-size) + 2px);
   position: relative;
   z-index: 1;
@@ -161,7 +159,6 @@
   background-image: linear-gradient(var(--material-range-thumb-color), var(--material-range-thumb-color));
   background-position: center left;
   background-size: 0% 2px;
-  overflow: visible;
 }
 
 .range--material__input::-webkit-slider-thumb {
