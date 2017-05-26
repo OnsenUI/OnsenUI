@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * Removed unresolved `require` in `react-onsenui.js` caused by `webpack.definePlugin`. Fixed [#2034](https://github.com/OnsenUI/OnsenUI/issues/2034).
+
 v1.3.3
 ----
 
