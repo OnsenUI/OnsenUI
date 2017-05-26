@@ -19,6 +19,7 @@ dev
 ### Misc
 
  * css-components: Refined the appearance of `select`.
+ * css-components: Refined the appearance of `range`.
  * core: Excluded test cases from `onsenui` package.
 
 v2.3.1
