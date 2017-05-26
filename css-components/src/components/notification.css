@@ -5,7 +5,11 @@
   --notification-height: 19px;
   --notification-min-width: 19px;
   --notification-padding: 0 4px;
+  --notification-font-weight: var(--font-weight);
   --notification-font-size: 16px;
+
+  --material-notification-font-size: 16px;
+  --material-notification-font-weight: 500;
 }
 
 /*~
@@ -40,9 +44,25 @@
   font-size: var(--notification-font-size);
   min-width: var(--notification-min-width);
   line-height: var(--notification-height);
-  font-weight: var(--font-weight);
+  font-weight: var(--notification-font-weight);
 }
 
 .notification:empty {
   display: none;
+}
+
+/*~
+  name: Material Notification
+  category: Notification
+  markup: |
+    <span class="notification notification--material">1</span>
+    <span class="notification notification--material">10</span>
+    <span class="notification notification--material">999</span>
+*/
+
+.notification--material {
+  @apply(--material-font);
+  background-color: var(--material-notification-background-color);
+  font-size: var(--material-notification-font-size);
+  font-weight: var(--material-notification-font-weight);
 }
