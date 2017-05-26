@@ -14,6 +14,7 @@ dev
 * ons-action-sheet: Fixed glitch when hiding on iOS.
 * ons-select: Fixed [#2017](https://github.com/OnsenUI/OnsenUI/issues/2017).
 * ons-list-item: Fixed [#2029](https://github.com/OnsenUI/OnsenUI/issues/2029).
+* ons-modal: Fixed [#1943](https://github.com/OnsenUI/OnsenUI/issues/1943).
 
 ### Misc
 
