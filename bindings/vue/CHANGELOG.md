@@ -1,6 +1,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+* VOnsModel: Arrays are now replaced instead of mutated.
+* VOnsNavigator: Fixed auto scroll top issue when popping pages.
+
 2.0.0-beta.7
 ----
 

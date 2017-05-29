@@ -70,12 +70,19 @@ const _bindModifierInputOn = (eventName, binding, vnode) => {
 
 const _bindArrayInputOn = (eventName, binding, vnode) => {
   _bindOn(eventName, binding, vnode, event => {
-    const modelValue = _getModel(binding, vnode.context);
-    if (modelValue.indexOf(event.target.value) >= 0) {
-      !event.target.checked && modelValue.splice(modelValue.indexOf(event.target.value), 1);
+    let modelValue = _getModel(binding, vnode.context);
+    const index = modelValue.indexOf(event.target.value);
+
+    if (index >= 0) {
+      !event.target.checked && _setModel(binding, vnode.context, [
+        ...modelValue.slice(0, index),
+        ...modelValue.slice(index + 1, modelValue.length)
+      ]);
     } else {
-      event.target.checked && modelValue.push(event.target.value);
+      event.target.checked && _setModel(binding, vnode.context, [ ...modelValue, event.target.value ]);
     }
+
+    modelValue = null;
   });
 };
 
