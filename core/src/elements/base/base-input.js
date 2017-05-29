@@ -1,0 +1,185 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+import util from '../../ons/util';
+import BaseElement from './base-element';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import contentReady from '../../ons/content-ready';
+
+const INPUT_ATTRIBUTES = [
+  'autocapitalize',
+  'autocomplete',
+  'autocorrect',
+  'autofocus',
+  'disabled',
+  'inputmode',
+  'max',
+  'maxlength',
+  'min',
+  'minlength',
+  'name',
+  'pattern',
+  'placeholder',
+  'readonly',
+  'size',
+  'step',
+  'validator',
+  'value'
+];
+
+export default class BaseInputElement extends BaseElement {
+
+  get _scheme() {
+    throw new Error('_scheme getter must be implemented.');
+  }
+
+  _addClassesAndUpdate() {
+    throw new Error('_addClassesAndUpdate method must be implemented.');
+  }
+
+  _setInputType() {
+    throw new Error('_setInputType method must be implemented.');
+  }
+
+  constructor() {
+    super();
+
+    contentReady(this, () => {
+      autoStyle.prepare(this);
+      this._compile();
+      this._setInputId();
+      ModifierUtil.initModifier(this, this._scheme);
+    });
+
+    this._boundDelegateEvent = this._delegateEvent.bind(this);
+  }
+
+  _compile() {
+    if (this.children.length !== 0) {
+      return;
+    }
+
+    const helper = document.createElement('span');
+    helper.classList.add('_helper');
+
+    const container = document.createElement('label');
+    container.appendChild(document.createElement('input'));
+    container.appendChild(helper);
+
+    const label = document.createElement('span');
+    label.classList.add('input-label');
+
+    util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
+    this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
+
+    this.appendChild(container);
+    this._setInputType();
+
+    this._addClassesAndUpdate();
+  }
+
+  _setInputId() {
+    if (this.hasAttribute('input-id')) {
+      this._input.id = this.getAttribute('input-id');
+    }
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'input-id', ...INPUT_ATTRIBUTES];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'modifier':
+        contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, this._scheme));
+        break;
+      case 'input-id':
+        contentReady(this, () => this._setInputId());
+        break;
+    }
+
+    if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
+      contentReady(this, () => this._updateBoundAttributes());
+    }
+  }
+
+  connectedCallback() {
+    contentReady(this, () => {
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
+    });
+  }
+
+  disconnectedCallback() {
+    contentReady(this, () => {
+      this._input.removeEventListener('focus', this._boundDelegateEvent);
+      this._input.removeEventListener('blur', this._boundDelegateEvent);
+    });
+  }
+
+  _updateBoundAttributes() {
+    INPUT_ATTRIBUTES.forEach((attr) => {
+      if (this.hasAttribute(attr)) {
+        this._input.setAttribute(attr, this.getAttribute(attr));
+      } else {
+        this._input.removeAttribute(attr);
+      }
+    });
+  }
+
+  _delegateEvent(event) {
+    const e = new CustomEvent(event.type, {
+      bubbles: false,
+      cancelable: true
+    });
+
+    return this.dispatchEvent(e);
+  }
+
+  get _input() {
+    return this.querySelector('input');
+  }
+
+  get _helper() {
+    return this.querySelector('._helper');
+  }
+
+  get value() {
+    return this._input === null
+      ? this.getAttribute('value')
+      : this._input.value;
+  }
+
+  set value(val) {
+    contentReady(this, () => {
+      if (val instanceof Date) {
+        val = val.toISOString().substring(0, 10);
+      }
+      this._input.value = val;
+      this._onInput && this._onInput();
+    });
+  }
+
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  static get events() {
+    return ['change', 'input', 'focus', 'focusin', 'focusout', 'blur'];
+  }
+}
