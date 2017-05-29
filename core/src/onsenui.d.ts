@@ -26,7 +26,7 @@ interface alertOptions {
   id?: string;
 }
 
-interface onsPlatform {
+interface OnsPlatformObject {
   /**
    * @param  {string} platform Name of the platform. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
    * @description Sets the platform used to render the elements. Useful for testing.
@@ -109,7 +109,7 @@ interface onsPlatform {
   isEdge(): boolean;
 }
 
-interface onsOrientation {
+interface OnsOrientationObject {
   /**
    * @description Add an event listener.
    */
@@ -134,7 +134,7 @@ interface onsOrientation {
   isLandscape(): boolean;
 }
 
-interface onsNotification {
+interface OnsNotificationObject {
   /**
    * @param {Object} options Parameter object
    * @param {String} [options.message] Alert message
@@ -268,15 +268,15 @@ declare namespace ons {
   /**
    * @description Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt
    */
-  var notification: onsNotification;
+  var notification: OnsNotificationObject;
   /**
    * @description Utility methods for orientation detection
    */
-  var orientation: onsOrientation;
+  var orientation: OnsOrientationObject;
   /**
    * @description Utility methods to detect current platform
    */
-  var platform: onsPlatform;
+  var platform: OnsPlatformObject;
 
   /**
    * @description Default page loader that load page template
