@@ -86,7 +86,7 @@
     "protractor": "^3.3.0",
     "rxjs": "^5.0.2",
     "selenium-server-standalone-jar": "^2.53.0",
-    "source-map-loader": "^0.1.5",
+    "source-map-loader": "^0.2.1",
     "static-server": "^2.0.3",
     "typescript": "^2.0.3",
     "typings": "^1.2.0",
