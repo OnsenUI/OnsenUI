@@ -119,7 +119,7 @@ Tabbar.propTypes = {
    * @name renderTabs
    * @type function
    * @description
-   *  [en] The index of the first tab to show.[/en]
+   *  [en] Function that returns an array of objects with the keys `content` and `tab`.[/en]
    *  [ja][/ja]
    */
   renderTabs: PropTypes.func.isRequired,
