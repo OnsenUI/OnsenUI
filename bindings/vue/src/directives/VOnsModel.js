@@ -31,7 +31,7 @@ const _getModel = (binding, context, newValue) => {
   }
 
   if (newValue !== undefined && model[lastKey] !== newValue) {
-    model[lastKey] = newValue; // Setter
+    context.$set(model, lastKey, newValue); // Setter
   }
 
   return model[lastKey] || binding.value; // Getter
