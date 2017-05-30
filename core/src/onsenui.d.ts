@@ -525,7 +525,7 @@ interface ModalOptions {
  *   Modal component that masks current screen
  *   Underlying components are not subject to any events while the modal component is shown
  */
-interface OnsModalElement{
+interface OnsModalElement extends HTMLElement {
   /**
    * @return Device back button handler
    * @param {String} [options.animation] Animation name. Available animations are `"none"` and `"fade"`.
