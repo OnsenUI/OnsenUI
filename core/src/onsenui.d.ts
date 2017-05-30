@@ -992,11 +992,6 @@ interface OnsProgressCircularElement extends HTMLElement {
   indeterminate: boolean;
 }
 
-interface PageLoader {
-  load(page: any, parent: Element, done: Function): void;
-  internalLoader: Function;
-}
-
 interface OnsSpeedDialElement extends HTMLElement {
   /**
    * @description Show the speed dial.
@@ -1035,4 +1030,3 @@ interface OnsSpeedDialElement extends HTMLElement {
    */
   visible: boolean;
 }
-
