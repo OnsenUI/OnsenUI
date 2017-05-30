@@ -12,7 +12,6 @@ limitations under the License.
 */
 
 import BaseInputElement from './base/base-input';
-import contentReady from '../ons/content-ready';
 
 const scheme = {
   '.search-input': 'search-input--*'
@@ -59,6 +58,20 @@ const scheme = {
  */
 export default class SearchInputElement extends BaseInputElement {
 
+  get _scheme() {
+    return scheme;
+  }
+
+  get _template() {
+    return `
+      <input type="${this.type}" class="search-input">
+    `;
+  }
+
+  get type() {
+    return 'search';
+  }
+
   /**
    * @attribute input-id
    * @type {String}
@@ -66,30 +79,6 @@ export default class SearchInputElement extends BaseInputElement {
    *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
    *  [ja][/ja]
    */
-
-  constructor() {
-    super();
-  }
-
-  get _scheme() {
-    return scheme;
-  }
-
-  _setInputType() {
-    this._input.setAttribute('type', 'search');
-  }
-
-  _compile() {
-    this._input || this.appendChild(document.createElement('input'));
-
-    this._setInputType();
-    this._addClassesAndUpdate();
-  }
-
-  _addClassesAndUpdate() {
-    this._input.classList.add('search-input');
-    this._updateBoundAttributes();
-  }
 
   /**
    * @property value

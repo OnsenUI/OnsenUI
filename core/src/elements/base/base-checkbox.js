@@ -24,15 +24,20 @@ export default class BaseCheckboxElement extends BaseInputElement {
     super();
 
     contentReady(this, () => {
+      this.classList.add(this._defaultElementClass);
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
     });
   }
 
-  _addClassesAndUpdate() {
-    this.classList.add(this._defaultElementClass);
-    this._input.classList.add(`${this._defaultElementClass}__input`);
-    this._helper.classList.add(`${this._defaultElementClass}__checkmark`);
-    this._updateBoundAttributes();
+  get _template() {
+    return `
+      <input type="${this.type}" class="${this._defaultElementClass}__input">
+      <span class="${this._defaultElementClass}__checkmark"></span>
+    `;
+  }
+
+  get _helper() {
+    return this.querySelector('span');
   }
 
   get checked() {

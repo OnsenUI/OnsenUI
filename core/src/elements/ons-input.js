@@ -65,43 +65,13 @@ const scheme = {
  */
 export default class InputElement extends BaseInputElement {
 
-  /**
-   * @attribute placeholder
-   * @type {String}
-   * @description
-   *   [en]Placeholder text. In Material Design, this placeholder will be a floating label.[/en]
-   *   [ja][/ja]
-   */
-
-  /**
-   * @attribute float
-   * @description
-   *  [en]If this attribute is present, the placeholder will be animated in Material Design.[/en]
-   *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
-   */
-
-  /**
-   * @attribute type
-   * @type {String}
-   * @description
-   *  [en]
-   *    Specify the input type. This is the same as the "type" attribute for normal inputs. It expects strict text types such as `text`, `password`, etc. For checkbox, radio button, select or range, please have a look at the corresponding elements.
-   *
-   *    Please take a look at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type) for an exhaustive list of possible values. Depending on the platform and browser version some of these might not work.
-   *  [/en]
-   *  [ja][/ja]
-   */
-
-  /**
-   * @attribute input-id
-   * @type {String}
-   * @description
-   *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
-   *  [ja][/ja]
-   */
-
   constructor() {
     super();
+
+    contentReady(this, () => {
+      this._updateLabel();
+      this._updateLabelClass();
+    });
 
     this._boundOnInput = this._onInput.bind(this);
     this._boundOnFocusin = this._onFocusin.bind(this);
@@ -111,19 +81,20 @@ export default class InputElement extends BaseInputElement {
     return scheme;
   }
 
-  _setInputType() {
-    const type = this.getAttribute('type');
-    this._input.setAttribute('type', (['checkbox', 'radio'].indexOf(type) < 0) && type || 'text');
+  get _template() {
+    return `
+      <input type="${this.type}" class="text-input">
+      <span class="text-input__label"></span>
+    `;
   }
 
-  _addClassesAndUpdate() {
-    this._input.classList.add('text-input');
-    this._helper.classList.add('text-input__label');
-    this._input.parentElement.classList.add('text-input__container');
+  get _helper() {
+    return this.querySelector('span');
+  }
 
-    this._updateLabel();
-    this._updateBoundAttributes();
-    this._updateLabelClass();
+  get type() {
+    const type = this.getAttribute('type');
+    return (['checkbox', 'radio'].indexOf(type) < 0) && type || 'text';
   }
 
   connectedCallback() {
@@ -172,6 +143,58 @@ export default class InputElement extends BaseInputElement {
     this._updateLabelClass();
   }
 
+  static get observedAttributes() {
+    return [...super.observedAttributes, 'placeholder', 'type'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'placeholder':
+        contentReady(this, () => this._updateLabel());
+        break;
+      case 'type':
+        contentReady(this, () => this._input.setAttribute('type', this.type));
+        break;
+      default:
+        super.attributeChangedCallback(name, last, current);
+    }
+  }
+
+  /**
+   * @attribute placeholder
+   * @type {String}
+   * @description
+   *   [en]Placeholder text. In Material Design, this placeholder will be a floating label.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute float
+   * @description
+   *  [en]If this attribute is present, the placeholder will be animated in Material Design.[/en]
+   *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
+   */
+
+  /**
+   * @attribute type
+   * @type {String}
+   * @description
+   *  [en]
+   *    Specify the input type. This is the same as the "type" attribute for normal inputs. It expects strict text types such as `text`, `password`, etc. For checkbox, radio button, select or range, please have a look at the corresponding elements.
+   *
+   *    Please take a look at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type) for an exhaustive list of possible values. Depending on the platform and browser version some of these might not work.
+   *  [/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @attribute input-id
+   * @type {String}
+   * @description
+   *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
+   *  [ja][/ja]
+   */
+
   /**
    * @property value
    * @type {String}
@@ -187,23 +210,6 @@ export default class InputElement extends BaseInputElement {
    *   [en]Whether the input is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-
-  static get observedAttributes() {
-    return [...super.observedAttributes, 'placeholder', 'type'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'placeholder':
-        contentReady(this, () => this._updateLabel());
-        break;
-      case 'type':
-        contentReady(this, () => this._setInputType());
-        break;
-      default:
-        super.attributeChangedCallback(name, last, current);
-    }
-  }
 }
 
 customElements.define('ons-input', InputElement);

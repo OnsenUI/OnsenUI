@@ -44,49 +44,34 @@ export default class BaseInputElement extends BaseElement {
     throw new Error('_scheme getter must be implemented.');
   }
 
-  _addClassesAndUpdate() {
-    throw new Error('_addClassesAndUpdate method must be implemented.');
+  get _template() {
+    throw new Error('_template getter must be implemented.');
   }
 
-  _setInputType() {
-    throw new Error('_setInputType method must be implemented.');
+  get type() {
+    throw new Error('type getter must be implemented.');
   }
 
   constructor() {
     super();
 
-    contentReady(this, () => {
-      autoStyle.prepare(this);
-      this._compile();
-      this._setInputId();
-      ModifierUtil.initModifier(this, this._scheme);
-    });
-
+    contentReady(this, () => this._compile());
     this._boundDelegateEvent = this._delegateEvent.bind(this);
   }
 
   _compile() {
+    autoStyle.prepare(this);
+
     if (this.children.length !== 0) {
       return;
     }
 
-    const helper = document.createElement('span');
-    helper.classList.add('_helper');
+    this.appendChild(util.createFragment(this._template).cloneNode(true));
 
-    const container = document.createElement('label');
-    container.appendChild(document.createElement('input'));
-    container.appendChild(helper);
+    this._setInputId();
+    this._updateBoundAttributes();
 
-    const label = document.createElement('span');
-    label.classList.add('input-label');
-
-    util.arrayFrom(this.childNodes).forEach(element => label.appendChild(element));
-    this.hasAttribute('content-left') ? container.insertBefore(label, container.firstChild) : container.appendChild(label);
-
-    this.appendChild(container);
-    this._setInputType();
-
-    this._addClassesAndUpdate();
+    ModifierUtil.initModifier(this, this._scheme);
   }
 
   _setInputId() {
@@ -149,10 +134,6 @@ export default class BaseInputElement extends BaseElement {
 
   get _input() {
     return this.querySelector('input');
-  }
-
-  get _helper() {
-    return this.querySelector('._helper');
   }
 
   get value() {

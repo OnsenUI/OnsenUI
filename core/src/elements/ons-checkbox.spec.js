@@ -109,34 +109,6 @@ describe('OnsCheckboxElement', () => {
       element.checked = false;
       expect(element._input.checked).to.be.false;
     });
-
-    // it('creates radio button', (done) => {
-    //   let element = ons._util.createElement('<ons-input type="radio"></ons-input>');
-
-    //   setImmediate(() => {
-    //     expect(element.className).to.contain('radio-button');
-    //     expect(element._input.className).to.contain('radio-button__input');
-    //     expect(element._input.type).to.equal('radio');
-    //     expect(element._helper.className).to.contain('radio-button__checkmark');
-
-    //     element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"></ons-input><ons-input type="radio" name="radiogroup"></ons-input></div>');
-    //     document.body.appendChild(element);
-
-    //     setImmediate(() => {
-    //       const r = element.querySelectorAll('ons-input[type=radio]');
-    //       expect(r[0].checked).to.be.false;
-    //       expect(r[1].checked).to.be.false;
-    //       r[0].checked = true;
-    //       expect(r[0].checked).to.be.true;
-    //       expect(r[1].checked).to.be.false;
-    //       r[1].checked = true;
-    //       expect(r[0].checked).to.be.false;
-    //       expect(r[1].checked).to.be.true;
-    //       element.remove();
-    //       done();
-    //     });
-    //   });
-    // });
   });
 
   describe('#disabled', () => {

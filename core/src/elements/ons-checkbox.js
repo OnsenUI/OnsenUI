@@ -60,18 +60,6 @@ const scheme = {
  */
 export default class CheckboxElement extends BaseCheckboxElement {
 
-  /**
-   * @attribute input-id
-   * @type {String}
-   * @description
-   *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
-   *  [ja][/ja]
-   */
-
-  constructor() {
-    super();
-  }
-
   get _scheme() {
     return scheme;
   }
@@ -80,9 +68,17 @@ export default class CheckboxElement extends BaseCheckboxElement {
     return 'checkbox';
   }
 
-  _setInputType() {
-    this._input.setAttribute('type', 'checkbox');
+  get type() {
+    return 'checkbox';
   }
+
+  /**
+   * @attribute input-id
+   * @type {String}
+   * @description
+   *  [en]Specify the "id" attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
+   *  [ja][/ja]
+   */
 
   /**
    * @property value
