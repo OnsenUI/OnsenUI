@@ -82,6 +82,9 @@ module.exports = function(config) {
       // Desktop - Chrome
       ////////////////////////////////////////
       local_chrome: { // alias for `Chrome` (defined by `karma-chrome-launcher`)
+        base: 'Chrome',
+      },
+      local_chrome_headless: { // alias for `ChromeHeadless` (defined by `karma-chrome-launcher`)
         base: 'ChromeHeadless',
       },
 
