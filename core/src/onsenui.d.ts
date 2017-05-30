@@ -89,15 +89,175 @@ declare namespace ons {
   /**
    * @description Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt
    */
-  var notification: OnsNotificationObject;
+  namespace notification {
+    /**
+     * @param {Object} options Parameter object
+     * @param {String} [options.message] Alert message
+     * @param {String} [options.messageHTML] Alert message in HTML
+     * @param {String} [options.buttonLabel] Label for confirmation button. Default is "OK"
+     * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
+     * @param {String} [options.title] Dialog title. Default is "Alert"
+     * @param {String} [options.modifier] Modifier for the dialog
+     * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
+     * @param {Function} [options.callback] Function that executes after dialog has been closed
+     * @description
+     *   Display an alert dialog to show the user a message
+     *   The content of the message can be either simple text or HTML
+     *   Must specify either message or messageHTML
+     */
+    function alert(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    /**
+     * @param {Object} options Parameter object
+     * @param {String} [options.message] Confirmation question
+     * @param {String} [options.messageHTML] Dialog content in HTML
+     * @param {Array} [options.buttonLabels] Labels for the buttons. Default is ["Cancel", "OK"]
+     * @param {Number} [options.primaryButtonIndex] Index of primary button. Default is 1
+     * @param {Boolean} [options.cancelable] Whether the dialog is cancelable or not. Default is false
+     * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
+     * @param {String} [options.title] Dialog title. Default is "Confirm"
+     * @param {String} [options.modifier] Modifier for the dialog
+     * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
+     * @param {Function} [options.callback]
+     *   Function that executes after the dialog has been closed
+     *   Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled
+     * @description
+     *   Display a dialog to ask the user for confirmation
+     *   The default button labels are "Cancel" and "OK" but they can be customized
+     *   Must specify either message or messageHTML
+     */
+    function confirm(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    /**
+     * @param {Object} options Parameter object
+     * @param {String} [options.message] Prompt question
+     * @param {String} [options.messageHTML] Dialog content in HTML
+     * @param {String} [options.buttonLabel] Label for confirmation button. Default is "OK"
+     * @param {Number} [options.primaryButtonIndex] Index of primary button. Default is 1
+     * @param {Boolean} [options.cancelable] Whether the dialog is cancelable or not. Default is false
+     * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
+     * @param {String} [options.title] Dialog title. Default is "Alert"
+     * @param {String} [options.modifier] Modifier for the dialog
+     * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
+     * @param {Function} [options.callback]
+     *   Function that executes after the dialog has been closed
+     *   Argument for the function is the value of the input field or null if the dialog was canceled
+     * @description
+     *   Display a dialog with a prompt to ask the user a question
+     *   Must specify either message or messageHTML
+     */
+    function prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+  }
   /**
    * @description Utility methods for orientation detection
    */
-  var orientation: OnsOrientationObject;
+  namespace orientation {
+    /**
+     * @description Add an event listener.
+     */
+    function on(eventName: string, listener: Function): void;
+    /**
+     * @description Add an event listener that's only triggered once.
+     */
+    function once(eventName: string, listener: Function): void;
+    /**
+     * @description Remove an event listener. If the listener is not specified all listeners for the event type will be removed.
+     */
+    function off(eventName: string, listener?: Function): void;
+    /**
+     * @return {Boolean} Will be true if the current orientation is portrait mode
+     * @description Returns whether the current screen orientation is portrait or not
+     */
+    function isPortrait(): boolean;
+    /**
+     * @return {Boolean} Will be true if the current orientation is landscape mode
+     * @description Returns whether the current screen orientation is landscape or not
+     */
+    function isLandscape(): boolean;
+  }
   /**
    * @description Utility methods to detect current platform
    */
-  var platform: OnsPlatformObject;
+  namespace platform {
+    /**
+     * @param  {string} platform Name of the platform. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
+     * @description Sets the platform used to render the elements. Useful for testing.
+     */
+    function select(platform: string): void;
+    /**
+     * @description Returns whether app is running in Cordova
+     * @return {Boolean}
+     */
+    function isWebView(): boolean;
+
+    /**
+     * @description Returns whether the OS is iOS
+     * @return {Boolean}
+     */
+    function isIOS(): boolean;
+
+    /**
+     * @description Returns whether the OS is Android
+     * @return {Boolean}
+     */
+    function isAndroid(): boolean;
+
+    /**
+     * @description Returns whether the device is iPhone
+     * @return {Boolean}
+     */
+    function isIPhone(): boolean;
+
+    /**
+     * @description Returns whether the device is iPad
+     * @return {Boolean}
+     */
+    function isIPad(): boolean;
+
+    /**
+     * @description Returns whether the device is BlackBerry
+     * @return {Boolean}
+     */
+    function isBlackBerry(): boolean;
+
+    /**
+     * @description Returns whether the browser is Opera
+     * @return {Boolean}
+     */
+    function isOpera(): boolean;
+
+    /**
+     * @description Returns whether the browser is Firefox
+     * @return {Boolean}
+     */
+    function isFirefox(): boolean;
+
+    /**
+     * @description Returns whether the browser is Safari
+     * @return {Boolean}
+     */
+    function isSafari(): boolean;
+
+    /**
+     * @description Returns whether the browser is Chrome
+     * @return {Boolean}
+     */
+    function isChrome(): boolean;
+
+    /**
+     * @description Returns whether the browser is Internet Explorer
+     * @return {Boolean}
+     */
+    function isIE(): boolean;
+
+    /**
+     * @description Returns whether the iOS version is 7 or above
+     * @return {Boolean}
+     */
+    function isIOS7above(): boolean;
+    /**
+     *
+     */
+    function isEdge(): boolean;
+  }
 
   /**
    * @description Default page loader that load page template
@@ -705,171 +865,6 @@ declare namespace ons {
 
 }
 
-interface OnsPlatformObject {
-  /**
-   * @param  {string} platform Name of the platform. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
-   * @description Sets the platform used to render the elements. Useful for testing.
-   */
-  select(platform: string): void;
-  /**
-   * @description Returns whether app is running in Cordova
-   * @return {Boolean}
-   */
-  isWebView(): boolean;
-
-  /**
-   * @description Returns whether the OS is iOS
-   * @return {Boolean}
-   */
-  isIOS(): boolean;
-
-  /**
-   * @description Returns whether the OS is Android
-   * @return {Boolean}
-   */
-  isAndroid(): boolean;
-
-  /**
-   * @description Returns whether the device is iPhone
-   * @return {Boolean}
-   */
-  isIPhone(): boolean;
-
-  /**
-   * @description Returns whether the device is iPad
-   * @return {Boolean}
-   */
-  isIPad(): boolean;
-
-  /**
-   * @description Returns whether the device is BlackBerry
-   * @return {Boolean}
-   */
-  isBlackBerry(): boolean;
-
-  /**
-   * @description Returns whether the browser is Opera
-   * @return {Boolean}
-   */
-  isOpera(): boolean;
-
-  /**
-   * @description Returns whether the browser is Firefox
-   * @return {Boolean}
-   */
-  isFirefox(): boolean;
-
-  /**
-   * @description Returns whether the browser is Safari
-   * @return {Boolean}
-   */
-  isSafari(): boolean;
-
-  /**
-   * @description Returns whether the browser is Chrome
-   * @return {Boolean}
-   */
-  isChrome(): boolean;
-
-  /**
-   * @description Returns whether the browser is Internet Explorer
-   * @return {Boolean}
-   */
-  isIE(): boolean;
-
-  /**
-   * @description Returns whether the iOS version is 7 or above
-   * @return {Boolean}
-   */
-  isIOS7above(): boolean;
-  /**
-   *
-   */
-  isEdge(): boolean;
-}
-
-interface OnsOrientationObject {
-  /**
-   * @description Add an event listener.
-   */
-  on(eventName: string, listener: Function): void;
-  /**
-   * @description Add an event listener that's only triggered once.
-   */
-  once(eventName: string, listener: Function): void;
-  /**
-   * @description Remove an event listener. If the listener is not specified all listeners for the event type will be removed.
-   */
-  off(eventName: string, listener?: Function): void;
-  /**
-   * @return {Boolean} Will be true if the current orientation is portrait mode
-   * @description Returns whether the current screen orientation is portrait or not
-   */
-  isPortrait(): boolean;
-  /**
-   * @return {Boolean} Will be true if the current orientation is landscape mode
-   * @description Returns whether the current screen orientation is landscape or not
-   */
-  isLandscape(): boolean;
-}
-
-interface OnsNotificationObject {
-  /**
-   * @param {Object} options Parameter object
-   * @param {String} [options.message] Alert message
-   * @param {String} [options.messageHTML] Alert message in HTML
-   * @param {String} [options.buttonLabel] Label for confirmation button. Default is "OK"
-   * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
-   * @param {String} [options.title] Dialog title. Default is "Alert"
-   * @param {String} [options.modifier] Modifier for the dialog
-   * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
-   * @param {Function} [options.callback] Function that executes after dialog has been closed
-   * @description
-   *   Display an alert dialog to show the user a message
-   *   The content of the message can be either simple text or HTML
-   *   Must specify either message or messageHTML
-   */
-  alert(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
-  /**
-   * @param {Object} options Parameter object
-   * @param {String} [options.message] Confirmation question
-   * @param {String} [options.messageHTML] Dialog content in HTML
-   * @param {Array} [options.buttonLabels] Labels for the buttons. Default is ["Cancel", "OK"]
-   * @param {Number} [options.primaryButtonIndex] Index of primary button. Default is 1
-   * @param {Boolean} [options.cancelable] Whether the dialog is cancelable or not. Default is false
-   * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
-   * @param {String} [options.title] Dialog title. Default is "Confirm"
-   * @param {String} [options.modifier] Modifier for the dialog
-   * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
-   * @param {Function} [options.callback]
-   *   Function that executes after the dialog has been closed
-   *   Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled
-   * @description
-   *   Display a dialog to ask the user for confirmation
-   *   The default button labels are "Cancel" and "OK" but they can be customized
-   *   Must specify either message or messageHTML
-   */
-  confirm(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
-  /**
-   * @param {Object} options Parameter object
-   * @param {String} [options.message] Prompt question
-   * @param {String} [options.messageHTML] Dialog content in HTML
-   * @param {String} [options.buttonLabel] Label for confirmation button. Default is "OK"
-   * @param {Number} [options.primaryButtonIndex] Index of primary button. Default is 1
-   * @param {Boolean} [options.cancelable] Whether the dialog is cancelable or not. Default is false
-   * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
-   * @param {String} [options.title] Dialog title. Default is "Alert"
-   * @param {String} [options.modifier] Modifier for the dialog
-   * @param {String} [options.id] The `<ons-alert-dialog>` element's ID.
-   * @param {Function} [options.callback]
-   *   Function that executes after the dialog has been closed
-   *   Argument for the function is the value of the input field or null if the dialog was canceled
-   * @description
-   *   Display a dialog with a prompt to ask the user a question
-   *   Must specify either message or messageHTML
-   */
-  prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
-}
 
 interface onsOptions {
   parentScope?: Object;
