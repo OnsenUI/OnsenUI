@@ -63,10 +63,13 @@ declare namespace ons {
    * @description Enable animations (default).
    */
   function enableAnimations(): void;
+  function disableAutoStyling(): void;
+  function enableAutoStyling(): void;
   /**
    * @description Refresh styling for the given platform.
    */
   function forcePlatformStyling(platform: string): void;
+  function createElement(...args: any[]): any;
   /**
    * @description Create a popover instance from a template.
    * @return Promise object that resolves to the popover component object.
@@ -82,6 +85,7 @@ declare namespace ons {
    * @return Promise object that resolves to the alert dialog component object.
    */
   function createAlertDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
+  function openActionSheet(...args: any[]): any;
   /**
    * @description If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.
    */
@@ -145,6 +149,7 @@ declare namespace ons {
      *   Must specify either message or messageHTML
      */
     function prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    function toast(...args: any[]): any;
   }
   /**
    * @description Utility methods for orientation detection
@@ -199,6 +204,10 @@ declare namespace ons {
      * @return {Boolean}
      */
     function isAndroid(): boolean;
+
+    function isAndroidPhone(): boolean;
+
+    function isAndroidTablet(): boolean;
 
     /**
      * @description Returns whether the device is iPhone
@@ -273,6 +282,40 @@ declare namespace ons {
     load(options: {page: any, parent: Element, params?: Object}, done: Function): void;
   }
 
+  var GestureDetector: any;
+
+  interface OnsActionSheetElement extends HTMLElement {
+    show(...args: any[]): any;
+    hide(...args: any[]): any;
+    onDeviceBackButton: any;
+    visible: any;
+    disabled: any;
+    cancelable: any;
+  }
+
+  interface OnsSelectElement extends HTMLElement {
+    length: any;
+    options: any;
+    selectedIndex: any;
+    value: any;
+  }
+
+  interface OnsTemplateElement extends HTMLElement {
+    template: any;
+  }
+
+  interface OnsToastElement extends HTMLElement {
+    show(...args: any[]): any;
+    toggle(...args: any[]): any;
+    hide(...args: any[]): any;
+    onDeviceBackButton: any;
+    visible: any;
+  }
+
+  interface OnsToolbarButtonElement extends HTMLElement {
+    disabled: any;
+  }
+
   /**
    * @description Should be used as root component of each page. The content inside page component is scrollable
    */
@@ -285,6 +328,7 @@ declare namespace ons {
      * @description Back-button handler.
      */
     backButtonHandler: any;
+    onDeviceBackButton: any;
     /**
      * @description User's custom data passed to `pushPage()`-like methods.
      */
@@ -418,6 +462,8 @@ declare namespace ons {
       * @description A boolean value that specifies whether the dialog is cancelable or not. When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
       */
     cancelable: boolean;
+    visible: any;
+    onDeviceBackButton: any;
   }
 
   /**
@@ -447,6 +493,7 @@ declare namespace ons {
      * @description Destroy the dialog and remove it from the DOM tree
      */
     destroy(): void;
+    visible: any;
     /**
       * @description A boolean value that specifies whether the dialog is disabled or not.
       */
@@ -473,6 +520,7 @@ declare namespace ons {
      * @description The underlying checkbox element.
      */
     checkbox: HTMLElement;
+    value: any;
   }
 
   /**
@@ -544,6 +592,7 @@ declare namespace ons {
      * @description Insert the specified page into the page stack with specified index
      */
     insertPage(index: number, page: any, options?: navigatorOptions): Promise<HTMLElement>;
+    removePage(...args: any[]): any;
     /**
      * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
      * @param {Object} [options] Parameter object
@@ -559,6 +608,9 @@ declare namespace ons {
      */
     bringPageTop(item: any, options?: Object): Promise<HTMLElement>;
 
+    pageLoader: any;
+    page: any;
+    onDeviceBackButton: any;
     /**
      * @return {HTMLElement}
      * @description Current top page element. Use this method to access options passed by `pushPage()`-like methods.
@@ -603,6 +655,7 @@ declare namespace ons {
      * @description Returns tab index on current active tab. If active tab is not found, returns -1
      */
     getActiveTabIndex(): number;
+    visible: any;
   }
 
   /**
@@ -644,6 +697,7 @@ declare namespace ons {
      * @description Page element loaded in the splitter side.
      */
     page: string;
+    pageLoader: any;
     /**
      * @description Current mode. Possible values are "split", "collapse", "closed", "open" or "changing".
      */
@@ -759,6 +813,8 @@ declare namespace ons {
      */
     page: string;
 
+    pageLoader: any;
+
     /**
      * @description Show the page specified in pageUrl in the right section. Returns: Resolves to the new page element
      * @param {*} page
@@ -777,6 +833,7 @@ declare namespace ons {
      * @description Right `<ons-splitter-side>` element.
      */
     right: HTMLElement;
+    side: any;
     /**
      * @description The `<ons-splitter-content>` element.
      */
@@ -792,6 +849,7 @@ declare namespace ons {
      * @Options Options object.
      */
     options?: BackButtonOptions;
+    onClick: any;
   }
 
   interface OnsProgressBarElement extends HTMLElement {
@@ -841,6 +899,7 @@ declare namespace ons {
      * @description Hide the speed dial items.
      */
     hideItems(): void;
+    isOpen(): any;
     /**
      * @description Toggle visibility.
      */
