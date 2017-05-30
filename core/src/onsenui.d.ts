@@ -74,17 +74,17 @@ declare namespace ons {
    * @description Create a popover instance from a template.
    * @return Promise object that resolves to the popover component object.
    */
-  function createPopover(page: string, options?: onsOptions): Promise<HTMLElement>;
+  function createPopover(page: string, options?: OnsOptions): Promise<HTMLElement>;
   /**
    * @description Create a dialog instance from a template.
    * @return Promise object that resolves to the dialog component object.
    */
-  function createDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
+  function createDialog(page: string, options?: OnsOptions): Promise<HTMLElement>;
   /**
    * @description Create a alert dialog instance from a template.
    * @return Promise object that resolves to the alert dialog component object.
    */
-  function createAlertDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
+  function createAlertDialog(page: string, options?: OnsOptions): Promise<HTMLElement>;
   function openActionSheet(...args: any[]): any;
   /**
    * @description If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.
@@ -109,7 +109,7 @@ declare namespace ons {
      *   The content of the message can be either simple text or HTML
      *   Must specify either message or messageHTML
      */
-    function alert(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    function alert(message: string | AlertOptions, options?: AlertOptions): Promise<HTMLElement>;
     /**
      * @param {Object} options Parameter object
      * @param {String} [options.message] Confirmation question
@@ -129,7 +129,7 @@ declare namespace ons {
      *   The default button labels are "Cancel" and "OK" but they can be customized
      *   Must specify either message or messageHTML
      */
-    function confirm(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    function confirm(message: string | AlertOptions, options?: AlertOptions): Promise<HTMLElement>;
     /**
      * @param {Object} options Parameter object
      * @param {String} [options.message] Prompt question
@@ -148,7 +148,7 @@ declare namespace ons {
      *   Display a dialog with a prompt to ask the user a question
      *   Must specify either message or messageHTML
      */
-    function prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
+    function prompt(message: string | AlertOptions, options?: AlertOptions): Promise<HTMLElement>;
     function toast(...args: any[]): any;
   }
   /**
@@ -446,14 +446,14 @@ declare namespace ons {
      * @param {Function} [options.callback] Function to execute after the dialog has been revealed
      * @description Show the alert dialog
      */
-    show(options?: dialogOptions): Promise<HTMLElement>;
+    show(options?: DialogOptions): Promise<HTMLElement>;
     /**
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "fade", "slide" and "none"
      * @param {Function} [options.callback] Function to execute after the dialog has been hidden
      * @description Hide the alert dialog
      */
-    hide(options?: dialogOptions): Promise<HTMLElement>;
+    hide(options?: DialogOptions): Promise<HTMLElement>;
     /**
       * @description A boolean value that specifies whether the dialog is disabled or not.
       */
@@ -481,14 +481,14 @@ declare namespace ons {
      * @param {Function} [options.callback] This function is called after the dialog has been revealed
      * @description Show the dialog
      */
-    show(options?: dialogOptions): Promise<HTMLElement>;
+    show(options?: DialogOptions): Promise<HTMLElement>;
     /**
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "none", "fade" and "slide"
      * @param {Function} [options.callback] This functions is called after the dialog has been hidden
      * @description Hide the dialog
      */
-    hide(options?: dialogOptions): Promise<HTMLElement>;
+    hide(options?: DialogOptions): Promise<HTMLElement>;
     /**
      * @description Destroy the dialog and remove it from the DOM tree
      */
@@ -569,7 +569,7 @@ declare namespace ons {
      * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
      * @description Pops the current page from the page stack. The previous page will be displayed
      */
-    popPage(options?: navigatorOptions): Promise<HTMLElement>;
+    popPage(options?: NavigatorOptions): Promise<HTMLElement>;
     /**
      * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
      * @param {Object} [options] Parameter object
@@ -591,7 +591,7 @@ declare namespace ons {
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
      * @description Insert the specified page into the page stack with specified index
      */
-    insertPage(index: number, page: any, options?: navigatorOptions): Promise<HTMLElement>;
+    insertPage(index: number, page: any, options?: NavigatorOptions): Promise<HTMLElement>;
     removePage(...args: any[]): any;
     /**
      * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
@@ -600,7 +600,7 @@ declare namespace ons {
      * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
      * @description Clears page stack and adds the specified pageUrl to the page stack
      */
-    resetToPage(page: any, options?: navigatorOptions): Promise<HTMLElement>;
+    resetToPage(page: any, options?: NavigatorOptions): Promise<HTMLElement>;
     /**
      * @param {any} item
      * @param {Object} [options]
@@ -623,7 +623,7 @@ declare namespace ons {
     /**
      * @description Default options object. Attributes have priority over this property.
      */
-    options: navigatorOptions;
+    options: NavigatorOptions;
 
   }
 
@@ -636,7 +636,7 @@ declare namespace ons {
      * @return Resolves to the new page element.
      * @description Displays a new page without changing the active index
      */
-    loadPage(page: any, options?: tabbarOptions): Promise<HTMLElement>;
+    loadPage(page: any, options?: TabbarOptions): Promise<HTMLElement>;
     /**
      * @param {Number} index Tab index
      * @param {Object} [options] Parameter object
@@ -645,7 +645,7 @@ declare namespace ons {
      * @return Resolves to the new page element.
      * @description Show specified tab page. Animations and other options can be specified by the second parameter
      */
-    setActiveTab(index: number, options?: tabbarOptions): Promise<HTMLElement>;
+    setActiveTab(index: number, options?: TabbarOptions): Promise<HTMLElement>;
     /**
      * @description Used to hide or show the tab bar.
      */
@@ -670,14 +670,14 @@ declare namespace ons {
      * @return Resolves to the displayed element
      * @description Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element
      */
-    show(target: any, options?: popoverOptions): Promise<HTMLElement>;
+    show(target: any, options?: PopoverOptions): Promise<HTMLElement>;
     /**
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "fade" and "none"
      * @return Resolves to the hidden element
      * @description Close the popover
      */
-    hide(options?: popoverOptions): Promise<HTMLElement>;
+    hide(options?: PopoverOptions): Promise<HTMLElement>;
     /**
      * @description Whether the dialog is visible or not.
      */
@@ -925,11 +925,11 @@ declare namespace ons {
 }
 
 
-interface onsOptions {
+interface OnsOptions {
   parentScope?: Object;
 }
 
-interface alertOptions {
+interface AlertOptions {
   message?: string;
   messageHTML?: string;
   buttonLabel?: string;
@@ -949,7 +949,7 @@ interface CarouselOptions{
   animationOptions?: Object;
 }
 
-interface dialogOptions {
+interface DialogOptions {
   animation?: string;
   callback?: Function;
 }
@@ -965,7 +965,7 @@ interface ModalOptions {
   animationOptions?: string;
 }
 
-interface navigatorOptions {
+interface NavigatorOptions {
    /**
    * @description Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`. These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
    */
@@ -1006,7 +1006,7 @@ interface ReplacePageOptions {
   }
 }
 
-interface tabbarOptions {
+interface TabbarOptions {
   /**
    * @description If true the page will not be changed.
    */
@@ -1025,7 +1025,7 @@ interface tabbarOptions {
   callback?: Function;
 }
 
-interface popoverOptions {
+interface PopoverOptions {
   animation?: string;
 }
 
