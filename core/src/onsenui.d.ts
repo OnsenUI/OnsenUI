@@ -14,6 +14,106 @@ export as namespace ons;
  */
 export = ons;
 
+/**
+ * @description A global object that's used in Onsen UI. This object can be reached from the AngularJS scope
+ */
+declare namespace ons {
+
+  /**
+   * @return {Boolean} Will be true if Onsen UI is initialized
+   * @description Returns true if Onsen UI is initialized
+   */
+  function isReady(): boolean;
+  /**
+   * @return {Boolean} Will be true if the app is running in Cordova
+   * @description Returns true if running inside Cordova
+   */
+  function isWebView(): boolean;
+  /**
+   * @description Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized
+   * @param {Function} callback Function that executes after Onsen UI has been initialized
+   */
+  function ready(callback: any): void;
+  /**
+   * @param {Function} listener Function that executes when device back button is pressed
+   * @description Set default handler for device back button
+   */
+  function setDefaultDeviceBackButtonListener(listener: (eventObject: any) => any): void;
+  /**
+   * @description Disable device back button event handler
+   */
+  function disableDeviceBackButtonHandler(): void;
+  /**
+   * @description Enable device back button event handler
+   */
+  function enableDeviceBackButtonHandler(): void;
+  /**
+   * @description Enable status bar fill feature on iOS7 and above
+   */
+  function enableAutoStatusBarFill(): void;
+  /**
+   * @description Disable status bar fill feature on iOS7 and above
+   */
+  function disableAutoStatusBarFill(): void;
+  /**
+   * @description Disable all animations. Could be handy for testing and older devices.
+   */
+  function disableAnimations(): void;
+  /**
+   * @description Enable animations (default).
+   */
+  function enableAnimations(): void;
+  /**
+   * @description Refresh styling for the given platform.
+   */
+  function forcePlatformStyling(platform: string): void;
+  /**
+   * @description Create a popover instance from a template.
+   * @return Promise object that resolves to the popover component object.
+   */
+  function createPopover(page: string, options?: onsOptions): Promise<HTMLElement>;
+  /**
+   * @description Create a dialog instance from a template.
+   * @return Promise object that resolves to the dialog component object.
+   */
+  function createDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
+  /**
+   * @description Create a alert dialog instance from a template.
+   * @return Promise object that resolves to the alert dialog component object.
+   */
+  function createAlertDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
+  /**
+   * @description If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.
+   */
+  function resolveLoadingPlaceholder(page: string): void;
+  /**
+   * @description Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt
+   */
+  var notification: OnsNotificationObject;
+  /**
+   * @description Utility methods for orientation detection
+   */
+  var orientation: OnsOrientationObject;
+  /**
+   * @description Utility methods to detect current platform
+   */
+  var platform: OnsPlatformObject;
+
+  /**
+   * @description Default page loader that load page template
+   */
+  var defaultPageLoader: PageLoader;
+
+  /**
+   * @description PageLoader class constructor
+   */
+  class PageLoader {
+    constructor(...args: any[]);
+    internalLoader: Function;
+    load(options: {page: any, parent: Element, params?: Object}, done: Function): void;
+  }
+}
+
 interface onsOptions {
   parentScope?: Object;
 }
@@ -196,107 +296,6 @@ interface OnsNotificationObject {
    *   Must specify either message or messageHTML
    */
   prompt(message: string | alertOptions, options?: alertOptions): Promise<HTMLElement>;
-}
-
-
-/**
- * @description A global object that's used in Onsen UI. This object can be reached from the AngularJS scope
- */
-declare namespace ons {
-
-  /**
-   * @return {Boolean} Will be true if Onsen UI is initialized
-   * @description Returns true if Onsen UI is initialized
-   */
-  function isReady(): boolean;
-  /**
-   * @return {Boolean} Will be true if the app is running in Cordova
-   * @description Returns true if running inside Cordova
-   */
-  function isWebView(): boolean;
-  /**
-   * @description Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized
-   * @param {Function} callback Function that executes after Onsen UI has been initialized
-   */
-  function ready(callback: any): void;
-  /**
-   * @param {Function} listener Function that executes when device back button is pressed
-   * @description Set default handler for device back button
-   */
-  function setDefaultDeviceBackButtonListener(listener: (eventObject: any) => any): void;
-  /**
-   * @description Disable device back button event handler
-   */
-  function disableDeviceBackButtonHandler(): void;
-  /**
-   * @description Enable device back button event handler
-   */
-  function enableDeviceBackButtonHandler(): void;
-  /**
-   * @description Enable status bar fill feature on iOS7 and above
-   */
-  function enableAutoStatusBarFill(): void;
-  /**
-   * @description Disable status bar fill feature on iOS7 and above
-   */
-  function disableAutoStatusBarFill(): void;
-  /**
-   * @description Disable all animations. Could be handy for testing and older devices.
-   */
-  function disableAnimations(): void;
-  /**
-   * @description Enable animations (default).
-   */
-  function enableAnimations(): void;
-  /**
-   * @description Refresh styling for the given platform.
-   */
-  function forcePlatformStyling(platform: string): void;
-  /**
-   * @description Create a popover instance from a template.
-   * @return Promise object that resolves to the popover component object.
-   */
-  function createPopover(page: string, options?: onsOptions): Promise<HTMLElement>;
-  /**
-   * @description Create a dialog instance from a template.
-   * @return Promise object that resolves to the dialog component object.
-   */
-  function createDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
-  /**
-   * @description Create a alert dialog instance from a template.
-   * @return Promise object that resolves to the alert dialog component object.
-   */
-  function createAlertDialog(page: string, options?: onsOptions): Promise<HTMLElement>;
-  /**
-   * @description If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.
-   */
-  function resolveLoadingPlaceholder(page: string): void;
-  /**
-   * @description Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt
-   */
-  var notification: OnsNotificationObject;
-  /**
-   * @description Utility methods for orientation detection
-   */
-  var orientation: OnsOrientationObject;
-  /**
-   * @description Utility methods to detect current platform
-   */
-  var platform: OnsPlatformObject;
-
-  /**
-   * @description Default page loader that load page template
-   */
-  var defaultPageLoader: PageLoader;
-
-  /**
-   * @description PageLoader class constructor
-   */
-  class PageLoader {
-    constructor(...args: any[]);
-    internalLoader: Function;
-    load(options: {page: any, parent: Element, params?: Object}, done: Function): void;
-  }
 }
 
 /**
