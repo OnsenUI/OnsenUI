@@ -5,7 +5,10 @@ import {
   Toolbar,
   ToolbarButton,
   BackButton,
-  Input
+  Input,
+  Checkbox,
+  Radio,
+  SearchInput
 } from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
@@ -52,12 +55,12 @@ export default class extends React.Component {
         <p>
         Please enter a text
         </p>
-          <Input disabled={false} value={this.state.text} float onChange={(event) => {
-            this.setState({text: event.target.value})} } modifier='material' placeholder='Username'></Input>
+          <Input disabled={false} value={this.state.text} float onChange={event => this.setState({text: event.target.value}) } modifier='material' placeholder='Username'></Input>
 
-          <input value={this.state.text} onChange={(event) => {
-            this.setState({text: event.target.value});
-          }} />
+          <input value={this.state.text} onChange={event => this.setState({text: event.target.value})} />
+
+          <SearchInput disabled={false} value={this.state.text} onChange={event => this.setState({text: event.target.value}) } modifier='material' placeholder='Search' />
+
           <div> Text : {this.state.text} </div>
 
         <h2>Checkboxes</h2>
@@ -71,8 +74,7 @@ export default class extends React.Component {
                 checked={this.state.selected.indexOf(idx) >= 0}
               />
 
-              <Input
-                type='checkbox'
+              <Checkbox
                 onChange={this.handleCheckbox.bind(this, idx)}
                 checked={this.state.selected.indexOf(idx) >= 0}
               />
@@ -92,8 +94,7 @@ export default class extends React.Component {
                 checked={idx === this.state.selected2}
               />
 
-              <Input
-                type='radio'
+              <Radio
                 onChange={this.handleRadio.bind(this, idx)}
                 checked={idx === this.state.selected2}
               />
