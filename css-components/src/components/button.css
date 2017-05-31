@@ -12,6 +12,9 @@
   --button-large-line-height: 36px;
   --button-active-opacity: 0.2;
   --button-border-radius: 3px;
+  --material-button-disabled-background-color: rgba(79, 79, 79, 0.26);
+  --material-button-disabled-color: rgba(0, 0, 0, 0.26);
+  --material-flat-button-active-background-color: rgba(153, 153, 153, 0.2);
 
   --button--quiet: {
     background: transparent;
@@ -360,12 +363,13 @@
 
 .button--material {
   @apply(--button--material);
+  opacity: 1;
 }
 
 .button--material:active {
   @apply(--material-shadow-3);
   background-color: var(--material-button-background-color);
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .button--material:focus {
@@ -374,8 +378,10 @@
 
 .button--material:disabled,
 .button--material[disabled] {
-  opacity: 0.5;
   @apply(--material-shadow-0);
+  background-color: var(--material-button-disabled-background-color);
+  color: var(--material-button-disabled-color);
+  opacity: 1;
 }
 
 /*~
@@ -394,15 +400,6 @@
   color: var(--material-button-background-color);
 }
 
-.button--material--flat:active {
-  @apply(--material-shadow-0);
-  background-color: transparent;
-  color: var(--material-button-background-color);
-  outline: 0;
-  opacity: 1;
-  border: none;
-}
-
 .button--material--flat:focus {
   @apply(--material-shadow-0);
   background-color: transparent;
@@ -412,8 +409,19 @@
   border: none;
 }
 
+.button--material--flat:active {
+  @apply(--material-shadow-0);
+  outline: 0;
+  opacity: 1;
+  border: none;
+  background-color: var(--material-flat-button-active-background-color);
+  color: var(--material-button-background-color);
+}
+
 .button--material--flat:disabled,
 .button--material--flat[disabled] {
-  opacity: 0.5;
+  opacity: 1;
   @apply(--material-shadow-0);
+  background-color: transparent;
+  color: var(--material-button-disabled-color);
 }

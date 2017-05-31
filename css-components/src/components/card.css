@@ -51,6 +51,7 @@
       </div>
     </div>
 */
+
 .card__title {
   @apply(--reset-font);
   font-weight: 400;
