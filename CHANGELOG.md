@@ -7,12 +7,12 @@ dev
 
 ### New Features
 
-* css-components: Added "--material" modifier on "notification" CSS components.
+* css-components: Added `--material` modifier on `notification` CSS components.
 
 ### Bug Fixes
 
 * ons-page: Fixed iOS status-bar-fill not added in initially opened modals ([#1944](https://github.com/OnsenUI/OnsenUI/issues/1944)).
-* ons-splitter: Fixed 'reveal' animation glitch.
+* ons-splitter: Fixed `reveal` animation glitch.
 * ons-modal: Fixed [#1943](https://github.com/OnsenUI/OnsenUI/issues/1943).
 * ons-action-sheet: Fixed glitch when hiding on iOS.
 * ons-list-item: Fixed [#2029](https://github.com/OnsenUI/OnsenUI/issues/2029).
