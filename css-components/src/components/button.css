@@ -69,7 +69,6 @@
     min-height: 36px;
     line-height: 36px;
     padding: 0 16px;
-    transition: box-shadow 0.2s ease;
     text-align: center;
     font-size: 14px;
     transform: translate3d(0, 0, 0);
@@ -77,6 +76,7 @@
     background-color: var(--material-button-background-color);
     color: var(--material-button-text-color);
     font-weight: 500;
+    transition: all 0.25s linear;
   }
 }
 
@@ -370,6 +370,7 @@
   @apply(--material-shadow-3);
   background-color: var(--material-button-background-color);
   opacity: 0.9;
+  transition: all 0.25s linear;
 }
 
 .button--material:focus {
@@ -378,6 +379,7 @@
 
 .button--material:disabled,
 .button--material[disabled] {
+  transition: none;
   @apply(--material-shadow-0);
   background-color: var(--material-button-disabled-background-color);
   color: var(--material-button-disabled-color);
@@ -416,10 +418,12 @@
   border: none;
   background-color: var(--material-flat-button-active-background-color);
   color: var(--material-button-background-color);
+  transition: all 0.25s linear;
 }
 
 .button--material--flat:disabled,
 .button--material--flat[disabled] {
+  transition: none;
   opacity: 1;
   @apply(--material-shadow-0);
   background-color: transparent;
