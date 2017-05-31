@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "1.2.0",
+  "version": "1.3.4",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "scripts": {
     "build": "npm run lint && webpack --config webpack.prod.config.js",
@@ -14,20 +14,8 @@
   },
   "main": "dist/react-onsenui.js",
   "files": [
-    "yarn.lock",
     "dist/react-onsenui.*",
-    "src",
-    "test",
-    "scripts",
-    "docs",
-    ".eslintrc.json",
-    "webpack.prod.config.js",
-    "webpack.dev.config.js",
-    "karma.conf.js",
-    "tests.webpack.js",
-    "docgen.js",
-    "circle.yml",
-    "index.html"
+    "src"
   ],
   "repository": {
     "type": "git",
@@ -76,7 +64,6 @@
     "karma-webpack": "^2.0.3",
     "mocha": "^3.1.2",
     "prompt": "^1.0.0",
-    "prop-types": "^15.5.6",
     "react": "^15.5.3",
     "react-docgen": "^2.13.0",
     "react-dom": "^15.5.3",
@@ -85,11 +72,15 @@
     "redux": "^3.6.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2",
+    "webpack": "^2.6.1",
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
+    "onsenui": "~2.3.0",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   }
 }

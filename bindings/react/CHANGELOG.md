@@ -2,13 +2,52 @@
 CHANGELOG
 ====
 
-dev
+v1.3.4
 ----
-* input: Added initial date value support.
+
+### Bug Fixes
+
+ * Removed unresolved `require` in `react-onsenui.js` caused by `webpack.definePlugin`. Fixed [#2034](https://github.com/OnsenUI/OnsenUI/issues/2034).
+
+v1.3.3
+----
+
+### Bug Fixes
+
+ * Updated `prop-types` to fix [facebook/prop-types#38](https://github.com/facebook/prop-types/issues/38).
+
+v1.3.2
+----
+
+### Misc
+
+ * Remove `module` property from `package.json` temporarily.
+
+v1.3.1
+----
+
+### Bug Fixes
+
+* card: Use `PropTypes` in `prop-types` instead of `React.PropTypes`.
+
+v1.3.0
+----
+
+### New Features
+
 * action-sheet: Added new component.
-* toast: Implemented Toast component.
+* toast: Added new component.
 * card: Added new component.
 * list-title: Added new component.
+* `react-onsenui` is now available as ES Modules.
+
+### Bug Fixes
+
+* input: Added initial date value support.
+
+### Misc
+
+* Added `onsenui@~2.3.0` into `peerDependencies`.
 * Build `react-onsenui.js` with webpack 2 instead of Rollup.
 
 v1.2.0

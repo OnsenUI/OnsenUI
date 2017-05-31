@@ -4,6 +4,28 @@ CHANGELOG
 dev
 ----
 
+### Bug Fixes
+
+* VOnsModel: Arrays are now replaced instead of mutated.
+* VOnsNavigator: Fixed auto scroll top issue when popping pages.
+
+2.0.0-beta.7
+----
+
+### New Features
+
+* VOnsModel: Supports object literal syntax `v-ons-model="{ container: myArray, key: myIndex }"`. This is useful inside `v-for` loops.
+
+2.0.0-beta.6
+----
+
+### Bug Fixes
+
+* Updated `onsenui` in `peerDependencies` to `~2.3.0`.
+
+2.0.0-beta.5
+----
+
 ### New features
 
 * VOnsCard: New component.

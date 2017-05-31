@@ -204,7 +204,7 @@ export default class PageElement extends BaseElement {
 
   _tryToFillStatusBar(){
     internal.autoStatusBarFill(() => {
-      const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'));
+      const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'), e => !e.nodeName.match(/ons-modal/i));
       util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageControlChild()));
     });
   }
@@ -270,6 +270,14 @@ export default class PageElement extends BaseElement {
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
+  get scrollTop() {
+    return this._contentElement.scrollTop;
+  }
+
+  set scrollTop(newValue) {
+    this._contentElement.scrollTop = newValue;
+  }
+
   /**
    * @return {HTMLElement}
    */
@@ -310,7 +318,6 @@ export default class PageElement extends BaseElement {
   _getBottomToolbarElement() {
     return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
   }
-
 
   /**
    * @return {HTMLElement}

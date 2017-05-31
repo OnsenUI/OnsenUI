@@ -1,7 +1,28 @@
 /* Private */
+const _isLiteral = e => e.trim().charAt(0) === '{';
+const _validateLiteral = o => {
+  if (!Object.hasOwnProperty.call(o, 'container')
+   || !Object.hasOwnProperty.call(o, 'key')
+  ) {
+    throw Error(`Object literals in VOnsModel must include 'key' and 'container' properties.`);
+  }
+}
 
-const _getModel = (modelPath, context, newValue) => {
-  const path = modelPath.trim().split('.');
+const _getModel = (binding, context, newValue) => {
+  const expression = (binding.expression || '').trim();
+
+  // Object literal
+  if (_isLiteral(expression)) {
+    _validateLiteral(binding.value);
+
+    if (newValue !== undefined && binding.value.container[binding.value.key] !== newValue) {
+      context.$set(binding.value.container, binding.value.key, newValue); // Setter
+    }
+
+    return binding.value.container[binding.value.key]; // Getter
+  }
+
+  const path = expression.split('.');
   const lastKey = path.pop();
 
   let key, model = context;
@@ -10,10 +31,10 @@ const _getModel = (modelPath, context, newValue) => {
   }
 
   if (newValue !== undefined && model[lastKey] !== newValue) {
-    model[lastKey] = newValue; // Setter
+    context.$set(model, lastKey, newValue); // Setter
   }
 
-  return model[lastKey]; // Getter
+  return model[lastKey] || binding.value; // Getter
 };
 
 const _setModel = _getModel;
@@ -28,50 +49,60 @@ const _formatOutput = (modifiers = {}, output) => {
   return output;
 };
 
-const _bindOn = (eventName, modelKey, vnode, handler) => {
-  if (vnode.context.hasOwnProperty(modelKey.split('.')[0])) {
+const _bindOn = (eventName, binding, vnode, handler) => {
+  const expression = (binding.expression || '').trim();
+  if (_isLiteral(expression) || vnode.context.hasOwnProperty(expression.split('.')[0])) {
     vnode.child.$on(eventName, handler);
   }
 };
 
-const _bindSimpleInputOn = (eventName, modelKey, vnode, propName) => {
-  _bindOn(eventName, modelKey, vnode, event => {
-    _setModel(modelKey, vnode.context, event.target[propName]);
+const _bindSimpleInputOn = (eventName, binding, vnode, propName) => {
+  _bindOn(eventName, binding, vnode, event => {
+    _setModel(binding, vnode.context, event.target[propName]);
   });
 };
 
-const _bindModifierInputOn = (eventName, modelKey, vnode, modifiers) => {
-  _bindOn(eventName, modelKey, vnode, event => {
-    _setModel(modelKey, vnode.context, _formatOutput(modifiers, event.target.value));
+const _bindModifierInputOn = (eventName, binding, vnode) => {
+  _bindOn(eventName, binding, vnode, event => {
+    _setModel(binding, vnode.context, _formatOutput(binding.modifiers, event.target.value));
   });
 };
 
-const _bindArrayInputOn = (eventName, modelKey, vnode) => {
-  _bindOn(eventName, modelKey, vnode, event => {
-    const modelValue = _getModel(modelKey, vnode.context);
-    if (modelValue.indexOf(event.target.value) >= 0) {
-      !event.target.checked && modelValue.splice(modelValue.indexOf(event.target.value), 1);
+const _bindArrayInputOn = (eventName, binding, vnode) => {
+  _bindOn(eventName, binding, vnode, event => {
+    let modelValue = _getModel(binding, vnode.context);
+    const index = modelValue.indexOf(event.target.value);
+
+    if (index >= 0) {
+      !event.target.checked && _setModel(binding, vnode.context, [
+        ...modelValue.slice(0, index),
+        ...modelValue.slice(index + 1, modelValue.length)
+      ]);
     } else {
-      event.target.checked && modelValue.push(event.target.value);
+      event.target.checked && _setModel(binding, vnode.context, [ ...modelValue, event.target.value ]);
     }
+
+    modelValue = null;
   });
 };
 
-const _bindCheckbox = (el, binding, vnode, modelKey) => {
-  if (binding.value instanceof Array) {
-    el.checked = binding.value.indexOf(el.value) >= 0;
-    _bindArrayInputOn('change', modelKey, vnode);
+const _bindCheckbox = (el, binding, vnode) => {
+  const value = _getModel(binding, vnode.context);
+  if (value instanceof Array) {
+    el.checked = value.indexOf(el.value) >= 0;
+    _bindArrayInputOn('change', binding, vnode);
   } else {
-    el.checked = !!binding.value;
-    _bindSimpleInputOn('change', modelKey, vnode, 'checked');
+    el.checked = !!value;
+    _bindSimpleInputOn('change', binding, vnode, 'checked');
   }
 };
 
-const _updateCheckbox = (el, binding, vnode, modelKey) => {
-  if (binding.value instanceof Array) {
-    el.checked = (_getModel(modelKey, vnode.context) || []).indexOf(el.value) >= 0;
+const _updateCheckbox = (el, binding, vnode) => {
+  const value = _getModel(binding, vnode.context);
+  if (value instanceof Array) {
+    el.checked = value.indexOf(el.value) >= 0;
   } else {
-    el.checked = !!binding.value;
+    el.checked = !!value;
   }
 };
 
@@ -81,38 +112,38 @@ const _updateCheckbox = (el, binding, vnode, modelKey) => {
 // VOnsModel directive
 export default {
   bind(el, binding, vnode) {
-    const modelKey = binding.expression.trim();
     const tag = el.tagName.toLowerCase();
+    const value = _getModel(binding, vnode.context);
 
     switch (tag) {
       case 'ons-select':
-        el.querySelector('option[value=' + binding.value + ']').setAttribute('selected', '');
-        _bindSimpleInputOn('change', modelKey, vnode, 'value');
+        el.querySelector('option[value=' + value + ']').setAttribute('selected', '');
+        _bindSimpleInputOn('change', binding, vnode, 'value');
         break;
 
       case 'ons-switch':
-        _bindCheckbox(el, binding, vnode, modelKey);
+        _bindCheckbox(el, binding, vnode);
         break;
 
       case 'ons-range':
-        el.value = binding.value;
-        _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', modelKey, vnode, binding.modifiers);
+        el.value = value;
+        _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', binding, vnode);
         break;
 
       case 'ons-input':
         switch (el.type) {
           case 'radio':
-            el.checked = el.value === binding.value;
-            _bindSimpleInputOn('change', modelKey, vnode, 'value');
+            el.checked = el.value === value;
+            _bindSimpleInputOn('change', binding, vnode, 'value');
             break;
 
           case 'checkbox':
-            _bindCheckbox(el, binding, vnode, modelKey);
+            _bindCheckbox(el, binding, vnode);
             break;
 
           default:
-            el.value = binding.value;
-            _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', modelKey, vnode, binding.modifiers);
+            el.value = value;
+            _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', binding, vnode);
         }
         break;
 
@@ -131,34 +162,34 @@ export default {
    * component using this directive is updated.
    */
   update(el, binding, vnode) {
-    const modelKey = binding.expression.trim();
     const tag = el.tagName.toLowerCase();
+    const value = _getModel(binding, vnode.context);
 
     switch (tag) {
       case 'ons-select':
-        el.value = binding.value;
+        el.value = value;
         break;
 
       case 'ons-switch':
-        _updateCheckbox(el, binding, vnode, modelKey);
+        _updateCheckbox(el, binding, vnode);
         break;
 
       case 'ons-range':
-        el.value = binding.value;
+        el.value = value;
         break;
 
       case 'ons-input':
         switch (el.type) {
           case 'radio':
-            el.checked = _getModel(modelKey, vnode.context) === el.value;
+            el.checked = value === el.value;
             break;
 
           case 'checkbox':
-            _updateCheckbox(el, binding, vnode, modelKey);
+            _updateCheckbox(el, binding, vnode);
             break;
 
           default:
-            el.value !== binding.value && (el.value = binding.value);
+            el.value !== value && (el.value = value);
         }
         break;
     }

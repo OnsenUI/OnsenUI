@@ -52,7 +52,7 @@ const _animatorDict = {
  *   [en]
  *     The Toast or Snackbar component is useful for displaying dismissable information or simple actions at (normally) the bottom of the page.
  *
- *     This component does not block user input, allowing the app to continue its flow. Furthermore, it can be automatically hidden after a timeout.
+ *     This component does not block user input, allowing the app to continue its flow. For simple toasts, consider `ons.notification.toast` instead.
  *   [/en]
  *   [ja][/ja]
  * @guide dialogs
@@ -181,9 +181,6 @@ export default class ToastElement extends BaseDialogElement {
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Number} [options.timeout]
-   *   [en]The element will be hidden after this value (miliseconds). Falsy values desactivate it.[/en]
-   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are `"default"`, `"ascend"` (Android), `"lift"` (iOS), `"fall"`, `"fade"` or `"none"`.[/en]
    *   [ja][/ja]

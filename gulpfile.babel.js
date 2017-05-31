@@ -65,7 +65,7 @@ gulp.task('browser-sync', () => {
 ////////////////////////////////////////
 // core
 ////////////////////////////////////////
-gulp.task('core', ['eslint'], function(done) {
+gulp.task('core', function(done) {
   try {
     webpack(
       { // webpack2 config
@@ -236,10 +236,10 @@ gulp.task('unit-test',
     //     gulp unit-test --separately --specs "core/src/**/*.spec.js"
     //
     //     # run unit tests in a particular browser
-    //     gulp unit-test --browsers local_chrome
-    //     gulp unit-test --browsers local_chrome,local_safari # you can use commas
+    //     gulp unit-test --browsers local_chrome_headless
+    //     gulp unit-test --browsers local_chrome_headless,local_safari # you can use commas
     //     gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
-    //     gulp unit-test --browsers local_chrome,remote_macos_elcapitan_safari_10 # default
+    //     gulp unit-test --browsers local_chrome_headless,remote_macos_elcapitan_safari_10 # default
     //
     //     # run unit tests without Onsen UI warnings
     //     gulp unit-test --disable-warnings
@@ -249,7 +249,7 @@ gulp.task('unit-test',
 
     (async () => {
       const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
-      const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome', 'remote_macos_elcapitan_safari_10'];
+      const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_elcapitan_safari_10'];
 
       let listOfSpecFiles;
       if (argv.separately) { // resolve glob pattern
@@ -488,7 +488,11 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // ES Modules (raw ES source codes)
-    gulp.src('core/src/**/*')
+    gulp.src([
+      'core/src/**/*',
+      '!core/src/onsenui-test.*',
+      '!core/src/**/*.spec.js',
+    ])
       .pipe(gulp.dest('build/core-src/')),
 
     // angular.js copy

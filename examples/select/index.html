@@ -18,7 +18,7 @@
     }
     function addOption(event) {
       const option = document.createElement('option');
-      let text = document.getElementById('optionLabel').value;
+      const text = document.getElementById('optionLabel').value;
       option.innerText = text;
       document.getElementById('dynamic-sel').appendChild(option);
     }

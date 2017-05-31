@@ -9,11 +9,11 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <style>
-    ons-splitter-side[side="left"] {
+    ons-splitter-side[side="left"]:not([animation=reveal]) {
       border-right: 1px solid #ddd;
     }
 
-    ons-splitter-side[side="right"] {
+    ons-splitter-side[side="right"]:not([animation=reveal]) {
       border-left: 1px solid #ddd;
     }
   </style>
@@ -44,7 +44,7 @@
 <body>
 
   <ons-splitter>
-    <ons-splitter-side side="left" width="200px" collapse swipeable>
+    <ons-splitter-side side="left" width="200px" collapse="portrait" swipeable>
       <ons-page>
         <ons-toolbar>
           <div class="center">content</div>

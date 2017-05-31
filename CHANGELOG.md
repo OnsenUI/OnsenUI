@@ -2,6 +2,25 @@
 CHANGELOG
 ====
 
+v2.3.2
+----
+
+### New Features
+
+* css-components: Added `--material` modifier on `notification` CSS components.
+
+### Bug Fixes
+
+* ons-page: Fixed iOS status-bar-fill not added in initially opened modals ([#1944](https://github.com/OnsenUI/OnsenUI/issues/1944)).
+* ons-splitter: Fixed `reveal` animation glitch.
+* ons-action-sheet: Fixed glitch when hiding on iOS.
+
+### Misc
+
+ * css-components: Refined the appearance of `select`. Fixed [#2017](https://github.com/OnsenUI/OnsenUI/issues/2017).
+ * css-components: Refined the appearance of `range` on iOS.
+ * core: Excluded test cases from `onsenui` package.
+
 v2.3.1
 ----
 
@@ -44,7 +63,7 @@ v2.3.0
  * ons-splitter: Fixed `animation` attribute issue.
  * angular1: Page loader now throws `destroy` event when page is unloaded.
  * angular1: `myNavigator.topPage.data` should now be ready by the time the controller runs. Fixed [#1854](https://github.com/OnsenUI/OnsenUI/issues/1854).
- 
+
 ### Misc
 
  * core: Removed polyfill for `Element.prototype.remove`.
