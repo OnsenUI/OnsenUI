@@ -1,5 +1,4 @@
 import * as components from './components';
-import * as directives from './directives';
 import { hyphenate } from './internal/util';
 
 import ons from 'onsenui';
@@ -17,11 +16,6 @@ const install = (Vue, params = {}) => {
    * Register components of vue-onsenui.
    */
   register(Vue, 'component', components);
-
-  /**
-   * Register directives of vue-onsenui.
-   */
-  register(Vue, 'directive', directives);
 
   /**
    * Apply a mixin globally to prevent ons-* elements
