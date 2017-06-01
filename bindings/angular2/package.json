@@ -13,27 +13,13 @@
   "main": "dist/src/angular2-onsenui.js",
   "typings": "dist/src/angular2-onsenui.d.ts",
   "files": [
-    "yarn.lock",
     "dist/bundles/angular2-onsenui.umd.*",
     "dist/bundles/angular2-onsenui.umd.min.*",
     "dist/src/angular2-onsenui.*",
     "dist/src/angular2-onsenui.ngfactory.*",
     "dist/src/angular2-onsenui.metadata.json",
-    "dist/src/polyfills.*",
-    "dist/src/vendor.*",
     "dist/src/directives",
-    "dist/src/ons",
-    "src/**/*.ts",
-    "src/**/*.ngfactory.ts",
-    "src/**/*.ngsummary.json",
-    "typings",
-    "umd-template",
-    "gulpfile.babel.js",
-    "webpack-dev.config.js",
-    "webpack-umd-bundle.config.js",
-    "tsconfig.json",
-    "typings.json",
-    "protractor-conf.js"
+    "dist/src/ons"
   ],
   "licenses": [
     {

@@ -13,6 +13,7 @@ dev
 ### Misc
 
  * Removed `onsenui.d.ts`. Please use the type definition file in `onsenui` package instead.
+ * Removed unnecessary files.
  * Removed unnecessary peer dependency `@angular/common`.
  * Removed unnecessary peer dependency `@angular/compiler`.
  * Removed unnecessary peer dependency `@angular/compiler-cli`.
