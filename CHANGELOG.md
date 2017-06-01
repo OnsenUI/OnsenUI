@@ -2,25 +2,23 @@
 CHANGELOG
 ====
 
-dev
+v2.3.2
 ----
 
 ### New Features
 
-* css-components: Added "--material" modifier on "notification" CSS components.
+* css-components: Added `--material` modifier on `notification` CSS components.
 
 ### Bug Fixes
 
-* ons-splitter: Fixed 'reveal' animation glitch.
+* ons-page: Fixed iOS status-bar-fill not added in initially opened modals ([#1944](https://github.com/OnsenUI/OnsenUI/issues/1944)).
+* ons-splitter: Fixed `reveal` animation glitch.
 * ons-action-sheet: Fixed glitch when hiding on iOS.
-* ons-select: Fixed [#2017](https://github.com/OnsenUI/OnsenUI/issues/2017).
-* ons-list-item: Fixed [#2029](https://github.com/OnsenUI/OnsenUI/issues/2029).
-* ons-modal: Fixed [#1943](https://github.com/OnsenUI/OnsenUI/issues/1943).
 
 ### Misc
 
- * css-components: Refined the appearance of `select`.
- * css-components: Refined the appearance of `range`.
+ * css-components: Refined the appearance of `select`. Fixed [#2017](https://github.com/OnsenUI/OnsenUI/issues/2017).
+ * css-components: Refined the appearance of `range` on iOS.
  * core: Excluded test cases from `onsenui` package.
 
 v2.3.1
