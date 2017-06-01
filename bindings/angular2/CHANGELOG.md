@@ -13,6 +13,14 @@ dev
 ### Misc
 
  * Removed `onsenui.d.ts`. Please use the type definition file in `onsenui` package instead.
+ * Removed unnecessary peer dependency `@angular/common`.
+ * Removed unnecessary peer dependency `@angular/compiler`.
+ * Removed unnecessary peer dependency `@angular/compiler-cli`.
+ * Removed unnecessary peer dependency `@angular/platform-browser`.
+ * Removed unnecessary peer dependency `@angular/platform-browser-dynamic`.
+ * Removed unnecessary peer dependency `rxjs`.
+ * Removed unnecessary peer dependency `zone.js`.
+ * Removed unnecessary peer dependency `core-js`.
 
 ### BREAKING CHANGES
 
