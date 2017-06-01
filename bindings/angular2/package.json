@@ -1,50 +1,20 @@
 {
-  "name": "ngx-onsenui",
-  "version": "1.0.0-rc.6",
-  "private": false,
-  "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
+  "name": "ngx-onsenui-dev",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "typings-install": "typings install",
-    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js && ngc -p tsconfig.json",
+    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js && ngc -p tsconfig.json && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
     "prepublish": "npm run build-dist",
     "start": "gulp serve",
     "test": "gulp test"
   },
-  "main": "dist/src/angular2-onsenui.js",
-  "typings": "dist/src/angular2-onsenui.d.ts",
-  "files": [
-    "dist/bundles/angular2-onsenui.umd.*",
-    "dist/bundles/angular2-onsenui.umd.min.*",
-    "dist/src/angular2-onsenui.*",
-    "dist/src/angular2-onsenui.ngfactory.*",
-    "dist/src/angular2-onsenui.metadata.json",
-    "dist/src/directives",
-    "dist/src/ons"
-  ],
   "licenses": [
     {
       "type": "Apache-2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
-  "keywords": [
-    "phonegap",
-    "cordova",
-    "components",
-    "angular2",
-    "hybrid",
-    "app",
-    "ui",
-    "mobile",
-    "onsen",
-    "onsenui"
-  ],
-  "homepage": "https://onsen.io/angular2/",
-  "peerDependencies": {
-    "@angular/core": "^4.0.0",
-    "onsenui": "~2.3.0"
-  },
   "devDependencies": {
     "@angular/common": "^2.4.1",
     "@angular/compiler": "^2.4.1",

@@ -1,0 +1,41 @@
+{
+  "name": "ngx-onsenui",
+  "version": "1.0.0-rc.7.dev",
+  "private": false,
+  "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
+  "main": "src/angular2-onsenui.js",
+  "typings": "src/angular2-onsenui.d.ts",
+  "files": [
+    "bundles/angular2-onsenui.umd.*",
+    "bundles/angular2-onsenui.umd.min.*",
+    "src/angular2-onsenui.*",
+    "src/angular2-onsenui.ngfactory.*",
+    "src/angular2-onsenui.metadata.json",
+    "src/directives",
+    "src/ons"
+  ],
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
+  "keywords": [
+    "phonegap",
+    "cordova",
+    "components",
+    "angular2",
+    "hybrid",
+    "app",
+    "ui",
+    "mobile",
+    "onsen",
+    "onsenui"
+  ],
+  "homepage": "https://onsen.io/angular2/",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "onsenui": "~2.3.0"
+  }
+}
