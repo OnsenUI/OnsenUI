@@ -14,7 +14,9 @@ dev
 
  * Removed `onsenui.d.ts`. Please use the type definition file in `onsenui` package instead.
 
-### PEER-DEPENDENCY UPDATES
+### BREAKING CHANGES
+
+ * Changed package name from `angular2-onsenui` to `ngx-onsenui`.
 
 1.0.0-rc.6 (2017-03-14)
 ----
