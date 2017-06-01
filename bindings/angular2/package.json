@@ -56,16 +56,8 @@
   ],
   "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
-    "@angular/common": "^2.4.1",
-    "@angular/compiler": "^2.4.1",
-    "@angular/compiler-cli": "^2.4.1",
     "@angular/core": "^2.4.1",
-    "@angular/platform-browser": "^2.4.1",
-    "@angular/platform-browser-dynamic": "^2.4.1",
-    "core-js": "^2.4.0",
-    "onsenui": "2.2.x",
-    "rxjs": "^5.0.1",
-    "zone.js": "^0.7.2"
+    "onsenui": "2.2.x"
   },
   "devDependencies": {
     "@angular/common": "^2.4.1",
