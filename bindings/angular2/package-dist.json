@@ -3,7 +3,7 @@
   "version": "1.0.0-rc.7.dev",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
-  "main": "src/ngx-onsenui.js",
+  "main": "bundles/ngx-onsenui.umd.js",
   "typings": "src/ngx-onsenui.d.ts",
   "files": [
     "bundles/ngx-onsenui.umd.*",
