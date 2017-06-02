@@ -2,7 +2,7 @@
 System.config({
   map: {
     // Set correct url
-    'angular2-onsenui': '../dist/bundles/angular2-onsenui.umd.js',
+    'ngx-onsenui': '../dist/bundles/ngx-onsenui.umd.js',
     '@angular/core': 'https://unpkg.com/@angular/core@2.0.0/bundles/core.umd.js',
     '@angular/compiler': 'https://unpkg.com/@angular/compiler@2.0.0/bundles/compiler.umd.js',
     '@angular/common': 'https://unpkg.com/@angular/common@2.0.0/bundles/common.umd.js',
@@ -13,7 +13,7 @@ System.config({
     'app': './app.ts'
   },
   packages: {
-    'angular2-onsenui': {
+    'ngx-onsenui': {
       format: 'cjs'
     },
     'core-js': {

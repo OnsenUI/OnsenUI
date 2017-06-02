@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js && ngc -p tsconfig.json && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
+    "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/ngx-onsenui.umd.min.js --source-map dist/bundles/ngx-onsenui.umd.min.js.map -- dist/bundles/ngx-onsenui.umd.js && ngc -p tsconfig.json && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
     "prepublish": "npm run build-dist",
     "start": "gulp serve",
     "test": "gulp test"

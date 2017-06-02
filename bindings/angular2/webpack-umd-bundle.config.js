@@ -6,13 +6,13 @@ var nodeExternals = require('webpack-node-externals');
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
 
 module.exports = {
-  entry: './dist/src/angular2-onsenui.js',
+  entry: './dist/src/ngx-onsenui.js',
   output: {
     library: 'Angular2-OnsenUI',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     path: path.resolve(__dirname, './dist/bundles'),
-    filename: 'angular2-onsenui.umd.js'
+    filename: 'ngx-onsenui.umd.js'
   },
   externals: [
     {

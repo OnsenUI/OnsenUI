@@ -14,7 +14,7 @@ var webpackConfig = {
 
     result['polyfills'] = ['./src/polyfills.ts'];
     result['vendor'] = ['./src/vendor.ts'];
-    result['angular2-onsenui'] = ['./src/angular2-onsenui.ts'];
+    result['ngx-onsenui'] = ['./src/ngx-onsenui.ts'];
 
     return result;
   })(),
