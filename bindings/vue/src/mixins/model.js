@@ -11,7 +11,10 @@ const modelInput = {
   model,
   props: {
     [model.prop]: [Number, String],
-    modelLazy: Boolean
+    [model.event]: {
+      type: String,
+      default: 'input'
+    }
   },
 
   methods: {
@@ -33,10 +36,10 @@ const modelInput = {
 
   mounted() {
     this._updateValue();
-    this.$el.addEventListener(this.modelLazy ? 'change' : 'input', this._onModelEvent);
+    this.$el.addEventListener(this[model.event], this._onModelEvent);
   },
   beforeDestroy() {
-    this.$el.removeEventListener(this.modelLazy ? 'change' : 'input', this._onModelEvent);
+    this.$el.removeEventListener(this[model.event], this._onModelEvent);
   }
 };
 
@@ -45,12 +48,10 @@ const modelCheckbox = {
   mixins: [modelInput],
 
   props: {
-    [model.prop]: [Array, Boolean]
-  },
-
-  data() {
-    return {
-      modelLazy: true
+    [model.prop]: [Array, Boolean],
+    [model.event]: {
+      type: String,
+      default: 'change'
     }
   },
 
@@ -96,10 +97,10 @@ const modelCheckbox = {
 // Radio input
 const modelRadio = {
   mixins: [modelInput],
-
-  data() {
-    return {
-      modelLazy: true
+  props: {
+    [model.event]: {
+      type: String,
+      default: 'change'
     }
   },
 
