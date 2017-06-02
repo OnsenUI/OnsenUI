@@ -11,9 +11,9 @@ var webpackConfig = {
       var key = path.basename(target, '.ts') + '-example';
       result[key] = target;
     });
+    result['polyfills'] = ['./examples/polyfills/index.ts'];
+    result['vendor'] = ['./examples/vendor/index.ts'];
 
-    result['polyfills'] = ['./src/polyfills.ts'];
-    result['vendor'] = ['./src/vendor.ts'];
     result['ngx-onsenui'] = ['./src/ngx-onsenui.ts'];
 
     return result;
