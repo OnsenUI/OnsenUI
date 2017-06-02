@@ -7,7 +7,7 @@
     "build-dist:clean": "echo \"Cleaning dist dir...\\n\" && rm -rf dist/*",
     "build-dist:src": "echo \"Transpiling TypeScript files...\\n\" && tsc && tsc -d",
     "build-dist:aot": "echo \"Creating files for AoT compilation...\\n\" && ngc -p tsconfig.json",
-    "build-dist:bundles": "echo \"Creating UMD bundles...\\n\" && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/ngx-onsenui.umd.min.js --source-map dist/bundles/ngx-onsenui.umd.min.js.map -- dist/bundles/ngx-onsenui.umd.js",
+    "build-dist:bundles": "echo \"Creating UMD bundles...\\n\" && webpack --config webpack.dist.config.js && uglifyjs --compress --output dist/bundles/ngx-onsenui.umd.min.js --source-map dist/bundles/ngx-onsenui.umd.min.js.map -- dist/bundles/ngx-onsenui.umd.js",
     "build-dist:package": "echo \"Preparing npm package metadata...\\n\" && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
     "prepublish": "npm run build-dist",
     "start": "gulp serve",
