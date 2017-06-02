@@ -3,6 +3,7 @@
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -16,8 +17,7 @@
     }
   },
   "include": [
-    "src",
-    "typings"
+    "src"
   ],
   "compileOnSave": false,
   "buildOnSave": false

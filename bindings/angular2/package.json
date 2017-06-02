@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "typings-install": "typings install",
     "build-dist": "rm -rf dist/* && tsc && tsc -d && webpack --config webpack-umd-bundle.config.js && uglifyjs --compress --output dist/bundles/angular2-onsenui.umd.min.js --source-map dist/bundles/angular2-onsenui.umd.min.js.map -- dist/bundles/angular2-onsenui.umd.js && ngc -p tsconfig.json && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
     "prepublish": "npm run build-dist",
     "start": "gulp serve",
@@ -27,8 +26,6 @@
     "chromedriver": "^2.29.0",
     "core-js": "^2.4.1",
     "cp": "^0.2.0",
-    "es6-promise": "3.0.2",
-    "es6-shim": "0.35.0",
     "gulp-shell": "^0.5.2",
     "open": "0.0.5",
     "protractor": "^3.3.0",
@@ -37,7 +34,6 @@
     "source-map-loader": "^0.2.1",
     "static-server": "^2.0.3",
     "typescript": "^2.3.4",
-    "typings": "^1.2.0",
     "uglify-js": "^2.7.3",
     "webdriver-manager": "^10.0.1",
     "webpack": "^1.12.9",
@@ -51,5 +47,8 @@
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "@types/core-js": "^0.9.41"
   }
 }
