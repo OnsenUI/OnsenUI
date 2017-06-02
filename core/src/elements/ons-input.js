@@ -68,13 +68,15 @@ export default class InputElement extends BaseInputElement {
   constructor() {
     super();
 
-    contentReady(this, () => {
-      this._updateLabel();
-      this._updateLabelClass();
-    });
+    this._boundOnInput = this._update.bind(this);
+    this._boundOnFocusin = this._update.bind(this);
+  }
 
-    this._boundOnInput = this._onInput.bind(this);
-    this._boundOnFocusin = this._onFocusin.bind(this);
+  /* Inherited props */
+
+  _update() {
+    this._updateLabel();
+    this._updateLabelClass();
   }
 
   get _scheme() {
@@ -88,13 +90,33 @@ export default class InputElement extends BaseInputElement {
     `;
   }
 
-  get _helper() {
-    return this.querySelector('span');
-  }
-
   get type() {
     const type = this.getAttribute('type');
     return (['checkbox', 'radio'].indexOf(type) < 0) && type || 'text';
+  }
+
+  /* Own props */
+
+  _updateLabel() {
+    const label = this.getAttribute('placeholder') || '';
+
+    if (typeof this._helper.textContent !== 'undefined') {
+      this._helper.textContent = label;
+    } else {
+      this._helper.innerText = label;
+    }
+  }
+
+  _updateLabelClass() {
+    if (this.value === '') {
+      this._helper.classList.remove('text-input--material__label--active');
+    } else {
+      this._helper.classList.add('text-input--material__label--active');
+    }
+  }
+
+  get _helper() {
+    return this.querySelector('span');
   }
 
   connectedCallback() {
@@ -115,43 +137,12 @@ export default class InputElement extends BaseInputElement {
     });
   }
 
-  _setLabel(value) {
-    if (typeof this._helper.textContent !== 'undefined') {
-      this._helper.textContent = value;
-    } else {
-      this._helper.innerText = value;
-    }
-  }
-
-  _updateLabel() {
-    this._setLabel(this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : '');
-  }
-
-  _updateLabelClass() {
-    if (this.value === '') {
-      this._helper.classList.remove('text-input--material__label--active');
-    } else {
-      this._helper.classList.add('text-input--material__label--active');
-    }
-  }
-
-  _onInput(event) {
-    this._updateLabelClass();
-  }
-
-  _onFocusin(event) {
-    this._updateLabelClass();
-  }
-
   static get observedAttributes() {
-    return [...super.observedAttributes, 'placeholder', 'type'];
+    return [...super.observedAttributes, 'type'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
-      case 'placeholder':
-        contentReady(this, () => this._updateLabel());
-        break;
       case 'type':
         contentReady(this, () => this._input.setAttribute('type', this.type));
         break;

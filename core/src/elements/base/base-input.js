@@ -40,6 +40,8 @@ const INPUT_ATTRIBUTES = [
 
 export default class BaseInputElement extends BaseElement {
 
+  _update() {} // Optionally implemented
+
   get _scheme() {
     throw new Error('_scheme getter must be implemented.');
   }
@@ -61,6 +63,7 @@ export default class BaseInputElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
+    this._defaultElementClass && this.classList.add(this._defaultElementClass);
 
     if (this.children.length !== 0) {
       return;
@@ -74,53 +77,16 @@ export default class BaseInputElement extends BaseElement {
     ModifierUtil.initModifier(this, this._scheme);
   }
 
-  _setInputId() {
-    if (this.hasAttribute('input-id')) {
-      this._input.id = this.getAttribute('input-id');
-    }
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'input-id', ...INPUT_ATTRIBUTES];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'modifier':
-        contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, this._scheme));
-        break;
-      case 'input-id':
-        contentReady(this, () => this._setInputId());
-        break;
-    }
-
-    if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
-      contentReady(this, () => this._updateBoundAttributes());
-    }
-  }
-
-  connectedCallback() {
-    contentReady(this, () => {
-      this._input.addEventListener('focus', this._boundDelegateEvent);
-      this._input.addEventListener('blur', this._boundDelegateEvent);
-    });
-  }
-
-  disconnectedCallback() {
-    contentReady(this, () => {
-      this._input.removeEventListener('focus', this._boundDelegateEvent);
-      this._input.removeEventListener('blur', this._boundDelegateEvent);
-    });
-  }
-
   _updateBoundAttributes() {
-    INPUT_ATTRIBUTES.forEach((attr) => {
+    INPUT_ATTRIBUTES.forEach(attr => {
       if (this.hasAttribute(attr)) {
         this._input.setAttribute(attr, this.getAttribute(attr));
       } else {
         this._input.removeAttribute(attr);
       }
     });
+
+    this._update();
   }
 
   _delegateEvent(event) {
@@ -130,6 +96,16 @@ export default class BaseInputElement extends BaseElement {
     });
 
     return this.dispatchEvent(e);
+  }
+
+  _setInputId() {
+    if (this.hasAttribute('input-id')) {
+      this._input.id = this.getAttribute('input-id');
+    }
+  }
+
+  get _defaultElementClass() {
+    return '';
   }
 
   get _input() {
@@ -148,7 +124,7 @@ export default class BaseInputElement extends BaseElement {
         val = val.toISOString().substring(0, 10);
       }
       this._input.value = val;
-      this._onInput && this._onInput();
+      this._update();
     });
   }
 
@@ -158,6 +134,44 @@ export default class BaseInputElement extends BaseElement {
 
   get disabled() {
     return this.hasAttribute('disabled');
+  }
+
+  connectedCallback() {
+    contentReady(this, () => {
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
+    });
+  }
+
+  disconnectedCallback() {
+    contentReady(this, () => {
+      this._input.removeEventListener('focus', this._boundDelegateEvent);
+      this._input.removeEventListener('blur', this._boundDelegateEvent);
+    });
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'input-id', 'class', ...INPUT_ATTRIBUTES];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'modifier':
+        contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, this._scheme));
+        break;
+      case 'input-id':
+        contentReady(this, () => this._setInputId());
+        break;
+      case 'class':
+        if (this._defaultElementClass && !this.classList.contains(this._defaultElementClass)) {
+          this.className = this._defaultElementClass + ' ' + current;
+        }
+        break;
+    }
+
+    if (INPUT_ATTRIBUTES.indexOf(name) >= 0) {
+      contentReady(this, () => this._updateBoundAttributes());
+    }
   }
 
   static get events() {

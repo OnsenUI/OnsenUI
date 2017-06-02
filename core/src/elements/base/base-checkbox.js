@@ -16,18 +16,15 @@ import contentReady from '../../ons/content-ready';
 
 export default class BaseCheckboxElement extends BaseInputElement {
 
-  get _defaultElementClass() {
-    throw new Error('_defaultElementClass getter must be implemented.');
-  }
-
   constructor() {
     super();
 
     contentReady(this, () => {
-      this.classList.add(this._defaultElementClass);
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
     });
   }
+
+  /* Inherited props */
 
   get _template() {
     return `
@@ -35,6 +32,8 @@ export default class BaseCheckboxElement extends BaseInputElement {
       <span class="${this._defaultElementClass}__checkmark"></span>
     `;
   }
+
+  /* Own props */
 
   get _helper() {
     return this.querySelector('span');
@@ -51,18 +50,13 @@ export default class BaseCheckboxElement extends BaseInputElement {
   }
 
   static get observedAttributes() {
-    return [...super.observedAttributes, 'class', 'checked'];
+    return [...super.observedAttributes, 'checked'];
   }
 
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'checked':
         this.checked = current !== null;
-        break;
-      case 'class':
-        if (!this.classList.contains(this._defaultElementClass)) {
-          this.className = this._defaultElementClass + ' ' + current;
-        }
         break;
       default:
         super.attributeChangedCallback(name, last, current);
