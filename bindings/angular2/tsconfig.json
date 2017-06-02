@@ -15,13 +15,9 @@
       "onsenui": ["../../build"]
     }
   },
-  "exclude": [
-    "typings/main.d.ts",
-    "typings/main",
-    "node_modules",
-    "umd-template",
-    "dist",
-    "examples"
+  "include": [
+    "src",
+    "typings"
   ],
   "compileOnSave": false,
   "buildOnSave": false
