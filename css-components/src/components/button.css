@@ -364,6 +364,11 @@
 .button--material {
   @apply(--button--material);
   opacity: 1;
+  transition: all 0.25s linear;
+}
+
+.button--material:hover {
+  transition: all 0.25s linear;
 }
 
 .button--material:active {
@@ -400,6 +405,11 @@
   @apply(--material-shadow-0);
   background-color: transparent;
   color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:hover {
+  transition: all 0.25s linear;
 }
 
 .button--material--flat:focus {
