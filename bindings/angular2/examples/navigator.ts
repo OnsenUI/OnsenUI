@@ -48,7 +48,7 @@ export class PageComponent {
     <div class="content">
       <div id="message">{{msg}}</div>
       <div style="text-align: center; margin: 10px">
-        <ons-button id="push" (click)="push(navi)">push</ons-button>
+        <ons-button id="push" (click)="push(navi)">push (no animation)</ons-button>
       </div>
     </div>
   `
