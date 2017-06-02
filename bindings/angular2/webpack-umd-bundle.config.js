@@ -8,7 +8,7 @@ const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
 module.exports = {
   entry: './dist/src/ngx-onsenui.js',
   output: {
-    library: 'Angular2-OnsenUI',
+    library: 'NgxOnsenUI',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     path: path.resolve(__dirname, './dist/bundles'),

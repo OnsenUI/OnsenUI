@@ -22,6 +22,7 @@ dev
  * Removed unnecessary peer dependency `rxjs`.
  * Removed unnecessary peer dependency `zone.js`.
  * Removed unnecessary peer dependency `core-js`.
+ * Changed name of the global variable from `Angular2-OnsenUI` to `NgxOnsenUI`.
 
 ### BREAKING CHANGES
 
