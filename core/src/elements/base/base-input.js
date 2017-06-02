@@ -159,8 +159,4 @@ export default class BaseInputElement extends BaseElement {
   get disabled() {
     return this.hasAttribute('disabled');
   }
-
-  static get events() {
-    return ['change', 'input', 'focus', 'focusin', 'focusout', 'blur'];
-  }
 }
