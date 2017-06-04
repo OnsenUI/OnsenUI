@@ -3,7 +3,7 @@ var fs = require('fs');
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
+const pkg = JSON.parse(fs.readFileSync('package-dist.json', 'utf-8' ));
 
 module.exports = {
   entry: './dist/src/ngx-onsenui.js',
