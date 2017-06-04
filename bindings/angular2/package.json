@@ -51,11 +51,6 @@
     "yargs": "^4.7.1",
     "zone.js": "^0.8.11"
   },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
   "dependencies": {
     "@types/core-js": "^0.9.41"
   }
