@@ -6,6 +6,7 @@ dev
 
 ### New Features
 
+ * Added unbundled ES modules written in ES2015.
 
 ### Bug Fixes
 

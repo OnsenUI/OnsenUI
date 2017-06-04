@@ -4,6 +4,7 @@
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "main": "bundles/ngx-onsenui.umd.js",
+  "module": "src/ngx-onsenui.js",
   "typings": "src/ngx-onsenui.d.ts",
   "files": [
     "bundles/ngx-onsenui.umd.*",
