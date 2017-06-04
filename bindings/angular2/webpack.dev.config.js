@@ -1,9 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
-var glob = require('glob');
+const path = require('path')
+const glob = require('glob');
+const webpack = require('webpack')
 
-// Webpack Config
-var webpackConfig = {
+module.exports = {
   entry: (function() {
     var result = {};
 
@@ -14,82 +13,109 @@ var webpackConfig = {
     result['polyfills'] = ['./examples/polyfills/index.ts'];
     result['vendor'] = ['./examples/vendor/index.ts'];
 
-    result['ngx-onsenui'] = ['./src/ngx-onsenui.ts'];
+    //result['ngx-onsenui'] = ['./src/ngx-onsenui.ts'];
 
     return result;
-  })(),
+  })(), // string | object | array
+  // Here the application starts executing
+  // and webpack starts bundling
 
-  externals: {
-    'onsenui': {
-      'root': 'ons',
-      'commonjs': 'onsenui',
-      'commonjs2': 'onsenui',
-      'amd': 'onsenui',
-    },
-  },
 
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/bundles/',
-    libraryTarget: 'umd',
-  },
+    // options related to how webpack emits results
 
-  module: {
-    loaders: [
-      // .ts files for TypeScript
-      {test: /\.ts$/, loader: 'awesome-typescript-loader'}
-    ]
-  }
-};
+    // path: path.resolve(__dirname, '/dist'), // string
+    // the target directory for all output files
+    // must be an absolute path (use the Node.js path module)
 
+    filename: '[name].js', // string
+    // the filename template for entry chunks
 
-// Our Webpack Defaults
-var defaultConfig = {
-  devtool: 'cheap-module-eval-source-map',
-  cache: true,
-  debug: true,
-  output: {
-    filename: '[name].js',
     sourceMapFilename: '[name].map',
-    chunkFilename: '[id].chunk.js'
+
+    chunkFilename: '[id].chunk.js',
+
+    publicPath: '/bundles/', // string
+    // the url to the output directory resolved relative to the HTML page
+
+    // library: 'Ons', // string,
+    // the name of the exported library
+
+    libraryTarget: 'umd', // universal module definition
+    // the type of the exported library
   },
 
   module: {
-    preLoaders: [
+    // configuration regarding modules
+
+    rules: [
+      // rules for modules (configure loaders, parser options, etc.)
+
       {
-        test: /\.js$/,
-        loader: 'source-map-loader',
-        exclude: [
-          // these packages have problems with their sourcemaps
-          path.join(__dirname, 'node_modules', 'rxjs'),
-          path.join(__dirname, 'node_modules', '@angular2-material'),
-        ]
-      }
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader'
+      },
     ],
-    noParse: [
-      path.join(__dirname, 'node_modules', 'zone.js', 'dist'),
-      path.join(__dirname, 'node_modules', 'angular2', 'bundles')
-    ]
   },
 
   resolve: {
-    root: [path.join(__dirname, 'src')],
-    extensions: ['', '.ts', '.js']
+    // options for resolving module requests
+    // (does not apply to resolving to loaders)
+
+    modules: [
+      'node_modules',
+    ],
+    // directories where to look for modules
+
+    extensions: ['.js', '.ts'],
+    // extensions that are used
+
+    alias: {
+      // a list of module name aliases
+
+      'onsenui': path.join(__dirname, '../../build/js/onsenui.js'),
+      // modules aliases are imported relative to the current context
+    }
   },
+
+  devtool: 'cheap-module-eval-source-map', // enum
+  // enhance debugging by adding meta info for the browser devtools
+  // source-map most detailed at the expense of build speed.
 
   devServer: {
-    historyApiFallback: true,
-    watchOptions: {aggregateTimeout: 300, poll: 1000},
-    contentBase: '../..'
+    // proxy: { // proxy URLs to backend development server
+    //   '/api': 'http://localhost:3000'
+    // },
+    contentBase: path.join(__dirname, '../..'), // boolean | string | array, static file location
+    // compress: true, // enable gzip compression
+    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+    // hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    // https: false, // true for self-signed, object for cert authority
+    // noInfo: true, // only errors & warns on hot reload
+    port: 9000,
   },
 
-  node: {
-    global: 1,
-    crypto: 'empty',
-    module: 0,
-    Buffer: 0
-  }
-};
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
+  ],
+  // list of additional plugins
 
-var webpackMerge = require('webpack-merge');
-module.exports = webpackMerge(defaultConfig, webpackConfig);
+  cache: true, // boolean
+  // disable/enable caching
+
+  watch: true, // boolean
+  // enables watching
+
+  watchOptions: {
+    aggregateTimeout: 300, // in ms
+    // aggregates multiple changes to a single rebuild
+
+    poll: true,
+    poll: 1000, // intervall in ms
+    // enables polling mode for watching
+    // must be used on filesystems that doesn't notify on change
+    // i. e. nfs shares
+  },
+};
