@@ -31,10 +31,6 @@ module.exports = {
     filename: '[name].js', // string
     // the filename template for entry chunks
 
-    sourceMapFilename: '[name].map',
-
-    chunkFilename: '[id].chunk.js',
-
     publicPath: '/bundles/', // string
     // the url to the output directory resolved relative to the HTML page
 
@@ -78,7 +74,7 @@ module.exports = {
     }
   },
 
-  devtool: 'cheap-module-eval-source-map', // enum
+  // devtool: 'cheap-module-eval-source-map', // enum
   // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.
 
