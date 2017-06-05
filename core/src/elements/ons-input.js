@@ -126,6 +126,11 @@ export default class InputElement extends BaseInputElement {
       this._input.addEventListener('input', this._boundOnInput);
       this._input.addEventListener('focusin', this._boundOnFocusin);
     });
+
+    const type = this.getAttribute('type');
+    if (['checkbox', 'radio'].indexOf(type) >= 0) {
+      console.warn(`Warn: <ons-input type="${type}"> is deprecated since v2.4.0. Use <ons-${type}> instead.`)
+    }
   }
 
   disconnectedCallback() {
