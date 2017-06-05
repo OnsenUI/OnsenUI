@@ -24,7 +24,7 @@ module.exports = {
   output: {
     // options related to how webpack emits results
 
-    // path: path.resolve(__dirname, '/dist'), // string
+    path: path.resolve(__dirname, 'dev'), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
