@@ -30,16 +30,15 @@
   ],
   "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
   "keywords": [
-    "phonegap",
-    "cordova",
+    "angular",
+    "material",
+    "material design",
     "components",
-    "angular2",
-    "hybrid",
-    "app",
     "ui",
     "mobile",
-    "onsen",
-    "onsenui"
+    "hybrid",
+    "cordova",
+    "phonegap"
   ],
   "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
