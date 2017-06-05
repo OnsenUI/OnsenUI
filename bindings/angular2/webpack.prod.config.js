@@ -91,19 +91,19 @@ module.exports = {
       commonjs: '@angular/core',
       commonjs2: '@angular/core',
       amd: '@angular/core',
-      root: 'ng.core'
+      root: ['ng', 'core']
     },
     '@angular/common': { // UMD
       commonjs: '@angular/common',
       commonjs2: '@angular/common',
       amd: '@angular/common',
-      root: 'ng.common'
+      root: ['ng', 'common']
     },
     '@angular/platform-browser': { // UMD
       commonjs: '@angular/platform-browser',
       commonjs2: '@angular/platform-browser',
       amd: '@angular/platform-browser',
-      root: 'ng.platformBrowser'
+      root: ['ng', 'platformBrowser']
     },
     'onsenui': { // UMD
       commonjs: 'onsenui',
