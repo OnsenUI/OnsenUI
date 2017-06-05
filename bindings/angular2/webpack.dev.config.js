@@ -10,10 +10,6 @@ module.exports = {
       var key = path.basename(target, '.ts') + '-example';
       result[key] = target;
     });
-    result['polyfills'] = ['./examples/polyfills/index.ts'];
-    result['vendor'] = ['./examples/vendor/index.ts'];
-
-    //result['ngx-onsenui'] = ['./src/ngx-onsenui.ts'];
 
     return result;
   })(), // string | object | array
@@ -78,6 +74,52 @@ module.exports = {
   // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.
 
+  externals: {
+    '@angular/core': { // UMD
+      commonjs: '@angular/core',
+      commonjs2: '@angular/core',
+      amd: '@angular/core',
+      root: ['ng', 'core']
+    },
+    '@angular/common': { // UMD
+      commonjs: '@angular/common',
+      commonjs2: '@angular/common',
+      amd: '@angular/common',
+      root: ['ng', 'common']
+    },
+    '@angular/compiler': { // UMD
+      commonjs: '@angular/compiler',
+      commonjs2: '@angular/compiler',
+      amd: '@angular/compiler',
+      root: ['ng', 'compiler']
+    },
+    '@angular/platform-browser': { // UMD
+      commonjs: '@angular/platform-browser',
+      commonjs2: '@angular/platform-browser',
+      amd: '@angular/platform-browser',
+      root: ['ng', 'platformBrowser']
+    },
+    '@angular/platform-browser-dynamic': { // UMD
+      commonjs: '@angular/platform-browser-dynamic',
+      commonjs2: '@angular/platform-browser-dynamic',
+      amd: '@angular/platform-browser-dynamic',
+      root: ['ng', 'platformBrowserDynamic']
+    },
+    '@angular/forms': { // UMD
+      commonjs: '@angular/forms',
+      commonjs2: '@angular/forms',
+      amd: '@angular/forms',
+      root: ['ng', 'forms']
+    },
+    'onsenui': { // UMD
+      commonjs: 'onsenui',
+      commonjs2: 'onsenui',
+      amd: 'onsenui',
+      root: 'ons'
+    },
+  },
+  // Don't follow/bundle these modules, but request them at runtime from the environment
+
   devServer: {
     // proxy: { // proxy URLs to backend development server
     //   '/api': 'http://localhost:3000'
@@ -113,5 +155,11 @@ module.exports = {
     // enables polling mode for watching
     // must be used on filesystems that doesn't notify on change
     // i. e. nfs shares
+  },
+
+  node: {
+      process: false,
+      setImmediate: false,
+      timers: false,
   },
 };
