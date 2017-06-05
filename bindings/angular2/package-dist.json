@@ -9,11 +9,10 @@
   "files": [
     "bundles/ngx-onsenui.umd.*",
     "bundles/ngx-onsenui.umd.min.*",
-    "src/ngx-onsenui.*",
-    "src/ngx-onsenui.ngfactory.*",
-    "src/ngx-onsenui.metadata.json",
-    "src/directives",
-    "src/ons"
+    "src/**/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.js.map",
+    "src/**/*.metadata.json"
   ],
   "licenses": [
     {

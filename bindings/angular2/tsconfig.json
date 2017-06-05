@@ -4,11 +4,13 @@
     "target": "es2015",
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
+    "declaration": true,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false,
+    "stripInternal": true,
+    "skipLibCheck": true,
     "rootDir": ".",
     "outDir": "dist",
     "baseUrl": ".",
@@ -20,5 +22,10 @@
     "src"
   ],
   "compileOnSave": false,
-  "buildOnSave": false
+  "buildOnSave": false,
+  "angularCompilerOptions": {
+    "genDir": "dist",
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit" : true
+  }
 }

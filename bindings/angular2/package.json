@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build-dist": "npm run build-dist:clean && npm run build-dist:src && npm run build-dist:aot && npm run build-dist:bundles && npm run build-dist:package",
+    "build-dist": "npm run build-dist:clean && npm run build-dist:ngc && npm run build-dist:bundles && npm run build-dist:package",
     "build-dist:clean": "echo \"Cleaning dist dir...\\n\" && rm -rf dist/*",
-    "build-dist:src": "echo \"Transpiling TypeScript files...\\n\" && tsc && tsc -d",
-    "build-dist:aot": "echo \"Creating files for AoT compilation...\\n\" && ngc -p tsconfig.json",
+    "build-dist:ngc": "echo \"Transpiling TypeScript files and preparing for AoT compilation...\\n\" && ngc -p tsconfig.json",
     "build-dist:bundles": "echo \"Creating UMD bundles...\\n\" && webpack --config webpack.prod.config.js && uglifyjs --compress --output dist/bundles/ngx-onsenui.umd.min.js --source-map dist/bundles/ngx-onsenui.umd.min.js.map -- dist/bundles/ngx-onsenui.umd.js",
     "build-dist:package": "echo \"Preparing npm package metadata...\\n\" && cp package-dist.json dist/package.json && cp README.md CHANGELOG.md dist",
     "prepublish": "npm run build-dist",
