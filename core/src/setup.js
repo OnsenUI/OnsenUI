@@ -49,6 +49,10 @@ import ToolbarElement from './elements/ons-toolbar';
 import RangeElement from './elements/ons-range';
 import CardElement from './elements/ons-card';
 
+if (window.ons) {
+  ons._util.warn('Onsen UI is loaded more than once.');
+}
+
 ons.TemplateElement = TemplateElement;
 ons.IfElement = IfElement;
 ons.ActionSheetElement = ActionSheetElement;
