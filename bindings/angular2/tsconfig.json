@@ -11,7 +11,7 @@
     "removeComments": false,
     "stripInternal": true,
     "skipLibCheck": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {

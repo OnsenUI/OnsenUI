@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const pkg = JSON.parse(fs.readFileSync('package-dist.json', 'utf-8' ));
 
 module.exports = {
-  entry: './dist/src/ngx-onsenui.js', // string | object | array
+  entry: './dist/ngx-onsenui.js', // string | object | array
   // Here the application starts executing
   // and webpack starts bundling
 
@@ -40,7 +40,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: [
-          path.resolve(__dirname, 'dist/src'),
+          path.resolve(__dirname, 'dist'),
         ],
         exclude: [
           // path.resolve(__dirname, 'app/demo-files')
