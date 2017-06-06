@@ -13,6 +13,13 @@
           >
           </v-ons-input>
         </div>
+        <div class="right">
+          <v-ons-search-input
+            placeholder="Search"
+            v-ons-model="name"
+          >
+          </v-ons-search-input>
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="center">
@@ -67,19 +74,17 @@
       <v-ons-list-header>
         Radio buttons - <button @click="modify('radio')">Modify JS</button>
       </v-ons-list-header>
-      <v-ons-list-item
+      <v-ons-list-item tappable
         v-for="(vegetable, $index) in vegetables"
         :key="vegetable"
-        tappable
       >
         <label class="left">
-          <v-ons-input
-            type="radio"
+          <v-ons-radio
             :input-id="'radio-' + $index"
             :value="vegetable"
             v-ons-model="selectedVegetable"
           >
-          </v-ons-input>
+          </v-ons-radio>
         </label>
         <label :for="'radio-' + $index" class="center">
           {{ vegetable }}
@@ -94,18 +99,17 @@
       <v-ons-list-header>
         Checkboxes - {{checkedColors}} - <button @click="modify('checkbox')">Modify JS</button>
       </v-ons-list-header>
-      <v-ons-list-item
+      <v-ons-list-item tappable
         v-for="(color, $index) in colors"
         :key="color"
       >
         <label class="left">
-          <v-ons-input
-            type="checkbox"
+          <v-ons-checkbox
             :input-id="'checkbox-' + $index"
             :value="color"
             v-ons-model="checkedColors"
           >
-          </v-ons-input>
+          </v-ons-checkbox>
         </label>
         <label class="center" :for="'checkbox-' + $index">
           {{ color }}
@@ -136,7 +140,7 @@
     <v-ons-list-title>Object Literal: {{ vForItems }}</v-ons-list-title>
     <v-ons-list>
       <v-ons-list-item v-for="(item, index) in vForItems" :key="item">
-        <div class="left"><v-ons-input type="checkbox" v-ons-model="{ container: item, key: 'checked' }"></v-ons-input></div>
+        <div class="left"><v-ons-checkbox v-ons-model="{ container: item, key: 'checked' }"></v-ons-checkbox></div>
         <div class="center">Index: #{{ index }}</div>
         <div class="right">{{ item.checked }}</div>
       </v-ons-list-item>

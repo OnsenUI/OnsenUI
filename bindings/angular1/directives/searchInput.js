@@ -1,11 +1,11 @@
 /**
- * @element ons-input
+ * @element ons-search-input
  */
 
 (function(){
   'use strict';
 
-  angular.module('onsen').directive('onsInput', function($parse) {
+  angular.module('onsen').directive('onsSearchInput', function($parse) {
     return {
       restrict: 'E',
       replace: false,

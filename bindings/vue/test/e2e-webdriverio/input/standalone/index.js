@@ -32,8 +32,6 @@ ons.ready(function(){
         <v-ons-input type="number"></v-ons-input> type="number"<br>
         <v-ons-input type="range"></v-ons-input> type="range"<br>
         <v-ons-input type="color"></v-ons-input> type="color"<br>
-        <v-ons-input type="checkbox"></v-ons-input> type="checkbox"<br>
-        <v-ons-input type="radio"></v-ons-input> type="radio"<br>
         <v-ons-input type="file"></v-ons-input> type="file"<br>
         <v-ons-input type="submit"></v-ons-input> type="submit"<br>
         <v-ons-input type="image"></v-ons-input> type="image"<br>
@@ -57,38 +55,11 @@ ons.ready(function(){
         <v-ons-input type="number" value="hoge"></v-ons-input><br>
         <v-ons-input type="range" value="hoge"></v-ons-input><br>
         <v-ons-input type="color" value="hoge"></v-ons-input><br>
-        <v-ons-input type="checkbox" value="hoge"></v-ons-input><br>
-        <v-ons-input type="radio" value="hoge"></v-ons-input><br>
         <v-ons-input type="file" value="hoge"></v-ons-input><br>
         <v-ons-input type="submit" value="hoge"></v-ons-input><br>
         <v-ons-input type="image" value="hoge"></v-ons-input><br>
         <v-ons-input type="reset" value="hoge"></v-ons-input><br>
         <v-ons-input type="button" value="hoge"></v-ons-input><br>
-
-        <h3>content-left</h3>
-        <v-ons-input type="hidden" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="text" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="search" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="tel" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="url" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="email" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="password" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="datetime" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="date" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="month" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="week" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="time" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="datetime-local" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="number" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="range" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="color" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="checkbox" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="radio" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="file" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="submit" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="image" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="reset" content-left>fuga</v-ons-input><br>
-        <v-ons-input type="button" content-left>fuga</v-ons-input><br>
 
         <h3>placeholder</h3>
         <v-ons-input type="hidden" placeholder="piyo"></v-ons-input><br>
@@ -107,8 +78,6 @@ ons.ready(function(){
         <v-ons-input type="number" placeholder="piyo"></v-ons-input><br>
         <v-ons-input type="range" placeholder="piyo"></v-ons-input><br>
         <v-ons-input type="color" placeholder="piyo"></v-ons-input><br>
-        <v-ons-input type="checkbox" placeholder="piyo"></v-ons-input><br>
-        <v-ons-input type="radio" placeholder="piyo"></v-ons-input><br>
         <v-ons-input type="file" placeholder="piyo"></v-ons-input><br>
         <v-ons-input type="submit" placeholder="piyo"></v-ons-input><br>
         <v-ons-input type="image" placeholder="piyo"></v-ons-input><br>
@@ -132,8 +101,6 @@ ons.ready(function(){
         <v-ons-input type="number" placeholder="piyo" float modifier="material"></v-ons-input><br>
         <v-ons-input type="range" placeholder="piyo" float modifier="material"></v-ons-input><br>
         <v-ons-input type="color" placeholder="piyo" float modifier="material"></v-ons-input><br>
-        <v-ons-input type="checkbox" placeholder="piyo" float modifier="material"></v-ons-input><br>
-        <v-ons-input type="radio" placeholder="piyo" float modifier="material"></v-ons-input><br>
         <v-ons-input type="file" placeholder="piyo" float modifier="material"></v-ons-input><br>
         <v-ons-input type="submit" placeholder="piyo" float modifier="material"></v-ons-input><br>
         <v-ons-input type="image" placeholder="piyo" float modifier="material"></v-ons-input><br>
@@ -165,8 +132,6 @@ ons.ready(function(){
         <v-ons-input type="number" v-model="numberValue"></v-ons-input> {{numberValue}}<br>
         <v-ons-input type="range" v-model="rangeValue"></v-ons-input> {{rangeValue}}<br>
         <v-ons-input type="color" v-model="colorValue"></v-ons-input> {{colorValue}}<br>
-        <v-ons-input type="checkbox" v-model="checkboxValue"></v-ons-input> {{checkboxValue}}<br>
-        <v-ons-input type="radio" v-model="radioValue"></v-ons-input> {{radioValue}}<br>
         <!-- Vue.js blocks use of v-model directive in <input type="file"> -->
         <!--<v-ons-input type="file" v-model="fileValue"></v-ons-input> {{fileValue}}<br>-->
         <v-ons-input type="submit" v-model="submitValue"></v-ons-input> {{submitValue}}<br>
@@ -192,8 +157,6 @@ ons.ready(function(){
       numberValue: null,
       rangeValue: null,
       colorValue: '#ffffff', // Suppress warning from <input type="color">
-      checkboxValue: null,
-      radioValue: null,
       fileValue: null,
       submitValue: null,
       imageValue: null,

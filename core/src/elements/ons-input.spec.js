@@ -21,28 +21,6 @@ describe('OnsInputElement', () => {
     expect(window.ons.InputElement).to.be.ok;
   });
 
-  describe('"class" attribute', () => {
-    it('should contain default class token automatically on radio input', () => {
-      const element = ons._util.createElement(`
-        <ons-input type="radio"> </ons-input>
-      `);
-      expect(element.classList.contains('radio-button')).to.be.true;
-      element.setAttribute('class', 'foo');
-      expect(element.classList.contains('radio-button')).to.be.true;
-      expect(element.classList.contains('foo')).to.be.true;
-    });
-
-    it('should contain default class token automatically on checkbox input', () => {
-      const element = ons._util.createElement(`
-        <ons-input type="checkbox"> </ons-input>
-      `);
-      expect(element.classList.contains('checkbox')).to.be.true;
-      element.setAttribute('class', 'foo');
-      expect(element.classList.contains('checkbox')).to.be.true;
-      expect(element.classList.contains('foo')).to.be.true;
-    });
-  });
-
   it('provides \'modifier\' attribute', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element._input.classList.contains('text-input--hoge')).to.be.true;
@@ -86,19 +64,17 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('#_onInput()', () => {
+  describe('#_updateLabelClass()', () => {
     it('is called when the value changes', () => {
-      const spy = chai.spy.on(element, '_onInput');
+      const spy = chai.spy.on(element, '_updateLabelClass');
       element.value = 'abc';
       element.value = '';
       expect(spy).to.have.been.called.twice;
     });
-  });
 
-  describe('#_onFocusin()', () => {
-    it('calls #_updateLabelClass()', () => {
+    it('is called on focusin', () => {
       const spy = chai.spy.on(element, '_updateLabelClass');
-      element._onFocusin();
+      element._boundOnFocusin();
       expect(spy).to.have.been.called.once;
     });
   });
@@ -125,7 +101,7 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('input label', () => {
+  describe('input id', () => {
     it('assigns ID to the inner input element', (done) => {
       const element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
 
@@ -137,51 +113,18 @@ describe('OnsInputElement', () => {
   });
 
   describe('#type attribute', () => {
-    it('creates checkbox', (done) => {
-      const element = ons._util.createElement('<ons-input type="checkbox"></ons-input>');
+    it('ignores checkbox and radio types', () => {
+      element.setAttribute('type', 'checkbox');
+      expect(element._input.type).to.equal('text');
+      element.setAttribute('type', 'radio');
+      expect(element._input.type).to.equal('text');
+    })
 
-      setImmediate(() => {
-        expect(element.className).to.contain('checkbox');
-        expect(element._input.className).to.contain('checkbox__input');
-        expect(element._input.type).to.equal('checkbox');
-        expect(element._helper.className).to.contain('checkbox__checkmark');
-        expect(element.checked).to.be.false;
-        expect(element._input.checked).to.be.false;
-        element.setAttribute('checked', '');
-        expect(element.checked).to.be.true;
-        expect(element._input.checked).to.be.true;
-        element.checked = false;
-        expect(element._input.checked).to.be.false;
-        done();
-      });
-    });
-
-    it('creates radio button', (done) => {
-      let element = ons._util.createElement('<ons-input type="radio"></ons-input>');
-
-      setImmediate(() => {
-        expect(element.className).to.contain('radio-button');
-        expect(element._input.className).to.contain('radio-button__input');
-        expect(element._input.type).to.equal('radio');
-        expect(element._helper.className).to.contain('radio-button__checkmark');
-
-        element = ons._util.createElement('<div><ons-input type="radio" name="radiogroup"></ons-input><ons-input type="radio" name="radiogroup"></ons-input></div>');
-        document.body.appendChild(element);
-
-        setImmediate(() => {
-          const r = element.querySelectorAll('ons-input[type=radio]');
-          expect(r[0].checked).to.be.false;
-          expect(r[1].checked).to.be.false;
-          r[0].checked = true;
-          expect(r[0].checked).to.be.true;
-          expect(r[1].checked).to.be.false;
-          r[1].checked = true;
-          expect(r[0].checked).to.be.false;
-          expect(r[1].checked).to.be.true;
-          element.remove();
-          done();
-        });
-      });
+    it('sets the type to the inner input', () => {
+      element.setAttribute('type', 'password');
+      expect(element._input.type).to.equal('password');
+      element.setAttribute('type', 'text');
+      expect(element._input.type).to.equal('text');
     });
   });
 

@@ -116,35 +116,26 @@ export default {
     const value = _getModel(binding, vnode.context);
 
     switch (tag) {
-      case 'ons-select':
-        el.querySelector('option[value=' + value + ']').setAttribute('selected', '');
+      case 'ons-radio':
+        el.checked = el.value === value;
         _bindSimpleInputOn('change', binding, vnode, 'value');
         break;
 
       case 'ons-switch':
+      case 'ons-checkbox':
         _bindCheckbox(el, binding, vnode);
         break;
 
+      case 'ons-input':
       case 'ons-range':
+      case 'ons-search-input':
         el.value = value;
         _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', binding, vnode);
         break;
 
-      case 'ons-input':
-        switch (el.type) {
-          case 'radio':
-            el.checked = el.value === value;
-            _bindSimpleInputOn('change', binding, vnode, 'value');
-            break;
-
-          case 'checkbox':
-            _bindCheckbox(el, binding, vnode);
-            break;
-
-          default:
-            el.value = value;
-            _bindModifierInputOn(Object.hasOwnProperty.call(binding.modifiers, 'lazy') ? 'change' : 'input', binding, vnode);
-        }
+      case 'ons-select':
+        el.querySelector('option[value=' + value + ']').setAttribute('selected', '');
+        _bindSimpleInputOn('change', binding, vnode, 'value');
         break;
 
       default:
@@ -157,40 +148,29 @@ export default {
    * This hook is called every time the view changes since
    * the directive's value is updated in the event handlers.
    *
-   * Also, only 1 instance of this directive exists. Therefore,
-   * it is called for every component whenever 1 single
-   * component using this directive is updated.
+   * Also, this is called on -every- update, not only when
+   * the corresponding value changes. Therefore, it must
+   * check if the current value has changed manually.
    */
   update(el, binding, vnode) {
     const tag = el.tagName.toLowerCase();
     const value = _getModel(binding, vnode.context);
 
     switch (tag) {
-      case 'ons-select':
-        el.value = value;
+      case 'ons-radio':
+        el.checked = value === el.value;
         break;
 
       case 'ons-switch':
+      case 'ons-checkbox':
         _updateCheckbox(el, binding, vnode);
         break;
 
-      case 'ons-range':
-        el.value = value;
-        break;
-
       case 'ons-input':
-        switch (el.type) {
-          case 'radio':
-            el.checked = value === el.value;
-            break;
-
-          case 'checkbox':
-            _updateCheckbox(el, binding, vnode);
-            break;
-
-          default:
-            el.value !== value && (el.value = value);
-        }
+      case 'ons-range':
+      case 'ons-select':
+      case 'ons-search-input':
+        el.value !== value && (el.value = value);
         break;
     }
   }

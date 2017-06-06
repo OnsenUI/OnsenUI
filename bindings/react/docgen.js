@@ -5,6 +5,8 @@ var files = filter.sync('./src/components/', (fp) => {
   // console.log(fp);
   return fp.indexOf('Util') === -1 &&
     fp.indexOf('BaseDialog') === -1 &&
+    fp.indexOf('BaseInput') === -1 &&
+    fp.indexOf('BasicComponent') === -1 &&
     fp.indexOf('todo') === -1;
 });
 
@@ -14,7 +16,8 @@ for (var i = 0; i < files.length; i++) {
   var cmd = 'node ./scripts/react-docgen.js ' + files[i] + ' > ' + './docs/' + fileName + '.json';
   exec(cmd, function callback(error, stdout, stderr) {
     if (error) {
-      throw new Error('error generating docs');
+      console.error('Error generating docs!\n');
+      throw error;
     }
   });
 }

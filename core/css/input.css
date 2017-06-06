@@ -1,10 +1,9 @@
-ons-input {
+ons-input, ons-radio, ons-checkbox, ons-search-input {
   display: inline-block;
   position: relative;
 }
 
-ons-input .text-input__container,
-ons-input .text-input__container input {
+ons-input input {
   width: 100%;
   display: inline-block;
 }
@@ -17,7 +16,10 @@ ons-input:not([float]) .text-input--material__label--active {
   display: none;
 }
 
-ons-input[disabled] {
+ons-input[disabled],
+ons-radio[disabled],
+ons-checkbox[disabled],
+ons-search-input[disabled] {
   opacity: 0.5;
   pointer-events: none;
 }

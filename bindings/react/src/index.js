@@ -7,6 +7,7 @@ import Button from './components/Button.jsx';
 import Card from './components/Card.jsx';
 import Carousel from './components/Carousel.jsx';
 import CarouselItem from './components/CarouselItem.jsx';
+import Checkbox from './components/Checkbox.jsx';
 import Col from './components/Col.jsx';
 import Dialog from './components/Dialog.jsx';
 import Fab from './components/Fab.jsx';
@@ -24,10 +25,12 @@ import Popover from './components/Popover.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import ProgressCircular from './components/ProgressCircular.jsx';
 import PullHook from './components/PullHook.jsx';
+import Radio from './components/Radio.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
 import RouterNavigator from './components/RouterNavigator.jsx';
 import Row from './components/Row.jsx';
+import SearchInput from './components/SearchInput.jsx';
 import Select from './components/Select.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
@@ -55,6 +58,7 @@ export {
   Card,
   Carousel,
   CarouselItem,
+  Checkbox,
   Col,
   Dialog,
   Fab,
@@ -72,11 +76,13 @@ export {
   ProgressBar,
   ProgressCircular,
   PullHook,
+  Radio,
   Range,
   Ripple,
   RouterNavigator,
   RouterUtil,
   Row,
+  SearchInput,
   Select,
   SpeedDial,
   SpeedDialItem,
