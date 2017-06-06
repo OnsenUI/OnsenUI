@@ -3,7 +3,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -17,7 +17,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     </div>
   `
 })
-class ContentPageComponent {
+export class ContentPageComponent {
 }
 
 @Component({
@@ -32,7 +32,7 @@ class ContentPageComponent {
     </div>
   `
 })
-class SidePageComponent {
+export class SidePageComponent {
 }
 
 @Component({

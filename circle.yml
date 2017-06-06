@@ -14,9 +14,9 @@ dependencies:
     - ~/.yarn
     - ~/.cache/yarn
   override:
-    - yarn install --pure-lockfile
     - yarn global add coveralls gulp
-    - cd css-components; yarn install --pure-lockfile; gulp build
+    - cd css-components; yarn install --pure-lockfile
+    - yarn install --pure-lockfile; gulp build
     - cd bindings/angular2; yarn install --pure-lockfile
     - cd bindings/react; yarn install --pure-lockfile
     - cd bindings/vue; yarn install --pure-lockfile
@@ -31,6 +31,8 @@ deployment:
     commands:
       - ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 $CIRCLE_ARTIFACTS
 test:
+  override:
+    - npm run test:skip-build
   post:
     - cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
     - cd bindings/angular2; npm test

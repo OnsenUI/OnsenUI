@@ -1,3 +1,5 @@
+import * as ons from 'onsenui';
+
 /**
  * @object onsNotification
  */

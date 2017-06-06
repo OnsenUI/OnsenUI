@@ -207,7 +207,7 @@ function collect(params) {
  * @param {string} out
  * @return {Promise}
  */
-module.exports = function(out) {
+function build(out) {
   out = resolve(out);
   return collect({
     src: [
@@ -228,4 +228,16 @@ module.exports = function(out) {
     console.log(reason.stack);
     throw reason;
   });
+}
+
+module.exports = {
+  createFileIndex: createFileIndex,
+  createElementIndex: createElementIndex,
+  createObjectIndex: createObjectIndex,
+  mergeDocdict: mergeDocdict,
+  mkdir: mkdir,
+  writeIndex: writeIndex,
+  validateIndex: validateIndex,
+  collect: collect,
+  build: build,
 };

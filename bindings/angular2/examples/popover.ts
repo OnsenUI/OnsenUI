@@ -8,7 +8,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -35,7 +35,7 @@ class MyPopoverComponent implements OnInit {
     console.log('popover:', this._popover.nativeElement);
   }
 
-  onPreHide(event) {
+  onPreHide(event: any) {
     // event.cancel(); // cancel hiding popover
   }
 }
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private _popoverFactory: PopoverFactory) { }
 
-  show(button) {
+  show(button: HTMLElement) {
     if (this._popover) {
       this._popover.show(button);
     }
