@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### BREAKING CHANGES
+
+ * Input: It has been split into different components: `Input` for text types; `Checkbox` for checkboxes; `Radio` for radio buttons; and `SearchInput` for styled search inputs.
+     * `<Input type='radio' checked={...} />` => `<Radio checked={...} />`
+
 v1.3.4
 ----
 
