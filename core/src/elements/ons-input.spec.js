@@ -64,19 +64,17 @@ describe('OnsInputElement', () => {
     });
   });
 
-  describe('#_onInput()', () => {
+  describe('#_updateLabelClass()', () => {
     it('is called when the value changes', () => {
-      const spy = chai.spy.on(element, '_onInput');
+      const spy = chai.spy.on(element, '_updateLabelClass');
       element.value = 'abc';
       element.value = '';
       expect(spy).to.have.been.called.twice;
     });
-  });
 
-  describe('#_onFocusin()', () => {
-    it('calls #_updateLabelClass()', () => {
+    it('is called on focusin', () => {
       const spy = chai.spy.on(element, '_updateLabelClass');
-      element._onFocusin();
+      element._boundOnFocusin();
       expect(spy).to.have.been.called.once;
     });
   });

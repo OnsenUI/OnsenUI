@@ -18,11 +18,9 @@ limitations under the License.
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
+import BaseCheckboxElement from './base/base-checkbox';
 import contentReady from '../ons/content-ready';
 import GestureDetector from '../ons/gesture-detector';
-
-const defaultClassName = 'switch';
 
 const scheme = {
   '': 'switch--*',
@@ -30,15 +28,6 @@ const scheme = {
   '.switch__handle': 'switch--*__handle',
   '.switch__toggle': 'switch--*__toggle'
 };
-
-const template = util.createFragment(`
-  <input type="checkbox" class="switch__input">
-  <div class="switch__toggle">
-    <div class="switch__handle">
-      <div class="switch__touch"></div>
-    </div>
-  </div>
-`);
 
 const locations = {
   ios: [1, 21],
@@ -70,7 +59,169 @@ const locations = {
  * <ons-switch modifier="material"></ons-switch>
  */
 
-export default class SwitchElement extends BaseElement {
+export default class SwitchElement extends BaseCheckboxElement {
+
+  constructor() {
+    super();
+
+    contentReady(this, () => {
+      this.attributeChangedCallback('modifier', null, this.getAttribute('modifier'));
+    });
+
+    this._boundOnChange = this._onChange.bind(this);
+    this._boundOnRelease = this._onRelease.bind(this);
+  }
+
+  get _scheme() {
+    return scheme;
+  }
+
+  get _defaultElementClass() {
+    return 'switch';
+  }
+
+  get _template() {
+    return `
+      <input type="${this.type}" class="${this._defaultElementClass}__input">
+      <div class="${this._defaultElementClass}__toggle">
+        <div class="${this._defaultElementClass}__handle">
+          <div class="${this._defaultElementClass}__touch"></div>
+        </div>
+      </div>
+    `;
+  }
+
+  get type() {
+    return 'checkbox';
+  }
+
+  /* Own props */
+
+  _getPosition(e) {
+    const l = this._locations;
+    return Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
+  }
+
+  _emitChangeEvent() {
+    util.triggerElementEvent(this, 'change', {
+      value: this.checked,
+      switch: this,
+      isInteractive: true
+    });
+  }
+
+  _onChange(event) {
+    if (event && event.stopPropagation) {
+      event.stopPropagation();
+    }
+
+    this._emitChangeEvent();
+  }
+
+  _onClick(ev) {
+    if (ev.target.classList.contains(`${this.defaultElementClass}__touch`)) {
+      ev.preventDefault();
+    }
+  }
+
+  _onHold(e) {
+    if (!this.disabled) {
+      ModifierUtil.addModifier(this, 'active');
+      document.addEventListener('release', this._boundOnRelease);
+    }
+  }
+
+  _onDragStart(e) {
+    if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
+      ModifierUtil.removeModifier(this, 'active');
+      return;
+    }
+
+    e.stopPropagation();
+
+    ModifierUtil.addModifier(this, 'active');
+    this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
+
+    this.addEventListener('drag', this._onDrag);
+    document.addEventListener('release', this._boundOnRelease);
+  }
+
+  _onDrag(e) {
+    e.gesture.srcEvent.preventDefault();
+    this._handle.style.left = this._getPosition(e) + 'px';
+  }
+
+  _onRelease(e) {
+    const l = this._locations;
+    const position = this._getPosition(e);
+    const previousValue = this.checked;
+
+    this.checked = position >= (l[0] + l[1]) / 2;
+
+    if (this.checked !== previousValue) {
+      this._emitChangeEvent();
+    }
+
+    this.removeEventListener('drag', this._onDrag);
+    document.removeEventListener('release', this._boundOnRelease);
+
+    this._handle.style.left = '';
+    ModifierUtil.removeModifier(this, 'active');
+  }
+
+  click() {
+    if (!this.disabled) {
+      this.checked = !this.checked;
+      this._emitChangeEvent();
+    }
+  }
+
+  get _handle() {
+    return this.querySelector(`.${this._defaultElementClass}__handle`);
+  }
+
+  get checkbox() {
+    return this._input;
+  }
+
+  connectedCallback() {
+    contentReady(this, () => {
+      this._input.addEventListener('change', this._boundOnChange);
+    });
+
+    this.addEventListener('dragstart', this._onDragStart);
+    this.addEventListener('hold', this._onHold);
+    this.addEventListener('tap', this.click);
+    this.addEventListener('click', this._onClick);
+    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+  }
+
+  disconnectedCallback() {
+    contentReady(this, () => {
+      this._input.removeEventListener('change', this._boundOnChange);
+    });
+
+    this.removeEventListener('dragstart', this._onDragStart);
+    this.removeEventListener('hold', this._onHold);
+    this.removeEventListener('tap', this.click);
+    this.removeEventListener('click', this._onClick);
+    if (this._gestureDetector) {
+      this._gestureDetector.dispose();
+    }
+  }
+
+  static get observedAttributes() {
+    return [...super.observedAttributes, 'modifier'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    if (name === 'modifier') {
+      const md = (current || '').indexOf('material') !== -1;
+      this._locations = locations[md ? 'material' : 'ios'];
+    }
+
+    super.attributeChangedCallback(name, last, current);
+  }
 
   /**
    * @event change
@@ -129,14 +280,13 @@ export default class SwitchElement extends BaseElement {
    *   [ja]スイッチがONの場合に`true`。[/ja]
    */
 
-  get checked() {
-    return this._checked;
-  }
-
-  set checked(value) {
-    this._checked = !!value;
-    util.toggleAttribute(this, 'checked', this._checked);
-  }
+  /**
+   * @property value
+   * @type {String}
+   * @description
+   *   [en]The current value of the input.[/en]
+   *   [ja][/ja]
+   */
 
   /**
    * @property disabled
@@ -145,17 +295,6 @@ export default class SwitchElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  get disabled() {
-    return this._disabled;
-  }
-
-  set disabled(value) {
-    contentReady(this, () => {
-      this._disabled = !!value;
-      util.toggleAttribute(this, 'disabled', this._disabled);
-      this._checkbox.disabled = this._disabled;
-    });
-  }
 
   /**
    * @property checkbox
@@ -165,215 +304,7 @@ export default class SwitchElement extends BaseElement {
    *   [en]The underlying checkbox element.[/en]
    *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
    */
-  get checkbox() {
-    return this._checkbox;
-  }
 
-  constructor() {
-    super();
-
-    this._checked = false;
-    this._disabled = false;
-
-    this._boundOnChange = this._onChange.bind(this);
-
-    contentReady(this, () => {
-      this._compile();
-      ['checked', 'disabled', 'modifier', 'name', 'value', 'input-id'].forEach(e => {
-        this.attributeChangedCallback(e, null, this.getAttribute(e));
-      });
-    });
-  }
-
-  _compile() {
-    autoStyle.prepare(this);
-
-    this.classList.add(defaultClassName);
-
-    if (!(util.findChild(this, '.switch__input') && util.findChild(this, '.switch__toggle'))) {
-      this.appendChild(template.cloneNode(true));
-    }
-
-    ModifierUtil.initModifier(this, scheme);
-
-    this._checkbox = this.querySelector('.switch__input');
-    this._handle = this.querySelector('.switch__handle');
-
-    this._checkbox.checked = this._checked;
-    this._checkbox.disabled = this._disabled;
-  }
-
-  disconnectedCallback() {
-    contentReady(this, () => {
-      this._checkbox.removeEventListener('change', this._boundOnChange);
-      this.removeEventListener('dragstart', this._onDragStart);
-      this.removeEventListener('hold', this._onHold);
-      this.removeEventListener('tap', this.click);
-      this.removeEventListener('click', this._onClick);
-      if (this._gestureDetector) {
-        this._gestureDetector.dispose();
-      }
-    });
-  }
-
-  connectedCallback() {
-    contentReady(this, () => {
-      this._checkbox.addEventListener('change', this._boundOnChange);
-      this.addEventListener('dragstart', this._onDragStart);
-      this.addEventListener('hold', this._onHold);
-      this.addEventListener('tap', this.click);
-      this.addEventListener('click', this._onClick);
-      this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
-      this._boundOnRelease = this._onRelease.bind(this);
-    });
-  }
-
-  _onChange(event) {
-    if (event && event.stopPropagation) {
-      event.stopPropagation();
-    }
-    this.click();
-  }
-
-  _onClick(ev) {
-    if (ev.target.classList.contains('switch__touch')) {
-      ev.preventDefault();
-    }
-  }
-
-  click() {
-    if (!this._disabled) {
-      this.checked = !this.checked;
-
-      util.triggerElementEvent(this, 'change', {
-        value: this.checked,
-        switch: this,
-        isInteractive: true
-      });
-    }
-  }
-
-  _getPosition(e) {
-    const l = this._locations;
-    return Math.min(l[1], Math.max(l[0], this._startX + e.gesture.deltaX));
-  }
-
-  _onHold(e) {
-    if (!this.disabled) {
-      ModifierUtil.addModifier(this, 'active');
-      document.addEventListener('release', this._boundOnRelease);
-    }
-  }
-
-  _onDragStart(e) {
-    if (this.disabled || ['left', 'right'].indexOf(e.gesture.direction) === -1) {
-      ModifierUtil.removeModifier(this, 'active');
-      return;
-    }
-
-    e.stopPropagation();
-
-    ModifierUtil.addModifier(this, 'active');
-    this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
-
-    this.addEventListener('drag', this._onDrag);
-    document.addEventListener('release', this._boundOnRelease);
-  }
-
-  _onDrag(e) {
-    e.gesture.srcEvent.preventDefault();
-    this._handle.style.left = this._getPosition(e) + 'px';
-  }
-
-  _onRelease(e) {
-    const l = this._locations;
-    const position = this._getPosition(e);
-    const previousValue = this.checked;
-
-    this.checked = position >= (l[0] + l[1]) / 2;
-
-    if (this.checked !== previousValue) {
-      util.triggerElementEvent(this, 'change', {
-        value: this.checked,
-        switch: this,
-        isInteractive: true
-      });
-    }
-
-    this.removeEventListener('drag', this._onDrag);
-    document.removeEventListener('release', this._boundOnRelease);
-
-    this._handle.style.left = '';
-    ModifierUtil.removeModifier(this, 'active');
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'input-id', 'checked', 'value', 'disabled', 'class'];
-  }
-
-  static get events() {
-    return ['change'];
-  }
-
-  /**
-   * @property value
-   * @type {String}
-   * @description
-   *   [en]The current value of the input.[/en]
-   *   [ja][/ja]
-   */
-  get value() {
-    return !this.hasOwnProperty('_checkbox')
-      ? this.getAttribute('value')
-      : this._checkbox.value;
-  }
-
-  set value(val) {
-    contentReady(this, () => {
-      this._checkbox.value = val;
-    });
-  }
-
-  attributeChangedCallback(name, last, current) {
-    contentReady(this, () => {
-      switch(name) {
-        case 'class':
-          if (!this.classList.contains(defaultClassName)) {
-            this.className = defaultClassName + ' ' + current;
-          }
-          break;
-
-        case 'modifier':
-          this._isMaterial = (current || '').indexOf('material') !== -1;
-          this._locations = locations[this._isMaterial ? 'material' : 'ios'];
-          ModifierUtil.onModifierChanged(last, current, this, scheme);
-          break;
-
-        case 'input-id':
-          this._checkbox.id = current;
-          break;
-
-        case 'checked':
-          this._checked = current !== null;
-          this._checkbox.checked = current !== null;
-          util.toggleAttribute(this._checkbox, name, current !== null);
-          break;
-
-        case 'disabled':
-          this._disabled = current !== null;
-          this._checkbox.disabled = current !== null;
-          util.toggleAttribute(this._checkbox, name, current !== null);
-          break;
-
-        default:
-          if (current !== null) {
-            this._checkbox.setAttribute(name, current);
-          } else {
-            this._checkbox.removeAttribute(name);
-          }
-      }
-    });
-  }
 }
 
 customElements.define('ons-switch', SwitchElement);
