@@ -2,6 +2,19 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+
+### Bug Fixes
+
+
+### Misc
+
+ * css-components: Refined the appearance of `button` on Android.
+
 v2.3.2
 ----
 
