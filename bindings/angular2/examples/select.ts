@@ -41,9 +41,13 @@ export class AppComponent {
   constructor() { }
 
   editSelects(event: any) {
-    document.getElementById('choose-sel').removeAttribute('modifier');
-    if (event == 'material' || event == 'underbar') {
-      document.getElementById('choose-sel').setAttribute('modifier', event);
+    const chooseSel = document.getElementById('choose-sel');
+
+    if (chooseSel) {
+      chooseSel.removeAttribute('modifier');
+      if (event == 'material' || event == 'underbar') {
+        chooseSel.setAttribute('modifier', event);
+      }
     }
   }
 }
