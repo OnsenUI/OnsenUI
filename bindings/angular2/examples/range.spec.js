@@ -19,6 +19,12 @@ describe('range.html', () => {
       .mouseUp()
       .perform();
 
+    const textIsChanged = () => {
+      return $('#value').getText().then(function(text) {
+        return text !== '10';
+      });
+    }
+    browser.wait(textIsChanged, 5000);
     expect($('#value').getText()).not.toBe('10');
   });
 });
