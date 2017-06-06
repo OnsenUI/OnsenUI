@@ -101,11 +101,12 @@ window.document.addEventListener('DOMContentLoaded', function() {
   register('script[type="text/ons-template"]');
   register('script[type="text/template"]');
   register('script[type="text/ng-template"]');
+  register('template');
 
   function register(query) {
     const templates = window.document.querySelectorAll(query);
     for (let i = 0; i < templates.length; i++) {
-      internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
+      internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent || templates[i].content);
     }
   }
 }, false);
@@ -120,9 +121,19 @@ internal.getTemplateHTMLAsync = function(page) {
       const cache = internal.templateStore.get(page);
 
       if (cache) {
+        if (cache instanceof DocumentFragment) {
+          return resolve(cache);
+        }
+
         const html = typeof cache === 'string' ? cache : cache[1];
-        resolve(html);
+        return resolve(internal.normalizePageHTML(html));
+
       } else {
+        const local = window.document.getElementById(page);
+        if (local) {
+          return resolve(local.textContent || local.content);
+        }
+
         const xhr = new XMLHttpRequest();
         xhr.open('GET', page, true);
         xhr.onload = function(response) {
@@ -156,19 +167,13 @@ internal.getPageHTMLAsync = function(page) {
     }
 
     return internal.getTemplateHTMLAsync(page)
-      .then(
-        function(html) {
-          return internal.normalizePageHTML(html);
-        },
-        function(error) {
-          if (pages.length === 0) {
-            return Promise.reject(error);
-          }
-
-          return getPage(pages.shift());
+      .catch(function(error) {
+        if (pages.length === 0) {
+          return Promise.reject(error);
         }
-      )
-      .then(html => internal.normalizePageHTML(html));
+
+        return getPage(pages.shift());
+      });
   };
 
   return getPage(pages.shift());

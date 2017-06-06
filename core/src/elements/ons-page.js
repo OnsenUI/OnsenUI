@@ -154,6 +154,9 @@ export default class PageElement extends BaseElement {
     this.classList.add(defaultClassName);
     this._initialized = false;
 
+    this._initScript = util.findChild(this, 'script');
+    this._initScript && this._initScript.remove();
+
     contentReady(this, () => {
       this._compile();
 
@@ -170,7 +173,10 @@ export default class PageElement extends BaseElement {
     this._initialized = true;
 
     contentReady(this, () => {
-      setImmediate(() => util.triggerElementEvent(this, 'init'));
+      setImmediate(() => {
+        util.triggerElementEvent(this, 'init');
+        this._initScript && this.appendChild(this._initScript);
+      });
 
       if (!util.hasAnyComponentAsParent(this)) {
         setImmediate(() => this._show());
@@ -395,7 +401,7 @@ export default class PageElement extends BaseElement {
     if (tagName === 'ons-fab') {
       return !el.hasAttribute('position');
     }
-    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
+    const fixedElements = ['script', 'ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
     return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 

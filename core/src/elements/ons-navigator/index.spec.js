@@ -4,9 +4,9 @@ describe('OnsNavigatorElement', () => {
   let nav, nav2;
 
   beforeEach((done) => {
-    const tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`);
-    const tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`);
-    const tpl3 = ons._util.createElement(`<ons-template id="info"><ons-page>info</ons-page></ons-template>`);
+    const tpl1 = ons._util.createElement(`<template id="hoge"><ons-page>hoge</ons-page></template>`);
+    const tpl2 = ons._util.createElement(`<template id="fuga"><ons-page>fuga</ons-page></template>`);
+    const tpl3 = ons._util.createElement(`<template id="info"><ons-page>info</ons-page></template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     document.body.appendChild(tpl3);
@@ -679,8 +679,8 @@ describe('OnsNavigatorElement', () => {
 
   describe('#backButton', () => {
     beforeEach((done) => {
-      const tpl1 = ons._util.createElement(`<ons-template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></ons-template>`)
-      const tpl2 = ons._util.createElement(`<ons-template id="backPage2"><ons-page><ons-back-button>Back</ons-back-button>hoge2</ons-page></ons-template>`);
+      const tpl1 = ons._util.createElement(`<template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></template>`)
+      const tpl2 = ons._util.createElement(`<template id="backPage2"><ons-page><ons-back-button>Back</ons-back-button>hoge2</ons-page></template>`);
 
       document.body.appendChild(tpl1);
       document.body.appendChild(tpl2);
