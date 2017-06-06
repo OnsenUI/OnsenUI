@@ -173,8 +173,4 @@ export default class BaseInputElement extends BaseElement {
       contentReady(this, () => this._updateBoundAttributes());
     }
   }
-
-  static get events() {
-    return ['change', 'input', 'focus', 'focusin', 'focusout', 'blur'];
-  }
 }

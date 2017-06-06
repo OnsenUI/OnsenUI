@@ -1,6 +1,22 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* Support for `v-model` in every input. As of `vue@2.3`, it does not support modifiers for custom components.
+* VOnsInput, VOnsRange: Added `modelEvent` prop to change the bound event name for `v-model`: `<v-ons-input v-model="something" model-event="change">` becomes a "lazy" model bound on `change` instead of `input` event.
+
+### BREAKING CHANGES
+
+* VOnsInput: It has been split into different components: `VOnsInput` for text types; `VOnsCheckbox` for checkboxes; `VOnsRadio` for radio buttons; and `VOnsSearchInput` for styled search inputs.
+    * `<v-ons-input type="radio" checked>` => `<v-ons-radio checked>`
+
+* VOnsModel: This directive has been removed in favor of `v-model`.
+    * `v-ons-model` => `v-model`
+
 2.0.0-beta.8
 ----
 

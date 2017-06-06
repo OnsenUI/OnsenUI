@@ -31,7 +31,7 @@ ons.ready(function(){
         <h2>Events</h2>
 
         <h3>change</h3>
-        <v-ons-switch id="change-event" @change="message   = 'it works!'"></v-ons-switch><span id="change-event-message">{{message}}</span><br>
+        <v-ons-switch id="change-event" @change.native="message   = 'it works!'"></v-ons-switch><span id="change-event-message">{{message}}</span><br>
       </div>
     `,
     data: {

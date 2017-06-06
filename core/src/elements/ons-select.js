@@ -141,9 +141,9 @@ export default class SelectElement extends BaseElement {
   constructor() {
     super();
 
-    contentReady(this, () => {
-      this._compile();
-    });
+    contentReady(this, () => this._compile());
+
+    this._deriveGetters();
   }
 
   static get observedAttributes() {
@@ -228,7 +228,9 @@ export default class SelectElement extends BaseElement {
     }
 
     ModifierUtil.initModifier(this, scheme);
+  }
 
+  _deriveGetters() {
     for (const key of ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value']) {
       this.__defineGetter__(key, () => {
         return this._select[key];
@@ -243,13 +245,14 @@ export default class SelectElement extends BaseElement {
     this.__defineGetter__('type', () => {
       return this._select['type'];
     });
+  }
 
-    this.add = (option, index = null) => {
-      this._select.add(option, index);
-    }
-    this.remove = (index) => {
-      this._select.remove(index);
-    }
+  add(option, index = null) {
+    this._select.add(option, index);
+  }
+
+  remove(index) {
+    this._select.remove(index);
   }
 }
 

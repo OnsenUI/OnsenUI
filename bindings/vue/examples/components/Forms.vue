@@ -9,14 +9,14 @@
           <v-ons-input
             placeholder="Input name"
             float
-            v-ons-model="name"
+            v-model="name"
           >
           </v-ons-input>
         </div>
         <div class="right">
           <v-ons-search-input
             placeholder="Search"
-            v-ons-model="name"
+            v-model="name"
           >
           </v-ons-search-input>
         </div>
@@ -36,7 +36,7 @@
         </label>
         <div class="right">
           <v-ons-switch
-            v-ons-model="switchOn.a.b"
+            v-model="switchOn.a.b"
             input-id="switch1"
           >
           </v-ons-switch>
@@ -59,7 +59,7 @@
         Select box - <button @click="modify('select')">Modify JS</button>
       </v-ons-list-header>
       <v-ons-list-item>
-        <v-ons-select id="choose-sel" v-ons-model="selectedModifier" @change="editSelects">
+        <v-ons-select id="choose-sel" v-model="selectedModifier" @change="editSelects">
           <option v-for="modifier in modifiers" :key="modifier" v-bind:value="modifier.value">
             {{ modifier.text }}
           </option>
@@ -82,7 +82,7 @@
           <v-ons-radio
             :input-id="'radio-' + $index"
             :value="vegetable"
-            v-ons-model="selectedVegetable"
+            v-model="selectedVegetable"
           >
           </v-ons-radio>
         </label>
@@ -107,7 +107,7 @@
           <v-ons-checkbox
             :input-id="'checkbox-' + $index"
             :value="color"
-            v-ons-model="checkedColors"
+            v-model="checkedColors"
           >
           </v-ons-checkbox>
         </label>
@@ -126,7 +126,7 @@
             <v-ons-icon icon="md-volume-down"></v-ons-icon>
           </v-ons-col>
           <v-ons-col>
-            <v-ons-range v-ons-model.number="volume" style="width: 100%;"></v-ons-range>
+            <v-ons-range v-model.number="volume" style="width: 100%;"></v-ons-range>
           </v-ons-col>
           <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
             <v-ons-icon icon="md-volume-up"></v-ons-icon>
@@ -137,12 +137,11 @@
     </v-ons-list>
 
     <br><br>
-    <v-ons-list-title>Object Literal: {{ vForItems }}</v-ons-list-title>
+    <v-ons-list-title>v-for: {{ vForItems }}</v-ons-list-title>
     <v-ons-list>
-      <v-ons-list-item v-for="(item, index) in vForItems" :key="item">
-        <div class="left"><v-ons-checkbox v-ons-model="{ container: item, key: 'checked' }"></v-ons-checkbox></div>
-        <div class="center">Index: #{{ index }}</div>
-        <div class="right">{{ item.checked }}</div>
+      <v-ons-list-item v-for="item in vForItems" :key="item">
+        <div class="left"><v-ons-checkbox v-model="item.checked"></v-ons-checkbox></div>
+        <div class="center">{{ item.checked }}</div>
       </v-ons-list-item>
     </v-ons-list>
   </v-ons-page>

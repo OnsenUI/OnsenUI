@@ -15,18 +15,23 @@ dev
 
  * css-components: Refined the appearance of `button` on Android.
 
+### BREAKING CHANGES
+
+ * ons-input: It has been split into different elements: `ons-input` for text types; `ons-checkbox` for checkboxes; `ons-radio` for radio buttons; and `ons-search-input` for styled search inputs.
+     * `<ons-input type="radio" checked>` => `<ons-radio checked>`
+
 v2.3.2
 ----
 
 ### New Features
 
-* css-components: Added `--material` modifier on `notification` CSS components.
+ * css-components: Added `--material` modifier on `notification` CSS components.
 
 ### Bug Fixes
 
-* ons-page: Fixed iOS status-bar-fill not added in initially opened modals ([#1944](https://github.com/OnsenUI/OnsenUI/issues/1944)).
-* ons-splitter: Fixed `reveal` animation glitch.
-* ons-action-sheet: Fixed glitch when hiding on iOS.
+ * ons-page: Fixed iOS status-bar-fill not added in initially opened modals ([#1944](https://github.com/OnsenUI/OnsenUI/issues/1944)).
+ * ons-splitter: Fixed `reveal` animation glitch.
+ * ons-action-sheet: Fixed glitch when hiding on iOS.
 
 ### Misc
 
