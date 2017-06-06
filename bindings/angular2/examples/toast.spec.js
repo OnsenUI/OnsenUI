@@ -45,7 +45,11 @@ describe('toast.html', () => {
     browser.wait(EC.visibilityOf(dynamicToast), 5000);
 
     element.all(by.css('.toast__button')).get(1).click();
-    browser.wait(EC.invisibilityOf(dynamicToast), 5000);
-    expect(dynamicToast.isPresent()).toBeFalsy();
+    browser.wait(() => {
+      return element.all(by.tagName('ons-toast')).count().then((count) => {
+        return count <= 1;
+      });
+    }, 5000);
+    expect(element.all(by.tagName('ons-toast')).count()).toBe(1);
   });
 });
