@@ -33,7 +33,7 @@
     <div class="action-sheet">
       <button class="action-sheet-button">Label</button>
       <button class="action-sheet-button action-sheet-button--destructive">Delete Label</button>
-      <button class="action-sheet-button">Cancel</button>
+      <button class="action-sheet-bactionutton">Cancel</button>
     </div>
 */
 
@@ -130,7 +130,7 @@
 }
 
 .action-sheet-icon {
-  display: none;
+  display: none !important;
 }
 
 .action-sheet-mask {
