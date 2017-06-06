@@ -6,7 +6,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -48,12 +48,12 @@ export class PageComponent {
     <div class="content">
       <div id="message">{{msg}}</div>
       <div style="text-align: center; margin: 10px">
-        <ons-button id="push" (click)="push(navi)">push</ons-button>
+        <ons-button id="push" (click)="push(navi)">push (no animation)</ons-button>
       </div>
     </div>
   `
 })
-class DefaultPageComponent {
+export class DefaultPageComponent {
   msg = 'Click to push:'
 
   constructor(private _navigator: OnsNavigator) {

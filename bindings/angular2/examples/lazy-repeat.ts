@@ -6,7 +6,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -35,7 +35,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 export class AppComponent {
   public items: any[];
 
-  @ViewChild(OnsLazyRepeat) lazyRepeat;
+  @ViewChild(OnsLazyRepeat) lazyRepeat: OnsLazyRepeat;
 
   constructor() {
     this.items = [];

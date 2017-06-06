@@ -4,7 +4,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -37,11 +37,11 @@ export class AppComponent {
       'swiperight swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate';
 
     events.split(/\s+/).forEach(event => {
-      elementRef.nativeElement.addEventListener(event, event => this.handleGesture(event));
+      elementRef.nativeElement.addEventListener(event, (event: any) => this.handleGesture(event));
     });
   }
 
-  handleGesture(event) {
+  handleGesture(event: any) {
     if (event.type !== 'release') {
       this.status = event.type;
     }

@@ -11,6 +11,7 @@ import {
   OnDestroy,
   NgZone
 } from '@angular/core';
+import * as ons from 'onsenui';
 
 /**
  * @element ons-tab
@@ -53,7 +54,7 @@ import {
   selector: 'ons-tab'
 })
 export class OnsTab implements OnDestroy {
-  private _pageComponent: ComponentRef<any> = null;
+  private _pageComponent: ComponentRef<any> | null = null;
 
   /**
    * @input page
@@ -77,7 +78,7 @@ export class OnsTab implements OnDestroy {
   _createPageLoader() {
     const PageLoader = <any>ons.PageLoader;
     return new PageLoader(
-      ({page, parent}, done: Function) => {
+      ({page, parent}: any, done: Function) => {
         this._zone.run(() => {
           const factory = this._resolver.resolveComponentFactory(page);
           const pageComponentRef = this._viewContainer.createComponent(factory, 0);
@@ -95,8 +96,10 @@ export class OnsTab implements OnDestroy {
       },
       () => {
         if (this.hasOwnProperty('_pageComponent')) {
-          this._pageComponent.destroy();
-          this._pageComponent = null;
+          if (this._pageComponent) {
+            this._pageComponent.destroy();
+            this._pageComponent = null;
+          }
         }
       }
     );

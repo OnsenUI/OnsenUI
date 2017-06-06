@@ -81,7 +81,7 @@ export class OnsPullHook implements OnDestroy {
    */
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
-    this._element.onAction = done => this.action.emit({done});
+    this._element.onAction = (done: Function) => this.action.emit({done});
   }
 
   ngOnDestroy() {
