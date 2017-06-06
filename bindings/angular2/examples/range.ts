@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   OnsRange,
   OnsenModule,
@@ -20,7 +19,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
       <div style="text-align: center; margin: 10px">
         <!-- (input) is needed for immediate change detection on dragging range component.
         -->
-        <ons-range id="range" [(value)]="value" (input)="refreshValue($event)"></ons-range><br>
+        <ons-range id="range" [(value)]="value" (input)="value = $event.target.value"></ons-range><br>
         <ons-range modifier="material" [(value)]="value"></ons-range><br>
         <span id="value">
           {{ value }}
@@ -32,12 +31,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 export class AppComponent {
   value: string = '10';
-  constructor(private cd: ChangeDetectorRef) { }
-
-  refreshValue($event: any) {
-    this.value = $event.target.value;
-    this.cd.detectChanges();
-  }
+  constructor() { }
 }
 
 @NgModule({
