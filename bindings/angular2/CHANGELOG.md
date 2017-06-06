@@ -16,6 +16,7 @@ dev
 
 ### Misc
 
+ * Complied with TypeScript’s `noImplicitAny`.
  * Refined directory structure.
  * Removed unnecessary peer dependency `@angular/common`.
  * Removed unnecessary peer dependency `@angular/compiler`.

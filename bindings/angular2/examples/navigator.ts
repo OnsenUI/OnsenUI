@@ -53,7 +53,7 @@ export class PageComponent {
     </div>
   `
 })
-class DefaultPageComponent {
+export class DefaultPageComponent {
   msg = 'Click to push:'
 
   constructor(private _navigator: OnsNavigator) {

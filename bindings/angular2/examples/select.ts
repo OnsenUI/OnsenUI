@@ -40,7 +40,7 @@ export class AppComponent {
 
   constructor() { }
 
-  editSelects(event) {
+  editSelects(event: any) {
     document.getElementById('choose-sel').removeAttribute('modifier');
     if (event == 'material' || event == 'underbar') {
       document.getElementById('choose-sel').setAttribute('modifier', event);

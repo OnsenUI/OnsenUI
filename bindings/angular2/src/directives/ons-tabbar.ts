@@ -78,7 +78,7 @@ export class OnsTab implements OnDestroy {
   _createPageLoader() {
     const PageLoader = <any>ons.PageLoader;
     return new PageLoader(
-      ({page, parent}, done: Function) => {
+      ({page, parent}: any, done: Function) => {
         this._zone.run(() => {
           const factory = this._resolver.resolveComponentFactory(page);
           const pageComponentRef = this._viewContainer.createComponent(factory, 0);

@@ -89,7 +89,7 @@ export class OnsSplitterSide {
     const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}, done: Function) => {
+      ({page, parent, params}: any, done: Function) => {
         this._zone.run(() => {
           const injector = ReflectiveInjector.resolveAndCreate([
             {provide: Params, useValue: new Params(params || {})},
@@ -106,7 +106,7 @@ export class OnsSplitterSide {
           done(pageElement);
         });
       },
-      element => {
+      (element: any) => {
         if (componentRefMap.has(element)) {
           componentRefMap.get(element).destroy();
           componentRefMap.delete(element);
@@ -159,7 +159,7 @@ export class OnsSplitterContent {
     const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}, done: Function) => {
+      ({page, parent, params}: any, done: Function) => {
         const injector = ReflectiveInjector.resolveAndCreate([
           {provide: Params, useValue: new Params(params || {})},
           {provide: OnsSplitterContent, useValue: this}
@@ -174,7 +174,7 @@ export class OnsSplitterContent {
 
         done(pageElement);
       },
-      element => {
+      (element: any) => {
         if (componentRefMap.has(element)) {
           componentRefMap.get(element).destroy();
           componentRefMap.delete(element);

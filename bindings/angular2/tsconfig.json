@@ -9,6 +9,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
+    "noImplicitAny": true,
     "stripInternal": true,
     "skipLibCheck": true,
     "rootDir": "src",

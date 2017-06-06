@@ -39,7 +39,7 @@ export class AppComponent {
     onsNotification.confirm({
       message: 'This dialog can be canceled by tapping the background or using the back button on your device.',
       cancelable: true,
-      callback: i => {
+      callback: (i: number) => {
         if (i == -1) {
           onsNotification.alert({message: 'You canceled it!'});
         }
@@ -50,7 +50,7 @@ export class AppComponent {
   prompt() {
     onsNotification.prompt({
       message: 'What is the meaning of Life, the Universe and Everything?',
-      callback: answer => {
+      callback: (answer: string) => {
         if (answer === '42') {
           onsNotification.alert({message: 'That\'s the correct answer!'});
         } else {

@@ -14,25 +14,24 @@ export class ComponentLoader {
   load(componentRef: ComponentRef<any>) {
     const rootElement = componentRef.location.nativeElement;
 
-    if (this.appRef['attachView']) {
-      // angular2.3.x has `attachView` and `detachView` methods.
-      this.appRef['attachView'](componentRef.hostView);
+    if (this.appRef.attachView) {
+      this.appRef.attachView(componentRef.hostView);
 
       componentRef.onDestroy(() => {
-        this.appRef['detachView'](componentRef.hostView);
+        this.appRef.detachView(componentRef.hostView);
 
         if (rootElement.parentNode) {
           rootElement.parentNode.removeChild(rootElement);
         }
       });
     } else {
-      if (this.appRef['registerChangeDetector']) {
-        this.appRef['registerChangeDetector'](componentRef.changeDetectorRef);
+      if ((<any>this.appRef).registerChangeDetector) {
+        (<any>this.appRef).registerChangeDetector(componentRef.changeDetectorRef);
       }
 
       componentRef.onDestroy(() => {
-        if (this.appRef['unregisterChangeDetector']) {
-          this.appRef['unregisterChangeDetector'](componentRef.changeDetectorRef);
+        if ((<any>this.appRef).unregisterChangeDetector) {
+          (<any>this.appRef).unregisterChangeDetector(componentRef.changeDetectorRef);
         }
 
         if (rootElement.parentNode) {
@@ -41,7 +40,7 @@ export class ComponentLoader {
       });
     }
 
-    const rootContainer = this.appRef['_rootComponents'][0].location.nativeElement;
+    const rootContainer = (<any>this.appRef)._rootComponents[0].location.nativeElement;
     rootContainer.appendChild(rootElement);
   }
 }

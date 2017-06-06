@@ -17,7 +17,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     </div>
   `
 })
-class ContentPageComponent {
+export class ContentPageComponent {
 }
 
 @Component({
@@ -32,7 +32,7 @@ class ContentPageComponent {
     </div>
   `
 })
-class SidePageComponent {
+export class SidePageComponent {
 }
 
 @Component({

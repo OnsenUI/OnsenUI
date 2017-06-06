@@ -94,7 +94,7 @@ export class OnsNavigator implements OnDestroy {
     const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}, done: Function) => {
+      ({page, parent, params}: any, done: Function) => {
         this._zone.run(() => {
           const pageParams = new Params(params || {});
           const injector = ReflectiveInjector.resolveAndCreate([
@@ -114,7 +114,7 @@ export class OnsNavigator implements OnDestroy {
           done(pageElement);
         });
       },
-      element => {
+      (element: any) => {
         if (componentRefMap.has(element)) {
           componentRefMap.get(element).destroy();
           componentRefMap.delete(element);
