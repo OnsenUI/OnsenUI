@@ -107,8 +107,10 @@ export class OnsSplitterSide {
         });
       },
       (element: any) => {
-        if (componentRefMap.has(element)) {
-          componentRefMap.get(element).destroy();
+        const componentRef = componentRefMap.get(element);
+        
+        if (componentRef) {
+          componentRef.destroy();
           componentRefMap.delete(element);
         }
       }
@@ -175,8 +177,10 @@ export class OnsSplitterContent {
         done(pageElement);
       },
       (element: any) => {
-        if (componentRefMap.has(element)) {
-          componentRefMap.get(element).destroy();
+        const componentRef = componentRefMap.get(element);
+        
+        if (componentRef) {
+          componentRef.destroy();
           componentRefMap.delete(element);
         }
       }

@@ -18,7 +18,7 @@ import {Params} from '../ons/params';
 
 export class NavigatorPage {
   constructor(
-    public elementRef: ElementRef = null,
+    public elementRef: ElementRef | null = null,
     public destroy: Function = function() {},
     public animator: any = null,
     public params: Params = new Params()) {
@@ -91,7 +91,7 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
-    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
+    const componentRefMap: WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
       ({page, parent, params}: any, done: Function) => {
@@ -104,7 +104,7 @@ export class OnsNavigator implements OnDestroy {
 
           const factory = this._resolver.resolveComponentFactory(page);
           const selector = 'ons-navigator';
-          const pageComponentRef = factory.create(injector, null);
+          const pageComponentRef = factory.create(injector, undefined);
           this._viewContainer.insert(pageComponentRef.hostView);
           const pageElement = pageComponentRef.location.nativeElement;
           componentRefMap.set(pageElement, pageComponentRef);
@@ -115,8 +115,10 @@ export class OnsNavigator implements OnDestroy {
         });
       },
       (element: any) => {
-        if (componentRefMap.has(element)) {
-          componentRefMap.get(element).destroy();
+        const componentRef = componentRefMap.get(element);
+        
+        if (componentRef) {
+          componentRef.destroy();
           componentRefMap.delete(element);
         }
       }

@@ -54,7 +54,7 @@ import * as ons from 'onsenui';
   selector: 'ons-tab'
 })
 export class OnsTab implements OnDestroy {
-  private _pageComponent: ComponentRef<any> = null;
+  private _pageComponent: ComponentRef<any> | null = null;
 
   /**
    * @input page
@@ -96,8 +96,10 @@ export class OnsTab implements OnDestroy {
       },
       () => {
         if (this.hasOwnProperty('_pageComponent')) {
-          this._pageComponent.destroy();
-          this._pageComponent = null;
+          if (this._pageComponent) {
+            this._pageComponent.destroy();
+            this._pageComponent = null;
+          }
         }
       }
     );
