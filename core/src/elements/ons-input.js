@@ -13,6 +13,7 @@ limitations under the License.
 
 import BaseInputElement from './base/base-input';
 import contentReady from '../ons/content-ready';
+import util from '../ons/util';
 
 const scheme = {
   '.text-input': 'text-input--*',
@@ -129,7 +130,7 @@ export default class InputElement extends BaseInputElement {
 
     const type = this.getAttribute('type');
     if (['checkbox', 'radio'].indexOf(type) >= 0) {
-      console.warn(`Warn: <ons-input type="${type}"> is deprecated since v2.4.0. Use <ons-${type}> instead.`)
+      util.warn(`Warn: <ons-input type="${type}"> is deprecated since v2.4.0. Use <ons-${type}> instead.`)
     }
   }
 
