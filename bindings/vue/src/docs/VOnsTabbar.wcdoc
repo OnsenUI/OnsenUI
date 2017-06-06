@@ -6,7 +6,7 @@
  * @attribute tabs
  * @type {Array}
  * @description
- *   [en]Contains as many objects as desired tabs in the tabbar. Every object describes a `VOnsTab` component. Every object must include at least one of the next properties: `page`, `icon` or `label` (see `VOnsTab` reference for more options). This can be omitted if using `slot="pages"` and `slot="tabs"` elements.[/en]
+ *   [en]Contains as many objects as desired tabs in the tabbar. Every object describes a `VOnsTab` component. Every object must include at least one of the next properties: `page`, `icon` or `label` (see `VOnsTab` reference for more options). It is also possible to pass props to the pages through a `props` object for each tab. Example: `tabs: [ { label: 'p1', page: p1 }, { label: 'p2', page: p2, props: { myPage2Prop: 'something' } } ]`. This can be omitted if using `slot="pages"` and `slot="tabs"` elements.[/en]
  *   [ja]どうしょう[/ja]
  */
 

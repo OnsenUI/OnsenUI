@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="left"><v-ons-toolbar-button @click="tabbarIndex--">Index--</v-ons-toolbar-button></div>
-      <div class="center">Index: {{tabbarIndex}} -- Show: <input type="checkbox" v-model="tabbarVisibility" /></div>
+      <div class="center">Index: {{tabbarIndex}} -- Show: <input type="checkbox" v-model="tabbarVisibility" /> - <button @click="tabs[0].props.test = 'Modified!'; tabs[1].badge = 2">Props</button></div>
       <div class="right"><v-ons-toolbar-button @click="tabbarIndex++">Index++</v-ons-toolbar-button></div>
     </v-ons-toolbar>
 
@@ -15,9 +15,11 @@
   const home = {
     template: `
       <v-ons-page>
-        Home page
+        Home page.
+        <p>{{ test }}</p>
       </v-ons-page>
-    `
+    `,
+    props: ['test']
   };
 
   const news = {
@@ -45,7 +47,10 @@
           {
             label: 'Home',
             icon: 'ion-ios-home-outline',
-            page: home
+            page: home,
+            props: {
+              test: 'This is a page prop.'
+            },
           },
           {
             label: 'News',

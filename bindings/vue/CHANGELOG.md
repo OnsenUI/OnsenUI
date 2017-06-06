@@ -8,6 +8,7 @@ dev
 
 * Support for `v-model` in every input. As of `vue@2.3`, it does not support modifiers for custom components.
 * VOnsInput, VOnsRange: Added `modelEvent` prop to change the bound event name for `v-model`: `<v-ons-input v-model="something" model-event="change">` becomes a "lazy" model bound on `change` instead of `input` event.
+* VOnsTabbar: `tabs` prop now accepts a `props` property for each tab that allows passing props to the corresponding page.
 
 ### BREAKING CHANGES
 
