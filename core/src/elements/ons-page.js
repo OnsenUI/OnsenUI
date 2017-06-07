@@ -34,6 +34,12 @@ const scheme = {
 
 const nullToolbarElement = document.createElement('ons-toolbar'); // requires that 'ons-toolbar' element is registered
 
+const checkHookValue = value => {
+  if (!(value instanceof Function)) {
+    throw new Error('Life-cycle hooks must be functions');
+  }
+};
+
 /**
  * @element ons-page
  * @category page
@@ -154,9 +160,6 @@ export default class PageElement extends BaseElement {
     this.classList.add(defaultClassName);
     this._initialized = false;
 
-    this._initScript = util.findChild(this, 'script');
-    this._initScript && this._initScript.remove();
-
     contentReady(this, () => {
       this._compile();
 
@@ -174,8 +177,8 @@ export default class PageElement extends BaseElement {
 
     contentReady(this, () => {
       setImmediate(() => {
+        this.onInit && this.onInit();
         util.triggerElementEvent(this, 'init');
-        this._initScript && this.appendChild(this._initScript);
       });
 
       if (!util.hasAnyComponentAsParent(this)) {
@@ -255,7 +258,6 @@ export default class PageElement extends BaseElement {
       this._onInfiniteScroll(() => this._loadingContent = false);
     }
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -408,6 +410,7 @@ export default class PageElement extends BaseElement {
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
+      this.onShow && this.onShow();
       util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
     }
@@ -416,6 +419,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
+      this.onHide && this.onHide();
       util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
     }
@@ -424,6 +428,7 @@ export default class PageElement extends BaseElement {
   _destroy() {
     this._hide();
 
+    this.onDestroy && this.onDestroy();
     util.triggerElementEvent(this, 'destroy');
 
     if (this.onDeviceBackButton) {
@@ -433,6 +438,44 @@ export default class PageElement extends BaseElement {
     util.propagateAction(this, '_destroy');
 
     this.remove();
+  }
+
+  /* Life-cycle hooks */
+
+  get onInit() {
+    return this._onInit;
+  }
+
+  set onInit(newValue) {
+    checkHookValue(newValue);
+    this._onInit = newValue.bind(this);
+  }
+
+  get onShow() {
+    return this._onShow;
+  }
+
+  set onShow(newValue) {
+    checkHookValue(newValue);
+    this._onShow = newValue.bind(this);
+  }
+
+  get onHide() {
+    return this._onShow;
+  }
+
+  set onHide(newValue) {
+    checkHookValue(newValue);
+    this._onHide = newValue.bind(this);
+  }
+
+  get onDestroy() {
+    return this._onDestroy;
+  }
+
+  set onDestroy(newValue) {
+    checkHookValue(newValue);
+    this._onDestroy = newValue.bind(this);
   }
 
   static get events() {
