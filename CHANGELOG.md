@@ -2,6 +2,18 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * onsenui.d.ts: Enabled `import * as ons from 'onsenui';` in TypeScript.
+ * onsenui.d.ts: Added definitions for Onsen UI 2.3.x.
+
+### Misc
+
+ * core: Added warning which is shown when Onsen UI is loaded more than once.
+
 v2.3.2
 ----
 
