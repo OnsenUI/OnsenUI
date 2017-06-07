@@ -53,7 +53,7 @@ export class OnsInput implements OnChanges, OnDestroy {
     this._element.addEventListener('input', this._boundOnChange);
   }
 
-  _onChange(event) {
+  _onChange(event: any) {
     this._valueChange.emit(this._element.value);
   }
 

@@ -1,6 +1,6 @@
 
 export class Params {
-  constructor(private _data = {}) {}
+  constructor(private _data: any = {}) {}
 
   at(key: string): any {
     return this._data[key];

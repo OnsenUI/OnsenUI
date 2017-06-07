@@ -1,13 +1,3 @@
 npm_modules
-examples/*.js
-examples/*.js.map
-!examples/*.spec.js
-src/**/*.js
-src/**/*.js.map
-src/**/*.ngfactory.ts
-src/**/*.ngsummary.json
-src/*.js
-src/*.js.map
 dist
 npm-debug.log
-src/angular2-onsenui.ngfactory.ts

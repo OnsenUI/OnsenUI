@@ -4,7 +4,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FormsModule } from '@angular/forms';
 
@@ -40,10 +40,14 @@ export class AppComponent {
 
   constructor() { }
 
-  editSelects(event) {
-    document.getElementById('choose-sel').removeAttribute('modifier');
-    if (event == 'material' || event == 'underbar') {
-      document.getElementById('choose-sel').setAttribute('modifier', event);
+  editSelects(event: any) {
+    const chooseSel = document.getElementById('choose-sel');
+
+    if (chooseSel) {
+      chooseSel.removeAttribute('modifier');
+      if (event == 'material' || event == 'underbar') {
+        chooseSel.setAttribute('modifier', event);
+      }
     }
   }
 }

@@ -318,7 +318,7 @@ Navigator.propTypes = {
    * @required true
    * @defaultValue null
    * @description
-   *  [en] This function takes the current route object as a parameter and  creates returns a React component.[/en]
+   *  [en] This function takes the current route object as a parameter and returns a React component.[/en]
    *  [ja][/ja]
    */
   renderPage: PropTypes.func.isRequired,

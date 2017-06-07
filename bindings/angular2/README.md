@@ -1,4 +1,4 @@
-# Onsen UI binding for Angular2
+# Onsen UI binding for Angular 2+
 
 All the following commands must be executed in `bindings/angular2` directory.  
 Also, **you need to build the core before building this binding.**
@@ -6,7 +6,7 @@ Also, **you need to build the core before building this binding.**
 ## How to manually build this project
 
 ```bash
-$ yarn
+$ yarn install
 ```
 
 This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already.
