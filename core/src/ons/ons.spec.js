@@ -91,14 +91,11 @@ describe('ons', () => {
 
   describe('#preload()', () => {
     it('requests and caches new templates as fragments', () => {
-      const template = ons.createElement('<template id="test-template"><div></div></template>');
-      document.body.appendChild(template);
-
-      return ons.preload(['test-template'])
+      return ons.preload(['/base/test-template.html'])
         .then(result => {
           expect(result[0]).to.be.an.instanceof(DocumentFragment);
-          expect(ons._internal.templateStore.get('test-template')).to.be.ok;
-          expect(result[0]).to.equal(ons._internal.templateStore.get('test-template'));
+          expect(ons._internal.templateStore.get('/base/test-template.html')).to.be.ok;
+          expect(result[0]).to.equal(ons._internal.templateStore.get('/base/test-template.html'));
         });
     });
   });
