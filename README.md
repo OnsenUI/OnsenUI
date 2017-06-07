@@ -100,7 +100,7 @@ We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/rele
 npm install onsenui
 ```
 
-This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `angular2-onsenui`.
+This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
 
 * __Get the latest development build__
 
