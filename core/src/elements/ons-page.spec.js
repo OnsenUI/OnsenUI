@@ -47,6 +47,12 @@ describe('OnsPageElement', () => {
   });
 
   describe('#attachedCallback()', () => {
+    it('calls \'onInit\' hook', () => {
+      const p = new Promise((resolve) => element.onInit = resolve);
+      document.body.appendChild(element);
+      return expect(p).to.eventually.be.fulfilled;
+    });
+
     it('fires \'init\' event', () => {
       const initPromise = new Promise(function(resolve, reject) {
         const resolveOnce = () => {
@@ -104,6 +110,15 @@ describe('OnsPageElement', () => {
       expect(element.parentNode).not.to.be.ok;
       expect(spy).to.have.been.called.once;
       element.removeEventListener('destroy', spy);
+    });
+
+    it('calls \'onDestroy\' hook', () => {
+      const spy = chai.spy();
+      element.onDestroy = spy;
+      document.body.appendChild(element);
+      element._destroy();
+      expect(element.parentNode).not.to.be.ok;
+      expect(spy).to.have.been.called.once;
     });
   });
 
@@ -212,6 +227,12 @@ describe('OnsPageElement', () => {
       expect(element.parentNode).to.be.ok;
       return expect(showPromise).to.eventually.be.fulfilled;
     });
+
+    it('calls \'onShow\' hook', () => {
+      const p = new Promise((resolve) => element.onShow = resolve);
+      document.body.appendChild(element);
+      return expect(p).to.eventually.be.fulfilled;
+    });
   });
 
   describe('#_hide()', () => {
@@ -223,6 +244,15 @@ describe('OnsPageElement', () => {
       element._hide();
       expect(spy).to.have.been.called.once;
       element.removeEventListener('hide', spy);
+    });
+
+    it('calls \'onHide\' hook', () => {
+      const spy = chai.spy();
+      element.onHide = spy;
+      document.body.appendChild(element);
+      element._isShown = true;
+      element._hide();
+      expect(spy).to.have.been.called.once;
     });
   });
 
