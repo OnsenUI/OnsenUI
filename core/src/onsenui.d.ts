@@ -789,6 +789,47 @@ declare namespace ons {
     disabled: boolean;
   }
 
+  interface OnsSearchInputElement extends HTMLElement {
+    /**
+     * @description The current value of the search input.
+     */
+    value: string;
+    /**
+     * @description A boolean value that specifies whether the search input is disabled or not.
+     */
+    disabled: boolean;
+  }
+
+  interface OnsCheckboxElement extends HTMLElement {
+    /**
+     * @description The value of the checkbox.
+     */
+    value: string;
+    /**
+     * @description This boolean specifies whether the checkbox is checked or not.
+     */
+    checked: boolean;
+    /**
+     * @description A boolean value that specifies whether the checkbox is disabled or not.
+     */
+    disabled: boolean;
+  }
+
+  interface OnsRadioElement extends HTMLElement {
+    /**
+     * @description The value of the radio button.
+     */
+    value: string;
+    /**
+     * @description This boolean specifies whether the radio button is selected or not.
+     */
+    checked: boolean;
+    /**
+     * @description A boolean value that specifies whether the radio button is disabled or not.
+     */
+    disabled: boolean;
+  }
+
   interface OnsRangeElement extends HTMLElement {
     /**
      * @description A boolean value that specifies whether the input is disabled or not.
