@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from '../util';
 import platform from '../platform';
 import pageAttributeExpression from '../page-attribute-expression';
 
@@ -119,7 +120,6 @@ internal.getTemplateHTMLAsync = function(page) {
   return new Promise((resolve, reject) => {
     setImmediate(() => {
       const cache = internal.templateStore.get(page);
-
       if (cache) {
         if (cache instanceof DocumentFragment) {
           return resolve(cache);
@@ -127,29 +127,31 @@ internal.getTemplateHTMLAsync = function(page) {
 
         const html = typeof cache === 'string' ? cache : cache[1];
         return resolve(internal.normalizePageHTML(html));
-
-      } else {
-        const local = window.document.getElementById(page);
-        if (local) {
-          return resolve(local.textContent || local.content);
-        }
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', page, true);
-        xhr.onload = function(response) {
-          const html = xhr.responseText;
-          if (xhr.status >= 400 && xhr.status < 600) {
-            reject(html);
-          }
-          else {
-            resolve(html);
-          }
-        };
-        xhr.onerror = function() {
-          throw new Error(`The page is not found: ${page}`);
-        };
-        xhr.send(null);
       }
+
+      const local = window.document.getElementById(page);
+      if (local) {
+        const html = local.textContent || local.content;
+        internal.templateStore.set(page, html);
+        return resolve(html);
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', page, true);
+      xhr.onload = function() {
+        const html = xhr.responseText;
+        if (xhr.status >= 400 && xhr.status < 600) {
+          reject(html);
+        } else {
+          const fragment = util.createFragment(html);
+          internal.templateStore.set(page, fragment);
+          resolve(fragment);
+        }
+      };
+      xhr.onerror = function() {
+        throw new Error(`The page is not found: ${page}`);
+      };
+      xhr.send(null);
     });
   });
 };
