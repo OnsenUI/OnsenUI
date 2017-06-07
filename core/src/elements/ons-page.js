@@ -34,12 +34,6 @@ const scheme = {
 
 const nullToolbarElement = document.createElement('ons-toolbar'); // requires that 'ons-toolbar' element is registered
 
-const checkHookValue = value => {
-  if (!(value instanceof Function)) {
-    throw new Error('Life-cycle hooks must be functions');
-  }
-};
-
 /**
  * @element ons-page
  * @category page
@@ -156,6 +150,8 @@ export default class PageElement extends BaseElement {
 
   constructor() {
     super();
+
+    this._deriveHooks();
 
     this.classList.add(defaultClassName);
     this._initialized = false;
@@ -440,42 +436,20 @@ export default class PageElement extends BaseElement {
     this.remove();
   }
 
-  /* Life-cycle hooks */
-
-  get onInit() {
-    return this._onInit;
-  }
-
-  set onInit(newValue) {
-    checkHookValue(newValue);
-    this._onInit = newValue.bind(this);
-  }
-
-  get onShow() {
-    return this._onShow;
-  }
-
-  set onShow(newValue) {
-    checkHookValue(newValue);
-    this._onShow = newValue.bind(this);
-  }
-
-  get onHide() {
-    return this._onHide;
-  }
-
-  set onHide(newValue) {
-    checkHookValue(newValue);
-    this._onHide = newValue.bind(this);
-  }
-
-  get onDestroy() {
-    return this._onDestroy;
-  }
-
-  set onDestroy(newValue) {
-    checkHookValue(newValue);
-    this._onDestroy = newValue.bind(this);
+  _deriveHooks() {
+    this.constructor.events.forEach(event => {
+      const key = 'on' + event.charAt(0).toUpperCase() + event.slice(1);
+      Object.defineProperty(this, `_${key}`, {
+        enumerable: true,
+        get: () => this[`_${key}`],
+        set: value => {
+          if (!(value instanceof Function)) {
+            throw new Error(`${key} hook must be a function`);
+          }
+          this[`_${key}`] = value.bind(this);
+        }
+      });
+    });
   }
 
   static get events() {
