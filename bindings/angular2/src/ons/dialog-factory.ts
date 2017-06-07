@@ -32,6 +32,8 @@ export class DialogFactory {
   }
 
   createDialog(componentType: Type<any>, params: Object = {}): Promise<DialogRef> { // TODO: fix "any"
+    console.warn('[ngx-onsenui] DialogFactory is deprecated since 4.0.0-rc.0. Place <ons-dialog> into your component instead.');
+
     return new Promise(resolve => {
       setImmediate(() => {
         this._zone.run(() => {

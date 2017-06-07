@@ -28,6 +28,10 @@ dev
  * Removed unnecessary peer dependency `rxjs`.
  * Removed unnecessary peer dependency `zone.js`.
  * Removed unnecessary peer dependency `core-js`.
+ * Added deprecation warning for `AlertDialogFactory`.
+ * Added deprecation warning for `DialogFactory`.
+ * Added deprecation warning for `ModalFactory`.
+ * Added deprecation warning for `PopoverFactory`.
 
 ### BREAKING CHANGES
 
