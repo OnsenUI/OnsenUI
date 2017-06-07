@@ -20,6 +20,18 @@ dev
  * ons-input: It has been split into different elements: `ons-input` for text types; `ons-checkbox` for checkboxes; `ons-radio` for radio buttons; and `ons-search-input` for styled search inputs.
      * `<ons-input type="radio" checked>` => `<ons-radio checked>`
 
+v2.3.3
+----
+
+### New Features
+
+ * onsenui.d.ts: Enabled `import * as ons from 'onsenui';` in TypeScript.
+ * onsenui.d.ts: Added definitions for Onsen UI 2.3.x.
+
+### Misc
+
+ * core: Added warning which is shown when Onsen UI is loaded more than once.
+
 v2.3.2
 ----
 
