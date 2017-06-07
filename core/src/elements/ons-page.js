@@ -461,7 +461,7 @@ export default class PageElement extends BaseElement {
   }
 
   get onHide() {
-    return this._onShow;
+    return this._onHide;
   }
 
   set onHide(newValue) {
