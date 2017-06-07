@@ -132,7 +132,6 @@ internal.getTemplateHTMLAsync = function(page) {
       const local = window.document.getElementById(page);
       if (local) {
         const html = local.textContent || local.content;
-        internal.templateStore.set(page, html);
         return resolve(html);
       }
 
