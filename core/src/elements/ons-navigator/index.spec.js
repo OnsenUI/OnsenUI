@@ -1,12 +1,12 @@
 'use strict';
 
 describe('OnsNavigatorElement', () => {
-  let nav, nav2;
+  let nav, nav2, tpl1, tpl2, tpl3;
 
   beforeEach((done) => {
-    const tpl1 = ons._util.createElement(`<template id="hoge"><ons-page>hoge</ons-page></template>`);
-    const tpl2 = ons._util.createElement(`<template id="fuga"><ons-page>fuga</ons-page></template>`);
-    const tpl3 = ons._util.createElement(`<template id="info"><ons-page>info</ons-page></template>`);
+    tpl1 = ons._util.createElement(`<template id="hoge"><ons-page>hoge</ons-page></template>`);
+    tpl2 = ons._util.createElement(`<template id="fuga"><ons-page>fuga</ons-page></template>`);
+    tpl3 = ons._util.createElement(`<template id="info"><ons-page>info</ons-page></template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     document.body.appendChild(tpl3);
@@ -22,7 +22,10 @@ describe('OnsNavigatorElement', () => {
 
   afterEach(() => {
     nav.remove();
-    nav = null;
+    tpl1.remove();
+    tpl2.remove();
+    tpl3.remove();
+    nav = tpl1 = tpl2 = tpl3 = null;
   });
 
   it('should exist', () => {
