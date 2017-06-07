@@ -17,8 +17,8 @@ CHANGELOG
 
 ### Misc
 
- * Complied with TypeScript’s `noImplicitAny`.
- * Complied with TypeScript’s `strictNullChecks`.
+ * Complied with TypeScript's '`noImplicitAny`.
+ * Complied with TypeScript's `strictNullChecks`.
  * Refined directory structure.
  * Removed unnecessary peer dependency `@angular/common`.
  * Removed unnecessary peer dependency `@angular/compiler`.
