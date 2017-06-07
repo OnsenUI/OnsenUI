@@ -14,6 +14,7 @@ dev
 ### Misc
 
  * css-components: Refined the appearance of `button` on Android.
+ * core: Updated `font-awesome` icon library.
 
 ### BREAKING CHANGES
 
