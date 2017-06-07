@@ -6,8 +6,8 @@ dev
 
 ### New Features
 
- * Supported Angular 4.0.0 and higher.
- * Supported Onsen UI Core 2.3.0 and higher.
+ * Supported Angular 4.0.0+.
+ * Supported Onsen UI Core 2.3.0+.
  * Added unbundled ES modules written in ES2015.
 
 ### Bug Fixes
