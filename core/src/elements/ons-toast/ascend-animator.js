@@ -37,13 +37,16 @@ export default class AscendToastAnimator extends ToastAnimator {
    * @param {Function} callback
    */
   show(toast, callback) {
-    const siblingPage = this._findSiblingControlComponent(toast);
     toast = toast._toast;
+
+    const fabs = util.arrayFrom(document.querySelectorAll('ons-fab[position~=bottom]')).filter(fab => fab.visible);
 
     if (!this.ascension) {
       const cs = window.getComputedStyle(toast);
       this.ascension = parseInt(cs.getPropertyValue('height'), 10) + parseInt(cs.getPropertyValue('margin-bottom'), 10);
     }
+
+    util.globals.fabOffset = this.ascension;
 
     animit.runAll(
       animit(toast)
@@ -64,13 +67,10 @@ export default class AscendToastAnimator extends ToastAnimator {
           done();
         }),
 
-      animit(siblingPage) // Cannot save/restore style
-        .queue({
-          bottom: '0'
-        })
+      animit(fabs)
         .wait(this.delay)
         .queue({
-          bottom: `${this.ascension}px`
+          transform: `translate3d(0, -${this.ascension}px, 0) scale(1)`
         }, {
           duration: this.duration,
           timing: this.timing
@@ -97,13 +97,11 @@ export default class AscendToastAnimator extends ToastAnimator {
    * @param {Function} callback
    */
   hide(toast, callback) {
-    const siblingPage = this._findSiblingControlComponent(toast);
     toast = toast._toast;
 
-    if (!this.ascension) {
-      const cs = window.getComputedStyle(toast);
-      this.ascension = parseInt(cs.getPropertyValue('height'), 10) + parseInt(cs.getPropertyValue('margin-bottom'), 10);
-    }
+    const offset = this.ascension ? `${this.ascension}px` : '100%';
+    const fabs = util.arrayFrom(document.querySelectorAll('ons-fab')).filter(fab => fab.visible);
+    util.globals.fabOffset = 0;
 
     animit.runAll(
       animit(toast)
@@ -113,7 +111,7 @@ export default class AscendToastAnimator extends ToastAnimator {
         })
         .wait(this.delay)
         .queue({
-          transform: `translate3d(0, ${this.ascension}px, 0)`
+          transform: `translate3d(0, ${offset}, 0)`
         }, {
           duration: this.duration,
           timing: this.timing
@@ -124,13 +122,10 @@ export default class AscendToastAnimator extends ToastAnimator {
           done();
         }),
 
-      animit(siblingPage) // Cannot save/restore style
-        .queue({
-          bottom: `${this.ascension}px`
-        })
+      animit(fabs)
         .wait(this.delay)
         .queue({
-          bottom: '0'
+          transform: 'translate3d(0, 0, 0) scale(1)'
         }, {
           duration: this.duration,
           timing: this.timing
@@ -150,10 +145,5 @@ export default class AscendToastAnimator extends ToastAnimator {
         })
         .restoreStyle()
     );
-  }
-
-  _findSiblingControlComponent(toast) {
-    const query = e => /(ons-page|ons-navigator|ons-tabbar|ons-splitter)/i.test(e.tagName);
-    return util.findChild(toast.parentNode, query) || util.findChild(document.body.children[0], query);
   }
 }
