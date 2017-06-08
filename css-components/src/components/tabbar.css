@@ -371,6 +371,7 @@
 }
 
 .tabbar--material {
+  background: none;
   background-color: var(--material-tabbar-background-color);
   border-bottom-width: 0;
   box-shadow:
