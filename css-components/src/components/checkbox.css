@@ -261,16 +261,19 @@
   height: var(--material-checkbox-size);
   width: var(--material-checkbox-size);
   border: 2px solid var(--material-checkbox-inactive-color);
+  transition: background-color 0.1s linear 0.2s, border-color 0.1s linear 0.2s;
+  background-color: transparent;
 }
 
 :checked + .checkbox--material__checkmark:before {
+  border: 2px solid var(--material-checkbox-active-color);
   background-color: var(--material-checkbox-active-color);
-  border: none;
+  transition: background-color 0.1s linear, border-color 0.1s linear;
 }
 
 .checkbox--material__checkmark:after {
   border-color: var(--material-checkbox-checkmark-color);
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease 0;
   width: 10px;
   height: 5px;
   top: 4px;
@@ -280,9 +283,13 @@
 }
 
 :checked + .checkbox--material__checkmark:after {
+  transition: transform 0.2s ease 0.2s;
+  width: 10px;
+  height: 5px;
   top: 4px;
   left: 3px;
   transform: scale(1) rotate(-45deg);
+  border-width: 2px;
 }
 
 :disabled + .checkbox--material__checkmark {
