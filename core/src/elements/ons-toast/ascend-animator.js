@@ -138,6 +138,6 @@ export default class AscendToastAnimator extends ToastAnimator {
   }
 
   _getFabs() {
-    return util.arrayFrom(document.querySelectorAll('ons-fab[position~=bottom]')).filter(fab => fab.visible);
+    return util.arrayFrom(document.querySelectorAll('ons-fab[position~=bottom], ons-speed-dial[position~=bottom]')).filter(fab => fab.visible);
   }
 }
