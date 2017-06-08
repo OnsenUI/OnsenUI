@@ -215,6 +215,7 @@ v2.2.0
  * angular1: `number input` retains number type variable with `ngModel`.
  * angular1: Fixed [#1843](https://github.com/OnsenUI/OnsenUI/issues/1843).
  * angular1: Fixed [#1799](https://github.com/OnsenUI/OnsenUI/issues/1799).
+ * core: Fixed [#1876](https://github.com/OnsenUI/OnsenUI/issues/1876).
 
 ### Misc
 
