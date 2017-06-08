@@ -18,6 +18,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import animit from '../../ons/animit';
+import platform from '../../ons/platform';
 import ToastAnimator from './animator';
 
 /**
@@ -29,7 +30,7 @@ export default class AscendToastAnimator extends ToastAnimator {
     super({ timing, delay, duration });
 
     this.messageDelay = this.duration * 0.4 + this.delay; // Delay message opacity change
-    this.ascension = undefined; // Calculated during the first animation
+    this.ascension = platform.isAndroid() ? 48 : 64; // Toasts are always 1 line
   }
 
   /**
@@ -38,14 +39,6 @@ export default class AscendToastAnimator extends ToastAnimator {
    */
   show(toast, callback) {
     toast = toast._toast;
-
-    const fabs = util.arrayFrom(document.querySelectorAll('ons-fab[position~=bottom]')).filter(fab => fab.visible);
-
-    if (!this.ascension) {
-      const cs = window.getComputedStyle(toast);
-      this.ascension = parseInt(cs.getPropertyValue('height'), 10) + parseInt(cs.getPropertyValue('margin-bottom'), 10);
-    }
-
     util.globals.fabOffset = this.ascension;
 
     animit.runAll(
@@ -67,7 +60,7 @@ export default class AscendToastAnimator extends ToastAnimator {
           done();
         }),
 
-      animit(fabs)
+      animit(this._getFabs())
         .wait(this.delay)
         .queue({
           transform: `translate3d(0, -${this.ascension}px, 0) scale(1)`
@@ -98,9 +91,6 @@ export default class AscendToastAnimator extends ToastAnimator {
    */
   hide(toast, callback) {
     toast = toast._toast;
-
-    const offset = this.ascension ? `${this.ascension}px` : '100%';
-    const fabs = util.arrayFrom(document.querySelectorAll('ons-fab')).filter(fab => fab.visible);
     util.globals.fabOffset = 0;
 
     animit.runAll(
@@ -111,7 +101,7 @@ export default class AscendToastAnimator extends ToastAnimator {
         })
         .wait(this.delay)
         .queue({
-          transform: `translate3d(0, ${offset}, 0)`
+          transform: `translate3d(0, ${this.ascension}px, 0)`
         }, {
           duration: this.duration,
           timing: this.timing
@@ -122,7 +112,7 @@ export default class AscendToastAnimator extends ToastAnimator {
           done();
         }),
 
-      animit(fabs)
+      animit(this._getFabs())
         .wait(this.delay)
         .queue({
           transform: 'translate3d(0, 0, 0) scale(1)'
@@ -145,5 +135,9 @@ export default class AscendToastAnimator extends ToastAnimator {
         })
         .restoreStyle()
     );
+  }
+
+  _getFabs() {
+    return util.arrayFrom(document.querySelectorAll('ons-fab[position~=bottom]')).filter(fab => fab.visible);
   }
 }
