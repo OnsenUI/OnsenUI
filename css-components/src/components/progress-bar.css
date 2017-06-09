@@ -1,8 +1,14 @@
 
 :root {
-  --progress-bar-color: var(--material-progress-bar-primary-color);
-  --progress-bar-secondary-color: var(--material-progress-bar-secondary-color);
-  --progress-bar-background-color: var(--material-progress-bar-background-color);
+  --progress-bar-color: #0076ff;
+  --progress-bar-secondary-color: #65adff;
+  --progress-bar-background-color: #b6b6b6;
+
+  /*
+  --material-progress-bar-primary-color;
+  --material-progress-bar-secondary-color;
+  --material-progress-bar-background-color;
+  */
 }
 
 /*~
@@ -25,13 +31,14 @@
 
 .progress-bar {
   position: relative;
-  height: 4px;
+  height: 2px;
   display: block;
   width: 100%;
   background-color: var(--progress-bar-background-color);
   background-clip: padding-box;
   margin: 0;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .progress-bar__primary,
@@ -42,6 +49,7 @@
   bottom: 0;
   transition: width .3s linear;
   z-index: 100;
+  border-radius: 4px;
 }
 
 .progress-bar__secondary {
@@ -58,6 +66,7 @@
   bottom: 0;
   will-change: left, right;
   animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  border-radius: 4px;
 }
 
 .progress-bar--indeterminate:after {
@@ -70,6 +79,7 @@
   will-change: left, right;
   animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   animation-delay: 1.15s;
+  border-radius: 4px;
 }
 
 @keyframes progress-bar__indeterminate {
@@ -106,3 +116,47 @@
   }
 }
 
+/*~
+  name: Material Progress Bar
+  category: Progress Bar
+  elements: ons-progress-bar
+  markup: |
+    <div class="progress-bar progress-bar--material">
+      <div class="progress-bar__primary progress-bar--material__primary" style="width: 30%"></div>
+    </div>
+    <br />
+    <div class="progress-bar progress-bar--material">
+      <div class="progress-bar__primary progress-bar--material__primary" style="width:20%"></div>
+      <div class="progress-bar__secondary progress-bar--material__secondary" style="width:76%"></div>
+    </div>
+    <br />
+    <div class="progress-bar progress-bar--material progress-bar--indeterminate">
+    </div>
+*/
+
+.progress-bar--material {
+  height: 4px;
+  background-color: var(--material-progress-bar-background-color);
+  border-radius: 0;
+}
+
+.progress-bar--material__primary,
+.progress-bar--material__secondary {
+  background-color: var(--material-progress-bar-primary-color);
+  border-radius: 0;
+}
+
+.progress-bar--material__secondary {
+  background-color: var(--material-progress-bar-secondary-color);
+  z-index: 0;
+}
+
+.progress-bar--material.progress-bar--indeterminate:before { /* FIXME */
+  background-color: var(--material-progress-bar-primary-color);
+  border-radius: 0;
+}
+
+.progress-bar--material.progress-bar--indeterminate:after { /* FIXME */
+  background-color: var(--material-progress-bar-primary-color);
+  border-radius: 0;
+}
