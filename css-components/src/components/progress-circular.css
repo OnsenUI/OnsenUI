@@ -1,3 +1,15 @@
+:root {
+
+
+  --progress-circle-primary-color: #0076ff;
+  --progress-circle-secondary-color: #0076ff;
+
+  /*
+  --material-progress-circle-primary-color: red;
+  --material-progress-circle-secondary-color: red;
+  */
+}
+
 /*~
   name: Progress Circle
   category: Progress Circle
@@ -33,19 +45,19 @@
   r: 40%;
   animation: none;
   fill: none;
-  stroke-width: 9%;
+  stroke-width: 5%;
   stroke-miterlimit: 10;
 }
 
 .progress-circular__primary {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  stroke: var(--material-progress-circle-primary-color);
+  stroke: var(--progress-circle-primary-color);
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-circular__secondary {
-  stroke: var(--material-progress-circle-secondary-color);
+  stroke: var(--progress-circle-secondary-color);
 }
 
 .progress-circular--indeterminate {
@@ -82,4 +94,36 @@
     stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: -251.32%;
   }
+}
+
+/*~
+  name: Material Progress Circle
+  category: Progress Circle
+  elements: ons-progress-circular
+  markup: |
+    <svg class="progress-circular progress-circular--material progress-circular--indeterminate">
+      <circle class="progress-circular__primary progress-circular--material__primary progress-circular--indeterminate__primary"/>
+      <circle class="progress-circular__secondary progress-circular--material__secondary progress-circular--indeterminate__secondary"/>
+    </svg>
+
+    <svg class="progress-circular progress-circular--material">
+      <circle class="progress-circular__secondary progress-circular--material__secondary" style="stroke-dasharray: 140%, 251.32%"/>
+      <circle class="progress-circular__primary progress-circular--material__primary" style="stroke-dasharray: 100%, 251.32%"/>
+    </svg>
+
+    <svg class="progress-circular progress-circular--material">
+      <circle class="progress-circular__primary progress-circular--material__primary" style="stroke-dasharray: 80%, 251.32%"/>
+    </svg>
+*/
+.progress-circular--material__primary, .progress-circular--material__secondary {
+  stroke-width: 9%;
+}
+
+
+.progress-circular--material__primary {
+  stroke: var(--material-progress-circle-primary-color);
+}
+
+.progress-circular--material__secondary {
+  stroke: var(--material-progress-circle-secondary-color);
 }
