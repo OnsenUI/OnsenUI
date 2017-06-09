@@ -337,9 +337,9 @@ export default class TabElement extends BaseElement {
     }
 
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
-      .forEach(element => element.style.display = 'none');
+      .forEach(element => element.style.visibility = 'hidden');
     util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
-      .forEach(element => element.style.display = 'inherit');
+      .forEach(element => element.style.visibility = 'visible');
   }
 
   setInactive() {
@@ -354,9 +354,9 @@ export default class TabElement extends BaseElement {
     }
 
     util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
-      .forEach(element => element.style.display = 'inherit');
+      .forEach(element => element.style.visibility = 'visible');
     util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
-      .forEach(element => element.style.display = 'none');
+      .forEach(element => element.style.visibility = 'hidden');
   }
 
   /**
@@ -432,7 +432,7 @@ export default class TabElement extends BaseElement {
         if (this._getPageTarget() && !this.hasLoaded) {
           this.hasLoaded = true;
           this._loadPageElement(tabbar._contentElement, pageElement => {
-            pageElement.style.display = 'none';
+            pageElement.style.visibility = 'hidden';
             tabbar._contentElement.appendChild(pageElement);
           });
         }
