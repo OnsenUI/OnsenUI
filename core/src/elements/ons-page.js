@@ -439,7 +439,7 @@ export default class PageElement extends BaseElement {
   _deriveHooks() {
     this.constructor.events.forEach(event => {
       const key = 'on' + event.charAt(0).toUpperCase() + event.slice(1);
-      Object.defineProperty(this, `_${key}`, {
+      Object.defineProperty(this, key, {
         enumerable: true,
         get: () => this[`_${key}`],
         set: value => {
