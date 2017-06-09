@@ -1,16 +1,4 @@
 
-:root {
-  --progress-bar-color: #0076ff;
-  --progress-bar-secondary-color: #65adff;
-  --progress-bar-background-color: #b6b6b6;
-
-  /*
-  --material-progress-bar-primary-color;
-  --material-progress-bar-secondary-color;
-  --material-progress-bar-background-color;
-  */
-}
-
 /*~
   name: Progress Bar
   category: Progress Bar

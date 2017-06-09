@@ -18,6 +18,11 @@
   --list-background-color: #fff;
   --list-header-background-color: #eee;
   --list-tap-active-background-color: #d9d9d9;
+  --progress-bar-color: rgba(24, 103, 194, 0.81);
+  --progress-bar-secondary-color: rgba(24, 103, 194, 0.4);
+  --progress-bar-background-color: #b6b6b6;
+  --progress-circle-primary-color: rgba(24, 103, 194, 0.81);
+  --progress-circle-secondary-color: rgba(24, 103, 194, 0.81);
   --tabbar-background-color: #fff;
   --tabbar-text-color: #999;
   --tabbar-highlight-text-color: rgba(24, 103, 194, 0.81);
