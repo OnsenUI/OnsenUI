@@ -53,6 +53,10 @@ describe('OnsPageElement', () => {
       return expect(p).to.eventually.be.fulfilled;
     });
 
+    it('throws error if \'onInit\' is not a function', () => {
+      expect(() => element.onInit = 'something').to.throw('function');
+    });
+
     it('fires \'init\' event', () => {
       const initPromise = new Promise(function(resolve, reject) {
         const resolveOnce = () => {
