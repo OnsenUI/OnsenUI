@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+4.0.0-rc.1
 ----
 
 ### Bug Fixes
