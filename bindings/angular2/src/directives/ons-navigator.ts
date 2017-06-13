@@ -12,13 +12,13 @@ import {
   OnDestroy,
   NgZone
 } from '@angular/core';
-import {Params} from '../ons/params';
+import * as ons from 'onsenui';
 
-declare const ons: any;
+import {Params} from '../ons/params';
 
 export class NavigatorPage {
   constructor(
-    public elementRef: ElementRef = null,
+    public elementRef: ElementRef | null = null,
     public destroy: Function = function() {},
     public animator: any = null,
     public params: Params = new Params()) {
@@ -91,10 +91,10 @@ export class OnsNavigator implements OnDestroy {
   }
 
   _createPageLoader() {
-    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
+    const componentRefMap: WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}, done: Function) => {
+      ({page, parent, params}: any, done: Function) => {
         this._zone.run(() => {
           const pageParams = new Params(params || {});
           const injector = ReflectiveInjector.resolveAndCreate([
@@ -104,7 +104,7 @@ export class OnsNavigator implements OnDestroy {
 
           const factory = this._resolver.resolveComponentFactory(page);
           const selector = 'ons-navigator';
-          const pageComponentRef = factory.create(injector, null);
+          const pageComponentRef = factory.create(injector, undefined);
           this._viewContainer.insert(pageComponentRef.hostView);
           const pageElement = pageComponentRef.location.nativeElement;
           componentRefMap.set(pageElement, pageComponentRef);
@@ -114,9 +114,11 @@ export class OnsNavigator implements OnDestroy {
           done(pageElement);
         });
       },
-      element => {
-        if (componentRefMap.has(element)) {
-          componentRefMap.get(element).destroy();
+      (element: any) => {
+        const componentRef = componentRefMap.get(element);
+        
+        if (componentRef) {
+          componentRef.destroy();
           componentRefMap.delete(element);
         }
       }

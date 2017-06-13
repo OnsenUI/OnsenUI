@@ -1,6 +1,52 @@
 CHANGELOG
 ====
 
+4.0.0-rc.1
+----
+
+### Bug Fixes
+
+ * Downgraded ES modules from ES2015-syntax to ES5-syntax.
+
+4.0.0-rc.0
+----
+
+### New Features
+
+ * Supported Angular 4.0.0+.
+ * Supported Onsen UI Core 2.3.0+.
+ * Added unbundled ES modules written in ES2015.
+
+### Bug Fixes
+
+ * Supported AoT compilation correctly.
+ * Fixed a problem where `ngx-onsenui` depends on `onsenui` via `ons` object. Now you do not have to load `onsenui.js` outside of module bundlers.
+
+### Misc
+
+ * Complied with TypeScript's `noImplicitAny`.
+ * Complied with TypeScript's `strictNullChecks`.
+ * Refined directory structure.
+ * Removed unnecessary peer dependency `@angular/common`.
+ * Removed unnecessary peer dependency `@angular/compiler`.
+ * Removed unnecessary peer dependency `@angular/compiler-cli`.
+ * Removed unnecessary peer dependency `@angular/platform-browser`.
+ * Removed unnecessary peer dependency `@angular/platform-browser-dynamic`.
+ * Removed unnecessary peer dependency `rxjs`.
+ * Removed unnecessary peer dependency `zone.js`.
+ * Removed unnecessary peer dependency `core-js`.
+ * Added deprecation warning for `AlertDialogFactory`.
+ * Added deprecation warning for `DialogFactory`.
+ * Added deprecation warning for `ModalFactory`.
+ * Added deprecation warning for `PopoverFactory`.
+
+### BREAKING CHANGES
+
+ * Changed package name from `angular2-onsenui` to `ngx-onsenui`.
+ * Changed name of the global variable from `Angular2-OnsenUI` to `NgxOnsenUI`.
+ * Removed `onsenui.d.ts`. Please use the type definition file in `onsenui` package instead.
+ * Removed other unnecessary files.
+
 1.0.0-rc.6 (2017-03-14)
 ----
 

@@ -6,8 +6,4 @@ dist
 .idea
 .selenium
 .vscode
-/core/test/unit/coverage
-/core/test/unit/test-results.xml
-/core/test/unit/TESTS-*.xml
-/core/src/onsenui-test.js
-/build/*
+/build

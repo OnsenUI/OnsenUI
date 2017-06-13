@@ -32,6 +32,8 @@ export class ModalFactory {
   }
 
   createModal(componentType: Type<any>, params: Object = {}): Promise<ModalRef> {
+    console.warn('[ngx-onsenui] ModalFactory is deprecated since 4.0.0-rc.0. Place <ons-modal> into your component instead.');
+
     return new Promise(resolve => {
       setImmediate(() => {
         this._zone.run(() => {

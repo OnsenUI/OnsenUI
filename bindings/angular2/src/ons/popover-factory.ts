@@ -34,6 +34,8 @@ export class PopoverFactory {
   }
 
   createPopover(componentType: any, params: Object = {}): Promise<PopoverRef> { // TODO: fix "any"
+    console.warn('[ngx-onsenui] PopoverFactory is deprecated since 4.0.0-rc.0. Place <ons-popover> into your component instead.');
+
     return new Promise(resolve => {
       setImmediate(() => {
         this._zone.run(() => {

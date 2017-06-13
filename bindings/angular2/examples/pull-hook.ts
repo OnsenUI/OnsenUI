@@ -3,7 +3,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/angular2-onsenui';
+} from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
@@ -35,14 +35,14 @@ export class AppComponent {
   constructor() {
   }
 
-  onAction($event) {
+  onAction($event: any) {
     setTimeout(() => {
       this.items.push(0);
       $event.done(); // Run change detector
     }, 1000);
   }
 
-  onChangeState($event) {
+  onChangeState($event: any) {
     switch ($event.state) {
       case 'initial':
         this.message = 'Pull down to refresh';

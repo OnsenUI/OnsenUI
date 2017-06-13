@@ -34,8 +34,18 @@
       <ons-button modifier="outline" onclick="setAnimation('fall')">Fall</ons-button>
       <ons-button modifier="outline" onclick="setAnimation('fade')">Fade</ons-button>
     </p>
-    <ons-fab position="bottom left">-</ons-fab>
-    <ons-fab position="bottom right">+</ons-fab>
+
+    <ons-fab position="top right">+</ons-fab>
+    <ons-fab position="bottom left">+</ons-fab>
+
+    <ons-speed-dial position="right bottom" direction="up">
+      <ons-fab>
+        <ons-icon icon="md-car"></ons-icon>
+      </ons-fab>
+      <ons-speed-dial-item>C</ons-speed-dial-item>
+      <ons-speed-dial-item>B</ons-speed-dial-item>
+      <ons-speed-dial-item>A</ons-speed-dial-item>
+    </ons-speed-dial>
   </ons-page>
 
   <ons-toast>

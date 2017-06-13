@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "onsenui": ["../../build"]
+    }
+  },
+  "include": [
+    "examples"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
+}

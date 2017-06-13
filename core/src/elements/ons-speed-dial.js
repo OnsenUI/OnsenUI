@@ -288,6 +288,12 @@ export default class SpeedDialElement extends BaseElement {
     }
   }
 
+  _getTranslate() {
+    const isBottom = (this.getAttribute('position') || '').indexOf('bottom') >= 0;
+    const translate = isBottom ? `translate3d(0px, -${util.globals.fabOffset || 0}px, 0px) ` : '';
+    return translate;
+  }
+
   /**
    * @method show
    * @signature show()
@@ -297,6 +303,7 @@ export default class SpeedDialElement extends BaseElement {
    */
   show() {
     this._fab.show();
+    this.style.webkitTransform = this.style.transform =  this._getTranslate();
     return Promise.resolve();
   }
 

@@ -7,6 +7,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
+import * as ons from 'onsenui';
+
 export class ItemContext {
   constructor(public $implicit: any, public index: number, public count: number) {
   }
@@ -58,7 +60,7 @@ export class OnsLazyRepeat implements OnDestroy {
     this._provider = new (<any>ons)._internal.LazyRepeatProvider(
       this._elementRef.nativeElement.parentElement,
       new (<any>ons)._internal.LazyRepeatDelegate({
-        loadItemElement: (index, done) => {
+        loadItemElement: (index: number, done: Function) => {
           this._loadItemTemplate(index, done);
         },
         countItems: () => {
@@ -68,7 +70,7 @@ export class OnsLazyRepeat implements OnDestroy {
     );
   }
 
-  _loadItemTemplate(index, done) {
+  _loadItemTemplate(index: number, done: Function) {
     const context = new ItemContext(this._onsLazyRepeatOf[index], index, this._onsLazyRepeatOf.length);
     const view = this._viewContainer.createEmbeddedView(this._templateRef, context);
     // dirty fix on createEmbeddedView() does not insert DOM element randomly.

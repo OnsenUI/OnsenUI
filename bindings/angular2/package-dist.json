@@ -1,0 +1,48 @@
+{
+  "name": "ngx-onsenui",
+  "version": "4.0.0-rc.1",
+  "private": false,
+  "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
+  "main": "bundles/ngx-onsenui.umd.js",
+  "module": "ngx-onsenui.js",
+  "typings": "ngx-onsenui.d.ts",
+  "files": [
+    "bundles/ngx-onsenui.umd.*",
+    "bundles/ngx-onsenui.umd.min.*",
+    "ngx-onsenui.d.ts",
+    "ngx-onsenui.js",
+    "ngx-onsenui.js.map",
+    "ngx-onsenui.metadata.json",
+    "directives/**/*.d.ts",
+    "directives/**/*.js",
+    "directives/**/*.js.map",
+    "directives/**/*.metadata.json",
+    "ons/**/*.d.ts",
+    "ons/**/*.js",
+    "ons/**/*.js.map",
+    "ons/**/*.metadata.json"
+  ],
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "repository": "https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2",
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "components",
+    "ui",
+    "mobile",
+    "hybrid",
+    "cordova",
+    "phonegap"
+  ],
+  "homepage": "https://onsen.io/angular2/",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "onsenui": "~2.3.3"
+  }
+}
