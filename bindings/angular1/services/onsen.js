@@ -162,7 +162,7 @@ limitations under the License.
               window.ons._internal.getPageHTMLAsync(page).then(html => {
                 this.compileAndLink(
                   view,
-                  window.ons._util.createElement(html.trim()),
+                  window.ons._util.createElement(html),
                   element => done(parent.appendChild(element))
                 );
               });
