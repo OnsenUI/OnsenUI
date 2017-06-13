@@ -15,6 +15,7 @@ dev
 
  * css-components: Refined the appearance of `button` on Android.
  * core: Updated `font-awesome` icon library.
+ * ons-toast: Improved 'ascend' animator performance.
 
 ### BREAKING CHANGES
 
