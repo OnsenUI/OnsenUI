@@ -7,6 +7,7 @@ dev
 
 ### New Features
 
+ * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
 
 ### Bug Fixes
 
