@@ -185,7 +185,7 @@ export default class TabbarElement extends BaseElement {
 
       const content = this._contentElement;
       for (let i = 0; i < content.children.length; i++) {
-        content.children[i].style.display = 'none';
+        content.children[i].style.visibility = 'hidden';
       }
 
       const activeIndex = this.getAttribute('activeIndex');
@@ -281,7 +281,7 @@ export default class TabbarElement extends BaseElement {
     const pages = this._contentElement.children;
     let page = null;
     for (var i = 0; i < pages.length; i++) {
-      if (pages[i].style.display !== 'none') {
+      if (pages[i].style.visibility !== 'hidden') {
         page = pages[i];
         break;
       }
@@ -324,10 +324,10 @@ export default class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          oldPageElement.style.display = 'none';
+          oldPageElement.style.visibility = 'hidden';
         }
 
-        element.style.display = 'block';
+        element.style.visibility = 'visible';
         element._show();
 
         if (options.callback instanceof Function) {
@@ -454,7 +454,7 @@ export default class TabbarElement extends BaseElement {
    */
   setTabbarVisibility(visible) {
     this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
-    this._getTabbarElement().style.display = visible ? '' : 'none';
+    this._getTabbarElement().style.visibility = visible ? 'visible' : 'hidden';
   }
 
   show() {
@@ -474,7 +474,7 @@ export default class TabbarElement extends BaseElement {
    *   [ja]タブバーが見える場合に`true`。[/ja]
    */
   get visible() {
-    return this._getTabbarElement().style.display !== 'none';
+    return this._getTabbarElement().style.visibility !== 'hidden';
   }
 
   /**
