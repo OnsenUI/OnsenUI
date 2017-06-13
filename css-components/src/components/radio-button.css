@@ -91,7 +91,7 @@
   height: var(--checkbox-size);
   background: transparent;
   border: none;
-  border-radius: var(--checkbox-border-radius);
+  border-radius: var(--checkbox-size);
   left: 0;
 }
 
@@ -105,19 +105,7 @@
 }
 
 .radio-button__checkmark:after {
-  @apply(--radio-button--after);
-  top: var(--checkmark-top);
-  left: var(--checkmark-left);
-  opacity: 0;
-  width: var(--checkmark-tail-width);
-  height: var(--checkmark-foot-height);
-  background: transparent;
-  border: var(--radio-button-border);
-  border-width: var(--checkmark-border-width);
-  border-top: none;
-  border-right: none;
-  border-radius: var(--checkmark-border-radius);
-  transform: rotate(-45deg);
+  @apply(--checkmark);
 }
 
 :checked + .radio-button__checkmark {

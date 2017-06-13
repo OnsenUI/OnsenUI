@@ -1,20 +1,9 @@
 :root {
-  --background-color-checked--checkbox: var(--highlight-color); /* background color active */
-  --checkbox-border-color: var(--highlight-color);
-  --checkbox-border-color-active: var(--highlight-color);
-  --checkmark-color: #fff; /* indicator color */
-  --checkmark-foot-height: 6px;
-  --checkbox-border: 1px solid var(--checkbox-border-color);
-  --background-color--before--checkbox: var(--background-color-checked--checkbox);
-  --checkmark-border: 3px solid var(--checkmark-color);
-  --checkmark-tail-width: 12px;
-  --checkmark-border-width: 2px;
-  --checkmark-top: 6px;
-  --checkmark-left: 5px;
-  --checkbox-size: 24px;
-  --border--checkmark--noborder: 3px solid var(--checkbox-border-color);
-  --checkbox-border-radius: 16px;
-  --checkmark-border-radius: 0;
+  --checkbox-size: 22px;
+  --checkbox-border: 1px solid #c7c7cd;
+  --checkbox-checked-background-color: var(--highlight-color); /* background color active */
+  --background-color--before--checkbox: var(--checkbox-checked-background-color);
+  --checkmark-border: 2px solid #fff;
   --material-checkbox-size: 18px;
 
   --checkbox: {
@@ -90,7 +79,7 @@
 }
 
 .checkbox__input:checked {
-  background: var(--background-color-checked--checkbox);
+  background: var(--checkbox-checked-background-color);
 }
 
 .checkbox__checkmark:before {
@@ -100,7 +89,7 @@
   height: var(--checkbox-size);
   background: transparent;
   border: var(--checkbox-border);
-  border-radius: var(--checkbox-border-radius);
+  border-radius: var(--checkbox-size);
   box-shadow: var(--box-shadow);
   left: 0;
 }
@@ -108,23 +97,23 @@
 /* checkmark's line */
 .checkbox__checkmark:after {
   @apply(--checkbox--after);
-  top: var(--checkmark-top);
-  left: var(--checkmark-left);
-  width: var(--checkmark-tail-width);
-  height: var(--checkmark-foot-height);
+  top: 7px;
+  left: 5px;
+  width: 11px;
+  height: 5px;
   background: transparent;
   border: var(--checkmark-border);
-  border-width: var(--checkmark-border-width);
+  border-width: 1px;
   border-top: none;
   border-right: none;
-  border-radius: var(--checkmark-border-radius);
+  border-radius: 0;
   transform: rotate(-45deg);
   opacity: 0;
 }
 
 :checked + .checkbox__checkmark:before {
   background: var(--background-color--before--checkbox);
-  border: var(--checkbox-border);
+  border: none;
 }
 
 :checked + .checkbox__checkmark:after {
@@ -197,25 +186,13 @@
   height: var(--checkbox-size);
   background: transparent;
   border: none;
-  border-radius: var(--checkbox-border-radius);
+  border-radius: var(--checkbox-size);
   left: 0;
 }
 
+/* checkmark's line */
 .checkbox--noborder__checkmark:after {
-  content: '';
-  position: absolute;
-  top: var(--checkmark-top);
-  left: var(--checkmark-left);
-  opacity: 0;
-  width: var(--checkmark-tail-width);
-  height: var(--checkmark-foot-height);
-  background: transparent;
-  border: var(--border--checkmark--noborder);
-  border-width: var(--checkmark-border-width);
-  border-top: none;
-  border-right: none;
-  border-radius: var(--checkmark-border-radius);
-  transform: rotate(-45deg);
+  @apply(--checkmark);
 }
 
 :checked + .checkbox--noborder__checkmark:before {
@@ -299,6 +276,7 @@
   top: 4px;
   left: 3px;
   transform: scale(0) rotate(-45deg);
+  border-width: 2px;
 }
 
 :checked + .checkbox--material__checkmark:after {

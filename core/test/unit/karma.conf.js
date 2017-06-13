@@ -16,7 +16,7 @@ module.exports = function(config) {
     files: [
       '../../../build/js/onsenui.js',
       'setup.js',
-      `browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found 
+      `browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found
       global.KARMA_DISABLE_WARNINGS ? 'disable-warnings.js' : null,
       global.KARMA_SPEC_FILES || '../../../core/src/**/*.spec.js',
       '../../../build/css/onsenui.css',
@@ -24,6 +24,7 @@ module.exports = function(config) {
       {pattern: '../../../build/css/font_awesome/**/*', served: true, included: false},
       {pattern: '../../../build/css/ionicons/**/*', served: true, included: false},
       {pattern: '../../../build/css/material-design-iconic-font/**/*', served: true, included: false},
+      {pattern: 'test-template.html', served: true, included: false},
     ].filter(v => v != null),
 
     preprocessors: {

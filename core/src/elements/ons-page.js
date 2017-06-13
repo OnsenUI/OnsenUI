@@ -151,6 +151,8 @@ export default class PageElement extends BaseElement {
   constructor() {
     super();
 
+    this._deriveHooks();
+
     this.classList.add(defaultClassName);
     this._initialized = false;
 
@@ -170,7 +172,10 @@ export default class PageElement extends BaseElement {
     this._initialized = true;
 
     contentReady(this, () => {
-      setImmediate(() => util.triggerElementEvent(this, 'init'));
+      setImmediate(() => {
+        this.onInit && this.onInit();
+        util.triggerElementEvent(this, 'init');
+      });
 
       if (!util.hasAnyComponentAsParent(this)) {
         setImmediate(() => this._show());
@@ -249,7 +254,6 @@ export default class PageElement extends BaseElement {
       this._onInfiniteScroll(() => this._loadingContent = false);
     }
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -395,13 +399,14 @@ export default class PageElement extends BaseElement {
     if (tagName === 'ons-fab') {
       return !el.hasAttribute('position');
     }
-    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
+    const fixedElements = ['script', 'ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
     return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
+      this.onShow && this.onShow();
       util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
     }
@@ -410,6 +415,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
+      this.onHide && this.onHide();
       util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
     }
@@ -418,6 +424,7 @@ export default class PageElement extends BaseElement {
   _destroy() {
     this._hide();
 
+    this.onDestroy && this.onDestroy();
     util.triggerElementEvent(this, 'destroy');
 
     if (this.onDeviceBackButton) {
@@ -427,6 +434,22 @@ export default class PageElement extends BaseElement {
     util.propagateAction(this, '_destroy');
 
     this.remove();
+  }
+
+  _deriveHooks() {
+    this.constructor.events.forEach(event => {
+      const key = 'on' + event.charAt(0).toUpperCase() + event.slice(1);
+      Object.defineProperty(this, key, {
+        enumerable: true,
+        get: () => this[`_${key}`],
+        set: value => {
+          if (!(value instanceof Function)) {
+            throw new Error(`${key} hook must be a function`);
+          }
+          this[`_${key}`] = value.bind(this);
+        }
+      });
+    });
   }
 
   static get events() {

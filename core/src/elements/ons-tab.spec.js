@@ -145,7 +145,7 @@ describe('OnsTabElement', () => {
       `);
 
       const template1 = ons._util.createElement(`
-        <ons-template id="page1"><ons-page></ons-page></ons-template>
+        <template id="page1"><ons-page></ons-page></template>
       `);
 
       document.body.appendChild(tabbar);
@@ -304,11 +304,11 @@ describe('OnsTabElement', () => {
       `);
 
       const template1 = ons._util.createElement(`
-        <ons-template id="page1"><ons-page></ons-page></ons-template>
+        <template id="page1"><ons-page></ons-page></template>
       `);
 
       const template2 = ons._util.createElement(`
-        <ons-template id="page2"><ons-page></ons-page></ons-template>
+        <template id="page2"><ons-page></ons-page></template>
       `);
 
       document.body.appendChild(tabbar);

@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from '../util';
 import platform from '../platform';
 import pageAttributeExpression from '../page-attribute-expression';
 
@@ -101,11 +102,12 @@ window.document.addEventListener('DOMContentLoaded', function() {
   register('script[type="text/ons-template"]');
   register('script[type="text/template"]');
   register('script[type="text/ng-template"]');
+  register('template');
 
   function register(query) {
     const templates = window.document.querySelectorAll(query);
     for (let i = 0; i < templates.length; i++) {
-      internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
+      internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent || templates[i].content);
     }
   }
 }, false);
@@ -118,27 +120,37 @@ internal.getTemplateHTMLAsync = function(page) {
   return new Promise((resolve, reject) => {
     setImmediate(() => {
       const cache = internal.templateStore.get(page);
-
       if (cache) {
+        if (cache instanceof DocumentFragment) {
+          return resolve(cache);
+        }
+
         const html = typeof cache === 'string' ? cache : cache[1];
-        resolve(html);
-      } else {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', page, true);
-        xhr.onload = function(response) {
-          const html = xhr.responseText;
-          if (xhr.status >= 400 && xhr.status < 600) {
-            reject(html);
-          }
-          else {
-            resolve(html);
-          }
-        };
-        xhr.onerror = function() {
-          throw new Error(`The page is not found: ${page}`);
-        };
-        xhr.send(null);
+        return resolve(internal.normalizePageHTML(html));
       }
+
+      const local = window.document.getElementById(page);
+      if (local) {
+        const html = local.textContent || local.content;
+        return resolve(html);
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', page, true);
+      xhr.onload = function() {
+        const html = xhr.responseText;
+        if (xhr.status >= 400 && xhr.status < 600) {
+          reject(html);
+        } else {
+          const fragment = util.createFragment(html);
+          internal.templateStore.set(page, fragment);
+          resolve(fragment);
+        }
+      };
+      xhr.onerror = function() {
+        throw new Error(`The page is not found: ${page}`);
+      };
+      xhr.send(null);
     });
   });
 };
@@ -156,19 +168,13 @@ internal.getPageHTMLAsync = function(page) {
     }
 
     return internal.getTemplateHTMLAsync(page)
-      .then(
-        function(html) {
-          return internal.normalizePageHTML(html);
-        },
-        function(error) {
-          if (pages.length === 0) {
-            return Promise.reject(error);
-          }
-
-          return getPage(pages.shift());
+      .catch(function(error) {
+        if (pages.length === 0) {
+          return Promise.reject(error);
         }
-      )
-      .then(html => internal.normalizePageHTML(html));
+
+        return getPage(pages.shift());
+      });
   };
 
   return getPage(pages.shift());
