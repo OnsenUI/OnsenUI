@@ -21,6 +21,10 @@ import animationOptionsParse from './animation-options-parser';
 
 const util = {};
 
+util.globals = {
+  fabOffset: 0
+};
+
 /**
  * @param {String/Function} query dot class name or node name or matcher function.
  * @return {Function}
