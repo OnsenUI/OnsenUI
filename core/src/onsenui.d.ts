@@ -69,6 +69,7 @@ declare namespace ons {
    * @description Refresh styling for the given platform.
    */
   function forcePlatformStyling(platform: string): void;
+  function preload(...args: any[]): any;
   function createElement(...args: any[]): any;
   /**
    * @description Create a popover instance from a template.
