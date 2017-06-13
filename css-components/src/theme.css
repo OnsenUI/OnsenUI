@@ -23,6 +23,7 @@
   --progress-bar-background-color: #b6b6b6;
   --progress-circle-primary-color: rgba(24, 103, 194, 0.81);
   --progress-circle-secondary-color: rgba(24, 103, 194, 0.81);
+  --progress-circle-background-color: #ddd;
   --tabbar-background-color: #fff;
   --tabbar-text-color: #999;
   --tabbar-highlight-text-color: rgba(24, 103, 194, 0.81);
@@ -69,6 +70,7 @@
   --material-progress-bar-background-color: #e0e0e0;
   --material-progress-circle-primary-color: #009688;
   --material-progress-circle-secondary-color: #80cbc4;
+  --material-progress-circle-background-color: #ddd;
   --material-tabbar-background-color: #009688;
   --material-tabbar-text-color: rgba(255, 255, 255, 0.6);
   --material-tabbar-highlight-text-color: #ffffff;

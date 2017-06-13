@@ -16,18 +16,21 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const scheme = {
   '.progress-circular': 'progress-circular--*',
+  '.progress-circular__background': 'progress-circular--*__background',
   '.progress-circular__primary': 'progress-circular--*__primary',
   '.progress-circular__secondary': 'progress-circular--*__secondary'
 };
 
 const template = util.createElement(`
   <svg class="progress-circular">
+    <circle class="progress-circular__background" />
     <circle class="progress-circular__secondary" />
     <circle class="progress-circular__primary" />
   </svg>
@@ -215,6 +218,7 @@ export default class ProgressCircularElement extends BaseElement {
 
     this.appendChild(this._template);
 
+    autoStyle.prepare(this);
     ModifierUtil.initModifier(this, scheme);
   }
 
