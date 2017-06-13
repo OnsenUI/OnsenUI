@@ -69,6 +69,7 @@ declare namespace ons {
    * @description Refresh styling for the given platform.
    */
   function forcePlatformStyling(platform: string): void;
+  function preload(...args: any[]): any;
   function createElement(...args: any[]): any;
   /**
    * @description Create a popover instance from a template.
@@ -785,6 +786,47 @@ declare namespace ons {
     checked: boolean;
     /**
      * @description A boolean value that specifies whether the input is disabled or not.
+     */
+    disabled: boolean;
+  }
+
+  interface OnsSearchInputElement extends HTMLElement {
+    /**
+     * @description The current value of the search input.
+     */
+    value: string;
+    /**
+     * @description A boolean value that specifies whether the search input is disabled or not.
+     */
+    disabled: boolean;
+  }
+
+  interface OnsCheckboxElement extends HTMLElement {
+    /**
+     * @description The value of the checkbox.
+     */
+    value: string;
+    /**
+     * @description This boolean specifies whether the checkbox is checked or not.
+     */
+    checked: boolean;
+    /**
+     * @description A boolean value that specifies whether the checkbox is disabled or not.
+     */
+    disabled: boolean;
+  }
+
+  interface OnsRadioElement extends HTMLElement {
+    /**
+     * @description The value of the radio button.
+     */
+    value: string;
+    /**
+     * @description This boolean specifies whether the radio button is selected or not.
+     */
+    checked: boolean;
+    /**
+     * @description A boolean value that specifies whether the radio button is disabled or not.
      */
     disabled: boolean;
   }

@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+4.0.0-rc.1
+----
+
+### Bug Fixes
+
+ * Downgraded ES modules from ES2015-syntax to ES5-syntax.
+
 4.0.0-rc.0
 ----
 
@@ -17,8 +24,8 @@ CHANGELOG
 
 ### Misc
 
- * Complied with TypeScript’s `noImplicitAny`.
- * Complied with TypeScript’s `strictNullChecks`.
+ * Complied with TypeScript's `noImplicitAny`.
+ * Complied with TypeScript's `strictNullChecks`.
  * Refined directory structure.
  * Removed unnecessary peer dependency `@angular/common`.
  * Removed unnecessary peer dependency `@angular/compiler`.

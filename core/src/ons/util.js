@@ -21,6 +21,10 @@ import animationOptionsParse from './animation-options-parser';
 
 const util = {};
 
+util.globals = {
+  fabOffset: 0
+};
+
 /**
  * @param {String/Function} query dot class name or node name or matcher function.
  * @return {Function}
@@ -153,7 +157,12 @@ util.create = (selector = '', style = {}) => {
  */
 util.createElement = (html) => {
   const wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
+
+  if (html instanceof DocumentFragment) {
+    wrapper.appendChild(document.importNode(html, true));
+  } else {
+    wrapper.innerHTML = html.trim();
+  }
 
   if (wrapper.children.length > 1) {
     throw new Error('"html" must be one wrapper element.');

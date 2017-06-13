@@ -249,6 +249,28 @@ ons.forcePlatformStyling = newPlatform => {
 };
 
 /**
+ * @method preload
+ * @signature preload(templatePaths)
+ * @param {String|Array} templatePaths
+ *   [en]Set of HTML file paths containing 'ons-page' elements.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Promise that resolves when all the templates are cached.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Separated files need to be requested on demand and this can slightly delay pushing new pages. This method requests and caches templates for later use.[/en]
+ *   [ja][/ja]
+ */
+ons.preload = function(templates = []) {
+  return Promise.all((templates instanceof Array ? templates : [templates]).map(template => {
+    if (typeof template !== 'string') {
+      throw new Error ('Expected string arguments but got ' + typeof template);
+    }
+    return ons._internal.getTemplateHTMLAsync(template);
+  }));
+};
+
+/**
  * @method createElement
  * @signature createElement(template, options)
  * @param {String} template
