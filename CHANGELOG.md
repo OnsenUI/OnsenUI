@@ -10,6 +10,7 @@ dev
 
 ### Bug Fixes
 
+ * ons-carousel: Fixed [#2065](https://github.com/OnsenUI/OnsenUI/issues/2065).
 
 ### Misc
 
