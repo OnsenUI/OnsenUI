@@ -15,6 +15,7 @@ dev
 ### Bug Fixes
 
  * ons-tabbar, ons-lazy-repeat, ons-carousel: `ons-tabbar` now applies `visibility:hidden` instead of `display:none` to pages. This fixes issues for `ons-lazy-repeat` and `ons-carousel` inside `ons-tabbar`.
+ * ons-carousel: Fixed [#2065](https://github.com/OnsenUI/OnsenUI/issues/2065).
 
 ### Misc
 
