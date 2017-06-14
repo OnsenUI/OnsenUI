@@ -2,7 +2,7 @@
   <ons-tabbar :activeIndex="index" @postchange.self="$emit('update:index', $event.index)">
     <div class="tabbar__content">
       <slot name="pages">
-        <component v-for="tab in tabs" :is="tab.page" :key="(tab.key || tab.page)"></component>
+        <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.key || tab.page)"></component>
       </slot>
     </div>
     <div class="tabbar">

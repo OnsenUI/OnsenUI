@@ -311,27 +311,18 @@
     </ul>
  */
 
-.list-item--chevron {
-  overflow: hidden;
-}
-
 .list-item--chevron:before {
-  display: flex;
-  align-items: center;
-  color: var(--list-item-separator-color);
-  order: 3;
-  align-self: stretch;
-  font-size: 28px;
-  font-family: 'FontAwesome';
-  font-style: normal;
-  font-weight: 200;
-  content: '\f105';
-  margin-left: auto;
-  text-align: right;
-  border-bottom: var(--list-border);
-  @apply(--retina-list-item-border);
-  width: 10px;
-  padding-right: 8px;
+  border-right: 2px solid #c7c7cc;
+  border-bottom: 2px solid #c7c7cc;
+  position: absolute;
+  content: '';
+  width: 7px;
+  height: 7px;
+  background-color: transparent;
+  transform: translateY(-50%) rotate(-45deg);
+  right: 16px;
+  top: 50%;
+  z-index: 5;
 }
 
 /*~

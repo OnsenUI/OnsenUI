@@ -1,13 +1,20 @@
 CHANGELOG
 ====
 
-dev
+4.0.0-rc.1
+----
+
+### Bug Fixes
+
+ * Downgraded ES modules from ES2015-syntax to ES5-syntax.
+
+4.0.0-rc.0
 ----
 
 ### New Features
 
- * Supported Angular 4.0.0 and higher.
- * Supported Onsen UI Core 2.3.0 and higher.
+ * Supported Angular 4.0.0+.
+ * Supported Onsen UI Core 2.3.0+.
  * Added unbundled ES modules written in ES2015.
 
 ### Bug Fixes
@@ -17,8 +24,8 @@ dev
 
 ### Misc
 
- * Complied with TypeScript’s `noImplicitAny`.
- * Complied with TypeScript’s `strictNullChecks`.
+ * Complied with TypeScript's `noImplicitAny`.
+ * Complied with TypeScript's `strictNullChecks`.
  * Refined directory structure.
  * Removed unnecessary peer dependency `@angular/common`.
  * Removed unnecessary peer dependency `@angular/compiler`.
@@ -28,6 +35,10 @@ dev
  * Removed unnecessary peer dependency `rxjs`.
  * Removed unnecessary peer dependency `zone.js`.
  * Removed unnecessary peer dependency `core-js`.
+ * Added deprecation warning for `AlertDialogFactory`.
+ * Added deprecation warning for `DialogFactory`.
+ * Added deprecation warning for `ModalFactory`.
+ * Added deprecation warning for `PopoverFactory`.
 
 ### BREAKING CHANGES
 

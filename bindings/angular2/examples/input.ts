@@ -26,12 +26,11 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
         </p>
 
         <p>
-          <ons-input
+          <ons-checkbox
             id="checkbox"
-            type="checkbox"
             [(checked)]="checked"
             (change)="checked = $event.target.checked"
-          ></ons-input>
+          ></ons-checkbox>
           <input
             id="native-checkbox"
             type="checkbox"

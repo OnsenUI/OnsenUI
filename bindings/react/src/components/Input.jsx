@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
+import BaseInput from './BaseInput.jsx';
 import Util from './Util.js';
-
-const EVENT_TYPES = ['change', 'input'];
 
 /**
  * @original ons-input
@@ -22,58 +19,16 @@ const EVENT_TYPES = ['change', 'input'];
  *   modifier='material'
  *   placeholder='Username' />
  */
-class Input extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-
-    this.onChange = (event) => {
-      if (this.props.onChange) {
-        return this.props.onChange(event);
-      }
-    };
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
-
-    if (this.props.value !== undefined) {
-      node.value = this.props.value;
-    }
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.addEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.removeEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillReceiveProps(props) {
-    var node = ReactDOM.findDOMNode(this);
-
-    if (typeof props.value !== 'undefined' && node.value !== props.value) {
-      node.value = props.value;
-    }
-
-    if (typeof props.checked !== 'undefined') {
-      node.checked = props.checked;
-    }
-  }
+class Input extends BaseInput {
 
   render() {
-    var {checked, ...other} = this.props;
+    var {...other} = this.props;
     other['input-id'] = this.props.inputId;
 
     Util.convert(other, 'disabled');
 
     return (
-      <ons-input checked={checked ? '' : null} {...other} />
+      <ons-input {...other} />
     );
   }
 }
@@ -93,9 +48,7 @@ Input.propTypes = {
    * @name disabled
    * @type bool
    * @description
-   *  [en]
-   *  Specifies whether the input is disabled.
-   *  [/en]
+   *  [en]Specifies whether the input is disabled.[/en]
    *  [ja][/ja]
    */
   disabled: PropTypes.bool,
@@ -104,7 +57,7 @@ Input.propTypes = {
    * @name onChange
    * @type function
    * @description
-   *  [en] Called when the text of the input changes.[/en]
+   *  [en]Called when the text of the input changes.[/en]
    *  [ja][/ja]
    */
   onChange: PropTypes.func,
@@ -113,22 +66,13 @@ Input.propTypes = {
    * @name value
    * @type string
    * @description
-   *  [en] Content of the input.[/en]
+   *  [en]Content of the input.[/en]
    *  [ja][/ja]
    */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
-
-  /**
-   * @name checked
-   * @type boolean
-   * @description
-   *  [en]Set to to true if the input is checked. Only used for radio buttons and checkboxes.[/en]
-   *  [ja][/ja]
-   */
-  checked: PropTypes.bool,
 
   /**
    * @name placehoder
@@ -143,9 +87,11 @@ Input.propTypes = {
    * @name type
    * @type string
    * @description
-   *  [en]  Specify the input type. This is the same as the "type" attribute for normal inputs.
+   *  [en]
+   *    Specify the input type. This is the same as the "type" attribute for normal inputs. It expects strict text types such as `text`, `password`, etc. For checkbox, radio button, select or range, please have a look at the corresponding components.
+   *
    *    Please take a look at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type) for an exhaustive list of possible values. Depending on the platform and browser version some of these might not work.
- [/en]
+   *  [/en]
    *  [ja][/ja]
    */
   type: PropTypes.string,

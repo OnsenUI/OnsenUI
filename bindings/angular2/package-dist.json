@@ -1,6 +1,6 @@
 {
   "name": "ngx-onsenui",
-  "version": "1.0.0-rc.7.dev",
+  "version": "4.0.0-rc.1",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "main": "bundles/ngx-onsenui.umd.js",
@@ -43,6 +43,6 @@
   "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
     "@angular/core": "^4.0.0",
-    "onsenui": "~2.3.0"
+    "onsenui": "~2.3.3"
   }
 }

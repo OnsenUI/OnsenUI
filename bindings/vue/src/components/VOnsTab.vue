@@ -9,6 +9,7 @@
 
     props: {
       page: { },
+      props: { },
       active: {
         type: Boolean
       }

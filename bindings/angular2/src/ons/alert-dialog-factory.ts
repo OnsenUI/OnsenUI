@@ -32,6 +32,8 @@ export class AlertDialogFactory {
   }
 
   createAlertDialog(componentType: Type<any>, params: Object = {}): Promise<AlertDialogRef> {
+    console.warn('[ngx-onsenui] AlertDialogFactory is deprecated since 4.0.0-rc.0. Place <ons-alert-dialog> into your component instead.');
+
     return new Promise(resolve => {
       setImmediate(() => {
         this._zone.run(() => {

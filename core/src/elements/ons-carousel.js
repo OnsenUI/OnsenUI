@@ -33,7 +33,8 @@ const VerticalModeTrait = {
 
   _getElementSize: function() {
     if (!this._currentElementSize) {
-      this._currentElementSize = this.getBoundingClientRect().height;
+      const styling = window.getComputedStyle(this, null);
+      this._currentElementSize = this.getBoundingClientRect().height - parseInt(styling.getPropertyValue('border-top-width')) - parseInt(styling.getPropertyValue('border-bottom-width'));
     }
 
     return this._currentElementSize;
@@ -88,7 +89,8 @@ const HorizontalModeTrait = {
 
   _getElementSize: function() {
     if (!this._currentElementSize) {
-      this._currentElementSize = this.getBoundingClientRect().width;
+      const styling = window.getComputedStyle(this, null);
+      this._currentElementSize = this.getBoundingClientRect().width - parseInt(styling.getPropertyValue('border-right-width')) - parseInt(styling.getPropertyValue('border-left-width'));
     }
 
     return this._currentElementSize;

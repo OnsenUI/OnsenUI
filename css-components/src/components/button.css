@@ -12,6 +12,9 @@
   --button-large-line-height: 36px;
   --button-active-opacity: 0.2;
   --button-border-radius: 3px;
+  --material-button-disabled-background-color: rgba(79, 79, 79, 0.26);
+  --material-button-disabled-color: rgba(0, 0, 0, 0.26);
+  --material-flat-button-active-background-color: rgba(153, 153, 153, 0.2);
 
   --button--quiet: {
     background: transparent;
@@ -66,7 +69,6 @@
     min-height: 36px;
     line-height: 36px;
     padding: 0 16px;
-    transition: box-shadow 0.2s ease;
     text-align: center;
     font-size: 14px;
     transform: translate3d(0, 0, 0);
@@ -74,6 +76,7 @@
     background-color: var(--material-button-background-color);
     color: var(--material-button-text-color);
     font-weight: 500;
+    transition: all 0.25s linear;
   }
 }
 
@@ -360,12 +363,19 @@
 
 .button--material {
   @apply(--button--material);
+  opacity: 1;
+  transition: all 0.25s linear;
+}
+
+.button--material:hover {
+  transition: all 0.25s linear;
 }
 
 .button--material:active {
   @apply(--material-shadow-3);
   background-color: var(--material-button-background-color);
-  opacity: 1;
+  opacity: 0.9;
+  transition: all 0.25s linear;
 }
 
 .button--material:focus {
@@ -374,8 +384,11 @@
 
 .button--material:disabled,
 .button--material[disabled] {
-  opacity: 0.5;
+  transition: none;
   @apply(--material-shadow-0);
+  background-color: var(--material-button-disabled-background-color);
+  color: var(--material-button-disabled-color);
+  opacity: 1;
 }
 
 /*~
@@ -392,15 +405,11 @@
   @apply(--material-shadow-0);
   background-color: transparent;
   color: var(--material-button-background-color);
+  transition: all 0.25s linear;
 }
 
-.button--material--flat:active {
-  @apply(--material-shadow-0);
-  background-color: transparent;
-  color: var(--material-button-background-color);
-  outline: 0;
-  opacity: 1;
-  border: none;
+.button--material--flat:hover {
+  transition: all 0.25s linear;
 }
 
 .button--material--flat:focus {
@@ -412,8 +421,21 @@
   border: none;
 }
 
+.button--material--flat:active {
+  @apply(--material-shadow-0);
+  outline: 0;
+  opacity: 1;
+  border: none;
+  background-color: var(--material-flat-button-active-background-color);
+  color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
 .button--material--flat:disabled,
 .button--material--flat[disabled] {
-  opacity: 0.5;
+  transition: none;
+  opacity: 1;
   @apply(--material-shadow-0);
+  background-color: transparent;
+  color: var(--material-button-disabled-color);
 }

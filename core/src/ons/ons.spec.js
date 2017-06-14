@@ -89,6 +89,17 @@ describe('ons', () => {
     });
   });
 
+  describe('#preload()', () => {
+    it('requests and caches new templates as fragments', () => {
+      return ons.preload(['/base/test-template.html'])
+        .then(result => {
+          expect(result[0]).to.be.an.instanceof(DocumentFragment);
+          expect(ons._internal.templateStore.get('/base/test-template.html')).to.be.ok;
+          expect(result[0]).to.equal(ons._internal.templateStore.get('/base/test-template.html'));
+        });
+    });
+  });
+
   describe('#createElement()', () => {
     it('throws error when no page is provided', () => {
       expect(() => ons.createElement(null)).to.throw(Error);

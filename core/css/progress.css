@@ -21,8 +21,8 @@ ons-progress-bar {
 
 ons-progress-circular {
   display: inline-block;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
 }
 
 ons-progress-circular > svg.progress-circular {
