@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v1.4.0
 ----
 
 ### BREAKING CHANGES
