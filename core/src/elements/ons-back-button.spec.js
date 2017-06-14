@@ -46,14 +46,14 @@ describe('OnsBackButtonElement', () => {
     beforeEach((done) => {
       div = ons._util.createElement(`
         <div>
-          <ons-template id="page1">
+          <template id="page1">
             <ons-page id="p1">page1 content</ons-page>
-          </ons-template>
-          <ons-template id="page2">
+          </template>
+          <template id="page2">
             <ons-page id="p2">
               <ons-back-button>content</ons-back-button>
             </ons-page>
-          </ons-template>
+          </template>
         </div>
       `);
 
