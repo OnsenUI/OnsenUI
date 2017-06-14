@@ -69,7 +69,7 @@
   @apply(--select-input);
   padding: 0 20px 0 0;
   background-color: transparent;
-  background-image: url('img/select-arrow.svg');
+  background-image: url('../img/select-arrow.svg');
   background-repeat: no-repeat;
   background-position: right center;
   border-bottom: none;
@@ -122,7 +122,7 @@
   @apply(--material-font);
   color: var(--material-select-input-color);
   font-size: var(--material-select-input-font-size);
-  background-image: url('img/select-arrow.svg'), linear-gradient(to top, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.12) 50%);
+  background-image: url('../img/select-arrow.svg'), linear-gradient(to top, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.12) 50%);
   background-size: auto, 100% 1px;
   background-repeat: no-repeat;
   background-position: right center, left bottom;
