@@ -50,7 +50,7 @@ gulp.task('cssnext', ['stylelint'], () => {
     require('postcss-import'),
     require('postcss-base64')({
       extensions: ['.svg'],
-      root: __dirname + '/src'
+      root: __dirname + '/src/components/'
     }),
     cssnext({
       browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
