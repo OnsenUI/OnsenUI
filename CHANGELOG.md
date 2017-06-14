@@ -7,14 +7,15 @@ dev
 
 ### New Features
 
- * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
  * core: Separated files are now cached after the first request. This improves performance when pushing pages.
  * core: Added `ons.preload` method to manually cache templates. This improves performance when pushing pages.
  * core: Support for `HTMLTemplateElement` (`<template>`). The former `<ons-template>` is still supported for backward compatibility.
  * core: Added page life-cycle hooks (similar to life-cycle events). `<template>` elements allow `<script>` tags in their content, which is useful for initialising pages. Therefore, hooks like `pageElement.onInit`, `pageElement.onShow`, etc. have been added.
+ * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
 
 ### Bug Fixes
 
+ * css-components: Fixed incorrect image path (select, search input).
  * ons-tabbar, ons-lazy-repeat, ons-carousel: `ons-tabbar` now applies `visibility:hidden` instead of `display:none` to pages. This fixes issues for `ons-lazy-repeat` and `ons-carousel` inside `ons-tabbar`.
  * ons-carousel: Fixed [#2065](https://github.com/OnsenUI/OnsenUI/issues/2065).
 
@@ -23,8 +24,12 @@ dev
  * css-components: Refined the appearance of `checkbox` on iOS.
  * css-components: Refined the appearance of `radio-button` on iOS.
  * css-components: Refined the appearance of `button` on Android.
+ * css-components: Refined the appearance of `progress-bar` on Android.
+ * css-components: Refined the appearance of `progress-circular` on Android.
+ * css-components: Refined the appearance of `checkbox` animation on Android.
+ * css-components: Refined the appearance of `list-item--chevron`.
  * core: Updated `font-awesome` icon library.
- * ons-toast: Improved 'ascend' animator performance.
+ * ons-toast: Improved `ascend` animator performance.
 
 ### BREAKING CHANGES
 
