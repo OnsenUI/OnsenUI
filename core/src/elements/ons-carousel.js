@@ -34,7 +34,7 @@ const VerticalModeTrait = {
   _getElementSize: function() {
     if (!this._currentElementSize) {
       var styling = getComputedStyle(this, null);
-      this._currentElementSize = this.getBoundingClientRect().height - parseInt(styling.getPropertyValue('border-right-width')) - parseInt(styling.getPropertyValue('border-left-width'));
+      this._currentElementSize = this.getBoundingClientRect().height - parseInt(styling.getPropertyValue('border-top-width')) - parseInt(styling.getPropertyValue('border-bottom-width'));
     }
 
     return this._currentElementSize;
