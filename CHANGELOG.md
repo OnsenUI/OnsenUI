@@ -7,6 +7,7 @@ dev
 
 ### New Features
 
+ * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
  * core: Separated files are now cached after the first request. This improves performance when pushing pages.
  * core: Added `ons.preload` method to manually cache templates. This improves performance when pushing pages.
  * core: Support for `HTMLTemplateElement` (`<template>`). The former `<ons-template>` is still supported for backward compatibility.
