@@ -354,6 +354,22 @@ util.removeModifier = (target, modifierName, options = {}) => {
   return modifiers.length !== newModifiers.length;
 };
 
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @param {Boolean} options.force Forces modifier to be added or removed.
+ * @param {Object} options.autoStyle Maps the modifierName to the corresponding styled modifier.
+ * @param {Boolean} options.forceAutoStyle Ignores platform limitation.
+ * @return {Boolean} Whether it was found or not.
+ */
+util.toggleModifier = (...args) => {
+  const options = args.length > 2 ? args[2] : {};
+  const force = typeof options === 'boolean' ? options : options.force;
+
+  const toggle = typeof force === 'boolean' ? force : !util.hasModifier(...args);
+  toggle ? util.addModifier(...args) : util.removeModifier(...args)
+};
+
 // TODO: FIX
 util.updateParentPosition = (el) => {
   if (!el._parentUpdated && el.parentElement) {
