@@ -29,7 +29,6 @@ const modifiersMap = {
   'large--quiet': 'material--flat large',
   'large--cta': 'large',
   'noborder': '',
-  'chevron': '',
   'tappable': ''
 };
 
