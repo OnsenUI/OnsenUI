@@ -3,7 +3,8 @@ ons-input, ons-radio, ons-checkbox, ons-search-input {
   position: relative;
 }
 
-ons-input input {
+ons-input .text-input,
+ons-search-input .search-input {
   width: 100%;
   display: inline-block;
 }

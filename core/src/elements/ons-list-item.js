@@ -135,6 +135,8 @@ export default class ListItemElement extends BaseElement {
   }
 
   _compile() {
+    autoStyle.prepare(this);
+
     this.classList.add(defaultClassName);
 
     let left, center, right;
@@ -180,8 +182,6 @@ export default class ListItemElement extends BaseElement {
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);
-
-    autoStyle.prepare(this);
   }
 
   static get observedAttributes() {
