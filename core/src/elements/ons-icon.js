@@ -129,19 +129,16 @@ export default class IconElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['icon', 'size', 'modifier'];
+    return ['icon', 'size', 'modifier', 'class'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (['icon', 'size', 'modifier'].indexOf(name) !== -1) {
-      this._update();
-    }
+    this._update();
   }
 
   _compile() {
     autoStyle.prepare(this);
     this._update();
-    setImmediate(() => this._update()); // Fix for bindings
   }
 
   _update() {
