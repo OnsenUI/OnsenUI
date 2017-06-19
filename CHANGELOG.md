@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-input, ons-search-input: Fixed [#2075](https://github.com/OnsenUI/OnsenUI/issues/2075).
+
 v2.4.0
 ----
 
