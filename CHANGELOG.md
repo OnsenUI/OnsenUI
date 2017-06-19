@@ -9,6 +9,10 @@ dev
 
  * ons-input, ons-search-input: Fixed [#2075](https://github.com/OnsenUI/OnsenUI/issues/2075).
 
+### Misc
+
+ * css-components: Removed `.text-input--transparent` modifier (same as default style).
+
 v2.4.0
 ----
 

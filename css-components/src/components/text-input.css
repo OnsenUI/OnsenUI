@@ -188,20 +188,3 @@
   }
 }
 
-/*~
-  name: Transparent Text Input
-  category: Text Input
-  elements: ons-input
-  markup: |
-    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value=""></div>
-    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value="" disabled></div>
-*/
-
-.text-input--transparent {
-  @apply(--text-input);
-}
-
-.text-input--transparent:disabled {
-  @apply(--text-input--disabled);
-}
-
