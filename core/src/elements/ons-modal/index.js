@@ -20,6 +20,7 @@ import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import ModalAnimator from './animator';
 import FadeModalAnimator from './fade-animator';
+import LiftModalAnimator from './lift-animator';
 import platform from '../../ons/platform';
 import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
@@ -34,6 +35,7 @@ const defaultClassName = 'modal';
 const _animatorDict = {
   'default': ModalAnimator,
   'fade': FadeModalAnimator,
+  'lift': LiftModalAnimator,
   'none': ModalAnimator
 };
 
