@@ -7,6 +7,7 @@ dev
 
 ### Bug Fixes
 
+ * ons.notification.prompt: Only returns input value if the clicked button is primary. Otherwise, returns null. Fixed [#2050](https://github.com/OnsenUI/OnsenUI/issues/2050).
  * ons-input, ons-search-input: Fixed [#2075](https://github.com/OnsenUI/OnsenUI/issues/2075).
 
 ### Misc

@@ -162,7 +162,10 @@ notification._createAlertDialog = options => {
         el.dialog.hide()
           .then(() => {
             if (el) {
-              const resolveValue = options.isPrompt ? el.input.value : index;
+              let resolveValue = index;
+              if (options.isPrompt) {
+                resolveValue = index === options.primaryButtonIndex ? el.input.value : null;
+              }
               el.dialog.remove();
               _destroyDialog();
               options.callback(resolveValue);
@@ -223,7 +226,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
       callback: param => param,
       animation: 'default',
       cancelable: false,
-      primaryButtonIndex: (options.buttonLabels || defaults.buttonLabels).length - 1
+      primaryButtonIndex: (options.buttonLabels || defaults.buttonLabels || []).length - 1
     }, defaults, options);
 };
 
