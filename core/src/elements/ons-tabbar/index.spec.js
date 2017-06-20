@@ -123,23 +123,23 @@ describe('OnsTabbarElement', () => {
       var bottomElement = document.getElementById('bottom');
 
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       topElement.setTabbarVisibility(false);
       bottomElement.setTabbarVisibility(false);
       expect(topElement._contentElement.style.top).to.equal('0px');
-      expect(topElement._getTabbarElement().style.visibility).to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('none');
       expect(bottomElement._contentElement.style.bottom).to.equal('0px');
-      expect(bottomElement._getTabbarElement().style.visibility).to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('none');
 
       topElement.setTabbarVisibility(true);
       bottomElement.setTabbarVisibility(true);
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       div.remove();
     });
@@ -321,7 +321,7 @@ describe('OnsTabbarElement', () => {
       setImmediate(() => {
         const tmp = element._getCurrentPageElement();
         element.setActiveTab(1, {'callback': () => {
-          expect(tmp.style.visibility).to.equal('hidden');
+          expect(tmp.style.display).to.equal('none');
           done();
         }, 'animation': 'none'});
       });
