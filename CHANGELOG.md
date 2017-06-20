@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v2.4.2
+----
+
+### Bug Fixes
+
+ * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
+
 v2.4.1
 ----
 
