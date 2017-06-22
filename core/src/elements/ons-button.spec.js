@@ -48,9 +48,9 @@ describe('ons-button', () => {
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
       e = ons._util.createElement('<ons-button modifier="quiet"></ons-button>');
-      expect(e.getAttribute('modifier')).to.contain('material--flat');
-      e = ons._util.createElement('<ons-button modifier="large--quiet"></ons-button>');
-      expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material--flat');
+      expect(e.getAttribute('modifier')).to.contain('material-flat');
+      e = ons._util.createElement('<ons-button modifier="large-quiet"></ons-button>');
+      expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material-flat');
       ons.platform.select('');
     });
   });

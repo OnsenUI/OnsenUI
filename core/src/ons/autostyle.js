@@ -22,12 +22,12 @@ let autoStyleEnabled = true;
 
 // Modifiers
 const modifiersMap = {
-  'quiet': 'material--flat',
-  'light': 'material--flat',
-  'outline': 'material--flat',
+  'quiet': 'material-flat',
+  'light': 'material-flat',
+  'outline': 'material-flat',
   'cta': '',
-  'large--quiet': 'material--flat large',
-  'large--cta': 'large',
+  'large-quiet': 'material-flat large',
+  'large-cta': 'large',
   'noborder': '',
   'tappable': ''
 };
@@ -69,8 +69,8 @@ platforms.ios = element => {
  if (/material/.test(element.getAttribute('modifier'))) {
    util.removeModifier(element, 'material');
 
-   if (util.removeModifier(element, 'material--flat')) {
-     util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
+   if (util.removeModifier(element, 'material-flat')) {
+     util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large-quiet' : 'quiet');
    }
 
    if (!element.getAttribute('modifier')) {

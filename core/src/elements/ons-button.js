@@ -42,16 +42,16 @@ const defaultClassName = 'button';
  * @modifier large
  *   [en]Large button that covers the width of the screen.[/en]
  *   [ja]横いっぱいに広がる大きなボタンを表示します。[/ja]
- * @modifier large--quiet
+ * @modifier large-quiet
  *   [en]Large quiet button.[/en]
  *   [ja]横いっぱいに広がるquietボタンを表示します。[/ja]
- * @modifier large--cta
+ * @modifier large-cta
  *   [en]Large call to action button.[/en]
  *   [ja]横いっぱいに広がるctaボタンを表示します。[/ja]
  * @modifier material
  *   [en]Material Design button[/en]
  *   [ja]マテリアルデザインのボタン[/ja]
- * @modifier material--flat
+ * @modifier material-flat
  *   [en]Material Design flat button[/en]
  *   [ja]マテリアルデザインのフラットボタン[/ja]
  * @description
@@ -66,7 +66,7 @@ const defaultClassName = 'button';
  * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
- * <ons-button modifier="large--cta">
+ * <ons-button modifier="large-cta">
  *   Tap Me
  * </ons-button>
  */

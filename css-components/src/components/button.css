@@ -277,7 +277,7 @@
     <button class="button--large--quiet" style="width: 95%; margin: 0 auto;">Button</button>
 */
 
-.button--large--quiet { /* stylelint-disable-line */
+.button--large-quiet {
   @apply(--button);
   font-size: var(--font-size--large);
   font-weight: var(--font-weight--large);
@@ -290,22 +290,23 @@
   text-align: center;
 }
 
-.button--large--quiet:active { /* stylelint-disable-line */
+.button--large-quiet:active {
   transition: none;
   opacity: var(--button-active-opacity);
   color: var(--button-quiet-color);
   @apply(--button--quiet);
 }
 
-.button--large--quiet:disabled, .button--large--quiet[disabled] { /* stylelint-disable-line */
+.button--large-quiet:disabled,
+.button--large-quiet[disabled] {
   @apply(--button--disabled);
 }
 
-.button--large--quiet:hover { /* stylelint-disable-line */
+.button--large-quiet:hover {
   @apply(--button--hover);
 }
 
-.button--large--quiet:focus { /* stylelint-disable-line */
+.button--large-quiet:focus {
   outline: 0;
 }
 
@@ -317,7 +318,7 @@
     <button class="button--large--cta" style="width: 95%; margin: 0 auto;">Button</button>
 */
 
-.button--large--cta { /* stylelint-disable-line */
+.button--large-cta {
   @apply(--button);
   border: none;
   background-color: var(--button-cta-background-color);
@@ -331,22 +332,23 @@
   display: block;
 }
 
-.button--large--cta:hover { /* stylelint-disable-line */
+.button--large-cta:hover {
   @apply(--button--hover);
 }
 
-.button--large--cta:focus { /* stylelint-disable-line */
+.button--large-cta:focus {
   @apply(--button--focus);
 }
 
-.button--large--cta:active { /* stylelint-disable-line */
+.button--large-cta:active {
   color: var(--button-cta-color);
   background-color: var(--button-cta-background-color);
   transition: none;
   opacity: var(--button-active-opacity);
 }
 
-.button--large--cta:disabled, .button--large--cta[disabled] { /* stylelint-disable-line */
+.button--large-cta:disabled,
+.button--large-cta[disabled] {
   @apply(--button--disabled);
 }
 
@@ -398,7 +400,7 @@
     <button class="button button--material--flat" disabled>DISABLED</button>
 */
 
-.button--material--flat { /* stylelint-disable-line */
+.button--material-flat {
   @apply(--button--material);
   @apply(--material-shadow-0);
   background-color: transparent;
@@ -406,11 +408,11 @@
   transition: all 0.25s linear;
 }
 
-.button--material--flat:hover { /* stylelint-disable-line */
+.button--material-flat:hover {
   transition: all 0.25s linear;
 }
 
-.button--material--flat:focus { /* stylelint-disable-line */
+.button--material-flat:focus {
   @apply(--material-shadow-0);
   background-color: transparent;
   color: var(--material-button-background-color);
@@ -419,7 +421,7 @@
   border: none;
 }
 
-.button--material--flat:active { /* stylelint-disable-line */
+.button--material-flat:active {
   @apply(--material-shadow-0);
   outline: 0;
   opacity: 1;
@@ -429,7 +431,8 @@
   transition: all 0.25s linear;
 }
 
-.button--material--flat:disabled, .button--material--flat[disabled] {/* stylelint-disable-line */
+.button--material-flat:disabled,
+.button--material-flat[disabled] {
   transition: none;
   opacity: 1;
   @apply(--material-shadow-0);
