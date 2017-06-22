@@ -299,15 +299,15 @@
   background-color: initial;
 }
 
-.alert-dialog-button--rowfooter--material,
-.alert-dialog-button--rowfooter--material:first-child {
+/* stylelint-disable */ .alert-dialog-button--rowfooter--material,
+.alert-dialog-button--rowfooter--material:first-child { /* stylelint-enable */
   border: 0;
   @media (--retina-query) {
     background: none;
   }
 }
 
-.alert-dialog-button--primal--material {
+/* stylelint-disable */ .alert-dialog-button--primal--material { /* stylelint-enable */
   font-weight: 500;
   @media (--retina-query) {
     background: none;
