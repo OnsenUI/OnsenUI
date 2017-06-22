@@ -24,8 +24,9 @@ import animit from '../../ons/animit';
  */
 export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor({timing = 'ease-out', delay = 0, duration = 0.25} = {}) {
-    super({ timing, delay, duration });
+  constructor({timing = 'cubic-bezier(0.45, 0, 0.745, 0.715)', timingOnPop = 'cubic-bezier(0.250, 0.100, 0.125, 1.000)', delay = 0, duration = 0.2} = {}) {
+    super({timing, delay, duration});
+    this.timingOnPop = timingOnPop;
   }
 
   /**
@@ -79,38 +80,24 @@ export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransiti
       animit(leavePage)
         .queue({
           css: {
-            transform: 'translate3D(0, 0, 0)'
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1
           },
           duration: 0
         })
         .wait(0.15)
         .queue({
           css: {
-            transform: 'translate3D(0, 38px, 0)'
+            transform: 'translate3D(0, 38px, 0)',
+            opacity: 0
           },
           duration: this.duration,
-          timing: this.timing
+          timing: this.timingOnPop,
         })
         .queue(done => {
           unblock();
           callback();
           done();
-        }),
-
-      animit(leavePage)
-        .queue({
-          css: {
-            opacity: 1
-          },
-          duration: 0
-        })
-        .wait(0.04)
-        .queue({
-          css: {
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timing
         })
     );
   }
