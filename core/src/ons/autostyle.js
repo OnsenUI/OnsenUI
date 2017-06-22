@@ -36,7 +36,7 @@ const platforms = {};
 
 platforms.android = element => {
 
-  if (!/ons-fab|ons-speed-dial/.test(element.tagName.toLowerCase()) &&
+  if (!/ons-speed-dial/.test(element.tagName.toLowerCase()) &&
     !/material/.test(element.getAttribute('modifier'))) {
 
     const oldModifier = element.getAttribute('modifier') || '';
