@@ -44,9 +44,6 @@ body {
   padding: 0;
   margin: 0;
   -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: -apple-system, 'Roboto', 'Noto', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
 }
 
 * { /* stylelint-disable-line selector-no-universal */
