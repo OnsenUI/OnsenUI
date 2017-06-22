@@ -11,12 +11,6 @@ For more information of what's included in Onsen UI please see:
 * [Docs](https://onsen.io/v2/docs/guide/vue/)
 * [Playground](http://tutorial.onsen.io/?framework=vue&category=reference&module=page)
 
-## Status
-
-`vue-onsenui` bindings are currently in **beta status**. This means that minor breaking changes might happen.
-
-We want the bindings to feel like a Vue extension. Therefore, we are open to suggestions about the API. Feel free to [open an issue](https://github.com/OnsenUI/OnsenUI/issues) if you find that something can be improved.
-
 ## Installation
 
 #### Package Manager (yarn, npm)
