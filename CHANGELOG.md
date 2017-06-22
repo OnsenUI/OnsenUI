@@ -13,6 +13,10 @@ v2.4.2
 
  * ons-fab: Added new appearances for iOS.
 
+### BREAKING CHANGES
+
+ * ons-button: Renamed some modifiers on ons-button component. From `large--cta` to `large-cta`, from `large--quiet` to `large-quite`, from `material--flat` to `material-flat`.
+
 v2.4.1
 ----
 
