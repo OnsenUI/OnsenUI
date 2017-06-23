@@ -153,12 +153,15 @@
   border-radius: 0;
   width: var(--material-range-thumb-size);
   height: 32px;
-  border-radius: 0;
   background-color: transparent;
   background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent calc(var(--material-range-thumb-radius)));
   box-shadow: none;
   transition: transform 0.1s linear;
   overflow: visible;
+}
+
+.range--material__input::-moz-range-track {
+  background: none;
 }
 
 .range--material__input::-moz-range-thumb,
@@ -169,12 +172,8 @@
   height: 32px;
   border-radius: 0;
   background-color: transparent;
-  background-image: -moz-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent calc(var(--material-range-thumb-radius)));
+  background-image: -moz-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent calc(var(--material-range-thumb-radius))); /* stylelint-disable-line */
   box-shadow: none;
-}
-
-.range--material__input::-moz-range-track {
-  background: none;
 }
 
 .range--material__input::-moz-range-thumb:before,
@@ -202,6 +201,6 @@
 }
 
 .range--material__input:disabled::-moz-range-thumb {
-  background-image: -moz-radial-gradient(circle cover, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px));
+  background-image: -moz-radial-gradient(circle cover, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px)); /* stylelint-disable-line */
   transition: none;
 }

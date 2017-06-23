@@ -48,7 +48,7 @@
 
 .page--material__content {
   @apply(--material-font);
-  font-weight: 400;
+  font-weight: var(--font-weight);
 }
 
 .page__content h1,
@@ -57,7 +57,7 @@
 .page__content h4,
 .page__content h5 {
   @apply(--material-font);
-  font-weight: bold;
+  font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;
 }
@@ -80,7 +80,7 @@
 .page--material__content h4,
 .page--material__content h5 {
   @apply(--material-font);
-  font-weight: bold;
+  font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;
 }
