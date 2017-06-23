@@ -75,8 +75,8 @@
     text-transform: uppercase;
     background-color: var(--material-button-background-color);
     color: var(--material-button-text-color);
-    font-weight: 500;
-    transition: all 0.25s linear;
+    font-weight: var(--font-weight--large);
+    transition: background-color 0.25s linear;
   }
 }
 

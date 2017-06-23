@@ -107,6 +107,8 @@ export default class ToolbarButtonElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
+    util.updateRipple(this);
+
     ModifierUtil.initModifier(this, scheme);
   }
 

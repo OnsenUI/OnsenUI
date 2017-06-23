@@ -48,7 +48,7 @@ platforms.android = element => {
   }
 
   // Effects
-  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
+  if (/ons-toolbar-button|ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
     && !element.hasAttribute('ripple')
     && !element.querySelector('ons-ripple')) {
 
