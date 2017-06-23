@@ -59,7 +59,7 @@ describe('ons-toolbar-button', () => {
       let e = document.createElement('ons-toolbar-button');
       expect(e.getAttribute('modifier')).to.equal('material');
       e = ons._util.createElement('<ons-toolbar-button modifier="outline"></ons-toolbar-button>');
-      expect(e.getAttribute('modifier')).to.contain('material--flat');
+      expect(e.getAttribute('modifier')).to.contain('material-flat');
       ons.platform.select('');
     });
   });
