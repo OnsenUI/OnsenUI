@@ -182,8 +182,18 @@
   display: none;
 }
 
-.range--disabled.range--material {
+.range--material__input:active::-webkit-slider-thumb,
+.range--material__input.range__input--active::-webkit-slider-thumb { /* NOTICE: ":active" does not work on Android Chrome. */
+  transform: scale(1.5);
+  transition: transform 0.1s linear;
+}
+
+/* stylelint-disable */ .range--disabled.range--material { /* stylelint-enable */
   opacity: 1;
+}
+
+/* stylelint-disable */ .range--disabled > .range--material__input { /* stylelint-enable */
+  background-image: none;
 }
 
 .range--material__input:disabled::-webkit-slider-thumb {
