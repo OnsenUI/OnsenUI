@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
+
 v2.4.2
 ----
 
