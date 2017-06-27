@@ -24,46 +24,39 @@ import ModalAnimator from './animator';
 
 export default class LiftModalAnimator extends ModalAnimator
 {
- constructor(options) {
-    options.duration = options.duration || '0.4';
-    options.timing = options.timing || 'cubic-bezier( .1, .7, .1, 1)';
-    options.delay = options.delay || 0;
-
-    super(options);
+  constructor({timing = 'cubic-bezier( .1, .7, .1, 1)', delay = 0, duration = 0.4} = {}) {
+    super({ timing, delay, duration });
   }
 
   /**
    * @param {HTMLElement} modal
    * @param {Function} callback
    */
-  show(modal, callback)
-  {
+  show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit.runAll(
-
-      animit(modal)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 100%, 0)',
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
-          callback();
-          done();
-        }),
-    );
+    animit(modal)
+      .saveStyle()
+      .queue({
+        css: {
+          transform: 'translate3D(0, 100%, 0)',
+        },
+        duration: 0
+      })
+      .wait(this.delay)
+      .queue({
+        css: {
+          transform: 'translate3D(0, 0, 0)',
+        },
+        duration: this.duration,
+        timing: this.timing
+      })
+      .restoreStyle()
+      .queue(function(done) {
+        callback();
+        done();
+      })
+      .play();
   }
 
   /**
@@ -73,30 +66,27 @@ export default class LiftModalAnimator extends ModalAnimator
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit.runAll(
-
-     animit(modal)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 100%, 0)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue( function( done )
-        {
-          callback();
-          done();
-        })
-    );
+   animit(modal)
+      .saveStyle()
+      .queue({
+        css: {
+          transform: 'translate3D(0, 0, 0)'
+        },
+        duration: 0
+      })
+      .wait(this.delay)
+      .queue({
+        css: {
+          transform: 'translate3D(0, 100%, 0)'
+        },
+        duration: this.duration,
+        timing: this.timing
+      })
+      .restoreStyle()
+      .queue(function(done) {
+        callback();
+        done();
+      })
+      .play();
   }
 }
