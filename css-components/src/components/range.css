@@ -5,41 +5,26 @@
   --range-track-background-color-active: var(--highlight-color);
   --range-thumb-background-color: #fff;
   --range-track-height: 2px;
-  --range-thumb-width: var(--range-thumb-size);
 
   --material-range-track-height: 2px;
-  --material-range-thumb-width: 12px;
-  --material-range-thumb-radius: calc(var(--material-range-thumb-width) / 2);
+  --material-range-thumb-size: 14px;
+  --material-range-thumb-radius: calc(var(--material-range-thumb-size) / 2);
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
+  --material-range-disabled-thumb-color: #b0b0b0;
+  --material-range-disabled-thumb-border-color: #eeeeee;
 
   --range__thumb: {
     cursor: pointer;
     position: relative;
-    height: var(--range-thumb-width);
-    width: var(--range-thumb-width);
+    height: var(--range-thumb-size);
+    width: var(--range-thumb-size);
     background-color: var(--range-thumb-background-color);
     border: none;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
     border-radius: var(--round-border);
     margin: 0;
     padding: 0;
-  }
-
-  --range--material--thumb--before: {
-    display: none;
-  }
-
-  --range--material--thumb--after: {
-    content: '';
-    display: block;
-    border-width: 0;
-    border-radius: 100%;
-    height: var(--material-range-thumb-width);
-    width: var(--material-range-thumb-width);
-    background-color: var(--material-range-thumb-color);
-    opacity: 0.2;
-    transition: transform 0.1s linear;
   }
 }
 
@@ -162,81 +147,60 @@
 }
 
 .range--material__input::-webkit-slider-thumb {
+  position: relative;
   box-sizing: border-box;
   border: none;
-  height: calc(var(--material-range-thumb-width) + var(--material-range-thumb-vertical-margin));
-  width: calc(var(--material-range-thumb-width) + var(--material-range-thumb-horizontal-margin));
   border-radius: 0;
+  width: var(--material-range-thumb-size);
+  height: 32px;
   background-color: transparent;
-  background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 1.2px));
+  background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent calc(var(--material-range-thumb-radius)));
   box-shadow: none;
-}
-
-.range--material__input::-moz-range-thumb,
-.range--material__input:focus::-moz-range-thumb {
-  box-sizing: border-box;
-  border: none;
-  height: calc(var(--material-range-thumb-width) + var(--material-range-thumb-vertical-margin));
-  width: calc(var(--material-range-thumb-width) + var(--material-range-thumb-horizontal-margin));
-  border-radius: 0;
-  background-color: transparent;
-  background-image: -moz-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 1.2px));
+  transition: transform 0.1s linear;
+  overflow: visible;
 }
 
 .range--material__input::-moz-range-track {
   background: none;
 }
 
-.range--material__input::-ms-thumb {
-  margin-top: 1px;
+.range--material__input::-moz-range-thumb,
+.range--material__input:focus::-moz-range-thumb {
+  box-sizing: border-box;
   border: none;
-  height: var(--material-range-thumb-width);
-  width: var(--material-range-thumb-width);
-  border-radius: 100%;
-  border-color: var(--material-range-thumb-color);
-  background-color: var(--material-range-thumb-color);
+  width: var(--material-range-thumb-size);
+  height: 32px;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: -moz-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent calc(var(--material-range-thumb-radius))); /* stylelint-disable-line */
+  box-shadow: none;
 }
 
-.range--material__input::-ms-fill-lower {
-  background-color: var(--material-range-thumb-color);
-}
-
-.range--material__input::-ms-fill-upper {
-  margin-top: -6px;
-  margin-left: -6px;
-  @apply(--range--material--thumb--after);
-}
-
-.range--material__input::-moz-range-thumb:before {
-  @apply(--range--material--thumb--before);
-}
-
+.range--material__input::-moz-range-thumb:before,
 .range--material__input::-webkit-slider-thumb:before {
-  @apply(--range--material--thumb--before);
+  display: none;
 }
 
-.range--material__input::-moz-range-thumb:after {
-  margin-top: -3px;
-  margin-left: -3px;
-  @apply(--range--material--thumb--after);
+.range--material__input:active::-webkit-slider-thumb,
+.range--material__input.range__input--active::-webkit-slider-thumb { /* NOTICE: ":active" does not work on Android Chrome. */
+  transform: scale(1.5);
+  transition: transform 0.1s linear;
 }
 
-.range--material__input::-webkit-slider-thumb:after {
-  @apply(--range--material--thumb--after);
-  display: inline-block;
-  margin-left: calc(var(--material-range-thumb-horizontal-margin) / 2);
-  margin-top: calc(var(--material-range-thumb-vertical-margin) / 2);
+/* stylelint-disable */ .range--disabled.range--material { /* stylelint-enable */
+  opacity: 1;
 }
 
-.range--material__input:active::-webkit-slider-thumb:after {
-  transform: scale(2.5);
+/* stylelint-disable */ .range--disabled > .range--material__input { /* stylelint-enable */
+  background-image: none;
 }
 
-.range--material__input:active::-moz-range-thumb:after {
-  transform: scale(2.5);
+.range--material__input:disabled::-webkit-slider-thumb {
+  background-image: radial-gradient(circle cover, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px));
+  transition: none;
 }
 
-.range--material__input:active::-ms-fill-upper {
-  transform: scale(2.5);
+.range--material__input:disabled::-moz-range-thumb {
+  background-image: -moz-radial-gradient(circle cover, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px)); /* stylelint-disable-line */
+  transition: none;
 }
-

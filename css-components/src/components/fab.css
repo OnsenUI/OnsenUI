@@ -6,11 +6,11 @@
   --fab-mini-width: 40px;
   --fab-mini-height: 40px;
 
-  --fab--disabled: {
-    background-color: alpha(black, 0.5);
-    @apply(--material-shadow-0);
-    @apply(--disabled);
-  }
+  --material-fab-width: 56px;
+  --material-fab-height: 56px;
+  --material-fab-position: absolute;
+  --material-fab-mini-width: 40px;
+  --material-fab-mini-height: 40px;
 
   --fab: {
     position: relative;
@@ -19,7 +19,6 @@
     @apply(--reset-base);
     @apply(--reset-font);
     @apply(--reset-cursor);
-    @apply(--material-font);
     width: var(--fab-width);
     height: var(--fab-height);
     text-decoration: none;
@@ -33,6 +32,20 @@
     border: 0 solid currentColor;
     border-radius: 50%;
     overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    transition: all 0.05s linear;
+  }
+
+  --material-fab: {
+    @apply(--fab);
+    @apply(--material-font);
+    width: var(--material-fab-width);
+    height: var(--material-fab-height);
+    text-decoration: none;
+    font-size: 25px;
+    line-height: var(--material-fab-height);
+    color: var(--material-fab-text-color);
+    background-color: var(--material-fab-background-color);
     @apply(--material-shadow-2);
     transition: all 0.2s ease-in-out;
   }
@@ -41,10 +54,32 @@
     outline: 0;
   }
 
+  --material-fab--focus: {
+    outline: 0;
+  }
+
   --fab--active: {
-    @apply(--material-shadow-4);
-    background-color: var(--fab-background-color);
+    box-shadow: 0 3px 6 rgba(0, 0, 0, 0.12);
+    background-color: var(--fab-active-background-color);
     transition: all 0.2s ease;
+  }
+
+  --material-fab--active: {
+    @apply(--material-shadow-4);
+    background-color: var(--material-fab-active-background-color);
+    transition: all 0.2s ease;
+  }
+
+  --fab--disabled: {
+    background-color: alpha(black, 0.5);
+    @apply(--material-shadow-0);
+    @apply(--disabled);
+  }
+
+  --material-fab--disabled: {
+    background-color: alpha(black, 0.5);
+    @apply(--material-shadow-0);
+    @apply(--disabled);
   }
 }
 
@@ -63,6 +98,7 @@
 
 .fab:active {
   @apply(--fab--active);
+  box-shadow: 0 0 6 rgba(0, 0, 0, 0.12);
 }
 
 .fab:focus {
@@ -78,12 +114,83 @@
   border-radius: 100%;
   padding: 0;
   z-index: 100;
-  line-height: var(--fab-height);
+  line-height: var(--material-fab-height);
 }
 
 .fab:disabled,
 .fab[disabled] {
-  @apply(--fab--disabled);
+  @apply(--material-fab--disabled);
+}
+
+/*~
+  name: Material Fab
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab fab--material"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab fab--material" disabled><i class="zmdi zmdi-car"></i></button>
+*/
+
+.fab--material {
+  @apply(--material-fab);
+}
+
+.fab--material:active {
+  @apply(--material-fab--active);
+}
+
+.fab--material:focus {
+  @apply(--material-fab--focus);
+}
+
+.fab--material__icon {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: block;
+  border-radius: 100%;
+  padding: 0;
+  z-index: 100;
+  line-height: var(--material-fab-height);
+}
+
+.fab--material:disabled,
+.fab--material[disabled] {
+  @apply(--material-fab--disabled);
+}
+
+/*~
+  name: Fab Mini
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
+*/
+
+/*~
+  name: Material Fab Mini
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab fab--material fab--mini"><i class="zmdi zmdi-plus"></i></button>
+    <button class="fab fab--material fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
+*/
+
+.fab--mini {
+  width: var(--fab-mini-width);
+  height: var(--fab-mini-height);
+  line-height: var(--fab-mini-height);
+}
+
+.fab--mini__icon {
+  line-height: var(--fab-mini-height);
+}
+
+.speed-dial__item {
+  position: absolute;
+  transform: scale(0);
 }
 
 .fab--top__right {
@@ -136,26 +243,3 @@
   position: var(--fab-position);
 }
 
-/*~
-  name: Fab Mini
-  category: Fab
-  elements: ons-fab
-  markup: |
-    <button class="fab fab--mini"><i class="zmdi zmdi-plus"></i></button>
-    <button class="fab fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
-*/
-
-.fab--mini {
-  width: var(--fab-mini-width);
-  height: var(--fab-mini-height);
-  line-height: var(--fab-mini-height);
-}
-
-.fab--mini__icon {
-  line-height: var(--fab-mini-height);
-}
-
-.speed-dial__item {
-  position: absolute;
-  transform: scale(0);
-}

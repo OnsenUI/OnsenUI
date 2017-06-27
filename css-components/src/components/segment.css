@@ -153,12 +153,6 @@
   background-color: var(--material-segment-background-color);
 }
 
-.segment--material__item:first-child > .segment--material__button,
-.segment--material__item:last-child > .segment--material__button {
-  border-radius: 0;
-  border-width: 0;
-}
-
 :active + .segment--material__button {
   background-color: var(--material-segment-background-color);
   border-radius: 0;
@@ -171,6 +165,12 @@
 :checked + .segment--material__button {
   background-color: var(--material-segment-active-background-color);
   color: var(--material-segment-active-text-color);
+  border-radius: 0;
+  border-width: 0;
+}
+
+.segment--material__item:first-child > .segment--material__button,
+.segment--material__item:last-child > .segment--material__button {
   border-radius: 0;
   border-width: 0;
 }

@@ -2,7 +2,18 @@
 CHANGELOG
 ====
 
-dev
+v2.4.2
+----
+
+### Bug Fixes
+
+ * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
+
+### New Features
+
+ * ons-fab: Added new appearances for iOS.
+
+v2.4.1
 ----
 
 ### Bug Fixes

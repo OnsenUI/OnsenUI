@@ -1,7 +1,6 @@
 
 :root {
   --background-color: #f9f9f9;
-  --material-background-color: #ffffff;
   --text-color: #1f1f21;
   --sub-text-color: #999;
   --highlight-color: rgba(24, 103, 194, 0.81);
@@ -39,12 +38,16 @@
   --popover-background-color: white;
   --popover-text-color: #1f1f21;
   --notification-background-color: #dc5236;
+  --fab-text-color: #ffffff;
+  --fab-background-color: rgba(24, 103, 194, 0.81);
+  --fab-active-background-color: rgba(24, 103, 194, 0.61);
+  --material-background-color: #ffffff;
   --material-notification-background-color: #e91e63;
   --material-switch-active-thumb-color: #009688;
   --material-switch-inactive-thumb-color: #f1f1f1;
   --material-switch-active-background-color: #77c2bb;
   --material-switch-inactive-background-color: #b0afaf;
-  --material-range-track-color: #e0e0e0;
+  --material-range-track-color: #bdbdbd;
   --material-range-thumb-color: #009688;
   --material-toolbar-background-color: #009688;
   --material-toolbar-text-color: #ffffff;
@@ -75,6 +78,7 @@
   --material-tabbar-text-color: rgba(255, 255, 255, 0.6);
   --material-tabbar-highlight-text-color: #ffffff;
   --material-tabbar-highlight-color: #26a69a;
-  --fab-text-color: #ffffff;
-  --fab-background-color: #009688;
+  --material-fab-text-color: #ffffff;
+  --material-fab-background-color: #009688;
+  --material-fab-active-background-color: rgba(0, 150, 136, 0.85);
 }
