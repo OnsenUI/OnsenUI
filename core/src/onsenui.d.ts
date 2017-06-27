@@ -268,6 +268,37 @@ declare namespace ons {
      */
     function isEdge(): boolean;
   }
+  /**
+   * @description Utility methods for modifier attributes
+   */
+  namespace modifier {
+    /**
+     * @description Add the specified modifiers to the element if they are not already included.
+     * @param {HTMLElemenet} element Target element.
+     * @param {String} modifier Name of the modifier.
+     */
+    function add(element: HTMLElement, ...modifier: string[]): void;
+    /**
+     * @description Remove the specified modifiers from the element if they are included.
+     * @param {HTMLElemenet} element Target element.
+     * @param {String} modifier Name of the modifier.
+     */
+    function remove(element: HTMLElement, ...modifier: string[]): void;
+    /**
+     * @description Check whether the specified modifier is included in the element.
+     * @param {HTMLElemenet} element Target element.
+     * @param {String} modifier Name of the modifier.
+     * @return {Boolean} 'true' when the specified modifier is found in the element's 'modifier' attribute. 'false' otherwise.
+     */
+    function contains(element: HTMLElement, modifier: string): boolean;
+    /**
+     * @description Toggle the specified modifier.
+     * @param {HTMLElemenet} element Target element.
+     * @param {String} modifier Name of the modifier.
+     * @param {Boolean} force If it evaluates to true, add specified modifier value, and if it evaluates to false, remove it.
+     */
+    function toggle(element: HTMLElement, modifier: string, force?: boolean): void;
+  }
 
   /**
    * @description Default page loader that load page template
