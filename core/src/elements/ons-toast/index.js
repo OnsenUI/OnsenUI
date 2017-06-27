@@ -55,6 +55,7 @@ const _animatorDict = {
  *     This component does not block user input, allowing the app to continue its flow. For simple toasts, consider `ons.notification.toast` instead.
  *   [/en]
  *   [ja][/ja]
+ * @tutorial vanilla/Reference/dialog
  * @guide dialogs
  *   [en]Dialog components[/en]
  *   [ja]Dialog components[/ja]
