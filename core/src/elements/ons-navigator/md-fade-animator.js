@@ -24,7 +24,7 @@ import animit from '../../ons/animit';
  */
 export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor({timing = 'cubic-bezier(0.45, 0, 0.745, 0.715)', timingOnPop = 'cubic-bezier(0.250, 0.100, 0.125, 1.000)', delay = 0, duration = 0.2} = {}) {
+  constructor({timing = 'cubic-bezier(0.4, 0.0, 0.2, 1)', timingOnPop = 'cubic-bezier(0.4, 0.0, 1, 1)', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});
     this.timingOnPop = timingOnPop;
   }

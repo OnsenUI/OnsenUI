@@ -25,7 +25,7 @@ import contentReady from '../../ons/content-ready';
  */
 export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor({timing = 'cubic-bezier(0.385, 0.080, 0.000, 0.930)', delay = 0, duration = 0.35} = {}) {
+  constructor({timing = 'cubic-bezier(.38, .08, 0, .93)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
