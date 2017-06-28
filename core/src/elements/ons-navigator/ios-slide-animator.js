@@ -25,7 +25,7 @@ import contentReady from '../../ons/content-ready';
  */
 export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor({timing = 'ease', delay = 0, duration = 0.4} = {}) {
+  constructor({timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
@@ -85,7 +85,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const pageRect = element.getBoundingClientRect();
     if (decomposition.backButtonLabel.classList.contains('back-button__label')) {
       const labelRect = decomposition.backButtonLabel.getBoundingClientRect();
-      title = Math.round((pageRect.width / 2) - (labelRect.width / 2) - labelRect.left);
+      title = Math.round(pageRect.width / 2 - labelRect.width / 2 - labelRect.left);
     } else {
       title = Math.round((pageRect.width / 2) * 0.6);
     }
@@ -124,7 +124,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
         })
         .wait(this.delay)
         .queue({
-          opacity: 0.05
+          opacity: 0.1
         }, {
           duration: this.duration,
           timing: this.timing
@@ -202,7 +202,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
+                opacity: 1
               },
               duration: this.duration,
               timing: this.timing
@@ -213,7 +213,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .saveStyle()
             .queue({
               css: {
-                transform: 'translate3d(' + delta.title + 'px, 0, 0)',
+                transform: `translate3d(${delta.title}px, 0, 0)`,
                 opacity: 0
               },
               duration: 0
@@ -222,10 +222,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
+                opacity: 1.0,
+                transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
               },
-              duration: this.duration,
-              timing: this.timing
+              duration: this.duration
             })
             .restoreStyle(),
 
@@ -239,7 +239,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {opacity: 1},
               duration: this.duration,
-              timing: this.timing
+              timing: 'linear'
             })
             .restoreStyle(),
 
@@ -278,11 +278,11 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .wait(this.delay)
             .queue({
               css: {
-                transform: 'translate3d(-' + delta.title + 'px, 0, 0)',
+                transform: `translate3d(-${delta.title}px, 0, 0)`,
                 opacity: 0,
+                transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
               },
-              duration: this.duration,
-              timing: this.timing
+              duration: this.duration
             })
             .restoreStyle(),
 
@@ -316,7 +316,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {opacity: 0},
               duration: this.duration,
-              timing: this.timing
+              timing: 'linear'
             })
             .restoreStyle()
 
@@ -453,10 +453,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {
               transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
+              opacity: 1.0,
+              transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
             },
-            duration: this.duration,
-            timing: this.timing
+            duration: this.duration
           })
           .restoreStyle(),
 
@@ -488,7 +488,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {opacity: 1},
             duration: this.duration,
-            timing: this.timing
+            timing: 'linear'
           })
           .restoreStyle(),
 
@@ -566,10 +566,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {
               transform: 'translate3d(' + delta.title + 'px, 0, 0)',
-              opacity: 0
+              opacity: 0,
+              transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
             },
-            duration: this.duration,
-            timing: this.timing
+            duration: this.duration
           })
       );
     } else {
