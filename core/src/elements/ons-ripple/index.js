@@ -65,6 +65,14 @@ export default class RippleElement extends BaseElement {
    */
 
   /**
+   * @attribute size
+   * @type {String}
+   * @description
+   *   [en]Sizing of the wave on ripple effect. Set "cover" or "contain". Default is "cover".[/en]
+   *   [ja]エフェクトのサイズを指定します。"cover"もしくは"contain"を指定します。デフォルトは"cover"です。[/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]If this attribute is set, the ripple effect will be disabled.[/en]
@@ -98,27 +106,55 @@ export default class RippleElement extends BaseElement {
     }
   }
 
+  _getEffectSize() {
+    const sizes = ['cover', 'contain'];
+    if (this.hasAttribute('size')) {
+      const size = this.getAttribute('size');
+      if (sizes.indexOf(size) !== -1) {
+        return size;
+      }
+    }
+
+    return 'cover';
+  }
+
   _calculateCoords(e) {
-    var x, y, h, w, r;
-    var b = this.getBoundingClientRect();
+    let x, y, h, w, r;
+    const b = this.getBoundingClientRect();
+    const size = this._getEffectSize();
+
     if (this._center) {
       x = b.width / 2;
       y = b.height / 2;
-      r = Math.sqrt(x * x + y * y);
+
+      if (size === 'cover') {
+        r = Math.sqrt(x * x + y * y);
+      } else if (size === 'contain') {
+        r = Math.min(x, y);
+      } else {
+        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+      }
     } else {
       x = (e.clientX || e.changedTouches[0].clientX) - b.left;
       y = (e.clientY || e.changedTouches[0].clientY) - b.top;
       h = Math.max(y, b.height - y);
       w = Math.max(x, b.width - x);
-      r = Math.sqrt(h * h + w * w);
+
+      if (size === 'cover') {
+        r = Math.sqrt(h * h + w * w);
+      } else if (size === 'contain') {
+        r = Math.min(Math.round(h / 2), Math.round(w / 2));
+      } else {
+        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+      }
     }
+
     return {x, y, r};
   }
 
   _rippleAnimation(e, duration = 300) {
-    var
-      {_animator, _wave, _background, _minR} = this,
-      {x, y, r} = this._calculateCoords(e);
+    const {_animator, _wave, _background, _minR} = this;
+    const {x, y, r} = this._calculateCoords(e);
 
     _animator.stopAll({stopNext: 1});
     _animator.animate(_background, {opacity: 1}, duration);
