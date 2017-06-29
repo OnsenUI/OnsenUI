@@ -385,8 +385,9 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 /**
  * @param {Element} target
  * @param {boolean} hasRipple
+ * @param {Object} attrs
  */
-util.updateRipple = (target, hasRipple) => {
+util.updateRipple = (target, hasRipple, attrs = {}) => {
   if (hasRipple === undefined) {
     hasRipple = target.hasAttribute('ripple');
   }
@@ -395,7 +396,9 @@ util.updateRipple = (target, hasRipple) => {
 
   if (hasRipple) {
     if (!rippleElement) {
-      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+      const element = document.createElement('ons-ripple');
+      Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]));
+      target.insertBefore(element, target.firstChild);
     }
   } else if (rippleElement) {
     rippleElement.remove();
@@ -418,7 +421,7 @@ util.isInteger = (value) => {
 };
 
 /**
- * @return {Obejct} Deferred promise.
+ * @return {Object} Deferred promise.
  */
 util.defer = () => {
   const deferred = {};

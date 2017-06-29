@@ -107,7 +107,7 @@ export default class ToolbarButtonElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    util.updateRipple(this);
+    util.updateRipple(this, undefined, {center: '', 'size': 'contain', 'background': 'transparent'});
 
     ModifierUtil.initModifier(this, scheme);
   }
