@@ -96,11 +96,12 @@ ons-bottom-toolbar {
   -ms-touch-action: pan-y;
 }
 
+.toolbar:not(.toolbar--transparent) + .page__background,
 .toolbar + .page__background + .page__content {
-  margin-top: -1px;
   top: 44px;
 }
 
+.toolbar--material:not(.toolbar--transparent) + .page__background,
 .toolbar--material + .page__background + .page__content {
   top: 56px;
 }

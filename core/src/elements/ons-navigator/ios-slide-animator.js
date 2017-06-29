@@ -119,8 +119,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
       if (shouldAnimateToolbar) {
-        // TODO: Remove this fix
-        const enterPageToolbarHeight = enterPageDecomposition.toolbar.getBoundingClientRect().height + 'px';
 
         animit.runAll(
 
@@ -158,14 +156,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
               timing: this.timing
             })
             .restoreStyle(),
-
-          animit(enterPageDecomposition.background)
-            .queue({
-              css: {
-                top: enterPageToolbarHeight
-              },
-              duration: 0
-            }),
 
           animit(enterPageDecomposition.toolbarCenter)
             .saveStyle()
@@ -377,8 +367,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
     if (shouldAnimateToolbar) {
-      const enterPageToolbarHeight = enterPageDecomposition.toolbar.getBoundingClientRect().height + 'px';
-
       animit.runAll(
 
         animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
@@ -452,14 +440,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             timing: 'linear'
           })
           .restoreStyle(),
-
-        animit(leavePageDecomposition.background)
-          .queue({
-            css: {
-              top: enterPageToolbarHeight
-            },
-            duration: 0
-          }),
 
         animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
           .queue({
