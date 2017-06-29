@@ -71,13 +71,9 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (until !== undefined && until(parent)) {
+    if (!parent || parent === document || (until && until(parent))) {
       return null;
-    }
-    if (!parent || parent === document) {
-      return null;
-    }
-    if (match(parent)) {
+    } else if (match(parent)) {
       return parent;
     }
     parent = parent.parentNode;
@@ -168,7 +164,9 @@ util.createElement = (html) => {
     throw new Error('"html" must be one wrapper element.');
   }
 
-  return wrapper.children[0];
+  const element = wrapper.children[0];
+  wrapper.children[0].remove();
+  return element;
 };
 
 /**
