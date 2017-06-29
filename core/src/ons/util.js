@@ -384,7 +384,7 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
- * @param {Element} hasRipple
+ * @param {boolean} hasRipple
  */
 util.updateRipple = (target, hasRipple) => {
   if (hasRipple === undefined) {

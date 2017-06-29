@@ -87,7 +87,6 @@
 
 .toolbar-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
   transition: background-color 0.25s linear;
 }
 
@@ -148,5 +147,4 @@
 
 .back-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
 }
