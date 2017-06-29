@@ -12,6 +12,7 @@ v2.4.2
 ### New Features
 
  * ons-fab: Added new appearances for iOS.
+ * ons-ripple: Added `size` attribute.
 
 v2.4.1
 ----
