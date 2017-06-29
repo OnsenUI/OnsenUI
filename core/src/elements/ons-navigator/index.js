@@ -17,9 +17,11 @@ limitations under the License.
 
 import util from '../../ons/util';
 import internal from '../../ons/internal';
+import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
+import IOSSwipeNavigatorTransitionAnimator from './ios-swipe-animator';
 import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
 import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
 import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
@@ -268,11 +270,28 @@ export default class NavigatorElement extends BaseElement {
   connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
+    this._swipe = new SwipeReveal({
+      element: this,
+      animator: new IOSSwipeNavigatorTransitionAnimator(),
+      swipeMax: (animator) => this.popPage({animator}),
+      getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
+      ignoreSwipe: event => {
+        if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
+          return true;
+        }
+        return event.gesture.direction !==  'right' || this._isRunning || this.children.length <= 1;
+      }
+    });
+
     if (this._initialized) {
       return;
     }
 
     this._initialized = true;
+
+    if (this.hasAttribute('swipeable')) {
+      this._swipe.update();
+    }
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this._getPageTarget()) {
@@ -314,16 +333,32 @@ export default class NavigatorElement extends BaseElement {
   disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
+
+    this._swipe && this._swipe.dispose();
+    this._swipe = null;
   }
 
   static get observedAttributes() {
-    return ['animation'];
+    return ['animation', 'swipeable'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'animation') {
-      this._updateAnimatorFactory();
+    switch(name) {
+      case 'animation':
+        this._updateAnimatorFactory();
+        break;
+      case 'swipeable':
+        this._swipe && this._swipe.update();
+        break;
     }
+  }
+
+  get _swipeTargetWidth() {
+    return Math.max(0, parseInt(this.getAttribute('swip-target-width')) || 20); // 20px default
+  }
+
+  get _threshold() {
+    return Math.max(0, Math.min(1, parseFloat(this.getAttribute('swipe-threshold')) || 0.3));
   }
 
   /**
@@ -419,7 +454,7 @@ export default class NavigatorElement extends BaseElement {
       };
 
       leavePage._hide();
-      const animator = this._animatorFactory.newAnimator(options);
+      const animator = options.animator || this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[length - 2], this.pages[length - 1], callback);
     }).catch(() => this._isRunning = false);
   }
