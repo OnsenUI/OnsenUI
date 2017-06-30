@@ -361,31 +361,22 @@ export default class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (util.findChild(this, '.content')) {
-      util.findChild(this, '.content').classList.add('page__content');
-    }
+    const toolbar = util.findChild(this, 'ons-toolbar');
 
-    if (util.findChild(this, '.background')) {
-      util.findChild(this, '.background').classList.add('page__background');
-    }
+    const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
+    background.classList.add('page__background');
+    this.insertBefore(background, toolbar && toolbar.nextSibling);
 
-    if (!util.findChild(this, '.page__content')) {
-      const content = util.create('.page__content');
-
+    const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
+    content.classList.add('page__content');
+    if (!content.parentElement) {
       util.arrayFrom(this.childNodes).forEach(node => {
         if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
           content.appendChild(node);
         }
       });
 
-      const prevNode = util.findChild(this, '.page__background') || util.findChild(this, 'ons-toolbar');
-
-      this.insertBefore(content, prevNode && prevNode.nextSibling);
-    }
-
-    if (!util.findChild(this, '.page__background')) {
-      const background = util.create('.page__background');
-      this.insertBefore(background, util.findChild(this, '.page__content'));
+      this.insertBefore(content, background.nextSibling);
     }
 
     ModifierUtil.initModifier(this, scheme);
