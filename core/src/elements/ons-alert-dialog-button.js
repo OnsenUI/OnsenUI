@@ -27,7 +27,7 @@ const scheme = {'': 'alert-dialog-button--*'};
 /**
  * @element ons-alert-dialog-button
  * @modifier material
- *   [en]Material Design toolbar button.[/en]
+ *   [en]Material Design alert-dialog button.[/en]
  *   [ja][/ja]
  * @description
  *   [en][/en]
@@ -90,7 +90,7 @@ export default class AlertDialogButtonElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    util.updateRipple(this, undefined, {'color': 'rgba(98, 98, 98, 0.2)'});
+    util.updateRipple(this, undefined, {'color': 'rgba(189, 189, 189, 0.3)'});
 
     ModifierUtil.initModifier(this, scheme);
   }

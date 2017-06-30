@@ -752,6 +752,13 @@ declare namespace ons {
     disabled: boolean;
   }
 
+  interface OnsAlertDialogButtonElement extends HTMLElement {
+    /**
+     * @description A boolean value that specifies if the button is disabled or not.
+     */
+    disabled: boolean;
+  }
+
   interface OnsFabElement extends HTMLElement {
     /**
      * @description Show the floating action button.
