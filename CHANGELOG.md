@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+### Bug Fixes
+
+ * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
+
 ### New Features
 
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
