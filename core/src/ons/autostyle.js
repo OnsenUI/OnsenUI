@@ -54,6 +54,7 @@ platforms.android = element => {
     'ons-list-item',
     'ons-fab',
     'ons-speed-dial',
+    'ons-speed-dial-item',
     'ons-tab'
   ];
 
