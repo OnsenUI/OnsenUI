@@ -20,8 +20,14 @@ import internal from '../../ons/internal';
 import BaseElement from '../base/base-element';
 import Animator from './animator-css';
 import contentReady from '../../ons/content-ready';
+import ModifierUtil from '../../ons/internal/modifier-util';
 
 const defaultClassName = 'ripple';
+const scheme = {
+  '': 'ripple--*',
+  '.ripple__wave': 'ripple--*__wave',
+  '.ripple__background': 'ripple--*__background',
+};
 
 /**
  * @element ons-ripple
@@ -57,6 +63,14 @@ export default class RippleElement extends BaseElement {
    */
 
   /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]The appearance of the ripple effect.[/en]
+   *   [ja]エフェクトの表現を指定します。[/ja]
+   */
+
+  /**
    * @attribute background
    * @type {String}
    * @description
@@ -86,7 +100,7 @@ export default class RippleElement extends BaseElement {
 
     this._animator = new Animator();
 
-    ['color', 'center', 'start-radius', 'background'].forEach(e => {
+    ['color', 'center', 'start-radius', 'background', 'modifier'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -104,6 +118,8 @@ export default class RippleElement extends BaseElement {
       this.appendChild(this._wave);
       this.appendChild(this._background);
     }
+
+    ModifierUtil.initModifier(this, scheme);
   }
 
   _getEffectSize() {
@@ -250,7 +266,7 @@ export default class RippleElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['start-radius', 'color', 'background', 'center', 'class'];
+    return ['start-radius', 'color', 'background', 'center', 'class', 'modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -260,6 +276,10 @@ export default class RippleElement extends BaseElement {
         if (!this.classList.contains(defaultClassName)) {
           this.className = defaultClassName + ' ' + current;
         }
+        break;
+
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
 
       case 'start-radius':
