@@ -41,6 +41,9 @@ const scheme = {
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
  * @tutorial vanilla/Reference/ripple
+ * @modifier light-gray
+ *   [en][/en]
+ *   [ja][/ja]
  * @guide cross-platform-styling
  *  [en]Cross platform styling[/en]
  *  [ja]Cross platform styling[/ja]

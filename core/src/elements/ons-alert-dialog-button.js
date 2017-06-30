@@ -90,7 +90,7 @@ export default class AlertDialogButtonElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    util.updateRipple(this, undefined, {'color': 'rgba(189, 189, 189, 0.3)'});
+    util.updateRipple(this, undefined, {'modifier': 'light-gray'});
 
     ModifierUtil.initModifier(this, scheme);
   }
