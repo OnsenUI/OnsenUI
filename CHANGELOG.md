@@ -12,6 +12,7 @@ dev
 ### New Features
 
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
+ * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
 
 v2.4.2
 ----
