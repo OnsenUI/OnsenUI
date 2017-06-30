@@ -274,12 +274,14 @@ export default class NavigatorElement extends BaseElement {
       element: this,
       animator: new IOSSwipeNavigatorTransitionAnimator(),
       swipeMax: (animator) => this.popPage({animator}),
+      getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
       getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
-      ignoreSwipe: event => {
+      ignoreSwipe: (event, distance) => {
         if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
           return true;
         }
-        return event.gesture.direction !==  'right' || this._isRunning || this.children.length <= 1;
+        const area = Math.max(20, parseInt(this.getAttribute('swip-target-width')) || 0);
+        return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
       }
     });
 
@@ -351,14 +353,6 @@ export default class NavigatorElement extends BaseElement {
         this._swipe && this._swipe.update();
         break;
     }
-  }
-
-  get _swipeTargetWidth() {
-    return Math.max(0, parseInt(this.getAttribute('swip-target-width')) || 20); // 20px default
-  }
-
-  get _threshold() {
-    return Math.max(0, Math.min(1, parseFloat(this.getAttribute('swipe-threshold')) || 0.3));
   }
 
   /**

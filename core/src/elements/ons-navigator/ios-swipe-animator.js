@@ -21,7 +21,7 @@ import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
 
 /**
- * Slide animator for navigator transition like iOS's screen slide transition.
+ * Swipe animator for iOS navigator transition.
  */
 export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigatorTransitionAnimator {
 
@@ -68,7 +68,6 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   restore(enterPage, leavePage, callback) {
-    const unblock = super.block(enterPage);
 
     animit.runAll(
 
@@ -100,8 +99,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
         duration: this.durationRestore
       })
       .queue(done => {
-        this._reset(enterPage, enterPage._contentElement, enterPage._getBackgroundElement(), leavePage, leavePage._contentElement, leavePage._getBackgroundElement());
-        unblock();
+        this._reset(enterPage, leavePage);
         callback && callback();
         done();
       })
@@ -109,7 +107,6 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   pop(enterPage, leavePage, callback) {
-    const unblock = super.block(enterPage);
 
     animit.runAll(
 
@@ -141,8 +138,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
         timing: this.timing
       })
       .queue(done => {
-        this._reset(enterPage, enterPage._contentElement, enterPage._getBackgroundElement(), leavePage, leavePage._contentElement, leavePage._getBackgroundElement());
-        unblock();
+        this._reset(enterPage, leavePage);
         callback && callback();
         done();
       })
@@ -152,8 +148,9 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   _reset(...elements) {
     this.swipeShadow.remove();
     this.backgroundMask.remove();
-    elements.forEach(element => {
-      element.style.transform = element.style.opacity = element.style.transition = element.style.overflow = null;
-    });
+
+    elements
+      .reduce((result, el) => result.concat([el, el._contentElement, el._getBackgroundElement()]), [])
+      .forEach(el => el.style.transform = el.style.opacity = el.style.transition = el.style.overflow = null);
   }
 }

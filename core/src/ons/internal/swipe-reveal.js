@@ -28,6 +28,7 @@ export default class SwipeReveal {
     this.element = params.element;
     this.elementHandler = params.elementHandler || params.element;
     this.animator = params.animator;
+    this.getThreshold = params.getThreshold;
     this.ignoreSwipe = params.ignoreSwipe;
     this.getAnimationElements = params.getAnimationElements;
     this.onDragCallback = params.onDrag;
@@ -60,8 +61,7 @@ export default class SwipeReveal {
   onDragStart(event) {
     const scrolling = !/left|right/.test(event.gesture.direction);
     const distance = this.side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
-    const area = this.element._swipeTargetWidth;
-    this._ignoreDrag = scrolling || (area && distance > area) || this.ignoreSwipe(event);
+    this._ignoreDrag = scrolling || this.ignoreSwipe(event, distance);
 
     this._width = widthToPx(this.element._width || '100%', this.element.parentNode);
     this._startDistance = this._distance = 0;
@@ -80,7 +80,7 @@ export default class SwipeReveal {
 
   onDragEnd(event) {
     const direction = event.gesture.interimDirection;
-    const isSwipeMax = this.side !== direction && this._distance > this._width * this.element._threshold;
+    const isSwipeMax = this.side !== direction && this._distance > this._width * this.getThreshold();
     isSwipeMax ? this.swipeMax(this.animator) : this.swipeMin(this.animator);
     this._ignoreDrag = true;
   }
