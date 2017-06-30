@@ -101,12 +101,18 @@ util.isAttached = (element) => {
 util.hasAnyComponentAsParent = (element) => {
   while (element && document.documentElement !== element) {
     element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal|ons-sliding-menu|ons-split-view)/)) {
+    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal)/)) {
       return true;
     }
   }
   return false;
 };
+
+/**
+ * @param {Element} element
+ * @return {boolean}
+ */
+util.isPageControl = element => element.nodeName.match(/^ons-(navigator|splitter|tabbar|page)$/i);
 
 /**
  * @param {Element} element

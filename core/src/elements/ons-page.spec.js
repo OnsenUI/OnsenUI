@@ -46,6 +46,16 @@ describe('OnsPageElement', () => {
     expect(page.querySelector('.page__background')).to.be.ok;
   });
 
+  it('should have transparent background if is a wrapper', () => {
+    const page = ons._util.createElement(`
+      <ons-page>
+        <div class="page__background"></div>
+        <ons-page id="inner"><div class="page__background"></div></ons-page>
+      </ons-page>`);
+    expect(page.querySelector('.page__background').style.backgroundColor).to.equal('transparent');
+    expect(page.querySelector('#inner .page__background').style.backgroundColor).to.equal('');
+  });
+
   describe('#attachedCallback()', () => {
     it('calls \'onInit\' hook', () => {
       const p = new Promise((resolve) => element.onInit = resolve);

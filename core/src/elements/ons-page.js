@@ -215,7 +215,7 @@ export default class PageElement extends BaseElement {
   }
 
   _hasAPageControlChild() {
-    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+    return util.findChild(this._contentElement, util.isPageControl);
   }
 
   /**
@@ -377,6 +377,14 @@ export default class PageElement extends BaseElement {
       });
 
       this.insertBefore(content, background.nextSibling);
+    }
+
+    // Make wrapper pages transparent for animations
+    if (!background.style.backgroundColor
+      && content.children.length === 1
+      && util.isPageControl(content.children[0])
+    ) {
+        background.style.backgroundColor = 'transparent';
     }
 
     ModifierUtil.initModifier(this, scheme);
