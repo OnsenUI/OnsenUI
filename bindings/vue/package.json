@@ -53,6 +53,8 @@
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "fs-extra": "^3.0.1",
+    "glob": "^7.1.2",
     "gulp-chmod": "^2.0.0",
     "gulp-download": "^0.0.1",
     "gulp-unzip": "^0.2.0",
