@@ -93,7 +93,7 @@ gulp.task('build:helper-json', ['build:core-docs'], (done) => {
     }
   };
 
-  const destinationPath = path.join(__dirname, 'build', 'vue-onsenui-helper-json');
+  const destinationPath = path.join(__dirname, 'packages', 'vue-onsenui-helper-json');
   const tags = {};
   const attributes = {};
 
