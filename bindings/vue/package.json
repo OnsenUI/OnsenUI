@@ -5,7 +5,8 @@
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --host 0.0.0.0",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.prod.js && npm run build:helper-json",
+    "build:helper-json": "gulp build:helper-json",
     "prepublish": "npm run build",
     "test": "gulp test"
   },
@@ -53,6 +54,8 @@
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "fs-extra": "^3.0.1",
+    "glob": "^7.1.2",
     "gulp-chmod": "^2.0.0",
     "gulp-download": "^0.0.1",
     "gulp-unzip": "^0.2.0",
