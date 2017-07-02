@@ -18,6 +18,31 @@ const $ = require('gulp-load-plugins')();
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
+// Build docs by running the parent gulpfile.
+//
+// We need the files in `build/docs/` in the project root
+// to generate tags data and attributes data of `vue-onsenui` components.
+gulp.task('build:core-docs', (done) => {
+  console.log('Running parent gulpfile...');
+  spawn('node_modules/.bin/gulp', ['build-docs'],
+    {
+      cwd: path.join(__dirname, '..', '..'), // exec in the project root
+      stdio: 'inherit', // redirect stdio/stdout/stderr to this process
+    }
+  )
+  .on('error', function (error) {
+      done(new Error(error.message));
+  })
+  .on('exit', function(code) {
+    if (code !== 0) {
+      done(new Error('gulp exited with code ' + code));
+    } else {
+      console.log('Done.');
+      done();
+    }
+  });
+});
+
 gulp.task('serve', done => {
   createDevServer('./webpack.config.js').listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/index.html');
