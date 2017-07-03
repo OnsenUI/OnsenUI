@@ -161,6 +161,7 @@ export default class PageElement extends BaseElement {
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
+      this._backgroundElement = this._getBackgroundElement();
     });
   }
 

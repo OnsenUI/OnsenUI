@@ -28,6 +28,7 @@ ons-gesture-detector {
 
 ons-navigator,
 ons-tabbar,
+ons-splitter,
 ons-action-sheet,
 ons-dialog,
 ons-toast,
@@ -94,6 +95,14 @@ ons-bottom-toolbar {
   -webkit-overflow-scrolling: touch;
   z-index: 0;
   -ms-touch-action: pan-y;
+}
+
+.page.overflow-visible,
+.page.overflow-visible .page,
+.page.overflow-visible .page__content,
+.page.overflow-visible ons-navigator,
+.page.overflow-visible ons-splitter {
+  overflow: visible;
 }
 
 .toolbar:not(.toolbar--transparent) + .page__background,
@@ -170,10 +179,6 @@ ons-pull-hook {
   margin: auto;
   text-align: center;
   z-index: 20002;
-}
-
-ons-splitter {
-  overflow: hidden;
 }
 
 ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {

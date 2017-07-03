@@ -25,10 +25,9 @@ import contentReady from '../../ons/content-ready';
  */
 export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigatorTransitionAnimator {
 
-  constructor({ duration = 0.1, timing = 'linear', delay = 0 } = {}) {
+  constructor({ duration = 0.15, timing = 'linear', delay = 0 } = {}) {
     super({duration, timing, delay});
     this.durationRestore = 0.1;
-    this.durationPop = 0.15;
 
     this.swipeShadow = util.createElement(`
       <div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;
@@ -37,120 +36,361 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   translate(distance, maxWidth, enterPage, leavePage) {
-    if (!this.backgroundMask.parentElement) {
+    if (!this.backgroundMask.parentElement) { // dragStart
       enterPage.parentElement.insertBefore(this.backgroundMask, enterPage);
-    }
 
-    leavePage._contentElement.appendChild(this.swipeShadow);
-    leavePage._contentElement.style.overflow = leavePage.style.overflow = 'visible';
+      // Decomposition
+      this.target = {
+        enter: util.findToolbarPage(enterPage) || enterPage,
+        leave: util.findToolbarPage(leavePage) || leavePage,
+      };
+      this.decomp = {
+        enter: this._decompose(this.target.enter),
+        leave: this._decompose(this.target.leave)
+      };
+      this.delta = this._calculateDelta(leavePage, this.decomp.leave);
+      this.shouldAnimateToolbar = this._shouldAnimateToolbar(this.target.enter, this.target.leave);
+
+      (this.shouldAnimateToolbar ? this.target.leave : leavePage)._contentElement.appendChild(this.swipeShadow);
+      leavePage.classList.add('overflow-visible');
+      this.overflowElement = leavePage;
+    }
 
     const behindOffset = (distance - maxWidth) / maxWidth;
 
-    animit.runAll(
-      animit(leavePage)
-        .queue({
-          transform: `translate3d(${distance}px, 0px, 0px)`
-        }),
+    if (this.shouldAnimateToolbar) {
 
-      animit(enterPage)
-        .queue({
-          transform: `translate3d(${behindOffset * 25}%, 0, 0)`
-        }),
-      animit([enterPage._contentElement, enterPage._getBackgroundElement()])
-        .queue({
-          opacity: 1 + behindOffset * 10 / 100
-        }),
-      animit(this.swipeShadow)
-        .queue({
-          opacity: -1 * behindOffset
-        })
-    )
+      animit.runAll(
+
+        /* Enter page */
+
+        animit([this.decomp.enter.content, this.decomp.enter.bottomToolbar, this.decomp.enter.background])
+          .queue({
+            transform: `translate3d(${behindOffset * 25}%, 0, 0)`,
+            opacity: 1 + behindOffset * 10 / 100 // 0.9 -> 1
+          }),
+
+        animit(this.decomp.enter.toolbarCenter)
+          .queue({
+            transform: `translate3d(${this.delta.title * behindOffset}px, 0, 0)`,
+            opacity: 1 + behindOffset // 0 -> 1
+          }),
+
+        animit(this.decomp.enter.backButtonLabel)
+          .queue({
+            opacity: 1 + behindOffset * 10 / 100, // 0.9 -> 1
+            transform: `translate3d(${this.delta.label * behindOffset}px, 0, 0)`
+          }),
+
+        animit(this.decomp.enter.other)
+          .queue({
+            opacity: 1 + behindOffset // 0 -> 1
+          }),
+
+        /* Leave page */
+
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+          .queue({
+            transform: `translate3d(${distance}px, 0px, 0px)`
+          }),
+
+        animit(this.decomp.leave.toolbar)
+          .queue({
+            opacity: -1 * behindOffset // 1 -> 0
+          }),
+
+        animit(this.decomp.leave.toolbarCenter)
+          .queue({
+            transform: `translate3d(${(1 + behindOffset) * 125}%, 0, 0)`
+          }),
+
+        animit(this.decomp.leave.backButtonLabel)
+          .queue({
+            opacity: -1 * behindOffset, // 1 -> 0
+            transform: `translate3d(${this.delta.title * (1 + behindOffset)}px, 0, 0)`
+          }),
+
+
+        /* Other */
+
+        animit(this.swipeShadow)
+          .queue({
+            opacity: -1 * behindOffset // 1 -> 0
+          })
+      );
+
+
+    } else {
+      animit.runAll(
+        animit(leavePage)
+          .queue({
+            transform: `translate3d(${distance}px, 0px, 0px)`
+          }),
+
+        animit(enterPage)
+          .queue({
+            transform: `translate3d(${behindOffset * 25}%, 0, 0)`,
+            opacity: 1 + behindOffset * 10 / 100 // 0.9 -> 1
+          }),
+
+        animit(this.swipeShadow)
+          .queue({
+            opacity: -1 * behindOffset // 1 -> 0
+          })
+      );
+    }
   }
 
   restore(enterPage, leavePage, callback) {
 
-    animit.runAll(
+    if (this.shouldAnimateToolbar) {
 
-      animit(enterPage)
-      .queue({
-        css: {
-          transform: 'translate3D(-25%, 0px, 0px)',
-          opacity: 0.9
-        },
-        timing: this.timing,
-        duration: this.durationRestore
-      }),
+      animit.runAll(
 
-      animit([enterPage._contentElement, enterPage._getBackgroundElement()])
+        /* Enter page */
+
+        animit([this.decomp.enter.content, this.decomp.enter.bottomToolbar, this.decomp.enter.background])
+          .queue({
+            transform: 'translate3d(-25%, 0, 0)',
+            opacity: 0.9
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        animit(this.decomp.enter.toolbarCenter)
+          .queue({
+            transform: `translate3d(-${this.delta.title}px, 0, 0)`,
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`,
+            opacity: 0
+          }),
+
+        animit(this.decomp.enter.backButtonLabel)
+          .queue({
+            transform: `translate3d(-${this.delta.label}px, 0, 0)`
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        animit(this.decomp.enter.other)
+          .queue({
+            opacity: 0
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        // /* Leave page */
+
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+          .queue({
+            transform: `translate3d(0, 0px, 0px)`
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        animit(this.decomp.leave.toolbar)
+          .queue({
+            opacity: 1
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        animit(this.decomp.leave.toolbarCenter)
+          .queue({
+            transform: `translate3d(0, 0, 0)`
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          }),
+
+        animit(this.decomp.leave.backButtonLabel)
+          .queue({
+            opacity: 1,
+            transform: `translate3d(0, 0, 0)`,
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`
+          }),
+
+
+        // /* Other */
+
+        animit(this.swipeShadow)
+          .queue({
+            opacity: 0
+          }, {
+            timing: this.timing,
+            duration: this.durationRestore
+          })
+          .queue(done => {
+            this._reset(this.target.enter, this.target.leave);
+            callback && callback();
+            done();
+          })
+      );
+
+
+    } else {
+      animit.runAll(
+
+        animit(enterPage)
         .queue({
-          opacity: 0.9
-        }, {
+          css: {
+            transform: 'translate3D(-25%, 0px, 0px)',
+            opacity: 0.9
+          },
           timing: this.timing,
           duration: this.durationRestore
-        }
-      ),
+        }),
 
-      animit(leavePage)
-      .queue({
-        css: {
-          transform: 'translate3D(0px, 0px, 0px)'
-        },
-        timing: this.timing,
-        duration: this.durationRestore
-      })
-      .queue(done => {
-        this._reset(enterPage, leavePage);
-        callback && callback();
-        done();
-      })
-    );
+        animit(leavePage)
+        .queue({
+          css: {
+            transform: 'translate3D(0px, 0px, 0px)'
+          },
+          timing: this.timing,
+          duration: this.durationRestore
+        })
+        .queue(done => {
+          this._reset(enterPage, leavePage);
+          callback && callback();
+          done();
+        })
+      );
+    }
   }
 
   pop(enterPage, leavePage, callback) {
 
-    animit.runAll(
+    if (this.shouldAnimateToolbar) {
 
-      animit(enterPage)
-      .queue({
-        css: {
-          transform: 'translate3D(0px, 0px, 0px)',
-          opacity: 1.0
-        },
-        duration: this.durationPop,
-        timing: this.timing
-      }),
+      animit.runAll(
 
-      animit([enterPage._contentElement, enterPage._getBackgroundElement()])
+        /* Enter page */
+
+        animit([this.decomp.enter.content, this.decomp.enter.bottomToolbar, this.decomp.enter.background])
+          .queue({
+            transform: 'translate3d(0, 0, 0)',
+            opacity: 1
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        animit(this.decomp.enter.toolbarCenter)
+          .queue({
+            transform: `translate3d(0, 0, 0)`,
+            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`,
+            opacity: 1
+          }),
+
+        animit(this.decomp.enter.backButtonLabel)
+          .queue({
+            transform: `translate3d(0, 0, 0)`
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        animit(this.decomp.enter.other)
+          .queue({
+            opacity: 1
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        // /* Leave page */
+
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+          .queue({
+            transform: `translate3d(100%, 0px, 0px)`
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        animit(this.decomp.leave.toolbar)
+          .queue({
+            opacity: 0
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        animit(this.decomp.leave.toolbarCenter)
+          .queue({
+            transform: `translate3d(125%, 0, 0)`
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          }),
+
+        animit(this.decomp.leave.backButtonLabel)
+          .queue({
+            opacity: 0,
+            transform: `translate3d(${this.delta.title}px, 0, 0)`,
+            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
+          }),
+
+
+        // /* Other */
+
+        animit(this.swipeShadow)
+          .queue({
+            opacity: 0
+          }, {
+            timing: this.timing,
+            duration: this.duration
+          })
+          .queue(done => {
+            this._reset(this.target.enter, this.target.leave);
+            callback && callback();
+            done();
+          })
+      );
+
+    } else {
+      animit.runAll(
+
+        animit(enterPage)
         .queue({
-          opacity: 1
-        }, {
-          duration: this.durationPop,
+          css: {
+            transform: 'translate3D(0px, 0px, 0px)',
+            opacity: 1.0
+          },
+          duration: this.duration,
           timing: this.timing
-        }
-      ),
+        }),
 
-      animit(leavePage)
-      .queue({
-        css: {
-          transform: 'translate3D(100%, 0px, 0px)'
-        },
-        duration: this.durationPop,
-        timing: this.timing
-      })
-      .queue(done => {
-        this._reset(enterPage, leavePage);
-        callback && callback();
-        done();
-      })
-    );
+        animit(leavePage)
+        .queue({
+          css: {
+            transform: 'translate3D(100%, 0px, 0px)'
+          },
+          duration: this.duration,
+          timing: this.timing
+        })
+        .queue(done => {
+          this._reset(enterPage, leavePage);
+          callback && callback();
+          done();
+        })
+      );
+    }
   }
 
-  _reset(...elements) {
+  _reset(...pages) {
     this.swipeShadow.remove();
     this.backgroundMask.remove();
 
-    elements
-      .reduce((result, el) => result.concat([el, el._contentElement, el._getBackgroundElement()]), [])
-      .forEach(el => el.style.transform = el.style.opacity = el.style.transition = el.style.overflow = null);
+    [...pages]
+      .reduce((result, el) => result.concat([el, el._contentElement, el._backgroundElement]), [])
+      .forEach(el => el.style.transform = el.style.opacity = el.style.transition = null);
+
+    this.overflowElement.classList.remove('overflow-visible');
+    this.decomp = this.target = this.overflowElement = null;
   }
 }
