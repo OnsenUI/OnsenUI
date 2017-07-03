@@ -270,30 +270,30 @@ export default class NavigatorElement extends BaseElement {
   connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
-    this._swipe = new SwipeReveal({
-      element: this,
-      animator: new IOSSwipeNavigatorTransitionAnimator(),
-      swipeMax: (animator) => this.popPage({animator}),
-      getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
-      getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
-      ignoreSwipe: (event, distance) => {
-        if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
-          return true;
+    if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
+      this._swipe = new SwipeReveal({
+        element: this,
+        animator: new IOSSwipeNavigatorTransitionAnimator(),
+        swipeMax: (animator) => this.popPage({animator}),
+        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+        getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
+        ignoreSwipe: (event, distance) => {
+          if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
+            return true;
+          }
+          const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
+          return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
         }
-        const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
-        return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
-      }
-    });
+      });
+
+      this.attributeChangedCallback('swipeable');
+    }
 
     if (this._initialized) {
       return;
     }
 
     this._initialized = true;
-
-    if (this.hasAttribute('swipeable')) {
-      this._swipe.update();
-    }
 
     rewritables.ready(this, () => {
       if (this.pages.length === 0 && this._getPageTarget()) {
