@@ -18,7 +18,6 @@ limitations under the License.
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
-import contentReady from '../../ons/content-ready';
 
 /**
  * Swipe animator for iOS navigator transition.
@@ -33,10 +32,15 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
       <div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;
         background: linear-gradient(to right, transparent 0, rgba(0,0,0,.04) 40%, rgba(0,0,0,.12) 80%, rgba(0,0,0,.16) 100%);"></div>
     `);
+
+    this.isDragStart = true;
   }
 
   translate(distance, maxWidth, enterPage, leavePage) {
-    if (!this.backgroundMask.parentElement) { // dragStart
+    if (this.isDragStart) {
+      this.isDragStart = false;
+
+      // Mask
       enterPage.parentElement.insertBefore(this.backgroundMask, enterPage);
 
       // Decomposition
@@ -48,15 +52,24 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
         enter: this._decompose(this.target.enter),
         leave: this._decompose(this.target.leave)
       };
+
+      // Animation values
       this.delta = this._calculateDelta(leavePage, this.decomp.leave);
       this.shouldAnimateToolbar = this._shouldAnimateToolbar(this.target.enter, this.target.leave);
 
-      (this.shouldAnimateToolbar ? this.target.leave : leavePage)._contentElement.appendChild(this.swipeShadow);
+      // Shadow && styles
+      if (this.shouldAnimateToolbar) {
+        this.decomp.leave.content.appendChild(this.swipeShadow);
+        this._saveStyle(this.target.enter, this.target.leave);
+      } else {
+        leavePage._contentElement.appendChild(this.swipeShadow);
+        this._saveStyle(enterPage, leavePage);
+      }
       leavePage.classList.add('overflow-visible');
       this.overflowElement = leavePage;
     }
 
-    const behindOffset = (distance - maxWidth) / maxWidth;
+    const swipeRatio = (distance - maxWidth) / maxWidth;
 
     if (this.shouldAnimateToolbar) {
 
@@ -66,25 +79,25 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         animit([this.decomp.enter.content, this.decomp.enter.bottomToolbar, this.decomp.enter.background])
           .queue({
-            transform: `translate3d(${behindOffset * 25}%, 0, 0)`,
-            opacity: 1 + behindOffset * 10 / 100 // 0.9 -> 1
+            transform: `translate3d(${swipeRatio * 25}%, 0, 0)`,
+            opacity: 1 + swipeRatio * 10 / 100 // 0.9 -> 1
           }),
 
         animit(this.decomp.enter.toolbarCenter)
           .queue({
-            transform: `translate3d(${this.delta.title * behindOffset}px, 0, 0)`,
-            opacity: 1 + behindOffset // 0 -> 1
+            transform: `translate3d(${this.delta.title * swipeRatio}px, 0, 0)`,
+            opacity: 1 + swipeRatio // 0 -> 1
           }),
 
         animit(this.decomp.enter.backButtonLabel)
           .queue({
-            opacity: 1 + behindOffset * 10 / 100, // 0.9 -> 1
-            transform: `translate3d(${this.delta.label * behindOffset}px, 0, 0)`
+            opacity: 1 + swipeRatio * 10 / 100, // 0.9 -> 1
+            transform: `translate3d(${this.delta.label * swipeRatio}px, 0, 0)`
           }),
 
         animit(this.decomp.enter.other)
           .queue({
-            opacity: 1 + behindOffset // 0 -> 1
+            opacity: 1 + swipeRatio // 0 -> 1
           }),
 
         /* Leave page */
@@ -96,18 +109,18 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         animit(this.decomp.leave.toolbar)
           .queue({
-            opacity: -1 * behindOffset // 1 -> 0
+            opacity: -1 * swipeRatio // 1 -> 0
           }),
 
         animit(this.decomp.leave.toolbarCenter)
           .queue({
-            transform: `translate3d(${(1 + behindOffset) * 125}%, 0, 0)`
+            transform: `translate3d(${(1 + swipeRatio) * 125}%, 0, 0)`
           }),
 
         animit(this.decomp.leave.backButtonLabel)
           .queue({
-            opacity: -1 * behindOffset, // 1 -> 0
-            transform: `translate3d(${this.delta.title * (1 + behindOffset)}px, 0, 0)`
+            opacity: -1 * swipeRatio, // 1 -> 0
+            transform: `translate3d(${this.delta.title * (1 + swipeRatio)}px, 0, 0)`
           }),
 
 
@@ -115,7 +128,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         animit(this.swipeShadow)
           .queue({
-            opacity: -1 * behindOffset // 1 -> 0
+            opacity: -1 * swipeRatio // 1 -> 0
           })
       );
 
@@ -129,13 +142,13 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         animit(enterPage)
           .queue({
-            transform: `translate3d(${behindOffset * 25}%, 0, 0)`,
-            opacity: 1 + behindOffset * 10 / 100 // 0.9 -> 1
+            transform: `translate3d(${swipeRatio * 25}%, 0, 0)`,
+            opacity: 1 + swipeRatio * 10 / 100 // 0.9 -> 1
           }),
 
         animit(this.swipeShadow)
           .queue({
-            opacity: -1 * behindOffset // 1 -> 0
+            opacity: -1 * swipeRatio // 1 -> 0
           })
       );
     }
@@ -181,7 +194,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
             duration: this.durationRestore
           }),
 
-        // /* Leave page */
+        /* Leave page */
 
         animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
           .queue({
@@ -215,7 +228,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
           }),
 
 
-        // /* Other */
+        /* Other */
 
         animit(this.swipeShadow)
           .queue({
@@ -302,7 +315,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
             duration: this.duration
           }),
 
-        // /* Leave page */
+        /* Leave page */
 
         animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
           .queue({
@@ -336,7 +349,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
           }),
 
 
-        // /* Other */
+        /* Other */
 
         animit(this.swipeShadow)
           .queue({
@@ -382,15 +395,38 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
     }
   }
 
-  _reset(...pages) {
+  _saveStyle(...args) {
+    this._savedStyle = new WeakMap();
+    const save = el => this._savedStyle.set(el, el.getAttribute('style'));
+    args.forEach(save);
+
+    Object.keys(this.decomp).forEach(p => {
+      Object.keys(this.decomp[p]).forEach(k => {
+        (this.decomp[p][k] instanceof Array ? this.decomp[p][k] : [this.decomp[p][k]]).forEach(save);
+      });
+    });
+  }
+
+  _restoreStyle(...args) {
+    const restore = el => {
+      this._savedStyle.get(el) === null ? el.removeAttribute('style') : el.setAttribute('style', this._savedStyle.get(el))
+      this._savedStyle.delete(el)
+    };
+    args.forEach(restore);
+
+    Object.keys(this.decomp).forEach(p => {
+      Object.keys(this.decomp[p]).forEach(k => {
+        (this.decomp[p][k] instanceof Array ? this.decomp[p][k] : [this.decomp[p][k]]).forEach(restore);
+      });
+    });
+  }
+
+  _reset(...args) {
+    this._restoreStyle(...args);
     this.swipeShadow.remove();
     this.backgroundMask.remove();
-
-    [...pages]
-      .reduce((result, el) => result.concat([el, el._contentElement, el._backgroundElement]), [])
-      .forEach(el => el.style.transform = el.style.opacity = el.style.transition = null);
-
     this.overflowElement.classList.remove('overflow-visible');
-    this.decomp = this.target = this.overflowElement = null;
+    this.decomp = this.target = this.overflowElement = this._savedStyle = null;
+    this.isDragStart = true;
   }
 }
