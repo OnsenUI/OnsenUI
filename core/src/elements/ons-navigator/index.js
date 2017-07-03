@@ -280,7 +280,7 @@ export default class NavigatorElement extends BaseElement {
         if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
           return true;
         }
-        const area = Math.max(20, parseInt(this.getAttribute('swip-target-width')) || 0);
+        const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
         return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
       }
     });
