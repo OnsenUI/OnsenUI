@@ -5,13 +5,16 @@ var webpack = require('webpack')
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8' ));
 
 module.exports = {
-  entry: './src',
+  entry: {
+    'vue-onsenui': './src',
+    'vue-onsenui.min': './src'
+  },
   output: {
     library: 'VueOnsen',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     path: path.resolve(__dirname, './dist'),
-    filename: 'vue-onsenui.js'
+    filename: '[name].js'
   },
   externals: [
     {
@@ -55,8 +58,12 @@ module.exports = {
       }
     ]
   },
-  devtool: '#inline-source-map',
+  devtool: '#source-map',
   plugins: [
-    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
+    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      compress: { warnings: false }
+    })
   ]
 }
