@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Misc
+
+* Provide minified version.
+
 v1.4.0
 ----
 
