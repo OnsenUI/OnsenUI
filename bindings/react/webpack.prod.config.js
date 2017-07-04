@@ -5,9 +5,13 @@ const webpack = require('webpack')
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
 module.exports = {
-  entry: './src/index', // string | object | array
+  // string | object | array
   // Here the application starts executing
   // and webpack starts bundling
+  entry: {
+    'react-onsenui': './src/index',
+    'react-onsenui.min': './src/index'
+  },
 
   output: {
     // options related to how webpack emits results
@@ -16,7 +20,7 @@ module.exports = {
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
-    filename: 'react-onsenui.js', // string
+    filename: '[name].js', // string
     // the filename template for entry chunks
 
     // publicPath: '/assets/', // string
@@ -110,7 +114,11 @@ module.exports = {
     // new webpack.DefinePlugin({
     //   'process.env.NODE_ENV': `'production'` // removes dead code
     // }),
-    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`)
+    new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      compress: { warnings: false }
+    })
   ]
   // list of additional plugins
 };
