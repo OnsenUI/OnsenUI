@@ -44,6 +44,17 @@ const hidable = {
   }
 };
 
+// Clickable
+const simpleClick = {
+  mounted() {
+    this._boundOnClick = e => this.$emit('click', e);
+    this.$el.addEventListener('click', this._boundOnClick);
+  },
+  beforeDestroy() {
+    this.$el.removeEventListener('click', this._boundOnClick);
+  }
+};
+
 // Components with 'options' property
 const hasOptions = {
   props: {
@@ -128,4 +139,4 @@ const portal = {
   }
 };
 
-export { hidable, hasOptions, modifier, selfProvider, dialogCancel, portal };
+export { hidable, simpleClick, hasOptions, modifier, selfProvider, dialogCancel, portal };

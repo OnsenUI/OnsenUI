@@ -1,6 +1,14 @@
 CHANGELOG
 ====
 
+2.0.1
+----
+
+### Misc
+
+* Provide minified version and separate source maps.
+* Reduced 'click' events registered in Vue dev tools.
+
 2.0.0
 ----
 

@@ -69,9 +69,8 @@ const deriveHandler = handlerName => {
 const deriveEvents = {
   mounted() {
     this._handlers = {};
-    this._boundEvents = this.$el.constructor.events || [];
 
-    this._boundEvents.forEach(key => {
+    (this.$el.constructor.events || []).forEach(key => {
       this._handlers[eventToHandler(key)] = event => {
         // Filter events from different components with the same name
         if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
@@ -83,10 +82,10 @@ const deriveEvents = {
   },
 
   beforeDestroy() {
-    this._boundEvents.forEach(key => {
-      this.$el.removeEventListener(key, this._handlers[eventToHandler(key)]);
+    Object.keys(this._handlers).forEach(key => {
+      this.$el.removeEventListener(key, this._handlers[key]);
     });
-    this._handlers = this._boundEvents = null;
+    this._handlers = null;
   }
 };
 
