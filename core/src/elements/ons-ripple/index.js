@@ -42,8 +42,8 @@ const scheme = {
  * @codepen wKQWdZ
  * @tutorial vanilla/Reference/ripple
  * @modifier light-gray
- *   [en][/en]
- *   [ja][/ja]
+ *   [en]Change the color of effects to light gray.[/en]
+ *   [ja]エフェクトの色が明るい灰色になります。[/ja]
  * @guide cross-platform-styling
  *  [en]Cross platform styling[/en]
  *  [ja]Cross platform styling[/ja]
@@ -87,6 +87,14 @@ export default class RippleElement extends BaseElement {
    * @description
    *   [en]Sizing of the wave on ripple effect. Set "cover" or "contain". Default is "cover".[/en]
    *   [ja]エフェクトのサイズを指定します。"cover"もしくは"contain"を指定します。デフォルトは"cover"です。[/ja]
+   */
+
+  /**
+   * @attribute center
+   * @type {Boolean}
+   * @description
+   *   [en]If this attribute presents, change the position of wave effect to center of the target element.[/en]
+   *   [ja]この要素を設定すると、エフェクトの位置が要素の真ん中から始まります。[/ja]
    */
 
   /**
