@@ -246,7 +246,7 @@
 }
 
 .alert-dialog-container--material {
-  padding-top: 22px;
+  padding: 22px 0 0 0;
   @apply(--material-shadow-5);
 }
 
@@ -272,9 +272,12 @@
 }
 
 .alert-dialog-footer--material {
-  display: inline-block;
-  padding: 0 8px 0 24px;
+  display: block;
+  padding: 0;
+  height: 52px;
   box-sizing: border-box;
+  margin: 0;
+  line-height: 1;
 }
 
 .alert-dialog-button--material {
@@ -282,13 +285,19 @@
   text-transform: uppercase;
   display: inline-block;
   width: auto;
-  min-width: 70px;
   float: right;
   background: none;
-  border-top: none;
+  border: none;
+  border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
   outline: none;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 8px;
+  margin: 8px 8px 8px 0;
+  box-sizing: border-box;
+  min-width: 50px;
   color: var(--material-alert-dialog-button-color);
   @media (--retina-query) {
     background: none;
