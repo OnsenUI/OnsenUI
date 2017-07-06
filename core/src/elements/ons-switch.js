@@ -113,7 +113,6 @@ export default class SwitchElement extends BaseCheckboxElement {
   _onChange(event) {
     if (event && event.stopPropagation) {
       event.stopPropagation();
-      event.gesture.stopPropagation();
     }
 
     this._emitChangeEvent();
@@ -150,7 +149,6 @@ export default class SwitchElement extends BaseCheckboxElement {
   _onDrag(e) {
     e.stopPropagation();
     e.gesture.preventDefault();
-    event.gesture.stopPropagation();
     this._handle.style.left = this._getPosition(e) + 'px';
   }
 
