@@ -2,6 +2,8 @@ import {
   Component,
   OnsenModule,
   NgModule,
+  ViewChild,
+  AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
@@ -15,7 +17,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     </ons-toolbar>
 
     <div class="content">
-      <ons-pull-hook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
+      <ons-pull-hook #pullhook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
         {{message}}
       </ons-pull-hook>
 
@@ -26,13 +28,18 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
   message: string = 'Pull down to refresh';
 
   items: number[] = [1, 2, 3, 4, 5];
 
+  @ViewChild('pullhook') pullhook:any;
   constructor() {
+  }
+
+  ngAfterViewInit() {
+    this.pullhook.nativeElement._disableDragLock();
   }
 
   onAction($event: any) {
