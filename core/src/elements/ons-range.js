@@ -49,6 +49,8 @@ export default class RangeElement extends BaseInputElement {
   constructor() {
     super();
 
+    this._boundOnMouseDown = this._onMouseDown.bind(this);
+    this._boundOnMouseUp = this._onMouseUp.bind(this);
     this._boundOnInput = this._update.bind(this);
     this._boundOnDragstart = this._onDragstart.bind(this);
     this._boundOnDragend = this._onDragend.bind(this);
@@ -84,6 +86,14 @@ export default class RangeElement extends BaseInputElement {
   }
 
   /* Own props */
+
+  _onMouseDown(e) {
+    this._input.classList.add(activeClassToken);
+  }
+
+  _onMouseUp(e) {
+    this._input.classList.remove(activeClassToken);
+  }
 
   _onDragstart(e) {
     e.stopPropagation();
@@ -126,12 +136,16 @@ export default class RangeElement extends BaseInputElement {
   }
 
   connectedCallback() {
+    this.addEventListener('mousedown', this._boundOnMouseDown);
+    this.addEventListener('mouseup', this._boundOnMouseUp);
     this.addEventListener('dragstart', this._boundOnDragstart);
     this.addEventListener('dragend', this._boundOnDragend);
     this.addEventListener('input', this._boundOnInput);
   }
 
   disconnectedCallback() {
+    this.removeEventListener('mousedown', this._boundOnMouseDown);
+    this.removeEventListener('mouseup', this._boundOnMouseUp);
     this.removeEventListener('dragstart', this._boundOnDragstart);
     this.removeEventListener('dragend', this._boundOnDragend);
     this.removeEventListener('input', this._boundOnInput);
