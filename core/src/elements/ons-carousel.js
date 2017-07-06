@@ -328,6 +328,7 @@ export default class CarouselElement extends BaseElement {
     this._offset = 0;
     this._lastActiveIndex = 0;
 
+    this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnDrag = this._onDrag.bind(this);
     this._boundOnDragEnd = this._onDragEnd.bind(this);
     this._boundOnResize = this._onResize.bind(this);
@@ -602,13 +603,10 @@ export default class CarouselElement extends BaseElement {
 
   _updateSwipeable() {
     if (this._gestureDetector) {
-      if (this.swipeable) {
-        this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
-        this._gestureDetector.on('dragend', this._boundOnDragEnd);
-      } else {
-        this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
-        this._gestureDetector.off('dragend', this._boundOnDragEnd);
-      }
+      const action = this.swipeable ? 'on' : 'off';
+      this._gestureDetector[action]('drag', this._boundOnDrag);
+      this._gestureDetector[action]('dragstart', this._boundOnDragStart);
+      this._gestureDetector[action]('dragend', this._boundOnDragEnd);
     }
   }
 
@@ -637,13 +635,28 @@ export default class CarouselElement extends BaseElement {
     }
   }
 
-  _isWrongDirection(d) {
-    // this._lastDragDirection = d;
-    return this._isVertical() ? (d === 'left' || d === 'right') : (d === 'up' || d === 'down');
+  _canConsumeGesture(gesture) {
+    return this._isVertical()
+      ? (gesture.direction === 'up' || gesture.direction === 'down')
+      : (gesture.direction === 'right' || gesture.direction === 'left');
+  }
+
+  _onDragStart(event) {
+    this._ignoreDrag = event.consumed;
+
+    if (!this._ignoreDrag) {
+      const consume = event.consume;
+      event.consume = () => { consume && consume(); this._ignoreDrag = true; };
+      if (this._canConsumeGesture(event.gesture)) {
+        consume && consume();
+        event.consumed = true;
+        this._started = true; // Avoid starting drag from outside
+      }
+    }
   }
 
   _onDrag(event) {
-    if (this._isWrongDirection(event.gesture.direction) || (event.target && event.target.tagName.toLowerCase() === 'input' && event.target.type === 'range')) {
+    if (this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
       return;
     }
 
@@ -659,15 +672,15 @@ export default class CarouselElement extends BaseElement {
   }
 
   _onDragEnd(event) {
-    if (!this._lastDragEvent) {
+    this._started = false;
+    if (!this._lastDragEvent || this._ignoreDrag) {
       return;
     }
+
+    event.stopPropagation();
+
     this._currentElementSize = undefined;
     this._scroll = this._scroll - this._getScrollDelta(event);
-
-    // if (!this._isWrongDirection(this._lastDragDirection) && this._getScrollDelta(event) !== 0) {
-    //   event.stopPropagation();
-    // }
 
     if (this._isOverScroll(this._scroll)) {
       let waitForAction = false;
