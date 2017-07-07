@@ -17,9 +17,9 @@ limitations under the License.
 
 import GestureDetector from '../../ons/gesture-detector';
 
-const widthToPx = (width, parent) => {
+const widthToPx = (width) => {
   const [value, px] = [parseInt(width, 10), /px/.test(width)];
-  return px ? value : Math.round(parent.offsetWidth * value / 100);
+  return px ? value : Math.round(document.body.offsetWidth * value / 100);
 };
 
 export default class SwipeReveal {
@@ -40,13 +40,12 @@ export default class SwipeReveal {
     this.boundHandleGesture = this.handleGesture.bind(this);
   }
 
-  update(swipeable = this.element.getAttribute('swipeable')) {
-    const action = swipeable === null ? 'off' : 'on';
-
+  update(swipeable = this.element.hasAttribute('swipeable')) {
     if (!this.gestureDetector) {
       this.gestureDetector = new GestureDetector(this.elementHandler, {dragMinDistance: 1});
     }
 
+    const action = swipeable ? 'on' : 'off';
     this.gestureDetector[action]('drag dragstart dragend', this.boundHandleGesture);
   }
 
@@ -67,7 +66,7 @@ export default class SwipeReveal {
       event.consume && event.consume();
       event.consumed = true;
 
-      this._width = widthToPx(this.element._width || '100%', this.element.parentNode);
+      this._width = widthToPx(this.element._width || '100%');
       this._startDistance = this._distance = 0;
     }
   }
