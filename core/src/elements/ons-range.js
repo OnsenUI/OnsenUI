@@ -15,7 +15,8 @@ import BaseInputElement from './base/base-input';
 
 const scheme = {
   '': 'range--*',
-  '.range__input': 'range--*__input'
+  '.range__input': 'range--*__input',
+  '.range__focus-ring': 'range--*__focus-ring'
 };
 
 const activeClassToken = 'range__input--active';
@@ -51,6 +52,8 @@ export default class RangeElement extends BaseInputElement {
 
     this._boundOnMouseDown = this._onMouseDown.bind(this);
     this._boundOnMouseUp = this._onMouseUp.bind(this);
+    this._boundOnTouchStart = this._onTouchStart.bind(this);
+    this._boundOnTouchEnd = this._onTouchEnd.bind(this);
     this._boundOnInput = this._update.bind(this);
     this._boundOnDragstart = this._onDragstart.bind(this);
     this._boundOnDragend = this._onDragend.bind(this);
@@ -63,8 +66,13 @@ export default class RangeElement extends BaseInputElement {
 
   /* Inherited props */
 
+  get _focusRing() {
+    return this.children[1];
+  }
+
   _update() {
-    this._input.style.backgroundSize = (100 * this._ratio) + '% 2px';
+    this._input.style.backgroundSize = `${100 * this._ratio}% 2px`;
+    this._focusRing.value = this.value;
   }
 
   get _scheme() {
@@ -74,6 +82,7 @@ export default class RangeElement extends BaseInputElement {
   get _template() {
     return `
       <input type="${this.type}" class="${this._defaultElementClass}__input">
+      <input type="range" class="range__focus-ring" tabIndex="-1">
     `;
   }
 
@@ -89,10 +98,19 @@ export default class RangeElement extends BaseInputElement {
 
   _onMouseDown(e) {
     this._input.classList.add(activeClassToken);
+    setImmediate(() => this._input.focus());
+  }
+
+  _onTouchStart(e) {
+    this._onMouseDown();
   }
 
   _onMouseUp(e) {
     this._input.classList.remove(activeClassToken);
+  }
+
+  _onTouchEnd(e) {
+    this._onMouseUp(e);
   }
 
   _onDragstart(e) {
@@ -138,6 +156,8 @@ export default class RangeElement extends BaseInputElement {
   connectedCallback() {
     this.addEventListener('mousedown', this._boundOnMouseDown);
     this.addEventListener('mouseup', this._boundOnMouseUp);
+    this.addEventListener('touchstart', this._boundOnTouchStart);
+    this.addEventListener('touchend', this._boundOnTouchEnd);
     this.addEventListener('dragstart', this._boundOnDragstart);
     this.addEventListener('dragend', this._boundOnDragend);
     this.addEventListener('input', this._boundOnInput);
@@ -146,6 +166,8 @@ export default class RangeElement extends BaseInputElement {
   disconnectedCallback() {
     this.removeEventListener('mousedown', this._boundOnMouseDown);
     this.removeEventListener('mouseup', this._boundOnMouseUp);
+    this.removeEventListener('touchstart', this._boundOnTouchStart);
+    this.removeEventListener('touchend', this._boundOnTouchEnd);
     this.removeEventListener('dragstart', this._boundOnDragstart);
     this.removeEventListener('dragend', this._boundOnDragend);
     this.removeEventListener('input', this._boundOnInput);
