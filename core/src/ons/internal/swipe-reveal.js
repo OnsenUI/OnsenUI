@@ -47,7 +47,7 @@ export default class SwipeReveal {
       this.gestureDetector = new GestureDetector(this.elementHandler, {dragMinDistance: 1});
     }
 
-    this.gestureDetector[action]('dragstart dragleft dragright dragend', this.boundHandleGesture);
+    this.gestureDetector[action]('drag dragstart dragend', this.boundHandleGesture);
   }
 
   handleGesture(e) {
