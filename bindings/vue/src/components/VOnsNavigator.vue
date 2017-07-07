@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator>
+  <ons-navigator @postpop="_checkSwipe">
     <slot>
       <component v-for="page in pageStack" :key="page" :is="page"></component>
     </slot>
@@ -85,11 +85,24 @@
         return this.$el._pushPage({ ...this.options }).then(() => {
           this._redetachPage(lastTopPage);
         });
+      },
+      _checkSwipe(event) {
+        if (this.$el.hasAttribute('swipeable')) {
+          if (event.leavePage !== this.$el.lastChild && event.leavePage === this.$children[this.$children.length - 1].$el) {
+            this._swipePop = true;
+            this.popPage();
+          }
+        }
       }
     },
 
     watch: {
       pageStack(after, before) {
+        if (this._swipePop) { // Skip when swiping
+          this._swipePop = false;
+          return;
+        }
+
         const propWasMutated = after === before; // Can be mutated or replaced
 
         const lastLength = propWasMutated ? this.$children.length : before.length;
