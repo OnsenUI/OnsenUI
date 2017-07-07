@@ -264,8 +264,9 @@ describe('OnsCarouselElement', () => {
       expect(carousel._lastDragEvent).not.to.be.ok;
     });
 
-    it('should work if carousel is swipeable and direction is horizontal', () => {
+    it('should work if carousel is swipeable, direction is horizontal and is started', () => {
       carousel.setAttribute('swipeable', '');
+      carousel._onDragStart(ev);
       carousel._onDrag(ev);
       expect(carousel._lastDragEvent).to.be.ok;
     });

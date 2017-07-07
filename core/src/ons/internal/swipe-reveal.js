@@ -47,7 +47,7 @@ export default class SwipeReveal {
       this.gestureDetector = new GestureDetector(this.elementHandler, {dragMinDistance: 1});
     }
 
-    this.gestureDetector[action]('dragstart dragleft dragright dragend', this.boundHandleGesture);
+    this.gestureDetector[action]('drag dragstart dragend', this.boundHandleGesture);
   }
 
   handleGesture(e) {
@@ -61,13 +61,20 @@ export default class SwipeReveal {
   onDragStart(event) {
     const scrolling = !/left|right/.test(event.gesture.direction);
     const distance = this.side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
-    this._ignoreDrag = scrolling || this.ignoreSwipe(event, distance);
+    this._ignoreDrag = scrolling || event.consumed || this.ignoreSwipe(event, distance);
 
-    this._width = widthToPx(this.element._width || '100%', this.element.parentNode);
-    this._startDistance = this._distance = 0;
+    if (!this._ignoreDrag) {
+      event.consume && event.consume();
+      event.consumed = true;
+
+      this._width = widthToPx(this.element._width || '100%', this.element.parentNode);
+      this._startDistance = this._distance = 0;
+    }
   }
 
   onDrag(event) {
+    event.stopPropagation();
+
     event.gesture.preventDefault();
     const delta = this.side === 'left' ? event.gesture.deltaX : -event.gesture.deltaX;
     const distance = Math.max(0, Math.min(this._width, this._startDistance + delta));
@@ -79,10 +86,11 @@ export default class SwipeReveal {
   }
 
   onDragEnd(event) {
+    event.stopPropagation();
+
     const direction = event.gesture.interimDirection;
     const isSwipeMax = this.side !== direction && this._distance > this._width * this.getThreshold();
     isSwipeMax ? this.swipeMax(this.animator) : this.swipeMin(this.animator);
-    this._ignoreDrag = true;
   }
 
   dispose() {

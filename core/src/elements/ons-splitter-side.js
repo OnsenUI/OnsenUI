@@ -132,14 +132,21 @@ class CollapseMode {
     const distance = this._element._side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
     const isOpen = this.isOpen();
-    this._ignoreDrag = scrolling || (area && distance > area && !isOpen);
+    this._ignoreDrag = scrolling || event.consumed || (area && distance > area && !isOpen);
 
-    this._width = widthToPx(this._element._width, this._element.parentNode);
-    this._startDistance = this._distance = isOpen ? this._width : 0;
+    if (!this._ignoreDrag) {
+      event.consume && event.consume();
+      event.consumed = true;
+
+      this._width = widthToPx(this._element._width, this._element.parentNode);
+      this._startDistance = this._distance = isOpen ? this._width : 0;
+    }
   }
 
   _onDrag(event) {
+    event.stopPropagation();
     event.gesture.preventDefault();
+
     const delta = this._element._side === 'left' ? event.gesture.deltaX : -event.gesture.deltaX;
     const distance = Math.max(0, Math.min(this._width, this._startDistance + delta));
     if (distance !== this._distance) {
@@ -150,6 +157,8 @@ class CollapseMode {
   }
 
   _onDragEnd(event) {
+    event.stopPropagation();
+
     const {_distance: distance, _width: width, _element: el} = this;
     const direction = event.gesture.interimDirection;
     const shouldOpen = el._side !== direction && distance > width * el._threshold;
@@ -556,7 +565,7 @@ export default class SplitterSideElement extends BaseElement {
     const action = swipeable === null ? 'off' : 'on';
 
     if (this._gestureDetector) {
-      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+      this._gestureDetector[action]('drag dragstart dragend', this._boundHandleGesture);
     }
   }
 
