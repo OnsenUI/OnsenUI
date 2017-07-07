@@ -565,7 +565,7 @@ export default class SplitterSideElement extends BaseElement {
     const action = swipeable === null ? 'off' : 'on';
 
     if (this._gestureDetector) {
-      this._gestureDetector[action]('dragstart dragleft dragright dragend', this._boundHandleGesture);
+      this._gestureDetector[action]('drag dragstart dragend', this._boundHandleGesture);
     }
   }
 
