@@ -274,7 +274,7 @@ export default class NavigatorElement extends BaseElement {
       this._swipe = new SwipeReveal({
         element: this,
         animator: new IOSSwipeNavigatorTransitionAnimator(),
-        swipeMax: (animator) => this.popPage({animator}),
+        swipeMax: animator => this.swipeMax ? this.swipeMax({animator}) : this.popPage({animator}),
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
         getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
         ignoreSwipe: (event, distance) => {
