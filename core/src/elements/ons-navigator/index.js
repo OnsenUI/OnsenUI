@@ -127,6 +127,32 @@ export default class NavigatorElement extends BaseElement {
    */
 
   /**
+   * @attribute swipeable
+   * @type {Boolean}
+   * @description
+   *   [en]Enable iOS "swipe to pop" feature.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute swipe-target-width
+   * @type {String}
+   * @default 20px
+   * @description
+   *   [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+   *   [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
+   */
+
+  /**
+   * @attribute swipe-threshold
+   * @type {Number}
+   * @default 0.2
+   * @description
+   *  [en]Specify how much the page needs to be swiped before popping. A value between `0` and `1`.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
