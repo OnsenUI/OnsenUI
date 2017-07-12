@@ -13,6 +13,7 @@
   --material-range-thumb-horizontal-margin: 2px;
   --material-range-disabled-thumb-color: #b0b0b0;
   --material-range-disabled-thumb-border-color: #eeeeee;
+  --material-range-zero-thumb-color: #f2f2f2;
 
   --range__thumb: {
     cursor: pointer;
@@ -145,7 +146,7 @@
   elements: ons-range
   markup: |
     <div class="range range--material">
-      <input type="range" class="range__input range--material__input">
+      <input type="range" class="range__input range--material__input" min="0" max="100">
       <!-- <input type="range" class="range__focus-ring range--material__focus-ring"> -->
     </div>
 
@@ -199,6 +200,14 @@
   background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius));
   transition: transform 0.1s linear;
   overflow: visible;
+}
+
+.range--material__input[_zero]::-webkit-slider-thumb {
+  background-image: radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4.0px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius)));
+}
+
+.range--material__input[_zero] + .range--material__focus-ring::-webkit-slider-thumb {
+  box-shadow: 0 0 0 calc((32px - var(--material-range-thumb-size)) / 2) var(--material-range-track-color);
 }
 
 .range--material__input::-moz-range-track {

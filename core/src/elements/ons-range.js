@@ -71,8 +71,17 @@ export default class RangeElement extends BaseInputElement {
   }
 
   _update() {
-    this._input.style.backgroundSize = `${100 * this._ratio}% 2px`;
+    const input = this._input;
+
+    input.style.backgroundSize = `${100 * this._ratio}% 2px`;
     this._focusRing.value = this.value;
+
+    // NOTE: "_zero" attribute is used for CSS styling.
+    if ((input.min === '' && input.value === '0') || input.min === input.value) {
+      input.setAttribute('_zero', '');
+    } else {
+      input.removeAttribute('_zero');
+    }
   }
 
   get _scheme() {
