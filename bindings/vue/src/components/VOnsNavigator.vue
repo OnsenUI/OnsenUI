@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator @postpop="_checkSwipe">
+  <ons-navigator @postpop.self="_checkSwipe">
     <slot>
       <component v-for="page in pageStack" :key="page" :is="page"></component>
     </slot>
@@ -87,19 +87,17 @@
         });
       },
       _checkSwipe(event) {
-        if (this.$el.hasAttribute('swipeable')) {
-          if (event.leavePage !== this.$el.lastChild && event.leavePage === this.$children[this.$children.length - 1].$el) {
-            this._swipePop = true;
-            this.popPage();
-          }
+        if (this.$el.hasAttribute('swipeable') &&
+          event.leavePage !== this.$el.lastChild && event.leavePage === this.$children[this.$children.length - 1].$el
+        ) {
+          this.popPage();
         }
       }
     },
 
     watch: {
       pageStack(after, before) {
-        if (this._swipePop) { // Skip when swiping
-          this._swipePop = false;
+        if (this.$el.hasAttribute('swipeable') && this.$children.length !== this.$el.children.length) {
           return;
         }
 
