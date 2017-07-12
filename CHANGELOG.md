@@ -5,25 +5,33 @@ CHANGELOG
 dev
 ----
 
-### Bug Fixes
-
- * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
-
 ### New Features
 
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
+ * ons-navigator: iOS Swipe-to-pop.
+
+### Bug Fixes
+
+ * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
+ * ons-list: Fixed double top border when located right under toolbar.
+ * Swipeable components: Swipe is now smoother.
+ * Swipeable components: Fixed compatibility of some swipeable components.
+
+### Misc
+
+ * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
 
 v2.4.2
 ----
 
-### Bug Fixes
-
- * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
-
 ### New Features
 
  * ons-fab: Added new appearances for iOS.
+
+### Bug Fixes
+
+ * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
 
 v2.4.1
 ----
