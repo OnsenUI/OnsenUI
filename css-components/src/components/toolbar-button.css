@@ -74,6 +74,7 @@
   border: none;
   border-radius: 0;
   vertical-align: initial;
+  transition: background-color 0.25s linear;
 }
 
 .toolbar-button--material:first-of-type {
@@ -86,7 +87,7 @@
 
 .toolbar-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
+  transition: background-color 0.25s linear;
 }
 
 .back-button {
@@ -105,6 +106,9 @@
   display: inline-block;
   height: 100%;
   vertical-align: top;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size--large);
+  font-weight: var(--font-weight--large);
 }
 
 .back-button__icon {
@@ -146,5 +150,4 @@
 
 .back-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
 }

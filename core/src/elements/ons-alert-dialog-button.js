@@ -20,51 +20,34 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 
-const defaultClassName = 'toolbar-button';
+const defaultClassName = 'alert-dialog-button';
 
-const scheme = {'': 'toolbar-button--*'};
+const scheme = {'': 'alert-dialog-button--*'};
 
 /**
- * @element ons-toolbar-button
- * @category page
+ * @element ons-alert-dialog-button
  * @modifier material
- *   [en]Material Design toolbar button.[/en]
+ *   [en]Material Design alert-dialog button.[/en]
  *   [ja][/ja]
- * @modifier outline
- *   [en]A button with an outline.[/en]
- *   [ja]アウトラインをもったボタンを表示します。[/ja]
  * @description
- *   [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
- *   [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
- * @codepen aHmGL
- * @tutorial vanilla/Reference/page
- * @guide adding-a-toolbar
- *   [en]Adding a toolbar[/en]
- *   [ja]ツールバーの追加[/ja]
- * @seealso ons-toolbar
- *   [en]The `<ons-toolbar>` component displays a navigation bar at the top of a page.[/en]
- *   [ja]ons-toolbarコンポーネント[/ja]
- * @seealso ons-back-button
- *   [en]The `<ons-back-button>` displays a back button in the navigation bar.[/en]
- *   [ja]ons-back-buttonコンポーネント[/ja]
+ *   [en][/en]
+ *   [ja][/ja]
+ * @seealso ons-alert-dialog
+ *   [en]The `<ons-alert-dialog>` component displays a alert dialog.[/en]
+ *   [ja]ons-alert-dialogコンポーネント[/ja]
  * @example
- * <ons-toolbar>
- *   <div class="left">
- *     <ons-toolbar-button>
- *       Button
- *     </ons-toolbar-button>
- *   </div>
- *   <div class="center">
- *     Title
- *   </div>
- *   <div class="right">
- *     <ons-toolbar-button>
- *       <ons-icon icon="ion-navicon" size="28px"></ons-icon>
- *     </ons-toolbar-button>
- *   </div>
- * </ons-toolbar>
+ *  <ons-alert-dialog>
+ *    <div class="alert-dialog-title">Warning!</div>
+ *    <div class="alert-dialog-content">
+ *      An error has occurred!
+ *    </div>
+ *    <div class="alert-dialog-footer">
+ *      <alert-dialog-button onclick="app.close()">Cancel</alert-dialog-button>
+ *      <alert-dialog-button class="alert-dialog-button" onclick="app.close()">OK</alert-dialog-button>
+ *    </div>
+ *  </ons-alert-dialog>
  */
-export default class ToolbarButtonElement extends BaseElement {
+export default class AlertDialogButtonElement extends BaseElement {
 
   /**
    * @attribute modifier
@@ -107,7 +90,7 @@ export default class ToolbarButtonElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    util.updateRipple(this, undefined, {center: '', 'size': 'contain', 'background': 'transparent'});
+    util.updateRipple(this, undefined, {'modifier': 'light-gray'});
 
     ModifierUtil.initModifier(this, scheme);
   }
@@ -130,4 +113,4 @@ export default class ToolbarButtonElement extends BaseElement {
   }
 }
 
-customElements.define('ons-toolbar-button', ToolbarButtonElement);
+customElements.define('ons-alert-dialog-button', AlertDialogButtonElement);

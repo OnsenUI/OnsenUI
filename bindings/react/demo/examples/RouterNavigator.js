@@ -111,13 +111,14 @@ export default class extends Component {
     this.setState({routeConfig});
   }
 
-  popPage() {
+  popPage(options = {}) {
     let routeConfig = this.state.routeConfig;
 
     routeConfig = RouterUtil.pop({
       routeConfig,
       options: {
-        animationOptions: {duration: 2}
+        ...options,
+        animationOptions: {duration: 0.4}
       }
     });
 
@@ -154,6 +155,8 @@ export default class extends Component {
     return (
       <Page renderToolbar={this.renderToolbar}>
         <RouterNavigator
+          swipeable={true}
+          swipePop={options => this.popPage(options)}
           routeConfig={this.state.routeConfig}
           renderPage={this.renderPage}
           onPostPush={() => this.onPostPush()}

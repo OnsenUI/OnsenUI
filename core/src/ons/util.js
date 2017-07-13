@@ -71,13 +71,9 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (until !== undefined && until(parent)) {
+    if (!parent || parent === document || (until && until(parent))) {
       return null;
-    }
-    if (!parent || parent === document) {
-      return null;
-    }
-    if (match(parent)) {
+    } else if (match(parent)) {
       return parent;
     }
     parent = parent.parentNode;
@@ -105,12 +101,18 @@ util.isAttached = (element) => {
 util.hasAnyComponentAsParent = (element) => {
   while (element && document.documentElement !== element) {
     element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal|ons-sliding-menu|ons-split-view)/)) {
+    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal)/)) {
       return true;
     }
   }
   return false;
 };
+
+/**
+ * @param {Element} element
+ * @return {boolean}
+ */
+util.isPageControl = element => element.nodeName.match(/^ons-(navigator|splitter|tabbar|page)$/i);
 
 /**
  * @param {Element} element
@@ -168,7 +170,9 @@ util.createElement = (html) => {
     throw new Error('"html" must be one wrapper element.');
   }
 
-  return wrapper.children[0];
+  const element = wrapper.children[0];
+  wrapper.children[0].remove();
+  return element;
 };
 
 /**
@@ -400,9 +404,10 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
- * @param {Element} hasRipple
+ * @param {boolean} hasRipple
+ * @param {Object} attrs
  */
-util.updateRipple = (target, hasRipple) => {
+util.updateRipple = (target, hasRipple, attrs = {}) => {
   if (hasRipple === undefined) {
     hasRipple = target.hasAttribute('ripple');
   }
@@ -411,7 +416,9 @@ util.updateRipple = (target, hasRipple) => {
 
   if (hasRipple) {
     if (!rippleElement) {
-      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+      const element = document.createElement('ons-ripple');
+      Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]));
+      target.insertBefore(element, target.firstChild);
     }
   } else if (rippleElement) {
     rippleElement.remove();
@@ -434,7 +441,7 @@ util.isInteger = (value) => {
 };
 
 /**
- * @return {Obejct} Deferred promise.
+ * @return {Object} Deferred promise.
  */
 util.defer = () => {
   const deferred = {};

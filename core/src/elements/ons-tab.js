@@ -449,15 +449,7 @@ export default class TabElement extends BaseElement {
   }
 
   _findTabbarElement() {
-    if (this.parentNode && this.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
-      return this.parentNode;
-    }
-
-    if (this.parentNode.parentNode && this.parentNode.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
-      return this.parentNode.parentNode;
-    }
-
-    return null;
+    return util.findParent(this, 'ons-tabbar');
   }
 
   _findTabIndex() {

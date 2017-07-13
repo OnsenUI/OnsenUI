@@ -5,6 +5,8 @@
   --background-color--before--checkbox: var(--checkbox-checked-background-color);
   --checkmark-border: 2px solid #fff;
   --material-checkbox-size: 18px;
+  --material-checkbox-focus-ring-size: 40px;
+  --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2px);
 
   --checkbox: {
     @apply(--reset-box-model);
@@ -74,12 +76,9 @@
   pointer-events: none;
 }
 
-.checkbox__input {
-  @apply(--hide-input);
-}
-
+.checkbox__input,
 .checkbox__input:checked {
-  background: var(--checkbox-checked-background-color);
+  @apply(--hide-input);
 }
 
 .checkbox__checkmark:before {
@@ -249,6 +248,7 @@
 .checkbox--material {
   line-height: var(--material-checkbox-size);
   @apply(--material-font);
+  overflow: visible;
 }
 
 .checkbox--material__checkmark {
@@ -290,6 +290,35 @@
   left: 3px;
   transform: scale(1) rotate(-45deg);
   border-width: 2px;
+}
+
+/* focus-ring effect */
+.checkbox--material__input:before {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--material-checkbox-size);
+  height: var(--material-checkbox-size);
+  box-shadow: 0 0 0 var(--material-checkbox-focus-ring-shadow-size) var(--material-checkbox-inactive-color);
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--material-checkbox-inactive-color);
+  pointer-events: none;
+  display: block;
+  transform: scale3d(0.2, 0.2, 0.2);
+  transition: opacity 0.25s ease-out, transform 0.1s ease-out;
+}
+
+.checkbox--material__input:checked:before {
+  box-shadow: 0 0 0 var(--material-checkbox-focus-ring-shadow-size) var(--material-checkbox-active-color);
+  background-color: var(--material-checkbox-active-color);
+}
+
+.checkbox--material__input:focus:before {
+  opacity: .15;
+  transform: scale3d(1, 1, 1);
 }
 
 :disabled + .checkbox--material__checkmark {

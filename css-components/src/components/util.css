@@ -37,14 +37,13 @@
 
   --hide-input: {
     position: absolute;
-    overflow: hidden;
     right: 0;
     top: 0;
     left: 0;
     bottom: 0;
     padding: 0;
     border: 0;
-    opacity: 0.001;
+    background-color: transparent;
     z-index: 1;
     vertical-align: top;
     outline: none;
