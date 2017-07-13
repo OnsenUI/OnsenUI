@@ -127,19 +127,31 @@ class CollapseMode {
     }
   }
 
-  _onDragStart(event) {
-    const scrolling = !/left|right/.test(event.gesture.direction);
-    const distance = this._element._side === 'left' ? event.gesture.center.clientX : window.innerWidth - event.gesture.center.clientX;
-    const area = this._element._swipeTargetWidth;
+  _canConsumeGesture(gesture) {
     const isOpen = this.isOpen();
-    this._ignoreDrag = scrolling || event.consumed || (area && distance > area && !isOpen);
+    let validDrag;
+
+    if (this._element._side === 'left') {
+      validDrag =  isOpen ? gesture.direction === 'left' : gesture.direction === 'right';
+    } else {
+      validDrag =  isOpen ? gesture.direction === 'right' : gesture.direction === 'left';
+    }
+
+    const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
+    const area = this._element._swipeTargetWidth;
+
+    return validDrag && !(area && distance > area && !isOpen);
+  }
+
+  _onDragStart(event) {
+    this._ignoreDrag = event.consumed || !this._canConsumeGesture(event.gesture);
 
     if (!this._ignoreDrag) {
       event.consume && event.consume();
       event.consumed = true;
 
       this._width = widthToPx(this._element._width, this._element.parentNode);
-      this._startDistance = this._distance = isOpen ? this._width : 0;
+      this._startDistance = this._distance = this.isOpen() ? this._width : 0;
     }
   }
 
