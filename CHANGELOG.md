@@ -13,6 +13,9 @@ dev
 
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
+ * Added ripple effects properly on `ons-range`, `ons-checkbox`, `ons-radio-button`, `ons-toolbar-button` and `ons-alert-dialog` buttons for Material Design.
+ * Added `ons-alert-dialog-button` elements.
+ * Added `size` attribute on `ons-ripple` elements.
 
 v2.4.2
 ----
