@@ -8,6 +8,7 @@ import IfElement from './elements/ons-if';
 import ActionSheetElement from './elements/ons-action-sheet';
 import ActionSheetButtonElement from './elements/ons-action-sheet-button';
 import AlertDialogElement from './elements/ons-alert-dialog';
+import AlertDialogButtonElement from './elements/ons-alert-dialog-button';
 import BackButtonElement from './elements/ons-back-button';
 import BottomToolbarElement from './elements/ons-bottom-toolbar';
 import ButtonElement from './elements/ons-button';

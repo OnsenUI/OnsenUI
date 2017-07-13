@@ -42,6 +42,22 @@ describe('OnsRippleElement', () => {
     });
   });
 
+  it('provides modifier attribute', () => {
+    var element = new ons.RippleElement();
+    element.setAttribute('modifier', 'hoge');
+    expect(element.classList.contains('ripple--hoge')).to.be.true;
+
+    element.setAttribute('modifier', ' foo bar');
+    expect(element.classList.contains('ripple--foo')).to.be.true;
+    expect(element.classList.contains('ripple--bar')).to.be.true;
+    expect(element.classList.contains('ripple--hoge')).not.to.be.true;
+
+    element.classList.add('ripple--piyo');
+    element.setAttribute('modifier', 'fuga');
+    expect(element.classList.contains('ripple--piyo')).to.be.true;
+    expect(element.classList.contains('ripple--fuga')).to.be.true;
+  });
+
   describe('#_compile()', () => {
     it('is called when an element is created', done => {
       const spy = spyOn('_compile'),
@@ -71,7 +87,7 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#attributeChangedCallback()', () => {
-    const attributes = ['color', 'center', 'start-radius', 'background'];
+    const attributes = ['color', 'center', 'start-radius', 'background', 'modifier'];
 
     it('is called when an element is created', () => {
       const spy = spyOn('attributeChangedCallback'),
