@@ -85,9 +85,11 @@ notification._createAlertDialog = options => {
   options.buttonLabels.forEach((label, index) => {
     buttons += `
       <ons-alert-dialog-button
-        ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
-        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
-      " style="position: relative;">
+        class="
+          ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
+        " 
+        style="position: relative;">
         ${label}
       </ons-alert-dialog-button>
     `;

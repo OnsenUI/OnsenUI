@@ -33,6 +33,8 @@ const scheme = {
   '.alert-dialog-footer--rowfooter': 'alert-dialog-footer--rowfooter--*',
   '.alert-dialog-button--rowfooter': 'alert-dialog-button--rowfooter--*',
   '.alert-dialog-button--primal': 'alert-dialog-button--primal--*',
+  '.alert-dialog-button': 'alert-dialog-button--*',
+  'ons-alert-dialog-button': 'alert-dialog-button--*',
   '.alert-dialog-mask': 'alert-dialog-mask--*',
   '.text-input': 'text-input--*'
 };
