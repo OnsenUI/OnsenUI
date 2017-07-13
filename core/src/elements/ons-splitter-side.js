@@ -128,14 +128,11 @@ class CollapseMode {
   }
 
   _canConsumeGesture(gesture) {
+    const d = gesture.direction;
     const isOpen = this.isOpen();
-    let validDrag;
-
-    if (this._element._side === 'left') {
-      validDrag =  isOpen ? gesture.direction === 'left' : gesture.direction === 'right';
-    } else {
-      validDrag =  isOpen ? gesture.direction === 'right' : gesture.direction === 'left';
-    }
+    const validDrag = this._element._side === 'left'
+      ? ((d === 'left' && isOpen) || (d === 'right' && !isOpen))
+      : ((d === 'left' && !isOpen) || (d === 'right' && isOpen));
 
     const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
