@@ -101,6 +101,22 @@ const prepareAutoStyle = (element, force) => {
   }
 };
 
+/**
+ * @param {Element} element
+ * @param {Object} object
+ * @param [defaultValue]
+ */
+const switchValue = (element, object, defaultValue = null) => {
+  if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
+    const mobileOS = onsPlatform.getMobileOS();
+    if (object.hasOwnProperty(mobileOS) && unlocked.hasOwnProperty(mobileOS)) {
+      return object[mobileOS];
+    }
+  }
+
+  return defaultValue;
+}
+
 const mapModifier = (modifier, element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     const mobileOS = onsPlatform.getMobileOS();
@@ -117,5 +133,6 @@ export default {
   enable: () => autoStyleEnabled = true,
   disable: () => autoStyleEnabled = false,
   prepare: prepareAutoStyle,
-  mapModifier
+  mapModifier,
+  switchValue
 };

@@ -126,6 +126,17 @@ gulp.task('core', function(done) {
                 plugins: ['add-module-exports']
               }
               // options for the loader
+            },
+
+            {
+              test: /\.svg$/,
+              loader: 'svg-inline-loader',
+              options: {
+                removingTags: ['title', 'desc', 'defs'],
+                removeSVGTagAttrs: false,
+                removingTagAttrs: ['fill'],
+                idPrefix: true
+              }
             }
           ]
         },

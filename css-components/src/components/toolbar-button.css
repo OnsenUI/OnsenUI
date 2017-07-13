@@ -95,6 +95,7 @@
   padding-left: 8px;
   color: var(--toolbar-button-color);
   background-color: var(--toolbar-button-background-color);
+  display: inline-block;
 }
 
 .back-button:active {
@@ -108,16 +109,11 @@
 }
 
 .back-button__icon {
-  display: inline-block;
-  height: 100%;
-  vertical-align: top;
   margin-right: 6px;
-}
-
-.back-button__icon:before {
-  font-family: 'Ionicons';
-  content: '\f3cf';
-  font-size: 32px;
+  display: inline-flex;
+  fill: var(--toolbar-button-color);
+  align-items: center;
+  height: 100%;
 }
 
 .back-button--material {
@@ -138,10 +134,11 @@
   font-size: 20px;
 }
 
-.back-button--material__icon:before {
-  font-family: 'Material-Design-Iconic-Font';
-  content: '\f2ea';
-  font-size: 26px;
+.back-button--material__icon {
+  display: inline-flex;
+  fill: var(--material-toolbar-button-color);
+  align-items: center;
+  height: 100%;
 }
 
 .back-button--material:active {
