@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-navigator :page-stack="pageStack" :pop-page="pop"></v-ons-navigator>
+    <v-ons-navigator swipeable :page-stack="pageStack" :pop-page="pop"></v-ons-navigator>
   </v-ons-page>
 </template>
 

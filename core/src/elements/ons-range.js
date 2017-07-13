@@ -86,13 +86,19 @@ export default class RangeElement extends BaseInputElement {
   /* Own props */
 
   _onDragstart(e) {
-    e.stopPropagation();
+    e.consumed = true;
     e.gesture.stopPropagation();
     this._input.classList.add(activeClassToken);
+    this.addEventListener('drag', this._onDrag);
+  }
+
+  _onDrag(e) {
+    e.stopPropagation();
   }
 
   _onDragend(e) {
     this._input.classList.remove(activeClassToken);
+    this.removeEventListener('drag', this._onDrag);
   }
 
   get _ratio() {

@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-navigator
+    <v-ons-navigator swipeable
       :page-stack="pageStack"
       :options="{animation: 'slide'}"
     >
