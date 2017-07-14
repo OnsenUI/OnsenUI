@@ -636,9 +636,13 @@ export default class CarouselElement extends BaseElement {
   }
 
   _canConsumeGesture(gesture) {
+    const d = gesture.direction;
+    const isFirst = this._scroll === 0 && !this.overscrollable;
+    const isLast = this._scroll === this._calculateMaxScroll() && !this.overscrollable;
+
     return this._isVertical()
-      ? (gesture.direction === 'up' || gesture.direction === 'down')
-      : (gesture.direction === 'right' || gesture.direction === 'left');
+      ? ((d === 'down' && !isFirst) || (d === 'up' && !isLast))
+      : ((d === 'right' && !isFirst) || (d === 'left' && !isLast));
   }
 
   _onDragStart(event) {
