@@ -5,7 +5,7 @@ describe('OnsCarouselElement', () => {
 
   beforeEach((done) => {
     carousel = ons._util.createElement(`
-      <ons-carousel>
+      <ons-carousel style="width: 100%; height: 300px">
         <ons-carousel-item>Item 1</ons-carousel-item>
         <ons-carousel-item>Item 2</ons-carousel-item>
         <ons-carousel-item>Item 3</ons-carousel-item>
@@ -34,6 +34,33 @@ describe('OnsCarouselElement', () => {
 
       carousel.removeAttribute('swipeable');
       expect(spyOff).to.have.been.called.at.least.once;
+    });
+  });
+
+  describe('#_canConsumeGesture()', () => {
+    it('ignores wrong unuseful swipes', () => {
+      const canConsume = (direction, value) => expect(carousel._canConsumeGesture({direction})).to.equal(value);
+      carousel.swipeable = true;
+
+      carousel.first();
+      canConsume('right', false);
+      canConsume('left', true);
+
+      carousel.overscrollable = true;
+      canConsume('right', true);
+      canConsume('left', true);
+
+      carousel.last();
+      canConsume('right', true);
+      canConsume('left', true);
+
+      carousel.overscrollable = false;
+      canConsume('right', true);
+      canConsume('left', false);
+
+      carousel.prev();
+      canConsume('right', true);
+      canConsume('left', true);
     });
   });
 
