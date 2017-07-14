@@ -10,10 +10,12 @@ dev
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
  * ons-navigator: iOS Swipe-to-pop.
+ * ons-icon: Allows CSS classes with `background-image` (or any other property) as custom icon names.
 
 ### Bug Fixes
 
  * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
+ * ons-tab: Custom classes can be passed to its `icon` attribute. Fixed [#2108](https://github.com/OnsenUI/OnsenUI/issues/2108).
  * ons-list: Fixed double top border when located right under toolbar.
  * ons-carousel: Ignores swipes that start outside carousel.
  * Swipeable components: Swipe is now smoother.
@@ -25,6 +27,10 @@ dev
  * Added `ons-alert-dialog-button` elements.
  * Added `size` attribute on `ons-ripple` elements.
  * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
+
+### BREAKING CHANGES
+
+ * ons-icon: Due to [#2108](https://github.com/OnsenUI/OnsenUI/issues/2108) fix, `fa-` prefix is not added automatically anymore to the icon name. In other words, Font Awesome icons must specify `fa-` prefix manually (`icon="bars"` => `icon="fa-bars"`).
 
 v2.4.2
 ----
