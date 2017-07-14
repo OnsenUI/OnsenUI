@@ -1,6 +1,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* VOnsNavigator: Supports iOS "swipe-to-pop".
+* VOnsAlertDialogButton: New component.
+
 2.0.2
 ----
 
