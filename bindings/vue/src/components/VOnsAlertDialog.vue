@@ -8,7 +8,7 @@
     </div>
     <div class="alert-dialog-footer">
       <slot name="footer">
-        <button v-for="(handler, key) in footer" :key="key" class="alert-dialog-button" @click="handler">{{key}}</button>
+        <ons-alert-dialog-button v-for="(handler, key) in footer" :key="key" @click="handler">{{key}}</ons-alert-dialog-button>
       </slot>
     </div>
   </ons-alert-dialog>

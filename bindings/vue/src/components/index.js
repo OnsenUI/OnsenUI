@@ -23,6 +23,7 @@ const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins
 export const VOnsToolbar = extend('toolbar');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
 export const VOnsToolbarButton = extend('toolbar-button', [simpleClick]);
+export const VOnsAlertDialogButton = extend('alert-dialog-button', [simpleClick]);
 export const VOnsButton = extend('button', [simpleClick]);
 export const VOnsIcon = extend('icon');
 export const VOnsCard = extend('card');

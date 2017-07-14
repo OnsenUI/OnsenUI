@@ -144,8 +144,8 @@
       Lorem ipsum
       <button @click="alertDialog1Visible= !alertDialog1Visible">toggle</button>
       <template slot="footer">
-        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Ok</button>
-        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Cancel</button>
+        <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Ok</v-ons-alert-dialog-button>
+        <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Cancel</v-ons-alert-dialog-button>
       </template>
     </v-ons-alert-dialog>
 
