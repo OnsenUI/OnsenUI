@@ -15,6 +15,7 @@ dev
 
  * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
  * ons-list: Fixed double top border when located right under toolbar.
+ * ons-carousel: Ignores swipes that start outside carousel.
  * Swipeable components: Swipe is now smoother.
  * Swipeable components: Fixed compatibility of some swipeable components.
 
