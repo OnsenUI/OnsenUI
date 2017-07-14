@@ -53,7 +53,7 @@ export default class IconElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The icon name. `"md-"` prefix for Material Icons, `"fa-"` for Font Awesome and `"ion-"` prefix for Ionicons.
+   *     The icon name. `"md-"` prefix for Material Icons, `"fa-"` for Font Awesome and `"ion-"` prefix for Ionicons. If you need a custom icon, create a CSS class with `background-image` or any other CSS property and pass it to this attribute.
    *
    *     See all available icons on their respective sites:
    *
@@ -133,6 +133,9 @@ export default class IconElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
+    if (name === 'icon' && last && !/\s/.test(last.trim())) {
+      this.classList.remove(last.trim());
+    }
     this._update();
   }
 
@@ -183,9 +186,8 @@ export default class IconElement extends BaseElement {
     } else if(iconName.indexOf('md-') === 0)  {
       classList.push('zmdi');
       classList.push('zmdi-' + iconName.split(/\-(.+)?/)[1]);
-    } else {
-      classList.push('fa');
-      classList.push('fa-' + iconName);
+    } else if (iconName) {
+      classList.push(iconName);
     }
 
     // Size

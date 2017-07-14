@@ -15,8 +15,8 @@ describe('OnsIconElement', () => {
       expect(element.classList.contains('fa-twitter')).to.be.true;
       expect(element.classList.contains('ion-navicon')).not.to.be.true;
 
-      element.setAttribute('icon', 'i-dont-exist');
-      expect(element.classList.contains('i-dont-exist')).not.to.be.true;
+      element.setAttribute('icon', 'custom-icon');
+      expect(element.classList.contains('custom-icon')).to.be.true;
       expect(element.classList.contains('fa-twitter')).not.to.be.true;
 
       element.setAttribute('icon', 'md-face');
