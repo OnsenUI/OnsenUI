@@ -10,6 +10,7 @@ dev
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
  * ons-navigator: iOS Swipe-to-pop.
+ * ons-toolbar: New `cover-content` modifier. Should be combined with `transparent` modifier.
 
 ### Bug Fixes
 

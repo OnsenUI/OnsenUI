@@ -106,13 +106,21 @@ ons-bottom-toolbar {
 }
 
 .toolbar:not(.toolbar--transparent) + .page__background,
-.toolbar + .page__background + .page__content {
+.toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 44px;
 }
 
+.toolbar.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 44px;
+}
+
 .toolbar--material:not(.toolbar--transparent) + .page__background,
-.toolbar--material + .page__background + .page__content {
+.toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 56px;
+}
+
+.toolbar--material.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 56px;
 }
 
 .page[status-bar-fill] > .page__content {
