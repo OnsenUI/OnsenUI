@@ -62,6 +62,7 @@ ons.IfElement = IfElement;
 ons.ActionSheetElement = ActionSheetElement;
 ons.ActionSheetButtonElement = ActionSheetButtonElement;
 ons.AlertDialogElement = AlertDialogElement;
+ons.AlertDialogButtonElement = AlertDialogButtonElement;
 ons.BackButtonElement = BackButtonElement;
 ons.BottomToolbarElement = BottomToolbarElement;
 ons.ButtonElement = ButtonElement;
