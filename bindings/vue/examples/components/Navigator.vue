@@ -3,8 +3,13 @@
     <v-ons-navigator swipeable
       :page-stack="pageStack"
       :options="{animation: 'slide'}"
+      @postpush="log('postpush!')"
+      @show="log('show from navigator!')"
+
+      @push="pageStack = [...pageStack, $event]"
+      @reset="pageStack = [pageStack[0]]"
+      @pop="pageStack.pop()"
     >
-      <div v-for="page in pageStack" :key="page.key || page.name" :is="page" :page-stack="pageStack"></div>
     </v-ons-navigator>
   </v-ons-page>
 </template>
@@ -35,21 +40,20 @@
     methods: {
       log,
       replace() {
-        this.pageStack.pop();
-        this.pageStack.push(page1);
+        this.$emit('pop');
+        this.$emit('push', page1);
       },
       reset() {
-        this.pageStack.splice(1, this.pageStack.length - 1);
+        this.$emit('reset')
       }
     },
     components: { myToolbar },
-    props: ['pageStack']
   };
 
   const page2 = {
     name: 'page2',
     template: `
-      <v-ons-page p2>
+      <v-ons-page p2 @init="log('init!')">
         <my-toolbar>Page 2</my-toolbar>
         Page 2
         <v-ons-button @click="push">Push 3 pages</v-ons-button>
@@ -58,13 +62,12 @@
     methods: {
       log,
       push() {
-        this.pageStack.push(page3);
-        this.pageStack.push(page3);
-        this.pageStack.push(page3);
+        this.$emit('push', page3);
+        this.$emit('push', page3);
+        this.$emit('push', page3);
       }
     },
     components: { myToolbar },
-    props: ['pageStack'],
     mounted() {
     }
   };
@@ -81,11 +84,10 @@
     methods: {
       log,
       push() {
-        this.pageStack.push(page2)
+        this.$emit('push', page2);
       }
     },
     components: { myToolbar },
-    props: ['pageStack'],
     mounted() {
     }
   };
