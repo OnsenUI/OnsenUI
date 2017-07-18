@@ -13,7 +13,7 @@ export { default as VOnsSelect } from './VOnsSelect.vue';
 // Generic components
 import VGeneric from './VGeneric.vue';
 import {
-  hidable, simpleClick, hasOptions, dialogCancel,
+  hidable, hasOptions, dialogCancel,
   deriveDBB, deriveHandler, selfProvider,
   portal, modelInput, modelCheckbox, modelRadio
 } from '../mixins';
@@ -22,13 +22,13 @@ const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins
 
 export const VOnsToolbar = extend('toolbar');
 export const VOnsBottomToolbar = extend('bottom-toolbar');
-export const VOnsToolbarButton = extend('toolbar-button', [simpleClick]);
-export const VOnsAlertDialogButton = extend('alert-dialog-button', [simpleClick]);
-export const VOnsButton = extend('button', [simpleClick]);
+export const VOnsToolbarButton = extend('toolbar-button');
+export const VOnsAlertDialogButton = extend('alert-dialog-button');
+export const VOnsButton = extend('button');
 export const VOnsIcon = extend('icon');
 export const VOnsCard = extend('card');
 export const VOnsList = extend('list');
-export const VOnsListItem = extend('list-item', [simpleClick]);
+export const VOnsListItem = extend('list-item');
 export const VOnsListTitle = extend('list-title');
 export const VOnsListHeader = extend('list-header');
 export const VOnsRipple = extend('ripple');
@@ -47,11 +47,11 @@ export const VOnsSearchInput = extend('search-input', [modelInput]);
 export const VOnsRange = extend('range', [modelInput]);
 export const VOnsRadio = extend('radio', [modelRadio]);
 export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction')]);
-export const VOnsFab = extend('fab', [hidable, simpleClick]);
-export const VOnsSpeedDialItem = extend('speed-dial-item', [simpleClick]);
+export const VOnsFab = extend('fab', [hidable]);
+export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsActionSheet = extend('action-sheet', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
-export const VOnsActionSheetButton = extend('action-sheet-button', [simpleClick]);
+export const VOnsActionSheetButton = extend('action-sheet-button');
 export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB, portal]);
 export const VOnsToast = extend('toast', [hidable, hasOptions, deriveDBB, portal]);
