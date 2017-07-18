@@ -2,12 +2,12 @@
   <ons-tabbar :activeIndex="index" @postchange.self="$emit('update:index', $event.index)">
     <div class="tabbar__content">
       <slot name="pages">
-        <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.key || tab.page)"></component>
+        <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))"></component>
       </slot>
     </div>
     <div class="tabbar">
       <slot>
-        <v-ons-tab v-for="tab in tabs" v-bind="tab" :key="(tab.key || tab)"></v-ons-tab>
+        <v-ons-tab v-for="tab in tabs" v-bind="tab" :key="_tabKey(tab)"></v-ons-tab>
       </slot>
     </div>
   </ons-tabbar>
@@ -28,6 +28,12 @@
         validator(value) {
           return value.every(tab => ['icon', 'label', 'page'].some(prop => !!Object.getOwnPropertyDescriptor(tab, prop)));
         }
+      }
+    },
+
+    methods: {
+      _tabKey(tab) {
+        return tab.key || tab.label || tab.icon;
       }
     },
 

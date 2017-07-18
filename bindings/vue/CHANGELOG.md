@@ -9,6 +9,10 @@ dev
 * VOnsNavigator: Supports iOS "swipe-to-pop".
 * VOnsAlertDialogButton: New component.
 
+### Misc
+
+* Support for `vue@2.4.0`. Some inner v-for keys have been modified.
+
 2.0.2
 ----
 

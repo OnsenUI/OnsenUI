@@ -4,7 +4,7 @@
       :page-stack="pageStack"
       :options="{animation: 'slide'}"
     >
-      <div v-for="page in pageStack" :key="page" :is="page" :page-stack="pageStack"></div>
+      <div v-for="page in pageStack" :key="page.key || page.name" :is="page" :page-stack="pageStack"></div>
     </v-ons-navigator>
   </v-ons-page>
 </template>
@@ -23,6 +23,7 @@
   };
 
   const page3 = {
+    name: 'page3',
     template: `
       <v-ons-page p3>
         <my-toolbar>Page 3</my-toolbar>
@@ -46,6 +47,7 @@
   };
 
   const page2 = {
+    name: 'page2',
     template: `
       <v-ons-page p2>
         <my-toolbar>Page 2</my-toolbar>
@@ -59,19 +61,16 @@
         this.pageStack.push(page3);
         this.pageStack.push(page3);
         this.pageStack.push(page3);
-        this.$nextTick(() => this.navigator.isReady().then(() => {
-          console.log('is ready');
-        }));
       }
     },
     components: { myToolbar },
-    inject: ['navigator'],
     props: ['pageStack'],
     mounted() {
     }
   };
 
   const page1 = {
+    name: 'page1',
     template: `
       <v-ons-page p1>
         <my-toolbar>Page 1</my-toolbar>

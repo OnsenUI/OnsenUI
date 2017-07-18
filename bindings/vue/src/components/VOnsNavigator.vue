@@ -1,7 +1,7 @@
 <template>
   <ons-navigator @postpop.self="_checkSwipe">
     <slot>
-      <component v-for="page in pageStack" :key="page" :is="page"></component>
+      <component v-for="page in pageStack" :is="page" :key="page.key || page.name"></component>
     </slot>
   </ons-navigator>
 </template>
