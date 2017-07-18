@@ -1,5 +1,5 @@
 <template>
-  <component :is="$options._componentTag.slice(2)">
+  <component :is="$options._componentTag.slice(2)" v-on="$listeners">
     <slot></slot>
   </component>
 </template>
