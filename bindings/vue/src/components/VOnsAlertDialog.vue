@@ -1,5 +1,5 @@
 <template>
-  <ons-alert-dialog>
+  <ons-alert-dialog v-on="unrecognizedListeners">
     <div class="alert-dialog-title">
       <slot name="title">{{title}}</slot>
     </div>

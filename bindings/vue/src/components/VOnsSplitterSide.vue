@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side>
+  <ons-splitter-side v-on="unrecognizedListeners">
     <slot></slot>
   </ons-splitter-side>
 </template>
