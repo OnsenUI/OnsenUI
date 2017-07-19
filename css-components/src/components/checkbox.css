@@ -292,7 +292,7 @@
   border-width: 2px;
 }
 
-/* focus-ring effect */
+/* active ring effect */
 .checkbox--material__input:before {
   content: '';
   opacity: 0;
@@ -316,7 +316,7 @@
   background-color: var(--material-checkbox-active-color);
 }
 
-.checkbox--material__input:focus:before {
+.checkbox--material__input:active:before {
   opacity: .15;
   transform: scale3d(1, 1, 1);
 }
