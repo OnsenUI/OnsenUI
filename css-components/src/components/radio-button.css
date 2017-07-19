@@ -182,7 +182,7 @@
   background-color: var(--material-radio-button-active-color);
 }
 
-.radio-button--material__input:focus:before {
+.radio-button--material__input:active:before {
   opacity: .15;
   transform: scale3d(1, 1, 1);
 }
