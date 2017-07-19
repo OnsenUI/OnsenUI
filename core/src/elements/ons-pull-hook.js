@@ -122,7 +122,6 @@ export default class PullHookElement extends BaseElement {
 
     this.style.height = `${height}px`;
     this.style.lineHeight = `${height}px`;
-    this.style.marginTop = '-1px';
     this._pageElement.style.marginTop = `-${height}px`;
   }
 
@@ -138,10 +137,35 @@ export default class PullHookElement extends BaseElement {
     return `translate3d(0px, ${scroll}px, 0px)`;
   }
 
-  _onDrag(event) {
+  _canConsumeGesture(gesture) {
+    return gesture.direction === 'up' || gesture.direction === 'down';
+  }
+
+  _onDragStart(event) {
     if (this.disabled) {
       return;
     }
+
+    this._ignoreDrag = event.consumed;
+
+    if (!this._ignoreDrag) {
+      const consume = event.consume;
+      event.consume = () => { consume && consume(); this._ignoreDrag = true; };
+      if (this._canConsumeGesture(event.gesture)) {
+        consume && consume();
+        event.consumed = true;
+      }
+    }
+
+    this._startScroll = this._getCurrentScroll();
+  }
+
+  _onDrag(event) {
+    if (this.disabled || this._ignoreDrag || !this._canConsumeGesture(event.gesture)) {
+      return;
+    }
+
+    event.stopPropagation();
 
     // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
     // there will be no inertial scroll when scrolling down. Allowing default scrolling will
@@ -177,27 +201,15 @@ export default class PullHookElement extends BaseElement {
       this._setState(STATE_INITIAL);
     }
 
-    // By stopping propagation only of `dragup` and `dragdown`,
-    // allowing ancestor elements to detect `dragleft` and `dragright`.
-    // If we comment out the following `if` block, `ons-splitter` with `ons-pull-hook` will be broken.
-    if (event.gesture.direction === 'up' || event.gesture.direction === 'down') {
-        event.stopPropagation();
-    }
     this._translateTo(scroll);
   }
 
-  _onDragStart(event) {
-    if (this.disabled) {
-      return;
-    }
-
-    this._startScroll = this._getCurrentScroll();
-  }
-
   _onDragEnd(event) {
-    if (this.disabled) {
+    if (this.disabled || this._ignoreDrag) {
       return;
     }
+
+    event.stopPropagation();
 
     if (this._currentTranslation > 0) {
       const scroll = this._currentTranslation;
@@ -422,7 +434,7 @@ export default class PullHookElement extends BaseElement {
     // If we swipe up/down a screen too fast,
     // the gesture detector occasionally dispatches a `dragleft` or `dragright`,
     // so we need to have the pull hook listen to `dragleft` and `dragright` as well as `dragup` and `dragdown`.
-    this._gestureDetector.on('dragup dragdown dragleft dragright', this._boundOnDrag);
+    this._gestureDetector.on('drag', this._boundOnDrag);
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
@@ -431,7 +443,7 @@ export default class PullHookElement extends BaseElement {
 
   _destroyEventListeners() {
     if (this._gestureDetector) {
-      this._gestureDetector.off('dragup dragdown dragleft dragright', this._boundOnDrag);
+      this._gestureDetector.off('drag', this._boundOnDrag);
       this._gestureDetector.off('dragstart', this._boundOnDragStart);
       this._gestureDetector.off('dragend', this._boundOnDragEnd);
 

@@ -32,7 +32,7 @@ const vm = new Vue({
   template: `
     <v-ons-page>
       <v-ons-toolbar>
-        <div class="left"><v-ons-back-button @click.prevent="backToList" v-show="currentView !== mainList">Main List</v-ons-back-button></div>
+        <div class="left"><v-ons-toolbar-button @click.prevent="backToList" v-show="currentView !== mainList">Main list</v-ons-toolbar-button></div>
         <div class="center">{{ title }}</div>
       </v-ons-toolbar>
 

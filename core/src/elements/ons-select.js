@@ -171,10 +171,6 @@ export default class SelectElement extends BaseElement {
     return this.querySelector('select');
   }
 
-  static get events() {
-    return ['change'];
-  }
-
   _updateBoundAttributes() {
     INPUT_ATTRIBUTES.forEach((attr) => {
       if (this.hasAttribute(attr)) {

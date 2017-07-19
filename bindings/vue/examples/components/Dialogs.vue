@@ -144,8 +144,8 @@
       Lorem ipsum
       <button @click="alertDialog1Visible= !alertDialog1Visible">toggle</button>
       <template slot="footer">
-        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Ok</button>
-        <button class="alert-dialog-button" @click="alertDialog1Visible = false">Cancel</button>
+        <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Ok</v-ons-alert-dialog-button>
+        <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Cancel</v-ons-alert-dialog-button>
       </template>
     </v-ons-alert-dialog>
 
@@ -181,16 +181,15 @@
     </v-ons-popover>
 
     <v-ons-action-sheet
-      :visible="actionSheetVisible"
-      @update="actionSheetVisible = $event"
+      :visible.sync="actionSheetVisible"
       cancelable
       title="Description"
     >
-      <v-ons-action-sheet-button icon="md-square-o">Label 1</v-ons-action-sheet-button>
-      <v-ons-action-sheet-button icon="md-square-o">Label 2</v-ons-action-sheet-button>
-      <v-ons-action-sheet-button icon="md-square-o">Label 4</v-ons-action-sheet-button>
-      <v-ons-action-sheet-button icon="md-square-o" modifier="destructive">Label 4</v-ons-action-sheet-button>
-      <v-ons-action-sheet-button icon="md-square-o">Label 5</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="actionSheetVisible = false" icon="md-square-o">Label 1</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="actionSheetVisible = false" icon="md-square-o">Label 2</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="actionSheetVisible = false" icon="md-square-o">Label 4</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="actionSheetVisible = false" icon="md-square-o" modifier="destructive">Label 4</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="actionSheetVisible = false" icon="md-square-o">Label 5</v-ons-action-sheet-button>
     </v-ons-action-sheet>
 
   </v-ons-page>

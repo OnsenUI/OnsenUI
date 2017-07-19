@@ -2,38 +2,40 @@ import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 
 /**
- * @original ons-action-sheet-button
+ * @original ons-alert-dialog-button
  * @category dialog
- * @tutorial react/Reference/action-sheet
+ * @tutorial react/Reference/dialog
  * @description
- * [en]Component that represent each button of the action sheet.[/en]
+ * [en]Component that represent each button of the alert dialog.[/en]
  * [ja][/ja]
  */
-class ActionSheetButton extends SimpleWrapper {
+class AlertDialogButton extends SimpleWrapper {
   _getDomNodeName() {
-    return 'ons-action-sheet-button';
+    return 'ons-alert-dialog-button';
   }
 }
 
-ActionSheetButton.propTypes = {
+AlertDialogButton.propTypes = {
   /**
    * @name modifier
    * @type string
    * @required false
    * @description
-   *  [en]The appearance of the action sheet button.[/en]
+   *  [en]The appearance of the alert dialog button.[/en]
    *  [ja][/ja]
    */
   modifier: PropTypes.string,
 
   /**
-   * @name icon
-   * @type string
+   * @name disabled
+   * @type bool
    * @description
-   *  [en]Creates an `Icon` component with this string. Only visible on Android.[/en]
+   *  [en]
+   *  Specifies whether the button is disabled.
+   *  [/en]
    *  [ja][/ja]
    */
-  icon: PropTypes.string,
+  disabled: PropTypes.bool,
 
   /**
    * @name onClick
@@ -45,4 +47,4 @@ ActionSheetButton.propTypes = {
   onClick: PropTypes.func
 };
 
-export default ActionSheetButton;
+export default AlertDialogButton;

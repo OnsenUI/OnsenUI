@@ -20,8 +20,14 @@ import internal from '../../ons/internal';
 import BaseElement from '../base/base-element';
 import Animator from './animator-css';
 import contentReady from '../../ons/content-ready';
+import ModifierUtil from '../../ons/internal/modifier-util';
 
 const defaultClassName = 'ripple';
+const scheme = {
+  '': 'ripple--*',
+  '.ripple__wave': 'ripple--*__wave',
+  '.ripple__background': 'ripple--*__background',
+};
 
 /**
  * @element ons-ripple
@@ -35,6 +41,9 @@ const defaultClassName = 'ripple';
  *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @codepen wKQWdZ
  * @tutorial vanilla/Reference/ripple
+ * @modifier light-gray
+ *   [en]Change the color of effects to light gray.[/en]
+ *   [ja]エフェクトの色が明るい灰色になります。[/ja]
  * @guide cross-platform-styling
  *  [en]Cross platform styling[/en]
  *  [ja]Cross platform styling[/ja]
@@ -57,11 +66,35 @@ export default class RippleElement extends BaseElement {
    */
 
   /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]The appearance of the ripple effect.[/en]
+   *   [ja]エフェクトの表現を指定します。[/ja]
+   */
+
+  /**
    * @attribute background
    * @type {String}
    * @description
    *   [en]Color of the background.[/en]
    *   [ja]背景の色を設定します。[/ja]
+   */
+
+  /**
+   * @attribute size
+   * @type {String}
+   * @description
+   *   [en]Sizing of the wave on ripple effect. Set "cover" or "contain". Default is "cover".[/en]
+   *   [ja]エフェクトのサイズを指定します。"cover"もしくは"contain"を指定します。デフォルトは"cover"です。[/ja]
+   */
+
+  /**
+   * @attribute center
+   * @type {Boolean}
+   * @description
+   *   [en]If this attribute presents, change the position of wave effect to center of the target element.[/en]
+   *   [ja]この要素を設定すると、エフェクトの位置が要素の真ん中から始まります。[/ja]
    */
 
   /**
@@ -78,7 +111,7 @@ export default class RippleElement extends BaseElement {
 
     this._animator = new Animator();
 
-    ['color', 'center', 'start-radius', 'background'].forEach(e => {
+    ['color', 'center', 'start-radius', 'background', 'modifier'].forEach(e => {
       this.attributeChangedCallback(e, null, this.getAttribute(e));
     });
   }
@@ -96,29 +129,59 @@ export default class RippleElement extends BaseElement {
       this.appendChild(this._wave);
       this.appendChild(this._background);
     }
+
+    ModifierUtil.initModifier(this, scheme);
+  }
+
+  _getEffectSize() {
+    const sizes = ['cover', 'contain'];
+    if (this.hasAttribute('size')) {
+      const size = this.getAttribute('size');
+      if (sizes.indexOf(size) !== -1) {
+        return size;
+      }
+    }
+
+    return 'cover';
   }
 
   _calculateCoords(e) {
-    var x, y, h, w, r;
-    var b = this.getBoundingClientRect();
+    let x, y, h, w, r;
+    const b = this.getBoundingClientRect();
+    const size = this._getEffectSize();
+
     if (this._center) {
       x = b.width / 2;
       y = b.height / 2;
-      r = Math.sqrt(x * x + y * y);
+
+      if (size === 'cover') {
+        r = Math.sqrt(x * x + y * y);
+      } else if (size === 'contain') {
+        r = Math.min(x, y);
+      } else {
+        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+      }
     } else {
       x = (e.clientX || e.changedTouches[0].clientX) - b.left;
       y = (e.clientY || e.changedTouches[0].clientY) - b.top;
       h = Math.max(y, b.height - y);
       w = Math.max(x, b.width - x);
-      r = Math.sqrt(h * h + w * w);
+
+      if (size === 'cover') {
+        r = Math.sqrt(h * h + w * w);
+      } else if (size === 'contain') {
+        r = Math.min(Math.round(h / 2), Math.round(w / 2));
+      } else {
+        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+      }
     }
+
     return {x, y, r};
   }
 
   _rippleAnimation(e, duration = 300) {
-    var
-      {_animator, _wave, _background, _minR} = this,
-      {x, y, r} = this._calculateCoords(e);
+    const {_animator, _wave, _background, _minR} = this;
+    const {x, y, r} = this._calculateCoords(e);
 
     _animator.stopAll({stopNext: 1});
     _animator.animate(_background, {opacity: 1}, duration);
@@ -214,7 +277,7 @@ export default class RippleElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['start-radius', 'color', 'background', 'center', 'class'];
+    return ['start-radius', 'color', 'background', 'center', 'class', 'modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -224,6 +287,10 @@ export default class RippleElement extends BaseElement {
         if (!this.classList.contains(defaultClassName)) {
           this.className = defaultClassName + ' ' + current;
         }
+        break;
+
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
 
       case 'start-radius':

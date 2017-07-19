@@ -47,8 +47,19 @@ platforms.android = element => {
     element.setAttribute('modifier', newModifier.join(' ').trim());
   }
 
+  const elements = [
+    'ons-alert-dialog-button',
+    'ons-toolbar-button',
+    'ons-button',
+    'ons-list-item',
+    'ons-fab',
+    'ons-speed-dial',
+    'ons-speed-dial-item',
+    'ons-tab'
+  ];
+
   // Effects
-  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
+  if (elements.indexOf(element.tagName.toLowerCase()) !== -1
     && !element.hasAttribute('ripple')
     && !element.querySelector('ons-ripple')) {
 

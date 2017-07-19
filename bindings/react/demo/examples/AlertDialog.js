@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Page, Toolbar, Button, BackButton, AlertDialog} from 'react-onsenui';
+import {Page, Toolbar, Button, BackButton, AlertDialog, AlertDialogButton} from 'react-onsenui';
 
 export default class extends React.Component {
   constructor(props) {
@@ -42,10 +42,10 @@ export default class extends React.Component {
           <Button onClick={this.handleClick.bind(this)}>Show dialog</Button>
         </p>
 
-        <AlertDialog maskColor='blue' isOpen={this.state.isOpen} animation='default'
+        <AlertDialog modifier='rowfooter' maskColor='blue' isOpen={this.state.isOpen} animation='default'
           animationOptions={{
-            duration: 1.0,
-            delay: 0.3,
+            duration: .5,
+            delay: 0.1,
             timing: 'ease-in'
           }}
 
@@ -55,12 +55,12 @@ export default class extends React.Component {
             An error has occurred!
           </div>
           <div className="alert-dialog-footer">
-            <button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+            <AlertDialogButton onClick={this.handleCancel.bind(this)}>
               Cancel
-            </button>
-            <button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+            </AlertDialogButton>
+            <AlertDialogButton onClick={this.handleCancel.bind(this)}>
               Ok
-            </button>
+            </AlertDialogButton>
           </div>
         </AlertDialog>
       </Page>
