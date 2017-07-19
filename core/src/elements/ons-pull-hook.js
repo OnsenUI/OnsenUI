@@ -149,14 +149,18 @@ export default class PullHookElement extends BaseElement {
 
     if (!this._ignoreDrag) {
       const consume = event.consume;
-      event.consume = () => { consume && consume(); this._ignoreDrag = true; };
-      if (this._canConsumeGesture(event.gesture)) {
+      event.consume = () => {
         consume && consume();
-        event.consumed = true;
-      } else {
+        this._ignoreDrag = true;
         // This elements resizes .page__content so it is safer
         // to hide it when other components are dragged.
         this._hide();
+      };
+
+      if (this._canConsumeGesture(event.gesture)) {
+        consume && consume();
+        event.consumed = true;
+        this._show(); // Not enough due to 'dragLockAxis'
       }
     }
 
