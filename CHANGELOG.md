@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-range, ons-checkbox, ons-radio-button: Removed focus ring effect on `:focus` state from Material Design components.
+
 v2.5.0
 ----
 
