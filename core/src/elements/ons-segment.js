@@ -88,6 +88,21 @@ export default class SegmentElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
+    console.log('this.children', this.children);
+    if (this.children && this.children.length > 0) {
+      const buttonArray = util.arrayFrom(this.children);
+      if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
+        throw new Error('All elements inside <ons-segment> should be <button> elements.');
+      }
+      buttonArray.forEach(item => {
+        const segmentItem = util.create('div.segment__item');
+        segmentItem.appendChild(util.createElement(`<input type="radio" class="segment__input" name="segment-input">`));
+        item.classList.add('segment__button');
+        segmentItem.appendChild(item);
+        this.appendChild(segmentItem);
+      });
+    }
+
     ModifierUtil.initModifier(this, scheme);
   }
 
