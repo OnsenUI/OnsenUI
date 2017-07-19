@@ -9,6 +9,10 @@ dev
 
  * ons-range, ons-checkbox, ons-radio-button: Removed focus ring effect on `:focus` state from Material Design components.
 
+### Misc
+
+ * ons-back-button: Replace font icons with SVG icons from `ons-back-button` components.
+
 v2.5.0
 ----
 
