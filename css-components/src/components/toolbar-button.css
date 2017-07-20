@@ -28,7 +28,6 @@
   padding: var(--toolbar-button-padding);
   letter-spacing: var(--letter-spacing);
   color: var(--toolbar-button-color);
-  text-shadow: var(--text-shadow);
   background-color: var(--toolbar-button-background-color);
   border-radius: var(--toolbar-button-border-radius);
   border: 1px solid transparent;

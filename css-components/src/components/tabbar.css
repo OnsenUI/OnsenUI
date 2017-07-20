@@ -138,7 +138,6 @@
   height: var(--tabbar-button-line-height);
   letter-spacing: var(--letter-spacing);
   color: var(--tabbar-button-color);
-  text-shadow: var(--text-shadow);
   vertical-align: top;
   background-color: transparent;
   box-shadow: var(--box-shadow);
