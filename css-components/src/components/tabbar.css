@@ -140,7 +140,6 @@
   color: var(--tabbar-button-color);
   vertical-align: top;
   background-color: transparent;
-  box-shadow: var(--box-shadow);
   border-top: var(--tabbar-button-border);
   width: 100%;
   font-weight: var(--font-weight);
