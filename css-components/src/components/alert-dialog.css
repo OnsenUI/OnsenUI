@@ -58,7 +58,7 @@
 
 .alert-dialog-title {
   @apply(--reset-font);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   padding: 0 8px;
   text-align: center;

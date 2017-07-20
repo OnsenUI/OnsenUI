@@ -108,7 +108,7 @@
   height: 100%;
   vertical-align: top;
   line-height: var(--toolbar-height);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
 }
 
