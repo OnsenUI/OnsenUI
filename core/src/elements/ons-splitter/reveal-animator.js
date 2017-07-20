@@ -102,6 +102,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
       this._slidingElements = this._getSlidingElements();
     }
 
+    this._mask.style.display = 'block'; // Avoid content clicks
+
     animit.runAll(
       animit(this._slidingElements)
         .queue({
