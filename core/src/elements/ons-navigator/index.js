@@ -302,7 +302,7 @@ export default class NavigatorElement extends BaseElement {
         animator: new IOSSwipeNavigatorTransitionAnimator(),
         swipeMax: animator => this.swipeMax ? this.swipeMax({animator}) : this.popPage({animator}),
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
-        getAnimationElements: () => [this.lastElementChild.previousElementSibling, this.lastElementChild],
+        getAnimationElements: () => [this.topPage.previousElementSibling, this.topPage],
         ignoreSwipe: (event, distance) => {
           if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
             return true;
@@ -906,7 +906,9 @@ export default class NavigatorElement extends BaseElement {
    *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
    */
   get topPage() {
-    return this.pages[this.pages.length - 1] || null;
+    let last = this.lastElementChild;
+    while (last && last.tagName !== 'ONS-PAGE') { last = last.previousElementSibling; }
+    return last;
   }
 
   /**
