@@ -20,6 +20,8 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
+import iosBackButtonIcon from '../../images/ios-back-button-icon.svg';
+import mdBackButtonIcon from '../../images/md-back-button-icon.svg';
 
 const defaultClassName = 'back-button';
 
@@ -97,6 +99,7 @@ export default class BackButtonElement extends BaseElement {
 
     if (!util.findChild(this, '.back-button__icon')) {
       const icon = util.create('span.back-button__icon');
+      icon.innerHTML = autoStyle.switchValue(this, {ios: iosBackButtonIcon, android: mdBackButtonIcon}, iosBackButtonIcon);
 
       this.insertBefore(icon, this.children[0]);
     }
