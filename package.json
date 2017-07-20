@@ -135,7 +135,7 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
-    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
+    "@onsenui/custom-elements": "1.0.0",
     "core-js": "2.4.1"
   }
 }
