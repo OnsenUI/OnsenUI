@@ -3,6 +3,7 @@
   --textarea-border: 1px solid var(--input-border-color);
   --textarea-padding: 5px 5px 5px 5px;
   --textarea-box-shadow: none;
+  --textarea-border-radius: 4px;
 }
 
 /*~
@@ -22,7 +23,7 @@
   padding: var(--textarea-padding);
   font-size: var(--text-input-font-size);
   font-weight: var(--font-weight);
-  border-radius: var(--border-radius);
+  border-radius: var(--textarea-border-radius);
   border: var(--textarea-border);
   background-color: var(--input-bg-color);
   color: var(--textarea-color);
@@ -59,7 +60,7 @@
   padding-right: 0;
   font-size: var(--text-input-font-size);
   font-weight: var(--font-weight);
-  border-radius: var(--border-radius);
+  border-radius: var(--textarea-border-radius);
   border: none;
   background-color: transparent;
   color: var(--textarea-color);

@@ -24,9 +24,6 @@
   --box-shadow--down: none;
   --text-shadow: 0 1px none;
   --round-border: 30px;
-  --border-radius: 4px;
-  --border-radius--large: 0;
-  --border--invalid: 1px solid var(--input-invalid-border-color);
 }
 
 html {
