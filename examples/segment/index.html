@@ -8,12 +8,24 @@
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    document.addEventListener('change', function (event) {
+      console.log('change event', event);
+    });
+  </script>
 </head>
 
 <body>
   <ons-page>
     <ons-toolbar>
-      <div class="center">Segment</div>
+      <div class="center">
+        <ons-segment style="width: 280px">
+          <button class="button">Page 1</button>
+          <button class="button">Page 2</button>
+          <button class="button">Page 3</button>
+        </ons-segment>
+      </div>
     </ons-toolbar>
 
     <ons-segment style="width: 280px; margin: 10px 20px;">

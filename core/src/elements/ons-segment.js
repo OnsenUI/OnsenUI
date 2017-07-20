@@ -19,6 +19,7 @@ import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
+import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'segment';
 const scheme = {
@@ -27,6 +28,11 @@ const scheme = {
   '.segment__input': 'segment--*__input',
   '.segment__button': 'segment--*__button'
 };
+
+const generateId = (() => {
+  let i = 0;
+  return () => 'ons-segment-gen-' + (i++);
+})();
 
 /**
  * @element ons-segment
@@ -56,6 +62,22 @@ const scheme = {
 export default class SegmentElement extends BaseElement {
 
   /**
+   * @event change
+   * @description
+   *   [en]Fires when the active button is changed.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja][/ja]
+   * @param {Number} event.index
+   *   [en]Tapped button index.[/en]
+   *   [ja][/ja]
+   * @param {Object} event.segmentItem
+   *   [en]Segment item object.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -80,7 +102,11 @@ export default class SegmentElement extends BaseElement {
   constructor() {
     super();
 
-    this._compile();
+    this._segmentId = generateId();
+
+    contentReady(this, () => {
+      this._compile();
+    });
   }
 
   _compile() {
@@ -88,23 +114,35 @@ export default class SegmentElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    console.log('this.children', this.children);
     if (this.children && this.children.length > 0) {
       const buttonArray = util.arrayFrom(this.children);
       if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
         throw new Error('All elements inside <ons-segment> should be <button> elements.');
       }
-      buttonArray.forEach(item => {
+      buttonArray.forEach((item, index) => {
         const segmentItem = util.create('div.segment__item');
-        segmentItem.appendChild(util.createElement(`<input type="radio" class="segment__input" name="segment-input">`));
+        const segmentInput = index === 0
+        ? util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}" checked>`)
+        : util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}">`);
+        segmentInput.id = this._segmentId + '-' + index;
+        segmentItem.appendChild(segmentInput);
         item.classList.add('segment__button');
         segmentItem.appendChild(item);
         this.appendChild(segmentItem);
+        segmentInput.addEventListener('change', event => {
+          event.stopPropagation();
+          util.triggerElementEvent(this, 'change', {
+            index: event.target.id.slice(-1),
+            segmentItem: segmentItem
+          });
+        });
       });
     }
 
     ModifierUtil.initModifier(this, scheme);
   }
+
+  // get input
 
   static get observedAttributes() {
     return ['class', 'modifier'];
@@ -121,6 +159,17 @@ export default class SegmentElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
     }
+  }
+
+  /**
+   * @return {String}
+   */
+  getSegmentId() {
+    return this._segmentId;
+  }
+
+  static get events() {
+    return ['change'];
   }
 }
 
