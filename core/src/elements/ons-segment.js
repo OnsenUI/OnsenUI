@@ -103,6 +103,7 @@ export default class SegmentElement extends BaseElement {
     super();
 
     this._segmentId = generateId();
+    this._tabbar = null;
 
     contentReady(this, () => {
       this._compile();
@@ -117,7 +118,7 @@ export default class SegmentElement extends BaseElement {
     if (this.children && this.children.length > 0) {
       const buttonArray = util.arrayFrom(this.children);
       if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
-        throw new Error('All elements inside <ons-segment> should be <button> elements.');
+        throw new Error('<ons-segment> error: all elements inside <ons-segment> should be <button> elements.');
       }
       buttonArray.forEach((item, index) => {
         const segmentItem = util.create('div.segment__item');
@@ -129,20 +130,29 @@ export default class SegmentElement extends BaseElement {
         item.classList.add('segment__button');
         segmentItem.appendChild(item);
         this.appendChild(segmentItem);
-        segmentInput.addEventListener('change', event => {
-          event.stopPropagation();
-          util.triggerElementEvent(this, 'change', {
-            index: event.target.id.slice(-1),
-            segmentItem: segmentItem
-          });
-        });
+        segmentInput.addEventListener('change', this._onTabChange.bind(this));
       });
+    }
+
+    if (this.hasAttribute('tabbar')) {
+      this._tabbar = document.getElementById(this.getAttribute('tabbar'));
+      if (!this._tabbar) {
+        throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar')} was found.`);
+      }
+      else if (this._tabbar._getTabbarElement().children.length !== this.children.length) {
+        throw new Error(`<ons-segment> error: number of tabs must be the same as number of buttons.`);
+      }
+      else {
+        this._tabbar.setTabbarVisibility(false);
+        this._tabbar.addEventListener('postchange', event => {
+          this._getSegmentInput(event.index).checked = true;
+          this._triggerChangeEvent(event.index);
+        })
+      }
     }
 
     ModifierUtil.initModifier(this, scheme);
   }
-
-  // get input
 
   static get observedAttributes() {
     return ['class', 'modifier'];
@@ -166,6 +176,66 @@ export default class SegmentElement extends BaseElement {
    */
   getSegmentId() {
     return this._segmentId;
+  }
+
+  /**
+   * @return {Element}
+   */
+  get tabbar() {
+    return this._tabbar;
+  }
+
+  /**
+   * @method setActiveButton
+   * @signature setActiveButton(index, [options])
+   * @param {Number} index
+   *   [en]Tab index.[/en]
+   *   [ja]タブのインデックスを指定します。[/ja]
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {Boolean} [options.keepPage]
+   *   [en]If true the page will not be changed.[/en]
+   *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
+   * @param {String} [options.animation]
+   *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
+   *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @description
+   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+   *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
+   * @return {Promise}
+   *   [en]Resolves to the new page element.[/en]
+   *   [ja][/ja]
+   */
+  setActiveButton(index, options = {}) {
+    if (this._tabbar) {
+      this._tabbar.setActiveTab(index, options);
+    } else {
+      this._getSegmentInput(index).checked = true;
+      this._triggerChangeEvent(index);
+    }
+  }
+
+  _getSegmentInput(index) {
+    return this.querySelector('#' + this._segmentId + '-' + index);
+  }
+
+  _onTabChange(event) {
+    event.stopPropagation();
+    if (this._tabbar) {
+      this._tabbar.setActiveTab(event.target.id.slice(-1));
+    }
+    this._triggerChangeEvent(event.target.id.slice(-1));
+  }
+
+  _triggerChangeEvent(index) {
+    util.triggerElementEvent(this, 'change', {
+      index: index,
+      segmentItem: this.children[index]
+    });
   }
 
   static get events() {

@@ -13,6 +13,9 @@
     document.addEventListener('change', function (event) {
       console.log('change event', event);
     });
+    function changeTab() {
+      document.getElementById('tabbar').setActiveTab(1);
+    }
   </script>
 </head>
 
@@ -20,7 +23,7 @@
   <ons-page>
     <ons-toolbar>
       <div class="center">
-        <ons-segment style="width: 280px">
+        <ons-segment id="segment" tabbar="tabbar" style="width: 280px">
           <button class="button">Page 1</button>
           <button class="button">Page 2</button>
           <button class="button">Page 3</button>
@@ -65,7 +68,32 @@
         <button class="segment__button segment--material__button">Three</button>
       </div>
     </div>
+
+    <ons-tabbar id="tabbar" position="auto">
+      <ons-tab page="page1.html" active icon="ion-home" label="Home"></ons-tab>
+      <ons-tab icon="ion-chatbox-working" label="Comments" badge="99+" page="page2.html"></ons-tab>
+      <ons-tab icon="ion-ios-cog" label="Settings" page="page3.html"></ons-tab>
+    </ons-tabbar>
   </ons-page>
+
+  <template id="page1.html">
+    <ons-page>
+      <h2>Page1</h2>
+      <ons-button onclick="changeTab()">Change tab</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page2.html">
+    <ons-page>
+      <h2>Page2</h2>
+    </ons-page>
+  </template>
+
+  <template id="page3.html">
+    <ons-page>
+      <h2>Page3</h2>
+    </ons-page>
+  </template>
 </body>
 
 </html>
