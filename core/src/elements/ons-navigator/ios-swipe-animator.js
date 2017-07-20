@@ -40,6 +40,9 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
     if (this.isDragStart) {
       this.isDragStart = false;
 
+      // Avoid content clicks
+      this.unblock = super.block(leavePage);
+
       // Mask
       enterPage.parentElement.insertBefore(this.backgroundMask, enterPage);
 
@@ -157,6 +160,9 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   restore(enterPage, leavePage, callback) {
+    if (this.isDragStart) {
+      return;
+    }
 
     if (this.shouldAnimateToolbar) {
 
@@ -278,6 +284,9 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   pop(enterPage, leavePage, callback) {
+    if (this.isDragStart) {
+      return;
+    }
 
     if (this.shouldAnimateToolbar) {
 
@@ -424,7 +433,8 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
   }
 
   _reset(...args) {
-    this._restoreStyle(...args);
+    this._savedStyle && this._restoreStyle(...args);
+    this.unblock && this.unblock();
     this.swipeShadow.remove();
     this.backgroundMask.remove();
     this.overflowElement.classList.remove('overflow-visible');
