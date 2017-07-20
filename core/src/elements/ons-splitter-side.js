@@ -148,6 +148,8 @@ class CollapseMode {
 
       this._width = widthToPx(this._element._width, this._element.parentNode);
       this._startDistance = this._distance = this.isOpen() ? this._width : 0;
+
+      util.skipContentScroll(event.gesture);
     }
   }
 
