@@ -62,15 +62,13 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
         this.swipeShadow.style.top = this.decomp.leave.toolbar.offsetHeight + 'px';
         this.target.leave.appendChild(this.swipeShadow);
         this._saveStyle(this.target.enter, this.target.leave);
-        this.swipingContent = this.decomp.leave.content;
       } else {
         leavePage.appendChild(this.swipeShadow);
         this._saveStyle(enterPage, leavePage);
-        this.swipingContent = this.decomp.leave.content;
       }
       leavePage.classList.add('overflow-visible');
       this.overflowElement = leavePage;
-      this.swipingContent.classList.add('content-swiping');
+      this.decomp.leave.content.classList.add('content-swiping');
     }
 
     const swipeRatio = (distance - maxWidth) / maxWidth;
@@ -430,8 +428,8 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
     this.swipeShadow.remove();
     this.backgroundMask.remove();
     this.overflowElement.classList.remove('overflow-visible');
-    this.swipingContent.classList.remove('content-swiping');
-    this.decomp = this.target = this.overflowElement = this.swipingContent = this._savedStyle = null;
+    this.decomp.leave.content.classList.remove('content-swiping');
+    this.decomp = this.target = this.overflowElement = this._savedStyle = null;
     this.isDragStart = true;
   }
 }
