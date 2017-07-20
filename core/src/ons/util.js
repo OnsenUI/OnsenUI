@@ -463,4 +463,18 @@ util.warn = (...args) => {
   }
 };
 
+util.skipContentScroll = gesture => {
+  const clickedElement = document.elementFromPoint(gesture.center.clientX, gesture.center.clientY);
+  const content = util.findParent(clickedElement, '.page__content', e => util.match(e, '.page'));
+  if (content) {
+    const preventScroll = e => e.preventDefault();
+    content.addEventListener('touchmove', preventScroll, true);
+    const clean = e => {
+      content.removeEventListener('touchmove', preventScroll, true);
+      content.removeEventListener('touchend', clean, true);
+    };
+    content.addEventListener('touchend', clean, true);
+  }
+};
+
 export default util;

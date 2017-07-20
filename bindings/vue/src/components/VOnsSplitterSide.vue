@@ -33,7 +33,7 @@
     },
 
     mounted() {
-      this.$on(['postopen', 'postclose'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen));
+      this.$on(['postopen', 'postclose', 'modechange'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen));
 
       this.action();
     }

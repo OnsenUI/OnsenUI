@@ -122,7 +122,6 @@ export default class PullHookElement extends BaseElement {
 
     this.style.height = `${height}px`;
     this.style.lineHeight = `${height}px`;
-    this._pageElement.style.marginTop = `-${height}px`;
   }
 
   _onScroll(event) {
@@ -150,10 +149,18 @@ export default class PullHookElement extends BaseElement {
 
     if (!this._ignoreDrag) {
       const consume = event.consume;
-      event.consume = () => { consume && consume(); this._ignoreDrag = true; };
+      event.consume = () => {
+        consume && consume();
+        this._ignoreDrag = true;
+        // This elements resizes .page__content so it is safer
+        // to hide it when other components are dragged.
+        this._hide();
+      };
+
       if (this._canConsumeGesture(event.gesture)) {
         consume && consume();
         event.consumed = true;
+        this._show(); // Not enough due to 'dragLockAxis'
       }
     }
 
@@ -163,6 +170,11 @@ export default class PullHookElement extends BaseElement {
   _onDrag(event) {
     if (this.disabled || this._ignoreDrag || !this._canConsumeGesture(event.gesture)) {
       return;
+    }
+
+    // Necessary due to 'dragLockAxis' (25px)
+    if (this.style.display === 'none') {
+      this._show();
     }
 
     event.stopPropagation();
@@ -367,11 +379,17 @@ export default class PullHookElement extends BaseElement {
   }
 
   _show() {
-    this.style.visibility = '';
+    this.style.display = '';
+    if (this._pageElement) {
+      this._pageElement.style.marginTop = `-${this.height}px`;
+    }
   }
 
   _hide() {
-    this.style.visibility = 'hidden';
+    this.style.display = 'none';
+    if (this._pageElement) {
+      this._pageElement.style.marginTop = '';
+    }
   }
 
   /**
@@ -463,7 +481,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._pageElement.style.marginTop = '';
+    this._hide();
 
     this._destroyEventListeners();
   }
