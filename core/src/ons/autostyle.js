@@ -36,7 +36,9 @@ const platforms = {};
 
 platforms.android = element => {
 
-  if (!/ons-speed-dial/.test(element.tagName.toLowerCase()) &&
+  const elementName = element.tagName.toLowerCase();
+
+  if (!/ons-speed-dial/.test(elementName) &&
     !/material/.test(element.getAttribute('modifier'))) {
 
     const oldModifier = element.getAttribute('modifier') || '';
@@ -50,6 +52,7 @@ platforms.android = element => {
   const elements = [
     'ons-alert-dialog-button',
     'ons-toolbar-button',
+    'ons-back-button',
     'ons-button',
     'ons-list-item',
     'ons-fab',
@@ -58,12 +61,13 @@ platforms.android = element => {
     'ons-tab'
   ];
 
+
   // Effects
-  if (elements.indexOf(element.tagName.toLowerCase()) !== -1
+  if (elements.indexOf(elementName) !== -1
     && !element.hasAttribute('ripple')
     && !element.querySelector('ons-ripple')) {
 
-    if (element.tagName.toLowerCase() === 'ons-list-item') {
+    if (elementName === 'ons-list-item') {
       if (element.hasAttribute('tappable')) {
         element.setAttribute('ripple', '');
         element.removeAttribute('tappable');
@@ -115,9 +119,8 @@ const prepareAutoStyle = (element, force) => {
 /**
  * @param {Element} element
  * @param {Object} object
- * @param [defaultValue]
  */
-const switchValue = (element, object, defaultValue = null) => {
+const caseOf = (element, object) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     const mobileOS = onsPlatform.getMobileOS();
     if (object.hasOwnProperty(mobileOS) && unlocked.hasOwnProperty(mobileOS)) {
@@ -125,7 +128,7 @@ const switchValue = (element, object, defaultValue = null) => {
     }
   }
 
-  return defaultValue;
+  return object['default'];
 }
 
 const mapModifier = (modifier, element, force) => {
@@ -145,5 +148,5 @@ export default {
   disable: () => autoStyleEnabled = false,
   prepare: prepareAutoStyle,
   mapModifier,
-  switchValue
+  caseOf
 };
