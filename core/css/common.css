@@ -105,6 +105,12 @@ ons-bottom-toolbar {
   overflow: visible;
 }
 
+.page.overflow-visible .page__content.content-swiping,
+.page.overflow-visible .page__content.content-swiping .page,
+.page.overflow-visible .page__content.content-swiping .page__content {
+  overflow: auto;
+}
+
 .toolbar:not(.toolbar--transparent) + .page__background,
 .toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 44px;

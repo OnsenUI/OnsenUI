@@ -59,14 +59,16 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
       // Shadow && styles
       if (this.shouldAnimateToolbar) {
-        this.decomp.leave.content.appendChild(this.swipeShadow);
+        this.swipeShadow.style.top = this.decomp.leave.toolbar.offsetHeight + 'px';
+        this.target.leave.appendChild(this.swipeShadow);
         this._saveStyle(this.target.enter, this.target.leave);
       } else {
-        leavePage._contentElement.appendChild(this.swipeShadow);
+        leavePage.appendChild(this.swipeShadow);
         this._saveStyle(enterPage, leavePage);
       }
       leavePage.classList.add('overflow-visible');
       this.overflowElement = leavePage;
+      this.decomp.leave.content.classList.add('content-swiping');
     }
 
     const swipeRatio = (distance - maxWidth) / maxWidth;
@@ -102,7 +104,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         /* Leave page */
 
-        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
           .queue({
             transform: `translate3d(${distance}px, 0px, 0px)`
           }),
@@ -196,7 +198,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         /* Leave page */
 
-        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
           .queue({
             transform: `translate3d(0, 0px, 0px)`
           }, {
@@ -317,7 +319,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         /* Leave page */
 
-        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
           .queue({
             transform: `translate3d(100%, 0px, 0px)`
           }, {
@@ -426,6 +428,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
     this.swipeShadow.remove();
     this.backgroundMask.remove();
     this.overflowElement.classList.remove('overflow-visible');
+    this.decomp.leave.content.classList.remove('content-swiping');
     this.decomp = this.target = this.overflowElement = this._savedStyle = null;
     this.isDragStart = true;
   }

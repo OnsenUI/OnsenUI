@@ -34,6 +34,8 @@ export default class PushSplitterAnimator extends SplitterAnimator {
       this._slidingElements = this._getSlidingElements();
     }
 
+    this._mask.style.display = 'block'; // Avoid content clicks
+
     animit(this._slidingElements)
       .queue({
         transform: `translate3d(${this.minus + distance}px, 0px, 0px)`

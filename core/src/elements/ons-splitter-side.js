@@ -128,16 +128,15 @@ class CollapseMode {
   }
 
   _canConsumeGesture(gesture) {
-    const d = gesture.direction;
     const isOpen = this.isOpen();
-    const validDrag = this._element._side === 'left'
+    const validDrag = d => this._element._side === 'left'
       ? ((d === 'left' && isOpen) || (d === 'right' && !isOpen))
       : ((d === 'left' && !isOpen) || (d === 'right' && isOpen));
 
     const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
 
-    return validDrag && !(area && distance > area && !isOpen);
+    return (validDrag(gesture.direction) || validDrag(gesture.interimDirection)) && !(area && distance > area && !isOpen);
   }
 
   _onDragStart(event) {
@@ -149,6 +148,8 @@ class CollapseMode {
 
       this._width = widthToPx(this._element._width, this._element.parentNode);
       this._startDistance = this._distance = this.isOpen() ? this._width : 0;
+
+      util.skipContentScroll(event.gesture);
     }
   }
 
