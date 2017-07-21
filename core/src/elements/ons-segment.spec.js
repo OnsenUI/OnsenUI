@@ -36,9 +36,9 @@ describe('ons-segment', () => {
       const div2 = document.createElement('div');
       div1.innerHTML = `
         <ons-segment>
-          <ons-button>Label 1</ons-button>
-          <ons-button>Label 2</ons-button>
-          <ons-button>Label 3</ons-button>
+          <button>Label 1</button>
+          <button>Label 2</button>
+          <button>Label 3</button>
         </ons-segment>
       `;
       div2.innerHTML = div1.innerHTML;
