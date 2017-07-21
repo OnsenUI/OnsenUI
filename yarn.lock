@@ -1674,6 +1674,13 @@ clean-css@2.2.x:
   dependencies:
     commander "2.2.x"
 
+clean-css@^3.1.9:
+  version "3.4.28"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.28.tgz#bf1945e82fc808f55695e6ddeaec01400efd03ff"
+  dependencies:
+    commander "2.8.x"
+    source-map "0.4.x"
+
 cli-cursor@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"
@@ -1750,6 +1757,12 @@ commander@2.2.x:
 commander@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.3.0.tgz#fd430e889832ec353b9acd1de217c11cb3eef873"
+
+commander@2.8.x:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
+  dependencies:
+    graceful-readlink ">= 1.0.0"
 
 commander@^2.2.0, commander@^2.8.1, commander@^2.9.0:
   version "2.9.0"
@@ -2739,6 +2752,10 @@ filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
 
+filesize@~2.0.0:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-2.0.4.tgz#7805941c60fcdfe63f46d7ea358c59ade11c1325"
+
 fill-range@^2.1.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-2.2.3.tgz#50b77dfd7e469bc7492470963699fe7a8485a723"
@@ -3139,7 +3156,7 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-graceful-fs@4.X, graceful-fs@^4.1.0, graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
+graceful-fs@4.X, graceful-fs@^4.1.0, graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@~4.1.4:
   version "4.1.9"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.9.tgz#baacba37d19d11f9d146d3578bc99958c3787e29"
 
@@ -3152,6 +3169,10 @@ graceful-fs@^3.0.0, graceful-fs@~3.0.2:
 graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
+
+graceful-fs@~2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-2.0.3.tgz#7cd2cdb228a4a3f36e95efa6cc142de7d1a136d0"
 
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
@@ -3243,6 +3264,18 @@ gulp-connect@^4.1.0:
   optionalDependencies:
     http2 "^3.3.2"
 
+gulp-cssmin@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/gulp-cssmin/-/gulp-cssmin-0.2.0.tgz#87ab3c69dd39b20d5d96355c6504ad6a447b1e72"
+  dependencies:
+    clean-css "^3.1.9"
+    filesize "~2.0.0"
+    graceful-fs "~4.1.4"
+    gulp-rename "~1.1.0"
+    gulp-util "~2.2.0"
+    map-stream "0.0.4"
+    temp-write "~0.1.0"
+
 gulp-download@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/gulp-download/-/gulp-download-0.0.1.tgz#54a3018fc619b341ccf6491606f7adf0bd3c7397"
@@ -3332,6 +3365,12 @@ gulp-remember@^0.3.0:
 gulp-rename@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
+
+gulp-rename@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.1.0.tgz#93090aaaf4d386c07f20538a6888f15efba727a1"
+  dependencies:
+    map-stream ">=0.0.4"
 
 gulp-shell@^0.5.1:
   version "0.5.2"
@@ -4527,7 +4566,11 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-map-stream@^0.1.0, map-stream@~0.1.0:
+map-stream@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.0.4.tgz#5ec6de90213ef6c7b2eb9367e9ade8da4efdb68b"
+
+map-stream@>=0.0.4, map-stream@^0.1.0, map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
@@ -6111,6 +6154,12 @@ source-map@0.1.34:
   dependencies:
     amdefine ">=0.0.4"
 
+source-map@0.4.x, source-map@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
+  dependencies:
+    amdefine ">=0.0.4"
+
 source-map@0.X, source-map@^0.5.0, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1, source-map@~0.5.3:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
@@ -6118,12 +6167,6 @@ source-map@0.X, source-map@^0.5.0, source-map@^0.5.1, source-map@^0.5.3, source-
 source-map@^0.1.38:
   version "0.1.43"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.43.tgz#c24bc146ca517c1471f5dacbe2571b2b7f9e3346"
-  dependencies:
-    amdefine ">=0.0.4"
-
-source-map@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
   dependencies:
     amdefine ">=0.0.4"
 
@@ -6393,6 +6436,19 @@ tar@~2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+temp-write@~0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/temp-write/-/temp-write-0.1.1.tgz#0b6467838dd77fbf7f62a0c93da879732ffda932"
+  dependencies:
+    graceful-fs "~2.0.0"
+    tempfile "~0.1.2"
+
+tempfile@~0.1.2:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/tempfile/-/tempfile-0.1.3.tgz#7d6b710047339d39f847327a056dadf183103010"
+  dependencies:
+    uuid "~1.4.0"
 
 ternary-stream@^2.0.0:
   version "2.0.0"
@@ -6729,6 +6785,10 @@ util@0.10.3, util@^0.10.3:
 utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
+
+uuid@~1.4.0:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-1.4.2.tgz#453019f686966a6df83cdc5244e7c990ecc332fc"
 
 v8flags@^2.0.10, v8flags@^2.0.2:
   version "2.0.11"
