@@ -44,16 +44,7 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
 
     const unblock = super.block(enterPage);
 
-    const maskClear = animit(this.backgroundMask)
-      .wait(this.delay + this.duration)
-      .queue(done => {
-        this.backgroundMask.remove();
-        done();
-      });
-
     animit.runAll(
-
-      maskClear,
 
       animit(enterPage)
         .saveStyle()
@@ -73,12 +64,14 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
         })
         .restoreStyle()
         .queue(done => {
+          this.backgroundMask.remove();
           unblock();
           callback();
           done();
         }),
 
       animit(leavePage)
+        .saveStyle()
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)',
@@ -95,8 +88,8 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
           duration: this.duration,
           timing: this.timing
         })
+        .restoreStyle()
     );
-
   }
 
   /**
@@ -112,17 +105,11 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
 
     animit.runAll(
 
-      animit(this.backgroundMask)
-        .wait(this.delay + this.duration)
-        .queue(done => {
-          this.backgroundMask.remove();
-          done();
-        }),
-
       animit(enterPage)
+        .saveStyle()
         .queue({
           css: {
-            transform: 'translate3D(0, -10%, 0)',
+            transform: 'translate3D(0, -43px, 0)', // Smaller than iOS toolbar - fixes glitch
             opacity: 0.9
           },
           duration: 0
@@ -136,13 +123,16 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
           duration: this.duration,
           timing: this.timing
         })
+        .restoreStyle()
         .queue(done => {
+          this.backgroundMask.remove();
           unblock();
           callback();
           done();
         }),
 
       animit(leavePage)
+        .saveStyle()
         .queue({
           css: {
             transform: 'translate3D(0, 0, 0)'
@@ -157,7 +147,7 @@ export default class IOSLiftNavigatorTransitionAnimator extends NavigatorTransit
           duration: this.duration,
           timing: this.timing
         })
-
+        .restoreStyle()
     );
   }
 }
