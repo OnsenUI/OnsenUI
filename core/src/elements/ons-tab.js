@@ -114,7 +114,6 @@ export default class TabElement extends BaseElement {
    * @description
    *   [en]
    *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`.
-   *     If you need to use your own icon, create a CSS class with `background-image` or any CSS properties and specify the name of your CSS class here.
    *   [/en]
    *   [ja]
    *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
@@ -449,15 +448,7 @@ export default class TabElement extends BaseElement {
   }
 
   _findTabbarElement() {
-    if (this.parentNode && this.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
-      return this.parentNode;
-    }
-
-    if (this.parentNode.parentNode && this.parentNode.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
-      return this.parentNode.parentNode;
-    }
-
-    return null;
+    return util.findParent(this, 'ons-tabbar');
   }
 
   _findTabIndex() {

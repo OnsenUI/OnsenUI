@@ -2,6 +2,18 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* navigator, router-navigator: Support iOS "swipe-to-pop".
+* alert-dialog-button: Added new component.
+
+### Misc
+
+* Provide minified version.
+
 v1.4.0
 ----
 

@@ -60,7 +60,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <v-ons-select id="choose-sel" v-model="selectedModifier" @change="editSelects">
-          <option v-for="modifier in modifiers" :key="modifier" v-bind:value="modifier.value">
+          <option v-for="modifier in modifiers" :key="modifier.value" v-bind:value="modifier.value">
             {{ modifier.text }}
           </option>
         </v-ons-select>
@@ -139,7 +139,7 @@
     <br><br>
     <v-ons-list-title>v-for: {{ vForItems }}</v-ons-list-title>
     <v-ons-list>
-      <v-ons-list-item v-for="item in vForItems" :key="item">
+      <v-ons-list-item v-for="item in vForItems" :key="'test'">
         <div class="left"><v-ons-checkbox v-model="item.checked"></v-ons-checkbox></div>
         <div class="center">{{ item.checked }}</div>
       </v-ons-list-item>

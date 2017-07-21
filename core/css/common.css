@@ -28,6 +28,7 @@ ons-gesture-detector {
 
 ons-navigator,
 ons-tabbar,
+ons-splitter,
 ons-action-sheet,
 ons-dialog,
 ons-toast,
@@ -96,13 +97,36 @@ ons-bottom-toolbar {
   -ms-touch-action: pan-y;
 }
 
-.toolbar + .page__background + .page__content {
-  margin-top: -1px;
+.page.overflow-visible,
+.page.overflow-visible .page,
+.page.overflow-visible .page__content,
+.page.overflow-visible ons-navigator,
+.page.overflow-visible ons-splitter {
+  overflow: visible;
+}
+
+.page.overflow-visible .page__content.content-swiping,
+.page.overflow-visible .page__content.content-swiping .page,
+.page.overflow-visible .page__content.content-swiping .page__content {
+  overflow: auto;
+}
+
+.toolbar:not(.toolbar--transparent) + .page__background,
+.toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 44px;
 }
 
-.toolbar--material + .page__background + .page__content {
+.toolbar.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 44px;
+}
+
+.toolbar--material:not(.toolbar--transparent) + .page__background,
+.toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 56px;
+}
+
+.toolbar--material.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 56px;
 }
 
 .page[status-bar-fill] > .page__content {
@@ -146,6 +170,10 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   bottom: 44px;
 }
 
+.page__content > .list:not(.list--material):first-child {
+  margin-top: -1px; /* Avoid double border with toolbar */
+}
+
 ons-action-sheet[disabled],
 ons-dialog[disabled],
 ons-alert-dialog[disabled],
@@ -169,10 +197,6 @@ ons-pull-hook {
   margin: auto;
   text-align: center;
   z-index: 20002;
-}
-
-ons-splitter {
-  overflow: hidden;
 }
 
 ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {

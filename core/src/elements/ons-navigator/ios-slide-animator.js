@@ -25,12 +25,12 @@ import contentReady from '../../ons/content-ready';
  */
 export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
-  constructor({timing = 'ease', delay = 0, duration = 0.4} = {}) {
+  constructor({timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black; opacity: 0; z-index: 2"></div>
+        background-color: black; z-index: 2"></div>
     `);
 
   }
@@ -85,7 +85,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
     const pageRect = element.getBoundingClientRect();
     if (decomposition.backButtonLabel.classList.contains('back-button__label')) {
       const labelRect = decomposition.backButtonLabel.getBoundingClientRect();
-      title = Math.round((pageRect.width / 2) - (labelRect.width / 2) - labelRect.left);
+      title = Math.round(pageRect.width / 2 - labelRect.width / 2 - labelRect.left);
     } else {
       title = Math.round((pageRect.width / 2) * 0.6);
     }
@@ -104,7 +104,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   push(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage.nextSibling);
+    leavePage.parentNode.insertBefore(this.backgroundMask, leavePage);
 
     const unblock = super.block(enterPage);
 
@@ -116,35 +116,11 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
       const delta = this._calculateDelta(leavePage, enterPageDecomposition);
 
-      const maskClear = animit(this.backgroundMask)
-        .saveStyle()
-        .queue({
-          opacity: 0,
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0.05
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue((done) => {
-          this.backgroundMask.remove();
-          done();
-        });
-
       const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
       if (shouldAnimateToolbar) {
-        // TODO: Remove this fix
-        const enterPageToolbarHeight = enterPageDecomposition.toolbar.getBoundingClientRect().height + 'px';
-        this.backgroundMask.style.top = enterPageToolbarHeight;
 
         animit.runAll(
-
-          maskClear,
 
           animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
             .saveStyle()
@@ -181,14 +157,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             })
             .restoreStyle(),
 
-          animit(enterPageDecomposition.background)
-            .queue({
-              css: {
-                top: enterPageToolbarHeight
-              },
-              duration: 0
-            }),
-
           animit(enterPageDecomposition.toolbarCenter)
             .saveStyle()
             .queue({
@@ -202,7 +170,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
+                opacity: 1
               },
               duration: this.duration,
               timing: this.timing
@@ -213,7 +181,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .saveStyle()
             .queue({
               css: {
-                transform: 'translate3d(' + delta.title + 'px, 0, 0)',
+                transform: `translate3d(${delta.title}px, 0, 0)`,
                 opacity: 0
               },
               duration: 0
@@ -222,10 +190,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
+                opacity: 1.0,
+                transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
               },
-              duration: this.duration,
-              timing: this.timing
+              duration: this.duration
             })
             .restoreStyle(),
 
@@ -239,7 +207,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {opacity: 1},
               duration: this.duration,
-              timing: this.timing
+              timing: 'linear'
             })
             .restoreStyle(),
 
@@ -248,6 +216,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
+                opacity: 1
               },
               duration: 0
             })
@@ -255,12 +224,14 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
               },
               duration: this.duration,
               timing: this.timing
             })
             .restoreStyle()
             .queue(done => {
+              this.backgroundMask.remove();
               unblock();
               callback();
               done();
@@ -278,11 +249,11 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .wait(this.delay)
             .queue({
               css: {
-                transform: 'translate3d(-' + delta.title + 'px, 0, 0)',
+                transform: `translate3d(-${delta.title}px, 0, 0)`,
                 opacity: 0,
+                transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
               },
-              duration: this.duration,
-              timing: this.timing
+              duration: this.duration
             })
             .restoreStyle(),
 
@@ -316,7 +287,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .queue({
               css: {opacity: 0},
               duration: this.duration,
-              timing: this.timing
+              timing: 'linear'
             })
             .restoreStyle()
 
@@ -325,8 +296,6 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
       } else {
 
         animit.runAll(
-
-          maskClear,
 
           animit(enterPage)
             .saveStyle()
@@ -350,20 +319,23 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
             .saveStyle()
             .queue({
               css: {
-                transform: 'translate3D(0, 0, 0)'
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1
               },
               duration: 0
             })
             .wait(this.delay)
             .queue({
               css: {
-                transform: 'translate3D(-25%, 0px, 0px)'
+                transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
               },
               duration: this.duration,
               timing: this.timing
             })
             .restoreStyle()
             .queue(done => {
+              this.backgroundMask.remove();
               unblock();
               callback();
               done();
@@ -381,7 +353,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
    */
   pop(enterPage, leavePage, callback) {
     this.backgroundMask.remove();
-    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage.nextSibling);
+    enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 
     const unblock = super.block(enterPage);
 
@@ -392,33 +364,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
 
     const delta = this._calculateDelta(leavePage, leavePageDecomposition);
 
-    const maskClear = animit(this.backgroundMask)
-      .saveStyle()
-      .queue({
-        opacity: 0.1,
-        transform: 'translate3d(0, 0, 0)'
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue((done) => {
-        done();
-      });
-
     const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPageTarget, leavePageTarget);
 
     if (shouldAnimateToolbar) {
-      const enterPageToolbarHeight = enterPageDecomposition.toolbar.getBoundingClientRect().height + 'px';
-      this.backgroundMask.style.top = enterPageToolbarHeight;
-
       animit.runAll(
-
-        maskClear,
 
         animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
           .saveStyle()
@@ -433,7 +382,7 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {
               transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1.0
+              opacity: 1
             },
             duration: this.duration,
             timing: this.timing
@@ -453,10 +402,10 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {
               transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
+              opacity: 1.0,
+              transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
             },
-            duration: this.duration,
-            timing: this.timing
+            duration: this.duration
           })
           .restoreStyle(),
 
@@ -488,17 +437,9 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {opacity: 1},
             duration: this.duration,
-            timing: this.timing
+            timing: 'linear'
           })
           .restoreStyle(),
-
-        animit(leavePageDecomposition.background)
-          .queue({
-            css: {
-              top: enterPageToolbarHeight
-            },
-            duration: 0
-          }),
 
         animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
           .queue({
@@ -566,16 +507,14 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
           .queue({
             css: {
               transform: 'translate3d(' + delta.title + 'px, 0, 0)',
-              opacity: 0
+              opacity: 0,
+              transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
             },
-            duration: this.duration,
-            timing: this.timing
+            duration: this.duration
           })
       );
     } else {
       animit.runAll(
-
-        maskClear,
 
         animit(enterPage)
           .saveStyle()

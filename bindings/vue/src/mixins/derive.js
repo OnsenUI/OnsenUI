@@ -1,4 +1,4 @@
-import { eventToHandler, handlerToProp } from '../internal/util';
+import { capitalize, camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {
@@ -67,11 +67,22 @@ const deriveHandler = handlerName => {
 };
 
 const deriveEvents = {
+  computed: {
+    unrecognizedListeners() {
+      const element = capitalize(camelize(this.$options._componentTag.slice(6))) + 'Element';
+      return Object.keys(this.$listeners || {})
+        .filter(k => (this.$ons[element].events || []).indexOf(k) === -1)
+        .reduce((r, k) => {
+          r[k] = this.$listeners[k];
+          return r;
+        }, {});
+    }
+  },
+
   mounted() {
     this._handlers = {};
-    this._boundEvents = this.$el.constructor.events || [];
 
-    this._boundEvents.forEach(key => {
+    (this.$el.constructor.events || []).forEach(key => {
       this._handlers[eventToHandler(key)] = event => {
         // Filter events from different components with the same name
         if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
@@ -83,10 +94,10 @@ const deriveEvents = {
   },
 
   beforeDestroy() {
-    this._boundEvents.forEach(key => {
-      this.$el.removeEventListener(key, this._handlers[eventToHandler(key)]);
+    Object.keys(this._handlers).forEach(key => {
+      this.$el.removeEventListener(key, this._handlers[key]);
     });
-    this._handlers = this._boundEvents = null;
+    this._handlers = null;
   }
 };
 

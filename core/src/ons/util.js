@@ -71,13 +71,9 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (until !== undefined && until(parent)) {
+    if (!parent || parent === document || (until && until(parent))) {
       return null;
-    }
-    if (!parent || parent === document) {
-      return null;
-    }
-    if (match(parent)) {
+    } else if (match(parent)) {
       return parent;
     }
     parent = parent.parentNode;
@@ -105,12 +101,18 @@ util.isAttached = (element) => {
 util.hasAnyComponentAsParent = (element) => {
   while (element && document.documentElement !== element) {
     element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal|ons-sliding-menu|ons-split-view)/)) {
+    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal)/)) {
       return true;
     }
   }
   return false;
 };
+
+/**
+ * @param {Element} element
+ * @return {boolean}
+ */
+util.isPageControl = element => element.nodeName.match(/^ons-(navigator|splitter|tabbar|page)$/i);
 
 /**
  * @param {Element} element
@@ -168,7 +170,9 @@ util.createElement = (html) => {
     throw new Error('"html" must be one wrapper element.');
   }
 
-  return wrapper.children[0];
+  const element = wrapper.children[0];
+  wrapper.children[0].remove();
+  return element;
 };
 
 /**
@@ -354,6 +358,22 @@ util.removeModifier = (target, modifierName, options = {}) => {
   return modifiers.length !== newModifiers.length;
 };
 
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @param {Boolean} options.force Forces modifier to be added or removed.
+ * @param {Object} options.autoStyle Maps the modifierName to the corresponding styled modifier.
+ * @param {Boolean} options.forceAutoStyle Ignores platform limitation.
+ * @return {Boolean} Whether it was found or not.
+ */
+util.toggleModifier = (...args) => {
+  const options = args.length > 2 ? args[2] : {};
+  const force = typeof options === 'boolean' ? options : options.force;
+
+  const toggle = typeof force === 'boolean' ? force : !util.hasModifier(...args);
+  toggle ? util.addModifier(...args) : util.removeModifier(...args)
+};
+
 // TODO: FIX
 util.updateParentPosition = (el) => {
   if (!el._parentUpdated && el.parentElement) {
@@ -384,9 +404,10 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
- * @param {Element} hasRipple
+ * @param {boolean} hasRipple
+ * @param {Object} attrs
  */
-util.updateRipple = (target, hasRipple) => {
+util.updateRipple = (target, hasRipple, attrs = {}) => {
   if (hasRipple === undefined) {
     hasRipple = target.hasAttribute('ripple');
   }
@@ -395,7 +416,9 @@ util.updateRipple = (target, hasRipple) => {
 
   if (hasRipple) {
     if (!rippleElement) {
-      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+      const element = document.createElement('ons-ripple');
+      Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]));
+      target.insertBefore(element, target.firstChild);
     }
   } else if (rippleElement) {
     rippleElement.remove();
@@ -418,7 +441,7 @@ util.isInteger = (value) => {
 };
 
 /**
- * @return {Obejct} Deferred promise.
+ * @return {Object} Deferred promise.
  */
 util.defer = () => {
   const deferred = {};
@@ -437,6 +460,20 @@ util.defer = () => {
 util.warn = (...args) => {
   if (!internal.config.warningsDisabled) {
     console.warn(...args);
+  }
+};
+
+util.skipContentScroll = gesture => {
+  const clickedElement = document.elementFromPoint(gesture.center.clientX, gesture.center.clientY);
+  const content = util.findParent(clickedElement, '.page__content', e => util.match(e, '.page'));
+  if (content) {
+    const preventScroll = e => e.preventDefault();
+    content.addEventListener('touchmove', preventScroll, true);
+    const clean = e => {
+      content.removeEventListener('touchmove', preventScroll, true);
+      content.removeEventListener('touchend', clean, true);
+    };
+    content.addEventListener('touchend', clean, true);
   }
 };
 

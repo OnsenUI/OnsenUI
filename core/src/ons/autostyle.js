@@ -36,7 +36,9 @@ const platforms = {};
 
 platforms.android = element => {
 
-  if (!/ons-fab|ons-speed-dial/.test(element.tagName.toLowerCase()) &&
+  const elementName = element.tagName.toLowerCase();
+
+  if (!/ons-speed-dial/.test(elementName) &&
     !/material/.test(element.getAttribute('modifier'))) {
 
     const oldModifier = element.getAttribute('modifier') || '';
@@ -47,12 +49,25 @@ platforms.android = element => {
     element.setAttribute('modifier', newModifier.join(' ').trim());
   }
 
+  const elements = [
+    'ons-alert-dialog-button',
+    'ons-toolbar-button',
+    'ons-back-button',
+    'ons-button',
+    'ons-list-item',
+    'ons-fab',
+    'ons-speed-dial',
+    'ons-speed-dial-item',
+    'ons-tab'
+  ];
+
+
   // Effects
-  if (/ons-button|ons-list-item|ons-fab|ons-speed-dial|ons-tab$/.test(element.tagName.toLowerCase())
+  if (elements.indexOf(elementName) !== -1
     && !element.hasAttribute('ripple')
     && !element.querySelector('ons-ripple')) {
 
-    if (element.tagName.toLowerCase() === 'ons-list-item') {
+    if (elementName === 'ons-list-item') {
       if (element.hasAttribute('tappable')) {
         element.setAttribute('ripple', '');
         element.removeAttribute('tappable');
@@ -101,6 +116,21 @@ const prepareAutoStyle = (element, force) => {
   }
 };
 
+/**
+ * @param {Element} element
+ * @param {Object} object
+ */
+const caseOf = (element, object) => {
+  if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
+    const mobileOS = onsPlatform.getMobileOS();
+    if (object.hasOwnProperty(mobileOS) && unlocked.hasOwnProperty(mobileOS)) {
+      return object[mobileOS];
+    }
+  }
+
+  return object['default'];
+}
+
 const mapModifier = (modifier, element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     const mobileOS = onsPlatform.getMobileOS();
@@ -117,5 +147,6 @@ export default {
   enable: () => autoStyleEnabled = true,
   disable: () => autoStyleEnabled = false,
   prepare: prepareAutoStyle,
-  mapModifier
+  mapModifier,
+  caseOf
 };

@@ -205,6 +205,7 @@ class App extends React.Component {
   render() {
     return (
       <Navigator
+        swipeable={true}
         renderPage={this.renderPage}
         onPrePush={e => console.log('prepush', e)}
         onPostPush={e => console.log('postpush', e)}

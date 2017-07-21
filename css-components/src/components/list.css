@@ -889,11 +889,6 @@
   background-image: none;
 }
 
-.list-item--longdivider.list-item--chevron:before { /* FIXME */
-  border: none;
-  background-image: none;
-}
-
 /*~
   name: List title
   category: List

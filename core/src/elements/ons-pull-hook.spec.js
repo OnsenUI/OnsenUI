@@ -90,7 +90,7 @@ describe('OnsPullHookElement', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
       // Need to initiate the dragging.
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       pullHook._onDrag(event);
 
       expect(spy).to.have.been.called.with(10);
@@ -101,7 +101,7 @@ describe('OnsPullHookElement', () => {
 
       event.gesture.interimDirection = 'up';
       // Need to initiate the dragging.
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       pullHook._onDrag(event);
 
       expect(spy).to.have.been.called.with(10);
@@ -111,7 +111,7 @@ describe('OnsPullHookElement', () => {
       pullHook.setAttribute('height', 10);
       event.gesture.deltaY = 20;
 
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       pullHook._onDrag(event);
 
       expect(pullHook.getAttribute('state')).to.equal('preaction');
@@ -120,7 +120,7 @@ describe('OnsPullHookElement', () => {
     it('bounces back if pull distance is higher than threshold', () => {
       const spy = chai.spy.on(event.gesture, 'stopDetect');
 
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       event.gesture.deltaY = 200;
       pullHook._onDrag(event);
 
@@ -131,12 +131,12 @@ describe('OnsPullHookElement', () => {
   describe('#_onDragStart()', () => {
     it('does nothing if the pull hook is disabled', () => {
       pullHook.setAttribute('disabled', '');
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       expect(pullHook._startScroll).to.be.an('undefined');
     });
 
     it('saves the current scroll', () => {
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       expect(pullHook._startScroll).to.equal(0);
     });
   });
@@ -144,7 +144,7 @@ describe('OnsPullHookElement', () => {
   describe('#_onDragEnd()', () => {
     it('does nothing if the pull hook is disabled', () => {
       pullHook.setAttribute('disabled', '');
-      expect(pullHook._onDragEnd()).to.be.an('undefined');
+      expect(pullHook._onDragEnd(event)).to.be.an('undefined');
     });
 
     it('changes the state', () => {
@@ -153,9 +153,9 @@ describe('OnsPullHookElement', () => {
       pullHook.setAttribute('height', 10);
       event.gesture.deltaY = 20;
 
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       pullHook._onDrag(event);
-      pullHook._onDragEnd();
+      pullHook._onDragEnd(event);
 
       expect(spy).to.have.been.called.with('action');
     });
@@ -163,9 +163,9 @@ describe('OnsPullHookElement', () => {
     it('translates back', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
-      pullHook._onDragStart();
+      pullHook._onDragStart(event);
       pullHook._onDrag(event);
-      pullHook._onDragEnd();
+      pullHook._onDragEnd(event);
 
       expect(spy).to.have.been.called.with(0, {animate: true});
     });

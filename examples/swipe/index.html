@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swipe Party</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+
+  </script>
+
+  <style>
+    ons-carousel-item {
+      display: table;
+      text-align: center;
+      padding-top: 40px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <ons-splitter>
+    <ons-splitter-side swipeable collapse="" width="200px">
+      <ons-page>Splitter side</ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content>
+
+      <ons-navigator swipeable>
+        <ons-page>
+          Previous navigator page
+        </ons-page>
+
+        <ons-page>
+          <ons-toolbar>
+            <div class="center">Swipe Party</div>
+          </ons-toolbar>
+
+          <ons-pull-hook id="pull-hook">
+            <span>Hi!</span>
+          </ons-pull-hook>
+
+
+          <ons-carousel style="width: 100%; height: 300px" swipeable overscrollable auto-scroll auto-scroll-ratio="0.2">
+            <ons-carousel-item style="background-color: gray;">
+              <br><ons-switch></ons-switch>
+              <br><ons-range></ons-range>
+            </ons-carousel-item>
+            <ons-carousel-item style="background-color: #373B44;">
+            </ons-carousel-item>
+          </ons-carousel>
+
+          <br><ons-switch></ons-switch>
+          <br><ons-range></ons-range>
+        </ons-page>
+      </ons-navigator>
+
+
+    </ons-splitter-content>
+  </ons-splitter>
+
+
+</body>
+</html>

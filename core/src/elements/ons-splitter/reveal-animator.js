@@ -49,6 +49,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     sideElement.style.zIndex = 0;
     sideElement.style.backgroundColor = 'black';
     sideElement.style.transform = this._generateBehindPageStyle(0).container.transform;
+    sideElement.style.display = 'none';
 
     const splitter = sideElement.parentElement;
     contentReady(splitter, () => {
@@ -59,7 +60,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   }
 
   _unsetStyles(sideElement) {
-    sideElement.style.left = sideElement.style.right = sideElement.style.zIndex = sideElement.style.backgroundColor = '';
+    sideElement.style.left = sideElement.style.right = sideElement.style.zIndex = sideElement.style.backgroundColor = sideElement.style.display = '';
     if (sideElement._content) {
       sideElement._content.style.opacity = '';
     }
@@ -92,13 +93,16 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   }
 
   translate(distance) {
+    this._side.style.display = '';
+    this._side.style.zIndex = 1;
     this.maxWidth = this.maxWidth || this._getMaxWidth();
     const menuStyle = this._generateBehindPageStyle(Math.min(distance, this.maxWidth));
-    this._side.style.zIndex = 1;
 
     if (!this._slidingElements) {
       this._slidingElements = this._getSlidingElements();
     }
+
+    this._mask.style.display = 'block'; // Avoid content clicks
 
     animit.runAll(
       animit(this._slidingElements)
@@ -116,10 +120,11 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
    * @param {Function} done
    */
   open(done) {
+    this._side.style.display = '';
+    this._side.style.zIndex = 1;
     this.maxWidth = this.maxWidth || this._getMaxWidth();
     const menuStyle = this._generateBehindPageStyle(this.maxWidth);
     this._slidingElements = this._getSlidingElements();
-    this._side.style.zIndex = 1;
 
     animit.runAll(
       animit(this._slidingElements)
@@ -197,6 +202,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
         .queue(callback => {
           this._slidingElements = null;
           this._side.style.zIndex = 0;
+          this._side.style.display = 'none';
           this._side._content.style.opacity = '';
           done && done();
           callback();

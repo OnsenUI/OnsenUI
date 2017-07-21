@@ -161,6 +161,7 @@ export default class PageElement extends BaseElement {
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
+      this._backgroundElement = this._getBackgroundElement();
     });
   }
 
@@ -215,7 +216,7 @@ export default class PageElement extends BaseElement {
   }
 
   _hasAPageControlChild() {
-    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+    return util.findChild(this._contentElement, util.isPageControl);
   }
 
   /**
@@ -361,31 +362,29 @@ export default class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (util.findChild(this, '.content')) {
-      util.findChild(this, '.content').classList.add('page__content');
-    }
+    const toolbar = util.findChild(this, 'ons-toolbar');
 
-    if (util.findChild(this, '.background')) {
-      util.findChild(this, '.background').classList.add('page__background');
-    }
+    const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
+    background.classList.add('page__background');
+    this.insertBefore(background, !toolbar && this.firstChild || toolbar && toolbar.nextSibling);
 
-    if (!util.findChild(this, '.page__content')) {
-      const content = util.create('.page__content');
-
+    const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
+    content.classList.add('page__content');
+    if (!content.parentElement) {
       util.arrayFrom(this.childNodes).forEach(node => {
         if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
           content.appendChild(node);
         }
       });
-
-      const prevNode = util.findChild(this, '.page__background') || util.findChild(this, 'ons-toolbar');
-
-      this.insertBefore(content, prevNode && prevNode.nextSibling);
     }
+    this.insertBefore(content, background.nextSibling);
 
-    if (!util.findChild(this, '.page__background')) {
-      const background = util.create('.page__background');
-      this.insertBefore(background, util.findChild(this, '.page__content'));
+    // Make wrapper pages transparent for animations
+    if (!background.style.backgroundColor
+      && content.children.length === 1
+      && util.isPageControl(content.children[0])
+    ) {
+        background.style.backgroundColor = 'transparent';
     }
 
     ModifierUtil.initModifier(this, scheme);

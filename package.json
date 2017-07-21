@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -127,6 +127,7 @@
     "progress-bar-webpack-plugin": "^1.9.3",
     "protractor": "^4.0.10",
     "run-sequence": "^1.2.1",
+    "svg-inline-loader": "^0.8.0",
     "typescript": "^2.3.3",
     "wcdoc": "0.1.19",
     "wdio-jasmine-framework": "^0.2.16",
@@ -134,7 +135,7 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
-    "@webcomponents/custom-elements": "OnsenUI/custom-elements#1.0.0-rc.3+mod.20170410.1",
+    "@onsenui/custom-elements": "1.0.0",
     "core-js": "2.4.1"
   }
 }

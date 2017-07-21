@@ -1,5 +1,5 @@
 <template>
-  <ons-popover>
+  <ons-popover v-on="unrecognizedListeners">
     <slot></slot>
   </ons-popover>
 </template>

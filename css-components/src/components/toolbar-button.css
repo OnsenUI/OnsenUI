@@ -74,6 +74,7 @@
   border: none;
   border-radius: 0;
   vertical-align: initial;
+  transition: background-color 0.25s linear;
 }
 
 .toolbar-button--material:first-of-type {
@@ -86,7 +87,7 @@
 
 .toolbar-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
+  transition: background-color 0.25s linear;
 }
 
 .back-button {
@@ -95,6 +96,7 @@
   padding-left: 8px;
   color: var(--toolbar-button-color);
   background-color: var(--toolbar-button-background-color);
+  display: inline-block;
 }
 
 .back-button:active {
@@ -105,19 +107,17 @@
   display: inline-block;
   height: 100%;
   vertical-align: top;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size--large);
+  font-weight: var(--font-weight--large);
 }
 
 .back-button__icon {
-  display: inline-block;
-  height: 100%;
-  vertical-align: top;
   margin-right: 6px;
-}
-
-.back-button__icon:before {
-  font-family: 'Ionicons';
-  content: '\f3cf';
-  font-size: 32px;
+  display: inline-flex;
+  fill: var(--toolbar-button-color);
+  align-items: center;
+  height: 100%;
 }
 
 .back-button--material {
@@ -138,13 +138,13 @@
   font-size: 20px;
 }
 
-.back-button--material__icon:before {
-  font-family: 'Material-Design-Iconic-Font';
-  content: '\f2ea';
-  font-size: 26px;
+.back-button--material__icon {
+  display: inline-flex;
+  fill: var(--material-toolbar-button-color);
+  align-items: center;
+  height: 100%;
 }
 
 .back-button--material:active {
   opacity: 1;
-  background-color: var(--material-toolbar-button-active-color);
 }

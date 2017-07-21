@@ -96,7 +96,7 @@
   transition-property: all;
   transition-duration: 0.35s;
   transition-timing-function: cubic-bezier(.59, .01, .5, .99);
-  box-shadow: 0 0 0 1px #e4e4e4, 0 3px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
 }
 
 .switch--active__handle {
