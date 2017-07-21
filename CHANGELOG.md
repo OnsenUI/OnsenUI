@@ -2,18 +2,6 @@
 CHANGELOG
 ====
 
-dev
-----
-
-### Bug Fixes
-
- * ons-range, ons-checkbox, ons-radio-button: Removed focus ring effect on `:focus` state from Material Design components.
-
-### Misc
-
- * ons-back-button: Replace font icons with SVG icons from `ons-back-button` components.
- * ons-back-button: Added ripple effect for `ons-back-button` components on Material Design.
-
 v2.5.0
 ----
 
@@ -29,16 +17,16 @@ v2.5.0
  * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
  * ons-list: Fixed double top border when located right under toolbar.
  * ons-carousel: Ignores swipes that start outside carousel.
- * ons-back-button: Replace font icons with SVG icons.
  * Swipeable components: Swipe is now smoother.
  * Swipeable components: Fixed compatibility of some swipeable components.
 
 ### Misc
 
- * Added ripple effects properly on `ons-range`, `ons-checkbox`, `ons-radio-button`, `ons-toolbar-button` and `ons-alert-dialog` buttons for Material Design.
+ * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
+ * ons-back-button: Replace font icons with SVG icons.
  * Added `ons-alert-dialog-button` elements.
  * Added `size` attribute on `ons-ripple` elements.
- * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
+ * Added ripple effects properly on `ons-range`, `ons-checkbox`, `ons-radio`, `ons-toolbar-button`, `ons-back-button` and `ons-alert-dialog-button` elements for Material Design.
 
 v2.4.2
 ----
