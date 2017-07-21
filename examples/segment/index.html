@@ -14,7 +14,13 @@
       console.log('change event', event);
     });
     function changeTab() {
-      document.getElementById('tabbar').setActiveTab(1);
+      console.log('set tab', document.getElementById('tabbar').setActiveTab(1));
+    }
+    function changeButton() {
+      console.log('set button', document.getElementById('segment').setActiveButton(1));
+    }
+    function getActiveButton() {
+      console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
     }
   </script>
 </head>
@@ -23,7 +29,7 @@
   <ons-page>
     <ons-toolbar>
       <div class="center">
-        <ons-segment id="segment" tabbar="tabbar" style="width: 280px">
+        <ons-segment id="segment" tabbar="tabbar" active-button="1" style="width: 280px">
           <button class="button">Page 1</button>
           <button class="button">Page 2</button>
           <button class="button">Page 3</button>
@@ -31,43 +37,12 @@
       </div>
     </ons-toolbar>
 
+    <!-- Comment <ons-tabbar> out to test this one -->
     <ons-segment style="width: 280px; margin: 10px 20px;">
       <button class="button">Label 1</button>
       <button class="button">Label 2</button>
       <button class="button">Label 3</button>
     </ons-segment>
-
-    <br>
-
-    <div class="segment" style="width: 280px; margin: 10px 20px;">
-      <div class="segment__item">
-        <input type="radio" class="segment__input" name="segment-a" checked>
-        <button class="segment__button">One</button>
-      </div>
-      <div class="segment__item">
-        <input type="radio" class="segment__input" name="segment-a">
-        <button class="segment__button">Two</button>
-      </div>
-      <div class="segment__item">
-        <input type="radio" class="segment__input" name="segment-a">
-        <button class="segment__button">Three</button>
-      </div>
-    </div>
-
-    <div class="segment segment--material" style="width: 280px; margin: 10px 20px;">
-      <div class="segment__item segment--material__item">
-        <input type="radio" class="segment__input segment--material__input" name="segment-b" checked>
-        <button class="segment__button segment--material__button">One</button>
-      </div>
-      <div class="segment__item segment--material__item">
-        <input type="radio" class="segment__input segment--material__input" name="segment-b">
-        <button class="segment__button segment--material__button">Two</button>
-      </div>
-      <div class="segment__item segment--material__item">
-        <input type="radio" class="segment__input segment--material__input" name="segment-b">
-        <button class="segment__button segment--material__button">Three</button>
-      </div>
-    </div>
 
     <ons-tabbar id="tabbar" position="auto">
       <ons-tab page="page1.html" active icon="ion-home" label="Home"></ons-tab>
@@ -79,19 +54,23 @@
   <template id="page1.html">
     <ons-page>
       <h2>Page1</h2>
-      <ons-button onclick="changeTab()">Change tab</ons-button>
+      <ons-button onclick="changeTab()">Change tab via tabbar</ons-button>
+      <ons-button onclick="changeButton()">Change tab via segment</ons-button>
+      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page2.html">
     <ons-page>
       <h2>Page2</h2>
+      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page3.html">
     <ons-page>
       <h2>Page3</h2>
+      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
     </ons-page>
   </template>
 </body>

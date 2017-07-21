@@ -81,22 +81,27 @@ export default class SegmentElement extends BaseElement {
    * @attribute modifier
    * @type {String}
    * @description
-   *  [en]The appearance of the button.[/en]
-   *  [ja]ボタンの表現を指定します。[/ja]
-   */
-
-  /**
-   * @attribute ripple
-   * @description
-   *  [en]If this attribute is defined, the button will have a ripple effect.[/en]
+   *  [en]The appearance of the segment.[/en]
    *  [ja][/ja]
    */
 
   /**
-   * @attribute disabled
+   * @attribute tabbar
+   * @initonly
+   * @type {String}
    * @description
-   *   [en]Specify if button should be disabled.[/en]
-   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   *  [en]ID of the `<ons-tabbar>` to "connect" to the segment.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @attribute active-button
+   * @initonly
+   * @default 0
+   * @type {String}
+   * @description
+   *  [en]Index of the first active button, only works if there is no connected tabbar (in which case the active tab sets the active button).[/en]
+   *  [ja][/ja]
    */
 
   constructor() {
@@ -120,11 +125,14 @@ export default class SegmentElement extends BaseElement {
       if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
         throw new Error('<ons-segment> error: all elements inside <ons-segment> should be <button> elements.');
       }
+      const activeButtonIndex = parseInt(this.getAttribute('active-button')) < buttonArray.length && !this.hasAttribute('tabbar')
+        ? parseInt(this.getAttribute('active-button'))
+        : 0;
       buttonArray.forEach((item, index) => {
         const segmentItem = util.create('div.segment__item');
-        const segmentInput = index === 0
-        ? util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}" checked>`)
-        : util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}">`);
+        const segmentInput = index === activeButtonIndex
+          ? util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}" checked>`)
+          : util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}">`);
         segmentInput.id = this._segmentId + '-' + index;
         segmentItem.appendChild(segmentInput);
         item.classList.add('segment__button');
@@ -179,7 +187,13 @@ export default class SegmentElement extends BaseElement {
   }
 
   /**
-   * @return {Element}
+   * @property tabbar
+   * @readonly
+   * @default null
+   * @type {Element}
+   * @description
+   *   [en]<ons-tabbar> element connected to the <ons-segment>.[/en]
+   *   [ja]タブバーが見える場合に`true`。[/ja]
    */
   get tabbar() {
     return this._tabbar;
@@ -189,14 +203,14 @@ export default class SegmentElement extends BaseElement {
    * @method setActiveButton
    * @signature setActiveButton(index, [options])
    * @param {Number} index
-   *   [en]Tab index.[/en]
-   *   [ja]タブのインデックスを指定します。[/ja]
+   *   [en]Button index.[/en]
+   *   [ja][/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
-   *   [ja]オプションを指定するオブジェクト。[/ja]
+   *   [ja][/ja]
    * @param {Boolean} [options.keepPage]
-   *   [en]If true the page will not be changed.[/en]
-   *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
+   *   [en]If true the button will not be changed.[/en]
+   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
    *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
@@ -204,19 +218,39 @@ export default class SegmentElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
-   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
-   *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
+   *   [en]Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and other options can be specified by the second parameter.[/en]
+   *   [ja][/ja]
    * @return {Promise}
-   *   [en]Resolves to the new page element.[/en]
+   *   [en]Resolves to the selected index or to the new page element if there is a connected tabbar.[/en]
    *   [ja][/ja]
    */
   setActiveButton(index, options = {}) {
     if (this._tabbar) {
-      this._tabbar.setActiveTab(index, options);
+      return this._tabbar.setActiveTab(index, options);
     } else {
       this._getSegmentInput(index).checked = true;
       this._triggerChangeEvent(index);
+      return Promise.resolve(index);
     }
+  }
+
+  /**
+   * @method getActiveButtonIndex
+   * @signature getActiveButtonIndex()
+   * @return {Number}
+   *   [en]The index of the currently active button.[/en]
+   *   [ja][/ja]
+   * @description
+   *   [en]Returns button index of current active button. If active button is not found, returns -1.[/en]
+   *   [ja][/ja]
+   */
+  getActiveButtonIndex() {
+    for (var i = 0; i < this.children.length; i++) {
+      if (this._getSegmentInput(i) && this._getSegmentInput(i).checked) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   _getSegmentInput(index) {
