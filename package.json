@@ -94,6 +94,7 @@
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^4.1.0",
+    "gulp-cssmin": "^0.2.0",
     "gulp-download": "0.0.1",
     "gulp-eslint": "^2.0.0",
     "gulp-header": "^1.7.1",

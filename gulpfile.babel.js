@@ -620,6 +620,11 @@ gulp.task('prepare', ['html2js'], () =>  {
       }))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
+      // onsenui.min.css
+      .pipe($.cssmin())
+      .pipe($.rename({suffix: '.min'}))
+      .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // ES Modules (raw ES source codes)

@@ -22,6 +22,7 @@ v2.5.0
 
 ### Misc
 
+ * core css: Add minimized core css file `build/css/onsenui.min.css`.
  * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
  * ons-back-button: Replace font icons with SVG icons.
  * Added `ons-alert-dialog-button` elements.
