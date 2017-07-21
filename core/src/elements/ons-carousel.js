@@ -291,6 +291,7 @@ export default class CarouselElement extends BaseElement {
   /**
    * @attribute initial-index
    * @initonly
+   * @default 0
    * @type {Number}
    * @description
    *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]

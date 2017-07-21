@@ -98,7 +98,7 @@ export default class SegmentElement extends BaseElement {
    * @attribute active-button
    * @initonly
    * @default 0
-   * @type {String}
+   * @type {Number}
    * @description
    *  [en]Index of the first active button, only works if there is no connected tabbar (in which case the active tab sets the active button).[/en]
    *  [ja][/ja]
@@ -206,7 +206,7 @@ export default class SegmentElement extends BaseElement {
    *   [en]Button index.[/en]
    *   [ja][/ja]
    * @param {Object} [options]
-   *   [en]Parameter object.[/en]
+   *   [en]Parameter object, works only if there is no connected tabbar.[/en]
    *   [ja][/ja]
    * @param {Boolean} [options.keepPage]
    *   [en]If true the button will not be changed.[/en]
