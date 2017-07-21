@@ -2,6 +2,18 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-range, ons-checkbox, ons-radio-button: Removed focus ring effect on `:focus` state from Material Design components.
+
+### Misc
+
+ * ons-back-button: Replace font icons with SVG icons from `ons-back-button` components.
+ * ons-back-button: Added ripple effect for `ons-back-button` components on Material Design.
+
 v2.5.0
 ----
 

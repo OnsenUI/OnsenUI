@@ -99,10 +99,16 @@ export default class BackButtonElement extends BaseElement {
 
     if (!util.findChild(this, '.back-button__icon')) {
       const icon = util.create('span.back-button__icon');
-      icon.innerHTML = autoStyle.switchValue(this, {ios: iosBackButtonIcon, android: mdBackButtonIcon}, iosBackButtonIcon);
+      icon.innerHTML = autoStyle.caseOf(this, {
+        ios: iosBackButtonIcon,
+        android: mdBackButtonIcon,
+        default: iosBackButtonIcon
+      });
 
       this.insertBefore(icon, this.children[0]);
     }
+
+    util.updateRipple(this, undefined, {center: '', 'size': 'contain', 'background': 'transparent'});
 
     ModifierUtil.initModifier(this, scheme);
   }
