@@ -7,15 +7,15 @@
  * @type {Boolean}
  * @description
  *   [en]If exists, the menu will be opened accordingly. Must be modified on `update:open` event.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  */
 
 /**
  * @event update:open
  * @description
  *   [en]Fired right after user interaction. Useful to update `open` prop.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  * @param {Number} event
  *   [en]New value for `open` prop.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  */
