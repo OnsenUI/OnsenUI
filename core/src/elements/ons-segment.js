@@ -153,6 +153,7 @@ export default class SegmentElement extends BaseElement {
       else {
         this._tabbar.setTabbarVisibility(false);
         this._tabbar.addEventListener('postchange', event => {
+          this._tabbar.setTabbarVisibility(false);
           this._getSegmentInput(event.index).checked = true;
           this._triggerChangeEvent(event.index);
         })
