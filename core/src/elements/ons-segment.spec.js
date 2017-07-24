@@ -29,21 +29,4 @@ describe('ons-segment', () => {
     expect(element.classList.contains('segment--piyo')).to.be.true;
     expect(element.classList.contains('segment--fuga')).to.be.true;
   });
-
-  describe('#_compile()', () => {
-    it('does not compile twice', () => {
-      const div1 = document.createElement('div');
-      const div2 = document.createElement('div');
-      div1.innerHTML = `
-        <ons-segment>
-          <button>Label 1</button>
-          <button>Label 2</button>
-          <button>Label 3</button>
-        </ons-segment>
-      `;
-      div2.innerHTML = div1.innerHTML;
-      expect(div1.isEqualNode(div2)).to.be.true;
-    });
-  });
 });
-
