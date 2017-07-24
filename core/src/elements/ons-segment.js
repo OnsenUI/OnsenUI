@@ -62,9 +62,9 @@ const generateId = (() => {
 export default class SegmentElement extends BaseElement {
 
   /**
-   * @event change
+   * @event postchange
    * @description
-   *   [en]Fires when the active button is changed.[/en]
+   *   [en]Fires after the active button is changed.[/en]
    *   [ja][/ja]
    * @param {Object} event
    *   [en]Event object.[/en]
@@ -86,7 +86,7 @@ export default class SegmentElement extends BaseElement {
    */
 
   /**
-   * @attribute tabbar
+   * @attribute tabbar-id
    * @initonly
    * @type {String}
    * @description
@@ -95,7 +95,7 @@ export default class SegmentElement extends BaseElement {
    */
 
   /**
-   * @attribute active-button
+   * @attribute active-index
    * @initonly
    * @default 0
    * @type {Number}
@@ -125,8 +125,8 @@ export default class SegmentElement extends BaseElement {
       if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
         throw new Error('<ons-segment> error: all elements inside <ons-segment> should be <button> elements.');
       }
-      const activeButtonIndex = parseInt(this.getAttribute('active-button')) < buttonArray.length && !this.hasAttribute('tabbar')
-        ? parseInt(this.getAttribute('active-button'))
+      const activeButtonIndex = parseInt(this.getAttribute('active-index')) < buttonArray.length && !this.hasAttribute('tabbar-id')
+        ? parseInt(this.getAttribute('active-index'))
         : 0;
       buttonArray.forEach((item, index) => {
         const segmentItem = util.create('div.segment__item');
@@ -138,14 +138,14 @@ export default class SegmentElement extends BaseElement {
         item.classList.add('segment__button');
         segmentItem.appendChild(item);
         this.appendChild(segmentItem);
-        segmentInput.addEventListener('change', this._onTabChange.bind(this));
+        segmentInput.addEventListener('postchange', this._onTabChange.bind(this));
       });
     }
 
-    if (this.hasAttribute('tabbar')) {
-      this._tabbar = document.getElementById(this.getAttribute('tabbar'));
+    if (this.hasAttribute('tabbar-id')) {
+      this._tabbar = document.getElementById(this.getAttribute('tabbar-id'));
       if (!this._tabbar) {
-        throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar')} was found.`);
+        throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
       }
       else if (this._tabbar._getTabbarElement().children.length !== this.children.length) {
         throw new Error(`<ons-segment> error: number of tabs must be the same as number of buttons.`);
@@ -153,7 +153,7 @@ export default class SegmentElement extends BaseElement {
       else {
         this._tabbar.setTabbarVisibility(false);
         this._tabbar.addEventListener('postchange', event => {
-          this._tabbar.setTabbarVisibility(false);
+          // this._tabbar.setTabbarVisibility(false);
           this._getSegmentInput(event.index).checked = true;
           this._triggerChangeEvent(event.index);
         })
@@ -267,14 +267,14 @@ export default class SegmentElement extends BaseElement {
   }
 
   _triggerChangeEvent(index) {
-    util.triggerElementEvent(this, 'change', {
+    util.triggerElementEvent(this, 'postchange', {
       index: index,
       segmentItem: this.children[index]
     });
   }
 
   static get events() {
-    return ['change'];
+    return ['postchange'];
   }
 }
 

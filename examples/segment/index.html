@@ -10,8 +10,8 @@
   <script src="../../build/js/onsenui.js"></script>
 
   <script>
-    document.addEventListener('change', function (event) {
-      console.log('change event', event);
+    document.addEventListener('postchange', function (event) {
+      console.log('postchange event', event);
     });
     function changeTab() {
       console.log('set tab', document.getElementById('tabbar').setActiveTab(1));
@@ -29,7 +29,7 @@
   <ons-page>
     <ons-toolbar>
       <div class="center">
-        <ons-segment id="segment" tabbar="tabbar" active-button="1" style="width: 280px">
+        <ons-segment id="segment" tabbar-id="tabbar" style="width: 280px">
           <button class="button">Page 1</button>
           <button class="button">Page 2</button>
           <button class="button">Page 3</button>
@@ -38,7 +38,7 @@
     </ons-toolbar>
 
     <!-- Comment <ons-tabbar> out to test this one -->
-    <ons-segment style="width: 280px; margin: 10px 20px;">
+    <ons-segment active-index="1" style="width: 280px; margin: 10px 20px;">
       <button class="button">Label 1</button>
       <button class="button">Label 2</button>
       <button class="button">Label 3</button>
