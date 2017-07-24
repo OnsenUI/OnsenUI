@@ -9,6 +9,7 @@ dev
 
  * onsenui.min.css: Restore 'import' statements.
  * ons-navigator: Swipe-to-pop animation glitch.
+ * ons-range: Fixed ripple effect when `min` attr is provided.
 
 v2.5.0
 ----

@@ -82,6 +82,12 @@ export default class RangeElement extends BaseInputElement {
     } else {
       input.removeAttribute('_zero');
     }
+
+    ['min', 'max'].forEach(attr => {
+      if (this.hasAttribute(attr)) {
+        this._focusRing[attr] = this.getAttribute(attr);
+      }
+    });
   }
 
   get _scheme() {
