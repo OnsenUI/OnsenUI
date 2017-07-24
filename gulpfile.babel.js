@@ -601,7 +601,6 @@ gulp.task('prepare', ['html2js'], () =>  {
     ])
       .pipe(gulp.dest('build/css-components-src/')),
 
-
     // onsenui.css
     gulp.src([
       'core/css/common.css',
@@ -622,7 +621,7 @@ gulp.task('prepare', ['html2js'], () =>  {
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       // onsenui.min.css
-      .pipe($.cssmin())
+      .pipe($.cssmin({processImport: false}))
       .pipe($.rename({suffix: '.min'}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
