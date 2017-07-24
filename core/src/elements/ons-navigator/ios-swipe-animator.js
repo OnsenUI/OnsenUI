@@ -36,42 +36,47 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
     this.isDragStart = true;
   }
 
+  _dragStartSetup(enterPage, leavePage) {
+    this.isDragStart = false;
+
+    // Avoid content clicks
+    this.unblock = super.block(leavePage);
+
+    // Mask
+    enterPage.parentElement.insertBefore(this.backgroundMask, enterPage);
+
+    // Decomposition
+    this.target = {
+      enter: util.findToolbarPage(enterPage) || enterPage,
+      leave: util.findToolbarPage(leavePage) || leavePage,
+    };
+    this.decomp = {
+      enter: this._decompose(this.target.enter),
+      leave: this._decompose(this.target.leave)
+    };
+
+    // Animation values
+    this.delta = this._calculateDelta(leavePage, this.decomp.leave);
+    this.shouldAnimateToolbar = this._shouldAnimateToolbar(this.target.enter, this.target.leave);
+
+    // Shadow && styles
+    if (this.shouldAnimateToolbar) {
+      this.swipeShadow.style.top = this.decomp.leave.toolbar.offsetHeight + 'px';
+      this.target.leave.appendChild(this.swipeShadow);
+      this._saveStyle(this.target.enter, this.target.leave);
+    } else {
+      leavePage.appendChild(this.swipeShadow);
+      this._saveStyle(enterPage, leavePage);
+    }
+    leavePage.classList.add('overflow-visible');
+    this.overflowElement = leavePage;
+    this.decomp.leave.content.classList.add('content-swiping');
+
+  }
+
   translate(distance, maxWidth, enterPage, leavePage) {
     if (this.isDragStart) {
-      this.isDragStart = false;
-
-      // Avoid content clicks
-      this.unblock = super.block(leavePage);
-
-      // Mask
-      enterPage.parentElement.insertBefore(this.backgroundMask, enterPage);
-
-      // Decomposition
-      this.target = {
-        enter: util.findToolbarPage(enterPage) || enterPage,
-        leave: util.findToolbarPage(leavePage) || leavePage,
-      };
-      this.decomp = {
-        enter: this._decompose(this.target.enter),
-        leave: this._decompose(this.target.leave)
-      };
-
-      // Animation values
-      this.delta = this._calculateDelta(leavePage, this.decomp.leave);
-      this.shouldAnimateToolbar = this._shouldAnimateToolbar(this.target.enter, this.target.leave);
-
-      // Shadow && styles
-      if (this.shouldAnimateToolbar) {
-        this.swipeShadow.style.top = this.decomp.leave.toolbar.offsetHeight + 'px';
-        this.target.leave.appendChild(this.swipeShadow);
-        this._saveStyle(this.target.enter, this.target.leave);
-      } else {
-        leavePage.appendChild(this.swipeShadow);
-        this._saveStyle(enterPage, leavePage);
-      }
-      leavePage.classList.add('overflow-visible');
-      this.overflowElement = leavePage;
-      this.decomp.leave.content.classList.add('content-swiping');
+      this._dragStartSetup(enterPage, leavePage);
     }
 
     const swipeRatio = (distance - maxWidth) / maxWidth;
