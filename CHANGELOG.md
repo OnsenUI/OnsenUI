@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+v2.5.1
 ----
 
 ### Bug Fixes
