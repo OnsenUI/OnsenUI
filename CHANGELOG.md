@@ -7,20 +7,34 @@ dev
 
 ### New Features
 
+ * core: Added `ons-segment` element.
+
+v2.5.0
+----
+
+### New Features
+
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
+ * ons-navigator: iOS Swipe-to-pop feature.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
- * ons-navigator: iOS Swipe-to-pop.
+ * ons-toolbar: New `cover-content` modifier. Should be combined with `transparent` modifier.
 
 ### Bug Fixes
 
  * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
  * ons-list: Fixed double top border when located right under toolbar.
+ * ons-carousel: Ignores swipes that start outside carousel.
  * Swipeable components: Swipe is now smoother.
  * Swipeable components: Fixed compatibility of some swipeable components.
 
 ### Misc
 
+ * core css: Add minimized core css file `build/css/onsenui.min.css`.
  * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
+ * ons-back-button: Replace font icons with SVG icons.
+ * Added `ons-alert-dialog-button` elements.
+ * Added `size` attribute on `ons-ripple` elements.
+ * Added ripple effects properly on `ons-range`, `ons-checkbox`, `ons-radio`, `ons-toolbar-button`, `ons-back-button` and `ons-alert-dialog-button` elements for Material Design.
 
 v2.4.2
 ----
