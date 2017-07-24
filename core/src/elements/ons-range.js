@@ -66,15 +66,12 @@ export default class RangeElement extends BaseInputElement {
 
   /* Inherited props */
 
-  get _focusRing() {
-    return this.children[1];
-  }
-
   _update() {
     const input = this._input;
+    const focusRing = this._focusRing;
 
     input.style.backgroundSize = `${100 * this._ratio}% 2px`;
-    this._focusRing.value = this.value;
+    focusRing.value = this.value;
 
     // NOTE: "_zero" attribute is used for CSS styling.
     if ((input.min === '' && input.value === '0') || input.min === input.value) {
@@ -83,11 +80,7 @@ export default class RangeElement extends BaseInputElement {
       input.removeAttribute('_zero');
     }
 
-    ['min', 'max'].forEach(attr => {
-      if (this.hasAttribute(attr)) {
-        this._focusRing[attr] = this.getAttribute(attr);
-      }
-    });
+    ['min', 'max'].forEach(attr => focusRing[attr] = input[attr]);
   }
 
   get _scheme() {
@@ -142,6 +135,10 @@ export default class RangeElement extends BaseInputElement {
   _onDragend(e) {
     this._input.classList.remove(activeClassToken);
     this.removeEventListener('drag', this._onDrag);
+  }
+
+  get _focusRing() {
+    return this.children[1];
   }
 
   get _ratio() {
