@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * onsenui.min.css: Restore 'import' statements.
+ * ons-navigator: Swipe-to-pop animation glitch.
+
 v2.5.0
 ----
 

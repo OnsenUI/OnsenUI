@@ -76,6 +76,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
   translate(distance, maxWidth, enterPage, leavePage) {
     if (this.isDragStart) {
+      this.maxWidth = maxWidth;
       this._dragStartSetup(enterPage, leavePage);
     }
 
@@ -333,7 +334,7 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         /* Leave page */
 
-        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
+        animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
           .queue({
             transform: `translate3d(100%, 0px, 0px)`
           }, {
@@ -369,7 +370,8 @@ export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigat
 
         animit(this.swipeShadow)
           .queue({
-            opacity: 0
+            opacity: 0,
+            transform: `translate3d(${this.maxWidth}px, 0px, 0px)`
           }, {
             timing: this.timing,
             duration: this.duration
