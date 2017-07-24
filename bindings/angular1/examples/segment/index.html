@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Segment | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css" />
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap()
+      .controller('PageController', function ($scope) {
+        $scope.changeTab = function () {
+          console.log('set tab', document.getElementById('tabbar').setActiveTab(1));
+        };
+        $scope.changeButton = function () {
+          console.log('set button', document.getElementById('segment').setActiveButton(1));
+        };
+        $scope.getActiveButton = function () {
+          console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
+        };
+      });
+    document.addEventListener('change', function (event) {
+      console.log('change event', event);
+    });
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="PageController">
+    <ons-toolbar>
+      <div class="center">
+        <ons-segment id="segment" tabbar="tabbar" active-button="1" style="width: 280px">
+          <button class="button">Page 1</button>
+          <button class="button">Page 2</button>
+          <button class="button">Page 3</button>
+        </ons-segment>
+      </div>
+    </ons-toolbar>
+
+    <!-- Comment <ons-tabbar> out to test this one -->
+    <ons-segment style="width: 280px; margin: 10px 20px;">
+      <button class="button">Label 1</button>
+      <button class="button">Label 2</button>
+      <button class="button">Label 3</button>
+    </ons-segment>
+
+    <ons-tabbar id="tabbar" position="auto">
+      <ons-tab page="page1.html" active icon="ion-home" label="Home"></ons-tab>
+      <ons-tab icon="ion-chatbox-working" label="Comments" badge="99+" page="page2.html"></ons-tab>
+      <ons-tab icon="ion-ios-cog" label="Settings" page="page3.html"></ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <template id="page1.html">
+    <ons-page>
+      <h2>Page1</h2>
+      <ons-button ng-click="changeTab()">Change tab via tabbar</ons-button>
+      <ons-button ng-click="changeButton()">Change tab via segment</ons-button>
+      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page2.html">
+    <ons-page>
+      <h2>Page2</h2>
+      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page3.html">
+    <ons-page>
+      <h2>Page3</h2>
+      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+</body>
+
+</html>
