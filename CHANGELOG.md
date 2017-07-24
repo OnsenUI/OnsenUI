@@ -8,6 +8,7 @@ dev
 ### New Features
 
  * core: Added `ons-segment` element.
+ * angular1: Added `ons-segment` bindings.
 
 v2.5.0
 ----
