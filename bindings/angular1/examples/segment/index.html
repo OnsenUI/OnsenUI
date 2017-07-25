@@ -15,10 +15,10 @@
     ons.bootstrap()
       .controller('PageController', function ($scope) {
         $scope.changeTab = function () {
-          console.log('set tab', document.getElementById('tabbar').setActiveTab(1));
+          document.getElementById('tabbar').setActiveTab(1);
         };
         $scope.changeButton = function () {
-          console.log('set button', document.getElementById('segment').setActiveButton(1));
+          document.getElementById('segment').setActiveButton(1);
         };
         $scope.getActiveButton = function () {
           console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
@@ -36,24 +36,24 @@
     <ons-toolbar>
       <div class="center">
         <ons-segment id="segment" tabbar-id="tabbar" style="width: 280px">
-          <button class="button">Page 1</button>
-          <button class="button">Page 2</button>
-          <button class="button">Page 3</button>
+          <button>Page 1</button>
+          <button>Page 2</button>
+          <button>Page 3</button>
         </ons-segment>
       </div>
     </ons-toolbar>
 
     <!-- Comment <ons-tabbar> out to test this one -->
     <ons-segment active-index="1" style="width: 280px; margin: 10px 20px;">
-      <button class="button">Label 1</button>
-      <button class="button">Label 2</button>
-      <button class="button">Label 3</button>
+      <button>Label 1</button>
+      <button>Label 2</button>
+      <button>Label 3</button>
     </ons-segment>
 
     <ons-tabbar id="tabbar" position="auto">
-      <ons-tab page="page1.html" active icon="ion-home" label="Home"></ons-tab>
-      <ons-tab icon="ion-chatbox-working" label="Comments" badge="99+" page="page2.html"></ons-tab>
-      <ons-tab icon="ion-ios-cog" label="Settings" page="page3.html"></ons-tab>
+      <ons-tab page="page1.html" active></ons-tab>
+      <ons-tab page="page2.html"></ons-tab>
+      <ons-tab page="page3.html"></ons-tab>
     </ons-tabbar>
   </ons-page>
 

@@ -138,7 +138,7 @@ export default class SegmentElement extends BaseElement {
         item.classList.add('segment__button');
         segmentItem.appendChild(item);
         this.appendChild(segmentItem);
-        segmentInput.addEventListener('postchange', this._onTabChange.bind(this));
+        segmentInput.addEventListener('change', this._onTabChange.bind(this));
       });
     }
 
@@ -153,9 +153,9 @@ export default class SegmentElement extends BaseElement {
       else {
         this._tabbar.setTabbarVisibility(false);
         this._tabbar.addEventListener('postchange', event => {
-          // this._tabbar.setTabbarVisibility(false);
+          this._tabbar.setTabbarVisibility(false);
           this._getSegmentInput(event.index).checked = true;
-          this._triggerChangeEvent(event.index);
+          this._triggerPostChangeEvent(event.index);
         })
       }
     }
@@ -209,9 +209,6 @@ export default class SegmentElement extends BaseElement {
    * @param {Object} [options]
    *   [en]Parameter object, works only if there is no connected tabbar.[/en]
    *   [ja][/ja]
-   * @param {Boolean} [options.keepPage]
-   *   [en]If true the button will not be changed.[/en]
-   *   [ja][/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
    *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
@@ -219,7 +216,7 @@ export default class SegmentElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
-   *   [en]Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and other options can be specified by the second parameter.[/en]
+   *   [en]Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and their options can be specified by the second parameter.[/en]
    *   [ja][/ja]
    * @return {Promise}
    *   [en]Resolves to the selected index or to the new page element if there is a connected tabbar.[/en]
@@ -230,7 +227,7 @@ export default class SegmentElement extends BaseElement {
       return this._tabbar.setActiveTab(index, options);
     } else {
       this._getSegmentInput(index).checked = true;
-      this._triggerChangeEvent(index);
+      this._triggerPostChangeEvent(index);
       return Promise.resolve(index);
     }
   }
@@ -261,14 +258,14 @@ export default class SegmentElement extends BaseElement {
   _onTabChange(event) {
     event.stopPropagation();
     if (this._tabbar) {
-      this._tabbar.setActiveTab(event.target.id.slice(-1));
+      this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)));
     }
-    this._triggerChangeEvent(event.target.id.slice(-1));
+    this._triggerPostChangeEvent(event.target.id.slice(-1));
   }
 
-  _triggerChangeEvent(index) {
+  _triggerPostChangeEvent(index) {
     util.triggerElementEvent(this, 'postchange', {
-      index: index,
+      index: parseInt(index),
       segmentItem: this.children[index]
     });
   }

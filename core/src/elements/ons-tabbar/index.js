@@ -348,9 +348,6 @@ export default class TabbarElement extends BaseElement {
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
-   * @param {Boolean} [options.keepPage]
-   *   [en]If true the page will not be changed.[/en]
-   *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
    * @param {String} [options.animation]
    *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
    *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
@@ -358,7 +355,7 @@ export default class TabbarElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
-   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+   *   [en]Show specified tab page. Animations and their options can be specified by the second parameter.[/en]
    *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the new page element.[/en]

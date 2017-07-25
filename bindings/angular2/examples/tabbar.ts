@@ -1,7 +1,6 @@
 import {
   Component,
   ViewChild,
-  OnsTab,
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA

@@ -147,7 +147,7 @@ Tabbar.propTypes = {
    * @type object
    * @required false
    * @description
-   *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *  [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,

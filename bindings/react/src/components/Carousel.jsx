@@ -86,7 +86,7 @@ class Carousel extends SimpleWrapper {
   render() {
     const {...others} = this.props;
 
-    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach((el) => {
+    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable'].forEach((el) => {
       Util.convert(others, el);
     });
 

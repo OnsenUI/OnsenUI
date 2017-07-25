@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+* segment: Added new component.
+
 ### Misc
 
 * Provide minified version.
