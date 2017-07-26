@@ -19,7 +19,7 @@ class TabPage extends React.Component {
         {this.props.active
           ? <h2>{this.props.title}</h2>
           : null}
-        <Button onClick={this.props.getActiveButton}>Log current button index</Button>
+        <Button onClick={this.props.logIndexes}>Log current button index</Button>
       </Page>
     );
   }
@@ -34,7 +34,7 @@ class HomePage extends React.Component {
           : null}
         <Button onClick={this.props.changeTab}>Chang tab via tabbar</Button>
         <Button onClick={this.props.changeButton}>Change tab via segment</Button>
-        <Button onClick={this.props.getActiveButton}>Log current button index</Button>
+        <Button onClick={this.props.logIndexes}>Log current button index</Button>
       </Page>
     );
   }
@@ -55,17 +55,17 @@ export default class extends React.Component {
       {
         content: <HomePage key="page1" changeTab={() => { this.setState({ tabbarIndex: 1 }); }}
           changeButton={() => { this.setState({ segmentIndex: 1 }); }}
-          getActiveButton={() => { console.log('active button index', activeIndex) }}
+          logIndexes={() => { console.log('active button index', activeIndex); console.log('active tab index', this.state.tabbarIndex) }}
           title="Page1" active={activeIndex == 0} tabbar={tabbar} />,
         tab: <Tab key="page1" />
       },
       {
-        content: <TabPage key="page2" getActiveButton={() => { console.log('active button index', activeIndex) }}
+        content: <TabPage key="page2" logIndexes={() => { console.log('active button index', activeIndex); console.log('active tab index', this.state.tabbarIndex) }}
           title="Page2" active={activeIndex == 1} tabbar={tabbar} />,
         tab: <Tab key="page2" />
       },
       {
-        content: <TabPage key="page3" getActiveButton={() => { console.log('active button index', activeIndex) }}
+        content: <TabPage key="page3" logIndexes={() => { console.log('active button index', activeIndex); console.log('active tab index', this.state.tabbarIndex) }}
           title="Page3" active={activeIndex == 2} tabbar={tabbar} />,
         tab: <Tab key="page3" />
       }

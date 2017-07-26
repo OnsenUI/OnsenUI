@@ -20,8 +20,9 @@
         $scope.changeButton = function () {
           document.getElementById('segment').setActiveButton(1);
         };
-        $scope.getActiveButton = function () {
+        $scope.logIndexes = function () {
           console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
+          console.log('active tab index', document.getElementById('tabbar').getActiveTabIndex());
         };
       });
     document.addEventListener('postchange', function (event) {
@@ -62,21 +63,21 @@
       <h2>Page1</h2>
       <ons-button ng-click="changeTab()">Change tab via tabbar</ons-button>
       <ons-button ng-click="changeButton()">Change tab via segment</ons-button>
-      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page2.html">
     <ons-page>
       <h2>Page2</h2>
-      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page3.html">
     <ons-page>
       <h2>Page3</h2>
-      <ons-button ng-click="getActiveButton()">Log current button index</ons-button>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 </body>

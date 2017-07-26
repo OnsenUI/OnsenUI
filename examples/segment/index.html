@@ -19,8 +19,9 @@
     function changeButton() {
       document.getElementById('segment').setActiveButton(1);
     }
-    function getActiveButton() {
+    function logIndexes() {
       console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
+      console.log('active tab index', document.getElementById('tabbar').getActiveTabIndex());
     }
   </script>
 </head>
@@ -56,21 +57,21 @@
       <h2>Page1</h2>
       <ons-button onclick="changeTab()">Change tab via tabbar</ons-button>
       <ons-button onclick="changeButton()">Change tab via segment</ons-button>
-      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page2.html">
     <ons-page>
       <h2>Page2</h2>
-      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 
   <template id="page3.html">
     <ons-page>
       <h2>Page3</h2>
-      <ons-button onclick="getActiveButton()">Log current button index</ons-button>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
     </ons-page>
   </template>
 </body>

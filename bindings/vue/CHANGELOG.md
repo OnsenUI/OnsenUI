@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New features
+
+* VOnsSegment: New component.
+
 2.0.2
 ----
 
