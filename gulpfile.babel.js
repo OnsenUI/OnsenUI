@@ -31,6 +31,7 @@ import browserSync from 'browser-sync';
 import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
+import fse from 'fs-extra';
 import {argv} from 'yargs';
 import webpack from 'webpack';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
@@ -697,6 +698,7 @@ gulp.task('build', done => {
     'prepare',
     'minify-js',
     'build-docs',
+    'build-helper-json',
     'compress-distribution-package',
     done
   );
@@ -776,6 +778,109 @@ gulp.task('build-docs', () => {
   const docsBuilder = require('./docs/wcdoc');
 
   return docsBuilder.build(path.join(__dirname, '/build/docs'));
+});
+
+gulp.task('build-helper-json', (done) => { // depends on build-docs
+  const extractEnglishDescription = (description) => {
+    // Extract inner characters of [en][/en]
+    let match;
+    if (match = /\[en]((.|\r|\n)*)\[\/en]/m.exec(description)) {
+      const extractedCharacters = match[1];
+
+      // Remove leading whitespaces
+      return extractedCharacters.replace(/^[\n ]*(.*)/, '$1');
+    }
+
+    return '';
+  };
+  const convertType = (type) => {
+    switch (true) { // regex switch
+      case /^Boolean$/.test(type):
+        return 'any'; // Vetur (0.8.6) recognizes only `v` and `event` as a valid type
+      case /^Number$/.test(type):
+        return 'any'; // same as above
+      case /^String$/.test(type):
+        return 'any'; // same as above
+      case /^Color$/.test(type):
+        return 'any'; // same as above
+      case /^Function$/.test(type):
+        return 'any'; // same as above
+      case /^Array$/.test(type):
+        return 'any'; // same as above
+      case /^Expression$/.test(type):
+        return 'any'; // same as above
+      case /^Object$/.test(type):
+        return 'any'; // same as above
+      case /|/.test(type):
+        return 'any'; // same as above
+      default:
+        throw new Error(`Unknown type: ${JSON.stringify(type)}`);
+    }
+  };
+
+  const destinationPath = path.join(__dirname, 'packages', 'onsenui-helper-json');
+  const tags = {};
+  const attributes = {};
+
+  glob.sync('build/docs/element/*.json').forEach((path) => {
+    const doc = JSON.parse(fs.readFileSync(path));
+
+    // Only core tags should be shown in autocompletion
+    if (!(doc.extensionOf == null)) {
+      return;
+    }
+
+    // Filter attributes
+    for (let i = doc.attributes.length - 1 ; i >= 0 ; i--) {
+      const attr = doc.attributes[i];
+
+      const isAllowedAttr =
+        // Only core attributes should be shown in autocompletion
+        (attr.extensionOf == null);
+
+      if (isAllowedAttr) {
+        attr.type = attr.type || 'Boolean';
+      } else {
+        // console.log(`Excluded attribute: ${doc.name}/${attr.name}`);
+        doc.attributes.splice(i, 1);
+      }
+    }
+
+    // Add the tag to `onsenui-tags.json`
+    tags[doc.name] = {
+      attributes: doc.attributes.map(attr => attr.name),
+      description: extractEnglishDescription(doc.description),
+    };
+
+    // Add the attributes of the tag to `onsenui-attributes.json`
+    for (const attr of doc.attributes) {
+      try {
+        attributes[`${doc.name}/${attr.name}`] = {
+          type: convertType(attr.type),
+          description: extractEnglishDescription(attr.description),
+        };
+      } catch (e) {
+        console.error(e.stack);
+        throw new Error(`Failed to convert type of the following attribute:\n${JSON.stringify(attr, null, 2)}`);
+      }
+    }
+  });
+
+  // Generate `onsenui-tags.json`
+  fse.outputFileSync(
+    path.join(destinationPath, 'onsenui-tags.json'),
+    JSON.stringify(tags, null, 2),
+    {encoding: 'utf8'}
+  );
+
+  // Generate `onsenui-attributes.json`
+  fse.outputFileSync(
+    path.join(destinationPath, 'onsenui-attributes.json'),
+    JSON.stringify(attributes, null, 2),
+    {encoding: 'utf8'}
+  );
+
+  done();
 });
 
 ////////////////////////////////////////
