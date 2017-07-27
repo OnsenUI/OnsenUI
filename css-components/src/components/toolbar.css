@@ -115,14 +115,14 @@
   width: 46%;
   text-align: center;
   line-height: var(--toolbar-height);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   color: var(--toolbar-color);
 }
 
 .toolbar__title {
   line-height: var(--toolbar-height);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   color: var(--toolbar-color);
   margin: 0;

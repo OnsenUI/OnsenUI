@@ -23,7 +23,7 @@
     background-color: var(--range-thumb-background-color);
     border: none;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
-    border-radius: var(--round-border);
+    border-radius: 50%;
     margin: 0;
     padding: 0;
   }
@@ -87,7 +87,7 @@
   border: none;
   background-color: var(--range-track-background-color);
   height: 0;
-  border-radius: var(--round-border);
+  border-radius: 50%;
 }
 
 .range__input::-webkit-slider-thumb {

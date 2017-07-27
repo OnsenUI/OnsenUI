@@ -3,6 +3,7 @@
   --textarea-border: 1px solid var(--input-border-color);
   --textarea-padding: 5px 5px 5px 5px;
   --textarea-box-shadow: none;
+  --textarea-border-radius: 4px;
 }
 
 /*~
@@ -22,11 +23,11 @@
   padding: var(--textarea-padding);
   font-size: var(--text-input-font-size);
   font-weight: var(--font-weight);
-  border-radius: var(--border-radius);
+  border-radius: var(--textarea-border-radius);
   border: var(--textarea-border);
   background-color: var(--input-bg-color);
   color: var(--textarea-color);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   box-shadow: var(--textarea-box-shadow);
   appearance: none;
   width: auto;
@@ -44,7 +45,7 @@
   name: Textarea Transparent
   category: Textarea
   markup: |
-    <textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+    <textarea class="textarea textarea--transparent" rows="3" placeholder="Textarea"></textarea>
 */
 
 .textarea--transparent {
@@ -59,11 +60,11 @@
   padding-right: 0;
   font-size: var(--text-input-font-size);
   font-weight: var(--font-weight);
-  border-radius: var(--border-radius);
+  border-radius: var(--textarea-border-radius);
   border: none;
   background-color: transparent;
   color: var(--textarea-color);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   box-shadow: var(--textarea-box-shadow);
   appearance: none;
   width: auto;

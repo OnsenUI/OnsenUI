@@ -4,6 +4,7 @@
   --segment-border-bottom: 1px solid var(--segment-color);
   --segment-border: 0 solid var(--segment-color);
   --segment-active-background-color: color(var(--segment-color) tint(var(--alpha-lighten)));
+  --segment-border-radius: 4px;
 
   --material-segment-background-color: #fafafa;
   --material-segment-active-background-color: #c8c8c8;
@@ -108,12 +109,12 @@
 
 .segment__item:first-child > .segment__button {
   border-left-width: 1px;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: var(--segment-border-radius) 0 0 var(--segment-border-radius);
 }
 
 .segment__item:last-child > .segment__button {
   border-right-width: 1px;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-radius: 0 var(--segment-border-radius) var(--segment-border-radius) 0;
 }
 
 /*~

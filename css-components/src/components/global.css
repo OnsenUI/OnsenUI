@@ -12,22 +12,9 @@
   --font-weight: 400;
   --material-font-size: 17px;
   --material-font-weight: 400;
-  --letter-spacing: 0;
   --font-size--mini: calc(var(--font-size) - 3px);
-  --font-size--large: 17px;
   --font-weight--large: 500;
   --background-color--input: transparent;
-  --box-shadow--text-input: none;
-  --box-shadow--cta: none;
-  --thumb-size: 29px;
-  --background--body: var(--list-background-color);
-  --box-shadow: none;
-  --box-shadow--down: none;
-  --text-shadow: 0 1px none;
-  --round-border: 30px;
-  --border-radius: 4px;
-  --border-radius--large: 0;
-  --border--invalid: 1px solid var(--input-invalid-border-color);
 }
 
 html {
@@ -47,7 +34,18 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-* { /* stylelint-disable-line selector-no-universal */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

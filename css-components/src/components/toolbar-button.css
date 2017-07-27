@@ -26,9 +26,8 @@
 .toolbar-button {
   @apply(--reset-font);
   padding: var(--toolbar-button-padding);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   color: var(--toolbar-button-color);
-  text-shadow: var(--text-shadow);
   background-color: var(--toolbar-button-background-color);
   border-radius: var(--toolbar-button-border-radius);
   border: 1px solid transparent;
@@ -108,7 +107,7 @@
   height: 100%;
   vertical-align: top;
   line-height: var(--toolbar-height);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
 }
 

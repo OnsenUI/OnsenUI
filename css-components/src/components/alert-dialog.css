@@ -58,7 +58,7 @@
 
 .alert-dialog-title {
   @apply(--reset-font);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   padding: 0 8px;
   text-align: center;
@@ -85,7 +85,7 @@
   @apply(--reset-cursor);
   @apply(--ellipsis);
   text-decoration: none;
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   vertical-align: middle;
   border: none;
   border-top: 1px solid var(--alert-dialog-separator-color);

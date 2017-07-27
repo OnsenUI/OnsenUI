@@ -43,7 +43,7 @@
     padding: var(--button-padding);
     font-size: var(--font-size);
     line-height: var(--button-line-height);
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: 0;
     color: var(--button-text-color);
     vertical-align: middle;
     background-color: var(--button-background-color);
@@ -242,7 +242,7 @@
 */
 
 .button--large {
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   line-height: var(--button-large-line-height);
   padding: var(--button-large-padding);
@@ -279,7 +279,7 @@
 
 .button--large--quiet { /* stylelint-disable-line */
   @apply(--button);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   line-height: var(--button-large-line-height);
   padding: var(--button-large-padding);
@@ -322,7 +322,7 @@
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
-  font-size: var(--font-size--large);
+  font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   line-height: var(--button-large-line-height);
   padding: var(--button-large-padding);

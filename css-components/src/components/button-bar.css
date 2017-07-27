@@ -4,6 +4,7 @@
   --button-bar-border-bottom: 1px solid var(--button-bar-color);
   --button-bar-border: 0 solid var(--button-bar-color);
   --button-bar-active-background-color: color(var(--button-bar-color) tint(var(--alpha-lighten)));
+  --button-bar-border-radius: 4px;
 
   --button-bar: {
     @apply(--reset-font);
@@ -105,11 +106,11 @@
 
 .button-bar__item:first-child > .button-bar__button {
   border-left-width: 1px;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: var(--button-bar-border-radius) 0 0 var(--button-bar-border-radius);
 }
 
 .button-bar__item:last-child > .button-bar__button {
   border-right-width: 1px;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-radius: 0 var(--button-bar-border-radius) var(--button-bar-border-radius) 0;
 }
 

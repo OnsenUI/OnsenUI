@@ -24,7 +24,7 @@
     text-decoration: none;
     font-size: 25px;
     line-height: var(--fab-height);
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: 0;
     color: var(--fab-text-color);
     vertical-align: middle;
     text-align: center;
