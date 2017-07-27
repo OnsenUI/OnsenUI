@@ -9,9 +9,17 @@ dev
 
 * segment: Added new component.
 
+1.5.0
+----
+
+### New Features
+
+* navigator, router-navigator: Support iOS "swipe-to-pop".
+
 ### Misc
 
 * Provide minified version.
+* alert-dialog-button: Added new component.
 
 v1.4.0
 ----

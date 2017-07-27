@@ -29,7 +29,7 @@ class Segment extends SimpleWrapper {
       if (this.props.onPostChange) {
         return this.props.onPostChange(event);
       }
-    }
+    };
   }
 
   _getDomNodeName() {
