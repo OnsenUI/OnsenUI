@@ -16,8 +16,6 @@
   --font-size--mini: calc(var(--font-size) - 3px);
   --font-weight--large: 500;
   --background-color--input: transparent;
-  --box-shadow--text-input: none;
-  --background--body: var(--list-background-color);
 }
 
 html {

@@ -10,7 +10,7 @@
     @apply(--input);
     @apply(--transparent);
     letter-spacing: var(--letter-spacing);
-    box-shadow: var(--box-shadow--text-input);
+    box-shadow: none;
     color: var(--input-text-color);
     padding: 0;
     margin: 0;
