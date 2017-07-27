@@ -96,7 +96,7 @@ export class Page1Component {
         <button>Label 3</button>
       </ons-segment>
 
-      <ons-tabbar #tabbar id="tabbar" position="auto">
+      <ons-tabbar #tabbar id="tabbar">
         <ons-tab [page]="page1" active></ons-tab>
         <ons-tab [page]="page2"></ons-tab>
         <ons-tab [page]="page3"></ons-tab>

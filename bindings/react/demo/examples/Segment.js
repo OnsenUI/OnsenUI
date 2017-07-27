@@ -90,6 +90,8 @@ export default class extends React.Component {
   render() {
     return (
       <Page renderToolbar={this.renderToolbar.bind(this)} >
+
+        {/* Comment <Tabbar> out to test this one */}
         <Segment index={1} style={{ width: '280px', margin: '10px 20px' }}>
           <button>Label 1</button>
           <button>Label 2</button>

@@ -10,14 +10,14 @@
       </div>
     </v-ons-toolbar>
 
-    <!-- Comment <ons-tabbar> out to test this one -->
-    <v-ons-segment :index.sync="segmentIndex" style="width: 280px; margin: 10px 20px;">
+    <!-- Comment <v-ons-tabbar> out to test this one -->
+    <v-ons-segment :index.sync="segment2Index" style="width: 280px; margin: 10px 20px;">
       <button>Label 1</button>
       <button>Label 2</button>
       <button>Label 3</button>
     </v-ons-segment>
 
-    <v-ons-tabbar id="tabbar" :tabs="tabs" :index.sync="tabbarIndex" @postchange="tabbarIndex = $event.index; log('postchange event', $event)" position="auto"></v-ons-tabbar>
+    <v-ons-tabbar id="tabbar" :tabs="tabs" :index.sync="tabbarIndex" @postchange="tabbarIndex = $event.index; log('postchange event', $event)"></v-ons-tabbar>
   </v-ons-page>
 </template>
 
@@ -47,7 +47,8 @@
 	export default {
     data() {
       return {
-        segmentIndex: 1,
+        segmentIndex: 0,
+        segment2Index: 1,
         tabbarIndex: 0,
         tabs: [
           {
