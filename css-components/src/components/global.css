@@ -12,7 +12,6 @@
   --font-weight: 400;
   --material-font-size: 17px;
   --material-font-weight: 400;
-  --letter-spacing: 0;
   --font-size--mini: calc(var(--font-size) - 3px);
   --font-weight--large: 500;
   --background-color--input: transparent;

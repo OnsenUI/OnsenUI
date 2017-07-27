@@ -26,7 +26,7 @@
 .toolbar-button {
   @apply(--reset-font);
   padding: var(--toolbar-button-padding);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   color: var(--toolbar-button-color);
   background-color: var(--toolbar-button-background-color);
   border-radius: var(--toolbar-button-border-radius);

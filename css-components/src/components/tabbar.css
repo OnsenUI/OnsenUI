@@ -136,7 +136,7 @@
   text-decoration: none;
   padding: 0;
   height: var(--tabbar-button-line-height);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   color: var(--tabbar-button-color);
   vertical-align: top;
   background-color: transparent;

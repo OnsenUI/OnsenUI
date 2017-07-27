@@ -43,7 +43,7 @@
     padding: var(--button-padding);
     font-size: var(--font-size);
     line-height: var(--button-line-height);
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: 0;
     color: var(--button-text-color);
     vertical-align: middle;
     background-color: var(--button-background-color);

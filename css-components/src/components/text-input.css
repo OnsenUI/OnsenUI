@@ -9,7 +9,7 @@
   --text-input: {
     @apply(--input);
     @apply(--transparent);
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: 0;
     box-shadow: none;
     color: var(--input-text-color);
     padding: 0;

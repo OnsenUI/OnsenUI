@@ -27,7 +27,7 @@
   border: var(--textarea-border);
   background-color: var(--input-bg-color);
   color: var(--textarea-color);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   box-shadow: var(--textarea-box-shadow);
   appearance: none;
   width: auto;
@@ -45,7 +45,7 @@
   name: Textarea Transparent
   category: Textarea
   markup: |
-    <textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+    <textarea class="textarea textarea--transparent" rows="3" placeholder="Textarea"></textarea>
 */
 
 .textarea--transparent {
@@ -64,7 +64,7 @@
   border: none;
   background-color: transparent;
   color: var(--textarea-color);
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   box-shadow: var(--textarea-box-shadow);
   appearance: none;
   width: auto;

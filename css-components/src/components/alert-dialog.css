@@ -85,7 +85,7 @@
   @apply(--reset-cursor);
   @apply(--ellipsis);
   text-decoration: none;
-  letter-spacing: var(--letter-spacing);
+  letter-spacing: 0;
   vertical-align: middle;
   border: none;
   border-top: 1px solid var(--alert-dialog-separator-color);
