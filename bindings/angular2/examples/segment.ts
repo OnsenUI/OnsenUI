@@ -81,19 +81,10 @@ export class Page1Component {
     <ons-page>
       <ons-toolbar>
         <div class="center">
-          <ons-segment #segment class="segment" id="segment" tabbar-id="tabbar" style="width: 280px">
-            <div class="segment__item">
-              <input type="radio" class="segment__input" name="segment" />
-              <button class="segment__button">Page 1</button>
-            </div>
-            <div class="segment__item">
-              <input type="radio" class="segment__input" name="segment" />
-              <button class="segment__button">Page 2</button>
-            </div>
-            <div class="segment__item">
-              <input type="radio" class="segment__input" name="segment" />
-              <button class="segment__button">Page 3</button>
-            </div>
+          <ons-segment #segment id="segment" tabbar-id="tabbar" style="width: 280px">
+            <button>Page 1</button>
+            <button>Page 2</button>
+            <button>Page 3</button>
           </ons-segment>
         </div>
       </ons-toolbar>
@@ -106,12 +97,9 @@ export class Page1Component {
       </ons-segment>
 
       <ons-tabbar #tabbar id="tabbar">
-        <div class="tabbar__content"></div>
-        <div class="tabbar">
-          <ons-tab label="page1" [page]="page1" active></ons-tab>
-          <ons-tab label="page2" [page]="page2"></ons-tab>
-          <ons-tab label="page3" [page]="page3"></ons-tab>
-        </div>
+        <ons-tab [page]="page1" active></ons-tab>
+        <ons-tab [page]="page2"></ons-tab>
+        <ons-tab [page]="page3"></ons-tab>
       </ons-tabbar>
     </ons-page>
   `
