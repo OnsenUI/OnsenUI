@@ -6,6 +6,8 @@
   --highlight-color: #0076ff;
   --second-highlight-color: #25a6d9;
   --border-color: #ccc;
+  --button-background-color: var(--highlight-color);
+  --button-cta-background-color: var(--second-highlight-color);
   --toolbar-background-color: #fafafa;
   --toolbar-button-color: var(--highlight-color);
   --toolbar-text-color: #1f1f21;
