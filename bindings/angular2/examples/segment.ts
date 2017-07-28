@@ -81,7 +81,7 @@ export class Page1Component {
     <ons-page>
       <ons-toolbar>
         <div class="center">
-          <ons-segment #segment id="segment" tabbar-id="tabbar" style="width: 280px">
+          <ons-segment #segment id="segment" tabbar-id="tabbar" style="width: 280px; margin-top: 8px;">
             <button>Page 1</button>
             <button>Page 2</button>
             <button>Page 3</button>
