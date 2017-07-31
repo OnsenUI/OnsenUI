@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-navigator: Ignore swipes on back buttons.
+
 v2.5.1
 ----
 
