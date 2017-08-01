@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+* VOnsNavigator: Keep page scroll during pop animation.
+
 2.1.0
 ----
 
