@@ -479,5 +479,18 @@ function waitDeviceReady() {
   }, false);
 }
 
+/**
+ * @method lastCreatedPage
+ * @signature lastCreatedPage()
+ * @description
+ *   [en]Access the last created page from the current `script` scope. Only works inside `<script></script>` tags that are direct children of `ons-page` element. Use this to add lifecycle hooks to a page.[/en]
+ *   [ja][/ja]
+ * @return {HTMLElement}
+ *   [en]Returns the corresponding page element.[/en]
+ *   [ja][/ja]
+ */
+const getCS = 'currentScript' in document ? () => document.currentScript : () => document.scripts[document.scripts.length - 1];
+ons.lastCreatedPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
+
 window._superSecretOns = ons;
 export default ons;
