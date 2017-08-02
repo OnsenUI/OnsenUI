@@ -290,6 +290,11 @@ class Navigator extends BasicComponent {
     this.forceUpdate();
   }
 
+  componentWillReceiveProps(newProps) {
+    const node = this._navi;
+    node.onDeviceBackButton = newProps.onDeviceBackButton || this._onDeviceBackButton.bind(this);
+  }
+
   componentWillUnmount() {
     const node = this._navi;
     node.removeEventListener('prepush', this.props.onPrePush);

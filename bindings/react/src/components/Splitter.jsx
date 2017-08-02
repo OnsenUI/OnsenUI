@@ -49,6 +49,11 @@ class Splitter extends SimpleWrapper {
       node.onDeviceBackButton = this.props.onDeviceBackButton;
     }
   }
+
+  componentWillReceiveProps(props) {
+    const node = ReactDOM.findDOMNode(this);
+    node.onDeviceBackButton = props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
+  }
 }
 
 Splitter.propTypes = {

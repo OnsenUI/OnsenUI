@@ -193,6 +193,9 @@ class RouterNavigator extends BasicComponent {
 
   componentWillReceiveProps(nextProps) {
     const processStack = [...nextProps.routeConfig.processStack];
+    
+    const node = ReactDOM.findDOMNode(this);
+    node.onDeviceBackButton = newProps.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     /**
      * Fix for Redux Timetravel.
