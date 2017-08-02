@@ -8,6 +8,7 @@ dev
 ### Bug Fixes
 
  * ons-navigator: Ignore swipes on back buttons.
+ * ons-pull-hook: After popPage transition style fix.
 
 v2.5.1
 ----

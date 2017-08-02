@@ -379,10 +379,13 @@ export default class PullHookElement extends BaseElement {
   }
 
   _show() {
-    this.style.display = '';
-    if (this._pageElement) {
-      this._pageElement.style.marginTop = `-${this.height}px`;
-    }
+    // Run asyncrhonously to avoid conflicts with Animit's style clean
+    setImmediate(() => {
+      this.style.display = '';
+      if (this._pageElement) {
+        this._pageElement.style.marginTop = `-${this.height}px`;
+      }
+    });
   }
 
   _hide() {
