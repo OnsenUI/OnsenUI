@@ -51,8 +51,9 @@ class Page extends BasicComponent {
   }
 
   componentWillReceiveProps(newProps) {
-    const node = ReactDOM.findDOMNode(this);
-    node.onDeviceBackButton = newProps.onDeviceBackButton || this._onDeviceBackButton.bind(this);
+    if (newProps.onDeviceBackButton !== undefined) {
+      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
+    }
   }
 
   componentWillUnmount() {
