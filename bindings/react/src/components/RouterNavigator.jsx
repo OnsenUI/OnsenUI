@@ -191,17 +191,17 @@ class RouterNavigator extends BasicComponent {
     this.update();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const processStack = [...nextProps.routeConfig.processStack];
-    
-    const node = ReactDOM.findDOMNode(this);
+  componentWillReceiveProps(newProps) {
+    const processStack = [...newProps.routeConfig.processStack];
+
+    const node = this._navi;
     node.onDeviceBackButton = newProps.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     /**
      * Fix for Redux Timetravel.
      */
-    if (this.props.routeConfig.processStack.length < nextProps.routeConfig.processStack.length &&
-      this.props.routeConfig.routeStack.length > nextProps.routeConfig.routeStack.length) {
+    if (this.props.routeConfig.processStack.length < newProps.routeConfig.processStack.length &&
+      this.props.routeConfig.routeStack.length > newProps.routeConfig.routeStack.length) {
       return;
     }
 
