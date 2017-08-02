@@ -117,7 +117,7 @@ class CollapseMode {
   }
 
   handleGesture(e) {
-    if (!this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
+    if (!e.gesture || !this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
       return;
     }
     if (e.type === 'dragstart') {

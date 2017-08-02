@@ -648,7 +648,7 @@ export default class CarouselElement extends BaseElement {
   _onDragStart(event) {
     this._ignoreDrag = event.consumed;
 
-    if (!this._ignoreDrag) {
+    if (event.gesture && !this._ignoreDrag) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
       if (this._canConsumeGesture(event.gesture)) {
@@ -660,7 +660,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
+    if (!event.gesture || this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
       return;
     }
 
@@ -677,7 +677,7 @@ export default class CarouselElement extends BaseElement {
 
   _onDragEnd(event) {
     this._started = false;
-    if (!this._lastDragEvent || this._ignoreDrag) {
+    if (!event.gesture || !this._lastDragEvent || this._ignoreDrag) {
       return;
     }
 
