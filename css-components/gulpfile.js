@@ -70,7 +70,8 @@ gulp.task('generate-preview', ['cssnext'], () => {
   const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
   const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)});
-  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components}), 'utf-8');
+  const componentsJSON = JSON.stringify(components);
+  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
 });
 
 ////////////////////////////////////////
