@@ -146,8 +146,14 @@ h1#title {
 <script>
 window.onload = function() {
   var components = JSON.parse(document.querySelector('#components-data').textContent);
-  ko.applyBindings({components: components.map(makeComponentModel)});
+  ko.applyBindings(makeViewModel(components));
 };
+
+function makeViewModel(components) {
+  return {
+    components: components.map(makeComponentModel)
+  };
+}
 
 function makeComponentModel(component) {
   component.annotation = makeAnnotationModel(component.annotation);

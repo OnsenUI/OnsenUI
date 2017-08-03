@@ -17,7 +17,14 @@ const prefix = __dirname + '/../build/css/';
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', ['cssmin']);
+gulp.task('build', (done) => {
+  runSequence('build-css', 'generate-preview', done);
+});
+
+////////////////////////////////////////
+// build-css
+////////////////////////////////////////
+gulp.task('build-css', ['cssnext', 'cssmin']);
 
 ////////////////////////////////////////
 // stylelint
@@ -33,7 +40,7 @@ gulp.task('stylelint', () => {
 ////////////////////////////////////////
 // cssmin
 ////////////////////////////////////////
-gulp.task('cssmin', ['generate-preview'], () => {
+gulp.task('cssmin', ['cssnext'], () => {
   return gulp.src(prefix + 'onsen-css-components.css')
     .pipe($.cssmin())
     .pipe($.rename({suffix: '.min'}))
@@ -68,23 +75,35 @@ gulp.task('cssnext', ['stylelint'], () => {
 // generate-preview
 ////////////////////////////////////////
 let generated = false;
-gulp.task('generate-preview', ['cssnext'], () => {
+gulp.task('generate-preview', (done) => {
   if (!generated) {
-    const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
-    const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
-    const components = ancss.parse(css, {detect: line => line.match(/^~/)});
-    const componentsJSON = JSON.stringify(components);
-    fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
-    generated = true;
+    runSequence('generate-preview-force', () => {
+      generated = true;
+      done();
+    });
+  } else {
+    done();
   }
+});
+
+////////////////////////////////////////
+// generate-preview-force
+////////////////////////////////////////
+gulp.task('generate-preview-force', () => {
+  const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
+  const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
+  const components = ancss.parse(css, {detect: line => line.match(/^~/)});
+  const componentsJSON = JSON.stringify(components);
+  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  browserSync.reload();
 });
 
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
 gulp.task('serve', ['build'], done => {
-  gulp.watch(['src/**/*.css', 'templates/preview.html.eco'], ['build']);
-  gulp.watch(prefix + 'preview.html').on('change', browserSync.reload);
+  gulp.watch(['src/**/*.css'], ['build-css']);
+  gulp.watch(['templates/preview.html.eco'], ['generate-preview-force']);
 
   browserSync.init({
     server: {
