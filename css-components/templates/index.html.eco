@@ -153,8 +153,20 @@ window.onload = function() {
 
 function makeViewModel(components) {
   return {
-    components: components.map(makeComponentModel)
+    components: components.filter(filterComponent).map(makeComponentModel)
   };
+}
+
+function filterComponent(component) {
+  var platform = getQueryParams()['platform'];
+
+  if (platform === 'android') {
+    return component.annotation.name.match(/Material/);
+  } else if (platform === 'ios') {
+    return !component.annotation.name.match(/Material/);
+  } else {
+    return true;
+  }
 }
 
 function makeComponentModel(component) {
@@ -168,6 +180,18 @@ function makeAnnotationModel(annotation) {
     annotation.preview(!annotation.preview());
   };
   return annotation;
+}
+
+function getQueryParams() {
+  var params = [];
+  var pairs = window.location.search.slice(1).split('&');    
+  var pair;
+  for (var i = 0; i < pairs.length; i++) {
+    pair = pairs[i].split('=');
+    params[pair[0]] = pair[1];
+  }
+
+  return params;
 }
 </script>
 
