@@ -90,11 +90,11 @@ gulp.task('generate-preview', (done) => {
 // generate-preview-force
 ////////////////////////////////////////
 gulp.task('generate-preview-force', () => {
-  const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
+  const template = fs.readFileSync(__dirname + '/templates/index.html.eco', 'utf-8');
   const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)});
   const componentsJSON = JSON.stringify(components);
-  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  fs.writeFileSync(prefix + 'index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
   browserSync.reload();
 });
 
@@ -103,13 +103,13 @@ gulp.task('generate-preview-force', () => {
 ////////////////////////////////////////
 gulp.task('serve', ['build'], done => {
   gulp.watch(['src/**/*.css'], ['build-css']);
-  gulp.watch(['templates/preview.html.eco'], ['generate-preview-force']);
+  gulp.watch(['templates/index.html.eco'], ['generate-preview-force']);
 
   browserSync.init({
     server: {
       baseDir: prefix
     },
-    startPath: '/preview.html'
+    startPath: '/'
   });
 });
 
