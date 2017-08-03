@@ -62,7 +62,11 @@ gulp.task('cssnext', ['stylelint'], () => {
     cssnext({
       browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
     }),
-    reporter({clearMessage: true, throwError: false})
+    reporter({
+      clearAllMessages: true,
+      clearReportedMessages: true,
+      throwError: false
+    })
   ];
 
   return gulp.src('src/onsen-css-components.css')
