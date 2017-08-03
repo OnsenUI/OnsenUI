@@ -3,7 +3,9 @@
 <head>
 <title>Onsen CSS Components</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1"> <link rel="stylesheet" href="./onsen-css-components.css" />
+<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">
+<base href="/">
+<link rel="stylesheet" href="./onsen-css-components.css" />
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

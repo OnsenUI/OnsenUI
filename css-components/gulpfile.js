@@ -11,6 +11,7 @@ const ancss = require('ancss');
 const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const reporter = require('postcss-reporter');
+const historyApiFallback = require('connect-history-api-fallback');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -107,7 +108,8 @@ gulp.task('serve', ['build'], done => {
 
   browserSync.init({
     server: {
-      baseDir: prefix
+      baseDir: prefix,
+      middleware: [historyApiFallback()],
     },
     startPath: '/'
   });
