@@ -3,7 +3,7 @@ const pkg = require('./package.json');
 const merge = require('event-stream').merge;
 const gutil = require('gulp-util');
 const runSequence = require('run-sequence');
-const browserSync = require('browser-sync');
+const browserSync = require('browser-sync').create();
 const $ = require('gulp-load-plugins')();
 const eco = require('eco');
 const fs = require('fs');
@@ -64,6 +64,7 @@ gulp.task('cssnext', ['stylelint'], () => {
     }),
     reporter({clearMessage: true, throwError: false})
   ];
+
   return gulp.src('src/onsen-css-components.css')
     .pipe($.plumber())
     .pipe($.postcss(plugins))
@@ -102,16 +103,36 @@ gulp.task('generate-preview-force', () => {
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['build'], done => {
-  gulp.watch(['src/**/*.css'], ['build-css']);
-  gulp.watch(['templates/index.html.eco'], ['generate-preview-force']);
+gulp.task('serve', ['reset-console', 'build'], done => {
+  gulp.watch(['src/**/*.css'], () => {
+    runSequence('reset-console', 'build-css', outputDevServerInfo);
+  });
+  gulp.watch(['templates/index.html.eco'], () => {
+    runSequence('reset-console', 'generate-preview-force', outputDevServerInfo)
+  });
 
   browserSync.init({
+    ui: false,
+    port: 4321,
     server: {
       baseDir: prefix,
       middleware: [historyApiFallback()],
     },
-    startPath: '/'
+    startPath: '/',
+    open: false
   });
 });
 
+////////////////////////////////////////
+// reset-console
+////////////////////////////////////////
+gulp.task('reset-console', () => process.stdout.write('\033c'));
+
+function outputDevServerInfo() {
+  const localUrl = browserSync.getOption('urls').get('local'); 
+  const externalUrl = browserSync.getOption('urls').get('external'); 
+
+  console.log('\nAccess URLs:');
+  console.log('     Local:', gutil.colors.magenta(localUrl));
+  console.log('  External:', gutil.colors.magenta(externalUrl));
+}
