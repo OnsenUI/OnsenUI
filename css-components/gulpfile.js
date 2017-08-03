@@ -60,18 +60,23 @@ gulp.task('cssnext', ['stylelint'], () => {
     .pipe($.plumber())
     .pipe($.postcss(plugins))
     .pipe(gulp.dest('./build/'))
-    .pipe(gulp.dest(prefix));
+    .pipe(gulp.dest(prefix))
+    .pipe(browserSync.stream());
 });
 
 ////////////////////////////////////////
 // generate-preview
 ////////////////////////////////////////
+let generated = false;
 gulp.task('generate-preview', ['cssnext'], () => {
-  const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
-  const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
-  const components = ancss.parse(css, {detect: line => line.match(/^~/)});
-  const componentsJSON = JSON.stringify(components);
-  fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  if (!generated) {
+    const template = fs.readFileSync(__dirname + '/templates/preview.html.eco', 'utf-8');
+    const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
+    const components = ancss.parse(css, {detect: line => line.match(/^~/)});
+    const componentsJSON = JSON.stringify(components);
+    fs.writeFileSync(prefix + 'preview.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+    generated = true;
+  }
 });
 
 ////////////////////////////////////////
