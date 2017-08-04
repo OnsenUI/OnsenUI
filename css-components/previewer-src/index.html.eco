@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="/onsen-css-components.css" />
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/style.css">
 
   <script id="components-data" type="application/json"><%- @componentsJSON %></script>
