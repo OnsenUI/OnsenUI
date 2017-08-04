@@ -95,13 +95,18 @@ gulp.task('generate-preview', (done) => {
 ////////////////////////////////////////
 // generate-preview-force
 ////////////////////////////////////////
-gulp.task('generate-preview-force', () => {
+gulp.task('generate-preview-force', ['preview-assets'], () => {
   const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
   const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)});
   const componentsJSON = JSON.stringify(components);
   fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
   browserSync.reload();
+});
+
+gulp.task('preview-assets', () => {
+  return gulp.src('previewer-src/*.{css,js}')
+    .pipe(gulp.dest('./build/'));
 });
 
 ////////////////////////////////////////
@@ -111,7 +116,8 @@ gulp.task('serve', ['reset-console', 'build'], done => {
   gulp.watch(['src/**/*.css'], () => {
     runSequence('reset-console', 'build-css', outputDevServerInfo);
   });
-  gulp.watch(['templates/index.html.eco'], () => {
+
+  gulp.watch(['previewer-src/*'], () => {
     runSequence('reset-console', 'generate-preview-force', outputDevServerInfo)
   });
 

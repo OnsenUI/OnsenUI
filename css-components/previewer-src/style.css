@@ -1,0 +1,110 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  position: static;
+  background-color: white;
+  overflow: visible;
+}
+
+h1#title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Helvetica;
+  text-align: center;
+  width: 100%;
+  height: 64px;
+  line-height: 64px;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.components {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 50vh;
+}
+
+.component-preview {
+  display: inline-block;
+  width: 350px;
+  box-sizing: border-box;
+  margin: 10px 10px 20px 10px;
+}
+
+.component-preview__link,
+.component-preview__link:link,
+.component-preview__link:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+.component-preview__link:hover {
+  text-decoration: underline;
+}
+
+.component-preview__title {
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+
+.component-preview__toggle {
+  display: none;
+  float: right;
+  margin: 8px 0 0 0;
+  border: none;
+  background-color: white;
+  font-size: 12px;
+  padding: 0px;
+  color: #aaa;
+  text-decoration: underline;
+  cursor: pointer;
+  line-height: 12px;
+  padding: 4px 3px;
+}
+
+.component-preview:hover > .component-preview__toggle {
+  display: block;
+}
+
+.component-preview__toggle:hover {
+  text-decoration: none;
+}
+
+.component-preview__toggle:active {
+  outline: none;
+}
+
+.component-preview__toggle:focus {
+  outline: none;
+}
+
+.component-preview__markup {
+  background-color: #f3f3f3;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: Consolas, monospace;
+  padding: 4px 6px;
+  max-width: 100%;
+  overflow-x: auto;
+  user-select: auto;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.component-preview__example {
+  height: 201px;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
