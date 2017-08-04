@@ -152,7 +152,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
     runSequence('reset-console', 'build-css', outputDevServerInfo);
   });
 
-  gulp.watch(['previewer-src/*'], () => {
+  gulp.watch(['previewer-src/**'], () => {
     runSequence('reset-console', 'generate-preview-force', outputDevServerInfo)
   });
 

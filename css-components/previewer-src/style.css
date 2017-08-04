@@ -7,6 +7,16 @@ body {
   overflow: visible;
 }
 
+a,
+a:link,
+a:visited {
+  color: #999;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 h1#title {
   font-size: 16px;
   font-weight: 500;
@@ -24,6 +34,7 @@ h1#title {
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 50vh;
+  margin-left: 120px;
 }
 
 .component-preview {
@@ -107,4 +118,36 @@ h1#title {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.category-list {
+  float: left;
+  width: 120px;
+  position: fixed;
+  padding: 10px;
+  overflow: auto;
+  height: 100vh;
+  background-color: white;
+  border-right: 1px solid #ddd;
+}
+
+.category-list__item {
+  height: 28px;
+  line-height: 28px;
+}
+
+.category-list__item-link,
+.category-list__item-link:link,
+.category-list__item-link:visited {
+  font-size: 13px;
+  color: #999;
+}
+
+.platform-filter {
+  float: right;
+  margin: 10px;
+}
+
+.platform-filter__link {
+  font-size: 13px;
 }

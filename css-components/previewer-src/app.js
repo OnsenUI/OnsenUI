@@ -1,13 +1,9 @@
-
-window.onload = init;
+import {getPlatform, getPlatformFilter} from './platform';
+import {ComponentView} from './components/component';
 
 function init() {
-  var components = JSON.parse(document.querySelector('#components-data').textContent);
-  components = components.map(component => {
-    component = component.annotation;
-    component.preview = true;
-    return component;
-  });
+  const components = makeComponents();
+  const categories = makeCategories(components);
 
   page('*', () => {
     setTimeout(() => {
@@ -19,8 +15,34 @@ function init() {
   var app = new Vue({
     el: '#app',
     data: {
-      components: components,
+      components,
+      categories,
       platform: getPlatform()
+    },
+    template: `
+      <div>
+        <div class="category-list">
+          <div class="category-list__item">Category</div>
+          <div v-for="category in categories" class="category-list__item">
+            <a :href="'/categories/' + category.hash" class="category-list__item-link">{{category.name}}</a>
+          </div>
+        </div>
+
+        <div class="platform-filter">
+          <a href="?">All</a>
+          <a href="?platform=ios">iOS</a>
+          <a href="?platform=android">Android</a>
+        </div>
+
+        <h1 id="title">CSS Components for Onsen UI</h1>
+
+        <div class="components">
+          <component-view v-for="component in filterComponents()" :component="component" />
+        </div>
+      </div>
+    `,
+    components: {
+      'component-view': ComponentView
     },
     methods: {
       filterComponents() {
@@ -40,47 +62,27 @@ function init() {
   });
 };
 
-function getPlatform() {
-  var platform = getQueryParams()['platform'];
-  if (platform === 'android' || platform === 'ios') {
-    return platform;
-  }
-  return 'all';
+function makeCategories(components) {
+  const set = new Set();
+  components.forEach(component => {
+    set.add(component.category);
+  });
+
+  return [...set.values()].map(value => {
+    return {
+      name: value,
+      hash: value.toLowerCase().replace(/ /g, '_')
+    };
+  });
 }
 
-function getPlatformFilter(platform) {
-  if (platform === 'android') {
-    return component => component.annotation.name.match(/Material/);
-  }
-  
-  if (platform === 'ios') {
-    return component => !component.annotation.name.match(/Material/);
-  }
-
-  return () => true;
+function makeComponents() {
+  return JSON.parse(document.querySelector('#components-data').textContent).map(component => {
+    component = component.annotation;
+    component.preview = true;
+    return component;
+  });
 }
 
-function makeComponentModel(component) {
-  component.annotation = makeAnnotationModel(component.annotation);
-  return component;
-}
+window.onload = init;
 
-function makeAnnotationModel(annotation) {
-  annotation.preview = ko.observable(true);
-  annotation.togglePreview = function() {
-    annotation.preview(!annotation.preview());
-  };
-  return annotation;
-}
-
-function getQueryParams() {
-  var params = [];
-  var pairs = window.location.search.slice(1).split('&');    
-  var pair;
-  for (var i = 0; i < pairs.length; i++) {
-    pair = pairs[i].split('=');
-    params[pair[0]] = pair[1];
-  }
-
-  return params;
-}
