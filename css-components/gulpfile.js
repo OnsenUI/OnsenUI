@@ -96,11 +96,11 @@ gulp.task('generate-preview', (done) => {
 // generate-preview-force
 ////////////////////////////////////////
 gulp.task('generate-preview-force', () => {
-  const template = fs.readFileSync(__dirname + '/templates/index.html.eco', 'utf-8');
+  const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
   const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)});
   const componentsJSON = JSON.stringify(components);
-  fs.writeFileSync(prefix + 'index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
   browserSync.reload();
 });
 
@@ -119,7 +119,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
     ui: false,
     port: 4321,
     server: {
-      baseDir: prefix,
+      baseDir: __dirname + '/build',
       middleware: [historyApiFallback()],
     },
     startPath: '/',

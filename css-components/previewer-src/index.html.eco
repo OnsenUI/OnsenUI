@@ -130,6 +130,12 @@ h1#title {
 
   <h1 id="title">CSS Components for Onsen UI</h1>
 
+  <div>
+    <a href="/">All</a>
+    <a href="?platform=android">Android</a>
+    <a href="?platform=ios">iOS</a>
+  </div>
+
   <div class="components" data-bind="foreach: components">
     <div class="component-preview">
       <button class="component-preview__toggle" data-bind="event: {click: annotation.togglePreview.bind(annotation)}">HTML</button>
@@ -150,6 +156,11 @@ window.onload = function() {
   var components = JSON.parse(document.querySelector('#components-data').textContent);
   ko.applyBindings(makeViewModel(components));
 };
+
+function getPlatformFilter() {
+  var platform = getQueryParams()['platform'];
+  return platform === 'android' || platform === 'ios' ? platform : 'all';
+}
 
 function makeViewModel(components) {
   return {
