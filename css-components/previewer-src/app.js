@@ -9,11 +9,33 @@ function init() {
     return component;
   });
 
+  page('*', function() {
+    setTimeout(function() {
+      app.platform = getPlatform();
+    }, 0);
+  });
+  page();
+
   var app = new Vue({
     el: '#app',
     data: {
       components: components,
       platform: getPlatform()
+    },
+    methods: {
+      filterComponents: function() {
+        var components = this.components;
+        if (this.platform === 'android') {
+          return components.filter(function(component) {
+            return component.name.match(/Material/);
+          });
+        } else if (this.platform === 'ios') {
+          return components.filter(function(component) {
+            return !component.name.match(/Material/);
+          });
+        }
+        return components;
+      }
     }
   });
 };

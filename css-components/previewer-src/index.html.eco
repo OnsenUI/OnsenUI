@@ -18,11 +18,17 @@
 <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
 
   <div id="app">
+    <div>
+      <a href="?">All</a>
+      <a href="?platform=ios">iOS</a>
+      <a href="?platform=android">Android</a>
+    </div>
+
     <h1 id="title">CSS Components for Onsen UI</h1>
 
     <div class="components">
-      <div class="component-preview" v-for="component in components">
-        <button class="component-preview__toggle" v-on:click="component.preview = !component.preview">HTML</button>
+      <div class="component-preview" v-for="component in filterComponents()">
+        <button class="component-preview__toggle" @click="component.preview = !component.preview">HTML</button>
 
         <h2 class="component-preview__title">{{component.name}}</h2>
 
@@ -36,6 +42,7 @@
   </div>
 
   <script src="https://unpkg.com/vue@2.4.2" async></script>
+  <script src="https://unpkg.com/page.js@4.13.3/page.js" async></script>
   <script src="/app.js" async></script>
 
 </body>
