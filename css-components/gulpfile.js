@@ -12,6 +12,10 @@ const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
+const file = require('gulp-file');
+const {rollup} = require('rollup');
+const babel = require('rollup-plugin-babel');
+const commonjs = require('rollup-plugin-commonjs');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -95,7 +99,7 @@ gulp.task('generate-preview', (done) => {
 ////////////////////////////////////////
 // generate-preview-force
 ////////////////////////////////////////
-gulp.task('generate-preview-force', ['preview-assets'], () => {
+gulp.task('generate-preview-force', ['preview-assets', 'preview-js'], () => {
   const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
   const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)});
@@ -104,9 +108,40 @@ gulp.task('generate-preview-force', ['preview-assets'], () => {
   browserSync.reload();
 });
 
+////////////////////////////////////////
+// preview-assets
+////////////////////////////////////////
 gulp.task('preview-assets', () => {
-  return gulp.src('previewer-src/*.{css,js}')
+  return gulp.src('previewer-src/*.css')
     .pipe(gulp.dest('./build/'));
+});
+
+////////////////////////////////////////
+// preview-js
+////////////////////////////////////////
+gulp.task('preview-js', function() {
+  return rollup({
+    entry: 'previewer-src/app.js',
+    plugins: [
+      commonjs,
+      babel({
+        presets: [
+          ['es2015', {'modules': false}]
+        ],
+        babelrc: false,
+        exclude: 'node_modules/**'
+      })
+    ]
+  })
+  .then(bundle => {
+    return bundle.generate({
+      format: 'umd'
+    });
+  })
+  .then(gen => {
+    return file('app.gen.js', gen.code, {src: true})
+      .pipe(gulp.dest('build/'))
+  });
 });
 
 ////////////////////////////////////////

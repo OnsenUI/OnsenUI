@@ -3,14 +3,14 @@ window.onload = init;
 
 function init() {
   var components = JSON.parse(document.querySelector('#components-data').textContent);
-  components = components.map(function(component) {
+  components = components.map(component => {
     component = component.annotation;
     component.preview = true;
     return component;
   });
 
-  page('*', function() {
-    setTimeout(function() {
+  page('*', () => {
+    setTimeout(() => {
       app.platform = getPlatform();
     }, 0);
   });
@@ -23,7 +23,7 @@ function init() {
       platform: getPlatform()
     },
     methods: {
-      filterComponents: function() {
+      filterComponents() {
         var components = this.components;
         if (this.platform === 'android') {
           return components.filter(function(component) {
