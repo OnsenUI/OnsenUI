@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* Components now update back button handler when prop changes.
+
 1.5.0
 ----
 

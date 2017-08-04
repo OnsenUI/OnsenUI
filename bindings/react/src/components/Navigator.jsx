@@ -295,6 +295,12 @@ class Navigator extends BasicComponent {
     node.onDeviceBackButton = nextProps.onDeviceBackButton || this._onDeviceBackButton.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.onDeviceBackButton !== undefined) {
+      this._navi.onDeviceBackButton = newProps.onDeviceBackButton;
+    }
+  }
+
   componentWillUnmount() {
     const node = this._navi;
     node.removeEventListener('prepush', this.props.onPrePush);
