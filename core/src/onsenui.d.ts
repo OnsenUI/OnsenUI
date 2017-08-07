@@ -66,11 +66,24 @@ declare namespace ons {
   function disableAutoStyling(): void;
   function enableAutoStyling(): void;
   /**
-   * @description Refresh styling for the given platform.
+   * @description Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.
    */
   function forcePlatformStyling(platform: string): void;
-  function preload(...args: any[]): any;
-  function createElement(...args: any[]): any;
+  /**
+   * @description Access the last created page from the current `script` scope. Only works inside `<script></script>` tags that are direct children of `ons-page` element. Use this to add lifecycle hooks to a page.
+   * @return Returns the corresponding page element.
+   */
+  function getScriptPage(): HTMLElement | null;
+  /**
+   * @description Separated files need to be requested on demand and this can slightly delay pushing new pages. This method requests and caches templates for later use.
+   * @return Promise that resolves when all the templates are cached.
+   */
+  function preload(...args: any[]): Promise<DocumentFragment[]>;
+  /**
+   * @description Create a new element from a template. Both inline HTML and external files are supported although the return value differs.
+   * @return If the provided template was an inline HTML string, it returns the new element. Otherwise, it returns a promise that resolves to the new element.
+   */
+  function createElement(...args: any[]): HTMLElement | Promise<HTMLElement>;
   /**
    * @description Create a popover instance from a template.
    * @return Promise object that resolves to the popover component object.
@@ -86,7 +99,11 @@ declare namespace ons {
    * @return Promise object that resolves to the alert dialog component object.
    */
   function createAlertDialog(page: string, options?: OnsOptions): Promise<HTMLElement>;
-  function openActionSheet(...args: any[]): any;
+  /**
+   * @description Shows an instant Action Sheet and lets the user choose an action.
+   * @return Will resolve when the action sheet is closed. The resolve value is either the index of the tapped button or -1 when canceled.
+   */
+  function openActionSheet(...args: any[]): Promise<number>;
   /**
    * @description If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.
    */

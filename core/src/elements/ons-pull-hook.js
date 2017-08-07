@@ -141,7 +141,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   _onDragStart(event) {
-    if (this.disabled) {
+    if (!event.gesture || this.disabled) {
       return;
     }
 
@@ -168,7 +168,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   _onDrag(event) {
-    if (this.disabled || this._ignoreDrag || !this._canConsumeGesture(event.gesture)) {
+    if (!event.gesture || this.disabled || this._ignoreDrag || !this._canConsumeGesture(event.gesture)) {
       return;
     }
 
@@ -217,7 +217,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   _onDragEnd(event) {
-    if (this.disabled || this._ignoreDrag) {
+    if (!event.gesture || this.disabled || this._ignoreDrag) {
       return;
     }
 
@@ -379,10 +379,13 @@ export default class PullHookElement extends BaseElement {
   }
 
   _show() {
-    this.style.display = '';
-    if (this._pageElement) {
-      this._pageElement.style.marginTop = `-${this.height}px`;
-    }
+    // Run asyncrhonously to avoid conflicts with Animit's style clean
+    setImmediate(() => {
+      this.style.display = '';
+      if (this._pageElement) {
+        this._pageElement.style.marginTop = `-${this.height}px`;
+      }
+    });
   }
 
   _hide() {

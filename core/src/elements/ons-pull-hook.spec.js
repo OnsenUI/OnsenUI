@@ -81,7 +81,7 @@ describe('OnsPullHookElement', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
       pullHook.setAttribute('disabled', '');
-      pullHook._onDrag();
+      pullHook._onDrag(event);
 
       expect(spy).not.to.have.been.called();
     });

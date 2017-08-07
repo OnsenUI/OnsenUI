@@ -2,6 +2,19 @@
 CHANGELOG
 ====
 
+v2.5.2
+----
+
+### Bug Fixes
+
+ * ons-navigator: Ignore swipes on back buttons.
+ * ons-pull-hook: After popPage transition style fix.
+ * ons-tabbar: Minor issue fixed to improve compatibility with external routers.
+
+### Misc
+
+ * ons.getScriptPage: Added new method as a shortcut to get the current page and attach lifecycle hooks.
+
 v2.5.1
 ----
 
