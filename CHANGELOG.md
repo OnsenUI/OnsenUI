@@ -9,6 +9,7 @@ dev
 
  * ons-navigator: Ignore swipes on back buttons.
  * ons-pull-hook: After popPage transition style fix.
+ * ons-tabbar: Minor issue fixed to improve compatibility with external routers.
 
 v2.5.1
 ----

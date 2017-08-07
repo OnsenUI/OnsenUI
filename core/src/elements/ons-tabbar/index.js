@@ -183,11 +183,6 @@ export default class TabbarElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
 
-      const content = this._contentElement;
-      for (let i = 0; i < content.children.length; i++) {
-        content.children[i].style.display = 'none';
-      }
-
       const activeIndex = this.getAttribute('activeIndex');
 
       const tabbar = this._tabbarElement;
