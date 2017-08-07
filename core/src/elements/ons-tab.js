@@ -428,16 +428,21 @@ export default class TabElement extends BaseElement {
       }
 
       const onReady = () => {
-        if (this._getPageTarget() && !this.hasLoaded) {
+        if (!this.hasLoaded) {
+          if (this._getPageTarget()) {
+            this._loadPageElement(tabbar._contentElement, pageElement => {
+              pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(pageElement);
+            });
+          } else if (tabbar._contentElement.children.length === this.parentElement.children.length) {
+            this.pageElement.style.display = 'none';
+          }
           this.hasLoaded = true;
-          this._loadPageElement(tabbar._contentElement, pageElement => {
-            pageElement.style.display = 'none';
-            tabbar._contentElement.appendChild(pageElement);
-          });
         }
 
         if (this.hasAttribute('active')) {
-          tabbar.setActiveTab(this._findTabIndex());
+          this._onClick();
+          !this.isActive() && this.setActive();
         }
       };
 
