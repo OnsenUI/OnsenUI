@@ -63,6 +63,10 @@ v2.4.2
 
  * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
 
+### BREAKING CHANGES
+
+ * ons-button: Renamed some modifiers on ons-button component. From `large--cta` to `large-cta`, from `large--quiet` to `large-quite`, from `material--flat` to `material-flat`.
+
 v2.4.1
 ----
 

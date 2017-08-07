@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  [/en]
  * [ja][/ja]
  * @example
- * <Button modifier="large--cta">
+ * <Button modifier="large-cta">
  *   Tap Me
  * </Button>
  */

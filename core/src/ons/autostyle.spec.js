@@ -12,9 +12,9 @@ describe('ons._autoStyle', () => {
     expect(e.hasAttribute('ripple')).to.be.true;
     expect(e.firstChild.tagName.toLowerCase()).to.equal('ons-ripple');
     e = ons._util.createElement('<ons-button modifier="quiet"></ons-button>');
-    expect(e.getAttribute('modifier')).to.contain('material--flat');
-    e = ons._util.createElement('<ons-button modifier="large--quiet"></ons-button>');
-    expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material--flat');
+    expect(e.getAttribute('modifier')).to.contain('material-flat');
+    e = ons._util.createElement('<ons-button modifier="large-quiet"></ons-button>');
+    expect(e.getAttribute('modifier')).to.contain('large').and.to.contain('material-flat');
     ons.platform.select('');
   });
 
@@ -23,7 +23,7 @@ describe('ons._autoStyle', () => {
       const e = document.createElement('ons-button');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
       ons.platform.select('android');
-      expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material--flat');
+      expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material-flat');
       e.setAttribute('disable-auto-styling', '');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
       ons.platform.select('');
