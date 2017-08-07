@@ -9,6 +9,10 @@ dev
 
  * ons-navigator: Ignore swipes on back buttons.
 
+### Misc
+
+ * ons.getScriptPage: Added new method as a shortcut to get the current page and attach lifecycle hooks.
+
 v2.5.1
 ----
 

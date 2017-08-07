@@ -229,7 +229,7 @@ ons.enableAutoStyling = ons._autoStyle.enable;
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description
- *   [en]Refresh styling for the given platform.[/en]
+ *   [en]Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.[/en]
  *   [ja][/ja]
  * @param {string} platform New platform to style the elements.
  */
@@ -480,8 +480,8 @@ function waitDeviceReady() {
 }
 
 /**
- * @method lastCreatedPage
- * @signature lastCreatedPage()
+ * @method getScriptPage
+ * @signature getScriptPage()
  * @description
  *   [en]Access the last created page from the current `script` scope. Only works inside `<script></script>` tags that are direct children of `ons-page` element. Use this to add lifecycle hooks to a page.[/en]
  *   [ja][/ja]
@@ -490,7 +490,7 @@ function waitDeviceReady() {
  *   [ja][/ja]
  */
 const getCS = 'currentScript' in document ? () => document.currentScript : () => document.scripts[document.scripts.length - 1];
-ons.lastCreatedPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
+ons.getScriptPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
 
 window._superSecretOns = ons;
 export default ons;
