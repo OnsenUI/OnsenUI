@@ -69,7 +69,7 @@ $ monaca debug # Preview on a real device
 $ monaca remote-build # Production build on the cloud
 ```
 
-See the [Onsen UI Getting Started Page](http://onsen.io/getting_started/) for more information.
+See the [Onsen UI Getting Started Page](http://onsen.io/v2/guide/) for more information.
 
 ## Examples with source code
 
