@@ -84,7 +84,8 @@ export default class SpeedDialItemElement extends BaseElement {
         this._updateClassName(current);
         break;
       case 'modifier':
-        util.addModifier(this, 'mini') || ModifierUtil.onModifierChanged(last, current, this, scheme);
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        util.addModifier(this, 'mini');
         break;
       case 'ripple':
         this._updateRipple();

@@ -92,11 +92,8 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static onModifierChanged(last, current, element, scheme) {
-    if (!(isMD(last) && !isMD(current) && autoStyle.restore(element))) {
-      ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
-      return true;
-    }
-    return false
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, element.getAttribute('modifier') || ''), element, scheme);
+    return autoStyle.restore(element);
   }
 
   /**

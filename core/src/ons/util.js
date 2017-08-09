@@ -342,12 +342,12 @@ util.addModifier = (target, modifierName, options = {}) => {
  * @return {Boolean} Whether it was found or not.
  */
 util.removeModifier = (target, modifierName, options = {}) => {
-  if (!target.getAttribute('modifier')) {
-    return false;
-  }
-
   if (options.autoStyle) {
     modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
+  }
+
+  if (!target.getAttribute('modifier') || !util.hasModifier(target, modifierName)) {
+    return false;
   }
 
   const modifiers = target.getAttribute('modifier').split(/\s+/);
