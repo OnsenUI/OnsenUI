@@ -20,6 +20,8 @@ import util from './util';
 
 let autoStyleEnabled = true;
 
+const isMD = e => /(^|\s+)material($|\s+)/i.test(e.getAttribute('modifier'));
+
 // Modifiers
 const modifiersMap = {
   'quiet': 'material--flat',
@@ -38,9 +40,7 @@ platforms.android = element => {
 
   const elementName = element.tagName.toLowerCase();
 
-  if (!/ons-speed-dial/.test(elementName) &&
-    !/material/.test(element.getAttribute('modifier'))) {
-
+  if (elementName !== 'ons-speed-dial' && !isMD(element)) {
     const oldModifier = element.getAttribute('modifier') || '';
 
     const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
@@ -81,7 +81,7 @@ platforms.android = element => {
 platforms.ios = element => {
 
  // Modifiers
- if (/material/.test(element.getAttribute('modifier'))) {
+ if (isMD(element)) {
    util.removeModifier(element, 'material');
 
    if (util.removeModifier(element, 'material--flat')) {
