@@ -1,3 +1,7 @@
+import {getPlatform} from '../platform';
+import {IndexPage} from './index-page';
+import {ComponentPage} from './component-page';
+
 export const createAppComponent = ({components, categories, platform}) => ({
   el: '#app',
   data: {
@@ -22,51 +26,66 @@ export const createAppComponent = ({components, categories, platform}) => ({
         </div>
       </div>
 
-
-      <div class="content">
-        <div class="platform-filter">
-          <a class="platform-filter__link" :class="{'platform-filter__link--active': this.platform !== 'ios' && this.platform !== 'android'}" href="?">All</a>
-          <a class="platform-filter__link" :class="{'platform-filter__link--active': this.platform === 'ios'}"  href="?platform=ios">iOS</a>
-          <a class="platform-filter__link" :class="{'platform-filter__link--active': this.platform === 'android'}"  href="?platform=android">Android</a>
-        </div>
-
-        <h2 class="content__header">All Components</h2>
-
-        <div class="components">
-          <css-component v-for="component in filterComponents()" :component="component" :key="component.id" />
-        </div>
-      </div>
+      <my-router />
     </div>
   `,
+    /*
+  created() {
+    page('*', (context, next) => {
+      setTimeout(() => {
+        app.platform = getPlatform();
+      }, 0);
+      next();
+    });
+  },*/
   components: {
-    'css-component': PreviewComponent
-  },
-  methods: {
-    filterComponents() {
-      var components = this.components;
-      if (this.platform === 'android') {
-        return components.filter(function(component) {
-          return component.name.match(/Material/);
-        });
-      } else if (this.platform === 'ios') {
-        return components.filter(function(component) {
-          return !component.name.match(/Material/);
-        });
-      }
-      return components;
-    }
+    'my-router': createRouter()
   }
 });
 
-const PreviewComponent = {
-  props: ['component'],
-  template: `
-      <div class="component-preview">
-        <a class="component-preview__title" :href="'/components/' + component.id">{{component.name}}</a>
-
-        <div class="page component-preview__example">
-          <div style="width: 100%;" v-html="component.markup"></div>
-        </div>
-      </div>
-    `
+const routes = {
+  '/': IndexPage,
+  '/components/:id': ComponentPage
 };
+
+const createRouter = () => {
+  return {
+    data: () => {
+      return {
+        path: '/',
+        params: {}
+      };
+    },
+    computed: {
+      currentView() {
+        const page = routes[this.path];
+        return page;
+      }
+    },
+    created() {
+      page('/components/:id', (context) => {
+        this.path = '/components/:id';
+        this.params = context.params;
+      });
+
+      page('/', () => {
+        this.path = '/';
+        this.params = {};
+      });
+
+      page();
+    },
+    render(h) {
+      const props = {};
+      for (let key in this.params) {
+        if (this.params.hasOwnProperty(key)) {
+          props[key] = this.params[key];
+        }
+      }
+      props.components = window.components;
+
+      return h(this.currentView, {props});
+    }
+  };
+};
+

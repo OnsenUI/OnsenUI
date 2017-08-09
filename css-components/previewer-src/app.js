@@ -5,12 +5,7 @@ function init() {
   const components = makeComponents();
   const categories = makeCategories(components);
 
-  page('*', () => {
-    setTimeout(() => {
-      app.platform = getPlatform();
-    }, 0);
-  });
-  page();
+  window.components = components;
 
   var app = new Vue(createAppComponent({
     components,
