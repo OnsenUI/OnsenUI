@@ -5,6 +5,18 @@ describe('ons._autoStyle', () => {
     expect(ons._autoStyle).to.be.an.instanceOf(Object);
   });
 
+  describe('getPlatform', () => {
+    it('returns the auto styling platform', () => {
+      const e = document.createElement('ons-button');
+      expect(ons._autoStyle.getPlatform(e)).to.equal(null);
+      ons.platform.select('android');
+      expect(ons._autoStyle.getPlatform(e)).to.equal('android');
+      e.setAttribute('disable-auto-styling', '');
+      expect(ons._autoStyle.getPlatform(e)).to.equal(null);
+      ons.platform.select('');
+    });
+  });
+
   it('adds \'material\' modifiers and effects on Android', () => {
     ons.platform.select('android');
     let e = document.createElement('ons-button');
