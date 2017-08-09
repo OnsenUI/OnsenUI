@@ -5,36 +5,36 @@ body {
   position: static;
   background-color: white;
   overflow: visible;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 a,
 a:link,
 a:visited {
   color: #999;
+  font-family: 'Helvetica Neue', 'Helevetica', sans-serif;
 }
 
 a:hover {
   text-decoration: none;
 }
 
-h1#title {
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Helvetica;
-  text-align: center;
-  width: 100%;
-  height: 64px;
-  line-height: 64px;
-  padding: 0;
-  margin: 0 0 20px 0;
+.content {
+  margin-left: 140px;
+}
+
+.content__header {
+  font-size: 22px;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  color: #444;
 }
 
 .components {
+  clear: both;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 50vh;
-  margin-left: 120px;
+  margin: 0 0 50vh -10px;
 }
 
 .component-preview {
@@ -55,58 +55,18 @@ h1#title {
   text-decoration: underline;
 }
 
-.component-preview__title {
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  color: #333;
-  line-height: 1.4;
-  margin: 8px 0;
-}
-
-.component-preview__toggle {
-  display: none;
-  float: right;
-  margin: 8px 0 0 0;
-  border: none;
-  background-color: white;
+.component-preview__title,
+.component-preview__title:link,
+.component-preview__title:visited,
+.component-preview__title:hover {
   font-size: 12px;
-  padding: 0px;
-  color: #aaa;
-  text-decoration: underline;
-  cursor: pointer;
-  line-height: 12px;
-  padding: 4px 3px;
-}
-
-.component-preview:hover > .component-preview__toggle {
-  display: block;
-}
-
-.component-preview__toggle:hover {
-  text-decoration: none;
-}
-
-.component-preview__toggle:active {
-  outline: none;
-}
-
-.component-preview__toggle:focus {
-  outline: none;
-}
-
-.component-preview__markup {
-  background-color: #f3f3f3;
-  color: #888;
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: Consolas, monospace;
-  padding: 4px 6px;
-  max-width: 100%;
-  overflow-x: auto;
-  user-select: auto;
-  box-sizing: border-box;
+  color: #444;
+  font-weight: 500;
   margin: 0;
+  line-height: 1.4;
+  text-decoration: none;
+  margin: 4px 0;
+  display: inline-block;
 }
 
 .component-preview__example {
@@ -118,36 +78,89 @@ h1#title {
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 3px;
+}
+
+.side-navi {
+  float: left; 
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  box-sizing: border-box;
+  padding: 18px 0 18px 18px;
+  overflow-y: auto;
+}
+
+.side-navi::-webkit-scrollbar { 
+  display: none; 
+}
+
+.side-navi__title,
+.side-navi__title:link,
+.side-navi__title:visited {
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-weight: 500;
+  display: block;
+  color: #444;
+  text-decoration: none;
+}
+
+.side-navi__title:hover {
+  color: #FF3726;
 }
 
 .category-list {
-  float: left;
-  width: 120px;
-  position: fixed;
-  padding: 10px;
-  overflow: auto;
-  height: 100vh;
-  background-color: white;
-  border-right: 1px solid #ddd;
+}
+
+.category-list__header {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  line-height: 23px;
 }
 
 .category-list__item {
-  height: 28px;
-  line-height: 28px;
+  height: 23px;
+  line-height: 22px;
+  margin-left: 13px;
 }
 
 .category-list__item-link,
 .category-list__item-link:link,
 .category-list__item-link:visited {
-  font-size: 13px;
-  color: #999;
+  font-size: 12px;
+  color: #444;
+  text-decoration: none;
 }
 
 .platform-filter {
   float: right;
-  margin: 10px;
+  margin: 0 18px 0 0;
+  display: flex;
 }
 
-.platform-filter__link {
-  font-size: 13px;
+.platform-filter__link,
+.platform-filter__link:link,
+.platform-filter__link:visited,
+.platform-filter__link:hover {
+  font-family: 'Helvetica Neue', 'Helevetica', sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  color: #999;
+  box-sizing: border-box;
+  padding: 2px 5px;
+  font-weight: 400;
+  margin: 0 1px;
+  border-radius: 3px;
+}
+
+.platform-filter__link--active,
+.platform-filter__link--active:link,
+.platform-filter__link--active:visited {
+  color: #444;
+  background-color: #eee;
 }
