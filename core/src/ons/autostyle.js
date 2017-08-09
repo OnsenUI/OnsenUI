@@ -38,7 +38,7 @@ platforms.android = element => {
 
   const elementName = element.tagName.toLowerCase();
 
-  if (elementName !== 'ons-speed-dial' && !util.hasModifier(element, 'material')) {
+  if (!util.hasModifier(element, 'material')) {
     const oldModifier = element.getAttribute('modifier') || '';
 
     const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);

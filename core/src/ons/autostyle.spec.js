@@ -51,8 +51,8 @@ describe('ons._autoStyle', () => {
       expect(e.getAttribute('modifier')).to.equal('material');
       e.setAttribute('disable-auto-styling', '');
       e.removeAttribute('modifier');
-      expect(ons._autoStyle.restore(e), 'restore(e)').to.be.false;
-      expect(e.hasAttribute('modifier'), 'hasAttribute(modifier)').to.be.false;
+      expect(ons._autoStyle.restore(e)).to.be.false;
+      expect(e.hasAttribute('modifier')).to.be.false;
       ons.platform.select('');
     });
   });
