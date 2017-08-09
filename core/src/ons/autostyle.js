@@ -20,8 +20,6 @@ import util from './util';
 
 let autoStyleEnabled = true;
 
-const isMD = e => /(^|\s+)material($|\s+)/i.test(e.getAttribute('modifier'));
-
 // Modifiers
 const modifiersMap = {
   'quiet': 'material--flat',
@@ -40,7 +38,7 @@ platforms.android = element => {
 
   const elementName = element.tagName.toLowerCase();
 
-  if (elementName !== 'ons-speed-dial' && !isMD(element)) {
+  if (elementName !== 'ons-speed-dial' && !util.hasModifier(element, 'material')) {
     const oldModifier = element.getAttribute('modifier') || '';
 
     const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
@@ -81,9 +79,7 @@ platforms.android = element => {
 platforms.ios = element => {
 
  // Modifiers
- if (isMD(element)) {
-   util.removeModifier(element, 'material');
-
+ if (util.removeModifier(element, 'material')) {
    if (util.removeModifier(element, 'material--flat')) {
      util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
    }
@@ -127,11 +123,14 @@ const mapModifier = (modifier, element, force) => {
   return p && modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
 };
 
+const restore = element => getPlatform(element) === 'android' && util.addModifier(element, 'material');
+
 export default {
   isEnabled: () => autoStyleEnabled,
   enable: () => autoStyleEnabled = true,
   disable: () => autoStyleEnabled = false,
   prepare,
   mapModifier,
-  getPlatform
+  getPlatform,
+  restore
 };

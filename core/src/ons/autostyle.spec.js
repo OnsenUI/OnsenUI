@@ -8,11 +8,11 @@ describe('ons._autoStyle', () => {
   describe('getPlatform', () => {
     it('returns the auto styling platform', () => {
       const e = document.createElement('ons-button');
-      expect(ons._autoStyle.getPlatform(e)).to.equal(null);
+      expect(ons._autoStyle.getPlatform(e)).to.be.null;
       ons.platform.select('android');
       expect(ons._autoStyle.getPlatform(e)).to.equal('android');
       e.setAttribute('disable-auto-styling', '');
-      expect(ons._autoStyle.getPlatform(e)).to.equal(null);
+      expect(ons._autoStyle.getPlatform(e)).to.be.null;
       ons.platform.select('');
     });
   });
@@ -38,6 +38,21 @@ describe('ons._autoStyle', () => {
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('material--flat');
       e.setAttribute('disable-auto-styling', '');
       expect(ons._autoStyle.mapModifier('quiet', e)).to.equal('quiet');
+      ons.platform.select('');
+    });
+  });
+
+  describe('restore', () => {
+    it('adds material modifier back if necessary', () => {
+      const e = document.createElement('ons-button');
+      expect(ons._autoStyle.restore(e)).to.be.false;
+      ons.platform.select('android');
+      expect(ons._autoStyle.restore(e)).to.be.true;
+      expect(e.getAttribute('modifier')).to.equal('material');
+      e.setAttribute('disable-auto-styling', '');
+      e.removeAttribute('modifier');
+      expect(ons._autoStyle.restore(e), 'restore(e)').to.be.false;
+      expect(e.hasAttribute('modifier'), 'hasAttribute(modifier)').to.be.false;
       ons.platform.select('');
     });
   });

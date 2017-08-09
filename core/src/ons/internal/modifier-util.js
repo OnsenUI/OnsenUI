@@ -16,6 +16,9 @@ limitations under the License.
 */
 
 import util from '../util.js';
+import autoStyle from '../autostyle.js';
+
+const isMD = m => /(^|\s+)material($|\s+)/i.test(m);
 
 export default class ModifierUtil {
   /**
@@ -91,7 +94,11 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static onModifierChanged(last, current, element, scheme) {
-    return ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+    if (!(isMD(last) && !isMD(current) && autoStyle.restore(element))) {
+      ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+      return true;
+    }
+    return false
   }
 
   /**

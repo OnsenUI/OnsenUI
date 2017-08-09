@@ -84,7 +84,7 @@ export default class BackButtonElement extends BaseElement {
   }
 
   _updateIcon(icon = util.findChild(this, '.back-button__icon')) {
-    icon.innerHTML = autoStyle.getPlatform(this) === 'android' ? mdBackButtonIcon : iosBackButtonIcon;
+    icon.innerHTML = autoStyle.getPlatform(this) === 'android' || util.hasModifier(this, 'material') ? mdBackButtonIcon : iosBackButtonIcon;
   }
 
   _compile() {
@@ -198,9 +198,7 @@ export default class BackButtonElement extends BaseElement {
         break;
 
       case 'modifier': {
-        const isMD = m => /(^|\s+)material($|\s+)/i.test(m);
-        isMD(last) !== isMD(current) && this._updateIcon();
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        ModifierUtil.onModifierChanged(last, current, this, scheme) && this._updateIcon();
         break;
       }
     }
