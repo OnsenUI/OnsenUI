@@ -24,7 +24,9 @@ a:hover {
 }
 
 .content {
-  margin-left: 140px;
+  padding-left: 140px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .content__header {
@@ -32,20 +34,22 @@ a:hover {
   font-weight: 400;
   font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
   color: #444;
+  margin: 18px 0 6px 0;
+  padding: 0;
 }
 
 .components {
   clear: both;
   display: flex;
   flex-wrap: wrap;
-  margin: -18px 0 50vh -10px;
+  margin: 0 0 50vh -10px;
 }
 
 .component-preview {
   display: inline-block;
   width: 350px;
   box-sizing: border-box;
-  margin: 0px 10px 0 10px;
+  margin: 0px 10px 6px 10px;
 }
 
 .component-preview__link,
@@ -84,8 +88,12 @@ a:hover {
   font-weight: 500;
   line-height: 1.4;
   text-decoration: none;
-  margin: 24px 0 4px 0;
-  display: block;
+  margin: 12px 0 4px 0;
+  display: inline-block;
+}
+
+a.title-label:hover {
+  color: #999;
 }
 
 .component-markup {
@@ -98,6 +106,7 @@ a:hover {
   width: 100%;
   margin: 0;
   user-select: text;
+  box-sizing: border-box;
 }
 
 .side-navi {
@@ -154,6 +163,10 @@ a:hover {
   font-size: 12px;
   color: #444;
   text-decoration: none;
+}
+
+.category-list__item-link:hover {
+  color: #999;
 }
 
 .platform-filter {

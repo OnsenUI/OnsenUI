@@ -11,7 +11,7 @@ export const ComponentPage = {
       <div>
         <h2 class="content__header">{{component.name}}</h2>
 
-        <h3 class="title-label">Preview</h3>
+        <h3 class="title-label">Example</h3>
 
         <div class="page component-example">
           <div style="width: 100%;" v-html="component.markup"></div>
