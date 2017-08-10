@@ -1,6 +1,10 @@
+import {ComponentExample} from './preview-component.js';
 
 export const ComponentPage = {
   props: ['components', 'id'],
+  components: {
+    'component-example': ComponentExample
+  },
   computed: {
     component() {
       return this.components.filter(component => component.id === this.id)[0];
@@ -13,9 +17,7 @@ export const ComponentPage = {
 
         <h3 class="title-label">Example</h3>
 
-        <div class="page component-example">
-          <div style="width: 100%;" v-html="component.markup"></div>
-        </div>
+        <component-example :component="component" />
 
         <h3 class="title-label">HTML</h3>
 

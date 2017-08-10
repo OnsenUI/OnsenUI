@@ -74,6 +74,7 @@ a:hover {
   text-align: center;
   border-radius: 3px;
   width: 350px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
 .title-label,
@@ -224,6 +225,7 @@ a.title-label:hover {
     border-radius: 0;
     margin-right: -10px;
     margin-left: -10px;
+    box-shadow: none;
   }
 
   .component-markup {
