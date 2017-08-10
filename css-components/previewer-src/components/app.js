@@ -54,6 +54,11 @@ const createRouter = () => {
       };
     },
     created() {
+      page('*', (context, next) => {
+        document.body.scrollTop = document.body.scrollLeft = 0;
+        next();
+      });
+
       page('/components/:id', (context) => {
         this.component = ComponentPage;
         this.params = context.params;

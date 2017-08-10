@@ -157,6 +157,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
   browserSync.init({
     ui: false,
     port: 4321,
+    notify: false,
     server: {
       baseDir: __dirname + '/build',
       middleware: [historyApiFallback()],
