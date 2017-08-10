@@ -1,6 +1,7 @@
 import {getPlatform} from '../platform';
 import {IndexPage} from './index-page';
 import {ComponentPage} from './component-page';
+import {CategoryPage} from './category-page';
 
 export const createAppComponent = ({components, categories}) => ({
   el: '#app',
@@ -48,13 +49,18 @@ const createRouter = () => {
     props: ['baseParams'],
     data: () => {
       return {
-        path: '/',
-        params: {}
+        component: IndexPage,
+        params: {platform: getPlatform()}
       };
     },
     created() {
       page('/components/:id', (context) => {
         this.component = ComponentPage;
+        this.params = context.params;
+      });
+
+      page('/categories/:id', (context) => {
+        this.component = CategoryPage;
         this.params = context.params;
       });
 

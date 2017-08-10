@@ -1,22 +1,7 @@
-
-const PreviewComponent = {
-  props: ['component'],
-  template: `
-      <div class="component-preview">
-        <a class="title-label" :href="'/components/' + component.id">{{component.name}}</a>
-
-        <div class="page component-example">
-          <div style="width: 100%;" v-html="component.markup"></div>
-        </div>
-      </div>
-    `
-};
+import {PreviewComponent} from './preview-component';
 
 export const IndexPage = {
   props: ['components', 'platform'],
-  components: {
-    'css-component': PreviewComponent
-  },
   template: `
     <div class="content">
       <div class="platform-filter">
@@ -32,9 +17,12 @@ export const IndexPage = {
       </div>
     </div>
   `,
+  components: {
+    'css-component': PreviewComponent
+  },
   methods: {
     filterComponents() {
-      var components = this.components;
+      const components = this.components;
       if (this.platform === 'android') {
         return components.filter(function(component) {
           return component.name.match(/Material/);

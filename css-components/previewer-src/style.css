@@ -38,7 +38,7 @@ a:hover {
   clear: both;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 50vh -10px;
+  margin: -18px 0 50vh -10px;
 }
 
 .component-preview {
