@@ -134,13 +134,11 @@ gulp.task('preview-js', function() {
     ]
   })
   .then(bundle => {
-    return bundle.generate({
-      format: 'umd'
+    return bundle.write({
+      dest: 'build/app.gen.js',
+      format: 'umd',
+      sourceMap: 'inline'
     });
-  })
-  .then(gen => {
-    return file('app.gen.js', gen.code, {src: true})
-      .pipe(gulp.dest('build/'))
   });
 });
 
