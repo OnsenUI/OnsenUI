@@ -128,16 +128,15 @@ a.title-label:hover {
 .side-navi__title:visited {
   font-size: 13px;
   line-height: 18px;
-  margin: 0 0 20px 0;
-  padding: 0;
-  font-weight: 500;
+  margin: -6px -6px 20px -6px;
+  padding: 6px;
+  font-weight: 400;
   display: block;
-  color: #444;
   text-decoration: none;
-}
-
-.side-navi__title:hover {
   color: #FF3726;
+  background-color: rgba(255, 26, 0, 0.08);
+  width: 95px;
+  box-sizing: border-box;
 }
 
 .category-list {
