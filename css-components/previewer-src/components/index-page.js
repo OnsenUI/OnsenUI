@@ -34,7 +34,6 @@ export const IndexPage = {
   `,
   methods: {
     filterComponents() {
-      console.log('filter', this.components);
       var components = this.components;
       if (this.platform === 'android') {
         return components.filter(function(component) {

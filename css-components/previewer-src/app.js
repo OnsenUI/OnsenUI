@@ -1,4 +1,3 @@
-import {getPlatform, getPlatformFilter} from './platform';
 import {createAppComponent} from './components/app';
 
 function init() {
@@ -9,8 +8,7 @@ function init() {
 
   var app = new Vue(createAppComponent({
     components,
-    categories,
-    platform: getPlatform()
+    categories
   }));
 };
 

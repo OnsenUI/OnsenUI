@@ -2,12 +2,11 @@ import {getPlatform} from '../platform';
 import {IndexPage} from './index-page';
 import {ComponentPage} from './component-page';
 
-export const createAppComponent = ({components, categories, platform}) => ({
+export const createAppComponent = ({components, categories}) => ({
   el: '#app',
   data: {
     components,
-    categories,
-    platform
+    categories
   },
   template: `
     <div>
@@ -26,65 +25,70 @@ export const createAppComponent = ({components, categories, platform}) => ({
         </div>
       </div>
 
-      <my-router />
+      <my-router :base-params="createParams()" />
     </div>
   `,
-    /*
-  created() {
-    page('*', (context, next) => {
-      setTimeout(() => {
-        app.platform = getPlatform();
-      }, 0);
-      next();
-    });
-  },*/
   components: {
     'my-router': createRouter()
+  },
+  methods: {
+    createParams() {
+      const params = {};
+
+      params.components = [].concat(this.components);
+      params.categories = [].concat(this.categories);
+
+      return params;
+    }
   }
 });
 
-const routes = {
-  '/': IndexPage,
-  '/components/:id': ComponentPage
-};
-
 const createRouter = () => {
   return {
+    props: ['baseParams'],
     data: () => {
       return {
         path: '/',
         params: {}
       };
     },
-    computed: {
-      currentView() {
-        const page = routes[this.path];
-        return page;
-      }
-    },
     created() {
       page('/components/:id', (context) => {
-        this.path = '/components/:id';
+        this.component = ComponentPage;
         this.params = context.params;
       });
 
       page('/', () => {
-        this.path = '/';
-        this.params = {};
+        setTimeout(() => {
+          this.component = IndexPage;
+          this.params = {platform: getPlatform()};
+        }, 0);
+      });
+
+      page('*', () => {
+        page.redirect('/');
       });
 
       page();
     },
     render(h) {
       const props = {};
+
+      if (this.baseParams) {
+        for (let key in this.baseParams) {
+          if (this.baseParams.hasOwnProperty(key)) {
+            props[key] = this.baseParams[key];
+          }
+        }
+      }
+
       for (let key in this.params) {
         if (this.params.hasOwnProperty(key)) {
           props[key] = this.params[key];
         }
       }
-      props.components = window.components;
 
-      return h(this.currentView, {props});
+      return h(this.component, {props});
     }
   };
 };

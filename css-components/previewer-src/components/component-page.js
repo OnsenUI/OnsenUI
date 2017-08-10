@@ -14,7 +14,7 @@ export const ComponentPage = {
         <h3 class="title-label">Preview</h3>
 
         <div class="page component-example">
-          <div v-html="component.markup"></div>
+          <div style="width: 100%;" v-html="component.markup"></div>
         </div>
 
         <h3 class="title-label">HTML</h3>

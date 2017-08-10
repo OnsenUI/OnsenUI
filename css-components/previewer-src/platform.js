@@ -8,14 +8,3 @@ export function getPlatform() {
   return 'all';
 }
 
-export function getPlatformFilter(platform) {
-  if (platform === 'android') {
-    return component => component.annotation.name.match(/Material/);
-  }
-  
-  if (platform === 'ios') {
-    return component => !component.annotation.name.match(/Material/);
-  }
-
-  return () => true;
-}
