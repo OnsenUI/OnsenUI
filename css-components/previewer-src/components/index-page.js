@@ -3,9 +3,9 @@ const PreviewComponent = {
   props: ['component'],
   template: `
       <div class="component-preview">
-        <a class="component-preview__title" :href="'/components/' + component.id">{{component.name}}</a>
+        <a class="title-label" :href="'/components/' + component.id">{{component.name}}</a>
 
-        <div class="page component-preview__example">
+        <div class="page component-example">
           <div style="width: 100%;" v-html="component.markup"></div>
         </div>
       </div>

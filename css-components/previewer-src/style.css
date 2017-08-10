@@ -8,6 +8,10 @@ body {
   font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
+* {
+  user-select: auto !important;
+}
+
 a,
 a:link,
 a:visited {
@@ -41,7 +45,7 @@ a:hover {
   display: inline-block;
   width: 350px;
   box-sizing: border-box;
-  margin: 10px 10px 20px 10px;
+  margin: 0px 10px 0 10px;
 }
 
 .component-preview__link,
@@ -55,21 +59,7 @@ a:hover {
   text-decoration: underline;
 }
 
-.component-preview__title,
-.component-preview__title:link,
-.component-preview__title:visited,
-.component-preview__title:hover {
-  font-size: 12px;
-  color: #444;
-  font-weight: 500;
-  margin: 0;
-  line-height: 1.4;
-  text-decoration: none;
-  margin: 4px 0;
-  display: inline-block;
-}
-
-.component-preview__example {
+.component-example {
   height: 201px;
   text-align: center;
   position: relative;
@@ -79,6 +69,35 @@ a:hover {
   align-items: center;
   text-align: center;
   border-radius: 3px;
+}
+
+.component-example {
+  width: 350px;
+}
+
+.title-label,
+.title-label:link,
+.title-label:visited,
+.title-label:hover {
+  font-size: 12px;
+  color: #444;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  margin: 24px 0 4px 0;
+  display: block;
+}
+
+.component-markup {
+  font-family: 'Menlo', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #F4F9FF;
+  background-color: #1F2833;
+  padding: 22px;
+  width: 100%;
+  margin: 0;
+  user-select: text;
 }
 
 .side-navi {
