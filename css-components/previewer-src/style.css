@@ -46,7 +46,7 @@ a:hover {
 }
 
 .component-preview {
-  display: inline-block;
+  display: block;
   width: 350px;
   box-sizing: border-box;
   margin: 0px 10px 6px 10px;
@@ -73,9 +73,6 @@ a:hover {
   align-items: center;
   text-align: center;
   border-radius: 3px;
-}
-
-.component-example {
   width: 350px;
 }
 
@@ -107,6 +104,7 @@ a.title-label:hover {
   margin: 0;
   user-select: text;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .side-navi {
@@ -195,4 +193,42 @@ a.title-label:hover {
 .platform-filter__link--active:visited {
   color: #444;
   background-color: #eee;
+}
+
+@media (max-width: 480px) {
+  .side-navi {
+    display: none;
+  }
+
+  .platform-filter {
+    display: none;
+  }
+
+  .content {
+    padding: 0 10px;
+  }
+
+  .components {
+    display: block;
+    margin-left: 0;
+  }
+
+  .component-preview {
+    width: auto;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .component-example {
+    width: auto;
+    border-radius: 0;
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+
+  .component-markup {
+    margin-right: -10px;
+    margin-left: -10px;
+    width: auto;
+  }
 }
