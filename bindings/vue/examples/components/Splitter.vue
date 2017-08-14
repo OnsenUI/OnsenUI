@@ -10,17 +10,13 @@
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"
-        @postclose="log('postclose')"
+        @postclose="log('postclose', splitterOpen)"
         @modechange="log('modechange')"
       >
         <page-side :toggle-menu="toggleMenu"></page-side>
       </v-ons-splitter-side>
-      <v-ons-splitter-content
-        :is-open="splitterOpen"
-        :side-state="state"
-        :toggle-menu="toggleMenu"
-      >
-        <div :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu"></div>
+      <v-ons-splitter-content>
+        <component :is="currentContent" :is-open="splitterOpen" :side-state="state" :toggle-menu="toggleMenu"></component>
       </v-ons-splitter-content>
     </v-ons-splitter>
   </v-ons-page>

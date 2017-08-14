@@ -83,6 +83,10 @@ export default class BackButtonElement extends BaseElement {
     this._boundOnClick = this._onClick.bind(this);
   }
 
+  _updateIcon(icon = util.findChild(this, '.back-button__icon')) {
+    icon.innerHTML = autoStyle.getPlatform(this) === 'android' || util.hasModifier(this, 'material') ? mdBackButtonIcon : iosBackButtonIcon;
+  }
+
   _compile() {
     autoStyle.prepare(this);
 
@@ -99,11 +103,7 @@ export default class BackButtonElement extends BaseElement {
 
     if (!util.findChild(this, '.back-button__icon')) {
       const icon = util.create('span.back-button__icon');
-      icon.innerHTML = autoStyle.caseOf(this, {
-        ios: iosBackButtonIcon,
-        android: mdBackButtonIcon,
-        default: iosBackButtonIcon
-      });
+      this._updateIcon(icon);
 
       this.insertBefore(icon, this.children[0]);
     }
@@ -197,9 +197,10 @@ export default class BackButtonElement extends BaseElement {
         }
         break;
 
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
+      case 'modifier': {
+        ModifierUtil.onModifierChanged(last, current, this, scheme) && this._updateIcon();
         break;
+      }
     }
   }
 

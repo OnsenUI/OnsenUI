@@ -2,6 +2,17 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-speed-dial-item: Apply Material Design style correctly.
+
+### Misc
+
+ * autostyle: 'material' modifier is automatically restored.
+
 v2.5.2
 ----
 

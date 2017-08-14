@@ -56,43 +56,6 @@ const hasOptions = {
   }
 };
 
-// Components with 'modifier' attribute
-const modifier = {
-  props: {
-    modifier: {
-      type: String,
-      default: ''
-    }
-  },
-
-  methods: {
-    _updateModifier() {
-      const preset = this._md ? ['material'] : [];
-
-      // Remove
-      (this._previousModifier || '').split(/\s+/).concat(preset)
-        .forEach(m => util.removeModifier(this.$el, m, { autoStyle: true }));
-
-      // Add
-      this.modifier.trim().split(/\s+/).concat(preset)
-        .forEach(m => m && util.addModifier(this.$el, m, { autoStyle: true }));
-
-      this._previousModifier = this.modifier;
-    }
-  },
-
-  watch: {
-    modifier() {
-      this._updateModifier();
-    }
-  },
-
-  mounted() {
-    this._md = /^material$/.test(this.$el.getAttribute('modifier'));
-    this._updateModifier();
-  }
-};
-
 // Provides itself to its descendants
 const selfProvider = {
   provide() {
@@ -128,4 +91,4 @@ const portal = {
   }
 };
 
-export { hidable, hasOptions, modifier, selfProvider, dialogCancel, portal };
+export { hidable, hasOptions, selfProvider, dialogCancel, portal };
