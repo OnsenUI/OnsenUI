@@ -37,14 +37,13 @@
 
   --hide-input: {
     position: absolute;
-    overflow: hidden;
     right: 0;
     top: 0;
     left: 0;
     bottom: 0;
     padding: 0;
     border: 0;
-    opacity: 0.001;
+    background-color: transparent;
     z-index: 1;
     vertical-align: top;
     outline: none;
@@ -141,5 +140,21 @@
       0 16px 24px 2px rgba(0, 0, 0, 0.14),
       0 6px 30px 5px rgba(0, 0, 0, 0.12),
       0 8px 10px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  --checkmark: {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    opacity: 0;
+    width: 11px;
+    height: 4px;
+    background: transparent;
+    border: 2px solid var(--highlight-color);
+    border-top: none;
+    border-right: none;
+    border-radius: 0;
+    transform: rotate(-45deg);
   }
 }

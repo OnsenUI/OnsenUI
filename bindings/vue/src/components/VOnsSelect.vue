@@ -1,5 +1,5 @@
 <template>
-  <ons-select>
+  <ons-select v-on="$listeners">
     <select>
       <slot></slot>
     </select>
@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  import { modifier, deriveEvents, modelInput } from '../mixins';
+  import { modelInput } from '../mixins';
 
   export default {
-    mixins: [modifier, deriveEvents, modelInput]
+    mixins: [modelInput]
   };
 </script>

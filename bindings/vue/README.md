@@ -8,14 +8,8 @@ For more information of what's included in Onsen UI please see:
 
 * [Main repo](https://github.com/OnsenUI/OnsenUI)
 * [Official website](https://onsen.io/)
-* [Docs](https://onsen.io/v2/docs/guide/vue/)
+* [Docs](https://onsen.io/v2/guide/vue/)
 * [Playground](http://tutorial.onsen.io/?framework=vue&category=reference&module=page)
-
-## Status
-
-`vue-onsenui` bindings are currently in **beta status**. This means that minor breaking changes might happen.
-
-We want the bindings to feel like a Vue extension. Therefore, we are open to suggestions about the API. Feel free to [open an issue](https://github.com/OnsenUI/OnsenUI/issues) if you find that something can be improved.
 
 ## Installation
 
@@ -38,7 +32,6 @@ import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
 import Vue from 'vue';
-import 'onsenui';
 import VueOnsen from 'vue-onsenui';
 
 Vue.use(VueOnsen);
@@ -69,6 +62,8 @@ yarn run dev
 ```
 
 This will open a development server with a kitchen sink app in `localhost:8080`.
+
+Otherwise, have a look at the [playground](https://tutorial.onsen.io/) for online examples.
 
 ## Support
 

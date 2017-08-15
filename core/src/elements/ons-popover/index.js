@@ -273,7 +273,8 @@ export default class PopoverElement extends BaseDialogElement {
     };
 
     const {vertical, primary: primaryDirection, secondary} = this._calculateDirections(targetDistance);
-    ModifierUtil.addModifier(this, primaryDirection);
+    this._currentDirection = primaryDirection;
+    util.addModifier(this, primaryDirection);
 
     const sizeName = vertical ? 'width' : 'height';
     // Get .popover__content size
@@ -308,9 +309,10 @@ export default class PopoverElement extends BaseDialogElement {
   }
 
   _clearStyles() {
+    this._currentDirection = null;
     ['top', 'bottom', 'left', 'right'].forEach(e => {
       this._arrow.style[e] = this._content.style[e] = this._popover.style[e] = '';
-      ModifierUtil.removeModifier(this, e);
+      util.removeModifier(this, e);
     });
   }
 
@@ -491,10 +493,11 @@ export default class PopoverElement extends BaseDialogElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'direction') {
-      this._boundOnChange();
-    } else {
-      super.attributeChangedCallback(name, last, current);
+      return this._boundOnChange();
+    } else if (name === 'modifier') {
+      this._currentDirection && util.addModifier(this, this._currentDirection);
     }
+    super.attributeChangedCallback(name, last, current);
   }
 
   /**

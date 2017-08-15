@@ -84,13 +84,14 @@ notification._createAlertDialog = options => {
   let buttons = '';
   options.buttonLabels.forEach((label, index) => {
     buttons += `
-      <button class="
-        alert-dialog-button
-        ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
-        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
-      ">
+      <ons-alert-dialog-button
+        class="
+          ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
+        " 
+        style="position: relative;">
         ${label}
-      </button>
+      </ons-alert-dialog-button>
     `;
   });
 
@@ -162,7 +163,10 @@ notification._createAlertDialog = options => {
         el.dialog.hide()
           .then(() => {
             if (el) {
-              const resolveValue = options.isPrompt ? el.input.value : index;
+              let resolveValue = index;
+              if (options.isPrompt) {
+                resolveValue = index === options.primaryButtonIndex ? el.input.value : null;
+              }
               el.dialog.remove();
               _destroyDialog();
               options.callback(resolveValue);
@@ -221,9 +225,9 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   return util.extend({
       compile: param => param,
       callback: param => param,
-      primaryButtonIndex: 0,
       animation: 'default',
-      cancelable: false
+      cancelable: false,
+      primaryButtonIndex: (options.buttonLabels || defaults.buttonLabels || []).length - 1
     }, defaults, options);
 };
 
@@ -249,7 +253,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
  *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
- *   [en]Index of primary button. Default is `0`.[/en]
+ *   [en]Index of primary button. Default is the last one.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
  * @param {Boolean} [options.cancelable]
  *   [en]Whether the dialog is cancelable or not. Default is `false`. If the dialog is cancelable it can be closed by clicking the background or pressing the Android back button.[/en]
@@ -317,7 +321,7 @@ notification.alert = (message, options) => {
  *   [en]Labels for the buttons. Default is `["Cancel", "OK"]`.[/en]
  *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
- *   [en]Index of primary button. Default is `1`.[/en]
+ *   [en]Index of primary button. Default is the last one.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
  * @description
  *   [en]
@@ -342,7 +346,6 @@ notification.alert = (message, options) => {
 notification.confirm = (message, options) => {
   options = _normalizeArguments(message, options, {
     buttonLabels: ['Cancel', 'OK'],
-    primaryButtonIndex: 1,
     title: 'Confirm'
   });
 
@@ -365,7 +368,7 @@ notification.confirm = (message, options) => {
  *   [en]Labels for the buttons. Default is `"OK"`.[/en]
  *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
- *   [en]Index of primary button. Default is `0`.[/en]
+ *   [en]Index of primary button. Default is the last one.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 0 です。[/ja]
  * @param {String} [options.placeholder]
  *   [en]Placeholder for the text input.[/en]

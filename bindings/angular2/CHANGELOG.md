@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+4.0.0-rc.1
+----
+
+### Bug Fixes
+
+ * Downgraded ES modules from ES2015-syntax to ES5-syntax.
+
 4.0.0-rc.0
 ----
 

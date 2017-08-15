@@ -47,7 +47,7 @@ describe('ons.notification', () => {
     });
 
     it('hides the dialog when a button is clicked', () => {
-      const button = dialog.querySelector('button');
+      const button = dialog.querySelector('ons-alert-dialog-button');
       const event = new CustomEvent('click');
       const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
@@ -66,7 +66,7 @@ describe('ons.notification', () => {
         done();
       });
 
-      dialog.querySelector('button').click();
+      dialog.querySelector('ons-alert-dialog-button').click();
     });
   });
 
@@ -108,7 +108,7 @@ describe('ons.notification', () => {
     });
 
     it('hides the dialog when a button is clicked', () => {
-      const button = dialog.querySelector('button');
+      const button = dialog.querySelector('ons-alert-dialog-button');
       const event = new CustomEvent('click');
       const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
@@ -127,7 +127,7 @@ describe('ons.notification', () => {
         done();
       });
 
-      dialog.querySelector('button').click();
+      dialog.querySelector('ons-alert-dialog-button').click();
     });
   });
 
@@ -187,7 +187,7 @@ describe('ons.notification', () => {
     });
 
     it('hides the dialog when a button is clicked', () => {
-      const button = dialog.querySelector('button');
+      const button = dialog.querySelector('ons-alert-dialog-button');
       const event = new CustomEvent('click');
       const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
@@ -207,7 +207,7 @@ describe('ons.notification', () => {
       });
 
       dialog.querySelector('input').value = 42;
-      dialog.querySelector('button').click();
+      dialog.querySelector('ons-alert-dialog-button').click();
     });
   });
 

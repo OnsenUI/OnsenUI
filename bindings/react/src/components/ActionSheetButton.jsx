@@ -33,6 +33,15 @@ ActionSheetButton.propTypes = {
    *  [en]Creates an `Icon` component with this string. Only visible on Android.[/en]
    *  [ja][/ja]
    */
+  icon: PropTypes.string,
+
+  /**
+   * @name onClick
+   * @type function
+   * @description
+   *  [en]This function will be called when the button is clicked.[/en]
+   *  [ja][/ja]
+   */
   onClick: PropTypes.func
 };
 

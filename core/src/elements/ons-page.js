@@ -151,6 +151,8 @@ export default class PageElement extends BaseElement {
   constructor() {
     super();
 
+    this._deriveHooks();
+
     this.classList.add(defaultClassName);
     this._initialized = false;
 
@@ -159,6 +161,7 @@ export default class PageElement extends BaseElement {
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
+      this._backgroundElement = this._getBackgroundElement();
     });
   }
 
@@ -170,7 +173,10 @@ export default class PageElement extends BaseElement {
     this._initialized = true;
 
     contentReady(this, () => {
-      setImmediate(() => util.triggerElementEvent(this, 'init'));
+      setImmediate(() => {
+        this.onInit && this.onInit();
+        util.triggerElementEvent(this, 'init');
+      });
 
       if (!util.hasAnyComponentAsParent(this)) {
         setImmediate(() => this._show());
@@ -210,7 +216,7 @@ export default class PageElement extends BaseElement {
   }
 
   _hasAPageControlChild() {
-    return util.findChild(this._contentElement, e => e.nodeName.match(/ons-(splitter|sliding-menu|navigator|tabbar)/i));
+    return util.findChild(this._contentElement, util.isPageControl);
   }
 
   /**
@@ -220,20 +226,20 @@ export default class PageElement extends BaseElement {
    *  [ja][/ja]
    */
   set onInfiniteScroll(value) {
-    if (value === null) {
-      this._onInfiniteScroll = null;
-      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
-      return;
-    }
-    if (!(value instanceof Function)) {
+    if (value && !(value instanceof Function)) {
       throw new Error('onInfiniteScroll must be a function or null');
     }
-    if (!this._onInfiniteScroll) {
-      this._infiniteScrollLimit = 0.9;
-      this._boundOnScroll = this._onScroll.bind(this);
-      setImmediate(() => this._contentElement.addEventListener('scroll', this._boundOnScroll));
-    }
-    this._onInfiniteScroll = value;
+
+    contentReady(this, () => {
+      if (!value) {
+        this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      } else if (!this._onInfiniteScroll) {
+        this._infiniteScrollLimit = 0.9;
+        this._boundOnScroll = this._onScroll.bind(this);
+        setImmediate(() => this._contentElement.addEventListener('scroll', this._boundOnScroll));
+      }
+      this._onInfiniteScroll = value;
+    });
   }
 
   get onInfiniteScroll() {
@@ -249,7 +255,6 @@ export default class PageElement extends BaseElement {
       this._onInfiniteScroll(() => this._loadingContent = false);
     }
   }
-
 
   /**
    * @property onDeviceBackButton
@@ -357,31 +362,29 @@ export default class PageElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (util.findChild(this, '.content')) {
-      util.findChild(this, '.content').classList.add('page__content');
-    }
+    const toolbar = util.findChild(this, 'ons-toolbar');
 
-    if (util.findChild(this, '.background')) {
-      util.findChild(this, '.background').classList.add('page__background');
-    }
+    const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
+    background.classList.add('page__background');
+    this.insertBefore(background, !toolbar && this.firstChild || toolbar && toolbar.nextSibling);
 
-    if (!util.findChild(this, '.page__content')) {
-      const content = util.create('.page__content');
-
+    const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
+    content.classList.add('page__content');
+    if (!content.parentElement) {
       util.arrayFrom(this.childNodes).forEach(node => {
         if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
           content.appendChild(node);
         }
       });
-
-      const prevNode = util.findChild(this, '.page__background') || util.findChild(this, 'ons-toolbar');
-
-      this.insertBefore(content, prevNode && prevNode.nextSibling);
     }
+    this.insertBefore(content, background.nextSibling);
 
-    if (!util.findChild(this, '.page__background')) {
-      const background = util.create('.page__background');
-      this.insertBefore(background, util.findChild(this, '.page__content'));
+    // Make wrapper pages transparent for animations
+    if (!background.style.backgroundColor
+      && content.children.length === 1
+      && util.isPageControl(content.children[0])
+    ) {
+        background.style.backgroundColor = 'transparent';
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -395,13 +398,14 @@ export default class PageElement extends BaseElement {
     if (tagName === 'ons-fab') {
       return !el.hasAttribute('position');
     }
-    const fixedElements = ['ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
+    const fixedElements = ['script', 'ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
     return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
+      this.onShow && this.onShow();
       util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
     }
@@ -410,6 +414,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
+      this.onHide && this.onHide();
       util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
     }
@@ -418,6 +423,7 @@ export default class PageElement extends BaseElement {
   _destroy() {
     this._hide();
 
+    this.onDestroy && this.onDestroy();
     util.triggerElementEvent(this, 'destroy');
 
     if (this.onDeviceBackButton) {
@@ -427,6 +433,22 @@ export default class PageElement extends BaseElement {
     util.propagateAction(this, '_destroy');
 
     this.remove();
+  }
+
+  _deriveHooks() {
+    this.constructor.events.forEach(event => {
+      const key = 'on' + event.charAt(0).toUpperCase() + event.slice(1);
+      Object.defineProperty(this, key, {
+        enumerable: true,
+        get: () => this[`_${key}`],
+        set: value => {
+          if (!(value instanceof Function)) {
+            throw new Error(`${key} hook must be a function`);
+          }
+          this[`_${key}`] = value.bind(this);
+        }
+      });
+    });
   }
 
   static get events() {

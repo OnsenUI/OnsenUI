@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
@@ -32,6 +33,8 @@ const template = util.createElement(`
     <div class="progress-bar__primary"></div>
   </div>
 `);
+
+const INDET = 'indeterminate';
 
 /**
  * @element ons-progress-bar
@@ -110,6 +113,7 @@ export default class ProgressBarElement extends BaseElement {
 
     this.appendChild(this._template);
 
+    autoStyle.prepare(this);
     ModifierUtil.initModifier(this, scheme);
   }
 
@@ -132,32 +136,22 @@ export default class ProgressBarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'value', 'secondary-value', 'indeterminate'];
+    return ['modifier', 'value', 'secondary-value', INDET];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      this.hasAttribute(INDET) && this._updateDeterminate();
     } else if (name === 'value' || name === 'secondary-value') {
       this._updateValue();
-    } else if (name === 'indeterminate') {
+    } else if (name === INDET) {
       this._updateDeterminate();
     }
   }
 
   _updateDeterminate() {
-    if (this.hasAttribute('indeterminate')) {
-      contentReady(this, () => {
-        this._template.classList.add(`progress-bar--indeterminate`);
-        this._template.classList.remove(`progress-bar--determinate`);
-      });
-    }
-    else {
-      contentReady(this, () => {
-        this._template.classList.add(`progress-bar--determinate`);
-        this._template.classList.remove(`progress-bar--indeterminate`);
-      });
-    }
+    contentReady(this, () => util.toggleModifier(this, INDET, { force: this.hasAttribute(INDET) }));
   }
 
   _updateValue() {
@@ -214,15 +208,15 @@ export default class ProgressBarElement extends BaseElement {
    */
   set indeterminate(value) {
     if (value) {
-      this.setAttribute('indeterminate', '');
+      this.setAttribute(INDET, '');
     }
     else {
-      this.removeAttribute('indeterminate');
+      this.removeAttribute(INDET);
     }
   }
 
   get indeterminate() {
-    return this.hasAttribute('indeterminate');
+    return this.hasAttribute(INDET);
   }
 }
 

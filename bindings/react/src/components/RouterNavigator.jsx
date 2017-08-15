@@ -185,19 +185,24 @@ class RouterNavigator extends BasicComponent {
       (route) => this.props.renderPage(route, this)
     );
 
+    node.swipeMax = this.props.swipePop;
     node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     this.update();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const processStack = [...nextProps.routeConfig.processStack];
+  componentWillReceiveProps(newProps) {
+    const processStack = [...newProps.routeConfig.processStack];
+
+    if (newProps.onDeviceBackButton !== undefined) {
+      this._navi.onDeviceBackButton = newProps.onDeviceBackButton;
+    }
 
     /**
      * Fix for Redux Timetravel.
      */
-    if (this.props.routeConfig.processStack.length < nextProps.routeConfig.processStack.length &&
-      this.props.routeConfig.routeStack.length > nextProps.routeConfig.routeStack.length) {
+    if (this.props.routeConfig.processStack.length < newProps.routeConfig.processStack.length &&
+      this.props.routeConfig.routeStack.length > newProps.routeConfig.routeStack.length) {
       return;
     }
 
@@ -342,6 +347,30 @@ RouterNavigator.propTypes = {
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
+
+  /**
+   * @name swipeable
+   * @type bool|string
+   * @required false
+   * @description
+   *  [en]
+   *  Enables swipe-to-pop functionality for iOS.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  swipeable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+
+  /**
+   * @name swipePop
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Function called on swipe-to-pop. Must perform a popPage with the given options object.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  swipePop: PropTypes.func,
 
   /**
    * @name onDeviceBackButton

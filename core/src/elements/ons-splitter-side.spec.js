@@ -46,7 +46,7 @@ describe('OnsSplitterSideElement', () => {
     let template;
 
     beforeEach(() => {
-      template = ons._util.createElement(`<ons-template id="hoge.html"><ons-page>hoge</ons-page></ons-template>`);
+      template = ons._util.createElement(`<template id="hoge.html"><ons-page>hoge</ons-page></template>`);
       document.body.appendChild(template);
     });
 
@@ -120,13 +120,15 @@ describe('OnsSplitterSideElement', () => {
     it('should ignore drags outside the target area', () => {
       const w = window.innerWidth;
       shouldIgnore({direction: 'left'}, false);
-      shouldIgnore({direction: 'right', center: {clientX: 10}}, false);
+      shouldIgnore({direction: 'left', center: {clientX: 10}}, false);
+      shouldIgnore({direction: 'right', center: {clientX: 10}}, true); // Right and closed
       right._swipeTargetWidth = 30;
       shouldIgnore({direction: 'left', center: {clientX: w - 10}}, false);
-      shouldIgnore({direction: 'right', center: {clientX: w - 40}}, true);
+      shouldIgnore({direction: 'left', center: {clientX: w - 40}}, true);
       right._side = 'left';
+      shouldIgnore({direction: 'left', center: {clientX: 10}}, true); // Left and closed
       shouldIgnore({direction: 'right', center: {clientX: 10}}, false);
-      shouldIgnore({direction: 'left', center: {clientX: 40}}, true);
+      shouldIgnore({direction: 'right', center: {clientX: 40}}, true);
     });
   });
 });

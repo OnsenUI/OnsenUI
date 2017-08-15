@@ -21,6 +21,10 @@ import animationOptionsParse from './animation-options-parser';
 
 const util = {};
 
+util.globals = {
+  fabOffset: 0
+};
+
 /**
  * @param {String/Function} query dot class name or node name or matcher function.
  * @return {Function}
@@ -67,13 +71,9 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (until !== undefined && until(parent)) {
+    if (!parent || parent === document || (until && until(parent))) {
       return null;
-    }
-    if (!parent || parent === document) {
-      return null;
-    }
-    if (match(parent)) {
+    } else if (match(parent)) {
       return parent;
     }
     parent = parent.parentNode;
@@ -101,12 +101,18 @@ util.isAttached = (element) => {
 util.hasAnyComponentAsParent = (element) => {
   while (element && document.documentElement !== element) {
     element = element.parentNode;
-    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal|ons-sliding-menu|ons-split-view)/)) {
+    if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-modal)/)) {
       return true;
     }
   }
   return false;
 };
+
+/**
+ * @param {Element} element
+ * @return {boolean}
+ */
+util.isPageControl = element => element.nodeName.match(/^ons-(navigator|splitter|tabbar|page)$/i);
 
 /**
  * @param {Element} element
@@ -153,13 +159,20 @@ util.create = (selector = '', style = {}) => {
  */
 util.createElement = (html) => {
   const wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
+
+  if (html instanceof DocumentFragment) {
+    wrapper.appendChild(document.importNode(html, true));
+  } else {
+    wrapper.innerHTML = html.trim();
+  }
 
   if (wrapper.children.length > 1) {
     throw new Error('"html" must be one wrapper element.');
   }
 
-  return wrapper.children[0];
+  const element = wrapper.children[0];
+  wrapper.children[0].remove();
+  return element;
 };
 
 /**
@@ -296,7 +309,8 @@ util.hasModifier = (target, modifierName) => {
   if (!target.hasAttribute('modifier')) {
     return false;
   }
-  return target.getAttribute('modifier').split(/\s+/).some(e => e === modifierName);
+
+  return RegExp(`(^|\\s+)${modifierName}($|\\s+)`, 'i').test(target.getAttribute('modifier'));
 };
 
 /**
@@ -315,9 +329,7 @@ util.addModifier = (target, modifierName, options = {}) => {
     return false;
   }
 
-  modifierName = modifierName.trim();
-  const modifierAttribute = target.getAttribute('modifier') || '';
-  target.setAttribute('modifier', (modifierAttribute + ' ' + modifierName).trim());
+  target.setAttribute('modifier', ((target.getAttribute('modifier') || '') + ' ' + modifierName).trim());
   return true;
 };
 
@@ -329,20 +341,33 @@ util.addModifier = (target, modifierName, options = {}) => {
  * @return {Boolean} Whether it was found or not.
  */
 util.removeModifier = (target, modifierName, options = {}) => {
-  if (!target.getAttribute('modifier')) {
-    return false;
-  }
-
   if (options.autoStyle) {
     modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
   }
 
-  const modifiers = target.getAttribute('modifier').split(/\s+/);
+  if (!target.getAttribute('modifier') || !util.hasModifier(target, modifierName)) {
+    return false;
+  }
 
-  const newModifiers = modifiers.filter(item => item && item !== modifierName);
-  target.setAttribute('modifier', newModifiers.join(' '));
+  const newModifiers = target.getAttribute('modifier').split(/\s+/).filter(m => m && m !== modifierName);
+  newModifiers.length ? target.setAttribute('modifier', newModifiers.join(' ')) : target.removeAttribute('modifier');
+  return true;
+};
 
-  return modifiers.length !== newModifiers.length;
+/**
+ * @param {Element} target
+ * @param {String} modifierName
+ * @param {Boolean} options.force Forces modifier to be added or removed.
+ * @param {Object} options.autoStyle Maps the modifierName to the corresponding styled modifier.
+ * @param {Boolean} options.forceAutoStyle Ignores platform limitation.
+ * @return {Boolean} Whether it was found or not.
+ */
+util.toggleModifier = (...args) => {
+  const options = args.length > 2 ? args[2] : {};
+  const force = typeof options === 'boolean' ? options : options.force;
+
+  const toggle = typeof force === 'boolean' ? force : !util.hasModifier(...args);
+  toggle ? util.addModifier(...args) : util.removeModifier(...args)
 };
 
 // TODO: FIX
@@ -375,9 +400,10 @@ util.each = (obj, f) => Object.keys(obj).forEach(key => f(key, obj[key]));
 
 /**
  * @param {Element} target
- * @param {Element} hasRipple
+ * @param {boolean} hasRipple
+ * @param {Object} attrs
  */
-util.updateRipple = (target, hasRipple) => {
+util.updateRipple = (target, hasRipple, attrs = {}) => {
   if (hasRipple === undefined) {
     hasRipple = target.hasAttribute('ripple');
   }
@@ -386,7 +412,9 @@ util.updateRipple = (target, hasRipple) => {
 
   if (hasRipple) {
     if (!rippleElement) {
-      target.insertBefore(document.createElement('ons-ripple'), target.firstChild);
+      const element = document.createElement('ons-ripple');
+      Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]));
+      target.insertBefore(element, target.firstChild);
     }
   } else if (rippleElement) {
     rippleElement.remove();
@@ -409,7 +437,7 @@ util.isInteger = (value) => {
 };
 
 /**
- * @return {Obejct} Deferred promise.
+ * @return {Object} Deferred promise.
  */
 util.defer = () => {
   const deferred = {};
@@ -428,6 +456,20 @@ util.defer = () => {
 util.warn = (...args) => {
   if (!internal.config.warningsDisabled) {
     console.warn(...args);
+  }
+};
+
+util.skipContentScroll = gesture => {
+  const clickedElement = document.elementFromPoint(gesture.center.clientX, gesture.center.clientY);
+  const content = util.findParent(clickedElement, '.page__content', e => util.match(e, '.page'));
+  if (content) {
+    const preventScroll = e => e.preventDefault();
+    content.addEventListener('touchmove', preventScroll, true);
+    const clean = e => {
+      content.removeEventListener('touchmove', preventScroll, true);
+      content.removeEventListener('touchend', clean, true);
+    };
+    content.addEventListener('touchend', clean, true);
   }
 };
 

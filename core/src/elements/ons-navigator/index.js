@@ -17,9 +17,11 @@ limitations under the License.
 
 import util from '../../ons/util';
 import internal from '../../ons/internal';
+import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorTransitionAnimator from './animator';
 import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
+import IOSSwipeNavigatorTransitionAnimator from './ios-swipe-animator';
 import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
 import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
 import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
@@ -122,6 +124,32 @@ export default class NavigatorElement extends BaseElement {
    * @description
    *   [en]First page to show when navigator is initialized.[/en]
    *   [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
+   */
+
+  /**
+   * @attribute swipeable
+   * @type {Boolean}
+   * @description
+   *   [en]Enable iOS "swipe to pop" feature.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute swipe-target-width
+   * @type {String}
+   * @default 20px
+   * @description
+   *   [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+   *   [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
+   */
+
+  /**
+   * @attribute swipe-threshold
+   * @type {Number}
+   * @default 0.2
+   * @description
+   *  [en]Specify how much the page needs to be swiped before popping. A value between `0` and `1`.[/en]
+   *  [ja][/ja]
    */
 
   /**
@@ -268,6 +296,25 @@ export default class NavigatorElement extends BaseElement {
   connectedCallback() {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
+    if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
+      this._swipe = new SwipeReveal({
+        element: this,
+        animator: new IOSSwipeNavigatorTransitionAnimator(),
+        swipeMax: animator => this.swipeMax ? this.swipeMax({animator}) : this.popPage({animator}),
+        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+        getAnimationElements: () => [this.topPage.previousElementSibling, this.topPage],
+        ignoreSwipe: (event, distance) => {
+          if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
+            return true;
+          }
+          const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
+          return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
+        }
+      });
+
+      this.attributeChangedCallback('swipeable');
+    }
+
     if (this._initialized) {
       return;
     }
@@ -314,15 +361,23 @@ export default class NavigatorElement extends BaseElement {
   disconnectedCallback() {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
+
+    this._swipe && this._swipe.dispose();
+    this._swipe = null;
   }
 
   static get observedAttributes() {
-    return ['animation'];
+    return ['animation', 'swipeable'];
   }
 
   attributeChangedCallback(name, last, current) {
-    if (name === 'animation') {
-      this._updateAnimatorFactory();
+    switch(name) {
+      case 'animation':
+        this._updateAnimatorFactory();
+        break;
+      case 'swipeable':
+        this._swipe && this._swipe.update();
+        break;
     }
   }
 
@@ -419,7 +474,7 @@ export default class NavigatorElement extends BaseElement {
       };
 
       leavePage._hide();
-      const animator = this._animatorFactory.newAnimator(options);
+      const animator = options.animator || this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[length - 2], this.pages[length - 1], callback);
     }).catch(() => this._isRunning = false);
   }
@@ -851,7 +906,9 @@ export default class NavigatorElement extends BaseElement {
    *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
    */
   get topPage() {
-    return this.pages[this.pages.length - 1] || null;
+    let last = this.lastElementChild;
+    while (last && last.tagName !== 'ONS-PAGE') { last = last.previousElementSibling; }
+    return last;
   }
 
   /**

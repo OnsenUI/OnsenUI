@@ -1,5 +1,5 @@
 :root {
-  --search-icon: url('img/ios-search-input-icon.svg');
+  --search-icon: url('../img/ios-search-input-icon.svg');
   --search-input-background-image: var(--search-icon);
   --search-input-background-color: rgba(3, 3, 3, 0.09);
   --search-input-color: var(--input-text-color);
@@ -9,7 +9,7 @@
   --search-input-font-size: 14px;
   --search-input-placeholder-color: #7a797b;
 
-  --material-search-icon: url('img/android-search-input-icon.svg');
+  --material-search-icon: url('../img/android-search-input-icon.svg');
 
   --search-input: {
     @apply(--reset-input);
@@ -35,7 +35,7 @@
   height: var(--search-input-height);
   font-size: var(--search-input-font-size);
   background-color: var(--search-input-background-color);
-  box-shadow: var(--box-shadow--text-input);
+  box-shadow: none;
   color: var(--search-input-color);
   line-height: 1.3;
   padding: 0 8px 0 28px;

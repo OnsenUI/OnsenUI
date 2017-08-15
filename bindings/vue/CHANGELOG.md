@@ -4,6 +4,48 @@ CHANGELOG
 dev
 ----
 
+### Bug Fixes
+
+* VOnsNavigator: Keep page scroll during pop animation.
+
+2.1.0
+----
+
+### New Features
+
+* VOnsNavigator: Supports iOS "swipe-to-pop" feature.
+* Components pass unrecognized listeners to the inner Custom Element (without modifiers). This allows listeners like `@click` or `@input` to be used without `native` modifier. E.g. `<v-ons-card @click="...">`.
+* VOnsNavigator: Passes unrecognized listeners to its redered pages. This allows declaring custom actions via events with a syntax like `<v-ons-navigator :page-stack="pageStack" @push="pageStack = [...pageStack, $event]"></v-ons-navigator>`. Note that it has no children (with `v-for`) since there is no need to pass `pageStack` prop down anymore. The old syntax is also supported.
+
+### Bug Fixes
+
+* VOnsSplitterSide: Keep `index` prop synced when changing modes (portrait/landscape).
+
+### Misc
+
+* Supports (and requires) `vue@2.4.0`. Some inner v-for keys have been modified.
+* VOnsAlertDialogButton: New component.
+
+2.0.2
+----
+
+### Misc
+
+* Provide minified version and separate source maps.
+
+2.0.1
+----
+
+### Misc
+
+* Reduced 'click' events registered in Vue dev tools.
+
+2.0.0
+----
+
+2.0.0-rc.0
+----
+
 ### New Features
 
 * Support for `v-model` in every input. As of `vue@2.3`, it does not support modifiers for custom components.

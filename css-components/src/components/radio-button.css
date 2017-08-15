@@ -5,6 +5,7 @@
   --radio-button-border: 3px solid var(--radio-button-indicator-color);
   --radio-button-size: 24px;
   --material-radio-button-size: 20px;
+  --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2px);
 
   --radio-button: {
     @apply(--reset-box-model);
@@ -91,7 +92,7 @@
   height: var(--checkbox-size);
   background: transparent;
   border: none;
-  border-radius: var(--checkbox-border-radius);
+  border-radius: var(--checkbox-size);
   left: 0;
 }
 
@@ -105,19 +106,7 @@
 }
 
 .radio-button__checkmark:after {
-  @apply(--radio-button--after);
-  top: var(--checkmark-top);
-  left: var(--checkmark-left);
-  opacity: 0;
-  width: var(--checkmark-tail-width);
-  height: var(--checkmark-foot-height);
-  background: transparent;
-  border: var(--radio-button-border);
-  border-width: var(--checkmark-border-width);
-  border-top: none;
-  border-right: none;
-  border-radius: var(--checkmark-border-radius);
-  transform: rotate(-45deg);
+  @apply(--checkmark);
 }
 
 :checked + .radio-button__checkmark {
@@ -167,6 +156,35 @@
 .radio-button--material {
   line-height: var(--material-radio-button-size) + 2px;
   @apply(--material-font);
+}
+
+.radio-button--material__input:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: var(--material-radio-button-size);
+  height: var(--material-radio-button-size);
+  box-shadow: 0 0 0 var(--material-radio-button-shadow-size) var(--material-radio-button-inactive-color);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--material-radio-button-inactive-color);
+  pointer-events: none;
+  display: block;
+  transform: scale3d(0.2, 0.2, 0.2);
+  transition: opacity 0.25s ease-out, transform 0.1s ease-out;
+}
+
+.radio-button--material__input:checked:before {
+  box-shadow: 0 0 0 var(--material-radio-button-shadow-size) var(--material-radio-button-active-color);
+  background-color: var(--material-radio-button-active-color);
+}
+
+.radio-button--material__input:active:before {
+  opacity: .15;
+  transform: scale3d(1, 1, 1);
 }
 
 .radio-button--material__checkmark {

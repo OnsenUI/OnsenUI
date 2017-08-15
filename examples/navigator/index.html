@@ -10,20 +10,20 @@
 
   <script>
     document.addEventListener('init', function(event) {
-      console.log('init');
+      console.log(event.target.id, 'init event');
       if (event.target.id === 'page1') {
         var title = event.target.data && event.target.data.title ? event.target.data.title : 'Custom Page';
         event.target.querySelector('ons-toolbar div.center').textContent = title;
       }
     });
     document.addEventListener('show', function(event) {
-      console.log('show');
+      console.log(event.target.id, 'show event');
     });
     document.addEventListener('hide', function(event) {
-      console.log('hide');
+      console.log(event.target.id, 'hide event');
     });
     document.addEventListener('destroy', function(event) {
-      console.log('destroy');
+      console.log(event.target.id, 'destroy event');
     });
 
     var customPush = function() {
@@ -35,12 +35,10 @@
 </head>
 
 <body>
-  <ons-navigator id="myNavigator">
-    <ons-page>
+  <ons-navigator id="myNavigator" swipeable>
+    <ons-page id="page0">
       <ons-toolbar>
-      <div class="left"><ons-toolbar-button modifier="border">Test</ons-toolbar-button></div>
         <div class="center">Navigator</div>
-        <div class="right"><ons-toolbar-button modifier="border"><ons-icon icon="ion-navicon"></ons-icon></ons-toolbar-button></div>
       </ons-toolbar>
 
       <div style="text-align: center">
@@ -54,7 +52,7 @@
 
   </ons-navigator>
 
-  <ons-template id="page1.html">
+  <template id="page1.html">
     <ons-page id="page1">
       <ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
@@ -77,8 +75,26 @@
           Pop Page
         </ons-button>
       </div>
+
+      <script>
+        ons.getScriptPage().onInit = function() {
+          console.log(this.id, 'init hook');
+
+          this.onShow = function() {
+            console.log(this.id, 'show hook');
+          };
+
+          this.onHide = function() {
+            console.log(this.id, 'hide hook');
+          };
+
+          this.onDestroy = function() {
+            console.log(this.id, 'destroy hook');
+          };
+        };
+      </script>
     </ons-page>
-  </ons-template>
+  </template>
 
 </body>
 </html>

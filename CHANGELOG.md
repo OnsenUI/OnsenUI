@@ -5,16 +5,117 @@ CHANGELOG
 dev
 ----
 
-### New Features
-
-
 ### Bug Fixes
 
+ * ons-speed-dial-item: Apply Material Design style correctly.
+ * Fixed glitch during push/pop animation when iOS status bar is visible.
 
 ### Misc
 
+ * autostyle: 'material' modifier is automatically restored.
+
+v2.5.2
+----
+
+### Bug Fixes
+
+ * ons-navigator: Ignore swipes on back buttons.
+ * ons-pull-hook: After popPage transition style fix.
+ * ons-tabbar: Minor issue fixed to improve compatibility with external routers.
+
+### Misc
+
+ * ons.getScriptPage: Added new method as a shortcut to get the current page and attach lifecycle hooks.
+
+v2.5.1
+----
+
+### Bug Fixes
+
+ * onsenui.min.css: Restore 'import' statements.
+ * ons-navigator: Swipe-to-pop animation glitch.
+ * ons-range: Fixed ripple effect when `min` attr is provided.
+
+v2.5.0
+----
+
+### New Features
+
+ * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
+ * ons-navigator: iOS Swipe-to-pop feature.
+ * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
+ * ons-toolbar: New `cover-content` modifier. Should be combined with `transparent` modifier.
+
+### Bug Fixes
+
+ * css-components, ons-list-item: Fixed [#2100](https://github.com/OnsenUI/OnsenUI/issues/2100).
+ * ons-list: Fixed double top border when located right under toolbar.
+ * ons-carousel: Ignores swipes that start outside carousel.
+ * Swipeable components: Swipe is now smoother.
+ * Swipeable components: Fixed compatibility of some swipeable components.
+
+### Misc
+
+ * core css: Add minimized core css file `build/css/onsenui.min.css`.
+ * css-components: Adjusted font size of `.back-button__label` (improves iOS slide animation).
+ * ons-back-button: Replace font icons with SVG icons.
+ * Added `ons-alert-dialog-button` elements.
+ * Added `size` attribute on `ons-ripple` elements.
+ * Added ripple effects properly on `ons-range`, `ons-checkbox`, `ons-radio`, `ons-toolbar-button`, `ons-back-button` and `ons-alert-dialog-button` elements for Material Design.
+
+v2.4.2
+----
+
+### New Features
+
+ * ons-fab: Added new appearances for iOS.
+ * ons-ripple: Added `size` attribute.
+
+### Bug Fixes
+
+ * Revert a recent change that creates `ons-tabbar` issues. Fixed [#2082](https://github.com/OnsenUI/OnsenUI/issues/2082).
+
+v2.4.1
+----
+
+### Bug Fixes
+
+ * ons.notification.prompt: Only returns input value if the clicked button is primary. Otherwise, returns null. Fixed [#2050](https://github.com/OnsenUI/OnsenUI/issues/2050).
+ * ons-input, ons-search-input: Fixed [#2075](https://github.com/OnsenUI/OnsenUI/issues/2075).
+ * ons-icon: Its class attribute is now recovered after modifications.
+
+### Misc
+
+ * css-components: Removed `.text-input--transparent` modifier (same as default style).
+
+v2.4.0
+----
+
+### New Features
+
+ * core: Separated files are now cached after the first request. This improves performance when pushing pages.
+ * core: Added `ons.preload` method to manually cache templates. This improves performance when pushing pages.
+ * core: Support for `HTMLTemplateElement` (`<template>`). The former `<ons-template>` is still supported for backward compatibility.
+ * core: Added page life-cycle hooks (similar to life-cycle events). `<template>` elements allow `<script>` tags in their content, which is useful for initialising pages. Therefore, hooks like `pageElement.onInit`, `pageElement.onShow`, etc. have been added.
+ * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
+
+### Bug Fixes
+
+ * css-components: Fixed incorrect image path (select, search input).
+ * ons-tabbar, ons-lazy-repeat, ons-carousel: `ons-tabbar` now applies `visibility:hidden` instead of `display:none` to pages. This fixes issues for `ons-lazy-repeat` and `ons-carousel` inside `ons-tabbar`.
+ * ons-carousel: Fixed [#2065](https://github.com/OnsenUI/OnsenUI/issues/2065).
+
+### Misc
+
+ * css-components: Refined the appearance of `checkbox` on iOS.
+ * css-components: Refined the appearance of `radio-button` on iOS.
  * css-components: Refined the appearance of `button` on Android.
+ * css-components: Refined the appearance of `progress-bar` on Android.
+ * css-components: Refined the appearance of `progress-circular` on Android.
+ * css-components: Refined the appearance of `checkbox` animation on Android.
+ * css-components: Refined the appearance of `list-item--chevron`.
  * core: Updated `font-awesome` icon library.
+ * ons-toast: Improved `ascend` animator performance.
 
 ### BREAKING CHANGES
 

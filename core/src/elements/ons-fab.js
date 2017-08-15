@@ -35,6 +35,9 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @tutorial vanilla/Reference/fab
+ * @modifier mini
+ *   [en]Makes the `ons-fab` smaller.[/en]
+ *   [ja][/ja]
  * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
@@ -185,6 +188,12 @@ export default class FabElement extends BaseElement {
     }
   }
 
+  _getTranslate() {
+    const isBottom = (this.getAttribute('position') || '').indexOf('bottom') >= 0;
+    const translate = isBottom ? `translate3d(0px, -${util.globals.fabOffset || 0}px, 0px) ` : '';
+    return translate;
+  }
+
   /**
    * @method show
    * @signature show()
@@ -193,8 +202,9 @@ export default class FabElement extends BaseElement {
    *  [ja][/ja]
    */
   show(options = {}) {
-    this.style.transform = 'scale(1)';
-    this.style.webkitTransform = 'scale(1)';
+    const translate = this._getTranslate();
+    this.style.transform = translate + 'scale(1)';
+    this.style.webkitTransform = translate + 'scale(1)';
   }
 
   /**
@@ -205,8 +215,9 @@ export default class FabElement extends BaseElement {
    *  [ja][/ja]
    */
   hide(options = {}) {
-    this.style.transform = 'scale(0)';
-    this.style.webkitTransform = 'scale(0)';
+    const translate = this._getTranslate();
+    this.style.transform = translate + 'scale(0)';
+    this.style.webkitTransform = translate + 'scale(0)';
   }
 
   /**
@@ -233,7 +244,7 @@ export default class FabElement extends BaseElement {
    *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
-    return this.style.transform === 'scale(1)' && this.style.display !== 'none';
+    return this.style.transform.indexOf('scale(0)') === -1 && this.style.display !== 'none';
   }
 
   /**

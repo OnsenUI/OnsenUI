@@ -1,6 +1,7 @@
 import ActionSheet from './components/ActionSheet.jsx';
 import ActionSheetButton from './components/ActionSheetButton.jsx';
 import AlertDialog from './components/AlertDialog.jsx';
+import AlertDialogButton from './components/AlertDialogButton.jsx';
 import BackButton from './components/BackButton.jsx';
 import BottomToolbar from './components/BottomToolbar.jsx';
 import Button from './components/Button.jsx';
@@ -52,6 +53,7 @@ export {
   ActionSheet,
   ActionSheetButton,
   AlertDialog,
+  AlertDialogButton,
   BackButton,
   BottomToolbar,
   Button,

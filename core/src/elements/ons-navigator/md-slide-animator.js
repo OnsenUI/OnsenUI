@@ -25,7 +25,7 @@ import animit from '../../ons/animit';
 export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
 
   constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.3} = {}) {
-    super({ timing, delay, duration });
+    super({timing, delay, duration});
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%; z-index: 2;

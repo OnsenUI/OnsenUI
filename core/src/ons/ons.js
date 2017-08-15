@@ -23,6 +23,7 @@ import notification from './notification';
 import actionSheet from './action-sheet';
 import internal from './internal';
 import orientation from './orientation';
+import modifier from './modifier';
 import softwareKeyboard from './software-keyboard';
 import PageAttributeExpression from './page-attribute-expression';
 import deviceBackButtonDispatcher from './device-back-button-dispatcher';
@@ -52,6 +53,7 @@ ons.softwareKeyboard = softwareKeyboard;
 ons.pageAttributeExpression = PageAttributeExpression;
 ons.orientation = orientation;
 ons.notification = notification;
+ons.modifier = modifier;
 ons._animationOptionsParser = animationOptionsParser;
 ons._autoStyle = autoStyle;
 ons._DoorLock = DoorLock;
@@ -227,7 +229,7 @@ ons.enableAutoStyling = ons._autoStyle.enable;
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description
- *   [en]Refresh styling for the given platform.[/en]
+ *   [en]Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.[/en]
  *   [ja][/ja]
  * @param {string} platform New platform to style the elements.
  */
@@ -246,6 +248,28 @@ ons.forcePlatformStyling = newPlatform => {
         }
       }
     });
+};
+
+/**
+ * @method preload
+ * @signature preload(templatePaths)
+ * @param {String|Array} templatePaths
+ *   [en]Set of HTML file paths containing 'ons-page' elements.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Promise that resolves when all the templates are cached.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Separated files need to be requested on demand and this can slightly delay pushing new pages. This method requests and caches templates for later use.[/en]
+ *   [ja][/ja]
+ */
+ons.preload = function(templates = []) {
+  return Promise.all((templates instanceof Array ? templates : [templates]).map(template => {
+    if (typeof template !== 'string') {
+      throw new Error ('Expected string arguments but got ' + typeof template);
+    }
+    return ons._internal.getTemplateHTMLAsync(template);
+  }));
 };
 
 /**
@@ -454,6 +478,19 @@ function waitDeviceReady() {
     }
   }, false);
 }
+
+/**
+ * @method getScriptPage
+ * @signature getScriptPage()
+ * @description
+ *   [en]Access the last created page from the current `script` scope. Only works inside `<script></script>` tags that are direct children of `ons-page` element. Use this to add lifecycle hooks to a page.[/en]
+ *   [ja][/ja]
+ * @return {HTMLElement}
+ *   [en]Returns the corresponding page element.[/en]
+ *   [ja][/ja]
+ */
+const getCS = 'currentScript' in document ? () => document.currentScript : () => document.scripts[document.scripts.length - 1];
+ons.getScriptPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
 
 window._superSecretOns = ons;
 export default ons;

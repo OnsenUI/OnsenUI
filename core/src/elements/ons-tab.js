@@ -105,7 +105,6 @@ export default class TabElement extends BaseElement {
    * @description
    *   [en]
    *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`.
-   *     If you need to use your own icon, create a CSS class with `background-image` or any CSS properties and specify the name of your CSS class here.
    *   [/en]
    *   [ja]
    *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
@@ -336,16 +335,21 @@ export default class TabElement extends BaseElement {
       }
 
       const onReady = () => {
-        if (this._getPageTarget() && !this.hasLoaded) {
+        if (!this.hasLoaded) {
+          if (this._getPageTarget()) {
+            this._loadPageElement(tabbar._contentElement, pageElement => {
+              pageElement.style.display = 'none';
+              tabbar._contentElement.appendChild(pageElement);
+            });
+          } else if (tabbar._contentElement.children.length === this.parentElement.children.length) {
+            this.pageElement.style.display = 'none';
+          }
           this.hasLoaded = true;
-          this._loadPageElement(tabbar._contentElement, pageElement => {
-            pageElement.style.visibility = 'hidden';
-            tabbar._contentElement.appendChild(pageElement);
-          });
         }
 
         if (this.hasAttribute('active')) {
-          tabbar.setActiveTab(this._index);
+          this._onClick();
+          !this.isActive() && this.setActive(true);
         }
       };
 

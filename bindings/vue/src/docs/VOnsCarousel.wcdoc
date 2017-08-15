@@ -7,15 +7,15 @@
  * @type {Number}
  * @description
  *   [en]If exists, specifies the current active index. It is also used as the initial index. Must be modified on `update:index` event.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  */
 
 /**
  * @event update:index
  * @description
  *   [en]Fired right after user interaction. Useful to update `index` prop.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  * @param {Number} event
  *   [en]New value for `index` prop.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  */

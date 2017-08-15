@@ -9,8 +9,8 @@
   --text-input: {
     @apply(--input);
     @apply(--transparent);
-    letter-spacing: var(--letter-spacing);
-    box-shadow: var(--box-shadow--text-input);
+    letter-spacing: 0;
+    box-shadow: none;
     color: var(--input-text-color);
     padding: 0;
     margin: 0;
@@ -186,22 +186,5 @@
   100% {
     background-size: 100% 2px, 100% 2px;
   }
-}
-
-/*~
-  name: Transparent Text Input
-  category: Text Input
-  elements: ons-input
-  markup: |
-    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value=""></div>
-    <div><input type="text" class="text-input text-input--transparent" placeholder="text" value="" disabled></div>
-*/
-
-.text-input--transparent {
-  @apply(--text-input);
-}
-
-.text-input--transparent:disabled {
-  @apply(--text-input--disabled);
 }
 

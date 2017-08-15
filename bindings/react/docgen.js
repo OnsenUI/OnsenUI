@@ -7,7 +7,8 @@ var files = filter.sync('./src/components/', (fp) => {
     fp.indexOf('BaseDialog') === -1 &&
     fp.indexOf('BaseInput') === -1 &&
     fp.indexOf('BasicComponent') === -1 &&
-    fp.indexOf('todo') === -1;
+    fp.indexOf('todo') === -1 &&
+    !/^\./.test(fp);
 });
 
 console.log('Generating docs, this may take a while: ..');

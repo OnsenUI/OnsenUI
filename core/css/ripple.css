@@ -25,11 +25,6 @@ limitations under the License.
   pointer-events: none;
 }
 
-ons-list-item .ripple__wave, ons-list-item .ripple__background,
-.button--material--flat .ripple__wave, .button--material--flat .ripple__background{
-  background: rgba(189, 189, 189, 0.3);
-}
-
 .ripple__background {
   background: rgba(255, 255, 255, 0.2);
   position: absolute;
@@ -52,3 +47,17 @@ ons-list-item .ripple__wave, ons-list-item .ripple__background,
   z-index: 0;
   pointer-events: none;
 }
+
+/* FIXME */
+ons-list-item .ripple__wave,
+ons-list-item .ripple__background,
+.button--material--flat .ripple__wave,
+.button--material--flat .ripple__background {
+  background: rgba(189, 189, 189, 0.3);
+}
+
+.ripple--light-gray__wave,
+.ripple--light-gray__background {
+  background: rgba(189, 189, 189, 0.3);
+}
+

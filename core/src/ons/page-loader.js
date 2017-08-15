@@ -20,7 +20,7 @@ import internal from './internal';
 // Default implementation for global PageLoader.
 function loadPage({page, parent, params = {}}, done) {
   internal.getPageHTMLAsync(page).then(html => {
-    const pageElement = util.createElement(html.trim());
+    const pageElement = util.createElement(html);
     parent.appendChild(pageElement);
 
     done(pageElement);

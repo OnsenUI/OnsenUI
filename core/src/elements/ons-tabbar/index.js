@@ -176,11 +176,6 @@ export default class TabbarElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
 
-      const content = this._contentElement;
-      for (let i = 0; i < content.children.length; i++) {
-        content.children[i].style.visibility = 'hidden';
-      }
-
       const activeIndex = this.getAttribute('activeIndex');
 
       const tabbar = this._tabbarElement;
@@ -267,7 +262,7 @@ export default class TabbarElement extends BaseElement {
     const pages = this._contentElement.children;
     let page = null;
     for (var i = 0; i < pages.length; i++) {
-      if (pages[i].style.visibility !== 'hidden') {
+      if (pages[i].style.display !== 'none') {
         page = pages[i];
         break;
       }
@@ -310,10 +305,10 @@ export default class TabbarElement extends BaseElement {
 
       animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, () => {
         if (oldPageElement !== internal.nullElement) {
-          oldPageElement.style.visibility = 'hidden';
+          oldPageElement.style.display = 'none';
         }
 
-        element.style.visibility = 'visible';
+        element.style.display = 'block';
         element._show();
 
         if (options.callback instanceof Function) {
@@ -440,7 +435,7 @@ export default class TabbarElement extends BaseElement {
    */
   setTabbarVisibility(visible) {
     this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
-    this._getTabbarElement().style.visibility = visible ? 'visible' : 'hidden';
+    this._getTabbarElement().style.display = visible ? '' : 'none';
   }
 
   show() {
@@ -460,7 +455,7 @@ export default class TabbarElement extends BaseElement {
    *   [ja]タブバーが見える場合に`true`。[/ja]
    */
   get visible() {
-    return this._getTabbarElement().style.visibility !== 'hidden';
+    return this._getTabbarElement().style.display !== 'none';
   }
 
   /**
@@ -524,12 +519,16 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'position'];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
+      isTop(last) !== isTop(current) && this._updatePosition();
+    } else if(name === 'position') {
+      this._updatePosition();
     }
   }
 

@@ -4,8 +4,8 @@ describe('OnsTabbarElement', () => {
   let element, template, template2;
 
   beforeEach(done => {
-    template = ons._util.createElement('<ons-template id="hoge"><ons-page>hogehoge</ons-page></ons-template>');
-    template2 = ons._util.createElement('<ons-template id="fuga"><ons-page>fugafuga</ons-page></ons-template>');
+    template = ons._util.createElement('<template id="hoge"><ons-page>hogehoge</ons-page></template>');
+    template2 = ons._util.createElement('<template id="fuga"><ons-page>fugafuga</ons-page></template>');
     element = new ons.TabbarElement();
     document.body.appendChild(template);
     document.body.appendChild(template2);
@@ -117,23 +117,23 @@ describe('OnsTabbarElement', () => {
       var bottomElement = document.getElementById('bottom');
 
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       topElement.setTabbarVisibility(false);
       bottomElement.setTabbarVisibility(false);
       expect(topElement._contentElement.style.top).to.equal('0px');
-      expect(topElement._getTabbarElement().style.visibility).to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('none');
       expect(bottomElement._contentElement.style.bottom).to.equal('0px');
-      expect(bottomElement._getTabbarElement().style.visibility).to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('none');
 
       topElement.setTabbarVisibility(true);
       bottomElement.setTabbarVisibility(true);
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(topElement._getTabbarElement().style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.visibility).not.to.equal('hidden');
+      expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       div.remove();
     });
@@ -159,8 +159,8 @@ describe('OnsTabbarElement', () => {
       const div = document.createElement('div');
       document.body.appendChild(div);
       div.innerHTML = `
-        <ons-template id="page1"></ons-template>
-        <ons-template id="page2"></ons-template>
+        <template id="page1"></template>
+        <template id="page2"></template>
         <ons-tabbar id="myTabbar">
           <ons-tab id="tab1" page="page1"></ons-tab>
           <ons-tab id="tab2" page="page2"></ons-tab>
@@ -187,7 +187,7 @@ describe('OnsTabbarElement', () => {
     let template, element;
 
     beforeEach(() => {
-      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
+      template = ons._util.createElement('<template id="page1"><ons-page>Page1</ons-page></template>');
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
@@ -234,7 +234,7 @@ describe('OnsTabbarElement', () => {
     let template, element;
 
     beforeEach(() => {
-      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
+      template = ons._util.createElement('<template id="page1"><ons-page>Page1</ons-page></template>');
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1"></ons-tab>
@@ -315,7 +315,7 @@ describe('OnsTabbarElement', () => {
       setImmediate(() => {
         const tmp = element._getCurrentPageElement();
         element.setActiveTab(1, {'callback': () => {
-          expect(tmp.style.visibility).to.equal('hidden');
+          expect(tmp.style.display).to.equal('none');
           done();
         }, 'animation': 'none'});
       });
