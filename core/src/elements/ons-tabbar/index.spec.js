@@ -102,12 +102,6 @@ describe('OnsTabbarElement', () => {
     expect(element.children[1].classList.contains('ons-tabbar__footer')).to.be.true;
   });
 
-  describe('#getTabbarId()', () => {
-    it('provides a unique auto generated id', () => {
-      expect(element.getTabbarId()).to.be.ok;
-    });
-  });
-
   describe('#setTabbarVisibility()', () => {
     it('sets the element visible or invisible', () => {
       var div = document.createElement('div');

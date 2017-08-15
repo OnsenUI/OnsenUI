@@ -357,7 +357,7 @@ util.updateParentPosition = (el) => {
 
 util.toggleAttribute = (element, name, value) => {
   if (value) {
-    element.setAttribute(name, value);
+    element.setAttribute(name, typeof value === 'boolean' ? '' : value);
   } else {
     element.removeAttribute(name);
   }

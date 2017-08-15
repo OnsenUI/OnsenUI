@@ -11,6 +11,24 @@
     <script>
       document.addEventListener('init', function(event) {
         console.log('init');
+
+        if (event.target.matches('#p2')) {
+          document.querySelector('#my-list').delegate = {
+            createItemContent: function(i, template) {
+              var dom = template.cloneNode(true);
+
+              dom.innerHTML = dom.innerHTML.replace('{{item}}', i===5?i+fixedJump:(i + jump(i)));
+              dom.setAttribute('index', i);
+
+              return dom;
+            },
+
+            countItems: function() {
+              return 10000000;
+            }
+          };
+
+        }
       });
       document.addEventListener('show', function(event) {
         console.log('show');
@@ -24,6 +42,27 @@
 
     </script>
 
+    <script>
+      var fixedJump = '';
+var jump = (function() {
+  var memoize = [];
+  return function(i) {
+    if (memoize[i] === undefined) {
+      memoize[i] = Array(1 + Math.floor(Math.random() * 5)).join('<br>');
+    }
+    return memoize[i];
+  };
+})();
+var test = function() {
+  fixedJump = Array(10).join('<br>');
+}
+
+function refresh(i) {
+  document.querySelector('#my-list').refresh(i);
+}
+
+</script>
+
   </head>
 
   <body>
@@ -35,6 +74,7 @@
       <ons-tabbar position="auto">
         <ons-tab page="page1.html" active
           icon="ion-home"
+          active-icon="md-menu"
           label="Home">
         </ons-tab>
         <ons-tab
@@ -56,8 +96,17 @@
     </ons-template>
 
     <ons-template id="page2.html">
-      <ons-page>
+      <ons-page id="p2">
         <h2>Page2</h2>
+
+        <ons-list>
+          <ons-lazy-repeat id="my-list">
+            <ons-list-item>
+              {{item}}
+            </ons-list-item>
+          </ons-lazy-repeat>
+        </ons-list>
+
       </ons-page>
     </ons-template>
 

@@ -48,11 +48,6 @@ const rewritables = {
   }
 };
 
-const generateId = (() => {
-  let i = 0;
-  return () => 'ons-tabbar-gen-' + (i++);
-})();
-
 /**
  * @element ons-tabbar
  * @category tabbar
@@ -178,8 +173,6 @@ export default class TabbarElement extends BaseElement {
   constructor() {
     super();
 
-    this._tabbarId = generateId();
-
     contentReady(this, () => {
       this._compile();
 
@@ -265,13 +258,6 @@ export default class TabbarElement extends BaseElement {
 
   _getTabbarElement() {
     return util.findChild(this, '.tabbar');
-  }
-
-  /**
-   * @return {String}
-   */
-  getTabbarId() {
-    return this._tabbarId;
   }
 
   /**
@@ -406,14 +392,14 @@ export default class TabbarElement extends BaseElement {
     });
 
     if (canceled) {
-      selectedTab.setInactive();
+      selectedTab.setActive(false);
       if (previousTab) {
-        previousTab.setActive();
+        previousTab.setActive(true);
       }
       return Promise.reject('Canceled in prechange event.');
     }
 
-    selectedTab.setActive();
+    selectedTab.setActive(true);
 
     const params = {
       ...options,
@@ -422,7 +408,7 @@ export default class TabbarElement extends BaseElement {
     };
 
     if (previousTab) {
-      previousTab.setInactive();
+      previousTab.setActive(false);
     } else {
       params.animation = 'none';
     }
