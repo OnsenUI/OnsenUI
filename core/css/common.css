@@ -138,10 +138,12 @@ ons-bottom-toolbar {
   box-sizing: content-box;
 }
 
+.page[status-bar-fill] > .toolbar + .page__background,
 .page[status-bar-fill] > .toolbar + .page__background + .page__content {
   top: 64px;
 }
 
+.page[status-bar-fill] > .toolbar--material + .page__background,
 .page[status-bar-fill] > .toolbar--material + .page__background + .page__content {
   top: 76px;
 }

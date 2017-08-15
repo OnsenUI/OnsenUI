@@ -8,6 +8,7 @@ dev
 ### Bug Fixes
 
  * ons-speed-dial-item: Apply Material Design style correctly.
+ * Fixed glitch during push/pop animation when iOS status bar is visible.
 
 ### Misc
 
