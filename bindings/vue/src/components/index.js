@@ -1,4 +1,3 @@
-export { default as VOnsPage } from './VOnsPage.vue';
 export { default as VOnsPopover } from './VOnsPopover.vue';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
 export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
@@ -50,6 +49,7 @@ export const VOnsRadio = extend('radio', [modelRadio]);
 export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction')]);
 export const VOnsFab = extend('fab', [hidable]);
 export const VOnsSpeedDialItem = extend('speed-dial-item');
+export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);
 export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsActionSheet = extend('action-sheet', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
 export const VOnsActionSheetButton = extend('action-sheet-button');
