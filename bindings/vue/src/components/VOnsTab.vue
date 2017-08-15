@@ -21,7 +21,7 @@
         this.$emit('click', { preventDefault: () => runDefault = false });
 
         if (runDefault) {
-          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
+          this.tabbar.$el.setActiveTab(this.$el._index, this.tabbar.options);
         }
       }
     },
