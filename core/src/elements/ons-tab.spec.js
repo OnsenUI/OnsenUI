@@ -17,11 +17,6 @@ describe('OnsTabElement', () => {
     expect(window.ons.TabElement).to.be.ok;
   });
 
-  it('has a default template', () => {
-    expect(element.classList.contains('tabbar__item')).to.be.true;
-    expect(element._hasDefaultTemplate).to.be.true;
-  });
-
   it('has "page" property', () => {
     element.page = 'foobar';
     expect(element.page).to.be.equal('foobar');
@@ -243,39 +238,6 @@ describe('OnsTabElement', () => {
 
       parent.appendChild(element);
       expect(() => element._ensureElementPosition()).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
-    });
-  });
-
-  describe('_hasDefaultTemplate property', () => {
-    it('is, by default, true', () => {
-      expect(element._hasDefaultTemplate).to.be.true;
-    });
-
-    it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
-      const tabbar = ons._util.createElement(`
-        <ons-tabbar>
-        </ons-tabbar>
-      `);
-
-      document.body.appendChild(tabbar);
-      element = ons._util.createElement(`
-        <ons-tab active="true">
-          <div></div>
-        </ons-tab>
-      `);
-      tabbar.appendChild(element);
-      expect(element._hasDefaultTemplate).not.to.be.true;
-
-      document.body.removeChild(tabbar);
-    });
-  });
-
-  describe('#_updateDefaultTemplate()', () => {
-    it('will return if there is not a default template', () => {
-      var spy = chai.spy.on(element, 'getAttribute');
-      element._hasDefaultTemplate = false;
-      element._updateDefaultTemplate();
-      expect(spy).not.to.have.been.called;
     });
   });
 
