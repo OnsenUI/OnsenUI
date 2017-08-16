@@ -92,29 +92,49 @@ gulp.task('css-clean', () => {
 ////////////////////////////////////////
 // generate-preview
 ////////////////////////////////////////
-let generated = false;
+let lastMarkupToken = '';
 gulp.task('generate-preview', (done) => {
-  if (!generated) {
-    runSequence('generate-preview-force', () => {
-      generated = true;
+  const components = parseComponents();
+  const markupToken = identifyComponentsMarkup(components);
+
+  if (markupToken !== lastMarkupToken) {
+    console.log("kita-");
+    runSequence('preview-assets', 'preview-js', () => {
+      const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
+      const componentsJSON = JSON.stringify(components);
+      fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+      browserSync.reload();
+
+      lastMarkupToken = markupToken;
       done();
     });
   } else {
+    lastMarkupToken = markupToken;
     done();
   }
 });
 
-////////////////////////////////////////
-// generate-preview-force
-////////////////////////////////////////
 gulp.task('generate-preview-force', ['preview-assets', 'preview-js'], () => {
+  const components = parseComponents();
   const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-  const css = fs.readFileSync(prefix + 'onsen-css-components.css', 'utf-8');
-  const components = ancss.parse(css, {detect: line => line.match(/^~/)});
   const componentsJSON = JSON.stringify(components);
   fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
   browserSync.reload();
 });
+
+function identifyComponentsMarkup(componentsJSON) {
+  const token = componentsJSON.map(component => {
+    return component.annotation.markup;
+  }).join('');
+
+  return token;
+}
+
+function parseComponents() {
+  const css = fs.readFileSync(__dirname + '/build/onsen-css-components.css', 'utf-8');
+  const components = ancss.parse(css, {detect: line => line.match(/^~/)});
+  return components || [];
+}
 
 ////////////////////////////////////////
 // preview-assets
@@ -156,7 +176,7 @@ gulp.task('preview-js', function() {
 gulp.task('serve', ['reset-console', 'build'], done => {
   gulp.watch(['src/**/*.css'], () => {
     reset();
-    runSequence('build-css', outputDevServerInfo);
+    runSequence('build-css', 'generate-preview', outputDevServerInfo);
   });
 
   gulp.watch(['previewer-src/**'], () => {
