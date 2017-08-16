@@ -98,7 +98,6 @@ gulp.task('generate-preview', (done) => {
   const markupToken = identifyComponentsMarkup(components);
 
   if (markupToken !== lastMarkupToken) {
-    console.log("kita-");
     runSequence('preview-assets', 'preview-js', () => {
       const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
       const componentsJSON = JSON.stringify(components);
