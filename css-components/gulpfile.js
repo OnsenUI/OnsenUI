@@ -16,6 +16,9 @@ const file = require('gulp-file');
 const {rollup} = require('rollup');
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
+const glob = require('glob');
+const rimraf = require('rimraf');
+const path = require('path');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -29,7 +32,7 @@ gulp.task('build', (done) => {
 ////////////////////////////////////////
 // build-css
 ////////////////////////////////////////
-gulp.task('build-css', ['cssnext', 'cssmin']);
+gulp.task('build-css', ['css-clean', 'cssnext', 'cssmin']);
 
 ////////////////////////////////////////
 // stylelint
@@ -79,6 +82,11 @@ gulp.task('cssnext', ['stylelint'], () => {
     .pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix))
     .pipe(browserSync.stream());
+});
+
+gulp.task('css-clean', () => {
+  rimraf.sync(__dirname + '/build/*.css');
+  rimraf.sync(prefix + '/*.css');
 });
 
 ////////////////////////////////////////
@@ -147,14 +155,21 @@ gulp.task('preview-js', function() {
 ////////////////////////////////////////
 gulp.task('serve', ['reset-console', 'build'], done => {
   gulp.watch(['src/**/*.css'], () => {
-    runSequence('reset-console', 'build-css', outputDevServerInfo);
+    reset();
+    runSequence('build-css', outputDevServerInfo);
   });
 
   gulp.watch(['previewer-src/**'], () => {
-    runSequence('reset-console', 'generate-preview-force', outputDevServerInfo)
+    reset();
+    runSequence('generate-preview-force', outputDevServerInfo)
+  });
+
+  browserSync.emitter.on('init', () => {
+    outputDevServerInfo();
   });
 
   browserSync.init({
+    logLevel: 'silent',
     ui: false,
     port: 4321,
     notify: false,
@@ -170,13 +185,47 @@ gulp.task('serve', ['reset-console', 'build'], done => {
 ////////////////////////////////////////
 // reset-console
 ////////////////////////////////////////
-gulp.task('reset-console', () => process.stdout.write('\033c'));
+gulp.task('reset-console', reset);
 
-function outputDevServerInfo() {
-  const localUrl = browserSync.getOption('urls').get('local'); 
-  const externalUrl = browserSync.getOption('urls').get('external'); 
+function reset() {
+  process.stdout.write('\033c');
+}
 
-  console.log('\nAccess URLs:');
-  console.log('     Local:', gutil.colors.magenta(localUrl));
-  console.log('  External:', gutil.colors.magenta(externalUrl));
+const outputDevServerInfo = (() => {
+  let defer = true;
+
+  return function () {
+    if (defer) {
+      setTimeout(() => {
+        output();
+        defer = true;
+      }, 60);
+      defer = false;
+    }
+  }
+
+  function output() {
+    const localUrl = browserSync.getOption('urls').get('local'); 
+    const externalUrl = browserSync.getOption('urls').get('external'); 
+
+    console.log('\nAccess URLs:');
+    console.log('     Local:', gutil.colors.magenta(localUrl));
+    console.log('  External:', gutil.colors.magenta(externalUrl));
+    console.log();
+
+    displayBuildCSSInfo();
+  }
+})();
+
+function displayBuildCSSInfo() {
+
+  const cssPath = getCSSPath();
+
+  console.log('Theme CSS:', gutil.colors.magenta(cssPath));
+
+  function getCSSPath() {
+    const cssPath = glob.sync(__dirname + '/build/*-css-components.css')[0];
+
+    return '.' + path.sep + path.relative(__dirname, cssPath);
+  }
 }
