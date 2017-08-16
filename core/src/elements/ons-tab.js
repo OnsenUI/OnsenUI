@@ -146,7 +146,11 @@ export default class TabElement extends BaseElement {
   constructor() {
     super();
 
-    contentReady(this, () => this._compile());
+    if (['label', 'icon', 'badge'].some(this.hasAttribute.bind(this))) {
+      this._compile();
+    } else {
+      contentReady(this, () => this._compile());
+    }
 
     this._pageLoader = defaultPageLoader;
     this._boundOnClick = this._onClick.bind(this);
