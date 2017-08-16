@@ -12,6 +12,11 @@ export const IndexPage = {
 
       <h2 class="content__header">All Components</h2>
 
+      <div class="build-css">
+        <span class="build-css__file">onsen-css-components.css</span>
+        <a class="build-css__button" href="/onsen-css-components.css" @click="download()">Download</a>
+      </div>
+
       <div class="components">
         <css-component v-for="component in filterComponents()" :component="component" :key="component.id" />
       </div>
@@ -21,6 +26,9 @@ export const IndexPage = {
     'css-component': PreviewComponent
   },
   methods: {
+    download() {
+      window.open('/onsen-css-components.css');
+    },
     filterComponents() {
       const components = this.components;
       if (this.platform === 'android') {

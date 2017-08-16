@@ -195,6 +195,41 @@ a.title-label:hover {
   background-color: #eee;
 }
 
+.build-css__file {
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid #D9D9D9;
+  color: #999;
+  font-size: 12px;
+  padding: 0 6px;
+  width: 200px;
+  border-radius: 1px;
+}
+
+.build-css__button,
+.build-css__button:link,
+.build-css__button:visited,
+.build-css__button:hover {
+  background-color: #F0F0F0;
+  border-radius: 2px;
+  border: 1px solid #f0f0f0;
+  line-height: 25px;
+  height: 25px;
+  font-size: 12px;
+  padding: 0 6px;
+  display: inline-block;
+  color: #444;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.build-css__button:active {
+  opacity: 0.6;
+}
+
 @media (max-width: 480px) {
   .side-navi {
     display: none;
@@ -232,4 +267,9 @@ a.title-label:hover {
     margin-left: -10px;
     width: auto;
   }
+
+  .build-css {
+    display: none;
+  }
 }
+
