@@ -84,15 +84,7 @@ util.findParent = (element, query, until) => {
  * @param {Element} element
  * @return {boolean}
  */
-util.isAttached = (element) => {
-  while (document.documentElement !== element) {
-    if (!element) {
-      return false;
-    }
-    element = element.parentNode;
-  }
-  return true;
-};
+util.isAttached = element => document.body.contains(element);
 
 /**
  * @param {Element} element
