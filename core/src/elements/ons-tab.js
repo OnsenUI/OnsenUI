@@ -19,7 +19,6 @@ import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
-import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
 import { PageLoader, defaultPageLoader } from '../ons/page-loader';
@@ -160,14 +159,6 @@ export default class TabElement extends BaseElement {
     return this.page || this.getAttribute('page');
   }
 
-  set page(page) {
-    this._page = page;
-  }
-
-  get page() {
-    return this._page;
-  }
-
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
       throw Error('First parameter must be an instance of PageLoader.');
@@ -251,7 +242,7 @@ export default class TabElement extends BaseElement {
     return util.findParent(this, 'ons-tabbar');
   }
 
-  get _index() {
+  get index() {
     return Array.prototype.indexOf.call(this.parentElement.children, this);
   }
 
@@ -259,7 +250,7 @@ export default class TabElement extends BaseElement {
     if (this.onClick instanceof Function) {
       this.onClick();
     } else {
-      this._tabbar.setActiveTab(this._index);
+      this._tabbar.setActiveTab(this.index);
     }
   }
 
@@ -273,44 +264,28 @@ export default class TabElement extends BaseElement {
     }
   }
 
-  /**
-   * @param {Element} parent
-   * @param {Function} callback
-   */
-  _loadPageElement(parent, callback) {
-    if (!this._loadedPage && !this._getPageTarget()) {
-      const pages = this._tabbar.pages;
-      const index = this._index;
-      if (!pages[index]) {
-        throw Error('Page was not provided to <ons-tab> index ' + index);
-      }
-      callback(pages[index]);
-    } else if (this._loadingPage) {
-      this._loadingPage.then(pageElement => {
-        callback(pageElement);
-      });
-    } else if (!this._loadedPage) {
-      const deferred = util.defer();
-      this._loadingPage = deferred.promise;
-
-      this._pageLoader.load({ page: this._getPageTarget(), parent }, pageElement => {
+  _loadPageElement(parent = this._tabbar._contentElement) {
+    this._hasLoaded = true;
+    return new Promise(resolve => {
+      this._pageLoader.load({ parent, page: this._getPageTarget() }, pageElement => {
         this._loadedPage = pageElement;
-        deferred.resolve(pageElement);
-        delete this._loadingPage;
-
-        callback(pageElement);
+        resolve();
       });
-    } else {
-      callback(this._loadedPage);
-    }
+    });
   }
 
   get pageElement() {
+    // It has been loaded by ons-tab
     if (this._loadedPage) {
       return this._loadedPage;
     }
-
-    return this._tabbar._contentElement.children[this._index];
+    // Manually attached to DOM, 1 per tab
+    const tabbar = this._tabbar;
+    if (tabbar._contentElement.children.length === this.parentElement.children.length) {
+      return tabbar._contentElement.children[this.index];
+    }
+    // Loaded in another way
+    return null;
   }
 
   /**
@@ -325,48 +300,46 @@ export default class TabElement extends BaseElement {
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
+      this._hasLoaded = false;
     }
   }
 
   connectedCallback() {
-    contentReady(this, () => {
-      this._ensureElementPosition();
+    if (!util.isAttached(this)) {
+      return; // ons-tabbar compilation may trigger this
+    }
 
+    contentReady(this, () => {
       const tabbar = this._tabbar;
+      if (!tabbar) {
+        throw new Error('This ons-tab element must be child of ons-tabbar element.');
+      }
 
       if (tabbar.hasAttribute('modifier')) {
         util.addModifier(this, tabbar.getAttribute('modifier'));
       }
 
-      const onReady = () => {
-        if (!this.hasLoaded) {
-          if (this._getPageTarget()) {
-            this._loadPageElement(tabbar._contentElement, pageElement => {
-              pageElement.style.display = 'none';
-              tabbar._contentElement.appendChild(pageElement);
-            });
-          } else if (tabbar._contentElement.children.length === this.parentElement.children.length) {
-            this.pageElement.style.display = 'none';
+      if (!this._hasLoaded) {
+        TabbarElement.rewritables.ready(tabbar, () => {
+          if (this.hasAttribute('active')) {
+            !this.isActive() && this.setActive(true);
           }
-          this.hasLoaded = true;
-        }
 
-        if (this.hasAttribute('active')) {
-          this._onClick();
-          !this.isActive() && this.setActive(true);
-        }
-      };
+          const loaded = (!this.pageElement && this._getPageTarget())
+            ? this._loadPageElement(tabbar._contentElement)
+            : Promise.resolve();
 
-      TabbarElement.rewritables.ready(tabbar, onReady);
+          loaded.then(() => {
+            const pageElement = this.pageElement;
+            if (!this.isActive() && pageElement) {
+              pageElement.style.display = 'none';
+            }
+          });
+        });
+      }
 
       this.addEventListener('click', this._boundOnClick, false);
     });
-  }
-
-  _ensureElementPosition() {
-    if (!this._tabbar) {
-      throw new Error('This ons-tab element is must be child of ons-tabbar element.');
-    }
   }
 
   static get observedAttributes() {
@@ -392,9 +365,7 @@ export default class TabElement extends BaseElement {
         contentReady(this, () => this._updateButtonContent());
         break;
       case 'page':
-        if (typeof current === 'string') {
-          this.page = current;
-        }
+        this.page = current || '';
         break;
     }
   }
