@@ -11,6 +11,10 @@ v2.5.1
  * ons-navigator: Swipe-to-pop animation glitch.
  * ons-range: Fixed ripple effect when `min` attr is provided.
 
+### New Features
+
+ * css-components: Reimplemented css-components previewer.
+
 v2.5.0
 ----
 
