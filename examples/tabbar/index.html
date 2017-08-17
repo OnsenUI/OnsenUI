@@ -9,19 +9,8 @@
     <script src="../../build/js/onsenui.js"></script>
 
     <script>
-      document.addEventListener('init', function(event) {
-        console.log('init');
-      });
-      document.addEventListener('show', function(event) {
-        console.log('show');
-      });
-      document.addEventListener('hide', function(event) {
-        console.log('hide');
-      });
-      document.addEventListener('destroy', function(event) {
-        console.log('destroy');
-      });
-
+      ['init', 'show', 'hide', 'destroy', 'prechange', 'postchange', 'reactive']
+        .forEach(eN => document.addEventListener(eN, e => console.log(eN)));
     </script>
 
 </script>
@@ -29,7 +18,7 @@
   </head>
 
   <body>
-    <ons-page>
+    <ons-page id="tabbar-page">
       <ons-toolbar>
         <div class="center">Tabbar</div>
       </ons-toolbar>
@@ -53,19 +42,19 @@
     </ons-page>
 
     <template id="page1.html">
-      <ons-page>
+      <ons-page id="tab1">
         <h2>Page1</h2>
       </ons-page>
     </template>
 
     <template id="page2.html">
-      <ons-page>
+      <ons-page id="tab2">
         <h2>Page2</h2>
       </ons-page>
     </template>
 
     <template id="page3.html">
-      <ons-page>
+      <ons-page id="tab3">
         <h2>Page3</h2>
       </ons-page>
     </template>

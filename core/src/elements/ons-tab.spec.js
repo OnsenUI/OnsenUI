@@ -152,7 +152,8 @@ describe('OnsTabElement', () => {
         tabbar.setActiveTab(0).then(() => {
           expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
 
-          document.body.removeChild(tabbar);
+          tabbar.remove();
+          template1.remove()
 
           done();
         });
@@ -227,33 +228,76 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('parent', () => {
-    it('should be an \'ons-tabbar\' element', () => {
-      expect(() => element._ensureElementPosition()).to.throw('This ons-tab element is must be child of ons-tabbar element.');
+  describe('#connectedCallback', () => {
+    it('should be child of \'ons-tabbar\' element', () => {
+      const error = 'ons-tabbar';
+      expect(() => document.body.appendChild(element)).to.throw(error);
 
-      const parent = ons._util.createElement(`
+      const tabbar = document.createElement('ons-tabbar');
+      document.body.appendChild(tabbar);
+
+      expect(() => tabbar.appendChild(element)).not.to.throw(error);
+      tabbar.remove();
+    });
+
+    it('loads the provided page', (done) => {
+      const tabbar = document.createElement('ons-tabbar');
+      const template1 = ons.createElement('<template id="t1"><ons-page id="page1"></ons-page></template>');
+      const tab = ons.createElement('<ons-tab label="tab1" page="t1"></ons-tab>');
+      const spy = chai.spy.on(tab._pageLoader, 'load');
+
+      tabbar.addEventListener('init', event => {
+        expect(spy).to.have.been.called.once;
+        expect(tab.pageElement).to.equal(event.target);
+        expect(tab.pageElement.id).to.equal('page1');
+
+        tabbar.remove();
+        template1.remove();
+        done();
+      });
+
+      tabbar.appendChild(tab);
+      document.body.appendChild(template1);
+      document.body.appendChild(tabbar);
+    });
+
+    it('uses existing pages', (done) => {
+      const tab = ons.createElement('<ons-tab label="tab1"></ons-tab>');
+      const tabbar = ons.createElement(`
         <ons-tabbar>
+          <div class="tabbar__content">
+            <ons-page id="test-page"></ons-page>
+          </div>
+          <div class="tabbar"></div>
+        </ons-tabbar>
+      `);
+      const spy = chai.spy.on(tab._pageLoader, 'load');
+
+      tabbar.addEventListener('init', event => {
+        expect(spy).not.to.have.been.called;
+        expect(tab.pageElement).to.equal(event.target);
+        expect(tab.pageElement.id).to.equal('test-page');
+
+        tabbar.remove();
+        done();
+      });
+
+      tabbar._tabbarElement.appendChild(tab);
+      document.body.appendChild(tabbar);
+    });
+
+    it('does nothing when there is no page', () => {
+      const tabbar = ons.createElement(`
+        <ons-tabbar>
+          <div class="tabbar__content"></div>
+          <div class="tabbar">
+            <ons-tab label="tab1"></ons-tab>
+          </div>
         </ons-tabbar>
       `);
 
-      parent.appendChild(element);
-      expect(() => element._ensureElementPosition()).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
-    });
-  });
-
-  describe('#_loadPage()', () => {
-    it('returns the current tab _pageElement', (done) => {
-      element = ons._util.createElement(`
-        <ons-tab>
-        </ons-tab>
-      `);
-
-      const myFunction = (value) => {
-        expect(value).to.equal(element._loadedPage);
-        done();
-      };
-      element._loadedPage = true;
-      element._loadPageElement(document.createElement('div'), myFunction);
+      expect(() => document.body.appendChild(tabbar)).not.to.throw.error;
+      tabbar.remove();
     });
   });
 
