@@ -49,7 +49,7 @@ gulp.task('stylelint', () => {
 // cssmin
 ////////////////////////////////////////
 gulp.task('cssmin', ['cssnext'], () => {
-  return gulp.src(prefix + 'onsen-css-components.css')
+  return gulp.src(prefix + '{*-,}onsen-css-components.css')
     .pipe($.cssmin())
     .pipe($.rename({suffix: '.min'}))
     .pipe(gulp.dest('./build/'))
@@ -76,7 +76,7 @@ gulp.task('cssnext', ['stylelint'], () => {
     })
   ];
 
-  return gulp.src('src/onsen-css-components.css')
+  return gulp.src('src/{*-,}onsen-css-components.css')
     .pipe($.plumber())
     .pipe($.postcss(plugins))
     .pipe(gulp.dest('./build/'))
@@ -85,8 +85,8 @@ gulp.task('cssnext', ['stylelint'], () => {
 });
 
 gulp.task('css-clean', () => {
-  rimraf.sync(__dirname + '/build/*.css');
-  rimraf.sync(prefix + '/*.css');
+  rimraf.sync(__dirname + '/build/{*-,}onsen-css-components.css');
+  rimraf.sync(prefix + '/{*-,}onsen-css-components.css');
 });
 
 ////////////////////////////////////////
@@ -183,9 +183,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
     runSequence('generate-preview-force', outputDevServerInfo)
   });
 
-  browserSync.emitter.on('init', () => {
-    outputDevServerInfo();
-  });
+  browserSync.emitter.on('init', outputDevServerInfo);
 
   browserSync.init({
     logLevel: 'silent',
@@ -238,13 +236,14 @@ const outputDevServerInfo = (() => {
 
 function displayBuildCSSInfo() {
 
-  const cssPath = getCSSPath();
+  console.log('Built CSS Files:')
+  getCSSPaths().forEach(cssPath => {
+    console.log('  ' + gutil.colors.magenta(cssPath));
+  });
 
-  console.log('Theme CSS:', gutil.colors.magenta(cssPath));
-
-  function getCSSPath() {
-    const cssPath = glob.sync(__dirname + '/build/*-css-components.css')[0];
-
-    return '.' + path.sep + path.relative(__dirname, cssPath);
+  function getCSSPaths() {
+    return glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(cssPath => {
+      return '.' + path.sep + path.relative(__dirname, cssPath);
+    });
   }
 }
