@@ -86,7 +86,9 @@ gulp.task('cssnext', ['stylelint'], () => {
 
 gulp.task('css-clean', () => {
   rimraf.sync(__dirname + '/build/{*-,}onsen-css-components.css');
+  rimraf.sync(__dirname + '/build/{*-,}onsen-css-components.min.css');
   rimraf.sync(prefix + '/{*-,}onsen-css-components.css');
+  rimraf.sync(prefix + '/{*-,}onsen-css-components.min.css');
 });
 
 ////////////////////////////////////////
