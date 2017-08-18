@@ -8,7 +8,7 @@ This CSS components is built by PostCSS + cssnext. You can build with following 
 
 ```
 $ yarn install --pure-lockfile
-$ gulp build
+$ yarn run build
 ```
 
 ## How to Customize Components
@@ -19,7 +19,7 @@ Execute the following command. When this command is executed, a preview of the C
 
 ```
 $ yarn install --pure-lockfile
-$ gulp serve
+$ yarn run serve
 ```
 
 When you edit the cssnext files under the `src` directory, the cssnext files is automatically built into the CSS and the browser is reloaded. The built CSS file is located in `./build/onsen-css-components.css`.

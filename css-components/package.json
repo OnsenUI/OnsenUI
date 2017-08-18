@@ -2,6 +2,10 @@
   "name": "",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "build": "gulp build",
+    "serve": "gulp serve"
+  },
   "dependencies": {
     "ancss": "^0.1.5",
     "autoprefixer": "^6.7.4",
@@ -20,8 +24,7 @@
     "gulp-stylelint": "^3.9.0",
     "gulp-stylus": "^1.0.0",
     "gulp-util": "^2.2.14",
-    "immutable-css": "^1.1.2",
-    "postcss-base64": "^0.6.1",
+    "immutable-css": "^1.1.2", "postcss-base64": "^0.6.1",
     "postcss-cssnext": "^2.9.0",
     "postcss-import": "^9.1.0",
     "postcss-reporter": "^3.0.0",
