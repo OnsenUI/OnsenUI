@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
     browsers: [ 'Chrome' ], // run in Chrome
     singleRun: true, // just run once by default
-    frameworks: [ 'mocha', 'chai' ], // use the mocha test framework
+    frameworks: [ 'mocha', 'chai' ], // use the Mocha test framework
     files: [
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css',

@@ -8,6 +8,10 @@ dev
 
 * VOnsNavigator: Keep page scroll during pop animation.
 
+### Misc
+
+* Added unit testing with Karma, Mocha, Chai and Sinon.
+
 2.1.0
 ----
 
