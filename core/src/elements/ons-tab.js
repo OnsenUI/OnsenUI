@@ -269,7 +269,7 @@ export default class TabElement extends BaseElement {
     return new Promise(resolve => {
       this._pageLoader.load({ parent, page: this._getPageTarget() }, pageElement => {
         this._loadedPage = pageElement;
-        resolve();
+        resolve(pageElement);
       });
     });
   }
@@ -296,6 +296,7 @@ export default class TabElement extends BaseElement {
   }
 
   disconnectedCallback() {
+    this.loaded = null;
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
@@ -309,6 +310,8 @@ export default class TabElement extends BaseElement {
       return; // ons-tabbar compilation may trigger this
     }
 
+    this.loaded = util.defer();
+
     contentReady(this, () => {
       const tabbar = this._tabbar;
       if (!tabbar) {
@@ -321,19 +324,15 @@ export default class TabElement extends BaseElement {
 
       if (!this._hasLoaded) {
         TabbarElement.rewritables.ready(tabbar, () => {
-          if (this.hasAttribute('active')) {
-            !this.isActive() && this.setActive(true);
-          }
-
-          const loaded = (!this.pageElement && this._getPageTarget())
+          const elementLoaded = (!this.pageElement && this._getPageTarget())
             ? this._loadPageElement(tabbar._contentElement)
-            : Promise.resolve();
+            : Promise.resolve(this.pageElement);
 
-          loaded.then(() => {
-            const pageElement = this.pageElement;
-            if (!this.isActive() && pageElement) {
-              pageElement.style.display = 'none';
-            }
+          elementLoaded.then(el => {
+            this.loaded.resolve(el);
+            this.hasAttribute('active')
+              ? !this.isActive() && tabbar.setActiveTab(this.index)
+              : el && (el.style.display = 'none');
           });
         });
       }

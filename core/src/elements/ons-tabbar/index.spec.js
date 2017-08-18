@@ -154,16 +154,10 @@ describe('OnsTabbarElement', () => {
 
 
   describe('#topPage', () => {
-    it('accepts only \'ons-page\' as current page element', () => {
-      const page = new ons.PageElement();
-      element._contentElement.insertBefore(page, element._contentElement.firstChild);
-      expect(element.topPage.classList.contains('page')).to.be.true;
-      expect(() => element.topPage).not.to.throw('ons-page');
-      page.remove();
-
-      const button = new ons.ButtonElement();
-      element._contentElement.insertBefore(button, element._contentElement.firstChild);
-      expect(() => element.topPage).to.throw('ons-page');
+    it('returns the current page', () => {
+      expect(element.topPage).to.be.null;
+      element.setActiveTab(0);
+      expect(element.topPage.id).to.equal('test-page1')
     });
   });
 
@@ -261,9 +255,9 @@ describe('OnsTabbarElement', () => {
     });
 
     it('returns a promise that resolves to the new page', () => {
-      expect(element.topPage.innerHTML.indexOf('fugafuga')).to.be.below(0);
+      expect(element.topPage).to.be.null;
       return expect(element.setActiveTab(1)).to.eventually.be.fulfilled.then(page => {
-        expect(page.innerHTML.indexOf('fugafuga')).not.to.be.below(0);
+        expect(page.id).to.equal('test-page2');
         expect(page).to.equal(element.topPage);
       });
     });

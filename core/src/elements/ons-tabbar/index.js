@@ -48,6 +48,8 @@ const rewritables = {
   }
 };
 
+const nullPage = internal.nullElement;
+
 /**
  * @element ons-tabbar
  * @category tabbar
@@ -254,13 +256,9 @@ export default class TabbarElement extends BaseElement {
   get topPage() {
     const tabs = this._tabbarElement.children,
       index = this.getActiveTabIndex();
-    const page = tabs[index] && tabs[index].pageElement || this._contentElement.children[0] || null;
-
-    if (page && page.nodeName.toLowerCase() !== 'ons-page') {
-      throw new Error('Invalid state: page element must be a "ons-page" element.');
-    }
-
-    return page;
+    return tabs[index]
+      ? tabs[index].pageElement || this._contentElement.children[0] || null
+      : null;
   }
 
   get pages() {
@@ -277,23 +275,18 @@ export default class TabbarElement extends BaseElement {
    * @param {Number} options.prevIndex
    * @return {Promise} Resolves to the new page element.
    */
-  _switchPage(nextPage, previousPage, options) {
-    if (!nextPage) {
-      throw new Error('No page loaded in tab ' + options.nextIndex);
-    }
+  _switchPage(nextPage, prevPage, options = {}) {
+    nextPage.removeAttribute('style');
+    prevPage._hide && prevPage._hide();
 
     return new Promise(resolve => {
-      nextPage.removeAttribute('style');
-      previousPage && previousPage._hide();
-
       this._animatorFactory.newAnimator(options)
-        .apply(nextPage, previousPage || internal.nullElement, options.nextIndex, options.prevIndex, () => {
-          previousPage && (previousPage.style.display = 'none');
-
+        .apply(nextPage, prevPage, options.nextIndex, options.prevIndex, () => {
+          prevPage.style.display = 'none';
           nextPage.style.display = 'block';
-          nextPage._show();
+          nextPage._show && nextPage._show();
 
-          resolve(nextPage);
+          resolve(nextPage === nullPage ? null : nextPage);
         });
     });
   }
@@ -351,19 +344,25 @@ export default class TabbarElement extends BaseElement {
     prevTab && prevTab.setActive(false);
     nextTab.setActive(true);
 
-    return this._switchPage(nextTab.pageElement, prevTab && prevTab.pageElement, {
-      prevIndex, nextIndex,
-      animation: (prevTab && options.animation || this.getAttribute('animation')) || 'none',
-      animationOptions: {
-        ...(options.animationOptions || {}),
-        ...AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-      }
-    })
-    .then(page => {
-      util.triggerElementEvent(this, 'postchange', event);
-      options.callback instanceof Function && options.callback(page);
-      return Promise.resolve(page);
-    });
+    return nextTab.loaded.promise
+      .then(nextPage => this._switchPage(
+        nextPage || nullPage,
+        prevTab && prevTab.pageElement || nullPage,
+        {
+          prevIndex, nextIndex,
+          animation: prevTab && nextPage
+            ? options.animation || this.getAttribute('animation')
+            : 'none',
+          animationOptions: {
+            ...(options.animationOptions || {}),
+            ...AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+          }
+        }))
+      .then(page => {
+        util.triggerElementEvent(this, 'postchange', event);
+        options.callback instanceof Function && options.callback(page);
+        return Promise.resolve(page);
+      });
   }
 
   /**
@@ -420,7 +419,7 @@ export default class TabbarElement extends BaseElement {
 
   _show() {
     const currentPageElement = this.topPage;
-    currentPageElement && currentPageElement._show();
+    currentPageElement &&  setImmediate(() => currentPageElement._show());
   }
 
   _hide() {
@@ -429,7 +428,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _destroy() {
-    const tabbar = this._tabbarElement;
+    const tabs = this._tabbarElement.children;
     while (tabs[0]) {
       tabs[0].remove();
     }

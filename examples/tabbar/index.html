@@ -10,7 +10,7 @@
 
     <script>
       ['init', 'show', 'hide', 'destroy', 'prechange', 'postchange', 'reactive']
-        .forEach(eN => document.addEventListener(eN, e => console.log(eN)));
+        .forEach(eN => document.addEventListener(eN, e => console.log(eN, e.target.id)));
     </script>
 
 </script>
@@ -23,13 +23,13 @@
         <div class="center">Tabbar</div>
       </ons-toolbar>
 
-      <ons-tabbar position="auto">
-        <ons-tab page="page1.html" active
+      <ons-tabbar position="auto" animation="slide">
+        <ons-tab page="page1.html"
           icon="ion-home"
           active-icon="md-menu"
           label="Home">
         </ons-tab>
-        <ons-tab
+        <ons-tab active
           icon="ion-chatbox-working"
           label="Comments"
           badge="99+"
