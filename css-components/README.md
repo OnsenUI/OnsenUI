@@ -2,6 +2,9 @@
 
 Onsen CSS Components is CSS components for Cordova Apps.
 
+![Screenshot](./misc/screenshot-01.png)
+![Screenshot](./misc/screenshot-02.png)
+
 ## How to Build
 
 This CSS components is built by PostCSS + cssnext. You can build with following commands.
@@ -12,9 +15,6 @@ $ yarn run build
 ```
 
 ## How to Customize CSS Components
-
-![Screenshot](./misc/screenshot-01.png)
-![Screenshot](./misc/screenshot-02.png)
 
 Execute the following command.
 
