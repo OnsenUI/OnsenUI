@@ -8,6 +8,11 @@ dev
 
 * VOnsNavigator: Keep page scroll during pop animation.
 
+### Misc
+
+* Avoid CE check in production.
+* Removed 'modifier' patches. Requires at least `onsenui@2.5.3`.
+
 2.1.0
 ----
 
