@@ -340,13 +340,16 @@ export default class CarouselElement extends BaseElement {
   }
 
   _compile() {
-    if (!this._swiperElement) {
-      const swiper = util.create('.swiper', { height: '100%'});
+    const swiper = this._swiperElement || util.create('.swiper', { height: '100%'});
+    if (!swiper.parentNode) {
       while (this.firstChild) {
         swiper.appendChild(this.firstChild);
       }
       this.appendChild(swiper);
     }
+
+    this.appendChild = this.appendChild.bind(swiper);
+    this.insertBefore = this.insertBefore.bind(swiper);
   }
 
   get _swiperElement() {
@@ -630,7 +633,7 @@ export default class CarouselElement extends BaseElement {
   _updateAutoRefresh() {
     if (this._mutationObserver) {
       if (this.hasAttribute('auto-refresh')) {
-        this._mutationObserver.observe(this, {childList: true});
+        this._mutationObserver.observe(this._swiperElement, {childList: true});
       } else {
         this._mutationObserver.disconnect();
       }
