@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  import { modifier, modelInput } from '../mixins';
+  import { modelInput } from '../mixins';
 
   export default {
-    mixins: [modifier, modelInput]
+    mixins: [modelInput]
   };
 </script>

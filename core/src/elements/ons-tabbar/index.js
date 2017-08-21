@@ -533,12 +533,16 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'position'];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
+      isTop(last) !== isTop(current) && this._updatePosition();
+    } else if(name === 'position') {
+      this._updatePosition();
     }
   }
 
