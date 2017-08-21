@@ -181,7 +181,7 @@ export default class TabbarElement extends BaseElement {
       const activeIndex = this.getAttribute('activeIndex');
       const tabbar = this._tabbarElement;
       if (activeIndex && tabbar.children.length > activeIndex) {
-        tabbar.children[activeIndex].setAttribute('active', 'true');
+        tabbar.children[activeIndex].setAttribute('active', '');
       }
 
       this._animatorFactory = new AnimatorFactory({
@@ -208,21 +208,15 @@ export default class TabbarElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    if (this._contentElement && this._tabbarElement) {
-      const content = util.findChild(this, '.tabbar__content');
-      const bar = util.findChild(this, '.tabbar');
+    const content = this._contentElement || util.create('.tabbar__content');
+    content.classList.add('ons-tabbar__content');
+    const tabbar = this._tabbarElement || util.create('.tabbar');
+    tabbar.classList.add('ons-tabbar__footer');
 
-      content.classList.add('ons-tabbar__content');
-      bar.classList.add('ons-tabbar__footer');
-    } else {
-
-      const content = util.create('.ons-tabbar__content.tabbar__content');
-      const tabbar = util.create('.tabbar.ons-tabbar__footer');
-
+    if (!content.parentNode || !tabbar.parentNode) {
       while (this.firstChild) {
         tabbar.appendChild(this.firstChild);
       }
-
       this.appendChild(content);
       this.appendChild(tabbar);
     }
