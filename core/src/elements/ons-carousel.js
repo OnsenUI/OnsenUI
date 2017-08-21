@@ -19,6 +19,7 @@ import util from '../ons/util';
 import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 import DoorLock from '../ons/doorlock';
+import contentReady from '../ons/content-ready';
 import animit from '../ons/animit';
 
 const VerticalModeTrait = {
@@ -334,6 +335,22 @@ export default class CarouselElement extends BaseElement {
     this._boundOnResize = this._onResize.bind(this);
 
     this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
+
+    contentReady(this, () => this._compile());
+  }
+
+  _compile() {
+    if (!this._swiperElement) {
+      const swiper = util.create('.swiper', { height: '100%'});
+      while (this.firstChild) {
+        swiper.appendChild(this.firstChild);
+      }
+      this.appendChild(swiper);
+    }
+  }
+
+  get _swiperElement() {
+    return util.findChild(this, '.swiper');
   }
 
   _onResize() {
@@ -729,7 +746,7 @@ export default class CarouselElement extends BaseElement {
 
       this._scroll = scroll;
 
-      animit(this._getCarouselItemElements())
+      animit(this._swiperElement)
         .queue({
           transform: this._generateScrollTransform(this._scroll)
         }, {
@@ -791,7 +808,7 @@ export default class CarouselElement extends BaseElement {
    * @return {Array}
    */
   _getCarouselItemElements() {
-    return util.arrayFrom(this.children)
+    return util.arrayFrom(this._swiperElement.children)
       .filter((child) => child.nodeName.toLowerCase() === 'ons-carousel-item');
   }
 
@@ -819,7 +836,7 @@ export default class CarouselElement extends BaseElement {
     };
 
     return new Promise(resolve => {
-      animit(this._getCarouselItemElements())
+      animit(this._swiperElement)
         .queue({
           transform: this._generateScrollTransform(normalizeScroll(scroll))
         }, options.animation  !== 'none' ? options.animationOptions : {})
@@ -856,7 +873,7 @@ export default class CarouselElement extends BaseElement {
     const duration = 0.4;
 
     if (this._scroll < 0) {
-      animit(this._getCarouselItemElements())
+      animit(this._swiperElement)
         .queue({
           transform: this._generateScrollTransform(0)
         }, {
@@ -875,7 +892,7 @@ export default class CarouselElement extends BaseElement {
     const maxScroll = this._calculateMaxScroll();
 
     if (maxScroll < this._scroll) {
-      animit(this._getCarouselItemElements())
+      animit(this._swiperElement)
         .queue({
           transform: this._generateScrollTransform(maxScroll)
         }, {
