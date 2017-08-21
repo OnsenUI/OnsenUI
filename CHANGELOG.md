@@ -8,11 +8,13 @@ dev
 ### Bug Fixes
 
  * ons-speed-dial-item: Apply Material Design style correctly.
+ * ons-splitter-side: Fixed [#2026](https://github.com/OnsenUI/OnsenUI/issues/2026).
  * Fixed glitch during push/pop animation when iOS status bar is visible.
 
 ### Misc
 
- * autostyle: 'material' modifier is automatically restored.
+ * modifiers: internal modifiers are automatically restored when anything removes them.
+ * docs: Added missing modifiers and attributes.
 
 v2.5.2
 ----
