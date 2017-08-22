@@ -59,19 +59,15 @@ const VerticalModeTrait = {
 
   _layoutCarouselItems: function() {
     const children = this._getCarouselItemElements();
-
     const sizeAttr = this._getCarouselItemSizeAttr();
-    const sizeInfo = this._decomposeSizeString(sizeAttr);
 
     for (let i = 0; i < children.length; i++) {
-      children[i].style.position = 'absolute';
       children[i].style.height = sizeAttr;
-      children[i].style.visibility = 'visible';
-      children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
     }
   },
 
-  _setup: function(){
+  _setup: function() {
+    this._swiperElement.classList.toggle('ons-swiper-target--vertical', true);
     this._updateDimensionData();
     this._updateOffset();
     this._layoutCarouselItems();
@@ -115,19 +111,15 @@ const HorizontalModeTrait = {
 
   _layoutCarouselItems: function() {
     const children = this._getCarouselItemElements();
-
     const sizeAttr = this._getCarouselItemSizeAttr();
-    const sizeInfo = this._decomposeSizeString(sizeAttr);
 
     for (let i = 0; i < children.length; i++) {
-      children[i].style.position = 'absolute';
       children[i].style.width = sizeAttr;
-      children[i].style.visibility = 'visible';
-      children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
     }
   },
 
   _setup: function(){
+    this._swiperElement.classList.toggle('ons-swiper-target--vertical', false);
     this._updateDimensionData();
     this._updateOffset();
     this._layoutCarouselItems();
@@ -340,7 +332,8 @@ export default class CarouselElement extends BaseElement {
   }
 
   _compile() {
-    const swiper = this._swiperElement || util.create('.swiper', { height: '100%'});
+    this.classList.add('ons-swiper');
+    const swiper = this._swiperElement || util.create('.ons-swiper-target');
     if (!swiper.parentNode) {
       while (this.firstChild) {
         swiper.appendChild(this.firstChild);
@@ -353,7 +346,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   get _swiperElement() {
-    return util.findChild(this, '.swiper');
+    return util.findChild(this, '.ons-swiper-target');
   }
 
   _onResize() {
@@ -405,13 +398,7 @@ export default class CarouselElement extends BaseElement {
    * @return {Number}
    */
   _getInitialIndex() {
-    const index = parseInt(this.getAttribute('initial-index'), 10);
-
-    if (typeof index === 'number' && !isNaN(index)) {
-      return Math.max(Math.min(index, this.itemCount - 1), 0);
-    } else {
-      return 0;
-    }
+    return Math.max(Math.min(Number(this.getAttribute('initial-index')) || 0, this.itemCount - 1), 0);
   }
 
   /**
@@ -437,8 +424,8 @@ export default class CarouselElement extends BaseElement {
   }
 
   _setupInitialIndex() {
-    this._scroll = (this._offset || 0) + this._getCarouselItemSize() * this._getInitialIndex();
     this._lastActiveIndex = this._getInitialIndex();
+    this._scroll = (this._offset || 0) + this._getCarouselItemSize() * this._lastActiveIndex;
     this._scrollTo(this._scroll);
   }
 
@@ -571,16 +558,6 @@ export default class CarouselElement extends BaseElement {
    */
   prev(options) {
     return this.setActiveIndex(this.getActiveIndex() - 1, options);
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  _isEnabledChangeEvent() {
-    const elementSize = this._getElementSize();
-    const carouselItemSize = this._getCarouselItemSize();
-
-    return this.autoScroll && Math.abs(elementSize - carouselItemSize) < 0.5;
   }
 
   /**

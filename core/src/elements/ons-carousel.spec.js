@@ -237,18 +237,6 @@ describe('OnsCarouselElement', () => {
     });
   });
 
-
-  describe('#_isEnabledChangeEvent()', () => {
-    it('should be true if auto scroll is enabled', () => {
-      carousel.autoScroll = true;
-      expect(carousel._isEnabledChangeEvent()).to.be.true;
-    });
-
-    it('should be false if auto scroll is not enabled', () => {
-      expect(carousel._isEnabledChangeEvent()).to.be.false;
-    });
-  });
-
   describe('#refresh()', () => {
     it('fires \'refresh\' event', () => {
       const promise = new Promise((resolve) =>
