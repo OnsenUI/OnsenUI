@@ -18,7 +18,6 @@ limitations under the License.
 import util from '../ons/util';
 import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
-import DoorLock from '../ons/doorlock';
 import contentReady from '../ons/content-ready';
 import animit from '../ons/animit';
 
@@ -316,7 +315,6 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
-    this._doorLock = new DoorLock();
     this._scroll = 0;
     this._offset = 0;
     this._lastActiveIndex = 0;
@@ -994,16 +992,19 @@ export default class CarouselElement extends BaseElement {
 
   connectedCallback() {
     this._prepareEventListeners();
-
     this._setup();
     this._setupInitialIndex();
-
     this._saveLastState();
 
     // Fix rendering glitch on Android 4.1
     if (this.offsetHeight === 0) {
       setImmediate(() => this.refresh());
     }
+
+    setImmediate(() => {
+      this._currentElementSize = undefined;
+      this._setupInitialIndex();
+    });
   }
 
   static get observedAttributes() {

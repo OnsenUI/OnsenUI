@@ -252,11 +252,11 @@ describe('OnsCarouselElement', () => {
       const item = ons._util.createElement(`
         <ons-carousel-item>Item 4</ons-carousel-item>
       `);
-
+      item.style.width = '10px';
       carousel.appendChild(item);
-      expect(item.style.position).not.to.equal('absolute');
+      expect(item.style.width).not.to.equal('100%');
       carousel.refresh();
-      expect(item.style.position).to.equal('absolute');
+      expect(item.style.width).to.equal('100%');
     });
   });
 
