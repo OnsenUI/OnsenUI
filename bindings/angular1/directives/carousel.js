@@ -149,11 +149,7 @@
       compile: function(element, attrs) {
         return function(scope, element, attrs) {
           if (scope.$last) {
-            let carousel = $onsen.util.findParent(element[0], 'ons-carousel');
-            carousel._setup();
-            carousel._setupInitialIndex();
-            carousel._saveLastState();
-            carousel = null;
+            $onsen.util.findParent(element[0], 'ons-carousel')._swiper.init();
           }
         };
       }

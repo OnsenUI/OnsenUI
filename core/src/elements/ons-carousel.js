@@ -17,113 +17,8 @@ limitations under the License.
 
 import util from '../ons/util';
 import BaseElement from './base/base-element';
-import GestureDetector from '../ons/gesture-detector';
 import contentReady from '../ons/content-ready';
-import animit from '../ons/animit';
-
-const VerticalModeTrait = {
-
-  _getScrollDelta: function(event) {
-    return event.gesture.deltaY;
-  },
-
-  _getScrollVelocity: function(event) {
-    return event.gesture.velocityY;
-  },
-
-  _getElementSize: function() {
-    if (!this._currentElementSize) {
-      const styling = window.getComputedStyle(this, null);
-      this._currentElementSize = this.getBoundingClientRect().height - parseInt(styling.getPropertyValue('border-top-width')) - parseInt(styling.getPropertyValue('border-bottom-width'));
-    }
-
-    return this._currentElementSize;
-  },
-
-  _generateScrollTransform: function(scroll) {
-    return 'translate3d(0px, ' + -scroll + 'px, 0px)';
-  },
-
-  _updateDimensionData: function(){
-    this._style = window.getComputedStyle(this);
-    this._dimensions = this.getBoundingClientRect();
-  },
-
-  _updateOffset: function(){
-    if (this.centered) {
-      const height = (this._dimensions.height || 0) - parseInt(this._style.paddingTop, 10) - parseInt(this._style.paddingBottom, 10);
-      this._offset = -(height - this._getCarouselItemSize()) / 2;
-    }
-  },
-
-  _layoutCarouselItems: function() {
-    const children = this._getCarouselItemElements();
-    const sizeAttr = this._getCarouselItemSizeAttr();
-
-    for (let i = 0; i < children.length; i++) {
-      children[i].style.height = sizeAttr;
-    }
-  },
-
-  _setup: function() {
-    this._swiperElement.classList.toggle('ons-swiper-target--vertical', true);
-    this._updateDimensionData();
-    this._updateOffset();
-    this._layoutCarouselItems();
-  }
-};
-
-const HorizontalModeTrait = {
-
-  _getScrollDelta: function(event) {
-    return event.gesture.deltaX;
-  },
-
-  _getScrollVelocity: function(event) {
-    return event.gesture.velocityX;
-  },
-
-  _getElementSize: function() {
-    if (!this._currentElementSize) {
-      const styling = window.getComputedStyle(this, null);
-      this._currentElementSize = this.getBoundingClientRect().width - parseInt(styling.getPropertyValue('border-right-width')) - parseInt(styling.getPropertyValue('border-left-width'));
-    }
-
-    return this._currentElementSize;
-  },
-
-  _generateScrollTransform: function(scroll) {
-    return 'translate3d(' + -scroll + 'px, 0px, 0px)';
-  },
-
-  _updateDimensionData: function(){
-    this._style = window.getComputedStyle(this);
-    this._dimensions = this.getBoundingClientRect();
-  },
-
-  _updateOffset: function(){
-    if (this.centered) {
-      const width = (this._dimensions.width || 0) - parseInt(this._style.paddingLeft, 10) - parseInt(this._style.paddingRight, 10);
-      this._offset = -(width - this._getCarouselItemSize()) / 2;
-    }
-  },
-
-  _layoutCarouselItems: function() {
-    const children = this._getCarouselItemElements();
-    const sizeAttr = this._getCarouselItemSizeAttr();
-
-    for (let i = 0; i < children.length; i++) {
-      children[i].style.width = sizeAttr;
-    }
-  },
-
-  _setup: function(){
-    this._swiperElement.classList.toggle('ons-swiper-target--vertical', false);
-    this._updateDimensionData();
-    this._updateOffset();
-    this._layoutCarouselItems();
-  }
-};
+import Swiper from '../ons/internal/swiper';
 
 /**
  * @element ons-carousel
@@ -315,116 +210,106 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
-    this._scroll = 0;
-    this._offset = 0;
-    this._lastActiveIndex = 0;
-
-    this._boundOnDragStart = this._onDragStart.bind(this);
-    this._boundOnDrag = this._onDrag.bind(this);
-    this._boundOnDragEnd = this._onDragEnd.bind(this);
-    this._boundOnResize = this._onResize.bind(this);
-
-    this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
-
     contentReady(this, () => this._compile());
   }
 
   _compile() {
-    this.classList.add('ons-swiper');
-    const swiper = this._swiperElement || util.create('.ons-swiper-target');
-    if (!swiper.parentNode) {
+    const target = util.findChild(this, '.target') || util.create('.target');
+    if (!target.parentNode) {
       while (this.firstChild) {
-        swiper.appendChild(this.firstChild);
+        target.appendChild(this.firstChild);
       }
-      this.appendChild(swiper);
+      this.appendChild(target);
     }
 
-    this.appendChild = this.appendChild.bind(swiper);
-    this.insertBefore = this.insertBefore.bind(swiper);
+    this.appendChild = this.appendChild.bind(target);
+    this.insertBefore = this.insertBefore.bind(target);
   }
 
-  get _swiperElement() {
-    return util.findChild(this, '.ons-swiper-target');
+  connectedCallback() {
+    this._swiper = new Swiper({
+      element: this,
+      initialIndex: this.getAttribute('initial-index'),
+      getAutoScrollRatio: () => this.autoScrollRatio,
+      isVertical: () => this.vertical,
+      isOverScrollable: () => this.overscrollable,
+      isCentered: () => this.centered,
+      isAutoScrollable: () => this.autoScroll,
+      itemSize: this.itemSize,
+      overScrollHook: this._onOverScroll.bind(this),
+      postChangeHook: this._onPostChange.bind(this),
+      refreshHook: this._onRefresh.bind(this),
+    });
+
+    this._swiper.init();
+    this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
   }
 
-  _onResize() {
-    const i = this._scroll / this._currentElementSize;
-    delete this._currentElementSize;
-    this.setActiveIndex(i);
-
-    this.refresh();
+  disconnectedCallback() {
+    this._swiper.dispose();
+    this._swiper = null;
   }
 
-  _onDirectionChange() {
-    if (this._isVertical()) {
-      this.style.overflowX = 'auto';
-      this.style.overflowY = '';
-    } else {
-      this.style.overflowX = '';
-      this.style.overflowY = 'auto';
+  static get observedAttributes() {
+    return ['swipeable', 'auto-refresh', 'direction', 'item-height', 'item-width'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    if (!this._swiper) {
+      return;
     }
 
-    this.refresh();
-  }
-
-  _saveLastState() {
-    this._lastState = {
-      elementSize: this._getCarouselItemSize(),
-      carouselElementCount: this.itemCount,
-      width: this._getCarouselItemSize() * this.itemCount
-    };
-  }
-
-  /**
-   * @return {Number}
-   */
-  _getCarouselItemSize() {
-    const sizeAttr = this._getCarouselItemSizeAttr();
-    const sizeInfo = this._decomposeSizeString(sizeAttr);
-    const elementSize = this._getElementSize();
-
-    if (sizeInfo.unit === '%') {
-      return Math.round(sizeInfo.number / 100 * elementSize);
-    } else if (sizeInfo.unit === 'px') {
-      return sizeInfo.number;
-    } else {
-      throw new Error('Invalid state');
+    switch (name) {
+      case 'swipeable':
+        this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
+        break;
+      case 'auto-refresh':
+        this._swiper.updateAutoRefresh(this.hasAttribute('auto-refresh'));
+        break;
+      case 'item-height':
+        this.vertical && this._swiper.updateItemSize(this.itemSize);
+        break;
+      case 'item-width':
+        this.vertical || this._swiper.updateItemSize(this.itemSize);
+        break;
+      case 'direction':
+        this._swiper.refresh();
     }
   }
 
-  /**
-   * @return {Number}
-   */
-  _getInitialIndex() {
-    return Math.max(Math.min(Number(this.getAttribute('initial-index')) || 0, this.itemCount - 1), 0);
+  _show() {
+    this._swiper.resizeOn();
   }
 
-  /**
-   * @return {String}
-   */
-  _getCarouselItemSizeAttr() {
-    const attrName = 'item-' + (this._isVertical() ? 'height' : 'width');
-    const itemSizeAttr = ('' + this.getAttribute(attrName)).trim();
-
-    return itemSizeAttr.match(/^\d+(px|%)$/) ? itemSizeAttr : '100%';
+  _hide() {
+    this._swiper.resizeOff();
   }
 
-  /**
-   * @return {Object}
-   */
-  _decomposeSizeString(size) {
-    const matches = size.match(/^(\d+)(px|%)/);
+  _onOverScroll({ direction, killOverscroll }) {
+    let waitForAction = false;
+    util.triggerElementEvent(this, 'overscroll', {
+      carousel: this,
+      activeIndex: this.getActiveIndex(),
+      direction,
+      waitToReturn: promise => {
+        waitForAction = true;
+        promise.then(killOverscroll);
+      }
+    });
 
-    return {
-      number: parseInt(matches[1], 10),
-      unit: matches[2],
-    };
+    return waitForAction;
   }
 
-  _setupInitialIndex() {
-    this._lastActiveIndex = this._getInitialIndex();
-    this._scroll = (this._offset || 0) + this._getCarouselItemSize() * this._lastActiveIndex;
-    this._scrollTo(this._scroll);
+  _onPostChange({ activeIndex, lastActiveIndex }) {
+    util.triggerElementEvent(this, 'postchange', {
+      carousel: this,
+      activeIndex,
+      lastActiveIndex
+    });
+  }
+
+  _onRefresh() {
+    util.triggerElementEvent(this, 'refresh', { carousel: this });
   }
 
   /**
@@ -464,16 +349,7 @@ export default class CarouselElement extends BaseElement {
       this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
     );
 
-    index = Math.max(0, Math.min(index, this.itemCount - 1));
-    const scroll = (this._offset || 0) + this._getCarouselItemSize() * index;
-    const max = this._calculateMaxScroll();
-
-    this._scroll = Math.max(0, Math.min(max, scroll));
-    return this._scrollTo(this._scroll, options).then(() => {
-      this._tryFirePostChangeEvent();
-      return this;
-    });
-
+    return this._swiper.setActiveIndex(index, options).then(() => this);
   }
 
   /**
@@ -487,23 +363,7 @@ export default class CarouselElement extends BaseElement {
    *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
    */
   getActiveIndex() {
-    const scroll = this._scroll - (this._offset || 0);
-    const count = this.itemCount;
-    const size = this._getCarouselItemSize();
-
-    if (scroll < 0) {
-      return 0;
-    }
-
-    let i;
-    for (i = 0; i < count; i++) {
-      if (size * i <= scroll && size * (i + 1) > scroll) {
-        return i;
-      }
-    }
-
-    // max carousel index
-    return i;
+    return this._swiper.getActiveIndex();
   }
 
   /**
@@ -559,384 +419,6 @@ export default class CarouselElement extends BaseElement {
   }
 
   /**
-   * @return {Boolean}
-   */
-  _isVertical() {
-    return this.getAttribute('direction') === 'vertical';
-  }
-
-  _show() {
-    window.addEventListener('resize', this._boundOnResize, true);
-  }
-
-  _prepareEventListeners() {
-    this._gestureDetector = new GestureDetector(this, {
-      dragMinDistance: 1,
-      dragLockToAxis: true
-    });
-    this._mutationObserver = new MutationObserver(() => this.refresh());
-
-    this._updateSwipeable();
-    this._updateAutoRefresh();
-
-    window.addEventListener('resize', this._boundOnResize, true);
-  }
-
-  _hide() {
-    window.removeEventListener('resize', this._boundOnResize, true);
-  }
-
-  _removeEventListeners() {
-    this._gestureDetector.dispose();
-    this._gestureDetector = null;
-
-    this._mutationObserver.disconnect();
-    this._mutationObserver = null;
-
-    window.removeEventListener('resize', this._boundOnResize, true);
-  }
-
-  _updateSwipeable() {
-    if (this._gestureDetector) {
-      const action = this.swipeable ? 'on' : 'off';
-      this._gestureDetector[action]('drag', this._boundOnDrag);
-      this._gestureDetector[action]('dragstart', this._boundOnDragStart);
-      this._gestureDetector[action]('dragend', this._boundOnDragEnd);
-    }
-  }
-
-  _updateAutoRefresh() {
-    if (this._mutationObserver) {
-      if (this.hasAttribute('auto-refresh')) {
-        this._mutationObserver.observe(this._swiperElement, {childList: true});
-      } else {
-        this._mutationObserver.disconnect();
-      }
-    }
-  }
-
-  _tryFirePostChangeEvent() {
-    const currentIndex = this.getActiveIndex();
-
-    if (this._lastActiveIndex !== currentIndex) {
-      const lastActiveIndex = this._lastActiveIndex;
-      this._lastActiveIndex = currentIndex;
-
-      util.triggerElementEvent(this, 'postchange', {
-        carousel: this,
-        activeIndex: currentIndex,
-        lastActiveIndex: lastActiveIndex
-      });
-    }
-  }
-
-  _canConsumeGesture(gesture) {
-    const d = gesture.direction;
-    const isFirst = this._scroll === 0 && !this.overscrollable;
-    const isLast = this._scroll === this._calculateMaxScroll() && !this.overscrollable;
-
-    return this._isVertical()
-      ? ((d === 'down' && !isFirst) || (d === 'up' && !isLast))
-      : ((d === 'right' && !isFirst) || (d === 'left' && !isLast));
-  }
-
-  _onDragStart(event) {
-    this._ignoreDrag = event.consumed;
-
-    if (event.gesture && !this._ignoreDrag) {
-      const consume = event.consume;
-      event.consume = () => { consume && consume(); this._ignoreDrag = true; };
-      if (this._canConsumeGesture(event.gesture)) {
-        consume && consume();
-        event.consumed = true;
-        this._started = true; // Avoid starting drag from outside
-      }
-    }
-  }
-
-  _onDrag(event) {
-    if (!event.gesture || this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
-      return;
-    }
-
-    event.stopPropagation();
-
-    this._lastDragEvent = event;
-
-    const scroll = this._scroll - this._getScrollDelta(event);
-    this._scrollTo(scroll);
-    event.gesture.preventDefault();
-
-    this._tryFirePostChangeEvent();
-  }
-
-  _onDragEnd(event) {
-    this._started = false;
-    if (!event.gesture || !this._lastDragEvent || this._ignoreDrag) {
-      return;
-    }
-
-    event.stopPropagation();
-
-    this._currentElementSize = undefined;
-    this._scroll = this._scroll - this._getScrollDelta(event);
-
-    if (this._isOverScroll(this._scroll)) {
-      let waitForAction = false;
-      util.triggerElementEvent(this, 'overscroll', {
-        carousel: this,
-        activeIndex: this.getActiveIndex(),
-        direction: this._getOverScrollDirection(),
-        waitToReturn: (promise) => {
-          waitForAction = true;
-          promise.then(() => this._scrollToKillOverScroll());
-        }
-      });
-
-      if (!waitForAction) {
-        this._scrollToKillOverScroll();
-      }
-    } else {
-      this._startMomentumScroll();
-    }
-    this._lastDragEvent = null;
-
-    event.gesture.preventDefault();
-  }
-
-  /**
-   * @param {Object} trait
-   */
-  _mixin(trait) {
-    Object.keys(trait).forEach(function(key) {
-      this[key] = trait[key];
-    }.bind(this));
-  }
-
-  _startMomentumScroll() {
-    if (this._lastDragEvent) {
-      const velocity = this._getScrollVelocity(this._lastDragEvent);
-      const duration = 0.3;
-      const scrollDelta = duration * 100 * velocity;
-      const scroll = this._normalizeScrollPosition(
-        this._scroll + (this._getScrollDelta(this._lastDragEvent) > 0 ? -scrollDelta : scrollDelta)
-      );
-
-      this._scroll = scroll;
-
-      animit(this._swiperElement)
-        .queue({
-          transform: this._generateScrollTransform(this._scroll)
-        }, {
-          duration: duration,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .queue(function(done) {
-          done();
-          this._tryFirePostChangeEvent();
-        }.bind(this))
-        .play();
-    }
-  }
-
-  _normalizeScrollPosition(scroll) {
-    const max = this._calculateMaxScroll();
-
-    if (!this.autoScroll) {
-      return Math.max(0, Math.min(max, scroll));
-    }
-    let arr = [];
-    const size = this._getCarouselItemSize();
-    const nbrOfItems = this.itemCount;
-
-    for (let i = 0; i < nbrOfItems; i++) {
-      if (i * size + this._offset < max) {
-        arr.push(i * size + this._offset);
-      }
-    }
-    arr.push(max);
-
-    arr.sort(function(left, right) {
-      left = Math.abs(left - scroll);
-      right = Math.abs(right - scroll);
-
-      return left - right;
-    });
-
-    arr = arr.filter(function(item, pos) {
-      return !pos || item != arr[pos - 1];
-    });
-
-    const lastScroll = this._lastActiveIndex * size + this._offset;
-    const scrollRatio = Math.abs(scroll - lastScroll) / size;
-    let result = arr[0];
-
-    if (scrollRatio <= this.autoScrollRatio) {
-      result = lastScroll;
-    } else if (scrollRatio < 1.0) {
-      if (arr[0] === lastScroll && arr.length > 1) {
-        result = arr[1];
-      }
-    }
-
-    return Math.max(0, Math.min(max, result));
-  }
-
-  /**
-   * @return {Array}
-   */
-  _getCarouselItemElements() {
-    return util.arrayFrom(this._swiperElement.children)
-      .filter((child) => child.nodeName.toLowerCase() === 'ons-carousel-item');
-  }
-
-  /**
-   * @param {Number} scroll
-   * @param {Object} [options]
-   * @return {Promise} Resolves to the carousel element
-   */
-  _scrollTo(scroll, options = {}) {
-    const isOverscrollable = this.overscrollable;
-
-    const normalizeScroll = (scroll) => {
-      const ratio = 0.35;
-
-      if (scroll < 0) {
-        return isOverscrollable ? Math.round(scroll * ratio) : 0;
-      }
-
-      const maxScroll = this._calculateMaxScroll();
-      if (maxScroll < scroll) {
-        return isOverscrollable ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
-      }
-
-      return scroll;
-    };
-
-    return new Promise(resolve => {
-      animit(this._swiperElement)
-        .queue({
-          transform: this._generateScrollTransform(normalizeScroll(scroll))
-        }, options.animation  !== 'none' ? options.animationOptions : {})
-        .play(() => {
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-          resolve();
-        });
-    });
-  }
-
-  _calculateMaxScroll() {
-    const max = this.itemCount * this._getCarouselItemSize() - this._getElementSize();
-    return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
-  }
-
-  _isOverScroll(scroll) {
-    if (scroll < 0 || scroll > this._calculateMaxScroll()) {
-      return true;
-    }
-    return false;
-  }
-
-  _getOverScrollDirection() {
-    if (this._isVertical()) {
-      return this._scroll <= 0 ? 'up' : 'down';
-    } else {
-      return this._scroll <= 0 ? 'left' : 'right';
-    }
-  }
-
-  _scrollToKillOverScroll() {
-    const duration = 0.4;
-
-    if (this._scroll < 0) {
-      animit(this._swiperElement)
-        .queue({
-          transform: this._generateScrollTransform(0)
-        }, {
-          duration: duration,
-          timing: 'cubic-bezier(.1, .4, .1, 1)'
-        })
-        .queue(function(done) {
-          done();
-          this._tryFirePostChangeEvent();
-        }.bind(this))
-        .play();
-      this._scroll = 0;
-      return;
-    }
-
-    const maxScroll = this._calculateMaxScroll();
-
-    if (maxScroll < this._scroll) {
-      animit(this._swiperElement)
-        .queue({
-          transform: this._generateScrollTransform(maxScroll)
-        }, {
-          duration: duration,
-          timing: 'cubic-bezier(.1, .4, .1, 1)'
-        })
-        .queue(function(done) {
-          done();
-          this._tryFirePostChangeEvent();
-        }.bind(this))
-        .play();
-      this._scroll = maxScroll;
-      return;
-    }
-
-    return;
-  }
-
-  /**
-   * @property itemCount
-   * @readonly
-   * @type {Number}
-   * @description
-   *   [en]The number of carousel items.[/en]
-   *   [ja]カルーセル要素の数です。[/ja]
-   */
-  get itemCount() {
-    return this._getCarouselItemElements().length;
-  }
-
-  /**
-   * @method refresh
-   * @signature refresh()
-   * @description
-   *   [en]Update the layout of the carousel. Used when adding `<ons-carousel-items>` dynamically or to automatically adjust the size.[/en]
-   *   [ja]レイアウトや内部の状態を最新のものに更新します。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用します。[/ja]
-   */
-  refresh() {
-    // Bug fix
-    if (this._getCarouselItemSize() === 0) {
-      return;
-    }
-
-    this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
-    this._setup();
-
-    if (this._lastState && this._lastState.width > 0) {
-      let scroll = this._scroll;// - this._offset;
-
-      if (this._isOverScroll(scroll)) {
-        this._scrollToKillOverScroll();
-      } else {
-        if (this.autoScroll) {
-          scroll = this._normalizeScrollPosition(scroll);
-        }
-
-        this._scrollTo(scroll);
-      }
-    }
-
-    this._saveLastState();
-
-    util.triggerElementEvent(this, 'refresh', {carousel: this});
-  }
-
-  /**
    * @method first
    * @signature first()
    * @param {Object} [options]
@@ -985,77 +467,30 @@ export default class CarouselElement extends BaseElement {
    *   [ja]最後のons-carousel-itemを表示します。[/ja]
    */
   last(options) {
-    this.setActiveIndex(
-      Math.max(this.itemCount - 1, 0), options
-    );
-  }
-
-  connectedCallback() {
-    this._prepareEventListeners();
-    this._setup();
-    this._setupInitialIndex();
-    this._saveLastState();
-
-    // Fix rendering glitch on Android 4.1
-    if (this.offsetHeight === 0) {
-      setImmediate(() => this.refresh());
-    }
-
-    setImmediate(() => {
-      this._currentElementSize = undefined;
-      this._setupInitialIndex();
-    });
-  }
-
-  static get observedAttributes() {
-    return ['swipeable', 'auto-refresh', 'direction'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'swipeable':
-        this._updateSwipeable();
-        break;
-      case 'auto-refresh':
-        this._updateAutoRefresh();
-        break;
-      case 'direction':
-        this._onDirectionChange();
-    }
-  }
-
-  disconnectedCallback() {
-    this._removeEventListeners();
+    this.setActiveIndex(Math.max(this.itemCount - 1, 0), options);
   }
 
   /**
-   * @property autoScrollRatio
-   * @type {Number}
+   * @method refresh
+   * @signature refresh()
    * @description
-   *   [en]The current auto scroll ratio. [/en]
-   *   [ja]現在のオートスクロールのratio値。[/ja]
+   *   [en]Update the layout of the carousel. Used when adding `<ons-carousel-items>` dynamically or to automatically adjust the size.[/en]
+   *   [ja]レイアウトや内部の状態を最新のものに更新します。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用します。[/ja]
    */
-  get autoScrollRatio() {
-    const attr = this.getAttribute('auto-scroll-ratio');
-
-    if (!attr) {
-      return 0.5;
-    }
-
-    const scrollRatio = parseFloat(attr);
-    if (scrollRatio < 0.0 || scrollRatio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
-    return isNaN(scrollRatio) ? 0.5 : scrollRatio;
+  refresh() {
+    this._swiper.refresh();
   }
 
-  set autoScrollRatio(ratio) {
-    if (ratio < 0.0 || ratio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
-    this.setAttribute('auto-scroll-ratio', ratio);
+  /**
+   * @property itemCount
+   * @readonly
+   * @type {Number}
+   * @description
+   *   [en]The number of carousel items.[/en]
+   *   [ja]カルーセル要素の数です。[/ja]
+   */
+  get itemCount() {
+    return this._swiper.itemCount;
   }
 
   /**
@@ -1086,6 +521,45 @@ export default class CarouselElement extends BaseElement {
 
   set autoScroll(value) {
     return util.toggleAttribute(this, 'auto-scroll', value);
+  }
+
+  get vertical() {
+    return this.getAttribute('direction') === 'vertical';
+  }
+
+  get itemSize() {
+    const itemSizeAttr = (this.getAttribute(`item-${this.vertical ? 'height' : 'width'}`) || '').trim();
+    return itemSizeAttr.match(/^\d+(px|%)$/) ? itemSizeAttr : '100%';
+  }
+
+  /**
+   * @property autoScrollRatio
+   * @type {Number}
+   * @description
+   *   [en]The current auto scroll ratio. [/en]
+   *   [ja]現在のオートスクロールのratio値。[/ja]
+   */
+  get autoScrollRatio() {
+    const attr = this.getAttribute('auto-scroll-ratio');
+
+    if (!attr) {
+      return 0.5;
+    }
+
+    const scrollRatio = parseFloat(attr);
+    if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+      throw new Error('Invalid ratio.');
+    }
+
+    return isNaN(scrollRatio) ? 0.5 : scrollRatio;
+  }
+
+  set autoScrollRatio(ratio) {
+    if (ratio < 0.0 || ratio > 1.0) {
+      throw new Error('Invalid ratio.');
+    }
+
+    this.setAttribute('auto-scroll-ratio', ratio);
   }
 
   /**
