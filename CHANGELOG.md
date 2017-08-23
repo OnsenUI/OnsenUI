@@ -10,6 +10,7 @@ v2.5.3
  * ons-speed-dial-item: Apply Material Design style correctly.
  * ons-splitter-side: Fixed [#2026](https://github.com/OnsenUI/OnsenUI/issues/2026).
  * Fixed glitch during push/pop animation when iOS status bar is visible.
+ * Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
 
 ### Misc
 
