@@ -33,22 +33,15 @@ export default class SwipeReveal {
     this.getAutoScrollRatio = params.getAutoScrollRatio || (() => .5);
     this.itemSize = params.itemSize || '100%';
 
-    // Setup interanl variables
-    this._scroll = 0;
-    this._offset = 0;
-    this._lastActiveIndex = 0;
-
     // Bind handlers
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onResize = this.onResize.bind(this);
-
-    // Update directional traits
-    this._updateDirections();
   }
 
   init() {
+    // Add classes
     this.element.classList.add('ons-swiper');
     this.target = util.findChild(this.element, '.target');
     if (!this.target) {
@@ -56,8 +49,16 @@ export default class SwipeReveal {
     }
     this.target.classList.add('ons-swiper-target');
 
-    this._prepareEventListeners();
-    this._setup();
+    // Setup listeners
+    this._gestureDetector = new GestureDetector(this.target, { dragMinDistance: 1, dragLockToAxis: true });
+    this._mutationObserver = new MutationObserver(() => this.refresh());
+    this.updateSwipeable(true);
+    this.updateAutoRefresh(true);
+    this.resizeOn();
+
+    // Setup initial layout
+    this._scroll = this._offset = this._lastActiveIndex = 0;
+    this._updateLayout();
     this._setupInitialIndex();
     setImmediate(() => this._setupInitialIndex());
 
@@ -68,10 +69,11 @@ export default class SwipeReveal {
   }
 
   dispose() {
+    this.updateSwipeable(false);
     this._gestureDetector.dispose();
     this._gestureDetector = null;
 
-    this._mutationObserver.disconnect();
+    this.updateAutoRefresh(false);
     this._mutationObserver = null;
 
     this.resizeOff();
@@ -79,27 +81,13 @@ export default class SwipeReveal {
 
   onResize() {
     const i = this._scroll / this.targetSize;
-    this._targetSize = undefined; // Reset
+    this._targetSize = this._itemNumSize = undefined; // Reset
     this.setActiveIndex(i);
     this.refresh();
   }
 
   get itemCount() {
     return this.target.children.length;
-  }
-
-  _getNumericItemSize() {
-    const sizeAttr = this.itemSize;
-    const sizeInfo = this._decomposeSizeString(sizeAttr);
-    const elementSize = this._getTargetSize();
-
-    if (sizeInfo.unit === '%') {
-      return Math.round(sizeInfo.number / 100 * elementSize);
-    } else if (sizeInfo.unit === 'px') {
-      return sizeInfo.number;
-    } else {
-      throw new Error('Invalid state');
-    }
   }
 
   get itemNumSize() {
@@ -116,8 +104,8 @@ export default class SwipeReveal {
 
   _calculateItemSize() {
     const matches = this.itemSize.match(/^(\d+)(px|%)/);
-    const value = parseInt(matches[1], 10);
-    const unit = matches[2];
+    const unit = matches[2],
+      value = parseInt(matches[1], 10);
 
     switch (unit) {
       case '%':
@@ -130,7 +118,7 @@ export default class SwipeReveal {
   }
 
   _setupInitialIndex() {
-    this._targetSize = this._itemNumSize = undefined;
+    this._targetSize = this._itemNumSize = undefined; // Reset
     this._lastActiveIndex = Math.max(Math.min(this.initialIndex, this.itemCount), 0);
     this._scroll = this._offset + this.itemNumSize * this._lastActiveIndex;
     this._scrollTo(this._scroll);
@@ -138,11 +126,8 @@ export default class SwipeReveal {
 
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
-    const scroll = this._offset + this.itemNumSize * index;
-    const max = this.maxScroll;
-
-    this._scroll = Math.max(0, Math.min(max, scroll));
-    return this._scrollTo(this._scroll, options).then(() => this.tryPostchange());
+    this._scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
+    return this._scrollTo(this._scroll, { ...options, postchange: true });
   }
 
   getActiveIndex() {
@@ -171,19 +156,6 @@ export default class SwipeReveal {
     window.removeEventListener('resize', this.onResize, true);
   }
 
-  _prepareEventListeners() {
-    this._gestureDetector = new GestureDetector(this.target, {
-      dragMinDistance: 1,
-      dragLockToAxis: true
-    });
-    this._mutationObserver = new MutationObserver(() => this.refresh());
-
-    this.updateSwipeable(true);
-    this.updateAutoRefresh();
-
-    this.resizeOn();
-  }
-
   updateSwipeable(shouldUpdate) {
     if (this._gestureDetector) {
       const action = shouldUpdate ? 'on' : 'off';
@@ -206,7 +178,7 @@ export default class SwipeReveal {
     this.refresh();
   }
 
-  tryPostchange() {
+  tryPostChange() {
     const activeIndex = this.getActiveIndex();
     if (this._lastActiveIndex !== activeIndex) {
       const lastActiveIndex = this._lastActiveIndex;
@@ -246,8 +218,7 @@ export default class SwipeReveal {
 
     event.stopPropagation();
 
-    const scroll = this._scroll - this._getScrollDelta(event);
-    this._scrollTo(scroll);
+    this._scrollTo(this._scroll - this._getDelta(event));
     event.gesture.preventDefault();
   }
 
@@ -259,9 +230,9 @@ export default class SwipeReveal {
 
     event.stopPropagation();
 
-    this._scroll = this._scroll - this._getScrollDelta(event);
+    this._scroll = this._scroll - this._getDelta(event);
 
-    if (this._isOverScroll(this._scroll)) {
+    if (this._isOverScrolling(this._scroll)) {
       const direction = this.isVertical() ? (this._scroll <= 0 ? 'up' : 'down') : (this._scroll <= 0 ? 'left' : 'right');
       if (!this.overScrollHook({ direction, killOverscroll: this._killOverScroll.bind(this) })) {
         this._killOverScroll();
@@ -273,27 +244,43 @@ export default class SwipeReveal {
     event.gesture.preventDefault();
   }
 
-  _updateDirections() {
-    this.dM = directionMap[this.isVertical() ? 'vertical' : 'horizontal'];
+  _scrollTo(scroll, options = {}) {
+    const ratio = 0.35;
+
+    if (scroll < 0) {
+      scroll = this.isOverScrollable() ? Math.round(scroll * ratio) : 0;
+    } else {
+      const maxScroll = this.maxScroll;
+      if (maxScroll < scroll) {
+        scroll = this.isOverScrollable() ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
+      }
+    }
+
+    return new Promise(resolve => {
+      animit(this.target)
+        .queue({
+          transform: this._getTransform(scroll)
+        }, options.animation  !== 'none' ? options.animationOptions : {})
+        .play(() => {
+          options.callback instanceof Function && options.callback();
+          options.postchange && this.tryPostChange();
+          resolve();
+        });
+    });
   }
 
   _startMomentumScroll(event) {
     const duration = 0.3;
-    const scrollDelta = duration * 100 * this._getScrollVelocity(event);
-    this._scroll = this._getAutoScroll(this._scroll + scrollDelta * (Math.sign(this._getScrollDelta(event)) || 1));
+    const velocity = duration * 100 * this._getVelocity(event);
+    this._scroll = this._getAutoScroll(this._scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
 
-    animit(this.target)
-      .queue({
-        transform: this._getTransform(this._scroll)
-      }, {
+    this._scrollTo(this._scroll, {
+      postchange: true,
+      animationOptions: {
         duration,
         timing: 'cubic-bezier(.1, .7, .1, 1)'
-      })
-      .queue(done => {
-        this.tryPostchange();
-        done();
-      })
-      .play();
+      }
+    });
   }
 
   _getAutoScroll(scroll) {
@@ -330,69 +317,29 @@ export default class SwipeReveal {
     return Math.max(0, Math.min(max, result));
   }
 
-  _scrollTo(scroll, options = {}) {
-    const ratio = 0.35;
-
-    if (scroll < 0) {
-      scroll = this.isOverScrollable() ? Math.round(scroll * ratio) : 0;
-    } else {
-      const maxScroll = this.maxScroll;
-      if (maxScroll < scroll) {
-        scroll = this.isOverScrollable() ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
-      }
-    }
-
-    return new Promise(resolve => {
-      animit(this.target)
-        .queue({
-          transform: this._getTransform(scroll)
-        }, options.animation  !== 'none' ? options.animationOptions : {})
-        .play(() => {
-          options.callback instanceof Function && options.callback();
-          resolve();
-        });
-    });
-  }
-
-  _isOverScroll(scroll) {
+  _isOverScrolling(scroll) {
     return scroll < 0 || scroll > this.maxScroll;
   }
 
   _killOverScroll() {
-    const restoreScroll = this._scroll < 0 ? 0 : this.maxScroll;
+    this._scroll = this._scroll < 0 ? 0 : this.maxScroll;
 
-    animit(this.target)
-      .queue({
-        transform: this._getTransform(restoreScroll)
-      }, {
+    this._scrollTo(this._scroll, {
+      postchange: true,
+      animationOptions: {
         duration: 0.4,
         timing: 'cubic-bezier(.1, .4, .1, 1)'
-      })
-      .queue(done => {
-        this.tryPostchange();
-        done();
-      })
-      .play();
-
-    this._scroll = restoreScroll;
+      }
+    });
   }
 
   refresh() {
-    this._itemNumSize = undefined; // Reset
-    this._updateDirections();
-    this._setup();
+    this._targetSize = this._itemNumSize = undefined; // Reset
+    this._updateLayout();
 
-    let scroll = this._scroll;// - this._offset;
-
-    if (this._isOverScroll(scroll)) {
-      this._killOverScroll();
-    } else {
-      if (this.isAutoScrollable()) {
-        scroll = this._getAutoScroll(scroll);
-      }
-
-      this._scrollTo(scroll);
-    }
+    this._isOverScrolling(this._scroll)
+      ? this._killOverScroll()
+      : this._scrollTo(this.isAutoScrollable() ? this._getAutoScroll(this._scroll) : this._scroll);
 
     this.refreshHook();
   }
@@ -407,11 +354,11 @@ export default class SwipeReveal {
     return this._targetSize;
   }
 
-  _getScrollDelta(event) {
+  _getDelta(event) {
     return event.gesture[`delta${this.dM.axis}`];
   }
 
-  _getScrollVelocity(event) {
+  _getVelocity(event) {
     return event.gesture[`velocity${this.dM.axis}`];
   }
 
@@ -419,15 +366,13 @@ export default class SwipeReveal {
     return `translate3d(${this.dM.t3d[0]}${-scroll}${this.dM.t3d[1]})`;
   }
 
-  _layoutItems() {
+  _updateLayout() {
+    this.dM = directionMap[this.isVertical() ? 'vertical' : 'horizontal'];
+    this.target.classList.toggle('ons-swiper-target--vertical', this.isVertical());
+
     for (let c = this.target.children[0]; c; c = c.nextElementSibling) {
       c.style[this.dM.size] = this.itemSize;
     }
-  }
-
-  _setup() {
-    this.target.classList.toggle('ons-swiper-target--vertical', this.isVertical());
-    this._layoutItems();
 
     if (this.isCentered()) {
       this._offset = (this.targetSize - this.itemNumSize) / -2 || 0;
