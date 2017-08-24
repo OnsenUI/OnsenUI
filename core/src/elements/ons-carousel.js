@@ -227,22 +227,24 @@ export default class CarouselElement extends BaseElement {
   }
 
   connectedCallback() {
-    this._swiper = new Swiper({
-      element: this,
-      initialIndex: this.getAttribute('initial-index'),
-      getAutoScrollRatio: () => this.autoScrollRatio,
-      isVertical: () => this.vertical,
-      isOverScrollable: () => this.overscrollable,
-      isCentered: () => this.centered,
-      isAutoScrollable: () => this.autoScroll,
-      itemSize: this.itemSize,
-      overScrollHook: this._onOverScroll.bind(this),
-      postChangeHook: this._onPostChange.bind(this),
-      refreshHook: this._onRefresh.bind(this),
-    });
+    if (!this._swiper) {
+      this._swiper = new Swiper({
+        element: this,
+        initialIndex: this.getAttribute('initial-index'),
+        getAutoScrollRatio: () => this.autoScrollRatio,
+        isVertical: () => this.vertical,
+        isOverScrollable: () => this.overscrollable,
+        isCentered: () => this.centered,
+        isAutoScrollable: () => this.autoScroll,
+        itemSize: this.itemSize,
+        overScrollHook: this._onOverScroll.bind(this),
+        postChangeHook: this._onPostChange.bind(this),
+        refreshHook: this._onRefresh.bind(this),
+      });
 
-    this._swiper.init();
-    this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
+      this._swiper.init();
+      this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
+    }
   }
 
   disconnectedCallback() {
