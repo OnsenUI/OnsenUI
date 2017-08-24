@@ -30,8 +30,15 @@ export default class SwipeReveal {
     this.preChangeHook = params.preChangeHook || NOOP;
     this.postChangeHook = params.postChangeHook || NOOP;
     this.overScrollHook = params.overScrollHook || NOOP;
-    this.getAutoScrollRatio = params.getAutoScrollRatio || (() => .5);
     this.itemSize = params.itemSize || '100%';
+    this.getAutoScrollRatio = ({ getAutoScrollRatio } = params) => {
+      let ratio = getAutoScrollRatio && getAutoScrollRatio();
+      ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
+      if (ratio < 0.0 || ratio > 1.0) {
+        throw new Error('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
+      }
+      return ratio;
+    };
 
     // Bind handlers
     this.onDragStart = this.onDragStart.bind(this);
@@ -104,17 +111,13 @@ export default class SwipeReveal {
 
   _calculateItemSize() {
     const matches = this.itemSize.match(/^(\d+)(px|%)/);
-    const unit = matches[2],
-      value = parseInt(matches[1], 10);
 
-    switch (unit) {
-      case '%':
-        return Math.round(value / 100 * this.targetSize);
-      case 'px':
-        return value;
+    if (!matches) {
+      throw new Error(`Invalid state: swiper's size unit must be '%' or 'px'`);
     }
 
-    throw new Error(`Invalid state: swiper's size unit must be '%' or 'px'`);
+    const value = parseInt(matches[1], 10);
+    return matches[2] === '%' ? Math.round(value / 100 * this.targetSize) : value;
   }
 
   _setupInitialIndex() {
