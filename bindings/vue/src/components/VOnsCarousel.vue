@@ -1,6 +1,8 @@
 <template>
   <ons-carousel :initial-index="index" @postchange.self="$emit('update:index', $event.activeIndex)" v-on="unrecognizedListeners">
-    <slot></slot>
+    <div class="target">
+      <slot></slot>
+    </div>
   </ons-carousel>
 </template>
 
