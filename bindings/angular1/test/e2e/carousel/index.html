@@ -42,8 +42,10 @@
       </div>
     </ons-toolbar>
     <ons-carousel ng-controller="CarouselController" ons-postchange="changed($event)" fullscreen var="carousel" swipeable overscrollable auto-scroll>
-      <ons-carousel-item id="first-item" style="background-color: red;"></ons-carousel-item>
-      <ons-carousel-item id="second-item" style="background-color: blue;"></ons-carousel-item>
+      <div class="target">
+        <ons-carousel-item id="first-item" style="background-color: red;"></ons-carousel-item>
+        <ons-carousel-item id="second-item" style="background-color: blue;"></ons-carousel-item>
+      </div>
       <div class="carousel-cover">The current index is: <span id="current-index">{{ currentIndex }}</span></div>
     </ons-carousel>
   </body>
