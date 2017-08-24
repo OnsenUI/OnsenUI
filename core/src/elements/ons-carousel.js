@@ -248,8 +248,11 @@ export default class CarouselElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._swiper.dispose();
-    this._swiper = null;
+    if (this._swiper) {
+
+      this._swiper.dispose();
+      this._swiper = null;
+    }
   }
 
   static get observedAttributes() {
@@ -542,25 +545,10 @@ export default class CarouselElement extends BaseElement {
    *   [ja]現在のオートスクロールのratio値。[/ja]
    */
   get autoScrollRatio() {
-    const attr = this.getAttribute('auto-scroll-ratio');
-
-    if (!attr) {
-      return 0.5;
-    }
-
-    const scrollRatio = parseFloat(attr);
-    if (scrollRatio < 0.0 || scrollRatio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
-    return isNaN(scrollRatio) ? 0.5 : scrollRatio;
+    return parseFloat(this.getAttribute('auto-scroll-ratio'));
   }
 
   set autoScrollRatio(ratio) {
-    if (ratio < 0.0 || ratio > 1.0) {
-      throw new Error('Invalid ratio.');
-    }
-
     this.setAttribute('auto-scroll-ratio', ratio);
   }
 
