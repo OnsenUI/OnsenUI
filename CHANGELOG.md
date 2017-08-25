@@ -5,6 +5,11 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * css-components: Reimplemented css-components previewer.
+ * css-components: Changed color scheme to more iOS native-like.
+
 ### Bug Fixes
 
  * Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
@@ -44,10 +49,6 @@ v2.5.1
  * onsenui.min.css: Restore 'import' statements.
  * ons-navigator: Swipe-to-pop animation glitch.
  * ons-range: Fixed ripple effect when `min` attr is provided.
-
-### New Features
-
- * css-components: Reimplemented css-components previewer.
 
 v2.5.0
 ----
