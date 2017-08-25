@@ -243,14 +243,15 @@ export default class CarouselElement extends BaseElement {
         refreshHook: this._onRefresh.bind(this),
       });
 
-      this._swiper.init();
-      this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
+      contentReady(this, () => {
+        this._swiper.init();
+        this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
+      });
     }
   }
 
   disconnectedCallback() {
-    if (this._swiper) {
-
+    if (this._swiper && this._swiper.initialized) {
       this._swiper.dispose();
       this._swiper = null;
     }

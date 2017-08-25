@@ -48,6 +48,7 @@ export default class SwipeReveal {
   }
 
   init() {
+    this.initialized = true;
     // Add classes
     this.element.classList.add('ons-swiper');
     this.target = util.findChild(this.element, '.target');
@@ -77,7 +78,7 @@ export default class SwipeReveal {
 
   dispose() {
     this.updateSwipeable(false);
-    this._gestureDetector.dispose();
+    this._gestureDetector && this._gestureDetector.dispose();
     this._gestureDetector = null;
 
     this.updateAutoRefresh(false);
