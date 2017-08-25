@@ -5,6 +5,11 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * css-components: Reimplemented css-components previewer.
+ * css-components: Changed color scheme to more iOS native-like.
+
 ### Bug Fixes
 
  * Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
