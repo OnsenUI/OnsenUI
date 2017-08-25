@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+* VOnsNavigator: Properly hide VOnsBackButton when replacing pages.
+
 2.1.1
 ----
 
