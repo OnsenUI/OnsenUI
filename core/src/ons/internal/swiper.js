@@ -275,7 +275,6 @@ export default class SwipeReveal {
     const duration = 0.3;
     const velocity = duration * 100 * this._getVelocity(event);
     this._scroll = this._getAutoScroll(this._scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
-
     this._scrollTo(this._scroll, { postchange: true, animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
   }
 
@@ -289,14 +288,14 @@ export default class SwipeReveal {
     }
 
     let arr = [];
-    for (let i = 0, s = offset; s < max; s = ++i * size + offset) {
+    for (let s = offset; s < max; s += size) {
       arr.push(s);
     }
     arr.push(max);
 
     arr = arr
       .sort((left, right) => Math.abs(left - scroll) - Math.abs(right - scroll))
-      .filter((item, pos) => !pos || item != arr[pos - 1]);
+      .filter((item, pos) => !pos || item !== arr[pos - 1]);
 
     let result = arr[0];
     const lastScroll = this._lastActiveIndex * size + offset;
