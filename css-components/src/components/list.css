@@ -202,10 +202,10 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list list--noborder">
-      <li class="list-item list-item--noborder">
+      <li class="list-item">
         <div class="list-item__center">Item</div>
       </li>
-      <li class="list-item list-item--noborder">
+      <li class="list-item">
         <div class="list-item__center">Item</div>
       </li>
     </ul>
@@ -307,7 +307,9 @@
       </li>
       <li class="list-item list-item--chevron">
         <div class="list-item__center">Item B</div>
-        <div class="list-item__right list-item--chevron__right">Label</div>
+        <div class="list-item__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
       </li>
     </ul>
  */
@@ -329,6 +331,24 @@
 .list-item--chevron__right {
   padding-right: 30px;
 }
+
+/*~
+  name: Nodivider List Item with Chevron
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item A</div>
+      </li>
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item B</div>
+        <div class="list-item__right list-item--nodivider__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+ */
 
 /*~
   name: Inset List
@@ -854,8 +874,7 @@
  */
 
 .list-item--nodivider__center,
-.list-item--nodivider__right,
-.list-item--nodivider:before {
+.list-item--nodivider__right {
   border: none;
   background-image: none;
 }
