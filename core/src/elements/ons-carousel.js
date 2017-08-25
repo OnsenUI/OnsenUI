@@ -214,7 +214,8 @@ export default class CarouselElement extends BaseElement {
   }
 
   _compile() {
-    const target = util.findChild(this, '.target') || util.create('.target');
+    const target = this.children[0] && this.children[0].tagName !== 'ONS-CAROUSEL-ITEM' && this.children[0] || document.createElement('div');
+    target.classList.add('target');
     if (!target.parentNode) {
       while (this.firstChild) {
         target.appendChild(this.firstChild);
