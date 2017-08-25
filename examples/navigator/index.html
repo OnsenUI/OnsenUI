@@ -77,20 +77,20 @@
       </div>
 
       <script>
-        myNavigator.topPage.onInit = function() {
+        ons.getScriptPage().onInit = function() {
           console.log(this.id, 'init hook');
-        };
 
-        myNavigator.topPage.onShow = function() {
-          console.log(this.id, 'show hook');
-        };
+          this.onShow = function() {
+            console.log(this.id, 'show hook');
+          };
 
-        myNavigator.topPage.onHide = function() {
-          console.log(this.id, 'hide hook');
-        };
+          this.onHide = function() {
+            console.log(this.id, 'hide hook');
+          };
 
-        myNavigator.topPage.onDestroy = function() {
-          console.log(this.id, 'destroy hook');
+          this.onDestroy = function() {
+            console.log(this.id, 'destroy hook');
+          };
         };
       </script>
     </ons-page>

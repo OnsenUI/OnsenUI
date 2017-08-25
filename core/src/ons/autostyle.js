@@ -38,9 +38,7 @@ platforms.android = element => {
 
   const elementName = element.tagName.toLowerCase();
 
-  if (!/ons-speed-dial/.test(elementName) &&
-    !/material/.test(element.getAttribute('modifier'))) {
-
+  if (!util.hasModifier(element, 'material')) {
     const oldModifier = element.getAttribute('modifier') || '';
 
     const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
@@ -81,9 +79,7 @@ platforms.android = element => {
 platforms.ios = element => {
 
  // Modifiers
- if (/material/.test(element.getAttribute('modifier'))) {
-   util.removeModifier(element, 'material');
-
+ if (util.removeModifier(element, 'material')) {
    if (util.removeModifier(element, 'material--flat')) {
      util.addModifier(element, (util.removeModifier(element, 'large')) ? 'large--quiet' : 'quiet');
    }
@@ -107,46 +103,34 @@ const unlocked = {
   android: true
 };
 
-const prepareAutoStyle = (element, force) => {
+const getPlatform = (element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     const mobileOS = onsPlatform.getMobileOS();
     if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
-      platforms[mobileOS](element);
+      return mobileOS;
     }
   }
+  return null;
 };
 
-/**
- * @param {Element} element
- * @param {Object} object
- */
-const caseOf = (element, object) => {
-  if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
-    const mobileOS = onsPlatform.getMobileOS();
-    if (object.hasOwnProperty(mobileOS) && unlocked.hasOwnProperty(mobileOS)) {
-      return object[mobileOS];
-    }
-  }
-
-  return object['default'];
-}
+const prepare = (element, force) => {
+  const p = getPlatform(element, force);
+  p && platforms[p](element);
+};
 
 const mapModifier = (modifier, element, force) => {
-  if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
-    const mobileOS = onsPlatform.getMobileOS();
-    if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
-      return modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
-    }
-  }
-
-  return modifier;
+  const p = getPlatform(element, force);
+  return p && modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
 };
+
+const restore = element => getPlatform(element) === 'android' && util.addModifier(element, 'material');
 
 export default {
   isEnabled: () => autoStyleEnabled,
   enable: () => autoStyleEnabled = true,
   disable: () => autoStyleEnabled = false,
-  prepare: prepareAutoStyle,
+  prepare,
   mapModifier,
-  caseOf
+  getPlatform,
+  restore
 };

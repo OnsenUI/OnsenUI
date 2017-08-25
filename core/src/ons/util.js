@@ -309,7 +309,8 @@ util.hasModifier = (target, modifierName) => {
   if (!target.hasAttribute('modifier')) {
     return false;
   }
-  return target.getAttribute('modifier').split(/\s+/).some(e => e === modifierName);
+
+  return RegExp(`(^|\\s+)${modifierName}($|\\s+)`, 'i').test(target.getAttribute('modifier'));
 };
 
 /**
@@ -328,9 +329,7 @@ util.addModifier = (target, modifierName, options = {}) => {
     return false;
   }
 
-  modifierName = modifierName.trim();
-  const modifierAttribute = target.getAttribute('modifier') || '';
-  target.setAttribute('modifier', (modifierAttribute + ' ' + modifierName).trim());
+  target.setAttribute('modifier', ((target.getAttribute('modifier') || '') + ' ' + modifierName).trim());
   return true;
 };
 
@@ -342,20 +341,17 @@ util.addModifier = (target, modifierName, options = {}) => {
  * @return {Boolean} Whether it was found or not.
  */
 util.removeModifier = (target, modifierName, options = {}) => {
-  if (!target.getAttribute('modifier')) {
-    return false;
-  }
-
   if (options.autoStyle) {
     modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
   }
 
-  const modifiers = target.getAttribute('modifier').split(/\s+/);
+  if (!target.getAttribute('modifier') || !util.hasModifier(target, modifierName)) {
+    return false;
+  }
 
-  const newModifiers = modifiers.filter(item => item && item !== modifierName);
-  target.setAttribute('modifier', newModifiers.join(' '));
-
-  return modifiers.length !== newModifiers.length;
+  const newModifiers = target.getAttribute('modifier').split(/\s+/).filter(m => m && m !== modifierName);
+  newModifiers.length ? target.setAttribute('modifier', newModifiers.join(' ')) : target.removeAttribute('modifier');
+  return true;
 };
 
 /**

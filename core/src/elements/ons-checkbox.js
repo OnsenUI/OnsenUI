@@ -25,6 +25,9 @@ const scheme = {
  * @modifier material
  *  [en]Displays a Material Design checkbox.[/en]
  *  [ja][/ja]
+ * @modifier noborder
+ *  [en]iOS borderless checkbox.[/en]
+ *  [ja][/ja]
  * @description
  *  [en]
  *    A checkbox element. The component will automatically render as a Material Design checkbox on Android devices.

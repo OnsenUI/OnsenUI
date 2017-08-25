@@ -39,27 +39,32 @@
           event.callParentHandler();
         }
       },
+      _findScrollPage(page) {
+        const nextPage = page._contentElement.children.length === 1
+          && this.$ons._ons._util.getTopPage(page._contentElement.children[0]);
+        return nextPage ? this._findScrollPage(nextPage) : page;
+      },
       _setPagesVisibility(start, end, visibility) {
         for (let i = start; i < end - 1; i++) {
           this.$children[i].$el.style.visibility = visibility;
         }
       },
-      _reattachPage(pageElement, position = null, scrollTop = 0) {
+      _reattachPage(pageElement, position = null, restoreScroll) {
         this.$el.insertBefore(pageElement, position);
-        pageElement.scrollTop = scrollTop;
+        restoreScroll instanceof Function && restoreScroll();
         pageElement._isShown = true;
       },
       _redetachPage(pageElement) {
         pageElement._destroy();
         return Promise.resolve();
       },
-      _animate({ lastLength, currentLength, lastTopPage, currentTopPage, lastScrollTop }) {
+      _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
 
         // Push
         if (currentLength > lastLength) {
           let isReattached = false;
           if (lastTopPage.parentElement !== this.$el) {
-            this._reattachPage(lastTopPage, this.$el.children[lastLength - 1], lastScrollTop);
+            this._reattachPage(lastTopPage, this.$el.children[lastLength - 1], restoreScroll);
             isReattached = true;
             lastLength--;
           }
@@ -76,15 +81,13 @@
 
         // Pop
         if (currentLength < lastLength) {
-          this._reattachPage(lastTopPage, null, lastScrollTop);
+          this._reattachPage(lastTopPage, null, restoreScroll);
           return this.$el._popPage({ ...this.options }, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
-        this._reattachPage(lastTopPage, currentTopPage, lastScrollTop);
-        return this.$el._pushPage({ ...this.options }).then(() => {
-          this._redetachPage(lastTopPage);
-        });
+        this._reattachPage(lastTopPage, currentTopPage, restoreScroll);
+        return this.$el._pushPage({ ...this.options, _replacePage: true }).then(() => this._redetachPage(lastTopPage));
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&
@@ -105,14 +108,17 @@
 
         const lastLength = propWasMutated ? this.$children.length : before.length;
         let lastTopPage = this.$children[this.$children.length - 1].$el;
-        const lastScrollTop = lastTopPage && lastTopPage.scrollTop || 0;
+
+        const scrollElement = this._findScrollPage(lastTopPage);
+        const scrollValue = scrollElement.scrollTop || 0;
+        const restoreScroll = () => scrollElement.scrollTop = scrollValue;
 
         this.$nextTick(() => {
           const currentLength = propWasMutated ? this.$children.length : after.length;
           let currentTopPage = this.$children[this.$children.length - 1].$el;
 
           if (currentTopPage !== lastTopPage) {
-            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, lastScrollTop });
+            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
           } else if (currentLength !== lastLength) {
             currentTopPage.updateBackButton(currentLength > 1);
           }

@@ -20,7 +20,7 @@
   const myToolbar = {
     template: `
     <v-ons-toolbar>
-      <div class="left"><v-ons-back-button>Back</v-ons-back-button></div>,
+      <div class="left"><v-ons-back-button>Back</v-ons-back-button></div>
       <div class="center"><slot></slot></div>
     </v-ons-toolbar>
     `,
@@ -75,7 +75,7 @@
   const page1 = {
     name: 'page1',
     template: `
-      <v-ons-page p1>
+      <v-ons-page p1 @deviceBackButton="log($event)" @show="log('showing p1')">
         <my-toolbar>Page 1</my-toolbar>
         Page 1
         <v-ons-button @click="push">Push</v-ons-button>

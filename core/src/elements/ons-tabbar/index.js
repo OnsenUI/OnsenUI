@@ -183,11 +183,6 @@ export default class TabbarElement extends BaseElement {
     contentReady(this, () => {
       this._compile();
 
-      const content = this._contentElement;
-      for (let i = 0; i < content.children.length; i++) {
-        content.children[i].style.display = 'none';
-      }
-
       const activeIndex = this.getAttribute('activeIndex');
 
       const tabbar = this._tabbarElement;
@@ -538,12 +533,16 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier'];
+    return ['modifier', 'position'];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
+      isTop(last) !== isTop(current) && this._updatePosition();
+    } else if(name === 'position') {
+      this._updatePosition();
     }
   }
 

@@ -19,7 +19,7 @@ import BaseElement from './base/base-element';
 const defaultClassName = 'fab fab--mini speed-dial__item';
 
 const scheme = {
-  '': 'speed-dial__item--*',
+  '': 'fab--* speed-dial__item--*'
 };
 
 /**
@@ -60,6 +60,13 @@ export default class SpeedDialItemElement extends BaseElement {
    *   [ja]このコンポーネントの表現を指定します。[/ja]
    */
 
+  /**
+   * @attribute ripple
+   * @description
+   *  [en]If this attribute is defined, the button will have a ripple effect when tapped.[/en]
+   *  [ja][/ja]
+   */
+
   constructor() {
     super();
 
@@ -78,6 +85,7 @@ export default class SpeedDialItemElement extends BaseElement {
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
+        util.addModifier(this, 'mini');
         break;
       case 'ripple':
         this._updateRipple();
@@ -115,6 +123,7 @@ export default class SpeedDialItemElement extends BaseElement {
       this.classList.add(token);
     });
 
+    util.addModifier(this, 'mini');
     this._updateRipple();
 
     ModifierUtil.initModifier(this, scheme);

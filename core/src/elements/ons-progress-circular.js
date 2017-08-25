@@ -36,6 +36,8 @@ const template = util.createElement(`
   </svg>
 `);
 
+const INDET = 'indeterminate';
+
 /**
  * @element ons-progress-circular
  * @category visual
@@ -99,30 +101,22 @@ export default class ProgressCircularElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'value', 'secondary-value', 'indeterminate'];
+    return ['modifier', 'value', 'secondary-value', INDET];
   }
 
   attributeChangedCallback(name, last, current) {
     if (name === 'modifier') {
-      return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      ModifierUtil.onModifierChanged(last, current, this, scheme);
+      this.hasAttribute(INDET) && this._updateDeterminate();
     } else if (name === 'value' || name === 'secondary-value') {
       this._updateValue();
-    } else if (name === 'indeterminate') {
+    } else if (name === INDET) {
       this._updateDeterminate();
     }
   }
 
   _updateDeterminate() {
-    if (this.hasAttribute('indeterminate')) {
-      contentReady(this, () => {
-        ModifierUtil.addModifier(this, 'indeterminate');
-      });
-    }
-    else {
-      contentReady(this, () => {
-        ModifierUtil.removeModifier(this, 'indeterminate');
-      });
-    }
+    contentReady(this, () => util.toggleModifier(this, INDET, { force: this.hasAttribute(INDET) }));
   }
 
   _updateValue() {
@@ -192,15 +186,15 @@ export default class ProgressCircularElement extends BaseElement {
    */
   set indeterminate(value) {
     if (value) {
-      this.setAttribute('indeterminate', '');
+      this.setAttribute(INDET, '');
     }
     else {
-      this.removeAttribute('indeterminate');
+      this.removeAttribute(INDET);
     }
   }
 
   get indeterminate() {
-    return this.hasAttribute('indeterminate');
+    return this.hasAttribute(INDET);
   }
 
   _compile() {

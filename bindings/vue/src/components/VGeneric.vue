@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import { modifier, deriveEvents } from '../mixins';
+  import { deriveEvents } from '../mixins';
   export default {
-    mixins: [modifier, deriveEvents]
+    mixins: [deriveEvents]
   };
 </script>

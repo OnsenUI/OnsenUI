@@ -307,6 +307,7 @@
       </li>
       <li class="list-item list-item--chevron">
         <div class="list-item__center">Item B</div>
+        <div class="list-item__right list-item--chevron__right">Label</div>
       </li>
     </ul>
  */
@@ -323,6 +324,10 @@
   right: 16px;
   top: 50%;
   z-index: 5;
+}
+
+.list-item--chevron__right {
+  padding-right: 30px;
 }
 
 /*~

@@ -304,7 +304,7 @@ export default class NavigatorElement extends BaseElement {
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
         getAnimationElements: () => [this.topPage.previousElementSibling, this.topPage],
         ignoreSwipe: (event, distance) => {
-          if ([event.target, event.target.parentElement].some(el => /ons-back-button/i.test(el.tagName))) {
+          if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
             return true;
           }
           const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
@@ -573,7 +573,7 @@ export default class NavigatorElement extends BaseElement {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
       }
 
-      enterPage.updateBackButton(pageLength - 1);
+      enterPage.updateBackButton(pageLength > (options._replacePage ? 2 : 1));
 
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});

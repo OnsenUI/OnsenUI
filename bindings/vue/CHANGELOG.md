@@ -1,6 +1,25 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+* VOnsNavigator: Properly hide VOnsBackButton when replacing pages.
+
+2.1.1
+----
+
+### Bug Fixes
+
+* VOnsNavigator: Keep page scroll during pop animation.
+
+### Misc
+
+* Avoid CE check in production.
+* Removed 'modifier' patches. Requires at least `onsenui@2.5.3`.
+
 2.1.0
 ----
 
