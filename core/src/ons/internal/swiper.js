@@ -88,7 +88,7 @@ export default class SwipeReveal {
 
   onResize() {
     const i = this._scroll / this.targetSize;
-    this._targetSize = this._itemNumSize = undefined; // Reset
+    this._reset();
     this.setActiveIndex(i);
     this.refresh();
   }
@@ -121,7 +121,7 @@ export default class SwipeReveal {
   }
 
   _setupInitialIndex() {
-    this._targetSize = this._itemNumSize = undefined; // Reset
+    this._reset();
     this._lastActiveIndex = Math.max(Math.min(this.initialIndex, this.itemCount), 0);
     this._scroll = this._offset + this.itemNumSize * this._lastActiveIndex;
     this._scrollTo(this._scroll);
@@ -171,7 +171,7 @@ export default class SwipeReveal {
   updateAutoRefresh(shouldWatch) {
     if (this._mutationObserver) {
       shouldWatch
-        ? this._mutationObserver.observe(this.target, {childList: true})
+        ? this._mutationObserver.observe(this.target, { childList: true })
         : this._mutationObserver.disconnect();
     }
   }
@@ -220,9 +220,8 @@ export default class SwipeReveal {
     }
 
     event.stopPropagation();
-
-    this._scrollTo(this._scroll - this._getDelta(event));
     event.gesture.preventDefault();
+    this._scrollTo(this._scroll - this._getDelta(event));
   }
 
   onDragEnd(event) {
@@ -232,19 +231,18 @@ export default class SwipeReveal {
     }
 
     event.stopPropagation();
+    event.gesture.preventDefault();
 
     this._scroll = this._scroll - this._getDelta(event);
 
-    if (this._isOverScrolling(this._scroll)) {
+    if (!this._isOverScrolling(this._scroll)) {
+      this._startMomentumScroll(event);
+    } else {
       const direction = this.isVertical() ? (this._scroll <= 0 ? 'up' : 'down') : (this._scroll <= 0 ? 'left' : 'right');
       if (!this.overScrollHook({ direction, killOverscroll: this._killOverScroll.bind(this) })) {
         this._killOverScroll();
       }
-    } else {
-      this._startMomentumScroll(event);
     }
-
-    event.gesture.preventDefault();
   }
 
   _scrollTo(scroll, options = {}) {
@@ -263,7 +261,7 @@ export default class SwipeReveal {
       animit(this.target)
         .queue({
           transform: this._getTransform(scroll)
-        }, options.animation  !== 'none' ? options.animationOptions : {})
+        }, options.animation  === 'none' ? {} :  options.animationOptions)
         .play(() => {
           options.callback instanceof Function && options.callback();
           options.postchange && this.tryPostChange();
@@ -277,13 +275,7 @@ export default class SwipeReveal {
     const velocity = duration * 100 * this._getVelocity(event);
     this._scroll = this._getAutoScroll(this._scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
 
-    this._scrollTo(this._scroll, {
-      postchange: true,
-      animationOptions: {
-        duration,
-        timing: 'cubic-bezier(.1, .7, .1, 1)'
-      }
-    });
+    this._scrollTo(this._scroll, { postchange: true, animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
   }
 
   _getAutoScroll(scroll) {
@@ -296,10 +288,8 @@ export default class SwipeReveal {
     }
 
     let arr = [];
-    for (let i = 0, count = this.itemCount; i < count; i++) {
-      if (i * size + offset < max) {
-        arr.push(i * size + offset);
-      }
+    for (let i = 0, s = offset; s < max; s = ++i * size + offset) {
+      arr.push(s);
     }
     arr.push(max);
 
@@ -326,18 +316,15 @@ export default class SwipeReveal {
 
   _killOverScroll() {
     this._scroll = this._scroll < 0 ? 0 : this.maxScroll;
+    this._scrollTo(this._scroll, { postchange: true, animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
+  }
 
-    this._scrollTo(this._scroll, {
-      postchange: true,
-      animationOptions: {
-        duration: 0.4,
-        timing: 'cubic-bezier(.1, .4, .1, 1)'
-      }
-    });
+  _reset() {
+    this._targetSize = this._itemNumSize = undefined;
   }
 
   refresh() {
-    this._targetSize = this._itemNumSize = undefined; // Reset
+    this._reset();
     this._updateLayout();
 
     this._isOverScrolling(this._scroll)
@@ -347,11 +334,8 @@ export default class SwipeReveal {
     this.refreshHook();
   }
 
-  //// Directional traits
-
   get targetSize() {
     if (!this._targetSize) {
-      const styling = window.getComputedStyle(this.target, null);
       this._targetSize = this.target.getBoundingClientRect()[this.dM.size];
     }
     return this._targetSize;

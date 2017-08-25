@@ -115,7 +115,7 @@ describe('Swiper', () => {
 
   describe('#getAutoScrollRatio()', () => {
     it('only accepts values between 0.0 and 1.0', () => {
-      let ratio = r => ({ getAutoScrollRatio: () => r });
+      const ratio = r => ({ getAutoScrollRatio: () => r });
       expect(() => swiper.getAutoScrollRatio(ratio(-1))).to.throw(Error);
       expect(() => swiper.getAutoScrollRatio(ratio(1.01))).to.throw(Error);
       expect(() => swiper.getAutoScrollRatio(ratio(-0.01))).to.throw(Error);
