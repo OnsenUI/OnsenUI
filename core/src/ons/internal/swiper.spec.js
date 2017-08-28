@@ -149,9 +149,18 @@ describe('Swiper', () => {
       expect(swiper.getActiveIndex()).to.equal(2);
     });
 
-    it('calls \'postchange\' hook', () => {
-      const spy = chai.spy.on(swiper, 'postChangeHook');
-      return swiper.setActiveIndex(1).then(() => expect(spy).to.have.been.called.once);
+    it('calls change hooks', () => {
+      let order;
+      swiper.preChangeHook = () => { order = 'first'; };
+      swiper.postChangeHook = () => { order = 'second'; };
+      const spy1 = chai.spy.on(swiper, 'postChangeHook');
+      const spy2 = chai.spy.on(swiper, 'postChangeHook');
+
+      return swiper.setActiveIndex(1).then(() => {
+        expect(spy1).to.have.been.called.once;
+        expect(spy2).to.have.been.called.once;
+        expect(order).to.equal('second');
+      });
     });
 
     it('returns a promise', () => {

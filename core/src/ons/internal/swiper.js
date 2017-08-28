@@ -17,19 +17,19 @@ const directionMap = {
 
 export default class SwipeReveal {
   constructor(params) {
-    const NOOP = (() => {});
+    const FALSE = (() => false);
 
     // Parameters
     this.element = params.element;
     this.initialIndex = Number(params.initialIndex) || 0;
-    this.isVertical = params.isVertical || NOOP;
-    this.isOverScrollable = params.isOverScrollable || NOOP;
-    this.isCentered = params.isCentered || NOOP;
-    this.isAutoScrollable = params.isAutoScrollable || NOOP;
-    this.refreshHook = params.refreshHook || NOOP;
-    this.preChangeHook = params.preChangeHook || NOOP;
-    this.postChangeHook = params.postChangeHook || NOOP;
-    this.overScrollHook = params.overScrollHook || NOOP;
+    this.isVertical = params.isVertical || FALSE;
+    this.isOverScrollable = params.isOverScrollable || FALSE;
+    this.isCentered = params.isCentered || FALSE;
+    this.isAutoScrollable = params.isAutoScrollable || FALSE;
+    this.refreshHook = params.refreshHook || FALSE;
+    this.preChangeHook = params.preChangeHook || FALSE;
+    this.postChangeHook = params.postChangeHook || FALSE;
+    this.overScrollHook = params.overScrollHook || FALSE;
     this.itemSize = params.itemSize || '100%';
     this.getAutoScrollRatio = ({ getAutoScrollRatio } = params) => {
       let ratio = getAutoScrollRatio && getAutoScrollRatio();
@@ -47,11 +47,11 @@ export default class SwipeReveal {
     this.onResize = this.onResize.bind(this);
   }
 
-  init() {
+  init({ swipeable, autoRefresh } = {}) {
     this.initialized = true;
     // Add classes
     this.element.classList.add('ons-swiper');
-    this.target = util.findChild(this.element, '.target');
+    this.target = this.element.children[0];
     if (!this.target) {
       throw new Error('Expected "target" element to exist before initializing Swiper.')
     }
@@ -60,8 +60,8 @@ export default class SwipeReveal {
     // Setup listeners
     this._gestureDetector = new GestureDetector(this.target, { dragMinDistance: 1, dragLockToAxis: true });
     this._mutationObserver = new MutationObserver(() => this.refresh());
-    this.updateSwipeable(true);
-    this.updateAutoRefresh(true);
+    this.updateSwipeable(swipeable);
+    this.updateAutoRefresh(autoRefresh);
     this.resizeOn();
 
     // Setup initial layout
@@ -131,7 +131,7 @@ export default class SwipeReveal {
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     this._scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
-    return this._scrollTo(this._scroll, { ...options, postchange: true });
+    return this._changeTo(this._scroll, options);
   }
 
   getActiveIndex() {
@@ -182,15 +182,6 @@ export default class SwipeReveal {
     this.refresh();
   }
 
-  tryPostChange() {
-    const activeIndex = this.getActiveIndex();
-    if (this._lastActiveIndex !== activeIndex) {
-      const lastActiveIndex = this._lastActiveIndex;
-      this._lastActiveIndex = activeIndex;
-      this.postChangeHook({ activeIndex, lastActiveIndex });
-    }
-  }
-
   _canConsumeGesture(gesture) {
     const d = gesture.direction;
     const isFirst = this._scroll === 0 && !this.isOverScrollable();
@@ -222,7 +213,7 @@ export default class SwipeReveal {
 
     event.stopPropagation();
     event.gesture.preventDefault();
-    this._scrollTo(this._scroll - this._getDelta(event));
+    this._scrollTo(this._scroll - this._getDelta(event), { throttle: true });
   }
 
   onDragEnd(event) {
@@ -234,48 +225,57 @@ export default class SwipeReveal {
     event.stopPropagation();
     event.gesture.preventDefault();
 
-    this._scroll = this._scroll - this._getDelta(event);
-
-    if (!this._isOverScrolling(this._scroll)) {
-      this._startMomentumScroll(event);
-    } else {
-      const direction = this.isVertical() ? (this._scroll <= 0 ? 'up' : 'down') : (this._scroll <= 0 ? 'left' : 'right');
-      if (!this.overScrollHook({ direction, killOverscroll: this._killOverScroll.bind(this) })) {
-        this._killOverScroll();
-      }
-    }
-  }
-
-  _scrollTo(scroll, options = {}) {
-    const ratio = 0.35;
-
-    if (scroll < 0) {
-      scroll = this.isOverScrollable() ? Math.round(scroll * ratio) : 0;
-    } else {
-      const maxScroll = this.maxScroll;
-      if (maxScroll < scroll) {
-        scroll = this.isOverScrollable() ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
-      }
-    }
-
-    return new Promise(resolve => {
-      animit(this.target)
-        .queue({
-          transform: this._getTransform(scroll)
-        }, options.animation  === 'none' ? {} :  options.animationOptions)
-        .play(() => {
-          options.callback instanceof Function && options.callback();
-          options.postchange && this.tryPostChange();
-          resolve();
-        });
-    });
+    this._scroll -= this._getDelta(event);
+    const normalizedScroll = this._normalizeScroll(this._scroll);
+    this._scroll === normalizedScroll ? this._startMomentumScroll(event) : this._killOverScroll(normalizedScroll);
   }
 
   _startMomentumScroll(event) {
     const duration = 0.3;
     const velocity = duration * 100 * this._getVelocity(event);
     this._scroll = this._getAutoScroll(this._scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
-    this._scrollTo(this._scroll, { postchange: true, animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
+    this._changeTo(this._scroll, { animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
+  }
+
+  _killOverScroll(scroll) {
+    this._scroll = scroll || this._normalizeScroll(this._scroll);
+    const direction = this.isVertical() ? (this._scroll <= 0 ? 'up' : 'down') : (this._scroll <= 0 ? 'left' : 'right');
+    const killOverScroll = this._changeTo.bind(this, this._scroll, { animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
+    this.overScrollHook({ direction, killOverscroll: killOverScroll }) || killOverScroll();
+  }
+
+  _changeTo(...args) {
+    this._tryChangeHook(true);
+    return this._scrollTo(...args).then(() => this._tryChangeHook(false));
+  }
+
+  _tryChangeHook(pre) {
+    const activeIndex = this.getActiveIndex();
+    if (this._lastActiveIndex !== activeIndex) {
+      const params = { activeIndex, lastActiveIndex: this._lastActiveIndex };
+      if (pre) {
+        return this.preChangeHook(params);
+      }
+      this._lastActiveIndex = activeIndex;
+      this.postChangeHook(params);
+    }
+  }
+
+  _scrollTo(scroll, options = {}) {
+    if (options.throttle) {
+      const ratio = 0.35;
+      if (scroll < 0) {
+        scroll = this.isOverScrollable() ? Math.round(scroll * ratio) : 0;
+      } else {
+        const maxScroll = this.maxScroll;
+        if (maxScroll < scroll) {
+          scroll = this.isOverScrollable() ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
+        }
+      }
+    }
+
+    const opt = options.animation  === 'none' ? {} :  options.animationOptions;
+    return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
   }
 
   _getAutoScroll(scroll) {
@@ -303,32 +303,30 @@ export default class SwipeReveal {
 
     if (scrollRatio <= this.getAutoScrollRatio()) {
       result = lastScroll;
-    } else if (scrollRatio < 1.0 && arr[0] === lastScroll && arr.length > 1) {
-      result = arr[1];
+    } else {
+      if (scrollRatio < 1.0 && arr[0] === lastScroll && arr.length > 1) {
+        result = arr[1];
+      }
     }
-
     return Math.max(0, Math.min(max, result));
-  }
-
-  _isOverScrolling(scroll) {
-    return scroll < 0 || scroll > this.maxScroll;
-  }
-
-  _killOverScroll() {
-    this._scroll = this._scroll < 0 ? 0 : this.maxScroll;
-    this._scrollTo(this._scroll, { postchange: true, animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
   }
 
   _reset() {
     this._targetSize = this._itemNumSize = undefined;
   }
 
+  _normalizeScroll(scroll) {
+    return Math.max( Math.min(scroll, this.maxScroll), 0)
+  }
+
   refresh() {
     this._reset();
     this._updateLayout();
 
-    this._isOverScrolling(this._scroll)
-      ? this._killOverScroll()
+    const prevScroll = this._scroll;
+    this._scroll = this._normalizeScroll(this._scroll);
+    prevScroll !== this._scroll
+      ? this._killOverScroll(this._scroll)
       : this._scrollTo(this.isAutoScrollable() ? this._getAutoScroll(this._scroll) : this._scroll);
 
     this.refreshHook();
