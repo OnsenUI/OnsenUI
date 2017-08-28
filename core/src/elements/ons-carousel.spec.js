@@ -27,7 +27,6 @@ describe('OnsCarouselElement', () => {
   it('compiles', () => {
     expect(carousel.children.length).to.equal(1);
     expect(carousel.children[0].children.length).to.equal(3);
-    expect(carousel.children[0].classList.contains('target')).to.be.true;
   });
 
   describe('attribute swipeable', () => {
@@ -121,13 +120,11 @@ describe('OnsCarouselElement', () => {
       expect(carousel.getActiveIndex()).to.equal(2);
     });
 
-    it('should fire \'postchange\' event', () => {
-      const promise = new Promise((resolve) =>
-        carousel.addEventListener('postchange', resolve)
-      );
-
+    it('should fire change events', () => {
+      const p = name => new Promise(resolve => carousel.addEventListener(name, resolve));
+      const promises = Promise.all([p('prechange'), p('postchange')])
       carousel.setActiveIndex(1);
-      return expect(promise).to.eventually.be.fulfilled;
+      return expect(promises).to.eventually.be.fulfilled;
     });
 
     it('returns a promise that resolves to the element', () => {

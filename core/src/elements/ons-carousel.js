@@ -215,7 +215,6 @@ export default class CarouselElement extends BaseElement {
 
   _compile() {
     const target = this.children[0] && this.children[0].tagName !== 'ONS-CAROUSEL-ITEM' && this.children[0] || document.createElement('div');
-    target.classList.add('target');
     if (!target.parentNode) {
       while (this.firstChild) {
         target.appendChild(this.firstChild);
@@ -239,14 +238,15 @@ export default class CarouselElement extends BaseElement {
         isAutoScrollable: () => this.autoScroll,
         itemSize: this.itemSize,
         overScrollHook: this._onOverScroll.bind(this),
-        postChangeHook: this._onPostChange.bind(this),
+        preChangeHook: this._onChange.bind(this, 'prechange'),
+        postChangeHook: this._onChange.bind(this, 'postchange'),
         refreshHook: this._onRefresh.bind(this),
       });
 
-      contentReady(this, () => {
-        this._swiper.init();
-        this.constructor.observedAttributes.forEach(a => this.attributeChangedCallback(a, null, this.getAttribute(a)));
-      });
+      contentReady(this, () => this._swiper.init({
+        swipeable: this.hasAttribute('swipeable'),
+        autoRefresh: this.hasAttribute('auto-refresh')
+      }));
     }
   }
 
@@ -307,12 +307,8 @@ export default class CarouselElement extends BaseElement {
     return waitForAction;
   }
 
-  _onPostChange({ activeIndex, lastActiveIndex }) {
-    util.triggerElementEvent(this, 'postchange', {
-      carousel: this,
-      activeIndex,
-      lastActiveIndex
-    });
+  _onChange(eventName, { activeIndex, lastActiveIndex }) {
+    util.triggerElementEvent(this, eventName, { carousel: this, activeIndex, lastActiveIndex });
   }
 
   _onRefresh() {
@@ -351,12 +347,16 @@ export default class CarouselElement extends BaseElement {
 
     options.animation = options.animation || this.getAttribute('animation');
     options.animationOptions = util.extend(
-      { duration: 0.3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
+      { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
       options.animationOptions || {},
       this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
     );
 
-    return this._swiper.setActiveIndex(index, options).then(() => this);
+    return this._swiper.setActiveIndex(index, options)
+      .then(() => {
+        options.callback instanceof Function && options.callback(this);
+        return Promise.resolve(this);
+      });
   }
 
   /**

@@ -149,7 +149,11 @@
       compile: function(element, attrs) {
         return function(scope, element, attrs) {
           if (scope.$last) {
-            $onsen.util.findParent(element[0], 'ons-carousel')._swiper.init();
+            const carousel = $onsen.util.findParent(element[0], 'ons-carousel');
+            carousel._swiper.init({
+              swipeable: carousel.hasAttribute('swipeable'),
+              autoRefresh: carousel.hasAttribute('auto-refresh')
+            });
           }
         };
       }
