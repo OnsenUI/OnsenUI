@@ -12,7 +12,8 @@ dev
 
 ### Bug Fixes
 
- * Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
+ * ons-list-item: `nodivider` modifier should not hide `chevron`.
+ * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
 
 v2.5.3
 ----
