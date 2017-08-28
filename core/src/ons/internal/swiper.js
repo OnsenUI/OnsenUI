@@ -210,6 +210,7 @@ export default class SwipeReveal {
     if (!event.gesture || this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
       return;
     }
+    this._continued = true; // Fix for random 'dragend' without 'drag'
 
     event.stopPropagation();
     event.gesture.preventDefault();
@@ -218,9 +219,10 @@ export default class SwipeReveal {
 
   onDragEnd(event) {
     this._started = false;
-    if (!event.gesture || this._ignoreDrag) {
+    if (!event.gesture || this._ignoreDrag || !this._continued) {
       return;
     }
+    this._continued = false;
 
     event.stopPropagation();
     event.gesture.preventDefault();
