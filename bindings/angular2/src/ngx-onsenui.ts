@@ -28,6 +28,7 @@ import {OnsRange} from './directives/ons-range';
 import {OnsSelect} from './directives/ons-select';
 import {OnsInput} from './directives/ons-input';
 import {OnsSearchInput} from './directives/ons-search-input';
+import {OnsCheckbox} from './directives/ons-checkbox';
 import {OnsPullHook} from './directives/ons-pull-hook';
 import {OnsLazyRepeat} from './directives/ons-lazy-repeat';
 import {OnsSplitterSide, OnsSplitterContent} from './directives/ons-splitter';
@@ -46,6 +47,7 @@ const directives = [
   OnsSelect,
   OnsInput,
   OnsSearchInput,
+  OnsCheckbox,
   OnsPullHook,
   OnsLazyRepeat,
   OnsSplitterSide,

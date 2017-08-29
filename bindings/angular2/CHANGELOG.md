@@ -6,6 +6,7 @@ dev
 
 ### New Features
 
+ * Added `OnsCheckbox` directive.
  * Added `OnsSearchInput` directive.
 
 ### Misc
