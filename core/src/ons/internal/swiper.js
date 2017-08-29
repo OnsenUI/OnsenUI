@@ -130,13 +130,13 @@ export default class SwipeReveal {
 
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
-    this._scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
-    return this._changeTo(this._scroll, options);
+    const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
+    return this._changeTo(scroll, options);
   }
 
-  getActiveIndex() {
-    const scroll = this._scroll - this._offset,
-      count = this.itemCount,
+  getActiveIndex(scroll = this._scroll) {
+    scroll -= this._offset;
+    const count = this.itemCount,
       size = this.itemNumSize;
 
     if (scroll < 0) {
@@ -227,39 +227,40 @@ export default class SwipeReveal {
     event.stopPropagation();
     event.gesture.preventDefault();
 
-    this._scroll -= this._getDelta(event);
-    const normalizedScroll = this._normalizeScroll(this._scroll);
-    this._scroll === normalizedScroll ? this._startMomentumScroll(event) : this._killOverScroll(normalizedScroll);
+    const scroll = this._scroll - this._getDelta(event);
+    const normalizedScroll = this._normalizeScroll(scroll);
+    scroll === normalizedScroll ? this._startMomentumScroll(scroll, event) : this._killOverScroll(normalizedScroll);
   }
 
-  _startMomentumScroll(event) {
+  _startMomentumScroll(scroll, event) {
     const duration = 0.3;
     const velocity = duration * 100 * this._getVelocity(event);
-    this._scroll = this._getAutoScroll(this._scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
-    this._changeTo(this._scroll, { animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
+    scroll = this._getAutoScroll(scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
+    this._changeTo(scroll, { animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
   }
 
   _killOverScroll(scroll) {
-    this._scroll = scroll || this._normalizeScroll(this._scroll);
-    const direction = this.isVertical() ? (this._scroll <= 0 ? 'up' : 'down') : (this._scroll <= 0 ? 'left' : 'right');
-    const killOverScroll = this._changeTo.bind(this, this._scroll, { animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
-    this.overScrollHook({ direction, killOverscroll: killOverScroll }) || killOverScroll();
+    this._scroll = scroll;
+    const direction = [['left', 'right'], ['up', 'down']][Number(this.isVertical())][Number(scroll > 0)];
+    const killOverScroll = () => this._changeTo(scroll, { animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
+    this.overScrollHook({ direction, killOverScroll }) || killOverScroll();
   }
 
-  _changeTo(...args) {
-    this._tryChangeHook(true);
-    return this._scrollTo(...args).then(() => this._tryChangeHook(false));
+  _changeTo(scroll, options) {
+    this._scroll = this._tryChangeHook(true, scroll) ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
+    return this._scrollTo(this._scroll, options)
+      .then(() => scroll === this._scroll && this._tryChangeHook(false))
   }
 
-  _tryChangeHook(pre) {
-    const activeIndex = this.getActiveIndex();
+  _tryChangeHook(pre, scroll) {
+    const activeIndex = this.getActiveIndex(scroll);
     if (this._lastActiveIndex !== activeIndex) {
       const params = { activeIndex, lastActiveIndex: this._lastActiveIndex };
       if (pre) {
         return this.preChangeHook(params);
       }
       this._lastActiveIndex = activeIndex;
-      this.postChangeHook(params);
+      return this.postChangeHook(params);
     }
   }
 
@@ -325,11 +326,8 @@ export default class SwipeReveal {
     this._reset();
     this._updateLayout();
 
-    const prevScroll = this._scroll;
-    this._scroll = this._normalizeScroll(this._scroll);
-    prevScroll !== this._scroll
-      ? this._killOverScroll(this._scroll)
-      : this._scrollTo(this.isAutoScrollable() ? this._getAutoScroll(this._scroll) : this._scroll);
+    const scroll = this._normalizeScroll(this._scroll);
+    scroll !== this._scroll ? this._killOverScroll(scroll) : this._changeTo(scroll);
 
     this.refreshHook();
   }

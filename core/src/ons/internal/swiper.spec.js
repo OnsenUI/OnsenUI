@@ -151,9 +151,9 @@ describe('Swiper', () => {
 
     it('calls change hooks', () => {
       let order;
-      swiper.preChangeHook = () => { order = 'first'; };
-      swiper.postChangeHook = () => { order = 'second'; };
-      const spy1 = chai.spy.on(swiper, 'postChangeHook');
+      swiper.preChangeHook = () => order = 'first';
+      swiper.postChangeHook = () => order = 'second';
+      const spy1 = chai.spy.on(swiper, 'preChangeHook');
       const spy2 = chai.spy.on(swiper, 'postChangeHook');
 
       return swiper.setActiveIndex(1).then(() => {

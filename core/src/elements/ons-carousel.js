@@ -292,7 +292,7 @@ export default class CarouselElement extends BaseElement {
     this._swiper.resizeOff();
   }
 
-  _onOverScroll({ direction, killOverscroll }) {
+  _onOverScroll({ direction, killOverScroll }) {
     let waitForAction = false;
     util.triggerElementEvent(this, 'overscroll', {
       carousel: this,
@@ -300,7 +300,7 @@ export default class CarouselElement extends BaseElement {
       direction,
       waitToReturn: promise => {
         waitForAction = true;
-        promise.then(killOverscroll);
+        promise.then(killOverScroll);
       }
     });
 
