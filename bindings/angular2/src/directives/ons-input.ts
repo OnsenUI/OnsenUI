@@ -50,7 +50,7 @@ export class OnsInput implements OnChanges, OnDestroy {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
-    this._element.addEventListener('change', this._boundOnChange);
+    this._element.addEventListener('input', this._boundOnChange);
   }
 
   _onChange(event: any) {
@@ -73,7 +73,7 @@ export class OnsInput implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._element.removeEventListener('change', this._boundOnChange);
+    this._element.removeEventListener('input', this._boundOnChange);
 
     this._element = null;
   }

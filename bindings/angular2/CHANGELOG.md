@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Misc
+
+ * OnsInput: `[(value)]` now listens to `input` event instead of `change` event.
+
 4.0.0-rc.1
 ----
 
