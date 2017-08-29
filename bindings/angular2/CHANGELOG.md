@@ -4,6 +4,10 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * Added `OnsSearchInput` directive.
+
 ### Misc
 
  * OnsInput: `[(value)]` now listens to `input` event instead of `change` event.
