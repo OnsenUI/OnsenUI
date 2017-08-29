@@ -150,21 +150,30 @@ describe('Swiper', () => {
     });
 
     it('calls change hooks', () => {
-      let order;
-      swiper.preChangeHook = () => order = 'first';
-      swiper.postChangeHook = () => order = 'second';
-      const spy1 = chai.spy.on(swiper, 'preChangeHook');
-      const spy2 = chai.spy.on(swiper, 'postChangeHook');
+      const deferred = ons._util.defer();
+      const spy = chai.spy.on(swiper, 'preChangeHook');
 
-      return swiper.setActiveIndex(1).then(() => {
-        expect(spy1).to.have.been.called.once;
-        expect(spy2).to.have.been.called.once;
-        expect(order).to.equal('second');
-      });
+      swiper.postChangeHook = () => {
+        expect(spy).to.have.been.called.once;
+        deferred.resolve();
+      };
+
+      swiper.setActiveIndex(1);
+      return expect(deferred.promise).to.eventually.be.fulfilled;
     });
 
     it('returns a promise', () => {
       return swiper.setActiveIndex(1).then(() => expect(swiper.getActiveIndex()).to.equal(1));
+    });
+
+    it('can be canceled during prechange', () => {
+      swiper.preChangeHook = () => true;
+      const spy = chai.spy.on(swiper, 'preChangeHook');
+
+      return swiper.setActiveIndex(1).then(() => {
+        expect(spy).to.have.been.called.once;
+        expect(swiper.getActiveIndex()).to.equal(0);
+      });
     });
   });
 
@@ -248,15 +257,19 @@ describe('Swiper', () => {
       spy = chai.spy.on(swiper, '_scrollTo');
     });
 
-    it('should work if it is swipeable', () => {
+    it('should work if it is swipeable, is started and continued', () => {
+      const spy = chai.spy.on(swiper, '_changeTo');
+      swiper.onDragStart(ev);
+      swiper.onDrag(ev);
       swiper.onDragEnd(ev);
       expect(spy).to.have.been.called.once;
     });
 
     it('should call \'_killOverScroll\' if overscrolled', () => {
       swiper.isOverScrollable = TRUE;
-
       const spy = chai.spy.on(swiper, '_killOverScroll');
+      swiper.onDragStart(ev);
+      swiper.onDrag(ev);
       swiper.onDragEnd(ev);
       expect(spy).to.be.called.once;
     });
@@ -293,7 +306,7 @@ describe('Swiper', () => {
       };
 
       const scroll = swiper._scroll;
-      swiper._startMomentumScroll(ev);
+      swiper._startMomentumScroll(scroll, ev);
       expect(swiper._scroll).not.to.equal(scroll);
     });
   });
