@@ -6,6 +6,7 @@ dev
 
 ### New Features
 
+ * Added `OnsRadio` directive.
  * Added `OnsCheckbox` directive.
  * Added `OnsSearchInput` directive.
 
