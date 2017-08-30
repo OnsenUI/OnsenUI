@@ -16,8 +16,8 @@ import {
  * @directive OnsSearchInput
  * @selector ons-search-input
  * @description
- *   [en]Angular 2 directive for `<ons-search-input>` component.[/en]
- *   [ja]`<ons-search-input>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-search-input>` component.[/en]
+ *   [ja]`<ons-search-input>`要素のAngularディレクティブです。[/ja]
  * @example
  *   <ons-search-input [(value)]="value"></ons-input>
  */

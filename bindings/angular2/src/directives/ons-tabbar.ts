@@ -18,7 +18,7 @@ import * as ons from 'onsenui';
  * @directive OnsTab
  * @selector ons-tab
  * @description
- *   [en]Angular 2 directive for `<ons-tab>` component.[/en]
+ *   [en]Angular directive for `<ons-tab>` component.[/en]
  *   [ja]`<ons-tab>`要素のためのディレクティブです。[/ja]
  * @example
  *   @Component({

@@ -31,8 +31,8 @@ export class NavigatorPage {
  * @selector ons-navigator
  * @codpen KgvAvx
  * @description
- *   [en]Angular 2 directive for `<ons-navigator>` component.[/en]
- *   [ja]`<ons-navigator>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-navigator>` component.[/en]
+ *   [ja]`<ons-navigator>`要素のAngularディレクティブです。[/ja]
  * @example
  *   @Component({
  *     selector: 'ons-page',

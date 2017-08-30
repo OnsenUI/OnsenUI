@@ -16,8 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @directive OnsRadio
  * @selector ons-radio
  * @description
- *   [en]Angular 2 directive for `<ons-radio>` component.[/en]
- *   [ja]`<ons-radio>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-radio>` component.[/en]
+ *   [ja]`<ons-radio>`要素のAngularディレクティブです。[/ja]
  * @example
  *   <ons-radio [(ngModel)]="selectedItem"></ons-input>
  */

@@ -16,8 +16,8 @@ import {
  * @directive OnsSelect
  * @selector ons-select
  * @description
- *   [en]Angular 2 directive for `<ons-select>` component.[/en]
- *   [ja]`<ons-select>`要素のAngular 2ディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-select>` component.[/en]
+ *   [ja]`<ons-select>`要素のAngularディレクティブです。[/en]
  * @example
  *   <ons-select>
  *    <option value="basic">Basic</option>

@@ -16,8 +16,8 @@ import {
  * @directive OnsRange
  * @selector ons-range
  * @description
- *   [en]Angular 2 directive for `<ons-range>` component.[/en]
- *   [ja]`<ons-range>`要素のAngular 2ディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-range>` component.[/en]
+ *   [ja]`<ons-range>`要素のAngularディレクティブです。[/en]
  * @example
  *   <ons-range [(value)]="foo"></ons-range><br>
  *
