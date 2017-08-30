@@ -15,16 +15,78 @@
     it('should switch page when a tab is clicked', function() {
       var tabs  = [
         element(by.id('tab1')),
-        element(by.id('tab2'))
+        element(by.id('tab2')),
+        element(by.id('tab3'))
+      ];
+
+      var pages  = [
+        element(by.id('page1')),
+        element(by.id('page2')),
+        element(by.id('page3'))
       ];
 
       tabs[0].click();
-      expect(element(by.id('page1')).isDisplayed()).toBeTruthy();
-      expect(element(by.id('page2')).isDisplayed()).toBeFalsy();
+      expect(pages[0].getLocation()).toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[1].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[2].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
 
       tabs[1].click();
-      expect(element(by.id('page2')).isDisplayed()).toBeTruthy();
-      expect(element(by.id('page1')).isDisplayed()).toBeFalsy();
+      expect(pages[0].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[1].getLocation()).toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[2].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
+
+      tabs[2].click();
+      expect(pages[0].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[1].getLocation()).not.toEqual(jasmine.objectContaining({x: 0}));
+      expect(pages[2].getLocation()).toEqual(jasmine.objectContaining({x: 0}));
+    });
+
+    it('should change page when swiped', function() {
+      var pages  = [
+        element(by.id('page1')),
+        element(by.id('page2')),
+        element(by.id('page3'))
+      ];
+
+      var swipe = function(from, to) {
+        browser.actions()
+          .mouseMove(pages[from], {x: 100, y: 100})
+          .mouseDown()
+          .mouseMove({x: 520 * Math.sign(from - to), y: 0})
+          .mouseUp()
+          .perform();
+        browser.waitForAngular();
+
+        browser.wait(function() {
+          return pages[to].getLocation().then(function(loc) {
+            return loc.x === 0;
+          });
+        });
+      };
+
+
+      // Store initial position.
+      var initialPosition = pages[0].getLocation();
+      var currentIndex = element(by.id('current-index'));
+      expect(currentIndex.getText()).toBe('0');
+
+      // Swipe left
+      swipe(0, 1);
+      expect(currentIndex.getText()).toBe('1');
+      expect(initialPosition).not.toEqual(pages[0].getLocation());
+
+      // Swipe left
+      swipe(1, 2);
+      expect(currentIndex.getText()).toBe('2');
+
+      // Swipe right
+      swipe(2, 1);
+      expect(currentIndex.getText()).toBe('1');
+
+      // Swipe right
+      swipe(1, 0);
+      expect(currentIndex.getText()).toBe('0');
+      expect(initialPosition).toEqual(pages[0].getLocation());
     });
 
     it('should not reload persistent tabs', function() {
@@ -41,16 +103,6 @@
       tabs[0].click();
       tabs[1].click();
       expect(input.getAttribute('value')).toBe('Hello');
-    });
-
-    it('should not hide persistent tabs when tapped twice (issue #530)', function() {
-      var tab = element(by.id('tab3'));
-      var page3 = element(by.id('page3'));
-
-      tab.click();
-      expect(page3.isDisplayed()).toBeTruthy();
-      tab.click();
-      expect(page3.isDisplayed()).toBeTruthy();
     });
 
     it('should pass down its scope to tabs', function() {
