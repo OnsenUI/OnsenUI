@@ -16,9 +16,7 @@ describe('Swiper', () => {
       </div>
     `);
     document.body.appendChild(element);
-    swiper = new window.ons._internal.Swiper({
-      element
-    });
+    swiper = new window.ons._internal.Swiper({ getElement: () => element });
     swiper.init();
 
     setImmediate(done);
@@ -170,7 +168,7 @@ describe('Swiper', () => {
       swiper.preChangeHook = () => true;
       const spy = chai.spy.on(swiper, 'preChangeHook');
 
-      return swiper.setActiveIndex(1).then(() => {
+      return expect(swiper.setActiveIndex(1)).to.eventually.be.rejected.then(() => {
         expect(spy).to.have.been.called.once;
         expect(swiper.getActiveIndex()).to.equal(0);
       });

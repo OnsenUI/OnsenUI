@@ -131,7 +131,7 @@ export default class SwipeReveal {
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
-    return this._changeTo(scroll, options);
+    return this._changeTo(scroll, { reject: true, ...options });
   }
 
   getActiveIndex(scroll = this._scroll) {
@@ -249,7 +249,7 @@ export default class SwipeReveal {
   _changeTo(scroll, options) {
     this._scroll = this._tryChangeHook(true, scroll) ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
     return this._scrollTo(this._scroll, options)
-      .then(() => scroll === this._scroll && this._tryChangeHook(false))
+      .then(() => scroll === this._scroll ? this._tryChangeHook(false) : options.reject && Promise.reject('Canceled'));
   }
 
   _tryChangeHook(pre, scroll) {
