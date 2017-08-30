@@ -16,8 +16,8 @@ CHANGELOG
 ### Misc
 
  * Added `@angular/forms` as a new dependency.
- * OnsInput: `valueChange` event now fires whenever `input` event fires in the inner `<ons-input>` element.
- * OnsRange: `valueChange` event now fires whenever `input` event fires in the inner `<ons-input>` element.
+ * OnsInput: `valueChange` event now fires whenever `input` event fires in the inner `<input>` element.
+ * OnsRange: `valueChange` event now fires whenever `input` event fires in the inner `<input>` element.
 
 ### BREAKING CHANGES
 
