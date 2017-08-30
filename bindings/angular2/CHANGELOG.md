@@ -9,6 +9,10 @@ dev
  * Supported features added in Onsen UI 2.4.x. Added `OnsRadio`, `OnsCheckbox` and `OnsSearchInput` directives.
  * Supported features added in Onsen UI 2.5.x.
 
+### Bug Fixes
+
+ * OnsSelect: Support `NgModel` correctly.
+
 ### Misc
 
  * Added `@angular/forms` as a new dependency.
