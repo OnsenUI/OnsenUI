@@ -21,7 +21,7 @@ export default class SwipeReveal {
 
     // Parameters
     this.element = params.element;
-    this.initialIndex = Number(params.initialIndex) || 0;
+    this.getInitialIndex = params.getInitialIndex || FALSE;
     this.isVertical = params.isVertical || FALSE;
     this.isOverScrollable = params.isOverScrollable || FALSE;
     this.isCentered = params.isCentered || FALSE;
@@ -123,7 +123,7 @@ export default class SwipeReveal {
 
   _setupInitialIndex() {
     this._reset();
-    this._lastActiveIndex = Math.max(Math.min(this.initialIndex, this.itemCount), 0);
+    this._lastActiveIndex = Math.max(Math.min(Number(this.getInitialIndex()), this.itemCount), 0);
     this._scroll = this._offset + this.itemNumSize * this._lastActiveIndex;
     this._scrollTo(this._scroll);
   }
