@@ -13,6 +13,7 @@ dev
 
  * Added `@angular/forms` as a new dependency.
  * OnsInput: `[(value)]` now listens to `input` event instead of `change` event.
+ * OnsRange: `[(value)]` now listens to `input` event instead of `change` event.
 
 ### BREAKING CHANGES
 
