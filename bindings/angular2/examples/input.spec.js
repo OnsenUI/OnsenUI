@@ -17,16 +17,4 @@ describe('input.html', () => {
     expect($('#text input').getAttribute('value')).toBe('fuga');
   });
 
-  it('should change the model when checkbox is clicked', () => {
-    expect($('#checked').getText()).toBe('false');
-    $('#checkbox').click();
-    expect($('#checked').getText()).toBe('true');
-  });
-
-  it('should change the value when native checkbox is clicked', () => {
-    expect($('#checkbox input').isSelected()).toBeFalsy();
-    $('#native-checkbox').click();
-    expect($('#checkbox input').isSelected()).toBeTruthy();
-  });
-
 });

@@ -10,7 +10,7 @@ describe('tabbar.html', () => {
   });
 
   it('should have ons-tab elements', () => {
-    expect($('ons-tab').isDisplayed()).toBeTruthy();
+    expect($('ons-tab[label="Page1"]').isDisplayed()).toBeTruthy();
   });
 
   it('should load initial page', () => {
@@ -20,7 +20,7 @@ describe('tabbar.html', () => {
 
   it('should switch page on click tab', () => {
     $('ons-tab[label="Page2"]').click();
-    browser.wait(EC.visibilityOf($('.normal-page')), 5000);
-    expect($('.normal-page').isDisplayed()).toBeTruthy();
+    browser.wait(EC.visibilityOf(element.all(by.css('.normal-page')).get(0)), 5000);
+    expect(element.all(by.css('.normal-page')).get(0).isDisplayed()).toBeTruthy();
   });
 });

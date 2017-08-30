@@ -13,13 +13,13 @@ import { FormsModule } from '@angular/forms';
   template: `
   <ons-page>
     <ons-toolbar>
-      <div class="center">Select Example</div>
+      <div class="center">Select</div>
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
       <div style="margin: 10px">
         <p>Choose which select input you want to see:<p>
-        <ons-select id="choose-sel" [(ngModel)]="selectedModifier" ngDefaultControl (ngModelChange)="editSelects($event)">
+        <ons-select [(ngModel)]="selectedModifier" [attr.modifier]="selectedModifier">
           <option *ngFor="let modifier of modifiers" [value]="modifier.value">
             {{ modifier.label }}
           </option>
@@ -39,17 +39,6 @@ export class AppComponent {
   ];
 
   constructor() { }
-
-  editSelects(event: any) {
-    const chooseSel = document.getElementById('choose-sel');
-
-    if (chooseSel) {
-      chooseSel.removeAttribute('modifier');
-      if (event == 'material' || event == 'underbar') {
-        chooseSel.setAttribute('modifier', event);
-      }
-    }
-  }
 }
 
 @NgModule({

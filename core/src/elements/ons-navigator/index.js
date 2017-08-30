@@ -573,7 +573,7 @@ export default class NavigatorElement extends BaseElement {
         throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
       }
 
-      enterPage.updateBackButton(pageLength - 1);
+      enterPage.updateBackButton(pageLength > (options._replacePage ? 2 : 1));
 
       enterPage.pushedOptions = util.extend({}, enterPage.pushedOptions || {}, options || {});
       enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});

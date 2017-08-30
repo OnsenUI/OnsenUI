@@ -5,6 +5,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app',
@@ -17,31 +18,15 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     <div class="content">
       <div style="padding: 10px">
         <p>
-          <ons-input id="text" placeholder="Type here" [(value)]="target" (input)="target = $event.target.value"></ons-input>
-          <input id="native-text" placeholder="Type here" [(value)]="target" (input)="target = $event.target.value">
+          <ons-input id="text" placeholder="Type here" [(value)]="target"></ons-input>
+          <input id="native-text" placeholder="Type here" [(ngModel)]="target">
         </p>
 
         <p id="target">
           {{target}}
         </p>
 
-        <p>
-          <ons-checkbox
-            id="checkbox"
-            [(checked)]="checked"
-            (change)="checked = $event.target.checked"
-          ></ons-checkbox>
-          <input
-            id="native-checkbox"
-            type="checkbox"
-            [(checked)]="checked"
-            (change)="checked = $event.target.checked"
-          >
-        </p>
-
-        <p id="checked">
-          {{ checked }}
-        </p>
+        <!-- type="password" works just same as type="text". No test is needed. -->
       </div>
     </div>
   </ons-page>
@@ -49,11 +34,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 export class AppComponent{
   target: string = '';
-  checked: boolean = false;
 }
 
 @NgModule({
-  imports: [OnsenModule],
+  imports: [OnsenModule, FormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

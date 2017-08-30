@@ -521,7 +521,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    this._update(name, current);
+    this.parentNode && this._update(name, current);
   }
 
   _update(name, value) {
