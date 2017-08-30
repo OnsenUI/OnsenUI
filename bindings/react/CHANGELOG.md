@@ -9,6 +9,10 @@ dev
 
 * Components now update back button handler when prop changes.
 
+### BREAKING CHANGES
+
+* SplitterSide: 'isSwipeable' prop has been renamed to 'swipeable'.
+
 1.5.0
 ----
 
