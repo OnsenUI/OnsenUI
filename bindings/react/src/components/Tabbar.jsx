@@ -71,30 +71,28 @@ class Tabbar extends BasicComponent {
   }
 
   render() {
-    const tabs = this.props.renderTabs(this.props.index, this);
+    const {...props} = this.props;
+    const tabs = props.renderTabs(props.index, this);
 
     if (!this.tabPages) {
       this.tabPages = tabs.map((tab) => tab.content);
     } else {
-      this.tabPages[this.props.index] = tabs[this.props.index].content;
+      this.tabPages[props.index] = tabs[props.index].content;
     }
 
-    var {...others} = this.props;
+    props.activeIndex = props.index; // Tabbar's initial index
 
-    ['animation'].forEach((el) => {
-      Util.convert(others, el);
-    });
-
-    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    ['animation', 'swipeable'].forEach(el => Util.convert(props, el));
+    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return (
-      <ons-tabbar activeIndex={this.props.index} {...this.props} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'ons-tabbar__content tabbar__content' + (this.props.position === 'top' ? ' tabbar--top__content' : '')}>
+      <ons-tabbar {...props} ref={(tabbar) => { this._tabbar = tabbar; }}>
+        <div className={'ons-tabbar__content tabbar__content' + (props.position === 'top' ? ' tabbar--top__content' : '')}>
           <div>
             {this.tabPages}
           </div>
         </div>
-        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tabbar--top' : '')}>
+        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (props.position === 'top' ? ' tabbar--top' : '')}>
           {tabs.map((tab) => tab.tab)}
         </div>
       </ons-tabbar>
@@ -130,6 +128,15 @@ Tabbar.propTypes = {
    *  [ja][/ja]
    */
   position: PropTypes.string,
+
+  /**
+   * @name swipeable
+   * @type bool
+   * @description
+   *  [en]Ennable swipe interaction.[/en]
+   *  [ja][/ja]
+   */
+  swipeable: PropTypes.bool,
 
   /**
    * @name animation
