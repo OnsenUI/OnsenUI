@@ -6,14 +6,17 @@ dev
 
 ### New Features
 
- * Added `OnsRadio` directive.
- * Added `OnsCheckbox` directive.
- * Added `OnsSearchInput` directive.
+ * Supported Onsen UI 2.4.x. Added `OnsRadio`, `OnsCheckbox` and `OnsSearchInput` directives.
 
 ### Misc
 
  * Added `@angular/forms` as a new dependency.
  * OnsInput: `[(value)]` now listens to `input` event instead of `change` event.
+
+### BREAKING CHANGES
+
+ * OnsInput: It has been split into different directives: `OnsInput` for text types; `OnsCheckbox` for checkboxes; `OnsRadio` for radio buttons; and `OnsSearchInput` for styled search inputs.
+     * `<ons-input type="radio" checked>` => `<ons-radio checked>`
 
 4.0.0-rc.1
 ----
