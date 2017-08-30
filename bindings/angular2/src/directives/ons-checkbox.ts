@@ -16,10 +16,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @directive OnsCheckbox
  * @selector ons-checkbox
  * @description
- *   [en]Angular directive for `<ons-checkbox>` component.[/en]
- *   [ja]`<ons-checkbox>`要素のAngularディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-checkbox>` component. You can use `[(ngModel)]` to synchronize the value of `[(ngModel)]` with the array of the selected values.[/en]
+ *   [ja]`<ons-checkbox>`要素のAngularディレクティブです。 `[(ngModel)]` を使用すると、 `[(ngModel)]` の値を選択された値の配列と同期することができます。[/ja]
  * @example
- *   <ons-checkbox [(ngModel)]="selectedItems"></ons-checkbox>
+ *   <ons-checkbox value="Item A" [(ngModel)]="selectedValues"></ons-checkbox>
+ *   <ons-checkbox value="Item B" [(ngModel)]="selectedValues"></ons-checkbox>
+ *   <ons-checkbox value="Item C" [(ngModel)]="selectedValues"></ons-checkbox>
  */
 @Directive({
   selector: 'ons-checkbox',

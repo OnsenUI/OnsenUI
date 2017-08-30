@@ -16,10 +16,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @directive OnsRadio
  * @selector ons-radio
  * @description
- *   [en]Angular directive for `<ons-radio>` component.[/en]
- *   [ja]`<ons-radio>`要素のAngularディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-radio>` component. You can use `[(ngModel)]` to synchronize the value of `[(ngModel)]` with the selected value.[/en]
+ *   [ja]`<ons-radio>`要素のAngularディレクティブです。 `[(ngModel)]` を使用すると、 `[(ngModel)]` の値を選択された値と同期することができます。[/ja]
  * @example
- *   <ons-radio [(ngModel)]="selectedItem"></ons-radio>
+ *   <ons-radio value="Item A" [(ngModel)]="selectedValue"></ons-radio>
+ *   <ons-radio value="Item B" [(ngModel)]="selectedValue"></ons-radio>
+ *   <ons-radio value="Item C" [(ngModel)]="selectedValue"></ons-radio>
  */
 @Directive({
   selector: 'ons-radio',
