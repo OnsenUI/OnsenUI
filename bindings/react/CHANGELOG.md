@@ -9,9 +9,14 @@ dev
 
 * Components now update back button handler when prop changes.
 
+### Bug Fixes
+
+* Tabbar: `index` was trying to set active tab twice.
+
 ### BREAKING CHANGES
 
 * SplitterSide: 'isSwipeable' prop has been renamed to 'swipeable'.
+* Tabbar: `index` must be updated during `onPostChange` instead of `onPreChange`.
 
 1.5.0
 ----

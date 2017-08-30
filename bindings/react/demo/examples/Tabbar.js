@@ -48,16 +48,17 @@ export default class extends React.Component {
     return (
       <Page>
         <Tabbar
+          animation={'none'}
           swipeable={true}
           index={this.state.index}
-          onPreChange={(event) =>
+          onPreChange={() => console.log('preChange')}
+          onPostChange={(event) =>
             {
               this.setState({index: event.index});
-              console.log('preChange', event.index);
+              console.log('postChange', event.index);
             }
           }
-          onPostChange={() => console.log('postChange')}
-          onReactive={() => console.log('postChange')}
+          onReactive={() => console.log('reactive')}
           position='bottom'
           renderTabs={this.renderTabs}
         />

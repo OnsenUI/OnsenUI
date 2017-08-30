@@ -65,8 +65,9 @@ class Tabbar extends BasicComponent {
 
   componentDidUpdate(prevProps) {
     super.componentDidUpdate(prevProps);
-    if (prevProps.index !== this.props.index) {
-      this._tabbar.setActiveTab(this.props.index);
+    const node = this._tabbar;
+    if (this.props.index !== node.getActiveTabIndex()) {
+      node.setActiveTab(this.props.index);
     }
   }
 
