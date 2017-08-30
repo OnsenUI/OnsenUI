@@ -20,7 +20,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
         {{message}}
       </div>
       <div class="alert-dialog-footer">
+        <ons-alert-dialog-button (click)="alert.hide()">OK</ons-alert-dialog-button>
+        <!-- Old way:
         <button class="alert-dialog-button" (click)="alert.hide()">OK</button>
+        -->
       </div>
     </ons-alert-dialog>
   `

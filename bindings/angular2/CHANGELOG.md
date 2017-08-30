@@ -1,6 +1,29 @@
 CHANGELOG
 ====
 
+4.1.0
+----
+
+### New Features
+
+ * Supported features added in Onsen UI 2.4.x. Added `OnsRadio`, `OnsCheckbox` and `OnsSearchInput` directives.
+ * Supported features added in Onsen UI 2.5.x.
+
+### Bug Fixes
+
+ * OnsSelect: Support `NgModel` correctly.
+
+### Misc
+
+ * Added `@angular/forms` as a new dependency.
+ * OnsInput: `valueChange` event now fires whenever `input` event fires in the inner `<ons-input>` element.
+ * OnsRange: `valueChange` event now fires whenever `input` event fires in the inner `<ons-input>` element.
+
+### BREAKING CHANGES
+
+ * OnsInput: It has been split into different directives: `OnsInput` for text types; `OnsCheckbox` for checkboxes; `OnsRadio` for radio buttons; and `OnsSearchInput` for styled search inputs.
+     * `<ons-input type="radio" checked>` => `<ons-radio checked>`
+
 4.0.0-rc.1
 ----
 

@@ -10,33 +10,30 @@ import {
   forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as ons from 'onsenui';
 
 /**
- * @element ons-select
- * @directive OnsSelect
- * @selector ons-select
+ * @element ons-radio
+ * @directive OnsRadio
+ * @selector ons-radio
  * @description
- *   [en]Angular directive for `<ons-select>` component.[/en]
- *   [ja]`<ons-select>`要素のAngularディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-radio>` component. You can use `[(ngModel)]` to synchronize the value of `[(ngModel)]` with the selected value.[/en]
+ *   [ja]`<ons-radio>`要素のAngularディレクティブです。 `[(ngModel)]` を使用すると、 `[(ngModel)]` の値を選択された値と同期することができます。[/ja]
  * @example
- *   <ons-select [(ngModel)]="selectedValue">
- *     <option value="Item A">Item A</option>
- *     <option value="Item B">Item B</option>
- *     <option value="Item C">Item C</option>
- *   </ons-select>
+ *   <ons-radio value="Item A" [(ngModel)]="selectedValue"></ons-radio>
+ *   <ons-radio value="Item B" [(ngModel)]="selectedValue"></ons-radio>
+ *   <ons-radio value="Item C" [(ngModel)]="selectedValue"></ons-radio>
  */
 @Directive({
-  selector: 'ons-select',
+  selector: 'ons-radio',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => OnsSelect),
+      useExisting: forwardRef(() => OnsRadio),
       multi: true,
     }
   ]
 })
-export class OnsSelect implements OnDestroy, ControlValueAccessor {
+export class OnsRadio implements OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
   private _propagateChange = (_: any) => { };
@@ -49,7 +46,8 @@ export class OnsSelect implements OnDestroy, ControlValueAccessor {
   }
   
   _onChange(event: any) {
-    this._propagateChange(event.target.value);
+    const { value, checked } = event.target;
+    checked && this._propagateChange(value);
   }
   
   get element(): any {
@@ -67,15 +65,11 @@ export class OnsSelect implements OnDestroy, ControlValueAccessor {
   }
 
   writeValue(obj: any) {
-    // When this statement is first evaluated, the inner <select> element is not ready,
-    // so contentReady is required in this case
-    (<any>ons)._contentReady(this._element, () => {
-      this._element.value = obj;
-    });
+    this._element.checked = (obj === this._element.value);
   }
 
   registerOnChange(fn: any) {
-    this._propagateChange = fn;
+      this._propagateChange = fn;
   }
 
   registerOnTouched() { }
