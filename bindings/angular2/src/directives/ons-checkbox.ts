@@ -19,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *   [en]Angular directive for `<ons-checkbox>` component.[/en]
  *   [ja]`<ons-checkbox>`要素のAngularディレクティブです。[/ja]
  * @example
- *   <ons-checkbox [(ngModel)]="selectedItems"></ons-input>
+ *   <ons-checkbox [(ngModel)]="selectedItems"></ons-checkbox>
  */
 @Directive({
   selector: 'ons-checkbox',

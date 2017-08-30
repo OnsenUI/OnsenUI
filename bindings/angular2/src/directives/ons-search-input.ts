@@ -19,7 +19,7 @@ import {
  *   [en]Angular directive for `<ons-search-input>` component.[/en]
  *   [ja]`<ons-search-input>`要素のAngularディレクティブです。[/ja]
  * @example
- *   <ons-search-input [(value)]="value"></ons-input>
+ *   <ons-search-input [(value)]="value"></ons-search-input>
  */
 @Directive({
   selector: 'ons-search-input'
