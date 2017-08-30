@@ -9,8 +9,15 @@
     <script src="../../build/js/onsenui.js"></script>
 
     <script>
-      ['init', 'show', 'hide', 'destroy', 'prechange', 'postchange', 'reactive']
-        .forEach(eN => document.addEventListener(eN, e => console.log(eN, e.target.id)));
+      ['init', 'show', 'hide', 'destroy', 'postchange', 'reactive']
+        .forEach(eN => document.addEventListener(eN, e => console.log(eN, e)));
+        document.addEventListener('prechange', function(e) {
+          console.log('prechange', e);
+          if (e.activeIndex === 0) {
+            console.log('Canceled in prechange.')
+            e.cancel();
+          }
+        });
     </script>
 
 </script>
@@ -23,13 +30,15 @@
         <div class="center">Tabbar</div>
       </ons-toolbar>
 
-      <ons-tabbar position="auto" animation="slide">
+      <ons-tabbar position="auto"
+        swipeable
+      >
         <ons-tab page="page1.html"
           icon="ion-home"
           active-icon="md-menu"
           label="Home">
         </ons-tab>
-        <ons-tab active
+        <ons-tab
           icon="ion-chatbox-working"
           label="Comments"
           badge="99+"
