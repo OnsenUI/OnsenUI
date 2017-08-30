@@ -1,9 +1,11 @@
 <template>
   <ons-tabbar :activeIndex="index" @postchange.self="$emit('update:index', $event.index)" v-on="unrecognizedListeners">
     <div class="tabbar__content">
-      <slot name="pages">
-        <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" v-on="unrecognizedListeners"></component>
-      </slot>
+      <div>
+        <slot name="pages">
+          <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" v-on="unrecognizedListeners"></component>
+        </slot>
+      </div>
     </div>
     <div class="tabbar">
       <slot>
