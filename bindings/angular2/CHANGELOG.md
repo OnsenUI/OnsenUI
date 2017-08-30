@@ -7,6 +7,7 @@ dev
 ### New Features
 
  * Supported Onsen UI 2.4.x. Added `OnsRadio`, `OnsCheckbox` and `OnsSearchInput` directives.
+ * Supported Onsen UI 2.5.x.
 
 ### Misc
 
