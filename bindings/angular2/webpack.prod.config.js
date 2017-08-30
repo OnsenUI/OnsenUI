@@ -105,6 +105,12 @@ module.exports = {
       amd: '@angular/platform-browser',
       root: ['ng', 'platformBrowser']
     },
+    '@angular/forms': { // UMD
+      commonjs: '@angular/forms',
+      commonjs2: '@angular/forms',
+      amd: '@angular/forms',
+      root: ['ng', 'forms']
+    },
     'onsenui': { // UMD
       commonjs: 'onsenui',
       commonjs2: 'onsenui',
