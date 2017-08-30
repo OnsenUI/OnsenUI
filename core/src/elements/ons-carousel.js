@@ -229,7 +229,7 @@ export default class CarouselElement extends BaseElement {
   connectedCallback() {
     if (!this._swiper) {
       this._swiper = new Swiper({
-        element: this,
+        getElement: () => this,
         getInitialIndex: () => this.getAttribute('initial-index'),
         getAutoScrollRatio: () => this.autoScrollRatio,
         isVertical: () => this.vertical,

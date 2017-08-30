@@ -20,7 +20,7 @@ export default class SwipeReveal {
     const FALSE = (() => false);
 
     // Parameters
-    this.element = params.element;
+    this.getElement = params.getElement; // Required
     this.getInitialIndex = params.getInitialIndex || FALSE;
     this.isVertical = params.isVertical || FALSE;
     this.isOverScrollable = params.isOverScrollable || FALSE;
@@ -50,8 +50,8 @@ export default class SwipeReveal {
   init({ swipeable, autoRefresh } = {}) {
     this.initialized = true;
     // Add classes
-    this.element.classList.add('ons-swiper');
-    this.target = this.element.children[0];
+    this.getElement().classList.add('ons-swiper');
+    this.target = this.getElement().children[0];
     if (!this.target) {
       throw new Error('Expected "target" element to exist before initializing Swiper.')
     }
