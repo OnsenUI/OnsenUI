@@ -36,4 +36,6 @@ limitations under the License.
   height: inherit;
   flex-shrink: 0;
   box-sizing: border-box;
+  width: 100%;
+  position: relative !important;
 }

@@ -705,6 +705,10 @@ declare namespace ons {
      */
     getActiveTabIndex(): number;
     visible: any;
+    /**
+     * @description true if the tabbar is swipeable.
+     **/
+    swipeable: boolean;
   }
 
   /**
