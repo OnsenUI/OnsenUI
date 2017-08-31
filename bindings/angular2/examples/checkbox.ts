@@ -12,28 +12,34 @@ import {FormsModule} from '@angular/forms';
   template: `
   <ons-page>
     <ons-toolbar>
-      <div class="center">Input</div>
+      <div class="center">Checkbox</div>
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
       <div style="padding: 10px">
-        <p>
-          <ons-input id="text" placeholder="Type here" [(value)]="target"></ons-input>
-          <input id="native-text" placeholder="Type here" [(ngModel)]="target">
+        <div *ngFor="let color of colors; let i = index">
+          <ons-checkbox
+            [attr.input-id]="'radio-' + i"
+            [attr.value]="color"
+            [(ngModel)]="checkedColors"
+          >
+          </ons-checkbox>
+          <label [attr.for]="'radio-' + i">
+            {{ color }}
+          </label>
+        </div>
+        
+        <p id="checked-colors">
+          {{ checkedColors }}
         </p>
-
-        <p id="target">
-          {{target}}
-        </p>
-
-        <!-- type="password" works just same as type="text". No test is needed. -->
       </div>
     </div>
   </ons-page>
   `
 })
 export class AppComponent{
-  target: string = '';
+  colors: string[] = ['Red', 'Green', 'Blue'];
+  checkedColors: string[] = ['Green', 'Blue'];
 }
 
 @NgModule({

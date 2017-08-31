@@ -12,7 +12,7 @@ describe('navigator.html', () => {
   });
 
   it('should push a page if the button is pressed', () => {
-    $('#push').click();
+    $('#push-with-no-animation').click();
     browser.wait(EC.elementToBeClickable($('#pop')), 5000);
     expect($('#pop').isPresent()).toBeTruthy();
     $('#pop').click();

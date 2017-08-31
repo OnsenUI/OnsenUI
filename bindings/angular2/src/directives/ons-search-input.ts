@@ -12,19 +12,19 @@ import {
 } from '@angular/core';
 
 /**
- * @element ons-range
- * @directive OnsRange
- * @selector ons-range
+ * @element ons-search-input
+ * @directive OnsSearchInput
+ * @selector ons-search-input
  * @description
- *   [en]Angular directive for `<ons-range>` component.[/en]
- *   [ja]`<ons-range>`要素のAngularディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-search-input>` component.[/en]
+ *   [ja]`<ons-search-input>`要素のAngularディレクティブです。[/ja]
  * @example
- *   <ons-range [(value)]="foo"></ons-range>
+ *   <ons-search-input [(value)]="value"></ons-search-input>
  */
 @Directive({
-  selector: 'ons-range'
+  selector: 'ons-search-input'
 })
-export class OnsRange implements OnChanges, OnDestroy {
+export class OnsSearchInput implements OnChanges, OnDestroy {
   private _element: any;
   private _boundOnChange: Function;
 
@@ -32,8 +32,8 @@ export class OnsRange implements OnChanges, OnDestroy {
    * @input value
    * @type {string}
    * @desc
-   *   [en]Input value of the `<ons-range>` element..[/en]
-   *   [ja]`ons-range`要素に対する入力値を指定します。[/ja]
+   *   [en]Input value for the internal `<input>` element.[/en]
+   *   [ja]内部の`input`要素に対する入力値を設定します。[/ja]
    */
   @Input('value') _value: string;
 
@@ -42,7 +42,7 @@ export class OnsRange implements OnChanges, OnDestroy {
    * @type {string}
    * @desc
    *   [en]Triggers when the value is changed.[/en]
-   *   [ja]値が変更された時に発火します。[/ja]
+   *   [ja]内部の`input`要素の値が変更された時に発火します。[/ja]
    */
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
@@ -59,7 +59,9 @@ export class OnsRange implements OnChanges, OnDestroy {
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
     const value = changeRecord['_value'].currentValue;
-    this._element.value = value;
+    if (this._element.value !== value) {
+      this._element.value = value;
+    }
   }
 
   get element(): any {

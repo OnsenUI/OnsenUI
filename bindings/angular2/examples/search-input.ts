@@ -1,6 +1,5 @@
 import {
   Component,
-  OnsRange,
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
@@ -12,24 +11,25 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   template: `
   <ons-page>
     <ons-toolbar>
-      <div class="center">Range Example</div>
+      <div class="center">Search Input</div>
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
-      <div style="text-align: center; margin: 10px">
-        <ons-range id="range" [(value)]="value"></ons-range><br>
-        <ons-range modifier="material" [(value)]="value"></ons-range><br>
-        <span id="value">
-          {{ value }}
-        </span>
+      <div style="padding: 10px">
+        <p>
+          <ons-search-input id="text" placeholder="Type here" [(value)]="target"></ons-search-input>
+        </p>
+
+        <p id="target">
+          {{target}}
+        </p>
       </div>
     </div>
   </ons-page>
   `
 })
-export class AppComponent {
-  value: string = '10';
-  constructor() { }
+export class AppComponent{
+  target: string = '';
 }
 
 @NgModule({
