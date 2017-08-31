@@ -275,7 +275,7 @@ describe('OnsTabElement', () => {
         done();
       });
 
-      tabbar._tabbarElement.appendChild(tab);
+      tabbar._tabbarElement.insertBefore(tab, tabbar._tabbarElement.children[0]);
       document.body.appendChild(tabbar);
     });
 

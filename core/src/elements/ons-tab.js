@@ -279,9 +279,9 @@ export default class TabElement extends BaseElement {
       return this._loadedPage;
     }
     // Manually attached to DOM, 1 per tab
-    const target = this._tabbar._targetElement;
-    if (target && target.children.length === this.parentElement.children.length) {
-      return target.children[this.index];
+    const tabbar = this._tabbar;
+    if (tabbar.pages.length === tabbar.tabs.length) {
+      return tabbar.pages[this.index];
     }
     // Loaded in another way
     return null;

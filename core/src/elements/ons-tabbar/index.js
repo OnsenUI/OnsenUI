@@ -215,9 +215,10 @@ export default class TabbarElement extends BaseElement {
         scrollHook: this._onScroll.bind(this)
       });
 
-      this._onRefresh();
-
-      contentReady(this, () => this._swiper.init({ swipeable: this.hasAttribute('swipeable') }));
+      contentReady(this, () => {
+        this._onRefresh();
+        this._swiper.init({ swipeable: this.hasAttribute('swipeable') })
+      });
     }
 
     contentReady(this, () => this._updatePosition());
@@ -265,14 +266,16 @@ export default class TabbarElement extends BaseElement {
   }
 
   _onScroll(index, options = {}) {
-    this._tabbarBorder.style.transition = `all ${options.duration || 0}s ${options.timing || ''}`;
+    if (this._tabbarBorder) {
+      this._tabbarBorder.style.transition = `all ${options.duration || 0}s ${options.timing || ''}`;
 
-    if (this._autogrow) {
-      const a = Math.floor(index), b = Math.ceil(index), r = index % 1;
-      this._tabbarBorder.style.width = lerp(this._tabsRect[a].width, this._tabsRect[b].width, r) + 'px';
-      this._tabbarBorder.style.transform = `translate3d(${lerp(this._tabsRect[a].left, this._tabsRect[b].left, r)}px, 0, 0)`;
-    } else {
-      this._tabbarBorder.style.transform = `translate3d(${index * 100}%, 0, 0)`;
+      if (this._autogrow && this._tabsRect.length > 0) {
+        const a = Math.floor(index), b = Math.ceil(index), r = index % 1;
+        this._tabbarBorder.style.width = lerp(this._tabsRect[a].width, this._tabsRect[b].width, r) + 'px';
+        this._tabbarBorder.style.transform = `translate3d(${lerp(this._tabsRect[a].left, this._tabsRect[b].left, r)}px, 0, 0)`;
+      } else {
+        this._tabbarBorder.style.transform = `translate3d(${index * 100}%, 0, 0)`;
+      }
     }
 
     this._onSwipe && this._onSwipe(index, options);
@@ -281,8 +284,13 @@ export default class TabbarElement extends BaseElement {
   _onRefresh() {
     this._autogrow = util.hasModifier(this, 'autogrow');
     this._tabsRect = this.tabs.map(tab => tab.getBoundingClientRect());
-    this._tabbarBorder.style.width = this._tabsRect[this.getActiveTabIndex()].width + 'px';
-    this._tabbarBorder.style.display = this.hasAttribute('tab-border') || platform.isAndroid() ? 'block' : 'none';
+    if (this._tabbarBorder) {
+      this._tabbarBorder.style.display = this.hasAttribute('tab-border') || platform.isAndroid() ? 'block' : 'none';
+      const index = this.getActiveTabIndex();
+      if (this._tabsRect.length > 0 && index >= 0) {
+        this._tabbarBorder.style.width = this._tabsRect[index].width + 'px';
+      }
+    }
   }
 
   get _tabbarElement() {
