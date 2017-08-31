@@ -30,6 +30,7 @@ export default class SwipeReveal {
     this.preChangeHook = params.preChangeHook || FALSE;
     this.postChangeHook = params.postChangeHook || FALSE;
     this.overScrollHook = params.overScrollHook || FALSE;
+    this.scrollHook = params.scrollHook;
     this.itemSize = params.itemSize || '100%';
     this.getAutoScrollRatio = ({ getAutoScrollRatio } = params) => {
       let ratio = getAutoScrollRatio && getAutoScrollRatio();
@@ -131,7 +132,7 @@ export default class SwipeReveal {
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
-    return this._changeTo(scroll, { reject: true, ...options });
+    return this._changeTo(scroll, options);
   }
 
   getActiveIndex(scroll = this._scroll) {
@@ -246,7 +247,7 @@ export default class SwipeReveal {
     this.overScrollHook({ direction, killOverScroll }) || killOverScroll();
   }
 
-  _changeTo(scroll, options) {
+  _changeTo(scroll, options = {}) {
     this._scroll = this._tryChangeHook(true, scroll) ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
     return this._scrollTo(this._scroll, options)
       .then(() => scroll === this._scroll ? this._tryChangeHook(false) : options.reject && Promise.reject('Canceled'));
@@ -278,6 +279,7 @@ export default class SwipeReveal {
     }
 
     const opt = options.animation  === 'none' ? {} :  options.animationOptions;
+    this.scrollHook && this.scrollHook((scroll / this.targetSize).toFixed(2), opt);
     return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
   }
 
