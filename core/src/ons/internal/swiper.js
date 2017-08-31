@@ -248,20 +248,30 @@ export default class SwipeReveal {
   }
 
   _changeTo(scroll, options = {}) {
-    this._scroll = this._tryChangeHook(true, scroll) ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
+    this._scroll = this._tryPreChange(scroll) ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
     return this._scrollTo(this._scroll, options)
-      .then(() => scroll === this._scroll ? this._tryChangeHook(false) : options.reject && Promise.reject('Canceled'));
+      .then(() => scroll === this._scroll ? this._tryPostChange(scroll) : options.reject && Promise.reject('Canceled'));
   }
 
-  _tryChangeHook(pre, scroll) {
+  _tryPreChange(scroll) {
     const activeIndex = this.getActiveIndex(scroll);
     if (this._lastActiveIndex !== activeIndex) {
-      const params = { activeIndex, lastActiveIndex: this._lastActiveIndex };
-      if (pre) {
-        return this.preChangeHook(params);
+      const canceled = this.preChangeHook({ activeIndex, lastActiveIndex: this._lastActiveIndex });
+      if (!canceled) {
+        this._lastActiveIndex = activeIndex;
+        this._prechanged = true;
       }
-      this._lastActiveIndex = activeIndex;
-      return this.postChangeHook(params);
+      return canceled;
+    }
+  }
+
+  _tryPostChange(scroll) {
+    if (this._prechanged) {
+      this._prechanged = false;
+      return this.postChangeHook({
+        activeIndex: this.getActiveIndex(scroll),
+        lastActiveIndex: this._lastActiveIndex
+      });
     }
   }
 
