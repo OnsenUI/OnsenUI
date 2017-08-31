@@ -19,8 +19,8 @@ export class ItemContext {
  * @directive OnsLazyRepeat
  * @selector [ons-lazy-repeat]
  * @description
- *   [en]Angular 2 directive for `<ons-lazy-repeat>` component.[/en]
- *   [en]`<ons-lazy-repeat>`要素と同じ機能を提供するAngular 2ディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-lazy-repeat>` component.[/en]
+ *   [en]`<ons-lazy-repeat>`要素と同じ機能を提供するAngularディレクティブです。[/en]
  * @example
  *   <ons-list>
  *     <ons-list-item *onsLazyRepeat="let item of items; let i = index">
@@ -45,7 +45,7 @@ export class OnsLazyRepeat implements OnDestroy {
   /**
    * @input onsLazyRepeat
    * @desc
-   *   [en]Render infinite lists with "let of" syntax in Angular 2.[/en]
+   *   [en]Render infinite lists with "let of" syntax in Angular.[/en]
    *   [ja]let of式を指定します。[/ja]
    * @example
    *  <ons-list>
