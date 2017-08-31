@@ -39,3 +39,7 @@ limitations under the License.
   width: 100%;
   position: relative !important;
 }
+
+.ons-swiper-tabbar .tabbar--material__button:after {
+  display: none;
+}

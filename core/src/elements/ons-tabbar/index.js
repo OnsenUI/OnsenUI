@@ -27,6 +27,7 @@ import contentReady from '../../ons/content-ready';
 
 const scheme = {
   '.tabbar__content': 'tabbar--*__content',
+  '.tabbar__border': 'tabbar--*__border',
   '.tabbar': 'tabbar--*'
 };
 
@@ -171,14 +172,17 @@ export default class TabbarElement extends BaseElement {
    *   [ja]この属性がある時、タブバーをスワイプやドラッグで移動できるようになります。[/ja]
    */
 
+  /**
+   * @attribute tab-border
+   * @description
+   *   [en]If this attribute is set the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
+   *   [ja][/ja]
+   */
+
 
   constructor() {
     super();
-
-    contentReady(this, () => {
-      this._compile();
-
-    });
+    contentReady(this, () => this._compile());
   }
 
   connectedCallback() {
@@ -189,8 +193,12 @@ export default class TabbarElement extends BaseElement {
         getAutoScrollRatio: () => .2,
         isAutoScrollable: () => true,
         preChangeHook: this._onPreChange.bind(this),
-        postChangeHook: this._onPostChange.bind(this)
+        postChangeHook: this._onPostChange.bind(this),
+        refreshHook: this._onRefresh.bind(this),
+        scrollHook: this._onScroll.bind(this)
       });
+
+      this._onRefresh();
 
       contentReady(this, () => this._swiper.init({ swipeable: this.hasAttribute('swipeable') }));
     }
@@ -241,6 +249,20 @@ export default class TabbarElement extends BaseElement {
     return canceled
   }
 
+  _onScroll(index, options) {
+    if (options && options.timing) {
+      this._tabbarBorder.style.transition = `all ${options.duration}s ${options.timing}`;
+    }
+    this._tabbarBorder.style.transform = `translate3d(${index * 100}%, 0, 0)`;
+    this._onSwipe && this._onSwipe(index, options || {});
+  }
+
+  _onRefresh() {
+    this._tabWidth = this.offsetWidth / this.tabs.length;
+    this._tabbarBorder.style.width = this._tabWidth + 'px';
+    this._tabbarBorder.style.display = this.hasAttribute('tab-border') || platform.isAndroid() ? 'block' : 'none';
+  }
+
   get _tabbarElement() {
     return util.findChild(this, '.tabbar');
   }
@@ -272,6 +294,10 @@ export default class TabbarElement extends BaseElement {
     if (tabbar.children.length > activeIndex && !util.findChild(tabbar, '[active]')) {
       tabbar.children[activeIndex].setAttribute('active', '');
     }
+
+    this._tabbarBorder = util.create('.tabbar__border');
+    tabbar.appendChild(this._tabbarBorder);
+    tabbar.classList.add('ons-swiper-tabbar'); // Hides material border
 
     !content.children[0] && content.appendChild(document.createElement('div'));
     content.appendChild = content.appendChild.bind(content.children[0]);
@@ -319,7 +345,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   get tabs() {
-    return util.arrayFrom(this._tabbarElement.children);
+    return Array.prototype.filter.call(this._tabbarElement.children, e => e.tagName === 'ONS-TAB');
   }
 
   /**
@@ -365,6 +391,7 @@ export default class TabbarElement extends BaseElement {
     const nextPage = nextTab.pageElement;
     return (nextPage ? Promise.resolve(nextPage) : nextTab.loaded)
       .then(nextPage => this._swiper.setActiveIndex(nextIndex, {
+        reject: true,
         ...options,
         animation: prevTab && nextPage ? options.animation || this.getAttribute('animation') : 'none',
         animationOptions: util.extend(
@@ -427,6 +454,24 @@ export default class TabbarElement extends BaseElement {
   }
 
   /**
+   * @property onSwipe
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *   [ja][/ja]
+   */
+  get onSwipe() {
+    return this._onSwipe;
+  }
+
+  set onSwipe(value) {
+    if (!(value instanceof Function)) {
+      throw new Error(`'onSwipe' must be a function.`)
+    }
+    this._onSwipe = value;
+  }
+
+  /**
    * @method getActiveTabIndex
    * @signature getActiveTabIndex()
    * @return {Number}
@@ -463,7 +508,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'position', 'swipeable'];
+    return ['modifier', 'position', 'swipeable', 'tab-border'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -475,6 +520,8 @@ export default class TabbarElement extends BaseElement {
       this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
+    } else if (name === 'tab-border') {
+      this._tabbarBorder && this._onRefresh();
     }
   }
 
