@@ -42,6 +42,7 @@ const rewritables = {
 };
 
 const nullPage = internal.nullElement;
+const lerp = (x0, x1, t) => (1 - t) * x0 + t * x1;
 
 /**
  * @element ons-tabbar
@@ -51,6 +52,15 @@ const nullPage = internal.nullElement;
  *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
  * @tutorial vanilla/Reference/tabbar
+ * @modifier material
+ *   [en]A tabbar in Material Design.[/en]
+ *   [ja][/ja]
+ * @modifier autogrow
+ *   [en]Tabs automatically grow depending on their content instead of having a fixed width.[/en]
+ *   [ja][/ja]
+ * @modifier top-border
+ *   [en]Shows a static border-bottom in tabs for iOS top tabbars.[/en]
+ *   [ja][/ja]
  * @guide multiple-page-navigation
  *  [en]Managing multiple pages.[/en]
  *  [ja]Managing multiple pages[/ja]
@@ -179,6 +189,13 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
 
+  /**
+   * @attribute modifier
+   * @type {String}
+   * @description
+   *   [en]The appearance of the tabbar.[/en]
+   *   [ja]タブバーの表現を指定します。[/ja]
+   */
 
   constructor() {
     super();
@@ -210,15 +227,13 @@ export default class TabbarElement extends BaseElement {
     if (this._swiper && this._swiper.initialized) {
       this._swiper.dispose();
       this._swiper = null;
+      this._tabbarBorder = null;
+      this._tabsRect = null;
     }
   }
 
   _normalizeEvent(event) {
-    return {
-      ...event,
-      index: event.activeIndex,
-      tabItem: this.tabs[event.activeIndex]
-    };
+    return { ...event, index: event.activeIndex, tabItem: this.tabs[event.activeIndex] };
   }
 
   _onPostChange(event) {
@@ -249,17 +264,24 @@ export default class TabbarElement extends BaseElement {
     return canceled
   }
 
-  _onScroll(index, options) {
-    if (options && options.timing) {
-      this._tabbarBorder.style.transition = `all ${options.duration}s ${options.timing}`;
+  _onScroll(index, options = {}) {
+    this._tabbarBorder.style.transition = `all ${options.duration || 0}s ${options.timing || ''}`;
+
+    if (this._autogrow) {
+      const a = Math.floor(index), b = Math.ceil(index), r = index % 1;
+      this._tabbarBorder.style.width = lerp(this._tabsRect[a].width, this._tabsRect[b].width, r) + 'px';
+      this._tabbarBorder.style.transform = `translate3d(${lerp(this._tabsRect[a].left, this._tabsRect[b].left, r)}px, 0, 0)`;
+    } else {
+      this._tabbarBorder.style.transform = `translate3d(${index * 100}%, 0, 0)`;
     }
-    this._tabbarBorder.style.transform = `translate3d(${index * 100}%, 0, 0)`;
-    this._onSwipe && this._onSwipe(index, options || {});
+
+    this._onSwipe && this._onSwipe(index, options);
   }
 
   _onRefresh() {
-    this._tabWidth = this.offsetWidth / this.tabs.length;
-    this._tabbarBorder.style.width = this._tabWidth + 'px';
+    this._autogrow = util.hasModifier(this, 'autogrow');
+    this._tabsRect = this.tabs.map(tab => tab.getBoundingClientRect());
+    this._tabbarBorder.style.width = this._tabsRect[this.getActiveTabIndex()].width + 'px';
     this._tabbarBorder.style.display = this.hasAttribute('tab-border') || platform.isAndroid() ? 'block' : 'none';
   }
 
@@ -520,8 +542,6 @@ export default class TabbarElement extends BaseElement {
       this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
-    } else if (name === 'tab-border') {
-      this._tabbarBorder && this._onRefresh();
     }
   }
 
