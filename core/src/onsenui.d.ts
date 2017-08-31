@@ -709,6 +709,12 @@ declare namespace ons {
      * @description true if the tabbar is swipeable.
      **/
     swipeable: boolean;
+    /**
+     * @param {Number} index Decimal index of the current swipe.
+     * @param {Object} animationOptions Object containing duration and timing.
+     * @description Hook called whenever the user slides the tabbar.
+     **/
+    onSwipe: Function;
   }
 
   /**
