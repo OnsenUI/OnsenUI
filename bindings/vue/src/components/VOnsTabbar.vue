@@ -42,7 +42,7 @@
     watch: {
       index() {
         if (this.index !== this.$el.getActiveTabIndex()) {
-          this.$el.setActiveTab(this.index, this.options);
+          this.$el.setActiveTab(this.index, { reject: false, ...this.options });
         }
       }
     }
