@@ -168,7 +168,7 @@ describe('Swiper', () => {
       swiper.preChangeHook = () => true;
       const spy = chai.spy.on(swiper, 'preChangeHook');
 
-      return expect(swiper.setActiveIndex(1)).to.eventually.be.rejected.then(() => {
+      return expect(swiper.setActiveIndex(1, { reject: true })).to.eventually.be.rejected.then(() => {
         expect(spy).to.have.been.called.once;
         expect(swiper.getActiveIndex()).to.equal(0);
       });

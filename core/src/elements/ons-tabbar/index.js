@@ -325,7 +325,7 @@ export default class TabbarElement extends BaseElement {
       tabbar.children[activeIndex].setAttribute('active', '');
     }
 
-    this._tabbarBorder = util.create('.tabbar__border');
+    this._tabbarBorder = util.findChild(tabbar, '.tabbar__border') || util.create('.tabbar__border');
     tabbar.appendChild(this._tabbarBorder);
     tabbar.classList.add('ons-swiper-tabbar'); // Hides material border
 
