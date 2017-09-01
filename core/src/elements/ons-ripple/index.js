@@ -162,8 +162,8 @@ export default class RippleElement extends BaseElement {
         throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
       }
     } else {
-      x = (e.clientX || e.changedTouches[0].clientX) - b.left;
-      y = (e.clientY || e.changedTouches[0].clientY) - b.top;
+      x = (typeof e.clientX === 'number' ? e.clientX : e.changedTouches[0].clientX) - b.left;
+      y = (typeof e.clientY === 'number' ? e.clientY : e.changedTouches[0].clientY) - b.top;
       h = Math.max(y, b.height - y);
       w = Math.max(x, b.width - x);
 
