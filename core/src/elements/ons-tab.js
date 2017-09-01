@@ -329,6 +329,10 @@ export default class TabElement extends BaseElement {
           tabbar.setAttribute('activeIndex', index);
         }
 
+        if (index === tabbar.tabs.length - 1) {
+          tabbar._onRefresh();
+        }
+
         TabbarElement.rewritables.ready(tabbar, () => {
           const pageTarget = this.page || this.getAttribute('page');
           if (!this.pageElement && pageTarget) {

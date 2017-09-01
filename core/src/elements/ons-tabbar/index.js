@@ -215,10 +215,7 @@ export default class TabbarElement extends BaseElement {
         scrollHook: this._onScroll.bind(this)
       });
 
-      contentReady(this, () => {
-        this._onRefresh();
-        this._swiper.init({ swipeable: this.hasAttribute('swipeable') })
-      });
+      contentReady(this, () => this._swiper.init({ swipeable: this.hasAttribute('swipeable') }));
     }
 
     contentReady(this, () => this._updatePosition());
