@@ -50,7 +50,7 @@
 
       var swipe = function(from, to) {
         browser.actions()
-          .mouseMove(pages[from], {x: 100, y: 100})
+          .mouseMove(pages[from], {x: 300, y: 100})
           .mouseDown()
           .mouseMove({x: 520 * Math.sign(from - to), y: 0})
           .mouseUp()
