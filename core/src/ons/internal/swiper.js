@@ -238,9 +238,14 @@ export default class SwipeReveal {
   }
 
   _startMomentumScroll(scroll, event) {
-    const matchesDirection = event.gesture.interimDirection === this.dM.dir[Math.min(Math.sign(this._getDelta(event)) + 1, 1)];
-    scroll = this._getAutoScroll(scroll, this._getVelocity(event), matchesDirection);
-    this._changeTo(scroll, { animationOptions: { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
+    const velocity = this._getVelocity(event),
+      matchesDirection = event.gesture.interimDirection === this.dM.dir[Math.min(Math.sign(this._getDelta(event)) + 1, 1)];
+
+    const nextScroll = this._getAutoScroll(scroll, velocity, matchesDirection);
+    let duration = Math.abs(nextScroll - scroll) / (velocity + 0.01) / 1000;
+    duration = Math.min(.25, Math.max(.1, duration));
+
+    this._changeTo(nextScroll, { animationOptions: { duration, timing: 'cubic-bezier(.4, .7, .5, 1)' } });
   }
 
   _killOverScroll(scroll) {
