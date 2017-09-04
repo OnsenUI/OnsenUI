@@ -16,7 +16,7 @@ describe('Swiper', () => {
       </div>
     `);
     document.body.appendChild(element);
-    swiper = new window.ons._internal.Swiper({ getElement: () => element });
+    swiper = new window.ons._internal.Swiper({ getElement: () => element, getAutoScrollRatio: r => r });
     swiper.init();
 
     setImmediate(done);
@@ -113,21 +113,20 @@ describe('Swiper', () => {
 
   describe('#getAutoScrollRatio()', () => {
     it('only accepts values between 0.0 and 1.0', () => {
-      const ratio = r => ({ getAutoScrollRatio: () => r });
-      expect(() => swiper.getAutoScrollRatio(ratio(-1))).to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(1.01))).to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(-0.01))).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(-1)).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1.01)).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(-0.01)).to.throw(Error);
 
-      expect(() => swiper.getAutoScrollRatio(ratio(1.0))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0.0))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0.5))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(1))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0))).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1.0)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0.0)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0.5)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0)).not.to.throw(Error);
 
       // Fallbacks to default value
-      expect(() => swiper.getAutoScrollRatio(ratio('2.0'))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(null))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(NaN))).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio('2.0')).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(null)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(NaN)).not.to.throw(Error);
     });
 
     it('uses \'0.5\' by default', () => {
@@ -303,9 +302,9 @@ describe('Swiper', () => {
         preventDefault: () => {}
       };
 
-      const scroll = swiper._scroll;
-      swiper._startMomentumScroll(scroll, ev);
-      expect(swiper._scroll).not.to.equal(scroll);
+      const fullScroll = document.body.offsetWidth;
+      swiper._startMomentumScroll(2/3 * fullScroll, ev);
+      expect(swiper._scroll).to.equal(fullScroll);
     });
   });
 });
