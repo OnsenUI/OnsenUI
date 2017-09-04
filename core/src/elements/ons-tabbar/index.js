@@ -430,7 +430,7 @@ export default class TabbarElement extends BaseElement {
         ...options,
         animation: prevTab && nextPage ? options.animation || this.getAttribute('animation') : 'none',
         animationOptions: util.extend(
-          { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
+          { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
           this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {},
           options.animationOptions || {}
         )

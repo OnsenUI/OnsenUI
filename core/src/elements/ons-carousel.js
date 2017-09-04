@@ -347,7 +347,7 @@ export default class CarouselElement extends BaseElement {
 
     options.animation = options.animation || this.getAttribute('animation');
     options.animationOptions = util.extend(
-      { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' },
+      { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
       options.animationOptions || {},
       this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
     );
