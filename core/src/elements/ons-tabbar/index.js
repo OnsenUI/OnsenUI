@@ -535,10 +535,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _destroy() {
-    const tabs = this.tabs;
-    while (tabs[0]) {
-      tabs[0].remove();
-    }
+    this.tabs.forEach(tab => tab.remove());
     this.remove();
   }
 
