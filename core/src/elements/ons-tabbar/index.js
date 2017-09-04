@@ -207,7 +207,7 @@ export default class TabbarElement extends BaseElement {
       this._swiper = new Swiper({
         getElement: () => this._contentElement,
         getInitialIndex: () => this.getAttribute('activeIndex'),
-        getAutoScrollRatio: () => .2,
+        getAutoScrollRatio: this._getAutoScrollRatio.bind(this),
         isAutoScrollable: () => true,
         preChangeHook: this._onPreChange.bind(this),
         postChangeHook: this._onPostChange.bind(this),
@@ -291,6 +291,11 @@ export default class TabbarElement extends BaseElement {
         this._tabbarBorder.style.width = this._tabsRect[index].width + 'px';
       }
     }
+  }
+
+  _getAutoScrollRatio(matches, velocity, size) {
+    const ratio = .6 + velocity * 1.2 * (matches ? -1 : 1);
+    return Math.min(1, Math.max(0, ratio));
   }
 
   get _tabbarElement() {

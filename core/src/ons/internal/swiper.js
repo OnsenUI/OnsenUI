@@ -6,11 +6,13 @@ const directionMap = {
   vertical: {
     axis: 'Y',
     size: 'height',
+    dir: ['up', 'down'],
     t3d: ['0px, ', 'px, 0px']
   },
   horizontal: {
     axis: 'X',
     size: 'width',
+    dir: ['left', 'right'],
     t3d: ['', 'px, 0px, 0px']
   }
 };
@@ -32,8 +34,8 @@ export default class SwipeReveal {
     this.overScrollHook = params.overScrollHook || FALSE;
     this.scrollHook = params.scrollHook;
     this.itemSize = params.itemSize || '100%';
-    this.getAutoScrollRatio = ({ getAutoScrollRatio } = params) => {
-      let ratio = getAutoScrollRatio && getAutoScrollRatio();
+    this.getAutoScrollRatio = (...args) => {
+      let ratio = params.getAutoScrollRatio && params.getAutoScrollRatio(...args);
       ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
       if (ratio < 0.0 || ratio > 1.0) {
         throw new Error('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
@@ -203,6 +205,8 @@ export default class SwipeReveal {
         consume && consume();
         event.consumed = true;
         this._started = true; // Avoid starting drag from outside
+        this._velocity = 0;
+        this._eventCount = 0;
       }
     }
   }
@@ -234,15 +238,14 @@ export default class SwipeReveal {
   }
 
   _startMomentumScroll(scroll, event) {
-    const duration = 0.3;
-    const velocity = duration * 100 * this._getVelocity(event);
-    scroll = this._getAutoScroll(scroll + velocity * (Math.sign(this._getDelta(event)) || 1));
-    this._changeTo(scroll, { animationOptions: { duration, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
+    const matchesDirection = event.gesture.interimDirection === this.dM.dir[Math.min(Math.sign(this._getDelta(event)) + 1, 1)];
+    scroll = this._getAutoScroll(scroll, this._getVelocity(event), matchesDirection);
+    this._changeTo(scroll, { animationOptions: { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' } });
   }
 
   _killOverScroll(scroll) {
     this._scroll = scroll;
-    const direction = [['left', 'right'], ['up', 'down']][Number(this.isVertical())][Number(scroll > 0)];
+    const direction = this.dM.dir[Number(scroll > 0)];
     const killOverScroll = () => this._changeTo(scroll, { animationOptions: { duration: .4, timing: 'cubic-bezier(.1, .4, .1, 1)' } });
     this.overScrollHook({ direction, killOverScroll }) || killOverScroll();
   }
@@ -293,7 +296,7 @@ export default class SwipeReveal {
     return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
   }
 
-  _getAutoScroll(scroll) {
+  _getAutoScroll(scroll, velocity, matchesDirection) {
     const max = this.maxScroll,
       offset = this._offset,
       size = this.itemNumSize;
@@ -316,7 +319,7 @@ export default class SwipeReveal {
     const lastScroll = this._lastActiveIndex * size + offset;
     const scrollRatio = Math.abs(scroll - lastScroll) / size;
 
-    if (scrollRatio <= this.getAutoScrollRatio()) {
+    if (scrollRatio <= this.getAutoScrollRatio(matchesDirection, velocity, size)) {
       result = lastScroll;
     } else {
       if (scrollRatio < 1.0 && arr[0] === lastScroll && arr.length > 1) {
