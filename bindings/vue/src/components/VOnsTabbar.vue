@@ -11,6 +11,7 @@
       <slot>
         <v-ons-tab v-for="tab in tabs" v-bind="tab" :key="_tabKey(tab)"></v-ons-tab>
       </slot>
+      <div class="tabbar__border"></div>
     </div>
   </ons-tabbar>
 </template>
