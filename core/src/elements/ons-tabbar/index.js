@@ -353,11 +353,13 @@ export default class TabbarElement extends BaseElement {
     const page = util.findParent(this, 'ons-page');
     if (page) {
       contentReady(page, () => {
-        this.style.top = top ? window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') : '';
-
+        let p = 0;
         if (page.children[0] && util.match(page.children[0], 'ons-toolbar')) {
           action(page.children[0], 'noshadow');
+          p = 1; // Visual fix for some devices
         }
+
+        this.style.top = top ? parseInt(window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top'), 10) - p + 'px' : '';
       });
     }
 
