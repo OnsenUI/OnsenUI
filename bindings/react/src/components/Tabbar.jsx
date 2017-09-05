@@ -95,6 +95,7 @@ class Tabbar extends BasicComponent {
         </div>
         <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (props.position === 'top' ? ' tabbar--top' : '')}>
           {tabs.map((tab) => tab.tab)}
+          <div className='tabbar__border'></div>
         </div>
       </ons-tabbar>
     );
