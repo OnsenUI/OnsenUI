@@ -10,7 +10,7 @@ describe('ons._animationOptionsParser', () => {
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(0);
 
-    result = ons._util.animationOptionsParse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, as :\' a\'}');
+    result = ons._util.animationOptionsParse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, \'as\' :\' a\'}');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(4);
     expect(result._v).to.equal(false);
@@ -55,7 +55,6 @@ describe('ons._animationOptionsParser', () => {
     expect(() => ons._util.animationOptionsParse('q:1')).to.throw(Error);
     expect(() => ons._util.animationOptionsParse('{@q:1}')).to.throw(Error);
     expect(() => ons._util.animationOptionsParse('{2:1}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{\'q\':1}')).to.throw(Error);
     expect(() => ons._util.animationOptionsParse('{:1}')).to.throw(Error);
     expect(() => ons._util.animationOptionsParse('{x: {w:1}')).to.throw(Error);
     expect(() => ons._util.animationOptionsParse('{x: [1,2}')).to.throw(Error);

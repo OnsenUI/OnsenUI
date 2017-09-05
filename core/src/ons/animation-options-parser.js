@@ -107,6 +107,7 @@ const parseObject = (string) => {
        || (token !== ':' && token !== ',' && (previousToken && previousToken !== ',' && previousToken !== ':'))) {
       error(token, string, originalString);
     } else if (token === ':' && readingKey && previousToken) {
+      previousToken = isQuotedString(previousToken) ? unwrap(previousToken) : previousToken;
       if (isValidKey(previousToken)) {
         key = previousToken;
         readingKey = false;
