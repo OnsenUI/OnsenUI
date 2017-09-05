@@ -48,11 +48,11 @@
         element(by.id('page3'))
       ];
 
-      var swipe = function(from, to) {
+      var swipe = function(from, to, inc) {
         browser.actions()
           .mouseMove(pages[from], {x: 300, y: 100})
           .mouseDown()
-          .mouseMove({x: 520 * Math.sign(from - to), y: 0})
+          .mouseMove({x: inc * Math.sign(from - to), y: 0})
           .mouseUp()
           .perform();
         browser.waitForAngular();
@@ -64,29 +64,32 @@
         });
       };
 
+      browser.executeScript('return document.body.clientWidth').then(function(clientWidth) {
+        var inc = clientWidth * 0.9;
 
-      // Store initial position.
-      var initialPosition = pages[0].getLocation();
-      var currentIndex = element(by.id('current-index'));
-      expect(currentIndex.getText()).toBe('0');
+        // Store initial position.
+        var initialPosition = pages[0].getLocation();
+        var currentIndex = element(by.id('current-index'));
+        expect(currentIndex.getText()).toBe('0');
 
-      // Swipe left
-      swipe(0, 1);
-      expect(currentIndex.getText()).toBe('1');
-      expect(initialPosition).not.toEqual(pages[0].getLocation());
+        // Swipe left
+        swipe(0, 1, inc);
+        expect(currentIndex.getText()).toBe('1');
+        expect(initialPosition).not.toEqual(pages[0].getLocation());
 
-      // Swipe left
-      swipe(1, 2);
-      expect(currentIndex.getText()).toBe('2');
+        // Swipe left
+        swipe(1, 2, inc);
+        expect(currentIndex.getText()).toBe('2');
 
-      // Swipe right
-      swipe(2, 1);
-      expect(currentIndex.getText()).toBe('1');
+        // Swipe right
+        swipe(2, 1, inc);
+        expect(currentIndex.getText()).toBe('1');
 
-      // Swipe right
-      swipe(1, 0);
-      expect(currentIndex.getText()).toBe('0');
-      expect(initialPosition).toEqual(pages[0].getLocation());
+        // Swipe right
+        swipe(1, 0, inc);
+        expect(currentIndex.getText()).toBe('0');
+        expect(initialPosition).toEqual(pages[0].getLocation());
+      });
     });
 
     it('should not reload persistent tabs', function() {
