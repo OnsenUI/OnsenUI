@@ -44,7 +44,11 @@ internal.normalizePageHTML = html => ('' + html).trim();
 
 internal.waitDOMContentLoaded = callback => {
   if (window.document.readyState === 'loading' || window.document.readyState == 'uninitialized') {
-    window.document.addEventListener('DOMContentLoaded', callback);
+    const wrappedCallback = () => {
+      callback();
+      window.document.removeEventListener('DOMContentLoaded', wrappedCallback);
+    };
+    window.document.addEventListener('DOMContentLoaded', wrappedCallback);
   } else {
     setImmediate(callback);
   }
@@ -56,15 +60,12 @@ internal.autoStatusBarFill = action => {
       action();
     }
     document.removeEventListener('deviceready', onReady);
-    document.removeEventListener('DOMContentLoaded', onReady);
   };
 
   if (typeof device === 'object') {
     document.addEventListener('deviceready', onReady);
   } else if (['complete', 'interactive'].indexOf(document.readyState) === -1) {
-    document.addEventListener('DOMContentLoaded', function() {
-      onReady();
-    });
+    internal.waitDOMContentLoaded(onReady);
   } else {
     onReady();
   }
@@ -98,7 +99,7 @@ window.document.addEventListener('_templateloaded', function(e) {
   }
 }, false);
 
-window.document.addEventListener('DOMContentLoaded', function() {
+internal.waitDOMContentLoaded(function() {
   register('script[type="text/ons-template"]');
   register('script[type="text/template"]');
   register('script[type="text/ng-template"]');
@@ -110,7 +111,7 @@ window.document.addEventListener('DOMContentLoaded', function() {
       internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent || templates[i].content);
     }
   }
-}, false);
+});
 
 /**
  * @param {String} page
@@ -118,7 +119,7 @@ window.document.addEventListener('DOMContentLoaded', function() {
  */
 internal.getTemplateHTMLAsync = function(page) {
   return new Promise((resolve, reject) => {
-    setImmediate(() => {
+    internal.waitDOMContentLoaded(() => {
       const cache = internal.templateStore.get(page);
       if (cache) {
         if (cache instanceof DocumentFragment) {
