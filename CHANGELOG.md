@@ -17,6 +17,7 @@ dev
  * templates: Fixed a bug where `script` tags might not be ready on time.
  * ons-navigator: Fixed [#2167](https://github.com/OnsenUI/OnsenUI/issues/2167).
  * ons-tabbar: Hide 1px line between toolbar and top tabbar in some Android devices.
+ * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
 
 v2.5.3
 ----
