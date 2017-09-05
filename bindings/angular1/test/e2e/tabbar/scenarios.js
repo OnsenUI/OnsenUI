@@ -48,14 +48,16 @@
         element(by.id('page3'))
       ];
 
-      var swipe = function(from, to, inc) {
+      var swipe = function(from, to, width) {
         browser.actions()
-          .mouseMove(pages[from], {x: 300, y: 100})
+          .mouseMove(pages[from], {x: width/2, y: 100})
           .mouseDown()
-          .mouseMove({x: inc * Math.sign(from - to), y: 0})
+          .mouseMove({x: width * 0.9 * Math.sign(from - to), y: 0})
           .mouseUp()
           .perform();
         browser.waitForAngular();
+
+        browser.sleep(300);
 
         browser.wait(function() {
           return pages[to].getLocation().then(function(loc) {
@@ -64,29 +66,27 @@
         });
       };
 
-      browser.executeScript('return document.body.clientWidth').then(function(clientWidth) {
-        var inc = clientWidth * 0.9;
-
+      browser.executeScript('return document.body.clientWidth').then(function(width) {
         // Store initial position.
         var initialPosition = pages[0].getLocation();
         var currentIndex = element(by.id('current-index'));
         expect(currentIndex.getText()).toBe('0');
 
         // Swipe left
-        swipe(0, 1, inc);
+        swipe(0, 1, width);
         expect(currentIndex.getText()).toBe('1');
         expect(initialPosition).not.toEqual(pages[0].getLocation());
 
         // Swipe left
-        swipe(1, 2, inc);
+        swipe(1, 2, width);
         expect(currentIndex.getText()).toBe('2');
 
         // Swipe right
-        swipe(2, 1, inc);
+        swipe(2, 1, width);
         expect(currentIndex.getText()).toBe('1');
 
         // Swipe right
-        swipe(1, 0, inc);
+        swipe(1, 0, width);
         expect(currentIndex.getText()).toBe('0');
         expect(initialPosition).toEqual(pages[0].getLocation());
       });
