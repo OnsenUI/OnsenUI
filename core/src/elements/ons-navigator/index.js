@@ -321,9 +321,15 @@ export default class NavigatorElement extends BaseElement {
 
     this._initialized = true;
 
+    const deferred = util.defer();
+    this.loaded = deferred.promise;
+
     rewritables.ready(this, () => {
+      const show = !util.hasAnyComponentAsParent(this);
+      const options = { animation: 'none', show };
+
       if (this.pages.length === 0 && this._getPageTarget()) {
-        this.pushPage(this._getPageTarget(), {animation: 'none'});
+        this.pushPage(this._getPageTarget(), options).then(() => deferred.resolve());
       } else if (this.pages.length > 0) {
         for (var i = 0; i < this.pages.length; i++) {
           if (this.pages[i].nodeName !== 'ONS-PAGE') {
@@ -334,7 +340,8 @@ export default class NavigatorElement extends BaseElement {
         if (this.topPage) {
           contentReady(this.topPage, () =>
             setTimeout(() => {
-              this.topPage._show();
+              deferred.resolve();
+              show && this.topPage._show();
               this._updateLastPageBackButton();
             }, 0)
           );
@@ -342,7 +349,9 @@ export default class NavigatorElement extends BaseElement {
       } else {
         contentReady(this, () => {
           if (this.pages.length === 0 && this._getPageTarget()) {
-            this.pushPage(this._getPageTarget(), {animation: 'none'});
+            this.pushPage(this._getPageTarget(), options).then(() => deferred.resolve());
+          } else {
+            deferred.resolve();
           }
         });
       }
@@ -583,7 +592,7 @@ export default class NavigatorElement extends BaseElement {
         const done = () => {
           this._isRunning = false;
 
-          setImmediate(() => enterPage._show());
+          options.show !== false && setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
           if (typeof options.callback === 'function') {
@@ -982,15 +991,11 @@ export default class NavigatorElement extends BaseElement {
   }
 
   _show() {
-    if (this.topPage) {
-      this.topPage._show();
-    }
+    this.loaded.then(() => this.topPage && this.topPage._show())
   }
 
   _hide() {
-    if (this.topPage) {
-      this.topPage._hide();
-    }
+    this.topPage && this.topPage._hide()
   }
 
   _destroy() {
