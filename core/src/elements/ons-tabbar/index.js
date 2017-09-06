@@ -335,6 +335,7 @@ export default class TabbarElement extends BaseElement {
     tabbar.classList.add('ons-swiper-tabbar'); // Hides material border
 
     !content.children[0] && content.appendChild(document.createElement('div'));
+    !content.children[1] && content.appendChild(document.createElement('div'));
     content.appendChild = content.appendChild.bind(content.children[0]);
     content.insertBefore = content.insertBefore.bind(content.children[0]);
 

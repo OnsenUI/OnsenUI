@@ -52,13 +52,16 @@ export default class SwipeReveal {
 
   init({ swipeable, autoRefresh } = {}) {
     this.initialized = true;
+    this.target = this.getElement().children[0];
+    this.blocker = this.getElement().children[1];
+    if (!this.target || !this.blocker) {
+      throw new Error('Expected "target" and "blocker" elements to exist before initializing Swiper.');
+    }
+
     // Add classes
     this.getElement().classList.add('ons-swiper');
-    this.target = this.getElement().children[0];
-    if (!this.target) {
-      throw new Error('Expected "target" element to exist before initializing Swiper.')
-    }
     this.target.classList.add('ons-swiper-target');
+    this.blocker.classList.add('ons-swiper-blocker');
 
     // Setup listeners
     this._gestureDetector = new GestureDetector(this.target, { dragMinDistance: 1, dragLockToAxis: true });
@@ -71,7 +74,7 @@ export default class SwipeReveal {
     this._scroll = this._offset = this._lastActiveIndex = 0;
     this._updateLayout();
     this._setupInitialIndex();
-    setImmediate(() => this._setupInitialIndex());
+    setImmediate(() => this.initialized && this._setupInitialIndex());
 
     // Fix rendering glitch on Android 4.1
     if (this.offsetHeight === 0) {
@@ -80,12 +83,12 @@ export default class SwipeReveal {
   }
 
   dispose() {
+    this.initialized = false;
     this.updateSwipeable(false);
-    this._gestureDetector && this._gestureDetector.dispose();
-    this._gestureDetector = null;
-
     this.updateAutoRefresh(false);
-    this._mutationObserver = null;
+
+    this._gestureDetector && this._gestureDetector.dispose();
+    this.target = this.blocker = this._gestureDetector = this._mutationObserver = null;
 
     this.resizeOff();
   }
@@ -185,6 +188,10 @@ export default class SwipeReveal {
     this.refresh();
   }
 
+  toggleBlocker(block) {
+    this.blocker.style.pointerEvents = block ? 'auto' : 'none';
+  }
+
   _canConsumeGesture(gesture) {
     const d = gesture.direction;
     const isFirst = this._scroll === 0 && !this.isOverScrollable();
@@ -205,8 +212,7 @@ export default class SwipeReveal {
         consume && consume();
         event.consumed = true;
         this._started = true; // Avoid starting drag from outside
-        this._velocity = 0;
-        this._eventCount = 0;
+        this.toggleBlocker(true);
       }
     }
   }
@@ -215,10 +221,10 @@ export default class SwipeReveal {
     if (!event.gesture || this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
       return;
     }
-    this._continued = true; // Fix for random 'dragend' without 'drag'
 
+    this._continued = true; // Fix for random 'dragend' without 'drag'
     event.stopPropagation();
-    event.gesture.preventDefault();
+
     this._scrollTo(this._scroll - this._getDelta(event), { throttle: true });
   }
 
@@ -235,6 +241,7 @@ export default class SwipeReveal {
     const scroll = this._scroll - this._getDelta(event);
     const normalizedScroll = this._normalizeScroll(scroll);
     scroll === normalizedScroll ? this._startMomentumScroll(scroll, event) : this._killOverScroll(normalizedScroll);
+    this.toggleBlocker(false);
   }
 
   _startMomentumScroll(scroll, event) {
