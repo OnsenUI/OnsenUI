@@ -222,6 +222,8 @@ export default class CarouselElement extends BaseElement {
       this.appendChild(target);
     }
 
+    !this.children[1] && this.appendChild(document.createElement('div'));
+
     this.appendChild = this.appendChild.bind(target);
     this.insertBefore = this.insertBefore.bind(target);
   }

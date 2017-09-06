@@ -25,8 +25,9 @@ describe('OnsCarouselElement', () => {
   });
 
   it('compiles', () => {
-    expect(carousel.children.length).to.equal(1);
+    expect(carousel.children.length).to.equal(2);
     expect(carousel.children[0].children.length).to.equal(3);
+    expect(carousel.children[1].children.length).to.equal(0);
   });
 
   describe('attribute swipeable', () => {
