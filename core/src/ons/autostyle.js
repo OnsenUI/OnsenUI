@@ -119,8 +119,10 @@ const prepare = (element, force) => {
 };
 
 const mapModifier = (modifier, element, force) => {
-  const p = getPlatform(element, force);
-  return p && modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
+  if (getPlatform(element, force)) {
+    return modifier.split(/\s+/).map(m => modifiersMap.hasOwnProperty(m) ? modifiersMap[m] : m).join(' ');
+  }
+  return modifier;
 };
 
 const restore = element => getPlatform(element) === 'android' && util.addModifier(element, 'material');

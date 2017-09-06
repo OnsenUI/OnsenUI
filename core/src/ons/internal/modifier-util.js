@@ -18,8 +18,6 @@ limitations under the License.
 import util from '../util.js';
 import autoStyle from '../autostyle.js';
 
-const isMD = m => /(^|\s+)material($|\s+)/i.test(m);
-
 export default class ModifierUtil {
   /**
    * @param {String} last

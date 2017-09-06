@@ -362,6 +362,19 @@ util.toggleModifier = (...args) => {
   toggle ? util.addModifier(...args) : util.removeModifier(...args)
 };
 
+/**
+ * @param {Element} el
+ * @param {String} defaultClass
+ */
+util.restoreClass = (el, defaultClass) => {
+  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  if (el.hasAttribute('modifier')) {
+    const modifier = el.getAttribute('modifier');
+    el.setAttribute('modifier', '');
+    el.setAttribute('modifier', autoStyle.mapModifier(modifier, el));
+  }
+}
+
 // TODO: FIX
 util.updateParentPosition = (el) => {
   if (!el._parentUpdated && el.parentElement) {
