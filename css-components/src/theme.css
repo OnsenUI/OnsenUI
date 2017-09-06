@@ -69,9 +69,9 @@
   --material-text-input-inactive-color: #afafaf;
   --material-dialog-background-color: #ffffff;
   --material-alert-dialog-background-color: #ffffff;
-  --material-alert-dialog-title-color: #212121;
-  --material-alert-dialog-content-color: #727272;
-  --material-alert-dialog-button-color: #1e88e5;
+  --material-alert-dialog-title-color: #31313a;
+  --material-alert-dialog-content-color: rgba(49, 49, 58, 0.85);
+  --material-alert-dialog-button-color: #37474f;
   --material-progress-bar-primary-color: #37474f;
   --material-progress-bar-secondary-color: #548ba7;
   --material-progress-bar-background-color: transparent;
