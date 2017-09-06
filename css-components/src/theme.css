@@ -48,21 +48,21 @@
   /* variables for Material Design components */
   --material-background-color: #eceff1;
   --material-notification-background-color: #e91e63;
-  --material-switch-active-thumb-color: #3d4b5f;
+  --material-switch-active-thumb-color: #37474f;
   --material-switch-inactive-thumb-color: #f1f1f1;
-  --material-switch-active-background-color: rgba(62, 90, 95, 0.5);
+  --material-switch-active-background-color: rgba(55, 71, 79, .5);
   --material-switch-inactive-background-color: #b0afaf;
   --material-range-track-color: #bdbdbd;
   --material-range-thumb-color: #31313a;
   --material-toolbar-background-color: #ffffff;
   --material-toolbar-text-color: #31313a;
-  --material-toolbar-button-color: #2979ff;
+  --material-toolbar-button-color: #1e88e5;
   --material-button-background-color: #2979ff;
   --material-button-text-color: #ffffff;
-  --material-checkbox-active-color: #2979ff;
+  --material-checkbox-active-color: #37474f;
   --material-checkbox-inactive-color: #717171;
   --material-checkbox-checkmark-color: #ffffff;
-  --material-radio-button-active-color: #2979ff;
+  --material-radio-button-active-color: #37474f;
   --material-radio-button-inactive-color: #717171;
   --material-text-input-text-color: #212121;
   --material-text-input-active-color: #3d5afe;
@@ -71,13 +71,13 @@
   --material-alert-dialog-background-color: #ffffff;
   --material-alert-dialog-title-color: #212121;
   --material-alert-dialog-content-color: #727272;
-  --material-alert-dialog-button-color: #3d5afe;
-  --material-progress-bar-primary-color: #3d4b5f;
-  --material-progress-bar-secondary-color: rgba(49, 49, 58, 0.3);
-  --material-progress-bar-background-color: #e0e0e0;
-  --material-progress-circle-primary-color: #3d4b5f;
-  --material-progress-circle-secondary-color: rgba(49, 49, 58, 0.3);
-  --material-progress-circle-background-color: #dbdbdb;
+  --material-alert-dialog-button-color: #1e88e5;
+  --material-progress-bar-primary-color: #37474f;
+  --material-progress-bar-secondary-color: #548ba7;
+  --material-progress-bar-background-color: transparent;
+  --material-progress-circle-primary-color: #37474f;
+  --material-progress-circle-secondary-color: #548ba7;
+  --material-progress-circle-background-color: transparent;
   --material-tabbar-background-color: #ffffff;
   --material-tabbar-text-color: #31313a;
   --material-tabbar-highlight-text-color: #31313a;
@@ -85,5 +85,5 @@
   --material-fab-text-color: #31313a;
   --material-fab-background-color: #ffffff;
   --material-fab-active-background-color: rgba(255, 255, 255, 0.75);
-  --material-toast-button-text-color: #eceff1;
+  --material-toast-button-text-color: #bbdefb;
 }
