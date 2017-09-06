@@ -8,11 +8,12 @@ describe('Swiper', () => {
   beforeEach((done) => {
     element = ons.createElement(`
       <div class="swiper">
-        <div class="target" style="width: 100%; height: 300px">
+        <div style="width: 100%; height: 300px">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
         </div>
+        <div></div>
       </div>
     `);
     document.body.appendChild(element);

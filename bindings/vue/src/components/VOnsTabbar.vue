@@ -6,6 +6,7 @@
           <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" v-on="unrecognizedListeners"></component>
         </slot>
       </div>
+      <div></div>
     </div>
     <div class="tabbar">
       <slot>
