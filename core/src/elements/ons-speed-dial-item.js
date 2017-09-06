@@ -81,7 +81,7 @@ export default class SpeedDialItemElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        this._updateClassName(current);
+        util.restoreClass(this, defaultClassName);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -89,14 +89,6 @@ export default class SpeedDialItemElement extends BaseElement {
         break;
       case 'ripple':
         this._updateRipple();
-    }
-  }
-
-  _updateClassName(className) {
-    if (!defaultClassName.split(/\s+/).every(token => {
-      return this.classList.contains(token);
-    })) {
-      this.className = defaultClassName + ' ' + className;
     }
   }
 
@@ -119,9 +111,7 @@ export default class SpeedDialItemElement extends BaseElement {
   _compile() {
     autoStyle.prepare(this);
 
-    defaultClassName.split(/\s+/).forEach(token => {
-      this.classList.add(token);
-    });
+    defaultClassName.split(/\s+/).forEach(token => this.classList.add(token));
 
     util.addModifier(this, 'mini');
     this._updateRipple();

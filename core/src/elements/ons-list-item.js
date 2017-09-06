@@ -191,9 +191,7 @@ export default class ListItemElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

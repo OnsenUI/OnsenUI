@@ -19,6 +19,10 @@ dev
  * ons-tabbar: Hide 1px line between toolbar and top tabbar in some Android devices.
  * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
 
+### Misc
+
+ * `modifier` classes are restored when `class` attribute is modified.
+
 v2.5.3
 ----
 
