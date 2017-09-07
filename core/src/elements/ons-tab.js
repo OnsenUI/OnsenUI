@@ -331,6 +331,7 @@ export default class TabElement extends BaseElement {
 
         if (index === tabbar.tabs.length - 1) {
           tabbar._onRefresh();
+          setImmediate(() => tabbar._onRefresh());
         }
 
         TabbarElement.rewritables.ready(tabbar, () => {
