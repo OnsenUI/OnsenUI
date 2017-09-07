@@ -32,6 +32,7 @@ const INPUT_ATTRIBUTES = [
   'pattern',
   'placeholder',
   'readonly',
+  'required',
   'size',
   'step',
   'validator',

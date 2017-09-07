@@ -13,6 +13,7 @@ dev
 ### Bug Fixes
 
  * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
+ * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).
  * ons-list-item: `nodivider` modifier should not hide `chevron`.
  * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
  * templates: Fixed a bug where `script` tags might not be ready on time.
