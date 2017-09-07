@@ -49,10 +49,11 @@
       ];
 
       var swipe = function(from, to, width) {
+        var d = Math.sign(from - to);
         browser.actions()
-          .mouseMove(pages[from], {x: width/2, y: 100})
+          .mouseMove(pages[from], {x: width * (d>0?.1:.9), y: 100})
           .mouseDown()
-          .mouseMove({x: width * 0.9 * Math.sign(from - to), y: 0})
+          .mouseMove({x: width * 0.7 * d, y: 0})
           .mouseUp()
           .perform();
         browser.waitForAngular();
