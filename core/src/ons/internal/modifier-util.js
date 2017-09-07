@@ -90,8 +90,14 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static onModifierChanged(last, current, element, scheme) {
-    ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, element.getAttribute('modifier') || ''), element, scheme);
-    return autoStyle.restore(element);
+    const restoredModifier = autoStyle.restoreModifier(element);
+    restoredModifier
+      ? element.setAttribute('modifier', restoredModifier)
+      : ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, element.getAttribute('modifier') || ''), element, scheme);
+  }
+
+  static refresh(element, scheme) {
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff('', element.getAttribute('modifier') || ''), element, scheme);
   }
 
   /**

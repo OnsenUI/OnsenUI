@@ -17,6 +17,7 @@ limitations under the License.
 
 import internal from './internal';
 import autoStyle from './autostyle';
+import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -365,14 +366,11 @@ util.toggleModifier = (...args) => {
 /**
  * @param {Element} el
  * @param {String} defaultClass
+ * @param {Object} scheme
  */
-util.restoreClass = (el, defaultClass) => {
+util.restoreClass = (el, defaultClass, scheme) => {
   defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
-  if (el.hasAttribute('modifier')) {
-    const modifier = el.getAttribute('modifier');
-    el.setAttribute('modifier', '');
-    el.setAttribute('modifier', autoStyle.mapModifier(modifier, el));
-  }
+  el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
 }
 
 // TODO: FIX

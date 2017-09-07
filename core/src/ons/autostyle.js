@@ -125,7 +125,21 @@ const mapModifier = (modifier, element, force) => {
   return modifier;
 };
 
-const restore = element => getPlatform(element) === 'android' && util.addModifier(element, 'material');
+const restoreModifier = element => {
+  if (getPlatform(element) === 'android') {
+    const modifier = element.getAttribute('modifier') || '';
+    let newModifier = mapModifier(modifier, element);
+
+    if (!/(^|\s+)material($|\s+)/i.test(modifier)) {
+      newModifier = 'material ' + newModifier;
+    }
+
+    if (newModifier !== modifier) {
+      return newModifier.trim();
+    }
+  }
+  return false;
+};
 
 export default {
   isEnabled: () => autoStyleEnabled,
@@ -134,5 +148,5 @@ export default {
   prepare,
   mapModifier,
   getPlatform,
-  restore
+  restoreModifier
 };

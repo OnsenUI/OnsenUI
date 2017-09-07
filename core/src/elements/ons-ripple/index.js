@@ -284,7 +284,7 @@ export default class RippleElement extends BaseElement {
     switch (name) {
 
       case 'class':
-        util.restoreClass(this, defaultClassName);
+        util.restoreClass(this, defaultClassName, scheme);
         break;
 
       case 'modifier':
