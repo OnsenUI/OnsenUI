@@ -63,7 +63,7 @@ export default class BaseInputElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-    this._defaultElementClass && this.classList.add(this._defaultElementClass);
+    this._defaultClassName && this.classList.add(this._defaultClassName);
 
     if (this.children.length !== 0) {
       return;
@@ -104,7 +104,7 @@ export default class BaseInputElement extends BaseElement {
     }
   }
 
-  get _defaultElementClass() {
+  get _defaultClassName() {
     return '';
   }
 
@@ -163,9 +163,7 @@ export default class BaseInputElement extends BaseElement {
         contentReady(this, () => this._setInputId());
         break;
       case 'class':
-        if (this._defaultElementClass && !this.classList.contains(this._defaultElementClass)) {
-          this.className = this._defaultElementClass + ' ' + current;
-        }
+        util.restoreClass(this, this._defaultClassName, this._scheme);
         break;
     }
 

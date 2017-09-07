@@ -76,16 +76,16 @@ export default class SwitchElement extends BaseCheckboxElement {
     return scheme;
   }
 
-  get _defaultElementClass() {
+  get _defaultClassName() {
     return 'switch';
   }
 
   get _template() {
     return `
-      <input type="${this.type}" class="${this._defaultElementClass}__input">
-      <div class="${this._defaultElementClass}__toggle">
-        <div class="${this._defaultElementClass}__handle">
-          <div class="${this._defaultElementClass}__touch"></div>
+      <input type="${this.type}" class="${this._defaultClassName}__input">
+      <div class="${this._defaultClassName}__toggle">
+        <div class="${this._defaultClassName}__handle">
+          <div class="${this._defaultClassName}__touch"></div>
         </div>
       </div>
     `;
@@ -178,7 +178,7 @@ export default class SwitchElement extends BaseCheckboxElement {
   }
 
   get _handle() {
-    return this.querySelector(`.${this._defaultElementClass}__handle`);
+    return this.querySelector(`.${this._defaultClassName}__handle`);
   }
 
   get checkbox() {

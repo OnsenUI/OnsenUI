@@ -89,12 +89,12 @@ export default class RangeElement extends BaseInputElement {
 
   get _template() {
     return `
-      <input type="${this.type}" class="${this._defaultElementClass}__input">
+      <input type="${this.type}" class="${this._defaultClassName}__input">
       <input type="range" class="range__focus-ring" tabIndex="-1">
     `;
   }
 
-  get _defaultElementClass() {
+  get _defaultClassName() {
     return 'range';
   }
 
