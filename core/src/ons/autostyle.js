@@ -135,7 +135,8 @@ const restoreModifier = element => {
     }
 
     if (newModifier !== modifier) {
-      return newModifier.trim();
+      element.setAttribute('modifier', newModifier.trim());
+      return true;
     }
   }
   return false;

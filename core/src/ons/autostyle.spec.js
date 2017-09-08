@@ -45,12 +45,14 @@ describe('ons._autoStyle', () => {
   describe('restore', () => {
     it('adds material modifier back if necessary', () => {
       const e = document.createElement('ons-button');
-      expect(ons._autoStyle.restoreModifier(e)).not.to.be.ok;
+      expect(ons._autoStyle.restoreModifier(e)).to.be.false;
       ons.platform.select('android');
-      expect(ons._autoStyle.restoreModifier(e)).to.equal('material');
+      expect(ons._autoStyle.restoreModifier(e)).to.be.true;
+      expect(e.getAttribute('modifier')).to.equal('material');
       e.setAttribute('disable-auto-styling', '');
       e.removeAttribute('modifier');
-      expect(ons._autoStyle.restoreModifier(e)).not.to.be.ok;
+      expect(ons._autoStyle.restoreModifier(e)).to.be.false;
+      expect(e.hasAttribute('modifier')).to.be.false;
       ons.platform.select('');
     });
   });
