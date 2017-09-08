@@ -85,6 +85,7 @@ class Tabbar extends BasicComponent {
 
     ['animation', 'swipeable'].forEach(el => Util.convert(props, el));
     Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    Util.convert(props, 'tabBorder', {newName: 'tab-border'});
 
     return (
       <ons-tabbar {...props} ref={(tabbar) => { this._tabbar = tabbar; }}>
@@ -159,6 +160,15 @@ Tabbar.propTypes = {
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
+
+  /**
+   * @name tabBorder
+   * @type bool
+   * @description
+   *  [en]If true, the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
+   *  [ja][/ja]
+   */
+  tabBorder: PropTypes.bool,
 
   /**
    * @name onPreChange
